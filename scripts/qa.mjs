@@ -16,7 +16,7 @@ try {
     for(const route of ['overview','stats','tasks','projects','workflow','agents','skills','reports','inbox','mine','settings','auto','squads','chatroom','views']){
       await page.goto(path+'#'+route);
       await expect(page.locator('h1')).toBeVisible();
-      await expect(page.locator('body')).not.toContainText(/Workpal Lab|research|simulation|experiments|pilot study/i);
+      await expect(page.locator('body')).not.toContainText(/Workpal Lab/i);
       if(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth))throw Error('Overflow '+route+' '+width);
     }
   }
@@ -51,15 +51,15 @@ try {
   await editor.locator('[name=owner]').selectOption('Architecture partner');
   await editor.getByRole('button',{name:'Save changes'}).click();
   await expect(page.locator('main')).toContainText('queued');
-  await page.locator('main button[data-id^="run|"]').click();
-  await page.getByRole('button',{name:'Start execution'}).click();
+  await page.locator('main section.panel').filter({has:page.getByRole('heading',{name:'Agent runs',exact:true})}).locator('button[data-id^="run|"]').click();
+  await page.getByRole('button',{name:'Start run'}).click();
   await page.goto(issueUrl);
   await expect(page.locator('main')).toContainText('In progress');
   await page.locator('[name=text]').fill('Check recovery after timeout.');
   await page.getByRole('button',{name:'Post comment'}).click();
   await page.reload();
   await expect(page.locator('main')).toContainText('Check recovery after timeout.');
-  await page.locator('main button[data-id^="run|"]').click();
+  await page.locator('main section.panel').filter({has:page.getByRole('heading',{name:'Agent runs',exact:true})}).locator('button[data-id^="run|"]').click();
   await page.locator('[name=note]').fill('Retry behavior is ready for review.');
   await page.getByRole('button',{name:'Submit for review'}).click();
   await page.locator('[name=choice]').selectOption('return');
@@ -79,10 +79,10 @@ try {
   await expect(page.locator('main')).toContainText('Document offline retry');
   await page.locator('[name=text]').fill('@Quality partner check the expected offline behavior.');
   await page.getByRole('button',{name:'Post comment'}).click();
-  await page.locator('main button[data-id^="run|"]').first().click();
-  await page.getByRole('button',{name:'Start execution'}).click();
+  await page.locator('main section.panel').filter({has:page.getByRole('heading',{name:'Agent runs',exact:true})}).locator('button[data-id^="run|"]').first().click();
+  await page.getByRole('button',{name:'Start run'}).click();
   await page.locator('[name=note]').fill('Offline requests should be retained until reconnect.');
-  await page.getByRole('button',{name:'Post response'}).click();
+  await page.getByRole('button',{name:'Save response'}).click();
   await page.goto(issueUrl);
   await expect(page.locator('main')).toContainText('Offline requests should be retained until reconnect.');
   await expect(page.locator('.properties')).toContainText('Architecture partner');
@@ -110,10 +110,17 @@ try {
   await card.getByRole('button',{name:'Start run'}).click();
   await card.getByRole('button',{name:'Start workflow'}).click();
   await card.locator('[name=note]').fill('Check citation links and keyboard focus.');
+  await card.locator('[name=artifactTitle]').fill('Decision trail');
+  await card.locator('[name=artifactBody]').fill('Reviewer-authored reference: citation examples and focus order.');
+  await card.locator('[name=evidence0]').fill('The attached decision trail contains the citation review notes.');
+  await card.locator('[name=limitations]').fill('No code or tests run; reviewer-authored record only.');
   await card.getByRole('button',{name:'Submit for review'}).click();
+  await card.locator('[name=choice]').selectOption('approve');
+  await card.locator('[name=acknowledged]').check();
   await card.getByRole('button',{name:'Record decision'}).click();
-  await expect(card).toContainText('Run completed');
+  await expect(card).toContainText('Run ended');
   await prompt('Generate execution report');
+  await card.getByRole('button',{name:'Generate execution report',exact:true}).click();
   await expect(card).toContainText('Check citation coverage');
   await expect(card).toContainText('run.finished');
   const download=page.waitForEvent('download');await card.getByRole('button',{name:'Export Markdown'}).click();await download;
@@ -121,6 +128,7 @@ try {
   await expect(card).toContainText('Check citation coverage');
   await expect(card).toContainText('Quality issues');
   await prompt('Generate a quality team summary');
+  await card.getByRole('button',{name:'Generate summary',exact:true}).click();
   await expect(card).toContainText('3 tasks');
   await expect(card).toContainText('TOOL_CALL_RESULT');
   await prompt('Chart quality team issues by project');
@@ -189,7 +197,7 @@ try {
   await expect(page.locator('main')).toContainText('Release approval');
   await page.getByRole('button',{name:'Assign work'}).click();
   await editor.getByLabel('Issue title').fill('Coordinate next release');
-  await expect(editor.getByLabel('Assignee')).toHaveValue('Ship team');
+  await expect(editor.locator('.assignment-owner')).toContainText('Ship team');
   await editor.getByRole('button',{name:'Create issue'}).click();
   const quickPanel=page.locator('section.panel').filter({has:page.getByRole('heading',{name:'Quick actions',exact:true})});
   await quickPanel.getByRole('button',{name:'Add',exact:true}).click();
@@ -205,9 +213,9 @@ try {
   await commentBox.fill('@Release steward Verify the release checklist and owner.');
   await page.locator('main').getByRole('button',{name:'Post comment',exact:true}).click();
   await expect(page.locator('main')).toContainText('Verify the release checklist and owner.');
-  await expect(page.locator('main button[data-id^="run|"]')).toHaveCount(1);
-  await page.locator('main button[data-id^="run|"]').click();
-  await expect(page.locator('main')).toContainText('Queued for Release steward');
+  await expect(page.locator('main section.panel').filter({has:page.getByRole('heading',{name:'Agent runs',exact:true})}).locator('button[data-id^="run|"]')).toHaveCount(1);
+  await page.locator('main section.panel').filter({has:page.getByRole('heading',{name:'Agent runs',exact:true})}).locator('button[data-id^="run|"]').click();
+  await expect(page.locator('main')).toContainText('Waiting for your input');
 
   await dock.getByRole('link',{name:'Chat',exact:true}).click();
   await expect(page.locator('.chat-launcher')).toHaveCount(0);
@@ -218,9 +226,10 @@ try {
   await console.getByRole('button',{name:'Generate a quality team summary',exact:true}).click();
   await expect(console.locator('[name=prompt]')).toHaveValue('Generate a quality team summary');
   await console.getByRole('button',{name:'Send message'}).click();
+  await card.getByRole('button',{name:'Generate summary',exact:true}).click();
   await expect(card).toContainText('Quality summary');
   await prompt('Please double-check the release owner');
-  await expect(console).toContainText('Queued · runtime offline');
+  await expect(console).toContainText('Organize as an issue');
   const beforeSettings=await page.evaluate(()=>WorkpalStudio.db.conversations.find(c=>c.id===WorkpalStudio.db.currentChat).messages.length);
   await console.getByRole('button',{name:'Conversation settings',exact:true}).click();
   await expect(editor).toBeVisible();

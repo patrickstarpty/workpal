@@ -5,7 +5,8 @@ let html = await read('index.html');
 const font = await readFile(new URL('assets/fonts/inter-latin.woff2', root));
 const css = '/* '+(await read('assets/fonts/LICENSE.txt'))+' */\n' + (await read('src/studio.css')).replace('../assets/fonts/inter-latin.woff2', 'data:font/woff2;base64,' + font.toString('base64'));
 html = html.replace('<link rel="stylesheet" href="src/studio.css" />', `<style>${css}</style>`);
-for (const file of ['icons', 'data', 'model', 'studio']) {
+html = html.replace('<link rel="stylesheet" href="src/analytics.css" />', `<style>${await read('src/analytics.css')}</style>`);
+for (const file of ['icons', 'data', 'model', 'analytics-data', 'analytics', 'studio']) {
   const script = (await read(`src/${file}.js`)).replaceAll('</script', '<\\/script');
   html = html.replace(`<script src="src/${file}.js"></script>`, () => `<script>${script}</script>`);
 }

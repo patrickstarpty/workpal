@@ -5,7 +5,7 @@
   const {states,teams,stages,handoffs,save,count,next,start,decide,report}=WorkpalStudio;
   const esc=WorkpalData.escapeHtml;
   const $=selector=>document.querySelector(selector);
-  const routes={overview:'Overview',tasks:'All issues',projects:'Projects',workflow:'Runs',agents:'Agents',skills:'Skill Hub',stats:'Workspace insights',reports:'Reports',inbox:'Inbox',mine:'My work',settings:'Settings',chatroom:'Chat',squads:'Squads',auto:'Autopilots',views:'Saved views',workflows:'Workflows',runtimes:'Runtimes'};
+  const routes={overview:'Overview',tasks:'All issues',projects:'Projects',workflow:'Runs',agents:'Agents',skills:'Skill Hub',stats:'Analytics',reports:'Reports',inbox:'Inbox',mine:'My work',settings:'Settings',chatroom:'Chat',squads:'Squads',auto:'Autopilots',views:'Saved views',workflows:'Workflows',runtimes:'Runtimes'};
   const icon=k=>`<svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="${WorkpalIcons[k]||WorkpalIcons.layers}"/></svg>`;
   const btn=(text,act,id='',cls='')=>{const label=cls.match(/aria-label="([^"]+)/)?.[1];return `<button type="button" class="btn ${cls}" ${label?'title="'+esc(label)+'"':''} data-act="${act}" data-id="${esc(id)}">${text}</button>`;};
   const tool=(text,type,arg='',cls='')=>btn(text,'surface',type+'|'+arg,cls);
@@ -37,16 +37,96 @@
   function issuePropertyVisible(name){return issuePrefs().properties.includes(name);}
   function toast(text){$('#toast').textContent=text;$('#toast').classList.add('on');clearTimeout(timer);timer=setTimeout(()=>$('#toast').classList.remove('on'),2800);}
   function write(){if(!save())toast('Browser storage is unavailable. Export your review before closing.');}
-  function form(type,fields,submit,id=''){return `<form data-form="${type}" data-id="${esc(id)}">${fields}<button class="btn primary" type="submit">${esc(submit)} ${icon('arrow')}</button></form>`;}
+  function form(type,fields,submit,id=''){return `<form data-form="${type}" data-id="${esc(id)}" data-workspace="${esc(workspace().id)}">${fields}<button class="btn primary" type="submit">${esc(submit)} ${icon('arrow')}</button></form>`;}
+  const draftTypes=new Set(['deliver','decision','comment','threadReply','note','assignWork','issue','issueProperty','selectDelivery']);
+  let draftTab;
+  try {draftTab=sessionStorage.getItem('workpal.draftTab')||crypto.randomUUID();sessionStorage.setItem('workpal.draftTab',draftTab);}catch{draftTab=crypto.randomUUID();}
+  const draftCache=new Map();
+  const draftStorageKey=space=>'workpal.drafts.'+space+'.'+draftTab;
+  function draftRecords(space){
+    if(!draftCache.has(space)){let data={};try{data=JSON.parse(localStorage.getItem(draftStorageKey(space)))||{};}catch{}draftCache.set(space,data);}
+    return draftCache.get(space);
+  }
+  const draftId=f=>f.dataset.form+'|'+(f.dataset.id||'');
+  function persistFormDraft(f){
+    if(!f||!draftTypes.has(f.dataset.form)||f.dataset.draftSaved)return;
+    const space=f.dataset.workspace||(f.dataset.workspace=workspace().id),record={};
+    for(const el of f.elements){if(!el.name||el.type==='hidden'||el.type==='submit')continue;record[el.name]=el.type==='checkbox'?el.checked:el.value;}
+    draftRecords(space)[draftId(f)]=record;
+    try{localStorage.setItem(draftStorageKey(space),JSON.stringify(draftRecords(space)));}catch{toast('Draft is held in this tab. Browser storage is unavailable.');}
+  }
+  function captureDrafts(root=document){root.querySelectorAll('form[data-form]').forEach(persistFormDraft);}
+  function syncIssueForm(f){
+    if(!['issue','issueProperty'].includes(f.dataset.form))return;
+    const old=db.tasks.find(t=>t.id===f.dataset.id),status=f.elements.status?.value||old?.status||'todo',owner=f.elements.owner?.value||old?.owner||'Unassigned';
+    const toggle=f.querySelector('.dispatch-option'),manual=f.querySelector('.manual-completion');
+    if(toggle){toggle.hidden=['backlog','done'].includes(status);f.elements.startAgent.disabled=toggle.hidden;}
+    if(manual){manual.hidden=status!=='done'||old?.status==='done';f.elements.manualReason.required=!manual.hidden;}
+    const project=f.elements.project?.value??old?.project??'',step=WorkpalStudio.workflowFor(project).steps.find(s=>s.status===status);
+    const handoff=(!old&&owner==='Unassigned'||old&&status!==old.status)&&step?.owner;
+    const nextOwner=handoff?(step.owner==='Project lead'?projectConfig(project).lead:step.owner):owner;
+    const agent=WorkpalStudio.handlingAgent(nextOwner),dispatch=!old||owner!==old.owner||status!==old.status;
+    const willQueue=dispatch&&f.elements.startAgent?.checked&&!f.elements.startAgent.disabled&&agent;
+    const previousAgent=old&&WorkpalStudio.handlingAgent(old.owner);
+    const stopped=old&&nextOwner!==old.owner?db.runs.filter(r=>r.task===old.id&&r.agent===previousAgent?.name&&['queued','running'].includes(r.status)):[];
+    let preview=f.querySelector('.operation-preview');if(!preview){preview=document.createElement('p');preview.className='operation-preview';preview.setAttribute('aria-live','polite');f.insertBefore(preview,f.querySelector('button[type=submit]'));}
+    preview.textContent='After saving: '+states[status]+' · '+nextOwner+'. '+(willQueue?'Queue one '+(status==='review'?'review':'execution')+' run for '+agent.name+'.':'No new run.')+(stopped.length?' Stop '+stopped.map(r=>r.id).join(', ')+' for the previous assignee.':'')+(status==='done'&&old?.status!=='done'?' Record manual completion; no delivery is approved.':'');
+  }
+  function restoreDrafts(root=document){
+    root.querySelectorAll('form[data-form]').forEach(f=>{
+      if(!draftTypes.has(f.dataset.form))return;
+      f.dataset.workspace??=workspace().id;
+      const values=draftRecords(f.dataset.workspace)[draftId(f)]||{};
+      for(const el of f.elements){if(!el.name||!Object.hasOwn(values,el.name)||el.type==='hidden')continue;if(el.type==='checkbox')el.checked=values[el.name];else el.value=values[el.name];}
+      syncIssueForm(f);
+      if(f.dataset.form==='decision'&&f.elements.choice){const approval=f.elements.choice.value==='approve';f.querySelector('.review-ack')?.toggleAttribute('hidden',!approval);if(f.elements.acknowledged)f.elements.acknowledged.required=approval;if(f.elements.note)f.elements.note.required=!approval;}
+      if(f.dataset.form==='assignWork'&&f.elements.status.value==='backlog'){f.elements.queueRun.disabled=true;f.elements.queueRun.checked=false;}
+    });
+  }
+  function clearFormDraft(f){
+    f.dataset.draftSaved='true';const space=f.dataset.workspace||workspace().id;
+    delete draftRecords(space)[draftId(f)];
+    try{localStorage.setItem(draftStorageKey(space),JSON.stringify(draftRecords(space)));}catch{}
+    document.querySelectorAll('form[data-form]').forEach(other=>{if(other!==f&&other.dataset.workspace===space&&draftId(other)===draftId(f))other.dataset.draftSaved='true';});
+  }
+  function showSaveError(err){
+    toast(err.message);
+    if(err.code!=='WORKSPACE_CONFLICT')return;
+    captureDrafts();
+    let warning=$('#storage-conflict');if(!warning){warning=document.createElement('aside');warning.id='storage-conflict';warning.setAttribute('role','alert');document.body.append(warning);}
+    ($('#dialog').open?$('#dialog'):document.body).append(warning);
+    warning.innerHTML='<strong>Another tab changed this record.</strong><p>Your edits and drafts are still here. Export them, or reload the saved workspace; a recovery copy is kept locally.</p>'+actionList([btn('Export unsaved work','exportUnsaved'),btn('Keep recovery copy and reload','reloadSaved')]);
+  }
   function actionList(items){return '<div class="actions">'+items.join('')+'</div>';}
-  const avatar=(name,cls='')=>'<span class="avatar '+cls+'" title="'+esc(name)+'">'+(db.agents.some(a=>a.name===name)?icon('agents'):db.squads.some(a=>a.name===name)?icon('squads'):esc(name==='Unassigned'?'—':name.split(' ').map(x=>x[0]).slice(0,2).join('')) )+'</span>';
+  const actorEmoji=name=>db.agents.find(a=>a.name===name)?.emoji||db.memberAvatars?.[name]||'';
+  const avatar=(name,cls='')=>'<span class="avatar '+cls+(actorEmoji(name)?' emoji-avatar':'')+'" title="'+esc(name)+'">'+(actorEmoji(name)?esc(actorEmoji(name)):db.agents.some(a=>a.name===name)?icon('agents'):db.squads.some(a=>a.name===name)?icon('squads'):esc(name==='Unassigned'?'—':Array.from(name).slice(0,2).join('')))+'</span>';
+  const emojiChoices=['🤖','🧠','🛠️','🔍','🎨','🚀','🦊','🐼','🐙','🦉','🐳','🦄','🌱','🌟','🔥','⚡','💎','🎯','🧪','📚','💻','🛰️','🧭','🦋'];
+  function avatarEditor(arg){
+    const {name,squad=''}=JSON.parse(arg),value=actorEmoji(name);
+    if(!db.agents.some(a=>a.name===name)&&name!=='Patrick')return empty('Member unavailable.');
+    return form('avatarEditor','<div class="avatar-editor-identity"><span class="avatar-choice-preview">'+(value?esc(value):icon('agents'))+'</span><div><strong>'+esc(name)+'</strong><small>Used across this workspace</small></div></div>'+
+      '<div class="emoji-palette" role="group" aria-label="Suggested emoji">'+emojiChoices.map(emoji=>'<button type="button" data-act="pickEmoji" data-id="'+esc(emoji)+'" aria-label="Use '+esc(emoji)+'" aria-pressed="'+(emoji===value)+'">'+emoji+'</button>').join('')+'</div>'+
+      field('Emoji','<input name="emoji" maxlength="32" value="'+esc(value)+'" placeholder="Choose above or paste one emoji" autocomplete="off">')+
+      '<input type="hidden" name="name" value="'+esc(name)+'"><input type="hidden" name="squad" value="'+esc(squad)+'">'+btn('Use default avatar','pickEmoji',''),'Save avatar',name);
+  }
+  function assignWorkEditor(target){
+    const squad=db.squads.find(s=>s.name===target),agent=WorkpalStudio.handlingAgent(target);
+    if(!squad&&!agent)return empty('Assignee unavailable.');
+    return '<div class="assignment-composer">'+form('assignWork',
+      '<input class="assignment-title" aria-label="Issue title" name="title" required maxlength="180" placeholder="What needs to be done?">'+
+      '<textarea class="assignment-description" aria-label="Description" name="description" rows="4" placeholder="Describe the goal and the context…"></textarea>'+
+      '<div class="assignment-properties"><span class="assignment-owner">'+avatar(target)+esc(target)+'</span>'+field('Status',select('status',{todo:'To do',backlog:'Backlog'},'todo'))+field('Priority',select('priority',strings(['Low','Normal','High','Urgent']),'Normal'))+field('Project',select('project',{'':'No project',...strings(db.projects)},db.projects[0]||''))+'</div>'+
+      '<details class="assignment-criteria"><summary>Acceptance criteria</summary>'+field('One criterion per line','<textarea name="checks" rows="3" placeholder="What must the delivery demonstrate?"></textarea>')+'</details>'+
+      '<div class="assignment-hint"><p>'+ (squad?'Assigned to <strong>'+esc(squad.name)+'</strong>. '+esc(squad.leader)+' is the coordination lead. Member roles and squad instructions are included in the run context.':'Assigned to '+esc(target)+'.')+'</p>'+(!agent?'<p>The leader is unavailable. You can save the issue without a run.</p>':'')+
+      '<label class="assign-option"><input type="checkbox" name="queueRun" '+(agent?'checked':'disabled')+'> Queue '+(squad?'leader':'agent')+' run after creation</label><small>Runtime offline. Queuing records the request; it does not execute work.</small></div>','Create issue',target)+'</div>';
+  }
   function boardCard(t){
     const children=db.tasks.filter(c=>c.parent===t.id),due=t.due?new Date(t.due+'T12:00').toLocaleDateString('en-US',{month:'short',day:'numeric'}):'';
     const properties=(issuePropertyVisible('project')&&t.project?'<span class="issue-project">'+icon('projects')+esc(t.project)+'</span>':'')+(issuePropertyVisible('labels')?(t.tags||[]).map(tag=>'<span class="issue-project">'+esc(tag)+'</span>').join(''):'');
     return `<button class="issue issue-card" draggable="true" data-act="surface" data-id="issue|${esc(t.id)}"><span class="card-top">${issuePropertyVisible('priority')?'<span class="issue-priority '+esc(t.priority.toLowerCase())+'" title="'+esc(t.priority)+' priority">'+icon('priority')+'</span>':''}<span class="issue-id">${esc(t.id)}</span></span><strong class="issue-title">${esc(t.title)}</strong>${properties?'<span class="card-properties">'+properties+'</span>':''}<span class="card-footer">${issuePropertyVisible('assignee')?avatar(t.owner):''}<span class="card-metadata">${issuePropertyVisible('due')&&due?'<span>'+icon('calendar')+esc(due)+'</span>':''}${issuePropertyVisible('children')&&children.length?'<span>'+icon('tasks')+children.filter(c=>c.status==='done').length+'/'+children.length+'</span>':''}</span></span></button>`;
   }
   function issueList(items, draggable=false){return items.length?items.map(t=>draggable?boardCard(t):`<button class="issue row" data-act="surface" data-id="issue|${esc(t.id)}"><span class="issue-priority ${esc(t.priority.toLowerCase())}" title="${esc(t.priority)} priority">${icon('priority')}</span><span class="issue-id">${esc(t.id)}</span><span class="issue-mark ${esc(t.status)}" title="${esc(states[t.status])}"></span><strong class="issue-title">${esc(t.title)}</strong><span class="issue-project">${icon('projects')}${esc(t.project||'No project')}</span><span class="issue-date">${t.due?esc(new Date(t.due+'T12:00').toLocaleDateString('en-US',{month:'short',day:'numeric'})):''}</span>${avatar(t.owner)}</button>`).join(''):draggable?'':empty('No matching issues.');}
-  function runList(items){return items.length?items.map(r=>`<button class="row" data-act="surface" data-id="run|${esc(r.id)}"><span class="tile">${icon('workflow')}</span><span class="grow"><small>${esc(r.id)} / ${esc(r.task||'Chat')}</small><strong>${esc(db.tasks.find(t=>t.id===r.task)?.title||r.title||'Chat message')}</strong></span>${badge(r.status)}${icon('chevron')}</button>`).join(''):empty('Launch a workflow to record its first decision.');}
+  function runList(items){return items.length?items.map(r=>`<button class="row" data-act="surface" data-id="run|${esc(r.id)}"><span class="tile">${icon('workflow')}</span><span class="grow"><small>${esc(r.id)} / ${esc(r.task||'Chat')} · Offline ${esc(r.kind||'execution')}</small><strong>${esc(db.tasks.find(t=>t.id===r.task)?.title||r.title||'Chat message')}</strong></span>${badge(r.status)}${icon('chevron')}</button>`).join(''):empty('Launch a workflow to record its first decision.');}
   function skillList(items){return items.length?items.map(s=>`<button class="row" data-act="surface" data-id="skill|${esc(s.id)}"><span class="tile">${icon('skills')}</span><span class="grow"><strong>${esc(s.name)}</strong><small>${esc(s.author)} · ${stages[s.stage]}</small></span>${icon('chevron')}</button>`).join(''):empty('No matching skills.');}
   function overview(){
     if(!db.projects.length)return box('Start your first project','<p>Create a project in '+esc(workspace().name)+' to organize issues and agent runs.</p>'+tool('Create project','newProject','','primary'));
@@ -108,52 +188,99 @@
       field('Due date','<input type="date" name="due" value="'+esc(task?.due||'')+'">')+
       field('Labels',input('tags',(task?.tags||[]).join(', '),false))+'</div>'+
       field('Acceptance criteria · one per line',`<textarea name="checks" rows="2">${esc(task?.checks.join('\n')||'')}</textarea>`)+
-      `<label class="assign-option" ${WorkpalStudio.handlingAgent(owner)&&status!=='backlog'&&!current?'':'hidden'}><input type="checkbox" name="startAgent" checked> Start a run when assigning an agent</label>`+
+      `<label class="assign-option dispatch-option" ${!['backlog','done'].includes(status)?'':'hidden'}><input type="checkbox" name="startAgent" checked> Queue the assigned agent or workflow handler</label><label class="manual-completion" ${status==='done'&&task?.status!=='done'?'':'hidden'}>Manual completion reason<textarea name="manualReason" ${status==='done'&&task?.status!=='done'?'required':''} placeholder="Explain why this issue is complete without approving a delivery."></textarea></label>`+
       '',task?'Save changes':'Create issue',id);
   }
   function issueDetail(id,dedicated=false){
     const t=db.tasks.find(t=>t.id===id);
     if(!t)return empty('Issue not found.');
     const children=db.tasks.filter(child=>child.parent===id);
-    const active=openRun(id), runs=db.runs.filter(r=>r.task===id);
+    const active=openRun(id), runs=db.runs.filter(r=>r.task===id), latest=WorkpalStudio.currentDelivery(id);
     return (chat?'<h3>'+esc(id)+' · '+esc(t.title)+'</h3>':'')+`<div class="detail-grid issue-detail-grid"><div class="detail-main"><div class="detail-reading">${dedicated?'<div class="heading"><h1>'+esc(t.title)+'</h1></div>':''}${box('Description','<p class="preserve">'+esc(t.description||'No description.')+'</p>'+
         (t.checks.length?'<h4>Acceptance criteria</h4><ul>'+t.checks.map(c=>'<li>'+esc(c)+'</li>').join('')+'</ul>':''),tool('Edit issue','editIssue',id))}
+      ${t.completion?box('Completion record','<p><strong>'+(t.completion.kind==='manual'?'Completed manually':'Delivery accepted')+'</strong> · '+date(t.completion.at)+'</p><p class="preserve">'+esc(t.completion.reason||'Acceptance decision recorded.')+'</p><small>This is a historical decision; the current issue status is '+esc(states[t.status])+'.</small>'):''}
+      ${box('Deliveries',deliveryHistory(id),latest?tool('Open current delivery','run',latest.run):'')}
       ${box('Sub-issues'+(children.length?' · '+children.filter(c=>c.status==='done').length+'/'+children.length:''),issueList(children),tool('Add sub-issue','childIssue',id))}
       ${box('Activity',t.activity.map(e=>'<div class="entry"><small>'+esc(e.author)+' · '+date(e.at)+'</small><p>'+esc(e.text)+'</p>'+(e.kind==='comment'?'<details '+(e.resolved?'':'open')+'><summary>'+((e.replies||[]).length)+' replies'+(e.resolved?' · Resolved':'')+'</summary>'+(e.replies||[]).map(r=>'<p class="thread-reply"><small>'+esc(r.author)+'</small> '+esc(r.text)+'</p>').join('')+actionList([tool('Reply','threadReply',id+'|'+e.id),btn(e.resolved?'Reopen':'Resolve','resolveThread',id+'|'+e.id)])+'</details>':'')+'</div>').join(''),btn(t.subscribed?'Unsubscribe':'Subscribe','subscribe',id))}
       </div><div class="issue-comment"><form data-form="comment" data-id="${esc(id)}" class="issue-composer"><textarea name="text" aria-label="Add a comment" rows="2" required placeholder="Leave a comment…"></textarea><button type="submit" class="send" aria-label="Post comment" title="Post comment">${icon('arrow')}</button></form></div></div><div class="detail-properties">${box('Properties','<dl class="properties">'+Object.entries({Status:states[t.status],Assignee:t.owner,Priority:t.priority,Project:t.project||'No project',Team:teams[t.team],'Due date':t.due||'No date',Labels:(t.tags||[]).join(', ')||'None'}).map(([k,v])=>{
         const key={Status:'status',Assignee:'owner',Priority:'priority','Due date':'due'}[k];
         return '<dt>'+k+'</dt><dd>'+(key?tool(esc(v),'issueProperty',t.id+'|'+key,'property-button'):esc(v))+'</dd>';
       }).join('')+'</dl>'+(t.parent?tool('Parent issue · '+esc(t.parent),'issue',t.parent):''))}
-      ${t.status==='review'&&runs.some(r=>r.delivered&&!r.reviewDecision)?box('Review',tool('Review delivery','run',runs.find(r=>r.delivered&&!r.reviewDecision)?.id||runs[0]?.id||'')):''}
+      ${t.status==='review'&&latest?box('Review',tool('Review delivery v'+latest.version,'run',latest.run)):''}
       ${quickActionsView(t.id)}${wakeupList(t)}
       ${box('Agent runs',runList(runs),active?'':tool('Start run','launch',id))}</div></div>`;
+  }
+  const offlineNotice=()=>'';
+  const evidenceStates={supported:'Evidence provided',missing:'Evidence missing',unmet:'Not met','not-applicable':'Not applicable · explain why'};
+  function deliveryHistory(taskId){
+    const deliveries=db.deliveries.filter(d=>d.task===taskId).sort((a,b)=>b.version-a.version);
+    return deliveries.length?deliveries.map((d,i)=>`<button class="row delivery-row" data-act="surface" data-id="run|${esc(d.run)}"><span class="grow"><strong>Delivery v${d.version} · ${esc(d.summary)}</strong><small>${d.disposition==='current'?'Current':d.disposition==='candidate'?'Candidate':'Historical'} · ${esc(d.run)} · ${d.review?d.review.decision==='approve'?'Approved':'Changes requested':'Awaiting review'}</small></span>${icon('chevron')}</button>`).join(''):empty('No delivery yet. Submit a summary, an artifact and evidence for each acceptance criterion.');
+  }
+  function delegationContext(taskId,agentName,skillId){
+    const t=db.tasks.find(t=>t.id===taskId),a=db.agents.find(a=>a.name===agentName);
+    if(!t||!a)return empty('Choose an issue and agent.');
+    const project=projectConfig(t.project),s=db.skills.find(s=>s.id===(skillId||a.skills[0])),existing=openRun(t.id,a.name,'execution'),prior=WorkpalStudio.currentDelivery(t.id);
+    return '<h3>Delegation context</h3>'+ (existing?'<p class="review-warning">'+esc(existing.id)+' is already open. Reopening keeps its original input snapshot. Cancel or finish it to change inputs.</p>':'')+(prior?.review?'<div class="decision-receipt"><strong>Previous decision · Delivery v'+prior.version+'</strong><p>'+esc(prior.review.note||prior.review.decision)+'</p></div>':'')+propertyList({Goal:t.title,Agent:a.name,Project:t.project||'No project',Skill:s?s.name+' · '+(s.version||'unversioned'):'None',Runtime:'Offline',Instructions:a.instructions||a.role||'None'})+
+      '<p class="preserve">'+esc(project.description||'No project context recorded.')+'</p><h4>Acceptance criteria</h4>'+(t.checks.length?'<ul>'+t.checks.map(c=>'<li>'+esc(c)+'</li>').join('')+'</ul>':empty('Add acceptance criteria before a delivery can be approved.'))+
+      '<small>The issue, agent, project and selected skill are captured when this attempt is created. Retry uses the current settings shown here.</small>';
   }
   function launch(arg){
     const [selected,followUp]=arg.split('~'), task=db.tasks.find(t=>t.id===selected)||db.tasks[0];
     if(!task)return empty('Create an issue before starting a run.')+tool('Create issue','issue');
     if(!db.agents.length)return empty('Configure an agent for this workspace to start a run.')+tool('Configure agent','newAgent');
-    return form('launch',field('Issue',select('task',Object.fromEntries(db.tasks.map(t=>[t.id,t.id+' · '+t.title])),task.id))+
-      field('Run agent',select('agent',strings(agentNames()),WorkpalStudio.handlingAgent(task.owner)?.name))+
+    const agent=WorkpalStudio.handlingAgent(task.owner)?.name||agentNames()[0];
+    return offlineNotice()+form('launch',field('Issue',select('task',Object.fromEntries(db.tasks.map(t=>[t.id,t.id+' · '+t.title])),task.id))+
+      field('Run agent',select('agent',strings(agentNames()),agent))+
       field('Skill',select('skill',{'':'Agent default',...Object.fromEntries(db.skills.map(s=>[s.id,s.name]))}))+
-      field('On completion',select('followUp',{'':'Keep execution trace',report:'Generate execution report'},followUp)),'Start workflow');
+      field('On completion',select('followUp',{'':'Keep execution trace',report:'Generate execution report'},followUp))+
+      '<div class="delegation-context">'+delegationContext(task.id,agent,'')+'</div>','Start workflow');
+  }
+  function deliveryContent(d){
+    return '<p class="preserve">'+esc(d.summary)+'</p><h4>Artifacts</h4>'+(d.artifacts.length?d.artifacts.map(a=>'<details class="artifact" open><summary>'+esc(a.title)+'</summary><pre>'+esc(a.body)+'</pre></details>').join(''):empty('No artifact provided.'))+
+      '<h4>Acceptance evidence</h4>'+(d.evidence.length?d.evidence.map(e=>'<div class="evidence-row"><strong>'+esc(e.criterion)+'</strong><small>'+esc(e.evidence?.trim()?(evidenceStates[e.status]||'Evidence provided'):'Evidence missing')+'</small><p class="preserve">'+esc(e.evidence||'No evidence provided.')+'</p></div>').join(''):empty('Original acceptance evidence is unavailable.'))+
+      '<h4>Open questions and limitations</h4><p class="preserve">'+esc(d.limitations||'Not recorded.')+'</p>';
+  }
+  function deliveryView(d){
+    const previous=db.deliveries.find(p=>p.id===d.supersedes),latest=WorkpalStudio.currentDelivery(d.task);
+    return box('Delivery v'+d.version, '<p class="delivery-meta">'+esc(d.id)+' · '+esc(d.run)+' · '+date(d.createdAt)+' · '+(latest?.id===d.id?'Current delivery':d.disposition==='candidate'?'Candidate delivery':'Historical version')+'</p>'+(d.candidateReason?'<p class="review-warning">'+esc(d.candidateReason)+' This result has been kept without changing the current decision.</p>':'')+deliveryContent(d)+
+      (d.review?'<div class="decision-receipt"><strong>'+ (d.review.decision==='approve'?'Approved':'Changes requested')+'</strong><p class="preserve">'+esc(d.review.note||d.review.reason||'')+'</p><small>'+esc(d.review.author||d.review.reviewer||'Patrick')+' · '+(d.review.at?date(d.review.at):'Original date unavailable')+' · This decision applies to v'+d.version+' only.</small></div>':'')+
+      (previous?'<details class="delivery-comparison"><summary>Compare v'+previous.version+' → v'+d.version+'</summary><div class="delivery-columns"><section><h4>Previous · v'+previous.version+'</h4>'+deliveryContent(previous)+'</section><section><h4>Current · v'+d.version+'</h4>'+deliveryContent(d)+'</section></div>'+tool('Open previous delivery','run',previous.run)+'</details>':''));
+  }
+  function inputSnapshotView(r){
+    const s=r.inputSnapshot;
+    if(!s||r.snapshotUnavailable)return '<details class="artifact"><summary>Input snapshot unavailable</summary><p>Historical requirements were not captured. Start a new attempt to record current inputs.</p></details>';
+    return '<details class="artifact"><summary>Input snapshot · '+date(s.capturedAt)+'</summary>'+(s.previousDelivery?'<div class="decision-receipt"><strong>Previous delivery · v'+s.previousDelivery.version+'</strong><p>'+esc(s.previousDelivery.review?.note||s.previousDelivery.summary)+'</p></div>':'')+propertyList({Goal:s.task.title,Project:s.task.project||'No project',Agent:s.agent.name,Skill:s.skill?s.skill.name+' · '+(s.skill.version||'unversioned'):'None'})+'<p class="preserve">'+esc(s.task.description)+'</p><ul>'+s.task.checks.map(c=>'<li>'+esc(c)+'</li>').join('')+'</ul><details><summary>Agent, project and skill details</summary><pre>'+esc(JSON.stringify({agent:s.agent,context:s.context,skill:s.skill,workflow:s.workflow},null,2))+'</pre></details></details>';
   }
   function run(id){
     const r=db.runs.find(x=>x.id===id);
     if(!r)return empty('Run not found.');
     const t=db.tasks.find(t=>t.id===r.task);
-    if(!t)return box(esc(r.title||'Chat run'),propertyList({Agent:r.agent,Status:r.status,Context:r.context?.project||'No project'})+'<ol class="trace">'+r.events.map(e=>'<li><code>'+esc(e.type)+'</code><span>'+esc(e.text)+'</span></li>').join('')+'</ol>'+btn('Open conversation','openThread',r.conversation));
+    if(!t)return offlineNotice()+box(esc(r.title||'Chat run'),propertyList({Agent:r.agent,Status:r.status,Context:r.context?.project||'No project'})+'<ol class="trace">'+r.events.map(e=>'<li><code>'+esc(e.type)+'</code><span>'+esc(e.text)+'</span></li>').join('')+'</ol>'+btn('Open conversation','openThread',r.conversation));
+    const d=db.deliveries.find(d=>d.run===id),checks=r.inputSnapshot?.task?.checks||[],kind=r.kind||'execution';
     let actions='';
-    if(r.status==='queued')actions=btn('Start execution','claimRun',id,'primary')+btn('Cancel run','cancel',id);
-    if(r.status==='running')actions=form('deliver',field('Handoff note','<textarea name="note" required placeholder="What changed, and what should the reviewer check?"></textarea>'),'Submit for review',id)+btn('Cancel run','cancel',id);
-    if(r.status==='running'&&r.kind!=='reply')actions+=btn('Finish run','finishRun',id);
-    if(r.kind==='reply' && r.status==='running')actions=form('deliver',field('Response','<textarea name="note" required></textarea>'),'Post response',id)+btn('Cancel request','cancel',id);
-    if(r.delivered&&t.status==='review'&&!r.reviewDecision)actions=form('decision',`<input type="hidden" name="stage" value="${r.stage}">`+
-      field('Decision',select('choice',{approve:'Approve and complete issue',return:'Request changes'}))+field('Review note',input('note','',false)),'Record decision',id);
-    if(r.kind!=='reply'&&(['cancelled','returned','failed'].includes(r.status)||r.reviewDecision==='return'))actions=tool(r.status==='failed'?'Retry run':'Start another attempt','launch',t.id);
-    return `<div class="run-title">${tool(esc(t.id),'issue',t.id)}${badge(r.status)}</div><h3>${esc(t.title)}</h3><p>${esc(r.agent||t.owner)} · ${esc(r.skill||'No attached skill')}</p>
-      <div class="gate"><h3>${({queued:'Queued for '+esc(r.agent),failed:'Run failed',waiting:'Ready for review',running:'In progress',returned:'Changes requested',cancelled:'Run cancelled',finished:'Run completed'})[r.status]}</h3>${actions}</div>
-      <h4>Deliverables</h4>${r.artifacts.map(a=>'<details class="artifact"><summary>'+esc(a.title)+'</summary><pre>'+esc(a.body)+'</pre></details>').join('')||empty('Add a handoff note to deliver this run.')}
-      <h4>Execution log</h4><ol class="trace">${r.events.slice().reverse().map(e=>'<li><code>'+esc(e.type)+'</code><span>'+esc(e.text)+'</span><small>'+date(e.at)+'</small></li>').join('')}</ol>${tool('Generate execution report','execution',id)}`;
+    if(r.status==='queued')actions=btn('Start run','claimRun',id,'primary')+btn('Cancel run','cancel',id);
+    if(r.status==='running'&&kind==='execution')actions=form('deliver',field('Summary','<textarea name="note" required placeholder="What changed, and what should the reviewer check?"></textarea>')+
+      '<fieldset><legend>Artifact</legend>'+field('Artifact title',input('artifactTitle','',false))+field('Artifact content or reference','<textarea name="artifactBody" rows="4" placeholder="Paste a document, change excerpt, or reference for the reviewer. Text is saved locally."></textarea>')+'</fieldset>'+
+      '<fieldset><legend>Acceptance evidence</legend><small>Record evidence or mark what is still missing.</small>'+checks.map((c,i)=>'<div class="evidence-input">'+field(esc(c),'<textarea name="evidence'+i+'" rows="2"></textarea>')+field('Evidence status · '+(i+1),select('evidenceStatus'+i,evidenceStates,'supported'))+'</div>').join('')+(checks.length?'':empty('No criteria captured. Add criteria to the issue and start a new attempt before approval.'))+'</fieldset>'+
+      field('Open questions and limitations','<textarea name="limitations" placeholder="Record unresolved questions, scope limits, or explicitly state none."></textarea>'),'Submit for review',id)+actionList([btn('Finish without delivery','finishRun',id),btn('Cancel run','cancel',id)]);
+    if(r.status==='running'&&kind==='review')actions=form('deliver',field('Review findings','<textarea name="note" required placeholder="Record findings, missing evidence and questions for the decision maker."></textarea>'),'Save review note',id)+actionList([(WorkpalStudio.currentDelivery?.(t.id)||WorkpalStudio.latestDelivery(t.id))?tool('Open delivery for review','run',(WorkpalStudio.currentDelivery?.(t.id)||WorkpalStudio.latestDelivery(t.id)).run):'',btn('Finish without delivery','finishRun',id),btn('Cancel run','cancel',id)]);
+    if(kind==='reply'&&r.status==='running')actions=form('deliver',field('Response · recorded by you','<textarea name="note" required></textarea>'),'Save response',id)+btn('Cancel request','cancel',id);
+    if(d&&!d.review){
+      const unavailable=WorkpalStudio.reviewEligibility(d),approval=WorkpalStudio.approvalEligibility(d);
+      const step=WorkpalStudio.workflowFor(t.project).steps.find(s=>s.status==='review');
+      if(!unavailable)actions=form('decision',`<input type="hidden" name="stage" value="${r.stage}">`+
+        '<p>Review delivery v'+d.version+'. Approval moves this issue to <strong>'+esc(states[step?.next||'done'])+'</strong>. Requesting changes moves it to '+esc(states[step?.rejected||'active'])+'.</p>'+
+        (approval?'<p class="review-warning">'+esc(approval)+'</p>':'')+
+        field('Decision',select('choice',approval?{return:'Request changes'}:{approve:'Approve → '+states[step?.next||'done'],return:'Request changes'},approval?'return':'approve'))+
+        field('Review note','<textarea name="note" '+(approval?'required':'')+' placeholder="Explain the decision or the changes needed."></textarea>')+
+        '<label class="assign-option review-ack" '+(approval?'hidden':'')+'><input type="checkbox" name="acknowledged" '+(approval?'':'required')+'> I reviewed the artifacts, each criterion and the limitations for v'+d.version+'.</label>','Record decision',id);
+      else actions='<p class="review-warning">'+esc(unavailable)+'</p>'+ (WorkpalStudio.currentDelivery(t.id)?.id!==d.id&&WorkpalStudio.currentDelivery(t.id)?tool('Open current delivery','run',WorkpalStudio.currentDelivery(t.id).run):'')+form('selectDelivery','<p>Choosing this version makes it the current delivery and moves the issue to In review. Other results and decisions stay in the history.</p>'+field('Selection reason','<textarea name="reason" required></textarea>'),'Select for review',d.id);
+    }
+    if(kind==='execution'&&(['cancelled','failed'].includes(r.status)||r.reviewDecision==='return'||(r.status==='finished'&&!d)))actions=tool('Start another attempt','launch',t.id);
+    return `<div class="run-title">${tool(esc(t.id),'issue',t.id)}${badge(r.status)}</div><h3>${esc(r.inputSnapshot?.task?.title||t.title)}</h3><p>${esc(r.agent||t.owner)} · ${esc(r.skill||'No attached skill')} · ${esc(kind)} · Runtime offline</p>`+offlineNotice()+inputSnapshotView(r)+
+      (d?deliveryView(d):'')+`<div class="gate"><h3>${({queued:'Waiting for your input',failed:'Run failed',running:'In progress',cancelled:'Run cancelled',finished:'Run ended'})[r.status]||esc(r.status)}</h3><p>Issue status: ${esc(states[t.status])}. Ending a run does not approve its delivery.</p>${actions}</div>`+
+      (!d&&r.artifacts.length?'<h4>Recorded notes</h4>'+r.artifacts.map(a=>'<details class="artifact"><summary>'+esc(a.title)+'</summary><pre>'+esc(a.body)+'</pre></details>').join(''):'')+
+      `<h4>Execution log · local records</h4><ol class="trace">${r.events.slice().reverse().map(e=>'<li><code>'+esc(e.type)+'</code><span>'+esc(e.text)+'</span><small>'+date(e.at)+'</small></li>').join('')}</ol>${tool('Generate execution report','execution',id)}`;
   }
   let issueStatus='',issueOwner='';
   function tasks(){
@@ -189,7 +316,7 @@
       steps.map(step=>'<fieldset><legend>'+esc(states[step.status])+'</legend>'+
         field('Hand to',select(step.status+'Owner',{'':'Keep assignee','Project lead':'Project lead',Patrick:'Patrick',...strings(agentNames())},step.owner))+
         field('Instructions','<textarea name="'+step.status+'Instructions" rows="2">'+esc(step.instructions)+'</textarea>')+
-        '<div class="fields">'+field('When done, move to',select(step.status+'Next',states,step.next))+
+        '<div class="fields">'+(step.status==='active'?'<div><strong>Delivery goes to In review</strong><p>Every submitted delivery needs a review decision.</p><input type="hidden" name="activeNext" value="review"></div>':field('When done, move to',select(step.status+'Next',states,step.next)))+
         field('If rejected, send back to',select(step.status+'Rejected',states,step.rejected))+'</div></fieldset>').join(''),'Save workflow',id);
   }
   function projectEditor(name){
@@ -213,11 +340,12 @@
   }
   function squadPage(name){
     const s=db.squads.find(x=>x.name===name);if(!s)return empty('Squad unavailable.');
-    const members=s.members.map(member=>'<div class="member-row"><b>'+esc(member)+'</b><small>'+esc([member===s.leader?'Leader':member==='Patrick'?'Member':'Agent',s.roles?.find(r=>r.name===member)?.role].filter(Boolean).join(' · '))+'</small></div>').join('');
-    return '<div class="detail-grid"><div>'+box('Members · '+s.members.length,members,tool('Manage members','squadEditor',name))+
+    const members=s.members.map(member=>'<div class="squad-member-row"><button type="button" class="member-avatar-button" data-act="surface" data-id="'+esc('avatarEditor|'+JSON.stringify({name:member,squad:name}))+'" aria-label="Change avatar for '+esc(member)+'">'+avatar(member)+'</button><div class="member-identity">'+(db.agents.some(a=>a.name===member)?tool(esc(member),'agent',member,'member-name'): '<strong>'+esc(member)+'</strong>')+'<small>'+esc(s.roles?.find(r=>r.name===member)?.role|| (member==='Patrick'?'Workspace member':'Agent'))+'</small></div><span class="member-role">'+(member===s.leader?'Leader':'Member')+'</span></div>').join('');
+    return '<div class="detail-grid squad-detail"><div>'+box('Members · '+s.members.length,members,tool('Manage members','squadEditor',name))+
       box('Instructions','<p class="preserve">'+esc(s.instructions||'No instructions yet.')+'</p>',tool('Edit','squadEditor',name))+box('Recent work',issueList(db.tasks.filter(t=>t.owner===name)))+
-      '</div><div>'+box('Properties','<p>'+esc(s.description||'')+'</p>'+propertyList({Leader:s.leader,Visibility:'Workspace','Created by':'Patrick'})+tool('Assign work','assignIssue',name,'primary'))+'</div></div>';
+      '</div><div>'+box('Properties','<p>'+esc(s.description||'')+'</p>'+propertyList({Leader:s.leader,Visibility:'Workspace','Created by':'Patrick'}))+'</div></div>';
   }
+
   function autopilots(){
     return '<div class="agent-table autopilot-table"><div class="table-head"><span>Name</span><span>Agent</span><span>Schedule</span><span>Status</span></div>'+db.autopilots.map(a=>'<button class="agent-row" data-act="surface" data-id="autopilot|'+esc(a.id)+'"><span class="actor-name">'+icon('auto')+'<strong>'+esc(a.name)+'</strong></span><span class="cell-meta">'+avatar(a.agent)+esc(a.agent)+'</span><span class="cell-meta">'+esc(a.time)+' daily</span><span class="availability"><i></i>'+(a.enabled?'Enabled':'Paused')+'</span></button>').join('')+(db.autopilots.length?'':empty('No autopilots yet.'))+'</div>';
   }
@@ -227,13 +355,14 @@
     return form('autoEditor',field('Name',input('name',a?.name))+field('Runbook','<textarea required name="prompt">'+esc(a?.prompt||'')+'</textarea>')+
       field('Assignee',select('agent',strings(agentNames()),a?.agent))+field('Project',select('project',{'':'No project',...strings(db.projects)},a?.project))+
       field('Output mode',select('mode',{issue:'Create issue',run:'Run only'},a?.mode))+
+      field('Acceptance criteria · one per line','<textarea name="checks" rows="3">'+esc((a?.checks?.length?a.checks:['Provide the requested summary with sources and open questions.']).join('\n'))+'</textarea>')+
       field('Daily at · device time','<input type="time" required name="time" value="'+esc(a?.time||'09:00')+'">')+
-      field('Schedule',select('enabled',{off:'Disabled',on:'Enabled while Workpal is open'},a?.enabled?'on':'off')),'Save autopilot',id);
+      field('Schedule',select('enabled',{off:'Disabled',on:'Enabled while this workspace is open'},a?.enabled?'on':'off'))+'<p class="empty">Schedules are checked only while this workspace is selected and this page stays open. Switching workspace or closing the page pauses checks; missed triggers are not replayed.</p>','Save autopilot',id);
   }
   function autopilotPage(id){
     const a=db.autopilots.find(x=>x.id===id);if(!a)return empty('Autopilot not found.');
     return box(esc(a.name),'<p>'+esc(a.prompt)+'</p>'+propertyList({Agent:a.agent,Project:a.project||'No project',Output:a.mode==='run'?'Run only':'Create issue',Trigger:'Daily at '+a.time+' · '+(a.enabled?'Enabled':'Disabled')})+
-      actionList([btn('Run now','triggerAuto',id,'primary'),tool('Edit','autoEditor',id)]))+
+      '<h4>Acceptance criteria</h4><ul>'+(a.checks?.length?a.checks:['Provide the requested summary with sources and open questions.']).map(c=>'<li>'+esc(c)+'</li>').join('')+'</ul><p class="empty">Scheduled checks pause when you leave this workspace or close this page. Missed triggers are not replayed.</p>'+actionList([btn('Run now','triggerAuto',id,'primary'),tool('Edit','autoEditor',id)]))+
       box('Run history',a.history.map(e=>'<div class="entry"><strong>'+esc(e.status)+'</strong><small> · '+esc(e.source)+' · '+date(e.at)+'</small><p>'+esc(e.note)+'</p>'+actionList([e.task?tool(esc(e.task),'issue',e.task):'',e.run?tool(esc(e.run),'run',e.run):''])+'</div>').join('')||empty('No deliveries yet.'));
   }
   function savedViews(){
@@ -291,17 +420,25 @@
   function notes(){return form('note',field('Reviewer',input('author','',false))+field('Review feedback','<textarea name="text" required rows="3"></textarea>'),'Save feedback')+db.notes.slice().reverse().map(n=>`<div class="note"><small>${esc(n.author||'Reviewer')} / ${esc(n.page)}</small><p>${esc(n.text)}</p></div>`).join('')+btn('Export notes','exportNotes');}
   function doc(id){const r=db.reports.find(r=>r.id===id);return r?`<small>${r.id} · ${date(r.at)} · ${esc(workspace().name)} snapshot</small><h3>${esc(r.title)}</h3><pre>${esc(r.body)}</pre>${btn('Export Markdown','exportDoc',id)}`:empty('Report unavailable.');}
   let inboxTab='active';
+  function notificationActivity(task){
+    const entries=(task?.activity||[]).flatMap(e=>[e,...(e.replies||[])]);
+    const latest=entries.reduce((latest,e)=>e.at>=latest.at?e:latest,{at:0,text:'Assigned to you'});
+    return {at:latest.at,text:latest.text,token:JSON.stringify(entries.map(e=>[e.id||'',e.at,e.text]))};
+  }
+  function notificationRead(state,activity){
+    return state.readToken!==undefined?state.readToken===activity.token:state.readAt>=activity.at;
+  }
   function inboxView(){
     const now=Date.now();
     const items=db.tasks.filter(t=>t.subscribed||t.owner==='Patrick').map(t=>{
-      const state=db.inbox[t.id]||{},latest=Math.max(0,...t.activity.map(e=>e.at));
-      const archived=state.archivedAt>=latest,snoozed=state.until>now;
-      return {t,state,latest,visible:inboxTab==='archived'?archived:inboxTab==='snoozed'?snoozed:!archived&&!snoozed};
-    }).filter(x=>x.visible).sort((a,b)=>b.latest-a.latest);
+      const state=db.inbox[t.id]||{},activity=notificationActivity(t);
+      const archived=state.archivedToken!==undefined?state.archivedToken===activity.token:state.archivedAt>=activity.at,snoozed=state.until>now;
+      return {t,state,activity,visible:inboxTab==='archived'?archived:inboxTab==='snoozed'?snoozed:!archived&&!snoozed};
+    }).filter(x=>x.visible).sort((a,b)=>b.activity.at-a.activity.at);
     return '<div class="toolbar">'+['active','snoozed','archived'].map(key=>btn(key[0].toUpperCase()+key.slice(1),'inboxTab',key,key===inboxTab?'primary':'')).join('')+'</div>'+
-      box('Inbox',items.map(({t,state,latest})=>'<article class="notification">'+tool(esc(t.title),'issue',t.id,'notification-title')+
-        '<small>'+esc(t.id)+' · '+esc(states[t.status])+(state.readAt>=latest?'':' · Unread')+'</small><p>'+esc(t.activity[0]?.text||'Assigned to you')+'</p>'+
-        actionList([btn(state.readAt>=latest?'Mark unread':'Mark read','inboxRead',t.id),btn(inboxTab==='archived'?'Restore':'Archive','inboxArchive',t.id),btn(inboxTab==='snoozed'?'Unsnooze':'Snooze 1 hour','inboxSnooze',t.id)])+'</article>').join('')||empty('You are all caught up.'));
+      box('Inbox',items.map(({t,state,activity})=>'<article class="notification">'+tool(esc(t.title),'issue',t.id,'notification-title')+
+        '<small>'+esc(t.id)+' · '+esc(states[t.status])+(notificationRead(state,activity)?'':' · Unread')+'</small><p>'+esc(activity.text)+'</p>'+
+        actionList([btn(notificationRead(state,activity)?'Mark unread':'Mark read','inboxRead',t.id),btn(inboxTab==='archived'?'Restore':'Archive','inboxArchive',t.id),btn(inboxTab==='snoozed'?'Unsnooze':'Snooze 1 hour','inboxSnooze',t.id)])+'</article>').join('')||empty('You are all caught up.'));
   }
   function quickActionsView(taskId){
     return box('Quick actions',db.quickActions.map(a=>btn(esc(a.name),'runQuick',taskId+'|'+a.id,'thread-row')).join('')||empty('Save a frequent request.'),tool('Add','quickEditor',taskId));
@@ -346,9 +483,9 @@
     }
     if(changed)write();
   }
-  const pages={runtimes:runtimesPage,workflows:workflowsPage,auto:autopilots,squads,views:savedViews,chatroom:chatPage,overview,tasks,projects,workflow:()=>box('Run history',runList(db.runs),tool('＋ Launch workflow','launch','','primary')),stats:()=>stats(route().params.get('team'))+pinnedPanels(),skills:skillsView,agents:agentsView,inbox:inboxView,mine:()=>box('Assigned to Patrick',issueList(db.tasks.filter(t=>t.owner==='Patrick'))),reports:reportList,settings:()=>box('Workspace settings','<dl class="properties"><dt>Workspace</dt><dd>'+esc(workspace().name)+'</dd><dt>Owner</dt><dd>Patrick</dd><dt>Language</dt><dd>English</dd><dt>Storage</dt><dd>This browser</dd></dl>'+actionList([tool('Workflows','workflows'),tool('Workspace notes','notes')]))};
+  const pages={runtimes:runtimesPage,workflows:workflowsPage,auto:autopilots,squads,views:savedViews,chatroom:chatPage,overview,tasks,projects,workflow:()=>box('Run history',runList(db.runs),tool('＋ Launch workflow','launch','','primary')),stats:()=>WorkpalAnalytics.page(),skills:skillsView,agents:agentsView,inbox:inboxView,mine:()=>box('Assigned to Patrick',issueList(db.tasks.filter(t=>t.owner==='Patrick'))),reports:reportList,settings:()=>box('Workspace settings','<dl class="properties"><dt>Workspace</dt><dd>'+esc(workspace().name)+'</dd><dt>Owner</dt><dd>Patrick</dd><dt>Language</dt><dd>English</dd><dt>Storage</dt><dd>This browser</dd></dl>'+actionList([tool('Workflows','workflows'),tool('Workspace notes','notes')]))};
   // A surface descriptor selects a trusted renderer. Tools never supply executable HTML.
-  const labels={...routes,statusIssue:'New issue',issueProperty:'Issue property',runtimeEditor:'Runtime settings',quickEditor:'New quick action',wakeupEditor:'Create wakeup',workflowEditor:'Configure workflow',conversationSettings:'Conversation settings',assignIssue:'Assign work',chatHistory:'Chat history',threadReply:'Reply to comment',agentConfig:'Agent settings',projectConfig:'Project settings',saveView:'Save issue view',squad:'Squad',squadEditor:'Squad settings',autopilot:'Autopilot',autoEditor:'Autopilot settings',recipients:'New chat',workspaces:'Switch workspace',newWorkspace:'Create workspace',issue:'Issue',move:'Move issue',editIssue:'Edit issue',projectIssue:'Create project issue',childIssue:'Create sub-issue',launch:'Launch a workflow',run:'Run inspector',project:'Project issues',agent:'Agent profile',skill:'Skill detail',notes:'Review notes',document:'Report snapshot',summary:'Generate summary',execution:'Execution report',newAgent:'Configure agent',newProject:'Create project',suggest:'Recommend a skill',directory:'Workspace actions',panel:'Live data panel',search:'Search workspace',reviews:'Review queue'};
+  const labels={...routes,avatarEditor:'Change avatar',statusIssue:'New issue',issueProperty:'Issue property',runtimeEditor:'Runtime settings',quickEditor:'New quick action',wakeupEditor:'Create wakeup',workflowEditor:'Configure workflow',conversationSettings:'Conversation settings',assignIssue:'Assign work',chatHelp:'Choose an action',chatHistory:'Chat history',threadReply:'Reply to comment',agentConfig:'Agent settings',projectConfig:'Project settings',saveView:'Save issue view',squad:'Squad',squadEditor:'Squad settings',autopilot:'Autopilot',autoEditor:'Autopilot settings',recipients:'New chat',workspaces:'Switch workspace',newWorkspace:'Create workspace',issue:'Issue',move:'Move issue',editIssue:'Edit issue',projectIssue:'Create project issue',childIssue:'Create sub-issue',launch:'Launch a workflow',run:'Run inspector',project:'Project issues',agent:'Agent profile',skill:'Skill detail',notes:'Review notes',document:'Report snapshot',summary:'Generate summary',execution:'Execution report',newAgent:'Configure agent',newProject:'Create project',suggest:'Recommend a skill',directory:'Workspace actions',panel:'Live data panel',search:'Search workspace',reviews:'Review queue'};
 
   function catalog(){return '<div class="catalog">'+Object.entries({...routes,workspaces:'Switch workspace',newWorkspace:'Create workspace',issue:'Create an issue',launch:'Launch a workflow',summary:'Workspace summary',execution:'Execution report',newAgent:'Configure agent',newProject:'Create project',suggest:'Recommend a skill',notes:'Review feedback',panel:'Build a live panel',search:'Search'}).map(([type,label])=>tool(label,type)).join('')+'</div>';}
   function surface(type,arg='',standalone=false){
@@ -369,18 +506,20 @@
       ).join('')+tool('＋ Create workspace','newWorkspace','','primary');
       case 'newWorkspace':return form('newWorkspace',field('Workspace name','<input name="name" value="'+esc(arg)+'" maxlength="60" required autocomplete="off">'),'Create workspace');
       case 'directory':return catalog();
+      case 'chatHelp':return '<p class="preserve">'+esc(arg)+'</p><p>Workspace actions use explicit commands and forms. Reports contain saved workspace records and decision trails.</p>'+actionList([tool('Organize as an issue','issue','draft:'+arg),tool('Choose workspace action','directory')]);
       case 'panel':return generatedPanel(arg);
       case 'reviews':return issueList(db.tasks.filter(t=>t.status==='review'));
       case 'issue':return arg.startsWith('draft:')?issueEditor('',arg.slice(6)):arg?issueDetail(arg,standalone):issueEditor();
       case 'issueProperty':{
         const [id,key]=arg.split('|'),t=db.tasks.find(t=>t.id===id);
         const fields={status:['Status',select('status',states,t.status)],owner:['Assignee',select('owner',ownerOptions(),t.owner)],priority:['Priority',select('priority',strings(['Low','Normal','High','Urgent']),t.priority)],due:['Due date','<input type="date" name="due" value="'+esc(t.due||'')+'">']};
-        return form('issueProperty',field(...fields[key])+(key==='owner'?'<label class="assign-option"><input type="checkbox" name="startAgent" checked> Start agent after assignment</label>':''),'Save',id);
+        return form('issueProperty',field(...fields[key])+(['owner','status'].includes(key)?'<label class="assign-option dispatch-option"><input type="checkbox" name="startAgent" checked> Queue the assigned agent or workflow handler</label>':'')+(key==='status'?'<label class="manual-completion" hidden>Manual completion reason<textarea name="manualReason" placeholder="Explain why this issue is complete without approving a delivery."></textarea></label>':''),'Save',id);
       }
       case 'move':{const [id,status]=arg.split('|');return issueEditor(id,'','',null,status);}
       case 'editIssue':return issueEditor(arg);
       case 'childIssue':{const parent=db.tasks.find(t=>t.id===arg);return parent?issueEditor('','',parent.project,parent):empty('Issue not found.');}
-      case 'assignIssue':return issueEditor('','','',null,'todo',arg);
+      case 'assignIssue':return assignWorkEditor(arg);
+      case 'avatarEditor':return avatarEditor(arg);
       case 'projectIssue':return issueEditor('','',arg);
       case 'statusIssue':return issueEditor('','','',undefined,arg);
       case 'launch':return launch(arg);
@@ -409,7 +548,7 @@
       }
       case 'agentConfig':{
         const a=db.agents.find(x=>x.name===arg);
-        return form('agentConfig',field('Instructions','<textarea name="instructions" rows="5" required>'+esc(a.instructions||a.role)+'</textarea>')+field('Harness',select('runtime',strings(['Codex','Claude Code','Local runner']),a.runtime))+field('Model',input('model',a.model||'Default'))+runtimeFields(a)+starterField(a),'Save settings',arg);
+        return form('agentConfig',tool(avatar(a.name)+' Change avatar','avatarEditor',JSON.stringify({name:a.name}))+field('Instructions','<textarea name="instructions" rows="5" required>'+esc(a.instructions||a.role)+'</textarea>')+field('Harness',select('runtime',strings(['Codex','Claude Code','Local runner']),a.runtime))+field('Model',input('model',a.model||'Default'))+runtimeFields(a)+starterField(a),'Save settings',arg);
       }
       case 'skill':return skill(arg);
       case 'suggest':return form('suggest',field('Skill name',input('name'))+field('Source URL','<input type="url" name="url" required>')+field('Recommended use',input('reason'))+field('Stage',select('stage',Object.fromEntries(stages.map((stage,i)=>[i,stage])))),'Add to directory');
@@ -424,58 +563,61 @@
   function searchResults(q){const term=q.toLowerCase();const matches=[...Object.entries(routes).map(([k,v])=>[v,k,'']),...db.tasks.map(t=>[t.id+' '+t.title,'issue',t.id]),...db.skills.map(s=>[s.name,'skill',s.id]),...db.agents.map(a=>[a.name,'agent',a.name])].filter(([text])=>text.toLowerCase().includes(term));return matches.length ? actionList(matches.map(([label,type,id])=>tool(esc(label),type,id))) : empty('No results.');}
   function descriptor(type,arg='',text=''){return {id:crypto.randomUUID(),role:'assistant',text,surface:{type,arg},event:'TOOL_CALL_RESULT',at:Date.now()};}
   function parse(prompt){
-    const p=prompt.trim().toLowerCase();
-    if(/(?:create|new|add) (?:a |an )?workspace\b(?!\s+(?:summary|report|panel|dashboard|issue)\b)|新建工作空间|创建工作空间/.test(p)){
-      const name=prompt.match(/workspace\s+(?:(?:named|called)\s+)?(.+)$/i)?.[1]||'';
+    const text=prompt.trim(),p=text.toLowerCase().replace(/^please\s+/,'');
+    const unsupported=()=>descriptor('chatHelp',text,'Choose an action to continue. Your message is saved in this conversation.');
+    // Parse only the command prefix. Titles, quoted material and negations are data.
+    if(/^(?:do not|don't|never|avoid|explain|what|why|how|can you explain|不要|别|解释)\b|^(?:不要|别|解释)/i.test(p))return unsupported();
+    const createIssue=text.match(/^(?:please\s+)?(?:create|new|add)\s+(?:a |an )?(?:issue|task)(?:\s+(?:titled|called|named))?(?:\s*[:：]\s*|\s+)?(.*)$/i)||text.match(/^(?:创建|新建)任务[：:\s]*(.*)$/);
+    if(createIssue){const title=createIssue[1]?.replace(/^['"]|['"]$/g,'')||'';return descriptor('issue',title?'draft:'+title:'');}
+    if(/^(?:create|new|add) (?:a |an )?workspace\b(?!\s+(?:summary|report|panel|dashboard|issue)\b)|^(?:新建|创建)工作空间/.test(p)){
+      const name=text.match(/workspace\s+(?:(?:named|called)\s+)?(.+)$/i)?.[1]||'';
       return descriptor('newWorkspace',name);
     }
-    if(/switch workspace|change workspace|切换工作空间/.test(p))return descriptor('workspaces');
+    if(/^(?:switch|change) workspace\b|^切换工作空间/.test(p))return descriptor('workspaces');
     const issue=db.tasks.find(t=>p.includes(t.id.toLowerCase()));
     const run=db.runs.find(r=>p.includes(r.id.toLowerCase()))||db.runs.find(r=>r.task===issue?.id);
     const team=Object.entries(teams).find(([id,name])=>p.includes(id)||p.includes(name.toLowerCase())||p.includes(({quality:'质量组',engineering:'研发组',product:'产品组',unassigned:'未分配'})[id]))?.[0]||'';
     const latest=(currentConversation()?.messages||[]).slice().reverse().find(m=>m.surface?.type==='run');
     const rid=run?.id||latest?.surface.arg||db.runs.find(r=>r.task)?.id||'';
     const previousIssue=(currentConversation()?.messages||[]).slice().reverse().find(m=>m.surface?.type==='issue'&&db.tasks.some(t=>t.id===m.surface.arg));
-    if(issue&&/assign|edit|update|指派|编辑/.test(p))return descriptor('editIssue',issue.id);
-    if(issue&&/comment|reply|评论/.test(p))return descriptor('issue',issue.id);
-    if(/launch|start.*(?:workflow|run)|run.*workflow|启动|跑流程/.test(p)){
+    if(issue&&/^(?:assign|edit|update|指派|编辑)\b/.test(p))return descriptor('editIssue',issue.id);
+    if(issue&&/^(?:comment|reply|评论)\b/.test(p))return descriptor('issue',issue.id);
+    if(/^(?:launch|start)\b.*(?:workflow|run)|^run\s+workflow|^(?:启动|跑流程)/.test(p)){
       const selected=issue?.id||previousIssue?.surface.arg||'';
       return descriptor('launch',selected+(/report|报告/.test(p)?'~report':''),'Review the workflow configuration.');
     }
-    if(/report|summary|summar|报告|总结/.test(p)){
+    if(/^(?:(?:generate|create|show|open)\s+.*(?:report|summary)|summarize\b|execution report$|workspace summary$|生成.*(?:报告|总结)|总结)/.test(p)){
       const execution=/execution|run|workflow|执行|流程/.test(p)||!!run;
       if(execution&&!rid)return descriptor('launch','','Start a workflow to capture execution evidence.');
-      const rec=report(execution?'execution':'summary',team,rid);
-      return descriptor('document',rec.id,'Snapshot generated from the current workspace.');
+      return descriptor(execution?'execution':'summary',execution?rid:team,'Review the report scope, then generate a snapshot.');
     }
-    if(/approv|reject|handoff|advance|continue|退回|批准|推进/.test(p))return descriptor('run',rid,'Inspect the gate and record your decision.');
-    if(/panel|chart|plot|by project|by assignee|by status|按项目|按状态|按负责人|生成.*面板/.test(p)){
+    if(/^(?:approve|reject|handoff|advance|continue|退回|批准|推进)\b/.test(p))return rid?descriptor('run',rid,'Inspect the delivery and record your decision.'):descriptor('reviews');
+    if(/^(?:panel|chart|plot)\b|^(?:create|generate|show)\b.*(?:panel|chart)|^按(?:项目|状态|负责人)|^生成.*面板/.test(p)){
       const group=/project|项目/.test(p)?'project':/assign|owner|负责人/.test(p)?'owner':'status';
       return descriptor('panel',team+':'+group);
     }
-    if(/dashboard|insight|stats|workload|统计|面板/.test(p))return descriptor('stats',team);
-    if(/new|create|add|configure|recommend|创建|新建|推荐/.test(p)){
-      const kind=/project|项目/.test(p)?'newProject':/agent|伙伴/.test(p)?'newAgent':/skill/.test(p)?'suggest':'issue';
-      const title=prompt.match(/(?:issue|task|任务)\s*(?:titled|called|named|[:：])?\s+(.+)/i)?.[1]?.replace(/^['"]|['"]$/g,'');
-      return descriptor(kind,kind==='issue'&&title?'draft:'+title:'');
+    if(/^(?:(?:quality|engineering|product|unassigned) )?(?:team )?(?:dashboard|insights?|stats|workload)$|^(?:show|open)\s+.*(?:dashboard|insights?|stats|workload)$|^(?:统计|面板)$/.test(p))return descriptor('stats',team);
+    if(/^(?:new|create|add|configure|recommend)\b|^(?:创建|新建|推荐)/.test(p)){
+      if(/^(?:(?:new|create|add|configure)\s+(?:a |an )?project|(?:创建|新建)项目)\b/.test(p))return descriptor('newProject');
+      if(/^(?:(?:new|create|add|configure)\s+(?:a |an )?agent|(?:创建|新建)伙伴)\b/.test(p))return descriptor('newAgent');
+      if(/^(?:recommend|add|new)\s+(?:a )?skill\b|^推荐/.test(p))return descriptor('suggest');
+      return unsupported();
     }
-    if(issue&&/run|history|evidence|轨迹/.test(p)&&run)return descriptor('run',run.id);
-    if(issue)return descriptor('issue',issue.id);
-    const project=db.projects.find(name=>p.includes('project '+name.toLowerCase())||p.includes(name.toLowerCase()+' project'));
+    if(issue&&(/^(?:open|show|view)\b/.test(p)||p===issue.id.toLowerCase()))return /run|history|evidence|轨迹/.test(p)&&run?descriptor('run',run.id):descriptor('issue',issue.id);
+    if(run&&(/^(?:open|show|view)\b/.test(p)||p===run.id.toLowerCase()))return descriptor('run',run.id);
+    const lookup=p.replace(/^(?:open|show|view)\s+/,'');
+    const project=db.projects.find(name=>lookup==='project '+name.toLowerCase()||lookup===name.toLowerCase()+' project');
     if(project)return descriptor('project',project);
-    const agent=db.agents.find(a=>p.includes(a.name.toLowerCase()));
-    if(agent)return descriptor('agent',agent.name);
-    if(run)return descriptor('run',run.id);
-    const skill=db.skills.find(s=>p.includes(s.name.toLowerCase())||p.includes(s.id));
-    if(skill)return descriptor('skill',skill.id);
-    if(/review queue|awaiting review|待评审/.test(p))return descriptor('reviews');
-    if(/feedback|note|意见/.test(p))return descriptor('notes');
-    if(/search|find|搜索/.test(p))return descriptor('search',prompt.replace(/^(search|find|搜索)\s*/i,''));
-    const page=Object.entries(routes).find(([k,v])=>p.includes(k)||p.includes(v.toLowerCase()));
+    const agent=db.agents.find(a=>lookup===a.name.toLowerCase());if(agent)return descriptor('agent',agent.name);
+    const skill=db.skills.find(s=>lookup===s.name.toLowerCase()||lookup===s.id);if(skill)return descriptor('skill',skill.id);
+    if(/^(?:show )?(?:review queue|issues awaiting review|awaiting review|待评审)$/.test(p))return descriptor('reviews');
+    if(/^(?:feedback|notes?|意见)$/.test(lookup))return descriptor('notes');
+    if(/^(?:search|find|搜索)\s+/.test(p))return descriptor('search',text.replace(/^(?:please\s+)?(?:search|find|搜索)\s*/i,''));
+    const page=Object.entries(routes).find(([k,v])=>lookup===k||lookup===v.toLowerCase());
     if(page)return descriptor(page[0]);
-    if(/workflow|流程/.test(p))return descriptor('workflow');
-    if(/issue|任务/.test(p))return descriptor('tasks');
-    return null;
+    if(/^(?:workflow|流程)$/.test(p))return descriptor('workflow');
+    if(/^(?:issues?|tasks?|任务)$/.test(p))return descriptor('tasks');
+    return unsupported();
   }
   // Local AG-UI-style event transport. The UI catalog binds only to known tools.
   // Resource URIs stay local; users can inspect the payload behind a generated card.
@@ -563,10 +705,11 @@
       ${starters}<div class="composer">${name?'<small class="runtime-state">'+esc(name)+' · Runtime offline</small>':''}${(c?.project||db.chatDraft?.project)?'<small class="context-label">Project · '+esc(c?.project||db.chatDraft.project)+'</small>':''}<form data-form="prompt"><textarea name="prompt" aria-label="Message" placeholder="Message ${esc(name||'workspace')}…" rows="2" required>${esc(draftText)}</textarea><div class="compose-actions">${btn(icon('plus'),'surface','directory|','icon-only" aria-label="Workspace actions')}${agentButton}<button type="submit" class="send" aria-label="Send message" ${name?'':'disabled'}>${icon('send')}</button></div></form></div></aside>`;
   }
   function paintChat(scroll=true){
+    if($('#assistant'))captureDrafts($('#assistant'));
     $('#assistant')?.remove();
     const pane=$('#chat-pane');
     if(!chat&&!(pane&&(currentConversation()||draftAgent)))return;
-    (pane||$('#app')).insertAdjacentHTML('beforeend',assistant(!!pane));
+    (pane||$('#app')).insertAdjacentHTML('beforeend',assistant(!!pane));restoreDrafts($('#assistant'));
     const m=$('#assistant .messages');
     if(scroll&&m){
       const latest=m.lastElementChild;
@@ -587,14 +730,15 @@
       if(location.hash.slice(1)===scoped(hash))render();else {location.hash=scoped(hash);enter();}
       return;
     }
+    if($('#dialog').open)captureDrafts($('#dialog'));
     modalSurface={type,arg};const d=$('#dialog');focusReturn=d.open?focusReturn:document.activeElement;
-    d.innerHTML=`<header><h2 id="dialog-title">${esc(labels[type]||'Workspace')}</h2>${btn(icon('close'),'dismiss','','icon-only" aria-label="Close dialog')}</header><div class="modal-body">${surface(type,arg)}</div>`;
-    if(!d.open)d.showModal();
+    d.dataset.surface=type;d.innerHTML=`<header><h2 id="dialog-title">${esc(labels[type]||'Workspace')}</h2>${btn(icon('close'),'dismiss','','icon-only" aria-label="Close dialog')}</header><div class="modal-body">${surface(type,arg)}</div>`;
+    restoreDrafts(d);if(!d.open)d.showModal();
   }
-  function dismiss(){const d=$('#dialog');if(d.open){d.close();focusReturn?.focus();}modalSurface=null;}
+  function dismiss(){const d=$('#dialog');if(d.open){captureDrafts(d);d.close();focusReturn?.focus();}modalSurface=null;}
   const spaces=[
-    {name:'Work',page:'tasks',icon:'tasks',pages:['overview','tasks','projects','inbox','mine','views','stats','reports']},
-    {name:'Team',page:'agents',icon:'squads',pages:['agents','squads','skills','workflow','workflows','runtimes']},
+    {name:'Work',page:'tasks',icon:'tasks',pages:['overview','tasks','projects','inbox','mine','views','reports']},
+    {name:'Team',page:'agents',icon:'squads',pages:['agents','squads','skills','workflow','workflows','runtimes','stats']},
     {name:'Chat',page:'chatroom',icon:'note',pages:['chatroom']},
     {name:'Auto',page:'auto',icon:'auto',pages:['auto']}
   ];
@@ -604,8 +748,8 @@
     function section(label,body){return '<section class="rail-group"><div class="rail-group-label"><small>'+label+'</small>'+icon('chevronDown')+'</div>'+body+'</section>';}
     let panel='';
     if(space.name==='Work')panel=section('Inbox',nav('inbox'))+section('Views',['tasks','mine','views'].map(nav).join('')+db.views.slice(0,3).map(v=>btn(icon('layers')+'<span>'+esc(v.name)+'</span>','applyView',v.id,'rail-item')).join(''))+
-      section('Projects',nav('projects')+db.projects.slice(0,6).map(p=>tool(icon('projects')+'<span>'+esc(p)+'</span><small>'+db.tasks.filter(t=>t.project===p).length+'</small>','project',p,'rail-item')).join(''))+section('Workspace',['overview','stats','reports'].map(nav).join(''));
-    if(space.name==='Team')panel=section('Team',nav('agents')+nav('squads'))+section('Resources',nav('skills')+nav('runtimes')+nav('workflow')+nav('workflows'));
+      section('Projects',nav('projects')+db.projects.slice(0,6).map(p=>tool(icon('projects')+'<span>'+esc(p)+'</span><small>'+db.tasks.filter(t=>t.project===p).length+'</small>','project',p,'rail-item')).join(''))+section('Workspace',['overview','reports'].map(nav).join(''));
+    if(space.name==='Team')panel=section('Team',nav('agents')+nav('squads'))+section('Resources',nav('skills')+nav('runtimes')+nav('stats')+nav('workflow')+nav('workflows'));
     if(space.name==='Auto')panel=section('Automation',nav('auto')+db.autopilots.map(a=>tool(icon('auto')+'<span>'+esc(a.name)+'</span>','autopilot',a.id,'rail-item')).join(''));
     return `<aside class="rail"><div class="app-dock"><button class="workspace-tile" data-act="surface" data-id="workspaces|" aria-label="Switch workspace, ${esc(workspace().name)}" title="${esc(workspace().name)} · Workpal">${esc(Array.from(workspace().name)[0])}</button>
       ${btn(icon('edit'),'surface','issue|','dock-command" aria-label="New issue')}${btn(icon('search'),'surface','search|','dock-command" aria-label="Search workspace')}
@@ -623,6 +767,7 @@
   }
   function scrollKey(el){return el.classList.contains('board-cards')?'column:'+el.closest('[data-drop-state]').dataset.dropState:el.tagName==='MAIN'?'main':el.className;}
   function render(){
+    captureDrafts();
     if(renderedHash)scrollPositions.set(renderedHash,new Map(scrollRegions().map(el=>[scrollKey(el),[el.scrollLeft,el.scrollTop]])));
     const {page,params}=route(),id=params.get('id');
     const type=Object.keys(detailPages).find(key=>detailPages[key]===page),detail=id&&type;
@@ -633,9 +778,9 @@
     const collectionAction=!detail&&createActions[page];
     document.title=heading+' · '+workspace().name+' · Workpal';
     $('#app').innerHTML=`<div class="shell ${mobileMenu?'menu-open':''} ${navCollapsed?'nav-collapsed':''}" data-page="${page}" data-space="${space}" data-detail="${detail?'true':'false'}" data-layout="${layout}">${navigation(page)}
-    <div class="main"><header class="top"><div class="top-title">${btn(icon('menu'),'menu','','mobile-only icon-only" aria-label="Workspace menu')}${navCollapsed&&space!=='Chat'?btn(icon('panelLeft'),'collapseNav','','icon-only" aria-label="Expand sidebar'):''}${icon(page)}${detail?'<a href="#'+scoped(page)+'">'+routes[page]+'</a><span class="separator">/</span><span>'+esc(type==='issue'?id:heading)+'</span>':(page==='chatroom'?'<span>Chat</span>':'<h1>'+esc(heading)+'</h1>')}${taskActions?btn(icon('filter'),'filters','','icon-only" aria-label="Filter issues'):''}</div><div class="top-actions">${taskActions?issueDisplay()+tool(icon('edit'),'issue','','icon-only" aria-label="New issue'):collectionAction?tool(icon('plus'),collectionAction[0],'','icon-only" aria-label="'+collectionAction[1]):btn(icon('search'),'surface','search|','icon-only" aria-label="Search workspace')}</div></header>
-    <main id="main" tabindex="-1">${detail&&type!=='issue'?'<div class="heading"><div><div class="crumb">'+esc(workspace().name)+'<span>/</span>'+esc(type==='issue'?id:labels[type])+'</div><h1>'+esc(heading)+'</h1></div></div>':''}<div id="page-content">${detail?surface(type,id,true):pages[page]()}</div></main></div></div><footer class="bottom-bar"><span class="product-wordmark">Workpal</span><span class="workspace-caption">${esc(workspace().name)}</span></footer>${page==='chatroom'?'':chatLauncher()}`;
-    paintChat();
+    <div class="main"><header class="top">${page==='stats'?WorkpalAnalytics.header():`<div class="top-title">${btn(icon('menu'),'menu','','mobile-only icon-only" aria-label="Workspace menu')}${navCollapsed&&space!=='Chat'?btn(icon('panelLeft'),'collapseNav','','icon-only" aria-label="Expand sidebar'):''}${icon(page)}${detail?'<a href="#'+scoped(page)+'">'+routes[page]+'</a><span class="separator">/</span><span>'+esc(type==='issue'?id:heading)+'</span>':(page==='chatroom'?'<span>Chat</span>':'<h1>'+esc(heading)+'</h1>')}${taskActions?btn(icon('filter'),'filters','','icon-only" aria-label="Filter issues'):''}</div><div class="top-actions">${taskActions?issueDisplay()+tool(icon('edit'),'issue','','icon-only" aria-label="New issue'):collectionAction?tool(icon('plus'),collectionAction[0],'','icon-only" aria-label="'+collectionAction[1]):btn(icon('search'),'surface','search|','icon-only" aria-label="Search workspace')}</div>`}</header>
+    <main id="main" tabindex="-1">${detail&&type!=='issue'?'<div class="heading"><div><div class="crumb">'+esc(workspace().name)+'<span>/</span>'+esc(type==='issue'?id:labels[type])+'</div><h1>'+esc(heading)+'</h1></div>'+(type==='squad'?tool(icon('plus')+' Assign work','assignIssue',id,'primary'):'')+'</div>':''}<div id="page-content">${detail?surface(type,id,true):pages[page]()}</div></main></div></div><footer class="bottom-bar"><span class="product-wordmark">Workpal</span><span class="workspace-caption">${esc(workspace().name)}</span></footer>${page==='chatroom'?'':chatLauncher()}`;
+    paintChat();restoreDrafts();
     renderedHash=location.hash;
     const positions=scrollPositions.get(renderedHash);
     for(const el of scrollRegions()){
@@ -647,28 +792,11 @@
   function refresh(){const prev=modalSurface;render();if(prev&&$('#dialog').open)show(prev.type,prev.arg,false);}
   function output(type,arg,text,inside){checkWakeups();write();if(inside){emitTurn(descriptor(type,arg,text));write();render();}else{dismiss();render();show(type,arg,false);}toast(text);}
   function saveIssue(data,id){
-      if(data.project&&!db.projects.includes(data.project))throw Error('Choose a project in this workspace.');
-      let t=db.tasks.find(item=>item.id===id);
-      const created=!t;
-      const oldOwner=t?.owner, oldStatus=t?.status;
-      const active=t&&openRun(t.id);
-      if(!t){t={id:next(data.project==='Workpal'?'WP':data.project.toUpperCase().replace(/[^A-Z0-9]/g,'').slice(0,5)||'ISS',db.tasks),stage:0,activity:[]};db.tasks.push(t);}
-      if(active&&data.owner!==oldOwner){
-        active.status='cancelled';
-        active.events.push({type:'run.cancelled',text:'Assignee changed',at:Date.now()});
-        log(t,active.id+' cancelled after reassignment.');
-      }
-      Object.assign(t,{title:data.title,description:data.description,checks:data.checks.split('\n').map(x=>x.trim()).filter(Boolean),owner:data.owner,status:oldStatus||'backlog',priority:data.priority,due:data.due,tags:data.tags.split(',').map(x=>x.trim()).filter(Boolean),team:data.team,project:data.project});
-      if(created&&data.parent)t.parent=data.parent;
-      log(t,created?'Created issue.':oldOwner!==t.owner?'Assigned to '+t.owner+'.':oldStatus!==t.status?'Moved to '+states[t.status]+'.':'Updated issue details.');
-      const transition=oldStatus!==data.status;
-      if(transition)WorkpalStudio.transitionIssue(t,data.status,{handoff:!created||data.owner==='Unassigned'});
-      if(data.startAgent&&t.status!=='backlog'&&WorkpalStudio.handlingAgent(t.owner)&&(oldOwner!==t.owner||oldStatus==='backlog')){
-        const agent=WorkpalStudio.handlingAgent(t.owner);
-        start(t,agent.skills[0]||'',agent.name,true);
-      }
-      return t;
+    const t=db.tasks.find(item=>item.id===id);
+    return WorkpalStudio.updateIssue(t||null,{...data,checks:data.checks.split('\n').map(x=>x.trim()).filter(Boolean),tags:data.tags.split(',').map(x=>x.trim()).filter(Boolean)},
+      {queueRun:data.startAgent==='on',manualReason:data.manualReason||''}).task;
   }
+
   function submit(f){
     const data=Object.fromEntries(new FormData(f));for(const k of Object.keys(data))data[k]=data[k].trim();
     const type=f.dataset.form, id=f.dataset.id, inside=!!f.closest('#assistant');
@@ -687,13 +815,27 @@
       if(answer)emitTurn(answer);
       draftText='';c.draft='';write();render();return;
     }
-    const done=(kind,key,message)=>output(kind,key,message,inside);
+    const done=(kind,key,message)=>{write();clearFormDraft(f);return output(kind,key,message,inside);};
+    if(type==='selectDelivery'){const d=WorkpalStudio.selectDelivery(id,data.reason);return done('run',d.run,'Current delivery selected.');}
+    if(type==='assignWork'){
+      const result=WorkpalStudio.assignWork(id,{...data,checks:data.checks.split('\n').map(x=>x.trim()).filter(Boolean),queueRun:data.queueRun==='on'});
+      return done('issue',result.task.id,result.run?'Issue assigned. Leader run queued.':'Issue assigned without a run.');
+    }
+    if(type==='avatarEditor'){
+      const emoji=data.emoji;
+      if(emoji&&(!/\p{Extended_Pictographic}|\p{Regional_Indicator}|[#*0-9]\uFE0F?\u20E3/u.test(emoji)||[...new Intl.Segmenter('en',{granularity:'grapheme'}).segment(emoji)].length!==1))throw Error('Choose or paste one emoji.');
+      const agent=db.agents.find(a=>a.name===data.name);
+      if(agent)agent.emoji=emoji;
+      else if(data.name==='Patrick'){db.memberAvatars??={};db.memberAvatars[data.name]=emoji;}
+      else throw Error('Member unavailable.');
+      return done(data.squad?'squad':'agent',data.squad||data.name,'Avatar saved.');
+    }
     if(type==='conversationSettings'){Object.assign(currentConversation(),data);write();dismiss();render();return;}
     if(type==='issue'||type==='issueProperty'){
       let values=data;
       if(type==='issueProperty'){
         const t=db.tasks.find(t=>t.id===id);
-        values={...t,checks:t.checks.join('\n'),tags:(t.tags||[]).join(', '),startAgent:data.owner?'':'on',...data};
+        values={...t,checks:t.checks.join('\n'),tags:(t.tags||[]).join(', '),startAgent:'',...data};
       }
       const t=saveIssue(values,id);return done('issue',t.id,'Saved '+t.id+'.');
     }
@@ -710,8 +852,9 @@
     }
     if(type==='attach'){const a=db.agents.find(a=>a.name===data.agent);if(!a.skills.includes(id))a.skills.push(id);return done('skill',id,'Attached to '+a.name+'.');}
     if(type==='deliver'){
-      const r=changeRun(db.runs.find(r=>r.id===id),'deliver',data.note);
-      return done('run',id,r.kind==='reply'?'Response posted.':'Submitted for review.');
+      const sourceRun=db.runs.find(r=>r.id===id);
+      const r=changeRun(sourceRun,'deliver',data.note,{artifacts:data.artifactTitle||data.artifactBody?[{title:data.artifactTitle||'Untitled artifact',body:data.artifactBody||''}]:[],evidence:(sourceRun.inputSnapshot?.task?.checks||[]).map((criterion,i)=>({criterion,evidence:data['evidence'+i]||'',status:data['evidenceStatus'+i]})),limitations:data.limitations||''});
+      return done('run',id,r.kind==='reply'?'Response saved.':r.kind==='review'?'Review findings saved.':'Delivery saved.');
     }
     if(type==='launch'){
       const t=db.tasks.find(t=>t.id===data.task), agent=db.agents.find(a=>a.name===data.agent);
@@ -720,7 +863,7 @@
       if(data.followUp==='report')r.reportOnFinish=true;
       return done('run',r.id,'Opened '+r.id+'.');
     }
-    if(type==='decision'){const r=decide(id,Number(data.stage),data.choice,data.note);if(r.status==='finished'&&r.reportOnFinish&&r.reviewDecision==='approve'){const rec=report('execution','',r.id);return done('document',rec.id,'Workflow complete. Execution report saved.');}return done('run',r.id,'Decision recorded.');}
+    if(type==='decision'){const r=decide(id,Number(data.stage),data.choice,data.note,{acknowledged:data.acknowledged==='on'});if(r.status==='finished'&&r.reportOnFinish&&r.reviewDecision==='approve'){const rec=report('execution','',r.id);return done('document',rec.id,'Decision recorded. Execution report saved.');}return done('run',r.id,'Decision recorded.');}
     if(type==='panel')return done('panel',panelConfig(data.team+':'+data.group).key,'Live panel updated.');
     if(type==='summary'||type==='execution'){const rec=report(type,data.team,data.run);return done('document',rec.id,'Report saved.');}
     if(type==='saveView'){db.views.push({id:next('VIEW',db.views),name:data.name,status:issueStatus,owner:issueOwner,query:taskFilter,layout});return done('views','','View saved.');}
@@ -752,7 +895,7 @@
     if(type==='autoEditor'){
       let a=db.autopilots.find(item=>item.id===id);
       if(!a){a={id:next('AUTO',db.autopilots),history:[]};db.autopilots.push(a);}
-      Object.assign(a,data,{enabled:data.enabled==='on'});return done('autopilot',a.id,'Autopilot saved.');
+      Object.assign(a,data,{enabled:data.enabled==='on',checks:data.checks.split('\n').map(c=>c.trim()).filter(Boolean)});return done('autopilot',a.id,'Autopilot saved.');
     }
     if(type==='newProject'){if(db.projects.includes(data.name))throw Error('This project already exists.');db.projects.push(data.name);return done('project',data.name,'Project created.');}
     if(type==='agentConfig'){Object.assign(db.agents.find(a=>a.name===id),data,{starters:starterLines(data.starters)});return done('agent',id,'Settings saved.');}
@@ -765,11 +908,12 @@
       db.skills.push({id:slug,name:data.name,source:url.href,author:workspace().name,stage:Number(data.stage),description:data.reason});
       return done('skill',slug,'Added to the '+workspace().name+' directory.');
     }
-    if(type==='note'){db.notes.push({author:data.author||'Patrick',page:routes[route().page],text:data.text,date:date(Date.now())});return done('notes','','Note saved.');}
+    if(type==='note'){db.notes.push({id:crypto.randomUUID(),at:Date.now(),author:data.author||'Patrick',page:routes[route().page],text:data.text,date:date(Date.now())});return done('notes','','Note saved.');}
     if(type==='search')show('search',data.q,inside);
   }
-  document.addEventListener('submit',ev=>{ev.preventDefault();try{submit(ev.target);}catch(err){toast(err.message);}});
+  document.addEventListener('submit',ev=>{ev.preventDefault();try{submit(ev.target);}catch(err){showSaveError(err);}});
   document.addEventListener('click',async ev=>{
+    try{
     document.querySelectorAll('.display-dropdown[open],.column-options[open]').forEach(menu=>{if(!menu.contains(ev.target))menu.open=false;});
     if(ev.target.closest('.skip-link')){ev.preventDefault();$('#main').focus();return;}
     const mobileLink=ev.target.closest('.rail a');
@@ -778,13 +922,23 @@
     if(mobileMenu&&b.closest('.rail')&&b.dataset.act!=='menu')mobileMenu=false;
     const id=b.dataset.id||'',inside=!!b.closest('#assistant');
     switch(b.dataset.act){
+      case 'pickEmoji':{
+        const f=b.closest('form');f.elements.emoji.value=id;
+        f.querySelector('.avatar-choice-preview').textContent=id||'—';
+        f.querySelectorAll('.emoji-palette button').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.id===id)));
+        f.elements.emoji.focus();break;
+      }
+      case 'exportUnsaved':download('Workpal-unsaved.json',JSON.stringify({workspace:workspace(),data:db,drafts:draftRecords(workspace().id)},null,2));break;
+      case 'reloadSaved':{
+        captureDrafts();localStorage.setItem('workpal.recovery.'+crypto.randomUUID(),JSON.stringify({workspace:workspace(),data:db,drafts:draftRecords(workspace().id),at:Date.now()}));location.reload();break;
+      }
       case 'switchSpace':openSpace(id);break;
       case 'menu':mobileMenu=!mobileMenu;render();break;
       case 'collapseNav':if(innerWidth<768)mobileMenu=false;else navCollapsed=!navCollapsed;render();break;
       case 'filters':filtersOpen=!filtersOpen;render();break;
       case 'inboxTab':inboxTab=id;refresh();break;
-      case 'inboxRead':{const state=db.inbox[id]??={};state.readAt=state.readAt?0:Date.now();write();refresh();break;}
-      case 'inboxArchive':{const state=db.inbox[id]??={};state.archivedAt=inboxTab==='archived'?0:Date.now();write();refresh();break;}
+      case 'inboxRead':{const state=db.inbox[id]??={},activity=notificationActivity(db.tasks.find(t=>t.id===id)),unread=notificationRead(state,activity);state.readAt=unread?0:activity.at;state.readToken=unread?'':activity.token;write();refresh();break;}
+      case 'inboxArchive':{const state=db.inbox[id]??={},activity=notificationActivity(db.tasks.find(t=>t.id===id));state.archivedAt=inboxTab==='archived'?0:activity.at;state.archivedToken=inboxTab==='archived'?'':activity.token;write();refresh();break;}
       case 'inboxSnooze':{const state=db.inbox[id]??={};state.until=inboxTab==='snoozed'?0:Date.now()+3600000;write();refresh();break;}
       case 'cancelWakeup':db.wakeups.find(w=>w.id===id).state='Cancelled';write();refresh();break;
       case 'runQuick':{const [taskId,actionId]=id.split('|');const a=db.quickActions.find(a=>a.id===actionId);WorkpalStudio.comment(db.tasks.find(t=>t.id===taskId),(a.agent?'@'+a.agent+' ':'')+a.prompt);output('issue',taskId,'Request posted.',inside);break;}
@@ -795,9 +949,9 @@
       case 'subscribe':{const t=db.tasks.find(t=>t.id===id);t.subscribed=!t.subscribed;write();refresh();break;}
       case 'resolveThread':{const [taskId,entryId]=id.split('|');const e=db.tasks.find(t=>t.id===taskId).activity.find(e=>e.id===entryId);e.resolved=!e.resolved;write();refresh();break;}
       case 'triggerAuto':WorkpalStudio.triggerAutopilot(id);output('autopilot',id,'Trigger recorded.',inside);break;
-      case 'applyView':{const v=db.views.find(v=>v.id===id);issueStatus=v.status;issueOwner=v.owner;taskFilter=v.query;layout=v.layout;show('tasks','',inside);break;}
-      case 'claimRun':{changeRun(db.runs.find(r=>r.id===id),'claim');output('run',id,'Execution started.',inside);break;}
-      case 'finishRun':{changeRun(db.runs.find(r=>r.id===id),'finish');output('run',id,'Execution completed.',inside);break;}
+      case 'applyView':{const v=db.views.find(v=>v.id===id);issueStatus=v.status;issueOwner=v.owner;taskFilter=v.query;layout=v.layout==='board'?'board':'list';issuePrefs().layout=layout;write();show('tasks','',inside);break;}
+      case 'claimRun':{changeRun(db.runs.find(r=>r.id===id),'claim');output('run',id,'Run started.',inside);break;}
+      case 'finishRun':{changeRun(db.runs.find(r=>r.id===id),'finish');output('run',id,'Run ended without a delivery.',inside);break;}
       case 'archiveFilter':archivedChats=!archivedChats;render();break;
       case 'pinChat':{const c=currentConversation();c.pinned=!c.pinned;write();dismiss();render();break;}
       case 'archiveChat':{const c=currentConversation();c.archived=!c.archived;db.currentChat=null;draftAgent='';draftText='';chat=false;write();dismiss();render();break;}
@@ -820,7 +974,7 @@
       case 'detach':{const [skill,name]=JSON.parse(id);const a=db.agents.find(a=>a.name===name);a.skills=a.skills.filter(s=>s!==skill);write();refresh();break;}
       case 'cancel':{const r=db.runs.find(r=>r.id===id);changeRun(r,'cancel');output('run',id,'Run cancelled.',inside);break;}
       case 'copyCommand':{const command=installCommand(db.skills.find(s=>s.id===id));try{await navigator.clipboard.writeText(command);toast('Install command copied.');}catch{const field=document.createElement('textarea');field.value=command;field.readOnly=true;b.after(field);field.select();}break;}
-      case 'pin':db.panels=db.panels.includes(id)?db.panels.filter(k=>k!==id):[...db.panels,id];write();refresh();toast(db.panels.includes(id)?'Panel pinned to Workspace insights.':'Panel unpinned.');break;
+      case 'pin':db.panels=db.panels.includes(id)?db.panels.filter(k=>k!==id):[...db.panels,id];write();refresh();toast(db.panels.includes(id)?'Panel pinned to Analytics.':'Panel unpinned.');break;
       case 'layout':case 'setLayout':layout=id|| (layout==='list'?'board':'list');issuePrefs().layout=layout;write();refresh();break;
       case 'collapseGroup':{const prefs=issuePrefs();prefs.collapsed=prefs.collapsed.includes(id)?prefs.collapsed.filter(x=>x!==id):[...prefs.collapsed,id];write();refresh();break;}
       case 'hideColumn':case 'toggleColumn':{const prefs=issuePrefs();prefs.hidden=prefs.hidden.includes(id)?prefs.hidden.filter(x=>x!==id):[...prefs.hidden,id];write();refresh();break;}
@@ -831,6 +985,7 @@
       case 'exportDoc':{const r=db.reports.find(r=>r.id===id);download(r.id+'.md','# '+r.title+'\n\n'+workspace().name+' · '+date(r.at)+'\n\n'+r.body);break;}
       case 'exportNotes':download('Workpal-review.md',db.notes.map(n=>'## '+n.page+' · '+(n.author||'Reviewer')+'\n\n'+n.text).join('\n\n'));break;
     }
+    }catch(err){showSaveError(err);}
   });
   document.addEventListener('dragstart',ev=>{
     const row=ev.target.closest('[draggable=true]');
@@ -847,23 +1002,34 @@
     show('move',t.id+'|'+lane.dataset.dropState,!!lane.closest('#assistant'));
   });
   document.addEventListener('input',ev=>{
-    const el=ev.target;if(el.name==='prompt')persistDraft(el.value);if(el.name==='text')quickSuggestions(el);if(!el.dataset.filter)return;
+    const el=ev.target;persistFormDraft(el.form);if(el.name==='prompt')persistDraft(el.value);if(el.name==='text')quickSuggestions(el);if(!el.dataset.filter)return;
     const parent=el.closest('.resource-body,.modal-body,#page-content');const pos=el.selectionStart;
     if(el.dataset.filter==='task'){taskFilter=el.value;parent.innerHTML=tasks();}else{skillFilter=el.value;parent.innerHTML=skillsView();}
     const replacement=parent.querySelector('[data-filter]');replacement.focus();replacement.setSelectionRange(pos,pos);
   });
   document.addEventListener('change',ev=>{
-    const el=ev.target;
-    if(el.form?.dataset.form==='issue'){
-      const f=el.form;
-      const old=db.tasks.find(t=>t.id===f.dataset.id);
-      const toggle=f.querySelector('.assign-option');
-      toggle.hidden=!WorkpalStudio.handlingAgent(f.elements.owner.value)||f.elements.status.value==='backlog'||(old?.owner===f.elements.owner.value&&old.status!=='backlog');
+    const el=ev.target;persistFormDraft(el.form);
+    if(el.form?.dataset.form==='assignWork'&&el.name==='status'){
+      const checkbox=el.form.elements.queueRun;
+      checkbox.disabled=el.value==='backlog'||!WorkpalStudio.handlingAgent(el.form.dataset.id);
+      if(checkbox.disabled)checkbox.checked=false;
       return;
     }
-    if(el.form?.dataset.form==='launch'&&el.name==='task'){
-      const owner=db.tasks.find(t=>t.id===el.value)?.owner;
-      if(WorkpalStudio.handlingAgent(owner))el.form.elements.agent.value=WorkpalStudio.handlingAgent(owner).name;
+    if(['issue','issueProperty'].includes(el.form?.dataset.form)){syncIssueForm(el.form);persistFormDraft(el.form);return;}
+    if(el.form?.dataset.form==='launch'){
+      const f=el.form;
+      if(el.name==='task'){
+        const owner=db.tasks.find(t=>t.id===el.value)?.owner;
+        if(WorkpalStudio.handlingAgent(owner))f.elements.agent.value=WorkpalStudio.handlingAgent(owner).name;
+      }
+      f.querySelector('.delegation-context').innerHTML=delegationContext(f.elements.task.value,f.elements.agent.value,f.elements.skill.value);
+      return;
+    }
+    if(el.form?.dataset.form==='decision'&&el.name==='choice'){
+      const f=el.form,approving=el.value==='approve';
+      f.querySelector('.review-ack').hidden=!approving;
+      f.elements.acknowledged.required=approving;
+      f.elements.note.required=!approving;
       return;
     }
     if(el.hasAttribute('data-stage-filter'))skillStage=el.value;
@@ -893,7 +1059,8 @@
     if(ev.key==='Escape'&&!$('#dialog').open&&chat){chat=false;paintChat();}
     if(ev.target.name==='prompt'&&ev.key==='Enter'&&!ev.shiftKey&&!ev.isComposing){ev.preventDefault();ev.target.form.requestSubmit();}
   });
-  $('#dialog').addEventListener('close',()=>{if(!$('#dialog').open)modalSurface=null;});
+  $('#dialog').addEventListener('close',()=>{captureDrafts($('#dialog'));if(!$('#dialog').open)modalSurface=null;});
+  window.addEventListener('pagehide',()=>captureDrafts());
   let visibleHash;
   function openSpace(id){
     dismiss();
@@ -928,12 +1095,15 @@
     mobileMenu=false;render();window.scrollTo(0,0);
   }
   setInterval(()=>{
+    try{
     checkWakeups();
     const now=new Date(),day=now.toLocaleDateString('en-CA'),time=now.toTimeString().slice(0,5);
     for(const a of db.autopilots||[]){
       if(!a.enabled||a.time!==time||a.lastDay===day)continue;
       a.lastDay=day;WorkpalStudio.triggerAutopilot(a.id,'Schedule');refresh();
     }
+    }catch(err){showSaveError(err);}
   },15000);
+  WorkpalAnalytics.init({getDb:()=>db,workspace,teams,states,scoped,icon,esc,avatar,issueList,render,write});
   window.addEventListener('hashchange',enter);enter();
 })();

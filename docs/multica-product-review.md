@@ -1,5 +1,7 @@
 # Workpal 对标 Multica 产品设计评审
 
+> 历史评审：本文对应第一轮改动前的实现，不应作为当前缺陷清单或直接实施指令。当前复审见 [第二轮产品评审](multica-product-review-round-2.md)。最新 AGENTS.md 已替换早期约束：产品保持英文并采用 Multica 中性紧凑视觉；产品界面不放 prototype、research、simulation 标签，后端限制在交付说明中诚实描述。本文要求界面增加模拟标识、保留 TAP 暖色方向的建议已撤回。旧交付审批、报告输入快照、回复与正式执行隔离等问题已有修复，具体状态以第二轮报告为准。
+
 评审日期：2026 年 11 月 18 日。对象为当前 English-first Workpal 原型，即 `src/model.js`、`src/studio.js`、`src/studio.css` 和导出的 `dist/Workpal.html`，不是旧版 `review-v1.html`。
 
 **核心结论：Workpal 已有较完整的对象和页面骨架，但尚未建立可信的工作交付闭环。下一版应围绕任务上下文、执行可见性、交付证据、版本化评审和 Skill 复用重构。继续增加菜单、聊天入口或统计图，不会解决主要问题。**

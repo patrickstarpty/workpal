@@ -4,15 +4,23 @@ Workpal. Work together.
 
 Open **[dist/Workpal.html](dist/Workpal.html)** in a browser for the English TAP workspace. Send the single HTML file to an advisor for offline review. Open **Ask Workpal** outside the Chat page or press Cmd/Ctrl + J. The interface uses Inter, compact navigation and table layouts; the font is embedded in the offline export.
 
-## A five-minute review
+## Review a delivery and its rework
 
-1. Ask “Create issue titled Review citation coverage”. Enter acceptance criteria, choose a team and assignee, and save the issue directly in the conversation.
-2. Assign an agent to a To do issue and leave the start option checked. Open its run from the issue detail, write a handoff note and submit for review. Approve the issue or return it for another attempt.
-3. Ask “Generate execution report”. Inspect the issue, current run state and timestamped decision trail. Export a Markdown snapshot from the same card.
-4. Ask “Chart quality team issues by project”. Change the grouping to assignee, then pin the panel to **Workspace insights**. Team totals and panels read the same issue records as the board.
-5. Ask “Generate a quality team summary”. Review the saved snapshot under **Reports**. **Workspace actions** also exposes project and agent configuration, the skill directory, notes, reports and workspace settings.
+1. Create an issue with a goal and one acceptance criterion per line. Choose an agent, then open **Start run**. The delegation context previews the project, agent and selected skill. **Start workflow** records an offline attempt; it does not execute an agent.
+2. In the run, supply a summary, an artifact (document, change excerpt or reference), evidence for each criterion, and limitations. Each evidence row can be provided, missing, not met, or not applicable with an explanation. **Submit for review** saves a versioned Delivery. You may submit gaps so a reviewer can request changes.
+3. Review the actual artifact and evidence. Missing evidence or artifacts block approval. Choose **Request changes**, explain the gap, and start another attempt. Its input snapshot includes the prior delivery and review note.
+4. Submit the revised content, expand **Compare v1 → v2**, and inspect both versions. Only the explicitly selected current delivery can be approved, with an explicit acknowledgement. Approval follows the current workflow's review destination; the control shows that destination. A finished run alone does not complete an issue.
+5. Generate an execution report from the run and export Markdown. Reports retain the original issue requirements, agent, selected skill record/version label, project context, source run, delivery version and decision. Editing an issue later does not rewrite historical inputs.
 
-The default data represents a simulated workspace. Issue edits, projects, agents, bookmarks, conversation cards, decisions, pinned panel configurations, notes and report snapshots persist in local browser storage. An existing v1 browser session is imported once on first use. User-authored text is preserved in its original language. For continued access to the earlier Chinese design, the source entry is review-v1.html.
+The workspace is an offline research prototype. All run transitions, supplied evidence and decisions are local records, not real agent outputs or measured test results. Runtime availability is shown as Offline. Research and simulation labels are kept out of the product interface. Runtime connections, model calls, repository writes and background production scheduling are not implemented. Evidence presence is validated; correctness must be judged by the reviewer. The local reviewer identity is Patrick, without authentication or multi-user permissions.
+
+Issue edits, projects, agents, deliveries, bookmarks, conversation cards, decisions, pinned panels, notes and report snapshots persist in local browser storage. Existing workspace records and review notes are retained. Historical runs without original inputs explicitly show that the input snapshot is unavailable; they cannot be approved against reconstructed requirements. They can be returned and replaced by a new attempt. User-authored text is escaped and preserved in its original language. The earlier Chinese design remains at review-v1.html.
+
+The behavior consistency update adds explicit current/candidate deliveries, one dispatch decision per issue edit, manual completion reasons, draft persistence and conflict-aware local saving. Parallel or late results remain candidates until a person selects them with a reason; cancelling another attempt does not revoke the current delivery. Independent changes across tabs merge; conflicting edits to the same record stay unsaved with export and recovery actions.
+
+**Squads → Assign work** opens a compact issue composer with the squad preassigned. Backlog and the unchecked queue option create no run. A queued leader receives the squad's members, roles and instructions in its captured context. Click a member avatar to choose or paste an emoji; it is shared across the member's appearances in the workspace. This does not implement autonomous multi-agent coordination.
+
+Chat report requests now open confirmation forms. Autopilot templates capture acceptance criteria before queuing; schedule checks only occur while that workspace is selected and the page is open. Missed triggers are not replayed. Skill publishing/reuse, real execution and production scheduling remain outside this update. See [behavior consistency implementation notes](docs/behavior-consistency-implementation.md).
 
 ## Agent application design
 
@@ -22,11 +30,21 @@ The browser dispatches local workpal:agent-event events for run and tool-call li
 
 ## Local development
 
+**Team → Analytics** provides Usage, Errors and Teams views. Period, project and team filters share the same scope; trend metrics, chart intervals and leaderboard sorting remain independent. Teams shows current issue status and opens team issues and usage. Pinned panels remain available below the analytics content.
+
+TAP's usage history is authored display data, stored separately in `analyticsHistory` with `source: "fixture"`. It is not observed token consumption, billing or agent execution, and never changes issues, run records or review evidence. Dates are anchored on first opening Analytics and retained across reloads. Symphony and newly created workspaces start with empty usage history. Team issue counts read the current workspace records.
+
 Node.js 22 or newer. No dependencies required to use or build the prototype.
 
 - npm run dev serves the source entry on 127.0.0.1:4173.
 - npm run check checks syntax, runs tests and builds the offline artifact.
 - node scripts/qa.mjs exercises the exported file with Playwright. Set WORKPAL_PLAYWRIGHT to a local @playwright/test installation if needed.
+- node scripts/delivery-qa.mjs checks offline delivery → missing evidence → return → v2 → approval, historical reports, text safety, local notes and export at desktop and narrow widths.
+- node scripts/squads-qa.mjs checks compact delegation and shared emoji avatars at desktop/narrow widths.
+- node scripts/lifecycle-qa.mjs checks workflow dispatch, manual completion and parallel/late delivery selection.
+- node scripts/drafts-qa.mjs checks drafts, two-tab notes, conflict export/recovery and workspace isolation.
+- node scripts/consistency-qa.mjs checks Chat, saved layouts, Inbox, review notes and Autopilot acceptance templates.
 - node scripts/layout-qa.mjs checks sparse and long issue boards at five viewport sizes, including bottom-aligned horizontal scrolling, independent column scrolling, restored scroll positions, sticky headers, detail panes and mobile Chat.
+- node scripts/analytics-qa.mjs checks analytics filters, tabs, chart controls, rankings, team drilldown, workspace isolation and responsive layouts.
 
 The updated source consists of src/model.js, src/studio.js and src/studio.css. The old review entry retains its original scripts and styles.
