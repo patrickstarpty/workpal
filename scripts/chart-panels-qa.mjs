@@ -17,9 +17,9 @@ try{
       await expect(page.locator('.analytics-chart,.viz-ring svg,.viz-bars').first()).toBeVisible();
       if(view==='contribution'){
         const expected=await page.evaluate(()=>{const result=WorkpalAnalyticsData.contribution(WorkpalStudio.db,{days:30});return WorkpalAnalyticsData.ticketContribution(WorkpalStudio.db,result).map(r=>[r.id,r.team,r.totalLines,r.agentLines,r.humanLines]);});
-        await expect(page.locator('.contribution-summary-charts > .analytics-card')).toHaveCount(4);
-        await expect(page.locator('.contribution-summary-charts .viz-ring')).toHaveCount(0);
-        await expect(page.locator('.contribution-summary-charts .analytics-chart')).toHaveCount(2);
+        await expect(page.locator('.contribution-top-panels > .analytics-card')).toHaveCount(2);
+        await expect(page.locator('.contribution-summary-charts')).toHaveCount(0);
+        await expect(page.locator('.contribution-top-panels + .analytics-card')).toContainText('Contribution by ticket');
         await expect(page.locator('.commit-heatmap [data-analytics-point]')).toHaveCount(30);
         const day=page.locator('.commit-heatmap [data-analytics-point]').first();
         await day.focus();

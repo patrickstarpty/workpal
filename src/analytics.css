@@ -1122,3 +1122,30 @@ a.analytics-agent:hover {
 
 /* Analytics charts use one full-width column at every viewport size. */
 .analytics-page :is(.viz-grid,.contribution-overview,.contribution-summary,.contribution-summary-charts){grid-template-columns:minmax(0,1fr)}
+
+/* Two overview panels, then the full-width ticket list. */
+.contribution-top-panels{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.contribution-compact-totals{display:flex;flex-wrap:wrap;gap:24px;margin:8px 0 24px;font-size:12px;color:var(--muted-foreground)}
+.contribution-compact-totals strong{display:block;font-size:23px;color:var(--foreground);font-variant-numeric:tabular-nums}
+.contribution-top-panels .analytics-legend{justify-content:flex-start;margin:16px 0}
+.contribution-top-panels .contribution-stacked{height:20px}
+@media(max-width:700px){.contribution-top-panels{grid-template-columns:minmax(0,1fr)}}
+
+/* Compact Usage layout, scoped away from Contribution and Errors. */
+.analytics-page[data-analytics-view=usage]{gap:12px}
+.analytics-page[data-analytics-view=usage] .analytics-kpi{min-height:0;padding:12px 16px;gap:4px}
+.analytics-page[data-analytics-view=usage] .analytics-value{font-size:28px;line-height:36px}
+.analytics-page[data-analytics-view=usage] .analytics-hint:empty{display:none}
+.analytics-page[data-analytics-view=usage] .analytics-card-header{padding:10px 14px;gap:8px}
+.analytics-page[data-analytics-view=usage] .analytics-card-body{padding:0 14px 12px}
+.analytics-page[data-analytics-view=usage] .analytics-chart-frame{min-height:200px}
+.analytics-page[data-analytics-view=usage] .analytics-chart{height:200px}
+.analytics-page[data-analytics-view=usage] .analytics-legend{margin:8px 0 0;gap:12px}
+.analytics-page[data-analytics-view=usage] .viz-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.analytics-page[data-analytics-view=usage] .viz-ring{min-height:150px;gap:12px}
+.analytics-page[data-analytics-view=usage] .viz-ring svg{width:120px;flex-basis:120px}
+.analytics-page[data-analytics-view=usage] .viz-bars{min-height:150px;max-height:190px;overflow-y:auto}
+.analytics-page[data-analytics-view=usage] .viz-row{margin-bottom:10px;gap:5px}
+.analytics-page[data-analytics-view=usage] .analytics-table :is(th,td){padding-top:9px;padding-bottom:9px}
+@media(max-width:800px){.analytics-page[data-analytics-view=usage] .viz-grid{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:480px){.analytics-page[data-analytics-view=usage] .analytics-kpi{padding:10px 12px}.analytics-page[data-analytics-view=usage] .analytics-value{font-size:24px;line-height:30px}}
