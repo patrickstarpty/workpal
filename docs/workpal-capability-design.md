@@ -1,6 +1,6 @@
 # Workpal 功能与 Python 后端设计
 
-本稿是早期能力梳理，已被[正式设计](superpowers/specs/2026-11-20-workpal-software-development-design.md)取代。最新用户要求为 SQLite 统一持久化、GitHub 与 Azure Repos Git、首版包含独立 Chat、复杂工作流、自动化及完整核心能力；下文旧分期不再作为实施依据。
+本稿是早期能力梳理，已被[正式设计](superpowers/specs/2026-11-20-workpal-software-development-design.md)取代。最新用户要求为 SQLite 统一持久化、GitHub 与 Azure Repos Git、首版包含独立 Chat、复杂工作流、自动化、真实环境故障调查、Jira 建单与修复及完整核心能力；下文旧分期不再作为实施依据。
 
 本稿以本地 Multica 来源文档为功能基线，定义 Workpal 的完整能力和分期边界。后端使用 Python；保留 Workpal 品牌、English UI 与当前 Multica 视觉体系。现有原型仅作为交互参考，不直接修改。本文是待评审设计，不代表功能已经实现。
 
