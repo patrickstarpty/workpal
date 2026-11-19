@@ -1,0 +1,36 @@
+/* A compact, explorable lifecycle map above the issue collection. */
+.issue-flow{flex:none;min-width:0;border-bottom:1px solid var(--border);background:var(--page-canvas)}
+.issue-flow-header{padding:0 16px}
+.issue-flow-header button{display:flex;align-items:center;gap:8px;width:100%;min-height:42px;padding:8px 0;border:0;background:none;color:var(--foreground);text-align:left;cursor:pointer;font:inherit;font-size:12px}
+.issue-flow-header button>svg{width:14px;height:14px;flex:none}
+.issue-flow-header button[aria-expanded=false]>svg{transform:rotate(-90deg)}
+.issue-flow-header span{margin-left:auto;color:var(--muted-foreground);font-size:11px}
+#issue-flow-content{max-height:min(480px,48dvh,max(80px,calc(100dvh - 440px)));overflow:auto;overscroll-behavior:contain}
+.issue-flow-tools{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:0 16px 8px;font-size:11px;color:var(--muted-foreground)}
+.issue-flow-tools label{display:flex;align-items:center;gap:8px;font-size:11px;min-width:0}
+.issue-flow-tools select{width:auto;max-width:220px;min-height:28px;padding:3px 24px 3px 8px;font-size:12px}
+.issue-flow-pan-hint{display:none}
+.issue-flow-scroll{overflow-x:auto;min-width:0;padding:4px 12px;scroll-padding:12px;overscroll-behavior-x:contain}
+.issue-flow-map{display:block;width:100%;height:auto;font-family:var(--font-sans);font-size:11px;fill:var(--muted-foreground)}
+.issue-flow-node{cursor:pointer;outline:none}
+.issue-flow-node rect{fill:var(--surface);stroke:var(--surface-border);stroke-width:1}
+.issue-flow-node.selected rect{stroke:var(--foreground);fill:var(--surface-selected)}
+.issue-flow-node:hover rect{fill:var(--surface-hover)}
+.issue-flow-node:focus-visible rect{stroke:var(--ring);stroke-width:3}
+.issue-flow-node .flow-node-title{fill:var(--foreground);font-size:13px;font-weight:600}
+.flow-node-owner{font-size:10px}
+.flow-status{fill:var(--muted-foreground)}
+.flow-status-active{fill:var(--warning)}
+.flow-status-review{fill:var(--success)}
+.flow-status-done{fill:var(--info)}
+.flow-status-blocked{fill:var(--destructive)}
+.flow-edge{fill:none;stroke:var(--muted-foreground);stroke-width:1.25}
+.flow-return{stroke-dasharray:4 4}
+#issue-flow-arrow path{fill:var(--muted-foreground)}
+.flow-edge-label{font-size:10px}
+.issue-flow-detail{margin:4px 16px 0;padding:10px 12px;background:var(--muted);border-radius:6px;font-size:12px;line-height:1.6;overflow-wrap:anywhere}
+.issue-flow-detail strong{font-weight:600}
+.issue-flow-detail p{margin:3px 0 0;color:var(--muted-foreground)}
+.issue-flow-instructions{white-space:pre-wrap}
+.issue-flow-footnote{margin:8px 16px 12px;font-size:10px;line-height:1.6;color:var(--muted-foreground)}
+@media(max-width:600px){.issue-flow-header{padding:0 12px}.issue-flow-header span{display:none}.issue-flow-tools{padding:0 12px 8px;gap:6px}.issue-flow-tools select{max-width:190px}.issue-flow-pan-hint{display:block}.issue-flow-detail{margin-left:12px;margin-right:12px}}

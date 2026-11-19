@@ -135,11 +135,26 @@ globalThis.WorkpalAnalytics = (() => {
     const tickets=data().ticketContribution(app.getDb(),result),num=n=>n.toLocaleString('en-US');
     const unique=[...new Map(result.rows.flatMap(r=>r.commits).map(c=>[c.repository+'|'+c.sha,c])).values()];
     const attributed=data().ticketContribution(app.getDb(),{rows:[{id:'summary',added:t.added,deleted:t.deleted,commits:unique}]})[0];
-    const calendar=data().contributionCalendar(result,s.days),total=t.added+t.deleted,share=total?100*attributed.agentLines/total:0;
-    const summary=card('Contribution summary',`<div class="analytics-card-body"><div class="contribution-compact-totals"><span><strong>${num(tickets.length)}</strong> Tickets</span><span><strong>${num(t.commits)}</strong> Commits</span><span><strong>${num(total)}</strong> Total</span></div><div class="contribution-share-value">${total?share.toFixed(1)+'%':'—'}<small>Agent contribution</small></div><div class="contribution-stacked" role="img" aria-label="Agent ${num(attributed.agentLines)}, Human ${num(attributed.humanLines)}"><i style="width:${share}%;background:${palette[0]}"></i><i style="width:${total?100-share:0}%;background:${palette[1]}"></i></div><div class="analytics-legend"><span><i class="analytics-dot" style="background:${palette[0]}"></i>Agent ${num(attributed.agentLines)}</span><span><i class="analytics-dot" style="background:${palette[1]}"></i>Human ${num(attributed.humanLines)}</span></div><p class="viz-caption">Added +${num(t.added)} · Deleted −${num(t.deleted)}</p></div>`);
+    const calendar=data().contributionCalendar(result,s.days),total=t.added+t.deleted;
+    const summary=card('Contribution summary',`<div class="analytics-card-body"><div class="contribution-compact-totals"><span><strong>${num(tickets.length)}</strong> Tickets</span><span><strong>${num(t.commits)}</strong> Commits</span><span><strong>${num(total)}</strong> Total</span></div>${contributionPie(attributed.agentLines,attributed.humanLines)}<p class="viz-caption">Added +${num(t.added)} · Deleted −${num(t.deleted)}</p></div>`);
     const rows=tickets.map(row=>{const pct=n=>row.totalLines?100*n/row.totalLines:0;return `<tr><td><strong>${esc(row.id)}</strong><small>${esc(row.title||row.name||'')}</small></td><td>${esc(row.team)}</td><td class="number">${num(row.totalLines)}<small>+${num(row.added)} / −${num(row.deleted)}</small></td><td class="number">${num(row.agentLines)}</td><td class="number">${num(row.humanLines)}</td><td class="squad-rate-cell"><div class="contribution-stacked" role="img" aria-label="${esc(row.id)}: Agent ${num(row.agentLines)}, Human ${num(row.humanLines)} lines"><i style="width:${pct(row.agentLines)}%;background:${palette[0]}"></i><i style="width:${pct(row.humanLines)}%;background:${palette[1]}"></i></div></td><td class="number">${row.commits.length}</td></tr>`;}).join('');
     return `<div class="contribution-top-panels">${summary}${commitHeatmap(calendar)}</div>`+card('Contribution by ticket',rows?`<div class="analytics-table-scroll" role="region" aria-label="Ticket contribution" tabindex="0"><table class="analytics-table ticket-contribution-table"><thead><tr><th>Ticket</th><th>Team / squad</th><th class="number">Total</th><th class="number">Agent</th><th class="number">Human</th><th>Contribution</th><th class="number">Commits</th></tr></thead><tbody>${rows}</tbody></table></div>`:empty('No linked tickets','Change the period or import commit data.'))+`<p class="viz-caption">Total lines = additions + deletions in the selected period. Agent + Human = Total. Explicit attribution takes priority; otherwise Workpal-tagged commit changes count toward Agent and other commit changes toward Human. Shared commits appear under each linked ticket and only once in the summary. Team follows the assigned squad or nearest parent assigned to a squad. ${result.excluded} commits without a ticket in scope are excluded.</p><details class="contribution-method"><summary>Attribution rules &amp; import</summary>${guide}<p class="viz-caption">Import agentLines and humanLines on each commit to provide line ownership. Remaining changes follow the commit attribution rule.</p></details>`;
 
+  }
+
+  function contributionPie(agent,human){
+    const total=agent+human,share=total?agent/total:0,num=n=>n.toLocaleString('en-US');
+    const entries=[{label:'Agent',value:agent},{label:'Human',value:human}];
+    const percent=value=>total?(100*value/total).toFixed(1)+'%':'—';
+    const label=total?entries.map(e=>`${e.label}: ${num(e.value)} lines (${percent(e.value)})`).join(', '):'No contribution data';
+    let slices=`<circle cx="80" cy="80" r="74" fill="${total?palette[1]:'var(--muted)'}"/>`;
+    if(share===1)slices=`<circle cx="80" cy="80" r="74" fill="${palette[0]}"/>`;
+    else if(share>0){
+      const angle=share*2*Math.PI-Math.PI/2,x=80+74*Math.cos(angle),y=80+74*Math.sin(angle);
+      slices+=`<path d="M 80 80 L 80 6 A 74 74 0 ${share>.5?1:0} 1 ${x} ${y} Z" fill="${palette[0]}"/>`;
+    }
+    const legend=entries.map((e,i)=>`<div class="contribution-pie-item"><span><i class="analytics-dot" style="background:${palette[i]}"></i>${e.label}</span><strong>${percent(e.value)}</strong><small>${num(e.value)} lines</small></div>`).join('');
+    return `<div class="contribution-pie"><svg viewBox="0 0 160 160" role="img" aria-label="${esc(label)}"><title>${esc(label)}</title>${slices}</svg><div class="contribution-pie-legend">${legend}${total?'':'<p class="viz-caption">No contribution data</p>'}</div></div>`;
   }
 
   function commitHeatmap(days){

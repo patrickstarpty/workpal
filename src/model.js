@@ -320,7 +320,47 @@ globalThis.WorkpalStudio = (() => {
     const id=db.projectSettings.find(config=>config.project===project)?.workflowId;
     return db.workflows.find(flow=>flow.id===id)||{id:'default',name:'Default',steps:[]};
   }
+  function requireUnarchived(task){
+    if(task?.archivedAt)throw Error('Restore this archived issue before changing it.');
+  }
+  function archiveSelection(ids){
+    if(!Array.isArray(ids)||ids.some(id=>typeof id!=='string'||!id))throw Error('Choose valid issue IDs.');
+    const records=new Map(db.tasks.map(task=>[task.id,task]));
+    return [...new Set(ids)].map(id=>{
+      const task=records.get(id);
+      if(!task)throw Error('Issue '+id+' is unavailable in this workspace.');
+      return task;
+    });
+  }
+  function archiveIssues(ids){
+    const selected=archiveSelection(ids);
+    if(selected.some(task=>task.status!=='done'))throw Error('Only Done issues can be archived.');
+    return saveArchiveBatch(selected.filter(task=>!task.archivedAt),true);
+  }
+  function restoreIssues(ids){
+    const selected=archiveSelection(ids),changed=selected.filter(task=>task.archivedAt);
+    if(changed.some(task=>task.status!=='done'))throw Error('An archived issue must remain Done.');
+    return saveArchiveBatch(changed,false);
+  }
+  function saveArchiveBatch(changed,archiving){
+    if(!changed.length)return changed;
+    const at=Date.now(),before=changed.map(task=>({task,hadArchive:Object.hasOwn(task,'archivedAt'),archivedAt:task.archivedAt}));
+    try{
+      for(const {task} of before){
+        if(archiving)task.archivedAt=at;else delete task.archivedAt;
+      }
+      if(!save())throw Error('Browser storage could not save these changes. No issues were '+(archiving?'archived':'restored')+'.');
+    }catch(error){
+      for(const record of before){
+        const {task}=record;
+        if(record.hadArchive)task.archivedAt=record.archivedAt;else delete task.archivedAt;
+      }
+      throw error;
+    }
+    return changed;
+  }
   function transitionIssue(task,status,{handoff=true,refreshReview=false,queueRun=true,internal=false,manualReason='',owner,dispatch=false}={}){
+    requireUnarchived(task);
     if(!Object.hasOwn(states,status))throw Error('Choose a valid issue status.');
     const previousStatus=task.status,previousOwner=task.owner;
     if(status==='done'&&globalThis.WorkpalCode){const blocked=WorkpalCode.blocker(db,task,currentDelivery(task.id));if(blocked)throw Error(blocked);}
@@ -364,6 +404,7 @@ globalThis.WorkpalStudio = (() => {
     save();return task;
   }
   function updateIssue(task, values, {queueRun=false,manualReason=''}={}){
+    requireUnarchived(task);
     const created=!task,previousStatus=task?.status||'backlog',previousOwner=task?.owner||'Unassigned';
     const next={title:task?.title||'',description:task?.description||'',checks:task?.checks||[],project:task?.project||'',
       owner:previousOwner,status:previousStatus,priority:task?.priority||'Normal',team:task?.team||'unassigned',due:task?.due||'',tags:task?.tags||[],...values};
@@ -497,6 +538,7 @@ globalThis.WorkpalStudio = (() => {
     auto.history.unshift(event);save();return event;
   }
   function start(task, skill, agent = handlingAgent(task.owner)?.name||task.owner, queued = false, kind = 'execution') {
+    requireUnarchived(task);
     if (!db.agents.some(a => a.name === agent)) throw Error('Select an agent to run this issue.');
     if(!['execution','review'].includes(kind))throw Error('Choose a valid run type.');
     const existing = openRun(task.id,agent,kind);
@@ -524,6 +566,7 @@ globalThis.WorkpalStudio = (() => {
     save();return run;
   }
   function comment(task, text, {replyTo} = {}) {
+    requireUnarchived(task);
     if(replyTo){
       const thread=task.activity.find(entry=>entry.id===replyTo&&entry.kind==='comment');
       if(!thread)throw Error('Discussion unavailable.');
@@ -569,6 +612,7 @@ globalThis.WorkpalStudio = (() => {
     if(!run)throw Error('Run unavailable.');
     if(['approve','return'].includes(action))return decide(run.id,run.stage,action,note,payload);
     const task=db.tasks.find(t=>t.id===run.task);
+    if(action==='claim')requireUnarchived(task);
     const record=(type,text)=>run.events.push({type,text,at:Date.now()});
     if(run.status==='queued'&&['claim','cancel'].includes(action)){
       run.status=action==='claim'?'running':'cancelled';
@@ -630,6 +674,7 @@ globalThis.WorkpalStudio = (() => {
     const delivery=db.deliveries.find(d=>d.id===id),task=db.tasks.find(t=>t.id===delivery?.task);
     const run=db.runs.find(r=>r.id===delivery?.run);
     if(!delivery||!task||!run||run.status!=='finished'||!run.delivered)throw Error('Choose a recorded delivery.');
+    requireUnarchived(task);
     if(delivery.review)throw Error('This delivery already has a decision. Start a new attempt to revise it.');
     if(!reason.trim())throw Error('Explain why this delivery should become current.');
     const previous=currentDelivery(task.id);
@@ -702,5 +747,5 @@ globalThis.WorkpalStudio = (() => {
   prepareWork();prepareDeliveries();
   if(active.id==='tap'&&globalThis.WorkpalWorkspaceFixtures)globalThis.WorkpalWorkspaceFixtures(db);
   save();
-  return {assignWork,updateIssue,currentDelivery,selectDelivery,latestDelivery,reviewEligibility,approvalEligibility,workflowFor,transitionIssue,handlingAgent,triggerAutopilot,get db(){return db;},get workspace(){return active;},listWorkspaces,createWorkspace,selectWorkspace,lastWorkspace,comment,openRun,changeRun,log,states,teams,stages,handoffs,save,count,next,start,decide,report};
+  return {assignWork,updateIssue,archiveIssues,restoreIssues,currentDelivery,selectDelivery,latestDelivery,reviewEligibility,approvalEligibility,workflowFor,transitionIssue,handlingAgent,triggerAutopilot,get db(){return db;},get workspace(){return active;},listWorkspaces,createWorkspace,selectWorkspace,lastWorkspace,comment,openRun,changeRun,log,states,teams,stages,handoffs,save,count,next,start,decide,report};
 })();

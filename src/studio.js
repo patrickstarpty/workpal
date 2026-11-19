@@ -29,7 +29,7 @@
   const icon=k=>k==='workpal'?WorkpalBrand.logo:`<svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="${WorkpalIcons[k]||WorkpalIcons.layers}"/></svg>`;
   const btn=(text,act,id='',cls='')=>{const label=cls.match(/aria-label="([^"]+)/)?.[1];return `<button type="button" class="btn ${cls}" ${label?'title="'+esc(label)+'"':''} data-act="${act}" data-id="${esc(id)}">${text}</button>`;};
   const tool=(text,type,arg='',cls='')=>btn(text,'surface',type+'|'+arg,cls);
-  const nav=(page)=>`<a href="#${scoped(page)}" class="nav ${route().page===page?'active':''}">${icon(page)}<span>${routes[page]}</span>${page==='tasks'?'<small>'+db.tasks.length+'</small>':page==='mine'?'<small>'+db.tasks.filter(t=>t.owner==='Patrick').length+'</small>':''}</a>`;
+  const nav=(page)=>`<a href="#${scoped(page)}" class="nav ${route().page===page?'active':''}">${icon(page)}<span>${routes[page]}</span>${page==='tasks'?'<small>'+db.tasks.filter(t=>!t.archivedAt).length+'</small>':page==='mine'?'<small>'+db.tasks.filter(t=>!t.archivedAt&&t.owner==='Patrick').length+'</small>':''}</a>`;
   const badge=(status)=>`<span class="status ${esc(status)}"><i></i>${esc(states[status]||status)}</span>`;
   const opt=(value,label,selected)=>`<option value="${esc(value)}" ${value===selected?'selected':''}>${esc(label)}</option>`;
   const options=(obj,selected)=>Object.entries(obj).map(([k,v])=>opt(k,v,selected)).join('');
@@ -170,10 +170,10 @@
   function skillList(items){return items.length?items.map(s=>`<button class="row" data-act="surface" data-id="skill|${esc(s.id)}"><span class="tile">${icon('skills')}</span><span class="grow"><strong>${esc(s.name)}</strong><small>${esc(s.author)} · ${stages[s.stage]}</small></span>${icon('chevron')}</button>`).join(''):empty('No matching skills.');}
   function overview(){
     if(!db.projects.length)return box('Start your first project','<p>Create a project in '+esc(workspace().name)+' to organize issues and agent runs.</p>'+tool('Create project','newProject','','primary'));
-    const counts=count(db.tasks);
+    const live=db.tasks.filter(t=>!t.archivedAt),counts=count(live);
     return `<div class="section-intro"><h2>Workspace overview</h2><p>Keep track of delivery across ${esc(workspace().name)}.</p>${tool(icon('plus')+' New issue','issue','','primary')}</div>
-      <div class="metrics">${[[db.tasks.length,'Total issues','tasks'],[counts.active,'In progress','stats'],[counts.review,'In review','stats'],[db.runs.filter(r=>r.status==='queued').length,'Queued runs','workflow']].map(([v,k,r])=>`<a href="#${scoped(r)}"><small>${k}</small><b>${v}</b>${icon(r)}</a>`).join('')}</div>
-      <div class="split">${box('Review queue',issueList(db.tasks.filter(t=>t.status==='review')),'<a href="#'+scoped('tasks')+'">View all '+icon('arrow')+'</a>')}${box('Assigned to me',issueList(db.tasks.filter(t=>t.owner==='Patrick')))}</div>
+      <div class="metrics">${[[live.length,'Total issues','tasks'],[counts.active,'In progress','stats'],[counts.review,'In review','stats'],[db.runs.filter(r=>r.status==='queued').length,'Queued runs','workflow']].map(([v,k,r])=>`<a href="#${scoped(r)}"><small>${k}</small><b>${v}</b>${icon(r)}</a>`).join('')}</div>
+      <div class="split">${box('Review queue',issueList(db.tasks.filter(t=>t.status==='review')),'<a href="#'+scoped('tasks')+'">View all '+icon('arrow')+'</a>')}${box('Assigned to me',issueList(db.tasks.filter(t=>!t.archivedAt&&t.owner==='Patrick')))}</div>
       ${box('Recent runs',runList(db.runs.slice(0,5)),tool('New run','launch'))}`;
   }
   function stats(){return WorkpalAnalytics.page();}
@@ -211,6 +211,7 @@
   function issueEditor(id='', draft='', project='', parent, nextStatus='', assignee=''){
 
     const task=db.tasks.find(t=>t.id===id);
+    if(task?.archivedAt)return empty('Restore this archived issue before editing it.')+btn('Restore issue','restoreIssue',id);
     const current=task && openRun(id);
     const owner=task?.owner||assignee||'Unassigned';
     const status=nextStatus||task?.status||'todo';
@@ -232,19 +233,19 @@
     if(!t)return empty('Issue not found.');
     const children=db.tasks.filter(child=>child.parent===id);
     const active=openRun(id), runs=db.runs.filter(r=>r.task===id), latest=WorkpalStudio.currentDelivery(id);
-    return (chat?'<h3>'+esc(id)+' · '+esc(t.title)+'</h3>':'')+`<div class="detail-grid issue-detail-grid"><div class="detail-main"><div class="detail-reading">${dedicated?'<div class="heading"><h1>'+esc(t.title)+'</h1></div>':''}${box('Description','<p class="preserve">'+esc(t.description||'No description.')+'</p>'+
-        (t.checks.length?'<h4>Acceptance criteria</h4><ul>'+t.checks.map(c=>'<li>'+esc(c)+'</li>').join('')+'</ul>':''),tool('Edit issue','editIssue',id))}
+    return (chat?'<h3>'+esc(id)+' · '+esc(t.title)+'</h3>':'')+`<div class="detail-grid issue-detail-grid"><div class="detail-main"><div class="detail-reading">${dedicated?'<div class="heading"><h1>'+esc(t.title)+'</h1></div>':''}${t.archivedAt?'<div class="issue-archived-banner"><div><strong>Archived · Done</strong><p>Archived '+date(t.archivedAt)+'. Restore to return this issue to Done.</p></div>'+btn('Restore issue','restoreIssue',t.id)+'</div>':''}${box('Description','<p class="preserve">'+esc(t.description||'No description.')+'</p>'+
+        (t.checks.length?'<h4>Acceptance criteria</h4><ul>'+t.checks.map(c=>'<li>'+esc(c)+'</li>').join('')+'</ul>':''),t.archivedAt?'':tool('Edit issue','editIssue',id))}
       ${t.completion?box('Completion record','<p><strong>'+(t.completion.kind==='manual'?'Completed manually':'Delivery accepted')+'</strong> · '+date(t.completion.at)+'</p><p class="preserve">'+esc(t.completion.reason||'Acceptance decision recorded.')+'</p><small>This is a historical decision; the current issue status is '+esc(states[t.status])+'.</small>'):''}
       ${codeDelivery(t)}${box('Deliveries',deliveryHistory(id),latest?tool('Open current delivery','run',latest.run):'')}
-      ${box('Sub-issues'+(children.length?' · '+children.filter(c=>c.status==='done').length+'/'+children.length:''),issueList(children),tool('Add sub-issue','childIssue',id))}
-      ${box('Activity',t.activity.map(e=>'<div class="entry"><small>'+esc(e.author)+' · '+date(e.at)+'</small><p>'+esc(e.text)+'</p>'+(e.kind==='comment'?'<details '+(e.resolved?'':'open')+'><summary>'+((e.replies||[]).length)+' replies'+(e.resolved?' · Resolved':'')+'</summary>'+(e.replies||[]).map(r=>'<p class="thread-reply"><small>'+esc(r.author)+'</small> '+esc(r.text)+'</p>').join('')+actionList([tool('Reply','threadReply',id+'|'+e.id),btn(e.resolved?'Reopen':'Resolve','resolveThread',id+'|'+e.id)])+'</details>':'')+'</div>').join(''),btn(t.subscribed?'Unsubscribe':'Subscribe','subscribe',id))}
-      </div><div class="issue-comment"><form data-form="comment" data-id="${esc(id)}" class="issue-composer"><textarea name="text" aria-label="Add a comment" rows="2" required placeholder="Leave a comment…"></textarea><button type="submit" class="send" aria-label="Post comment" title="Post comment">${icon('arrow')}</button></form></div></div><div class="detail-properties">${box('Properties','<dl class="properties">'+Object.entries({Status:states[t.status],Assignee:t.owner,Priority:t.priority,Project:t.project||'No project',Team:teams[t.team],'Due date':t.due||'No date',Labels:(t.tags||[]).join(', ')||'None'}).map(([k,v])=>{
+      ${box('Sub-issues'+(children.length?' · '+children.filter(c=>c.status==='done').length+'/'+children.length:''),issueList(children),t.archivedAt?'':tool('Add sub-issue','childIssue',id))}
+      ${box('Activity',t.activity.map(e=>'<div class="entry"><small>'+esc(e.author)+' · '+date(e.at)+'</small><p>'+esc(e.text)+'</p>'+(e.kind==='comment'?'<details '+(e.resolved?'':'open')+'><summary>'+((e.replies||[]).length)+' replies'+(e.resolved?' · Resolved':'')+'</summary>'+(e.replies||[]).map(r=>'<p class="thread-reply"><small>'+esc(r.author)+'</small> '+esc(r.text)+'</p>').join('')+(t.archivedAt?'':actionList([tool('Reply','threadReply',id+'|'+e.id),btn(e.resolved?'Reopen':'Resolve','resolveThread',id+'|'+e.id)]))+'</details>':'')+'</div>').join(''),t.archivedAt?'':btn(t.subscribed?'Unsubscribe':'Subscribe','subscribe',id))}
+      </div>${t.archivedAt?'':`<div class="issue-comment"><form data-form="comment" data-id="${esc(id)}" class="issue-composer"><textarea name="text" aria-label="Add a comment" rows="2" required placeholder="Leave a comment…"></textarea><button type="submit" class="send" aria-label="Post comment" title="Post comment">${icon('arrow')}</button></form></div>`}</div><div class="detail-properties">${box('Properties','<dl class="properties">'+Object.entries({Status:states[t.status],Assignee:t.owner,Priority:t.priority,Project:t.project||'No project',Team:teams[t.team],'Due date':t.due||'No date',Labels:(t.tags||[]).join(', ')||'None'}).map(([k,v])=>{
         const key={Status:'status',Assignee:'owner',Priority:'priority','Due date':'due'}[k];
-        return '<dt>'+k+'</dt><dd>'+(key?tool(esc(v),'issueProperty',t.id+'|'+key,'property-button'):esc(v))+'</dd>';
+        return '<dt>'+k+'</dt><dd>'+(key&&!t.archivedAt?tool(esc(v),'issueProperty',t.id+'|'+key,'property-button'):esc(v))+'</dd>';
       }).join('')+'</dl>'+(t.parent?tool('Parent issue · '+esc(t.parent),'issue',t.parent):''))}
       ${t.status==='review'&&latest?box('Review',tool('Review delivery v'+latest.version,'run',latest.run)):''}
-      ${quickActionsView(t.id)}${wakeupList(t)}
-      ${box('Agent runs',runList(runs),active?'':tool('Start run','launch',id))}</div></div>`;
+      ${t.archivedAt?'':quickActionsView(t.id)+wakeupList(t)}
+      ${box('Agent runs',runList(runs),active||t.archivedAt?'':tool('Start run','launch',id))}</div></div>`;
   }
   const offlineNotice=()=>'';
   const evidenceStates={supported:'Evidence provided',missing:'Evidence missing',unmet:'Not met','not-applicable':'Not applicable · explain why'};
@@ -318,16 +319,47 @@
       (!d&&r.artifacts.length?'<h4>Recorded notes</h4>'+r.artifacts.map(a=>'<details class="artifact"><summary>'+esc(a.title)+'</summary><pre>'+esc(a.body)+'</pre></details>').join(''):'')+
       `<h4>Execution log · local records</h4><ol class="trace">${r.events.slice().reverse().map(e=>'<li><code>'+esc(e.type)+'</code><span>'+esc(e.text)+'</span><small>'+date(e.at)+'</small></li>').join('')}</ol>${tool('Generate execution report','execution',id)}`;
   }
-  let issueStatus='',issueOwner='';
-  function tasks(){
-    const items=db.tasks.filter(t=>(!issueStatus||t.status===issueStatus)&&(!issueOwner||t.owner===issueOwner)&&
+  let issueStatus='',issueOwner='',donePage=0,archivedPage=0,archivePending=null;
+  const issuePageSize=50;
+  const archivedIssueView=()=>route().params.get('archive')==='1';
+  function matchingIssues(archived=archivedIssueView()){
+    return db.tasks.filter(t=>!!t.archivedAt===archived&&(archived||!issueStatus||t.status===issueStatus)&&(!issueOwner||t.owner===issueOwner)&&
       (t.id+' '+t.title+' '+t.project+' '+t.owner).toLowerCase().includes(taskFilter.toLowerCase()));
-    const toolbar='<div class="toolbar issue-filters" '+(filtersOpen?'':'hidden')+'><div class="search-field">'+icon('search')+'<input aria-label="Filter issues" data-filter="task" placeholder="Search issues…" value="'+esc(taskFilter)+'"></div>'+
-      '<select aria-label="Filter by status" data-issue-status>'+options({'':'All statuses',...states},issueStatus)+'</select>'+
-      '<select aria-label="Filter by assignee" data-issue-owner>'+options({'':'All assignees',...ownerOptions()},issueOwner)+'</select>'+tool('Save view','saveView')+'</div>';
-    const groupHeader=(key,label,number)=>'<header class="issue-group-header">'+(layout==='list'?btn(icon('chevronDown'),'collapseGroup',key,'group-toggle '+(issuePrefs().collapsed.includes(key)?'collapsed':'')+'" aria-label="'+(issuePrefs().collapsed.includes(key)?'Expand ':'Collapse ')+label):'')+'<span class="issue-mark '+key+'"></span><strong>'+label+'</strong><small>'+number+'</small><span class="group-actions">'+(layout==='board'?'<details class="column-options"><summary role="button" aria-label="More actions for '+label+'">'+icon('more')+'</summary><div class="column-menu">'+btn('Hide column','hideColumn',key)+'</div></details>':'')+tool(icon('plus'),'statusIssue',key,'icon-only" aria-label="New issue in '+label)+'</span></header>';
+  }
+  function completedIssues(){return matchingIssues(false).filter(t=>t.status==='done').sort((a,b)=>(b.completion?.at||0)-(a.completion?.at||0)||b.id.localeCompare(a.id));}
+  function issuePage(items,kind){
+    const pages=Math.max(1,Math.ceil(items.length/issuePageSize)),index=Math.max(0,Math.min(kind==='done'?donePage:archivedPage,pages-1));
+    if(kind==='done')donePage=index;else archivedPage=index;
+    return {items:items.slice(index*issuePageSize,(index+1)*issuePageSize),index,pages,start:items.length?index*issuePageSize+1:0,end:Math.min(items.length,(index+1)*issuePageSize),total:items.length};
+  }
+  function issuePagination(page,kind){
+    if(!page.total)return '';
+    const action=(label,direction,disabled)=>`<button type="button" class="btn" data-act="issuePage" data-id="${kind}:${direction}" aria-label="${label} ${kind==='done'?'Done':'archived'} page" ${disabled?'disabled':''}>${label}</button>`;
+    return `<div class="issue-pagination" tabindex="-1" aria-label="${kind==='done'?'Done':'Archive'} pagination"><span>${page.start.toLocaleString('en-US')}–${page.end.toLocaleString('en-US')} of ${page.total.toLocaleString('en-US')}</span><div>${action('Previous',-1,page.index===0)}<small>Page ${page.index+1} / ${page.pages}</small>${action('Next',1,page.index===page.pages-1)}</div></div>`;
+  }
+  function archiveReview(){
+    if(!archivePending)return '';
+    const count=archivePending.ids.length;
+    return `<section class="issue-archive-review" role="region" aria-label="Review archive selection" tabindex="-1"><div><strong>Archive ${count.toLocaleString('en-US')} completed issues?</strong><p>${esc(archivePending.label)}. Issues leave the daily list and board. Their status stays Done, and their comments and delivery history remain available in Archived.</p><small>${archivePending.ids.slice(0,5).map(esc).join(' · ')}${count>5?' · +'+(count-5).toLocaleString('en-US')+' more':''}</small></div><div>${btn('Archive '+count.toLocaleString('en-US')+' issues','confirmIssueArchive','','primary')}${btn('Cancel','cancelIssueArchive')}</div></section>`;
+  }
+  function doneControls(page){
+    if(!page.total)return '';
+    return `<div class="issue-done-controls">${issuePagination(page,'done')}<div class="issue-archive-actions">${btn('Archive this page','prepareIssueArchive','page')}${page.total>page.items.length?btn('Archive all '+page.total.toLocaleString('en-US')+' matching','prepareIssueArchive','all'):''}</div></div>`;
+  }
+  function tasks(){
+    const archived=archivedIssueView(),items=matchingIssues(archived),archiveCount=db.tasks.filter(t=>t.archivedAt).length;
+    const collection=`<div class="issue-collection-bar"><nav aria-label="Issue collections"><a class="btn ${archived?'':'selected'}" href="#${scoped('tasks')}" ${archived?'':'aria-current="page"'}>All issues</a><a class="btn ${archived?'selected':''}" href="#${scoped('tasks?archive=1')}" ${archived?'aria-current="page"':''}>Archived <small>${archiveCount.toLocaleString('en-US')}</small></a></nav><small>${archived?'Completed issues kept for reference. Restore to show them in Done.':'Done shows 50 issues per page. Archive older work to keep this view focused.'}</small></div>`;
+    const toolbar='<div class="toolbar issue-filters" '+(filtersOpen||archived?'':'hidden')+'><div class="search-field">'+icon('search')+'<input aria-label="Filter issues" data-filter="task" placeholder="'+(archived?'Search archived issues…':'Search issues…')+'" value="'+esc(taskFilter)+'"></div>'+
+      (archived?'':'<select aria-label="Filter by status" data-issue-status>'+options({'':'All statuses',...states},issueStatus)+'</select>')+
+      '<select aria-label="Filter by assignee" data-issue-owner>'+options({'':'All assignees',...ownerOptions()},issueOwner)+'</select>'+(archived?'':tool('Save view','saveView'))+'</div>';
+    if(archived){
+      const page=issuePage(items.sort((a,b)=>b.archivedAt-a.archivedAt||b.id.localeCompare(a.id)),'archived');
+      return collection+toolbar+`<div class="issue-archive-toolbar">${issuePagination(page,'archived')}${page.total?btn('Restore this page','restoreIssuePage'):''}</div><div class="issue-archive-list">${page.items.map(t=>`<div class="archived-issue">${issueList([t])}${btn('Restore','restoreIssue',t.id,'" aria-label="Restore '+esc(t.id))}</div>`).join('')||empty('No archived issues match these filters.')}</div>`;
+    }
+    const done=issuePage(completedIssues(),'done');
+    const groupHeader=(key,label,number)=>'<header class="issue-group-header">'+(layout==='list'?btn(icon('chevronDown'),'collapseGroup',key,'group-toggle '+(issuePrefs().collapsed.includes(key)?'collapsed':'')+'" aria-label="'+(issuePrefs().collapsed.includes(key)?'Expand ':'Collapse ')+label):'')+'<span class="issue-mark '+key+'"></span><strong>'+label+'</strong><small>'+number.toLocaleString('en-US')+'</small><span class="group-actions">'+(layout==='board'?'<details class="column-options"><summary role="button" aria-label="More actions for '+label+'">'+icon('more')+'</summary><div class="column-menu">'+btn('Hide column','hideColumn',key)+'</div></details>':'')+tool(icon('plus'),'statusIssue',key,'icon-only" aria-label="New issue in '+label)+'</span></header>';
     const groups=Object.entries(states).filter(([key])=>!issuePrefs().hidden.includes(key));
-    return toolbar+(layout==='list'?'<div class="issue-groups">'+(groups.map(([key,label])=>{const group=items.filter(t=>t.status===key);return group.length?'<section class="issue-group" data-group="'+key+'">'+groupHeader(key,label,group.length)+'<div '+(issuePrefs().collapsed.includes(key)?'hidden':'')+'>'+issueList(group)+'</div></section>':'';}).join('')||empty('No matching issues.'))+'</div>':'<div class="board" aria-label="Issue board">'+groups.map(([key,label])=>{const group=items.filter(t=>t.status===key);return '<section class="board-lane" data-drop-state="'+key+'">'+groupHeader(key,label,group.length)+'<div class="board-cards" tabindex="0" aria-label="'+label+' issues">'+issueList(group,true)+'</div></section>';}).join('')+'</div>');
+    return WorkpalIssueFlow.page()+collection+toolbar+archiveReview()+(layout==='list'?'<div class="issue-groups">'+(groups.map(([key,label])=>{const group=items.filter(t=>t.status===key);return group.length?'<section class="issue-group" data-group="'+key+'">'+groupHeader(key,label,group.length)+'<div '+(issuePrefs().collapsed.includes(key)?'hidden':'')+'>'+(key==='done'?doneControls(done):'')+issueList(key==='done'?done.items:group)+'</div></section>':'';}).join('')||empty('No matching issues.'))+'</div>':'<div class="board" aria-label="Issue board">'+groups.map(([key,label])=>{const group=items.filter(t=>t.status===key);return '<section class="board-lane" data-drop-state="'+key+'">'+groupHeader(key,label,group.length)+(key==='done'?doneControls(done):'')+'<div class="board-cards" tabindex="0" aria-label="'+label+' issues">'+issueList(key==='done'?done.items:group,true)+'</div></section>';}).join('')+'</div>');
   }
   function issueDisplay(){
     const prefs=issuePrefs();
@@ -355,8 +387,10 @@
   function codeSettings(){const c=db.codeSettings||{};return box('Code',propertyList({Provider:'GitHub',Connection:'Not connected','Status source':'Manual PR records','Automatic association':c.association==='issue'?'Match issue keys when connected':'Off','After merge':c.afterMerge==='complete'?'Complete eligible issues':'Keep issue status'})+tool('Configure Code','codeSettings'));
   }
   function codeSettingsEditor(){const c=db.codeSettings||{};return form('codeSettings','<p>GitHub status reading is not connected. These preferences apply when records are entered here; no Git operations are performed. Credentials stay on the execution machine.</p>'+field('Status reading preference',select('reading',{off:'Off',requested:'Read PR, checks and reviews when connected'},c.reading||'off'))+field('Automatic association preference',select('association',{off:'Off',issue:'Match issue keys when connected'},c.association||'off'))+field('After recording a merge',select('afterMerge',{keep:'Keep issue status',complete:'Complete eligible issues'},c.afterMerge||'keep'))+'<p>This setting never merges a PR. Manual acceptance rules always require a separate completion decision.</p>','Save Code settings');}
-  function codeDelivery(t){if(db.codeSettings?.prSidebar===false)return box('Code delivery',tool('Record completion','codeComplete',t.id));const prs=(db.pullRequests||[]).filter(p=>p.task===t.id),delivery=WorkpalStudio.currentDelivery(t.id),blocked=WorkpalCode.blocker(db,t,delivery);
-    return box('Code delivery',propertyList({'Delivery approval':delivery?.review?.decision==='approve'?'Approved':'Not approved','PR merge':prs.length?prs.filter(p=>p.state==='merged').length+' / '+prs.length+' recorded merged':'No linked PRs','Issue status':states[t.status]})+prs.map(p=>'<div class="row"><span class="grow"><strong>'+esc(p.repository+' · '+p.source+' → '+p.target)+'</strong><small>'+esc(p.run+' · '+p.sha+' · '+p.state+' · CI: '+p.ci+' · Review: '+p.review+' · Conflicts: '+p.conflicts)+'</small><small>Manual record · '+date(p.updatedAt)+'</small><span class="preserve">'+esc(p.url)+'</span></span>'+tool('Update','pullRequest',t.id+'~'+p.id)+'</div>').join('')+(blocked?'<p>'+esc(blocked)+'</p>':'')+tool('Record completion','codeComplete',t.id),tool('Link PR','pullRequest',t.id));
+  function codeDelivery(t){
+    if(db.codeSettings?.prSidebar===false&&!t.archivedAt)return box('Code delivery',tool('Record completion','codeComplete',t.id));
+    const prs=(db.pullRequests||[]).filter(p=>p.task===t.id),delivery=WorkpalStudio.currentDelivery(t.id),blocked=t.archivedAt?'':WorkpalCode.blocker(db,t,delivery);
+    return box('Code delivery',propertyList({'Delivery approval':delivery?.review?.decision==='approve'?'Approved':'Not approved','PR merge':prs.length?prs.filter(p=>p.state==='merged').length+' / '+prs.length+' recorded merged':'No linked PRs','Issue status':states[t.status]+(t.archivedAt?' · Archived':'')})+prs.map(p=>'<div class="row"><span class="grow"><strong>'+esc(p.repository+' · '+p.source+' → '+p.target)+'</strong><small>'+esc(p.run+' · '+p.sha+' · '+p.state+' · CI: '+p.ci+' · Review: '+p.review+' · Conflicts: '+p.conflicts)+'</small><small>Manual record · '+date(p.updatedAt)+'</small><span class="preserve">'+esc(p.url)+'</span></span>'+(t.archivedAt?'':tool('Update','pullRequest',t.id+'~'+p.id))+'</div>').join('')+(blocked?'<p>'+esc(blocked)+'</p>':'')+(t.archivedAt?'':tool('Record completion','codeComplete',t.id)),t.archivedAt?'':tool('Link PR','pullRequest',t.id));
   }
   function pullRequestEditor(arg){const [id,prId]=arg.split('~'),p=(db.pullRequests||[]).find(p=>p.id===prId)||{},runs=db.runs.filter(r=>r.task===id&&(r.kind||'execution')==='execution');
     if(!runs.length)return empty('Start a run before linking its code delivery.')+tool('Start run','launch',id);
@@ -364,7 +398,7 @@
   }
   function projectPage(name){
     if(!db.projects.includes(name))return empty('Project not found.');
-    const p=projectConfig(name),items=db.tasks.filter(t=>t.project===name);
+    const p=projectConfig(name),items=db.tasks.filter(t=>!t.archivedAt&&t.project===name);
     return `<div class="detail-grid"><div>${box('Description','<p class="preserve">'+esc(p.description||'Add context for issues and agent runs.')+'</p>',tool('Edit project','projectConfig',name))}
       ${box('Resources',codeContext(WorkpalCode.context(db,name,null)),tool('Manage resources','resourceEditor',name))}${box('Delivery rules',propertyList({Completion:completionModes[p.deliveryRules?.completion||'workflow'],'PR target':p.deliveryRules?.target||'Not configured'}),tool('Edit delivery rules','deliveryRules',name))}
       ${box('Project issues',issueList(items),tool('＋ New issue','projectIssue',name))}</div><div>${box('Properties',propertyList({Lead:p.lead,'Due date':p.due||'No date',Workflow:WorkpalStudio.workflowFor(name).name,Progress:items.filter(t=>t.status==='done').length+' / '+items.length}))}</div></div>`;
@@ -407,7 +441,7 @@
     const s=db.squads.find(x=>x.name===name);if(!s)return empty('Squad unavailable.');
     const members=s.members.map(member=>'<div class="squad-member-row"><button type="button" class="member-avatar-button" data-act="surface" data-id="'+esc('avatarEditor|'+JSON.stringify({name:member,squad:name}))+'" aria-label="Change avatar for '+esc(member)+'">'+avatar(member)+'</button><div class="member-identity">'+(db.agents.some(a=>a.name===member)?tool(esc(member),'agent',member,'member-name'): '<strong>'+esc(member)+'</strong>')+'<small>'+esc(s.roles?.find(r=>r.name===member)?.role|| (member==='Patrick'?'Workspace member':'Agent'))+'</small></div><span class="member-role">'+(member===s.leader?'Leader':'Member')+'</span></div>').join('');
     return '<div class="detail-grid squad-detail"><div>'+box('Members · '+s.members.length,members,tool('Manage members','squadEditor',name))+
-      box('Instructions','<p class="preserve">'+esc(s.instructions||'No instructions yet.')+'</p>',tool('Edit','squadEditor',name))+box('Recent work',issueList(db.tasks.filter(t=>t.owner===name)))+
+      box('Instructions','<p class="preserve">'+esc(s.instructions||'No instructions yet.')+'</p>',tool('Edit','squadEditor',name))+box('Recent work',issueList(db.tasks.filter(t=>!t.archivedAt&&t.owner===name)))+
       '</div><div>'+box('Properties','<p>'+esc(s.description||'')+'</p>'+propertyList({Leader:s.leader,Visibility:'Workspace','Created by':'Patrick'}))+'</div></div>';
   }
 
@@ -433,7 +467,7 @@
   function savedViews(){
     return box('Saved views',db.views.map(v=>btn(esc(v.name)+' <small>'+esc(states[v.status]||'All statuses')+'</small>','applyView',v.id,'thread-row')).join('')||empty('Save a filtered issue list to reuse it.'));
   }
-  function projects(){return box('Project directory',db.projects.map(p=>`<button class="row" data-act="surface" data-id="project|${esc(p)}"><span class="tile">${icon('projects')}</span><span class="grow"><strong>${esc(p)}</strong><small>${db.tasks.filter(t=>t.project===p).length} issues</small></span>${icon('chevron')}</button>`).join(''),tool('＋ New project','newProject'));}
+  function projects(){return box('Project directory',db.projects.map(p=>`<button class="row" data-act="surface" data-id="project|${esc(p)}"><span class="tile">${icon('projects')}</span><span class="grow"><strong>${esc(p)}</strong><small>${db.tasks.filter(t=>!t.archivedAt&&t.project===p).length} issues</small></span>${icon('chevron')}</button>`).join(''),tool('＋ New project','newProject'));}
   function starterField(agent){
     return field('Conversation starters · one per line','<textarea name="starters" rows="2">'+esc((agent?.starters||[]).join('\n'))+'</textarea>');
   }
@@ -495,7 +529,7 @@
   }
   function inboxView(){
     const now=Date.now();
-    const items=db.tasks.filter(t=>t.subscribed||t.owner==='Patrick').map(t=>{
+    const items=db.tasks.filter(t=>!t.archivedAt&&(t.subscribed||t.owner==='Patrick')).map(t=>{
       const state=db.inbox[t.id]||{},activity=notificationActivity(t);
       const archived=state.archivedToken!==undefined?state.archivedToken===activity.token:state.archivedAt>=activity.at,snoozed=state.until>now;
       return {t,state,activity,visible:inboxTab==='archived'?archived:inboxTab==='snoozed'?snoozed:!archived&&!snoozed};
@@ -535,7 +569,7 @@
   function checkWakeups(){
     let changed=false;
     for(const w of db.wakeups.filter(w=>w.state==='Waiting')){
-      const t=db.tasks.find(t=>t.id===w.task);if(!t)continue;
+      const t=db.tasks.find(t=>t.id===w.task);if(!t||t.archivedAt)continue;
       const children=db.tasks.filter(c=>c.parent===t.id);
       const ready=w.condition==='time'?Date.now()>=w.at:w.condition==='children'?children.length>0&&children.every(c=>c.status==='done'):
         t.activity.some(e=>(e.kind==='comment'&&e.at>w.created)||(e.replies||[]).some(r=>r.at>w.created));
@@ -549,7 +583,7 @@
     if(changed)write();
   }
   const settingsView=WorkpalSettings.create({getDB:()=>db,esc,icon,btn,tool,form,field,input,select,scoped,appearance,codeSettings});
-  const pages={runtimes:runtimesPage,workflows:workflowsPage,auto:autopilots,squads,views:savedViews,chatroom:chatPage,overview,tasks,projects,workflow:()=>box('Run history',runList(db.runs),tool('＋ Launch workflow','launch','','primary')),stats:()=>WorkpalAnalytics.page(),skills:skillsView,agents:agentsView,inbox:inboxView,mine:()=>box('Assigned to Patrick',issueList(db.tasks.filter(t=>t.owner==='Patrick'))),reports:reportList,settings:()=>settingsView.page(route().params.get('tab'))};
+  const pages={runtimes:runtimesPage,workflows:workflowsPage,auto:autopilots,squads,views:savedViews,chatroom:chatPage,overview,tasks,projects,workflow:()=>box('Run history',runList(db.runs),tool('＋ Launch workflow','launch','','primary')),stats:()=>WorkpalAnalytics.page(),skills:skillsView,agents:agentsView,inbox:inboxView,mine:()=>box('Assigned to Patrick',issueList(db.tasks.filter(t=>!t.archivedAt&&t.owner==='Patrick'))),reports:reportList,settings:()=>settingsView.page(route().params.get('tab'))};
   // A surface descriptor selects a trusted renderer. Tools never supply executable HTML.
   const labels={...routes,repositoryEditor:'Repository',repositoryRemove:'Delete repository',appCatalog:'Connect app',integrationSetup:'Account setup',integrationRemove:'Remove setup',environmentSetup:'Environment chat',resourceEditor:'Project resources',deliveryRules:'Delivery rules',codeSettings:'Code settings',pullRequest:'Pull request record',codeComplete:'Complete code issue',avatarEditor:'Change avatar',statusIssue:'New issue',issueProperty:'Issue property',runtimeEditor:'Runtime settings',quickEditor:'New quick action',wakeupEditor:'Create wakeup',workflowEditor:'Configure workflow',conversationSettings:'Conversation settings',assignIssue:'Assign work',chatHelp:'Choose an action',chatHistory:'Chat history',threadReply:'Reply to comment',agentConfig:'Agent settings',projectConfig:'Project settings',saveView:'Save issue view',squad:'Squad',squadEditor:'Squad settings',autopilot:'Autopilot',autoEditor:'Autopilot settings',recipients:'New chat',workspaces:'Switch workspace',newWorkspace:'Create workspace',issue:'Issue',move:'Move issue',editIssue:'Edit issue',projectIssue:'Create project issue',childIssue:'Create sub-issue',launch:'Launch a workflow',run:'Run inspector',project:'Project issues',agent:'Agent profile',skill:'Skill detail',notes:'Review notes',document:'Report snapshot',summary:'Generate summary',execution:'Execution report',newAgent:'Configure agent',newProject:'Create project',suggest:'Recommend a skill',directory:'Workspace actions',panel:'Live data panel',search:'Search workspace',reviews:'Review queue'};
 
@@ -580,6 +614,7 @@
       case 'issue':return arg.startsWith('draft:')?issueEditor('',arg.slice(6)):arg?issueDetail(arg,standalone):issueEditor();
       case 'issueProperty':{
         const [id,key]=arg.split('|'),t=db.tasks.find(t=>t.id===id);
+        if(t?.archivedAt)return empty('Restore this archived issue before editing it.')+btn('Restore issue','restoreIssue',id);
         const fields={status:['Status',select('status',states,t.status)],owner:['Assignee',select('owner',ownerOptions(),t.owner)],priority:['Priority',select('priority',strings(['Low','Normal','High','Urgent']),t.priority)],due:['Due date','<input type="date" name="due" value="'+esc(t.due||'')+'">']};
         return form('issueProperty',field(...fields[key])+(['owner','status'].includes(key)?'<label class="assign-option dispatch-option"><input type="checkbox" name="startAgent" checked> Queue the assigned agent or workflow handler</label>':'')+(key==='status'?'<label class="manual-completion" hidden>Manual completion reason<textarea name="manualReason" placeholder="Explain why this issue is complete without approving a delivery."></textarea></label>':''),'Save',id);
       }
@@ -613,7 +648,7 @@
       case 'newAgent':return form('newAgent',field('Name',input('name'))+emojiField('')+field('Responsibilities',input('role'))+field('Instructions','<textarea name="instructions" rows="3"></textarea>')+starterField()+field('Harness',select('runtime',strings(['Copilot CLI','Codex','Claude Code','Local runner'])))+runtimeFields()+field('Skill',select('skill',Object.fromEntries(db.skills.map(s=>[s.id,s.name])))),'Save agent');
       case 'agent':{
         const a=db.agents.find(x=>x.name===arg);if(!a)return empty('Agent unavailable.');
-        const assigned=db.tasks.filter(t=>t.owner===a.name),runs=db.runs.filter(r=>r.agent===a.name);
+        const assigned=db.tasks.filter(t=>!t.archivedAt&&t.owner===a.name),runs=db.runs.filter(r=>r.agent===a.name);
         return '<div class="detail-grid"><div>'+box('Instructions','<p class="preserve">'+esc(a.instructions||a.role)+'</p>',tool('Edit','agentConfig',a.name))+
           box('Recent work',issueList(assigned))+box('Execution log',runList(runs))+'</div><div>'+
           box('Properties',propertyList({Owner:'Patrick',Harness:a.runtime,Runtime:db.runtimes.find(r=>r.id===a.runtimeId)?.name||'Not connected',Model:a.model||'Default',Access:'Workspace'})+actionList([tool('Assign work','assignIssue',a.name),btn('New chat','startThread',a.name)]))+
@@ -841,7 +876,7 @@
     function section(label,body){return '<section class="rail-group"><div class="rail-group-label"><small>'+label+'</small>'+icon('chevronDown')+'</div>'+body+'</section>';}
     let panel=page==='settings'?settingsView.navigation(route().params.get('tab')):'';
     if(space.name==='Work')panel=section('Inbox',nav('inbox'))+section('Views',['tasks','mine','views'].map(nav).join('')+db.views.slice(0,3).map(v=>btn(icon('layers')+'<span>'+esc(v.name)+'</span>','applyView',v.id,'rail-item')).join(''))+
-      section('Projects',nav('projects')+db.projects.slice(0,6).map(p=>tool(icon('projects')+'<span>'+esc(p)+'</span><small>'+db.tasks.filter(t=>t.project===p).length+'</small>','project',p,'rail-item')).join(''))+section('Workspace',['overview','reports'].map(nav).join(''));
+      section('Projects',nav('projects')+db.projects.slice(0,6).map(p=>tool(icon('projects')+'<span>'+esc(p)+'</span><small>'+db.tasks.filter(t=>!t.archivedAt&&t.project===p).length+'</small>','project',p,'rail-item')).join(''))+section('Workspace',['overview','reports'].map(nav).join(''));
     if(space.name==='Team')panel=section('Team',nav('agents')+nav('squads'))+section('Resources',nav('skills')+nav('runtimes')+nav('stats')+nav('workflow')+nav('workflows'));
     if(space.name==='Auto')panel=section('Automation',nav('auto')+db.autopilots.map(a=>tool(icon('auto')+'<span>'+esc(a.name)+'</span>','autopilot',a.id,'rail-item')).join(''));
     return `<aside class="rail"><div class="app-dock"><button class="workspace-tile" data-act="surface" data-id="workspaces|" aria-label="Switch workspace, ${esc(workspace().name)}" title="${esc(workspace().name)} · Workpal">${esc(Array.from(workspace().name)[0])}</button>
@@ -856,7 +891,7 @@
   const scrollPositions=new Map();
   let renderedHash;
   function scrollRegions(){
-    return [...document.querySelectorAll('main,.board,.board-cards,.issue-groups,.agent-table,.detail-reading,.detail-properties,.thread-scroll')];
+    return [...document.querySelectorAll('main,.board,.board-cards,.issue-groups,.issue-archive-list,.issue-flow-scroll,.agent-table,.detail-reading,.detail-properties,.thread-scroll')];
   }
   function scrollKey(el){return el.classList.contains('board-cards')?'column:'+el.closest('[data-drop-state]').dataset.dropState:el.tagName==='MAIN'?'main':el.className;}
   function render(){
@@ -878,7 +913,7 @@
     const collectionAction=!detail&&createActions[page];
     document.title=heading+' · '+workspace().name+' · Workpal';
     $('#app').innerHTML=`<div class="shell ${mobileMenu?'menu-open':''} ${navCollapsed?'nav-collapsed':''}" data-page="${page}" data-space="${space}" data-detail="${detail?'true':'false'}" data-layout="${layout}">${navigation(page)}
-    <div class="main"><header class="top">${page==='stats'?WorkpalAnalytics.header():`<div class="top-title">${btn(icon('menu'),'menu','','mobile-only icon-only" aria-label="Workspace menu')}${navCollapsed&&space!=='Chat'?btn(icon('panelLeft'),'collapseNav','','icon-only" aria-label="Expand sidebar'):''}${icon(page)}${detail?'<a href="#'+scoped(page)+'">'+routes[page]+'</a><span class="separator">/</span><span>'+esc(type==='issue'?id:heading)+'</span>':(page==='chatroom'?'<span>Chat</span>':'<h1>'+esc(heading)+'</h1>')}${taskActions?btn(icon('filter'),'filters','','icon-only" aria-label="Filter issues'):''}</div><div class="top-actions">${taskActions?issueDisplay()+tool(icon('edit'),'issue','','icon-only" aria-label="New issue'):collectionAction?tool(icon('plus'),collectionAction[0],'','icon-only" aria-label="'+collectionAction[1]):btn(icon('search'),'surface','search|','icon-only" aria-label="Search workspace')}</div>`}</header>
+    <div class="main"><header class="top">${page==='stats'?WorkpalAnalytics.header():`<div class="top-title">${btn(icon('menu'),'menu','','mobile-only icon-only" aria-label="Workspace menu')}${navCollapsed&&space!=='Chat'?btn(icon('panelLeft'),'collapseNav','','icon-only" aria-label="Expand sidebar'):''}${icon(page)}${detail?'<a href="#'+scoped(page)+'">'+routes[page]+'</a><span class="separator">/</span><span>'+esc(type==='issue'?id:heading)+'</span>':(page==='chatroom'?'<span>Chat</span>':'<h1>'+esc(heading)+'</h1>')}${taskActions&&!archivedIssueView()?btn(icon('filter'),'filters','','icon-only" aria-label="Filter issues'):''}</div><div class="top-actions">${taskActions?(archivedIssueView()?'':issueDisplay())+tool(icon('edit'),'issue','','icon-only" aria-label="New issue'):collectionAction?tool(icon('plus'),collectionAction[0],'','icon-only" aria-label="'+collectionAction[1]):btn(icon('search'),'surface','search|','icon-only" aria-label="Search workspace')}</div>`}</header>
     <main id="main" tabindex="-1">${detail&&type!=='issue'?'<div class="heading'+(type==='agent'?' agent-profile-heading':'')+'"><div><div class="crumb">'+esc(workspace().name)+'<span>/</span>'+esc(type==='issue'?id:labels[type])+'</div><h1>'+esc(heading)+'</h1></div>'+(type==='squad'?tool(icon('plus')+' Assign work','assignIssue',id,'primary'):type==='agent'?agentAvatarControl(id,'agent-profile-avatar'):'')+'</div>':''}<div id="page-content">${detail?surface(type,id,true):pages[page]()}</div></main></div></div><footer class="bottom-bar"><a class="product-wordmark" href="#welcome" aria-label="Workpal home">${WorkpalBrand.wordmark}</a><span class="workspace-caption">${esc(workspace().name)}</span></footer>${page==='chatroom'?'':chatLauncher()}`;
     paintChat();restoreDrafts();
     renderedHash=location.hash;
@@ -1046,12 +1081,35 @@
     try{
     document.querySelectorAll('.display-dropdown[open],.column-options[open],.repository-add-menu[open],.repository-actions[open]').forEach(menu=>{if(!menu.contains(ev.target))menu.open=false;});
     if(ev.target.closest('.skip-link')){ev.preventDefault();$('#main').focus();return;}
+    if(ev.target.closest('.issue-collection-bar a')){issueStatus='';donePage=archivedPage=0;archivePending=null;}
     const mobileLink=ev.target.closest('.rail a');
     if(mobileMenu&&mobileLink){ev.preventDefault();mobileMenu=false;if(location.hash===mobileLink.hash)render();else location.hash=mobileLink.hash;return;}
     const b=ev.target.closest('[data-act]');if(!b)return;
     if(mobileMenu&&b.closest('.rail')&&b.dataset.act!=='menu')mobileMenu=false;
     const id=b.dataset.id||'',inside=!!b.closest('#assistant');
     switch(b.dataset.act){
+      case 'issuePage':{
+        const [kind,direction]=id.split(':');if(kind==='done')donePage+=Number(direction);else archivedPage+=Number(direction);
+        refresh();const control=document.querySelector(`[data-act="issuePage"][data-id="${id}"]:not(:disabled)`);(control||document.querySelector('.issue-pagination'))?.focus();break;
+      }
+      case 'prepareIssueArchive':{
+        const all=completedIssues(),page=issuePage(all,'done');
+        archivePending={ids:(id==='page'?page.items:all).map(t=>t.id),label:id==='page'?'Current Done page':'All Done issues matching the current search and filters'};
+        refresh();document.querySelector('.issue-archive-review')?.focus();break;
+      }
+      case 'cancelIssueArchive':archivePending=null;refresh();document.querySelector('[data-act="prepareIssueArchive"]')?.focus();break;
+      case 'confirmIssueArchive':{
+        if(!archivePending)break;const changed=WorkpalStudio.archiveIssues(archivePending.ids);archivePending=null;
+        refresh();toast(changed.length.toLocaleString('en-US')+' issues archived. Find them in Archived.');document.querySelector('.issue-collection-bar a[href*="archive=1"]')?.focus();break;
+      }
+      case 'restoreIssuePage':{
+        const all=matchingIssues(true).sort((a,b)=>b.archivedAt-a.archivedAt||b.id.localeCompare(a.id)),page=issuePage(all,'archived');
+        const changed=WorkpalStudio.restoreIssues(page.items.map(t=>t.id));refresh();toast(changed.length+' issues restored to Done.');document.querySelector('[data-act="restoreIssuePage"],.issue-collection-bar a')?.focus();break;
+      }
+      case 'restoreIssue':{
+        WorkpalStudio.restoreIssues([id]);refresh();toast(id+' restored to Done.');document.querySelector('.issue-archive-list [data-act=restoreIssue],.detail-properties .property-button,.issue-collection-bar a')?.focus();break;
+      }
+
       case 'pickEmoji':{
         const f=b.closest('form');f.elements.emoji.value=id;
         f.querySelector('.avatar-choice-preview').textContent=id||'—';
@@ -1079,7 +1137,7 @@
       case 'subscribe':{const t=db.tasks.find(t=>t.id===id);t.subscribed=!t.subscribed;write();refresh();break;}
       case 'resolveThread':{const [taskId,entryId]=id.split('|');const e=db.tasks.find(t=>t.id===taskId).activity.find(e=>e.id===entryId);e.resolved=!e.resolved;write();refresh();break;}
       case 'triggerAuto':WorkpalStudio.triggerAutopilot(id);output('autopilot',id,'Trigger recorded.',inside);break;
-      case 'applyView':{const v=db.views.find(v=>v.id===id);issueStatus=v.status;issueOwner=v.owner;taskFilter=v.query;layout=v.layout==='board'?'board':'list';issuePrefs().layout=layout;write();show('tasks','',inside);break;}
+      case 'applyView':{donePage=archivedPage=0;archivePending=null;const v=db.views.find(v=>v.id===id);issueStatus=v.status;issueOwner=v.owner;taskFilter=v.query;layout=v.layout==='board'?'board':'list';issuePrefs().layout=layout;write();show('tasks','',inside);break;}
       case 'claimRun':{changeRun(db.runs.find(r=>r.id===id),'claim');output('run',id,'Run started.',inside);break;}
       case 'finishRun':{changeRun(db.runs.find(r=>r.id===id),'finish');output('run',id,'Run ended without a delivery.',inside);break;}
       case 'archiveFilter':archivedChats=!archivedChats;render();break;
@@ -1132,7 +1190,7 @@
   document.addEventListener('drop',ev=>{
     const lane=ev.target.closest('[data-drop-state]');
     const t=db.tasks.find(t=>t.id===ev.dataTransfer.getData('application/workpal-issue'));
-    if(!t||!lane||lane.dataset.dropState===t.status)return;
+    if(!t||t.archivedAt||!lane||lane.dataset.dropState===t.status)return;
     ev.preventDefault();
     show('move',t.id+'|'+lane.dataset.dropState,!!lane.closest('#assistant'));
   });
@@ -1141,7 +1199,7 @@
     if(el.name==='appSearch'){const row=el.closest('.modal-body').querySelector('.app-catalog-row');row.hidden=!row.dataset.appName.includes(el.value.trim().toLowerCase());el.closest('.modal-body').querySelector('.app-catalog-empty').hidden=!row.hidden;return;}
     persistFormDraft(el.form);if(el.name==='prompt')persistDraft(el.value);if(el.name==='text')quickSuggestions(el);if(!el.dataset.filter)return;
     const parent=el.closest('.resource-body,.modal-body,#page-content');const pos=el.selectionStart;
-    if(el.dataset.filter==='task'){taskFilter=el.value;parent.innerHTML=tasks();}else{skillFilter=el.value;parent.innerHTML=skillsView();}
+    if(el.dataset.filter==='task'){taskFilter=el.value;donePage=archivedPage=0;archivePending=null;parent.innerHTML=tasks();}else{skillFilter=el.value;parent.innerHTML=skillsView();}
     const replacement=parent.querySelector('[data-filter]');replacement.focus();replacement.setSelectionRange(pos,pos);
   });
   document.addEventListener('change',ev=>{
@@ -1183,8 +1241,8 @@
     }
     if(el.hasAttribute('data-stage-filter'))skillStage=el.value;
     else if(el.hasAttribute('data-sort-skills'))sortSkills=el.value;
-    else if(el.hasAttribute('data-issue-status'))issueStatus=el.value;
-    else if(el.hasAttribute('data-issue-owner'))issueOwner=el.value;
+    else if(el.hasAttribute('data-issue-status')){issueStatus=el.value;donePage=archivedPage=0;archivePending=null;}
+    else if(el.hasAttribute('data-issue-owner')){issueOwner=el.value;donePage=archivedPage=0;archivePending=null;}
     else return;
     refresh();
   });
@@ -1238,7 +1296,7 @@
     db=WorkpalStudio.db;db.runtimes??=[];db.inbox??={};db.quickActions??=[];db.wakeups??=[];prepareConversations();
     if(changed){
       chat=false;draftAgent='';draftText='';
-      taskFilter=skillFilter=skillStage=issueStatus=issueOwner='';
+      taskFilter=skillFilter=skillStage=issueStatus=issueOwner='';donePage=archivedPage=0;archivePending=null;
       layout='list';directoryTab='all';sortSkills='rank';
     }
     layout=issuePrefs().layout;loadDraft();
@@ -1256,6 +1314,7 @@
     }
     }catch(err){showSaveError(err);}
   },15000);
+  WorkpalIssueFlow.init({getDb:()=>db,workspace,esc,icon,render});
   WorkpalAnalytics.init({getDb:()=>db,workspace,teams,states,stages,scoped,icon,esc,avatar,issueList,render,write});
   // Each document opens at welcome, including bookmarks and workspace reloads.
   // Retain the requested destination in this history entry, without a login flag.

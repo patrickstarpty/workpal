@@ -18,6 +18,14 @@ The welcome screen pairs the **W.** logo in an orange square with the italic Wor
 4. Submit the revised content, expand **Compare v1 → v2**, and inspect both versions. Only the explicitly selected current delivery can be approved, with an explicit acknowledgement. Approval follows the current workflow's review destination; the control shows that destination. A finished run alone does not complete an issue.
 5. Generate an execution report from the run and export Markdown. Reports retain the original issue requirements, agent, selected skill record/version label, project context, source run, delivery version and decision. Editing an issue later does not rewrite historical inputs.
 
+## Follow the issue workflow and retain completed work
+
+**All issues → Workflow overview** shows the main issue lifecycle, review return paths, manual blocking, and Done → Archived → Done. Select a project to use its configured review destinations and delivery requirements; select a stage for its handoff and rules. The map can be collapsed, scrolled on narrow screens, and operated with the keyboard. Starting work can skip To do; every current delivery still enters In review. Existing runs retain the completion requirements captured when they started.
+
+Done displays 50 issues per page in both list and board layouts. **Archive this page** and **Archive all matching** show the exact selection size before applying the change. **Archived** supports search, pagination, historical details, and restoration of one issue or the current page. Archive is visibility metadata, not a new issue status: records stay Done, and existing comments, deliveries, relationships, and review notes remain intact. Restore before editing an archived issue.
+
+All data still lives in browser local storage, subject to its capacity. Failed archive/restore saves roll back the batch and report the failure. Pagination limits rendered rows; it does not add a production database or unlimited storage.
+
 The workspace is an offline research prototype. All run transitions, supplied evidence and decisions are local records, not real agent outputs or measured test results. Runtime availability is shown as Offline. Research and simulation labels are kept out of the product interface. Runtime connections, model calls, repository writes and background production scheduling are not implemented. Evidence presence is validated; correctness must be judged by the reviewer. The local reviewer identity is Patrick, without authentication or multi-user permissions.
 
 Issue edits, projects, agents, deliveries, bookmarks, conversation cards, decisions, pinned panels, notes and report snapshots persist in local browser storage. Existing workspace records and review notes are retained. Historical runs without original inputs explicitly show that the input snapshot is unavailable; they cannot be approved against reconstructed requirements. They can be returned and replaced by a new attempt. User-authored text is escaped and preserved in its original language. The earlier Chinese design remains at review-v1.html.
@@ -60,6 +68,8 @@ Node.js 22 or newer. No dependencies required to use or build the prototype.
 
 - npm run dev serves the source entry on 127.0.0.1:4173.
 - npm run check checks syntax, runs tests and builds the offline artifact.
+- node scripts/workflow-qa.mjs checks project-specific review routes, completion gates, keyboard access, collapse behavior, and responsive bounds.
+- node scripts/archive-qa.mjs checks 10,000 Done issues with 50 rendered per page, batch archive/restore, persistence, filtering, and preserved notes.
 - node scripts/integrations-qa.mjs checks repository CRUD, Jira/GitHub setup states, persistence, isolation, keyboard access, escaping and offline behavior at desktop/narrow widths.
 - node scripts/qa.mjs exercises the exported file with Playwright. Set WORKPAL_PLAYWRIGHT to a local @playwright/test installation if needed.
 - node scripts/delivery-qa.mjs checks offline delivery → missing evidence → return → v2 → approval, historical reports, text safety, local notes and export at desktop and narrow widths.
