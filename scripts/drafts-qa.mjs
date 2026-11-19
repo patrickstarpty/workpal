@@ -1,3 +1,4 @@
+import {gotoWorkspace,reloadWorkspace} from './qa-navigation.mjs';
 import {createRequire} from 'node:module';
 import {pathToFileURL} from 'node:url';
 import {resolve} from 'node:path';
@@ -8,7 +9,7 @@ const url=pathToFileURL(resolve('dist/Workpal.html')).href;
 const browser=await chromium.launch();
 await mkdir('test-results',{recursive:true});
 const failures=[];
-async function visit(page,hash){await page.goto(url+'#'+hash);}
+async function visit(page,hash){await gotoWorkspace(page,url+'#'+hash);}
 async function notes(page){await page.getByRole('button',{name:'Workspace notes',exact:true}).click();return page.locator('#dialog');}
 try {
   for(const width of [1440,390]){
@@ -45,21 +46,21 @@ try {
       await visit(page,'workflow?id='+fixture.first);
       await expect(summary).toHaveValue('Keep this summary '+width);
       await expect(artifact).toHaveValue('Keep the important artifact '+width);
-      await page.reload();
+      await reloadWorkspace(page);
       await expect(summary).toHaveValue('Keep this summary '+width);
       await expect(artifact).toHaveValue('Keep the important artifact '+width);
       await visit(page,'workflow?id='+fixture.review);
       await page.locator('main form[data-form=decision] [name=choice]').selectOption('return');
       await page.locator('main form[data-form=decision] [name=note]').fill('Keep this review reasoning '+width);
-      await page.reload();
+      await reloadWorkspace(page);
       await expect(page.locator('main form[data-form=decision] [name=choice]')).toHaveValue('return');
       await expect(page.locator('main form[data-form=decision] [name=note]')).toHaveValue('Keep this review reasoning '+width);
       await visit(page,'tasks?id='+fixture.task);
       await page.locator('main form[data-form=comment] [name=text]').fill('Keep this comment '+width);
-      await page.reload();
+      await reloadWorkspace(page);
       await expect(page.locator('main form[data-form=comment] [name=text]')).toHaveValue('Keep this comment '+width);
       await page.getByRole('button',{name:'Post comment',exact:true}).click();
-      await page.reload();
+      await reloadWorkspace(page);
       await expect(page.locator('main form[data-form=comment] [name=text]')).toHaveValue('');
       await page.screenshot({path:'test-results/drafts-'+width+'.png'});
       expect(errors).toEqual([]);
@@ -101,6 +102,7 @@ try {
     await second.screenshot({path:'test-results/storage-conflict.png'});
     await second.getByRole('button',{name:'Keep recovery copy and reload',exact:true}).click();
     await expect(second.locator('#storage-conflict')).toHaveCount(0);
+    await second.getByRole('link',{name:'Enter workspace',exact:true}).click();
     await second.getByRole('button',{name:'Edit issue',exact:true}).click();
     await expect(second.locator('#dialog [name=description]')).toHaveValue('Keep unsaved description from second tab');
     expect(await second.evaluate(()=>Object.keys(localStorage).some(key=>key.startsWith('workpal.recovery.')))).toBe(true);

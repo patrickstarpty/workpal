@@ -1,3 +1,4 @@
+import {gotoWorkspace,reloadWorkspace} from './qa-navigation.mjs';
 import {createRequire} from 'node:module';
 import {pathToFileURL} from 'node:url';
 import {resolve} from 'node:path';
@@ -11,7 +12,7 @@ const errors=[];
 page.on('pageerror',error=>errors.push(error.message));
 const url=pathToFileURL(resolve('dist/Workpal.html')).href;
 try{
-  await page.goto(url+'#overview');
+  await gotoWorkspace(page,url+'#overview');
   await page.locator('.chat-launcher [data-act=chat]').click();
   const assistant=page.locator('#assistant');
   const card=assistant.locator('.resource-body').last();
@@ -44,10 +45,10 @@ try{
     WorkpalStudio.db.issueDisplay={layout:'list',hidden:[],collapsed:[],properties:['priority','project','assignee','due','children']};
     WorkpalStudio.save();
   });
-  await page.goto(url+'#views');
+  await gotoWorkspace(page,url+'#views');
   await page.getByRole('button',{name:'QA board view All statuses',exact:true}).click();
   await expect(page.getByRole('region',{name:'Issue board'}).or(page.locator('.board'))).toBeVisible();
-  await page.reload();
+  await reloadWorkspace(page);
   await expect(page.locator('.board')).toBeVisible();
 
   await page.evaluate(()=>{
@@ -57,7 +58,7 @@ try{
     WorkpalStudio.db.inbox[task.id]={readAt:100};
     WorkpalStudio.save();
   });
-  await page.goto(url+'#inbox');
+  await gotoWorkspace(page,url+'#inbox');
   const notification=page.locator('.notification').filter({hasText:'Nested reply notification'});
   await expect(notification).toContainText('First nested reply');
   await notification.getByRole('button',{name:'Mark read',exact:true}).click();
@@ -66,7 +67,7 @@ try{
     WorkpalStudio.db.tasks.find(t=>t.id==='QA-INBOX').activity[0].replies.push({id:'qa-reply-2',text:'Second reply in the same millisecond',author:'Reviewer',at:200});
     WorkpalStudio.save();
   });
-  await page.reload();
+  await reloadWorkspace(page);
   await expect(notification).toContainText('Second reply in the same millisecond');
   await notification.getByRole('button',{name:'Mark read',exact:true}).click();
   await expect(notification.getByRole('button',{name:'Mark unread',exact:true})).toBeVisible();
@@ -76,7 +77,7 @@ try{
     WorkpalStudio.db.tasks.find(t=>t.id==='QA-INBOX').activity[0].replies.push({id:'qa-reply-3',text:'New reply after archive',author:'Reviewer',at:200});
     WorkpalStudio.save();
   });
-  await page.reload();
+  await reloadWorkspace(page);
   await expect(notification).toContainText('New reply after archive');
 
   const reviewId=await page.evaluate(()=>{
@@ -89,7 +90,7 @@ try{
     s.changeRun(run,'deliver','Ready for inspection',{artifacts:[{title:'Draft',body:'Reviewer reference'}],evidence:[]});
     return db.runs.find(r=>r.task===issue.id&&r.kind==='review').id;
   });
-  await page.goto(url+'#workflow?id='+reviewId);
+  await gotoWorkspace(page,url+'#workflow?id='+reviewId);
   await page.getByRole('button',{name:/Start (?:offline walkthrough|execution|run)/,exact:true}).click();
   await page.getByLabel('Review findings',{exact:true}).fill('Need a source reference for the acceptance criterion.');
   const count=await page.evaluate(()=>WorkpalStudio.db.deliveries.length);
@@ -98,7 +99,7 @@ try{
   expect(await page.evaluate(()=>WorkpalStudio.db.deliveries.length)).toBe(count);
   expect(await page.evaluate(()=>WorkpalStudio.db.tasks.find(t=>t.id==='QA-REVIEW').status)).toBe('review');
 
-  await page.goto(url+'#auto');
+  await gotoWorkspace(page,url+'#auto');
   await page.getByRole('button',{name:'New autopilot',exact:true}).click();
   const dialog=page.locator('#dialog');
   await dialog.getByLabel('Name',{exact:true}).fill('QA summary autopilot');

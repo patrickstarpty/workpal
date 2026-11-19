@@ -11,14 +11,21 @@
   function applyTheme(value){
     theme=value==='neutral'?'neutral':'warm';
     document.documentElement.dataset.theme=theme;
-    document.querySelector('meta[name="theme-color"]')?.setAttribute('content',theme==='warm'?'#f7f6f3':'#f3f3f4');
+    document.querySelector('meta[name="theme-color"]')?.setAttribute('content',theme==='warm'?'#faf5ef':'#f3f3f4');
   }
   applyTheme(theme);
   function appearance(){
     return box('Appearance',`<div class="appearance-setting"><div><label for="workspace-theme">Theme</label><p id="theme-description">Applies across your workspaces. Saved in this browser.</p></div><select id="workspace-theme" name="workspaceTheme" aria-describedby="theme-description">${options({neutral:'Neutral',warm:'Warm'},theme)}</select></div>`);
   }
+  function welcomeContent(destination){
+    return `<main id="main" class="welcome-page" tabindex="-1"><section class="welcome-card" aria-labelledby="welcome-title">
+      <div class="welcome-brand"><span class="welcome-brand-mark" aria-hidden="true"><svg class="welcome-masthead" viewBox="0 0 102 70" focusable="false"><path transform="translate(0 67)" d="M99.12-66.21V-64.4Q97.27-64.26 96-63.38Q94.73-62.5 93.75-60.69Q93.46-60.11 90.67-53.12L69.92 1.51H68.02L51.61-41.16L33.54 1.51H31.74L9.96-52.54Q6.64-60.69 5.32-62.4Q4-64.11.88-64.4V-66.21H29.59V-64.4Q26.12-64.31 24.98-63.35Q23.83-62.4 23.83-60.99Q23.83-59.13 26.22-53.12L39.21-21L49.61-46.09L46.88-53.12Q44.63-58.89 43.41-60.82Q42.19-62.74 40.6-63.57Q39.01-64.4 35.94-64.4V-66.21H68.02V-64.4Q64.65-64.36 63.18-63.87Q62.16-63.53 61.57-62.72Q60.99-61.91 60.99-60.89Q60.99-59.77 63.18-54L75.24-22.66L86.04-51.03Q87.74-55.42 88.13-57.03Q88.53-58.64 88.53-60.01Q88.53-62.01 87.16-63.16Q85.79-64.31 81.93-64.4V-66.21Z"/><circle cx="91.5" cy="60.12" r="8.13"/></svg></span><h1 id="welcome-title">Workpal</h1></div>
+      <p class="welcome-slogan">Let’s work together.</p>
+      <a class="btn primary welcome-enter" href="${esc(destination)}"><span>Enter workspace</span>${icon('arrow')}</a>
+    </section></main>`;
+  }
   const routes={overview:'Overview',tasks:'All issues',projects:'Projects',workflow:'Runs',agents:'Agents',skills:'Skill Hub',stats:'Analytics',reports:'Reports',inbox:'Inbox',mine:'My work',settings:'Settings',chatroom:'Chat',squads:'Squads',auto:'Autopilots',views:'Saved views',workflows:'Workflows',runtimes:'Runtimes'};
-  const icon=k=>`<svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="${WorkpalIcons[k]||WorkpalIcons.layers}"/></svg>`;
+  const icon=k=>`<svg class="icon${k==='workpal'?' workpal-mark':''}" aria-hidden="true" viewBox="0 0 24 24"><path d="${WorkpalIcons[k]||WorkpalIcons.layers}"/></svg>`;
   const btn=(text,act,id='',cls='')=>{const label=cls.match(/aria-label="([^"]+)/)?.[1];return `<button type="button" class="btn ${cls}" ${label?'title="'+esc(label)+'"':''} data-act="${act}" data-id="${esc(id)}">${text}</button>`;};
   const tool=(text,type,arg='',cls='')=>btn(text,'surface',type+'|'+arg,cls);
   const nav=(page)=>`<a href="#${scoped(page)}" class="nav ${route().page===page?'active':''}">${icon(page)}<span>${routes[page]}</span>${page==='tasks'?'<small>'+db.tasks.length+'</small>':page==='mine'?'<small>'+db.tasks.filter(t=>t.owner==='Patrick').length+'</small>':''}</a>`;
@@ -35,8 +42,22 @@
   function scoped(path, id=workspace().id){
     return (id==='tap'?'':'w/'+id+'/')+path;
   }
-  function route(){
-    const [path,query]=location.hash.slice(1).split('?');
+  function isWelcome(){return !location.hash||location.hash==='#welcome';}
+  let pendingEntry='';
+  function welcomeDestination(){
+    const spaces=WorkpalStudio.listWorkspaces();
+    if(pendingEntry.startsWith('#')){
+      const parts=pendingEntry.slice(1).split('?')[0].split('/');
+      const page=parts[0]==='w'?parts[2]:parts[0];
+      const requested=route(pendingEntry);
+      if(Object.hasOwn(routes,page)&&spaces.some(item=>item.id===requested.workspaceId))return pendingEntry;
+    }
+    const last=WorkpalStudio.lastWorkspace();
+    const id=spaces.some(item=>item.id===last)?last:'tap';
+    return '#'+scoped(id==='tap'?'tasks':'overview',id);
+  }
+  function route(hash=location.hash){
+    const [path,query]=hash.slice(1).split('?');
     const segments=path.split('/');
     const nested=segments[0]==='w';
     const page=nested?segments[2]:path;
@@ -112,14 +133,20 @@
   function actionList(items){return '<div class="actions">'+items.join('')+'</div>';}
   const actorEmoji=name=>db.agents.find(a=>a.name===name)?.emoji||db.memberAvatars?.[name]||'';
   const avatar=(name,cls='')=>'<span class="avatar '+cls+(actorEmoji(name)?' emoji-avatar':'')+'" title="'+esc(name)+'">'+(actorEmoji(name)?esc(actorEmoji(name)):db.agents.some(a=>a.name===name)?icon('agents'):db.squads.some(a=>a.name===name)?icon('squads'):esc(name==='Unassigned'?'—':Array.from(name).slice(0,2).join('')))+'</span>';
+  const agentAvatarControl=(name,cls='',source='')=>'<button type="button" class="member-avatar-button '+cls+'" data-act="surface" data-id="'+esc('avatarEditor|'+JSON.stringify({name,source}))+'" data-agent-name="'+esc(name)+'" aria-label="Change avatar for '+esc(name)+'" title="Change avatar for '+esc(name)+'">'+avatar(name)+(cls==='agent-profile-avatar'?'<span>Change avatar</span>':'')+'</button>';
+  const emojiField=value=>field('Emoji avatar','<input name="emoji" maxlength="32" value="'+esc(value||'')+'" placeholder="Choose one emoji, e.g. 🦊" autocomplete="off">');
+  function validateEmoji(value){
+    if(value&&(!/\p{Extended_Pictographic}|\p{Regional_Indicator}|[#*0-9]\uFE0F?\u20E3/u.test(value)||[...new Intl.Segmenter('en',{granularity:'grapheme'}).segment(value)].length!==1))throw Error('Choose or paste one emoji.');
+    return value;
+  }
   const emojiChoices=['🤖','🧠','🛠️','🔍','🎨','🚀','🦊','🐼','🐙','🦉','🐳','🦄','🌱','🌟','🔥','⚡','💎','🎯','🧪','📚','💻','🛰️','🧭','🦋'];
   function avatarEditor(arg){
-    const {name,squad=''}=JSON.parse(arg),value=actorEmoji(name);
+    const {name,squad='',source=''}=JSON.parse(arg),value=actorEmoji(name);
     if(!db.agents.some(a=>a.name===name)&&name!=='Patrick')return empty('Member unavailable.');
     return form('avatarEditor','<div class="avatar-editor-identity"><span class="avatar-choice-preview">'+(value?esc(value):icon('agents'))+'</span><div><strong>'+esc(name)+'</strong><small>Used across this workspace</small></div></div>'+
       '<div class="emoji-palette" role="group" aria-label="Suggested emoji">'+emojiChoices.map(emoji=>'<button type="button" data-act="pickEmoji" data-id="'+esc(emoji)+'" aria-label="Use '+esc(emoji)+'" aria-pressed="'+(emoji===value)+'">'+emoji+'</button>').join('')+'</div>'+
       field('Emoji','<input name="emoji" maxlength="32" value="'+esc(value)+'" placeholder="Choose above or paste one emoji" autocomplete="off">')+
-      '<input type="hidden" name="name" value="'+esc(name)+'"><input type="hidden" name="squad" value="'+esc(squad)+'">'+btn('Use default avatar','pickEmoji',''),'Save avatar',name);
+      '<input type="hidden" name="name" value="'+esc(name)+'"><input type="hidden" name="squad" value="'+esc(squad)+'"><input type="hidden" name="source" value="'+esc(source)+'">'+btn('Use default avatar','pickEmoji',''),'Save avatar',name);
   }
   function assignWorkEditor(target){
     const squad=db.squads.find(s=>s.name===target),agent=WorkpalStudio.handlingAgent(target);
@@ -397,7 +424,7 @@
     return field('Runtime',select('runtimeId',{'':'Not connected',...Object.fromEntries(db.runtimes.map(r=>[r.id,r.name+' · Offline']))},a?.runtimeId||''))+
       field('Concurrent runs','<input name="concurrency" type="number" min="1" max="16" value="'+(a?.concurrency||1)+'">');
   }
-  function agentsView(){return '<div class="agent-table"><div class="table-head"><span>Name</span><span>Runtime</span><span>Skills</span><span>Status</span></div>'+db.agents.map(a=>`<button class="agent-row" data-act="surface" data-id="agent|${esc(a.name)}"><span class="actor-name" title="${esc(a.role)}">${avatar(a.name)}<strong>${esc(a.name)}</strong></span><span class="cell-meta">${icon('runtimes')}${esc(a.runtime)}</span><span>${a.skills.length} skills</span><span class="availability"><i></i>Offline</span></button>`).join('')+'</div>';}
+  function agentsView(){return '<div class="agent-table"><div class="table-head"><span>Name</span><span>Runtime</span><span>Skills</span><span>Status</span></div>'+db.agents.map(a=>`<div class="agent-row-entry"><button type="button" class="agent-row" data-act="surface" data-id="agent|${esc(a.name)}"><span class="actor-name" title="${esc(a.role)}"><strong>${esc(a.name)}</strong></span><span class="cell-meta">${icon('runtimes')}${esc(a.runtime)}</span><span>${a.skills.length} skills</span><span class="availability"><i></i>Offline</span></button>${agentAvatarControl(a.name,'agent-avatar-button','agents')}</div>`).join('')+'</div>';}
   let directoryTab='all', sortSkills='rank';
   const skillAgents=id=>db.agents.filter(a=>a.skills.includes(id));
   const skillRuns=id=>db.runs.filter(r=>r.skill===id).length;
@@ -549,7 +576,7 @@
       case 'wakeupEditor':return wakeupEditor(arg);
       case 'saveView':return form('saveView',field('View name',input('name')),'Save view');
       case 'newProject':return form('newProject',field('Project name',input('name')),'Create project');
-      case 'newAgent':return form('newAgent',field('Name',input('name'))+field('Responsibilities',input('role'))+field('Instructions','<textarea name="instructions" rows="3"></textarea>')+starterField()+field('Harness',select('runtime',strings(['Codex','Claude Code','Local runner'])))+runtimeFields()+field('Skill',select('skill',Object.fromEntries(db.skills.map(s=>[s.id,s.name])))),'Save agent');
+      case 'newAgent':return form('newAgent',field('Name',input('name'))+emojiField('')+field('Responsibilities',input('role'))+field('Instructions','<textarea name="instructions" rows="3"></textarea>')+starterField()+field('Harness',select('runtime',strings(['Codex','Claude Code','Local runner'])))+runtimeFields()+field('Skill',select('skill',Object.fromEntries(db.skills.map(s=>[s.id,s.name])))),'Save agent');
       case 'agent':{
         const a=db.agents.find(x=>x.name===arg);if(!a)return empty('Agent unavailable.');
         const assigned=db.tasks.filter(t=>t.owner===a.name),runs=db.runs.filter(r=>r.agent===a.name);
@@ -560,7 +587,7 @@
       }
       case 'agentConfig':{
         const a=db.agents.find(x=>x.name===arg);
-        return form('agentConfig',tool(avatar(a.name)+' Change avatar','avatarEditor',JSON.stringify({name:a.name}))+field('Instructions','<textarea name="instructions" rows="5" required>'+esc(a.instructions||a.role)+'</textarea>')+field('Harness',select('runtime',strings(['Codex','Claude Code','Local runner']),a.runtime))+field('Model',input('model',a.model||'Default'))+runtimeFields(a)+starterField(a),'Save settings',arg);
+        return form('agentConfig',emojiField(a.emoji)+field('Instructions','<textarea name="instructions" rows="5" required>'+esc(a.instructions||a.role)+'</textarea>')+field('Harness',select('runtime',strings(['Codex','Claude Code','Local runner']),a.runtime))+field('Model',input('model',a.model||'Default'))+runtimeFields(a)+starterField(a),'Save settings',arg);
       }
       case 'skill':return skill(arg);
       case 'suggest':return form('suggest',field('Skill name',input('name'))+field('Source URL','<input type="url" name="url" required>')+field('Recommended use',input('reason'))+field('Stage',select('stage',Object.fromEntries(stages.map((stage,i)=>[i,stage])))),'Add to directory');
@@ -769,7 +796,7 @@
       <div class="space-panel"><header class="space-heading"><h2>${space.name}</h2>${btn(icon('panelLeft'),'collapseNav','','icon-only" aria-label="Collapse sidebar')}</header><div class="panel-scroll">${panel}</div></div></aside>`;
   }
   function chatLauncher(){
-    return '<div class="chat-launcher" aria-label="Workspace chat">'+btn(icon('sparkles')+' Ask Workpal','chat','','ask-button')+
+    return '<div class="chat-launcher" aria-label="Workspace chat">'+btn(icon('workpal')+' Ask Workpal','chat','','ask-button')+
       btn(icon('history'),'surface','chatHistory|','history-button" aria-label="Chat history')+'</div>';
   }
   const scrollPositions=new Map();
@@ -781,6 +808,13 @@
   function render(){
     captureDrafts();
     if(renderedHash)scrollPositions.set(renderedHash,new Map(scrollRegions().map(el=>[scrollKey(el),[el.scrollLeft,el.scrollTop]])));
+    if(isWelcome()){
+      dismiss();chat=false;mobileMenu=false;
+      document.title='Welcome · Workpal';
+      $('#app').innerHTML=welcomeContent(welcomeDestination());
+      renderedHash=location.hash;
+      return;
+    }
     const {page,params}=route(),id=params.get('id');
     const type=Object.keys(detailPages).find(key=>detailPages[key]===page),detail=id&&type;
     const heading=detail?({issue:db.tasks.find(t=>t.id===id)?.title,skill:db.skills.find(s=>s.id===id)?.name})[type]||id:routes[page];
@@ -791,7 +825,7 @@
     document.title=heading+' · '+workspace().name+' · Workpal';
     $('#app').innerHTML=`<div class="shell ${mobileMenu?'menu-open':''} ${navCollapsed?'nav-collapsed':''}" data-page="${page}" data-space="${space}" data-detail="${detail?'true':'false'}" data-layout="${layout}">${navigation(page)}
     <div class="main"><header class="top">${page==='stats'?WorkpalAnalytics.header():`<div class="top-title">${btn(icon('menu'),'menu','','mobile-only icon-only" aria-label="Workspace menu')}${navCollapsed&&space!=='Chat'?btn(icon('panelLeft'),'collapseNav','','icon-only" aria-label="Expand sidebar'):''}${icon(page)}${detail?'<a href="#'+scoped(page)+'">'+routes[page]+'</a><span class="separator">/</span><span>'+esc(type==='issue'?id:heading)+'</span>':(page==='chatroom'?'<span>Chat</span>':'<h1>'+esc(heading)+'</h1>')}${taskActions?btn(icon('filter'),'filters','','icon-only" aria-label="Filter issues'):''}</div><div class="top-actions">${taskActions?issueDisplay()+tool(icon('edit'),'issue','','icon-only" aria-label="New issue'):collectionAction?tool(icon('plus'),collectionAction[0],'','icon-only" aria-label="'+collectionAction[1]):btn(icon('search'),'surface','search|','icon-only" aria-label="Search workspace')}</div>`}</header>
-    <main id="main" tabindex="-1">${detail&&type!=='issue'?'<div class="heading"><div><div class="crumb">'+esc(workspace().name)+'<span>/</span>'+esc(type==='issue'?id:labels[type])+'</div><h1>'+esc(heading)+'</h1></div>'+(type==='squad'?tool(icon('plus')+' Assign work','assignIssue',id,'primary'):'')+'</div>':''}<div id="page-content">${detail?surface(type,id,true):pages[page]()}</div></main></div></div><footer class="bottom-bar"><span class="product-wordmark">Workpal</span><span class="workspace-caption">${esc(workspace().name)}</span></footer>${page==='chatroom'?'':chatLauncher()}`;
+    <main id="main" tabindex="-1">${detail&&type!=='issue'?'<div class="heading'+(type==='agent'?' agent-profile-heading':'')+'"><div><div class="crumb">'+esc(workspace().name)+'<span>/</span>'+esc(type==='issue'?id:labels[type])+'</div><h1>'+esc(heading)+'</h1></div>'+(type==='squad'?tool(icon('plus')+' Assign work','assignIssue',id,'primary'):type==='agent'?agentAvatarControl(id,'agent-profile-avatar'):'')+'</div>':''}<div id="page-content">${detail?surface(type,id,true):pages[page]()}</div></main></div></div><footer class="bottom-bar"><a class="product-wordmark" href="#welcome" aria-label="Workpal home">Workpal</a><span class="workspace-caption">${esc(workspace().name)}</span></footer>${page==='chatroom'?'':chatLauncher()}`;
     paintChat();restoreDrafts();
     renderedHash=location.hash;
     const positions=scrollPositions.get(renderedHash);
@@ -834,12 +868,16 @@
       return done('issue',result.task.id,result.run?'Issue assigned. Leader run queued.':'Issue assigned without a run.');
     }
     if(type==='avatarEditor'){
-      const emoji=data.emoji;
-      if(emoji&&(!/\p{Extended_Pictographic}|\p{Regional_Indicator}|[#*0-9]\uFE0F?\u20E3/u.test(emoji)||[...new Intl.Segmenter('en',{granularity:'grapheme'}).segment(emoji)].length!==1))throw Error('Choose or paste one emoji.');
+      const emoji=validateEmoji(data.emoji);
       const agent=db.agents.find(a=>a.name===data.name);
       if(agent)agent.emoji=emoji;
       else if(data.name==='Patrick'){db.memberAvatars??={};db.memberAvatars[data.name]=emoji;}
       else throw Error('Member unavailable.');
+      if(data.source==='agents'&&!inside){
+        write();clearFormDraft(f);dismiss();render();
+        [...document.querySelectorAll('.agent-avatar-button')].find(button=>button.dataset.agentName===data.name)?.focus();
+        toast('Avatar saved.');return;
+      }
       return done(data.squad?'squad':'agent',data.squad||data.name,'Avatar saved.');
     }
     if(type==='conversationSettings'){Object.assign(currentConversation(),data);write();dismiss();render();return;}
@@ -910,8 +948,8 @@
       Object.assign(a,data,{enabled:data.enabled==='on',checks:data.checks.split('\n').map(c=>c.trim()).filter(Boolean)});return done('autopilot',a.id,'Autopilot saved.');
     }
     if(type==='newProject'){if(db.projects.includes(data.name))throw Error('This project already exists.');db.projects.push(data.name);return done('project',data.name,'Project created.');}
-    if(type==='agentConfig'){Object.assign(db.agents.find(a=>a.name===id),data,{starters:starterLines(data.starters)});return done('agent',id,'Settings saved.');}
-    if(type==='newAgent'){if(Object.hasOwn(ownerOptions(),data.name))throw Error('This agent already exists.');db.agents.push({name:data.name,role:data.role,instructions:data.instructions,starters:starterLines(data.starters),runtime:data.runtime,runtimeId:data.runtimeId,concurrency:Number(data.concurrency),skills:[data.skill]});return done('agent',data.name,'Agent profile saved.');}
+    if(type==='agentConfig'){validateEmoji(data.emoji);Object.assign(db.agents.find(a=>a.name===id),data,{starters:starterLines(data.starters)});return done('agent',id,'Settings saved.');}
+    if(type==='newAgent'){validateEmoji(data.emoji);if(Object.hasOwn(ownerOptions(),data.name))throw Error('This agent already exists.');db.agents.push({name:data.name,emoji:data.emoji,role:data.role,instructions:data.instructions,starters:starterLines(data.starters),runtime:data.runtime,runtimeId:data.runtimeId,concurrency:Number(data.concurrency),skills:[data.skill]});return done('agent',data.name,'Agent profile saved.');}
     if(type==='suggest'){
       const url=new URL(data.url);
       if(!['https:','http:'].includes(url.protocol))throw Error('Enter an HTTPS or HTTP source.');
@@ -1057,6 +1095,7 @@
     refresh();
   });
   document.addEventListener('keydown',ev=>{
+    if(isWelcome())return;
     if(ev.key==='Escape'){const menu=document.querySelector('.display-dropdown[open],.column-options[open]');if(menu){ev.preventDefault();menu.open=false;menu.querySelector('summary').focus();return;}}
     if(ev.key==='Escape'&&mobileMenu&&!$('#dialog').open){ev.preventDefault();mobileMenu=false;render();$('.mobile-only[data-act=menu]')?.focus();return;}
     const quickMenu=ev.target.closest('form')?.querySelector('.comment-suggestions');
@@ -1086,13 +1125,13 @@
     enter();
   }
   function enter(){
-    if(!location.hash){
-      const last=WorkpalStudio.lastWorkspace();
-      const id=WorkpalStudio.listWorkspaces().some(w=>w.id===last)?last:'tap';
-      location.replace('#'+scoped(id==='tap'?'tasks':'overview',id));
-    }
+    if(!location.hash)history.replaceState(null,'','#welcome');
     if(visibleHash===location.hash)return;
     visibleHash=location.hash;
+    if(isWelcome()){
+      render();window.scrollTo(0,0);$('#main').focus();
+      return;
+    }
     const id=route().workspaceId;
     const changed=id!==workspace().id;
     dismiss();
@@ -1101,6 +1140,7 @@
       toast('Workspace unavailable in this browser.');
       return;
     }
+    pendingEntry='';
     db=WorkpalStudio.db;db.runtimes??=[];db.inbox??={};db.quickActions??=[];db.wakeups??=[];prepareConversations();
     if(changed){
       chat=false;draftAgent='';draftText='';
@@ -1112,6 +1152,7 @@
     mobileMenu=false;render();window.scrollTo(0,0);
   }
   setInterval(()=>{
+    if(isWelcome())return;
     try{
     checkWakeups();
     const now=new Date(),day=now.toLocaleDateString('en-CA'),time=now.toTimeString().slice(0,5);
@@ -1122,5 +1163,13 @@
     }catch(err){showSaveError(err);}
   },15000);
   WorkpalAnalytics.init({getDb:()=>db,workspace,teams,states,scoped,icon,esc,avatar,issueList,render,write});
+  // Each document opens at welcome, including bookmarks and workspace reloads.
+  // Retain the requested destination in this history entry, without a login flag.
+  if(!isWelcome()){
+    pendingEntry=location.hash;
+    history.replaceState({workpalWelcomeTarget:pendingEntry},'','#welcome');
+  }else if(typeof history.state?.workpalWelcomeTarget==='string'){
+    pendingEntry=history.state.workpalWelcomeTarget;
+  }
   window.addEventListener('hashchange',enter);enter();
 })();

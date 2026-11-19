@@ -1,3 +1,4 @@
+import {gotoWorkspace,reloadWorkspace} from './qa-navigation.mjs';
 import {createRequire} from 'node:module';
 import {pathToFileURL} from 'node:url';
 import {resolve} from 'node:path';
@@ -14,14 +15,14 @@ try {
   for(const width of [1440,390]){
     await page.setViewportSize({width,height:900});
     for(const route of ['overview','stats','tasks','projects','workflow','agents','skills','reports','inbox','mine','settings','auto','squads','chatroom','views']){
-      await page.goto(path+'#'+route);
+      await gotoWorkspace(page,path+'#'+route);
       await expect(page.locator('h1')).toBeVisible();
       await expect(page.locator('body')).not.toContainText(/Workpal Lab/i);
       if(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth))throw Error('Overflow '+route+' '+width);
     }
   }
   await page.setViewportSize({width:1440,height:950});
-  await page.goto(path+'#skills');
+  await gotoWorkspace(page,path+'#skills');
   await page.screenshot({path:'test-results/studio-skills.png'});
   await page.getByLabel('Search skills').fill('anthropics/skills');
   await page.locator('.skill-line').filter({hasText:'Frontend Design'}).click();
@@ -33,7 +34,7 @@ try {
   await expect(page.locator('main')).toContainText('Frontend Design');
   await page.goBack();
   await expect(page.locator('main h1')).toHaveText('Frontend Design');
-  await page.goto(path+'#projects?id=TAP');
+  await gotoWorkspace(page,path+'#projects?id=TAP');
   await page.locator('main').getByRole('button',{name:'New issue'}).click();
   const editor=page.locator('#dialog');
   await editor.locator('[name=title]').fill('Route upload retries');
@@ -53,11 +54,11 @@ try {
   await expect(page.locator('main')).toContainText('queued');
   await page.locator('main section.panel').filter({has:page.getByRole('heading',{name:'Agent runs',exact:true})}).locator('button[data-id^="run|"]').click();
   await page.getByRole('button',{name:'Start run'}).click();
-  await page.goto(issueUrl);
+  await gotoWorkspace(page,issueUrl);
   await expect(page.locator('main')).toContainText('In progress');
   await page.locator('[name=text]').fill('Check recovery after timeout.');
   await page.getByRole('button',{name:'Post comment'}).click();
-  await page.reload();
+  await reloadWorkspace(page);
   await expect(page.locator('main')).toContainText('Check recovery after timeout.');
   await page.locator('main section.panel').filter({has:page.getByRole('heading',{name:'Agent runs',exact:true})}).locator('button[data-id^="run|"]').click();
   await page.locator('[name=note]').fill('Retry behavior is ready for review.');
@@ -69,7 +70,7 @@ try {
   await editor.getByRole('button',{name:'Start workflow'}).click();
   await page.getByRole('button',{name:'Cancel run'}).click();
   await expect(page.locator('main')).toContainText('Run cancelled');
-  await page.goto(issueUrl);
+  await gotoWorkspace(page,issueUrl);
   await expect(page.locator('main')).toContainText('Include the offline case.');
   await page.getByRole('button',{name:'Add sub-issue'}).click();
   await editor.locator('[name=title]').fill('Document offline retry');
@@ -83,11 +84,11 @@ try {
   await page.getByRole('button',{name:'Start run'}).click();
   await page.locator('[name=note]').fill('Offline requests should be retained until reconnect.');
   await page.getByRole('button',{name:'Save response'}).click();
-  await page.goto(issueUrl);
+  await gotoWorkspace(page,issueUrl);
   await expect(page.locator('main')).toContainText('Offline requests should be retained until reconnect.');
   await expect(page.locator('.properties')).toContainText('Architecture partner');
   await expect(page.locator('.properties')).toContainText('To do');
-  await page.goto(path+'#tasks');
+  await gotoWorkspace(page,path+'#tasks');
   await page.getByRole('button',{name:'Display',exact:true}).click();
   await page.getByRole('button',{name:'Board view',exact:true}).click();
   const row=page.locator('[draggable=true]').filter({hasText:'Document offline retry'});
@@ -95,7 +96,7 @@ try {
   await expect(editor.locator('[name=status]')).toHaveValue('backlog');
   await editor.getByRole('button',{name:'Save changes'}).click();
   await expect(page.locator('.properties')).toContainText('Backlog');
-  await page.goto(path+'#overview');
+  await gotoWorkspace(page,path+'#overview');
   await page.screenshot({path:'test-results/studio-desktop.png'});
   await page.locator('.chat-launcher [data-act=chat]').click();
   const console=page.locator('#assistant');
@@ -136,12 +137,12 @@ try {
   await card.getByRole('button',{name:'Pin to insights'}).click();
   await expect(card).toContainText('Unpin panel');
   await page.screenshot({path:'test-results/studio-agent.png'});
-  await page.reload();
-  await page.goto(path+'#reports');
+  await reloadWorkspace(page);
+  await gotoWorkspace(page,path+'#reports');
   await expect(page.locator('#main')).toContainText('Quality summary');
-  await page.goto(path+'#stats');
+  await gotoWorkspace(page,path+'#stats');
   await expect(page.locator('#main')).toContainText('Quality by project');
-  await page.goto(path+'#stats?team=quality');
+  await gotoWorkspace(page,path+'#stats?team=quality');
   await expect(page.locator('#main')).toContainText('Check citation coverage');
   await page.setViewportSize({width:390,height:844});await page.locator('.chat-launcher [data-act=chat]').click();
   await prompt('team dashboard');
@@ -164,19 +165,19 @@ try {
   await page.locator('.chat-launcher [data-act=chat]').click();
   await expect(console).not.toContainText('Check citation coverage');
   await page.getByRole('button',{name:'Close chat'}).click();
-  await page.goto(path);
+  await gotoWorkspace(page,path);
   await expect(page.getByRole('button',{name:'Switch workspace, Atlas'})).toBeVisible();
   await page.getByRole('button',{name:'Switch workspace, Atlas'}).click();
   await editor.locator('[data-act=switchSpace][data-id=tap]').click();
   await expect(page.getByRole('button',{name:'Switch workspace, TAP'})).toBeVisible();
   await page.locator('.nav').filter({hasText:'Projects'}).click();
   await expect(page.locator('main')).not.toContainText('Atlas Core');
-  await page.goto(scopedUrl);
+  await gotoWorkspace(page,scopedUrl);
   await expect(page.locator('main h1')).toHaveText('Atlas Core');
   await expect(page.getByRole('button',{name:'Switch workspace, Atlas'})).toBeVisible();
   // Follow the same Work → Team → Chat → Auto paths as a workspace member.
   await page.setViewportSize({width:1440,height:950});
-  await page.goto(path+'#tasks');
+  await gotoWorkspace(page,path+'#tasks');
   const dock=page.getByRole('navigation',{name:'App navigation'});
   await dock.getByRole('link',{name:'Team',exact:true}).click();
   await page.getByRole('button',{name:'Configure agent'}).click();
@@ -252,7 +253,7 @@ try {
   await console.getByRole('button',{name:'Open in Chat'}).click();
   await expect(console).toHaveClass(/full-chat/);
   await expect(console).toContainText('Please double-check the release owner');
-  await page.reload();
+  await reloadWorkspace(page);
   await expect(console).toContainText('Please double-check the release owner');
   await dock.getByRole('link',{name:'Auto',exact:true}).click();
   await page.locator('main').getByRole('button',{name:/Daily delivery brief/}).click();
@@ -261,7 +262,7 @@ try {
   await page.locator('main button[data-id^="issue|"]').click();
   await expect(page.locator('main')).toContainText('Created by Daily delivery brief');
   await page.setViewportSize({width:390,height:844});
-  await page.goto(path+'#tasks');
+  await gotoWorkspace(page,path+'#tasks');
   await page.getByRole('button',{name:'Workspace menu',exact:true}).click();
   await expect(page.locator('.shell')).toHaveClass(/menu-open/);
   await page.keyboard.press('Escape');

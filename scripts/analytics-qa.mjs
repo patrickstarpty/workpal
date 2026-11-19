@@ -1,3 +1,4 @@
+import {gotoWorkspace,reloadWorkspace} from './qa-navigation.mjs';
 import {createRequire} from 'node:module';
 import {pathToFileURL} from 'node:url';
 import {resolve} from 'node:path';
@@ -67,7 +68,7 @@ async function switchWorkspace(page,current,next){
   await page.locator('#dialog [data-act=switchSpace]').filter({hasText:next}).click();
   await expect.poll(()=>page.evaluate(()=>WorkpalStudio.workspace.name)).toBe(next);
   const id=await page.evaluate(()=>WorkpalStudio.workspace.id);
-  await page.goto(artifact+'#'+(id==='tap'?'':'w/'+id+'/')+'stats');
+  await gotoWorkspace(page,artifact+'#'+(id==='tap'?'':'w/'+id+'/')+'stats');
   await expect(page.getByRole('heading',{name:'Analytics',exact:true})).toBeVisible();
 }
 
@@ -79,7 +80,7 @@ try{
     const label=viewport.width+'x'+viewport.height,errors=[];
     page.on('pageerror',error=>errors.push(error.message));
     try{
-      await page.goto(artifact+'#stats');
+      await gotoWorkspace(page,artifact+'#stats');
       await expect(page.getByRole('heading',{name:'Analytics',exact:true})).toBeVisible();
       await headline(page);
       await screenshot(page,'usage',viewport);
@@ -162,7 +163,7 @@ try{
       await issue.click();
       await expect(page.locator('.shell')).toHaveAttribute('data-detail','true');
       expect(new URLSearchParams((await page.evaluate(()=>location.hash)).split('?')[1]).get('id')).toBe(issueId);
-      await page.goto(artifact+'#stats');
+      await gotoWorkspace(page,artifact+'#stats');
       await switchWorkspace(page,'TAP','Symphony');
       await expect(page.getByRole('heading',{name:'No usage yet',exact:true})).toBeVisible();
       await expect(page.locator('.analytics-value')).toHaveCount(0);

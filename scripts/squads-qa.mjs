@@ -1,3 +1,4 @@
+import {gotoWorkspace,reloadWorkspace} from './qa-navigation.mjs';
 import {createRequire} from 'node:module';
 import {pathToFileURL} from 'node:url';
 import {resolve} from 'node:path';
@@ -27,13 +28,13 @@ try {
     }
     try {
       // Save a reviewer note before changing assignments and shared identities.
-      await page.goto(url+'#settings');
+      await gotoWorkspace(page,url+'#settings');
       await page.getByRole('button',{name:'Workspace notes',exact:true}).click();
       await dialog.locator('[name=author]').fill('Squad reviewer');
       await dialog.locator('[name=text]').fill('Keep the squad review note '+width);
       await dialog.getByRole('button',{name:'Save feedback',exact:true}).click();
       await page.keyboard.press('Escape');
-      await page.goto(squadUrl);
+      await gotoWorkspace(page,squadUrl);
       const baseline=await page.evaluate(()=>({tasks:WorkpalStudio.db.tasks.length,runs:WorkpalStudio.db.runs.length}));
       const assign=page.locator('main .heading').getByRole('button',{name:'Assign work',exact:true});
       await expect(assign).toBeVisible();
@@ -72,9 +73,9 @@ try {
       expect(created.runs[0].context.squad.name).toBe('TAP delivery');
       expect(created.runs[0].context.squad.members).toContain('Quality partner');
       expect(created.runs[0].context.squad.instructions).toContain('Delegate implementation');
-      await page.reload();
+      await reloadWorkspace(page);
       expect(await page.evaluate(id=>WorkpalStudio.db.runs.filter(r=>r.task===id).length,created.task.id)).toBe(1);
-      await page.goto(squadUrl);
+      await gotoWorkspace(page,squadUrl);
       await expect(page.locator('main')).toContainText('Coordinate upload delivery '+width);
 
       // A parked issue and an explicit no-run assignment must not enqueue work.
@@ -95,7 +96,7 @@ try {
         expect(result.owner).toBe('TAP delivery');
         expect(result.status).toBe(mode==='backlog'?'backlog':'todo');
         expect(result.runs).toBe(0);
-        await page.goto(squadUrl);
+        await gotoWorkspace(page,squadUrl);
       }
 
       // Avatar choices belong to the agent, so every surface uses one identity.
@@ -108,14 +109,14 @@ try {
       await page.screenshot({path:'test-results/squad-avatar-picker-'+width+'.png'});
       await dialog.getByRole('button',{name:'Save avatar',exact:true}).click();
       await expect(avatarButton().locator('.avatar')).toHaveText('🚀');
-      await page.reload();
+      await reloadWorkspace(page);
       await expect(avatarButton().locator('.avatar')).toHaveText('🚀');
-      await page.goto(url+'#agents');
-      await expect(page.locator('button[data-id="agent|Engineering partner"] .avatar')).toHaveText('🚀');
+      await gotoWorkspace(page,url+'#agents');
+      await expect(page.getByRole('button',{name:'Change avatar for Engineering partner',exact:true}).locator('.avatar')).toHaveText('🚀');
       const taskId=await page.evaluate(()=>WorkpalStudio.db.tasks.find(t=>t.owner==='Engineering partner').id);
-      await page.goto(url+'#tasks');
+      await gotoWorkspace(page,url+'#tasks');
       await expect(page.locator('button[data-id="issue|'+taskId+'"] .avatar')).toHaveText('🚀');
-      await page.goto(squadUrl);
+      await gotoWorkspace(page,squadUrl);
       await avatarButton().click();
       const family='👩‍👩‍👧‍👦';
       await dialog.locator('[name=emoji]').fill(family);
@@ -132,11 +133,11 @@ try {
       await expect(dialog.locator('[name=emoji]')).toHaveValue('');
       await dialog.getByRole('button',{name:'Save avatar',exact:true}).click();
       await expect(avatarButton().locator('.avatar svg')).toHaveCount(1);
-      await page.reload();
+      await reloadWorkspace(page);
       await expect(avatarButton().locator('.avatar svg')).toHaveCount(1);
       await noOverflow();
 
-      await page.goto(url+'#settings');
+      await gotoWorkspace(page,url+'#settings');
       await page.getByRole('button',{name:'Workspace notes',exact:true}).click();
       await expect(dialog).toContainText('Keep the squad review note '+width);
       await page.keyboard.press('Escape');

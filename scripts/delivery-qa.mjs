@@ -1,3 +1,4 @@
+import {gotoWorkspace,reloadWorkspace} from './qa-navigation.mjs';
 import {createRequire} from 'node:module';
 import {pathToFileURL} from 'node:url';
 import {resolve} from 'node:path';
@@ -21,7 +22,7 @@ try {
     page.on('request',request=>{if(/^https?:/.test(request.url()))remoteRequests.push(request.url());});
     page.on('pageerror',error=>errors.push(error.message));
     try {
-      await page.goto(url+'#projects?id=TAP');
+      await gotoWorkspace(page,url+'#projects?id=TAP');
       const editor=page.locator('#dialog');
       await page.locator('main').getByRole('button',{name:/New issue/}).click();
       const title='Verify upload recovery '+width;
@@ -74,17 +75,17 @@ try {
       expect(await page.locator('main').evaluate(el=>el.scrollWidth-el.clientWidth)).toBeLessThanOrEqual(1);
       expect(await page.evaluate(()=>document.documentElement.scrollWidth)).toBeLessThanOrEqual(width);
       await page.screenshot({path:'test-results/delivery-review-'+width+'.png'});
-      await page.goto(firstRunUrl);
+      await gotoWorkspace(page,firstRunUrl);
       await expect(page.locator('main')).toContainText('First delivery: upload state retained; retry evidence missing.');
       await expect(page.locator('form[data-form=decision]')).toHaveCount(0);
-      await page.goto(secondRunUrl);
+      await gotoWorkspace(page,secondRunUrl);
       await page.locator('[name=choice]').selectOption('approve');
       await page.locator('[name=acknowledged]').check();
       await page.getByRole('button',{name:'Record decision',exact:true}).click();
-      await page.reload();
+      await reloadWorkspace(page);
       expect(await page.evaluate(id=>WorkpalStudio.db.tasks.find(t=>t.id===id).status,issueId)).toBe('done');
       await expect(page.locator('form[data-form=decision]')).toHaveCount(0);
-      await page.goto(issueUrl);
+      await gotoWorkspace(page,issueUrl);
       await expect(page.locator('main')).toContainText('Add evidence for retry after timeout.');
       await expect(page.locator('main')).toContainText('Second delivery: adds timeout retry evidence.');
 
@@ -93,7 +94,7 @@ try {
       await editor.locator('[name=title]').fill('Changed requirements '+width);
       await editor.locator('[name=checks]').fill('New acceptance condition');
       await editor.getByRole('button',{name:'Save changes',exact:true}).click();
-      await page.goto(secondRunUrl);
+      await gotoWorkspace(page,secondRunUrl);
       await page.getByRole('button',{name:'Generate execution report',exact:true}).click();
       await editor.getByRole('button',{name:'Generate execution report',exact:true}).click();
       const report=await page.evaluate(()=>WorkpalStudio.db.reports[0]);
@@ -106,13 +107,13 @@ try {
       expect((await download).suggestedFilename()).toMatch(/\.md$/);
 
       // Existing local review notes remain usable and escaped through reload.
-      await page.goto(url+'#settings');
+      await gotoWorkspace(page,url+'#settings');
       await page.getByRole('button',{name:'Workspace notes',exact:true}).click();
       await editor.locator('[name=author]').fill('Delivery reviewer');
       await editor.locator('[name=text]').fill('Keep this review note '+width+' '+unsafe);
       await editor.getByRole('button',{name:'Save feedback',exact:true}).click();
       await expect(editor).toContainText('Keep this review note '+width);
-      await page.reload();
+      await reloadWorkspace(page);
       await page.getByRole('button',{name:'Workspace notes',exact:true}).click();
       await expect(editor).toContainText('Keep this review note '+width);
       expect(await page.evaluate(()=>globalThis.deliveryInjection)).toBeUndefined();

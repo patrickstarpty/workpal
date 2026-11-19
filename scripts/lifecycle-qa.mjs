@@ -1,3 +1,4 @@
+import {gotoWorkspace,reloadWorkspace} from './qa-navigation.mjs';
 import {createRequire} from 'node:module';
 import {pathToFileURL} from 'node:url';
 import {resolve} from 'node:path';
@@ -33,8 +34,8 @@ try {
         studio.save();return {task:task.id,run:run?.id};
       },{name,workflow,status,running});
     }
-    async function openIssue(id){await page.goto(url+'#tasks?id='+encodeURIComponent(id));}
-    async function openRun(id){await page.goto(url+'#workflow?id='+encodeURIComponent(id));}
+    async function openIssue(id){await gotoWorkspace(page,url+'#tasks?id='+encodeURIComponent(id));}
+    async function openRun(id){await gotoWorkspace(page,url+'#workflow?id='+encodeURIComponent(id));}
     async function editStatus(id,status){
       await openIssue(id);
       await page.locator('[data-id="issueProperty|'+id+'|status"]').click();
@@ -53,7 +54,7 @@ try {
       await page.getByRole('button',{name:'Record decision',exact:true}).click();
     }
     try {
-      await page.goto(url+'#overview');
+      await gotoWorkspace(page,url+'#overview');
 
       // A status edit with a workflow dispatches one review run, not another execution.
       const routing=await fixture('Route review '+width,{workflow:true,running:true});
@@ -134,7 +135,7 @@ try {
       await expect(page.locator('form[data-form=decision]')).toBeVisible();
       expect(await page.evaluate(id=>WorkpalStudio.currentDelivery(id).id,retry.task)).toBe(retained);
       await approveCurrent();
-      await page.reload();
+      await reloadWorkspace(page);
       expect(await page.evaluate(id=>WorkpalStudio.db.tasks.find(t=>t.id===id).status,retry.task)).toBe('done');
       expect(await page.evaluate(()=>document.documentElement.scrollWidth)).toBeLessThanOrEqual(width);
       expect(errors).toEqual([]);

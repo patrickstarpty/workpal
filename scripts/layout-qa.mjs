@@ -1,3 +1,4 @@
+import {gotoWorkspace,reloadWorkspace} from './qa-navigation.mjs';
 import {createRequire} from 'node:module';
 import {pathToFileURL} from 'node:url';
 import {resolve} from 'node:path';
@@ -80,7 +81,7 @@ try {
     page.on('pageerror',error=>errors.push(error.message));
     const label=viewport.width+'x'+viewport.height;
     try {
-      await page.goto(path+'#tasks');
+      await gotoWorkspace(page,path+'#tasks');
       await layout(page,'Board');
       await filters(page,label+' sparse');
       if(viewport.width===1440||viewport.height===844)
@@ -98,7 +99,7 @@ try {
         db.currentChat=null;
         WorkpalStudio.save();
       });
-      await page.reload();
+      await reloadWorkspace(page);
       await layout(page,'Board');
       await filters(page,label+' long');
       const lane=page.locator('.board-lane').first();
@@ -114,13 +115,13 @@ try {
 
       await page.locator('.board').evaluate(element=>element.scrollLeft=300);
       const scrollBefore=await geometry(page.locator('.board'));
-      await page.goto(path+'#agents');
+      await gotoWorkspace(page,path+'#agents');
       await expect(page.locator('.agent-table')).toBeVisible();
-      await page.goto(path+'#tasks');
+      await gotoWorkspace(page,path+'#tasks');
       close((await geometry(page.locator('.board'))).scrollLeft,scrollBefore.scrollLeft,label+' board restores horizontal position');
       close((await geometry(page.locator('.board-cards').first())).scrollTop,500,label+' column restores vertical position');
 
-      await page.goto(path+'#tasks?id=TAP-030');
+      await gotoWorkspace(page,path+'#tasks?id=TAP-030');
       await expect(page.locator('.detail-reading h1')).toBeVisible();
       if(viewport.width>=768){
         const properties=await geometry(page.locator('.detail-properties'));
@@ -130,7 +131,7 @@ try {
       expect(await page.locator('main').evaluate(el=>el.scrollWidth-el.clientWidth),label+' detail fits viewport').toBeLessThanOrEqual(1);
       if(viewport.width===1440||viewport.height===844)
         await page.screenshot({path:'test-results/layout-detail-'+label+'.png'});
-      await page.goto(path+'#tasks');
+      await gotoWorkspace(page,path+'#tasks');
 
       await layout(page,'List');
       const groups=page.locator('.issue-groups');
@@ -149,7 +150,7 @@ try {
       close((await geometry(page.locator('.space-panel'))).top,sidebarBefore.top,label+' sidebar stays fixed');
       close((await geometry(page.locator('main'))).scrollTop,0,label+' list scroll stays contained');
 
-      await page.goto(path+'#agents');
+      await gotoWorkspace(page,path+'#agents');
       const table=page.locator('.agent-table');
       const tableBefore=await geometry(table);
       expect(tableBefore.scrollHeight,label+' agent table owns scrolling').toBeGreaterThan(tableBefore.clientHeight);
@@ -158,11 +159,11 @@ try {
       close((await geometry(page.locator('.table-head'))).top,tableHeadBefore.top,label+' table header stays fixed');
       close((await geometry(page.locator('main'))).scrollTop,0,label+' table scroll stays contained');
 
-      await page.goto(path+'#overview');
+      await gotoWorkspace(page,path+'#overview');
       const overview=await geometry(page.locator('main'));
       expect(overview.scrollWidth,label+' long review titles fit overview').toBeLessThanOrEqual(overview.clientWidth+1);
 
-      await page.goto(path+'#chatroom');
+      await gotoWorkspace(page,path+'#chatroom');
       const thread=page.locator('.thread-scroll');
       const threadBefore=await geometry(thread);
       expect(threadBefore.scrollHeight,label+' conversation list owns scrolling').toBeGreaterThan(threadBefore.clientHeight);

@@ -105,27 +105,47 @@ dialog>#storage-conflict{position:static;transform:none;width:auto;margin:16px;b
 
 .operation-preview{font-size:12px;line-height:1.6;color:var(--muted-foreground);padding:10px 12px;border:1px solid var(--surface-border);border-radius:6px;background:var(--muted)}
 
-/* Warm: warm navigation, white working surfaces, and precise information hierarchy.
+/* Warm: FWD-inspired orange, apricot, and evergreen on white working surfaces.
    Keep all layout refinements scoped so Neutral retains its original presentation. */
 :root[data-theme=warm]{
-  --app-shell:#f7f6f3;--page-canvas:#fff;--surface:#fff;
+  --app-shell:#faf5ef;--page-canvas:#fff;--surface:#fff;
   --foreground:#25272a;--muted-foreground:#676b70;--faint-foreground:#767a80;
   --primary:#25272a;--primary-foreground:#fff;
-  --secondary:#f5f5f3;--surface-selected:#eeede9;--sidebar-accent:#eeede9;
-  --border:#eeefed;--surface-border:#e2e3df;--brand:#a66035;
+  --secondary:#fff5ec;--surface-selected:#ffe4cc;--sidebar-accent:#ffdfc3;
+  --border:#eee7df;--surface-border:#ded6ce;--brand:#a74f10;
+  --brand-orange:#e87722;--brand-ink:#183028;--brand-soft:#ffdfc3;
+  --nav-surface:#fff8f1;--dock-surface:#fff0e2;--nav-divider:#d9c9bb;
   --font-mono:ui-monospace,'SFMono-Regular',Menlo,Consolas,monospace;
   --sidebar-width:232px;
 }
 :root[data-theme=warm] svg.icon{stroke-width:1.7}
+:root[data-theme=warm] .app-dock{background:var(--dock-surface);border-right:1px solid var(--nav-divider)}
+:root[data-theme=warm] .space-panel{background:var(--nav-surface);border-right:1px solid var(--nav-divider)}
+:root[data-theme=warm] .space-heading{border-bottom:1px solid var(--nav-divider)}
+:root[data-theme=warm] .panel-scroll{padding-top:10px}
+:root[data-theme=warm] .rail-group+.rail-group{margin-top:14px;padding-top:12px;border-top:1px solid var(--nav-divider)}
 :root[data-theme=warm] .space-heading h2{font-size:14px;font-weight:600;letter-spacing:-.02em}
 :root[data-theme=warm] .rail-group-label small{font-size:11px;font-weight:500;letter-spacing:.01em}
 :root[data-theme=warm] .nav,
 :root[data-theme=warm] .rail-item{font-size:13px!important;border-radius:6px!important}
-:root[data-theme=warm] .nav.active{background:var(--surface)!important;box-shadow:0 0 0 1px var(--surface-border)}
+:root[data-theme=warm] .nav.active{background:var(--brand-soft)!important;color:var(--brand-ink);box-shadow:none}
+:root[data-theme=warm] .nav.active>svg,
+:root[data-theme=warm] .nav.active>small{color:var(--brand-ink)}
 :root[data-theme=warm] .dock-link{border-radius:8px}
-:root[data-theme=warm] .dock-link.current{background:#eeede9}
+:root[data-theme=warm] .dock-link.current{background:var(--brand-orange);color:var(--brand-ink)}
+:root[data-theme=warm] .dock-link.current:hover{background:#f08a38!important;color:var(--brand-ink)}
+:root[data-theme=warm] .workspace-tile{background:var(--brand-orange);border-color:var(--brand-orange);color:var(--brand-ink);box-shadow:none}
 :root[data-theme=warm] .top-title h1{letter-spacing:-.015em}
 :root[data-theme=warm] .btn{border-radius:6px}
+:root[data-theme=warm] .btn.primary{background:var(--brand-orange);border-color:var(--brand-orange);color:var(--brand-ink);font-weight:600}
+:root[data-theme=warm] .btn.primary:hover{background:#f08a38;border-color:#f08a38}
+:root[data-theme=warm] .top-title h1,
+:root[data-theme=warm] .heading h1,
+:root[data-theme=warm] .section-intro h2,
+:root[data-theme=warm] .shell[data-page=overview] .metrics b{color:var(--brand-ink)}
+:root[data-theme=warm] .chat-launcher .ask-button{background:var(--brand-ink);color:#fff;border-color:var(--brand-ink)}
+:root[data-theme=warm] .chat-launcher .ask-button svg{color:#ffa65e}
+:root[data-theme=warm] .chat-launcher .ask-button:hover{background:#24473b}
 :root[data-theme=warm] .panel,
 :root[data-theme=warm] .directory{box-shadow:none;border-radius:8px}
 :root[data-theme=warm] .issue-id{font-family:var(--font-mono);font-size:12px;letter-spacing:-.025em}
@@ -171,12 +191,17 @@ dialog>#storage-conflict{position:static;transform:none;width:auto;margin:16px;b
 :root[data-theme=warm] .appearance-setting select{border-radius:6px}
 
 @media(min-width:768px){
-  :root[data-theme=warm] .space-panel{background:var(--app-shell);border:0;border-radius:0;box-shadow:none}
-  :root[data-theme=warm] .main{border-radius:10px;box-shadow:0 0 0 1px var(--surface-border)}
+  :root[data-theme=warm] .space-panel{border:0;border-right:1px solid var(--nav-divider);border-radius:0;box-shadow:none}
+  :root[data-theme=warm] .main{border-radius:0 10px 10px 0;box-shadow:1px 0 0 var(--surface-border),0 -1px 0 var(--surface-border),0 1px 0 var(--surface-border)}
+  :root[data-theme=warm] .shell.nav-collapsed .main,
+  :root[data-theme=warm] .shell[data-page=chatroom] .main{border-radius:10px;box-shadow:0 0 0 1px var(--surface-border)}
+  :root[data-theme=warm] .shell[data-page=chatroom] .thread-list{border-right-color:var(--nav-divider)}
   :root[data-theme=warm] .shell[data-page=overview] main,
   :root[data-theme=warm] .shell[data-page=settings] main{padding:32px}
 }
 @media(max-width:767px){
+  :root[data-theme=warm] .shell.menu-open .rail{border-right-color:var(--nav-divider);background:var(--nav-surface)}
+  :root[data-theme=warm] .shell.menu-open .space-panel{border-right:0}
   :root[data-theme=warm] .issue-groups{padding:4px 4px 52px}
   :root[data-theme=warm] .issue-groups .issue.row{padding:0 8px}
   :root[data-theme=warm] .shell[data-page=overview] .section-intro h2{font-size:24px;line-height:32px}
@@ -190,3 +215,32 @@ dialog>#storage-conflict{position:static;transform:none;width:auto;margin:16px;b
 .appearance-setting p{margin-top:4px;font-size:12px;line-height:18px;color:var(--muted-foreground)}
 .appearance-setting select{width:144px;flex:none;font-size:13px}
 @media(max-width:540px){.appearance-setting{align-items:flex-start;flex-direction:column;gap:12px}.appearance-setting select{width:100%}}
+
+/* The brand mark has its own optical weight at the launcher's small size. */
+.chat-launcher .ask-button .icon.workpal-mark{width:16px;height:16px;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+
+/* Separate avatar actions keep row navigation and identity editing accessible. */
+.agent-row-entry{position:relative}
+.agent-row-entry>.agent-row .actor-name{padding-left:34px}
+.agent-row-entry>.agent-avatar-button{position:absolute;left:12px;top:50%;transform:translateY(-50%);width:28px;height:28px;display:grid;place-items:center}
+.agent-row-entry>.agent-avatar-button .avatar{width:24px;height:24px}
+.shell[data-page=agents][data-detail=true] .heading{gap:12px;flex-wrap:wrap}
+.agent-profile-avatar{display:inline-flex;align-items:center;gap:8px;min-height:32px;padding:6px 10px;border:1px solid var(--surface-border);border-radius:6px;background:var(--surface);font-size:13px}
+.agent-profile-avatar .avatar{width:24px;height:24px}
+@media(max-width:767px){.agent-row-entry>.agent-avatar-button{left:8px}}
+
+/* A single branded entry screen, following the centered Multica welcome layout. */
+.welcome-page{min-height:100dvh;display:flex;align-items:center;justify-content:center;padding:32px 24px;background:var(--app-shell);overflow:visible}
+.welcome-card{--welcome-radius:10px;width:100%;max-width:480px;padding:56px 40px 44px;border:1px solid var(--surface-border);border-radius:16px;background:var(--surface);text-align:center;box-shadow:0 8px 32px rgb(24 48 40/.035),0 1px 2px rgb(24 48 40/.04)}
+.welcome-brand{display:flex;align-items:center;justify-content:center;gap:18px}
+.welcome-brand-mark{display:grid;place-items:center;flex:none;width:64px;aspect-ratio:1;padding:6px;border-radius:var(--welcome-radius);background:var(--brand-orange,#e87722);color:var(--brand-ink,#183028);line-height:0}
+.welcome-masthead{display:block;width:100%;height:auto;fill:currentColor;stroke:none}
+.welcome-card h1{font-family:var(--font-sans);font-style:italic;font-synthesis:style;font-size:72px;line-height:76px;font-weight:600;letter-spacing:-.045em}
+.welcome-slogan{margin:24px auto 36px;font-size:15px;line-height:24px;color:var(--muted-foreground)}
+.welcome-page .btn.welcome-enter{width:220px;max-width:100%;height:48px;padding:0 20px;justify-content:center;gap:10px;border-radius:var(--welcome-radius);font-size:14px;line-height:20px;flex:none}
+.welcome-page .welcome-enter svg{width:20px;height:20px}
+.product-wordmark{font-family:var(--font-sans);font-style:italic;font-synthesis:style;font-weight:600;font-size:13px;letter-spacing:-.035em}
+:root[data-theme=warm] .welcome-brand-mark{color:var(--brand-ink)}
+:root[data-theme=warm] .welcome-card h1{color:var(--brand-ink)}
+@media(max-width:520px){.welcome-page{padding:24px 16px}.welcome-card{--welcome-radius:8px;padding:44px 20px 36px}.welcome-brand{gap:14px}.welcome-brand-mark{width:52px;padding:5px}.welcome-card h1{font-size:54px;line-height:60px}}
+@media(max-width:360px){.welcome-card{--welcome-radius:7px}.welcome-brand{gap:12px}.welcome-brand-mark{width:46px;padding:4px}.welcome-card h1{font-size:46px;line-height:52px}}

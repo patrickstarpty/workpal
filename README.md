@@ -1,8 +1,14 @@
 # Workpal
 
-Workpal. Work together.
+**Let’s work together.**
 
-Open **[dist/Workpal.html](dist/Workpal.html)** in a browser for the English TAP workspace. Send the single HTML file to an advisor for offline review. Open **Ask Workpal** outside the Chat page or press Cmd/Ctrl + J. The interface uses Inter, compact navigation and table layouts; the font is embedded in the offline export.
+Open **[dist/Workpal.html](dist/Workpal.html)** in a browser to start on the Workpal welcome screen, then select **Enter workspace**. Send the single HTML file to an advisor for offline review. Open **Ask Workpal** outside the Chat page or press Cmd/Ctrl + J. The interface uses Inter, compact navigation and table layouts; the font is embedded in the offline export.
+
+## Brand identity
+
+The brand slogan is **Let’s work together.** Preserve this exact capitalization and punctuation. The Workpal wordmark uses sans-serif Inter with italic styling, paired with a prominent **W.** mark in the bold serif tradition of newspaper mastheads. The mark uses fixed SVG outlines, so it stays consistent in the offline export without an additional font. Workspace controls and content retain upright Inter. The Inter font and its license are included in `assets/fonts/`.
+
+The welcome screen pairs the **W.** logo in an orange square with the italic Workpal wordmark, with **Let’s work together.** on the next line. Keep the orange square close to the wordmark’s visible height and scale both together on smaller screens. Keep the dot close to the W and the mark spacious inside its square. The **Enter workspace** control below combines a visible label with a right arrow. Its rectangular shape shares the logo’s corner radius; its accessible name comes from the visible label.
 
 ## Review a delivery and its rework
 

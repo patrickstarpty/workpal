@@ -50,6 +50,8 @@ globalThis.WorkpalIcons = Object.freeze({
   priority: 'M5 16v4 M12 11v9 M19 5v15',
   panelLeft: 'M5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2Z M9 3v18',
   sparkles: 'm12 3 2.4 6.6L21 12l-6.6 2.4L12 21l-2.4-6.6L3 12l6.6-2.4L12 3Z',
+  // Workpal monogram: a continuous W, echoing the application's favicon.
+  workpal: 'M3 5.5 7.5 18.5 12 10.5 16.5 18.5 21 5.5',
   history: 'M3 11a9 9 0 1 1 2.7 7 M3 4v7h7 M12 7v5l3 2',
 
   overview: "M4 3h5a1 1 0 0 1 1 1v7a1 1 0 0 1 -1 1h-5a1 1 0 0 1 -1 -1v-7a1 1 0 0 1 1 -1Z M15 3h5a1 1 0 0 1 1 1v3a1 1 0 0 1 -1 1h-5a1 1 0 0 1 -1 -1v-3a1 1 0 0 1 1 -1Z M15 12h5a1 1 0 0 1 1 1v7a1 1 0 0 1 -1 1h-5a1 1 0 0 1 -1 -1v-7a1 1 0 0 1 1 -1Z M4 16h5a1 1 0 0 1 1 1v3a1 1 0 0 1 -1 1h-5a1 1 0 0 1 -1 -1v-3a1 1 0 0 1 1 -1Z",
