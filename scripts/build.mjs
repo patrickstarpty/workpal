@@ -9,7 +9,7 @@ const css = '/* '+(await read('assets/fonts/LICENSE.txt'))+' */\n' + (await read
   .replace('../assets/fonts/inter-latin.woff2', 'data:font/woff2;base64,' + font.toString('base64'));
 html = html.replace('<link rel="stylesheet" href="src/studio.css" />', `<style>${css}</style>`);
 html = html.replace('<link rel="stylesheet" href="src/analytics.css" />', `<style>${await read('src/analytics.css')}</style>`);
-for (const file of ['brand', 'icons', 'data', 'workspace-fixtures', 'model', 'analytics-data', 'analytics', 'studio']) {
+for (const file of ['brand', 'icons', 'data', 'workspace-fixtures', 'code-delivery', 'model', 'analytics-data', 'analytics', 'environment-chat', 'integrations', 'settings', 'studio']) {
   const script = (await read(`src/${file}.js`)).replaceAll('</script', '<\\/script');
   html = html.replace(`<script src="src/${file}.js"></script>`, () => `<script>${script}</script>`);
 }

@@ -323,6 +323,7 @@ globalThis.WorkpalStudio = (() => {
   function transitionIssue(task,status,{handoff=true,refreshReview=false,queueRun=true,internal=false,manualReason='',owner,dispatch=false}={}){
     if(!Object.hasOwn(states,status))throw Error('Choose a valid issue status.');
     const previousStatus=task.status,previousOwner=task.owner;
+    if(status==='done'&&globalThis.WorkpalCode){const blocked=WorkpalCode.blocker(db,task,currentDelivery(task.id));if(blocked)throw Error(blocked);}
     if(!internal&&status==='done'&&previousStatus!=='done'&&!manualReason.trim())
       throw Error('Explain why this issue is being completed manually.');
     const step=workflowFor(task.project).steps.find(item=>item.status===status);
@@ -375,6 +376,7 @@ globalThis.WorkpalStudio = (() => {
     next.checks=next.checks.map(c=>c.trim()).filter(Boolean);
     const reason=String(manualReason||next.manualReason||next.completionReason||'').trim();
     if(next.status==='done'&&previousStatus!=='done'&&!reason)throw Error('Explain why this issue is being completed manually.');
+    if(next.status==='done'&&globalThis.WorkpalCode){const blocked=WorkpalCode.blocker(db,{...task,...next},task?currentDelivery(task.id):null);if(blocked)throw Error(blocked);}
     if(!task){
       task={id:nextIdForProject(next.project),stage:0,status:'backlog',owner:'Unassigned',activity:[],operationRevision:0};
       db.tasks.push(task);
@@ -507,7 +509,7 @@ globalThis.WorkpalStudio = (() => {
     const profile=db.agents.find(a=>a.name===agent);
     const project=db.projectSettings.find(p=>p.project===task.project);
     const squad=db.squads.find(item=>item.name===task.owner);
-    const context={project:task.project,description:project?.description||'',resources:clone(project?.resources||[]),
+    const context={...(globalThis.WorkpalCode?WorkpalCode.context(db,task.project,profile):{}),project:task.project,description:project?.description||'',resources:clone(project?.resources||[]),
       instructions:profile.instructions||'',skills:[...(profile.skills||[])],runtime:profile.runtimeId||'',harness:profile.runtime,model:profile.model||'Default'};
     if(squad)context.squad=clone({name:squad.name,leader:squad.leader,members:squad.members||[],roles:squad.roles||[],
       instructions:squad.instructions||'',description:squad.description||''});
@@ -652,7 +654,12 @@ globalThis.WorkpalStudio = (() => {
     if(choice==='approve'&&!options.acknowledged)throw Error('Confirm you inspected the artifacts and acceptance evidence before approval.');
     const task=db.tasks.find(t=>t.id===run.task);
     const step=workflowFor(task.project).steps.find(item=>item.status==='review');
-    const destination=choice==='approve'?(step?.next||'done'):(step?.rejected||'active');
+    let destination=choice==='approve'?(step?.next||'done'):(step?.rejected||'active');
+    if(choice==='approve'&&destination==='done'&&globalThis.WorkpalCode){
+      const mode=db.projectSettings.find(p=>p.project===task.project)?.deliveryRules?.completion;
+      const captured=delivery.inputSnapshot?.context?.deliveryRules?.completion;
+      if((mode&&mode!=='workflow')||(captured&&captured!=='workflow'))destination='review';
+    }
     if(!Object.hasOwn(states,destination))throw Error('Choose a valid review destination in the workflow.');
     task.operationRevision=(task.operationRevision||0)+1;
     delivery.review={decision:choice,note:reason,reviewer:'Patrick',at:Date.now(),destination};

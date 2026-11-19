@@ -4,10 +4,11 @@
   const workspace = () => WorkpalStudio.workspace;
   const {states,teams,stages,handoffs,save,count,next,start,decide,report}=WorkpalStudio;
   const esc=WorkpalData.escapeHtml;
+  const environmentChat=WorkpalEnvironmentChat;
   const $=selector=>document.querySelector(selector);
   const themeKey='workpal.theme';
-  let theme='warm';
-  try{theme=localStorage.getItem(themeKey)==='neutral'?'neutral':'warm';}catch{}
+  let theme='neutral';
+  try{theme=localStorage.getItem(themeKey)==='warm'?'warm':'neutral';}catch{}
   function applyTheme(value){
     theme=value==='neutral'?'neutral':'warm';
     document.documentElement.dataset.theme=theme;
@@ -33,7 +34,7 @@
   const opt=(value,label,selected)=>`<option value="${esc(value)}" ${value===selected?'selected':''}>${esc(label)}</option>`;
   const options=(obj,selected)=>Object.entries(obj).map(([k,v])=>opt(k,v,selected)).join('');
   const field=(label,control)=>`<label>${label}${control}</label>`;
-  const select=(name,obj,value)=>`<select name="${name}">${options(obj,value)}</select>`;
+  const select=(name,obj,value,label)=>`<select name="${name}" ${label?'aria-label="'+esc(label)+'"':''}>${options(obj,value)}</select>`;
   const strings=a=>Object.fromEntries(a.map(x=>[x,x]));
   const input=(name,value='',required=true)=>`<input name="${name}" value="${esc(value)}" maxlength="180" ${required?'required':''}>`;
   const box=(title,body,after='')=>`<section class="panel"><header><h2>${title}</h2>${after}</header>${body}</section>`;
@@ -234,7 +235,7 @@
     return (chat?'<h3>'+esc(id)+' · '+esc(t.title)+'</h3>':'')+`<div class="detail-grid issue-detail-grid"><div class="detail-main"><div class="detail-reading">${dedicated?'<div class="heading"><h1>'+esc(t.title)+'</h1></div>':''}${box('Description','<p class="preserve">'+esc(t.description||'No description.')+'</p>'+
         (t.checks.length?'<h4>Acceptance criteria</h4><ul>'+t.checks.map(c=>'<li>'+esc(c)+'</li>').join('')+'</ul>':''),tool('Edit issue','editIssue',id))}
       ${t.completion?box('Completion record','<p><strong>'+(t.completion.kind==='manual'?'Completed manually':'Delivery accepted')+'</strong> · '+date(t.completion.at)+'</p><p class="preserve">'+esc(t.completion.reason||'Acceptance decision recorded.')+'</p><small>This is a historical decision; the current issue status is '+esc(states[t.status])+'.</small>'):''}
-      ${box('Deliveries',deliveryHistory(id),latest?tool('Open current delivery','run',latest.run):'')}
+      ${codeDelivery(t)}${box('Deliveries',deliveryHistory(id),latest?tool('Open current delivery','run',latest.run):'')}
       ${box('Sub-issues'+(children.length?' · '+children.filter(c=>c.status==='done').length+'/'+children.length:''),issueList(children),tool('Add sub-issue','childIssue',id))}
       ${box('Activity',t.activity.map(e=>'<div class="entry"><small>'+esc(e.author)+' · '+date(e.at)+'</small><p>'+esc(e.text)+'</p>'+(e.kind==='comment'?'<details '+(e.resolved?'':'open')+'><summary>'+((e.replies||[]).length)+' replies'+(e.resolved?' · Resolved':'')+'</summary>'+(e.replies||[]).map(r=>'<p class="thread-reply"><small>'+esc(r.author)+'</small> '+esc(r.text)+'</p>').join('')+actionList([tool('Reply','threadReply',id+'|'+e.id),btn(e.resolved?'Reopen':'Resolve','resolveThread',id+'|'+e.id)])+'</details>':'')+'</div>').join(''),btn(t.subscribed?'Unsubscribe':'Subscribe','subscribe',id))}
       </div><div class="issue-comment"><form data-form="comment" data-id="${esc(id)}" class="issue-composer"><textarea name="text" aria-label="Add a comment" rows="2" required placeholder="Leave a comment…"></textarea><button type="submit" class="send" aria-label="Post comment" title="Post comment">${icon('arrow')}</button></form></div></div><div class="detail-properties">${box('Properties','<dl class="properties">'+Object.entries({Status:states[t.status],Assignee:t.owner,Priority:t.priority,Project:t.project||'No project',Team:teams[t.team],'Due date':t.due||'No date',Labels:(t.tags||[]).join(', ')||'None'}).map(([k,v])=>{
@@ -257,7 +258,7 @@
     const project=projectConfig(t.project),s=db.skills.find(s=>s.id===(skillId||a.skills[0])),existing=openRun(t.id,a.name,'execution'),prior=WorkpalStudio.currentDelivery(t.id);
     return '<h3>Delegation context</h3>'+ (existing?'<p class="review-warning">'+esc(existing.id)+' is already open. Reopening keeps its original input snapshot. Cancel or finish it to change inputs.</p>':'')+(prior?.review?'<div class="decision-receipt"><strong>Previous decision · Delivery v'+prior.version+'</strong><p>'+esc(prior.review.note||prior.review.decision)+'</p></div>':'')+propertyList({Goal:t.title,Agent:a.name,Project:t.project||'No project',Skill:s?s.name+' · '+(s.version||'unversioned'):'None',Runtime:'Offline',Instructions:a.instructions||a.role||'None'})+
       '<p class="preserve">'+esc(project.description||'No project context recorded.')+'</p><h4>Acceptance criteria</h4>'+(t.checks.length?'<ul>'+t.checks.map(c=>'<li>'+esc(c)+'</li>').join('')+'</ul>':empty('Add acceptance criteria before a delivery can be approved.'))+
-      '<small>The issue, agent, project and selected skill are captured when this attempt is created. Retry uses the current settings shown here.</small>';
+      codeContext(WorkpalCode.context(db,t.project,a))+'<small>The issue, agent, project and selected skill are captured when this attempt is created. Retry uses the current settings shown here.</small>';
   }
   function launch(arg){
     const [selected,followUp]=arg.split('~'), task=db.tasks.find(t=>t.id===selected)||db.tasks[0];
@@ -306,7 +307,7 @@
       if(!unavailable)actions=form('decision',`<input type="hidden" name="stage" value="${r.stage}">`+
         '<p>Review delivery v'+d.version+'. Approval moves this issue to <strong>'+esc(states[step?.next||'done'])+'</strong>. Requesting changes moves it to '+esc(states[step?.rejected||'active'])+'.</p>'+
         (approval?'<p class="review-warning">'+esc(approval)+'</p>':'')+
-        field('Decision',select('choice',approval?{return:'Request changes'}:{approve:'Approve → '+states[step?.next||'done'],return:'Request changes'},approval?'return':'approve'))+
+        field('Decision',select('choice',approval?{return:'Request changes'}:{approve:'Approve delivery',return:'Request changes'},approval?'return':'approve'))+
         field('Review note','<textarea name="note" '+(approval?'required':'')+' placeholder="Explain the decision or the changes needed."></textarea>')+
         '<label class="assign-option review-ack" '+(approval?'hidden':'')+'><input type="checkbox" name="acknowledged" '+(approval?'':'required')+'> I reviewed the artifacts, each criterion and the limitations for v'+d.version+'.</label>','Record decision',id);
       else actions='<p class="review-warning">'+esc(unavailable)+'</p>'+ (WorkpalStudio.currentDelivery(t.id)?.id!==d.id&&WorkpalStudio.currentDelivery(t.id)?tool('Open current delivery','run',WorkpalStudio.currentDelivery(t.id).run):'')+form('selectDelivery','<p>Choosing this version makes it the current delivery and moves the issue to In review. Other results and decisions stay in the history.</p>'+field('Selection reason','<textarea name="reason" required></textarea>'),'Select for review',d.id);
@@ -333,10 +334,39 @@
     return '<details class="display-dropdown"><summary class="icon-only" role="button" aria-haspopup="menu" aria-label="Display" title="Display">'+icon(layout==='board'?'board':'list')+'</summary><div class="display-menu"><div class="layout-options">'+['board','list'].map(value=>btn(icon(value)+'<span>'+value[0].toUpperCase()+value.slice(1)+'</span>','setLayout',value,(layout===value?'selected':'')+'" aria-label="'+(value==='board'?'Board view':'List view'))).join('')+'</div><div class="display-setting"><span>Grouping</span><span>Status</span></div><h3>Columns</h3><div class="display-chips">'+Object.entries(states).map(([key,label])=>btn('<span class="issue-mark '+key+'"></span>'+label,'toggleColumn',key,prefs.hidden.includes(key)?'':'selected')).join('')+'</div><h3>Card properties</h3><div class="display-chips">'+Object.entries({priority:'Priority',assignee:'Assignee',due:'Due date',project:'Project',labels:'Labels',children:'Sub-issue progress'}).map(([key,label])=>btn(label,'toggleCardProperty',key,prefs.properties.includes(key)?'selected':'')).join('')+'</div></div></details>';
   }
   const projectConfig=name=>db.projectSettings.find(p=>p.project===name)||{project:name,lead:'Patrick',description:'',reviewer:'',due:''};
+  const completionModes={workflow:'Follow workflow',merged:'Approved delivery + merged PRs',acceptance:'Approved delivery + merged PRs + manual acceptance'};
+  function codeContext(value){
+    return '<h4>Code context</h4>'+propertyList({Machine:value.machine?.name||'Not connected','Working directory':value.machine?.directory||'Not configured','PR target':value.deliveryRules?.target||'Not configured','Branch naming':value.deliveryRules?.branch||'Not configured','Required checks':value.deliveryRules?.checks||'Not configured',Completion:completionModes[value.deliveryRules?.completion||'workflow']})+
+      '<ul>'+ (value.resources||[]).map(r=>'<li>'+esc(r.name)+' · '+esc(r.kind==='repository'?r.url+' · Starting ref: '+r.startingRef:r.path+' · '+((value.resourceMachines||[]).find(m=>m.id===r.runtimeId)?.name||r.runtimeId)+' · '+r.mode)+'</li>').join('')+'</ul>'+
+      '<small>Access and tools: '+esc(value.machine?['readAccess','pushAccess','prAccess','gitTool','devTools'].map(k=>k+': '+(value.machine[k]||'Not checked')).join(' · '):'Not checked')+'. '+esc(value.deliveryRules?.merge||'Human merge required.')+'</small>';
+  }
+  function resourceEditor(project){
+    const p=projectConfig(project),r=(p.resources||[]).find(r=>r.id===resourceEditId)||{};
+    return form('resourceEditor',field('Resource',select('resourceId',{'':'Add resource',...Object.fromEntries((p.resources||[]).map(r=>[r.id,r.name]))},r.id||''))+
+      field('Type',select('kind',{repository:'Repository',folder:'Local folder'},r.kind||'repository'))+field('Name',input('name',r.name||''))+
+      '<fieldset><legend>Repository</legend>'+field('Workspace repository',select('workspaceRepository',{'':'Enter a URL',...Object.fromEntries(WorkpalIntegrations.repositories(db).map(repo=>[repo.id,repo.url]))},''))+field('Repository URL',input('url',r.url||'',false))+field('Starting ref',input('startingRef',r.startingRef||'main',false))+'</fieldset>'+
+      '<fieldset><legend>Local folder</legend>'+field('Owning machine',select('runtimeId',{'':'Choose runtime',...Object.fromEntries((db.runtimes||[]).map(m=>[m.id,m.name]))},r.runtimeId||''))+field('Folder path',input('path',r.path||'',false))+field('Mode',select('mode',{'in-place':'In place',worktree:'Worktree'},r.mode||'worktree'))+'</fieldset>'+
+      '<label><input type="checkbox" name="remove"> Remove selected resource</label><p>Only fields for the selected type are saved. Folder paths belong to the selected machine.</p>','Save resource',project);
+  }
+  let resourceEditId='';
+  function deliveryRulesEditor(project){const r=projectConfig(project).deliveryRules||{};
+    return form('deliveryRules',field('PR target branch',input('target',r.target||'main'))+field('Branch naming',input('branch',r.branch||'workpal/{issue}-{slug}'))+field('Required checks','<textarea name="checks">'+esc(r.checks||'')+'</textarea>')+field('Merge agreement','<textarea name="merge">'+esc(r.merge||'A human reviews and merges the pull request.')+'</textarea>')+field('Completion rule',select('completion',completionModes,r.completion||'workflow')),'Save delivery rules',project);
+  }
+  function codeSettings(){const c=db.codeSettings||{};return box('Code',propertyList({Provider:'GitHub',Connection:'Not connected','Status source':'Manual PR records','Automatic association':c.association==='issue'?'Match issue keys when connected':'Off','After merge':c.afterMerge==='complete'?'Complete eligible issues':'Keep issue status'})+tool('Configure Code','codeSettings'));
+  }
+  function codeSettingsEditor(){const c=db.codeSettings||{};return form('codeSettings','<p>GitHub status reading is not connected. These preferences apply when records are entered here; no Git operations are performed. Credentials stay on the execution machine.</p>'+field('Status reading preference',select('reading',{off:'Off',requested:'Read PR, checks and reviews when connected'},c.reading||'off'))+field('Automatic association preference',select('association',{off:'Off',issue:'Match issue keys when connected'},c.association||'off'))+field('After recording a merge',select('afterMerge',{keep:'Keep issue status',complete:'Complete eligible issues'},c.afterMerge||'keep'))+'<p>This setting never merges a PR. Manual acceptance rules always require a separate completion decision.</p>','Save Code settings');}
+  function codeDelivery(t){if(db.codeSettings?.prSidebar===false)return box('Code delivery',tool('Record completion','codeComplete',t.id));const prs=(db.pullRequests||[]).filter(p=>p.task===t.id),delivery=WorkpalStudio.currentDelivery(t.id),blocked=WorkpalCode.blocker(db,t,delivery);
+    return box('Code delivery',propertyList({'Delivery approval':delivery?.review?.decision==='approve'?'Approved':'Not approved','PR merge':prs.length?prs.filter(p=>p.state==='merged').length+' / '+prs.length+' recorded merged':'No linked PRs','Issue status':states[t.status]})+prs.map(p=>'<div class="row"><span class="grow"><strong>'+esc(p.repository+' · '+p.source+' → '+p.target)+'</strong><small>'+esc(p.run+' · '+p.sha+' · '+p.state+' · CI: '+p.ci+' · Review: '+p.review+' · Conflicts: '+p.conflicts)+'</small><small>Manual record · '+date(p.updatedAt)+'</small><span class="preserve">'+esc(p.url)+'</span></span>'+tool('Update','pullRequest',t.id+'~'+p.id)+'</div>').join('')+(blocked?'<p>'+esc(blocked)+'</p>':'')+tool('Record completion','codeComplete',t.id),tool('Link PR','pullRequest',t.id));
+  }
+  function pullRequestEditor(arg){const [id,prId]=arg.split('~'),p=(db.pullRequests||[]).find(p=>p.id===prId)||{},runs=db.runs.filter(r=>r.task===id&&(r.kind||'execution')==='execution');
+    if(!runs.length)return empty('Start a run before linking its code delivery.')+tool('Start run','launch',id);
+    return form('pullRequest','<p>Record observed GitHub facts manually. Saving does not create or merge a PR or verify access.</p>'+field('PR URL',input('url',p.url||''))+field('Delivery run',select('run',Object.fromEntries(runs.map(r=>[r.id,r.id])),p.run||runs[0].id))+field('Source branch',input('source',p.source||''))+field('Target branch',input('target',p.target||projectConfig(db.tasks.find(t=>t.id===id).project).deliveryRules?.target||'main'))+field('Commit SHA',input('sha',p.sha||''))+field('PR state',select('state',strings(['open','closed','merged']),p.state||'open'))+field('CI',select('ci',strings(['unknown','pending','passed','failed']),p.ci||'unknown'))+field('Review',select('review',strings(['unknown','requested','approved','changes-requested']),p.review||'unknown'))+field('Conflicts',select('conflicts',strings(['unknown','clear','conflicting']),p.conflicts||'unknown')),'Save PR record',id);
+  }
   function projectPage(name){
     if(!db.projects.includes(name))return empty('Project not found.');
     const p=projectConfig(name),items=db.tasks.filter(t=>t.project===name);
     return `<div class="detail-grid"><div>${box('Description','<p class="preserve">'+esc(p.description||'Add context for issues and agent runs.')+'</p>',tool('Edit project','projectConfig',name))}
+      ${box('Resources',codeContext(WorkpalCode.context(db,name,null)),tool('Manage resources','resourceEditor',name))}${box('Delivery rules',propertyList({Completion:completionModes[p.deliveryRules?.completion||'workflow'],'PR target':p.deliveryRules?.target||'Not configured'}),tool('Edit delivery rules','deliveryRules',name))}
       ${box('Project issues',issueList(items),tool('＋ New issue','projectIssue',name))}</div><div>${box('Properties',propertyList({Lead:p.lead,'Due date':p.due||'No date',Workflow:WorkpalStudio.workflowFor(name).name,Progress:items.filter(t=>t.status==='done').length+' / '+items.length}))}</div></div>`;
   }
   function propertyList(values){return '<dl class="properties">'+Object.entries(values).map(([k,v])=>'<dt>'+esc(k)+'</dt><dd>'+esc(v)+'</dd>').join('')+'</dl>';}
@@ -414,7 +444,7 @@
   function runtimeEditor(id){
     const r=db.runtimes.find(r=>r.id===id);
     return form('runtimeEditor',field('Device name',input('name',r?.name))+field('Platform',select('platform',strings(['macOS','Linux','Windows']),r?.platform))+
-      field('Working directory',input('directory',r?.directory||'',false)),'Save runtime',id);
+      field('Working directory',input('directory',r?.directory||'',false))+'<fieldset><legend>Access & tools</legend><p>Manually recorded for this runtime. Credentials stay on this machine.</p>'+Object.entries({readAccess:'Repository read',pushAccess:'Repository push',prAccess:'PR operations',gitTool:'Git tool',devTools:'Development tools'}).map(([key,label])=>field(label,select(key,strings(['Not checked','Reported ready','Reported unavailable']),r?.[key]||'Not checked'))).join('')+field('Scope and evidence','<textarea name="accessNotes">'+esc(r?.accessNotes||'')+'</textarea>')+'</fieldset>','Save runtime',id);
   }
   function runtimeFields(a){
     return field('Runtime',select('runtimeId',{'':'Not connected',...Object.fromEntries(db.runtimes.map(r=>[r.id,r.name+' · Offline']))},a?.runtimeId||''))+
@@ -518,12 +548,15 @@
     }
     if(changed)write();
   }
-  const pages={runtimes:runtimesPage,workflows:workflowsPage,auto:autopilots,squads,views:savedViews,chatroom:chatPage,overview,tasks,projects,workflow:()=>box('Run history',runList(db.runs),tool('＋ Launch workflow','launch','','primary')),stats:()=>WorkpalAnalytics.page(),skills:skillsView,agents:agentsView,inbox:inboxView,mine:()=>box('Assigned to Patrick',issueList(db.tasks.filter(t=>t.owner==='Patrick'))),reports:reportList,settings:()=>appearance()+box('Workspace settings','<dl class="properties"><dt>Workspace</dt><dd>'+esc(workspace().name)+'</dd><dt>Owner</dt><dd>Patrick</dd><dt>Language</dt><dd>English</dd><dt>Storage</dt><dd>This browser</dd></dl>'+actionList([tool('Workflows','workflows'),tool('Workspace notes','notes')]))};
+  const settingsView=WorkpalSettings.create({getDB:()=>db,esc,icon,btn,tool,form,field,input,select,scoped,appearance,codeSettings});
+  const pages={runtimes:runtimesPage,workflows:workflowsPage,auto:autopilots,squads,views:savedViews,chatroom:chatPage,overview,tasks,projects,workflow:()=>box('Run history',runList(db.runs),tool('＋ Launch workflow','launch','','primary')),stats:()=>WorkpalAnalytics.page(),skills:skillsView,agents:agentsView,inbox:inboxView,mine:()=>box('Assigned to Patrick',issueList(db.tasks.filter(t=>t.owner==='Patrick'))),reports:reportList,settings:()=>settingsView.page(route().params.get('tab'))};
   // A surface descriptor selects a trusted renderer. Tools never supply executable HTML.
-  const labels={...routes,avatarEditor:'Change avatar',statusIssue:'New issue',issueProperty:'Issue property',runtimeEditor:'Runtime settings',quickEditor:'New quick action',wakeupEditor:'Create wakeup',workflowEditor:'Configure workflow',conversationSettings:'Conversation settings',assignIssue:'Assign work',chatHelp:'Choose an action',chatHistory:'Chat history',threadReply:'Reply to comment',agentConfig:'Agent settings',projectConfig:'Project settings',saveView:'Save issue view',squad:'Squad',squadEditor:'Squad settings',autopilot:'Autopilot',autoEditor:'Autopilot settings',recipients:'New chat',workspaces:'Switch workspace',newWorkspace:'Create workspace',issue:'Issue',move:'Move issue',editIssue:'Edit issue',projectIssue:'Create project issue',childIssue:'Create sub-issue',launch:'Launch a workflow',run:'Run inspector',project:'Project issues',agent:'Agent profile',skill:'Skill detail',notes:'Review notes',document:'Report snapshot',summary:'Generate summary',execution:'Execution report',newAgent:'Configure agent',newProject:'Create project',suggest:'Recommend a skill',directory:'Workspace actions',panel:'Live data panel',search:'Search workspace',reviews:'Review queue'};
+  const labels={...routes,repositoryEditor:'Repository',repositoryRemove:'Delete repository',appCatalog:'Connect app',integrationSetup:'Account setup',integrationRemove:'Remove setup',environmentSetup:'Environment chat',resourceEditor:'Project resources',deliveryRules:'Delivery rules',codeSettings:'Code settings',pullRequest:'Pull request record',codeComplete:'Complete code issue',avatarEditor:'Change avatar',statusIssue:'New issue',issueProperty:'Issue property',runtimeEditor:'Runtime settings',quickEditor:'New quick action',wakeupEditor:'Create wakeup',workflowEditor:'Configure workflow',conversationSettings:'Conversation settings',assignIssue:'Assign work',chatHelp:'Choose an action',chatHistory:'Chat history',threadReply:'Reply to comment',agentConfig:'Agent settings',projectConfig:'Project settings',saveView:'Save issue view',squad:'Squad',squadEditor:'Squad settings',autopilot:'Autopilot',autoEditor:'Autopilot settings',recipients:'New chat',workspaces:'Switch workspace',newWorkspace:'Create workspace',issue:'Issue',move:'Move issue',editIssue:'Edit issue',projectIssue:'Create project issue',childIssue:'Create sub-issue',launch:'Launch a workflow',run:'Run inspector',project:'Project issues',agent:'Agent profile',skill:'Skill detail',notes:'Review notes',document:'Report snapshot',summary:'Generate summary',execution:'Execution report',newAgent:'Configure agent',newProject:'Create project',suggest:'Recommend a skill',directory:'Workspace actions',panel:'Live data panel',search:'Search workspace',reviews:'Review queue'};
 
   function catalog(){return '<div class="catalog">'+Object.entries({...routes,workspaces:'Switch workspace',newWorkspace:'Create workspace',issue:'Create an issue',launch:'Launch a workflow',summary:'Workspace summary',execution:'Execution report',newAgent:'Configure agent',newProject:'Create project',suggest:'Recommend a skill',notes:'Review feedback',panel:'Build a live panel',search:'Search'}).map(([type,label])=>tool(label,type)).join('')+'</div>';}
   function surface(type,arg='',standalone=false){
+    if(['repositoryEditor','repositoryRemove','appCatalog','integrationSetup','integrationRemove'].includes(type))return settingsView.editor(type,arg);
+    if(type==='environmentSetup')return environmentEditor(arg);
     if(type==='stats')return stats();
     if(type==='chatroom')return conversationList()+btn('New chat','chooseAgent');
     if(type==='overview'&&(chat||route().page==='chatroom'))return box('Workspace overview',`<p><b>${db.projects.length}</b> projects · <b>${db.tasks.length}</b> issues · <b>${db.runs.length}</b> runs</p>`+actionList([tool('Review queue','reviews'),tool('Team workload','stats'),tool('Runs','workflow')]));
@@ -532,10 +565,10 @@
       case 'chatHistory':return conversationList()+'<a class="btn" href="#'+scoped('chatroom')+'">All chats</a>';
       case 'conversationSettings':{
         const c=currentConversation();
-        return form('conversationSettings',field('Title',input('title',c.title))+field('Project context',select('project',{'':'No project context',...strings(db.projects)},c.project)),'Save conversation')+
+        return form('conversationSettings',field('Title',input('title',c.title))+(c.environment?'<p>'+esc(c.project)+' · '+esc(c.environment)+' · '+esc(c.agent)+'</p><small>Start a new environment chat to change this context.</small>':field('Project context',select('project',{'':'No project context',...strings(db.projects)},c.project))),'Save conversation')+
           actionList([btn(c.pinned?'Unpin':'Pin','pinChat'),btn(c.archived?'Unarchive':'Archive','archiveChat')]);
       }
-      case 'recipients':return db.agents.map(a=>btn(esc(a.name),'startThread',a.name,'thread-row')).join('')||empty('Add an agent to start a conversation.')+tool('Configure agent','newAgent');
+      case 'recipients':return '<div class="environment-picker"><h3>Environment support</h3><p>Investigate an issue with the right project and agent.</p>'+environmentChoices()+'</div><h3>All agents</h3>'+(db.agents.map(a=>btn(esc(a.name),'startThread',a.name,'thread-row')).join('')||empty('Add an agent to start a conversation.')+tool('Configure agent','newAgent'));
       case 'workspaces':return WorkpalStudio.listWorkspaces().map(w=>
         '<button type="button" class="row space-choice" data-act="switchSpace" data-id="'+esc(w.id)+'"><span class="tile">'+esc(Array.from(w.name)[0])+'</span><strong class="grow">'+esc(w.name)+'</strong>'+(w.id===workspace().id?'<small>Current</small>':'')+'</button>'
       ).join('')+tool('＋ Create workspace','newWorkspace','','primary');
@@ -562,6 +595,11 @@
       case 'project':return projectPage(arg);
       case 'runtimeEditor':return runtimeEditor(arg);
       case 'workflowEditor':return workflowEditor(arg);
+      case 'resourceEditor':return resourceEditor(arg);
+      case 'deliveryRules':return deliveryRulesEditor(arg);
+      case 'codeSettings':return codeSettingsEditor();
+      case 'pullRequest':return pullRequestEditor(arg);
+      case 'codeComplete':return form('codeComplete',field('Acceptance note','<textarea name="note" required></textarea>')+'<p>This records issue completion separately from delivery approval and PR merge.</p>','Record completion',arg);
       case 'projectConfig':return projectEditor(arg);
       case 'squad':return squadPage(arg);
       case 'squadEditor':return squadEditor(arg);
@@ -691,8 +729,26 @@
       <details><summary>Surface schema</summary><pre>${esc(JSON.stringify(message.resource.contents,null,2))}</pre></details></details>`;
   }
   let draftAgent='',draftText='',archivedChats=false;
+  function environmentChoices(){
+    return '<div class="environment-choices">'+environmentChat.profiles.map(p=>tool('<strong>'+esc(p.id)+'</strong><span>'+esc(p.label)+'</span>','environmentSetup',p.id)).join('')+'</div>';
+  }
+  function environmentEditor(id){
+    if(!db.projects.length||!db.agents.length)return empty('Add a project and an agent before starting an environment chat.')+tool('Create project','newProject')+tool('Configure agent','newAgent');
+    const c=currentConversation(),context=c||db.chatDraft||{},env=environmentChat.profile(id||context.environment)||environmentChat.profiles[0];
+    const assigned=env.id===context.environment?context.agent:environmentChat.agent(db,env.id)?.name;
+    return form('environmentSetup',field('Environment',select('environment',Object.fromEntries(environmentChat.profiles.map(p=>[p.id,p.id+' · '+p.label])),env.id,'Environment'))+
+      field('Project',select('project',strings(db.projects),context.project||db.projects[0],'Project'))+
+      field('Agent',select('agent',{'':'Choose an agent',...strings(agentNames())},assigned||'','Agent'))+
+      '<p class="environment-role">'+esc(env.role)+'</p><small>'+(c?'Starts a new conversation. This thread and its draft stay saved.':'Include the affected service, time, release and relevant log excerpts in your message.')+'</small>','Start conversation');
+  }
+  function environmentContext(c,env){
+    if(!env)return '';
+    const context=c||db.chatDraft,linked=c?.issueId&&db.tasks.find(t=>t.id===c.issueId);
+    return '<div class="environment-context"><div><span class="environment-tag">'+esc(env.id)+'</span><strong>'+esc(context.project)+'</strong><span>'+esc(env.label)+'</span></div>'+
+      (c?.messages.length?(linked?tool(esc(linked.id),'issue',linked.id,'quiet'):btn('Create issue','environmentIssue',c.id,'quiet')):'')+'</div>';
+  }
   function prepareConversations(){
-    if(db.conversations)return;
+    if(db.conversations){if(environmentChat.initialize(db,workspace().id))write();return;}
     db.conversations=[];
     if(db.messages?.length){
       const first=db.messages.find(m=>m.role==='user');
@@ -700,12 +756,13 @@
       db.conversations.push(c);db.currentChat=c.id;
     }
     db.messages=[];
+    environmentChat.initialize(db,workspace().id);
     write();
   }
   function currentConversation(create=false){
     let c=db.conversations.find(item=>item.id===db.currentChat);
     if(!c&&create){
-      c={id:crypto.randomUUID(),agent:draftAgent||db.agents[0]?.name||'',project:db.chatDraft?.project||'',title:'New chat',messages:[],draft:draftText};
+      c={id:crypto.randomUUID(),agent:draftAgent||db.agents[0]?.name||'',project:db.chatDraft?.project||'',environment:db.chatDraft?.environment||'',title:'New chat',messages:[],draft:draftText};
       db.chatDraft=null;
       db.conversations.unshift(c);db.currentChat=c.id;
     }
@@ -721,23 +778,24 @@
   }
   function conversationList(){
     const chats=db.conversations.filter(c=>!!c.archived===archivedChats).slice().sort((a,b)=>Number(!!b.pinned)-Number(!!a.pinned));
-    return chats.map(c=>{const last=c.messages.at(-1);return `<button class="thread-row ${c.id===db.currentChat?'selected':''}" aria-label="${esc(c.title+' · '+(c.agent||'Workpal'))}" data-act="openThread" data-id="${esc(c.id)}">${avatar(c.agent||'Workpal')}<span class="thread-copy"><strong>${c.pinned?'☆ ':''}${esc(c.title)}</strong><small>${esc(last?.text||c.agent||'New conversation')}</small></span>${last?.at?'<time>'+new Date(last.at).toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'})+'</time>':''}</button>`;}).join('')||empty('No conversations yet.');
+    return chats.map(c=>{const last=c.messages.at(-1);return `<button class="thread-row ${c.id===db.currentChat?'selected':''}" aria-label="${esc(c.title+' · '+(c.agent||'Workpal'))}" data-act="openThread" data-id="${esc(c.id)}">${avatar(c.agent||'Workpal')}<span class="thread-copy"><strong>${c.pinned?'☆ ':''}${esc(c.title)}</strong>${c.environment?'<span class="thread-environment">'+esc(c.environment)+' · '+esc(c.project)+'</span>':''}<small>${esc(last?.text||c.agent||'New conversation')}</small></span>${last?.at?'<time>'+new Date(last.at).toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'})+'</time>':''}</button>`;}).join('')||empty('No conversations yet.');
   }
   function chatPage(){
-    return `<div class="chat-page ${(currentConversation()||draftAgent)?'has-conversation':''}"><section class="thread-list"><header><div class="thread-title">${btn(icon('menu'),'menu','','mobile-only icon-only" aria-label="Workspace menu')}<h1>Chat</h1></div>${btn(icon('plus'),'chooseAgent','','icon-only" aria-label="New chat')}</header><div class="thread-scroll">${btn(archivedChats?'Show active':'Archived','archiveFilter','','quiet')}${conversationList()}</div></section><section id="chat-pane">${!currentConversation()&&!draftAgent?'<div class="chat-empty">'+icon('chatroom')+'<p>Select a conversation or start a new chat</p>'+btn('New chat','chooseAgent','','quiet')+'</div>':''}</section></div>`;
+    return `<div class="chat-page ${(currentConversation()||draftAgent)?'has-conversation':''}"><section class="thread-list"><header><div class="thread-title">${btn(icon('menu'),'menu','','mobile-only icon-only" aria-label="Workspace menu')}<h1>Chat</h1></div>${btn(icon('plus'),'chooseAgent','','icon-only" aria-label="New chat')}</header><div class="thread-scroll">${btn(archivedChats?'Show active':'Archived','archiveFilter','','quiet')}${conversationList()}</div></section><section id="chat-pane">${!currentConversation()&&!draftAgent?'<div class="chat-empty">'+icon('chatroom')+'<h2>What needs investigating?</h2><p>Open a conversation or choose an environment.</p>'+environmentChoices()+btn('New chat','chooseAgent','','quiet')+'</div>':''}</section></div>`;
   }
   function assistant(full=false){
     const c=currentConversation(), name=c?.agent||draftAgent||db.agents[0]?.name||'';
     const messages=(c?.messages||[]).filter(m=>!m.surface||Object.hasOwn(labels,m.surface.type));
-    const title=c?.title||'New chat',agent=db.agents.find(a=>a.name===name);
-    const suggestions=agent?.starters?.length?agent.starters.slice(0,3):['Summarize workspace progress','Show issues awaiting review','Create an issue'];
-    const starters=!messages.length&&name?'<div class="chat-welcome">'+avatar(name)+'<h2>Chat with '+esc(name)+'</h2><p>'+esc(agent?.role||'')+'</p><div class="starters">'+suggestions.map(t=>btn(esc(t),'starter',t)).join('')+'</div></div>':'';
+    const title=c?.title||'New chat',agent=db.agents.find(a=>a.name===name),env=environmentChat.profile(c?c.environment:db.chatDraft?.environment);
+    const suggestions=env?env.starters:agent?.starters?.length?agent.starters.slice(0,3):['Summarize workspace progress','Show issues awaiting review','Create an issue'];
+    const starters=!messages.length&&name?'<div class="chat-welcome">'+avatar(name)+'<h2>Chat with '+esc(name)+'</h2><p>'+esc(env?.role||agent?.role||'')+'</p><div class="starters">'+suggestions.map(t=>btn(esc(t),'starter',t)).join('')+'</div></div>':'';
 
-    const agentButton=btn((name?avatar(name):'')+esc(name||'Choose agent')+icon('chevronDown'),'chooseAgent','','quiet');
+    const agentButton=env?tool(esc(env.id)+icon('chevronDown'),'environmentSetup',env.id,'quiet'):btn((name?avatar(name):'')+esc(name||'Choose agent')+icon('chevronDown'),'chooseAgent','','quiet');
     return `<aside id="assistant" class="${full?'full-chat':'float-chat'}" aria-label="Chat">
       <header>${full?btn(icon('back'),'chatBack','','mobile-only icon-only" aria-label="Back to conversations'): ''}<strong title="${esc(title)}">${esc(title)}</strong><div>${c?btn(icon('more'),'chatSettings',c.id,'icon-only" aria-label="Conversation settings'):''}${btn(icon('plus'),'chooseAgent','','icon-only" aria-label="New chat with an agent')}${full?'':btn(icon('expand'),'expandChat','','icon-only" aria-label="Open in Chat')}${btn(icon('close'),'closeChat','','icon-only" aria-label="Close chat')}</div></header>
-      ${messages.length?'<div class="messages">'+messages.map((m,i)=>m.role==='user'?`<div class="user-turn"><p class="bubble">${esc(m.text)}</p>${m.queued?'<small>Queued · runtime offline</small>'+btn('Cancel','cancelChatRun',m.run,'quiet'):''}</div>`:`<section class="reply"><small>${esc(name||'Workspace')}</small>${m.text?'<p>'+esc(m.text)+'</p>':''}${m.surface?`<details class="resource" ${i===messages.length-1?'open':''}><summary>${icon('layers')}${esc(labels[m.surface.type]||'Workspace action')}</summary>${i===messages.length-1?'<div class="resource-body">'+surface(m.surface.type,m.surface.arg)+traceView(m)+'</div>':btn('Reopen card','surface',m.surface.type+'|'+m.surface.arg)}</details>`:''}</section>`).join('')+'</div>':''}
-      ${starters}<div class="composer">${name?'<small class="runtime-state">'+esc(name)+' · Runtime offline</small>':''}${(c?.project||db.chatDraft?.project)?'<small class="context-label">Project · '+esc(c?.project||db.chatDraft.project)+'</small>':''}<form data-form="prompt"><textarea name="prompt" aria-label="Message" placeholder="Message ${esc(name||'workspace')}…" rows="2" required>${esc(draftText)}</textarea><div class="compose-actions">${btn(icon('plus'),'surface','directory|','icon-only" aria-label="Workspace actions')}${agentButton}<button type="submit" class="send" aria-label="Send message" ${name?'':'disabled'}>${icon('send')}</button></div></form></div></aside>`;
+      ${environmentContext(c,env)}
+      ${messages.length?'<div class="messages">'+messages.map((m,i)=>m.role==='user'?`<div class="user-turn"><p class="bubble">${esc(m.text)}</p>${m.queued?'<small role="status">Queued · runtime offline</small>'+btn('Cancel','cancelChatRun',m.run,'quiet'):db.runs.find(r=>r.id===m.run)?.status==='cancelled'?'<small>Cancelled</small>':''}</div>`:`<section class="reply"><small>${esc(m.agent||name||'Workspace')}</small>${m.text?'<p class="message-text">'+esc(m.text)+'</p>':''}${m.surface?`<details class="resource" ${i===messages.length-1?'open':''}><summary>${icon('layers')}${esc(labels[m.surface.type]||'Workspace action')}</summary>${i===messages.length-1?'<div class="resource-body">'+surface(m.surface.type,m.surface.arg)+traceView(m)+'</div>':btn('Reopen card','surface',m.surface.type+'|'+m.surface.arg)}</details>`:''}</section>`).join('')+'</div>':''}
+      ${starters}<div class="composer">${name?'<small class="runtime-state">'+esc(name)+' · Runtime offline</small>':''}${!env&&(c?.project||db.chatDraft?.project)?'<small class="context-label">Project · '+esc(c?.project||db.chatDraft.project)+'</small>':''}<form data-form="prompt"><textarea name="prompt" aria-label="Message" placeholder="Message ${esc(name||'workspace')}…" rows="2" required>${esc(draftText)}</textarea><div class="compose-actions">${btn(icon('plus'),'surface','directory|','icon-only" aria-label="Workspace actions')}${agentButton}<button type="submit" class="send" aria-label="Send message" ${name?'':'disabled'}>${icon('send')}</button></div></form></div></aside>`;
   }
   function paintChat(scroll=true){
     if($('#assistant'))captureDrafts($('#assistant'));
@@ -752,8 +810,8 @@
       else m.scrollTop=m.scrollHeight;
     }
   }
-  function newThread(name){
-    dismiss();db.currentChat=null;draftAgent=name;draftText='';db.chatDraft={agent:name,text:'',project:''};write();
+  function newThread(name,context={}){
+    dismiss();db.currentChat=null;draftAgent=name;draftText=context.text||'';db.chatDraft={agent:name,text:draftText,project:context.project||'',environment:context.environment||''};write();
     chat=route().page!=='chatroom';render();$('#assistant textarea[name="prompt"]')?.focus();
   }
   const detailPages={autopilot:'auto',squad:'squads',issue:'tasks',project:'projects',skill:'skills',run:'workflow',agent:'agents',document:'reports'};
@@ -778,10 +836,10 @@
     {name:'Auto',page:'auto',icon:'auto',pages:['auto']}
   ];
   function navigation(page){
-    const space=spaces.find(s=>s.pages.includes(page))||spaces[0];
+    const space=page==='settings'?{name:'Settings'}:spaces.find(s=>s.pages.includes(page))||spaces[0];
     const dock=spaces.map(s=>`<a class="dock-link ${space===s?'current':''}" href="#${scoped(s.page)}" title="${s.name}">${icon(s.icon)}<span>${s.name}</span></a>`).join('');
     function section(label,body){return '<section class="rail-group"><div class="rail-group-label"><small>'+label+'</small>'+icon('chevronDown')+'</div>'+body+'</section>';}
-    let panel='';
+    let panel=page==='settings'?settingsView.navigation(route().params.get('tab')):'';
     if(space.name==='Work')panel=section('Inbox',nav('inbox'))+section('Views',['tasks','mine','views'].map(nav).join('')+db.views.slice(0,3).map(v=>btn(icon('layers')+'<span>'+esc(v.name)+'</span>','applyView',v.id,'rail-item')).join(''))+
       section('Projects',nav('projects')+db.projects.slice(0,6).map(p=>tool(icon('projects')+'<span>'+esc(p)+'</span><small>'+db.tasks.filter(t=>t.project===p).length+'</small>','project',p,'rail-item')).join(''))+section('Workspace',['overview','reports'].map(nav).join(''));
     if(space.name==='Team')panel=section('Team',nav('agents')+nav('squads'))+section('Resources',nav('skills')+nav('runtimes')+nav('stats')+nav('workflow')+nav('workflows'));
@@ -844,10 +902,19 @@
     const type=f.dataset.form, id=f.dataset.id, inside=!!f.closest('#assistant');
     if([...f.querySelectorAll('[required]')].some(c=>!c.value.trim()))throw Error('Complete the required fields.');
     if(type==='newWorkspace'){const space=WorkpalStudio.createWorkspace(data.name);openSpace(space);toast('Workspace created.');return;}
+    if(type==='environmentSetup'){
+      if(!environmentChat.profile(data.environment)||!db.projects.includes(data.project)||!db.agents.some(a=>a.name===data.agent))throw Error('Choose an environment, project and agent.');
+      newThread(data.agent,{environment:data.environment,project:data.project,text:currentConversation()?'':draftText});return;
+    }
     if(type==='prompt'){
       const recipient=currentConversation()?.agent||draftAgent||db.agents[0]?.name;
       if(!db.agents.some(a=>a.name===recipient))throw Error('Choose an agent before sending.');
-      const c=currentConversation(true),answer=parse(data.prompt);
+      const c=currentConversation(true);
+      if(c.environment){
+        environmentChat.queue(db,c,data.prompt);
+        draftText='';c.draft='';write();render();$('#assistant textarea[name="prompt"]')?.focus();return;
+      }
+      const answer=parse(data.prompt);
       const run={id:next('RUN',db.runs),kind:'chat',conversation:c.id,task:null,agent:recipient,title:data.prompt.slice(0,80),
         status:answer?'finished':'queued',stage:0,artifacts:[],context:c.project?{...projectConfig(c.project)}:null,
         events:[{type:answer?'workspace.action':'run.queued',text:data.prompt,at:Date.now()}]};
@@ -856,6 +923,13 @@
       c.messages.push({role:'user',text:data.prompt,at:Date.now(),queued:!answer,run:run.id});
       if(answer)emitTurn(answer);
       draftText='';c.draft='';write();render();return;
+    }
+    const settingsResult=settingsView.submit(type,id,data);
+    if(settingsResult){
+      write();dismiss();
+      const target='#'+scoped('settings?tab='+settingsResult.tab);
+      if(location.hash===target)render();else location.hash=target;
+      requestAnimationFrame(()=>$('#main')?.focus());toast(settingsResult.message);return;
     }
     const done=(kind,key,message)=>{write();clearFormDraft(f);return output(kind,key,message,inside);};
     if(type==='selectDelivery'){const d=WorkpalStudio.selectDelivery(id,data.reason);return done('run',d.run,'Current delivery selected.');}
@@ -913,6 +987,16 @@
     if(type==='panel')return done('panel',panelConfig(data.team+':'+data.group).key,'Live panel updated.');
     if(type==='summary'||type==='execution'){const rec=report(type,data.team,data.run);return done('document',rec.id,'Report saved.');}
     if(type==='saveView'){db.views.push({id:next('VIEW',db.views),name:data.name,status:issueStatus,owner:issueOwner,query:taskFilter,layout});return done('views','','View saved.');}
+    if(type==='resourceEditor'){if(!db.projectSettings.some(p=>p.project===id))db.projectSettings.push(projectConfig(id));WorkpalCode.saveResource(db,id,data);resourceEditId='';return done('project',id,'Resource saved.');}
+    if(type==='deliveryRules'){let p=db.projectSettings.find(p=>p.project===id);if(!p){p=projectConfig(id);db.projectSettings.push(p);}p.deliveryRules=data;return done('project',id,'Delivery rules saved.');}
+    if(type==='codeSettings'){WorkpalIntegrations.savePreferences(db,data);return done('settings','','Code preferences saved.');}
+    if(type==='codeComplete'){const t=db.tasks.find(t=>t.id===id);WorkpalStudio.transitionIssue(t,'done',{manualReason:data.note,handoff:false});return done('issue',id,'Completion recorded.');}
+    if(type==='pullRequest'){
+      const pr=WorkpalCode.savePR(db,id,data),t=db.tasks.find(t=>t.id===id),d=WorkpalStudio.currentDelivery(id);
+      const currentMode=projectConfig(t.project).deliveryRules?.completion,capturedMode=d?.inputSnapshot?.context?.deliveryRules?.completion;
+      if(pr.state==='merged'&&db.codeSettings?.afterMerge==='complete'&&currentMode==='merged'&&capturedMode!=='acceptance'&&!WorkpalCode.blocker(db,t,d))WorkpalStudio.transitionIssue(t,'done',{manualReason:'Merged PRs recorded; completion policy applied.',handoff:false});
+      WorkpalStudio.log(t,'PR record updated · '+pr.url+' · '+pr.state+' · '+pr.sha);return done('issue',id,'PR facts recorded.');
+    }
     if(type==='runtimeEditor'){
       const r={id:id||next('RUNTIME',db.runtimes),...data};db.runtimes=db.runtimes.filter(item=>item.id!==r.id);db.runtimes.push(r);return done('runtimes','','Runtime settings saved.');
     }
@@ -922,8 +1006,8 @@
       db.workflows=db.workflows.filter(item=>item.id!==w.id);db.workflows.push(w);return done('workflows','','Workflow saved.');
     }
     if(type==='projectConfig'){
-      db.projectSettings=db.projectSettings.filter(p=>p.project!==id);
-      db.projectSettings.push({project:id,...data});return done('project',id,'Project updated.');
+      const previous=projectConfig(id);db.projectSettings=db.projectSettings.filter(p=>p.project!==id);
+      db.projectSettings.push({...previous,project:id,...data});return done('project',id,'Project updated.');
     }
     if(type==='squadEditor'){
       const name=data.name;
@@ -960,7 +1044,7 @@
   document.addEventListener('submit',ev=>{ev.preventDefault();try{submit(ev.target);}catch(err){showSaveError(err);}});
   document.addEventListener('click',async ev=>{
     try{
-    document.querySelectorAll('.display-dropdown[open],.column-options[open]').forEach(menu=>{if(!menu.contains(ev.target))menu.open=false;});
+    document.querySelectorAll('.display-dropdown[open],.column-options[open],.repository-add-menu[open],.repository-actions[open]').forEach(menu=>{if(!menu.contains(ev.target))menu.open=false;});
     if(ev.target.closest('.skip-link')){ev.preventDefault();$('#main').focus();return;}
     const mobileLink=ev.target.closest('.rail a');
     if(mobileMenu&&mobileLink){ev.preventDefault();mobileMenu=false;if(location.hash===mobileLink.hash)render();else location.hash=mobileLink.hash;return;}
@@ -1007,6 +1091,11 @@
         break;
       }
       case 'chatSettings':show('conversationSettings',id,false);break;
+      case 'environmentIssue':{
+        const c=db.conversations.find(item=>item.id===id);
+        const task=environmentChat.createIssue(WorkpalStudio,c);
+        write();render();show('issue',task.id,false);toast('Conversation linked to '+task.id+'.');break;
+      }
       case 'chooseAgent':show('recipients','',false);break;
       case 'startThread':newThread(id);break;
       case 'openThread':dismiss();db.currentChat=id;loadDraft();chat=route().page!=='chatroom';write();render();break;
@@ -1014,7 +1103,7 @@
       case 'starter':{const field=$('#assistant textarea[name="prompt"]');field.value=id;persistDraft(id);field.focus();break;}
       case 'chat':mobileMenu=false;newThread(db.agents[0]?.name||'');break;
       case 'closeChat':chat=false;if(route().page==='chatroom'){db.currentChat=null;draftAgent='';write();render();}else paintChat();$('.chat-launcher [data-act=chat]')?.focus();break;
-      case 'surface':{const cut=id.indexOf('|');show(id.slice(0,cut),id.slice(cut+1),inside);break;}
+      case 'surface':{const cut=id.indexOf('|'),type=id.slice(0,cut);show(type,id.slice(cut+1),type==='environmentSetup'?false:inside);break;}
       case 'dismiss':dismiss();break;
       case 'skillTab':directoryTab=id;refresh();break;
       case 'detach':{const [skill,name]=JSON.parse(id);const a=db.agents.find(a=>a.name===name);a.skills=a.skills.filter(s=>s!==skill);write();refresh();break;}
@@ -1048,13 +1137,22 @@
     show('move',t.id+'|'+lane.dataset.dropState,!!lane.closest('#assistant'));
   });
   document.addEventListener('input',ev=>{
-    const el=ev.target;persistFormDraft(el.form);if(el.name==='prompt')persistDraft(el.value);if(el.name==='text')quickSuggestions(el);if(!el.dataset.filter)return;
+    const el=ev.target;
+    if(el.name==='appSearch'){const row=el.closest('.modal-body').querySelector('.app-catalog-row');row.hidden=!row.dataset.appName.includes(el.value.trim().toLowerCase());el.closest('.modal-body').querySelector('.app-catalog-empty').hidden=!row.hidden;return;}
+    persistFormDraft(el.form);if(el.name==='prompt')persistDraft(el.value);if(el.name==='text')quickSuggestions(el);if(!el.dataset.filter)return;
     const parent=el.closest('.resource-body,.modal-body,#page-content');const pos=el.selectionStart;
     if(el.dataset.filter==='task'){taskFilter=el.value;parent.innerHTML=tasks();}else{skillFilter=el.value;parent.innerHTML=skillsView();}
     const replacement=parent.querySelector('[data-filter]');replacement.focus();replacement.setSelectionRange(pos,pos);
   });
   document.addEventListener('change',ev=>{
+    if(ev.target.name==='workspaceRepository'&&ev.target.form?.dataset.form==='resourceEditor'){const r=WorkpalIntegrations.repositories(db).find(r=>r.id===ev.target.value);if(r){const f=ev.target.form;f.elements.url.value=r.url;f.elements.kind.value='repository';if(!f.elements.name.value)f.elements.name.value=r.url.split(/[/:]/).at(-1).replace(/\.git$/,'');}return;}
+    if(ev.target.name==='resourceId'&&ev.target.form?.dataset.form==='resourceEditor'){resourceEditId=ev.target.value;show('resourceEditor',ev.target.form.dataset.id,false);return;}
     const el=ev.target;persistFormDraft(el.form);
+    if(el.form?.dataset.form==='environmentSetup'&&el.name==='environment'){
+      const env=environmentChat.profile(el.value);
+      el.form.elements.agent.value=environmentChat.agent(db,el.value)?.name||'';
+      el.form.querySelector('.environment-role').textContent=env?.role||'';return;
+    }
     if(el.name==='workspaceTheme'){
       applyTheme(el.value);
       try{localStorage.setItem(themeKey,theme);}catch{toast('Theme applied. Browser storage is unavailable.');}
@@ -1092,7 +1190,7 @@
   });
   document.addEventListener('keydown',ev=>{
     if(isWelcome())return;
-    if(ev.key==='Escape'){const menu=document.querySelector('.display-dropdown[open],.column-options[open]');if(menu){ev.preventDefault();menu.open=false;menu.querySelector('summary').focus();return;}}
+    if(ev.key==='Escape'&&!$('#dialog').open){const menu=document.querySelector('.display-dropdown[open],.column-options[open],.repository-add-menu[open],.repository-actions[open]');if(menu){ev.preventDefault();menu.open=false;menu.querySelector('summary').focus();return;}}
     if(ev.key==='Escape'&&mobileMenu&&!$('#dialog').open){ev.preventDefault();mobileMenu=false;render();$('.mobile-only[data-act=menu]')?.focus();return;}
     const quickMenu=ev.target.closest('form')?.querySelector('.comment-suggestions');
     if(quickMenu&&['ArrowDown','ArrowUp','Enter','Escape'].includes(ev.key)&&!ev.isComposing){

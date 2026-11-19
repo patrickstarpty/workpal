@@ -86,8 +86,8 @@ try {
   await page.getByRole('button',{name:'Save response'}).click();
   await gotoWorkspace(page,issueUrl);
   await expect(page.locator('main')).toContainText('Offline requests should be retained until reconnect.');
-  await expect(page.locator('.properties')).toContainText('Architecture partner');
-  await expect(page.locator('.properties')).toContainText('To do');
+  await expect(page.locator('.detail-properties .properties')).toContainText('Architecture partner');
+  await expect(page.locator('.detail-properties .properties')).toContainText('To do');
   await gotoWorkspace(page,path+'#tasks');
   await page.getByRole('button',{name:'Display',exact:true}).click();
   await page.getByRole('button',{name:'Board view',exact:true}).click();
@@ -95,7 +95,7 @@ try {
   await row.dragTo(page.locator('[data-drop-state=backlog]'));
   await expect(editor.locator('[name=status]')).toHaveValue('backlog');
   await editor.getByRole('button',{name:'Save changes'}).click();
-  await expect(page.locator('.properties')).toContainText('Backlog');
+  await expect(page.locator('.detail-properties .properties')).toContainText('Backlog');
   await gotoWorkspace(page,path+'#overview');
   await page.screenshot({path:'test-results/studio-desktop.png'});
   await page.locator('.chat-launcher [data-act=chat]').click();

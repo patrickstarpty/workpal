@@ -28,11 +28,27 @@ The behavior consistency update adds explicit current/candidate deliveries, one 
 
 Chat report requests now open confirmation forms. Autopilot templates capture acceptance criteria before queuing; schedule checks only occur while that workspace is selected and the page is open. Missed triggers are not replayed. Skill publishing/reuse, real execution and production scheduling remain outside this update. See [behavior consistency implementation notes](docs/behavior-consistency-implementation.md).
 
+## Investigate an environment in Chat
+
+Open **Chat** in TAP to review three authored six-turn conversations: DEV request-contract mismatch, UAT duplicate uploads after retry, and PRD search timeouts after deployment. These are fictional review scenarios requested for the prototype, not connected logs, actual Agent responses or verified incidents. The data retains `fixtureSource: "environment-chat-v1"`; no measured usage, runs or resolved issues are generated from the preset histories. Existing conversations, drafts and review notes are preserved, and custom workspaces do not receive these examples.
+
+**New chat → Environment support** selects a project, environment and agent. DEV defaults to Architecture partner, UAT to Quality partner and PRD to Engineering partner; any existing agent can be selected explicitly. Each environment thread keeps its context; choosing another environment starts a separate thread. New messages are saved as offline queued requests with captured history and project/agent settings, with a Cancel action. No live analysis is performed.
+
+**Create issue** saves a linked Backlog issue with the conversation history and environment, without starting another run. Reopening the thread shows the existing issue link. Its context is a snapshot at handoff; later chat messages do not rewrite it. Fixture provenance remains in record metadata, rather than labels in the interface.
+
 ## Agent application design
 
 The local dispatcher understands supported intents and identifiers. A form supplies missing parameters, and the action catalog gives direct access to every workspace area. Chat and pages call the same model and rendering functions. Live dashboard cards query current records; documents capture the data at generation time.
 
 The browser dispatches local workpal:agent-event events for run and tool-call lifecycle transitions. Tool results describe a named component and arguments inside a local ui://workpal resource. Allowlisted components render editable forms, team statistics, workflow handoffs and reports. Inspect **Tool events → Surface schema** on a response card. These are offline design adaptations of [AG-UI events](https://docs.ag-ui.com/concepts/events), [A2UI surfaces](https://a2ui.org/) and [MCP-UI resources](https://mcpui.dev/). Network transports, a live model, remote MCP servers and code execution are future integrations.
+
+## Workspace connections
+
+Settings follows the local Multica implementation: **Code** contains Code hosting, Repositories, and Pull requests & issues; **Connected apps** contains Team accounts and My accounts. Jira uses the app catalog account flow, not a custom Jira URL/token/project-mapping form. The repository catalog supports HTTPS/SSH URLs, optional descriptions, editing, confirmed removal, and deduplication across clone protocols. Project resources can select a saved workspace repository; deleting a catalog entry preserves existing project resources and delivery history.
+
+Jira and GitHub account setups are local records with **Authorization required / Not connected** status. Hosted OAuth, GitHub App installation, fetching authorized repositories, Jira access, PR webhooks, and credential storage are not implemented in this offline artifact. No remote authorization is attempted, no tokens are collected, and saved setup does not imply a connection. The Pull Request sidebar preference affects issue display; code preferences are captured with run context. Automatic PR linking and commit attribution still need a real runtime/backend. Existing manual merge/completion rules remain in force.
+
+Reference source: `../multica/packages/views/settings/components/{code-tab,repositories-section,apps-settings,add-app-dialog}.tsx` and the Jira entry in `../multica/server/internal/connectedapps/catalog.go`.
 
 ## Local development
 
@@ -44,13 +60,17 @@ Node.js 22 or newer. No dependencies required to use or build the prototype.
 
 - npm run dev serves the source entry on 127.0.0.1:4173.
 - npm run check checks syntax, runs tests and builds the offline artifact.
+- node scripts/integrations-qa.mjs checks repository CRUD, Jira/GitHub setup states, persistence, isolation, keyboard access, escaping and offline behavior at desktop/narrow widths.
 - node scripts/qa.mjs exercises the exported file with Playwright. Set WORKPAL_PLAYWRIGHT to a local @playwright/test installation if needed.
 - node scripts/delivery-qa.mjs checks offline delivery → missing evidence → return → v2 → approval, historical reports, text safety, local notes and export at desktop and narrow widths.
 - node scripts/squads-qa.mjs checks compact delegation and shared emoji avatars at desktop/narrow widths.
 - node scripts/lifecycle-qa.mjs checks workflow dispatch, manual completion and parallel/late delivery selection.
 - node scripts/drafts-qa.mjs checks drafts, two-tab notes, conflict export/recovery and workspace isolation.
+- node scripts/environment-chat-qa.mjs checks the preset histories, routing, offline queue/cancel, text safety, draft persistence and issue handoff at desktop/narrow widths.
 - node scripts/consistency-qa.mjs checks Chat, saved layouts, Inbox, review notes and Autopilot acceptance templates.
 - node scripts/layout-qa.mjs checks sparse and long issue boards at five viewport sizes, including bottom-aligned horizontal scrolling, independent column scrolling, restored scroll positions, sticky headers, detail panes and mobile Chat.
 - node scripts/analytics-qa.mjs checks analytics filters, tabs, chart controls, rankings, team drilldown, workspace isolation and responsive layouts.
 
 The updated source consists of src/model.js, src/studio.js and src/studio.css. The old review entry retains its original scripts and styles.
+
+Environment Chat validation: `npm run check` passes, as do `environment-chat-qa.mjs` at 1440px and 390px and `consistency-qa.mjs`. The floating chat path also preserves typed text when choosing an environment and expanding into full Chat. The older all-in-one `qa.mjs` is not fully passing: after scoping its issue-property assertions to the properties sidebar, its Quality dashboard assertion still expects issue content that the current Analytics surface does not render.
