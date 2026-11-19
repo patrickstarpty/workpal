@@ -29,10 +29,10 @@ globalThis.WorkpalData = (() => {
     { id: 'skill-creator', name: 'Skill Creator', subtitle: '把有效经验，留给下一位伙伴', author: 'Anthropic', repo: 'anthropics/skills', category: '知识与协作', stage: 5, icon: 'book', color: 'orange', featured: false, tags: ['知识复用', 'Skill 编写'], description: '将重复使用的工作方法整理成清晰的 Skill，并通过实际任务持续改进。', use: '团队形成了可复用方法，需要编写或迭代 Skill 时。', outcome: '说明清晰、边界明确的 Skill 及其验证案例。', source: 'https://github.com/anthropics/skills/tree/main/skills/skill-creator' },
   ];
   const agents = [
-    { name: '产品伙伴', english: 'Product partner', initials: 'P', color: 'orange', role: '需求分析与知识沉淀', runtime: 'Claude Code', status: '待命', skills: ['brainstorming', 'skill-creator'], description: '帮助团队澄清需求、补充验收标准，并把经验整理成下一次可以复用的方法。', boundary: '可以起草需求与复盘；需求定稿和 Skill 发布必须由人确认。' },
-    { name: '架构伙伴', english: 'Architecture partner', initials: 'A', color: 'purple', role: '方案设计与技术评审', runtime: 'Codex', status: '等待确认', skills: ['writing-plans', 'verification-before-completion'], description: '理解项目约束、比较设计取舍，并为复杂需求建立可追溯的实施计划。', boundary: '可以分析架构和建议方案；关键技术决策由技术负责人批准。' },
-    { name: '开发伙伴', english: 'Engineering partner', initials: 'E', color: 'blue', role: '代码实现与单元测试', runtime: 'Codex', status: '演示运行中', skills: ['test-driven-development', 'frontend-design'], description: '围绕已确认的任务编写代码和测试，保留实现过程与验证结果。', boundary: '在任务分支内修改；不自行合并主分支、发布或访问未授权数据。' },
-    { name: '质量伙伴', english: 'Quality partner', initials: 'Q', color: 'green', role: '测试验证与质量检查', runtime: 'Claude Code', status: '等待确认', skills: ['webapp-testing', 'web-design-guidelines'], description: '验证关键路径、审阅变更风险，并把问题与证据交给负责的人。', boundary: '可以运行检查并生成意见；不能代替人批准自己参与的交付。' },
+    { name: '产品伙伴', english: 'Product partner', initials: 'P', color: 'orange', role: '需求分析与知识沉淀', runtime: 'Copilot CLI', status: '待命', skills: ['brainstorming', 'skill-creator'], description: '帮助团队澄清需求、补充验收标准，并把经验整理成下一次可以复用的方法。', boundary: '可以起草需求与复盘；需求定稿和 Skill 发布必须由人确认。' },
+    { name: '架构伙伴', english: 'Architecture partner', initials: 'A', color: 'purple', role: '方案设计与技术评审', runtime: 'Copilot CLI', status: '等待确认', skills: ['writing-plans', 'verification-before-completion'], description: '理解项目约束、比较设计取舍，并为复杂需求建立可追溯的实施计划。', boundary: '可以分析架构和建议方案；关键技术决策由技术负责人批准。' },
+    { name: '开发伙伴', english: 'Engineering partner', initials: 'E', color: 'blue', role: '代码实现与单元测试', runtime: 'Copilot CLI', status: '演示运行中', skills: ['test-driven-development', 'frontend-design'], description: '围绕已确认的任务编写代码和测试，保留实现过程与验证结果。', boundary: '在任务分支内修改；不自行合并主分支、发布或访问未授权数据。' },
+    { name: '质量伙伴', english: 'Quality partner', initials: 'Q', color: 'green', role: '测试验证与质量检查', runtime: 'Copilot CLI', status: '等待确认', skills: ['webapp-testing', 'web-design-guidelines'], description: '验证关键路径、审阅变更风险，并把问题与证据交给负责的人。', boundary: '可以运行检查并生成意见；不能代替人批准自己参与的交付。' },
   ];
   const statusLabels = { todo: '待规划', active: '进行中', review: '待评审', done: '已完成' };
   const teams = [

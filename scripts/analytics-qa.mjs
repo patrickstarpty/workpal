@@ -81,6 +81,10 @@ try{
     page.on('pageerror',error=>errors.push(error.message));
     try{
       await gotoWorkspace(page,artifact+'#stats');
+      // Exercise usage/error controls with the dedicated historical test fixture,
+      // independently of the evolving linked workspace scenarios.
+      await page.evaluate(()=>{delete WorkpalStudio.db.analyticsHistory;WorkpalAnalyticsData.ensure(WorkpalStudio.db,'tap');WorkpalStudio.save();});
+      await reloadWorkspace(page);
       await expect(page.getByRole('heading',{name:'Analytics',exact:true})).toBeVisible();
       await headline(page);
       await screenshot(page,'usage',viewport);
@@ -119,14 +123,10 @@ try{
       await expect(page.getByRole('tooltip')).not.toBeVisible();
 
       await choose(page,'Project','TAP');
-      await choose(page,'Team','quality');
       await headline(page);
-      await expect(page.getByRole('region',{name:'Agent leaderboard',exact:true}).locator('tbody tr')).toHaveCount(1);
-      await expect(page.getByRole('region',{name:'Agent leaderboard',exact:true})).toContainText('Quality partner');
       await tab(page,'Errors');
       await headline(page);
       await choose(page,'Project','');
-      await choose(page,'Team','');
       await headline(page);
       await screenshot(page,'errors',viewport);
       await page.getByRole('button',{name:'Show error codes',exact:true}).click();
@@ -146,23 +146,6 @@ try{
       await tab(page,'Errors');
       await pressed(page,'Chart interval','Weekly');
 
-      await tab(page,'Teams');
-      await headline(page);
-      await screenshot(page,'teams',viewport);
-      await page.getByRole('region',{name:'Workload by team',exact:true}).getByRole('button',{name:'Quality',exact:true}).click();
-      await expect(page.getByRole('combobox',{name:'Team',exact:true})).toHaveValue('quality');
-      await expect(page.getByRole('heading',{name:'Quality issues',exact:true})).toBeVisible();
-      await headline(page);
-      await page.getByRole('button',{name:/View usage/}).click();
-      await expect(page.getByRole('tab',{name:'Usage',exact:true})).toHaveAttribute('aria-selected','true');
-      await expect(page.getByRole('combobox',{name:'Team',exact:true})).toHaveValue('quality');
-      await headline(page);
-      await tab(page,'Teams');
-      const issue=page.locator('.analytics-team-issues [data-id^="issue|"]').first();
-      const issueId=(await issue.getAttribute('data-id')).split('|')[1];
-      await issue.click();
-      await expect(page.locator('.shell')).toHaveAttribute('data-detail','true');
-      expect(new URLSearchParams((await page.evaluate(()=>location.hash)).split('?')[1]).get('id')).toBe(issueId);
       await gotoWorkspace(page,artifact+'#stats');
       await switchWorkspace(page,'TAP','Symphony');
       await expect(page.getByRole('heading',{name:'No usage yet',exact:true})).toBeVisible();
@@ -170,9 +153,6 @@ try{
       await tab(page,'Errors');
       await headline(page);
       await expect(page.getByRole('heading',{name:'No failed runs in this window',exact:true})).toBeVisible();
-      await tab(page,'Teams');
-      await headline(page);
-      await expect(page.locator('.analytics-value')).toHaveText(['0','0','0','0']);
       await switchWorkspace(page,'Symphony','TAP');
       await headline(page);
       await expect(page.getByRole('heading',{name:'Leaderboard',exact:true})).toBeVisible();

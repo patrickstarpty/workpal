@@ -19,13 +19,13 @@
   }
   function welcomeContent(destination){
     return `<main id="main" class="welcome-page" tabindex="-1"><section class="welcome-card" aria-labelledby="welcome-title">
-      <div class="welcome-brand"><span class="welcome-brand-mark" aria-hidden="true"><svg class="welcome-masthead" viewBox="0 0 102 70" focusable="false"><path transform="translate(0 67)" d="M99.12-66.21V-64.4Q97.27-64.26 96-63.38Q94.73-62.5 93.75-60.69Q93.46-60.11 90.67-53.12L69.92 1.51H68.02L51.61-41.16L33.54 1.51H31.74L9.96-52.54Q6.64-60.69 5.32-62.4Q4-64.11.88-64.4V-66.21H29.59V-64.4Q26.12-64.31 24.98-63.35Q23.83-62.4 23.83-60.99Q23.83-59.13 26.22-53.12L39.21-21L49.61-46.09L46.88-53.12Q44.63-58.89 43.41-60.82Q42.19-62.74 40.6-63.57Q39.01-64.4 35.94-64.4V-66.21H68.02V-64.4Q64.65-64.36 63.18-63.87Q62.16-63.53 61.57-62.72Q60.99-61.91 60.99-60.89Q60.99-59.77 63.18-54L75.24-22.66L86.04-51.03Q87.74-55.42 88.13-57.03Q88.53-58.64 88.53-60.01Q88.53-62.01 87.16-63.16Q85.79-64.31 81.93-64.4V-66.21Z"/><circle cx="91.5" cy="60.12" r="8.13"/></svg></span><h1 id="welcome-title">Workpal</h1></div>
+      <div class="welcome-brand"><span class="welcome-brand-mark" aria-hidden="true">${WorkpalBrand.logo}</span><h1 id="welcome-title" aria-label="Workpal">${WorkpalBrand.wordmark}</h1></div>
       <p class="welcome-slogan">Let’s work together.</p>
       <a class="btn primary welcome-enter" href="${esc(destination)}"><span>Enter workspace</span>${icon('arrow')}</a>
     </section></main>`;
   }
   const routes={overview:'Overview',tasks:'All issues',projects:'Projects',workflow:'Runs',agents:'Agents',skills:'Skill Hub',stats:'Analytics',reports:'Reports',inbox:'Inbox',mine:'My work',settings:'Settings',chatroom:'Chat',squads:'Squads',auto:'Autopilots',views:'Saved views',workflows:'Workflows',runtimes:'Runtimes'};
-  const icon=k=>`<svg class="icon${k==='workpal'?' workpal-mark':''}" aria-hidden="true" viewBox="0 0 24 24"><path d="${WorkpalIcons[k]||WorkpalIcons.layers}"/></svg>`;
+  const icon=k=>k==='workpal'?WorkpalBrand.logo:`<svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="${WorkpalIcons[k]||WorkpalIcons.layers}"/></svg>`;
   const btn=(text,act,id='',cls='')=>{const label=cls.match(/aria-label="([^"]+)/)?.[1];return `<button type="button" class="btn ${cls}" ${label?'title="'+esc(label)+'"':''} data-act="${act}" data-id="${esc(id)}">${text}</button>`;};
   const tool=(text,type,arg='',cls='')=>btn(text,'surface',type+'|'+arg,cls);
   const nav=(page)=>`<a href="#${scoped(page)}" class="nav ${route().page===page?'active':''}">${icon(page)}<span>${routes[page]}</span>${page==='tasks'?'<small>'+db.tasks.length+'</small>':page==='mine'?'<small>'+db.tasks.filter(t=>t.owner==='Patrick').length+'</small>':''}</a>`;
@@ -175,12 +175,8 @@
       <div class="split">${box('Review queue',issueList(db.tasks.filter(t=>t.status==='review')),'<a href="#'+scoped('tasks')+'">View all '+icon('arrow')+'</a>')}${box('Assigned to me',issueList(db.tasks.filter(t=>t.owner==='Patrick')))}</div>
       ${box('Recent runs',runList(db.runs.slice(0,5)),tool('New run','launch'))}`;
   }
-  function stats(team=''){
-    team=Object.hasOwn(teams,team)?team:'';
-    const items=db.tasks.filter(t=>!team||t.team===team),counts=count(items);
-    return `${team?tool('← All teams','stats'):''}<div class="metrics">${Object.entries(states).map(([k,v])=>`<div><small>${v}</small><b>${counts[k]}</b></div>`).join('')}</div>
-      ${team?box(esc(teams[team])+' issues',issueList(items)):box('Workload by team',Object.entries(teams).map(([id,name])=>{
-        const group=items.filter(t=>t.team===id),dist=count(group);return `<button class="team-row" data-act="surface" data-id="stats|${id}"><span>${name}</span><span class="bars">${Object.keys(states).map(k=>`<i class="${k}" style="width:${100*dist[k]/Math.max(1,items.length)}%"></i>`).join('')}</span><b>${group.length}</b>${icon('chevron')}</button>`;}).join('')+'<div class="legend">'+Object.keys(states).map(badge).join('')+'</div>')}${tool('Generate '+(team?'team':'workspace')+' summary','summary',team)}`;}
+  function stats(){return WorkpalAnalytics.page();}
+
   function panelConfig(arg='') {
     const [rawTeam, rawGroup]=arg.split(':');
     const team=Object.hasOwn(teams,rawTeam)?rawTeam:'';
@@ -434,7 +430,9 @@
       (directoryTab!=='attached'||skillAgents(s.id).length)&&(!skillStage||stages[s.stage]===skillStage)&&
       [s.id,s.name,s.author,s.repo,s.description].join(' ').toLowerCase().includes(skillFilter.trim().toLowerCase()));
     items.sort((a,b)=>(sortSkills==='rank'?(a.rank??Infinity)-(b.rank??Infinity):sortSkills==='usage'?skillRuns(b.id)-skillRuns(a.id):0)||a.name.localeCompare(b.name));
-    return `<div class="directory"><div class="directory-head"><div class="directory-tabs">${[['all','Directory'],['attached','On agents'],['saved','Saved']].map(([key,label])=>btn(label,'skillTab',key,key===directoryTab?'chosen':'')).join('')}</div>${tool('＋ Add skill','suggest')}</div>
+    const featured=items.filter(s=>s.local).sort((a,b)=>skillRuns(b.id)-skillRuns(a.id)).slice(0,3);
+    const shelf=featured.length?'<section class="skill-shelf" aria-label="Workpal skills">'+featured.map(s=>'<button class="skill-feature" data-act="surface" data-id="skill|'+esc(s.id)+'"><span class="skill-feature-top"><span class="tile">'+icon('skills')+'</span><small>Workpal · '+esc(s.version)+'</small></span><strong>'+esc(s.name)+'</strong><p>'+esc(s.description)+'</p><span class="skill-feature-footer">'+esc(stages[s.stage])+'<span>'+skillRuns(s.id)+' runs · '+skillAgents(s.id).length+' agents</span></span></button>').join('')+'</section>':'';
+    return WorkpalAnalytics.skillDashboard(items)+shelf+`<div class="directory"><div class="directory-head"><div class="directory-tabs">${[['all','Directory'],['attached','On agents'],['saved','Saved']].map(([key,label])=>btn(label,'skillTab',key,key===directoryTab?'chosen':'')).join('')}</div>${tool('＋ Add skill','suggest')}</div>
       <div class="toolbar"><input data-filter="skill" aria-label="Search skills" placeholder="Search skills, publishers or repositories…" value="${esc(skillFilter)}">
       <select aria-label="Skill stage" data-stage-filter>${options({'':'All stages',...strings(stages)},skillStage)}</select>
       <select aria-label="Sort skills" data-sort-skills>${options({rank:'Skills.sh ranking',usage:'Most used in '+workspace().name,name:'Name A–Z'},sortSkills)}</select></div>
@@ -449,7 +447,7 @@
     const related=db.skills.filter(other=>other.id!==id&&(other.stage===s.stage||other.repo===s.repo)).slice(0,3);
     return (chat?'<h3>'+esc(s.name)+'</h3>':'')+`<div class="detail-grid"><div>${box('Overview','<small class="mono">'+esc(s.repo||s.author)+'</small><p>'+esc(s.description)+'</p>'+
       (command?'<h4>Install with the CLI</h4><div class="command"><code>'+esc(command)+'</code>'+btn('Copy','copyCommand',id)+'</div>':'')+
-      actionList([btn(db.bookmarks.includes(id)?'Unsave skill':'Save skill','bookmark',id),btn('Share skill','share',id),'<a class="btn" href="'+esc(s.source)+'" target="_blank" rel="noopener noreferrer">View source ↗</a>']))}
+      actionList([btn(db.bookmarks.includes(id)?'Unsave skill':'Save skill','bookmark',id),btn('Share skill','share',id),s.source?'<a class="btn" href="'+esc(s.source)+'" target="_blank" rel="noopener noreferrer">View source ↗</a>':'<span class="muted">Workspace skill · '+esc(s.version||'1.0.0')+'</span>']))}
       ${box('Related skills',skillList(related))}</div><div>${box('Workspace usage','<dl class="properties"><dt>Stage</dt><dd>'+stages[s.stage]+'</dd><dt>Workspace runs</dt><dd>'+skillRuns(id)+'</dd></dl><h4>Attached agents</h4>'+
       assigned.map(a=>'<div class="binding">'+tool(esc(a.name),'agent',a.name)+btn('Remove','detach',JSON.stringify([id,a.name]))+'</div>').join('')+
       (assigned.length===0?empty('No agents attached.'):'')+
@@ -528,7 +526,7 @@
 
   function catalog(){return '<div class="catalog">'+Object.entries({...routes,workspaces:'Switch workspace',newWorkspace:'Create workspace',issue:'Create an issue',launch:'Launch a workflow',summary:'Workspace summary',execution:'Execution report',newAgent:'Configure agent',newProject:'Create project',suggest:'Recommend a skill',notes:'Review feedback',panel:'Build a live panel',search:'Search'}).map(([type,label])=>tool(label,type)).join('')+'</div>';}
   function surface(type,arg='',standalone=false){
-    if(type==='stats')return (teams[arg] ? '<h3>'+esc(teams[arg])+'</h3>' : '')+stats(arg);
+    if(type==='stats')return stats();
     if(type==='chatroom')return conversationList()+btn('New chat','chooseAgent');
     if(type==='overview'&&(chat||route().page==='chatroom'))return box('Workspace overview',`<p><b>${db.projects.length}</b> projects · <b>${db.tasks.length}</b> issues · <b>${db.runs.length}</b> runs</p>`+actionList([tool('Review queue','reviews'),tool('Team workload','stats'),tool('Runs','workflow')]));
     if(Object.hasOwn(pages,type))return pages[type]();
@@ -576,7 +574,7 @@
       case 'wakeupEditor':return wakeupEditor(arg);
       case 'saveView':return form('saveView',field('View name',input('name')),'Save view');
       case 'newProject':return form('newProject',field('Project name',input('name')),'Create project');
-      case 'newAgent':return form('newAgent',field('Name',input('name'))+emojiField('')+field('Responsibilities',input('role'))+field('Instructions','<textarea name="instructions" rows="3"></textarea>')+starterField()+field('Harness',select('runtime',strings(['Codex','Claude Code','Local runner'])))+runtimeFields()+field('Skill',select('skill',Object.fromEntries(db.skills.map(s=>[s.id,s.name])))),'Save agent');
+      case 'newAgent':return form('newAgent',field('Name',input('name'))+emojiField('')+field('Responsibilities',input('role'))+field('Instructions','<textarea name="instructions" rows="3"></textarea>')+starterField()+field('Harness',select('runtime',strings(['Copilot CLI','Codex','Claude Code','Local runner'])))+runtimeFields()+field('Skill',select('skill',Object.fromEntries(db.skills.map(s=>[s.id,s.name])))),'Save agent');
       case 'agent':{
         const a=db.agents.find(x=>x.name===arg);if(!a)return empty('Agent unavailable.');
         const assigned=db.tasks.filter(t=>t.owner===a.name),runs=db.runs.filter(r=>r.agent===a.name);
@@ -587,7 +585,7 @@
       }
       case 'agentConfig':{
         const a=db.agents.find(x=>x.name===arg);
-        return form('agentConfig',emojiField(a.emoji)+field('Instructions','<textarea name="instructions" rows="5" required>'+esc(a.instructions||a.role)+'</textarea>')+field('Harness',select('runtime',strings(['Codex','Claude Code','Local runner']),a.runtime))+field('Model',input('model',a.model||'Default'))+runtimeFields(a)+starterField(a),'Save settings',arg);
+        return form('agentConfig',emojiField(a.emoji)+field('Instructions','<textarea name="instructions" rows="5" required>'+esc(a.instructions||a.role)+'</textarea>')+field('Harness',select('runtime',strings(['Copilot CLI','Codex','Claude Code','Local runner']),a.runtime))+field('Model',input('model',a.model||'Default'))+runtimeFields(a)+starterField(a),'Save settings',arg);
       }
       case 'skill':return skill(arg);
       case 'suggest':return form('suggest',field('Skill name',input('name'))+field('Source URL','<input type="url" name="url" required>')+field('Recommended use',input('reason'))+field('Stage',select('stage',Object.fromEntries(stages.map((stage,i)=>[i,stage])))),'Add to directory');
@@ -765,7 +763,7 @@
     if(inside){emitTurn(descriptor(type,arg));write();paintChat();return;}
     if ((Object.hasOwn(detailPages,type)&&arg&&!arg.startsWith('draft:')&&!(type==='issue'&&!db.tasks.some(t=>t.id===arg)))||Object.hasOwn(routes,type)){
       dismiss();
-      const hash=Object.hasOwn(routes,type)?type+(type==='stats'&&arg?'?team='+encodeURIComponent(arg):''):detailPages[type]+'?id='+encodeURIComponent(arg);
+      const hash=Object.hasOwn(routes,type)?type:detailPages[type]+'?id='+encodeURIComponent(arg);
       if(location.hash.slice(1)===scoped(hash))render();else {location.hash=scoped(hash);enter();}
       return;
     }
@@ -825,7 +823,7 @@
     document.title=heading+' · '+workspace().name+' · Workpal';
     $('#app').innerHTML=`<div class="shell ${mobileMenu?'menu-open':''} ${navCollapsed?'nav-collapsed':''}" data-page="${page}" data-space="${space}" data-detail="${detail?'true':'false'}" data-layout="${layout}">${navigation(page)}
     <div class="main"><header class="top">${page==='stats'?WorkpalAnalytics.header():`<div class="top-title">${btn(icon('menu'),'menu','','mobile-only icon-only" aria-label="Workspace menu')}${navCollapsed&&space!=='Chat'?btn(icon('panelLeft'),'collapseNav','','icon-only" aria-label="Expand sidebar'):''}${icon(page)}${detail?'<a href="#'+scoped(page)+'">'+routes[page]+'</a><span class="separator">/</span><span>'+esc(type==='issue'?id:heading)+'</span>':(page==='chatroom'?'<span>Chat</span>':'<h1>'+esc(heading)+'</h1>')}${taskActions?btn(icon('filter'),'filters','','icon-only" aria-label="Filter issues'):''}</div><div class="top-actions">${taskActions?issueDisplay()+tool(icon('edit'),'issue','','icon-only" aria-label="New issue'):collectionAction?tool(icon('plus'),collectionAction[0],'','icon-only" aria-label="'+collectionAction[1]):btn(icon('search'),'surface','search|','icon-only" aria-label="Search workspace')}</div>`}</header>
-    <main id="main" tabindex="-1">${detail&&type!=='issue'?'<div class="heading'+(type==='agent'?' agent-profile-heading':'')+'"><div><div class="crumb">'+esc(workspace().name)+'<span>/</span>'+esc(type==='issue'?id:labels[type])+'</div><h1>'+esc(heading)+'</h1></div>'+(type==='squad'?tool(icon('plus')+' Assign work','assignIssue',id,'primary'):type==='agent'?agentAvatarControl(id,'agent-profile-avatar'):'')+'</div>':''}<div id="page-content">${detail?surface(type,id,true):pages[page]()}</div></main></div></div><footer class="bottom-bar"><a class="product-wordmark" href="#welcome" aria-label="Workpal home">Workpal</a><span class="workspace-caption">${esc(workspace().name)}</span></footer>${page==='chatroom'?'':chatLauncher()}`;
+    <main id="main" tabindex="-1">${detail&&type!=='issue'?'<div class="heading'+(type==='agent'?' agent-profile-heading':'')+'"><div><div class="crumb">'+esc(workspace().name)+'<span>/</span>'+esc(type==='issue'?id:labels[type])+'</div><h1>'+esc(heading)+'</h1></div>'+(type==='squad'?tool(icon('plus')+' Assign work','assignIssue',id,'primary'):type==='agent'?agentAvatarControl(id,'agent-profile-avatar'):'')+'</div>':''}<div id="page-content">${detail?surface(type,id,true):pages[page]()}</div></main></div></div><footer class="bottom-bar"><a class="product-wordmark" href="#welcome" aria-label="Workpal home">${WorkpalBrand.wordmark}</a><span class="workspace-caption">${esc(workspace().name)}</span></footer>${page==='chatroom'?'':chatLauncher()}`;
     paintChat();restoreDrafts();
     renderedHash=location.hash;
     const positions=scrollPositions.get(renderedHash);
@@ -1162,7 +1160,7 @@
     }
     }catch(err){showSaveError(err);}
   },15000);
-  WorkpalAnalytics.init({getDb:()=>db,workspace,teams,states,scoped,icon,esc,avatar,issueList,render,write});
+  WorkpalAnalytics.init({getDb:()=>db,workspace,teams,states,stages,scoped,icon,esc,avatar,issueList,render,write});
   // Each document opens at welcome, including bookmarks and workspace reloads.
   // Retain the requested destination in this history entry, without a login flag.
   if(!isWelcome()){

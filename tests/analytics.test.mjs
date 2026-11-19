@@ -116,3 +116,27 @@ test('format helpers display compact counts, currency, durations and explicit fa
   assert.equal(api.rate(2,31),'6.5%');
   assert.equal(api.rate(0,0),'0%');
 });
+
+test('contribution links exact tickets, deduplicates commits, scopes dates and detects the Workpal trailer',()=>{
+  const api=analytics();
+  const commit={repository:'org/repo',sha:'one',message:'TAP-1 TAP-2 Fix\n\nCo-authored-by: Workpal <workpal@users.noreply.github.com>',at:when(18),additions:12,deletions:4};
+  const db={tasks:[{id:'TAP-1',team:'engineering',project:'TAP'},{id:'TAP-2',team:'product',project:'TAP'}],contributionCommits:[commit,commit,{...commit,sha:'two',message:'TAP-1 Mention Workpal in prose'},{...commit,sha:'three',message:'TAP-10 Unknown'},{...commit,sha:'future',at:when(20)}]};
+  const result=api.contribution(db,{days:1},now);
+  assert.equal(result.totals.commits,2);assert.equal(result.totals.workpal,1);assert.equal(result.totals.human,1);assert.equal(result.totals.added,24);assert.equal(result.rows.length,2);assert.equal(result.excluded,1);
+  assert.equal(api.contribution(db,{team:'product',days:1},now).totals.commits,1);
+  assert.equal(api.contribution(db,{project:'Other',days:1},now).totals.commits,0);
+  assert.throws(()=>api.parseCommits('[{"message":"bad"}]'));
+  assert.equal(api.parseCommits(JSON.stringify([commit]))[0].sha,'one');
+});
+
+test('squad contribution uses explicit ancestry, deduplicates and separates ambiguous ownership',()=>{
+  const api=analytics();
+  const db={squads:[{name:'Alpha',leader:'Agent'},{name:'Beta',leader:'Agent'},{name:'Empty',leader:'Agent'}],tasks:[{id:'P-1',owner:'Alpha'},{id:'T-1',parent:'P-1',owner:'Agent'},{id:'T-2',owner:'Alpha'},{id:'T-3',owner:'Beta'},{id:'T-4',owner:'Agent'},{id:'T-5',parent:'T-6'},{id:'T-6',parent:'T-5'}]};
+  const c=(sha,assisted=true)=>({repository:'repo',sha,assisted,additions:10,deletions:2});
+  const result={rows:db.tasks.filter(t=>t.id.startsWith('T-')).map(t=>({...t,commits:t.id==='T-1'?[c('one'),c('shared')]:t.id==='T-2'?[c('one')]:t.id==='T-3'?[c('shared'),c('two',false)]:[c(t.id)]}))};
+  const summary=api.squadContribution(db,result);
+  assert.equal(summary.rows[0].commits,1);assert.equal(summary.rows[0].workpal,1);assert.equal(summary.rows[0].tickets,2);
+  assert.equal(summary.rows[1].commits,1);assert.equal(summary.rows[1].human,1);assert.equal(summary.rows[2].commits,0);
+  assert.equal(summary.shared,1);assert.equal(summary.unassigned,3);
+  assert.equal(summary.rows.reduce((n,r)=>n+r.commits,0)+summary.shared+summary.unassigned,6);
+});

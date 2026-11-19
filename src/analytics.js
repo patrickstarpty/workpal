@@ -15,12 +15,11 @@ globalThis.WorkpalAnalytics = (() => {
   }
   function selection() {
     const params=new URLSearchParams(location.hash.split('?')[1]||'');
-    const db=app.getDb(),rawTeam=params.get('team'),rawProject=params.get('project');
-    const team=Object.hasOwn(app.teams,rawTeam)?rawTeam:'';
+    const db=app.getDb(),rawProject=params.get('project');
     const project=db.projects.includes(rawProject)?rawProject:'';
     const days=[1,7,30,90,180].includes(Number(params.get('days')))?Number(params.get('days')):30;
-    const tab=['usage','errors','teams'].includes(params.get('tab'))?params.get('tab'):team?'teams':'usage';
-    return {team,project,days,tab};
+    const tab=['usage','errors','contribution'].includes(params.get('tab'))?params.get('tab'):'usage';
+    return {project,days,tab};
   }
   function snapshot() {
     const db=app.getDb();
@@ -29,10 +28,9 @@ globalThis.WorkpalAnalytics = (() => {
   }
   function navigate(key,value) {
     const state=selection();state[key]=value;
-    if(key==='team'&&state.tab==='teams')state.tab='teams';
     const params=new URLSearchParams();
     params.set('tab',state.tab);
-    for(const k of ['days','project','team'])if(state[k]&&!(k==='days'&&state[k]===30))params.set(k,String(state[k]));
+    for(const k of ['days','project'])if(state[k]&&!(k==='days'&&state[k]===30))params.set(k,String(state[k]));
     location.hash=app.scoped('stats')+'?'+params;
   }
   function control(label,key,items,value,iconName) {
@@ -48,7 +46,7 @@ globalThis.WorkpalAnalytics = (() => {
     const s=selection(),db=app.getDb();
     const tz=new Intl.DateTimeFormat('en',{timeZoneName:'shortOffset'}).formatToParts(new Date()).find(p=>p.type==='timeZoneName')?.value||'';
     const time=new Date(prefs().refreshed).toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'});
-    return `<div class="analytics-heading"><button type="button" class="btn mobile-only icon-only" data-act="menu" aria-label="Workspace menu">${icon('menu')}</button><button type="button" class="btn analytics-expand icon-only" data-act="collapseNav" aria-label="Expand sidebar">${icon('panelLeft')}</button><h1>${icon('stats')}<span>Analytics</span></h1><div class="analytics-tabs" role="tablist" aria-label="Analytics views">${['usage','errors','teams'].map(tab=>`<button type="button" role="tab" id="analytics-tab-${tab}" aria-selected="${s.tab===tab}" aria-controls="analytics-panel" data-analytics="tab" data-value="${tab}">${tab[0].toUpperCase()+tab.slice(1)}</button>`).join('')}</div></div><div class="analytics-tools"><small class="analytics-freshness">${esc(tz)} · updated ${esc(time)}</small>${control('Period','days',{'1':'1d','7':'7d','30':'30d','90':'90d','180':'180d'},s.days,'calendar')}${control('Project','project',{'':'All projects',...Object.fromEntries(db.projects.map(p=>[p,p]))},s.project,'projects')}${control('Team','team',{'':'All teams',...app.teams},s.team,'team')}<button type="button" class="btn icon-only analytics-refresh" data-analytics="refresh" aria-label="Refresh analytics" title="Refresh">${icon('refresh')}</button></div>`;
+    return `<div class="analytics-heading"><button type="button" class="btn mobile-only icon-only" data-act="menu" aria-label="Workspace menu">${icon('menu')}</button><button type="button" class="btn analytics-expand icon-only" data-act="collapseNav" aria-label="Expand sidebar">${icon('panelLeft')}</button><h1>${icon('stats')}<span>Analytics</span></h1><div class="analytics-tabs" role="tablist" aria-label="Analytics views">${['usage','errors','contribution'].map(tab=>`<button type="button" role="tab" id="analytics-tab-${tab}" aria-selected="${s.tab===tab}" aria-controls="analytics-panel" data-analytics="tab" data-value="${tab}">${tab[0].toUpperCase()+tab.slice(1)}</button>`).join('')}</div></div><div class="analytics-tools"><small class="analytics-freshness">${esc(tz)} · updated ${esc(time)}</small>${control('Period','days',{'1':'1d','7':'7d','30':'30d','90':'90d','180':'180d'},s.days,'calendar')}${control('Project','project',{'':'All projects',...Object.fromEntries(db.projects.map(p=>[p,p]))},s.project,'projects')}<button type="button" class="btn icon-only analytics-refresh" data-analytics="refresh" aria-label="Refresh analytics" title="Refresh">${icon('refresh')}</button></div>`;
   }
   const kpi = (label,value,hint='') => `<div class="analytics-kpi"><span class="analytics-label">${esc(label)}</span><strong class="analytics-value">${esc(value)}</strong><span class="analytics-hint">${esc(hint)}</span></div>`;
   const empty = (title,caption='') => `<div class="analytics-empty">${icon('stats')}<h3>${esc(title)}</h3>${caption?`<p>${esc(caption)}</p>`:''}</div>`;
@@ -68,7 +66,7 @@ globalThis.WorkpalAnalytics = (() => {
     if(!totals.some(Boolean))return `<div class="analytics-chart-empty">${icon('stats')}<span>No data for this metric in the selected period.</span></div>`;
     const width=Math.max(300,Math.min(1080,innerWidth-(innerWidth>=768?424:64))),height=260,left=50,right=10,top=12,bottom=36;
     const plotWidth=width-left-right,plotHeight=height-top-bottom;
-    const step=axisStep(Math.max(...totals)),max=step*4;
+    const step=axisStep(Math.max(...totals)),max=Math.max(step*4,Math.ceil(Math.max(...totals)/step)*step);
     const cell=plotWidth/Math.max(1,rows.length),barWidth=Math.max(2,Math.min(80,cell*.7));
     let svg='';
     for(let i=0;i<=4;i++){
@@ -111,7 +109,7 @@ globalThis.WorkpalAnalytics = (() => {
   function usage(snap,s) {
     if(!snap.records.length)return empty('No usage yet','Agent usage will appear here once runs report activity.');
     const t=snap.totals,suffix=' · '+s.days+'D';
-    return `<div class="analytics-kpis">${kpi('Cost'+suffix,data().money(t.cost))}${kpi('Tokens'+suffix,data().compact(t.tokens),'Input '+data().compact(t.input)+' · Output '+data().compact(t.output))}${kpi('Run time'+suffix,data().duration(t.seconds),'Across '+t.runs+' runs')}${kpi('Runs'+suffix,t.runs,t.failed+' failed')}</div>${trend(snap,s)}${leaderboard(snap)}`;
+    return `<div class="analytics-kpis">${kpi('Cost'+suffix,data().money(t.cost))}${kpi('Tokens'+suffix,data().compact(t.tokens),'Input '+data().compact(t.input)+' · Output '+data().compact(t.output))}${kpi('Run time'+suffix,data().duration(t.seconds),'Across '+t.runs+' runs')}${kpi('Runs'+suffix,t.runs,t.failed+' failed')}</div>${trend(snap,s)}<div class="viz-grid">${distribution('Token composition',[{label:'Input',value:t.input},{label:'Output',value:t.output},{label:'Cache read',value:t.cacheRead},{label:'Cache write',value:t.cacheWrite}],true)}${distribution('Runs by agent',snap.agents.map(a=>({label:a.name,value:a.runs})))}</div>${leaderboard(snap)}`;
   }
   function mix(snap) {
     const p=prefs(),items=snap.classes.filter(item=>item.count),total=snap.totals.failed;
@@ -129,29 +127,45 @@ globalThis.WorkpalAnalytics = (() => {
   }
   function errors(snap,s) {
     const t=snap.totals,suffix=' · '+s.days+'D',worst=[...snap.agents].sort((a,b)=>b.failed-a.failed)[0];
-    return `<div class="analytics-kpis three">${kpi('Failed runs'+suffix,t.failed,'Of '+t.runs+' runs')}${kpi('Failure rate'+suffix,data().rate(t.failed,t.runs),t.failed+' of '+t.runs+' runs failed')}${kpi('Agents affected'+suffix,t.affected,t.failed&&worst?'Most failures: '+worst.name+' · '+worst.failed:'')}</div>${t.failed?trend(snap,s,true)+mix(snap)+offenders(snap):empty('No failed runs in this window','Change the period or scope to explore another view.')}`;
+    return `<div class="analytics-kpis three">${kpi('Failed runs'+suffix,t.failed,'Of '+t.runs+' runs')}${kpi('Failure rate'+suffix,data().rate(t.failed,t.runs),t.failed+' of '+t.runs+' runs failed')}${kpi('Agents affected'+suffix,t.affected,t.failed&&worst?'Most failures: '+worst.name+' · '+worst.failed:'')}</div>${lineChart('Run outcomes',snap.daily.map(r=>({...r,label:r.label})),[{key:'completed',label:'Completed'},{key:'failed',label:'Failed'}])}${t.failed?trend(snap,s,true)+mix(snap)+offenders(snap):empty('No failed runs in this window','Change the period or scope to explore another view.')}`;
   }
-  function teamsPage(snap,s) {
-    const db=app.getDb(),items=db.tasks.filter(t=>(!s.project||t.project===s.project)&&(!s.team||t.team===s.team));
-    const active=items.filter(t=>t.status==='active').length,review=items.filter(t=>t.status==='review').length,done=items.filter(t=>t.status==='done').length;
-    const kpis=`<div class="analytics-kpis">${kpi('Total issues',items.length,'Current workspace status')}${kpi('In progress',active,'Issues being worked on')}${kpi('In review',review,'Awaiting a decision')}${kpi('Completed',done,items.length?Math.round(100*done/items.length)+'% of issues':'No issues yet')}</div>`;
-    const groups=Object.entries(app.teams).filter(([id])=>!s.team||id===s.team);
-    const allByTeam=Object.fromEntries(groups.map(([id])=>[id,items.filter(t=>t.team===id)]));
-    const table=`<div class="analytics-table-scroll" role="region" aria-label="Workload by team" tabindex="0"><table class="analytics-table analytics-team-table"><thead><tr><th>Team</th><th>Issue status</th><th class="number">Issues</th><th class="number">Runs · ${s.days}d</th><th class="number">Cost · ${s.days}d</th><th class="number">Failed</th></tr></thead><tbody>${groups.map(([id,name])=>{
-      const tasks=allByTeam[id],records=snap.records.filter(r=>r.team===id),counts=Object.keys(app.states).map(k=>tasks.filter(t=>t.status===k).length);
-      return `<tr><td><button type="button" class="analytics-agent" data-analytics="drillTeam" data-value="${esc(id)}">${icon('team')}<span>${esc(name)}</span>${icon('chevron')}</button></td><td><span class="analytics-status-bar">${Object.keys(app.states).map((k,i)=>`<i class="${k}" style="width:${100*counts[i]/Math.max(1,tasks.length)}%" title="${esc(app.states[k])}: ${counts[i]}"></i>`).join('')}</span></td><td class="number">${tasks.length}</td><td class="number">${records.length}</td><td class="number">${data().money(records.reduce((n,r)=>n+r.cost,0))}</td><td class="number">${records.filter(r=>r.status==='failed').length}</td></tr>`;
-    }).join('')}</tbody></table></div><div class="analytics-legend analytics-team-legend">${Object.entries(app.states).map(([k,name])=>`<span><i class="analytics-dot ${k}"></i>${esc(name)}</span>`).join('')}</div>`;
-    let details='';
-    if(s.team)details=card(app.teams[s.team]+' issues',`<div class="analytics-team-issues">${app.issueList(items)}</div>`,`<button type="button" class="analytics-link" data-analytics="teamUsage">View usage ${icon('arrow')}</button>`);
-    return kpis+card('Workload by team',table,`<small>Issue status now · Usage over ${s.days} days</small>`)+details+`<div class="analytics-footer"><button type="button" class="btn" data-act="surface" data-id="summary|${esc(s.team)}">${icon('reports')} Generate ${s.team?'team':'workspace'} summary</button>${s.team?'<button type="button" class="analytics-link" data-analytics="allTeams">All teams</button>':''}</div>`;
+  function contributionPage(s) {
+    const result=data().contribution(app.getDb(),s),t=result.totals;
+    const guide=card('Commit attribution',`<div class="analytics-card-body contribution-guide"><p>Reference a ticket number in every commit message. Add the Workpal trailer when Workpal contributes to the change.</p><pre>TAP-027 Improve search feedback\n\nCo-authored-by: Workpal &lt;workpal@users.noreply.github.com&gt;</pre><p>Human commits only need the ticket number and a description. Workpal-assisted includes human + agent collaboration. Labels classify commits, not individual lines or productivity.</p><details><summary>Import commit data</summary><p>Import a JSON array to replace this workspace’s saved commit data. Date and project filters apply to linked tickets.</p><pre>[{"repository":"org/repo","sha":"abc123","message":"TAP-027 Fix search","at":"2026-11-19T08:00:00Z","additions":24,"deletions":8}]</pre><label class="btn">Choose JSON file <input type="file" accept=".json,application/json" data-contribution-import></label></details><p role="status" id="contribution-status"></p></div>`);
+    const squads=data().squadContribution(app.getDb(),result);
+    const summary=`<div class="contribution-summary">${distribution('Contribution summary',[{label:'Agent-assisted',value:t.workpal},{label:'Human',value:t.human}],true,true)}<div class="contribution-summary-counts">${kpi('Linked commits',t.commits)}${kpi('Tickets',result.rows.length)}${kpi('Code changes','+'+data().compact(t.added)+' / −'+data().compact(t.deleted))}</div></div>`;
+    const rows=squads.rows.map(row=>{const percent=row.commits?100*row.workpal/row.commits:0;return `<tr><td><button type="button" class="analytics-agent" data-act="surface" data-id="squad|${esc(row.name)}">${icon('team')}<span>${esc(row.name)}</span>${icon('chevron')}</button><small class="squad-contribution-leader">${esc(row.leader)}</small></td><td class="number">${row.tickets}</td><td class="number">${row.commits}</td><td class="number">${row.workpal}</td><td class="number">${row.human}</td><td class="squad-rate-cell"><strong>${row.commits?percent.toFixed(1)+'%':'—'}</strong><div class="contribution-stacked" role="img" aria-label="${esc(row.name)}: ${row.commits?percent.toFixed(1)+'% agent-assisted, '+row.workpal+' of '+row.commits+' commits':'No linked commits'}"><i style="width:${percent}%;background:${palette[0]}"></i><i style="width:${row.commits?100-percent:0}%;background:${palette[1]}"></i></div></td><td class="number">+${data().compact(row.added)} / −${data().compact(row.deleted)}</td></tr>`;}).join('');
+    return summary+card('Contribution by squad',rows?`<div class="analytics-table-scroll" role="region" aria-label="Squad contribution" tabindex="0"><table class="analytics-table squad-contribution-table"><thead><tr><th>Squad</th><th class="number">Tickets</th><th class="number">Commits</th><th class="number">Agent-assisted</th><th class="number">Human</th><th>Agent contribution</th><th class="number">Lines + / −</th></tr></thead><tbody>${rows}</tbody></table></div>`:empty('No squads yet','Create a squad to see its contribution here.'))+`<p class="viz-caption">Agent contribution = Workpal-tagged commits ÷ linked commits. Squad ownership follows the ticket’s assigned squad, or its nearest parent assigned to a squad. ${squads.unassigned} unassigned and ${squads.shared} shared-squad commits appear only in the summary. ${result.excluded} commits without a ticket in scope are excluded.</p><details class="contribution-method"><summary>Attribution rules &amp; import</summary>${guide}</details>`;
   }
-  function pinned() {
-    if(!app.getDb().panels.length)return '';
-    return `<section class="analytics-card analytics-pinned"><header class="analytics-card-header"><h2>Pinned panels</h2><button type="button" class="analytics-link" data-act="surface" data-id="panel|">Build panel</button></header><div class="analytics-card-body">${app.getDb().panels.map(key=>{const [team,group]=key.split(':');return `<button type="button" class="btn" data-act="surface" data-id="panel|${esc(key)}">${icon('pin')}${esc(app.teams[team]||'Workspace')} by ${esc(group)}</button>`;}).join('')}</div></section>`;
+
+  const palette=Array.from({length:6},(_,i)=>`var(--chart-series-${i+1})`);
+  function distribution(title,entries,ring=false,percent=false){
+    const total=entries.reduce((n,e)=>n+e.value,0),max=Math.max(1,...entries.map(e=>e.value));let offset=0;
+    const legend=entries.map((e,i)=>`<div class="viz-row"><span><i style="background:${palette[i%palette.length]}"></i>${esc(e.label)}</span><strong>${percent?(total?(100*e.value/total).toFixed(1)+'%':'—'):esc(data().compact(e.value))}</strong>${ring?'':`<div class="viz-track"><b style="width:${100*e.value/max}%;background:${palette[i%palette.length]}"></b></div>`}</div>`).join('');
+    const arcs=entries.map((e,i)=>{const length=total?100*e.value/total:0;const result=`<circle cx="90" cy="90" r="64" pathLength="100" fill="none" stroke="${palette[i%palette.length]}" stroke-width="18" stroke-dasharray="${length} ${100-length}" stroke-dashoffset="${-offset}" transform="rotate(-90 90 90)"/>`;offset+=length;return result;}).join('');
+    return card(title,`<div class="analytics-card-body ${ring?'viz-ring':'viz-bars'}">${ring?`<svg viewBox="0 0 180 180" role="img" aria-label="${esc(title+': '+entries.map(e=>e.label+' '+e.value).join(', '))}"><circle cx="90" cy="90" r="64" fill="none" stroke="var(--border)" stroke-width="18"/>${arcs}<text x="90" y="87" text-anchor="middle" class="viz-total">${percent?(total?(100*entries[0].value/total).toFixed(1)+'%':'—'):esc(data().compact(total))}</text><text x="90" y="108" text-anchor="middle" class="chart-label">${percent?'Agent contribution':'Total'}</text></svg>`:''}<div class="viz-legend">${legend||'<p>No data in this scope.</p>'}</div></div>`);
   }
+  function lineChart(title,rows,series){
+    const width=720,height=250,left=46,top=18,bottom=36,plot=width-left-18,h=height-top-bottom;
+    const max=Math.max(1,...rows.flatMap(r=>series.map(s=>r[s.key]||0))),ceiling=Math.ceil(max/4)*4;
+    const x=i=>left+(rows.length<2?plot/2:i*plot/(rows.length-1)),y=v=>top+h-h*v/ceiling;
+    let svg=Array.from({length:5},(_,i)=>`<line class="chart-grid" x1="${left}" x2="${width-18}" y1="${y(i*ceiling/4)}" y2="${y(i*ceiling/4)}"/><text class="chart-label" x="${left-8}" y="${y(i*ceiling/4)+4}" text-anchor="end">${data().compact(i*ceiling/4)}</text>`).join('');
+    series.forEach((s,j)=>{const points=rows.map((r,i)=>`${x(i)},${y(r[s.key]||0)}`).join(' ');if(rows.length)svg+=`${j===0?`<polygon points="${x(0)},${y(0)} ${points} ${x(rows.length-1)},${y(0)}" fill="${palette[j]}" opacity=".08"/>`:''}<polyline points="${points}" fill="none" stroke="${palette[j]}" stroke-width="2" vector-effect="non-scaling-stroke"/>`;});
+    rows.forEach((r,i)=>{const label=r.label||r.date,tip=[label,...series.map(s=>s.label+': '+(r[s.key]||0))].join('\n');svg+=`<g tabindex="0" role="img" class="analytics-chart-point" data-analytics-point data-tooltip="${esc(tip)}" aria-label="${esc(tip)}"><title>${esc(tip)}</title>${series.map((s,j)=>`<circle cx="${x(i)}" cy="${y(r[s.key]||0)}" r="3" fill="${palette[j]}"/>`).join('')}<rect x="${x(i)-Math.max(4,plot/Math.max(1,rows.length)/2)}" y="${top}" width="${Math.max(8,plot/Math.max(1,rows.length))}" height="${h}" fill="transparent"/></g>`;if(i===0||i===rows.length-1||i%Math.max(1,Math.ceil(rows.length/5))===0)svg+=`<text class="chart-label" x="${x(i)}" y="${height-10}" text-anchor="middle">${esc(label)}</text>`;});
+    return card(title,`<div class="analytics-card-body"><div class="analytics-chart-frame"><svg class="analytics-chart" viewBox="0 0 ${width} ${height}" role="group" aria-label="${esc(title)}">${svg}</svg><div class="analytics-tooltip" role="tooltip" hidden></div></div><div class="analytics-legend">${series.map((s,i)=>`<span><i class="analytics-dot" style="background:${palette[i]}"></i>${esc(s.label)}</span>`).join('')}</div><p class="viz-caption">${rows.some(r=>series.some(s=>r[s.key]))?'Hover or focus points for details. Use arrow keys to move.':'No activity in this period.'}</p></div>`);
+  }
+  function skillDashboard(items){
+    const db=app.getDb();return `<div class="skill-dashboard"><div class="analytics-kpis">${kpi('Skills in view',items.length)}${kpi('Workpal skills',items.filter(s=>s.author==='Workpal').length)}${kpi('Attached to agents',items.filter(s=>db.agents.some(a=>a.skills.includes(s.id))).length)}${kpi('Recorded runs',db.runs.filter(r=>items.some(s=>s.id===r.skill)).length)}</div><div class="viz-grid">${distribution('Lifecycle coverage',app.stages.map((label,i)=>({label,value:items.filter(s=>s.stage===i).length})),true)}${distribution('Most used skills · top 6',items.map(s=>({label:s.name,value:db.runs.filter(r=>r.skill===s.id).length})).sort((a,b)=>b.value-a.value).slice(0,6))}</div></div>`;
+  }
+
   function page() {
     const s=selection(),snap=snapshot();
-    return `<div class="analytics-page" id="analytics-panel" role="tabpanel" aria-labelledby="analytics-tab-${s.tab}">${s.tab==='errors'?errors(snap,s):s.tab==='teams'?teamsPage(snap,s):usage(snap,s)}${pinned()}</div>`;
+    const params=new URLSearchParams(location.hash.split('?')[1]||'');
+    if(params.has('team')||params.get('tab')==='teams'){
+      params.delete('team');params.set('tab',s.tab);
+      history.replaceState(history.state,'',location.hash.split('?')[0]+'?'+params);
+    }
+    return `<div class="analytics-page" id="analytics-panel" role="tabpanel" aria-labelledby="analytics-tab-${s.tab}">${s.tab==='contribution'?contributionPage(s):s.tab==='errors'?errors(snap,s):usage(snap,s)}</div>`;
   }
   function showTooltip(target) {
     const point=target.closest?.('[data-analytics-point]');if(!point)return;
@@ -168,9 +182,6 @@ globalThis.WorkpalAnalytics = (() => {
       const button=event.target.closest('[data-analytics]');if(!button)return;
       const key=button.dataset.analytics,value=button.dataset.value;
       if(key==='tab')return navigate('tab',value);
-      if(key==='drillTeam')return navigate('team',value);
-      if(key==='teamUsage')return navigate('tab','usage');
-      if(key==='allTeams')return navigate('team','');
       const p=prefs();
       if(key==='refresh')p.refreshed=Date.now();
       else if(['showAll','showOffenders','codes'].includes(key))p[key]=!p[key];
@@ -180,12 +191,26 @@ globalThis.WorkpalAnalytics = (() => {
       document.querySelector(selector)?.focus({preventScroll:true});
     });
     document.addEventListener('change',event=>{const key=event.target.dataset.analyticsSelect;if(key)navigate(key,event.target.value);});
+    document.addEventListener('change',async event=>{
+      if(!event.target.matches('[data-contribution-import]'))return;
+      const file=event.target.files[0];if(!file)return;
+      const db=app.getDb();
+      try {
+        if(file.size>10000000)throw new Error('Choose a JSON file smaller than 10 MB.');
+        const commits=data().parseCommits(await file.text());
+        db.contributionCommits=commits;app.write();app.render();
+        const status=document.querySelector('#contribution-status');if(status)status.textContent=`Imported ${commits.length} commit records.`;
+      } catch(error) {const status=document.querySelector('#contribution-status');if(status)status.textContent=error.message;}
+    });
     document.addEventListener('pointerover',event=>showTooltip(event.target));
     document.addEventListener('focusin',event=>showTooltip(event.target));
     document.addEventListener('pointerout',event=>{if(event.target.closest?.('[data-analytics-point]')&&!event.relatedTarget?.closest?.('[data-analytics-point]'))hideTooltips();});
     document.addEventListener('focusout',event=>{if(event.target.closest?.('[data-analytics-point]'))hideTooltips();});
     document.addEventListener('keydown',event=>{
       if(event.key==='Escape')hideTooltips();
+      if(event.target.matches('[data-analytics-point]')&&['ArrowLeft','ArrowRight','Home','End'].includes(event.key)){
+        event.preventDefault();const points=[...event.target.closest('svg').querySelectorAll('[data-analytics-point]')],index=points.indexOf(event.target);points[event.key==='Home'?0:event.key==='End'?points.length-1:Math.max(0,Math.min(points.length-1,index+(event.key==='ArrowRight'?1:-1)))].focus();
+      }
       if(event.target.matches('[role=tab][data-analytics=tab]')&&['ArrowLeft','ArrowRight','Home','End'].includes(event.key)){
         event.preventDefault();const tabs=[...event.target.parentElement.querySelectorAll('[role=tab]')],index=tabs.indexOf(event.target);
         const next=event.key==='Home'?0:event.key==='End'?tabs.length-1:(index+(event.key==='ArrowRight'?1:-1)+tabs.length)%tabs.length;
@@ -195,5 +220,5 @@ globalThis.WorkpalAnalytics = (() => {
     });
     window.addEventListener('resize',()=>{clearTimeout(resizeTimer);resizeTimer=setTimeout(()=>{if(document.querySelector('.analytics-page'))app.render();},150);});
   }
-  return {init,header,page};
+  return {init,header,page,skillDashboard};
 })();

@@ -132,6 +132,46 @@ globalThis.WorkpalAnalyticsData = (() => {
       asOf:Number.isFinite(history?.asOf)?history.asOf:at};
   }
 
+  function contribution(db,selection={},now=Date.now()) {
+    const start=addDays(localDay(now),1-(selection.days||30)).getTime();
+    const tasks=new Map((db.tasks||[]).filter(t=>(!selection.team||t.team===selection.team)&&(!selection.project||t.project===selection.project)).map(t=>[t.id.toUpperCase(),t]));
+    const seen=new Set(),rows=new Map();let excluded=0;
+    const totals={commits:0,workpal:0,human:0,added:0,deleted:0};
+    for(const c of db.contributionCommits||[]) {
+      const at=stamp(c.at);if(!Number.isFinite(at)||at<start||at>now)continue;
+      const key=c.repository+'|'+c.sha;if(seen.has(key))continue;seen.add(key);
+      const ids=[...new Set((c.message.toUpperCase().match(/\b[A-Z][A-Z0-9]*-\d+\b/g)||[]))];
+      const matched=ids.filter(id=>tasks.has(id));if(!matched.length){excluded++;continue;}
+      const assisted=/^Co-authored-by:\s*Workpal\s*<workpal@users\.noreply\.github\.com>\s*$/im.test(c.message);
+      const added=finite(c.additions),deleted=finite(c.deletions);
+      totals.commits++;totals[assisted?'workpal':'human']++;totals.added+=added;totals.deleted+=deleted;
+      for(const id of matched){if(!rows.has(id))rows.set(id,{...tasks.get(id),commits:[],workpal:0,human:0,added:0,deleted:0});
+        const row=rows.get(id);row.commits.push({...c,assisted});row[assisted?'workpal':'human']++;row.added+=added;row.deleted+=deleted;}
+    }
+    return {totals,rows:[...rows.values()],excluded};
+  }
+  function squadContribution(db,result){
+    const squads=db.squads||[],names=new Set(squads.map(s=>s.name)),tasks=new Map((db.tasks||[]).map(t=>[t.id,t]));
+    const ownerOf=task=>{const seen=new Set();while(task&&!seen.has(task.id)){seen.add(task.id);if(names.has(task.owner))return task.owner;task=tasks.get(task.parent);}return null;};
+    const groups=new Map(squads.map(s=>[s.name,{name:s.name,leader:s.leader,tickets:new Set(),commits:0,workpal:0,human:0,added:0,deleted:0}])),commits=new Map();
+    for(const row of result.rows){const owner=ownerOf(row);for(const c of row.commits){const key=c.repository+'|'+c.sha;if(!commits.has(key))commits.set(key,{commit:c,owners:new Set(),tickets:new Set()});const item=commits.get(key);item.owners.add(owner);item.tickets.add(row.id);}}
+    let unassigned=0,shared=0;
+    for(const item of commits.values()){
+      if(item.owners.size!==1){shared++;continue;}
+      const name=[...item.owners][0],group=groups.get(name);if(!group){unassigned++;continue;}
+      group.commits++;group[item.commit.assisted?'workpal':'human']++;group.added+=finite(item.commit.additions);group.deleted+=finite(item.commit.deletions);for(const id of item.tickets)group.tickets.add(id);
+    }
+    return {rows:[...groups.values()].map(g=>({...g,tickets:g.tickets.size})),unassigned,shared};
+  }
+  function parseCommits(text) {
+    const rows=JSON.parse(text);
+    if(!Array.isArray(rows)||rows.length>20000)throw new Error('Provide a JSON array with up to 20,000 commits.');
+    return rows.map(c=>{
+      if(!c||typeof c.repository!=='string'||!c.repository.trim()||typeof c.sha!=='string'||!c.sha.trim()||typeof c.message!=='string'||!Number.isFinite(stamp(c.at))||!Number.isInteger(c.additions)||c.additions<0||!Number.isInteger(c.deletions)||c.deletions<0)throw new Error('Each commit needs repository, sha, message, at (ISO date), and non-negative integer additions and deletions.');
+      return {repository:c.repository,sha:c.sha,message:c.message,at:stamp(c.at),additions:c.additions,deletions:c.deletions};
+    });
+  }
+
   const compact=value=>new Intl.NumberFormat('en-US',{notation:'compact',maximumFractionDigits:1}).format(finite(value));
   const money=value=>new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',minimumFractionDigits:2,maximumFractionDigits:2}).format(finite(value));
   const rate=(failed,total)=>`${total>0?(100*finite(failed)/finite(total)).toFixed(1):'0'}%`;
@@ -142,5 +182,5 @@ globalThis.WorkpalAnalyticsData = (() => {
     const hours=Math.floor(seconds/3600),minutes=Math.floor(seconds%3600/60);
     return `${hours}h${minutes?' '+minutes+'m':''}`;
   }
-  return Object.freeze({ensure,snapshot,compact,duration,rate,money,failureLabels});
+  return Object.freeze({ensure,snapshot,contribution,squadContribution,parseCommits,compact,duration,rate,money,failureLabels});
 })();

@@ -216,8 +216,6 @@ dialog>#storage-conflict{position:static;transform:none;width:auto;margin:16px;b
 .appearance-setting select{width:144px;flex:none;font-size:13px}
 @media(max-width:540px){.appearance-setting{align-items:flex-start;flex-direction:column;gap:12px}.appearance-setting select{width:100%}}
 
-/* The brand mark has its own optical weight at the launcher's small size. */
-.chat-launcher .ask-button .icon.workpal-mark{width:16px;height:16px;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
 
 /* Separate avatar actions keep row navigation and identity editing accessible. */
 .agent-row-entry{position:relative}
@@ -244,3 +242,10 @@ dialog>#storage-conflict{position:static;transform:none;width:auto;margin:16px;b
 :root[data-theme=warm] .welcome-card h1{color:var(--brand-ink)}
 @media(max-width:520px){.welcome-page{padding:24px 16px}.welcome-card{--welcome-radius:8px;padding:44px 20px 36px}.welcome-brand{gap:14px}.welcome-brand-mark{width:52px;padding:5px}.welcome-card h1{font-size:54px;line-height:60px}}
 @media(max-width:360px){.welcome-card{--welcome-radius:7px}.welcome-brand{gap:12px}.welcome-brand-mark{width:46px;padding:4px}.welcome-card h1{font-size:46px;line-height:52px}}
+.skill-shelf{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-bottom:24px}.skill-feature{display:flex;flex-direction:column;gap:14px;text-align:left;padding:20px;border:1px solid var(--border);border-radius:12px;background:var(--card);min-width:0}.skill-feature:hover{background:var(--surface-hover);border-color:var(--faint-foreground)}.skill-feature-top,.skill-feature-footer{display:flex;align-items:center;justify-content:space-between;gap:8px}.skill-feature-top small,.skill-feature-footer{font-size:11px;color:var(--muted-foreground)}.skill-feature>strong{font-size:16px;font-weight:600}.skill-feature p{font-size:12px;line-height:1.7;color:var(--muted-foreground);margin:0;flex:1}.skill-feature-footer{padding-top:12px;border-top:1px solid var(--border)}@media(max-width:900px){.skill-shelf{grid-template-columns:minmax(0,1fr)}}
+/* Shared current brand assets: welcome, footer and assistant entry. */
+.brand-logo{display:block;width:100%;height:auto;fill:currentColor;stroke:none}
+.brand-wordmark{display:block;width:100%;height:auto;fill:currentColor;stroke:none}
+.welcome-card h1 .brand-wordmark{width:3.75em;height:auto}
+.product-wordmark .brand-wordmark{width:53px;height:auto}
+.chat-launcher .ask-button .brand-logo{width:18px;height:16px;flex:none}

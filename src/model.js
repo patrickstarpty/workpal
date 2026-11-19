@@ -400,6 +400,19 @@ globalThis.WorkpalStudio = (() => {
     return next(project==='Workpal'?'WP':project.toUpperCase().replace(/[^A-Z0-9]/g,'').slice(0,5)||'ISS',db.tasks);
   }
   function prepareWork(){
+    if(!db.copilotDefaultVersion){
+      for(const agent of db.agents)agent.runtime='Copilot CLI';
+      for(const run of db.runs.filter(r=>r.fixtureSource==='linked-v1')){
+        if(run.context)run.context.harness='Copilot CLI';
+        if(run.inputSnapshot?.context)run.inputSnapshot.context.harness='Copilot CLI';
+        if(run.inputSnapshot?.agent)run.inputSnapshot.agent.runtime='Copilot CLI';
+      }
+      for(const delivery of (db.deliveries||[]).filter(d=>d.fixtureSource==='linked-v1')){
+        if(delivery.inputSnapshot?.context)delivery.inputSnapshot.context.harness='Copilot CLI';
+        if(delivery.inputSnapshot?.agent)delivery.inputSnapshot.agent.runtime='Copilot CLI';
+      }
+      db.copilotDefaultVersion=1;
+    }
     prepareWorkflows();
     if(db.workReady)return;
     db.squads=[];db.autopilots=[];db.views=[];db.projectSettings=[];
@@ -679,6 +692,8 @@ globalThis.WorkpalStudio = (() => {
     const record={id:next('DOC',db.reports),title,body:lines.join('\n'),at:Date.now()};
     db.reports.unshift(record);save();return record;
   }
-  prepareWork();prepareDeliveries();save();
+  prepareWork();prepareDeliveries();
+  if(active.id==='tap'&&globalThis.WorkpalWorkspaceFixtures)globalThis.WorkpalWorkspaceFixtures(db);
+  save();
   return {assignWork,updateIssue,currentDelivery,selectDelivery,latestDelivery,reviewEligibility,approvalEligibility,workflowFor,transitionIssue,handlingAgent,triggerAutopilot,get db(){return db;},get workspace(){return active;},listWorkspaces,createWorkspace,selectWorkspace,lastWorkspace,comment,openRun,changeRun,log,states,teams,stages,handoffs,save,count,next,start,decide,report};
 })();
