@@ -147,7 +147,7 @@ dialog>#storage-conflict{position:static;transform:none;width:auto;margin:16px;b
 @media(max-width:767px){.agent-row-entry>.agent-avatar-button{left:8px}}
 
 /* A single branded entry screen, following the centered Multica welcome layout. */
-.welcome-page{min-height:100dvh;display:flex;align-items:center;justify-content:center;padding:32px 24px;background:linear-gradient(110deg,rgba(27,23,18,.22),rgba(27,23,18,.08)),url("../assets/images/welcome-celebrate-living.webp") center / cover no-repeat;background-color:#8b6a49;overflow:visible}
+.welcome-page{min-height:100dvh;display:flex;align-items:center;justify-content:center;padding:32px 24px;background:linear-gradient(110deg,rgba(27,23,18,.22),rgba(27,23,18,.08)),url("../assets/images/welcome-celebrate-living.jpg") center / cover no-repeat;background-color:#8b6a49;overflow:visible}
 .welcome-card{--welcome-radius:10px;width:100%;max-width:480px;padding:56px 40px 44px;border:1px solid var(--surface-border);border-radius:16px;background:var(--surface);text-align:center;box-shadow:0 16px 56px rgb(24 30 25/.18),0 1px 2px rgb(24 30 25/.08)}
 .welcome-brand{display:flex;align-items:center;justify-content:center;gap:18px}
 .welcome-brand-mark{display:grid;place-items:center;flex:none;width:64px;aspect-ratio:1;padding:6px;border-radius:var(--welcome-radius);background:var(--brand-orange,#e87722);color:var(--brand-ink,#183028);line-height:0}

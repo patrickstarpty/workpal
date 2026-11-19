@@ -5,9 +5,9 @@ const read = (path) => readFile(new URL(path, root), 'utf8');
 let html = await read('index.html');
 html=html.replace('assets/brand/workpal-favicon.svg','data:image/svg+xml;base64,'+Buffer.from(await read('assets/brand/workpal-favicon.svg')).toString('base64'));
 const font = await readFile(new URL('assets/fonts/inter-latin.woff2', root));
-const welcomeImage = await readFile(new URL('assets/images/welcome-celebrate-living.webp', root));
+const welcomeImage = await readFile(new URL('assets/images/welcome-celebrate-living.jpg', root));
 const css = '/* '+(await read('assets/fonts/LICENSE.txt'))+' */\n' + (await read('src/studio.css'))
-  .replace('../assets/images/welcome-celebrate-living.webp', 'data:image/webp;base64,' + welcomeImage.toString('base64'))
+  .replace('../assets/images/welcome-celebrate-living.jpg', 'data:image/jpeg;base64,' + welcomeImage.toString('base64'))
   .replace('../assets/fonts/inter-latin.woff2', 'data:font/woff2;base64,' + font.toString('base64'));
 html = html.replace('<link rel="stylesheet" href="src/studio.css" />', `<style>${css}</style>`);
 html = html.replace('<link rel="stylesheet" href="src/analytics.css" />', `<style>${await read('src/analytics.css')}</style>`);
