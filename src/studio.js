@@ -792,7 +792,7 @@
       <div class="space-panel"><header class="space-heading"><h2>${space.name}</h2>${btn(icon('panelLeft'),'collapseNav','','icon-only" aria-label="Collapse sidebar')}</header><div class="panel-scroll">${panel}</div></div></aside>`;
   }
   function chatLauncher(){
-    return '<div class="chat-launcher" aria-label="Workspace chat">'+btn(icon('workpal')+' Ask Workpal','chat','','ask-button')+
+    return '<div class="chat-launcher" aria-label="Workspace chat">'+btn(icon('workpal')+' <span>Ask <span class="ask-workpal-name">Workpal</span></span>','chat','','ask-button')+
       btn(icon('history'),'surface','chatHistory|','history-button" aria-label="Chat history')+'</div>';
   }
   const scrollPositions=new Map();
