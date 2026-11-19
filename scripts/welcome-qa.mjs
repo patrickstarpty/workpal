@@ -37,7 +37,8 @@ try{
     await page.goto(url);
     await expect(welcome).toBeVisible();await expect(page).toHaveTitle('Welcome · Workpal');
     await expect(page).toHaveURL(/#welcome$/);await expect(page.locator('input')).toHaveCount(0);
-    await expect(welcome.locator('h1')).toHaveText('Workpal');
+    await expect(welcome.getByRole('heading',{name:'Workpal',exact:true})).toBeVisible();
+    await expect(welcome.locator('h1 .brand-wordmark text')).toHaveText('Workpal');
     await expect(welcome.locator('h1')).toHaveCSS('font-style','italic');
     await expect(welcome.locator('h1')).toHaveCSS('font-family',/Inter/);
     await expect(welcome.locator('.welcome-brand-mark')).toHaveCount(1);

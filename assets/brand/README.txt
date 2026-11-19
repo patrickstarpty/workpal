@@ -1,12 +1,15 @@
 Workpal current brand assets
 
-workpal-logo.svg       Current orange tile with the serif W and dot.
-workpal-mark.svg       Transparent W-and-dot symbol; uses currentColor.
+workpal-logo.svg       Current orange tile with the deep-green lowercase pal.
+workpal-mark.svg       Transparent italic pal symbol; uses currentColor.
 workpal-wordmark.svg   Current italic Inter 600 Workpal wordmark, embedded font.
 workpal-favicon.svg    Small orange-tile variant for browser tabs.
 
-The existing welcome-screen design is the reference; these are not new designs.
-The wordmark embeds assets/fonts/inter-latin.woff2, whose license is in
+The pal symbol reuses the exact embedded font and text styling from the final
+three letters of the Workpal wordmark: Inter 600 italic at a 72px base size,
+with -3.24px letter spacing. Scale the SVG instead of changing its font size.
+The square tile places the cropped pal SVG at 84% width, centered on both axes.
+The assets embed assets/fonts/inter-latin.woff2, whose license is in
 assets/fonts/LICENSE.txt. No remote font or image requests are needed.
 
 Edit SVG sources here. scripts/build-brand.mjs generates src/brand.js, and

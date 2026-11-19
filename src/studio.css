@@ -150,24 +150,25 @@ dialog>#storage-conflict{position:static;transform:none;width:auto;margin:16px;b
 .welcome-page{min-height:100dvh;display:flex;align-items:center;justify-content:center;padding:32px 24px;background:linear-gradient(110deg,rgba(27,23,18,.22),rgba(27,23,18,.08)),url("../assets/images/welcome-celebration-restored.png") center / cover no-repeat;background-color:#8b6a49;overflow:visible}
 .welcome-card{--welcome-radius:10px;width:100%;max-width:480px;padding:56px 40px 44px;border:1px solid var(--surface-border);border-radius:16px;background:var(--surface);text-align:center;box-shadow:0 16px 56px rgb(24 30 25/.18),0 1px 2px rgb(24 30 25/.08)}
 .welcome-brand{display:flex;align-items:center;justify-content:center;gap:18px}
-.welcome-brand-mark{display:grid;place-items:center;flex:none;width:64px;aspect-ratio:1;padding:6px;border-radius:var(--welcome-radius);background:var(--brand-orange,#e87722);color:var(--brand-ink,#183028);line-height:0}
+.welcome-brand-mark{display:grid;place-items:center;flex:none;width:64px;aspect-ratio:1;border-radius:var(--welcome-radius);background:var(--brand-orange,#e87722);color:var(--brand-ink,#183028);line-height:0}
+.welcome-brand-mark .brand-logo{width:84%}
 .welcome-masthead{display:block;width:100%;height:auto;fill:currentColor;stroke:none}
 .welcome-card h1{font-family:var(--font-sans);font-style:italic;font-synthesis:style;font-size:72px;line-height:76px;font-weight:600;letter-spacing:-.045em}
-.welcome-slogan{margin:24px auto 36px;font-size:15px;line-height:24px;color:var(--muted-foreground)}
+.welcome-slogan{margin:24px auto 36px;font-size:18px;line-height:28px;font-weight:700;color:var(--foreground)}
 .welcome-page .btn.welcome-enter{width:220px;max-width:100%;height:48px;padding:0 20px;justify-content:center;gap:10px;border-radius:var(--welcome-radius);font-size:14px;line-height:20px;flex:none}
 .welcome-page .welcome-enter svg{width:20px;height:20px}
 .product-wordmark{font-family:var(--font-sans);font-style:italic;font-synthesis:style;font-weight:600;font-size:13px;letter-spacing:-.035em}
 :root[data-theme=warm] .welcome-brand-mark{color:var(--brand-ink)}
 :root[data-theme=warm] .welcome-card h1{color:var(--brand-ink)}
-@media(max-width:520px){.welcome-page{padding:24px 16px}.welcome-card{--welcome-radius:8px;padding:44px 20px 36px}.welcome-brand{gap:14px}.welcome-brand-mark{width:52px;padding:5px}.welcome-card h1{font-size:54px;line-height:60px}}
-@media(max-width:360px){.welcome-card{--welcome-radius:7px}.welcome-brand{gap:12px}.welcome-brand-mark{width:46px;padding:4px}.welcome-card h1{font-size:46px;line-height:52px}}
+@media(max-width:520px){.welcome-page{padding:24px 16px}.welcome-card{--welcome-radius:8px;padding:44px 20px 36px}.welcome-brand{gap:14px}.welcome-brand-mark{width:52px}.welcome-card h1{font-size:54px;line-height:60px}}
+@media(max-width:360px){.welcome-card{--welcome-radius:7px}.welcome-brand{gap:12px}.welcome-brand-mark{width:46px}.welcome-card h1{font-size:46px;line-height:52px}}
 .skill-shelf{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-bottom:24px}.skill-feature{display:flex;flex-direction:column;gap:14px;text-align:left;padding:20px;border:1px solid var(--border);border-radius:12px;background:var(--card);min-width:0}.skill-feature:hover{background:var(--surface-hover);border-color:var(--faint-foreground)}.skill-feature-top,.skill-feature-footer{display:flex;align-items:center;justify-content:space-between;gap:8px}.skill-feature-top small,.skill-feature-footer{font-size:11px;color:var(--muted-foreground)}.skill-feature>strong{font-size:16px;font-weight:600}.skill-feature p{font-size:12px;line-height:1.7;color:var(--muted-foreground);margin:0;flex:1}.skill-feature-footer{padding-top:12px;border-top:1px solid var(--border)}@media(max-width:900px){.skill-shelf{grid-template-columns:minmax(0,1fr)}}
 /* Shared current brand assets: welcome, footer and assistant entry. */
 .brand-logo{display:block;width:100%;height:auto;fill:currentColor;stroke:none}
 .brand-wordmark{display:block;width:100%;height:auto;fill:currentColor;stroke:none}
 .welcome-card h1 .brand-wordmark{width:3.75em;height:auto}
 .product-wordmark .brand-wordmark{width:53px;height:auto}
-.chat-launcher .ask-button .brand-logo{width:18px;height:16px;flex:none}
+.chat-launcher .ask-button .brand-logo{width:24px;height:18px;flex:none}
 
 .chat-launcher .ask-button .ask-workpal-name{font-style:italic}
 

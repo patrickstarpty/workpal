@@ -6,9 +6,9 @@ Open **[dist/Workpal.html](dist/Workpal.html)** in a browser to start on the Wor
 
 ## Brand identity
 
-The brand slogan is **Let’s work together.** Preserve this exact capitalization and punctuation. The Workpal wordmark uses sans-serif Inter with italic styling, paired with a prominent **W.** mark in the bold serif tradition of newspaper mastheads. The mark uses fixed SVG outlines, so it stays consistent in the offline export without an additional font. Workspace controls and content retain upright Inter. The Inter font and its license are included in `assets/fonts/`.
+The brand slogan is **Let’s work together.** Preserve this exact capitalization and punctuation. The Workpal wordmark uses sans-serif Inter with italic styling, paired with a lowercase **pal** mark. The mark reuses the wordmark’s embedded font, weight, italic styling and letter spacing, matching its final three letters. Scale the SVG as a whole to preserve those letterforms. Workspace controls and content retain upright Inter. The Inter font and its license are included in `assets/fonts/`.
 
-The welcome screen pairs the **W.** logo in an orange square with the italic Workpal wordmark, with **Let’s work together.** on the next line. Keep the orange square close to the wordmark’s visible height and scale both together on smaller screens. Keep the dot close to the W and the mark spacious inside its square. The **Enter workspace** control below combines a visible label with a right arrow. Its rectangular shape shares the logo’s corner radius; its accessible name comes from the visible label.
+The welcome screen pairs the deep-green **pal** logo in an orange square with the italic Workpal wordmark, with **Let’s work together.** on the next line in 18px bold foreground text. Keep the orange square close to the wordmark’s visible height and scale both together on smaller screens. The pal SVG occupies 84% of the square’s width and is centered with clear space around its letters. The **Enter workspace** control below combines a visible label with a right arrow. Its rectangular shape shares the logo’s corner radius; its accessible name comes from the visible label.
 
 ## Review a delivery and its rework
 
