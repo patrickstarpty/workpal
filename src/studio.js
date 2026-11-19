@@ -5,6 +5,18 @@
   const {states,teams,stages,handoffs,save,count,next,start,decide,report}=WorkpalStudio;
   const esc=WorkpalData.escapeHtml;
   const $=selector=>document.querySelector(selector);
+  const themeKey='workpal.theme';
+  let theme='warm';
+  try{theme=localStorage.getItem(themeKey)==='neutral'?'neutral':'warm';}catch{}
+  function applyTheme(value){
+    theme=value==='neutral'?'neutral':'warm';
+    document.documentElement.dataset.theme=theme;
+    document.querySelector('meta[name="theme-color"]')?.setAttribute('content',theme==='warm'?'#f4f0e9':'#f3f3f4');
+  }
+  applyTheme(theme);
+  function appearance(){
+    return box('Appearance',`<div class="appearance-intro"><div><h3>A quieter space. A brighter focus.</h3><p>Choose the light that works for you.</p></div><span class="appearance-mark" aria-hidden="true">↗</span></div><fieldset class="theme-options"><legend>Workspace theme</legend>${[['neutral','Neutral','Crisp whites. Quiet graphite.'],['warm','Warm','Soft ivory. Amber accents. Deep evergreen.']].map(([value,label,description])=>`<label class="theme-option"><input type="radio" name="workspaceTheme" value="${value}" ${theme===value?'checked':''}><span class="theme-preview ${value}" aria-hidden="true"><i></i><span><b></b><b></b><b></b></span></span><span class="theme-label"><strong>${label}</strong><small>${description}</small></span></label>`).join('')}</fieldset><p class="theme-note">Applies across your workspaces. Saved in this browser.</p>`);
+  }
   const routes={overview:'Overview',tasks:'All issues',projects:'Projects',workflow:'Runs',agents:'Agents',skills:'Skill Hub',stats:'Analytics',reports:'Reports',inbox:'Inbox',mine:'My work',settings:'Settings',chatroom:'Chat',squads:'Squads',auto:'Autopilots',views:'Saved views',workflows:'Workflows',runtimes:'Runtimes'};
   const icon=k=>`<svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="${WorkpalIcons[k]||WorkpalIcons.layers}"/></svg>`;
   const btn=(text,act,id='',cls='')=>{const label=cls.match(/aria-label="([^"]+)/)?.[1];return `<button type="button" class="btn ${cls}" ${label?'title="'+esc(label)+'"':''} data-act="${act}" data-id="${esc(id)}">${text}</button>`;};
@@ -483,7 +495,7 @@
     }
     if(changed)write();
   }
-  const pages={runtimes:runtimesPage,workflows:workflowsPage,auto:autopilots,squads,views:savedViews,chatroom:chatPage,overview,tasks,projects,workflow:()=>box('Run history',runList(db.runs),tool('＋ Launch workflow','launch','','primary')),stats:()=>WorkpalAnalytics.page(),skills:skillsView,agents:agentsView,inbox:inboxView,mine:()=>box('Assigned to Patrick',issueList(db.tasks.filter(t=>t.owner==='Patrick'))),reports:reportList,settings:()=>box('Workspace settings','<dl class="properties"><dt>Workspace</dt><dd>'+esc(workspace().name)+'</dd><dt>Owner</dt><dd>Patrick</dd><dt>Language</dt><dd>English</dd><dt>Storage</dt><dd>This browser</dd></dl>'+actionList([tool('Workflows','workflows'),tool('Workspace notes','notes')]))};
+  const pages={runtimes:runtimesPage,workflows:workflowsPage,auto:autopilots,squads,views:savedViews,chatroom:chatPage,overview,tasks,projects,workflow:()=>box('Run history',runList(db.runs),tool('＋ Launch workflow','launch','','primary')),stats:()=>WorkpalAnalytics.page(),skills:skillsView,agents:agentsView,inbox:inboxView,mine:()=>box('Assigned to Patrick',issueList(db.tasks.filter(t=>t.owner==='Patrick'))),reports:reportList,settings:()=>appearance()+box('Workspace settings','<dl class="properties"><dt>Workspace</dt><dd>'+esc(workspace().name)+'</dd><dt>Owner</dt><dd>Patrick</dd><dt>Language</dt><dd>English</dd><dt>Storage</dt><dd>This browser</dd></dl>'+actionList([tool('Workflows','workflows'),tool('Workspace notes','notes')]))};
   // A surface descriptor selects a trusted renderer. Tools never supply executable HTML.
   const labels={...routes,avatarEditor:'Change avatar',statusIssue:'New issue',issueProperty:'Issue property',runtimeEditor:'Runtime settings',quickEditor:'New quick action',wakeupEditor:'Create wakeup',workflowEditor:'Configure workflow',conversationSettings:'Conversation settings',assignIssue:'Assign work',chatHelp:'Choose an action',chatHistory:'Chat history',threadReply:'Reply to comment',agentConfig:'Agent settings',projectConfig:'Project settings',saveView:'Save issue view',squad:'Squad',squadEditor:'Squad settings',autopilot:'Autopilot',autoEditor:'Autopilot settings',recipients:'New chat',workspaces:'Switch workspace',newWorkspace:'Create workspace',issue:'Issue',move:'Move issue',editIssue:'Edit issue',projectIssue:'Create project issue',childIssue:'Create sub-issue',launch:'Launch a workflow',run:'Run inspector',project:'Project issues',agent:'Agent profile',skill:'Skill detail',notes:'Review notes',document:'Report snapshot',summary:'Generate summary',execution:'Execution report',newAgent:'Configure agent',newProject:'Create project',suggest:'Recommend a skill',directory:'Workspace actions',panel:'Live data panel',search:'Search workspace',reviews:'Review queue'};
 
@@ -1009,6 +1021,11 @@
   });
   document.addEventListener('change',ev=>{
     const el=ev.target;persistFormDraft(el.form);
+    if(el.name==='workspaceTheme'){
+      applyTheme(el.value);
+      try{localStorage.setItem(themeKey,theme);}catch{toast('Theme applied. Browser storage is unavailable.');}
+      return;
+    }
     if(el.form?.dataset.form==='assignWork'&&el.name==='status'){
       const checkbox=el.form.elements.queueRun;
       checkbox.disabled=el.value==='backlog'||!WorkpalStudio.handlingAgent(el.form.dataset.id);
