@@ -1,11 +1,11 @@
-/* A compact, explorable lifecycle map above the issue collection. */
-.issue-flow{flex:none;min-width:0;border-bottom:1px solid var(--border);background:var(--page-canvas)}
+/* An explorable lifecycle map alongside workflow configuration. */
+.issue-flow{min-width:0;margin-bottom:20px;border:1px solid var(--surface-border);border-radius:12px;background:var(--surface);overflow:hidden}
 .issue-flow-header{padding:0 16px}
 .issue-flow-header button{display:flex;align-items:center;gap:8px;width:100%;min-height:42px;padding:8px 0;border:0;background:none;color:var(--foreground);text-align:left;cursor:pointer;font:inherit;font-size:12px}
 .issue-flow-header button>svg{width:14px;height:14px;flex:none}
 .issue-flow-header button[aria-expanded=false]>svg{transform:rotate(-90deg)}
 .issue-flow-header span{margin-left:auto;color:var(--muted-foreground);font-size:11px}
-#issue-flow-content{max-height:min(480px,48dvh,max(80px,calc(100dvh - 440px)));overflow:auto;overscroll-behavior:contain}
+#issue-flow-content{min-width:0}
 .issue-flow-tools{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:0 16px 8px;font-size:11px;color:var(--muted-foreground)}
 .issue-flow-tools label{display:flex;align-items:center;gap:8px;font-size:11px;min-width:0}
 .issue-flow-tools select{width:auto;max-width:220px;min-height:28px;padding:3px 24px 3px 8px;font-size:12px}

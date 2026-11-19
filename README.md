@@ -20,7 +20,7 @@ The welcome screen pairs the **W.** logo in an orange square with the italic Wor
 
 ## Follow the issue workflow and retain completed work
 
-**All issues → Workflow overview** shows the main issue lifecycle, review return paths, manual blocking, and Done → Archived → Done. Select a project to use its configured review destinations and delivery requirements; select a stage for its handoff and rules. The map can be collapsed, scrolled on narrow screens, and operated with the keyboard. Starting work can skip To do; every current delivery still enters In review. Existing runs retain the completion requirements captured when they started.
+**Team → Workflows → Workflow overview** shows the main issue lifecycle, review return paths, manual blocking, and Done → Archived → Done. Select a project to use its configured review destinations and delivery requirements; select a stage for its handoff and rules. The map can be collapsed, scrolled on narrow screens, and operated with the keyboard. Starting work can skip To do; every current delivery still enters In review. Existing runs retain the completion requirements captured when they started.
 
 Done displays 50 issues per page in both list and board layouts. **Archive this page** and **Archive all matching** show the exact selection size before applying the change. **Archived** supports search, pagination, historical details, and restoration of one issue or the current page. Archive is visibility metadata, not a new issue status: records stay Done, and existing comments, deliveries, relationships, and review notes remain intact. Restore before editing an archived issue.
 

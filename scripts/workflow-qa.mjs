@@ -14,6 +14,11 @@ try{
     const context=await browser.newContext({viewport:{width,height:900}}),page=await context.newPage(),errors=[];
     page.on('pageerror',e=>errors.push(e.message));
     await gotoWorkspace(page,pathToFileURL(resolve('dist/Workpal.html')).href+'#tasks');
+    await expect(page.locator('.issue-flow')).toHaveCount(0);
+    await page.getByRole('button',{name:'Display',exact:true}).click();
+    await page.getByRole('button',{name:'Board view',exact:true}).click();
+    await expect(page.locator('.issue-flow')).toHaveCount(0);
+    await page.evaluate(()=>{location.hash='#workflows';});
     const toggle=page.locator('[data-issue-flow-toggle]');
     await expect(toggle).toHaveAttribute('aria-expanded','true');
     await expect(page.locator('[data-issue-flow-node]')).toHaveCount(7);
@@ -24,9 +29,11 @@ try{
     await page.keyboard.press('ArrowRight');await expect(page.locator('[data-issue-flow-node=review]')).toBeFocused();
     await page.keyboard.press('Space');await expect(page.locator('.issue-flow-detail')).toContainText('Request changes → In progress');
     await toggle.focus();await page.keyboard.press('Enter');await expect(page.locator('#issue-flow-content')).toBeHidden();
-    await page.getByRole('button',{name:'Filter issues',exact:true}).click();
+    await page.getByRole('button',{name:'New workflow',exact:true}).click();
+    await expect(page.locator('#dialog form[data-form=workflowEditor]')).toBeVisible();
+    await page.keyboard.press('Escape');
     await expect(toggle).toHaveAttribute('aria-expanded','false');
-    await page.keyboard.press('Escape');await toggle.click();
+    await toggle.click();
     await page.evaluate(()=>{
       const db=WorkpalStudio.db;db.projects.push('Flow QA');
       db.workflows.push({id:'flow-qa',name:'QA custom',steps:[{status:'review',next:'todo',rejected:'blocked',owner:'Project lead',instructions:'Verify the release.'}]});
@@ -44,7 +51,10 @@ try{
     await expect(page.locator('.issue-flow-detail')).toContainText('manual acceptance reason');
     await expect(page.locator('.issue-flow-detail')).toContainText('current delivery');
     expect(await page.evaluate(()=>document.documentElement.scrollWidth)).toBeLessThanOrEqual(width);
-    const issues=await page.locator('.issue-groups').boundingBox();expect(issues.height).toBeGreaterThan(100);
+    await expect(page.getByRole('button',{name:'New workflow',exact:true})).toBeVisible();
+    await page.getByRole('button',{name:'QA custom',exact:true}).click();
+    await expect(page.locator('#dialog form[data-form=workflowEditor]')).toBeVisible();
+    await page.keyboard.press('Escape');
     expect(errors).toEqual([]);console.log(`${width}px: workflow routes, completion gate, keyboard, collapse, and bounds passed`);
     await context.close();
   }

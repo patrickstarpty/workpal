@@ -359,7 +359,7 @@
     const done=issuePage(completedIssues(),'done');
     const groupHeader=(key,label,number)=>'<header class="issue-group-header">'+(layout==='list'?btn(icon('chevronDown'),'collapseGroup',key,'group-toggle '+(issuePrefs().collapsed.includes(key)?'collapsed':'')+'" aria-label="'+(issuePrefs().collapsed.includes(key)?'Expand ':'Collapse ')+label):'')+'<span class="issue-mark '+key+'"></span><strong>'+label+'</strong><small>'+number.toLocaleString('en-US')+'</small><span class="group-actions">'+(layout==='board'?'<details class="column-options"><summary role="button" aria-label="More actions for '+label+'">'+icon('more')+'</summary><div class="column-menu">'+btn('Hide column','hideColumn',key)+'</div></details>':'')+tool(icon('plus'),'statusIssue',key,'icon-only" aria-label="New issue in '+label)+'</span></header>';
     const groups=Object.entries(states).filter(([key])=>!issuePrefs().hidden.includes(key));
-    return WorkpalIssueFlow.page()+collection+toolbar+archiveReview()+(layout==='list'?'<div class="issue-groups">'+(groups.map(([key,label])=>{const group=items.filter(t=>t.status===key);return group.length?'<section class="issue-group" data-group="'+key+'">'+groupHeader(key,label,group.length)+'<div '+(issuePrefs().collapsed.includes(key)?'hidden':'')+'>'+(key==='done'?doneControls(done):'')+issueList(key==='done'?done.items:group)+'</div></section>':'';}).join('')||empty('No matching issues.'))+'</div>':'<div class="board" aria-label="Issue board">'+groups.map(([key,label])=>{const group=items.filter(t=>t.status===key);return '<section class="board-lane" data-drop-state="'+key+'">'+groupHeader(key,label,group.length)+(key==='done'?doneControls(done):'')+'<div class="board-cards" tabindex="0" aria-label="'+label+' issues">'+issueList(key==='done'?done.items:group,true)+'</div></section>';}).join('')+'</div>');
+    return collection+toolbar+archiveReview()+(layout==='list'?'<div class="issue-groups">'+(groups.map(([key,label])=>{const group=items.filter(t=>t.status===key);return group.length?'<section class="issue-group" data-group="'+key+'">'+groupHeader(key,label,group.length)+'<div '+(issuePrefs().collapsed.includes(key)?'hidden':'')+'>'+(key==='done'?doneControls(done):'')+issueList(key==='done'?done.items:group)+'</div></section>':'';}).join('')||empty('No matching issues.'))+'</div>':'<div class="board" aria-label="Issue board">'+groups.map(([key,label])=>{const group=items.filter(t=>t.status===key);return '<section class="board-lane" data-drop-state="'+key+'">'+groupHeader(key,label,group.length)+(key==='done'?doneControls(done):'')+'<div class="board-cards" tabindex="0" aria-label="'+label+' issues">'+issueList(key==='done'?done.items:group,true)+'</div></section>';}).join('')+'</div>');
   }
   function issueDisplay(){
     const prefs=issuePrefs();
@@ -405,7 +405,7 @@
   }
   function propertyList(values){return '<dl class="properties">'+Object.entries(values).map(([k,v])=>'<dt>'+esc(k)+'</dt><dd>'+esc(v)+'</dd>').join('')+'</dl>';}
   function workflowsPage(){
-    return box('Workflows','<p>Choose the handoff, brief and next status for each step. Projects can share a workflow.</p>'+
+    return WorkpalIssueFlow.page()+box('Workflows','<p>Choose the handoff, brief and next status for each step. Projects can share a workflow.</p>'+
       db.workflows.map(w=>tool(esc(w.name),'workflowEditor',w.id,'thread-row')).join(''),tool('New workflow','workflowEditor'));
   }
   function workflowEditor(id){
