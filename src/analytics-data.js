@@ -150,17 +150,27 @@ globalThis.WorkpalAnalyticsData = (() => {
     }
     return {totals,rows:[...rows.values()],excluded};
   }
+  function contributionCalendar(result,days=30,now=Date.now()){
+    const start=addDays(localDay(now),1-days),buckets=new Map();
+    for(let i=0;i<days;i++){const day=addDays(start,i),date=dateKey(day);buckets.set(date,{date,weekday:day.getDay(),commits:0,agent:0,human:0,added:0,deleted:0});}
+    const seen=new Set();
+    for(const row of result.rows)for(const c of row.commits){const key=c.repository+'|'+c.sha,at=stamp(c.at);if(seen.has(key)||!Number.isFinite(at)||at>now)continue;seen.add(key);const bucket=buckets.get(dateKey(at));if(bucket){bucket.commits++;bucket[c.assisted?'agent':'human']++;bucket.added+=finite(c.additions);bucket.deleted+=finite(c.deletions);}}
+    return [...buckets.values()];
+  }
   function ticketContribution(db,result){
     const tasks=new Map((db.tasks||[]).map(t=>[t.id,t])),names=new Set((db.squads||[]).map(s=>s.name));
     return result.rows.map(row=>{
       let task=row,team='Unassigned';const seen=new Set();
       while(task&&!seen.has(task.id)){seen.add(task.id);if(names.has(task.owner)){team=task.owner;break;}task=tasks.get(task.parent);}
-      let agentLines=0,humanLines=0,unattributedLines=0;
+      let agentLines=0,humanLines=0;
       for(const c of row.commits){const total=finite(c.additions)+finite(c.deletions);
-        if(Number.isSafeInteger(c.agentLines)&&c.agentLines>=0&&Number.isSafeInteger(c.humanLines)&&c.humanLines>=0&&c.agentLines+c.humanLines<=total){agentLines+=c.agentLines;humanLines+=c.humanLines;unattributedLines+=total-c.agentLines-c.humanLines;}
-        else unattributedLines+=total;
+        // Explicit counts take priority; legacy records use commit-level attribution.
+        const explicit=Number.isSafeInteger(c.agentLines)&&c.agentLines>=0&&Number.isSafeInteger(c.humanLines)&&c.humanLines>=0&&c.agentLines+c.humanLines<=total;
+        const remainder=explicit?total-c.agentLines-c.humanLines:total;
+        agentLines+=(explicit?c.agentLines:0)+(c.assisted?remainder:0);
+        humanLines+=(explicit?c.humanLines:0)+(c.assisted?0:remainder);
       }
-      return {...row,team,agentLines,humanLines,unattributedLines,totalLines:row.added+row.deleted};
+      return {...row,team,agentLines,humanLines,totalLines:row.added+row.deleted};
     }).sort((a,b)=>b.totalLines-a.totalLines||a.id.localeCompare(b.id));
   }
   function squadContribution(db,result){
@@ -207,5 +217,5 @@ globalThis.WorkpalAnalyticsData = (() => {
     const hours=Math.floor(seconds/3600),minutes=Math.floor(seconds%3600/60);
     return `${hours}h${minutes?' '+minutes+'m':''}`;
   }
-  return Object.freeze({skillUsage,ensure,snapshot,contribution,ticketContribution,squadContribution,parseCommits,compact,duration,rate,money,failureLabels});
+  return Object.freeze({skillUsage,ensure,snapshot,contribution,contributionCalendar,ticketContribution,squadContribution,parseCommits,compact,duration,rate,money,failureLabels});
 })();

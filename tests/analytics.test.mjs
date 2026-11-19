@@ -141,15 +141,27 @@ test('squad contribution uses explicit ancestry, deduplicates and separates ambi
   assert.equal(summary.rows.reduce((n,r)=>n+r.commits,0)+summary.shared+summary.unassigned,6);
 });
 
-test('ticket line attribution preserves unknown lines and inherits explicit squad ownership',()=>{
+test('ticket line attribution partitions all changes and inherits explicit squad ownership',()=>{
   const api=analytics(),db={squads:[{name:'Platform'}],tasks:[{id:'TAP-1',owner:'Platform'},{id:'TAP-2',parent:'TAP-1'}]};
   const rows=api.ticketContribution(db,{rows:[{...db.tasks[1],added:20,deleted:10,commits:[{additions:10,deletions:10,agentLines:8,humanLines:7},{additions:10,deletions:0,assisted:true}]}]});
   assert.equal(rows[0].team,'Platform');
   assert.equal(rows[0].totalLines,30);
-  assert.equal(rows[0].agentLines,8);
-  assert.equal(rows[0].humanLines,7);
-  assert.equal(rows[0].unattributedLines,15);
+  assert.equal(rows[0].agentLines,18);
+  assert.equal(rows[0].humanLines,12);
+  assert.equal(rows[0].agentLines+rows[0].humanLines,rows[0].totalLines);
   const commit={repository:'r',sha:'a',message:'TAP-2',at:'2026-11-18',additions:20,deletions:10,agentLines:8,humanLines:7};
   assert.equal(api.parseCommits(JSON.stringify([commit]))[0].agentLines,8);
   assert.throws(()=>api.parseCommits(JSON.stringify([{...commit,humanLines:50}])));
+});
+
+test('commit calendar fills zero days and deduplicates shared ticket commits',()=>{
+  const api=analytics(),c={repository:'repo',sha:'one',at:when(18),assisted:true};
+  const days=api.contributionCalendar({rows:[{commits:[c,{...c,sha:'two',assisted:false},{...c,sha:'future',at:when(19)}]},{commits:[c]}]},7,now);
+  assert.equal(days.length,7);
+  assert.equal(days[0].date,'2026-11-12');
+  assert.equal(days[0].commits,0);
+  assert.equal(days[6].commits,2);
+  assert.equal(days[6].agent,1);
+  assert.equal(days[6].human,1);
+  assert.equal(api.contributionCalendar({rows:[]},1,now)[0].commits,0);
 });

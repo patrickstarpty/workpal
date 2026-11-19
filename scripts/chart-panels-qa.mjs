@@ -16,16 +16,24 @@ try{
       await page.waitForTimeout(150);
       await expect(page.locator('.analytics-chart,.viz-ring svg,.viz-bars').first()).toBeVisible();
       if(view==='contribution'){
-        const expected=await page.evaluate(()=>{const result=WorkpalAnalyticsData.contribution(WorkpalStudio.db,{days:30});return {rate:result.totals.commits?(100*result.totals.workpal/result.totals.commits).toFixed(1)+'%':'—',rows:WorkpalAnalyticsData.squadContribution(WorkpalStudio.db,result).rows.map(r=>[r.name,r.tickets,r.commits,r.workpal,r.human,r.commits?(100*r.workpal/r.commits).toFixed(1)+'%':'—'])};});
-        await expect(page.locator('.contribution-summary .viz-total')).toHaveText(expected.rate);
-        await expect(page.locator('.squad-contribution-table tbody tr')).toHaveCount(expected.rows.length);
-        for(let i=0;i<expected.rows.length;i++){
-          const cells=page.locator('.squad-contribution-table tbody tr').nth(i).locator('td');
-          await expect(cells.nth(0)).toContainText(expected.rows[i][0]);
-          for(let j=1;j<6;j++)await expect(cells.nth(j)).toHaveText(String(expected.rows[i][j]));
+        const expected=await page.evaluate(()=>{const result=WorkpalAnalyticsData.contribution(WorkpalStudio.db,{days:30});return WorkpalAnalyticsData.ticketContribution(WorkpalStudio.db,result).map(r=>[r.id,r.team,r.totalLines,r.agentLines,r.humanLines]);});
+        await expect(page.locator('.contribution-summary-charts > .analytics-card')).toHaveCount(4);
+        await expect(page.locator('.contribution-summary-charts .viz-ring')).toHaveCount(0);
+        await expect(page.locator('.contribution-summary-charts .analytics-chart')).toHaveCount(2);
+        await expect(page.locator('.commit-heatmap [data-analytics-point]')).toHaveCount(30);
+        const day=page.locator('.commit-heatmap [data-analytics-point]').first();
+        await day.focus();
+        await expect(page.locator('.commit-heatmap-frame .analytics-tooltip')).toBeVisible();
+        await page.keyboard.press('ArrowRight');
+        await expect(page.locator('.commit-heatmap [data-analytics-point]').nth(1)).toBeFocused();
+        await expect(page.locator('.ticket-contribution-table tbody tr')).toHaveCount(expected.length);
+        for(let i=0;i<expected.length;i++){
+          const cells=page.locator('.ticket-contribution-table tbody tr').nth(i).locator('td');
+          for(let j=0;j<5;j++)await expect(cells.nth(j)).toContainText(typeof expected[i][j]==='number'?expected[i][j].toLocaleString('en-US'):expected[i][j]);
         }
-        await expect(page.locator('.analytics-chart')).toHaveCount(0);
-        await expect(page.getByRole('heading',{name:'Contribution summary',exact:true})).toBeVisible();
+        await expect(page.getByRole('columnheader',{name:'Agent',exact:true})).toBeVisible();
+        await expect(page.getByRole('columnheader',{name:'Human',exact:true})).toBeVisible();
+        await expect(page.getByRole('columnheader',{name:'Unattributed',exact:true})).toHaveCount(0);
       }
       if(view==='skills'){
         await expect(page.locator('.skill-feature')).toHaveCount(3);
