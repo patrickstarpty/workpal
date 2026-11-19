@@ -56,6 +56,8 @@ Settings follows the local Multica implementation: **Code** contains Code hostin
 
 Jira and GitHub account setups are local records with **Authorization required / Not connected** status. Hosted OAuth, GitHub App installation, fetching authorized repositories, Jira access, PR webhooks, and credential storage are not implemented in this offline artifact. No remote authorization is attempted, no tokens are collected, and saved setup does not imply a connection. The Pull Request sidebar preference affects issue display; code preferences are captured with run context. Automatic PR linking and commit attribution still need a real runtime/backend. Existing manual merge/completion rules remain in force.
 
+The default TAP workspace receives a one-time set of five repository entries, two GitHub account setups and three Jira account setups. These are authored review data, not fetched account or repository records; the four `git.example.com` URLs are placeholders. All account setups remain pending authorization. The additive migration deduplicates equivalent clone URLs, preserves existing configurations and notes, leaves other workspaces empty, and does not restore examples after deletion. Project resources and captured run contexts are not changed.
+
 Reference source: `../multica/packages/views/settings/components/{code-tab,repositories-section,apps-settings,add-app-dialog}.tsx` and the Jira entry in `../multica/server/internal/connectedapps/catalog.go`.
 
 ## Local development

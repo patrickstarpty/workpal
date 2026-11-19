@@ -1294,6 +1294,7 @@
     }
     pendingEntry='';
     db=WorkpalStudio.db;db.runtimes??=[];db.inbox??={};db.quickActions??=[];db.wakeups??=[];prepareConversations();
+    if(WorkpalIntegrations.initialize(db,workspace().id))write();
     if(changed){
       chat=false;draftAgent='';draftText='';
       taskFilter=skillFilter=skillStage=issueStatus=issueOwner='';donePage=archivedPage=0;archivePending=null;

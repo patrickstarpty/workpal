@@ -4,6 +4,42 @@ globalThis.WorkpalIntegrations = (() => {
   const setups = db => db.integrationSetups || [];
   const text = value => typeof value === 'string' ? value.trim() : '';
 
+  // Authored review data, added once to the default workspace. Never imply OAuth.
+  function initialize(db, workspaceId) {
+    if (workspaceId !== 'tap' || db.integrationFixturesVersion >= 1) return false;
+    const fixtureSource = 'integration-settings-v1';
+    const examples = [
+      ['workpal', 'https://github.com/patrickstarpty/workpal', 'Workpal workspace UI, agent collaboration and skill sharing.'],
+      ['tap-web', 'https://git.example.com/workpal/tap-web', 'TAP frontend: knowledge search, citations and document upload.'],
+      ['tap-api', 'git@git.example.com:workpal/tap-api.git', 'TAP services: retrieval, document ingestion and access policies.'],
+      ['skill-hub', 'https://git.example.com/workpal/skill-hub', 'Skill catalog, versioning, review and team collections.'],
+      ['developer-platform', 'git@git.example.com:workpal/developer-platform.git', 'Runtime configuration, CI pipelines and release tooling.'],
+    ];
+    const safeKey = value => {try {return repositoryKey(value);} catch {return null;}};
+    const repos = [...repositories(db)];
+    for (const [slug, url, description] of examples) {
+      const id = 'REPO-example-' + slug, key = repositoryKey(url);
+      if (!repos.some(r => r.id === id || safeKey(r.url) === key)) repos.push({id, url, description, fixtureSource});
+    }
+    const accounts = [...setups(db)];
+    for (const [slug, provider, scope, name] of [
+      ['github-patrick', 'github', 'personal', 'patrickstarpty'],
+      ['github-engineering', 'github', 'team', 'Workpal Engineering'],
+      ['jira-engineering', 'jira', 'team', 'TAP Engineering'],
+      ['jira-quality', 'jira', 'team', 'Release & Quality'],
+      ['jira-patrick', 'jira', 'personal', 'Patrick’s Jira'],
+    ]) {
+      const id = 'SETUP-example-' + slug;
+      if (!accounts.some(a => a.id === id || a.provider === provider && a.scope === scope && text(a.name).toLowerCase() === name.toLowerCase())) {
+        accounts.push({id, provider, scope, name, status:'authorization-required', createdBy:'Patrick', createdAt:Date.UTC(2026,10,18,9), fixtureSource});
+      }
+    }
+    db.repositories = repos;
+    db.integrationSetups = accounts;
+    db.integrationFixturesVersion = 1;
+    return true;
+  }
+
   function repositoryKey(value) {
     const raw = text(value);
     if (!raw || raw.length > 2048 || /[\s\\?#%]/.test(raw)) throw Error('Enter an HTTPS or SSH repository URL without query parameters or credentials.');
@@ -77,5 +113,5 @@ globalThis.WorkpalIntegrations = (() => {
     return result;
   }
 
-  return {repositories, repositoryKey, saveRepository, removeRepository, setups, saveSetup, removeSetup, savePreferences};
+  return {initialize, repositories, repositoryKey, saveRepository, removeRepository, setups, saveSetup, removeSetup, savePreferences};
 })();
