@@ -150,6 +150,19 @@ globalThis.WorkpalAnalyticsData = (() => {
     }
     return {totals,rows:[...rows.values()],excluded};
   }
+  function ticketContribution(db,result){
+    const tasks=new Map((db.tasks||[]).map(t=>[t.id,t])),names=new Set((db.squads||[]).map(s=>s.name));
+    return result.rows.map(row=>{
+      let task=row,team='Unassigned';const seen=new Set();
+      while(task&&!seen.has(task.id)){seen.add(task.id);if(names.has(task.owner)){team=task.owner;break;}task=tasks.get(task.parent);}
+      let agentLines=0,humanLines=0,unattributedLines=0;
+      for(const c of row.commits){const total=finite(c.additions)+finite(c.deletions);
+        if(Number.isSafeInteger(c.agentLines)&&c.agentLines>=0&&Number.isSafeInteger(c.humanLines)&&c.humanLines>=0&&c.agentLines+c.humanLines<=total){agentLines+=c.agentLines;humanLines+=c.humanLines;unattributedLines+=total-c.agentLines-c.humanLines;}
+        else unattributedLines+=total;
+      }
+      return {...row,team,agentLines,humanLines,unattributedLines,totalLines:row.added+row.deleted};
+    }).sort((a,b)=>b.totalLines-a.totalLines||a.id.localeCompare(b.id));
+  }
   function squadContribution(db,result){
     const squads=db.squads||[],names=new Set(squads.map(s=>s.name)),tasks=new Map((db.tasks||[]).map(t=>[t.id,t]));
     const ownerOf=task=>{const seen=new Set();while(task&&!seen.has(task.id)){seen.add(task.id);if(names.has(task.owner))return task.owner;task=tasks.get(task.parent);}return null;};
@@ -168,7 +181,8 @@ globalThis.WorkpalAnalyticsData = (() => {
     if(!Array.isArray(rows)||rows.length>20000)throw new Error('Provide a JSON array with up to 20,000 commits.');
     return rows.map(c=>{
       if(!c||typeof c.repository!=='string'||!c.repository.trim()||typeof c.sha!=='string'||!c.sha.trim()||typeof c.message!=='string'||!Number.isFinite(stamp(c.at))||!Number.isInteger(c.additions)||c.additions<0||!Number.isInteger(c.deletions)||c.deletions<0)throw new Error('Each commit needs repository, sha, message, at (ISO date), and non-negative integer additions and deletions.');
-      return {repository:c.repository,sha:c.sha,message:c.message,at:stamp(c.at),additions:c.additions,deletions:c.deletions};
+      if(('agentLines' in c||'humanLines' in c)&&(!Number.isSafeInteger(c.agentLines)||c.agentLines<0||!Number.isSafeInteger(c.humanLines)||c.humanLines<0||c.agentLines+c.humanLines>c.additions+c.deletions))throw new Error('Provide both agentLines and humanLines as non-negative integers whose sum does not exceed additions + deletions.');
+      return {...('agentLines' in c?{agentLines:c.agentLines,humanLines:c.humanLines}:{}),repository:c.repository,sha:c.sha,message:c.message,at:stamp(c.at),additions:c.additions,deletions:c.deletions};
     });
   }
 
@@ -193,5 +207,5 @@ globalThis.WorkpalAnalyticsData = (() => {
     const hours=Math.floor(seconds/3600),minutes=Math.floor(seconds%3600/60);
     return `${hours}h${minutes?' '+minutes+'m':''}`;
   }
-  return Object.freeze({skillUsage,ensure,snapshot,contribution,squadContribution,parseCommits,compact,duration,rate,money,failureLabels});
+  return Object.freeze({skillUsage,ensure,snapshot,contribution,ticketContribution,squadContribution,parseCommits,compact,duration,rate,money,failureLabels});
 })();
