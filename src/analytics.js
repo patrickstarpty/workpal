@@ -17,7 +17,7 @@ globalThis.WorkpalAnalytics = (() => {
     const params=new URLSearchParams(location.hash.split('?')[1]||'');
     const db=app.getDb(),rawProject=params.get('project');
     const project=db.projects.includes(rawProject)?rawProject:'';
-    const days=[1,7,30,90,180].includes(Number(params.get('days')))?Number(params.get('days')):30;
+    const days=[1,7,30,90,180,365].includes(Number(params.get('days')))?Number(params.get('days')):365;
     const tab=['usage','contribution','errors'].includes(params.get('tab'))?params.get('tab'):'usage';
     return {project,days,tab};
   }
@@ -30,7 +30,7 @@ globalThis.WorkpalAnalytics = (() => {
     const state=selection();state[key]=value;
     const params=new URLSearchParams();
     params.set('tab',state.tab);
-    for(const k of ['days','project'])if(state[k]&&!(k==='days'&&state[k]===30))params.set(k,String(state[k]));
+    for(const k of ['days','project'])if(state[k]&&!(k==='days'&&state[k]===365))params.set(k,String(state[k]));
     location.hash=app.scoped('stats')+'?'+params;
   }
   function control(label,key,items,value,iconName) {
@@ -39,14 +39,14 @@ globalThis.WorkpalAnalytics = (() => {
   function segments(label,key,items,value) {
     return `<div class="analytics-segments" role="group" aria-label="${esc(label)}">${Object.entries(items).map(([id,text])=>`<button type="button" data-analytics="${key}" data-value="${esc(id)}" aria-pressed="${id===value}">${esc(text)}</button>`).join('')}</div>`;
   }
-  function grainOptions(days) {return days<=7?['daily']:days===180?['weekly']:['daily','weekly'];}
+  function grainOptions(days) {return days<=7?['daily']:days>=180?['weekly']:['daily','weekly'];}
   function grain(days,key) {const allowed=grainOptions(days);return allowed.includes(prefs()[key])?prefs()[key]:allowed[0];}
   function grainControl(days,key) {const allowed=grainOptions(days);return allowed.length>1?segments('Chart interval',key,{daily:'Daily',weekly:'Weekly'},grain(days,key)):'';}
   function header() {
     const s=selection(),db=app.getDb();
     const tz=new Intl.DateTimeFormat('en',{timeZoneName:'shortOffset'}).formatToParts(new Date()).find(p=>p.type==='timeZoneName')?.value||'';
     const time=new Date(prefs().refreshed).toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'});
-    return `<div class="analytics-heading"><button type="button" class="btn mobile-only icon-only" data-act="menu" aria-label="Workspace menu">${icon('menu')}</button><button type="button" class="btn analytics-expand icon-only" data-act="collapseNav" aria-label="Expand sidebar">${icon('panelLeft')}</button><h1>${icon('stats')}<span>Analytics</span></h1><div class="analytics-tabs" role="tablist" aria-label="Analytics views">${['usage','contribution','errors'].map(tab=>`<button type="button" role="tab" id="analytics-tab-${tab}" aria-selected="${s.tab===tab}" aria-controls="analytics-panel" data-analytics="tab" data-value="${tab}">${tab[0].toUpperCase()+tab.slice(1)}</button>`).join('')}</div></div><div class="analytics-tools"><small class="analytics-freshness">${esc(tz)} · updated ${esc(time)}</small>${control('Period','days',{'1':'1d','7':'7d','30':'30d','90':'90d','180':'180d'},s.days,'calendar')}${control('Project','project',{'':'All projects',...Object.fromEntries(db.projects.map(p=>[p,p]))},s.project,'projects')}<button type="button" class="btn icon-only analytics-refresh" data-analytics="refresh" aria-label="Refresh analytics" title="Refresh">${icon('refresh')}</button></div>`;
+    return `<div class="analytics-heading"><button type="button" class="btn mobile-only icon-only" data-act="menu" aria-label="Workspace menu">${icon('menu')}</button><button type="button" class="btn analytics-expand icon-only" data-act="collapseNav" aria-label="Expand sidebar">${icon('panelLeft')}</button><h1>${icon('stats')}<span>Analytics</span></h1><div class="analytics-tabs" role="tablist" aria-label="Analytics views">${['usage','contribution','errors'].map(tab=>`<button type="button" role="tab" id="analytics-tab-${tab}" aria-selected="${s.tab===tab}" aria-controls="analytics-panel" data-analytics="tab" data-value="${tab}">${tab[0].toUpperCase()+tab.slice(1)}</button>`).join('')}</div></div><div class="analytics-tools"><small class="analytics-freshness">${esc(tz)} · updated ${esc(time)}</small>${control('Period','days',{'1':'1d','7':'7d','30':'30d','90':'90d','180':'180d','365':'1y'},s.days,'calendar')}${control('Project','project',{'':'All projects',...Object.fromEntries(db.projects.map(p=>[p,p]))},s.project,'projects')}<button type="button" class="btn icon-only analytics-refresh" data-analytics="refresh" aria-label="Refresh analytics" title="Refresh">${icon('refresh')}</button></div>`;
   }
   const kpi = (label,value,hint='') => `<div class="analytics-kpi"><span class="analytics-label">${esc(label)}</span><strong class="analytics-value">${esc(value)}</strong><span class="analytics-hint">${esc(hint)}</span></div>`;
   const empty = (title,caption='') => `<div class="analytics-empty">${icon('stats')}<h3>${esc(title)}</h3>${caption?`<p>${esc(caption)}</p>`:''}</div>`;
@@ -143,13 +143,14 @@ globalThis.WorkpalAnalytics = (() => {
   }
 
   function commitHeatmap(days){
+    if(days.length>190){const segments=[];for(let i=0;i<days.length;i+=183)segments.push(commitHeatmap(days.slice(i,i+183)));return card('Commit activity',`<div class="annual-heatmap">${segments.join('')}</div>`);}
     const offset=days[0]?.weekday||0,columns=Math.ceil((offset+days.length)/7),step=19,width=56+columns*step;
     const colors=['var(--muted)','color-mix(in srgb, var(--chart-series-1) 25%, var(--card))','color-mix(in srgb, var(--chart-series-1) 50%, var(--card))','color-mix(in srgb, var(--chart-series-1) 75%, var(--card))','var(--chart-series-1)'];
     const level=n=>n===0?0:n<=2?1:n<=5?2:n<=9?3:4;
     let previousMonth='';
     const months=days.map((d,i)=>{const month=d.date.slice(0,7),column=Math.floor((offset+i)/7);if(month===previousMonth)return '';previousMonth=month;return `<text x="${48+column*step}" y="14" class="chart-label">${new Date(d.date+'T12:00:00').toLocaleDateString('en-US',{month:'short'})}</text>`;}).join('');
     const cells=days.map((d,i)=>{const tip=`${d.date}: ${d.commits} commits · Agent ${d.agent} · Human ${d.human}`;return `<g tabindex="0" role="img" class="analytics-chart-point" data-analytics-point data-tooltip="${esc(tip)}" aria-label="${esc(tip)}"><title>${esc(tip)}</title><rect x="${48+Math.floor((offset+i)/7)*step}" y="${26+d.weekday*step}" width="15" height="15" rx="3" fill="${colors[level(d.commits)]}"/></g>`;}).join('');
-    return card('Commit activity',`<div class="analytics-card-body"><div class="commit-heatmap-scroll" role="region" aria-label="Daily commit calendar" tabindex="0"><div class="analytics-chart-frame commit-heatmap-frame" style="width:${Math.max(180,width)}px"><svg class="commit-heatmap" width="${Math.max(180,width)}" height="163" role="group" aria-label="Daily commits">${months}${['Mon','Wed','Fri'].map((label,i)=>`<text x="4" y="${57+i*38}" class="chart-label">${label}</text>`).join('')}${cells}</svg><div class="analytics-tooltip" role="tooltip" hidden></div></div></div><div class="commit-heatmap-footer"><span>${days.reduce((n,d)=>n+d.commits,0).toLocaleString('en-US')} commits · ${days[0]?.date||''} — ${days.at(-1)?.date||''}</span><span class="commit-heatmap-legend">Less ${colors.map((color,i)=>`<i style="background:${color}" title="${['0','1–2','3–5','6–9','10+'][i]} commits"></i>`).join('')} More</span></div><p class="viz-caption">Hover or focus a day for details. Use left/right arrow keys to move. Each repository commit is counted once, including commits linked to multiple tickets.</p></div>`);
+    return card('Commit activity',`<div class="analytics-card-body"><div class="commit-heatmap-scroll" role="region" aria-label="Daily commit calendar" tabindex="0"><div class="analytics-chart-frame commit-heatmap-frame" ><svg class="commit-heatmap" viewBox="0 0 ${Math.max(180,width)} 163" role="group" aria-label="Daily commits">${months}${['Mon','Wed','Fri'].map((label,i)=>`<text x="4" y="${57+i*38}" class="chart-label">${label}</text>`).join('')}${cells}</svg><div class="analytics-tooltip" role="tooltip" hidden></div></div></div><div class="commit-heatmap-footer"><span>${days.reduce((n,d)=>n+d.commits,0).toLocaleString('en-US')} commits · ${days[0]?.date||''} — ${days.at(-1)?.date||''}</span><span class="commit-heatmap-legend">Less ${colors.map((color,i)=>`<i style="background:${color}" title="${['0','1–2','3–5','6–9','10+'][i]} commits"></i>`).join('')} More</span></div><p class="viz-caption">Hover or focus a day for details. Use left/right arrow keys to move. Each repository commit is counted once, including commits linked to multiple tickets.</p></div>`);
   }
 
   const palette=Array.from({length:6},(_,i)=>`var(--chart-series-${i+1})`);
@@ -172,7 +173,7 @@ globalThis.WorkpalAnalytics = (() => {
     const records=data().skillUsage(app.getDb()),items=records.map(r=>r.skill);
     const sum=key=>records.reduce((n,r)=>n+r[key],0);
     const weeks=['Week 1','Week 2','Week 3','Week 4'].map((label,i)=>({label,runs:records.reduce((n,r)=>n+r.weekly[i],0)}));
-    return `<div class="skill-dashboard"><div class="skill-summary-caption">Workspace library <span>Last 4 weeks · independent of directory filters</span></div><div class="analytics-kpis">${kpi('Total skills',items.length)}${kpi('Active skills',items.length)}${kpi('Activations',sum('total'))}${kpi('Automatic activations',sum('auto'))}${kpi('Auto activation share',sum('total')?Math.round(sum('auto')/sum('total')*100)+'%':'—')}</div><div class="viz-grid skill-charts">${lineChart('Activation trend',weeks,[{key:'runs',label:'Activations'}])}${distribution('Most used skills',records.map(r=>({label:r.skill.name,value:r.total})).sort((a,b)=>b.value-a.value).slice(0,5))}${distribution('Activation methods',[{label:'Manual',value:sum('manual')},{label:'Pinned',value:sum('pinned')},{label:'Automatic',value:sum('auto')}],true)}</div></div>`;
+    return `<div class="skill-dashboard"><div class="skill-summary-caption">Workspace library <span>Last 4 weeks · independent of directory filters</span></div><div class="analytics-kpis">${kpi('Total skills',items.length)}${kpi('Active skills',records.filter(r=>r.total>0).length)}${kpi('Activations',sum('total'))}${kpi('Automatic activations',sum('auto'))}${kpi('Auto activation share',sum('total')?Math.round(sum('auto')/sum('total')*100)+'%':'—')}</div><div class="viz-grid skill-charts">${lineChart('Activation trend',weeks,[{key:'runs',label:'Activations'}])}${distribution('Most used skills',records.map(r=>({label:r.skill.name,value:r.total})).sort((a,b)=>b.value-a.value).slice(0,5))}${distribution('Activation methods',[{label:'Manual',value:sum('manual')},{label:'Pinned',value:sum('pinned')},{label:'Automatic',value:sum('auto')}],true)}</div></div>`;
   }
   function skillUsageDetail(id){
     const record=data().skillUsage(app.getDb()).find(r=>r.skill.id===id);

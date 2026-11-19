@@ -24,7 +24,7 @@ test('linked workspace has complete ticket, run, delivery, contribution and usag
   }
   for(const commit of db.contributionCommits){assert.ok(db.tasks.some(t=>t.id===commit.task));if(commit.run)assert.ok(db.runs.some(r=>r.id===commit.run&&r.task===commit.task));}
   for(const record of db.analyticsHistory.records)assert.ok(db.runs.some(r=>r.id===record.run&&r.task===record.task&&r.status==='finished'));
-  const totals=ctx.WorkpalAnalyticsData.contribution(db,{days:90}).totals;
+  const totals=ctx.WorkpalAnalyticsData.contribution(db,{days:365}).totals;
   assert.equal(totals.commits,db.contributionCommits.length);assert.ok(totals.human>0&&totals.workpal>0);
   console.log(JSON.stringify({tasks:tasks.length,runs:db.runs.filter(r=>r.fixtureSource).length,deliveries:db.deliveries.filter(d=>d.fixtureSource).length,commits:totals.commits,reports:db.reports.length}));
 });
@@ -51,4 +51,19 @@ test('scenario history has coherent timestamps, dependencies and returned revisi
   }
   for(const t of db.tasks.filter(t=>t.dependsOn))for(const id of t.dependsOn)assert.ok(db.tasks.some(p=>p.id===id&&p.id!==t.id));
   assert.ok(new Set(db.contributionCommits.map(c=>c.sha.slice(0,12))).size===db.contributionCommits.length);
+});
+
+test('annual history spans the year, reconciles attribution and preserves imports during upgrade',()=>{
+  const ctx=workspace(),db=ctx.WorkpalStudio.db,api=ctx.WorkpalAnalyticsData;
+  const annual=db.contributionCommits.filter(c=>c.fixtureSource==='annual-v1');
+  assert.ok(new Set(annual.map(c=>new Date(c.at).toISOString().slice(0,7))).size>=12);
+  for(const c of annual)assert.equal(c.agentLines+c.humanLines,c.additions+c.deletions);
+  const result=api.contribution(db,{days:365}),calendar=api.contributionCalendar(result,365);
+  assert.equal(calendar.length,365);assert.equal(calendar.reduce((n,d)=>n+d.commits,0),result.totals.commits);
+  assert.ok(api.snapshot(db,{days:365}).totals.failed>0);
+  const before=JSON.stringify(db);ctx.WorkpalWorkspaceFixtures(db,Date.now()+86400000);assert.equal(JSON.stringify(db),before);
+  const imported=JSON.parse(before);delete imported.annualFixtureVersion;
+  imported.contributionCommits=[];imported.analyticsHistory={source:'import',records:[]};
+  ctx.WorkpalWorkspaceFixtures(imported);assert.equal(imported.contributionCommits.length,0);assert.equal(imported.analyticsHistory.records.length,0);
+  const skill=api.skillUsage(db).find(r=>r.total>0);assert.ok(skill);assert.equal(skill.total,skill.manual+skill.pinned+skill.auto);
 });

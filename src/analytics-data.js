@@ -198,12 +198,14 @@ globalThis.WorkpalAnalyticsData = (() => {
 
   // Authored Skill Hub display fixtures, deliberately separate from execution records.
   // Stable IDs keep catalog, charts and detail totals consistent across reloads.
-  function skillUsage(db){
+  function skillUsage(db,now=Date.now()){
+    const start=addDays(localDay(now),-27).getTime();
     return db.skills.map(skill=>{
-      const seed=Array.from(skill.id).reduce((n,c)=>(n*31+c.charCodeAt(0))>>>0,7);
-      const weekly=Array.from({length:4},(_,i)=>8+((seed>>>i*4)%47)+i*5);
-      const total=weekly.reduce((n,v)=>n+v,0),manual=Math.floor(total*.24),pinned=Math.floor(total*.31);
-      return {skill,weekly,total,manual,pinned,auto:total-manual-pinned,users:3+seed%19};
+      const weekly=[0,0,0,0],methods={manual:0,pinned:0,auto:0},users=new Set();
+      for(const run of db.runs||[]){if(run.skill!==skill.id)continue;const at=stamp(run.inputSnapshot?.capturedAt??run.events?.[0]?.at);if(!Number.isFinite(at)||at<start||at>now)continue;
+        const dayIndex=Math.round((localDay(at)-localDay(start))/86400000),week=Math.min(3,Math.floor(dayIndex/7));weekly[week]++;methods[Object.hasOwn(methods,run.activationMethod)?run.activationMethod:'manual']++;users.add(run.agent);
+      }
+      return {skill,weekly,total:weekly.reduce((n,v)=>n+v,0),...methods,users:users.size};
     });
   }
 

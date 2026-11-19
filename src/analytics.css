@@ -1149,3 +1149,19 @@ a.analytics-agent:hover {
 .analytics-page[data-analytics-view=usage] .analytics-table :is(th,td){padding-top:9px;padding-bottom:9px}
 @media(max-width:800px){.analytics-page[data-analytics-view=usage] .viz-grid{grid-template-columns:minmax(0,1fr)}}
 @media(max-width:480px){.analytics-page[data-analytics-view=usage] .analytics-kpi{padding:10px 12px}.analytics-page[data-analytics-view=usage] .analytics-value{font-size:24px;line-height:30px}}
+
+/* Fit every calendar segment to the available width, without internal scrolling. */
+.commit-heatmap-scroll{overflow:visible;padding:0}
+.commit-heatmap-frame{width:100%;height:auto;min-height:0}
+.commit-heatmap{display:block;width:100%;height:auto;max-height:163px}
+.annual-heatmap{padding:0 12px 12px;display:grid;gap:6px}
+.annual-heatmap>.analytics-card{border:0;background:transparent}
+.annual-heatmap>.analytics-card>.analytics-card-header{display:none}
+.annual-heatmap .analytics-card-body{padding:0}
+.annual-heatmap .viz-caption{display:none}
+.annual-heatmap .commit-heatmap-footer{font-size:10px;margin:2px 0 8px}
+.skill-charts .viz-ring{flex-direction:column;flex-wrap:nowrap;gap:12px;padding:12px 16px}
+.skill-charts .viz-ring svg{width:176px;flex:0 0 176px;max-width:100%}
+.skill-charts .viz-ring .viz-legend{width:100%;max-width:300px}
+.skill-charts .viz-ring .viz-total{font-size:30px}
+.skill-charts .viz-ring .viz-row{font-size:12px;margin-bottom:10px}

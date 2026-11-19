@@ -37,7 +37,41 @@ globalThis.WorkpalWorkspaceFixtures = (db, now=Date.now()) => {
       const delivery=db.deliveries.find(d=>d.run===run.id);if(delivery?.inputSnapshot)delivery.inputSnapshot.skill=JSON.parse(JSON.stringify(skill));
     }
   };
-  if(db.linkedFixtureVersion===2){linkSkills();return false;}
+  const extendAnnual=()=>{
+    if(db.annualFixtureVersion)return false;
+    const copy=v=>JSON.parse(JSON.stringify(v)),source='annual-v1',day=86400000;
+    const commitWritable=Array.isArray(db.contributionCommits)&&db.contributionCommits.length>0&&db.contributionCommits.every(c=>c.fixtureSource);
+    const usageWritable=db.analyticsHistory?.source==='fixture';
+    const next=(prefix,rows)=>prefix+'-'+(Math.max(1999,...rows.map(r=>Number(r.id?.split('-').pop())||0))+1);
+    const projects=['TAP','Developer Platform','Skill Hub'];
+    const templates=db.runs.filter(r=>r.fixtureSource==='linked-v2'&&r.status==='finished');
+    for(let ago=364;ago>=2;ago-=2){
+      const project=projects[ago%3],pool=templates.filter(r=>r.context.project===project);if(!pool.length)continue;
+      const base=pool[ago%pool.length],original=db.tasks.find(t=>t.id===base.task),agent=db.agents.find(a=>a.name===base.agent);
+      const date=new Date(now);date.setHours(9,0,0,0);date.setDate(date.getDate()-ago);const at=date.getTime(),label=date.toISOString().slice(0,10),failed=ago%22===0;
+      const task={id:next(project==='TAP'?'TAP':project==='Skill Hub'?'SKILL':'DEV',db.tasks),project,parent:original.parent,title:original.title+' · '+label,description:'Scheduled maintenance: '+original.description,checks:copy(original.checks),status:failed?'active':'done',team:original.team,owner:agent.name,priority:'Normal',stage:failed?2:5,tags:['Maintenance'],due:label,subscribed:false,operationRevision:0,activity:[],fixtureSource:source};
+      db.tasks.push(task);
+      const context=copy(base.context),skill=db.skills.find(s=>s.id===base.skill);
+      const run={id:next('RUN',db.runs),task:task.id,agent:agent.name,kind:'execution',mode:'offline',stage:2,status:'finished',skill:base.skill,activationMethod:['manual','pinned','auto'][ago%3],context,inputSnapshot:{capturedAt:at,operationRevision:0,task:{id:task.id,title:task.title,description:task.description,checks:copy(task.checks),project},agent:copy(agent),context:copy(context),skill:copy(skill||null),previousDelivery:null},events:[{type:'run.started',text:task.title,at}],artifacts:[],fixtureSource:source};db.runs.push(run);
+      const linked=[];
+      if(!failed)for(let i=0;i<2+ago%5;i++){
+        const added=18+(ago*31+i*53)%480,deleted=(ago*7+i*11)%120,assisted=i!==0,total=added+deleted,agentLines=assisted?Math.floor(total*.8):0;
+        const sha=(ago.toString(16).padStart(8,'0')+i.toString(16).padStart(4,'0')+'a11c0de0').padEnd(40,'0');
+        const c={repository:'workpal/'+project.toLowerCase().replaceAll(' ','-'),sha,message:task.id+' '+(i?'Refine implementation and regression coverage':task.title)+(assisted?'\n\nCo-authored-by: Workpal <workpal@users.noreply.github.com>':''),at:at+(i+1)*1800000,additions:added,deletions:deleted,agentLines,humanLines:total-agentLines,task:task.id,run:run.id,fixtureSource:source};linked.push(c);
+      }
+      if(commitWritable)db.contributionCommits.push(...linked);
+      if(!failed){
+        const createdAt=at+6*3600000,artifact={title:'Change manifest',body:linked.map(c=>c.repository+' · '+c.sha+' · '+c.message.split('\n')[0]).join('\n'),stage:3,at:createdAt};
+        const delivery={id:next('DEL',db.deliveries),task:task.id,run:run.id,version:1,supersedes:null,summary:task.title,artifacts:[artifact],evidence:task.checks.map((criterion,index)=>({criterion,index,status:'supported',evidence:'Change references: '+linked.map(c=>c.sha.slice(0,12)).join(', ')})),limitations:'Verify repository checks before shipping.',inputSnapshot:copy(run.inputSnapshot),createdAt,disposition:'current',review:{decision:'approve',reviewer:'Patrick',note:'Maintenance scope accepted.',destination:'done',at:createdAt+3600000},fixtureSource:source};
+        db.deliveries.push(delivery);task.currentDeliveryId=delivery.id;task.completion={kind:'delivery',delivery:delivery.id,reason:delivery.review.note,at:delivery.review.at,reviewer:'Patrick'};run.deliveryId=delivery.id;run.delivered=true;run.reviewDecision='approve';run.artifacts=copy(delivery.artifacts);run.events.push({type:'delivery.recorded',text:delivery.id,at:createdAt});
+      }else run.events.push({type:'run.failed',text:'Provider request timed out; retry required.',at:at+3600000});
+      task.activity.push({id:'annual-'+task.id,kind:'comment',author:'Patrick',text:failed?'Provider timeout. Retry before requesting review.':'Reviewed '+run.deliveryId+' for '+run.id,at:at+7*3600000,replies:[],resolved:!failed});
+      if(usageWritable)db.analyticsHistory.records.push({id:'usage-'+run.id,run:run.id,task:task.id,at:at+6*3600000,agent:run.agent,team:task.team,project,input:4000+ago*83,output:600+ago*17,cacheRead:ago*29,cacheWrite:ago*7,cost:Number((.08+ago*.0023).toFixed(4)),seconds:120+ago*7,status:failed?'failed':'completed',...(failed?{failureClass:'timeout',reason:'provider.request_timeout'}:{}),fixtureSource:source});
+    }
+    for(const project of projects){const tasks=db.tasks.filter(t=>t.fixtureSource===source&&t.project===project);db.reports.push({id:next('DOC',db.reports),title:project+' annual maintenance',at:now,body:tasks.map(t=>t.id+' · '+t.title+' · '+t.status+(t.currentDeliveryId?' · '+t.currentDeliveryId:'')).join('\n'),fixtureSource:source});}
+    db.annualFixtureVersion=1;db.annualFixtureAnchor=now;if(usageWritable)db.analyticsHistory.asOf=now;return true;
+  };
+  if(db.linkedFixtureVersion===2){linkSkills();return extendAnnual();}
   // Upgrade untouched v1 chains; preserve any chain with local edits or replies.
   if(db.linkedFixtureVersion===1){
     const removable=new Set(db.tasks.filter(t=>t.fixtureSource==='linked-v1'&&t.operationRevision===0&&t.activity.length===2&&t.activity.every(e=>!e.replies?.length)&&!db.runs.some(r=>r.task===t.id&&(!r.fixtureSource||r.events.length>2))&&!db.deliveries.some(d=>d.task===t.id&&(d.selections?.length||d.review?.note&&d.review.note!=='Scope accepted for the release checklist.'))).map(t=>t.id));
@@ -137,6 +171,6 @@ globalThis.WorkpalWorkspaceFixtures = (db, now=Date.now()) => {
   // Do not replace imports or local review notes. Only replace legacy authored usage.
   if(db.mergeFixtureCommits){db.contributionCommits.push(...commits);delete db.mergeFixtureCommits;}else if(!Object.hasOwn(db,'contributionCommits'))db.contributionCommits=commits;
   if(!db.analyticsHistory||db.analyticsHistory.source==='fixture')db.analyticsHistory={version:1,source:'fixture',asOf:now,records:[...(db.analyticsHistory?.records||[]).filter(r=>r.fixtureSource==='linked-v1'&&db.runs.some(run=>run.id===r.run)),...usage]};
-  db.linkedFixtureVersion=2;linkSkills();
+  db.linkedFixtureVersion=2;linkSkills();extendAnnual();
   return true;
 };

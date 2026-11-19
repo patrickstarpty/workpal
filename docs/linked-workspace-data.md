@@ -38,3 +38,9 @@ This Workpal-specific aggregation uses an explicit squad assignee on the ticket,
 ## Theme-aware charts
 
 Chart series now use CSS custom properties shared by SVG marks, ring segments, legends and horizontal bars. Neutral retains all original series colors. Warm uses the existing FWD-inspired orange (#e87722), apricot, amber and terracotta palette; usage stacks, error classes and generated status charts also receive scoped warm colors. No theme preference, data, layout or attribution behavior changes. Browser verification switches Neutral → Warm → Neutral through Settings, checks computed SVG/bar colors (including failure bars) and persistence across Analytics and Skill Hub.
+
+## Annual analytics and connected skill activity
+
+An additive annual-v1 migration anchors 182 maintenance attempts across the preceding 365 days. Tickets retain project and parent-squad links; runs capture agent, runtime context, skill and requirements; successful attempts carry reviewed deliveries and commit manifests; failed attempts supply timeout events and Errors records. Commits include explicit Agent/Human contributions. Reports reference the same ticket and delivery IDs. Existing imports, review notes and original records are preserved. The migration runs once in the default workspace and does not shift dates on reload. These are authored examples, not repository measurements or real agent executions. No external integrations, repository PRs or workflow executions are claimed.
+
+Analytics defaults to 1y, with shorter ranges still available. The yearly commit calendar uses two continuous date segments that scale to the card width without internal scrolling. Skill Hub activation counts and methods now derive from recorded skill runs in the last four weeks, rather than independent generated counts. Its activation-method ring is enlarged to 176px.
