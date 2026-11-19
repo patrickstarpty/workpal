@@ -1119,3 +1119,6 @@ a.analytics-agent:hover {
 .contribution-share-value small{display:block;font-size:12px;font-weight:400;color:var(--muted-foreground);margin-top:4px}
 .contribution-share .contribution-stacked{height:20px}
 @media(max-width:600px){.contribution-summary-charts{grid-template-columns:minmax(0,1fr)}}
+
+/* Analytics charts use one full-width column at every viewport size. */
+.analytics-page :is(.viz-grid,.contribution-overview,.contribution-summary,.contribution-summary-charts){grid-template-columns:minmax(0,1fr)}
