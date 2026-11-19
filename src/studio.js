@@ -423,21 +423,19 @@
   function agentsView(){return '<div class="agent-table"><div class="table-head"><span>Name</span><span>Runtime</span><span>Skills</span><span>Status</span></div>'+db.agents.map(a=>`<div class="agent-row-entry"><button type="button" class="agent-row" data-act="surface" data-id="agent|${esc(a.name)}"><span class="actor-name" title="${esc(a.role)}"><strong>${esc(a.name)}</strong></span><span class="cell-meta">${icon('runtimes')}${esc(a.runtime)}</span><span>${a.skills.length} skills</span><span class="availability"><i></i>Offline</span></button>${agentAvatarControl(a.name,'agent-avatar-button','agents')}</div>`).join('')+'</div>';}
   let directoryTab='all', sortSkills='rank';
   const skillAgents=id=>db.agents.filter(a=>a.skills.includes(id));
-  const skillRuns=id=>db.runs.filter(r=>r.skill===id).length;
+  const skillRuns=id=>WorkpalAnalyticsData.skillUsage(db).find(r=>r.skill.id===id)?.total||0;
   const installCommand=s=>s.repo?'npx skills add https://github.com/'+s.repo+' --skill '+s.id:'';
   function skillsView(){
     const items=db.skills.filter(s=>(directoryTab!=='saved'||db.bookmarks.includes(s.id))&&
       (directoryTab!=='attached'||skillAgents(s.id).length)&&(!skillStage||stages[s.stage]===skillStage)&&
       [s.id,s.name,s.author,s.repo,s.description].join(' ').toLowerCase().includes(skillFilter.trim().toLowerCase()));
     items.sort((a,b)=>(sortSkills==='rank'?(a.rank??Infinity)-(b.rank??Infinity):sortSkills==='usage'?skillRuns(b.id)-skillRuns(a.id):0)||a.name.localeCompare(b.name));
-    const featured=items.filter(s=>s.local).sort((a,b)=>skillRuns(b.id)-skillRuns(a.id)).slice(0,3);
-    const shelf=featured.length?'<section class="skill-shelf" aria-label="Workpal skills">'+featured.map(s=>'<button class="skill-feature" data-act="surface" data-id="skill|'+esc(s.id)+'"><span class="skill-feature-top"><span class="tile">'+icon('skills')+'</span><small>Workpal · '+esc(s.version)+'</small></span><strong>'+esc(s.name)+'</strong><p>'+esc(s.description)+'</p><span class="skill-feature-footer">'+esc(stages[s.stage])+'<span>'+skillRuns(s.id)+' runs · '+skillAgents(s.id).length+' agents</span></span></button>').join('')+'</section>':'';
-    return WorkpalAnalytics.skillDashboard(items)+shelf+`<div class="directory"><div class="directory-head"><div class="directory-tabs">${[['all','Directory'],['attached','On agents'],['saved','Saved']].map(([key,label])=>btn(label,'skillTab',key,key===directoryTab?'chosen':'')).join('')}</div>${tool('＋ Add skill','suggest')}</div>
+    return WorkpalAnalytics.skillDashboard()+ `<div class="directory"><div class="directory-head"><div class="directory-tabs">${[['all','Directory'],['attached','On agents'],['saved','Saved']].map(([key,label])=>btn(label,'skillTab',key,key===directoryTab?'chosen':'')).join('')}</div>${tool('＋ Add skill','suggest')}</div>
       <div class="toolbar"><input data-filter="skill" aria-label="Search skills" placeholder="Search skills, publishers or repositories…" value="${esc(skillFilter)}">
       <select aria-label="Skill stage" data-stage-filter>${options({'':'All stages',...strings(stages)},skillStage)}</select>
       <select aria-label="Sort skills" data-sort-skills>${options({rank:'Skills.sh ranking',usage:'Most used in '+workspace().name,name:'Name A–Z'},sortSkills)}</select></div>
-      <div class="skill-head"><span>Global rank</span><span>Skill / Repository</span><span>Stage</span><span>Local runs</span></div>
-      ${items.map(s=>`<button class="skill-line" data-act="surface" data-id="skill|${esc(s.id)}"><code>${s.rank?'#'+s.rank:'—'}</code><span><strong>${esc(s.name)}</strong><small>${esc(s.repo||s.author)}</small></span><span>${esc(stages[s.stage])}</span><b>${skillRuns(s.id)}</b></button>`).join('')||empty('No skills match these filters.')}
+      <div class="skill-head"><span>Rank</span><span>Skill / Description</span><span>Stage / Version</span><span>Activations</span></div>
+      ${items.map(s=>`<button class="skill-line" data-act="surface" data-id="skill|${esc(s.id)}"><code>${s.rank?'#'+s.rank:'—'}</code><span><strong>${esc(s.name)}</strong><small class="skill-description">${esc(s.description)}</small><small>${esc(s.repo||s.author)}${db.bookmarks.includes(s.id)?" · Saved":""}${s.local?" · Workspace":""}</small></span><span>${esc(stages[s.stage])}<small>${esc(s.version||"Unversioned")}</small></span><b title="Last 4 weeks">${skillRuns(s.id)}</b></button>`).join('')||empty('No skills match these filters.')}
       <footer><span>${items.length} skills · Skills.sh ranks as of Nov 18, 2026</span><a href="https://skills.sh" target="_blank" rel="noopener noreferrer">Explore global rankings ↗</a></footer></div>`;
   }
   function skill(id){
@@ -448,7 +446,7 @@
     return (chat?'<h3>'+esc(s.name)+'</h3>':'')+`<div class="detail-grid"><div>${box('Overview','<small class="mono">'+esc(s.repo||s.author)+'</small><p>'+esc(s.description)+'</p>'+
       (command?'<h4>Install with the CLI</h4><div class="command"><code>'+esc(command)+'</code>'+btn('Copy','copyCommand',id)+'</div>':'')+
       actionList([btn(db.bookmarks.includes(id)?'Unsave skill':'Save skill','bookmark',id),btn('Share skill','share',id),s.source?'<a class="btn" href="'+esc(s.source)+'" target="_blank" rel="noopener noreferrer">View source ↗</a>':'<span class="muted">Workspace skill · '+esc(s.version||'1.0.0')+'</span>']))}
-      ${box('Related skills',skillList(related))}</div><div>${box('Workspace usage','<dl class="properties"><dt>Stage</dt><dd>'+stages[s.stage]+'</dd><dt>Workspace runs</dt><dd>'+skillRuns(id)+'</dd></dl><h4>Attached agents</h4>'+
+      ${WorkpalAnalytics.skillUsageDetail(id)}${box('Related skills',skillList(related))}</div><div>${box('Workspace usage','<dl class="properties"><dt>Version</dt><dd>'+esc(s.version||'Unversioned')+'</dd><dt>Publisher</dt><dd>'+esc(s.author)+'</dd><dt>Source</dt><dd>'+esc(s.local?'Workspace':'External catalog')+'</dd><dt>Stage</dt><dd>'+stages[s.stage]+'</dd><dt>Activations · 4 weeks</dt><dd>'+(skillRuns(id)||'Not yet recorded')+'</dd></dl><h4>Attached agents</h4>'+
       assigned.map(a=>'<div class="binding">'+tool(esc(a.name),'agent',a.name)+btn('Remove','detach',JSON.stringify([id,a.name]))+'</div>').join('')+
       (assigned.length===0?empty('No agents attached.'):'')+
       (assigned.length<db.agents.length?form('attach',field('Agent',select('agent',strings(db.agents.filter(a=>!a.skills.includes(id)).map(a=>a.name)))),'Attach skill',id):''))}</div></div>`;

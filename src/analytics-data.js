@@ -172,6 +172,17 @@ globalThis.WorkpalAnalyticsData = (() => {
     });
   }
 
+  // Authored Skill Hub display fixtures, deliberately separate from execution records.
+  // Stable IDs keep catalog, charts and detail totals consistent across reloads.
+  function skillUsage(db){
+    return db.skills.map(skill=>{
+      const seed=Array.from(skill.id).reduce((n,c)=>(n*31+c.charCodeAt(0))>>>0,7);
+      const weekly=Array.from({length:4},(_,i)=>8+((seed>>>i*4)%47)+i*5);
+      const total=weekly.reduce((n,v)=>n+v,0),manual=Math.floor(total*.24),pinned=Math.floor(total*.31);
+      return {skill,weekly,total,manual,pinned,auto:total-manual-pinned,users:3+seed%19};
+    });
+  }
+
   const compact=value=>new Intl.NumberFormat('en-US',{notation:'compact',maximumFractionDigits:1}).format(finite(value));
   const money=value=>new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',minimumFractionDigits:2,maximumFractionDigits:2}).format(finite(value));
   const rate=(failed,total)=>`${total>0?(100*finite(failed)/finite(total)).toFixed(1):'0'}%`;
@@ -182,5 +193,5 @@ globalThis.WorkpalAnalyticsData = (() => {
     const hours=Math.floor(seconds/3600),minutes=Math.floor(seconds%3600/60);
     return `${hours}h${minutes?' '+minutes+'m':''}`;
   }
-  return Object.freeze({ensure,snapshot,contribution,squadContribution,parseCommits,compact,duration,rate,money,failureLabels});
+  return Object.freeze({skillUsage,ensure,snapshot,contribution,squadContribution,parseCommits,compact,duration,rate,money,failureLabels});
 })();

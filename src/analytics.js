@@ -154,8 +154,16 @@ globalThis.WorkpalAnalytics = (() => {
     rows.forEach((r,i)=>{const label=r.label||r.date,tip=[label,...series.map(s=>s.label+': '+(r[s.key]||0))].join('\n');svg+=`<g tabindex="0" role="img" class="analytics-chart-point" data-analytics-point data-tooltip="${esc(tip)}" aria-label="${esc(tip)}"><title>${esc(tip)}</title>${series.map((s,j)=>`<circle cx="${x(i)}" cy="${y(r[s.key]||0)}" r="3" fill="${palette[j]}"/>`).join('')}<rect x="${x(i)-Math.max(4,plot/Math.max(1,rows.length)/2)}" y="${top}" width="${Math.max(8,plot/Math.max(1,rows.length))}" height="${h}" fill="transparent"/></g>`;if(i===0||i===rows.length-1||i%Math.max(1,Math.ceil(rows.length/5))===0)svg+=`<text class="chart-label" x="${x(i)}" y="${height-10}" text-anchor="middle">${esc(label)}</text>`;});
     return card(title,`<div class="analytics-card-body"><div class="analytics-chart-frame"><svg class="analytics-chart" viewBox="0 0 ${width} ${height}" role="group" aria-label="${esc(title)}">${svg}</svg><div class="analytics-tooltip" role="tooltip" hidden></div></div><div class="analytics-legend">${series.map((s,i)=>`<span><i class="analytics-dot" style="background:${palette[i]}"></i>${esc(s.label)}</span>`).join('')}</div><p class="viz-caption">${rows.some(r=>series.some(s=>r[s.key]))?'Hover or focus points for details. Use arrow keys to move.':'No activity in this period.'}</p></div>`);
   }
-  function skillDashboard(items){
-    const db=app.getDb();return `<div class="skill-dashboard"><div class="analytics-kpis">${kpi('Skills in view',items.length)}${kpi('Workpal skills',items.filter(s=>s.author==='Workpal').length)}${kpi('Attached to agents',items.filter(s=>db.agents.some(a=>a.skills.includes(s.id))).length)}${kpi('Recorded runs',db.runs.filter(r=>items.some(s=>s.id===r.skill)).length)}</div><div class="viz-grid">${distribution('Lifecycle coverage',app.stages.map((label,i)=>({label,value:items.filter(s=>s.stage===i).length})),true)}${distribution('Most used skills · top 6',items.map(s=>({label:s.name,value:db.runs.filter(r=>r.skill===s.id).length})).sort((a,b)=>b.value-a.value).slice(0,6))}</div></div>`;
+  function skillDashboard(){
+    const records=data().skillUsage(app.getDb()),items=records.map(r=>r.skill);
+    const sum=key=>records.reduce((n,r)=>n+r[key],0);
+    const weeks=['Week 1','Week 2','Week 3','Week 4'].map((label,i)=>({label,runs:records.reduce((n,r)=>n+r.weekly[i],0)}));
+    return `<div class="skill-dashboard"><div class="skill-summary-caption">Workspace library <span>Last 4 weeks · independent of directory filters</span></div><div class="analytics-kpis">${kpi('Total skills',items.length)}${kpi('Active skills',items.length)}${kpi('Activations',sum('total'))}${kpi('Automatic activations',sum('auto'))}${kpi('Auto activation share',sum('total')?Math.round(sum('auto')/sum('total')*100)+'%':'—')}</div><div class="viz-grid skill-charts">${lineChart('Activation trend',weeks,[{key:'runs',label:'Activations'}])}${distribution('Most used skills',records.map(r=>({label:r.skill.name,value:r.total})).sort((a,b)=>b.value-a.value).slice(0,5))}${distribution('Activation methods',[{label:'Manual',value:sum('manual')},{label:'Pinned',value:sum('pinned')},{label:'Automatic',value:sum('auto')}],true)}</div></div>`;
+  }
+  function skillUsageDetail(id){
+    const record=data().skillUsage(app.getDb()).find(r=>r.skill.id===id);
+    if(!record)return '';
+    return `<div class="skill-dashboard">${lineChart('Activations · last 4 weeks',record.weekly.map((runs,i)=>({label:'Week '+(i+1),runs})),[{key:'runs',label:'Activations'}])}${distribution('Activation methods',[{label:'Manual',value:record.manual},{label:'Pinned',value:record.pinned},{label:'Automatic',value:record.auto}])}</div>`;
   }
 
   function page() {
@@ -220,5 +228,5 @@ globalThis.WorkpalAnalytics = (() => {
     });
     window.addEventListener('resize',()=>{clearTimeout(resizeTimer);resizeTimer=setTimeout(()=>{if(document.querySelector('.analytics-page'))app.render();},150);});
   }
-  return {init,header,page,skillDashboard};
+  return {init,header,page,skillDashboard,skillUsageDetail};
 })();
