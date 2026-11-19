@@ -105,31 +105,88 @@ dialog>#storage-conflict{position:static;transform:none;width:auto;margin:16px;b
 
 .operation-preview{font-size:12px;line-height:1.6;color:var(--muted-foreground);padding:10px 12px;border:1px solid var(--surface-border);border-radius:6px;background:var(--muted)}
 
-/* Warm: FWD-inspired amber and evergreen, within the compact Workpal frame. */
+/* Warm: warm navigation, white working surfaces, and precise information hierarchy.
+   Keep all layout refinements scoped so Neutral retains its original presentation. */
 :root[data-theme=warm]{
-  --app-shell:#f4f0e9;--page-canvas:#fffcf8;--surface:#fffefa;
-  --foreground:#183028;--muted-foreground:#626a60;--faint-foreground:#74796e;
-  --primary:#183028;--primary-foreground:#fffdf8;--secondary:#f5efe5;
-  --surface-selected:#fae4d3;--sidebar-accent:#f3e3d3;
-  --border:#ece5da;--surface-border:#ded8cc;--ring:#b85212;--brand:#a8460c;
-  --surface-shadow:0 1px 3px rgb(71 49 19/.045);
-  --floating-shadow:0 20px 60px rgb(41 48 32/.12),0 3px 10px rgb(71 49 19/.05);
-  --menu-shadow:0 8px 28px rgb(71 49 19/.09);
+  --app-shell:#f7f6f3;--page-canvas:#fff;--surface:#fff;
+  --foreground:#25272a;--muted-foreground:#676b70;--faint-foreground:#767a80;
+  --primary:#25272a;--primary-foreground:#fff;
+  --secondary:#f5f5f3;--surface-selected:#eeede9;--sidebar-accent:#eeede9;
+  --border:#eeefed;--surface-border:#e2e3df;--brand:#a66035;
+  --font-mono:ui-monospace,'SFMono-Regular',Menlo,Consolas,monospace;
+  --sidebar-width:232px;
 }
-:root[data-theme=warm] .workspace-tile{background:#e87722;color:#183028;border-color:transparent;border-radius:10px 10px 3px 10px}
-:root[data-theme=warm] .top{background:linear-gradient(110deg,#fffefa 50%,#fcf0e3)}
-:root[data-theme=warm] .nav.active{box-shadow:inset 2px 0 #e87722}
-:root[data-theme=warm] .dock-link.current{color:#183028;box-shadow:inset 0 -2px #e87722}
-:root[data-theme=warm] .btn.primary{background:#e87722;border-color:#e87722;color:#183028}
-:root[data-theme=warm] .btn.primary:hover{background:#f18c40;border-color:#f18c40}
-:root[data-theme=warm] .shell[data-page=stats]{--analytics-blue-1:#a8460c;--analytics-blue-2:#cb661d;--analytics-blue-3:#e89b5b;--analytics-blue-4:#f5cdab}
-.appearance-intro{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px;margin-bottom:20px;border:1px solid var(--border);border-radius:10px;background:radial-gradient(circle at 90% 10%,color-mix(in srgb,var(--brand) 9%,transparent),transparent 55%),radial-gradient(var(--border) .6px,transparent .6px);background-size:auto,12px 12px}
-.appearance-intro h3{font-size:20px;line-height:28px;letter-spacing:-.04em}.appearance-intro p{color:var(--muted-foreground);margin-top:6px;font-size:13px}
-.appearance-mark{font-size:40px;font-weight:300;color:var(--brand)}
-.theme-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;padding:0;border:0;max-width:720px}.theme-options legend{padding:0;margin-bottom:12px}
-.theme-option{position:relative;display:block;padding:12px;border:1px solid var(--surface-border);border-radius:10px;cursor:pointer;background:var(--surface)}
-.theme-option:has(:checked){border-color:var(--brand);box-shadow:0 0 0 1px var(--brand)}
-.theme-option input{position:absolute;right:12px;bottom:23px;width:16px;height:16px;margin:0;accent-color:var(--brand)}
-.theme-preview{display:flex;height:98px;border:1px solid #e5e5e5;border-radius:6px;overflow:hidden;background:#fcfcfc;gap:12px;padding:10px}.theme-preview>i{width:25%;background:#ededee;border-radius:3px}.theme-preview>span{flex:1;padding:4px 0;display:grid;gap:8px}.theme-preview b{background:#ececee;border-radius:3px}.theme-preview b:first-child{width:36%;background:#27272a}.theme-preview.warm{background:#fffcf8;border-color:#ece5da}.theme-preview.warm>i{background:#f3e3d3}.theme-preview.warm b{background:#eee7dc}.theme-preview.warm b:first-child{background:#e87722}.theme-preview.warm b:last-child{background:#dce4dc;width:70%}
-.theme-label{display:grid;gap:4px;padding:12px 25px 0 0}.theme-label strong{font-size:14px}.theme-label small{font-weight:400}.theme-note{font-size:12px;color:var(--muted-foreground);margin-top:14px}
-@media(max-width:540px){.theme-options{grid-template-columns:1fr}.appearance-intro{padding:16px}.appearance-intro h3{font-size:18px}}
+:root[data-theme=warm] svg.icon{stroke-width:1.7}
+:root[data-theme=warm] .space-heading h2{font-size:14px;font-weight:600;letter-spacing:-.02em}
+:root[data-theme=warm] .rail-group-label small{font-size:11px;font-weight:500;letter-spacing:.01em}
+:root[data-theme=warm] .nav,
+:root[data-theme=warm] .rail-item{font-size:13px!important;border-radius:6px!important}
+:root[data-theme=warm] .nav.active{background:var(--surface)!important;box-shadow:0 0 0 1px var(--surface-border)}
+:root[data-theme=warm] .dock-link{border-radius:8px}
+:root[data-theme=warm] .dock-link.current{background:#eeede9}
+:root[data-theme=warm] .top-title h1{letter-spacing:-.015em}
+:root[data-theme=warm] .btn{border-radius:6px}
+:root[data-theme=warm] .panel,
+:root[data-theme=warm] .directory{box-shadow:none;border-radius:8px}
+:root[data-theme=warm] .issue-id{font-family:var(--font-mono);font-size:12px;letter-spacing:-.025em}
+:root[data-theme=warm] .nav small,
+:root[data-theme=warm] .issue-group-header small{font-variant-numeric:tabular-nums}
+
+/* List headers organize the work without competing with the issue titles. */
+:root[data-theme=warm] .issue-groups{padding:8px 16px 24px}
+:root[data-theme=warm] .issue-groups .issue-group{margin-bottom:12px}
+:root[data-theme=warm] .issue-groups .issue-group-header{
+  height:36px;padding:0 12px;border-radius:0;
+  background:var(--page-canvas);border-bottom:1px solid var(--border);
+}
+:root[data-theme=warm] .issue-groups .issue-group-header strong{font-weight:500;font-size:12px}
+:root[data-theme=warm] .issue-groups .issue-group-header small{font-size:11px}
+:root[data-theme=warm] .issue-groups .issue.row{height:40px;min-height:40px;padding:0 12px;border-radius:4px}
+:root[data-theme=warm] .issue-groups .issue-project{background:transparent;border-radius:4px}
+
+/* Overview: a single metrics band, followed by quiet, unboxed work lists. */
+:root[data-theme=warm] .shell[data-page=overview] .section-intro{margin:0 0 32px}
+:root[data-theme=warm] .shell[data-page=overview] .section-intro h2{font-size:26px;line-height:34px;font-weight:550;letter-spacing:-.035em}
+:root[data-theme=warm] .shell[data-page=overview] .section-intro p{font-size:13px;margin-top:6px}
+:root[data-theme=warm] .shell[data-page=overview] .metrics{gap:0;margin-bottom:36px;padding:20px 0;border-block:1px solid var(--surface-border)}
+:root[data-theme=warm] .shell[data-page=overview] .metrics>a{min-height:76px;padding:0 24px;border:0;border-radius:0;background:none;box-shadow:none}
+:root[data-theme=warm] .shell[data-page=overview] .metrics>a:first-child{padding-left:0}
+:root[data-theme=warm] .shell[data-page=overview] .metrics>a+a{border-left:1px solid var(--border)}
+:root[data-theme=warm] .shell[data-page=overview] .metrics>a:hover{background:var(--surface-hover)}
+:root[data-theme=warm] .shell[data-page=overview] .metrics b{font-size:32px;line-height:40px;font-weight:450;letter-spacing:-.04em;margin-top:6px}
+:root[data-theme=warm] .shell[data-page=overview] .metrics svg{display:none}
+:root[data-theme=warm] .shell[data-page=overview] .split{gap:32px}
+:root[data-theme=warm] .shell[data-page=overview] .panel{padding:0;border:0;border-radius:0;margin-bottom:32px}
+:root[data-theme=warm] .shell[data-page=overview] .panel>header{padding-bottom:12px;border-bottom:1px solid var(--border);margin-bottom:8px;min-height:36px}
+:root[data-theme=warm] .shell[data-page=overview] .panel>header h2{font-size:13px;font-weight:600}
+:root[data-theme=warm] .shell[data-page=overview] .panel>header>a{font-size:12px;color:var(--muted-foreground)}
+:root[data-theme=warm] .shell[data-page=overview] .panel .row{border-radius:4px}
+
+/* Settings use aligned form rows rather than full-width dashboard cards. */
+:root[data-theme=warm] .shell[data-page=settings] #page-content{max-width:760px}
+:root[data-theme=warm] .shell[data-page=settings] .panel{padding:0 0 28px;border:0;border-bottom:1px solid var(--border);border-radius:0;margin-bottom:28px}
+:root[data-theme=warm] .shell[data-page=settings] .panel>header{margin-bottom:24px}
+:root[data-theme=warm] .shell[data-page=settings] .panel>header h2{font-size:15px;letter-spacing:-.02em}
+:root[data-theme=warm] .appearance-setting{max-width:none}
+:root[data-theme=warm] .appearance-setting select{border-radius:6px}
+
+@media(min-width:768px){
+  :root[data-theme=warm] .space-panel{background:var(--app-shell);border:0;border-radius:0;box-shadow:none}
+  :root[data-theme=warm] .main{border-radius:10px;box-shadow:0 0 0 1px var(--surface-border)}
+  :root[data-theme=warm] .shell[data-page=overview] main,
+  :root[data-theme=warm] .shell[data-page=settings] main{padding:32px}
+}
+@media(max-width:767px){
+  :root[data-theme=warm] .issue-groups{padding:4px 4px 52px}
+  :root[data-theme=warm] .issue-groups .issue.row{padding:0 8px}
+  :root[data-theme=warm] .shell[data-page=overview] .section-intro h2{font-size:24px;line-height:32px}
+  :root[data-theme=warm] .shell[data-page=overview] .metrics{row-gap:20px;padding:16px 0;margin-bottom:28px}
+  :root[data-theme=warm] .shell[data-page=overview] .metrics>a{padding:0 16px;min-height:72px}
+  :root[data-theme=warm] .shell[data-page=overview] .metrics>a:nth-child(odd){padding-left:0;border-left:0}
+  :root[data-theme=warm] .shell[data-page=overview] .split{gap:0}
+}
+.appearance-setting{display:flex;align-items:center;justify-content:space-between;gap:24px;max-width:560px}
+.appearance-setting label{font-size:13px;font-weight:500}
+.appearance-setting p{margin-top:4px;font-size:12px;line-height:18px;color:var(--muted-foreground)}
+.appearance-setting select{width:144px;flex:none;font-size:13px}
+@media(max-width:540px){.appearance-setting{align-items:flex-start;flex-direction:column;gap:12px}.appearance-setting select{width:100%}}

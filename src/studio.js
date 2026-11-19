@@ -11,11 +11,11 @@
   function applyTheme(value){
     theme=value==='neutral'?'neutral':'warm';
     document.documentElement.dataset.theme=theme;
-    document.querySelector('meta[name="theme-color"]')?.setAttribute('content',theme==='warm'?'#f4f0e9':'#f3f3f4');
+    document.querySelector('meta[name="theme-color"]')?.setAttribute('content',theme==='warm'?'#f7f6f3':'#f3f3f4');
   }
   applyTheme(theme);
   function appearance(){
-    return box('Appearance',`<div class="appearance-intro"><div><h3>A quieter space. A brighter focus.</h3><p>Choose the light that works for you.</p></div><span class="appearance-mark" aria-hidden="true">↗</span></div><fieldset class="theme-options"><legend>Workspace theme</legend>${[['neutral','Neutral','Crisp whites. Quiet graphite.'],['warm','Warm','Soft ivory. Amber accents. Deep evergreen.']].map(([value,label,description])=>`<label class="theme-option"><input type="radio" name="workspaceTheme" value="${value}" ${theme===value?'checked':''}><span class="theme-preview ${value}" aria-hidden="true"><i></i><span><b></b><b></b><b></b></span></span><span class="theme-label"><strong>${label}</strong><small>${description}</small></span></label>`).join('')}</fieldset><p class="theme-note">Applies across your workspaces. Saved in this browser.</p>`);
+    return box('Appearance',`<div class="appearance-setting"><div><label for="workspace-theme">Theme</label><p id="theme-description">Applies across your workspaces. Saved in this browser.</p></div><select id="workspace-theme" name="workspaceTheme" aria-describedby="theme-description">${options({neutral:'Neutral',warm:'Warm'},theme)}</select></div>`);
   }
   const routes={overview:'Overview',tasks:'All issues',projects:'Projects',workflow:'Runs',agents:'Agents',skills:'Skill Hub',stats:'Analytics',reports:'Reports',inbox:'Inbox',mine:'My work',settings:'Settings',chatroom:'Chat',squads:'Squads',auto:'Autopilots',views:'Saved views',workflows:'Workflows',runtimes:'Runtimes'};
   const icon=k=>`<svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="${WorkpalIcons[k]||WorkpalIcons.layers}"/></svg>`;
