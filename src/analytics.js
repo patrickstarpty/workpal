@@ -143,7 +143,6 @@ globalThis.WorkpalAnalytics = (() => {
   }
 
   function commitHeatmap(days){
-    if(days.length>190){const segments=[];for(let i=0;i<days.length;i+=183)segments.push(commitHeatmap(days.slice(i,i+183)));return card('Commit activity',`<div class="annual-heatmap">${segments.join('')}</div>`);}
     const offset=days[0]?.weekday||0,columns=Math.ceil((offset+days.length)/7),step=19,width=56+columns*step;
     const colors=['var(--muted)','color-mix(in srgb, var(--chart-series-1) 25%, var(--card))','color-mix(in srgb, var(--chart-series-1) 50%, var(--card))','color-mix(in srgb, var(--chart-series-1) 75%, var(--card))','var(--chart-series-1)'];
     const level=n=>n===0?0:n<=2?1:n<=5?2:n<=9?3:4;
