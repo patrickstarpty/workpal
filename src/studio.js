@@ -65,6 +65,7 @@
     return {workspaceId:nested?segments[1]:'tap',page:Object.hasOwn(routes,page)?page:'overview',params:new URLSearchParams(query)};
   }
   let chat=false, mobileMenu=false, focusReturn, modalSurface, timer;
+  const modalStack=[];
   db.panels ??= [];
   let taskFilter='',skillFilter='',skillStage='',layout='list',filtersOpen=false,navCollapsed=false;
   function issuePrefs(){return db.issueDisplay??={layout:'list',hidden:[],collapsed:[],properties:['priority','project','assignee','due','children']};}
@@ -86,16 +87,17 @@
     if(!f||!draftTypes.has(f.dataset.form)||f.dataset.draftSaved)return;
     const space=f.dataset.workspace||(f.dataset.workspace=workspace().id),record={};
     for(const el of f.elements){if(!el.name||el.type==='hidden'||el.type==='submit')continue;record[el.name]=el.type==='checkbox'?el.checked:el.value;}
-    draftRecords(space)[draftId(f)]=record;
+    draftRecords(space)[draftId(f)]=record;updateDraftIndicator();
     try{localStorage.setItem(draftStorageKey(space),JSON.stringify(draftRecords(space)));}catch{toast('Draft is held in this tab. Browser storage is unavailable.');}
   }
+  function updateDraftIndicator(){const exists=Object.entries(draftRecords(workspace().id)).some(([key,value])=>key.startsWith('issue|')&&(value.title||value.description));document.querySelectorAll('[data-id="issue|"]').forEach(button=>button.classList.toggle('has-draft',exists));document.querySelectorAll('.creator-draft-state').forEach(el=>el.textContent=exists?'Draft saved':'');}
   function captureDrafts(root=document){root.querySelectorAll('form[data-form]').forEach(persistFormDraft);}
   function syncIssueForm(f){
-    if(!['issue','issueProperty'].includes(f.dataset.form))return;
+    if(!['issue','issueProperty'].includes(f.dataset.form))return;if(f.elements.title)f.querySelector('[type=submit]').disabled=!f.elements.title.value.trim();
     const old=db.tasks.find(t=>t.id===f.dataset.id),status=f.elements.status?.value||old?.status||'todo',owner=f.elements.owner?.value||old?.owner||'Unassigned';
     const toggle=f.querySelector('.dispatch-option'),manual=f.querySelector('.manual-completion');
     if(toggle){toggle.hidden=['backlog','done'].includes(status);f.elements.startAgent.disabled=toggle.hidden;}
-    if(manual){manual.hidden=status!=='done'||old?.status==='done';f.elements.manualReason.required=!manual.hidden;}
+    if(manual){manual.hidden=status!=='done'||old?.status==='done';f.elements.manualReason.required=!manual.hidden;if(!manual.hidden&&manual.closest('details'))manual.closest('details').open=true;}
     const project=f.elements.project?.value??old?.project??'',step=WorkpalStudio.workflowFor(project).steps.find(s=>s.status===status);
     const handoff=(!old&&owner==='Unassigned'||old&&status!==old.status)&&step?.owner;
     const nextOwner=handoff?(step.owner==='Project lead'?projectConfig(project).lead:step.owner):owner;
@@ -103,7 +105,7 @@
     const willQueue=dispatch&&f.elements.startAgent?.checked&&!f.elements.startAgent.disabled&&agent;
     const previousAgent=old&&WorkpalStudio.handlingAgent(old.owner);
     const stopped=old&&nextOwner!==old.owner?db.runs.filter(r=>r.task===old.id&&r.agent===previousAgent?.name&&['queued','running'].includes(r.status)):[];
-    let preview=f.querySelector('.operation-preview');if(!preview){preview=document.createElement('p');preview.className='operation-preview';preview.setAttribute('aria-live','polite');f.insertBefore(preview,f.querySelector('button[type=submit]'));}
+    let preview=f.querySelector('.operation-preview');if(!preview){preview=document.createElement('p');preview.className='operation-preview';preview.setAttribute('aria-live','polite');f.insertBefore(preview,f.querySelector('.creator-footer')||f.querySelector('button[type=submit]'));}
     preview.textContent='After saving: '+states[status]+' · '+nextOwner+'. '+(willQueue?'Queue one '+(status==='review'?'review':'execution')+' run for '+agent.name+'.':'No new run.')+(stopped.length?' Stop '+stopped.map(r=>r.id).join(', ')+' for the previous assignee.':'')+(status==='done'&&old?.status!=='done'?' Record manual completion; no delivery is approved.':'');
   }
   function restoreDrafts(root=document){
@@ -124,7 +126,7 @@
     document.querySelectorAll('form[data-form]').forEach(other=>{if(other!==f&&other.dataset.workspace===space&&draftId(other)===draftId(f))other.dataset.draftSaved='true';});
   }
   function showSaveError(err){
-    toast(err.message);
+    toast(err.message);const form=document.querySelector('dialog[open]:last-of-type form');if(form){let alert=form.querySelector('.form-error');if(!alert){alert=document.createElement('p');alert.className='form-error';alert.setAttribute('role','alert');form.prepend(alert);}alert.textContent=err.message;}
     if(err.code!=='WORKSPACE_CONFLICT')return;
     captureDrafts();
     let warning=$('#storage-conflict');if(!warning){warning=document.createElement('aside');warning.id='storage-conflict';warning.setAttribute('role','alert');document.body.append(warning);}
@@ -163,7 +165,7 @@
   function boardCard(t){
     const children=db.tasks.filter(c=>c.parent===t.id),due=t.due?new Date(t.due+'T12:00').toLocaleDateString('en-US',{month:'short',day:'numeric'}):'';
     const properties=(issuePropertyVisible('project')&&t.project?'<span class="issue-project">'+icon('projects')+esc(t.project)+'</span>':'')+(issuePropertyVisible('labels')?(t.tags||[]).map(tag=>'<span class="issue-project">'+esc(tag)+'</span>').join(''):'');
-    return `<button class="issue issue-card" draggable="true" data-act="surface" data-id="issue|${esc(t.id)}"><span class="card-top">${issuePropertyVisible('priority')?'<span class="issue-priority '+esc(t.priority.toLowerCase())+'" title="'+esc(t.priority)+' priority">'+icon('priority')+'</span>':''}<span class="issue-id">${esc(t.id)}</span></span><strong class="issue-title">${esc(t.title)}</strong>${properties?'<span class="card-properties">'+properties+'</span>':''}<span class="card-footer">${issuePropertyVisible('assignee')?avatar(t.owner):''}<span class="card-metadata">${issuePropertyVisible('due')&&due?'<span>'+icon('calendar')+esc(due)+'</span>':''}${issuePropertyVisible('children')&&children.length?'<span>'+icon('tasks')+children.filter(c=>c.status==='done').length+'/'+children.length+'</span>':''}</span></span></button>`;
+    return `<div role="button" tabindex="0" class="issue issue-card" draggable="true" data-act="surface" data-id="issue|${esc(t.id)}"><span class="card-top">${issueSelection(t)}${issuePropertyVisible('priority')?tool(icon('priority'),'issueProperty',t.id+'|priority','card-property" aria-label="Change priority'):''}<span class="issue-id">${esc(t.id)}</span>${btn(icon('more'),'cardMenu',t.id,'card-property icon-only" aria-label="Issue actions')}</span><strong class="issue-title">${esc(t.title)}</strong>${properties?'<span class="card-properties">'+properties+'</span>':''}<span class="card-footer">${issuePropertyVisible('assignee')?tool(avatar(t.owner),'issueProperty',t.id+'|owner','card-property" aria-label="Change assignee'):''}<span class="card-metadata">${issuePropertyVisible('due')&&due?tool(icon('calendar')+esc(due),'issueProperty',t.id+'|due','card-property\" aria-label=\"Change due date'):''}${issuePropertyVisible('children')&&children.length?'<span>'+icon('tasks')+children.filter(c=>c.status==='done').length+'/'+children.length+'</span>':''}</span></span></div>`;
   }
   function issueList(items, draggable=false){return items.length?items.map(t=>draggable?boardCard(t):`<button class="issue row" data-act="surface" data-id="issue|${esc(t.id)}"><span class="issue-priority ${esc(t.priority.toLowerCase())}" title="${esc(t.priority)} priority">${icon('priority')}</span><span class="issue-id">${esc(t.id)}</span><span class="issue-mark ${esc(t.status)}" title="${esc(states[t.status])}"></span><strong class="issue-title">${esc(t.title)}</strong><span class="issue-project">${icon('projects')}${esc(t.project||'No project')}</span><span class="issue-date">${t.due?esc(new Date(t.due+'T12:00').toLocaleDateString('en-US',{month:'short',day:'numeric'})):''}</span>${avatar(t.owner)}</button>`).join(''):draggable?'':empty('No matching issues.');}
   function runList(items){return items.length?items.map(r=>`<button class="row" data-act="surface" data-id="run|${esc(r.id)}"><span class="tile">${icon('workflow')}</span><span class="grow"><small>${esc(r.id)} / ${esc(r.task||'Chat')} · Offline ${esc(r.kind||'execution')}</small><strong>${esc(db.tasks.find(t=>t.id===r.task)?.title||r.title||'Chat message')}</strong></span>${badge(r.status)}${icon('chevron')}</button>`).join(''):empty('Launch a workflow to record its first decision.');}
@@ -215,7 +217,7 @@
     const current=task && openRun(id);
     const owner=task?.owner||assignee||'Unassigned';
     const status=nextStatus||task?.status||'todo';
-    return form('issue', (parent?'<input type="hidden" name="parent" value="'+esc(parent.id)+'"><p>Parent issue · '+esc(parent.id)+' · '+esc(parent.title)+'</p>':'')+field('Issue title',input('title',task?.title||draft))+
+    return '<div class="issue-editor" data-mode="manual">'+(!task?'<div class="creator-modes" role="group" aria-label="Creation mode">'+btn('Switch to Manual','creatorMode','manual','selected" aria-label="Manual')+btn('Switch to Agent','creatorMode','agent','" aria-label="Agent')+'<span class="creator-draft-state" role="status"></span></div>':'')+form('issue', (parent?'<input type="hidden" name="parent" value="'+esc(parent.id)+'"><p>Parent issue · '+esc(parent.id)+' · '+esc(parent.title)+'</p>':'')+field('Issue title',input('title',task?.title||draft))+
       field('Description',`<textarea name="description" rows="3">${esc(task?.description||'')}</textarea>`)+
       '<div class="fields">'+field('Project',select('project',{'':'No project',...strings(db.projects)},task?task.project:(project||db.projects[0])))+
       field('Team',select('team',teams,task?.team||parent?.team||'unassigned'))+
@@ -224,23 +226,23 @@
       field('Priority',select('priority',strings(['Low','Normal','High','Urgent']),task?.priority||'Normal'))+
       field('Due date','<input type="date" name="due" value="'+esc(task?.due||'')+'">')+
       field('Labels',input('tags',(task?.tags||[]).join(', '),false))+'</div>'+
-      field('Acceptance criteria · one per line',`<textarea name="checks" rows="2">${esc(task?.checks.join('\n')||'')}</textarea>`)+
-      `<label class="assign-option dispatch-option" ${!['backlog','done'].includes(status)?'':'hidden'}><input type="checkbox" name="startAgent" checked> Queue the assigned agent or workflow handler</label><label class="manual-completion" ${status==='done'&&task?.status!=='done'?'':'hidden'}>Manual completion reason<textarea name="manualReason" ${status==='done'&&task?.status!=='done'?'required':''} placeholder="Explain why this issue is complete without approving a delivery."></textarea></label>`+
-      '',task?'Save changes':'Create issue',id);
+      '<details class="creator-extra"><summary>Additional details</summary>'+field('Acceptance criteria · one per line',`<textarea name="checks" rows="2">${esc(task?.checks.join('\n')||'')}</textarea>`)+
+      `<label class="assign-option dispatch-option" ${!['backlog','done'].includes(status)?'':'hidden'}><input type="checkbox" name="startAgent"> Queue the assigned agent or workflow handler</label><label class="manual-completion" ${status==='done'&&task?.status!=='done'?'':'hidden'}>Manual completion reason<textarea name="manualReason" ${status==='done'&&task?.status!=='done'?'required':''} placeholder="Explain why this issue is complete without approving a delivery."></textarea></label>`+
+      '</details>',task?'Save changes':'Create issue',id)+'</div>';
   }
   function issueDetail(id,dedicated=false){
     const t=db.tasks.find(t=>t.id===id);
     if(!t)return empty('Issue not found.');
     const children=db.tasks.filter(child=>child.parent===id);
     const active=openRun(id), runs=db.runs.filter(r=>r.task===id), latest=WorkpalStudio.currentDelivery(id);
-    return (chat?'<h3>'+esc(id)+' · '+esc(t.title)+'</h3>':'')+`<div class="detail-grid issue-detail-grid"><div class="detail-main"><div class="detail-reading">${dedicated?'<div class="heading"><h1>'+esc(t.title)+'</h1></div>':''}${t.archivedAt?'<div class="issue-archived-banner"><div><strong>Archived · Done</strong><p>Archived '+date(t.archivedAt)+'. Restore to return this issue to Done.</p></div>'+btn('Restore issue','restoreIssue',t.id)+'</div>':''}${box('Description','<p class="preserve">'+esc(t.description||'No description.')+'</p>'+
+    return (chat?'<h3>'+esc(id)+' · '+esc(t.title)+'</h3>':'')+`<div class="detail-grid issue-detail-grid"><div class="detail-main"><div class="detail-reading">${dedicated?'<div class="heading"><h1 '+(!t.archivedAt?'contenteditable="plaintext-only" role="textbox" aria-label="Issue title" data-inline-field="title" data-issue="'+esc(id)+'"':'')+'>'+esc(t.title)+'</h1></div>':''}${t.archivedAt?'<div class="issue-archived-banner"><div><strong>Archived · Done</strong><p>Archived '+date(t.archivedAt)+'. Restore to return this issue to Done.</p></div>'+btn('Restore issue','restoreIssue',t.id)+'</div>':''}${box('Description','<p class="preserve" '+(!t.archivedAt?'contenteditable="plaintext-only" role="textbox" aria-label="Description" data-inline-field="description" data-issue="'+esc(id)+'"':'')+'>'+esc(t.description||'')+'</p>'+
         (t.checks.length?'<h4>Acceptance criteria</h4><ul>'+t.checks.map(c=>'<li>'+esc(c)+'</li>').join('')+'</ul>':''),t.archivedAt?'':tool('Edit issue','editIssue',id))}
       ${t.completion?box('Completion record','<p><strong>'+(t.completion.kind==='manual'?'Completed manually':'Delivery accepted')+'</strong> · '+date(t.completion.at)+'</p><p class="preserve">'+esc(t.completion.reason||'Acceptance decision recorded.')+'</p><small>This is a historical decision; the current issue status is '+esc(states[t.status])+'.</small>'):''}
-      ${codeDelivery(t)}${box('Deliveries',deliveryHistory(id),latest?tool('Open current delivery','run',latest.run):'')}
+      <details class="delivery-extension"><summary>Delivery evidence</summary>${codeDelivery(t)}${box('Deliveries',deliveryHistory(id),latest?tool('Open current delivery','run',latest.run):'')}</details>
       ${box('Sub-issues'+(children.length?' · '+children.filter(c=>c.status==='done').length+'/'+children.length:''),issueList(children),t.archivedAt?'':tool('Add sub-issue','childIssue',id))}
       ${box('Activity',t.activity.map(e=>'<div class="entry"><small>'+esc(e.author)+' · '+date(e.at)+'</small><p>'+esc(e.text)+'</p>'+(e.kind==='comment'?'<details '+(e.resolved?'':'open')+'><summary>'+((e.replies||[]).length)+' replies'+(e.resolved?' · Resolved':'')+'</summary>'+(e.replies||[]).map(r=>'<p class="thread-reply"><small>'+esc(r.author)+'</small> '+esc(r.text)+'</p>').join('')+(t.archivedAt?'':actionList([tool('Reply','threadReply',id+'|'+e.id),btn(e.resolved?'Reopen':'Resolve','resolveThread',id+'|'+e.id)]))+'</details>':'')+'</div>').join(''),t.archivedAt?'':btn(t.subscribed?'Unsubscribe':'Subscribe','subscribe',id))}
       </div>${t.archivedAt?'':`<div class="issue-comment"><form data-form="comment" data-id="${esc(id)}" class="issue-composer"><textarea name="text" aria-label="Add a comment" rows="2" required placeholder="Leave a comment…"></textarea><button type="submit" class="send" aria-label="Post comment" title="Post comment">${icon('arrow')}</button></form></div>`}</div><div class="detail-properties">${box('Properties','<dl class="properties">'+Object.entries({Status:states[t.status],Assignee:t.owner,Priority:t.priority,Project:t.project||'No project',Team:teams[t.team],'Due date':t.due||'No date',Labels:(t.tags||[]).join(', ')||'None'}).map(([k,v])=>{
-        const key={Status:'status',Assignee:'owner',Priority:'priority','Due date':'due'}[k];
+        const key={Status:'status',Assignee:'owner',Priority:'priority','Due date':'due',Project:'project',Labels:'tags'}[k];
         return '<dt>'+k+'</dt><dd>'+(key&&!t.archivedAt?tool(esc(v),'issueProperty',t.id+'|'+key,'property-button'):esc(v))+'</dd>';
       }).join('')+'</dl>'+(t.parent?tool('Parent issue · '+esc(t.parent),'issue',t.parent):''))}
       ${t.status==='review'&&latest?box('Review',tool('Review delivery v'+latest.version,'run',latest.run)):''}
@@ -319,14 +321,16 @@
       (!d&&r.artifacts.length?'<h4>Recorded notes</h4>'+r.artifacts.map(a=>'<details class="artifact"><summary>'+esc(a.title)+'</summary><pre>'+esc(a.body)+'</pre></details>').join(''):'')+
       `<h4>Execution log · local records</h4><ol class="trace">${r.events.slice().reverse().map(e=>'<li><code>'+esc(e.type)+'</code><span>'+esc(e.text)+'</span><small>'+date(e.at)+'</small></li>').join('')}</ol>${tool('Generate execution report','execution',id)}`;
   }
+  const selectedIssues=new Set();
   let issueStatus='',issueOwner='',donePage=0,archivedPage=0,archivePending=null;
   const issuePageSize=50;
   const archivedIssueView=()=>route().params.get('archive')==='1';
   function matchingIssues(archived=archivedIssueView()){
-    return db.tasks.filter(t=>!!t.archivedAt===archived&&(archived||!issueStatus||t.status===issueStatus)&&(!issueOwner||t.owner===issueOwner)&&
+    const result=db.tasks.filter(t=>!!t.archivedAt===archived&&(archived||!issueStatus||t.status===issueStatus)&&(!issueOwner||t.owner===issueOwner)&&
       (t.id+' '+t.title+' '+t.project+' '+t.owner).toLowerCase().includes(taskFilter.toLowerCase()));
+    const prefs=issuePrefs(),rank={Urgent:0,High:1,Normal:2,Low:3};return result.sort((a,b)=>{const key=prefs.sort||'manual';let order=key==='priority'?rank[a.priority]-rank[b.priority]:key==='due'?(a.due||'9999').localeCompare(b.due||'9999'):key==='title'?a.title.localeCompare(b.title):((db.issueOrder||[]).indexOf(a.id)<0?99999:db.issueOrder.indexOf(a.id))-((db.issueOrder||[]).indexOf(b.id)<0?99999:db.issueOrder.indexOf(b.id));return order*(prefs.descending?-1:1);});
   }
-  function completedIssues(){return matchingIssues(false).filter(t=>t.status==='done').sort((a,b)=>(b.completion?.at||0)-(a.completion?.at||0)||b.id.localeCompare(a.id));}
+  function completedIssues(){const items=matchingIssues(false).filter(t=>t.status==='done');return (issuePrefs().sort||'manual')==='manual'&&!db.issueOrder?.length?items.sort((a,b)=>(b.completion?.at||0)-(a.completion?.at||0)||b.id.localeCompare(a.id)):items;}
   function issuePage(items,kind){
     const pages=Math.max(1,Math.ceil(items.length/issuePageSize)),index=Math.max(0,Math.min(kind==='done'?donePage:archivedPage,pages-1));
     if(kind==='done')donePage=index;else archivedPage=index;
@@ -356,14 +360,27 @@
       const page=issuePage(items.sort((a,b)=>b.archivedAt-a.archivedAt||b.id.localeCompare(a.id)),'archived');
       return collection+toolbar+`<div class="issue-archive-toolbar">${issuePagination(page,'archived')}${page.total?btn('Restore this page','restoreIssuePage'):''}</div><div class="issue-archive-list">${page.items.map(t=>`<div class="archived-issue">${issueList([t])}${btn('Restore','restoreIssue',t.id,'" aria-label="Restore '+esc(t.id))}</div>`).join('')||empty('No archived issues match these filters.')}</div>`;
     }
-    const done=issuePage(completedIssues(),'done');
-    const groupHeader=(key,label,number)=>'<header class="issue-group-header">'+(layout==='list'?btn(icon('chevronDown'),'collapseGroup',key,'group-toggle '+(issuePrefs().collapsed.includes(key)?'collapsed':'')+'" aria-label="'+(issuePrefs().collapsed.includes(key)?'Expand ':'Collapse ')+label):'')+'<span class="issue-mark '+key+'"></span><strong>'+label+'</strong><small>'+number.toLocaleString('en-US')+'</small><span class="group-actions">'+(layout==='board'?'<details class="column-options"><summary role="button" aria-label="More actions for '+label+'">'+icon('more')+'</summary><div class="column-menu">'+btn('Hide column','hideColumn',key)+'</div></details>':'')+tool(icon('plus'),'statusIssue',key,'icon-only" aria-label="New issue in '+label)+'</span></header>';
-    const groups=Object.entries(states).filter(([key])=>!issuePrefs().hidden.includes(key));
-    return collection+toolbar+archiveReview()+(layout==='list'?'<div class="issue-groups">'+(groups.map(([key,label])=>{const group=items.filter(t=>t.status===key);return group.length?'<section class="issue-group" data-group="'+key+'">'+groupHeader(key,label,group.length)+'<div '+(issuePrefs().collapsed.includes(key)?'hidden':'')+'>'+(key==='done'?doneControls(done):'')+issueList(key==='done'?done.items:group)+'</div></section>':'';}).join('')||empty('No matching issues.'))+'</div>':'<div class="board" aria-label="Issue board">'+groups.map(([key,label])=>{const group=items.filter(t=>t.status===key);return '<section class="board-lane" data-drop-state="'+key+'">'+groupHeader(key,label,group.length)+(key==='done'?doneControls(done):'')+'<div class="board-cards" tabindex="0" aria-label="'+label+' issues">'+issueList(key==='done'?done.items:group,true)+'</div></section>';}).join('')+'</div>');
+    const done=issuePage(completedIssues(),'done'),prefs=issuePrefs(),grouping=layout==='swimlane'?'status':prefs.grouping||'status';
+    const groupValues=grouping==='status'?Object.entries(states):grouping==='none'?[['','All issues']]:[...new Set(items.map(t=>t[grouping]||''))].map(key=>[key,key||'None']);
+    const groups=groupValues.filter(([key])=>!prefs.hidden.includes(key));
+    const header=(key,label,n)=>'<header class="issue-group-header">'+btn(icon('chevronDown'),'collapseGroup',key,'group-toggle" aria-label="Toggle '+esc(label))+'<strong>'+esc(label)+'</strong><small>'+n.toLocaleString('en-US')+'</small><span class="group-actions">'+(grouping==='status'?tool(icon('plus'),'statusIssue',key,'icon-only" aria-label="New issue in '+esc(label)):'')+'</span></header>';
+    const groupItems=key=>{const all=items.filter(t=>grouping==='none'||(t[grouping]||'')===key);return grouping==='status'&&key==='done'?done.items:all;};
+    const lane=(key,label,subset)=>'<section class="board-lane" '+(grouping==='status'?'data-drop-state="'+esc(key)+'"':'')+'>'+header(key,label,grouping==='status'&&key==='done'?done.total:subset.length)+(layout==='board'&&grouping==='status'&&key==='done'?doneControls(done):'')+'<div '+(prefs.collapsed.includes(key)?'hidden':'')+' class="board-cards" tabindex="0" aria-label="'+esc(label)+' issues">'+issueList(subset,true)+'</div></section>';
+    let body='';
+    if(layout==='swimlane'){
+      const by=prefs.swimlane||'project',values=[...new Set(items.map(t=>t[by]||''))];
+      body='<div class="swimlanes">'+values.map(value=>'<section class="swimlane"><h2>'+esc(value||'No '+by)+'</h2><div class="board">'+groups.map(([key,label])=>lane(key,label,groupItems(key).filter(t=>(t[by]||'')===value))).join('')+'</div></section>').join('')+'</div>';
+    }else if(layout==='board')body='<div class="board" aria-label="Issue board">'+groups.map(([key,label])=>lane(key,label,groupItems(key))).join('')+'</div>';
+    else body='<div class="issue-groups">'+groups.map(([key,label])=>{const group=groupItems(key);return '<section class="issue-group" data-group="'+esc(key)+'">'+header(key,label,grouping==='status'&&key==='done'?done.total:group.length)+'<div '+(prefs.collapsed.includes(key)?'hidden':'')+'>'+(grouping==='status'&&key==='done'?doneControls(done):'')+(layout==='table'?issueTable(group):selectableIssueList(group))+'</div></section>';}).join('')+'</div>';
+    return collection+toolbar+issueBulkToolbar()+archiveReview()+body;
   }
+  function issueSelection(t){return '<input type="checkbox" class="issue-selection" data-select-issue="'+esc(t.id)+'" aria-label="Select '+esc(t.id)+'" '+(selectedIssues.has(t.id)?'checked':'')+'>';}
+  function selectableIssueList(items){return items.map(t=>'<div class="selectable-issue '+(selectedIssues.has(t.id)?'selected':'')+'">'+issueSelection(t)+issueList([t])+'</div>').join('')||empty('No matching issues.');}
+  function issueBulkToolbar(){return '<div class="issue-bulk-toolbar"'+(selectedIssues.size?'':' hidden')+'><span role="status">'+selectedIssues.size+' selected</span>'+btn('Select visible','selectIssues')+btn('Clear','clearIssues')+(selectedIssues.size?['status','owner','priority','project','due','tags'].map(key=>btn(({owner:'Assignee',tags:'Labels'}[key]||key[0].toUpperCase()+key.slice(1)),'bulkIssueProperty',key)).join('')+btn('Archive completed','archiveSelectedIssues'):'')+'</div>';}
+  function issueTable(items){const columns=issuePrefs().tableColumns||['status','priority','owner','project','due'];return '<div class="issue-table-scroll"><table class="issue-table"><thead><tr><th aria-label="Selection"></th><th>Issue</th>'+columns.map(k=>'<th>'+esc({owner:'Assignee',due:'Due date',tags:'Labels'}[k]||k[0].toUpperCase()+k.slice(1))+'</th>').join('')+'</tr></thead><tbody>'+items.map(t=>'<tr class="'+(selectedIssues.has(t.id)?'selected':'')+'"><td>'+issueSelection(t)+'</td><td>'+tool('<small>'+esc(t.id)+'</small> '+esc(t.title),'issue',t.id)+'</td>'+columns.map(key=>'<td>'+tool(esc(key==='status'?states[t.status]:key==='tags'?(t.tags||[]).join(', ')||'None':t[key]||'None'),'issueProperty',t.id+'|'+key,'table-property')+'</td>').join('')+'</tr>').join('')+'</tbody></table></div>';}
   function issueDisplay(){
-    const prefs=issuePrefs();
-    return '<details class="display-dropdown"><summary class="icon-only" role="button" aria-haspopup="menu" aria-label="Display" title="Display">'+icon(layout==='board'?'board':'list')+'</summary><div class="display-menu"><div class="layout-options">'+['board','list'].map(value=>btn(icon(value)+'<span>'+value[0].toUpperCase()+value.slice(1)+'</span>','setLayout',value,(layout===value?'selected':'')+'" aria-label="'+(value==='board'?'Board view':'List view'))).join('')+'</div><div class="display-setting"><span>Grouping</span><span>Status</span></div><h3>Columns</h3><div class="display-chips">'+Object.entries(states).map(([key,label])=>btn('<span class="issue-mark '+key+'"></span>'+label,'toggleColumn',key,prefs.hidden.includes(key)?'':'selected')).join('')+'</div><h3>Card properties</h3><div class="display-chips">'+Object.entries({priority:'Priority',assignee:'Assignee',due:'Due date',project:'Project',labels:'Labels',children:'Sub-issue progress'}).map(([key,label])=>btn(label,'toggleCardProperty',key,prefs.properties.includes(key)?'selected':'')).join('')+'</div></div></details>';
+    const prefs=issuePrefs(),setting=(name,values,value)=>'<label>'+name+select('display'+name,values,value,name)+'</label>';
+    return '<details class="display-dropdown"><summary class="icon-only" role="button" aria-haspopup="menu" aria-label="Display">'+icon(layout==='board'?'board':'list')+'</summary><div class="display-menu"><div class="layout-options">'+['board','list','table','swimlane'].map(value=>btn(icon(value)+'<span>'+value[0].toUpperCase()+value.slice(1)+'</span>','setLayout',value,(layout===value?'selected':'')+'" aria-label="'+value[0].toUpperCase()+value.slice(1)+' view')).join('')+'</div>'+setting('Grouping',{status:'Status',owner:'Assignee',project:'Project',priority:'Priority',none:'None'},prefs.grouping||'status')+(layout==='swimlane'?setting('Swimlane',{project:'Project',owner:'Assignee',parent:'Parent issue'},prefs.swimlane||'project'):'')+setting('Sort',{manual:'Manual',title:'Title',priority:'Priority',due:'Due date'},prefs.sort||'manual')+btn(prefs.descending?'Descending':'Ascending','issueSortDirection')+btn('Select visible issues','selectIssues')+'<h3>Visible status groups</h3><div class="display-chips">'+Object.entries(states).map(([key,label])=>btn(label,'toggleColumn',key,prefs.hidden.includes(key)?'':'selected')).join('')+'</div><h3>'+(layout==='table'?'Table columns':'Card properties')+'</h3><div class="display-chips">'+Object.entries({status:'Status',priority:'Priority',owner:'Assignee',due:'Due date',project:'Project',tags:'Labels',children:'Sub-issues'}).filter(([key])=>layout!=='table'||key!=='children').map(([key,label])=>btn(label,layout==='table'?'toggleTableColumn':'toggleCardProperty',layout==='table'?key:({owner:'assignee',tags:'labels'}[key]||key),(layout==='table'?(prefs.tableColumns||['status','priority','owner','project','due']).includes(key):prefs.properties.includes({owner:'assignee',tags:'labels'}[key]||key))?'selected':'')).join('')+'</div></div></details>';
   }
   const projectConfig=name=>db.projectSettings.find(p=>p.project===name)||{project:name,lead:'Patrick',description:'',reviewer:'',due:''};
   const completionModes={workflow:'Follow workflow',merged:'Approved delivery + merged PRs',acceptance:'Approved delivery + merged PRs + manual acceptance'};
@@ -454,7 +471,7 @@
     return form('autoEditor',field('Name',input('name',a?.name))+field('Runbook','<textarea required name="prompt">'+esc(a?.prompt||'')+'</textarea>')+
       field('Assignee',select('agent',strings(agentNames()),a?.agent))+field('Project',select('project',{'':'No project',...strings(db.projects)},a?.project))+
       field('Output mode',select('mode',{issue:'Create issue',run:'Run only'},a?.mode))+
-      field('Acceptance criteria · one per line','<textarea name="checks" rows="3">'+esc((a?.checks?.length?a.checks:['Provide the requested summary with sources and open questions.']).join('\n'))+'</textarea>')+
+      '<details class="creator-extra"><summary>Additional details</summary>'+field('Acceptance criteria · one per line','<textarea name="checks" rows="3">'+esc((a?.checks?.length?a.checks:['Provide the requested summary with sources and open questions.']).join('\n'))+'</textarea>')+
       field('Daily at · device time','<input type="time" required name="time" value="'+esc(a?.time||'09:00')+'">')+
       field('Schedule',select('enabled',{off:'Disabled',on:'Enabled while this workspace is open'},a?.enabled?'on':'off'))+'<p class="empty">Schedules are checked only while this workspace is selected and this page stays open. Switching workspace or closing the page pauses checks; missed triggers are not replayed.</p>','Save autopilot',id);
   }
@@ -467,7 +484,32 @@
   function savedViews(){
     return box('Saved views',db.views.map(v=>btn(esc(v.name)+' <small>'+esc(states[v.status]||'All statuses')+'</small>','applyView',v.id,'thread-row')).join('')||empty('Save a filtered issue list to reuse it.'));
   }
-  function projects(){return box('Project directory',db.projects.map(p=>`<button class="row" data-act="surface" data-id="project|${esc(p)}"><span class="tile">${icon('projects')}</span><span class="grow"><strong>${esc(p)}</strong><small>${db.tasks.filter(t=>!t.archivedAt&&t.project===p).length} issues</small></span>${icon('chevron')}</button>`).join(''),tool('＋ New project','newProject'));}
+  const collectionState={};
+  const collectionColumns={projects:{status:'Status',priority:'Priority',progress:'Progress',lead:'Lead',due:'Due date',activity:'Recent activity',created:'Created',issues:'Issues'},agents:{status:'Status',runtime:'Runtime',model:'Model',active:'Last active',runs:'Runs',skills:'Skills'},skills:{usedBy:'Used by',addedBy:'Added by',updated:'Updated',author:'Publisher',stage:'Stage',version:'Version',usage:'Activations'}};
+  const collectionDefaults={projects:['status','priority','progress','lead','due','activity','created'],agents:['status','runtime','model','active','runs'],skills:['usedBy','addedBy','updated']};
+  function collectionDate(value,relative=false){if(!value)return '—';const at=new Date(value);if(!Number.isFinite(at.getTime()))return '—';const hours=Math.max(0,Math.floor((Date.now()-at.getTime())/3600000));if(relative&&hours<24)return hours?hours+'h ago':'Just now';return at.toDateString()===new Date().toDateString()?'Today':at.toLocaleDateString('en-US',{month:'short',day:'numeric'});}
+  function collectionItems(kind){
+    if(kind==='projects')return db.projects.map(name=>{const config=projectConfig(name),tasks=db.tasks.filter(t=>!t.archivedAt&&t.project===name),last=tasks.flatMap(t=>t.activity||[]).map(a=>a.at).filter(Boolean).sort().at(-1);return {id:name,name,type:'project',edit:'projectConfig',status:config.status||'In Progress',priority:config.priority||'No priority',progress:tasks.filter(t=>t.status==='done').length+'/'+tasks.length,lead:config.lead||'Unassigned',issues:tasks.length,due:config.due||'—',activity:collectionDate(last),created:collectionDate(config.createdAt)};});
+    if(kind==='agents')return db.agents.map(a=>({id:a.name,name:a.name,description:a.role,type:'agent',edit:'agentConfig',runtime:a.runtime,model:a.model||'—',active:'No activity',runs:db.runs.filter(r=>r.agent===a.name).length,skills:a.skills.length,status:'Offline'}));
+    return db.skills.map(s=>({id:s.id,name:s.name,description:s.description,type:'skill',stage:stages[s.stage],version:s.version||'Unversioned',author:s.author,addedBy:s.addedBy||'—',usedBy:skillAgents(s.id).map(a=>a.name).join(', ')||'—',updated:collectionDate(s.updatedAt,true),sortUpdated:s.updatedAt||0,usage:skillRuns(s.id)}));
+  }
+  function collectionCell(item,key){if(key==='lead'||key==='addedBy')return (item[key]==='—'?'':avatar(item[key]))+esc(item[key]);if(key==='usedBy'){const agents=skillAgents(item.id);return agents.length===1?avatar(agents[0].name)+esc(agents[0].name):agents.length?agents.map(a=>avatar(a.name)).join(''):'— unused';}if(key==='progress'){const [done,total]=item.progress.split('/').map(Number);return '<i class="collection-progress" style="--progress:'+(total?done/total*100:0)+'"></i>'+esc(item.progress);}return esc(String(item[key]??''));}
+  function collection(kind){
+    const columns=collectionColumns[kind],state=collectionState[kind]??={query:'',descending:kind!=='projects',selected:[],columns:[...collectionDefaults[kind]],sort:kind==='skills'?'updated':kind==='agents'?'runs':'name',scope:kind==='agents'?'mine':'all',filter:''};
+    const items=collectionItems(kind),filterKey={projects:'lead',agents:'runtime',skills:'stage'}[kind];
+    const rows=items.filter(item=>(Object.values(item).join(' ')).toLowerCase().includes(state.query.toLowerCase())&&(!state.filter||item[filterKey]===state.filter)&&(state.scope!=='selected'||state.selected.includes(item.id))&&(state.scope!=='saved'||db.bookmarks.includes(item.id))&&(state.scope!=='attached'||skillAgents(item.id).length)&&(state.scope!=='mine'||(kind==='projects'?projectConfig(item.id).lead==='Patrick':(db.agents.find(a=>a.name===item.id)?.owner||'Patrick')==='Patrick'))).sort((a,b)=>{const x=state.sort==='updated'?a.sortUpdated:a[state.sort],y=state.sort==='updated'?b.sortUpdated:b[state.sort];return (typeof x==='number'?x-y:String(x||'').localeCompare(String(y||'')))*(state.descending?-1:1);});
+    state.visible=rows.map(r=>r.id);
+    const scopes=kind==='skills'?{all:'All skills',saved:'Saved',attached:'On agents',selected:'Selected'}:{all:'All '+kind,mine:kind==='projects'?'My projects':'My agents',selected:'Selected'};
+    return '<section class="collection" data-collection="'+kind+'"><div class="toolbar">'+select('collectionScope',scopes,state.scope,'Collection scope')+'<input data-collection-search="'+kind+'" aria-label="Search '+kind+'" placeholder="Search…" value="'+esc(state.query)+'">'+btn(icon('filter')+' Filter'+(state.filter?' · 1':''),'collectionFilter',kind)+'<details class="display-dropdown"><summary role="button" aria-label="Display">'+icon('list')+' Display</summary><div class="display-menu"><h3>Sort</h3>'+select('collectionSort',{name:'Name',...columns},state.sort,'Sort by')+btn(state.descending?'Descending':'Ascending','collectionSort',kind)+'<h3>Columns</h3>'+Object.entries(columns).map(([key,label])=>btn(label,'collectionColumn',kind+'|'+key,state.columns.includes(key)?'selected':'')).join('')+'</div></details></div><div class="collection-selection"'+(state.selected.length?'':' hidden')+'><span role="status">'+state.selected.length+' selected</span>'+btn('Select visible','collectionSelect',kind)+btn('Clear selection','collectionClear',kind)+(state.selected.length?btn({projects:'Set lead',agents:'Set harness',skills:'Save selected'}[kind],'collectionBulk',kind)+(kind==='skills'?btn('Attach to agent','collectionAttach',kind)+btn('Unsave selected','collectionUnsave',kind):''):'')+'</div><div class="collection-table" role="table" aria-label="'+kind+'"><div class="collection-row collection-head" data-default-columns="'+(state.columns.join(',')===collectionDefaults[kind].join(','))+'" style="--collection-columns:'+state.columns.length+'" role="row"><input type="checkbox" data-collection-select-all="'+kind+'" aria-label="Select visible '+kind+'" '+(rows.length&&rows.every(r=>state.selected.includes(r.id))?'checked':'')+'><strong>'+(kind==='agents'?'Agent':'Name')+'</strong>'+state.columns.map(key=>'<span>'+esc(columns[key])+'</span>').join('')+'<span></span></div>'+rows.map(item=>'<div class="collection-row" data-default-columns="'+(state.columns.join(',')===collectionDefaults[kind].join(','))+'" role="row" style="--collection-columns:'+state.columns.length+'"><input type="checkbox" data-collection-check="'+kind+'" value="'+esc(item.id)+'" aria-label="Select '+esc(item.name)+'" '+(state.selected.includes(item.id)?'checked':'')+'>'+tool((kind==='agents'?avatar(item.name):icon(kind))+'<span class="collection-label"><strong>'+esc(item.name)+'</strong>'+(item.description?'<small>'+esc(item.description)+'</small>':'')+'</span>',item.type,item.id,'collection-name')+state.columns.map(key=>'<span class="collection-cell" data-column="'+key+'">'+collectionCell(item,key)+'</span>').join('')+'<details class="column-options"><summary aria-label="Actions for '+esc(item.name)+'">'+icon('more')+'</summary><div class="column-menu">'+tool('Open',item.type,item.id)+(item.edit?tool('Edit',item.edit,item.id):'')+(kind==='agents'?tool('Change avatar','avatarEditor',JSON.stringify({name:item.id,source:'agents'}))+btn('New chat','startThread',item.id):kind==='projects'?tool('New issue','projectIssue',item.id):btn(db.bookmarks.includes(item.id)?'Unsave skill':'Save skill','bookmark',item.id))+'</div></details></div>').join('')+'</div>'+(rows.length?'':empty('No matching items. Clear the filter or change your search.'))+'</section>';
+  }
+  function mountCollectionHeader(){
+    const collection=document.querySelector('#page-content>.collection');if(!collection)return;const kind=collection.dataset.collection,state=collectionState[kind],toolbar=collection.querySelector('.toolbar'),top=$('.top'),title=top.querySelector('.top-title'),actions=top.querySelector('.top-actions');top.dataset.collection=kind;
+    const scope=toolbar.querySelector('[name=collectionScope]'),scopeButton=scope.nextElementSibling;title.querySelector('h1')?.remove();title.append(scope,scopeButton);
+    const input=toolbar.querySelector('[data-collection-search]');input.hidden=!state.searchOpen;input.classList.add('header-collection-search');
+    const search=document.createElement('button');search.type='button';search.className='btn icon-only';search.dataset.act='collectionSearchToggle';search.dataset.id=kind;search.setAttribute('aria-label','Search '+kind);search.innerHTML=icon('search');
+    title.append(toolbar.querySelector('[data-act=collectionFilter]'),search,input);actions.prepend(toolbar.querySelector('.display-dropdown'));toolbar.remove();
+  }
+  function projects(){return collection('projects');}
   function starterField(agent){
     return field('Conversation starters · one per line','<textarea name="starters" rows="2">'+esc((agent?.starters||[]).join('\n'))+'</textarea>');
   }
@@ -484,24 +526,12 @@
     return field('Runtime',select('runtimeId',{'':'Not connected',...Object.fromEntries(db.runtimes.map(r=>[r.id,r.name+' · Offline']))},a?.runtimeId||''))+
       field('Concurrent runs','<input name="concurrency" type="number" min="1" max="16" value="'+(a?.concurrency||1)+'">');
   }
-  function agentsView(){return '<div class="agent-table"><div class="table-head"><span>Name</span><span>Runtime</span><span>Skills</span><span>Status</span></div>'+db.agents.map(a=>`<div class="agent-row-entry"><button type="button" class="agent-row" data-act="surface" data-id="agent|${esc(a.name)}"><span class="actor-name" title="${esc(a.role)}"><strong>${esc(a.name)}</strong></span><span class="cell-meta">${icon('runtimes')}${esc(a.runtime)}</span><span>${a.skills.length} skills</span><span class="availability"><i></i>Offline</span></button>${agentAvatarControl(a.name,'agent-avatar-button','agents')}</div>`).join('')+'</div>';}
+  function agentsView(){return collection('agents');}
   let directoryTab='all', sortSkills='rank';
   const skillAgents=id=>db.agents.filter(a=>a.skills.includes(id));
   const skillRuns=id=>WorkpalAnalyticsData.skillUsage(db).find(r=>r.skill.id===id)?.total||0;
   const installCommand=s=>s.repo?'npx skills add https://github.com/'+s.repo+' --skill '+s.id:'';
-  function skillsView(){
-    const items=db.skills.filter(s=>(directoryTab!=='saved'||db.bookmarks.includes(s.id))&&
-      (directoryTab!=='attached'||skillAgents(s.id).length)&&(!skillStage||stages[s.stage]===skillStage)&&
-      [s.id,s.name,s.author,s.repo,s.description].join(' ').toLowerCase().includes(skillFilter.trim().toLowerCase()));
-    items.sort((a,b)=>(sortSkills==='rank'?(a.rank??Infinity)-(b.rank??Infinity):sortSkills==='usage'?skillRuns(b.id)-skillRuns(a.id):0)||a.name.localeCompare(b.name));
-    return WorkpalAnalytics.skillDashboard()+ `<div class="directory"><div class="directory-head"><div class="directory-tabs">${[['all','Directory'],['attached','On agents'],['saved','Saved']].map(([key,label])=>btn(label,'skillTab',key,key===directoryTab?'chosen':'')).join('')}</div>${tool('＋ Add skill','suggest')}</div>
-      <div class="toolbar"><input data-filter="skill" aria-label="Search skills" placeholder="Search skills, publishers or repositories…" value="${esc(skillFilter)}">
-      <select aria-label="Skill stage" data-stage-filter>${options({'':'All stages',...strings(stages)},skillStage)}</select>
-      <select aria-label="Sort skills" data-sort-skills>${options({rank:'Skills.sh ranking',usage:'Most used in '+workspace().name,name:'Name A–Z'},sortSkills)}</select></div>
-      <div class="skill-head"><span>Rank</span><span>Skill / Description</span><span>Stage / Version</span><span>Activations</span></div>
-      ${items.map(s=>`<button class="skill-line" data-act="surface" data-id="skill|${esc(s.id)}"><code>${s.rank?'#'+s.rank:'—'}</code><span><strong>${esc(s.name)}</strong><small class="skill-description">${esc(s.description)}</small><small>${esc(s.repo||s.author)}${db.bookmarks.includes(s.id)?" · Saved":""}${s.local?" · Workspace":""}</small></span><span>${esc(stages[s.stage])}<small>${esc(s.version||"Unversioned")}</small></span><b title="Last 4 weeks">${skillRuns(s.id)}</b></button>`).join('')||empty('No skills match these filters.')}
-      <footer><span>${items.length} skills · Skills.sh ranks as of Nov 18, 2026</span><a href="https://skills.sh" target="_blank" rel="noopener noreferrer">Explore global rankings ↗</a></footer></div>`;
-  }
+  function skillsView(){return collection('skills')+'<details class="skill-insights"><summary>Usage and rankings</summary>'+WorkpalAnalytics.skillDashboard()+'</details>'; }
   function skill(id){
     const s=db.skills.find(x=>x.id===id);
     if(!s)return empty('Skill unavailable.');
@@ -602,7 +632,7 @@
         return form('conversationSettings',field('Title',input('title',c.title))+(c.environment?'<p>'+esc(c.project)+' · '+esc(c.environment)+' · '+esc(c.agent)+'</p><small>Start a new environment chat to change this context.</small>':field('Project context',select('project',{'':'No project context',...strings(db.projects)},c.project))),'Save conversation')+
           actionList([btn(c.pinned?'Unpin':'Pin','pinChat'),btn(c.archived?'Unarchive':'Archive','archiveChat')]);
       }
-      case 'recipients':return '<div class="environment-picker"><h3>Environment support</h3><p>Investigate an issue with the right project and agent.</p>'+environmentChoices()+'</div><h3>All agents</h3>'+(db.agents.map(a=>btn(esc(a.name),'startThread',a.name,'thread-row')).join('')||empty('Add an agent to start a conversation.')+tool('Configure agent','newAgent'));
+      case 'recipients':return '<h3>Choose an agent</h3>'+db.agents.map(a=>btn(avatar(a.name)+'<span>'+esc(a.name)+'</span>','startThread',a.name,'thread-row')).join('')+tool('Configure agent','newAgent')+'<details><summary>Environment context</summary>'+environmentChoices()+'</details>';
       case 'workspaces':return WorkpalStudio.listWorkspaces().map(w=>
         '<button type="button" class="row space-choice" data-act="switchSpace" data-id="'+esc(w.id)+'"><span class="tile">'+esc(Array.from(w.name)[0])+'</span><strong class="grow">'+esc(w.name)+'</strong>'+(w.id===workspace().id?'<small>Current</small>':'')+'</button>'
       ).join('')+tool('＋ Create workspace','newWorkspace','','primary');
@@ -611,14 +641,15 @@
       case 'chatHelp':return '<p class="preserve">'+esc(arg)+'</p><p>Workspace actions use explicit commands and forms. Reports contain saved workspace records and decision trails.</p>'+actionList([tool('Organize as an issue','issue','draft:'+arg),tool('Choose workspace action','directory')]);
       case 'panel':return generatedPanel(arg);
       case 'reviews':return issueList(db.tasks.filter(t=>t.status==='review'));
+      case 'peek':return issueDetail(arg,true);
       case 'issue':return arg.startsWith('draft:')?issueEditor('',arg.slice(6)):arg?issueDetail(arg,standalone):issueEditor('','',route().page==='projects'?route().params.get('id')||'':'');
-      case 'issueProperty':{
+      case 'confirmProperty':case 'issueProperty':{
         const [id,key]=arg.split('|'),t=db.tasks.find(t=>t.id===id);
         if(t?.archivedAt)return empty('Restore this archived issue before editing it.')+btn('Restore issue','restoreIssue',id);
         const fields={status:['Status',select('status',states,t.status)],owner:['Assignee',select('owner',ownerOptions(),t.owner)],priority:['Priority',select('priority',strings(['Low','Normal','High','Urgent']),t.priority)],due:['Due date','<input type="date" name="due" value="'+esc(t.due||'')+'">']};
-        return form('issueProperty',field(...fields[key])+(['owner','status'].includes(key)?'<label class="assign-option dispatch-option"><input type="checkbox" name="startAgent" checked> Queue the assigned agent or workflow handler</label>':'')+(key==='status'?'<label class="manual-completion" hidden>Manual completion reason<textarea name="manualReason" placeholder="Explain why this issue is complete without approving a delivery."></textarea></label>':''),'Save',id);
+        return form('issueProperty',field(...fields[key])+(['owner','status'].includes(key)?'<label class="assign-option dispatch-option"><input type="checkbox" name="startAgent"> Queue the assigned agent or workflow handler</label>':'')+(key==='status'?'<label class="manual-completion" hidden>Manual completion reason<textarea name="manualReason" placeholder="Explain why this issue is complete without approving a delivery."></textarea></label>':''),'Save',id);
       }
-      case 'move':{const [id,status]=arg.split('|');return issueEditor(id,'','',null,status);}
+      case 'move':{const [id,status]=arg.split('|');return surface('confirmProperty',id+'|status');}
       case 'editIssue':return issueEditor(arg);
       case 'childIssue':{const parent=db.tasks.find(t=>t.id===arg);return parent?issueEditor('','',parent.project,parent):empty('Issue not found.');}
       case 'assignIssue':return assignWorkEditor(arg);
@@ -668,7 +699,15 @@
       default:return catalog();
     }
   }
-  document.addEventListener('input',e=>{if(e.target.id==='command-input')$('#command-results').innerHTML=searchResults(e.target.value);});
+  let commandIndex=0;
+  function selectCommand(index){
+    const rows=[...document.querySelectorAll('#command-results .command-result')];
+    commandIndex=rows.length?(index+rows.length)%rows.length:0;
+    rows.forEach((row,i)=>{row.id='command-option-'+i;row.setAttribute('role','option');row.setAttribute('aria-selected',String(i===commandIndex));row.tabIndex=-1;});
+    const input=$('#command-input');
+    if(rows.length){input?.setAttribute('aria-activedescendant',rows[commandIndex].id);rows[commandIndex].scrollIntoView({block:'nearest'});}else input?.removeAttribute('aria-activedescendant');
+  }
+  document.addEventListener('input',e=>{if(e.target.id==='command-input'){$('#command-results').innerHTML=searchResults(e.target.value);selectCommand(0);}});
   function searchResults(q){
     const scope=q[0],term=q.replace(/^[>#@]/,'').trim().toLowerCase();
     const entries=[['New issue','issue','','Actions'],['New project','newProject','','Actions'],
@@ -677,10 +716,10 @@
       ...db.projects.map(p=>[p,'project',p,'Projects']),
       ...db.skills.map(s=>[s.name,'skill',s.id,'Skills']),
       ...db.agents.map(a=>[a.name,'agent',a.name,'People']),
-      ...db.squads.map(s=>[s.name,'squad',s.name,'Squads'])];
-    const matches=entries.filter(([label,type,id,group])=>label.toLowerCase().includes(term)&&(scope!=='>'||group==='Actions')&&(scope!=='#'||group==='Issues')&&(scope!=='@'||group==='People'));
+      ...db.squads.map(s=>[s.name,'squad',s.name,'Squads']),...db.conversations.map(c=>[c.title+' · '+c.agent,'conversation',c.id,'Conversations']),...db.views.map(v=>[v.name,'savedView',v.id,'Saved views'])];
+    const matches=(q.trim()?entries:[...entries.filter(e=>e[3]==='Actions'),...(db.recentSearch||[]).map(key=>entries.find(e=>e[1]+'|'+e[2]===key)).filter(Boolean).map(e=>[...e.slice(0,3),'Recent'])]).filter(([label,type,id,group])=>label.toLowerCase().includes(term)&&(scope!=='>'||group==='Actions')&&(scope!=='#'||group==='Issues')&&(scope!=='@'||group==='People'));
     let group='';
-    return matches.map(([label,type,id,category])=>{const heading=group!==category?'<small class="command-group">'+category+'</small>':'';group=category;return heading+tool(esc(label),type,id,'command-result');}).join('')||empty('No results.');
+    return matches.map(([label,type,id,category])=>{const heading=group!==category?'<small class="command-group">'+category+'</small>':'';group=category;const at=label.toLowerCase().indexOf(term),text=term&&at>=0?esc(label.slice(0,at))+'<mark>'+esc(label.slice(at,at+term.length))+'</mark>'+esc(label.slice(at+term.length)):esc(label);return heading+tool(icon(type)+'<span>'+text+'</span><small>'+esc(category)+'</small>',type,id,'command-result');}).join('')||empty('No results.');
   }
 
   function descriptor(type,arg='',text=''){return {id:crypto.randomUUID(),role:'assistant',text,surface:{type,arg},event:'TOOL_CALL_RESULT',at:Date.now()};}
@@ -777,7 +816,7 @@
       <ol>${message.trace.map(ev=>'<li>'+esc(ev.type)+'</li>').join('')}</ol>
       <details><summary>Surface schema</summary><pre>${esc(JSON.stringify(message.resource.contents,null,2))}</pre></details></details>`;
   }
-  let draftAgent='',draftText='',archivedChats=false;
+  let draftAgent='',draftText='',archivedChats=false,chatSearch='';
   function environmentChoices(){
     return '<div class="environment-choices">'+environmentChat.profiles.map(p=>tool('<strong>'+esc(p.id)+'</strong><span>'+esc(p.label)+'</span>','environmentSetup',p.id)).join('')+'</div>';
   }
@@ -826,11 +865,11 @@
     const c=currentConversation();draftAgent=c?.agent||db.chatDraft?.agent||'';draftText=c?.draft||(!c?db.chatDraft?.text:'')||'';
   }
   function conversationList(){
-    const chats=db.conversations.filter(c=>!!c.archived===archivedChats).slice().sort((a,b)=>Number(!!b.pinned)-Number(!!a.pinned));
+    const chats=db.conversations.filter(c=>!!c.archived===archivedChats&&(c.title+' '+c.agent).toLowerCase().includes(chatSearch.toLowerCase())).slice().sort((a,b)=>Number(!!b.pinned)-Number(!!a.pinned));
     return chats.map(c=>{const last=c.messages.at(-1);return `<button class="thread-row ${c.id===db.currentChat?'selected':''}" aria-label="${esc(c.title+' · '+(c.agent||'Workpal'))}" data-act="openThread" data-id="${esc(c.id)}">${avatar(c.agent||'Workpal')}<span class="thread-copy"><strong>${c.pinned?'☆ ':''}${esc(c.title)}</strong>${c.environment?'<span class="thread-environment">'+esc(c.environment)+' · '+esc(c.project)+'</span>':''}<small>${esc(last?.text||c.agent||'New conversation')}</small></span>${last?.at?'<time>'+new Date(last.at).toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'})+'</time>':''}</button>`;}).join('')||empty('No conversations yet.');
   }
   function chatPage(){
-    return `<div class="chat-page ${(currentConversation()||draftAgent)?'has-conversation':''}"><section class="thread-list"><header><div class="thread-title">${btn(icon('menu'),'menu','','mobile-only icon-only" aria-label="Workspace menu')}<h1>Chat</h1></div>${btn(icon('plus'),'chooseAgent','','icon-only" aria-label="New chat')}</header><div class="thread-scroll">${btn(archivedChats?'Show active':'Archived','archiveFilter','','quiet')}${conversationList()}</div></section><section id="chat-pane">${!currentConversation()&&!draftAgent?'<div class="chat-empty">'+icon('chatroom')+'<h2>What needs investigating?</h2><p>Open a conversation or choose an environment.</p>'+environmentChoices()+btn('New chat','chooseAgent','','quiet')+'</div>':''}</section></div>`;
+    return `<div class="chat-page ${(currentConversation()||draftAgent)?'has-conversation':''}"><section class="thread-list"><header><div class="thread-title">${btn(icon('menu'),'menu','','mobile-only icon-only" aria-label="Workspace menu')}<h1>Chat</h1></div>${btn(icon('plus'),'chooseAgent','','icon-only" aria-label="New chat')}</header><input class="chat-search" aria-label="Search conversations" placeholder="Search conversations…" value="${esc(chatSearch)}"><div class="thread-scroll">${btn(archivedChats?'Show active':'Archived','archiveFilter','','quiet')}${conversationList()}</div></section><section id="chat-pane"></section></div>`;
   }
   function assistant(full=false){
     const c=currentConversation(), name=c?.agent||draftAgent||db.agents[0]?.name||'';
@@ -844,13 +883,13 @@
       <header>${full?btn(icon('back'),'chatBack','','mobile-only icon-only" aria-label="Back to conversations'): ''}<strong title="${esc(title)}">${esc(title)}</strong><div>${c?btn(icon('more'),'chatSettings',c.id,'icon-only" aria-label="Conversation settings'):''}${btn(icon('plus'),'chooseAgent','','icon-only" aria-label="New chat with an agent')}${full?'':btn(icon('expand'),'expandChat','','icon-only" aria-label="Open in Chat')}${btn(icon('close'),'closeChat','','icon-only" aria-label="Close chat')}</div></header>
       ${environmentContext(c,env)}
       ${messages.length?'<div class="messages">'+messages.map((m,i)=>m.role==='user'?`<div class="user-turn"><p class="bubble">${esc(m.text)}</p>${m.queued?'<small role="status">Queued · runtime offline</small>'+btn('Cancel','cancelChatRun',m.run,'quiet'):db.runs.find(r=>r.id===m.run)?.status==='cancelled'?'<small>Cancelled</small>':''}</div>`:`<section class="reply"><small>${esc(m.agent||name||'Workspace')}</small>${m.text?'<p class="message-text">'+esc(m.text)+'</p>':''}${m.surface?`<details class="resource" ${i===messages.length-1?'open':''}><summary>${icon('layers')}${esc(labels[m.surface.type]||'Workspace action')}</summary>${i===messages.length-1?'<div class="resource-body">'+surface(m.surface.type,m.surface.arg)+traceView(m)+'</div>':btn('Reopen card','surface',m.surface.type+'|'+m.surface.arg)}</details>`:''}</section>`).join('')+'</div>':''}
-      ${starters}<div class="composer">${name?'<small class="runtime-state">'+esc(name)+' · Runtime offline</small>':''}${!env&&(c?.project||db.chatDraft?.project)?'<small class="context-label">Project · '+esc(c?.project||db.chatDraft.project)+'</small>':''}<form data-form="prompt"><textarea name="prompt" aria-label="Message" placeholder="Message ${esc(name||'workspace')}…" rows="2" required>${esc(draftText)}</textarea><div class="compose-actions">${btn(icon('plus'),'surface','directory|','icon-only" aria-label="Workspace actions')}${agentButton}<button type="submit" class="send" aria-label="Send message" ${name?'':'disabled'}>${icon('send')}</button></div></form></div></aside>`;
+      ${starters}<div class="composer">${name?'<small class="runtime-state">'+esc(name)+' · Runtime offline</small>':''}${!env&&(c?.project||db.chatDraft?.project)?'<small class="context-label">Project · '+esc(c?.project||db.chatDraft.project)+'</small>':''}<form data-form="prompt"><textarea name="prompt" aria-label="Message" placeholder="Message ${esc(name||'workspace')}…" rows="2" required>${esc(draftText)}</textarea><div class="compose-actions">${btn(icon('plus'),'surface','directory|','icon-only" aria-label="Workspace actions')}${agentButton}${tool(icon('layers'),'environmentSetup','','icon-only" aria-label="Environment context')}<button type="submit" class="send" aria-label="Send message" ${name?'':'disabled'}>${icon('send')}</button></div></form></div></aside>`;
   }
   function paintChat(scroll=true){
     if($('#assistant'))captureDrafts($('#assistant'));
     $('#assistant')?.remove();
     const pane=$('#chat-pane');
-    if(!chat&&!(pane&&(currentConversation()||draftAgent)))return;
+    if(!chat&&!pane)return;
     (pane||$('#app')).insertAdjacentHTML('beforeend',assistant(!!pane));restoreDrafts($('#assistant'));
     const m=$('#assistant .messages');
     if(scroll&&m){
@@ -864,27 +903,75 @@
     chat=route().page!=='chatroom';render();$('#assistant textarea[name="prompt"]')?.focus();
   }
   const detailPages={autopilot:'auto',squad:'squads',issue:'tasks',project:'projects',skill:'skills',run:'workflow',agent:'agents',document:'reports'};
+  function propertyIcons(key,values){return Object.fromEntries(Object.keys(values).map(value=>[value,key==='status'?'<span class="issue-mark '+esc(value)+'"></span>':key==='owner'?avatar(value):icon(key==='project'?'projects':key==='tags'?'tag':key)]));}
+  function propertyChoices(key){return {status:states,owner:ownerOptions(),priority:strings(['Low','Normal','High','Urgent']),project:{'':'No project',...strings(db.projects)},team:teams,tags:strings([...new Set(db.tasks.flatMap(t=>t.tags||[]))])}[key];}
+  function propertyNeedsConfirmation(task,key,value){
+    if(!['status','owner'].includes(key)||task[key]===value)return false;
+    if(key==='status'&&value==='done')return true;
+    const status=key==='status'?value:task.status,step=WorkpalStudio.workflowFor(task.project).steps.find(s=>s.status===status);
+    return !!(key==='status'&&step?.owner||WorkpalStudio.handlingAgent(key==='owner'?value:task.owner)||db.runs.some(r=>r.task===task.id&&['queued','running'].includes(r.status)));
+  }
+  function applyProperty(tasks,key,value,options={}){
+    // Validate completion for the entire selection before mutating any record.
+    if(key==='status'&&value==='done')for(const t of tasks){if(!options.manualReason?.trim())throw Error('Explain why these issues are complete.');const blocked=WorkpalCode.blocker(db,{...t,status:'done'},WorkpalStudio.currentDelivery(t.id));if(blocked)throw Error(t.id+': '+blocked);}
+    for(const t of tasks)saveIssue({...t,[key]:value,checks:t.checks.join('\n'),tags:(key==='tags'?value:t.tags||[]).join(', '),startAgent:options.queue?'on':'',manualReason:options.manualReason||''},t.id);
+    const focused=document.activeElement,focusAct=focused?.dataset.act,focusId=focused?.dataset.id;write();refresh();if(focusAct)[...document.querySelectorAll('[data-act]')].find(el=>el.dataset.act===focusAct&&el.dataset.id===focusId)?.focus();toast(tasks.length===1?'Property saved.':tasks.length+' issues updated.');
+  }
+  function confirmProperty(tasks,key,value){
+    const anchor=document.activeElement,d=document.createElement('dialog');d.className='workflow-confirm';d.setAttribute('aria-label','Confirm workflow change');
+    d.innerHTML='<header><h2>Confirm workflow change</h2><button type="button" data-cancel aria-label="Close confirmation">×</button></header><form class="modal-body"><p>'+esc(tasks.length===1?tasks[0].id:tasks.length+' issues')+' → '+esc(propertyChoices(key)?.[value]||value)+'</p><p>Workflow handoffs may change the assignee and stop the previous assignee’s active run.</p>'+(key==='status'&&value==='done'?'<label>Completion reason<textarea name="manualReason" required></textarea></label>':'<label class="assign-option"><input type="checkbox" name="queue"> Queue the assigned agent or workflow handler</label>')+'<p role="alert" class="form-error"></p><footer><button type="button" class="btn" data-cancel>Cancel</button><button type="submit" class="btn primary">Confirm change</button></footer></form>';
+    document.body.append(d);const close=()=>{WorkpalUI.close(false);d.close();d.remove();anchor?.isConnected&&anchor.focus();};d.querySelectorAll('[data-cancel]').forEach(b=>b.onclick=close);d.addEventListener('cancel',e=>{e.preventDefault();close();});d.addEventListener('click',e=>{if(e.target===d){const r=d.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)close();}});
+    d.querySelector('form').addEventListener('submit',e=>{e.preventDefault();e.stopPropagation();try{const f=e.currentTarget;applyProperty(tasks,key,value,{queue:f.elements.queue?.checked,manualReason:f.elements.manualReason?.value});close();}catch(error){d.querySelector('.form-error').textContent=error.message;}});d.showModal();(d.querySelector('textarea')||d.querySelector('[type=submit]')).focus();
+  }
+  function editProperty(anchor,tasks,key){
+    const value=tasks[0][key]||'',commit=next=>{if(tasks.every(t=>JSON.stringify(t[key]||'')===JSON.stringify(next)))return;if(tasks.some(t=>propertyNeedsConfirmation(t,key,next)))confirmProperty(tasks,key,next);else try{applyProperty(tasks,key,next);}catch(error){showSaveError(error);}};
+    if(key==='due')return WorkpalUI.datePicker(anchor,value,commit);
+    return openPicker(anchor,propertyChoices(key),key==='tags'?tasks[0].tags||[]:value,commit,{multiple:key==='tags',allowCreate:key==='tags',label:'Choose '+({owner:'assignee',tags:'labels'}[key]||key),icons:propertyIcons(key,propertyChoices(key))});
+  }
   function show(type,arg='',inside=chat){
+    if(type==='conversation'){dismiss();db.currentChat=arg;loadDraft();write();location.hash=scoped('chatroom');render();return;}
+    if(type==='savedView'){const v=db.views.find(v=>v.id===arg);if(!v)return;issueStatus=v.status;issueOwner=v.owner;taskFilter=v.query;layout=v.layout;issuePrefs().layout=layout;show('tasks','',false);return;}
+    if(type==='issueProperty'&&!inside){
+      const [id,key]=arg.split('|'),task=db.tasks.find(t=>t.id===id);if(task&&!task.archivedAt){editProperty(document.activeElement,[task],key);return;}
+    }
+
     if(inside){emitTurn(descriptor(type,arg));write();paintChat();return;}
     if ((Object.hasOwn(detailPages,type)&&arg&&!arg.startsWith('draft:')&&!(type==='issue'&&!db.tasks.some(t=>t.id===arg)))||Object.hasOwn(routes,type)){
-      dismiss();
+      modalStack.length=0;dismiss();
       const hash=Object.hasOwn(routes,type)?type:detailPages[type]+'?id='+encodeURIComponent(arg);
       if(location.hash.slice(1)===scoped(hash))render();else {location.hash=scoped(hash);enter();}
       return;
     }
-    if($('#dialog').open)captureDrafts($('#dialog'));
+    if($('#dialog').open){captureDrafts($('#dialog'));if(modalSurface?.type==='peek'&&type!=='peek')modalStack.push({...modalSurface,scroll:$('#dialog .modal-body')?.scrollTop||0});}
     modalSurface={type,arg};const d=$('#dialog');focusReturn=d.open?focusReturn:document.activeElement;
     if(type==='search'){
       d.dataset.surface=type;
-      d.innerHTML='<div class="command-search">'+icon('search')+'<input id="command-input" aria-label="Search workspace" autocomplete="off" placeholder="Search, or type what needs doing..." value="'+esc(arg)+'"><kbd>Esc</kbd></div><div id="command-results">'+searchResults(arg)+'</div><footer class="command-footer">↑ ↓ Navigate · Enter Open · Esc Close</footer>';
+      d.innerHTML='<div class="command-search">'+icon('search')+'<input id="command-input" role="combobox" aria-autocomplete="list" aria-expanded="true" aria-controls="command-results" aria-label="Search workspace" autocomplete="off" placeholder="Search, or type what needs doing..." value="'+esc(arg)+'"><kbd>Esc</kbd></div><div id="command-results" role="listbox" aria-label="Search results">'+searchResults(arg)+'</div><footer class="command-footer">↑ ↓ Navigate · Enter Open · Esc Close</footer>';
       d.setAttribute('aria-label','Search workspace');d.removeAttribute('aria-labelledby');
-      if(!d.open)d.showModal();$('#command-input').focus();return;
+      if(!d.open)d.showModal();$('#command-input').focus();selectCommand(0);return;
     }
     d.removeAttribute('aria-label');d.setAttribute('aria-labelledby','dialog-title');
     d.dataset.surface=type;d.innerHTML=`<header><h2 id="dialog-title">${esc(labels[type]||'Workspace')}</h2>${btn(icon('close'),'dismiss','','icon-only" aria-label="Close dialog')}</header><div class="modal-body">${surface(type,arg)}</div>`;
-    restoreDrafts(d);if(!d.open)d.showModal();
+    restoreDrafts(d);if(type==='move'){d.querySelector('[name=status]').value=arg.split('|')[1];syncIssueForm(d.querySelector('form'));}upgradeSelects(d);if(!d.open)d.showModal();
+    d.classList.remove('expanded');if(type==='peek'){d.querySelector('header').insertAdjacentHTML('beforeend',btn('Previous','peekStep','-1')+btn('Next','peekStep','1')+tool('Open issue','issue',arg));const items=matchingIssues(),index=items.findIndex(t=>t.id===arg);d.querySelector('[data-act=peekStep][data-id="-1"]').disabled=index<=0;d.querySelector('[data-act=peekStep][data-id="1"]').disabled=index<0||index===items.length-1;}
+    if(d.querySelector('.issue-editor')){d.dataset.surface='creator';d.querySelector('header h2').textContent=workspace().name+' / '+(d.querySelector('form').dataset.id?'Edit issue':d.querySelector('form').elements.startAgent.checked?'Create with agent':'Create manually');d.querySelector('header').insertAdjacentHTML('beforeend',btn(icon('expand'),'expandCreator','','creator-expand icon-only" aria-label="Expand creator'));const f=d.querySelector('form');if(f.elements.startAgent.checked&&d.querySelector('[data-act=creatorMode][data-id=agent]')){d.querySelector('.issue-editor').dataset.mode='agent';d.querySelectorAll('[data-act=creatorMode]').forEach(button=>button.classList.toggle('selected',button.dataset.id==='agent'));}const fields=f.querySelector('.fields'),extra=f.querySelector('.creator-extra');if(extra){const team=f.elements.team?.closest('label');if(team)extra.append(team);const preview=f.querySelector('.operation-preview');if(preview)extra.append(preview);}if(fields){for(const name of ['status','priority','owner','tags','project','due']){const label=f.elements[name]?.closest('label');if(label)fields.append(label);}}const footer=document.createElement('div');footer.className='creator-footer';const modes=d.querySelector('.creator-modes');if(modes){const draft=modes.querySelector('.creator-draft-state');if(draft)d.querySelector('header').append(draft);footer.append(modes);footer.insertAdjacentHTML('beforeend','<label class="create-another"><input type="checkbox" name="createAnother">Create another</label>');}footer.append(f.querySelector('button[type=submit]'));f.append(footer);const expand=d.querySelector('.creator-expand');if(expand)d.querySelector('header').insertBefore(expand,d.querySelector('header button'));d.querySelector('[name=title]').placeholder='Issue title';d.querySelector('[name=description]').placeholder='Add description…';d.querySelector('[name=title]').focus();updateDraftIndicator();}
+    else d.querySelector('input:not([type=hidden]),textarea')?.focus();
   }
-  function dismiss(){const d=$('#dialog');if(d.open){captureDrafts(d);d.close();focusReturn?.focus();}modalSurface=null;}
+$('#dialog').addEventListener('click',e=>{if(e.target!==e.currentTarget)return;const r=e.currentTarget.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)dismiss();});
+  const closePicker=()=>WorkpalUI.close();
+  const openPicker=(...args)=>WorkpalUI.picker(...args);
+  document.addEventListener('click',e=>{
+    const custom=e.target.closest('[data-form-picker]');if(custom){const input=custom.previousElementSibling,commit=value=>{input.value=Array.isArray(value)?value.join(', '):value;custom.textContent=input.value||(input.name==='due'?'No date':'Labels');input.dispatchEvent(new Event('change',{bubbles:true}));};if(input.name==='due')WorkpalUI.datePicker(custom,input.value,commit);else openPicker(custom,propertyChoices('tags'),input.value.split(',').map(x=>x.trim()).filter(Boolean),commit,{multiple:true,allowCreate:true,label:'Choose labels'});return;}
+    const anchor=e.target.closest('[data-picker-select]');if(!anchor)return;
+    const select=anchor.parentElement.querySelector('select');openPicker(anchor,Object.fromEntries([...select.options].map(o=>[o.value,o.text])),select.value,value=>{select.value=value;anchor.textContent=select.selectedOptions[0].text;select.dispatchEvent(new Event('change',{bubbles:true}));persistFormDraft(select.form);});
+  });
+  function upgradeSelects(root){
+    root.querySelectorAll('select').forEach(select=>{if(select.nextElementSibling?.hasAttribute('data-picker-select'))return;select.hidden=true;const button=document.createElement('button');button.type='button';button.className='btn property-button';button.dataset.pickerSelect='';button.textContent=select.selectedOptions[0]?.text||'Choose';if(select.closest('.issue-editor')){const key={owner:'owner',status:'status',project:'projects',priority:'priority'}[select.name];if(key)button.innerHTML=(select.name==='status'?'<span class="issue-mark '+esc(select.value)+'"></span>':select.name==='owner'?avatar(select.value):icon(key))+esc(select.selectedOptions[0]?.text||'Choose');}button.setAttribute('aria-label',select.getAttribute('aria-label')||select.closest('label')?.firstChild?.textContent?.trim()||select.name);button.setAttribute('aria-haspopup','dialog');button.disabled=select.disabled;select.after(button);});
+    root.querySelectorAll('.issue-editor [name=due],.issue-editor [name=tags]').forEach(input=>{if(input.nextElementSibling?.dataset.formPicker)return;input.hidden=true;const button=document.createElement('button');button.type='button';button.className='btn property-button';button.dataset.formPicker=input.name;button.textContent=input.value||(input.name==='due'?'No date':'Labels');button.setAttribute('aria-label',input.name==='due'?'Due date':'Labels');input.after(button);});
+  }
+
+  function stepPeek(delta){if(modalSurface?.type!=='peek')return;const items=matchingIssues(),index=items.findIndex(t=>t.id===modalSurface.arg),next=items[index+delta];if(next)show('peek',next.id,false);}
+  function dismiss(){closePicker();const d=$('#dialog');if(modalStack.length&&d.open){captureDrafts(d);const previous=modalStack.pop();modalSurface=null;show(previous.type,previous.arg,false);$('#dialog .modal-body').scrollTop=previous.scroll;return;}if(d.open){captureDrafts(d);d.close();if(focusReturn?.isConnected&&focusReturn!==document.body)focusReturn.focus();else $('#main')?.focus();}modalSurface=null;}
   const spaces=[
     {name:'Work',page:'tasks',icon:'tasks',pages:['overview','tasks','projects','inbox','mine','views','reports']},
     {name:'Team',page:'agents',icon:'squads',pages:['agents','squads','skills','workflow','workflows','runtimes','stats']},
@@ -897,14 +984,22 @@
     function section(label,body){const key='workpal.nav.'+workspace().id+'.'+label;return '<details class="rail-group" data-nav-key="'+esc(key)+'" '+(localStorage.getItem(key)==='closed'?'':'open')+'><summary class="rail-group-label"><small>'+label+'</small>'+icon('chevronDown')+'</summary>'+body+'</details>';}
 
     let panel=page==='settings'?settingsView.navigation(route().params.get('tab')):'';
+    const tree=()=>db.projects.map(project=>{const key='project:'+project,open=(db.navTree||[]).includes(key);return '<details class="nav-project-tree" data-tree="'+esc(key)+'" '+(open?'open':'')+'><summary>'+icon('chevronDown')+tool(icon('projects')+'<span>'+esc(project)+'</span>','project',project,'rail-item')+'</summary><div class="tree-actions">'+tool('New issue','projectIssue',project)+tool('Project settings','projectConfig',project)+'</div>'+(open?db.tasks.filter(t=>!t.archivedAt&&t.project===project).slice(0,db.navTreeLimit?.[project]||50):[]).map(t=>tool('<span class="issue-mark '+esc(t.status)+'"></span><span>'+esc(t.title)+'</span>','issue',t.id,'tree-issue')).join('')+(open&&db.tasks.filter(t=>!t.archivedAt&&t.project===project).length>(db.navTreeLimit?.[project]||50)?btn('Load more issues','moreTree',project,'tree-issue'):'')+'</details>';}).join('');
     if(space.name==='Work')panel=section('Inbox',nav('inbox'))+section('Views',['tasks','mine','views'].map(nav).join('')+db.views.map(v=>btn(icon('layers')+'<span>'+esc(v.name)+'</span>','applyView',v.id,'rail-item')).join(''))+
-      section('Projects',nav('projects')+db.projects.map(p=>tool(icon('projects')+'<span>'+esc(p)+'</span><small>'+db.tasks.filter(t=>!t.archivedAt&&t.project===p).length+'</small>','project',p,'rail-item '+(route().page==='projects'&&route().params.get('id')===p?'active':''))).join(''))+section('Workspace',['overview','reports'].map(nav).join(''));
-    if(space.name==='Team')panel=section('Team',nav('agents')+nav('squads'))+section('Resources',nav('skills')+nav('runtimes')+nav('stats')+nav('workflow')+nav('workflows'));
+      section('Projects',nav('projects')+tree())+section('Workspace',['overview','reports'].map(nav).join(''));
+    if(space.name==='Team'){
+      const scope=collectionState.agents?.scope||'mine',mine=db.agents.filter(a=>(a.owner||'Patrick')==='Patrick').length;
+      const agentLink=(label,action,count,selected)=>btn(icon('agents')+'<span>'+label+'</span><small>'+count+'</small>',action,'','rail-item '+(page==='agents'&&selected?'active':''));
+      panel=section('Agents',agentLink('All agents','allAgents',db.agents.length,scope==='all')+agentLink('My agents','myAgents',mine,scope==='mine'))+
+        section('Squads & members',nav('squads').replace('</a>','<small>'+db.squads.length+'</small></a>'))+
+        section('Resources',nav('skills').replace('Skill Hub','Skills').replace('</a>','<small>'+db.skills.length+'</small></a>')+nav('runtimes').replace('</a>','<small>0 online</small></a>')+nav('stats'))+
+        '<details class="rail-group" '+(['workflow','workflows'].includes(page)?'open':'')+'><summary class="rail-group-label"><small>More</small>'+icon('chevronDown')+'</summary>'+nav('workflow')+nav('workflows')+'</details>';
+    }
     if(space.name==='Auto')panel=section('Automation',nav('auto')+db.autopilots.map(a=>tool(icon('auto')+'<span>'+esc(a.name)+'</span>','autopilot',a.id,'rail-item')).join(''));
     return `<aside class="rail"><div class="app-dock"><button class="workspace-tile" data-act="surface" data-id="workspaces|" aria-label="Switch workspace, ${esc(workspace().name)}" title="${esc(workspace().name)} · Workpal">${esc(Array.from(workspace().name)[0])}</button>
       ${btn(icon('squarePen'),'surface','issue|','dock-command" title="New issue (C)" aria-label="New issue')}${btn(icon('search'),'surface','search|','dock-command" title="Search workspace (Cmd/Ctrl+K)" aria-label="Search workspace')}
       <nav aria-label="App navigation">${dock}</nav><div class="dock-bottom"><a class="dock-settings" href="#${scoped('settings')}" aria-label="Settings">${icon('settings')}</a><button class="account-avatar" data-act="surface" data-id="workspaces|" aria-label="Account and workspaces">P</button></div></div>
-      <div class="space-panel"><header class="space-heading"><h2>${space.name}</h2>${btn(icon('panelLeft'),'collapseNav','','icon-only" aria-label="Collapse sidebar')}</header><div class="panel-scroll">${panel}</div></div></aside>`;
+      <div class="space-panel"><header class="space-heading"><h2>${space.name}</h2>${btn(icon('panelLeft'),'collapseNav','','icon-only" aria-label="Collapse sidebar')}</header><div class="panel-scroll">${panel}</div><div class="sidebar-resizer" role="separator" tabindex="0" aria-label="Resize sidebar" aria-orientation="vertical" aria-valuemin="220" aria-valuemax="420" aria-valuenow="${db.navWidth||280}"></div></div></aside>`;
   }
   function chatLauncher(){
     return '<div class="chat-launcher" aria-label="Workspace chat">'+btn(icon('workpal')+' <span>Ask <span class="ask-workpal-name">Workpal</span></span>','chat','','ask-button')+
@@ -931,13 +1026,14 @@
     const heading=detail?({issue:db.tasks.find(t=>t.id===id)?.title,skill:db.skills.find(s=>s.id===id)?.name})[type]||id:routes[page];
     const space=spaces.find(s=>s.pages.includes(page))?.name||'Work';
     const taskActions=page==='tasks'&&!detail;
-    const createActions={agents:['newAgent','Configure agent'],squads:['squadEditor','New squad'],auto:['autoEditor','New autopilot']};
+    const createActions={projects:['newProject','New project'],skills:['suggest','Add skill'],agents:['newAgent','Configure agent'],squads:['squadEditor','New squad'],auto:['autoEditor','New autopilot']};
     const collectionAction=!detail&&createActions[page];
     document.title=heading+' · '+workspace().name+' · Workpal';
-    $('#app').innerHTML=`<div class="shell ${mobileMenu?'menu-open':''} ${navCollapsed?'nav-collapsed':''}" data-page="${page}" data-space="${space}" data-detail="${detail?'true':'false'}" data-layout="${layout}">${navigation(page)}
+    $('#app').innerHTML=`<div style="--sidebar-width:${db.navWidth||280}px" class="shell ${mobileMenu?'menu-open':''} ${navCollapsed?'nav-collapsed':''}" data-page="${page}" data-space="${space}" data-detail="${detail?'true':'false'}" data-layout="${layout}">${navigation(page)}
     <div class="main"><header class="top">${page==='stats'?WorkpalAnalytics.header():`<div class="top-title">${btn(icon('menu'),'menu','','mobile-only icon-only" aria-label="Workspace menu')}${navCollapsed&&space!=='Chat'?btn(icon('panelLeft'),'collapseNav','','icon-only" aria-label="Expand sidebar'):''}${icon(page)}${detail?'<a href="#'+scoped(page)+'">'+routes[page]+'</a><span class="separator">/</span><span>'+esc(type==='issue'?id:heading)+'</span>':(page==='chatroom'?'<span>Chat</span>':'<h1>'+esc(heading)+'</h1>')}${taskActions&&!archivedIssueView()?btn(icon('filter'),'filters','','icon-only" aria-label="Filter issues'):''}</div><div class="top-actions">${taskActions?(archivedIssueView()?'':issueDisplay())+tool(icon('edit'),'issue','','icon-only" aria-label="New issue'):collectionAction?tool(icon('plus'),collectionAction[0],'','icon-only" aria-label="'+collectionAction[1]):btn(icon('search'),'surface','search|','icon-only" aria-label="Search workspace')}</div>`}</header>
     <main id="main" tabindex="-1">${detail&&type!=='issue'?'<div class="heading'+(type==='agent'?' agent-profile-heading':'')+'"><div><div class="crumb">'+esc(workspace().name)+'<span>/</span>'+esc(type==='issue'?id:labels[type])+'</div><h1>'+esc(heading)+'</h1></div>'+(type==='squad'?tool(icon('plus')+' Assign work','assignIssue',id,'primary'):type==='agent'?agentAvatarControl(id,'agent-profile-avatar'):'')+'</div>':''}<div id="page-content">${detail?surface(type,id,true):pages[page]()}</div></main></div></div><footer class="bottom-bar"><a class="product-wordmark" href="#welcome" aria-label="Workpal home">${WorkpalBrand.wordmark}</a><span class="workspace-caption">${esc(workspace().name)}</span></footer>${page==='chatroom'?'':chatLauncher()}`;
-    paintChat();restoreDrafts();
+    paintChat();restoreDrafts();upgradeSelects($('#app'));mountCollectionHeader();updateDraftIndicator();
+    document.querySelectorAll('[data-tree]').forEach(el=>el.addEventListener('toggle',()=>{if(el.open===(db.navTree||[]).includes(el.dataset.tree))return;db.navTree=el.open?[...(db.navTree||[]),el.dataset.tree]:(db.navTree||[]).filter(key=>key!==el.dataset.tree);write();const key=el.dataset.tree;render();[...document.querySelectorAll('[data-tree]')].find(node=>node.dataset.tree===key)?.querySelector('summary')?.focus();}));
     document.querySelectorAll('details[data-nav-key]').forEach(el=>el.addEventListener('toggle',()=>localStorage.setItem(el.dataset.navKey,el.open?'open':'closed')));
     if(mobileMenu&&innerWidth<768){
       document.querySelectorAll('.main,.bottom-bar,.chat-launcher').forEach(el=>el.inert=true);
@@ -953,7 +1049,7 @@
   }
   function download(name,body){const url=URL.createObjectURL(new Blob([body],{type:'text/markdown;charset=utf-8'}));const a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
   function refresh(){const prev=modalSurface;render();if(prev&&$('#dialog').open)show(prev.type,prev.arg,false);}
-  function output(type,arg,text,inside){checkWakeups();write();if(inside){emitTurn(descriptor(type,arg,text));write();render();}else{dismiss();render();show(type,arg,false);}toast(text);}
+  function output(type,arg,text,inside){checkWakeups();write();if(inside){emitTurn(descriptor(type,arg,text));write();render();}else{modalStack.length=0;dismiss();render();show(type,arg,false);}toast(text);}
   function saveIssue(data,id){
     const t=db.tasks.find(item=>item.id===id);
     return WorkpalStudio.updateIssue(t||null,{...data,checks:data.checks.split('\n').map(x=>x.trim()).filter(Boolean),tags:data.tags.split(',').map(x=>x.trim()).filter(Boolean)},
@@ -1008,7 +1104,7 @@
       else throw Error('Member unavailable.');
       if(data.source==='agents'&&!inside){
         write();clearFormDraft(f);dismiss();render();
-        [...document.querySelectorAll('.agent-avatar-button')].find(button=>button.dataset.agentName===data.name)?.focus();
+        [...document.querySelectorAll('.collection-name')].find(button=>button.dataset.id==='agent|'+data.name)?.focus();
         toast('Avatar saved.');return;
       }
       return done(data.squad?'squad':'agent',data.squad||data.name,'Avatar saved.');
@@ -1020,7 +1116,7 @@
         const t=db.tasks.find(t=>t.id===id);
         values={...t,checks:t.checks.join('\n'),tags:(t.tags||[]).join(', '),startAgent:'',...data};
       }
-      const t=saveIssue(values,id);return done('issue',t.id,'Saved '+t.id+'.');
+      const t=saveIssue(values,id);if(type==='issue'&&!id&&data.createAnother){const project=values.project;clearFormDraft(f);dismiss();render();show('projectIssue',project,false);const again=$('#dialog [name=createAnother]');if(again)again.checked=true;toast('Created '+t.id+'.');return;}return done('issue',t.id,'Saved '+t.id+'.');
     }
     if(type==='threadReply'){
       const [taskId,entryId]=id.split('|'),t=db.tasks.find(t=>t.id===taskId),e=t.activity.find(e=>e.id===entryId);
@@ -1098,7 +1194,7 @@
       if(!['https:','http:'].includes(url.protocol))throw Error('Enter an HTTPS or HTTP source.');
       const slug=data.name.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')||'skill';
       if(db.skills.some(s=>s.source===url.href||s.id===slug))throw Error('This skill is already in the directory.');
-      db.skills.push({id:slug,name:data.name,source:url.href,author:workspace().name,stage:Number(data.stage),description:data.reason});
+      db.skills.push({id:slug,name:data.name,source:url.href,author:workspace().name,addedBy:'Patrick',updatedAt:Date.now(),stage:Number(data.stage),description:data.reason});
       return done('skill',slug,'Added to the '+workspace().name+' directory.');
     }
     if(type==='note'){db.notes.push({id:crypto.randomUUID(),at:Date.now(),author:data.author||'Patrick',page:routes[route().page],text:data.text,date:date(Date.now())});return done('notes','','Note saved.');}
@@ -1112,9 +1208,38 @@
     if(ev.target.closest('.issue-collection-bar a')){issueStatus='';donePage=archivedPage=0;archivePending=null;}
     const mobileLink=ev.target.closest('.rail a');
     if(mobileMenu&&mobileLink){ev.preventDefault();mobileMenu=false;if(location.hash===mobileLink.hash)render();else location.hash=mobileLink.hash;return;}
+    if(ev.target.matches('[data-select-issue]'))return;
     const b=ev.target.closest('[data-act]');if(!b)return;
     if(mobileMenu&&b.closest('.rail')&&b.dataset.act!=='menu'){mobileMenu=false;render();$('.mobile-only[data-act=menu]')?.focus();}
     const id=b.dataset.id||'',inside=!!b.closest('#assistant');
+    if(b.classList.contains('command-result')){db.recentSearch=[id,...(db.recentSearch||[]).filter(x=>x!==id)].slice(0,8);write();}
+    if(b.dataset.act==='creatorMode'){const editor=b.closest('.issue-editor'),f=editor.querySelector('form');editor.dataset.mode=id;$('#dialog header h2').textContent=workspace().name+' / '+(id==='agent'?'Create with agent':'Create manually');editor.querySelectorAll('[data-act=creatorMode]').forEach(button=>{button.classList.toggle('selected',button.dataset.id===id);button.setAttribute('aria-pressed',String(button.dataset.id===id));});f.elements.startAgent.checked=id==='agent';if(id==='manual'&&f.elements.status.value!=='done')f.querySelector('.creator-extra').open=false;if(id==='agent'){f.querySelector('.creator-extra').open=true;if(f.elements.owner.value==='Unassigned'){f.elements.owner.value=db.agents[0]?.name||'Unassigned';f.elements.owner.nextElementSibling.textContent=f.elements.owner.value;}}syncIssueForm(f);persistFormDraft(f);return;}
+    if(b.dataset.act==='expandCreator'){$('#dialog').classList.toggle('expanded');const expanded=$('#dialog').classList.contains('expanded');b.setAttribute('aria-expanded',String(expanded));b.setAttribute('aria-label',expanded?'Collapse creator':'Expand creator');return;}
+    if(b.dataset.act.startsWith('collection')){const [kind,column]=id.split('|'),state=collectionState[kind];if(!state)return;
+      const change=()=>{write();refresh();};
+      if(b.dataset.act==='collectionSearchToggle'){state.searchOpen=!state.searchOpen;refresh();if(state.searchOpen)document.querySelector('[data-collection-search]').focus();return;}
+      if(b.dataset.act==='collectionSort')state.descending=!state.descending;
+      if(b.dataset.act==='collectionColumn')state.columns=state.columns.includes(column)?state.columns.filter(c=>c!==column):[...state.columns,column];
+      if(b.dataset.act==='collectionClear')state.selected=[];
+      if(b.dataset.act==='collectionSelect')state.selected=[...new Set([...state.selected,...state.visible])];
+      if(b.dataset.act==='collectionFilter'){const key={projects:'lead',agents:'runtime',skills:'stage'}[kind];openPicker(b,{'':'All',...strings(collectionItems(kind).map(item=>String(item[key])))},state.filter,value=>{state.filter=value;refresh();},{label:'Filter '+kind});return;}
+      if(b.dataset.act==='collectionBulk'){
+        if(kind==='skills'){db.bookmarks=[...new Set([...db.bookmarks,...state.selected])];change();return;}
+        openPicker(b,kind==='projects'?ownerOptions():strings(['Copilot CLI','Codex','Claude Code','Local runner']),'',value=>{for(const id of state.selected){if(kind==='agents'){const agent=db.agents.find(a=>a.name===id);if(agent)agent.runtime=value;}else{let config=db.projectSettings.find(p=>p.project===id);if(!config){config={...projectConfig(id)};db.projectSettings.push(config);}config.lead=value;}}change();},{label:kind==='projects'?'Set project lead':'Set harness'});return;
+      }
+      if(b.dataset.act==='collectionUnsave'){db.bookmarks=db.bookmarks.filter(id=>!state.selected.includes(id));change();return;}
+      if(b.dataset.act==='collectionAttach'){openPicker(b,strings(agentNames()),'',value=>{const agent=db.agents.find(a=>a.name===value);agent.skills=[...new Set([...agent.skills,...state.selected])];change();},{label:'Attach skills to agent'});return;}
+      refresh();return;
+    }
+    if(b.dataset.act==='moreTree'){db.navTreeLimit??={};db.navTreeLimit[id]=(db.navTreeLimit[id]||50)+50;render();return;}
+    if(b.dataset.act==='cardMenu'){const t=db.tasks.find(t=>t.id===id);openPicker(b,{peek:'Peek',status:'Move to',due:'Due date',tags:'Labels'},'',key=>{if(key==='peek')show('peek',id,false);else editProperty(b,[t],key);},{label:'Issue actions'});return;}
+    if(b.dataset.act==='peekStep'){stepPeek(Number(id));return;}
+    if(b.dataset.act==='bulkIssueProperty'){const tasks=db.tasks.filter(t=>selectedIssues.has(t.id)&&!t.archivedAt);if(tasks.length)editProperty(b,tasks,id);return;}
+    if(b.dataset.act==='selectIssues'){document.querySelectorAll('[data-select-issue]').forEach(el=>{if(el.getClientRects().length)selectedIssues.add(el.dataset.selectIssue);});refresh();return;}
+    if(b.dataset.act==='clearIssues'){selectedIssues.clear();refresh();return;}
+    if(b.dataset.act==='archiveSelectedIssues'){const ids=db.tasks.filter(t=>selectedIssues.has(t.id)&&t.status==='done').map(t=>t.id);if(ids.length){archivePending={ids,label:'Selected completed issues'};refresh();}else toast('Select completed issues to archive.');return;}
+    if(b.dataset.act==='issueSortDirection'){issuePrefs().descending=!issuePrefs().descending;write();refresh();return;}
+    if(b.dataset.act==='toggleTableColumn'){const prefs=issuePrefs();prefs.tableColumns??=['status','priority','owner','project','due'];prefs.tableColumns=prefs.tableColumns.includes(id)?prefs.tableColumns.filter(k=>k!==id):[...prefs.tableColumns,id];write();refresh();return;}
     switch(b.dataset.act){
       case 'issuePage':{
         const [kind,direction]=id.split(':');if(kind==='done')donePage+=Number(direction);else archivedPage+=Number(direction);
@@ -1150,7 +1275,8 @@
       }
       case 'switchSpace':openSpace(id);break;
       case 'menu':mobileMenu=!mobileMenu;render();break;
-      case 'collapseNav':if(innerWidth<768)mobileMenu=false;else navCollapsed=!navCollapsed;render();break;
+      case 'collapseNav':if(innerWidth<768)mobileMenu=false;else navCollapsed=!navCollapsed;db.navCollapsed=navCollapsed;write();render();break;
+      case 'allAgents':case 'myAgents':collectionState.agents??={query:'',descending:true,selected:[],columns:[...collectionDefaults.agents],sort:'runs',scope:'mine',filter:''};collectionState.agents.scope=b.dataset.act==='allAgents'?'all':'mine';show('agents','',false);break;
       case 'filters':filtersOpen=!filtersOpen;render();break;
       case 'inboxTab':inboxTab=id;refresh();break;
       case 'inboxRead':{const state=db.inbox[id]??={},activity=notificationActivity(db.tasks.find(t=>t.id===id)),unread=notificationRead(state,activity);state.readAt=unread?0:activity.at;state.readToken=unread?'':activity.token;write();refresh();break;}
@@ -1165,7 +1291,7 @@
       case 'subscribe':{const t=db.tasks.find(t=>t.id===id);t.subscribed=!t.subscribed;write();refresh();break;}
       case 'resolveThread':{const [taskId,entryId]=id.split('|');const e=db.tasks.find(t=>t.id===taskId).activity.find(e=>e.id===entryId);e.resolved=!e.resolved;write();refresh();break;}
       case 'triggerAuto':WorkpalStudio.triggerAutopilot(id);output('autopilot',id,'Trigger recorded.',inside);break;
-      case 'applyView':{donePage=archivedPage=0;archivePending=null;const v=db.views.find(v=>v.id===id);issueStatus=v.status;issueOwner=v.owner;taskFilter=v.query;layout=v.layout==='board'?'board':'list';issuePrefs().layout=layout;write();show('tasks','',inside);break;}
+      case 'applyView':{donePage=archivedPage=0;archivePending=null;const v=db.views.find(v=>v.id===id);issueStatus=v.status;issueOwner=v.owner;taskFilter=v.query;layout=['board','list','table','swimlane'].includes(v.layout)?v.layout:'list';issuePrefs().layout=layout;write();show('tasks','',inside);break;}
       case 'claimRun':{changeRun(db.runs.find(r=>r.id===id),'claim');output('run',id,'Run started.',inside);break;}
       case 'finishRun':{changeRun(db.runs.find(r=>r.id===id),'finish');output('run',id,'Run ended without a delivery.',inside);break;}
       case 'archiveFilter':archivedChats=!archivedChats;render();break;
@@ -1208,29 +1334,34 @@
     }
     }catch(err){showSaveError(err);}
   });
-  document.addEventListener('dragstart',ev=>{
-    const row=ev.target.closest('[draggable=true]');
-    if(row)ev.dataTransfer.setData('application/workpal-issue',row.dataset.id.slice(6));
-  });
-  document.addEventListener('dragover',ev=>{
-    if(ev.target.closest('[data-drop-state]')&&ev.dataTransfer.types.includes('application/workpal-issue'))ev.preventDefault();
-  });
-  document.addEventListener('drop',ev=>{
-    const lane=ev.target.closest('[data-drop-state]');
-    const t=db.tasks.find(t=>t.id===ev.dataTransfer.getData('application/workpal-issue'));
-    if(!t||t.archivedAt||!lane||lane.dataset.dropState===t.status)return;
-    ev.preventDefault();
-    show('move',t.id+'|'+lane.dataset.dropState,!!lane.closest('#assistant'));
-  });
+  document.addEventListener('focusin',e=>{if(e.target.matches('[data-inline-field]'))e.target.dataset.originalValue=e.target.textContent;});
+  document.addEventListener('keydown',e=>{if(!e.target.matches('[data-inline-field]')||e.isComposing)return;if(e.key==='Escape'){e.preventDefault();e.stopImmediatePropagation();e.target.textContent=e.target.dataset.originalValue;e.target.blur();}else if(e.key==='Enter'&&(e.target.dataset.inlineField==='title'||e.metaKey||e.ctrlKey)){e.preventDefault();e.target.blur();}});
+  document.addEventListener('focusout',e=>{const el=e.target.closest('[data-inline-field]');if(!el)return;const t=db.tasks.find(t=>t.id===el.dataset.issue);if(!t||t.archivedAt)return;const value=el.textContent.trim();if(value===t[el.dataset.inlineField])return;try{saveIssue({...t,[el.dataset.inlineField]:value,checks:t.checks.join('\n'),tags:(t.tags||[]).join(', '),startAgent:''},t.id);write();if(el.dataset.inlineField==='title')document.querySelectorAll('.issue[data-id]').forEach(row=>{if(row.dataset.id==='issue|'+t.id)row.querySelector('.issue-title').textContent=value;});}catch(error){el.textContent=t[el.dataset.inlineField];showSaveError(error);}});
+  let dragIssue='',dropBefore='';
+  function clearDrag(){document.querySelectorAll('.dragging,.drop-target,.drop-before').forEach(el=>el.classList.remove('dragging','drop-target','drop-before'));dragIssue='';dropBefore='';}
+  document.addEventListener('dragstart',ev=>{const row=ev.target.closest('.issue-card');if(!row||ev.target.closest('input,button')){ev.preventDefault();return;}dragIssue=row.dataset.id.slice(6);ev.dataTransfer.setData('application/workpal-issue',dragIssue);ev.dataTransfer.effectAllowed='move';row.classList.add('dragging');});
+  document.addEventListener('dragover',ev=>{const lane=ev.target.closest('[data-drop-state]');if(!lane||!dragIssue)return;ev.preventDefault();ev.dataTransfer.dropEffect='move';document.querySelectorAll('.drop-target,.drop-before').forEach(el=>el.classList.remove('drop-target','drop-before'));lane.classList.add('drop-target');const card=ev.target.closest('.issue-card');dropBefore=card?.dataset.id.slice(6)||'';if(card&&dropBefore!==dragIssue)card.classList.add('drop-before');});
+  document.addEventListener('dragend',clearDrag);
+  document.addEventListener('drop',ev=>{const lane=ev.target.closest('[data-drop-state]'),id=ev.dataTransfer.getData('application/workpal-issue'),t=db.tasks.find(t=>t.id===id),before=dropBefore;clearDrag();if(!t||t.archivedAt||!lane)return;ev.preventDefault();if(t.status===lane.dataset.dropState){db.issueOrder=[...(db.issueOrder||[]),...db.tasks.map(t=>t.id)].filter((v,i,a)=>a.indexOf(v)===i&&v!==id);const index=db.issueOrder.indexOf(before);db.issueOrder.splice(index<0?db.issueOrder.length:index,0,id);issuePrefs().sort='manual';write();refresh();}else if(propertyNeedsConfirmation(t,'status',lane.dataset.dropState))confirmProperty([t],'status',lane.dataset.dropState);else try{applyProperty([t],'status',lane.dataset.dropState);}catch(error){showSaveError(error);}});
   document.addEventListener('input',ev=>{
     const el=ev.target;
+    if(el.matches('.chat-search')){chatSearch=el.value;$('.thread-scroll').innerHTML=btn(archivedChats?'Show active':'Archived','archiveFilter','','quiet')+conversationList();return;}
+    if(el.dataset.collectionSearch){const kind=el.dataset.collectionSearch,pos=el.selectionStart;collectionState[kind].query=el.value;refresh();const input=document.querySelector('[data-collection-search="'+kind+'"]');input.focus();input.setSelectionRange(pos,pos);return;}
     if(el.name==='appSearch'){const row=el.closest('.modal-body').querySelector('.app-catalog-row');row.hidden=!row.dataset.appName.includes(el.value.trim().toLowerCase());el.closest('.modal-body').querySelector('.app-catalog-empty').hidden=!row.hidden;return;}
-    persistFormDraft(el.form);if(el.name==='prompt')persistDraft(el.value);if(el.name==='text')quickSuggestions(el);if(!el.dataset.filter)return;
+    persistFormDraft(el.form);if(el.form?.dataset.form==='issue')syncIssueForm(el.form);if(el.name==='prompt')persistDraft(el.value);if(el.name==='text')quickSuggestions(el);if(!el.dataset.filter)return;
     const parent=el.closest('.resource-body,.modal-body,#page-content');const pos=el.selectionStart;
     if(el.dataset.filter==='task'){taskFilter=el.value;donePage=archivedPage=0;archivePending=null;parent.innerHTML=tasks();}else{skillFilter=el.value;parent.innerHTML=skillsView();}
-    const replacement=parent.querySelector('[data-filter]');replacement.focus();replacement.setSelectionRange(pos,pos);
+    upgradeSelects(parent);const replacement=parent.querySelector('[data-filter]');replacement.focus();replacement.setSelectionRange(pos,pos);
   });
   document.addEventListener('change',ev=>{
+    if(['collectionScope','collectionSort'].includes(ev.target.name)){const state=collectionState[ev.target.closest('[data-collection]').dataset.collection];state[ev.target.name==='collectionScope'?'scope':'sort']=ev.target.value;refresh();return;}
+
+    if(ev.target.dataset.selectIssue){const el=ev.target;el.checked?selectedIssues.add(el.dataset.selectIssue):selectedIssues.delete(el.dataset.selectIssue);refresh();[...document.querySelectorAll('[data-select-issue]')].find(n=>n.dataset.selectIssue===el.dataset.selectIssue)?.focus();return;}
+    if(ev.target.name?.startsWith('display')){issuePrefs()[ev.target.name.slice(7).toLowerCase()]=ev.target.value;write();refresh();return;}
+
+    if(ev.target.dataset.collectionSelectAll){const el=ev.target,state=collectionState[el.dataset.collectionSelectAll];state.selected=el.checked?[...new Set([...state.selected,...state.visible])]:state.selected.filter(id=>!state.visible.includes(id));refresh();document.querySelector('[data-collection-select-all="'+el.dataset.collectionSelectAll+'"]')?.focus();return;}
+    if(ev.target.dataset.collectionCheck){const el=ev.target,state=collectionState[el.dataset.collectionCheck];state.selected=el.checked?[...state.selected,el.value]:state.selected.filter(id=>id!==el.value);const index=[...document.querySelectorAll('[data-collection-check]')].indexOf(el);refresh();document.querySelectorAll('[data-collection-check]')[index]?.focus();return;}
+
     if(ev.target.name==='workspaceRepository'&&ev.target.form?.dataset.form==='resourceEditor'){const r=WorkpalIntegrations.repositories(db).find(r=>r.id===ev.target.value);if(r){const f=ev.target.form;f.elements.url.value=r.url;f.elements.kind.value='repository';if(!f.elements.name.value)f.elements.name.value=r.url.split(/[/:]/).at(-1).replace(/\.git$/,'');}return;}
     if(ev.target.name==='resourceId'&&ev.target.form?.dataset.form==='resourceEditor'){resourceEditId=ev.target.value;show('resourceEditor',ev.target.form.dataset.id,false);return;}
     const el=ev.target;persistFormDraft(el.form);
@@ -1274,19 +1405,41 @@
     else return;
     refresh();
   });
+  let sidebarDrag=null,previewTimer;
+  document.addEventListener('pointerdown',e=>{const handle=e.target.closest('.sidebar-resizer');if(!handle)return;sidebarDrag={start:e.clientX,width:db.navWidth||280,handle};handle.setPointerCapture(e.pointerId);e.preventDefault();});
+  document.addEventListener('pointermove',e=>{if(!sidebarDrag)return;db.navWidth=Math.min(420,Math.max(220,sidebarDrag.width+e.clientX-sidebarDrag.start));$('.shell').style.setProperty('--sidebar-width',db.navWidth+'px');sidebarDrag.handle.setAttribute('aria-valuenow',db.navWidth);});
+  document.addEventListener('pointerup',()=>{if(sidebarDrag){sidebarDrag=null;write();}});
+  document.addEventListener('pointerover',e=>{if(navCollapsed&&innerWidth>=768&&e.target.closest('.app-dock .dock-link')){clearTimeout(previewTimer);$('.shell')?.classList.add('nav-preview');}if(e.target.closest('.space-panel'))clearTimeout(previewTimer);});
+  document.addEventListener('pointerout',e=>{if(e.target.closest('.rail')&&!e.relatedTarget?.closest?.('.rail'))previewTimer=setTimeout(()=>$('.shell')?.classList.remove('nav-preview'),220);});
+  document.addEventListener('focusin',e=>{if(navCollapsed&&e.target.closest('.app-dock .dock-link'))$('.shell')?.classList.add('nav-preview');});
+  document.addEventListener('focusout',e=>{if(e.target.closest('.rail')&&!e.relatedTarget?.closest?.('.rail'))$('.shell')?.classList.remove('nav-preview');});
   document.addEventListener('keydown',ev=>{
-    if(isWelcome())return;
+    if(isWelcome()||ev.target.closest('.workflow-confirm'))return;
+    if(ev.target.matches('[data-inline-field]')&&ev.key==='Escape')return;
+    if(ev.key==='Escape'&&ev.target.dataset.collectionSearch){const kind=ev.target.dataset.collectionSearch;collectionState[kind].searchOpen=false;ev.preventDefault();refresh();document.querySelector('[data-act=collectionSearchToggle]')?.focus();return;}
+    if(ev.target.matches('.sidebar-resizer')&&['ArrowLeft','ArrowRight','Home','End'].includes(ev.key)){ev.preventDefault();db.navWidth=ev.key==='Home'?220:ev.key==='End'?420:Math.max(220,Math.min(420,(db.navWidth||280)+(ev.key==='ArrowRight'?10:-10)));$('.shell').style.setProperty('--sidebar-width',db.navWidth+'px');ev.target.setAttribute('aria-valuenow',db.navWidth);write();return;}
+    if(ev.key==='Escape'&&$('.shell.nav-preview')){$('.shell').classList.remove('nav-preview');$('.top [data-act=collapseNav]')?.focus();return;}
+    const tree=ev.target.closest('.nav-project-tree');if(tree&&ev.target===tree.querySelector('summary')&&['ArrowRight','ArrowLeft'].includes(ev.key)){ev.preventDefault();tree.open=ev.key==='ArrowRight';return;}
+    if(modalSurface?.type==='peek'&&!ev.target.closest('input,textarea,[contenteditable]')&&['ArrowUp','ArrowDown'].includes(ev.key)&&!WorkpalUI.active){ev.preventDefault();stepPeek(ev.key==='ArrowDown'?1:-1);return;}
+    if(ev.key==='/'&&!ev.target.closest('input,textarea,select,[contenteditable]')&&!$('#dialog').open){const input=document.querySelector('[data-collection-search]');if(input){ev.preventDefault();const kind=input.dataset.collectionSearch;collectionState[kind].searchOpen=true;input.hidden=false;input.focus();return;}}
+
     if($('#command-input')&&$('#dialog').open&&['ArrowDown','ArrowUp','Enter','Escape'].includes(ev.key)){
-      const rows=[...document.querySelectorAll('#command-results button')],i=rows.indexOf(document.activeElement);
-      if(ev.key==='Escape'){ev.preventDefault();dismiss();return;}
-      if(ev.key==='Enter'&&i<0){ev.preventDefault();rows[0]?.click();return;}
-      if(ev.key.startsWith('Arrow')){ev.preventDefault();rows[(i+(ev.key==='ArrowDown'?1:-1)+rows.length)%rows.length]?.focus();return;}
+      if(ev.isComposing)return;
+      const rows=[...document.querySelectorAll('#command-results .command-result')];
+      ev.preventDefault();
+      if(ev.key==='Escape')dismiss();
+      else if(ev.key==='Enter')rows[commandIndex]?.click();
+      else selectCommand(commandIndex+(ev.key==='ArrowDown'?1:-1));
+      return;
     }
     if(mobileMenu&&innerWidth<768&&ev.key==='Tab'&&!$('#dialog').open){
       const items=[...document.querySelectorAll('.rail button,.rail a,.rail summary')].filter(e=>e.getClientRects().length);
       const i=items.indexOf(document.activeElement);
       if(ev.shiftKey&&i<=0){ev.preventDefault();items.at(-1)?.focus();}else if(!ev.shiftKey&&i===items.length-1){ev.preventDefault();items[0]?.focus();}
     }
+    if(ev.key.toLowerCase()==='m'&&ev.target.matches('.issue-card')){ev.preventDefault();editProperty(ev.target,[db.tasks.find(t=>t.id===ev.target.dataset.id.slice(6))],'status');return;}
+    if(ev.key==='Enter'&&ev.target.matches('.issue-card')){ev.preventDefault();ev.target.click();return;}
+    if(ev.key===' '&&ev.target.matches('.issue-card')){ev.preventDefault();show('peek',ev.target.dataset.id.slice(6),false);return;}
     if(!ev.ctrlKey&&!ev.metaKey&&!ev.altKey&&!ev.target.closest('input,textarea,select,[contenteditable]')&&!$('#dialog').open&&ev.key.toLowerCase()==='c'){ev.preventDefault();show('issue','',false);return;}
     if(ev.key==='Escape'&&!$('#dialog').open){const menu=document.querySelector('.display-dropdown[open],.column-options[open],.repository-add-menu[open],.repository-actions[open]');if(menu){ev.preventDefault();menu.open=false;menu.querySelector('summary').focus();return;}}
     if(ev.key==='Escape'&&mobileMenu&&!$('#dialog').open){ev.preventDefault();mobileMenu=false;render();$('.mobile-only[data-act=menu]')?.focus();return;}
@@ -1297,6 +1450,7 @@
       if(ev.key==='Enter'&&ev.target.tagName==='TEXTAREA'&&buttons.length){ev.preventDefault();buttons[0].click();return;}
       if(ev.key.startsWith('Arrow')&&buttons.length){ev.preventDefault();buttons[(index+(ev.key==='ArrowDown'?1:-1)+buttons.length)%buttons.length].focus();return;}
     }
+    if(ev.target.form?.dataset.form==='issue'&&(ev.metaKey||ev.ctrlKey)&&ev.key==='Enter'&&!ev.isComposing){ev.preventDefault();if(!ev.target.form.querySelector('[type=submit]').disabled)ev.target.form.requestSubmit();return;}
     if(ev.target.name==='text'&&['comment','threadReply'].includes(ev.target.form?.dataset.form)&&(ev.metaKey||ev.ctrlKey)&&ev.key==='Enter'){ev.preventDefault();ev.target.form.requestSubmit();return;}
     if((ev.metaKey||ev.ctrlKey)&&ev.key.toLowerCase()==='k'){ev.preventDefault();show('search','',false);}
     if((ev.metaKey||ev.ctrlKey)&&ev.key.toLowerCase()==='j'&&route().page!=='chatroom'){
@@ -1307,6 +1461,7 @@
     if(ev.key==='Escape'&&!$('#dialog').open&&chat){chat=false;paintChat();}
     if(ev.target.name==='prompt'&&ev.key==='Enter'&&!ev.shiftKey&&!ev.isComposing){ev.preventDefault();ev.target.form.requestSubmit();}
   });
+  $('#dialog').addEventListener('cancel',e=>{e.preventDefault();if(WorkpalUI.active)WorkpalUI.close();else dismiss();});
   $('#dialog').addEventListener('close',()=>{captureDrafts($('#dialog'));if(!$('#dialog').open)modalSurface=null;});
   window.addEventListener('pagehide',()=>captureDrafts());
   let visibleHash;
@@ -1326,7 +1481,7 @@
     }
     const id=route().workspaceId;
     const changed=id!==workspace().id;
-    dismiss();
+    modalStack.length=0;dismiss();
     if(!WorkpalStudio.selectWorkspace(id)){
       location.replace('#overview');
       toast('Workspace unavailable in this browser.');
@@ -1336,11 +1491,12 @@
     db=WorkpalStudio.db;db.runtimes??=[];db.inbox??={};db.quickActions??=[];db.wakeups??=[];prepareConversations();
     if(WorkpalIntegrations.initialize(db,workspace().id))write();
     if(changed){
+      selectedIssues.clear();Object.keys(collectionState).forEach(k=>delete collectionState[k]);
       chat=false;draftAgent='';draftText='';
       taskFilter=skillFilter=skillStage=issueStatus=issueOwner='';donePage=archivedPage=0;archivePending=null;
       layout='list';directoryTab='all';sortSkills='rank';
     }
-    layout=issuePrefs().layout;loadDraft();
+    layout=issuePrefs().layout;navCollapsed=!!db.navCollapsed;loadDraft();
     if(route().page==='chatroom')chat=false;
     mobileMenu=false;render();window.scrollTo(0,0);
   }
