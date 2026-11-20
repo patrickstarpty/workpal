@@ -1,0 +1,35 @@
+{
+  "name": "workpal-original",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@10.28.2",
+  "engines": {
+    "node": ">=22.22"
+  },
+  "scripts": {
+    "dev": "node server/start.mjs --dev",
+    "start": "node server/start.mjs",
+    "build": "vite build",
+    "test": "node --test server/*.test.mjs"
+  },
+  "dependencies": {
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "@tanstack/react-query": "catalog:",
+    "i18next": "catalog:",
+    "react-i18next": "catalog:",
+    "zustand": "catalog:",
+    "@fontsource-variable/inter": "catalog:",
+    "shadcn": "catalog:",
+    "tw-animate-css": "catalog:",
+    "@multica/core": "workspace:*",
+    "@multica/views": "workspace:*",
+    "@multica/ui": "workspace:*"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "catalog:",
+    "@vitejs/plugin-react": "catalog:",
+    "tailwindcss": "catalog:",
+    "vite": "^8.0.1"
+  }
+}
