@@ -25,7 +25,11 @@
     "start": "node server/start.mjs",
     "check": "node --check server/api.mjs && node --check server/store.mjs && npm test && npm run build",
     "prototype:check": "npm --prefix assets/workpal-prototype run check",
-    "postinstall": "node scripts/ensure-app-layout.mjs"
+    "postinstall": "node scripts/ensure-app-layout.mjs",
+    "dev:docs": "pnpm -C apps/docs dev",
+    "build:docs": "pnpm -C apps/docs build",
+    "storybook": "pnpm -C apps/storybook storybook",
+    "build:storybook": "pnpm -C apps/storybook build-storybook"
   },
   "engines": {
     "node": ">=22.22"

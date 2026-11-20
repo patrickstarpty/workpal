@@ -1,6 +1,6 @@
 # Workpal
 
-The active application in `apps/web/` uses the copied Multica React frontend with a local mock HTTP backend and SQLite in `server/data/`. Top-level structure mirrors Multica; upstream deployment/CLI sources are retained; apps other than web are empty placeholders, while the default dev/build/check commands target the local mock-backed web app. The prior offline prototype is archived in `assets/workpal-prototype/`; its instructions and historical documents apply to that archive only.
+The active application in `apps/web/` uses the copied Multica React frontend with a local mock HTTP backend and SQLite in `server/data/`. Top-level structure mirrors Multica; upstream deployment/CLI sources are retained; apps/docs and apps/storybook retain their upstream implementations; apps/desktop and apps/mobile are empty placeholders, while the default dev/build/check commands target the local mock-backed web app. The prior offline prototype is archived in `assets/workpal-prototype/`; its instructions and historical documents apply to that archive only.
 
 - Keep Workpal branding and English UI, neutral surfaces, Inter typography and the Multica frontend visual system.
 - Keep prototype, research and simulation labels out of the product interface. Describe backend limitations honestly in delivery notes; do not invent agent outputs or measured results.

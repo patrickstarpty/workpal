@@ -2,7 +2,7 @@
 
 This repository follows Multica's top-level layout. Its tracked top-level directories and files are present here, with the additional `assets/` directory retaining the previous Workpal prototype. Upstream revision and local adaptations are recorded in [docs/UPSTREAM.json](docs/UPSTREAM.json).
 
-The default application is the Workpal-branded Multica frontend with a local mock HTTP backend and SQLite. Go server sources, CLI, CI and deployment files are retained as source; non-web app directories are empty; the local commands below do not run those production services.
+The default application is the Workpal-branded Multica frontend with a local mock HTTP backend and SQLite. Go server sources, CLI, CI and deployment files are retained as source; desktop and mobile app directories are empty; the local commands below do not run those production services.
 
 ## Local web app
 
@@ -26,7 +26,7 @@ Stop the development server before running `npm start`, which serves the build a
 
 ## Layout
 
-- `apps/web/`: active web application. `apps/desktop/`, `apps/mobile/`, `apps/docs/` and `apps/storybook/` are empty placeholders. Git does not track empty directories; `pnpm install` recreates these directory names through the root postinstall script.
+- `apps/web/`: active web application. `apps/docs/` contains the documentation site and `apps/storybook/` the component explorer. `apps/desktop/` and `apps/mobile/` are empty placeholders. Git does not track empty directories; `pnpm install` recreates these directory names through the root postinstall script.
 - `packages/`: shared UI, views, core, enterprise and supporting packages.
 - `server/`: local mock service (`*.mjs`) and upstream Go backend/CLI sources.
 - `server/data/workpal.sqlite`: existing SQLite database, preserved during migration and ignored by Git.
@@ -51,3 +51,7 @@ WORKPAL_PLAYWRIGHT=/path/to/@playwright/test node scripts/qa.mjs
 This checks 20 desktop/mobile page loads and project title editing with reload persistence. The copied upstream CI, Go server and Next.js applications are outside this local validation. Dependency peer-version and large bundle warnings are inherited from the upstream frontend stack; Node 22 labels its SQLite API experimental.
 
 `npm run prototype:check` checks and rebuilds the archived dependency-free HTML app. Historical reference scripts may still reference their original sibling repositories and temporary tooling paths.
+
+## Documentation and components
+
+Install all workspace dependencies with `pnpm install`. Start the documentation site with `npm run dev:docs` (port 4000), or the component explorer with `npm run storybook` (port 6006). Build them with `npm run build:docs` and `npm run build:storybook`. Desktop and mobile directories remain empty.
