@@ -28,7 +28,7 @@ globalThis.WorkpalStudio = (() => {
   const skillDescriptions = ['Clarify constraints and acceptance criteria before implementation.', 'Break an approved design into small, verifiable engineering tasks.', 'Drive implementation from a failing test to a verified behavior.', 'Check browser workflows with repeatable tests and screenshots.', 'Design a distinctive interface around a specific product context.', 'Review interaction quality and accessibility in a web interface.', 'Collect fresh evidence before marking a task complete.', 'Turn a repeated practice into a skill with a test case.'];
   const agents = source.agents.map((a,i) => ({name:handoffs[i][0], role:['Product definition','System design','Implementation','Verification'][i],runtime:a.runtime,skills:a.skills}));
   const builtInSkills = () => source.skills.map((s,i) => ({id:s.id,name:s.name,author:s.author,source:s.source,stage:s.stage,description:skillDescriptions[i]}));
-  function read(key) { try { return JSON.parse(localStorage.getItem(key)); } catch { return null; } }
+  function read(key) { try { return JSON.parse((globalThis.WorkpalStorage || localStorage).getItem(key)); } catch (error) { if(globalThis.WorkpalStorage)throw error; return null; } }
   const old = read('workpal.prototype.v1') || {};
   function initial(oldState = old) {
     const tasks = (Array.isArray(oldState.tasks) ? oldState.tasks : source.tasks.filter(t=>t.project==='TAP')).map(t => {
@@ -171,13 +171,13 @@ globalThis.WorkpalStudio = (() => {
   function save() {
     try {
       const storageKey=active.id===home.id?key:spacePrefix+active.id;
-      const raw=localStorage.getItem(storageKey);
+      const raw=(globalThis.WorkpalStorage || localStorage).getItem(storageKey);
       const saved=raw?JSON.parse(raw):null;
       const remote=(active.id===home.id?saved:saved?.data)||{};
       if(storageExists&&!saved)throw storageConflict('workspace removed');
       const merged=mergeStoredValue(storageBase,db,remote);
       const candidate={...merged,_storageRevision:Math.max(Number(remote._storageRevision)||0,Number(storageBase._storageRevision)||0)+1};
-      localStorage.setItem(storageKey,JSON.stringify(active.id===home.id?candidate:{name:active.name,data:candidate}));
+      (globalThis.WorkpalStorage || localStorage).setItem(storageKey,JSON.stringify(active.id===home.id?candidate:{name:active.name,data:candidate}));
       applyStoredValue(db,candidate);
       storageBase=storageCopy(candidate);storageExists=true;
       return true;
@@ -189,8 +189,8 @@ globalThis.WorkpalStudio = (() => {
   function listWorkspaces(){
     const result=[home];
     try {
-      for(let i=0;i<localStorage.length;i++){
-        const k=localStorage.key(i);
+      for(let i=0;i<(globalThis.WorkpalStorage || localStorage).length;i++){
+        const k=(globalThis.WorkpalStorage || localStorage).key(i);
         if(!k?.startsWith(spacePrefix))continue;
         const item=read(k);
         if(item?.data)result.push({id:k.slice(spacePrefix.length),name:item.name});
@@ -205,7 +205,7 @@ globalThis.WorkpalStudio = (() => {
     const id=crypto.randomUUID();
     const data={projects:[],tasks:[],agents:[],skills:populateDirectory(builtInSkills()),runs:[],
       bookmarks:[],notes:[],reports:[],messages:[],panels:[],issueSchema:1};
-    try{localStorage.setItem(spacePrefix+id,JSON.stringify({name,data}));}
+    try{(globalThis.WorkpalStorage || localStorage).setItem(spacePrefix+id,JSON.stringify({name,data}));}
     catch{throw Error('Workspace could not be saved in this browser.');}
     return id;
   }
@@ -222,7 +222,7 @@ globalThis.WorkpalStudio = (() => {
       storageBase=storageCopy(item.data);storageExists=true;
       active={id,name:item.name};prepareWork();prepareDeliveries();
     }
-    try{localStorage.setItem('workpal.lastSpace',JSON.stringify(id));}catch{}
+    try{(globalThis.WorkpalStorage || localStorage).setItem('workpal.lastSpace',JSON.stringify(id));}catch{}
     return true;
   }
   const lastWorkspace=()=>read('workpal.lastSpace')||home.id;

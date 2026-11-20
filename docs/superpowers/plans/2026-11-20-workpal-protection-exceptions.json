@@ -1,0 +1,18 @@
+{
+  "baseline": "/tmp/workpal-supervision-baseline-20261120.json",
+  "baseline_replaced": false,
+  "exceptions": {
+    ".gitignore": {
+      "sha256": "f75f67ec67b01f3cf74f26a2636705b281b0571af8f28ec73dde24add416bab3",
+      "basis": "Previously accepted workspace difference for backend local files"
+    },
+    "src/studio.js": {
+      "sha256": "678532eae3f54f592fc2f0581697b968d60fcf78f7b3a8b965175642cf338e7a",
+      "baseline_sha256": "1ac5cfe26f24fb93457564c808a55241e23bf18bc6c1407953d0d1e808dc3daa",
+      "confirmed_by": "user",
+      "confirmed_on": "2026-11-20",
+      "confirmation": "是，有意修改，保留该改动",
+      "scope": "Close mobile menu, render, and restore focus to the menu button; this exact hash only"
+    }
+  }
+}

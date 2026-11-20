@@ -1,0 +1,31 @@
+{
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/*.test.mjs",
+    "qa:shell": "node scripts/qa.mjs --suite shell",
+    "qa:review": "node scripts/qa.review.mjs",
+    "qa:projects": "node scripts/qa.projects.mjs",
+    "qa:projects-review": "node scripts/qa.projects.review.mjs",
+    "qa:issues": "node scripts/qa.issues.mjs",
+    "qa:issues-review": "node scripts/qa.issues.review.mjs",
+    "qa:issue-create": "node scripts/qa.issue-create.mjs",
+    "qa:issue-create-review": "node scripts/qa.issue-create.review.mjs",
+    "qa:issue-edit": "node scripts/qa.issue-edit.mjs",
+    "qa:issue-edit-review": "node scripts/qa.issue-edit.review.mjs",
+    "qa:issue-archive": "node scripts/qa.issue-archive.mjs",
+    "qa:issue-archive-review": "node scripts/qa.issue-archive.review.mjs",
+    "qa:issue-assignee": "node scripts/qa.issue-assignee.mjs",
+    "qa:issue-assignee-review": "node scripts/qa.issue-assignee.review.mjs",
+    "qa:issue-status-history": "node scripts/qa.issue-status-history.mjs",
+    "qa:issue-transition": "node scripts/qa.issue-transition.mjs",
+    "qa:issue-transition-review": "node scripts/qa.issue-transition.review.mjs",
+    "qa:issue-dependencies": "node scripts/qa.issue-dependencies.mjs",
+    "qa:issue-dependencies-review": "node scripts/qa.issue-dependencies.review.mjs",
+    "qa:issue-hierarchy": "node scripts/qa.issue-hierarchy.mjs",
+    "qa:issue-hierarchy-review": "node scripts/qa.issue-hierarchy.review.mjs",
+    "qa:issue-parent": "node scripts/qa.issue-parent.mjs",
+    "qa:issue-parent-review": "node scripts/qa.issue-parent.review.mjs",
+    "qa:issue-parent-recovery": "node scripts/qa.issue-parent.recovery.mjs"
+  }
+}

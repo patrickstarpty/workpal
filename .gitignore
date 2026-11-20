@@ -2,3 +2,10 @@ node_modules/
 dist/
 .DS_Store
 test-results/
+data/
+__pycache__/
+*.pyc
+
+.venv-workpal/
+services/workpal/data/
+services/workpal/**/__pycache__/

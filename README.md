@@ -86,3 +86,28 @@ Node.js 22 or newer. No dependencies required to use or build the prototype.
 The updated source consists of src/model.js, src/studio.js and src/studio.css. The old review entry retains its original scripts and styles.
 
 Environment Chat validation: `npm run check` passes, as do `environment-chat-qa.mjs` at 1440px and 390px and `consistency-qa.mjs`. The floating chat path also preserves typed text when choosing an environment and expanding into full Chat. The older all-in-one `qa.mjs` is not fully passing: after scoping its issue-property assertions to the properties sidebar, its Quality dashboard assertion still expects issue content that the current Analytics surface does not render.
+
+## Local Python + SQLite service
+
+Requires Python 3.10+; no pip packages, Docker, or external database required.
+
+```sh
+python3 backend/server.py
+# or: npm run dev
+```
+
+Open **http://127.0.0.1:4173**. SQLite data is written to `data/workpal.sqlite3` (ignored by Git). Stop with Ctrl+C and run the same command to resume. Override the port/database with `python3 backend/server.py --port 4180 --db /path/to/workpal.sqlite3`.
+
+The local service serves the existing English UI and stores workspace records (including tasks, projects, agents, skills, review notes, reports), drafts, and preferences in SQLite. It is a single-user local service, bound to loopback, with a per-process API token and Host validation. Reload open pages after restarting the server to renew their token. The database uses WAL and transactional revision checks; stale writes return HTTP 409. Existing model merge behavior handles independent changes across tabs. For backup, stop the service before copying the database file.
+
+The API exposes `GET /api/health`, `GET /api/records`, and `GET/PUT /api/records/{key}`. Record requests require the `X-Workpal-Token` supplied in the served page. PUT takes `{ "value": "serialized record", "revision": 0 }`; use the revision returned by GET for updates. It returns the new revision only after committing. Records retain the current document structure; business validation and workflows still live in the frontend. Synchronous local requests preserve the existing save contract and may briefly block the UI for large workspaces.
+
+This adds real persistence, not real agent execution, scheduled background jobs, OAuth connections, or model responses. Existing starter content remains example data. Browser-only data is not automatically imported into the database; it remains intact at its previous origin. `npm run dev:offline` retains the former browser-storage mode, and `npm run build` still produces the standalone offline `dist/Workpal.html`. Offline and server data stores are separate.
+
+Run `npm run test:backend` for persistence, restart, conflict and access-boundary tests, and `npm run check` for existing frontend checks and offline export.
+
+For browser persistence QA, start the server with a temporary `--db` and run `WORKPAL_URL=http://127.0.0.1:4188 node scripts/backend-qa.mjs` (requires Playwright; creates QA records).
+
+## Branch scope
+
+`main` retains the standalone offline research prototype. `develop` carries the Python/SQLite services, the connected Web client in `apps/workpal-web`, storage integration, and their development plans. Local database files and virtual environments are never committed. Switch to `develop` before working on the backend or connected application.

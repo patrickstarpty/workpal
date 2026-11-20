@@ -8,7 +8,7 @@
   const $=selector=>document.querySelector(selector);
   const themeKey='workpal.theme';
   let theme='neutral';
-  try{theme=localStorage.getItem(themeKey)==='warm'?'warm':'neutral';}catch{}
+  try{theme=(globalThis.WorkpalStorage || localStorage).getItem(themeKey)==='warm'?'warm':'neutral';}catch{}
   function applyTheme(value){
     theme=value==='neutral'?'neutral':'warm';
     document.documentElement.dataset.theme=theme;
@@ -79,7 +79,7 @@
   const draftCache=new Map();
   const draftStorageKey=space=>'workpal.drafts.'+space+'.'+draftTab;
   function draftRecords(space){
-    if(!draftCache.has(space)){let data={};try{data=JSON.parse(localStorage.getItem(draftStorageKey(space)))||{};}catch{}draftCache.set(space,data);}
+    if(!draftCache.has(space)){let data={};try{data=JSON.parse((globalThis.WorkpalStorage || localStorage).getItem(draftStorageKey(space)))||{};}catch{}draftCache.set(space,data);}
     return draftCache.get(space);
   }
   const draftId=f=>f.dataset.form+'|'+(f.dataset.id||'');
@@ -88,7 +88,7 @@
     const space=f.dataset.workspace||(f.dataset.workspace=workspace().id),record={};
     for(const el of f.elements){if(!el.name||el.type==='hidden'||el.type==='submit')continue;record[el.name]=el.type==='checkbox'?el.checked:el.value;}
     draftRecords(space)[draftId(f)]=record;updateDraftIndicator();
-    try{localStorage.setItem(draftStorageKey(space),JSON.stringify(draftRecords(space)));}catch{toast('Draft is held in this tab. Browser storage is unavailable.');}
+    try{(globalThis.WorkpalStorage || localStorage).setItem(draftStorageKey(space),JSON.stringify(draftRecords(space)));}catch{toast('Draft is held in this tab. Browser storage is unavailable.');}
   }
   function updateDraftIndicator(){const exists=Object.entries(draftRecords(workspace().id)).some(([key,value])=>key.startsWith('issue|')&&(value.title||value.description));document.querySelectorAll('[data-id="issue|"]').forEach(button=>button.classList.toggle('has-draft',exists));document.querySelectorAll('.creator-draft-state').forEach(el=>el.textContent=exists?'Draft saved':'');}
   function captureDrafts(root=document){root.querySelectorAll('form[data-form]').forEach(persistFormDraft);}
@@ -122,7 +122,7 @@
   function clearFormDraft(f){
     f.dataset.draftSaved='true';const space=f.dataset.workspace||workspace().id;
     delete draftRecords(space)[draftId(f)];
-    try{localStorage.setItem(draftStorageKey(space),JSON.stringify(draftRecords(space)));}catch{}
+    try{(globalThis.WorkpalStorage || localStorage).setItem(draftStorageKey(space),JSON.stringify(draftRecords(space)));}catch{}
     document.querySelectorAll('form[data-form]').forEach(other=>{if(other!==f&&other.dataset.workspace===space&&draftId(other)===draftId(f))other.dataset.draftSaved='true';});
   }
   function showSaveError(err){
@@ -981,7 +981,7 @@ $('#dialog').addEventListener('click',e=>{if(e.target!==e.currentTarget)return;c
   function navigation(page){
     const space=page==='settings'?{name:'Settings'}:spaces.find(s=>s.pages.includes(page))||spaces[0];
     const dock=spaces.map(s=>`<a class="dock-link ${space===s?'current':''}" href="#${scoped(s.page)}" title="${s.name}">${icon(s.icon)}<span>${s.name}</span></a>`).join('');
-    function section(label,body){const key='workpal.nav.'+workspace().id+'.'+label;return '<details class="rail-group" data-nav-key="'+esc(key)+'" '+(localStorage.getItem(key)==='closed'?'':'open')+'><summary class="rail-group-label"><small>'+label+'</small>'+icon('chevronDown')+'</summary>'+body+'</details>';}
+    function section(label,body){const key='workpal.nav.'+workspace().id+'.'+label;return '<details class="rail-group" data-nav-key="'+esc(key)+'" '+((globalThis.WorkpalStorage || localStorage).getItem(key)==='closed'?'':'open')+'><summary class="rail-group-label"><small>'+label+'</small>'+icon('chevronDown')+'</summary>'+body+'</details>';}
 
     let panel=page==='settings'?settingsView.navigation(route().params.get('tab')):'';
     const tree=()=>db.projects.map(project=>{const key='project:'+project,open=(db.navTree||[]).includes(key);return '<details class="nav-project-tree" data-tree="'+esc(key)+'" '+(open?'open':'')+'><summary>'+icon('chevronDown')+tool(icon('projects')+'<span>'+esc(project)+'</span>','project',project,'rail-item')+'</summary><div class="tree-actions">'+tool('New issue','projectIssue',project)+tool('Project settings','projectConfig',project)+'</div>'+(open?db.tasks.filter(t=>!t.archivedAt&&t.project===project).slice(0,db.navTreeLimit?.[project]||50):[]).map(t=>tool('<span class="issue-mark '+esc(t.status)+'"></span><span>'+esc(t.title)+'</span>','issue',t.id,'tree-issue')).join('')+(open&&db.tasks.filter(t=>!t.archivedAt&&t.project===project).length>(db.navTreeLimit?.[project]||50)?btn('Load more issues','moreTree',project,'tree-issue'):'')+'</details>';}).join('');
@@ -1034,7 +1034,7 @@ $('#dialog').addEventListener('click',e=>{if(e.target!==e.currentTarget)return;c
     <main id="main" tabindex="-1">${detail&&type!=='issue'?'<div class="heading'+(type==='agent'?' agent-profile-heading':'')+'"><div><div class="crumb">'+esc(workspace().name)+'<span>/</span>'+esc(type==='issue'?id:labels[type])+'</div><h1>'+esc(heading)+'</h1></div>'+(type==='squad'?tool(icon('plus')+' Assign work','assignIssue',id,'primary'):type==='agent'?agentAvatarControl(id,'agent-profile-avatar'):'')+'</div>':''}<div id="page-content">${detail?surface(type,id,true):pages[page]()}</div></main></div></div><footer class="bottom-bar"><a class="product-wordmark" href="#welcome" aria-label="Workpal home">${WorkpalBrand.wordmark}</a><span class="workspace-caption">${esc(workspace().name)}</span></footer>${page==='chatroom'?'':chatLauncher()}`;
     paintChat();restoreDrafts();upgradeSelects($('#app'));mountCollectionHeader();updateDraftIndicator();
     document.querySelectorAll('[data-tree]').forEach(el=>el.addEventListener('toggle',()=>{if(el.open===(db.navTree||[]).includes(el.dataset.tree))return;db.navTree=el.open?[...(db.navTree||[]),el.dataset.tree]:(db.navTree||[]).filter(key=>key!==el.dataset.tree);write();const key=el.dataset.tree;render();[...document.querySelectorAll('[data-tree]')].find(node=>node.dataset.tree===key)?.querySelector('summary')?.focus();}));
-    document.querySelectorAll('details[data-nav-key]').forEach(el=>el.addEventListener('toggle',()=>localStorage.setItem(el.dataset.navKey,el.open?'open':'closed')));
+    document.querySelectorAll('details[data-nav-key]').forEach(el=>el.addEventListener('toggle',()=>(globalThis.WorkpalStorage || localStorage).setItem(el.dataset.navKey,el.open?'open':'closed')));
     if(mobileMenu&&innerWidth<768){
       document.querySelectorAll('.main,.bottom-bar,.chat-launcher').forEach(el=>el.inert=true);
       const rail=$('.rail');rail.setAttribute('role','dialog');rail.setAttribute('aria-modal','true');rail.setAttribute('aria-label','Workspace menu');rail.querySelector('button,a').focus();
@@ -1271,7 +1271,7 @@ $('#dialog').addEventListener('click',e=>{if(e.target!==e.currentTarget)return;c
       }
       case 'exportUnsaved':download('Workpal-unsaved.json',JSON.stringify({workspace:workspace(),data:db,drafts:draftRecords(workspace().id)},null,2));break;
       case 'reloadSaved':{
-        captureDrafts();localStorage.setItem('workpal.recovery.'+crypto.randomUUID(),JSON.stringify({workspace:workspace(),data:db,drafts:draftRecords(workspace().id),at:Date.now()}));location.reload();break;
+        captureDrafts();(globalThis.WorkpalStorage || localStorage).setItem('workpal.recovery.'+crypto.randomUUID(),JSON.stringify({workspace:workspace(),data:db,drafts:draftRecords(workspace().id),at:Date.now()}));location.reload();break;
       }
       case 'switchSpace':openSpace(id);break;
       case 'menu':mobileMenu=!mobileMenu;render();break;
@@ -1372,7 +1372,7 @@ $('#dialog').addEventListener('click',e=>{if(e.target!==e.currentTarget)return;c
     }
     if(el.name==='workspaceTheme'){
       applyTheme(el.value);
-      try{localStorage.setItem(themeKey,theme);}catch{toast('Theme applied. Browser storage is unavailable.');}
+      try{(globalThis.WorkpalStorage || localStorage).setItem(themeKey,theme);}catch{toast('Theme applied. Browser storage is unavailable.');}
       return;
     }
     if(el.form?.dataset.form==='assignWork'&&el.name==='status'){
