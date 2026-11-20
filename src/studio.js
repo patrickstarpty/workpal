@@ -611,7 +611,7 @@
       case 'chatHelp':return '<p class="preserve">'+esc(arg)+'</p><p>Workspace actions use explicit commands and forms. Reports contain saved workspace records and decision trails.</p>'+actionList([tool('Organize as an issue','issue','draft:'+arg),tool('Choose workspace action','directory')]);
       case 'panel':return generatedPanel(arg);
       case 'reviews':return issueList(db.tasks.filter(t=>t.status==='review'));
-      case 'issue':return arg.startsWith('draft:')?issueEditor('',arg.slice(6)):arg?issueDetail(arg,standalone):issueEditor();
+      case 'issue':return arg.startsWith('draft:')?issueEditor('',arg.slice(6)):arg?issueDetail(arg,standalone):issueEditor('','',route().page==='projects'?route().params.get('id')||'':'');
       case 'issueProperty':{
         const [id,key]=arg.split('|'),t=db.tasks.find(t=>t.id===id);
         if(t?.archivedAt)return empty('Restore this archived issue before editing it.')+btn('Restore issue','restoreIssue',id);
@@ -668,7 +668,21 @@
       default:return catalog();
     }
   }
-  function searchResults(q){const term=q.toLowerCase();const matches=[...Object.entries(routes).map(([k,v])=>[v,k,'']),...db.tasks.map(t=>[t.id+' '+t.title,'issue',t.id]),...db.skills.map(s=>[s.name,'skill',s.id]),...db.agents.map(a=>[a.name,'agent',a.name])].filter(([text])=>text.toLowerCase().includes(term));return matches.length ? actionList(matches.map(([label,type,id])=>tool(esc(label),type,id))) : empty('No results.');}
+  document.addEventListener('input',e=>{if(e.target.id==='command-input')$('#command-results').innerHTML=searchResults(e.target.value);});
+  function searchResults(q){
+    const scope=q[0],term=q.replace(/^[>#@]/,'').trim().toLowerCase();
+    const entries=[['New issue','issue','','Actions'],['New project','newProject','','Actions'],
+      ...Object.entries(routes).map(([k,v])=>[v,k,'','Pages']),
+      ...db.tasks.map(t=>[t.id+' '+t.title,'issue',t.id,'Issues']),
+      ...db.projects.map(p=>[p,'project',p,'Projects']),
+      ...db.skills.map(s=>[s.name,'skill',s.id,'Skills']),
+      ...db.agents.map(a=>[a.name,'agent',a.name,'People']),
+      ...db.squads.map(s=>[s.name,'squad',s.name,'Squads'])];
+    const matches=entries.filter(([label,type,id,group])=>label.toLowerCase().includes(term)&&(scope!=='>'||group==='Actions')&&(scope!=='#'||group==='Issues')&&(scope!=='@'||group==='People'));
+    let group='';
+    return matches.map(([label,type,id,category])=>{const heading=group!==category?'<small class="command-group">'+category+'</small>':'';group=category;return heading+tool(esc(label),type,id,'command-result');}).join('')||empty('No results.');
+  }
+
   function descriptor(type,arg='',text=''){return {id:crypto.randomUUID(),role:'assistant',text,surface:{type,arg},event:'TOOL_CALL_RESULT',at:Date.now()};}
   function parse(prompt){
     const text=prompt.trim(),p=text.toLowerCase().replace(/^please\s+/,'');
@@ -860,6 +874,13 @@
     }
     if($('#dialog').open)captureDrafts($('#dialog'));
     modalSurface={type,arg};const d=$('#dialog');focusReturn=d.open?focusReturn:document.activeElement;
+    if(type==='search'){
+      d.dataset.surface=type;
+      d.innerHTML='<div class="command-search">'+icon('search')+'<input id="command-input" aria-label="Search workspace" autocomplete="off" placeholder="Search, or type what needs doing..." value="'+esc(arg)+'"><kbd>Esc</kbd></div><div id="command-results">'+searchResults(arg)+'</div><footer class="command-footer">↑ ↓ Navigate · Enter Open · Esc Close</footer>';
+      d.setAttribute('aria-label','Search workspace');d.removeAttribute('aria-labelledby');
+      if(!d.open)d.showModal();$('#command-input').focus();return;
+    }
+    d.removeAttribute('aria-label');d.setAttribute('aria-labelledby','dialog-title');
     d.dataset.surface=type;d.innerHTML=`<header><h2 id="dialog-title">${esc(labels[type]||'Workspace')}</h2>${btn(icon('close'),'dismiss','','icon-only" aria-label="Close dialog')}</header><div class="modal-body">${surface(type,arg)}</div>`;
     restoreDrafts(d);if(!d.open)d.showModal();
   }
@@ -873,14 +894,15 @@
   function navigation(page){
     const space=page==='settings'?{name:'Settings'}:spaces.find(s=>s.pages.includes(page))||spaces[0];
     const dock=spaces.map(s=>`<a class="dock-link ${space===s?'current':''}" href="#${scoped(s.page)}" title="${s.name}">${icon(s.icon)}<span>${s.name}</span></a>`).join('');
-    function section(label,body){return '<section class="rail-group"><div class="rail-group-label"><small>'+label+'</small>'+icon('chevronDown')+'</div>'+body+'</section>';}
+    function section(label,body){const key='workpal.nav.'+workspace().id+'.'+label;return '<details class="rail-group" data-nav-key="'+esc(key)+'" '+(localStorage.getItem(key)==='closed'?'':'open')+'><summary class="rail-group-label"><small>'+label+'</small>'+icon('chevronDown')+'</summary>'+body+'</details>';}
+
     let panel=page==='settings'?settingsView.navigation(route().params.get('tab')):'';
-    if(space.name==='Work')panel=section('Inbox',nav('inbox'))+section('Views',['tasks','mine','views'].map(nav).join('')+db.views.slice(0,3).map(v=>btn(icon('layers')+'<span>'+esc(v.name)+'</span>','applyView',v.id,'rail-item')).join(''))+
-      section('Projects',nav('projects')+db.projects.slice(0,6).map(p=>tool(icon('projects')+'<span>'+esc(p)+'</span><small>'+db.tasks.filter(t=>!t.archivedAt&&t.project===p).length+'</small>','project',p,'rail-item')).join(''))+section('Workspace',['overview','reports'].map(nav).join(''));
+    if(space.name==='Work')panel=section('Inbox',nav('inbox'))+section('Views',['tasks','mine','views'].map(nav).join('')+db.views.map(v=>btn(icon('layers')+'<span>'+esc(v.name)+'</span>','applyView',v.id,'rail-item')).join(''))+
+      section('Projects',nav('projects')+db.projects.map(p=>tool(icon('projects')+'<span>'+esc(p)+'</span><small>'+db.tasks.filter(t=>!t.archivedAt&&t.project===p).length+'</small>','project',p,'rail-item '+(route().page==='projects'&&route().params.get('id')===p?'active':''))).join(''))+section('Workspace',['overview','reports'].map(nav).join(''));
     if(space.name==='Team')panel=section('Team',nav('agents')+nav('squads'))+section('Resources',nav('skills')+nav('runtimes')+nav('stats')+nav('workflow')+nav('workflows'));
     if(space.name==='Auto')panel=section('Automation',nav('auto')+db.autopilots.map(a=>tool(icon('auto')+'<span>'+esc(a.name)+'</span>','autopilot',a.id,'rail-item')).join(''));
     return `<aside class="rail"><div class="app-dock"><button class="workspace-tile" data-act="surface" data-id="workspaces|" aria-label="Switch workspace, ${esc(workspace().name)}" title="${esc(workspace().name)} · Workpal">${esc(Array.from(workspace().name)[0])}</button>
-      ${btn(icon('edit'),'surface','issue|','dock-command" aria-label="New issue')}${btn(icon('search'),'surface','search|','dock-command" aria-label="Search workspace')}
+      ${btn(icon('squarePen'),'surface','issue|','dock-command" title="New issue (C)" aria-label="New issue')}${btn(icon('search'),'surface','search|','dock-command" title="Search workspace (Cmd/Ctrl+K)" aria-label="Search workspace')}
       <nav aria-label="App navigation">${dock}</nav><div class="dock-bottom"><a class="dock-settings" href="#${scoped('settings')}" aria-label="Settings">${icon('settings')}</a><button class="account-avatar" data-act="surface" data-id="workspaces|" aria-label="Account and workspaces">P</button></div></div>
       <div class="space-panel"><header class="space-heading"><h2>${space.name}</h2>${btn(icon('panelLeft'),'collapseNav','','icon-only" aria-label="Collapse sidebar')}</header><div class="panel-scroll">${panel}</div></div></aside>`;
   }
@@ -916,6 +938,12 @@
     <div class="main"><header class="top">${page==='stats'?WorkpalAnalytics.header():`<div class="top-title">${btn(icon('menu'),'menu','','mobile-only icon-only" aria-label="Workspace menu')}${navCollapsed&&space!=='Chat'?btn(icon('panelLeft'),'collapseNav','','icon-only" aria-label="Expand sidebar'):''}${icon(page)}${detail?'<a href="#'+scoped(page)+'">'+routes[page]+'</a><span class="separator">/</span><span>'+esc(type==='issue'?id:heading)+'</span>':(page==='chatroom'?'<span>Chat</span>':'<h1>'+esc(heading)+'</h1>')}${taskActions&&!archivedIssueView()?btn(icon('filter'),'filters','','icon-only" aria-label="Filter issues'):''}</div><div class="top-actions">${taskActions?(archivedIssueView()?'':issueDisplay())+tool(icon('edit'),'issue','','icon-only" aria-label="New issue'):collectionAction?tool(icon('plus'),collectionAction[0],'','icon-only" aria-label="'+collectionAction[1]):btn(icon('search'),'surface','search|','icon-only" aria-label="Search workspace')}</div>`}</header>
     <main id="main" tabindex="-1">${detail&&type!=='issue'?'<div class="heading'+(type==='agent'?' agent-profile-heading':'')+'"><div><div class="crumb">'+esc(workspace().name)+'<span>/</span>'+esc(type==='issue'?id:labels[type])+'</div><h1>'+esc(heading)+'</h1></div>'+(type==='squad'?tool(icon('plus')+' Assign work','assignIssue',id,'primary'):type==='agent'?agentAvatarControl(id,'agent-profile-avatar'):'')+'</div>':''}<div id="page-content">${detail?surface(type,id,true):pages[page]()}</div></main></div></div><footer class="bottom-bar"><a class="product-wordmark" href="#welcome" aria-label="Workpal home">${WorkpalBrand.wordmark}</a><span class="workspace-caption">${esc(workspace().name)}</span></footer>${page==='chatroom'?'':chatLauncher()}`;
     paintChat();restoreDrafts();
+    document.querySelectorAll('details[data-nav-key]').forEach(el=>el.addEventListener('toggle',()=>localStorage.setItem(el.dataset.navKey,el.open?'open':'closed')));
+    if(mobileMenu&&innerWidth<768){
+      document.querySelectorAll('.main,.bottom-bar,.chat-launcher').forEach(el=>el.inert=true);
+      const rail=$('.rail');rail.setAttribute('role','dialog');rail.setAttribute('aria-modal','true');rail.setAttribute('aria-label','Workspace menu');rail.querySelector('button,a').focus();
+    }
+
     renderedHash=location.hash;
     const positions=scrollPositions.get(renderedHash);
     for(const el of scrollRegions()){
@@ -1085,7 +1113,7 @@
     const mobileLink=ev.target.closest('.rail a');
     if(mobileMenu&&mobileLink){ev.preventDefault();mobileMenu=false;if(location.hash===mobileLink.hash)render();else location.hash=mobileLink.hash;return;}
     const b=ev.target.closest('[data-act]');if(!b)return;
-    if(mobileMenu&&b.closest('.rail')&&b.dataset.act!=='menu')mobileMenu=false;
+    if(mobileMenu&&b.closest('.rail')&&b.dataset.act!=='menu'){mobileMenu=false;render();$('.mobile-only[data-act=menu]')?.focus();}
     const id=b.dataset.id||'',inside=!!b.closest('#assistant');
     switch(b.dataset.act){
       case 'issuePage':{
@@ -1248,6 +1276,18 @@
   });
   document.addEventListener('keydown',ev=>{
     if(isWelcome())return;
+    if($('#command-input')&&$('#dialog').open&&['ArrowDown','ArrowUp','Enter','Escape'].includes(ev.key)){
+      const rows=[...document.querySelectorAll('#command-results button')],i=rows.indexOf(document.activeElement);
+      if(ev.key==='Escape'){ev.preventDefault();dismiss();return;}
+      if(ev.key==='Enter'&&i<0){ev.preventDefault();rows[0]?.click();return;}
+      if(ev.key.startsWith('Arrow')){ev.preventDefault();rows[(i+(ev.key==='ArrowDown'?1:-1)+rows.length)%rows.length]?.focus();return;}
+    }
+    if(mobileMenu&&innerWidth<768&&ev.key==='Tab'&&!$('#dialog').open){
+      const items=[...document.querySelectorAll('.rail button,.rail a,.rail summary')].filter(e=>e.getClientRects().length);
+      const i=items.indexOf(document.activeElement);
+      if(ev.shiftKey&&i<=0){ev.preventDefault();items.at(-1)?.focus();}else if(!ev.shiftKey&&i===items.length-1){ev.preventDefault();items[0]?.focus();}
+    }
+    if(!ev.ctrlKey&&!ev.metaKey&&!ev.altKey&&!ev.target.closest('input,textarea,select,[contenteditable]')&&!$('#dialog').open&&ev.key.toLowerCase()==='c'){ev.preventDefault();show('issue','',false);return;}
     if(ev.key==='Escape'&&!$('#dialog').open){const menu=document.querySelector('.display-dropdown[open],.column-options[open],.repository-add-menu[open],.repository-actions[open]');if(menu){ev.preventDefault();menu.open=false;menu.querySelector('summary').focus();return;}}
     if(ev.key==='Escape'&&mobileMenu&&!$('#dialog').open){ev.preventDefault();mobileMenu=false;render();$('.mobile-only[data-act=menu]')?.focus();return;}
     const quickMenu=ev.target.closest('form')?.querySelector('.comment-suggestions');
