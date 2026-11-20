@@ -1,53 +1,53 @@
 # Workpal
 
-Multica's React frontend source is copied into `packages/` with its license and revision in `UPSTREAM.json`. The local Vite entry uses its original page components and shared UI, with Workpal branding and English text. It does not import the sibling Multica repository. The previous offline prototype and its documentation, scripts, assets and outputs are archived under `assets/workpal-prototype/`.
+This repository follows Multica's top-level layout. Its tracked top-level directories and files are present here, with the additional `assets/` directory retaining the previous Workpal prototype. Upstream revision and local adaptations are recorded in [docs/UPSTREAM.json](docs/UPSTREAM.json).
 
-## Run
+The default application is the Workpal-branded Multica frontend with a local mock HTTP backend and SQLite. Go server sources, CLI, CI and deployment files are retained as source; non-web app directories are empty; the local commands below do not run those production services.
 
-Requires Node >=22.22 and pnpm 10.
+## Local web app
 
-```sh
-pnpm install
-pnpm dev
-```
-
-Open http://127.0.0.1:4174. The development API listens on loopback port 4175.
+Node >=22.22 and pnpm 10.28.2 are required.
 
 ```sh
-pnpm build
-pnpm start
-pnpm test
+pnpm install --filter @multica/web... --frozen-lockfile --ignore-scripts
+npm run postinstall
+npm run dev
 ```
 
-Production mode serves the built frontend and API on loopback port 4174. Stop the development server before starting production mode. Root commands: `npm run dev`, `npm run build`, `npm start`, `npm test`, `npm run check`.
+Open http://127.0.0.1:4174. The local development API listens on 127.0.0.1:4175.
 
-## Data and limits
+```sh
+npm run check
+npm run build
+npm start
+```
 
-`data/workpal.sqlite` is a real SQLite database (Node's built-in `node:sqlite`). It is seeded once from authored fixtures. Project, issue, agent, skill, squad and autopilot record CRUD and preferences persist across restarts. `WORKPAL_DB=/absolute/path.sqlite` selects another database. To reset, stop the server and move `data/` aside, then start again. The database and generated bundles are ignored by Git.
+Stop the development server before running `npm start`, which serves the build and API together on port 4174. `npm run dev:web` also starts the local web app and mock service. The Vite web entry is `apps/web/index.html` and `apps/web/app/main.tsx`. Upstream Next.js files are retained alongside it; `build:next`/`dev:next` in the web package are separate upstream entry points, not the validated local application.
 
-This is a local mock backend, not Multica's production backend. No real login, model calls, agent execution, skill installation, external integrations, scheduling, billing, uploads or WebSocket execution are implemented. Unsupported endpoints return HTTP 501. Read-only empty collections represent absence of local records, not measured results. Advanced issue filters and grouping beyond status are not implemented. The app is single-workspace and single-user; it binds to loopback and should not be exposed publicly.
+## Layout
 
-The included page routes cover projects, issues, agents, skills, squads, autopilots, inbox, chat, settings and dashboard, with project/issue/agent details. Some upstream controls depend on unsupported backend operations and show an error. This is a separate server-based app; use the archived prototype `npm --prefix assets/workpal-prototype run build` for the dependency-free offline Workpal export.
+- `apps/web/`: active web application. `apps/desktop/`, `apps/mobile/`, `apps/docs/` and `apps/storybook/` are empty placeholders. Git does not track empty directories; `pnpm install` recreates these directory names through the root postinstall script.
+- `packages/`: shared UI, views, core, enterprise and supporting packages.
+- `server/`: local mock service (`*.mjs`) and upstream Go backend/CLI sources.
+- `server/data/workpal.sqlite`: existing SQLite database, preserved during migration and ignored by Git.
+- `scripts/`, `e2e/`, `docs/`, `examples/`: tooling, tests, documentation and examples.
+- `deploy/`, `docker/`, `.github/`, root Docker/Compose/Makefile configs: upstream deployment and automation sources, not configured or validated for the SQLite mock service.
+- `assets/workpal-prototype/`: all previous offline prototype sources, scripts, assets, review notes, historical docs and outputs.
 
-## Source changes
+## Data and supported behavior
 
-Copied `core`, `views`, `ui` and their supporting config/test/plugin packages. Modified English product copy, the wordmark/icon components, and allowed an empty WebSocket URL to disable realtime transport. `app/` contains the local navigation/auth bootstrap; `server/` contains the mock HTTP API and SQLite persistence. Upstream code retains its existing package names and license.
+SQLite is seeded once from authored fixtures. Project, issue, agent, skill, squad and autopilot record CRUD and preferences persist across restarts. `WORKPAL_DB=/absolute/path.sqlite` selects a different database. To reset, stop the service and move `server/data/` aside before restarting.
 
-## Verification
+The local backend is single-user and single-workspace. It does not implement real authentication, model/agent execution, skill installation, external integrations, scheduling, billing, uploads or realtime execution. Unsupported operations return HTTP 501. Advanced issue filters/grouping remain partial. Keep the service bound to loopback. Empty fixture collections are not measured results.
 
-Validated: root `npm run check`, `pnpm build`, SQLite HTTP CRUD/restart/input tests, and Playwright page loading at 1440px and 390px plus project title editing and reload persistence. To rerun browser checks with a running app:
+## Verification and archive
+
+`npm run check` runs local server checks/tests and builds the active web entry. With the app running and Playwright installed:
 
 ```sh
 WORKPAL_PLAYWRIGHT=/path/to/@playwright/test node scripts/qa.mjs
 ```
 
-The production build reports large bundle warnings. Node 22 reports its built-in SQLite API as experimental. Dependency installation reports upstream peer-version warnings; the build and exercised browser flows pass.
+This checks 20 desktop/mobile page loads and project title editing with reload persistence. The copied upstream CI, Go server and Next.js applications are outside this local validation. Dependency peer-version and large bundle warnings are inherited from the upstream frontend stack; Node 22 labels its SQLite API experimental.
 
-## Repository layout
-
-- `app/`, `packages/`, `public/`: active Multica frontend and Workpal entry.
-- `server/`, `data/`: local mock API and SQLite database.
-- `scripts/`: active app browser verification.
-- `assets/workpal-prototype/`: archived offline prototype, including historical docs, reports, reference outputs and original assets.
-
-Run `npm run prototype:check` to check and rebuild the archived offline app. Historical comparison scripts may reference their original sibling repositories and temporary browser installations; they are retained as archival material.
+`npm run prototype:check` checks and rebuilds the archived dependency-free HTML app. Historical reference scripts may still reference their original sibling repositories and temporary tooling paths.

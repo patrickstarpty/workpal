@@ -7,7 +7,7 @@ const collections=new Set(['projects','issues','agents','skills','squads','autop
 const types={'.html':'text/html','.js':'text/javascript','.css':'text/css','.svg':'image/svg+xml','.woff2':'font/woff2','.png':'image/png'};
 function fail(status,message){throw Object.assign(new Error(message),{status});}
 async function readBody(req){let text='';for await(const chunk of req){text+=chunk;if(text.length>1024*1024)fail(413,'Request too large');}try{const v=JSON.parse(text||'{}');if(!v||Array.isArray(v)||typeof v!=='object')fail(400,'Expected an object');return v;}catch(e){if(e.status)throw e;fail(400,'Invalid JSON');}}
-export function createServer({dbPath='data/workpal.sqlite',staticDir=resolve('dist')}={}) {
+export function createServer({dbPath='server/data/workpal.sqlite',staticDir=resolve('apps/web/dist')}={}) {
  const store=openStore(dbPath);
  const server=httpServer(async(req,res)=>{
   const send=(status,data)=>{res.writeHead(status,{'Content-Type':'application/json','Cache-Control':'no-store'});res.end(JSON.stringify(data));};
