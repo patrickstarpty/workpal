@@ -23,3 +23,12 @@ test('HTTP CRUD persists across restart, validates input and rejects execution',
  await stop();base=await start();assert.equal((await request('projects/'+project.id)).status,404);
  }finally{if(server?.listening)await stop();await rm(dir,{recursive:true,force:true});}
 });
+
+test('repeated server shutdown closes SQLite only once',async()=>{
+ const server=createServer({dbPath:':memory:'});
+ await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));
+ await new Promise(resolve=>server.close(resolve));
+ await new Promise(resolve=>server.close(error=>{
+  assert.equal(error?.code,'ERR_SERVER_NOT_RUNNING');resolve();
+ }));
+});
