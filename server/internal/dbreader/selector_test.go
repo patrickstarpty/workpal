@@ -10,7 +10,7 @@ import (
 
 	"github.com/jackc/pgx/v5/pgconn"
 	"github.com/jackc/pgx/v5/pgxpool"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
+	db "workpal.local/workpal/server/pkg/db/generated"
 )
 
 var testBusiness = BusinessDashboard
@@ -127,7 +127,7 @@ func TestReadFallsBackOnceForServerConnectionError(t *testing.T) {
 }
 
 func TestConnectErrorFallsBackToPrimary(t *testing.T) {
-	pool, err := pgxpool.New(context.Background(), "postgres://multica:multica@127.0.0.1:1/multica?sslmode=disable&connect_timeout=1")
+	pool, err := pgxpool.New(context.Background(), "postgres://workpal:workpal@127.0.0.1:1/workpal?sslmode=disable&connect_timeout=1")
 	if err != nil {
 		t.Fatalf("create unreachable pool: %v", err)
 	}

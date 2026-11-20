@@ -2,10 +2,10 @@
 
 import type { ReactNode } from "react";
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
-import { Scan, TriangleAlert, X } from "@multica/ui/icons";
-import { IconButton } from "@multica/ui/components/common/icon-button";
+import { Scan, TriangleAlert, X } from "@workpal/ui/icons";
+import { IconButton } from "@workpal/ui/components/common/icon-button";
 import { toast } from "sonner";
-import { cn } from "@multica/ui/lib/utils";
+import { cn } from "@workpal/ui/lib/utils";
 import {
   ContentEditor,
   type ContentEditorRef,
@@ -19,17 +19,17 @@ import {
   useCoordinatedUploads,
   type UploadDraftBinding,
 } from "../../editor/use-coordinated-uploads";
-import { SubmitButton } from "@multica/ui/components/common/submit-button";
+import { SubmitButton } from "@workpal/ui/components/common/submit-button";
 import { ChatAddMenu } from "./chat-add-menu";
 import { CHAT_COLUMN, CHAT_GUTTER } from "./chat-column";
-import { useChatStore, DRAFT_NEW_SESSION } from "@multica/core/chat";
-import { attachmentToDraftUpload, type DraftUpload } from "@multica/core/drafts";
-import { createLogger } from "@multica/core/logger";
-import { useShortcut, type ShortcutChord } from "@multica/core/shortcuts";
+import { useChatStore, DRAFT_NEW_SESSION } from "@workpal/core/chat";
+import { attachmentToDraftUpload, type DraftUpload } from "@workpal/core/drafts";
+import { createLogger } from "@workpal/core/logger";
+import { useShortcut, type ShortcutChord } from "@workpal/core/shortcuts";
 import { ShortcutKeycaps } from "../../common/shortcut-keycaps";
 import type { MentionItem } from "../../editor/extensions/mention-suggestion";
 import { escapeMarkdownLabel } from "../../editor/utils/escape-markdown-label";
-import type { Attachment, Project } from "@multica/core/types";
+import type { Attachment, Project } from "@workpal/core/types";
 import { ProjectPicker } from "../../projects/components/project-picker";
 import { ClearablePillButton } from "../../common/pill-button";
 import { useT } from "../../i18n";
@@ -41,8 +41,8 @@ import {
   VoiceSetupDialog,
   VoiceStrip,
 } from "../../voice";
-import { useCommentDraftStore } from "@multica/core/issues/stores";
-import { composeAnnotatedReply, EMPTY_REPLY_ANNOTATIONS, hasReplyIntent } from "@multica/core/drafts/reply-annotation";
+import { useCommentDraftStore } from "@workpal/core/issues/stores";
+import { composeAnnotatedReply, EMPTY_REPLY_ANNOTATIONS, hasReplyIntent } from "@workpal/core/drafts/reply-annotation";
 import { ReplyAnnotations } from "../../issues/components/reply-annotations";
 import type { ChatAnnotations } from "./use-chat-annotations";
 

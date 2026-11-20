@@ -8,10 +8,10 @@
     "no_agent_action": "Nuevo agente"
   },
   "fab": {
-    "running": "Multica está trabajando...",
+    "running": "Workpal está trabajando...",
     "unread_one": "{{count}} chat sin leer",
     "unread_other": "{{count}} chats sin leer",
-    "default": "Pregunta a Multica"
+    "default": "Pregunta a Workpal"
   },
   "bar": {
     "history": "Historial de chats",
@@ -82,7 +82,7 @@
       "runtime_recovery": "El agente se reinició antes de poder terminar. Inténtalo de nuevo.",
       "manual": "Se ha cancelado esta respuesta.",
       "skill_bundle_unavailable": "No se han podido descargar las skills del agente, así que nunca se puso en marcha. Suele ser un problema de conexión: inténtalo de nuevo.",
-      "runtime_cli_timeout": "La CLI local de OpenClaw no respondió a tiempo, así que esta ejecución nunca arrancó. Es un timeout de arranque local, no un problema de red: reintentar no ayudará hasta que la CLI sea más rápida o se aumente el timeout (MULTICA_OPENCLAW_CLI_TIMEOUT).",
+      "runtime_cli_timeout": "La CLI local de OpenClaw no respondió a tiempo, así que esta ejecución nunca arrancó. Es un timeout de arranque local, no un problema de red: reintentar no ayudará hasta que la CLI sea más rápida o se aumente el timeout (WORKPAL_OPENCLAW_CLI_TIMEOUT).",
       "environment_prepare_failed": "La máquina que ejecuta el agente no pudo preparar esta ejecución, así que nunca arrancó. El error de abajo indica qué falló allí: a menudo espacio en disco, un permiso, una carpeta aún en uso, o una configuración local ilegible. No es el agente ni el proveedor del modelo.",
       "provider_network": "La conexión con el proveedor del modelo se perdió antes de que terminara la respuesta. Comprueba tu red e inténtalo de nuevo.",
       "provider_auth_or_access": "La cuenta de modelo del agente ya no tiene la sesión iniciada. Inicia sesión de nuevo y reintenta.",
@@ -171,7 +171,7 @@
     "first_time_pillars_suffix": ".",
     "first_time_actions": "Pide un resumen, planifica tu día o encarga una tarea rápida.",
     "returning_title_named": "Hola, soy {{name}}",
-    "returning_title_default": "Bienvenido a Multica",
+    "returning_title_default": "Bienvenido a Workpal",
     "returning_subtitle": "Prueba a preguntar",
     "chat_with_named": "Chatear con {{name}}"
   },

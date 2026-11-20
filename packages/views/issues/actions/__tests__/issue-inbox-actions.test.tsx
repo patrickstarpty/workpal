@@ -2,15 +2,15 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { act, cleanup, fireEvent, screen, waitFor } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { toast } from "sonner";
-import { agentTaskSnapshotOptions } from "@multica/core/agents";
-import { setApiInstance } from "@multica/core/api";
-import type { ApiClient } from "@multica/core/api/client";
-import { useInboxFilterStore } from "@multica/core/inbox/filter-store";
-import { inboxListOptions, snoozedInboxOptions } from "@multica/core/inbox/queries";
-import { useInboxSelectionStore } from "@multica/core/inbox/selection-store";
-import { childIssuesOptions, issueDetailOptions, issueSubscribersOptions } from "@multica/core/issues/queries";
-import { agentListOptions } from "@multica/core/workspace/queries";
-import type { InboxItem, Issue, SnoozedInboxIssue } from "@multica/core/types";
+import { agentTaskSnapshotOptions } from "@workpal/core/agents";
+import { setApiInstance } from "@workpal/core/api";
+import type { ApiClient } from "@workpal/core/api/client";
+import { useInboxFilterStore } from "@workpal/core/inbox/filter-store";
+import { inboxListOptions, snoozedInboxOptions } from "@workpal/core/inbox/queries";
+import { useInboxSelectionStore } from "@workpal/core/inbox/selection-store";
+import { childIssuesOptions, issueDetailOptions, issueSubscribersOptions } from "@workpal/core/issues/queries";
+import { agentListOptions } from "@workpal/core/workspace/queries";
+import type { InboxItem, Issue, SnoozedInboxIssue } from "@workpal/core/types";
 import { renderWithI18n } from "../../../test/i18n";
 import { NavigationProvider, type NavigationAdapter } from "../../../navigation";
 import { IssueInboxActions } from "../issue-inbox-actions";
@@ -24,15 +24,15 @@ const state = vi.hoisted(() => ({
 }));
 
 vi.mock("sonner", () => ({ toast: { success: vi.fn(), error: vi.fn() } }));
-vi.mock("@multica/core/hooks", () => ({ useWorkspaceId: () => "ws" }));
-vi.mock("@multica/core/paths", async (importOriginal) => {
-  const actual = await importOriginal<typeof import("@multica/core/paths")>();
+vi.mock("@workpal/core/hooks", () => ({ useWorkspaceId: () => "ws" }));
+vi.mock("@workpal/core/paths", async (importOriginal) => {
+  const actual = await importOriginal<typeof import("@workpal/core/paths")>();
   return { ...actual, useWorkspacePaths: () => actual.paths.workspace("acme") };
 });
 // Archive runs through the real mutation, so the tests see React Query drop
 // per-call callbacks when the next issue's page replaces the header.
-vi.mock("@multica/core/inbox/mutations", async (importOriginal) => ({
-  ...(await importOriginal<typeof import("@multica/core/inbox/mutations")>()),
+vi.mock("@workpal/core/inbox/mutations", async (importOriginal) => ({
+  ...(await importOriginal<typeof import("@workpal/core/inbox/mutations")>()),
   useUnsubscribeArchiveInbox: () => ({ mutate: state.unsubscribeArchive }),
   undoUnsubscribeArchiveInbox: vi.fn(),
   useSnoozeInbox: () => ({ mutateAsync: state.snooze }),

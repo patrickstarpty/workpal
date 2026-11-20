@@ -11,8 +11,8 @@ import (
 
 	"github.com/go-chi/chi/v5"
 	"github.com/google/uuid"
-	"github.com/multica-ai/multica/server/internal/storage"
-	"github.com/multica-ai/multica/server/internal/testutil"
+	"workpal.local/workpal/server/internal/storage"
+	"workpal.local/workpal/server/internal/testutil"
 )
 
 // withAvatarStorage swaps the handler's storage/config for one test and

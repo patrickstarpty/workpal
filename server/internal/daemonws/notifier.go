@@ -5,8 +5,8 @@ import (
 
 	"github.com/oklog/ulid/v2"
 
-	"github.com/multica-ai/multica/server/internal/realtime"
-	"github.com/multica-ai/multica/server/pkg/protocol"
+	"workpal.local/workpal/server/internal/realtime"
+	"workpal.local/workpal/server/pkg/protocol"
 )
 
 // RelayNotifier sends daemon wakeup hints to the local daemon hub and, when

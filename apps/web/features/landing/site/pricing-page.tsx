@@ -1,5 +1,5 @@
-import { Check } from "@multica/ui/icons";
-import { cn } from "@multica/ui/lib/utils";
+import { Check } from "@workpal/ui/icons";
+import { cn } from "@workpal/ui/lib/utils";
 import { ActionLink, Container, Section } from "./primitives";
 import { CtaBand, PageHero, SitePage } from "./site-page";
 import { PLACEHOLDER_PAGES } from "./sitemap";

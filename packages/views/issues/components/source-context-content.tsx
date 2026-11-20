@@ -4,8 +4,8 @@ import type { ReactNode } from "react";
 import type {
   SourceContextCommentSnapshot,
   SourceContextIssueSnapshot,
-} from "@multica/core/types";
-import { cn } from "@multica/ui/lib/utils";
+} from "@workpal/core/types";
+import { cn } from "@workpal/ui/lib/utils";
 import { ReadonlyContent } from "../../editor";
 import { SourceContextCommentList } from "./source-context-comment-list";
 

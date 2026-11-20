@@ -1,8 +1,8 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { fireEvent, render, screen } from "@testing-library/react";
-import { I18nProvider } from "@multica/core/i18n/react";
+import { I18nProvider } from "@workpal/core/i18n/react";
 import enChat from "../../locales/en/chat.json";
-import { contextMenuOriginRef } from "@multica/ui/lib/context-menu-origin";
+import { contextMenuOriginRef } from "@workpal/ui/lib/context-menu-origin";
 import { SessionRenameInput } from "./session-rename-input";
 
 const TEST_RESOURCES = { en: { chat: enChat } };

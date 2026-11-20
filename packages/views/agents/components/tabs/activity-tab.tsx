@@ -9,29 +9,29 @@ import {
   MessageSquare,
   Workflow,
   X,
-} from "@multica/ui/icons";
+} from "@workpal/ui/icons";
 import { toast } from "sonner";
 import { Virtuoso, type ListProps } from "react-virtuoso";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from "@multica/ui/components/ui/tooltip";
-import { Button } from "@multica/ui/components/ui/button";
-import { Skeleton } from "@multica/ui/components/ui/skeleton";
-import { cn } from "@multica/ui/lib/utils";
+} from "@workpal/ui/components/ui/tooltip";
+import { Button } from "@workpal/ui/components/ui/button";
+import { Skeleton } from "@workpal/ui/components/ui/skeleton";
+import { cn } from "@workpal/ui/lib/utils";
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
-import type { Agent, AgentTask } from "@multica/core/types";
+import type { Agent, AgentTask } from "@workpal/core/types";
 import {
   agentTaskSnapshotOptions,
   agentTasksOptions,
   summarizeActivityWindow,
   useWorkspaceActivityMap,
-} from "@multica/core/agents";
-import { api } from "@multica/core/api";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { useWorkspacePaths } from "@multica/core/paths";
-import { issueDetailOptions } from "@multica/core/issues/queries";
+} from "@workpal/core/agents";
+import { api } from "@workpal/core/api";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { useWorkspacePaths } from "@workpal/core/paths";
+import { issueDetailOptions } from "@workpal/core/issues/queries";
 import { AppLink } from "../../../navigation";
 import { TranscriptButton, type TimelineItem } from "../../../common/task-transcript";
 import { VirtuosoSeed } from "../../../common/virtuoso-seed";

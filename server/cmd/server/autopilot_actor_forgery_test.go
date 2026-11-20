@@ -8,8 +8,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/multica-ai/multica/server/internal/handler"
-	"github.com/multica-ai/multica/server/internal/testutil"
+	"workpal.local/workpal/server/internal/handler"
+	"workpal.local/workpal/server/internal/testutil"
 )
 
 // Autopilot writes are judged as the human the caller acts for, and for an
@@ -51,7 +51,7 @@ func TestAutopilotWritesIgnoreForgedAgentIdentity(t *testing.T) {
 	})
 
 	// The forger: a workspace member holding no grant on this autopilot.
-	email := fmt.Sprintf("autopilot-forger-%d@multica.test", time.Now().UnixNano())
+	email := fmt.Sprintf("autopilot-forger-%d@workpal.test", time.Now().UnixNano())
 	outsider := fx.User(t, "Autopilot Forger", email)
 	fx.Member(t, testWorkspaceID, outsider, "member")
 	outsiderJWT, err := generateTestJWT(outsider, email, "Autopilot Forger")

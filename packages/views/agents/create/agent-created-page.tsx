@@ -1,22 +1,22 @@
 "use client";
 
 import type { ReactNode } from "react";
-import { ArrowRight, AtSign, CircleCheck, ListPlus, Users } from "@multica/ui/icons";
+import { ArrowRight, AtSign, CircleCheck, ListPlus, Users } from "@workpal/ui/icons";
 import { useQuery } from "@tanstack/react-query";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { useModalStore } from "@multica/core/modals";
-import { useWorkspacePaths } from "@multica/core/paths";
-import { runtimeDisplayLabel } from "@multica/core/runtimes";
-import { runtimeListOptions } from "@multica/core/runtimes/queries";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { useModalStore } from "@workpal/core/modals";
+import { useWorkspacePaths } from "@workpal/core/paths";
+import { runtimeDisplayLabel } from "@workpal/core/runtimes";
+import { runtimeListOptions } from "@workpal/core/runtimes/queries";
 import {
   agentDetailOptions,
   agentListOptions,
   squadListOptions,
-} from "@multica/core/workspace/queries";
-import { MulticaStarRow } from "@multica/ui/components/common/multica-graphics";
-import { Button } from "@multica/ui/components/ui/button";
-import { Skeleton } from "@multica/ui/components/ui/skeleton";
-import { cn } from "@multica/ui/lib/utils";
+} from "@workpal/core/workspace/queries";
+import { WorkpalStarRow } from "@workpal/ui/components/common/workpal-graphics";
+import { Button } from "@workpal/ui/components/ui/button";
+import { Skeleton } from "@workpal/ui/components/ui/skeleton";
+import { cn } from "@workpal/ui/lib/utils";
 import { ActorAvatar } from "../../common/actor-avatar";
 import { AppLink, useNavigation } from "../../navigation";
 import { useT } from "../../i18n";
@@ -56,14 +56,14 @@ export function AgentCreatedPage({ agentId }: { agentId: string }) {
     >
       <main className="flex min-h-0 flex-1 flex-col overflow-y-auto px-5 py-12">
         <div className="m-auto w-full max-w-xl">
-          <div aria-hidden="true" className="relative mb-10 h-36 overflow-hidden rounded-xl bg-multica-ink">
+          <div aria-hidden="true" className="relative mb-10 h-36 overflow-hidden rounded-xl bg-workpal-ink">
             {stars && agent ? (
-              <MulticaStarRow
+              <WorkpalStarRow
                 count={stars}
                 join
                 delay={0.2}
-                className="absolute top-1/2 left-1/2 h-8 w-auto -translate-x-1/2 -translate-y-1/2 text-multica-paper/15"
-                lastClassName="fill-multica-paper"
+                className="absolute top-1/2 left-1/2 h-8 w-auto -translate-x-1/2 -translate-y-1/2 text-workpal-paper/15"
+                lastClassName="fill-workpal-paper"
               />
             ) : null}
           </div>

@@ -1,8 +1,8 @@
 "use client";
 
 import type { ReactNode } from "react";
-import { Laptop, Plus, Server } from "@multica/ui/icons";
-import { cn } from "@multica/ui/lib/utils";
+import { Laptop, Plus, Server } from "@workpal/ui/icons";
+import { cn } from "@workpal/ui/lib/utils";
 import {
   FLOATING,
   HeaderButton,
@@ -18,8 +18,8 @@ import {
 } from "./mock-kit";
 
 /*
- * Mockups for the Multica CLI page: a terminal connecting a computer with
- * `multica setup`, the Runtimes list it lands in, and a coding agent driving
+ * Mockups for the Workpal CLI page: a terminal connecting a computer with
+ * `workpal setup`, the Runtimes list it lands in, and a coding agent driving
  * the CLI on someone's behalf. Command output follows the CLI's own strings;
  * data is fictional.
  */
@@ -65,10 +65,10 @@ function Cursor() {
 function SetupSession({ compact }: { compact?: boolean }) {
   return (
     <>
-      <Cmd>multica setup</Cmd>
-      <p>Configured for Multica Cloud (https://multica.ai).</p>
-      <p>{"  server_url: https://api.multica.ai"}</p>
-      <p>{"  app_url:    https://multica.ai"}</p>
+      <Cmd>workpal setup</Cmd>
+      <p>Configured for Workpal Cloud (https://workpal.invalid).</p>
+      <p>{"  server_url: https://workpal.invalid"}</p>
+      <p>{"  app_url:    https://workpal.invalid"}</p>
       <Gap />
       <p>Opening browser to authenticate...</p>
       <p>Authenticated as Leo Park (leo@acme.dev)</p>
@@ -76,12 +76,12 @@ function SetupSession({ compact }: { compact?: boolean }) {
       <p>Daemon started (pid 48211, version v0.4.31)</p>
       <Gap />
       <p className="text-foreground">
-        <span className="text-success">✓</span> Setup complete! Your machine is now connected to Multica.
+        <span className="text-success">✓</span> Setup complete! Your machine is now connected to Workpal.
       </p>
       <Gap />
       {compact ? null : (
         <>
-          <Cmd>multica daemon status</Cmd>
+          <Cmd>workpal daemon status</Cmd>
           <p>{"Daemon:      running (pid 48211, uptime 14s)"}</p>
           <p>{"Version:     v0.4.31"}</p>
           <p>{"Agents:      claude, codex, opencode"}</p>
@@ -133,7 +133,7 @@ function RuntimesPanel({ className, compact }: { className: string; compact?: bo
 const SCENE = { width: 1100, height: 600 } as const;
 const SCENE_NARROW = { width: 440, height: 440 } as const;
 
-/** Hero: `multica setup` connecting a Linux box, which then shows up on the Runtimes page. */
+/** Hero: `workpal setup` connecting a Linux box, which then shows up on the Runtimes page. */
 export function CliScene() {
   return (
     <>
@@ -166,7 +166,7 @@ function ToolCall({ name, children }: { name: string; children: ReactNode }) {
   );
 }
 
-/** A coding agent working an issue through the CLI, the way the Multica CLI skill teaches it to. */
+/** A coding agent working an issue through the CLI, the way the Workpal CLI skill teaches it to. */
 export function AgentSessionVisual() {
   return (
     <TerminalWindow title="Claude Code — acme/web" className="h-[340px] w-[420px]">
@@ -174,8 +174,8 @@ export function AgentSessionVisual() {
         <span className="text-muted-foreground">&gt; </span>Pick up ACM-163 and post what you find
       </p>
       <Gap />
-      <ToolCall name="Bash">multica issue get ACM-163 --output json</ToolCall>
-      <ToolCall name="Bash">multica issue comment list ACM-163 \</ToolCall>
+      <ToolCall name="Bash">workpal issue get ACM-163 --output json</ToolCall>
+      <ToolCall name="Bash">workpal issue comment list ACM-163 \</ToolCall>
       <p>{"      --roots-only --summary --compact"}</p>
       <ToolCall name="Read">e2e/checkout.spec.ts</ToolCall>
       <Gap />
@@ -184,7 +184,7 @@ export function AgentSessionVisual() {
       </p>
       <Gap />
       <ToolCall name="Write">./reply.md</ToolCall>
-      <ToolCall name="Bash">multica issue comment add ACM-163 \</ToolCall>
+      <ToolCall name="Bash">workpal issue comment add ACM-163 \</ToolCall>
       <p>{"      --content-file ./reply.md"}</p>
       <p>{"  Comment added to issue ACM-163."}</p>
     </TerminalWindow>

@@ -10,10 +10,10 @@ import (
 
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgconn"
-	"github.com/multica-ai/multica/server/internal/analytics"
-	"github.com/multica-ai/multica/server/internal/projectaccess"
-	"github.com/multica-ai/multica/server/internal/testutil"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
+	"workpal.local/workpal/server/internal/analytics"
+	"workpal.local/workpal/server/internal/projectaccess"
+	"workpal.local/workpal/server/internal/testutil"
+	db "workpal.local/workpal/server/pkg/db/generated"
 )
 
 // A page resolves the originals its duplicates point at in one read, the way

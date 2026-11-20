@@ -1,5 +1,5 @@
-import { Lock } from "@multica/ui/icons";
-import { cn } from "@multica/ui/lib/utils";
+import { Lock } from "@workpal/ui/icons";
+import { cn } from "@workpal/ui/lib/utils";
 
 type Resource = "agent" | "skill" | "comment" | "runtime" | "workspace";
 

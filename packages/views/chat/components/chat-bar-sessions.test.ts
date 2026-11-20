@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import type { ChatSession } from "@multica/core/types";
+import type { ChatSession } from "@workpal/core/types";
 import { chatActivity, selectChatBarSessions } from "./chat-bar-sessions";
 
 function session(id: string, minute: number, overrides: Partial<ChatSession> = {}): ChatSession {

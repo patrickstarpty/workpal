@@ -10,8 +10,8 @@ import (
 	"strings"
 	"sync"
 
-	skillpkg "github.com/multica-ai/multica/server/internal/skill"
-	"github.com/multica-ai/multica/server/pkg/skillbundle"
+	skillpkg "workpal.local/workpal/server/internal/skill"
+	"workpal.local/workpal/server/pkg/skillbundle"
 )
 
 type SkillBundleCache struct {

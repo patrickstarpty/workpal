@@ -44,7 +44,7 @@ func modelVisibleSkills(skills []SkillContextForEnv) []SkillContextForEnv {
 //
 // sanitizeSkillName alone is not injective: "A B" and "A-B" both reduce to
 // "a-b". writeSkillFiles resolves that at write time via
-// allocateCollisionFreeSkillDir, so the second skill lands in `a-b-multica` —
+// allocateCollisionFreeSkillDir, so the second skill lands in `a-b-workpal` —
 // but a listing built from sanitizeSkillName alone would name both `a-b`,
 // leaving the second skill with no invocable name and silently pointing the
 // model at the first. Deriving both sides from this function keeps them in

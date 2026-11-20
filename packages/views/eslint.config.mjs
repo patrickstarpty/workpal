@@ -1,7 +1,7 @@
-import reactConfig from "@multica/eslint-config/react";
-import { ICON_LIBRARY_IMPORT_PATTERNS, REDUCED_MOTION_IMPORT } from "@multica/eslint-config/base";
-import { NO_ROUND_CONTROLS } from "@multica/eslint-config/control-shape";
-import { NO_FULL_PAGE_NAVIGATION } from "@multica/eslint-config/full-page-navigation";
+import reactConfig from "@workpal/eslint-config/react";
+import { ICON_LIBRARY_IMPORT_PATTERNS, REDUCED_MOTION_IMPORT } from "@workpal/eslint-config/base";
+import { NO_ROUND_CONTROLS } from "@workpal/eslint-config/control-shape";
+import { NO_FULL_PAGE_NAVIGATION } from "@workpal/eslint-config/full-page-navigation";
 import i18next from "eslint-plugin-i18next";
 import {
   NO_UNTRANSLATED_ATTRIBUTES,
@@ -60,7 +60,7 @@ export default [
   },
   {
     // The dev toolbar only exists in development builds and speaks to the
-    // people building Multica, so its copy is not translated. Features declare
+    // people building Workpal, so its copy is not translated. Features declare
     // their toolbar actions in a `dev-actions.ts` beside their own code.
     files: ["dev-toolbar/**/*.{ts,tsx}", "**/dev-actions.ts"],
     rules: {

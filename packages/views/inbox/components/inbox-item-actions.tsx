@@ -1,8 +1,8 @@
 "use client";
 
-import { Archive, ArchiveRestore, BellOff, Check, CircleDot, ExternalLink, Trash2 } from "@multica/ui/icons";
-import { paths, useWorkspaceSlug } from "@multica/core/paths";
-import type { InboxItem } from "@multica/core/types";
+import { Archive, ArchiveRestore, BellOff, Check, CircleDot, ExternalLink, Trash2 } from "@workpal/ui/icons";
+import { paths, useWorkspaceSlug } from "@workpal/core/paths";
+import type { InboxItem } from "@workpal/core/types";
 import type { RowActionItem } from "../../common/row-actions-menu";
 import { useIntentNavigate } from "../../navigation";
 import { useT } from "../../i18n";

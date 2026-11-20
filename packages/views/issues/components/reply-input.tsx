@@ -1,20 +1,20 @@
 "use client";
 
-import { composeAnnotatedReply, EMPTY_REPLY_ANNOTATIONS, hasReplyIntent } from "@multica/core/drafts/reply-annotation";
+import { composeAnnotatedReply, EMPTY_REPLY_ANNOTATIONS, hasReplyIntent } from "@workpal/core/drafts/reply-annotation";
 import { annotationsWithPending, type AnnotationComposerSlot } from "./annotation-composer";
 import { ReplyAnnotations } from "./reply-annotations";
 import { useCallback, useRef, useState, useEffect, useImperativeHandle, useMemo, type Ref } from "react";
 import { toast } from "sonner";
 import { ContentEditor, type ContentEditorRef, useFileDropZone, FileDropOverlay, useLazyEditor, useUploadGate, useComposerSubmit } from "../../editor";
-import { SubmitButton } from "@multica/ui/components/common/submit-button";
-import { Button } from "@multica/ui/components/ui/button";
+import { SubmitButton } from "@workpal/ui/components/common/submit-button";
+import { Button } from "@workpal/ui/components/ui/button";
 import { ActorAvatar } from "../../common/actor-avatar";
-import { contentReferencesAttachment, type AgentTask } from "@multica/core/types";
-import { useShortcut } from "@multica/core/shortcuts";
+import { contentReferencesAttachment, type AgentTask } from "@workpal/core/types";
+import { useShortcut } from "@workpal/core/shortcuts";
 import { ShortcutKeycaps } from "../../common/shortcut-keycaps";
-import { useCommentDraftStore, type CommentDraftKey } from "@multica/core/issues/stores";
-import { cn } from "@multica/ui/lib/utils";
-import type { AvatarSize } from "@multica/ui/lib/avatar-size";
+import { useCommentDraftStore, type CommentDraftKey } from "@workpal/core/issues/stores";
+import { cn } from "@workpal/ui/lib/utils";
+import type { AvatarSize } from "@workpal/ui/lib/avatar-size";
 import { useT } from "../../i18n";
 import {
   useComposerVoice,

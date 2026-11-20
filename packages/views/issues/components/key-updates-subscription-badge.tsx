@@ -1,8 +1,8 @@
 "use client";
 
-import { Bell, Settings2 } from "@multica/ui/icons";
-import { useWorkspacePaths } from "@multica/core/paths";
-import type { IssueSubscriberDelivery } from "@multica/core/types";
+import { Bell, Settings2 } from "@workpal/ui/icons";
+import { useWorkspacePaths } from "@workpal/core/paths";
+import type { IssueSubscriberDelivery } from "@workpal/core/types";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,7 +11,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@multica/ui/components/ui/dropdown-menu";
+} from "@workpal/ui/components/ui/dropdown-menu";
 import { useT } from "../../i18n";
 import { useNavigation } from "../../navigation";
 

@@ -5,7 +5,7 @@ import (
 	"log/slog"
 	"time"
 
-	"github.com/multica-ai/multica/server/internal/service"
+	"workpal.local/workpal/server/internal/service"
 )
 
 const (

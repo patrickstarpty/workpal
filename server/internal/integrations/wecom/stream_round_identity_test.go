@@ -13,7 +13,7 @@ package wecom
 
 import (
 	"context"
-	"github.com/multica-ai/multica/server/internal/integrations/channel/engine"
+	"workpal.local/workpal/server/internal/integrations/channel/engine"
 	"testing"
 	"time"
 )

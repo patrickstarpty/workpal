@@ -4,7 +4,7 @@ import (
 	"net/http"
 
 	"github.com/jackc/pgx/v5/pgtype"
-	"github.com/multica-ai/multica/server/internal/projectaccess"
+	"workpal.local/workpal/server/internal/projectaccess"
 )
 
 // The exported surface server/ee builds its handlers on. Commercial packages

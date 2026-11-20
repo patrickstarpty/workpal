@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import type { Project } from "@multica/core/types";
+import type { Project } from "@workpal/core/types";
 import { NO_FOLDER_KEY, NO_LEAD_KEY, groupProjects, projectGroupKey, projectGroupUpdate } from "./project-groups";
 
 const base: Project = {

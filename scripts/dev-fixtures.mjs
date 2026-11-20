@@ -52,9 +52,9 @@ function parseCli(argv) {
 }
 
 function loadProfile(env) {
-  if (!env.MULTICA_DEV_PROFILE) fail("MULTICA_DEV_PROFILE is not set; run this through `make env-exec`.");
-  const home = env.MULTICA_DEV_PROFILES_HOME || join(homedir(), ".multica", "profiles");
-  const file = join(home, env.MULTICA_DEV_PROFILE, "config.json");
+  if (!env.WORKPAL_DEV_PROFILE) fail("WORKPAL_DEV_PROFILE is not set; run this through `make env-exec`.");
+  const home = env.WORKPAL_DEV_PROFILES_HOME || join(homedir(), ".workpal", "profiles");
+  const file = join(home, env.WORKPAL_DEV_PROFILE, "config.json");
   let config;
   try {
     config = JSON.parse(readFileSync(file, "utf8"));
@@ -94,7 +94,7 @@ const sleep = (ms) => new Promise((done) => setTimeout(done, ms));
 const LONG_LOG_LINE =
   "2026-11-09T06:48:19.632113Z WARN  daemon/claim runtime=4f1c2a7e-0b8d-4c55-9a51-2f0f7a3c9e10 task=0193c2d4-5b6a-7e8f-9a0b-1c2d3e4f5a6b " +
   "agent=fixture-agent attempt=3 elapsed_ms=48213 queue_depth=17 lease_expires_at=2026-11-09T06:53:19Z " +
-  'reason="prepare lease extended twice; workspace checkout still copying node_modules from cache /Users/dev/multica_workspaces/dev/4f1c2a7e/workdir"';
+  'reason="prepare lease extended twice; workspace checkout still copying node_modules from cache /Users/dev/workpal_workspaces/dev/4f1c2a7e/workdir"';
 
 const WIDE_TABLE = `| Runtime | Provider | Region | p50 latency | p95 latency | Error rate | Tasks / day | Queue depth | Last deploy | Owner |
 | --- | --- | --- | ---: | ---: | ---: | ---: | ---: | --- | --- |
@@ -165,7 +165,7 @@ I drafted **Runtime Watch** around that report. Should it post to an issue every
 // Mirrors encodeBuilderInput in packages/core/agents/builder-protocol.ts, so the
 // studio decodes the user turn the way it decodes one it sent itself.
 function builderInput(runtime) {
-  return `MULTICA_AGENT_BUILDER_INPUT\n${JSON.stringify(
+  return `WORKPAL_AGENT_BUILDER_INPUT\n${JSON.stringify(
     {
       user_request: BUILDER_PROMPT,
       current_draft: {

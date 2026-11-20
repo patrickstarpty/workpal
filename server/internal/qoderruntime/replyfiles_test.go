@@ -203,9 +203,9 @@ func TestReplyFileLostUploadAcknowledgementIsNotReplayed(t *testing.T) {
 	h.deliver("evt_a1", "file_report", "report.pdf", "%PDF-1.7", 8, true)
 	h.deliver("evt_a2", "file_data", "data.csv", "a,b", 3, true)
 	h.finish("end_turn")
-	upstream := h.b.multica.client.Transport
+	upstream := h.b.workpal.client.Transport
 	lost := false
-	h.b.multica.client.Transport = replyTransport(func(req *http.Request) (*http.Response, error) {
+	h.b.workpal.client.Transport = replyTransport(func(req *http.Request) (*http.Response, error) {
 		resp, err := upstream.RoundTrip(req)
 		if err == nil && req.URL.Path == "/api/upload-file" && !lost {
 			lost = true
@@ -235,9 +235,9 @@ func TestReplyFileUploadRequiresAttachmentID(t *testing.T) {
 			}
 			h.deliver("evt_a1", "file_report", "report.pdf", "%PDF-1.7", 8, true)
 			h.finish("end_turn")
-			upstream := h.b.multica.client.Transport
+			upstream := h.b.workpal.client.Transport
 			attempts := 0
-			h.b.multica.client.Transport = replyTransport(func(req *http.Request) (*http.Response, error) {
+			h.b.workpal.client.Transport = replyTransport(func(req *http.Request) (*http.Response, error) {
 				if req.URL.Path == "/api/upload-file" {
 					attempts++
 					return replyResponse(req, 200, body), nil
@@ -302,7 +302,7 @@ func TestReplyFileTransferSharesOneTimeBudget(t *testing.T) {
 	h.deliver("evt_a1", "file_report", "report.pdf", "%PDF-1.7", 8, true)
 	h.finish("end_turn")
 	var deadlines []time.Time
-	for _, api := range []*api{h.b.qoder, h.b.multica} {
+	for _, api := range []*api{h.b.qoder, h.b.workpal} {
 		upstream := api.client.Transport
 		api.client.Transport = replyTransport(func(req *http.Request) (*http.Response, error) {
 			if strings.HasPrefix(req.URL.Path, "/files/") || strings.HasPrefix(req.URL.Path, "/blob/") || req.URL.Path == "/api/upload-file" {
@@ -375,9 +375,9 @@ func TestReplyFileNoticeSurvivesRestartAndCompletionRetry(t *testing.T) {
 	}
 	h.deliver("evt_a1", "file_report", "report.pdf", "%PDF-1.7", 8, false)
 	h.finish("end_turn")
-	upstream := h.b.multica.client.Transport
+	upstream := h.b.workpal.client.Transport
 	var first map[string]any
-	h.b.multica.client.Transport = replyTransport(func(req *http.Request) (*http.Response, error) {
+	h.b.workpal.client.Transport = replyTransport(func(req *http.Request) (*http.Response, error) {
 		if strings.HasSuffix(req.URL.Path, "/complete") {
 			if err := json.NewDecoder(req.Body).Decode(&first); err != nil {
 				t.Error(err)
@@ -401,7 +401,7 @@ func TestReplyFileNoticeSurvivesRestartAndCompletionRetry(t *testing.T) {
 		t.Fatal("task credential persisted")
 	}
 	h.b.state = j
-	h.b.multica.client.Transport = upstream
+	h.b.workpal.client.Transport = upstream
 	h.stepUntilDone(t)
 	output := fmt.Sprint(h.complete["output"])
 	if output != first["output"] || strings.Count(output, "Attachment delivery notice:") != 1 || !strings.Contains(output, "report.pdf") || len(h.replyUploads) != 0 {
@@ -504,9 +504,9 @@ func TestConcurrentReplyFilesUseSeparatePolls(t *testing.T) {
 		}
 		return upstreamQoder.RoundTrip(req)
 	})
-	upstreamMultica := h.b.multica.client.Transport
+	upstreamWorkpal := h.b.workpal.client.Transport
 	var uploaded []string
-	h.b.multica.client.Transport = replyTransport(func(req *http.Request) (*http.Response, error) {
+	h.b.workpal.client.Transport = replyTransport(func(req *http.Request) (*http.Response, error) {
 		if req.URL.Path == "/api/upload-file" {
 			if err := req.ParseMultipartForm(1 << 20); err != nil {
 				t.Fatal(err)
@@ -515,7 +515,7 @@ func TestConcurrentReplyFilesUseSeparatePolls(t *testing.T) {
 			uploaded = append(uploaded, req.FormValue("task_id"))
 			return replyResponse(req, 200, `{"id":"attachment"}`), nil
 		}
-		return upstreamMultica.RoundTrip(req)
+		return upstreamWorkpal.RoundTrip(req)
 	})
 	for poll, wantUploads := range []int{0, 1, 1, 2} {
 		if err := h.b.guardedStep(context.Background()); err != nil {

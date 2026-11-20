@@ -1,10 +1,10 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Loader2, Save } from "@multica/ui/icons";
-import type { Agent } from "@multica/core/types";
-import { Button } from "@multica/ui/components/ui/button";
-import { Textarea } from "@multica/ui/components/ui/textarea";
+import { Loader2, Save } from "@workpal/ui/icons";
+import type { Agent } from "@workpal/core/types";
+import { Button } from "@workpal/ui/components/ui/button";
+import { Textarea } from "@workpal/ui/components/ui/textarea";
 import { ReadonlyContent } from "../../../editor/readonly-content";
 import { useT } from "../../../i18n";
 import { SettingsViewTabs } from "../../../settings/components/settings-layout";

@@ -28,38 +28,38 @@ set -euo pipefail
 
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
-DEV_HOME="${MULTICA_DEV_HOME:-$HOME/.multica/dev}"
+DEV_HOME="${WORKPAL_DEV_HOME:-$HOME/.workpal/dev}"
 ENVS_DIR="$DEV_HOME/envs"
 LOCK_DIR="$DEV_HOME/lock.d"
-DEV_WORKSPACES_PARENT="${MULTICA_DEV_WORKSPACES_PARENT:-$HOME}"
-DEV_DESKTOP_APP_DATA="${MULTICA_DEV_DESKTOP_APP_DATA:-}"
-DEV_PROFILES_HOME="${MULTICA_DEV_PROFILES_HOME:-$HOME/.multica/profiles}"
+DEV_WORKSPACES_PARENT="${WORKPAL_DEV_WORKSPACES_PARENT:-$HOME}"
+DEV_DESKTOP_APP_DATA="${WORKPAL_DEV_DESKTOP_APP_DATA:-}"
+DEV_PROFILES_HOME="${WORKPAL_DEV_PROFILES_HOME:-$HOME/.workpal/profiles}"
 
-DEV_EMAIL="${MULTICA_DEV_EMAIL:-dev@localhost}"
+DEV_EMAIL="${WORKPAL_DEV_EMAIL:-dev@localhost}"
 DEV_CODE_DEFAULT=888888
-WORKSPACE_NAME="${MULTICA_DEV_WORKSPACE_NAME:-Dev}"
-WORKSPACE_SLUG="${MULTICA_DEV_WORKSPACE_SLUG:-dev}"
+WORKSPACE_NAME="${WORKPAL_DEV_WORKSPACE_NAME:-Dev}"
+WORKSPACE_SLUG="${WORKPAL_DEV_WORKSPACE_SLUG:-dev}"
 
 ALL_COMPONENTS="api web daemon desktop"
 DEFAULT_COMPONENTS="api web"
 
-# An agent runs with TMPDIR=/tmp/multica-task-<id>, deleted when the run ends.
+# An agent runs with TMPDIR=/tmp/workpal-task-<id>, deleted when the run ends.
 # Anything the Go toolchain builds there goes with it, so a binary started from
 # such a build stops being re-executable the moment its creator finishes.
-DEV_TMPDIR="${MULTICA_DEV_TMPDIR:-$HOME/.multica/dev-tmp}"
+DEV_TMPDIR="${WORKPAL_DEV_TMPDIR:-$HOME/.workpal/dev-tmp}"
 
-# The agent runtime exports these pointing at PRODUCTION, and MULTICA_SERVER_URL
+# The agent runtime exports these pointing at PRODUCTION, and WORKPAL_SERVER_URL
 # silently outranks server_url in a saved profile config. Every long-lived child
 # is launched without them, so a local daemon cannot authenticate its local
 # token against the production API — which fails as a bare 401 and reads like a
 # product bug. PATH is never stripped: the daemon resolves agent CLI paths by
 # forking the login shell.
 CLEAN_ENV=(env
-  -u MULTICA_SERVER_URL -u MULTICA_TOKEN -u MULTICA_WORKSPACE_ID
-  -u MULTICA_DAEMON_PORT -u MULTICA_AGENT_ID -u MULTICA_AGENT_NAME
-  -u MULTICA_TASK_ID -u MULTICA_TASK_SLOT
-  -u MULTICA_TASK_CONFIG_ROOT -u MULTICA_TASK_WORKSPACES_ROOT
-  -u MULTICA_WORKSPACES_ROOT)
+  -u WORKPAL_SERVER_URL -u WORKPAL_TOKEN -u WORKPAL_WORKSPACE_ID
+  -u WORKPAL_DAEMON_PORT -u WORKPAL_AGENT_ID -u WORKPAL_AGENT_NAME
+  -u WORKPAL_TASK_ID -u WORKPAL_TASK_SLOT
+  -u WORKPAL_TASK_CONFIG_ROOT -u WORKPAL_TASK_WORKSPACES_ROOT
+  -u WORKPAL_WORKSPACES_ROOT)
 
 # ---------------------------------------------------------------- output ----
 
@@ -165,12 +165,12 @@ load_manifest() {
   . "$file"
   [ "$NAME" = "$1" ] || die "Manifest $file declares NAME=$NAME; expected $1."
   # Run from an agent task, everything launched for this environment loses the
-  # task's MULTICA_* identity (CLEAN_ENV) but still sits under the task's
+  # task's WORKPAL_* identity (CLEAN_ENV) but still sits under the task's
   # marker. This tells the CLI why, so its refusal does not call the task's own
   # marker a leftover to delete. A human's run exports nothing: a marker in
   # their checkout really can be a leftover.
-  if [ -n "${MULTICA_TASK_ID:-}${MULTICA_AGENT_ID:-}${MULTICA_TASK_CONFIG_ROOT:-}" ]; then
-    export MULTICA_DEV_ENV="$NAME"
+  if [ -n "${WORKPAL_TASK_ID:-}${WORKPAL_AGENT_ID:-}${WORKPAL_TASK_CONFIG_ROOT:-}" ]; then
+    export WORKPAL_DEV_ENV="$NAME"
   fi
 }
 
@@ -271,7 +271,7 @@ desktop_app_data_root() {
 }
 
 desktop_user_data_dir() {
-  printf '%s/Multica Canary %s' "$(desktop_app_data_root)" "$1"
+  printf '%s/Workpal Canary %s' "$(desktop_app_data_root)" "$1"
 }
 
 # Desktop's daemon manager derives its own CLI profile from the backend URL
@@ -386,17 +386,17 @@ load_env_file() {
 # makes `up` able to log itself in without a human reading a log for a code.
 ensure_dev_code() {
   local file="$REPO_ROOT/$1" tmp
-  if grep -qE '^MULTICA_DEV_VERIFICATION_CODE=[0-9]{6}$' "$file"; then
+  if grep -qE '^WORKPAL_DEV_VERIFICATION_CODE=[0-9]{6}$' "$file"; then
     return 0
   fi
-  if grep -q '^MULTICA_DEV_VERIFICATION_CODE=' "$file"; then
+  if grep -q '^WORKPAL_DEV_VERIFICATION_CODE=' "$file"; then
     tmp="$(mktemp)"
-    sed "s/^MULTICA_DEV_VERIFICATION_CODE=.*/MULTICA_DEV_VERIFICATION_CODE=$DEV_CODE_DEFAULT/" "$file" > "$tmp"
+    sed "s/^WORKPAL_DEV_VERIFICATION_CODE=.*/WORKPAL_DEV_VERIFICATION_CODE=$DEV_CODE_DEFAULT/" "$file" > "$tmp"
     mv "$tmp" "$file"
   else
-    printf '\nMULTICA_DEV_VERIFICATION_CODE=%s\n' "$DEV_CODE_DEFAULT" >> "$file"
+    printf '\nWORKPAL_DEV_VERIFICATION_CODE=%s\n' "$DEV_CODE_DEFAULT" >> "$file"
   fi
-  info "Set MULTICA_DEV_VERIFICATION_CODE=$DEV_CODE_DEFAULT in $1 (ignored when APP_ENV=production)."
+  info "Set WORKPAL_DEV_VERIFICATION_CODE=$DEV_CODE_DEFAULT in $1 (ignored when APP_ENV=production)."
 }
 
 rewrite_env_ports() {
@@ -411,9 +411,9 @@ rewrite_env_ports() {
     -e "s|^FRONTEND_ORIGIN=.*|FRONTEND_ORIGIN=http://localhost:${frontend}|" \
     -e "s|^POSTGRES_DB=.*|POSTGRES_DB=${db}|" \
     -e "s|^DATABASE_URL=.*|DATABASE_URL=${escaped_database_url}|" \
-    -e "s|^MULTICA_SERVER_URL=.*|MULTICA_SERVER_URL=ws://localhost:${backend}/ws|" \
-    -e "s|^MULTICA_PUBLIC_URL=.*|MULTICA_PUBLIC_URL=http://localhost:${backend}|" \
-    -e "s|^MULTICA_APP_URL=.*|MULTICA_APP_URL=http://localhost:${frontend}|" \
+    -e "s|^WORKPAL_SERVER_URL=.*|WORKPAL_SERVER_URL=ws://localhost:${backend}/ws|" \
+    -e "s|^WORKPAL_PUBLIC_URL=.*|WORKPAL_PUBLIC_URL=http://localhost:${backend}|" \
+    -e "s|^WORKPAL_APP_URL=.*|WORKPAL_APP_URL=http://localhost:${frontend}|" \
     -e "s|^NEXT_PUBLIC_API_URL=.*|NEXT_PUBLIC_API_URL=http://localhost:${backend}|" \
     -e "s|^NEXT_PUBLIC_WS_URL=.*|NEXT_PUBLIC_WS_URL=ws://localhost:${backend}/ws|" \
     "$file" > "$tmp"
@@ -800,7 +800,7 @@ EOF
 
 ensure_credentials() {
   local server="http://localhost:${BACKEND_PORT}" config="$PROFILE_DIR/config.json"
-  local code="${MULTICA_DEV_VERIFICATION_CODE:-$DEV_CODE_DEFAULT}"
+  local code="${WORKPAL_DEV_VERIFICATION_CODE:-$DEV_CODE_DEFAULT}"
   local verify jwt pat ws
 
   if [ -f "$config" ]; then
@@ -818,7 +818,7 @@ ensure_credentials() {
 
   curl -sf -X POST "$server/auth/send-code" -H 'Content-Type: application/json' \
     -d "{\"email\":\"${DEV_EMAIL}\"}" >/dev/null \
-    || die "send-code failed. Is MULTICA_DEV_VERIFICATION_CODE set and APP_ENV non-production?"
+    || die "send-code failed. Is WORKPAL_DEV_VERIFICATION_CODE set and APP_ENV non-production?"
 
   verify="$(curl -sS -X POST "$server/auth/verify-code" -H 'Content-Type: application/json' \
     -d "{\"email\":\"${DEV_EMAIL}\",\"code\":\"${code}\"}")"
@@ -900,8 +900,8 @@ ensure_fixture_issues() {
 }
 
 daemon_status_json() {
-  "${CLEAN_ENV[@]}" MULTICA_WORKSPACES_ROOT="$WORKSPACES_ROOT" \
-    "$MULTICA_BIN" daemon status --profile "$PROFILE" --output json 2>/dev/null || true
+  "${CLEAN_ENV[@]}" WORKPAL_WORKSPACES_ROOT="$WORKSPACES_ROOT" \
+    "$WORKPAL_BIN" daemon status --profile "$PROFILE" --output json 2>/dev/null || true
 }
 
 # A running daemon keeps executing the binary it was started from, and
@@ -933,7 +933,7 @@ daemon_stale_reason() {
   fi
   recorded="$(cat "$(daemon_build_file)" 2>/dev/null || true)"
   if [ "${recorded%% *}" != "$pid" ]; then
-    printf 'was not started from %s by make up' "$MULTICA_BIN"
+    printf 'was not started from %s by make up' "$WORKPAL_BIN"
   elif [ "${recorded#* }" != "$bin_hash" ]; then
     printf 'runs an older build of commit %s (uncommitted changes differ)' "$(short_commit "$running_commit")"
   fi
@@ -943,7 +943,7 @@ daemon_stale_reason() {
 # Under a daemon-task marker the CLI refuses daemon commands for every profile
 # except one this registry assigns to an environment, reached without the task's
 # identity and pointed at that environment's API — exactly how CLEAN_ENV and
-# the profile written above launch it (server/cmd/multica/dev_env_profile.go).
+# the profile written above launch it (server/cmd/workpal/dev_env_profile.go).
 start_daemon() {
   local status state pid build_commit bin_hash reason active
 
@@ -951,11 +951,11 @@ start_daemon() {
   # and re-execs it as the execution-environment helper for every task. Under
   # `go run` the toolchain deletes that binary when the launcher exits, so the
   # daemon registers, heartbeats, and then fails every task with
-  # "fork/exec .../go-build.../exe/multica: no such file or directory".
-  info "Building $MULTICA_BIN (a go run daemon would fail every task later)."
+  # "fork/exec .../go-build.../exe/workpal: no such file or directory".
+  info "Building $WORKPAL_BIN (a go run daemon would fail every task later)."
   build_commit="$(git -C "$REPO_ROOT" rev-parse HEAD 2>/dev/null || printf 'unknown')"
-  (cd "$REPO_ROOT/server" && go build -ldflags "-X main.buildCommit=$build_commit" -o bin/multica ./cmd/multica) || die "Failed to build the multica CLI."
-  bin_hash="$(file_sha256 "$MULTICA_BIN")"
+  (cd "$REPO_ROOT/server" && go build -ldflags "-X main.buildCommit=$build_commit" -o bin/workpal ./cmd/workpal) || die "Failed to build the workpal CLI."
+  bin_hash="$(file_sha256 "$WORKPAL_BIN")"
 
   status="$(daemon_status_json)"
   state="$(json_field "$status" status || true)"
@@ -973,15 +973,15 @@ start_daemon() {
       else
         warn "daemon pid $pid $reason; restarting it."
       fi
-      "${CLEAN_ENV[@]}" MULTICA_WORKSPACES_ROOT="$WORKSPACES_ROOT" \
-        "$MULTICA_BIN" daemon stop --force --profile "$PROFILE" >/dev/null 2>&1 \
+      "${CLEAN_ENV[@]}" WORKPAL_WORKSPACES_ROOT="$WORKSPACES_ROOT" \
+        "$WORKPAL_BIN" daemon stop --force --profile "$PROFILE" >/dev/null 2>&1 \
         || die "Could not stop the stale daemon pid $pid for profile $PROFILE. Log: $PROFILE_DIR/daemon.log"
       rm -f "$(daemon_build_file)"
     fi
   fi
 
-  "${CLEAN_ENV[@]}" MULTICA_WORKSPACES_ROOT="$WORKSPACES_ROOT" \
-    "$MULTICA_BIN" daemon start --profile "$PROFILE" 2>&1 | sed 's/^/    /' || true
+  "${CLEAN_ENV[@]}" WORKPAL_WORKSPACES_ROOT="$WORKSPACES_ROOT" \
+    "$WORKPAL_BIN" daemon start --profile "$PROFILE" 2>&1 | sed 's/^/    /' || true
 
   status="$(daemon_status_json)"
   state="$(json_field "$status" status || echo unknown)"
@@ -1026,13 +1026,13 @@ start_desktop() {
   fi
 
   write_desktop_env_file
-  # Desktop's main process delivers MULTICA_DEV_AUTH_TOKEN to the renderer the
+  # Desktop's main process delivers WORKPAL_DEV_AUTH_TOKEN to the renderer the
   # way a browser login's deep link does, so the session is stored exactly as
   # it is for a human. electron-vite turns REMOTE_DEBUGGING_PORT into
   # --remote-debugging-port; turbo.json passes both through to the dev task.
   local launch_env=(env
     DESKTOP_RENDERER_PORT="$DESKTOP_RENDERER_PORT" DESKTOP_APP_SUFFIX="$DESKTOP_APP_SUFFIX"
-    MULTICA_DEV_AUTH_TOKEN="$DEV_TOKEN")
+    WORKPAL_DEV_AUTH_TOKEN="$DEV_TOKEN")
   [ -z "$DESKTOP_CDP_PORT" ] || launch_env+=(REMOTE_DEBUGGING_PORT="$DESKTOP_CDP_PORT")
   launch_detached desktop "${launch_env[@]}" \
     make -C "$REPO_ROOT" -s desktop-dev ENV_FILE="$ENV_FILE"
@@ -1134,8 +1134,8 @@ stop_desktop_daemon() {
   profile="$(desktop_daemon_profile)"
   pid="$(cat "$DEV_PROFILES_HOME/$profile/daemon.pid" 2>/dev/null || true)"
   [ -n "$pid" ] && kill -0 "$pid" 2>/dev/null || return 0
-  bin="$MULTICA_BIN"
-  [ -x "$bin" ] || bin="$DIR/apps/desktop/resources/bin/multica"
+  bin="$WORKPAL_BIN"
+  [ -x "$bin" ] || bin="$DIR/apps/desktop/resources/bin/workpal"
   if [ -x "$bin" ] && "${CLEAN_ENV[@]}" "$bin" daemon stop --force --profile "$profile" >/dev/null 2>&1 \
     && ! kill -0 "$pid" 2>/dev/null; then
     ok "stopped Desktop's daemon for profile $profile"
@@ -1150,13 +1150,13 @@ stop_component() {
   local descendants="" child survivors=""
   case "$name" in
     daemon)
-      if [ -x "$MULTICA_BIN" ]; then
-        if "${CLEAN_ENV[@]}" MULTICA_WORKSPACES_ROOT="$WORKSPACES_ROOT" \
-          "$MULTICA_BIN" daemon stop --profile "$PROFILE" >/dev/null 2>&1; then
+      if [ -x "$WORKPAL_BIN" ]; then
+        if "${CLEAN_ENV[@]}" WORKPAL_WORKSPACES_ROOT="$WORKSPACES_ROOT" \
+          "$WORKPAL_BIN" daemon stop --profile "$PROFILE" >/dev/null 2>&1; then
           ok "daemon stopped"
         else
-          status="$("${CLEAN_ENV[@]}" MULTICA_WORKSPACES_ROOT="$WORKSPACES_ROOT" \
-            "$MULTICA_BIN" daemon status --profile "$PROFILE" --output json 2>/dev/null || true)"
+          status="$("${CLEAN_ENV[@]}" WORKPAL_WORKSPACES_ROOT="$WORKSPACES_ROOT" \
+            "$WORKPAL_BIN" daemon status --profile "$PROFILE" --output json 2>/dev/null || true)"
           state="$(json_field "$status" status || echo stopped)"
           if [ "$state" = running ]; then
             warn "daemon for profile $PROFILE is still running"
@@ -1167,7 +1167,7 @@ stop_component() {
       else
         pid="$(cat "$PROFILE_DIR/daemon.pid" 2>/dev/null || true)"
         if [ -n "$pid" ] && kill -0 "$pid" 2>/dev/null; then
-          warn "cannot stop daemon pid $pid because no usable multica binary was found"
+          warn "cannot stop daemon pid $pid because no usable workpal binary was found"
           return 1
         fi
         info "daemon skipped (no usable binary and no live profile pid)"
@@ -1314,7 +1314,7 @@ component_state() {
       ;;
     daemon)
       local status state pid running_commit reason
-      if [ -x "$MULTICA_BIN" ]; then
+      if [ -x "$WORKPAL_BIN" ]; then
         status="$(daemon_status_json)"
         state="$(json_field "$status" status || echo stopped)"
         pid="$(json_field "$status" pid || echo '-')"
@@ -1323,11 +1323,11 @@ component_state() {
           return 0
         fi
         running_commit="$(json_field "$status" cli_commit || true)"
-        # Measured against server/bin/multica as it is now: an edit that has
+        # Measured against server/bin/workpal as it is now: an edit that has
         # not been rebuilt yet shows up only once `make up` compiles it.
         reason="$(daemon_stale_reason "$status" \
           "$(git -C "$DIR" rev-parse HEAD 2>/dev/null || printf 'unknown')" \
-          "$(file_sha256 "$MULTICA_BIN")")"
+          "$(file_sha256 "$WORKPAL_BIN")")"
         if [ -n "$reason" ]; then
           printf 'stale|%s|pid %s %s; run make up C=daemon to restart' "$PROFILE" "$pid" "$reason"
         else
@@ -1428,7 +1428,7 @@ print_handoff() {
 ${C_GREEN}✓ Environment ready.${C_OFF}
 
   ${entrypoint}
-  Sign in     ${DEV_EMAIL}  ·  code ${MULTICA_DEV_VERIFICATION_CODE:-$DEV_CODE_DEFAULT}
+  Sign in     ${DEV_EMAIL}  ·  code ${WORKPAL_DEV_VERIFICATION_CODE:-$DEV_CODE_DEFAULT}
   Token       profile ${PROFILE} (onboarded, workspace /${WORKSPACE_SLUG})
   Fixtures    make env-exec ARGS="-- node scripts/dev-fixtures.mjs all"
   Backend     http://localhost:${BACKEND_PORT}   (GET /health reports pid + commit + started_at)
@@ -1458,16 +1458,16 @@ bind_paths() {
   STATE_DIR="$(env_dir "$NAME")"
   LOG_DIR="$STATE_DIR/logs"
   PROFILE_DIR="$DEV_PROFILES_HOME/$PROFILE"
-  WORKSPACES_ROOT="${WORKSPACES_ROOT:-$DEV_WORKSPACES_PARENT/multica_workspaces_$PROFILE}"
+  WORKSPACES_ROOT="${WORKSPACES_ROOT:-$DEV_WORKSPACES_PARENT/workpal_workspaces_$PROFILE}"
   DESKTOP_RENDERER_PORT="${DESKTOP_RENDERER_PORT:-$(renderer_port_for_offset "$OFFSET")}"
   DESKTOP_APP_SUFFIX="${DESKTOP_APP_SUFFIX:-$NAME}"
   DESKTOP_USER_DATA_DIR="${DESKTOP_USER_DATA_DIR:-$(desktop_user_data_dir "$DESKTOP_APP_SUFFIX")}"
   DESKTOP_ENV_FILE="${DESKTOP_ENV_FILE:-$DIR/apps/desktop/.env.development.local}"
   DESKTOP_CDP_PORT="${DESKTOP_CDP_PORT:-}"
   EXPIRES_AT="${EXPIRES_AT:-}"
-  MULTICA_BIN="$DIR/server/bin/multica"
-  if [ ! -x "$MULTICA_BIN" ] && [ -x "$REPO_ROOT/server/bin/multica" ]; then
-    MULTICA_BIN="$REPO_ROOT/server/bin/multica"
+  WORKPAL_BIN="$DIR/server/bin/workpal"
+  if [ ! -x "$WORKPAL_BIN" ] && [ -x "$REPO_ROOT/server/bin/workpal" ]; then
+    WORKPAL_BIN="$REPO_ROOT/server/bin/workpal"
   fi
   mkdir -p "$LOG_DIR"
 }
@@ -1604,7 +1604,7 @@ cmd_up() {
       fi
       offset="$(allocate_offset "$REPO_ROOT")" || die "No free slot left; run 'make gc' or 'make list'."
       local new_backend=$((18080 + offset)) new_frontend=$((13000 + offset))
-      local new_db="multica_$(slugify "$(basename "$REPO_ROOT")")_${offset}"
+      local new_db="workpal_$(slugify "$(basename "$REPO_ROOT")")_${offset}"
       rewrite_env_ports "$ENV_FILE" "$offset" "$new_backend" "$new_frontend" "$new_db"
       load_env_file "$ENV_FILE"
       info "Allocated slot $offset — backend $new_backend, frontend $new_frontend, database $new_db"
@@ -1613,7 +1613,7 @@ cmd_up() {
     NAME="${name:-$(slugify "$(basename "$REPO_ROOT")")-${offset}}"
     require_env_name "$NAME"
     PROFILE="dev-$(slugify "$(basename "$REPO_ROOT")")-${offset}"
-    WORKSPACES_ROOT="$DEV_WORKSPACES_PARENT/multica_workspaces_$PROFILE"
+    WORKSPACES_ROOT="$DEV_WORKSPACES_PARENT/workpal_workspaces_$PROFILE"
     DESKTOP_RENDERER_PORT="$(renderer_port_for_offset "$offset")"
     DESKTOP_APP_SUFFIX="$NAME"
     DESKTOP_USER_DATA_DIR="$(desktop_user_data_dir "$DESKTOP_APP_SUFFIX")"
@@ -1766,7 +1766,7 @@ cmd_destroy() {
     failures=$((failures + 1))
   fi
 
-  expected_workspaces="$DEV_WORKSPACES_PARENT/multica_workspaces_$PROFILE"
+  expected_workspaces="$DEV_WORKSPACES_PARENT/workpal_workspaces_$PROFILE"
   if [ "$WORKSPACES_ROOT" != "$expected_workspaces" ]; then
     warn "refusing to remove unexpected workspaces root $WORKSPACES_ROOT (expected $expected_workspaces)"
     failures=$((failures + 1))
@@ -1919,7 +1919,7 @@ EOF
 }
 
 # Runs a command with this environment's variables, without the agent runtime's
-# production MULTICA_* values and with a durable TMPDIR. Replaces the prefix
+# production WORKPAL_* values and with a durable TMPDIR. Replaces the prefix
 # people used to have to copy out of a document by hand.
 cmd_exec() {
   local name=""
@@ -1933,15 +1933,15 @@ cmd_exec() {
   load_env_file "$ENV_FILE" "$DIR"
   export PORT="$BACKEND_PORT" FRONTEND_PORT DATABASE_URL POSTGRES_DB="$DB_NAME"
   export TMPDIR="$DEV_TMPDIR" TMP="$DEV_TMPDIR" TEMP="$DEV_TMPDIR"
-  export MULTICA_DEV_PROFILE="$PROFILE"
+  export WORKPAL_DEV_PROFILE="$PROFILE"
   # Read by scripts/desktop-cdp.mjs to find this environment's Desktop.
-  export MULTICA_DEV_DESKTOP_RENDERER_URL="http://localhost:${DESKTOP_RENDERER_PORT}"
+  export WORKPAL_DEV_DESKTOP_RENDERER_URL="http://localhost:${DESKTOP_RENDERER_PORT}"
   if [ -n "${DESKTOP_CDP_PORT:-}" ]; then
-    export MULTICA_DEV_DESKTOP_CDP_URL="http://127.0.0.1:${DESKTOP_CDP_PORT}"
+    export WORKPAL_DEV_DESKTOP_CDP_URL="http://127.0.0.1:${DESKTOP_CDP_PORT}"
   else
-    unset MULTICA_DEV_DESKTOP_CDP_URL
+    unset WORKPAL_DEV_DESKTOP_CDP_URL
   fi
-  exec "${CLEAN_ENV[@]}" MULTICA_WORKSPACES_ROOT="$WORKSPACES_ROOT" "$@"
+  exec "${CLEAN_ENV[@]}" WORKPAL_WORKSPACES_ROOT="$WORKSPACES_ROOT" "$@"
 }
 
 usage() {

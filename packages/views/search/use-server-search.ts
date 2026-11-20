@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import type { SearchIssueResult, SearchProjectResult } from "@multica/core/types";
-import { isLocalSearchReady, searchIssues, searchProjects } from "@multica/core/search-index";
+import type { SearchIssueResult, SearchProjectResult } from "@workpal/core/types";
+import { isLocalSearchReady, searchIssues, searchProjects } from "@workpal/core/search-index";
 
 export interface SearchResults {
   /**

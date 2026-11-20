@@ -1,4 +1,4 @@
-import { EMBED_TOKENS, isPlainEmbedValue, type EmbedTokenKind } from "@multica/core/appearance";
+import { EMBED_TOKENS, isPlainEmbedValue, type EmbedTokenKind } from "@workpal/core/appearance";
 
 /** The host's theme as a sandboxed embed receives it (docs/theming.md, "Embedded content"). */
 export interface EmbedTheme {

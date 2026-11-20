@@ -5,11 +5,11 @@ import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import {
   NavigationProvider,
   type NavigationAdapter,
-} from "@multica/views/navigation";
+} from "@workpal/views/navigation";
 import { canGoBackInApp } from "./in-app-history";
 
 /**
- * Web half of the `multica:navigate` bridge — the event shared content
+ * Web half of the `workpal:navigate` bridge — the event shared content
  * (comments, chat, issue descriptions) fires when a link resolves to an in-app
  * destination. A plain click ("push") is a router push in place. A modifier
  * click normally never reaches here on web — real anchors leave it to the
@@ -39,8 +39,8 @@ function useInternalLinkHandler(router: ReturnType<typeof useRouter>) {
       }
       router.push(path);
     };
-    window.addEventListener("multica:navigate", handler);
-    return () => window.removeEventListener("multica:navigate", handler);
+    window.addEventListener("workpal:navigate", handler);
+    return () => window.removeEventListener("workpal:navigate", handler);
   }, [router]);
 }
 
@@ -88,7 +88,7 @@ function NavigationProviderInner({
       typeof window === "undefined" ? path : window.location.origin + path,
     openInDesktop: (path: string) => {
       const url = window.location.origin + path;
-      window.location.href = `multica://open/issue?url=${encodeURIComponent(url)}`;
+      window.location.href = `workpal://open/issue?url=${encodeURIComponent(url)}`;
     },
     // router.prefetch is a no-op in dev mode by Next.js design; in production
     // it warms the RSC payload + route chunk so the next push() commits with

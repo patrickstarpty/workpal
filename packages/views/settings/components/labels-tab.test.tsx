@@ -5,7 +5,7 @@ import { renderWithI18n } from "../../test/i18n";
 import { LabelsTab } from "./labels-tab";
 import { LabelManager } from "../../labels/label-manager";
 
-vi.mock("@multica/core/hooks", () => ({
+vi.mock("@workpal/core/hooks", () => ({
   useWorkspaceId: () => "workspace-1",
 }));
 
@@ -27,11 +27,11 @@ vi.mock("../../navigation", () => ({
   }),
 }));
 
-vi.mock("@multica/core/paths", () => ({
+vi.mock("@workpal/core/paths", () => ({
   useCurrentWorkspace: () => ({ id: "workspace-1", name: "Acme" }),
 }));
 
-vi.mock("@multica/core/labels", () => ({
+vi.mock("@workpal/core/labels", () => ({
   labelListOptions: (wsId: string, resourceType: string) => ({
     queryKey: ["labels", wsId, "list", resourceType],
   }),

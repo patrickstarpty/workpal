@@ -18,7 +18,7 @@ permissions:
 
 jobs:
   promote:
-    if: github.repository == 'multica-ai/multica'
+    if: github.repository == 'workpal-ai/workpal'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     concurrency:
@@ -36,10 +36,10 @@ jobs:
         with:
           node-version: 22
           cache: pnpm
-      - run: pnpm install --frozen-lockfile --ignore-scripts --filter multica
+      - run: pnpm install --frozen-lockfile --ignore-scripts --filter workpal
       - name: Validate artifacts and promote Latest
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           RELEASE_TAG: ${{ inputs.tag }}
-          GH_REPO: multica-ai/multica
+          GH_REPO: workpal-ai/workpal
         run: node scripts/promote-release.mjs

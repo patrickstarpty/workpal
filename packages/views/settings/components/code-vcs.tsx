@@ -3,18 +3,18 @@
 import { useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
-import { Copy, FolderGit2, GitBranch, MoreHorizontal, RefreshCw, Unplug } from "@multica/ui/icons";
-import { Button } from "@multica/ui/components/ui/button";
-import { IconButton } from "@multica/ui/components/common/icon-button";
-import { Input } from "@multica/ui/components/ui/input";
-import { Label } from "@multica/ui/components/ui/label";
+import { Copy, FolderGit2, GitBranch, MoreHorizontal, RefreshCw, Unplug } from "@workpal/ui/icons";
+import { Button } from "@workpal/ui/components/ui/button";
+import { IconButton } from "@workpal/ui/components/common/icon-button";
+import { Input } from "@workpal/ui/components/ui/input";
+import { Label } from "@workpal/ui/components/ui/label";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@multica/ui/components/ui/select";
+} from "@workpal/ui/components/ui/select";
 import {
   Dialog,
   DialogContent,
@@ -22,7 +22,7 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "@multica/ui/components/ui/dialog";
+} from "@workpal/ui/components/ui/dialog";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -32,18 +32,18 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@multica/ui/components/ui/alert-dialog";
+} from "@workpal/ui/components/ui/alert-dialog";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@multica/ui/components/ui/dropdown-menu";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { vcsConnectionsOptions } from "@multica/core/vcs";
-import { api } from "@multica/core/api";
-import type { ConnectVCSResponse, VCSProvider } from "@multica/core/types";
+} from "@workpal/ui/components/ui/dropdown-menu";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { vcsConnectionsOptions } from "@workpal/core/vcs";
+import { api } from "@workpal/core/api";
+import type { ConnectVCSResponse, VCSProvider } from "@workpal/core/types";
 import { useT } from "../../i18n";
 import { SettingsRow } from "./settings-layout";
 import { HostMark, HostStatus } from "./code-host";
@@ -155,7 +155,7 @@ export function VCSConnectionRows() {
           <>
             {t(($) => $.vcs.not_configured)}{" "}
             <code className="rounded-xs bg-muted px-1 py-0.5 text-micro">
-              MULTICA_VCS_SECRET_KEY
+              WORKPAL_VCS_SECRET_KEY
             </code>
           </>
         )

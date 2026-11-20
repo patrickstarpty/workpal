@@ -7,11 +7,11 @@ import {
   GitPullRequestArrow,
   GitPullRequestClosed,
   GitPullRequestDraft,
-} from "@multica/ui/icons";
-import { issuePullRequestSummariesOptions } from "@multica/core/github";
-import { useWorkspaceId } from "@multica/core/hooks";
-import type { GitHubPullRequestState, IssuePullRequestSummary } from "@multica/core/types";
-import { cn } from "@multica/ui/lib/utils";
+} from "@workpal/ui/icons";
+import { issuePullRequestSummariesOptions } from "@workpal/core/github";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import type { GitHubPullRequestState, IssuePullRequestSummary } from "@workpal/core/types";
+import { cn } from "@workpal/ui/lib/utils";
 import { useSingleRowFit } from "../../common/single-row-fit";
 import { useT } from "../../i18n";
 import { openExternal } from "../../platform/open-external";

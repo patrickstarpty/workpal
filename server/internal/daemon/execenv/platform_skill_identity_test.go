@@ -15,14 +15,14 @@ func TestPlatformSkillHintsRequireBuiltinIdentity(t *testing.T) {
 	user := platformSkillFixture()
 	user.BuiltinName = ""
 	hidden := platformSkillFixture()
-	hidden.Content = "---\nname: multica-platform\ndisable-model-invocation: true\n---\n\nHidden contracts."
+	hidden.Content = "---\nname: workpal-platform\ndisable-model-invocation: true\n---\n\nHidden contracts."
 	for _, tc := range []struct {
 		name   string
 		skills []SkillContextForEnv
 		want   string
 	}{
 		{name: "builtin", skills: []SkillContextForEnv{platformSkillFixture()}, want: platformSkillName},
-		{name: "user precedes builtin", skills: []SkillContextForEnv{user, platformSkillFixture()}, want: "multica-platform-multica"},
+		{name: "user precedes builtin", skills: []SkillContextForEnv{user, platformSkillFixture()}, want: "workpal-platform-workpal"},
 		{name: "user only", skills: []SkillContextForEnv{user}},
 		{name: "frontmatter alone is not identity", skills: []SkillContextForEnv{{Name: "helper", Content: user.Content}}},
 		{name: "hidden builtin alongside visible user", skills: []SkillContextForEnv{user, hidden}},
@@ -63,7 +63,7 @@ func TestPlatformSkillHintsFollowPreparedDirectories(t *testing.T) {
 						}
 						workDir = env.WorkDir
 					}
-					const userContent = "---\nname: multica-platform\n---\n\nUser-owned skill."
+					const userContent = "---\nname: workpal-platform\n---\n\nUser-owned skill."
 					for i := 0; i < collisions; i++ {
 						mustWrite(t, filepath.Join(skillsDirPath(workDir, provider), skillSlugCandidate(platformSkillName, i), "SKILL.md"), userContent)
 					}
@@ -157,7 +157,7 @@ func TestPlatformSkillDomainsMatchDescription(t *testing.T) {
 func assertPlatformSkillHints(t *testing.T, provider, brief, slug string) {
 	t.Helper()
 	if slug == "" {
-		for _, unwanted := range []string{"For a Multica platform action this brief does not fully cover", "Before creating sub-issues, read"} {
+		for _, unwanted := range []string{"For a Workpal platform action this brief does not fully cover", "Before creating sub-issues, read"} {
 			if strings.Contains(brief, unwanted) {
 				t.Errorf("brief advertised a platform contract without a visible builtin: %q", unwanted)
 			}

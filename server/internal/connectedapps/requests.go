@@ -10,12 +10,12 @@ import (
 	"time"
 
 	"github.com/jackc/pgx/v5/pgtype"
-	"github.com/multica-ai/multica/server/internal/events"
-	"github.com/multica-ai/multica/server/internal/inbox"
-	"github.com/multica-ai/multica/server/internal/runtimeapps"
-	"github.com/multica-ai/multica/server/internal/util"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
-	"github.com/multica-ai/multica/server/pkg/dbid"
+	"workpal.local/workpal/server/internal/events"
+	"workpal.local/workpal/server/internal/inbox"
+	"workpal.local/workpal/server/internal/runtimeapps"
+	"workpal.local/workpal/server/internal/util"
+	db "workpal.local/workpal/server/pkg/db/generated"
+	"workpal.local/workpal/server/pkg/dbid"
 )
 
 // EventRequestChanged tells clients to refetch the requests of an issue or
@@ -291,7 +291,7 @@ func (s *Service) executeApproved(ctx context.Context, req db.AppActionRequest) 
 	if string(req.ApprovedArguments) != string(req.Arguments) {
 		edited = " The person edited the arguments before approving; the result reflects their version."
 	}
-	return row, fmt.Sprintf("Your %s was approved and Multica ran it.%s Result:\n```json\n%s\n```\nContinue the task from here. Do not call the tool again for this request.", label, edited, string(result))
+	return row, fmt.Sprintf("Your %s was approved and Workpal ran it.%s Result:\n```json\n%s\n```\nContinue the task from here. Do not call the tool again for this request.", label, edited, string(result))
 }
 
 func (s *Service) agentApp(ctx context.Context, agentID pgtype.UUID, slug string) (db.AgentApp, bool) {

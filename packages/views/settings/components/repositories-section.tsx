@@ -10,13 +10,13 @@ import {
   Plus,
   Search,
   Trash2,
-} from "@multica/ui/icons";
-import { Input } from "@multica/ui/components/ui/input";
-import { Label } from "@multica/ui/components/ui/label";
-import { Button } from "@multica/ui/components/ui/button";
-import { IconButton } from "@multica/ui/components/common/icon-button";
-import { Badge } from "@multica/ui/components/ui/badge";
-import { Checkbox } from "@multica/ui/components/ui/checkbox";
+} from "@workpal/ui/icons";
+import { Input } from "@workpal/ui/components/ui/input";
+import { Label } from "@workpal/ui/components/ui/label";
+import { Button } from "@workpal/ui/components/ui/button";
+import { IconButton } from "@workpal/ui/components/common/icon-button";
+import { Badge } from "@workpal/ui/components/ui/badge";
+import { Checkbox } from "@workpal/ui/components/ui/checkbox";
 import {
   Dialog,
   DialogContent,
@@ -24,14 +24,14 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "@multica/ui/components/ui/dialog";
+} from "@workpal/ui/components/ui/dialog";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@multica/ui/components/ui/select";
+} from "@workpal/ui/components/ui/select";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -41,34 +41,34 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@multica/ui/components/ui/alert-dialog";
+} from "@workpal/ui/components/ui/alert-dialog";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@multica/ui/components/ui/dropdown-menu";
-import { TruncatedTooltip } from "@multica/ui/components/common/truncated-tooltip";
+} from "@workpal/ui/components/ui/dropdown-menu";
+import { TruncatedTooltip } from "@workpal/ui/components/common/truncated-tooltip";
 import { toast } from "sonner";
 import {
   useInfiniteQuery,
   useQuery,
   useQueryClient,
 } from "@tanstack/react-query";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { useCurrentMember } from "@multica/core/permissions";
-import { useCurrentWorkspace } from "@multica/core/paths";
-import { workspaceKeys } from "@multica/core/workspace/queries";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { useCurrentMember } from "@workpal/core/permissions";
+import { useCurrentWorkspace } from "@workpal/core/paths";
+import { workspaceKeys } from "@workpal/core/workspace/queries";
 import {
   githubInstallationRepositoriesOptions,
   githubInstallationsOptions,
-} from "@multica/core/github";
-import { api } from "@multica/core/api";
+} from "@workpal/core/github";
+import { api } from "@workpal/core/api";
 import type {
   GitHubRepository,
   Workspace,
   WorkspaceRepo,
-} from "@multica/core/types";
+} from "@workpal/core/types";
 import { useNavigation } from "../../navigation";
 import { useT } from "../../i18n";
 import { SettingsCard, SettingsSection } from "./settings-layout";

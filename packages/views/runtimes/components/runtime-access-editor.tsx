@@ -1,26 +1,26 @@
 "use client";
 
 import { useMemo, useState, type ComponentProps } from "react";
-import { Globe, Lock, Users } from "@multica/ui/icons";
+import { Globe, Lock, Users } from "@workpal/ui/icons";
 import { toast } from "sonner";
 import { useQuery } from "@tanstack/react-query";
-import type { AgentRuntime } from "@multica/core/types";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { memberListOptions } from "@multica/core/workspace/queries";
-import { useUpdateRuntime } from "@multica/core/runtimes/mutations";
-import { Button } from "@multica/ui/components/ui/button";
-import { Checkbox } from "@multica/ui/components/ui/checkbox";
-import { Input } from "@multica/ui/components/ui/input";
+import type { AgentRuntime } from "@workpal/core/types";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { memberListOptions } from "@workpal/core/workspace/queries";
+import { useUpdateRuntime } from "@workpal/core/runtimes/mutations";
+import { Button } from "@workpal/ui/components/ui/button";
+import { Checkbox } from "@workpal/ui/components/ui/checkbox";
+import { Input } from "@workpal/ui/components/ui/input";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@multica/ui/components/ui/popover";
+} from "@workpal/ui/components/ui/popover";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from "@multica/ui/components/ui/tooltip";
+} from "@workpal/ui/components/ui/tooltip";
 import { ActorAvatar } from "../../common/actor-avatar";
 import { useT } from "../../i18n";
 import {

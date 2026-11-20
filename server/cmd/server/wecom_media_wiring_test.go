@@ -8,11 +8,11 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/multica-ai/multica/server/internal/analytics"
-	"github.com/multica-ai/multica/server/internal/events"
-	"github.com/multica-ai/multica/server/internal/realtime"
-	"github.com/multica-ai/multica/server/internal/util/secretbox"
-	"github.com/multica-ai/multica/server/pkg/protocol"
+	"workpal.local/workpal/server/internal/analytics"
+	"workpal.local/workpal/server/internal/events"
+	"workpal.local/workpal/server/internal/realtime"
+	"workpal.local/workpal/server/internal/util/secretbox"
+	"workpal.local/workpal/server/pkg/protocol"
 )
 
 // The media resolver's queries are a constructor argument that may be nil, and
@@ -43,11 +43,11 @@ func TestWecomMediaResolverGetsItsQueriesOnTheRealBootPath(t *testing.T) {
 	slog.SetDefault(slog.New(slog.NewTextHandler(&logged, &slog.HandlerOptions{Level: slog.LevelDebug})))
 	t.Cleanup(func() { slog.SetDefault(restore) })
 
-	t.Setenv("MULTICA_WECOM_SECRET_KEY", "")
+	t.Setenv("WORKPAL_WECOM_SECRET_KEY", "")
 	withoutWecom := events.New()
 	NewRouter(nil, realtime.NewHub(), withoutWecom, analytics.NoopClient{}, nil)
 
-	t.Setenv("MULTICA_WECOM_SECRET_KEY", base64.StdEncoding.EncodeToString(key))
+	t.Setenv("WORKPAL_WECOM_SECRET_KEY", base64.StdEncoding.EncodeToString(key))
 	withWecom := events.New()
 	NewRouter(nil, realtime.NewHub(), withWecom, analytics.NoopClient{}, nil)
 

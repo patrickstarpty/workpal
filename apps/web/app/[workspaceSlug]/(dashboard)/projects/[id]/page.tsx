@@ -1,7 +1,7 @@
 "use client";
 
 import { Suspense, use } from "react";
-import { ProjectDetail } from "@multica/views/projects/components";
+import { ProjectDetail } from "@workpal/views/projects/components";
 import { useIssueViewUrlSync } from "../../../../../platform/use-issue-view-url-sync";
 
 function IssueViewUrlSync({ projectId }: { projectId: string }) {

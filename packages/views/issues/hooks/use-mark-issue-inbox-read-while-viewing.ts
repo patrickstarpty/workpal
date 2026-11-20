@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { useMarkIssueInboxRead } from "@multica/core/inbox";
-import { useWSEvent, useWSReconnect } from "@multica/core/realtime";
-import type { InboxNewPayload } from "@multica/core/types";
+import { useMarkIssueInboxRead } from "@workpal/core/inbox";
+import { useWSEvent, useWSReconnect } from "@workpal/core/realtime";
+import type { InboxNewPayload } from "@workpal/core/types";
 import { useAppForeground } from "../../common/use-app-foreground";
 
 /**

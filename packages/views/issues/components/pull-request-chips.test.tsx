@@ -1,8 +1,8 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { fireEvent, render, screen } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { I18nProvider } from "@multica/core/i18n/react";
-import type { IssuePullRequestSummary } from "@multica/core/types";
+import { I18nProvider } from "@workpal/core/i18n/react";
+import type { IssuePullRequestSummary } from "@workpal/core/types";
 import enCommon from "../../locales/en/common.json";
 import enIssues from "../../locales/en/issues.json";
 
@@ -11,11 +11,11 @@ const TEST_RESOURCES = { en: { common: enCommon, issues: enIssues } };
 const apiMock = vi.hoisted(() => ({
   listIssuePullRequestSummaries: vi.fn(),
 }));
-vi.mock("@multica/core/api", async (importOriginal) => ({
-  ...(await importOriginal<typeof import("@multica/core/api")>()),
+vi.mock("@workpal/core/api", async (importOriginal) => ({
+  ...(await importOriginal<typeof import("@workpal/core/api")>()),
   api: apiMock,
 }));
-vi.mock("@multica/core/hooks", () => ({ useWorkspaceId: () => "ws-1" }));
+vi.mock("@workpal/core/hooks", () => ({ useWorkspaceId: () => "ws-1" }));
 
 import { IssuePullRequestChips, useIssuePullRequestSummaries } from "./pull-request-chips";
 

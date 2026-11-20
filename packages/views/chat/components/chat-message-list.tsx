@@ -4,19 +4,19 @@ import { memo, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { toast } from "sonner";
 import { useQuery } from "@tanstack/react-query";
 import { Virtuoso, type Components, type VirtuosoHandle } from "react-virtuoso";
-import { cn } from "@multica/ui/lib/utils";
-import { Skeleton } from "@multica/ui/components/ui/skeleton";
-import { Button } from "@multica/ui/components/ui/button";
+import { cn } from "@workpal/ui/lib/utils";
+import { Skeleton } from "@workpal/ui/components/ui/skeleton";
+import { Button } from "@workpal/ui/components/ui/button";
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-} from "@multica/ui/components/ui/collapsible";
+} from "@workpal/ui/components/ui/collapsible";
 import {
   Tooltip,
   TooltipTrigger,
   TooltipContent,
-} from "@multica/ui/components/ui/tooltip";
+} from "@workpal/ui/components/ui/tooltip";
 import {
   ChevronRight,
   ChevronDown,
@@ -26,24 +26,24 @@ import {
   ArrowUpRight,
   Copy,
   RotateCw,
-} from "@multica/ui/icons";
-import { useScrollFade } from "@multica/ui/hooks/use-scroll-fade";
-import { isTaskMessageTaskId, taskMessagesOptions } from "@multica/core/chat/queries";
+} from "@workpal/ui/icons";
+import { useScrollFade } from "@workpal/ui/hooks/use-scroll-fade";
+import { isTaskMessageTaskId, taskMessagesOptions } from "@workpal/core/chat/queries";
 import { RichContent } from "../../rich-content";
 import { RichContentScrollRootProvider } from "../../rich-content/scroll-root";
-import { copyText } from "@multica/ui/lib/clipboard";
+import { copyText } from "@workpal/ui/lib/clipboard";
 import { AttachmentList } from "../../issues/components/comment-card";
 import { PreviewSequenceProvider, collectPreviewSequence } from "../../editor";
-import type { AgentAvailability } from "@multica/core/agents";
-import { resolveFailureReasonKey } from "@multica/core/agents";
+import type { AgentAvailability } from "@workpal/core/agents";
+import { resolveFailureReasonKey } from "@workpal/core/agents";
 import type {
   ChatMessage,
   ChatPendingTask,
   ChatQuickAction,
   ChatWakeup,
   TaskMessagePayload,
-} from "@multica/core/types";
-import type { ChatTimelineItem } from "@multica/core/chat";
+} from "@workpal/core/types";
+import type { ChatTimelineItem } from "@workpal/core/chat";
 import { buildTimeline } from "../../common/task-transcript";
 import { readCommandInput, traceToolArgSummary } from "../../common/task-transcript/trace-event-presenter";
 import { OnboardingStarterCards } from "./onboarding-starter-cards";
@@ -1185,7 +1185,7 @@ function TimelineView({
 }: {
   items: ChatTimelineItem[];
   isStreaming?: boolean;
-  attachments?: import("@multica/core/types").Attachment[];
+  attachments?: import("@workpal/core/types").Attachment[];
   phase?: "streaming" | "settled";
   settledContent?: string;
   sourceId?: string;
@@ -1266,7 +1266,7 @@ function OuterProcessFold({
 }: {
   items: ChatTimelineItem[];
   isStreaming?: boolean;
-  attachments?: import("@multica/core/types").Attachment[];
+  attachments?: import("@workpal/core/types").Attachment[];
   phase?: "streaming" | "settled";
   stepCount?: number;
 }) {
@@ -1320,7 +1320,7 @@ function MiddleTextRow({
   phase = "settled",
 }: {
   item: ChatTimelineItem;
-  attachments?: import("@multica/core/types").Attachment[];
+  attachments?: import("@workpal/core/types").Attachment[];
   phase?: "streaming" | "settled";
 }) {
   return (

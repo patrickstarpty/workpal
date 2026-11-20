@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/multica-ai/multica/server/internal/testutil"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
-	"github.com/multica-ai/multica/server/pkg/dbid"
+	"workpal.local/workpal/server/internal/testutil"
+	db "workpal.local/workpal/server/pkg/db/generated"
+	"workpal.local/workpal/server/pkg/dbid"
 )
 
 // A manual quick-create retry is claimable only on its agent's current

@@ -3,16 +3,16 @@
 import { useCallback } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { isOwnIssue } from "@multica/core/issues/ownership";
-import type { InboxItem } from "@multica/core/types";
-import { agentListOptions } from "@multica/core/workspace/queries";
-import { useInboxSelectionStore } from "@multica/core/inbox/selection-store";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { isOwnIssue } from "@workpal/core/issues/ownership";
+import type { InboxItem } from "@workpal/core/types";
+import { agentListOptions } from "@workpal/core/workspace/queries";
+import { useInboxSelectionStore } from "@workpal/core/inbox/selection-store";
 import {
   undoUnsubscribeArchiveInbox,
   useUnsubscribeArchiveInbox,
   type InboxUnsubscribeScope,
-} from "@multica/core/inbox/mutations";
+} from "@workpal/core/inbox/mutations";
 import { useT } from "../../i18n";
 
 /**

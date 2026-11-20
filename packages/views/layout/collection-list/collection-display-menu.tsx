@@ -1,18 +1,18 @@
 "use client";
 
 import type { ComponentProps, ReactNode } from "react";
-import { ArrowDown, ArrowUp, ChevronDown } from "@multica/ui/icons";
-import { Button } from "@multica/ui/components/ui/button";
-import { IconButton } from "@multica/ui/components/common/icon-button";
+import { ArrowDown, ArrowUp, ChevronDown } from "@workpal/ui/icons";
+import { Button } from "@workpal/ui/components/ui/button";
+import { IconButton } from "@workpal/ui/components/common/icon-button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuRadioGroup,
   DropdownMenuRadioItem,
   DropdownMenuTrigger,
-} from "@multica/ui/components/ui/dropdown-menu";
-import { Popover, PopoverContent, PopoverTrigger } from "@multica/ui/components/ui/popover";
-import { Switch } from "@multica/ui/components/ui/switch";
+} from "@workpal/ui/components/ui/dropdown-menu";
+import { Popover, PopoverContent, PopoverTrigger } from "@workpal/ui/components/ui/popover";
+import { Switch } from "@workpal/ui/components/ui/switch";
 import { useT } from "../../i18n";
 import { CollectionDisplayButton } from "../collection-page";
 import type { CollectionColumn, CollectionSort } from "./collection-list";

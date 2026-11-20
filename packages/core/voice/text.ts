@@ -53,8 +53,8 @@ function escapeRegExp(value: string): string {
 }
 
 /**
- * Spell vocabulary words the way the user wrote them: "multica" becomes
- * "Multica", and a CamelCase word also matches its spoken split, so "git hub"
+ * Spell vocabulary words the way the user wrote them: "workpal" becomes
+ * "Workpal", and a CamelCase word also matches its spoken split, so "git hub"
  * becomes "GitHub". Only whole words are replaced.
  */
 export function applyVocabulary(text: string, words: readonly string[]): string {

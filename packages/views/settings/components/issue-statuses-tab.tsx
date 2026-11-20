@@ -13,7 +13,7 @@ import {
   Pencil,
   Plus,
   Zap,
-} from "@multica/ui/icons";
+} from "@workpal/ui/icons";
 import { toast } from "sonner";
 import {
   DndContext,
@@ -32,48 +32,48 @@ import {
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { useAuthStore } from "@multica/core/auth";
-import { derivePRMergeStatus } from "@multica/core/github";
-import { useCurrentWorkspace } from "@multica/core/paths";
-import { issueStatusArchiveConflictCount, createIssueStatusListStore } from "@multica/core/issue-statuses";
-import { baselineFromQuery } from "@multica/core/issue-views/baseline";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { useAuthStore } from "@workpal/core/auth";
+import { derivePRMergeStatus } from "@workpal/core/github";
+import { useCurrentWorkspace } from "@workpal/core/paths";
+import { issueStatusArchiveConflictCount, createIssueStatusListStore } from "@workpal/core/issue-statuses";
+import { baselineFromQuery } from "@workpal/core/issue-views/baseline";
 import { IssueSurfaceWithStore } from "../../issues/surface/issue-surface";
-import { memberListOptions } from "@multica/core/workspace/queries";
+import { memberListOptions } from "@workpal/core/workspace/queries";
 import {
   issueStatusColor,
   compareIssueStatusEntries,
   issueStatusListOptions,
   normalizeIssueStatusCategory,
-} from "@multica/core/issue-statuses/queries";
+} from "@workpal/core/issue-statuses/queries";
 import {
   useArchiveIssueStatus,
   useCreateIssueStatus,
   useReorderIssueStatuses,
   useUpdateIssueStatus,
-} from "@multica/core/issue-statuses/mutations";
-import { ALL_STATUSES } from "@multica/core/issues/config";
+} from "@workpal/core/issue-statuses/mutations";
+import { ALL_STATUSES } from "@workpal/core/issues/config";
 import type {
   BuiltInIssueStatus,
   IssueStatusCategory,
   IssueStatusEntry,
   IssueStatusIcon,
-} from "@multica/core/types";
-import { ISSUE_STATUS_ICONS } from "@multica/core/types/issue-status";
-import { Button } from "@multica/ui/components/ui/button";
-import { IconButton } from "@multica/ui/components/common/icon-button";
-import { TooltipHint } from "@multica/ui/components/common/tooltip-hint";
-import { Input } from "@multica/ui/components/ui/input";
-import { Textarea } from "@multica/ui/components/ui/textarea";
-import { Label as FieldLabel } from "@multica/ui/components/ui/label";
-import { Switch } from "@multica/ui/components/ui/switch";
+} from "@workpal/core/types";
+import { ISSUE_STATUS_ICONS } from "@workpal/core/types/issue-status";
+import { Button } from "@workpal/ui/components/ui/button";
+import { IconButton } from "@workpal/ui/components/common/icon-button";
+import { TooltipHint } from "@workpal/ui/components/common/tooltip-hint";
+import { Input } from "@workpal/ui/components/ui/input";
+import { Textarea } from "@workpal/ui/components/ui/textarea";
+import { Label as FieldLabel } from "@workpal/ui/components/ui/label";
+import { Switch } from "@workpal/ui/components/ui/switch";
 import {
   Dialog,
   DialogContent,
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "@multica/ui/components/ui/dialog";
+} from "@workpal/ui/components/ui/dialog";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -83,26 +83,26 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@multica/ui/components/ui/alert-dialog";
+} from "@workpal/ui/components/ui/alert-dialog";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@multica/ui/components/ui/dropdown-menu";
+} from "@workpal/ui/components/ui/dropdown-menu";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@multica/ui/components/ui/select";
+} from "@workpal/ui/components/ui/select";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from "@multica/ui/components/ui/tooltip";
+} from "@workpal/ui/components/ui/tooltip";
 import { ColorPicker, COLOR_PICKER_PRESETS } from "../../common/color-picker";
 import { StatusIcon } from "../../issues/components/status-icon";
 import { useStatusLabel } from "../../issues/utils/status-label";

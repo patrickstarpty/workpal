@@ -1,7 +1,7 @@
-import { AlarmClock, BellOff, CircleDot, Command, FolderKanban, Gauge, Globe, History, Layers, ListChecks, ListPlus, Lock, Mic, Palette, PanelLeft, Pin, Quote, Server, Sparkles, Terminal, Users, Workflow, type IconComponent } from "@multica/ui/icons";
-import type { SupportedLocale } from "@multica/core/i18n";
-import type { WorkspacePaths } from "@multica/core/paths";
-import type { ReleaseStamp } from "@multica/core/whats-new";
+import { AlarmClock, BellOff, CircleDot, Command, FolderKanban, Gauge, Globe, History, Layers, ListChecks, ListPlus, Lock, Mic, Palette, PanelLeft, Pin, Quote, Server, Sparkles, Terminal, Users, Workflow, type IconComponent } from "@workpal/ui/icons";
+import type { SupportedLocale } from "@workpal/core/i18n";
+import type { WorkspacePaths } from "@workpal/core/paths";
+import type { ReleaseStamp } from "@workpal/core/whats-new";
 import { ANNOTATIONS_HERO, ENVIRONMENTS_HERO, SNOOZE_HERO, THEMES_HERO, VOICE_HERO, type WhatsNewHero } from "./heroes";
 
 export interface HighlightCopy {
@@ -411,27 +411,27 @@ export const WHATS_NEW_RELEASES: WhatsNewRelease[] = [
         copy: {
           en: {
             title: "See the services an issue started",
-            body: "Open an issue and check Environments in its sidebar for the services its agent runs started, with status, link, and time left. On macOS and Linux, agents can keep a service running with multica env start.",
+            body: "Open an issue and check Environments in its sidebar for the services its agent runs started, with status, link, and time left. On macOS and Linux, agents can keep a service running with workpal env start.",
           },
           "zh-Hans": {
             title: "查看任务启动的服务",
-            body: "打开一个任务，在侧栏的「环境」里查看智能体运行时启动的服务，以及状态、链接和剩余时间。在 macOS 和 Linux 上，智能体可以用 multica env start 让服务持续运行。",
+            body: "打开一个任务，在侧栏的「环境」里查看智能体运行时启动的服务，以及状态、链接和剩余时间。在 macOS 和 Linux 上，智能体可以用 workpal env start 让服务持续运行。",
           },
           "zh-Hant": {
             title: "查看任務啟動的服務",
-            body: "打開一個任務，在側欄的「環境」裡查看 AI 代理執行時啟動的服務，以及狀態、連結和剩餘時間。在 macOS 和 Linux 上，AI 代理可以用 multica env start 讓服務持續執行。",
+            body: "打開一個任務，在側欄的「環境」裡查看 AI 代理執行時啟動的服務，以及狀態、連結和剩餘時間。在 macOS 和 Linux 上，AI 代理可以用 workpal env start 讓服務持續執行。",
           },
           ja: {
             title: "タスクが起動したサービスを確認",
-            body: "タスクを開き、サイドバーの「環境」で、エージェントの実行が起動したサービスとその状態、リンク、残り時間を確認できます。macOS と Linux では、エージェントが multica env start でサービスを動かし続けられます。",
+            body: "タスクを開き、サイドバーの「環境」で、エージェントの実行が起動したサービスとその状態、リンク、残り時間を確認できます。macOS と Linux では、エージェントが workpal env start でサービスを動かし続けられます。",
           },
           ko: {
             title: "태스크가 시작한 서비스 보기",
-            body: "태스크를 열고 사이드바의 '환경'에서 에이전트 실행이 시작한 서비스와 상태, 링크, 남은 시간을 확인하세요. macOS와 Linux에서는 에이전트가 multica env start로 서비스를 계속 실행해 둘 수 있습니다.",
+            body: "태스크를 열고 사이드바의 '환경'에서 에이전트 실행이 시작한 서비스와 상태, 링크, 남은 시간을 확인하세요. macOS와 Linux에서는 에이전트가 workpal env start로 서비스를 계속 실행해 둘 수 있습니다.",
           },
           fr: {
             title: "Voyez les services lancés par une tâche",
-            body: "Ouvrez une tâche et consultez Environnements dans sa barre latérale : services lancés par les exécutions de l'agent, avec leur état, leur lien et le temps restant. Sur macOS et Linux, les agents peuvent garder un service actif avec multica env start.",
+            body: "Ouvrez une tâche et consultez Environnements dans sa barre latérale : services lancés par les exécutions de l'agent, avec leur état, leur lien et le temps restant. Sur macOS et Linux, les agents peuvent garder un service actif avec workpal env start.",
           },
         },
       },
@@ -741,7 +741,7 @@ export const WHATS_NEW_RELEASES: WhatsNewRelease[] = [
         action: { kind: "route", to: (p) => `${p.settings()}?tab=preferences` },
         copy: {
           en: {
-            title: "Multica in Traditional Chinese",
+            title: "Workpal in Traditional Chinese",
             body: "Switch the app language in Settings → Preferences.",
           },
           "zh-Hans": {
@@ -761,7 +761,7 @@ export const WHATS_NEW_RELEASES: WhatsNewRelease[] = [
             body: "설정 → 환경설정에서 앱 언어를 바꿀 수 있습니다.",
           },
           fr: {
-            title: "Multica en chinois traditionnel",
+            title: "Workpal en chinois traditionnel",
             body: "Changez la langue de l'application dans Paramètres → Préférences.",
           },
         },

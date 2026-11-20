@@ -10,7 +10,7 @@ import (
 	"sync/atomic"
 	"time"
 
-	"github.com/multica-ai/multica/server/internal/integrations/channel"
+	"workpal.local/workpal/server/internal/integrations/channel"
 )
 
 // dingtalkChannel is ONE installation's DingTalk Stream connection. Every

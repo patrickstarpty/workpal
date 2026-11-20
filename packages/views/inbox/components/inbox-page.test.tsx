@@ -1,10 +1,10 @@
 import { act, fireEvent, render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import { toast } from "sonner";
-import type { AgentTask, InboxItem } from "@multica/core/types";
-import { useInboxFilterStore } from "@multica/core/inbox/filter-store";
-import { useInboxSelectionStore } from "@multica/core/inbox/selection-store";
-import { useCommandBarContextStore } from "@multica/core/command-bar";
+import type { AgentTask, InboxItem } from "@workpal/core/types";
+import { useInboxFilterStore } from "@workpal/core/inbox/filter-store";
+import { useInboxSelectionStore } from "@workpal/core/inbox/selection-store";
+import { useCommandBarContextStore } from "@workpal/core/command-bar";
 import { InboxPage } from "./inbox-page";
 
 vi.mock("sonner", () => ({
@@ -50,11 +50,11 @@ vi.mock("@tanstack/react-query", () => ({
   }); },
 }));
 
-vi.mock("@multica/core/hooks", () => ({
+vi.mock("@workpal/core/hooks", () => ({
   useWorkspaceId: () => "workspace-1",
 }));
 
-vi.mock("@multica/core/paths", () => ({
+vi.mock("@workpal/core/paths", () => ({
   useWorkspacePaths: () => ({
     inbox: () => "/acme/inbox",
     issueDetail: (id: string) => `/acme/issues/${id}`,
@@ -65,15 +65,15 @@ const modalState: { modal: string | null; open: ReturnType<typeof vi.fn> } = {
   modal: null,
   open: vi.fn(),
 };
-vi.mock("@multica/core/modals", () => ({
+vi.mock("@workpal/core/modals", () => ({
   useModalStore: { getState: () => modalState },
 }));
 
-vi.mock("@multica/core/issues/stores/draft-store", () => ({
+vi.mock("@workpal/core/issues/stores/draft-store", () => ({
   useIssueDraftStore: { getState: () => ({ setDraft: vi.fn() }) },
 }));
 
-vi.mock("@multica/core/inbox/queries", () => ({
+vi.mock("@workpal/core/inbox/queries", () => ({
   inboxListOptions: () => ({ queryKey: ["inbox", "workspace-1", "list"] }),
   archivedInboxPagesOptions: () => ({ queryKey: ["inbox", "workspace-1", "archived", "pages"] }),
   archivedInboxLookupOptions: () => ({ queryKey: ["inbox", "workspace-1", "archived", "lookup"] }),
@@ -96,7 +96,7 @@ vi.mock("../../modals/use-limit-recovery-prompt", () => ({
   useLimitRecoveryPrompt: () => showAutopilotQuotaRecoveryPrompt,
 }));
 
-vi.mock("@multica/core/inbox/mutations", () => {
+vi.mock("@workpal/core/inbox/mutations", () => {
   const mutation = () => ({ mutate: vi.fn(), mutateAsync: vi.fn(() => Promise.resolve()) });
   // The shared archive handlers await the request; settle it through the spy's callbacks.
   const settled = (spy: typeof archiveMutate) => (id: string) =>
@@ -158,7 +158,7 @@ const FOLD_INNER_LANDSCAPE = 951;
 const TABLET = 768;
 const DESKTOP = 1440;
 const layout = { width: PHONE };
-vi.mock("@multica/ui/hooks/use-mobile", () => ({
+vi.mock("@workpal/ui/hooks/use-mobile", () => ({
   useIsMobile: () => layout.width < 768,
   useIsCompact: () => layout.width < 768,
 }));

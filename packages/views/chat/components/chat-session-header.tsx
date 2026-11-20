@@ -1,15 +1,15 @@
 "use client";
 
 import { useEffect, useRef, useState, type ReactNode } from "react";
-import { Archive, ArchiveRestore, MoreHorizontal, Pencil, Settings2, Trash2 } from "@multica/ui/icons";
-import { IconButton } from "@multica/ui/components/common/icon-button";
+import { Archive, ArchiveRestore, MoreHorizontal, Pencil, Settings2, Trash2 } from "@workpal/ui/icons";
+import { IconButton } from "@workpal/ui/components/common/icon-button";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
-} from "@multica/ui/components/ui/dropdown-menu";
+} from "@workpal/ui/components/ui/dropdown-menu";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -19,21 +19,21 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@multica/ui/components/ui/alert-dialog";
-import { useWorkspacePaths } from "@multica/core/paths";
+} from "@workpal/ui/components/ui/alert-dialog";
+import { useWorkspacePaths } from "@workpal/core/paths";
 import {
   useUpdateChatSession,
   useDeleteChatSession,
   useSetChatSessionArchived,
-} from "@multica/core/chat/mutations";
-import { useChatStore } from "@multica/core/chat";
-import type { Agent, ChatSession } from "@multica/core/types";
-import { isImeComposing } from "@multica/core/utils";
+} from "@workpal/core/chat/mutations";
+import { useChatStore } from "@workpal/core/chat";
+import type { Agent, ChatSession } from "@workpal/core/types";
+import { isImeComposing } from "@workpal/core/utils";
 import { ActorAvatar } from "../../common/actor-avatar";
 import { BreadcrumbHeader } from "../../layout/breadcrumb-header";
 import { useNavigation } from "../../navigation";
 import { useT } from "../../i18n";
-import { TooltipHint } from "@multica/ui/components/common/tooltip-hint";
+import { TooltipHint } from "@workpal/ui/components/common/tooltip-hint";
 import { ChatWakeupHeaderButton, useChatWakeups } from "./chat-wakeups";
 
 /**

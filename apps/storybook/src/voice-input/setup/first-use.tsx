@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from "react";
-import { Check, CheckCircle2, Cloud, Download, Laptop, Mic, X } from "@multica/ui/icons";
-import { Button } from "@multica/ui/components/ui/button";
-import { IconButton } from "@multica/ui/components/common/icon-button";
-import { cn } from "@multica/ui/lib/utils";
+import { Check, CheckCircle2, Cloud, Download, Laptop, Mic, X } from "@workpal/ui/icons";
+import { Button } from "@workpal/ui/components/ui/button";
+import { IconButton } from "@workpal/ui/components/common/icon-button";
+import { cn } from "@workpal/ui/lib/utils";
 import type { Lang, VoiceScript } from "../copy";
 import { useStoryEnv } from "../env";
 import { RecDot, Shimmer, Waveform } from "../primitives";
@@ -31,8 +31,8 @@ const C = {
     local: "On this device",
     localBody: "Works offline and audio never leaves this computer.",
     localNeeds: "Downloads",
-    cloud: "Multica Cloud",
-    cloudBody: "Ready right away. Audio is sent to Multica and deleted after.",
+    cloud: "Workpal Cloud",
+    cloudBody: "Ready right away. Audio is sent to Workpal and deleted after.",
     recommended: "Recommended",
     continue: "Continue",
     downloading: "Downloading",
@@ -60,8 +60,8 @@ const C = {
     local: "本机",
     localBody: "离线可用，音频不会离开这台电脑。",
     localNeeds: "需要下载",
-    cloud: "Multica 云端",
-    cloudBody: "马上能用。音频发送到 Multica 识别，识别完即删除。",
+    cloud: "Workpal 云端",
+    cloudBody: "马上能用。音频发送到 Workpal 识别，识别完即删除。",
     recommended: "推荐",
     continue: "继续",
     downloading: "正在下载",
@@ -184,7 +184,7 @@ function TryPad({ session, lang, onPress, onRelease }: { session: VoiceSession; 
 
 /**
  * First-use setup, shown the first time someone presses the mic. Modeled on
- * Handy's onboarding (permissions → model → try it), trimmed to what Multica
+ * Handy's onboarding (permissions → model → try it), trimmed to what Workpal
  * needs before the first dictation.
  */
 export function FirstUseDialog({

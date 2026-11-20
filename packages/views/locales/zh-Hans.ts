@@ -1,4 +1,4 @@
-import type { LocaleResources } from "@multica/core/i18n";
+import type { LocaleResources } from "@workpal/core/i18n";
 import zhHansCommon from "./zh-Hans/common.json";
 import zhHansAuth from "./zh-Hans/auth.json";
 import zhHansSettings from "./zh-Hans/settings.json";

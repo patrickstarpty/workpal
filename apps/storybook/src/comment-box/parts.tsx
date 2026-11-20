@@ -1,11 +1,11 @@
 import { useState, type CSSProperties, type FocusEvent, type ReactNode } from "react";
-import { ArrowUp, Check, ChevronDown, Mic, Paperclip, X } from "@multica/ui/icons";
-import { ActorAvatar } from "@multica/ui/components/common/actor-avatar";
-import { IconButton } from "@multica/ui/components/common/icon-button";
-import { SubmitButton } from "@multica/ui/components/common/submit-button";
-import { Button } from "@multica/ui/components/ui/button";
-import { Kbd } from "@multica/ui/components/ui/kbd";
-import { cn } from "@multica/ui/lib/utils";
+import { ArrowUp, Check, ChevronDown, Mic, Paperclip, X } from "@workpal/ui/icons";
+import { ActorAvatar } from "@workpal/ui/components/common/actor-avatar";
+import { IconButton } from "@workpal/ui/components/common/icon-button";
+import { SubmitButton } from "@workpal/ui/components/common/submit-button";
+import { Button } from "@workpal/ui/components/ui/button";
+import { Kbd } from "@workpal/ui/components/ui/kbd";
+import { cn } from "@workpal/ui/lib/utils";
 import type { Lang } from "../voice-input/copy";
 import { useStoryEnv } from "../voice-input/env";
 import { RecDot, formatElapsed } from "../voice-input/primitives";

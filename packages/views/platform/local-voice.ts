@@ -1,6 +1,6 @@
 // Desktop's on-device speech engine, through the preload `desktopAPI.voice`.
 // Undefined on web and on Desktop builds that predate it.
-import type { VoiceHistoryEntry, VoiceHistoryStatus, VoiceModels, VoiceTranscription } from "@multica/core/voice";
+import type { VoiceHistoryEntry, VoiceHistoryStatus, VoiceModels, VoiceTranscription } from "@workpal/core/voice";
 
 export interface LocalVoiceRequest {
   modelId: string;

@@ -6,22 +6,22 @@ import { DndContext, PointerSensor, closestCenter, useSensor, useSensors, type D
 import { SortableContext, arrayMove, useSortable, verticalListSortingStrategy } from "@dnd-kit/sortable";
 import { restrictToFirstScrollableAncestor, restrictToVerticalAxis } from "@dnd-kit/modifiers";
 import { CSS } from "@dnd-kit/utilities";
-import { Copy, EyeOff, Filter, Layers, Link2, MoreHorizontal, Pencil, Plus, Trash2 } from "@multica/ui/icons";
-import { cn } from "@multica/ui/lib/utils";
-import { IconButton } from "@multica/ui/components/common/icon-button";
+import { Copy, EyeOff, Filter, Layers, Link2, MoreHorizontal, Pencil, Plus, Trash2 } from "@workpal/ui/icons";
+import { cn } from "@workpal/ui/lib/utils";
+import { IconButton } from "@workpal/ui/components/common/icon-button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@multica/ui/components/ui/dropdown-menu";
-import type { IssueView } from "@multica/core/api/schemas";
-import type { IssueTableFacetsRequest } from "@multica/core/types";
-import { useWorkspacePaths } from "@multica/core/paths";
-import { issueTableFacetsOptions, sidebarIssuesOptions } from "@multica/core/issues/queries";
-import { workspaceWorkingAgentsOptions } from "@multica/core/agents";
-import { snoozedInboxOptions } from "@multica/core/inbox/queries";
+} from "@workpal/ui/components/ui/dropdown-menu";
+import type { IssueView } from "@workpal/core/api/schemas";
+import type { IssueTableFacetsRequest } from "@workpal/core/types";
+import { useWorkspacePaths } from "@workpal/core/paths";
+import { issueTableFacetsOptions, sidebarIssuesOptions } from "@workpal/core/issues/queries";
+import { workspaceWorkingAgentsOptions } from "@workpal/core/agents";
+import { snoozedInboxOptions } from "@workpal/core/inbox/queries";
 import {
   SIDEBAR_FIRST_PAGE,
   builtinSidebarRequest,
@@ -31,27 +31,27 @@ import {
   viewSidebarRequest,
   viewSidebarSource,
   type SidebarIssuesRequest,
-} from "@multica/core/issues/sidebar-list";
-import { todayDateOnly } from "@multica/core/issues/date";
-import { useIssueUnreadIds } from "@multica/core/issues/unread";
-import { filterDependencyState, statusCatalogSource } from "@multica/core/issues/surface/filter-dependency";
-import { useIssueStatuses } from "@multica/core/issue-statuses/hooks";
-import { useSidebarProjectPrefs } from "@multica/core/issues/sidebar-project-prefs";
-import { useSidebarTreeStore } from "@multica/core/issues/stores/sidebar-tree-store";
+} from "@workpal/core/issues/sidebar-list";
+import { todayDateOnly } from "@workpal/core/issues/date";
+import { useIssueUnreadIds } from "@workpal/core/issues/unread";
+import { filterDependencyState, statusCatalogSource } from "@workpal/core/issues/surface/filter-dependency";
+import { useIssueStatuses } from "@workpal/core/issue-statuses/hooks";
+import { useSidebarProjectPrefs } from "@workpal/core/issues/sidebar-project-prefs";
+import { useSidebarTreeStore } from "@workpal/core/issues/stores/sidebar-tree-store";
 import {
   issueViewContainerKey,
   useActiveIssueViewStore,
-} from "@multica/core/issue-views/active-view-store";
-import { issueViewEverywhereOptions } from "@multica/core/issue-views/queries";
-import { issueViewSeedDefinition } from "@multica/core/issue-views/definition";
-import { useIssueViewRenameStore } from "@multica/core/issue-views/rename-store";
+} from "@workpal/core/issue-views/active-view-store";
+import { issueViewEverywhereOptions } from "@workpal/core/issue-views/queries";
+import { issueViewSeedDefinition } from "@workpal/core/issue-views/definition";
+import { useIssueViewRenameStore } from "@workpal/core/issue-views/rename-store";
 import {
   BUILTIN_VIEW_KEYS,
   builtinViewItemId,
   type BuiltinViewKey,
   type SidebarViewItem,
-} from "@multica/core/issue-views/sidebar-views";
-import { issueViewTarget } from "@multica/core/issue-views/view-target";
+} from "@workpal/core/issue-views/sidebar-views";
+import { issueViewTarget } from "@workpal/core/issue-views/view-target";
 import type { IssueViewActions } from "../../issue-views/use-view-actions";
 import { DeleteViewDialog } from "../../issue-views/delete-view-dialog";
 import { ViewNameInput } from "../../issue-views/view-name-input";

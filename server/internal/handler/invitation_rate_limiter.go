@@ -9,7 +9,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/multica-ai/multica/server/internal/logger"
+	"workpal.local/workpal/server/internal/logger"
 	"github.com/redis/go-redis/v9"
 )
 

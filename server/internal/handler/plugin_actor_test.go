@@ -4,9 +4,9 @@ import (
 	"net/http"
 	"testing"
 
-	"github.com/multica-ai/multica/server/internal/featureflags"
-	"github.com/multica-ai/multica/server/internal/testutil"
-	"github.com/multica-ai/multica/server/pkg/featureflag"
+	"workpal.local/workpal/server/internal/featureflags"
+	"workpal.local/workpal/server/internal/testutil"
+	"workpal.local/workpal/server/pkg/featureflag"
 )
 
 func TestPluginConsentHandlersRejectMachineCredentials(t *testing.T) {

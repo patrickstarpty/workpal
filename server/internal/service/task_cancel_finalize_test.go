@@ -8,10 +8,10 @@ import (
 	"time"
 
 	"github.com/jackc/pgx/v5/pgxpool"
-	"github.com/multica-ai/multica/server/internal/events"
-	"github.com/multica-ai/multica/server/internal/util"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
-	"github.com/multica-ai/multica/server/pkg/protocol"
+	"workpal.local/workpal/server/internal/events"
+	"workpal.local/workpal/server/internal/util"
+	db "workpal.local/workpal/server/pkg/db/generated"
+	"workpal.local/workpal/server/pkg/protocol"
 )
 
 func newCancelFinalizePool(t *testing.T) *pgxpool.Pool {
@@ -36,7 +36,7 @@ func createCancelFinalizeFixture(t *testing.T, ctx context.Context, pool *pgxpoo
 	t.Helper()
 
 	suffix := time.Now().UnixNano()
-	email := fmt.Sprintf("cancel-finalize-%d@multica.ai", suffix)
+	email := fmt.Sprintf("cancel-finalize-%d@workpal.invalid", suffix)
 	slug := fmt.Sprintf("cancel-finalize-%d", suffix)
 
 	var userID string
@@ -606,7 +606,7 @@ func (f cancelFinalizeFixture) unbindChannelSession(t *testing.T, ctx context.Co
 }
 
 // Channel-ingested user messages are the durable record of what the platform
-// sender wrote — the sender has no Multica composer to restore a draft into.
+// sender wrote — the sender has no Workpal composer to restore a draft into.
 // The gate is the immutable per-message channel_ingested stamp, so it must
 // hold even after archiving/rebinding deleted the session binding: cancelling
 // the sealed queued task keeps the messages and settles as "Stopped.".

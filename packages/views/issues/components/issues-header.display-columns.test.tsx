@@ -10,19 +10,19 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 import { cleanup, fireEvent, screen } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { createStore, type StoreApi } from "zustand/vanilla";
-import { setApiInstance } from "@multica/core/api";
-import type { ApiClient } from "@multica/core/api/client";
+import { setApiInstance } from "@workpal/core/api";
+import type { ApiClient } from "@workpal/core/api/client";
 import {
   type IssueViewState,
   viewStoreSlice,
-} from "@multica/core/issues/stores/view-store";
-import { ViewStoreProvider } from "@multica/core/issues/stores/view-store-context";
-import type { IssueStatus } from "@multica/core/types";
+} from "@workpal/core/issues/stores/view-store";
+import { ViewStoreProvider } from "@workpal/core/issues/stores/view-store-context";
+import type { IssueStatus } from "@workpal/core/types";
 import { renderWithI18n } from "../../test/i18n";
 import { ColumnStatusesProvider } from "../surface/column-statuses-context";
 import { IssueDisplayControls } from "./issues-header";
 
-vi.mock("@multica/core/hooks", () => ({
+vi.mock("@workpal/core/hooks", () => ({
   useWorkspaceId: () => "ws-1",
 }));
 

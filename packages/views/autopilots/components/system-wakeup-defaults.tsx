@@ -3,14 +3,14 @@
 import { useId, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { toast } from "sonner";
-import { ArrowRight, ListChecks, Pencil } from "@multica/ui/icons";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { useCurrentMember } from "@multica/core/permissions";
-import { useUpdateWorkspaceSystemWakeup, workspaceSystemWakeupsOptions } from "@multica/core/issues";
-import type { WorkspaceSystemWakeup } from "@multica/core/types";
-import { Button } from "@multica/ui/components/ui/button";
-import { Switch } from "@multica/ui/components/ui/switch";
-import { Textarea } from "@multica/ui/components/ui/textarea";
+import { ArrowRight, ListChecks, Pencil } from "@workpal/ui/icons";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { useCurrentMember } from "@workpal/core/permissions";
+import { useUpdateWorkspaceSystemWakeup, workspaceSystemWakeupsOptions } from "@workpal/core/issues";
+import type { WorkspaceSystemWakeup } from "@workpal/core/types";
+import { Button } from "@workpal/ui/components/ui/button";
+import { Switch } from "@workpal/ui/components/ui/switch";
+import { Textarea } from "@workpal/ui/components/ui/textarea";
 import {
   Dialog,
   DialogContent,
@@ -19,7 +19,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@multica/ui/components/ui/dialog";
+} from "@workpal/ui/components/ui/dialog";
 import { useT } from "../../i18n";
 
 const MAX_INSTRUCTION_BYTES = 4000;

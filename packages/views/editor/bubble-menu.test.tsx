@@ -2,8 +2,8 @@ import { act, fireEvent, render, screen, waitFor } from "@testing-library/react"
 import type { Editor } from "@tiptap/core";
 import { useState } from "react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { ContextMenu, ContextMenuContent, ContextMenuItem } from "@multica/ui/components/ui/context-menu";
-import { contextMenuOriginRef } from "@multica/ui/lib/context-menu-origin";
+import { ContextMenu, ContextMenuContent, ContextMenuItem } from "@workpal/ui/components/ui/context-menu";
+import { contextMenuOriginRef } from "@workpal/ui/lib/context-menu-origin";
 
 const formatState = vi.hoisted(() => ({ codeBlock: false }));
 
@@ -39,7 +39,7 @@ vi.mock("@tiptap/react", () => ({
   }),
 }));
 
-vi.mock("@multica/core/issues/mutations", () => ({
+vi.mock("@workpal/core/issues/mutations", () => ({
   useCreateIssue: () => ({
     mutateAsync: vi.fn(),
   }),

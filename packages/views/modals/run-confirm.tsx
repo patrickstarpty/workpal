@@ -9,17 +9,17 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "@multica/ui/components/ui/dialog";
-import { Button } from "@multica/ui/components/ui/button";
-import { Spinner } from "@multica/ui/components/ui/spinner";
-import type { IssueAssigneeType, IssueStatus, UpdateIssueRequest } from "@multica/core/types";
-import { useUpdateIssue, useBatchUpdateIssues } from "@multica/core/issues/mutations";
+} from "@workpal/ui/components/ui/dialog";
+import { Button } from "@workpal/ui/components/ui/button";
+import { Spinner } from "@workpal/ui/components/ui/spinner";
+import type { IssueAssigneeType, IssueStatus, UpdateIssueRequest } from "@workpal/core/types";
+import { useUpdateIssue, useBatchUpdateIssues } from "@workpal/core/issues/mutations";
 import { useBatchResultToast } from "../issues/components/batch-result-toast";
-import { errorCode } from "@multica/core/api";
-import { useActorName } from "@multica/core/workspace/hooks";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { useShortcut, shortcutMatchesEvent, isPlainShortcut } from "@multica/core/shortcuts";
-import { isImeComposing } from "@multica/core/utils";
+import { errorCode } from "@workpal/core/api";
+import { useActorName } from "@workpal/core/workspace/hooks";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { useShortcut, shortcutMatchesEvent, isPlainShortcut } from "@workpal/core/shortcuts";
+import { isImeComposing } from "@workpal/core/utils";
 import { ShortcutKeycaps } from "../common/shortcut-keycaps";
 import { useStatusLabel } from "../issues/utils/status-label";
 import { useT } from "../i18n";

@@ -2,9 +2,9 @@
 
 import { useEffect, useState, type ReactNode } from "react";
 import { useDefaultLayout } from "react-resizable-panels";
-import { useIsMobile } from "@multica/ui/hooks/use-mobile";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@multica/ui/components/ui/tabs";
-import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "@multica/ui/components/ui/resizable";
+import { useIsMobile } from "@workpal/ui/hooks/use-mobile";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@workpal/ui/components/ui/tabs";
+import { ResizableHandle, ResizablePanel, ResizablePanelGroup } from "@workpal/ui/components/ui/resizable";
 import { useT } from "../../i18n";
 
 export function BuilderWorkspaceLayout({ conversation, configuration, footer }: {
@@ -17,7 +17,7 @@ export function BuilderWorkspaceLayout({ conversation, configuration, footer }: 
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
   const { defaultLayout, onLayoutChanged } = useDefaultLayout({
-    id: "multica_agent_builder_layout",
+    id: "workpal_agent_builder_layout",
   });
 
   // The breakpoint resolves after hydration. Do not briefly mount a desktop

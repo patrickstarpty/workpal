@@ -4,15 +4,15 @@ import type { ReactNode } from "react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { cleanup, render, screen } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import type { AgentRuntime, RuntimeRateLimitsResponse } from "@multica/core/types";
-import { I18nProvider } from "@multica/core/i18n/react";
+import type { AgentRuntime, RuntimeRateLimitsResponse } from "@workpal/core/types";
+import { I18nProvider } from "@workpal/core/i18n/react";
 import enCommon from "../../locales/en/common.json";
 import enRuntimes from "../../locales/en/runtimes.json";
 
 const TEST_RESOURCES = { en: { common: enCommon, runtimes: enRuntimes } };
 
 const getRuntimeRateLimits = vi.hoisted(() => vi.fn());
-vi.mock("@multica/core/api", () => ({
+vi.mock("@workpal/core/api", () => ({
   api: { getRuntimeRateLimits },
 }));
 

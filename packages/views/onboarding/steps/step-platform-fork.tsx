@@ -1,21 +1,21 @@
 "use client";
 
 import { useEffect, useState, type ReactNode } from "react";
-import { ArrowRight, Download, Loader2 } from "@multica/ui/icons";
-import { Button } from "@multica/ui/components/ui/button";
+import { ArrowRight, Download, Loader2 } from "@workpal/ui/icons";
+import { Button } from "@workpal/ui/components/ui/button";
 import {
   Dialog,
   DialogContent,
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "@multica/ui/components/ui/dialog";
-import { cn } from "@multica/ui/lib/utils";
-import type { AgentRuntime } from "@multica/core/types";
+} from "@workpal/ui/components/ui/dialog";
+import { cn } from "@workpal/ui/lib/utils";
+import type { AgentRuntime } from "@workpal/core/types";
 import {
   runtimeDisplayLabel,
   useDaemonSetupCommands,
-} from "@multica/core/runtimes";
+} from "@workpal/core/runtimes";
 import {
   StepFooter,
   StepHeading,
@@ -420,7 +420,7 @@ function CliWaitingStatus({ dialogOpen }: { dialogOpen: boolean }) {
 
   if (commands.status !== "ready") return null;
 
-  // Stage thresholds are rough — `multica setup` typical flow is
+  // Stage thresholds are rough — `workpal setup` typical flow is
   //   ~1s save config → browser-tab auth (user-driven, 5–30s) →
   //   ~2s daemon boot → immediate WS register. So under 15s means
   //   "still normal", 15–45s means "probably stuck on browser auth",

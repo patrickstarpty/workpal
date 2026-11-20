@@ -11,11 +11,11 @@ import (
 
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgtype"
-	"github.com/multica-ai/multica/server/internal/entitlement"
-	"github.com/multica-ai/multica/server/internal/inbox"
-	"github.com/multica-ai/multica/server/internal/util"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
-	"github.com/multica-ai/multica/server/pkg/dbid"
+	"workpal.local/workpal/server/internal/entitlement"
+	"workpal.local/workpal/server/internal/inbox"
+	"workpal.local/workpal/server/internal/util"
+	db "workpal.local/workpal/server/pkg/db/generated"
+	"workpal.local/workpal/server/pkg/dbid"
 )
 
 const autopilotQuotaFirstRejectionNoticeKey = "rejection_first"

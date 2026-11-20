@@ -9,11 +9,11 @@ import (
 	"testing"
 	"time"
 
-	"github.com/multica-ai/multica/server/internal/analytics"
-	"github.com/multica-ai/multica/server/internal/events"
-	"github.com/multica-ai/multica/server/internal/realtime"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
-	"github.com/multica-ai/multica/server/pkg/protocol"
+	"workpal.local/workpal/server/internal/analytics"
+	"workpal.local/workpal/server/internal/events"
+	"workpal.local/workpal/server/internal/realtime"
+	db "workpal.local/workpal/server/pkg/db/generated"
+	"workpal.local/workpal/server/pkg/protocol"
 )
 
 type chatMembershipFunc func(context.Context, string, string) (bool, error)

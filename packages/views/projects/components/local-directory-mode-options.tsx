@@ -1,7 +1,7 @@
 "use client";
 
-import { GitBranch, Pencil, TriangleAlert } from "@multica/ui/icons";
-import type { LocalDirectoryExecutionMode } from "@multica/core/types";
+import { GitBranch, Pencil, TriangleAlert } from "@workpal/ui/icons";
+import type { LocalDirectoryExecutionMode } from "@workpal/core/types";
 import { useT } from "../../i18n/use-t";
 
 /**

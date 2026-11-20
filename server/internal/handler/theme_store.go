@@ -9,7 +9,7 @@ import (
 	"strconv"
 
 	"github.com/go-chi/chi/v5"
-	"github.com/multica-ai/multica/server/internal/themestore"
+	"workpal.local/workpal/server/internal/themestore"
 )
 
 // ThemeStoreTheme is a registry theme as the app sees it. Download URLs and

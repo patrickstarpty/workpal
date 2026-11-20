@@ -11,7 +11,7 @@ import {
 } from "vitest";
 import { render, screen, act, cleanup, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { I18nProvider } from "@multica/core/i18n/react";
+import { I18nProvider } from "@workpal/core/i18n/react";
 import enCommon from "../../locales/en/common.json";
 import enAuth from "../../locales/en/auth.json";
 import enSettings from "../../locales/en/settings.json";
@@ -35,10 +35,10 @@ const userRef = vi.hoisted(() => ({
   current: null as { id: string; timezone?: string | null } | null,
 }));
 
-vi.mock("@multica/core/i18n/react", async () => {
+vi.mock("@workpal/core/i18n/react", async () => {
   const actual = await vi.importActual<
-    typeof import("@multica/core/i18n/react")
-  >("@multica/core/i18n/react");
+    typeof import("@workpal/core/i18n/react")
+  >("@workpal/core/i18n/react");
   return {
     ...actual,
     useLocaleAdapter: () => ({
@@ -55,7 +55,7 @@ const chatState = vi.hoisted(() => ({
   floatingChatEnabled: true,
   setFloatingChatEnabled: vi.fn(),
 }));
-vi.mock("@multica/core/chat", () => ({
+vi.mock("@workpal/core/chat", () => ({
   useChatStore: Object.assign(
     (selector: (state: typeof chatState) => unknown) => selector(chatState),
     { getState: () => chatState },
@@ -65,11 +65,11 @@ vi.mock("@multica/core/chat", () => ({
 // Reads the workspace's agents; covered by its own test.
 vi.mock("./quick-chat-agent-row", () => ({ QuickChatAgentRow: () => null }));
 
-vi.mock("@multica/core/paths", () => ({
+vi.mock("@workpal/core/paths", () => ({
   useCurrentWorkspace: () => ({ id: "ws-1", name: "Acme" }),
 }));
 
-vi.mock("@multica/core/api", () => ({
+vi.mock("@workpal/core/api", () => ({
   api: { updateMe: mockUpdateMe },
 }));
 
@@ -81,10 +81,10 @@ vi.mock("sonner", () => ({
   },
 }));
 
-vi.mock("@multica/core/auth", async () => {
+vi.mock("@workpal/core/auth", async () => {
   const actual =
-    await vi.importActual<typeof import("@multica/core/auth")>(
-      "@multica/core/auth",
+    await vi.importActual<typeof import("@workpal/core/auth")>(
+      "@workpal/core/auth",
     );
   type AuthState = {
     user: typeof userRef.current;
@@ -102,13 +102,13 @@ vi.mock("@multica/core/auth", async () => {
 });
 
 import { PreferencesTab } from "./preferences-tab";
-import { useCommentComposerStore } from "@multica/core/issues/stores";
-import { useIssueOpeningStore } from "@multica/core/issues/stores/issue-opening-store";
+import { useCommentComposerStore } from "@workpal/core/issues/stores";
+import { useIssueOpeningStore } from "@workpal/core/issues/stores/issue-opening-store";
 import {
   DEFAULT_MANUAL_CREATE_FIELDS,
   DEFAULT_QUICK_CREATE_FIELDS,
   useIssueCreateSettingsStore,
-} from "@multica/core/issues/stores/issue-create-settings-store";
+} from "@workpal/core/issues/stores/issue-create-settings-store";
 
 
 const TEST_RESOURCES = {

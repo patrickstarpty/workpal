@@ -46,7 +46,7 @@ export const useCommentComposerStore = create<CommentComposerStore>()(
       setImageLayout: (imageLayout) => set({ imageLayout }),
     }),
     {
-      name: "multica_comment_composer",
+      name: "workpal_comment_composer",
       storage: createJSONStorage(() => defaultStorage),
     },
   ),

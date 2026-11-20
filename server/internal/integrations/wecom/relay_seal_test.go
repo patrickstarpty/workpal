@@ -8,7 +8,7 @@ import (
 	"log/slog"
 	"testing"
 
-	"github.com/multica-ai/multica/server/internal/util"
+	"workpal.local/workpal/server/internal/util"
 )
 
 // ---- every ending reaches the bubble, including the ones with no words ----

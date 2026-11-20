@@ -1,12 +1,12 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { useUpdateAutopilotTrigger } from "@multica/core/autopilots/mutations";
-import { Button } from "@multica/ui/components/ui/button";
-import { Switch } from "@multica/ui/components/ui/switch";
-import { Dialog, DialogContent, DialogTitle } from "@multica/ui/components/ui/dialog";
+import { useUpdateAutopilotTrigger } from "@workpal/core/autopilots/mutations";
+import { Button } from "@workpal/ui/components/ui/button";
+import { Switch } from "@workpal/ui/components/ui/switch";
+import { Dialog, DialogContent, DialogTitle } from "@workpal/ui/components/ui/dialog";
 import { toast } from "sonner";
-import type { AutopilotTrigger } from "@multica/core/types";
+import type { AutopilotTrigger } from "@workpal/core/types";
 import { WebhookEventFilterSection } from "./webhook-event-filter-section";
 import { serializeEventFilters } from "./webhook-payload-condition";
 import {

@@ -9,10 +9,10 @@ import (
 	"time"
 
 	"github.com/google/uuid"
-	"github.com/multica-ai/multica/server/internal/events"
-	"github.com/multica-ai/multica/server/internal/testutil"
-	"github.com/multica-ai/multica/server/internal/util"
-	"github.com/multica-ai/multica/server/pkg/protocol"
+	"workpal.local/workpal/server/internal/events"
+	"workpal.local/workpal/server/internal/testutil"
+	"workpal.local/workpal/server/internal/util"
+	"workpal.local/workpal/server/pkg/protocol"
 )
 
 func TestCommentInvocationDeniedNoticePersistsWithoutDisclosure(t *testing.T) {
@@ -68,7 +68,7 @@ func TestCommentInvocationDeniedNoticePersistsWithoutDisclosure(t *testing.T) {
 	if strings.Count(notice.Content, "Target not found or permission not granted") != 4 {
 		t.Errorf("denied targets do not share the generic reason: %s", notice.Content)
 	}
-	for _, secret := range []string{"private-access-test-agent", "Other workspace secret", "private-agent-owner@multica.test", "Allowed alias"} {
+	for _, secret := range []string{"private-access-test-agent", "Other workspace secret", "private-agent-owner@workpal.test", "Allowed alias"} {
 		if strings.Contains(notice.Content, secret) {
 			t.Errorf("notice exposed an unrelated or private value %q", secret)
 		}

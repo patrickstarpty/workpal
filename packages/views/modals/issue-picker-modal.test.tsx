@@ -2,19 +2,19 @@
 
 import { cleanup, fireEvent, screen, waitFor } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { buildIssueStatusCatalog } from "@multica/core/issue-statuses";
-import type { Issue } from "@multica/core/types";
+import { buildIssueStatusCatalog } from "@workpal/core/issue-statuses";
+import type { Issue } from "@workpal/core/types";
 import { renderWithI18n } from "../test/i18n";
 
 const searchIssues = vi.fn();
 
-vi.mock("@multica/core/api", () => ({
+vi.mock("@workpal/core/api", () => ({
   api: { searchIssues: (params: unknown) => searchIssues(params) },
 }));
-vi.mock("@multica/core/hooks", () => ({
+vi.mock("@workpal/core/hooks", () => ({
   useWorkspaceId: () => "workspace-1",
 }));
-vi.mock("@multica/core/issue-statuses/hooks", () => ({
+vi.mock("@workpal/core/issue-statuses/hooks", () => ({
   useIssueStatuses: () => buildIssueStatusCatalog(undefined),
 }));
 

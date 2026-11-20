@@ -11,11 +11,11 @@ const spies = vi.hoisted(() => ({
   attachSkill: vi.fn(),
   create: vi.fn(),
 }));
-vi.mock("@multica/core/hooks", () => ({ useWorkspaceId: () => "ws-1" }));
-vi.mock("@multica/core/paths", () => ({ useWorkspacePaths: () => ({ settings: () => "/settings" }) }));
+vi.mock("@workpal/core/hooks", () => ({ useWorkspaceId: () => "ws-1" }));
+vi.mock("@workpal/core/paths", () => ({ useWorkspacePaths: () => ({ settings: () => "/settings" }) }));
 vi.mock("../../../navigation", () => ({ useNavigation: () => ({ push: spies.push }) }));
 vi.mock("@tanstack/react-query", () => ({ useQuery: () => ({ data: [{ id: "bug", name: "Bug", color: "#ff0000" }] }) }));
-vi.mock("@multica/core/labels", () => ({
+vi.mock("@workpal/core/labels", () => ({
   labelListOptions: (_wsId: string, resourceType: string) => {
     spies.listTypes.push(resourceType);
     return {};

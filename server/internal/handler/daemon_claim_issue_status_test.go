@@ -7,7 +7,7 @@ import (
 	"slices"
 	"testing"
 
-	"github.com/multica-ai/multica/server/internal/testutil"
+	"workpal.local/workpal/server/internal/testutil"
 )
 
 // TestClaimTaskByRuntime_PopulatesIssueStatusCatalog verifies the claim

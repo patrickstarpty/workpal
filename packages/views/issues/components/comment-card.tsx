@@ -1,16 +1,16 @@
 "use client";
 
 import { Fragment, memo, useCallback, useEffect, useRef, useState, type ReactNode } from "react";
-import { CheckCircle2, ChevronRight, CornerUpLeft, ListChevronsDownUp, Copy, Link2, Loader2, MessageSquare, MessageSquarePlus, MoreHorizontal, Pencil, Plus, RotateCcw, SmilePlus, Trash2 } from "@multica/ui/icons";
+import { CheckCircle2, ChevronRight, CornerUpLeft, ListChevronsDownUp, Copy, Link2, Loader2, MessageSquare, MessageSquarePlus, MoreHorizontal, Pencil, Plus, RotateCcw, SmilePlus, Trash2 } from "@workpal/ui/icons";
 import { toast } from "sonner";
-import { Card } from "@multica/ui/components/ui/card";
-import { Button, buttonVariants } from "@multica/ui/components/ui/button";
+import { Card } from "@workpal/ui/components/ui/card";
+import { Button, buttonVariants } from "@workpal/ui/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
   DropdownMenuContent,
-} from "@multica/ui/components/ui/dropdown-menu";
-import { Tooltip, TooltipTrigger, TooltipContent } from "@multica/ui/components/ui/tooltip";
+} from "@workpal/ui/components/ui/dropdown-menu";
+import { Tooltip, TooltipTrigger, TooltipContent } from "@workpal/ui/components/ui/tooltip";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -20,23 +20,23 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@multica/ui/components/ui/alert-dialog";
+} from "@workpal/ui/components/ui/alert-dialog";
 import { ActorAvatar } from "../../common/actor-avatar";
 import { shouldOpenRowMenu, useRowMenu } from "../../common/point-menu";
 import { MenuActionGroups, useContextMenuScope } from "../../common/context-menu-scope";
 import { dropdownPrimitives } from "../../common/menu-primitives";
 import type { RowActionItem } from "../../common/row-actions-menu";
 import { DeferredTooltip } from "../../common/deferred-tooltip";
-import { ReactionBar } from "@multica/ui/components/common/reaction-bar";
-import { QuickEmojiPicker } from "@multica/ui/components/common/quick-emoji-picker";
-import { cn } from "@multica/ui/lib/utils";
-import { copyText } from "@multica/ui/lib/clipboard";
-import { useActorName } from "@multica/core/workspace/hooks";
+import { ReactionBar } from "@workpal/ui/components/common/reaction-bar";
+import { QuickEmojiPicker } from "@workpal/ui/components/common/quick-emoji-picker";
+import { cn } from "@workpal/ui/lib/utils";
+import { copyText } from "@workpal/ui/lib/clipboard";
+import { useActorName } from "@workpal/core/workspace/hooks";
 import { useLocale, useTimeAgo } from "../../i18n";
 import { ContentEditor, type ContentEditorRef, ReadonlyContent, useFileDropZone, FileDropOverlay, Attachment as AttachmentRenderer, AttachmentDownloadProvider, useUploadGate, useComposerSubmit } from "../../editor";
 import { useCommentUploads } from "./use-comment-uploads";
-import { FileUploadButton } from "@multica/ui/components/common/file-upload-button";
-import { api, dispatchReasonCode, errorCode } from "@multica/core/api";
+import { FileUploadButton } from "@workpal/ui/components/common/file-upload-button";
+import { api, dispatchReasonCode, errorCode } from "@workpal/core/api";
 import { ReplyInput, type ReplyInputHandle } from "./reply-input";
 import { VirtualThreadRow, shouldVirtualizeThreadRows } from "./virtual-thread-row";
 import { CommentTriggerChips } from "./comment-trigger-chips";
@@ -44,17 +44,17 @@ import { AppCallChips } from "./app-call-chips";
 import { useCommentTriggerPreview } from "../hooks/use-comment-trigger-preview";
 import { useRecipientActions } from "../hooks/use-recipient-actions";
 import { SteerBadge, SteerReceipts } from "./steer-receipts";
-import type { AgentTask, TimelineEntry, Attachment } from "@multica/core/types";
-import { contentReferencesAttachment } from "@multica/core/types";
-import { isDeletedComment } from "@multica/core/issues/comment-deletion";
-import { commentSupplementReceipts, isSupplementInFlight } from "@multica/core/issues/run-steering";
-import { useConfigStore } from "@multica/core/config";
+import type { AgentTask, TimelineEntry, Attachment } from "@workpal/core/types";
+import { contentReferencesAttachment } from "@workpal/core/types";
+import { isDeletedComment } from "@workpal/core/issues/comment-deletion";
+import { commentSupplementReceipts, isSupplementInFlight } from "@workpal/core/issues/run-steering";
+import { useConfigStore } from "@workpal/core/config";
 import {
   orderStandaloneAttachments,
   selectStandaloneAttachments,
   standaloneAttachmentGroup,
-} from "@multica/core/attachments/image-sequence";
-import { useCommentCollapseStore, useCommentDraftStore } from "@multica/core/issues/stores";
+} from "@workpal/core/attachments/image-sequence";
+import { useCommentCollapseStore, useCommentDraftStore } from "@workpal/core/issues/stores";
 import { useT } from "../../i18n";
 import { CommentsFoldBar } from "./resolved-thread-bar";
 import { deriveThreadResolution } from "./thread-utils";

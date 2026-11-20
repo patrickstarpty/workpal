@@ -2,7 +2,7 @@
 
 import { useTheme } from "next-themes"
 import { Toaster as Sonner, type ToasterProps } from "sonner"
-import { CircleCheckIcon, InfoIcon, TriangleAlertIcon, OctagonXIcon, Loader2Icon } from "@multica/ui/icons"
+import { CircleCheckIcon, InfoIcon, TriangleAlertIcon, OctagonXIcon, Loader2Icon } from "@workpal/ui/icons"
 
 // Sonner's default gaps (24px, 16px on phones), measured from the safe area
 // rather than the screen edge so a toast never lands under a camera or the

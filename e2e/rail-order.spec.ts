@@ -21,7 +21,7 @@ async function dragOnto(page: Page, from: string, to: string) {
 test("rail spaces reorder by drag and keep their order", async ({ page }) => {
   await page.setViewportSize({ width: 1280, height: 900 });
   const slug = await loginAsDefault(page);
-  await page.evaluate(() => localStorage.removeItem("multica_rail_order"));
+  await page.evaluate(() => localStorage.removeItem("workpal_rail_order"));
   await reloadAppPage(page);
 
   expect(await railOrder(page)).toEqual(["inbox", "work", "team", "chat", "autopilots"]);

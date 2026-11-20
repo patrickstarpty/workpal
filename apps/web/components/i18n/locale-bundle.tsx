@@ -2,7 +2,7 @@
 
 import type { ComponentType, ReactNode } from "react";
 import dynamic from "next/dynamic";
-import type { LocaleResources, SupportedLocale } from "@multica/core/i18n";
+import type { LocaleResources, SupportedLocale } from "@workpal/core/i18n";
 
 export interface LocaleBundleProps {
   children: (resources: Record<string, LocaleResources>) => ReactNode;

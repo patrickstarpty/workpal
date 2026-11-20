@@ -1,10 +1,10 @@
 "use client";
 
-import { useIssueStatuses } from "@multica/core/issue-statuses/hooks";
-import { useWorkspaceId } from "@multica/core/hooks";
+import { useIssueStatuses } from "@workpal/core/issue-statuses/hooks";
+import { useWorkspaceId } from "@workpal/core/hooks";
 
 import { memo, useState, useCallback, useMemo, useEffect, useRef } from "react";
-import { ChevronRight, Plus } from "@multica/ui/icons";
+import { ChevronRight, Plus } from "@workpal/ui/icons";
 import { Accordion } from "@base-ui/react/accordion";
 import {
   DndContext,
@@ -19,9 +19,9 @@ import {
 } from "@dnd-kit/core";
 import { SortableContext, verticalListSortingStrategy, arrayMove } from "@dnd-kit/sortable";
 import { Virtuoso } from "react-virtuoso";
-import { Button } from "@multica/ui/components/ui/button";
-import type { Issue, IssueStatus, Project } from "@multica/core/types";
-import { useViewStore } from "@multica/core/issues/stores/view-store-context";
+import { Button } from "@workpal/ui/components/ui/button";
+import type { Issue, IssueStatus, Project } from "@workpal/core/types";
+import { useViewStore } from "@workpal/core/issues/stores/view-store-context";
 import { StatusHeading } from "./status-heading";
 import { ListRow, DraggableListRow, rowParity, type ChildProgress } from "./list-row";
 import { useDragSettle } from "./use-drag-settle";

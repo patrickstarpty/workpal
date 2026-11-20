@@ -11,8 +11,8 @@ import (
 	"github.com/jackc/pgx/v5/pgtype"
 	"github.com/slack-go/slack"
 
-	"github.com/multica-ai/multica/server/internal/integrations/channel/engine"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
+	"workpal.local/workpal/server/internal/integrations/channel/engine"
+	db "workpal.local/workpal/server/pkg/db/generated"
 )
 
 // ---- fakes ----
@@ -143,7 +143,7 @@ func issueSlashCmd() slack.SlashCommand {
 func TestSlashHandle_EnqueuesQuickCreateAndAcks(t *testing.T) {
 	q := &fakeSlashQueries{
 		inst:    activeSlashInstallation(),
-		binding: db.ChannelUserBinding{MulticaUserID: slashTestUUID(9)},
+		binding: db.ChannelUserBinding{WorkpalUserID: slashTestUUID(9)},
 	}
 	tasks := &fakeQuickCreate{}
 	p, captured, count := newTestSlashProcessor(q, tasks, &fakeBindingMinter{})
@@ -182,7 +182,7 @@ func TestSlashHandle_EnqueuesQuickCreateAndAcks(t *testing.T) {
 func TestSlashHandle_MultilinePromptPassedThrough(t *testing.T) {
 	q := &fakeSlashQueries{
 		inst:    activeSlashInstallation(),
-		binding: db.ChannelUserBinding{MulticaUserID: slashTestUUID(9)},
+		binding: db.ChannelUserBinding{WorkpalUserID: slashTestUUID(9)},
 	}
 	tasks := &fakeQuickCreate{}
 	p, _, _ := newTestSlashProcessor(q, tasks, &fakeBindingMinter{})
@@ -236,7 +236,7 @@ func TestSlashHandle_UnboundUserGetsLink(t *testing.T) {
 func TestSlashHandle_NonMemberDropped(t *testing.T) {
 	q := &fakeSlashQueries{
 		inst:      activeSlashInstallation(),
-		binding:   db.ChannelUserBinding{MulticaUserID: slashTestUUID(9)},
+		binding:   db.ChannelUserBinding{WorkpalUserID: slashTestUUID(9)},
 		memberErr: pgx.ErrNoRows,
 	}
 	tasks := &fakeQuickCreate{}
@@ -281,7 +281,7 @@ func TestSlashHandle_TeamMismatchTreatedAsDisconnected(t *testing.T) {
 func TestSlashHandle_EnqueueFailureIsInternalError(t *testing.T) {
 	q := &fakeSlashQueries{
 		inst:    activeSlashInstallation(),
-		binding: db.ChannelUserBinding{MulticaUserID: slashTestUUID(9)},
+		binding: db.ChannelUserBinding{WorkpalUserID: slashTestUUID(9)},
 	}
 	tasks := &fakeQuickCreate{err: errors.New("agent has no runtime")}
 	p, captured, _ := newTestSlashProcessor(q, tasks, &fakeBindingMinter{})
@@ -310,7 +310,7 @@ func TestSlashHandle_IgnoresOtherCommands(t *testing.T) {
 }
 
 func TestSlashHandle_NewDMUsesSharedStarterAndEnvelopeDedup(t *testing.T) {
-	q := &fakeSlashQueries{inst: activeSlashInstallation(), binding: db.ChannelUserBinding{MulticaUserID: slashTestUUID(9)}}
+	q := &fakeSlashQueries{inst: activeSlashInstallation(), binding: db.ChannelUserBinding{WorkpalUserID: slashTestUUID(9)}}
 	tasks := &fakeQuickCreate{}
 	p, captured, _ := newTestSlashProcessor(q, tasks, &fakeBindingMinter{})
 	starter := &fakeSlashControlStarter{}
@@ -332,7 +332,7 @@ func TestSlashHandle_NewDMUsesSharedStarterAndEnvelopeDedup(t *testing.T) {
 func TestSlashHandle_NewChannelGuidesToMentionWithoutGuessingThread(t *testing.T) {
 	q := &fakeSlashQueries{
 		inst:    activeSlashInstallation(),
-		binding: db.ChannelUserBinding{MulticaUserID: slashTestUUID(9)},
+		binding: db.ChannelUserBinding{WorkpalUserID: slashTestUUID(9)},
 	}
 	p, captured, _ := newTestSlashProcessor(q, &fakeQuickCreate{}, &fakeBindingMinter{})
 	starter := &fakeSlashControlStarter{}
@@ -349,7 +349,7 @@ func TestSlashHandle_NewChannelGuidesToMentionWithoutGuessingThread(t *testing.T
 }
 
 func TestSlashHandle_ClearDMUsesSharedStarterAndEnvelopeDedup(t *testing.T) {
-	q := &fakeSlashQueries{inst: activeSlashInstallation(), binding: db.ChannelUserBinding{MulticaUserID: slashTestUUID(9)}}
+	q := &fakeSlashQueries{inst: activeSlashInstallation(), binding: db.ChannelUserBinding{WorkpalUserID: slashTestUUID(9)}}
 	p, captured, _ := newTestSlashProcessor(q, &fakeQuickCreate{}, &fakeBindingMinter{})
 	starter := &fakeSlashControlStarter{}
 	p.control = starter
@@ -365,7 +365,7 @@ func TestSlashHandle_ClearDMUsesSharedStarterAndEnvelopeDedup(t *testing.T) {
 }
 
 func TestSlashHandle_ClearChannelGuidesToMentionWithoutGuessingThread(t *testing.T) {
-	q := &fakeSlashQueries{inst: activeSlashInstallation(), binding: db.ChannelUserBinding{MulticaUserID: slashTestUUID(9)}}
+	q := &fakeSlashQueries{inst: activeSlashInstallation(), binding: db.ChannelUserBinding{WorkpalUserID: slashTestUUID(9)}}
 	p, captured, _ := newTestSlashProcessor(q, &fakeQuickCreate{}, &fakeBindingMinter{})
 	starter := &fakeSlashControlStarter{}
 	p.control = starter

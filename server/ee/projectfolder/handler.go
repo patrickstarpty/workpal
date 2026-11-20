@@ -21,12 +21,12 @@ import (
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgtype"
 
-	"github.com/multica-ai/multica/server/ee/projectfolder/folderdb"
-	"github.com/multica-ai/multica/server/internal/extension"
-	"github.com/multica-ai/multica/server/internal/handler"
-	"github.com/multica-ai/multica/server/internal/logger"
-	"github.com/multica-ai/multica/server/internal/util"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
+	"workpal.local/workpal/server/ee/projectfolder/folderdb"
+	"workpal.local/workpal/server/internal/extension"
+	"workpal.local/workpal/server/internal/handler"
+	"workpal.local/workpal/server/internal/logger"
+	"workpal.local/workpal/server/internal/util"
+	db "workpal.local/workpal/server/pkg/db/generated"
 )
 
 const (

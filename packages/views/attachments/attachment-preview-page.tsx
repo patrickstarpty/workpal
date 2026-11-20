@@ -29,8 +29,8 @@
 
 import { useCallback, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { Loader2 } from "@multica/ui/icons";
-import { api } from "@multica/core/api";
+import { Loader2 } from "@workpal/ui/icons";
+import { api } from "@workpal/core/api";
 import { useT } from "../i18n";
 import { useRestoredViewState, useViewStateWriter } from "../platform";
 import {
@@ -113,7 +113,7 @@ export function AttachmentPreviewPage({
   );
 }
 
-// Scroll-position restoration across desktop tab switches (multica-ai#6405).
+// Scroll-position restoration across desktop tab switches (workpal-ai#6405).
 // No-op on web (no desktop adapter). The iframe is keyed on contentKey so a
 // content change (re-upload) structurally remounts a fresh document; the
 // hook reports y=0 with the new key until that document scrolls, and

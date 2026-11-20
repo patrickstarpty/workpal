@@ -12,10 +12,10 @@ import {
   useManualAgentDraftStore,
   type AgentDraft,
   type StoredAgentDraft,
-} from "@multica/core/agents";
-import { EMPTY_SKILL_SUMMARY } from "@multica/core/api/schemas";
-import type { Agent, SkillSummary } from "@multica/core/types";
-import { workspaceKeys } from "@multica/core/workspace/queries";
+} from "@workpal/core/agents";
+import { EMPTY_SKILL_SUMMARY } from "@workpal/core/api/schemas";
+import type { Agent, SkillSummary } from "@workpal/core/types";
+import { workspaceKeys } from "@workpal/core/workspace/queries";
 import { useBuilderDraftSync } from "./use-builder-draft-sync";
 import { useCreateAgentForm } from "./use-create-agent-form";
 import { useManualDraftSync } from "./use-manual-draft-sync";
@@ -28,14 +28,14 @@ const api = vi.hoisted(() => ({
 }));
 const workspace = vi.hoisted(() => ({ id: "ws-1" }));
 
-vi.mock("@multica/core/api", async (importOriginal) => ({
-  ...await importOriginal<typeof import("@multica/core/api")>(),
+vi.mock("@workpal/core/api", async (importOriginal) => ({
+  ...await importOriginal<typeof import("@workpal/core/api")>(),
   api,
 }));
-vi.mock("@multica/core/hooks", () => ({
+vi.mock("@workpal/core/hooks", () => ({
   useWorkspaceId: () => workspace.id,
 }));
-vi.mock("@multica/core/auth", () => ({
+vi.mock("@workpal/core/auth", () => ({
   useAuthStore: Object.assign(
     (selector: (state: { user: null }) => unknown) => selector({ user: null }),
     { getState: () => ({ user: null }) },

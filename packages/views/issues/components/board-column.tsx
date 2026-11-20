@@ -2,7 +2,7 @@
 
 import { memo, useCallback, useMemo, useState, type ReactNode } from "react";
 import { Virtuoso } from "react-virtuoso";
-import { Ban, EyeOff, FolderMinus, MoreHorizontal, Plus, UserMinus } from "@multica/ui/icons";
+import { Ban, EyeOff, FolderMinus, MoreHorizontal, Plus, UserMinus } from "@workpal/ui/icons";
 import { useDroppable } from "@dnd-kit/core";
 import { SortableContext, verticalListSortingStrategy } from "@dnd-kit/sortable";
 import type {
@@ -10,18 +10,18 @@ import type {
   IssueAssigneeType,
   IssueStatus,
   Project,
-} from "@multica/core/types";
-import { Button } from "@multica/ui/components/ui/button";
+} from "@workpal/core/types";
+import { Button } from "@workpal/ui/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
   DropdownMenuContent,
   DropdownMenuItem,
-} from "@multica/ui/components/ui/dropdown-menu";
-import { TruncatedTooltip } from "@multica/ui/components/common/truncated-tooltip";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { useIssueStatuses } from "@multica/core/issue-statuses/hooks";
-import { useViewStoreApi } from "@multica/core/issues/stores/view-store-context";
+} from "@workpal/ui/components/ui/dropdown-menu";
+import { TruncatedTooltip } from "@workpal/ui/components/common/truncated-tooltip";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { useIssueStatuses } from "@workpal/core/issue-statuses/hooks";
+import { useViewStoreApi } from "@workpal/core/issues/stores/view-store-context";
 import { useViewBaseline } from "../surface/view-baseline-context";
 import { StatusHeading } from "./status-heading";
 import { DraggableBoardCard } from "./board-card";
@@ -36,7 +36,7 @@ import { VirtuosoSeed } from "../../common/virtuoso-seed";
 import { useBoardWorkflow } from "./board-workflow-context";
 import { ColumnHandoff } from "../../workflows/column-handoff";
 import type { IssueCreateDefaults } from "../surface/types";
-import { paletteColor } from "@multica/core/appearance";
+import { paletteColor } from "@workpal/core/appearance";
 
 // Insertion-position prediction intentionally omitted. The server's
 // ORDER BY uses PostgreSQL's en_US.utf8 collation (glibc), which

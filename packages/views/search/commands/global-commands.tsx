@@ -11,14 +11,14 @@ import {
   Palette,
   SquarePen,
   Zap,
-} from "@multica/ui/icons";
-import { useChatStore } from "@multica/core/chat";
-import type { CommandBarContext } from "@multica/core/command-bar";
-import { useArchiveAllReadInbox, useMarkAllInboxRead } from "@multica/core/inbox/mutations";
-import { openCreateIssueWithPreference } from "@multica/core/issues/stores";
-import { useModalStore } from "@multica/core/modals";
-import { useWorkspacePaths } from "@multica/core/paths";
-import { useShortcut } from "@multica/core/shortcuts";
+} from "@workpal/ui/icons";
+import { useChatStore } from "@workpal/core/chat";
+import type { CommandBarContext } from "@workpal/core/command-bar";
+import { useArchiveAllReadInbox, useMarkAllInboxRead } from "@workpal/core/inbox/mutations";
+import { openCreateIssueWithPreference } from "@workpal/core/issues/stores";
+import { useModalStore } from "@workpal/core/modals";
+import { useWorkspacePaths } from "@workpal/core/paths";
+import { useShortcut } from "@workpal/core/shortcuts";
 import { isFloatingChatRouteSuppressed } from "../../chat/floating-chat-visibility";
 import { useNavigation } from "../../navigation";
 import { useT } from "../../i18n";

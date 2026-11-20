@@ -17,7 +17,7 @@ import (
 	"strings"
 	"time"
 
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
+	db "workpal.local/workpal/server/pkg/db/generated"
 )
 
 func encryptMedia(data, key []byte) ([]byte, error) {
@@ -143,7 +143,7 @@ func (o *Outbound) attachment(ctx context.Context, api *apiClient, userID string
 	defer cancel()
 	key := o.objects.KeyFromURL(row.Url)
 	if key == "" {
-		return messageItem{}, errors.New("weixin: attachment is not in Multica object storage")
+		return messageItem{}, errors.New("weixin: attachment is not in Workpal object storage")
 	}
 	reader, err := o.objects.GetReader(ctx, key)
 	if err != nil {

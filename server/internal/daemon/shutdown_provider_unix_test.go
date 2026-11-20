@@ -35,7 +35,7 @@ func (l *shutdownProviderLog) Write(p []byte) (int, error) {
 // shutdown as retryable recovery. The provider blocks on a FIFO, not a timer.
 func TestHandleTask_ShutdownThroughRunTask(t *testing.T) {
 	redirectTestHome(t, t.TempDir())
-	t.Setenv("MULTICA_OPENCODE_TRANSPORT", "run")
+	t.Setenv("WORKPAL_OPENCODE_TRANSPORT", "run")
 	dir := t.TempDir()
 	gate := filepath.Join(dir, "gate")
 	if err := syscall.Mkfifo(gate, 0600); err != nil {

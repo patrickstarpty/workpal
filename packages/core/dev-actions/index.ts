@@ -38,7 +38,7 @@ export const useDevActionsStore = create<DevActionsStore>()(
       setSection: (section) => set({ section }),
     }),
     {
-      name: "multica_dev_actions",
+      name: "workpal_dev_actions",
       storage: createJSONStorage(() => defaultStorage),
       partialize: ({ pinned, recent, section }) => ({ pinned, recent, section }),
       version: 1,

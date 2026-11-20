@@ -2,11 +2,11 @@
 
 import { useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { AlertCircle, Loader2, RefreshCw } from "@multica/ui/icons";
-import { useAuthStore } from "@multica/core/auth";
-import { paths } from "@multica/core/paths";
-import { workspaceListOptions } from "@multica/core/workspace/queries";
-import { Button } from "@multica/ui/components/ui/button";
+import { AlertCircle, Loader2, RefreshCw } from "@workpal/ui/icons";
+import { useAuthStore } from "@workpal/core/auth";
+import { paths } from "@workpal/core/paths";
+import { workspaceListOptions } from "@workpal/core/workspace/queries";
+import { Button } from "@workpal/ui/components/ui/button";
 import { useNavigation } from "../navigation";
 import { useT } from "../i18n";
 

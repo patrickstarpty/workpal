@@ -10,9 +10,9 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { cleanup, screen } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { ViewStoreProvider } from "@multica/core/issues/stores/view-store-context";
-import { getIssueSurfaceViewStore } from "@multica/core/issues/stores/surface-view-store";
-import type { Issue, Project } from "@multica/core/types";
+import { ViewStoreProvider } from "@workpal/core/issues/stores/view-store-context";
+import { getIssueSurfaceViewStore } from "@workpal/core/issues/stores/surface-view-store";
+import type { Issue, Project } from "@workpal/core/types";
 import { renderWithI18n } from "../../test/i18n";
 import { IssueContextMenuProvider } from "../actions/issue-actions-context-menu";
 import type { IssueGroupBranches } from "../surface/use-issue-group-branches";
@@ -22,10 +22,10 @@ import {
   type ScrollRestorationAdapter,
 } from "../../platform";
 
-vi.mock("@multica/core/hooks", () => ({ useWorkspaceId: () => "ws-1" }));
+vi.mock("@workpal/core/hooks", () => ({ useWorkspaceId: () => "ws-1" }));
 
-vi.mock("@multica/core/properties", async (importOriginal) => ({
-  ...(await importOriginal<typeof import("@multica/core/properties")>()),
+vi.mock("@workpal/core/properties", async (importOriginal) => ({
+  ...(await importOriginal<typeof import("@workpal/core/properties")>()),
   propertyListOptions: () => ({
     queryKey: ["properties"],
     queryFn: async () => [],
@@ -34,26 +34,26 @@ vi.mock("@multica/core/properties", async (importOriginal) => ({
   useUnsetIssueProperty: () => ({ mutate: () => {} }),
 }));
 
-vi.mock("@multica/core/workspace/hooks", async (importOriginal) => ({
-  ...(await importOriginal<typeof import("@multica/core/workspace/hooks")>()),
+vi.mock("@workpal/core/workspace/hooks", async (importOriginal) => ({
+  ...(await importOriginal<typeof import("@workpal/core/workspace/hooks")>()),
   useActorName: () => ({ getActorName: () => "Someone" }),
 }));
 
-vi.mock("@multica/core/auth", async (importOriginal) => ({
-  ...(await importOriginal<typeof import("@multica/core/auth")>()),
+vi.mock("@workpal/core/auth", async (importOriginal) => ({
+  ...(await importOriginal<typeof import("@workpal/core/auth")>()),
   useAuthStore: (selector: (state: { user: { id: string } }) => unknown) =>
     selector({ user: { id: "viewer-1" } }),
 }));
 
-vi.mock("@multica/core/agents", async (importOriginal) => ({
-  ...(await importOriginal<typeof import("@multica/core/agents")>()),
+vi.mock("@workpal/core/agents", async (importOriginal) => ({
+  ...(await importOriginal<typeof import("@workpal/core/agents")>()),
   isAgentRuntimeBound: () => true,
   useAgentPresenceDetail: () => ({ availability: "offline", workload: null }),
 }));
 
-vi.mock("@multica/core/paths", async (importOriginal) => {
+vi.mock("@workpal/core/paths", async (importOriginal) => {
   const actual =
-    await importOriginal<typeof import("@multica/core/paths")>();
+    await importOriginal<typeof import("@workpal/core/paths")>();
   return {
     ...actual,
     useCurrentWorkspace: () => ({ id: "ws-1", slug: "acme" }),

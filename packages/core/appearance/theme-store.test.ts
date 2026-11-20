@@ -21,7 +21,7 @@ const entry = (overrides: Partial<StoreTheme> = {}): StoreTheme => ({
   id: "ink",
   name: "Ink",
   author: "Someone",
-  repo: "someone/multica-theme-ink",
+  repo: "someone/workpal-theme-ink",
   modes: ["light", "dark"],
   version: "1.0.0",
   size: 100,

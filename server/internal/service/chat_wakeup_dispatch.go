@@ -7,9 +7,9 @@ import (
 
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgtype"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
-	"github.com/multica-ai/multica/server/pkg/dbid"
-	"github.com/multica-ai/multica/server/pkg/protocol"
+	db "workpal.local/workpal/server/pkg/db/generated"
+	"workpal.local/workpal/server/pkg/dbid"
+	"workpal.local/workpal/server/pkg/protocol"
 )
 
 // errChatSessionGone means a wakeup outlived its conversation.
@@ -24,7 +24,7 @@ var errChatSessionGone = errors.New("chat session no longer exists")
 // thread, quoted message), so the report lands in the same place even after
 // the person started a new topic with /new; its row is marked
 // channel_ingested, which also makes an empty reply silent and a cancelled
-// turn settle as "Stopped." A wakeup created from Web stays in Multica, like
+// turn settle as "Stopped." A wakeup created from Web stays in Workpal, like
 // any Web turn, even when the conversation also has an IM route.
 func (s *TaskService) enqueueChatWakeupTaskTx(
 	ctx context.Context,

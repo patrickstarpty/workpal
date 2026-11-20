@@ -1,20 +1,20 @@
 "use client";
 
-import { Check } from "@multica/ui/icons";
+import { Check } from "@workpal/ui/icons";
 import {
   PROJECT_STATUS_CONFIG,
   PROJECT_STATUS_ORDER,
   PROJECT_PRIORITY_CONFIG,
   PROJECT_PRIORITY_ORDER
-} from "@multica/core/projects/config";
-import { cn } from "@multica/ui/lib/utils";
+} from "@workpal/core/projects/config";
+import { cn } from "@workpal/ui/lib/utils";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@multica/ui/components/ui/dropdown-menu";
-import type { Project, ProjectStatus, ProjectPriority, UpdateProjectRequest } from "@multica/core/types";
+} from "@workpal/ui/components/ui/dropdown-menu";
+import type { Project, ProjectStatus, ProjectPriority, UpdateProjectRequest } from "@workpal/core/types";
 import { PriorityIcon } from "../../issues/components/priority-icon";
 import { useOfferArchiveOnComplete } from "./project-archive";
 import { useProjectStatusLabels, useProjectPriorityLabels } from "./labels";

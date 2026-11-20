@@ -1,15 +1,15 @@
 ---
 title: Make a theme
-description: The Multica theme format — manifest, CSS variables, options, and anchors — how to write and check a theme, and how to publish it to the theme store.
+description: The Workpal theme format — manifest, CSS variables, options, and anchors — how to write and check a theme, and how to publish it to the theme store.
 ---
 
 import { Callout } from "fumadocs-ui/components/callout";
 import { Step, Steps } from "fumadocs-ui/components/steps";
 
-A Multica theme is a folder with a `manifest.json` and a `theme.css`, plus any fonts and images the CSS uses. The CSS sets public variables for light and dark mode and can restyle a set of stable anchors; the manifest names the theme and can declare options that people adjust in **Settings → Appearance**. Themes never run JavaScript.
+A Workpal theme is a folder with a `manifest.json` and a `theme.css`, plus any fonts and images the CSS uses. The CSS sets public variables for light and dark mode and can restyle a set of stable anchors; the manifest names the theme and can declare options that people adjust in **Settings → Appearance**. Themes never run JavaScript.
 
 <Callout type="warn">
-  The theme format is a beta API. Variables, anchors, and the manifest may change until it is declared stable. The complete, generated list of variables and anchors is in [`docs/theming.md`](https://github.com/multica-ai/multica/blob/main/docs/theming.md); this page covers how they fit together.
+  The theme format is a beta API. Variables, anchors, and the manifest may change until it is declared stable. The complete, generated list of variables and anchors is in `docs/theming.md`; this page covers how they fit together.
 </Callout>
 
 ## Quick start
@@ -34,7 +34,7 @@ In **Settings → Appearance**, pick the theme closest to what you want, then ch
 
 ### Check it
 
-Run the checks from a checkout of the [Multica repository](https://github.com/multica-ai/multica) before you share it (see [Check and preview](#check-and-preview)).
+Run the checks from a checkout of the Workpal repository before you share it (see [Check and preview](#check-and-preview)).
 
 </Step>
 </Steps>
@@ -121,7 +121,7 @@ The app never declares a component variable; components read it with their defau
 }
 ```
 
-The [variable reference](https://github.com/multica-ai/multica/blob/main/docs/theming.md#variable-reference) lists every variable with its light and dark default.
+The variable reference lists every variable with its light and dark default.
 
 ## Options
 
@@ -168,7 +168,7 @@ A theme can put a picture behind the app — a gradient, an image, or an animate
 - `--backdrop-color` is required with a backdrop: the solid color shown while it loads, and the color `theme:check` measures the glass on.
 - `--glass-opacity` and `--glass-blur` set how much of the page's own color covers the backdrop and how much the backdrop blurs behind it. `--frame-glass-opacity` and `--frame-glass-blur` do the same for the rail, window toolbar, tab bar, and bottom bar.
 
-Use these instead of a transparent `--app-shell` or a `background` on `body`: the app then changes backdrops without flashing the window. [`examples/themes/night-sky`](https://github.com/multica-ai/multica/tree/main/examples/themes/night-sky) is a complete example.
+Use these instead of a transparent `--app-shell` or a `background` on `body`: the app then changes backdrops without flashing the window. `examples/themes/night-sky` is a complete example.
 
 ## Selectors
 
@@ -183,7 +183,7 @@ Target anchors, slots, and state hooks — not class names or DOM structure, whi
 .theme-dark [data-mc="issue-row"][data-priority="urgent"] { box-shadow: inset 2px 0 var(--priority-urgent); }
 ```
 
-The [selector reference](https://github.com/multica-ai/multica/blob/main/docs/theming.md#selectors) lists every anchor, its attributes, and every slot.
+The selector reference lists every anchor, its attributes, and every slot.
 
 ## What CSS may not do
 
@@ -203,7 +203,7 @@ Escapes, case, and comments don't get around the check; it reads the CSS the way
 
 ## Check and preview
 
-From a checkout of the [Multica repository](https://github.com/multica-ai/multica):
+From a checkout of the Workpal repository:
 
 ```bash
 pnpm theme:check path/to/paper          # a folder
@@ -217,24 +217,24 @@ pnpm theme:preview path/to/paper --out preview   # preview/light.png and preview
 
 If a theme hides or breaks part of the interface while you work on it, open the app with `?theme=default`, or hold **Shift** right after it loads; see [When a theme breaks something](/themes#when-a-theme-breaks-something).
 
-The checker also runs without installing the repository, from a sparse clone and Node 22.18 or newer. Agents get the same commands from their built-in Multica skill:
+The checker also runs without installing the repository, from a sparse clone and Node 22.18 or newer. Agents get the same commands from their built-in Workpal skill:
 
 ```bash
-git clone --depth 1 --filter=blob:none --sparse https://github.com/multica-ai/multica.git multica-themes
-git -C multica-themes sparse-checkout set docs scripts packages/core packages/ui
-node multica-themes/scripts/theme-check.mjs path/to/paper
+git clone --depth 1 --filter=blob:none --sparse https://code-host.invalid/workpal.git workpal-themes
+git -C workpal-themes sparse-checkout set docs scripts packages/core packages/ui
+node workpal-themes/scripts/theme-check.mjs path/to/paper
 ```
 
 ## Publish to the theme store
 
-The theme store lists themes from the [multica-ai/multica-themes](https://github.com/multica-ai/multica-themes) registry. Its [contributing guide](https://github.com/multica-ai/multica-themes/blob/main/CONTRIBUTING.md) has the details; in short:
+The theme store lists themes from the workpal-ai/workpal-themes registry. Its contributing guide has the details; in short:
 
 <Steps>
 <Step>
 
 ### Give the theme its own repository
 
-Keep the theme in a public GitHub repository. [multica-ai/multica-theme-sample](https://github.com/multica-ai/multica-theme-sample) is a template with a release workflow.
+Keep the theme in a public GitHub repository. workpal-ai/workpal-theme-sample is a template with a release workflow.
 
 </Step>
 <Step>
@@ -255,9 +255,9 @@ Open a pull request that adds a file `themes/<id>.json`, named by the manifest's
 
 New releases reach the store within about an hour, after they pass the same checks; people who installed the theme then see an update. A release that fails keeps the previous one listed. The app only installs the exact `theme.zip` that passed, and reads it with the same parser and CSS checks as an imported theme.
 
-Each store card shows how many times the theme has been downloaded from that Multica server. Every install and every update counts once, and themes people haven't installed yet are listed most downloaded first.
+Each store card shows how many times the theme has been downloaded from that Workpal server. Every install and every update counts once, and themes people haven't installed yet are listed most downloaded first.
 
 ## Next steps
 
 - [Themes and appearance](/themes) — installing, updating, and removing themes.
-- [`docs/theming.md`](https://github.com/multica-ai/multica/blob/main/docs/theming.md) — the generated variable and selector reference.
+- `docs/theming.md` — the generated variable and selector reference.

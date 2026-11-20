@@ -4,7 +4,7 @@ import { createRequire } from 'node:module';
 import { writeFileSync } from 'node:fs';
 const require = createRequire(process.cwd() + '/package.json');
 const { Client } = require('pg');
-if (!process.env.MULTICA_DEV_PROFILE) throw new Error('Run through make env-exec in an isolated development environment.');
+if (!process.env.WORKPAL_DEV_PROFILE) throw new Error('Run through make env-exec in an isolated development environment.');
 const db = new Client({ connectionString: process.env.DATABASE_URL });
 await db.connect();
 const results = [];

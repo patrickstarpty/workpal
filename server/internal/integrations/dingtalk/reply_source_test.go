@@ -6,8 +6,8 @@ import (
 	"sync"
 	"testing"
 
-	"github.com/multica-ai/multica/server/internal/integrations/channel/engine"
-	"github.com/multica-ai/multica/server/pkg/dbid"
+	"workpal.local/workpal/server/internal/integrations/channel/engine"
+	"workpal.local/workpal/server/pkg/dbid"
 )
 
 func TestReplySourceRequiresLocalAcceptedInput(t *testing.T) {

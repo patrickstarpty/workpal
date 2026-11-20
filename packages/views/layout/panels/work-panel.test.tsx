@@ -2,25 +2,25 @@ import { useState, type ReactNode } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { act, fireEvent, screen, waitFor, within } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { agentTaskSnapshotOptions } from "@multica/core/agents";
-import { EMPTY_ISSUE_VIEW_PREFERENCE } from "@multica/core/api/schemas";
-import { useActiveIssueViewStore } from "@multica/core/issue-views/active-view-store";
-import { issueViewPreferenceOptions } from "@multica/core/issue-views/preferences";
-import { issueViewEverywhereOptions } from "@multica/core/issue-views/queries";
-import { inboxListOptions } from "@multica/core/inbox/queries";
-import { useInboxSelectionStore } from "@multica/core/inbox/selection-store";
-import { issueDetailOptions, issueKeys } from "@multica/core/issues/queries";
-import { issueUnreadOptions } from "@multica/core/issues/unread";
-import { NO_PROJECT_SIDEBAR_SOURCE } from "@multica/core/issues/sidebar-list";
-import { SIDEBAR_PROJECTS_SCOPE } from "@multica/core/issues/sidebar-project-prefs";
-import { useSidebarKeptStore } from "@multica/core/issues/stores/sidebar-kept-store";
+import { agentTaskSnapshotOptions } from "@workpal/core/agents";
+import { EMPTY_ISSUE_VIEW_PREFERENCE } from "@workpal/core/api/schemas";
+import { useActiveIssueViewStore } from "@workpal/core/issue-views/active-view-store";
+import { issueViewPreferenceOptions } from "@workpal/core/issue-views/preferences";
+import { issueViewEverywhereOptions } from "@workpal/core/issue-views/queries";
+import { inboxListOptions } from "@workpal/core/inbox/queries";
+import { useInboxSelectionStore } from "@workpal/core/inbox/selection-store";
+import { issueDetailOptions, issueKeys } from "@workpal/core/issues/queries";
+import { issueUnreadOptions } from "@workpal/core/issues/unread";
+import { NO_PROJECT_SIDEBAR_SOURCE } from "@workpal/core/issues/sidebar-list";
+import { SIDEBAR_PROJECTS_SCOPE } from "@workpal/core/issues/sidebar-project-prefs";
+import { useSidebarKeptStore } from "@workpal/core/issues/stores/sidebar-kept-store";
 import {
   DEFAULT_SIDEBAR_PROJECT_SETTINGS,
   useSidebarTreeStore,
-} from "@multica/core/issues/stores/sidebar-tree-store";
-import { spaceForPath } from "@multica/core/paths";
-import { pinListOptions } from "@multica/core/pins/queries";
-import { projectListOptions } from "@multica/core/projects/queries";
+} from "@workpal/core/issues/stores/sidebar-tree-store";
+import { spaceForPath } from "@workpal/core/paths";
+import { pinListOptions } from "@workpal/core/pins/queries";
+import { projectListOptions } from "@workpal/core/projects/queries";
 import type {
   InboxItem,
   Issue,
@@ -28,7 +28,7 @@ import type {
   IssueTableRowsResponse,
   PinnedItem,
   Project,
-} from "@multica/core/types";
+} from "@workpal/core/types";
 import { renderWithI18n } from "../../test/i18n";
 import { NavigationProvider, type NavigationAdapter } from "../../navigation";
 import { IssueInboxActions } from "../../issues/actions/issue-inbox-actions";
@@ -47,8 +47,8 @@ const actions = vi.hoisted(() => ({
   canManage: () => true,
 }));
 
-vi.mock("@multica/core/api", async (importOriginal) => ({
-  ...(await importOriginal<typeof import("@multica/core/api")>()),
+vi.mock("@workpal/core/api", async (importOriginal) => ({
+  ...(await importOriginal<typeof import("@workpal/core/api")>()),
   api: apiMock,
 }));
 vi.mock("../../issue-views/use-view-actions", () => ({ useIssueViewActions: () => actions }));
@@ -68,32 +68,32 @@ vi.mock("@dnd-kit/sortable", () => ({
   verticalListSortingStrategy: vi.fn(),
   arrayMove: vi.fn(),
 }));
-vi.mock("@multica/ui/components/common/tooltip-hint", () => ({
+vi.mock("@workpal/ui/components/common/tooltip-hint", () => ({
   TooltipHint: ({ children }: { children: ReactNode }) => <>{children}</>,
 }));
-vi.mock("@multica/core/paths", async (importOriginal) => {
-  const actual = await importOriginal<typeof import("@multica/core/paths")>();
+vi.mock("@workpal/core/paths", async (importOriginal) => {
+  const actual = await importOriginal<typeof import("@workpal/core/paths")>();
   return {
     ...actual,
     useWorkspacePaths: () => actual.paths.workspace("acme"),
     useCurrentWorkspace: () => ({ id: "ws-1" }),
   };
 });
-vi.mock("@multica/core/hooks", async (importOriginal) => ({
-  ...(await importOriginal<typeof import("@multica/core/hooks")>()),
+vi.mock("@workpal/core/hooks", async (importOriginal) => ({
+  ...(await importOriginal<typeof import("@workpal/core/hooks")>()),
   useWorkspaceId: () => "ws-1",
 }));
-vi.mock("@multica/core/auth", async (importOriginal) => {
+vi.mock("@workpal/core/auth", async (importOriginal) => {
   const state = { user: { id: "u1" } };
   return {
-    ...(await importOriginal<typeof import("@multica/core/auth")>()),
+    ...(await importOriginal<typeof import("@workpal/core/auth")>()),
     useAuthStore: Object.assign((selector: (s: typeof state) => unknown) => selector(state), {
       getState: () => state,
     }),
   };
 });
-vi.mock("@multica/core/issue-statuses/hooks", async () => {
-  const { buildIssueStatusCatalog } = await import("@multica/core/issue-statuses/queries");
+vi.mock("@workpal/core/issue-statuses/hooks", async () => {
+  const { buildIssueStatusCatalog } = await import("@workpal/core/issue-statuses/queries");
   const catalog = buildIssueStatusCatalog([
     {
       id: "s1",

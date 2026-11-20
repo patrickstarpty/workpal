@@ -3,25 +3,25 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 import { screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { api } from "@multica/core/api";
+import { api } from "@workpal/core/api";
 import {
   EMPTY_AUTOPILOT_FILTERS,
   useAutopilotsViewStore,
-} from "@multica/core/autopilots/stores";
-import type { Autopilot } from "@multica/core/types";
+} from "@workpal/core/autopilots/stores";
+import type { Autopilot } from "@workpal/core/types";
 import { NavigationProvider } from "../../navigation";
 import { renderWithI18n } from "../../test/i18n";
 import { AutopilotsPage } from "./autopilots-page";
 
-vi.mock("@multica/core/api", () => ({ api: { listAutopilots: vi.fn() } }));
-vi.mock("@multica/core/hooks", () => ({ useWorkspaceId: () => "ws" }));
-vi.mock("@multica/core/paths", () => ({
+vi.mock("@workpal/core/api", () => ({ api: { listAutopilots: vi.fn() } }));
+vi.mock("@workpal/core/hooks", () => ({ useWorkspaceId: () => "ws" }));
+vi.mock("@workpal/core/paths", () => ({
   useWorkspacePaths: () => ({
     autopilots: () => "/ws/autopilots",
     autopilotDetail: (id: string) => `/ws/autopilots/${id}`,
   }),
 }));
-vi.mock("@multica/core/workspace/hooks", () => ({
+vi.mock("@workpal/core/workspace/hooks", () => ({
   useActorName: () => ({ getActorName: () => "Lambda" }),
 }));
 vi.mock("../../common/actor-avatar", () => ({ ActorAvatar: () => null }));

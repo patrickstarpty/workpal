@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"testing"
 
-	"github.com/multica-ai/multica/server/internal/integrations/channel"
+	"workpal.local/workpal/server/internal/integrations/channel"
 )
 
 func TestInboundFromCallback_QuotedAuthorUsesDisplayNameOnly(t *testing.T) {

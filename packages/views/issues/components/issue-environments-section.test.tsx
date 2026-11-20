@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { I18nProvider } from "@multica/core/i18n/react";
+import { I18nProvider } from "@workpal/core/i18n/react";
 import type {
   Agent,
   AgentRuntime,
@@ -9,7 +9,7 @@ import type {
   IssueEnvironment,
   IssueEnvironmentActionRecord,
   IssueEnvironmentConfig,
-} from "@multica/core/types";
+} from "@workpal/core/types";
 import enCommon from "../../locales/en/common.json";
 import enIssues from "../../locales/en/issues.json";
 
@@ -24,8 +24,8 @@ let mockTasks: AgentTask[] = [];
 let mockAgents: Agent[] = [];
 let mockLocalDaemonId: string | null = null;
 
-vi.mock("@multica/core/issues/queries", async (importOriginal) => ({
-  ...(await importOriginal<typeof import("@multica/core/issues/queries")>()),
+vi.mock("@workpal/core/issues/queries", async (importOriginal) => ({
+  ...(await importOriginal<typeof import("@workpal/core/issues/queries")>()),
   issueEnvironmentsOptions: (wsId: string, issueId: string) => ({
     queryKey: ["issues", wsId, "environments", issueId],
     queryFn: async () => ({ environments: mockEnvironments, configs: mockConfigs, pending_starts: mockPendingStarts, failed_starts: mockFailedStarts }),
@@ -35,49 +35,49 @@ vi.mock("@multica/core/issues/queries", async (importOriginal) => ({
     queryFn: async () => mockTasks,
   }),
 }));
-vi.mock("@multica/core/runtimes/queries", async (importOriginal) => ({
-  ...(await importOriginal<typeof import("@multica/core/runtimes/queries")>()),
+vi.mock("@workpal/core/runtimes/queries", async (importOriginal) => ({
+  ...(await importOriginal<typeof import("@workpal/core/runtimes/queries")>()),
   runtimeListOptions: (wsId: string) => ({
     queryKey: ["runtimes", wsId, "list"],
     queryFn: async () => mockRuntimes,
   }),
 }));
-vi.mock("@multica/core/workspace/queries", async (importOriginal) => ({
-  ...(await importOriginal<typeof import("@multica/core/workspace/queries")>()),
+vi.mock("@workpal/core/workspace/queries", async (importOriginal) => ({
+  ...(await importOriginal<typeof import("@workpal/core/workspace/queries")>()),
   agentListOptions: (wsId: string) => ({
     queryKey: ["workspaces", wsId, "agents"],
     queryFn: async () => mockAgents,
   }),
 }));
-vi.mock("@multica/core/workspace/hooks", () => ({
+vi.mock("@workpal/core/workspace/hooks", () => ({
   useActorName: () => ({
     getActorName: (type: string, id: string) =>
       type === "member" ? (id === "user-1" ? "Jiayuan" : "Unknown") : mockAgents.find((a) => a.id === id)?.name ?? "Unknown Agent",
   }),
 }));
-vi.mock("@multica/core/hooks", () => ({ useWorkspaceId: () => "ws-1" }));
-vi.mock("@multica/core/auth", () => ({
+vi.mock("@workpal/core/hooks", () => ({ useWorkspaceId: () => "ws-1" }));
+vi.mock("@workpal/core/auth", () => ({
   useAuthStore: (select: (state: { user: { id: string } }) => unknown) => select({ user: { id: "user-1" } }),
 }));
 vi.mock("../../platform/use-local-daemon-status", () => ({
   useLocalDaemonStatus: () => ({ daemonId: mockLocalDaemonId, deviceName: null, running: !!mockLocalDaemonId }),
 }));
 const control = vi.hoisted(() => vi.fn());
-vi.mock("@multica/core/issues/environments", async (importOriginal) => ({
-  ...(await importOriginal<typeof import("@multica/core/issues/environments")>()),
+vi.mock("@workpal/core/issues/environments", async (importOriginal) => ({
+  ...(await importOriginal<typeof import("@workpal/core/issues/environments")>()),
   useControlIssueEnvironment: () => ({ mutate: control }),
 }));
 const createComment = vi.hoisted(() => vi.fn());
-vi.mock("@multica/core/issues/mutations", () => ({
+vi.mock("@workpal/core/issues/mutations", () => ({
   useCreateComment: () => ({ mutate: createComment }),
 }));
 const apiMock = vi.hoisted(() => ({
   readIssueEnvironmentLogs: vi.fn(),
   getIssueEnvironmentCommand: vi.fn(),
 }));
-vi.mock("@multica/core/api", () => ({ api: apiMock }));
+vi.mock("@workpal/core/api", () => ({ api: apiMock }));
 const copyText = vi.hoisted(() => vi.fn(async () => true));
-vi.mock("@multica/ui/lib/clipboard", () => ({ copyText }));
+vi.mock("@workpal/ui/lib/clipboard", () => ({ copyText }));
 const toastError = vi.hoisted(() => vi.fn());
 vi.mock("sonner", () => ({ toast: { error: toastError, success: vi.fn() } }));
 const focusEnvironment = vi.fn();
@@ -321,7 +321,7 @@ describe("IssueEnvironmentsSection", () => {
         local_key: "detected:app",
         source: "detected",
         kind: "app",
-        name: "Multica Canary multica-501",
+        name: "Workpal Canary workpal-501",
         label: "",
         url: "",
         port: null,
@@ -341,12 +341,12 @@ describe("IssueEnvironmentsSection", () => {
       renderSection();
 
       const row = await screen.findByTestId("environment-row");
-      expect(within(row).getByText("Multica Canary multica-501")).toBeVisible();
+      expect(within(row).getByText("Workpal Canary workpal-501")).toBeVisible();
       expect(within(row).queryByText(/localhost/)).not.toBeInTheDocument();
       expect(within(row).queryByRole("link")).not.toBeInTheDocument();
       expect(row).toHaveAttribute("title", expect.stringContaining("Remote debugging on localhost:9724"));
 
-      fireEvent.click(within(row).getByText("Multica Canary multica-501"));
+      fireEvent.click(within(row).getByText("Workpal Canary workpal-501"));
       fireEvent.click(within(row).getByRole("button", { name: "Switch to window" }));
       await waitFor(() => expect(focusEnvironment).toHaveBeenCalledTimes(2));
       expect(focusEnvironment).toHaveBeenCalledWith("detected:app");
@@ -375,7 +375,7 @@ describe("IssueEnvironmentsSection", () => {
 
       const row = await screen.findByTestId("environment-row");
       expect(within(row).queryByRole("button")).not.toBeInTheDocument();
-      fireEvent.click(within(row).getByText("Multica Canary multica-501"));
+      fireEvent.click(within(row).getByText("Workpal Canary workpal-501"));
       expect(focusEnvironment).not.toHaveBeenCalled();
     });
 
@@ -386,7 +386,7 @@ describe("IssueEnvironmentsSection", () => {
       renderSection();
 
       fireEvent.click(await screen.findByRole("button", { name: "Switch to window" }));
-      await waitFor(() => expect(toastError).toHaveBeenCalledWith("Multica Canary multica-501 is no longer running"));
+      await waitFor(() => expect(toastError).toHaveBeenCalledWith("Workpal Canary workpal-501 is no longer running"));
     });
 
     it("cannot be switched to from another machine", async () => {
@@ -396,22 +396,22 @@ describe("IssueEnvironmentsSection", () => {
 
       const row = await screen.findByTestId("environment-row");
       expect(within(row).queryByRole("button")).not.toBeInTheDocument();
-      expect(row).toHaveAttribute("title", expect.stringContaining("Runs on build-02. Switch to its window from Multica Desktop on that machine."));
+      expect(row).toHaveAttribute("title", expect.stringContaining("Runs on build-02. Switch to its window from Workpal Desktop on that machine."));
     });
 
     it("cannot be switched to on web", async () => {
       mockEnvironments = [app(), app({ id: "env-app-2", runtime_id: "rt-gone", name: "Other App" })];
       renderSection();
 
-      await screen.findByText("Multica Canary multica-501");
+      await screen.findByText("Workpal Canary workpal-501");
       const rows = screen.getAllByTestId("environment-row");
       for (const row of rows) {
         expect(within(row).queryByRole("button")).not.toBeInTheDocument();
         expect(within(row).queryByRole("link")).not.toBeInTheDocument();
       }
       const row = (name: string) => rows.find((r) => within(r).queryByText(name))!;
-      expect(row("Multica Canary multica-501")).toHaveAttribute("title", expect.stringContaining("Runs on studio.local. Switch to its window from Multica Desktop on that machine."));
-      expect(row("Other App")).toHaveAttribute("title", expect.stringContaining("Switch to its window from Multica Desktop on the machine running it."));
+      expect(row("Workpal Canary workpal-501")).toHaveAttribute("title", expect.stringContaining("Runs on studio.local. Switch to its window from Workpal Desktop on that machine."));
+      expect(row("Other App")).toHaveAttribute("title", expect.stringContaining("Switch to its window from Workpal Desktop on the machine running it."));
       expect(focusEnvironment).not.toHaveBeenCalled();
     });
 
@@ -422,7 +422,7 @@ describe("IssueEnvironmentsSection", () => {
 
       fireEvent.click(await screen.findByRole("button", { name: /1 ended/ }));
       const ended = screen.getAllByTestId("environment-row")[1]!;
-      expect(within(ended).getByText("Multica Canary multica-501")).toBeVisible();
+      expect(within(ended).getByText("Workpal Canary workpal-501")).toBeVisible();
       expect(within(ended).queryByRole("button")).not.toBeInTheDocument();
     });
   });
@@ -643,13 +643,13 @@ describe("IssueEnvironmentsSection", () => {
     expect(createComment).toHaveBeenCalledTimes(1);
     const [{ content }] = createComment.mock.calls[0]!;
     expect(content).toMatch(/^\[@Lambda\]\(mention:\/\/agent\/agent-1\) /);
-    expect(content).toContain("multica env start");
+    expect(content).toContain("workpal env start");
   });
 
   it("shows the agent preparing the environment while its run is under way", async () => {
     mockTasks = [
       task({}),
-      task({ id: "task-2", status: "running", created_at: new Date().toISOString(), trigger_summary: "@Lambda Start the environment: get this issue's code ready, then run multica env start" }),
+      task({ id: "task-2", status: "running", created_at: new Date().toISOString(), trigger_summary: "@Lambda Start the environment: get this issue's code ready, then run workpal env start" }),
     ];
     renderSection();
     expect(await screen.findByText("Lambda is preparing the environment")).toBeVisible();

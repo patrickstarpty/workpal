@@ -11,7 +11,7 @@ import (
 	"slices"
 	"time"
 
-	"github.com/multica-ai/multica/server/internal/daemon/execenv"
+	"workpal.local/workpal/server/internal/daemon/execenv"
 )
 
 const chatArtifactSweepFile = ".gc_chat_artifacts"

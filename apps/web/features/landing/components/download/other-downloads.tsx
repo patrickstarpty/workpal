@@ -1,15 +1,15 @@
 "use client";
 
 import Link from "@/features/landing/components/landing-link";
-import { ChevronDown, ChevronRight } from "@multica/ui/icons";
-import { cn } from "@multica/ui/lib/utils";
+import { ChevronDown, ChevronRight } from "@workpal/ui/icons";
+import { cn } from "@workpal/ui/lib/utils";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@multica/ui/components/ui/dropdown-menu";
+} from "@workpal/ui/components/ui/dropdown-menu";
 import { useLocale } from "../../i18n";
 import { focusRing } from "../../site/primitives";
 import { formatSize, osOf, platformOf, type PrimaryDownloadKey } from "../../utils/download-target";

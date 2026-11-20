@@ -1,8 +1,8 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { fireEvent, screen, within } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { chatSessionsOptions, pendingChatTasksOptions } from "@multica/core/chat/queries";
-import type { ChatSession } from "@multica/core/types";
+import { chatSessionsOptions, pendingChatTasksOptions } from "@workpal/core/chat/queries";
+import type { ChatSession } from "@workpal/core/types";
 import { NavigationProvider, type NavigationAdapter } from "../../navigation";
 import { renderWithI18n } from "../../test/i18n";
 import { ChatBar } from "./chat-bar";
@@ -25,18 +25,18 @@ const h = vi.hoisted(() => ({
   },
 }));
 
-vi.mock("@multica/core/chat", () => ({
+vi.mock("@workpal/core/chat", () => ({
   useChatStore: Object.assign(
     (selector: (state: typeof h.chat) => unknown) => selector(h.chat),
     { getState: () => h.chat },
   ),
 }));
-vi.mock("@multica/core/hooks", () => ({ useWorkspaceId: () => "ws-test" }));
-vi.mock("@multica/core/paths", () => ({
+vi.mock("@workpal/core/hooks", () => ({ useWorkspaceId: () => "ws-test" }));
+vi.mock("@workpal/core/paths", () => ({
   useWorkspacePaths: () => ({ chat: () => "/acme/chat" }),
 }));
-vi.mock("@multica/core/api", async (importOriginal) => ({
-  ...(await importOriginal<typeof import("@multica/core/api")>()),
+vi.mock("@workpal/core/api", async (importOriginal) => ({
+  ...(await importOriginal<typeof import("@workpal/core/api")>()),
   api: { getBaseUrl: () => "http://localhost" },
 }));
 
@@ -138,7 +138,7 @@ describe("ChatBar", () => {
 
     const chip = screen.getByRole("button", { name: "Weekly report, Unread" });
     expect(chip).toHaveAttribute("aria-pressed", "true");
-    expect(screen.getByRole("button", { name: "Ask Multica" })).toHaveAttribute("aria-pressed", "false");
+    expect(screen.getByRole("button", { name: "Ask Workpal" })).toHaveAttribute("aria-pressed", "false");
 
     fireEvent.click(chip);
 
@@ -184,12 +184,12 @@ describe("ChatBar", () => {
     expect(h.chat.dismissChatFromBar).toHaveBeenCalledWith("Billing progress", SESSIONS[1]!.updated_at);
   });
 
-  it("starts a new chat from Ask Multica, leaving the open chat behind", () => {
+  it("starts a new chat from Ask Workpal, leaving the open chat behind", () => {
     h.chat.isOpen = true;
     h.chat.activeSessionId = "Weekly report";
     renderBar(SESSIONS);
 
-    const ask = screen.getByRole("button", { name: "Ask Multica" });
+    const ask = screen.getByRole("button", { name: "Ask Workpal" });
     expect(ask).toHaveAttribute("aria-pressed", "false");
     fireEvent.click(ask);
 
@@ -197,12 +197,12 @@ describe("ChatBar", () => {
     expect(h.chat.setOpen).not.toHaveBeenCalled();
   });
 
-  it("closes the window from Ask Multica while it shows the new chat", () => {
+  it("closes the window from Ask Workpal while it shows the new chat", () => {
     h.chat.isOpen = true;
     h.chat.activeSessionId = null;
     renderBar(SESSIONS);
 
-    const ask = screen.getByRole("button", { name: "Ask Multica" });
+    const ask = screen.getByRole("button", { name: "Ask Workpal" });
     expect(ask).toHaveAttribute("aria-pressed", "true");
     fireEvent.click(ask);
 

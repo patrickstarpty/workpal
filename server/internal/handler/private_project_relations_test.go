@@ -13,7 +13,7 @@ import (
 
 	"github.com/google/uuid"
 
-	"github.com/multica-ai/multica/server/internal/testutil"
+	"workpal.local/workpal/server/internal/testutil"
 )
 
 // Relations and indirect ids (MUL-8472): an object a request reaches through

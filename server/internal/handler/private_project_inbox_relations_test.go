@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"testing"
 
-	"github.com/multica-ai/multica/server/internal/testutil"
+	"workpal.local/workpal/server/internal/testutil"
 )
 
 type inboxItemState struct{ read, archived bool }

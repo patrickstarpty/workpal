@@ -1,18 +1,18 @@
 import { afterEach, expect, it, vi } from "vitest";
 import { act, cleanup, renderHook, waitFor } from "@testing-library/react";
 import { QueryClientProvider } from "@tanstack/react-query";
-import { createQueryClient } from "@multica/core/query-client";
-import { setApiInstance } from "@multica/core/api";
-import type { ApiClient } from "@multica/core/api/client";
-import { I18nProvider } from "@multica/core/i18n/react";
+import { createQueryClient } from "@workpal/core/query-client";
+import { setApiInstance } from "@workpal/core/api";
+import type { ApiClient } from "@workpal/core/api/client";
+import { I18nProvider } from "@workpal/core/i18n/react";
 import { toast } from "sonner";
 import enInbox from "../../locales/en/inbox.json";
 import { useUnsubscribeArchive } from "./use-unsubscribe-archive";
 import { useKeptOpenInboxRow } from "./use-kept-open-inbox-row";
-import { useInboxSelectionStore } from "@multica/core/inbox/selection-store";
-import type { InboxItem } from "@multica/core/types";
+import { useInboxSelectionStore } from "@workpal/core/inbox/selection-store";
+import type { InboxItem } from "@workpal/core/types";
 
-vi.mock("@multica/core/hooks", () => ({ useWorkspaceId: () => "ws-review" }));
+vi.mock("@workpal/core/hooks", () => ({ useWorkspaceId: () => "ws-review" }));
 vi.mock("sonner", () => ({ toast: { success: vi.fn(), error: vi.fn() } }));
 afterEach(() => { cleanup(); vi.clearAllMocks(); });
 

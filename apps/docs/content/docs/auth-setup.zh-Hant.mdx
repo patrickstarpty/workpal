@@ -6,11 +6,11 @@ description: 配置信箱驗證碼、Google 登入和新使用者註冊範圍。
 import { Callout } from "fumadocs-ui/components/callout";
 import { Step, Steps } from "fumadocs-ui/components/steps";
 
-Multica 預設使用信箱驗證碼登入，也可以增加 Google OAuth。已經存在的使用者始終可以再次登入；註冊限制只決定是否允許建立新帳號。
+Workpal 預設使用信箱驗證碼登入，也可以增加 Google OAuth。已經存在的使用者始終可以再次登入；註冊限制只決定是否允許建立新帳號。
 
 ## 信箱驗證碼
 
-使用者輸入信箱後，Multica 會傳送一個 6 位驗證碼。驗證碼 10 分鐘內有效，驗證成功後瀏覽器獲得登入 cookie。
+使用者輸入信箱後，Workpal 會傳送一個 6 位驗證碼。驗證碼 10 分鐘內有效，驗證成功後瀏覽器獲得登入 cookie。
 
 郵件可以透過 Resend 或 SMTP 傳送。兩者同時配置時，`SMTP_HOST` 優先。
 
@@ -48,7 +48,7 @@ RESEND_FROM_EMAIL=noreply@example.com
 ```dotenv
 SMTP_HOST=smtp.example.com
 SMTP_PORT=587
-SMTP_USERNAME=multica
+SMTP_USERNAME=workpal
 SMTP_PASSWORD=<password>
 SMTP_FROM_EMAIL=noreply@example.com
 ```
@@ -81,13 +81,13 @@ SMTP_EHLO_NAME=mail.example.com
 
 ```dotenv
 APP_ENV=development
-MULTICA_DEV_VERIFICATION_CODE=888888
+WORKPAL_DEV_VERIFICATION_CODE=888888
 ```
 
 驗證碼必須是 6 位數字。`APP_ENV=production` 時固定驗證碼會被忽略。
 
 <Callout type="warning">
-不要在公網實例中啟用固定驗證碼。生產環境的組合是 `APP_ENV=production` 加空的 `MULTICA_DEV_VERIFICATION_CODE`。
+不要在公網實例中啟用固定驗證碼。生產環境的組合是 `APP_ENV=production` 加空的 `WORKPAL_DEV_VERIFICATION_CODE`。
 </Callout>
 
 ## Google 登入
@@ -100,10 +100,10 @@ MULTICA_DEV_VERIFICATION_CODE=888888
 </Step>
 <Step>
 
-把 Multica 前端的回呼地址加入 **Authorized redirect URIs**：
+把 Workpal 前端的回呼地址加入 **Authorized redirect URIs**：
 
 ```text
-https://multica.example.com/auth/callback
+https://workpal.example.com/auth/callback
 ```
 
 </Step>
@@ -114,7 +114,7 @@ https://multica.example.com/auth/callback
 ```dotenv
 GOOGLE_CLIENT_ID=xxxxx.apps.googleusercontent.com
 GOOGLE_CLIENT_SECRET=GOCSPX-xxxxxxxxxxxxxxx
-GOOGLE_REDIRECT_URI=https://multica.example.com/auth/callback
+GOOGLE_REDIRECT_URI=https://workpal.example.com/auth/callback
 ```
 
 </Step>

@@ -26,8 +26,8 @@ test("workspace unread stays visible before pinning and after unpinning", async 
       await db.end();
     }
     await page.addInitScript((token) => {
-      localStorage.setItem("multica_token", token!);
-      localStorage.setItem("multica:chat:isOpen", "false");
+      localStorage.setItem("workpal_token", token!);
+      localStorage.setItem("workpal:chat:isOpen", "false");
     }, viewer.getToken());
     await page.setViewportSize({ width: 1280, height: 820 });
     await page.goto(`/${home.slug}/issues`, { waitUntil: "domcontentloaded" });

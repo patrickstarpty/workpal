@@ -5,7 +5,7 @@ import (
 	"os"
 	"testing"
 
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
+	db "workpal.local/workpal/server/pkg/db/generated"
 )
 
 func TestBuildQuickActionBodySharedContract(t *testing.T) {

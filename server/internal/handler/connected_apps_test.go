@@ -16,13 +16,13 @@ import (
 	"time"
 
 	"github.com/jackc/pgx/v5/pgtype"
-	"github.com/multica-ai/multica/server/internal/connectedapps"
-	composio "github.com/multica-ai/multica/server/internal/integrations/composio"
-	"github.com/multica-ai/multica/server/internal/middleware"
-	"github.com/multica-ai/multica/server/internal/testutil"
-	"github.com/multica-ai/multica/server/internal/util"
-	sdk "github.com/multica-ai/multica/server/pkg/composio"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
+	"workpal.local/workpal/server/internal/connectedapps"
+	composio "workpal.local/workpal/server/internal/integrations/composio"
+	"workpal.local/workpal/server/internal/middleware"
+	"workpal.local/workpal/server/internal/testutil"
+	"workpal.local/workpal/server/internal/util"
+	sdk "workpal.local/workpal/server/pkg/composio"
+	db "workpal.local/workpal/server/pkg/db/generated"
 )
 
 // appsFakeSDK serves a small Gmail toolkit and records executions.
@@ -107,8 +107,8 @@ func newAppsFixture(t *testing.T) *appsFixture {
 	fake := &appsFakeSDK{}
 	svc, err := composio.NewService(fake, testHandler.Queries, composio.Config{
 		StateSecret:     []byte("apps-test-secret"),
-		CallbackBaseURL: "https://multica.ai",
-		FrontendBaseURL: "https://multica.ai",
+		CallbackBaseURL: "https://workpal.invalid",
+		FrontendBaseURL: "https://workpal.invalid",
 	})
 	if err != nil {
 		t.Fatalf("composio.NewService: %v", err)
@@ -119,7 +119,7 @@ func newAppsFixture(t *testing.T) *appsFixture {
 		Queries:       h.Queries,
 		Composio:      svc,
 		TokenSecret:   connectedapps.DeriveTokenSecret([]byte("apps-test-secret")),
-		PublicBaseURL: "https://api.multica.test",
+		PublicBaseURL: "https://api.workpal.test",
 	})
 	if err != nil {
 		t.Fatalf("connectedapps.New: %v", err)

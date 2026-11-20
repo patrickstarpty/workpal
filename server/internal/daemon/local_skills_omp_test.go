@@ -10,7 +10,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/multica-ai/multica/server/pkg/agent"
+	"workpal.local/workpal/server/pkg/agent"
 )
 
 func TestOmpLocalSkillsListAndImportUseSelectedProfile(t *testing.T) {

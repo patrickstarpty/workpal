@@ -4,14 +4,14 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuSubContent,
   DropdownMenuSeparator,
-} from "@multica/ui/components/ui/dropdown-menu";
+} from "@workpal/ui/components/ui/dropdown-menu";
 import {
   ContextMenuItem,
   ContextMenuSub,
   ContextMenuSubTrigger,
   ContextMenuSubContent,
   ContextMenuSeparator,
-} from "@multica/ui/components/ui/context-menu";
+} from "@workpal/ui/components/ui/context-menu";
 
 // Both Dropdown and Context menu wrappers expose an API-compatible surface
 // (variant, inset, onClick, etc.). We bundle the primitives we need into a

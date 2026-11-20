@@ -1,4 +1,4 @@
-// Package qoderruntime bridges Multica's daemon task protocol to Qoder's managed sessions API.
+// Package qoderruntime bridges Workpal's daemon task protocol to Qoder's managed sessions API.
 package qoderruntime
 
 import (
@@ -14,7 +14,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/multica-ai/multica/server/pkg/httptransport"
+	"workpal.local/workpal/server/pkg/httptransport"
 )
 
 type api struct {

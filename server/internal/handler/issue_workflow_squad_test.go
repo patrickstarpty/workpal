@@ -9,9 +9,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/multica-ai/multica/server/internal/service"
-	"github.com/multica-ai/multica/server/internal/testutil"
-	"github.com/multica-ai/multica/server/pkg/protocol"
+	"workpal.local/workpal/server/internal/service"
+	"workpal.local/workpal/server/internal/testutil"
+	"workpal.local/workpal/server/pkg/protocol"
 )
 
 func TestWorkflowHandoffCancelsDeferredSquadStages(t *testing.T) {

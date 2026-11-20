@@ -17,23 +17,23 @@ import {
   Unlink,
   UserMinus,
   X,
-} from "@multica/ui/icons";
-import { copyText } from "@multica/ui/lib/clipboard";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { useWorkspacePaths } from "@multica/core/paths";
-import { PRIORITY_CONFIG, PRIORITY_DISPLAY_ORDER } from "@multica/core/issues/config";
-import { addDaysDateOnly, todayDateOnly } from "@multica/core/issues/date";
-import type { CommonIssueFields } from "@multica/core/issues/batch";
-import { projectListOptions } from "@multica/core/projects/queries";
-import { propertyListOptions } from "@multica/core/properties";
-import { paletteColor } from "@multica/core/appearance";
+} from "@workpal/ui/icons";
+import { copyText } from "@workpal/ui/lib/clipboard";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { useWorkspacePaths } from "@workpal/core/paths";
+import { PRIORITY_CONFIG, PRIORITY_DISPLAY_ORDER } from "@workpal/core/issues/config";
+import { addDaysDateOnly, todayDateOnly } from "@workpal/core/issues/date";
+import type { CommonIssueFields } from "@workpal/core/issues/batch";
+import { projectListOptions } from "@workpal/core/projects/queries";
+import { propertyListOptions } from "@workpal/core/properties";
+import { paletteColor } from "@workpal/core/appearance";
 import type {
   BatchIssuePropertyOps,
   Issue,
   IssueProperty,
   IssuePropertyValue,
   UpdateIssueRequest,
-} from "@multica/core/types";
+} from "@workpal/core/types";
 import type { MenuPrimitives } from "../../common/menu-primitives";
 import { PropertyIcon } from "../../common/property-icon";
 import { ProjectIcon } from "../../projects/components/project-icon";

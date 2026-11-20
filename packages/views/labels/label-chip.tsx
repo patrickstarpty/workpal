@@ -1,12 +1,12 @@
 "use client";
 
 import type { CSSProperties } from "react";
-import type { Label } from "@multica/core/types";
-import { labelTextColor, paletteColor, paletteSlot } from "@multica/core/appearance";
-import { X } from "@multica/ui/icons";
-import { TooltipHint } from "@multica/ui/components/common/tooltip-hint";
+import type { Label } from "@workpal/core/types";
+import { labelTextColor, paletteColor, paletteSlot } from "@workpal/core/appearance";
+import { X } from "@workpal/ui/icons";
+import { TooltipHint } from "@workpal/ui/components/common/tooltip-hint";
 import { useT } from "../i18n";
-import { TruncatedTooltip } from "@multica/ui/components/common/truncated-tooltip";
+import { TruncatedTooltip } from "@workpal/ui/components/common/truncated-tooltip";
 
 interface LabelChipProps {
   label: Label;

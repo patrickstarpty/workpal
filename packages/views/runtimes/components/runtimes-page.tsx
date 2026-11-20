@@ -17,43 +17,43 @@ import {
   Plus,
   Server,
   SquareTerminal,
-} from "@multica/ui/icons";
+} from "@workpal/ui/icons";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
-import { useAuthStore } from "@multica/core/auth";
-import { useWorkspaceId } from "@multica/core/hooks";
+import { useAuthStore } from "@workpal/core/auth";
+import { useWorkspaceId } from "@workpal/core/hooks";
 import {
   memberNeedsMikaSetup,
   useBootstrapMika,
-} from "@multica/core/onboarding";
+} from "@workpal/core/onboarding";
 import { MIKA_PLACEHOLDER_EMOJI } from "../../onboarding/components/mika-intro";
 import {
   useRequiredWorkspaceSlug,
   useWorkspacePaths,
-} from "@multica/core/paths";
-import { agentTaskSnapshotOptions } from "@multica/core/agents";
-import { chatSessionsOptions } from "@multica/core/chat/queries";
-import { runtimeProfileListOptions } from "@multica/core/runtimes";
+} from "@workpal/core/paths";
+import { agentTaskSnapshotOptions } from "@workpal/core/agents";
+import { chatSessionsOptions } from "@workpal/core/chat/queries";
+import { runtimeProfileListOptions } from "@workpal/core/runtimes";
 import {
   runtimeListOptions,
   runtimeKeys,
-} from "@multica/core/runtimes/queries";
-import { useWSEvent } from "@multica/core/realtime";
+} from "@workpal/core/runtimes/queries";
+import { useWSEvent } from "@workpal/core/realtime";
 import {
   agentListOptions,
   memberListOptions,
-} from "@multica/core/workspace/queries";
-import type { AgentRuntime, MemberWithUser } from "@multica/core/types";
-import type { QoderConnection } from "@multica/core/runtimes/qoder";
-import { Badge } from "@multica/ui/components/ui/badge";
-import { Button, buttonVariants } from "@multica/ui/components/ui/button";
+} from "@workpal/core/workspace/queries";
+import type { AgentRuntime, MemberWithUser } from "@workpal/core/types";
+import type { QoderConnection } from "@workpal/core/runtimes/qoder";
+import { Badge } from "@workpal/ui/components/ui/badge";
+import { Button, buttonVariants } from "@workpal/ui/components/ui/button";
 import {
   Dialog,
   DialogContent,
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "@multica/ui/components/ui/dialog";
+} from "@workpal/ui/components/ui/dialog";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -62,7 +62,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@multica/ui/components/ui/dropdown-menu";
+} from "@workpal/ui/components/ui/dropdown-menu";
 import {
   MikaRuntimeChoice,
   type MikaRuntimeSelection,
@@ -81,10 +81,10 @@ import {
   type CollectionColumn,
   type CollectionGroup,
 } from "../../layout/collection-list";
-import { cn } from "@multica/ui/lib/utils";
+import { cn } from "@workpal/ui/lib/utils";
 import { useNavigation } from "../../navigation";
 import { getMikaOnboarding, pickContentLang } from "../../onboarding/templates";
-import { qoderOptions } from "@multica/core/runtimes/qoder";
+import { qoderOptions } from "@workpal/core/runtimes/qoder";
 import { QODER_RUNTIME_LOCATOR } from "./qoder-detail-page";
 import { RemoteRuntimeDialog } from "./remote-runtime-dialog";
 import { ConnectRemoteDialog } from "./connect-remote-dialog";

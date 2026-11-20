@@ -1,12 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { FolderKanban } from "@multica/ui/icons";
+import { FolderKanban } from "@workpal/ui/icons";
 import { useQuery } from "@tanstack/react-query";
-import { projectListOptions } from "@multica/core/projects/queries";
-import { isProjectArchived, selectableProjects } from "@multica/core/projects";
-import { useWorkspaceId } from "@multica/core/hooks";
-import type { UpdateIssueRequest } from "@multica/core/types";
+import { projectListOptions } from "@workpal/core/projects/queries";
+import { isProjectArchived, selectableProjects } from "@workpal/core/projects";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import type { UpdateIssueRequest } from "@workpal/core/types";
 import { ProjectIcon } from "./project-icon";
 import { ArchivedProjectTag } from "./project-archive";
 import {

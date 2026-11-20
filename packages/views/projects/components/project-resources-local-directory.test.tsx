@@ -68,25 +68,25 @@ vi.mock("@tanstack/react-query", () => ({
   queryOptions: (options: unknown) => options,
 }));
 
-vi.mock("@multica/core/projects", () => ({
+vi.mock("@workpal/core/projects", () => ({
   projectResourcesOptions: () => ({ queryKey: ["project-resources"], queryFn: vi.fn() }),
   useCreateProjectResource: () => ({ mutateAsync: state.createMock, isPending: false }),
   useUpdateProjectResource: () => ({ mutateAsync: state.updateMock }),
   useDeleteProjectResource: () => ({ mutateAsync: vi.fn() }),
 }));
 
-vi.mock("@multica/core/config", () => ({
+vi.mock("@workpal/core/config", () => ({
   useConfigStore: (selector: (s: { localWorktreeSupported: boolean }) => unknown) =>
     selector({ localWorktreeSupported: true }),
 }));
 
-vi.mock("@multica/core/runtimes", async (importOriginal) => ({
-  ...(await importOriginal<typeof import("@multica/core/runtimes")>()),
+vi.mock("@workpal/core/runtimes", async (importOriginal) => ({
+  ...(await importOriginal<typeof import("@workpal/core/runtimes")>()),
   runtimeListOptions: () => ({ queryKey: ["runtimes"], queryFn: vi.fn() }),
   runtimeAdvertisesLocalWorktree: () => true,
 }));
-vi.mock("@multica/core/hooks", () => ({ useWorkspaceId: () => "workspace-1" }));
-vi.mock("@multica/core/paths", () => ({
+vi.mock("@workpal/core/hooks", () => ({ useWorkspaceId: () => "workspace-1" }));
+vi.mock("@workpal/core/paths", () => ({
   useCurrentWorkspace: () => ({ id: "workspace-1", slug: "ws", repos: [] }),
 }));
 vi.mock("../../platform/local-directory", () => ({

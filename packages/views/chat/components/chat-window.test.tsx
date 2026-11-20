@@ -3,10 +3,10 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { act, fireEvent, render, screen } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { createChatStore, registerChatStore, useChatStore } from "@multica/core/chat";
-import { chatSessionsOptions } from "@multica/core/chat/queries";
-import type { ChatSession } from "@multica/core/types";
-import { I18nProvider } from "@multica/core/i18n/react";
+import { createChatStore, registerChatStore, useChatStore } from "@workpal/core/chat";
+import { chatSessionsOptions } from "@workpal/core/chat/queries";
+import type { ChatSession } from "@workpal/core/types";
+import { I18nProvider } from "@workpal/core/i18n/react";
 import enCommon from "../../locales/en/common.json";
 import enChat from "../../locales/en/chat.json";
 
@@ -25,24 +25,24 @@ registerChatStore(
 
 // The header is what's under test, so the conversation body, composer and
 // network layer are stubbed; requests stay pending forever.
-vi.mock("@multica/core/api", async (importOriginal) => ({
-  ...(await importOriginal<typeof import("@multica/core/api")>()),
+vi.mock("@workpal/core/api", async (importOriginal) => ({
+  ...(await importOriginal<typeof import("@workpal/core/api")>()),
   api: new Proxy({}, { get: () => () => new Promise(() => {}) }),
 }));
-vi.mock("@multica/core/auth", () => ({
+vi.mock("@workpal/core/auth", () => ({
   useAuthStore: (sel: (s: { user: { id: string } }) => unknown) =>
     sel({ user: { id: "user-1" } }),
 }));
-vi.mock("@multica/core/hooks", async (importOriginal) => ({
-  ...(await importOriginal<typeof import("@multica/core/hooks")>()),
+vi.mock("@workpal/core/hooks", async (importOriginal) => ({
+  ...(await importOriginal<typeof import("@workpal/core/hooks")>()),
   useWorkspaceId: () => "ws-1",
 }));
-vi.mock("@multica/core/agents", async (importOriginal) => ({
-  ...(await importOriginal<typeof import("@multica/core/agents")>()),
+vi.mock("@workpal/core/agents", async (importOriginal) => ({
+  ...(await importOriginal<typeof import("@workpal/core/agents")>()),
   useAgentPresenceDetail: () => "loading",
   useWorkspaceAgentAvailability: () => "loading",
 }));
-vi.mock("@multica/ui/hooks/use-mobile", () => ({
+vi.mock("@workpal/ui/hooks/use-mobile", () => ({
   useIsMobile: () => false,
   useIsCompact: () => false,
 }));

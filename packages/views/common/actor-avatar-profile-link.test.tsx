@@ -18,7 +18,7 @@ import { DeferredPopup } from "./deferred-popup";
 
 const actorDirectory = vi.hoisted(() => ({ known: true as boolean | undefined }));
 
-vi.mock("@multica/core/workspace/hooks", () => ({
+vi.mock("@workpal/core/workspace/hooks", () => ({
   useActorName: () => ({
     getActorName: () => "Ada Lovelace",
     getActorInitials: () => "AL",
@@ -27,7 +27,7 @@ vi.mock("@multica/core/workspace/hooks", () => ({
   }),
 }));
 
-vi.mock("@multica/core/paths", () => ({
+vi.mock("@workpal/core/paths", () => ({
   useWorkspacePaths: () => ({
     memberDetail: (id: string) => `/acme/members/${id}`,
     agentDetail: (id: string) => `/acme/agents/${id}`,
@@ -36,7 +36,7 @@ vi.mock("@multica/core/paths", () => ({
   useCurrentWorkspace: () => ({ id: "ws1", slug: "acme" }),
 }));
 
-vi.mock("@multica/core/agents", () => ({
+vi.mock("@workpal/core/agents", () => ({
   useAgentPresenceDetail: () => ({ availability: "offline", workload: null }),
 }));
 

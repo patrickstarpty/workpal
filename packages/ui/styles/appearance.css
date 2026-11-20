@@ -81,13 +81,13 @@ html[lang="zh-TW"] {
 
 /* ── Backdrop and glass ─────────────────────────────────────────────────────
  * A theme that sets --backdrop gets a layer under the whole window,
- * #multica-backdrop, which AppearanceSync paints and keeps; it also marks
+ * #workpal-backdrop, which AppearanceSync paints and keeps; it also marks
  * <html> with data-backdrop while the mode in use has one. The frame and the
  * page then turn to glass: their own colours at the glass opacity, mixed here
  * on <html> from the theme's opaque values, with the backdrop blurred behind
  * them. theme-check.ts measures contrast on the same mixes. */
 
-#multica-backdrop {
+#workpal-backdrop {
     position: fixed;
     inset: 0;
     z-index: -1;
@@ -96,7 +96,7 @@ html[lang="zh-TW"] {
     background-color: var(--backdrop-color, var(--app-shell));
 }
 
-#multica-backdrop > div {
+#workpal-backdrop > div {
     position: absolute;
     inset: calc(-2 * var(--frame-glass-blur, var(--glass-blur, 0px)));
     filter: blur(var(--frame-glass-blur, var(--glass-blur, 0px)));

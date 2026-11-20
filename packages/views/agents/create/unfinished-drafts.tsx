@@ -1,17 +1,17 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronRight, MessageSquare } from "@multica/ui/icons";
-import { decodeBuilderInput, stripBuilderDraft } from "@multica/core/agents";
-import type { AgentBuilderSessionSummary } from "@multica/core/types";
+import { ChevronRight, MessageSquare } from "@workpal/ui/icons";
+import { decodeBuilderInput, stripBuilderDraft } from "@workpal/core/agents";
+import type { AgentBuilderSessionSummary } from "@workpal/core/types";
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
-} from "@multica/ui/components/ui/dialog";
-import { cn } from "@multica/ui/lib/utils";
+} from "@workpal/ui/components/ui/dialog";
+import { cn } from "@workpal/ui/lib/utils";
 import { useT, useTimeAgo } from "../../i18n";
 
 /**

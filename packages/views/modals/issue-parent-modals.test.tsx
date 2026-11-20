@@ -11,11 +11,11 @@ const mocks = vi.hoisted(() => ({
 }));
 
 vi.mock("sonner", () => ({ toast: mocks.toast }));
-vi.mock("@multica/core/hooks", () => ({ useWorkspaceId: () => "ws-1" }));
-vi.mock("@multica/core/issues/mutations", () => ({
+vi.mock("@workpal/core/hooks", () => ({ useWorkspaceId: () => "ws-1" }));
+vi.mock("@workpal/core/issues/mutations", () => ({
   useUpdateIssue: () => ({ mutateAsync: mocks.mutateAsync }),
 }));
-vi.mock("@multica/core/issues/queries", () => ({
+vi.mock("@workpal/core/issues/queries", () => ({
   issueDetailOptions: (_wsId: string, issueId: string) => ({
     queryKey: ["issues", "detail", issueId],
   }),

@@ -1,8 +1,8 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { DevToolbar } from "@multica/views/dev-toolbar";
-import { useNavigation } from "@multica/views/navigation";
+import { DevToolbar } from "@workpal/views/dev-toolbar";
+import { useNavigation } from "@workpal/views/navigation";
 
 export function WebDevToolbar({ apiUrl }: { apiUrl: string }) {
   const pathname = usePathname();

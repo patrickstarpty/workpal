@@ -1,9 +1,9 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import type { AppSpaceId } from "@multica/core/paths";
-import { cn } from "@multica/ui/lib/utils";
-import { useSidebar } from "@multica/ui/components/ui/sidebar";
+import type { AppSpaceId } from "@workpal/core/paths";
+import { cn } from "@workpal/ui/lib/utils";
+import { useSidebar } from "@workpal/ui/components/ui/sidebar";
 import { useAppShell } from "./app-shell-context";
 import { PanelResizeHandle } from "./panel-resize-handle";
 import { AutopilotsPanel } from "./panels/autopilots-panel";

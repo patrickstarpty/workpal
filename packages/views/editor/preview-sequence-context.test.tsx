@@ -8,7 +8,7 @@ import {
 } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useState, type ReactElement } from "react";
-import type { Attachment } from "@multica/core/types";
+import type { Attachment } from "@workpal/core/types";
 
 const { downloadMock, getBaseUrlMock, getAttachmentMock, toastErrorMock } = vi.hoisted(() => ({
   downloadMock: vi.fn(),
@@ -19,7 +19,7 @@ const { downloadMock, getBaseUrlMock, getAttachmentMock, toastErrorMock } = vi.h
 
 vi.mock("../platform", () => ({ openExternal: vi.fn() }));
 
-vi.mock("@multica/core/api", () => ({
+vi.mock("@workpal/core/api", () => ({
   api: {
     getBaseUrl: getBaseUrlMock,
     getAttachmentTextContent: vi.fn(),

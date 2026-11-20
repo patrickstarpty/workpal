@@ -7,11 +7,11 @@ import (
 	"testing"
 
 	"github.com/google/uuid"
-	"github.com/multica-ai/multica/server/internal/analytics"
-	"github.com/multica-ai/multica/server/internal/auth"
-	"github.com/multica-ai/multica/server/internal/events"
-	"github.com/multica-ai/multica/server/internal/realtime"
-	dbfx "github.com/multica-ai/multica/server/internal/testutil"
+	"workpal.local/workpal/server/internal/analytics"
+	"workpal.local/workpal/server/internal/auth"
+	"workpal.local/workpal/server/internal/events"
+	"workpal.local/workpal/server/internal/realtime"
+	dbfx "workpal.local/workpal/server/internal/testutil"
 )
 
 // TestPrivateProjectOwnerRecoveryRejectsMachineCredentials runs the real
@@ -64,7 +64,7 @@ func TestPrivateProjectOwnerRecoveryRejectsMachineCredentials(t *testing.T) {
 		_ = json.NewEncoder(w).Encode(map[string]any{"valid": true, "owner_id": f.UserID})
 	}))
 	t.Cleanup(fleet.Close)
-	t.Setenv("MULTICA_CLOUD_URL", fleet.URL)
+	t.Setenv("WORKPAL_CLOUD_URL", fleet.URL)
 	router, _ := NewRouterWithOptions(testPool, realtime.NewHub(), events.New(), analytics.NoopClient{}, nil, RouterOptions{})
 
 	call := func(t *testing.T, method, path, token string) *dbfx.Response {

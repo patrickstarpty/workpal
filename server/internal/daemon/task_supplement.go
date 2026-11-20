@@ -11,8 +11,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/multica-ai/multica/server/pkg/agent"
-	"github.com/multica-ai/multica/server/pkg/protocol"
+	"workpal.local/workpal/server/pkg/agent"
+	"workpal.local/workpal/server/pkg/protocol"
 )
 
 const (

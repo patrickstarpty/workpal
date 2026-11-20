@@ -11,11 +11,11 @@ import (
 
 	"github.com/gorilla/websocket"
 	"github.com/jackc/pgx/v5"
-	"github.com/multica-ai/multica/server/internal/daemonws"
-	"github.com/multica-ai/multica/server/internal/service"
-	"github.com/multica-ai/multica/server/internal/testutil"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
-	"github.com/multica-ai/multica/server/pkg/protocol"
+	"workpal.local/workpal/server/internal/daemonws"
+	"workpal.local/workpal/server/internal/service"
+	"workpal.local/workpal/server/internal/testutil"
+	db "workpal.local/workpal/server/pkg/db/generated"
+	"workpal.local/workpal/server/pkg/protocol"
 )
 
 // Expire the request only after the service has committed the claim. The next

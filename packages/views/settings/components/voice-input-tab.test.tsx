@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { DEFAULT_VOICE_SETTINGS, useVoiceModelsStore, useVoiceSettingsStore } from "@multica/core/voice";
+import { DEFAULT_VOICE_SETTINGS, useVoiceModelsStore, useVoiceSettingsStore } from "@workpal/core/voice";
 import { renderWithI18n } from "../../test/i18n";
 import { VoiceInputTab } from "./voice-input-tab";
 
@@ -15,7 +15,7 @@ vi.mock("../../navigation", () => ({
   useOptionalNavigation: () => null,
 }));
 vi.mock("../../voice/engine", async () => {
-  const { useVoiceModelsStore } = await import("@multica/core/voice");
+  const { useVoiceModelsStore } = await import("@workpal/core/voice");
   return { useVoiceModels: () => useVoiceModelsStore((s) => s.models) };
 });
 

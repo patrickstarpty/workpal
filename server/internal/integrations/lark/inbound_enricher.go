@@ -11,7 +11,7 @@ import (
 	"strings"
 	"sync"
 
-	"github.com/multica-ai/multica/server/internal/integrations/channel/engine"
+	"workpal.local/workpal/server/internal/integrations/channel/engine"
 )
 
 // larkMsgTypeMergeForward is the msg_type of a "merged & forwarded"

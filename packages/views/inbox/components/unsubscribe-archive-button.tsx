@@ -2,8 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { BellOff, ListTree } from "@multica/ui/icons";
-import { IconButton } from "@multica/ui/components/common/icon-button";
+import { BellOff, ListTree } from "@workpal/ui/icons";
+import { IconButton } from "@workpal/ui/components/common/icon-button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,20 +11,20 @@ import {
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuTrigger,
-} from "@multica/ui/components/ui/dropdown-menu";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { useModalStore } from "@multica/core/modals";
-import type { InboxUnsubscribeScope } from "@multica/core/inbox/mutations";
-import { childIssuesOptions, issueDetailOptions, issueSubscribersOptions } from "@multica/core/issues/queries";
-import { isOwnIssue } from "@multica/core/issues/ownership";
-import { agentListOptions } from "@multica/core/workspace/queries";
+} from "@workpal/ui/components/ui/dropdown-menu";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { useModalStore } from "@workpal/core/modals";
+import type { InboxUnsubscribeScope } from "@workpal/core/inbox/mutations";
+import { childIssuesOptions, issueDetailOptions, issueSubscribersOptions } from "@workpal/core/issues/queries";
+import { isOwnIssue } from "@workpal/core/issues/ownership";
+import { agentListOptions } from "@workpal/core/workspace/queries";
 import {
   getShortcut,
   isEditableShortcutTarget,
   isPortalLayerShortcutTarget,
   shortcutMatchesEvent,
-} from "@multica/core/shortcuts";
-import { isImeComposing } from "@multica/core/utils";
+} from "@workpal/core/shortcuts";
+import { isImeComposing } from "@workpal/core/utils";
 import { ActionShortcutKeycaps } from "../../common/shortcut-keycaps";
 import { useT } from "../../i18n";
 

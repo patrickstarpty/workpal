@@ -1,20 +1,20 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Loader2, Sparkles } from "@multica/ui/icons";
+import { Loader2, Sparkles } from "@workpal/ui/icons";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { api } from "@multica/core/api";
+import { api } from "@workpal/core/api";
 import {
   agentBuilderSessionKeys,
   toStoredAgentDraft,
-} from "@multica/core/agents";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { useWorkspacePaths } from "@multica/core/paths";
-import { runtimeDisplayLabel } from "@multica/core/runtimes";
-import type { RuntimeDevice } from "@multica/core/types";
-import { agentListOptions } from "@multica/core/workspace/queries";
-import { Button } from "@multica/ui/components/ui/button";
-import { cn } from "@multica/ui/lib/utils";
+} from "@workpal/core/agents";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { useWorkspacePaths } from "@workpal/core/paths";
+import { runtimeDisplayLabel } from "@workpal/core/runtimes";
+import type { RuntimeDevice } from "@workpal/core/types";
+import { agentListOptions } from "@workpal/core/workspace/queries";
+import { Button } from "@workpal/ui/components/ui/button";
+import { cn } from "@workpal/ui/lib/utils";
 import { useBackOrReplace, useNavigation } from "../../navigation";
 import { useT } from "../../i18n";
 import { ProviderLogo } from "../../runtimes/components/provider-logo";

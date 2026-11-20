@@ -10,12 +10,12 @@ import {
   type DevCacheChange,
   type DevRealtimeEvent,
   type DevRecording,
-} from "@multica/core/diagnostics";
-import { agentListOptions } from "@multica/core/workspace/queries";
-import { readRuntimeCliVersion, runtimeDisplayName } from "@multica/core/runtimes";
-import type { AgentRuntime, AgentTask } from "@multica/core/types";
-import { ChevronDown, ChevronRight, Copy, ExternalLink, RefreshCw, RotateCcw, Trash2, Unplug } from "@multica/ui/icons";
-import { cn } from "@multica/ui/lib/utils";
+} from "@workpal/core/diagnostics";
+import { agentListOptions } from "@workpal/core/workspace/queries";
+import { readRuntimeCliVersion, runtimeDisplayName } from "@workpal/core/runtimes";
+import type { AgentRuntime, AgentTask } from "@workpal/core/types";
+import { ChevronDown, ChevronRight, Copy, ExternalLink, RefreshCw, RotateCcw, Trash2, Unplug } from "@workpal/ui/icons";
+import { cn } from "@workpal/ui/lib/utils";
 import {
   activeTasks,
   CACHE_CHANGE_LABEL,

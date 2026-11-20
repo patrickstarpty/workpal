@@ -1,12 +1,12 @@
 ---
 title: CLI を使う
-description: Multica CLI をインストールしてサインインし、ターミナルからワークスペース、タスク、エージェント、ランタイムを管理します。
+description: Workpal CLI をインストールしてサインインし、ターミナルからワークスペース、タスク、エージェント、ランタイムを管理します。
 ---
 
 import { Callout } from "fumadocs-ui/components/callout";
 import { Tab, Tabs } from "fumadocs-ui/components/tabs";
 
-Multica CLI は、ローカルのランタイムを接続する役割と、ターミナルからワークスペース、タスク、エージェント、オートパイロットを管理する役割の両方を担います。このページではよく使う操作の流れを紹介します。現在のバージョンがサポートするフラグは、常に各コマンド自身の `--help` が正です。
+Workpal CLI は、ローカルのランタイムを接続する役割と、ターミナルからワークスペース、タスク、エージェント、オートパイロットを管理する役割の両方を担います。このページではよく使う操作の流れを紹介します。現在のバージョンがサポートするフラグは、常に各コマンド自身の `--help` が正です。
 
 ## インストール
 
@@ -14,13 +14,13 @@ Multica CLI は、ローカルのランタイムを接続する役割と、タ�
 <Tab value="macOS / Linux">
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/multica-ai/multica/main/scripts/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/workpal-ai/workpal/main/scripts/install.sh | bash
 ```
 
 Homebrew がインストールされていれば、次のコマンドでもインストールできます:
 
 ```bash
-brew install multica-ai/tap/multica
+brew install workpal-ai/tap/workpal
 ```
 
 </Tab>
@@ -29,7 +29,7 @@ brew install multica-ai/tap/multica
 PowerShell で実行します:
 
 ```powershell
-irm https://raw.githubusercontent.com/multica-ai/multica/main/scripts/install.ps1 | iex
+irm https://raw.githubusercontent.com/workpal-ai/workpal/main/scripts/install.ps1 | iex
 ```
 
 </Tab>
@@ -38,25 +38,25 @@ irm https://raw.githubusercontent.com/multica-ai/multica/main/scripts/install.ps
 インストールを確認します:
 
 ```bash
-multica version
+workpal version
 ```
 
 ## 初回接続
 
 接続先のサービスを選びます:
 
-<Tabs items={["Multica Cloud", "セルフホストインスタンス"]}>
-<Tab value="Multica Cloud">
+<Tabs items={["Workpal Cloud", "セルフホストインスタンス"]}>
+<Tab value="Workpal Cloud">
 
 ```bash
-multica setup
+workpal setup
 ```
 
 </Tab>
 <Tab value="セルフホストインスタンス">
 
 ```bash
-multica setup self-host \
+workpal setup self-host \
   --server-url https://api.example.com \
   --app-url https://app.example.com
 ```
@@ -67,14 +67,14 @@ multica setup self-host \
 `setup` はサーバーアドレスを保存し、ブラウザを開いてサインインを完了し、デーモンを起動します。完了したら確認します:
 
 ```bash
-multica auth status
-multica daemon status
+workpal auth status
+workpal daemon status
 ```
 
-他の設定を上書きせずにサインインだけやり直したい場合は、`multica login` を実行します。ブラウザのない環境では、先に Web の設定で個人アクセストークンを作成しておき、次のコマンドで入力します:
+他の設定を上書きせずにサインインだけやり直したい場合は、`workpal login` を実行します。ブラウザのない環境では、先に Web の設定で個人アクセストークンを作成しておき、次のコマンドで入力します:
 
 ```bash
-multica login --token
+workpal login --token
 ```
 
 このコマンドはターミナル上でトークンの貼り付けを促すため、完全な値が shell history に残りません。
@@ -84,64 +84,64 @@ multica login --token
 ワークスペースを一覧し、デフォルトを切り替えます:
 
 ```bash
-multica workspace list
-multica workspace switch <slug>
+workpal workspace list
+workpal workspace switch <slug>
 ```
 
-以降のコマンドはこのワークスペースを使います。単発のコマンドでは `--workspace-id` で一時的に上書きでき、`MULTICA_WORKSPACE_ID` を設定することもできます。
+以降のコマンドはこのワークスペースを使います。単発のコマンドでは `--workspace-id` で一時的に上書きでき、`WORKPAL_WORKSPACE_ID` を設定することもできます。
 
 メンバーを招待する:
 
 ```bash
-multica workspace member invite teammate@example.com
-multica workspace member invite admin@example.com --role admin
+workpal workspace member invite teammate@example.com
+workpal workspace member invite admin@example.com --role admin
 ```
 
 ## よく使うタスク操作
 
 ```bash
 # 表示と検索
-multica issue list
-multica issue get MUL-123
-multica issue search "ログイン失敗"
+workpal issue list
+workpal issue get MUL-123
+workpal issue search "ログイン失敗"
 
 # 作成と更新
-multica issue create --title "ログイン失敗を修正"
-multica issue status MUL-123 in_progress
-multica issue assign MUL-123 --to "Backend Agent"
+workpal issue create --title "ログイン失敗を修正"
+workpal issue status MUL-123 in_progress
+workpal issue assign MUL-123 --to "Backend Agent"
 
 # コメントと実行履歴
-multica issue comment list MUL-123
-multica issue comment add MUL-123 --content "まず回帰テストを確認してください"
-multica issue comment update <comment-id> --expected-revision 2 --content "回帰テストとリリースノートを確認してください"
-multica issue runs MUL-123
+workpal issue comment list MUL-123
+workpal issue comment add MUL-123 --content "まず回帰テストを確認してください"
+workpal issue comment update <comment-id> --expected-revision 2 --content "回帰テストとリリースノートを確認してください"
+workpal issue runs MUL-123
 ```
 
 長い説明やコメントは stdin から読み込むと、改行や引用符の扱いに悩まずに済みます:
 
 ```bash
-multica issue create --title "アップグレードメモ" --description-stdin < notes.md
-multica issue comment add MUL-123 --content-stdin < review.md
-multica issue comment update <comment-id> --expected-revision 2 --content-file revised-review.md
+workpal issue create --title "アップグレードメモ" --description-stdin < notes.md
+workpal issue comment add MUL-123 --content-stdin < review.md
+workpal issue comment update <comment-id> --expected-revision 2 --content-file revised-review.md
 ```
 
 1 回の実行のメッセージを表示、実行を停止、または再試行する:
 
 ```bash
-multica issue run-messages <task-id> --issue MUL-123
-multica issue cancel-task <task-id> --issue MUL-123
-multica issue rerun-task <run-id> --issue MUL-123
-multica issue rerun-task <run-id> --issue MUL-123 --fresh
+workpal issue run-messages <task-id> --issue MUL-123
+workpal issue cancel-task <task-id> --issue MUL-123
+workpal issue rerun-task <run-id> --issue MUL-123
+workpal issue rerun-task <run-id> --issue MUL-123 --fresh
 ```
 
 後続の実行をキューに入れる代わりに、進行中の実行にコメントを追加する（追加メッセージを受け付ける実行のみ。コメントで起動できるエージェントに限る）:
 
 ```bash
-multica issue comment add MUL-123 --content-file note.md --steer <task-id>
-multica issue comment add MUL-123 --content-file note.md --steer-active
+workpal issue comment add MUL-123 --content-file note.md --steer <task-id>
+workpal issue comment add MUL-123 --content-file note.md --steer-active
 ```
 
-同じプロジェクト・同じ親タスクの下に、タイトルが同じ（大文字小文字と余分な空白は区別しない）未完了のタスクがすでにあると、`issue create` は作成を拒否してそのタスクを示します。それでも作る場合は `--allow-duplicate` を付けます。あるタスクを別のタスクの重複にするには `multica issue status MUL-124 cancelled --duplicate-of MUL-123` を使います。
+同じプロジェクト・同じ親タスクの下に、タイトルが同じ（大文字小文字と余分な空白は区別しない）未完了のタスクがすでにあると、`issue create` は作成を拒否してそのタスクを示します。それでも作る場合は `--allow-duplicate` を付けます。あるタスクを別のタスクの重複にするには `workpal issue status MUL-124 cancelled --duplicate-of MUL-123` を使います。
 
 複数の PR を順番に作成するタスクでは、`issue create --title "..." --pr-auto-complete off` または `issue update <id> --pr-auto-complete off` で、マージ時も状態を維持できます。`--pr-auto-complete on` はワークスペースのルールを復元し、次の PR イベントから有効になります。`issue pull-requests <id>` は、PR が未関連付けでもタスクとワークスペースの設定、移行先の状態、判定結果を表示します。対応サーバーは作成トランザクション内で設定を保存し、旧サーバーには追加の PUT を送ります。失敗時は作成済み ID と再試行用の update コマンドが表示されるため、create を繰り返さないでください。
 
@@ -150,9 +150,9 @@ multica issue comment add MUL-123 --content-file note.md --steer-active
 複数のタスクに同じ変更を適用できます。`--ids-stdin` ではタスク番号または UUID を標準入力から1行ずつ読み取ります。
 
 ```bash
-multica issue batch update MUL-123 MUL-124 --priority high --add-label QA --dry-run
-multica issue batch update MUL-123 MUL-124 --priority high --add-label QA
-multica issue batch update MUL-123 MUL-124 --property "Severity=High" --unset-property Reviewer
+workpal issue batch update MUL-123 MUL-124 --priority high --add-label QA --dry-run
+workpal issue batch update MUL-123 MUL-124 --priority high --add-label QA
+workpal issue batch update MUL-123 MUL-124 --property "Severity=High" --unset-property Reviewer
 ```
 
 `--add-label` と `--remove-label` は他のラベルを変えません。`--clear-labels` は追加の前に全ラベルを消します。`--property` で値を設定し、`--unset-property` で消します。複数値のプロパティは値全体を置き換えます。ステータス、担当者、プロジェクト、日付、親タスク、ステージも変更できます。`--no-start` を付けるとエージェントの実行を開始せずに変更を適用します。
@@ -164,8 +164,8 @@ multica issue batch update MUL-123 MUL-124 --property "Severity=High" --unset-pr
 1 件のタスクを削除するか、複数のタスク番号または完全な UUID を渡して一括削除します。
 
 ```bash
-multica issue delete MUL-123
-multica issue delete MUL-123 MUL-124 --yes --output json
+workpal issue delete MUL-123
+workpal issue delete MUL-123 MUL-124 --yes --output json
 ```
 
 削除は元に戻せません。コメントと添付ファイルが削除され、進行中の実行はキャンセルされ、関連する自動化の実行は失敗扱いになります。削除したタスクを参照する重複マークは解除されます。サブタスクは親との関連が外れますが、削除されません。確認の前にすべての ID を解決し、存在しないタスクやアクセスできないタスクがあれば、削除せずにコマンドを中止します。
@@ -175,7 +175,7 @@ multica issue delete MUL-123 MUL-124 --yes --output json
 `--dry-run` は削除権限を含めて削除予定を確認します。書き込みや確認プロンプトはありません。
 
 ```bash
-multica issue delete MUL-123 MUL-124 --dry-run --output json
+workpal issue delete MUL-123 MUL-124 --dry-run --output json
 ```
 
 ### タイムライン
@@ -183,9 +183,9 @@ multica issue delete MUL-123 MUL-124 --dry-run --output json
 `issue get` はタスクの現在の状態を返します。`issue timeline` はステータス、優先度、担当者、タイトル、日付の変更と実行結果を時系列に並べ、コメントも混ぜて表示します。「いつ in_review に移ったか」「今のステータスにどれだけ留まっているか」を調べるときに使います。
 
 ```bash
-multica issue timeline MUL-123 --action status_changed
-multica issue timeline MUL-123 --activity-only --output json
-multica issue timeline MUL-123 --since 2026-08-19T00:00:00Z
+workpal issue timeline MUL-123 --action status_changed
+workpal issue timeline MUL-123 --activity-only --output json
+workpal issue timeline MUL-123 --since 2026-08-19T00:00:00Z
 ```
 
 `--activity-only` はコメントを除き、すべてのアクティビティ記録を残します。`--action` は指定したアクションだけを返し、繰り返し指定でき、`--activity-only` を含意します。サーバーが読み込む履歴には上限があり、切り詰められた場合は stderr に警告が出ます。その結果から滞在時間を推定しないでください。
@@ -195,8 +195,8 @@ multica issue timeline MUL-123 --since 2026-08-19T00:00:00Z
 コメントの多いタスクを 1 件ずつ読むと、エージェントは多くのトークンを使います。まずスレッドをざっと見て、必要なものだけを開きます。
 
 ```bash
-multica issue comment list MUL-123 --roots-only --summary --output json --compact
-multica issue comment list MUL-123 --thread <comment-id> --tail 5 --output json --compact
+workpal issue comment list MUL-123 --roots-only --summary --output json --compact
+workpal issue comment list MUL-123 --thread <comment-id> --tail 5 --output json --compact
 ```
 
 - `--roots-only` はトップレベルのコメントだけを返し、それぞれに返信数と最終アクティビティ時刻が付きます。
@@ -205,12 +205,12 @@ multica issue comment list MUL-123 --thread <comment-id> --tail 5 --output json 
 - `--recent N` は最近動きのあった N 件のスレッドを、すべての返信付きで返します。返信が多いと出力は長くなります。
 - 解決済みのスレッドは既定で最初のコメントと結論に折りたたまれます。全文が必要なら `--full` を付けます。
 
-一覧も必要なフィールドだけに絞れます：`multica issue list --output json --fields id,identifier,title,status`。絞り込みは CLI 側で行われるので、減るのは出力とコンテキストで、リクエストの量は変わりません。
+一覧も必要なフィールドだけに絞れます：`workpal issue list --output json --fields id,identifier,title,status`。絞り込みは CLI 側で行われるので、減るのは出力とコンテキストで、リクエストの量は変わりません。
 
 最終更新日時でタスクを絞り込むには、RFC3339 形式の `--updated-since` と `--updated-until` を両方指定します。サーバーは、現在の `updated_at` が `since` 以上、`until` 未満のタスクを返します：`[since, until)`。既存のフィルター、並べ替え、ページネーションと組み合わせて使えます。ページ間で同じ期間を指定してください。ページネーションはスナップショットを提供しないため、同時に更新が行われると結果が変わる場合があります。
 
 ```bash
-multica issue list --updated-since 2026-11-05T10:00:00Z \
+workpal issue list --updated-since 2026-11-05T10:00:00Z \
   --updated-until 2026-11-05T10:01:00Z \
   --sort created_at --direction asc --limit 100 --offset 0 \
   --output json --fields id,workspace_id,project_id,title
@@ -221,15 +221,15 @@ multica issue list --updated-since 2026-11-05T10:00:00Z \
 ウェイクアップは、イベントが起きたとき、条件が成り立ったとき、または指定の時刻に、エージェントの通常の実行を始めます。詳しいルールは[タスクのウェイクアップ](/issue-wakeups)を参照してください。
 
 ```bash
-multica issue wakeup events
-multica issue wakeup create MUL-123 --agent-id <agent-id> \
+workpal issue wakeup events
+workpal issue wakeup create MUL-123 --agent-id <agent-id> \
   --event comment.created --filter-actor-type member --filter-actor-id <user-id> \
   --instruction "返信が来たら、その内容で見積書を更新する"
-multica issue wakeup create MUL-123 --agent-id <agent-id> \
+workpal issue wakeup create MUL-123 --agent-id <agent-id> \
   --kind every --every 1h --expires-in 72h \
   --instruction "仕入れ先から返信が来ているか確認する"
-multica issue wakeup list MUL-123
-multica issue wakeup runs MUL-123 <wakeup-id>
+workpal issue wakeup list MUL-123
+workpal issue wakeup runs MUL-123 <wakeup-id>
 ```
 
 ターミナルからメンバーとして作成するときは `--agent-id` が必要です。エージェントが自分の実行の中で作成した場合は、既定でそのエージェント自身を起こします。
@@ -237,23 +237,23 @@ multica issue wakeup runs MUL-123 <wakeup-id>
 ## エージェントとスキル
 
 ```bash
-multica agent list
-multica agent get <agent-id>
-multica agent create --help
-multica agent update <agent-id> --help
+workpal agent list
+workpal agent get <agent-id>
+workpal agent create --help
+workpal agent update <agent-id> --help
 
-multica skill list
-multica skill get <skill-id>
-multica skill import --url <skill-url>
-multica agent skills add <agent-id> --skill-ids <skill-id>
+workpal skill list
+workpal skill get <skill-id>
+workpal skill import --url <skill-url>
+workpal agent skills add <agent-id> --skill-ids <skill-id>
 ```
 
 インポートで同名のスキルに当たった場合、デフォルトでは既存の内容を変更せずに停止します。意図に応じて選択してください:
 
 ```bash
-multica skill import --url <skill-url> --on-conflict overwrite
-multica skill import --url <skill-url> --on-conflict rename
-multica skill import --url <skill-url> --on-conflict skip
+workpal skill import --url <skill-url> --on-conflict overwrite
+workpal skill import --url <skill-url> --on-conflict rename
+workpal skill import --url <skill-url> --on-conflict skip
 ```
 
 `overwrite` はスキルの作成者だけが使え、元の ID とエージェントの紐付けを維持します。
@@ -261,13 +261,13 @@ multica skill import --url <skill-url> --on-conflict skip
 環境変数や MCP 設定にはトークンが含まれることがよくあります。コマンドラインに値を直接書くとシェルの履歴や `ps` の出力に残るので、`-file` または `-stdin` の形で渡してください。
 
 ```bash
-multica agent create --name "運用アシスタント" --runtime-id <runtime-id> \
+workpal agent create --name "運用アシスタント" --runtime-id <runtime-id> \
   --custom-env-file ./agent-env.json \
   --mcp-config-file ./mcp.json \
   --custom-args '["--max-turns", "40"]'
 
-multica agent env set <agent-id> --custom-env-stdin < agent-env.json
-multica agent update <agent-id> --mcp-config-file ./mcp.json
+workpal agent env set <agent-id> --custom-env-stdin < agent-env.json
+workpal agent update <agent-id> --mcp-config-file ./mcp.json
 ```
 
 - `--custom-env` 系のフラグは `agent create` にしかありません。後から変えるときは `agent env set` を使います。これは全体を置き換え、値を `****` にしたキーは元の値を保ちます。
@@ -278,57 +278,57 @@ multica agent update <agent-id> --mcp-config-file ./mcp.json
 ## デーモンとランタイム
 
 ```bash
-multica daemon start
-multica daemon stop
-multica daemon restart
-multica daemon status --output json
-multica daemon logs --follow
+workpal daemon start
+workpal daemon stop
+workpal daemon restart
+workpal daemon status --output json
+workpal daemon logs --follow
 
-multica runtime list
-multica runtime rename <runtime-id> "Office Mac"
-multica runtime usage <runtime-id>
-multica runtime activity <runtime-id>
+workpal runtime list
+workpal runtime rename <runtime-id> "Office Mac"
+workpal runtime usage <runtime-id>
+workpal runtime activity <runtime-id>
 ```
 
 ```bash
-multica daemon autostart enable
-multica runtime usage <runtime-id> --days 30
-multica runtime update <runtime-id> --target-version <version> --wait
-multica runtime profile create --display-name "社内 Claude ラッパー" \
+workpal daemon autostart enable
+workpal runtime usage <runtime-id> --days 30
+workpal runtime update <runtime-id> --target-version <version> --wait
+workpal runtime profile create --display-name "社内 Claude ラッパー" \
   --command-name ccms --runtime-type claude
 ```
 
-`daemon autostart` は現在のプロファイルをログイン時に起動するよう登録します。プラットフォームごとの違いは[ログイン時の自動起動](/daemon-runtimes#autostart)を参照してください。`runtime usage` は既定で 90 日分を集計し、`--days` は最大 365 です。`runtime update` はそのコンピューターのデーモンに CLI を指定のバージョンへ更新させ、`--wait` を付けると更新の完了を待ちます。更新の失敗、更新のタイムアウト、待機自体のタイムアウトでは、終了コードが非ゼロになります。`runtime profile create` は互換ツールを `--runtime-type` で指定します（古い `--protocol-family` も使えます）。固定引数は今のところ Web アプリでしか設定できません。 `runtime profile create` は既定で現在のマシンに紐づけます。別の登録済みローカルマシンを選択するには `--daemon-id <id>` を指定します。 既存の未設定プロファイルは `multica runtime profile update <profile-id> --daemon-id <id>` でマシンに紐づけられます。
+`daemon autostart` は現在のプロファイルをログイン時に起動するよう登録します。プラットフォームごとの違いは[ログイン時の自動起動](/daemon-runtimes#autostart)を参照してください。`runtime usage` は既定で 90 日分を集計し、`--days` は最大 365 です。`runtime update` はそのコンピューターのデーモンに CLI を指定のバージョンへ更新させ、`--wait` を付けると更新の完了を待ちます。更新の失敗、更新のタイムアウト、待機自体のタイムアウトでは、終了コードが非ゼロになります。`runtime profile create` は互換ツールを `--runtime-type` で指定します（古い `--protocol-family` も使えます）。固定引数は今のところ Web アプリでしか設定できません。 `runtime profile create` は既定で現在のマシンに紐づけます。別の登録済みローカルマシンを選択するには `--daemon-id <id>` を指定します。 既存の未設定プロファイルは `workpal runtime profile update <profile-id> --daemon-id <id>` でマシンに紐づけられます。
 
-アクティブなエージェントがまだ紐付いているランタイムの削除は、デフォルトで拒否されます。`multica runtime delete <id> --cascade` は、それらのエージェントをランタイムから解除して設定と履歴を保持し、アクティブな実行をキャンセルします。
+アクティブなエージェントがまだ紐付いているランタイムの削除は、デフォルトで拒否されます。`workpal runtime delete <id> --cascade` は、それらのエージェントをランタイムから解除して設定と履歴を保持し、アクティブな実行をキャンセルします。
 
 仕組みとカスタムプロファイルについては[デーモンとランタイム](/daemon-runtimes)を参照してください。
 
 ## 環境 [#environments]
 
 ```bash
-multica env start web
-multica env start web --wait=false
-multica env list
-multica env stop web
+workpal env start web
+workpal env start web --wait=false
+workpal env list
+workpal env stop web
 ```
 
-`multica env`（長い形式は `multica environment`）は、リポジトリが `.multica/environments.toml` に宣言した環境を起動します。環境はデーモンが管理するため、実行が終わっても動き続け、タスクのサイドバーに表示され、TTL が切れると停止します。`start` は環境が応答するまで待ってから URL を表示します。これらのコマンドは実行中のタスクの認証情報を使うので、エージェントの実行の中でしか使えません。自分のコンピューターからはタスクのサイドバーを使ってください。ファイルの形式と例は[環境](/environments)を参照してください。
+`workpal env`（長い形式は `workpal environment`）は、リポジトリが `.workpal/environments.toml` に宣言した環境を起動します。環境はデーモンが管理するため、実行が終わっても動き続け、タスクのサイドバーに表示され、TTL が切れると停止します。`start` は環境が応答するまで待ってから URL を表示します。これらのコマンドは実行中のタスクの認証情報を使うので、エージェントの実行の中でしか使えません。自分のコンピューターからはタスクのサイドバーを使ってください。ファイルの形式と例は[環境](/environments)を参照してください。
 
 ## プロジェクト、ワークスペース、オートパイロット
 
 ```bash
-multica project create --title "夏のキャンペーン" --lead "李雷" \
+workpal project create --title "夏のキャンペーン" --lead "李雷" \
   --repo https://github.com/acme/campaign-site
-multica project resource add <project-id> --type github_repo \
+workpal project resource add <project-id> --type github_repo \
   --url https://github.com/acme/brand-assets --default-branch-hint main
 
-multica workspace create --name "運用チーム" --slug ops --issue-prefix OPS
-multica workspace update --context-stdin < team-context.md
+workpal workspace create --name "運用チーム" --slug ops --issue-prefix OPS
+workpal workspace update --context-stdin < team-context.md
 
-multica autopilot create --title "週次の売上レポート" --agent "運用アシスタント" \
+workpal autopilot create --title "週次の売上レポート" --agent "運用アシスタント" \
   --mode create_issue --issue-title-template "売上レポート {{date}}"
-multica autopilot trigger-add <autopilot-id> --cron "0 9 * * 1" --timezone Asia/Tokyo
+workpal autopilot trigger-add <autopilot-id> --cron "0 9 * * 1" --timezone Asia/Tokyo
 ```
 
 - `--lead` にはメンバーまたはエージェントの名前を指定します。`--default-branch-hint` はリポジトリの既定ブランチをエージェントに伝えるだけで、ブランチは切り替えません。
@@ -363,10 +363,10 @@ multica autopilot trigger-add <autopilot-id> --cron "0 9 * * 1" --timezone Asia/
 この例では、PR レビューの送信とすべての push イベントを受け入れます。`actions` を省略するか空の配列を指定すると、そのイベントのすべての action を受け入れます。
 
 ```bash
-multica autopilot trigger-add <autopilot-id> --kind webhook --event-filters-file filters.json
-multica autopilot trigger-list <autopilot-id> --full-id
-multica autopilot trigger-update <autopilot-id> <trigger-id> --event-filters-file filters.json
-multica autopilot get <autopilot-id> --output json
+workpal autopilot trigger-add <autopilot-id> --kind webhook --event-filters-file filters.json
+workpal autopilot trigger-list <autopilot-id> --full-id
+workpal autopilot trigger-update <autopilot-id> <trigger-id> --event-filters-file filters.json
+workpal autopilot get <autopilot-id> --output json
 ```
 
 更新時はファイルの内容でフィルター一覧全体を置き換えます。両方のフィルターオプションを省略すると、ラベルの変更やトリガーの有効化・無効化でも保存済みのフィルターを保持します。`autopilot get` はトップレベルの `triggers` 配列でフィルターを返します。
@@ -374,7 +374,7 @@ multica autopilot get <autopilot-id> --output json
 すべてのフィルターを削除して全イベントを受け入れるには、更新専用のオプションを使います。
 
 ```bash
-multica autopilot trigger-update <autopilot-id> <trigger-id> --clear-event-filters
+workpal autopilot trigger-update <autopilot-id> <trigger-id> --clear-event-filters
 ```
 
 `--clear-event-filters` と `--event-filters-file` は同時に指定できません。トップレベルが `null` または空の配列であるファイルや、不明なフィールド、不正な JSON、空または空白のみのイベント名・action 名を含むファイルは拒否されます。これらのオプションは Webhook トリガー専用です。フィルターファイルを指定せずに作成すると全イベントを受け入れます。受信イベントの照合方法は[オートパイロット](/autopilots#event-filters)を参照してください。
@@ -400,7 +400,7 @@ multica autopilot trigger-update <autopilot-id> <trigger-id> --clear-event-filte
 | `config` | 現在の CLI プロファイルのローカル設定を表示・編集 |
 | `update`、`version` | CLI の更新とバージョンの表示 |
 
-`multica chat` が読み取るのは、**エージェントが現在処理している外部チャットセッション**です。主にチャット統合の中のエージェントが使うもので、任意のワークスペースの会話を閲覧するための汎用コマンドではありません。
+`workpal chat` が読み取るのは、**エージェントが現在処理している外部チャットセッション**です。主にチャット統合の中のエージェントが使うもので、任意のワークスペースの会話を閲覧するための汎用コマンドではありません。
 
 ## ID と出力形式
 
@@ -411,38 +411,38 @@ multica autopilot trigger-update <autopilot-id> <trigger-id> --clear-event-filte
 多くのコマンドが構造化出力をサポートします:
 
 ```bash
-multica issue list --output json
-multica agent list --output json
+workpal issue list --output json
+workpal agent list --output json
 ```
 
-スクリプトでは、ターミナル向けの表を解析せず JSON 出力を使ってください。各コマンドがサポートする出力形式とページネーションのフラグは `multica <command> --help` が正です。
+スクリプトでは、ターミナル向けの表を解析せず JSON 出力を使ってください。各コマンドがサポートする出力形式とページネーションのフラグは `workpal <command> --help` が正です。
 
 ## プロファイルと設定
 
-デフォルトの設定は `~/.multica/config.json` に保存されます。`--profile <name>` を使うと、サーバーアドレス、トークン、デフォルトワークスペース、デーモン状態を別のセットとして分離できます:
+デフォルトの設定は `~/.workpal/config.json` に保存されます。`--profile <name>` を使うと、サーバーアドレス、トークン、デフォルトワークスペース、デーモン状態を別のセットとして分離できます:
 
 ```bash
-multica setup self-host --profile staging \
+workpal setup self-host --profile staging \
   --server-url https://api.staging.example.com \
   --app-url https://app.staging.example.com
 
-multica issue list --profile staging
+workpal issue list --profile staging
 ```
 
-名前付きプロファイルは `~/.multica/profiles/<name>/config.json` に保存されます。現在の値を確認する:
+名前付きプロファイルは `~/.workpal/profiles/<name>/config.json` に保存されます。現在の値を確認する:
 
 ```bash
-multica config show
-multica config show --profile staging
+workpal config show
+workpal config show --profile staging
 ```
 
 <Callout type="warning">
-CLI の設定ファイルには、あなたとして Multica にアクセスできるトークンが含まれます。リポジトリにコミットしたり、ログにアップロードしたり、他人と共有したりしないでください。
+CLI の設定ファイルには、あなたとして Workpal にアクセスできるトークンが含まれます。リポジトリにコミットしたり、ログにアップロードしたり、他人と共有したりしないでください。
 </Callout>
 
 ## コマンドリファレンス
 
-以下の表は、現在のすべてのトップレベルコマンドを CLI 自身のグループ分けに沿って掲載しています。すべてのコマンドがグローバルフラグ `--server-url`、`--workspace-id`、`--profile`、`--debug` を受け付けます。`--output` はコマンドごとに登録されるフラグで、デフォルトの形式はコマンドによって異なります: `list` 系は表、`get` や `create` 系は多くが JSON です。完全なフラグは `multica <command> --help` が正です。
+以下の表は、現在のすべてのトップレベルコマンドを CLI 自身のグループ分けに沿って掲載しています。すべてのコマンドがグローバルフラグ `--server-url`、`--workspace-id`、`--profile`、`--debug` を受け付けます。`--output` はコマンドごとに登録されるフラグで、デフォルトの形式はコマンドによって異なります: `list` 系は表、`get` や `create` 系は多くが JSON です。完全なフラグは `workpal <command> --help` が正です。
 
 ### Core
 
@@ -495,7 +495,7 @@ CLI の設定ファイルには、あなたとして Multica にアクセスで�
 | | `runs <id>` | 実行履歴を表示 | |
 | | `trigger-add/trigger-update/trigger-delete/trigger-rotate-url` | スケジュールと webhook のトリガーを管理 | `trigger-add`: `--kind`（`schedule` または `webhook`）、`--cron`、`--timezone`（既定は UTC）、`--label` |
 | `workspace` | `list/get/create/update/switch` | ワークスペースを管理。`switch` は現在のプロファイルのデフォルトワークスペースを設定 | `create`: `--name`、`--slug`（いずれも必須）、`--issue-prefix`、`--description`、`--context` / `--context-stdin`；`update` は slug 以外の同じ項目を変更 |
-| | `mcp list/add/update/remove` | ワークスペースの MCP サーバーライブラリを管理 | 書き込みは owner/admin のみ。ここに追加したサーバーはどのエージェントにも割り当てられません — `multica agent mcp add` で割り当てます。`list` は名前と transport のみを表示し、保存されたエントリは書き込み専用でどのロールにも返りません。`--server-config-file` / `--server-config-stdin` はトークンをシェル履歴から守ります |
+| | `mcp list/add/update/remove` | ワークスペースの MCP サーバーライブラリを管理 | 書き込みは owner/admin のみ。ここに追加したサーバーはどのエージェントにも割り当てられません — `workpal agent mcp add` で割り当てます。`list` は名前と transport のみを表示し、保存されたエントリは書き込み専用でどのロールにも返りません。`--server-config-file` / `--server-config-stdin` はトークンをシェル履歴から守ります |
 | | `member list/invite <email>` | メンバーの表示と招待 | `invite`: `--role`（member または admin。デフォルトは member） |
 | `repo` | `list/add/remove/checkout` | ワークスペースのリポジトリを管理し、ローカルにチェックアウト | `--url`（繰り返し可）；`checkout`: `--ref` |
 | `skill` | `list/get/create/update/delete` | スキルを管理 | |
@@ -513,7 +513,7 @@ CLI の設定ファイルには、あなたとして Multica にアクセスで�
 
 | コマンド | サブコマンド | 用途 | 主なフラグ |
 | --- | --- | --- | --- |
-| `daemon` | `start` | ローカルデーモンを起動 | `--foreground`、`--device-name`、`--runtime-name`、`--workspaces-root`、`--poll-interval`、`--heartbeat-interval`、`--agent-timeout`（`0` は上限なし）、`--max-concurrent-tasks`、`--no-auto-update`；それぞれに対応する `MULTICA_*` 環境変数があります |
+| `daemon` | `start` | ローカルデーモンを起動 | `--foreground`、`--device-name`、`--runtime-name`、`--workspaces-root`、`--poll-interval`、`--heartbeat-interval`、`--agent-timeout`（`0` は上限なし）、`--max-concurrent-tasks`、`--no-auto-update`；それぞれに対応する `WORKPAL_*` 環境変数があります |
 | | `stop` / `status` / `restart` | 停止、状態の確認、再起動（`restart` は `start` と同じフラグ） | |
 | | `logs` | デーモンのログを表示 | `--follow`、`--lines` |
 | | `disk-usage` | ローカルのディスク使用量を表示 | `--by-workspace`、`--by-task`、`--top` |
@@ -536,15 +536,15 @@ CLI の設定ファイルには、あなたとして Multica にアクセスで�
 | `update` | — | CLI を最新バージョンに更新 | |
 | `version` | — | バージョン情報を表示 | `--output`（`text` または `json`） |
 
-## 別のコーディングエージェントから Multica を操作する
+## 別のコーディングエージェントから Workpal を操作する
 
-作業の多くを Codex、Claude Code、Cursor の中で進めているなら、ターミナルに切り替えずそこから Multica を操作できます。[Multica CLI skill](https://github.com/multica-ai/multica-cli) は、このページのコマンドを安全に扱う方法をそれらのエージェントに教えます。タスクとコメントスレッドをトークンを浪費せずに読み、コメントはファイル経由で書き、メンション・ステータス変更・アサインが伴う副作用を正しく扱います。
+作業の多くを Codex、Claude Code、Cursor の中で進めているなら、ターミナルに切り替えずそこから Workpal を操作できます。Workpal CLI skill は、このページのコマンドを安全に扱う方法をそれらのエージェントに教えます。タスクとコメントスレッドをトークンを浪費せずに読み、コメントはファイル経由で書き、メンション・ステータス変更・アサインが伴う副作用を正しく扱います。
 
 認証済みの CLI を通してのみ動作し、それ自体は何の権限も与えません。権限は引き続きログイン、選択中のプロファイル、ワークスペースに由来します。CLI は v0.4.26 以降が必要です。Claude Code のプラグインマーケットプレイス、Codex の skill インストーラー、Cursor、その他 Markdown の指示を読み込むツールへのインストール方法は、リポジトリの README を参照してください。
 
 ## 次のステップ
 
-- [Multica CLI skill](https://github.com/multica-ai/multica-cli) — Codex、Claude Code、Cursor から Multica を操作する。
+- Workpal CLI skill — Codex、Claude Code、Cursor から Workpal を操作する。
 - [認証とトークン](/auth-tokens) — PAT の作成、更新、失効。
 - [トラブルシューティング](/troubleshooting) — コマンドのエラーと、いつまでも開始しない実行の診断。
 - [エージェントの作成と設定](/agents-create) — `agent create` 各フィールドの完全な意味。

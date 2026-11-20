@@ -1,11 +1,11 @@
 import { act, fireEvent, render, screen, within } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { I18nProvider } from "@multica/core/i18n/react";
+import { I18nProvider } from "@workpal/core/i18n/react";
 import {
   ISSUE_SIDEBAR_SECTIONS,
   useIssueSidebarSectionsStore,
   type IssueSidebarSection,
-} from "@multica/core/issues/stores";
+} from "@workpal/core/issues/stores";
 import enCommon from "../../locales/en/common.json";
 import enIssues from "../../locales/en/issues.json";
 import { IssueSidebarSections, letSidebarSettingsDragKeysThrough } from "./issue-sidebar-settings";

@@ -3,9 +3,9 @@
 import { useCallback } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { cachedInboxSnoozedUntil, useSnoozeInbox, useUnsnoozeInbox } from "@multica/core/inbox/mutations";
-import { useInboxSelectionStore } from "@multica/core/inbox/selection-store";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { cachedInboxSnoozedUntil, useSnoozeInbox, useUnsnoozeInbox } from "@workpal/core/inbox/mutations";
+import { useInboxSelectionStore } from "@workpal/core/inbox/selection-store";
 import { useLocale, useT } from "../../i18n";
 import { formatSnoozeTime } from "./inbox-snooze-time";
 

@@ -1,12 +1,12 @@
-name: multica
+name: workpal
 
 services:
   postgres:
     image: pgvector/pgvector:pg17
     environment:
-      POSTGRES_DB: multica
-      POSTGRES_USER: ${POSTGRES_USER:-multica}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-multica}
+      POSTGRES_DB: workpal
+      POSTGRES_USER: ${POSTGRES_USER:-workpal}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-workpal}
     ports:
       - "127.0.0.1:5432:5432"
     volumes:

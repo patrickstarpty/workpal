@@ -15,9 +15,9 @@ import (
 	"testing"
 	"time"
 
-	"github.com/multica-ai/multica/server/internal/daemon/execenv"
-	"github.com/multica-ai/multica/server/internal/service"
-	"github.com/multica-ai/multica/server/pkg/agent"
+	"workpal.local/workpal/server/internal/daemon/execenv"
+	"workpal.local/workpal/server/internal/service"
+	"workpal.local/workpal/server/pkg/agent"
 )
 
 func TestRunTaskOpenCodeClockSkew(t *testing.T) {
@@ -29,7 +29,7 @@ func TestRunTaskOpenCodeClockSkew(t *testing.T) {
 		t.Run(name, func(t *testing.T) {
 			redirectTestHome(t, t.TempDir())
 			// The fake CLI speaks `opencode run`; pin that transport.
-			t.Setenv("MULTICA_OPENCODE_TRANSPORT", "run")
+			t.Setenv("WORKPAL_OPENCODE_TRANSPORT", "run")
 			dir := t.TempDir()
 			bin := filepath.Join(dir, "opencode")
 			argsPath, promptPath := filepath.Join(dir, "args"), filepath.Join(dir, "prompt")

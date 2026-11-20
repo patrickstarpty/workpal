@@ -1,8 +1,8 @@
 import { useCallback, useEffect, useRef, useState, type ReactNode, type Ref } from "react";
-import { Bot, ChevronDown, Maximize2, Mic, Minus, Plus, SquarePen } from "@multica/ui/icons";
-import { IconButton } from "@multica/ui/components/common/icon-button";
-import { SubmitButton } from "@multica/ui/components/common/submit-button";
-import { cn } from "@multica/ui/lib/utils";
+import { Bot, ChevronDown, Maximize2, Mic, Minus, Plus, SquarePen } from "@workpal/ui/icons";
+import { IconButton } from "@workpal/ui/components/common/icon-button";
+import { SubmitButton } from "@workpal/ui/components/common/submit-button";
+import { cn } from "@workpal/ui/lib/utils";
 import { useStoryEnv } from "./env";
 
 export interface DemoMessage {

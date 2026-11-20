@@ -7,7 +7,7 @@
 --
 -- Why the encrypted columns: scode is the polling handle and qr_code_url embeds
 -- it, so together they are a bearer credential for "finish creating this bot".
--- They are sealed with the same MULTICA_WECOM_SECRET_KEY that seals the bot
+-- They are sealed with the same WORKPAL_WECOM_SECRET_KEY that seals the bot
 -- secret, which is also why a deployment without that key cannot run the scan
 -- flow at all.
 --

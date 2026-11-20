@@ -35,7 +35,7 @@ func TestInboxReadMetrics(t *testing.T) {
 	}
 	foundQuery := false
 	for _, family := range families {
-		if family.GetName() == "multica_inbox_read_query_duration_seconds" {
+		if family.GetName() == "workpal_inbox_read_query_duration_seconds" {
 			foundQuery = family.Metric[0].Histogram.GetSampleCount() == 1
 		}
 	}

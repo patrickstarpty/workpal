@@ -13,8 +13,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/multica-ai/multica/server/internal/testutil"
-	"github.com/multica-ai/multica/server/pkg/agent"
+	"workpal.local/workpal/server/internal/testutil"
+	"workpal.local/workpal/server/pkg/agent"
 )
 
 type cancelPiAtTool struct {

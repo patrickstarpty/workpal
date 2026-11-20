@@ -2,20 +2,20 @@
 
 import { useMemo, useState } from "react";
 import { useStore } from "zustand";
-import { ListTodo, Search } from "@multica/ui/icons";
+import { ListTodo, Search } from "@workpal/ui/icons";
 import type {
   Issue,
   IssueTableFacetSpec,
   IssueTableFacetsResponse,
-} from "@multica/core/types";
+} from "@workpal/core/types";
 import {
   actorIssuesViewStore,
   type ActorIssuesScope,
-} from "@multica/core/issues/stores/actor-issues-view-store";
-import { Button } from "@multica/ui/components/ui/button";
-import { cn } from "@multica/ui/lib/utils";
-import { Input } from "@multica/ui/components/ui/input";
-import { Tooltip, TooltipContent, TooltipTrigger } from "@multica/ui/components/ui/tooltip";
+} from "@workpal/core/issues/stores/actor-issues-view-store";
+import { Button } from "@workpal/ui/components/ui/button";
+import { cn } from "@workpal/ui/lib/utils";
+import { Input } from "@workpal/ui/components/ui/input";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@workpal/ui/components/ui/tooltip";
 import {
   IssueDisplayControls,
   ViewRefreshIndicator,

@@ -45,11 +45,11 @@ describe("docsAlternates", () => {
     const { docsAlternates } = await import("./site");
 
     expect(docsAlternates(["agents"])).toEqual({
-      canonical: "https://www.multica.ai/docs/agents",
+      canonical: "https://workpal.invalid/docs/agents",
       languages: {
-        en: "https://www.multica.ai/docs/agents",
-        zh: "https://www.multica.ai/docs/zh/agents",
-        "x-default": "https://www.multica.ai/docs/agents",
+        en: "https://workpal.invalid/docs/agents",
+        zh: "https://workpal.invalid/docs/zh/agents",
+        "x-default": "https://workpal.invalid/docs/agents",
       },
     });
   });
@@ -65,12 +65,12 @@ describe("docsAlternates", () => {
     const { docsAlternates } = await import("./site");
 
     expect(docsAlternates(["agents"])).toEqual({
-      canonical: "https://www.multica.ai/docs/agents",
+      canonical: "https://workpal.invalid/docs/agents",
       languages: {
-        en: "https://www.multica.ai/docs/agents",
-        zh: "https://www.multica.ai/docs/zh/agents",
-        ko: "https://www.multica.ai/docs/ko/agents",
-        "x-default": "https://www.multica.ai/docs/agents",
+        en: "https://workpal.invalid/docs/agents",
+        zh: "https://workpal.invalid/docs/zh/agents",
+        ko: "https://workpal.invalid/docs/ko/agents",
+        "x-default": "https://workpal.invalid/docs/agents",
       },
     });
   });
@@ -80,12 +80,12 @@ describe("docsAlternates", () => {
     const { docsAlternates } = await import("./site");
 
     expect(docsAlternates(["agents"])).toEqual({
-      canonical: "https://www.multica.ai/docs/agents",
+      canonical: "https://workpal.invalid/docs/agents",
       languages: {
-        en: "https://www.multica.ai/docs/agents",
-        zh: "https://www.multica.ai/docs/zh/agents",
-        ja: "https://www.multica.ai/docs/ja/agents",
-        "x-default": "https://www.multica.ai/docs/agents",
+        en: "https://workpal.invalid/docs/agents",
+        zh: "https://workpal.invalid/docs/zh/agents",
+        ja: "https://workpal.invalid/docs/ja/agents",
+        "x-default": "https://workpal.invalid/docs/agents",
       },
     });
   });
@@ -95,12 +95,12 @@ describe("docsAlternates", () => {
     const { docsAlternates } = await import("./site");
 
     expect(docsAlternates(["agents"])).toEqual({
-      canonical: "https://www.multica.ai/docs/agents",
+      canonical: "https://workpal.invalid/docs/agents",
       languages: {
-        en: "https://www.multica.ai/docs/agents",
-        zh: "https://www.multica.ai/docs/zh/agents",
-        "zh-Hant": "https://www.multica.ai/docs/zh-Hant/agents",
-        "x-default": "https://www.multica.ai/docs/agents",
+        en: "https://workpal.invalid/docs/agents",
+        zh: "https://workpal.invalid/docs/zh/agents",
+        "zh-Hant": "https://workpal.invalid/docs/zh-Hant/agents",
+        "x-default": "https://workpal.invalid/docs/agents",
       },
     });
   });
@@ -110,12 +110,12 @@ describe("docsAlternates", () => {
     const { docsAlternates } = await import("./site");
 
     expect(docsAlternates(["agents"])).toEqual({
-      canonical: "https://www.multica.ai/docs/agents",
+      canonical: "https://workpal.invalid/docs/agents",
       languages: {
-        en: "https://www.multica.ai/docs/agents",
-        zh: "https://www.multica.ai/docs/zh/agents",
-        fr: "https://www.multica.ai/docs/fr/agents",
-        "x-default": "https://www.multica.ai/docs/agents",
+        en: "https://workpal.invalid/docs/agents",
+        zh: "https://workpal.invalid/docs/zh/agents",
+        fr: "https://workpal.invalid/docs/fr/agents",
+        "x-default": "https://workpal.invalid/docs/agents",
       },
     });
   });
@@ -124,11 +124,11 @@ describe("docsAlternates", () => {
     const { docsAlternates } = await import("./site");
 
     expect(docsAlternates([])).toEqual({
-      canonical: "https://www.multica.ai/docs",
+      canonical: "https://workpal.invalid/docs",
       languages: {
-        en: "https://www.multica.ai/docs",
-        zh: "https://www.multica.ai/docs/zh",
-        "x-default": "https://www.multica.ai/docs",
+        en: "https://workpal.invalid/docs",
+        zh: "https://workpal.invalid/docs/zh",
+        "x-default": "https://workpal.invalid/docs",
       },
     });
   });

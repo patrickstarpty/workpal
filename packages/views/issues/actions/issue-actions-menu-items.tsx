@@ -29,32 +29,32 @@ import {
   Unlink,
   UserMinus,
   Zap,
-} from "@multica/ui/icons";
-import { useIssueDeletion } from "@multica/core/issues/use-issue-deletion";
-import type { AgentTask, Issue } from "@multica/core/types";
-import { quickActionListOptions } from "@multica/core/quick-actions";
-import { resolveWorkdirCopyTarget } from "@multica/core/issues";
-import { todayDateOnly, addDaysDateOnly, formatDateOnly } from "@multica/core/issues/date";
-import { agentTaskSnapshotOptions } from "@multica/core/agents";
+} from "@workpal/ui/icons";
+import { useIssueDeletion } from "@workpal/core/issues/use-issue-deletion";
+import type { AgentTask, Issue } from "@workpal/core/types";
+import { quickActionListOptions } from "@workpal/core/quick-actions";
+import { resolveWorkdirCopyTarget } from "@workpal/core/issues";
+import { todayDateOnly, addDaysDateOnly, formatDateOnly } from "@workpal/core/issues/date";
+import { agentTaskSnapshotOptions } from "@workpal/core/agents";
 import {
   PRIORITY_DISPLAY_ORDER,
   PRIORITY_CONFIG,
-} from "@multica/core/issues/config";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { useIssueUnread, useMarkIssueRead, useMarkIssueUnread } from "@multica/core/issues/unread";
-import { useActorName } from "@multica/core/workspace/hooks";
-import { useIssueStatuses } from "@multica/core/issue-statuses/hooks";
-import { stepHandsOff, workflowAllowsStatus, workflowStep } from "@multica/core/issue-workflows";
-import { useModalStore } from "@multica/core/modals";
+} from "@workpal/core/issues/config";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { useIssueUnread, useMarkIssueRead, useMarkIssueUnread } from "@workpal/core/issues/unread";
+import { useActorName } from "@workpal/core/workspace/hooks";
+import { useIssueStatuses } from "@workpal/core/issue-statuses/hooks";
+import { stepHandsOff, workflowAllowsStatus, workflowStep } from "@workpal/core/issue-workflows";
+import { useModalStore } from "@workpal/core/modals";
 import { useIssueStatusOptions } from "../utils/status-options";
 import { useStatusLabel } from "../utils/status-label";
-import { issueTasksOptions } from "@multica/core/issues/queries";
+import { issueTasksOptions } from "@workpal/core/issues/queries";
 import { StatusIcon } from "../components/status-icon";
 import { PriorityIcon } from "../components/priority-icon";
 import { selectIssueTasks } from "../surface/activity";
 import { AssigneePickerPanel } from "../components/pickers";
 import { useQuickActionRunner } from "../hooks/use-quick-action-runner";
-import { copyText } from "@multica/ui/lib/clipboard";
+import { copyText } from "@workpal/ui/lib/clipboard";
 import {
   contextPrimitives,
   dropdownPrimitives,

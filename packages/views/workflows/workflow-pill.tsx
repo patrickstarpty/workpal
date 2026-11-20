@@ -1,8 +1,8 @@
 "use client";
 
-import { Check, Workflow } from "@multica/ui/icons";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { useIssueWorkflows } from "@multica/core/issue-workflows";
+import { Check, Workflow } from "@workpal/ui/icons";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { useIssueWorkflows } from "@workpal/core/issue-workflows";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -10,7 +10,7 @@ import {
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuTrigger,
-} from "@multica/ui/components/ui/dropdown-menu";
+} from "@workpal/ui/components/ui/dropdown-menu";
 import { PillButton } from "../common/pill-button";
 import { useT } from "../i18n";
 

@@ -32,7 +32,7 @@ export * from "./safe-mode";
  * Appearance sits on top of light/dark mode: a theme (see ./themes) with its
  * options, type for the interface and for content, density and two
  * accessibility switches. All of it is saved on this device.
- * `AppearanceSync` in @multica/views writes it onto `<html>`: global
+ * `AppearanceSync` in @workpal/views writes it onto `<html>`: global
  * variables as inline style, the theme's CSS and the adjustments on top of
  * it as two generated stylesheets.
  */
@@ -100,7 +100,7 @@ export const DEFAULT_APPEARANCE: AppearancePreferences = {
   highContrast: false,
 };
 
-export const APPEARANCE_STORAGE_KEY = "multica_appearance";
+export const APPEARANCE_STORAGE_KEY = "workpal_appearance";
 export const APPEARANCE_THEME_ATTR = "data-theme";
 
 const oneOf =

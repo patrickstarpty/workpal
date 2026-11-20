@@ -6,7 +6,7 @@ import (
 
 	"github.com/go-chi/chi/v5"
 
-	"github.com/multica-ai/multica/server/internal/testutil"
+	"workpal.local/workpal/server/internal/testutil"
 )
 
 func TestQoderDisconnectRemovesConnectionAndUnbindsAgents(t *testing.T) {

@@ -21,7 +21,7 @@ func TestWecomScanInstallIsForWorkspaceAdmins(t *testing.T) {
 
 	var memberID string
 	if err := testPool.QueryRow(ctx, `
-		INSERT INTO "user" (name, email) VALUES ('Scan Agent Owner', 'scan-agent-owner@multica.test')
+		INSERT INTO "user" (name, email) VALUES ('Scan Agent Owner', 'scan-agent-owner@workpal.test')
 		RETURNING id`).Scan(&memberID); err != nil {
 		t.Fatalf("create member: %v", err)
 	}
@@ -53,7 +53,7 @@ func TestWecomScanInstallIsForWorkspaceAdmins(t *testing.T) {
 	t.Cleanup(func() {
 		_, _ = testPool.Exec(context.Background(), `DELETE FROM wecom_install_session WHERE id = $1`, sessionID)
 	})
-	memberToken, err := generateTestJWT(memberID, "scan-agent-owner@multica.test", "Scan Agent Owner")
+	memberToken, err := generateTestJWT(memberID, "scan-agent-owner@workpal.test", "Scan Agent Owner")
 	if err != nil {
 		t.Fatalf("member token: %v", err)
 	}

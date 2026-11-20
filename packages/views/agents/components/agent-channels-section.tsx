@@ -2,18 +2,18 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import type { Agent } from "@multica/core/types";
-import { dingtalkAgentGroupsOptions } from "@multica/core/dingtalk";
-import { Button } from "@multica/ui/components/ui/button";
-import { IconButton } from "@multica/ui/components/common/icon-button";
-import { ExternalLink, MoreHorizontal, Plus } from "@multica/ui/icons";
+import type { Agent } from "@workpal/core/types";
+import { dingtalkAgentGroupsOptions } from "@workpal/core/dingtalk";
+import { Button } from "@workpal/ui/components/ui/button";
+import { IconButton } from "@workpal/ui/components/common/icon-button";
+import { ExternalLink, MoreHorizontal, Plus } from "@workpal/ui/icons";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@multica/ui/components/ui/dropdown-menu";
+} from "@workpal/ui/components/ui/dropdown-menu";
 
 import { docsLocalePrefix } from "../../common/docs-locale";
 import { ObjectSection, ObjectSectionAction } from "../../layout/object-page";
@@ -313,7 +313,7 @@ function AgentChannelRow({
                   <DropdownMenuItem
                     onClick={() =>
                       openExternal(
-                        `https://multica.ai/docs${docsLocalePrefix(i18n.language)}/lark-bot-integration`,
+                        `https://workpal.invalid/docs${docsLocalePrefix(i18n.language)}/lark-bot-integration`,
                       )
                     }
                   >

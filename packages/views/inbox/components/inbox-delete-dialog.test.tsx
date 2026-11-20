@@ -1,15 +1,15 @@
 import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { I18nProvider } from "@multica/core/i18n/react";
-import { setApiInstance } from "@multica/core/api";
-import type { ApiClient } from "@multica/core/api/client";
-import type { InboxItem } from "@multica/core/types";
+import { I18nProvider } from "@workpal/core/i18n/react";
+import { setApiInstance } from "@workpal/core/api";
+import type { ApiClient } from "@workpal/core/api/client";
+import type { InboxItem } from "@workpal/core/types";
 import enInbox from "../../locales/en/inbox.json";
 import { InboxDeleteDialog } from "./inbox-delete-dialog";
 import type { InboxView } from "./inbox-view";
 
-vi.mock("@multica/core/hooks", () => ({ useWorkspaceId: () => "workspace-1" }));
+vi.mock("@workpal/core/hooks", () => ({ useWorkspaceId: () => "workspace-1" }));
 
 const entry = { id: "notification-1", title: "Create with agent failed", issue_id: null } as InboxItem;
 function setup(remove = vi.fn(async () => ({ count: 1 })), issueId: string | null = null, view: InboxView = "inbox") {

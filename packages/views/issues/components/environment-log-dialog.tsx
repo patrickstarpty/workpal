@@ -3,17 +3,17 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { toast } from "sonner";
-import { api } from "@multica/core/api";
-import { issueEnvironmentCommandOptions } from "@multica/core/issues/environments";
-import type { IssueEnvironment } from "@multica/core/types";
-import { ArrowDownToLine, Copy, RefreshCw, RotateCw, Search, Server, WrapText } from "@multica/ui/icons";
-import { Button } from "@multica/ui/components/ui/button";
-import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@multica/ui/components/ui/dialog";
-import { Input } from "@multica/ui/components/ui/input";
-import { Spinner } from "@multica/ui/components/ui/spinner";
-import { Toggle } from "@multica/ui/components/ui/toggle";
-import { copyText } from "@multica/ui/lib/clipboard";
-import { cn } from "@multica/ui/lib/utils";
+import { api } from "@workpal/core/api";
+import { issueEnvironmentCommandOptions } from "@workpal/core/issues/environments";
+import type { IssueEnvironment } from "@workpal/core/types";
+import { ArrowDownToLine, Copy, RefreshCw, RotateCw, Search, Server, WrapText } from "@workpal/ui/icons";
+import { Button } from "@workpal/ui/components/ui/button";
+import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@workpal/ui/components/ui/dialog";
+import { Input } from "@workpal/ui/components/ui/input";
+import { Spinner } from "@workpal/ui/components/ui/spinner";
+import { Toggle } from "@workpal/ui/components/ui/toggle";
+import { copyText } from "@workpal/ui/lib/clipboard";
+import { cn } from "@workpal/ui/lib/utils";
 import { useLocale, useT } from "../../i18n";
 import { classifyLogLines, environmentTitle, exitCode, isLive } from "./environment-model";
 

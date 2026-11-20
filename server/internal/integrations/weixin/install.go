@@ -13,11 +13,11 @@ import (
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgtype"
 
-	"github.com/multica-ai/multica/server/internal/integrations/channel/engine"
-	"github.com/multica-ai/multica/server/internal/util"
-	"github.com/multica-ai/multica/server/internal/util/secretbox"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
-	"github.com/multica-ai/multica/server/pkg/dbid"
+	"workpal.local/workpal/server/internal/integrations/channel/engine"
+	"workpal.local/workpal/server/internal/util"
+	"workpal.local/workpal/server/internal/util/secretbox"
+	db "workpal.local/workpal/server/pkg/db/generated"
+	"workpal.local/workpal/server/pkg/dbid"
 )
 
 var (
@@ -46,7 +46,7 @@ func (e *ConflictError) Error() string { return ErrConflict.Error() }
 func (e *ConflictError) Unwrap() error { return ErrConflict }
 
 // LoginView never contains bot credentials, the polling QR value, or a code.
-// Only the initiating Multica user can retrieve this short-lived view.
+// Only the initiating Workpal user can retrieve this short-lived view.
 type LoginView struct {
 	ID             string `json:"id"`
 	Status         string `json:"status"`
@@ -315,7 +315,7 @@ func (s *InstallService) complete(ctx context.Context, session db.WeixinLoginSes
 	if err != nil {
 		return err
 	}
-	if _, err := q.CreateChannelUserBinding(ctx, db.CreateChannelUserBindingParams{WorkspaceID: session.WorkspaceID, MulticaUserID: session.InitiatorUserID, InstallationID: inst.ID, ChannelType: string(TypeWeixin), ChannelUserID: result.UserID, Config: []byte(`{}`)}); err != nil {
+	if _, err := q.CreateChannelUserBinding(ctx, db.CreateChannelUserBindingParams{WorkspaceID: session.WorkspaceID, WorkpalUserID: session.InitiatorUserID, InstallationID: inst.ID, ChannelType: string(TypeWeixin), ChannelUserID: result.UserID, Config: []byte(`{}`)}); err != nil {
 		return err
 	}
 	if err := q.ResetWeixinAccountState(ctx, db.ResetWeixinAccountStateParams{InstallationID: inst.ID, BotID: result.BotID, UserID: result.UserID}); err != nil {

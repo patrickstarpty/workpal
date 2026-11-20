@@ -41,7 +41,7 @@ describe("useAgentsViewStore", () => {
     await flush();
     useAgentsViewStore.getState().setScope("all");
 
-    const raw = localStorage.getItem("multica_agents_view:acme");
+    const raw = localStorage.getItem("workpal_agents_view:acme");
     expect(raw).not.toBeNull();
     const parsed = JSON.parse(raw as string);
     expect(Object.keys(parsed.state).sort()).toEqual([
@@ -56,11 +56,11 @@ describe("useAgentsViewStore", () => {
 
   it("rehydrates a different saved scope on workspace switch", async () => {
     localStorage.setItem(
-      "multica_agents_view:acme",
+      "workpal_agents_view:acme",
       JSON.stringify({ state: { scope: "all" }, version: 0 }),
     );
     localStorage.setItem(
-      "multica_agents_view:beta",
+      "workpal_agents_view:beta",
       JSON.stringify({ state: { scope: "mine" }, version: 0 }),
     );
 
@@ -77,7 +77,7 @@ describe("useAgentsViewStore", () => {
 
   it("resets to 'mine' when switching to a workspace with no persisted value", async () => {
     localStorage.setItem(
-      "multica_agents_view:acme",
+      "workpal_agents_view:acme",
       JSON.stringify({ state: { scope: "all" }, version: 0 }),
     );
 
@@ -90,7 +90,7 @@ describe("useAgentsViewStore", () => {
     await flush();
     await flush();
     expect(useAgentsViewStore.getState().scope).toBe("mine");
-    expect(localStorage.getItem("multica_agents_view:acme")).not.toBeNull();
+    expect(localStorage.getItem("workpal_agents_view:acme")).not.toBeNull();
   });
 
   it("backfills new filter dimensions when rehydrating a pre-owners payload", async () => {
@@ -98,7 +98,7 @@ describe("useAgentsViewStore", () => {
     // the key to undefined (the agents list filter predicate reads
     // `filters.owners.length` and would crash).
     localStorage.setItem(
-      "multica_agents_view:acme",
+      "workpal_agents_view:acme",
       JSON.stringify({
         state: { filters: { availability: ["online"], runtimes: [] } },
         version: 0,
@@ -134,7 +134,7 @@ describe("useAgentsViewStore", () => {
       useAgentsViewStore.getState().toggleFilter("access", "specific-people");
       await flush();
 
-      const raw = localStorage.getItem("multica_agents_view:acme");
+      const raw = localStorage.getItem("workpal_agents_view:acme");
       expect(raw).not.toBeNull();
       const parsed = JSON.parse(raw as string);
       expect(parsed.state.filters.access).toEqual(["specific-people"]);
@@ -142,14 +142,14 @@ describe("useAgentsViewStore", () => {
 
     it("rehydrates a saved access filter on workspace switch", async () => {
       localStorage.setItem(
-        "multica_agents_view:acme",
+        "workpal_agents_view:acme",
         JSON.stringify({
           state: { filters: { access: ["owner-only"] } },
           version: 0,
         }),
       );
       localStorage.setItem(
-        "multica_agents_view:beta",
+        "workpal_agents_view:beta",
         JSON.stringify({
           state: { filters: { access: ["workspace"] } },
           version: 0,
@@ -171,7 +171,7 @@ describe("useAgentsViewStore", () => {
       // Pre-access payloads would leave filters.access undefined and crash
       // the row-filter predicate (`filters.access.length`).
       localStorage.setItem(
-        "multica_agents_view:acme",
+        "workpal_agents_view:acme",
         JSON.stringify({
           state: { filters: { availability: ["online"] } },
           version: 0,
@@ -195,7 +195,7 @@ describe("useAgentsViewStore", () => {
 
     it("migrates a v0 payload by un-hiding model and keeping other hidden columns", async () => {
       localStorage.setItem(
-        "multica_agents_view:acme",
+        "workpal_agents_view:acme",
         JSON.stringify({
           state: { scope: "all", hiddenColumns: ["model", "created", "runs"] },
           version: 0,
@@ -213,7 +213,7 @@ describe("useAgentsViewStore", () => {
 
     it("respects a v1 payload that hides model explicitly", async () => {
       localStorage.setItem(
-        "multica_agents_view:acme",
+        "workpal_agents_view:acme",
         JSON.stringify({
           state: { hiddenColumns: ["model"] },
           version: 1,
@@ -229,7 +229,7 @@ describe("useAgentsViewStore", () => {
 
     it("moves a v1 payload still on the old default to the new default", async () => {
       localStorage.setItem(
-        "multica_agents_view:acme",
+        "workpal_agents_view:acme",
         JSON.stringify({ state: { hiddenColumns: ["created"] }, version: 1 }),
       );
 
@@ -246,7 +246,7 @@ describe("useAgentsViewStore", () => {
 
     it("keeps a customised v1 column choice", async () => {
       localStorage.setItem(
-        "multica_agents_view:acme",
+        "workpal_agents_view:acme",
         JSON.stringify({ state: { hiddenColumns: ["created", "runs"] }, version: 1 }),
       );
 
@@ -266,14 +266,14 @@ describe("useAgentsViewStore", () => {
       await flush();
 
       expect(useAgentsViewStore.getState().search).toBe("reviewer");
-      const raw = localStorage.getItem("multica_agents_view:acme");
+      const raw = localStorage.getItem("workpal_agents_view:acme");
       expect(raw).not.toBeNull();
       expect(JSON.parse(raw as string).state).not.toHaveProperty("search");
     });
 
     it("clears the query on workspace switch", async () => {
       localStorage.setItem(
-        "multica_agents_view:beta",
+        "workpal_agents_view:beta",
         JSON.stringify({ state: { scope: "all" }, version: 2 }),
       );
       setCurrentWorkspace("acme", "ws_a");

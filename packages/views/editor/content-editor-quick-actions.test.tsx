@@ -2,8 +2,8 @@ import type { Editor } from "@tiptap/core";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { act, cleanup, fireEvent, screen, waitFor } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import type { ListQuickActionsResponse, QuickAction } from "@multica/core/types";
-import { quickActionKeys } from "@multica/core/quick-actions";
+import type { ListQuickActionsResponse, QuickAction } from "@workpal/core/types";
+import { quickActionKeys } from "@workpal/core/quick-actions";
 import { renderWithI18n } from "../test/i18n";
 import { NavigationProvider } from "../navigation/context";
 import { useQuickActionMenu } from "../issues/hooks/use-quick-action-menu";
@@ -15,12 +15,12 @@ const toastError = vi.hoisted(() => vi.fn());
 
 vi.mock("sonner", () => ({ toast: { error: toastError } }));
 
-vi.mock("@multica/core/api", async (importOriginal) => {
-  const actual = await importOriginal<typeof import("@multica/core/api")>();
+vi.mock("@workpal/core/api", async (importOriginal) => {
+  const actual = await importOriginal<typeof import("@workpal/core/api")>();
   return { ...actual, api: { ...actual.api, listQuickActions, renderQuickAction } };
 });
-vi.mock("@multica/core/paths", async (importOriginal) => ({
-  ...(await importOriginal<typeof import("@multica/core/paths")>()),
+vi.mock("@workpal/core/paths", async (importOriginal) => ({
+  ...(await importOriginal<typeof import("@workpal/core/paths")>()),
   useCurrentWorkspace: () => ({ id: "ws", slug: "test" }),
   useWorkspaceSlug: () => "test",
   useWorkspacePaths: () => ({ issueDetail: (id: string) => `/test/issues/${id}` }),

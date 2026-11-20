@@ -1,9 +1,9 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import type { IssueView } from "@multica/core/api/schemas";
+import type { IssueView } from "@workpal/core/api/schemas";
 import { renderWithI18n } from "../test/i18n";
-import { useActiveIssueViewStore } from "@multica/core/issue-views/active-view-store";
+import { useActiveIssueViewStore } from "@workpal/core/issue-views/active-view-store";
 import { NavigationProvider, type NavigationAdapter } from "../navigation";
 import { AllViewsPage } from "./all-views-page";
 
@@ -23,17 +23,17 @@ vi.mock("@tanstack/react-query", () => ({
     data: queryKey.includes("views") ? mocks.views : [],
   }),
 }));
-vi.mock("@multica/core/issue-views/queries", () => ({
+vi.mock("@workpal/core/issue-views/queries", () => ({
   issueViewEverywhereOptions: () => ({ queryKey: ["views"] }),
 }));
-vi.mock("@multica/core/projects/queries", () => ({
+vi.mock("@workpal/core/projects/queries", () => ({
   projectListOptions: () => ({ queryKey: ["projects"] }),
 }));
-vi.mock("@multica/core/workspace/queries", () => ({
+vi.mock("@workpal/core/workspace/queries", () => ({
   memberListOptions: () => ({ queryKey: ["members"] }),
 }));
-vi.mock("@multica/core/hooks", () => ({ useWorkspaceId: () => "ws-1" }));
-vi.mock("@multica/core/paths", () => ({
+vi.mock("@workpal/core/hooks", () => ({ useWorkspaceId: () => "ws-1" }));
+vi.mock("@workpal/core/paths", () => ({
   useWorkspacePaths: () => ({
     issues: () => "/acme/issues",
     myIssues: () => "/acme/my-issues",
@@ -41,7 +41,7 @@ vi.mock("@multica/core/paths", () => ({
     projectDetail: (id: string) => `/acme/projects/${id}`,
   }),
 }));
-vi.mock("@multica/core/auth", () => ({
+vi.mock("@workpal/core/auth", () => ({
   useAuthStore: (select: (s: { user: { id: string } }) => unknown) => select({ user: { id: "me" } }),
 }));
 vi.mock("../common/actor-avatar", () => ({ ActorAvatar: () => null }));

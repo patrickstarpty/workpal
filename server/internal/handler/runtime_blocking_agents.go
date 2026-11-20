@@ -5,8 +5,8 @@ import (
 	"strings"
 
 	"github.com/jackc/pgx/v5/pgtype"
-	"github.com/multica-ai/multica/server/internal/service"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
+	"workpal.local/workpal/server/internal/service"
+	db "workpal.local/workpal/server/pkg/db/generated"
 )
 
 // A runtime or profile delete is refused while user agents are still bound.
@@ -83,7 +83,7 @@ func classifyBlockingAgent(systemKey pgtype.Text) blockingAgentClass {
 func blockingAgentLabel(name, runtimeName, runtimeStatus string, class blockingAgentClass) string {
 	switch class {
 	case blockingAgentMika, blockingAgentOtherSystem:
-		return fmt.Sprintf("%q on %q (%s, built into Multica)", name, runtimeName, runtimeStatus)
+		return fmt.Sprintf("%q on %q (%s, built into Workpal)", name, runtimeName, runtimeStatus)
 	default:
 		return fmt.Sprintf("%q on %q (%s)", name, runtimeName, runtimeStatus)
 	}
@@ -113,7 +113,7 @@ func blockingAgentRemedies(classes map[blockingAgentClass]bool, scope blockingAg
 
 	var out []string
 	if classes[blockingAgentUser] && mixed {
-		out = append(out, "The agents above that are not marked as built into Multica can be reassigned or archived.")
+		out = append(out, "The agents above that are not marked as built into Workpal can be reassigned or archived.")
 	} else if classes[blockingAgentUser] {
 		out = append(out, "Reassign or archive them first.")
 	}
@@ -132,12 +132,12 @@ func blockingAgentRemedies(classes map[blockingAgentClass]bool, scope blockingAg
 			target = "a runtime that this profile does not provide"
 		}
 		out = append(out, fmt.Sprintf(
-			"Mika is built into Multica, so it cannot be archived — but it can be moved: open Mika's agent page and bind it to %s.",
+			"Mika is built into Workpal, so it cannot be archived — but it can be moved: open Mika's agent page and bind it to %s.",
 			target,
 		))
 	}
 	if classes[blockingAgentOtherSystem] {
-		out = append(out, "Some blockers are agents built into Multica and cannot be archived.")
+		out = append(out, "Some blockers are agents built into Workpal and cannot be archived.")
 	}
 	return out
 }

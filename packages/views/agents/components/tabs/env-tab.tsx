@@ -12,14 +12,14 @@ import {
   Save,
   Trash2,
   WrapText,
-} from "@multica/ui/icons";
-import { api } from "@multica/core/api";
-import type { Agent } from "@multica/core/types";
-import { Button } from "@multica/ui/components/ui/button";
-import { IconButton } from "@multica/ui/components/common/icon-button";
-import { TooltipHint } from "@multica/ui/components/common/tooltip-hint";
-import { Input } from "@multica/ui/components/ui/input";
-import { Textarea } from "@multica/ui/components/ui/textarea";
+} from "@workpal/ui/icons";
+import { api } from "@workpal/core/api";
+import type { Agent } from "@workpal/core/types";
+import { Button } from "@workpal/ui/components/ui/button";
+import { IconButton } from "@workpal/ui/components/common/icon-button";
+import { TooltipHint } from "@workpal/ui/components/common/tooltip-hint";
+import { Input } from "@workpal/ui/components/ui/input";
+import { Textarea } from "@workpal/ui/components/ui/textarea";
 import { toast } from "sonner";
 import { useT } from "../../../i18n";
 import type { EnvParseError } from "./env-file";

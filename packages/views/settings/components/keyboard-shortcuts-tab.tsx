@@ -1,10 +1,10 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { Keyboard, RotateCcw, Search, X } from "@multica/ui/icons";
-import { Button } from "@multica/ui/components/ui/button";
-import { IconButton } from "@multica/ui/components/common/icon-button";
-import { Input } from "@multica/ui/components/ui/input";
+import { Keyboard, RotateCcw, Search, X } from "@workpal/ui/icons";
+import { Button } from "@workpal/ui/components/ui/button";
+import { IconButton } from "@workpal/ui/components/common/icon-button";
+import { Input } from "@workpal/ui/components/ui/input";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -14,8 +14,8 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@multica/ui/components/ui/alert-dialog";
-import { cn } from "@multica/ui/lib/utils";
+} from "@workpal/ui/components/ui/alert-dialog";
+import { cn } from "@workpal/ui/lib/utils";
 import {
   findShortcutConflict,
   createShortcutChord,
@@ -31,8 +31,8 @@ import {
   type ShortcutActionId,
   type ShortcutCategory,
   type ShortcutChord,
-} from "@multica/core/shortcuts";
-import { isImeComposing } from "@multica/core/utils";
+} from "@workpal/core/shortcuts";
+import { isImeComposing } from "@workpal/core/utils";
 import { useT } from "../../i18n";
 import { ShortcutKeycaps } from "../../common/shortcut-keycaps";
 import {

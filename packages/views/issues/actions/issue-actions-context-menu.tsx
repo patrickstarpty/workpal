@@ -13,12 +13,12 @@ import {
   type ReactNode,
 } from "react";
 import { toast } from "sonner";
-import type { AgentTask, Issue } from "@multica/core/types";
-import { useCancelIssueRun } from "@multica/core/issues/mutations";
+import type { AgentTask, Issue } from "@workpal/core/types";
+import { useCancelIssueRun } from "@workpal/core/issues/mutations";
 import {
   ContextMenu,
   ContextMenuContent,
-} from "@multica/ui/components/ui/context-menu";
+} from "@workpal/ui/components/ui/context-menu";
 import { useIssueActions } from "./use-issue-actions";
 import {
   IssueActionsMenuItems,

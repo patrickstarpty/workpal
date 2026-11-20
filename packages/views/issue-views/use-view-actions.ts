@@ -3,28 +3,28 @@
 import { useCallback, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { toast } from "sonner";
-import { copyText } from "@multica/ui/lib/clipboard";
-import { ApiError } from "@multica/core/api/client";
-import type { CreateIssueViewRequest, IssueView } from "@multica/core/api/schemas";
-import { useAuthStore } from "@multica/core/auth";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { useWorkspacePaths } from "@multica/core/paths";
-import { memberListOptions } from "@multica/core/workspace/queries";
-import { canManageIssueView, type IssueViewScope } from "@multica/core/issue-views/queries";
+import { copyText } from "@workpal/ui/lib/clipboard";
+import { ApiError } from "@workpal/core/api/client";
+import type { CreateIssueViewRequest, IssueView } from "@workpal/core/api/schemas";
+import { useAuthStore } from "@workpal/core/auth";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { useWorkspacePaths } from "@workpal/core/paths";
+import { memberListOptions } from "@workpal/core/workspace/queries";
+import { canManageIssueView, type IssueViewScope } from "@workpal/core/issue-views/queries";
 import {
   useCreateIssueView,
   useDeleteIssueView,
   useUpdateIssueView,
-} from "@multica/core/issue-views/mutations";
-import { useActiveIssueViewStore } from "@multica/core/issue-views/active-view-store";
-import { savedViewItemId, useSidebarViews } from "@multica/core/issue-views/sidebar-views";
-import { issueViewTarget } from "@multica/core/issue-views/view-target";
-import type { IssueViewDefinition } from "@multica/core/issue-views/definition";
+} from "@workpal/core/issue-views/mutations";
+import { useActiveIssueViewStore } from "@workpal/core/issue-views/active-view-store";
+import { savedViewItemId, useSidebarViews } from "@workpal/core/issue-views/sidebar-views";
+import { issueViewTarget } from "@workpal/core/issue-views/view-target";
+import type { IssueViewDefinition } from "@workpal/core/issue-views/definition";
 import {
   useIssueViewRenameStore,
   type IssueViewRenameSurface,
-} from "@multica/core/issue-views/rename-store";
-import { useIssueViewEditStore } from "@multica/core/issue-views/edit-store";
+} from "@workpal/core/issue-views/rename-store";
+import { useIssueViewEditStore } from "@workpal/core/issue-views/edit-store";
 import { useNavigation } from "../navigation";
 import { useT } from "../i18n";
 

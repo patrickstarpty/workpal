@@ -1,12 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { Plus, Workflow } from "@multica/ui/icons";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { statusAcceptsHandoff, workflowStep } from "@multica/core/issue-workflows";
-import { useActorName } from "@multica/core/workspace/hooks";
-import type { IssueWorkflow, Project } from "@multica/core/types";
-import { Popover, PopoverContent, PopoverTrigger } from "@multica/ui/components/ui/popover";
+import { Plus, Workflow } from "@workpal/ui/icons";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { statusAcceptsHandoff, workflowStep } from "@workpal/core/issue-workflows";
+import { useActorName } from "@workpal/core/workspace/hooks";
+import type { IssueWorkflow, Project } from "@workpal/core/types";
+import { Popover, PopoverContent, PopoverTrigger } from "@workpal/ui/components/ui/popover";
 import { ActorAvatar } from "../common/actor-avatar";
 import { useStatusLabel } from "../issues/utils/status-label";
 import { useT } from "../i18n";

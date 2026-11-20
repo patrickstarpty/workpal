@@ -1,10 +1,10 @@
 "use client";
 
 import React, { useMemo, useState } from "react";
-import { Plus } from "@multica/ui/icons";
-import { Button } from "@multica/ui/components/ui/button";
-import { IconButton } from "@multica/ui/components/common/icon-button";
-import { Tooltip, TooltipTrigger, TooltipContent } from "@multica/ui/components/ui/tooltip";
+import { Plus } from "@workpal/ui/icons";
+import { Button } from "@workpal/ui/components/ui/button";
+import { IconButton } from "@workpal/ui/components/common/icon-button";
+import { Tooltip, TooltipTrigger, TooltipContent } from "@workpal/ui/components/ui/tooltip";
 import { ActorAvatar } from "../../common/actor-avatar";
 import {
   PickerEmpty,
@@ -13,8 +13,8 @@ import {
   PropertyPicker,
 } from "../../issues/components/pickers/property-picker";
 import { matchesPinyin } from "../../editor/extensions/pinyin-match";
-import type { Agent } from "@multica/core/types";
-import { isAgentRuntimeBound } from "@multica/core/agents";
+import type { Agent } from "@workpal/core/types";
+import { isAgentRuntimeBound } from "@workpal/core/agents";
 import { toast } from "sonner";
 import { useT } from "../../i18n";
 

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import type { Label } from "@multica/core/types";
+import type { Label } from "@workpal/core/types";
 import { renderWithI18n } from "../test/i18n";
 import { LabelChip } from "./label-chip";
 

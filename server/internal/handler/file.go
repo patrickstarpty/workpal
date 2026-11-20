@@ -20,11 +20,11 @@ import (
 	"github.com/google/uuid"
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgtype"
-	"github.com/multica-ai/multica/server/internal/imagemetadata"
-	"github.com/multica-ai/multica/server/internal/storage"
-	"github.com/multica-ai/multica/server/internal/util"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
-	"github.com/multica-ai/multica/server/pkg/protocol"
+	"workpal.local/workpal/server/internal/imagemetadata"
+	"workpal.local/workpal/server/internal/storage"
+	"workpal.local/workpal/server/internal/util"
+	db "workpal.local/workpal/server/pkg/db/generated"
+	"workpal.local/workpal/server/pkg/protocol"
 )
 
 // extContentTypes overrides http.DetectContentType for extensions it gets wrong.
@@ -78,7 +78,7 @@ type AttachmentResponse struct {
 	// chat messages). It is computed per deployment policy by
 	// buildMarkdownURL — preferring the storage URL when it is already a
 	// public, durable absolute URL (public CDN), and otherwise prefixing
-	// MULTICA_PUBLIC_URL onto the stable per-attachment endpoint that the
+	// WORKPAL_PUBLIC_URL onto the stable per-attachment endpoint that the
 	// server self-resigns / proxies on every request.
 	//
 	// Why a separate field from URL / DownloadURL:
@@ -232,11 +232,11 @@ func (h *Handler) attachmentToResponse(a db.Attachment, mode attachmentURLMode) 
 //     against a private bucket without a CDN domain, raw S3 / R2 /
 //     MinIO, and all LocalStorage deployments — uses the
 //     stable per-attachment endpoint that the server self-signs /
-//     proxies on every request, anchored on `MULTICA_PUBLIC_URL` so the
+//     proxies on every request, anchored on `WORKPAL_PUBLIC_URL` so the
 //     persisted URL keeps working for clients that don't share the
 //     document origin (Desktop / mobile webview).
 //
-//  3. Last-resort fallback (no `MULTICA_PUBLIC_URL` configured): emit
+//  3. Last-resort fallback (no `WORKPAL_PUBLIC_URL` configured): emit
 //     the site-relative path. Web's Next.js rewrite handles this; non-
 //     web clients on a deployment without `PublicURL` configured were
 //     already broken before MUL-3192 and stay broken here, but we
@@ -1035,7 +1035,7 @@ func shouldProxyAttachmentURL(rawURL string) bool {
 		return addr.IsLoopback() ||
 			addr.IsPrivate() ||
 			addr.IsLinkLocalUnicast() ||
-			addr.IsLinkLocalMulticast() ||
+			addr.IsLinkLocalWorkpalst() ||
 			addr.IsUnspecified()
 	}
 	return false

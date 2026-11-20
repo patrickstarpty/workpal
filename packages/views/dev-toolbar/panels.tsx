@@ -9,10 +9,10 @@ import {
   DEV_RECORDING_WINDOW_MS,
   type DevRecording,
   type DevRequest,
-} from "@multica/core/diagnostics";
-import { ChevronDown, ChevronRight, Copy, Trash2 } from "@multica/ui/icons";
-import { copyText } from "@multica/ui/lib/clipboard";
-import { cn } from "@multica/ui/lib/utils";
+} from "@workpal/core/diagnostics";
+import { ChevronDown, ChevronRight, Copy, Trash2 } from "@workpal/ui/icons";
+import { copyText } from "@workpal/ui/lib/clipboard";
+import { cn } from "@workpal/ui/lib/utils";
 import {
   curlCommand,
   firstStackFrame,

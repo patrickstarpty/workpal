@@ -5,7 +5,7 @@ import (
 
 	"github.com/jackc/pgx/v5/pgtype"
 
-	"github.com/multica-ai/multica/server/internal/util"
+	"workpal.local/workpal/server/internal/util"
 )
 
 // Claim decision observability (#8551, queue-wait attribution).
@@ -87,7 +87,7 @@ const (
 )
 
 // Claim poll paths, as seen by the counter's claim_path label. Distinct from
-// the task-origin `source` label used by the other multica_agent_task_*
+// the task-origin `source` label used by the other workpal_agent_task_*
 // metrics: those classify where a task came from (issue, chat, autopilot),
 // while this classifies which poll path made the decision.
 const (

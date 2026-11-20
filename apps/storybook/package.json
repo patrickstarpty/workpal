@@ -1,5 +1,5 @@
 {
-  "name": "@multica/storybook",
+  "name": "@workpal/storybook",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -11,15 +11,15 @@
   },
   "dependencies": {
     "@fontsource-variable/inter": "catalog:",
-    "@multica/ui": "workspace:*",
+    "@workpal/ui": "workspace:*",
     "react": "catalog:",
     "react-dom": "catalog:",
     "shadcn": "catalog:",
     "tw-animate-css": "catalog:"
   },
   "devDependencies": {
-    "@multica/eslint-config": "workspace:*",
-    "@multica/tsconfig": "workspace:*",
+    "@workpal/eslint-config": "workspace:*",
+    "@workpal/tsconfig": "workspace:*",
     "@storybook/react-vite": "^10.6.7",
     "@tailwindcss/vite": "catalog:",
     "@types/react": "catalog:",

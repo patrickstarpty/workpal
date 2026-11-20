@@ -3,13 +3,13 @@
 import * as React from "react"
 import { Menu as MenuPrimitive } from "@base-ui/react/menu"
 
-import { cn } from "@multica/ui/lib/utils"
-import { ChevronRightIcon, CheckIcon } from "@multica/ui/icons"
+import { cn } from "@workpal/ui/lib/utils"
+import { ChevronRightIcon, CheckIcon } from "@workpal/ui/icons"
 import {
   ContextMenuOwnerProvider,
   useContextMenuOwner,
   useContextMenuOwnerRef,
-} from "@multica/ui/hooks/use-context-menu-owner"
+} from "@workpal/ui/hooks/use-context-menu-owner"
 
 function DropdownMenu({ onOpenChange, ...props }: MenuPrimitive.Root.Props) {
   const owner = useContextMenuOwner(onOpenChange)

@@ -213,7 +213,7 @@ func (b *devinBackend) Execute(ctx context.Context, prompt string, opts ExecOpti
 		initResult, err := c.request(runCtx, "initialize", map[string]any{
 			"protocolVersion": 1,
 			"clientInfo": map[string]any{
-				"name":    "multica-agent-sdk",
+				"name":    "workpal-agent-sdk",
 				"version": "0.2.0",
 			},
 			"clientCapabilities": map[string]any{},
@@ -435,8 +435,8 @@ func selectDevinAuthMethod(methods []string, haveWindsurfKey bool) string {
 func discoverDevinModels(ctx context.Context, runtimeCmd Command) ([]Model, error) {
 	models, err := discoverACPModels(ctx, runtimeCmd, acpDiscoveryProvider{
 		defaultBin:   "devin",
-		clientName:   "multica-model-discovery",
-		tmpdirPrefix: "multica-devin-discovery-",
+		clientName:   "workpal-model-discovery",
+		tmpdirPrefix: "workpal-devin-discovery-",
 		timeout:      15 * time.Second,
 		strictErrors: true,
 		parseModels:  parseDevinSessionModels,

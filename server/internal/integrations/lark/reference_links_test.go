@@ -8,9 +8,9 @@ import (
 	"testing"
 
 	"github.com/jackc/pgx/v5/pgtype"
-	"github.com/multica-ai/multica/server/internal/events"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
-	"github.com/multica-ai/multica/server/pkg/protocol"
+	"workpal.local/workpal/server/internal/events"
+	db "workpal.local/workpal/server/pkg/db/generated"
+	"workpal.local/workpal/server/pkg/protocol"
 )
 
 const referenceUUID = "11111111-1111-4111-8111-111111111111"
@@ -361,13 +361,13 @@ func TestPatcherLinksIssueReferencesForFeishu(t *testing.T) {
 			base.installation.WorkspaceID = wsID
 			q := &referenceLinkQueryFake{fakePatcherQueries: base, workspace: db.Workspace{ID: wsID, Slug: "demo", IssuePrefix: "DEMO"}}
 			p.queries = q
-			p.cfg.AppURL = "https://multica.example"
+			p.cfg.AppURL = "https://workpal.example"
 			p.handleEvent(events.Event{Type: protocol.EventChatDone, TaskID: "eeeeeeee-eeee-eeee-eeee-eeeeeeeeeeee", ChatSessionID: uuidString(base.binding.ChatSessionID), Payload: protocol.ChatDonePayload{Content: tc.body}})
 			if len(api.mdCardSent) != 1 || len(api.textSent) != 0 {
 				t.Fatalf("cards=%d, texts=%d", len(api.mdCardSent), len(api.textSent))
 			}
 			got := api.mdCardSent[0]
-			want := prependMarkdownMention("ou_sender", "已记录：[DEMO-193](https://multica.example/demo/issues/"+tc.target+")。")
+			want := prependMarkdownMention("ou_sender", "已记录：[DEMO-193](https://workpal.example/demo/issues/"+tc.target+")。")
 			if got.Markdown != want || got.ReplyTarget != threadReplyTarget(base.binding) {
 				t.Fatalf("outbound=%+v, want=%q", got, want)
 			}

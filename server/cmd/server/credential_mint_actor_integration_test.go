@@ -7,7 +7,7 @@ import (
 	"net/http"
 	"testing"
 
-	"github.com/multica-ai/multica/server/internal/auth"
+	"workpal.local/workpal/server/internal/auth"
 )
 
 // TestCredentialRoutesRejectTaskToken exercises the real Auth -> router ->

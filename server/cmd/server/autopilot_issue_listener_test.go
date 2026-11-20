@@ -4,10 +4,10 @@ import (
 	"context"
 	"testing"
 
-	"github.com/multica-ai/multica/server/internal/events"
-	"github.com/multica-ai/multica/server/internal/handler"
-	"github.com/multica-ai/multica/server/internal/service"
-	"github.com/multica-ai/multica/server/pkg/protocol"
+	"workpal.local/workpal/server/internal/events"
+	"workpal.local/workpal/server/internal/handler"
+	"workpal.local/workpal/server/internal/service"
+	"workpal.local/workpal/server/pkg/protocol"
 )
 
 // publishIssueUpdated fires the same event the autopilot listener subscribes

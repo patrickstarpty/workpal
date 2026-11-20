@@ -2,9 +2,9 @@ package lark
 
 import (
 	"context"
-	"github.com/multica-ai/multica/server/internal/integrations/channel"
-	"github.com/multica-ai/multica/server/internal/integrations/channel/engine"
-	dbfx "github.com/multica-ai/multica/server/internal/testutil"
+	"workpal.local/workpal/server/internal/integrations/channel"
+	"workpal.local/workpal/server/internal/integrations/channel/engine"
+	dbfx "workpal.local/workpal/server/internal/testutil"
 	"testing"
 )
 

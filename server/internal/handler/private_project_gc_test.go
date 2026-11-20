@@ -4,8 +4,8 @@ import (
 	"net/http"
 	"testing"
 
-	"github.com/multica-ai/multica/server/internal/middleware"
-	"github.com/multica-ai/multica/server/internal/testutil"
+	"workpal.local/workpal/server/internal/middleware"
+	"workpal.local/workpal/server/internal/testutil"
 )
 
 // A member's credential on the daemon GC routes must not read the lifecycle

@@ -1,12 +1,12 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { History, Loader2 } from "@multica/ui/icons";
-import { useWorkspacePaths } from "@multica/core/paths";
-import type { ChatSession } from "@multica/core/types";
-import { TooltipHint } from "@multica/ui/components/common/tooltip-hint";
-import { Popover, PopoverContent, PopoverTrigger } from "@multica/ui/components/ui/popover";
-import { cn } from "@multica/ui/lib/utils";
+import { History, Loader2 } from "@workpal/ui/icons";
+import { useWorkspacePaths } from "@workpal/core/paths";
+import type { ChatSession } from "@workpal/core/types";
+import { TooltipHint } from "@workpal/ui/components/common/tooltip-hint";
+import { Popover, PopoverContent, PopoverTrigger } from "@workpal/ui/components/ui/popover";
+import { cn } from "@workpal/ui/lib/utils";
 import { useT } from "../../i18n";
 import { BOTTOM_BAR_ICON_ITEM_CLASS } from "../../layout/bottom-bar-styles";
 import { AppLink } from "../../navigation";

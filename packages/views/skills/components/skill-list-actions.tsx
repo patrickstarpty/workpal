@@ -10,22 +10,22 @@ import {
   RotateCw,
   Search,
   Trash2,
-} from "@multica/ui/icons";
+} from "@workpal/ui/icons";
 import { useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
-import type { Agent, SkillSummary } from "@multica/core/types";
-import { api } from "@multica/core/api";
-import { workspaceKeys } from "@multica/core/workspace/queries";
-import { useWorkspacePaths } from "@multica/core/paths";
-import { resolvePublicFileUrl } from "@multica/core/workspace/avatar-url";
-import { Button } from "@multica/ui/components/ui/button";
-import { Checkbox } from "@multica/ui/components/ui/checkbox";
-import { Input } from "@multica/ui/components/ui/input";
+import type { Agent, SkillSummary } from "@workpal/core/types";
+import { api } from "@workpal/core/api";
+import { workspaceKeys } from "@workpal/core/workspace/queries";
+import { useWorkspacePaths } from "@workpal/core/paths";
+import { resolvePublicFileUrl } from "@workpal/core/workspace/avatar-url";
+import { Button } from "@workpal/ui/components/ui/button";
+import { Checkbox } from "@workpal/ui/components/ui/checkbox";
+import { Input } from "@workpal/ui/components/ui/input";
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-} from "@multica/ui/components/ui/collapsible";
+} from "@workpal/ui/components/ui/collapsible";
 import {
   Dialog,
   DialogContent,
@@ -33,18 +33,18 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "@multica/ui/components/ui/dialog";
+} from "@workpal/ui/components/ui/dialog";
 import {
   DropdownMenuItem,
   DropdownMenuSeparator,
-} from "@multica/ui/components/ui/dropdown-menu";
+} from "@workpal/ui/components/ui/dropdown-menu";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from "@multica/ui/components/ui/tooltip";
-import { ActorAvatar } from "@multica/ui/components/common/actor-avatar";
-import { cn } from "@multica/ui/lib/utils";
+} from "@workpal/ui/components/ui/tooltip";
+import { ActorAvatar } from "@workpal/ui/components/common/actor-avatar";
+import { cn } from "@workpal/ui/lib/utils";
 import { useT } from "../../i18n";
 import { useIntentNavigate } from "../../navigation";
 import {

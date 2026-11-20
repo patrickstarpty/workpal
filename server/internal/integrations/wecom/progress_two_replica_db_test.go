@@ -24,12 +24,12 @@ import (
 	"github.com/jackc/pgx/v5/pgtype"
 	"github.com/jackc/pgx/v5/pgxpool"
 
-	"github.com/multica-ai/multica/server/internal/events"
-	"github.com/multica-ai/multica/server/internal/integrations/channel"
-	"github.com/multica-ai/multica/server/internal/integrations/channel/engine"
-	"github.com/multica-ai/multica/server/internal/util"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
-	"github.com/multica-ai/multica/server/pkg/protocol"
+	"workpal.local/workpal/server/internal/events"
+	"workpal.local/workpal/server/internal/integrations/channel"
+	"workpal.local/workpal/server/internal/integrations/channel/engine"
+	"workpal.local/workpal/server/internal/util"
+	db "workpal.local/workpal/server/pkg/db/generated"
+	"workpal.local/workpal/server/pkg/protocol"
 )
 
 // progressTurn is a boundTurn whose asker is the bot's principal in their own
@@ -56,7 +56,7 @@ func seedProgressTurn(t *testing.T, pool *pgxpool.Pool) *progressTurn {
 	}
 	turn.sender = "SENDER_" + strings.ReplaceAll(turn.chatID, "CHAT_", "")
 	if _, err := pool.Exec(ctx, `INSERT INTO channel_user_binding
-	        (workspace_id, multica_user_id, installation_id, channel_type, channel_user_id)
+	        (workspace_id, workpal_user_id, installation_id, channel_type, channel_user_id)
 	      VALUES ($1, $2, $3, 'wecom', $4)`,
 		workspaceID, turn.installer, turn.instID, turn.sender); err != nil {
 		t.Fatalf("seed: bind the principal: %v", err)

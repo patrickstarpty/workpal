@@ -1,4 +1,4 @@
-import type { LocaleResources } from "@multica/core/i18n";
+import type { LocaleResources } from "@workpal/core/i18n";
 import zhHantCommon from "./zh-Hant/common.json";
 import zhHantAuth from "./zh-Hant/auth.json";
 import zhHantSettings from "./zh-Hant/settings.json";

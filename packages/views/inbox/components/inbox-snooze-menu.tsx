@@ -7,9 +7,9 @@ import {
   inboxSnoozeOptions,
   inboxSnoozePickedTime,
   type InboxSnoozePreset,
-} from "@multica/core/inbox/snooze";
-import { AlarmClock, ArrowLeft, CalendarDays, ChevronRight, Clock, Undo2 } from "@multica/ui/icons";
-import { Button } from "@multica/ui/components/ui/button";
+} from "@workpal/core/inbox/snooze";
+import { AlarmClock, ArrowLeft, CalendarDays, ChevronRight, Clock, Undo2 } from "@workpal/ui/icons";
+import { Button } from "@workpal/ui/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -19,9 +19,9 @@ import {
   DropdownMenuSeparator,
   DropdownMenuShortcut,
   DropdownMenuTrigger,
-} from "@multica/ui/components/ui/dropdown-menu";
-import { LazyCalendar } from "@multica/ui/components/ui/lazy-calendar";
-import { TimeInput } from "@multica/ui/components/ui/time-input";
+} from "@workpal/ui/components/ui/dropdown-menu";
+import { LazyCalendar } from "@workpal/ui/components/ui/lazy-calendar";
+import { TimeInput } from "@workpal/ui/components/ui/time-input";
 import { useLocale, useT } from "../../i18n";
 import { formatSnoozeTime } from "./inbox-snooze-time";
 

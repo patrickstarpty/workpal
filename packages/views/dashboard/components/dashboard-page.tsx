@@ -1,20 +1,20 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { BarChart3, RefreshCw } from "@multica/ui/icons";
+import { BarChart3, RefreshCw } from "@workpal/ui/icons";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { IconButton } from "@multica/ui/components/common/icon-button";
-import { Skeleton } from "@multica/ui/components/ui/skeleton";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@multica/ui/components/ui/tabs";
+import { IconButton } from "@workpal/ui/components/common/icon-button";
+import { Skeleton } from "@workpal/ui/components/ui/skeleton";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@workpal/ui/components/ui/tabs";
 import {
   CompactNumberFlow,
   CurrencyNumberFlow,
   NumberFlow,
-} from "@multica/ui/components/ui/number-flow";
-import { useWorkspaceId } from "@multica/core/hooks";
-import type { Agent } from "@multica/core/types";
-import { agentListOptions } from "@multica/core/workspace/queries";
-import { projectListOptions } from "@multica/core/projects/queries";
+} from "@workpal/ui/components/ui/number-flow";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import type { Agent } from "@workpal/core/types";
+import { agentListOptions } from "@workpal/core/workspace/queries";
+import { projectListOptions } from "@workpal/core/projects/queries";
 import {
   dashboardKeys,
   dashboardUsageDailyOptions,
@@ -23,8 +23,8 @@ import {
   dashboardRunTimeDailyOptions,
   dashboardFailuresDailyOptions,
   dashboardFailuresByAgentOptions,
-} from "@multica/core/dashboard";
-import { useCustomPricingStore } from "@multica/core/runtimes/custom-pricing-store";
+} from "@workpal/core/dashboard";
+import { useCustomPricingStore } from "@workpal/core/runtimes/custom-pricing-store";
 import { useViewingTimezone } from "../../common/use-viewing-timezone";
 import { CollectionPageState } from "../../layout/collection-page";
 import { PageHeader } from "../../layout/page-header";
@@ -71,12 +71,12 @@ import { ErrorsTab } from "./errors-tab";
 // Stable references — `data ?? []` would create a new empty array on
 // every render while the query is loading, which breaks useMemo's
 // reference-equality dep check and trips the exhaustive-deps lint rule.
-const EMPTY_DAILY: import("@multica/core/types").DashboardUsageDaily[] = [];
-const EMPTY_BY_AGENT: import("@multica/core/types").DashboardUsageByAgent[] = [];
-const EMPTY_RUNTIME: import("@multica/core/types").DashboardAgentRunTime[] = [];
-const EMPTY_RUNTIME_DAILY: import("@multica/core/types").DashboardRunTimeDaily[] = [];
-const EMPTY_FAILURE_DAILY: import("@multica/core/types").DashboardFailureDaily[] = [];
-const EMPTY_FAILURE_BY_AGENT: import("@multica/core/types").DashboardFailureByAgent[] =
+const EMPTY_DAILY: import("@workpal/core/types").DashboardUsageDaily[] = [];
+const EMPTY_BY_AGENT: import("@workpal/core/types").DashboardUsageByAgent[] = [];
+const EMPTY_RUNTIME: import("@workpal/core/types").DashboardAgentRunTime[] = [];
+const EMPTY_RUNTIME_DAILY: import("@workpal/core/types").DashboardRunTimeDaily[] = [];
+const EMPTY_FAILURE_DAILY: import("@workpal/core/types").DashboardFailureDaily[] = [];
+const EMPTY_FAILURE_BY_AGENT: import("@workpal/core/types").DashboardFailureByAgent[] =
   [];
 const EMPTY_AGENTS: Agent[] = [];
 

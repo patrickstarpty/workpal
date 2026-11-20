@@ -20,12 +20,12 @@ func TestAmpDiscoveryAndConfiguration(t *testing.T) {
 				t.Fatal(err)
 			}
 			t.Setenv("SHELL", "/usr/bin/fish")
-			t.Setenv("MULTICA_AMP_PATH", "")
+			t.Setenv("WORKPAL_AMP_PATH", "")
 			if override {
-				t.Setenv("MULTICA_AMP_PATH", path)
+				t.Setenv("WORKPAL_AMP_PATH", path)
 			}
-			t.Setenv("MULTICA_AMP_MODEL", "high")
-			t.Setenv("MULTICA_AMP_ARGS", "--features fast")
+			t.Setenv("WORKPAL_AMP_MODEL", "high")
+			t.Setenv("WORKPAL_AMP_ARGS", "--features fast")
 			cfg, err := LoadConfig(Overrides{ServerURL: "http://localhost:0", WorkspacesRoot: t.TempDir()})
 			if err != nil {
 				t.Fatal(err)

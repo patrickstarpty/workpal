@@ -31,12 +31,12 @@ for (const [name, files, selected] of [
   ["process-group caller", ["server/internal/daemon/gc.go"], ["backend", "runtime"]],
   ["native test compilation dependency", ["server/pkg/db/generated/issues.sql.go"], ["backend", "sqlc", "runtime"]],
   ["Go dependencies", ["server/go.mod", "server/go.sum"], ["backend", "runtime"]],
-  ["Helm only", ["deploy/helm/multica/templates/deployment.yaml"], ["scripts"]],
+  ["Helm only", ["deploy/helm/workpal/templates/deployment.yaml"], ["scripts"]],
   ["container entrypoint", ["docker/entrypoint.sh"], ["scripts"]],
   ["selfhost config", [".env.example"], ["backend", "scripts", "installer"]],
   ["selfhost compose", ["docker-compose.selfhost.yml"], ["backend", "scripts", "installer"]],
-  ["local environment config", [".multica/environments.toml"], ["backend", "scripts"]],
-  ["plugin example", ["examples/plugins/hello-panel/multica.plugin.json"], ["backend"]],
+  ["local environment config", [".workpal/environments.toml"], ["backend", "scripts"]],
+  ["plugin example", ["examples/plugins/hello-panel/workpal.plugin.json"], ["backend"]],
   ["shell installer", ["scripts/install.sh"], ["scripts", "installer"]],
   ["PowerShell installer", ["scripts/install.ps1.test.ps1"], ["installer"]],
   ["cleanup script", ["scripts/drop-database.sh"], ["scripts"]],
@@ -47,9 +47,9 @@ for (const [name, files, selected] of [
   ["reserved slug source", ["server/internal/handler/reserved_slugs.json"], ["backend", "runtime", "scripts"]],
   ["reserved slug output", ["packages/core/paths/reserved-slugs.ts"], ["frontend", "quality", "scripts"]],
   ["integration key gates", ["server/cmd/server/router.go"], ["backend", "runtime", "scripts"]],
-  ["brand source", ["packages/ui/lib/multica-brand.ts"], ["frontend", "quality"]],
-  ["CLI brand copy", ["server/cmd/multica/cmd_auth.go"], ["backend", "runtime", "quality"]],
-  ["mobile brand copy", ["apps/mobile/components/brand/multica-logo.tsx"], ["quality"]],
+  ["brand source", ["packages/ui/lib/workpal-brand.ts"], ["frontend", "quality"]],
+  ["CLI brand copy", ["server/cmd/workpal/cmd_auth.go"], ["backend", "runtime", "quality"]],
+  ["mobile brand copy", ["apps/mobile/components/brand/workpal-logo.tsx"], ["quality"]],
   ["README logo", ["docs/assets/logo-dark.svg"], ["quality"]],
   ["brand generator", ["scripts/brand/sync.mjs"], ["quality"]],
   ["PR evidence uploader", ["scripts/pr-shots"], ["quality"]],
@@ -219,12 +219,12 @@ test("quality checks have exactly one runner", () => {
 });
 
 test("docs run their test suite on one runner and are never built", () => {
-  const owners = Object.entries(jobs).filter(([, source]) => source.includes("--filter @multica/docs test")).map(([job]) => job);
+  const owners = Object.entries(jobs).filter(([, source]) => source.includes("--filter @workpal/docs test")).map(([job]) => job);
   assert.deepEqual(owners, ["docs-test"]);
   assert.equal(productionMapping("frontend")["docs-test"], "docs");
   for (const [job, source] of Object.entries(jobs)) {
     for (const [run] of source.matchAll(/turbo build[^\n]*/g)) {
-      assert.match(run, /--filter='!@multica\/docs'/, `${job} builds docs`);
+      assert.match(run, /--filter='!@workpal\/docs'/, `${job} builds docs`);
     }
   }
 });
@@ -405,7 +405,7 @@ test("the Go test scan follows relative paths, constants and repo-root helpers",
   const root = mkdtempSync(join(tmpdir(), "ci-scope-go-"));
   t.after(() => rmSync(root, { recursive: true, force: true }));
   const files = {
-    "server/pkg/a/config.go": 'package a\n\nconst ConfigPath = ".multica/environments.toml"\n',
+    "server/pkg/a/config.go": 'package a\n\nconst ConfigPath = ".workpal/environments.toml"\n',
     "server/pkg/a/a_test.go": [
       "package a",
       'const repoRoot = "../../.."',
@@ -420,10 +420,10 @@ test("the Go test scan follows relative paths, constants and repo-root helpers",
       '\t// os.ReadFile("../../../docs/commented.md")',
       "}",
     ].join("\n"),
-    ".multica/environments.toml": "",
+    ".workpal/environments.toml": "",
     ".env.example": "",
     "scripts/check.sh": "",
-    "examples/plugins/demo/multica.plugin.json": "",
+    "examples/plugins/demo/workpal.plugin.json": "",
     "server/migrations/1.up.sql": "",
     "docs/commented.md": "",
   };
@@ -433,8 +433,8 @@ test("the Go test scan follows relative paths, constants and repo-root helpers",
   }
   const reads = goTestRepoReads(root);
   assert.deepEqual([...reads.keys()].sort(),
-    [".env.example", ".multica/environments.toml", "examples/plugins", "scripts/check.sh"]);
+    [".env.example", ".workpal/environments.toml", "examples/plugins", "scripts/check.sh"]);
   const missing = uncoveredReads(root, reads, [".env.example", "examples/plugins/**", "scripts/*.sh"]);
   assert.equal(missingFilterMessage(missing).split("\n").at(-1),
-    '  ".multica/environments.toml"  (read by server/pkg/a/a_test.go)');
+    '  ".workpal/environments.toml"  (read by server/pkg/a/a_test.go)');
 });

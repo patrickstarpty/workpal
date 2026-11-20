@@ -1,14 +1,14 @@
 "use client";
 
 import { Fragment, type KeyboardEvent, type ReactNode } from "react";
-import { MoreHorizontal } from "@multica/ui/icons";
+import { MoreHorizontal } from "@workpal/ui/icons";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@multica/ui/components/ui/dropdown-menu";
+} from "@workpal/ui/components/ui/dropdown-menu";
 import { nextRowMenuState, usePointAnchor, type RowMenuState } from "./point-menu";
 
 export interface RowActionItem {

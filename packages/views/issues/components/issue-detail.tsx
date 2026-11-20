@@ -1,16 +1,16 @@
 "use client";
 
-import { subIssueCreateDefaults } from "@multica/core/issues";
+import { subIssueCreateDefaults } from "@workpal/core/issues";
 import {
   issueBehavesAs,
   issueBehavesAsAny,
   issueStatusCategory,
-} from "@multica/core/issues";
+} from "@workpal/core/issues";
 import { IssueFlowCard } from "../../workflows/issue-flow-card";
 import { IssueAppRequests } from "../../common/app-requests";
 import { useStatusLabel } from "../utils/status-label";
 import { priorityLabel } from "../utils/priority-label";
-import { useIssueStatuses } from "@multica/core/issue-statuses/hooks";
+import { useIssueStatuses } from "@workpal/core/issue-statuses/hooks";
 import { useState, useEffect, useCallback, useMemo, useRef, useId, Fragment, type ComponentProps, type ReactNode } from "react";
 import { Virtuoso, type ListRange, type VirtuosoHandle } from "react-virtuoso";
 import { useDefaultLayout, usePanelRef } from "react-resizable-panels";
@@ -39,14 +39,14 @@ import {
   Unlink,
   Users,
   ArrowDown,
-} from "@multica/ui/icons";
+} from "@workpal/ui/icons";
 import { BreadcrumbHeader, type BreadcrumbSegment } from "../../layout/breadcrumb-header";
-import { Skeleton } from "@multica/ui/components/ui/skeleton";
-import { Button } from "@multica/ui/components/ui/button";
-import { IconButton } from "@multica/ui/components/common/icon-button";
-import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from "@multica/ui/components/ui/resizable";
-import { Sheet, SheetContent } from "@multica/ui/components/ui/sheet";
-import { useIsMobile } from "@multica/ui/hooks/use-mobile";
+import { Skeleton } from "@workpal/ui/components/ui/skeleton";
+import { Button } from "@workpal/ui/components/ui/button";
+import { IconButton } from "@workpal/ui/components/common/icon-button";
+import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from "@workpal/ui/components/ui/resizable";
+import { Sheet, SheetContent } from "@workpal/ui/components/ui/sheet";
+import { useIsMobile } from "@workpal/ui/hooks/use-mobile";
 import { ContentEditor, type ContentEditorRef, TitleEditor, type TitleEditorRef, useFileDropZone, FileDropOverlay, useLazyEditor, useEditorUpload, PreviewSequenceProvider, collectPreviewSequence } from "../../editor";
 import {
   WAKEUP_ACTIVITY_ACTIONS,
@@ -55,41 +55,41 @@ import {
   wakeupActivityChip,
 } from "./wakeup-activity";
 import { useWakeupText } from "./wakeup-presentation";
-import type { ImageSequenceBlock } from "@multica/core/attachments/image-sequence";
-import { FileUploadButton } from "@multica/ui/components/common/file-upload-button";
+import type { ImageSequenceBlock } from "@workpal/core/attachments/image-sequence";
+import { FileUploadButton } from "@workpal/ui/components/common/file-upload-button";
 import {
   Tooltip,
   TooltipTrigger,
   TooltipContent,
-} from "@multica/ui/components/ui/tooltip";
+} from "@workpal/ui/components/ui/tooltip";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
   DropdownMenuContent,
   DropdownMenuItem,
-} from "@multica/ui/components/ui/dropdown-menu";
-import { Popover, PopoverTrigger, PopoverContent } from "@multica/ui/components/ui/popover";
+} from "@workpal/ui/components/ui/dropdown-menu";
+import { Popover, PopoverTrigger, PopoverContent } from "@workpal/ui/components/ui/popover";
 import { KeyUpdatesSubscriptionBadge } from "./key-updates-subscription-badge";
-import { Checkbox } from "@multica/ui/components/ui/checkbox";
-import { Command, CommandInput, CommandList, CommandEmpty, CommandGroup, CommandItem } from "@multica/ui/components/ui/command";
-import { AvatarGroup, AvatarGroupCount } from "@multica/ui/components/ui/avatar";
+import { Checkbox } from "@workpal/ui/components/ui/checkbox";
+import { Command, CommandInput, CommandList, CommandEmpty, CommandGroup, CommandItem } from "@workpal/ui/components/ui/command";
+import { AvatarGroup, AvatarGroupCount } from "@workpal/ui/components/ui/avatar";
 import { ActorAvatar } from "../../common/actor-avatar";
 import { MemberProfileCard } from "../../members/member-profile-card";
-import { HoverCard, HoverCardTrigger, HoverCardContent } from "@multica/ui/components/ui/hover-card";
+import { HoverCard, HoverCardTrigger, HoverCardContent } from "@workpal/ui/components/ui/hover-card";
 import { ActionShortcutKeycaps } from "../../common/shortcut-keycaps";
 import { UnsubscribeArchiveButton } from "../../inbox/components/unsubscribe-archive-button";
-import type { InboxUnsubscribeScope } from "@multica/core/inbox/mutations";
+import type { InboxUnsubscribeScope } from "@workpal/core/inbox/mutations";
 import { PropRow } from "../../common/prop-row";
 import { TimelineHandoff } from "../../workflows/timeline-handoff";
 import { PropertyIcon } from "../../common/property-icon";
-import type { Attachment, Issue, IssueProperty, IssueStatus, IssueStatusCategory, IssuePriority, TimelineEntry, UpdateIssueRequest } from "@multica/core/types";
-import { contentReferencesAttachment } from "@multica/core/types";
-import { isBuiltInIssueStatus } from "@multica/core/issue-statuses";
-import { commentLandingTarget, isDeletedComment } from "@multica/core/issues/comment-deletion";
-import { formatDateOnly, isPastDateOnly } from "@multica/core/issues/date";
-import { useUpdateIssue } from "@multica/core/issues/mutations";
+import type { Attachment, Issue, IssueProperty, IssueStatus, IssueStatusCategory, IssuePriority, TimelineEntry, UpdateIssueRequest } from "@workpal/core/types";
+import { contentReferencesAttachment } from "@workpal/core/types";
+import { isBuiltInIssueStatus } from "@workpal/core/issue-statuses";
+import { commentLandingTarget, isDeletedComment } from "@workpal/core/issues/comment-deletion";
+import { formatDateOnly, isPastDateOnly } from "@workpal/core/issues/date";
+import { useUpdateIssue } from "@workpal/core/issues/mutations";
 import { toast } from "sonner";
-import { errorCode } from "@multica/core/api";
+import { errorCode } from "@workpal/core/api";
 import { StatusIcon } from "./status-icon";
 import { PriorityIcon } from "./priority-icon";
 import { StatusPicker } from "./pickers/status-picker";
@@ -100,7 +100,7 @@ import { DueDatePicker } from "./pickers/due-date-picker";
 import { AssigneePicker } from "./pickers/assignee-picker";
 import { LabelPicker } from "./pickers/label-picker";
 import { CustomPropertyValueEditor, CustomPropertyValueDisplay } from "./pickers/custom-property-picker";
-import { Switch } from "@multica/ui/components/ui/switch";
+import { Switch } from "@workpal/ui/components/ui/switch";
 import { IssueActionsDropdown, useIssuePageMenu, useIssueActions, useArchivedInboxItemId, IssueActionsContextMenu, IssueContextMenuProvider, IssueInboxActions } from "../actions";
 import { LabelChip } from "../../labels/label-chip";
 import { IssueAgentActivityIndicator } from "./issue-agent-activity-indicator";
@@ -111,7 +111,7 @@ import { LocalDirectoryHint } from "../../projects/components/local-directory-hi
 import { useNewRunIds } from "./use-run-comment-motion";
 import { AgentRunComment, CommentCard } from "./comment-card";
 import { EMPTY_COMMENT_RUNS, buildCommentRunView, orderTimelineWithRuns, type CommentRun } from "./comment-runs";
-import { issueTasksOptions } from "@multica/core/issues/queries";
+import { issueTasksOptions } from "@workpal/core/issues/queries";
 import { SourceContextBadge } from "./source-context-viewer";
 import { RevisionConflictCompare } from "./revision-conflict-compare";
 import { CommentInput } from "./comment-input";
@@ -128,9 +128,9 @@ import { QuickActionsSection } from "./quick-actions-section";
 import { PluginPanelSection } from "../../plugins";
 import { PullRequestsSection } from "./pull-requests-section";
 import { IssueEnvironmentsSection } from "./issue-environments-section";
-import { useGitHubSettings } from "@multica/core/github";
-import { useFeatureEnabled } from "@multica/core/config";
-import { PLUGINS_V1_FLAG } from "@multica/core/feature-flags";
+import { useGitHubSettings } from "@workpal/core/github";
+import { useFeatureEnabled } from "@workpal/core/config";
+import { PLUGINS_V1_FLAG } from "@workpal/core/feature-flags";
 import { DeliverablesSection } from "./deliverables/deliverables-section";
 import { IssueAppsSection } from "./issue-apps-section";
 import { DeliverablesOverview } from "./deliverables/deliverables-overview";
@@ -139,7 +139,7 @@ import {
   useDeliverableDetails,
   type DeliverableOrigin,
 } from "./deliverables/deliverable-details";
-import { collectDeliverableFiles, deliverableInventoryFromAttachments, mergeDeliverableSources } from "@multica/core/attachments/deliverables";
+import { collectDeliverableFiles, deliverableInventoryFromAttachments, mergeDeliverableSources } from "@workpal/core/attachments/deliverables";
 import { AttachmentVersionsProvider } from "./deliverables/attachment-versions";
 import {
   OpenDeliverableOnLoad,
@@ -148,23 +148,23 @@ import {
   useFreshTimelineRead,
 } from "./deliverables/deliverable-link";
 import { useQuery } from "@tanstack/react-query";
-import { useIssueReadState } from "@multica/core/issues/read-state";
-import { useAuthStore } from "@multica/core/auth";
-import { useWorkspacePaths } from "@multica/core/paths";
-import { useActorName } from "@multica/core/workspace/hooks";
-import { useWorkspaceId } from "@multica/core/hooks";
+import { useIssueReadState } from "@workpal/core/issues/read-state";
+import { useAuthStore } from "@workpal/core/auth";
+import { useWorkspacePaths } from "@workpal/core/paths";
+import { useActorName } from "@workpal/core/workspace/hooks";
+import { useWorkspaceId } from "@workpal/core/hooks";
 import {
   useProjectWorkflow,
-} from "@multica/core/issue-workflows";
-import { useRecentContextStore } from "@multica/core/chat";
+} from "@workpal/core/issue-workflows";
+import { useRecentContextStore } from "@workpal/core/chat";
 import { useRegisterCommandBarContext } from "../../search/register-context";
-import { useModalStore } from "@multica/core/modals";
-import { issueListOptions, issueDetailOptions, childIssuesOptions, childIssueProgressOptions, issueAttachmentsOptions } from "@multica/core/issues/queries";
-import { projectDetailOptions } from "@multica/core/projects/queries";
+import { useModalStore } from "@workpal/core/modals";
+import { issueListOptions, issueDetailOptions, childIssuesOptions, childIssueProgressOptions, issueAttachmentsOptions } from "@workpal/core/issues/queries";
+import { projectDetailOptions } from "@workpal/core/projects/queries";
 import { ProjectIcon } from "../../projects/components/project-icon";
-import { issueLabelsOptions } from "@multica/core/labels";
-import { propertyListOptions } from "@multica/core/properties";
-import { memberListOptions, agentListOptions } from "@multica/core/workspace/queries";
+import { issueLabelsOptions } from "@workpal/core/labels";
+import { propertyListOptions } from "@workpal/core/properties";
+import { memberListOptions, agentListOptions } from "@workpal/core/workspace/queries";
 import {
   selectExpandedResolved,
   useCommentCollapseStore,
@@ -178,7 +178,7 @@ import {
   type SubIssueRowPropertyKey,
   ISSUE_SIDEBAR_SECTIONS,
   type IssueSidebarSection,
-} from "@multica/core/issues/stores";
+} from "@workpal/core/issues/stores";
 import { BatchActionToolbar } from "./batch-action-toolbar";
 import {
   IssueSurfaceSelectionProvider,
@@ -190,7 +190,7 @@ import { useIssueReactions } from "../hooks/use-issue-reactions";
 import { useIssueSubscribers } from "../hooks/use-issue-subscribers";
 import { useMarkIssueReadWhileViewing } from "../hooks/use-mark-issue-read-while-viewing";
 import { useMarkIssueInboxReadWhileViewing } from "../hooks/use-mark-issue-inbox-read-while-viewing";
-import { ReactionBar } from "@multica/ui/components/common/reaction-bar";
+import { ReactionBar } from "@workpal/ui/components/common/reaction-bar";
 import { useLocale, useTimeAgo } from "../../i18n";
 import {
   useRestoredScrollOffset,
@@ -198,8 +198,8 @@ import {
   useRestoredViewState,
   useViewStateWriter,
 } from "../../platform";
-import { cn } from "@multica/ui/lib/utils";
-import { TruncatedTooltip } from "@multica/ui/components/common/truncated-tooltip";
+import { cn } from "@workpal/ui/lib/utils";
+import { TruncatedTooltip } from "@workpal/ui/components/common/truncated-tooltip";
 import { CollectionPageState } from "../../layout/collection-page";
 import { PAGE_GUTTER, usePageHeaderTitleBar } from "../../layout/page-header";
 import { READING_COLUMN } from "../../layout/reading-column";
@@ -1401,7 +1401,7 @@ export function IssueLoadError({
 
 // Loading skeleton
 
-const ISSUE_DETAIL_LAYOUT_ID = "multica_issue_detail_layout";
+const ISSUE_DETAIL_LAYOUT_ID = "workpal_issue_detail_layout";
 const REVEALED_WAKEUPS: readonly IssueSidebarSection[] = ["wakeups"];
 
 /**

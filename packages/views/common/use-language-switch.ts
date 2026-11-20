@@ -1,10 +1,10 @@
 "use client";
 
 import { toast } from "sonner";
-import { api } from "@multica/core/api";
-import { useAuthStore } from "@multica/core/auth";
-import { matchLocale, type SupportedLocale } from "@multica/core/i18n";
-import { useLocaleAdapter } from "@multica/core/i18n/react";
+import { api } from "@workpal/core/api";
+import { useAuthStore } from "@workpal/core/auth";
+import { matchLocale, type SupportedLocale } from "@workpal/core/i18n";
+import { useLocaleAdapter } from "@workpal/core/i18n/react";
 import { useT } from "../i18n";
 
 /** The UI language options, the current one, and the switch shared by Settings and the account menu. */

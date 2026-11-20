@@ -1,10 +1,10 @@
 "use client";
 
-import { useIssueStatuses } from "@multica/core/issue-statuses/hooks";
-import type { IssueStatusCatalog } from "@multica/core/issue-statuses";
-import { isBuiltInIssueStatus } from "@multica/core/issue-statuses";
-import { useWorkspaceId } from "@multica/core/hooks";
-import type { IssueStatus } from "@multica/core/types";
+import { useIssueStatuses } from "@workpal/core/issue-statuses/hooks";
+import type { IssueStatusCatalog } from "@workpal/core/issue-statuses";
+import { isBuiltInIssueStatus } from "@workpal/core/issue-statuses";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import type { IssueStatus } from "@workpal/core/types";
 import { StatusIcon } from "./status-icon";
 
 /**

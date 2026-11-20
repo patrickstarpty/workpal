@@ -1,8 +1,8 @@
 "use client";
 
-import { addDaysDateOnly, formatDateOnly, todayDateOnly } from "@multica/core/issues/date";
-import type { Project } from "@multica/core/types";
-import { cn } from "@multica/ui/lib/utils";
+import { addDaysDateOnly, formatDateOnly, todayDateOnly } from "@workpal/core/issues/date";
+import type { Project } from "@workpal/core/types";
+import { cn } from "@workpal/ui/lib/utils";
 import { useLocale } from "../../i18n";
 import { CollectionEmptyValue } from "../../layout/collection-list";
 

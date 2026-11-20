@@ -7,7 +7,7 @@ import {
   cleanup,
 } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { I18nProvider } from "@multica/core/i18n/react";
+import { I18nProvider } from "@workpal/core/i18n/react";
 import enRuntimes from "../../locales/en/runtimes.json";
 import { QoderConfiguration } from "./qoder-configuration";
 
@@ -18,9 +18,9 @@ const mocks = vi.hoisted(() => ({
   checkQoderConnection: vi.fn(),
   saveQoderConnection: vi.fn(),
 }));
-vi.mock("@multica/core/api", () => ({ api: mocks }));
-vi.mock("@multica/core/hooks", () => ({ useWorkspaceId: () => "ws-test" }));
-vi.mock("@multica/core/auth", () => {
+vi.mock("@workpal/core/api", () => ({ api: mocks }));
+vi.mock("@workpal/core/hooks", () => ({ useWorkspaceId: () => "ws-test" }));
+vi.mock("@workpal/core/auth", () => {
   const state = { user: { id: "owner" } };
   return {
     useAuthStore: Object.assign(
@@ -72,7 +72,7 @@ it("explains missing server encryption setup without offering credential submiss
   mocks.getQoderConnection.mockResolvedValue({ available: false, configured: false });
   const client = mount();
   expect(
-    await screen.findByText("Server setup is required: configure MULTICA_VCS_SECRET_KEY."),
+    await screen.findByText("Server setup is required: configure WORKPAL_VCS_SECRET_KEY."),
   ).toBeInTheDocument();
   expect(screen.queryByPlaceholderText("pt-…")).not.toBeInTheDocument();
   expect(mocks.saveQoderConnection).not.toHaveBeenCalled();

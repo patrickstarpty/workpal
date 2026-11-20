@@ -18,17 +18,17 @@ func chatSkillTask(message string) Task {
 
 func TestBuildRuntimePromptExplicitSkills(t *testing.T) {
 	dir := t.TempDir()
-	directories := map[string]string{"one": filepath.Join(dir, "review-code"), "two": filepath.Join(dir, "review-code-multica-2")}
+	directories := map[string]string{"one": filepath.Join(dir, "review-code"), "two": filepath.Join(dir, "review-code-workpal-2")}
 	for _, provider := range []string{"claude", "codex", "antigravity", "kimi", "hermes", "pi", "unknown"} {
 		t.Run(provider, func(t *testing.T) {
 			task := chatSkillTask("[/spoofed](slash://skill/two) and [/first](slash://skill/one) [/again](slash://skill/two) check this")
 			task.InitiatorName = "Member"
 			task.ChatMessageAttachments = []ChatAttachmentMeta{{ID: "attachment", Filename: "image.png"}}
 			prompt, invocation := buildRuntimePrompt(task, provider, directories, WithSharedLocalDirectory())
-			if invocation == nil || len(invocation.Skills) != 2 || invocation.Skills[0].Name != "review-code-multica-2" || invocation.Skills[1].Name != "review-code" {
+			if invocation == nil || len(invocation.Skills) != 2 || invocation.Skills[0].Name != "review-code-workpal-2" || invocation.Skills[1].Name != "review-code" {
 				t.Fatalf("wrong selection order/identity: %+v", invocation)
 			}
-			for _, want := range []string{"SECOND BODY", "FIRST BODY", directories["two"], "check this", "attachment", "Member", "Explicitly selected skills:\n- review-code-multica-2\n- review-code\n"} {
+			for _, want := range []string{"SECOND BODY", "FIRST BODY", directories["two"], "check this", "attachment", "Member", "Explicitly selected skills:\n- review-code-workpal-2\n- review-code\n"} {
 				if !strings.Contains(prompt, want) {
 					t.Errorf("fallback missing %q: %s", want, prompt)
 				}
@@ -75,7 +75,7 @@ func TestBuildRuntimePromptAgentChatKeepsBoundSkillHints(t *testing.T) {
 
 func TestBuildRuntimePromptPreservesSkillTargetMapping(t *testing.T) {
 	message := "对 A 用 [/spoofed-one](slash://skill/one)，对 B 用 [/spoofed-two](slash://skill/two)，再对 C 用 [/again](slash://skill/one)"
-	want := "对 A 用 /review-code，对 B 用 /review-code-multica-2，再对 C 用 /review-code"
+	want := "对 A 用 /review-code，对 B 用 /review-code-workpal-2，再对 C 用 /review-code"
 	for _, surface := range []string{"chat", "issue comment"} {
 		t.Run(surface, func(t *testing.T) {
 			task := chatSkillTask(message)

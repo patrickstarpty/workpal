@@ -130,7 +130,7 @@ export const useProjectViewStore = createCollectionViewStore<
     setGroupBy: (groupBy: ProjectGroupBy) => void;
   }
 >({
-  name: "multica_projects_view",
+  name: "workpal_projects_view",
   version: 1,
   migrate: migrateProjectViewState,
   defaultSortField: "last_activity",

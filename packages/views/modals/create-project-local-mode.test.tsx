@@ -20,7 +20,7 @@ let pickedIsGitRepo: boolean | undefined = true;
 
 const createProjectMock = vi.fn().mockResolvedValue({ id: "p1", slug: "p1" });
 
-vi.mock("@multica/core/auth", () => ({
+vi.mock("@workpal/core/auth", () => ({
   useAuthStore: Object.assign(
     (selector: (state: { user: { id: string } }) => unknown) =>
       selector({ user: { id: "user-1" } }),
@@ -71,16 +71,16 @@ vi.mock("@tanstack/react-query", () => ({
 }));
 
 // The access picker needs the signed-in creator when deriving draft members.
-vi.mock("@multica/core/auth", () => ({
+vi.mock("@workpal/core/auth", () => ({
   useAuthStore: (selector: (state: { user: { id: string } }) => unknown) =>
     selector({ user: { id: "user-1" } }),
 }));
 
-vi.mock("@multica/core/projects/mutations", () => ({
+vi.mock("@workpal/core/projects/mutations", () => ({
   useCreateProject: () => ({ mutateAsync: createProjectMock }),
 }));
 
-vi.mock("@multica/core/projects", () => ({
+vi.mock("@workpal/core/projects", () => ({
   useProjectDraftStore: (selector: (state: unknown) => unknown) =>
     selector({
       draft: {
@@ -104,13 +104,13 @@ vi.mock("@multica/core/projects", () => ({
 // Whether the connected server validates execution_mode at all. Absent on every
 // release before the worktree save gate.
 let serverValidatesWorktree = true;
-vi.mock("@multica/core/config", () => ({
+vi.mock("@workpal/core/config", () => ({
   useConfigStore: (selector: (state: { localWorktreeSupported: boolean; featureFlags: Record<string, boolean> }) => unknown) =>
     selector({ localWorktreeSupported: serverValidatesWorktree, featureFlags: {} }),
 }));
 
-vi.mock("@multica/core/hooks", () => ({ useWorkspaceId: () => "workspace-1" }));
-vi.mock("@multica/core/auth", () => {
+vi.mock("@workpal/core/hooks", () => ({ useWorkspaceId: () => "workspace-1" }));
+vi.mock("@workpal/core/auth", () => {
   const state = { user: { id: "user-1" } };
   return {
     useAuthStore: Object.assign(
@@ -120,15 +120,15 @@ vi.mock("@multica/core/auth", () => {
   };
 });
 vi.mock("../workflows/workflow-pill", () => ({ WorkflowPill: () => null }));
-vi.mock("@multica/core/paths", () => ({
+vi.mock("@workpal/core/paths", () => ({
   useCurrentWorkspace: () => ({ id: "workspace-1", slug: "ws", repos: [] }),
   useWorkspacePaths: () => ({ projectDetail: (id: string) => `/ws/projects/${id}` }),
 }));
-vi.mock("@multica/core/workspace/queries", () => ({
+vi.mock("@workpal/core/workspace/queries", () => ({
   memberListOptions: () => ({ queryKey: ["members"], queryFn: vi.fn() }),
   agentListOptions: () => ({ queryKey: ["agents"], queryFn: vi.fn() }),
 }));
-vi.mock("@multica/core/workspace/hooks", () => ({
+vi.mock("@workpal/core/workspace/hooks", () => ({
   useActorName: () => ({ getActorName: vi.fn() }),
 }));
 vi.mock("../navigation", () => ({ useNavigation: () => ({ push: vi.fn() }) }));
@@ -169,17 +169,17 @@ vi.mock("../platform/use-local-daemon-status", () => ({
 }));
 
 // Render overlays inline so their contents are assertable.
-vi.mock("@multica/ui/components/ui/dialog", () => ({
+vi.mock("@workpal/ui/components/ui/dialog", () => ({
   Dialog: ({ children }: { children: React.ReactNode }) => <div>{children}</div>,
   DialogContent: ({ children }: { children: React.ReactNode }) => <div>{children}</div>,
   DialogTitle: ({ children }: { children: React.ReactNode }) => <div>{children}</div>,
 }));
-vi.mock("@multica/ui/components/ui/popover", () => ({
+vi.mock("@workpal/ui/components/ui/popover", () => ({
   Popover: ({ children }: { children: React.ReactNode }) => <>{children}</>,
   PopoverTrigger: ({ render }: { render: React.ReactNode }) => <>{render}</>,
   PopoverContent: ({ children }: { children: React.ReactNode }) => <div>{children}</div>,
 }));
-vi.mock("@multica/ui/components/ui/dropdown-menu", () => ({
+vi.mock("@workpal/ui/components/ui/dropdown-menu", () => ({
   DropdownMenu: ({ children }: { children: React.ReactNode }) => <>{children}</>,
   DropdownMenuTrigger: ({ render }: { render: React.ReactNode }) => <>{render}</>,
   DropdownMenuContent: ({ children }: { children: React.ReactNode }) => <>{children}</>,
@@ -318,7 +318,7 @@ describe("CreateProjectModal — local directory execution mode", () => {
     await pickLocalDirectory(user);
 
     expect(screen.getByRole("radio", { name: /Run in parallel/i })).toBeDisabled();
-    expect(screen.getByText(/Multica server is too old/i)).toBeInTheDocument();
+    expect(screen.getByText(/Workpal server is too old/i)).toBeInTheDocument();
     // And it must not have been preselected either — that would submit a mode
     // the server would silently downgrade.
     expect(screen.getByRole("button", { name: /^Direct$/i })).toBeInTheDocument();

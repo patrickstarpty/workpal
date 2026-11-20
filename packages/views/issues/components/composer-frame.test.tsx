@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { renderHook, screen } from "@testing-library/react";
-import type { VoiceState } from "@multica/core/voice";
+import type { VoiceState } from "@workpal/core/voice";
 import { renderWithI18n } from "../../test/i18n";
 import type { ComposerVoice } from "../../voice";
 import { ComposerToolbar, useComposerExpanded } from "./composer-frame";

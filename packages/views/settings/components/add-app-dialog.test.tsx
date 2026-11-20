@@ -1,14 +1,14 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { cleanup, render, screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { api } from "@multica/core/api";
-import { I18nProvider } from "@multica/core/i18n/react";
-import type { AppAccountScope, AppsOverview } from "@multica/core/types";
+import { api } from "@workpal/core/api";
+import { I18nProvider } from "@workpal/core/i18n/react";
+import type { AppAccountScope, AppsOverview } from "@workpal/core/types";
 import enCommon from "../../locales/en/common.json";
 import enSettings from "../../locales/en/settings.json";
 import { AddAppDialog } from "./add-app-dialog";
 
-vi.mock("@multica/core/api", () => ({ api: { connectApp: vi.fn() } }));
+vi.mock("@workpal/core/api", () => ({ api: { connectApp: vi.fn() } }));
 
 const overview: AppsOverview = {
   catalog_mode: "all", can_manage: true, agent_apps: [], personal: [],

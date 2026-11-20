@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronDown, X } from "@multica/ui/icons";
-import { Button } from "@multica/ui/components/ui/button";
-import { cn } from "@multica/ui/lib/utils";
+import { ChevronDown, X } from "@workpal/ui/icons";
+import { Button } from "@workpal/ui/components/ui/button";
+import { cn } from "@workpal/ui/lib/utils";
 import {
   CoachMark,
   DemoAvatar,

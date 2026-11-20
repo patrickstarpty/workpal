@@ -64,8 +64,8 @@ func (r *registry) entry(base string) map[string]any {
 	return map[string]any{
 		"id":          "sample",
 		"name":        "Sample",
-		"author":      "Multica",
-		"repo":        "multica-ai/multica-theme-sample",
+		"author":      "Workpal",
+		"repo":        "workpal-ai/workpal-theme-sample",
 		"description": "A sample theme.",
 		"modes":       []string{"light", "dark"},
 		"version":     "1.0.0",

@@ -1,16 +1,16 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Loader2 } from "@multica/ui/icons";
-import { Button } from "@multica/ui/components/ui/button";
-import { Input } from "@multica/ui/components/ui/input";
+import { Loader2 } from "@workpal/ui/icons";
+import { Button } from "@workpal/ui/components/ui/button";
+import { Input } from "@workpal/ui/components/ui/input";
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
-} from "@multica/ui/components/ui/dialog";
-import { cn } from "@multica/ui/lib/utils";
+} from "@workpal/ui/components/ui/dialog";
+import { cn } from "@workpal/ui/lib/utils";
 import { useT } from "../i18n";
 import {
   TEXT_AVATAR_COLORS,

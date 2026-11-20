@@ -11,7 +11,7 @@ import {
   type VoiceModel,
   type VoiceModels,
   type VoiceRuntime,
-} from "@multica/core/voice";
+} from "@workpal/core/voice";
 import { localVoiceAPI } from "../platform/local-voice";
 import { Recording } from "./recorder";
 

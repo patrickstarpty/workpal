@@ -7,7 +7,7 @@ import (
 	"time"
 
 	"github.com/jackc/pgx/v5/pgxpool"
-	"github.com/multica-ai/multica/server/internal/testutil"
+	"workpal.local/workpal/server/internal/testutil"
 )
 
 func taskClaimTriggerPool(t *testing.T) *pgxpool.Pool {

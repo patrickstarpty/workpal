@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState, type MouseEvent } from "react";
-import type { AgentTask } from "@multica/core/types";
-import { UI_EASE_OUT_CSS, UI_MOTION_DURATION } from "@multica/ui/lib/motion";
+import type { AgentTask } from "@workpal/core/types";
+import { UI_EASE_OUT_CSS, UI_MOTION_DURATION } from "@workpal/ui/lib/motion";
 
 const EMPTY_IDS: ReadonlySet<string> = new Set();
 

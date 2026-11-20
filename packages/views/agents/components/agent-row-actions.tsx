@@ -9,15 +9,15 @@ import {
   Settings2,
   Square,
   Trash2,
-} from "@multica/ui/icons";
+} from "@workpal/ui/icons";
 import { useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
-import type { Agent } from "@multica/core/types";
-import type { AgentPresenceDetail } from "@multica/core/agents";
-import { api } from "@multica/core/api";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { useWorkspacePaths } from "@multica/core/paths";
-import { workspaceKeys } from "@multica/core/workspace/queries";
+import type { Agent } from "@workpal/core/types";
+import type { AgentPresenceDetail } from "@workpal/core/agents";
+import { api } from "@workpal/core/api";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { useWorkspacePaths } from "@workpal/core/paths";
+import { workspaceKeys } from "@workpal/core/workspace/queries";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -27,11 +27,11 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@multica/ui/components/ui/alert-dialog";
+} from "@workpal/ui/components/ui/alert-dialog";
 import {
   DropdownMenuItem,
   DropdownMenuSeparator,
-} from "@multica/ui/components/ui/dropdown-menu";
+} from "@workpal/ui/components/ui/dropdown-menu";
 import { useT } from "../../i18n";
 import { AppLink, useIntentNavigate } from "../../navigation";
 import { CollectionRowMenu } from "../../layout/collection-list";
@@ -88,7 +88,7 @@ export function AgentRowActions({
   // branches.
   const showStop = canManage && !isArchived && hasActiveWork;
   const showDuplicate = !isArchived; // any workspace member can duplicate
-  // Multica's built-in agents cannot be archived — the server refuses it, and
+  // Workpal's built-in agents cannot be archived — the server refuses it, and
   // the workspace's entry point runs through one. Hide the action rather than
   // let it fail with a toast.
   const isSystemAgent = !!agent.system_key;

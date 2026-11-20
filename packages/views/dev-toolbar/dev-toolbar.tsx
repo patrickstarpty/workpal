@@ -2,20 +2,20 @@
 
 import { useState, useSyncExternalStore, type ReactNode } from "react";
 import { useIsFetching, useQuery, useQueryClient } from "@tanstack/react-query";
-import { agentTaskSnapshotOptions } from "@multica/core/agents/queries";
-import { useAuthStore } from "@multica/core/auth";
-import { paths } from "@multica/core/paths";
+import { agentTaskSnapshotOptions } from "@workpal/core/agents/queries";
+import { useAuthStore } from "@workpal/core/auth";
+import { paths } from "@workpal/core/paths";
 import {
   getCurrentSlug,
   getCurrentWsId,
   subscribeToCurrentSlug,
-} from "@multica/core/platform";
-import { useWSStatus, type WSStatus } from "@multica/core/realtime";
-import { runtimeListOptions } from "@multica/core/runtimes/queries";
-import { memberListOptions } from "@multica/core/workspace/queries";
-import { Popover, PopoverContent, PopoverTrigger } from "@multica/ui/components/ui/popover";
-import { ChevronUp, Minus } from "@multica/ui/icons";
-import { cn } from "@multica/ui/lib/utils";
+} from "@workpal/core/platform";
+import { useWSStatus, type WSStatus } from "@workpal/core/realtime";
+import { runtimeListOptions } from "@workpal/core/runtimes/queries";
+import { memberListOptions } from "@workpal/core/workspace/queries";
+import { Popover, PopoverContent, PopoverTrigger } from "@workpal/ui/components/ui/popover";
+import { ChevronUp, Minus } from "@workpal/ui/icons";
+import { cn } from "@workpal/ui/lib/utils";
 import {
   activeTasks,
   apiHost,

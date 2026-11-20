@@ -1,4 +1,3 @@
-// Copyright 2026 Multica. All rights reserved.
 
 package daemon
 
@@ -8,7 +7,7 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/multica-ai/multica/server/internal/testutil"
+	"workpal.local/workpal/server/internal/testutil"
 )
 
 // TestMain redirects the home environment variables to one scratch directory
@@ -21,18 +20,18 @@ func TestMain(m *testing.M) {
 		os.Exit(0)
 	}
 	for _, key := range []string{
-		"MULTICA_AGENT_ID",
-		"MULTICA_TASK_ID",
-		"MULTICA_TOKEN",
-		"MULTICA_DAEMON_PORT",
-		"MULTICA_WORKSPACE_ID",
-		"MULTICA_SERVER_URL",
-		"MULTICA_TASK_CONFIG_ROOT",
+		"WORKPAL_AGENT_ID",
+		"WORKPAL_TASK_ID",
+		"WORKPAL_TOKEN",
+		"WORKPAL_DAEMON_PORT",
+		"WORKPAL_WORKSPACE_ID",
+		"WORKPAL_SERVER_URL",
+		"WORKPAL_TASK_CONFIG_ROOT",
 	} {
 		os.Unsetenv(key)
 	}
 
-	scratchHome, err := testutil.IsolateUserHome("multica-daemon-tests-home-")
+	scratchHome, err := testutil.IsolateUserHome("workpal-daemon-tests-home-")
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "isolate internal/daemon test home: %v\n", err)
 		os.Exit(1)

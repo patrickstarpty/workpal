@@ -8,7 +8,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/multica-ai/multica/server/internal/integrations/channel"
+	"workpal.local/workpal/server/internal/integrations/channel"
 )
 
 func TestCleanFilenameRejectsDotOnlyNames(t *testing.T) {

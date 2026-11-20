@@ -89,14 +89,14 @@ func buildAmpArgs(opts ExecOptions, logger *slog.Logger) ([]string, error) {
 
 func (b *ampBackend) Execute(ctx context.Context, prompt string, opts ExecOptions) (*Session, error) {
 	if hasManagedMcpConfig(opts.McpConfig) {
-		return nil, fmt.Errorf("amp does not support Multica-managed MCP configuration; configure MCP in Amp itself")
+		return nil, fmt.Errorf("amp does not support Workpal-managed MCP configuration; configure MCP in Amp itself")
 	}
 	execPath := b.cfg.ExecutablePath
 	if execPath == "" {
 		execPath = "amp"
 	}
 	if _, err := exec.LookPath(execPath); err != nil {
-		return nil, fmt.Errorf("amp executable not found at %q; install Amp or set MULTICA_AMP_PATH: %w", execPath, err)
+		return nil, fmt.Errorf("amp executable not found at %q; install Amp or set WORKPAL_AMP_PATH: %w", execPath, err)
 	}
 	key := os.Getenv("AMP_API_KEY")
 	if configured, ok := b.cfg.Env["AMP_API_KEY"]; ok {

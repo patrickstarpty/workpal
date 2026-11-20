@@ -52,7 +52,7 @@ describe("useSidebarTreeStore", () => {
   });
 
   it("opens new Team sections by default when hydrating older sidebar preferences", async () => {
-    localStorage.setItem("multica_sidebar_tree:legacy", JSON.stringify({
+    localStorage.setItem("workpal_sidebar_tree:legacy", JSON.stringify({
       state: { expanded: ["project:p1"], pinnedCollapsed: true },
       version: 0,
     }));

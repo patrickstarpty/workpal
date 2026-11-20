@@ -11,12 +11,12 @@ import (
 
 	"github.com/jackc/pgx/v5/pgtype"
 
-	"github.com/multica-ai/multica/server/internal/events"
-	"github.com/multica-ai/multica/server/internal/projectaccess"
-	"github.com/multica-ai/multica/server/internal/testutil"
-	"github.com/multica-ai/multica/server/internal/util"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
-	"github.com/multica-ai/multica/server/pkg/protocol"
+	"workpal.local/workpal/server/internal/events"
+	"workpal.local/workpal/server/internal/projectaccess"
+	"workpal.local/workpal/server/internal/testutil"
+	"workpal.local/workpal/server/internal/util"
+	db "workpal.local/workpal/server/pkg/db/generated"
+	"workpal.local/workpal/server/pkg/protocol"
 )
 
 type chatWakeupFixture struct {
@@ -410,7 +410,7 @@ func TestChatWakeupHonorsPrivateProjects(t *testing.T) {
 func TestChatWakeupReplyGoesWhereTheRequestCameFrom(t *testing.T) {
 	ctx := context.Background()
 
-	t.Run("web request stays in Multica", func(t *testing.T) {
+	t.Run("web request stays in Workpal", func(t *testing.T) {
 		f := newChatWakeupFixture(t)
 		seedChannelTaskBinding(t, f.fx.Pool, f.session)
 		w := f.create(t, ChatWakeupInput{AfterSeconds: 60})

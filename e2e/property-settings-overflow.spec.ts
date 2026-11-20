@@ -7,10 +7,10 @@ test("admins can reach property actions in narrow settings and save edits", asyn
   const owner = new TestApiClient();
   const admin = new TestApiClient();
   const suffix = `${Date.now().toString(36)}-${test.info().workerIndex}`;
-  const email = `property-admin-${suffix}@multica.ai`;
+  const email = `property-admin-${suffix}@workpal.invalid`;
   let workspaceCreated = false;
   try {
-    await owner.login(`property-owner-${suffix}@multica.ai`, "Property owner");
+    await owner.login(`property-owner-${suffix}@workpal.invalid`, "Property owner");
     const workspace = await owner.ensureWorkspace("Property settings", `properties-${suffix}`);
     workspaceCreated = true;
     await admin.login(email, "Property admin");
@@ -23,8 +23,8 @@ test("admins can reach property actions in narrow settings and save edits", asyn
     const token = admin.getToken();
     if (!token) throw new Error("Admin login did not return a token");
     await page.addInitScript((value) => {
-      localStorage.setItem("multica_token", value);
-      localStorage.setItem("multica:chat:isOpen", "false");
+      localStorage.setItem("workpal_token", value);
+      localStorage.setItem("workpal:chat:isOpen", "false");
     }, token);
     await page.setViewportSize({ width: 1024, height: 768 });
     await page.goto(`/${workspace.slug}/settings?tab=properties`);

@@ -1,11 +1,11 @@
 "use client";
 
 import type { ComponentProps } from "react";
-import { ArrowUpDown } from "@multica/ui/icons";
-import { cn } from "@multica/ui/lib/utils";
-import { Button } from "@multica/ui/components/ui/button";
-import { Toggle } from "@multica/ui/components/ui/toggle";
-import { Tooltip, TooltipContent, TooltipTrigger } from "@multica/ui/components/ui/tooltip";
+import { ArrowUpDown } from "@workpal/ui/icons";
+import { cn } from "@workpal/ui/lib/utils";
+import { Button } from "@workpal/ui/components/ui/button";
+import { Toggle } from "@workpal/ui/components/ui/toggle";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@workpal/ui/components/ui/tooltip";
 
 /**
  * An on/off chip in a display panel. Hover never fills an unpressed chip: in

@@ -1,5 +1,5 @@
-import type { ProjectGroupBy } from "@multica/core/projects";
-import type { Project, UpdateProjectRequest } from "@multica/core/types";
+import type { ProjectGroupBy } from "@workpal/core/projects";
+import type { Project, UpdateProjectRequest } from "@workpal/core/types";
 
 export type ProjectGroupField = Exclude<ProjectGroupBy, "none">;
 

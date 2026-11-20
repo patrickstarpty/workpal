@@ -3,10 +3,10 @@
 import { IssueSidebarSectionHeader } from "../issue-sidebar-section";
 
 import { useMemo, useState } from "react";
-import { LayoutGrid, Link2 } from "@multica/ui/icons";
-import type { DeliverableFile } from "@multica/core/attachments/deliverables";
-import { IconButton } from "@multica/ui/components/common/icon-button";
-import { TooltipHint } from "@multica/ui/components/common/tooltip-hint";
+import { LayoutGrid, Link2 } from "@workpal/ui/icons";
+import type { DeliverableFile } from "@workpal/core/attachments/deliverables";
+import { IconButton } from "@workpal/ui/components/common/icon-button";
+import { TooltipHint } from "@workpal/ui/components/common/tooltip-hint";
 import { useT } from "../../../i18n";
 import { formatBytes } from "../../../common/format-bytes";
 import { fileIcon } from "../../../editor/utils/file-icon";

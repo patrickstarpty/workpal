@@ -22,7 +22,7 @@ func TestWrittenSkillDirectoriesIncludeEveryCollision(t *testing.T) {
 	if err := writeSkillFilesTracked(root, skills, nil, installed); err != nil {
 		t.Fatal(err)
 	}
-	want := map[string]string{"one": filepath.Join(root, "a-b-multica"), "two": filepath.Join(root, "a-b-multica-multica")}
+	want := map[string]string{"one": filepath.Join(root, "a-b-workpal"), "two": filepath.Join(root, "a-b-workpal-workpal")}
 	if !reflect.DeepEqual(installed, want) {
 		t.Fatalf("installed=%v want=%v", installed, want)
 	}

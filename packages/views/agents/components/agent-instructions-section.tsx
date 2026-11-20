@@ -1,8 +1,8 @@
 "use client";
 
 import { useLayoutEffect, useRef, useState } from "react";
-import { Pencil, X } from "@multica/ui/icons";
-import type { Agent } from "@multica/core/types";
+import { Pencil, X } from "@workpal/ui/icons";
+import type { Agent } from "@workpal/core/types";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -12,8 +12,8 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@multica/ui/components/ui/alert-dialog";
-import { cn } from "@multica/ui/lib/utils";
+} from "@workpal/ui/components/ui/alert-dialog";
+import { cn } from "@workpal/ui/lib/utils";
 import { ReadonlyContent } from "../../editor/readonly-content";
 import {
   ObjectSection,

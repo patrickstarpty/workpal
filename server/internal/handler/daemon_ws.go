@@ -5,9 +5,9 @@ import (
 	"net/http"
 	"strings"
 
-	"github.com/multica-ai/multica/server/internal/auth"
-	"github.com/multica-ai/multica/server/internal/daemonws"
-	"github.com/multica-ai/multica/server/internal/middleware"
+	"workpal.local/workpal/server/internal/auth"
+	"workpal.local/workpal/server/internal/daemonws"
+	"workpal.local/workpal/server/internal/middleware"
 )
 
 func (h *Handler) DaemonWebSocket(w http.ResponseWriter, r *http.Request) {

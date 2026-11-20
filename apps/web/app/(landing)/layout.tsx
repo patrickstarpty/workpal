@@ -7,13 +7,13 @@ const jsonLd = {
   "@graph": [
     {
       "@type": "Organization",
-      name: "Multica",
-      url: "https://www.multica.ai",
-      sameAs: ["https://github.com/multica-ai/multica"],
+      name: "Workpal",
+      url: "https://workpal.invalid",
+      sameAs: ["https://code-host.invalid/workpal"],
     },
     {
       "@type": "SoftwareApplication",
-      name: "Multica",
+      name: "Workpal",
       applicationCategory: "ProjectManagement",
       operatingSystem: "Web",
       description:

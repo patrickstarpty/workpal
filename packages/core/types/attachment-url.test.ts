@@ -39,7 +39,7 @@ describe("attachmentDownloadPath", () => {
 describe("stripChannelMediaMarkers", () => {
   it("removes provenance while retaining the visible channel image", () => {
     const image = `![](${attachmentDownloadPath(ID)})`;
-    const marker = `<!-- multica:channel-media:${ID} -->`;
+    const marker = `<!-- workpal:channel-media:${ID} -->`;
 
     expect(stripChannelMediaMarkers(`${image}\n\n${marker}`)).toBe(`${image}\n\n`);
   });
@@ -109,7 +109,7 @@ describe("contentReferencesAttachment", () => {
     id: ID,
     url: "/uploads/workspaces/ws/legacy.png",
     download_url: "https://cdn.example.com/workspaces/ws/file.png?Signature=fresh",
-    markdown_url: `https://multica-api.copilothub.ai/api/attachments/${ID}/download`,
+    markdown_url: `https://workpal-api.copilothub.ai/api/attachments/${ID}/download`,
   };
 
   it("matches when the markdown uses the stable download path", () => {
@@ -159,7 +159,7 @@ describe("contentReferencesAttachment", () => {
   // Regression — issue DESCRIPTION editor binding (Desktop image render).
   //
   // The editor persists the durable `markdown_url`
-  // (`<MULTICA_PUBLIC_URL>/api/attachments/<id>/download`) into the body,
+  // (`<WORKPAL_PUBLIC_URL>/api/attachments/<id>/download`) into the body,
   // NOT the raw storage `a.url`. The description composer used to bind
   // pending uploads with `md.includes(a.url)`, which never matched this
   // shape, so the upload was never linked via `attachment_ids`. After a
@@ -180,7 +180,7 @@ describe("contentReferencesAttachment", () => {
 
 describe("attachmentIdFromStorageURL", () => {
   const WS = "aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee";
-  const CDN = "static.multica.ai";
+  const CDN = "workpal.invalid";
 
   it("extracts the attachment id from a workspace object on the CDN", () => {
     expect(attachmentIdFromStorageURL(`https://${CDN}/workspaces/${WS}/${ID}.jpg`, CDN)).toBe(ID);

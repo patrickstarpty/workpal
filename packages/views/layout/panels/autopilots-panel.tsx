@@ -2,12 +2,12 @@
 
 import { useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { AlarmClock, Code, Clock, Plus, Webhook, Zap } from "@multica/ui/icons";
-import { IconButton } from "@multica/ui/components/common/icon-button";
-import { autopilotListOptions } from "@multica/core/autopilots/queries";
-import { useAutopilotsViewStore } from "@multica/core/autopilots/stores";
-import { useCurrentWorkspace, useWorkspacePaths } from "@multica/core/paths";
-import type { Autopilot } from "@multica/core/types";
+import { AlarmClock, Code, Clock, Plus, Webhook, Zap } from "@workpal/ui/icons";
+import { IconButton } from "@workpal/ui/components/common/icon-button";
+import { autopilotListOptions } from "@workpal/core/autopilots/queries";
+import { useAutopilotsViewStore } from "@workpal/core/autopilots/stores";
+import { useCurrentWorkspace, useWorkspacePaths } from "@workpal/core/paths";
+import type { Autopilot } from "@workpal/core/types";
 import { useNavigation } from "../../navigation";
 import { useT } from "../../i18n";
 import { AUTOPILOT_TEMPLATES } from "../../autopilots/components/autopilot-templates";

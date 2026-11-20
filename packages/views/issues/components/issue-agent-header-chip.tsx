@@ -6,12 +6,12 @@ import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@multica/ui/components/ui/popover";
-import { useActorName } from "@multica/core/workspace/hooks";
-import { cn } from "@multica/ui/lib/utils";
-import { BorderBeam } from "@multica/ui/components/common/border-beam";
-import { issueTasksOptions } from "@multica/core/issues/queries";
-import type { AgentTask } from "@multica/core/types";
+} from "@workpal/ui/components/ui/popover";
+import { useActorName } from "@workpal/core/workspace/hooks";
+import { cn } from "@workpal/ui/lib/utils";
+import { BorderBeam } from "@workpal/ui/components/common/border-beam";
+import { issueTasksOptions } from "@workpal/core/issues/queries";
+import type { AgentTask } from "@workpal/core/types";
 import { TranscriptButton } from "../../common/task-transcript";
 import { AgentAvatarStack } from "../../agents/components/agent-avatar-stack";
 import { ActiveTaskRow } from "./execution-log-section";

@@ -4,7 +4,7 @@ import { IssueSidebarSectionHeader } from "./issue-sidebar-section";
 
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { Bell, Clock3, ChevronRight, GitPullRequest, Link2, ListChecks, CircleDot, Play } from "@multica/ui/icons";
+import { Bell, Clock3, ChevronRight, GitPullRequest, Link2, ListChecks, CircleDot, Play } from "@workpal/ui/icons";
 import { toast } from "sonner";
 import {
   issueSystemWakeupsOptions,
@@ -15,16 +15,16 @@ import {
   useEnableIssueWakeup,
   useTriggerIssueWakeup,
   issueTasksOptions,
-} from "@multica/core/issues";
-import type { AgentTask, IssueWakeup, SystemWakeup, WakeupCondition } from "@multica/core/types";
-import { useCurrentWorkspace } from "@multica/core/paths";
+} from "@workpal/core/issues";
+import type { AgentTask, IssueWakeup, SystemWakeup, WakeupCondition } from "@workpal/core/types";
+import { useCurrentWorkspace } from "@workpal/core/paths";
 import {
   Popover,
   PopoverTrigger,
   PopoverContent,
   PopoverTitle,
-} from "@multica/ui/components/ui/popover";
-import { Button } from "@multica/ui/components/ui/button";
+} from "@workpal/ui/components/ui/popover";
+import { Button } from "@workpal/ui/components/ui/button";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -34,7 +34,7 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@multica/ui/components/ui/alert-dialog";
+} from "@workpal/ui/components/ui/alert-dialog";
 import { WakeupInstructionEditor } from "./wakeup-instruction-editor";
 import { WakeupControl } from "./wakeup-control";
 import { WakeupCreate } from "./wakeup-create";

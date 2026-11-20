@@ -3,10 +3,10 @@
 import { useCallback, useState, type ReactNode } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
-import { Archive } from "@multica/ui/icons";
-import { cn } from "@multica/ui/lib/utils";
-import { Button } from "@multica/ui/components/ui/button";
-import { Spinner } from "@multica/ui/components/ui/spinner";
+import { Archive } from "@workpal/ui/icons";
+import { cn } from "@workpal/ui/lib/utils";
+import { Button } from "@workpal/ui/components/ui/button";
+import { Spinner } from "@workpal/ui/components/ui/spinner";
 import {
   Dialog,
   DialogContent,
@@ -14,11 +14,11 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "@multica/ui/components/ui/dialog";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { autopilotListOptions } from "@multica/core/autopilots/queries";
-import { useArchiveProject, useRestoreProject } from "@multica/core/projects";
-import type { Project, ProjectStatus } from "@multica/core/types";
+} from "@workpal/ui/components/ui/dialog";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { autopilotListOptions } from "@workpal/core/autopilots/queries";
+import { useArchiveProject, useRestoreProject } from "@workpal/core/projects";
+import type { Project, ProjectStatus } from "@workpal/core/types";
 import { useT } from "../../i18n";
 import { CollectionTag } from "../../layout/collection-list";
 

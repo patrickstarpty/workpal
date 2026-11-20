@@ -8,10 +8,10 @@ import (
 	"github.com/jackc/pgx/v5/pgtype"
 	"github.com/jackc/pgx/v5/pgxpool"
 
-	"github.com/multica-ai/multica/server/internal/events"
-	"github.com/multica-ai/multica/server/internal/integrations/channel"
-	"github.com/multica-ai/multica/server/internal/service"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
+	"workpal.local/workpal/server/internal/events"
+	"workpal.local/workpal/server/internal/integrations/channel"
+	"workpal.local/workpal/server/internal/service"
+	db "workpal.local/workpal/server/pkg/db/generated"
 )
 
 // MUL-7234 / #8234, driven from the top. Migration 461 moved the reply trigger

@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { chatSessionsOptions } from "@multica/core/chat/queries";
-import { countUnreadChatMessages } from "@multica/core/chat/unread";
-import { useInboxUnreadCount } from "@multica/core/inbox/queries";
+import { chatSessionsOptions } from "@workpal/core/chat/queries";
+import { countUnreadChatMessages } from "@workpal/core/chat/unread";
+import { useInboxUnreadCount } from "@workpal/core/inbox/queries";
 
 type BadgeCapableAPI = {
   setUnreadBadge?: (count: number) => void;

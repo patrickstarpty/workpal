@@ -9,16 +9,16 @@ import (
 
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgtype"
-	"github.com/multica-ai/multica/server/internal/analytics"
-	"github.com/multica-ai/multica/server/internal/events"
-	"github.com/multica-ai/multica/server/internal/handler"
-	"github.com/multica-ai/multica/server/internal/issuestatus"
-	obsmetrics "github.com/multica-ai/multica/server/internal/metrics"
-	"github.com/multica-ai/multica/server/internal/service"
-	"github.com/multica-ai/multica/server/internal/util"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
-	"github.com/multica-ai/multica/server/pkg/protocol"
-	"github.com/multica-ai/multica/server/pkg/redact"
+	"workpal.local/workpal/server/internal/analytics"
+	"workpal.local/workpal/server/internal/events"
+	"workpal.local/workpal/server/internal/handler"
+	"workpal.local/workpal/server/internal/issuestatus"
+	obsmetrics "workpal.local/workpal/server/internal/metrics"
+	"workpal.local/workpal/server/internal/service"
+	"workpal.local/workpal/server/internal/util"
+	db "workpal.local/workpal/server/pkg/db/generated"
+	"workpal.local/workpal/server/pkg/protocol"
+	"workpal.local/workpal/server/pkg/redact"
 )
 
 const (

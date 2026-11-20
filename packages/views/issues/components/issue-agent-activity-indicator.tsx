@@ -1,20 +1,20 @@
 "use client";
 
 import { memo, useCallback, useMemo, useState } from "react";
-import { Bell, Clock3, TriangleAlert } from "@multica/ui/icons";
+import { Bell, Clock3, TriangleAlert } from "@workpal/ui/icons";
 import { useQuery } from "@tanstack/react-query";
-import { ShimmerText } from "@multica/ui/components/common/shimmer-text";
+import { ShimmerText } from "@workpal/ui/components/common/shimmer-text";
 import {
   HoverCard,
   HoverCardTrigger,
   HoverCardContent,
-} from "@multica/ui/components/ui/hover-card";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { agentTaskSnapshotOptions } from "@multica/core/agents";
-import type { AgentTask, IssueWakeupSummaryRow, PausedWakeup } from "@multica/core/types";
-import { pausedWakeupsOptions, workspaceWakeupSummariesOptions } from "@multica/core/issues/wakeups";
-import { cn } from "@multica/ui/lib/utils";
-import type { AvatarSize } from "@multica/ui/lib/avatar-size";
+} from "@workpal/ui/components/ui/hover-card";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { agentTaskSnapshotOptions } from "@workpal/core/agents";
+import type { AgentTask, IssueWakeupSummaryRow, PausedWakeup } from "@workpal/core/types";
+import { pausedWakeupsOptions, workspaceWakeupSummariesOptions } from "@workpal/core/issues/wakeups";
+import { cn } from "@workpal/ui/lib/utils";
+import type { AvatarSize } from "@workpal/ui/lib/avatar-size";
 import { AgentAvatarStack } from "../../agents/components/agent-avatar-stack";
 import { AgentActivityHoverContent } from "../../agents/components/agent-activity-hover-content";
 import { selectIssueTasks, type IssueTaskGroups } from "../surface/activity";

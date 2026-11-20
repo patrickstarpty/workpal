@@ -21,12 +21,12 @@ import {
 } from "react";
 import { createPortal } from "react-dom";
 import { AnimatePresence, motion } from "motion/react";
-import { useReducedMotion } from "@multica/core/appearance";
+import { useReducedMotion } from "@workpal/core/appearance";
 import { toast } from "sonner";
 import {
   PreviewTooLargeError,
   PreviewUnsupportedError,
-} from "@multica/core/api";
+} from "@workpal/core/api";
 import {
   ChevronLeft,
   ChevronRight,
@@ -56,18 +56,18 @@ import {
   WrapText,
   X,
   type IconComponent,
-} from "@multica/ui/icons";
-import type { Attachment } from "@multica/core/types";
+} from "@workpal/ui/icons";
+import type { Attachment } from "@workpal/core/types";
 import {
   attachmentIdFromDownloadURL,
   attachmentIdFromLocalUploadURL,
   attachmentIdFromStorageURL,
-} from "@multica/core/types/attachment-url";
-import { useConfigStore } from "@multica/core/config";
-import { paths, useWorkspaceSlug } from "@multica/core/paths";
-import { createShortcutChord } from "@multica/core/shortcuts";
-import { cn } from "@multica/ui/lib/utils";
-import { TooltipHint } from "@multica/ui/components/common/tooltip-hint";
+} from "@workpal/core/types/attachment-url";
+import { useConfigStore } from "@workpal/core/config";
+import { paths, useWorkspaceSlug } from "@workpal/core/paths";
+import { createShortcutChord } from "@workpal/core/shortcuts";
+import { cn } from "@workpal/ui/lib/utils";
+import { TooltipHint } from "@workpal/ui/components/common/tooltip-hint";
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -79,13 +79,13 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@multica/ui/components/ui/dropdown-menu";
-import { copyImage, copyText } from "@multica/ui/lib/clipboard";
-import { resolvePublicFileUrl } from "@multica/core/workspace/avatar-url";
+} from "@workpal/ui/components/ui/dropdown-menu";
+import { copyImage, copyText } from "@workpal/ui/lib/clipboard";
+import { resolvePublicFileUrl } from "@workpal/core/workspace/avatar-url";
 import {
   UI_EASE_OUT,
   UI_MOTION_DURATION,
-} from "@multica/ui/lib/motion";
+} from "@workpal/ui/lib/motion";
 import { useT } from "../i18n";
 import { useNavigation } from "../navigation";
 import { openExternal } from "../platform";

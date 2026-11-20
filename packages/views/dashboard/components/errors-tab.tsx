@@ -1,10 +1,10 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { BarChart3 } from "@multica/ui/icons";
-import { NumberFlow } from "@multica/ui/components/ui/number-flow";
-import { FAILURE_CLASSES, type FailureClass } from "@multica/core/dashboard";
-import { useWorkspacePaths } from "@multica/core/paths";
+import { BarChart3 } from "@workpal/ui/icons";
+import { NumberFlow } from "@workpal/ui/components/ui/number-flow";
+import { FAILURE_CLASSES, type FailureClass } from "@workpal/core/dashboard";
+import { useWorkspacePaths } from "@workpal/core/paths";
 import { KpiCard } from "../../runtimes/components/shared";
 import {
   DailyErrorsChart,

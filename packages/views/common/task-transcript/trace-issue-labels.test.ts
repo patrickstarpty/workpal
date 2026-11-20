@@ -12,12 +12,12 @@ const labels = new Map([[issue, "DEV-17"], [other, "DEV-14"]]);
 describe("trace issue labels", () => {
   it("resolves only issue targets, deduplicating commands and preserving comment IDs", () => {
     expect(collectTraceIssueIds(issue, [
-      { type: "tool_use", input: { command: `multica issue comment list '${issue}' --thread ${thread}` } },
-      { type: "tool_use", input: { cmd: `multica issue get ${other.toUpperCase()} --output json` } },
+      { type: "tool_use", input: { command: `workpal issue comment list '${issue}' --thread ${thread}` } },
+      { type: "tool_use", input: { cmd: `workpal issue get ${other.toUpperCase()} --output json` } },
       { type: "tool_use", input: { issue_id: other } },
-      { type: "tool_use", input: { command: `multica issue comment update ${thread}` } },
-      { type: "tool_result", output: `multica issue get ${thread}` },
-      { type: "text", content: `multica issue get ${thread}` },
+      { type: "tool_use", input: { command: `workpal issue comment update ${thread}` } },
+      { type: "tool_result", output: `workpal issue get ${thread}` },
+      { type: "text", content: `workpal issue get ${thread}` },
     ])).toEqual([issue, other]);
   });
 
@@ -30,13 +30,13 @@ describe("trace issue labels", () => {
   });
 
   it("formats before truncation without changing raw input, detail or copy text", () => {
-    const command = `multica issue update ${issue} --description '${other} ${issue} visible-tail'`;
+    const command = `workpal issue update ${issue} --description '${other} ${issue} visible-tail'`;
     const input = { command };
     const event = { type: "tool_use", tool: "exec_command", input };
     expect(traceToolArgSummary(input, { formatText: (text) => replaceTraceIssueIds(text, labels) }))
-      .toBe("multica issue update DEV-17 --description 'DEV-14 DEV-17 visible-tail'");
+      .toBe("workpal issue update DEV-17 --description 'DEV-14 DEV-17 visible-tail'");
     expect(traceToolArgSummary({ cmd: command }, { formatText: (text) => replaceTraceIssueIds(text, labels) }))
-      .toBe("multica issue update DEV-17 --description 'DEV-14 DEV-17 visible-tail'");
+      .toBe("workpal issue update DEV-17 --description 'DEV-14 DEV-17 visible-tail'");
     expect(input.command).toBe(command);
     expect(traceEventDetail(event)).toEqual({ kind: "command", command, params: null });
     expect(traceEventCopyText(event)).toContain(issue);

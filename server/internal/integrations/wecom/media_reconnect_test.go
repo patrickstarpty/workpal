@@ -20,7 +20,7 @@ import (
 	"sync/atomic"
 	"testing"
 
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
+	db "workpal.local/workpal/server/pkg/db/generated"
 )
 
 // dyingConn is a mediaConn whose socket closes on the first frame carrying

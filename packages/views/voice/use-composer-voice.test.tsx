@@ -11,8 +11,8 @@ import {
   useVoiceModelsStore,
   useVoiceSettingsStore,
   type VoiceModels,
-} from "@multica/core/voice";
-import { createShortcutChord, useShortcutStore } from "@multica/core/shortcuts";
+} from "@workpal/core/voice";
+import { createShortcutChord, useShortcutStore } from "@workpal/core/shortcuts";
 import { useComposerVoice, type ComposerVoiceOptions } from "./use-composer-voice";
 
 const INSTALLED: VoiceModels = {
@@ -36,7 +36,7 @@ const engine = vi.hoisted(() => ({ transcribe: vi.fn(), started: 0 }));
 
 vi.mock("./recorder", () => ({ voiceInputSupported: () => true }));
 vi.mock("./engine", async () => {
-  const { useVoiceModelsStore } = await import("@multica/core/voice");
+  const { useVoiceModelsStore } = await import("@workpal/core/voice");
   return { useVoiceModels: () => useVoiceModelsStore((s) => s.models) };
 });
 

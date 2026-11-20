@@ -3,12 +3,12 @@
 import { useEffect, useRef, useState, type KeyboardEvent as ReactKeyboardEvent, type ReactNode } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
-import { useAuthStore } from "@multica/core/auth";
-import { useDevActionsStore } from "@multica/core/dev-actions";
-import { createShortcutChord, formatShortcut, shortcutMatchesEvent } from "@multica/core/shortcuts";
-import { Popover, PopoverContent, PopoverTrigger } from "@multica/ui/components/ui/popover";
-import { History, Pin, Play, Search, Zap } from "@multica/ui/icons";
-import { cn } from "@multica/ui/lib/utils";
+import { useAuthStore } from "@workpal/core/auth";
+import { useDevActionsStore } from "@workpal/core/dev-actions";
+import { createShortcutChord, formatShortcut, shortcutMatchesEvent } from "@workpal/core/shortcuts";
+import { Popover, PopoverContent, PopoverTrigger } from "@workpal/ui/components/ui/popover";
+import { History, Pin, Play, Search, Zap } from "@workpal/ui/icons";
+import { cn } from "@workpal/ui/lib/utils";
 import {
   blockedReason,
   commandTitle,

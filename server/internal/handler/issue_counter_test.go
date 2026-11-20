@@ -6,8 +6,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/multica-ai/multica/server/internal/service"
-	"github.com/multica-ai/multica/server/internal/testutil"
+	"workpal.local/workpal/server/internal/service"
+	"workpal.local/workpal/server/internal/testutil"
 )
 
 func TestIssueNumberCollisionResponse(t *testing.T) {

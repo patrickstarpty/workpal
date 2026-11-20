@@ -1,1 +1,1 @@
-export { DeferredTooltip } from "@multica/ui/components/common/deferred-tooltip";
+export { DeferredTooltip } from "@workpal/ui/components/common/deferred-tooltip";

@@ -3,11 +3,11 @@ package main
 import (
 	"testing"
 
-	"github.com/multica-ai/multica/server/internal/events"
-	"github.com/multica-ai/multica/server/internal/handler"
-	"github.com/multica-ai/multica/server/internal/testutil"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
-	"github.com/multica-ai/multica/server/pkg/protocol"
+	"workpal.local/workpal/server/internal/events"
+	"workpal.local/workpal/server/internal/handler"
+	"workpal.local/workpal/server/internal/testutil"
+	db "workpal.local/workpal/server/pkg/db/generated"
+	"workpal.local/workpal/server/pkg/protocol"
 )
 
 func TestDeliverToBystander(t *testing.T) {
@@ -52,14 +52,14 @@ func TestBystanderTier_StatusChange(t *testing.T) {
 	queries := db.New(testPool)
 	bus := newNotificationBus(t, queries)
 
-	owner := createNotificationMember(t, "bystander-owner@multica.ai")
-	t.Cleanup(func() { cleanupTestUser(t, "bystander-owner@multica.ai") })
-	watcher := createNotificationMember(t, "bystander-watcher@multica.ai")
-	t.Cleanup(func() { cleanupTestUser(t, "bystander-watcher@multica.ai") })
-	follower := createNotificationMember(t, "bystander-follower@multica.ai")
-	t.Cleanup(func() { cleanupTestUser(t, "bystander-follower@multica.ai") })
-	optedIn := createNotificationMember(t, "bystander-all@multica.ai")
-	t.Cleanup(func() { cleanupTestUser(t, "bystander-all@multica.ai") })
+	owner := createNotificationMember(t, "bystander-owner@workpal.invalid")
+	t.Cleanup(func() { cleanupTestUser(t, "bystander-owner@workpal.invalid") })
+	watcher := createNotificationMember(t, "bystander-watcher@workpal.invalid")
+	t.Cleanup(func() { cleanupTestUser(t, "bystander-watcher@workpal.invalid") })
+	follower := createNotificationMember(t, "bystander-follower@workpal.invalid")
+	t.Cleanup(func() { cleanupTestUser(t, "bystander-follower@workpal.invalid") })
+	optedIn := createNotificationMember(t, "bystander-all@workpal.invalid")
+	t.Cleanup(func() { cleanupTestUser(t, "bystander-all@workpal.invalid") })
 	setOthersIssuesPref(t, optedIn, "all")
 	enableStatusChanges(t, owner, watcher, follower, optedIn)
 
@@ -101,10 +101,10 @@ func TestBystanderTier_OwnAgentIsOwnIssue(t *testing.T) {
 	queries := db.New(testPool)
 	bus := newNotificationBus(t, queries)
 
-	owner := createNotificationMember(t, "bystander-agent-owner@multica.ai")
-	t.Cleanup(func() { cleanupTestUser(t, "bystander-agent-owner@multica.ai") })
-	other := createNotificationMember(t, "bystander-agent-other@multica.ai")
-	t.Cleanup(func() { cleanupTestUser(t, "bystander-agent-other@multica.ai") })
+	owner := createNotificationMember(t, "bystander-agent-owner@workpal.invalid")
+	t.Cleanup(func() { cleanupTestUser(t, "bystander-agent-owner@workpal.invalid") })
+	other := createNotificationMember(t, "bystander-agent-other@workpal.invalid")
+	t.Cleanup(func() { cleanupTestUser(t, "bystander-agent-other@workpal.invalid") })
 	enableStatusChanges(t, owner, other)
 
 	f := workspaceFixture(t)
@@ -135,10 +135,10 @@ func TestBystanderTier_ThreadReply(t *testing.T) {
 	queries := db.New(testPool)
 	bus := newNotificationBus(t, queries)
 
-	owner := createNotificationMember(t, "bystander-thread-owner@multica.ai")
-	t.Cleanup(func() { cleanupTestUser(t, "bystander-thread-owner@multica.ai") })
-	watcher := createNotificationMember(t, "bystander-thread-watcher@multica.ai")
-	t.Cleanup(func() { cleanupTestUser(t, "bystander-thread-watcher@multica.ai") })
+	owner := createNotificationMember(t, "bystander-thread-owner@workpal.invalid")
+	t.Cleanup(func() { cleanupTestUser(t, "bystander-thread-owner@workpal.invalid") })
+	watcher := createNotificationMember(t, "bystander-thread-watcher@workpal.invalid")
+	t.Cleanup(func() { cleanupTestUser(t, "bystander-thread-watcher@workpal.invalid") })
 
 	f := workspaceFixture(t)
 	issueID := f.Issue(t, "bystander tier issue", testutil.Cols{
@@ -190,12 +190,12 @@ func TestBystanderTier_ProjectWatcherKeepsEveryEvent(t *testing.T) {
 	queries := db.New(testPool)
 	bus := newNotificationBus(t, queries)
 
-	owner := createNotificationMember(t, "bystander-project-owner@multica.ai")
-	t.Cleanup(func() { cleanupTestUser(t, "bystander-project-owner@multica.ai") })
-	watcher := createNotificationMember(t, "bystander-project-watcher@multica.ai")
-	t.Cleanup(func() { cleanupTestUser(t, "bystander-project-watcher@multica.ai") })
-	bystander := createNotificationMember(t, "bystander-project-plain@multica.ai")
-	t.Cleanup(func() { cleanupTestUser(t, "bystander-project-plain@multica.ai") })
+	owner := createNotificationMember(t, "bystander-project-owner@workpal.invalid")
+	t.Cleanup(func() { cleanupTestUser(t, "bystander-project-owner@workpal.invalid") })
+	watcher := createNotificationMember(t, "bystander-project-watcher@workpal.invalid")
+	t.Cleanup(func() { cleanupTestUser(t, "bystander-project-watcher@workpal.invalid") })
+	bystander := createNotificationMember(t, "bystander-project-plain@workpal.invalid")
+	t.Cleanup(func() { cleanupTestUser(t, "bystander-project-plain@workpal.invalid") })
 	enableStatusChanges(t, watcher, bystander)
 
 	projectID := createTestProject(t)

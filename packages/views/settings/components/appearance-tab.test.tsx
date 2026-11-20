@@ -3,8 +3,8 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { act, cleanup, render, screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { I18nProvider } from "@multica/core/i18n/react";
-import { configStore } from "@multica/core/config";
+import { I18nProvider } from "@workpal/core/i18n/react";
+import { configStore } from "@workpal/core/config";
 import {
   DEFAULT_APPEARANCE,
   parseTheme,
@@ -14,7 +14,7 @@ import {
   useInstalledThemesStore,
   useThemeFolderStatus,
   writeZip,
-} from "@multica/core/appearance";
+} from "@workpal/core/appearance";
 import enCommon from "../../locales/en/common.json";
 import enSettings from "../../locales/en/settings.json";
 
@@ -23,7 +23,7 @@ const themeState = vi.hoisted(() => ({
   resolvedTheme: "light",
   setTheme: vi.fn(),
 }));
-vi.mock("@multica/ui/components/common/theme-provider", () => ({
+vi.mock("@workpal/ui/components/common/theme-provider", () => ({
   useTheme: () => themeState,
 }));
 const api = vi.hoisted(() => ({
@@ -31,7 +31,7 @@ const api = vi.hoisted(() => ({
   getStoreThemePackage: vi.fn(),
   getStoreThemeScreenshot: vi.fn(),
 }));
-vi.mock("@multica/core/api", () => ({ api }));
+vi.mock("@workpal/core/api", () => ({ api }));
 
 import { AppearanceTab } from "./appearance-tab";
 
@@ -307,7 +307,7 @@ describe("AppearanceTab", () => {
       id: "paper",
       name: "Paper",
       author: "Someone",
-      repo: "someone/multica-theme-paper",
+      repo: "someone/workpal-theme-paper",
       description: "",
       modes: ["light"],
       version,

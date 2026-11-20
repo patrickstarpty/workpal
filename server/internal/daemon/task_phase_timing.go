@@ -6,7 +6,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/multica-ai/multica/server/pkg/agent"
+	"workpal.local/workpal/server/pkg/agent"
 )
 
 type taskPhase string

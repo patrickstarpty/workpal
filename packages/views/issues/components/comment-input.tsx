@@ -1,15 +1,15 @@
 "use client";
 
 import { useRef, useState, useEffect, useMemo } from "react";
-import { cn } from "@multica/ui/lib/utils";
+import { cn } from "@workpal/ui/lib/utils";
 import { ContentEditor, type ContentEditorRef, useFileDropZone, FileDropOverlay, useLazyEditor, useUploadGate, useComposerSubmit } from "../../editor";
-import { SubmitButton } from "@multica/ui/components/common/submit-button";
-import { Button } from "@multica/ui/components/ui/button";
-import { contentReferencesAttachment, type AgentTask } from "@multica/core/types";
-import { useShortcut } from "@multica/core/shortcuts";
+import { SubmitButton } from "@workpal/ui/components/common/submit-button";
+import { Button } from "@workpal/ui/components/ui/button";
+import { contentReferencesAttachment, type AgentTask } from "@workpal/core/types";
+import { useShortcut } from "@workpal/core/shortcuts";
 import { ShortcutKeycaps } from "../../common/shortcut-keycaps";
-import { useCommentDraftStore } from "@multica/core/issues/stores";
-import { composeAnnotatedReply, hasReplyIntent } from "@multica/core/drafts/reply-annotation";
+import { useCommentDraftStore } from "@workpal/core/issues/stores";
+import { composeAnnotatedReply, hasReplyIntent } from "@workpal/core/drafts/reply-annotation";
 import { annotationsWithPending, type AnnotationComposerSlot } from "./annotation-composer";
 import { ReplyAnnotations } from "./reply-annotations";
 import { useT } from "../../i18n";

@@ -12,7 +12,7 @@ import (
 	"sync"
 	"testing"
 
-	"github.com/multica-ai/multica/server/pkg/agent"
+	"workpal.local/workpal/server/pkg/agent"
 )
 
 // modelListFixture stands up a Daemon whose model-list report is captured and

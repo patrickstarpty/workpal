@@ -6,9 +6,9 @@ import (
 	"testing"
 
 	"github.com/jackc/pgx/v5/pgtype"
-	"github.com/multica-ai/multica/server/internal/testutil"
-	"github.com/multica-ai/multica/server/internal/util"
-	"github.com/multica-ai/multica/server/pkg/protocol"
+	"workpal.local/workpal/server/internal/testutil"
+	"workpal.local/workpal/server/internal/util"
+	"workpal.local/workpal/server/pkg/protocol"
 )
 
 // deliveryFixture is a run of agent on source issue A that reports to target
@@ -46,7 +46,7 @@ func (d deliveryFixture) runningTask(t *testing.T, over testutil.Cols) pgtype.UU
 }
 
 // reportOnTarget posts the agent's explicit report on the target issue, as
-// `multica issue comment add <target>` does during the run.
+// `workpal issue comment add <target>` does during the run.
 func (d deliveryFixture) reportOnTarget(t *testing.T) {
 	t.Helper()
 	d.f.Comment(t, d.target, "Report for the target issue.", testutil.Cols{"author_type": "agent", "author_id": d.agentID})

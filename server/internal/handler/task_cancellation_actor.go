@@ -3,8 +3,8 @@ package handler
 import (
 	"context"
 
-	"github.com/multica-ai/multica/server/internal/service"
-	"github.com/multica-ai/multica/server/internal/util"
+	"workpal.local/workpal/server/internal/service"
+	"workpal.local/workpal/server/internal/util"
 )
 
 // taskCancellationActor snapshots the authenticated actor's display name for

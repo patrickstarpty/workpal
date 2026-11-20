@@ -13,10 +13,10 @@ import {
   Plus,
   SquareTerminal,
   TriangleAlert,
-} from "@multica/ui/icons";
-import type { QoderConnection } from "@multica/core/runtimes/qoder";
-import { Button, buttonVariants } from "@multica/ui/components/ui/button";
-import { cn } from "@multica/ui/lib/utils";
+} from "@workpal/ui/icons";
+import type { QoderConnection } from "@workpal/core/runtimes/qoder";
+import { Button, buttonVariants } from "@workpal/ui/components/ui/button";
+import { cn } from "@workpal/ui/lib/utils";
 import { useT } from "../../i18n";
 import { ProviderLogo } from "../../runtimes/components/provider-logo";
 import { HealthDot, useHealthLabel } from "../../runtimes/components/shared";

@@ -28,10 +28,10 @@ import (
 	"github.com/jackc/pgx/v5/pgxpool"
 	"github.com/redis/go-redis/v9"
 
-	"github.com/multica-ai/multica/server/internal/events"
-	"github.com/multica-ai/multica/server/internal/integrations/channel/engine"
-	"github.com/multica-ai/multica/server/internal/util"
-	"github.com/multica-ai/multica/server/pkg/protocol"
+	"workpal.local/workpal/server/internal/events"
+	"workpal.local/workpal/server/internal/integrations/channel/engine"
+	"workpal.local/workpal/server/internal/util"
+	"workpal.local/workpal/server/pkg/protocol"
 )
 
 // wecomTestRedis is the same gate the rest of the repository uses for

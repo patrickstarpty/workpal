@@ -9,16 +9,16 @@ import {
   SlidersHorizontal,
   X,
   type IconComponent,
-} from "@multica/ui/icons";
-import { Button } from "@multica/ui/components/ui/button";
-import { IconButton } from "@multica/ui/components/common/icon-button";
+} from "@workpal/ui/icons";
+import { Button } from "@workpal/ui/components/ui/button";
+import { IconButton } from "@workpal/ui/components/common/icon-button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuRadioGroup,
   DropdownMenuRadioItem,
   DropdownMenuTrigger,
-} from "@multica/ui/components/ui/dropdown-menu";
+} from "@workpal/ui/components/ui/dropdown-menu";
 import {
   Empty,
   EmptyContent,
@@ -26,20 +26,20 @@ import {
   EmptyHeader,
   EmptyMedia,
   EmptyTitle,
-} from "@multica/ui/components/ui/empty";
+} from "@workpal/ui/components/ui/empty";
 import {
   InputGroup,
   InputGroupAddon,
   InputGroupInput,
-} from "@multica/ui/components/ui/input-group";
-import { cn } from "@multica/ui/lib/utils";
-import { useModalStore } from "@multica/core/modals";
+} from "@workpal/ui/components/ui/input-group";
+import { cn } from "@workpal/ui/lib/utils";
+import { useModalStore } from "@workpal/core/modals";
 import {
   createShortcutChord,
   isEditableShortcutTarget,
   isPortalLayerShortcutTarget,
-} from "@multica/core/shortcuts";
-import { isImeComposing } from "@multica/core/utils";
+} from "@workpal/core/shortcuts";
+import { isImeComposing } from "@workpal/core/utils";
 import { ShortcutKeycaps } from "../common/shortcut-keycaps";
 import { useT } from "../i18n";
 import { PageHeader } from "./page-header";

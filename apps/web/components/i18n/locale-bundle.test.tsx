@@ -1,8 +1,8 @@
 // @vitest-environment node
 import type { ComponentType } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
-import { SUPPORTED_LOCALES } from "@multica/core/i18n";
-import { RESOURCES } from "@multica/views/locales";
+import { SUPPORTED_LOCALES } from "@workpal/core/i18n";
+import { RESOURCES } from "@workpal/views/locales";
 import { describe, expect, it, vi } from "vitest";
 import type { LocaleBundleProps } from "./locale-bundle";
 

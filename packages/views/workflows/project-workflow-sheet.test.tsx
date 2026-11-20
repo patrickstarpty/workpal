@@ -1,6 +1,6 @@
 import { cleanup, fireEvent, screen } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import type { IssueWorkflow, Project } from "@multica/core/types";
+import type { IssueWorkflow, Project } from "@workpal/core/types";
 import { renderWithI18n } from "../test/i18n";
 import { ProjectWorkflowSheet } from "./project-workflow-sheet";
 
@@ -23,14 +23,14 @@ const releaseWorkflow = {
 } as unknown as IssueWorkflow;
 
 vi.mock("@tanstack/react-query", () => ({ useQuery: () => ({ data: [] }) }));
-vi.mock("@multica/core/api", () => ({ api: {}, clientErrorMessage: () => null }));
-vi.mock("@multica/core/hooks", () => ({ useWorkspaceId: () => "workspace-1" }));
-vi.mock("@multica/core/paths", () => ({ useWorkspacePaths: () => ({ settings: () => "/settings" }) }));
-vi.mock("@multica/core/projects/queries", () => ({ projectListOptions: () => ({}) }));
-vi.mock("@multica/core/issue-statuses/hooks", () => ({
+vi.mock("@workpal/core/api", () => ({ api: {}, clientErrorMessage: () => null }));
+vi.mock("@workpal/core/hooks", () => ({ useWorkspaceId: () => "workspace-1" }));
+vi.mock("@workpal/core/paths", () => ({ useWorkspacePaths: () => ({ settings: () => "/settings" }) }));
+vi.mock("@workpal/core/projects/queries", () => ({ projectListOptions: () => ({}) }));
+vi.mock("@workpal/core/issue-statuses/hooks", () => ({
   useIssueStatuses: () => ({ categoryOf: () => "unstarted", colorOf: () => undefined, iconOf: () => undefined }),
 }));
-vi.mock("@multica/core/issue-workflows", () => ({
+vi.mock("@workpal/core/issue-workflows", () => ({
   useIssueWorkflows: () => ({ workflows: [releaseWorkflow] }),
   resolveProjectWorkflow: () => releaseWorkflow,
   statusAcceptsHandoff: () => true,

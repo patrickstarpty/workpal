@@ -30,8 +30,8 @@ func TestChatAttachmentDownloadURLLifetime(t *testing.T) {
 				chatAttach(map[string]string{}, h.task, [3]string{"first.txt", "text/plain", "first"}, second)
 				var now int64
 				var requests []string
-				base := h.b.multica.client.Transport
-				h.b.multica.client.Transport = attachmentTransport(func(r *http.Request) (*http.Response, error) {
+				base := h.b.workpal.client.Transport
+				h.b.workpal.client.Transport = attachmentTransport(func(r *http.Request) (*http.Response, error) {
 					if !strings.HasPrefix(r.URL.Path, "/api/attachments/") {
 						return base.RoundTrip(r)
 					}

@@ -23,10 +23,10 @@ import (
 
 	"github.com/jackc/pgx/v5/pgtype"
 
-	"github.com/multica-ai/multica/server/internal/events"
-	"github.com/multica-ai/multica/server/internal/integrations/channel/engine"
-	"github.com/multica-ai/multica/server/internal/realtime"
-	"github.com/multica-ai/multica/server/internal/util"
+	"workpal.local/workpal/server/internal/events"
+	"workpal.local/workpal/server/internal/integrations/channel/engine"
+	"workpal.local/workpal/server/internal/realtime"
+	"workpal.local/workpal/server/internal/util"
 )
 
 // relayPublisher is the slice of the realtime relay this package needs.

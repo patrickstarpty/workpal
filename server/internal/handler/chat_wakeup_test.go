@@ -9,8 +9,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/multica-ai/multica/server/internal/service"
-	"github.com/multica-ai/multica/server/internal/testutil"
+	"workpal.local/workpal/server/internal/service"
+	"workpal.local/workpal/server/internal/testutil"
 )
 
 // seedChatWakeup stores an active reminder in a conversation, asked for by
@@ -49,8 +49,8 @@ func TestCancelChatSessionWakeup_RequesterOrSessionOwner(t *testing.T) {
 	agentID := createHandlerTestAgent(t, "ChatWakeupCancelAgent", []byte("[]"))
 	sessionID := createHandlerTestChatSession(t, agentID)
 	suffix := time.Now().UnixNano()
-	sender := createWorkspaceMemberUser(t, "Wakeup sender", fmt.Sprintf("wakeup-sender-%d@multica.test", suffix))
-	bystander := createWorkspaceMemberUser(t, "Wakeup bystander", fmt.Sprintf("wakeup-bystander-%d@multica.test", suffix))
+	sender := createWorkspaceMemberUser(t, "Wakeup sender", fmt.Sprintf("wakeup-sender-%d@workpal.test", suffix))
+	bystander := createWorkspaceMemberUser(t, "Wakeup bystander", fmt.Sprintf("wakeup-bystander-%d@workpal.test", suffix))
 
 	senders := seedChatWakeup(t, sessionID, agentID, sender)
 	if w := cancelChatWakeupAs(t, bystander, sessionID, senders); w.Code != http.StatusForbidden {
@@ -102,7 +102,7 @@ func TestClaimTaskByRuntime_ChatWakeupRechecksRequester(t *testing.T) {
 	runtimeID := createClaimReclaimRuntime(t, ctx, "Offline wakeup runtime")
 	agentID, _ := createClaimReclaimAgentAndIssue(t, ctx, runtimeID, "Offline wakeup agent")
 	sessionID := createHandlerTestChatSession(t, agentID)
-	sender := createWorkspaceMemberUser(t, "Wakeup sender", fmt.Sprintf("offline-wakeup-%d@multica.test", time.Now().UnixNano()))
+	sender := createWorkspaceMemberUser(t, "Wakeup sender", fmt.Sprintf("offline-wakeup-%d@workpal.test", time.Now().UnixNano()))
 	dbfx.Exec(t, `UPDATE agent SET permission_mode = 'public_to' WHERE id = $1`, agentID)
 	dbfx.Exec(t, `INSERT INTO agent_invocation_target (agent_id, target_type, target_id) VALUES ($1, 'member', $2) ON CONFLICT DO NOTHING`, agentID, sender)
 	sourceID := dbfx.Task(t, agentID, testutil.Cols{"runtime_id": runtimeID, "chat_session_id": sessionID, "status": "completed", "initiator_user_id": sender, "originator_user_id": sender, "accountable_user_id": sender})

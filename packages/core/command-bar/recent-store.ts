@@ -71,7 +71,7 @@ export const useRecentVisitsStore = create<RecentVisitsState>()(
         }),
     }),
     {
-      name: "multica_recent_visits",
+      name: "workpal_recent_visits",
       storage: createJSONStorage(() => defaultStorage),
       partialize: (state) => ({ byWorkspace: state.byWorkspace }),
       version: 1,

@@ -1,4 +1,4 @@
-import { clearDevErrors, clearDevRequests } from "@multica/core/diagnostics";
+import { clearDevErrors, clearDevRequests } from "@workpal/core/diagnostics";
 import type { DevFeature } from "./actions";
 
 export const queryCacheDevFeature: DevFeature = {

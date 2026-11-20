@@ -7,7 +7,7 @@ import (
 	"runtime"
 	"testing"
 
-	"github.com/multica-ai/multica/server/pkg/agent"
+	"workpal.local/workpal/server/pkg/agent"
 )
 
 func TestProbeAgentCLIsDiscoversZCodeAppBundle(t *testing.T) {
@@ -35,7 +35,7 @@ func TestProbeAgentCLIsDiscoversZCodeAppBundle(t *testing.T) {
 	t.Setenv("HOME", t.TempDir())
 	t.Setenv("USERPROFILE", t.TempDir())
 	t.Setenv("PATH", t.TempDir())
-	t.Setenv("MULTICA_ZCODE_PATH", "")
+	t.Setenv("WORKPAL_ZCODE_PATH", "")
 
 	entry, ok := probeAgentCLIs()["zcode"]
 	if !ok {
@@ -89,8 +89,8 @@ printf '0.17.1\n'
 			resolveAgentsViaLoginShell = func([]string) map[string]string { return nil }
 			resetShellResolveCacheForTest(t)
 			t.Setenv("PATH", root)
-			t.Setenv("MULTICA_ZCODE_PATH", "")
-			t.Setenv("MULTICA_ZCODE_MODEL", "zai/glm-5.3")
+			t.Setenv("WORKPAL_ZCODE_PATH", "")
+			t.Setenv("WORKPAL_ZCODE_MODEL", "zai/glm-5.3")
 			switch source {
 			case "PATH":
 				link := filepath.Join(root, "zcode")
@@ -100,7 +100,7 @@ printf '0.17.1\n'
 			case "login shell":
 				resolveAgentsViaLoginShell = func([]string) map[string]string { return map[string]string{"zcode": bin} }
 			case "override":
-				t.Setenv("MULTICA_ZCODE_PATH", bin)
+				t.Setenv("WORKPAL_ZCODE_PATH", bin)
 			}
 			entry, ok := probeAgentCLIs()["zcode"]
 			if !ok || entry.Path != bin || entry.Model != "zai/glm-5.3" {

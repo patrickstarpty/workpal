@@ -36,7 +36,7 @@ func TestProbeBuiltinRuntimeDshRetainsStartupDiagnosis(t *testing.T) {
 	} {
 		t.Run(tc.name, func(t *testing.T) {
 			path := dshProbeFixture(t, "exit 1", true)
-			manifestPath := dshMulticaProfileManifestPath()
+			manifestPath := dshWorkpalProfileManifestPath()
 			data, err := os.ReadFile(manifestPath)
 			if err != nil {
 				t.Fatal(err)
@@ -54,7 +54,7 @@ func TestProbeBuiltinRuntimeDshRetainsStartupDiagnosis(t *testing.T) {
 				t.Fatal(err)
 			}
 			marker := filepath.Join(t.TempDir(), "provisioned")
-			t.Setenv(dshProfileBundleEnv, "@multica-ai/dsh-runtime")
+			t.Setenv(dshProfileBundleEnv, "@workpal-ai/dsh-runtime")
 			t.Setenv("DSH_DIAGNOSTIC_INSTALL_MARKER", marker)
 			script := "#!/bin/sh\ncase \"$*\" in\n" +
 				"*--version*) printf '%s\\n' '0.2.2-rc.3' ;;\n" +
@@ -125,7 +125,7 @@ func TestDshProfileDiagnosticClassification(t *testing.T) {
 				body += fmt.Sprintf("exit %d", tc.code)
 			}
 			path := dshProbeFixture(t, body, true)
-			if got := probeDshMulticaProfile(context.Background(), path).verdict; got != tc.want {
+			if got := probeDshWorkpalProfile(context.Background(), path).verdict; got != tc.want {
 				t.Fatalf("profile verdict=%v, want %v", got, tc.want)
 			}
 		})
@@ -177,7 +177,7 @@ func TestDshCoreCompatibilityDemotionRequiresConfirmationAndRecovers(t *testing.
 	}
 	stubConfirmWindow(t, 0)
 	path := dshProbeFixture(t, dshProbeOKFrame, true)
-	manifestPath := dshMulticaProfileManifestPath()
+	manifestPath := dshWorkpalProfileManifestPath()
 	before, err := os.ReadFile(manifestPath)
 	if err != nil {
 		t.Fatal(err)
@@ -242,7 +242,7 @@ func TestDshCoreCompatibilitySignalIsTransient(t *testing.T) {
 		t.Skip("POSIX signal fixture")
 	}
 	path := dshProbeFixture(t, "printf '%s\\n' '"+dshCoreCompatibilityFixture+"' >&2; kill -TERM $$", true)
-	result := probeDshMulticaProfile(context.Background(), path)
+	result := probeDshWorkpalProfile(context.Background(), path)
 	if result.verdict != dshProbeUnavailable {
 		t.Fatalf("signal verdict=%v, want transient", result.verdict)
 	}

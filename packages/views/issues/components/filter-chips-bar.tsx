@@ -1,6 +1,6 @@
 "use client";
 
-import { useIssueStatuses } from "@multica/core/issue-statuses/hooks";
+import { useIssueStatuses } from "@workpal/core/issue-statuses/hooks";
 import { useStatusLabel } from "../utils/status-label";
 import { useMemo, type ReactNode } from "react";
 import {
@@ -18,34 +18,34 @@ import {
   User,
   UserPen,
   X,
-} from "@multica/ui/icons";
+} from "@workpal/ui/icons";
 import { useQuery } from "@tanstack/react-query";
-import { Button } from "@multica/ui/components/ui/button";
-import { TooltipHint } from "@multica/ui/components/common/tooltip-hint";
-import { cn } from "@multica/ui/lib/utils";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { memberListOptions, agentListOptions, squadListOptions } from "@multica/core/workspace/queries";
-import { projectListOptions } from "@multica/core/projects/queries";
-import { PROJECT_STATUS_CONFIG } from "@multica/core/projects/config";
-import { labelListOptions } from "@multica/core/labels/queries";
-import { propertyListOptions } from "@multica/core/properties";
-import { isActorPropertyType, parseActorRef, propertyFilterValueKey, type PropertyFilterValue } from "@multica/core/types";
+import { Button } from "@workpal/ui/components/ui/button";
+import { TooltipHint } from "@workpal/ui/components/common/tooltip-hint";
+import { cn } from "@workpal/ui/lib/utils";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { memberListOptions, agentListOptions, squadListOptions } from "@workpal/core/workspace/queries";
+import { projectListOptions } from "@workpal/core/projects/queries";
+import { PROJECT_STATUS_CONFIG } from "@workpal/core/projects/config";
+import { labelListOptions } from "@workpal/core/labels/queries";
+import { propertyListOptions } from "@workpal/core/properties";
+import { isActorPropertyType, parseActorRef, propertyFilterValueKey, type PropertyFilterValue } from "@workpal/core/types";
 import {
   type ActorFilterValue,
   type FilterDimension,
   type FilterSnapshot,
   type IssueDateFilter,
   type NegatableFilterDimension,
-} from "@multica/core/issues/stores/view-store";
+} from "@workpal/core/issues/stores/view-store";
 import {
   actorFilterKey,
   type IssueViewBaseline,
-} from "@multica/core/issue-views/baseline";
-import { useViewStore, useViewStoreApi } from "@multica/core/issues/stores/view-store-context";
+} from "@workpal/core/issue-views/baseline";
+import { useViewStore, useViewStoreApi } from "@workpal/core/issues/stores/view-store-context";
 import {
   advancedFilterSignature,
   countAdvancedConditions,
-} from "@multica/core/issues/stores/filter-tree";
+} from "@workpal/core/issues/stores/filter-tree";
 import { DUE_DATE_LABEL_KEY, RELATION_LABEL_KEY } from "./filter-field-options";
 import { usePropertyValueName } from "./property-filter-options";
 import { StatusIcon } from "./status-icon";
@@ -53,7 +53,7 @@ import { PriorityIcon } from "./priority-icon";
 import { ActorAvatar } from "../../common/actor-avatar";
 import { useProjectStatusLabels } from "../../projects/components/labels";
 import { useT } from "../../i18n";
-import { paletteColor } from "@multica/core/appearance";
+import { paletteColor } from "@workpal/core/appearance";
 
 /** One rendered chip: a dimension with its selected values summarised. */
 export interface FilterChip {

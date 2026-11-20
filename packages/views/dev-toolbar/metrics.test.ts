@@ -1,7 +1,7 @@
 // @vitest-environment node
 import { describe, expect, it } from "vitest";
-import type { DevRealtimeEvent, DevRequest } from "@multica/core/diagnostics";
-import type { AgentTask } from "@multica/core/types";
+import type { DevRealtimeEvent, DevRequest } from "@workpal/core/diagnostics";
+import type { AgentTask } from "@workpal/core/types";
 import {
   activeTasks,
   apiHost,
@@ -106,7 +106,7 @@ describe("jankTone", () => {
 describe("apiHost", () => {
   it("keeps host and port, and passes through what is not a URL", () => {
     expect(apiHost("http://localhost:18080")).toBe("localhost:18080");
-    expect(apiHost("https://api.multica.ai/")).toBe("api.multica.ai");
+    expect(apiHost("https://workpal.invalid/")).toBe("workpal.invalid");
     expect(apiHost("same-origin")).toBe("same-origin");
   });
 });
@@ -156,7 +156,7 @@ describe("curlCommand", () => {
     expect(command).toBe(
       [
         "curl -X POST 'http://localhost:18080/api/issues'",
-        `-H "Authorization: Bearer $MULTICA_TOKEN"`,
+        `-H "Authorization: Bearer $WORKPAL_TOKEN"`,
         "-H 'X-Workspace-Slug: acme'",
         "-H 'Content-Type: application/json'",
         `--data '{"title":"it'\\''s"}'`,

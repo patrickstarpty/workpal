@@ -13,13 +13,13 @@ import { createLogger } from "../logger";
 
 const logger = createLogger("chat.store");
 
-const AGENT_STORAGE_KEY = "multica:chat:selectedAgentId";
-const PROJECT_STORAGE_KEY = "multica:chat:selectedProjectId";
-const SESSION_STORAGE_KEY = "multica:chat:activeSessionId";
+const AGENT_STORAGE_KEY = "workpal:chat:selectedAgentId";
+const PROJECT_STORAGE_KEY = "workpal:chat:selectedProjectId";
+const SESSION_STORAGE_KEY = "workpal:chat:activeSessionId";
 /** Drafts are stored as one JSON blob per workspace: { [sessionId]: text }. */
-const DRAFTS_KEY = "multica:chat:drafts";
+const DRAFTS_KEY = "workpal:chat:drafts";
 /** Draft attachment records per workspace: { [sessionId]: Attachment[] }. */
-const DRAFT_ATTACHMENTS_KEY = "multica:chat:draft-attachments";
+const DRAFT_ATTACHMENTS_KEY = "workpal:chat:draft-attachments";
 /**
  * Ids of durable draft restores (#5219) this client has already written into a
  * composer. Persisted, because the server-side consume that follows can be lost
@@ -28,7 +28,7 @@ const DRAFT_ATTACHMENTS_KEY = "multica:chat:draft-attachments";
  * The ledger makes the hand-off at-most-once regardless: an id in here is never
  * offered again, only reconciled (consumed again) until the row is gone.
  */
-const APPLIED_RESTORES_KEY = "multica:chat:applied-draft-restores";
+const APPLIED_RESTORES_KEY = "workpal:chat:applied-draft-restores";
 /**
  * Local restore requests waiting to reach a composer, queued per session (#5219).
  *
@@ -42,7 +42,7 @@ const APPLIED_RESTORES_KEY = "multica:chat:applied-draft-restores";
  * Durable restores (which have a server row) deliberately do NOT go in here —
  * they are refetchable, so dropping one loses nothing.
  */
-const PENDING_SEND_RESTORES_KEY = "multica:chat:pending-send-restores";
+const PENDING_SEND_RESTORES_KEY = "workpal:chat:pending-send-restores";
 /**
  * Draft slot for a chat that hasn't been created yet. There is exactly one per
  * workspace: the new-chat composer's identity is "the chat I have not created",
@@ -54,9 +54,9 @@ export const DRAFT_NEW_SESSION = "__new__";
 
 /** Pre-MUL-4864 per-agent new-chat slots, shaped `__new__:<agentId>`. */
 const LEGACY_NEW_SESSION_PREFIX = `${DRAFT_NEW_SESSION}:`;
-const CHAT_WIDTH_KEY = "multica:chat:width";
-const CHAT_HEIGHT_KEY = "multica:chat:height";
-const CHAT_EXPANDED_KEY = "multica:chat:expanded";
+const CHAT_WIDTH_KEY = "workpal:chat:width";
+const CHAT_HEIGHT_KEY = "workpal:chat:height";
+const CHAT_EXPANDED_KEY = "workpal:chat:expanded";
 /**
  * Open/closed preference, persisted globally (not per-workspace) — most users
  * have one habitual chat-panel preference across workspaces. Missing key =
@@ -65,7 +65,7 @@ const CHAT_EXPANDED_KEY = "multica:chat:expanded";
  * Once the user toggles even once, their explicit choice is respected on
  * every subsequent reload.
  */
-const OPEN_KEY = "multica:chat:isOpen";
+const OPEN_KEY = "workpal:chat:isOpen";
 /**
  * Whether the floating chat window (FAB + overlay) is available at all,
  * persisted globally like OPEN_KEY. This is the Settings → Chat preference:
@@ -73,12 +73,12 @@ const OPEN_KEY = "multica:chat:isOpen";
  * Missing key = default ON — the floating window is on by default and can
  * be turned off from the Settings → Chat tab.
  */
-const FLOATING_KEY = "multica:chat:floatingChatEnabled";
+const FLOATING_KEY = "workpal:chat:floatingChatEnabled";
 /**
- * The agent Ask Multica starts a new chat with, per workspace. Missing key =
+ * The agent Ask Workpal starts a new chat with, per workspace. Missing key =
  * no preference: a new chat goes to the agent last chatted with.
  */
-const QUICK_CHAT_AGENT_KEY = "multica:chat:quickChatAgentId";
+const QUICK_CHAT_AGENT_KEY = "workpal:chat:quickChatAgentId";
 /**
  * The chats kept as chips in the bottom bar, per workspace:
  * `{ kept: sessionId[], dismissed: { [sessionId]: activity } }`.
@@ -88,7 +88,7 @@ const QUICK_CHAT_AGENT_KEY = "multica:chat:quickChatAgentId";
  * moment its chip was closed, so the chip stays away until the chat moves
  * again; without it, closing the chip of an unread chat would do nothing.
  */
-const CHAT_BAR_KEY = "multica:chat:bar";
+const CHAT_BAR_KEY = "workpal:chat:bar";
 /** Chips are a working set, not a history: the oldest fall off. */
 const CHAT_BAR_MAX_KEPT = 12;
 const CHAT_BAR_MAX_DISMISSED = 50;
@@ -359,7 +359,7 @@ export interface ChatState {
   /** Project context for the next session. Existing sessions remain bound to
    *  their server-persisted project_id. */
   selectedProjectId: string | null;
-  /** Settings preference: the agent Ask Multica starts a new chat with. */
+  /** Settings preference: the agent Ask Workpal starts a new chat with. */
   quickChatAgentId: string | null;
   /** Bumped by `startNewChat`; the window focuses its composer on each bump. */
   newChatRequest: number;
@@ -387,7 +387,7 @@ export interface ChatState {
   setSelectedAgentId: (id: string) => void;
   setSelectedProjectId: (id: string | null) => void;
   setQuickChatAgentId: (id: string | null) => void;
-  /** Ask Multica: open the window on a new chat with the quick-chat agent and no project. */
+  /** Ask Workpal: open the window on a new chat with the quick-chat agent and no project. */
   startNewChat: () => void;
   /** Give a chat a chip in the bottom bar. No-op when it already has one. */
   keepChatInBar: (sessionId: string) => void;

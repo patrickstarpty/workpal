@@ -7,7 +7,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/multica-ai/multica/server/pkg/protocol"
+	"workpal.local/workpal/server/pkg/protocol"
 )
 
 type batchClaimReceiptResponse struct {

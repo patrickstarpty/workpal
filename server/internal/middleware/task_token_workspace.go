@@ -7,8 +7,8 @@ import (
 	"net/url"
 
 	"github.com/jackc/pgx/v5"
-	"github.com/multica-ai/multica/server/internal/util"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
+	"workpal.local/workpal/server/internal/util"
+	db "workpal.local/workpal/server/pkg/db/generated"
 )
 
 // errTaskTokenWorkspaceMismatch is the 403 body returned when a task-token

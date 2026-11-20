@@ -150,11 +150,11 @@ test("comment typing stays responsive beside an image-heavy thread", async ({ pa
   page.on("pageerror", (error) => pageErrors.push(error.message));
   await page.emulateMedia({ colorScheme: "light", reducedMotion: "no-preference" });
   await context.addCookies([
-    { name: "multica_logged_in", value: "1", url: origin },
+    { name: "workpal_logged_in", value: "1", url: origin },
     { name: "last_workspace_slug", value: fx.WORKSPACE_SLUG, url: origin },
   ]);
   await context.addInitScript(() => {
-    window.localStorage.setItem("multica:chat:floatingChatEnabled", "false");
+    window.localStorage.setItem("workpal:chat:floatingChatEnabled", "false");
   });
   await context.addInitScript(() => {
     const tasks: number[] = [];

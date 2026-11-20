@@ -11,22 +11,22 @@ import {
   type ReactNode,
 } from "react";
 import type { QueryClient } from "@tanstack/react-query";
-import { getCurrentWsId } from "@multica/core/platform";
-import { flattenIssueBuckets, issueKeys } from "@multica/core/issues/queries";
-import { issueStatusCategory } from "@multica/core/issues";
-import { useIssueStatuses } from "@multica/core/issue-statuses/hooks";
-import { workspaceKeys } from "@multica/core/workspace/queries";
-import { projectKeys } from "@multica/core/projects/queries";
-import { useAuthStore } from "@multica/core/auth";
-import { canAssignAgentToIssue } from "@multica/core/permissions";
-import { isAgentRuntimeBound } from "@multica/core/agents";
-import { searchIssues, searchProjects } from "@multica/core/search-index";
+import { getCurrentWsId } from "@workpal/core/platform";
+import { flattenIssueBuckets, issueKeys } from "@workpal/core/issues/queries";
+import { issueStatusCategory } from "@workpal/core/issues";
+import { useIssueStatuses } from "@workpal/core/issue-statuses/hooks";
+import { workspaceKeys } from "@workpal/core/workspace/queries";
+import { projectKeys } from "@workpal/core/projects/queries";
+import { useAuthStore } from "@workpal/core/auth";
+import { canAssignAgentToIssue } from "@workpal/core/permissions";
+import { isAgentRuntimeBound } from "@workpal/core/agents";
+import { searchIssues, searchProjects } from "@workpal/core/search-index";
 import {
   isIssueDirectHit,
   isProjectDirectHit,
-} from "@multica/core/search/cancelled-rank";
-import { isImeComposing } from "@multica/core/utils";
-import { isMentionBoundaryAfter } from "@multica/core/markdown";
+} from "@workpal/core/search/cancelled-rank";
+import { isImeComposing } from "@workpal/core/utils";
+import { isMentionBoundaryAfter } from "@workpal/core/markdown";
 import type {
   Issue,
   ListIssuesCache,
@@ -34,22 +34,22 @@ import type {
   MemberWithUser,
   Agent,
   Squad,
-} from "@multica/core/types";
-import { ListTodo } from "@multica/ui/icons";
+} from "@workpal/core/types";
+import { ListTodo } from "@workpal/ui/icons";
 import { ActorAvatar } from "../../common/actor-avatar";
 import { StatusIcon } from "../../issues/components/status-icon";
 import { ProjectIcon } from "../../projects/components/project-icon";
 import { ArchivedProjectTag } from "../../projects/components/project-archive";
 import { useT } from "../../i18n";
-import { Badge } from "@multica/ui/components/ui/badge";
+import { Badge } from "@workpal/ui/components/ui/badge";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from "@multica/ui/components/ui/tooltip";
-import { cn } from "@multica/ui/lib/utils";
-import type { IssueStatus, IssueStatusCategory, ProjectStatus } from "@multica/core/types";
-import { PROJECT_STATUS_CONFIG } from "@multica/core/projects/config";
+} from "@workpal/ui/components/ui/tooltip";
+import { cn } from "@workpal/ui/lib/utils";
+import type { IssueStatus, IssueStatusCategory, ProjectStatus } from "@workpal/core/types";
+import { PROJECT_STATUS_CONFIG } from "@workpal/core/projects/config";
 import type { SuggestionOptions } from "@tiptap/suggestion";
 import type { Node as ProseMirrorNode } from "@tiptap/pm/model";
 import { PluginKey } from "@tiptap/pm/state";
@@ -750,7 +750,7 @@ function projectToMention(p: {
  * True when the `@` at `pos` starts a token instead of continuing one.
  *
  * The rule itself — which characters make an `@` part of the word it follows,
- * and why CJK needs the exception — lives in @multica/core/markdown, shared
+ * and why CJK needs the exception — lives in @workpal/core/markdown, shared
  * with the mobile composer so the two clients cannot drift apart.
  */
 function isMentionBoundary(doc: ProseMirrorNode, pos: number): boolean {

@@ -46,14 +46,14 @@ func TestCodexShellEnvAllowlistUsesExactTaskAndSafeInheritedNames(t *testing.T) 
 		"SDKROOT=/opt/sdk",
 		"OPENAI_API_KEY=host-secret",
 		"GH_TOKEN=host-secret",
-		"MULTICA_LLM_API_KEY=daemon-secret",
-		"MULTICA_SERVER_URL=https://wrong.example",
+		"WORKPAL_LLM_API_KEY=daemon-secret",
+		"WORKPAL_SERVER_URL=https://wrong.example",
 	}
 	explicit := map[string]string{
-		"MULTICA_TOKEN": "mat_task",
-		"MULTICA_QUICK_CREATE_DEFAULT_ASSIGNEE_TYPE": "agent",
-		"MULTICA_QUICK_CREATE_DEFAULT_ASSIGNEE_ID":   "282bdf4e-b502-4ca9-8fae-0c842f973e63",
-		"MULTICA_SERVER_URL":                         "https://task.example",
+		"WORKPAL_TOKEN": "mat_task",
+		"WORKPAL_QUICK_CREATE_DEFAULT_ASSIGNEE_TYPE": "agent",
+		"WORKPAL_QUICK_CREATE_DEFAULT_ASSIGNEE_ID":   "282bdf4e-b502-4ca9-8fae-0c842f973e63",
+		"WORKPAL_SERVER_URL":                         "https://task.example",
 		"CUSTOM_FLAG":                                "enabled",
 		"ANTHROPIC_API_KEY":                          "agent-secret",
 	}
@@ -68,10 +68,10 @@ func TestCodexShellEnvAllowlistUsesExactTaskAndSafeInheritedNames(t *testing.T) 
 		"HTTPS_PROXY",
 		"LANG",
 		"LOCALAPPDATA",
-		"MULTICA_QUICK_CREATE_DEFAULT_ASSIGNEE_ID",
-		"MULTICA_QUICK_CREATE_DEFAULT_ASSIGNEE_TYPE",
-		"MULTICA_SERVER_URL",
-		"MULTICA_TOKEN",
+		"WORKPAL_QUICK_CREATE_DEFAULT_ASSIGNEE_ID",
+		"WORKPAL_QUICK_CREATE_DEFAULT_ASSIGNEE_TYPE",
+		"WORKPAL_SERVER_URL",
+		"WORKPAL_TOKEN",
 		"PATH",
 		"PATHEXT",
 		"SDKROOT",
@@ -91,14 +91,14 @@ func TestCodexShellEnvAllowlistOnlyAuthorizesExplicitCustomSecrets(t *testing.T)
 		"PATH=/usr/bin",
 		"CUSTOM_ACCESS_TOKEN=host-secret",
 		"HOST_SECRET=host-secret",
-		"MULTICA_TOKEN=daemon-secret",
+		"WORKPAL_TOKEN=daemon-secret",
 	}
 	explicit := map[string]string{
 		"CUSTOM_ACCESS_TOKEN": "agent-secret",
 		"x_secret":            "agent-secret",
 		"Y_KEY":               "agent-secret",
 		"UNAUTHORIZED_TOKEN":  "daemon-secret",
-		"MULTICA_TOKEN":       "mat_task",
+		"WORKPAL_TOKEN":       "mat_task",
 	}
 	authorizedExplicit := []string{
 		"custom_access_token", // Authorization matching is case-insensitive.
@@ -110,7 +110,7 @@ func TestCodexShellEnvAllowlistOnlyAuthorizesExplicitCustomSecrets(t *testing.T)
 	got := CodexShellEnvAllowlist(inherited, explicit, authorizedExplicit)
 	want := []string{
 		"CUSTOM_ACCESS_TOKEN",
-		"MULTICA_TOKEN",
+		"WORKPAL_TOKEN",
 		"PATH",
 		"x_secret",
 		"Y_KEY",
@@ -159,14 +159,14 @@ include_only = [
   "PATH",
   "HOME",
 ]
-set = { FOO = "bar", MULTICA_TOKEN = "stale" }
+set = { FOO = "bar", WORKPAL_TOKEN = "stale" }
 
 [features]
 # keep feature comment
 foo = true
 `,
 			kept:    []string{`model = "gpt-5.6"`, "# policy-local comment remains harmless", "# keep feature comment", "[features]", "foo = true"},
-			removed: []string{"legal quoted table", `FOO = "bar"`, `MULTICA_TOKEN = "stale"`},
+			removed: []string{"legal quoted table", `FOO = "bar"`, `WORKPAL_TOKEN = "stale"`},
 		},
 		{
 			name: "inline root and profile policies",
@@ -206,7 +206,7 @@ foo = true
 		},
 	}
 
-	includeOnly := []string{"CUSTOM_FLAG", "MULTICA_SERVER_URL", "MULTICA_TOKEN", "PATH", "SystemRoot"}
+	includeOnly := []string{"CUSTOM_FLAG", "WORKPAL_SERVER_URL", "WORKPAL_TOKEN", "PATH", "SystemRoot"}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
 			t.Parallel()
@@ -234,8 +234,8 @@ foo = true
 					t.Errorf("stale policy content %q remains:\n%s", unwanted, s)
 				}
 			}
-			if strings.Contains(s, `"MULTICA_*"`) {
-				t.Fatalf("managed policy must not use a MULTICA_* wildcard:\n%s", s)
+			if strings.Contains(s, `"WORKPAL_*"`) {
+				t.Fatalf("managed policy must not use a WORKPAL_* wildcard:\n%s", s)
 			}
 			if n := strings.Count(s, "[shell_environment_policy]"); n != 1 {
 				t.Fatalf("expected exactly one managed policy table, got %d:\n%s", n, s)
@@ -259,7 +259,7 @@ func TestEnsureCodexShellEnvPolicyConfigRejectsInvalidInputWithoutWriting(t *tes
 	if err := os.WriteFile(configPath, existing, 0o644); err != nil {
 		t.Fatalf("write config.toml: %v", err)
 	}
-	if err := EnsureCodexShellEnvPolicyConfig(configPath, []string{"MULTICA_TOKEN", "PATH"}, testLogger()); err == nil {
+	if err := EnsureCodexShellEnvPolicyConfig(configPath, []string{"WORKPAL_TOKEN", "PATH"}, testLogger()); err == nil {
 		t.Fatal("expected malformed input to fail")
 	}
 	got, err := os.ReadFile(configPath)
@@ -274,7 +274,7 @@ func TestEnsureCodexShellEnvPolicyConfigRejectsInvalidInputWithoutWriting(t *tes
 func TestEnsureCodexShellEnvPolicyConfigIsIdempotent(t *testing.T) {
 	t.Parallel()
 	configPath := filepath.Join(t.TempDir(), "config.toml")
-	includeOnly := []string{"MULTICA_SERVER_URL", "MULTICA_TOKEN", "PATH"}
+	includeOnly := []string{"WORKPAL_SERVER_URL", "WORKPAL_TOKEN", "PATH"}
 
 	for i := 0; i < 3; i++ {
 		if err := EnsureCodexShellEnvPolicyConfig(configPath, includeOnly, testLogger()); err != nil {
@@ -288,7 +288,7 @@ func TestEnsureCodexShellEnvPolicyConfigIsIdempotent(t *testing.T) {
 	}
 	s := string(data)
 	assertValidToml(t, s)
-	if n := strings.Count(s, multicaShellEnvBeginMarker); n != 1 {
+	if n := strings.Count(s, workpalShellEnvBeginMarker); n != 1 {
 		t.Fatalf("expected exactly one managed block, got %d:\n%s", n, s)
 	}
 }

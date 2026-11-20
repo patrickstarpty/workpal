@@ -2,33 +2,33 @@ import { act, type ReactNode } from "react";
 import { fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { beforeEach, describe, expect, it, vi, type Mock } from "vitest";
-import { DEFAULT_APPEARANCE, useAppearanceStore, useInstalledThemesStore } from "@multica/core/appearance";
-import { buildIssueStatusCatalog } from "@multica/core/issue-statuses/queries";
+import { DEFAULT_APPEARANCE, useAppearanceStore, useInstalledThemesStore } from "@workpal/core/appearance";
+import { buildIssueStatusCatalog } from "@workpal/core/issue-statuses/queries";
 import {
   useCommandBarContextStore,
   useSearchStore,
   type CommandBarContext,
-} from "@multica/core/command-bar";
-import { inboxUnreadSummaryOptions } from "@multica/core/inbox/queries";
-import { useActiveIssueViewStore } from "@multica/core/issue-views/active-view-store";
-import { issueViewEverywhereOptions } from "@multica/core/issue-views/queries";
-import { projectListOptions } from "@multica/core/projects/queries";
-import { I18nProvider } from "@multica/core/i18n/react";
-import { issueDetailOptions, issueTimelineOptions } from "@multica/core/issues/queries";
-import { WORKSPACE_PAGES } from "@multica/core/paths";
-import type { Issue } from "@multica/core/types";
+} from "@workpal/core/command-bar";
+import { inboxUnreadSummaryOptions } from "@workpal/core/inbox/queries";
+import { useActiveIssueViewStore } from "@workpal/core/issue-views/active-view-store";
+import { issueViewEverywhereOptions } from "@workpal/core/issue-views/queries";
+import { projectListOptions } from "@workpal/core/projects/queries";
+import { I18nProvider } from "@workpal/core/i18n/react";
+import { issueDetailOptions, issueTimelineOptions } from "@workpal/core/issues/queries";
+import { WORKSPACE_PAGES } from "@workpal/core/paths";
+import type { Issue } from "@workpal/core/types";
 import {
   agentListOptions,
   memberListOptions,
   squadListOptions,
   workspaceListOptions,
-} from "@multica/core/workspace/queries";
+} from "@workpal/core/workspace/queries";
 import { RESOURCES } from "../locales";
 import enLayout from "../locales/en/layout.json";
 import zhHansProjects from "../locales/zh-Hans/projects.json";
 import { SearchCommand } from "./search-command";
 
-vi.mock("@multica/core/issue-statuses/hooks", () => ({
+vi.mock("@workpal/core/issue-statuses/hooks", () => ({
   useIssueStatuses: () => buildIssueStatusCatalog([]),
 }));
 
@@ -73,7 +73,7 @@ const {
     ),
     mockPush: vi.fn(),
     mockPathname: { current: "/ws-test/issues" },
-    mockGetShareableUrl: vi.fn((p: string) => `https://app.multica/${p}`),
+    mockGetShareableUrl: vi.fn((p: string) => `https://app.workpal/${p}`),
     mockRecentItems: { current: [] as Array<{ id: string; visitedAt: number }> },
     mockOpenModal: vi.fn(),
     mockToast: toast,
@@ -154,33 +154,33 @@ vi.mock("@tanstack/react-query", async (importOriginal) => {
   };
 });
 
-vi.mock("@multica/core/api", async (importOriginal) => ({
-  ...(await importOriginal<typeof import("@multica/core/api")>()),
+vi.mock("@workpal/core/api", async (importOriginal) => ({
+  ...(await importOriginal<typeof import("@workpal/core/api")>()),
   api: mockApi,
 }));
 
-vi.mock("@multica/core/auth", async (importOriginal) => {
+vi.mock("@workpal/core/auth", async (importOriginal) => {
   const state = { user: { id: "user-me", name: "Me Myself", email: "me@example.com" } };
   return {
-    ...(await importOriginal<typeof import("@multica/core/auth")>()),
+    ...(await importOriginal<typeof import("@workpal/core/auth")>()),
     useAuthStore: Object.assign((selector?: (s: typeof state) => unknown) => (selector ? selector(state) : state), {
       getState: () => state,
     }),
   };
 });
 
-vi.mock("@multica/core/hooks", async (importOriginal) => ({
-  ...(await importOriginal<typeof import("@multica/core/hooks")>()),
+vi.mock("@workpal/core/hooks", async (importOriginal) => ({
+  ...(await importOriginal<typeof import("@workpal/core/hooks")>()),
   useWorkspaceId: () => "ws-test",
 }));
 
-vi.mock("@multica/core", async (importOriginal) => ({
-  ...(await importOriginal<typeof import("@multica/core")>()),
+vi.mock("@workpal/core", async (importOriginal) => ({
+  ...(await importOriginal<typeof import("@workpal/core")>()),
   useWorkspaceId: () => "ws-test",
 }));
 
-vi.mock("@multica/core/paths", async (importOriginal) => {
-  const actual = await importOriginal<typeof import("@multica/core/paths")>();
+vi.mock("@workpal/core/paths", async (importOriginal) => {
+  const actual = await importOriginal<typeof import("@workpal/core/paths")>();
   return {
     ...actual,
     useWorkspacePaths: () => actual.paths.workspace("ws-test"),
@@ -194,8 +194,8 @@ vi.mock("../common/actor-avatar", () => ({
   ),
 }));
 
-vi.mock("@multica/core/issues/stores", async (importOriginal) => {
-  const actual = await importOriginal<typeof import("@multica/core/issues/stores")>();
+vi.mock("@workpal/core/issues/stores", async (importOriginal) => {
+  const actual = await importOriginal<typeof import("@workpal/core/issues/stores")>();
   const EMPTY: Array<{ id: string; visitedAt: number }> = [];
   return {
     ...actual,
@@ -220,10 +220,10 @@ vi.mock("@multica/core/issues/stores", async (importOriginal) => {
   };
 });
 
-vi.mock("@multica/core/modals", async (importOriginal) => {
+vi.mock("@workpal/core/modals", async (importOriginal) => {
   const state = { open: mockOpenModal };
   return {
-    ...(await importOriginal<typeof import("@multica/core/modals")>()),
+    ...(await importOriginal<typeof import("@workpal/core/modals")>()),
     useModalStore: Object.assign((selector?: (s: typeof state) => unknown) => (selector ? selector(state) : state), {
       getState: () => state,
     }),
@@ -242,7 +242,7 @@ vi.mock("../navigation/context", () => {
   return { useNavigation: adapter, useOptionalNavigation: adapter };
 });
 
-vi.mock("@multica/ui/components/common/theme-provider", () => ({
+vi.mock("@workpal/ui/components/common/theme-provider", () => ({
   useTheme: () => ({ theme: mockTheme.current, setTheme: mockSetTheme }),
 }));
 
@@ -372,7 +372,7 @@ describe("SearchCommand", () => {
     apiFns.set("searchProjects", vi.fn(() => Promise.resolve({ projects: [], total: 0 })));
     mockPush.mockReset();
     mockPathname.current = "/ws-test/issues";
-    mockGetShareableUrl.mockReset().mockImplementation((p: string) => `https://app.multica/${p}`);
+    mockGetShareableUrl.mockReset().mockImplementation((p: string) => `https://app.workpal/${p}`);
     mockRecentItems.current = [];
     mockOpenModal.mockReset();
     mockToast.mockReset();
@@ -468,7 +468,7 @@ describe("SearchCommand", () => {
       fireEvent.click(await screen.findByText("Settings"), { metaKey: true });
 
       expect(open).toHaveBeenCalledWith(
-        "https://app.multica//ws-test/settings",
+        "https://app.workpal//ws-test/settings",
         "_blank",
         "noopener,noreferrer",
       );
@@ -486,7 +486,7 @@ describe("SearchCommand", () => {
       fireEvent.keyDown(input(), { key: "Enter", metaKey: true });
 
       expect(open).toHaveBeenCalledWith(
-        "https://app.multica//ws-test/settings",
+        "https://app.workpal//ws-test/settings",
         "_blank",
         "noopener,noreferrer",
       );
@@ -875,7 +875,7 @@ describe("SearchCommand", () => {
       fireEvent.click(await rowText("Open bugs"), { metaKey: true });
 
       expect(open).toHaveBeenCalledWith(
-        "https://app.multica//ws-test/issues?view=view-bugs",
+        "https://app.workpal//ws-test/issues?view=view-bugs",
         "_blank",
         "noopener,noreferrer",
       );
@@ -988,7 +988,7 @@ describe("SearchCommand", () => {
       await user.type(input(), "copy");
       await user.click(await rowText("Copy issue link"));
 
-      await waitFor(() => expect(writeSpy).toHaveBeenCalledWith("https://app.multica//ws-test/issues/MUL-42"));
+      await waitFor(() => expect(writeSpy).toHaveBeenCalledWith("https://app.workpal//ws-test/issues/MUL-42"));
 
       act(() => useSearchStore.setState({ open: true }));
       await user.type(input(), "copy");

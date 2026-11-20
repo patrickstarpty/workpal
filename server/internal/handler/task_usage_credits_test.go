@@ -4,7 +4,7 @@ import (
 	"net/http"
 	"testing"
 
-	"github.com/multica-ai/multica/server/internal/testutil"
+	"workpal.local/workpal/server/internal/testutil"
 )
 
 func TestReportTaskUsageStoresCreditsSeparatelyFromTokens(t *testing.T) {

@@ -89,7 +89,7 @@ async function paintBackdrop(tab) {
     if (value === "" || value === "none") return;
     root.setAttribute("data-backdrop", "");
     const layer = document.createElement("div");
-    layer.id = "multica-backdrop";
+    layer.id = "workpal-backdrop";
     const image = layer.appendChild(document.createElement("div"));
     document.body.prepend(layer);
     const urls = [...value.matchAll(/url\(\s*(["']?)(.*?)\1\s*\)/g)].map((m) => m[2]).filter(Boolean);

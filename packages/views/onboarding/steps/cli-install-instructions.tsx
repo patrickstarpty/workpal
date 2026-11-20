@@ -1,13 +1,13 @@
 "use client";
 
 import { useState, type ReactNode } from "react";
-import { Check, Copy, Terminal } from "@multica/ui/icons";
-import { Card, CardContent } from "@multica/ui/components/ui/card";
-import { TooltipHint } from "@multica/ui/components/common/tooltip-hint";
-import { CODE_LIGATURE_CLASS } from "@multica/ui/lib/code-style";
-import { cn } from "@multica/ui/lib/utils";
-import { copyText } from "@multica/ui/lib/clipboard";
-import { useDaemonSetupCommands } from "@multica/core/runtimes";
+import { Check, Copy, Terminal } from "@workpal/ui/icons";
+import { Card, CardContent } from "@workpal/ui/components/ui/card";
+import { TooltipHint } from "@workpal/ui/components/common/tooltip-hint";
+import { CODE_LIGATURE_CLASS } from "@workpal/ui/lib/code-style";
+import { cn } from "@workpal/ui/lib/utils";
+import { copyText } from "@workpal/ui/lib/clipboard";
+import { useDaemonSetupCommands } from "@workpal/core/runtimes";
 import { CliInstallCommand } from "../../common/cli-install-command";
 import { DaemonSetupNotice } from "../../common/daemon-setup-notice";
 import { useT } from "../../i18n";

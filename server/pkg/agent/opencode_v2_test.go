@@ -471,7 +471,7 @@ func TestOpencodeInterruptSessionUsesRunConnection(t *testing.T) {
 	capture := filepath.Join(tempDir, "capture.txt")
 	fakePath := filepath.Join(tempDir, "opencode")
 	script := "#!/bin/sh\n" +
-		"{ printf 'env=%s\\n' \"$MULTICA_TEST_ENV\"; printf 'cwd=%s\\n' \"$PWD\"; " +
+		"{ printf 'env=%s\\n' \"$WORKPAL_TEST_ENV\"; printf 'cwd=%s\\n' \"$PWD\"; " +
 		"for arg in \"$@\"; do printf '%s\\n' \"$arg\"; done; } > \"" + capture + "\"\n"
 	writeTestExecutable(t, fakePath, []byte(script))
 
@@ -479,7 +479,7 @@ func TestOpencodeInterruptSessionUsesRunConnection(t *testing.T) {
 	conn := opencodeRunConnection{
 		cmd:    NewCommand(fakePath, nil),
 		server: "http://127.0.0.1:54321",
-		env:    []string{"MULTICA_TEST_ENV=task-marker"},
+		env:    []string{"WORKPAL_TEST_ENV=task-marker"},
 		dir:    workDir,
 	}
 	opencodeInterruptSession(conn, "ses_abc", slog.Default())
@@ -556,7 +556,7 @@ func TestOpencodeV2CancelInterruptsThroughRunConnection(t *testing.T) {
 	// blocks so the test can cancel it mid-flight.
 	script := "#!/bin/sh\n" +
 		"if [ \"$1\" = \"api\" ]; then\n" +
-		"  { printf 'env=%s\\n' \"$MULTICA_TEST_ENV\"; for arg in \"$@\"; do printf '%s\\n' \"$arg\"; done; } > \"" + capture + "\"\n" +
+		"  { printf 'env=%s\\n' \"$WORKPAL_TEST_ENV\"; for arg in \"$@\"; do printf '%s\\n' \"$arg\"; done; } > \"" + capture + "\"\n" +
 		"  exit 0\n" +
 		"fi\n" +
 		"cat > /dev/null\n" +
@@ -569,7 +569,7 @@ func TestOpencodeV2CancelInterruptsThroughRunConnection(t *testing.T) {
 		CLIVersion:     "opencode v2.0.10",
 		BuiltinRuntime: true,
 		Logger:         slog.Default(),
-		Env:            map[string]string{opencodeTransportEnv: "run", "MULTICA_TEST_ENV": "task-marker"},
+		Env:            map[string]string{opencodeTransportEnv: "run", "WORKPAL_TEST_ENV": "task-marker"},
 	})
 	if err != nil {
 		t.Fatalf("new opencode backend: %v", err)

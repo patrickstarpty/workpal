@@ -13,8 +13,8 @@ import (
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgconn"
 	"github.com/jackc/pgx/v5/pgxpool"
-	"github.com/multica-ai/multica/server/internal/inboxread"
-	"github.com/multica-ai/multica/server/internal/testutil"
+	"workpal.local/workpal/server/internal/inboxread"
+	"workpal.local/workpal/server/internal/testutil"
 )
 
 func TestInboxReadPostgresTimeoutAndLocalSettings(t *testing.T) {

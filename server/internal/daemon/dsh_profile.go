@@ -14,12 +14,12 @@ import (
 	"time"
 	"unicode/utf8"
 
-	"github.com/multica-ai/multica/server/internal/daemon/processtree"
-	"github.com/multica-ai/multica/server/pkg/agent"
-	"github.com/multica-ai/multica/server/pkg/redact"
+	"workpal.local/workpal/server/internal/daemon/processtree"
+	"workpal.local/workpal/server/pkg/agent"
+	"workpal.local/workpal/server/pkg/redact"
 )
 
-// The DSH backend drives `dsh --profile multica --stdio`, and that profile is
+// The DSH backend drives `dsh --profile workpal --stdio`, and that profile is
 // what supplies the protocol: DSH ships no machine-drivable mode of its own.
 // `--profile headless` answers one task and exits, and ACP — the one protocol
 // DSH does implement — is itself a profile rather than a built-in. Every other
@@ -31,37 +31,37 @@ import (
 // These knobs let the daemon close that gap instead of only reporting it.
 const (
 	// dshProfileBundleEnv names the DSH-side bundle to install into the
-	// `multica` profile when a dsh CLI resolves without one. It takes a
+	// `workpal` profile when a dsh CLI resolves without one. It takes a
 	// comma-separated list of candidates tried in order, each of which may be
-	// anything `dsh plugin --profile multica add` accepts: an npm spec, a
+	// anything `dsh plugin --profile workpal add` accepts: an npm spec, a
 	// directory, or a packed tarball.
 	//
 	// Unset is the default and means "do not touch the user's DSH
 	// installation". Installing a bundle into another product's home is a
 	// side effect the operator has to ask for — and there is nothing to point
-	// it at by default either, because Multica's own DSH bridge is not
-	// published to npm yet (multica#6936). Setting this is what turns the
+	// it at by default either, because Workpal's own DSH bridge is not
+	// published to npm yet (workpal#6936). Setting this is what turns the
 	// reported drop into a self-healing one.
-	dshProfileBundleEnv = "MULTICA_DSH_PROFILE_BUNDLE"
+	dshProfileBundleEnv = "WORKPAL_DSH_PROFILE_BUNDLE"
 
 	// dshPluginPathEnv overrides where `dsh plugin` finds pnpm. It exists
 	// because DSH Desktop ships pnpm inside its own runtime-commands
 	// directory and injects that directory into the PATH of the processes it
-	// spawns itself. A daemon started by Multica's desktop app, by launchd or
+	// spawns itself. A daemon started by Workpal's desktop app, by launchd or
 	// from a terminal is not one of them, so the install fails with "pnpm not
 	// found on PATH" on exactly the machines this feature is for.
-	dshPluginPathEnv = "MULTICA_DSH_PLUGIN_PATH"
+	dshPluginPathEnv = "WORKPAL_DSH_PLUGIN_PATH"
 
-	// dshMulticaProfileName is the profile the backend launches. Kept beside
+	// dshWorkpalProfileName is the profile the backend launches. Kept beside
 	// the install command so the two cannot drift.
-	dshMulticaProfileName = "multica"
+	dshWorkpalProfileName = "workpal"
 
-	// dshMulticaRuntimePackage is the bridge a multica profile has to load
+	// dshWorkpalRuntimePackage is the bridge a workpal profile has to load
 	// before this daemon will treat the profile as installed. `dsh plugin add`
 	// records that name in dependencies and, when the package is a bundle, in
 	// dsh.profile.bundles — including installs from git, a directory, or a tarball.
-	dshMulticaRuntimePackage = "@multica-ai/dsh-runtime"
-	dshLegacyRuntimePackage  = "dsh-profile-multica"
+	dshWorkpalRuntimePackage = "@workpal-ai/dsh-runtime"
+	dshLegacyRuntimePackage  = "dsh-profile-workpal"
 	dshBaseProfileBundle     = "@deepseek-ai/dsh-base"
 )
 
@@ -81,9 +81,9 @@ type dshProfileManifest struct {
 // talking to a registry, so it is generous next to the CLI probes.
 const dshProvisionTimeout = 3 * time.Minute
 
-// dshMulticaProfilePresent reports whether the `multica` profile is installed.
+// dshWorkpalProfilePresent reports whether the `workpal` profile is installed.
 //
-// Installed means the manifest loads the Multica runtime bundle, not that the file
+// Installed means the manifest loads the Workpal runtime bundle, not that the file
 // exists. A refused `dsh plugin add` leaves package.json behind with empty
 // dependencies and only DSH's template bundle; a stat of that file made every
 // later probe look transient and blocked the automatic install.
@@ -95,8 +95,8 @@ const dshProvisionTimeout = 3 * time.Minute
 // The authoritative question — "does --probe actually succeed?" — costs booting
 // a whole DSH process, so it stays in the probe round this signal forces. This
 // read is the cheap check the discovery loop runs on every tick.
-func dshMulticaProfilePresent() bool {
-	path := dshMulticaProfileManifestPath()
+func dshWorkpalProfilePresent() bool {
+	path := dshWorkpalProfileManifestPath()
 	if path == "" {
 		return false
 	}
@@ -114,9 +114,9 @@ func dshMulticaProfilePresent() bool {
 	return dshProfileNamesRuntime(manifest)
 }
 
-// dshMulticaProfileManifestPath is <DSH_HOME>/profiles/multica/package.json.
+// dshWorkpalProfileManifestPath is <DSH_HOME>/profiles/workpal/package.json.
 // An empty result means the home directory could not be resolved.
-func dshMulticaProfileManifestPath() string {
+func dshWorkpalProfileManifestPath() string {
 	home, err := os.UserHomeDir()
 	if err != nil {
 		return ""
@@ -127,10 +127,10 @@ func dshMulticaProfileManifestPath() string {
 	if dshHome == "" {
 		dshHome = filepath.Join(home, ".dsh")
 	}
-	return filepath.Join(dshHome, "profiles", dshMulticaProfileName, "package.json")
+	return filepath.Join(dshHome, "profiles", dshWorkpalProfileName, "package.json")
 }
 
-// dshProfileNamesRuntime reports whether the manifest lists the Multica runtime
+// dshProfileNamesRuntime reports whether the manifest lists the Workpal runtime
 // as a loaded profile bundle, without the legacy bridge.
 func dshProfileNamesRuntime(manifest dshProfileManifest) bool {
 	for _, bundle := range manifest.DSH.Profile.Bundles {
@@ -139,18 +139,18 @@ func dshProfileNamesRuntime(manifest dshProfileManifest) bool {
 		}
 	}
 	for _, bundle := range manifest.DSH.Profile.Bundles {
-		if bundle == dshMulticaRuntimePackage {
+		if bundle == dshWorkpalRuntimePackage {
 			return true
 		}
 	}
 	return false
 }
 
-// dshMulticaProfileNeedsMigration separates an existing bridge configuration
+// dshWorkpalProfileNeedsMigration separates an existing bridge configuration
 // from a missing profile or the empty template left by a refused install.
 // Never provision over an existing bridge just because it is not usable.
-func dshMulticaProfileNeedsMigration() bool {
-	data, err := os.ReadFile(dshMulticaProfileManifestPath())
+func dshWorkpalProfileNeedsMigration() bool {
+	data, err := os.ReadFile(dshWorkpalProfileManifestPath())
 	if err != nil {
 		return false
 	}
@@ -309,9 +309,9 @@ func dshDiagnosticOutput(raw []byte) string {
 
 // dshProfileRepair names what is missing, and deliberately carries NO command.
 //
-// The install is `dsh plugin --profile multica add <bundle>`, and <bundle> is
-// the operator's own choice of npm spec, directory or tarball — Multica's own
-// bridge is not on a public registry yet (multica#6936). A Repair.Command is
+// The install is `dsh plugin --profile workpal add <bundle>`, and <bundle> is
+// the operator's own choice of npm spec, directory or tarball — Workpal's own
+// bridge is not on a public registry yet (workpal#6936). A Repair.Command is
 // rendered to the user inside a shell code fence as the thing to run on that
 // machine, so shipping the placeholder there hands out a line that fails when
 // pasted. Package alone still tells the server which repair to explain; the
@@ -326,13 +326,13 @@ func dshProfileRepair() agent.ExecFormatRepair {
 // platform, including the Windows ones where a shell fixture cannot stand in
 // for a package manager.
 func dshProvisionCommand(dshPath, spec string) *exec.Cmd {
-	cmd := exec.Command(dshPath, "plugin", "--profile", dshMulticaProfileName, "add", spec)
+	cmd := exec.Command(dshPath, "plugin", "--profile", dshWorkpalProfileName, "add", spec)
 	cmd.Env = dshPluginEnv()
 	return cmd
 }
 
-// provisionDshMulticaProfile installs the configured runtime bundle into the
-// `multica` profile, so a later discovery round finds a usable dsh. Candidates
+// provisionDshWorkpalProfile installs the configured runtime bundle into the
+// `workpal` profile, so a later discovery round finds a usable dsh. Candidates
 // are tried in order and the first success wins.
 //
 // Runs the package manager through processtree: `dsh plugin` forwards to pnpm,
@@ -351,8 +351,8 @@ func dshProvisionCommand(dshPath, spec string) *exec.Cmd {
 // Returns nil when nothing is configured — the caller treats provisioning as
 // best-effort either way, and the missing-profile verdict stands until a probe
 // succeeds.
-func provisionDshMulticaProfile(ctx context.Context, dshPath string, logger *slog.Logger) error {
-	if dshMulticaProfileNeedsMigration() {
+func provisionDshWorkpalProfile(ctx context.Context, dshPath string, logger *slog.Logger) error {
+	if dshWorkpalProfileNeedsMigration() {
 		return fmt.Errorf("%s", dshProfileMigrationReason)
 	}
 	specs := dshProfileBundleSpecs()
@@ -366,22 +366,22 @@ func provisionDshMulticaProfile(ctx context.Context, dshPath string, logger *slo
 	for i, spec := range specs {
 		// A profile may appear after discovery or after a failed candidate.
 		// Never continue installation over a now-populated profile.
-		if dshMulticaProfileNeedsMigration() {
+		if dshWorkpalProfileNeedsMigration() {
 			return fmt.Errorf("%s", dshProfileMigrationReason)
 		}
-		if dshMulticaProfilePresent() {
+		if dshWorkpalProfilePresent() {
 			return lastErr
 		}
 		output, err := processtree.CombinedOutput(ctx, dshProvisionCommand(dshPath, spec), 5*time.Second)
 		switch {
-		case err == nil && dshMulticaProfilePresent():
+		case err == nil && dshWorkpalProfilePresent():
 			logger.Info("installed the DSH runtime profile",
 				"bundle_candidate", i+1, "candidates", len(specs),
-				"path", dshPath, "profile", dshMulticaProfileName)
+				"path", dshPath, "profile", dshWorkpalProfileName)
 			return nil
 		case err == nil:
 			// Exit 0 with no manifest behind it. The exit status is the package
-			// manager's opinion about its own run; dshMulticaProfilePresent is
+			// manager's opinion about its own run; dshWorkpalProfilePresent is
 			// the fact the REST of the daemon judges by — the probe
 			// classification and the discovery loop's mismatch check both read
 			// it — so an install allowed to report success while disagreeing
@@ -394,13 +394,13 @@ func provisionDshMulticaProfile(ctx context.Context, dshPath string, logger *slo
 			// done the job, and stopping on it would hide a later spec that
 			// would have.
 			lastErr = fmt.Errorf("dsh plugin --profile %s add (candidate %d of %d): reported success without creating the profile: %s",
-				dshMulticaProfileName, i+1, len(specs), dshDiagnosticOutput(output))
+				dshWorkpalProfileName, i+1, len(specs), dshDiagnosticOutput(output))
 		default:
 			lastErr = fmt.Errorf("dsh plugin --profile %s add (candidate %d of %d): %w: %s",
-				dshMulticaProfileName, i+1, len(specs), err, dshDiagnosticOutput(output))
+				dshWorkpalProfileName, i+1, len(specs), err, dshDiagnosticOutput(output))
 		}
 		// Leave the directory. A refused add can write a skeleton, and a failure
-		// can also land on a profile the user already had. dshMulticaProfilePresent
+		// can also land on a profile the user already had. dshWorkpalProfilePresent
 		// treats a manifest that does not name the runtime as missing, so the
 		// next restart retries over it and --probe is not started.
 		logger.Warn("DSH runtime profile install failed",
@@ -434,10 +434,10 @@ func (d *Daemon) startDshProfileProvision(dshPath string) bool {
 		d.dshInstallInFlight.Store(true)
 		go func() {
 			defer d.dshInstallInFlight.Store(false)
-			// provisionDshMulticaProfile returns nil only once the profile is
+			// provisionDshWorkpalProfile returns nil only once the profile is
 			// actually on disk, so nil here means there is something new to
 			// find. The exit status alone would not have meant that.
-			err := provisionDshMulticaProfile(ctx, dshPath, d.logger)
+			err := provisionDshWorkpalProfile(ctx, dshPath, d.logger)
 			if err == nil {
 				d.logger.Info("DSH runtime profile installed; re-probing to bring dsh online")
 				// Re-probe now rather than at the next scheduled round. The

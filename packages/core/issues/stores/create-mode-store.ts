@@ -39,7 +39,7 @@ export const useCreateModeStore = create<CreateModeState>()(
       setExpanded: (expanded) => set({ expanded }),
     }),
     {
-      name: "multica_create_mode",
+      name: "workpal_create_mode",
       storage: createJSONStorage(() => defaultStorage),
     },
   ),

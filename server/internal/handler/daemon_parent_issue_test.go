@@ -5,8 +5,8 @@ import (
 	"net/http"
 	"testing"
 
-	"github.com/multica-ai/multica/server/internal/service"
-	"github.com/multica-ai/multica/server/internal/testutil"
+	"workpal.local/workpal/server/internal/service"
+	"workpal.local/workpal/server/internal/testutil"
 )
 
 type claimParentIssueResp struct {
@@ -39,7 +39,7 @@ func TestClaimTaskByRuntime_SubIssueCarriesParent(t *testing.T) {
 	runtimeID := createClaimReclaimRuntime(t, ctx, "Parent issue runtime")
 	agentID, issueID := createClaimReclaimAgentAndIssue(t, ctx, runtimeID, "Parent issue agent")
 
-	parentID := dbfx.Issue(t, "Merge PRs from Multica", testutil.Cols{"status": "in_review"})
+	parentID := dbfx.Issue(t, "Merge PRs from Workpal", testutil.Cols{"status": "in_review"})
 	dbfx.Exec(t, `UPDATE issue SET parent_issue_id = $1 WHERE id = $2`, parentID, issueID)
 	var prefix string
 	var number int32
@@ -54,7 +54,7 @@ func TestClaimTaskByRuntime_SubIssueCarriesParent(t *testing.T) {
 	want := ClaimParentIssue{
 		ID:         parentID,
 		Identifier: service.IssueIdentifier(prefix, number),
-		Title:      "Merge PRs from Multica",
+		Title:      "Merge PRs from Workpal",
 		Status:     "in_review",
 	}
 	if *got != want {

@@ -4,7 +4,7 @@ import { render, screen } from "@testing-library/react";
 import {
   useRestoredScrollEntry,
   useRestoredScrollOffset,
-} from "@multica/views/platform";
+} from "@workpal/views/platform";
 import { WebScrollRestorationProvider } from "./scroll-restoration";
 
 function ScrollProbe({ containerKey }: { containerKey: string }) {

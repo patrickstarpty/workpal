@@ -9,9 +9,9 @@ import (
 	"sort"
 
 	"github.com/jackc/pgx/v5/pgtype"
-	"github.com/multica-ai/multica/server/internal/service"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
-	"github.com/multica-ai/multica/server/pkg/taskfailure"
+	"workpal.local/workpal/server/internal/service"
+	db "workpal.local/workpal/server/pkg/db/generated"
+	"workpal.local/workpal/server/pkg/taskfailure"
 )
 
 var errRuntimeManagedByConnection = errors.New("runtime managed by connection")

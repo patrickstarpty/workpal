@@ -1,4 +1,4 @@
-.PHONY: help makehelp dev server daemon cli multica build test migrate-up migrate-down sqlc seed clean setup start stop check worktree-env setup-main start-main stop-main check-main setup-worktree start-worktree stop-worktree check-worktree remove-worktree db-up db-down db-drop db-reset selfhost selfhost-start selfhost-build selfhost-build-start selfhost-stop up down status list destroy gc env-exec api-dev web-dev desktop-dev
+.PHONY: help makehelp dev server daemon cli workpal build test migrate-up migrate-down sqlc seed clean setup start stop check worktree-env setup-main start-main stop-main check-main setup-worktree start-worktree stop-worktree check-worktree remove-worktree db-up db-down db-drop db-reset selfhost selfhost-start selfhost-build selfhost-build-start selfhost-stop up down status list destroy gc env-exec api-dev web-dev desktop-dev
 
 MAIN_ENV_FILE ?= .env
 WORKTREE_ENV_FILE ?= .env.worktree
@@ -8,27 +8,27 @@ ifneq ($(wildcard $(ENV_FILE)),)
 include $(ENV_FILE)
 endif
 
-POSTGRES_DB ?= multica
-POSTGRES_USER ?= multica
-POSTGRES_PASSWORD ?= multica
+POSTGRES_DB ?= workpal
+POSTGRES_USER ?= workpal
+POSTGRES_PASSWORD ?= workpal
 POSTGRES_PORT ?= 5432
 PORT := $(or $(BACKEND_PORT),$(API_PORT),$(SERVER_PORT),$(PORT),8080)
-ifeq ($(origin MULTICA_PUBLIC_URL), undefined)
-MULTICA_PUBLIC_URL := http://localhost:$(PORT)
+ifeq ($(origin WORKPAL_PUBLIC_URL), undefined)
+WORKPAL_PUBLIC_URL := http://localhost:$(PORT)
 endif
 FRONTEND_PORT ?= 3000
 FRONTEND_ORIGIN ?= http://localhost:$(FRONTEND_PORT)
-MULTICA_APP_URL ?= $(FRONTEND_ORIGIN)
+WORKPAL_APP_URL ?= $(FRONTEND_ORIGIN)
 DATABASE_URL ?= postgres://$(POSTGRES_USER):$(POSTGRES_PASSWORD)@localhost:$(POSTGRES_PORT)/$(POSTGRES_DB)?sslmode=disable
 NEXT_PUBLIC_API_URL ?= http://localhost:$(PORT)
 NEXT_PUBLIC_WS_URL ?= ws://localhost:$(PORT)/ws
 GOOGLE_REDIRECT_URI ?= $(FRONTEND_ORIGIN)/auth/callback
-MULTICA_SERVER_URL ?= ws://localhost:$(PORT)/ws
+WORKPAL_SERVER_URL ?= ws://localhost:$(PORT)/ws
 LOCAL_UPLOAD_BASE_URL ?= http://localhost:$(PORT)
 
 export
 
-MULTICA_ARGS ?= $(ARGS)
+WORKPAL_ARGS ?= $(ARGS)
 
 COMPOSE := docker compose
 
@@ -91,14 +91,14 @@ selfhost: ## Create .env if needed, then pull and start the official self-hosted
 			sed -i '' "s/^JWT_SECRET=.*/JWT_SECRET=$$JWT/" .env; \
 			sed -i '' "s/^POSTGRES_PASSWORD=.*/POSTGRES_PASSWORD=$$PGPASS/" .env; \
 			sed -i '' -E "s#^(DATABASE_URL=postgres://[^:]+:)[^@]*(@.*)#\1$$PGPASS\2#" .env; \
-			sed -i '' "s#^MULTICA_VCS_SECRET_KEY=.*#MULTICA_VCS_SECRET_KEY=$$VCSKEY#" .env; \
+			sed -i '' "s#^WORKPAL_VCS_SECRET_KEY=.*#WORKPAL_VCS_SECRET_KEY=$$VCSKEY#" .env; \
 		else \
 			sed -i "s/^JWT_SECRET=.*/JWT_SECRET=$$JWT/" .env; \
 			sed -i "s/^POSTGRES_PASSWORD=.*/POSTGRES_PASSWORD=$$PGPASS/" .env; \
 			sed -i -E "s#^(DATABASE_URL=postgres://[^:]+:)[^@]*(@.*)#\1$$PGPASS\2#" .env; \
-			sed -i "s#^MULTICA_VCS_SECRET_KEY=.*#MULTICA_VCS_SECRET_KEY=$$VCSKEY#" .env; \
+			sed -i "s#^WORKPAL_VCS_SECRET_KEY=.*#WORKPAL_VCS_SECRET_KEY=$$VCSKEY#" .env; \
 		fi; \
-		echo "==> Generated random JWT_SECRET, POSTGRES_PASSWORD, and MULTICA_VCS_SECRET_KEY"; \
+		echo "==> Generated random JWT_SECRET, POSTGRES_PASSWORD, and WORKPAL_VCS_SECRET_KEY"; \
 	fi
 	@$(MAKE) --no-print-directory selfhost-start ENV_FILE=.env
 
@@ -106,15 +106,15 @@ selfhost: ## Create .env if needed, then pull and start the official self-hosted
 # is included before Compose reads POSTGRES_PASSWORD from the environment.
 # ENV_FILE is pinned because Compose reads .env even when .env.worktree exists.
 selfhost-start:
-	@echo "==> Pulling official Multica images..."
+	@echo "==> Pulling official Workpal images..."
 	@if ! $(COMPOSE) -f docker-compose.selfhost.yml pull; then \
 		echo ""; \
-		echo "Official images for tag '$${MULTICA_IMAGE_TAG:-latest}' are not published yet."; \
+		echo "Official images for tag '$${WORKPAL_IMAGE_TAG:-latest}' are not published yet."; \
 		echo "If this is before the first GHCR release, build from the current checkout:"; \
 		echo "  make selfhost-build"; \
 		exit 1; \
 	fi
-	@echo "==> Starting Multica via Docker Compose..."
+	@echo "==> Starting Workpal via Docker Compose..."
 	$(COMPOSE) -f docker-compose.selfhost.yml up -d
 	@bash scripts/selfhost-wait.sh official
 
@@ -130,26 +130,26 @@ selfhost-build: ## Build backend/web from the current checkout and start the sel
 			sed -i '' "s/^JWT_SECRET=.*/JWT_SECRET=$$JWT/" .env; \
 			sed -i '' "s/^POSTGRES_PASSWORD=.*/POSTGRES_PASSWORD=$$PGPASS/" .env; \
 			sed -i '' -E "s#^(DATABASE_URL=postgres://[^:]+:)[^@]*(@.*)#\1$$PGPASS\2#" .env; \
-			sed -i '' "s#^MULTICA_VCS_SECRET_KEY=.*#MULTICA_VCS_SECRET_KEY=$$VCSKEY#" .env; \
+			sed -i '' "s#^WORKPAL_VCS_SECRET_KEY=.*#WORKPAL_VCS_SECRET_KEY=$$VCSKEY#" .env; \
 		else \
 			sed -i "s/^JWT_SECRET=.*/JWT_SECRET=$$JWT/" .env; \
 			sed -i "s/^POSTGRES_PASSWORD=.*/POSTGRES_PASSWORD=$$PGPASS/" .env; \
 			sed -i -E "s#^(DATABASE_URL=postgres://[^:]+:)[^@]*(@.*)#\1$$PGPASS\2#" .env; \
-			sed -i "s#^MULTICA_VCS_SECRET_KEY=.*#MULTICA_VCS_SECRET_KEY=$$VCSKEY#" .env; \
+			sed -i "s#^WORKPAL_VCS_SECRET_KEY=.*#WORKPAL_VCS_SECRET_KEY=$$VCSKEY#" .env; \
 		fi; \
-		echo "==> Generated random JWT_SECRET, POSTGRES_PASSWORD, and MULTICA_VCS_SECRET_KEY"; \
+		echo "==> Generated random JWT_SECRET, POSTGRES_PASSWORD, and WORKPAL_VCS_SECRET_KEY"; \
 	fi
 	@$(MAKE) --no-print-directory selfhost-build-start ENV_FILE=.env
 
 # Internal: see selfhost-start.
 selfhost-build-start:
-	@echo "==> Building Multica from the current checkout..."
+	@echo "==> Building Workpal from the current checkout..."
 	$(COMPOSE) -f docker-compose.selfhost.yml -f docker-compose.selfhost.build.yml up -d --build
 	@bash scripts/selfhost-wait.sh build
 
 selfhost-stop: ## Stop the self-hosted Docker Compose stack
 	$(REQUIRE_COMPOSE)
-	@echo "==> Stopping Multica services..."
+	@echo "==> Stopping Workpal services..."
 	$(COMPOSE) -f docker-compose.selfhost.yml down
 	@echo "✓ All services stopped."
 
@@ -326,13 +326,13 @@ server: ## Run only the Go server for the current checkout
 	cd server && go run ./cmd/server
 
 daemon: ## Restart the local agent daemon using the CLI's stored auth/session
-	@$(MAKE) multica MULTICA_ARGS="daemon restart --profile local"
+	@$(MAKE) workpal WORKPAL_ARGS="daemon restart --profile local"
 
-cli: ## Run the multica CLI with ARGS or MULTICA_ARGS from source
-	@$(MAKE) multica MULTICA_ARGS="$(MULTICA_ARGS)"
+cli: ## Run the workpal CLI with ARGS or WORKPAL_ARGS from source
+	@$(MAKE) workpal WORKPAL_ARGS="$(WORKPAL_ARGS)"
 
-multica: ## Run the multica CLI entrypoint directly from the Go source tree
-	cd server && go run -ldflags "-X main.version=$(VERSION) -X main.commit=$(COMMIT) -X main.buildCommit=$(BUILD_COMMIT) -X main.date=$(DATE)" ./cmd/multica $(MULTICA_ARGS)
+workpal: ## Run the workpal CLI entrypoint directly from the Go source tree
+	cd server && go run -ldflags "-X main.version=$(VERSION) -X main.commit=$(COMMIT) -X main.buildCommit=$(BUILD_COMMIT) -X main.date=$(DATE)" ./cmd/workpal $(WORKPAL_ARGS)
 
 VERSION ?= $(shell git describe --tags --match 'v[0-9]*' --always --dirty 2>/dev/null || echo dev)
 COMMIT  ?= $(shell git rev-parse --short HEAD 2>/dev/null || echo unknown)
@@ -352,7 +352,7 @@ DATE    ?= $(shell date -u '+%Y-%m-%dT%H:%M:%SZ')
 build: EXE = $(if $(filter windows,$(or $(GOOS),$(shell go env GOOS))),.exe,)
 build: ## Build the server, CLI, and migrate binaries into server/bin
 	cd server && go build -ldflags "-X main.version=$(VERSION) -X main.commit=$(COMMIT)" -o bin/server$(EXE) ./cmd/server
-	cd server && go build -ldflags "-X main.version=$(VERSION) -X main.commit=$(COMMIT) -X main.buildCommit=$(BUILD_COMMIT) -X main.date=$(DATE)" -o bin/multica$(EXE) ./cmd/multica
+	cd server && go build -ldflags "-X main.version=$(VERSION) -X main.commit=$(COMMIT) -X main.buildCommit=$(BUILD_COMMIT) -X main.date=$(DATE)" -o bin/workpal$(EXE) ./cmd/workpal
 	cd server && go build -o bin/migrate$(EXE) ./cmd/migrate
 
 test: ## Run Go tests after ensuring the target DB exists and migrations are applied

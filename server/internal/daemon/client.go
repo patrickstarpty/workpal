@@ -15,11 +15,11 @@ import (
 	"sync"
 	"time"
 
-	"github.com/multica-ai/multica/server/internal/daemon/localenv"
-	"github.com/multica-ai/multica/server/pkg/agent"
-	"github.com/multica-ai/multica/server/pkg/httptransport"
-	"github.com/multica-ai/multica/server/pkg/protocol"
-	"github.com/multica-ai/multica/server/pkg/remotemcp"
+	"workpal.local/workpal/server/internal/daemon/localenv"
+	"workpal.local/workpal/server/pkg/agent"
+	"workpal.local/workpal/server/pkg/httptransport"
+	"workpal.local/workpal/server/pkg/protocol"
+	"workpal.local/workpal/server/pkg/remotemcp"
 )
 
 // requestError is returned by postJSON/getJSON when the server responds with an error status.
@@ -95,7 +95,7 @@ func isRuntimeNotFoundError(err error) bool {
 	return strings.Contains(strings.ToLower(reqErr.Body), "runtime not found")
 }
 
-// Client handles HTTP communication with the Multica server daemon API.
+// Client handles HTTP communication with the Workpal server daemon API.
 type Client struct {
 	baseURL string
 	token   string
@@ -535,7 +535,7 @@ func (c *Client) StartTask(ctx context.Context, task Task, capabilities ...strin
 		}
 		negotiated = response.SupplementCapability == protocol.DaemonCapabilityTaskSupplementV1
 		if slices.Contains(capabilities, protocol.DaemonCapabilityMuseAppProcessCleanupV1) && response.ProcessCleanupCapability != protocol.DaemonCapabilityMuseAppProcessCleanupV1 {
-			return fmt.Errorf("%w: Muse app requires server support for remote execution cleanup; upgrade the Multica server before using this runtime", errInvalidResponseBody)
+			return fmt.Errorf("%w: Muse app requires server support for remote execution cleanup; upgrade the Workpal server before using this runtime", errInvalidResponseBody)
 		}
 		return nil
 	}

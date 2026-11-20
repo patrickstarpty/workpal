@@ -9,8 +9,8 @@ import (
 
 	"github.com/jackc/pgx/v5"
 
-	"github.com/multica-ai/multica/server/internal/qoderruntime"
-	"github.com/multica-ai/multica/server/internal/util"
+	"workpal.local/workpal/server/internal/qoderruntime"
+	"workpal.local/workpal/server/internal/util"
 )
 
 // Retired connections keep their encrypted journal until remote cancellation

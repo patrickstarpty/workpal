@@ -1,19 +1,19 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { Globe, Info, Lock } from "@multica/ui/icons";
+import { Globe, Info, Lock } from "@workpal/ui/icons";
 import { toast } from "sonner";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { useCurrentMember } from "@multica/core/permissions";
-import { useCreateQuickAction } from "@multica/core/quick-actions";
-import type { QuickAction, QuickActionAssigneeType, QuickActionVisibility } from "@multica/core/types";
-import { findQuickActionTemplateToken } from "@multica/core/types";
-import { Button } from "@multica/ui/components/ui/button";
-import { Input } from "@multica/ui/components/ui/input";
-import { Textarea } from "@multica/ui/components/ui/textarea";
-import { Label as FieldLabel } from "@multica/ui/components/ui/label";
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@multica/ui/components/ui/dialog";
-import { cn } from "@multica/ui/lib/utils";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { useCurrentMember } from "@workpal/core/permissions";
+import { useCreateQuickAction } from "@workpal/core/quick-actions";
+import type { QuickAction, QuickActionAssigneeType, QuickActionVisibility } from "@workpal/core/types";
+import { findQuickActionTemplateToken } from "@workpal/core/types";
+import { Button } from "@workpal/ui/components/ui/button";
+import { Input } from "@workpal/ui/components/ui/input";
+import { Textarea } from "@workpal/ui/components/ui/textarea";
+import { Label as FieldLabel } from "@workpal/ui/components/ui/label";
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@workpal/ui/components/ui/dialog";
+import { cn } from "@workpal/ui/lib/utils";
 import { AgentPicker } from "../../autopilots/components/pickers/agent-picker";
 import { useT } from "../../i18n";
 

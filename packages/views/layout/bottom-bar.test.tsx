@@ -17,17 +17,17 @@ const h = vi.hoisted(() => ({
   team: { working: [], stuck: [], byAgent: new Map() } as TeamStatus,
 }));
 
-vi.mock("@multica/core/chat", () => ({
+vi.mock("@workpal/core/chat", () => ({
   useChatStore: Object.assign(
     (selector: (state: typeof h.chat) => unknown) => selector(h.chat),
     { getState: () => h.chat },
   ),
 }));
-vi.mock("@multica/core/paths", () => ({
+vi.mock("@workpal/core/paths", () => ({
   useCurrentWorkspace: () => h.workspace,
   useWorkspacePaths: () => ({ chat: () => "/acme/chat", agents: () => "/acme/agents" }),
 }));
-vi.mock("@multica/ui/hooks/use-mobile", () => ({ useIsMobile: () => h.isMobile }));
+vi.mock("@workpal/ui/hooks/use-mobile", () => ({ useIsMobile: () => h.isMobile }));
 vi.mock("./panels/team-status", () => ({ useTeamAgentStatus: () => h.team }));
 vi.mock("./app-shell-context", () => ({ useAppShell: () => null }));
 vi.mock("../chat/components/chat-bar", () => ({ ChatBar: () => <div data-testid="chat-bar" /> }));

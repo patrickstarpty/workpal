@@ -5,10 +5,10 @@ test("members can delete their own shared project while keeping its issues", asy
   const owner = new TestApiClient();
   const member = new TestApiClient();
   const suffix = `${Date.now()}-${testInfo.workerIndex}`;
-  const memberEmail = `project-member-${suffix}@multica.ai`;
+  const memberEmail = `project-member-${suffix}@workpal.invalid`;
   const apiBase = process.env.NEXT_PUBLIC_API_URL || `http://localhost:${process.env.PORT || "8080"}`;
 
-  await owner.login(`project-owner-${suffix}@multica.ai`, "Project owner");
+  await owner.login(`project-owner-${suffix}@workpal.invalid`, "Project owner");
   const workspace = await owner.ensureWorkspace("Project permissions", `project-permissions-${suffix}`);
   try {
     await member.login(memberEmail, "Project member");
@@ -23,8 +23,8 @@ test("members can delete their own shared project while keeping its issues", asy
     const token = member.getToken();
     expect(token).toBeTruthy();
     await page.addInitScript((value) => {
-      localStorage.setItem("multica_token", value!);
-      localStorage.setItem("multica:chat:isOpen", "false");
+      localStorage.setItem("workpal_token", value!);
+      localStorage.setItem("workpal:chat:isOpen", "false");
     }, token);
 
     await page.goto(`/${workspace.slug}/projects/${otherProject.id}`, { waitUntil: "domcontentloaded" });

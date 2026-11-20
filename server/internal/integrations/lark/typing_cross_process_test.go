@@ -8,9 +8,9 @@ import (
 
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgtype"
-	"github.com/multica-ai/multica/server/internal/events"
-	dbfx "github.com/multica-ai/multica/server/internal/testutil"
-	"github.com/multica-ai/multica/server/pkg/protocol"
+	"workpal.local/workpal/server/internal/events"
+	dbfx "workpal.local/workpal/server/internal/testutil"
+	"workpal.local/workpal/server/pkg/protocol"
 )
 
 // Two independent managers share the remote API and durable DB, never local state.

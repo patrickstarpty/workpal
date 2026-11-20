@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, type ReactNode } from "react";
-import { Check, ChevronDown, ChevronRight, FileText, LayoutGrid, MessageSquareText, X } from "@multica/ui/icons";
-import { cn } from "@multica/ui/lib/utils";
+import { Check, ChevronDown, ChevronRight, FileText, LayoutGrid, MessageSquareText, X } from "@workpal/ui/icons";
+import { cn } from "@workpal/ui/lib/utils";
 import { CoachMark, DemoAvatar, DemoFrame, useDemoCopy, useStartWhenVisible } from "./demo-kit";
 
 type Version = 1 | 2;

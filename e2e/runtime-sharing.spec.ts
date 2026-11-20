@@ -13,8 +13,8 @@ test("runtime owner can save specific members and revoke their access", async ({
     const memberId = await api.addMemberByEmail(`runtime-member-${run}@localhost`);
     const runtimeId = await api.seedRuntime("Studio Mac");
     await page.addInitScript((token) => {
-      localStorage.setItem("multica_token", token!);
-      localStorage.setItem("multica:chat:isOpen", "false");
+      localStorage.setItem("workpal_token", token!);
+      localStorage.setItem("workpal:chat:isOpen", "false");
     }, api.getToken());
     await page.setViewportSize({ width: 1280, height: 900 });
     await page.goto(`/${workspace.slug}/runtimes/${runtimeId}`);

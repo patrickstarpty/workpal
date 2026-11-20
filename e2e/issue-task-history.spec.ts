@@ -36,8 +36,8 @@ test("issue loads compact runs until Runs requests full own or subtree history",
 
     await page.setViewportSize({ width: 1440, height: 900 });
     await page.addInitScript((token) => {
-      localStorage.setItem("multica_token", token!);
-      localStorage.setItem("multica:chat:isOpen", "false");
+      localStorage.setItem("workpal_token", token!);
+      localStorage.setItem("workpal:chat:isOpen", "false");
     }, api.getToken());
     const isIssueTasks = (url: URL) => url.pathname.endsWith(`/issues/${issue.id}/task-runs`);
     const requests: URL[] = [];

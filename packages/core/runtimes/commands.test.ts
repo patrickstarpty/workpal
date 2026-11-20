@@ -23,9 +23,9 @@ describe("daemonCommands", () => {
     if (result.status !== "ready") {
       throw new Error("expected confirmed Cloud commands");
     }
-    expect(result.setupCmd).toBe("multica setup");
-    expect(result.tokenCmd).toContain("server_url https://api.multica.ai");
-    expect(result.tokenCmd).toContain("app_url https://multica.ai");
+    expect(result.setupCmd).toBe("workpal setup");
+    expect(result.tokenCmd).toContain("server_url https://workpal.invalid");
+    expect(result.tokenCmd).toContain("app_url https://workpal.invalid");
   });
 
   it("returns self-host commands with the configured URLs", () => {
@@ -40,15 +40,15 @@ describe("daemonCommands", () => {
       throw new Error("expected self-host commands");
     }
     expect(result.setupCmd).toBe(
-      "multica setup self-host --server-url https://api.example.com --app-url https://app.example.com",
+      "workpal setup self-host --server-url https://api.example.com --app-url https://app.example.com",
     );
     expect(result.tokenCmd).toContain(
-      "multica config set server_url https://api.example.com",
+      "workpal config set server_url https://api.example.com",
     );
     expect(result.tokenCmd).toContain(
-      "multica config set app_url https://app.example.com",
+      "workpal config set app_url https://app.example.com",
     );
-    expect(result.tokenCmd).not.toContain("multica.ai");
+    expect(result.tokenCmd).not.toContain("workpal.invalid");
   });
 
   it.each<{ name: string; config: DaemonSetupConfig; status: string }>([

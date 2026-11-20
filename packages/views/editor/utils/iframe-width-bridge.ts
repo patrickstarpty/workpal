@@ -24,7 +24,7 @@
  */
 
 /** Marker on every bridge message. */
-export const HTML_PREVIEW_WIDTH_KEY = "__multicaHtmlWidth";
+export const HTML_PREVIEW_WIDTH_KEY = "__workpalHtmlWidth";
 
 /** Upper bound on a reported width; anything larger is not a width we keep. */
 const MAX_REPORTED_WIDTH = 100_000;

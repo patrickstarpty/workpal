@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { useSidebar } from "@multica/ui/components/ui/sidebar";
+import { useSidebar } from "@workpal/ui/components/ui/sidebar";
 import {
   getShortcut,
   isEditableShortcutTarget,
@@ -9,12 +9,12 @@ import {
   SHORTCUT_ACTION_BY_ID,
   useShortcutStore,
   type ShortcutActionId,
-} from "@multica/core/shortcuts";
-import { useChatStore } from "@multica/core/chat";
-import { useSearchStore } from "@multica/core/command-bar";
-import { useModalStore } from "@multica/core/modals";
-import { useWorkspacePaths } from "@multica/core/paths";
-import { isImeComposing } from "@multica/core/utils";
+} from "@workpal/core/shortcuts";
+import { useChatStore } from "@workpal/core/chat";
+import { useSearchStore } from "@workpal/core/command-bar";
+import { useModalStore } from "@workpal/core/modals";
+import { useWorkspacePaths } from "@workpal/core/paths";
+import { isImeComposing } from "@workpal/core/utils";
 import { isFloatingChatRouteSuppressed } from "../chat/floating-chat-visibility";
 import { useAppShell } from "./app-shell-context";
 import { openCreateIssueForPath } from "./global-actions";
@@ -111,7 +111,7 @@ export function GlobalShortcuts() {
         return;
       }
       if (actionId === "newChat") {
-        // Like pressing Ask Multica: a second press closes the new chat it opened.
+        // Like pressing Ask Workpal: a second press closes the new chat it opened.
         const chat = useChatStore.getState();
         if (chat.isOpen && chat.activeSessionId === null) chat.setOpen(false);
         else chat.startNewChat();

@@ -1,6 +1,6 @@
-import reactConfig from "@multica/eslint-config/react";
-import { ICON_LIBRARY_IMPORT_PATTERNS } from "@multica/eslint-config/base";
-import { NO_FULL_PAGE_NAVIGATION } from "@multica/eslint-config/full-page-navigation";
+import reactConfig from "@workpal/eslint-config/react";
+import { ICON_LIBRARY_IMPORT_PATTERNS } from "@workpal/eslint-config/base";
+import { NO_FULL_PAGE_NAVIGATION } from "@workpal/eslint-config/full-page-navigation";
 
 // Package boundary (AGENTS.md): core is headless and runs unchanged in web,
 // desktop and SSR. No UI libraries, no react-dom, no next/*, no Web Storage
@@ -8,8 +8,8 @@ import { NO_FULL_PAGE_NAVIGATION } from "@multica/eslint-config/full-page-naviga
 
 const UI_LIBRARIES = [
   "react-dom",
-  "@multica/ui",
-  "@multica/views",
+  "@workpal/ui",
+  "@workpal/views",
   "@base-ui/react",
   "@radix-ui",
   "sonner",

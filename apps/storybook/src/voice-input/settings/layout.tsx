@@ -1,7 +1,7 @@
 import type { ReactNode } from "react";
-import { Bell, Keyboard, KeyRound, Laptop, Mic, Palette, Search, SlidersHorizontal, User } from "@multica/ui/icons";
-import { Card, CardContent } from "@multica/ui/components/ui/card";
-import { cn } from "@multica/ui/lib/utils";
+import { Bell, Keyboard, KeyRound, Laptop, Mic, Palette, Search, SlidersHorizontal, User } from "@workpal/ui/icons";
+import { Card, CardContent } from "@workpal/ui/components/ui/card";
+import { cn } from "@workpal/ui/lib/utils";
 import type { SettingsCopy } from "./copy";
 
 /*

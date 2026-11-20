@@ -7,7 +7,7 @@ import (
 	"testing"
 
 	"github.com/go-chi/chi/v5"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
+	db "workpal.local/workpal/server/pkg/db/generated"
 )
 
 // appendChannelUserMessage writes an inbound channel message the way

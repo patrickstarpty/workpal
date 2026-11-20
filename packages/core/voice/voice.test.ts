@@ -52,13 +52,13 @@ describe("removeSpokenFillers", () => {
 
 describe("applyVocabulary", () => {
   it.each([
-    ["assign it to lambda in multica", "assign it to Lambda in Multica"],
+    ["assign it to lambda in workpal", "assign it to Lambda in Workpal"],
     ["open the git hub link", "open the GitHub link"],
     ["Git-Hub and github", "GitHub and GitHub"],
-    ["lambdas and multicast stay", "lambdas and multicast stay"],
+    ["lambdas and workpalst stay", "lambdas and workpalst stay"],
     ["交给 lambda 处理", "交给 Lambda 处理"],
   ])("%j", (input, output) => {
-    expect(applyVocabulary(input, [" Multica ", "", "Lambda", "GitHub", "工作区"])).toBe(output);
+    expect(applyVocabulary(input, [" Workpal ", "", "Lambda", "GitHub", "工作区"])).toBe(output);
   });
 });
 
@@ -89,7 +89,7 @@ describe("sanitizeVoiceSettings", () => {
       language: "zh",
       deviceId: "mic-1",
       removeFillers: false,
-      vocabulary: ["Multica", "multica", " ", 7, ...words],
+      vocabulary: ["Workpal", "workpal", " ", 7, ...words],
       modelId: "sensevoice-small",
     });
     expect(settings.enabled).toBe(true);
@@ -97,7 +97,7 @@ describe("sanitizeVoiceSettings", () => {
     expect(settings.language).toBe("zh");
     expect(settings.deviceId).toBe("mic-1");
     expect(settings.removeFillers).toBe(false);
-    expect(settings.vocabulary[0]).toBe("Multica");
+    expect(settings.vocabulary[0]).toBe("Workpal");
     expect(settings.vocabulary).toHaveLength(MAX_VOCABULARY_WORDS);
     expect(settings.modelId).toBe("sensevoice-small");
   });

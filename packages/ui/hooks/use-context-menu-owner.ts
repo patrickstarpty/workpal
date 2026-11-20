@@ -2,7 +2,7 @@
 
 import * as React from "react"
 
-import { contextMenuOrigin } from "@multica/ui/lib/context-menu-origin"
+import { contextMenuOrigin } from "@workpal/ui/lib/context-menu-origin"
 
 type Register = (element: Element) => () => void
 

@@ -54,7 +54,7 @@ func isNodeScriptPath(path string) bool {
 func requireNodeForZcodeScript(lookedUp string) error {
 	if script, desktop := zcodeDesktopScript(lookedUp); desktop {
 		if info, err := os.Stat(script); err != nil || !info.Mode().IsRegular() {
-			return fmt.Errorf("ZCode Desktop CLI is missing at %s; set MULTICA_ZCODE_PATH to a headless ZCode CLI or wrapper", script)
+			return fmt.Errorf("ZCode Desktop CLI is missing at %s; set WORKPAL_ZCODE_PATH to a headless ZCode CLI or wrapper", script)
 		}
 		return nil
 	}

@@ -14,12 +14,12 @@ import (
 	"github.com/go-chi/chi/v5"
 	"github.com/google/uuid"
 	"github.com/jackc/pgx/v5/pgtype"
-	"github.com/multica-ai/multica/server/internal/events"
-	"github.com/multica-ai/multica/server/internal/middleware"
-	"github.com/multica-ai/multica/server/internal/seatcapacity"
-	"github.com/multica-ai/multica/server/internal/testutil"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
-	"github.com/multica-ai/multica/server/pkg/protocol"
+	"workpal.local/workpal/server/internal/events"
+	"workpal.local/workpal/server/internal/middleware"
+	"workpal.local/workpal/server/internal/seatcapacity"
+	"workpal.local/workpal/server/internal/testutil"
+	db "workpal.local/workpal/server/pkg/db/generated"
+	"workpal.local/workpal/server/pkg/protocol"
 )
 
 var testSeq atomic.Int64
@@ -116,7 +116,7 @@ func createTestUserAndMember(t *testing.T, role string) string {
 	if err := testPool.QueryRow(ctx,
 		`INSERT INTO "user" (name, email) VALUES ($1, $2) RETURNING id`,
 		fmt.Sprintf("sharelink-test-%d", seq),
-		fmt.Sprintf("sharelink-test-%d@multica.ai", seq),
+		fmt.Sprintf("sharelink-test-%d@workpal.invalid", seq),
 	).Scan(&userID); err != nil {
 		t.Fatalf("create share-link test user: %v", err)
 	}

@@ -1,4 +1,4 @@
-import type { DeliverableFile } from "@multica/core/attachments/deliverables";
+import type { DeliverableFile } from "@workpal/core/attachments/deliverables";
 import { getPreviewKind } from "../../../editor/utils/preview";
 import { isDocumentFile } from "../../../editor/utils/file-icon";
 

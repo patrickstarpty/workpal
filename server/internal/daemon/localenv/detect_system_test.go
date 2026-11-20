@@ -27,7 +27,7 @@ func TestListListenersFindsAServerAndItsDirectory(t *testing.T) {
 	}
 	cmd := exec.Command(os.Args[0], "-test.run=^TestHelperProcess$")
 	cmd.Dir = dir
-	cmd.Env = append(os.Environ(), "LOCALENV_HELPER=serve", fmt.Sprintf("MULTICA_PORT=%d", port))
+	cmd.Env = append(os.Environ(), "LOCALENV_HELPER=serve", fmt.Sprintf("WORKPAL_PORT=%d", port))
 	if err := cmd.Start(); err != nil {
 		t.Fatal(err)
 	}

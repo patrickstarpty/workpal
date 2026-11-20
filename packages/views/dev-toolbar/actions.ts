@@ -1,5 +1,5 @@
 import type { QueryClient } from "@tanstack/react-query";
-import type { User } from "@multica/core/types";
+import type { User } from "@workpal/core/types";
 import type { MetricTone } from "./metrics";
 
 /** What an action can read and act on when it runs. */

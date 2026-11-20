@@ -3,8 +3,8 @@ package handler
 import (
 	"testing"
 
-	"github.com/multica-ai/multica/server/internal/storage"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
+	"workpal.local/workpal/server/internal/storage"
+	db "workpal.local/workpal/server/pkg/db/generated"
 )
 
 func TestLocalAttachmentResponseCompatibility(t *testing.T) {

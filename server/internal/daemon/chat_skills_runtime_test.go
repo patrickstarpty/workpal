@@ -14,7 +14,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/multica-ai/multica/server/internal/daemon/execenv"
+	"workpal.local/workpal/server/internal/daemon/execenv"
 )
 
 // Exercise the complete claim -> environment -> prompt -> backend path. The
@@ -42,7 +42,7 @@ printf '%s\n' "$@" > "$SKILL_CAPTURE/args-$attempt"
 IFS= read -r input
 case "$input" in
   *'"type":"control_request"'*)
-    printf '%s\n' '{"type":"control_response","response":{"subtype":"success","request_id":"multica-supplement-initialize","response":{"commands":[{"name":"review-code","description":"Bound skill (project)"}]}}}'
+    printf '%s\n' '{"type":"control_response","response":{"subtype":"success","request_id":"workpal-supplement-initialize","response":{"commands":[{"name":"review-code","description":"Bound skill (project)"}]}}}'
     IFS= read -r input;;
 esac
 printf '%s\n' "$input" > "$SKILL_CAPTURE/input-$attempt.json"

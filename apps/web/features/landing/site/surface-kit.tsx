@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState, type ComponentType, type ReactNode } from "react";
-import { Check, Copy, type IconComponent } from "@multica/ui/icons";
-import { cn } from "@multica/ui/lib/utils";
+import { Check, Copy, type IconComponent } from "@workpal/ui/icons";
+import { cn } from "@workpal/ui/lib/utils";
 import { Container, Eyebrow, focusRing } from "./primitives";
 import { AdvanceLine, useAutoAdvance } from "./auto-advance";
 

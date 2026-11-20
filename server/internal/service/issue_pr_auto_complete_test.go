@@ -6,12 +6,12 @@ import (
 	"testing"
 
 	"github.com/google/uuid"
-	"github.com/multica-ai/multica/server/internal/analytics"
-	"github.com/multica-ai/multica/server/internal/events"
-	"github.com/multica-ai/multica/server/internal/testutil"
-	"github.com/multica-ai/multica/server/internal/util"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
-	"github.com/multica-ai/multica/server/pkg/protocol"
+	"workpal.local/workpal/server/internal/analytics"
+	"workpal.local/workpal/server/internal/events"
+	"workpal.local/workpal/server/internal/testutil"
+	"workpal.local/workpal/server/internal/util"
+	db "workpal.local/workpal/server/pkg/db/generated"
+	"workpal.local/workpal/server/pkg/protocol"
 )
 
 func TestIssueCreatePRAutoCompleteAtomic(t *testing.T) {
@@ -23,7 +23,7 @@ func TestIssueCreatePRAutoCompleteAtomic(t *testing.T) {
 		t.Run(name, func(t *testing.T) {
 			pool := sharedTestPool(t)
 			f := testutil.New(pool, "", "")
-			userID := f.User(t, "PR automation creator", uuid.NewString()+"@multica.test")
+			userID := f.User(t, "PR automation creator", uuid.NewString()+"@workpal.test")
 			workspaceID := f.Workspace(t, "PR automation create", "pr-create-"+uuid.NewString())
 			f.Cleanup(t, "DELETE FROM issue WHERE workspace_id = $1", workspaceID)
 			f.Cleanup(t, "DELETE FROM issue_pr_automation WHERE workspace_id = $1", workspaceID)

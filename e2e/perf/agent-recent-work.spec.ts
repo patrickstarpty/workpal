@@ -102,11 +102,11 @@ async function setup(page: Page, baseURL: string) {
   const pages: string[] = [];
   page.on("pageerror", (error) => errors.push(error.message));
   await page.context().addCookies([
-    { name: "multica_logged_in", value: "1", url: origin },
+    { name: "workpal_logged_in", value: "1", url: origin },
     { name: "last_workspace_slug", value: "perf", url: origin },
   ]);
   await page.addInitScript(() => {
-    localStorage.setItem("multica:chat:floatingChatEnabled", "false");
+    localStorage.setItem("workpal:chat:floatingChatEnabled", "false");
   });
   await page.routeWebSocket(() => true, (socket) => socket.onMessage(() => {}));
   await page.route("**/*", async (route) => {
@@ -205,7 +205,7 @@ for (const compact of [false, true]) {
     await expect(recent.getByText("Synthetic work 0001", { exact: true })).toBeVisible();
     await rows.first().press("Enter");
     await expect(page.getByText("Synthetic transcript for run 1.", { exact: true })).toBeVisible();
-    await page.evaluate(() => window.dispatchEvent(new CustomEvent("multica:navigate")));
+    await page.evaluate(() => window.dispatchEvent(new CustomEvent("workpal:navigate")));
     await expect(page.getByRole("dialog")).toHaveCount(0);
     const report = { baseline, compact, revealed_rows: count, mounted_rows: mounted, max_mounted_while_scrolling: maxMountedWhileScrolling, task_pages: state.pages, errors: state.errors, unexpected_requests: state.unexpected };
     console.log(JSON.stringify(report));

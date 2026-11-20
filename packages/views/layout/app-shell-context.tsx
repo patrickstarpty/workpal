@@ -1,8 +1,8 @@
 "use client";
 
 import { createContext, use, useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { spaceForPath, type AppSpaceId } from "@multica/core/paths";
-import { useSidebarSafe } from "@multica/ui/components/ui/sidebar";
+import { spaceForPath, type AppSpaceId } from "@workpal/core/paths";
+import { useSidebarSafe } from "@workpal/ui/components/ui/sidebar";
 import { useNavigation } from "../navigation";
 
 /**

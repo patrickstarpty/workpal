@@ -1,8 +1,8 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { fireEvent, render, screen } from "@testing-library/react";
 import type { ReactElement } from "react";
-import type { BatchUpdateIssuesResponse } from "@multica/core/types";
-import { BatchOpsUnsupportedError } from "@multica/core/api";
+import type { BatchUpdateIssuesResponse } from "@workpal/core/types";
+import { BatchOpsUnsupportedError } from "@workpal/core/api";
 import { renderWithI18n } from "../../test/i18n";
 import { useBatchResultToast, type BatchResultToastOptions } from "./batch-result-toast";
 

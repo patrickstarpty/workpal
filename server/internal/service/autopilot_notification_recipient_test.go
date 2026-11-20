@@ -4,7 +4,7 @@ import (
 	"context"
 	"testing"
 
-	"github.com/multica-ai/multica/server/internal/entitlement"
+	"workpal.local/workpal/server/internal/entitlement"
 )
 
 func TestResolveAutopilotNotificationRecipientRejectsFormerMember(t *testing.T) {

@@ -6,8 +6,8 @@ import (
 	"testing"
 
 	"github.com/jackc/pgx/v5/pgtype"
-	"github.com/multica-ai/multica/server/internal/integrations/wecom"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
+	"workpal.local/workpal/server/internal/integrations/wecom"
+	db "workpal.local/workpal/server/pkg/db/generated"
 )
 
 type noticeUserLookup struct {

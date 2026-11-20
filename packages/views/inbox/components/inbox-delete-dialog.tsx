@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import type { InboxItem } from "@multica/core/types";
-import { useDeleteInbox } from "@multica/core/inbox/mutations";
+import type { InboxItem } from "@workpal/core/types";
+import { useDeleteInbox } from "@workpal/core/inbox/mutations";
 import {
   AlertDialog,
   AlertDialogCancel,
@@ -11,8 +11,8 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@multica/ui/components/ui/alert-dialog";
-import { Button } from "@multica/ui/components/ui/button";
+} from "@workpal/ui/components/ui/alert-dialog";
+import { Button } from "@workpal/ui/components/ui/button";
 import { useT } from "../../i18n";
 import type { InboxView } from "./inbox-view";
 

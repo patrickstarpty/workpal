@@ -5,13 +5,13 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 import {
   DEFAULT_SIDEBAR_INBOX_SETTINGS,
   useSidebarTreeStore,
-} from "@multica/core/issues/stores/sidebar-tree-store";
-import { useInboxFilterStore } from "@multica/core/inbox/filter-store";
-import { useInboxSelectionStore } from "@multica/core/inbox/selection-store";
-import { agentTaskSnapshotOptions } from "@multica/core/agents";
-import type { Agent, AgentTask, InboxItem, SnoozedInboxIssue } from "@multica/core/types";
-import { agentListOptions } from "@multica/core/workspace/queries";
-import { snoozedInboxOptions } from "@multica/core/inbox/queries";
+} from "@workpal/core/issues/stores/sidebar-tree-store";
+import { useInboxFilterStore } from "@workpal/core/inbox/filter-store";
+import { useInboxSelectionStore } from "@workpal/core/inbox/selection-store";
+import { agentTaskSnapshotOptions } from "@workpal/core/agents";
+import type { Agent, AgentTask, InboxItem, SnoozedInboxIssue } from "@workpal/core/types";
+import { agentListOptions } from "@workpal/core/workspace/queries";
+import { snoozedInboxOptions } from "@workpal/core/inbox/queries";
 import { renderWithI18n } from "../../test/i18n";
 import { NavigationProvider, type NavigationAdapter } from "../../navigation";
 import { InboxSection, useInboxSectionRows } from "./inbox-section";
@@ -32,15 +32,15 @@ const state = vi.hoisted(() => ({
   unsnooze: vi.fn(() => Promise.resolve()),
 }));
 
-vi.mock("@multica/core/paths", async (importOriginal) => {
-  const actual = await importOriginal<typeof import("@multica/core/paths")>();
+vi.mock("@workpal/core/paths", async (importOriginal) => {
+  const actual = await importOriginal<typeof import("@workpal/core/paths")>();
   return { ...actual, useWorkspacePaths: () => actual.paths.workspace("acme") };
 });
-vi.mock("@multica/core/inbox/queries", async (importOriginal) => ({
-  ...(await importOriginal<typeof import("@multica/core/inbox/queries")>()),
+vi.mock("@workpal/core/inbox/queries", async (importOriginal) => ({
+  ...(await importOriginal<typeof import("@workpal/core/inbox/queries")>()),
   useInboxUnreadCount: () => state.unread,
 }));
-vi.mock("@multica/core/inbox/mutations", () => ({
+vi.mock("@workpal/core/inbox/mutations", () => ({
   useArchiveInbox: () => ({
     mutate: state.archive,
     mutateAsync: (id: string) => {
@@ -61,22 +61,22 @@ vi.mock("@multica/core/inbox/mutations", () => ({
   useUnsnoozeInbox: () => ({ mutateAsync: state.unsnooze }),
   cachedInboxSnoozedUntil: () => null,
 }));
-vi.mock("@multica/core/hooks", async (importOriginal) => ({
-  ...(await importOriginal<typeof import("@multica/core/hooks")>()),
+vi.mock("@workpal/core/hooks", async (importOriginal) => ({
+  ...(await importOriginal<typeof import("@workpal/core/hooks")>()),
   useWorkspaceId: () => "ws-1",
 }));
-vi.mock("@multica/core/workspace/hooks", () => ({
+vi.mock("@workpal/core/workspace/hooks", () => ({
   useActorName: () => ({ getActorName: () => "Leo Park", getActorInitials: () => "LP", getActorAvatarUrl: () => null }),
 }));
 vi.mock("../../common/actor-avatar", () => ({ ActorAvatar: () => null }));
 vi.mock("../../agents/components/agent-avatar-stack", () => ({
   AgentAvatarStack: ({ agentIds }: { agentIds: string[] }) => <span data-testid="agents">{agentIds.join(",")}</span>,
 }));
-vi.mock("@multica/ui/hooks/use-mobile", async (importOriginal) => ({
-  ...(await importOriginal<typeof import("@multica/ui/hooks/use-mobile")>()),
+vi.mock("@workpal/ui/hooks/use-mobile", async (importOriginal) => ({
+  ...(await importOriginal<typeof import("@workpal/ui/hooks/use-mobile")>()),
   useIsCompact: () => state.compact,
 }));
-vi.mock("@multica/ui/components/common/tooltip-hint", () => ({
+vi.mock("@workpal/ui/components/common/tooltip-hint", () => ({
   TooltipHint: ({ children }: { children: ReactNode }) => <>{children}</>,
 }));
 

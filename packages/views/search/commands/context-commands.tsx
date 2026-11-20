@@ -17,21 +17,21 @@ import {
   Settings2,
   SquarePen,
   UserPlus,
-} from "@multica/ui/icons";
-import { isAgentRuntimeBound } from "@multica/core/agents";
-import { useAuthStore } from "@multica/core/auth";
-import type { CommandBarContext } from "@multica/core/command-bar";
-import { useUpdateAutopilot } from "@multica/core/autopilots/mutations";
-import { usePinChatAgent, useSetChatSessionPinned, useUnpinChatAgent } from "@multica/core/chat/mutations";
-import { chatPinnedAgentsOptions } from "@multica/core/chat/queries";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { openCreateIssueWithPreference } from "@multica/core/issues/stores";
-import { useModalStore } from "@multica/core/modals";
-import { useWorkspacePaths } from "@multica/core/paths";
-import { canAssignAgentToIssue, useCurrentMember } from "@multica/core/permissions";
-import { pinListOptions, useCreatePin, useDeletePin } from "@multica/core/pins";
-import { getShortcut } from "@multica/core/shortcuts";
-import { copyText } from "@multica/ui/lib/clipboard";
+} from "@workpal/ui/icons";
+import { isAgentRuntimeBound } from "@workpal/core/agents";
+import { useAuthStore } from "@workpal/core/auth";
+import type { CommandBarContext } from "@workpal/core/command-bar";
+import { useUpdateAutopilot } from "@workpal/core/autopilots/mutations";
+import { usePinChatAgent, useSetChatSessionPinned, useUnpinChatAgent } from "@workpal/core/chat/mutations";
+import { chatPinnedAgentsOptions } from "@workpal/core/chat/queries";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { openCreateIssueWithPreference } from "@workpal/core/issues/stores";
+import { useModalStore } from "@workpal/core/modals";
+import { useWorkspacePaths } from "@workpal/core/paths";
+import { canAssignAgentToIssue, useCurrentMember } from "@workpal/core/permissions";
+import { pinListOptions, useCreatePin, useDeletePin } from "@workpal/core/pins";
+import { getShortcut } from "@workpal/core/shortcuts";
+import { copyText } from "@workpal/ui/lib/clipboard";
 import { useRunAutopilotNow } from "../../autopilots/components/use-run-autopilot-now";
 import { useNavigation } from "../../navigation";
 import { useT } from "../../i18n";

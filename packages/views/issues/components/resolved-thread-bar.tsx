@@ -1,8 +1,8 @@
-import { CheckCircle2, ChevronRight } from "@multica/ui/icons";
-import { useActorName } from "@multica/core/workspace/hooks";
-import { Card } from "@multica/ui/components/ui/card";
-import type { TimelineEntry } from "@multica/core/types";
-import { isDeletedComment } from "@multica/core/issues/comment-deletion";
+import { CheckCircle2, ChevronRight } from "@workpal/ui/icons";
+import { useActorName } from "@workpal/core/workspace/hooks";
+import { Card } from "@workpal/ui/components/ui/card";
+import type { TimelineEntry } from "@workpal/core/types";
+import { isDeletedComment } from "@workpal/core/issues/comment-deletion";
 import { useT } from "../../i18n";
 
 interface ResolvedThreadBarProps {

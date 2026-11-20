@@ -11,9 +11,9 @@ import (
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgtype"
 	"github.com/jackc/pgx/v5/pgxpool"
-	"github.com/multica-ai/multica/server/internal/seatcapacity"
-	"github.com/multica-ai/multica/server/internal/testutil"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
+	"workpal.local/workpal/server/internal/seatcapacity"
+	"workpal.local/workpal/server/internal/testutil"
+	db "workpal.local/workpal/server/pkg/db/generated"
 )
 
 type deadlineRecordingWorkspaceLocker struct {
@@ -263,7 +263,7 @@ func TestCapacityConsumeFailsClosedWhenCloudIsUnavailable(t *testing.T) {
 
 func TestAcceptInvitationRejectsUnavailableReservedCapacity(t *testing.T) {
 	ctx := context.Background()
-	email := "strict-capacity-invite-" + uuid.NewString() + "@multica.ai"
+	email := "strict-capacity-invite-" + uuid.NewString() + "@workpal.invalid"
 	userID := dbfx.User(t, "Strict Capacity Invitee", email)
 	invitationID := dbfx.Insert(t, "workspace_invitation", testutil.Cols{
 		"workspace_id":    testWorkspaceID,
@@ -312,7 +312,7 @@ func TestSeatCapacityWorkspaceDeletionSettlesOverlappingInvitationIntent(t *test
 	invitationID := uuid.MustParse(dbfx.Insert(t, "workspace_invitation", testutil.Cols{
 		"workspace_id":  testWorkspaceID,
 		"inviter_id":    testUserID,
-		"invitee_email": uuid.NewString() + "@multica.ai",
+		"invitee_email": uuid.NewString() + "@workpal.invalid",
 		"role":          "member",
 		"status":        "pending",
 		"expires_at":    testutil.Raw("now() + interval '1 day'"),
@@ -353,7 +353,7 @@ func TestSeatCapacityWorkspaceDeletionCannotRegressConcurrentConfirm(t *testing.
 	invitationID := uuid.MustParse(dbfx.Insert(t, "workspace_invitation", testutil.Cols{
 		"workspace_id":  testWorkspaceID,
 		"inviter_id":    testUserID,
-		"invitee_email": uuid.NewString() + "@multica.ai",
+		"invitee_email": uuid.NewString() + "@workpal.invalid",
 		"role":          "member",
 		"status":        "pending",
 		"expires_at":    testutil.Raw("now() + interval '1 day'"),

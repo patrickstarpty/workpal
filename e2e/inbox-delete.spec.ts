@@ -23,8 +23,8 @@ test("delete a failed inbox entry with confirmation, retry, and cross-session re
     );
     const id = seeded.rows[0].id;
     await context.addInitScript((token) => {
-      localStorage.setItem("multica_token", token!);
-      localStorage.setItem("multica:chat:isOpen", "false");
+      localStorage.setItem("workpal_token", token!);
+      localStorage.setItem("workpal:chat:isOpen", "false");
     }, api.getToken());
     await page.setViewportSize({ width: 1280, height: 850 });
     await page.goto(`/${workspace.slug}/inbox`, { waitUntil: "domcontentloaded" });
@@ -101,8 +101,8 @@ test("deleting active issue notifications restores archived history with explici
       [workspace.id, login.user.id, issue.id],
     );
     await context.addInitScript((token) => {
-      localStorage.setItem("multica_token", token!);
-      localStorage.setItem("multica:chat:isOpen", "false");
+      localStorage.setItem("workpal_token", token!);
+      localStorage.setItem("workpal:chat:isOpen", "false");
     }, api.getToken());
     await page.setViewportSize({ width: 1280, height: 850 });
     await page.goto(`/${workspace.slug}/inbox`, { waitUntil: "domcontentloaded" });

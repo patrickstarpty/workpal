@@ -2,30 +2,30 @@
 
 import { useCallback, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
-import type { Issue, Project } from "@multica/core/types";
-import { projectListOptions } from "@multica/core/projects/queries";
-import { childIssueProgressOptions } from "@multica/core/issues/queries";
-import { issueSurfaceGanttOptions } from "@multica/core/issues/surface/repository";
-import type { IssueSurfaceQueryPlan } from "@multica/core/issues/surface/query-plan";
+import type { Issue, Project } from "@workpal/core/types";
+import { projectListOptions } from "@workpal/core/projects/queries";
+import { childIssueProgressOptions } from "@workpal/core/issues/queries";
+import { issueSurfaceGanttOptions } from "@workpal/core/issues/surface/repository";
+import type { IssueSurfaceQueryPlan } from "@workpal/core/issues/surface/query-plan";
 import {
   filterDependencyState,
   type FilterDependencySource,
   type FilterDependencyState,
-} from "@multica/core/issues/surface/filter-dependency";
-import type { IssueStatus, ProjectStatus, PropertyFilterValue } from "@multica/core/types";
-import { useIssueStatuses } from "@multica/core/issue-statuses/hooks";
+} from "@workpal/core/issues/surface/filter-dependency";
+import type { IssueStatus, ProjectStatus, PropertyFilterValue } from "@workpal/core/types";
+import { useIssueStatuses } from "@workpal/core/issue-statuses/hooks";
 import {
   advancedFilterUsesField,
   statusColumnFilter,
   type AdvancedFilterGroup,
   type DueDateFilter,
-} from "@multica/core/issues/stores/filter-tree";
+} from "@workpal/core/issues/stores/filter-tree";
 import { useColumnWorkflow, workflowColumns } from "../utils/workflow-columns";
-import { issueBehavesAsAny, statusColumnKeys, visibleStatusKeys } from "@multica/core/issues";
+import { issueBehavesAsAny, statusColumnKeys, visibleStatusKeys } from "@workpal/core/issues";
 import type {
   IssueRelationFilter,
   NegatableFilterDimension,
-} from "@multica/core/issues/stores/view-store";
+} from "@workpal/core/issues/stores/view-store";
 import {
   applyIssueFilters,
   type IssueFilterState,

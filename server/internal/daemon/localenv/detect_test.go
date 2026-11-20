@@ -19,8 +19,8 @@ func TestParseLsofListeners(t *testing.T) {
 	if got[0] != (Listener{PID: 4210, Port: 5173, Command: "node"}) || got[1] != (Listener{PID: 4300, Port: 5432, Command: "postgres"}) {
 		t.Fatalf("listeners = %+v", got)
 	}
-	cwds := parseLsofCwd("p4210\nfcwd\nn/Users/me/multica_workspaces/ws/abc/workdir/app\np4300\nfcwd\nn/\n")
-	if cwds[4210] != "/Users/me/multica_workspaces/ws/abc/workdir/app" || cwds[4300] != "/" {
+	cwds := parseLsofCwd("p4210\nfcwd\nn/Users/me/workpal_workspaces/ws/abc/workdir/app\np4300\nfcwd\nn/\n")
+	if cwds[4210] != "/Users/me/workpal_workspaces/ws/abc/workdir/app" || cwds[4300] != "/" {
 		t.Fatalf("cwds = %v", cwds)
 	}
 }
@@ -77,7 +77,7 @@ func TestDetectorLeavesOutADeclaredEnvironmentsServersAndKeepsItsApp(t *testing.
 		{PID: 13, Port: 6006, Command: "node", Cwd: "/ws/task-a/workdir"},
 	}
 	procs := map[int]Process{
-		10: {Args: electronBundle + "/Contents/MacOS/Electron . --remote-debugging-port=9724", App: "Multica Canary", Bundle: electronBundle},
+		10: {Args: electronBundle + "/Contents/MacOS/Electron . --remote-debugging-port=9724", App: "Workpal Canary", Bundle: electronBundle},
 	}
 	owner := func(pid int) string {
 		if pid == 13 {
@@ -109,7 +109,7 @@ func TestDetectorReportsADesktopAppInsteadOfItsDebugPort(t *testing.T) {
 		{PID: 11, Port: 5173, Command: "node", Cwd: "/ws/task-a/workdir/apps/desktop"},
 	}
 	procs := map[int]Process{
-		10: {Args: electronBundle + "/Contents/MacOS/Electron . --remote-debugging-port=9724", App: "Multica Canary multica-501", Bundle: electronBundle},
+		10: {Args: electronBundle + "/Contents/MacOS/Electron . --remote-debugging-port=9724", App: "Workpal Canary workpal-501", Bundle: electronBundle},
 		11: {Args: "node node_modules/.bin/electron-vite dev"},
 	}
 	probed := 0
@@ -121,7 +121,7 @@ func TestDetectorReportsADesktopAppInsteadOfItsDebugPort(t *testing.T) {
 		t.Fatalf("detected = %+v, want the app and the Vite server", envs)
 	}
 	app, vite := byKind(envs, KindApp), byKind(envs, KindServer)
-	if app.Name != "Multica Canary multica-501" || app.URL != "" || app.Port != 0 || app.Detail != "Remote debugging on localhost:9724" {
+	if app.Name != "Workpal Canary workpal-501" || app.URL != "" || app.Port != 0 || app.Detail != "Remote debugging on localhost:9724" {
 		t.Fatalf("app = %+v, want the app's own name, no URL and the debug port as detail", app)
 	}
 	if app.pid != 10 || app.bundle != electronBundle {
@@ -139,7 +139,7 @@ func TestDetectorReportsADesktopAppInsteadOfItsDebugPort(t *testing.T) {
 
 	// The same app restarted on another debug port is still the same row.
 	listeners[0] = Listener{PID: 20, Port: 9800, Command: "Electron", Cwd: "/ws/task-a/workdir/apps/desktop"}
-	procs[20] = Process{Args: electronBundle + "/Contents/MacOS/Electron . --remote-debugging-port 9800", App: "Multica Canary multica-501", Bundle: electronBundle}
+	procs[20] = Process{Args: electronBundle + "/Contents/MacOS/Electron . --remote-debugging-port 9800", App: "Workpal Canary workpal-501", Bundle: electronBundle}
 	envs, _ = d.Detect(context.Background(), resolveTaskA, notOwned)
 	if restarted := byKind(envs, KindApp); restarted.Key != app.Key || restarted.pid != 20 || restarted.Detail != "Remote debugging on localhost:9800" {
 		t.Fatalf("restarted app = %+v, want the same key with the new process", restarted)

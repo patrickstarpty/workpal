@@ -8,7 +8,7 @@ import (
 	"sync"
 
 	"github.com/go-chi/chi/v5"
-	"github.com/multica-ai/multica/server/internal/handler"
+	"workpal.local/workpal/server/internal/handler"
 )
 
 // WorkspaceRoutes mounts routes inside the authenticated, workspace-member

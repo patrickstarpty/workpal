@@ -1,15 +1,15 @@
 "use client";
 
-import { statusCategoryOfKey } from "@multica/core/issues";
+import { statusCategoryOfKey } from "@workpal/core/issues";
 import { useState } from "react";
-import { ArrowRight, Download, Loader2 } from "@multica/ui/icons";
-import { Button, buttonVariants } from "@multica/ui/components/ui/button";
-import { MulticaWordmark } from "@multica/ui/components/common/multica-wordmark";
-import { MulticaStarRow } from "@multica/ui/components/common/multica-graphics";
-import { cn } from "@multica/ui/lib/utils";
-import { DragStrip } from "@multica/views/platform";
-import { STATUS_CONFIG } from "@multica/core/issues/config";
-import type { BuiltInIssueStatus } from "@multica/core/types";
+import { ArrowRight, Download, Loader2 } from "@workpal/ui/icons";
+import { Button, buttonVariants } from "@workpal/ui/components/ui/button";
+import { WorkpalWordmark } from "@workpal/ui/components/common/workpal-wordmark";
+import { WorkpalStarRow } from "@workpal/ui/components/common/workpal-graphics";
+import { cn } from "@workpal/ui/lib/utils";
+import { DragStrip } from "@workpal/views/platform";
+import { STATUS_CONFIG } from "@workpal/core/issues/config";
+import type { BuiltInIssueStatus } from "@workpal/core/types";
 import { StatusIcon } from "../../issues/components/status-icon";
 import { ProviderLogo } from "../../runtimes/components/provider-logo";
 import { useT } from "../../i18n";
@@ -79,7 +79,7 @@ export function StepWelcome({
         <DragStrip />
         <div className="flex flex-1 flex-col justify-center px-6 pb-12 sm:px-10 md:px-20 lg:px-20 xl:px-24">
           <div className="flex w-full max-w-[540px] flex-col gap-8">
-            <MulticaWordmark
+            <WorkpalWordmark
               writeDelayMs={200}
               title={t(($) => $.welcome.wordmark)}
               className="h-[35px] self-start text-foreground"
@@ -173,7 +173,7 @@ export function StepWelcome({
           centers the mock cards vertically, mirroring the left
           column's copy-center layout. */}
       <div className="relative hidden border-l bg-muted/40 lg:flex lg:flex-1 lg:flex-col lg:overflow-hidden">
-        <MulticaStarRow
+        <WorkpalStarRow
           count={9}
           className="pointer-events-none absolute -bottom-10 left-1/2 w-[130%] -translate-x-1/2 text-muted"
         />

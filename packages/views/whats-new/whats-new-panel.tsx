@@ -1,9 +1,9 @@
 "use client";
 
-import { ArrowUpRight, X } from "@multica/ui/icons";
-import { useConfigStore } from "@multica/core/config";
-import { IconButton } from "@multica/ui/components/common/icon-button";
-import { cn } from "@multica/ui/lib/utils";
+import { ArrowUpRight, X } from "@workpal/ui/icons";
+import { useConfigStore } from "@workpal/core/config";
+import { IconButton } from "@workpal/ui/components/common/icon-button";
+import { cn } from "@workpal/ui/lib/utils";
 import { useT } from "../i18n";
 import { CHANGELOG_URL } from "../layout/help-links";
 import { HighlightActionButton } from "./highlight-action";

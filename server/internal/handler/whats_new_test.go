@@ -35,7 +35,7 @@ func storedWhatsNewSeenVersion(t *testing.T, userID string) *string {
 }
 
 func TestMarkWhatsNewSeenOnlyAdvances(t *testing.T) {
-	userID := newWaitlistTestUser(t, "whats-new-advance@multica.ai")
+	userID := newWaitlistTestUser(t, "whats-new-advance@workpal.invalid")
 
 	if v := storedWhatsNewSeenVersion(t, userID); v != nil {
 		t.Fatalf("new user should start with NULL, got %q", *v)
@@ -72,7 +72,7 @@ func TestMarkWhatsNewSeenOnlyAdvances(t *testing.T) {
 }
 
 func TestMarkWhatsNewSeenRejectsMalformedVersion(t *testing.T) {
-	userID := newWaitlistTestUser(t, "whats-new-invalid@multica.ai")
+	userID := newWaitlistTestUser(t, "whats-new-invalid@workpal.invalid")
 
 	for _, version := range []string{"", "v0.7.2", "0.7", "0.7.2-beta", "0.7.2.1", "9999999.0.0", "a.b.c"} {
 		w := markWhatsNewSeen(t, userID, map[string]string{"version": version})
@@ -86,7 +86,7 @@ func TestMarkWhatsNewSeenRejectsMalformedVersion(t *testing.T) {
 }
 
 func TestGetMeAlwaysSerializesWhatsNewSeenVersion(t *testing.T) {
-	userID := newWaitlistTestUser(t, "whats-new-getme@multica.ai")
+	userID := newWaitlistTestUser(t, "whats-new-getme@workpal.invalid")
 
 	req := httptest.NewRequest("GET", "/api/me", nil)
 	req.Header.Set("X-User-ID", userID)

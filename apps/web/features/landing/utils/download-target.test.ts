@@ -4,10 +4,10 @@ import { alternateKey, isDownloadKey, platformOf, resolvePrimary } from "./downl
 import { detectFromUserAgent } from "./os-detect";
 
 const ASSETS = {
-  macArm64Dmg: "https://downloads.test/multica-desktop-0.8.1-mac-arm64.dmg",
-  macX64Dmg: "https://downloads.test/multica-desktop-0.8.1-mac-x64.dmg",
-  winX64Exe: "https://downloads.test/multica-desktop-0.8.1-windows-x64.exe",
-  linuxArm64AppImage: "https://downloads.test/multica-desktop-0.8.1-linux-arm64.AppImage",
+  macArm64Dmg: "https://downloads.test/workpal-desktop-0.8.1-mac-arm64.dmg",
+  macX64Dmg: "https://downloads.test/workpal-desktop-0.8.1-mac-x64.dmg",
+  winX64Exe: "https://downloads.test/workpal-desktop-0.8.1-windows-x64.exe",
+  linuxArm64AppImage: "https://downloads.test/workpal-desktop-0.8.1-linux-arm64.AppImage",
 };
 
 const SAFARI_MAC =

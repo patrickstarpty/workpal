@@ -1,7 +1,7 @@
 import { useRef, useState, type PointerEvent } from "react";
-import { ArrowUp, ChevronLeft, ChevronUp, Loader2, Lock, Mic, Trash2 } from "@multica/ui/icons";
-import { IconButton } from "@multica/ui/components/common/icon-button";
-import { cn } from "@multica/ui/lib/utils";
+import { ArrowUp, ChevronLeft, ChevronUp, Loader2, Lock, Mic, Trash2 } from "@workpal/ui/icons";
+import { IconButton } from "@workpal/ui/components/common/icon-button";
+import { cn } from "@workpal/ui/lib/utils";
 import { CHAT_SCRIPT } from "../copy";
 import { useStoryEnv } from "../env";
 import { AddButton, AgentPicker, ChatWindowFrame, ComposerSurface, DraftEditor, SendButton, useDemoChat } from "../chat-frame";

@@ -3,8 +3,8 @@ import { MAX_VOICE_HOTWORDS, voiceHotwords } from "./hotwords";
 
 describe("voiceHotwords", () => {
   it("puts vocabulary first and drops case-insensitive repeats and blanks", () => {
-    expect(voiceHotwords(["Multica", " "], ["Lambda", "MULTICA", " Jiayuan "])).toEqual([
-      "Multica",
+    expect(voiceHotwords(["Workpal", " "], ["Lambda", "WORKPAL", " Jiayuan "])).toEqual([
+      "Workpal",
       "Lambda",
       "Jiayuan",
     ]);

@@ -2,18 +2,18 @@ import { afterEach, beforeEach, expect, it, vi } from "vitest";
 import { cleanup, fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { api } from "@multica/core/api";
-import { I18nProvider } from "@multica/core/i18n/react";
-import type { AppsOverview } from "@multica/core/types";
+import { api } from "@workpal/core/api";
+import { I18nProvider } from "@workpal/core/i18n/react";
+import type { AppsOverview } from "@workpal/core/types";
 import enCommon from "../../locales/en/common.json";
 import enSettings from "../../locales/en/settings.json";
 import { AppsSettings } from "./apps-settings";
 
-vi.mock("@multica/core/api", () => ({ api: {
+vi.mock("@workpal/core/api", () => ({ api: {
   getAppsOverview: vi.fn(), listAppCatalog: vi.fn(), updateAppSettings: vi.fn(), updateAppRules: vi.fn(),
 } }));
-vi.mock("@multica/core/hooks", () => ({ useWorkspaceId: () => "ws-1" }));
-vi.mock("@multica/core/workspace/hooks", () => ({ useActorName: () => ({ getActorName: () => "Admin" }) }));
+vi.mock("@workpal/core/hooks", () => ({ useWorkspaceId: () => "ws-1" }));
+vi.mock("@workpal/core/workspace/hooks", () => ({ useActorName: () => ({ getActorName: () => "Admin" }) }));
 vi.mock("../../navigation", () => ({ useNavigation: () => ({ searchParams: new URLSearchParams() }) }));
 
 let overview: AppsOverview;

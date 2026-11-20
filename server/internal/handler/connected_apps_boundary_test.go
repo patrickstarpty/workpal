@@ -12,10 +12,10 @@ import (
 
 	"github.com/go-chi/chi/v5"
 	"github.com/jackc/pgx/v5/pgtype"
-	"github.com/multica-ai/multica/server/internal/auth"
-	"github.com/multica-ai/multica/server/internal/middleware"
-	sdk "github.com/multica-ai/multica/server/pkg/composio"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
+	"workpal.local/workpal/server/internal/auth"
+	"workpal.local/workpal/server/internal/middleware"
+	sdk "workpal.local/workpal/server/pkg/composio"
+	db "workpal.local/workpal/server/pkg/db/generated"
 )
 
 func (f *appsFixture) submitSend(t *testing.T) AppRequestResponse {

@@ -697,7 +697,7 @@
     },
     "publish": {
       "title": "Publish a Plugin",
-      "hint": "A .zip holding multica.plugin.json and every file it names.",
+      "hint": "A .zip holding workpal.plugin.json and every file it names.",
       "upload": "Upload package",
       "published": "Published {{name}} {{version}}",
       "empty": "Nothing has been published in this workspace yet.",
@@ -919,7 +919,7 @@
   },
   "tokens": {
     "title": "API Tokens",
-    "description": "Personal access tokens allow the CLI and external integrations to authenticate with your account. Use one via multica login --token, or as a Bearer token when calling the API.",
+    "description": "Personal access tokens allow the CLI and external integrations to authenticate with your account. Use one via workpal login --token, or as a Bearer token when calling the API.",
     "security_note": "A token grants full access to your account — treat it like a password.",
     "empty": "No API tokens yet.",
     "load_failed": "Could not load your API tokens. Reload the page to try again.",
@@ -1505,8 +1505,8 @@
       "auto_stop_description": "Stop the daemon when Desktop closes.",
       "cli_status": "CLI Status",
       "cli_checking": "Checking…",
-      "cli_installed": "multica CLI is installed and available in PATH.",
-      "cli_missing": "multica CLI not found. Install it to enable daemon management.",
+      "cli_installed": "workpal CLI is installed and available in PATH.",
+      "cli_missing": "workpal CLI not found. Install it to enable daemon management.",
       "installation_guide": "Installation Guide",
       "diagnostics_title": "Diagnostics",
       "state": "State",

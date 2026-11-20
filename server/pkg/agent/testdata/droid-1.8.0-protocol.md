@@ -12,7 +12,7 @@ See the [capability audit](droid-capability-audit.md) for the full official-docu
 Run only with an explicitly authorized test account:
 
 ```sh
-MULTICA_RUN_REAL_AGENT_SMOKE=1 MULTICA_DROID_PATH=/path/to/droid go test -tags=agentintegration ./pkg/agent -run '^TestDroidReal(AgentsMDCanary|TaskSmoke)$' -count=1 -v
+WORKPAL_RUN_REAL_AGENT_SMOKE=1 WORKPAL_DROID_PATH=/path/to/droid go test -tags=agentintegration ./pkg/agent -run '^TestDroidReal(AgentsMDCanary|TaskSmoke)$' -count=1 -v
 ```
 
-These tests access the real CLI only after the `agentintegration` build tag and `MULTICA_RUN_REAL_AGENT_SMOKE=1` gate. Default tests use the test executable as a fake CLI and have no Factory account dependency.
+These tests access the real CLI only after the `agentintegration` build tag and `WORKPAL_RUN_REAL_AGENT_SMOKE=1` gate. Default tests use the test executable as a fake CLI and have no Factory account dependency.

@@ -1,9 +1,9 @@
 "use client";
 
 import { useEffect, useState, type CSSProperties } from "react";
-import { BarChart3, CalendarDays, ChevronDown, FolderKanban, RefreshCw } from "@multica/ui/icons";
-import { Button } from "@multica/ui/components/ui/button";
-import { cn } from "@multica/ui/lib/utils";
+import { BarChart3, CalendarDays, ChevronDown, FolderKanban, RefreshCw } from "@workpal/ui/icons";
+import { Button } from "@workpal/ui/components/ui/button";
+import { cn } from "@workpal/ui/lib/utils";
 import {
   CoachMark,
   DemoAvatar,

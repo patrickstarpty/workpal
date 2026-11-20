@@ -2,31 +2,31 @@ import type { ReactNode } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { renderHook } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { EMPTY_ISSUE_VIEW_PREFERENCE } from "@multica/core/api/schemas";
-import { issueViewPreferenceOptions } from "@multica/core/issue-views/preferences";
-import { NO_PROJECT_SIDEBAR_SOURCE } from "@multica/core/issues/sidebar-list";
-import { SIDEBAR_PROJECTS_SCOPE } from "@multica/core/issues/sidebar-project-prefs";
+import { EMPTY_ISSUE_VIEW_PREFERENCE } from "@workpal/core/api/schemas";
+import { issueViewPreferenceOptions } from "@workpal/core/issue-views/preferences";
+import { NO_PROJECT_SIDEBAR_SOURCE } from "@workpal/core/issues/sidebar-list";
+import { SIDEBAR_PROJECTS_SCOPE } from "@workpal/core/issues/sidebar-project-prefs";
 import {
   DEFAULT_SIDEBAR_PROJECT_SETTINGS,
   useSidebarTreeStore,
-} from "@multica/core/issues/stores/sidebar-tree-store";
-import { projectListOptions } from "@multica/core/projects/queries";
-import type { Project } from "@multica/core/types";
+} from "@workpal/core/issues/stores/sidebar-tree-store";
+import { projectListOptions } from "@workpal/core/projects/queries";
+import type { Project } from "@workpal/core/types";
 import { NavigationProvider, type NavigationAdapter } from "../../navigation";
 import { useShowInSidebar } from "./show-in-sidebar";
 
-vi.mock("@multica/core/paths", async (importOriginal) => {
-  const actual = await importOriginal<typeof import("@multica/core/paths")>();
+vi.mock("@workpal/core/paths", async (importOriginal) => {
+  const actual = await importOriginal<typeof import("@workpal/core/paths")>();
   return { ...actual, useWorkspacePaths: () => actual.paths.workspace("acme") };
 });
-vi.mock("@multica/core/hooks", async (importOriginal) => ({
-  ...(await importOriginal<typeof import("@multica/core/hooks")>()),
+vi.mock("@workpal/core/hooks", async (importOriginal) => ({
+  ...(await importOriginal<typeof import("@workpal/core/hooks")>()),
   useWorkspaceId: () => "ws-1",
 }));
-vi.mock("@multica/core/auth", async (importOriginal) => {
+vi.mock("@workpal/core/auth", async (importOriginal) => {
   const state = { user: { id: "u1" } };
   return {
-    ...(await importOriginal<typeof import("@multica/core/auth")>()),
+    ...(await importOriginal<typeof import("@workpal/core/auth")>()),
     useAuthStore: Object.assign((selector: (s: typeof state) => unknown) => selector(state), {
       getState: () => state,
     }),
@@ -38,8 +38,8 @@ const layout = vi.hoisted(() => ({
   sidebar: null as { isCompact: boolean; setOpenMobile: (open: boolean) => void } | null,
 }));
 vi.mock("../app-shell-context", () => ({ useAppShell: () => layout.shell }));
-vi.mock("@multica/ui/components/ui/sidebar", async (importOriginal) => ({
-  ...(await importOriginal<typeof import("@multica/ui/components/ui/sidebar")>()),
+vi.mock("@workpal/ui/components/ui/sidebar", async (importOriginal) => ({
+  ...(await importOriginal<typeof import("@workpal/ui/components/ui/sidebar")>()),
   useSidebarSafe: () => layout.sidebar,
 }));
 

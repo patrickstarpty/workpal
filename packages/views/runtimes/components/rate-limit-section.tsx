@@ -2,27 +2,27 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { Gauge } from "@multica/ui/icons";
-import { Skeleton } from "@multica/ui/components/ui/skeleton";
+import { Gauge } from "@workpal/ui/icons";
+import { Skeleton } from "@workpal/ui/components/ui/skeleton";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from "@multica/ui/components/ui/tooltip";
-import { cn } from "@multica/ui/lib/utils";
+} from "@workpal/ui/components/ui/tooltip";
+import { cn } from "@workpal/ui/lib/utils";
 import type {
   AgentRuntime,
   RuntimeRateLimits,
   RuntimeRateLimitWindow,
-} from "@multica/core/types";
-import { runtimeRateLimitsOptions } from "@multica/core/runtimes/queries";
+} from "@workpal/core/types";
+import { runtimeRateLimitsOptions } from "@workpal/core/runtimes/queries";
 import {
   describeRateLimitWindow,
   runtimeReportsRateLimits,
   tightestRateLimitWindow,
   type RateLimitTone,
   type RateLimitWindowView,
-} from "@multica/core/runtimes/rate-limits";
+} from "@workpal/core/runtimes/rate-limits";
 import { useT, useTimeAgo } from "../../i18n";
 import { useViewingTimezone } from "../../common/use-viewing-timezone";
 import { ObjectSectionCard, ObjectSectionEmpty } from "../../layout/object-page";

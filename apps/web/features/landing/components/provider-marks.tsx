@@ -1,4 +1,4 @@
-import { cn } from "@multica/ui/lib/utils";
+import { cn } from "@workpal/ui/lib/utils";
 
 import { GitHubMark } from "./shared";
 

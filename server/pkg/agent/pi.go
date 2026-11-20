@@ -1269,7 +1269,7 @@ func buildPiArgsFor(label, sessionPath string, opts ExecOptions, logger *slog.Lo
 }
 
 const (
-	piMcpExtensionDirPrefix = "multica-pi-mcp-"
+	piMcpExtensionDirPrefix = "workpal-pi-mcp-"
 	// Pi 0.99.0 introduced the built-in MCP extension and the
 	// registerMcpServer API used by the task-local adapter below. This is a
 	// capability floor, not a global Pi floor: older Pi installations keep
@@ -1314,7 +1314,7 @@ func (b *piBackend) validatePiMcpVersion() error {
 	return nil
 }
 
-// writePiMcpExtension writes mcp-extension.mjs under a multica-pi-mcp-*
+// writePiMcpExtension writes mcp-extension.mjs under a workpal-pi-mcp-*
 // directory. An empty server list returns an empty path and leaves no
 // directory behind. The caller deletes the directory with
 // removePiMcpExtension. Pi validates each server; the generated extension
@@ -1341,14 +1341,14 @@ func writePiMcpExtension(raw json.RawMessage) (string, error) {
 	script := "const servers = JSON.parse(" + string(literal) + ");\n" +
 		"export default function (pi) {\n" +
 		"  if (typeof pi.registerMcpServer !== \"function\") {\n" +
-		"    throw new Error(\"Multica MCP delivery requires Pi " + piMcpMinVersion + " or newer\");\n" +
+		"    throw new Error(\"Workpal MCP delivery requires Pi " + piMcpMinVersion + " or newer\");\n" +
 		"  }\n" +
 		"  for (const [name, config] of Object.entries(servers)) {\n" +
 		"    try {\n" +
 		"      pi.registerMcpServer(name, config);\n" +
 		"    } catch (error) {\n" +
 		"      const reason = error instanceof Error ? error.message : String(error);\n" +
-		"      console.error(\"[multica] could not register MCP server \" + JSON.stringify(name) + \": \" + reason);\n" +
+		"      console.error(\"[workpal] could not register MCP server \" + JSON.stringify(name) + \": \" + reason);\n" +
 		"    }\n" +
 		"  }\n" +
 		"}\n"
@@ -1365,7 +1365,7 @@ func writePiMcpExtension(raw json.RawMessage) (string, error) {
 }
 
 // removePiMcpExtension deletes the temporary extension directory. It refuses
-// any path whose parent is not a multica-pi-mcp-* directory.
+// any path whose parent is not a workpal-pi-mcp-* directory.
 func removePiMcpExtension(path string) {
 	if path == "" {
 		return
@@ -1461,7 +1461,7 @@ func piSessionDir() (string, error) {
 	if err != nil {
 		return "", err
 	}
-	return filepath.Join(home, ".multica", "pi-sessions"), nil
+	return filepath.Join(home, ".workpal", "pi-sessions"), nil
 }
 
 func newPiSessionPath() (string, error) {

@@ -1,23 +1,23 @@
 "use client";
 
-import { MessageCircle } from "@multica/ui/icons";
+import { MessageCircle } from "@workpal/ui/icons";
 import { useQuery } from "@tanstack/react-query";
-import { cn } from "@multica/ui/lib/utils";
-import { useChatStore } from "@multica/core/chat";
+import { cn } from "@workpal/ui/lib/utils";
+import { useChatStore } from "@workpal/core/chat";
 import {
   chatSessionsOptions,
   countUnreadChatSessions,
   hasPendingChatTasksOptions,
-} from "@multica/core/chat/queries";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { createLogger } from "@multica/core/logger";
-import { useShortcut } from "@multica/core/shortcuts";
+} from "@workpal/core/chat/queries";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { createLogger } from "@workpal/core/logger";
+import { useShortcut } from "@workpal/core/shortcuts";
 import {
   Tooltip,
   TooltipTrigger,
   TooltipContent,
-} from "@multica/ui/components/ui/tooltip";
-import { useIsMobile } from "@multica/ui/hooks/use-mobile";
+} from "@workpal/ui/components/ui/tooltip";
+import { useIsMobile } from "@workpal/ui/hooks/use-mobile";
 import { ShortcutKeycaps } from "../../common/shortcut-keycaps";
 import { useT } from "../../i18n";
 

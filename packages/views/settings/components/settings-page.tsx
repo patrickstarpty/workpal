@@ -24,16 +24,16 @@ import {
   X,
   Workflow,
   Zap,
-} from "@multica/ui/icons";
-import { useCurrentWorkspace, useWorkspacePaths } from "@multica/core/paths";
-import { useFeatureEnabled } from "@multica/core/config";
-import { useCurrentMember } from "@multica/core/permissions";
+} from "@workpal/ui/icons";
+import { useCurrentWorkspace, useWorkspacePaths } from "@workpal/core/paths";
+import { useFeatureEnabled } from "@workpal/core/config";
+import { useCurrentMember } from "@workpal/core/permissions";
 import {
   BILLING_WORKSPACE_SUBSCRIPTIONS_FLAG,
   PLUGINS_V1_FLAG,
-} from "@multica/core/feature-flags";
-import { TooltipHint } from "@multica/ui/components/common/tooltip-hint";
-import { cn } from "@multica/ui/lib/utils";
+} from "@workpal/core/feature-flags";
+import { TooltipHint } from "@workpal/ui/components/common/tooltip-hint";
+import { cn } from "@workpal/ui/lib/utils";
 import { resolveSettingsLocation, settingsHref } from "./settings-navigation";
 import { AppLink, useNavigation } from "../../navigation";
 import { AccountTab } from "./account-tab";

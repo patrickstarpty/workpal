@@ -15,7 +15,7 @@ import (
 
 	"github.com/jackc/pgx/v5/pgtype"
 
-	"github.com/multica-ai/multica/server/internal/integrations/wecom"
+	"workpal.local/workpal/server/internal/integrations/wecom"
 )
 
 func TestWecomInstallationResponseIncludesDisplayNameWithoutCredentials(t *testing.T) {

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Registry-level behaviour of scripts/dev-env.sh, with no services started.
 #
-# Everything here runs against a throwaway MULTICA_DEV_HOME holding hand-written
+# Everything here runs against a throwaway WORKPAL_DEV_HOME holding hand-written
 # manifests, so the verbs are exercised end to end without a database, a
 # backend, or a port.
 set -euo pipefail
@@ -10,10 +10,10 @@ root_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 tmp_dir="$(mktemp -d)"
 trap 'rm -rf "$tmp_dir"' EXIT
 
-export MULTICA_DEV_HOME="$tmp_dir/dev"
-export MULTICA_DEV_WORKSPACES_PARENT="$tmp_dir/workspaces-parent"
-export MULTICA_DEV_DESKTOP_APP_DATA="$tmp_dir/app-data"
-export MULTICA_DEV_PROFILES_HOME="$tmp_dir/profiles"
+export WORKPAL_DEV_HOME="$tmp_dir/dev"
+export WORKPAL_DEV_WORKSPACES_PARENT="$tmp_dir/workspaces-parent"
+export WORKPAL_DEV_DESKTOP_APP_DATA="$tmp_dir/app-data"
+export WORKPAL_DEV_PROFILES_HOME="$tmp_dir/profiles"
 
 fake_bin="$tmp_dir/bin"
 mkdir -p "$fake_bin"
@@ -49,8 +49,8 @@ dev_env() {
 write_manifest() {
   local name=$1 dir=$2 offset=$3
   local profile="dev-dev-env-test-$offset"
-  mkdir -p "$MULTICA_DEV_HOME/envs/$name/logs"
-  cat > "$MULTICA_DEV_HOME/envs/$name/manifest.env" <<EOF
+  mkdir -p "$WORKPAL_DEV_HOME/envs/$name/logs"
+  cat > "$WORKPAL_DEV_HOME/envs/$name/manifest.env" <<EOF
 NAME=$name
 DIR=$(printf '%q' "$dir")
 CREATED_AT=2026-01-01T00:00:00Z
@@ -60,10 +60,10 @@ ENV_FILE=.env.example
 OFFSET=$offset
 BACKEND_PORT=$((18080 + offset))
 FRONTEND_PORT=$((13000 + offset))
-DB_NAME=multica_dev_env_test_$offset
-DATABASE_URL=postgres://multica:multica@localhost:5432/multica_dev_env_test_$offset?sslmode=disable
+DB_NAME=workpal_dev_env_test_$offset
+DATABASE_URL=postgres://workpal:workpal@localhost:5432/workpal_dev_env_test_$offset?sslmode=disable
 PROFILE=$profile
-WORKSPACES_ROOT=$(printf '%q' "$MULTICA_DEV_WORKSPACES_PARENT/multica_workspaces_$profile")
+WORKSPACES_ROOT=$(printf '%q' "$WORKPAL_DEV_WORKSPACES_PARENT/workpal_workspaces_$profile")
 DESKTOP_RENDERER_PORT=$((5174 + offset))
 DESKTOP_APP_SUFFIX=$name
 EOF
@@ -345,7 +345,7 @@ assert_api_source_fingerprint() (
   [ -n "$clean" ] || fail "fingerprint of a clean tree is empty"
   [ "$(api_source_fingerprint)" = "$clean" ] || fail "fingerprint is not stable"
 
-  printf 'built\n' > "$repo/server/bin/multica"
+  printf 'built\n' > "$repo/server/bin/workpal"
   printf 'edited\n' >> "$repo/README.md"
   fingerprint_is "ignored file and edit outside server/" same >/dev/null
 
@@ -465,32 +465,32 @@ require_contains "$out" "make down C=daemon"
 # Commands launched through env-exec must not inherit the daemon-task identity
 # hints that make human/profile CLI commands reject --profile.
 write_manifest "clean-env-903" "$root_dir" 903
-MULTICA_TASK_CONFIG_ROOT=/task/config \
-MULTICA_TASK_WORKSPACES_ROOT=/task/workspaces \
-MULTICA_WORKSPACES_ROOT=/owner/workspaces \
+WORKPAL_TASK_CONFIG_ROOT=/task/config \
+WORKPAL_TASK_WORKSPACES_ROOT=/task/workspaces \
+WORKPAL_WORKSPACES_ROOT=/owner/workspaces \
   dev_env exec clean-env-903 -- sh -c '
-    test -z "${MULTICA_TASK_CONFIG_ROOT:-}" &&
-    test -z "${MULTICA_TASK_WORKSPACES_ROOT:-}" &&
-    test "$MULTICA_WORKSPACES_ROOT" = "$1" &&
-    test "$MULTICA_DEV_ENV" = clean-env-903
-  ' _ "$MULTICA_DEV_WORKSPACES_PARENT/multica_workspaces_dev-dev-env-test-903" \
+    test -z "${WORKPAL_TASK_CONFIG_ROOT:-}" &&
+    test -z "${WORKPAL_TASK_WORKSPACES_ROOT:-}" &&
+    test "$WORKPAL_WORKSPACES_ROOT" = "$1" &&
+    test "$WORKPAL_DEV_ENV" = clean-env-903
+  ' _ "$WORKPAL_DEV_WORKSPACES_PARENT/workpal_workspaces_dev-dev-env-test-903" \
   > "$out" 2>&1 || fail "env-exec leaked daemon task identity or owner workspaces root, or did not name its environment"
 # Outside a task nothing was stripped, so the CLI must still be free to call a
 # marker in the checkout a leftover.
-env -u MULTICA_TASK_ID -u MULTICA_AGENT_ID -u MULTICA_TASK_CONFIG_ROOT -u MULTICA_DEV_ENV \
-  bash "$root_dir/scripts/dev-env.sh" exec clean-env-903 -- sh -c 'test -z "${MULTICA_DEV_ENV:-}"' \
+env -u WORKPAL_TASK_ID -u WORKPAL_AGENT_ID -u WORKPAL_TASK_CONFIG_ROOT -u WORKPAL_DEV_ENV \
+  bash "$root_dir/scripts/dev-env.sh" exec clean-env-903 -- sh -c 'test -z "${WORKPAL_DEV_ENV:-}"' \
   > "$out" 2>&1 || fail "env-exec named its environment for a run that stripped no task identity"
 
 # scripts/desktop-cdp.mjs finds Desktop through env-exec: a recorded CDP port
 # becomes its endpoint, and an environment without one never inherits a URL.
 write_manifest "cdp-exec-906" "$root_dir" 906
-printf 'DESKTOP_CDP_PORT=10129\n' >> "$MULTICA_DEV_HOME/envs/cdp-exec-906/manifest.env"
+printf 'DESKTOP_CDP_PORT=10129\n' >> "$WORKPAL_DEV_HOME/envs/cdp-exec-906/manifest.env"
 dev_env exec cdp-exec-906 -- sh -c '
-  test "$MULTICA_DEV_DESKTOP_CDP_URL" = http://127.0.0.1:10129 &&
-  test "$MULTICA_DEV_DESKTOP_RENDERER_URL" = http://localhost:6080
+  test "$WORKPAL_DEV_DESKTOP_CDP_URL" = http://127.0.0.1:10129 &&
+  test "$WORKPAL_DEV_DESKTOP_RENDERER_URL" = http://localhost:6080
 ' > "$out" 2>&1 || fail "env-exec did not export the Desktop CDP and renderer URLs"
-MULTICA_DEV_DESKTOP_CDP_URL=http://127.0.0.1:1 dev_env exec clean-env-903 -- sh -c '
-  test -z "${MULTICA_DEV_DESKTOP_CDP_URL:-}"
+WORKPAL_DEV_DESKTOP_CDP_URL=http://127.0.0.1:1 dev_env exec clean-env-903 -- sh -c '
+  test -z "${WORKPAL_DEV_DESKTOP_CDP_URL:-}"
 ' > "$out" 2>&1 || fail "env-exec leaked a CDP URL into an environment without one"
 
 # A health response without process identity is never proof that the process is
@@ -556,7 +556,7 @@ daemon_fake="$tmp_dir/daemon-fake"
 mkdir -p "$daemon_fake/server/bin" "$daemon_fake/go-bin"
 printf '#!/usr/bin/env bash\nexit 0\n' > "$daemon_fake/go-bin/go"
 chmod +x "$daemon_fake/go-bin/go"
-cat > "$daemon_fake/server/bin/multica" <<'EOF'
+cat > "$daemon_fake/server/bin/workpal" <<'EOF'
 #!/usr/bin/env bash
 printf '%s\n' "$*" >> "$FAKE_DAEMON/calls"
 case "$1 $2" in
@@ -567,7 +567,7 @@ case "$1 $2" in
       "$(cat "$FAKE_DAEMON/start_commit")" > "$FAKE_DAEMON/status" ;;
 esac
 EOF
-chmod +x "$daemon_fake/server/bin/multica"
+chmod +x "$daemon_fake/server/bin/workpal"
 
 # Args: case, commit the running daemon reports, recorded "<pid> <hash>" (or
 # "-" for none), commit a fresh start reports, expected exit, expected output,
@@ -584,8 +584,8 @@ assert_start_daemon() (
   source "$root_dir/scripts/dev-env.sh"
   PATH="$daemon_fake/go-bin:$PATH"
   DIR="$root_dir" PROFILE=dev-test STATE_DIR="$FAKE_DAEMON" PROFILE_DIR="$FAKE_DAEMON"
-  WORKSPACES_ROOT="$FAKE_DAEMON/ws" MULTICA_BIN="$daemon_fake/server/bin/multica"
-  bin_hash="$(file_sha256 "$MULTICA_BIN")"
+  WORKSPACES_ROOT="$FAKE_DAEMON/ws" WORKPAL_BIN="$daemon_fake/server/bin/workpal"
+  bin_hash="$(file_sha256 "$WORKPAL_BIN")"
   [ -n "$bin_hash" ] || fail "file_sha256 printed nothing"
   case "$recorded" in
     -) ;;
@@ -620,8 +620,8 @@ assert_daemon_state() (
   # shellcheck disable=SC1090
   source "$root_dir/scripts/dev-env.sh"
   DIR="$root_dir" PROFILE=dev-test STATE_DIR="$FAKE_DAEMON" PROFILE_DIR="$FAKE_DAEMON"
-  WORKSPACES_ROOT="$FAKE_DAEMON/ws" MULTICA_BIN="$daemon_fake/server/bin/multica"
-  [ "$recorded" = - ] || printf '5001 %s\n' "$(file_sha256 "$MULTICA_BIN")" > "$(daemon_build_file)"
+  WORKSPACES_ROOT="$FAKE_DAEMON/ws" WORKPAL_BIN="$daemon_fake/server/bin/workpal"
+  [ "$recorded" = - ] || printf '5001 %s\n' "$(file_sha256 "$WORKPAL_BIN")" > "$(daemon_build_file)"
   row="$(component_state daemon)"
   [ "${row%%|*}" = "$expected_state" ] || fail "$case_name: daemon state row '$row', want $expected_state"
   case "$row" in *"$expected"*) ;; *) fail "$case_name: daemon state row '$row', want '$expected'" ;; esac
@@ -637,7 +637,7 @@ assert_daemon_state unrecorded "$head_commit" - stale "run make up C=daemon to r
 # A recorded CDP port is reported for Playwright, and the next allocation skips
 # a port another environment already holds.
 write_manifest "cdp-905" "$tmp_dir/checkout" 905
-printf 'DESKTOP_CDP_PORT=19999\n' >> "$MULTICA_DEV_HOME/envs/cdp-905/manifest.env"
+printf 'DESKTOP_CDP_PORT=19999\n' >> "$WORKPAL_DEV_HOME/envs/cdp-905/manifest.env"
 dev_env status cdp-905 --json > "$out" 2>&1 || fail "status --json with a CDP port must succeed"
 node -e '
   const payload = JSON.parse(require("fs").readFileSync(process.argv[1], "utf8"));
@@ -700,7 +700,7 @@ wait "$tree_root" 2>/dev/null || true
 # Desktop's own daemon outlives Electron. Stopping Desktop stops it, and only a
 # confirmed stop lets destroy remove the profile Desktop derived from this
 # backend's URL; that profile holds the pid a retried destroy needs.
-desktop_profile_dir="$MULTICA_DEV_PROFILES_HOME/desktop-localhost-18080"
+desktop_profile_dir="$WORKPAL_DEV_PROFILES_HOME/desktop-localhost-18080"
 mkdir -p "$desktop_profile_dir"
 desktop_daemon="$(sleep 60 > /dev/null 2>&1 & printf '%s' "$!")"
 printf '%s\n' "$desktop_daemon" > "$desktop_profile_dir/daemon.pid"
@@ -709,7 +709,7 @@ stop_mode="$tmp_dir/daemon-stop-mode"
 mkdir -p "$fake_checkout/server/bin"
 # The fake CLI stops the daemon only in "kill" mode. "lies" exits 0 with the
 # daemon still alive, like a plain `daemon stop` that is still finishing a run.
-cat > "$fake_checkout/server/bin/multica" <<EOF
+cat > "$fake_checkout/server/bin/workpal" <<EOF
 #!/usr/bin/env bash
 [ "\$*" = "daemon stop --force --profile desktop-localhost-18080" ] || exit 0
 case "\$(cat "$stop_mode")" in
@@ -721,14 +721,14 @@ case "\$(cat "$stop_mode")" in
   *) exit 1 ;;
 esac
 EOF
-chmod +x "$fake_checkout/server/bin/multica"
+chmod +x "$fake_checkout/server/bin/workpal"
 
 printf 'lies' > "$stop_mode"
 status=0
 (
   # shellcheck disable=SC1090
   source "$root_dir/scripts/dev-env.sh"
-  BACKEND_PORT=18080 MULTICA_BIN="$fake_checkout/server/bin/multica" DIR="$fake_checkout"
+  BACKEND_PORT=18080 WORKPAL_BIN="$fake_checkout/server/bin/workpal" DIR="$fake_checkout"
   stop_desktop_daemon
 ) > "$out" 2>&1 || status=$?
 [ "$status" -ne 0 ] || fail "stop_desktop_daemon trusted a stop that left the daemon running"
@@ -740,7 +740,7 @@ status=0
 dev_env destroy desktop-profile-906 --yes > "$out" 2>&1 || status=$?
 [ "$status" -ne 0 ] || fail "destroy succeeded while Desktop's daemon was still running"
 [ -f "$desktop_profile_dir/daemon.pid" ] || fail "a failed destroy removed Desktop's daemon pid"
-[ -f "$MULTICA_DEV_HOME/envs/desktop-profile-906/manifest.env" ] \
+[ -f "$WORKPAL_DEV_HOME/envs/desktop-profile-906/manifest.env" ] \
   || fail "a failed destroy discarded the manifest"
 require_contains "$out" "kept Desktop's CLI profile desktop-localhost-18080"
 
@@ -775,7 +775,7 @@ require_contains "$out" "orphan-902 would be collected"
 if grep -Fq "probe-901 would be collected" "$out"; then
   fail "gc must not collect an environment whose directory still exists"
 fi
-[ -f "$MULTICA_DEV_HOME/envs/orphan-902/manifest.env" ] || fail "gc --dry-run deleted a manifest"
+[ -f "$WORKPAL_DEV_HOME/envs/orphan-902/manifest.env" ] || fail "gc --dry-run deleted a manifest"
 
 # A failed database drop keeps the manifest and slot so cleanup can be retried;
 # destroy must never print success and forget the only deletion recipe.
@@ -783,7 +783,7 @@ write_manifest "drop-fails-904" "$root_dir" 904
 status=0
 FAIL_DROP=1 dev_env destroy drop-fails-904 --yes > "$out" 2>&1 || status=$?
 [ "$status" -ne 0 ] || fail "destroy succeeded after DROP DATABASE failed"
-[ -f "$MULTICA_DEV_HOME/envs/drop-fails-904/manifest.env" ] \
+[ -f "$WORKPAL_DEV_HOME/envs/drop-fails-904/manifest.env" ] \
   || fail "destroy discarded the manifest after DROP DATABASE failed"
 require_contains "$out" "manifest and slot were kept"
 dev_env destroy drop-fails-904 --yes > "$out" 2>&1 || fail "retrying destroy after database recovery failed"
@@ -793,7 +793,7 @@ dev_env destroy drop-fails-904 --yes > "$out" 2>&1 || fail "retrying destroy aft
 # makes the registry an allocator rather than a second place to leak.
 # ---------------------------------------------------------------------------
 dev_env destroy probe-901 --yes > "$out" 2>&1 || fail "destroy must succeed"
-[ ! -d "$MULTICA_DEV_HOME/envs/probe-901" ] || fail "destroy left the environment directory behind"
+[ ! -d "$WORKPAL_DEV_HOME/envs/probe-901" ] || fail "destroy left the environment directory behind"
 
 dev_env list > "$out" 2>&1 || fail "list must succeed after destroy"
 if grep -Fq "probe-901" "$out"; then
@@ -803,7 +803,7 @@ fi
 # Declining the confirmation is a successful no-op, not a failure.
 printf 'n\n' | dev_env destroy orphan-902 > "$out" 2>&1 || fail "declining destroy must exit 0"
 require_contains "$out" "Cancelled."
-[ -d "$MULTICA_DEV_HOME/envs/orphan-902" ] || fail "declined destroy removed the environment anyway"
+[ -d "$WORKPAL_DEV_HOME/envs/orphan-902" ] || fail "declined destroy removed the environment anyway"
 
 # ---------------------------------------------------------------------------
 # uutils mkdir (Ubuntu 26.04) reports success to a caller that lost the race

@@ -29,8 +29,8 @@ import (
 
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgtype"
-	"github.com/multica-ai/multica/server/internal/issuestatus"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
+	"workpal.local/workpal/server/internal/issuestatus"
+	db "workpal.local/workpal/server/pkg/db/generated"
 )
 
 // Handler types a project can hand an issue to when it enters a status.
@@ -866,24 +866,24 @@ func Brief(in BriefInput) string {
 	switch {
 	case span.ok:
 		if span.start != "" {
-			fmt.Fprintf(&b, "Starting work  → multica issue status %s %s\n", in.IssueIdentifier, span.start)
+			fmt.Fprintf(&b, "Starting work  → workpal issue status %s %s\n", in.IssueIdentifier, span.start)
 		}
 		if span.deliver != "" {
-			fmt.Fprintf(&b, "Step done      → multica issue status %s %s%s\n", in.IssueIdentifier, span.deliver, handsOffTo(span.deliver))
+			fmt.Fprintf(&b, "Step done      → workpal issue status %s %s%s\n", in.IssueIdentifier, span.deliver, handsOffTo(span.deliver))
 		} else {
 			fmt.Fprintf(&b, "Step done      → leave the issue at `%s`; `done` is set by a human\n", in.StatusKey)
 		}
 	default:
 		if next := in.Workflow.NextStatus(in.StatusKey); next != "" {
-			fmt.Fprintf(&b, "Step done      → multica issue status %s %s%s\n", in.IssueIdentifier, next, handsOffTo(next))
+			fmt.Fprintf(&b, "Step done      → workpal issue status %s %s%s\n", in.IssueIdentifier, next, handsOffTo(next))
 		}
 	}
 	if step.BackStatusKey != "" {
-		fmt.Fprintf(&b, "Needs changes  → multica issue status %s %s%s\n", in.IssueIdentifier, step.BackStatusKey, handsOffTo(step.BackStatusKey))
+		fmt.Fprintf(&b, "Needs changes  → workpal issue status %s %s%s\n", in.IssueIdentifier, step.BackStatusKey, handsOffTo(step.BackStatusKey))
 	}
 	switch {
 	case in.Workflow.Has(issuestatus.Blocked):
-		fmt.Fprintf(&b, "Can't proceed  → multica issue status %s blocked, then comment why\n", in.IssueIdentifier)
+		fmt.Fprintf(&b, "Can't proceed  → workpal issue status %s blocked, then comment why\n", in.IssueIdentifier)
 	case step.BackStatusKey != "":
 		b.WriteString("Can't proceed  → comment why, then run Needs changes\n")
 	default:

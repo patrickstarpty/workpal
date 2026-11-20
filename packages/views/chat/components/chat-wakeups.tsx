@@ -3,14 +3,14 @@
 import { useEffect, useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { toast } from "sonner";
-import { AlarmClock, RotateCcw, X } from "@multica/ui/icons";
-import { IconButton } from "@multica/ui/components/common/icon-button";
-import { Button } from "@multica/ui/components/ui/button";
-import { Popover, PopoverContent, PopoverTrigger } from "@multica/ui/components/ui/popover";
-import { cn } from "@multica/ui/lib/utils";
-import { chatWakeupsOptions } from "@multica/core/chat/queries";
-import { useCancelChatWakeup, useRetryChatWakeup } from "@multica/core/chat/mutations";
-import type { ChatMessage, ChatWakeup } from "@multica/core/types";
+import { AlarmClock, RotateCcw, X } from "@workpal/ui/icons";
+import { IconButton } from "@workpal/ui/components/common/icon-button";
+import { Button } from "@workpal/ui/components/ui/button";
+import { Popover, PopoverContent, PopoverTrigger } from "@workpal/ui/components/ui/popover";
+import { cn } from "@workpal/ui/lib/utils";
+import { chatWakeupsOptions } from "@workpal/core/chat/queries";
+import { useCancelChatWakeup, useRetryChatWakeup } from "@workpal/core/chat/mutations";
+import type { ChatMessage, ChatWakeup } from "@workpal/core/types";
 import { useLocale, useT } from "../../i18n";
 import { CHAT_COLUMN, CHAT_GUTTER } from "./chat-column";
 

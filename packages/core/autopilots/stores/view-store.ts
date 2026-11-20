@@ -87,7 +87,7 @@ export const useAutopilotsViewStore = createCollectionViewStore<
   { scope: AutopilotScope },
   { setScope: (scope: AutopilotScope) => void }
 >({
-  name: "multica_autopilots_view",
+  name: "workpal_autopilots_view",
   defaultSortField: "lastRun",
   sortDefaultDirection: AUTOPILOT_SORT_DEFAULT_DIRECTION,
   defaultHiddenColumns: AUTOPILOT_DEFAULT_HIDDEN_COLUMNS,

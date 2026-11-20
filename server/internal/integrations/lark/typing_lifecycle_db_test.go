@@ -8,8 +8,8 @@ import (
 	"github.com/google/uuid"
 	"github.com/jackc/pgx/v5/pgtype"
 	"github.com/jackc/pgx/v5/pgxpool"
-	dbfx "github.com/multica-ai/multica/server/internal/testutil"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
+	dbfx "workpal.local/workpal/server/internal/testutil"
+	db "workpal.local/workpal/server/pkg/db/generated"
 )
 
 type typingDBFixture struct {
@@ -33,7 +33,7 @@ func newTypingDBFixture(t *testing.T) *typingDBFixture {
 	t.Cleanup(pool.Close)
 	fx := dbfx.New(pool, "", "")
 	suffix := uuid.NewString()
-	fx.UserID = fx.User(t, "Typing tester", "typing-"+suffix+"@multica.test")
+	fx.UserID = fx.User(t, "Typing tester", "typing-"+suffix+"@workpal.test")
 	fx.WorkspaceID = fx.Workspace(t, "Typing workspace", "typing-"+suffix)
 	runtimeID := fx.Runtime(t, "Typing runtime")
 	agentID := fx.Agent(t, "Typing agent", runtimeID)

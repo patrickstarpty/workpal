@@ -26,8 +26,8 @@ describe("ActorAvatar shape", () => {
   });
 
   it("fills a system avatar with the mark's tile colour", () => {
-    const avatar = avatarOf(<ActorAvatar name="Multica" initials="M" isSystem />);
-    expect(avatar.classList).toContain("bg-multica-ink");
+    const avatar = avatarOf(<ActorAvatar name="Workpal" initials="M" isSystem />);
+    expect(avatar.classList).toContain("bg-workpal-ink");
     expect(avatar.classList).not.toContain("bg-muted");
   });
 });

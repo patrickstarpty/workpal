@@ -11,7 +11,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/multica-ai/multica/server/internal/daemon/repocache"
+	"workpal.local/workpal/server/internal/daemon/repocache"
 )
 
 func TestRepoCheckoutEquivalentURLsUseRegisteredRepo(t *testing.T) {

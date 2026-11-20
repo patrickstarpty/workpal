@@ -1,6 +1,6 @@
 package main
 
-// wecom_env_documented_test.go — every MULTICA_WECOM_* knob the boot block
+// wecom_env_documented_test.go — every WORKPAL_WECOM_* knob the boot block
 // reads has to be reachable from a self-hosted deployment.
 //
 // Two files stand between an operator and one of these variables, and both are
@@ -10,7 +10,7 @@ package main
 // because compose only forwards what its `environment:` block names, so a
 // variable missing there is set, ignored, and silent about it.
 //
-// MULTICA_WECOM_DEFAULT_LOCALE was missing from both. router.go has read it
+// WORKPAL_WECOM_DEFAULT_LOCALE was missing from both. router.go has read it
 // since the copy pack started following the reader's language, and a
 // self-hosted deployment that set it on the host got the built-in zh-Hans with
 // nothing saying why.
@@ -36,13 +36,13 @@ const routerSourceFile = "router.go"
 // the working directory, so this is stable wherever the tree is checked out.
 const repoRoot = "../../.."
 
-var wecomEnvName = regexp.MustCompile(`^MULTICA_WECOM_[A-Z0-9_]+$`)
+var wecomEnvName = regexp.MustCompile(`^WORKPAL_WECOM_[A-Z0-9_]+$`)
 
 func TestEveryWecomEnvVarIsDocumentedAndPassedIntoTheContainer(t *testing.T) {
 	t.Parallel()
 
 	// The names as the code asks for them: string literals in router.go, not
-	// words in a comment. secretbox.LoadKey("MULTICA_WECOM_SECRET_KEY") counts
+	// words in a comment. secretbox.LoadKey("WORKPAL_WECOM_SECRET_KEY") counts
 	// the same as os.Getenv — what matters is that the process reads it, not
 	// which helper does the reading.
 	fset := token.NewFileSet()

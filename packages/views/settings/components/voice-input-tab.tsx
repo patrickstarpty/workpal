@@ -1,18 +1,18 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { X } from "@multica/ui/icons";
-import { Button } from "@multica/ui/components/ui/button";
+import { X } from "@workpal/ui/icons";
+import { Button } from "@workpal/ui/components/ui/button";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@multica/ui/components/ui/select";
-import { Switch } from "@multica/ui/components/ui/switch";
-import { cn } from "@multica/ui/lib/utils";
-import { useShortcut } from "@multica/core/shortcuts";
+} from "@workpal/ui/components/ui/select";
+import { Switch } from "@workpal/ui/components/ui/switch";
+import { cn } from "@workpal/ui/lib/utils";
+import { useShortcut } from "@workpal/core/shortcuts";
 import {
   MAX_VOCABULARY_WORDS,
   pickVoiceModel,
@@ -20,7 +20,7 @@ import {
   VOICE_LANGUAGES,
   type VoiceActivation,
   type VoiceLanguage,
-} from "@multica/core/voice";
+} from "@workpal/core/voice";
 import { SegmentedToggle } from "../../common/segmented-toggle";
 import { ShortcutKeycaps } from "../../common/shortcut-keycaps";
 import { AppLink, useOptionalNavigation } from "../../navigation";

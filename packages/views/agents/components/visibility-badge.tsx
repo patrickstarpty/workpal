@@ -1,8 +1,8 @@
 "use client";
 
-import { Globe, Lock } from "@multica/ui/icons";
-import type { AgentVisibility } from "@multica/core/types";
-import { Tooltip, TooltipTrigger, TooltipContent } from "@multica/ui/components/ui/tooltip";
+import { Globe, Lock } from "@workpal/ui/icons";
+import type { AgentVisibility } from "@workpal/core/types";
+import { Tooltip, TooltipTrigger, TooltipContent } from "@workpal/ui/components/ui/tooltip";
 import { useT } from "../../i18n";
 
 /**

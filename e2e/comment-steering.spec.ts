@@ -50,8 +50,8 @@ for (const provider of ["codex", "pi"]) {
       );
 
       await page.addInitScript((token) => {
-        localStorage.setItem("multica_token", token!);
-        localStorage.setItem("multica:chat:isOpen", "false");
+        localStorage.setItem("workpal_token", token!);
+        localStorage.setItem("workpal:chat:isOpen", "false");
       }, api.getToken());
       await page.setViewportSize({ width: 1440, height: 1000 });
       await page.goto(`/${workspace.slug}/issues/${issue.id}`, { waitUntil: "domcontentloaded" });

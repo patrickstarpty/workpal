@@ -15,12 +15,12 @@ import (
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgtype"
 
-	"github.com/multica-ai/multica/server/internal/logger"
-	obsmetrics "github.com/multica-ai/multica/server/internal/metrics"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
-	"github.com/multica-ai/multica/server/pkg/dbid"
-	"github.com/multica-ai/multica/server/pkg/protocol"
-	"github.com/multica-ai/multica/server/pkg/redact"
+	"workpal.local/workpal/server/internal/logger"
+	obsmetrics "workpal.local/workpal/server/internal/metrics"
+	db "workpal.local/workpal/server/pkg/db/generated"
+	"workpal.local/workpal/server/pkg/dbid"
+	"workpal.local/workpal/server/pkg/protocol"
+	"workpal.local/workpal/server/pkg/redact"
 )
 
 // Environment commands let a member stop, restart, start or read the log of
@@ -251,7 +251,7 @@ func (h *Handler) commandIssueEnvironment(w http.ResponseWriter, r *http.Request
 		writeError(w, http.StatusConflict, "only environments the repository declares can be restarted or have a log")
 		return
 	case !env.Controllable:
-		writeError(w, http.StatusConflict, "update Multica on this machine to control its environments from the sidebar")
+		writeError(w, http.StatusConflict, "update Workpal on this machine to control its environments from the sidebar")
 		return
 	}
 	rt, ok := h.environmentRuntime(w, r, issue, env.RuntimeID, control)

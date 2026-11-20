@@ -10,7 +10,7 @@ import (
 	"testing"
 )
 
-const eePath = "github.com/multica-ai/multica/server/ee"
+const eePath = "workpal.local/workpal/server/ee"
 
 // The open-source server must build and run without server/ee, so the only
 // file outside it that may import it is the build-tagged link in cmd/server.

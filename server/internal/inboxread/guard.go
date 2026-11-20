@@ -15,7 +15,7 @@ import (
 
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgconn"
-	"github.com/multica-ai/multica/server/internal/metrics"
+	"workpal.local/workpal/server/internal/metrics"
 )
 
 var ErrBusy = errors.New("inbox read capacity unavailable")

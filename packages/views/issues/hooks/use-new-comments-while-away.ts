@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import type { TimelineEntry } from "@multica/core/types";
-import { isDeletedComment } from "@multica/core/issues/comment-deletion";
+import type { TimelineEntry } from "@workpal/core/types";
+import { isDeletedComment } from "@workpal/core/issues/comment-deletion";
 
 /**
  * Comments that arrived while the reader was away from the latest entry

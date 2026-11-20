@@ -9,8 +9,8 @@ import {
   useAppearanceStore,
   useInstalledThemesStore,
   type Theme,
-} from "@multica/core/appearance";
-import { useTheme } from "@multica/ui/components/common/theme-provider";
+} from "@workpal/core/appearance";
+import { useTheme } from "@workpal/ui/components/common/theme-provider";
 import { useT } from "../../i18n";
 
 export type PreviewMode = "light" | "dark";

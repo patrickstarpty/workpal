@@ -12,8 +12,8 @@
  */
 
 import type { ReactNode } from "react";
-import { cn } from "@multica/ui/lib/utils";
-import { Download, Eye, FileText, Loader2, Trash2 } from "@multica/ui/icons";
+import { cn } from "@workpal/ui/lib/utils";
+import { Download, Eye, FileText, Loader2, Trash2 } from "@workpal/ui/icons";
 import { useT } from "../i18n";
 import { DeferredTooltip } from "../common/deferred-tooltip";
 import { formatBytes } from "../common/format-bytes";

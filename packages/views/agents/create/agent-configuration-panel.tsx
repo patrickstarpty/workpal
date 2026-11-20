@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, type ReactNode } from "react";
 import {useQuery} from "@tanstack/react-query";
-import {runtimeModelsOptions} from "@multica/core/runtimes";
+import {runtimeModelsOptions} from "@workpal/core/runtimes";
 import {findModelCapabilityEntry,thinkingLevelRequiredForProvider} from "../components/inspector/model-capability";
 import {
   AGENT_DESCRIPTION_MAX_LENGTH,
@@ -10,13 +10,13 @@ import {
   applyDraftRuntimeChange,
   type AgentDraft,
   type AgentPermissionScope,
-} from "@multica/core/agents";
-import { useConfigStore } from "@multica/core/config";
-import type { MemberWithUser, RuntimeDevice } from "@multica/core/types";
-import { Checkbox } from "@multica/ui/components/ui/checkbox";
-import { Input } from "@multica/ui/components/ui/input";
-import { Textarea } from "@multica/ui/components/ui/textarea";
-import { cn } from "@multica/ui/lib/utils";
+} from "@workpal/core/agents";
+import { useConfigStore } from "@workpal/core/config";
+import type { MemberWithUser, RuntimeDevice } from "@workpal/core/types";
+import { Checkbox } from "@workpal/ui/components/ui/checkbox";
+import { Input } from "@workpal/ui/components/ui/input";
+import { Textarea } from "@workpal/ui/components/ui/textarea";
+import { cn } from "@workpal/ui/lib/utils";
 import { ActorAvatar } from "../../common/actor-avatar";
 import { AvatarUploadControl } from "../../common/avatar-upload-control";
 import { useT } from "../../i18n";

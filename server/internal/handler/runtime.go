@@ -15,13 +15,13 @@ import (
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgconn"
 	"github.com/jackc/pgx/v5/pgtype"
-	"github.com/multica-ai/multica/server/internal/agentconfig"
-	obsmetrics "github.com/multica-ai/multica/server/internal/metrics"
-	"github.com/multica-ai/multica/server/internal/service"
-	"github.com/multica-ai/multica/server/internal/util"
-	"github.com/multica-ai/multica/server/pkg/agent"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
-	"github.com/multica-ai/multica/server/pkg/protocol"
+	"workpal.local/workpal/server/internal/agentconfig"
+	obsmetrics "workpal.local/workpal/server/internal/metrics"
+	"workpal.local/workpal/server/internal/service"
+	"workpal.local/workpal/server/internal/util"
+	"workpal.local/workpal/server/pkg/agent"
+	db "workpal.local/workpal/server/pkg/db/generated"
+	"workpal.local/workpal/server/pkg/protocol"
 )
 
 type AgentRuntimeResponse struct {
@@ -708,7 +708,7 @@ func canEditRuntime(member db.Member, rt db.AgentRuntime) bool {
 }
 
 // getAgentRuntime reads one agent_runtime row by id and attributes the read to
-// source, which labels multica_agent_runtime_lookup_total (MUL-6884). Pick the
+// source, which labels workpal_agent_runtime_lookup_total (MUL-6884). Pick the
 // obsmetrics.RuntimeLookupSource* constant that names the product behaviour
 // driving the read, not the file the call happens to live in: a poll loop
 // counted as generic API traffic is exactly the confusion the metric exists to
@@ -866,7 +866,7 @@ func (h *Handler) runtimeWorkspaceAccessRevocationResponse(plan runtimeWorkspace
 // 404 for that case prevents a known runtime ID from becoming an oracle.
 //
 // source names the product behaviour behind the read for
-// multica_agent_runtime_lookup_total (MUL-6884). It matters here more than
+// workpal_agent_runtime_lookup_total (MUL-6884). It matters here more than
 // anywhere else: this one gate serves both a rarely-opened usage tab and
 // several 500ms browser poll loops, and counting them together would hide the
 // polling the metric exists to measure.
@@ -961,13 +961,13 @@ func profileInstanceDeleteRefusal(rt db.AgentRuntime, profile db.RuntimeProfile,
 		parts = append(parts, "Edit this custom runtime and choose the machine that should keep it. Unused copies on other machines are removed when the binding is saved; move or archive their agents and finish pending tasks first. Until then, this legacy instance is kept so the machine can reconnect.")
 	case rt.Status == "online":
 		parts = append(parts, fmt.Sprintf(
-			"It is still online, so its daemon would register it again. Stop that daemon first; Multica then removes the runtime automatically after %d days offline, once no agent is bound to it and nothing is still running on it.",
+			"It is still online, so its daemon would register it again. Stop that daemon first; Workpal then removes the runtime automatically after %d days offline, once no agent is bound to it and nothing is still running on it.",
 			ttlDays,
 		))
 	case !known:
 		// Blocker set unavailable; promise only what holds regardless of it.
 		parts = append(parts, fmt.Sprintf(
-			"It is offline, and Multica removes offline runtimes automatically after %d days, once no agent is bound to them and nothing is still running on them.",
+			"It is offline, and Workpal removes offline runtimes automatically after %d days, once no agent is bound to them and nothing is still running on them.",
 			ttlDays,
 		))
 	case len(blockers.agents) > 0 || blockers.undrainedTasks > 0:
@@ -983,7 +983,7 @@ func profileInstanceDeleteRefusal(rt db.AgentRuntime, profile db.RuntimeProfile,
 			holds = append(holds, fmt.Sprintf("%d unfinished task(s) belong to it or to agents bound to it", n))
 		}
 		parts = append(parts, fmt.Sprintf(
-			"It is offline, but %s, which holds it in place; Multica removes the runtime automatically after %d days offline once that is cleared.",
+			"It is offline, but %s, which holds it in place; Workpal removes the runtime automatically after %d days offline once that is cleared.",
 			strings.Join(holds, " and "), ttlDays,
 		))
 		parts = append(parts, blockingAgentRemedies(blockingAgentClassesFromAgents(blockers.agents), blockingAgentScopeInstance)...)
@@ -992,7 +992,7 @@ func profileInstanceDeleteRefusal(rt db.AgentRuntime, profile db.RuntimeProfile,
 		}
 	default:
 		parts = append(parts, fmt.Sprintf(
-			"It is offline with no agents bound and nothing still running on it, so Multica removes it automatically after %d days offline — this row will be reclaimed without any action from you.",
+			"It is offline with no agents bound and nothing still running on it, so Workpal removes it automatically after %d days offline — this row will be reclaimed without any action from you.",
 			ttlDays,
 		))
 	}

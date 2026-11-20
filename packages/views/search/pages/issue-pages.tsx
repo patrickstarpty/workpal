@@ -3,24 +3,24 @@
 import { useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { toast } from "sonner";
-import { CalendarClock, CalendarX, FolderMinus, Lock, Network, UserMinus, Zap } from "@multica/ui/icons";
+import { CalendarClock, CalendarX, FolderMinus, Lock, Network, UserMinus, Zap } from "@workpal/ui/icons";
 import { Command as CommandPrimitive } from "cmdk";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { PRIORITY_DISPLAY_ORDER } from "@multica/core/issues/config";
-import { addDaysDateOnly, todayDateOnly } from "@multica/core/issues/date";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { PRIORITY_DISPLAY_ORDER } from "@workpal/core/issues/config";
+import { addDaysDateOnly, todayDateOnly } from "@workpal/core/issues/date";
 import {
   sharedWorkflowStatusKeys,
   stepHandsOff,
   useIssueWorkflows,
   workflowStep,
-} from "@multica/core/issue-workflows";
-import { issueLabelsOptions, labelListOptions } from "@multica/core/labels/queries";
-import { useAttachLabelToIssue, useDetachLabel } from "@multica/core/labels/mutations";
-import { useModalStore } from "@multica/core/modals";
-import { projectListOptions } from "@multica/core/projects/queries";
-import { selectableProjects } from "@multica/core/projects";
-import { quickActionListOptions } from "@multica/core/quick-actions";
-import type { Issue, IssuePriority, Label } from "@multica/core/types";
+} from "@workpal/core/issue-workflows";
+import { issueLabelsOptions, labelListOptions } from "@workpal/core/labels/queries";
+import { useAttachLabelToIssue, useDetachLabel } from "@workpal/core/labels/mutations";
+import { useModalStore } from "@workpal/core/modals";
+import { projectListOptions } from "@workpal/core/projects/queries";
+import { selectableProjects } from "@workpal/core/projects";
+import { quickActionListOptions } from "@workpal/core/quick-actions";
+import type { Issue, IssuePriority, Label } from "@workpal/core/types";
 import { StatusIcon } from "../../issues/components/status-icon";
 import { PriorityIcon } from "../../issues/components/priority-icon";
 import { useQuickActionRunner } from "../../issues/hooks/use-quick-action-runner";
@@ -36,7 +36,7 @@ import { AgentPresenceText, ActorRow, IssueResultRow } from "../result-rows";
 import { useActorDirectory } from "../use-actor-directory";
 import { useServerSearch } from "../use-server-search";
 import type { IssueTarget } from "../types";
-import { paletteColor } from "@multica/core/appearance";
+import { paletteColor } from "@workpal/core/appearance";
 
 /** The value every target issue shares, or undefined when they differ. */
 function common<T>(issues: Issue[], pick: (issue: Issue) => T): T | undefined {

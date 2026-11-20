@@ -10,7 +10,7 @@ import (
 	"testing"
 	"time"
 
-	sdk "github.com/multica-ai/multica/server/pkg/composio"
+	sdk "workpal.local/workpal/server/pkg/composio"
 )
 
 func TestExecuteTool_ConnectedAccountIdentityOnWire(t *testing.T) {

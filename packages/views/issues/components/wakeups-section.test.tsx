@@ -1,7 +1,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { fireEvent, screen, waitFor, within } from "@testing-library/react";
 import type { ReactNode } from "react";
-import type { IssueWakeup, SystemWakeup } from "@multica/core/types";
+import type { IssueWakeup, SystemWakeup } from "@workpal/core/types";
 import { renderWithI18n } from "../../test/i18n";
 import { WakeupsSection } from "./wakeups-section";
 const mutate = vi.fn();
@@ -28,11 +28,11 @@ vi.mock("../../navigation", () => ({
     </a>
   ),
 }));
-vi.mock("@multica/core/paths", () => ({
+vi.mock("@workpal/core/paths", () => ({
   useWorkspacePaths: () => ({ autopilots: () => "/acme/autopilots" }),
   useCurrentWorkspace: () => ({ id: "ws" }),
 }));
-vi.mock("@multica/core/issues", () => ({
+vi.mock("@workpal/core/issues", () => ({
   issueWakeupsOptions: () => ({ queryKey: ["wakeups"] }),
   issueTasksOptions: () => ({ queryKey: ["tasks"] }),
   issueSystemWakeupsOptions: () => ({ queryKey: ["system"] }),

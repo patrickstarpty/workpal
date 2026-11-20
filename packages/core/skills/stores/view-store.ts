@@ -74,7 +74,7 @@ export const useSkillsViewStore = createCollectionViewStore<
   SkillColumnKey,
   SkillListFilters
 >({
-  name: "multica_skills_view",
+  name: "workpal_skills_view",
   defaultSortField: "updated",
   sortDefaultDirection: SKILL_SORT_DEFAULT_DIRECTION,
   defaultHiddenColumns: DEFAULT_HIDDEN_COLUMNS,

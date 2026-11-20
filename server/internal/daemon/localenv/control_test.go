@@ -135,7 +135,7 @@ func TestManagerRestartReportsCleanedUpCode(t *testing.T) {
 	}
 	waitReady(t, m, env.Key)
 	id, _ := IDFromKey(env.Key)
-	if err := os.RemoveAll(filepath.Join(task.RootDir, ".multica")); err != nil {
+	if err := os.RemoveAll(filepath.Join(task.RootDir, ".workpal")); err != nil {
 		t.Fatal(err)
 	}
 	if _, err := m.Restart(id, func(string) (Task, bool) { return task, true }); err != ErrGone {
@@ -207,7 +207,7 @@ func TestDetectorStopsOnlyTheListeningProcess(t *testing.T) {
 	port := ln.Addr().(*net.TCPAddr).Port
 	ln.Close()
 	cmd := exec.Command(os.Args[0], "-test.run=^TestHelperProcess$")
-	cmd.Env = append(os.Environ(), "LOCALENV_HELPER=serve", fmt.Sprintf("MULTICA_PORT=%d", port))
+	cmd.Env = append(os.Environ(), "LOCALENV_HELPER=serve", fmt.Sprintf("WORKPAL_PORT=%d", port))
 	if err := cmd.Start(); err != nil {
 		t.Fatal(err)
 	}

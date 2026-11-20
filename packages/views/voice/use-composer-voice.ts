@@ -5,7 +5,7 @@ import {
   useVoiceSettingsStore,
   useVoiceState,
   type VoiceState,
-} from "@multica/core/voice";
+} from "@workpal/core/voice";
 import { useVoiceModels } from "./engine";
 import { voiceInputSupported } from "./recorder";
 

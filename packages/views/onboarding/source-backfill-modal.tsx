@@ -10,10 +10,10 @@ import {
   MoreHorizontal,
   Newspaper,
   Users,
-} from "@multica/ui/icons";
+} from "@workpal/ui/icons";
 import { toast } from "sonner";
-import { useAuthStore } from "@multica/core/auth";
-import { prefersReducedMotion } from "@multica/core/appearance";
+import { useAuthStore } from "@workpal/core/auth";
+import { prefersReducedMotion } from "@workpal/core/appearance";
 import {
   agentCompletedIssueCountOptions,
   needsSourceBackfill,
@@ -21,14 +21,14 @@ import {
   SOURCE_BACKFILL_MIN_AGENT_DONE_ISSUES,
   type QuestionnaireAnswers,
   type Source,
-} from "@multica/core/onboarding";
-import { useCurrentWorkspace } from "@multica/core/paths";
-import { useDevPromptStore, useSessionPromptStore } from "@multica/core/session-prompt";
-import { Button } from "@multica/ui/components/ui/button";
+} from "@workpal/core/onboarding";
+import { useCurrentWorkspace } from "@workpal/core/paths";
+import { useDevPromptStore, useSessionPromptStore } from "@workpal/core/session-prompt";
+import { Button } from "@workpal/ui/components/ui/button";
 import {
   Dialog,
   DialogContent,
-} from "@multica/ui/components/ui/dialog";
+} from "@workpal/ui/components/ui/dialog";
 import {
   GitHubIcon,
   GoogleIcon,

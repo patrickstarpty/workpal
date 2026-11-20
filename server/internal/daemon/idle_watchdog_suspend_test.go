@@ -9,8 +9,8 @@ import (
 	"testing/synctest"
 	"time"
 
-	"github.com/multica-ai/multica/server/pkg/agent"
-	"github.com/multica-ai/multica/server/pkg/awakeclock"
+	"workpal.local/workpal/server/pkg/agent"
+	"workpal.local/workpal/server/pkg/awakeclock"
 )
 
 // hostClock simulates a host that can suspend. Bubble time stands in for

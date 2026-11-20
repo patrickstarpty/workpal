@@ -10,7 +10,7 @@ import {
   recordDevSyncStatus,
   subscribeDevRecording,
   type DevRecording,
-} from "@multica/core/diagnostics";
+} from "@workpal/core/diagnostics";
 import { blockedRatio, JANK_WINDOW_MS, navDuration } from "./metrics";
 
 /** Start the recorder and feed it what only the platform knows: route and sync. */

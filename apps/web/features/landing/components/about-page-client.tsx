@@ -46,15 +46,7 @@ export function AboutPageClient() {
           </div>
 
           <div className="mt-12">
-            <Link
-              href={githubUrl}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-2.5 rounded-(--landing-radius-action) bg-[#0a0d12] px-5 py-3 text-body font-semibold text-white transition-colors hover:bg-[#0a0d12]/88"
-            >
-              <GitHubMark className="size-4" />
-              {t.about.cta}
-            </Link>
+            
           </div>
 
           <section className="mt-16 border-t border-[#0a0d12]/10 pt-12 sm:mt-20 sm:pt-16">

@@ -12,10 +12,10 @@ function fixture(tag = "v0.10.0") {
   for (const [name, platform, arch, ext] of channels) {
     add(name);
     const cpu = platform === "linux" && arch === "x64" ? "x86_64" : arch;
-    const file = add(`multica-desktop-${version}-${platform}-${cpu}.${ext}`);
+    const file = add(`workpal-desktop-${version}-${platform}-${cpu}.${ext}`);
     const files = [{ url: file.name, size: file.size, sha512: "hash" }];
     if (platform === "linux") {
-      const rpm = add(`multica-desktop-${version}-linux-${arch === "x64" ? "x86_64" : "aarch64"}.rpm`);
+      const rpm = add(`workpal-desktop-${version}-linux-${arch === "x64" ? "x86_64" : "aarch64"}.rpm`);
       files.push({ url: rpm.name, size: rpm.size, sha512: "hash" });
     }
     metadata.set(name, stringify({ version, files }));
@@ -23,8 +23,8 @@ function fixture(tag = "v0.10.0") {
   for (const os of ["darwin", "linux", "windows"]) {
     for (const arch of ["amd64", "arm64"]) {
       const ext = os === "windows" ? "zip" : "tar.gz";
-      add(`multica_${os}_${arch}.${ext}`);
-      add(`multica-cli-${version}-${os}-${arch}.${ext}`);
+      add(`workpal_${os}_${arch}.${ext}`);
+      add(`workpal-cli-${version}-${os}-${arch}.${ext}`);
     }
   }
   add("checksums.txt");
@@ -68,7 +68,7 @@ test("bad metadata and incomplete assets cannot promote", async () => {
     (m) => { m.files = []; },
     (m) => { m.files[0].url = "missing.zip"; },
     (m) => { m.files[0].url = "https://example.com/other.zip"; },
-    (m) => { m.files[0].url = "multica-desktop-0.10.0-mac-x64.zip"; },
+    (m) => { m.files[0].url = "workpal-desktop-0.10.0-mac-x64.zip"; },
     (m) => { m.files[0].size++; },
     (m) => { delete m.files[0].size; },
   ]) {

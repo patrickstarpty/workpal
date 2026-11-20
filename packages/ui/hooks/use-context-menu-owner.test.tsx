@@ -1,7 +1,7 @@
 import { afterEach, describe, expect, it } from "vitest";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
-import { contextMenuOriginRef } from "@multica/ui/lib/context-menu-origin";
-import { Popover, PopoverContent, PopoverTrigger } from "@multica/ui/components/ui/popover";
+import { contextMenuOriginRef } from "@workpal/ui/lib/context-menu-origin";
+import { Popover, PopoverContent, PopoverTrigger } from "@workpal/ui/components/ui/popover";
 
 let menu: HTMLElement;
 

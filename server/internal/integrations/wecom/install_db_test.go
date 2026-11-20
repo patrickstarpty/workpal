@@ -27,8 +27,8 @@ import (
 	"github.com/jackc/pgx/v5/pgtype"
 	"github.com/jackc/pgx/v5/pgxpool"
 
-	"github.com/multica-ai/multica/server/internal/util"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
+	"workpal.local/workpal/server/internal/util"
+	db "workpal.local/workpal/server/pkg/db/generated"
 )
 
 const (
@@ -82,7 +82,7 @@ func setupScanDB(t *testing.T, agents int) (context.Context, *pgxpool.Pool) {
 	}
 	exec(`INSERT INTO workspace (id, name, slug, description) VALUES ($1, 'wecom scan', 'wecom-scan', '')`, wcScanWS)
 	exec(`INSERT INTO agent_runtime (id, workspace_id, name, runtime_mode, provider)
-VALUES ($1, $2, 'wecom scan runtime', 'local', 'multica_daemon')`, wcScanRuntime, wcScanWS)
+VALUES ($1, $2, 'wecom scan runtime', 'local', 'workpal_daemon')`, wcScanRuntime, wcScanWS)
 	for i := 0; i < agents; i++ {
 		exec(`INSERT INTO agent (id, workspace_id, name, runtime_mode, runtime_id)
 VALUES ($1, $2, $3, 'local', $4)`, wcScanAgent(i), wcScanWS, fmt.Sprintf("wecom scan %d", i), wcScanRuntime)

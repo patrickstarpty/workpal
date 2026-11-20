@@ -13,10 +13,10 @@ import (
 
 	"github.com/jackc/pgx/v5/pgtype"
 
-	"github.com/multica-ai/multica/server/internal/events"
-	"github.com/multica-ai/multica/server/internal/integrations/wecom"
-	"github.com/multica-ai/multica/server/internal/util"
-	"github.com/multica-ai/multica/server/pkg/protocol"
+	"workpal.local/workpal/server/internal/events"
+	"workpal.local/workpal/server/internal/integrations/wecom"
+	"workpal.local/workpal/server/internal/util"
+	"workpal.local/workpal/server/pkg/protocol"
 )
 
 // outbound_progress.go — what the agent is doing, shown while it does it.

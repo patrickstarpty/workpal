@@ -1,8 +1,8 @@
 import { describe, expect, it, vi } from "vitest";
 import { fireEvent, screen } from "@testing-library/react";
-import { DropdownMenu, DropdownMenuContent } from "@multica/ui/components/ui/dropdown-menu";
-import { commonIssueFields } from "@multica/core/issues/batch";
-import type { Issue, IssueProperty } from "@multica/core/types";
+import { DropdownMenu, DropdownMenuContent } from "@workpal/ui/components/ui/dropdown-menu";
+import { commonIssueFields } from "@workpal/core/issues/batch";
+import type { Issue, IssueProperty } from "@workpal/core/types";
 import { renderWithI18n } from "../../test/i18n";
 import { dropdownPrimitives } from "../../common/menu-primitives";
 import { BatchMenuItems } from "./batch-menu-items";
@@ -11,13 +11,13 @@ const PROPERTIES = vi.hoisted(
   () => [{ id: "notes", name: "Notes", type: "text", config: {}, archived: false }] as IssueProperty[],
 );
 
-vi.mock("@multica/core/hooks", () => ({ useWorkspaceId: () => "ws-1" }));
+vi.mock("@workpal/core/hooks", () => ({ useWorkspaceId: () => "ws-1" }));
 vi.mock("@tanstack/react-query", async (importOriginal) => ({
   ...(await importOriginal<typeof import("@tanstack/react-query")>()),
   useQuery: () => ({ data: PROPERTIES }),
 }));
-vi.mock("@multica/core/paths", async (importOriginal) => ({
-  ...(await importOriginal<typeof import("@multica/core/paths")>()),
+vi.mock("@workpal/core/paths", async (importOriginal) => ({
+  ...(await importOriginal<typeof import("@workpal/core/paths")>()),
   useWorkspacePaths: () => ({ issueDetail: (id: string) => `/acme/issues/${id}` }),
 }));
 vi.mock("../../navigation", () => ({

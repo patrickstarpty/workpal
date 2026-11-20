@@ -3,17 +3,17 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it, vi } from "vitest";
-import { I18nProvider } from "@multica/core/i18n/react";
-import { agentTaskSnapshotOptions } from "@multica/core/agents";
-import { chatSessionsOptions } from "@multica/core/chat/queries";
-import { runtimeProfileListOptions } from "@multica/core/runtimes";
-import { qoderOptions, type QoderConnection } from "@multica/core/runtimes/qoder";
-import { runtimeListOptions } from "@multica/core/runtimes/queries";
-import type { AgentRuntime } from "@multica/core/types";
+import { I18nProvider } from "@workpal/core/i18n/react";
+import { agentTaskSnapshotOptions } from "@workpal/core/agents";
+import { chatSessionsOptions } from "@workpal/core/chat/queries";
+import { runtimeProfileListOptions } from "@workpal/core/runtimes";
+import { qoderOptions, type QoderConnection } from "@workpal/core/runtimes/qoder";
+import { runtimeListOptions } from "@workpal/core/runtimes/queries";
+import type { AgentRuntime } from "@workpal/core/types";
 import {
   agentListOptions,
   memberListOptions,
-} from "@multica/core/workspace/queries";
+} from "@workpal/core/workspace/queries";
 import enCommon from "../../locales/en/common.json";
 import enLayout from "../../locales/en/layout.json";
 import enRuntimes from "../../locales/en/runtimes.json";
@@ -24,19 +24,19 @@ const TEST_RESOURCES = {
 };
 const WS = "ws-test";
 
-vi.mock("@multica/core/hooks", () => ({ useWorkspaceId: () => "ws-test" }));
-vi.mock("@multica/core/auth", () => ({
+vi.mock("@workpal/core/hooks", () => ({ useWorkspaceId: () => "ws-test" }));
+vi.mock("@workpal/core/auth", () => ({
   useAuthStore: (select: (state: unknown) => unknown) =>
     select({ isLoading: false, user: { id: "user-1" } }),
 }));
-vi.mock("@multica/core/paths", () => ({
+vi.mock("@workpal/core/paths", () => ({
   useWorkspacePaths: () => ({
     runtimeDetail: (id: string) => `/runtimes/${id}`,
   }),
   useRequiredWorkspaceSlug: () => "workspace-test",
 }));
-vi.mock("@multica/core/realtime", () => ({ useWSEvent: () => {} }));
-vi.mock("@multica/core/onboarding", () => ({
+vi.mock("@workpal/core/realtime", () => ({ useWSEvent: () => {} }));
+vi.mock("@workpal/core/onboarding", () => ({
   memberNeedsMikaSetup: () => false,
   useBootstrapMika: () => ({ isPending: false, mutateAsync: vi.fn() }),
 }));

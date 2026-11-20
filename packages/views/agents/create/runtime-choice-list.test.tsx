@@ -1,8 +1,8 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { cleanup, fireEvent, render, screen } from "@testing-library/react";
-import { I18nProvider } from "@multica/core/i18n/react";
-import type { QoderConnection } from "@multica/core/runtimes/qoder";
-import type { AgentRuntime } from "@multica/core/types";
+import { I18nProvider } from "@workpal/core/i18n/react";
+import type { QoderConnection } from "@workpal/core/runtimes/qoder";
+import type { AgentRuntime } from "@workpal/core/types";
 import enAgents from "../../locales/en/agents.json";
 import enRuntimes from "../../locales/en/runtimes.json";
 import { buildRuntimeMachines } from "../../runtimes/components/runtime-machines";

@@ -2,20 +2,20 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { Loader2, X } from "@multica/ui/icons";
-import { useChatStore } from "@multica/core/chat";
-import { chatSessionsOptions, pendingChatTasksOptions } from "@multica/core/chat/queries";
-import { useWorkspaceId } from "@multica/core/hooks";
-import type { ChatSession } from "@multica/core/types";
-import { TooltipHint } from "@multica/ui/components/common/tooltip-hint";
+import { Loader2, X } from "@workpal/ui/icons";
+import { useChatStore } from "@workpal/core/chat";
+import { chatSessionsOptions, pendingChatTasksOptions } from "@workpal/core/chat/queries";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import type { ChatSession } from "@workpal/core/types";
+import { TooltipHint } from "@workpal/ui/components/common/tooltip-hint";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@multica/ui/components/ui/dropdown-menu";
-import { STAR_STROKE, starPath } from "@multica/ui/lib/multica-brand";
-import { cn } from "@multica/ui/lib/utils";
+} from "@workpal/ui/components/ui/dropdown-menu";
+import { WorkpalIcon } from "@workpal/ui/components/common/workpal-icon";
+import { cn } from "@workpal/ui/lib/utils";
 import { ActionShortcutKeycaps } from "../../common/shortcut-keycaps";
 import { useT } from "../../i18n";
 import { BOTTOM_BAR_ITEM_CLASS } from "../../layout/bottom-bar-styles";
@@ -23,20 +23,18 @@ import { ChatBarHistory } from "./chat-bar-history";
 import { chatActivity, selectChatBarSessions, type ChatBarSession } from "./chat-bar-sessions";
 
 const EMPTY_SESSIONS: ChatSession[] = [];
-const STAR = starPath(STAR_STROKE);
 
-/** The star from the Multica mark, in the text colour. */
-function MulticaStar() {
+
+/** The star from the Workpal mark, in the text colour. */
+function WorkpalStar() {
   return (
-    <svg aria-hidden viewBox="0 0 100 100" fill="currentColor">
-      <path d={STAR} />
-    </svg>
+    <WorkpalIcon />
   );
 }
 const DEFAULT_MAX_CHIPS = 3;
 
 /**
- * How many chips fit. The bar's other content (workspace status, Ask Multica,
+ * How many chips fit. The bar's other content (workspace status, Ask Workpal,
  * history) takes about 560px and a chip up to 170px; a narrow window gives up
  * chips before it squeezes the status.
  */
@@ -82,7 +80,7 @@ function SessionMark({ item }: { item: ChatBarSession }) {
 
 /**
  * Quick chat in the bottom bar: a chip per chat that needs watching or was
- * opened here, then Ask Multica, which starts a new chat, and the history.
+ * opened here, then Ask Workpal, which starts a new chat, and the history.
  * The chat window opens above whichever control is pressed:
  * `useChatWindowAnchor` finds it by `data-chat-anchor`, and re-places the
  * window on a click that carries that attribute or `data-chat-anchor-trigger`.
@@ -148,7 +146,7 @@ export function ChatBar() {
     dismissChatFromBar(item.session.id, chatActivity(item.session));
   };
 
-  const askMultica = () => {
+  const askWorkpal = () => {
     if (askPressed) setOpen(false);
     else startNewChat();
   };
@@ -229,10 +227,10 @@ export function ChatBar() {
           type="button"
           data-chat-anchor="new"
           aria-pressed={askPressed}
-          onClick={askMultica}
+          onClick={askWorkpal}
           className={BOTTOM_BAR_ITEM_CLASS}
         >
-          <MulticaStar />
+          <WorkpalStar />
           {askLabel}
         </button>
       </TooltipHint>

@@ -2,25 +2,25 @@
 
 import { memo, useEffect, useMemo, useRef, useState, type ReactNode, type RefObject } from "react";
 import { AnimatePresence, motion, useIsPresent } from "motion/react";
-import { useReducedMotion } from "@multica/core/appearance";
-import { ChevronDown, ChevronUp, Maximize2, X } from "@multica/ui/icons";
-import { Button, buttonVariants } from "@multica/ui/components/ui/button";
+import { useReducedMotion } from "@workpal/core/appearance";
+import { ChevronDown, ChevronUp, Maximize2, X } from "@workpal/ui/icons";
+import { Button, buttonVariants } from "@workpal/ui/components/ui/button";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from "@multica/ui/components/ui/tooltip";
-import { ErrorBoundary } from "@multica/ui/components/common/error-boundary";
-import { cn } from "@multica/ui/lib/utils";
-import { UI_EASE_OUT, UI_MOTION_DURATION } from "@multica/ui/lib/motion";
-import { useModalStore } from "@multica/core/modals";
-import { useWorkspacePaths } from "@multica/core/paths";
+} from "@workpal/ui/components/ui/tooltip";
+import { ErrorBoundary } from "@workpal/ui/components/common/error-boundary";
+import { cn } from "@workpal/ui/lib/utils";
+import { UI_EASE_OUT, UI_MOTION_DURATION } from "@workpal/ui/lib/motion";
+import { useModalStore } from "@workpal/core/modals";
+import { useWorkspacePaths } from "@workpal/core/paths";
 import {
   createShortcutChord,
   isEditableShortcutTarget,
   isPortalLayerShortcutTarget,
-} from "@multica/core/shortcuts";
-import { isImeComposing } from "@multica/core/utils";
+} from "@workpal/core/shortcuts";
+import { isImeComposing } from "@workpal/core/utils";
 import { AppLink } from "../../navigation";
 import { PAGE_GUTTER } from "../../layout/page-header";
 import { WindowTitleBarProvider } from "../../platform/window-title-bar";

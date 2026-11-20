@@ -22,16 +22,16 @@ import (
 )
 
 // TestHelperProcess is the environment under test: the test binary re-run as
-// a server on MULTICA_PORT, or as a command that fails on start.
+// a server on WORKPAL_PORT, or as a command that fails on start.
 func TestHelperProcess(t *testing.T) {
 	switch os.Getenv("LOCALENV_HELPER") {
 	case "serve":
-		ln, err := net.Listen("tcp", "127.0.0.1:"+os.Getenv("MULTICA_PORT"))
+		ln, err := net.Listen("tcp", "127.0.0.1:"+os.Getenv("WORKPAL_PORT"))
 		if err != nil {
 			fmt.Println("listen:", err)
 			os.Exit(2)
 		}
-		fmt.Println("serving", os.Getenv("MULTICA_ENVIRONMENT"))
+		fmt.Println("serving", os.Getenv("WORKPAL_ENVIRONMENT"))
 		http.Serve(ln, http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) { io.WriteString(w, "ok") }))
 	case "detach":
 		// What `make up` does: start the server in a process group of its

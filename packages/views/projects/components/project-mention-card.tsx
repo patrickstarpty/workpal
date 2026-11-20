@@ -12,7 +12,7 @@ import {
 import { dropdownPrimitives } from "../../common/menu-primitives";
 import { CollectionRowContext } from "../../layout/collection-list/row-context";
 import { ProjectMenu } from "./project-row-actions";
-import { useWorkspacePaths } from "@multica/core/paths";
+import { useWorkspacePaths } from "@workpal/core/paths";
 import { ProjectChip, useChipProject } from "./project-chip";
 
 interface ProjectMentionCardProps {

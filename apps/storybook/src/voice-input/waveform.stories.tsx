@@ -1,7 +1,7 @@
 import { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { Button } from "@multica/ui/components/ui/button";
-import { cn } from "@multica/ui/lib/utils";
+import { Button } from "@workpal/ui/components/ui/button";
+import { cn } from "@workpal/ui/lib/utils";
 import type { Lang } from "./copy";
 import { useStoryEnv } from "./env";
 import { HudFrame, StripFrame } from "./waveform/frames";

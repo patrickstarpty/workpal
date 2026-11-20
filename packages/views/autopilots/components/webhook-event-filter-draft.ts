@@ -2,7 +2,7 @@ import type {
   WebhookEventFilter,
   WebhookPayloadCondition,
   WebhookPayloadConditionValue,
-} from "@multica/core/types";
+} from "@workpal/core/types";
 import {
   MAX_CONDITION_PATH_LENGTH,
   MAX_CONDITION_VALUES,

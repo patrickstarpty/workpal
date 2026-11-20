@@ -2,8 +2,8 @@
 
 import { useCallback } from "react";
 import { toast } from "sonner";
-import type { BatchUpdateIssuesResponse } from "@multica/core/types";
-import { BatchOpsUnsupportedError } from "@multica/core/api";
+import type { BatchUpdateIssuesResponse } from "@workpal/core/types";
+import { BatchOpsUnsupportedError } from "@workpal/core/api";
 import { useT } from "../../i18n";
 
 const SKIP_REASONS = [

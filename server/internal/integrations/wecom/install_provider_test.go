@@ -21,7 +21,7 @@ func newTestProvider(t *testing.T, handler http.HandlerFunc) (*HTTPProvider, *ht
 	t.Cleanup(srv.Close)
 	p, err := NewHTTPProvider(HTTPProviderConfig{
 		BaseURL:    srv.URL,
-		SourceID:   "multica",
+		SourceID:   "workpal",
 		HTTPClient: srv.Client(),
 	})
 	if err != nil {
@@ -53,7 +53,7 @@ func TestHTTPProviderGenerateReadsDataEnvelope(t *testing.T) {
 	if gotPath != "/ai/qc/generate" {
 		t.Errorf("path = %q", gotPath)
 	}
-	if gotSource != "multica" {
+	if gotSource != "workpal" {
 		t.Errorf("source = %q", gotSource)
 	}
 }
@@ -87,7 +87,7 @@ func TestHTTPProviderQueryResultReadsDataEnvelope(t *testing.T) {
 	if got.BotInfo == nil || got.BotInfo.BotID != "bot-1" || got.BotInfo.Secret != "sec-1" {
 		t.Errorf("BotInfo = %+v", got.BotInfo)
 	}
-	if gotScode != "sc-1" || gotSource != "multica" {
+	if gotScode != "sc-1" || gotSource != "workpal" {
 		t.Errorf("scode = %q, source = %q", gotScode, gotSource)
 	}
 }
@@ -197,7 +197,7 @@ func TestHTTPProviderTransportErrorsNeverCarryTheScode(t *testing.T) {
 		t.Cleanup(srv.Close)
 		p, err := NewHTTPProvider(HTTPProviderConfig{
 			BaseURL:    srv.URL,
-			SourceID:   "multica",
+			SourceID:   "workpal",
 			HTTPClient: srv.Client(),
 			Timeout:    50 * time.Millisecond,
 		})

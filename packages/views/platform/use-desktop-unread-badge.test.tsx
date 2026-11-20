@@ -2,10 +2,10 @@ import type { ReactNode } from "react";
 import { act, cleanup, renderHook, waitFor } from "@testing-library/react";
 import { QueryClient, QueryClientProvider, focusManager } from "@tanstack/react-query";
 import { afterEach, expect, it, vi } from "vitest";
-import { setApiInstance } from "@multica/core/api";
-import type { ApiClient } from "@multica/core/api/client";
-import { chatKeys } from "@multica/core/chat/queries";
-import type { ChatSession } from "@multica/core/types";
+import { setApiInstance } from "@workpal/core/api";
+import type { ApiClient } from "@workpal/core/api/client";
+import { chatKeys } from "@workpal/core/chat/queries";
+import type { ChatSession } from "@workpal/core/types";
 import { useDesktopUnreadBadge } from "./use-desktop-unread-badge";
 
 afterEach(() => {

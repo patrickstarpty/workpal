@@ -21,7 +21,7 @@ const (
 	legacyBuiltinSkillsRoot = "builtin_skills_legacy"
 )
 
-// PlatformSkillName is the built-in skill carrying Multica's platform
+// PlatformSkillName is the built-in skill carrying Workpal's platform
 // contracts — issues, mentions, agents, squads, autopilots, projects, runtimes,
 // local environments and skill import — behind one routing SKILL.md. Every agent receives it.
 //
@@ -29,7 +29,7 @@ const (
 // daemon runs on the user's machine and must not import this package, so the
 // two are pinned by the brief's rendered-output tests instead of a shared
 // symbol.
-const PlatformSkillName = "multica-platform"
+const PlatformSkillName = "workpal-platform"
 
 // builtinSkillSystemKey restricts a built-in skill to one product-defined
 // agent, keyed by that agent's system key. A skill absent from this map is
@@ -41,7 +41,7 @@ const PlatformSkillName = "multica-platform"
 // agent's procedure, not a platform contract, so shipping it workspace-wide
 // spent that budget on nine agents out of ten that can never use it.
 var builtinSkillSystemKey = map[string]string{
-	"multica-onboarding": MikaSystemKey,
+	"workpal-onboarding": MikaSystemKey,
 }
 
 // BuiltinSkills returns the platform's built-in skills for an agent with the
@@ -51,14 +51,14 @@ var builtinSkillSystemKey = map[string]string{
 // intentionally leaves to skills.
 //
 // Layout: builtin_skills/<name>/SKILL.md plus optional supporting files. The
-// <name> directory carries a "multica-" prefix. The daemon preserves built-in
+// <name> directory carries a "workpal-" prefix. The daemon preserves built-in
 // identity separately from allocated directory names so brief pointers still
 // resolve when a user skill occupies the same name.
 // legacyRedirects asks for redirect stubs under the names this server has
 // stopped shipping. The runtime brief is assembled by the daemon, not the
 // server, so a backend deploy cannot rewrite an installed daemon's copy of it:
-// a daemon older than the multica-platform merge still tells its agent to read
-// `multica-working-on-issues`. Passing true for such a daemon keeps that
+// a daemon older than the workpal-platform merge still tells its agent to read
+// `workpal-working-on-issues`. Passing true for such a daemon keeps that
 // pointer resolvable; the stub carries no contracts of its own, only the new
 // location. Callers decide by capability, never by version string.
 func (s *TaskService) BuiltinSkills(agentSystemKey string, legacyRedirects bool) []AgentSkillData {

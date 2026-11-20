@@ -3,27 +3,27 @@
 import { useMemo, useState } from "react";
 import { createPortal } from "react-dom";
 import { useStore } from "zustand";
-import { ListTodo, UserRound, Users } from "@multica/ui/icons";
+import { ListTodo, UserRound, Users } from "@workpal/ui/icons";
 import { useQuery } from "@tanstack/react-query";
-import type { MemberRole, MemberWithUser } from "@multica/core/types";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { useWorkspacePaths } from "@multica/core/paths";
-import { agentListOptions, memberListOptions } from "@multica/core/workspace/queries";
+import type { MemberRole, MemberWithUser } from "@workpal/core/types";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { useWorkspacePaths } from "@workpal/core/paths";
+import { agentListOptions, memberListOptions } from "@workpal/core/workspace/queries";
 import {
   actorIssuesViewStore,
   type ActorIssuesScope,
-} from "@multica/core/issues/stores/actor-issues-view-store";
-import { countAdvancedConditions } from "@multica/core/issues/stores/filter-tree";
-import { useViewStore } from "@multica/core/issues/stores/view-store-context";
+} from "@workpal/core/issues/stores/actor-issues-view-store";
+import { countAdvancedConditions } from "@workpal/core/issues/stores/filter-tree";
+import { useViewStore } from "@workpal/core/issues/stores/view-store-context";
 import {
   DropdownMenuRadioGroup,
   DropdownMenuRadioItem,
   DropdownMenuSub,
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
-} from "@multica/ui/components/ui/dropdown-menu";
-import { Skeleton } from "@multica/ui/components/ui/skeleton";
-import { cn } from "@multica/ui/lib/utils";
+} from "@workpal/ui/components/ui/dropdown-menu";
+import { Skeleton } from "@workpal/ui/components/ui/skeleton";
+import { cn } from "@workpal/ui/lib/utils";
 import { ActorAvatar } from "../common/actor-avatar";
 import {
   IssueDisplayControls,
@@ -46,7 +46,7 @@ import {
 import { AppLink } from "../navigation";
 import { useLocale, useT } from "../i18n";
 
-const LAYOUT_ID = "multica_member_detail_layout";
+const LAYOUT_ID = "workpal_member_detail_layout";
 const SCOPE_VALUES: ActorIssuesScope[] = ["assigned", "created"];
 
 /**

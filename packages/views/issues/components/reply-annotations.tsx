@@ -1,12 +1,12 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { MessageSquare, X } from "@multica/ui/icons";
-import { Button } from "@multica/ui/components/ui/button";
-import { IconButton } from "@multica/ui/components/common/icon-button";
-import { Popover, PopoverContent, PopoverTrigger } from "@multica/ui/components/ui/popover";
-import { useCommentDraftStore, type CommentDraftKey } from "@multica/core/issues/stores";
-import type { ReplyAnnotation } from "@multica/core/drafts/reply-annotation";
+import { MessageSquare, X } from "@workpal/ui/icons";
+import { Button } from "@workpal/ui/components/ui/button";
+import { IconButton } from "@workpal/ui/components/common/icon-button";
+import { Popover, PopoverContent, PopoverTrigger } from "@workpal/ui/components/ui/popover";
+import { useCommentDraftStore, type CommentDraftKey } from "@workpal/core/issues/stores";
+import type { ReplyAnnotation } from "@workpal/core/drafts/reply-annotation";
 import { useT } from "../../i18n";
 
 export function ReplyAnnotations({ draftKey, annotations, disabled, onEditAnnotation }: {

@@ -1,9 +1,9 @@
 "use client";
 
-import { CircleUser, ListTodo, Plus } from "@multica/ui/icons";
-import { Button } from "@multica/ui/components/ui/button";
-import { useAuthStore } from "@multica/core/auth";
-import { myIssuesRelationFromScope } from "@multica/core/issues/stores/my-issues-view-store";
+import { CircleUser, ListTodo, Plus } from "@workpal/ui/icons";
+import { Button } from "@workpal/ui/components/ui/button";
+import { useAuthStore } from "@workpal/core/auth";
+import { myIssuesRelationFromScope } from "@workpal/core/issues/stores/my-issues-view-store";
 import { CollectionPageState } from "../../layout/collection-page";
 import { PageHeader } from "../../layout/page-header";
 import { IssueSurface } from "../../issues/surface/issue-surface";

@@ -1,5 +1,5 @@
-import type { Agent, AgentRuntime, MemberWithUser, SkillSummary } from "@multica/core/types";
-import type { SkillListFilters } from "@multica/core/skills/stores";
+import type { Agent, AgentRuntime, MemberWithUser, SkillSummary } from "@workpal/core/types";
+import type { SkillListFilters } from "@workpal/core/skills/stores";
 import { matchesPinyin } from "../../editor/extensions/pinyin-match";
 import type { OriginInfo } from "../lib/origin";
 

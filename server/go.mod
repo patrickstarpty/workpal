@@ -1,4 +1,4 @@
-module github.com/multica-ai/multica/server
+module workpal.local/workpal/server
 
 go 1.26.9
 

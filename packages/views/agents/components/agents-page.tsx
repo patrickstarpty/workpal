@@ -5,13 +5,13 @@ import {
   AlertCircle,
   Bot,
   Lock,
-} from "@multica/ui/icons";
+} from "@workpal/ui/icons";
 import { useQuery } from "@tanstack/react-query";
 import type {
   Agent,
   AgentRuntime,
   MemberWithUser,
-} from "@multica/core/types";
+} from "@workpal/core/types";
 import {
   type AgentActivity,
   agentRunCounts30dOptions,
@@ -21,7 +21,7 @@ import {
   useWorkspacePresenceMap,
   VISIBILITY_TOOLTIP,
   type AgentPresenceDetail,
-} from "@multica/core/agents";
+} from "@workpal/core/agents";
 import {
   type AgentListFilters,
   useAgentsViewStore,
@@ -29,22 +29,22 @@ import {
   type AgentColumnKey,
   type AgentsScope,
   type AgentSortField,
-} from "@multica/core/agents/stores";
-import { useAuthStore } from "@multica/core/auth";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { useWorkspacePaths } from "@multica/core/paths";
+} from "@workpal/core/agents/stores";
+import { useAuthStore } from "@workpal/core/auth";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { useWorkspacePaths } from "@workpal/core/paths";
 import {
   agentListOptions,
   memberListOptions,
-} from "@multica/core/workspace/queries";
-import { runtimeDisplayLabel, runtimeListOptions } from "@multica/core/runtimes";
-import { Button } from "@multica/ui/components/ui/button";
+} from "@workpal/core/workspace/queries";
+import { runtimeDisplayLabel, runtimeListOptions } from "@workpal/core/runtimes";
+import { Button } from "@workpal/ui/components/ui/button";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from "@multica/ui/components/ui/tooltip";
-import { TruncatedTooltip } from "@multica/ui/components/common/truncated-tooltip";
+} from "@workpal/ui/components/ui/tooltip";
+import { TruncatedTooltip } from "@workpal/ui/components/common/truncated-tooltip";
 import { useNavigation } from "../../navigation";
 import { ActorAvatar } from "../../common/actor-avatar";
 import { ProviderLogo } from "../../runtimes/components/provider-logo";
@@ -169,11 +169,11 @@ export function rowMatchesFilters(
 
 /**
  * Bulk-access dialog confirm-button enablement is centralized in
- * `@multica/core/agents` as `isAccessChangeReady` (MUL-3963). The dialog
+ * `@workpal/core/agents` as `isAccessChangeReady` (MUL-3963). The dialog
  * consumes it; the picker also gates its internal Save button on the same
  * predicate (its own Save button is hidden via `hideFooter` in the bulk flow).
  */
-import { isAccessChangeReady } from "@multica/core/agents";
+import { isAccessChangeReady } from "@workpal/core/agents";
 import { AgentBatchToolbar } from "./agent-batch-toolbar";
 import { AgentsIntro } from "./agents-intro";
 export { isAccessChangeReady };

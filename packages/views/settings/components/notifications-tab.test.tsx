@@ -3,13 +3,13 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 import { cleanup, render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { I18nProvider } from "@multica/core/i18n/react";
-import { notificationPreferenceKeys } from "@multica/core/notification-preferences/queries";
+import { I18nProvider } from "@workpal/core/i18n/react";
+import { notificationPreferenceKeys } from "@workpal/core/notification-preferences/queries";
 import enSettings from "../../locales/en/settings.json";
 import { NotificationsTab } from "./notifications-tab";
 
-vi.mock("@multica/core/hooks", () => ({ useWorkspaceId: () => "ws-a" }));
-vi.mock("@multica/core/paths", () => ({
+vi.mock("@workpal/core/hooks", () => ({ useWorkspaceId: () => "ws-a" }));
+vi.mock("@workpal/core/paths", () => ({
   useCurrentWorkspace: () => ({ id: "ws-a", name: "Acme" }),
   useWorkspacePaths: () => ({ inbox: () => "/acme/inbox" }),
 }));
@@ -21,7 +21,7 @@ vi.mock("../../navigation", () => ({
   ),
 }));
 const { mutate } = vi.hoisted(() => ({ mutate: vi.fn() }));
-vi.mock("@multica/core/notification-preferences/mutations", () => ({
+vi.mock("@workpal/core/notification-preferences/mutations", () => ({
   useUpdateNotificationPreferences: () => ({ mutate }),
 }));
 vi.mock("./browser-notification-setting", () => ({ BrowserNotificationSetting: () => null }));

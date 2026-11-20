@@ -9,10 +9,10 @@ import (
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgtype"
 
-	"github.com/multica-ai/multica/server/internal/integrations/channel"
-	"github.com/multica-ai/multica/server/internal/integrations/channel/engine"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
-	"github.com/multica-ai/multica/server/pkg/dbid"
+	"workpal.local/workpal/server/internal/integrations/channel"
+	"workpal.local/workpal/server/internal/integrations/channel/engine"
+	db "workpal.local/workpal/server/pkg/db/generated"
+	"workpal.local/workpal/server/pkg/dbid"
 )
 
 const originWeixinChat = "weixin_chat"
@@ -113,7 +113,7 @@ func (r *identityResolver) ResolveSender(ctx context.Context, inst engine.Resolv
 		return engine.ResolvedIdentity{}, err
 	}
 	if _, err := r.q.GetMemberByUserAndWorkspace(ctx, db.GetMemberByUserAndWorkspaceParams{
-		UserID:      binding.MulticaUserID,
+		UserID:      binding.WorkpalUserID,
 		WorkspaceID: inst.WorkspaceID,
 	}); err != nil {
 		if errors.Is(err, pgx.ErrNoRows) {
@@ -121,7 +121,7 @@ func (r *identityResolver) ResolveSender(ctx context.Context, inst engine.Resolv
 		}
 		return engine.ResolvedIdentity{}, err
 	}
-	return engine.ResolvedIdentity{UserID: binding.MulticaUserID}, nil
+	return engine.ResolvedIdentity{UserID: binding.WorkpalUserID}, nil
 }
 
 type deduper struct{ q *db.Queries }

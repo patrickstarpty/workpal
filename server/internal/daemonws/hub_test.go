@@ -11,8 +11,8 @@ import (
 	"time"
 
 	"github.com/gorilla/websocket"
-	"github.com/multica-ai/multica/server/internal/realtime"
-	"github.com/multica-ai/multica/server/pkg/protocol"
+	"workpal.local/workpal/server/internal/realtime"
+	"workpal.local/workpal/server/pkg/protocol"
 )
 
 func TestNotifyTaskAvailable(t *testing.T) {

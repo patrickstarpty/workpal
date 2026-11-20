@@ -41,7 +41,7 @@ deadline; it did not produce a terminal result.
 Offline subprocess tests cover protocol completion/failure, stdin transport,
 redaction, cancellation, timeouts, inherited output pipes, oversized frames,
 wrapper exit and local descendant cleanup. Real tests require both the
-`agentintegration` build tag and `MULTICA_RUN_REAL_AGENT_SMOKE=1`.
+`agentintegration` build tag and `WORKPAL_RUN_REAL_AGENT_SMOKE=1`.
 
 Cancellation owns the local process tree. Amp documents that service-side
 asynchronous subagents can survive CLI exit; this adapter has no remote

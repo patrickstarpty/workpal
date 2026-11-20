@@ -1,7 +1,7 @@
 "use client";
 
 import type { CSSProperties, ReactNode } from "react";
-import { cn } from "@multica/ui/lib/utils";
+import { cn } from "@workpal/ui/lib/utils";
 
 // The table shared by the settings catalogs of small named things: Labels,
 // Properties and Quick Actions. They read as one surface, so the header, the

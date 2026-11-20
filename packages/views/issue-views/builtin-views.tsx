@@ -1,13 +1,13 @@
 "use client";
 
 import { useCallback } from "react";
-import { AlarmClock, Bell, Bot, CircleUser, ListTodo } from "@multica/ui/icons";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { useWorkspacePaths } from "@multica/core/paths";
-import { issueViewContainerKey, useActiveIssueViewStore } from "@multica/core/issue-views/active-view-store";
-import { FILTERED_BUILTIN_VIEWS } from "@multica/core/issue-views/builtin-issue-views";
-import type { BuiltinViewKey } from "@multica/core/issue-views/sidebar-views";
-import { issueViewTarget } from "@multica/core/issue-views/view-target";
+import { AlarmClock, Bell, Bot, CircleUser, ListTodo } from "@workpal/ui/icons";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { useWorkspacePaths } from "@workpal/core/paths";
+import { issueViewContainerKey, useActiveIssueViewStore } from "@workpal/core/issue-views/active-view-store";
+import { FILTERED_BUILTIN_VIEWS } from "@workpal/core/issue-views/builtin-issue-views";
+import type { BuiltinViewKey } from "@workpal/core/issue-views/sidebar-views";
+import { issueViewTarget } from "@workpal/core/issue-views/view-target";
 import { useT } from "../i18n";
 
 const WORKSPACE_SCOPE = { scope_type: "workspace" } as const;

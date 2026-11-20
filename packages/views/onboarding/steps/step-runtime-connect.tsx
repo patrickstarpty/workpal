@@ -6,14 +6,14 @@ import {
   ArrowRight,
   Loader2,
   RefreshCw,
-} from "@multica/ui/icons";
-import { Button } from "@multica/ui/components/ui/button";
-import { cn } from "@multica/ui/lib/utils";
-import { runtimeKeys } from "@multica/core/runtimes/queries";
+} from "@workpal/ui/icons";
+import { Button } from "@workpal/ui/components/ui/button";
+import { cn } from "@workpal/ui/lib/utils";
+import { runtimeKeys } from "@workpal/core/runtimes/queries";
 import {
   runtimeDisplayLabel,
-} from "@multica/core/runtimes";
-import type { AgentRuntime } from "@multica/core/types";
+} from "@workpal/core/runtimes";
+import type { AgentRuntime } from "@workpal/core/types";
 import { MikaIntro } from "../components/mika-intro";
 import {
   StepFooter,

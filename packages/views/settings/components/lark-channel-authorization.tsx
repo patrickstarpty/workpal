@@ -4,12 +4,12 @@ import { useEffect, useRef, useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { QRCode } from "react-qr-code";
-import { RefreshCw } from "@multica/ui/icons";
-import { Button } from "@multica/ui/components/ui/button";
-import { DialogFooter } from "@multica/ui/components/ui/dialog";
-import { api, ApiError } from "@multica/core/api";
-import { larkKeys } from "@multica/core/lark";
-import type { LarkInstallStatusResponse } from "@multica/core/types";
+import { RefreshCw } from "@workpal/ui/icons";
+import { Button } from "@workpal/ui/components/ui/button";
+import { DialogFooter } from "@workpal/ui/components/ui/dialog";
+import { api, ApiError } from "@workpal/core/api";
+import { larkKeys } from "@workpal/core/lark";
+import type { LarkInstallStatusResponse } from "@workpal/core/types";
 import { useT } from "../../i18n";
 
 export function LarkChannelAuthorization({

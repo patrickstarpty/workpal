@@ -12,11 +12,11 @@ import (
 
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgtype"
-	"github.com/multica-ai/multica/server/internal/events"
-	"github.com/multica-ai/multica/server/internal/util"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
-	"github.com/multica-ai/multica/server/pkg/dbid"
-	"github.com/multica-ai/multica/server/pkg/protocol"
+	"workpal.local/workpal/server/internal/events"
+	"workpal.local/workpal/server/internal/util"
+	db "workpal.local/workpal/server/pkg/db/generated"
+	"workpal.local/workpal/server/pkg/dbid"
+	"workpal.local/workpal/server/pkg/protocol"
 )
 
 var (
@@ -284,7 +284,7 @@ func (s *ChatWakeupService) Create(ctx context.Context, task db.AgentTaskQueue, 
 		if n, err := qtx.CountActiveChatWakeupsForSession(ctx, session.ID); err != nil {
 			return err
 		} else if n >= ChatWakeupMaxPerSession {
-			return fmt.Errorf("%w: this conversation already has %d active wakeups; list them with `multica chat wakeup list`, and ask the user which one to cancel", ErrChatWakeupLimit, n)
+			return fmt.Errorf("%w: this conversation already has %d active wakeups; list them with `workpal chat wakeup list`, and ask the user which one to cancel", ErrChatWakeupLimit, n)
 		}
 		if n, err := qtx.CountActiveChatWakeupsForRequester(ctx, db.CountActiveChatWakeupsForRequesterParams{WorkspaceID: session.WorkspaceID, RequesterID: requester}); err != nil {
 			return err
@@ -908,7 +908,7 @@ func (s *ChatWakeupService) turnInput(ctx context.Context, w db.ChatWakeup, reas
 	case reason == ChatWakeupReasonExpired:
 		b.WriteString("Tell the user where things stand and why it has not happened yet, and ask whether to keep waiting. If they want you to, create a new wakeup in that later turn.\n")
 	case reason == ChatWakeupReasonCheck && w.Status == "active":
-		fmt.Fprintf(&b, "If nothing needs the user's attention yet, run `multica chat wakeup checkin %s --note \"<what you saw>\"` and end without a reply: nothing is sent and the next check runs on schedule. When what you are watching for has happened, reply to the user and run `multica chat wakeup finish %s`.\n", id, id)
+		fmt.Fprintf(&b, "If nothing needs the user's attention yet, run `workpal chat wakeup checkin %s --note \"<what you saw>\"` and end without a reply: nothing is sent and the next check runs on schedule. When what you are watching for has happened, reply to the user and run `workpal chat wakeup finish %s`.\n", id, id)
 	}
 	return b.String()
 }

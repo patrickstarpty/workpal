@@ -14,7 +14,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/multica-ai/multica/server/internal/integrations/channel/engine"
+	"workpal.local/workpal/server/internal/integrations/channel/engine"
 )
 
 func assertMediaTempDirEmpty(t *testing.T, dir string) {
@@ -63,9 +63,9 @@ func TestMediaTempFileRemovedAfterClose(t *testing.T) {
 }
 
 func TestMediaTempFileRemovedAfterProcessExit(t *testing.T) {
-	if os.Getenv("MULTICA_TEST_MEDIA_TEMP_CHILD") == "1" {
+	if os.Getenv("WORKPAL_TEST_MEDIA_TEMP_CHILD") == "1" {
 		key, keyB64 := mediaTestKey(t)
-		f, _, err := decryptToFile(keyB64, strings.NewReader(sealMedia(t, key, []byte("private attachment"))), os.Getenv("MULTICA_TEST_MEDIA_TEMP_DIR"))
+		f, _, err := decryptToFile(keyB64, strings.NewReader(sealMedia(t, key, []byte("private attachment"))), os.Getenv("WORKPAL_TEST_MEDIA_TEMP_DIR"))
 		if err != nil {
 			t.Fatal(err)
 		}
@@ -80,7 +80,7 @@ func TestMediaTempFileRemovedAfterProcessExit(t *testing.T) {
 		t.Fatal(err)
 	}
 	cmd := exec.CommandContext(ctx, exe, "-test.run=^TestMediaTempFileRemovedAfterProcessExit$")
-	cmd.Env = append(os.Environ(), "MULTICA_TEST_MEDIA_TEMP_CHILD=1", "MULTICA_TEST_MEDIA_TEMP_DIR="+dir)
+	cmd.Env = append(os.Environ(), "WORKPAL_TEST_MEDIA_TEMP_CHILD=1", "WORKPAL_TEST_MEDIA_TEMP_DIR="+dir)
 	output, err := cmd.CombinedOutput()
 	var exitErr *exec.ExitError
 	if !errors.As(err, &exitErr) || exitErr.ExitCode() != 43 {

@@ -1,13 +1,13 @@
 import { describe, expect, it, vi } from "vitest";
 import { fireEvent, screen, waitFor } from "@testing-library/react";
 import { QueryClientProvider } from "@tanstack/react-query";
-import { setApiInstance } from "@multica/core/api";
-import type { ApiClient } from "@multica/core/api/client";
-import { createQueryClient } from "@multica/core/query-client";
-import type { Agent, Issue, IssueSubscriber } from "@multica/core/types";
+import { setApiInstance } from "@workpal/core/api";
+import type { ApiClient } from "@workpal/core/api/client";
+import { createQueryClient } from "@workpal/core/query-client";
+import type { Agent, Issue, IssueSubscriber } from "@workpal/core/types";
 import { renderWithI18n } from "../../test/i18n";
 
-vi.mock("@multica/core/hooks", () => ({ useWorkspaceId: () => "ws-1" }));
+vi.mock("@workpal/core/hooks", () => ({ useWorkspaceId: () => "ws-1" }));
 
 import { UnsubscribeArchiveButton } from "./unsubscribe-archive-button";
 

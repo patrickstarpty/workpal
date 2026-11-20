@@ -39,18 +39,18 @@ import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
 import rehypeRaw from "rehype-raw";
 import rehypeSanitize from "rehype-sanitize";
-import { cn } from "@multica/ui/lib/utils";
-import { useWorkspaceSlug } from "@multica/core/paths";
-import { useConfigStore } from "@multica/core/config";
-import { api } from "@multica/core/api";
-import type { Attachment } from "@multica/core/types";
-import { attachmentIdFromDownloadURL } from "@multica/core/types";
+import { cn } from "@workpal/ui/lib/utils";
+import { useWorkspaceSlug } from "@workpal/core/paths";
+import { useConfigStore } from "@workpal/core/config";
+import { api } from "@workpal/core/api";
+import type { Attachment } from "@workpal/core/types";
+import { attachmentIdFromDownloadURL } from "@workpal/core/types";
 import {
   isAllowedFileCardHref,
   isIssueIdentifier,
   markdownSanitizeSchema,
   markdownUrlTransform,
-} from "@multica/ui/markdown";
+} from "@workpal/ui/markdown";
 import {
   resolveClickIntent,
   useAppOrigin,
@@ -254,7 +254,7 @@ function RichLink({ href, children }: { href?: string; children?: ReactNode }) {
   // An attachment download URL written as a plain link — the shape the
   // server persists into bodies via `buildMarkdownURL`, which in private-
   // storage deployments is ABSOLUTE and pinned to the API host
-  // (`MULTICA_PUBLIC_URL`). A bare navigation there cannot authenticate:
+  // (`WORKPAL_PUBLIC_URL`). A bare navigation there cannot authenticate:
   // web's session cookie is host-locked to the API origin and
   // SameSite=Strict (and Desktop/mobile carry a bearer token no <a> can
   // send), so the browser gets `401 missing authorization`. Route through
@@ -262,7 +262,7 @@ function RichLink({ href, children }: { href?: string; children?: ReactNode }) {
   // and navigates to the credential-bearing URL the server mints for this
   // click (capability / presign / CloudFront, per deployment mode). Same
   // click-time re-sign the file-card renderer already does (MUL-3130).
-  // Also require this deployment's origin; another Multica instance may use
+  // Also require this deployment's origin; another Workpal instance may use
   // the same path shape with unrelated attachment IDs.
   const attachmentId = href
     ? ownAttachmentDownloadId(href, appOrigin, attachmentPublicUrl)

@@ -61,7 +61,7 @@ After the manual macOS release has signed, notarized, verified, and uploaded bot
 architectures, the release-desktop skill dispatches the same workflow:
 
 ```bash
-gh workflow run promote-release.yml --repo multica-ai/multica --ref main -f tag=vX.Y.Z
+gh workflow run promote-release.yml --repo workpal-ai/workpal --ref main -f tag=vX.Y.Z
 ```
 
 The workflow uses the reviewed validator from `main`, not executable code from the

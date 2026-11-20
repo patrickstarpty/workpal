@@ -13,7 +13,7 @@ import (
 
 const (
 	zcodePersonalConfigEnv   = "ZCODE_PERSONAL_PROVIDER_CONFIG_FILE"
-	zcodeProvidersTempPrefix = "multica-zcode-providers-"
+	zcodeProvidersTempPrefix = "workpal-zcode-providers-"
 )
 
 type zcodeDesktopProvider struct {
@@ -60,7 +60,7 @@ func readZcodeConfig(path string, into any) error {
 
 // prepareZcodeRuntimeEnv adapts Desktop's enabled API-key connections into a
 // private, process-owned native provider repository snapshot under the process
-// temp dir (multica-zcode-providers-*). It reads Desktop's enabled connections
+// temp dir (workpal-zcode-providers-*). It reads Desktop's enabled connections
 // to build that snapshot, but never edits Desktop's repositories or converts
 // Start Plan identity tokens into API keys. Explicit native repositories remain
 // authoritative. Call CleanupStaleZcodeProviderSnapshots on daemon startup so
@@ -140,7 +140,7 @@ func prepareZcodeRuntimeEnv(executable string, env []string) ([]string, func(), 
 		if strings.HasPrefix(sourceID, "builtin:") && strings.Contains(sourceID, "start-plan") {
 			continue
 		}
-		providerID := "multica-desktop:" + sourceID
+		providerID := "workpal-desktop:" + sourceID
 		ids := make([]string, 0, len(provider.Models))
 		for id := range provider.Models {
 			ids = append(ids, id)

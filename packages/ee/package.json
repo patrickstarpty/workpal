@@ -1,5 +1,5 @@
 {
-  "name": "@multica/ee",
+  "name": "@workpal/ee",
   "version": "0.0.0",
   "private": true,
   "license": "SEE LICENSE IN LICENSE",
@@ -13,9 +13,9 @@
     ".": "./index.ts"
   },
   "dependencies": {
-    "@multica/core": "workspace:*",
-    "@multica/ui": "workspace:*",
-    "@multica/views": "workspace:*",
+    "@workpal/core": "workspace:*",
+    "@workpal/ui": "workspace:*",
+    "@workpal/views": "workspace:*",
     "sonner": "catalog:",
     "zod": "catalog:"
   },
@@ -28,9 +28,9 @@
     "zustand": "catalog:"
   },
   "devDependencies": {
-    "@multica/eslint-config": "workspace:*",
-    "@multica/tsconfig": "workspace:*",
-    "@multica/vitest-setup": "workspace:*",
+    "@workpal/eslint-config": "workspace:*",
+    "@workpal/tsconfig": "workspace:*",
+    "@workpal/vitest-setup": "workspace:*",
     "@testing-library/jest-dom": "catalog:",
     "@testing-library/react": "catalog:",
     "@testing-library/user-event": "catalog:",

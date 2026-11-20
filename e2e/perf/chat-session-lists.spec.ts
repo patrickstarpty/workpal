@@ -85,11 +85,11 @@ async function setup(page: Page, baseURL: string, withArchive: boolean, size = c
   const unexpected: string[] = [];
   page.on("pageerror", (error) => errors.push(error.message));
   await page.context().addCookies([
-    { name: "multica_logged_in", value: "1", url: origin },
+    { name: "workpal_logged_in", value: "1", url: origin },
     { name: "last_workspace_slug", value: "perf", url: origin },
   ]);
   await page.addInitScript(() => {
-    localStorage.setItem("multica:chat:floatingChatEnabled", "true");
+    localStorage.setItem("workpal:chat:floatingChatEnabled", "true");
   });
   await page.routeWebSocket(() => true, (ws) => { ws.onMessage(() => {}); });
   await page.route("**/*", async (route) => {
@@ -164,7 +164,7 @@ for (const withArchive of [false, true]) {
 
 test("floating chat history scrolls to an offscreen session", async ({ page, baseURL }) => {
   const state = await setup(page, baseURL!, false);
-  await page.addInitScript(() => localStorage.setItem("multica:chat:isOpen", "true"));
+  await page.addInitScript(() => localStorage.setItem("workpal:chat:isOpen", "true"));
   await page.goto("/perf/inbox");
   const started = Date.now();
   await page.getByRole("button", { name: "New chat", exact: true }).click();
@@ -198,7 +198,7 @@ test("compact chat list can select its last session", async ({ page, baseURL }) 
 for (const size of [0, 1]) {
   test(`floating history with ${size} sessions`, async ({ page, baseURL }) => {
     const state = await setup(page, baseURL!, false, size);
-    await page.addInitScript(() => localStorage.setItem("multica:chat:isOpen", "true"));
+    await page.addInitScript(() => localStorage.setItem("workpal:chat:isOpen", "true"));
     await page.goto("/perf/inbox");
     await page.getByRole("button", { name: "New chat", exact: true }).click();
     if (size === 0) {

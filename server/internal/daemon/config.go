@@ -15,9 +15,9 @@ import (
 
 	"github.com/mattn/go-shellwords"
 
-	"github.com/multica-ai/multica/server/internal/cli"
-	"github.com/multica-ai/multica/server/internal/daemon/execenv"
-	"github.com/multica-ai/multica/server/pkg/agent"
+	"workpal.local/workpal/server/internal/cli"
+	"workpal.local/workpal/server/internal/daemon/execenv"
+	"workpal.local/workpal/server/pkg/agent"
 )
 
 const (
@@ -32,7 +32,7 @@ const (
 	// agent run. 0 = no cap: a run is bounded only by the inactivity watchdog
 	// (DefaultAgentIdleWatchdog), so a session that keeps emitting events is
 	// never killed merely for running long (MUL-3064). Operators who want a
-	// hard ceiling for cost/resource control can set MULTICA_AGENT_TIMEOUT.
+	// hard ceiling for cost/resource control can set WORKPAL_AGENT_TIMEOUT.
 	DefaultAgentTimeout                   = 0
 	DefaultCodexSemanticInactivityTimeout = 10 * time.Minute
 	DefaultCodexHandshakeTimeout          = 30 * time.Second
@@ -61,7 +61,7 @@ const (
 	// from 5 min to 30 min), a subagent, a full test suite. 30 min still cut
 	// real work short, so this is 2h.
 	//
-	// Set MULTICA_AGENT_IDLE_WATCHDOG=0 to disable the whole watchdog suite.
+	// Set WORKPAL_AGENT_IDLE_WATCHDOG=0 to disable the whole watchdog suite.
 	DefaultAgentIdleWatchdog              = 2 * time.Hour
 	DefaultRuntimeName                    = "Local Agent"
 	DefaultWorkspaceBootstrapSyncInterval = 30 * time.Second
@@ -72,7 +72,7 @@ const (
 	DefaultMaxConcurrentTasks             = 20
 	DefaultGCInterval                     = 2 * time.Hour
 	DefaultGCTTL                          = 24 * time.Hour      // 1 day — AI-coding issues rarely stay open long
-	DefaultGCCompletedTaskTTL             = 14 * 24 * time.Hour // 14 days — bound completed issue-task env retention on every server; see the MULTICA_GC_COMPLETED_TASK_TTL comment in LoadConfig
+	DefaultGCCompletedTaskTTL             = 14 * 24 * time.Hour // 14 days — bound completed issue-task env retention on every server; see the WORKPAL_GC_COMPLETED_TASK_TTL comment in LoadConfig
 	DefaultGCOrphanTTL                    = 72 * time.Hour      // 3 days — orphans with no meta (crashes, pre-GC leftovers)
 	DefaultGCArtifactTTL                  = 12 * time.Hour      // 12h — drop regenerable artifacts once a task has been completed this long
 	DefaultGCCodexSessionTTL              = 14 * 24 * time.Hour // 14 days — reclaim per-issue Codex session stores untouched this long
@@ -96,7 +96,7 @@ const (
 // always cheap to recreate (`pnpm install`, `next build`, `turbo build`). Things
 // like `dist/`, `build/`, `.cache/` or `.venv/` may legitimately hold source or
 // release output in some repos and are NOT included by default — set
-// MULTICA_GC_ARTIFACT_PATTERNS to extend the list per deployment.
+// WORKPAL_GC_ARTIFACT_PATTERNS to extend the list per deployment.
 var DefaultGCArtifactPatterns = []string{"node_modules", ".next", ".turbo"}
 
 // Config holds all daemon configuration.
@@ -106,12 +106,12 @@ type Config struct {
 	LegacyDaemonIDs                []string // historical daemon_ids this machine may have registered under; reported at register time so the server can merge old runtime rows
 	DeviceName                     string
 	RuntimeName                    string
-	CLIVersion                     string                // multica CLI version (e.g. "0.1.13")
+	CLIVersion                     string                // workpal CLI version (e.g. "0.1.13")
 	CLICommit                      string                // full build revision embedded in the running CLI; empty/unknown if unavailable
 	LaunchedBy                     string                // "desktop" when spawned by the Electron app, empty for standalone
 	Profile                        string                // profile name (empty = default)
 	Agents                         map[string]AgentEntry // keyed by provider: claude, codebuddy, codex, copilot, opencode, codearts, deveco, openclaw, hermes, pi, cursor, kimi, reasonix, dsh, kiro, antigravity, qoder, qoderclicn, traecli, grok, qwen, qwenpaw, droid, amp, mcode, muse, devin, dim, zeroclaw, museapp (plus built-in runtime identities from agent.BuiltinRuntimes, e.g. omp)
-	WorkspacesRoot                 string                // base path for execution envs (default: ~/multica_workspaces)
+	WorkspacesRoot                 string                // base path for execution envs (default: ~/workpal_workspaces)
 	HealthPort                     int                   // local HTTP port for health checks (default: 19514)
 	MaxConcurrentTasks             int                   // max tasks running in parallel (default: 20)
 	GCEnabled                      bool                  // enable periodic workspace garbage collection (default: true)
@@ -123,20 +123,20 @@ type Config struct {
 	GCArtifactPatterns             []string              // basename patterns whose subtrees are removed during artifact cleanup (default: node_modules, .next, .turbo)
 	GCRepoTTL                      time.Duration         // evict a cached bare repo under .repos once no task has created a worktree from it for this long, it has no worktrees left, and it is no longer attached to any watched workspace (default: 30d, set 0 to disable)
 	GCRepoMaintenanceEnabled       bool                  // run reflog expiry and git gc after stale agent refs are removed (default: true; disable independently as an operational kill switch)
-	GCCodexSessionTTL              time.Duration         // reclaim a per-issue Codex session store (~/.codex/multica-sessions/<agent>/<issue>) untouched for at least this long, so a done/abandoned issue's conversation history does not accumulate forever (default: 14d, set 0 to disable)
+	GCCodexSessionTTL              time.Duration         // reclaim a per-issue Codex session store (~/.codex/workpal-sessions/<agent>/<issue>) untouched for at least this long, so a done/abandoned issue's conversation history does not accumulate forever (default: 14d, set 0 to disable)
 	GCHermesMemoryTTL              time.Duration         // reclaim a per-agent Hermes memory store (<profile dir>/hermes-state/<agent>/<profile>) untouched for at least this long, so a deleted agent's memory does not sit on disk forever (default: 90d, set 0 to disable)
 	GCHermesSessionTTL             time.Duration         // reclaim a per-conversation Hermes session store (<profile dir>/hermes-sessions/<agent>/<profile>/<conversation>) untouched for at least this long, so a done or abandoned conversation's transcript does not accumulate forever (default: 14d, set 0 to disable)
-	GCTaskTempLegacyTTL            time.Duration         // reclaim a per-task temp dir (<temp base>/multica-task-*) that carries no execution lock — i.e. left by a daemon predating the lock — once nothing inside it has been touched for this long. Dirs that DO carry the lock are reclaimed on liveness, never on age, so this knob does not apply to them. Neither does it reclaim a dir holding no task content — an old empty leftover, or a shell left by a daemon that died between creating the dir and publishing its lock — because holding no content is exactly what a dir currently being published looks like (default: 0, disabled — see DefaultGCTaskTempLegacyTTL)
-	AutoUpdateEnabled              bool                  // periodically check for a newer CLI release and self-update when idle (default: true on Multica Cloud, false on self-host)
+	GCTaskTempLegacyTTL            time.Duration         // reclaim a per-task temp dir (<temp base>/workpal-task-*) that carries no execution lock — i.e. left by a daemon predating the lock — once nothing inside it has been touched for this long. Dirs that DO carry the lock are reclaimed on liveness, never on age, so this knob does not apply to them. Neither does it reclaim a dir holding no task content — an old empty leftover, or a shell left by a daemon that died between creating the dir and publishing its lock — because holding no content is exactly what a dir currently being published looks like (default: 0, disabled — see DefaultGCTaskTempLegacyTTL)
+	AutoUpdateEnabled              bool                  // periodically check for a newer CLI release and self-update when idle (default: true on Workpal Cloud, false on self-host)
 	AutoUpdateCheckInterval        time.Duration         // how often the auto-update loop polls for a new release (default: 6h)
-	AutoReloadEnabled              bool                  // restart when the multica binary on disk no longer matches the running version (default: true for CLI-launched daemons)
+	AutoReloadEnabled              bool                  // restart when the workpal binary on disk no longer matches the running version (default: true for CLI-launched daemons)
 	PollInterval                   time.Duration
 	WSClaimPollInterval            time.Duration // upper bound for healthy WS batch-claim safety polls; actual sleeps use downward-only jitter
 	HeartbeatInterval              time.Duration
 	AgentTimeout                   time.Duration
 	CodexSemanticInactivityTimeout time.Duration
 	// CodexFirstTurnNoProgressTimeout is an explicit override for the Codex
-	// first-turn no-progress ceiling (MULTICA_CODEX_FIRST_TURN_TIMEOUT). 0 means
+	// first-turn no-progress ceiling (WORKPAL_CODEX_FIRST_TURN_TIMEOUT). 0 means
 	// unset: the backend keeps its default ceiling, which CodexSemanticInactivityTimeout
 	// can only shrink. A positive value raises (or lowers) that ceiling outright,
 	// for app-servers that are legitimately slow to their first event (GH #3262).
@@ -144,7 +144,7 @@ type Config struct {
 	CodexHandshakeTimeout           time.Duration
 	// CodexTurnInterruptTimeout is the bounded grace period after cancellation
 	// for app-server to acknowledge turn/interrupt and emit turn/completed.
-	// Operators can tune it with MULTICA_CODEX_TURN_INTERRUPT_TIMEOUT using the
+	// Operators can tune it with WORKPAL_CODEX_TURN_INTERRUPT_TIMEOUT using the
 	// latency recorded in the Codex lifecycle logs.
 	CodexTurnInterruptTimeout   time.Duration
 	CodexThreadHandshakeTimeout time.Duration
@@ -162,7 +162,7 @@ type Config struct {
 	// ProfileCommandOverrides maps a custom runtime profile_id -> the absolute
 	// executable path to use for that profile on THIS machine (MUL-3284).
 	// Sourced from the local CLI config (cli.CLIConfig.ProfileCommandOverrides),
-	// written by `multica runtime profile set-path`. appendProfileRuntimes
+	// written by `workpal runtime profile set-path`. appendProfileRuntimes
 	// prefers a matching, executable override over resolving the profile's
 	// command_name on PATH. nil/empty means "always resolve via PATH".
 	ProfileCommandOverrides map[string]string
@@ -207,7 +207,7 @@ type Overrides struct {
 // and optional CLI flag overrides.
 func LoadConfig(overrides Overrides) (Config, error) {
 	// Server URL: override > env > default
-	rawServerURL := envOrDefault("MULTICA_SERVER_URL", DefaultServerURL)
+	rawServerURL := envOrDefault("WORKPAL_SERVER_URL", DefaultServerURL)
 	if overrides.ServerURL != "" {
 		rawServerURL = overrides.ServerURL
 	}
@@ -223,15 +223,15 @@ func LoadConfig(overrides Overrides) (Config, error) {
 	// instead of a launchctl env hack. We translate those fields into the
 	// same env vars the rest of LoadConfig already honors:
 	//
-	//   - MULTICA_OPENCLAW_PATH: read by probe() via envOrDefault for the
+	//   - WORKPAL_OPENCLAW_PATH: read by probe() via envOrDefault for the
 	//     binary lookup; pre-existing path.
 	//   - OPENCLAW_STATE_DIR:    OpenClaw's own env var; the daemon already
 	//     forwards it to spawned children via mergeEnv (server/pkg/agent/...).
-	//   - MULTICA_OPENCLAW_CLI_TIMEOUT: read by execenv when it sets the
+	//   - WORKPAL_OPENCLAW_CLI_TIMEOUT: read by execenv when it sets the
 	//     deadline on each `openclaw config ...` call during task prep.
 	//
 	// Precedence is "env wins over config wins over default" — same shape
-	// users already get with MULTICA_OPENCLAW_PATH today. We achieve it with
+	// users already get with WORKPAL_OPENCLAW_PATH today. We achieve it with
 	// LookupEnv guards: if the user already exported the env var (in their
 	// shell, via launchctl, or via the systemd unit), we leave it alone;
 	// otherwise we Setenv from the config file. This keeps every downstream
@@ -271,31 +271,31 @@ func LoadConfig(overrides Overrides) (Config, error) {
 		return Config{}, fmt.Errorf("no agent CLI found: install claude, codebuddy, codearts, codex, copilot, opencode, deveco, openclaw, hermes, pi, omp, cursor-agent, kimi, reasonix, dsh, kiro-cli, agy, qodercli, qoderclicn, traecli, grok, qwen, qwenpaw, droid, amp, mcode, muse, devin, dim, zeroclaw, or zcode and ensure it is on PATH")
 	}
 
-	claudeArgs, err := shellArgsFromEnv("MULTICA_CLAUDE_ARGS")
+	claudeArgs, err := shellArgsFromEnv("WORKPAL_CLAUDE_ARGS")
 	if err != nil {
 		return Config{}, err
 	}
-	codexArgs, err := shellArgsFromEnv("MULTICA_CODEX_ARGS")
+	codexArgs, err := shellArgsFromEnv("WORKPAL_CODEX_ARGS")
 	if err != nil {
 		return Config{}, err
 	}
-	codebuddyArgs, err := shellArgsFromEnv("MULTICA_CODEBUDDY_ARGS")
+	codebuddyArgs, err := shellArgsFromEnv("WORKPAL_CODEBUDDY_ARGS")
 	if err != nil {
 		return Config{}, err
 	}
-	qwenArgs, err := shellArgsFromEnv("MULTICA_QWEN_ARGS")
+	qwenArgs, err := shellArgsFromEnv("WORKPAL_QWEN_ARGS")
 	if err != nil {
 		return Config{}, err
 	}
-	ampArgs, err := shellArgsFromEnv("MULTICA_AMP_ARGS")
+	ampArgs, err := shellArgsFromEnv("WORKPAL_AMP_ARGS")
 	if err != nil {
 		return Config{}, err
 	}
-	droidArgs, err := shellArgsFromEnv("MULTICA_DROID_ARGS")
+	droidArgs, err := shellArgsFromEnv("WORKPAL_DROID_ARGS")
 	if err != nil {
 		return Config{}, err
 	}
-	qwenpawArgs, err := shellArgsFromEnv("MULTICA_QWENPAW_ARGS")
+	qwenpawArgs, err := shellArgsFromEnv("WORKPAL_QWENPAW_ARGS")
 	if err != nil {
 		return Config{}, err
 	}
@@ -307,14 +307,14 @@ func LoadConfig(overrides Overrides) (Config, error) {
 	}
 
 	// Durations: override > env > default
-	pollInterval, err := durationFromEnv("MULTICA_DAEMON_POLL_INTERVAL", DefaultPollInterval)
+	pollInterval, err := durationFromEnv("WORKPAL_DAEMON_POLL_INTERVAL", DefaultPollInterval)
 	if err != nil {
 		return Config{}, err
 	}
 	if overrides.PollInterval > 0 {
 		pollInterval = overrides.PollInterval
 	}
-	wsClaimPollInterval, err := durationFromEnv("MULTICA_DAEMON_WS_CLAIM_POLL_INTERVAL", DefaultWSClaimPollInterval)
+	wsClaimPollInterval, err := durationFromEnv("WORKPAL_DAEMON_WS_CLAIM_POLL_INTERVAL", DefaultWSClaimPollInterval)
 	if err != nil {
 		return Config{}, err
 	}
@@ -322,10 +322,10 @@ func LoadConfig(overrides Overrides) (Config, error) {
 		wsClaimPollInterval = overrides.WSClaimPollInterval
 	}
 	if wsClaimPollInterval <= 0 {
-		return Config{}, fmt.Errorf("MULTICA_DAEMON_WS_CLAIM_POLL_INTERVAL must be positive (got %s)", wsClaimPollInterval)
+		return Config{}, fmt.Errorf("WORKPAL_DAEMON_WS_CLAIM_POLL_INTERVAL must be positive (got %s)", wsClaimPollInterval)
 	}
 
-	heartbeatInterval, err := durationFromEnv("MULTICA_DAEMON_HEARTBEAT_INTERVAL", DefaultHeartbeatInterval)
+	heartbeatInterval, err := durationFromEnv("WORKPAL_DAEMON_HEARTBEAT_INTERVAL", DefaultHeartbeatInterval)
 	if err != nil {
 		return Config{}, err
 	}
@@ -333,7 +333,7 @@ func LoadConfig(overrides Overrides) (Config, error) {
 		heartbeatInterval = overrides.HeartbeatInterval
 	}
 
-	agentTimeout, err := durationFromEnv("MULTICA_AGENT_TIMEOUT", DefaultAgentTimeout)
+	agentTimeout, err := durationFromEnv("WORKPAL_AGENT_TIMEOUT", DefaultAgentTimeout)
 	if err != nil {
 		return Config{}, err
 	}
@@ -341,22 +341,22 @@ func LoadConfig(overrides Overrides) (Config, error) {
 		agentTimeout = *overrides.AgentTimeout
 	}
 
-	// MULTICA_AGENT_IDLE_WATCHDOG=0 disables the per-task idle watchdog. We
+	// WORKPAL_AGENT_IDLE_WATCHDOG=0 disables the per-task idle watchdog. We
 	// route 0 through durationFromEnv so the operator can opt out without
 	// patching the binary; any positive duration overrides DefaultAgentIdleWatchdog.
-	agentIdleWatchdog, err := durationFromEnv("MULTICA_AGENT_IDLE_WATCHDOG", DefaultAgentIdleWatchdog)
+	agentIdleWatchdog, err := durationFromEnv("WORKPAL_AGENT_IDLE_WATCHDOG", DefaultAgentIdleWatchdog)
 	if err != nil {
 		return Config{}, err
 	}
 	if overrides.AgentIdleWatchdog != nil {
 		agentIdleWatchdog = *overrides.AgentIdleWatchdog
 	}
-	// MULTICA_OPENCODE_IDLE_WATCHDOG narrows the no-message window for
+	// WORKPAL_OPENCODE_IDLE_WATCHDOG narrows the no-message window for
 	// OpenCode's streamed model responses. Zero removes the provider-specific
-	// override and falls back to MULTICA_AGENT_IDLE_WATCHDOG; positive values
+	// override and falls back to WORKPAL_AGENT_IDLE_WATCHDOG; positive values
 	// cannot extend the global bound, and the global zero still disables the
 	// whole mechanism.
-	openCodeIdleWatchdog, err := durationFromEnv("MULTICA_OPENCODE_IDLE_WATCHDOG", DefaultOpenCodeIdleWatchdog)
+	openCodeIdleWatchdog, err := durationFromEnv("WORKPAL_OPENCODE_IDLE_WATCHDOG", DefaultOpenCodeIdleWatchdog)
 	if err != nil {
 		return Config{}, err
 	}
@@ -367,14 +367,14 @@ func LoadConfig(overrides Overrides) (Config, error) {
 	// silent step it already covers those.
 	//
 	// The derivation tracks in BOTH directions, which is the point of collapsing
-	// this to one number. Raising MULTICA_AGENT_IDLE_WATCHDOG no longer leaves
+	// this to one number. Raising WORKPAL_AGENT_IDLE_WATCHDOG no longer leaves
 	// tool calls silently pinned to the old ceiling — and lowering it now also
 	// lowers the tool budget, where previously a shortened idle window left
 	// tools at a separate, larger 2h. That second direction is a real behaviour
 	// change for anyone who had deliberately shortened the idle window; the
 	// override below is how they keep the two apart.
 	//
-	// MULTICA_AGENT_TOOL_WATCHDOG still overrides for the deliberate "tools may
+	// WORKPAL_AGENT_TOOL_WATCHDOG still overrides for the deliberate "tools may
 	// run longer than the model may think" case, and 0 keeps its meaning: never
 	// force-stop while a tool is in flight.
 	//
@@ -383,9 +383,9 @@ func LoadConfig(overrides Overrides) (Config, error) {
 	// what keeps a legitimate long background job on the tool budget instead of
 	// the shorter idle one. The consequence at 0 is the same one a foreground
 	// tool that never returns already has: such a run is bounded only by
-	// MULTICA_AGENT_TIMEOUT, which is itself 0 by default. Operators who want a
+	// WORKPAL_AGENT_TIMEOUT, which is itself 0 by default. Operators who want a
 	// stalled background shell bounded must leave this non-zero.
-	agentToolWatchdog, err := durationFromEnv("MULTICA_AGENT_TOOL_WATCHDOG", agentIdleWatchdog)
+	agentToolWatchdog, err := durationFromEnv("WORKPAL_AGENT_TOOL_WATCHDOG", agentIdleWatchdog)
 	if err != nil {
 		return Config{}, err
 	}
@@ -419,7 +419,7 @@ func LoadConfig(overrides Overrides) (Config, error) {
 	if codexSemanticDefault <= 0 {
 		codexSemanticDefault = DefaultCodexSemanticInactivityTimeout
 	}
-	codexSemanticInactivityTimeout, err := durationFromEnv("MULTICA_CODEX_SEMANTIC_INACTIVITY_TIMEOUT", codexSemanticDefault)
+	codexSemanticInactivityTimeout, err := durationFromEnv("WORKPAL_CODEX_SEMANTIC_INACTIVITY_TIMEOUT", codexSemanticDefault)
 	if err != nil {
 		return Config{}, err
 	}
@@ -429,7 +429,7 @@ func LoadConfig(overrides Overrides) (Config, error) {
 
 	// 0 = unset: the codex backend keeps its default first-turn ceiling. A
 	// positive value is an explicit operator override (GH #3262 / #5959).
-	codexFirstTurnNoProgressTimeout, err := durationFromEnv("MULTICA_CODEX_FIRST_TURN_TIMEOUT", 0)
+	codexFirstTurnNoProgressTimeout, err := durationFromEnv("WORKPAL_CODEX_FIRST_TURN_TIMEOUT", 0)
 	if err != nil {
 		return Config{}, err
 	}
@@ -450,14 +450,14 @@ func LoadConfig(overrides Overrides) (Config, error) {
 			effectiveSemanticTimeout = DefaultCodexSemanticInactivityTimeout
 		}
 		if codexFirstTurnNoProgressTimeout >= effectiveSemanticTimeout {
-			slog.Warn("MULTICA_CODEX_FIRST_TURN_TIMEOUT is greater than or equal to the semantic-inactivity timeout; the effective first-turn wait is truncated to the semantic timeout and the model-catalog startup retry is disabled. Because the semantic timer is armed first and equal durations do not deterministically favour the first-turn deadline, set MULTICA_CODEX_SEMANTIC_INACTIVITY_TIMEOUT strictly above MULTICA_CODEX_FIRST_TURN_TIMEOUT (with some margin) to preserve it.",
+			slog.Warn("WORKPAL_CODEX_FIRST_TURN_TIMEOUT is greater than or equal to the semantic-inactivity timeout; the effective first-turn wait is truncated to the semantic timeout and the model-catalog startup retry is disabled. Because the semantic timer is armed first and equal durations do not deterministically favour the first-turn deadline, set WORKPAL_CODEX_SEMANTIC_INACTIVITY_TIMEOUT strictly above WORKPAL_CODEX_FIRST_TURN_TIMEOUT (with some margin) to preserve it.",
 				"first_turn_timeout", codexFirstTurnNoProgressTimeout.String(),
 				"semantic_inactivity_timeout", effectiveSemanticTimeout.String(),
 			)
 		}
 	}
 
-	codexHandshakeTimeout, err := durationFromEnv("MULTICA_CODEX_HANDSHAKE_TIMEOUT", DefaultCodexHandshakeTimeout)
+	codexHandshakeTimeout, err := durationFromEnv("WORKPAL_CODEX_HANDSHAKE_TIMEOUT", DefaultCodexHandshakeTimeout)
 	if err != nil {
 		return Config{}, err
 	}
@@ -472,7 +472,7 @@ func LoadConfig(overrides Overrides) (Config, error) {
 	// persisted config values into Overrides, while embedded callers may reach
 	// LoadConfig with the environment directly.
 	codexThreadHandshakeTimeout := DefaultCodexThreadHandshakeTimeout
-	if raw, ok := os.LookupEnv("MULTICA_CODEX_HANDSHAKE_TIMEOUT"); ok && strings.TrimSpace(raw) != "" {
+	if raw, ok := os.LookupEnv("WORKPAL_CODEX_HANDSHAKE_TIMEOUT"); ok && strings.TrimSpace(raw) != "" {
 		if parsed, parseErr := parseFlexDuration(strings.TrimSpace(raw)); parseErr == nil && parsed > 0 {
 			codexThreadHandshakeTimeout = codexHandshakeTimeout
 		}
@@ -480,7 +480,7 @@ func LoadConfig(overrides Overrides) (Config, error) {
 	if overrides.CodexHandshakeTimeout > 0 {
 		codexThreadHandshakeTimeout = overrides.CodexHandshakeTimeout
 	}
-	codexTurnInterruptTimeout, err := durationFromEnv("MULTICA_CODEX_TURN_INTERRUPT_TIMEOUT", DefaultCodexTurnInterruptTimeout)
+	codexTurnInterruptTimeout, err := durationFromEnv("WORKPAL_CODEX_TURN_INTERRUPT_TIMEOUT", DefaultCodexTurnInterruptTimeout)
 	if err != nil {
 		return Config{}, err
 	}
@@ -488,7 +488,7 @@ func LoadConfig(overrides Overrides) (Config, error) {
 		codexTurnInterruptTimeout = DefaultCodexTurnInterruptTimeout
 	}
 
-	maxConcurrentTasks, err := intFromEnv("MULTICA_DAEMON_MAX_CONCURRENT_TASKS", DefaultMaxConcurrentTasks)
+	maxConcurrentTasks, err := intFromEnv("WORKPAL_DAEMON_MAX_CONCURRENT_TASKS", DefaultMaxConcurrentTasks)
 	if err != nil {
 		return Config{}, err
 	}
@@ -503,9 +503,9 @@ func LoadConfig(overrides Overrides) (Config, error) {
 	// The persistent UUID is written once to `<profile-dir>/daemon.id` and
 	// then reused forever so hostname drift (.local suffix, system rename,
 	// mDNS state, profile switch) no longer mints a new runtime identity.
-	// Callers may still pin a specific id via MULTICA_DAEMON_ID or the
+	// Callers may still pin a specific id via WORKPAL_DAEMON_ID or the
 	// override field (e.g. for tests or embedded environments).
-	daemonID := strings.TrimSpace(os.Getenv("MULTICA_DAEMON_ID"))
+	daemonID := strings.TrimSpace(os.Getenv("WORKPAL_DAEMON_ID"))
 	if overrides.DaemonID != "" {
 		daemonID = overrides.DaemonID
 	}
@@ -522,7 +522,7 @@ func LoadConfig(overrides Overrides) (Config, error) {
 	legacyDaemonIDs := LegacyDaemonIDs(host, profile)
 	// Pre-change (#1220) daemon identity was stored per profile, which means
 	// the same machine could end up with multiple leftover daemon.id files
-	// — e.g. ~/.multica/daemon.id (default) plus ~/.multica/profiles/<x>/
+	// — e.g. ~/.workpal/daemon.id (default) plus ~/.workpal/profiles/<x>/
 	// daemon.id. Surface those UUIDs so the server can merge their runtime
 	// rows into the canonical machine UUID. Fatal-free: a broken profiles
 	// dir shouldn't block startup.
@@ -530,21 +530,21 @@ func LoadConfig(overrides Overrides) (Config, error) {
 		legacyDaemonIDs = append(legacyDaemonIDs, uuids...)
 	}
 	// Strip anything that collides with the resolved daemon_id (e.g. when
-	// the user explicitly pins MULTICA_DAEMON_ID=<hostname>, or when the
+	// the user explicitly pins WORKPAL_DAEMON_ID=<hostname>, or when the
 	// canonical id was itself promoted from a pre-change profile file).
 	legacyDaemonIDs = filterLegacyIDs(legacyDaemonIDs, daemonID)
 
-	deviceName := envOrDefault("MULTICA_DAEMON_DEVICE_NAME", host)
+	deviceName := envOrDefault("WORKPAL_DAEMON_DEVICE_NAME", host)
 	if overrides.DeviceName != "" {
 		deviceName = overrides.DeviceName
 	}
 
-	runtimeName := envOrDefault("MULTICA_AGENT_RUNTIME_NAME", DefaultRuntimeName)
+	runtimeName := envOrDefault("WORKPAL_AGENT_RUNTIME_NAME", DefaultRuntimeName)
 	if overrides.RuntimeName != "" {
 		runtimeName = overrides.RuntimeName
 	}
 
-	// Workspaces root: override > env > default (~/multica_workspaces or ~/multica_workspaces_<profile>)
+	// Workspaces root: override > env > default (~/workpal_workspaces or ~/workpal_workspaces_<profile>)
 	workspacesRoot, err := ResolveWorkspacesRoot(profile, overrides.WorkspacesRoot)
 	if err != nil {
 		return Config{}, err
@@ -558,14 +558,14 @@ func LoadConfig(overrides Overrides) (Config, error) {
 
 	// GC config: env > defaults
 	gcEnabled := true
-	if v := os.Getenv("MULTICA_GC_ENABLED"); v == "false" || v == "0" {
+	if v := os.Getenv("WORKPAL_GC_ENABLED"); v == "false" || v == "0" {
 		gcEnabled = false
 	}
-	gcInterval, err := durationFromEnv("MULTICA_GC_INTERVAL", DefaultGCInterval)
+	gcInterval, err := durationFromEnv("WORKPAL_GC_INTERVAL", DefaultGCInterval)
 	if err != nil {
 		return Config{}, err
 	}
-	gcTTL, err := durationFromEnv("MULTICA_GC_TTL", DefaultGCTTL)
+	gcTTL, err := durationFromEnv("WORKPAL_GC_TTL", DefaultGCTTL)
 	if err != nil {
 		return Config{}, err
 	}
@@ -577,58 +577,58 @@ func LoadConfig(overrides Overrides) (Config, error) {
 	// nobody is watching it. 14d is deliberately generous: past that much idle
 	// time main has usually moved far enough that a fresh checkout beats a
 	// stale worktree. Operators who want the old keep-until-terminal behavior
-	// set MULTICA_GC_COMPLETED_TASK_TTL=0.
+	// set WORKPAL_GC_COMPLETED_TASK_TTL=0.
 	// Local-directory tasks keep their daemon logs and output; this TTL removes
 	// only their Codex home, and only when session history is stored elsewhere.
-	gcCompletedTaskTTL, err := durationFromEnv("MULTICA_GC_COMPLETED_TASK_TTL", DefaultGCCompletedTaskTTL)
+	gcCompletedTaskTTL, err := durationFromEnv("WORKPAL_GC_COMPLETED_TASK_TTL", DefaultGCCompletedTaskTTL)
 	if err != nil {
 		return Config{}, err
 	}
-	gcOrphanTTL, err := durationFromEnv("MULTICA_GC_ORPHAN_TTL", DefaultGCOrphanTTL)
+	gcOrphanTTL, err := durationFromEnv("WORKPAL_GC_ORPHAN_TTL", DefaultGCOrphanTTL)
 	if err != nil {
 		return Config{}, err
 	}
-	gcArtifactTTL, err := durationFromEnv("MULTICA_GC_ARTIFACT_TTL", DefaultGCArtifactTTL)
+	gcArtifactTTL, err := durationFromEnv("WORKPAL_GC_ARTIFACT_TTL", DefaultGCArtifactTTL)
 	if err != nil {
 		return Config{}, err
 	}
-	gcCodexSessionTTL, err := durationFromEnv("MULTICA_GC_CODEX_SESSION_TTL", DefaultGCCodexSessionTTL)
+	gcCodexSessionTTL, err := durationFromEnv("WORKPAL_GC_CODEX_SESSION_TTL", DefaultGCCodexSessionTTL)
 	if err != nil {
 		return Config{}, err
 	}
-	gcTaskTempLegacyTTL, err := durationFromEnv("MULTICA_GC_TASK_TEMP_LEGACY_TTL", DefaultGCTaskTempLegacyTTL)
+	gcTaskTempLegacyTTL, err := durationFromEnv("WORKPAL_GC_TASK_TEMP_LEGACY_TTL", DefaultGCTaskTempLegacyTTL)
 	if err != nil {
 		return Config{}, err
 	}
-	gcHermesMemoryTTL, err := durationFromEnv("MULTICA_GC_HERMES_MEMORY_TTL", DefaultGCHermesMemoryTTL)
+	gcHermesMemoryTTL, err := durationFromEnv("WORKPAL_GC_HERMES_MEMORY_TTL", DefaultGCHermesMemoryTTL)
 	if err != nil {
 		return Config{}, err
 	}
-	gcHermesSessionTTL, err := durationFromEnv("MULTICA_GC_HERMES_SESSION_TTL", DefaultGCHermesSessionTTL)
+	gcHermesSessionTTL, err := durationFromEnv("WORKPAL_GC_HERMES_SESSION_TTL", DefaultGCHermesSessionTTL)
 	if err != nil {
 		return Config{}, err
 	}
-	gcRepoTTL, err := durationFromEnv("MULTICA_GC_REPO_TTL", DefaultGCRepoTTL)
+	gcRepoTTL, err := durationFromEnv("WORKPAL_GC_REPO_TTL", DefaultGCRepoTTL)
 	if err != nil {
 		return Config{}, err
 	}
-	gcRepoMaintenanceEnabled := boolFromEnv("MULTICA_GC_REPO_MAINTENANCE_ENABLED", true)
-	gcArtifactPatterns := patternsFromEnv("MULTICA_GC_ARTIFACT_PATTERNS", DefaultGCArtifactPatterns)
+	gcRepoMaintenanceEnabled := boolFromEnv("WORKPAL_GC_REPO_MAINTENANCE_ENABLED", true)
+	gcArtifactPatterns := patternsFromEnv("WORKPAL_GC_ARTIFACT_PATTERNS", DefaultGCArtifactPatterns)
 
 	// Auto-update config: default -> env override -> CLI override.
 	//
-	// Default is opt-in on Multica Cloud (api.multica.ai) and opt-out for
+	// Default is opt-in on Workpal Cloud (workpal.invalid) and opt-out for
 	// self-hosted instances. Self-host operators frequently run a fork with
 	// their own patches, and silently upgrading their daemon to an upstream
 	// GitHub release would clobber that work; they also commonly stay on an
 	// older server build, which a fresh CLI may no longer talk to. Keeping
 	// auto-update off by default for self-host avoids both footguns (MUL-2381).
-	// Operators on either side can flip the default with MULTICA_DAEMON_AUTO_UPDATE.
-	autoUpdateEnabled := boolFromEnv("MULTICA_DAEMON_AUTO_UPDATE", isOfficialCloudServer(serverBaseURL))
+	// Operators on either side can flip the default with WORKPAL_DAEMON_AUTO_UPDATE.
+	autoUpdateEnabled := boolFromEnv("WORKPAL_DAEMON_AUTO_UPDATE", isOfficialCloudServer(serverBaseURL))
 	if overrides.DisableAutoUpdate {
 		autoUpdateEnabled = false
 	}
-	autoUpdateInterval, err := durationFromEnv("MULTICA_DAEMON_AUTO_UPDATE_INTERVAL", DefaultAutoUpdateCheckInterval)
+	autoUpdateInterval, err := durationFromEnv("WORKPAL_DAEMON_AUTO_UPDATE_INTERVAL", DefaultAutoUpdateCheckInterval)
 	if err != nil {
 		return Config{}, err
 	}
@@ -642,7 +642,7 @@ func LoadConfig(overrides Overrides) (Config, error) {
 	// off (don't clobber my fork) argues the opposite way for the latter: an
 	// operator who installed a build by hand wants the daemon to run it.
 	// Default on for every CLI-launched daemon; Desktop opts out at the loop.
-	autoReloadEnabled := boolFromEnv("MULTICA_DAEMON_AUTO_RELOAD", true)
+	autoReloadEnabled := boolFromEnv("WORKPAL_DAEMON_AUTO_RELOAD", true)
 	if overrides.DisableAutoReload {
 		autoReloadEnabled = false
 	}
@@ -697,14 +697,14 @@ func LoadConfig(overrides Overrides) (Config, error) {
 	}, nil
 }
 
-// officialCloudHost is the hostname of Multica's hosted cloud. It's the only
+// officialCloudHost is the hostname of Workpal's hosted cloud. It's the only
 // origin we treat as "official" for the auto-update default — staging,
-// preview, and any future *.multica.ai subdomains are deliberately excluded
+// preview, and any future *.workpal.invalid subdomains are deliberately excluded
 // so they inherit the safer self-host default until explicitly opted in.
-const officialCloudHost = "api.multica.ai"
+const officialCloudHost = "workpal.invalid"
 
 // isOfficialCloudServer reports whether the resolved server base URL points
-// at Multica's hosted cloud. Used to pick defaults that are safe on
+// at Workpal's hosted cloud. Used to pick defaults that are safe on
 // infrastructure we operate but not on someone else's: auto-update (cloud
 // users run a server that publishes the matching CLI release, so opt-in
 // self-update is safe, while self-host users may run a fork or pin to an
@@ -722,7 +722,7 @@ func isOfficialCloudServer(baseURL string) bool {
 func NormalizeServerBaseURL(raw string) (string, error) {
 	u, err := url.Parse(strings.TrimSpace(raw))
 	if err != nil {
-		return "", fmt.Errorf("invalid MULTICA_SERVER_URL: %w", err)
+		return "", fmt.Errorf("invalid WORKPAL_SERVER_URL: %w", err)
 	}
 	switch u.Scheme {
 	case "ws":
@@ -731,7 +731,7 @@ func NormalizeServerBaseURL(raw string) (string, error) {
 		u.Scheme = "https"
 	case "http", "https":
 	default:
-		return "", fmt.Errorf("MULTICA_SERVER_URL must use ws, wss, http, or https")
+		return "", fmt.Errorf("WORKPAL_SERVER_URL must use ws, wss, http, or https")
 	}
 	if u.Path == "/ws" {
 		u.Path = ""
@@ -747,29 +747,29 @@ func NormalizeServerBaseURL(raw string) (string, error) {
 // reads this and nothing else: ResolveWorkspacesRoot derives its default from
 // $HOME and the --profile name, so a task hosted by a named-profile daemon
 // would otherwise scan the default root and silently report the wrong tree.
-const TaskWorkspacesRootEnv = "MULTICA_TASK_WORKSPACES_ROOT"
+const TaskWorkspacesRootEnv = "WORKPAL_TASK_WORKSPACES_ROOT"
 
 // ResolveWorkspacesRoot returns the absolute path that the daemon and CLI
 // should treat as the workspaces root. Resolution order: explicit override >
-// MULTICA_WORKSPACES_ROOT env > default ($HOME/multica_workspaces, or
-// $HOME/multica_workspaces_<profile> for a named profile). Read-only callers
-// (e.g. `multica daemon disk-usage`) use this directly so they pick the same
+// WORKPAL_WORKSPACES_ROOT env > default ($HOME/workpal_workspaces, or
+// $HOME/workpal_workspaces_<profile> for a named profile). Read-only callers
+// (e.g. `workpal daemon disk-usage`) use this directly so they pick the same
 // directory the running daemon would have picked. Inside a managed task use
 // TaskWorkspacesRootEnv instead — see resolveDiskUsageRoot.
 func ResolveWorkspacesRoot(profile, override string) (string, error) {
-	root := strings.TrimSpace(os.Getenv("MULTICA_WORKSPACES_ROOT"))
+	root := strings.TrimSpace(os.Getenv("WORKPAL_WORKSPACES_ROOT"))
 	if override != "" {
 		root = override
 	}
 	if root == "" {
 		home, err := os.UserHomeDir()
 		if err != nil {
-			return "", fmt.Errorf("resolve home directory: %w (set MULTICA_WORKSPACES_ROOT to override)", err)
+			return "", fmt.Errorf("resolve home directory: %w (set WORKPAL_WORKSPACES_ROOT to override)", err)
 		}
 		if profile != "" {
-			root = filepath.Join(home, "multica_workspaces_"+profile)
+			root = filepath.Join(home, "workpal_workspaces_"+profile)
 		} else {
-			root = filepath.Join(home, "multica_workspaces")
+			root = filepath.Join(home, "workpal_workspaces")
 		}
 	}
 	abs, err := filepath.Abs(root)
@@ -784,7 +784,7 @@ func ResolveWorkspacesRoot(profile, override string) (string, error) {
 // disk-usage CLI uses this to make sure the "artifact size" it reports
 // matches what the GC would actually reclaim.
 func ArtifactPatternsFromEnv() []string {
-	return patternsFromEnv("MULTICA_GC_ARTIFACT_PATTERNS", DefaultGCArtifactPatterns)
+	return patternsFromEnv("WORKPAL_GC_ARTIFACT_PATTERNS", DefaultGCArtifactPatterns)
 }
 
 // patternsFromEnv reads a comma-separated list from env. Patterns containing
@@ -831,7 +831,7 @@ func shellArgsFromEnv(name string) ([]string, error) {
 // On Windows this deliberately keeps the stable discovered junction path;
 // resolveAgentEntryWithHeal follows it for each launch so installer upgrades
 // that retarget a still-live junction take effect without a daemon restart.
-// When ~/.multica/hooks shadows a real agent binary, skip that hooks directory:
+// When ~/.workpal/hooks shadows a real agent binary, skip that hooks directory:
 // previously generated hook wrappers can execute the same command name and
 // recurse forever if the daemon records or launches the wrapper.
 func resolveAgentExecutablePath(cmd string) (string, error) {
@@ -842,8 +842,8 @@ func resolveAgentExecutablePath(cmd string) (string, error) {
 	if strings.ContainsAny(cmd, "/\\") {
 		return canonicalConfiguredExecutablePath(resolved), nil
 	}
-	if isInMulticaHooksDir(resolved) {
-		if unshadowed, err := lookPathExcludingMulticaHooks(cmd); err == nil {
+	if isInWorkpalHooksDir(resolved) {
+		if unshadowed, err := lookPathExcludingWorkpalHooks(cmd); err == nil {
 			return unshadowed, nil
 		}
 	}
@@ -865,7 +865,7 @@ func agentExecutablePresent(path string) bool {
 
 // reresolveAgentCommand re-runs the startup resolution for a single agent
 // command name, returning the freshly resolved absolute path. It mirrors the
-// probe() order in LoadConfig: exec.LookPath (with the ~/.multica/hooks
+// probe() order in LoadConfig: exec.LookPath (with the ~/.workpal/hooks
 // exclusion preserved via resolveAgentExecutablePath) first, then the login
 // shell fallback for a bare command name a GUI-launched daemon can't see on
 // its own PATH. It is only called on the miss path — when a previously pinned
@@ -881,7 +881,7 @@ func reresolveAgentCommand(cmd string) (string, bool) {
 	// A bare command name the daemon's own PATH can't see: retry via the
 	// user's login shell, exactly as the startup probe does for
 	// fnm/nvm/native-installer prefixes. Absolute/relative overrides skip
-	// this — an operator-pinned MULTICA_*_PATH that no longer exists should
+	// this — an operator-pinned WORKPAL_*_PATH that no longer exists should
 	// stay a hard miss rather than silently resolve a different binary.
 	if !strings.ContainsAny(cmd, "/\\") {
 		if path, ok := resolveAgentsViaLoginShell([]string{cmd})[cmd]; ok {
@@ -891,12 +891,12 @@ func reresolveAgentCommand(cmd string) (string, bool) {
 	return "", false
 }
 
-func lookPathExcludingMulticaHooks(cmd string) (string, error) {
+func lookPathExcludingWorkpalHooks(cmd string) (string, error) {
 	for _, dir := range filepath.SplitList(os.Getenv("PATH")) {
 		if dir == "" {
 			dir = "."
 		}
-		if isMulticaHooksDir(dir) {
+		if isWorkpalHooksDir(dir) {
 			continue
 		}
 		candidate := filepath.Join(dir, cmd)
@@ -907,19 +907,19 @@ func lookPathExcludingMulticaHooks(cmd string) (string, error) {
 	return "", exec.ErrNotFound
 }
 
-func isInMulticaHooksDir(path string) bool {
+func isInWorkpalHooksDir(path string) bool {
 	if path == "" {
 		return false
 	}
-	return isMulticaHooksDir(filepath.Dir(path))
+	return isWorkpalHooksDir(filepath.Dir(path))
 }
 
-func isMulticaHooksDir(dir string) bool {
+func isWorkpalHooksDir(dir string) bool {
 	home, err := os.UserHomeDir()
 	if err != nil || home == "" {
 		return false
 	}
-	return samePathDir(dir, filepath.Join(home, ".multica", "hooks"))
+	return samePathDir(dir, filepath.Join(home, ".workpal", "hooks"))
 }
 
 func samePathDir(a, b string) bool {
@@ -965,7 +965,7 @@ func isExecutableFile(path string) bool {
 }
 
 // defaultAgentCommandNames lists the command names the agent probe loop tries
-// before any MULTICA_*_PATH override is applied. Kept in sync with the
+// before any WORKPAL_*_PATH override is applied. Kept in sync with the
 // `probe(...)` calls in LoadConfig — the shell-fallback resolver uses this
 // list to pre-fetch canonical paths for every known agent in a single shell
 // invocation, instead of paying the cost-per-miss.
@@ -1025,7 +1025,7 @@ var codexDesktopAppBundlePaths = func() []string {
 //
 // Only DEFAULT locations are covered, and nothing here reads an install receipt
 // or the registry, so an install put somewhere else still needs
-// MULTICA_DSH_PATH. This is a convenience for the common case, never a contract
+// WORKPAL_DSH_PATH. This is a convenience for the common case, never a contract
 // — which is why a miss falls through to "dsh not found" rather than to a guess.
 var dshDesktopAppBundlePaths = func() []string {
 	home, err := os.UserHomeDir()
@@ -1335,7 +1335,7 @@ var supportedLoginShells = map[string]struct{}{
 //     path) and per-shell paths the shell happened not to fully canonicalise.
 //   - Agent names are restricted to the bare set in defaultAgentCommandNames
 //     (`[A-Za-z0-9._-]` only); we inline them into the script unquoted to
-//     keep the script readable. Custom MULTICA_*_PATH values never reach this
+//     keep the script readable. Custom WORKPAL_*_PATH values never reach this
 //     resolver — those go through exec.LookPath directly.
 //
 // A var so tests can stub the fork without a real login shell.
@@ -1409,7 +1409,7 @@ var resolveAgentsViaLoginShell = func(names []string) map[string]string {
 //  5. canonicalises the directory via `cd ... && pwd -P` so symlinked prefix
 //     dirs (fnm/nvm/volta) collapse to stable paths while the invoked command
 //     name is kept,
-//  6. if the resolved path lives in ~/.multica/hooks, searches the same
+//  6. if the resolved path lives in ~/.workpal/hooks, searches the same
 //     shell-expanded PATH for the first executable outside that hooks dir,
 //  7. prints `<name>\t<canonical_path>` one entry per line for the caller.
 //
@@ -1441,7 +1441,7 @@ func buildLoginShellResolveScript(names []string) string {
 	b.WriteString("  case \"$p\" in /*) ;; *) continue ;; esac\n")
 	b.WriteString("  d=$(dirname \"$p\") && f=$(basename \"$p\") && c=$(cd \"$d\" 2>/dev/null && pwd -P) || continue\n")
 	b.WriteString("  hc=\"\"\n")
-	b.WriteString("  if [ -n \"${HOME:-}\" ]; then hd=\"$HOME/.multica/hooks\"; hc=$(cd \"$hd\" 2>/dev/null && pwd -P) || hc=\"\"; fi\n")
+	b.WriteString("  if [ -n \"${HOME:-}\" ]; then hd=\"$HOME/.workpal/hooks\"; hc=$(cd \"$hd\" 2>/dev/null && pwd -P) || hc=\"\"; fi\n")
 	b.WriteString("  if [ -n \"$hc\" ] && [ \"$c\" = \"$hc\" ]; then\n")
 	b.WriteString("    oldIFS=$IFS; IFS=:\n")
 	b.WriteString("    for d2 in $PATH; do\n")
@@ -1498,8 +1498,8 @@ func openclawOverrideFrom(cfg cli.CLIConfig) *cli.OpenClawOverride {
 //
 // Side-effecting on os.Setenv is intentional and scoped:
 //
-//   - The three vars touched (MULTICA_OPENCLAW_PATH, OPENCLAW_STATE_DIR,
-//     MULTICA_OPENCLAW_CLI_TIMEOUT) are
+//   - The three vars touched (WORKPAL_OPENCLAW_PATH, OPENCLAW_STATE_DIR,
+//     WORKPAL_OPENCLAW_CLI_TIMEOUT) are
 //     OpenClaw-specific. Other backends do not read them; setting them in the
 //     daemon process has no observable effect on, e.g., Claude Code or Codex
 //     spawn behavior.
@@ -1512,8 +1512,8 @@ func applyOpenclawOverride(oc *cli.OpenClawOverride) {
 		return
 	}
 	if oc.BinaryPath != "" {
-		if _, set := os.LookupEnv("MULTICA_OPENCLAW_PATH"); !set {
-			_ = os.Setenv("MULTICA_OPENCLAW_PATH", oc.BinaryPath)
+		if _, set := os.LookupEnv("WORKPAL_OPENCLAW_PATH"); !set {
+			_ = os.Setenv("WORKPAL_OPENCLAW_PATH", oc.BinaryPath)
 		}
 	}
 	if oc.StateDir != "" {

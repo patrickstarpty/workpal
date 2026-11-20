@@ -2,9 +2,9 @@ import { useState } from "react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { fireEvent, screen, waitFor, within } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import type { Agent } from "@multica/core/types";
+import type { Agent } from "@workpal/core/types";
 import { renderWithI18n } from "../../test/i18n";
-import { api, ApiError } from "@multica/core/api";
+import { api, ApiError } from "@workpal/core/api";
 import {
   AgentChannelsSection,
   AgentChannelLinks,
@@ -19,15 +19,15 @@ const state = vi.hoisted(() => ({
   replace: vi.fn(),
   open: vi.fn(),
 }));
-vi.mock("@multica/core/hooks", () => ({ useWorkspaceId: () => "ws-1" }));
-vi.mock("@multica/core/permissions", () => ({
+vi.mock("@workpal/core/hooks", () => ({ useWorkspaceId: () => "ws-1" }));
+vi.mock("@workpal/core/permissions", () => ({
   useCurrentMember: () => ({
     role: state.role,
     userId: "user-1",
     member: state.member ? { role: state.role } : null,
   }),
 }));
-vi.mock("@multica/core/paths", () => ({
+vi.mock("@workpal/core/paths", () => ({
   useCurrentWorkspace: () => ({ id: "ws-1", name: "Acme" }),
   useWorkspacePaths: () => ({
     agentDetail: (id: string) => `/acme/agents/${id}`,
@@ -48,8 +48,8 @@ vi.mock("../../common/actor-avatar", () => ({
     <span data-testid={`avatar-${actorId}`} />
   ),
 }));
-vi.mock("@multica/core/api", async (original) => ({
-  ...(await original<typeof import("@multica/core/api")>()),
+vi.mock("@workpal/core/api", async (original) => ({
+  ...(await original<typeof import("@workpal/core/api")>()),
   api: Object.fromEntries(
     [
       "listLarkInstallations",
@@ -168,7 +168,7 @@ describe("agent messaging channels", () => {
         await screen.findByRole("menuitem", { name: "Troubleshooting" }),
       );
       expect(state.open).toHaveBeenCalledWith(
-        "https://multica.ai/docs/lark-bot-integration",
+        "https://workpal.invalid/docs/lark-bot-integration",
       );
     },
   );
@@ -437,7 +437,7 @@ describe("shared connection dialog", () => {
     ).toBeTruthy();
     fireEvent.click(guide);
     expect(state.open).toHaveBeenCalledWith(
-      "https://multica.ai/docs/weixin-bot-integration",
+      "https://workpal.invalid/docs/weixin-bot-integration",
     );
     // The footer's Close; the header's icon button shares the name.
     fireEvent.click(screen.getAllByRole("button", { name: "Close" })[0]!);

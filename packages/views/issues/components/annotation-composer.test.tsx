@@ -10,8 +10,8 @@ import {
   stopVoice,
   useVoiceModelsStore,
   useVoiceSettingsStore,
-} from "@multica/core/voice";
-import type { ReplyAnnotation } from "@multica/core/drafts/reply-annotation";
+} from "@workpal/core/voice";
+import type { ReplyAnnotation } from "@workpal/core/drafts/reply-annotation";
 import { renderWithI18n } from "../../test/i18n";
 import type { ContentEditorRef } from "../../editor";
 import { AnnotationComposer } from "./annotation-composer";
@@ -20,7 +20,7 @@ const engine = vi.hoisted(() => ({ transcribe: vi.fn() }));
 
 vi.mock("../../voice/recorder", () => ({ voiceInputSupported: () => true }));
 vi.mock("../../voice/engine", async () => {
-  const { useVoiceModelsStore } = await import("@multica/core/voice");
+  const { useVoiceModelsStore } = await import("@workpal/core/voice");
   return { useVoiceModels: () => useVoiceModelsStore((s) => s.models) };
 });
 

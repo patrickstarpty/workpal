@@ -51,10 +51,10 @@ warning. Queries do not begin when the remaining deadline cannot accommodate
 the SQL timeout, network headroom and rollback. Changing settings requires a
 process restart. Increasing either concurrency or SQL time raises database load.
 
-The existing metrics listener exports `multica_inbox_read_active`,
-`multica_inbox_read_queued`, `multica_inbox_read_rejected_total`,
-`multica_inbox_read_duration_seconds`, `multica_inbox_read_query_duration_seconds`
-and `multica_inbox_read_timeouts_total`.
+The existing metrics listener exports `workpal_inbox_read_active`,
+`workpal_inbox_read_queued`, `workpal_inbox_read_rejected_total`,
+`workpal_inbox_read_duration_seconds`, `workpal_inbox_read_query_duration_seconds`
+and `workpal_inbox_read_timeouts_total`.
 Duration measures admitted transaction work including pool acquisition and
 cleanup. Labels contain operation and rejection reason, never account IDs.
 Correlate with primary CPU, connection acquisition latency, inbox failures and

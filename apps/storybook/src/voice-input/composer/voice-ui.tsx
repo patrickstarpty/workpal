@@ -1,8 +1,8 @@
-import { ArrowUp, Check, Mic, Sparkles, X } from "@multica/ui/icons";
-import { Button } from "@multica/ui/components/ui/button";
-import { IconButton } from "@multica/ui/components/common/icon-button";
-import { Kbd, KbdGroup } from "@multica/ui/components/ui/kbd";
-import { cn } from "@multica/ui/lib/utils";
+import { ArrowUp, Check, Mic, Sparkles, X } from "@workpal/ui/icons";
+import { Button } from "@workpal/ui/components/ui/button";
+import { IconButton } from "@workpal/ui/components/common/icon-button";
+import { Kbd, KbdGroup } from "@workpal/ui/components/ui/kbd";
+import { cn } from "@workpal/ui/lib/utils";
 import { useStoryEnv } from "../env";
 import { Elapsed, InlineVoiceError, LevelBars, RecDot, Shimmer, Waveform, formatElapsed } from "../primitives";
 import { useVoiceSettings } from "../settings/store";
@@ -126,11 +126,11 @@ export function VoiceHud({ target, className }: { target: VoiceTarget; className
       )}
     >
       {showText && (
-        <div className="max-w-[340px] truncate rounded-md bg-multica-ink/80 px-2.5 py-1 text-caption text-multica-paper/80 backdrop-blur animate-in fade-in [direction:rtl]">
+        <div className="max-w-[340px] truncate rounded-md bg-workpal-ink/80 px-2.5 py-1 text-caption text-workpal-paper/80 backdrop-blur animate-in fade-in [direction:rtl]">
           <span className="[direction:ltr] [unicode-bidi:embed]">{text}</span>
         </div>
       )}
-      <div className="flex h-10 items-center gap-2.5 whitespace-nowrap rounded-full bg-multica-ink pl-3.5 pr-4 text-multica-paper shadow-[var(--floating-shadow)] animate-in fade-in zoom-in-95 slide-in-from-bottom-2">
+      <div className="flex h-10 items-center gap-2.5 whitespace-nowrap rounded-full bg-workpal-ink pl-3.5 pr-4 text-workpal-paper shadow-[var(--floating-shadow)] animate-in fade-in zoom-in-95 slide-in-from-bottom-2">
         {phase === "processing" ? (
           <>
             <Mic className="size-4 opacity-70" />

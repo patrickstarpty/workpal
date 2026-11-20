@@ -6,11 +6,11 @@ import (
 	"testing"
 
 	"github.com/jackc/pgx/v5/pgtype"
-	"github.com/multica-ai/multica/server/internal/dispatch"
-	"github.com/multica-ai/multica/server/internal/projectaccess"
-	"github.com/multica-ai/multica/server/internal/testutil"
-	"github.com/multica-ai/multica/server/internal/util"
-	"github.com/multica-ai/multica/server/pkg/dbid"
+	"workpal.local/workpal/server/internal/dispatch"
+	"workpal.local/workpal/server/internal/projectaccess"
+	"workpal.local/workpal/server/internal/testutil"
+	"workpal.local/workpal/server/internal/util"
+	"workpal.local/workpal/server/pkg/dbid"
 )
 
 // Background runs (wakeups, the sub-issue rule, app decisions, delegated

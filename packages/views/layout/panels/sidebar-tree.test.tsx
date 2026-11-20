@@ -2,12 +2,12 @@ import { cloneElement, type ReactNode } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { act, fireEvent, screen, waitFor } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
-import { agentTaskSnapshotOptions } from "@multica/core/agents";
-import { buildIssueStatusCatalog } from "@multica/core/issue-statuses/queries";
-import { issueKeys } from "@multica/core/issues/queries";
-import type { SidebarIssuesRequest } from "@multica/core/issues/sidebar-list";
-import { issueUnreadOptions } from "@multica/core/issues/unread";
-import type { AgentTask, Issue, IssueUnread } from "@multica/core/types";
+import { agentTaskSnapshotOptions } from "@workpal/core/agents";
+import { buildIssueStatusCatalog } from "@workpal/core/issue-statuses/queries";
+import { issueKeys } from "@workpal/core/issues/queries";
+import type { SidebarIssuesRequest } from "@workpal/core/issues/sidebar-list";
+import { issueUnreadOptions } from "@workpal/core/issues/unread";
+import type { AgentTask, Issue, IssueUnread } from "@workpal/core/types";
 import { renderWithI18n } from "../../test/i18n";
 import { IssueContextMenuProvider } from "../../issues/actions";
 import { SidebarIssueList, TreeRow } from "./sidebar-tree";
@@ -43,7 +43,7 @@ vi.mock("../../issues/components/pickers/status-picker", () => ({
   ),
 }));
 
-vi.mock("@multica/core/issue-statuses/hooks", () => ({
+vi.mock("@workpal/core/issue-statuses/hooks", () => ({
   useIssueStatuses: () => buildIssueStatusCatalog([]),
 }));
 vi.mock("../../navigation", () => ({
@@ -59,14 +59,14 @@ vi.mock("../../navigation", () => ({
   ),
 }));
 vi.mock("../../issues/components/status-icon", () => ({ StatusIcon: () => <span /> }));
-vi.mock("@multica/core/workspace/hooks", () => ({
+vi.mock("@workpal/core/workspace/hooks", () => ({
   useActorName: () => ({ getActorName: () => "Lambda" }),
 }));
 vi.mock("../../agents/components/agent-avatar-stack", () => ({
   AgentAvatarStack: ({ agentIds }: { agentIds: string[] }) => <span data-testid="agents">{agentIds.join(",")}</span>,
 }));
-vi.mock("@multica/core/paths", async (importOriginal) => {
-  const actual = await importOriginal<typeof import("@multica/core/paths")>();
+vi.mock("@workpal/core/paths", async (importOriginal) => {
+  const actual = await importOriginal<typeof import("@workpal/core/paths")>();
   return { ...actual, useWorkspacePaths: () => actual.paths.workspace("acme") };
 });
 

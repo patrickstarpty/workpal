@@ -12,7 +12,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/multica-ai/multica/server/internal/daemon/execenv"
+	"workpal.local/workpal/server/internal/daemon/execenv"
 )
 
 func receiptSource(t *testing.T, r ContextReceipt, kind, name string) ContextReceiptSource {
@@ -43,7 +43,7 @@ func TestBuildContextReceiptFileDeliveredBrief(t *testing.T) {
 		Model:          "claude-opus",
 		WorkDir:        workDir,
 		Prompt:         "do the task",
-		RuntimeBrief:   "# Multica Agent Runtime\nbrief",
+		RuntimeBrief:   "# Workpal Agent Runtime\nbrief",
 		BriefWritten:   true,
 		ResumedSession: true,
 		MCPConfig:      json.RawMessage(`{"mcpServers":{"zeta":{"command":"z","env":{"TOKEN":"secret"}},"alpha":{"url":"https://x"}}}`),
@@ -61,7 +61,7 @@ func TestBuildContextReceiptFileDeliveredBrief(t *testing.T) {
 	if r.SchemaVersion != ContextReceiptSchemaVersion || r.Runtime != "kiro" || !r.ResumedSession {
 		t.Fatalf("unexpected header: %+v", r)
 	}
-	if r.PromptBytes != len("do the task") || r.BriefBytes != len("# Multica Agent Runtime\nbrief") {
+	if r.PromptBytes != len("do the task") || r.BriefBytes != len("# Workpal Agent Runtime\nbrief") {
 		t.Fatalf("sizes: prompt=%d brief=%d", r.PromptBytes, r.BriefBytes)
 	}
 	if got := strings.Join(r.MCPServers, ","); got != "alpha,zeta" {

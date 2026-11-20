@@ -2,16 +2,16 @@ import type { ReactNode } from "react";
 import { act, fireEvent, screen, waitFor, within } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { useRailOrderStore } from "@multica/core/navigation";
+import { useRailOrderStore } from "@workpal/core/navigation";
 import {
   DEFAULT_SIDEBAR_INBOX_SETTINGS,
   useSidebarTreeStore,
-} from "@multica/core/issues/stores/sidebar-tree-store";
-import { SidebarProvider, useSidebar } from "@multica/ui/components/ui/sidebar";
+} from "@workpal/core/issues/stores/sidebar-tree-store";
+import { SidebarProvider, useSidebar } from "@workpal/ui/components/ui/sidebar";
 import { renderWithI18n } from "../test/i18n";
 import { AppRail } from "./app-rail";
 import { AppShellProvider, useAppShell } from "./app-shell-context";
-import type { InboxItem } from "@multica/core/types";
+import type { InboxItem } from "@workpal/core/types";
 
 const state = vi.hoisted(() => ({
   pathname: "/acme/issues",
@@ -47,43 +47,43 @@ vi.mock("../navigation", () => ({
   }),
   useIntentNavigate: () => vi.fn(),
 }));
-vi.mock("@multica/core/inbox/mutations", () => ({
+vi.mock("@workpal/core/inbox/mutations", () => ({
   useMarkAllInboxRead: () => ({ mutate: state.markAllInboxRead }),
 }));
-vi.mock("@multica/core/chat/mutations", () => ({
+vi.mock("@workpal/core/chat/mutations", () => ({
   useMarkAllChatSessionsRead: () => ({ mutate: state.markAllChatsRead }),
 }));
-vi.mock("@multica/core/paths", async (importOriginal) => {
-  const actual = await importOriginal<typeof import("@multica/core/paths")>();
+vi.mock("@workpal/core/paths", async (importOriginal) => {
+  const actual = await importOriginal<typeof import("@workpal/core/paths")>();
   return {
     ...actual,
     useCurrentWorkspace: () => ({ id: "ws-1", name: "Acme", slug: "acme" }),
     useWorkspacePaths: () => actual.paths.workspace("acme"),
   };
 });
-vi.mock("@multica/core/inbox/queries", async (importOriginal) => {
-  const actual = await importOriginal<typeof import("@multica/core/inbox/queries")>();
+vi.mock("@workpal/core/inbox/queries", async (importOriginal) => {
+  const actual = await importOriginal<typeof import("@workpal/core/inbox/queries")>();
   return {
     deduplicateInboxItems: actual.deduplicateInboxItems,
     inboxListOptions: actual.inboxListOptions,
     useInboxUnreadCount: () => state.inboxUnread,
   };
 });
-vi.mock("@multica/core/inbox/use-snooze-wake", () => ({ useInboxSnoozeWake: () => {} }));
-vi.mock("@multica/core/chat/queries", () => ({
+vi.mock("@workpal/core/inbox/use-snooze-wake", () => ({ useInboxSnoozeWake: () => {} }));
+vi.mock("@workpal/core/chat/queries", () => ({
   chatSessionsOptions: (wsId: string) => ({
     queryKey: ["chat", wsId, "sessions"],
     queryFn: async () => state.chatSessions,
   }),
 }));
 // Callable-store shape (selectorFn + getState) per the repo testing rules.
-vi.mock("@multica/core/chat", () => ({
+vi.mock("@workpal/core/chat", () => ({
   useChatStore: Object.assign(
     (selector: (s: typeof state.chat) => unknown) => selector(state.chat),
     { getState: () => state.chat },
   ),
 }));
-vi.mock("@multica/core/shortcuts", () => ({ useShortcut: () => null }));
+vi.mock("@workpal/core/shortcuts", () => ({ useShortcut: () => null }));
 vi.mock("../common/use-app-foreground", () => ({
   useAppForeground: () => state.appForeground,
 }));
@@ -93,7 +93,7 @@ vi.mock("./panels/team-status", () => ({
 vi.mock("./rail-workspaces", () => ({ RailWorkspaces: () => null }));
 vi.mock("./help-launcher", () => ({ HelpLauncher: () => null }));
 vi.mock("./account-menu", () => ({ AccountMenu: () => null }));
-vi.mock("@multica/ui/components/common/tooltip-hint", () => ({
+vi.mock("@workpal/ui/components/common/tooltip-hint", () => ({
   TooltipHint: ({ children }: { children: ReactNode }) => <>{children}</>,
 }));
 

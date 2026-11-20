@@ -1,7 +1,7 @@
 // @vitest-environment node
 import { describe, expect, it } from "vitest";
-import type { SkillListFilters } from "@multica/core/skills/stores";
-import type { Agent, Label, SkillSummary } from "@multica/core/types";
+import type { SkillListFilters } from "@workpal/core/skills/stores";
+import type { Agent, Label, SkillSummary } from "@workpal/core/types";
 import {
   matchesSkillSearch,
   rowMatchesFilters,

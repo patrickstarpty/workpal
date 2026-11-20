@@ -5,7 +5,7 @@ import { NavigationProvider } from "../../navigation";
 import { IssueMentionCard } from "../../issues/components/issue-mention-card";
 import { ProjectMentionCard } from "../../projects/components/project-mention-card";
 
-vi.mock("@multica/core/paths", () => ({
+vi.mock("@workpal/core/paths", () => ({
   useWorkspacePaths: () => ({ issueDetail: (id: string) => `/acme/issues/${id}`, projectDetail: (id: string) => `/acme/projects/${id}` }),
 }));
 vi.mock("../../issues/components/issue-chip", () => ({

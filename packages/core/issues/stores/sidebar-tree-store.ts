@@ -175,7 +175,7 @@ export const useSidebarTreeStore = create<SidebarTreeState>()(
       setNeedsAttentionCollapsed: (collapsed) => set({ needsAttentionCollapsed: collapsed }),
     }),
     {
-      name: "multica_sidebar_tree",
+      name: "workpal_sidebar_tree",
       storage: createJSONStorage(() => createWorkspaceAwareStorage(defaultStorage)),
       partialize: (state): PersistedSidebarTree => ({
         expanded: state.expanded,

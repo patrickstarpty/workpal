@@ -1,6 +1,6 @@
 import { readEmbedTheme } from "../common/embed-theme";
 
-export const SURFACE_BRIDGE_CONNECT_MESSAGE = "multica:plugin-bridge-connect";
+export const SURFACE_BRIDGE_CONNECT_MESSAGE = "workpal:plugin-bridge-connect";
 export const SURFACE_BRIDGE_PROTOCOL_VERSION = 2;
 
 /** Design tokens forwarded over the bridge so a surface looks native: the embed token contract. */
@@ -22,7 +22,7 @@ function encodeUTF8(value: string): string {
 }
 
 export interface SurfaceFrameDocumentInput {
-  /** Short-lived URL on Multica's dedicated, cookie-free content origin. */
+  /** Short-lived URL on Workpal's dedicated, cookie-free content origin. */
   url: string;
   /** Single-use proof embedded in both trusted documents, never plugin code. */
   bridgeToken: string;
@@ -35,7 +35,7 @@ export interface SurfaceFrameDocumentInput {
  * page-wide policy would also have to allow every attachment preview origin;
  * that wider list would let a hostile surface navigate to those origins. Here
  * the only network navigation an inner frame may make is back to the exact
- * Multica content origin that served it.
+ * Workpal content origin that served it.
  *
  * The outer frame is host-authored and same-origin with the app. The INNER
  * frame is still `sandbox="allow-scripts"` without `allow-same-origin`, so two
@@ -68,12 +68,12 @@ export function buildSurfaceFrameDocument({ url, bridgeToken }: SurfaceFrameDocu
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
-html, body, #multica-plugin-root, iframe { width: 100%; height: 100%; margin: 0; padding: 0; border: 0; }
+html, body, #workpal-plugin-root, iframe { width: 100%; height: 100%; margin: 0; padding: 0; border: 0; }
 body { overflow: hidden; background: transparent; }
 </style>
 </head>
 <body>
-<div id="multica-plugin-root"></div>
+<div id="workpal-plugin-root"></div>
 <script>
 (function () {
   var encoded = ${JSON.stringify(config)};
@@ -98,19 +98,19 @@ body { overflow: hidden; background: transparent; }
 
   document.addEventListener("securitypolicyviolation", function (event) {
     if (event.effectiveDirective === "frame-src" || event.effectiveDirective === "child-src") {
-      stopSurface("multica:plugin-surface-navigation-blocked");
+      stopSurface("workpal:plugin-surface-navigation-blocked");
     }
   });
 
   child.addEventListener("load", function () {
     loadCount += 1;
-    if (loadCount > 1) stopSurface("multica:plugin-surface-navigated");
+    if (loadCount > 1) stopSurface("workpal:plugin-surface-navigated");
   });
 
   window.addEventListener("message", function (event) {
     if (!child.contentWindow || event.source !== child.contentWindow) return;
     var data = event.data || {};
-    if (data.type === "multica:plugin-surface-error" || data.type === "multica:plugin-surface-navigated") {
+    if (data.type === "workpal:plugin-surface-error" || data.type === "workpal:plugin-surface-navigated") {
       stopSurface(data.type);
       return;
     }
@@ -129,7 +129,7 @@ body { overflow: hidden; background: transparent; }
 
   child.src = config.url;
   config.url = "";
-  document.getElementById("multica-plugin-root").appendChild(child);
+  document.getElementById("workpal-plugin-root").appendChild(child);
 })();
 </script>
 </body>

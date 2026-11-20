@@ -12,7 +12,7 @@ const state = vi.hoisted(() => ({
 vi.mock("../navigation", () => ({
   useNavigation: () => ({ pathname: state.pathname }),
 }));
-vi.mock("@multica/ui/components/ui/sidebar", () => ({
+vi.mock("@workpal/ui/components/ui/sidebar", () => ({
   useSidebar: () => ({
     isCompact: state.isCompact,
     openMobile: state.openMobile,

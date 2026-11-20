@@ -4,11 +4,11 @@ import (
 	"context"
 	"fmt"
 	"github.com/google/uuid"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
+	db "workpal.local/workpal/server/pkg/db/generated"
 	"net/http"
 	"testing"
 
-	"github.com/multica-ai/multica/server/internal/testutil"
+	"workpal.local/workpal/server/internal/testutil"
 )
 
 func runtimeSharingPatch(t *testing.T, runtimeID, actorID string, body map[string]any) *testutil.Response {
@@ -60,7 +60,7 @@ func TestRuntimeSharingRejectsInvalidRecipients(t *testing.T) {
 		t.Fatal("database-backed fixture required")
 	}
 	rtID, ownerID, _ := runtimeVisibilityFixture(t)
-	outsider := dbfx.Insert(t, "user", testutil.Cols{"name": "Outside workspace", "email": "runtime-sharing-outside@multica.test"})
+	outsider := dbfx.Insert(t, "user", testutil.Cols{"name": "Outside workspace", "email": "runtime-sharing-outside@workpal.test"})
 	for _, recipients := range [][]string{{"bad-uuid"}, {outsider}} {
 		runtimeSharingPatch(t, rtID, ownerID, map[string]any{"shared_with": recipients, "custom_name": "must not save"}).Want(http.StatusBadRequest)
 	}

@@ -1,9 +1,9 @@
 "use client";
 
-import { TriangleAlert } from "@multica/ui/icons";
-import { useChatStore } from "@multica/core/chat";
-import { useCurrentWorkspace, useWorkspacePaths } from "@multica/core/paths";
-import { useIsMobile } from "@multica/ui/hooks/use-mobile";
+import { TriangleAlert } from "@workpal/ui/icons";
+import { useChatStore } from "@workpal/core/chat";
+import { useCurrentWorkspace, useWorkspacePaths } from "@workpal/core/paths";
+import { useIsMobile } from "@workpal/ui/hooks/use-mobile";
 import { ChatBar } from "../chat/components/chat-bar";
 import { isFloatingChatRouteSuppressed } from "../chat/floating-chat-visibility";
 import { useT } from "../i18n";

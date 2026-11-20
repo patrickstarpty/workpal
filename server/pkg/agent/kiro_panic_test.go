@@ -8,7 +8,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/multica-ai/multica/server/pkg/taskfailure"
+	"workpal.local/workpal/server/pkg/taskfailure"
 )
 
 // fakeKiroACPPanicScript reproduces MUL-8188: session/load succeeds, then the

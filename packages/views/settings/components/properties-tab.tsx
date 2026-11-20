@@ -12,36 +12,36 @@ import {
   Search,
   SlidersHorizontal,
   X,
-} from "@multica/ui/icons";
+} from "@workpal/ui/icons";
 import { toast } from "sonner";
-import { useAuthStore } from "@multica/core/auth";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { memberListOptions } from "@multica/core/workspace/queries";
+import { useAuthStore } from "@workpal/core/auth";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { memberListOptions } from "@workpal/core/workspace/queries";
 import {
   propertyListOptions,
   useCreateProperty,
   useUpdateProperty,
-} from "@multica/core/properties";
+} from "@workpal/core/properties";
 import type {
   IssueProperty,
   IssuePropertyOption,
   IssuePropertyType,
-} from "@multica/core/types";
-import { ISSUE_PROPERTY_TYPES, MAX_ISSUE_PROPERTY_SELECT_OPTIONS } from "@multica/core/types";
-import { Button } from "@multica/ui/components/ui/button";
-import { IconButton } from "@multica/ui/components/common/icon-button";
-import { Badge } from "@multica/ui/components/ui/badge";
-import { Input } from "@multica/ui/components/ui/input";
-import { Textarea } from "@multica/ui/components/ui/textarea";
-import { Label as FieldLabel } from "@multica/ui/components/ui/label";
-import { Switch } from "@multica/ui/components/ui/switch";
+} from "@workpal/core/types";
+import { ISSUE_PROPERTY_TYPES, MAX_ISSUE_PROPERTY_SELECT_OPTIONS } from "@workpal/core/types";
+import { Button } from "@workpal/ui/components/ui/button";
+import { IconButton } from "@workpal/ui/components/common/icon-button";
+import { Badge } from "@workpal/ui/components/ui/badge";
+import { Input } from "@workpal/ui/components/ui/input";
+import { Textarea } from "@workpal/ui/components/ui/textarea";
+import { Label as FieldLabel } from "@workpal/ui/components/ui/label";
+import { Switch } from "@workpal/ui/components/ui/switch";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@multica/ui/components/ui/select";
+} from "@workpal/ui/components/ui/select";
 import {
   Dialog,
   DialogContent,
@@ -49,7 +49,7 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "@multica/ui/components/ui/dialog";
+} from "@workpal/ui/components/ui/dialog";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -59,18 +59,18 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@multica/ui/components/ui/alert-dialog";
+} from "@workpal/ui/components/ui/alert-dialog";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@multica/ui/components/ui/dropdown-menu";
+} from "@workpal/ui/components/ui/dropdown-menu";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@multica/ui/components/ui/popover";
+} from "@workpal/ui/components/ui/popover";
 import { ColorPicker, COLOR_PICKER_PRESETS } from "../../common/color-picker";
 import {
   PropertyIcon,
@@ -80,8 +80,8 @@ import {
 import { useLocale, useT } from "../../i18n";
 import { SettingsReadOnlyNotice, SettingsTab } from "./settings-layout";
 import { CatalogHeader, CatalogRow, CatalogRows, CatalogTable } from "./catalog-table";
-import { cn } from "@multica/ui/lib/utils";
-import { paletteColor } from "@multica/core/appearance";
+import { cn } from "@workpal/ui/lib/utils";
+import { paletteColor } from "@workpal/core/appearance";
 
 const MAX_ACTIVE_PROPERTIES = 20;
 

@@ -42,7 +42,7 @@ describe("useProjectViewStore", () => {
     useProjectViewStore.getState().setLayout("board");
     useProjectViewStore.getState().setGroupBy("priority");
 
-    const raw = localStorage.getItem("multica_projects_view:acme");
+    const raw = localStorage.getItem("workpal_projects_view:acme");
     expect(raw).not.toBeNull();
     const parsed = JSON.parse(raw as string);
     expect(parsed.version).toBe(1);
@@ -60,11 +60,11 @@ describe("useProjectViewStore", () => {
 
   it("rehydrates a different saved layout on workspace switch", async () => {
     localStorage.setItem(
-      "multica_projects_view:acme",
+      "workpal_projects_view:acme",
       JSON.stringify({ state: { layout: "board" }, version: 1 }),
     );
     localStorage.setItem(
-      "multica_projects_view:beta",
+      "workpal_projects_view:beta",
       JSON.stringify({ state: { layout: "table" }, version: 1 }),
     );
 
@@ -81,7 +81,7 @@ describe("useProjectViewStore", () => {
 
   it("resets to the table when switching to a workspace with no persisted value", async () => {
     localStorage.setItem(
-      "multica_projects_view:acme",
+      "workpal_projects_view:acme",
       JSON.stringify({ state: { layout: "board" }, version: 1 }),
     );
 
@@ -94,16 +94,16 @@ describe("useProjectViewStore", () => {
     await flush();
     await flush();
     expect(useProjectViewStore.getState().layout).toBe("table");
-    expect(localStorage.getItem("multica_projects_view:acme")).not.toBeNull();
+    expect(localStorage.getItem("workpal_projects_view:acme")).not.toBeNull();
   });
 
   it("opens a saved card view as the board and keeps a saved table as the table", async () => {
     localStorage.setItem(
-      "multica_projects_view:acme",
+      "workpal_projects_view:acme",
       JSON.stringify({ state: { viewMode: "comfortable", hiddenColumns: [] }, version: 0 }),
     );
     localStorage.setItem(
-      "multica_projects_view:beta",
+      "workpal_projects_view:beta",
       JSON.stringify({ state: { viewMode: "compact" }, version: 0 }),
     );
 

@@ -1,15 +1,15 @@
-# @multica/plugin-sdk
+# @workpal/plugin-sdk
 
-What a Multica plugin surface imports.
+What a Workpal plugin surface imports.
 
 ```js
-import { multica } from "@multica/plugin-sdk";
+import { workpal } from "@workpal/plugin-sdk";
 
-const ctx   = await multica.context.get();
-const issue = await multica.issue.get();
-await multica.issue.comment({ body: "hello" });
-const note  = await multica.storage.user.get("note");
-multica.ui.resize(320);
+const ctx   = await workpal.context.get();
+const issue = await workpal.issue.get();
+await workpal.issue.comment({ body: "hello" });
+const note  = await workpal.storage.user.get("note");
+workpal.ui.resize(320);
 ```
 
 ## What a surface is
@@ -17,7 +17,7 @@ multica.ui.resize(320);
 **One** script in a sandboxed iframe.
 
 Bundle this SDK and everything else your surface needs into a single file. There
-is no module graph: you publish an artifact, Multica stores it and serves your
+is no module graph: you publish an artifact, Workpal stores it and serves your
 entry inside a generated document on its dedicated plugin-content origin. There
 is no path back to the author's server and no top-level module graph for a bare
 `import` to resolve against. Publishing refuses an entry that has one rather
@@ -28,15 +28,15 @@ The frame is mounted with `sandbox="allow-scripts"` and **not**
 before you write one:
 
 - **No browser storage.** `localStorage`, `sessionStorage` and cookies all throw
-  or are empty. Use `multica.storage` — it is server-side, scoped per workspace
+  or are empty. Use `workpal.storage` — it is server-side, scoped per workspace
   or per member, and survives the frame.
 - **`Origin: null` on your own requests.** If your surface calls your backend
   directly, that backend must accept a null origin in CORS.
-- **A CSP you did not write.** Multica generates the response and derives
+- **A CSP you did not write.** Workpal generates the response and derives
   `connect-src` from the `net:` scopes in your manifest. Declare every host you
   intend to reach; with no `net:` scope your surface cannot issue a network
   request at all, including back to your own origin, which is no longer in the
-  policy now that Multica serves your code. `net:` is an exact host, so declare
+  policy now that Workpal serves your code. `net:` is an exact host, so declare
   `net:api.example.com` separately from `net:example.com`.
 
 ## Publishing
@@ -59,7 +59,7 @@ user's own session. Two limits apply at once:
 
 So a member without access to an issue gets a 404 through your surface too, and
 a scope the admin declined is a 403 that names it. Errors are
-`MulticaPluginError` with a `status` mirroring HTTP.
+`WorkpalPluginError` with a `status` mirroring HTTP.
 
 A comment you post is authored by **the user**, recorded as having been made
 through your plugin. It does not run `@mention` trigger dispatch — a surface
@@ -92,10 +92,10 @@ so it is safe to use anywhere a value is expected. A token the host does not
 define is not sent; give it a fallback (`var(--chart-1, steelblue)`) if your
 surface needs one.
 
-`multica.ui.onThemeChange(fn)` if you need to react in JS, for example to
+`workpal.ui.onThemeChange(fn)` if you need to react in JS, for example to
 redraw a canvas chart with the new colours.
 
 ## Sizing
 
-The frame does not auto-size. Call `multica.ui.resize(px)` after your content
+The frame does not auto-size. Call `workpal.ui.resize(px)` after your content
 settles; the host clamps the value.

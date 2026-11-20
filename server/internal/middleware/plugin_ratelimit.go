@@ -7,7 +7,7 @@ import (
 	"net/http"
 	"time"
 
-	publicapiv1 "github.com/multica-ai/multica/server/pkg/publicapi/v1"
+	publicapiv1 "workpal.local/workpal/server/pkg/publicapi/v1"
 	"github.com/redis/go-redis/v9"
 )
 

@@ -11,9 +11,9 @@ import {
   Loader2,
   Plus,
   RefreshCw,
-} from "@multica/ui/icons";
-import { ApiError, errorCode } from "@multica/core/api";
-import { autopilotQuotaUsageOptions } from "@multica/core/autopilots";
+} from "@workpal/ui/icons";
+import { ApiError, errorCode } from "@workpal/core/api";
+import { autopilotQuotaUsageOptions } from "@workpal/core/autopilots";
 import {
   useCreateWorkspaceSubscriptionCheckout,
   useCreateWorkspaceSubscriptionPortal,
@@ -21,20 +21,20 @@ import {
   usePurchaseWorkspaceSeats,
   workspaceSubscriptionPricesOptions,
   workspaceSubscriptionSummaryOptions,
-} from "@multica/core/billing";
-import { useFeatureEnabled } from "@multica/core/config";
-import { BILLING_WORKSPACE_SUBSCRIPTIONS_FLAG } from "@multica/core/feature-flags";
-import { useCurrentWorkspace } from "@multica/core/paths";
+} from "@workpal/core/billing";
+import { useFeatureEnabled } from "@workpal/core/config";
+import { BILLING_WORKSPACE_SUBSCRIPTIONS_FLAG } from "@workpal/core/feature-flags";
+import { useCurrentWorkspace } from "@workpal/core/paths";
 import type {
   PurchaseWorkspaceSeatsRequest,
   WorkspaceSeatPurchasePreview,
   WorkspaceSubscriptionInterval,
-} from "@multica/core/types";
+} from "@workpal/core/types";
 import {
   Alert,
   AlertDescription,
   AlertTitle,
-} from "@multica/ui/components/ui/alert";
+} from "@workpal/ui/components/ui/alert";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -44,10 +44,10 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@multica/ui/components/ui/alert-dialog";
-import { Badge } from "@multica/ui/components/ui/badge";
-import { Button } from "@multica/ui/components/ui/button";
-import { IconButton } from "@multica/ui/components/common/icon-button";
+} from "@workpal/ui/components/ui/alert-dialog";
+import { Badge } from "@workpal/ui/components/ui/badge";
+import { Button } from "@workpal/ui/components/ui/button";
+import { IconButton } from "@workpal/ui/components/common/icon-button";
 import {
   Dialog,
   DialogContent,
@@ -55,20 +55,20 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "@multica/ui/components/ui/dialog";
-import { Input } from "@multica/ui/components/ui/input";
+} from "@workpal/ui/components/ui/dialog";
+import { Input } from "@workpal/ui/components/ui/input";
 import {
   Popover,
   PopoverContent,
   PopoverDescription,
   PopoverTrigger,
-} from "@multica/ui/components/ui/popover";
+} from "@workpal/ui/components/ui/popover";
 import {
   Progress,
   ProgressLabel,
   ProgressValue,
-} from "@multica/ui/components/ui/progress";
-import { Skeleton } from "@multica/ui/components/ui/skeleton";
+} from "@workpal/ui/components/ui/progress";
+import { Skeleton } from "@workpal/ui/components/ui/skeleton";
 import { useLocale, useT } from "../../i18n";
 import { useNavigation } from "../../navigation";
 import { openExternal } from "../../platform";

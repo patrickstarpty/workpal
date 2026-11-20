@@ -8,7 +8,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/multica-ai/multica/server/pkg/agent"
+	"workpal.local/workpal/server/pkg/agent"
 )
 
 func rateLimitSnap(used float64, at time.Time) agent.RateLimitSnapshot {

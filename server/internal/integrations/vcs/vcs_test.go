@@ -182,7 +182,7 @@ func TestGitlabSystemHookMergeRequest(t *testing.T) {
 	p, _ := For("gitlab")
 	h := http.Header{}
 	h.Set("X-Gitlab-Event", "System Hook")
-	// GitLab 19.5.3-ee: https://github.com/multica-ai/multica/pull/10411#issuecomment-6943978266
+	// GitLab 19.5.3-ee: https://workpal.local/workpal/pull/10411#issuecomment-6943978266
 	body, err := os.ReadFile("testdata/gitlab-system-hook-merge.json")
 	if err != nil {
 		t.Fatal(err)

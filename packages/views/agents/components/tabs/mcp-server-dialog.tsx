@@ -7,32 +7,32 @@ import {
   useRef,
   useState,
 } from "react";
-import { Globe2, Loader2, Plus, SquareTerminal, Trash2 } from "@multica/ui/icons";
-import { Button } from "@multica/ui/components/ui/button";
-import { IconButton } from "@multica/ui/components/common/icon-button";
-import { cn } from "@multica/ui/lib/utils";
+import { Globe2, Loader2, Plus, SquareTerminal, Trash2 } from "@workpal/ui/icons";
+import { Button } from "@workpal/ui/components/ui/button";
+import { IconButton } from "@workpal/ui/components/common/icon-button";
+import { cn } from "@workpal/ui/lib/utils";
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
-} from "@multica/ui/components/ui/dialog";
+} from "@workpal/ui/components/ui/dialog";
 import {
   Field,
   FieldDescription,
   FieldError,
   FieldGroup,
   FieldLabel,
-} from "@multica/ui/components/ui/field";
-import { Input } from "@multica/ui/components/ui/input";
+} from "@workpal/ui/components/ui/field";
+import { Input } from "@workpal/ui/components/ui/input";
 import {
   Tabs,
   TabsContent,
   TabsList,
   TabsTrigger,
-} from "@multica/ui/components/ui/tabs";
-import { Textarea } from "@multica/ui/components/ui/textarea";
+} from "@workpal/ui/components/ui/tabs";
+import { Textarea } from "@workpal/ui/components/ui/textarea";
 import { useT } from "../../../i18n";
 import type { ManagedMcpServer } from "./mcp-config-model";
 import { isRecord, mcpTransport } from "./mcp-config-model";

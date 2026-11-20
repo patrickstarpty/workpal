@@ -1,17 +1,17 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { matchLocale } from "@multica/core/i18n";
-import { createBrowserCookieLocaleAdapter } from "@multica/core/i18n/browser";
-import { XIcon } from "@multica/ui/icons";
-import { cn } from "@multica/ui/lib/utils";
+import { matchLocale } from "@workpal/core/i18n";
+import { createBrowserCookieLocaleAdapter } from "@workpal/core/i18n/browser";
+import { XIcon } from "@workpal/ui/icons";
+import { cn } from "@workpal/ui/lib/utils";
 import { HTML_LANG } from "@/lib/html-lang";
 import { landingPathLocale, type LandingPathLocale } from "@/lib/landing-locale-path";
 import { createLandingDict } from "../i18n/dictionary";
 import { useLocale } from "../i18n";
 import { Container, focusRing } from "./primitives";
 
-const DISMISSED_KEY = "multica-locale-suggestion-dismissed";
+const DISMISSED_KEY = "workpal-locale-suggestion-dismissed";
 
 function wasDismissed() {
   try {

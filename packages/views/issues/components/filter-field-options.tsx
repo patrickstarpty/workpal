@@ -17,13 +17,13 @@ import {
   UserMinus,
   UserPen,
   type IconComponent,
-} from "@multica/ui/icons";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { PRIORITY_DISPLAY_ORDER } from "@multica/core/issues/config";
-import { PROJECT_STATUS_CONFIG, PROJECT_STATUS_ORDER } from "@multica/core/projects/config";
-import { projectListOptions } from "@multica/core/projects/queries";
-import { labelListOptions } from "@multica/core/labels/queries";
-import { memberListOptions, agentListOptions, squadListOptions } from "@multica/core/workspace/queries";
+} from "@workpal/ui/icons";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { PRIORITY_DISPLAY_ORDER } from "@workpal/core/issues/config";
+import { PROJECT_STATUS_CONFIG, PROJECT_STATUS_ORDER } from "@workpal/core/projects/config";
+import { projectListOptions } from "@workpal/core/projects/queries";
+import { labelListOptions } from "@workpal/core/labels/queries";
+import { memberListOptions, agentListOptions, squadListOptions } from "@workpal/core/workspace/queries";
 import {
   DUE_DATE_FILTERS,
   FILTER_NONE_VALUE,
@@ -31,8 +31,8 @@ import {
   type DueDateFilter,
   type IssueRelationFilter,
   type NegatableFilterDimension,
-} from "@multica/core/issues/stores/filter-tree";
-import type { ActorFilterValue } from "@multica/core/issues/stores/view-store";
+} from "@workpal/core/issues/stores/filter-tree";
+import type { ActorFilterValue } from "@workpal/core/issues/stores/view-store";
 import { useT } from "../../i18n";
 import { useStatusOptions } from "../utils/status-options";
 import { matchesPinyin } from "../../editor/extensions/pinyin-match";
@@ -41,7 +41,7 @@ import { ActorAvatar } from "../../common/actor-avatar";
 import { ProjectIcon } from "../../projects/components/project-icon";
 import { StatusIcon } from "./status-icon";
 import { PriorityIcon } from "./priority-icon";
-import { paletteColor } from "@multica/core/appearance";
+import { paletteColor } from "@workpal/core/appearance";
 
 export const FILTER_FIELD_ICONS: Record<NegatableFilterDimension, IconComponent> = {
   status: CircleDot,

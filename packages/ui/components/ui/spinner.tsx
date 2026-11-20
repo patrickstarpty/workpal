@@ -1,5 +1,5 @@
-import { cn } from "@multica/ui/lib/utils"
-import { Loader2Icon } from "@multica/ui/icons"
+import { cn } from "@workpal/ui/lib/utils"
+import { Loader2Icon } from "@workpal/ui/icons"
 
 function Spinner({ className, ...props }: React.ComponentProps<"svg">) {
   return (

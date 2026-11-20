@@ -1,10 +1,10 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import { ApiError, errorCode } from "@multica/core/api";
-import { composioToolkitsOptions } from "@multica/core/composio";
-import { useFeatureEnabled } from "@multica/core/config";
-import { COMPOSIO_MCP_APPS_FLAG } from "@multica/core/feature-flags";
+import { ApiError, errorCode } from "@workpal/core/api";
+import { composioToolkitsOptions } from "@workpal/core/composio";
+import { useFeatureEnabled } from "@workpal/core/config";
+import { COMPOSIO_MCP_APPS_FLAG } from "@workpal/core/feature-flags";
 import { useT } from "../../i18n";
 import { AppsSettings } from "./apps-settings";
 import { SettingsTab } from "./settings-layout";

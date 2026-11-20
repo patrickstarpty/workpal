@@ -31,7 +31,7 @@ import (
 	"testing"
 	"unicode/utf8"
 
-	"github.com/multica-ai/multica/server/internal/integrations/channel"
+	"workpal.local/workpal/server/internal/integrations/channel"
 )
 
 type wire = map[string]any

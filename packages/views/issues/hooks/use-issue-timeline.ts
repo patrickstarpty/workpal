@@ -11,7 +11,7 @@ import type {
   Comment,
   TimelineEntry,
   Reaction,
-} from "@multica/core/types";
+} from "@workpal/core/types";
 import type {
   CommentCreatedPayload,
   CommentUpdatedPayload,
@@ -21,12 +21,12 @@ import type {
   ActivityCreatedPayload,
   ReactionAddedPayload,
   ReactionRemovedPayload,
-} from "@multica/core/types";
+} from "@workpal/core/types";
 import {
   issueTimelineOptions,
   issueCommentThreadOptions,
   issueKeys,
-} from "@multica/core/issues/queries";
+} from "@workpal/core/issues/queries";
 import {
   useCreateComment,
   useUpdateComment,
@@ -34,15 +34,15 @@ import {
   useResolveComment,
   useToggleCommentReaction,
   type ToggleCommentReactionVars,
-} from "@multica/core/issues/mutations";
-import { commentToTimelineEntry, mergeCommentThread } from "@multica/core/issues/comment-thread";
-import { sortTimelineEntriesAsc } from "@multica/core/issues/timeline-sort";
+} from "@workpal/core/issues/mutations";
+import { commentToTimelineEntry, mergeCommentThread } from "@workpal/core/issues/comment-thread";
+import { sortTimelineEntriesAsc } from "@workpal/core/issues/timeline-sort";
 import {
   unhandledCommentTriggerOutcomes,
   mentionLabelsByTarget,
-} from "@multica/core/issues/comment-trigger-outcomes";
-import { useWSEvent, useWSReconnect } from "@multica/core/realtime";
-import { removeCommentSubtree } from "@multica/core/issues/comment-deletion";
+} from "@workpal/core/issues/comment-trigger-outcomes";
+import { useWSEvent, useWSReconnect } from "@workpal/core/realtime";
+import { removeCommentSubtree } from "@workpal/core/issues/comment-deletion";
 import { toast } from "sonner";
 import { useT } from "../../i18n";
 import { blockedShortReasonLabel } from "../blocked-trigger-copy";

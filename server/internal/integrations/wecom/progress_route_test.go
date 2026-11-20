@@ -17,10 +17,10 @@ import (
 
 	"github.com/jackc/pgx/v5/pgtype"
 
-	"github.com/multica-ai/multica/server/internal/events"
-	"github.com/multica-ai/multica/server/internal/util"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
-	"github.com/multica-ai/multica/server/pkg/protocol"
+	"workpal.local/workpal/server/internal/events"
+	"workpal.local/workpal/server/internal/util"
+	db "workpal.local/workpal/server/pkg/db/generated"
+	"workpal.local/workpal/server/pkg/protocol"
 )
 
 // fakeTranscript is task_message as ListTaskProgressSince sees it. Rows are
@@ -317,13 +317,13 @@ func TestARevokedInstallationGetsNoHandOver(t *testing.T) {
 
 // ---- which runs have steps to show ----
 
-// A question typed in Multica can hold a WeCom round for a moment —
+// A question typed in Workpal can hold a WeCom round for a moment —
 // task:queued binds it, and the origin gate gives it back at the end — but it
 // has no delivery row, and its steps are not the room's question's steps.
 //
 // REVERSE VERIFICATION: delete the return in progressTarget's ErrNoRows case
 // for the delivery row, and the browser run's tool call is painted.
-func TestARunTypedInMulticaShowsNoStepsInTheRoomsBubble(t *testing.T) {
+func TestARunTypedInWorkpalShowsNoStepsInTheRoomsBubble(t *testing.T) {
 	t.Parallel()
 	rig := newProgressRig(t)
 	rig.askFrom(t, "REQ-A", rig.chatType)
@@ -341,7 +341,7 @@ func TestARunTypedInMulticaShowsNoStepsInTheRoomsBubble(t *testing.T) {
 	rig.toolCall(t, "web-1", "Read", map[string]any{"file_path": "/home/dana/salary-review.md"})
 
 	if got := rig.refreshes(t); len(got) != 0 {
-		t.Errorf("a run typed in Multica painted %d step(s) into the room's bubble: %q", len(got), got)
+		t.Errorf("a run typed in Workpal painted %d step(s) into the room's bubble: %q", len(got), got)
 	}
 }
 

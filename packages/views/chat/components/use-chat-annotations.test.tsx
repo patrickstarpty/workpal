@@ -2,9 +2,9 @@ import { act, fireEvent, screen, waitFor } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { useState, type ReactElement } from "react";
 import { QueryClient, QueryClientProvider, useInfiniteQuery } from "@tanstack/react-query";
-import { chatKeys, chatMessagesPageOptions } from "@multica/core/chat/queries";
-import { useCommentDraftStore } from "@multica/core/issues/stores";
-import type { ChatMessage, ChatMessagesPage } from "@multica/core/types";
+import { chatKeys, chatMessagesPageOptions } from "@workpal/core/chat/queries";
+import { useCommentDraftStore } from "@workpal/core/issues/stores";
+import type { ChatMessage, ChatMessagesPage } from "@workpal/core/types";
 import { toast } from "sonner";
 import { renderWithI18n } from "../../test/i18n";
 import { ChatMessageList } from "./chat-message-list";
@@ -13,8 +13,8 @@ import { useChatAnnotations } from "./use-chat-annotations";
 vi.mock("sonner", () => ({ toast: { error: vi.fn() } }));
 
 const listChatMessagesPage = vi.hoisted(() => vi.fn());
-vi.mock("@multica/core/api", async (original) => {
-  const actual = await original<typeof import("@multica/core/api")>();
+vi.mock("@workpal/core/api", async (original) => {
+  const actual = await original<typeof import("@workpal/core/api")>();
   return { ...actual, api: { ...actual.api, listChatMessagesPage } };
 });
 

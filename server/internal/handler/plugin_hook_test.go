@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
-	"github.com/multica-ai/multica/server/internal/service"
+	"workpal.local/workpal/server/internal/service"
 	"net/http"
 	"net/http/httptest"
 	"strings"
@@ -12,9 +12,9 @@ import (
 	"time"
 
 	"github.com/go-chi/chi/v5"
-	"github.com/multica-ai/multica/server/internal/featureflags"
-	"github.com/multica-ai/multica/server/pkg/featureflag"
-	"github.com/multica-ai/multica/server/pkg/plugincontract"
+	"workpal.local/workpal/server/internal/featureflags"
+	"workpal.local/workpal/server/pkg/featureflag"
+	"workpal.local/workpal/server/pkg/plugincontract"
 )
 
 // hookHandlerTestManifest declares the three host-driven triggers. Its endpoint

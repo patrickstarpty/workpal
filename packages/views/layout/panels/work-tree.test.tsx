@@ -3,38 +3,38 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { act, fireEvent, screen, waitFor } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import type { DragEndEvent } from "@dnd-kit/core";
-import type { IssueViewPreference } from "@multica/core/api/schemas";
-import { issueViewPreferenceOptions } from "@multica/core/issue-views/preferences";
-import { buildIssueStatusCatalog } from "@multica/core/issue-statuses/queries";
-import { issueTableFacetsOptions } from "@multica/core/issues/queries";
+import type { IssueViewPreference } from "@workpal/core/api/schemas";
+import { issueViewPreferenceOptions } from "@workpal/core/issue-views/preferences";
+import { buildIssueStatusCatalog } from "@workpal/core/issue-statuses/queries";
+import { issueTableFacetsOptions } from "@workpal/core/issues/queries";
 import {
   NO_PROJECT_FACET_KEY,
   NO_PROJECT_ORDER_ID,
   NO_PROJECT_SIDEBAR_SOURCE,
   noProjectCountRequest,
-} from "@multica/core/issues/sidebar-list";
-import { SIDEBAR_PROJECTS_SCOPE } from "@multica/core/issues/sidebar-project-prefs";
+} from "@workpal/core/issues/sidebar-list";
+import { SIDEBAR_PROJECTS_SCOPE } from "@workpal/core/issues/sidebar-project-prefs";
 import {
   DEFAULT_SIDEBAR_ISSUE_SETTINGS,
   DEFAULT_SIDEBAR_PROJECT_SETTINGS,
   useSidebarTreeStore,
   type SidebarProjectSettings,
-} from "@multica/core/issues/stores/sidebar-tree-store";
-import type { SidebarFolder } from "@multica/core/projects/folder-tree";
-import type { Project } from "@multica/core/types";
-import { DropdownMenuItem } from "@multica/ui/components/ui/dropdown-menu";
+} from "@workpal/core/issues/stores/sidebar-tree-store";
+import type { SidebarFolder } from "@workpal/core/projects/folder-tree";
+import type { Project } from "@workpal/core/types";
+import { DropdownMenuItem } from "@workpal/ui/components/ui/dropdown-menu";
 import { renderWithI18n } from "../../test/i18n";
 import { registerProjectFoldersExtension, type ProjectFolders } from "../../extensions";
 import { ProjectsSection } from "./work-tree";
 
 const apiMock = vi.hoisted(() => ({ putIssueViewPreference: vi.fn() }));
-vi.mock("@multica/core/api", async (importOriginal) => ({
-  ...(await importOriginal<typeof import("@multica/core/api")>()),
+vi.mock("@workpal/core/api", async (importOriginal) => ({
+  ...(await importOriginal<typeof import("@workpal/core/api")>()),
   api: apiMock,
 }));
 
 const openCreateIssue = vi.hoisted(() => vi.fn());
-vi.mock("@multica/core/issues/stores/create-mode-store", () => ({
+vi.mock("@workpal/core/issues/stores/create-mode-store", () => ({
   openCreateIssueWithPreference: openCreateIssue,
 }));
 
@@ -50,11 +50,11 @@ vi.mock("@dnd-kit/core", async (importOriginal) => {
     },
   };
 });
-vi.mock("@multica/core/issue-statuses/hooks", () => ({
+vi.mock("@workpal/core/issue-statuses/hooks", () => ({
   useIssueStatuses: () => buildIssueStatusCatalog([]),
 }));
-vi.mock("@multica/core/hooks", () => ({ useWorkspaceId: () => "ws-1" }));
-vi.mock("@multica/core/auth", () => {
+vi.mock("@workpal/core/hooks", () => ({ useWorkspaceId: () => "ws-1" }));
+vi.mock("@workpal/core/auth", () => {
   const state = { user: { id: "u1" } };
   return {
     useAuthStore: Object.assign(
@@ -78,11 +78,11 @@ vi.mock("../../navigation", () => ({
   ),
 }));
 vi.mock("../../issues/components/status-icon", () => ({ StatusIcon: () => <span /> }));
-vi.mock("@multica/ui/components/common/tooltip-hint", () => ({
+vi.mock("@workpal/ui/components/common/tooltip-hint", () => ({
   TooltipHint: ({ children }: { children: ReactNode }) => <>{children}</>,
 }));
-vi.mock("@multica/core/paths", async (importOriginal) => {
-  const actual = await importOriginal<typeof import("@multica/core/paths")>();
+vi.mock("@workpal/core/paths", async (importOriginal) => {
+  const actual = await importOriginal<typeof import("@workpal/core/paths")>();
   return { ...actual, useWorkspacePaths: () => actual.paths.workspace("acme") };
 });
 

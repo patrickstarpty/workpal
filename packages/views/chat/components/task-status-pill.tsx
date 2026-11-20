@@ -1,10 +1,10 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { ShimmerText } from "@multica/ui/components/common/shimmer-text";
-import { MulticaIcon } from "@multica/ui/components/common/multica-icon";
-import type { AgentAvailability } from "@multica/core/agents";
-import type { ChatPendingTask, TaskMessagePayload } from "@multica/core/types";
+import { ShimmerText } from "@workpal/ui/components/common/shimmer-text";
+import { WorkpalIcon } from "@workpal/ui/components/common/workpal-icon";
+import type { AgentAvailability } from "@workpal/core/agents";
+import type { ChatPendingTask, TaskMessagePayload } from "@workpal/core/types";
 import { formatElapsedSecs } from "../lib/format";
 import { useT } from "../../i18n";
 
@@ -213,7 +213,7 @@ export function TaskStatusPill({
       aria-live="polite"
     >
       {!stage.static && (
-        <MulticaIcon mode="think" size={16} />
+        <WorkpalIcon mode="think" size={16} />
       )}
       <span className="truncate">
         <ShimmerText active={!stage.static}>

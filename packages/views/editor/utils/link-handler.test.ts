@@ -1,8 +1,8 @@
 import {
   bindWorkspaceSlugLookup,
   createQueryClient,
-} from "@multica/core/query-client";
-import { workspaceKeys } from "@multica/core/workspace/queries";
+} from "@workpal/core/query-client";
+import { workspaceKeys } from "@workpal/core/workspace/queries";
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import {
   openLink,
@@ -10,7 +10,7 @@ import {
   toInternalAppPath,
 } from "./link-handler";
 
-const APP_ORIGIN = "https://app.multica.ai";
+const APP_ORIGIN = "https://workpal.invalid";
 
 function navigatedPaths(): string[] {
   return dispatched.map((e) => (e as CustomEvent<{ path: string }>).detail.path);
@@ -102,10 +102,10 @@ describe("openLink", () => {
   });
 
   it("opens an external URL in a new window", () => {
-    openLink("https://github.com/multica-ai/multica/pull/1", "acme", APP_ORIGIN);
+    openLink("https://code-host.invalid/workpal/pull/1", "acme", APP_ORIGIN);
     expect(dispatched).toHaveLength(0);
     expect(openSpy).toHaveBeenCalledWith(
-      "https://github.com/multica-ai/multica/pull/1",
+      "https://code-host.invalid/workpal/pull/1",
       "_blank",
       "noopener,noreferrer",
     );

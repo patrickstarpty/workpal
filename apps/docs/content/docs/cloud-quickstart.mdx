@@ -8,7 +8,7 @@ import { Step, Steps } from "fumadocs-ui/components/steps";
 import { Tab, Tabs } from "fumadocs-ui/components/tabs";
 
 <Callout type="info">
-Before an agent can execute, the computer that runs it needs at least one [supported AI coding tool](/providers) installed and signed in — for example Claude Code, Codex, or Cursor. Multica does not ship these tools.
+Before an agent can execute, the computer that runs it needs at least one [supported AI coding tool](/providers) installed and signed in — for example Claude Code, Codex, or Cursor. Workpal does not ship these tools.
 </Callout>
 
 <Steps>
@@ -16,7 +16,7 @@ Before an agent can execute, the computer that runs it needs at least one [suppo
 
 ## Sign in and open your workspace [#1-sign-in-and-open-your-workspace]
 
-Sign in on the web ([multica.ai](https://multica.ai)) or with [Multica Desktop](https://multica.ai/download). Email verification codes and Google are both supported. If you sign in with Desktop, the next step can connect this computer automatically; on the web, you connect it from the command line.
+Sign in on the web (workpal.invalid) or with Workpal Desktop. Email verification codes and Google are both supported. If you sign in with Desktop, the next step can connect this computer automatically; on the web, you connect it from the command line.
 
 </Step>
 <Step>
@@ -32,22 +32,22 @@ Agents execute work on the computers you connect. Open **Runtimes** under **AI T
 <Tab value="macOS / Linux">
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/multica-ai/multica/main/scripts/install.sh | bash
-multica setup
+curl -fsSL https://raw.githubusercontent.com/workpal-ai/workpal/main/scripts/install.sh | bash
+workpal setup
 ```
 
 </Tab>
 <Tab value="Windows">
 
 ```powershell
-irm https://raw.githubusercontent.com/multica-ai/multica/main/scripts/install.ps1 | iex
-multica setup
+irm https://raw.githubusercontent.com/workpal-ai/workpal/main/scripts/install.ps1 | iex
+workpal setup
 ```
 
 </Tab>
 </Tabs>
 
-`multica setup` opens a browser to complete sign-in, then leaves the daemon running in the background. Once the daemon is online, the dialog usually detects the computer within a minute.
+`workpal setup` opens a browser to complete sign-in, then leaves the daemon running in the background. Once the daemon is online, the dialog usually detects the computer within a minute.
 
 **Success check**: an online computer appears in the runtime list.
 
@@ -77,9 +77,9 @@ Click **New Issue** at the top of the sidebar (or press `C`). In the default age
 
 1. Under **Created by**, select the agent you just created.
 2. Describe the work in a sentence or two, for example "Explain how this workspace can be used."
-3. Submit. Multica creates the issue, sets the agent as the assignee, and starts executing immediately.
+3. Submit. Workpal creates the issue, sets the agent as the assignee, and starts executing immediately.
 
-![New issue dialog in agent mode: Created by set to Multica Assistant](/images/docs/quickstart-new-issue.webp)
+![New issue dialog in agent mode: Created by set to Workpal Assistant](/images/docs/quickstart-new-issue.webp)
 
 </Step>
 <Step>
@@ -99,14 +99,14 @@ After submitting, open the issue: the execution log shows the run status, and th
 
 | Symptom | Check first |
 |---|---|
-| No runtime found | Confirm the AI coding tool is installed and runs in a terminal. On Desktop, click **Refresh**; on the CLI path, rerun `multica setup`. |
-| Runtime shows offline | Keep Desktop open; on the CLI path, run `multica daemon status`, and `multica daemon start` if it is not running. |
+| No runtime found | Confirm the AI coding tool is installed and runs in a terminal. On Desktop, click **Refresh**; on the CLI path, rerun `workpal setup`. |
+| Runtime shows offline | Keep Desktop open; on the CLI path, run `workpal daemon status`, and `workpal daemon start` if it is not running. |
 | Issue stays queued | Confirm the runtime the agent uses is online. When a runtime hits its concurrency limit, new runs keep queueing. |
 
 For more cases, see [Troubleshooting](/troubleshooting).
 
 ## Next steps
 
-- [Core concepts](/concepts) — meet all of Multica's core objects in three minutes.
-- [How Multica works](/how-multica-works) — how issues, agents, runtimes, and each run relate.
+- [Core concepts](/concepts) — meet all of Workpal's core objects in three minutes.
+- [How Workpal works](/how-workpal-works) — how issues, agents, runtimes, and each run relate.
 - [Put agents to work](/triggering-agents) — besides assignment, you can start an agent with an @mention, a chat, or an Autopilot.

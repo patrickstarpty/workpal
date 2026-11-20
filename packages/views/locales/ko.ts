@@ -1,4 +1,4 @@
-import type { LocaleResources } from "@multica/core/i18n";
+import type { LocaleResources } from "@workpal/core/i18n";
 import koCommon from "./ko/common.json";
 import koAuth from "./ko/auth.json";
 import koSettings from "./ko/settings.json";

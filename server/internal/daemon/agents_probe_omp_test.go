@@ -7,7 +7,7 @@ import (
 	"runtime"
 	"testing"
 
-	"github.com/multica-ai/multica/server/pkg/agent"
+	"workpal.local/workpal/server/pkg/agent"
 )
 
 // TestProbeAgentCLIs_DiscoversPiAndOmpSeparately covers discovery only: it
@@ -37,8 +37,8 @@ func TestProbeAgentCLIs_DiscoversPiAndOmpSeparately(t *testing.T) {
 	resetShellResolveCacheForTest(t)
 
 	t.Setenv("PATH", fakeDir)
-	t.Setenv("MULTICA_PI_PATH", "")
-	t.Setenv("MULTICA_OMP_PATH", "")
+	t.Setenv("WORKPAL_PI_PATH", "")
+	t.Setenv("WORKPAL_OMP_PATH", "")
 
 	agents := probeAgentCLIs()
 
@@ -112,8 +112,8 @@ func TestRegisterRuntimes_PiAndOmpBothReachTheServer(t *testing.T) {
 	resetShellResolveCacheForTest(t)
 
 	t.Setenv("PATH", fakeDir)
-	t.Setenv("MULTICA_PI_PATH", "")
-	t.Setenv("MULTICA_OMP_PATH", "")
+	t.Setenv("WORKPAL_PI_PATH", "")
+	t.Setenv("WORKPAL_OMP_PATH", "")
 
 	agents := probeAgentCLIs()
 	piEntry, ok := agents["pi"]

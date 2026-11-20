@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { Check, ChevronsUpDown, Inbox, ListTodo, Pin, PinOff, UserRound, X } from "@multica/ui/icons";
-import { cn } from "@multica/ui/lib/utils";
+import { Check, ChevronsUpDown, Inbox, ListTodo, Pin, PinOff, UserRound, X } from "@workpal/ui/icons";
+import { cn } from "@workpal/ui/lib/utils";
 import { CoachMark, DemoFrame, useDemoCopy, useStartWhenVisible } from "./demo-kit";
 
 type Ws = "a" | "b";

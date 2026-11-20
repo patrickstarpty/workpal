@@ -25,7 +25,7 @@ import {
   RotateCw,
   Save,
   Trash2,
-} from "@multica/ui/icons";
+} from "@workpal/ui/icons";
 import { SkillIcon } from "../lib/skill-icon";
 import type {
   Agent,
@@ -34,13 +34,13 @@ import type {
   Skill,
   SkillFile,
   UpdateSkillRequest,
-} from "@multica/core/types";
+} from "@workpal/core/types";
 import { toast } from "sonner";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { api } from "@multica/core/api";
-import { useAuthStore } from "@multica/core/auth";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { useWorkspacePaths } from "@multica/core/paths";
+import { api } from "@workpal/core/api";
+import { useAuthStore } from "@workpal/core/auth";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { useWorkspacePaths } from "@workpal/core/paths";
 import {
   agentListOptions,
   memberListOptions,
@@ -48,13 +48,13 @@ import {
   skillDetailOptions,
   skillVersionsOptions,
   workspaceKeys,
-} from "@multica/core/workspace/queries";
-import { resolvePublicFileUrl } from "@multica/core/workspace/avatar-url";
-import { runtimeListOptions } from "@multica/core/runtimes";
-import { parseFrontmatter } from "@multica/core/skills/frontmatter";
-import { ActorAvatar } from "@multica/ui/components/common/actor-avatar";
-import { IconButton } from "@multica/ui/components/common/icon-button";
-import { Button, buttonVariants } from "@multica/ui/components/ui/button";
+} from "@workpal/core/workspace/queries";
+import { resolvePublicFileUrl } from "@workpal/core/workspace/avatar-url";
+import { runtimeListOptions } from "@workpal/core/runtimes";
+import { parseFrontmatter } from "@workpal/core/skills/frontmatter";
+import { ActorAvatar } from "@workpal/ui/components/common/actor-avatar";
+import { IconButton } from "@workpal/ui/components/common/icon-button";
+import { Button, buttonVariants } from "@workpal/ui/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -62,17 +62,17 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "@multica/ui/components/ui/dialog";
+} from "@workpal/ui/components/ui/dialog";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@multica/ui/components/ui/dropdown-menu";
-import { Skeleton } from "@multica/ui/components/ui/skeleton";
-import { copyText } from "@multica/ui/lib/clipboard";
-import { cn } from "@multica/ui/lib/utils";
+} from "@workpal/ui/components/ui/dropdown-menu";
+import { Skeleton } from "@workpal/ui/components/ui/skeleton";
+import { copyText } from "@workpal/ui/lib/clipboard";
+import { cn } from "@workpal/ui/lib/utils";
 import { AppLink, useNavigation } from "../../navigation";
 import { PAGE_GUTTER, PAGE_RAIL } from "../../layout/page-header";
 import { CollectionPageState } from "../../layout/collection-page";
@@ -88,8 +88,8 @@ import {
 } from "../../layout/object-page";
 import { RichContent } from "../../rich-content";
 import { useCanEditSkill } from "../hooks/use-can-edit-skill";
-import { useSkillPermissions } from "@multica/core/permissions";
-import { CapabilityBanner } from "@multica/ui/components/common/capability-banner";
+import { useSkillPermissions } from "@workpal/core/permissions";
+import { CapabilityBanner } from "@workpal/ui/components/common/capability-banner";
 import { isRefreshableOrigin, readOrigin } from "../lib/origin";
 import { isMarkdownPath, type FileMode } from "./file-viewer";
 import { SKILL_MD, SkillFilesEditor } from "./skill-files-editor";
@@ -183,7 +183,7 @@ function readView(value: string | null): DetailView {
   return value === "files" || value === "versions" ? value : "overview";
 }
 
-const SKILL_DETAIL_LAYOUT_ID = "multica_skill_detail_layout";
+const SKILL_DETAIL_LAYOUT_ID = "workpal_skill_detail_layout";
 
 function Notice({
   title,

@@ -5,10 +5,10 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/multica-ai/multica/server/internal/analytics"
-	"github.com/multica-ai/multica/server/internal/events"
-	obsmetrics "github.com/multica-ai/multica/server/internal/metrics"
-	"github.com/multica-ai/multica/server/internal/realtime"
+	"workpal.local/workpal/server/internal/analytics"
+	"workpal.local/workpal/server/internal/events"
+	obsmetrics "workpal.local/workpal/server/internal/metrics"
+	"workpal.local/workpal/server/internal/realtime"
 )
 
 func TestMainRouterDoesNotExposeDiagnostics(t *testing.T) {

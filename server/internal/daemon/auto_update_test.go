@@ -7,7 +7,7 @@ import (
 	"sync/atomic"
 	"testing"
 
-	"github.com/multica-ai/multica/server/internal/cli"
+	"workpal.local/workpal/server/internal/cli"
 )
 
 // newAutoUpdateTestDaemon returns a Daemon stripped to just the pieces

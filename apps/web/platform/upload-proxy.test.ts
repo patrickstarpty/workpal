@@ -60,7 +60,7 @@ describe("proxyUpload", () => {
       method: "POST",
       headers: {
         authorization: "Bearer test-token",
-        cookie: "multica_session=test-session",
+        cookie: "workpal_session=test-session",
         "x-csrf-token": "test-csrf",
         "x-workspace-slug": "acme",
         "content-type": "multipart/form-data; boundary=test",

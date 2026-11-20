@@ -1,5 +1,5 @@
-import reactConfig from "@multica/eslint-config/react";
-import { NO_ROUND_CONTROLS } from "@multica/eslint-config/control-shape";
+import reactConfig from "@workpal/eslint-config/react";
+import { NO_ROUND_CONTROLS } from "@workpal/eslint-config/control-shape";
 
 export default [
   { ignores: ["storybook-static/**"] },

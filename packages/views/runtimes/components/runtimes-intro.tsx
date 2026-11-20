@@ -1,10 +1,10 @@
 "use client";
 
 import type { ReactNode } from "react";
-import { Check, Cloud, Download, Laptop, Server, SquareTerminal } from "@multica/ui/icons";
-import { buttonVariants } from "@multica/ui/components/ui/button";
-import { cn } from "@multica/ui/lib/utils";
-import { providerDisplayName } from "@multica/core/runtimes";
+import { Check, Cloud, Download, Laptop, Server, SquareTerminal } from "@workpal/ui/icons";
+import { buttonVariants } from "@workpal/ui/components/ui/button";
+import { cn } from "@workpal/ui/lib/utils";
+import { providerDisplayName } from "@workpal/core/runtimes";
 import {
   FeatureIntro,
   FeatureIntroCarousel,
@@ -19,8 +19,8 @@ const MACHINE = "studio-mbp";
 const REMOTE_MACHINE = "ci-runner-02";
 const DETECTED = ["claude", "codex", "cursor", "copilot"];
 const SETUP_COMMANDS = [
-  "curl -fsSL …/multica/main/scripts/n | bash",
-  "multica setup",
+  "curl -fsSL …/workpal/main/scripts/n | bash",
+  "workpal setup",
 ];
 const CLOUD_NODES = [
   { name: "cloud-node-01", spec: "t3.medium · ap-southeast-1", online: true },

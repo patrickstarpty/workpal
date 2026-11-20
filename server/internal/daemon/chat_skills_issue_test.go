@@ -22,7 +22,7 @@ func issueSkillTask(content string) Task {
 func issueSkillDirs(t *testing.T) map[string]string {
 	t.Helper()
 	dir := t.TempDir()
-	return map[string]string{"one": filepath.Join(dir, "review-code"), "two": filepath.Join(dir, "review-code-multica-2")}
+	return map[string]string{"one": filepath.Join(dir, "review-code"), "two": filepath.Join(dir, "review-code-workpal-2")}
 }
 
 func TestBuildRuntimePromptIssueMemberComments(t *testing.T) {
@@ -33,12 +33,12 @@ func TestBuildRuntimePromptIssueMemberComments(t *testing.T) {
 		{ID: "c2", AuthorType: "agent", Content: "agent also picked [/two](slash://skill/two)"},
 	}
 	prompt, invocation := buildRuntimePrompt(task, "claude", dirs)
-	if invocation == nil || len(invocation.Skills) != 2 || invocation.Skills[0].Name != "review-code" || invocation.Skills[1].Name != "review-code-multica-2" {
+	if invocation == nil || len(invocation.Skills) != 2 || invocation.Skills[0].Name != "review-code" || invocation.Skills[1].Name != "review-code-workpal-2" {
 		t.Fatalf("wrong selection order/identity: %+v", invocation)
 	}
 	for _, want := range []string{
-		"Explicitly selected skills:\n- review-code\n- review-code-multica-2\n",
-		"earlier ask with /review-code\n", "/review-code-multica-2 please review", "--parent comment-trigger", dirs["one"], dirs["two"],
+		"Explicitly selected skills:\n- review-code\n- review-code-workpal-2\n",
+		"earlier ask with /review-code\n", "/review-code-workpal-2 please review", "--parent comment-trigger", dirs["one"], dirs["two"],
 	} {
 		if !strings.Contains(prompt, want) {
 			t.Errorf("prompt missing %q: %s", want, prompt)
@@ -52,7 +52,7 @@ func TestBuildRuntimePromptIssueMemberComments(t *testing.T) {
 	if !strings.Contains(prompt, "agent also picked [/two](slash://skill/two)") {
 		t.Errorf("agent coalesced comment must keep its link verbatim: %s", prompt)
 	}
-	if invocation.UserMessage != "earlier ask with /review-code\n\n/review-code-multica-2 please review" {
+	if invocation.UserMessage != "earlier ask with /review-code\n\n/review-code-workpal-2 please review" {
 		// The member texts join chronologically (coalesced first, trigger
 		// last), each with its acted-on link replaced by its resolved name.
 		t.Fatalf("UserMessage=%q", invocation.UserMessage)
@@ -72,7 +72,7 @@ func TestBuildRuntimePromptIssueMultiSelectConflictSuffix(t *testing.T) {
 	task := issueSkillTask("[/a](slash://skill/two) and [/b](slash://skill/one) together")
 	_, invocation := buildRuntimePrompt(task, "hermes", dirs)
 	if invocation == nil || len(invocation.Skills) != 2 ||
-		invocation.Skills[0].Name != "review-code-multica-2" || invocation.Skills[1].Name != "review-code" {
+		invocation.Skills[0].Name != "review-code-workpal-2" || invocation.Skills[1].Name != "review-code" {
 		t.Fatalf("conflict-suffixed names must follow first-seen order: %+v", invocation)
 	}
 	if !strings.Contains(invocation.FallbackPrompt(), "SECOND BODY") || !strings.Contains(invocation.FallbackPrompt(), "FIRST BODY") {
@@ -226,7 +226,7 @@ func TestBuildRuntimePromptIssueUserMessageJoinsMemberTexts(t *testing.T) {
 	if invocation == nil {
 		t.Fatal("selection missing")
 	}
-	if invocation.UserMessage != "and double-check the tests\n\n/review-code-multica-2 please review" {
+	if invocation.UserMessage != "and double-check the tests\n\n/review-code-workpal-2 please review" {
 		t.Fatalf("UserMessage must join member asks without blank segments: %q", invocation.UserMessage)
 	}
 }

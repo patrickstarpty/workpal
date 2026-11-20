@@ -6,22 +6,22 @@ import {
   agentActivity30dOptions,
   agentRunCounts30dOptions,
   agentTaskSnapshotOptions,
-} from "@multica/core/agents/queries";
-import { autopilotListOptions } from "@multica/core/autopilots/queries";
-import { chatSessionsOptions } from "@multica/core/chat/queries";
-import { inboxListOptions } from "@multica/core/inbox/queries";
-import { useAuthStore } from "@multica/core/auth";
-import { paths, useCurrentWorkspace, useWorkspaceSlug } from "@multica/core/paths";
-import { pinListOptions } from "@multica/core/pins/queries";
-import { projectListOptions } from "@multica/core/projects/queries";
-import { runtimeProfileListOptions } from "@multica/core/runtimes";
-import { runtimeListOptions } from "@multica/core/runtimes/queries";
+} from "@workpal/core/agents/queries";
+import { autopilotListOptions } from "@workpal/core/autopilots/queries";
+import { chatSessionsOptions } from "@workpal/core/chat/queries";
+import { inboxListOptions } from "@workpal/core/inbox/queries";
+import { useAuthStore } from "@workpal/core/auth";
+import { paths, useCurrentWorkspace, useWorkspaceSlug } from "@workpal/core/paths";
+import { pinListOptions } from "@workpal/core/pins/queries";
+import { projectListOptions } from "@workpal/core/projects/queries";
+import { runtimeProfileListOptions } from "@workpal/core/runtimes";
+import { runtimeListOptions } from "@workpal/core/runtimes/queries";
 import {
   agentListOptions,
   memberListOptions,
   skillListOptions,
   squadListOptions,
-} from "@multica/core/workspace/queries";
+} from "@workpal/core/workspace/queries";
 import { RouteDataPrefetchProvider } from "../navigation/route-data-prefetch";
 
 type WarmRoute = (qc: QueryClient, wsId: string, userId: string | null) => void;

@@ -1,22 +1,22 @@
 "use client";
 
 import type { ReactNode } from "react";
-import { FileText, MessageSquare } from "@multica/ui/icons";
+import { FileText, MessageSquare } from "@workpal/ui/icons";
 import { Command as CommandPrimitive } from "cmdk";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { issueStatusCategory } from "@multica/core/issues";
-import { useIssueStatuses } from "@multica/core/issue-statuses/hooks";
-import { PROJECT_STATUS_CONFIG } from "@multica/core/projects/config";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { issueStatusCategory } from "@workpal/core/issues";
+import { useIssueStatuses } from "@workpal/core/issue-statuses/hooks";
+import { PROJECT_STATUS_CONFIG } from "@workpal/core/projects/config";
 import type {
   AgentAvailability,
-} from "@multica/core/agents";
+} from "@workpal/core/agents";
 import type {
   Issue,
   ProjectStatus,
   SearchIssueResult,
   SearchProjectResult,
-} from "@multica/core/types";
-import { cn } from "@multica/ui/lib/utils";
+} from "@workpal/core/types";
+import { cn } from "@workpal/ui/lib/utils";
 import { ActorAvatar } from "../common/actor-avatar";
 import { availabilityConfig } from "../agents/presence";
 import { StatusIcon } from "../issues/components";

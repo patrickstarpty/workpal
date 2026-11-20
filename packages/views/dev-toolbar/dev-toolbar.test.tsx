@@ -1,11 +1,11 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { render, screen, fireEvent, waitFor, within } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { ApiClient } from "@multica/core/api/client";
-import { WSClient } from "@multica/core/api/ws-client";
-import { resetDevRecorder } from "@multica/core/diagnostics";
-import { setCurrentWorkspace } from "@multica/core/platform";
-import type { WSMessage } from "@multica/core/types";
+import { ApiClient } from "@workpal/core/api/client";
+import { WSClient } from "@workpal/core/api/ws-client";
+import { resetDevRecorder } from "@workpal/core/diagnostics";
+import { setCurrentWorkspace } from "@workpal/core/platform";
+import type { WSMessage } from "@workpal/core/types";
 import { DevToolbar, type DevToolbarProps } from "./dev-toolbar";
 
 const mocks = vi.hoisted(() => ({
@@ -41,11 +41,11 @@ function connectSocket() {
   };
 }
 
-vi.mock("@multica/core/realtime", () => ({
+vi.mock("@workpal/core/realtime", () => ({
   useWSStatus: () => mocks.wsStatus,
 }));
 
-vi.mock("@multica/core/auth", () => {
+vi.mock("@workpal/core/auth", () => {
   const state = { user: { id: "user-1" } };
   return {
     useAuthStore: Object.assign(
@@ -55,7 +55,7 @@ vi.mock("@multica/core/auth", () => {
   };
 });
 
-vi.mock("@multica/core/api", () => ({
+vi.mock("@workpal/core/api", () => ({
   api: {
     listMembers: mocks.listMembers,
     listRuntimes: mocks.listRuntimes,

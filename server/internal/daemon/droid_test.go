@@ -20,12 +20,12 @@ func TestDroidDiscoveryAndConfiguration(t *testing.T) {
 				t.Fatal(err)
 			}
 			t.Setenv("SHELL", "/usr/bin/fish")
-			t.Setenv("MULTICA_DROID_PATH", "")
+			t.Setenv("WORKPAL_DROID_PATH", "")
 			if override {
-				t.Setenv("MULTICA_DROID_PATH", path)
+				t.Setenv("WORKPAL_DROID_PATH", path)
 			}
-			t.Setenv("MULTICA_DROID_MODEL", "custom:test")
-			t.Setenv("MULTICA_DROID_ARGS", "--reasoning-effort high")
+			t.Setenv("WORKPAL_DROID_MODEL", "custom:test")
+			t.Setenv("WORKPAL_DROID_ARGS", "--reasoning-effort high")
 			cfg, err := LoadConfig(Overrides{ServerURL: "http://localhost:0", WorkspacesRoot: t.TempDir()})
 			if err != nil {
 				t.Fatal(err)

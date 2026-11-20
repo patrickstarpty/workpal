@@ -7,8 +7,8 @@ import (
 	"sync"
 	"testing"
 
-	"github.com/multica-ai/multica/server/internal/events"
-	"github.com/multica-ai/multica/server/pkg/protocol"
+	"workpal.local/workpal/server/internal/events"
+	"workpal.local/workpal/server/pkg/protocol"
 )
 
 // Deleting a chat session cancels the session's active tasks, and every

@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/multica-ai/multica/server/pkg/taskfailure"
+	"workpal.local/workpal/server/pkg/taskfailure"
 )
 
 // finalizeRefusal builds the error runTask's Finalize defer returns when the
@@ -26,8 +26,8 @@ func finalizeRefusal(path string) error {
 // like a 5xx, agent_error.unknown otherwise — both blame the agent/provider.
 func TestTaskRunFailureReasonLabelsWorktreeFinalization(t *testing.T) {
 	cases := map[string]error{
-		"5xx-looking path segment": finalizeRefusal("/Users/u/multica_workspaces/ws-500/task/worktree"),
-		"plain path":               finalizeRefusal("/Users/u/multica_workspaces/ws/c503f/worktree"),
+		"5xx-looking path segment": finalizeRefusal("/Users/u/workpal_workspaces/ws-500/task/worktree"),
+		"plain path":               finalizeRefusal("/Users/u/workpal_workspaces/ws/c503f/worktree"),
 		"joined with nothing else": errors.Join(finalizeRefusal("/Users/u/w/503/worktree")),
 	}
 	for name, err := range cases {

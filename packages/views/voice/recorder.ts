@@ -8,7 +8,7 @@ import {
   type VoiceMeter,
   type VoiceRecorder,
   type VoiceRecorderFailure,
-} from "@multica/core/voice";
+} from "@workpal/core/voice";
 
 /** The recording stops itself here; Desktop's engine accepts a little more. */
 const MAX_RECORDING_MS = 120_000;

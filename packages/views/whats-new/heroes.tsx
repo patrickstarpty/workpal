@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, type CSSProperties, type ReactNode } from "react";
-import { inboxSnoozeOptions, type InboxSnoozePreset } from "@multica/core/inbox/snooze";
+import { inboxSnoozeOptions, type InboxSnoozePreset } from "@workpal/core/inbox/snooze";
 import {
   AlarmClock,
   AppWindow,
@@ -21,8 +21,8 @@ import {
   Search,
   Server,
   Square,
-} from "@multica/ui/icons";
-import { cn } from "@multica/ui/lib/utils";
+} from "@workpal/ui/icons";
+import { cn } from "@workpal/ui/lib/utils";
 import { useLocale, useT } from "../i18n";
 import { formatSnoozeTime } from "../inbox/components/inbox-snooze-time";
 
@@ -104,7 +104,7 @@ function MenuItem({ icon, active, children }: { icon: ReactNode; active?: boolea
 
 /** Names in the art: proper nouns that read the same in every locale. */
 const SAMPLE = {
-  author: "Multica",
+  author: "Workpal",
   machine: "MacBook Pro",
   webApp: "Web app",
   desktopApp: "Desktop app",
@@ -404,7 +404,7 @@ function VoiceArt() {
   const { t: tIssues } = useT("issues");
   return (
     <div className="absolute top-[5.75rem] left-6 w-[20.5rem]">
-      <div className="absolute bottom-full left-1/2 z-10 mb-3 flex h-10 -translate-x-1/2 items-center gap-2.5 whitespace-nowrap rounded-full bg-multica-ink pr-4 pl-3.5 text-multica-paper shadow-[var(--floating-shadow)]">
+      <div className="absolute bottom-full left-1/2 z-10 mb-3 flex h-10 -translate-x-1/2 items-center gap-2.5 whitespace-nowrap rounded-full bg-workpal-ink pr-4 pl-3.5 text-workpal-paper shadow-[var(--floating-shadow)]">
         <span className="size-2 shrink-0 rounded-full bg-[#ff5a52]" />
         <span className="flex h-5 items-center gap-[2px]">
           {VOICE_LEVELS.map((level, i) => (

@@ -28,7 +28,7 @@ const USAGE = `Usage: node scripts/desktop-cdp.mjs [options] [script.mjs [script
   --login             make sure the dev user is signed in and onboarded, then wait for the shell
   --screenshot FILE   save a PNG of the main window when done
   --record FILE.mp4   record a CDP screencast while the script runs
-  --cdp URL           CDP endpoint (default: $MULTICA_DEV_DESKTOP_CDP_URL)
+  --cdp URL           CDP endpoint (default: $WORKPAL_DEV_DESKTOP_CDP_URL)
   --timeout SECONDS   how long to wait for the app and the shell (default: 60)
 
 Run through \`make env-exec ARGS="-- node scripts/desktop-cdp.mjs ..."\`.`;
@@ -143,18 +143,18 @@ async function tokenIsValid(apiUrl, token) {
 // token, the same one Desktop starts with. Reusing it avoids requesting a new
 // login code, which the backend rate-limits.
 function profileToken(env) {
-  if (!env.MULTICA_DEV_PROFILE) return null;
-  const home = env.MULTICA_DEV_PROFILES_HOME || join(homedir(), ".multica", "profiles");
+  if (!env.WORKPAL_DEV_PROFILE) return null;
+  const home = env.WORKPAL_DEV_PROFILES_HOME || join(homedir(), ".workpal", "profiles");
   try {
-    return JSON.parse(readFileSync(join(home, env.MULTICA_DEV_PROFILE, "config.json"), "utf8")).token || null;
+    return JSON.parse(readFileSync(join(home, env.WORKPAL_DEV_PROFILE, "config.json"), "utf8")).token || null;
   } catch {
     return null;
   }
 }
 
 async function ensureWorkspace(apiUrl, token, env) {
-  const slug = env.MULTICA_DEV_WORKSPACE_SLUG || "dev";
-  const name = env.MULTICA_DEV_WORKSPACE_NAME || "Dev";
+  const slug = env.WORKPAL_DEV_WORKSPACE_SLUG || "dev";
+  const name = env.WORKPAL_DEV_WORKSPACE_NAME || "Dev";
   const workspaces = (await request(apiUrl, "GET", "/api/workspaces", { token })) ?? [];
   const existing = workspaces.find((ws) => ws.slug === slug) ?? workspaces[0];
   if (existing) return existing;
@@ -167,10 +167,10 @@ async function ensureWorkspace(apiUrl, token, env) {
 async function login(page, env, { timeoutMs }) {
   if (!env.PORT) fail("PORT is not set; run this through `make env-exec`.");
   const apiUrl = `http://localhost:${env.PORT}`;
-  const email = env.MULTICA_DEV_EMAIL || "dev@localhost";
-  const code = env.MULTICA_DEV_VERIFICATION_CODE || "888888";
+  const email = env.WORKPAL_DEV_EMAIL || "dev@localhost";
+  const code = env.WORKPAL_DEV_VERIFICATION_CODE || "888888";
 
-  const stored = await page.evaluate(() => localStorage.getItem("multica_token"));
+  const stored = await page.evaluate(() => localStorage.getItem("workpal_token"));
   let token = null;
   for (const candidate of [stored, profileToken(env)]) {
     if (await tokenIsValid(apiUrl, candidate)) {
@@ -207,7 +207,7 @@ async function login(page, env, { timeoutMs }) {
   const shell = page.locator('[data-slot="main-canvas"]').first();
   const changed = token !== stored || !me.onboarded_at;
   if (changed || !(await shell.isVisible())) {
-    await page.evaluate((value) => localStorage.setItem("multica_token", value), token);
+    await page.evaluate((value) => localStorage.setItem("workpal_token", value), token);
     await page.reload();
   }
   await shell.waitFor({ state: "visible", timeout: timeoutMs });
@@ -262,12 +262,12 @@ function encodeVideo(concat, output) {
 async function main() {
   const options = parseCli(process.argv.slice(2));
   const env = process.env;
-  const cdpUrl = options.cdp || env.MULTICA_DEV_DESKTOP_CDP_URL;
+  const cdpUrl = options.cdp || env.WORKPAL_DEV_DESKTOP_CDP_URL;
   if (!cdpUrl) {
     fail('no CDP endpoint. Start Desktop with one (make up C=desktop ARGS="--cdp") and run this through `make env-exec`.');
   }
-  const rendererUrl = env.MULTICA_DEV_DESKTOP_RENDERER_URL;
-  if (!rendererUrl) fail("MULTICA_DEV_DESKTOP_RENDERER_URL is not set; run this through `make env-exec`.");
+  const rendererUrl = env.WORKPAL_DEV_DESKTOP_RENDERER_URL;
+  if (!rendererUrl) fail("WORKPAL_DEV_DESKTOP_RENDERER_URL is not set; run this through `make env-exec`.");
 
   const timeoutMs = options.timeout * 1000;
   const deadline = Date.now() + timeoutMs;

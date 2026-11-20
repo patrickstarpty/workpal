@@ -2,21 +2,21 @@
 
 import { useId, useMemo, useRef, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { issueTasksOptions } from "@multica/core/issues/queries";
-import { ArrowRight, Ban, ChevronRight, XCircle } from "@multica/ui/icons";
-import type { AgentTask } from "@multica/core/types";
-import { cn } from "@multica/ui/lib/utils";
-import { Checkbox } from "@multica/ui/components/ui/checkbox";
+import { issueTasksOptions } from "@workpal/core/issues/queries";
+import { ArrowRight, Ban, ChevronRight, XCircle } from "@workpal/ui/icons";
+import type { AgentTask } from "@workpal/core/types";
+import { cn } from "@workpal/ui/lib/utils";
+import { Checkbox } from "@workpal/ui/components/ui/checkbox";
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
-} from "@multica/ui/components/ui/dialog";
-import { TruncatedTooltip } from "@multica/ui/components/common/truncated-tooltip";
-import { useActorName } from "@multica/core/workspace/hooks";
-import { useCustomPricingStore } from "@multica/core/runtimes/custom-pricing-store";
+} from "@workpal/ui/components/ui/dialog";
+import { TruncatedTooltip } from "@workpal/ui/components/common/truncated-tooltip";
+import { useActorName } from "@workpal/core/workspace/hooks";
+import { useCustomPricingStore } from "@workpal/core/runtimes/custom-pricing-store";
 import { ActorAvatar } from "../../common/actor-avatar";
 import { DeferredTooltip } from "../../common/deferred-tooltip";
 import { TranscriptButton } from "../../common/task-transcript";

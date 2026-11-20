@@ -8,9 +8,9 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/multica-ai/multica/server/internal/testutil"
-	"github.com/multica-ai/multica/server/internal/util"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
+	"workpal.local/workpal/server/internal/testutil"
+	"workpal.local/workpal/server/internal/util"
+	db "workpal.local/workpal/server/pkg/db/generated"
 )
 
 // TestCanUseRuntimeForAgent_Pure exercises the pure predicate behind the
@@ -90,14 +90,14 @@ func runtimeVisibilityFixture(t *testing.T) (runtimeID, runtimeOwnerID, plainMem
 
 	if err := testPool.QueryRow(ctx, `
 		INSERT INTO "user" (name, email)
-		VALUES ('Runtime Owner', 'runtime-owner@multica.test')
+		VALUES ('Runtime Owner', 'runtime-owner@workpal.test')
 		RETURNING id
 	`).Scan(&runtimeOwnerID); err != nil {
 		t.Fatalf("create runtime owner user: %v", err)
 	}
 	t.Cleanup(func() {
 		testPool.Exec(context.Background(),
-			`DELETE FROM "user" WHERE email = 'runtime-owner@multica.test'`)
+			`DELETE FROM "user" WHERE email = 'runtime-owner@workpal.test'`)
 	})
 
 	if _, err := testPool.Exec(ctx, `
@@ -109,14 +109,14 @@ func runtimeVisibilityFixture(t *testing.T) (runtimeID, runtimeOwnerID, plainMem
 
 	if err := testPool.QueryRow(ctx, `
 		INSERT INTO "user" (name, email)
-		VALUES ('Plain Runtime Member', 'plain-runtime-member@multica.test')
+		VALUES ('Plain Runtime Member', 'plain-runtime-member@workpal.test')
 		RETURNING id
 	`).Scan(&plainMemberID); err != nil {
 		t.Fatalf("create plain member user: %v", err)
 	}
 	t.Cleanup(func() {
 		testPool.Exec(context.Background(),
-			`DELETE FROM "user" WHERE email = 'plain-runtime-member@multica.test'`)
+			`DELETE FROM "user" WHERE email = 'plain-runtime-member@workpal.test'`)
 	})
 
 	if _, err := testPool.Exec(ctx, `
@@ -741,11 +741,11 @@ func TestUpdateAgent_RuntimeBindingMatchesAgentOwner(t *testing.T) {
 		{"admin public runtime on foreign agent", "admin", false, "public", http.StatusOK},
 	} {
 		t.Run(tc.name, func(t *testing.T) {
-			agentOwnerID := dbfx.User(t, "Agent binding owner", "binding-owner@multica.test")
+			agentOwnerID := dbfx.User(t, "Agent binding owner", "binding-owner@workpal.test")
 			dbfx.Member(t, testWorkspaceID, agentOwnerID, "member")
 			actorID := agentOwnerID
 			if !tc.actorOwner {
-				actorID = dbfx.User(t, "Agent binding manager", "binding-manager@multica.test")
+				actorID = dbfx.User(t, "Agent binding manager", "binding-manager@workpal.test")
 				dbfx.Member(t, testWorkspaceID, actorID, tc.actorRole)
 			}
 			originalRuntimeID := dbfx.Runtime(t, "Original binding runtime", testutil.Cols{"owner_id": agentOwnerID})

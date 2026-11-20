@@ -3,12 +3,12 @@ import { act, fireEvent, renderHook, screen, waitFor } from "@testing-library/re
 import userEvent from "@testing-library/user-event";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import type { ReactNode } from "react";
-import { setApiInstance } from "@multica/core/api";
-import type { ApiClient } from "@multica/core/api/client";
-import { EMPTY_PROJECT } from "@multica/core/api/schemas";
-import { I18nProvider } from "@multica/core/i18n/react";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from "@multica/ui/components/ui/dropdown-menu";
-import { getProjectFoldersExtension, registerProjectFoldersExtension } from "@multica/views/extensions";
+import { setApiInstance } from "@workpal/core/api";
+import type { ApiClient } from "@workpal/core/api/client";
+import { EMPTY_PROJECT } from "@workpal/core/api/schemas";
+import { I18nProvider } from "@workpal/core/i18n/react";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from "@workpal/ui/components/ui/dropdown-menu";
+import { getProjectFoldersExtension, registerProjectFoldersExtension } from "@workpal/views/extensions";
 import { renderWithI18n } from "../test/i18n";
 import { registerEE } from "../index";
 import { projectFoldersExtension } from "./components";
@@ -16,16 +16,16 @@ import type { ProjectFolderList } from "./data";
 import { useFolderDialogStore, useProjectFoldersState } from "./state";
 
 const ws = vi.hoisted(() => ({ handlers: new Map<string, () => void>() }));
-vi.mock("@multica/core/hooks", () => ({ useWorkspaceId: () => "ws" }));
-vi.mock("@multica/core/realtime", () => ({
+vi.mock("@workpal/core/hooks", () => ({ useWorkspaceId: () => "ws" }));
+vi.mock("@workpal/core/realtime", () => ({
   useWSEvent: (event: string, handler: () => void) => ws.handlers.set(event, handler),
   useWSReconnect: (handler: () => void) => ws.handlers.set("reconnect", handler),
 }));
-vi.mock("@multica/core/paths", async (importOriginal) => ({
+vi.mock("@workpal/core/paths", async (importOriginal) => ({
   ...(await importOriginal<object>()),
   useWorkspacePaths: () => ({ settings: () => "/acme/settings" }),
 }));
-vi.mock("@multica/views/navigation", async (importOriginal) => ({
+vi.mock("@workpal/views/navigation", async (importOriginal) => ({
   ...(await importOriginal<object>()),
   AppLink: ({ href, children, ...props }: React.ComponentProps<"a"> & { href: string }) => (
     <a href={href} {...props}>
@@ -34,7 +34,7 @@ vi.mock("@multica/views/navigation", async (importOriginal) => ({
   ),
 }));
 // The sidebar opens a folder's menu at the pointer; here a button stands in.
-vi.mock("@multica/views/layout/collection-list", () => ({
+vi.mock("@workpal/views/layout/collection-list", () => ({
   CollectionRowMenu: ({ label, children }: { label: string; children: ReactNode }) => (
     <DropdownMenu>
       <DropdownMenuTrigger aria-label={label}>{label}</DropdownMenuTrigger>

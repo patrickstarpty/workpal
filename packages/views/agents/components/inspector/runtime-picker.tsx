@@ -8,9 +8,9 @@ import {
   ChevronRight,
   Lock,
   Monitor,
-} from "@multica/ui/icons";
-import { isRuntimeUsableForUser } from "@multica/core/runtimes";
-import type { AgentRuntime, MemberWithUser } from "@multica/core/types";
+} from "@workpal/ui/icons";
+import { isRuntimeUsableForUser } from "@workpal/core/runtimes";
+import type { AgentRuntime, MemberWithUser } from "@workpal/core/types";
 import { ActorAvatar } from "../../../common/actor-avatar";
 import {
   PickerItem,
@@ -22,7 +22,7 @@ import {
   runtimeRowLabel,
   type RuntimeMachine,
 } from "../../../runtimes/components/runtime-machines";
-import { Label } from "@multica/ui/components/ui/label";
+import { Label } from "@workpal/ui/components/ui/label";
 import { CHIP_CLASS } from "./chip";
 import { useT } from "../../../i18n";
 

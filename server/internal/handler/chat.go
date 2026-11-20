@@ -13,16 +13,16 @@ import (
 	"github.com/go-chi/chi/v5"
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgtype"
-	"github.com/multica-ai/multica/server/internal/analytics"
-	"github.com/multica-ai/multica/server/internal/events"
-	"github.com/multica-ai/multica/server/internal/logger"
-	obsmetrics "github.com/multica-ai/multica/server/internal/metrics"
-	"github.com/multica-ai/multica/server/internal/middleware"
-	"github.com/multica-ai/multica/server/internal/service"
-	"github.com/multica-ai/multica/server/internal/util"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
-	"github.com/multica-ai/multica/server/pkg/dbid"
-	"github.com/multica-ai/multica/server/pkg/protocol"
+	"workpal.local/workpal/server/internal/analytics"
+	"workpal.local/workpal/server/internal/events"
+	"workpal.local/workpal/server/internal/logger"
+	obsmetrics "workpal.local/workpal/server/internal/metrics"
+	"workpal.local/workpal/server/internal/middleware"
+	"workpal.local/workpal/server/internal/service"
+	"workpal.local/workpal/server/internal/util"
+	db "workpal.local/workpal/server/pkg/db/generated"
+	"workpal.local/workpal/server/pkg/dbid"
+	"workpal.local/workpal/server/pkg/protocol"
 )
 
 // chatSessionTitleMaxLen caps the rename input. Long enough to fit a
@@ -2027,7 +2027,7 @@ type ChatSessionResponse struct {
 	Pinned bool `json:"pinned"`
 	// ChannelSource is present only for Chats created from an external channel.
 	// IsCurrentChannelRoute distinguishes the active route generation from an
-	// older Chat that remains readable and writable in Multica.
+	// older Chat that remains readable and writable in Workpal.
 	ChannelSource         *ChatSessionChannelSourceResponse `json:"channel_source,omitempty"`
 	IsCurrentChannelRoute *bool                             `json:"is_current_channel_route,omitempty"`
 	CreatedAt             string                            `json:"created_at"`
@@ -2127,7 +2127,7 @@ type ChatMessageResponse struct {
 	// Attachments linked to this message via chat_message_id. The chat
 	// bubble renders file cards from these, and the daemon claim path
 	// (daemon.go) pulls structured metadata from the same source so the
-	// agent can `multica attachment download <id>` rather than guessing
+	// agent can `workpal attachment download <id>` rather than guessing
 	// from a markdown URL that may expire.
 	Attachments []AttachmentResponse `json:"attachments,omitempty"`
 }

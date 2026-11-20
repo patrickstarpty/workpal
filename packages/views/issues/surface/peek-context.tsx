@@ -1,8 +1,8 @@
 "use client";
 
 import { createContext, useCallback, useContext, useMemo } from "react";
-import { useIssueOpeningStore, type IssueOpenMode } from "@multica/core/issues/stores/issue-opening-store";
-import { useWorkspacePaths } from "@multica/core/paths";
+import { useIssueOpeningStore, type IssueOpenMode } from "@workpal/core/issues/stores/issue-opening-store";
+import { useWorkspacePaths } from "@workpal/core/paths";
 import { useNavigation } from "../../navigation";
 
 /**

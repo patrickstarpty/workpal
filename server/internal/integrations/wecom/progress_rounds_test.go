@@ -34,11 +34,11 @@ import (
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgtype"
 
-	"github.com/multica-ai/multica/server/internal/events"
-	"github.com/multica-ai/multica/server/internal/integrations/channel"
-	"github.com/multica-ai/multica/server/internal/util"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
-	"github.com/multica-ai/multica/server/pkg/protocol"
+	"workpal.local/workpal/server/internal/events"
+	"workpal.local/workpal/server/internal/integrations/channel"
+	"workpal.local/workpal/server/internal/util"
+	db "workpal.local/workpal/server/pkg/db/generated"
+	"workpal.local/workpal/server/pkg/protocol"
 )
 
 // fakeIdentityLookup answers "is the person in this chat the bot's principal",
@@ -118,7 +118,7 @@ func newProgressRig(t *testing.T) *progressRig {
 	principal := pgtype.UUID{Bytes: [16]byte{7, 7, 7}, Valid: true}
 	rig.installer = principal
 	identities := &fakeIdentityLookup{bindings: map[identityKey]db.ChannelUserBinding{
-		{rig.instID, bubbleSender}: {MulticaUserID: principal},
+		{rig.instID, bubbleSender}: {WorkpalUserID: principal},
 	}}
 
 	rig.typing = NewTypingIndicator(TypingIndicatorConfig{
@@ -667,7 +667,7 @@ func TestAChatThatIsNotThePrincipalsShowsNoSteps(t *testing.T) {
 			who:  "a colleague",
 			setUp: func(rig *progressRig) {
 				rig.identities.bindings[identityKey{rig.instID, bubbleSender}] = db.ChannelUserBinding{
-					MulticaUserID: pgtype.UUID{Bytes: [16]byte{9, 9, 9}, Valid: true},
+					WorkpalUserID: pgtype.UUID{Bytes: [16]byte{9, 9, 9}, Valid: true},
 				}
 			},
 		},

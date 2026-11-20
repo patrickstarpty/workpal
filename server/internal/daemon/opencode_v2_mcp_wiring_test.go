@@ -12,7 +12,7 @@ import (
 	"testing"
 	"time"
 
-	agentpkg "github.com/multica-ai/multica/server/pkg/agent"
+	agentpkg "workpal.local/workpal/server/pkg/agent"
 )
 
 // TestOpenCodeV2RefusesSynthesizedMCPWithoutAgentConfig covers the seam between
@@ -55,7 +55,7 @@ func TestOpenCodeV2RefusesSynthesizedMCPWithoutAgentConfig(t *testing.T) {
 		ExecutablePath: fakeCLI,
 		CLIVersion:     "opencode v2.0.10",
 		BuiltinRuntime: true,
-		Env:            map[string]string{"MULTICA_OPENCODE_TRANSPORT": "run"},
+		Env:            map[string]string{"WORKPAL_OPENCODE_TRANSPORT": "run"},
 		Logger:         slog.Default(),
 	})
 	if err != nil {

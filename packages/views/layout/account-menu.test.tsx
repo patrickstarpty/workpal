@@ -1,20 +1,20 @@
 import type { ReactNode } from "react";
 import { fireEvent, screen, waitFor, within } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { DEFAULT_APPEARANCE, useAppearanceStore, useInstalledThemesStore } from "@multica/core/appearance";
+import { DEFAULT_APPEARANCE, useAppearanceStore, useInstalledThemesStore } from "@workpal/core/appearance";
 import { renderWithI18n } from "../test/i18n";
 import { AccountMenu } from "./account-menu";
 
 const theme = vi.hoisted(() => ({ current: "light", setTheme: vi.fn() }));
 
-vi.mock("@multica/ui/components/common/theme-provider", () => ({
+vi.mock("@workpal/ui/components/common/theme-provider", () => ({
   useTheme: () => ({
     theme: theme.current,
     resolvedTheme: theme.current,
     setTheme: theme.setTheme,
   }),
 }));
-vi.mock("@multica/core/auth", () => {
+vi.mock("@workpal/core/auth", () => {
   const state = { user: { id: "user-1", name: "Jiayuan", email: "jiayuan@example.com", avatar_url: null } };
   return {
     useAuthStore: Object.assign((selector: (s: typeof state) => unknown) => selector(state), {
@@ -22,8 +22,8 @@ vi.mock("@multica/core/auth", () => {
     }),
   };
 });
-vi.mock("@multica/core/workspace/avatar-url", () => ({ resolvePublicFileUrl: () => undefined }));
-vi.mock("@multica/ui/components/common/tooltip-hint", () => ({
+vi.mock("@workpal/core/workspace/avatar-url", () => ({ resolvePublicFileUrl: () => undefined }));
+vi.mock("@workpal/ui/components/common/tooltip-hint", () => ({
   TooltipHint: ({ children }: { children: ReactNode }) => <>{children}</>,
 }));
 vi.mock("../navigation", () => ({
@@ -33,8 +33,8 @@ vi.mock("../navigation", () => ({
     </a>
   ),
 }));
-vi.mock("@multica/core/paths", async (importOriginal) => {
-  const actual = await importOriginal<typeof import("@multica/core/paths")>();
+vi.mock("@workpal/core/paths", async (importOriginal) => {
+  const actual = await importOriginal<typeof import("@workpal/core/paths")>();
   return { ...actual, useWorkspacePaths: () => actual.paths.workspace("acme") };
 });
 vi.mock("../auth", () => ({ useLogout: () => vi.fn() }));

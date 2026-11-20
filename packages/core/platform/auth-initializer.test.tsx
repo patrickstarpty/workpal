@@ -84,7 +84,7 @@ function makeApiWithConfigResponse(config: unknown): ApiClient {
 
 function renderInitializer({
   api,
-  storage = makeStorage({ multica_token: "token-1" }),
+  storage = makeStorage({ workpal_token: "token-1" }),
   cookieAuth = false,
   platform = "desktop",
 }: {
@@ -155,12 +155,12 @@ describe("AuthInitializer recovery", () => {
     });
     expect(commands).toMatchObject({
       status: "ready",
-      setupCmd: "multica setup self-host --server-url https://api.example.com --app-url https://app.example.com",
+      setupCmd: "workpal setup self-host --server-url https://api.example.com --app-url https://app.example.com",
     });
     if (commands.status !== "ready") throw new Error("expected self-host commands");
     expect(commands.tokenCmd).toContain("server_url https://api.example.com");
     expect(commands.tokenCmd).toContain("app_url https://app.example.com");
-    expect(commands.tokenCmd).not.toContain("multica.ai");
+    expect(commands.tokenCmd).not.toContain("workpal.invalid");
   });
 
   it.each([
@@ -284,7 +284,7 @@ describe("AuthInitializer recovery", () => {
   });
 
   it("keeps the token and recovers on the online event after a network failure", async () => {
-    const storage = makeStorage({ multica_token: "token-1" });
+    const storage = makeStorage({ workpal_token: "token-1" });
     const getMe = vi
       .fn()
       .mockRejectedValueOnce(new TypeError("fetch failed"))
@@ -295,7 +295,7 @@ describe("AuthInitializer recovery", () => {
     await waitFor(() => {
       expect(useAuthStore.getState().status).toBe("recovering");
     });
-    expect(storage.snapshot().multica_token).toBe("token-1");
+    expect(storage.snapshot().workpal_token).toBe("token-1");
     expect(onLogout).not.toHaveBeenCalled();
 
     act(() => window.dispatchEvent(new Event("online")));
@@ -445,13 +445,13 @@ describe("AuthInitializer recovery", () => {
   it("erases the previous user's client state when a live session is rejected", async () => {
     const shared = "acme";
     const storage = makeStorage({
-      multica_token: "token-1",
-      "multica_comment_drafts:acme": '{"issue-1":"A private draft"}',
-      multica_tabs: '[{"path":"/acme/issues/secret"}]',
+      workpal_token: "token-1",
+      "workpal_comment_drafts:acme": '{"issue-1":"A private draft"}',
+      workpal_tabs: '[{"path":"/acme/issues/secret"}]',
     });
     const resetInMemory = vi.fn();
     registerDraftCleanup({
-      storageKey: "multica_comment_drafts",
+      storageKey: "workpal_comment_drafts",
       workspaceScoped: true,
       resetInMemory,
     });
@@ -496,14 +496,14 @@ describe("AuthInitializer recovery", () => {
     ["gateway timeout", new ApiError("slow", 504, "Gateway Timeout")],
   ])("keeps the session and every draft when getMe fails: %s", async (_label, error) => {
     const before = {
-      multica_token: "token-1",
-      "multica_comment_drafts:acme": '{"issue-1":"unsent work"}',
-      multica_tabs: '[{"path":"/acme/issues/1"}]',
+      workpal_token: "token-1",
+      "workpal_comment_drafts:acme": '{"issue-1":"unsent work"}',
+      workpal_tabs: '[{"path":"/acme/issues/1"}]',
     };
     const storage = makeStorage(before);
     const resetInMemory = vi.fn();
     registerDraftCleanup({
-      storageKey: "multica_comment_drafts",
+      storageKey: "workpal_comment_drafts",
       workspaceScoped: true,
       resetInMemory,
     });
@@ -521,14 +521,14 @@ describe("AuthInitializer recovery", () => {
 
   it("erases the previous session on a cold start with a stale token", async () => {
     const storage = makeStorage({
-      multica_token: "stale-token",
-      "multica_comment_drafts:acme": '{"issue-1":"A private draft"}',
-      "multica:chat:activeSessionId:acme": "session-1",
-      multica_tabs: '[{"path":"/acme/issues/secret"}]',
-      multica_locale: "zh-Hans",
+      workpal_token: "stale-token",
+      "workpal_comment_drafts:acme": '{"issue-1":"A private draft"}',
+      "workpal:chat:activeSessionId:acme": "session-1",
+      workpal_tabs: '[{"path":"/acme/issues/secret"}]',
+      workpal_locale: "zh-Hans",
     });
     registerDraftCleanup({
-      storageKey: "multica_comment_drafts",
+      storageKey: "workpal_comment_drafts",
       workspaceScoped: true,
       resetInMemory: vi.fn(),
     });
@@ -544,15 +544,15 @@ describe("AuthInitializer recovery", () => {
     });
     await waitFor(() => {
       // Only the device preference survives.
-      expect(storage.snapshot()).toEqual({ multica_locale: "zh-Hans" });
+      expect(storage.snapshot()).toEqual({ workpal_locale: "zh-Hans" });
     });
     expect(queryClient.getQueryData(workspaceKeys.list())).toBeUndefined();
   });
 
   it("publishes a definitive logout for a genuine 401", async () => {
-    const storage = makeStorage({ multica_token: "token-1" });
+    const storage = makeStorage({ workpal_token: "token-1" });
     const getMe = vi.fn().mockImplementation(() => {
-      storage.removeItem("multica_token");
+      storage.removeItem("workpal_token");
       return Promise.reject(new ApiError("unauthorized", 401, "Unauthorized"));
     });
     const api = makeApi({ getMe });
@@ -561,7 +561,7 @@ describe("AuthInitializer recovery", () => {
     await waitFor(() => {
       expect(useAuthStore.getState().status).toBe("unauthenticated");
     });
-    expect(storage.snapshot().multica_token).toBeUndefined();
+    expect(storage.snapshot().workpal_token).toBeUndefined();
     expect(onLogout).toHaveBeenCalledOnce();
   });
 });

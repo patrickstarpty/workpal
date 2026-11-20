@@ -3,9 +3,9 @@
 import { useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
-import type { Agent } from "@multica/core/types";
-import { api, errorCode } from "@multica/core/api";
-import { Button } from "@multica/ui/components/ui/button";
+import type { Agent } from "@workpal/core/types";
+import { api, errorCode } from "@workpal/core/api";
+import { Button } from "@workpal/ui/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -13,9 +13,9 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "@multica/ui/components/ui/dialog";
-import { Input } from "@multica/ui/components/ui/input";
-import { Label } from "@multica/ui/components/ui/label";
+} from "@workpal/ui/components/ui/dialog";
+import { Input } from "@workpal/ui/components/ui/input";
+import { Label } from "@workpal/ui/components/ui/label";
 import { useT } from "../../i18n";
 import { docsLocalePrefix } from "../../common/docs-locale";
 import { openExternal } from "../../platform";
@@ -108,7 +108,7 @@ function ChannelConnectSteps({
   };
   const openGuide = () =>
     openExternal(
-      `https://multica.ai/docs${docsLocalePrefix(i18n.language)}/${channel}-bot-integration`,
+      `https://workpal.invalid/docs${docsLocalePrefix(i18n.language)}/${channel}-bot-integration`,
     );
   const scanWecom =
     channel === "wecom" &&

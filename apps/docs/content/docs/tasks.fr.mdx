@@ -7,7 +7,7 @@ import { Callout } from "fumadocs-ui/components/callout";
 import { Tab, Tabs } from "fumadocs-ui/components/tabs";
 import { RunLifecycleDemo } from "@/components/demos/run-lifecycle-demo";
 
-Chaque fois qu'un agent commence à travailler, Multica crée une **exécution** qui enregistre ce qui a déclenché le travail, à quel agent il a été confié, où il en est et s'il a réussi.
+Chaque fois qu'un agent commence à travailler, Workpal crée une **exécution** qui enregistre ce qui a déclenché le travail, à quel agent il a été confié, où il en est et s'il a réussi.
 
 ## Tâches et exécutions
 
@@ -31,7 +31,7 @@ Chacun des éléments suivants déclenche une exécution :
 - Une automatisation qui se déclenche selon une planification ou à partir d'un événement externe.
 - Un [réveil de tâche](/issue-wakeups) dont l'événement, l'heure ou la condition arrive.
 
-Selon le point d'entrée, l'agent reçoit un contexte différent, mais l'exécution fonctionne de la même façon : Multica crée une exécution, un runtime la prend en charge, et le runtime invoque l'outil de codage IA configuré pour l'agent.
+Selon le point d'entrée, l'agent reçoit un contexte différent, mais l'exécution fonctionne de la même façon : Workpal crée une exécution, un runtime la prend en charge, et le runtime invoque l'outil de codage IA configuré pour l'agent.
 
 ## Cycle de vie d'une exécution
 
@@ -146,13 +146,13 @@ Une relance conserve autant que possible les fichiers que l'exécution précéde
 Retrouvez l’exécution source, puis relancez-la depuis le CLI :
 
 ```bash
-multica issue runs <issue-id> --full-id
-multica issue rerun-task <run-id>
+workpal issue runs <issue-id> --full-id
+workpal issue rerun-task <run-id>
 ```
 
 Un UUID d’exécution complet permet d’omettre `--issue` ; un préfixe court exige `--issue`. La commande reprend l’agent et le contexte de déclenchement d’origine, avec les mêmes règles de continuité que le bouton de relance. Ajoutez `--fresh` pour démarrer une nouvelle session dans un nouveau répertoire de travail.
 
-L’ancienne commande `multica issue rerun <issue-id>` est obsolète et masquée dans l’aide. Elle reste disponible pour les scripts existants et lance toujours l’assigné actuel avec une nouvelle session et un nouveau répertoire de travail.
+L’ancienne commande `workpal issue rerun <issue-id>` est obsolète et masquée dans l’aide. Elle reste disponible pour les scripts existants et lance toujours l’assigné actuel avec une nouvelle session et un nouveau répertoire de travail.
 
 ## Fin d'exécution et fin de tâche
 
@@ -168,7 +168,7 @@ Les valeurs ci-dessous sont celles de la configuration par défaut du serveur.
 | `queued` | En attente de prise en charge par un runtime | Attend tant que son runtime continue d'envoyer des signaux de vie, et dans tous les cas au moins un délai de grâce de reconnexion après la mise en file d'attente ; n'échoue que lorsque les deux fenêtres sont écoulées, et n'est pas relancée automatiquement |
 | `dispatched` | Prise en charge ; l'outil démarre | Considérée comme en échec après plus de **5 minutes** dans cet état |
 | `waiting_local_directory` | En attente de la libération du verrou du répertoire local | Pas de délai propre ; reprend le processus de démarrage une fois le répertoire libéré |
-| `running` | L'outil de codage IA est en cours d'exécution | Pas de durée maximale fixe ; la vivacité suit le signal de vie du runtime — un toutes les 15 secondes ; un runtime qui perd son signal de vie est marqué hors ligne au plus tard en 3 minutes environ. Ses exécutions n'échouent qu'une fois le signal de vie absent au-delà du délai de grâce de reconnexion (`MULTICA_RUNTIME_RECONNECT_GRACE`, 3 heures par défaut) ; un redémarrage du daemon les récupère directement |
+| `running` | L'outil de codage IA est en cours d'exécution | Pas de durée maximale fixe ; la vivacité suit le signal de vie du runtime — un toutes les 15 secondes ; un runtime qui perd son signal de vie est marqué hors ligne au plus tard en 3 minutes environ. Ses exécutions n'échouent qu'une fois le signal de vie absent au-delà du délai de grâce de reconnexion (`WORKPAL_RUNTIME_RECONNECT_GRACE`, 3 heures par défaut) ; un redémarrage du daemon les récupère directement |
 
 La relance automatique ne couvre que les défaillances transitoires ci-dessous, et ne s'applique qu'aux exécutions rattachées à une tâche ou à une discussion (hors mode **Exécution seule** des automatisations) :
 

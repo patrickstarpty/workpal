@@ -7,7 +7,7 @@
 const DOWNLOAD_PREFIX = "/api/attachments/";
 const DOWNLOAD_SUFFIX = "/download";
 const CHANNEL_MEDIA_MARKER_RE =
-  /<!-- multica:channel-media:[0-9a-fA-F-]{36} -->/g;
+  /<!-- workpal:channel-media:[0-9a-fA-F-]{36} -->/g;
 
 /** Remove server-owned channel-media merge metadata from editable or rendered
  * Markdown while leaving the visible attachment link untouched. */
@@ -112,7 +112,7 @@ export function attachmentIdFromLocalUploadURL(rawURL: string): string | undefin
 
 /**
  * Extract the attachment id from a raw storage URL on the configured CDN
- * domain, e.g. `https://static.multica.ai/workspaces/<ws>/<id>.jpg`.
+ * domain, e.g. `https://workpal.invalid/workspaces/<ws>/<id>.jpg`.
  *
  * Markdown can embed a storage URL whose attachment record is not in the
  * surrounding surface's attachment list (an agent quoting an image from

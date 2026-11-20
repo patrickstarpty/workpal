@@ -39,11 +39,11 @@ describe("prefixLocale", () => {
   });
 
   it("leaves external URLs alone", () => {
-    expect(prefixLocale("https://multica.ai/download", "zh")).toBe(
-      "https://multica.ai/download",
+    expect(prefixLocale("https://workpal.invalid/download", "zh")).toBe(
+      "https://workpal.invalid/download",
     );
-    expect(prefixLocale("mailto:hello@multica.ai", "zh")).toBe(
-      "mailto:hello@multica.ai",
+    expect(prefixLocale("mailto:hello@workpal.invalid", "zh")).toBe(
+      "mailto:hello@workpal.invalid",
     );
     expect(prefixLocale("tel:+1234567890", "zh")).toBe("tel:+1234567890");
   });

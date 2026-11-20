@@ -22,11 +22,11 @@ import (
 	"github.com/go-chi/chi/v5"
 	"github.com/golang-jwt/jwt/v5"
 	"github.com/jackc/pgx/v5/pgtype"
-	"github.com/multica-ai/multica/server/internal/events"
-	"github.com/multica-ai/multica/server/internal/middleware"
-	"github.com/multica-ai/multica/server/internal/testutil"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
-	"github.com/multica-ai/multica/server/pkg/protocol"
+	"workpal.local/workpal/server/internal/events"
+	"workpal.local/workpal/server/internal/middleware"
+	"workpal.local/workpal/server/internal/testutil"
+	db "workpal.local/workpal/server/pkg/db/generated"
+	"workpal.local/workpal/server/pkg/protocol"
 )
 
 func TestExtractIdentifiers(t *testing.T) {
@@ -317,7 +317,7 @@ func TestGitHubStateDesktopAndLegacyLinks(t *testing.T) {
 }
 
 func TestGitHubConnectUsesUnifiedState(t *testing.T) {
-	t.Setenv("GITHUB_APP_SLUG", "multica-test")
+	t.Setenv("GITHUB_APP_SLUG", "workpal-test")
 	t.Setenv("GITHUB_APP_ID", "11111")
 	t.Setenv("GITHUB_APP_PRIVATE_KEY", "configured-key")
 	t.Setenv("GITHUB_APP_CLIENT_ID", "test-client")
@@ -355,7 +355,7 @@ func TestGitHubSetupCallbackReturnsToInitiatingClient(t *testing.T) {
 		t.Skip("handler fixture requires a database")
 	}
 	t.Setenv("GITHUB_WEBHOOK_SECRET", "callback-test-secret")
-	t.Setenv("FRONTEND_ORIGIN", "https://app.multica.test")
+	t.Setenv("FRONTEND_ORIGIN", "https://app.workpal.test")
 	t.Setenv("GITHUB_APP_ID", "")
 	t.Setenv("GITHUB_APP_PRIVATE_KEY", "")
 	installationID := time.Now().UnixNano()
@@ -383,7 +383,7 @@ func TestGitHubSetupCallbackReturnsToInitiatingClient(t *testing.T) {
 		rec := httptest.NewRecorder()
 		testHandler.GitHubSetupCallback(rec, req)
 		if desktop {
-			if rec.Code != http.StatusOK || !strings.Contains(rec.Body.String(), "Return to Multica") || rec.Header().Get("Location") != "" {
+			if rec.Code != http.StatusOK || !strings.Contains(rec.Body.String(), "Return to Workpal") || rec.Header().Get("Location") != "" {
 				t.Fatalf("desktop callback: %d %s", rec.Code, rec.Body.String())
 			}
 		} else {
@@ -400,7 +400,7 @@ func TestGitHubSetupCallbackReturnsToInitiatingClient(t *testing.T) {
 
 func TestGitHubSetupCallbackUnifiedErrorTarget(t *testing.T) {
 	t.Setenv("GITHUB_WEBHOOK_SECRET", "test-secret-123")
-	t.Setenv("FRONTEND_ORIGIN", "https://app.multica.test/")
+	t.Setenv("FRONTEND_ORIGIN", "https://app.workpal.test/")
 	state, err := signState("11111111-2222-3333-4444-555555555555")
 	if err != nil {
 		t.Fatal(err)
@@ -408,7 +408,7 @@ func TestGitHubSetupCallbackUnifiedErrorTarget(t *testing.T) {
 	req := httptest.NewRequest(http.MethodGet, "/api/github/setup?installation_id=not-a-number&state="+url.QueryEscape(state), nil)
 	rec := httptest.NewRecorder()
 	(&Handler{}).GitHubSetupCallback(rec, req)
-	if rec.Code != http.StatusFound || rec.Header().Get("Location") != "https://app.multica.test/settings?tab=code&github_error=bad_installation_id" {
+	if rec.Code != http.StatusFound || rec.Header().Get("Location") != "https://app.workpal.test/settings?tab=code&github_error=bad_installation_id" {
 		t.Fatalf("callback: %d %s", rec.Code, rec.Header().Get("Location"))
 	}
 }
@@ -2154,7 +2154,7 @@ func TestGitHubRoutes_RoleGating(t *testing.T) {
 	mkUser := func(t *testing.T, label string) string {
 		t.Helper()
 		var id string
-		email := fmt.Sprintf("github-routes-%s-%s@multica.ai", slug, label)
+		email := fmt.Sprintf("github-routes-%s-%s@workpal.invalid", slug, label)
 		dbfx.QueryRow(t, `
 INSERT INTO "user" (name, email) VALUES ($1, $2) RETURNING id
 `, "GHR "+label, email).Scan(&id)

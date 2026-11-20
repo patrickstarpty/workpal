@@ -5,8 +5,8 @@ import (
 	"testing"
 
 	"github.com/jackc/pgx/v5/pgtype"
-	"github.com/multica-ai/multica/server/internal/integrations/channel/engine"
-	"github.com/multica-ai/multica/server/pkg/dbid"
+	"workpal.local/workpal/server/internal/integrations/channel/engine"
+	"workpal.local/workpal/server/pkg/dbid"
 )
 
 type captureMediaSession struct {
@@ -26,7 +26,7 @@ func TestMediaBindingPreservesFailureNoticeAndIssueDestination(t *testing.T) {
 		IssueID:              dbid.NewV7(),
 		IssueDescriptionBase: pgtype.Text{String: "Original description", Valid: true},
 		IssueCommandText:     "/issue Review image",
-		Body:                 "[Image]\n[WeChat attachment unavailable: file 1; send it again or upload it in Multica.]",
+		Body:                 "[Image]\n[WeChat attachment unavailable: file 1; send it again or upload it in Workpal.]",
 	}
 	if _, err := binder.BindMedia(context.Background(), params); err != nil {
 		t.Fatal(err)

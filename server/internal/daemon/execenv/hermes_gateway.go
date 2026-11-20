@@ -9,7 +9,7 @@ import (
 	"gopkg.in/yaml.v3"
 )
 
-const hermesGatewayStateMarker = ".multica-gateway-state-v1"
+const hermesGatewayStateMarker = ".workpal-gateway-state-v1"
 
 func isHermesGatewayStateEntry(name string) bool {
 	return name == "logs" || name == "sessions" || name == "cron" ||

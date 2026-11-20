@@ -9,15 +9,15 @@ import (
 	"github.com/jackc/pgx/v5/pgtype"
 	"github.com/jackc/pgx/v5/pgxpool"
 
-	"github.com/multica-ai/multica/server/internal/integrations/channel"
-	"github.com/multica-ai/multica/server/internal/integrations/channel/engine"
-	"github.com/multica-ai/multica/server/internal/integrations/dingtalk"
-	"github.com/multica-ai/multica/server/internal/integrations/lark"
-	"github.com/multica-ai/multica/server/internal/integrations/slack"
-	"github.com/multica-ai/multica/server/internal/integrations/telegram"
-	"github.com/multica-ai/multica/server/internal/integrations/wecom"
-	dbfx "github.com/multica-ai/multica/server/internal/testutil"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
+	"workpal.local/workpal/server/internal/integrations/channel"
+	"workpal.local/workpal/server/internal/integrations/channel/engine"
+	"workpal.local/workpal/server/internal/integrations/dingtalk"
+	"workpal.local/workpal/server/internal/integrations/lark"
+	"workpal.local/workpal/server/internal/integrations/slack"
+	"workpal.local/workpal/server/internal/integrations/telegram"
+	"workpal.local/workpal/server/internal/integrations/wecom"
+	dbfx "workpal.local/workpal/server/internal/testutil"
+	db "workpal.local/workpal/server/pkg/db/generated"
 )
 
 // Every adapter must forward the current instruction on the /new path. Testing
@@ -40,7 +40,7 @@ func TestChannelStartTitleCommandMappingDB(t *testing.T) {
 		t.Run(platform, func(t *testing.T) {
 			fx := dbfx.New(pool, "", "")
 			suffix := uuid.NewString()
-			fx.UserID = fx.User(t, "Title tester", "title-"+suffix+"@multica.test")
+			fx.UserID = fx.User(t, "Title tester", "title-"+suffix+"@workpal.test")
 			fx.WorkspaceID = fx.Workspace(t, "Title workspace", "title-"+suffix)
 			fx.Member(t, fx.WorkspaceID, fx.UserID, "owner")
 			agent := fx.Agent(t, "Title agent", "")

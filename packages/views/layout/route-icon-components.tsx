@@ -22,12 +22,12 @@ import {
   FileVideo,
   FileQuestion,
   type IconComponent,
-} from "@multica/ui/icons";
-import { resolveRouteIconName, type RouteIconName } from "@multica/core/paths";
+} from "@workpal/ui/icons";
+import { resolveRouteIconName, type RouteIconName } from "@workpal/core/paths";
 
 /**
  * Icon name → component registry: the rendering half of the route icon
- * contract defined in `@multica/core/paths`.
+ * contract defined in `@workpal/core/paths`.
  *
  * Every {@link RouteIconName} must have an entry — the `Record` type makes a
  * missing key a compile error.

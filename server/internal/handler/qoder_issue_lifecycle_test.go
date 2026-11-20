@@ -2,11 +2,11 @@ package handler
 
 import (
 	"context"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
+	db "workpal.local/workpal/server/pkg/db/generated"
 	"testing"
 	"time"
 
-	"github.com/multica-ai/multica/server/internal/testutil"
+	"workpal.local/workpal/server/internal/testutil"
 )
 
 func TestQoderIssueLifecycle(t *testing.T) {

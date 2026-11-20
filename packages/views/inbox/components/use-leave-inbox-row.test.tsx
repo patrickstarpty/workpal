@@ -3,17 +3,17 @@ import { act, cleanup, renderHook } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import type { ReactNode } from "react";
 import { toast } from "sonner";
-import { setApiInstance } from "@multica/core/api";
-import type { ApiClient } from "@multica/core/api/client";
-import { I18nProvider } from "@multica/core/i18n/react";
-import { inboxListOptions } from "@multica/core/inbox/queries";
-import { useInboxSelectionStore } from "@multica/core/inbox/selection-store";
-import type { InboxItem } from "@multica/core/types";
+import { setApiInstance } from "@workpal/core/api";
+import type { ApiClient } from "@workpal/core/api/client";
+import { I18nProvider } from "@workpal/core/i18n/react";
+import { inboxListOptions } from "@workpal/core/inbox/queries";
+import { useInboxSelectionStore } from "@workpal/core/inbox/selection-store";
+import type { InboxItem } from "@workpal/core/types";
 import { getTestResources } from "../../test/i18n";
 import { useArchiveInboxBatchWithUndo, useArchiveInboxWithUndo } from "./use-leave-inbox-row";
 
 vi.mock("sonner", () => ({ toast: { success: vi.fn(), error: vi.fn() } }));
-vi.mock("@multica/core/hooks", () => ({ useWorkspaceId: () => "ws" }));
+vi.mock("@workpal/core/hooks", () => ({ useWorkspaceId: () => "ws" }));
 
 const api = {
   archiveInbox: vi.fn(async (id: string) => ({ id })),

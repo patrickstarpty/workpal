@@ -97,12 +97,12 @@ The lead of a private project can be a member, an agent, or nobody, as on any pr
 - **CLI**: pass `--visibility private` to `project create` or `project update`, with `--member` (a name, email, or user ID; repeatable) for the initial list. Manage the list afterwards with `project member list|add|remove`.
 
 ```bash
-multica project create --title "Pricing revamp" --visibility private --member alice@example.com --member Bob
-multica project update <project-id> --visibility private --member alice@example.com
-multica project member add <project-id> carol@example.com
+workpal project create --title "Pricing revamp" --visibility private --member alice@example.com --member Bob
+workpal project update <project-id> --visibility private --member alice@example.com
+workpal project member add <project-id> carol@example.com
 ```
 
-Switching a private project back to **Entire workspace** makes the project and its issues, comments, and attachments visible to every workspace member. The app asks for confirmation first; `multica project update --visibility workspace` applies the change immediately.
+Switching a private project back to **Entire workspace** makes the project and its issues, comments, and attachments visible to every workspace member. The app asks for confirmation first; `workpal project update --visibility workspace` applies the change immediately.
 
 ### Workspace owner recovery
 

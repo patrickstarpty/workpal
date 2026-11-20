@@ -22,7 +22,7 @@ func TestAmpHelperProcess(t *testing.T) {
 	input, _ := io.ReadAll(os.Stdin)
 	if capture := os.Getenv("AMP_CAPTURE"); capture != "" {
 		cwd, _ := os.Getwd()
-		data, _ := json.Marshal(map[string]any{"args": os.Args[1:], "prompt": string(input), "cwd": cwd, "cli_path": os.Getenv("MULTICA_CLI_PATH")})
+		data, _ := json.Marshal(map[string]any{"args": os.Args[1:], "prompt": string(input), "cwd": cwd, "cli_path": os.Getenv("WORKPAL_CLI_PATH")})
 		_ = os.WriteFile(capture, data, 0o600)
 	}
 	if os.Getenv("AMP_HANG") == "1" {
@@ -221,7 +221,7 @@ func TestAmpExecuteProtocol(t *testing.T) {
 	var logs bytes.Buffer
 	dir := t.TempDir()
 	capture := filepath.Join(dir, "capture.json")
-	backend := newFakeAmp(t, map[string]string{"AMP_STREAM": stream, "AMP_CAPTURE": capture, "AMP_API_KEY": key, "MULTICA_CLI_PATH": "owned-cli"}, &logs)
+	backend := newFakeAmp(t, map[string]string{"AMP_STREAM": stream, "AMP_CAPTURE": capture, "AMP_API_KEY": key, "WORKPAL_CLI_PATH": "owned-cli"}, &logs)
 	prompt := strings.Repeat("private task\"\n", 20000)
 	session, err := backend.Execute(context.Background(), prompt, ExecOptions{Cwd: dir, ResumeSessionID: "T-task", Timeout: 10 * time.Second})
 	if err != nil {
@@ -266,7 +266,7 @@ func TestAmpExecuteProtocol(t *testing.T) {
 
 func TestAmpPermissionDenials(t *testing.T) {
 	backend := newFakeAmp(t, map[string]string{
-		"AMP_STREAM": `{"type":"result","subtype":"success","result":"Done","permission_denials":["Bash: git push","Bash: /path/to/multica api_key=sgamp_private-token"]}`,
+		"AMP_STREAM": `{"type":"result","subtype":"success","result":"Done","permission_denials":["Bash: git push","Bash: /path/to/workpal api_key=sgamp_private-token"]}`,
 	}, io.Discard)
 	session, err := backend.Execute(context.Background(), "task", ExecOptions{Timeout: 10 * time.Second})
 	if err != nil {
@@ -328,7 +328,7 @@ func TestAmpStartupAndUnsupportedMCP(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if _, err := backend.Execute(context.Background(), "task", ExecOptions{}); err == nil || !strings.Contains(err.Error(), "MULTICA_AMP_PATH") {
+	if _, err := backend.Execute(context.Background(), "task", ExecOptions{}); err == nil || !strings.Contains(err.Error(), "WORKPAL_AMP_PATH") {
 		t.Fatalf("missing install = %v", err)
 	}
 	if _, err := backend.Execute(context.Background(), "task", ExecOptions{McpConfig: json.RawMessage(`{"mcpServers":{"test":{"command":"example"}}}`)}); err == nil || !strings.Contains(err.Error(), "MCP") {

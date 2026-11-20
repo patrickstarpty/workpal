@@ -2,10 +2,10 @@
 
 import { toast } from "sonner";
 import { useQuery } from "@tanstack/react-query";
-import { useAuthStore } from "@multica/core/auth";
-import { memberListOptions } from "@multica/core/workspace/queries";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { qoderOptions } from "@multica/core/runtimes/qoder";
+import { useAuthStore } from "@workpal/core/auth";
+import { memberListOptions } from "@workpal/core/workspace/queries";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { qoderOptions } from "@workpal/core/runtimes/qoder";
 import { QoderConnectForm } from "./qoder-connect-form";
 import { useT } from "../../i18n";
 

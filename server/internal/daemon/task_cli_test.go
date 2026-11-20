@@ -19,30 +19,30 @@ func stubTaskCLI(t *testing.T, path string) {
 }
 
 func TestConfigureTaskCLIEnvironment(t *testing.T) {
-	cliPath := filepath.Join(t.TempDir(), "Desktop App", "multica")
+	cliPath := filepath.Join(t.TempDir(), "Desktop App", "workpal")
 	stubTaskCLI(t, cliPath)
 	inheritedPath := filepath.Join(t.TempDir(), "old-cli")
 	t.Setenv("PATH", inheritedPath)
-	env := map[string]string{"MULTICA_TOKEN": "mat_fixture"}
+	env := map[string]string{"WORKPAL_TOKEN": "mat_fixture"}
 	if err := configureTaskCLIEnvironment(env); err != nil {
 		t.Fatal(err)
 	}
-	if env["MULTICA_CLI_PATH"] != cliPath {
-		t.Fatalf("CLI path = %q, want daemon executable %q", env["MULTICA_CLI_PATH"], cliPath)
+	if env["WORKPAL_CLI_PATH"] != cliPath {
+		t.Fatalf("CLI path = %q, want daemon executable %q", env["WORKPAL_CLI_PATH"], cliPath)
 	}
 	wantPath := filepath.Dir(cliPath) + string(os.PathListSeparator) + inheritedPath
 	if env["PATH"] != wantPath {
 		t.Fatalf("PATH = %q, want %q", env["PATH"], wantPath)
 	}
 	layerCustomEnvAndHermesHome(env, map[string]string{
-		"MULTICA_CLI_PATH": "other-cli",
-		"multica_cli_path": "other-cli",
+		"WORKPAL_CLI_PATH": "other-cli",
+		"workpal_cli_path": "other-cli",
 		"PATH":             "other-path",
 	}, "", nil)
-	if env["MULTICA_CLI_PATH"] != cliPath || env["PATH"] != wantPath || env["MULTICA_TOKEN"] != "mat_fixture" {
+	if env["WORKPAL_CLI_PATH"] != cliPath || env["PATH"] != wantPath || env["WORKPAL_TOKEN"] != "mat_fixture" {
 		t.Fatal("custom environment replaced the daemon CLI or task credential")
 	}
-	if _, ok := env["multica_cli_path"]; ok {
+	if _, ok := env["workpal_cli_path"]; ok {
 		t.Fatal("custom environment introduced a case alias for the daemon CLI")
 	}
 }
@@ -73,9 +73,9 @@ func TestTaskCLICommandSurvivesShellPathOverride(t *testing.T) {
 			t.Fatal(err)
 		}
 	}
-	cliPath := filepath.Join(binDir, "multica")
+	cliPath := filepath.Join(binDir, "workpal")
 	writeTestExecutable(t, cliPath, []byte("#!/bin/sh\nprintf '%s\\n' \"$@\"\n"))
-	writeTestExecutable(t, filepath.Join(staleDir, "multica"), []byte("#!/bin/sh\nprintf '%s\\n' 'unknown flag: --assignee-picker' >&2\nexit 2\n"))
+	writeTestExecutable(t, filepath.Join(staleDir, "workpal"), []byte("#!/bin/sh\nprintf '%s\\n' 'unknown flag: --assignee-picker' >&2\nexit 2\n"))
 	stubTaskCLI(t, cliPath)
 	env := map[string]string{}
 	if err := configureTaskCLIEnvironment(env); err != nil {
@@ -91,8 +91,8 @@ func TestTaskCLICommandSurvivesShellPathOverride(t *testing.T) {
 		name, command, want string
 		wantErr             bool
 	}{
-		{"PATH lookup uses stale CLI", `multica`, "unknown flag: --assignee-picker\n", true},
-		{"explicit CLI supports picker", `"$MULTICA_CLI_PATH"`, "issue\ncreate\n--title\nA quoted title\n--assignee-picker\n", false},
+		{"PATH lookup uses stale CLI", `workpal`, "unknown flag: --assignee-picker\n", true},
+		{"explicit CLI supports picker", `"$WORKPAL_CLI_PATH"`, "issue\ncreate\n--title\nA quoted title\n--assignee-picker\n", false},
 	} {
 		t.Run(tc.name, func(t *testing.T) {
 			ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)

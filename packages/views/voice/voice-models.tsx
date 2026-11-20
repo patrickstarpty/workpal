@@ -1,10 +1,10 @@
 "use client";
 
 import { useMemo } from "react";
-import { Download, Mic, Trash2 } from "@multica/ui/icons";
-import { Badge } from "@multica/ui/components/ui/badge";
-import { Button } from "@multica/ui/components/ui/button";
-import { IconButton } from "@multica/ui/components/common/icon-button";
+import { Download, Mic, Trash2 } from "@workpal/ui/icons";
+import { Badge } from "@workpal/ui/components/ui/badge";
+import { Button } from "@workpal/ui/components/ui/button";
+import { IconButton } from "@workpal/ui/components/common/icon-button";
 import {
   Dialog,
   DialogContent,
@@ -12,15 +12,15 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "@multica/ui/components/ui/dialog";
-import { Progress } from "@multica/ui/components/ui/progress";
+} from "@workpal/ui/components/ui/dialog";
+import { Progress } from "@workpal/ui/components/ui/progress";
 import {
   cancelVoice,
   pickVoiceModel,
   toggleVoice,
   useVoiceSettingsStore,
   type VoiceModel,
-} from "@multica/core/voice";
+} from "@workpal/core/voice";
 import { formatBytes } from "../common/format-bytes";
 import { useEditorOverlayOwner } from "../editor/overlay-owner";
 import { useLocale, useT } from "../i18n";

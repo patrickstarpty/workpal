@@ -4,7 +4,7 @@ import (
 	"errors"
 	"net/http"
 
-	"github.com/multica-ai/multica/server/internal/service"
+	"workpal.local/workpal/server/internal/service"
 )
 
 // writeIssueNumberCollision reports a number conflict that automatic repair

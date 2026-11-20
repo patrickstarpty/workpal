@@ -4,7 +4,7 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/multica-ai/multica/server/internal/auth"
+	"workpal.local/workpal/server/internal/auth"
 )
 
 // RefreshCloudFrontCookies is middleware that refreshes CloudFront signed cookies

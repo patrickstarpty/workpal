@@ -1,9 +1,9 @@
 "use client";
 
 import { Fragment } from "react";
-import type { Agent, DeclaredEnvironment, IssueEnvironmentConfig } from "@multica/core/types";
-import { Bot, Plus, Server } from "@multica/ui/icons";
-import { IconButton } from "@multica/ui/components/common/icon-button";
+import type { Agent, DeclaredEnvironment, IssueEnvironmentConfig } from "@workpal/core/types";
+import { Bot, Plus, Server } from "@workpal/ui/icons";
+import { IconButton } from "@workpal/ui/components/common/icon-button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -15,7 +15,7 @@ import {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
-} from "@multica/ui/components/ui/dropdown-menu";
+} from "@workpal/ui/components/ui/dropdown-menu";
 import { useT } from "../../i18n";
 
 export type DeclaredState = "available" | "running" | "starting";

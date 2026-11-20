@@ -7,7 +7,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/multica-ai/multica/server/internal/testutil"
+	"workpal.local/workpal/server/internal/testutil"
 )
 
 func TestCreateAgent_CustomArgs(t *testing.T) {
@@ -27,7 +27,7 @@ func TestCreateAgent_CustomArgs(t *testing.T) {
 		{"permission mode", claudeID, []string{"--permission-mode", "dontAsk", "--tools", "Bash"}, http.StatusBadRequest, "--permission-mode"},
 		{"inline permission mode", claudeID, []string{"--permission-mode=dontAsk"}, http.StatusBadRequest, "--permission-mode"},
 		{"quoted permission mode", claudeID, []string{"'--permission-mode'", "dontAsk"}, http.StatusBadRequest, "--permission-mode"},
-		{"allowed arguments", claudeID, []string{"--tools", "Bash", "--allowedTools", "Bash(multica issue *)"}, http.StatusCreated, ""},
+		{"allowed arguments", claudeID, []string{"--tools", "Bash", "--allowedTools", "Bash(workpal issue *)"}, http.StatusCreated, ""},
 		{"empty arguments", claudeID, []string{}, http.StatusCreated, ""},
 		{"omp no session", ompID, []string{"--no-session"}, http.StatusBadRequest, "--no-session"},
 		{"omp inline session directory", ompID, []string{"--session-dir=/other"}, http.StatusBadRequest, "--session-dir"},

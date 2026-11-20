@@ -1,8 +1,8 @@
 "use client";
 
-import type { IssueProperty } from "@multica/core/types";
-import { Button } from "@multica/ui/components/ui/button";
-import { cn } from "@multica/ui/lib/utils";
+import type { IssueProperty } from "@workpal/core/types";
+import { Button } from "@workpal/ui/components/ui/button";
+import { cn } from "@workpal/ui/lib/utils";
 import {
   Bookmark,
   BriefcaseBusiness,
@@ -43,7 +43,7 @@ import {
   X,
   Zap,
   type IconComponent,
-} from "@multica/ui/icons";
+} from "@workpal/ui/icons";
 import { DeferredTooltip } from "./deferred-tooltip";
 
 interface PropertyIconOption {

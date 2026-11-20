@@ -17,8 +17,8 @@ function flagged(code) {
           parser: tseslint.parser,
           parserOptions: { ecmaFeatures: { jsx: true } },
         },
-        plugins: { "multica-a11y": a11yPlugin },
-        rules: { "multica-a11y/icon-button-name": "error" },
+        plugins: { "workpal-a11y": a11yPlugin },
+        rules: { "workpal-a11y/icon-button-name": "error" },
       },
     ],
     "fixture.tsx",
@@ -58,12 +58,12 @@ const ALLOWED = [
   ["IconButton", '<IconButton label="Close"><X /></IconButton>'],
 ];
 
-const ICONS = 'import { ChevronDown, ChevronUp, X, X as XIcon } from "@multica/ui/icons";\n';
+const ICONS = 'import { ChevronDown, ChevronUp, X, X as XIcon } from "@workpal/ui/icons";\n';
 
 const NATIVE_FLAGGED = [
   ["icon-only native button", '<button type="button"><X /></button>'],
   ["aliased icon import", '<button type="button"><XIcon className="size-4" /></button>'],
-  ["namespace icon import", 'import * as Icons from "@multica/ui/icons";\n<button type="button"><Icons.X /></button>'],
+  ["namespace icon import", 'import * as Icons from "@workpal/ui/icons";\n<button type="button"><Icons.X /></button>'],
   ["several icons", "<button><ChevronUp /><ChevronDown /></button>"],
   ["icon chosen by a conditional", "<button>{open ? <ChevronUp /> : <ChevronDown />}</button>"],
   ["icon behind &&", "<button>{open && <ChevronUp />}</button>"],
@@ -86,7 +86,7 @@ const NATIVE_ALLOWED = [
   ["native sr-only child", '<button><X /><span className="sr-only">Close</span></button>'],
   ["native child component that may render text", "<button><X /><Label /></button>"],
   ["native icon or text", "<button>{busy ? <X /> : label}</button>"],
-  ["icon not from @multica/ui/icons", 'import { X } from "./x";\n<button><X /></button>'],
+  ["icon not from @workpal/ui/icons", 'import { X } from "./x";\n<button><X /></button>'],
   ["empty native button", "<button />"],
   ["native named render-prop trigger", '<TooltipTrigger aria-label="Close" render={<button />}><X /></TooltipTrigger>'],
   ["native render-prop trigger with text", "<TooltipTrigger render={<button />}><X /> Close</TooltipTrigger>"],
@@ -115,5 +115,5 @@ test("the shared React config turns the rule on", async () => {
   const [result] = await eslint.lintText('export const A = () => <Button size="icon" />;\n', {
     filePath: "fixture.tsx",
   });
-  assert.equal(result.messages.filter((m) => m.ruleId === "multica-a11y/icon-button-name").length, 1);
+  assert.equal(result.messages.filter((m) => m.ruleId === "workpal-a11y/icon-button-name").length, 1);
 });

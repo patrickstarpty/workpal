@@ -8,10 +8,10 @@ import (
 	"time"
 
 	"github.com/jackc/pgx/v5/pgtype"
-	"github.com/multica-ai/multica/server/internal/auth"
-	"github.com/multica-ai/multica/server/internal/middleware"
-	"github.com/multica-ai/multica/server/internal/testutil"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
+	"workpal.local/workpal/server/internal/auth"
+	"workpal.local/workpal/server/internal/middleware"
+	"workpal.local/workpal/server/internal/testutil"
+	db "workpal.local/workpal/server/pkg/db/generated"
 )
 
 func TestCommentSelfMention_SourceIssueAndThread(t *testing.T) {
@@ -212,7 +212,7 @@ func TestCommentSelfMention_PermissionGatePrecedesSuppression(t *testing.T) {
 	sourceID := dbfx.Task(t, agentID, testutil.Cols{
 		"runtime_id": runtimeID, "issue_id": issueID, "status": "running",
 	})
-	otherUserID := dbfx.User(t, "Other originator", "self-mention-originator@multica.test")
+	otherUserID := dbfx.User(t, "Other originator", "self-mention-originator@workpal.test")
 	dbfx.Member(t, testWorkspaceID, otherUserID, "member")
 	triggers, targets := testHandler.computeCommentAgentTriggers(context.Background(), db.Issue{
 		ID: parseUUID(issueID), WorkspaceID: parseUUID(testWorkspaceID),

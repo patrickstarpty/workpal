@@ -1,15 +1,15 @@
 "use client";
 
 import { useMemo, useState, type ReactElement } from "react";
-import { ChevronDown, TriangleAlert, Users } from "@multica/ui/icons";
-import type { CommentTriggerPreviewAgent, CommentTriggerOutcome } from "@multica/core/types";
-import type { AgentRunState, RecipientAction } from "@multica/core/issues/run-steering";
-import { useAgentPresenceDetail } from "@multica/core/agents";
-import { mentionLabelsByTarget } from "@multica/core/issues/comment-trigger-outcomes";
-import { resolvePublicFileUrl } from "@multica/core/workspace/avatar-url";
-import { useCurrentWorkspace } from "@multica/core/paths";
-import { ActorAvatar as ActorAvatarBase } from "@multica/ui/components/common/actor-avatar";
-import { AVATAR_SIZE_PX } from "@multica/ui/lib/avatar-size";
+import { ChevronDown, TriangleAlert, Users } from "@workpal/ui/icons";
+import type { CommentTriggerPreviewAgent, CommentTriggerOutcome } from "@workpal/core/types";
+import type { AgentRunState, RecipientAction } from "@workpal/core/issues/run-steering";
+import { useAgentPresenceDetail } from "@workpal/core/agents";
+import { mentionLabelsByTarget } from "@workpal/core/issues/comment-trigger-outcomes";
+import { resolvePublicFileUrl } from "@workpal/core/workspace/avatar-url";
+import { useCurrentWorkspace } from "@workpal/core/paths";
+import { ActorAvatar as ActorAvatarBase } from "@workpal/ui/components/common/actor-avatar";
+import { AVATAR_SIZE_PX } from "@workpal/ui/lib/avatar-size";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -17,14 +17,14 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@multica/ui/components/ui/dropdown-menu";
+} from "@workpal/ui/components/ui/dropdown-menu";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@multica/ui/components/ui/popover";
-import { Tooltip, TooltipContent, TooltipTrigger } from "@multica/ui/components/ui/tooltip";
-import { cn } from "@multica/ui/lib/utils";
+} from "@workpal/ui/components/ui/popover";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@workpal/ui/components/ui/tooltip";
+import { cn } from "@workpal/ui/lib/utils";
 import { AgentStatusDot } from "../../common/actor-avatar";
 import { useT } from "../../i18n";
 import { useEditorOverlayOwner } from "../../editor/overlay-owner";

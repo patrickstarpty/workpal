@@ -5,11 +5,11 @@ import type { LocaleBundleProps } from "./i18n/locale-bundle";
 
 const installUserTimingCap = vi.hoisted(() => vi.fn());
 
-vi.mock("@multica/core/diagnostics", () => ({ installUserTimingCap }));
-vi.mock("@multica/core/platform", () => ({
+vi.mock("@workpal/core/diagnostics", () => ({ installUserTimingCap }));
+vi.mock("@workpal/core/platform", () => ({
   CoreProvider: ({ children }: { children: React.ReactNode }) => <>{children}</>,
 }));
-vi.mock("@multica/core/i18n/browser", () => ({
+vi.mock("@workpal/core/i18n/browser", () => ({
   createBrowserCookieLocaleAdapter: () => ({}),
 }));
 vi.mock("@/platform/navigation", () => ({

@@ -1,6 +1,6 @@
 import { render } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
-import { I18nProvider } from "@multica/core/i18n/react";
+import { I18nProvider } from "@workpal/core/i18n/react";
 import en from "../locales/en";
 import zhHans from "../locales/zh-Hans";
 import { HeroFrame } from "./heroes";

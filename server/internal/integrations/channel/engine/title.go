@@ -3,8 +3,8 @@ package engine
 import (
 	"strings"
 
-	"github.com/multica-ai/multica/server/internal/chattitle"
-	"github.com/multica-ai/multica/server/internal/integrations/channel"
+	"workpal.local/workpal/server/internal/chattitle"
+	"workpal.local/workpal/server/internal/integrations/channel"
 )
 
 // DeriveChatTitle is the deterministic fallback shared by channel-created

@@ -1,10 +1,10 @@
 import type { ReactNode } from "react";
 import { fireEvent, screen, waitFor } from "@testing-library/react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { ApiError } from "@multica/core/api";
-import { buildIssueStatusCatalog } from "@multica/core/issue-statuses/queries";
-import type { PinnedItem } from "@multica/core/types";
-import { useSidebarTreeStore } from "@multica/core/issues/stores/sidebar-tree-store";
+import { ApiError } from "@workpal/core/api";
+import { buildIssueStatusCatalog } from "@workpal/core/issue-statuses/queries";
+import type { PinnedItem } from "@workpal/core/types";
+import { useSidebarTreeStore } from "@workpal/core/issues/stores/sidebar-tree-store";
 import { renderWithI18n } from "../../test/i18n";
 import { IssueContextMenuProvider } from "../../issues/actions";
 import { PinnedSection, usePanelPins } from "./pinned-section";
@@ -23,7 +23,7 @@ const state = vi.hoisted(() => ({
   deletePin: vi.fn(),
 }));
 
-vi.mock("@multica/core/issue-statuses/hooks", () => ({
+vi.mock("@workpal/core/issue-statuses/hooks", () => ({
   useIssueStatuses: () => buildIssueStatusCatalog([]),
 }));
 vi.mock("../../navigation", () => ({
@@ -34,21 +34,21 @@ vi.mock("../../navigation", () => ({
   ),
 }));
 vi.mock("../../issues/components/status-icon", () => ({ StatusIcon: () => <span /> }));
-vi.mock("@multica/ui/components/common/tooltip-hint", () => ({
+vi.mock("@workpal/ui/components/common/tooltip-hint", () => ({
   TooltipHint: ({ children }: { children: ReactNode }) => <>{children}</>,
 }));
-vi.mock("@multica/core/paths", async (importOriginal) => {
-  const actual = await importOriginal<typeof import("@multica/core/paths")>();
+vi.mock("@workpal/core/paths", async (importOriginal) => {
+  const actual = await importOriginal<typeof import("@workpal/core/paths")>();
   return { ...actual, useWorkspacePaths: () => actual.paths.workspace("acme") };
 });
-vi.mock("@multica/core/pins/queries", () => ({ pinListOptions: () => ({ queryKey: ["pins"] }) }));
-vi.mock("@multica/core/pins/mutations", () => ({
+vi.mock("@workpal/core/pins/queries", () => ({ pinListOptions: () => ({ queryKey: ["pins"] }) }));
+vi.mock("@workpal/core/pins/mutations", () => ({
   useDeletePin: () => ({ mutate: state.deletePin }),
   useReorderPins: () => ({ mutate: vi.fn() }),
 }));
-vi.mock("@multica/core/issues/queries", () => ({ issueDetailOptions: () => ({ queryKey: ["issue"] }) }));
-vi.mock("@multica/core/projects/queries", () => ({ projectDetailOptions: () => ({ queryKey: ["project"] }) }));
-vi.mock("@multica/core/issue-views/queries", () => ({
+vi.mock("@workpal/core/issues/queries", () => ({ issueDetailOptions: () => ({ queryKey: ["issue"] }) }));
+vi.mock("@workpal/core/projects/queries", () => ({ projectDetailOptions: () => ({ queryKey: ["project"] }) }));
+vi.mock("@workpal/core/issue-views/queries", () => ({
   issueViewDetailOptions: () => ({ queryKey: ["view"] }),
 }));
 vi.mock("@tanstack/react-query", async (importOriginal) => ({

@@ -8,16 +8,16 @@ vi.mock("next/navigation", () => ({
   useParams: () => ({ id: "inv-1" }),
 }));
 
-vi.mock("@multica/core/auth", () => ({
+vi.mock("@workpal/core/auth", () => ({
   useAuthStore: (selector: (s: { user: object; isLoading: boolean }) => unknown) =>
     selector({ user: { id: "u-1" }, isLoading: false }),
 }));
 
-vi.mock("@multica/core/api", () => ({
+vi.mock("@workpal/core/api", () => ({
   api: { listWorkspaces: vi.fn().mockResolvedValue([]) },
 }));
 
-vi.mock("@multica/views/invitations", () => ({
+vi.mock("@workpal/views/invitations", () => ({
   InvitationsPage: () => <div data-testid="invitations-page" />,
 }));
 

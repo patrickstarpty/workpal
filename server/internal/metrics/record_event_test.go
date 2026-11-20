@@ -3,8 +3,8 @@ package metrics_test
 import (
 	"testing"
 
-	"github.com/multica-ai/multica/server/internal/analytics"
-	"github.com/multica-ai/multica/server/internal/metrics"
+	"workpal.local/workpal/server/internal/analytics"
+	"workpal.local/workpal/server/internal/metrics"
 )
 
 // captureSpy records the names of every event handed to Capture so tests can

@@ -9,7 +9,7 @@
  * saving a theme file never clears the window to repaint it.
  */
 
-export const BACKDROP_ELEMENT_ID = "multica-backdrop";
+export const BACKDROP_ELEMENT_ID = "workpal-backdrop";
 export const BACKDROP_ATTR = "data-backdrop";
 
 export interface BackdropState {

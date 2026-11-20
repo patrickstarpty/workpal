@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, it } from "vitest";
 import { act, renderHook } from "@testing-library/react";
-import { EMBED_TOKEN_INPUTS } from "@multica/core/appearance";
+import { EMBED_TOKEN_INPUTS } from "@workpal/core/appearance";
 import { useThemeVersion } from "./use-theme-version";
 
 const root = document.documentElement;

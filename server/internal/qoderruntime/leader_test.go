@@ -45,9 +45,9 @@ func TestSquadLeaderQuickCreateAssignsSquad(t *testing.T) {
 
 func TestSquadLeaderLostCommentResponseDoesNotRepost(t *testing.T) {
 	h := pendingLeader(t, leaderDelegation)
-	base := h.b.multica.client.Transport
+	base := h.b.workpal.client.Transport
 	lost := false
-	h.b.multica.client.Transport = leaderTransport(func(r *http.Request) (*http.Response, error) {
+	h.b.workpal.client.Transport = leaderTransport(func(r *http.Request) (*http.Response, error) {
 		resp, err := base.RoundTrip(r)
 		if err == nil && !lost && r.Method == http.MethodPost && strings.HasSuffix(r.URL.Path, "/comments") {
 			j, journalErr := readJournal(h.b.path, "test")
@@ -86,8 +86,8 @@ func TestSquadLeaderReportsBlockedDelegation(t *testing.T) {
 	} {
 		t.Run(tc.name, func(t *testing.T) {
 			h := pendingLeader(t, tc.reply)
-			base := h.b.multica.client.Transport
-			h.b.multica.client.Transport = leaderTransport(func(r *http.Request) (*http.Response, error) {
+			base := h.b.workpal.client.Transport
+			h.b.workpal.client.Transport = leaderTransport(func(r *http.Request) (*http.Response, error) {
 				resp, err := base.RoundTrip(r)
 				if err == nil && r.Method == http.MethodPost && strings.HasSuffix(r.URL.Path, "/comments") {
 					resp.Body.Close()
@@ -110,9 +110,9 @@ func TestSquadLeaderReportsBlockedDelegation(t *testing.T) {
 
 func TestSquadLeaderEvaluationRateLimitDoesNotRepostComment(t *testing.T) {
 	h := pendingLeader(t, leaderDelegation)
-	base := h.b.multica.client.Transport
+	base := h.b.workpal.client.Transport
 	limited := false
-	h.b.multica.client.Transport = leaderTransport(func(r *http.Request) (*http.Response, error) {
+	h.b.workpal.client.Transport = leaderTransport(func(r *http.Request) (*http.Response, error) {
 		if !limited && strings.HasSuffix(r.URL.Path, "/squad-evaluated") {
 			limited = true
 			return &http.Response{StatusCode: 429, Body: io.NopCloser(strings.NewReader(`{}`)), Header: http.Header{}}, nil
@@ -132,9 +132,9 @@ func TestSquadLeaderEvaluationRateLimitDoesNotRepostComment(t *testing.T) {
 
 func TestSquadLeaderLostEvaluationResponseDoesNotReplay(t *testing.T) {
 	h := pendingLeader(t, leaderDelegation)
-	base := h.b.multica.client.Transport
+	base := h.b.workpal.client.Transport
 	lost := false
-	h.b.multica.client.Transport = leaderTransport(func(r *http.Request) (*http.Response, error) {
+	h.b.workpal.client.Transport = leaderTransport(func(r *http.Request) (*http.Response, error) {
 		resp, err := base.RoundTrip(r)
 		if err == nil && !lost && strings.HasSuffix(r.URL.Path, "/squad-evaluated") {
 			lost = true
@@ -154,8 +154,8 @@ func TestSquadLeaderLostEvaluationResponseDoesNotReplay(t *testing.T) {
 
 func TestSquadLeaderRejectedNoActionEvaluationFailsVisibly(t *testing.T) {
 	h := pendingLeader(t, "OUTCOME: no_action\nREASON: progress only")
-	base := h.b.multica.client.Transport
-	h.b.multica.client.Transport = leaderTransport(func(r *http.Request) (*http.Response, error) {
+	base := h.b.workpal.client.Transport
+	h.b.workpal.client.Transport = leaderTransport(func(r *http.Request) (*http.Response, error) {
 		if strings.HasSuffix(r.URL.Path, "/squad-evaluated") {
 			return &http.Response{StatusCode: 403, Body: io.NopCloser(strings.NewReader(`{}`)), Header: http.Header{}}, nil
 		}
@@ -171,9 +171,9 @@ func TestSquadLeaderRejectedNoActionEvaluationFailsVisibly(t *testing.T) {
 
 func TestSquadLeaderCompletedDeliverySurvivesRestart(t *testing.T) {
 	h := pendingLeader(t, leaderDelegation)
-	base := h.b.multica.client.Transport
+	base := h.b.workpal.client.Transport
 	refused := false
-	h.b.multica.client.Transport = leaderTransport(func(r *http.Request) (*http.Response, error) {
+	h.b.workpal.client.Transport = leaderTransport(func(r *http.Request) (*http.Response, error) {
 		if !refused && strings.HasSuffix(r.URL.Path, "/complete") {
 			refused = true
 			return &http.Response{StatusCode: 503, Body: io.NopCloser(strings.NewReader(`{}`)), Header: http.Header{}}, nil

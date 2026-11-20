@@ -11,9 +11,9 @@ import {
   Paperclip,
   Users,
   X,
-} from "@multica/ui/icons";
-import { Button } from "@multica/ui/components/ui/button";
-import { cn } from "@multica/ui/lib/utils";
+} from "@workpal/ui/icons";
+import { Button } from "@workpal/ui/components/ui/button";
+import { cn } from "@workpal/ui/lib/utils";
 import {
   CoachMark,
   DemoAvatar,

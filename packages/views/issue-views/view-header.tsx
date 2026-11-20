@@ -23,10 +23,10 @@ import {
   ListTree,
   Trash2,
   Users,
-} from "@multica/ui/icons";
-import { Button } from "@multica/ui/components/ui/button";
-import { IconButton } from "@multica/ui/components/common/icon-button";
-import { Separator } from "@multica/ui/components/ui/separator";
+} from "@workpal/ui/icons";
+import { Button } from "@workpal/ui/components/ui/button";
+import { IconButton } from "@workpal/ui/components/common/icon-button";
+import { Separator } from "@workpal/ui/components/ui/separator";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -40,45 +40,45 @@ import {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
-} from "@multica/ui/components/ui/dropdown-menu";
-import { cn } from "@multica/ui/lib/utils";
-import type { CreateIssueViewRequest, IssueView } from "@multica/core/api/schemas";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { useWorkspacePaths } from "@multica/core/paths";
-import { useActiveIssueView } from "@multica/core/issue-views/use-active-view";
-import type { IssueViewScope } from "@multica/core/issue-views/queries";
+} from "@workpal/ui/components/ui/dropdown-menu";
+import { cn } from "@workpal/ui/lib/utils";
+import type { CreateIssueViewRequest, IssueView } from "@workpal/core/api/schemas";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { useWorkspacePaths } from "@workpal/core/paths";
+import { useActiveIssueView } from "@workpal/core/issue-views/use-active-view";
+import type { IssueViewScope } from "@workpal/core/issue-views/queries";
 import {
   builtinViewItemId,
   savedViewItemId,
   type BuiltinViewKey,
-} from "@multica/core/issue-views/sidebar-views";
-import { issueViewTarget } from "@multica/core/issue-views/view-target";
-import { isFilteredBuiltinViewKey } from "@multica/core/issue-views/builtin-issue-views";
+} from "@workpal/core/issue-views/sidebar-views";
+import { issueViewTarget } from "@workpal/core/issue-views/view-target";
+import { isFilteredBuiltinViewKey } from "@workpal/core/issue-views/builtin-issue-views";
 import {
   isIssueViewModified,
   isIssueViewUndefined,
   issueViewDefinitionFromState,
   issueViewSeedDefinition,
   modifiedFilterDimensions,
-} from "@multica/core/issue-views/definition";
-import { useIssueViewRenameStore } from "@multica/core/issue-views/rename-store";
-import { useIssueViewEditStore } from "@multica/core/issue-views/edit-store";
+} from "@workpal/core/issue-views/definition";
+import { useIssueViewRenameStore } from "@workpal/core/issue-views/rename-store";
+import { useIssueViewEditStore } from "@workpal/core/issue-views/edit-store";
 import {
   myIssuesViewStore,
   type MyIssuesScope,
-} from "@multica/core/issues/stores/my-issues-view-store";
+} from "@workpal/core/issues/stores/my-issues-view-store";
 import {
   useIssuesScope,
   useIssuesScopeStore,
   type IssuesScope,
-} from "@multica/core/issues/stores/issues-scope-store";
-import { actorKindForViewVariant } from "@multica/core/issues/surface/scope";
-import { useViewStore, useViewStoreApi } from "@multica/core/issues/stores/view-store-context";
+} from "@workpal/core/issues/stores/issues-scope-store";
+import { actorKindForViewVariant } from "@workpal/core/issues/surface/scope";
+import { useViewStore, useViewStoreApi } from "@workpal/core/issues/stores/view-store-context";
 import {
   countAdvancedConditions,
   type NegatableFilterDimension,
-} from "@multica/core/issues/stores/filter-tree";
-import type { Project } from "@multica/core/types";
+} from "@workpal/core/issues/stores/filter-tree";
+import type { Project } from "@workpal/core/types";
 import { PageHeader } from "../layout/page-header";
 import { RefreshablePageIcon } from "../layout/refreshable-page-icon";
 import { ActionShortcutKeycaps } from "../common/shortcut-keycaps";

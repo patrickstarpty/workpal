@@ -18,10 +18,10 @@ import (
 	"github.com/jackc/pgx/v5/pgconn"
 	"github.com/jackc/pgx/v5/pgtype"
 
-	"github.com/multica-ai/multica/server/internal/featureflags"
-	"github.com/multica-ai/multica/server/internal/logger"
-	"github.com/multica-ai/multica/server/internal/projectaccess"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
+	"workpal.local/workpal/server/internal/featureflags"
+	"workpal.local/workpal/server/internal/logger"
+	"workpal.local/workpal/server/internal/projectaccess"
+	db "workpal.local/workpal/server/pkg/db/generated"
 )
 
 // Local search index sync (MUL-7754).

@@ -1,5 +1,5 @@
-import { useDevPromptStore, useSessionPromptStore } from "@multica/core/session-prompt";
-import { STAR_PROMPT_MAX_SHOWINGS, starPromptDue } from "@multica/core/star-prompt";
+import { useDevPromptStore, useSessionPromptStore } from "@workpal/core/session-prompt";
+import { STAR_PROMPT_MAX_SHOWINGS, starPromptDue } from "@workpal/core/star-prompt";
 import type { DevFeature } from "../dev-toolbar/actions";
 
 const day = (iso: string | null | undefined) => (iso ? iso.slice(0, 10) : "—");

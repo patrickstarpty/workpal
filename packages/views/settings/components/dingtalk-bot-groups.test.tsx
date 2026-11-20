@@ -2,8 +2,8 @@ import type { ReactNode } from "react";
 import { describe, it, expect, beforeEach, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { I18nProvider } from "@multica/core/i18n/react";
-import type { DingTalkGroup } from "@multica/core/types";
+import { I18nProvider } from "@workpal/core/i18n/react";
+import type { DingTalkGroup } from "@workpal/core/types";
 import enSettings from "../../locales/en/settings.json";
 import { DingTalkBotGroups } from "./dingtalk-bot-groups";
 const groupsRef = {

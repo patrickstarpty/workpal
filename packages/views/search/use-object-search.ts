@@ -2,20 +2,20 @@
 
 import { useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { autopilotListOptions } from "@multica/core/autopilots/queries";
-import { chatSessionsOptions } from "@multica/core/chat/queries";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { issueViewEverywhereOptions } from "@multica/core/issue-views/queries";
-import { BUILTIN_VIEW_KEYS, type BuiltinViewKey } from "@multica/core/issue-views/sidebar-views";
-import { skillListOptions, workspaceListOptions } from "@multica/core/workspace/queries";
-import type { IssueView } from "@multica/core/api/schemas";
+import { autopilotListOptions } from "@workpal/core/autopilots/queries";
+import { chatSessionsOptions } from "@workpal/core/chat/queries";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { issueViewEverywhereOptions } from "@workpal/core/issue-views/queries";
+import { BUILTIN_VIEW_KEYS, type BuiltinViewKey } from "@workpal/core/issue-views/sidebar-views";
+import { skillListOptions, workspaceListOptions } from "@workpal/core/workspace/queries";
+import type { IssueView } from "@workpal/core/api/schemas";
 import type {
   Autopilot,
   ChatSession,
   MemberWithUser,
   SkillSummary,
   Workspace,
-} from "@multica/core/types";
+} from "@workpal/core/types";
 import { useBuiltinViewLabel } from "../issue-views/builtin-views";
 import { scoreRow, scoreText } from "./matching";
 import { useActorDirectory, type AgentEntry, type SquadEntry } from "./use-actor-directory";

@@ -39,7 +39,7 @@ func IsolatedDB(t *testing.T, dsn string) *pgxpool.Pool {
 		}
 	})
 
-	name := "multica_test_" + strings.ReplaceAll(uuid.NewString(), "-", "")
+	name := "workpal_test_" + strings.ReplaceAll(uuid.NewString(), "-", "")
 	ident := pgx.Identifier{name}.Sanitize()
 	// template0 is empty even when the shared test database contains active
 	// fixtures from other packages. Never clone those rows into this test.

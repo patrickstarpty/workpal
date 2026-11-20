@@ -3,27 +3,27 @@
 import { useMemo, useState, useCallback, useRef, useEffect } from "react";
 import { useRegisterCommandBarContext } from "../../search/register-context";
 import { useDefaultLayout, usePanelRef } from "react-resizable-panels";
-import { Archive, ArchiveRestore, BellOff, BellRing, Check, ChevronRight, FileQuestion, Link2, PanelRight, Pencil, Pin, PinOff, Trash2, Type } from "@multica/ui/icons";
+import { Archive, ArchiveRestore, BellOff, BellRing, Check, ChevronRight, FileQuestion, Link2, PanelRight, Pencil, Pin, PinOff, Trash2, Type } from "@workpal/ui/icons";
 import { useQuery } from "@tanstack/react-query";
-import { cn } from "@multica/ui/lib/utils";
-import { copyText, copyTextAndHtml } from "@multica/ui/lib/clipboard";
+import { cn } from "@workpal/ui/lib/utils";
+import { copyText, copyTextAndHtml } from "@workpal/ui/lib/clipboard";
 import { toast } from "sonner";
-import type { Project, ProjectStatus, ProjectPriority } from "@multica/core/types";
-import { useAuthStore } from "@multica/core/auth";
-import { canDeleteProject } from "@multica/core/projects/deletion-permissions";
-import { projectDetailOptions, projectSubscriptionOptions } from "@multica/core/projects/queries";
-import { Spinner } from "@multica/ui/components/ui/spinner";
-import { useUpdateProject, useDeleteProject, useSetProjectSubscription, ProjectDeletionOfflineError } from "@multica/core/projects/mutations";
-import { pinListOptions } from "@multica/core/pins";
-import { useCreatePin, useDeletePin } from "@multica/core/pins";
-import { useModalStore } from "@multica/core/modals";
-import { memberListOptions, agentListOptions } from "@multica/core/workspace/queries";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { useIssuesScope } from "@multica/core/issues/stores";
-import { useRecentContextStore } from "@multica/core/chat";
-import { useWorkspacePaths } from "@multica/core/paths";
-import { useActorName } from "@multica/core/workspace/hooks";
-import { PROJECT_STATUS_ORDER, PROJECT_STATUS_CONFIG, PROJECT_PRIORITY_ORDER } from "@multica/core/projects/config";
+import type { Project, ProjectStatus, ProjectPriority } from "@workpal/core/types";
+import { useAuthStore } from "@workpal/core/auth";
+import { canDeleteProject } from "@workpal/core/projects/deletion-permissions";
+import { projectDetailOptions, projectSubscriptionOptions } from "@workpal/core/projects/queries";
+import { Spinner } from "@workpal/ui/components/ui/spinner";
+import { useUpdateProject, useDeleteProject, useSetProjectSubscription, ProjectDeletionOfflineError } from "@workpal/core/projects/mutations";
+import { pinListOptions } from "@workpal/core/pins";
+import { useCreatePin, useDeletePin } from "@workpal/core/pins";
+import { useModalStore } from "@workpal/core/modals";
+import { memberListOptions, agentListOptions } from "@workpal/core/workspace/queries";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { useIssuesScope } from "@workpal/core/issues/stores";
+import { useRecentContextStore } from "@workpal/core/chat";
+import { useWorkspacePaths } from "@workpal/core/paths";
+import { useActorName } from "@workpal/core/workspace/hooks";
+import { PROJECT_STATUS_ORDER, PROJECT_STATUS_CONFIG, PROJECT_PRIORITY_ORDER } from "@workpal/core/projects/config";
 import { getProjectIssueMetrics } from "./project-issue-metrics";
 import { ActorAvatar } from "../../common/actor-avatar";
 import { AppLink, currentPath, useNavigation } from "../../navigation";
@@ -37,30 +37,30 @@ import { ProjectLeadPicker } from "./project-lead-picker";
 import { ProjectWorkflowControl } from "../../workflows/project-workflow-row";
 import { ProjectWorkflowMenuItem, ProjectWorkflowSheet } from "../../workflows/project-workflow-sheet";
 import { IssueSurface } from "../../issues/surface/issue-surface";
-import { Skeleton } from "@multica/ui/components/ui/skeleton";
-import { Button, buttonVariants } from "@multica/ui/components/ui/button";
-import { TooltipHint } from "@multica/ui/components/common/tooltip-hint";
-import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from "@multica/ui/components/ui/resizable";
-import { Sheet, SheetContent } from "@multica/ui/components/ui/sheet";
-import { useIsMobile } from "@multica/ui/hooks/use-mobile";
+import { Skeleton } from "@workpal/ui/components/ui/skeleton";
+import { Button, buttonVariants } from "@workpal/ui/components/ui/button";
+import { TooltipHint } from "@workpal/ui/components/common/tooltip-hint";
+import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from "@workpal/ui/components/ui/resizable";
+import { Sheet, SheetContent } from "@workpal/ui/components/ui/sheet";
+import { useIsMobile } from "@workpal/ui/hooks/use-mobile";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@multica/ui/components/ui/dropdown-menu";
+} from "@workpal/ui/components/ui/dropdown-menu";
 import {
   Popover,
   PopoverTrigger,
   PopoverContent,
-} from "@multica/ui/components/ui/popover";
+} from "@workpal/ui/components/ui/popover";
 import {
   Tooltip,
   TooltipTrigger,
   TooltipContent,
-} from "@multica/ui/components/ui/tooltip";
-import { EmojiPicker } from "@multica/ui/components/common/emoji-picker";
+} from "@workpal/ui/components/ui/tooltip";
+import { EmojiPicker } from "@workpal/ui/components/common/emoji-picker";
 import { IssueViewHeader } from "../../issue-views/view-header";
 import {
   AnimatedRightSidebar,
@@ -79,7 +79,7 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@multica/ui/components/ui/alert-dialog";
+} from "@workpal/ui/components/ui/alert-dialog";
 import { useT } from "../../i18n";
 import { titleLinkPayload } from "../../common/title-link";
 import { useProjectStatusLabels, useProjectPriorityLabels, useFormatRelativeDate } from "./labels";
@@ -202,7 +202,7 @@ export function ProjectDetail({ projectId }: { projectId: string }) {
 
   // Sidebar panel
   const { defaultLayout, onLayoutChanged } = useDefaultLayout({
-    id: "multica_project_detail_layout",
+    id: "workpal_project_detail_layout",
   });
   const sidebarRef = usePanelRef();
   const rightSidebarShortcutTargetRef = useRef<HTMLDivElement | null>(null);

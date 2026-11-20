@@ -9,40 +9,40 @@ import {
   Loader2,
   Pencil,
   Trash2,
-} from "@multica/ui/icons";
+} from "@workpal/ui/icons";
 import { toast } from "sonner";
 import { useQuery } from "@tanstack/react-query";
-import { CurrencyNumberFlow } from "@multica/ui/components/ui/number-flow";
+import { CurrencyNumberFlow } from "@workpal/ui/components/ui/number-flow";
 import type {
   Agent,
   AgentRuntime,
   AgentTask,
   MemberWithUser,
   RuntimeProfile,
-} from "@multica/core/types";
-import { useAuthStore } from "@multica/core/auth";
-import { useWorkspaceId } from "@multica/core/hooks";
+} from "@workpal/core/types";
+import { useAuthStore } from "@workpal/core/auth";
+import { useWorkspaceId } from "@workpal/core/hooks";
 import {
   agentListOptions,
   memberListOptions,
-} from "@multica/core/workspace/queries";
-import { agentTaskSnapshotOptions } from "@multica/core/agents";
+} from "@workpal/core/workspace/queries";
+import { agentTaskSnapshotOptions } from "@workpal/core/agents";
 import {
   deriveRuntimeHealth,
   isRuntimeUsableForUser,
   runtimeProfileListOptions,
   runtimeUsageOptions,
-} from "@multica/core/runtimes";
-import { useWorkspacePaths } from "@multica/core/paths";
+} from "@workpal/core/runtimes";
+import { useWorkspacePaths } from "@workpal/core/paths";
 import {
   DropdownMenuItem,
   DropdownMenuSeparator,
-} from "@multica/ui/components/ui/dropdown-menu";
+} from "@workpal/ui/components/ui/dropdown-menu";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from "@multica/ui/components/ui/tooltip";
+} from "@workpal/ui/components/ui/tooltip";
 import { useIntentNavigate } from "../../navigation";
 import {
   CollectionEmptyValue,
@@ -72,7 +72,7 @@ import {
   pendingRuntimeCommandName,
 } from "./pending-runtime";
 import { useT, useTimeAgo } from "../../i18n";
-import { TruncatedTooltip } from "@multica/ui/components/common/truncated-tooltip";
+import { TruncatedTooltip } from "@workpal/ui/components/common/truncated-tooltip";
 
 // The machine detail's runtimes table. A machine hosts 1-5 runtimes, so no
 // sorting, filters, column toggles or batch selection — and batch-deleting
@@ -399,7 +399,7 @@ export function CliCell({ runtime }: { runtime: AgentRuntime }) {
   const meta = runtime.metadata as Record<string, unknown> | null;
   // `version` is the agent's own underlying CLI tool version — distinct per
   // provider (e.g. "2.1.5 (Claude Code)", "codex-cli 0.118.0", "0.42.0").
-  // The separate `cli_version` is the shared multica daemon CLI, identical
+  // The separate `cli_version` is the shared workpal daemon CLI, identical
   // for every runtime on one machine; surfacing it here made all agents
   // show the same number (#3838). The daemon CLI version and its update
   // prompt belong to the machine — they live in the machine header, not on a

@@ -17,14 +17,14 @@ import {
   Settings,
   SlidersHorizontal,
   type IconComponent,
-} from "@multica/ui/icons";
-import { cn } from "@multica/ui/lib/utils";
-import { StatusIcon } from "@multica/views/issues/components/status-icon";
-import { PriorityIcon } from "@multica/views/issues/components/priority-icon";
+} from "@workpal/ui/icons";
+import { cn } from "@workpal/ui/lib/utils";
+import { StatusIcon } from "@workpal/views/issues/components/status-icon";
+import { PriorityIcon } from "@workpal/views/issues/components/priority-icon";
 import { Avatar, BACKEND, LEO, MIA, QA, SAM, Working, ZoomCanvas, type Actor } from "./mock-kit";
 
 /*
- * Mockups for the Mobile page: the Multica iOS app on an iPhone, one screen
+ * Mockups for the Mobile page: the Workpal iOS app on an iPhone, one screen
  * per tab plus an issue's agent runs. Phones are drawn at device size
  * (264 × 560) and are meant to run off the bottom of their frame. Strings
  * follow the app's own copy; data is fictional.

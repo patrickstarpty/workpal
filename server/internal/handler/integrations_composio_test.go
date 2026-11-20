@@ -13,10 +13,10 @@ import (
 	"github.com/go-chi/chi/v5"
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgtype"
-	composio "github.com/multica-ai/multica/server/internal/integrations/composio"
-	"github.com/multica-ai/multica/server/internal/util"
-	sdk "github.com/multica-ai/multica/server/pkg/composio"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
+	composio "workpal.local/workpal/server/internal/integrations/composio"
+	"workpal.local/workpal/server/internal/util"
+	sdk "workpal.local/workpal/server/pkg/composio"
+	db "workpal.local/workpal/server/pkg/db/generated"
 )
 
 const composioTestUserID = "22222222-2222-2222-2222-222222222222"
@@ -139,8 +139,8 @@ func newComposioTestHandler(t *testing.T, sdkFake composio.SDK, store composio.S
 	t.Helper()
 	svc, err := composio.NewService(sdkFake, store, composio.Config{
 		StateSecret:     []byte("handler-test-secret"),
-		CallbackBaseURL: "https://multica.ai",
-		FrontendBaseURL: "https://multica.ai",
+		CallbackBaseURL: "https://workpal.invalid",
+		FrontendBaseURL: "https://workpal.invalid",
 	})
 	if err != nil {
 		t.Fatalf("NewService: %v", err)

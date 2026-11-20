@@ -1,16 +1,16 @@
 "use client";
 
 import { useState } from "react";
-import { AlertCircle, Plus } from "@multica/ui/icons";
+import { AlertCircle, Plus } from "@workpal/ui/icons";
 import { toast } from "sonner";
 import { useQuery } from "@tanstack/react-query";
-import type { Agent, AgentRuntime } from "@multica/core/types";
-import { useAuthStore } from "@multica/core/auth";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { useWorkspacePaths } from "@multica/core/paths";
-import { useWorkspacePresenceMap } from "@multica/core/agents";
-import { isRuntimeUsableForUser } from "@multica/core/runtimes";
-import { runtimeListOptions } from "@multica/core/runtimes/queries";
+import type { Agent, AgentRuntime } from "@workpal/core/types";
+import { useAuthStore } from "@workpal/core/auth";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { useWorkspacePaths } from "@workpal/core/paths";
+import { useWorkspacePresenceMap } from "@workpal/core/agents";
+import { isRuntimeUsableForUser } from "@workpal/core/runtimes";
+import { runtimeListOptions } from "@workpal/core/runtimes/queries";
 import {
   QODER_REGIONS,
   qoderOptions,
@@ -18,13 +18,13 @@ import {
   useResumeQoder,
   useStopQoder,
   type QoderConnection,
-} from "@multica/core/runtimes/qoder";
+} from "@workpal/core/runtimes/qoder";
 import {
   agentListOptions,
   memberListOptions,
-} from "@multica/core/workspace/queries";
-import { Button } from "@multica/ui/components/ui/button";
-import { Skeleton } from "@multica/ui/components/ui/skeleton";
+} from "@workpal/core/workspace/queries";
+import { Button } from "@workpal/ui/components/ui/button";
+import { Skeleton } from "@workpal/ui/components/ui/skeleton";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -34,8 +34,8 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@multica/ui/components/ui/alert-dialog";
-import { cn } from "@multica/ui/lib/utils";
+} from "@workpal/ui/components/ui/alert-dialog";
+import { cn } from "@workpal/ui/lib/utils";
 import { CollectionPageState } from "../../layout/collection-page";
 import {
   OBJECT_PAGE_BODY,
@@ -63,7 +63,7 @@ import { parseActiveAgentsConflict } from "./delete-runtime-dialog";
 /** Route locator of the workspace's Qoder Cloud Agents page. */
 export const QODER_RUNTIME_LOCATOR = "qoder";
 
-const LAYOUT_ID = "multica_runtime_detail_layout";
+const LAYOUT_ID = "workpal_runtime_detail_layout";
 
 /**
  * Whether a runtimes route locator names Qoder: its own locator, the machine

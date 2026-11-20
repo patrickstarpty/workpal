@@ -8,15 +8,15 @@ import {
   type ReactNode,
 } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { useReducedMotion } from "@multica/core/appearance";
-import { Check, ChevronRight, Copy, Terminal } from "@multica/ui/icons";
+import { useReducedMotion } from "@workpal/core/appearance";
+import { Check, ChevronRight, Copy, Terminal } from "@workpal/ui/icons";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { useAuthStore } from "@multica/core/auth";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { runtimeKeys, runtimeListOptions } from "@multica/core/runtimes/queries";
-import { useDaemonSetupCommands } from "@multica/core/runtimes";
-import { useWSEvent, useWSReconnect } from "@multica/core/realtime";
-import { paths, useWorkspaceSlug } from "@multica/core/paths";
+import { useAuthStore } from "@workpal/core/auth";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { runtimeKeys, runtimeListOptions } from "@workpal/core/runtimes/queries";
+import { useDaemonSetupCommands } from "@workpal/core/runtimes";
+import { useWSEvent, useWSReconnect } from "@workpal/core/realtime";
+import { paths, useWorkspaceSlug } from "@workpal/core/paths";
 import {
   Dialog,
   DialogContent,
@@ -24,16 +24,16 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "@multica/ui/components/ui/dialog";
-import { Button } from "@multica/ui/components/ui/button";
-import { TooltipHint } from "@multica/ui/components/common/tooltip-hint";
-import { CODE_LIGATURE_CLASS } from "@multica/ui/lib/code-style";
-import { copyText } from "@multica/ui/lib/clipboard";
+} from "@workpal/ui/components/ui/dialog";
+import { Button } from "@workpal/ui/components/ui/button";
+import { TooltipHint } from "@workpal/ui/components/common/tooltip-hint";
+import { CODE_LIGATURE_CLASS } from "@workpal/ui/lib/code-style";
+import { copyText } from "@workpal/ui/lib/clipboard";
 import {
   UI_EASE_OUT,
   UI_MOTION_DURATION,
-} from "@multica/ui/lib/motion";
-import { cn } from "@multica/ui/lib/utils";
+} from "@workpal/ui/lib/motion";
+import { cn } from "@workpal/ui/lib/utils";
 import { CliInstallCommand } from "../../common/cli-install-command";
 import { DaemonSetupNotice } from "../../common/daemon-setup-notice";
 import { useNavigation } from "../../navigation";
@@ -289,7 +289,7 @@ function InstructionsStep({ onClose }: { onClose: () => void }) {
         <div className="space-y-4">
           {/* Step 1 owns the platform switch: the install command differs by
               OS, so the user picks instead of us guessing. Step 2's
-              `multica setup` is platform-independent. */}
+              `workpal setup` is platform-independent. */}
           <CommandStep n={1} label={t(($) => $.connect.step1_label)}>
             <CliInstallCommand
               labels={{
@@ -379,7 +379,7 @@ function TroubleshootingDetails({ tokenCmd }: { tokenCmd: string }) {
                 CODE_LIGATURE_CLASS,
               )}
             >
-              {"multica daemon status"}
+              {"workpal daemon status"}
             </code>
           </li>
           <li className="flex items-center gap-1.5">
@@ -391,7 +391,7 @@ function TroubleshootingDetails({ tokenCmd }: { tokenCmd: string }) {
                 CODE_LIGATURE_CLASS,
               )}
             >
-              {"multica daemon logs -f"}
+              {"workpal daemon logs -f"}
             </code>
           </li>
         </ul>

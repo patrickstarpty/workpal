@@ -3,8 +3,8 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { act, screen, fireEvent, waitFor, within } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { setApiInstance } from "@multica/core/api";
-import type { ApiClient } from "@multica/core/api/client";
+import { setApiInstance } from "@workpal/core/api";
+import type { ApiClient } from "@workpal/core/api/client";
 import { renderWithI18n } from "../../test/i18n";
 
 const updateMock = vi.fn().mockResolvedValue({});
@@ -17,7 +17,7 @@ const PINNED = {
   workspace_id: "workspace-1",
   resource_type: "github_repo",
   resource_ref: {
-    url: "https://github.com/multica-ai/multica",
+    url: "https://code-host.invalid/workpal",
     ref: "release/2026-09",
   },
   // A custom name, which is what used to hide the ref: the row rendered
@@ -30,17 +30,17 @@ const PINNED = {
 };
 
 const AVAILABLE_REPO = {
-  url: "https://github.com/multica-ai/api",
+  url: "https://github.com/workpal-ai/api",
   description: "API and daemon runtime",
 };
 
 const ATTACHABLE_REPO = {
-  url: "https://github.com/multica-ai/daemon",
+  url: "https://github.com/workpal-ai/daemon",
   description: "Background task runner",
 };
 
 const PINNED_REPO = {
-  url: "https://github.com/multica-ai/multica",
+  url: "https://code-host.invalid/workpal",
   description: "The main monorepo",
 };
 
@@ -67,23 +67,23 @@ vi.mock("@tanstack/react-query", async (importOriginal) => ({
   queryOptions: (options: unknown) => options,
 }));
 
-vi.mock("@multica/core/projects", () => ({
+vi.mock("@workpal/core/projects", () => ({
   projectResourcesOptions: () => ({ queryKey: ["project-resources"], queryFn: vi.fn() }),
   useCreateProjectResource: () => ({ mutateAsync: createMock, isPending: false }),
   useUpdateProjectResource: () => ({ mutateAsync: updateMock }),
   useDeleteProjectResource: (...args: unknown[]) => deleteHookMock(...args),
 }));
 
-vi.mock("@multica/core/config", () => ({
+vi.mock("@workpal/core/config", () => ({
   useConfigStore: (selector: (state: { localWorktreeSupported: boolean }) => unknown) =>
     selector({ localWorktreeSupported: true }),
 }));
-vi.mock("@multica/core/runtimes", () => ({
+vi.mock("@workpal/core/runtimes", () => ({
   runtimeListOptions: () => ({ queryKey: ["runtimes"], queryFn: vi.fn() }),
   runtimeAdvertisesLocalWorktree: () => true,
 }));
-vi.mock("@multica/core/hooks", () => ({ useWorkspaceId: () => "workspace-1" }));
-vi.mock("@multica/core/paths", () => ({
+vi.mock("@workpal/core/hooks", () => ({ useWorkspaceId: () => "workspace-1" }));
+vi.mock("@workpal/core/paths", () => ({
   useCurrentWorkspace: () => ({
     id: "workspace-1",
     slug: "ws",
@@ -110,7 +110,7 @@ describe("ProjectResourcesSection — github_repo checkout ref", () => {
   });
 
   it.each(["success", "failure"])("prevents duplicate deletes per row and releases pending state on %s", async (outcome) => {
-    const actual = await vi.importActual<typeof import("@multica/core/projects")>("@multica/core/projects");
+    const actual = await vi.importActual<typeof import("@workpal/core/projects")>("@workpal/core/projects");
     deleteHookMock.mockImplementation(actual.useDeleteProjectResource);
     let resolveFirst!: () => void;
     let rejectFirst!: (error: Error) => void;
@@ -164,13 +164,13 @@ describe("ProjectResourcesSection — github_repo checkout ref", () => {
 
   it("shows a live workspace repository description and keeps it out of the attached resource label", async () => {
     renderWithI18n(<ProjectResourcesSection projectId="p1" />);
-    expect(screen.getAllByText("multica-ai/api")).not.toHaveLength(0);
+    expect(screen.getAllByText("workpal-ai/api")).not.toHaveLength(0);
     expect(screen.getByText(AVAILABLE_REPO.description)).toBeTruthy();
 
     fireEvent.click(screen.getByRole("button", { name: /add repository/i }));
     expect(screen.getByText(ATTACHABLE_REPO.description)).toBeTruthy();
     fireEvent.click(
-      screen.getByRole("button", { name: /multica-ai\/daemon/i }),
+      screen.getByRole("button", { name: /workpal-ai\/daemon/i }),
     );
 
     await waitFor(() => expect(createMock).toHaveBeenCalledTimes(1));
@@ -198,7 +198,7 @@ describe("ProjectResourcesSection — github_repo checkout ref", () => {
     // deep-merging, so an edit that sends only `ref` is a 400 at best and
     // drops the repository at worst.
     expect(payload.data.resource_ref).toEqual({
-      url: "https://github.com/multica-ai/multica",
+      url: "https://code-host.invalid/workpal",
       ref: "release/2026-10",
     });
   });
@@ -217,7 +217,7 @@ describe("ProjectResourcesSection — github_repo checkout ref", () => {
       data: { resource_ref: Record<string, unknown> };
     };
     expect(payload.data.resource_ref).toEqual({
-      url: "https://github.com/multica-ai/multica",
+      url: "https://code-host.invalid/workpal",
       ref: undefined,
     });
   });
@@ -243,17 +243,17 @@ describe("ProjectResourcesSection — github_repo checkout ref", () => {
     fireEvent.click(screen.getByRole("button", { name: /add repository/i }));
     const urlInput = screen.getByLabelText(/paste a github url/i);
     fireEvent.change(urlInput, {
-      target: { value: "https://github.com/multica-ai/other" },
+      target: { value: "https://github.com/workpal-ai/other" },
     });
     fireEvent.change(screen.getByLabelText(/starting branch/i), {
       target: { value: "main" },
     });
-    fireEvent.click(screen.getByRole("button", { name: /^add multica-ai\//i }));
+    fireEvent.click(screen.getByRole("button", { name: /^add workpal-ai\//i }));
 
     await waitFor(() => expect(createMock).toHaveBeenCalledTimes(1));
     expect(createMock.mock.calls[0]?.[0]).toEqual({
       resource_type: "github_repo",
-      resource_ref: { url: "https://github.com/multica-ai/other", ref: "main" },
+      resource_ref: { url: "https://github.com/workpal-ai/other", ref: "main" },
     });
   });
 
@@ -280,7 +280,7 @@ describe("ProjectResourcesSection — github_repo checkout ref", () => {
     });
   });
 
-  it.each(["multica", "agent sdk"])("keeps %j a search rather than an address", (term) => {
+  it.each(["workpal", "agent sdk"])("keeps %j a search rather than an address", (term) => {
     renderWithI18n(<ProjectResourcesSection projectId="p1" />);
 
     fireEvent.click(screen.getByRole("button", { name: /add repository/i }));
@@ -300,20 +300,20 @@ describe("ProjectResourcesSection — github_repo checkout ref", () => {
     // What someone copies out of the address bar when they want a branch.
     // Stored whole, this is a clone URL that does not exist.
     fireEvent.change(screen.getByLabelText(/paste a github url/i), {
-      target: { value: "https://github.com/multica-ai/other/tree/release/2026-09" },
+      target: { value: "https://github.com/workpal-ai/other/tree/release/2026-09" },
     });
 
     const urlInput = screen.getByLabelText(/paste a github url/i) as HTMLInputElement;
     const refInput = screen.getByLabelText(/starting branch/i) as HTMLInputElement;
-    expect(urlInput.value).toBe("https://github.com/multica-ai/other");
+    expect(urlInput.value).toBe("https://github.com/workpal-ai/other");
     expect(refInput.value).toBe("release/2026-09");
 
-    fireEvent.click(screen.getByRole("button", { name: /^add multica-ai\//i }));
+    fireEvent.click(screen.getByRole("button", { name: /^add workpal-ai\//i }));
     await waitFor(() => expect(createMock).toHaveBeenCalledTimes(1));
     expect(createMock.mock.calls[0]?.[0]).toEqual({
       resource_type: "github_repo",
       resource_ref: {
-        url: "https://github.com/multica-ai/other",
+        url: "https://github.com/workpal-ai/other",
         ref: "release/2026-09",
       },
     });
@@ -329,22 +329,22 @@ describe("ProjectResourcesSection — github_repo checkout ref", () => {
     const refInput = () => screen.getByLabelText(/starting branch/i) as HTMLInputElement;
 
     fireEvent.change(urlInput(), {
-      target: { value: "https://github.com/multica-ai/one/tree/release/2026-09" },
+      target: { value: "https://github.com/workpal-ai/one/tree/release/2026-09" },
     });
-    expect(urlInput().value).toBe("https://github.com/multica-ai/one");
+    expect(urlInput().value).toBe("https://github.com/workpal-ai/one");
     expect(refInput().value).toBe("release/2026-09");
 
     fireEvent.change(urlInput(), {
-      target: { value: "https://github.com/multica-ai/two/tree/main" },
+      target: { value: "https://github.com/workpal-ai/two/tree/main" },
     });
-    expect(urlInput().value).toBe("https://github.com/multica-ai/two");
+    expect(urlInput().value).toBe("https://github.com/workpal-ai/two");
     expect(refInput().value).toBe("main");
 
-    fireEvent.click(screen.getByRole("button", { name: /^add multica-ai\//i }));
+    fireEvent.click(screen.getByRole("button", { name: /^add workpal-ai\//i }));
     await waitFor(() => expect(createMock).toHaveBeenCalledTimes(1));
     expect(createMock.mock.calls[0]?.[0]).toEqual({
       resource_type: "github_repo",
-      resource_ref: { url: "https://github.com/multica-ai/two", ref: "main" },
+      resource_ref: { url: "https://github.com/workpal-ai/two", ref: "main" },
     });
   });
 
@@ -353,14 +353,14 @@ describe("ProjectResourcesSection — github_repo checkout ref", () => {
 
     fireEvent.click(screen.getByRole("button", { name: /add repository/i }));
     fireEvent.change(screen.getByLabelText(/paste a github url/i), {
-      target: { value: "https://github.com/multica-ai/other" },
+      target: { value: "https://github.com/workpal-ai/other" },
     });
-    fireEvent.click(screen.getByRole("button", { name: /^add multica-ai\//i }));
+    fireEvent.click(screen.getByRole("button", { name: /^add workpal-ai\//i }));
 
     await waitFor(() => expect(createMock).toHaveBeenCalledTimes(1));
     expect(createMock.mock.calls[0]?.[0]).toEqual({
       resource_type: "github_repo",
-      resource_ref: { url: "https://github.com/multica-ai/other" },
+      resource_ref: { url: "https://github.com/workpal-ai/other" },
     });
   });
 
@@ -369,13 +369,13 @@ describe("ProjectResourcesSection — github_repo checkout ref", () => {
 
     fireEvent.click(screen.getByRole("button", { name: /add repository/i }));
     fireEvent.change(screen.getByLabelText(/paste a github url/i), {
-      target: { value: "https://github.com/multica-ai/other" },
+      target: { value: "https://github.com/workpal-ai/other" },
     });
     fireEvent.change(screen.getByLabelText(/starting branch/i), {
       target: { value: "bad ref" },
     });
 
-    const add = screen.getByRole("button", { name: /^add multica-ai\//i }) as HTMLButtonElement;
+    const add = screen.getByRole("button", { name: /^add workpal-ai\//i }) as HTMLButtonElement;
     expect(add.disabled).toBe(true);
     fireEvent.click(add);
     expect(createMock).not.toHaveBeenCalled();
@@ -391,7 +391,7 @@ describe("ProjectResourcesSection — github_repo checkout ref", () => {
     expect(within(pinnedRow).queryByText("release/2026-09")).toBeTruthy();
     expect(within(pinnedRow).queryByText(/default branch/i)).toBeNull();
 
-    const plainRow = screen.getAllByText("multica-ai/api")[0]?.closest(".group") as HTMLElement;
+    const plainRow = screen.getAllByText("workpal-ai/api")[0]?.closest(".group") as HTMLElement;
     expect(within(plainRow).queryByText(/default branch/i)).toBeTruthy();
     expect(within(plainRow).queryByText("release/2026-09")).toBeNull();
   });
@@ -453,8 +453,8 @@ describe("ProjectResourcesSection — github_repo checkout ref", () => {
       target: { value: "daemon" },
     });
 
-    expect(screen.getByRole("button", { name: /multica-ai\/daemon/i })).toBeTruthy();
-    expect(screen.queryByRole("button", { name: /multica-ai\/api/i })).toBeNull();
+    expect(screen.getByRole("button", { name: /workpal-ai\/daemon/i })).toBeTruthy();
+    expect(screen.queryByRole("button", { name: /workpal-ai\/api/i })).toBeNull();
     expect(screen.queryByLabelText(/starting branch/i)).toBeNull();
   });
 

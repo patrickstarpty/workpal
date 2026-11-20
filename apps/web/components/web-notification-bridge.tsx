@@ -4,8 +4,8 @@ import { useEffect, useRef } from "react";
 import {
   registerSystemNotificationClickHandler,
   systemNotificationPath,
-} from "@multica/core/platform";
-import { useNavigation } from "@multica/views/navigation";
+} from "@workpal/core/platform";
+import { useNavigation } from "@workpal/views/navigation";
 
 /**
  * Routes browser notification clicks to the source workspace's inbox or chat.

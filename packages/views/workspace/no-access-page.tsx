@@ -2,12 +2,12 @@
 
 import { useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { Button } from "@multica/ui/components/ui/button";
+import { Button } from "@workpal/ui/components/ui/button";
 import {
   resolvePostAuthDestination,
   useHasOnboarded,
-} from "@multica/core/paths";
-import { workspaceListOptions } from "@multica/core/workspace/queries";
+} from "@workpal/core/paths";
+import { workspaceListOptions } from "@workpal/core/workspace/queries";
 import { useNavigation } from "../navigation";
 import { useLogout } from "../auth";
 import { DragStrip } from "../platform";

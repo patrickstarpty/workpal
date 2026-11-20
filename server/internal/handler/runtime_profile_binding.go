@@ -5,8 +5,8 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/multica-ai/multica/server/internal/service"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
+	"workpal.local/workpal/server/internal/service"
+	db "workpal.local/workpal/server/pkg/db/generated"
 )
 
 var (

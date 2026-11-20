@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
-import { configStore } from "@multica/core/config";
-import type { WebhookEventFilter } from "@multica/core/types";
+import { configStore } from "@workpal/core/config";
+import type { WebhookEventFilter } from "@workpal/core/types";
 import { screen, fireEvent, within } from "@testing-library/react";
 import { renderWithI18n } from "../../test/i18n";
 import { WebhookEventFilterSection } from "./webhook-event-filter-section";
@@ -184,11 +184,11 @@ describe("WebhookEventFilterSection", () => {
   it.each([
     [
       "zh-Hans",
-      `https://multica.ai/docs/zh/autopilots#${encodeURIComponent("事件过滤")}`,
+      `https://workpal.invalid/docs/zh/autopilots#${encodeURIComponent("事件过滤")}`,
     ],
     [
       "zh-Hant",
-      `https://multica.ai/docs/zh-Hant/autopilots#${encodeURIComponent("事件過濾")}`,
+      `https://workpal.invalid/docs/zh-Hant/autopilots#${encodeURIComponent("事件過濾")}`,
     ],
   ] as const)("links the %s event filter docs section", (locale, href) => {
     renderEditor({}, locale);

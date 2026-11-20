@@ -22,9 +22,9 @@ import {
   UserRound,
   X,
   type IconComponent,
-} from "@multica/ui/icons";
-import { Button } from "@multica/ui/components/ui/button";
-import { FILTER_NONE_VALUE } from "@multica/core/issues/stores/filter-tree";
+} from "@workpal/ui/icons";
+import { Button } from "@workpal/ui/components/ui/button";
+import { FILTER_NONE_VALUE } from "@workpal/core/issues/stores/filter-tree";
 import {
   activeInboxFilterKeys,
   inboxActorKeyParts,
@@ -34,10 +34,10 @@ import {
   type InboxFilters,
   type InboxReceivedFilter,
   type InboxTypeGroup,
-} from "@multica/core/inbox/filter-store";
-import { useActorName } from "@multica/core/workspace/hooks";
-import { projectListOptions } from "@multica/core/projects/queries";
-import { labelListOptions } from "@multica/core/labels/queries";
+} from "@workpal/core/inbox/filter-store";
+import { useActorName } from "@workpal/core/workspace/hooks";
+import { projectListOptions } from "@workpal/core/projects/queries";
+import { labelListOptions } from "@workpal/core/labels/queries";
 import { ChipSpan, summarize, type FilterChip } from "../../issues/components/filter-chips-bar";
 import { DUE_DATE_LABEL_KEY } from "../../issues/components/filter-field-options";
 import { useStatusOptions } from "../../issues/utils/status-options";

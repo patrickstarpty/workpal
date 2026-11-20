@@ -1,14 +1,14 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { useCurrentMember } from "@multica/core/permissions";
-import { larkInstallationsOptions } from "@multica/core/lark";
-import { slackInstallationsOptions } from "@multica/core/slack";
-import { dingtalkInstallationsOptions } from "@multica/core/dingtalk";
-import { wecomInstallationsOptions } from "@multica/core/wecom";
-import { weixinInstallationsOptions } from "@multica/core/weixin";
-import { telegramInstallationsOptions } from "@multica/core/telegram";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { useCurrentMember } from "@workpal/core/permissions";
+import { larkInstallationsOptions } from "@workpal/core/lark";
+import { slackInstallationsOptions } from "@workpal/core/slack";
+import { dingtalkInstallationsOptions } from "@workpal/core/dingtalk";
+import { wecomInstallationsOptions } from "@workpal/core/wecom";
+import { weixinInstallationsOptions } from "@workpal/core/weixin";
+import { telegramInstallationsOptions } from "@workpal/core/telegram";
 import type {
   Agent,
   LarkInstallation,
@@ -17,7 +17,7 @@ import type {
   WecomInstallation,
   TelegramInstallation,
   WeixinInstallation,
-} from "@multica/core/types";
+} from "@workpal/core/types";
 import type { ChannelIntegration } from "./settings-navigation";
 
 export type ChannelConnection =

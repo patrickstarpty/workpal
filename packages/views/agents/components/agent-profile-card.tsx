@@ -1,23 +1,23 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import type { Agent, AgentRuntime } from "@multica/core/types";
-import { useAgentPresenceDetail } from "@multica/core/agents";
-import { useWorkspaceId } from "@multica/core/hooks";
+import type { Agent, AgentRuntime } from "@workpal/core/types";
+import { useAgentPresenceDetail } from "@workpal/core/agents";
+import { useWorkspaceId } from "@workpal/core/hooks";
 import {
   deriveRuntimeHealth,
   runtimeDisplayLabel,
   type RuntimeHealth,
-} from "@multica/core/runtimes";
-import { agentListOptions, memberListOptions } from "@multica/core/workspace/queries";
-import { resolvePublicFileUrl } from "@multica/core/workspace/avatar-url";
-import { runtimeListOptions } from "@multica/core/runtimes/queries";
-import { useWorkspacePaths } from "@multica/core/paths";
-import { ActorAvatar as ActorAvatarBase } from "@multica/ui/components/common/actor-avatar";
-import { Settings2 } from "@multica/ui/icons";
-import { Button } from "@multica/ui/components/ui/button";
-import { Skeleton } from "@multica/ui/components/ui/skeleton";
-import { TruncatedTooltip } from "@multica/ui/components/common/truncated-tooltip";
+} from "@workpal/core/runtimes";
+import { agentListOptions, memberListOptions } from "@workpal/core/workspace/queries";
+import { resolvePublicFileUrl } from "@workpal/core/workspace/avatar-url";
+import { runtimeListOptions } from "@workpal/core/runtimes/queries";
+import { useWorkspacePaths } from "@workpal/core/paths";
+import { ActorAvatar as ActorAvatarBase } from "@workpal/ui/components/common/actor-avatar";
+import { Settings2 } from "@workpal/ui/icons";
+import { Button } from "@workpal/ui/components/ui/button";
+import { Skeleton } from "@workpal/ui/components/ui/skeleton";
+import { TruncatedTooltip } from "@workpal/ui/components/common/truncated-tooltip";
 import { AppLink } from "../../navigation";
 import { HealthIcon } from "../../runtimes/components/shared";
 import { availabilityConfig } from "../presence";

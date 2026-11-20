@@ -2,9 +2,9 @@
 
 import { useCallback } from "react";
 import { toast } from "sonner";
-import { dispatchReasonCode } from "@multica/core/api";
-import { useRunQuickAction } from "@multica/core/quick-actions";
-import type { QuickAction } from "@multica/core/types";
+import { dispatchReasonCode } from "@workpal/core/api";
+import { useRunQuickAction } from "@workpal/core/quick-actions";
+import type { QuickAction } from "@workpal/core/types";
 import { outcomeMessage } from "../components/quick-actions-section";
 import { useT } from "../../i18n";
 

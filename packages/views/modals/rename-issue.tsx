@@ -8,11 +8,11 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "@multica/ui/components/ui/dialog";
-import { Button } from "@multica/ui/components/ui/button";
-import { Input } from "@multica/ui/components/ui/input";
-import { errorCode } from "@multica/core/api";
-import { useUpdateIssue } from "@multica/core/issues/mutations";
+} from "@workpal/ui/components/ui/dialog";
+import { Button } from "@workpal/ui/components/ui/button";
+import { Input } from "@workpal/ui/components/ui/input";
+import { errorCode } from "@workpal/core/api";
+import { useUpdateIssue } from "@workpal/core/issues/mutations";
 import { useT } from "../i18n";
 
 /**

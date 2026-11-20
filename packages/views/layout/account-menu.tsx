@@ -14,15 +14,15 @@ import {
   Settings2,
   Sun,
   User,
-} from "@multica/ui/icons";
-import { useAppearanceStore } from "@multica/core/appearance";
-import { useAuthStore } from "@multica/core/auth";
-import { useWorkspacePaths } from "@multica/core/paths";
-import type { SupportedLocale } from "@multica/core/i18n";
-import { resolvePublicFileUrl } from "@multica/core/workspace/avatar-url";
-import { ActorAvatar } from "@multica/ui/components/common/actor-avatar";
-import { useTheme } from "@multica/ui/components/common/theme-provider";
-import { TooltipHint } from "@multica/ui/components/common/tooltip-hint";
+} from "@workpal/ui/icons";
+import { useAppearanceStore } from "@workpal/core/appearance";
+import { useAuthStore } from "@workpal/core/auth";
+import { useWorkspacePaths } from "@workpal/core/paths";
+import type { SupportedLocale } from "@workpal/core/i18n";
+import { resolvePublicFileUrl } from "@workpal/core/workspace/avatar-url";
+import { ActorAvatar } from "@workpal/ui/components/common/actor-avatar";
+import { useTheme } from "@workpal/ui/components/common/theme-provider";
+import { TooltipHint } from "@workpal/ui/components/common/tooltip-hint";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -36,8 +36,8 @@ import {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
-} from "@multica/ui/components/ui/dropdown-menu";
-import { cn } from "@multica/ui/lib/utils";
+} from "@workpal/ui/components/ui/dropdown-menu";
+import { cn } from "@workpal/ui/lib/utils";
 import { useLogout } from "../auth";
 import { docsLocalePrefix } from "../common/docs-locale";
 import { useLanguageSwitch } from "../common/use-language-switch";

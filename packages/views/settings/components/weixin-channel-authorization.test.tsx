@@ -4,10 +4,10 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 import { cleanup, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { I18nProvider } from "@multica/core/i18n/react";
+import { I18nProvider } from "@workpal/core/i18n/react";
 import enCommon from "../../locales/en/common.json";
 import enSettings from "../../locales/en/settings.json";
-import { ApiError } from "@multica/core/api/client";
+import { ApiError } from "@workpal/core/api/client";
 
 const mocks = vi.hoisted(() => ({
   begin: vi.fn(),
@@ -15,7 +15,7 @@ const mocks = vi.hoisted(() => ({
   cancel: vi.fn(),
   toast: vi.fn(),
 }));
-vi.mock("@multica/core/api", () => ({
+vi.mock("@workpal/core/api", () => ({
   api: {
     beginWeixinLogin: mocks.begin,
     pollWeixinLogin: mocks.poll,

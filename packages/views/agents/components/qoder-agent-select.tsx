@@ -2,16 +2,16 @@
 
 import { useId } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { qoderAgentsOptions } from "@multica/core/runtimes/qoder";
-import { Button } from "@multica/ui/components/ui/button";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { qoderAgentsOptions } from "@workpal/core/runtimes/qoder";
+import { Button } from "@workpal/ui/components/ui/button";
 import {
   Select,
   SelectTrigger,
   SelectValue,
   SelectContent,
   SelectItem,
-} from "@multica/ui/components/ui/select";
+} from "@workpal/ui/components/ui/select";
 import { useT } from "../../i18n";
 
 export function QoderAgentSelect({

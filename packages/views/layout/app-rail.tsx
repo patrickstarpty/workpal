@@ -13,39 +13,39 @@ import {
 import { restrictToFirstScrollableAncestor, restrictToVerticalAxis } from "@dnd-kit/modifiers";
 import { SortableContext, arrayMove, useSortable, verticalListSortingStrategy } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import { CheckCheck, ExternalLink, Link2, RotateCcw, Settings, Users, type IconComponent } from "@multica/ui/icons";
+import { CheckCheck, ExternalLink, Link2, RotateCcw, Settings, Users, type IconComponent } from "@workpal/ui/icons";
 import { toast } from "sonner";
-import { useChatStore } from "@multica/core/chat";
-import { useMarkAllChatSessionsRead } from "@multica/core/chat/mutations";
-import { chatSessionsOptions } from "@multica/core/chat/queries";
-import { countUnreadChatMessages } from "@multica/core/chat/unread";
+import { useChatStore } from "@workpal/core/chat";
+import { useMarkAllChatSessionsRead } from "@workpal/core/chat/mutations";
+import { chatSessionsOptions } from "@workpal/core/chat/queries";
+import { countUnreadChatMessages } from "@workpal/core/chat/unread";
 import {
   deduplicateInboxItems,
   inboxListOptions,
   useInboxUnreadCount,
-} from "@multica/core/inbox/queries";
-import { useMarkAllInboxRead } from "@multica/core/inbox/mutations";
-import { useInboxSnoozeWake } from "@multica/core/inbox/use-snooze-wake";
-import { useSidebarTreeStore } from "@multica/core/issues/stores/sidebar-tree-store";
-import { resolveRailOrder, useRailOrderStore } from "@multica/core/navigation";
+} from "@workpal/core/inbox/queries";
+import { useMarkAllInboxRead } from "@workpal/core/inbox/mutations";
+import { useInboxSnoozeWake } from "@workpal/core/inbox/use-snooze-wake";
+import { useSidebarTreeStore } from "@workpal/core/issues/stores/sidebar-tree-store";
+import { resolveRailOrder, useRailOrderStore } from "@workpal/core/navigation";
 import {
   RAIL_SPACES,
   useCurrentWorkspace,
   useWorkspacePaths,
   type AppSpaceId,
   type RailSpaceId,
-} from "@multica/core/paths";
-import { TooltipHint } from "@multica/ui/components/common/tooltip-hint";
-import { TruncatedTooltip } from "@multica/ui/components/common/truncated-tooltip";
-import { CappedNumberFlow } from "@multica/ui/components/ui/number-flow";
-import { cn } from "@multica/ui/lib/utils";
-import { copyText } from "@multica/ui/lib/clipboard";
+} from "@workpal/core/paths";
+import { TooltipHint } from "@workpal/ui/components/common/tooltip-hint";
+import { TruncatedTooltip } from "@workpal/ui/components/common/truncated-tooltip";
+import { CappedNumberFlow } from "@workpal/ui/components/ui/number-flow";
+import { cn } from "@workpal/ui/lib/utils";
+import { copyText } from "@workpal/ui/lib/clipboard";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
-} from "@multica/ui/components/ui/dropdown-menu";
+} from "@workpal/ui/components/ui/dropdown-menu";
 import { useAppForeground } from "../common/use-app-foreground";
 import { useRowMenu } from "../common/point-menu";
 import { useT } from "../i18n";

@@ -6,7 +6,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/multica-ai/multica/server/internal/delegatedrecoverybackfill"
+	"workpal.local/workpal/server/internal/delegatedrecoverybackfill"
 )
 
 func cursorFor(createdAt time.Time, id string) *delegatedrecoverybackfill.Cursor {

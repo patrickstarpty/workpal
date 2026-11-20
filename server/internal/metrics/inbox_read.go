@@ -21,12 +21,12 @@ type InboxReadMetrics struct {
 
 func NewInboxReadMetrics() *InboxReadMetrics {
 	return &InboxReadMetrics{
-		active:        prometheus.NewGauge(prometheus.GaugeOpts{Name: "multica_inbox_read_active", Help: "Inbox read transactions holding execution capacity."}),
-		queued:        prometheus.NewGauge(prometheus.GaugeOpts{Name: "multica_inbox_read_queued", Help: "Inbox reads waiting for execution capacity."}),
-		rejected:      prometheus.NewCounterVec(prometheus.CounterOpts{Name: "multica_inbox_read_rejected_total", Help: "Inbox reads rejected before acquiring a connection."}, []string{"operation", "reason"}),
-		duration:      prometheus.NewHistogramVec(prometheus.HistogramOpts{Name: "multica_inbox_read_duration_seconds", Help: "Inbox transaction duration including acquisition and cleanup, excluding admission wait.", Buckets: []float64{.01, .025, .05, .1, .25, .5, 1, 2, 3, 5}}, []string{"operation"}),
-		queryDuration: prometheus.NewHistogramVec(prometheus.HistogramOpts{Name: "multica_inbox_read_query_duration_seconds", Help: "Inbox SQL execution and row scanning duration.", Buckets: []float64{.01, .025, .05, .1, .25, .5, 1, 2, 3, 5}}, []string{"operation"}),
-		timeouts:      prometheus.NewCounterVec(prometheus.CounterOpts{Name: "multica_inbox_read_timeouts_total", Help: "Inbox database or connection acquisition timeouts."}, []string{"operation"}),
+		active:        prometheus.NewGauge(prometheus.GaugeOpts{Name: "workpal_inbox_read_active", Help: "Inbox read transactions holding execution capacity."}),
+		queued:        prometheus.NewGauge(prometheus.GaugeOpts{Name: "workpal_inbox_read_queued", Help: "Inbox reads waiting for execution capacity."}),
+		rejected:      prometheus.NewCounterVec(prometheus.CounterOpts{Name: "workpal_inbox_read_rejected_total", Help: "Inbox reads rejected before acquiring a connection."}, []string{"operation", "reason"}),
+		duration:      prometheus.NewHistogramVec(prometheus.HistogramOpts{Name: "workpal_inbox_read_duration_seconds", Help: "Inbox transaction duration including acquisition and cleanup, excluding admission wait.", Buckets: []float64{.01, .025, .05, .1, .25, .5, 1, 2, 3, 5}}, []string{"operation"}),
+		queryDuration: prometheus.NewHistogramVec(prometheus.HistogramOpts{Name: "workpal_inbox_read_query_duration_seconds", Help: "Inbox SQL execution and row scanning duration.", Buckets: []float64{.01, .025, .05, .1, .25, .5, 1, 2, 3, 5}}, []string{"operation"}),
+		timeouts:      prometheus.NewCounterVec(prometheus.CounterOpts{Name: "workpal_inbox_read_timeouts_total", Help: "Inbox database or connection acquisition timeouts."}, []string{"operation"}),
 	}
 }
 

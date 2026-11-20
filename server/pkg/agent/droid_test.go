@@ -102,7 +102,7 @@ func isolateDroidSystemPromptFiles(t *testing.T) {
 		t.Setenv(key, dir)
 	}
 	t.Cleanup(func() {
-		files, err := filepath.Glob(filepath.Join(dir, "multica-droid-system-*"))
+		files, err := filepath.Glob(filepath.Join(dir, "workpal-droid-system-*"))
 		if err != nil || len(files) != 0 {
 			t.Errorf("system prompt files remain after execution: %v (error: %v)", files, err)
 		}
@@ -405,7 +405,7 @@ func TestDroidMissingExecutableAndUnsupportedMCP(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if _, err := b.Execute(context.Background(), "task", ExecOptions{}); err == nil || !strings.Contains(err.Error(), "MULTICA_DROID_PATH") {
+	if _, err := b.Execute(context.Background(), "task", ExecOptions{}); err == nil || !strings.Contains(err.Error(), "WORKPAL_DROID_PATH") {
 		t.Fatalf("missing executable error = %v", err)
 	}
 	if _, err := b.Execute(context.Background(), "task", ExecOptions{McpConfig: json.RawMessage(`{"mcpServers":{"example":{"command":"example"}}}`)}); err == nil || !strings.Contains(err.Error(), "managed MCP") {

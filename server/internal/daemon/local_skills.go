@@ -12,9 +12,9 @@ import (
 	"strings"
 	"unicode/utf8"
 
-	"github.com/multica-ai/multica/server/internal/daemon/execenv"
-	"github.com/multica-ai/multica/server/internal/skill"
-	"github.com/multica-ai/multica/server/pkg/agent"
+	"workpal.local/workpal/server/internal/daemon/execenv"
+	"workpal.local/workpal/server/internal/skill"
+	"workpal.local/workpal/server/pkg/agent"
 )
 
 const (

@@ -108,7 +108,7 @@ export const useVoiceSettingsStore = create<VoiceSettingsState>()(
         set((state) => ({ vocabulary: state.vocabulary.filter((w) => w !== word) })),
     }),
     {
-      name: "multica_voice_input",
+      name: "workpal_voice_input",
       storage: createJSONStorage(() => defaultStorage),
       version: 1,
       partialize: (state): VoiceSettings => pickSettings(state),

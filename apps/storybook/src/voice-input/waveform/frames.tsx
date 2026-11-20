@@ -1,9 +1,9 @@
 import type { ComponentType } from "react";
-import { ArrowUp, Check, X } from "@multica/ui/icons";
-import { Button } from "@multica/ui/components/ui/button";
-import { IconButton } from "@multica/ui/components/common/icon-button";
-import { Kbd } from "@multica/ui/components/ui/kbd";
-import { cn } from "@multica/ui/lib/utils";
+import { ArrowUp, Check, X } from "@workpal/ui/icons";
+import { Button } from "@workpal/ui/components/ui/button";
+import { IconButton } from "@workpal/ui/components/common/icon-button";
+import { Kbd } from "@workpal/ui/components/ui/kbd";
+import { cn } from "@workpal/ui/lib/utils";
 import { ComposerSurface } from "../chat-frame";
 import { useStoryEnv } from "../env";
 import { RecDot, formatElapsed } from "../primitives";
@@ -63,7 +63,7 @@ export function StripFrame({ Wave, className }: { Wave: ComponentType<WaveProps>
 export function HudFrame({ Wave }: { Wave: ComponentType<WaveProps> }) {
   const { copy } = useStoryEnv();
   return (
-    <div className="flex h-10 w-fit items-center gap-2.5 whitespace-nowrap rounded-full bg-multica-ink pl-3.5 pr-4 text-multica-paper shadow-[var(--floating-shadow)]">
+    <div className="flex h-10 w-fit items-center gap-2.5 whitespace-nowrap rounded-full bg-workpal-ink pl-3.5 pr-4 text-workpal-paper shadow-[var(--floating-shadow)]">
       <RecDot className="bg-[#ff5a52]" />
       <div className="w-[86px]">
         <Wave density="hud" />

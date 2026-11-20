@@ -1,12 +1,12 @@
 ---
 title: 使用 CLI
-description: 安装并登录 Multica CLI，在终端中管理工作区、任务、智能体和运行时。
+description: 安装并登录 Workpal CLI，在终端中管理工作区、任务、智能体和运行时。
 ---
 
 import { Callout } from "fumadocs-ui/components/callout";
 import { Tab, Tabs } from "fumadocs-ui/components/tabs";
 
-Multica CLI 既负责连接本机运行时，也可以在终端中管理工作区、任务、智能体和自动化。这里介绍常用路径；当前版本支持的参数始终以命令自身的 `--help` 为准。
+Workpal CLI 既负责连接本机运行时，也可以在终端中管理工作区、任务、智能体和自动化。这里介绍常用路径；当前版本支持的参数始终以命令自身的 `--help` 为准。
 
 ## 安装
 
@@ -14,13 +14,13 @@ Multica CLI 既负责连接本机运行时，也可以在终端中管理工作�
 <Tab value="macOS / Linux">
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/multica-ai/multica/main/scripts/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/workpal-ai/workpal/main/scripts/install.sh | bash
 ```
 
 安装了 Homebrew 时也可以运行：
 
 ```bash
-brew install multica-ai/tap/multica
+brew install workpal-ai/tap/workpal
 ```
 
 </Tab>
@@ -29,7 +29,7 @@ brew install multica-ai/tap/multica
 在 PowerShell 中运行：
 
 ```powershell
-irm https://raw.githubusercontent.com/multica-ai/multica/main/scripts/install.ps1 | iex
+irm https://raw.githubusercontent.com/workpal-ai/workpal/main/scripts/install.ps1 | iex
 ```
 
 </Tab>
@@ -38,25 +38,25 @@ irm https://raw.githubusercontent.com/multica-ai/multica/main/scripts/install.ps
 确认安装成功：
 
 ```bash
-multica version
+workpal version
 ```
 
 ## 第一次连接
 
 按连接的服务选择：
 
-<Tabs items={["Multica Cloud", "自托管实例"]}>
-<Tab value="Multica Cloud">
+<Tabs items={["Workpal Cloud", "自托管实例"]}>
+<Tab value="Workpal Cloud">
 
 ```bash
-multica setup
+workpal setup
 ```
 
 </Tab>
 <Tab value="自托管实例">
 
 ```bash
-multica setup self-host \
+workpal setup self-host \
   --server-url https://api.example.com \
   --app-url https://app.example.com
 ```
@@ -67,14 +67,14 @@ multica setup self-host \
 `setup` 会保存服务地址、打开浏览器完成登录，并启动守护进程。完成后检查：
 
 ```bash
-multica auth status
-multica daemon status
+workpal auth status
+workpal daemon status
 ```
 
-如果只需要重新登录，不想覆盖其他配置，运行 `multica login`。没有浏览器的环境可以先在 Web 设置中创建个人访问令牌，再输入：
+如果只需要重新登录，不想覆盖其他配置，运行 `workpal login`。没有浏览器的环境可以先在 Web 设置中创建个人访问令牌，再输入：
 
 ```bash
-multica login --token
+workpal login --token
 ```
 
 命令会在终端中提示粘贴令牌，避免把完整值留在 shell history 中。
@@ -84,64 +84,64 @@ multica login --token
 列出并切换默认工作区：
 
 ```bash
-multica workspace list
-multica workspace switch <slug>
+workpal workspace list
+workpal workspace switch <slug>
 ```
 
-之后的命令会使用这个工作区。单次命令可以通过 `--workspace-id` 临时覆盖，也可以设置 `MULTICA_WORKSPACE_ID`。
+之后的命令会使用这个工作区。单次命令可以通过 `--workspace-id` 临时覆盖，也可以设置 `WORKPAL_WORKSPACE_ID`。
 
 邀请成员：
 
 ```bash
-multica workspace member invite teammate@example.com
-multica workspace member invite admin@example.com --role admin
+workpal workspace member invite teammate@example.com
+workpal workspace member invite admin@example.com --role admin
 ```
 
 ## 常用任务操作
 
 ```bash
 # 查看和搜索
-multica issue list
-multica issue get MUL-123
-multica issue search "登录失败"
+workpal issue list
+workpal issue get MUL-123
+workpal issue search "登录失败"
 
 # 创建和修改
-multica issue create --title "修复登录失败"
-multica issue status MUL-123 in_progress
-multica issue assign MUL-123 --to "Backend Agent"
+workpal issue create --title "修复登录失败"
+workpal issue status MUL-123 in_progress
+workpal issue assign MUL-123 --to "Backend Agent"
 
 # 评论和执行记录
-multica issue comment list MUL-123
-multica issue comment add MUL-123 --content "请先检查回归测试"
-multica issue comment update <comment-id> --expected-revision 2 --content "请检查回归测试和发布说明"
-multica issue runs MUL-123
+workpal issue comment list MUL-123
+workpal issue comment add MUL-123 --content "请先检查回归测试"
+workpal issue comment update <comment-id> --expected-revision 2 --content "请检查回归测试和发布说明"
+workpal issue runs MUL-123
 ```
 
 长描述或评论从 stdin 读取，避免处理换行和引号：
 
 ```bash
-multica issue create --title "升级说明" --description-stdin < notes.md
-multica issue comment add MUL-123 --content-stdin < review.md
-multica issue comment update <comment-id> --expected-revision 2 --content-file revised-review.md
+workpal issue create --title "升级说明" --description-stdin < notes.md
+workpal issue comment add MUL-123 --content-stdin < review.md
+workpal issue comment update <comment-id> --expected-revision 2 --content-file revised-review.md
 ```
 
 查看某次运行的消息、停止运行或重试：
 
 ```bash
-multica issue run-messages <task-id> --issue MUL-123
-multica issue cancel-task <task-id> --issue MUL-123
-multica issue rerun-task <run-id> --issue MUL-123
-multica issue rerun-task <run-id> --issue MUL-123 --fresh
+workpal issue run-messages <task-id> --issue MUL-123
+workpal issue cancel-task <task-id> --issue MUL-123
+workpal issue rerun-task <run-id> --issue MUL-123
+workpal issue rerun-task <run-id> --issue MUL-123 --fresh
 ```
 
 把评论插话到仍在进行中的运行，而不是排队一个后续运行（仅限支持插话的运行；你的评论能启动哪个智能体，就能向它插话）：
 
 ```bash
-multica issue comment add MUL-123 --content-file note.md --steer <task-id>
-multica issue comment add MUL-123 --content-file note.md --steer-active
+workpal issue comment add MUL-123 --content-file note.md --steer <task-id>
+workpal issue comment add MUL-123 --content-file note.md --steer-active
 ```
 
-同一项目、同一父任务下已有标题相同（不区分大小写，忽略多余空格）且未关闭的任务时，`issue create` 会拒绝创建并给出那个任务。确实要再建一个，加 `--allow-duplicate`；要把一个任务标为另一个的重复，用 `multica issue status MUL-124 cancelled --duplicate-of MUL-123`。
+同一项目、同一父任务下已有标题相同（不区分大小写，忽略多余空格）且未关闭的任务时，`issue create` 会拒绝创建并给出那个任务。确实要再建一个，加 `--allow-duplicate`；要把一个任务标为另一个的重复，用 `workpal issue status MUL-124 cancelled --duplicate-of MUL-123`。
 
 一个任务要依次提交多个 PR 时，用 `issue create --title "..." --pr-auto-complete off` 或 `issue update <id> --pr-auto-complete off`，让这个任务在 PR 合并后保持原状态。用 `--pr-auto-complete on` 恢复工作区规则，从下一次 PR 事件起生效。`issue pull-requests <id>` 会显示任务开关、工作区开关、目标状态和判断结果，没有关联 PR 时也会显示。支持该字段的服务端会在创建事务内保存开关；旧服务端会补调一次 PUT，失败时 CLI 会给出已创建的任务 ID 和重试用的 update 命令，请勿重复创建。
 
@@ -150,9 +150,9 @@ multica issue comment add MUL-123 --content-file note.md --steer-active
 把相同修改应用到多条任务，也可用 `--ids-stdin` 从标准输入逐行读取任务编号或 UUID：
 
 ```bash
-multica issue batch update MUL-123 MUL-124 --priority high --add-label QA --dry-run
-multica issue batch update MUL-123 MUL-124 --priority high --add-label QA
-multica issue batch update MUL-123 MUL-124 --property "Severity=High" --unset-property Reviewer
+workpal issue batch update MUL-123 MUL-124 --priority high --add-label QA --dry-run
+workpal issue batch update MUL-123 MUL-124 --priority high --add-label QA
+workpal issue batch update MUL-123 MUL-124 --property "Severity=High" --unset-property Reviewer
 ```
 
 `--add-label` 和 `--remove-label` 不影响其他标签；`--clear-labels` 会先清空标签，再执行添加。`--property` 设置属性，`--unset-property` 清空属性；多值属性会整体替换。也支持状态、负责人、项目、日期、父任务和阶段。加上 `--no-start` 可应用修改而不启动智能体运行。
@@ -164,8 +164,8 @@ multica issue batch update MUL-123 MUL-124 --property "Severity=High" --unset-pr
 删除一条任务，或传入多个任务编号、完整 UUID 批量删除：
 
 ```bash
-multica issue delete MUL-123
-multica issue delete MUL-123 MUL-124 --yes --output json
+workpal issue delete MUL-123
+workpal issue delete MUL-123 MUL-124 --yes --output json
 ```
 
 删除无法撤销：评论和附件会被移除，进行中的运行会被取消，关联的自动化运行会被标记为失败，指向这些任务的重复标记会被清除；子任务会解除关联，但不会被删除。确认前会先解析所有 ID；遇到不存在或无权访问的任务时，命令会中止，不执行删除。
@@ -175,7 +175,7 @@ multica issue delete MUL-123 MUL-124 --yes --output json
 `--dry-run` 会检查拟删除的任务和删除权限，不写入数据，也不要求确认：
 
 ```bash
-multica issue delete MUL-123 MUL-124 --dry-run --output json
+workpal issue delete MUL-123 MUL-124 --dry-run --output json
 ```
 
 ### 时间线
@@ -183,9 +183,9 @@ multica issue delete MUL-123 MUL-124 --dry-run --output json
 `issue get` 给出任务现在的状态；`issue timeline` 按时间顺序列出状态、优先级、负责人、标题、日期的改动和运行结果，并混排评论，用来回答"什么时候进入 in_review""卡在当前状态多久了"：
 
 ```bash
-multica issue timeline MUL-123 --action status_changed
-multica issue timeline MUL-123 --activity-only --output json
-multica issue timeline MUL-123 --since 2026-08-19T00:00:00Z
+workpal issue timeline MUL-123 --action status_changed
+workpal issue timeline MUL-123 --activity-only --output json
+workpal issue timeline MUL-123 --since 2026-08-19T00:00:00Z
 ```
 
 `--activity-only` 去掉评论，保留全部活动记录；`--action` 只返回指定的动作，可重复，并隐含 `--activity-only`。服务器读取的历史有上限，被截断时 stderr 会打印警告，这时不要据此推算停留时长。
@@ -195,8 +195,8 @@ multica issue timeline MUL-123 --since 2026-08-19T00:00:00Z
 评论多的任务，智能体逐条读取很费 token。先扫一遍线程，再展开需要的那一个：
 
 ```bash
-multica issue comment list MUL-123 --roots-only --summary --output json --compact
-multica issue comment list MUL-123 --thread <comment-id> --tail 5 --output json --compact
+workpal issue comment list MUL-123 --roots-only --summary --output json --compact
+workpal issue comment list MUL-123 --thread <comment-id> --tail 5 --output json --compact
 ```
 
 - `--roots-only` 只返回顶层评论，每条附带回复数和最近活动时间。
@@ -205,12 +205,12 @@ multica issue comment list MUL-123 --thread <comment-id> --tail 5 --output json 
 - `--recent N` 返回最近活跃的 N 个线程，每个线程带上全部回复，回复多时输出可能很长。
 - 已解决的线程默认折叠成首条评论和结论，需要原文时加 `--full`。
 
-列表也可以只取需要的字段：`multica issue list --output json --fields id,identifier,title,status`。筛选在 CLI 本地完成，减少的是输出和上下文，不是请求量。
+列表也可以只取需要的字段：`workpal issue list --output json --fields id,identifier,title,status`。筛选在 CLI 本地完成，减少的是输出和上下文，不是请求量。
 
 按最近更新时间列出任务时，同时传入 RFC3339 时间戳 `--updated-since` 和 `--updated-until`。服务端返回当前 `updated_at` 大于等于 `since`、小于 `until` 的任务，即 `[since, until)`。这两个参数可与现有筛选、排序和分页参数组合使用。翻页时保持时间范围一致；分页不提供快照，并发更新可能改变结果集。
 
 ```bash
-multica issue list --updated-since 2026-11-05T10:00:00Z \
+workpal issue list --updated-since 2026-11-05T10:00:00Z \
   --updated-until 2026-11-05T10:01:00Z \
   --sort created_at --direction asc --limit 100 --offset 0 \
   --output json --fields id,workspace_id,project_id,title
@@ -221,15 +221,15 @@ multica issue list --updated-since 2026-11-05T10:00:00Z \
 唤醒让智能体在某个事件发生、某个条件成立或到点时开始一次普通运行。完整规则见[任务唤醒](/issue-wakeups)。
 
 ```bash
-multica issue wakeup events
-multica issue wakeup create MUL-123 --agent-id <agent-id> \
+workpal issue wakeup events
+workpal issue wakeup create MUL-123 --agent-id <agent-id> \
   --event comment.created --filter-actor-type member --filter-actor-id <user-id> \
   --instruction "对方回复后，按回复内容更新报价单"
-multica issue wakeup create MUL-123 --agent-id <agent-id> \
+workpal issue wakeup create MUL-123 --agent-id <agent-id> \
   --kind every --every 1h --expires-in 72h \
   --instruction "检查供应商是否回信"
-multica issue wakeup list MUL-123
-multica issue wakeup runs MUL-123 <wakeup-id>
+workpal issue wakeup list MUL-123
+workpal issue wakeup runs MUL-123 <wakeup-id>
 ```
 
 在终端里以成员身份创建时需要 `--agent-id`；智能体在自己的运行中创建时默认唤醒它自己。
@@ -237,23 +237,23 @@ multica issue wakeup runs MUL-123 <wakeup-id>
 ## 智能体和 skill
 
 ```bash
-multica agent list
-multica agent get <agent-id>
-multica agent create --help
-multica agent update <agent-id> --help
+workpal agent list
+workpal agent get <agent-id>
+workpal agent create --help
+workpal agent update <agent-id> --help
 
-multica skill list
-multica skill get <skill-id>
-multica skill import --url <skill-url>
-multica agent skills add <agent-id> --skill-ids <skill-id>
+workpal skill list
+workpal skill get <skill-id>
+workpal skill import --url <skill-url>
+workpal agent skills add <agent-id> --skill-ids <skill-id>
 ```
 
 导入时遇到同名 skill，默认会停止且不修改现有内容。按意图选择：
 
 ```bash
-multica skill import --url <skill-url> --on-conflict overwrite
-multica skill import --url <skill-url> --on-conflict rename
-multica skill import --url <skill-url> --on-conflict skip
+workpal skill import --url <skill-url> --on-conflict overwrite
+workpal skill import --url <skill-url> --on-conflict rename
+workpal skill import --url <skill-url> --on-conflict skip
 ```
 
 `overwrite` 只允许 skill 的创建者使用，并保留原来的 ID 与智能体绑定关系。
@@ -261,13 +261,13 @@ multica skill import --url <skill-url> --on-conflict skip
 环境变量和 MCP 配置常带有 token。命令行里直接写值会留在 shell 历史和 `ps` 输出中，用 `-file` 或 `-stdin` 形式传入：
 
 ```bash
-multica agent create --name "运营助手" --runtime-id <runtime-id> \
+workpal agent create --name "运营助手" --runtime-id <runtime-id> \
   --custom-env-file ./agent-env.json \
   --mcp-config-file ./mcp.json \
   --custom-args '["--max-turns", "40"]'
 
-multica agent env set <agent-id> --custom-env-stdin < agent-env.json
-multica agent update <agent-id> --mcp-config-file ./mcp.json
+workpal agent env set <agent-id> --custom-env-stdin < agent-env.json
+workpal agent update <agent-id> --mcp-config-file ./mcp.json
 ```
 
 - `--custom-env` 系列只在 `agent create` 中可用。之后修改用 `agent env set`，它整体替换原有变量，值写成 `****` 的键保留原值。
@@ -278,57 +278,57 @@ multica agent update <agent-id> --mcp-config-file ./mcp.json
 ## 守护进程和运行时
 
 ```bash
-multica daemon start
-multica daemon stop
-multica daemon restart
-multica daemon status --output json
-multica daemon logs --follow
+workpal daemon start
+workpal daemon stop
+workpal daemon restart
+workpal daemon status --output json
+workpal daemon logs --follow
 
-multica runtime list
-multica runtime rename <runtime-id> "Office Mac"
-multica runtime usage <runtime-id>
-multica runtime activity <runtime-id>
+workpal runtime list
+workpal runtime rename <runtime-id> "Office Mac"
+workpal runtime usage <runtime-id>
+workpal runtime activity <runtime-id>
 ```
 
 ```bash
-multica daemon autostart enable
-multica runtime usage <runtime-id> --days 30
-multica runtime update <runtime-id> --target-version <version> --wait
-multica runtime profile create --display-name "内部 Claude 封装" \
+workpal daemon autostart enable
+workpal runtime usage <runtime-id> --days 30
+workpal runtime update <runtime-id> --target-version <version> --wait
+workpal runtime profile create --display-name "内部 Claude 封装" \
   --command-name ccms --runtime-type claude
 ```
 
-`daemon autostart` 为当前 profile 登记开机自启，平台差异见[开机自启](/daemon-runtimes#autostart)。`runtime usage` 默认统计 90 天，`--days` 最多 365。`runtime update` 让那台电脑上的守护进程把 CLI 更新到指定版本，`--wait` 等待更新结束；更新失败、更新超时或等待本身超时时，命令会以非零状态退出。`runtime profile create` 用 `--runtime-type` 指定兼容的工具（旧的 `--protocol-family` 仍可用）；固定参数目前只能在网页端填写。 `runtime profile create` 默认绑定当前机器；使用 `--daemon-id <id>` 可以选择另一台已登记的本地机器。 旧配置可以通过 `multica runtime profile update <profile-id> --daemon-id <id>` 绑定机器。
+`daemon autostart` 为当前 profile 登记开机自启，平台差异见[开机自启](/daemon-runtimes#autostart)。`runtime usage` 默认统计 90 天，`--days` 最多 365。`runtime update` 让那台电脑上的守护进程把 CLI 更新到指定版本，`--wait` 等待更新结束；更新失败、更新超时或等待本身超时时，命令会以非零状态退出。`runtime profile create` 用 `--runtime-type` 指定兼容的工具（旧的 `--protocol-family` 仍可用）；固定参数目前只能在网页端填写。 `runtime profile create` 默认绑定当前机器；使用 `--daemon-id <id>` 可以选择另一台已登记的本地机器。 旧配置可以通过 `workpal runtime profile update <profile-id> --daemon-id <id>` 绑定机器。
 
-删除仍绑定活跃智能体的运行时时，命令默认拒绝。`multica runtime delete <id> --cascade` 会解绑这些智能体、保留其配置与历史记录，并取消它们的活动运行。
+删除仍绑定活跃智能体的运行时时，命令默认拒绝。`workpal runtime delete <id> --cascade` 会解绑这些智能体、保留其配置与历史记录，并取消它们的活动运行。
 
 运行机制和自定义 profile 见[守护进程与运行时](/daemon-runtimes)。
 
 ## 环境 [#environments]
 
 ```bash
-multica env start web
-multica env start web --wait=false
-multica env list
-multica env stop web
+workpal env start web
+workpal env start web --wait=false
+workpal env list
+workpal env stop web
 ```
 
-`multica env`（完整写法 `multica environment`）启动仓库在 `.multica/environments.toml` 里声明的环境。环境由守护进程托管，运行结束后继续运行，显示在任务侧栏里，TTL 到期时停止。`start` 会等环境能响应后打印它的 URL。这些命令使用当前运行的凭据，所以只能在智能体的运行中使用；在你自己的电脑上请用任务侧栏。文件格式和示例见[环境](/environments)。
+`workpal env`（完整写法 `workpal environment`）启动仓库在 `.workpal/environments.toml` 里声明的环境。环境由守护进程托管，运行结束后继续运行，显示在任务侧栏里，TTL 到期时停止。`start` 会等环境能响应后打印它的 URL。这些命令使用当前运行的凭据，所以只能在智能体的运行中使用；在你自己的电脑上请用任务侧栏。文件格式和示例见[环境](/environments)。
 
 ## 项目、工作区和自动化
 
 ```bash
-multica project create --title "618 活动" --lead "李雷" \
+workpal project create --title "618 活动" --lead "李雷" \
   --repo https://github.com/acme/campaign-site
-multica project resource add <project-id> --type github_repo \
+workpal project resource add <project-id> --type github_repo \
   --url https://github.com/acme/brand-assets --default-branch-hint main
 
-multica workspace create --name "运营部" --slug ops --issue-prefix OPS
-multica workspace update --context-stdin < team-context.md
+workpal workspace create --name "运营部" --slug ops --issue-prefix OPS
+workpal workspace update --context-stdin < team-context.md
 
-multica autopilot create --title "每周销售周报" --agent "运营助手" \
+workpal autopilot create --title "每周销售周报" --agent "运营助手" \
   --mode create_issue --issue-title-template "销售周报 {{date}}"
-multica autopilot trigger-add <autopilot-id> --cron "0 9 * * 1" --timezone Asia/Shanghai
+workpal autopilot trigger-add <autopilot-id> --cron "0 9 * * 1" --timezone Asia/Shanghai
 ```
 
 - `--lead` 接受成员或智能体的名称。`--default-branch-hint` 只告诉智能体仓库的默认分支，不会切换分支。
@@ -363,10 +363,10 @@ multica autopilot trigger-add <autopilot-id> --cron "0 9 * * 1" --timezone Asia/
 这个示例接收 PR 评审提交和所有 push 事件。省略 `actions` 或使用空的 actions 数组，表示接收该事件的所有 action。
 
 ```bash
-multica autopilot trigger-add <autopilot-id> --kind webhook --event-filters-file filters.json
-multica autopilot trigger-list <autopilot-id> --full-id
-multica autopilot trigger-update <autopilot-id> <trigger-id> --event-filters-file filters.json
-multica autopilot get <autopilot-id> --output json
+workpal autopilot trigger-add <autopilot-id> --kind webhook --event-filters-file filters.json
+workpal autopilot trigger-list <autopilot-id> --full-id
+workpal autopilot trigger-update <autopilot-id> <trigger-id> --event-filters-file filters.json
+workpal autopilot get <autopilot-id> --output json
 ```
 
 更新时，文件内容会替换整组过滤条件。不传这两个过滤参数就保留原值，修改标签或启停触发器时也一样。`autopilot get` 在顶层 `triggers` 数组中返回过滤条件。
@@ -374,7 +374,7 @@ multica autopilot get <autopilot-id> --output json
 要删除全部过滤条件、恢复接收所有事件，使用仅限更新的参数：
 
 ```bash
-multica autopilot trigger-update <autopilot-id> <trigger-id> --clear-event-filters
+workpal autopilot trigger-update <autopilot-id> <trigger-id> --clear-event-filters
 ```
 
 `--clear-event-filters` 与 `--event-filters-file` 不能同时使用。顶层为 `null` 或空数组、包含未知字段、无效 JSON 或空白事件/action 名称的文件会被拒绝。这些参数只适用于 Webhook 触发器；创建时不传过滤文件则接收所有事件。事件匹配方式见[自动化](/autopilots#事件过滤)。
@@ -402,7 +402,7 @@ multica autopilot trigger-update <autopilot-id> <trigger-id> --clear-event-filte
 | `config` | 查看或修改当前 CLI profile 的本地配置 |
 | `update`、`version` | 更新 CLI 或查看版本 |
 
-`multica chat` 读取的是**智能体当前正在处理的外部聊天会话**，主要供聊天集成中的智能体使用，不能用来浏览任意工作区对话。
+`workpal chat` 读取的是**智能体当前正在处理的外部聊天会话**，主要供聊天集成中的智能体使用，不能用来浏览任意工作区对话。
 
 ## ID 和输出格式
 
@@ -413,38 +413,38 @@ multica autopilot trigger-update <autopilot-id> <trigger-id> --clear-event-filte
 许多命令支持结构化输出：
 
 ```bash
-multica issue list --output json
-multica agent list --output json
+workpal issue list --output json
+workpal agent list --output json
 ```
 
-脚本使用 JSON 输出，不解析面向终端的表格。各命令支持的输出格式和分页参数以 `multica <command> --help` 为准。
+脚本使用 JSON 输出，不解析面向终端的表格。各命令支持的输出格式和分页参数以 `workpal <command> --help` 为准。
 
 ## Profile 与配置
 
-默认配置保存在 `~/.multica/config.json`。使用 `--profile <name>` 可以隔离另一套服务地址、令牌、默认工作区和守护进程状态：
+默认配置保存在 `~/.workpal/config.json`。使用 `--profile <name>` 可以隔离另一套服务地址、令牌、默认工作区和守护进程状态：
 
 ```bash
-multica setup self-host --profile staging \
+workpal setup self-host --profile staging \
   --server-url https://api.staging.example.com \
   --app-url https://app.staging.example.com
 
-multica issue list --profile staging
+workpal issue list --profile staging
 ```
 
-命名 profile 保存在 `~/.multica/profiles/<name>/config.json`。查看当前值：
+命名 profile 保存在 `~/.workpal/profiles/<name>/config.json`。查看当前值：
 
 ```bash
-multica config show
-multica config show --profile staging
+workpal config show
+workpal config show --profile staging
 ```
 
 <Callout type="warning">
-CLI 配置文件包含可代表你访问 Multica 的令牌。不要提交到仓库、上传到日志或与他人共享。
+CLI 配置文件包含可代表你访问 Workpal 的令牌。不要提交到仓库、上传到日志或与他人共享。
 </Callout>
 
 ## 命令参考
 
-下表覆盖当前全部顶层命令，按 CLI 自身的分组排列。所有命令都接受全局 flag `--server-url`、`--workspace-id`、`--profile` 和 `--debug`。`--output` 是逐命令注册的 flag，默认格式因命令而异：`list` 类默认表格，`get`、`create` 类多默认 JSON。完整参数以 `multica <command> --help` 为准。
+下表覆盖当前全部顶层命令，按 CLI 自身的分组排列。所有命令都接受全局 flag `--server-url`、`--workspace-id`、`--profile` 和 `--debug`。`--output` 是逐命令注册的 flag，默认格式因命令而异：`list` 类默认表格，`get`、`create` 类多默认 JSON。完整参数以 `workpal <command> --help` 为准。
 
 ### 任务附件
 
@@ -507,7 +507,7 @@ CLI 配置文件包含可代表你访问 Multica 的令牌。不要提交到仓�
 | | `runs <id>` | 查看运行历史 | |
 | | `trigger-add/trigger-update/trigger-delete/trigger-rotate-url` | 管理定时和 webhook 触发器 | `trigger-add`：`--kind`（`schedule` 或 `webhook`）、`--cron`、`--timezone`（默认 UTC）、`--label` |
 | `workspace` | `list/get/create/update/switch` | 管理工作区；`switch` 设置当前 profile 的默认工作区 | `create`：`--name`、`--slug`（均必填）、`--issue-prefix`、`--description`、`--context` / `--context-stdin`；`update` 可改除 slug 外的同类字段 |
-| | `mcp list/add/update/remove` | 管理工作区的 MCP 服务库 | 写操作需要 owner/admin。这里添加的服务不会分配给任何 agent——用 `multica agent mcp add` 分配给某个 agent。`list` 只列出名称与 transport；存储的条目是只写的，任何角色都读不回。`--server-config-file` / `--server-config-stdin` 避免 token 进入 shell 历史 |
+| | `mcp list/add/update/remove` | 管理工作区的 MCP 服务库 | 写操作需要 owner/admin。这里添加的服务不会分配给任何 agent——用 `workpal agent mcp add` 分配给某个 agent。`list` 只列出名称与 transport；存储的条目是只写的，任何角色都读不回。`--server-config-file` / `--server-config-stdin` 避免 token 进入 shell 历史 |
 | | `member list/invite <email>` | 查看成员、发出邀请 | `invite`：`--role`（member 或 admin，默认 member） |
 | `repo` | `list/add/remove/checkout` | 管理工作区仓库并检出到本机 | `--url`（可重复）；`checkout`：`--ref` |
 | `skill` | `list/get/create/update/delete` | 管理 skill | |
@@ -525,7 +525,7 @@ CLI 配置文件包含可代表你访问 Multica 的令牌。不要提交到仓�
 
 | 命令 | 子命令 | 用途 | 关键 flag |
 | --- | --- | --- | --- |
-| `daemon` | `start` | 启动本机守护进程 | `--foreground`、`--device-name`、`--runtime-name`、`--workspaces-root`、`--poll-interval`、`--heartbeat-interval`、`--agent-timeout`（`0` 表示不设上限）、`--max-concurrent-tasks`、`--no-auto-update`；均有对应的 `MULTICA_*` 环境变量 |
+| `daemon` | `start` | 启动本机守护进程 | `--foreground`、`--device-name`、`--runtime-name`、`--workspaces-root`、`--poll-interval`、`--heartbeat-interval`、`--agent-timeout`（`0` 表示不设上限）、`--max-concurrent-tasks`、`--no-auto-update`；均有对应的 `WORKPAL_*` 环境变量 |
 | | `stop` / `status` / `restart` | 停止、查看状态、重启（`restart` 与 `start` 同一套 flag） | |
 | | `logs` | 查看守护进程日志 | `--follow`、`--lines` |
 | | `disk-usage` | 查看本机磁盘占用 | `--by-workspace`、`--by-task`、`--top` |
@@ -548,15 +548,15 @@ CLI 配置文件包含可代表你访问 Multica 的令牌。不要提交到仓�
 | `update` | — | 更新 CLI 到最新版本 | |
 | `version` | — | 查看版本信息 | `--output`（`text` 或 `json`） |
 
-## 在其他编码智能体里操作 Multica
+## 在其他编码智能体里操作 Workpal
 
-如果你的工作大多发生在 Codex、Claude Code 或 Cursor 里，可以直接在那里操作 Multica，不必切回终端。[Multica CLI skill](https://github.com/multica-ai/multica-cli) 会教这些智能体安全地使用本页的命令：读任务和评论线程时少耗 token、通过文件写评论，以及正确处理 mention、状态变更和指派带来的副作用。
+如果你的工作大多发生在 Codex、Claude Code 或 Cursor 里，可以直接在那里操作 Workpal，不必切回终端。Workpal CLI skill 会教这些智能体安全地使用本页的命令：读任务和评论线程时少耗 token、通过文件写评论，以及正确处理 mention、状态变更和指派带来的副作用。
 
 它完全通过你已认证的 CLI 运行，本身不授予任何权限，权限仍然只来自你的登录、所选 profile 和工作区。要求 CLI 版本不低于 v0.4.26。该仓库的 README 说明了 Claude Code 插件市场、Codex skill 安装器、Cursor 以及其他任何加载 Markdown 指令的工具的安装方式。
 
 ## 接下来
 
-- [Multica CLI skill](https://github.com/multica-ai/multica-cli) — 在 Codex、Claude Code 或 Cursor 里操作 Multica。
+- Workpal CLI skill — 在 Codex、Claude Code 或 Cursor 里操作 Workpal。
 - [认证与令牌](/auth-tokens) — PAT 的创建、续期和吊销。
 - [故障排查](/troubleshooting) — 命令报错和运行不开始的排查路径。
 - [创建和配置智能体](/agents-create) — `agent create` 各字段的完整语义。

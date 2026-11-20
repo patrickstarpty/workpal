@@ -3,9 +3,9 @@
 import * as React from "react"
 import { Dialog as DialogPrimitive } from "@base-ui/react/dialog"
 
-import { cn } from "@multica/ui/lib/utils"
-import { Button } from "@multica/ui/components/ui/button"
-import { XIcon } from "@multica/ui/icons"
+import { cn } from "@workpal/ui/lib/utils"
+import { Button } from "@workpal/ui/components/ui/button"
+import { XIcon } from "@workpal/ui/icons"
 
 function Dialog({ onOpenChange, modal = true, ...props }: DialogPrimitive.Root.Props) {
   const handleOpenChange: NonNullable<DialogPrimitive.Root.Props["onOpenChange"]> = (open, details) => {

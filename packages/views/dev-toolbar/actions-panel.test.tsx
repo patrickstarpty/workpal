@@ -2,10 +2,10 @@ import type { ReactNode } from "react";
 import { act, fireEvent, render, screen, within } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { useDevActionsStore } from "@multica/core/dev-actions";
-import { useDevPromptStore, useSessionPromptStore } from "@multica/core/session-prompt";
-import { configureShortcutPlatform } from "@multica/core/shortcuts";
-import type { User } from "@multica/core/types";
+import { useDevActionsStore } from "@workpal/core/dev-actions";
+import { useDevPromptStore, useSessionPromptStore } from "@workpal/core/session-prompt";
+import { configureShortcutPlatform } from "@workpal/core/shortcuts";
+import type { User } from "@workpal/core/types";
 import { WHATS_NEW_RELEASES } from "../whats-new/releases";
 import { deckCards } from "../whats-new/whats-new-deck";
 import { ActionsPanel, DevActions } from "./actions-panel";
@@ -24,8 +24,8 @@ const stores = vi.hoisted(() => {
   return { auth, chat };
 });
 
-vi.mock("@multica/core/auth", () => ({ useAuthStore: stores.auth }));
-vi.mock("@multica/core/chat", () => ({ useChatStore: stores.chat }));
+vi.mock("@workpal/core/auth", () => ({ useAuthStore: stores.auth }));
+vi.mock("@workpal/core/chat", () => ({ useChatStore: stores.chat }));
 
 function signIn(user: Partial<User> = {}) {
   stores.auth.setState({

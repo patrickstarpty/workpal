@@ -5,8 +5,8 @@ import (
 	"net/http"
 	"testing"
 
-	"github.com/multica-ai/multica/server/internal/projectaccess"
-	"github.com/multica-ai/multica/server/internal/testutil"
+	"workpal.local/workpal/server/internal/projectaccess"
+	"workpal.local/workpal/server/internal/testutil"
 )
 
 // MUL-9284: the workspace owner can list every private project and let

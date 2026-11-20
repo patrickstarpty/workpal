@@ -1,8 +1,8 @@
 import type { ReactNode } from "react";
-import { AlertCircle, MicOff, RotateCcw } from "@multica/ui/icons";
-import { Button } from "@multica/ui/components/ui/button";
-import { Kbd } from "@multica/ui/components/ui/kbd";
-import { cn } from "@multica/ui/lib/utils";
+import { AlertCircle, MicOff, RotateCcw } from "@workpal/ui/icons";
+import { Button } from "@workpal/ui/components/ui/button";
+import { Kbd } from "@workpal/ui/components/ui/kbd";
+import { cn } from "@workpal/ui/lib/utils";
 import type { Copy } from "./copy";
 import type { VoiceError } from "./voice-session";
 import "./voice.css";

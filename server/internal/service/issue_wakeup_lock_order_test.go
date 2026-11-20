@@ -3,7 +3,7 @@ package service
 import (
 	"context"
 	"github.com/jackc/pgx/v5"
-	"github.com/multica-ai/multica/server/internal/util"
+	"workpal.local/workpal/server/internal/util"
 	"strings"
 	"testing"
 	"time"

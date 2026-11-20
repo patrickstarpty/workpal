@@ -1,8 +1,8 @@
 import { useRef, useState } from "react";
-import { Lock, Mic, Square } from "@multica/ui/icons";
-import { IconButton } from "@multica/ui/components/common/icon-button";
-import { Kbd, KbdGroup } from "@multica/ui/components/ui/kbd";
-import { cn } from "@multica/ui/lib/utils";
+import { Lock, Mic, Square } from "@workpal/ui/icons";
+import { IconButton } from "@workpal/ui/components/common/icon-button";
+import { Kbd, KbdGroup } from "@workpal/ui/components/ui/kbd";
+import { cn } from "@workpal/ui/lib/utils";
 import { CHAT_SCRIPT } from "../copy";
 import { useStoryEnv } from "../env";
 import { AddButton, AgentPicker, ChatWindowFrame, ComposerSurface, DraftEditor, SendButton, useDemoChat } from "../chat-frame";
@@ -40,14 +40,14 @@ export function TalkHud({
   return (
     <div className="pointer-events-none absolute inset-x-0 bottom-[132px] z-20 flex flex-col items-center gap-2">
       {tail && phase === "listening" && (
-        <div className="max-w-[80%] truncate rounded-md bg-multica-ink/80 px-2.5 py-1 text-caption text-multica-paper/80 backdrop-blur animate-in fade-in">
+        <div className="max-w-[80%] truncate rounded-md bg-workpal-ink/80 px-2.5 py-1 text-caption text-workpal-paper/80 backdrop-blur animate-in fade-in">
           {(session.finalText + session.interimText).length > 46 ? "…" : ""}
           {tail}
         </div>
       )}
       <div
         className={cn(
-          "pointer-events-auto flex h-10 items-center gap-2.5 rounded-full bg-multica-ink pl-3.5 text-multica-paper shadow-[var(--floating-shadow)] transition-[width] animate-in fade-in zoom-in-95 slide-in-from-bottom-2",
+          "pointer-events-auto flex h-10 items-center gap-2.5 rounded-full bg-workpal-ink pl-3.5 text-workpal-paper shadow-[var(--floating-shadow)] transition-[width] animate-in fade-in zoom-in-95 slide-in-from-bottom-2",
           locked && phase === "listening" ? "pr-1.5" : "pr-4",
         )}
       >
@@ -74,7 +74,7 @@ export function TalkHud({
                 aria-label="Stop"
                 onClick={onStop}
                 // eslint-disable-next-line no-restricted-syntax -- the HUD's stop control mirrors the composer send/stop button
-                className="flex size-7 cursor-pointer items-center justify-center rounded-full bg-multica-paper text-multica-ink transition-transform active:scale-95"
+                className="flex size-7 cursor-pointer items-center justify-center rounded-full bg-workpal-paper text-workpal-ink transition-transform active:scale-95"
               >
                 <Square className="size-3 fill-current" />
               </button>

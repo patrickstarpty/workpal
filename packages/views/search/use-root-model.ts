@@ -1,10 +1,10 @@
 "use client";
 
 import { useMemo } from "react";
-import type { CommandBarContext } from "@multica/core/command-bar";
-import { WORKSPACE_PAGES, type WorkspacePageKey } from "@multica/core/paths";
-import { partitionAggregatedSearchResults } from "@multica/core/search/cancelled-rank";
-import type { SearchIssueResult, SearchProjectResult } from "@multica/core/types";
+import type { CommandBarContext } from "@workpal/core/command-bar";
+import { WORKSPACE_PAGES, type WorkspacePageKey } from "@workpal/core/paths";
+import { partitionAggregatedSearchResults } from "@workpal/core/search/cancelled-rank";
+import type { SearchIssueResult, SearchProjectResult } from "@workpal/core/types";
 import { useT } from "../i18n";
 import { useAgentCommandGroup, useAutopilotCommandGroup, useChatCommandGroup, useInboxCommandGroup, useProjectCommandGroup } from "./commands/context-commands";
 import { useGlobalCommands } from "./commands/global-commands";

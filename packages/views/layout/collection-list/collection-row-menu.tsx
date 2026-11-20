@@ -1,14 +1,14 @@
 "use client";
 
 import { useId, useState, type ReactNode } from "react";
-import { MoreHorizontal } from "@multica/ui/icons";
-import { cn } from "@multica/ui/lib/utils";
-import { DeferredTooltip } from "@multica/ui/components/common/deferred-tooltip";
+import { MoreHorizontal } from "@workpal/ui/icons";
+import { cn } from "@workpal/ui/lib/utils";
+import { DeferredTooltip } from "@workpal/ui/components/common/deferred-tooltip";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuTrigger,
-} from "@multica/ui/components/ui/dropdown-menu";
+} from "@workpal/ui/components/ui/dropdown-menu";
 import { useT } from "../../i18n";
 import { CLOSED_ROW_MENU, nextRowMenuState, usePointAnchor } from "../../common/point-menu";
 import { useCollectionRowMenuState, type RowMenuState } from "./row-context";

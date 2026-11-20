@@ -20,7 +20,7 @@ import type { Theme } from "./themes";
  * an update.
  */
 
-export const INSTALLED_THEMES_STORAGE_KEY = "multica_installed_themes";
+export const INSTALLED_THEMES_STORAGE_KEY = "workpal_installed_themes";
 export const MAX_INSTALLED_THEMES = 20;
 
 /** One entry of the themes folder, read and checked. */

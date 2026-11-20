@@ -1,10 +1,10 @@
 "use client";
 
 import { useRef, type ReactNode } from "react";
-import { cn } from "@multica/ui/lib/utils";
-import { useScrollFade } from "@multica/ui/hooks/use-scroll-fade";
-import { DragStrip } from "@multica/views/platform";
-import type { OnboardingStep } from "@multica/core/onboarding";
+import { cn } from "@workpal/ui/lib/utils";
+import { useScrollFade } from "@workpal/ui/hooks/use-scroll-fade";
+import { DragStrip } from "@workpal/views/platform";
+import type { OnboardingStep } from "@workpal/core/onboarding";
 import { StepProgressBar, StepSidebar } from "./step-sidebar";
 
 /**

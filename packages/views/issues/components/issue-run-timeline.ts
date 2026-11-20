@@ -1,4 +1,4 @@
-import type { AgentTask } from "@multica/core/types";
+import type { AgentTask } from "@workpal/core/types";
 import {
   estimateCost,
   estimateCostBreakdown,

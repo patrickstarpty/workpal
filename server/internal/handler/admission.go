@@ -3,7 +3,7 @@ package handler
 import (
 	"net/http"
 
-	"github.com/multica-ai/multica/server/internal/dispatch"
+	"workpal.local/workpal/server/internal/dispatch"
 )
 
 // Unified execution-admission contract (MUL-4525).

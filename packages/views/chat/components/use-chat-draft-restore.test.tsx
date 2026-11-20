@@ -48,25 +48,25 @@ const h = vi.hoisted(() => {
   };
 });
 
-vi.mock("@multica/core/api", () => ({
+vi.mock("@workpal/core/api", () => ({
   api: {
     listChatDraftRestores: h.listChatDraftRestores,
     consumeChatDraftRestore: h.consumeChatDraftRestore,
   },
 }));
-vi.mock("@multica/core/hooks", () => ({ useWorkspaceId: () => "ws-1" }));
-vi.mock("@multica/core/chat", () => ({
+vi.mock("@workpal/core/hooks", () => ({ useWorkspaceId: () => "ws-1" }));
+vi.mock("@workpal/core/chat", () => ({
   useChatStore: Object.assign(
     (sel: (s: typeof h.store) => unknown) => sel(h.store),
     { getState: () => h.store },
   ),
 }));
-vi.mock("@multica/core/realtime", () => ({ removeChatMessageFromCaches: vi.fn() }));
-vi.mock("@multica/core/logger", () => ({
+vi.mock("@workpal/core/realtime", () => ({ removeChatMessageFromCaches: vi.fn() }));
+vi.mock("@workpal/core/logger", () => ({
   createLogger: () => ({ info: vi.fn(), warn: vi.fn(), error: vi.fn(), debug: vi.fn() }),
 }));
 
-import type { Attachment } from "@multica/core/types";
+import type { Attachment } from "@workpal/core/types";
 import { useChatDraftRestore } from "./use-chat-draft-restore";
 
 // Every assertion here drives a real react-query fetch and mutation, so each

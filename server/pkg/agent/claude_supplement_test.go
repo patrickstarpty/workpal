@@ -26,7 +26,7 @@ func (s *claudeSupplementSession) handleHook(msg claudeSDKMessage, w io.Writer) 
 
 func claudeSupplementHook(event, agentID string) claudeSDKMessage {
 	request, _ := json.Marshal(map[string]any{
-		"subtype": "hook_callback", "callback_id": "multica-supplement-" + event,
+		"subtype": "hook_callback", "callback_id": "workpal-supplement-" + event,
 		"input": map[string]any{"hook_event_name": event, "agent_id": agentID},
 	})
 	return claudeSDKMessage{Type: "control_request", RequestID: "hook-request", Request: request}
@@ -416,7 +416,7 @@ func runFakeClaudePendingControlResult() {
 	if _, err := reader.ReadBytes('\n'); err != nil {
 		os.Exit(21)
 	}
-	fmt.Println(`{"type":"control_response","response":{"subtype":"success","request_id":"multica-supplement-initialize"}}`)
+	fmt.Println(`{"type":"control_response","response":{"subtype":"success","request_id":"workpal-supplement-initialize"}}`)
 	if _, err := reader.ReadBytes('\n'); err != nil {
 		os.Exit(22)
 	}

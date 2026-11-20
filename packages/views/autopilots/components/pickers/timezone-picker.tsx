@@ -1,8 +1,8 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { Check, ChevronDown, Globe } from "@multica/ui/icons";
-import { cn } from "@multica/ui/lib/utils";
+import { Check, ChevronDown, Globe } from "@workpal/ui/icons";
+import { cn } from "@workpal/ui/lib/utils";
 import {
   PropertyPicker,
   PickerEmpty,

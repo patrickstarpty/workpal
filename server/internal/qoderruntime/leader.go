@@ -8,12 +8,12 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/multica-ai/multica/server/internal/util"
+	"workpal.local/workpal/server/internal/util"
 )
 
 // squadLeader holds what a squad-leader run needs to deliver its turn. The
 // Squad Operating Protocol tells a leader to delegate with a mention comment
-// and record its evaluation through the Multica CLI; a managed Qoder session
+// and record its evaluation through the Workpal CLI; a managed Qoder session
 // has no CLI, so the agent states both in its final message and the bridge
 // posts them with the task credential. Only a comment created through the
 // comments API triggers the mentioned members.
@@ -32,7 +32,7 @@ type squadLeader struct {
 }
 
 const leaderBridgeNote = `
-Squad leader on Qoder Cloud Agents: this session has no Multica CLI. Never run ` + "`multica`" + ` commands; the bridge performs the delegation comment and the evaluation record from the Squad Operating Protocol for you. Do not change code or open pull requests. End your turn with a final message in exactly this form:
+Squad leader on Qoder Cloud Agents: this session has no Workpal CLI. Never run ` + "`workpal`" + ` commands; the bridge performs the delegation comment and the evaluation record from the Squad Operating Protocol for you. Do not change code or open pull requests. End your turn with a final message in exactly this form:
 
 OUTCOME: action | no_action | failed
 REASON: <one short line>
@@ -80,7 +80,7 @@ func (b *Bridge) deliverLeader(ctx context.Context, r *run) error {
 		}
 		return fail("the bridge restarted before the squad leader turn was delivered; trigger the leader again")
 	}
-	taskAPI := *b.multica
+	taskAPI := *b.workpal
 	taskAPI.token = l.token
 	outcome, reason, comment := parseLeaderOutput(r.Output)
 	if outcome == "action" && comment == "" && r.Failure == "" {
@@ -119,7 +119,7 @@ func (b *Bridge) deliverLeader(ctx context.Context, r *run) error {
 				return err
 			}
 			if definitelyRejected(err) {
-				r.Failure = "Multica rejected the squad leader comment: " + err.Error()
+				r.Failure = "Workpal rejected the squad leader comment: " + err.Error()
 			} else {
 				r.Failure = uncertainComment
 			}
@@ -176,7 +176,7 @@ func (b *Bridge) deliverLeader(ctx context.Context, r *run) error {
 		}
 		failure := "squad evaluation delivery could not be confirmed; check the issue activity before retrying and do not repeat the delegation"
 		if definitelyRejected(err) {
-			failure = "Multica rejected the squad leader evaluation: " + err.Error()
+			failure = "Workpal rejected the squad leader evaluation: " + err.Error()
 		}
 		if r.Failure != "" {
 			failure = r.Failure + "; " + failure

@@ -3,16 +3,16 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { act, cleanup, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { I18nProvider } from "@multica/core/i18n/react";
-import { configStore } from "@multica/core/config";
+import { I18nProvider } from "@workpal/core/i18n/react";
+import { configStore } from "@workpal/core/config";
 import {
   DEFAULT_APPEARANCE,
   parseTheme,
   useAppearanceStore,
   useInstalledThemesStore,
   writeZip,
-} from "@multica/core/appearance";
-import type { StoreTheme } from "@multica/core/api/schemas";
+} from "@workpal/core/appearance";
+import type { StoreTheme } from "@workpal/core/api/schemas";
 import enCommon from "../../locales/en/common.json";
 import enSettings from "../../locales/en/settings.json";
 
@@ -21,8 +21,8 @@ const api = vi.hoisted(() => ({
   getStoreThemePackage: vi.fn(),
   getStoreThemeScreenshot: vi.fn(),
 }));
-vi.mock("@multica/core/api", () => ({ api }));
-vi.mock("@multica/ui/components/common/theme-provider", () => ({
+vi.mock("@workpal/core/api", () => ({ api }));
+vi.mock("@workpal/ui/components/common/theme-provider", () => ({
   useTheme: () => ({ theme: "light", resolvedTheme: "light", setTheme: vi.fn() }),
 }));
 
@@ -56,7 +56,7 @@ const listed = (id: string, name: string, version = "1.0.0", downloads = 0): Sto
   id,
   name,
   author: "Someone",
-  repo: `someone/multica-theme-${id}`,
+  repo: `someone/workpal-theme-${id}`,
   description: `${name} theme`,
   modes: ["light", "dark"],
   version,

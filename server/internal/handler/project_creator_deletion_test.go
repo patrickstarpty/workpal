@@ -5,7 +5,7 @@ import (
 	"testing"
 
 	"github.com/google/uuid"
-	"github.com/multica-ai/multica/server/internal/testutil"
+	"workpal.local/workpal/server/internal/testutil"
 )
 
 func TestProjectCreatorDeletionPreservesWorkspaceData(t *testing.T) {
@@ -27,7 +27,7 @@ func TestProjectCreatorDeletionPreservesWorkspaceData(t *testing.T) {
 				"title": "Shared project", "lead_type": "member", "lead_id": other,
 				"resources": []map[string]any{{
 					"resource_type": "github_repo",
-					"resource_ref":  map[string]any{"url": "https://github.com/multica-ai/multica"},
+					"resource_ref":  map[string]any{"url": "https://workpal.local/workpal"},
 				}},
 			})
 			req.Header.Set("X-Workspace-ID", ws)

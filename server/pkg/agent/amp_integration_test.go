@@ -14,7 +14,7 @@ import (
 func ampRealExecutable(t *testing.T) string {
 	t.Helper()
 	requireRealAgentSmoke(t)
-	if path := os.Getenv("MULTICA_AMP_PATH"); path != "" {
+	if path := os.Getenv("WORKPAL_AMP_PATH"); path != "" {
 		return path
 	}
 	return "amp"
@@ -23,7 +23,7 @@ func ampRealExecutable(t *testing.T) string {
 func TestAmpRealInvalidAuthentication(t *testing.T) {
 	executable := ampRealExecutable(t)
 	home := t.TempDir()
-	const key = "sgamp_invalid-multica-smoke-credential"
+	const key = "sgamp_invalid-workpal-smoke-credential"
 	backend, err := New("amp", Config{ExecutablePath: executable, Env: map[string]string{
 		"AMP_API_KEY": key, "HOME": home, "USERPROFILE": home,
 		"XDG_CONFIG_HOME": filepath.Join(home, ".config"), "XDG_DATA_HOME": filepath.Join(home, ".local", "share"),

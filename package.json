@@ -5,11 +5,11 @@
   "type": "module",
   "scripts": {
     "dev:web": "node server/start.mjs --dev",
-    "build": "pnpm --filter @multica/web build",
-    "typecheck": "turbo typecheck --filter=!@multica/mobile",
+    "build": "pnpm --filter @workpal/web build",
+    "typecheck": "turbo typecheck --filter=!@workpal/mobile",
     "test": "node --test server/*.test.mjs",
     "test:scripts": "node --test \"scripts/**/*.test.mjs\"",
-    "lint": "turbo lint --filter=!@multica/mobile",
+    "lint": "turbo lint --filter=!@workpal/mobile",
     "knip": "knip",
     "check:ui-exports": "node scripts/check-ui-wildcard-exports.mjs",
     "check:ui-radii": "node scripts/check-ui-radius-tokens.mjs",
@@ -80,8 +80,8 @@
     "@fontsource-variable/inter": "catalog:",
     "shadcn": "catalog:",
     "tw-animate-css": "catalog:",
-    "@multica/core": "workspace:*",
-    "@multica/views": "workspace:*",
-    "@multica/ui": "workspace:*"
+    "@workpal/core": "workspace:*",
+    "@workpal/views": "workspace:*",
+    "@workpal/ui": "workspace:*"
   }
 }

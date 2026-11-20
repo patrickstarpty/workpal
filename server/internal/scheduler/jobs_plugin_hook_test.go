@@ -5,10 +5,10 @@ import (
 	"testing"
 	"time"
 
-	"github.com/multica-ai/multica/server/internal/featureflags"
-	"github.com/multica-ai/multica/server/internal/service"
-	"github.com/multica-ai/multica/server/internal/util"
-	"github.com/multica-ai/multica/server/pkg/featureflag"
+	"workpal.local/workpal/server/internal/featureflags"
+	"workpal.local/workpal/server/internal/service"
+	"workpal.local/workpal/server/internal/util"
+	"workpal.local/workpal/server/pkg/featureflag"
 )
 
 func TestPluginHookSchedulePlansCollapseToLatestAndStaySerial(t *testing.T) {

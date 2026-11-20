@@ -39,7 +39,7 @@ AI 代理這次需要知道的資訊，要寫在任務的說明和討論裡，�
 
 ## 分配後的執行流程
 
-Multica 會為 AI 代理建立一條[執行](/tasks)。線上執行時領取執行後，會呼叫本機的 AI 程式設計工具；進度、評論和結果隨後顯示在任務中。
+Workpal 會為 AI 代理建立一條[執行](/tasks)。線上執行時領取執行後，會呼叫本機的 AI 程式設計工具；進度、評論和結果隨後顯示在任務中。
 
 執行時暫時離線時，執行留在佇列中等待；執行繫結該執行時，不會轉移到其他電腦執行。
 
@@ -87,13 +87,13 @@ AI 代理會隨工作進展更新任務狀態。預設情況下，開始工作�
 ## 使用 CLI
 
 ```bash
-multica issue assign MUL-42 --to "Agent name"
-multica issue assign MUL-42 --to-id <agent-uuid> --no-start
-multica issue status MUL-42 in_progress --no-start
-multica issue assign MUL-42 --unassign
+workpal issue assign MUL-42 --to "Agent name"
+workpal issue assign MUL-42 --to-id <agent-uuid> --no-start
+workpal issue status MUL-42 in_progress --no-start
+workpal issue assign MUL-42 --unassign
 ```
 
-指令碼中用 `--to-id <uuid>` 可避免同名物件匹配錯誤。UUID 透過 `multica agent list --output json` 或 `multica workspace member list --output json` 檢視。
+指令碼中用 `--to-id <uuid>` 可避免同名物件匹配錯誤。UUID 透過 `workpal agent list --output json` 或 `workpal workspace member list --output json` 檢視。
 
 如果指派只用於記錄負責人、不應建立新執行（例如同一 AI 代理已在另一次執行中處理該任務），請使用 `--no-start`。`issue update` 和 `issue status` 同樣支援這個 flag。如果只記錄歸屬的流程同時修改負責人和狀態，兩條命令都要傳入該 flag；抑制指派不會自動抑制後續狀態變更觸發的執行。
 

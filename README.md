@@ -1,15 +1,14 @@
 # Workpal
 
-This repository follows Multica's top-level layout. Its tracked top-level directories and files are present here, with the additional `assets/` directory retaining the previous Workpal prototype. Upstream revision and local adaptations are recorded in [docs/UPSTREAM.json](docs/UPSTREAM.json).
 
-The default application is the Workpal-branded Multica frontend with a local mock HTTP backend and SQLite. Go server sources, CLI, CI and deployment files are retained as source; desktop and mobile app directories are empty; the local commands below do not run those production services.
+The default application is the Workpal-branded Workpal frontend with a local mock HTTP backend and SQLite. Go server sources, CLI, CI and deployment files are retained as source; desktop and mobile app directories are empty; the local commands below do not run those production services.
 
 ## Local web app
 
 Node >=22.22 and pnpm 10.28.2 are required.
 
 ```sh
-pnpm install --filter @multica/web... --frozen-lockfile --ignore-scripts
+pnpm install --filter @workpal/web... --frozen-lockfile --ignore-scripts
 npm run postinstall
 npm run dev
 ```
@@ -55,3 +54,7 @@ This checks 20 desktop/mobile page loads and project title editing with reload p
 ## Documentation and components
 
 Install all workspace dependencies with `pnpm install`. Start the documentation site with `npm run dev:docs` (port 4000), or the component explorer with `npm run storybook` (port 6006). Build them with `npm run build:docs` and `npm run build:storybook`. Desktop and mobile directories remain empty.
+
+## Branding
+
+Active source packages use `@workpal/*`; the Go module is `workpal.local/workpal/server`. No public service domain is configured. `.invalid` addresses in templates are non-resolving placeholders. Website/GitHub promotion entries are removed. Storage keys are copied to the Workpal namespace without overwriting existing values. The historical prototype archive is unchanged.

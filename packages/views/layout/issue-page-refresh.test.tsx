@@ -5,14 +5,14 @@ import { IssuesPage } from "../issues/components/issues-page";
 import { MyIssuesPage } from "../my-issues/components/my-issues-page";
 
 const state = vi.hoisted(() => ({ refreshing: false, user: { id: "user-1" } as { id: string } | null }));
-vi.mock("@multica/core/hooks", () => ({ useWorkspaceId: () => "ws-1" }));
-vi.mock("@multica/core/auth", () => ({
+vi.mock("@workpal/core/hooks", () => ({ useWorkspaceId: () => "ws-1" }));
+vi.mock("@workpal/core/auth", () => ({
   useAuthStore: (select: (s: typeof state) => unknown) => select(state),
 }));
-vi.mock("@multica/core/issues/stores/issues-scope-store", () => ({
+vi.mock("@workpal/core/issues/stores/issues-scope-store", () => ({
   useIssuesScope: () => "all",
 }));
-vi.mock("@multica/core/issues/stores/my-issues-view-store", () => {
+vi.mock("@workpal/core/issues/stores/my-issues-view-store", () => {
   const scopeState = { scope: "all", setScope: vi.fn() };
   return {
     myIssuesRelationFromScope: () => "all",

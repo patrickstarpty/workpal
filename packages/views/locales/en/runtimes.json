@@ -541,7 +541,7 @@
     "title": "Qoder Cloud Agents runtime",
     "description": "Connect Qoder Cloud Agents. Workpal manages execution and stores credentials encrypted. Workspace administrators can change this configuration.",
     "loading": "Loading…",
-    "unavailable": "Server setup is required: configure MULTICA_VCS_SECRET_KEY.",
+    "unavailable": "Server setup is required: configure WORKPAL_VCS_SECRET_KEY.",
     "online": "Online",
     "error": "Connection error",
     "starting": "Starting",
@@ -685,7 +685,7 @@
       },
       "remote": {
         "title": "Another machine, two commands",
-        "description": "Install the CLI on a server or another computer, then run multica setup to connect it."
+        "description": "Install the CLI on a server or another computer, then run workpal setup to connect it."
       },
       "cloud": {
         "title": "Or use a cloud node",

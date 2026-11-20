@@ -3,8 +3,8 @@
 import * as React from "react"
 import { OTPInput, OTPInputContext } from "input-otp"
 
-import { cn } from "@multica/ui/lib/utils"
-import { MinusIcon } from "@multica/ui/icons"
+import { cn } from "@workpal/ui/lib/utils"
+import { MinusIcon } from "@workpal/ui/icons"
 
 function InputOTP({
   className,

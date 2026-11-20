@@ -17,8 +17,8 @@ import (
 )
 
 const (
-	piEscapedStdoutHelperEnv = "MULTICA_TEST_PI_ESCAPED_STDOUT_HELPER"
-	piEscapedStdoutPIDEnv    = "MULTICA_TEST_PI_ESCAPED_STDOUT_PID_FILE"
+	piEscapedStdoutHelperEnv = "WORKPAL_TEST_PI_ESCAPED_STDOUT_HELPER"
+	piEscapedStdoutPIDEnv    = "WORKPAL_TEST_PI_ESCAPED_STDOUT_PID_FILE"
 )
 
 // TestPiEscapedStdoutHolderProcess runs only in the subprocess launched by the

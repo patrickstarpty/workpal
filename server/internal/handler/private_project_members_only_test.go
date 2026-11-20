@@ -8,9 +8,9 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/multica-ai/multica/server/internal/projectaccess"
-	"github.com/multica-ai/multica/server/internal/testutil"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
+	"workpal.local/workpal/server/internal/projectaccess"
+	"workpal.local/workpal/server/internal/testutil"
+	db "workpal.local/workpal/server/pkg/db/generated"
 )
 
 // MUL-9284: only the member list opens a private project. Its lead is as free
@@ -173,7 +173,7 @@ func TestPrivateProjectLeadIsOptionalAndMayBeAnAgent(t *testing.T) {
 func TestProjectTurningPrivateKeepsItsLead(t *testing.T) {
 	marker := newPrivateProjectFixture(t).marker
 	agentID := dbfx.Agent(t, marker+" lead agent", testRuntimeID)
-	human := createPlainMember(t, marker+"-human-lead@multica.test")
+	human := createPlainMember(t, marker+"-human-lead@workpal.test")
 	// A lead who has since left the workspace: the id points at nobody.
 	departed := "00000000-0000-0000-0000-0000000d0001"
 
@@ -239,13 +239,13 @@ func TestProjectTurningPrivateKeepsItsLead(t *testing.T) {
 func TestPrivateProjectAccessManager(t *testing.T) {
 	marker := newPrivateProjectFixture(t).marker
 	agentID := dbfx.Agent(t, marker+" lead agent", testRuntimeID)
-	lead := createPlainMember(t, marker+"-mgr-lead@multica.test")
-	creator := createPlainMember(t, marker+"-mgr-creator@multica.test")
-	early := createPlainMember(t, marker+"-mgr-early@multica.test")
-	late := createPlainMember(t, marker+"-mgr-late@multica.test")
-	admin := createWorkspaceAdmin(t, marker+"-mgr-admin@multica.test")
+	lead := createPlainMember(t, marker+"-mgr-lead@workpal.test")
+	creator := createPlainMember(t, marker+"-mgr-creator@workpal.test")
+	early := createPlainMember(t, marker+"-mgr-early@workpal.test")
+	late := createPlainMember(t, marker+"-mgr-late@workpal.test")
+	admin := createWorkspaceAdmin(t, marker+"-mgr-admin@workpal.test")
 	// Not on any list: the one each manager is asked to add.
-	newcomer := createPlainMember(t, marker+"-mgr-newcomer@multica.test")
+	newcomer := createPlainMember(t, marker+"-mgr-newcomer@workpal.test")
 
 	// Members are listed oldest first; ages are a day apart.
 	for _, tc := range []struct {
@@ -394,10 +394,10 @@ func TestPrivateProjectAccessManager(t *testing.T) {
 func TestPrivateProjectAccessManagerAfterLeadLeavesWorkspace(t *testing.T) {
 	ctx := context.Background()
 	marker := newPrivateProjectFixture(t).marker
-	leaver := createPlainMember(t, marker+"-leaver@multica.test")
-	early := createPlainMember(t, marker+"-early@multica.test")
-	late := createPlainMember(t, marker+"-late@multica.test")
-	newcomer := createPlainMember(t, marker+"-newcomer@multica.test")
+	leaver := createPlainMember(t, marker+"-leaver@workpal.test")
+	early := createPlainMember(t, marker+"-early@workpal.test")
+	late := createPlainMember(t, marker+"-late@workpal.test")
+	newcomer := createPlainMember(t, marker+"-newcomer@workpal.test")
 	var leaverMemberID string
 	if err := testPool.QueryRow(ctx, `SELECT id FROM member WHERE workspace_id = $1 AND user_id = $2`, testWorkspaceID, leaver).Scan(&leaverMemberID); err != nil {
 		t.Fatalf("load member row: %v", err)
@@ -506,9 +506,9 @@ func TestSearchIndexCopyFromRoleBasedAccessIsRebuilt(t *testing.T) {
 func TestProjectUpdateMemberIDsAreNeverDropped(t *testing.T) {
 	f := newPrivateProjectFixture(t)
 	dbfx.Exec(t, `UPDATE project SET lead_type = 'member', lead_id = $1 WHERE id = $2`, f.insider, f.projectID)
-	plain := createPlainMember(t, f.marker+"-plain@multica.test")
+	plain := createPlainMember(t, f.marker+"-plain@workpal.test")
 	addProjectMemberRow(t, f.projectID, plain)
-	newcomer := createPlainMember(t, f.marker+"-newcomer@multica.test")
+	newcomer := createPlainMember(t, f.marker+"-newcomer@workpal.test")
 	title := func() string {
 		var s string
 		if err := testPool.QueryRow(context.Background(), `SELECT title FROM project WHERE id = $1`, f.projectID).Scan(&s); err != nil {

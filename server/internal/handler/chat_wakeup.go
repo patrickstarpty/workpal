@@ -8,8 +8,8 @@ import (
 	"github.com/go-chi/chi/v5"
 	"github.com/jackc/pgx/v5/pgtype"
 
-	"github.com/multica-ai/multica/server/internal/service"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
+	"workpal.local/workpal/server/internal/service"
+	db "workpal.local/workpal/server/pkg/db/generated"
 )
 
 // ChatWakeupResponse is one chat wakeup as clients and the CLI see it.
@@ -94,7 +94,7 @@ func (h *Handler) chatWakeups() *service.ChatWakeupService {
 }
 
 // chatTurnTask resolves the chat turn behind an agent's task-scoped token. Like
-// `multica chat history`, the agent never names a session: it can only manage
+// `workpal chat history`, the agent never names a session: it can only manage
 // the wakeups of the conversation it is running in.
 func (h *Handler) chatTurnTask(w http.ResponseWriter, r *http.Request) (db.AgentTaskQueue, bool) {
 	if r.Header.Get("X-Actor-Source") != "task_token" {
@@ -111,7 +111,7 @@ func (h *Handler) chatTurnTask(w http.ResponseWriter, r *http.Request) (db.Agent
 		return db.AgentTaskQueue{}, false
 	}
 	if !task.ChatSessionID.Valid {
-		writeError(w, http.StatusBadRequest, "this task is not a chat turn; use `multica issue wakeup` for issue work")
+		writeError(w, http.StatusBadRequest, "this task is not a chat turn; use `workpal issue wakeup` for issue work")
 		return db.AgentTaskQueue{}, false
 	}
 	session, err := h.Queries.GetChatSession(r.Context(), task.ChatSessionID)

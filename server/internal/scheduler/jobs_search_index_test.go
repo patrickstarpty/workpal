@@ -7,7 +7,7 @@ import (
 
 	"github.com/google/uuid"
 
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
+	db "workpal.local/workpal/server/pkg/db/generated"
 )
 
 func TestSearchIndexChangePruneJobRemovesExpiredRowsAndRaisesMark(t *testing.T) {

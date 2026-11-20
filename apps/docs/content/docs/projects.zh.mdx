@@ -97,12 +97,12 @@ import { ProjectDemo } from "@/components/demos/project-demo";
 - **CLI**：给 `project create` 或 `project update` 加上 `--visibility private`，用 `--member`（名称、邮箱或用户 ID，可重复）指定初始名单。之后用 `project member list|add|remove` 管理名单。
 
 ```bash
-multica project create --title "Pricing revamp" --visibility private --member alice@example.com --member Bob
-multica project update <project-id> --visibility private --member alice@example.com
-multica project member add <project-id> carol@example.com
+workpal project create --title "Pricing revamp" --visibility private --member alice@example.com --member Bob
+workpal project update <project-id> --visibility private --member alice@example.com
+workpal project member add <project-id> carol@example.com
 ```
 
-把私有项目改回**整个工作区**后，所有工作区成员都能看到这个项目及其中的任务、评论和附件。在界面中保存前会要求确认；`multica project update --visibility workspace` 则直接生效。
+把私有项目改回**整个工作区**后，所有工作区成员都能看到这个项目及其中的任务、评论和附件。在界面中保存前会要求确认；`workpal project update --visibility workspace` 则直接生效。
 
 ### 工作区所有者恢复访问 [#workspace-owner-recovery]
 

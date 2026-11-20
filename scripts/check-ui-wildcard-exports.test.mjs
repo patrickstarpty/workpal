@@ -21,7 +21,7 @@ function fixture(t) {
   };
   const remove = (rel) => rmSync(join(root, rel));
   write("packages/ui/package.json", JSON.stringify({
-    name: "@multica/ui",
+    name: "@workpal/ui",
     exports: {
       "./components/ui/*": "./components/ui/*.tsx",
       "./components/common/*": "./components/common/*.tsx",
@@ -53,7 +53,7 @@ test("an unimported component fails and is named until a consumer imports it", (
   passes("a clean tree should pass");
   write("packages/ui/components/ui/zz-unused-export-probe.tsx", "export function UnusedExportProbe() { return null; }\n");
   failsNaming(["zz-unused-export-probe.tsx"], "a zero-reference component should fail");
-  write(importer, 'export { UnusedExportProbe } from "@multica/ui/components/ui/zz-unused-export-probe";\n');
+  write(importer, 'export { UnusedExportProbe } from "@workpal/ui/components/ui/zz-unused-export-probe";\n');
   passes("a real consumer should make the component live");
 });
 
@@ -74,7 +74,7 @@ test("an unreachable import chain or cycle stays dead until something outside re
   failsNaming(["zz-cycle-a.tsx", "zz-cycle-b.tsx"], "an A -> B chain must not vouch for itself");
   write("packages/ui/components/ui/zz-cycle-b.tsx", 'import { CycleA } from "./zz-cycle-a";\nexport const CycleB = () => CycleA;\n');
   failsNaming(["zz-cycle-a.tsx", "zz-cycle-b.tsx"], "an A <-> B cycle must not vouch for itself");
-  write(importer, 'export { CycleA } from "@multica/ui/components/ui/zz-cycle-a";\n');
+  write(importer, 'export { CycleA } from "@workpal/ui/components/ui/zz-cycle-a";\n');
   passes("an external consumer should make both halves live");
 });
 
@@ -85,13 +85,13 @@ test("commented-out, stringified and mock-only mentions are not imports", (t) =>
   const { write, remove, failsNaming } = fixture(t);
   write("packages/ui/components/ui/zz-comment-probe.tsx", "export function CommentProbe() { return null; }\n");
   write(importer, [
-    '// import { CommentProbe } from "@multica/ui/components/ui/zz-comment-probe";',
-    'export const note = \'import { CommentProbe } from "@multica/ui/components/ui/zz-comment-probe"\';',
+    '// import { CommentProbe } from "@workpal/ui/components/ui/zz-comment-probe";',
+    'export const note = \'import { CommentProbe } from "@workpal/ui/components/ui/zz-comment-probe"\';',
   ].join("\n"));
   failsNaming(["zz-comment-probe.tsx"], "a comment or string must not count as an edge");
   remove("packages/ui/components/ui/zz-comment-probe.tsx");
   write("packages/ui/components/ui/zz-mock-only.tsx", "export function MockOnly() { return null; }\n");
-  write(importer, 'import { vi } from "vitest"; vi.mock("@multica/ui/components/ui/zz-mock-only");\n');
+  write(importer, 'import { vi } from "vitest"; vi.mock("@workpal/ui/components/ui/zz-mock-only");\n');
   failsNaming(["zz-mock-only.tsx"], "a mock-only mention must not vouch for a product");
 });
 
@@ -107,7 +107,7 @@ for (const [dir, ext] of [["components/ui", "tsx"], ["components/common", "tsx"]
     write(`packages/ui/${dir}/zz-unused-runtime.${ext}`, "export function RuntimeProbe() { return null; }\n");
     write(testFile, 'import { RuntimeProbe } from "./zz-unused-runtime";\nimport { it } from "vitest";\nit("probe", () => RuntimeProbe());\n');
     failsNaming([`${dir}/zz-unused-runtime.${ext}`], `a colocated test in ${dir} must not vouch for an unused product`);
-    write(importer, `export { RuntimeProbe } from "@multica/ui/${dir}/zz-unused-runtime";\n`);
+    write(importer, `export { RuntimeProbe } from "@workpal/ui/${dir}/zz-unused-runtime";\n`);
     passes(`a real consumer should make the product in ${dir} live`);
     for (const rel of [importer, testFile, `packages/ui/${dir}/zz-unused-runtime.${ext}`]) remove(rel);
     write(`packages/ui/${dir}/zz-not-discovered.spec.${ext}`, "export function StillGuarded() { return null; }\n");

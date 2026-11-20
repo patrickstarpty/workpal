@@ -1,6 +1,6 @@
 // @vitest-environment node
 import { describe, expect, it } from "vitest";
-import type { WebhookEventFilter } from "@multica/core/types";
+import type { WebhookEventFilter } from "@workpal/core/types";
 import {
   conditionValueToText,
   draftsFromEventFilters,

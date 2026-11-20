@@ -1,8 +1,8 @@
 "use client";
 
 import { use } from "react";
-import { IssueDetailRoute } from "@multica/views/issues/components";
-import { ErrorBoundary } from "@multica/ui/components/common/error-boundary";
+import { IssueDetailRoute } from "@workpal/views/issues/components";
+import { ErrorBoundary } from "@workpal/ui/components/common/error-boundary";
 
 // `/{ws}/issues/{id}/deliverables/{name}`: the issue page, opened on the
 // newest version of the deliverable called `name`.

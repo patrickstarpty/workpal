@@ -2,12 +2,12 @@
 
 import { useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { Check, Minus, X } from "@multica/ui/icons";
-import { cn } from "@multica/ui/lib/utils";
-import type { BatchIssueLabelOps, Issue, Label } from "@multica/core/types";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { labelListOptions } from "@multica/core/labels";
-import { paletteColor } from "@multica/core/appearance";
+import { Check, Minus, X } from "@workpal/ui/icons";
+import { cn } from "@workpal/ui/lib/utils";
+import type { BatchIssueLabelOps, Issue, Label } from "@workpal/core/types";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { labelListOptions } from "@workpal/core/labels";
+import { paletteColor } from "@workpal/core/appearance";
 import { matchesPinyin } from "../../../editor/extensions/pinyin-match";
 import { PickerEmpty, PickerItem, PickerPanel, PropertyPicker } from "./property-picker";
 import { useT } from "../../../i18n";

@@ -2,26 +2,26 @@
 
 import { Fragment } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { useWorkspacePaths } from "@multica/core/paths";
-import { notificationPreferenceOptions } from "@multica/core/notification-preferences/queries";
-import { useUpdateNotificationPreferences } from "@multica/core/notification-preferences/mutations";
-import { notificationPreferenceValue } from "@multica/core/notification-preferences/patch";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { useWorkspacePaths } from "@workpal/core/paths";
+import { notificationPreferenceOptions } from "@workpal/core/notification-preferences/queries";
+import { useUpdateNotificationPreferences } from "@workpal/core/notification-preferences/mutations";
+import { notificationPreferenceValue } from "@workpal/core/notification-preferences/patch";
 import type {
   NotificationGroupKey,
   NotificationPreferences,
   OthersIssuesValue,
-} from "@multica/core/types";
-import { buttonVariants } from "@multica/ui/components/ui/button";
+} from "@workpal/core/types";
+import { buttonVariants } from "@workpal/ui/components/ui/button";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@multica/ui/components/ui/select";
-import { Switch } from "@multica/ui/components/ui/switch";
-import { cn } from "@multica/ui/lib/utils";
+} from "@workpal/ui/components/ui/select";
+import { Switch } from "@workpal/ui/components/ui/switch";
+import { cn } from "@workpal/ui/lib/utils";
 import { toast } from "sonner";
 import { useT } from "../../i18n";
 import { ARCHIVED_VIEW_PARAM } from "../../inbox/components/inbox-view";

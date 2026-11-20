@@ -1,7 +1,7 @@
-import type { IssueStatus } from "@multica/core/types";
+import type { IssueStatus } from "@workpal/core/types";
 import { StatusIcon } from "./status-icon";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { useIssueStatuses } from "@multica/core/issue-statuses/hooks";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { useIssueStatuses } from "@workpal/core/issue-statuses/hooks";
 import { useStatusLabel } from "../utils/status-label";
 
 export function StatusHeading({

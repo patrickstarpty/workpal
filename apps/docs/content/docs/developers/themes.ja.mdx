@@ -1,15 +1,15 @@
 ---
 title: テーマを作る
-description: Multica のテーマ形式（マニフェスト、CSS 変数、オプション、アンカー）、テーマの書き方とチェック方法、テーマストアへの公開方法。
+description: Workpal のテーマ形式（マニフェスト、CSS 変数、オプション、アンカー）、テーマの書き方とチェック方法、テーマストアへの公開方法。
 ---
 
 import { Callout } from "fumadocs-ui/components/callout";
 import { Step, Steps } from "fumadocs-ui/components/steps";
 
-Multica のテーマは、`manifest.json` と `theme.css`、それに CSS が使うフォントや画像を入れたフォルダです。CSS はライトとダークのモードごとに公開変数を設定し、安定したアンカーのスタイルを変更できます。マニフェストはテーマに名前を付け、**設定 → 外観** で調整できるオプションを宣言できます。テーマが JavaScript を実行することはありません。
+Workpal のテーマは、`manifest.json` と `theme.css`、それに CSS が使うフォントや画像を入れたフォルダです。CSS はライトとダークのモードごとに公開変数を設定し、安定したアンカーのスタイルを変更できます。マニフェストはテーマに名前を付け、**設定 → 外観** で調整できるオプションを宣言できます。テーマが JavaScript を実行することはありません。
 
 <Callout type="warn">
-  テーマの形式はベータ版の API です。安定版と宣言されるまで、変数、アンカー、マニフェストは変わる可能性があります。自動生成された変数とアンカーの完全な一覧は [`docs/theming.md`](https://github.com/multica-ai/multica/blob/main/docs/theming.md) にあります。このページではそれらの組み合わせ方を説明します。
+  テーマの形式はベータ版の API です。安定版と宣言されるまで、変数、アンカー、マニフェストは変わる可能性があります。自動生成された変数とアンカーの完全な一覧は `docs/theming.md` にあります。このページではそれらの組み合わせ方を説明します。
 </Callout>
 
 ## クイックスタート
@@ -34,7 +34,7 @@ Multica のテーマは、`manifest.json` と `theme.css`、それに CSS が使
 
 ### チェックする
 
-共有する前に、[Multica リポジトリ](https://github.com/multica-ai/multica)のクローンでチェックを実行します（[チェックとプレビュー](#チェックとプレビュー)を参照）。
+共有する前に、Workpal リポジトリのクローンでチェックを実行します（[チェックとプレビュー](#チェックとプレビュー)を参照）。
 
 </Step>
 </Steps>
@@ -121,7 +121,7 @@ paper/
 }
 ```
 
-[変数リファレンス](https://github.com/multica-ai/multica/blob/main/docs/theming.md#variable-reference)に、すべての変数とライト・ダークの既定値があります。
+変数リファレンスに、すべての変数とライト・ダークの既定値があります。
 
 ## オプション
 
@@ -168,7 +168,7 @@ paper/
 - 背景を使うときは `--backdrop-color` が必須です。読み込み中に表示される単色で、`theme:check` がガラスのコントラストを測る下地でもあります。
 - `--glass-opacity` と `--glass-blur` は、ページ自身の色が背景をどれだけ覆うかと、ページの後ろで背景をどれだけぼかすかを決めます。`--frame-glass-opacity` と `--frame-glass-blur` はレール、ウィンドウツールバー、タブバー、ボトムバーに同じことをします。
 
-`--app-shell` を透明にしたり `body` に `background` を設定したりする代わりに、これらを使ってください。そうすれば背景を変えてもウィンドウがちらつきません。[`examples/themes/night-sky`](https://github.com/multica-ai/multica/tree/main/examples/themes/night-sky) が完全な例です。
+`--app-shell` を透明にしたり `body` に `background` を設定したりする代わりに、これらを使ってください。そうすれば背景を変えてもウィンドウがちらつきません。`examples/themes/night-sky` が完全な例です。
 
 ## セレクタ
 
@@ -183,7 +183,7 @@ paper/
 .theme-dark [data-mc="issue-row"][data-priority="urgent"] { box-shadow: inset 2px 0 var(--priority-urgent); }
 ```
 
-[セレクタリファレンス](https://github.com/multica-ai/multica/blob/main/docs/theming.md#selectors)に、すべてのアンカーとその属性、すべてのスロットがあります。
+セレクタリファレンスに、すべてのアンカーとその属性、すべてのスロットがあります。
 
 ## CSS でできないこと
 
@@ -203,7 +203,7 @@ paper/
 
 ## チェックとプレビュー
 
-[Multica リポジトリ](https://github.com/multica-ai/multica)のクローンで実行します。
+Workpal リポジトリのクローンで実行します。
 
 ```bash
 pnpm theme:check path/to/paper          # フォルダ
@@ -217,24 +217,24 @@ pnpm theme:preview path/to/paper --out preview   # preview/light.png と preview
 
 作業中にテーマでインターフェースが隠れたり崩れたりしたら、`?theme=default` を付けてアプリを開くか、読み込み直後に **Shift** を押し続けます。[テーマで表示が崩れたとき](/themes#テーマで表示が崩れたとき)を参照してください。
 
-チェッカーはリポジトリをインストールしなくても、スパースクローンと Node 22.18 以降で実行できます。エージェントも、組み込みの Multica スキルで同じコマンドを使います。
+チェッカーはリポジトリをインストールしなくても、スパースクローンと Node 22.18 以降で実行できます。エージェントも、組み込みの Workpal スキルで同じコマンドを使います。
 
 ```bash
-git clone --depth 1 --filter=blob:none --sparse https://github.com/multica-ai/multica.git multica-themes
-git -C multica-themes sparse-checkout set docs scripts packages/core packages/ui
-node multica-themes/scripts/theme-check.mjs path/to/paper
+git clone --depth 1 --filter=blob:none --sparse https://code-host.invalid/workpal.git workpal-themes
+git -C workpal-themes sparse-checkout set docs scripts packages/core packages/ui
+node workpal-themes/scripts/theme-check.mjs path/to/paper
 ```
 
 ## テーマストアに公開する
 
-テーマストアには [multica-ai/multica-themes](https://github.com/multica-ai/multica-themes) レジストリのテーマが並びます。詳しくはその[コントリビューションガイド](https://github.com/multica-ai/multica-themes/blob/main/CONTRIBUTING.md)を参照してください。要点は次のとおりです。
+テーマストアには workpal-ai/workpal-themes レジストリのテーマが並びます。詳しくはそのコントリビューションガイドを参照してください。要点は次のとおりです。
 
 <Steps>
 <Step>
 
 ### テーマ専用のリポジトリを用意する
 
-テーマを公開 GitHub リポジトリに置きます。[multica-ai/multica-theme-sample](https://github.com/multica-ai/multica-theme-sample) はリリース用のワークフロー付きのテンプレートです。
+テーマを公開 GitHub リポジトリに置きます。workpal-ai/workpal-theme-sample はリリース用のワークフロー付きのテンプレートです。
 
 </Step>
 <Step>
@@ -255,9 +255,9 @@ node multica-themes/scripts/theme-check.mjs path/to/paper
 
 新しいリリースは同じチェックを通過してから約 1 時間でストアに反映され、テーマをインストールした人にはアップデートが表示されます。失敗したリリースは前のリリースを置き換えません。アプリはチェックを通過した `theme.zip` そのものだけをインストールし、読み込んだテーマと同じパーサーと CSS チェックで読み込みます。
 
-ストアのカードには、その Multica サーバーからテーマがダウンロードされた回数が表示されます。インストールとアップデートはそれぞれ 1 回と数えられ、まだインストールされていないテーマはダウンロード数の多い順に並びます。
+ストアのカードには、その Workpal サーバーからテーマがダウンロードされた回数が表示されます。インストールとアップデートはそれぞれ 1 回と数えられ、まだインストールされていないテーマはダウンロード数の多い順に並びます。
 
 ## 次のステップ
 
 - [テーマと外観](/themes) — テーマのインストール、アップデート、削除。
-- [`docs/theming.md`](https://github.com/multica-ai/multica/blob/main/docs/theming.md) — 自動生成された変数とセレクタのリファレンス。
+- `docs/theming.md` — 自動生成された変数とセレクタのリファレンス。

@@ -1,6 +1,6 @@
 "use client";
 
-import type { AgentTask } from "@multica/core/types";
+import type { AgentTask } from "@workpal/core/types";
 import { WakeupRunLabel } from "./wakeup-source-chip";
 
 /**

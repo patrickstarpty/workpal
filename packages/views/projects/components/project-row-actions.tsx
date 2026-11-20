@@ -3,10 +3,10 @@
 import { useState, type ReactNode } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { toast } from "sonner";
-import { Archive, ArchiveRestore, ExternalLink, Link2, Pencil, Pin, PinOff, Trash2, Type } from "@multica/ui/icons";
-import { copyText, copyTextAndHtml } from "@multica/ui/lib/clipboard";
-import { Button } from "@multica/ui/components/ui/button";
-import { Spinner } from "@multica/ui/components/ui/spinner";
+import { Archive, ArchiveRestore, ExternalLink, Link2, Pencil, Pin, PinOff, Trash2, Type } from "@workpal/ui/icons";
+import { copyText, copyTextAndHtml } from "@workpal/ui/lib/clipboard";
+import { Button } from "@workpal/ui/components/ui/button";
+import { Spinner } from "@workpal/ui/components/ui/spinner";
 import {
   Dialog,
   DialogContent,
@@ -14,20 +14,20 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "@multica/ui/components/ui/dialog";
+} from "@workpal/ui/components/ui/dialog";
 import {
   DropdownMenuItem,
   DropdownMenuSeparator,
-} from "@multica/ui/components/ui/dropdown-menu";
-import { useAuthStore } from "@multica/core/auth";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { useModalStore } from "@multica/core/modals";
-import { useWorkspacePaths } from "@multica/core/paths";
-import { pinListOptions, useCreatePin, useDeletePin } from "@multica/core/pins";
-import { ProjectDeletionOfflineError, useDeleteProject } from "@multica/core/projects";
-import { canDeleteProject } from "@multica/core/projects/deletion-permissions";
-import type { Project } from "@multica/core/types";
-import { agentListOptions, memberListOptions } from "@multica/core/workspace/queries";
+} from "@workpal/ui/components/ui/dropdown-menu";
+import { useAuthStore } from "@workpal/core/auth";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { useModalStore } from "@workpal/core/modals";
+import { useWorkspacePaths } from "@workpal/core/paths";
+import { pinListOptions, useCreatePin, useDeletePin } from "@workpal/core/pins";
+import { ProjectDeletionOfflineError, useDeleteProject } from "@workpal/core/projects";
+import { canDeleteProject } from "@workpal/core/projects/deletion-permissions";
+import type { Project } from "@workpal/core/types";
+import { agentListOptions, memberListOptions } from "@workpal/core/workspace/queries";
 import { useT } from "../../i18n";
 import { useIntentNavigate, useNavigation } from "../../navigation";
 import { CollectionRowMenu } from "../../layout/collection-list";

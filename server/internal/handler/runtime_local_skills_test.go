@@ -12,7 +12,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/multica-ai/multica/server/pkg/protocol"
+	"workpal.local/workpal/server/pkg/protocol"
 )
 
 type runtimeLocalSkillPendingWorkRecorder struct {
@@ -62,7 +62,7 @@ func createRuntimeLocalSkillTestRuntime(t *testing.T, ownerID string) string {
 func createRuntimeLocalSkillTestMember(t *testing.T, role string) string {
 	t.Helper()
 
-	email := fmt.Sprintf("runtime-local-skills-%d@multica.ai", time.Now().UnixNano())
+	email := fmt.Sprintf("runtime-local-skills-%d@workpal.invalid", time.Now().UnixNano())
 	name := fmt.Sprintf("Runtime Local Skills %s", role)
 
 	var userID string
@@ -350,7 +350,7 @@ func TestListLocalSkills_RejectsNonMember(t *testing.T) {
 	runtimeID := createRuntimeLocalSkillTestRuntime(t, testUserID)
 
 	var outsiderID string
-	email := fmt.Sprintf("runtime-local-skills-outsider-%d@multica.ai", time.Now().UnixNano())
+	email := fmt.Sprintf("runtime-local-skills-outsider-%d@workpal.invalid", time.Now().UnixNano())
 	if err := testPool.QueryRow(context.Background(), `
 		INSERT INTO "user" (name, email)
 		VALUES ('Runtime Local Skills Outsider', $1)

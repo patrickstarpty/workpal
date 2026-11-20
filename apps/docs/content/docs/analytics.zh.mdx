@@ -73,7 +73,7 @@ import { UsageDemo } from "@/components/demos/usage-demo";
 
 统计里的费用都是估算值，单位美元，不是 AI 编程工具或模型服务商的账单：
 
-- Multica 内置一张各模型的公开价目表，按每百万 token 分别给输入、输出、缓存读取和缓存写入定价，用它乘以上报的 token 数。
+- Workpal 内置一张各模型的公开价目表，按每百万 token 分别给输入、输出、缓存读取和缓存写入定价，用它乘以上报的 token 数。
 - AI 编程工具自己报告了费用时（例如 Grok Build），这部分直接用报告的数字，不再估算。
 - 价目表里没有的模型，token 照常计入，费用按 $0 计算。在运行时的用量里可以给这些模型[设置自定义价格](#自定义价格)。
 - 有些模型的提示超过一定长度后单价会上浮，汇总数据区分不出每次请求的长度，统一按标准价算，这类运行的估算可能偏低。
@@ -115,8 +115,8 @@ token 由 AI 编程工具上报。工具没有上报时，这次运行仍计入�
 ## 用 CLI 查看
 
 ```bash
-multica issue usage <issue-id>
-multica runtime usage <runtime-id> --days 30
+workpal issue usage <issue-id>
+workpal runtime usage <runtime-id> --days 30
 ```
 
 `issue usage` 输出一条任务的 token 合计（输入、输出、缓存读取、缓存写入）和运行次数。`RUNS` 是已结束的运行数，`METERED_RUNS` 是上报了用量的运行数，`UNREPORTED` 是没有上报的；有运行没上报时，token 数前面带 `>=`，表示实际只会更多。

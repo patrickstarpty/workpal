@@ -34,7 +34,7 @@ function resource(id: string): ProjectResource {
     project_id: "p1",
     workspace_id: "ws1",
     resource_type: "github_repo",
-    resource_ref: { owner: "multica-ai", repo: id },
+    resource_ref: { owner: "workpal-ai", repo: id },
     label: id,
     position: 0,
     created_at: "2026-10-28T00:00:00Z",

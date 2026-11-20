@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, type FocusEvent, type MouseEvent, type ReactNode } from "react";
-import { FileUploadButton } from "@multica/ui/components/common/file-upload-button";
-import { cn } from "@multica/ui/lib/utils";
+import { FileUploadButton } from "@workpal/ui/components/common/file-upload-button";
+import { cn } from "@workpal/ui/lib/utils";
 import { VoiceMicButton, VoiceStrip, type ComposerVoice } from "../../voice";
 
 /**

@@ -2,8 +2,8 @@
 
 import { useCallback, useState } from "react";
 import { toast } from "sonner";
-import { api } from "@multica/core/api";
-import { useGitHubConnectionStore } from "@multica/core/github";
+import { api } from "@workpal/core/api";
+import { useGitHubConnectionStore } from "@workpal/core/github";
 import { isDesktopShell, openExternal } from "../../platform";
 import { useT } from "../../i18n";
 

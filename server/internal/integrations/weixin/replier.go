@@ -3,30 +3,30 @@ package weixin
 import (
 	"context"
 
-	"github.com/multica-ai/multica/server/internal/integrations/channel"
-	"github.com/multica-ai/multica/server/internal/integrations/channel/engine"
-	"github.com/multica-ai/multica/server/internal/util"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
-	"github.com/multica-ai/multica/server/pkg/dbid"
+	"workpal.local/workpal/server/internal/integrations/channel"
+	"workpal.local/workpal/server/internal/integrations/channel/engine"
+	"workpal.local/workpal/server/internal/util"
+	db "workpal.local/workpal/server/pkg/db/generated"
+	"workpal.local/workpal/server/pkg/dbid"
 )
 
 // Reply implements the shared engine's command/status notices. The scanner
-// was already bound to the initiating Multica user during QR confirmation.
+// was already bound to the initiating Workpal user during QR confirmation.
 func (o *Outbound) Reply(ctx context.Context, inst engine.ResolvedInstallation, msg channel.InboundMessage, result engine.Result) {
 	var text string
 	switch result.Outcome {
 	case engine.OutcomeAgentOffline:
-		text = "This agent is offline. Start its runtime in Multica, then send your message again."
+		text = "This agent is offline. Start its runtime in Workpal, then send your message again."
 	case engine.OutcomeAgentArchived:
-		text = "This agent is archived. Restore it in Multica before continuing."
+		text = "This agent is archived. Restore it in Workpal before continuing."
 	case engine.OutcomeInvokeDenied:
-		text = "You no longer have permission to run this agent. Check your workspace access in Multica."
+		text = "You no longer have permission to run this agent. Check your workspace access in Workpal."
 	case engine.OutcomeNeedsBinding:
-		text = "Reconnect WeChat in Multica to link this account."
+		text = "Reconnect WeChat in Workpal to link this account."
 	case engine.OutcomeFreshPending:
 		text = "Your next message will start with fresh context."
 	case engine.OutcomeChatStarted:
-		text = "Started a new Multica chat. Send your next message here."
+		text = "Started a new Workpal chat. Send your next message here."
 	case engine.OutcomeIssueUsage:
 		text = "Use /issue <title> followed by an optional description."
 	case engine.OutcomeIngested:
@@ -38,7 +38,7 @@ func (o *Outbound) Reply(ctx context.Context, inst engine.ResolvedInstallation, 
 		}
 	case engine.OutcomeDropped:
 		if result.DropReason == engine.DropReasonNonWorkspaceMember {
-			text = "You are no longer a member of this Multica workspace."
+			text = "You are no longer a member of this Workpal workspace."
 		}
 	}
 	if text == "" {

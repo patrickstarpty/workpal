@@ -1,6 +1,6 @@
-import type { TimelineEntry } from "@multica/core/types";
-import { isDeletedComment } from "@multica/core/issues/comment-deletion";
-import { sortTimelineEntriesAsc } from "@multica/core/issues/timeline-sort";
+import type { TimelineEntry } from "@workpal/core/types";
+import { isDeletedComment } from "@workpal/core/issues/comment-deletion";
+import { sortTimelineEntriesAsc } from "@workpal/core/issues/timeline-sort";
 
 /**
  * Walks the parent_id graph rooted at `rootId` and returns every descendant in

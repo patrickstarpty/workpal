@@ -81,7 +81,7 @@ export const useIssueSidebarSectionsStore = create<IssueSidebarSectionsState>()(
       reset: () => set({ order: null, hidden: [] }),
     }),
     {
-      name: "multica_issue_sidebar_sections",
+      name: "workpal_issue_sidebar_sections",
       storage: createJSONStorage(() => defaultStorage),
       partialize: (state) => ({ order: state.order, hidden: state.hidden }),
       merge: (persisted, current) => {

@@ -4,13 +4,13 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 import { getRouteRegex } from "next/dist/shared/lib/router/utils/route-regex";
 import { getRouteMatcher } from "next/dist/shared/lib/router/utils/route-matcher";
 import { getDynamicParam } from "next/dist/shared/lib/router/utils/get-dynamic-param";
-import { paths } from "@multica/core/paths";
+import { paths } from "@workpal/core/paths";
 
 const routeProps = vi.hoisted(() => ({
   last: null as { routeId: string; deliverable?: string } | null,
 }));
 
-vi.mock("@multica/views/issues/components", () => ({
+vi.mock("@workpal/views/issues/components", () => ({
   IssueDetailRoute: (props: { routeId: string; deliverable?: string }) => {
     routeProps.last = props;
     return null;

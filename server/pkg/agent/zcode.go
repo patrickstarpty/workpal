@@ -1103,7 +1103,7 @@ func zcodeWriteReverseResult(w io.Writer, id json.RawMessage, result any) {
 // response shape {id, result|error}: the error must sit at the top level,
 // not nested inside result.
 func zcodeWriteReverseUnsupported(w io.Writer, id json.RawMessage, method string) {
-	zcodeWriteReverseError(w, id, -32601, fmt.Sprintf("method not supported by multica: %s", method))
+	zcodeWriteReverseError(w, id, -32601, fmt.Sprintf("method not supported by workpal: %s", method))
 }
 
 func zcodeWriteReverseError(w io.Writer, id json.RawMessage, code int, message string) {
@@ -1192,7 +1192,7 @@ func (c *zcodeClient) handleLine(line string) {
 		case "session/requestRuntimePreferences":
 			c.respond(msg.ID, zcodeRuntimePreferencesDefaults())
 		default:
-			c.respondError(msg.ID, -32601, fmt.Sprintf("method not supported by multica: %s", msg.Method))
+			c.respondError(msg.ID, -32601, fmt.Sprintf("method not supported by workpal: %s", msg.Method))
 		}
 	case hasID:
 		// Response to one of our requests. Our ids are plain ints.
@@ -1269,7 +1269,7 @@ func zcodeSessionIDFromSnapshot(result json.RawMessage) string {
 	return snap.Session.SessionID
 }
 
-// splitZcodeModelSelection splits Multica's persisted agent.model string into
+// splitZcodeModelSelection splits Workpal's persisted agent.model string into
 // the ZCode {providerId, modelId} pair. The composite form is the runtime's
 // own picker format (model-selection.ts formatModelPickerValue), and its
 // execution entry rejects a selection without a provider. A string without a
@@ -1345,7 +1345,7 @@ func zcodeWorkspaceKey(taskID, cwd string) string {
 	return cwd
 }
 
-// buildZcodeMcpServers converts Multica's canonical mcp_config JSON into the
+// buildZcodeMcpServers converts Workpal's canonical mcp_config JSON into the
 // ZCode Protocol mcpServers array. Same parsing skeleton and alt-key
 // tolerance as buildACPMcpServers, but the output is built for zcode's strict
 // schema (index.ts zcodeProtocolMcpServerSchema): stdio entries carry

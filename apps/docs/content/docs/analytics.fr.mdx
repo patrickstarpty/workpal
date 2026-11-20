@@ -73,7 +73,7 @@ Pour le sens de chaque code et la manière de le traiter, voir [Exécutions · R
 
 Tous les coûts affichés dans Statistiques sont des estimations en USD, pas une facture de l'outil de codage IA ni du fournisseur de modèle :
 
-- Multica embarque une table des tarifs publiés des modèles, avec un prix par million de tokens pour l'entrée, la sortie, la lecture et l'écriture de cache, qu'il multiplie par les tokens transmis.
+- Workpal embarque une table des tarifs publiés des modèles, avec un prix par million de tokens pour l'entrée, la sortie, la lecture et l'écriture de cache, qu'il multiplie par les tokens transmis.
 - Quand l'outil de codage IA communique son propre coût (c'est le cas de Grok Build, par exemple), ce chiffre est repris tel quel au lieu d'une estimation.
 - Les tokens des modèles absents de la table sont comptés, mais leur coût vaut $0. Vous pouvez [définir des tarifs personnalisés](#tarifs-personnalisés) pour ces modèles depuis la consommation d'un runtime.
 - Certains modèles appliquent un tarif plus élevé au-delà d'une certaine longueur de prompt. Les données agrégées ne disent pas quelle était la longueur de chaque requête, tout est donc compté au tarif standard, et ces exécutions peuvent être sous-estimées.
@@ -115,8 +115,8 @@ Le bas de la boîte de dialogue rappelle que le coût est estimé et nomme les m
 ## Depuis la CLI
 
 ```bash
-multica issue usage <issue-id>
-multica runtime usage <runtime-id> --days 30
+workpal issue usage <issue-id>
+workpal runtime usage <runtime-id> --days 30
 ```
 
 `issue usage` affiche les totaux de tokens d'une tâche (entrée, sortie, lecture de cache, écriture de cache) et les nombres d'exécutions. `RUNS` est le nombre d'exécutions terminées, `METERED_RUNS` celles qui ont transmis leur consommation, `UNREPORTED` celles qui ne l'ont pas fait ; dès qu'une exécution n'a rien transmis, les totaux de tokens sont précédés de `>=`, car le chiffre réel ne peut être que plus élevé.

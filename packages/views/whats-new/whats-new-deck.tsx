@@ -10,12 +10,12 @@ import {
   type CSSProperties,
   type KeyboardEvent,
 } from "react";
-import { ArrowRight, X } from "@multica/ui/icons";
-import { Button } from "@multica/ui/components/ui/button";
-import { cn } from "@multica/ui/lib/utils";
-import { useChatStore } from "@multica/core/chat";
-import { useCurrentWorkspace, useWorkspacePaths } from "@multica/core/paths";
-import { useDevPromptStore, useSessionPromptStore } from "@multica/core/session-prompt";
+import { ArrowRight, X } from "@workpal/ui/icons";
+import { Button } from "@workpal/ui/components/ui/button";
+import { cn } from "@workpal/ui/lib/utils";
+import { useChatStore } from "@workpal/core/chat";
+import { useCurrentWorkspace, useWorkspacePaths } from "@workpal/core/paths";
+import { useDevPromptStore, useSessionPromptStore } from "@workpal/core/session-prompt";
 import { isFloatingChatRouteSuppressed } from "../chat/floating-chat-visibility";
 import { isQuietMoment } from "../common/quiet-moment";
 import { useT } from "../i18n";

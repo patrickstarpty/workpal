@@ -1,12 +1,12 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { cleanup, fireEvent, render, screen } from "@testing-library/react";
-import { I18nProvider } from "@multica/core/i18n/react";
-import type { IssueSubscriberDelivery } from "@multica/core/types";
+import { I18nProvider } from "@workpal/core/i18n/react";
+import type { IssueSubscriberDelivery } from "@workpal/core/types";
 import enIssues from "../../locales/en/issues.json";
 import { KeyUpdatesSubscriptionBadge } from "./key-updates-subscription-badge";
 
 const push = vi.fn();
-vi.mock("@multica/core/paths", () => ({
+vi.mock("@workpal/core/paths", () => ({
   useWorkspacePaths: () => ({ settings: () => "/acme/settings" }),
 }));
 vi.mock("../../navigation", () => ({ useNavigation: () => ({ push }) }));

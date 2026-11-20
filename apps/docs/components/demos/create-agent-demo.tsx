@@ -1,9 +1,9 @@
 "use client";
 
 import { useState, type ReactNode } from "react";
-import { ArrowRight, AtSign, Bot, Check, CircleCheck, ListPlus, Monitor, Sparkles, Users } from "@multica/ui/icons";
-import { Button } from "@multica/ui/components/ui/button";
-import { cn } from "@multica/ui/lib/utils";
+import { ArrowRight, AtSign, Bot, Check, CircleCheck, ListPlus, Monitor, Sparkles, Users } from "@workpal/ui/icons";
+import { Button } from "@workpal/ui/components/ui/button";
+import { cn } from "@workpal/ui/lib/utils";
 import { CoachMark, DemoFrame, useDemoCopy, useDemoTimers, useStartWhenVisible } from "./demo-kit";
 
 type Harness = { id: string; label: string; version: string };

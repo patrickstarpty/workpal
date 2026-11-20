@@ -16,8 +16,8 @@ import (
 	"sync"
 	"time"
 
-	"github.com/multica-ai/multica/server/internal/daemon/execenv"
-	"github.com/multica-ai/multica/server/internal/daemon/localenv"
+	"workpal.local/workpal/server/internal/daemon/execenv"
+	"workpal.local/workpal/server/internal/daemon/localenv"
 )
 
 const (
@@ -36,7 +36,7 @@ type environmentReporter interface {
 }
 
 // environmentService supervises the environments tasks start with
-// `multica env start`, detects servers agents started on their own, and
+// `workpal env start`, detects servers agents started on their own, and
 // reports both to the issue each task belongs to.
 type environmentService struct {
 	manager        *localenv.Manager
@@ -408,7 +408,7 @@ func pathWithin(path, root string) bool {
 	return err == nil && (rel == "." || filepath.IsLocal(rel))
 }
 
-// Local HTTP API used by `multica environment`. Identity comes from the
+// Local HTTP API used by `workpal environment`. Identity comes from the
 // task-scoped bearer token, exactly as for /repo/checkout.
 
 type environmentStartRequest struct {

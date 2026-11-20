@@ -8,7 +8,7 @@ import (
 	"github.com/google/uuid"
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgtype"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
+	db "workpal.local/workpal/server/pkg/db/generated"
 )
 
 type mediaDeliveryQueries interface {
@@ -30,7 +30,7 @@ type mediaDeliveryOwner struct {
 // The existing reply ledger fences duplicate completion events and retry
 // attempts across replicas and restarts, beyond Feishu's one-hour UUID window.
 // A crashed in-flight batch is never blindly replayed: per-file receipts are
-// unavailable, so a successor reports the uncertainty and leaves files in Multica.
+// unavailable, so a successor reports the uncertainty and leaves files in Workpal.
 func (p *Patcher) claimMediaDelivery(ctx context.Context, taskID pgtype.UUID, binding ChatSessionBinding) (context.Context, func(), bool) {
 	turn, err := p.queries.GetChannelReplyTurn(ctx, taskID)
 	if errors.Is(err, pgx.ErrNoRows) {

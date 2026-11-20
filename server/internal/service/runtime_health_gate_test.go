@@ -9,8 +9,8 @@ import (
 
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgtype"
-	"github.com/multica-ai/multica/server/internal/util"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
+	"workpal.local/workpal/server/internal/util"
+	db "workpal.local/workpal/server/pkg/db/generated"
 )
 
 func TestStaleDispatchRecoveryHonorsBatchLimitWithStaleStatistics(t *testing.T) {
@@ -33,7 +33,7 @@ func TestStaleDispatchRecoveryHonorsBatchLimitWithStaleStatistics(t *testing.T) 
 			var runtimeID, agentID pgtype.UUID
 			if err := tx.QueryRow(ctx, `
 				INSERT INTO agent_runtime (workspace_id, name, runtime_mode, provider, status, visibility, last_seen_at)
-				VALUES (gen_random_uuid(), 'batch reclaim', 'local', 'multica_daemon', 'online', 'public', now())
+				VALUES (gen_random_uuid(), 'batch reclaim', 'local', 'workpal_daemon', 'online', 'public', now())
 				RETURNING id
 			`).Scan(&runtimeID); err != nil {
 				t.Fatal(err)

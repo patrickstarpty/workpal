@@ -14,12 +14,12 @@ import (
 // matches.
 //
 // Why this is surfaced: Hermes keys the dependency stamp on the ACTIVE home's
-// plugin selection. Multica's per-task Hermes home links installs/ back to the
+// plugin selection. Workpal's per-task Hermes home links installs/ back to the
 // user's home but blanks memory.provider (no cross-task memory sharing), so a
 // user whose memory provider plugin declares Python dependencies gets a
-// different stamp per home. Alternating between the Hermes CLI and Multica
+// different stamp per home. Alternating between the Hermes CLI and Workpal
 // tasks then reinstalls the shared environment on every switch (~45-60s and a
-// new generation on disk each time; GH multica#9390, upstream
+// new generation on disk each time; GH workpal#9390, upstream
 // NousResearch/hermes-agent#137726). The stderr forwarder logs at Debug, so
 // without this the cost is invisible in a default daemon log.
 var hermesDepSyncMarkers = []string{
@@ -30,8 +30,8 @@ var hermesDepSyncMarkers = []string{
 
 const hermesDepSyncHint = "Hermes resolves its dependency set from the active home's plugins; " +
 	"the per-task home disables memory.provider, so a memory plugin with Python dependencies " +
-	"in your own Hermes home makes each switch between the Hermes CLI and Multica tasks reinstall " +
-	"the shared environment (multica#9390, NousResearch/hermes-agent#137726)"
+	"in your own Hermes home makes each switch between the Hermes CLI and Workpal tasks reinstall " +
+	"the shared environment (workpal#9390, NousResearch/hermes-agent#137726)"
 
 // hermesDepSyncWatcher sniffs Hermes stderr for a launch-time dependency
 // reinstall and logs one Warn when it is seen and one once the ACP handshake

@@ -29,10 +29,10 @@ import {
   UserMinus,
   UserPen,
   Waves,
-} from "@multica/ui/icons";
-import { Button } from "@multica/ui/components/ui/button";
-import { cn } from "@multica/ui/lib/utils";
-import { Spinner } from "@multica/ui/components/ui/spinner";
+} from "@workpal/ui/icons";
+import { Button } from "@workpal/ui/components/ui/button";
+import { cn } from "@workpal/ui/lib/utils";
+import { Spinner } from "@workpal/ui/components/ui/spinner";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -47,14 +47,14 @@ import {
   DropdownMenuSub,
   DropdownMenuSubTrigger,
   DropdownMenuSubContent,
-} from "@multica/ui/components/ui/dropdown-menu";
+} from "@workpal/ui/components/ui/dropdown-menu";
 import {
   Popover,
   PopoverTrigger,
   PopoverContent,
-} from "@multica/ui/components/ui/popover";
-import { LazyCalendar } from "@multica/ui/components/ui/lazy-calendar";
-import { Switch } from "@multica/ui/components/ui/switch";
+} from "@workpal/ui/components/ui/popover";
+import { LazyCalendar } from "@workpal/ui/components/ui/lazy-calendar";
+import { Switch } from "@workpal/ui/components/ui/switch";
 import {
   Select,
   SelectTrigger,
@@ -62,11 +62,11 @@ import {
   SelectContent,
   SelectGroup,
   SelectItem,
-} from "@multica/ui/components/ui/select";
-import { Toggle } from "@multica/ui/components/ui/toggle";
+} from "@workpal/ui/components/ui/select";
+import { Toggle } from "@workpal/ui/components/ui/toggle";
 import {
   PRIORITY_DISPLAY_ORDER,
-} from "@multica/core/issues/config";
+} from "@workpal/core/issues/config";
 import { StatusIcon, PriorityIcon } from ".";
 import {
   FilterOperator,
@@ -75,20 +75,20 @@ import {
   type FilterChip,
 } from "./filter-chips-bar";
 import { useQuery } from "@tanstack/react-query";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { memberListOptions, agentListOptions, squadListOptions } from "@multica/core/workspace/queries";
-import { projectListOptions } from "@multica/core/projects/queries";
-import { PROJECT_STATUS_CONFIG, PROJECT_STATUS_ORDER } from "@multica/core/projects/config";
-import { labelListOptions } from "@multica/core/labels/queries";
-import { propertyListOptions } from "@multica/core/properties";
-import { propertyIdFromViewKey } from "@multica/core/issues/stores/view-store";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { memberListOptions, agentListOptions, squadListOptions } from "@workpal/core/workspace/queries";
+import { projectListOptions } from "@workpal/core/projects/queries";
+import { PROJECT_STATUS_CONFIG, PROJECT_STATUS_ORDER } from "@workpal/core/projects/config";
+import { labelListOptions } from "@workpal/core/labels/queries";
+import { propertyListOptions } from "@workpal/core/properties";
+import { propertyIdFromViewKey } from "@workpal/core/issues/stores/view-store";
 import type {
   Issue,
   IssueTableFacetSpec,
   IssueTableFacetsResponse,
   ProjectStatus,
-} from "@multica/core/types";
-import { isFilterablePropertyType, propertyFilterValueKey, type PropertyFilterValue } from "@multica/core/types";
+} from "@workpal/core/types";
+import { isFilterablePropertyType, propertyFilterValueKey, type PropertyFilterValue } from "@workpal/core/types";
 import { ProjectIcon } from "../../projects/components/project-icon";
 import { useProjectStatusLabels } from "../../projects/components/labels";
 import { ActorAvatar } from "../../common/actor-avatar";
@@ -113,8 +113,8 @@ import {
   type SwimlaneGrouping,
   type TableGrouping,
   type ViewMode,
-} from "@multica/core/issues/stores/view-store";
-import { useViewStore, useViewStoreApi } from "@multica/core/issues/stores/view-store-context";
+} from "@workpal/core/issues/stores/view-store";
+import { useViewStore, useViewStoreApi } from "@workpal/core/issues/stores/view-store-context";
 import {
   advancedFilterSignature,
   countAdvancedConditions,
@@ -122,10 +122,10 @@ import {
   NEGATABLE_FILTER_DIMENSIONS,
   simpleFieldValues,
   type AdvancedFilterGroup,
-} from "@multica/core/issues/stores/filter-tree";
-import { actorFilterKey, type IssueViewBaseline } from "@multica/core/issue-views/baseline";
-import { addDaysDateOnly, dateOnlyToLocalDate, formatDateOnly, toDateOnly, todayDateOnly } from "@multica/core/issues/date";
-import { Tooltip, TooltipTrigger, TooltipContent } from "@multica/ui/components/ui/tooltip";
+} from "@workpal/core/issues/stores/filter-tree";
+import { actorFilterKey, type IssueViewBaseline } from "@workpal/core/issue-views/baseline";
+import { addDaysDateOnly, dateOnlyToLocalDate, formatDateOnly, toDateOnly, todayDateOnly } from "@workpal/core/issues/date";
+import { Tooltip, TooltipTrigger, TooltipContent } from "@workpal/ui/components/ui/tooltip";
 import { useT } from "../../i18n";
 import { useStatusOptions } from "../utils/status-options";
 import { useColumnStatuses } from "../surface/column-statuses-context";

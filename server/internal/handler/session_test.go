@@ -6,8 +6,8 @@ import (
 	"time"
 
 	"github.com/golang-jwt/jwt/v5"
-	"github.com/multica-ai/multica/server/internal/auth"
-	"github.com/multica-ai/multica/server/internal/testutil"
+	"workpal.local/workpal/server/internal/auth"
+	"workpal.local/workpal/server/internal/testutil"
 )
 
 // refreshSessionToken signs a session for the shared test user.

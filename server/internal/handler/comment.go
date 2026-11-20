@@ -16,13 +16,13 @@ import (
 	"github.com/go-chi/chi/v5"
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgtype"
-	"github.com/multica-ai/multica/server/internal/logger"
-	obsmetrics "github.com/multica-ai/multica/server/internal/metrics"
-	"github.com/multica-ai/multica/server/internal/service"
-	"github.com/multica-ai/multica/server/internal/util"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
-	"github.com/multica-ai/multica/server/pkg/dbid"
-	"github.com/multica-ai/multica/server/pkg/protocol"
+	"workpal.local/workpal/server/internal/logger"
+	obsmetrics "workpal.local/workpal/server/internal/metrics"
+	"workpal.local/workpal/server/internal/service"
+	"workpal.local/workpal/server/internal/util"
+	db "workpal.local/workpal/server/pkg/db/generated"
+	"workpal.local/workpal/server/pkg/dbid"
+	"workpal.local/workpal/server/pkg/protocol"
 )
 
 type CommentResponse struct {
@@ -636,8 +636,8 @@ func (h *Handler) ListComments(w http.ResponseWriter, r *http.Request) {
 	// body so the default flat-array response shape — which the desktop UI
 	// and existing callers depend on — is unchanged.
 	if result.NextBefore != "" && result.NextBeforeID != "" {
-		w.Header().Set("X-Multica-Next-Before", result.NextBefore)
-		w.Header().Set("X-Multica-Next-Before-Id", result.NextBeforeID)
+		w.Header().Set("X-Workpal-Next-Before", result.NextBefore)
+		w.Header().Set("X-Workpal-Next-Before-Id", result.NextBeforeID)
 	}
 	if result.CommentsTruncated {
 		w.Header().Set(HeaderCommentsTruncated, "true")
@@ -2817,7 +2817,7 @@ func (h *Handler) routeReplyToParentAuthor(ctx context.Context, issue db.Issue, 
 //
 // Without it, replying directly to a leader's comment demoted the next run to
 // a generic direct-agent task (MUL-4024's thread-parent gap): no squad
-// briefing at claim time, `multica squad activity` rejected, and — on a
+// briefing at claim time, `workpal squad activity` rejected, and — on a
 // project with a local_directory resource — the coordinator dragged into the
 // user's own directory, queued behind its path mutex and stripped of the
 // prior session it was still holding a workdir for (MUL-7006). Replying to a

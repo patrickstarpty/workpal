@@ -68,7 +68,7 @@ export const useSquadsViewStore = createCollectionViewStore<
   { scope: SquadsScope },
   { setScope: (scope: SquadsScope) => void }
 >({
-  name: "multica_squads_view",
+  name: "workpal_squads_view",
   defaultSortField: "name",
   sortDefaultDirection: SQUAD_SORT_DEFAULT_DIRECTION,
   defaultHiddenColumns: SQUAD_DEFAULT_HIDDEN_COLUMNS,

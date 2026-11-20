@@ -1,8 +1,8 @@
 import { NextResponse, type NextRequest } from "next/server";
-import { LOCALE_COOKIE, type SupportedLocale } from "@multica/core/i18n";
+import { LOCALE_COOKIE, type SupportedLocale } from "@workpal/core/i18n";
 import {
   isSupportedLocale,
-  MULTICA_LOCALE_HEADER,
+  WORKPAL_LOCALE_HEADER,
   resolveLocaleFromSignals,
 } from "./lib/locale-routing";
 import {
@@ -39,13 +39,13 @@ function resolveLocale(req: NextRequest): SupportedLocale {
   });
 }
 
-// Forward the resolved locale to RSC layouts via the `x-multica-locale`
+// Forward the resolved locale to RSC layouts via the `x-workpal-locale`
 // request header. layout.tsx reads it through `await headers()`. The
 // `request: { headers }` form is what makes the header land on the upstream
 // request — without it the value would only sit on the response.
 function nextWithLocale(req: NextRequest, locale = resolveLocale(req)): NextResponse {
   const headers = new Headers(req.headers);
-  headers.set(MULTICA_LOCALE_HEADER, locale);
+  headers.set(WORKPAL_LOCALE_HEADER, locale);
   return NextResponse.next({ request: { headers } });
 }
 
@@ -66,7 +66,7 @@ function routeLandingLocale(
     const url = req.nextUrl.clone();
     url.pathname = prefixed.path;
     const headers = new Headers(req.headers);
-    headers.set(MULTICA_LOCALE_HEADER, prefixed.locale);
+    headers.set(WORKPAL_LOCALE_HEADER, prefixed.locale);
     return NextResponse.rewrite(url, { request: { headers } });
   }
   if (!isLandingPath(pathname)) return null;
@@ -98,7 +98,7 @@ export function proxy(req: NextRequest) {
     return NextResponse.rewrite(url);
   }
 
-  const hasSession = req.cookies.has("multica_logged_in");
+  const hasSession = req.cookies.has("workpal_logged_in");
   const lastSlug = req.cookies.get("last_workspace_slug")?.value;
 
   // --- Legacy URL redirect: /issues/... → /{slug}/issues/... ---
@@ -135,7 +135,7 @@ export function proxy(req: NextRequest) {
 
   // --- Root path: redirect logged-in users to their last workspace ---
   // The official cloud host also serves the public marketing site. Visiting
-  // https://multica.ai/ must remain a public-site navigation even when a local
+  // https://workpal.invalid/ must remain a public-site navigation even when a local
   // desktop/runtime session has fresh auth cookies; explicit app routes such
   // as /acme/issues and legacy /issues still route to the workspace app.
   if (

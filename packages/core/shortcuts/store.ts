@@ -132,7 +132,7 @@ export const useShortcutStore = create<ShortcutState>()(
       resetAll: () => set({ overrides: {} }),
     }),
     {
-      name: "multica_keyboard_shortcuts",
+      name: "workpal_keyboard_shortcuts",
       storage: createJSONStorage(() => defaultStorage),
       partialize: (state) => ({ overrides: state.overrides }),
       version: 2,

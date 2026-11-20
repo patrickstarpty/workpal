@@ -1,8 +1,8 @@
 import { queryOptions, useMutation, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { z } from "zod";
-import { api } from "@multica/core/api";
-import { parseWithFallback } from "@multica/core/api/schema";
+import { api } from "@workpal/core/api";
+import { parseWithFallback } from "@workpal/core/api/schema";
 import { useFoldersT } from "./i18n";
 
 export interface ProjectFolder {

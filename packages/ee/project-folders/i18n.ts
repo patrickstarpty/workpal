@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import type { i18n as I18n } from "i18next";
-import type { SupportedLocale } from "@multica/core/i18n";
+import type { SupportedLocale } from "@workpal/core/i18n";
 import en from "./locales/en.json";
 import es from "./locales/es.json";
 import fr from "./locales/fr.json";

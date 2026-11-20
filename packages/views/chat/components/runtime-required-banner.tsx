@@ -1,9 +1,9 @@
 "use client";
 
-import { Server } from "@multica/ui/icons";
-import { useWorkspacePaths } from "@multica/core/paths";
-import { Button } from "@multica/ui/components/ui/button";
-import { cn } from "@multica/ui/lib/utils";
+import { Server } from "@workpal/ui/icons";
+import { useWorkspacePaths } from "@workpal/core/paths";
+import { Button } from "@workpal/ui/components/ui/button";
+import { cn } from "@workpal/ui/lib/utils";
 import { AppLink } from "../../navigation";
 import { useT } from "../../i18n";
 import { CHAT_COLUMN, CHAT_GUTTER } from "./chat-column";

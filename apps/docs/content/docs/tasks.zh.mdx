@@ -7,7 +7,7 @@ import { Callout } from "fumadocs-ui/components/callout";
 import { Tab, Tabs } from "fumadocs-ui/components/tabs";
 import { RunLifecycleDemo } from "@/components/demos/run-lifecycle-demo";
 
-智能体每开始一次工作，Multica 就创建一条**运行记录**，写明这次运行由什么触发、交给了哪个智能体、进行到哪里、最后是否成功。
+智能体每开始一次工作，Workpal 就创建一条**运行记录**，写明这次运行由什么触发、交给了哪个智能体、进行到哪里、最后是否成功。
 
 ## 任务与运行
 
@@ -31,7 +31,7 @@ import { RunLifecycleDemo } from "@/components/demos/run-lifecycle-demo";
 - 由自动化按计划或外部事件触发。
 - [任务唤醒](/issue-wakeups)的事件、时间或条件到了。
 
-入口不同，智能体拿到的上下文也不同，执行方式则是一样的：Multica 创建运行，运行时领取它，再调用智能体配置的 AI 编程工具。
+入口不同，智能体拿到的上下文也不同，执行方式则是一样的：Workpal 创建运行，运行时领取它，再调用智能体配置的 AI 编程工具。
 
 ## 执行过程
 
@@ -146,13 +146,13 @@ import { RunLifecycleDemo } from "@/components/demos/run-lifecycle-demo";
 通过 CLI 找到原运行，再重试：
 
 ```bash
-multica issue runs <issue-id> --full-id
-multica issue rerun-task <run-id>
+workpal issue runs <issue-id> --full-id
+workpal issue rerun-task <run-id>
 ```
 
 使用完整运行 UUID 时可以省略 `--issue`；短 ID 前缀必须用 `--issue` 指定任务。命令会沿用原智能体和触发上下文，会话与目录的复用规则和重试按钮相同。添加 `--fresh` 可从新的会话和工作目录开始。
 
-旧命令 `multica issue rerun <issue-id>` 已弃用，并从帮助列表中隐藏。现有脚本仍可使用它，行为保持为让当前负责人从新会话和工作目录开始。
+旧命令 `workpal issue rerun <issue-id>` 已弃用，并从帮助列表中隐藏。现有脚本仍可使用它，行为保持为让当前负责人从新会话和工作目录开始。
 
 ## 运行完成与任务完成
 
@@ -168,7 +168,7 @@ multica issue rerun-task <run-id>
 | `queued` | 等待运行时领取 | 只要运行时还在心跳就一直等待，并且无论如何都会在入队后至少保留一个重连宽限期；两个窗口都过去才会失败，且不会自动重试 |
 | `dispatched` | 运行时已领取，正在启动工具 | 停留超过 **5 分钟**按失败处理 |
 | `waiting_local_directory` | 等待本地目录锁释放 | 没有独立超时；目录释放后回到启动流程 |
-| `running` | AI 编程工具正在执行 | 不设固定时长上限；以运行时心跳判定存活，心跳每 15 秒一次，失去心跳的运行时最迟约 3 分钟被判为离线。其上的运行要等心跳缺席超过重连宽限期（`MULTICA_RUNTIME_RECONNECT_GRACE`，默认 3 小时）才失败；守护进程重启时，会直接回收这些运行 |
+| `running` | AI 编程工具正在执行 | 不设固定时长上限；以运行时心跳判定存活，心跳每 15 秒一次，失去心跳的运行时最迟约 3 分钟被判为离线。其上的运行要等心跳缺席超过重连宽限期（`WORKPAL_RUNTIME_RECONNECT_GRACE`，默认 3 小时）才失败；守护进程重启时，会直接回收这些运行 |
 
 自动重试只覆盖以下临时故障，且仅适用于挂在任务或对话上的运行（自动化**仅运行**模式除外）：
 

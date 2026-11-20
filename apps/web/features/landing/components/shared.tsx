@@ -1,8 +1,8 @@
-import { cn } from "@multica/ui/lib/utils";
+import { cn } from "@workpal/ui/lib/utils";
 
-export const githubUrl = "https://github.com/multica-ai/multica";
-export const twitterUrl = "https://x.com/MulticaAI";
-export const discordUrl = "https://discord.gg/W8gYBn226t";
+export const githubUrl = "";
+export const twitterUrl = "";
+export const discordUrl = "";
 
 export function GitHubMark({ className }: { className?: string }) {
   return (

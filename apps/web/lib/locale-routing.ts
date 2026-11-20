@@ -2,9 +2,9 @@ import {
   matchLocale,
   SUPPORTED_LOCALES,
   type SupportedLocale,
-} from "@multica/core/i18n";
+} from "@workpal/core/i18n";
 
-export const MULTICA_LOCALE_HEADER = "x-multica-locale";
+export const WORKPAL_LOCALE_HEADER = "x-workpal-locale";
 
 export function isSupportedLocale(
   value: string | null,

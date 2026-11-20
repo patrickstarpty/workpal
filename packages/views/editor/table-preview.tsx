@@ -23,10 +23,10 @@ import {
   type Row,
   type SortingState,
 } from "@tanstack/react-table";
-import { ArrowDown, ArrowUp, ArrowUpDown } from "@multica/ui/icons";
-import { DataTable } from "@multica/ui/components/ui/data-table";
-import { cn } from "@multica/ui/lib/utils";
-import { TruncatedTooltip } from "@multica/ui/components/common/truncated-tooltip";
+import { ArrowDown, ArrowUp, ArrowUpDown } from "@workpal/ui/icons";
+import { DataTable } from "@workpal/ui/components/ui/data-table";
+import { cn } from "@workpal/ui/lib/utils";
+import { TruncatedTooltip } from "@workpal/ui/components/common/truncated-tooltip";
 import { useT } from "../i18n";
 import {
   parseDelimited,

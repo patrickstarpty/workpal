@@ -3,11 +3,11 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { act, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { I18nProvider } from "@multica/core/i18n/react";
-import { configStore } from "@multica/core/config";
-import type { DaemonConfigStatus, DaemonSetupTarget } from "@multica/core/runtimes";
-import { runtimeKeys } from "@multica/core/runtimes/queries";
-import type { AgentRuntime } from "@multica/core/types";
+import { I18nProvider } from "@workpal/core/i18n/react";
+import { configStore } from "@workpal/core/config";
+import type { DaemonConfigStatus, DaemonSetupTarget } from "@workpal/core/runtimes";
+import { runtimeKeys } from "@workpal/core/runtimes/queries";
+import type { AgentRuntime } from "@workpal/core/types";
 import enCommon from "../../locales/en/common.json";
 import enRuntimes from "../../locales/en/runtimes.json";
 import { ConnectRemoteDialog } from "./connect-remote-dialog";
@@ -22,8 +22,8 @@ const workspaceState = vi.hoisted(() => ({
 }));
 const authState = vi.hoisted(() => ({ user: { id: "user-test" } as { id: string } | null }));
 const runtimeApi = vi.hoisted(() => ({ listRuntimes: vi.fn<() => Promise<AgentRuntime[]>>() }));
-vi.mock("@multica/core/api", () => ({ api: runtimeApi }));
-vi.mock("@multica/core/auth", () => ({
+vi.mock("@workpal/core/api", () => ({ api: runtimeApi }));
+vi.mock("@workpal/core/auth", () => ({
   useAuthStore: Object.assign(
     (select: (state: typeof authState) => unknown) => select(authState),
     { getState: () => authState },
@@ -48,13 +48,13 @@ const clipboard = vi.hoisted(() => ({
   copyText: vi.fn<(text: string) => Promise<boolean>>(),
 }));
 
-vi.mock("@multica/ui/lib/clipboard", () => ({ copyText: clipboard.copyText }));
+vi.mock("@workpal/ui/lib/clipboard", () => ({ copyText: clipboard.copyText }));
 
-vi.mock("@multica/core/hooks", () => ({
+vi.mock("@workpal/core/hooks", () => ({
   useWorkspaceId: () => workspaceState.id,
 }));
 
-vi.mock("@multica/core/paths", () => ({
+vi.mock("@workpal/core/paths", () => ({
   paths: {
     workspace: () => ({
       agents: () => "/agents",
@@ -70,9 +70,9 @@ const wsEventState = vi.hoisted(() => ({
 }));
 
 const WINDOWS_CMD =
-  "irm https://raw.githubusercontent.com/multica-ai/multica/main/scripts/install.ps1 | iex";
+  "irm https://raw.githubusercontent.com/workpal-ai/workpal/main/scripts/install.ps1 | iex";
 
-vi.mock("@multica/core/realtime", () => ({
+vi.mock("@workpal/core/realtime", () => ({
   useWSEvent: (_event: string, handler: (payload: unknown) => void) => {
     wsEventState.handler = handler;
   },
@@ -168,13 +168,13 @@ describe("ConnectRemoteDialog", () => {
   it("uses cloud setup commands by default", () => {
     const { baseElement } = renderDialog();
 
-    expect(baseElement).toHaveTextContent("multica setup");
-    expect(baseElement).not.toHaveTextContent("multica setup self-host");
+    expect(baseElement).toHaveTextContent("workpal setup");
+    expect(baseElement).not.toHaveTextContent("workpal setup self-host");
     expect(baseElement).toHaveTextContent(
-      "multica config set server_url https://api.multica.ai",
+      "workpal config set server_url https://workpal.invalid",
     );
     expect(baseElement).toHaveTextContent(
-      "multica config set app_url https://multica.ai",
+      "workpal config set app_url https://workpal.invalid",
     );
   });
 
@@ -186,13 +186,13 @@ describe("ConnectRemoteDialog", () => {
     });
 
     expect(baseElement).toHaveTextContent(
-      "multica setup self-host --server-url https://api.example.com --app-url https://app.example.com",
+      "workpal setup self-host --server-url https://api.example.com --app-url https://app.example.com",
     );
     expect(baseElement).toHaveTextContent(
-      "multica config set server_url https://api.example.com",
+      "workpal config set server_url https://api.example.com",
     );
     expect(baseElement).toHaveTextContent(
-      "multica config set app_url https://app.example.com",
+      "workpal config set app_url https://app.example.com",
     );
   });
 
@@ -201,24 +201,24 @@ describe("ConnectRemoteDialog", () => {
     expect(screen.getByRole("status")).toHaveTextContent(
       "Loading connection settings",
     );
-    expect(baseElement).not.toHaveTextContent("multica setup");
-    expect(baseElement).not.toHaveTextContent("multica config set");
+    expect(baseElement).not.toHaveTextContent("workpal setup");
+    expect(baseElement).not.toHaveTextContent("workpal config set");
     act(() => configStore.getState().setDaemonConfigStatus("error"));
     expect(screen.getByRole("alert")).toHaveTextContent(
       "Couldn't load connection settings",
     );
-    expect(baseElement).not.toHaveTextContent("multica setup");
-    expect(baseElement).not.toHaveTextContent("multica config set");
+    expect(baseElement).not.toHaveTextContent("workpal setup");
+    expect(baseElement).not.toHaveTextContent("workpal config set");
     act(() => configStore.getState().setDaemonConfig({
       daemonSetupTarget: "self_host",
       daemonServerUrl: "https://api.example.com",
       daemonAppUrl: "https://app.example.com",
     }));
     expect(baseElement).toHaveTextContent(
-      "multica setup self-host --server-url https://api.example.com --app-url https://app.example.com",
+      "workpal setup self-host --server-url https://api.example.com --app-url https://app.example.com",
     );
     expect(baseElement).toHaveTextContent(
-      "multica config set server_url https://api.example.com",
+      "workpal config set server_url https://api.example.com",
     );
   });
 
@@ -228,8 +228,8 @@ describe("ConnectRemoteDialog", () => {
   ])("withholds both command paths for unresolved config %j", (config) => {
     const { baseElement } = renderDialog(config);
     expect(screen.getByRole("alert")).toBeInTheDocument();
-    expect(baseElement).not.toHaveTextContent("multica setup");
-    expect(baseElement).not.toHaveTextContent("multica config set");
+    expect(baseElement).not.toHaveTextContent("workpal setup");
+    expect(baseElement).not.toHaveTextContent("workpal config set");
     expect(screen.getAllByRole("button", { name: "Copy" })).toHaveLength(1);
   });
 
@@ -254,7 +254,7 @@ describe("ConnectRemoteDialog", () => {
     const user = userEvent.setup();
     const { baseElement, qc } = await renderListeningDialog();
 
-    expect(baseElement).toHaveTextContent("multica setup");
+    expect(baseElement).toHaveTextContent("workpal setup");
     const runtime = makeRuntime();
     runtimeApi.listRuntimes.mockResolvedValue([runtime]);
     await refreshRuntimes(qc, { runtimes: [runtime] });
@@ -265,7 +265,7 @@ describe("ConnectRemoteDialog", () => {
         screen.getByRole("button", { name: "Create an agent" }),
       ).toBeInTheDocument();
     });
-    expect(baseElement).not.toHaveTextContent("multica setup");
+    expect(baseElement).not.toHaveTextContent("workpal setup");
     expect(runtimeApi.listRuntimes).toHaveBeenCalledWith({ workspace_id: WS_ID, owner: "me" }, "workspace-test");
     await user.click(screen.getByRole("button", { name: "View runtime" }));
     expect(navigationState.push).toHaveBeenCalledWith("/runtimes/rt-new");
@@ -284,7 +284,7 @@ describe("ConnectRemoteDialog", () => {
     const { qc } = await renderListeningDialog();
     await refreshRuntimes(qc, payload);
     expect(screen.queryByText("Machine connected")).not.toBeInTheDocument();
-    expect(screen.getByText("multica setup")).toBeInTheDocument();
+    expect(screen.getByText("workpal setup")).toBeInTheDocument();
   });
 
   it("does not report success from an offline notification alone", async () => {
@@ -474,7 +474,7 @@ describe("ConnectRemoteDialog", () => {
     await waitFor(() => expect(view.qc.getQueryData(runtimeKeys.listMine(nextWorkspace))).toEqual([]));
     await refreshRuntimes(view.qc, { runtime_profile_id: "existing-profile" });
     expect(screen.queryByText("Machine connected")).not.toBeInTheDocument();
-    expect(screen.getByText("multica setup")).toBeInTheDocument();
+    expect(screen.getByText("workpal setup")).toBeInTheDocument();
   });
 
 

@@ -35,10 +35,10 @@ import (
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgtype"
 
-	"github.com/multica-ai/multica/server/internal/events"
-	"github.com/multica-ai/multica/server/internal/util"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
-	"github.com/multica-ai/multica/server/pkg/protocol"
+	"workpal.local/workpal/server/internal/events"
+	"workpal.local/workpal/server/internal/util"
+	db "workpal.local/workpal/server/pkg/db/generated"
+	"workpal.local/workpal/server/pkg/protocol"
 )
 
 // transcriptLookup reads the rows a bubble shows. *db.Queries satisfies it.
@@ -276,12 +276,12 @@ func progressEventID(n progressNudge) string {
 // Neither task:progress nor task:message carries a chat session, so the rows
 // are the only answer, and one run posts dozens of reports. Hence the cache,
 // which also remembers the runs that are not WeCom's so an issue run, an
-// autopilot run or a question typed in Multica costs one read and then
+// autopilot run or a question typed in Workpal costs one read and then
 // nothing.
 //
 // The delivery row comes first because it is the cheaper "no": it exists only
 // for a run asked over a channel, and it names the bot. A run with no row was
-// typed in Multica, and although it can hold a WeCom round for a moment
+// typed in Workpal, and although it can hold a WeCom round for a moment
 // (task:queued binds it; the origin gate gives it back at the end), its steps
 // are not the room's question's steps. The round comes off the task row: see
 // task_sessions.go for why that column is what an auto-retry clone is resolved

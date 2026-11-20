@@ -1,10 +1,10 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import type { Agent, AgentRuntime, MemberWithUser } from "@multica/core/types";
-import { providerSupportsMcpConfig } from "@multica/core/agents";
-import { useFeatureEnabled } from "@multica/core/config";
-import { COMPOSIO_MCP_APPS_FLAG } from "@multica/core/feature-flags";
+import type { Agent, AgentRuntime, MemberWithUser } from "@workpal/core/types";
+import { providerSupportsMcpConfig } from "@workpal/core/agents";
+import { useFeatureEnabled } from "@workpal/core/config";
+import { COMPOSIO_MCP_APPS_FLAG } from "@workpal/core/feature-flags";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -14,15 +14,15 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@multica/ui/components/ui/alert-dialog";
+} from "@workpal/ui/components/ui/alert-dialog";
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
-} from "@multica/ui/components/ui/dialog";
-import { cn } from "@multica/ui/lib/utils";
+} from "@workpal/ui/components/ui/dialog";
+import { cn } from "@workpal/ui/lib/utils";
 import { SkillsTab } from "./tabs/skills-tab";
 import { EnvTab } from "./tabs/env-tab";
 import { CustomArgsTab } from "./tabs/custom-args-tab";

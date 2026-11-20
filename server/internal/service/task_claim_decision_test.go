@@ -5,7 +5,7 @@ import (
 
 	"github.com/jackc/pgx/v5/pgtype"
 
-	obsmetrics "github.com/multica-ai/multica/server/internal/metrics"
+	obsmetrics "workpal.local/workpal/server/internal/metrics"
 )
 
 // This runs without a database: claimReasonFor, normalizeClaimPath, and the
@@ -170,9 +170,9 @@ func TestClaimDecisionIncrementsLabeledSeries(t *testing.T) {
 func claimDecisionCount(t *testing.T, m *obsmetrics.BusinessMetrics, claimPath, outcome, reason string) float64 {
 	t.Helper()
 
-	fam := obsmetrics.GatherForTest(t, m)["multica_agent_task_claim_decision_total"]
+	fam := obsmetrics.GatherForTest(t, m)["workpal_agent_task_claim_decision_total"]
 	if fam == nil {
-		t.Fatalf("multica_agent_task_claim_decision_total not registered")
+		t.Fatalf("workpal_agent_task_claim_decision_total not registered")
 	}
 	for _, mtr := range fam.GetMetric() {
 		if labelValue(mtr, "claim_path") == claimPath && labelValue(mtr, "outcome") == outcome && labelValue(mtr, "reason") == reason {

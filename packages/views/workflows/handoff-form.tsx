@@ -3,31 +3,31 @@
 import { useEffect, useId, useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { toast } from "sonner";
-import { api, clientErrorMessage } from "@multica/core/api";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { useIssueStatuses } from "@multica/core/issue-statuses/hooks";
-import { useSetWorkflowHandoff, workflowNextStatus } from "@multica/core/issue-workflows";
-import { projectListOptions } from "@multica/core/projects/queries";
-import { agentListOptions, memberListOptions, squadListOptions } from "@multica/core/workspace/queries";
-import type { IssueWorkflow, IssueWorkflowStep, Project } from "@multica/core/types";
-import { Button } from "@multica/ui/components/ui/button";
+import { api, clientErrorMessage } from "@workpal/core/api";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { useIssueStatuses } from "@workpal/core/issue-statuses/hooks";
+import { useSetWorkflowHandoff, workflowNextStatus } from "@workpal/core/issue-workflows";
+import { projectListOptions } from "@workpal/core/projects/queries";
+import { agentListOptions, memberListOptions, squadListOptions } from "@workpal/core/workspace/queries";
+import type { IssueWorkflow, IssueWorkflowStep, Project } from "@workpal/core/types";
+import { Button } from "@workpal/ui/components/ui/button";
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
-} from "@multica/ui/components/ui/dialog";
+} from "@workpal/ui/components/ui/dialog";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
-} from "@multica/ui/components/ui/select";
-import { Spinner } from "@multica/ui/components/ui/spinner";
-import { Textarea } from "@multica/ui/components/ui/textarea";
-import { cn } from "@multica/ui/lib/utils";
-import { ChevronDown } from "@multica/ui/icons";
+} from "@workpal/ui/components/ui/select";
+import { Spinner } from "@workpal/ui/components/ui/spinner";
+import { Textarea } from "@workpal/ui/components/ui/textarea";
+import { cn } from "@workpal/ui/lib/utils";
+import { ChevronDown } from "@workpal/ui/icons";
 import { ActorAvatar } from "../common/actor-avatar";
 import { PickerEmpty, PickerItem, PickerSection, PropertyPicker } from "../issues/components/pickers/property-picker";
 import { StatusIcon } from "../issues/components/status-icon";

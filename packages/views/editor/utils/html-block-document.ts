@@ -1,4 +1,4 @@
-import { EMBED_TOKENS, embedTokenDeclarations } from "@multica/core/appearance";
+import { EMBED_TOKENS, embedTokenDeclarations } from "@workpal/core/appearance";
 import type { EmbedTheme } from "../../common/embed-theme";
 import { withFragmentNavShim } from "./iframe-fragment-nav";
 
@@ -24,7 +24,7 @@ import { withFragmentNavShim } from "./iframe-fragment-nav";
  */
 
 /** Marker on every bridge message; anything without it is ignored. */
-export const HTML_BLOCK_MESSAGE_KEY = "__multicaHtmlBlock";
+export const HTML_BLOCK_MESSAGE_KEY = "__workpalHtmlBlock";
 
 // The bridge is one line on purpose: it sits on the author's first line, so a
 // script error's line number still points at the author's own source.

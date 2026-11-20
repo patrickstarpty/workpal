@@ -118,14 +118,14 @@ func buildDroidArgs(opts ExecOptions, logger *slog.Logger) ([]string, error) {
 
 func (b *droidBackend) Execute(ctx context.Context, prompt string, opts ExecOptions) (*Session, error) {
 	if hasManagedMcpConfig(opts.McpConfig) {
-		return nil, fmt.Errorf("droid does not support Multica-managed MCP configuration; configure MCP in Droid itself")
+		return nil, fmt.Errorf("droid does not support Workpal-managed MCP configuration; configure MCP in Droid itself")
 	}
 	execPath := b.cfg.ExecutablePath
 	if execPath == "" {
 		execPath = "droid"
 	}
 	if _, err := exec.LookPath(execPath); err != nil {
-		return nil, fmt.Errorf("droid executable not found at %q; install Factory Droid or set MULTICA_DROID_PATH: %w", execPath, err)
+		return nil, fmt.Errorf("droid executable not found at %q; install Factory Droid or set WORKPAL_DROID_PATH: %w", execPath, err)
 	}
 	args, err := buildDroidArgs(opts, b.cfg.Logger)
 	if err != nil {
@@ -145,7 +145,7 @@ func (b *droidBackend) Execute(ctx context.Context, prompt string, opts ExecOpti
 		}
 	}()
 	if opts.SystemPrompt != "" {
-		file, err := os.CreateTemp("", "multica-droid-system-*.md")
+		file, err := os.CreateTemp("", "workpal-droid-system-*.md")
 		if err != nil {
 			cancel()
 			return nil, fmt.Errorf("create droid system prompt file: %w", err)

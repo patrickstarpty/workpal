@@ -21,8 +21,8 @@ import (
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgtype"
 
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
-	"github.com/multica-ai/multica/server/pkg/dbid"
+	db "workpal.local/workpal/server/pkg/db/generated"
+	"workpal.local/workpal/server/pkg/dbid"
 )
 
 // channelTypeFeishu is the channel_type discriminator for every row this
@@ -241,7 +241,7 @@ func (s *ChannelStore) CreateLarkUserBinding(ctx context.Context, arg CreateUser
 	}
 	row, err := s.Queries.CreateChannelUserBinding(ctx, db.CreateChannelUserBindingParams{
 		WorkspaceID:    arg.WorkspaceID,
-		MulticaUserID:  arg.MulticaUserID,
+		WorkpalUserID:  arg.WorkpalUserID,
 		InstallationID: arg.InstallationID,
 		ChannelType:    channelTypeFeishu,
 		ChannelUserID:  arg.ChannelUserID,

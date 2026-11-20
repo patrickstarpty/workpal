@@ -30,8 +30,8 @@ const (
 	SourceConfig   = "config"
 	SourceDetected = "detected"
 
-	// Each environment gets ten consecutive ports, MULTICA_PORT through
-	// MULTICA_PORT+9, so a web app and its API can run side by side and
+	// Each environment gets ten consecutive ports, WORKPAL_PORT through
+	// WORKPAL_PORT+9, so a web app and its API can run side by side and
 	// parallel tasks never collide.
 	portBlock  = 10
 	portLow    = 41000
@@ -673,13 +673,13 @@ func portFree(port int) bool {
 	return true
 }
 
-// childEnv is the daemon's environment without the Multica identity a task
+// childEnv is the daemon's environment without the Workpal identity a task
 // carries, plus the caller's PATH so the repository's toolchain resolves.
 func childEnv(pathEnv string, port int, name string) []string {
 	env := make([]string, 0, len(os.Environ())+3)
 	for _, kv := range os.Environ() {
 		key, _, _ := strings.Cut(kv, "=")
-		if strings.HasPrefix(key, "MULTICA_") || (pathEnv != "" && key == "PATH") {
+		if strings.HasPrefix(key, "WORKPAL_") || (pathEnv != "" && key == "PATH") {
 			continue
 		}
 		env = append(env, kv)
@@ -687,7 +687,7 @@ func childEnv(pathEnv string, port int, name string) []string {
 	if pathEnv != "" {
 		env = append(env, "PATH="+pathEnv)
 	}
-	return append(env, fmt.Sprintf("MULTICA_PORT=%d", port), "MULTICA_ENVIRONMENT="+name)
+	return append(env, fmt.Sprintf("WORKPAL_PORT=%d", port), "WORKPAL_ENVIRONMENT="+name)
 }
 
 // exitDetail says how the start command ended and nothing it printed: the

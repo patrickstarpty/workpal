@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from "vitest";
 import { fireEvent, screen } from "@testing-library/react";
-import type { Issue } from "@multica/core/types";
+import type { Issue } from "@workpal/core/types";
 import { renderWithI18n } from "../../test/i18n";
 import { BatchActionToolbar } from "./batch-action-toolbar";
 import { IssueActionsContextMenu, IssueContextMenuProvider } from "../actions/issue-actions-context-menu";
@@ -10,28 +10,28 @@ import { IssueActionsContextMenu, IssueContextMenuProvider } from "../actions/is
 
 const selection = vi.hoisted(() => ({ selectedIds: new Set<string>(["a", "b"]), clear: vi.fn() }));
 
-vi.mock("@multica/core/issues/stores/selection-store", () => ({
+vi.mock("@workpal/core/issues/stores/selection-store", () => ({
   useIssueSelectionStore: (selector: (s: typeof selection) => unknown) => selector(selection),
 }));
-vi.mock("@multica/core/issues/use-issue-deletion", () => ({
+vi.mock("@workpal/core/issues/use-issue-deletion", () => ({
   useIssueDeletion: () => ({ canDelete: () => true }),
 }));
-vi.mock("@multica/core/issues/mutations", () => ({
+vi.mock("@workpal/core/issues/mutations", () => ({
   useBatchUpdateIssues: () => ({ mutateAsync: vi.fn(), isPending: false }),
   useBatchDeleteIssues: () => ({ mutateAsync: vi.fn(), isPending: false }),
   useCancelIssueRun: () => ({ mutateAsync: vi.fn() }),
 }));
-vi.mock("@multica/core/hooks", () => ({ useWorkspaceId: () => "ws-1" }));
-vi.mock("@multica/core/issue-workflows", async (importOriginal) => ({
-  ...(await importOriginal<typeof import("@multica/core/issue-workflows")>()),
+vi.mock("@workpal/core/hooks", () => ({ useWorkspaceId: () => "ws-1" }));
+vi.mock("@workpal/core/issue-workflows", async (importOriginal) => ({
+  ...(await importOriginal<typeof import("@workpal/core/issue-workflows")>()),
   useIssueWorkflows: () => ({ workflows: [] }),
 }));
 vi.mock("@tanstack/react-query", async (importOriginal) => ({
   ...(await importOriginal<typeof import("@tanstack/react-query")>()),
   useQuery: () => ({ data: [] }),
 }));
-vi.mock("@multica/core/paths", async (importOriginal) => ({
-  ...(await importOriginal<typeof import("@multica/core/paths")>()),
+vi.mock("@workpal/core/paths", async (importOriginal) => ({
+  ...(await importOriginal<typeof import("@workpal/core/paths")>()),
   useWorkspacePaths: () => ({ issueDetail: (id: string) => `/acme/issues/${id}` }),
 }));
 vi.mock("../../navigation", () => ({

@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import { ArrowUp, Check, Mic, Pause, Play, Sparkles, X } from "@multica/ui/icons";
-import { Button } from "@multica/ui/components/ui/button";
-import { IconButton } from "@multica/ui/components/common/icon-button";
-import { Switch } from "@multica/ui/components/ui/switch";
-import { Tabs, TabsList, TabsTrigger } from "@multica/ui/components/ui/tabs";
-import { Kbd } from "@multica/ui/components/ui/kbd";
-import { cn } from "@multica/ui/lib/utils";
+import { ArrowUp, Check, Mic, Pause, Play, Sparkles, X } from "@workpal/ui/icons";
+import { Button } from "@workpal/ui/components/ui/button";
+import { IconButton } from "@workpal/ui/components/common/icon-button";
+import { Switch } from "@workpal/ui/components/ui/switch";
+import { Tabs, TabsList, TabsTrigger } from "@workpal/ui/components/ui/tabs";
+import { Kbd } from "@workpal/ui/components/ui/kbd";
+import { cn } from "@workpal/ui/lib/utils";
 import { CHAT_SCRIPT } from "../copy";
 import { appendDictation, useStoryEnv } from "../env";
 import { AddButton, AgentPicker, ChatWindowFrame, ComposerSurface, DraftEditor, SendButton, useDemoChat } from "../chat-frame";

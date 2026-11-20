@@ -5,10 +5,10 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 import { act, cleanup, renderHook, waitFor } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import type { ReactNode } from "react";
-import { setApiInstance } from "@multica/core/api";
-import { issueKeys } from "@multica/core/issues/queries";
-import { ApiError } from "@multica/core/api/client";
-import type { ApiClient } from "@multica/core/api/client";
+import { setApiInstance } from "@workpal/core/api";
+import { issueKeys } from "@workpal/core/issues/queries";
+import { ApiError } from "@workpal/core/api/client";
+import type { ApiClient } from "@workpal/core/api/client";
 
 const toastError = vi.fn();
 const toastSuccess = vi.fn();
@@ -40,7 +40,7 @@ vi.mock("../../i18n", () => ({
 }));
 
 const wsHandlers = new Map<string, (payload: unknown) => void>();
-vi.mock("@multica/core/realtime", () => ({
+vi.mock("@workpal/core/realtime", () => ({
   useWSEvent: (event: string, handler: (payload: unknown) => void) => {
     wsHandlers.set(event, handler);
   },

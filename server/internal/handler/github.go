@@ -26,11 +26,11 @@ import (
 	"github.com/golang-jwt/jwt/v5"
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgtype"
-	"github.com/multica-ai/multica/server/internal/issuestatus"
-	"github.com/multica-ai/multica/server/internal/middleware"
-	"github.com/multica-ai/multica/server/internal/qoderruntime"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
-	"github.com/multica-ai/multica/server/pkg/protocol"
+	"workpal.local/workpal/server/internal/issuestatus"
+	"workpal.local/workpal/server/internal/middleware"
+	"workpal.local/workpal/server/internal/qoderruntime"
+	db "workpal.local/workpal/server/pkg/db/generated"
+	"workpal.local/workpal/server/pkg/protocol"
 )
 
 // githubAPIBase is the base URL for GitHub's REST API. Mutable so tests can
@@ -455,7 +455,7 @@ func githubSettingsURL(frontend string) string {
 }
 
 // GitHubConnect (GET /api/workspaces/{id}/github/connect) returns the URL the
-// browser should open to install the Multica GitHub App against the caller's
+// browser should open to install the Workpal GitHub App against the caller's
 // repos. The state token binds the resulting setup callback to this workspace.
 func (h *Handler) GitHubConnect(w http.ResponseWriter, r *http.Request) {
 	workspaceID := chi.URLParam(r, "id")
@@ -553,7 +553,7 @@ func (h *Handler) GitHubSetupCallback(w http.ResponseWriter, r *http.Request) {
 
 		// Best-effort capture of the connecting user (may be nil if the public
 		// callback was hit without a session — e.g. user wasn't logged in to
-		// Multica when they finished the GitHub install). Either way we save
+		// Workpal when they finished the GitHub install). Either way we save
 		// the row so the workspace owner sees the connection on next reload.
 		connectedBy := pgtype.UUID{}
 		if userID := requestUserID(r); userID != "" {
@@ -588,7 +588,7 @@ func (h *Handler) GitHubSetupCallback(w http.ResponseWriter, r *http.Request) {
 	})
 	if strings.HasPrefix(connectionID, "desktop-") {
 		w.Header().Set("Content-Type", "text/html; charset=utf-8")
-		_, _ = io.WriteString(w, `<!doctype html><html lang="en"><meta charset="utf-8"><title>GitHub connected</title><body><h1>GitHub connected</h1><p>Return to Multica to confirm your repositories. You can close this tab.</p></body></html>`)
+		_, _ = io.WriteString(w, `<!doctype html><html lang="en"><meta charset="utf-8"><title>GitHub connected</title><body><h1>GitHub connected</h1><p>Return to Workpal to confirm your repositories. You can close this tab.</p></body></html>`)
 		return
 	}
 	http.Redirect(w, r, settingsURL+"&github_connected=1&github_installation="+url.QueryEscape(uuidToString(inst.ID)), http.StatusFound)

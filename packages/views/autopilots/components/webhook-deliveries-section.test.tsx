@@ -1,14 +1,14 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { screen, fireEvent, within } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
-import { api } from "@multica/core/api";
-import { EMPTY_WEBHOOK_DELIVERY } from "@multica/core/api/schemas";
-import type { WebhookDelivery } from "@multica/core/types";
+import { api } from "@workpal/core/api";
+import { EMPTY_WEBHOOK_DELIVERY } from "@workpal/core/api/schemas";
+import type { WebhookDelivery } from "@workpal/core/types";
 import { renderWithI18n } from "../../test/i18n";
 import { WebhookDeliveriesSection } from "./webhook-deliveries-section";
 
-vi.mock("@multica/core/hooks", () => ({ useWorkspaceId: () => "ws" }));
-vi.mock("@multica/core/api", () => ({ api: { listAutopilotDeliveries: vi.fn(), getAutopilotDelivery: vi.fn() } }));
+vi.mock("@workpal/core/hooks", () => ({ useWorkspaceId: () => "ws" }));
+vi.mock("@workpal/core/api", () => ({ api: { listAutopilotDeliveries: vi.fn(), getAutopilotDelivery: vi.fn() } }));
 
 function renderDelivery(delivery: WebhookDelivery) {
   vi.mocked(api.listAutopilotDeliveries).mockResolvedValue({ deliveries: [delivery], total: 1 });

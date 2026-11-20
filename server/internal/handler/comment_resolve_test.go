@@ -9,8 +9,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/multica-ai/multica/server/internal/events"
-	"github.com/multica-ai/multica/server/pkg/protocol"
+	"workpal.local/workpal/server/internal/events"
+	"workpal.local/workpal/server/pkg/protocol"
 )
 
 // resolveCommentHTTP drives the POST /api/comments/{id}/resolve handler and

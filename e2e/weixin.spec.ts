@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
 import { TestApiClient } from "./fixtures";
 
-// Real Multica login and workspace with a fixture agent and channel responses.
+// Real Workpal login and workspace with a fixture agent and channel responses.
 // Never needs a WeChat account or launches an agent CLI.
 test("An agent owner can connect and disconnect WeChat as a workspace member", async ({
   page,
@@ -22,8 +22,8 @@ test("An agent owner can connect and disconnect WeChat as a workspace member", a
   const token = api.getToken();
   if (!token) throw new Error("test login returned no token");
   await page.addInitScript((value) => {
-    localStorage.setItem("multica_token", value);
-    localStorage.setItem("multica:chat:isOpen", "false");
+    localStorage.setItem("workpal_token", value);
+    localStorage.setItem("workpal:chat:isOpen", "false");
   }, token);
   const agentID = "11111111-1111-4111-8111-111111111111";
   const agent = {
@@ -50,7 +50,7 @@ test("An agent owner can connect and disconnect WeChat as a workspace member", a
   const login = {
     id: "22222222-2222-4222-8222-222222222222",
     status: "wait",
-    qr_code_url: "https://weixin.qq.com/multica-test-fixture-not-a-live-login",
+    qr_code_url: "https://weixin.qq.com/workpal-test-fixture-not-a-live-login",
     expires_at: new Date(Date.now() + 300_000).toISOString(),
   };
   await page.route("**/api/agents**", (route) => {

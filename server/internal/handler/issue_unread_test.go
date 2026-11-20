@@ -7,9 +7,9 @@ import (
 	"testing"
 
 	"github.com/google/uuid"
-	"github.com/multica-ai/multica/server/internal/middleware"
-	"github.com/multica-ai/multica/server/internal/testutil"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
+	"workpal.local/workpal/server/internal/middleware"
+	"workpal.local/workpal/server/internal/testutil"
+	db "workpal.local/workpal/server/pkg/db/generated"
 )
 
 type issueUnreadList struct {
@@ -66,7 +66,7 @@ func TestIssueUnreadMarkAndClear(t *testing.T) {
 }
 
 func TestIssueUnreadPointsAtTheRunsLastComment(t *testing.T) {
-	userID := dbfx.User(t, "Unread Landing", "issue-unread-landing@multica.ai")
+	userID := dbfx.User(t, "Unread Landing", "issue-unread-landing@workpal.invalid")
 	dbfx.Member(t, testWorkspaceID, userID, "member")
 	dbfx.Cleanup(t, `DELETE FROM issue_unread WHERE user_id = $1`, userID)
 	withComments := dbfx.Issue(t, "unread run with comments")
@@ -103,7 +103,7 @@ VALUES ($1, $2, $3, 'completed', $4), ($1, $2, $5, 'failed', $6)`,
 func TestIssueUnreadIsPerUser(t *testing.T) {
 	issueID := dbfx.Issue(t, "issue unread per user")
 	dbfx.Cleanup(t, `DELETE FROM issue_unread WHERE issue_id = $1`, issueID)
-	otherID := dbfx.User(t, "Unread Other", "issue-unread-other@multica.ai")
+	otherID := dbfx.User(t, "Unread Other", "issue-unread-other@workpal.invalid")
 	dbfx.Member(t, testWorkspaceID, otherID, "member")
 
 	setIssueUnreadAs(t, testUserID, issueID, true).Want(http.StatusOK)
@@ -128,7 +128,7 @@ func TestIssueUnreadRejectsIssueInAnotherWorkspace(t *testing.T) {
 }
 
 func TestIssueUnreadPagesReachEveryRow(t *testing.T) {
-	userID := dbfx.User(t, "Unread Pages", "issue-unread-pages@multica.ai")
+	userID := dbfx.User(t, "Unread Pages", "issue-unread-pages@workpal.invalid")
 	dbfx.Member(t, testWorkspaceID, userID, "member")
 	dbfx.Cleanup(t, `DELETE FROM issue_unread WHERE user_id = $1`, userID)
 	// Rows share timestamps in pairs, so a page boundary can fall between two

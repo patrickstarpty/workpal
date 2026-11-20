@@ -1,21 +1,21 @@
 "use client";
 
 import { useEffect, useId, useRef } from "react";
-import { X, Plus, Filter, ExternalLink } from "@multica/ui/icons";
-import { cn } from "@multica/ui/lib/utils";
-import { TooltipHint } from "@multica/ui/components/common/tooltip-hint";
-import { Button } from "@multica/ui/components/ui/button";
-import { Checkbox } from "@multica/ui/components/ui/checkbox";
+import { X, Plus, Filter, ExternalLink } from "@workpal/ui/icons";
+import { cn } from "@workpal/ui/lib/utils";
+import { TooltipHint } from "@workpal/ui/components/common/tooltip-hint";
+import { Button } from "@workpal/ui/components/ui/button";
+import { Checkbox } from "@workpal/ui/components/ui/checkbox";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@multica/ui/components/ui/select";
-import type { WebhookEventFilter } from "@multica/core/types";
+} from "@workpal/ui/components/ui/select";
+import type { WebhookEventFilter } from "@workpal/core/types";
 import { useT } from "../../i18n";
-import { useConfigStore } from "@multica/core/config";
+import { useConfigStore } from "@workpal/core/config";
 import {
   CONDITION_OPS,
   MAX_CONDITIONS,
@@ -60,12 +60,12 @@ export function WebhookEventFilterSection({
   const payloadSupported = useConfigStore((state) => state.webhookPayloadConditionsSupported);
   const { errors } = resolveEventFilterDrafts(drafts);
   const docsHref = isTraditionalChinese(i18n.language)
-    ? `https://multica.ai/docs/zh-Hant/autopilots#${encodeURIComponent("事件過濾")}`
+    ? `https://workpal.invalid/docs/zh-Hant/autopilots#${encodeURIComponent("事件過濾")}`
     : i18n.language?.startsWith("zh")
-      ? `https://multica.ai/docs/zh/autopilots#${encodeURIComponent("事件过滤")}`
+      ? `https://workpal.invalid/docs/zh/autopilots#${encodeURIComponent("事件过滤")}`
       : i18n.language?.startsWith("fr")
-        ? `https://multica.ai/docs/fr/autopilots#${encodeURIComponent("filtres-dévénements")}`
-        : "https://multica.ai/docs/autopilots#event-filters";
+        ? `https://workpal.invalid/docs/fr/autopilots#${encodeURIComponent("filtres-dévénements")}`
+        : "https://workpal.invalid/docs/autopilots#event-filters";
 
   // A blocked save lands the user on the first field that blocked it.
   useEffect(() => {

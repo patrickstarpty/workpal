@@ -27,16 +27,16 @@ const ompSkillProbe = `import { writeFileSync } from "node:fs";
 export default function (pi) {
   pi.on("session_start", () => {
     const skills = pi.getCommands().filter(command => command.source === "skill");
-    writeFileSync(process.env.MULTICA_OMP_SKILLS_OUTPUT, JSON.stringify({ skills }), { mode: 0o600 });
+    writeFileSync(process.env.WORKPAL_OMP_SKILLS_OUTPUT, JSON.stringify({ skills }), { mode: 0o600 });
   });
 }
 `
 
 // DiscoverOmpSkills asks the selected runtime command for its effective
 // user-level skills. The empty working directory excludes project-specific
-// settings and Multica-assigned skills. No prompt or model request is sent.
+// settings and Workpal-assigned skills. No prompt or model request is sent.
 func DiscoverOmpSkills(ctx context.Context, runtimeCmd Command) ([]OmpSkill, error) {
-	dir, err := os.MkdirTemp("", "multica-omp-skills-*")
+	dir, err := os.MkdirTemp("", "workpal-omp-skills-*")
 	if err != nil {
 		return nil, err
 	}
@@ -55,7 +55,7 @@ func DiscoverOmpSkills(ctx context.Context, runtimeCmd Command) ([]OmpSkill, err
 	cmd := runtimeCmd.exec(runCtx, "--mode", "rpc", "--no-session", "--no-title", "--no-ui",
 		"--config", config, "--extension", extension)
 	cmd.Dir = dir
-	cmd.Env = replaceEnvValue(os.Environ(), "MULTICA_OMP_SKILLS_OUTPUT", output)
+	cmd.Env = replaceEnvValue(os.Environ(), "WORKPAL_OMP_SKILLS_OUTPUT", output)
 	cmd.Stdin = strings.NewReader("")
 	cmd.Stdout, cmd.Stderr = io.Discard, io.Discard
 	hideAgentWindow(cmd)

@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { Loader2, Save } from "@multica/ui/icons";
-import type { Agent } from "@multica/core/types";
+import { Loader2, Save } from "@workpal/ui/icons";
+import type { Agent } from "@workpal/core/types";
 import {
   OPENCLAW_GATEWAY_TOKEN_MASK,
   type OpenclawRoutingMode,
@@ -10,11 +10,11 @@ import {
   openclawRuntimeConfigEquals,
   parseOpenclawRuntimeConfig,
   serializeOpenclawRuntimeConfig,
-} from "@multica/core/agents";
-import { Button } from "@multica/ui/components/ui/button";
-import { Input } from "@multica/ui/components/ui/input";
-import { Label } from "@multica/ui/components/ui/label";
-import { Switch } from "@multica/ui/components/ui/switch";
+} from "@workpal/core/agents";
+import { Button } from "@workpal/ui/components/ui/button";
+import { Input } from "@workpal/ui/components/ui/input";
+import { Label } from "@workpal/ui/components/ui/label";
+import { Switch } from "@workpal/ui/components/ui/switch";
 import { toast } from "sonner";
 import { useT } from "../../../i18n";
 

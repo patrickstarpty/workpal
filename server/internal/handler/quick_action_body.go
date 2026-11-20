@@ -3,7 +3,7 @@ package handler
 import (
 	"fmt"
 
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
+	db "workpal.local/workpal/server/pkg/db/generated"
 )
 
 // quickActionTarget is the resolved execution target of an action: the agent

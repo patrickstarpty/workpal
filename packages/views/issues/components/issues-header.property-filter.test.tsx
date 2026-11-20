@@ -14,19 +14,19 @@ import { cleanup, fireEvent, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { createStore } from "zustand/vanilla";
-import { setApiInstance } from "@multica/core/api";
-import type { ApiClient } from "@multica/core/api/client";
-import { createAuthStore, registerAuthStore } from "@multica/core/auth";
+import { setApiInstance } from "@workpal/core/api";
+import type { ApiClient } from "@workpal/core/api/client";
+import { createAuthStore, registerAuthStore } from "@workpal/core/auth";
 import {
   type IssueViewState,
   viewStoreSlice,
-} from "@multica/core/issues/stores/view-store";
-import { ViewStoreProvider } from "@multica/core/issues/stores/view-store-context";
-import type { IssueProperty } from "@multica/core/types";
+} from "@workpal/core/issues/stores/view-store";
+import { ViewStoreProvider } from "@workpal/core/issues/stores/view-store-context";
+import type { IssueProperty } from "@workpal/core/types";
 import { renderWithI18n } from "../../test/i18n";
 import { IssueFilterMenu } from "./issues-header";
 
-vi.mock("@multica/core/hooks", () => ({
+vi.mock("@workpal/core/hooks", () => ({
   useWorkspaceId: () => "ws-1",
 }));
 

@@ -19,18 +19,18 @@ import {
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import { EyeOff, GripVertical, RotateCcw, SlidersHorizontal } from "@multica/ui/icons";
-import { IconButton } from "@multica/ui/components/common/icon-button";
-import { Popover, PopoverContent, PopoverTrigger } from "@multica/ui/components/ui/popover";
-import { Switch } from "@multica/ui/components/ui/switch";
-import { cn } from "@multica/ui/lib/utils";
+import { EyeOff, GripVertical, RotateCcw, SlidersHorizontal } from "@workpal/ui/icons";
+import { IconButton } from "@workpal/ui/components/common/icon-button";
+import { Popover, PopoverContent, PopoverTrigger } from "@workpal/ui/components/ui/popover";
+import { Switch } from "@workpal/ui/components/ui/switch";
+import { cn } from "@workpal/ui/lib/utils";
 import {
   ISSUE_SIDEBAR_ALWAYS_SHOWN,
   selectIssueSidebarCustomized,
   selectIssueSidebarOrder,
   useIssueSidebarSectionsStore,
   type IssueSidebarSection,
-} from "@multica/core/issues/stores";
+} from "@workpal/core/issues/stores";
 import { useT } from "../../i18n";
 import { IssueSidebarStack } from "./issue-sidebar-section";
 

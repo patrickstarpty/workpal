@@ -1,8 +1,8 @@
 import {
   isRuntimeUsableForUser,
   providerDisplayName,
-} from "@multica/core/runtimes";
-import type { RuntimeDevice } from "@multica/core/types";
+} from "@workpal/core/runtimes";
+import type { RuntimeDevice } from "@workpal/core/types";
 import {
   runtimeRowLabel,
   type RuntimeMachine,

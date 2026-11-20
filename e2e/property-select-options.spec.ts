@@ -7,7 +7,7 @@ for (const type of ["select", "multi_select"] as const) {
     const suffix = Date.now().toString(36);
     let workspaceCreated = false;
     try {
-      await api.login(`select-options-${type}-${suffix}@multica.ai`, "Property owner");
+      await api.login(`select-options-${type}-${suffix}@workpal.invalid`, "Property owner");
       const workspace = await api.ensureWorkspace("Select options", `options-${type === "select" ? "s" : "m"}-${suffix}`);
       workspaceCreated = true;
       await api.markUserOnboarded();
@@ -21,8 +21,8 @@ for (const type of ["select", "multi_select"] as const) {
       const token = api.getToken();
       if (!token) throw new Error("Owner login did not return a token");
       await page.addInitScript((value) => {
-        localStorage.setItem("multica_token", value);
-        localStorage.setItem("multica:chat:isOpen", "false");
+        localStorage.setItem("workpal_token", value);
+        localStorage.setItem("workpal:chat:isOpen", "false");
       }, token);
       await page.setViewportSize({ width: 1280, height: 800 });
       await page.goto(`/${workspace.slug}/settings?tab=properties`);

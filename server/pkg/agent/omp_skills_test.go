@@ -19,24 +19,24 @@ func TestDiscoverOmpSkillsUsesRuntimePrefixWithoutPrompt(t *testing.T) {
 	}
 	dir := t.TempDir()
 	capture := filepath.Join(dir, "argv")
-	t.Setenv("MULTICA_TEST_OMP_ARGS", capture)
+	t.Setenv("WORKPAL_TEST_OMP_ARGS", capture)
 	path := filepath.Join(dir, "profile", "SKILL.md")
 	snapshot, _ := json.Marshal(map[string]any{"skills": []map[string]string{{
 		"source": "skill", "name": "skill:profile-only", "description": "Selected profile", "path": path,
 	}}})
-	t.Setenv("MULTICA_TEST_OMP_SNAPSHOT", string(snapshot))
+	t.Setenv("WORKPAL_TEST_OMP_SNAPSHOT", string(snapshot))
 	binary := filepath.Join(dir, "wrapper")
 	writeTestExecutable(t, binary, []byte(`#!/bin/sh
-printf '%s\n' "$@" > "$MULTICA_TEST_OMP_ARGS"
-cat > "$MULTICA_TEST_OMP_ARGS.stdin"
-pwd > "$MULTICA_TEST_OMP_ARGS.cwd"
+printf '%s\n' "$@" > "$WORKPAL_TEST_OMP_ARGS"
+cat > "$WORKPAL_TEST_OMP_ARGS.stdin"
+pwd > "$WORKPAL_TEST_OMP_ARGS.cwd"
 while [ "$#" -gt 0 ]; do
   case "$1" in
-    --config) cat "$2" > "$MULTICA_TEST_OMP_ARGS.config" ;;
+    --config) cat "$2" > "$WORKPAL_TEST_OMP_ARGS.config" ;;
   esac
   shift
 done
-printf '%s' "$MULTICA_TEST_OMP_SNAPSHOT" > "$MULTICA_OMP_SKILLS_OUTPUT"
+printf '%s' "$WORKPAL_TEST_OMP_SNAPSHOT" > "$WORKPAL_OMP_SKILLS_OUTPUT"
 `))
 	prefix := []string{"launch", "--profile", "review-a", "--no-extensions"}
 	skills, err := DiscoverOmpSkills(t.Context(), NewCommand(binary, prefix))
@@ -77,7 +77,7 @@ func TestDiscoverOmpSkillsFailureAndCancellation(t *testing.T) {
 	for _, tc := range []struct{ name, script string }{
 		{"exit", "exit 1"},
 		{"no-inventory", "exit 0"},
-		{"invalid-inventory", `printf '{}' > "$MULTICA_OMP_SKILLS_OUTPUT"`},
+		{"invalid-inventory", `printf '{}' > "$WORKPAL_OMP_SKILLS_OUTPUT"`},
 	} {
 		t.Run(tc.name, func(t *testing.T) {
 			binary := filepath.Join(t.TempDir(), "omp")

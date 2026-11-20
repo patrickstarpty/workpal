@@ -5,8 +5,8 @@ import (
 	"errors"
 	"testing"
 
-	"github.com/multica-ai/multica/server/internal/integrations/channel"
-	"github.com/multica-ai/multica/server/internal/integrations/channel/engine"
+	"workpal.local/workpal/server/internal/integrations/channel"
+	"workpal.local/workpal/server/internal/integrations/channel/engine"
 )
 
 const postDOCX = `{"title":"Review","content":[[{"tag":"text","text":"Please read"}]],"files":[{"file_key":"file_docx","file_name":"demo.docx","is_folder":false}]}`

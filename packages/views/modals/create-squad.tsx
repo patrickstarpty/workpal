@@ -2,34 +2,34 @@
 
 import { useMemo, useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { ChevronDown, UserPlus, X } from "@multica/ui/icons";
-import { api } from "@multica/core/api";
-import { useAuthStore } from "@multica/core/auth";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { useWorkspacePaths } from "@multica/core/paths";
+import { ChevronDown, UserPlus, X } from "@workpal/ui/icons";
+import { api } from "@workpal/core/api";
+import { useAuthStore } from "@workpal/core/auth";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { useWorkspacePaths } from "@workpal/core/paths";
 import {
   agentListOptions,
   memberListOptions,
   workspaceKeys,
-} from "@multica/core/workspace/queries";
-import { AGENT_DESCRIPTION_MAX_LENGTH } from "@multica/core/agents";
-import { isImeComposing } from "@multica/core/utils";
-import type { Agent, MemberWithUser } from "@multica/core/types";
+} from "@workpal/core/workspace/queries";
+import { AGENT_DESCRIPTION_MAX_LENGTH } from "@workpal/core/agents";
+import { isImeComposing } from "@workpal/core/utils";
+import type { Agent, MemberWithUser } from "@workpal/core/types";
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
-} from "@multica/ui/components/ui/dialog";
+} from "@workpal/ui/components/ui/dialog";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@multica/ui/components/ui/popover";
-import { Button } from "@multica/ui/components/ui/button";
-import { Input } from "@multica/ui/components/ui/input";
-import { Label } from "@multica/ui/components/ui/label";
-import { TooltipHint } from "@multica/ui/components/common/tooltip-hint";
+} from "@workpal/ui/components/ui/popover";
+import { Button } from "@workpal/ui/components/ui/button";
+import { Input } from "@workpal/ui/components/ui/input";
+import { Label } from "@workpal/ui/components/ui/label";
+import { TooltipHint } from "@workpal/ui/components/common/tooltip-hint";
 import { toast } from "sonner";
 
 import { useNavigation } from "../navigation";

@@ -9,9 +9,9 @@ import (
 	"time"
 
 	"github.com/jackc/pgx/v5/pgxpool"
-	"github.com/multica-ai/multica/server/internal/events"
-	"github.com/multica-ai/multica/server/internal/util"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
+	"workpal.local/workpal/server/internal/events"
+	"workpal.local/workpal/server/internal/util"
+	db "workpal.local/workpal/server/pkg/db/generated"
 )
 
 func newTaskClaimRacePool(t *testing.T) *pgxpool.Pool {
@@ -122,7 +122,7 @@ func createClaimCapacityFixture(t *testing.T, ctx context.Context, pool *pgxpool
 	t.Helper()
 
 	suffix := time.Now().UnixNano()
-	email := fmt.Sprintf("claim-capacity-%d@multica.ai", suffix)
+	email := fmt.Sprintf("claim-capacity-%d@workpal.invalid", suffix)
 	slug := fmt.Sprintf("claim-capacity-%d", suffix)
 
 	var userID string

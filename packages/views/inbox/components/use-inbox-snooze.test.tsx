@@ -3,14 +3,14 @@ import { act, fireEvent, screen, waitFor } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { toast } from "sonner";
-import { api } from "@multica/core/api";
-import { inboxKeys } from "@multica/core/inbox/queries";
-import type { SnoozedInboxIssue } from "@multica/core/types";
+import { api } from "@workpal/core/api";
+import { inboxKeys } from "@workpal/core/inbox/queries";
+import type { SnoozedInboxIssue } from "@workpal/core/types";
 import { renderWithI18n } from "../../test/i18n";
 import { useInboxSnooze } from "./use-inbox-snooze";
 
-vi.mock("@multica/core/hooks", () => ({ useWorkspaceId: () => "ws" }));
-vi.mock("@multica/core/api", () => ({ api: { snoozeInbox: vi.fn(), unsnoozeInbox: vi.fn() } }));
+vi.mock("@workpal/core/hooks", () => ({ useWorkspaceId: () => "ws" }));
+vi.mock("@workpal/core/api", () => ({ api: { snoozeInbox: vi.fn(), unsnoozeInbox: vi.fn() } }));
 vi.mock("sonner", () => ({ toast: { success: vi.fn(), error: vi.fn() } }));
 
 const earlier = new Date("2026-11-20T09:00:00Z");

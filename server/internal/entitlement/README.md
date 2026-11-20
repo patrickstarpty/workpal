@@ -1,11 +1,11 @@
 # Entitlement policy consumer
 
-This package is the mechanical Multica-side consumer of the private Cloud
+This package is the mechanical Workpal-side consumer of the private Cloud
 enforcement-policy endpoint. Commercial inputs stay in Cloud: this package does
 not contain plan names, subscription-state mapping, limit values, or policy
 switches.
 
-Production wiring has one boundary: setting `MULTICA_CLOUD_URL` connects this
+Production wiring has one boundary: setting `WORKPAL_CLOUD_URL` connects this
 consumer as well as the other managed Cloud clients. An empty URL performs no
 HTTP request and the autopilot consumer does not access its quota tables. Self-hosted deployments therefore retain the
 unlimited paths. Request timeout and stale grace use bounded code defaults
@@ -32,7 +32,7 @@ The client reads:
   extend enforcement.
 - `gates`: effective `off`, `observe`, or `enforce` instructions and
   parameters. Cloud chooses the action per gate; `observe` carries the same
-  limit and period parameters as `enforce`. Multica also downgrades an expired
+  limit and period parameters as `enforce`. Workpal also downgrades an expired
   cached `enforce` instruction to `observe` locally (see below).
 - `gates.*.notifications`: an optional, additive delivery policy. The autopilot
   quota consumer recognizes `first_rejection_per_period` and delivers one

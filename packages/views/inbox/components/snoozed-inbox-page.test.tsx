@@ -1,9 +1,9 @@
 import { fireEvent, screen } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import { snoozedInboxOptions } from "@multica/core/inbox/queries";
-import { issueDetailOptions } from "@multica/core/issues/queries";
-import type { Issue, SnoozedInboxIssue } from "@multica/core/types";
+import { snoozedInboxOptions } from "@workpal/core/inbox/queries";
+import { issueDetailOptions } from "@workpal/core/issues/queries";
+import type { Issue, SnoozedInboxIssue } from "@workpal/core/types";
 import { renderWithI18n } from "../../test/i18n";
 import { NavigationProvider, type NavigationAdapter } from "../../navigation";
 import { SnoozedInboxPage } from "./snoozed-inbox-page";
@@ -14,15 +14,15 @@ const state = vi.hoisted(() => ({
 }));
 
 vi.mock("sonner", () => ({ toast: { success: vi.fn(), error: vi.fn() } }));
-vi.mock("@multica/core/hooks", async (importOriginal) => ({
-  ...(await importOriginal<typeof import("@multica/core/hooks")>()),
+vi.mock("@workpal/core/hooks", async (importOriginal) => ({
+  ...(await importOriginal<typeof import("@workpal/core/hooks")>()),
   useWorkspaceId: () => "ws-1",
 }));
-vi.mock("@multica/core/paths", async (importOriginal) => {
-  const actual = await importOriginal<typeof import("@multica/core/paths")>();
+vi.mock("@workpal/core/paths", async (importOriginal) => {
+  const actual = await importOriginal<typeof import("@workpal/core/paths")>();
   return { ...actual, useWorkspacePaths: () => actual.paths.workspace("acme") };
 });
-vi.mock("@multica/core/inbox/mutations", () => ({
+vi.mock("@workpal/core/inbox/mutations", () => ({
   useSnoozeInbox: () => ({ mutateAsync: state.snooze }),
   useUnsnoozeInbox: () => ({ mutateAsync: state.unsnooze }),
   cachedInboxSnoozedUntil: () => null,

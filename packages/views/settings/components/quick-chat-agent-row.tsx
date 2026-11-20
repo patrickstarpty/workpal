@@ -2,17 +2,17 @@
 
 import { useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { useAuthStore } from "@multica/core/auth";
-import { useChatStore } from "@multica/core/chat";
-import { useCurrentWorkspace } from "@multica/core/paths";
-import { agentListOptions, memberListOptions } from "@multica/core/workspace/queries";
+import { useAuthStore } from "@workpal/core/auth";
+import { useChatStore } from "@workpal/core/chat";
+import { useCurrentWorkspace } from "@workpal/core/paths";
+import { agentListOptions, memberListOptions } from "@workpal/core/workspace/queries";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@multica/ui/components/ui/select";
+} from "@workpal/ui/components/ui/select";
 import { useT } from "../../i18n";
 import { canAssignAgent } from "../../issues/components/pickers/assignee-picker";
 import { SettingsRow } from "./settings-layout";
@@ -20,7 +20,7 @@ import { SettingsRow } from "./settings-layout";
 const LAST_USED_AGENT = "last-used";
 
 /**
- * The agent Ask Multica starts a new chat with. Unset, a new chat goes to the
+ * The agent Ask Workpal starts a new chat with. Unset, a new chat goes to the
  * agent last chatted with. Stored on this device per workspace, like the
  * chat's other selections.
  */

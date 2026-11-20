@@ -12,7 +12,7 @@ import (
 	"sync"
 	"testing"
 
-	"github.com/multica-ai/multica/server/internal/daemon/repocache"
+	"workpal.local/workpal/server/internal/daemon/repocache"
 )
 
 type caRecordingCache struct {

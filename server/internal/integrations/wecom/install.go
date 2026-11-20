@@ -30,10 +30,10 @@ import (
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgtype"
 
-	"github.com/multica-ai/multica/server/internal/integrations/channel/engine"
-	"github.com/multica-ai/multica/server/internal/util"
-	"github.com/multica-ai/multica/server/internal/util/secretbox"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
+	"workpal.local/workpal/server/internal/integrations/channel/engine"
+	"workpal.local/workpal/server/internal/util"
+	"workpal.local/workpal/server/internal/util/secretbox"
+	db "workpal.local/workpal/server/pkg/db/generated"
 )
 
 // Session status wire values. String constants because the DB CHECK constraint
@@ -73,8 +73,8 @@ const (
 )
 
 // DefaultSourceID is the WeCom-issued caller identifier. Operators may override
-// it with MULTICA_WECOM_SOURCE_ID without re-provisioning the source.
-const DefaultSourceID = "multica"
+// it with WORKPAL_WECOM_SOURCE_ID without re-provisioning the source.
+const DefaultSourceID = "workpal"
 
 var (
 	// ErrAgentMismatch: the idempotency key hit an existing session whose agent

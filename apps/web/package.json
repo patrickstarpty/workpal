@@ -1,5 +1,5 @@
 {
-  "name": "@multica/web",
+  "name": "@workpal/web",
   "version": "0.10.0",
   "private": true,
   "type": "module",
@@ -15,10 +15,10 @@
     "build:next": "next build"
   },
   "dependencies": {
-    "@multica/core": "workspace:*",
-    "@multica/ee": "workspace:*",
-    "@multica/ui": "workspace:*",
-    "@multica/views": "workspace:*",
+    "@workpal/core": "workspace:*",
+    "@workpal/ee": "workspace:*",
+    "@workpal/ui": "workspace:*",
+    "@workpal/views": "workspace:*",
     "@tanstack/react-query": "catalog:",
     "dotenv": "^17.4.1",
     "fumadocs-core": "catalog:",
@@ -35,8 +35,8 @@
     "@fontsource-variable/inter": "catalog:"
   },
   "devDependencies": {
-    "@multica/eslint-config": "workspace:*",
-    "@multica/vitest-setup": "workspace:*",
+    "@workpal/eslint-config": "workspace:*",
+    "@workpal/vitest-setup": "workspace:*",
     "@tailwindcss/postcss": "catalog:",
     "postcss": "catalog:",
     "@testing-library/jest-dom": "catalog:",

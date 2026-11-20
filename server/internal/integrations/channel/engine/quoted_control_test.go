@@ -5,7 +5,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/multica-ai/multica/server/internal/integrations/channel"
+	"workpal.local/workpal/server/internal/integrations/channel"
 )
 
 // The normalized inputs match the DingTalk adapter's selected-reply contract.

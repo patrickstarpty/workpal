@@ -2,17 +2,17 @@ import { beforeEach, expect, it, vi } from "vitest";
 import type { ReactNode } from "react";
 import { fireEvent, screen, waitFor } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { api } from "@multica/core/api";
-import { useUpdateIssueSystemWakeup } from "@multica/core/issues";
+import { api } from "@workpal/core/api";
+import { useUpdateIssueSystemWakeup } from "@workpal/core/issues";
 import { renderWithI18n } from "../../test/i18n";
 import { SystemWakeupDefaults } from "./system-wakeup-defaults";
 
-vi.mock("@multica/core/api", () => ({
+vi.mock("@workpal/core/api", () => ({
   api: { listWorkspaceSystemWakeups: vi.fn(), updateWorkspaceSystemWakeup: vi.fn(), updateIssueSystemWakeup: vi.fn() },
 }));
-vi.mock("@multica/core/hooks", () => ({ useWorkspaceId: () => "ws" }));
+vi.mock("@workpal/core/hooks", () => ({ useWorkspaceId: () => "ws" }));
 let role = "admin";
-vi.mock("@multica/core/permissions", () => ({
+vi.mock("@workpal/core/permissions", () => ({
   useCurrentMember: () => ({ role, isLoading: false }),
 }));
 

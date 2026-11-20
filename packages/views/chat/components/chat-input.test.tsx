@@ -1,9 +1,9 @@
 import { cloneElement, forwardRef, useEffect, useRef, useImperativeHandle } from "react";
 import { beforeEach, describe, it, expect, vi } from "vitest";
 import { act, render, screen, fireEvent, waitFor } from "@testing-library/react";
-import { I18nProvider } from "@multica/core/i18n/react";
-import type { UploadResult } from "@multica/core/hooks/use-file-upload";
-import type { DraftUpload } from "@multica/core/drafts";
+import { I18nProvider } from "@workpal/core/i18n/react";
+import type { UploadResult } from "@workpal/core/hooks/use-file-upload";
+import type { DraftUpload } from "@workpal/core/drafts";
 import enCommon from "../../locales/en/common.json";
 import enChat from "../../locales/en/chat.json";
 import enEditor from "../../locales/en/editor.json";
@@ -39,7 +39,7 @@ const insertMarkdownSpy = vi.hoisted(() => vi.fn());
 // the same or the two records drift apart only in tests.
 let mockUploadIdSeq = 0;
 
-vi.mock("@multica/core/api", () => ({
+vi.mock("@workpal/core/api", () => ({
   api: { uploadFile: mockApiUploadFile },
 }));
 
@@ -233,7 +233,7 @@ vi.mock("../../projects/components/project-picker", () => ({
 // Mock chat store with an in-memory implementation that supports both
 // (selector) calls and getState(). Draft attachments hold coordinator-owned
 // DraftUpload entries (MUL-5181 L2).
-vi.mock("@multica/core/chat", () => {
+vi.mock("@workpal/core/chat", () => {
   const state = {
     activeSessionId: null as string | null,
     selectedAgentId: "agent-1",
@@ -260,9 +260,9 @@ vi.mock("@multica/core/chat", () => {
 });
 
 import { ChatInput } from "./chat-input";
-import { useChatStore } from "@multica/core/chat";
-import { useCommentDraftStore } from "@multica/core/issues/stores";
-import { composeAnnotatedReply } from "@multica/core/drafts/reply-annotation";
+import { useChatStore } from "@workpal/core/chat";
+import { useCommentDraftStore } from "@workpal/core/issues/stores";
+import { composeAnnotatedReply } from "@workpal/core/drafts/reply-annotation";
 
 type ChatInputOnSend = React.ComponentProps<typeof ChatInput>["onSend"];
 type ChatInputCommit = Parameters<ChatInputOnSend>[2];
@@ -383,7 +383,7 @@ function renderInput(props: Partial<React.ComponentProps<typeof ChatInput>> = {}
   const onSend = props.onSend ?? vi.fn();
   const view = render(
     <I18nProvider locale="en" resources={TEST_RESOURCES}>
-      <ChatInput onSend={onSend} uploadEnabled agentName="Multica" {...props} />
+      <ChatInput onSend={onSend} uploadEnabled agentName="Workpal" {...props} />
     </I18nProvider>,
   );
   return { onSend, ...view };
@@ -392,7 +392,7 @@ function renderInput(props: Partial<React.ComponentProps<typeof ChatInput>> = {}
 function element(props: Partial<React.ComponentProps<typeof ChatInput>>) {
   return (
     <I18nProvider locale="en" resources={TEST_RESOURCES}>
-      <ChatInput onSend={vi.fn()} uploadEnabled agentName="Multica" {...props} />
+      <ChatInput onSend={vi.fn()} uploadEnabled agentName="Workpal" {...props} />
     </I18nProvider>
   );
 }
@@ -400,7 +400,7 @@ function element(props: Partial<React.ComponentProps<typeof ChatInput>>) {
 describe("ChatInput annotations", () => {
   const key = "chat:session-1" as const;
   const annotation = {
-    id: "ann-1", sourceCommentId: "msg-1", sourceActorName: "Multica",
+    id: "ann-1", sourceCommentId: "msg-1", sourceActorName: "Workpal",
     quote: "Use the cache.", note: "Why not the DB?", start: 0, prefix: "", suffix: "",
   };
   const slot = { draftKey: key, composer: undefined, editAnnotation: () => true };
@@ -591,7 +591,7 @@ describe("ChatInput focusRequest", () => {
   it("focuses the editor when focusRequest becomes a non-zero value (new chat)", () => {
     const { rerender } = render(
       <I18nProvider locale="en" resources={TEST_RESOURCES}>
-        <ChatInput onSend={vi.fn()} agentName="Multica" focusRequest={0} />
+        <ChatInput onSend={vi.fn()} agentName="Workpal" focusRequest={0} />
       </I18nProvider>,
     );
     // The inert initial value must not steal focus (e.g. a plain deep-link open).
@@ -600,7 +600,7 @@ describe("ChatInput focusRequest", () => {
     // Starting a new chat bumps the nonce — the compose box grabs focus.
     rerender(
       <I18nProvider locale="en" resources={TEST_RESOURCES}>
-        <ChatInput onSend={vi.fn()} agentName="Multica" focusRequest={1} />
+        <ChatInput onSend={vi.fn()} agentName="Workpal" focusRequest={1} />
       </I18nProvider>,
     );
     expect(editorState.focused).toBe(1);
@@ -608,7 +608,7 @@ describe("ChatInput focusRequest", () => {
     // Each subsequent new chat re-focuses.
     rerender(
       <I18nProvider locale="en" resources={TEST_RESOURCES}>
-        <ChatInput onSend={vi.fn()} agentName="Multica" focusRequest={2} />
+        <ChatInput onSend={vi.fn()} agentName="Workpal" focusRequest={2} />
       </I18nProvider>,
     );
     expect(editorState.focused).toBe(2);
@@ -1938,9 +1938,9 @@ describe("ChatInput revoked-access placeholder", () => {
   });
 
   it("leaves the normal placeholder alone when access is intact", () => {
-    renderInput({ agentName: "Multica" });
+    renderInput({ agentName: "Workpal" });
 
-    expect(editorProps.last?.placeholder).toBe("Message Multica…");
+    expect(editorProps.last?.placeholder).toBe("Message Workpal…");
   });
 });
 
@@ -1965,7 +1965,7 @@ describe("ChatInput send disabled reason", () => {
   });
 
   it("stays natively disabled when the composer is only empty", () => {
-    renderInput({ agentName: "Multica" });
+    renderInput({ agentName: "Workpal" });
 
     expect(sendButton()).toBeDisabled();
     expect(sendButton()).not.toHaveAttribute("aria-disabled");

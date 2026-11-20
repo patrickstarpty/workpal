@@ -2,26 +2,26 @@
 
 import { useMemo, useState, type MouseEvent } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { AppWindow, ArrowBigUp, Check, Link2, Mail, Pin, PinOff, Plus, Settings, UserPlus } from "@multica/ui/icons";
+import { AppWindow, ArrowBigUp, Check, Link2, Mail, Pin, PinOff, Plus, Settings, UserPlus } from "@workpal/ui/icons";
 import { toast } from "sonner";
-import { copyText } from "@multica/ui/lib/clipboard";
-import type { api } from "@multica/core/api";
-import { useConfigStore } from "@multica/core/config";
+import { copyText } from "@workpal/ui/lib/clipboard";
+import type { api } from "@workpal/core/api";
+import { useConfigStore } from "@workpal/core/config";
 import {
   inboxUnreadSummaryEnabled,
   inboxUnreadSummaryOptions,
   unreadWorkspaceIds,
-} from "@multica/core/inbox/queries";
-import { paths, useCurrentWorkspace } from "@multica/core/paths";
-import type { Invitation, Workspace } from "@multica/core/types";
-import { useAuthStore } from "@multica/core/auth";
+} from "@workpal/core/inbox/queries";
+import { paths, useCurrentWorkspace } from "@workpal/core/paths";
+import type { Invitation, Workspace } from "@workpal/core/types";
+import { useAuthStore } from "@workpal/core/auth";
 import {
   memberListOptions,
   myInvitationListOptions,
   workspaceListOptions,
-} from "@multica/core/workspace/queries";
-import { useSetWorkspacePinned } from "@multica/core/workspace/mutations";
-import { TooltipHint } from "@multica/ui/components/common/tooltip-hint";
+} from "@workpal/core/workspace/queries";
+import { useSetWorkspacePinned } from "@workpal/core/workspace/mutations";
+import { TooltipHint } from "@workpal/ui/components/common/tooltip-hint";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -30,9 +30,9 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@multica/ui/components/ui/dropdown-menu";
-import { Kbd, KbdGroup } from "@multica/ui/components/ui/kbd";
-import { cn } from "@multica/ui/lib/utils";
+} from "@workpal/ui/components/ui/dropdown-menu";
+import { Kbd, KbdGroup } from "@workpal/ui/components/ui/kbd";
+import { cn } from "@workpal/ui/lib/utils";
 import { useRowMenu } from "../common/point-menu";
 import { useT } from "../i18n";
 import { AppLink, useNavigation } from "../navigation";

@@ -60,14 +60,14 @@ import (
 // The run transport is kept as a fallback for everything this file cannot vouch
 // for: custom runtime profiles, versions older than the ones checked, agents
 // with custom_args (they are `opencode run` flags), and anyone who sets
-// MULTICA_OPENCODE_TRANSPORT=run.
+// WORKPAL_OPENCODE_TRANSPORT=run.
 
 // opencodeTransportEnv selects the OpenCode transport. "run" forces the
 // `opencode run --format json` path; anything else lets the backend choose.
 // It is an operator setting read from the daemon's environment (the daemon
-// strips MULTICA_* keys from agent custom_env); Config.Env is consulted first
+// strips WORKPAL_* keys from agent custom_env); Config.Env is consulted first
 // so tests can pin a transport per backend.
-const opencodeTransportEnv = "MULTICA_OPENCODE_TRANSPORT"
+const opencodeTransportEnv = "WORKPAL_OPENCODE_TRANSPORT"
 
 // Oldest releases whose ACP surface (configOptions model + effort selectors,
 // loadSession, session/cancel) matches what this file drives. 1.15.0 is the
@@ -146,7 +146,7 @@ func opencodeACPToolName(name, title, kind string) string {
 }
 
 // opencodeACPChildUpdate reports whether a session/update came from a 2.x
-// subagent's child session rather than the session Multica prompted.
+// subagent's child session rather than the session Workpal prompted.
 func opencodeACPChildUpdate(update json.RawMessage) bool {
 	var u struct {
 		Meta map[string]json.RawMessage `json:"_meta"`
@@ -511,7 +511,7 @@ func (b *opencodeBackend) executeACP(ctx context.Context, execPath, prompt strin
 
 		initResult, err := c.request(runCtx, "initialize", map[string]any{
 			"protocolVersion": 1,
-			"clientInfo":      map[string]any{"name": "multica-agent-sdk", "version": "0.2.0"},
+			"clientInfo":      map[string]any{"name": "workpal-agent-sdk", "version": "0.2.0"},
 			"clientCapabilities": map[string]any{
 				"fs":       map[string]any{"readTextFile": false, "writeTextFile": false},
 				"terminal": false,

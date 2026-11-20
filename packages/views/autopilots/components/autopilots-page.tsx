@@ -8,21 +8,21 @@ import {
   Pause,
   Webhook,
   Zap,
-} from "@multica/ui/icons";
+} from "@workpal/ui/icons";
 import { useQuery } from "@tanstack/react-query";
-import { autopilotListOptions } from "@multica/core/autopilots/queries";
+import { autopilotListOptions } from "@workpal/core/autopilots/queries";
 import {
   useAutopilotsViewStore,
   AUTOPILOT_SCOPES,
   type AutopilotColumnKey,
   type AutopilotScope,
   type AutopilotSortField,
-} from "@multica/core/autopilots/stores";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { useWorkspacePaths } from "@multica/core/paths";
-import { useActorName } from "@multica/core/workspace/hooks";
-import type { Autopilot } from "@multica/core/types";
-import { Button } from "@multica/ui/components/ui/button";
+} from "@workpal/core/autopilots/stores";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { useWorkspacePaths } from "@workpal/core/paths";
+import { useActorName } from "@workpal/core/workspace/hooks";
+import type { Autopilot } from "@workpal/core/types";
+import { Button } from "@workpal/ui/components/ui/button";
 import { WorkspaceWakeups } from "./workspace-wakeups";
 import { useNavigation } from "../../navigation";
 import { ActorAvatar } from "../../common/actor-avatar";

@@ -2,13 +2,13 @@
 
 import { useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { Loader2, Plug } from "@multica/ui/icons";
+import { Loader2, Plug } from "@workpal/ui/icons";
 import { toast } from "sonner";
-import { useFeatureEnabled } from "@multica/core/config";
-import { PLUGINS_V1_FLAG } from "@multica/core/feature-flags";
-import { useCurrentWorkspace } from "@multica/core/paths";
-import { pluginInstallationsOptions, useInvokePluginHook } from "@multica/core/plugins";
-import type { PluginHook, PluginInstallation } from "@multica/core/types";
+import { useFeatureEnabled } from "@workpal/core/config";
+import { PLUGINS_V1_FLAG } from "@workpal/core/feature-flags";
+import { useCurrentWorkspace } from "@workpal/core/paths";
+import { pluginInstallationsOptions, useInvokePluginHook } from "@workpal/core/plugins";
+import type { PluginHook, PluginInstallation } from "@workpal/core/types";
 import { useT } from "../i18n";
 
 /**

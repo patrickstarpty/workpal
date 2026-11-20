@@ -1,17 +1,17 @@
 import { act, fireEvent, screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { DEFAULT_VOICE_SETTINGS, useVoiceModelsStore, useVoiceSettingsStore, type VoiceHistoryEntry } from "@multica/core/voice";
+import { DEFAULT_VOICE_SETTINGS, useVoiceModelsStore, useVoiceSettingsStore, type VoiceHistoryEntry } from "@workpal/core/voice";
 import { renderWithI18n } from "../../test/i18n";
 import { VoiceHistorySection } from "./voice-history";
 
 const transcribe = vi.hoisted(() => vi.fn());
-vi.mock("@multica/core/voice", async (original) => ({
-  ...(await original<typeof import("@multica/core/voice")>()),
+vi.mock("@workpal/core/voice", async (original) => ({
+  ...(await original<typeof import("@workpal/core/voice")>()),
   transcribeVoiceClip: transcribe,
 }));
 vi.mock("../../voice/engine", async () => {
-  const { useVoiceModelsStore } = await import("@multica/core/voice");
+  const { useVoiceModelsStore } = await import("@workpal/core/voice");
   return { useVoiceModels: () => useVoiceModelsStore((s) => s.models) };
 });
 

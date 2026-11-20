@@ -7,9 +7,9 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/multica-ai/multica/server/internal/testutil"
-	"github.com/multica-ai/multica/server/internal/util"
-	"github.com/multica-ai/multica/server/pkg/eventcontract"
+	"workpal.local/workpal/server/internal/testutil"
+	"workpal.local/workpal/server/internal/util"
+	"workpal.local/workpal/server/pkg/eventcontract"
 )
 
 // Exercise real writes rather than calling the capture function: every advertised
@@ -157,7 +157,7 @@ func TestIssueWakeupCollaborationTransactionAndActor(t *testing.T) {
 			t.Fatal(err)
 		}
 		defer tx.Rollback(ctx)
-		if _, err = tx.Exec(ctx, "SELECT set_config('multica.source_task_id',$1,true),set_config('multica.actor_type','agent',true),set_config('multica.actor_id',$2,true)", run, agent); err != nil {
+		if _, err = tx.Exec(ctx, "SELECT set_config('workpal.source_task_id',$1,true),set_config('workpal.actor_type','agent',true),set_config('workpal.actor_id',$2,true)", run, agent); err != nil {
 			t.Fatal(err)
 		}
 		if own {

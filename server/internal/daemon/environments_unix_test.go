@@ -12,18 +12,18 @@ import (
 	"testing"
 	"time"
 
-	"github.com/multica-ai/multica/server/internal/daemon/localenv"
+	"workpal.local/workpal/server/internal/daemon/localenv"
 )
 
 func TestEnvironmentHandlersStartListAndStop(t *testing.T) {
 	s, _ := newTestEnvironmentService(t)
 	d := &Daemon{logger: s.logger, environments: s}
 	workDir := t.TempDir()
-	if err := os.MkdirAll(filepath.Join(workDir, "repo", ".multica"), 0o755); err != nil {
+	if err := os.MkdirAll(filepath.Join(workDir, "repo", ".workpal"), 0o755); err != nil {
 		t.Fatal(err)
 	}
 	config := "[environments.worker]\nlabel = \"Queue worker\"\nstart = \"exec sleep 60\"\nurl = \"\"\n"
-	if err := os.WriteFile(filepath.Join(workDir, "repo", ".multica", "environments.toml"), []byte(config), 0o644); err != nil {
+	if err := os.WriteFile(filepath.Join(workDir, "repo", ".workpal", "environments.toml"), []byte(config), 0o644); err != nil {
 		t.Fatal(err)
 	}
 	d.registerActiveRepoCheckoutTask("mat_env_a", activeRepoCheckoutTask{WorkspaceID: "ws", TaskID: "task-a", IssueID: "issue-a", WorkDir: workDir})
@@ -78,11 +78,11 @@ func TestEnvironmentReportSendsOnlyACrashExcerpt(t *testing.T) {
 	const secret = "fake-password-for-tests"
 	s, reporter := newTestEnvironmentService(t)
 	root := t.TempDir()
-	if err := os.MkdirAll(filepath.Join(root, ".multica"), 0o755); err != nil {
+	if err := os.MkdirAll(filepath.Join(root, ".workpal"), 0o755); err != nil {
 		t.Fatal(err)
 	}
 	config := "[environments.api]\nstart = \"echo 'cannot reach postgres://demo:" + secret + "@db.invalid/app'; exit 3\"\nurl = \"\"\n"
-	if err := os.WriteFile(filepath.Join(root, ".multica", "environments.toml"), []byte(config), 0o644); err != nil {
+	if err := os.WriteFile(filepath.Join(root, ".workpal", "environments.toml"), []byte(config), 0o644); err != nil {
 		t.Fatal(err)
 	}
 	task := localenv.Task{TaskID: "task-a", IssueID: "issue-a", WorkspaceID: "ws", RootDir: root}
@@ -115,11 +115,11 @@ func TestEnvironmentReportSendsOnlyACrashExcerpt(t *testing.T) {
 func TestEnvironmentReportShowsADeclaredEnvironmentAsItsApp(t *testing.T) {
 	s, reporter := newTestEnvironmentService(t)
 	root := t.TempDir()
-	if err := os.MkdirAll(filepath.Join(root, ".multica"), 0o755); err != nil {
+	if err := os.MkdirAll(filepath.Join(root, ".workpal"), 0o755); err != nil {
 		t.Fatal(err)
 	}
 	config := "[environments.desktop]\nlabel = \"Desktop app\"\nstart = \"exec sleep 60\"\nurl = \"\"\n"
-	if err := os.WriteFile(filepath.Join(root, ".multica", "environments.toml"), []byte(config), 0o644); err != nil {
+	if err := os.WriteFile(filepath.Join(root, ".workpal", "environments.toml"), []byte(config), 0o644); err != nil {
 		t.Fatal(err)
 	}
 	task := localenv.Task{TaskID: "task-a", IssueID: "issue-a", WorkspaceID: "ws", RootDir: root}
@@ -144,7 +144,7 @@ func TestEnvironmentReportShowsADeclaredEnvironmentAsItsApp(t *testing.T) {
 	// processes: the app, under the environment's key.
 	s.detected = []localenv.Environment{{
 		Key: env.Key, TaskID: "task-a", IssueID: "issue-a", Source: localenv.SourceConfig, Kind: localenv.KindApp,
-		Name: "Multica Canary", State: localenv.StateRunning,
+		Name: "Workpal Canary", State: localenv.StateRunning,
 	}}
 	s.report(context.Background(), time.Now())
 	calls = reporter.take()

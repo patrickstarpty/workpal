@@ -834,12 +834,12 @@ func mustWrite(t *testing.T, path, content string) {
 func TestHermesTerminalEnvPassthrough(t *testing.T) {
 	t.Parallel()
 	required := []string{
-		"MULTICA_TOKEN", "MULTICA_TASK_CONFIG_ROOT", "MULTICA_TASK_WORKSPACES_ROOT",
-		"MULTICA_SERVER_URL", "MULTICA_DAEMON_PORT", "MULTICA_WORKSPACE_ID",
-		"MULTICA_AGENT_NAME", "MULTICA_AGENT_ID", "MULTICA_TASK_ID", "MULTICA_TASK_SLOT",
-		"MULTICA_AUTOPILOT_RUN_ID", "MULTICA_AUTOPILOT_ID",
-		"MULTICA_QUICK_CREATE_TASK_ID", "MULTICA_QUICK_CREATE_ATTACHMENT_IDS",
-		"MULTICA_QUICK_CREATE_DEFAULT_ASSIGNEE_TYPE", "MULTICA_QUICK_CREATE_DEFAULT_ASSIGNEE_ID",
+		"WORKPAL_TOKEN", "WORKPAL_TASK_CONFIG_ROOT", "WORKPAL_TASK_WORKSPACES_ROOT",
+		"WORKPAL_SERVER_URL", "WORKPAL_DAEMON_PORT", "WORKPAL_WORKSPACE_ID",
+		"WORKPAL_AGENT_NAME", "WORKPAL_AGENT_ID", "WORKPAL_TASK_ID", "WORKPAL_TASK_SLOT",
+		"WORKPAL_AUTOPILOT_RUN_ID", "WORKPAL_AUTOPILOT_ID",
+		"WORKPAL_QUICK_CREATE_TASK_ID", "WORKPAL_QUICK_CREATE_ATTACHMENT_IDS",
+		"WORKPAL_QUICK_CREATE_DEFAULT_ASSIGNEE_TYPE", "WORKPAL_QUICK_CREATE_DEFAULT_ASSIGNEE_ID",
 	}
 	for _, tc := range []struct {
 		name, config string
@@ -853,9 +853,9 @@ func TestHermesTerminalEnvPassthrough(t *testing.T) {
 		{name: "existing terminal", config: "model: hermes-4\nterminal:\n  timeout: 42\n"},
 		{name: "scalar terminal anchor", config: "model: hermes-4\nterminal: &terminal invalid\ncopy: *terminal\n"},
 		{name: "terminal alias", config: "model: hermes-4\ndefaults: &terminal {timeout: 42, env_passthrough: [CUSTOM_KEY]}\nterminal: *terminal\ncopy: *terminal\n", existing: []string{"CUSTOM_KEY"}},
-		{name: "allowlist alias", config: "model: hermes-4\nshared_names: &names [CUSTOM_KEY, MULTICA_TOKEN, CUSTOM_KEY]\nterminal: {timeout: 42, env_passthrough: *names}\ncopy: *names\n", existing: []string{"CUSTOM_KEY", "MULTICA_TOKEN"}},
+		{name: "allowlist alias", config: "model: hermes-4\nshared_names: &names [CUSTOM_KEY, WORKPAL_TOKEN, CUSTOM_KEY]\nterminal: {timeout: 42, env_passthrough: *names}\ncopy: *names\n", existing: []string{"CUSTOM_KEY", "WORKPAL_TOKEN"}},
 		{name: "terminal anchor", config: "model: hermes-4\nterminal: &terminal {timeout: 42, env_passthrough: &names [CUSTOM_KEY]}\nshared_names: *names\ncopy: *terminal\n", existing: []string{"CUSTOM_KEY"}},
-		{name: "existing allowlist", config: "model: hermes-4\nterminal:\n  timeout: 42\n  env_passthrough: [CUSTOM_KEY, MULTICA_TOKEN, CUSTOM_KEY]\n", existing: []string{"CUSTOM_KEY", "MULTICA_TOKEN"}},
+		{name: "existing allowlist", config: "model: hermes-4\nterminal:\n  timeout: 42\n  env_passthrough: [CUSTOM_KEY, WORKPAL_TOKEN, CUSTOM_KEY]\n", existing: []string{"CUSTOM_KEY", "WORKPAL_TOKEN"}},
 	} {
 		t.Run(tc.name, func(t *testing.T) {
 			shared := t.TempDir()
@@ -871,13 +871,13 @@ func TestHermesTerminalEnvPassthrough(t *testing.T) {
 				Provider:         "hermes",
 				HermesSourceHome: shared,
 				HermesEnv: map[string]string{
-					"MULTICA_TOKEN":                              "mat_fixture_not_for_config",
-					"MULTICA_AUTOPILOT_RUN_ID":                   "autopilot_run_fixture",
-					"MULTICA_AUTOPILOT_ID":                       "autopilot_fixture",
-					"MULTICA_QUICK_CREATE_TASK_ID":               "quick_create_fixture",
-					"MULTICA_QUICK_CREATE_DEFAULT_ASSIGNEE_TYPE": "squad",
-					"MULTICA_QUICK_CREATE_DEFAULT_ASSIGNEE_ID":   "aaaa1111-2222-3333-4444-555555555555",
-					"MULTICA_QUICK_CREATE_ATTACHMENT_IDS":        `["attachment_fixture"]`,
+					"WORKPAL_TOKEN":                              "mat_fixture_not_for_config",
+					"WORKPAL_AUTOPILOT_RUN_ID":                   "autopilot_run_fixture",
+					"WORKPAL_AUTOPILOT_ID":                       "autopilot_fixture",
+					"WORKPAL_QUICK_CREATE_TASK_ID":               "quick_create_fixture",
+					"WORKPAL_QUICK_CREATE_DEFAULT_ASSIGNEE_TYPE": "squad",
+					"WORKPAL_QUICK_CREATE_DEFAULT_ASSIGNEE_ID":   "aaaa1111-2222-3333-4444-555555555555",
+					"WORKPAL_QUICK_CREATE_ATTACHMENT_IDS":        `["attachment_fixture"]`,
 					"UNRELATED_SECRET":                           "unrelated_fixture",
 				},
 				Task: task,

@@ -2,7 +2,7 @@ import type {
   WebhookEventFilter,
   WebhookPayloadCondition,
   WebhookPayloadConditionValue,
-} from "@multica/core/types";
+} from "@workpal/core/types";
 
 export type ConditionOp = WebhookPayloadCondition["op"];
 

@@ -1,15 +1,15 @@
 import type { ComponentType, ReactNode } from "react";
-import { AtSign, Paperclip, Plus } from "@multica/ui/icons";
-import { IconButton } from "@multica/ui/components/common/icon-button";
-import { Button } from "@multica/ui/components/ui/button";
+import { AtSign, Paperclip, Plus } from "@workpal/ui/icons";
+import { IconButton } from "@workpal/ui/components/common/icon-button";
+import { Button } from "@workpal/ui/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuShortcut,
   DropdownMenuTrigger,
-} from "@multica/ui/components/ui/dropdown-menu";
-import { cn } from "@multica/ui/lib/utils";
+} from "@workpal/ui/components/ui/dropdown-menu";
+import { cn } from "@workpal/ui/lib/utils";
 import type { Lang } from "../voice-input/copy";
 import {
   AttachButton,

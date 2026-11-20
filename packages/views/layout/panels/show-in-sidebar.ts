@@ -1,15 +1,15 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import { useAuthStore } from "@multica/core/auth";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { NO_PROJECT_SIDEBAR_SOURCE, projectSidebarSource, sidebarProjects } from "@multica/core/issues/sidebar-list";
-import { useSidebarProjectPrefs } from "@multica/core/issues/sidebar-project-prefs";
-import { useSidebarTreeStore } from "@multica/core/issues/stores/sidebar-tree-store";
-import { useWorkspacePaths } from "@multica/core/paths";
-import { projectListOptions } from "@multica/core/projects/queries";
-import type { Issue } from "@multica/core/types";
-import { useSidebarSafe } from "@multica/ui/components/ui/sidebar";
+import { useAuthStore } from "@workpal/core/auth";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { NO_PROJECT_SIDEBAR_SOURCE, projectSidebarSource, sidebarProjects } from "@workpal/core/issues/sidebar-list";
+import { useSidebarProjectPrefs } from "@workpal/core/issues/sidebar-project-prefs";
+import { useSidebarTreeStore } from "@workpal/core/issues/stores/sidebar-tree-store";
+import { useWorkspacePaths } from "@workpal/core/paths";
+import { projectListOptions } from "@workpal/core/projects/queries";
+import type { Issue } from "@workpal/core/types";
+import { useSidebarSafe } from "@workpal/ui/components/ui/sidebar";
 import { useNavigation } from "../../navigation";
 import { useAppShell } from "../app-shell-context";
 

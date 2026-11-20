@@ -2,10 +2,10 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { toast } from "sonner";
-import { Copy, Pause, Play, RotateCcw, Trash2 } from "@multica/ui/icons";
-import { Button } from "@multica/ui/components/ui/button";
-import { IconButton } from "@multica/ui/components/common/icon-button";
-import { ShimmerText } from "@multica/ui/components/common/shimmer-text";
+import { Copy, Pause, Play, RotateCcw, Trash2 } from "@workpal/ui/icons";
+import { Button } from "@workpal/ui/components/ui/button";
+import { IconButton } from "@workpal/ui/components/common/icon-button";
+import { ShimmerText } from "@workpal/ui/components/common/shimmer-text";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -15,16 +15,16 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@multica/ui/components/ui/alert-dialog";
+} from "@workpal/ui/components/ui/alert-dialog";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@multica/ui/components/ui/select";
-import { copyText } from "@multica/ui/lib/clipboard";
-import { cn } from "@multica/ui/lib/utils";
+} from "@workpal/ui/components/ui/select";
+import { copyText } from "@workpal/ui/lib/clipboard";
+import { cn } from "@workpal/ui/lib/utils";
 import {
   pickVoiceModel,
   transcribeVoiceClip,
@@ -33,7 +33,7 @@ import {
   voiceHistoryDays,
   type VoiceHistoryEntry,
   type VoiceHistoryRetention,
-} from "@multica/core/voice";
+} from "@workpal/core/voice";
 import { useLocale, useT } from "../../i18n";
 import { localVoiceAPI, type LocalVoiceHistoryAPI } from "../../platform/local-voice";
 import { useVoiceModels } from "../../voice";

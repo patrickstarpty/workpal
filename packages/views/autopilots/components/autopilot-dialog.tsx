@@ -20,14 +20,14 @@ import {
   Webhook,
   X as XIcon,
   Zap,
-} from "@multica/ui/icons";
-import { cn } from "@multica/ui/lib/utils";
+} from "@workpal/ui/icons";
+import { cn } from "@workpal/ui/lib/utils";
 import {
   Dialog,
   DialogContent,
   DialogTitle,
-} from "@multica/ui/components/ui/dialog";
-import { Tooltip, TooltipTrigger, TooltipContent } from "@multica/ui/components/ui/tooltip";
+} from "@workpal/ui/components/ui/dialog";
+import { Tooltip, TooltipTrigger, TooltipContent } from "@workpal/ui/components/ui/tooltip";
 import {
   Popover,
   PopoverTrigger,
@@ -35,26 +35,26 @@ import {
   PopoverHeader,
   PopoverTitle,
   PopoverDescription,
-} from "@multica/ui/components/ui/popover";
-import { Button } from "@multica/ui/components/ui/button";
-import { useCurrentWorkspace } from "@multica/core/paths";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { agentListOptions, squadListOptions } from "@multica/core/workspace/queries";
-import { projectListOptions } from "@multica/core/projects/queries";
+} from "@workpal/ui/components/ui/popover";
+import { Button } from "@workpal/ui/components/ui/button";
+import { useCurrentWorkspace } from "@workpal/core/paths";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { agentListOptions, squadListOptions } from "@workpal/core/workspace/queries";
+import { projectListOptions } from "@workpal/core/projects/queries";
 import {
   useCreateAutopilot,
   useCreateAutopilotTrigger,
   useUpdateAutopilot,
   useUpdateAutopilotTrigger,
-} from "@multica/core/autopilots/mutations";
-import { buildAutopilotWebhookUrl } from "@multica/core/autopilots";
-import { api } from "@multica/core/api";
+} from "@workpal/core/autopilots/mutations";
+import { buildAutopilotWebhookUrl } from "@workpal/core/autopilots";
+import { api } from "@workpal/core/api";
 import type {
   AutopilotAssigneeType,
   AutopilotCollaborator,
   AutopilotExecutionMode,
   AutopilotTrigger,
-} from "@multica/core/types";
+} from "@workpal/core/types";
 import { TitleEditor, ContentEditor, type TitleEditorRef } from "../../editor";
 import { ActorAvatar } from "../../common/actor-avatar";
 import { SegmentedToggle } from "../../common/segmented-toggle";

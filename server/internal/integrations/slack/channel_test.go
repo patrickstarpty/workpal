@@ -10,7 +10,7 @@ import (
 
 	"github.com/slack-go/slack"
 
-	"github.com/multica-ai/multica/server/internal/integrations/channel"
+	"workpal.local/workpal/server/internal/integrations/channel"
 )
 
 func TestChunkMessage(t *testing.T) {

@@ -8,8 +8,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/multica-ai/multica/server/pkg/agent"
-	"github.com/multica-ai/multica/server/pkg/taskfailure"
+	"workpal.local/workpal/server/pkg/agent"
+	"workpal.local/workpal/server/pkg/taskfailure"
 )
 
 type unconfirmedCleanupBackend struct{ omitResult bool }

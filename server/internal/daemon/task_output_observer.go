@@ -5,7 +5,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/multica-ai/multica/server/pkg/awakeclock"
+	"workpal.local/workpal/server/pkg/awakeclock"
 )
 
 // silentResumeRetireThreshold is how long a RESUMED run must have gone without

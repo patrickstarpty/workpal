@@ -19,7 +19,7 @@ func testSkillInvocation(t *testing.T) *SkillInvocation {
 		PlatformPrompt: "Platform context\nAttachments: file-id",
 		UserMessage:    "/compact keep this text",
 		Skills: []ExplicitSkill{
-			{Name: "first-multica", Directory: filepath.Join(t.TempDir(), "first-multica"), Body: "FIRST REQUIREMENT"},
+			{Name: "first-workpal", Directory: filepath.Join(t.TempDir(), "first-workpal"), Body: "FIRST REQUIREMENT"},
 			{Name: "second", Directory: filepath.Join(t.TempDir(), "second"), Body: "SECOND REQUIREMENT"},
 		},
 	}
@@ -70,7 +70,7 @@ func TestClaudeSkillCommandBlockSpacing(t *testing.T) {
 
 func TestExplicitSkillsProviderInputs(t *testing.T) {
 	s := testSkillInvocation(t)
-	blocks := s.claudeTextBlocks(map[string]bool{"first-multica": true})
+	blocks := s.claudeTextBlocks(map[string]bool{"first-workpal": true})
 	wire, err := buildClaudeInput(blocks...)
 	if err != nil {
 		t.Fatal(err)
@@ -81,14 +81,14 @@ func TestExplicitSkillsProviderInputs(t *testing.T) {
 	if err := json.Unmarshal(wire, &input); err != nil {
 		t.Fatal(err)
 	}
-	if len(input.Message.Content) != 2 || input.Message.Content[1].Text != "/first-multica /compact keep this text" {
+	if len(input.Message.Content) != 2 || input.Message.Content[1].Text != "/first-workpal /compact keep this text" {
 		t.Fatalf("Claude command must start last block: %s", wire)
 	}
 	if !strings.Contains(blocks[0], "Attachments: file-id") || !strings.Contains(blocks[0], "SECOND REQUIREMENT") || strings.Contains(blocks[0], "FIRST REQUIREMENT") {
 		t.Fatalf("Claude platform block=%q", blocks[0])
 	}
 	agy := s.antigravityPrompt(true)
-	if !strings.HasPrefix(agy, "/first-multica\nPlatform context") || !strings.Contains(agy, "SECOND REQUIREMENT") || strings.Contains(agy, "FIRST REQUIREMENT") {
+	if !strings.HasPrefix(agy, "/first-workpal\nPlatform context") || !strings.Contains(agy, "SECOND REQUIREMENT") || strings.Contains(agy, "FIRST REQUIREMENT") {
 		t.Fatalf("agy prompt=%q", agy)
 	}
 	catalog, _ := json.Marshal(map[string]any{"data": []any{map[string]any{"skills": []any{
@@ -96,14 +96,14 @@ func TestExplicitSkillsProviderInputs(t *testing.T) {
 		map[string]any{"name": s.Skills[1].Name, "path": filepath.Join(s.Skills[1].Directory, "SKILL.md"), "enabled": true},
 	}}}})
 	codex := s.codexPrompt(catalog)
-	if !strings.Contains(codex, "$first-multica\n") || !strings.Contains(codex, "$second\n") || strings.Contains(codex, "REQUIREMENT") || !strings.Contains(codex, s.UserMessage) {
+	if !strings.Contains(codex, "$first-workpal\n") || !strings.Contains(codex, "$second\n") || strings.Contains(codex, "REQUIREMENT") || !strings.Contains(codex, s.UserMessage) {
 		t.Fatalf("Codex prompt=%q", codex)
 	}
 }
 
 func TestExplicitSkillsMissingCapabilitiesFallBack(t *testing.T) {
 	s := testSkillInvocation(t)
-	for _, catalog := range []string{`{}`, `{"data":[]}`, `{"data":[{"skills":[{"name":"first-multica","path":"/some-other/SKILL.md","enabled":true}]}]}`, `not json`} {
+	for _, catalog := range []string{`{}`, `{"data":[]}`, `{"data":[{"skills":[{"name":"first-workpal","path":"/some-other/SKILL.md","enabled":true}]}]}`, `not json`} {
 		if got := s.codexPrompt(json.RawMessage(catalog)); got != s.FallbackPrompt() {
 			t.Fatalf("unsupported Codex: %q", got)
 		}
@@ -181,9 +181,9 @@ func TestClaudeExplicitSkillsExecute(t *testing.T) {
 			dir := t.TempDir()
 			capture := filepath.Join(dir, "input.json")
 			path := filepath.Join(dir, "fake-claude")
-			response := `{"subtype":"error","request_id":"multica-supplement-initialize","error":"unsupported"}`
+			response := `{"subtype":"error","request_id":"workpal-supplement-initialize","error":"unsupported"}`
 			if !tc.rejected {
-				response = fmt.Sprintf(`{"subtype":"success","request_id":"multica-supplement-initialize","response":{"commands":[{"name":"first-multica","description":%q}]}}`, tc.description)
+				response = fmt.Sprintf(`{"subtype":"success","request_id":"workpal-supplement-initialize","response":{"commands":[{"name":"first-workpal","description":%q}]}}`, tc.description)
 			}
 			script := "#!/bin/sh\nIFS= read -r init\nprintf '%s\\n' \"$init\" > \"$INIT_CAPTURE\"\nprintf '%s\\n' '{\"type\":\"control_response\",\"response\":" + response + "}'\nIFS= read -r input\nprintf '%s\\n' \"$input\" > \"$CAPTURE\"\nprintf '%s\\n' '{\"type\":\"result\",\"subtype\":\"success\",\"result\":\"done\"}'\ncat >/dev/null\n"
 			writeTestExecutable(t, path, []byte(script))
@@ -222,7 +222,7 @@ func TestClaudeExplicitSkillsExecute(t *testing.T) {
 				t.Errorf("skill discovery enabled supplement hooks: %s", initWire)
 			}
 			if tc.native {
-				if len(input.Message.Content) != 2 || !strings.HasPrefix(input.Message.Content[1].Text, "/first-multica ") {
+				if len(input.Message.Content) != 2 || !strings.HasPrefix(input.Message.Content[1].Text, "/first-workpal ") {
 					t.Fatalf("native input=%s", wire)
 				}
 			} else if len(input.Message.Content) != 1 || input.Message.Content[0].Text != s.FallbackPrompt() {
@@ -296,10 +296,10 @@ echo '{"jsonrpc":"2.0","method":"turn/completed","params":{"threadId":"skill-thr
 				}
 			}
 			if supported {
-				if !strings.Contains(got, "$first-multica") || strings.Contains(got, "FIRST REQUIREMENT") {
+				if !strings.Contains(got, "$first-workpal") || strings.Contains(got, "FIRST REQUIREMENT") {
 					t.Fatalf("missing native input: %s", got)
 				}
-			} else if !strings.Contains(got, "FIRST REQUIREMENT") || strings.Contains(got, "$first-multica") {
+			} else if !strings.Contains(got, "FIRST REQUIREMENT") || strings.Contains(got, "$first-workpal") {
 				t.Fatalf("missing fallback: %s", got)
 			}
 		})

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Play } from "@multica/ui/icons";
+import { Play } from "@workpal/ui/icons";
 
 /**
  * VideoEmbed — provider-agnostic, click-to-load video embed for docs MDX.
@@ -13,7 +13,7 @@ import { Play } from "@multica/ui/icons";
  * component.
  *
  * Usage in MDX (registered in the docs MDX components map):
- *   <VideoEmbed provider="bilibili" id="BV1cv7Y6gEg7" title="Multica 介绍视频" />
+ *   <VideoEmbed provider="bilibili" id="BV1cv7Y6gEg7" title="Workpal 介绍视频" />
  */
 
 type Provider = "bilibili" | "youtube";

@@ -12,7 +12,7 @@ import (
 	"time"
 	"unicode/utf8"
 
-	"github.com/multica-ai/multica/server/pkg/taskfailure"
+	"workpal.local/workpal/server/pkg/taskfailure"
 )
 
 func TestCodebuddyFailureDetails(t *testing.T) {

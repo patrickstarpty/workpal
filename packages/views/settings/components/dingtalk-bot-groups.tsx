@@ -3,9 +3,9 @@
 import { useState } from "react";
 import { useInfiniteQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
-import { ChevronDown, ChevronRight } from "@multica/ui/icons";
-import { cn } from "@multica/ui/lib/utils";
-import { Button } from "@multica/ui/components/ui/button";
+import { ChevronDown, ChevronRight } from "@workpal/ui/icons";
+import { cn } from "@workpal/ui/lib/utils";
+import { Button } from "@workpal/ui/components/ui/button";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -15,16 +15,16 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@multica/ui/components/ui/alert-dialog";
+} from "@workpal/ui/components/ui/alert-dialog";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@multica/ui/components/ui/tooltip";
-import { dingtalkKeys } from "@multica/core/dingtalk";
-import { api } from "@multica/core/api";
-import type { DingTalkGroup, DingTalkGroupBot } from "@multica/core/types";
+} from "@workpal/ui/components/ui/tooltip";
+import { dingtalkKeys } from "@workpal/core/dingtalk";
+import { api } from "@workpal/core/api";
+import type { DingTalkGroup, DingTalkGroupBot } from "@workpal/core/types";
 import { useT, useTimeAgo } from "../../i18n";
 
 export function getDingTalkBotIdentity(

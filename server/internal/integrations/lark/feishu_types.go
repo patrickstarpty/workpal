@@ -3,7 +3,7 @@ package lark
 import (
 	"github.com/jackc/pgx/v5/pgtype"
 
-	"github.com/multica-ai/multica/server/internal/integrations/channel"
+	"workpal.local/workpal/server/internal/integrations/channel"
 )
 
 // This file holds the Feishu adapter's native-ish inbound/outbound value

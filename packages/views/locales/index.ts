@@ -1,4 +1,4 @@
-import type { LocaleResources, SupportedLocale } from "@multica/core/i18n";
+import type { LocaleResources, SupportedLocale } from "@workpal/core/i18n";
 import en from "./en";
 import zhHans from "./zh-Hans";
 import zhHant from "./zh-Hant";

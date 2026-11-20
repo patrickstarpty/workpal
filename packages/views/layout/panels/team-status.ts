@@ -2,10 +2,10 @@
 
 import { useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { useWorkspacePresenceMap } from "@multica/core/agents";
-import type { AgentPresenceDetail } from "@multica/core/agents";
-import { agentListOptions } from "@multica/core/workspace/queries";
-import type { Agent } from "@multica/core/types";
+import { useWorkspacePresenceMap } from "@workpal/core/agents";
+import type { AgentPresenceDetail } from "@workpal/core/agents";
+import { agentListOptions } from "@workpal/core/workspace/queries";
+import type { Agent } from "@workpal/core/types";
 
 const EMPTY_AGENTS: Agent[] = [];
 

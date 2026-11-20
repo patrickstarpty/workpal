@@ -13,7 +13,7 @@ import (
 	"testing"
 	"unicode/utf8"
 
-	"github.com/multica-ai/multica/server/pkg/protocol"
+	"workpal.local/workpal/server/pkg/protocol"
 )
 
 func thinking(content string) protocol.TaskMessagePayload {

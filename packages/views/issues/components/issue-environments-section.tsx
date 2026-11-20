@@ -19,13 +19,13 @@ import {
   Server,
   Square,
   WifiOff,
-} from "@multica/ui/icons";
-import { useAuthStore } from "@multica/core/auth";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { useControlIssueEnvironment, type IssueEnvironmentControl } from "@multica/core/issues/environments";
-import { useCreateComment } from "@multica/core/issues/mutations";
-import { issueEnvironmentsOptions, issueKeys, issueTasksOptions } from "@multica/core/issues/queries";
-import { runtimeListOptions } from "@multica/core/runtimes/queries";
+} from "@workpal/ui/icons";
+import { useAuthStore } from "@workpal/core/auth";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { useControlIssueEnvironment, type IssueEnvironmentControl } from "@workpal/core/issues/environments";
+import { useCreateComment } from "@workpal/core/issues/mutations";
+import { issueEnvironmentsOptions, issueKeys, issueTasksOptions } from "@workpal/core/issues/queries";
+import { runtimeListOptions } from "@workpal/core/runtimes/queries";
 import type {
   Agent,
   DeclaredEnvironment,
@@ -34,10 +34,10 @@ import type {
   IssueEnvironmentActionRecord,
   IssueEnvironmentConfig,
   IssueEnvironmentState,
-} from "@multica/core/types";
-import { useActorName } from "@multica/core/workspace/hooks";
-import { agentListOptions } from "@multica/core/workspace/queries";
-import { IconButton } from "@multica/ui/components/common/icon-button";
+} from "@workpal/core/types";
+import { useActorName } from "@workpal/core/workspace/hooks";
+import { agentListOptions } from "@workpal/core/workspace/queries";
+import { IconButton } from "@workpal/ui/components/common/icon-button";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -47,8 +47,8 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@multica/ui/components/ui/alert-dialog";
-import { Button } from "@multica/ui/components/ui/button";
+} from "@workpal/ui/components/ui/alert-dialog";
+import { Button } from "@workpal/ui/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -57,10 +57,10 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@multica/ui/components/ui/dropdown-menu";
-import { Spinner } from "@multica/ui/components/ui/spinner";
-import { copyText } from "@multica/ui/lib/clipboard";
-import { cn } from "@multica/ui/lib/utils";
+} from "@workpal/ui/components/ui/dropdown-menu";
+import { Spinner } from "@workpal/ui/components/ui/spinner";
+import { copyText } from "@workpal/ui/lib/clipboard";
+import { cn } from "@workpal/ui/lib/utils";
 import { escapeMarkdownLabel } from "../../editor/utils/escape-markdown-label";
 import { useT, useTimeAgo } from "../../i18n";
 import { canFocusLocalEnvironments, focusLocalEnvironment } from "../../platform/environment-focus";

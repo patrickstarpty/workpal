@@ -1,20 +1,20 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import { ActorAvatar as ActorAvatarBase } from "@multica/ui/components/common/actor-avatar";
-import { Skeleton } from "@multica/ui/components/ui/skeleton";
-import { TruncatedTooltip } from "@multica/ui/components/common/truncated-tooltip";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { useWorkspacePaths } from "@multica/core/paths";
-import { agentListOptions } from "@multica/core/workspace/queries";
-import { resolvePublicFileUrl } from "@multica/core/workspace/avatar-url";
+import { ActorAvatar as ActorAvatarBase } from "@workpal/ui/components/common/actor-avatar";
+import { Skeleton } from "@workpal/ui/components/ui/skeleton";
+import { TruncatedTooltip } from "@workpal/ui/components/common/truncated-tooltip";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { useWorkspacePaths } from "@workpal/core/paths";
+import { agentListOptions } from "@workpal/core/workspace/queries";
+import { resolvePublicFileUrl } from "@workpal/core/workspace/avatar-url";
 import {
   agentTaskSnapshotOptions,
   useAgentPresenceDetail,
-} from "@multica/core/agents";
-import { issueDetailOptions } from "@multica/core/issues";
-import type { AgentTask } from "@multica/core/types";
-import { AlertTriangle } from "@multica/ui/icons";
+} from "@workpal/core/agents";
+import { issueDetailOptions } from "@workpal/core/issues";
+import type { AgentTask } from "@workpal/core/types";
+import { AlertTriangle } from "@workpal/ui/icons";
 import { AppLink } from "../../navigation";
 import { useT, useTimeAgo } from "../../i18n";
 import { availabilityConfig, workloadConfig } from "../presence";

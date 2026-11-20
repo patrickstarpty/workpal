@@ -17,32 +17,32 @@ import {
   Settings2,
   Square,
   Trash2,
-} from "@multica/ui/icons";
+} from "@workpal/ui/icons";
 import { toast } from "sonner";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import type { Agent, UpdateAgentRequest } from "@multica/core/types";
+import type { Agent, UpdateAgentRequest } from "@workpal/core/types";
 import {
   type AgentPresenceDetail,
   isAgentRuntimeBound,
   useWorkspacePresenceMap,
-} from "@multica/core/agents";
-import { api, ApiError } from "@multica/core/api";
-import { useAuthStore } from "@multica/core/auth";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { useModalStore } from "@multica/core/modals";
-import { useWorkspacePaths } from "@multica/core/paths";
+} from "@workpal/core/agents";
+import { api, ApiError } from "@workpal/core/api";
+import { useAuthStore } from "@workpal/core/auth";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { useModalStore } from "@workpal/core/modals";
+import { useWorkspacePaths } from "@workpal/core/paths";
 import {
   agentDetailOptions,
   agentListOptions,
   cacheAgentResponse,
   memberListOptions,
   workspaceKeys,
-} from "@multica/core/workspace/queries";
-import { runtimeListOptions } from "@multica/core/runtimes";
-import { useAgentPermissions } from "@multica/core/permissions";
-import { Button } from "@multica/ui/components/ui/button";
-import { IconButton } from "@multica/ui/components/common/icon-button";
-import { CapabilityBanner } from "@multica/ui/components/common/capability-banner";
+} from "@workpal/core/workspace/queries";
+import { runtimeListOptions } from "@workpal/core/runtimes";
+import { useAgentPermissions } from "@workpal/core/permissions";
+import { Button } from "@workpal/ui/components/ui/button";
+import { IconButton } from "@workpal/ui/components/common/icon-button";
+import { CapabilityBanner } from "@workpal/ui/components/common/capability-banner";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -52,7 +52,7 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@multica/ui/components/ui/alert-dialog";
+} from "@workpal/ui/components/ui/alert-dialog";
 import {
   Dialog,
   DialogContent,
@@ -60,17 +60,17 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "@multica/ui/components/ui/dialog";
+} from "@workpal/ui/components/ui/dialog";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@multica/ui/components/ui/dropdown-menu";
-import { Skeleton } from "@multica/ui/components/ui/skeleton";
-import { copyText } from "@multica/ui/lib/clipboard";
-import { cn } from "@multica/ui/lib/utils";
+} from "@workpal/ui/components/ui/dropdown-menu";
+import { Skeleton } from "@workpal/ui/components/ui/skeleton";
+import { copyText } from "@workpal/ui/lib/clipboard";
+import { cn } from "@workpal/ui/lib/utils";
 import { AppLink, useNavigation } from "../../navigation";
 import { CollectionPageState } from "../../layout/collection-page";
 import {
@@ -94,7 +94,7 @@ import { AgentSkillsSection } from "./agent-skills-section";
 import { AgentWorkDialog } from "./agent-work-dialog";
 import { AgentWorkSections } from "./tabs/activity-tab";
 
-const AGENT_DETAIL_LAYOUT_ID = "multica_agent_detail_layout";
+const AGENT_DETAIL_LAYOUT_ID = "workpal_agent_detail_layout";
 
 /**
  * The page's `?view=` deep link. Every view the old tabbed page had stays
@@ -442,7 +442,7 @@ export function AgentDetailPage({ agentId }: AgentDetailPageProps) {
   const runningCount = presence?.runningCount ?? 0;
   const queuedCount = presence?.queuedCount ?? 0;
   const hasActiveWork = runningCount + queuedCount > 0;
-  // Multica's built-in agents cannot be archived — the server refuses it.
+  // Workpal's built-in agents cannot be archived — the server refuses it.
   const canArchive = canEdit.allowed && !isArchived && !agent.system_key;
 
   // Chat shares the invocation gate with assignment (MUL-3963): starting a

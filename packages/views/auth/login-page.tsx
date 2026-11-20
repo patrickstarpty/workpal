@@ -9,20 +9,20 @@ import {
   CardDescription,
   CardContent,
   CardFooter,
-} from "@multica/ui/components/ui/card";
-import { Alert, AlertDescription } from "@multica/ui/components/ui/alert";
-import { Input } from "@multica/ui/components/ui/input";
-import { Button } from "@multica/ui/components/ui/button";
-import { Label } from "@multica/ui/components/ui/label";
+} from "@workpal/ui/components/ui/card";
+import { Alert, AlertDescription } from "@workpal/ui/components/ui/alert";
+import { Input } from "@workpal/ui/components/ui/input";
+import { Button } from "@workpal/ui/components/ui/button";
+import { Label } from "@workpal/ui/components/ui/label";
 import {
   InputOTP,
   InputOTPGroup,
   InputOTPSlot,
-} from "@multica/ui/components/ui/input-otp";
-import { useAuthStore } from "@multica/core/auth";
-import { workspaceKeys } from "@multica/core/workspace/queries";
-import { api } from "@multica/core/api";
-import type { User } from "@multica/core/types";
+} from "@workpal/ui/components/ui/input-otp";
+import { useAuthStore } from "@workpal/core/auth";
+import { workspaceKeys } from "@workpal/core/workspace/queries";
+import { api } from "@workpal/core/api";
+import type { User } from "@workpal/core/types";
 import { useT } from "../i18n";
 
 // Types
@@ -129,7 +129,7 @@ export function LoginPage({
     // for a token-mode session, and a 401 ends the session — clearing this
     // very key — so reading it after the probe would always come back null
     // and the fallback could never run.
-    const storedToken = localStorage.getItem("multica_token");
+    const storedToken = localStorage.getItem("workpal_token");
 
     // Ensure no stale bearer token interferes — we want to test the cookie first.
     api.setToken(null);
@@ -145,7 +145,7 @@ export function LoginPage({
         // Cookie auth failed — fall back to the token this browser had.
         if (!storedToken) return;
 
-        localStorage.setItem("multica_token", storedToken);
+        localStorage.setItem("workpal_token", storedToken);
         api.setToken(storedToken);
         api
           .getMe()
@@ -156,7 +156,7 @@ export function LoginPage({
           })
           .catch(() => {
             api.setToken(null);
-            localStorage.removeItem("multica_token");
+            localStorage.removeItem("workpal_token");
           });
       });
   }, [cliCallback]);
@@ -204,7 +204,7 @@ export function LoginPage({
         if (cliCallback) {
           // CLI path: get token directly for the redirect URL
           const { token } = await api.verifyCode(email, value);
-          localStorage.setItem("multica_token", token);
+          localStorage.setItem("workpal_token", token);
           api.setToken(token);
           onTokenObtained?.();
           redirectToCliCallback(cliCallback.url, token, cliCallback.state);
@@ -255,7 +255,7 @@ export function LoginPage({
 
       if (authSourceRef.current === "localStorage") {
         // Session was detected via localStorage — reuse that token directly.
-        const stored = localStorage.getItem("multica_token");
+        const stored = localStorage.getItem("workpal_token");
         if (!stored) throw new Error("token missing");
         token = stored;
       } else {

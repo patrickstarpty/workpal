@@ -3,9 +3,9 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { toast } from "sonner";
-import { Check, Loader2 } from "@multica/ui/icons";
-import { Button } from "@multica/ui/components/ui/button";
-import { Badge } from "@multica/ui/components/ui/badge";
+import { Check, Loader2 } from "@workpal/ui/icons";
+import { Button } from "@workpal/ui/components/ui/button";
+import { Badge } from "@workpal/ui/components/ui/badge";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -15,12 +15,12 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@multica/ui/components/ui/alert-dialog";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { useWorkspacePaths } from "@multica/core/paths";
-import { privateProjectOverviewOptions } from "@multica/core/projects/queries";
-import { useJoinPrivateProject } from "@multica/core/projects/mutations";
-import type { PrivateProjectOverview } from "@multica/core/types";
+} from "@workpal/ui/components/ui/alert-dialog";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { useWorkspacePaths } from "@workpal/core/paths";
+import { privateProjectOverviewOptions } from "@workpal/core/projects/queries";
+import { useJoinPrivateProject } from "@workpal/core/projects/mutations";
+import type { PrivateProjectOverview } from "@workpal/core/types";
 import { AppLink } from "../../navigation";
 import { ProjectIcon } from "../../projects/components/project-icon";
 import { useT } from "../../i18n";

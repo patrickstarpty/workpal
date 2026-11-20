@@ -11,17 +11,17 @@ import {
   Plus,
   Search,
   User,
-} from "@multica/ui/icons";
-import { useAuthStore } from "@multica/core/auth";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { useWorkspacePaths } from "@multica/core/paths";
-import { useIssueStatuses } from "@multica/core/issue-statuses/hooks";
-import { statusColumnKeys } from "@multica/core/issues";
-import { useIssueWorkflows } from "@multica/core/issue-workflows";
-import { projectListOptions } from "@multica/core/projects/queries";
-import { memberListOptions } from "@multica/core/workspace/queries";
-import type { IssueWorkflow, IssueWorkflowStep, Project } from "@multica/core/types";
-import { Button } from "@multica/ui/components/ui/button";
+} from "@workpal/ui/icons";
+import { useAuthStore } from "@workpal/core/auth";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { useWorkspacePaths } from "@workpal/core/paths";
+import { useIssueStatuses } from "@workpal/core/issue-statuses/hooks";
+import { statusColumnKeys } from "@workpal/core/issues";
+import { useIssueWorkflows } from "@workpal/core/issue-workflows";
+import { projectListOptions } from "@workpal/core/projects/queries";
+import { memberListOptions } from "@workpal/core/workspace/queries";
+import type { IssueWorkflow, IssueWorkflowStep, Project } from "@workpal/core/types";
+import { Button } from "@workpal/ui/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -30,14 +30,14 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@multica/ui/components/ui/dropdown-menu";
+} from "@workpal/ui/components/ui/dropdown-menu";
 import {
   Popover,
   PopoverContent,
   PopoverDescription,
   PopoverTitle,
   PopoverTrigger,
-} from "@multica/ui/components/ui/popover";
+} from "@workpal/ui/components/ui/popover";
 import { ActorAvatar } from "../common/actor-avatar";
 import { matchesPinyin } from "../editor/extensions/pinyin-match";
 import { StatusIcon } from "../issues/components/status-icon";

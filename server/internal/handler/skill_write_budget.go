@@ -3,7 +3,7 @@ package handler
 import (
 	"fmt"
 
-	skillpkg "github.com/multica-ai/multica/server/internal/skill"
+	skillpkg "workpal.local/workpal/server/internal/skill"
 )
 
 // Manual writes use the existing skill import limits for stored UTF-8 text.

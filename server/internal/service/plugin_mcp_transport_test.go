@@ -4,9 +4,9 @@ import (
 	"encoding/json"
 	"testing"
 
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
-	"github.com/multica-ai/multica/server/pkg/plugincontract"
-	"github.com/multica-ai/multica/server/pkg/remotemcp"
+	db "workpal.local/workpal/server/pkg/db/generated"
+	"workpal.local/workpal/server/pkg/plugincontract"
+	"workpal.local/workpal/server/pkg/remotemcp"
 )
 
 // The approval is the grant, not the install.

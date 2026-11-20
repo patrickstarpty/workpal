@@ -9,8 +9,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/multica-ai/multica/server/internal/testutil"
-	"github.com/multica-ai/multica/server/pkg/protocol"
+	"workpal.local/workpal/server/internal/testutil"
+	"workpal.local/workpal/server/pkg/protocol"
 )
 
 // claimAgentInstructionsForTest claims the next queued task for runtimeID and

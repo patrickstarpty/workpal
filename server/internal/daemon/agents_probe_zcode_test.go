@@ -8,7 +8,7 @@ import (
 )
 
 // TestDefaultAgentCommandNamesIncludeZcode keeps the shell-fallback probe
-// list in lockstep with the MULTICA_ZCODE_PATH probe: without the bare
+// list in lockstep with the WORKPAL_ZCODE_PATH probe: without the bare
 // command name, a zcode CLI on PATH would only be found via the env override.
 func TestDefaultAgentCommandNamesIncludeZcode(t *testing.T) {
 	for _, name := range defaultAgentCommandNames {
@@ -20,8 +20,8 @@ func TestDefaultAgentCommandNamesIncludeZcode(t *testing.T) {
 }
 
 // TestProbeAgentCLIsDiscoversZcodeViaEnvOverride covers the ZCode probe:
-// a fake binary wired through MULTICA_ZCODE_PATH registers the "zcode"
-// provider, and MULTICA_ZCODE_MODEL seeds the daemon-wide default model —
+// a fake binary wired through WORKPAL_ZCODE_PATH registers the "zcode"
+// provider, and WORKPAL_ZCODE_MODEL seeds the daemon-wide default model —
 // ZCode supports per-turn modelSelection on session/send, so unlike zeroclaw
 // its probe reads a model env var (see agents_probe.go).
 func TestProbeAgentCLIsDiscoversZcodeViaEnvOverride(t *testing.T) {
@@ -43,17 +43,17 @@ func TestProbeAgentCLIsDiscoversZcodeViaEnvOverride(t *testing.T) {
 	resetShellResolveCacheForTest(t)
 
 	t.Setenv("PATH", t.TempDir())
-	t.Setenv("MULTICA_ZCODE_PATH", executable)
-	t.Setenv("MULTICA_ZCODE_MODEL", "zai/glm-5.3")
+	t.Setenv("WORKPAL_ZCODE_PATH", executable)
+	t.Setenv("WORKPAL_ZCODE_MODEL", "zai/glm-5.3")
 
 	entry, ok := probeAgentCLIs()["zcode"]
 	if !ok {
-		t.Fatal("zcode was not discovered via MULTICA_ZCODE_PATH")
+		t.Fatal("zcode was not discovered via WORKPAL_ZCODE_PATH")
 	}
 	if filepath.Clean(entry.Path) != filepath.Clean(executable) {
 		t.Fatalf("zcode path = %q, want %q", entry.Path, executable)
 	}
-	// With a MULTICA_*_PATH override, Command mirrors the override value (see
+	// With a WORKPAL_*_PATH override, Command mirrors the override value (see
 	// probe()'s envOrDefault), unlike the bare-command-name path used by the
 	// omp/pi test.
 	if entry.Command != executable {

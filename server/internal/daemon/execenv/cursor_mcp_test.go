@@ -404,7 +404,7 @@ func TestCursorMcpLoginInOneTaskClearsNoticeForNextTask(t *testing.T) {
 
 	root := t.TempDir()
 	store := filepath.Join(root, "profile", cursorMcpAuthStoreRoot, "agent-1", cursorMcpAuthFile)
-	mcpConfig := json.RawMessage(`{"mcpServers":{"multica_apps":{"url":"http://127.0.0.1:1/mcp"}}}`)
+	mcpConfig := json.RawMessage(`{"mcpServers":{"workpal_apps":{"url":"http://127.0.0.1:1/mcp"}}}`)
 	prepare := func(name string) (string, string) {
 		t.Helper()
 		envRoot := filepath.Join(root, name)

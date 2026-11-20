@@ -1,5 +1,5 @@
 import { render, type RenderOptions, type RenderResult } from "@testing-library/react";
-import { I18nProvider } from "@multica/core/i18n/react";
+import { I18nProvider } from "@workpal/core/i18n/react";
 import type { ReactElement, ReactNode } from "react";
 
 // ee adds its own bundle to the app's i18n instance at runtime, so tests

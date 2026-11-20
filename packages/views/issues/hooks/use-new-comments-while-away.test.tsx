@@ -1,6 +1,6 @@
 import { act, renderHook } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
-import type { TimelineEntry } from "@multica/core/types";
+import type { TimelineEntry } from "@workpal/core/types";
 import { useNewCommentsWhileAway } from "./use-new-comments-while-away";
 
 const ME = "user-me";

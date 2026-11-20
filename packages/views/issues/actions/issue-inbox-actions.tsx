@@ -2,21 +2,21 @@
 
 import { type ReactNode, useEffect, useRef, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { AlarmClock, Archive, ChevronDown, CircleCheck } from "@multica/ui/icons";
-import { IconButton } from "@multica/ui/components/common/icon-button";
-import { cn } from "@multica/ui/lib/utils";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { useModalStore } from "@multica/core/modals";
-import type { InboxUnsubscribeScope } from "@multica/core/inbox/mutations";
-import { findSnoozedInboxIssue, snoozedInboxOptions } from "@multica/core/inbox/queries";
-import { nextInboxRow } from "@multica/core/inbox/open-row";
+import { AlarmClock, Archive, ChevronDown, CircleCheck } from "@workpal/ui/icons";
+import { IconButton } from "@workpal/ui/components/common/icon-button";
+import { cn } from "@workpal/ui/lib/utils";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { useModalStore } from "@workpal/core/modals";
+import type { InboxUnsubscribeScope } from "@workpal/core/inbox/mutations";
+import { findSnoozedInboxIssue, snoozedInboxOptions } from "@workpal/core/inbox/queries";
+import { nextInboxRow } from "@workpal/core/inbox/open-row";
 import {
   getShortcut,
   isEditableShortcutTarget,
   isPortalLayerShortcutTarget,
   shortcutMatchesEvent,
-} from "@multica/core/shortcuts";
-import { isImeComposing } from "@multica/core/utils";
+} from "@workpal/core/shortcuts";
+import { isImeComposing } from "@workpal/core/utils";
 import { ActionShortcutKeycaps } from "../../common/shortcut-keycaps";
 import { InboxKeptActions, InboxNextButton, useKeptInboxRowText } from "../../inbox/components/inbox-kept-actions";
 import { InboxSnoozeMenu } from "../../inbox/components/inbox-snooze-menu";

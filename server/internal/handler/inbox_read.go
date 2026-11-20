@@ -7,10 +7,10 @@ import (
 	"net/http"
 
 	"github.com/jackc/pgx/v5"
-	"github.com/multica-ai/multica/server/internal/inboxread"
-	"github.com/multica-ai/multica/server/internal/logger"
-	"github.com/multica-ai/multica/server/internal/projectaccess"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
+	"workpal.local/workpal/server/internal/inboxread"
+	"workpal.local/workpal/server/internal/logger"
+	"workpal.local/workpal/server/internal/projectaccess"
+	db "workpal.local/workpal/server/pkg/db/generated"
 )
 
 // Struct-literal handlers used by tests still share a bounded guard.

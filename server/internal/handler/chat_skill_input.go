@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"strings"
 
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
-	"github.com/multica-ai/multica/server/pkg/protocol"
+	db "workpal.local/workpal/server/pkg/db/generated"
+	"workpal.local/workpal/server/pkg/protocol"
 )
 
 // Only SendDirectChatMessage stamps the authenticated sender. Attribution is

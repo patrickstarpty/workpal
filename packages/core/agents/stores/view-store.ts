@@ -101,7 +101,7 @@ export const useAgentsViewStore = createCollectionViewStore<
   { scope: AgentsScope },
   { setScope: (scope: AgentsScope) => void }
 >({
-  name: "multica_agents_view",
+  name: "workpal_agents_view",
   version: AGENT_VIEW_STORE_VERSION,
   // v0 → v1: model went from hidden-by-default to shown-by-default. Every v0
   // payload carried "model" in hiddenColumns unless the user had turned it

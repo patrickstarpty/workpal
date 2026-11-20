@@ -7,9 +7,9 @@ import (
 
 	"github.com/google/uuid"
 	"github.com/jackc/pgx/v5/pgtype"
-	"github.com/multica-ai/multica/server/internal/service"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
-	"github.com/multica-ai/multica/server/pkg/protocol"
+	"workpal.local/workpal/server/internal/service"
+	db "workpal.local/workpal/server/pkg/db/generated"
+	"workpal.local/workpal/server/pkg/protocol"
 )
 
 // revokeAndRemoveMember converges all server-side state that should follow a
@@ -152,7 +152,7 @@ func (h *Handler) revokeAndRemoveMember(ctx context.Context, workspaceID, userID
 	// but pruning stops a stale binding from lingering across a remove/re-add.
 	if err := qtx.DeleteChannelUserBindingsByWorkspaceMember(ctx, db.DeleteChannelUserBindingsByWorkspaceMemberParams{
 		WorkspaceID:   workspaceID,
-		MulticaUserID: userID,
+		WorkpalUserID: userID,
 	}); err != nil {
 		return empty, err
 	}

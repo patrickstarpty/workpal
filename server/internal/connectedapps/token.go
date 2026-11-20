@@ -28,7 +28,7 @@ type tokenClaims struct {
 // a gateway token can never verify as a connect state or the other way round.
 func DeriveTokenSecret(secret []byte) []byte {
 	mac := hmac.New(sha256.New, secret)
-	mac.Write([]byte("multica-connected-apps-gateway-v1"))
+	mac.Write([]byte("workpal-connected-apps-gateway-v1"))
 	return mac.Sum(nil)
 }
 

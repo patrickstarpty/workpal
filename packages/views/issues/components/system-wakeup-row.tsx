@@ -1,22 +1,22 @@
 "use client";
 
 import { useId, useState } from "react";
-import { ListChecks, Pencil } from "@multica/ui/icons";
+import { ListChecks, Pencil } from "@workpal/ui/icons";
 import { toast } from "sonner";
-import { useUpdateIssueSystemWakeup } from "@multica/core/issues";
-import { useWorkspacePaths } from "@multica/core/paths";
-import type { SystemWakeup } from "@multica/core/types";
-import { Button } from "@multica/ui/components/ui/button";
-import { IconButton } from "@multica/ui/components/common/icon-button";
-import { Switch } from "@multica/ui/components/ui/switch";
-import { Textarea } from "@multica/ui/components/ui/textarea";
+import { useUpdateIssueSystemWakeup } from "@workpal/core/issues";
+import { useWorkspacePaths } from "@workpal/core/paths";
+import type { SystemWakeup } from "@workpal/core/types";
+import { Button } from "@workpal/ui/components/ui/button";
+import { IconButton } from "@workpal/ui/components/common/icon-button";
+import { Switch } from "@workpal/ui/components/ui/switch";
+import { Textarea } from "@workpal/ui/components/ui/textarea";
 import {
   Popover,
   PopoverContent,
   PopoverTitle,
   PopoverTrigger,
-} from "@multica/ui/components/ui/popover";
-import { TruncatedTooltip } from "@multica/ui/components/common/truncated-tooltip";
+} from "@workpal/ui/components/ui/popover";
+import { TruncatedTooltip } from "@workpal/ui/components/common/truncated-tooltip";
 import { useT } from "../../i18n";
 import { AppLink } from "../../navigation";
 import { wakeupsHref } from "../../autopilots/components/wakeups-tab";

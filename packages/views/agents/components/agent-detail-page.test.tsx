@@ -10,9 +10,9 @@ import {
   within,
 } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { ApiError } from "@multica/core/api";
-import type { Agent } from "@multica/core/types";
-import { I18nProvider } from "@multica/core/i18n/react";
+import { ApiError } from "@workpal/core/api";
+import type { Agent } from "@workpal/core/types";
+import { I18nProvider } from "@workpal/core/i18n/react";
 import { RESOURCES } from "../../locales";
 import {
   NavigationProvider,
@@ -141,15 +141,15 @@ const mockArchiveAgent = vi.hoisted(() => vi.fn());
 const mockCancelAgentTasks = vi.hoisted(() => vi.fn());
 const mockCopyText = vi.hoisted(() => vi.fn());
 
-vi.mock("@multica/core/hooks", () => ({
+vi.mock("@workpal/core/hooks", () => ({
   useWorkspaceId: () => "ws-1",
 }));
-vi.mock("@multica/core/agents", () => ({
+vi.mock("@workpal/core/agents", () => ({
   isAgentRuntimeBound: (agent: { runtime_id: string; runtime_bound?: boolean }) =>
     agent.runtime_bound !== false && agent.runtime_id.length > 0,
   useWorkspacePresenceMap: () => ({ byAgent: presenceRef.current }),
 }));
-vi.mock("@multica/core/workspace/queries", () => ({
+vi.mock("@workpal/core/workspace/queries", () => ({
   agentListOptions: (wsId: string) => ({
     queryKey: ["agents", wsId],
     queryFn: () => Promise.resolve(agentsRef.current),
@@ -194,13 +194,13 @@ vi.mock("@multica/core/workspace/queries", () => ({
     ],
   },
 }));
-vi.mock("@multica/core/runtimes", () => ({
+vi.mock("@workpal/core/runtimes", () => ({
   runtimeListOptions: (wsId: string) => ({
     queryKey: ["runtimes", wsId],
     queryFn: () => Promise.resolve(runtimesRef.current),
   }),
 }));
-vi.mock("@multica/core/auth", () => {
+vi.mock("@workpal/core/auth", () => {
   type AuthState = { user: { id: string } | null };
   const state = (): AuthState => ({ user: currentUserRef.current });
   const useAuthStore = Object.assign(
@@ -210,12 +210,12 @@ vi.mock("@multica/core/auth", () => {
   );
   return { useAuthStore };
 });
-vi.mock("@multica/core/modals", () => ({
+vi.mock("@workpal/core/modals", () => ({
   useModalStore: Object.assign(vi.fn(), {
     getState: () => ({ open: mockModalOpen }),
   }),
 }));
-vi.mock("@multica/core/paths", () => ({
+vi.mock("@workpal/core/paths", () => ({
   useWorkspacePaths: () => ({
     agents: () => "/acme/agents",
     agentDetail: (id: string) => `/acme/agents/${id}`,
@@ -223,7 +223,7 @@ vi.mock("@multica/core/paths", () => ({
     chat: () => "/acme/chat",
   }),
 }));
-vi.mock("@multica/core/api", () => {
+vi.mock("@workpal/core/api", () => {
   class ApiError extends Error {
     status: number;
     constructor(message: string, status: number) {
@@ -242,7 +242,7 @@ vi.mock("@multica/core/api", () => {
     ApiError,
   };
 });
-vi.mock("@multica/ui/lib/clipboard", () => ({
+vi.mock("@workpal/ui/lib/clipboard", () => ({
   copyText: mockCopyText,
 }));
 vi.mock("sonner", () => ({

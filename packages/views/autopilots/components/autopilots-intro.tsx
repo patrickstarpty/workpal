@@ -1,7 +1,7 @@
 "use client";
 
-import { CalendarClock, Plus, Zap } from "@multica/ui/icons";
-import { Button } from "@multica/ui/components/ui/button";
+import { CalendarClock, Plus, Zap } from "@workpal/ui/icons";
+import { Button } from "@workpal/ui/components/ui/button";
 import { FeatureIntro } from "../../layout/feature-intro";
 import { useT } from "../../i18n";
 import { AUTOPILOT_TEMPLATES, type AutopilotTemplate } from "./autopilot-templates";

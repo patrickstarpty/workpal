@@ -17,12 +17,12 @@ import {
   Laptop,
   Loader2,
   UserRound,
-} from "@multica/ui/icons";
+} from "@workpal/ui/icons";
 import { useQuery } from "@tanstack/react-query";
-import { Card, CardContent } from "@multica/ui/components/ui/card";
-import { cn } from "@multica/ui/lib/utils";
-import { useCurrentWorkspace } from "@multica/core/paths";
-import { memberListOptions } from "@multica/core/workspace/queries";
+import { Card, CardContent } from "@workpal/ui/components/ui/card";
+import { cn } from "@workpal/ui/lib/utils";
+import { useCurrentWorkspace } from "@workpal/core/paths";
+import { memberListOptions } from "@workpal/core/workspace/queries";
 import { WorkspaceAvatar } from "../../workspace/workspace-avatar";
 import { useT } from "../../i18n";
 

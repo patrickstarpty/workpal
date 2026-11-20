@@ -6,8 +6,8 @@ import {
   screen,
   waitFor,
 } from "@testing-library/react";
-import { ApiError } from "@multica/core/api";
-import { I18nProvider } from "@multica/core/i18n/react";
+import { ApiError } from "@workpal/core/api";
+import { I18nProvider } from "@workpal/core/i18n/react";
 import enCommon from "../locales/en/common.json";
 import enOnboarding from "../locales/en/onboarding.json";
 import enWorkspace from "../locales/en/workspace.json";
@@ -28,20 +28,20 @@ vi.mock("sonner", () => ({ toast: { error: mockToastError } }));
 
 vi.mock("../auth", () => ({ useLogout: () => vi.fn() }));
 
-vi.mock("@multica/core/api", async () => {
+vi.mock("@workpal/core/api", async () => {
   const actual = await vi.importActual<Record<string, unknown>>(
-    "@multica/core/api",
+    "@workpal/core/api",
   );
   return {
     ...actual,
     api: {
-      getBaseUrl: () => "https://multica.ai",
+      getBaseUrl: () => "https://workpal.invalid",
       createIssue: (...args: unknown[]) => mockCreateIssue(...args),
     },
   };
 });
 
-vi.mock("@multica/core/auth", () => ({
+vi.mock("@workpal/core/auth", () => ({
   useAuthStore: Object.assign(
     (selector: (s: { user: unknown }) => unknown) =>
       selector({ user: { id: "u-1", onboarding_questionnaire: {} } }),
@@ -49,13 +49,13 @@ vi.mock("@multica/core/auth", () => ({
   ),
 }));
 
-vi.mock("@multica/core/workspace", () => ({
+vi.mock("@workpal/core/workspace", () => ({
   useWorkspaceList: () => ({ workspaces: [], ready: true }),
 }));
 
-vi.mock("@multica/core/onboarding", async () => {
+vi.mock("@workpal/core/onboarding", async () => {
   const actual = await vi.importActual<Record<string, unknown>>(
-    "@multica/core/onboarding",
+    "@workpal/core/onboarding",
   );
   return {
     ...actual,

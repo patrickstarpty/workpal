@@ -2,12 +2,12 @@ import React from "react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { act, screen, waitFor, within } from "@testing-library/react";
 import { onlineManager, QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { setApiInstance } from "@multica/core/api";
-import type { ApiClient } from "@multica/core/api/client";
-import { projectKeys } from "@multica/core/projects/queries";
-import { useModalStore } from "@multica/core/modals";
+import { setApiInstance } from "@workpal/core/api";
+import type { ApiClient } from "@workpal/core/api/client";
+import { projectKeys } from "@workpal/core/projects/queries";
+import { useModalStore } from "@workpal/core/modals";
 import userEvent from "@testing-library/user-event";
-import type { Project } from "@multica/core/types";
+import type { Project } from "@workpal/core/types";
 import { renderWithI18n } from "../../test/i18n";
 import { NavigationProvider, type NavigationAdapter } from "../../navigation";
 import { ProjectDetail } from "./project-detail";
@@ -27,7 +27,7 @@ const mocks = vi.hoisted(() => ({
   toastError: vi.fn(),
 }));
 
-vi.mock("@multica/ui/lib/clipboard", () => ({
+vi.mock("@workpal/ui/lib/clipboard", () => ({
   copyText: mocks.copyText,
   copyTextAndHtml: mocks.copyTextAndHtml,
 }));
@@ -38,13 +38,13 @@ vi.mock("../../workflows/project-workflow-sheet", () => ({
 }));
 vi.mock("../../workflows/project-workflow-row", () => ({ ProjectWorkflowControl: () => null }));
 
-vi.mock("@multica/core/pins", () => ({
+vi.mock("@workpal/core/pins", () => ({
   pinListOptions: () => ({ queryKey: ["pins"], queryFn: async () => [] }),
   useCreatePin: () => ({ mutate: vi.fn() }),
   useDeletePin: () => ({ mutate: vi.fn() }),
 }));
 
-vi.mock("@multica/core/workspace/queries", () => ({
+vi.mock("@workpal/core/workspace/queries", () => ({
   memberListOptions: () => ({
     queryKey: ["members"],
     queryFn: async () => [{ user_id: "user-1", name: "User One", role: mocks.role }],
@@ -52,28 +52,28 @@ vi.mock("@multica/core/workspace/queries", () => ({
   agentListOptions: () => ({ queryKey: ["agents"], queryFn: async () => [] }),
 }));
 
-vi.mock("@multica/core/hooks", () => ({
+vi.mock("@workpal/core/hooks", () => ({
   useWorkspaceId: () => "workspace-1",
 }));
 
-vi.mock("@multica/core/auth", () => ({
+vi.mock("@workpal/core/auth", () => ({
   useAuthStore: (selector: (state: { user: { id: string } }) => unknown) =>
     selector({ user: { id: "user-1" } }),
 }));
 
-vi.mock("@multica/core/chat", () => ({
+vi.mock("@workpal/core/chat", () => ({
   useRecentContextStore: (
     selector: (state: { recordVisit: typeof mocks.recordVisit }) => unknown,
   ) => selector({ recordVisit: mocks.recordVisit }),
 }));
 
-vi.mock("@multica/core/paths", () => ({
+vi.mock("@workpal/core/paths", () => ({
   useWorkspacePaths: () => ({
     projects: () => "/test-workspace/projects",
   }),
 }));
 
-vi.mock("@multica/core/workspace/hooks", () => ({
+vi.mock("@workpal/core/workspace/hooks", () => ({
   useActorName: () => ({ getActorName: () => "User One" }),
 }));
 
@@ -95,15 +95,15 @@ vi.mock("react-resizable-panels", () => ({
   }),
 }));
 
-vi.mock("@multica/ui/hooks/use-mobile", () => ({
+vi.mock("@workpal/ui/hooks/use-mobile", () => ({
   useIsMobile: () => false,
 }));
 
-vi.mock("@multica/ui/components/common/emoji-picker", () => ({
+vi.mock("@workpal/ui/components/common/emoji-picker", () => ({
   EmojiPicker: () => null,
 }));
 
-vi.mock("@multica/ui/components/ui/resizable", () => ({
+vi.mock("@workpal/ui/components/ui/resizable", () => ({
   ResizablePanelGroup: ({ children }: { children: React.ReactNode }) => (
     <div>{children}</div>
   ),
@@ -113,7 +113,7 @@ vi.mock("@multica/ui/components/ui/resizable", () => ({
   ResizableHandle: () => null,
 }));
 
-vi.mock("@multica/ui/components/ui/dropdown-menu", () => ({
+vi.mock("@workpal/ui/components/ui/dropdown-menu", () => ({
   DropdownMenu: ({ children }: { children: React.ReactNode }) => <>{children}</>,
   DropdownMenuTrigger: ({ render }: { render: React.ReactNode }) => <>{render}</>,
   DropdownMenuContent: ({ children }: { children: React.ReactNode }) => (
@@ -135,7 +135,7 @@ vi.mock("@multica/ui/components/ui/dropdown-menu", () => ({
   DropdownMenuSeparator: () => <hr />,
 }));
 
-vi.mock("@multica/ui/components/ui/tooltip", () => ({
+vi.mock("@workpal/ui/components/ui/tooltip", () => ({
   Tooltip: ({ children }: { children: React.ReactNode }) => <>{children}</>,
   TooltipTrigger: ({ render }: { render: React.ReactNode }) => <>{render}</>,
   TooltipContent: ({ children }: { children: React.ReactNode }) => (
@@ -143,7 +143,7 @@ vi.mock("@multica/ui/components/ui/tooltip", () => ({
   ),
 }));
 
-vi.mock("@multica/ui/components/ui/sheet", () => ({
+vi.mock("@workpal/ui/components/ui/sheet", () => ({
   Sheet: ({ children }: { children: React.ReactNode }) => <>{children}</>,
   SheetContent: ({ children }: { children: React.ReactNode }) => (
     <div>{children}</div>

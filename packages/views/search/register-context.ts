@@ -6,7 +6,7 @@ import {
   useRecentVisitsStore,
   type CommandBarContext,
   type RecentVisitType,
-} from "@multica/core/command-bar";
+} from "@workpal/core/command-bar";
 
 function recentVisitOf(
   context: CommandBarContext | null,

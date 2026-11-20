@@ -3,17 +3,17 @@
 import { useId, useMemo, useState } from "react";
 import type { FormEvent, HTMLAttributes } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { Cloud, Loader2, RefreshCw, Rocket, Trash2 } from "@multica/ui/icons";
+import { Cloud, Loader2, RefreshCw, Rocket, Trash2 } from "@workpal/ui/icons";
 import { toast } from "sonner";
-import type { CloudRuntimeNode } from "@multica/core/runtimes";
+import type { CloudRuntimeNode } from "@workpal/core/runtimes";
 import {
   cloudRuntimeNodeListOptions,
   useCreateCloudRuntimeNode,
   useDeleteCloudRuntimeNode,
-} from "@multica/core/runtimes";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { Badge } from "@multica/ui/components/ui/badge";
-import { Button } from "@multica/ui/components/ui/button";
+} from "@workpal/core/runtimes";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { Badge } from "@workpal/ui/components/ui/badge";
+import { Button } from "@workpal/ui/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -21,17 +21,17 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "@multica/ui/components/ui/dialog";
-import { Input } from "@multica/ui/components/ui/input";
-import { Label } from "@multica/ui/components/ui/label";
+} from "@workpal/ui/components/ui/dialog";
+import { Input } from "@workpal/ui/components/ui/input";
+import { Label } from "@workpal/ui/components/ui/label";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@multica/ui/components/ui/select";
-import { cn } from "@multica/ui/lib/utils";
+} from "@workpal/ui/components/ui/select";
+import { cn } from "@workpal/ui/lib/utils";
 import { useT } from "../../i18n";
 
 const CLOUD_RUNTIME_INSTANCE_TYPES = ["t4g.medium", "t4g.large"] as const;

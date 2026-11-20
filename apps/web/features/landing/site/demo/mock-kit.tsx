@@ -17,12 +17,12 @@ import {
   Wifi,
   Zap,
   type IconComponent,
-} from "@multica/ui/icons";
-import { cn } from "@multica/ui/lib/utils";
-import { ActorAvatar } from "@multica/ui/components/common/actor-avatar";
-import { ShimmerText } from "@multica/ui/components/common/shimmer-text";
+} from "@workpal/ui/icons";
+import { cn } from "@workpal/ui/lib/utils";
+import { ActorAvatar } from "@workpal/ui/components/common/actor-avatar";
+import { ShimmerText } from "@workpal/ui/components/common/shimmer-text";
 import { HERO_PROVIDERS } from "../../components/provider-marks";
-import { MulticaIcon } from "@multica/ui/components/common/multica-icon";
+import { WorkpalIcon } from "@workpal/ui/components/common/workpal-icon";
 import { useLocale } from "../../i18n";
 import type { DemoDict } from "../../i18n/types";
 
@@ -256,7 +256,7 @@ export const APP_CARD =
   "relative flex min-w-0 flex-1 overflow-hidden rounded-xl bg-page-canvas shadow-[var(--surface-shadow)] ring-1 ring-surface-border";
 
 /**
- * The Multica app as a window: the rail on the grey app shell, and the page
+ * The Workpal app as a window: the rail on the grey app shell, and the page
  * on the content card with the space panel collapsed. A window that runs off
  * the right and bottom of its frame passes `bleed` (in px), and the page keeps
  * its content out of the cropped strip so nothing is cut mid-word.
@@ -457,7 +457,7 @@ export function Working({ label, agents }: { label?: string; agents?: Actor[] })
   return (
     <span className="inline-flex shrink-0 items-center gap-1">
       {agents ? <AvatarStack actors={agents} size={16} /> : null}
-      <MulticaIcon mode="think" size={12} />
+      <WorkpalIcon mode="think" size={12} />
       <ShimmerText className="text-micro text-muted-foreground">{label ?? working}</ShimmerText>
     </span>
   );

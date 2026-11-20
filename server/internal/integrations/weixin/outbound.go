@@ -12,13 +12,13 @@ import (
 
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgtype"
-	"github.com/multica-ai/multica/server/internal/events"
-	"github.com/multica-ai/multica/server/internal/integrations/channel/engine"
-	"github.com/multica-ai/multica/server/internal/util"
-	"github.com/multica-ai/multica/server/internal/util/secretbox"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
-	"github.com/multica-ai/multica/server/pkg/dbid"
-	"github.com/multica-ai/multica/server/pkg/protocol"
+	"workpal.local/workpal/server/internal/events"
+	"workpal.local/workpal/server/internal/integrations/channel/engine"
+	"workpal.local/workpal/server/internal/util"
+	"workpal.local/workpal/server/internal/util/secretbox"
+	db "workpal.local/workpal/server/pkg/db/generated"
+	"workpal.local/workpal/server/pkg/dbid"
+	"workpal.local/workpal/server/pkg/protocol"
 )
 
 const outboundEventQueueDepth = 256
@@ -116,7 +116,7 @@ func (o *Outbound) enqueue(e events.Event) {
 	hash := fnv.New32a()
 	_, _ = hash.Write([]byte(e.ChatSessionID))
 	// The event bus is synchronous. Saturation must never hold up task
-	// completion or realtime fanout; the answer remains in the Multica chat.
+	// completion or realtime fanout; the answer remains in the Workpal chat.
 	select {
 	case o.queues[hash.Sum32()%uint32(len(o.queues))] <- e:
 	case <-o.done:
@@ -265,7 +265,7 @@ func (o *Outbound) deliverReply(ctx context.Context, reply outboundReply) error 
 		return settle("send_result_unknown")
 	}
 	if event.Type == protocol.EventTaskFailed {
-		payload.Content = "This run failed. Open Multica to review the error and try again."
+		payload.Content = "This run failed. Open Workpal to review the error and try again."
 	}
 	if event.Type == protocol.EventTaskCancelled {
 		return settle("cancelled")
@@ -295,7 +295,7 @@ func (o *Outbound) deliverReply(ctx context.Context, reply outboundReply) error 
 		} else {
 			item, prepErr := o.attachment(ctx, api, creds.UserID, attachments[i-len(chunks)])
 			if prepErr != nil {
-				msg = textMessage(creds.UserID, token, msg.ClientID, "This file could not be sent to WeChat. It is still attached to the reply in Multica.")
+				msg = textMessage(creds.UserID, token, msg.ClientID, "This file could not be sent to WeChat. It is still attached to the reply in Workpal.")
 				o.logger.WarnContext(ctx, "weixin: attachment unavailable", "error", prepErr)
 			} else {
 				msg.Items = []messageItem{item}

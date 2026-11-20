@@ -13,7 +13,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/multica-ai/multica/server/internal/daemon/execenv"
+	"workpal.local/workpal/server/internal/daemon/execenv"
 )
 
 const managedCodexArtifactPaths = "codex-home/.sandbox-bin,codex-home/.tmp/marketplaces,codex-home/.tmp/plugins,codex-home/cache/remote_plugin_catalog"

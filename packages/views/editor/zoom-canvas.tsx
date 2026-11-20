@@ -13,15 +13,15 @@
  */
 
 import { useCallback, type ReactNode, type RefObject } from "react";
-import { Frame, Maximize, Minus, Plus } from "@multica/ui/icons";
-import { cn } from "@multica/ui/lib/utils";
+import { Frame, Maximize, Minus, Plus } from "@workpal/ui/icons";
+import { cn } from "@workpal/ui/lib/utils";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@multica/ui/components/ui/tooltip";
-import { createShortcutChord, type ShortcutChord } from "@multica/core/shortcuts";
+} from "@workpal/ui/components/ui/tooltip";
+import { createShortcutChord, type ShortcutChord } from "@workpal/core/shortcuts";
 import { ShortcutKeycaps } from "../common/shortcut-keycaps";
 import { useT } from "../i18n";
 import type { ZoomCanvasApi } from "./hooks/use-zoom-canvas";

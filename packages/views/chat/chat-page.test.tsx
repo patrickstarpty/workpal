@@ -4,8 +4,8 @@ import { StrictMode } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { act, fireEvent, render, screen } from "@testing-library/react";
-import type { Agent } from "@multica/core/types";
-import { I18nProvider } from "@multica/core/i18n/react";
+import type { Agent } from "@workpal/core/types";
+import { I18nProvider } from "@workpal/core/i18n/react";
 import enCommon from "../locales/en/common.json";
 import enChat from "../locales/en/chat.json";
 import {
@@ -78,17 +78,17 @@ const FOLD_INNER_LANDSCAPE = 951;
 const TABLET = 768;
 const DESKTOP = 1440;
 const layout = vi.hoisted(() => ({ width: 1440 }));
-vi.mock("@multica/ui/hooks/use-mobile", () => ({
+vi.mock("@workpal/ui/hooks/use-mobile", () => ({
   useIsMobile: () => layout.width < 768,
   useIsCompact: () => layout.width < 768,
 }));
-vi.mock("@multica/core/paths", () => ({
+vi.mock("@workpal/core/paths", () => ({
   useRequiredWorkspaceSlug: () => "acme",
   useWorkspacePaths: () => ({ chat: () => "/acme/chat" }),
 }));
 const platformWorkspace = vi.hoisted(() => ({ slug: "acme" }));
-vi.mock("@multica/core/platform", async (importOriginal) => ({
-  ...(await importOriginal<typeof import("@multica/core/platform")>()),
+vi.mock("@workpal/core/platform", async (importOriginal) => ({
+  ...(await importOriginal<typeof import("@workpal/core/platform")>()),
   getCurrentSlug: () => platformWorkspace.slug,
 }));
 
@@ -121,7 +121,7 @@ vi.mock("sonner", () => ({
   toast: { success: vi.fn(), error: mockToastError },
 }));
 
-vi.mock("@multica/core/chat", () => ({
+vi.mock("@workpal/core/chat", () => ({
   useChatStore: Object.assign(
     (selector?: (s: { activeSessionId: string | null }) => unknown) =>
       selector ? selector(storeRef.current) : storeRef.current,

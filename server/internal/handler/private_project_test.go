@@ -13,11 +13,11 @@ import (
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgtype"
 
-	"github.com/multica-ai/multica/server/internal/middleware"
-	"github.com/multica-ai/multica/server/internal/projectaccess"
-	"github.com/multica-ai/multica/server/internal/service"
-	"github.com/multica-ai/multica/server/internal/testutil"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
+	"workpal.local/workpal/server/internal/middleware"
+	"workpal.local/workpal/server/internal/projectaccess"
+	"workpal.local/workpal/server/internal/service"
+	"workpal.local/workpal/server/internal/testutil"
+	db "workpal.local/workpal/server/pkg/db/generated"
 )
 
 // privateProjectFixture: a private project whose members are the workspace
@@ -39,9 +39,9 @@ func newPrivateProjectFixture(t *testing.T) privateProjectFixture {
 	t.Helper()
 	marker := fmt.Sprintf("pp%d", time.Now().UnixNano())
 	f := privateProjectFixture{marker: marker}
-	f.insider = createPlainMember(t, marker+"-insider@multica.test")
-	f.outsider = createPlainMember(t, marker+"-outsider@multica.test")
-	f.outsideAdmin = createWorkspaceAdmin(t, marker+"-admin@multica.test")
+	f.insider = createPlainMember(t, marker+"-insider@workpal.test")
+	f.outsider = createPlainMember(t, marker+"-outsider@workpal.test")
+	f.outsideAdmin = createWorkspaceAdmin(t, marker+"-admin@workpal.test")
 	f.projectID = dbfx.Project(t, marker+" secret project", testutil.Cols{"visibility": projectaccess.VisibilityPrivate})
 	addProjectMemberRow(t, f.projectID, testUserID)
 	addProjectMemberRow(t, f.projectID, f.insider)
@@ -653,7 +653,7 @@ func TestPrivateProjectLeadChangeRequiresAccessManager(t *testing.T) {
 	for _, change := range []string{"self", "outsider", "clear", "id_only", "type_only"} {
 		t.Run(change, func(t *testing.T) {
 			f := newPrivateProjectFixture(t)
-			lead := createPlainMember(t, f.marker+"-lead@multica.test")
+			lead := createPlainMember(t, f.marker+"-lead@workpal.test")
 			addProjectMemberRow(t, f.projectID, lead)
 			dbfx.Exec(t, `UPDATE project SET lead_type = 'member', lead_id = $1 WHERE id = $2`, lead, f.projectID)
 			body := map[string]any{"lead_type": "member", "lead_id": f.insider, "title": "must not change"}
@@ -715,10 +715,10 @@ func TestPrivateProjectAccessManagersCanAddAndTransferLead(t *testing.T) {
 			if actor == "lead" {
 				userID = f.insider
 			} else if actor == "admin" {
-				userID = createWorkspaceAdmin(t, f.marker+"-inside-admin@multica.test")
+				userID = createWorkspaceAdmin(t, f.marker+"-inside-admin@workpal.test")
 				addProjectMemberRow(t, f.projectID, userID)
 			}
-			added := createPlainMember(t, f.marker+"-added@multica.test")
+			added := createPlainMember(t, f.marker+"-added@workpal.test")
 			req := withURLParam(asUser(newRequest(http.MethodPost, "/api/projects/"+f.projectID+"/members", map[string]any{"user_ids": []string{added}}), userID), "id", f.projectID)
 			testutil.Call(t, testHandler.AddProjectMembers, req).Want(http.StatusOK)
 			req = withURLParam(asUser(newRequest(http.MethodPut, "/api/projects/"+f.projectID, map[string]any{"lead_type": "member", "lead_id": f.outsider}), userID), "id", f.projectID)

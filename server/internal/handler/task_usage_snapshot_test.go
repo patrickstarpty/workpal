@@ -7,11 +7,11 @@ import (
 	"testing"
 
 	"github.com/google/uuid"
-	"github.com/multica-ai/multica/server/internal/events"
-	obsmetrics "github.com/multica-ai/multica/server/internal/metrics"
-	"github.com/multica-ai/multica/server/internal/service"
-	"github.com/multica-ai/multica/server/internal/testutil"
-	"github.com/multica-ai/multica/server/pkg/protocol"
+	"workpal.local/workpal/server/internal/events"
+	obsmetrics "workpal.local/workpal/server/internal/metrics"
+	"workpal.local/workpal/server/internal/service"
+	"workpal.local/workpal/server/internal/testutil"
+	"workpal.local/workpal/server/pkg/protocol"
 )
 
 func TestReportTaskUsageSnapshotsReplaceRowsAndOnlyMeterTerminal(t *testing.T) {
@@ -67,7 +67,7 @@ func TestReportTaskUsageSnapshotsReplaceRowsAndOnlyMeterTerminal(t *testing.T) {
 	if rows[0].InputTokens != 200 || rows[0].Provider != "anthropic" || rows[0].CostUsdTicks.Int64 != entry.CostUSDTicks {
 		t.Fatalf("latest cumulative snapshot was not preserved: %+v", rows[0])
 	}
-	for _, name := range []string{"multica_llm_tokens_total", "multica_llm_cost_usd_total"} {
+	for _, name := range []string{"workpal_llm_tokens_total", "workpal_llm_cost_usd_total"} {
 		if got := counterValue(t, m, name); got != 0 {
 			t.Errorf("snapshots incremented %s by %v", name, got)
 		}
@@ -80,10 +80,10 @@ func TestReportTaskUsageSnapshotsReplaceRowsAndOnlyMeterTerminal(t *testing.T) {
 	if err != nil || len(rows) != 1 || rows[0].InputTokens != 300 {
 		t.Fatalf("terminal usage = %v, err=%v; want one row with 300 input tokens", rows, err)
 	}
-	if got := counterValue(t, m, "multica_llm_tokens_total"); got != 380 {
+	if got := counterValue(t, m, "workpal_llm_tokens_total"); got != 380 {
 		t.Errorf("metered tokens = %v, want final total 380", got)
 	}
-	if got := counterValue(t, m, "multica_llm_cost_usd_total"); math.Abs(got-1) > 1e-10 {
+	if got := counterValue(t, m, "workpal_llm_cost_usd_total"); math.Abs(got-1) > 1e-10 {
 		t.Errorf("metered cost = %v, want final cost $1", got)
 	}
 	if len(updates) != 3 {

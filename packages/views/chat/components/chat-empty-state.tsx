@@ -1,7 +1,7 @@
 "use client";
 
-import { selectConversationStarters } from "@multica/core/agents";
-import type { Agent } from "@multica/core/types";
+import { selectConversationStarters } from "@workpal/core/agents";
+import type { Agent } from "@workpal/core/types";
 import { ActorAvatar } from "../../common/actor-avatar";
 import { useT } from "../../i18n";
 import {

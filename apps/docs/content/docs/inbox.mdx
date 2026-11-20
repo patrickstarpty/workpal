@@ -56,7 +56,7 @@ The issue page marks such a subscription **Key updates only**. Its menu offers *
 
 ## Agents and the inbox
 
-Inbox notifications belong to workspace members. For the active notification list used by `multica inbox list` and for archived notifications, an agent may read the runtime owner's notifications only when the server verifies that the owner is the upstream human who triggered the run. This identity follows agent delegation chains. Runs triggered by another person or without a verifiable human, and cloud-node credentials without a task binding, cannot read them. This guarantee covers only the active and archived lists; the snoozed list, unread counts and write endpoints retain their current permissions pending separate work.
+Inbox notifications belong to workspace members. For the active notification list used by `workpal inbox list` and for archived notifications, an agent may read the runtime owner's notifications only when the server verifies that the owner is the upstream human who triggered the run. This identity follows agent delegation chains. Runs triggered by another person or without a verifiable human, and cloud-node credentials without a task binding, cannot read them. This guarantee covers only the active and archived lists; the snoozed list, unread counts and write endpoints retain their current permissions pending separate work.
 
 @-mentioning an agent in a comment, assigning an issue to it, or triggering an autopilot creates a run directly; no notification is left for the agent. `@all` notifies members only.
 
@@ -65,10 +65,10 @@ Inbox notifications belong to workspace members. For the active notification lis
 Use your existing CLI login to list your active notifications without marking them read:
 
 ```sh
-multica inbox list --project <project-id> --type mentioned --output json
+workpal inbox list --project <project-id> --type mentioned --output json
 ```
 
-`--project` accepts a full UUID or a unique ID prefix, including the short ID from `multica project list`. Prefixes are resolved through the project list before reading the inbox; no match or an ambiguous prefix produces an error.
+`--project` accepts a full UUID or a unique ID prefix, including the short ID from `workpal project list`. Prefixes are resolved through the project list before reading the inbox; no match or an ambiguous prefix produces an error.
 
 Both filters are optional and apply locally after fetching the active inbox. JSON includes notification, issue, project and optional comment IDs, plus the type, title, read status and creation time. The default output is a table. An authorized agent run reads the runtime owner's notifications using its task credential; it never falls back to a person's login.
 

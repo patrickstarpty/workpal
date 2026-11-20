@@ -4,7 +4,7 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 import { useChatResize } from "./use-chat-resize";
 import { useChatWindowAnchor } from "./use-chat-window-anchor";
 
-vi.mock("@multica/core/chat", async () => {
+vi.mock("@workpal/core/chat", async () => {
   const { create } = await import("zustand");
   const store = create<{
     chatWidth: number;

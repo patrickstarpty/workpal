@@ -1,8 +1,8 @@
 "use client";
 
 import type { ComponentType, ReactNode } from "react";
-import { ArrowUpRight, Check, Star } from "@multica/ui/icons";
-import { cn } from "@multica/ui/lib/utils";
+import { ArrowUpRight, Check, Star } from "@workpal/ui/icons";
+import { cn } from "@workpal/ui/lib/utils";
 import { useLocale } from "../../i18n";
 import { PROVIDER_MARKS } from "../../site/demo/mock-kit";
 import { ActionLink, Container, Eyebrow, actionClassName, focusRing } from "../../site/primitives";
@@ -14,7 +14,7 @@ import { DiscordMark, GitHubMark, XMark, discordUrl, githubUrl, twitterUrl } fro
 const AGENTS = ["Claude Code", "Codex", "OpenCode"] as const;
 
 /** Opens the installed desktop app, or does nothing when it is not installed yet. */
-const OPEN_APP_URL = "multica://open";
+const OPEN_APP_URL = "workpal://open";
 
 type InstallStep = "dmg" | "zip" | "exe" | "appImage" | "deb" | "rpm";
 
@@ -141,7 +141,7 @@ export function DownloadStarted({
             <div className="relative">
               <p className="flex items-center gap-2 font-site-mono text-[0.8125rem] text-site-ink-secondary">
                 <GitHubMark className="size-4 text-site-ink" />
-                multica-ai/multica
+                workpal-ai/workpal
               </p>
               <h2 className="mt-4 font-site-display text-site-title text-site-ink text-balance">{d.community.githubTitle}</h2>
               <p className="mt-2 max-w-[28rem] text-site-small text-site-muted text-pretty">{d.community.githubBody}</p>
@@ -152,10 +152,7 @@ export function DownloadStarted({
                 </p>
               ) : null}
             </div>
-            <ActionLink href={githubUrl} size="lg" className="relative self-start sm:self-auto">
-              <Star className="size-4" aria-hidden />
-              {d.community.star}
-            </ActionLink>
+            
           </div>
           <div className="grid gap-4">
             <CommunityRow

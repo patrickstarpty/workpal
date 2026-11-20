@@ -9,22 +9,22 @@ import {
   useRef,
 } from "react";
 import { useInfiniteQuery, useQuery, useQueryClient } from "@tanstack/react-query";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { MulticaBleedMark } from "@multica/ui/components/common/multica-graphics";
-import { ApiError, errorCode } from "@multica/core/api";
-import { useWorkspacePaths } from "@multica/core/paths";
-import { useModalStore } from "@multica/core/modals";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { WorkpalBleedMark } from "@workpal/ui/components/common/workpal-graphics";
+import { ApiError, errorCode } from "@workpal/core/api";
+import { useWorkspacePaths } from "@workpal/core/paths";
+import { useModalStore } from "@workpal/core/modals";
 import {
   getShortcut,
   isEditableShortcutTarget,
   isPortalLayerShortcutTarget,
   shortcutMatchesEvent,
-} from "@multica/core/shortcuts";
-import { isImeComposing } from "@multica/core/utils";
-import { useIssueDraftStore } from "@multica/core/issues/stores/draft-store";
-import { useInboxSelectionStore } from "@multica/core/inbox/selection-store";
-import { inboxRowKey, nextInboxRow } from "@multica/core/inbox/open-row";
-import { useIssueStatuses } from "@multica/core/issue-statuses/hooks";
+} from "@workpal/core/shortcuts";
+import { isImeComposing } from "@workpal/core/utils";
+import { useIssueDraftStore } from "@workpal/core/issues/stores/draft-store";
+import { useInboxSelectionStore } from "@workpal/core/inbox/selection-store";
+import { inboxRowKey, nextInboxRow } from "@workpal/core/inbox/open-row";
+import { useIssueStatuses } from "@workpal/core/issue-statuses/hooks";
 import {
   inboxListOptions,
   archivedInboxPagesOptions,
@@ -32,7 +32,7 @@ import {
   deduplicateInboxItems,
   deduplicateArchivedInboxItems,
   useInboxUnreadCount,
-} from "@multica/core/inbox/queries";
+} from "@workpal/core/inbox/queries";
 import {
   useMarkInboxRead,
   useMarkInboxUnread,
@@ -43,7 +43,7 @@ import {
   useArchiveCompletedInbox,
   useRetrySourceContextQuickCreate,
   type InboxUnsubscribeScope,
-} from "@multica/core/inbox/mutations";
+} from "@workpal/core/inbox/mutations";
 import {
   effectiveInboxFilters,
   filterInboxItems,
@@ -54,7 +54,7 @@ import {
   useInboxFilterStore,
   type InboxAgentFilter,
   type InboxFilterSupport,
-} from "@multica/core/inbox/filter-store";
+} from "@workpal/core/inbox/filter-store";
 
 import { IssueDetail, issueHighlightMementoKey } from "../../issues/components/issue-detail";
 import { ActionShortcutKeycaps } from "../../common/shortcut-keycaps";
@@ -62,7 +62,7 @@ import { useRegisterCommandBarContext } from "../../search/register-context";
 import { IssuePeekHost } from "../../issues/components/issue-peek";
 import { useIssueSurfaceActivity } from "../../issues/surface/activity";
 import { useViewStateWriter } from "../../platform";
-import { ErrorBoundary } from "@multica/ui/components/common/error-boundary";
+import { ErrorBoundary } from "@workpal/ui/components/common/error-boundary";
 import { AppLink, useNavigation, useReportNavigating } from "../../navigation";
 import { toast } from "sonner";
 import {
@@ -76,17 +76,17 @@ import {
   ListChecks,
   ArrowLeft,
   AlarmClock,
-} from "@multica/ui/icons";
-import type { InboxItem } from "@multica/core/types";
-import { Button } from "@multica/ui/components/ui/button";
-import { IconButton } from "@multica/ui/components/common/icon-button";
+} from "@workpal/ui/icons";
+import type { InboxItem } from "@workpal/core/types";
+import { Button } from "@workpal/ui/components/ui/button";
+import { IconButton } from "@workpal/ui/components/common/icon-button";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from "@multica/ui/components/ui/tooltip";
-import { Skeleton } from "@multica/ui/components/ui/skeleton";
-import { NumberFlow } from "@multica/ui/components/ui/number-flow";
+} from "@workpal/ui/components/ui/tooltip";
+import { Skeleton } from "@workpal/ui/components/ui/skeleton";
+import { NumberFlow } from "@workpal/ui/components/ui/number-flow";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
@@ -95,9 +95,9 @@ import {
   DropdownMenuRadioGroup,
   DropdownMenuRadioItem,
   DropdownMenuSeparator,
-} from "@multica/ui/components/ui/dropdown-menu";
-import { useIsCompact } from "@multica/ui/hooks/use-mobile";
-import { cn } from "@multica/ui/lib/utils";
+} from "@workpal/ui/components/ui/dropdown-menu";
+import { useIsCompact } from "@workpal/ui/hooks/use-mobile";
+import { cn } from "@workpal/ui/lib/utils";
 import { CollapsedNavTrigger, PAGE_GUTTER, PageHeader } from "../../layout/page-header";
 import { PanelHeader } from "../../layout/panel-nav";
 import { useListColumnCollapsed } from "../../layout/app-shell-context";
@@ -985,7 +985,7 @@ export function InboxPage() {
           key={detailItem.issue_id}
           issueId={detailItem.issue_id}
           defaultSidebarOpen={false}
-          layoutId="multica_inbox_issue_detail_layout"
+          layoutId="workpal_inbox_issue_detail_layout"
           highlightCommentId={landingCommentId}
           highlightRequestToken={highlightRequestToken}
           highlightAppRequestId={
@@ -1218,7 +1218,7 @@ export function InboxPage() {
       )}
       <div className="relative flex min-h-0 flex-1 flex-col items-center justify-center overflow-hidden text-muted-foreground">
         {inboxZeroCount === 0 ? (
-          <MulticaBleedMark
+          <WorkpalBleedMark
             key={inboxZeroRises ? "rise" : "rest"}
             enterDelay={inboxZeroRises ? 0.2 : undefined}
             className="pointer-events-none absolute -right-[14%] -bottom-[26%] w-[min(560px,58%)] text-muted"

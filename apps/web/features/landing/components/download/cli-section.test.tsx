@@ -24,10 +24,10 @@ vi.mock("../../i18n", () => ({
 }));
 
 const WINDOWS_CMD =
-  "irm https://raw.githubusercontent.com/multica-ai/multica/main/scripts/install.ps1 | iex";
+  "irm https://raw.githubusercontent.com/workpal-ai/workpal/main/scripts/install.ps1 | iex";
 
 describe("CliSection", () => {
-  // The switch itself is covered in @multica/views; this checks the landing
+  // The switch itself is covered in @workpal/views; this checks the landing
   // dictionary is wired into it and the daemon block stays shared.
   it("wires the platform switch into the install block", async () => {
     const user = userEvent.setup();
@@ -36,6 +36,6 @@ describe("CliSection", () => {
     await user.click(screen.getByRole("tab", { name: "Windows" }));
 
     expect(screen.getByText(WINDOWS_CMD)).toBeInTheDocument();
-    expect(screen.getByText("multica setup")).toBeInTheDocument();
+    expect(screen.getByText("workpal setup")).toBeInTheDocument();
   });
 });

@@ -2,10 +2,10 @@
 
 import { useLayoutEffect, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { inboxRowKey, keepOpenInboxRow } from "@multica/core/inbox/open-row";
-import { snoozedInboxOptions } from "@multica/core/inbox/queries";
-import { useInboxSelectionStore } from "@multica/core/inbox/selection-store";
-import type { InboxItem, SnoozedInboxIssue } from "@multica/core/types";
+import { inboxRowKey, keepOpenInboxRow } from "@workpal/core/inbox/open-row";
+import { snoozedInboxOptions } from "@workpal/core/inbox/queries";
+import { useInboxSelectionStore } from "@workpal/core/inbox/selection-store";
+import type { InboxItem, SnoozedInboxIssue } from "@workpal/core/types";
 
 const NO_SNOOZED: SnoozedInboxIssue[] = [];
 

@@ -15,44 +15,44 @@ import {
   Search,
   Trash2,
   TriangleAlert,
-} from "@multica/ui/icons";
+} from "@workpal/ui/icons";
 import { toast } from "sonner";
 import {
   projectResourcesOptions,
   useCreateProjectResource,
   useDeleteProjectResource,
   useUpdateProjectResource,
-} from "@multica/core/projects";
-import { splitGithubUrlRef } from "@multica/core/github";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { useCurrentWorkspace } from "@multica/core/paths";
+} from "@workpal/core/projects";
+import { splitGithubUrlRef } from "@workpal/core/github";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { useCurrentWorkspace } from "@workpal/core/paths";
 import type {
   AgentRuntime,
   GithubRepoResourceRef,
   LocalDirectoryExecutionMode,
   LocalDirectoryResourceRef,
   ProjectResource,
-} from "@multica/core/types";
+} from "@workpal/core/types";
 import {
   runtimeAdvertisesLocalWorktree,
   runtimeListOptions,
-} from "@multica/core/runtimes";
-import { useConfigStore } from "@multica/core/config";
-import { Button } from "@multica/ui/components/ui/button";
-import { Spinner } from "@multica/ui/components/ui/spinner";
+} from "@workpal/core/runtimes";
+import { useConfigStore } from "@workpal/core/config";
+import { Button } from "@workpal/ui/components/ui/button";
+import { Spinner } from "@workpal/ui/components/ui/spinner";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@multica/ui/components/ui/popover";
+} from "@workpal/ui/components/ui/popover";
 import {
   Tooltip,
   TooltipTrigger,
   TooltipContent,
-} from "@multica/ui/components/ui/tooltip";
-import { TooltipHint } from "@multica/ui/components/common/tooltip-hint";
-import { IconButton } from "@multica/ui/components/common/icon-button";
-import { cn } from "@multica/ui/lib/utils";
+} from "@workpal/ui/components/ui/tooltip";
+import { TooltipHint } from "@workpal/ui/components/common/tooltip-hint";
+import { IconButton } from "@workpal/ui/components/common/icon-button";
+import { cn } from "@workpal/ui/lib/utils";
 import {
   isDesktopShell,
   pickDirectory,
@@ -77,7 +77,7 @@ import { githubShortLabel } from "../../common/github-url";
 // every machine, while a local folder only applies to runs on the one machine
 // it is pinned to (at most one per machine). Add a new resource_type by:
 //   (1) extending the server validator
-//   (2) extending ProjectResourceType in @multica/core/types
+//   (2) extending ProjectResourceType in @workpal/core/types
 //   (3) giving it a group here; unknown types fall through to a plain row
 type GithubResource = ProjectResource & { resource_ref: GithubRepoResourceRef };
 type LocalDirectoryResource = ProjectResource & {

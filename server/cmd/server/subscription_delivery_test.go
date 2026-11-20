@@ -5,12 +5,12 @@ import (
 	"slices"
 	"testing"
 
-	"github.com/multica-ai/multica/server/internal/events"
-	"github.com/multica-ai/multica/server/internal/handler"
-	"github.com/multica-ai/multica/server/internal/inbox"
-	"github.com/multica-ai/multica/server/internal/testutil"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
-	"github.com/multica-ai/multica/server/pkg/protocol"
+	"workpal.local/workpal/server/internal/events"
+	"workpal.local/workpal/server/internal/handler"
+	"workpal.local/workpal/server/internal/inbox"
+	"workpal.local/workpal/server/internal/testutil"
+	db "workpal.local/workpal/server/pkg/db/generated"
+	"workpal.local/workpal/server/pkg/protocol"
 )
 
 // The tier GET /api/issues/{id}/subscribers reports for each member is the
@@ -25,12 +25,12 @@ func TestSubscriberDeliveryMatchesFanout(t *testing.T) {
 		t.Cleanup(func() { cleanupTestUser(t, email) })
 		return id
 	}
-	owner := member("delivery-owner@multica.ai")
-	bystander := member("delivery-bystander@multica.ai")
-	follower := member("delivery-follower@multica.ai")
-	projectWatcher := member("delivery-project-watcher@multica.ai")
-	delegate := member("delivery-delegate@multica.ai")
-	optedIn := member("delivery-opted-in@multica.ai")
+	owner := member("delivery-owner@workpal.invalid")
+	bystander := member("delivery-bystander@workpal.invalid")
+	follower := member("delivery-follower@workpal.invalid")
+	projectWatcher := member("delivery-project-watcher@workpal.invalid")
+	delegate := member("delivery-delegate@workpal.invalid")
+	optedIn := member("delivery-opted-in@workpal.invalid")
 	setOthersIssuesPref(t, optedIn, "all")
 	// Status changes are muted by default; this test is about the tiers.
 	enableStatusChanges(t, owner, bystander, follower, projectWatcher, delegate, optedIn)

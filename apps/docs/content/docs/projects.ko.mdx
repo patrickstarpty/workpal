@@ -97,12 +97,12 @@ import { ProjectDemo } from "@/components/demos/project-demo";
 - **CLI**: `project create`나 `project update`에 `--visibility private`를 붙이고, `--member`(이름, 이메일 또는 사용자 ID, 여러 번 지정 가능)로 처음 목록을 정합니다. 이후에는 `project member list|add|remove`로 목록을 관리합니다.
 
 ```bash
-multica project create --title "Pricing revamp" --visibility private --member alice@example.com --member Bob
-multica project update <project-id> --visibility private --member alice@example.com
-multica project member add <project-id> carol@example.com
+workpal project create --title "Pricing revamp" --visibility private --member alice@example.com --member Bob
+workpal project update <project-id> --visibility private --member alice@example.com
+workpal project member add <project-id> carol@example.com
 ```
 
-비공개 프로젝트를 **전체 워크스페이스**로 되돌리면 모든 워크스페이스 멤버가 프로젝트와 그 안의 태스크, 댓글, 첨부 파일을 볼 수 있습니다. 앱에서는 저장 전에 확인을 거치지만, `multica project update --visibility workspace`는 바로 적용됩니다.
+비공개 프로젝트를 **전체 워크스페이스**로 되돌리면 모든 워크스페이스 멤버가 프로젝트와 그 안의 태스크, 댓글, 첨부 파일을 볼 수 있습니다. 앱에서는 저장 전에 확인을 거치지만, `workpal project update --visibility workspace`는 바로 적용됩니다.
 
 ### 워크스페이스 소유자 복구 [#workspace-owner-recovery]
 

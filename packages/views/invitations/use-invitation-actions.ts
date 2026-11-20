@@ -1,12 +1,12 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { api } from "@multica/core/api";
-import { useAuthStore } from "@multica/core/auth";
-import { paths, useHasOnboarded } from "@multica/core/paths";
-import type { Invitation } from "@multica/core/types";
+import { api } from "@workpal/core/api";
+import { useAuthStore } from "@workpal/core/auth";
+import { paths, useHasOnboarded } from "@workpal/core/paths";
+import type { Invitation } from "@workpal/core/types";
 import {
   workspaceKeys,
   workspaceListOptions,
-} from "@multica/core/workspace/queries";
+} from "@workpal/core/workspace/queries";
 import { useNavigation } from "../navigation";
 
 /**

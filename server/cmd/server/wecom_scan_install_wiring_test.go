@@ -8,11 +8,11 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/multica-ai/multica/server/internal/analytics"
-	"github.com/multica-ai/multica/server/internal/events"
-	"github.com/multica-ai/multica/server/internal/handler"
-	"github.com/multica-ai/multica/server/internal/realtime"
-	"github.com/multica-ai/multica/server/internal/util/secretbox"
+	"workpal.local/workpal/server/internal/analytics"
+	"workpal.local/workpal/server/internal/events"
+	"workpal.local/workpal/server/internal/handler"
+	"workpal.local/workpal/server/internal/realtime"
+	"workpal.local/workpal/server/internal/util/secretbox"
 )
 
 // The scan-code install has three pieces boot has to assemble, and each one
@@ -39,9 +39,9 @@ func bootWecomScanInstall(t *testing.T, withKey bool) (*handler.Handler, string)
 		if _, err := rand.Read(key); err != nil {
 			t.Fatalf("generate a wecom secretbox key: %v", err)
 		}
-		t.Setenv("MULTICA_WECOM_SECRET_KEY", base64.StdEncoding.EncodeToString(key))
+		t.Setenv("WORKPAL_WECOM_SECRET_KEY", base64.StdEncoding.EncodeToString(key))
 	} else {
-		t.Setenv("MULTICA_WECOM_SECRET_KEY", "")
+		t.Setenv("WORKPAL_WECOM_SECRET_KEY", "")
 	}
 	_, h := NewRouterWithOptions(nil, realtime.NewHub(), events.New(), analytics.NoopClient{}, nil, RouterOptions{})
 	return h, logged.String()

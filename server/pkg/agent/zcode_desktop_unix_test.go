@@ -91,7 +91,7 @@ func TestZcodeLinuxDesktopMissingCLI(t *testing.T) {
 		t.Fatal(err)
 	}
 	_, err := DetectVersion(context.Background(), NewCommand(bin, nil).ForVersionProbe("zcode"))
-	if err == nil || !strings.Contains(err.Error(), "MULTICA_ZCODE_PATH") {
+	if err == nil || !strings.Contains(err.Error(), "WORKPAL_ZCODE_PATH") {
 		t.Fatalf("expected a headless CLI configuration error, got %v", err)
 	}
 }

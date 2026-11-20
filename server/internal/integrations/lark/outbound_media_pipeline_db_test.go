@@ -11,11 +11,11 @@ import (
 	"testing"
 
 	"github.com/google/uuid"
-	"github.com/multica-ai/multica/server/internal/events"
-	"github.com/multica-ai/multica/server/internal/testutil"
-	"github.com/multica-ai/multica/server/internal/util"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
-	"github.com/multica-ai/multica/server/pkg/protocol"
+	"workpal.local/workpal/server/internal/events"
+	"workpal.local/workpal/server/internal/testutil"
+	"workpal.local/workpal/server/internal/util"
+	db "workpal.local/workpal/server/pkg/db/generated"
+	"workpal.local/workpal/server/pkg/protocol"
 )
 
 func TestMediaPipelineDatabaseAttachmentsReachHTTPOnce(t *testing.T) {
@@ -135,7 +135,7 @@ func testMediaPipelineDatabaseAttachmentsReachHTTPOnce(t *testing.T, markdown bo
 			}
 			want := "Here are the chart and report."
 			if markdown {
-				want += "\n[chart](https://multica.example/api/attachments/" + chartID + "/download)\nAfter the chart."
+				want += "\n[chart](https://workpal.example/api/attachments/" + chartID + "/download)\nAfter the chart."
 			}
 			if len(card.Body.Elements) != 1 || card.Body.Elements[0].Content != want {
 				t.Errorf("Feishu would reject an artifact URL used as an image key: %+v", card)
@@ -156,7 +156,7 @@ func testMediaPipelineDatabaseAttachmentsReachHTTPOnce(t *testing.T, markdown bo
 		Payload: protocol.ChatDonePayload{TaskID: taskID, ChatSessionID: sessionID, MessageID: messageID, Content: "Here are the chart and report."}}
 	if markdown {
 		payload := event.Payload.(protocol.ChatDonePayload)
-		payload.Content += "\n![chart](https://multica.example/api/attachments/" + chartID + "/download)\nAfter the chart."
+		payload.Content += "\n![chart](https://workpal.example/api/attachments/" + chartID + "/download)\nAfter the chart."
 		event.Payload = payload
 	}
 	if err := p.processEvent(context.Background(), event); err != nil {

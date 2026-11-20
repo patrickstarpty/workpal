@@ -8,11 +8,11 @@ import {
   DialogTitle,
   DialogDescription,
   DialogFooter,
-} from "@multica/ui/components/ui/dialog";
-import { Input } from "@multica/ui/components/ui/input";
-import { Label } from "@multica/ui/components/ui/label";
-import { Button } from "@multica/ui/components/ui/button";
-import { isImeComposing } from "@multica/core/utils";
+} from "@workpal/ui/components/ui/dialog";
+import { Input } from "@workpal/ui/components/ui/input";
+import { Label } from "@workpal/ui/components/ui/label";
+import { Button } from "@workpal/ui/components/ui/button";
+import { isImeComposing } from "@workpal/core/utils";
 import { useT } from "../../i18n";
 
 /**

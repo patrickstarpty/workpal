@@ -2,7 +2,7 @@ import { describe, expect, it, vi } from "vitest";
 import { fireEvent, screen } from "@testing-library/react";
 import { forwardRef, type ReactNode } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import type { TimelineEntry } from "@multica/core/types";
+import type { TimelineEntry } from "@workpal/core/types";
 import { renderWithI18n } from "../../test/i18n";
 
 // Comment "more actions" menu layout, in four groups: respond (Reply, Add
@@ -10,7 +10,7 @@ import { renderWithI18n } from "../../test/i18n";
 // Copy link), and Delete alone at the bottom. Edit and Delete only show on
 // comments the viewer may change.
 
-vi.mock("@multica/core/api", () => ({
+vi.mock("@workpal/core/api", () => ({
   api: { uploadFile: vi.fn() },
   dispatchReasonCode: () => undefined,
   errorCode: () => undefined,
@@ -24,7 +24,7 @@ vi.mock("../../navigation", () => ({
   }),
 }));
 
-vi.mock("@multica/core/workspace/hooks", () => ({
+vi.mock("@workpal/core/workspace/hooks", () => ({
   useActorName: () => ({ getActorName: () => "Ada" }),
 }));
 

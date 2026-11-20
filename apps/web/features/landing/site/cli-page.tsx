@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowUpRight } from "@multica/ui/icons";
+import { ArrowUpRight } from "@workpal/ui/icons";
 import { docsHrefForLocale, useLocale } from "../i18n";
 import { ActionLink, Container, Section, SectionHeader } from "./primitives";
 import { AgentSessionVisual, CliScene } from "./demo/cli-visuals";
@@ -15,13 +15,13 @@ export function CliPage() {
         <Install />
         <Commands />
         <AgentDriven />
-        <CtaBand title="Connect your first computer" lead="Install the CLI, run multica setup, and assign an issue to an agent on that machine." />
+        <CtaBand title="Connect your first computer" lead="Install the CLI, run workpal setup, and assign an issue to an agent on that machine." />
       </div>
     </SitePage>
   );
 }
 
-const SKILL_URL = "https://github.com/multica-ai/multica-cli";
+const SKILL_URL = "https://code-host.invalid/workpal-cli";
 
 function useCliDocsHref() {
   const { locale } = useLocale();
@@ -32,10 +32,10 @@ function Hero() {
   const docsHref = useCliDocsHref();
   return (
     <SurfaceHero
-      eyebrow="Multica CLI"
-      title="Multica from your terminal."
+      eyebrow="Workpal CLI"
+      title="Workpal from your terminal."
       subtitle="And from every agent you run."
-      lead="The multica command connects a computer as a runtime, then lets you, a script, or another coding agent work with issues, comments, and agents from the shell."
+      lead="The workpal command connects a computer as a runtime, then lets you, a script, or another coding agent work with issues, comments, and agents from the shell."
       actions={
         <>
           <ActionLink href="#install" size="lg">
@@ -48,7 +48,7 @@ function Hero() {
         </>
       }
       frost="cli"
-      label="A terminal on build-01 runs multica setup: it signs Leo Park in, starts the daemon, and multica daemon status reports Claude Code, Codex, and OpenCode. Beside it, build-01 appears on the Runtimes page as a new machine."
+      label="A terminal on build-01 runs workpal setup: it signs Leo Park in, starts the daemon, and workpal daemon status reports Claude Code, Codex, and OpenCode. Beside it, build-01 appears on the Runtimes page as a new machine."
     >
       <CliScene />
     </SurfaceHero>
@@ -60,26 +60,26 @@ const INSTALL: { title: string; body: string; code: CodeVariant[] }[] = [
     title: "Install it",
     body: "One line in a terminal on macOS and Linux, or in PowerShell on Windows. Homebrew works too.",
     code: [
-      { label: "macOS / Linux", code: "curl -fsSL https://raw.githubusercontent.com/multica-ai/multica/main/scripts/install.sh | bash" },
-      { label: "Windows", code: "irm https://raw.githubusercontent.com/multica-ai/multica/main/scripts/install.ps1 | iex" },
-      { label: "Homebrew", code: "brew install multica-ai/tap/multica" },
+      { label: "macOS / Linux", code: "curl -fsSL https://raw.githubusercontent.com/workpal-ai/workpal/main/scripts/install.sh | bash" },
+      { label: "Windows", code: "irm https://raw.githubusercontent.com/workpal-ai/workpal/main/scripts/install.ps1 | iex" },
+      { label: "Homebrew", code: "brew install workpal-ai/tap/workpal" },
     ],
   },
   {
     title: "Connect the computer",
-    body: "Setup saves the server, signs you in through the browser, and starts the daemon. Running your own Multica? Give it your server’s addresses.",
+    body: "Setup saves the server, signs you in through the browser, and starts the daemon. Running your own Workpal? Give it your server’s addresses.",
     code: [
-      { label: "Multica Cloud", code: "multica setup" },
+      { label: "Workpal Cloud", code: "workpal setup" },
       {
         label: "Self-hosted",
-        code: "multica setup self-host \\\n  --server-url https://api.example.com \\\n  --app-url https://app.example.com",
+        code: "workpal setup self-host \\\n  --server-url https://api.example.com \\\n  --app-url https://app.example.com",
       },
     ],
   },
   {
     title: "Check it’s running",
     body: "See who you’re signed in as and which coding tools the daemon found. Your computer is now a runtime you can assign agents to.",
-    code: [{ label: "Terminal", code: "multica auth status\nmultica daemon status" }],
+    code: [{ label: "Terminal", code: "workpal auth status\nworkpal daemon status" }],
   },
 ];
 
@@ -138,7 +138,7 @@ function Commands() {
         <dl className="grid border-t border-site-line sm:grid-cols-2 sm:gap-x-10">
           {COMMANDS.map((command) => (
             <div key={command.name} className="border-b border-site-line py-4">
-              <dt className="font-site-mono text-site-small text-site-ink">multica {command.name}</dt>
+              <dt className="font-site-mono text-site-small text-site-ink">workpal {command.name}</dt>
               <dd className="mt-1 text-site-small text-site-muted text-pretty">{command.body}</dd>
             </div>
           ))}
@@ -154,7 +154,7 @@ function AgentDriven() {
       <Container className="grid items-center gap-site-block lg:grid-cols-2 lg:gap-16">
         <div
           role="img"
-          aria-label="A Claude Code session asked to pick up ACM-163: it reads the issue and its comment threads with multica, finds a fixed timeout in the checkout test, writes a reply to a file, and posts it as a comment."
+          aria-label="A Claude Code session asked to pick up ACM-163: it reads the issue and its comment threads with workpal, finds a fixed timeout in the checkout test, writes a reply to a file, and posts it as a comment."
           data-frost="cli"
           className="site-frost flex h-[26rem] items-center justify-center overflow-hidden rounded-site-panel max-lg:order-2"
         >
@@ -168,7 +168,7 @@ function AgentDriven() {
             <span className="block text-site-muted">Without leaving its session.</span>
           </h2>
           <p className="mt-3 max-w-[30rem] text-site-body text-site-muted text-pretty">
-            The Multica CLI skill teaches Codex, Claude Code, Cursor, and other agents to work with Multica through the
+            The Workpal CLI skill teaches Codex, Claude Code, Cursor, and other agents to work with Workpal through the
             commands on this page.
           </p>
           <CheckList

@@ -1,14 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import { ArrowUpRight, Check, Clock, LoaderCircle } from "@multica/ui/icons";
-import { cn } from "@multica/ui/lib/utils";
+import { ArrowUpRight, Check, Clock, LoaderCircle } from "@workpal/ui/icons";
+import { cn } from "@workpal/ui/lib/utils";
 import {
   Tooltip,
   TooltipTrigger,
   TooltipContent,
-} from "@multica/ui/components/ui/tooltip";
-import type { ChatQuickAction } from "@multica/core/types";
+} from "@workpal/ui/components/ui/tooltip";
+import type { ChatQuickAction } from "@workpal/core/types";
 import { useT } from "../../i18n";
 
 /**

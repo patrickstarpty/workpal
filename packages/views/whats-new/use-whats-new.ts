@@ -1,10 +1,10 @@
 "use client";
 
 import { useCallback, useMemo } from "react";
-import { useAuthStore } from "@multica/core/auth";
-import { useConfigStore } from "@multica/core/config";
-import { createLogger } from "@multica/core/logger";
-import { markWhatsNewSeen, unreadReleases, visibleReleases } from "@multica/core/whats-new";
+import { useAuthStore } from "@workpal/core/auth";
+import { useConfigStore } from "@workpal/core/config";
+import { createLogger } from "@workpal/core/logger";
+import { markWhatsNewSeen, unreadReleases, visibleReleases } from "@workpal/core/whats-new";
 import { WHATS_NEW_RELEASES, type WhatsNewRelease } from "./releases";
 
 const logger = createLogger("whats-new");

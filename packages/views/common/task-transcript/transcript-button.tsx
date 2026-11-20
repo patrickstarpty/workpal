@@ -1,22 +1,22 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { Loader2, ScrollText } from "@multica/ui/icons";
+import { Loader2, ScrollText } from "@workpal/ui/icons";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { cn } from "@multica/ui/lib/utils";
+import { cn } from "@workpal/ui/lib/utils";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from "@multica/ui/components/ui/tooltip";
-import { api } from "@multica/core/api";
+} from "@workpal/ui/components/ui/tooltip";
+import { api } from "@workpal/core/api";
 import {
   chatKeys,
   isTaskMessageTaskId,
   taskMessagesOptions,
-} from "@multica/core/chat/queries";
-import type { AgentTask } from "@multica/core/types/agent";
-import type { TaskMessagePayload } from "@multica/core/types/events";
+} from "@workpal/core/chat/queries";
+import type { AgentTask } from "@workpal/core/types/agent";
+import type { TaskMessagePayload } from "@workpal/core/types/events";
 import { AgentTranscriptDialog } from "./agent-transcript-dialog";
 import { buildTimeline, type TimelineItem } from "./build-timeline";
 
@@ -166,9 +166,9 @@ export function TranscriptButton({
       setOpen(false);
     };
 
-    window.addEventListener("multica:navigate", handleGlobalNavigate);
+    window.addEventListener("workpal:navigate", handleGlobalNavigate);
     return () => {
-      window.removeEventListener("multica:navigate", handleGlobalNavigate);
+      window.removeEventListener("workpal:navigate", handleGlobalNavigate);
     };
   }, [open, setOpen]);
 

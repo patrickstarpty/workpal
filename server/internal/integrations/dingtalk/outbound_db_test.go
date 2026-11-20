@@ -9,16 +9,16 @@ import (
 	"testing"
 	"time"
 
-	"github.com/multica-ai/multica/server/internal/events"
-	"github.com/multica-ai/multica/server/internal/integrations/channel"
-	"github.com/multica-ai/multica/server/internal/integrations/channel/engine"
-	"github.com/multica-ai/multica/server/internal/service"
-	dbfx "github.com/multica-ai/multica/server/internal/testutil"
-	"github.com/multica-ai/multica/server/internal/util"
-	"github.com/multica-ai/multica/server/internal/util/secretbox"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
-	"github.com/multica-ai/multica/server/pkg/dbid"
-	"github.com/multica-ai/multica/server/pkg/protocol"
+	"workpal.local/workpal/server/internal/events"
+	"workpal.local/workpal/server/internal/integrations/channel"
+	"workpal.local/workpal/server/internal/integrations/channel/engine"
+	"workpal.local/workpal/server/internal/service"
+	dbfx "workpal.local/workpal/server/internal/testutil"
+	"workpal.local/workpal/server/internal/util"
+	"workpal.local/workpal/server/internal/util/secretbox"
+	db "workpal.local/workpal/server/pkg/db/generated"
+	"workpal.local/workpal/server/pkg/dbid"
+	"workpal.local/workpal/server/pkg/protocol"
 )
 
 func TestOutboundDB_SealedQuoteAndMemoryAnchor(t *testing.T) {
@@ -39,7 +39,7 @@ func testOutboundSealedInput(t *testing.T, scenario string, restart bool) {
 	defer cancel()
 	fx := dbfx.New(pool, "", "")
 	suffix := util.UUIDToString(dbid.NewV7())
-	fx.UserID = fx.User(t, "Sender", "dingtalk-sealed-"+suffix+"@multica.test")
+	fx.UserID = fx.User(t, "Sender", "dingtalk-sealed-"+suffix+"@workpal.test")
 	fx.WorkspaceID = fx.Workspace(t, "DingTalk sealed input", "dingtalk-sealed-"+suffix)
 	fx.Member(t, fx.WorkspaceID, fx.UserID, "owner")
 	runtimeID := fx.Runtime(t, "Runtime")

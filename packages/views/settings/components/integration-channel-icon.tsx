@@ -1,4 +1,4 @@
-import { WeChat } from "@multica/ui/icons";
+import { WeChat } from "@workpal/ui/icons";
 import { DingTalkMark } from "./dingtalk-mark";
 import { LarkMark } from "./lark-mark";
 import { SlackMark } from "./slack-mark";

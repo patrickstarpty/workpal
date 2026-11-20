@@ -1,4 +1,4 @@
-import type { LocaleResources } from "@multica/core/i18n";
+import type { LocaleResources } from "@workpal/core/i18n";
 import jaCommon from "./ja/common.json";
 import jaAuth from "./ja/auth.json";
 import jaSettings from "./ja/settings.json";

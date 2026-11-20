@@ -1,12 +1,12 @@
 "use client";
 
 import { useState, type MouseEvent, type ReactElement } from "react";
-import type { Issue } from "@multica/core/types";
+import type { Issue } from "@workpal/core/types";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
   DropdownMenuContent,
-} from "@multica/ui/components/ui/dropdown-menu";
+} from "@workpal/ui/components/ui/dropdown-menu";
 import { shouldOpenRowMenu, useRowMenu } from "../../common/point-menu";
 import { isDesktopShell } from "../../platform/local-directory";
 import { useIssueActions } from "./use-issue-actions";

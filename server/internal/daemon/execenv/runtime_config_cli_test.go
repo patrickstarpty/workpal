@@ -11,9 +11,9 @@ func TestRuntimeBriefPinsTaskCLI(t *testing.T) {
 	for _, tc := range []struct {
 		goos, command string
 	}{
-		{"darwin", `"$MULTICA_CLI_PATH"`},
-		{"linux", `"$MULTICA_CLI_PATH"`},
-		{"windows", `& "$env:MULTICA_CLI_PATH"`},
+		{"darwin", `"$WORKPAL_CLI_PATH"`},
+		{"linux", `"$WORKPAL_CLI_PATH"`},
+		{"windows", `& "$env:WORKPAL_CLI_PATH"`},
 	} {
 		runtimeGOOS = tc.goos
 		for kind, ctx := range map[string]TaskContextForEnv{
@@ -22,9 +22,9 @@ func TestRuntimeBriefPinsTaskCLI(t *testing.T) {
 		} {
 			brief := buildMetaSkillContent("codex", ctx)
 			for _, want := range []string{
-				"The daemon sets `MULTICA_CLI_PATH` to its own CLI executable",
+				"The daemon sets `WORKPAL_CLI_PATH` to its own CLI executable",
 				"invoke `" + tc.command + " ...` instead",
-				"do not resolve `multica` through PATH",
+				"do not resolve `workpal` through PATH",
 			} {
 				if !strings.Contains(brief, want) {
 					t.Errorf("%s/%s brief missing %q", tc.goos, kind, want)

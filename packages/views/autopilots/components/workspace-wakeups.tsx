@@ -2,24 +2,24 @@
 
 import { useCallback, useMemo, useRef, useState, type ReactNode } from "react";
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
-import { AlarmClock, Bell, Clock3, AlertCircle, ListChecks, TriangleAlert } from "@multica/ui/icons";
+import { AlarmClock, Bell, Clock3, AlertCircle, ListChecks, TriangleAlert } from "@workpal/ui/icons";
 import { toast } from "sonner";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { useWorkspacePaths } from "@multica/core/paths";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { useWorkspacePaths } from "@workpal/core/paths";
 import {
   workspaceWakeupsInfiniteOptions,
   useDisableWorkspaceWakeups,
   useDisableIssueWakeup,
   useEnableIssueWakeup,
   useUpdateIssueSystemWakeup,
-} from "@multica/core/issues/wakeups";
+} from "@workpal/core/issues/wakeups";
 import type {
   Issue,
   WorkspaceWakeup,
   WorkspaceWakeupFilters,
-} from "@multica/core/types";
-import { Switch } from "@multica/ui/components/ui/switch";
-import { Button } from "@multica/ui/components/ui/button";
+} from "@workpal/core/types";
+import { Switch } from "@workpal/ui/components/ui/switch";
+import { Button } from "@workpal/ui/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -29,7 +29,7 @@ import {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
-} from "@multica/ui/components/ui/dropdown-menu";
+} from "@workpal/ui/components/ui/dropdown-menu";
 import {
   Dialog,
   DialogContent,
@@ -37,8 +37,8 @@ import {
   DialogTitle,
   DialogDescription,
   DialogFooter,
-} from "@multica/ui/components/ui/dialog";
-import { cn } from "@multica/ui/lib/utils";
+} from "@workpal/ui/components/ui/dialog";
+import { cn } from "@workpal/ui/lib/utils";
 import { useLocale, useT } from "../../i18n";
 import {
   CollectionCreateButton,

@@ -1,8 +1,8 @@
 import { StrictMode, type ReactNode } from "react";
 import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
 import { act, render, screen, waitFor } from "@testing-library/react";
-import { I18nProvider } from "@multica/core/i18n/react";
-import { ApiError } from "@multica/core/api";
+import { I18nProvider } from "@workpal/core/i18n/react";
+import { ApiError } from "@workpal/core/api";
 import enSettings from "../../locales/en/settings.json";
 import { LarkChannelAuthorization } from "./lark-channel-authorization";
 const mockBeginInstall = vi.hoisted(() => vi.fn());
@@ -11,11 +11,11 @@ const mockInvalidate = vi.hoisted(() => vi.fn());
 vi.mock("@tanstack/react-query", () => ({
   useQueryClient: () => ({ invalidateQueries: mockInvalidate }),
 }));
-vi.mock("@multica/core/lark", () => ({
+vi.mock("@workpal/core/lark", () => ({
   larkKeys: { installations: (id: string) => ["lark", id, "installations"] },
 }));
-vi.mock("@multica/core/api", async (original) => ({
-  ...(await original<typeof import("@multica/core/api")>()),
+vi.mock("@workpal/core/api", async (original) => ({
+  ...(await original<typeof import("@workpal/core/api")>()),
   api: {
     beginLarkInstall: mockBeginInstall,
     getLarkInstallStatus: mockGetStatus,

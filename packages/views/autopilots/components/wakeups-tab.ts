@@ -1,4 +1,4 @@
-import { workspaceWakeupsOptions } from "@multica/core/issues/wakeups";
+import { workspaceWakeupsOptions } from "@workpal/core/issues/wakeups";
 
 /** The workspace's issue wakeups live on the autopilots route under `?tab=wakeups`. */
 export const WAKEUPS_TAB = "wakeups";

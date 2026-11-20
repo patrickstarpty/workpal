@@ -3,9 +3,9 @@
 import * as React from "react"
 import { AlertDialog as AlertDialogPrimitive } from "@base-ui/react/alert-dialog"
 
-import { cn } from "@multica/ui/lib/utils"
-import { Button } from "@multica/ui/components/ui/button"
-import { SafeAreaLayer } from "@multica/ui/components/ui/dialog"
+import { cn } from "@workpal/ui/lib/utils"
+import { Button } from "@workpal/ui/components/ui/button"
+import { SafeAreaLayer } from "@workpal/ui/components/ui/dialog"
 
 function AlertDialog({ ...props }: AlertDialogPrimitive.Root.Props) {
   return <AlertDialogPrimitive.Root data-slot="alert-dialog" {...props} />

@@ -1,6 +1,6 @@
-# Theming Multica
+# Theming Workpal
 
-A Multica theme is a folder with a `manifest.json` and a `theme.css`, plus any
+A Workpal theme is a folder with a `manifest.json` and a `theme.css`, plus any
 fonts and images the CSS uses. The CSS overrides public variables for light
 and dark mode and can restyle the stable anchors listed below; the manifest
 names the theme and can declare options that appear under **Settings →
@@ -395,7 +395,7 @@ keyword. Nothing that could load a resource or read another variable gets
 through.
 
 They follow the theme and mode as they change: a plugin surface receives a
-new set (`multica.ui.onThemeChange` in the
+new set (`workpal.ui.onThemeChange` in the
 [SDK](../packages/plugin-sdk/README.md#theme)), and an HTML block that
 uses any of them rebuilds with the new values, reruns its scripts and takes
 the app's `color-scheme`. In an HTML block, `--background` is the
@@ -451,7 +451,7 @@ kept. If a check fails, the import dialog lists every problem.
 ### Ask an agent
 
 Any agent can build a theme: ask for one in a chat, an issue or a comment.
-The theme reference in Multica's built-in platform skill tells the agent to
+The theme reference in Workpal's built-in platform skill tells the agent to
 read this guide, to pass `theme:check` with 0 errors before it delivers, and
 to attach `theme:preview` screenshots when it can run them. It is a reference
 inside the existing skill rather than a skill of its own, so it adds a line
@@ -471,9 +471,9 @@ The checker runs without installing the repository, from a sparse clone
 and Node 22.18 or newer:
 
 ```sh
-git clone --depth 1 --filter=blob:none --sparse https://github.com/multica-ai/multica.git multica-themes
-git -C multica-themes sparse-checkout set docs scripts packages/core packages/ui
-node multica-themes/scripts/theme-check.mjs path/to/paper
+git clone --depth 1 --filter=blob:none --sparse https://code-host.invalid/workpal.git workpal-themes
+git -C workpal-themes sparse-checkout set docs scripts packages/core packages/ui
+node workpal-themes/scripts/theme-check.mjs path/to/paper
 ```
 
 ### Checking a theme
@@ -544,12 +544,12 @@ defaults.
 ## Publishing to the theme store
 
 The theme store (beta) lists themes from
-[multica-ai/multica-themes](https://github.com/multica-ai/multica-themes).
-Its [contributing guide](https://github.com/multica-ai/multica-themes/blob/main/CONTRIBUTING.md)
+workpal-ai/workpal-themes.
+Its contributing guide
 has the details; in short:
 
 1. Keep the theme in its own GitHub repository.
-   [multica-ai/multica-theme-sample](https://github.com/multica-ai/multica-theme-sample)
+   workpal-ai/workpal-theme-sample
    is a starting point with a release workflow.
 2. Publish a release tagged with the manifest's `version` (`1.0.0` or
    `v1.0.0`) and attach the zipped theme as `theme.zip`.
@@ -566,12 +566,12 @@ fails keeps the previous one listed. The app only installs the exact
 sanitizer as an imported theme.
 
 Each store card shows how many times the theme was downloaded from the
-Multica server it lists on: every install and every update counts once.
+Workpal server it lists on: every install and every update counts once.
 Themes not yet installed are listed most downloaded first. A self-hosted
 server counts its own downloads.
 
 A self-hosted server reads the official registry by default.
-`MULTICA_THEME_REGISTRY_URL` points it at another registry's `index.json`.
+`WORKPAL_THEME_REGISTRY_URL` points it at another registry's `index.json`.
 
 ## Variable reference
 

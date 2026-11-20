@@ -1,12 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronDown, Plus, X } from "@multica/ui/icons";
+import { ChevronDown, Plus, X } from "@workpal/ui/icons";
 import { useQuery } from "@tanstack/react-query";
-import type { SkillSummary } from "@multica/core/types";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { skillListOptions } from "@multica/core/workspace/queries";
-import { Button } from "@multica/ui/components/ui/button";
+import type { SkillSummary } from "@workpal/core/types";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { skillListOptions } from "@workpal/core/workspace/queries";
+import { Button } from "@workpal/ui/components/ui/button";
 import { useT } from "../../i18n";
 import { SkillPickerList } from "./skill-picker-list";
 

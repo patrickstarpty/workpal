@@ -1,15 +1,15 @@
 "use client";
 
 import type { CSSProperties, ReactNode } from "react";
-import { ArrowLeft, Check } from "@multica/ui/icons";
+import { ArrowLeft, Check } from "@workpal/ui/icons";
 import {
   ONBOARDING_STEP_ORDER,
   type OnboardingStep,
-} from "@multica/core/onboarding";
-import { cn } from "@multica/ui/lib/utils";
-import { IconButton } from "@multica/ui/components/common/icon-button";
-import { MulticaWordmark } from "@multica/ui/components/common/multica-wordmark";
-import { DotSphere } from "@multica/ui/components/ui/dot-sphere";
+} from "@workpal/core/onboarding";
+import { cn } from "@workpal/ui/lib/utils";
+import { IconButton } from "@workpal/ui/components/common/icon-button";
+import { WorkpalWordmark } from "@workpal/ui/components/common/workpal-wordmark";
+import { DotSphere } from "@workpal/ui/components/ui/dot-sphere";
 import {
   Stepper,
   StepperIndicator,
@@ -17,7 +17,7 @@ import {
   StepperNav,
   StepperSeparator,
   StepperTitle,
-} from "@multica/ui/components/ui/stepper";
+} from "@workpal/ui/components/ui/stepper";
 import { useT } from "../../i18n";
 
 /**
@@ -164,7 +164,7 @@ export function StepSidebar({
 
         <div className="relative flex min-h-0 flex-1 flex-col pt-5">
           <header className="flex min-h-9 shrink-0 items-center justify-between gap-3">
-            <MulticaWordmark
+            <WorkpalWordmark
               title={t(($) => $.step_nav.wordmark)}
               className="h-[17px] text-foreground"
             />

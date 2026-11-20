@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { EMBED_TOKEN_INPUTS } from "@multica/core/appearance";
+import { EMBED_TOKEN_INPUTS } from "@workpal/core/appearance";
 
 /**
  * Everything that decides what a sandboxed embed copies out of the theme: the

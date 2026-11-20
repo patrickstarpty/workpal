@@ -2,17 +2,17 @@
 
 import { useEffect, useLayoutEffect, useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { useAuthStore } from "@multica/core/auth";
-import { useCurrentWorkspace, useWorkspacePaths } from "@multica/core/paths";
-import { isIssueUuid } from "@multica/core/issues/canonical-id";
-import { issueDetailOptions } from "@multica/core/issues/queries";
-import { useInboxSelectionStore } from "@multica/core/inbox/selection-store";
-import { NO_PROJECT_SIDEBAR_SOURCE, projectSidebarSource, sidebarProjects } from "@multica/core/issues/sidebar-list";
-import { useSidebarProjectPrefs } from "@multica/core/issues/sidebar-project-prefs";
-import { useSidebarKeptStore } from "@multica/core/issues/stores/sidebar-kept-store";
-import { useSidebarTreeStore } from "@multica/core/issues/stores/sidebar-tree-store";
-import { projectListOptions } from "@multica/core/projects/queries";
-import type { Project } from "@multica/core/types";
+import { useAuthStore } from "@workpal/core/auth";
+import { useCurrentWorkspace, useWorkspacePaths } from "@workpal/core/paths";
+import { isIssueUuid } from "@workpal/core/issues/canonical-id";
+import { issueDetailOptions } from "@workpal/core/issues/queries";
+import { useInboxSelectionStore } from "@workpal/core/inbox/selection-store";
+import { NO_PROJECT_SIDEBAR_SOURCE, projectSidebarSource, sidebarProjects } from "@workpal/core/issues/sidebar-list";
+import { useSidebarProjectPrefs } from "@workpal/core/issues/sidebar-project-prefs";
+import { useSidebarKeptStore } from "@workpal/core/issues/stores/sidebar-kept-store";
+import { useSidebarTreeStore } from "@workpal/core/issues/stores/sidebar-tree-store";
+import { projectListOptions } from "@workpal/core/projects/queries";
+import type { Project } from "@workpal/core/types";
 import { resolveClickIntent, useHeldUntilArrival, useNavigation } from "../../navigation";
 import { useSidebarInboxIssue } from "../../inbox/components/use-sidebar-inbox-issue";
 import { IssueContextMenuProvider } from "../../issues/actions";

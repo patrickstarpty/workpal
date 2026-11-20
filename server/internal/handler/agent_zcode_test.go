@@ -17,7 +17,7 @@ func TestCreateAgentZcodeAcceptsDiscoveredThinkingLevel(t *testing.T) {
 	testHandler.CreateAgent(response, newRequest(http.MethodPost, "/api/agents", map[string]any{
 		"name":                 "zcode-thinking-regression",
 		"runtime_id":           runtimeID,
-		"model":                "multica-desktop:example/glm",
+		"model":                "workpal-desktop:example/glm",
 		"visibility":           "private",
 		"thinking_level":       "max",
 		"max_concurrent_tasks": 1,

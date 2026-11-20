@@ -38,7 +38,7 @@ var availableCommandsKinds = map[string]TaskContextForEnv{
 
 // TestAvailableCommandsKeepsCompressedContracts pins what MUL-8292 kept when it
 // moved command detail out of the brief and into `--help` and the
-// multica-platform references. Each entry is a behaviour the agent needs at
+// workpal-platform references. Each entry is a behaviour the agent needs at
 // the moment it reaches for the command, not something it can look up after
 // the fact; the removed parts (wakeup condition catalogue, PR snapshot
 // mechanics, actor-filter recipe) are covered where the pointer leads.
@@ -60,7 +60,7 @@ func TestAvailableCommandsKeepsCompressedContracts(t *testing.T) {
 					"persist an event, condition or time wakeup on this issue, then finish the current run",
 					"use one `--until-*` condition so no run starts before it holds",
 					"check the rule's `last_error` for missing PR links or snapshots, which are retried automatically",
-					"`multica issue wakeup create --help` and the multica-platform issues reference",
+					"`workpal issue wakeup create --help` and the workpal-platform issues reference",
 					// comment list: the two bounded reads, the THREADS trap and
 					// the pagination pointer.
 					"scan with `--roots-only --summary`, then expand one thread with `--thread <id> --tail N`",
@@ -71,7 +71,7 @@ func TestAvailableCommandsKeepsCompressedContracts(t *testing.T) {
 					"heredoc stdin can swallow trailing flags, #4182",
 					"write that file inside your working directory, never `/tmp` or shared paths",
 					// duplicate mark: why a plain cancel is not enough.
-					"`multica issue status <id> cancelled --duplicate-of <original>`",
+					"`workpal issue status <id> cancelled --duplicate-of <original>`",
 					"a plain cancel leaves no link",
 					// comment add: the file-first mandate stays at the call site.
 					"Agent-authored bodies MUST use `--content-file` with a file inside your working directory",

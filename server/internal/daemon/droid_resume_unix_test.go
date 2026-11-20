@@ -14,7 +14,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/multica-ai/multica/server/internal/daemon/execenv"
+	"workpal.local/workpal/server/internal/daemon/execenv"
 )
 
 func TestRunTaskDroidResumeRecovery(t *testing.T) {
@@ -32,7 +32,7 @@ func TestRunTaskDroidResumeRecovery(t *testing.T) {
 	} {
 		t.Run(tc.name, func(t *testing.T) {
 			redirectTestHome(t, t.TempDir())
-			t.Setenv("MULTICA_TASK_CONFIG_ROOT", "")
+			t.Setenv("WORKPAL_TASK_CONFIG_ROOT", "")
 			dir := t.TempDir()
 			attemptFile := filepath.Join(dir, "attempts")
 			fakeBin := filepath.Join(dir, "droid")

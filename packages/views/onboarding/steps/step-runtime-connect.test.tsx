@@ -1,15 +1,15 @@
-import { api } from "@multica/core/api";
+import { api } from "@workpal/core/api";
 import { describe, expect, it, vi, beforeEach, afterEach } from "vitest";
 import { act, render, screen } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import type { AgentRuntime } from "@multica/core/types";
-import { I18nProvider } from "@multica/core/i18n/react";
+import type { AgentRuntime } from "@workpal/core/types";
+import { I18nProvider } from "@workpal/core/i18n/react";
 import enCommon from "../../locales/en/common.json";
 import enOnboarding from "../../locales/en/onboarding.json";
 
 import enAgents from "../../locales/en/agents.json";
-vi.mock("@multica/core/api", async (importOriginal) => ({
-  ...await importOriginal<typeof import("@multica/core/api")>(),
+vi.mock("@workpal/core/api", async (importOriginal) => ({
+  ...await importOriginal<typeof import("@workpal/core/api")>(),
   api: { initiateListModels: vi.fn() },
 }));
 

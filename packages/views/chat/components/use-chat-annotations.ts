@@ -3,9 +3,9 @@
 import { useCallback, useEffect, useMemo, useRef } from "react";
 import { useInfiniteQuery, type InfiniteData, type UseInfiniteQueryResult } from "@tanstack/react-query";
 import { toast } from "sonner";
-import { chatMessagesPageOptions } from "@multica/core/chat/queries";
-import { useCommentDraftStore, type CommentDraftKey } from "@multica/core/issues/stores";
-import type { ChatMessage, ChatMessagesPage } from "@multica/core/types";
+import { chatMessagesPageOptions } from "@workpal/core/chat/queries";
+import { useCommentDraftStore, type CommentDraftKey } from "@workpal/core/issues/stores";
+import type { ChatMessage, ChatMessagesPage } from "@workpal/core/types";
 import { useCommentAnnotations } from "../../issues/components/use-comment-annotations";
 import { useT } from "../../i18n";
 

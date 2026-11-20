@@ -2,7 +2,7 @@
 import { writeFileSync } from 'node:fs'
 import { performance } from 'node:perf_hooks'
 
-// MULTICA_MARKDOWN_BENCHMARK=1 pnpm --filter @multica/ui test markdown/linkify.performance.test.ts --maxWorkers=1 -t benchmarks
+// WORKPAL_MARKDOWN_BENCHMARK=1 pnpm --filter @workpal/ui test markdown/linkify.performance.test.ts --maxWorkers=1 -t benchmarks
 import { describe, expect, it, vi } from 'vitest'
 
 const { stats } = vi.hoisted(() => ({ stats: { calls: 0 } }))
@@ -47,7 +47,7 @@ describe('linkify reference-definition precheck', () => {
     expect(stats.calls).toBeLessThanOrEqual(1)
   })
 
-  it.skipIf(process.env.MULTICA_MARKDOWN_BENCHMARK !== '1')('benchmarks link-range discovery for 300 unique 3 KiB comments', () => {
+  it.skipIf(process.env.WORKPAL_MARKDOWN_BENCHMARK !== '1')('benchmarks link-range discovery for 300 unique 3 KiB comments', () => {
     const results = [false, true].map((definitions) => {
       const blocks = comments(definitions)
       for (let i = 0; i < 3; i++) blocks.forEach(findMarkdownLinkRanges)
@@ -62,8 +62,8 @@ describe('linkify reference-definition precheck', () => {
     })
     const report = { node: process.version, blocks: 300, bytes_per_block: 3072, warmups: 3, samples: 15, results }
     process.stdout.write("MARKDOWN_LINKIFY_BENCHMARK " + JSON.stringify(report) + "\n")
-    if (process.env.MULTICA_MARKDOWN_BENCHMARK_OUTPUT) {
-      writeFileSync(process.env.MULTICA_MARKDOWN_BENCHMARK_OUTPUT, JSON.stringify(report, null, 2) + "\n")
+    if (process.env.WORKPAL_MARKDOWN_BENCHMARK_OUTPUT) {
+      writeFileSync(process.env.WORKPAL_MARKDOWN_BENCHMARK_OUTPUT, JSON.stringify(report, null, 2) + "\n")
     }
   }, 60_000)
 })

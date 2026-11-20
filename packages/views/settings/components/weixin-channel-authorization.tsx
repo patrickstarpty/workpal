@@ -8,20 +8,20 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { QRCode } from "react-qr-code";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
-import { api, clientErrorMessage } from "@multica/core/api";
-import type { WeixinLogin } from "@multica/core/types";
+import { api, clientErrorMessage } from "@workpal/core/api";
+import type { WeixinLogin } from "@workpal/core/types";
 import {
   weixinKeys,
   isWeixinLoginPending,
   isWeixinVerificationRequired,
   weixinConflict,
-} from "@multica/core/weixin";
-import { Button } from "@multica/ui/components/ui/button";
-import { DialogFooter } from "@multica/ui/components/ui/dialog";
-import { Input } from "@multica/ui/components/ui/input";
-import { Label } from "@multica/ui/components/ui/label";
-import { BookOpen } from "@multica/ui/icons";
-import { cn } from "@multica/ui/lib/utils";
+} from "@workpal/core/weixin";
+import { Button } from "@workpal/ui/components/ui/button";
+import { DialogFooter } from "@workpal/ui/components/ui/dialog";
+import { Input } from "@workpal/ui/components/ui/input";
+import { Label } from "@workpal/ui/components/ui/label";
+import { BookOpen } from "@workpal/ui/icons";
+import { cn } from "@workpal/ui/lib/utils";
 import { useT } from "../../i18n";
 
 const pollsProvider = (status?: string) =>

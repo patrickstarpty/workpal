@@ -1,13 +1,13 @@
 import { act, renderHook, waitFor } from "@testing-library/react";
 import { beforeEach, expect, it, vi } from "vitest";
-import { useGitHubConnectionStore } from "@multica/core/github";
+import { useGitHubConnectionStore } from "@workpal/core/github";
 
 const mocks = vi.hoisted(() => ({
   connect: vi.fn(),
   open: vi.fn(),
   desktop: false,
 }));
-vi.mock("@multica/core/api", () => ({ api: { getGitHubConnectURL: mocks.connect } }));
+vi.mock("@workpal/core/api", () => ({ api: { getGitHubConnectURL: mocks.connect } }));
 vi.mock("../../platform", () => ({
   isDesktopShell: () => mocks.desktop,
   openExternal: mocks.open,

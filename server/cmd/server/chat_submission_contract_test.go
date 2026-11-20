@@ -13,12 +13,12 @@ import (
 	"testing"
 
 	"github.com/google/uuid"
-	"github.com/multica-ai/multica/server/internal/analytics"
-	"github.com/multica-ai/multica/server/internal/events"
-	obsmetrics "github.com/multica-ai/multica/server/internal/metrics"
-	"github.com/multica-ai/multica/server/internal/realtime"
-	"github.com/multica-ai/multica/server/internal/testutil"
-	"github.com/multica-ai/multica/server/pkg/protocol"
+	"workpal.local/workpal/server/internal/analytics"
+	"workpal.local/workpal/server/internal/events"
+	obsmetrics "workpal.local/workpal/server/internal/metrics"
+	"workpal.local/workpal/server/internal/realtime"
+	"workpal.local/workpal/server/internal/testutil"
+	"workpal.local/workpal/server/pkg/protocol"
 	"github.com/prometheus/client_golang/prometheus"
 )
 
@@ -189,7 +189,7 @@ func TestChatSubmissionConcurrentFirstSendAndPersistentReplay(t *testing.T) {
 	}
 	var sentMetrics float64
 	for _, family := range families {
-		if family.GetName() == "multica_chat_message_sent_total" {
+		if family.GetName() == "workpal_chat_message_sent_total" {
 			for _, metric := range family.Metric {
 				sentMetrics += metric.GetCounter().GetValue()
 			}

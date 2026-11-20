@@ -8,7 +8,7 @@ import {
   HardDrive,
   Lock,
   Pencil,
-} from "@multica/ui/icons";
+} from "@workpal/ui/icons";
 import { SkillIcon } from "../lib/skill-icon";
 import type {
   Agent,
@@ -16,26 +16,26 @@ import type {
   MemberWithUser,
   Skill,
   SkillSummary,
-} from "@multica/core/types";
+} from "@workpal/core/types";
 import { useQuery } from "@tanstack/react-query";
-import { useAuthStore } from "@multica/core/auth";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { useWorkspacePaths } from "@multica/core/paths";
+import { useAuthStore } from "@workpal/core/auth";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { useWorkspacePaths } from "@workpal/core/paths";
 import {
   agentListOptions,
   memberListOptions,
   selectSkillAssignments,
   skillListOptions,
-} from "@multica/core/workspace/queries";
-import { runtimeDisplayLabel, runtimeListOptions } from "@multica/core/runtimes";
-import { resolvePublicFileUrl } from "@multica/core/workspace/avatar-url";
-import { Button } from "@multica/ui/components/ui/button";
+} from "@workpal/core/workspace/queries";
+import { runtimeDisplayLabel, runtimeListOptions } from "@workpal/core/runtimes";
+import { resolvePublicFileUrl } from "@workpal/core/workspace/avatar-url";
+import { Button } from "@workpal/ui/components/ui/button";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from "@multica/ui/components/ui/tooltip";
-import { ActorAvatar } from "@multica/ui/components/common/actor-avatar";
+} from "@workpal/ui/components/ui/tooltip";
+import { ActorAvatar } from "@workpal/ui/components/common/actor-avatar";
 import { rowLinkInteractiveProps, useNavigation } from "../../navigation";
 import {
   CollectionNoMatches,
@@ -68,7 +68,7 @@ import {
   useSkillsViewStore,
   type SkillColumnKey,
   type SkillSortField,
-} from "@multica/core/skills/stores";
+} from "@workpal/core/skills/stores";
 import {
   SkillCreateMenu,
   SkillFilterMenu,
@@ -82,7 +82,7 @@ import {
 import { useT, useTimeAgo } from "../../i18n";
 
 // Sort/filter/column types and defaults live in the core view store
-// (@multica/core/skills/stores/view-store) so the persisted state and the
+// (@workpal/core/skills/stores/view-store) so the persisted state and the
 // UI share one definition. Re-exported here for the toolbar's convenience.
 export type SortField = SkillSortField;
 export { rowMatchesFilters, type SkillRow } from "./skill-list-filter";

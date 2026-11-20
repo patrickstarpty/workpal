@@ -1,11 +1,11 @@
-import type { AgentTask, IssueEnvironment, IssueEnvironmentActionRecord } from "@multica/core/types";
+import type { AgentTask, IssueEnvironment, IssueEnvironmentActionRecord } from "@workpal/core/types";
 
 const DAY = 24 * 60 * 60_000;
 const RECENT_FAILURE = 10 * 60_000;
 
 /** Every localized "let the agent start it" instruction names this command,
  *  which is how the sidebar recognizes those runs whatever the reader's language. */
-export const ENVIRONMENT_START_MARKER = "multica env start";
+export const ENVIRONMENT_START_MARKER = "workpal env start";
 
 export const isLive = (env: IssueEnvironment) => env.ended_at === null;
 

@@ -10,7 +10,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/multica-ai/multica/server/internal/integrations/channel/engine"
+	"workpal.local/workpal/server/internal/integrations/channel/engine"
 )
 
 // Per attachment, not per message: the sender hears one sentence for two

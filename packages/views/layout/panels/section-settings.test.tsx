@@ -4,8 +4,8 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 import {
   DEFAULT_SIDEBAR_INBOX_SETTINGS,
   useSidebarTreeStore,
-} from "@multica/core/issues/stores/sidebar-tree-store";
-import { notificationPreferenceOptions } from "@multica/core/notification-preferences/queries";
+} from "@workpal/core/issues/stores/sidebar-tree-store";
+import { notificationPreferenceOptions } from "@workpal/core/notification-preferences/queries";
 import { renderWithI18n } from "../../test/i18n";
 import { NavigationProvider, type NavigationAdapter } from "../../navigation";
 import type { IssueViewActions } from "../../issue-views/use-view-actions";
@@ -13,15 +13,15 @@ import { InboxSectionSettings, PinnedSectionSettings, ViewsSectionSettings } fro
 
 const preferences = vi.hoisted(() => ({ mutate: vi.fn() }));
 
-vi.mock("@multica/core/hooks", async (importOriginal) => ({
-  ...(await importOriginal<typeof import("@multica/core/hooks")>()),
+vi.mock("@workpal/core/hooks", async (importOriginal) => ({
+  ...(await importOriginal<typeof import("@workpal/core/hooks")>()),
   useWorkspaceId: () => "ws-1",
 }));
-vi.mock("@multica/core/paths", async (importOriginal) => {
-  const actual = await importOriginal<typeof import("@multica/core/paths")>();
+vi.mock("@workpal/core/paths", async (importOriginal) => {
+  const actual = await importOriginal<typeof import("@workpal/core/paths")>();
   return { ...actual, useWorkspacePaths: () => actual.paths.workspace("acme") };
 });
-vi.mock("@multica/core/notification-preferences/mutations", () => ({
+vi.mock("@workpal/core/notification-preferences/mutations", () => ({
   useUpdateNotificationPreferences: () => ({ mutate: preferences.mutate }),
 }));
 

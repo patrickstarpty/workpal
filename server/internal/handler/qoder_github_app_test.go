@@ -9,8 +9,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/multica-ai/multica/server/internal/qoderruntime"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
+	"workpal.local/workpal/server/internal/qoderruntime"
+	db "workpal.local/workpal/server/pkg/db/generated"
 )
 
 // withQoderGitHubApp wires the App identity and a stubbed GitHub API for

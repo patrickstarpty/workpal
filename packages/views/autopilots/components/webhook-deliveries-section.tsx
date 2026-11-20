@@ -12,25 +12,25 @@ import {
   Copy,
   Check,
   Webhook,
-} from "@multica/ui/icons";
+} from "@workpal/ui/icons";
 import { useQuery } from "@tanstack/react-query";
 import {
   autopilotDeliveriesOptions,
   autopilotDeliveryOptions,
   useReplayAutopilotDelivery,
-} from "@multica/core/autopilots";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { Skeleton } from "@multica/ui/components/ui/skeleton";
-import { Button } from "@multica/ui/components/ui/button";
-import { Badge } from "@multica/ui/components/ui/badge";
+} from "@workpal/core/autopilots";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { Skeleton } from "@workpal/ui/components/ui/skeleton";
+import { Button } from "@workpal/ui/components/ui/button";
+import { Badge } from "@workpal/ui/components/ui/badge";
 import {
   Dialog,
   DialogContent,
   DialogTitle,
-} from "@multica/ui/components/ui/dialog";
-import { cn } from "@multica/ui/lib/utils";
-import { copyText } from "@multica/ui/lib/clipboard";
-import { TruncatedTooltip } from "@multica/ui/components/common/truncated-tooltip";
+} from "@workpal/ui/components/ui/dialog";
+import { cn } from "@workpal/ui/lib/utils";
+import { copyText } from "@workpal/ui/lib/clipboard";
+import { TruncatedTooltip } from "@workpal/ui/components/common/truncated-tooltip";
 import { toast } from "sonner";
 import { useLocale, useT } from "../../i18n";
 import { ObjectSection, ObjectSectionCard, ObjectSectionEmpty } from "../../layout/object-page";
@@ -38,7 +38,7 @@ import type {
   WebhookDelivery,
   WebhookDeliveryStatus,
   WebhookSignatureStatus,
-} from "@multica/core/types";
+} from "@workpal/core/types";
 import { formatConditionValue } from "./webhook-payload-condition";
 
 // --- Status visuals -------------------------------------------------------

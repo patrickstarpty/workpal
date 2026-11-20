@@ -3,17 +3,17 @@ import { workspaceUrlHost } from "./workspace-url";
 
 describe("workspaceUrlHost", () => {
   it("returns the host of a full app URL", () => {
-    expect(workspaceUrlHost("https://multica.example.com")).toBe(
-      "multica.example.com",
+    expect(workspaceUrlHost("https://workpal.example.com")).toBe(
+      "workpal.example.com",
     );
   });
 
   it("ignores scheme, path, and trailing slash", () => {
-    expect(workspaceUrlHost("https://multica.example.com/")).toBe(
-      "multica.example.com",
+    expect(workspaceUrlHost("https://workpal.example.com/")).toBe(
+      "workpal.example.com",
     );
-    expect(workspaceUrlHost("http://multica.example.com/app/onboarding")).toBe(
-      "multica.example.com",
+    expect(workspaceUrlHost("http://workpal.example.com/app/onboarding")).toBe(
+      "workpal.example.com",
     );
   });
 
@@ -22,16 +22,16 @@ describe("workspaceUrlHost", () => {
   });
 
   it("accepts a bare host without a scheme", () => {
-    expect(workspaceUrlHost("multica.example.com")).toBe("multica.example.com");
-    expect(workspaceUrlHost("multica.example.com/path")).toBe(
-      "multica.example.com",
+    expect(workspaceUrlHost("workpal.example.com")).toBe("workpal.example.com");
+    expect(workspaceUrlHost("workpal.example.com/path")).toBe(
+      "workpal.example.com",
     );
   });
 
   it("falls back to the brand host when no app URL is configured", () => {
-    expect(workspaceUrlHost("")).toBe("multica.ai");
-    expect(workspaceUrlHost("   ")).toBe("multica.ai");
-    expect(workspaceUrlHost(null)).toBe("multica.ai");
-    expect(workspaceUrlHost(undefined)).toBe("multica.ai");
+    expect(workspaceUrlHost("")).toBe("workpal.invalid");
+    expect(workspaceUrlHost("   ")).toBe("workpal.invalid");
+    expect(workspaceUrlHost(null)).toBe("workpal.invalid");
+    expect(workspaceUrlHost(undefined)).toBe("workpal.invalid");
   });
 });

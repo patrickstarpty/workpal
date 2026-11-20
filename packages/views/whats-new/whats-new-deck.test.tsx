@@ -1,9 +1,9 @@
 import { act, fireEvent, render, screen, within } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { I18nProvider } from "@multica/core/i18n/react";
-import { useDevPromptStore, useSessionPromptStore } from "@multica/core/session-prompt";
-import type { User } from "@multica/core/types";
-import { Command, Globe, Terminal } from "@multica/ui/icons";
+import { I18nProvider } from "@workpal/core/i18n/react";
+import { useDevPromptStore, useSessionPromptStore } from "@workpal/core/session-prompt";
+import type { User } from "@workpal/core/types";
+import { Command, Globe, Terminal } from "@workpal/ui/icons";
 import enCommon from "../locales/en/common.json";
 import enLayout from "../locales/en/layout.json";
 import type { WhatsNewRelease } from "./releases";
@@ -23,18 +23,18 @@ const stores = vi.hoisted(() => {
   };
 });
 
-vi.mock("@multica/core/auth", () => ({ useAuthStore: stores.auth }));
-vi.mock("@multica/core/chat", () => ({ useChatStore: stores.chat }));
-vi.mock("@multica/core/paths", async () => {
-  const actual = await vi.importActual<typeof import("@multica/core/paths")>("@multica/core/paths");
+vi.mock("@workpal/core/auth", () => ({ useAuthStore: stores.auth }));
+vi.mock("@workpal/core/chat", () => ({ useChatStore: stores.chat }));
+vi.mock("@workpal/core/paths", async () => {
+  const actual = await vi.importActual<typeof import("@workpal/core/paths")>("@workpal/core/paths");
   return {
     ...actual,
     useWorkspacePaths: () => ({ chat: () => "/acme/chat", runtimes: () => "/acme/runtimes" }),
     useCurrentWorkspace: () => ({ id: "ws-1", slug: "acme" }),
   };
 });
-vi.mock("@multica/core/whats-new", async () => {
-  const actual = await vi.importActual<typeof import("@multica/core/whats-new")>("@multica/core/whats-new");
+vi.mock("@workpal/core/whats-new", async () => {
+  const actual = await vi.importActual<typeof import("@workpal/core/whats-new")>("@workpal/core/whats-new");
   return { ...actual, markWhatsNewSeen: mocks.markWhatsNewSeen };
 });
 vi.mock("../navigation", () => ({ useNavigation: () => ({ pathname: "/acme/issues", push: mocks.push }) }));
@@ -125,7 +125,7 @@ beforeEach(() => {
 });
 
 afterEach(() => {
-  window.localStorage.removeItem("multica.source_backfill.dismiss.u1");
+  window.localStorage.removeItem("workpal.source_backfill.dismiss.u1");
   vi.useRealTimers();
   vi.clearAllMocks();
 });

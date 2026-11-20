@@ -4,7 +4,7 @@ package wecom
 // pack, not a literal compiled into the file that happens to send it.
 //
 // Localising one surface and not the rest produces the worst possible outcome:
-// a colleague whose Multica profile says English gets an English notice, then
+// a colleague whose Workpal profile says English gets an English notice, then
 // a Chinese binding prompt and a Chinese inbox card around it. The tests below
 // drive the REAL entry points — OutboundReplier.Reply, wecomChannel
 // .dispatchFrame, Outbound.tryDeliverInbox — once per language and assert on
@@ -21,19 +21,19 @@ import (
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgtype"
 
-	"github.com/multica-ai/multica/server/internal/integrations/channel"
-	"github.com/multica-ai/multica/server/internal/integrations/channel/engine"
-	"github.com/multica-ai/multica/server/internal/util"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
+	"workpal.local/workpal/server/internal/integrations/channel"
+	"workpal.local/workpal/server/internal/integrations/channel/engine"
+	"workpal.local/workpal/server/internal/util"
+	db "workpal.local/workpal/server/pkg/db/generated"
 )
 
-// localeTestUserID is the Multica user every bound sender in this file
+// localeTestUserID is the Workpal user every bound sender in this file
 // resolves to. Deliberately not mustTestUUID's installation id: a lookup that
 // confuses the two must not pass.
 var localeTestUserID = pgtype.UUID{Bytes: [16]byte{77}, Valid: true}
 
 // fakeLanguages is a languageLookup holding one bound person: their WeCom
-// userid, the Multica user it resolves to, and that profile's language.
+// userid, the Workpal user it resolves to, and that profile's language.
 // Anyone else is unbound, which is what a real first-time sender is.
 type fakeLanguages struct {
 	senderID string
@@ -43,7 +43,7 @@ type fakeLanguages struct {
 
 func (f fakeLanguages) GetChannelUserBindingByUserID(_ context.Context, arg db.GetChannelUserBindingByUserIDParams) (db.ChannelUserBinding, error) {
 	if arg.ChannelUserID == f.senderID {
-		return db.ChannelUserBinding{MulticaUserID: f.userID}, nil
+		return db.ChannelUserBinding{WorkpalUserID: f.userID}, nil
 	}
 	return db.ChannelUserBinding{}, pgx.ErrNoRows
 }
@@ -131,7 +131,7 @@ func TestReplierNoticesReadTheAskersLanguage(t *testing.T) {
 					r := NewOutboundReplier(OutboundReplierConfig{
 						Senders:   reg,
 						Languages: languagesFor(tc.language),
-						AppURL:    "https://multica.example",
+						AppURL:    "https://workpal.example",
 					})
 					// A 1:1 chat, so the destination IS the asker and their
 					// own profile decides the language.
@@ -165,7 +165,7 @@ func TestReplierGroupNoticeReadsTheRoomNotTheMember(t *testing.T) {
 		Senders: reg,
 		// The member who spoke reads English...
 		Languages: languagesFor("en"),
-		AppURL:    "https://multica.example",
+		AppURL:    "https://workpal.example",
 	})
 	msg := channel.InboundMessage{Source: channel.Source{
 		ChatID:   "GROUP_CHAT",
@@ -194,7 +194,7 @@ func TestInvokeDeniedFromAGroupReadsTheSendersLanguage(t *testing.T) {
 	r := NewOutboundReplier(OutboundReplierConfig{
 		Senders:   reg,
 		Languages: languagesFor("en"),
-		AppURL:    "https://multica.example",
+		AppURL:    "https://workpal.example",
 	})
 	msg := channel.InboundMessage{Source: channel.Source{
 		ChatID:   "GROUP_CHAT",
@@ -225,7 +225,7 @@ func TestInvokeDeniedAsksTheRoomWhenTheUserMustMessageFirst(t *testing.T) {
 	r := NewOutboundReplier(OutboundReplierConfig{
 		Senders:   reg,
 		Languages: languagesFor("en"),
-		AppURL:    "https://multica.example",
+		AppURL:    "https://workpal.example",
 	})
 	msg := channel.InboundMessage{Source: channel.Source{
 		ChatID:   "GROUP_CHAT",
@@ -253,7 +253,7 @@ func TestInboxCardReadsTheRecipientsLanguage(t *testing.T) {
 	// resumes.
 	for _, tc := range localeCases {
 		t.Run(tc.name, func(t *testing.T) {
-			t.Setenv("WECOM_APP_URL", "https://multica.example")
+			t.Setenv("WECOM_APP_URL", "https://workpal.example")
 			q := &fakeOutboundQueries{
 				memberBinding: db.ChannelUserBinding{ChannelUserID: "T-asker"},
 				workspace:     db.Workspace{Slug: "acme"},
@@ -599,7 +599,7 @@ func TestDeploymentLocaleMovesTheCopyNobodyHasAProfileFor(t *testing.T) {
 	r := NewOutboundReplier(OutboundReplierConfig{
 		Senders:   reg,
 		Languages: languagesFor("zh-Hans"),
-		AppURL:    "https://multica.example",
+		AppURL:    "https://workpal.example",
 	})
 	r.binding = fakeBinder{raw: "RAW_TOKEN"}
 

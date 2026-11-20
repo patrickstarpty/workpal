@@ -11,16 +11,16 @@ const setSearchOpen = vi.hoisted(() => vi.fn());
 vi.mock("../navigation", () => ({
   useNavigation: () => ({ pathname: state.pathname }),
 }));
-vi.mock("@multica/core/issues/stores", () => ({ openCreateIssueWithPreference }));
-vi.mock("@multica/core/issues/stores/draft-store", () => ({
+vi.mock("@workpal/core/issues/stores", () => ({ openCreateIssueWithPreference }));
+vi.mock("@workpal/core/issues/stores/draft-store", () => ({
   useIssueDraftStore: (selector: (s: { hasDraft: () => boolean }) => unknown) =>
     selector({ hasDraft: () => state.hasDraft }),
 }));
-vi.mock("@multica/core/command-bar", () => ({
+vi.mock("@workpal/core/command-bar", () => ({
   useSearchStore: { getState: () => ({ setOpen: setSearchOpen }) },
 }));
-vi.mock("@multica/core/shortcuts", () => ({ useShortcut: () => null }));
-vi.mock("@multica/ui/components/common/tooltip-hint", () => ({
+vi.mock("@workpal/core/shortcuts", () => ({ useShortcut: () => null }));
+vi.mock("@workpal/ui/components/common/tooltip-hint", () => ({
   TooltipHint: ({ children }: { children: ReactNode }) => <>{children}</>,
 }));
 

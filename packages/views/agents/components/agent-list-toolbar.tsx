@@ -4,11 +4,11 @@ import {
   ALL_ACCESS_SCOPES,
   effectiveAccessScope,
   type AgentAvailability,
-} from "@multica/core/agents";
-import type { MemberWithUser } from "@multica/core/types";
-import { runtimeDisplayLabel } from "@multica/core/runtimes";
-import { resolvePublicFileUrl } from "@multica/core/workspace/avatar-url";
-import type { AgentListFilters } from "@multica/core/agents/stores";
+} from "@workpal/core/agents";
+import type { MemberWithUser } from "@workpal/core/types";
+import { runtimeDisplayLabel } from "@workpal/core/runtimes";
+import { resolvePublicFileUrl } from "@workpal/core/workspace/avatar-url";
+import type { AgentListFilters } from "@workpal/core/agents/stores";
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -17,8 +17,8 @@ import {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
-} from "@multica/ui/components/ui/dropdown-menu";
-import { ActorAvatar } from "@multica/ui/components/common/actor-avatar";
+} from "@workpal/ui/components/ui/dropdown-menu";
+import { ActorAvatar } from "@workpal/ui/components/common/actor-avatar";
 import { FILTER_ITEM_CLASS, HoverCheck } from "../../common/hover-check";
 import { CollectionFilterButton } from "../../layout/collection-page";
 import { availabilityConfig } from "../presence";

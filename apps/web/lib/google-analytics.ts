@@ -8,7 +8,7 @@ type Gtag = (...args: unknown[]) => void;
 type GaWindow = Window & {
   dataLayer?: unknown[];
   gtag?: Gtag;
-  __multicaGoogleAnalytics?: string;
+  __workpalGoogleAnalytics?: string;
   [disableKey: `ga-disable-${string}`]: boolean | undefined;
 };
 
@@ -34,8 +34,8 @@ export function installGoogleAnalytics(measurementId: string) {
   const w = window as unknown as GaWindow;
   // Install once per page: the root layout never unmounts, and StrictMode /
   // Fast Refresh re-runs must not stack history hooks or reload gtag.js.
-  if (w.__multicaGoogleAnalytics === measurementId) return;
-  w.__multicaGoogleAnalytics = measurementId;
+  if (w.__workpalGoogleAnalytics === measurementId) return;
+  w.__workpalGoogleAnalytics = measurementId;
   const disableKey = `ga-disable-${measurementId}` as const;
   let loaded = false;
   let stopped = false;

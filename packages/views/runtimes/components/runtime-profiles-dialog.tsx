@@ -12,22 +12,22 @@ import {
   Server,
   Trash2,
   X,
-} from "@multica/ui/icons";
+} from "@workpal/ui/icons";
 import { toast } from "sonner";
 import { useQuery } from "@tanstack/react-query";
-import { ApiError } from "@multica/core/api";
-import { runtimeListOptions } from "@multica/core/runtimes/queries";
+import { ApiError } from "@workpal/core/api";
+import { runtimeListOptions } from "@workpal/core/runtimes/queries";
 import type {
   RuntimeProfile,
   RuntimeProfileType,
-} from "@multica/core/types";
+} from "@workpal/core/types";
 import {
   runtimeProfileListOptions,
   useCreateRuntimeProfile,
   useUpdateRuntimeProfile,
-} from "@multica/core/runtimes";
-import { Button } from "@multica/ui/components/ui/button";
-import { IconButton } from "@multica/ui/components/common/icon-button";
+} from "@workpal/core/runtimes";
+import { Button } from "@workpal/ui/components/ui/button";
+import { IconButton } from "@workpal/ui/components/common/icon-button";
 import {
   Dialog,
   DialogClose,
@@ -35,19 +35,19 @@ import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
-} from "@multica/ui/components/ui/dialog";
-import { Input } from "@multica/ui/components/ui/input";
-import { Label } from "@multica/ui/components/ui/label";
-import { Textarea } from "@multica/ui/components/ui/textarea";
+} from "@workpal/ui/components/ui/dialog";
+import { Input } from "@workpal/ui/components/ui/input";
+import { Label } from "@workpal/ui/components/ui/label";
+import { Textarea } from "@workpal/ui/components/ui/textarea";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@multica/ui/components/ui/select";
+} from "@workpal/ui/components/ui/select";
 import { buildRuntimeMachines } from "./runtime-machines";
-import { cn } from "@multica/ui/lib/utils";
+import { cn } from "@workpal/ui/lib/utils";
 import { ProviderLogo } from "./provider-logo";
 import { DeleteRuntimeProfileDialog } from "./delete-runtime-profile-dialog";
 import {

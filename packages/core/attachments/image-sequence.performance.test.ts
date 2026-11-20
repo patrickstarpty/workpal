@@ -3,7 +3,7 @@ import { writeFileSync } from "node:fs";
 import { performance } from "node:perf_hooks";
 
 // Timings are opt-in; default CI checks parser call counts instead.
-// MULTICA_MARKDOWN_BENCHMARK=1 pnpm --filter @multica/core test attachments/image-sequence.performance.test.ts --maxWorkers=1 -t benchmarks
+// WORKPAL_MARKDOWN_BENCHMARK=1 pnpm --filter @workpal/core test attachments/image-sequence.performance.test.ts --maxWorkers=1 -t benchmarks
 import { beforeEach, describe, expect, it, vi } from "vitest";
 
 const { stats } = vi.hoisted(() => ({ stats: { calls: 0 } }));
@@ -109,7 +109,7 @@ describe("large preview timelines", () => {
     expect(stats.calls).toBe(502);
   });
 
-  it.skipIf(process.env.MULTICA_MARKDOWN_BENCHMARK !== "1")("benchmarks 300 unique 3 KiB comments", () => {
+  it.skipIf(process.env.WORKPAL_MARKDOWN_BENCHMARK !== "1")("benchmarks 300 unique 3 KiB comments", () => {
     const results = scenarios.map(({ name, imageEvery, expected }) => {
       const blocks = timeline(imageEvery);
       expect(blocks.every((block) => Buffer.byteLength(block.content) === BLOCK_BYTES)).toBe(true);
@@ -139,8 +139,8 @@ describe("large preview timelines", () => {
     });
     const report = { node: process.version, blocks: BLOCK_COUNT, bytes_per_block: BLOCK_BYTES, warmups: 3, samples: 15, results };
     process.stdout.write("MARKDOWN_SEQUENCE_BENCHMARK " + JSON.stringify(report) + "\n");
-    if (process.env.MULTICA_MARKDOWN_BENCHMARK_OUTPUT) {
-      writeFileSync(process.env.MULTICA_MARKDOWN_BENCHMARK_OUTPUT, JSON.stringify(report, null, 2) + "\n");
+    if (process.env.WORKPAL_MARKDOWN_BENCHMARK_OUTPUT) {
+      writeFileSync(process.env.WORKPAL_MARKDOWN_BENCHMARK_OUTPUT, JSON.stringify(report, null, 2) + "\n");
     }
   }, 60_000);
 });

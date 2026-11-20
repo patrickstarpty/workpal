@@ -15,7 +15,7 @@ import (
 	"time"
 )
 
-const piCleanupFixtureMode = "MULTICA_TEST_PI_CLEANUP_MODE"
+const piCleanupFixtureMode = "WORKPAL_TEST_PI_CLEANUP_MODE"
 
 // RunPiCleanupFixture dispatches before testing parses the runtime's argv.
 // Both agent and daemon tests use the same fake, never a user-installed CLI.
@@ -24,7 +24,7 @@ func RunPiCleanupFixture() bool {
 	if mode == "" {
 		return false
 	}
-	dir := os.Getenv("MULTICA_TEST_PI_CLEANUP_DIR")
+	dir := os.Getenv("WORKPAL_TEST_PI_CLEANUP_DIR")
 	if mode == "writer" {
 		signal.Ignore(syscall.SIGTERM)
 		f, err := os.OpenFile(filepath.Join(dir, "receipt"), os.O_CREATE|os.O_APPEND|os.O_WRONLY, 0o600)
@@ -113,5 +113,5 @@ func PiCleanupExecutable(t *testing.T, mode string) (string, string, map[string]
 			}
 		}
 	})
-	return fake, dir, map[string]string{piCleanupFixtureMode: mode, "MULTICA_TEST_PI_CLEANUP_DIR": dir}
+	return fake, dir, map[string]string{piCleanupFixtureMode: mode, "WORKPAL_TEST_PI_CLEANUP_DIR": dir}
 }

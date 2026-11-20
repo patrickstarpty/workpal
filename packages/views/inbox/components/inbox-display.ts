@@ -1,5 +1,5 @@
-import type { WorkspacePaths } from "@multica/core/paths";
-import type { InboxItem } from "@multica/core/types";
+import type { WorkspacePaths } from "@workpal/core/paths";
+import type { InboxItem } from "@workpal/core/types";
 
 function singleLine(value: string | null | undefined): string {
   return (value ?? "").replace(/\s+/g, " ").trim();

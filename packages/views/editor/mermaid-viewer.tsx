@@ -23,17 +23,17 @@ import {
   Download,
   Image as ImageIcon,
   X,
-} from "@multica/ui/icons";
-import { cn } from "@multica/ui/lib/utils";
-import { copyText } from "@multica/ui/lib/clipboard";
-import { Dialog, DialogContent, DialogTitle } from "@multica/ui/components/ui/dialog";
-import { TooltipHint } from "@multica/ui/components/common/tooltip-hint";
+} from "@workpal/ui/icons";
+import { cn } from "@workpal/ui/lib/utils";
+import { copyText } from "@workpal/ui/lib/clipboard";
+import { Dialog, DialogContent, DialogTitle } from "@workpal/ui/components/ui/dialog";
+import { TooltipHint } from "@workpal/ui/components/common/tooltip-hint";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@multica/ui/components/ui/dropdown-menu";
+} from "@workpal/ui/components/ui/dropdown-menu";
 import { useT } from "../i18n";
 import { CodeBlockStatic } from "./code-block-static";
 import { useZoomCanvas } from "./hooks/use-zoom-canvas";

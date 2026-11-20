@@ -1,15 +1,15 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { Lock, UserMinus } from "@multica/ui/icons";
-import type { Agent, IssueAssigneeType, UpdateIssueRequest } from "@multica/core/types";
+import { Lock, UserMinus } from "@workpal/ui/icons";
+import type { Agent, IssueAssigneeType, UpdateIssueRequest } from "@workpal/core/types";
 import { useQuery } from "@tanstack/react-query";
-import { useAuthStore } from "@multica/core/auth";
-import { isAgentRuntimeBound } from "@multica/core/agents";
-import { canAssignAgentToIssue } from "@multica/core/permissions";
-import { useActorName } from "@multica/core/workspace/hooks";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { memberListOptions, agentListOptions, squadListOptions, assigneeFrequencyOptions } from "@multica/core/workspace/queries";
+import { useAuthStore } from "@workpal/core/auth";
+import { isAgentRuntimeBound } from "@workpal/core/agents";
+import { canAssignAgentToIssue } from "@workpal/core/permissions";
+import { useActorName } from "@workpal/core/workspace/hooks";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { memberListOptions, agentListOptions, squadListOptions, assigneeFrequencyOptions } from "@workpal/core/workspace/queries";
 import { ActorAvatar } from "../../../common/actor-avatar";
 import { DeferredPopup } from "../../../common/deferred-popup";
 import {

@@ -1,15 +1,15 @@
 ---
 title: 製作主題
-description: Multica 的主題格式（manifest、CSS 變數、選項和錨點），如何編寫和檢查主題，以及如何釋出到主題商店。
+description: Workpal 的主題格式（manifest、CSS 變數、選項和錨點），如何編寫和檢查主題，以及如何釋出到主題商店。
 ---
 
 import { Callout } from "fumadocs-ui/components/callout";
 import { Step, Steps } from "fumadocs-ui/components/steps";
 
-Multica 主題是一個資料夾，包含 `manifest.json`、`theme.css`，以及 CSS 用到的字型和圖片。CSS 為淺色和深色模式設定公開變數，也可以重新設計一組穩定的錨點；manifest 給主題命名，還可以宣告選項，讓使用者在 **設定 → 外觀** 裡調整。主題永遠不會執行 JavaScript。
+Workpal 主題是一個資料夾，包含 `manifest.json`、`theme.css`，以及 CSS 用到的字型和圖片。CSS 為淺色和深色模式設定公開變數，也可以重新設計一組穩定的錨點；manifest 給主題命名，還可以宣告選項，讓使用者在 **設定 → 外觀** 裡調整。主題永遠不會執行 JavaScript。
 
 <Callout type="warn">
-  主題格式是 Beta API。在宣佈穩定之前，變數、錨點和 manifest 都可能變化。完整的、自動生成的變數和錨點列表在 [`docs/theming.md`](https://github.com/multica-ai/multica/blob/main/docs/theming.md)；本頁講它們怎麼配合使用。
+  主題格式是 Beta API。在宣佈穩定之前，變數、錨點和 manifest 都可能變化。完整的、自動生成的變數和錨點列表在 `docs/theming.md`；本頁講它們怎麼配合使用。
 </Callout>
 
 ## 快速開始
@@ -34,7 +34,7 @@ Multica 主題是一個資料夾，包含 `manifest.json`、`theme.css`，以及
 
 ### 檢查
 
-分享之前，在 [Multica 倉庫](https://github.com/multica-ai/multica)的本地副本里執行檢查（見[檢查與預覽](#檢查與預覽)）。
+分享之前，在 Workpal 倉庫的本地副本里執行檢查（見[檢查與預覽](#檢查與預覽)）。
 
 </Step>
 </Steps>
@@ -121,7 +121,7 @@ paper/
 }
 ```
 
-[變數參考](https://github.com/multica-ai/multica/blob/main/docs/theming.md#variable-reference)列出了每個變數及其淺色和深色預設值。
+變數參考列出了每個變數及其淺色和深色預設值。
 
 ## 選項
 
@@ -168,7 +168,7 @@ paper/
 - 設定背景時必須同時設定 `--backdrop-color`：載入期間顯示的純色，也是 `theme:check` 計算玻璃對比度時用的底色。
 - `--glass-opacity` 和 `--glass-blur` 決定頁面自身顏色蓋住背景的程度，以及背景在頁面後面的模糊程度。`--frame-glass-opacity` 和 `--frame-glass-blur` 對側欄、視窗工具列、分頁列和底列起同樣的作用。
 
-請用這些變數，而不是把 `--app-shell` 設成透明或給 `body` 設定 `background`：這樣切換背景時不會讓整個視窗閃爍。[`examples/themes/night-sky`](https://github.com/multica-ai/multica/tree/main/examples/themes/night-sky) 是一個完整範例。
+請用這些變數，而不是把 `--app-shell` 設成透明或給 `body` 設定 `background`：這樣切換背景時不會讓整個視窗閃爍。`examples/themes/night-sky` 是一個完整範例。
 
 ## 選擇器
 
@@ -183,7 +183,7 @@ paper/
 .theme-dark [data-mc="issue-row"][data-priority="urgent"] { box-shadow: inset 2px 0 var(--priority-urgent); }
 ```
 
-[選擇器參考](https://github.com/multica-ai/multica/blob/main/docs/theming.md#selectors)列出了每個錨點、它的屬性和每個 slot。
+選擇器參考列出了每個錨點、它的屬性和每個 slot。
 
 ## CSS 不能做什麼
 
@@ -203,7 +203,7 @@ paper/
 
 ## 檢查與預覽
 
-在 [Multica 倉庫](https://github.com/multica-ai/multica)的本地副本里執行：
+在 Workpal 倉庫的本地副本里執行：
 
 ```bash
 pnpm theme:check path/to/paper          # 資料夾
@@ -217,24 +217,24 @@ pnpm theme:preview path/to/paper --out preview   # preview/light.png 和 preview
 
 開發過程中如果主題隱藏或弄亂了介面，在地址後加 `?theme=default` 開啟應用，或者載入後立刻按住 **Shift**；見[主題出問題時](/themes#主題出問題時)。
 
-檢查器也可以不安裝儲存庫，用稀疏複製和 Node 22.18 或更新版本直接執行。AI 代理內建的 Multica skill 裡也是這些指令：
+檢查器也可以不安裝儲存庫，用稀疏複製和 Node 22.18 或更新版本直接執行。AI 代理內建的 Workpal skill 裡也是這些指令：
 
 ```bash
-git clone --depth 1 --filter=blob:none --sparse https://github.com/multica-ai/multica.git multica-themes
-git -C multica-themes sparse-checkout set docs scripts packages/core packages/ui
-node multica-themes/scripts/theme-check.mjs path/to/paper
+git clone --depth 1 --filter=blob:none --sparse https://code-host.invalid/workpal.git workpal-themes
+git -C workpal-themes sparse-checkout set docs scripts packages/core packages/ui
+node workpal-themes/scripts/theme-check.mjs path/to/paper
 ```
 
 ## 釋出到主題商店
 
-主題商店列出 [multica-ai/multica-themes](https://github.com/multica-ai/multica-themes) 倉庫裡的主題。詳細說明見它的[貢獻指南](https://github.com/multica-ai/multica-themes/blob/main/CONTRIBUTING.md)，簡單來說：
+主題商店列出 workpal-ai/workpal-themes 倉庫裡的主題。詳細說明見它的貢獻指南，簡單來說：
 
 <Steps>
 <Step>
 
 ### 給主題一個獨立倉庫
 
-把主題放在一個公開的 GitHub 倉庫裡。[multica-ai/multica-theme-sample](https://github.com/multica-ai/multica-theme-sample) 是一個帶釋出工作流的模板。
+把主題放在一個公開的 GitHub 倉庫裡。workpal-ai/workpal-theme-sample 是一個帶釋出工作流的模板。
 
 </Step>
 <Step>
@@ -255,9 +255,9 @@ node multica-themes/scripts/theme-check.mjs path/to/paper
 
 新 release 通過同樣的檢查後，大約一小時內上架；裝過這個主題的人會看到更新。沒通過檢查的 release 不會替換已上架的版本。應用只會安裝通過檢查的那個 `theme.zip`，並用與匯入主題相同的解析器和 CSS 檢查讀取它。
 
-商店卡片會顯示主題從這個 Multica 伺服器被下載的次數。每次安裝和每次更新都算一次，沒裝的主題按下載次數從多到少排列。
+商店卡片會顯示主題從這個 Workpal 伺服器被下載的次數。每次安裝和每次更新都算一次，沒裝的主題按下載次數從多到少排列。
 
 ## 接下來
 
 - [主題與外觀](/themes) — 安裝、更新和移除主題。
-- [`docs/theming.md`](https://github.com/multica-ai/multica/blob/main/docs/theming.md) — 自動生成的變數和選擇器參考。
+- `docs/theming.md` — 自動生成的變數和選擇器參考。

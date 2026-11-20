@@ -2,11 +2,11 @@
 
 import type { ReactNode } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { useReducedMotion } from "@multica/core/appearance";
-import { X } from "@multica/ui/icons";
-import { cn } from "@multica/ui/lib/utils";
-import { TooltipHint } from "@multica/ui/components/common/tooltip-hint";
-import { UI_EASE_OUT, UI_MOTION_DURATION } from "@multica/ui/lib/motion";
+import { useReducedMotion } from "@workpal/core/appearance";
+import { X } from "@workpal/ui/icons";
+import { cn } from "@workpal/ui/lib/utils";
+import { TooltipHint } from "@workpal/ui/components/common/tooltip-hint";
+import { UI_EASE_OUT, UI_MOTION_DURATION } from "@workpal/ui/lib/motion";
 import { useT } from "../../i18n";
 
 /**

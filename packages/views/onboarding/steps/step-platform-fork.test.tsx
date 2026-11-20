@@ -1,17 +1,17 @@
-import { api } from "@multica/core/api";
+import { api } from "@workpal/core/api";
 import { describe, expect, it, vi, beforeEach, afterEach } from "vitest";
 import { act, cleanup, fireEvent, render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import type { AgentRuntime } from "@multica/core/types";
+import type { AgentRuntime } from "@workpal/core/types";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { I18nProvider } from "@multica/core/i18n/react";
-import { configStore } from "@multica/core/config";
+import { I18nProvider } from "@workpal/core/i18n/react";
+import { configStore } from "@workpal/core/config";
 import enCommon from "../../locales/en/common.json";
 import enOnboarding from "../../locales/en/onboarding.json";
 
 import enAgents from "../../locales/en/agents.json";
-vi.mock("@multica/core/api", async (importOriginal) => ({
-  ...await importOriginal<typeof import("@multica/core/api")>(),
+vi.mock("@workpal/core/api", async (importOriginal) => ({
+  ...await importOriginal<typeof import("@workpal/core/api")>(),
   api: { initiateListModels: vi.fn() },
 }));
 
@@ -140,13 +140,13 @@ describe("StepPlatformFork", () => {
     renderFork();
     fireEvent.click(screen.getByRole("button", { name: /show steps/i }));
     const dialog = screen.getByRole("dialog");
-    const command = "multica setup self-host --server-url https://api.example.com --app-url https://app.example.com";
+    const command = "workpal setup self-host --server-url https://api.example.com --app-url https://app.example.com";
     expect(within(dialog).getByText(command)).toBeInTheDocument();
     act(() => vi.advanceTimersByTime(15_000));
     expect(within(dialog).getByText(command)).toBeInTheDocument();
     act(() => vi.advanceTimersByTime(30_000));
     expect(within(dialog).getByText(command)).toBeInTheDocument();
-    expect(within(dialog).queryByText("multica setup")).not.toBeInTheDocument();
+    expect(within(dialog).queryByText("workpal setup")).not.toBeInTheDocument();
   });
 
   it("does not show Cloud waiting guidance while configuration is loading or failed", () => {
@@ -154,10 +154,10 @@ describe("StepPlatformFork", () => {
     renderFork();
     fireEvent.click(screen.getByRole("button", { name: /show steps/i }));
     const dialog = screen.getByRole("dialog");
-    expect(within(dialog).queryByText("multica setup")).not.toBeInTheDocument();
+    expect(within(dialog).queryByText("workpal setup")).not.toBeInTheDocument();
     expect(within(dialog).queryByText(/waiting for your computer/i)).not.toBeInTheDocument();
     act(() => configStore.getState().setDaemonConfigStatus("error"));
-    expect(within(dialog).queryByText("multica setup")).not.toBeInTheDocument();
+    expect(within(dialog).queryByText("workpal setup")).not.toBeInTheDocument();
   });
 
   it("renders the three fork options at rest", () => {

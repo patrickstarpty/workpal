@@ -1,22 +1,22 @@
 import { act, cleanup, render, screen, waitFor } from "@testing-library/react";
 import { QueryClientProvider, focusManager } from "@tanstack/react-query";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { api, ApiError } from "@multica/core/api";
-import { createQueryClient } from "@multica/core/query-client";
-import { issueKeys } from "@multica/core/issues/queries";
-import type { Issue, ListIssuesCache } from "@multica/core/types";
+import { api, ApiError } from "@workpal/core/api";
+import { createQueryClient } from "@workpal/core/query-client";
+import { issueKeys } from "@workpal/core/issues/queries";
+import type { Issue, ListIssuesCache } from "@workpal/core/types";
 import { IssueChip } from "./issue-chip";
 
-vi.mock("@multica/core/api", async (importOriginal) => ({
-  ...(await importOriginal<typeof import("@multica/core/api")>()),
+vi.mock("@workpal/core/api", async (importOriginal) => ({
+  ...(await importOriginal<typeof import("@workpal/core/api")>()),
   api: { getIssue: vi.fn() },
 }));
 
-vi.mock("@multica/core/hooks", () => ({
+vi.mock("@workpal/core/hooks", () => ({
   useWorkspaceId: () => "workspace-1",
 }));
 
-vi.mock("@multica/core/issue-statuses/hooks", () => ({
+vi.mock("@workpal/core/issue-statuses/hooks", () => ({
   useIssueStatuses: () => ({ colorOf: () => null, iconOf: () => null }),
 }));
 

@@ -26,7 +26,7 @@ import type { Logger } from "../logger";
  * session, and that path already exists (ApiClient's 401 handling).
  */
 
-const TOKEN_STORAGE_KEY = "multica_token";
+const TOKEN_STORAGE_KEY = "workpal_token";
 
 /**
  * How long to wait after a FAILED check before another is allowed, by
@@ -64,7 +64,7 @@ const MIN_CHECK_INTERVAL_MS = 5 * 1000;
  * else (RefreshSession in server/internal/handler/session.go). A personal
  * access token (`mul_`), agent task token (`mat_`) or cloud-node PAT (`mcn_`)
  * still authenticates every other request, so it can legitimately sit in
- * `multica_token` — the local dev environment signs the browser in with its
+ * `workpal_token` — the local dev environment signs the browser in with its
  * profile's PAT. Those are opaque strings, never three-part JWTs, so the shape
  * alone tells them apart. Asking anyway would fail on every launch and every
  * backoff retry, and renewing it is not ours to do: a PAT has its own lifetime.

@@ -29,7 +29,7 @@ type Listener struct {
 // agent started.
 type Detector struct {
 	// ignore holds command names that are never an environment: the agent
-	// CLIs themselves and the multica binary.
+	// CLIs themselves and the workpal binary.
 	ignore  map[string]bool
 	list    func(ctx context.Context) ([]Listener, error)
 	inspect func(ctx context.Context, pids []int) map[int]Process
@@ -72,7 +72,7 @@ type sighting struct {
 }
 
 func NewDetector(ignoreCommands []string) *Detector {
-	ignore := map[string]bool{"multica": true}
+	ignore := map[string]bool{"workpal": true}
 	for _, c := range ignoreCommands {
 		if c = strings.ToLower(strings.TrimSpace(c)); c != "" {
 			ignore[c] = true

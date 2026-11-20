@@ -15,7 +15,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/multica-ai/multica/server/internal/daemon/execenv"
+	"workpal.local/workpal/server/internal/daemon/execenv"
 )
 
 const skillInvocationHelperMode = "skill-invocation-helper"
@@ -64,8 +64,8 @@ func TestRunTaskListsAllocatedSkillInvocationName(t *testing.T) {
 	if err := os.WriteFile(userSkillPath, []byte(userSkill), 0o600); err != nil {
 		t.Fatal(err)
 	}
-	userPlatformPath := filepath.Join(workDir, ".claude", "skills", "multica-platform", "SKILL.md")
-	const userPlatform = "---\nname: multica-platform\n---\n\nUser-owned platform skill.\n"
+	userPlatformPath := filepath.Join(workDir, ".claude", "skills", "workpal-platform", "SKILL.md")
+	const userPlatform = "---\nname: workpal-platform\n---\n\nUser-owned platform skill.\n"
 	if err := os.MkdirAll(filepath.Dir(userPlatformPath), 0o755); err != nil {
 		t.Fatal(err)
 	}
@@ -112,8 +112,8 @@ func TestRunTaskListsAllocatedSkillInvocationName(t *testing.T) {
 			ID: "agent-skill-collision", Name: "test-agent",
 			Skills: []SkillData{
 				{ID: "assigned-review", Source: "workspace", Name: "Review", Content: "---\nname: original-review\n---\n\nAssigned review skill.\n"},
-				{ID: "e78e3700-7776-427a-a0bb-96a6f7b41af6", Source: "workspace", Name: "multica-platform", Content: userPlatform},
-				{ID: "builtin:multica-platform", Source: "builtin", Name: "multica-platform", Content: "---\nname: multica-platform\n---\n\nPlatform contracts.\n"},
+				{ID: "e78e3700-7776-427a-a0bb-96a6f7b41af6", Source: "workspace", Name: "workpal-platform", Content: userPlatform},
+				{ID: "builtin:workpal-platform", Source: "builtin", Name: "workpal-platform", Content: "---\nname: workpal-platform\n---\n\nPlatform contracts.\n"},
 			},
 		},
 	}
@@ -130,15 +130,15 @@ func TestRunTaskListsAllocatedSkillInvocationName(t *testing.T) {
 	if err != nil {
 		t.Fatalf("read captured runtime brief: %v", err)
 	}
-	if !strings.Contains(string(brief), "**review-multica**") || strings.Contains(string(brief), "**review**") {
-		t.Errorf("runtime brief must list the allocated skill name review-multica, not the user-owned review:\n%s", brief)
+	if !strings.Contains(string(brief), "**review-workpal**") || strings.Contains(string(brief), "**review**") {
+		t.Errorf("runtime brief must list the allocated skill name review-workpal, not the user-owned review:\n%s", brief)
 	}
 	if got, err := os.ReadFile(userSkillPath); err != nil || string(got) != userSkill {
 		t.Fatalf("user-owned skill changed: %q, %v", got, err)
 	}
 	for _, want := range []string{
-		"load the `multica-platform-multica-multica` skill and open the reference(s)",
-		"Before creating sub-issues, read `references/sub-issues.md` in the `multica-platform-multica-multica` skill",
+		"load the `workpal-platform-workpal-workpal` skill and open the reference(s)",
+		"Before creating sub-issues, read `references/sub-issues.md` in the `workpal-platform-workpal-workpal` skill",
 	} {
 		if !strings.Contains(string(brief), want) {
 			t.Errorf("runtime brief lost platform hint %q", want)

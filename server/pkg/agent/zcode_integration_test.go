@@ -22,8 +22,8 @@ import (
 //     (session/create pins mode=yolo, so no interactive permission prompt
 //     blocks the turn)
 //
-// Gated by MULTICA_RUN_REAL_AGENT_SMOKE=1 per AGENTS.md. The CLI is
-// discovered from MULTICA_ZCODE_PATH (which may directly name the desktop bundle
+// Gated by WORKPAL_RUN_REAL_AGENT_SMOKE=1 per AGENTS.md. The CLI is
+// discovered from WORKPAL_ZCODE_PATH (which may directly name the desktop bundle
 // zcode.cjs entry point) or
 // `zcode` on PATH, and requires a configured API connection.
 func TestZcodeRealProtocolSmoke(t *testing.T) {
@@ -32,11 +32,11 @@ func TestZcodeRealProtocolSmoke(t *testing.T) {
 		t.Skip("skipping real-binary smoke test in -short mode")
 	}
 
-	path := os.Getenv("MULTICA_ZCODE_PATH")
+	path := os.Getenv("WORKPAL_ZCODE_PATH")
 	if path == "" {
 		discovered, err := exec.LookPath("zcode")
 		if err != nil {
-			t.Skip("zcode not on PATH and MULTICA_ZCODE_PATH unset; skipping real-binary smoke test")
+			t.Skip("zcode not on PATH and WORKPAL_ZCODE_PATH unset; skipping real-binary smoke test")
 		}
 		path = discovered
 	}
@@ -68,8 +68,8 @@ func TestZcodeRealProtocolSmoke(t *testing.T) {
 	// three hardcoded attempts (account:zai-start-plan,
 	// account:zai-individual-coding-plan) all answered "Provider Registry 中
 	// 不存在 Model", which is exactly what discovery exists to answer.
-	// Override with MULTICA_ZCODE_SMOKE_MODEL for a specific pick.
-	model := os.Getenv("MULTICA_ZCODE_SMOKE_MODEL")
+	// Override with WORKPAL_ZCODE_SMOKE_MODEL for a specific pick.
+	model := os.Getenv("WORKPAL_ZCODE_SMOKE_MODEL")
 	thinkingLevel := ""
 	if model == "" {
 		catalog, err := ListModels(ctx, "zcode", NewCommand(path, nil))

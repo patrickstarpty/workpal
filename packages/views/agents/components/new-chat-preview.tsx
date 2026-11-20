@@ -1,9 +1,9 @@
 "use client";
 
-import { selectConversationStarters } from "@multica/core/agents";
-import type { AgentConversationStarter } from "@multica/core/types";
-import { resolvePublicFileUrl } from "@multica/core/workspace/avatar-url";
-import { ActorAvatar } from "@multica/ui/components/common/actor-avatar";
+import { selectConversationStarters } from "@workpal/core/agents";
+import type { AgentConversationStarter } from "@workpal/core/types";
+import { resolvePublicFileUrl } from "@workpal/core/workspace/avatar-url";
+import { ActorAvatar } from "@workpal/ui/components/common/actor-avatar";
 import {
   ConversationStarterList,
   useFallbackConversationStarters,

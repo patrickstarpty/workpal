@@ -1,8 +1,8 @@
 import { act, cleanup, render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { I18nProvider } from "@multica/core/i18n/react";
-import { configStore } from "@multica/core/config";
+import { I18nProvider } from "@workpal/core/i18n/react";
+import { configStore } from "@workpal/core/config";
 import enCommon from "../../locales/en/common.json";
 import enOnboarding from "../../locales/en/onboarding.json";
 import { CliInstallInstructions } from "./cli-install-instructions";
@@ -10,10 +10,10 @@ import { CliInstallInstructions } from "./cli-install-instructions";
 const TEST_RESOURCES = { en: { common: enCommon, onboarding: enOnboarding } };
 
 const WINDOWS_CMD =
-  "irm https://raw.githubusercontent.com/multica-ai/multica/main/scripts/install.ps1 | iex";
+  "irm https://raw.githubusercontent.com/workpal-ai/workpal/main/scripts/install.ps1 | iex";
 
 const clipboard = vi.hoisted(() => ({ copyText: vi.fn() }));
-vi.mock("@multica/ui/lib/clipboard", () => ({ copyText: clipboard.copyText }));
+vi.mock("@workpal/ui/lib/clipboard", () => ({ copyText: clipboard.copyText }));
 
 function renderInstructions() {
   return render(
@@ -48,7 +48,7 @@ describe("CliInstallInstructions", () => {
 
   it("does not offer a setup command before connection settings resolve", () => {
     renderInstructions();
-    expect(screen.queryByText("multica setup")).not.toBeInTheDocument();
+    expect(screen.queryByText("workpal setup")).not.toBeInTheDocument();
     expect(screen.getAllByRole("button", { name: "Copy" })).toHaveLength(1);
     expect(screen.getByRole("status")).toHaveTextContent(
       "Loading connection settings",
@@ -62,7 +62,7 @@ describe("CliInstallInstructions", () => {
     expect(screen.getByRole("alert")).toHaveTextContent(
       "Couldn't load connection settings",
     );
-    expect(screen.queryByText("multica setup")).not.toBeInTheDocument();
+    expect(screen.queryByText("workpal setup")).not.toBeInTheDocument();
     expect(screen.getAllByRole("button", { name: "Copy" })).toHaveLength(1);
     act(() => configStore.getState().setDaemonConfig({
       daemonSetupTarget: "self_host",
@@ -72,7 +72,7 @@ describe("CliInstallInstructions", () => {
     expect(screen.queryByRole("alert")).not.toBeInTheDocument();
     await user.click(screen.getAllByRole("button", { name: "Copy" })[1]!);
     expect(clipboard.copyText).toHaveBeenCalledExactlyOnceWith(
-      "multica setup self-host --server-url https://api.example.com --app-url https://app.example.com",
+      "workpal setup self-host --server-url https://api.example.com --app-url https://app.example.com",
     );
   });
 
@@ -90,7 +90,7 @@ describe("CliInstallInstructions", () => {
     await user.click(screen.getByRole("tab", { name: "Windows" }));
 
     expect(screen.getByText(WINDOWS_CMD)).toBeInTheDocument();
-    expect(screen.getByText("multica setup")).toBeInTheDocument();
+    expect(screen.getByText("workpal setup")).toBeInTheDocument();
   });
 
   it("renders self-host setup command when daemon URLs are configured", () => {
@@ -108,9 +108,9 @@ describe("CliInstallInstructions", () => {
 
     expect(
       screen.getByText(
-        "multica setup self-host --server-url https://api.example.com --app-url https://app.example.com",
+        "workpal setup self-host --server-url https://api.example.com --app-url https://app.example.com",
       ),
     ).toBeInTheDocument();
-    expect(screen.queryByText("multica setup")).not.toBeInTheDocument();
+    expect(screen.queryByText("workpal setup")).not.toBeInTheDocument();
   });
 });

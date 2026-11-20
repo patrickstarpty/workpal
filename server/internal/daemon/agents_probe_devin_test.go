@@ -6,7 +6,7 @@ import (
 	"runtime"
 	"testing"
 
-	"github.com/multica-ai/multica/server/pkg/agent"
+	"workpal.local/workpal/server/pkg/agent"
 )
 
 func TestProbeAgentCLIsDiscoversNativeDevin(t *testing.T) {
@@ -20,8 +20,8 @@ func TestProbeAgentCLIsDiscoversNativeDevin(t *testing.T) {
 	resolveAgentsViaLoginShell = func([]string) map[string]string { return map[string]string{} }
 	resetShellResolveCacheForTest(t)
 	t.Setenv("PATH", dir)
-	t.Setenv("MULTICA_DEVIN_PATH", "")
-	t.Setenv("MULTICA_DEVIN_MODEL", "selected-model")
+	t.Setenv("WORKPAL_DEVIN_PATH", "")
+	t.Setenv("WORKPAL_DEVIN_MODEL", "selected-model")
 	entry, ok := probeAgentCLIs()["devin"]
 	if !ok || entry.Command != "devin" || entry.Model != "selected-model" {
 		t.Fatalf("Devin not discovered as a native family: %+v ok=%v", entry, ok)

@@ -6,10 +6,10 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
-} from "@multica/ui/components/ui/dialog";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { appActivityOptions } from "@multica/core/connected-apps";
-import type { AppAccountScope } from "@multica/core/types";
+} from "@workpal/ui/components/ui/dialog";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { appActivityOptions } from "@workpal/core/connected-apps";
+import type { AppAccountScope } from "@workpal/core/types";
 import { useT, useTimeAgo } from "../../i18n";
 
 /** Recent calls through one connected account. */

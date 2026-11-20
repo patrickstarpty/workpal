@@ -204,10 +204,10 @@ func TestEnsureCodexMultiAgentConfigEmptyFile(t *testing.T) {
 	if !strings.Contains(got, "features.multi_agent = false") {
 		t.Errorf("expected managed block to set features.multi_agent = false at root, got:\n%s", got)
 	}
-	if !strings.Contains(got, multicaMultiAgentBeginMarker) {
+	if !strings.Contains(got, workpalMultiAgentBeginMarker) {
 		t.Errorf("expected begin marker, got:\n%s", got)
 	}
-	if !strings.Contains(got, multicaMultiAgentEndMarker) {
+	if !strings.Contains(got, workpalMultiAgentEndMarker) {
 		t.Errorf("expected end marker, got:\n%s", got)
 	}
 	requireMultiAgentDisabled(t, parseTOML(t, got))
@@ -492,7 +492,7 @@ agents.enabled = true
 		t.Fatalf("write fixture: %v", err)
 	}
 
-	t.Setenv(MulticaCodexMultiAgentEnv, "1")
+	t.Setenv(WorkpalCodexMultiAgentEnv, "1")
 
 	if err := ensureCodexMultiAgentConfig(configPath, "0.145.0", nil); err != nil {
 		t.Fatalf("ensureCodexMultiAgentConfig failed: %v", err)
@@ -508,7 +508,7 @@ agents.enabled = true
 func TestCodexMultiAgentEnabledTruthy(t *testing.T) {
 	for _, v := range []string{"1", "true", "TRUE", "yes", "On"} {
 		t.Run(v, func(t *testing.T) {
-			t.Setenv(MulticaCodexMultiAgentEnv, v)
+			t.Setenv(WorkpalCodexMultiAgentEnv, v)
 			if !codexMultiAgentEnabled() {
 				t.Errorf("expected %q to be truthy", v)
 			}
@@ -519,7 +519,7 @@ func TestCodexMultiAgentEnabledTruthy(t *testing.T) {
 func TestCodexMultiAgentEnabledFalsy(t *testing.T) {
 	for _, v := range []string{"", "0", "false", "no", "off", "anything else"} {
 		t.Run(v, func(t *testing.T) {
-			t.Setenv(MulticaCodexMultiAgentEnv, v)
+			t.Setenv(WorkpalCodexMultiAgentEnv, v)
 			if codexMultiAgentEnabled() {
 				t.Errorf("expected %q to be falsy", v)
 			}
@@ -549,10 +549,10 @@ features.multi_agent = true
 
 	data, _ := os.ReadFile(configPath)
 	got := string(data)
-	if !strings.Contains(got, multicaManagedBeginMarker) {
+	if !strings.Contains(got, workpalManagedBeginMarker) {
 		t.Errorf("expected sandbox managed block, got:\n%s", got)
 	}
-	if !strings.Contains(got, multicaMultiAgentBeginMarker) {
+	if !strings.Contains(got, workpalMultiAgentBeginMarker) {
 		t.Errorf("expected multi-agent managed block, got:\n%s", got)
 	}
 	if strings.Contains(got, "features.multi_agent = true") {
@@ -617,7 +617,7 @@ func TestEnsureCodexMultiAgentConfigEmptyFileWritesAgentsDisabled(t *testing.T) 
 
 	data, _ := os.ReadFile(configPath)
 	got := string(data)
-	for _, want := range []string{multicaAgentsBeginMarker, "agents.enabled = false", multicaAgentsEndMarker} {
+	for _, want := range []string{workpalAgentsBeginMarker, "agents.enabled = false", workpalAgentsEndMarker} {
 		if !strings.Contains(got, want) {
 			t.Errorf("expected %q in output, got:\n%s", want, got)
 		}
@@ -729,9 +729,9 @@ func TestEnsureCodexMultiAgentConfigUpgradesLegacyManagedBlock(t *testing.T) {
 	original := `model = "o3"
 
 [features]
-` + multicaMultiAgentBeginMarker + `
+` + workpalMultiAgentBeginMarker + `
 multi_agent = false
-` + multicaMultiAgentEndMarker + `
+` + workpalMultiAgentEndMarker + `
 unified_exec = false
 `
 	if err := os.WriteFile(configPath, []byte(original), 0o644); err != nil {
@@ -744,7 +744,7 @@ unified_exec = false
 
 	data, _ := os.ReadFile(configPath)
 	got := string(data)
-	if n := strings.Count(got, multicaMultiAgentBeginMarker); n != 1 {
+	if n := strings.Count(got, workpalMultiAgentBeginMarker); n != 1 {
 		t.Errorf("expected exactly one multi-agent block, got %d:\n%s", n, got)
 	}
 	parsed := parseTOML(t, got)
@@ -771,7 +771,7 @@ description = "Research-focused role."
 		t.Fatal(err)
 	}
 	t.Setenv("CODEX_HOME", sharedHome)
-	t.Setenv(MulticaCodexMultiAgentEnv, "")
+	t.Setenv(WorkpalCodexMultiAgentEnv, "")
 
 	for _, tc := range []struct {
 		version string
@@ -812,7 +812,7 @@ description = "Research-focused role."
 				if _, exists := agents["enabled"]; exists {
 					t.Error("agents.enabled is unsupported by this Codex version")
 				}
-				if strings.Contains(string(data), multicaAgentsBeginMarker) {
+				if strings.Contains(string(data), workpalAgentsBeginMarker) {
 					t.Error("unexpected managed agents block for unsupported version")
 				}
 			}
@@ -885,7 +885,7 @@ description = "Research-focused role."
 				if _, exists := agents["enabled"]; exists {
 					t.Error("agents.enabled survived downgrade")
 				}
-				if strings.Contains(string(data), multicaAgentsBeginMarker) {
+				if strings.Contains(string(data), workpalAgentsBeginMarker) {
 					t.Error("managed agents block survived downgrade")
 				}
 				if agents["max_threads"] != int64(4) {

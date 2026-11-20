@@ -1,3 +1,4 @@
+import './storage-migration';
 import React,{useState,useEffect,useRef} from 'react';
 import {createRoot} from 'react-dom/client';
 import {CoreProvider,setCurrentWorkspace} from '../../../packages/core/platform';

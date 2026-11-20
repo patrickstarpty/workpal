@@ -13,11 +13,11 @@ import (
 
 	"github.com/go-chi/chi/v5"
 	"github.com/jackc/pgx/v5/pgtype"
-	"github.com/multica-ai/multica/server/internal/connectedapps"
-	"github.com/multica-ai/multica/server/internal/integrations/composio"
-	"github.com/multica-ai/multica/server/internal/logger"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
-	"github.com/multica-ai/multica/server/pkg/protocol"
+	"workpal.local/workpal/server/internal/connectedapps"
+	"workpal.local/workpal/server/internal/integrations/composio"
+	"workpal.local/workpal/server/internal/logger"
+	db "workpal.local/workpal/server/pkg/db/generated"
+	"workpal.local/workpal/server/pkg/protocol"
 )
 
 // Connected Apps v2 (MUL-8516). Team accounts belong to the workspace and are
@@ -1113,7 +1113,7 @@ func writeDecisionError(w http.ResponseWriter, err error) {
 }
 
 // ApproveAppRequest (POST /api/app-requests/{id}/approve). The approver may
-// send edited arguments; Multica runs the call and resumes the agent.
+// send edited arguments; Workpal runs the call and resumes the agent.
 func (h *Handler) ApproveAppRequest(w http.ResponseWriter, r *http.Request) {
 	if !h.appsReady(w, r) {
 		return
@@ -1214,7 +1214,7 @@ func (h *Handler) ResumeAfterDecision(ctx context.Context, req db.AppActionReque
 	if err != nil {
 		return err
 	}
-	content := "[Multica] " + strings.TrimSpace(note)
+	content := "[Workpal] " + strings.TrimSpace(note)
 	sent, err := h.TaskService.SendDirectChatMessage(ctx, session, agent, actorID, content, nil, "member", actorID)
 	if err != nil {
 		return err

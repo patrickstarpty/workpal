@@ -2,9 +2,9 @@
 
 import { useEffect, useRef, useState, type ComponentType, type CSSProperties } from "react";
 import Link from "@/features/landing/components/landing-link";
-import { ArrowRight, ArrowUpRight, ChevronRight } from "@multica/ui/icons";
-import { cn } from "@multica/ui/lib/utils";
-import { BorderBeam } from "@multica/ui/components/common/border-beam";
+import { ArrowRight, ArrowUpRight, ChevronRight } from "@workpal/ui/icons";
+import { cn } from "@workpal/ui/lib/utils";
+import { BorderBeam } from "@workpal/ui/components/common/border-beam";
 import { FAQSection } from "../components/faq-section";
 import { anchorId } from "../components/changelog-page-client";
 import {

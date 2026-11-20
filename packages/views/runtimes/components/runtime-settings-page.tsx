@@ -1,14 +1,14 @@
 "use client";
 
-import { FileQuestion } from "@multica/ui/icons";
-import { buttonVariants } from "@multica/ui/components/ui/button";
+import { FileQuestion } from "@workpal/ui/icons";
+import { buttonVariants } from "@workpal/ui/components/ui/button";
 import { useQuery } from "@tanstack/react-query";
-import type { AgentRuntime } from "@multica/core/types";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { useWorkspacePaths } from "@multica/core/paths";
-import { runtimeListOptions } from "@multica/core/runtimes/queries";
-import { Skeleton } from "@multica/ui/components/ui/skeleton";
-import { cn } from "@multica/ui/lib/utils";
+import type { AgentRuntime } from "@workpal/core/types";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { useWorkspacePaths } from "@workpal/core/paths";
+import { runtimeListOptions } from "@workpal/core/runtimes/queries";
+import { Skeleton } from "@workpal/ui/components/ui/skeleton";
+import { cn } from "@workpal/ui/lib/utils";
 import { CollectionPageState } from "../../layout/collection-page";
 import { AppLink } from "../../navigation";
 import { OBJECT_PAGE_BODY, ObjectPage } from "../../layout/object-page";
@@ -37,7 +37,7 @@ export function RuntimeSettingsPage({
     return (
       <ObjectPage
         type="runtime"
-        layoutId="multica_runtime_detail_layout"
+        layoutId="workpal_runtime_detail_layout"
         segments={segments}
         leaf={<Skeleton className="h-4 w-40" />}
       >
@@ -64,7 +64,7 @@ export function RuntimeSettingsPage({
     return (
       <ObjectPage
         type="runtime"
-        layoutId="multica_runtime_detail_layout"
+        layoutId="workpal_runtime_detail_layout"
         segments={segments}
         leaf={
           <span className="truncate text-muted-foreground">

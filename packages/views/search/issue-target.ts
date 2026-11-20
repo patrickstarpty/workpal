@@ -2,12 +2,12 @@
 
 import { useCallback, useMemo } from "react";
 import { toast } from "sonner";
-import type { BatchIssueLabelOps, Issue, UpdateIssueRequest } from "@multica/core/types";
-import { errorCode } from "@multica/core/api";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { useIssueStatuses } from "@multica/core/issue-statuses/hooks";
-import { useBatchUpdateIssues, useUpdateIssue } from "@multica/core/issues/mutations";
-import { useModalStore } from "@multica/core/modals";
+import type { BatchIssueLabelOps, Issue, UpdateIssueRequest } from "@workpal/core/types";
+import { errorCode } from "@workpal/core/api";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { useIssueStatuses } from "@workpal/core/issue-statuses/hooks";
+import { useBatchUpdateIssues, useUpdateIssue } from "@workpal/core/issues/mutations";
+import { useModalStore } from "@workpal/core/modals";
 import { runConfirmIntent } from "../issues/actions/run-confirm-gate";
 import { useBatchResultToast } from "../issues/components/batch-result-toast";
 import { useT } from "../i18n";

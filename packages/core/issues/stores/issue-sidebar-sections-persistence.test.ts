@@ -4,9 +4,9 @@ import {
   ISSUE_SIDEBAR_SECTIONS,
   selectIssueSidebarOrder,
   useIssueSidebarSectionsStore,
-} from "@multica/core/issues/stores";
+} from "@workpal/core/issues/stores";
 
-const STORAGE_KEY = "multica_issue_sidebar_sections";
+const STORAGE_KEY = "workpal_issue_sidebar_sections";
 // The order persisted before the Sub-issues section was introduced.
 const OLD_ORDER = [
   "properties", "quick_actions", "wakeups", "plugins", "parent", "duplicates",

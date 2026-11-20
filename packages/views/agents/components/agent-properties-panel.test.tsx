@@ -3,8 +3,8 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { cleanup, fireEvent, screen } from "@testing-library/react";
-import type { AgentActivity } from "@multica/core/agents";
-import type { Agent, AgentRuntime, MemberWithUser } from "@multica/core/types";
+import type { AgentActivity } from "@workpal/core/agents";
+import type { Agent, AgentRuntime, MemberWithUser } from "@workpal/core/types";
 import { renderWithI18n } from "../../test/i18n";
 
 const pickers = vi.hoisted(() => ({
@@ -20,17 +20,17 @@ const activityRef = vi.hoisted(() => ({
 }));
 const mockInitiateListModels = vi.hoisted(() => vi.fn());
 
-vi.mock("@multica/core/api", () => ({
+vi.mock("@workpal/core/api", () => ({
   api: {
     initiateListModels: (...args: unknown[]) => mockInitiateListModels(...args),
     getListModelsResult: vi.fn(),
   },
 }));
-vi.mock("@multica/core/hooks", () => ({
+vi.mock("@workpal/core/hooks", () => ({
   useWorkspaceId: () => "workspace-1",
 }));
-vi.mock("@multica/core/agents", async (importOriginal) => ({
-  ...(await importOriginal<typeof import("@multica/core/agents")>()),
+vi.mock("@workpal/core/agents", async (importOriginal) => ({
+  ...(await importOriginal<typeof import("@workpal/core/agents")>()),
   useWorkspaceActivityMap: () => ({ byAgent: activityRef.current, loading: false }),
 }));
 vi.mock("../../common/actor-avatar", () => ({

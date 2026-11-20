@@ -18,7 +18,7 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/multica-ai/multica/server/pkg/taskfailure"
+	"workpal.local/workpal/server/pkg/taskfailure"
 )
 
 // claudeTerminateGraceNanos optionally overrides, in nanoseconds, how long a
@@ -466,7 +466,7 @@ func (b *claudeBackend) Execute(ctx context.Context, prompt string, opts ExecOpt
 
 		completionGuardError := ""
 		if sawAsyncLaunch {
-			completionGuardError = "claude launched an async background task; Multica-managed runs require foreground execution"
+			completionGuardError = "claude launched an async background task; Workpal-managed runs require foreground execution"
 		}
 		finalStatus, finalOutput, finalError := finalizeStreamResult(
 			"claude",
@@ -1286,7 +1286,7 @@ var resumeRejectedPhrases = []string{
 	// session found with ID <id>. Run `qwen --resume` without an ID to
 	// choose from existing sessions."
 	"no saved session found",
-	// Reported verbatim in multica-ai/multica#5704 against Claude Code
+	// Reported verbatim in workpal-ai/workpal#5704 against Claude Code
 	// 2.1.207 (zh-CN): "400 此 session 已绑定另外的ai账号，请执行 /new 开启新
 	// session". This is the account-switch guardrail this signal exists for.
 	"已绑定另外",
@@ -1348,7 +1348,7 @@ func claudeRootSudoPreflight(args, env []string) error {
 	if !argsRequestBypassPermissions(args) || os.Geteuid() != 0 || envHasSandbox(env) {
 		return nil
 	}
-	return fmt.Errorf("Claude Code refuses bypassPermissions under root/sudo privileges. Run the Multica daemon as a non-root user, or set IS_SANDBOX=1 if running in a genuine container/sandbox")
+	return fmt.Errorf("Claude Code refuses bypassPermissions under root/sudo privileges. Run the Workpal daemon as a non-root user, or set IS_SANDBOX=1 if running in a genuine container/sandbox")
 }
 
 func argsRequestBypassPermissions(args []string) bool {
@@ -1386,10 +1386,10 @@ func mergeEnv(base []string, extra map[string]string) []string {
 	env := make([]string, 0, len(base)+len(extra))
 	for _, entry := range base {
 		key, _, _ := strings.Cut(entry, "=")
-		// MULTICA_* in the daemon's own environment is not task context. Drop
+		// WORKPAL_* in the daemon's own environment is not task context. Drop
 		// the inherited namespace for every backend and append only the values
 		// daemon.go explicitly assembled for this task below.
-		if isFilteredChildEnvKey(key) || strings.HasPrefix(strings.ToUpper(key), "MULTICA_") {
+		if isFilteredChildEnvKey(key) || strings.HasPrefix(strings.ToUpper(key), "WORKPAL_") {
 			continue
 		}
 		env = append(env, entry)
@@ -1528,7 +1528,7 @@ func stripSurroundingQuotes(s string) (string, bool) {
 // writeMcpConfigToTemp writes MCP config JSON to a temporary file and returns
 // its path. The caller is responsible for removing it via cleanupMcpConfigTemp.
 func writeMcpConfigToTemp(raw json.RawMessage) (string, error) {
-	dir, err := os.MkdirTemp("", "multica-mcp-*")
+	dir, err := os.MkdirTemp("", "workpal-mcp-*")
 	if err != nil {
 		return "", fmt.Errorf("create mcp config temp dir: %w", err)
 	}
@@ -1550,7 +1550,7 @@ func cleanupMcpConfigTemp(path string) {
 		return
 	}
 	dir := filepath.Dir(path)
-	if strings.HasPrefix(filepath.Base(dir), "multica-mcp-") {
+	if strings.HasPrefix(filepath.Base(dir), "workpal-mcp-") {
 		_ = os.RemoveAll(dir)
 		return
 	}

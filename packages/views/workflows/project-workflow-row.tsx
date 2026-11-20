@@ -2,14 +2,14 @@
 
 import { useState, type ReactNode } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { Check, Workflow } from "@multica/ui/icons";
+import { Check, Workflow } from "@workpal/ui/icons";
 import { toast } from "sonner";
-import { api, clientErrorMessage } from "@multica/core/api";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { handoffStepCount, resolveProjectWorkflow, useIssueWorkflows, useSetProjectWorkflow } from "@multica/core/issue-workflows";
-import { projectListOptions } from "@multica/core/projects/queries";
-import type { IssueWorkflow, IssueWorkflowMappingPlan, Project } from "@multica/core/types";
-import { DropdownMenuItem } from "@multica/ui/components/ui/dropdown-menu";
+import { api, clientErrorMessage } from "@workpal/core/api";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { handoffStepCount, resolveProjectWorkflow, useIssueWorkflows, useSetProjectWorkflow } from "@workpal/core/issue-workflows";
+import { projectListOptions } from "@workpal/core/projects/queries";
+import type { IssueWorkflow, IssueWorkflowMappingPlan, Project } from "@workpal/core/types";
+import { DropdownMenuItem } from "@workpal/ui/components/ui/dropdown-menu";
 import { useT } from "../i18n";
 import { WorkflowMappingDialog } from "./workflow-mapping-dialog";
 

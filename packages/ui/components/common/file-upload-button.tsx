@@ -1,10 +1,10 @@
 "use client";
 
 import { useRef } from "react";
-import { Paperclip } from "@multica/ui/icons";
+import { Paperclip } from "@workpal/ui/icons";
 import { useTranslation } from "react-i18next";
-import { IconButton } from "@multica/ui/components/common/icon-button";
-import { cn } from "@multica/ui/lib/utils";
+import { IconButton } from "@workpal/ui/components/common/icon-button";
+import { cn } from "@workpal/ui/lib/utils";
 
 interface FileUploadButtonProps {
   /** Called with the selected File — caller handles upload. */

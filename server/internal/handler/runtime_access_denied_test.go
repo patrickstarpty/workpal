@@ -7,7 +7,7 @@ import (
 	"testing"
 
 	"github.com/google/uuid"
-	"github.com/multica-ai/multica/server/internal/testutil"
+	"workpal.local/workpal/server/internal/testutil"
 )
 
 func createRuntimeAccessDeniedAgent(t *testing.T, ctx context.Context, runtimeID, name string) string {

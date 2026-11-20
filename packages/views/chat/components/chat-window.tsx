@@ -3,19 +3,19 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { AnimatePresence, motion } from "motion/react";
-import { Minus, Maximize2, Minimize2, ChevronDown, Plus, Check, Archive, Pencil, Loader2, Square, X } from "@multica/ui/icons";
-import { Button } from "@multica/ui/components/ui/button";
-import { cn } from "@multica/ui/lib/utils";
-import { Tooltip, TooltipTrigger, TooltipContent } from "@multica/ui/components/ui/tooltip";
+import { Minus, Maximize2, Minimize2, ChevronDown, Plus, Check, Archive, Pencil, Loader2, Square, X } from "@workpal/ui/icons";
+import { Button } from "@workpal/ui/components/ui/button";
+import { cn } from "@workpal/ui/lib/utils";
+import { Tooltip, TooltipTrigger, TooltipContent } from "@workpal/ui/components/ui/tooltip";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@multica/ui/components/ui/popover";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { useReducedMotion } from "@multica/core/appearance";
-import { api } from "@multica/core/api";
-import { isAgentRuntimeBound } from "@multica/core/agents";
+} from "@workpal/ui/components/ui/popover";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { useReducedMotion } from "@workpal/core/appearance";
+import { api } from "@workpal/core/api";
+import { isAgentRuntimeBound } from "@workpal/core/agents";
 import { ActorAvatar } from "../../common/actor-avatar";
 import { DeferredTooltip } from "../../common/deferred-tooltip";
 import { ActionShortcutKeycaps } from "../../common/shortcut-keycaps";
@@ -39,13 +39,13 @@ import { RuntimeRequiredBanner } from "./runtime-required-banner";
 import {
   pendingChatTasksOptions,
   chatKeys,
-} from "@multica/core/chat/queries";
-import { useUpdateChatSession } from "@multica/core/chat/mutations";
-import { useChatStore } from "@multica/core/chat";
-import { chatQuickActionsPendingOptions } from "@multica/core/chat/queries";
-import { useQuickActionsPendingTimeout } from "@multica/core/chat/use-quick-actions-pending-timeout";
+} from "@workpal/core/chat/queries";
+import { useUpdateChatSession } from "@workpal/core/chat/mutations";
+import { useChatStore } from "@workpal/core/chat";
+import { chatQuickActionsPendingOptions } from "@workpal/core/chat/queries";
+import { useQuickActionsPendingTimeout } from "@workpal/core/chat/use-quick-actions-pending-timeout";
 import { useQuickActionsFailureToast } from "./use-quick-actions-failure-toast";
-import { removeChatMessageFromCaches } from "@multica/core/realtime";
+import { removeChatMessageFromCaches } from "@workpal/core/realtime";
 import { useChatInputFocus } from "./use-chat-input-focus";
 import { useChatOpenReveal } from "./use-chat-open-reveal";
 import { ChatWindowMessages } from "./chat-window-messages";
@@ -62,12 +62,12 @@ import { ChatResizeHandles } from "./chat-resize-handles";
 import { useChatContextItems } from "./use-chat-context-items";
 import { useChatResize } from "./use-chat-resize";
 import { useVisualViewportKeyboard } from "./use-visual-viewport-keyboard";
-import { useIsMobile } from "@multica/ui/hooks/use-mobile";
+import { useIsMobile } from "@workpal/ui/hooks/use-mobile";
 import { CHAT_WINDOW_INSET, useChatWindowAnchor } from "./use-chat-window-anchor";
 import { useFormatTimeAgo } from "./use-format-time-ago";
 import { useChatController } from "./use-chat-controller";
-import { createLogger } from "@multica/core/logger";
-import type { Agent, ChatSession, PendingChatTasksResponse } from "@multica/core/types";
+import { createLogger } from "@workpal/core/logger";
+import type { Agent, ChatSession, PendingChatTasksResponse } from "@workpal/core/types";
 import { useT } from "../../i18n";
 
 const uiLogger = createLogger("chat.ui");
@@ -95,7 +95,7 @@ export function ChatWindow() {
   useQuickActionsFailureToast(activeSessionId ?? null);
   const wakeups = useChatWakeups(activeSessionId);
 
-  // The window adds its own focus moments — opening it, and Ask Multica starting
+  // The window adds its own focus moments — opening it, and Ask Workpal starting
   // a new chat — on top of the controller's new-chat nonce. Both counters only
   // grow, so their sum changes whenever either one does.
   const windowRef = useRef<HTMLDivElement>(null);

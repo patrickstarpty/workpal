@@ -5,8 +5,8 @@ import (
 
 	"github.com/jackc/pgx/v5/pgtype"
 
-	"github.com/multica-ai/multica/server/internal/projectaccess"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
+	"workpal.local/workpal/server/internal/projectaccess"
+	db "workpal.local/workpal/server/pkg/db/generated"
 )
 
 // redactHiddenProjectTasks replaces every run about a private project the

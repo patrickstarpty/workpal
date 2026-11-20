@@ -10,7 +10,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/multica-ai/multica/server/pkg/taskfailure"
+	"workpal.local/workpal/server/pkg/taskfailure"
 )
 
 func TestCodexGuardianRateLimitCircuitCountsDistinctParentReviews(t *testing.T) {

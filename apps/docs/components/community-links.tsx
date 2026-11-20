@@ -18,13 +18,13 @@ export function CommunityLinks({
     },
     {
       label: "GitHub",
-      href: "https://github.com/multica-ai/multica",
+      href: "https://code-host.invalid/workpal",
       description: githubDescription,
       Icon: GitHubMark,
     },
     {
       label: "X（Twitter）",
-      href: "https://x.com/MulticaAI",
+      href: "https://x.com/WorkpalAI",
       description: xDescription,
       Icon: XMark,
     },

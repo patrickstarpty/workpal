@@ -268,8 +268,8 @@ func TestMuseAppExecuteForwardsTaskToken(t *testing.T) {
 	session, err := b.Execute(context.Background(), "do the thing", ExecOptions{
 		Cwd:                "/tmp/work-1",
 		TaskToken:          "mat_abc123",
-		MulticaServerURL:   "https://multica.example.com",
-		MulticaWorkspaceID: "ws-123",
+		WorkpalServerURL:   "https://workpal.example.com",
+		WorkpalWorkspaceID: "ws-123",
 	})
 	if err != nil {
 		t.Fatalf("Execute = %v", err)
@@ -282,7 +282,7 @@ func TestMuseAppExecuteForwardsTaskToken(t *testing.T) {
 	if body.TaskToken != "mat_abc123" {
 		t.Errorf("task_token = %q, want %q", body.TaskToken, "mat_abc123")
 	}
-	if body.ServerURL != "https://multica.example.com" {
+	if body.ServerURL != "https://workpal.example.com" {
 		t.Errorf("server_url = %q", body.ServerURL)
 	}
 	if body.WorkspaceID != "ws-123" {
@@ -316,7 +316,7 @@ func TestMuseAppExecuteMissingEndpoint(t *testing.T) {
 	}
 	t.Setenv(museappEnvEndpoint, "")
 	if _, err := b.Execute(context.Background(), "hi", ExecOptions{}); err == nil {
-		t.Fatal("Execute succeeded without MULTICA_MUSEAPP_ENDPOINT, want error")
+		t.Fatal("Execute succeeded without WORKPAL_MUSEAPP_ENDPOINT, want error")
 	} else if !strings.Contains(err.Error(), museappEnvEndpoint) {
 		t.Errorf("error = %q, want it to name %s", err, museappEnvEndpoint)
 	}

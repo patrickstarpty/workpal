@@ -1,10 +1,10 @@
 "use client";
 
-import { X } from "@multica/ui/icons";
-import { stripBuilderDraft, type BuilderRestore } from "@multica/core/agents";
-import type { ChatMessage } from "@multica/core/types";
-import { IconButton } from "@multica/ui/components/common/icon-button";
-import { cn } from "@multica/ui/lib/utils";
+import { X } from "@workpal/ui/icons";
+import { stripBuilderDraft, type BuilderRestore } from "@workpal/core/agents";
+import type { ChatMessage } from "@workpal/core/types";
+import { IconButton } from "@workpal/ui/components/common/icon-button";
+import { cn } from "@workpal/ui/lib/utils";
 import { ChatInput } from "../../chat/components/chat-input";
 import { CHAT_COLUMN, CHAT_GUTTER } from "../../chat/components/chat-column";
 import {

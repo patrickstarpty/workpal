@@ -7,7 +7,7 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/multica-ai/multica/server/internal/selfexec"
+	"workpal.local/workpal/server/internal/selfexec"
 )
 
 const maxSearchDepth = 4

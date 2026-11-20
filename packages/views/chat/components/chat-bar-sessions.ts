@@ -1,4 +1,4 @@
-import type { ChatSession } from "@multica/core/types";
+import type { ChatSession } from "@workpal/core/types";
 
 export interface ChatBarSession {
   session: ChatSession;

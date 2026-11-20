@@ -10,12 +10,12 @@ import (
 
 	"github.com/google/uuid"
 	"github.com/jackc/pgx/v5/pgtype"
-	"github.com/multica-ai/multica/server/internal/util"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
-	"github.com/multica-ai/multica/server/pkg/protocol"
+	"workpal.local/workpal/server/internal/util"
+	db "workpal.local/workpal/server/pkg/db/generated"
+	"workpal.local/workpal/server/pkg/protocol"
 )
 
-// Based on multica-ai/multica#8332, commit 95756b4f0f98d620278619029fae863fa90bc680.
+// Based on workpal-ai/workpal#8332, commit 95756b4f0f98d620278619029fae863fa90bc680.
 // Text is delivered first, then uploaded images update that same card; files
 // are separate messages. Only server-bound attachments are read; response
 // Markdown and provider URLs are never treated as authority to fetch a file.
@@ -31,9 +31,9 @@ type mediaObjectStore interface {
 }
 
 const (
-	mediaSendFailedText               = "部分附件未能发送到飞书，仍保留在 Multica 的这条回复中。"
-	mediaSendUnknownText              = "无法确认部分附件是否已送达飞书，请先检查当前会话；附件仍保留在 Multica 中。"
-	mediaLookupFailedText             = "暂时无法检查这条回复的附件；如有附件，请在 Multica 中查看。"
+	mediaSendFailedText               = "部分附件未能发送到飞书，仍保留在 Workpal 的这条回复中。"
+	mediaSendUnknownText              = "无法确认部分附件是否已送达飞书，请先检查当前会话；附件仍保留在 Workpal 中。"
+	mediaLookupFailedText             = "暂时无法检查这条回复的附件；如有附件，请在 Workpal 中查看。"
 	attachmentBudget                  = 5 * time.Minute
 	attachmentNoticeBudget            = 5 * time.Second
 	maxConcurrentAttachmentDeliveries = 2

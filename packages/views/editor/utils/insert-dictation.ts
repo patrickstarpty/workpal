@@ -1,6 +1,6 @@
 import type { Editor } from "@tiptap/core";
 import { Selection } from "@tiptap/pm/state";
-import { dictationSeparator } from "@multica/core/voice";
+import { dictationSeparator } from "@workpal/core/voice";
 
 /**
  * Insert dictated text as plain text where the user would type next: over

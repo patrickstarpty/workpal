@@ -1,5 +1,5 @@
-import type { IconComponent } from "@multica/ui/icons";
-import { WORKSPACE_PAGES } from "@multica/core/paths";
+import type { IconComponent } from "@workpal/ui/icons";
+import { WORKSPACE_PAGES } from "@workpal/core/paths";
 import { ROUTE_ICON_COMPONENTS } from "../../layout/route-icon-components";
 
 /**

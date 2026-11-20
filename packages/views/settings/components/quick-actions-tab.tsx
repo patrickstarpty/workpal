@@ -14,22 +14,22 @@ import {
   Trash2,
   TriangleAlert,
   Zap,
-} from "@multica/ui/icons";
+} from "@workpal/ui/icons";
 import { toast } from "sonner";
-import { useWorkspaceId } from "@multica/core/hooks";
+import { useWorkspaceId } from "@workpal/core/hooks";
 import {
   quickActionListOptions,
   useCreateQuickAction,
   useDeleteQuickAction,
   useUpdateQuickAction,
-} from "@multica/core/quick-actions";
+} from "@workpal/core/quick-actions";
 import type {
   QuickAction,
-} from "@multica/core/types";
-import { Button } from "@multica/ui/components/ui/button";
-import { IconButton } from "@multica/ui/components/common/icon-button";
-import { Badge } from "@multica/ui/components/ui/badge";
-import { Input } from "@multica/ui/components/ui/input";
+} from "@workpal/core/types";
+import { Button } from "@workpal/ui/components/ui/button";
+import { IconButton } from "@workpal/ui/components/common/icon-button";
+import { Badge } from "@workpal/ui/components/ui/badge";
+import { Input } from "@workpal/ui/components/ui/input";
 import { QuickActionDialog } from "../../quick-actions/components/quick-action-dialog";
 import {
   AlertDialog,
@@ -40,14 +40,14 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@multica/ui/components/ui/alert-dialog";
+} from "@workpal/ui/components/ui/alert-dialog";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@multica/ui/components/ui/dropdown-menu";
-import { cn } from "@multica/ui/lib/utils";
+} from "@workpal/ui/components/ui/dropdown-menu";
+import { cn } from "@workpal/ui/lib/utils";
 import { useLocale, useT } from "../../i18n";
 import { SettingsTab } from "./settings-layout";
 import { CatalogHeader, CatalogRow, CatalogRows, CatalogTable } from "./catalog-table";

@@ -1,14 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import { Check, Copy } from "@multica/ui/icons";
-import { CliInstallCommand } from "@multica/views/common/cli-install-command";
-import { copyText } from "@multica/ui/lib/clipboard";
-import { cn } from "@multica/ui/lib/utils";
+import { Check, Copy } from "@workpal/ui/icons";
+import { CliInstallCommand } from "@workpal/views/common/cli-install-command";
+import { copyText } from "@workpal/ui/lib/clipboard";
+import { cn } from "@workpal/ui/lib/utils";
 import { useLocale } from "../../i18n";
 import { Container, Eyebrow, focusRing } from "../../site/primitives";
 
-const SETUP_CMD = "multica setup";
+const SETUP_CMD = "workpal setup";
 
 /**
  * The landing palette bypasses the product tokens, so the shared platform

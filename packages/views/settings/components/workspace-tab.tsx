@@ -1,12 +1,12 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { Copy } from "@multica/ui/icons";
-import { Input } from "@multica/ui/components/ui/input";
-import { Textarea } from "@multica/ui/components/ui/textarea";
-import { Button } from "@multica/ui/components/ui/button";
-import { IconButton } from "@multica/ui/components/common/icon-button";
-import { Label } from "@multica/ui/components/ui/label";
+import { Copy } from "@workpal/ui/icons";
+import { Input } from "@workpal/ui/components/ui/input";
+import { Textarea } from "@workpal/ui/components/ui/textarea";
+import { Button } from "@workpal/ui/components/ui/button";
+import { IconButton } from "@workpal/ui/components/common/icon-button";
+import { Label } from "@workpal/ui/components/ui/label";
 import {
   Dialog,
   DialogContent,
@@ -14,8 +14,8 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "@multica/ui/components/ui/dialog";
-import { copyText } from "@multica/ui/lib/clipboard";
+} from "@workpal/ui/components/ui/dialog";
+import { copyText } from "@workpal/ui/lib/clipboard";
 import {
   AlertDialog,
   AlertDialogContent,
@@ -25,25 +25,25 @@ import {
   AlertDialogFooter,
   AlertDialogCancel,
   AlertDialogAction,
-} from "@multica/ui/components/ui/alert-dialog";
+} from "@workpal/ui/components/ui/alert-dialog";
 import { toast } from "sonner";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { useAuthStore } from "@multica/core/auth";
-import { useLeaveWorkspace, useDeleteWorkspace } from "@multica/core/workspace/mutations";
+import { useAuthStore } from "@workpal/core/auth";
+import { useLeaveWorkspace, useDeleteWorkspace } from "@workpal/core/workspace/mutations";
 import {
   memberListOptions,
   workspaceKeys,
   workspaceListOptions,
-} from "@multica/core/workspace/queries";
-import { issueKeys } from "@multica/core/issues/queries";
-import { api } from "@multica/core/api";
+} from "@workpal/core/workspace/queries";
+import { issueKeys } from "@workpal/core/issues/queries";
+import { api } from "@workpal/core/api";
 import {
   resolvePostAuthDestination,
   useCurrentWorkspace,
   useHasOnboarded,
-} from "@multica/core/paths";
-import { setCurrentWorkspace } from "@multica/core/platform";
-import type { Workspace } from "@multica/core/types";
+} from "@workpal/core/paths";
+import { setCurrentWorkspace } from "@workpal/core/platform";
+import type { Workspace } from "@workpal/core/types";
 import { AvatarUploadControl } from "../../common/avatar-upload-control";
 import { useNavigation } from "../../navigation";
 import { DeleteWorkspaceDialog } from "./delete-workspace-dialog";

@@ -2,12 +2,12 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { Input } from "@multica/ui/components/ui/input";
-import { DropdownMenuCheckboxItem } from "@multica/ui/components/ui/dropdown-menu";
-import { useAuthStore } from "@multica/core/auth";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { isImeComposing } from "@multica/core/utils";
-import { memberListOptions } from "@multica/core/workspace/queries";
+import { Input } from "@workpal/ui/components/ui/input";
+import { DropdownMenuCheckboxItem } from "@workpal/ui/components/ui/dropdown-menu";
+import { useAuthStore } from "@workpal/core/auth";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { isImeComposing } from "@workpal/core/utils";
+import { memberListOptions } from "@workpal/core/workspace/queries";
 import {
   formatActorRef,
   isActorPropertyType,
@@ -20,13 +20,13 @@ import {
   type IssueProperty,
   type PropertyFilterOp,
   type PropertyFilterValue,
-} from "@multica/core/types";
+} from "@workpal/core/types";
 import { ActorAvatar } from "../../common/actor-avatar";
 import { FILTER_ITEM_CLASS, HoverCheck } from "../../common/hover-check";
 import { useT } from "../../i18n";
-import type { ActorFilterValue } from "@multica/core/issues/stores/view-store";
+import type { ActorFilterValue } from "@workpal/core/issues/stores/view-store";
 import { NO_PROPERTY_VALUE } from "../utils/filter";
-import { paletteColor } from "@multica/core/appearance";
+import { paletteColor } from "@workpal/core/appearance";
 
 /**
  * Names one property filter value the way chips and advanced conditions show

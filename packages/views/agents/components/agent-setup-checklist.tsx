@@ -1,8 +1,8 @@
 "use client";
 
-import { CheckCircle2, Circle } from "@multica/ui/icons";
-import { buttonVariants } from "@multica/ui/components/ui/button";
-import { cn } from "@multica/ui/lib/utils";
+import { CheckCircle2, Circle } from "@workpal/ui/icons";
+import { buttonVariants } from "@workpal/ui/components/ui/button";
+import { cn } from "@workpal/ui/lib/utils";
 import { useT } from "../../i18n";
 import { AppLink } from "../../navigation";
 

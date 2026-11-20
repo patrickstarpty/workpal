@@ -2,7 +2,7 @@
 // agent starts for a task, so the daemon can report them on the issue.
 //
 // An environment is either declared by the repository in
-// .multica/environments.toml and supervised by the daemon ("config"), or a
+// .workpal/environments.toml and supervised by the daemon ("config"), or a
 // listening process the daemon finds running inside a task's directory
 // ("detected").
 package localenv
@@ -22,7 +22,7 @@ import (
 
 // ConfigPath is where a repository declares its environments, relative to
 // the repository root.
-const ConfigPath = ".multica/environments.toml"
+const ConfigPath = ".workpal/environments.toml"
 
 const (
 	DefaultTTL = 24 * time.Hour
@@ -62,7 +62,7 @@ type configFile struct {
 
 // Config is a repository's parsed environments file.
 type Config struct {
-	// RepoRoot is the directory holding .multica/; commands run from here.
+	// RepoRoot is the directory holding .workpal/; commands run from here.
 	RepoRoot     string
 	Environments map[string]Definition
 }
@@ -131,7 +131,7 @@ func ParseConfig(data []byte) (Config, error) {
 			Name:  name,
 			Label: strings.TrimSpace(raw.Label),
 			Start: strings.TrimSpace(raw.Start),
-			URL:   "http://localhost:$MULTICA_PORT",
+			URL:   "http://localhost:$WORKPAL_PORT",
 			Ready: strings.TrimSpace(raw.Ready),
 			Stop:  strings.TrimSpace(raw.Stop),
 			TTL:   DefaultTTL,
@@ -163,11 +163,11 @@ func ParseConfig(data []byte) (Config, error) {
 	return cfg, nil
 }
 
-// expandPort substitutes $MULTICA_PORT / ${MULTICA_PORT} in a URL. Commands
-// are not expanded here: the shell sees MULTICA_PORT in their environment.
+// expandPort substitutes $WORKPAL_PORT / ${WORKPAL_PORT} in a URL. Commands
+// are not expanded here: the shell sees WORKPAL_PORT in their environment.
 func expandPort(s string, port int) string {
 	return os.Expand(s, func(key string) string {
-		if key == "MULTICA_PORT" {
+		if key == "WORKPAL_PORT" {
 			return fmt.Sprint(port)
 		}
 		return "$" + key

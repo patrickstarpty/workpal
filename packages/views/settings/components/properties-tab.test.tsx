@@ -1,7 +1,7 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { cleanup, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import type { IssueProperty } from "@multica/core/types";
+import type { IssueProperty } from "@workpal/core/types";
 import { renderWithI18n } from "../../test/i18n";
 import { PropertiesTab } from "./properties-tab";
 
@@ -23,24 +23,24 @@ const component: IssueProperty = {
   updated_at: "2026-11-15T00:00:00Z",
 } as IssueProperty;
 
-vi.mock("@multica/core/hooks", () => ({
+vi.mock("@workpal/core/hooks", () => ({
   useWorkspaceId: () => "workspace-1",
 }));
 
-vi.mock("@multica/core/paths", () => ({
+vi.mock("@workpal/core/paths", () => ({
   useCurrentWorkspace: () => ({ id: "workspace-1", name: "Acme" }),
 }));
 
-vi.mock("@multica/core/auth", () => ({
+vi.mock("@workpal/core/auth", () => ({
   useAuthStore: (select: (s: { user: { id: string } }) => unknown) =>
     select({ user: { id: "user-1" } }),
 }));
 
-vi.mock("@multica/core/workspace/queries", () => ({
+vi.mock("@workpal/core/workspace/queries", () => ({
   memberListOptions: (wsId: string) => ({ queryKey: ["members", wsId] }),
 }));
 
-vi.mock("@multica/core/properties", () => ({
+vi.mock("@workpal/core/properties", () => ({
   propertyListOptions: (wsId: string) => ({ queryKey: ["properties", wsId] }),
   useCreateProperty: () => ({ mutate: vi.fn(), isPending: false }),
   useUpdateProperty: () => ({ mutate: vi.fn(), isPending: false }),

@@ -19,9 +19,9 @@ import (
 	"sync"
 	"time"
 
-	"github.com/multica-ai/multica/server/internal/daemon/processtree"
-	"github.com/multica-ai/multica/server/internal/util"
-	"github.com/multica-ai/multica/server/pkg/redact"
+	"workpal.local/workpal/server/internal/daemon/processtree"
+	"workpal.local/workpal/server/internal/util"
+	"workpal.local/workpal/server/pkg/redact"
 )
 
 // gitEnv returns an environment for git subprocesses that contact remotes.
@@ -172,7 +172,7 @@ type CachedRepo struct {
 
 // Cache manages bare git clones for workspace repositories.
 type Cache struct {
-	root        string // base directory for all caches (e.g. ~/multica_workspaces/.repos)
+	root        string // base directory for all caches (e.g. ~/workpal_workspaces/.repos)
 	logger      *slog.Logger
 	renameCache func(string, string) error
 	// repoLocks maps bare repo path → dedicated mutex. Any mutating operation
@@ -191,7 +191,7 @@ type Cache struct {
 var ErrRepoBusy = errors.New("repository is busy")
 
 // ErrCheckoutPathTaken means the checkout's target path already holds a
-// Multica checkout of a different repository with the same directory name.
+// Workpal checkout of a different repository with the same directory name.
 // CreateWorktree reports it before touching that checkout.
 var ErrCheckoutPathTaken = errors.New("checkout path holds another repository")
 
@@ -524,7 +524,7 @@ func (c *Cache) prepareBarePathContext(ctx context.Context, workspaceID, repoURL
 // out in months. atime is worse: noatime is common on Linux and Windows
 // disables it by default. So the signal has to be written explicitly, at the
 // one place that means a repo was really used — CreateWorktree.
-const lastUsedFile = ".multica_last_used"
+const lastUsedFile = ".workpal_last_used"
 
 // MarkUsed records that this bare repo was just used for a checkout. Callers
 // must already hold the repo lock. Best-effort: a failed stamp only risks the
@@ -862,8 +862,8 @@ type WorktreeParams struct {
 	// inside WorkDir instead of a linked worktree whose gitdir lives under the
 	// shared cache. Codex tasks need this because workspace-write keeps a
 	// resolved external worktree gitdir read-only even when it is explicitly
-	// listed as a writable root — on Linux (multica-ai/multica#2925) and on the
-	// Windows native sandbox (multica-ai/multica#6449).
+	// listed as a writable root — on Linux (workpal-ai/workpal#2925) and on the
+	// Windows native sandbox (workpal-ai/workpal#6449).
 	IsolatedGitMetadata bool
 	// Fresh discards what an existing checkout at the target path holds —
 	// uncommitted changes, untracked files, its branch position — and starts
@@ -1153,9 +1153,9 @@ func (c *Cache) logCheckoutReady(msg, repoURL, baseRef string, result *WorktreeR
 }
 
 const (
-	isolatedCheckoutConfigKey   = "multica.checkout-mode"
+	isolatedCheckoutConfigKey   = "workpal.checkout-mode"
 	isolatedCheckoutConfigValue = "isolated"
-	isolatedCacheRemoteName     = "multica-cache"
+	isolatedCacheRemoteName     = "workpal-cache"
 )
 
 func (c *Cache) createOrUpdateIsolatedCheckoutContext(ctx context.Context, barePath, repoURL, checkoutPath, branchName, baseRef string, fresh bool) (*WorktreeResult, error) {
@@ -1223,7 +1223,7 @@ func (c *Cache) createOrUpdateIsolatedCheckoutContext(ctx context.Context, bareP
 		}
 	}
 	if _, err := os.Stat(checkoutPath); err == nil {
-		return nil, fmt.Errorf("checkout path already exists and is not a Multica isolated checkout: %s", checkoutPath)
+		return nil, fmt.Errorf("checkout path already exists and is not a Workpal isolated checkout: %s", checkoutPath)
 	} else if !os.IsNotExist(err) {
 		return nil, fmt.Errorf("stat checkout path: %w", err)
 	}
@@ -1235,7 +1235,7 @@ func (c *Cache) createOrUpdateIsolatedCheckoutContext(ctx context.Context, bareP
 	return &WorktreeResult{Path: checkoutPath, BranchName: actualBranch}, nil
 }
 
-// CheckoutBelongsTo reports whether path holds a Multica checkout of the
+// CheckoutBelongsTo reports whether path holds a Workpal checkout of the
 // repository cached at barePath: a linked worktree of that cache, or an
 // isolated checkout whose origin is cached there.
 func CheckoutBelongsTo(ctx context.Context, barePath, path string) bool {
@@ -1250,9 +1250,9 @@ func CheckoutBelongsTo(ctx context.Context, barePath, path string) bool {
 	return false
 }
 
-// otherRepoCheckout describes the repository a Multica checkout at path
+// otherRepoCheckout describes the repository a Workpal checkout at path
 // belongs to when that is not the one cached at barePath. It returns "" when
-// the checkout is this repository's, when path holds no Multica checkout, or
+// the checkout is this repository's, when path holds no Workpal checkout, or
 // when its owner cannot be read — the update path then fails on its own.
 func otherRepoCheckout(ctx context.Context, barePath, path string) string {
 	if isGitWorktree(path) {
@@ -2040,23 +2040,23 @@ func bareHeadBranchContext(ctx context.Context, barePath string) string {
 	return ref
 }
 
-// multicaHookMarker is a sentinel comment embedded in every prepare-commit-msg
+// workpalHookMarker is a sentinel comment embedded in every prepare-commit-msg
 // hook installed by the daemon. removeCoAuthoredByHookContext uses it to recognize
 // hooks it owns so it never deletes a hook installed by the user or another
 // tool. Do not change without bumping the recognition logic.
-const multicaHookMarker = "# multica:prepare-commit-msg:co-authored-by"
+const workpalHookMarker = "# workpal:prepare-commit-msg:co-authored-by"
 
 // daemonInstalledHookSignatures lists substrings that identify a
 // prepare-commit-msg hook as one the daemon installed. removeCoAuthoredByHookContext
-// treats a hook as Multica-owned if its content contains ANY of these
+// treats a hook as Workpal-owned if its content contains ANY of these
 // substrings. The list deliberately includes the legacy comment that the
-// daemon used before multicaHookMarker existed, so disabling the toggle on
+// daemon used before workpalHookMarker existed, so disabling the toggle on
 // existing installations still cleans up old hooks seeded by previous daemon
 // versions. Add to this list — never remove from it — so future tweaks to
 // prepareCommitMsgHook keep recognizing every previously-shipped variant.
 var daemonInstalledHookSignatures = []string{
-	multicaHookMarker,
-	"# Installed by the Multica daemon.",
+	workpalHookMarker,
+	"# Installed by the Workpal daemon.",
 }
 
 // coAuthoredByStateFile records the workspace's current Co-authored-by setting
@@ -2066,7 +2066,7 @@ var daemonInstalledHookSignatures = []string{
 // commits under the current value. Without it the decision would be frozen
 // into the hook file at checkout time (MUL-6921).
 const (
-	coAuthoredByStateFile     = ".multica_co_authored_by"
+	coAuthoredByStateFile     = ".workpal_co_authored_by"
 	coAuthoredByStateEnabled  = "1"
 	coAuthoredByStateDisabled = "0"
 )
@@ -2279,7 +2279,7 @@ func (c *Cache) reconcileHookAt(hooksDir, workspaceID string, enabled bool) erro
 }
 
 // prepareCommitMsgHook builds the prepare-commit-msg hook script that appends
-// a Co-authored-by trailer for the Multica Agent to every commit message.
+// a Co-authored-by trailer for the Workpal Agent to every commit message.
 //
 // The script re-reads statePath on every commit instead of trusting its own
 // presence on disk: the hook is installed in the git common directory and
@@ -2306,9 +2306,9 @@ fi
 `, shellSingleQuoted(filepath.ToSlash(statePath)))
 	}
 	return `#!/bin/sh
-# multica:prepare-commit-msg:co-authored-by
-# Multica: add Co-authored-by trailer for the Multica Agent.
-# Installed by the Multica daemon. Do not edit — it will be overwritten.
+# workpal:prepare-commit-msg:co-authored-by
+# Workpal: add Co-authored-by trailer for the Workpal Agent.
+# Installed by the Workpal daemon. Do not edit — it will be overwritten.
 
 COMMIT_MSG_FILE="$1"
 COMMIT_SOURCE="$2"
@@ -2318,7 +2318,7 @@ case "$COMMIT_SOURCE" in
   merge|squash) exit 0 ;;
 esac
 
-` + gate + `TRAILER="Co-authored-by: multica-agent <github@multica.ai>"
+` + gate + `TRAILER="Co-authored-by: workpal-agent <github@workpal.invalid>"
 
 # Don't add if already present.
 if grep -qF "$TRAILER" "$COMMIT_MSG_FILE"; then
@@ -2363,7 +2363,7 @@ func installCoAuthoredByHookContext(ctx context.Context, worktreePath, statePath
 // script, and this path rewrites hooks in repos with checkouts live on them.
 func writeHookFile(hookPath, contents string) error {
 	dir := filepath.Dir(hookPath)
-	tmp, err := os.CreateTemp(dir, ".multica-hook-*")
+	tmp, err := os.CreateTemp(dir, ".workpal-hook-*")
 	if err != nil {
 		return err
 	}
@@ -2389,7 +2389,7 @@ func writeHookFile(hookPath, contents string) error {
 }
 
 // isDaemonInstalledHook reports whether a prepare-commit-msg hook on disk was
-// installed by the Multica daemon (current or any previously released
+// installed by the Workpal daemon (current or any previously released
 // version). It returns false for hooks that don't carry any known daemon
 // signature, so a user-installed hook at the same path is left alone.
 func isDaemonInstalledHook(contents []byte) bool {

@@ -4,7 +4,7 @@ import (
 	"reflect"
 	"testing"
 
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
+	db "workpal.local/workpal/server/pkg/db/generated"
 )
 
 func TestIssueTableStatusOrder(t *testing.T) {

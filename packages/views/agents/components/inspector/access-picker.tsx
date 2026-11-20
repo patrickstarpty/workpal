@@ -1,17 +1,17 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { Globe, Loader2, Lock, Users } from "@multica/ui/icons";
+import { Globe, Loader2, Lock, Users } from "@workpal/ui/icons";
 import type {
   AgentInvocationTarget,
   AgentInvocationTargetInput,
   AgentPermissionMode,
   AgentVisibility,
   MemberWithUser,
-} from "@multica/core/types";
-import { effectiveAccessScope } from "@multica/core/agents";
-import { Button } from "@multica/ui/components/ui/button";
-import { Checkbox } from "@multica/ui/components/ui/checkbox";
+} from "@workpal/core/types";
+import { effectiveAccessScope } from "@workpal/core/agents";
+import { Button } from "@workpal/ui/components/ui/button";
+import { Checkbox } from "@workpal/ui/components/ui/checkbox";
 import { ActorAvatar } from "../../../common/actor-avatar";
 import { useT } from "../../../i18n";
 

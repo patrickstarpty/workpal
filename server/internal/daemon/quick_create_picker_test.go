@@ -44,8 +44,8 @@ func TestQuickCreatePickerEnvironment(t *testing.T) {
 	const (
 		agentID = "282bdf4e-b502-4ca9-8fae-0c842f973e63"
 		squadID = "aaaa1111-2222-3333-4444-555555555555"
-		typeKey = "MULTICA_QUICK_CREATE_DEFAULT_ASSIGNEE_TYPE"
-		idKey   = "MULTICA_QUICK_CREATE_DEFAULT_ASSIGNEE_ID"
+		typeKey = "WORKPAL_QUICK_CREATE_DEFAULT_ASSIGNEE_TYPE"
+		idKey   = "WORKPAL_QUICK_CREATE_DEFAULT_ASSIGNEE_ID"
 	)
 	for _, tc := range []struct {
 		name, prompt, squad, wantType, wantID string
@@ -56,7 +56,7 @@ func TestQuickCreatePickerEnvironment(t *testing.T) {
 		{name: "squad takes precedence over leader", prompt: "create work", squad: squadID, wantType: "squad", wantID: squadID},
 	} {
 		t.Run(tc.name, func(t *testing.T) {
-			env := taskMulticaEnvironment(Task{
+			env := taskWorkpalEnvironment(Task{
 				AgentID: agentID, QuickCreatePrompt: tc.prompt, SquadID: tc.squad,
 			}, "codex", "picker-agent", "mat_fixture", "/task/config", "/task/workspaces", "https://task.example", 19514, 0, "/task/tmp")
 			if tc.prompt == "" {

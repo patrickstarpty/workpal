@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { compareVersions, parseVersion } from "@multica/core/whats-new";
+import { compareVersions, parseVersion } from "@workpal/core/whats-new";
 import { WHATS_NEW_DECK_SINCE, WHATS_NEW_RELEASES } from "./releases";
 
 describe("WHATS_NEW_RELEASES", () => {

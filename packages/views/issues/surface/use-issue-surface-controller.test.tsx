@@ -5,16 +5,16 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { act, cleanup, renderHook, waitFor } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import type { ReactNode } from "react";
-import { setApiInstance } from "@multica/core/api";
-import type { ApiClient } from "@multica/core/api/client";
-import { agentTaskSnapshotKeys, workspaceWorkingAgentsKeys } from "@multica/core/agents/queries";
-import { issueUnreadKeys } from "@multica/core/issues/unread";
+import { setApiInstance } from "@workpal/core/api";
+import type { ApiClient } from "@workpal/core/api/client";
+import { agentTaskSnapshotKeys, workspaceWorkingAgentsKeys } from "@workpal/core/agents/queries";
+import { issueUnreadKeys } from "@workpal/core/issues/unread";
 import {
   getIssueSurfaceViewStore,
   pruneIssueSurfaceViewStates,
-} from "@multica/core/issues/stores/surface-view-store";
-import { ViewStoreProvider } from "@multica/core/issues/stores/view-store-context";
-import type { IssueRelationFilter } from "@multica/core/issues/stores/view-store";
+} from "@workpal/core/issues/stores/surface-view-store";
+import { ViewStoreProvider } from "@workpal/core/issues/stores/view-store-context";
+import type { IssueRelationFilter } from "@workpal/core/issues/stores/view-store";
 import type {
   Agent,
   AgentTask,
@@ -23,7 +23,7 @@ import type {
   ListIssuesParams,
   ListIssuesResponse,
   WorkspaceWorkingAgent,
-} from "@multica/core/types";
+} from "@workpal/core/types";
 import { useIssueSurfaceController } from "./use-issue-surface-controller";
 import { IssueTableExportIntegrityError } from "../components/table-view-model";
 import { statusTableMethodsFromLegacy } from "./status-table-test-api";
@@ -61,16 +61,16 @@ const batchUpdateMutateAsync = vi.hoisted(() => vi.fn());
 const batchDeleteMutateAsync = vi.hoisted(() => vi.fn());
 const openModal = vi.hoisted(() => vi.fn());
 
-vi.mock("@multica/core/hooks", () => ({
+vi.mock("@workpal/core/hooks", () => ({
   useWorkspaceId: () => "ws-1",
 }));
 
-vi.mock("@multica/core/auth", () => ({
+vi.mock("@workpal/core/auth", () => ({
   useAuthStore: (selector: (state: { user: { id: string } }) => unknown) =>
     selector({ user: { id: "user-1" } }),
 }));
 
-vi.mock("@multica/core/issues/mutations", () => ({
+vi.mock("@workpal/core/issues/mutations", () => ({
   useUpdateIssue: () => ({ mutate: updateIssueMutate, isPending: false }),
   useBatchUpdateIssues: () => ({
     mutateAsync: batchUpdateMutateAsync,
@@ -82,7 +82,7 @@ vi.mock("@multica/core/issues/mutations", () => ({
   }),
 }));
 
-vi.mock("@multica/core/modals", () => ({
+vi.mock("@workpal/core/modals", () => ({
   useModalStore: {
     getState: () => ({ open: openModal }),
   },

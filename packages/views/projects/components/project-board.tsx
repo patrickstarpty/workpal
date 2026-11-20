@@ -15,11 +15,11 @@ import {
   type DragEndEvent,
   type DragStartEvent,
 } from "@dnd-kit/core";
-import { Calendar } from "@multica/ui/icons";
-import { Skeleton } from "@multica/ui/components/ui/skeleton";
-import { cn } from "@multica/ui/lib/utils";
-import { useWorkspacePaths } from "@multica/core/paths";
-import type { Project, UpdateProjectRequest } from "@multica/core/types";
+import { Calendar } from "@workpal/ui/icons";
+import { Skeleton } from "@workpal/ui/components/ui/skeleton";
+import { cn } from "@workpal/ui/lib/utils";
+import { useWorkspacePaths } from "@workpal/core/paths";
+import type { Project, UpdateProjectRequest } from "@workpal/core/types";
 import { AppLink } from "../../navigation";
 import { ActorAvatar } from "../../common/actor-avatar";
 import { CardControl } from "../../common/card-control";

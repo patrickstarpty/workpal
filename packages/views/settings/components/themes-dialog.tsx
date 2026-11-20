@@ -3,21 +3,21 @@
 import { useCallback, useEffect, useRef, useState, type ReactNode } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
-import { ExternalLink, Search } from "@multica/ui/icons";
-import { Badge } from "@multica/ui/components/ui/badge";
-import { Button } from "@multica/ui/components/ui/button";
+import { ExternalLink, Search } from "@workpal/ui/icons";
+import { Badge } from "@workpal/ui/components/ui/badge";
+import { Button } from "@workpal/ui/components/ui/button";
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
-} from "@multica/ui/components/ui/dialog";
-import { Input } from "@multica/ui/components/ui/input";
-import { Skeleton } from "@multica/ui/components/ui/skeleton";
-import { Switch } from "@multica/ui/components/ui/switch";
-import { useConfigStore } from "@multica/core/config";
-import { useAppearanceStore, useInstalledThemesStore, type Theme } from "@multica/core/appearance";
+} from "@workpal/ui/components/ui/dialog";
+import { Input } from "@workpal/ui/components/ui/input";
+import { Skeleton } from "@workpal/ui/components/ui/skeleton";
+import { Switch } from "@workpal/ui/components/ui/switch";
+import { useConfigStore } from "@workpal/core/config";
+import { useAppearanceStore, useInstalledThemesStore, type Theme } from "@workpal/core/appearance";
 import {
   readStoreTheme,
   storeThemeScreenshotOptions,
@@ -26,7 +26,7 @@ import {
   themeStoreKeys,
   type StoreTheme,
   type StoreThemeMode,
-} from "@multica/core/appearance/theme-store";
+} from "@workpal/core/appearance/theme-store";
 import { useLocale, useT } from "../../i18n";
 import { SegmentedToggle } from "../../common/segmented-toggle";
 import { openExternal } from "../../platform/open-external";

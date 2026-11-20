@@ -72,7 +72,7 @@ async function openFilteredList(page: Page, width: number) {
         version: 2,
       }),
     );
-  }, `multica_agents_view:${slug}`);
+  }, `workpal_agents_view:${slug}`);
   await page.goto(`/${slug}/agents`, { waitUntil: "domcontentloaded" });
   await expect(page.getByRole("button", { name: "1 filter" })).toBeVisible({ timeout: 20000 });
 }

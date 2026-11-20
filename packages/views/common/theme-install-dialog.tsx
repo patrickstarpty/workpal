@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Badge } from "@multica/ui/components/ui/badge";
+import { Badge } from "@workpal/ui/components/ui/badge";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -11,13 +11,13 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@multica/ui/components/ui/alert-dialog";
+} from "@workpal/ui/components/ui/alert-dialog";
 import {
   useAppearanceStore,
   useInstalledThemesStore,
   type Theme,
   type ThemePackageResult,
-} from "@multica/core/appearance";
+} from "@workpal/core/appearance";
 import { useT } from "../i18n";
 
 export interface ThemeInstallDialog {

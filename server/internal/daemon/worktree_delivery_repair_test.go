@@ -12,8 +12,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/multica-ai/multica/server/internal/daemon/execenv"
-	"github.com/multica-ai/multica/server/pkg/agent"
+	"workpal.local/workpal/server/internal/daemon/execenv"
+	"workpal.local/workpal/server/pkg/agent"
 )
 
 // #9404: a worktree turn is told up front where its delivery has to end, so

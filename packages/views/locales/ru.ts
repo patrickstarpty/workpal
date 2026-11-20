@@ -1,4 +1,4 @@
-import type { LocaleResources } from "@multica/core/i18n";
+import type { LocaleResources } from "@workpal/core/i18n";
 import ruCommon from "./ru/common.json";
 import ruAuth from "./ru/auth.json";
 import ruSettings from "./ru/settings.json";

@@ -1,13 +1,13 @@
 "use client";
 
 import type { ReactNode } from "react";
-import { Archive, ArrowDown, Undo2 } from "@multica/ui/icons";
-import { Button } from "@multica/ui/components/ui/button";
-import { TooltipHint } from "@multica/ui/components/common/tooltip-hint";
-import { cn } from "@multica/ui/lib/utils";
-import { useIssueStatuses } from "@multica/core/issue-statuses/hooks";
-import type { KeptInboxRow } from "@multica/core/inbox/open-row";
-import type { InboxItem } from "@multica/core/types";
+import { Archive, ArrowDown, Undo2 } from "@workpal/ui/icons";
+import { Button } from "@workpal/ui/components/ui/button";
+import { TooltipHint } from "@workpal/ui/components/common/tooltip-hint";
+import { cn } from "@workpal/ui/lib/utils";
+import { useIssueStatuses } from "@workpal/core/issue-statuses/hooks";
+import type { KeptInboxRow } from "@workpal/core/inbox/open-row";
+import type { InboxItem } from "@workpal/core/types";
 import { useLocale, useT } from "../../i18n";
 import { ActionShortcutKeycaps } from "../../common/shortcut-keycaps";
 import { PAGE_GUTTER } from "../../layout/page-header";

@@ -8,8 +8,8 @@ import (
 	"time"
 
 	"github.com/jackc/pgx/v5/pgtype"
-	"github.com/multica-ai/multica/server/internal/dispatch"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
+	"workpal.local/workpal/server/internal/dispatch"
+	db "workpal.local/workpal/server/pkg/db/generated"
 )
 
 // TestDispatchFailReasonCode is the regression for Elon must-fix 2, case 1: a
@@ -123,7 +123,7 @@ func TestAgentReadinessVerdict(t *testing.T) {
 	// the user to reinstall a CLI that runs perfectly.
 	profile := runtimeVerdict(db.AgentRuntime{
 		Status:   "offline",
-		Metadata: []byte(`{"offline_reason":{"code":"dsh_profile","detail":"the Multica runtime profile is not installed","repair":{"package":"DeepSeek Harness runtime profile"}}}`),
+		Metadata: []byte(`{"offline_reason":{"code":"dsh_profile","detail":"the Workpal runtime profile is not installed","repair":{"package":"DeepSeek Harness runtime profile"}}}`),
 	}, db.Agent{OwnerID: ownerA})
 	if !profile.Blocked() || profile.Reason != dispatch.ReasonRuntimeProfileMissing {
 		t.Fatalf("missing DSH profile: got %+v, want blocked/runtime_profile_missing", profile)
@@ -236,7 +236,7 @@ func TestRuntimeUnusableNotice(t *testing.T) {
 func TestRuntimeProfileNoticeIncludesManualMigrationPath(t *testing.T) {
 	verdict := runtimeVerdict(db.AgentRuntime{
 		Status:   "offline",
-		Metadata: []byte(`{"offline_reason":{"code":"dsh_profile","detail":"the multica DSH profile needs manual migration","installing":false}}`),
+		Metadata: []byte(`{"offline_reason":{"code":"dsh_profile","detail":"the workpal DSH profile needs manual migration","installing":false}}`),
 	}, db.Agent{})
 	if !verdict.Blocked() || verdict.Reason != dispatch.ReasonRuntimeProfileMissing {
 		t.Fatalf("migration must refuse the trigger with the existing profile reason: %+v", verdict)
@@ -244,9 +244,9 @@ func TestRuntimeProfileNoticeIncludesManualMigrationPath(t *testing.T) {
 	notice := RuntimeUnusableNotice("Kit", verdict)
 	for _, required := range []string{
 		"Kit",
-		"https://github.com/multica-ai/dsh-multica-runtime",
+		"https://github.com/workpal-ai/dsh-workpal-runtime",
 		"`dsh.profile.bundles`",
-		"replace `dsh-profile-multica` with `@multica-ai/dsh-runtime`",
+		"replace `dsh-profile-workpal` with `@workpal-ai/dsh-runtime`",
 		"back up",
 		"will not migrate",
 		"core packages",

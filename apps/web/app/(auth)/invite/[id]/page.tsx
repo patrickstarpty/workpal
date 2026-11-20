@@ -3,10 +3,10 @@
 import { useEffect } from "react";
 import { useRouter, useParams } from "next/navigation";
 import { useQuery } from "@tanstack/react-query";
-import { useAuthStore } from "@multica/core/auth";
-import { paths } from "@multica/core/paths";
-import { workspaceListOptions } from "@multica/core/workspace/queries";
-import { InvitationsPage } from "@multica/views/invitations";
+import { useAuthStore } from "@workpal/core/auth";
+import { paths } from "@workpal/core/paths";
+import { workspaceListOptions } from "@workpal/core/workspace/queries";
+import { InvitationsPage } from "@workpal/views/invitations";
 
 export default function InviteAcceptPage() {
   const router = useRouter();

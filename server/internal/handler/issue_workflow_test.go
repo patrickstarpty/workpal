@@ -10,11 +10,11 @@ import (
 	"unicode/utf8"
 
 	"github.com/jackc/pgx/v5/pgtype"
-	"github.com/multica-ai/multica/server/internal/issueworkflow"
-	"github.com/multica-ai/multica/server/internal/service"
-	"github.com/multica-ai/multica/server/internal/testutil"
-	"github.com/multica-ai/multica/server/internal/util"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
+	"workpal.local/workpal/server/internal/issueworkflow"
+	"workpal.local/workpal/server/internal/service"
+	"workpal.local/workpal/server/internal/testutil"
+	"workpal.local/workpal/server/internal/util"
+	db "workpal.local/workpal/server/pkg/db/generated"
 )
 
 // Project workflow tests (MUL-7420).
@@ -566,7 +566,7 @@ func TestStatusChangeHandsOffOnDefaultProject(t *testing.T) {
 		t.Fatalf("handoff note = %q, want none: the brief rides the claim", tasks[0].HandoffNote.String)
 	}
 	brief := claimBriefForTest(t, issueID, tasks[0])
-	for _, want := range []string{"Implement it and open a PR.", "This project's workflow — Default (Workflow handoff project)", "Step done      → multica issue status"} {
+	for _, want := range []string{"Implement it and open a PR.", "This project's workflow — Default (Workflow handoff project)", "Step done      → workpal issue status"} {
 		if !strings.Contains(brief, want) {
 			t.Fatalf("claim brief is missing %q:\n%s", want, brief)
 		}
@@ -1010,7 +1010,7 @@ func TestClaimCarriesProjectWorkflow(t *testing.T) {
 		"This project's workflow — Default (Workflow claim project)",
 		"Implement it and open a PR.",
 		"   ← current",
-		"Step done      → multica issue status",
+		"Step done      → workpal issue status",
 	} {
 		if !strings.Contains(brief, want) {
 			t.Fatalf("assignee brief is missing %q:\n%s", want, brief)
@@ -1071,7 +1071,7 @@ func TestClaimExplainsMovedWorkflowStep(t *testing.T) {
 						t.Errorf("brief missing %q:\n%s", want, got.Brief)
 					}
 				}
-				for _, leak := range []string{"Implement it and open a PR.", "Your moves:", "multica issue status", "unless you are explicitly asked", "Before your run ends, either run"} {
+				for _, leak := range []string{"Implement it and open a PR.", "Your moves:", "workpal issue status", "unless you are explicitly asked", "Before your run ends, either run"} {
 					if strings.Contains(got.Brief, leak) {
 						t.Errorf("stale run received %q:\n%s", leak, got.Brief)
 					}
@@ -1098,7 +1098,7 @@ func TestClaimExplainsMovedWorkflowStep(t *testing.T) {
 	}
 	named := createTestWorkflow(t, "Continuation "+workflowTestSuffix(), "in_progress", "in_review")
 	setProjectWorkflow(t, projectID, map[string]any{"workflow_id": named.ID}).Want(http.StatusOK)
-	if brief := claimBriefForTest(t, issueID, task); !strings.Contains(brief, `bound to "waiting_for_merge"`) || strings.Contains(brief, "multica issue status") {
+	if brief := claimBriefForTest(t, issueID, task); !strings.Contains(brief, `bound to "waiting_for_merge"`) || strings.Contains(brief, "workpal issue status") {
 		t.Fatalf("named workflow without handoffs lost the step guard:\n%s", brief)
 	}
 	agentUpdateIssue(t, issueID, agentID, taskID, map[string]any{"status": "in_review"}).Want(http.StatusConflict)

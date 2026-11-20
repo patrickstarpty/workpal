@@ -1,25 +1,25 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import { ChevronRight, Download, HardDrive, History, Pencil } from "@multica/ui/icons";
-import type { AgentRuntime, MemberWithUser, Skill } from "@multica/core/types";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { resourceLabelsOptions } from "@multica/core/labels";
-import { runtimeDisplayLabel } from "@multica/core/runtimes";
-import { resolvePublicFileUrl } from "@multica/core/workspace/avatar-url";
-import { ActorAvatar } from "@multica/ui/components/common/actor-avatar";
+import { ChevronRight, Download, HardDrive, History, Pencil } from "@workpal/ui/icons";
+import type { AgentRuntime, MemberWithUser, Skill } from "@workpal/core/types";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { resourceLabelsOptions } from "@workpal/core/labels";
+import { runtimeDisplayLabel } from "@workpal/core/runtimes";
+import { resolvePublicFileUrl } from "@workpal/core/workspace/avatar-url";
+import { ActorAvatar } from "@workpal/ui/components/common/actor-avatar";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@multica/ui/components/ui/popover";
-import { Textarea } from "@multica/ui/components/ui/textarea";
+} from "@workpal/ui/components/ui/popover";
+import { Textarea } from "@workpal/ui/components/ui/textarea";
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
-} from "@multica/ui/components/ui/tooltip";
-import { cn } from "@multica/ui/lib/utils";
+} from "@workpal/ui/components/ui/tooltip";
+import { cn } from "@workpal/ui/lib/utils";
 import { ObjectPanelSection, ObjectProperty } from "../../layout/object-page";
 import { LabelChip } from "../../labels/label-chip";
 import { LabelPicker } from "../../issues/components/pickers/label-picker";

@@ -4,7 +4,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/multica-ai/multica/server/internal/daemon/execenv"
+	"workpal.local/workpal/server/internal/daemon/execenv"
 )
 
 func TestConvertSkillsForEnvPreservesBuiltinIdentity(t *testing.T) {
@@ -12,20 +12,20 @@ func TestConvertSkillsForEnvPreservesBuiltinIdentity(t *testing.T) {
 	for _, tc := range []struct {
 		name, source, id, wantBuiltin string
 	}{
-		{name: "builtin ref", source: "builtin", id: "builtin:multica-platform", wantBuiltin: "multica-platform"},
-		{name: "builtin without id", source: "builtin", wantBuiltin: "multica-platform"},
-		{name: "legacy builtin", wantBuiltin: "multica-platform"},
+		{name: "builtin ref", source: "builtin", id: "builtin:workpal-platform", wantBuiltin: "workpal-platform"},
+		{name: "builtin without id", source: "builtin", wantBuiltin: "workpal-platform"},
+		{name: "legacy builtin", wantBuiltin: "workpal-platform"},
 		{name: "workspace ref", source: "workspace", id: "e78e3700-7776-427a-a0bb-96a6f7b41af6"},
 		{name: "legacy workspace", id: "e78e3700-7776-427a-a0bb-96a6f7b41af6"},
 		{name: "explicit workspace without id", source: "workspace"},
-		{name: "plugin", source: "plugin", id: "plugin:multica-platform"},
+		{name: "plugin", source: "plugin", id: "plugin:workpal-platform"},
 		{name: "unknown source without id", source: "external"},
 	} {
 		t.Run(tc.name, func(t *testing.T) {
 			t.Parallel()
 			skill := SkillData{
-				ID: tc.id, Source: tc.source, Name: "multica-platform", Description: "Platform contracts.",
-				Content: "---\nname: multica-platform\n---\n\nInstructions.",
+				ID: tc.id, Source: tc.source, Name: "workpal-platform", Description: "Platform contracts.",
+				Content: "---\nname: workpal-platform\n---\n\nInstructions.",
 				Files:   []SkillFileData{{Path: "references/sub-issues.md", Content: "Sub-issue contracts."}},
 			}
 			want := []execenv.SkillContextForEnv{{

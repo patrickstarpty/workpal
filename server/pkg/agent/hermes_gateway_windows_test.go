@@ -15,7 +15,7 @@ import (
 )
 
 func TestHermesGatewayProcessHelper(t *testing.T) {
-	mode := os.Getenv("MULTICA_TEST_GATEWAY_HELPER")
+	mode := os.Getenv("WORKPAL_TEST_GATEWAY_HELPER")
 	if mode == "" {
 		return
 	}
@@ -31,7 +31,7 @@ func TestHermesGatewayProcessHelper(t *testing.T) {
 		t.Fatal(err)
 	}
 	child := exec.Command(exe, "-test.run=^TestHermesGatewayProcessHelper$")
-	child.Env = append(os.Environ(), "MULTICA_TEST_GATEWAY_HELPER=child")
+	child.Env = append(os.Environ(), "WORKPAL_TEST_GATEWAY_HELPER=child")
 	if err := child.Start(); err != nil {
 		t.Fatal(err)
 	}
@@ -64,7 +64,7 @@ func TestHermesGatewayWindowsCleanupOwnsDescendants(t *testing.T) {
 			defer cancel()
 			stop, err := StartHermesTaskGateway(ctx, Config{
 				ExecutablePath: exe, LaunchPrefix: []string{"-test.run=^TestHermesGatewayProcessHelper$", "--"},
-				CLIVersion: "0.22.6", Env: map[string]string{"HERMES_HOME": home, "MULTICA_TEST_GATEWAY_HELPER": "owner"},
+				CLIVersion: "0.22.6", Env: map[string]string{"HERMES_HOME": home, "WORKPAL_TEST_GATEWAY_HELPER": "owner"},
 			}, home)
 			if err != nil {
 				t.Fatal(err)

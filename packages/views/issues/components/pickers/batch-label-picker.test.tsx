@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from "vitest";
 import { act, fireEvent, screen, waitFor } from "@testing-library/react";
-import type { Issue, Label } from "@multica/core/types";
+import type { Issue, Label } from "@workpal/core/types";
 import { renderWithI18n } from "../../../test/i18n";
 import { BatchLabelPicker } from "./batch-label-picker";
 
@@ -8,7 +8,7 @@ const LABELS = vi.hoisted(() =>
   ["bug", "frontend", "docs"].map((name) => ({ id: `l-${name}`, name, color: "blue" })),
 );
 
-vi.mock("@multica/core/hooks", () => ({ useWorkspaceId: () => "ws-1" }));
+vi.mock("@workpal/core/hooks", () => ({ useWorkspaceId: () => "ws-1" }));
 vi.mock("@tanstack/react-query", async (importOriginal) => ({
   ...(await importOriginal<typeof import("@tanstack/react-query")>()),
   useQuery: () => ({ data: LABELS }),

@@ -8,7 +8,7 @@ import {
   THEME_VARIABLES,
   embedTokenDeclarations,
   isPlainEmbedValue,
-} from "@multica/core/appearance";
+} from "@workpal/core/appearance";
 
 /**
  * EMBED_TOKENS is the public contract for plugin surfaces and HTML blocks.

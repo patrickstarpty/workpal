@@ -5,7 +5,7 @@ import {
   ScrollRestorationProvider,
   type ScrollRestorationAdapter,
   type ScrollRestorationEntry,
-} from "@multica/views/platform";
+} from "@workpal/views/platform";
 
 /**
  * Web half of the MUL-4741 scroll-restoration protocol (desktop's half lives

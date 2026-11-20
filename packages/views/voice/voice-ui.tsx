@@ -1,13 +1,13 @@
 "use client";
 
 import { useEffect, useRef, type PointerEvent, type SyntheticEvent } from "react";
-import { AlertCircle, Check, Mic, MicOff, RotateCcw, X } from "@multica/ui/icons";
-import { Button } from "@multica/ui/components/ui/button";
-import { IconButton } from "@multica/ui/components/common/icon-button";
-import { ShimmerText } from "@multica/ui/components/common/shimmer-text";
-import { SubmitButton } from "@multica/ui/components/common/submit-button";
-import { cn } from "@multica/ui/lib/utils";
-import { createShortcutChord } from "@multica/core/shortcuts";
+import { AlertCircle, Check, Mic, MicOff, RotateCcw, X } from "@workpal/ui/icons";
+import { Button } from "@workpal/ui/components/ui/button";
+import { IconButton } from "@workpal/ui/components/common/icon-button";
+import { ShimmerText } from "@workpal/ui/components/common/shimmer-text";
+import { SubmitButton } from "@workpal/ui/components/common/submit-button";
+import { cn } from "@workpal/ui/lib/utils";
+import { createShortcutChord } from "@workpal/core/shortcuts";
 import {
   cancelVoice,
   noteVoiceFocus,
@@ -19,7 +19,7 @@ import {
   useVoiceMeter,
   useVoiceSettingsStore,
   type VoiceErrorKind,
-} from "@multica/core/voice";
+} from "@workpal/core/voice";
 import { ActionShortcutKeycaps, ShortcutKeycaps } from "../common/shortcut-keycaps";
 import { useT } from "../i18n";
 import { METER_INTERVAL_MS } from "./recorder";
@@ -293,7 +293,7 @@ export function VoiceHud({ voice }: { voice: ComposerVoice }) {
     <div className="pointer-events-none absolute bottom-full left-1/2 z-30 mb-3 -translate-x-1/2">
       <div
         role="status"
-        className="flex h-10 items-center gap-2.5 whitespace-nowrap rounded-full bg-multica-ink pl-3.5 pr-4 text-multica-paper shadow-[var(--floating-shadow)] animate-in fade-in zoom-in-95 slide-in-from-bottom-2"
+        className="flex h-10 items-center gap-2.5 whitespace-nowrap rounded-full bg-workpal-ink pl-3.5 pr-4 text-workpal-paper shadow-[var(--floating-shadow)] animate-in fade-in zoom-in-95 slide-in-from-bottom-2"
       >
         {phase === "recording" ? (
           <>

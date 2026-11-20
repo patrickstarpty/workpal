@@ -1,30 +1,30 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { AlertCircle, MoreHorizontal, Pencil, Plus, Server } from "@multica/ui/icons";
+import { AlertCircle, MoreHorizontal, Pencil, Plus, Server } from "@workpal/ui/icons";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { useAuthStore } from "@multica/core/auth";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { useWorkspacePaths } from "@multica/core/paths";
-import { agentTaskSnapshotOptions } from "@multica/core/agents";
-import { runtimeProfileListOptions } from "@multica/core/runtimes";
-import { runtimeKeys, runtimeListOptions } from "@multica/core/runtimes/queries";
-import { useWSEvent } from "@multica/core/realtime";
+import { useAuthStore } from "@workpal/core/auth";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { useWorkspacePaths } from "@workpal/core/paths";
+import { agentTaskSnapshotOptions } from "@workpal/core/agents";
+import { runtimeProfileListOptions } from "@workpal/core/runtimes";
+import { runtimeKeys, runtimeListOptions } from "@workpal/core/runtimes/queries";
+import { useWSEvent } from "@workpal/core/realtime";
 import {
   agentListOptions,
   memberListOptions,
-} from "@multica/core/workspace/queries";
-import type { MemberWithUser } from "@multica/core/types";
-import { Button } from "@multica/ui/components/ui/button";
-import { IconButton } from "@multica/ui/components/common/icon-button";
+} from "@workpal/core/workspace/queries";
+import type { MemberWithUser } from "@workpal/core/types";
+import { Button } from "@workpal/ui/components/ui/button";
+import { IconButton } from "@workpal/ui/components/common/icon-button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@multica/ui/components/ui/dropdown-menu";
-import { Skeleton } from "@multica/ui/components/ui/skeleton";
-import { cn } from "@multica/ui/lib/utils";
+} from "@workpal/ui/components/ui/dropdown-menu";
+import { Skeleton } from "@workpal/ui/components/ui/skeleton";
+import { cn } from "@workpal/ui/lib/utils";
 import { ActorAvatar } from "../../common/actor-avatar";
 import { CollectionPageState } from "../../layout/collection-page";
 import {
@@ -64,7 +64,7 @@ import {
 } from "./shared";
 import { useT, useTimeAgo } from "../../i18n";
 
-const LAYOUT_ID = "multica_runtime_detail_layout";
+const LAYOUT_ID = "workpal_runtime_detail_layout";
 
 export interface RuntimeDetailPageProps {
   /** A machine id, or a legacy runtime id that locates its machine. */

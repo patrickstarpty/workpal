@@ -5,37 +5,37 @@ import {
   Zap, Play, Clock, Plus, Trash2, CheckCircle2, XCircle, Loader2, Pencil,
   Ban, ChevronDown, ChevronRight, MoreHorizontal, Link2, ArrowUpRight, FilePlus2,
   Webhook, RotateCw, Server, FileQuestion, FileText, Square, Archive,
-} from "@multica/ui/icons";
+} from "@workpal/ui/icons";
 import { useQuery } from "@tanstack/react-query";
-import { autopilotDetailOptions, autopilotRunsOptions, autopilotRunOptions } from "@multica/core/autopilots/queries";
-import { projectDetailOptions } from "@multica/core/projects/queries";
+import { autopilotDetailOptions, autopilotRunsOptions, autopilotRunOptions } from "@workpal/core/autopilots/queries";
+import { projectDetailOptions } from "@workpal/core/projects/queries";
 import {
   useUpdateAutopilot,
   useDeleteAutopilot,
   useCreateAutopilotTrigger,
   useDeleteAutopilotTrigger,
   useRotateAutopilotTriggerWebhookToken,
-} from "@multica/core/autopilots/mutations";
-import { buildAutopilotWebhookUrl } from "@multica/core/autopilots";
-import { api } from "@multica/core/api";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { useWorkspacePaths } from "@multica/core/paths";
-import { useActorName } from "@multica/core/workspace/hooks";
-import { memberListOptions } from "@multica/core/workspace/queries";
+} from "@workpal/core/autopilots/mutations";
+import { buildAutopilotWebhookUrl } from "@workpal/core/autopilots";
+import { api } from "@workpal/core/api";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { useWorkspacePaths } from "@workpal/core/paths";
+import { useActorName } from "@workpal/core/workspace/hooks";
+import { memberListOptions } from "@workpal/core/workspace/queries";
 import { useNavigation, AppLink } from "../../navigation";
 import { ActorAvatar } from "../../common/actor-avatar";
-import { Skeleton } from "@multica/ui/components/ui/skeleton";
-import { Button, buttonVariants } from "@multica/ui/components/ui/button";
-import { IconButton } from "@multica/ui/components/common/icon-button";
-import { Switch } from "@multica/ui/components/ui/switch";
-import { cn } from "@multica/ui/lib/utils";
-import { copyText } from "@multica/ui/lib/clipboard";
+import { Skeleton } from "@workpal/ui/components/ui/skeleton";
+import { Button, buttonVariants } from "@workpal/ui/components/ui/button";
+import { IconButton } from "@workpal/ui/components/common/icon-button";
+import { Switch } from "@workpal/ui/components/ui/switch";
+import { cn } from "@workpal/ui/lib/utils";
+import { copyText } from "@workpal/ui/lib/clipboard";
 import { toast } from "sonner";
 import {
   Dialog,
   DialogContent,
   DialogTitle,
-} from "@multica/ui/components/ui/dialog";
+} from "@workpal/ui/components/ui/dialog";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -44,7 +44,7 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@multica/ui/components/ui/dropdown-menu";
+} from "@workpal/ui/components/ui/dropdown-menu";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -54,7 +54,7 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@multica/ui/components/ui/alert-dialog";
+} from "@workpal/ui/components/ui/alert-dialog";
 import { ScheduleEditor } from "./schedule-editor/schedule-editor";
 import { WebhookUrlField } from "./webhook-url-field";
 import { WebhookEventFilterSummary } from "./webhook-event-filter-section";
@@ -70,8 +70,8 @@ import type {
   AutopilotExecutionMode,
   AutopilotRun,
   AutopilotTrigger,
-} from "@multica/core/types";
-import type { AgentTask } from "@multica/core/types/agent";
+} from "@workpal/core/types";
+import type { AgentTask } from "@workpal/core/types/agent";
 import { ReadonlyContent } from "../../editor";
 import { TranscriptButton } from "../../common/task-transcript";
 import { AutopilotDialog } from "./autopilot-dialog";
@@ -105,7 +105,7 @@ import {
 import { CollectionPageState } from "../../layout/collection-page";
 import { useT } from "../../i18n";
 
-const LAYOUT_ID = "multica_autopilot_detail_layout";
+const LAYOUT_ID = "workpal_autopilot_detail_layout";
 
 const TRIGGER_ICON: Record<AutopilotTrigger["kind"], typeof Clock> = {
   schedule: Clock,

@@ -9,13 +9,13 @@ import {
   ShieldCheck,
   Trash2,
   X,
-} from "@multica/ui/icons";
-import { Button } from "@multica/ui/components/ui/button";
-import { IconButton } from "@multica/ui/components/common/icon-button";
-import { Kbd } from "@multica/ui/components/ui/kbd";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@multica/ui/components/ui/select";
-import { Switch } from "@multica/ui/components/ui/switch";
-import { cn } from "@multica/ui/lib/utils";
+} from "@workpal/ui/icons";
+import { Button } from "@workpal/ui/components/ui/button";
+import { IconButton } from "@workpal/ui/components/common/icon-button";
+import { Kbd } from "@workpal/ui/components/ui/kbd";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@workpal/ui/components/ui/select";
+import { Switch } from "@workpal/ui/components/ui/switch";
+import { cn } from "@workpal/ui/lib/utils";
 import { useStoryEnv } from "../env";
 import { CommentComposer } from "../composer/surfaces";
 import { VoiceProvider } from "../composer/voice-provider";

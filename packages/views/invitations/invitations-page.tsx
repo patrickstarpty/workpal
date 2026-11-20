@@ -2,28 +2,28 @@
 
 import { useState, type ReactNode } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { api } from "@multica/core/api";
+import { api } from "@workpal/core/api";
 import {
   myInvitationListOptions,
   workspaceListOptions,
-} from "@multica/core/workspace/queries";
+} from "@workpal/core/workspace/queries";
 import {
   paths,
   resolvePostAuthDestination,
   useHasOnboarded,
-} from "@multica/core/paths";
-import type { Invitation } from "@multica/core/types";
+} from "@workpal/core/paths";
+import type { Invitation } from "@workpal/core/types";
 import { AppLink } from "../navigation";
 import { useLogout } from "../auth";
 import { DragStrip } from "../platform";
 import { useT } from "../i18n";
 import { WorkspaceAvatar } from "../workspace/workspace-avatar";
 import { useInvitationActions } from "./use-invitation-actions";
-import { Button } from "@multica/ui/components/ui/button";
-import { Card, CardContent } from "@multica/ui/components/ui/card";
-import { Skeleton } from "@multica/ui/components/ui/skeleton";
-import { cn } from "@multica/ui/lib/utils";
-import { ArrowLeft, LogOut, Mail, Users } from "@multica/ui/icons";
+import { Button } from "@workpal/ui/components/ui/button";
+import { Card, CardContent } from "@workpal/ui/components/ui/card";
+import { Skeleton } from "@workpal/ui/components/ui/skeleton";
+import { cn } from "@workpal/ui/lib/utils";
+import { ArrowLeft, LogOut, Mail, Users } from "@workpal/ui/icons";
 
 export interface InvitationsPageProps {
   /**

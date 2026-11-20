@@ -202,7 +202,7 @@ func TestClassifyRules(t *testing.T) {
 		//     as digits.
 		{"429 in hex id not capacity", "local_directory worktree: refusing to record branch agent/a/b: " +
 			"the delivered commit a806f863 no longer contains e8574f2b, the commit this turn started from; " +
-			"the task worktree is preserved at /Users/u/multica_workspaces_x/ws-0000c429f4b/b-1/worktree", ReasonAgentUnknown},
+			"the task worktree is preserved at /Users/u/workpal_workspaces_x/ws-0000c429f4b/b-1/worktree", ReasonAgentUnknown},
 		{"403 in hex id not auth", "refusing to write /users/u/ws-c403f1b9/worktree", ReasonAgentUnknown},
 		{"401 in hex id not auth", "artifact stored at /tmp/run-00be401d7c/output.log", ReasonAgentUnknown},
 		{"402 in hex id not quota", "cache dir /var/cache/ws-0000d402aa9f removed", ReasonAgentUnknown},

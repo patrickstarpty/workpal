@@ -1,4 +1,4 @@
-import type { LocaleResources } from "@multica/core/i18n";
+import type { LocaleResources } from "@workpal/core/i18n";
 import esCommon from "./es/common.json";
 import esAuth from "./es/auth.json";
 import esSettings from "./es/settings.json";

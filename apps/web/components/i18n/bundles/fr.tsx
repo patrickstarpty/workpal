@@ -1,6 +1,6 @@
 "use client";
 
-import localeResources from "@multica/views/locales/fr";
+import localeResources from "@workpal/views/locales/fr";
 import type { LocaleBundleProps } from "../locale-bundle";
 
 const resources = { "fr": localeResources };

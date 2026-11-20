@@ -2,10 +2,10 @@
 
 import { useState, type ComponentProps } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { projectMoveMayHandOff, resolveProjectWorkflow, useIssueWorkflows } from "@multica/core/issue-workflows";
-import { projectListOptions } from "@multica/core/projects/queries";
-import type { Project, UpdateIssueRequest } from "@multica/core/types";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { projectMoveMayHandOff, resolveProjectWorkflow, useIssueWorkflows } from "@workpal/core/issue-workflows";
+import { projectListOptions } from "@workpal/core/projects/queries";
+import type { Project, UpdateIssueRequest } from "@workpal/core/types";
 import { WorkflowHandoffConfirmDialog } from "../../workflows/handoff-confirm-dialog";
 import { ProjectPicker } from "./project-picker";
 

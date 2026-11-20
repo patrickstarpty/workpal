@@ -2,14 +2,14 @@
 
 import { useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { AlertCircle, Loader2 } from "@multica/ui/icons";
-import { pluginMCPToolsOptions, useApprovePluginMCPTools } from "@multica/core/plugins";
-import type { PluginHook, PluginMCPTool } from "@multica/core/types";
-import { Alert, AlertDescription, AlertTitle } from "@multica/ui/components/ui/alert";
-import { Badge } from "@multica/ui/components/ui/badge";
-import { Button } from "@multica/ui/components/ui/button";
-import { Checkbox } from "@multica/ui/components/ui/checkbox";
-import { Skeleton } from "@multica/ui/components/ui/skeleton";
+import { AlertCircle, Loader2 } from "@workpal/ui/icons";
+import { pluginMCPToolsOptions, useApprovePluginMCPTools } from "@workpal/core/plugins";
+import type { PluginHook, PluginMCPTool } from "@workpal/core/types";
+import { Alert, AlertDescription, AlertTitle } from "@workpal/ui/components/ui/alert";
+import { Badge } from "@workpal/ui/components/ui/badge";
+import { Button } from "@workpal/ui/components/ui/button";
+import { Checkbox } from "@workpal/ui/components/ui/checkbox";
+import { Skeleton } from "@workpal/ui/components/ui/skeleton";
 import { toast } from "sonner";
 import { useT } from "../i18n";
 

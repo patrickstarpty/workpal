@@ -7,7 +7,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/multica-ai/multica/server/internal/testutil"
+	"workpal.local/workpal/server/internal/testutil"
 )
 
 type environmentControlFixture struct {
@@ -238,9 +238,9 @@ func TestEnvironmentCommandsAreRefusedWhereTheyCannotWork(t *testing.T) {
 	f.commandAs(t, testUserID, "stop", vite.ID).Want(http.StatusAccepted)
 
 	f.report(t, true, webEnvironment("exited"), detectedEnvironment(),
-		map[string]any{"key": "detected:app", "source": "detected", "kind": "app", "name": "Multica Canary", "state": "running"},
+		map[string]any{"key": "detected:app", "source": "detected", "kind": "app", "name": "Workpal Canary", "state": "running"},
 		map[string]any{"key": "config:desktop", "source": "config", "kind": "app", "name": "desktop", "state": "running"})
-	f.commandAs(t, testUserID, "stop", f.env(t, "Multica Canary").ID).Want(http.StatusConflict)
+	f.commandAs(t, testUserID, "stop", f.env(t, "Workpal Canary").ID).Want(http.StatusConflict)
 	// A desktop app the repository declares is supervised like any declared environment.
 	f.commandAs(t, testUserID, "stop", f.env(t, "desktop").ID).Want(http.StatusAccepted)
 
@@ -279,7 +279,7 @@ func TestEnvironmentControlPermissions(t *testing.T) {
 	// Membership for every issue route is enforced by RequireWorkspaceMember;
 	// acting on a machine checks it again.
 	t.Run("someone outside the workspace", func(t *testing.T) {
-		outsider := dbfx.User(t, "env-control-outsider", fmt.Sprintf("env-control-outsider-%d@multica.test", time.Now().UnixNano()))
+		outsider := dbfx.User(t, "env-control-outsider", fmt.Sprintf("env-control-outsider-%d@workpal.test", time.Now().UnixNano()))
 		f.commandAs(t, outsider, "stop", web.ID).Want(http.StatusNotFound)
 	})
 
@@ -355,11 +355,11 @@ func TestEnvironmentStartFromDeclaredConfig(t *testing.T) {
 			ReportTaskEnvironmentConfigsRequest{Environments: envs}), "taskId", f.taskID)
 		return testutil.Call(t, testHandler.ReportTaskEnvironmentConfigs, req)
 	}
-	reportConfigs(DeclaredEnvironment{Repo: "multica", Name: "BAD NAME", Start: "x"}).Want(http.StatusBadRequest)
+	reportConfigs(DeclaredEnvironment{Repo: "workpal", Name: "BAD NAME", Start: "x"}).Want(http.StatusBadRequest)
 	reportConfigs(DeclaredEnvironment{Repo: "../etc", Name: "web", Start: "x"}).Want(http.StatusBadRequest)
 	reportConfigs(
-		DeclaredEnvironment{Repo: "multica", Name: "web", Label: "Web app", Start: "make dev-web"},
-		DeclaredEnvironment{Repo: "multica", Name: "api", Label: "API", Start: "make server"},
+		DeclaredEnvironment{Repo: "workpal", Name: "web", Label: "Web app", Start: "make dev-web"},
+		DeclaredEnvironment{Repo: "workpal", Name: "api", Label: "API", Start: "make server"},
 	).Want(http.StatusOK)
 
 	list := f.list(t, testUserID)
@@ -371,16 +371,16 @@ func TestEnvironmentStartFromDeclaredConfig(t *testing.T) {
 		req := withURLParam(newRequestAs(userID, http.MethodPost, "/api/issues/"+f.issueID+"/environments/start", body), "id", f.issueID)
 		return testutil.Call(t, testHandler.StartIssueEnvironment, req)
 	}
-	start(testUserID, StartIssueEnvironmentRequest{TaskID: f.taskID, Repo: "multica", Name: "worker"}).Want(http.StatusNotFound)
-	start(plainMember(t, "env-start-member"), StartIssueEnvironmentRequest{TaskID: f.taskID, Repo: "multica", Name: "web"}).Want(http.StatusForbidden)
+	start(testUserID, StartIssueEnvironmentRequest{TaskID: f.taskID, Repo: "workpal", Name: "worker"}).Want(http.StatusNotFound)
+	start(plainMember(t, "env-start-member"), StartIssueEnvironmentRequest{TaskID: f.taskID, Repo: "workpal", Name: "web"}).Want(http.StatusForbidden)
 
 	var queued IssueEnvironmentCommandResponse
-	start(testUserID, StartIssueEnvironmentRequest{TaskID: f.taskID, Repo: "multica", Name: "web"}).Want(http.StatusAccepted).JSON(&queued)
+	start(testUserID, StartIssueEnvironmentRequest{TaskID: f.taskID, Repo: "workpal", Name: "web"}).Want(http.StatusAccepted).JSON(&queued)
 	if pending := f.list(t, testUserID).PendingStarts; len(pending) != 1 || pending[0].Name != "web" || pending[0].RuntimeID != f.runtimeID {
 		t.Fatalf("pending starts = %+v", pending)
 	}
 	cmds := f.claim(t)
-	if len(cmds) != 1 || cmds[0].Action != "start" || cmds[0].TaskID != f.taskID || cmds[0].Repo != "multica" || cmds[0].Name != "web" {
+	if len(cmds) != 1 || cmds[0].Action != "start" || cmds[0].TaskID != f.taskID || cmds[0].Repo != "workpal" || cmds[0].Name != "web" {
 		t.Fatalf("claimed start = %+v", cmds)
 	}
 
@@ -395,14 +395,14 @@ func TestEnvironmentStartFailuresStayVisibleUntilRetried(t *testing.T) {
 	f := newEnvironmentControlFixture(t)
 	req := withURLParam(newOwnerDaemonRequest(http.MethodPost, "/api/daemon/tasks/"+f.taskID+"/environment-configs",
 		ReportTaskEnvironmentConfigsRequest{Environments: []DeclaredEnvironment{
-			{Repo: "multica", Name: "web", Start: "make dev-web"},
-			{Repo: "multica", Name: "api", Start: "make server"},
+			{Repo: "workpal", Name: "web", Start: "make dev-web"},
+			{Repo: "workpal", Name: "api", Start: "make server"},
 		}}), "taskId", f.taskID)
 	testutil.Call(t, testHandler.ReportTaskEnvironmentConfigs, req).Want(http.StatusOK)
 	start := func(name string) IssueEnvironmentCommandResponse {
 		var queued IssueEnvironmentCommandResponse
 		req := withURLParam(newRequestAs(testUserID, http.MethodPost, "/api/issues/"+f.issueID+"/environments/start",
-			StartIssueEnvironmentRequest{TaskID: f.taskID, Repo: "multica", Name: name}), "id", f.issueID)
+			StartIssueEnvironmentRequest{TaskID: f.taskID, Repo: "workpal", Name: name}), "id", f.issueID)
 		testutil.Call(t, testHandler.StartIssueEnvironment, req).Want(http.StatusAccepted).JSON(&queued)
 		return queued
 	}
@@ -458,11 +458,11 @@ func TestEnvironmentStartFailuresStayVisibleUntilRetried(t *testing.T) {
 func TestEnvironmentReportsKeepTheirRepository(t *testing.T) {
 	f := newEnvironmentControlFixture(t)
 	web := webEnvironment("running")
-	web["repo"] = "multica"
+	web["repo"] = "workpal"
 	detected := detectedEnvironment()
-	detected["repo"] = "multica"
+	detected["repo"] = "workpal"
 	f.report(t, true, web, detected)
-	if got := f.env(t, "web").Repo; got != "multica" {
+	if got := f.env(t, "web").Repo; got != "workpal" {
 		t.Fatalf("declared environment repo = %q", got)
 	}
 	if got := f.env(t, "vite").Repo; got != "" {

@@ -45,7 +45,7 @@ export function exportTheme(theme: Theme, target: ThemeExportTarget): ArchiveFil
   const header = [
     `/* ${target.name}, started from ${theme.name}.`,
     " * Variables, anchors and the manifest are in beta and may change without notice:",
-    " * https://github.com/multica-ai/multica/blob/main/docs/theming.md */",
+    " * https://code-host.invalid/workpal/blob/main/docs/theming.md */",
   ].join("\n");
   const css = [header, themeCssSource(theme)].filter(Boolean).join("\n\n");
   return [

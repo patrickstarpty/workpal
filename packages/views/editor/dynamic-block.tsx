@@ -35,13 +35,13 @@ import {
   RotateCw,
   TriangleAlert,
   Workflow,
-} from "@multica/ui/icons";
-import { Button } from "@multica/ui/components/ui/button";
-import { IconButton } from "@multica/ui/components/common/icon-button";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@multica/ui/components/ui/tabs";
-import { Spinner } from "@multica/ui/components/ui/spinner";
-import { copyText } from "@multica/ui/lib/clipboard";
-import { cn } from "@multica/ui/lib/utils";
+} from "@workpal/ui/icons";
+import { Button } from "@workpal/ui/components/ui/button";
+import { IconButton } from "@workpal/ui/components/common/icon-button";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@workpal/ui/components/ui/tabs";
+import { Spinner } from "@workpal/ui/components/ui/spinner";
+import { copyText } from "@workpal/ui/lib/clipboard";
+import { cn } from "@workpal/ui/lib/utils";
 import { useT } from "../i18n";
 import { CodeBlockStatic } from "./code-block-static";
 

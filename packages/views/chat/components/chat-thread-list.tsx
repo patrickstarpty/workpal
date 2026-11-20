@@ -16,28 +16,28 @@ import {
   PinOff,
   Square,
   Trash2,
-} from "@multica/ui/icons";
-import { cn } from "@multica/ui/lib/utils";
-import { copyText } from "@multica/ui/lib/clipboard";
+} from "@workpal/ui/icons";
+import { cn } from "@workpal/ui/lib/utils";
+import { copyText } from "@workpal/ui/lib/clipboard";
 import { toast } from "sonner";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { paths, useWorkspaceSlug } from "@multica/core/paths";
-import { useWorkspacePresenceMap } from "@multica/core/agents";
-import { api } from "@multica/core/api";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { paths, useWorkspaceSlug } from "@workpal/core/paths";
+import { useWorkspacePresenceMap } from "@workpal/core/agents";
+import { api } from "@workpal/core/api";
 import {
   pendingChatTasksOptions,
   chatKeys,
   myChatWakeupsOptions,
   sortChatSessions,
-} from "@multica/core/chat/queries";
+} from "@workpal/core/chat/queries";
 import {
   useDeleteChatSession,
   useSetChatSessionArchived,
   useSetChatSessionPinned,
   useUpdateChatSession,
-} from "@multica/core/chat/mutations";
-import { useChatStore } from "@multica/core/chat";
-import type { Agent, ChatSession, PendingChatTasksResponse } from "@multica/core/types";
+} from "@workpal/core/chat/mutations";
+import { useChatStore } from "@workpal/core/chat";
+import type { Agent, ChatSession, PendingChatTasksResponse } from "@workpal/core/types";
 import { ActorAvatar } from "../../common/actor-avatar";
 import { DeferredTooltip } from "../../common/deferred-tooltip";
 import {
@@ -48,8 +48,8 @@ import {
 } from "../../common/row-actions-menu";
 import { CLOSED_ROW_MENU, shouldOpenRowMenu, type RowMenuState } from "../../common/point-menu";
 import { resolveClickIntent, useOptionalNavigation } from "../../navigation";
-import { createLogger } from "@multica/core/logger";
-import { removeChatMessageFromCaches } from "@multica/core/realtime";
+import { createLogger } from "@workpal/core/logger";
+import { removeChatMessageFromCaches } from "@workpal/core/realtime";
 import { useLocale, useT } from "../../i18n";
 import { SessionHistoryList } from "./session-history-list";
 import { SessionRenameInput } from "./session-rename-input";

@@ -2,16 +2,16 @@
 
 import { useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { isAgentRuntimeBound, useWorkspacePresenceMap, type AgentAvailability } from "@multica/core/agents";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { canAssignAgentToIssue, useCurrentMember } from "@multica/core/permissions";
-import { runtimeDisplayLabel, runtimeListOptions } from "@multica/core/runtimes";
+import { isAgentRuntimeBound, useWorkspacePresenceMap, type AgentAvailability } from "@workpal/core/agents";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { canAssignAgentToIssue, useCurrentMember } from "@workpal/core/permissions";
+import { runtimeDisplayLabel, runtimeListOptions } from "@workpal/core/runtimes";
 import {
   agentListOptions,
   memberListOptions,
   squadListOptions,
-} from "@multica/core/workspace/queries";
-import type { Agent, MemberWithUser, Squad } from "@multica/core/types";
+} from "@workpal/core/workspace/queries";
+import type { Agent, MemberWithUser, Squad } from "@workpal/core/types";
 
 export interface AgentEntry {
   agent: Agent;

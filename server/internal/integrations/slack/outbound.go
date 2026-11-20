@@ -12,12 +12,12 @@ import (
 	"github.com/jackc/pgx/v5/pgtype"
 	"github.com/slack-go/slack"
 
-	"github.com/multica-ai/multica/server/internal/events"
-	"github.com/multica-ai/multica/server/internal/integrations/channel"
-	"github.com/multica-ai/multica/server/internal/integrations/channel/engine"
-	"github.com/multica-ai/multica/server/internal/util"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
-	"github.com/multica-ai/multica/server/pkg/protocol"
+	"workpal.local/workpal/server/internal/events"
+	"workpal.local/workpal/server/internal/integrations/channel"
+	"workpal.local/workpal/server/internal/integrations/channel/engine"
+	"workpal.local/workpal/server/internal/util"
+	db "workpal.local/workpal/server/pkg/db/generated"
+	"workpal.local/workpal/server/pkg/protocol"
 )
 
 // outboundQueries is the slice of generated queries the Slack outbound
@@ -94,7 +94,7 @@ func (o *Outbound) processEvent(ctx context.Context, e events.Event) error {
 	// Only bound, non-empty completions reach here, so classify the task origin
 	// before loading credentials or sending. Web/mobile direct-chat tasks can
 	// reuse a session that originated in Slack, but their replies belong only in
-	// Multica. Outbound delivery fails closed when the origin cannot be
+	// Workpal. Outbound delivery fails closed when the origin cannot be
 	// established. Sealed channel tasks own an input batch just like direct
 	// tasks, so the discriminator is the immutable channel_ingested provenance
 	// of that batch, not chat_input_task_id presence (which #5645 originally

@@ -6,8 +6,8 @@ import (
 	"slices"
 	"testing"
 
-	"github.com/multica-ai/multica/server/internal/issuestatus"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
+	"workpal.local/workpal/server/internal/issuestatus"
+	db "workpal.local/workpal/server/pkg/db/generated"
 )
 
 func TestProjectTerminalIssueStatusKeysFallsBackToCanonicalKeys(t *testing.T) {

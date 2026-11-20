@@ -15,8 +15,8 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@multica/ui/components/ui/dropdown-menu";
-import { Popover, PopoverContent, PopoverTrigger } from "@multica/ui/components/ui/popover";
+} from "@workpal/ui/components/ui/dropdown-menu";
+import { Popover, PopoverContent, PopoverTrigger } from "@workpal/ui/components/ui/popover";
 import { AppLink } from "../navigation/app-link";
 import { NavigationProvider } from "../navigation/context";
 import type { NavigationAdapter } from "../navigation/types";

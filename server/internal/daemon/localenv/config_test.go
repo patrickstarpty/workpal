@@ -13,7 +13,7 @@ func TestParseConfigDefaults(t *testing.T) {
 	cfg, err := ParseConfig([]byte(`
 [environments.web]
 label = "Web app"
-start = "pnpm dev --port $MULTICA_PORT"
+start = "pnpm dev --port $WORKPAL_PORT"
 
 [environments.worker]
 start = "pnpm worker"
@@ -24,7 +24,7 @@ ttl = "2h"
 		t.Fatalf("ParseConfig: %v", err)
 	}
 	web := cfg.Environments["web"]
-	if web.URL != "http://localhost:$MULTICA_PORT" || web.Ready != web.URL || web.TTL != DefaultTTL || web.Label != "Web app" {
+	if web.URL != "http://localhost:$WORKPAL_PORT" || web.Ready != web.URL || web.TTL != DefaultTTL || web.Label != "Web app" {
 		t.Fatalf("web = %+v", web)
 	}
 	worker := cfg.Environments["worker"]
@@ -58,7 +58,7 @@ func TestParseConfigRejects(t *testing.T) {
 
 func writeConfig(t *testing.T, repo, body string) {
 	t.Helper()
-	if err := os.MkdirAll(filepath.Join(repo, ".multica"), 0o755); err != nil {
+	if err := os.MkdirAll(filepath.Join(repo, ".workpal"), 0o755); err != nil {
 		t.Fatal(err)
 	}
 	if err := os.WriteFile(filepath.Join(repo, filepath.FromSlash(ConfigPath)), []byte(body), 0o644); err != nil {
@@ -98,7 +98,7 @@ func TestFindConfigWalksUpToTheBoundary(t *testing.T) {
 	}
 }
 
-// The repository's own environments file is what agents working on Multica
+// The repository's own environments file is what agents working on Workpal
 // start, so a typo in it should fail here rather than in an agent's run.
 func TestRepositoryConfigParses(t *testing.T) {
 	data, err := os.ReadFile(filepath.Join("..", "..", "..", "..", filepath.FromSlash(ConfigPath)))

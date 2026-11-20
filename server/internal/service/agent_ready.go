@@ -6,8 +6,8 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/multica-ai/multica/server/internal/dispatch"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
+	"workpal.local/workpal/server/internal/dispatch"
+	db "workpal.local/workpal/server/pkg/db/generated"
 )
 
 // AgentAvailability is what a readiness check concluded, in the vocabulary the
@@ -111,7 +111,7 @@ func RuntimeBlockedNeedsNotice(code dispatch.ReasonCode) bool {
 //
 // The lookup carries the connection to read on plus the source label the
 // runtime read is attributed to (MUL-6884), so each admission path stays
-// distinguishable in multica_agent_runtime_lookup_total.
+// distinguishable in workpal_agent_runtime_lookup_total.
 //
 // err is non-nil only on DB lookup failure for the runtime row. Callers that
 // treat a transient DB error as "do not skip" (the autopilot admission gate)
@@ -293,21 +293,21 @@ func RuntimeUnusableNotice(agentName string, verdict AgentVerdict) string {
 }
 
 // runtimeProfileMissingNotice explains a runtime whose CLI runs but whose
-// Multica runtime profile is absent or needs manual migration.
+// Workpal runtime profile is absent or needs manual migration.
 //
-// No fenced command, deliberately. The install is `dsh plugin --profile multica
+// No fenced command, deliberately. The install is `dsh plugin --profile workpal
 // add <bundle>`, and <bundle> is the operator's own choice of package,
-// directory or tarball — Multica's bridge is not on a public registry yet
-// (multica#6936). Rendering that line in a code block presents a placeholder as
+// directory or tarball — Workpal's bridge is not on a public registry yet
+// (workpal#6936). Rendering that line in a code block presents a placeholder as
 // something to copy and run, which is the shape of instruction people paste
 // verbatim and then report as broken. Naming the two ways to supply a real
 // bundle, and pointing at the docs that list them, is the honest version.
 func runtimeProfileMissingNotice(name string) string {
 	return fmt.Sprintf(
-		"%s could not start: the DeepSeek Harness CLI is installed on that machine, but its `multica` runtime profile is missing or needs migration, so this trigger was not queued.\n\n"+
-			"Build a compatible `@multica-ai/dsh-runtime` bundle from [multica-ai/dsh-multica-runtime](https://github.com/multica-ai/dsh-multica-runtime#local-development), following its README's DSH version requirements. For a missing profile, install the built directory or tarball with `dsh plugin --profile multica add`, or set `MULTICA_DSH_PROFILE_BUNDLE` for the daemon to install it.\n\n"+
-			"For an existing bridge configuration, back up the profile and install the compatible bundle manually. In `dsh.profile.bundles`, replace `dsh-profile-multica` with `@multica-ai/dsh-runtime`; if both are listed, remove `dsh-profile-multica`. If the first-party runtime is only in `dependencies`, add it to `dsh.profile.bundles`. `MULTICA_DSH_PROFILE_BUNDLE` will not migrate an existing bridge configuration.\n\n"+
-			"If the profile probe names incompatible DSH core packages after an application upgrade, back up the profile manifest and review its profile-local core dependency overrides. Use core packages compatible with the installed application while retaining required independent plugins. Check the daemon's profile diagnostic for the package versions and manifest location, then rerun `dsh --profile multica --probe`.\n\n"+
+		"%s could not start: the DeepSeek Harness CLI is installed on that machine, but its `workpal` runtime profile is missing or needs migration, so this trigger was not queued.\n\n"+
+			"Build a compatible `@workpal-ai/dsh-runtime` bundle from [workpal-ai/dsh-workpal-runtime](https://github.com/workpal-ai/dsh-workpal-runtime#local-development), following its README's DSH version requirements. For a missing profile, install the built directory or tarball with `dsh plugin --profile workpal add`, or set `WORKPAL_DSH_PROFILE_BUNDLE` for the daemon to install it.\n\n"+
+			"For an existing bridge configuration, back up the profile and install the compatible bundle manually. In `dsh.profile.bundles`, replace `dsh-profile-workpal` with `@workpal-ai/dsh-runtime`; if both are listed, remove `dsh-profile-workpal`. If the first-party runtime is only in `dependencies`, add it to `dsh.profile.bundles`. `WORKPAL_DSH_PROFILE_BUNDLE` will not migrate an existing bridge configuration.\n\n"+
+			"If the profile probe names incompatible DSH core packages after an application upgrade, back up the profile manifest and review its profile-local core dependency overrides. Use core packages compatible with the installed application while retaining required independent plugins. Check the daemon's profile diagnostic for the package versions and manifest location, then rerun `dsh --profile workpal --probe`.\n\n"+
 			"The runtime registers on its own within a couple of minutes after that; trigger the agent again then.",
 		name,
 	)

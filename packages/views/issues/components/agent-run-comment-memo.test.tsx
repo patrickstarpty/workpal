@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from "vitest";
 import { forwardRef, type ReactNode } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import type { AgentTask, TimelineEntry } from "@multica/core/types";
+import type { AgentTask, TimelineEntry } from "@workpal/core/types";
 import { renderWithI18n } from "../../test/i18n";
 
 // MUL-9426: the timeline rebuilds an agent reply's `commentProps` on every
@@ -24,7 +24,7 @@ vi.mock("./inline-comment-run", async () => {
   };
 });
 
-vi.mock("@multica/core/api", () => ({
+vi.mock("@workpal/core/api", () => ({
   api: { uploadFile: vi.fn() },
   dispatchReasonCode: () => undefined,
   errorCode: () => undefined,
@@ -38,7 +38,7 @@ vi.mock("../../navigation", () => ({
   }),
 }));
 
-vi.mock("@multica/core/workspace/hooks", () => ({
+vi.mock("@workpal/core/workspace/hooks", () => ({
   useActorName: () => ({ getActorName: () => "Ada" }),
 }));
 

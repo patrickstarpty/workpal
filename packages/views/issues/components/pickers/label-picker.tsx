@@ -2,11 +2,11 @@
 
 import { useLayoutEffect, useMemo, useRef, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { Tag, Plus, Settings2 } from "@multica/ui/icons";
+import { Tag, Plus, Settings2 } from "@workpal/ui/icons";
 import { toast } from "sonner";
-import type { Label } from "@multica/core/types";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { useWorkspacePaths } from "@multica/core/paths";
+import type { Label } from "@workpal/core/types";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { useWorkspacePaths } from "@workpal/core/paths";
 import {
   labelListOptions,
   issueLabelsOptions,
@@ -16,7 +16,7 @@ import {
   useAttachResourceLabel,
   useDetachResourceLabel,
   useCreateLabel,
-} from "@multica/core/labels";
+} from "@workpal/core/labels";
 import { LabelChip } from "../../../labels/label-chip";
 import type { LabelScope } from "../../../labels/label-manager";
 import { useNavigation } from "../../../navigation";
@@ -26,7 +26,7 @@ import {
   PickerEmpty,
 } from "./property-picker";
 import { useT } from "../../../i18n";
-import { paletteColor } from "@multica/core/appearance";
+import { paletteColor } from "@workpal/core/appearance";
 
 interface LabelPickerProps {
   /**

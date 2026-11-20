@@ -10,18 +10,18 @@ import {
   type Ref,
 } from "react";
 import { useDefaultLayout, usePanelRef } from "react-resizable-panels";
-import { ChevronRight, PanelRight, type IconComponent } from "@multica/ui/icons";
-import { Button } from "@multica/ui/components/ui/button";
-import { IconButton } from "@multica/ui/components/common/icon-button";
-import { TruncatedTooltip } from "@multica/ui/components/common/truncated-tooltip";
+import { ChevronRight, PanelRight, type IconComponent } from "@workpal/ui/icons";
+import { Button } from "@workpal/ui/components/ui/button";
+import { IconButton } from "@workpal/ui/components/common/icon-button";
+import { TruncatedTooltip } from "@workpal/ui/components/common/truncated-tooltip";
 import {
   ResizableHandle,
   ResizablePanel,
   ResizablePanelGroup,
-} from "@multica/ui/components/ui/resizable";
-import { Sheet, SheetContent } from "@multica/ui/components/ui/sheet";
-import { useIsMobile } from "@multica/ui/hooks/use-mobile";
-import { cn } from "@multica/ui/lib/utils";
+} from "@workpal/ui/components/ui/resizable";
+import { Sheet, SheetContent } from "@workpal/ui/components/ui/sheet";
+import { useIsMobile } from "@workpal/ui/hooks/use-mobile";
+import { cn } from "@workpal/ui/lib/utils";
 import { ActionShortcutKeycaps } from "../common/shortcut-keycaps";
 import { useT } from "../i18n";
 import {

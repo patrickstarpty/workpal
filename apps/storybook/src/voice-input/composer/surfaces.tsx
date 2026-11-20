@@ -1,7 +1,7 @@
 import { useRef, useState, type ReactNode } from "react";
-import { Bot, ChevronRight, Mic, Paperclip } from "@multica/ui/icons";
-import { IconButton } from "@multica/ui/components/common/icon-button";
-import { cn } from "@multica/ui/lib/utils";
+import { Bot, ChevronRight, Mic, Paperclip } from "@workpal/ui/icons";
+import { IconButton } from "@workpal/ui/components/common/icon-button";
+import { cn } from "@workpal/ui/lib/utils";
 import { CHAT_SCRIPT, COMMENT_SCRIPT, REPLY_SCRIPT, type VoiceScript } from "../copy";
 import { useStoryEnv } from "../env";
 import { AddButton, AgentPicker, ComposerSurface, DraftEditor, SendButton } from "../chat-frame";
@@ -155,7 +155,7 @@ function Avatar({ kind, className }: { kind: "agent" | "human"; className?: stri
   ) : (
     <span
       className={cn(
-        "flex size-6 shrink-0 items-center justify-center rounded-full bg-multica-ink text-micro font-semibold text-multica-paper",
+        "flex size-6 shrink-0 items-center justify-center rounded-full bg-workpal-ink text-micro font-semibold text-workpal-paper",
         className,
       )}
     >
@@ -250,7 +250,7 @@ export function IssuePage({ width = 720, height = 760, className }: { width?: nu
       style={{ width, height }}
     >
       <div className="flex items-center gap-1.5 border-b px-6 py-2.5 text-caption text-muted-foreground">
-        <span>Multica</span>
+        <span>Workpal</span>
         <ChevronRight className="size-3" />
         <span className="font-medium text-foreground">{copy.issueKey}</span>
       </div>

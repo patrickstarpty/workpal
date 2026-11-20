@@ -1,17 +1,17 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import { renderHook, act, waitFor } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { buildIssueStatusCatalog } from "@multica/core/issue-statuses";
-import { statusCategoryOfKey } from "@multica/core/issues";
-import type { Issue, IssueStatusEntry } from "@multica/core/types";
-import * as clipboard from "@multica/ui/lib/clipboard";
+import { buildIssueStatusCatalog } from "@workpal/core/issue-statuses";
+import { statusCategoryOfKey } from "@workpal/core/issues";
+import type { Issue, IssueStatusEntry } from "@workpal/core/types";
+import * as clipboard from "@workpal/ui/lib/clipboard";
 
-vi.mock("@multica/core/hooks", () => ({
+vi.mock("@workpal/core/hooks", () => ({
   useWorkspaceId: () => "ws-1",
 }));
 
 const mockOpenModal = vi.fn();
-vi.mock("@multica/core/modals", () => ({
+vi.mock("@workpal/core/modals", () => ({
   useModalStore: Object.assign(
     (selector?: any) => {
       const state = { open: mockOpenModal };
@@ -22,7 +22,7 @@ vi.mock("@multica/core/modals", () => ({
 }));
 
 const mockAuthState = { user: { id: "user-1" }, isAuthenticated: true };
-vi.mock("@multica/core/auth", () => ({
+vi.mock("@workpal/core/auth", () => ({
   useAuthStore: Object.assign(
     (selector?: any) => (selector ? selector(mockAuthState) : mockAuthState),
     { getState: () => mockAuthState },
@@ -36,7 +36,7 @@ const pinListRef: { value: Array<{ item_type: string; item_id: string }> } = {
 };
 const mockCreatePinMutate = vi.fn();
 const mockDeletePinMutate = vi.fn();
-vi.mock("@multica/core/pins", () => ({
+vi.mock("@workpal/core/pins", () => ({
   pinListOptions: () => ({
     queryKey: ["pins", "ws-1", "user-1"],
     queryFn: () => Promise.resolve(pinListRef.value),
@@ -46,7 +46,7 @@ vi.mock("@multica/core/pins", () => ({
 }));
 
 const mockUpdateMutate = vi.fn();
-vi.mock("@multica/core/issues/mutations", () => ({
+vi.mock("@workpal/core/issues/mutations", () => ({
   useUpdateIssue: () => ({ mutate: mockUpdateMutate }),
 }));
 
@@ -86,13 +86,13 @@ function statusEntry(overrides: Partial<IssueStatusEntry>): IssueStatusEntry {
     ...overrides,
   };
 }
-vi.mock("@multica/core/issue-statuses/hooks", () => ({
+vi.mock("@workpal/core/issue-statuses/hooks", () => ({
   useIssueStatuses: () => buildIssueStatusCatalog(catalogEntries),
 }));
 
-vi.mock("@multica/core/paths", async () => {
-  const actual = await vi.importActual<typeof import("@multica/core/paths")>(
-    "@multica/core/paths",
+vi.mock("@workpal/core/paths", async () => {
+  const actual = await vi.importActual<typeof import("@workpal/core/paths")>(
+    "@workpal/core/paths",
   );
   return {
     ...actual,
@@ -109,7 +109,7 @@ vi.mock("../../../navigation", () => ({
     hash: "",
     back: vi.fn(),
     replace: vi.fn(),
-    getShareableUrl: (p: string) => `https://app.multica.com${p}`,
+    getShareableUrl: (p: string) => `https://workpal.invalid${p}`,
   }),
 }));
 
@@ -284,7 +284,7 @@ describe("useIssueActions", () => {
     });
 
     expect(navigator.clipboard.writeText).toHaveBeenCalledWith(
-      "https://app.multica.com/test/issues/TES-1",
+      "https://workpal.invalid/test/issues/TES-1",
     );
   });
 
@@ -299,7 +299,7 @@ describe("useIssueActions", () => {
     });
 
     expect(navigator.clipboard.writeText).toHaveBeenCalledWith(
-      "https://app.multica.com/test/issues/issue-1",
+      "https://workpal.invalid/test/issues/issue-1",
     );
   });
 
@@ -311,7 +311,7 @@ describe("useIssueActions", () => {
     });
 
     expect(navigator.clipboard.writeText).toHaveBeenCalledWith(
-      "[TES-1 Example](https://app.multica.com/test/issues/TES-1)",
+      "[TES-1 Example](https://workpal.invalid/test/issues/TES-1)",
     );
   });
 
@@ -335,7 +335,7 @@ describe("useIssueActions", () => {
     });
 
     expect(navigator.clipboard.writeText).toHaveBeenCalledWith(
-      "https://app.multica.com/test/issues/TES-1#comment-comment-7",
+      "https://workpal.invalid/test/issues/TES-1#comment-comment-7",
     );
   });
 

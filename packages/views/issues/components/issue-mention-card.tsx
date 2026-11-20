@@ -2,7 +2,7 @@
 
 import { AppLink } from "../../navigation";
 import { yieldsToTextMenu } from "../../common/point-menu";
-import { useWorkspacePaths } from "@multica/core/paths";
+import { useWorkspacePaths } from "@workpal/core/paths";
 import { IssueChip, useChipIssue } from "./issue-chip";
 import { IssueHoverCard } from "./issue-hover-card";
 import { useT } from "../../i18n";

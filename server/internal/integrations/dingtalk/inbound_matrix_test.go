@@ -5,7 +5,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/multica-ai/multica/server/internal/integrations/channel"
+	"workpal.local/workpal/server/internal/integrations/channel"
 )
 
 type dingTalkMatrixMessageKind string
@@ -160,11 +160,11 @@ func dingTalkMatrixBotQuote(t *testing.T, kind dingTalkMatrixMessageKind) dingTa
 			"msgType":    "interactiveCard",
 			"msgId":      "quoted-bot-message",
 			"senderId":   "bot-user-id",
-			"senderNick": "Multica",
+			"senderNick": "Workpal",
 			"content":    map[string]any{"cardContent": cardContent},
 		},
 		messageID: "quoted-bot-message",
-		sender:    "Multica",
+		sender:    "Workpal",
 		body:      "[quoted content unavailable]",
 	}
 }

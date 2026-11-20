@@ -5,7 +5,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/multica-ai/multica/server/internal/util"
+	"workpal.local/workpal/server/internal/util"
 	"gopkg.in/yaml.v3"
 )
 
@@ -62,13 +62,13 @@ func TestBuiltinSkillsConformToTemplate(t *testing.T) {
 
 	for _, skill := range skills {
 		t.Run(skill.Name, func(t *testing.T) {
-			// The multica- prefix is the platform namespace. Pointers name
+			// The workpal- prefix is the platform namespace. Pointers name
 			// built-ins by their bare name on the assumption that no
 			// workspace skill shares one; nothing reserves the prefix
 			// server-side yet, and that gap is accepted rather than handled
 			// (see builtinSlug).
-			if !strings.HasPrefix(skill.Name, "multica-") {
-				t.Errorf("skill name %q must carry the multica- prefix", skill.Name)
+			if !strings.HasPrefix(skill.Name, "workpal-") {
+				t.Errorf("skill name %q must carry the workpal- prefix", skill.Name)
 			}
 
 			fm, body, ok := splitFrontmatter(skill.Content)
@@ -111,8 +111,8 @@ func TestBuiltinSkillsConformToTemplate(t *testing.T) {
 			// daemon's global permission mode means this grants no privilege
 			// the agent did not already have. Revisit if per-reference
 			// declarations ever exist.
-			if got := strings.TrimSpace(fm["allowed-tools"]); !strings.Contains(got, "Bash(multica *)") {
-				t.Errorf("allowed-tools = %q, want access to the Multica CLI", got)
+			if got := strings.TrimSpace(fm["allowed-tools"]); !strings.Contains(got, "Bash(workpal *)") {
+				t.Errorf("allowed-tools = %q, want access to the Workpal CLI", got)
 			}
 
 			for _, f := range skill.Files {
@@ -260,7 +260,7 @@ func TestPlatformSkillRoutingTableMatchesItsReferences(t *testing.T) {
 //
 // The runtime brief is assembled by the DAEMON, so deploying a backend does not
 // rewrite an installed daemon's copy of it. A daemon released before the merge
-// still tells its agent to "read the `multica-working-on-issues` skill" — a
+// still tells its agent to "read the `workpal-working-on-issues` skill" — a
 // name this server no longer ships — and backend upgrades do not force a daemon
 // upgrade, so that window is open-ended. Such a daemon gets a redirect stub;
 // a current one gets nothing extra, which is what lets the stub retire itself.
@@ -269,7 +269,7 @@ func TestPlatformSkillRoutingTableMatchesItsReferences(t *testing.T) {
 // will rot against references/issues.md, silently, on exactly the installs that
 // cannot be updated from here.
 func TestLegacyRedirectsFollowTheDaemonsBrief(t *testing.T) {
-	const legacy = "multica-working-on-issues"
+	const legacy = "workpal-working-on-issues"
 	svc := &TaskService{}
 
 	current := svc.BuiltinSkills("", false)
@@ -289,11 +289,11 @@ func TestLegacyRedirectsFollowTheDaemonsBrief(t *testing.T) {
 	}
 
 	// Mika's scoping is orthogonal to the redirect: both dimensions compose.
-	if !named(svc.BuiltinSkills(MikaSystemKey, true), "multica-onboarding") {
-		t.Errorf("Mika on a pre-merge daemon lost multica-onboarding")
+	if !named(svc.BuiltinSkills(MikaSystemKey, true), "workpal-onboarding") {
+		t.Errorf("Mika on a pre-merge daemon lost workpal-onboarding")
 	}
-	if named(svc.BuiltinSkills("", true), "multica-onboarding") {
-		t.Errorf("the redirect path leaked multica-onboarding to an ordinary agent")
+	if named(svc.BuiltinSkills("", true), "workpal-onboarding") {
+		t.Errorf("the redirect path leaked workpal-onboarding to an ordinary agent")
 	}
 
 	var stub AgentSkillData
@@ -464,9 +464,9 @@ func TestPlatformSkillCoversPlatformContracts(t *testing.T) {
 		{
 			file: "references/issues.md",
 			want: []string{
-				"multica issue pull-requests <issue-id> --output json",
+				"workpal issue pull-requests <issue-id> --output json",
 				"Default for code-changing issue work",
-				"open or update a PR before posting the final Multica issue comment",
+				"open or update a PR before posting the final Workpal issue comment",
 				"This is a default, not",
 				"put a routable issue key in the PR **title**",
 				"body links nothing",
@@ -511,7 +511,7 @@ func TestPlatformSkillCoversPlatformContracts(t *testing.T) {
 				// answer from reading as an empty one, and the advisory line
 				// is a negative safety boundary: an agent that reads these as
 				// a lock will skip the coordination they exist to prompt.
-				"multica issue runs <issue-id> --siblings --output json",
+				"workpal issue runs <issue-id> --siblings --output json",
 				"capped at 20",
 				"Nothing here reserves an issue or serialises anything",
 				// #8008: the read path for typed properties. The flag, the
@@ -542,8 +542,8 @@ func TestPlatformSkillCoversPlatformContracts(t *testing.T) {
 				// Per-turn workflow the runtime brief owns; duplicating it here
 				// is how the two drift apart.
 				"Start from the trigger, not from memory",
-				"multica issue comment list <issue-id> --thread <trigger-comment-id>",
-				"multica issue comment add <issue-id> --parent <trigger-comment-id>",
+				"workpal issue comment list <issue-id> --thread <trigger-comment-id>",
+				"workpal issue comment add <issue-id> --parent <trigger-comment-id>",
 			},
 		},
 		{
@@ -556,7 +556,7 @@ func TestPlatformSkillCoversPlatformContracts(t *testing.T) {
 				"--status backlog",
 				"`--stage <N>`",
 				"wakes the parent assignee when a stage",
-				"multica issue status <child-id> todo",
+				"workpal issue status <child-id> todo",
 				// MUL-8441: the brief's split rule is the short form of this
 				// section; the child-side half depends on the [Parent issue]
 				// block the daemon renders.
@@ -577,7 +577,7 @@ func TestPlatformSkillCoversPlatformContracts(t *testing.T) {
 				"A fenced `diff` of agent instructions cannot invoke",
 				"paste it into",
 				"Prose mentions in blockquotes still count",
-				"multica workspace member list --output json",
+				"workpal workspace member list --output json",
 				"enqueues a run for that agent",
 				"enqueues NOTHING",
 				"[@all](mention://all/all)",
@@ -599,15 +599,15 @@ func TestPlatformSkillCoversPlatformContracts(t *testing.T) {
 				"`instructions` is the runtime behavior contract",
 				"`conversation_starters`",
 				"`avatar_url` → a random `emoji:<glyph>`",
-				"multica agent create --name <name> --runtime-id <runtime-id>",
+				"workpal agent create --name <name> --runtime-id <runtime-id>",
 				"`model` is a first-class persisted column",
 				"custom_env",
 				"Never put credentials or other secrets in `custom_args`",
 				"--custom-env-stdin",
 				"--custom-env-file",
-				"multica agent skills add <agent-id> --skill-ids <skill-id> --output json",
-				"multica agent skills list <agent-id> --output json",
-				"multica agent get <agent-id> --output json",
+				"workpal agent skills add <agent-id> --skill-ids <skill-id> --output json",
+				"workpal agent skills list <agent-id> --output json",
+				"workpal agent get <agent-id> --output json",
 				"255",
 			},
 			notWant: []string{
@@ -628,7 +628,7 @@ func TestPlatformSkillCoversPlatformContracts(t *testing.T) {
 				"A squad is not an agent",
 				"squad's `leader_id` agent",
 				"squad members are not automatically fanned out",
-				"multica squad member set-role",
+				"workpal squad member set-role",
 				"mention://squad/<squad-id>",
 				"recording squad activity",
 				// The debugging entry point must stay a bounded two-step read
@@ -645,7 +645,7 @@ func TestPlatformSkillCoversPlatformContracts(t *testing.T) {
 			notWant: []string{
 				// MUL-5696: no unbounded comment pull. Both shapes contradict
 				// the brief's "two bounded reads, never one bulk pull".
-				"multica issue comment list <issue-id> --output json",
+				"workpal issue comment list <issue-id> --output json",
 				"--recent 10",
 			},
 		},
@@ -655,8 +655,8 @@ func TestPlatformSkillCoversPlatformContracts(t *testing.T) {
 				"An autopilot is not an agent",
 				"create_issue",
 				"run_only",
-				"multica autopilot trigger-add <autopilot-id> --kind schedule",
-				"multica autopilot trigger <autopilot-id> --output json",
+				"workpal autopilot trigger-add <autopilot-id> --kind schedule",
+				"workpal autopilot trigger <autopilot-id> --output json",
 				"Do not run `trigger`",
 				"webhook tokens",
 				"{{date}}",
@@ -670,9 +670,9 @@ func TestPlatformSkillCoversPlatformContracts(t *testing.T) {
 			file: "references/runtimes.md",
 			want: []string{
 				"the daemon polls and claims the task",
-				"multica runtime list --output json",
-				"multica repo checkout <url>",
-				"MULTICA_DAEMON_PORT",
+				"workpal runtime list --output json",
+				"workpal repo checkout <url>",
+				"WORKPAL_DAEMON_PORT",
 				"resource_ref.ref",
 				"github_repo",
 				"local_directory",
@@ -687,11 +687,11 @@ func TestPlatformSkillCoversPlatformContracts(t *testing.T) {
 		{
 			file: "references/environments.md",
 			want: []string{
-				".multica/environments.toml",
-				"multica env start <name>",
+				".workpal/environments.toml",
+				"workpal env start <name>",
 				// The port block is what keeps parallel runs from colliding;
 				// an agent that hard-codes a port breaks the second run.
-				"`MULTICA_PORT` through `MULTICA_PORT+9`",
+				"`WORKPAL_PORT` through `WORKPAL_PORT+9`",
 				// A detaching start command ends the environment at once and
 				// leaves its work unreachable by stop.
 				"`docker compose up -d`",
@@ -706,11 +706,11 @@ func TestPlatformSkillCoversPlatformContracts(t *testing.T) {
 			file: "references/projects.md",
 			want: []string{
 				"Projects are durable context containers",
-				".multica/project/resources.json",
-				"multica project resource list <project-id> --output json",
-				"multica project resource add <project-id> --type github_repo --url <github-url> --output json",
-				"multica project resource add <project-id> --type github_repo --url <github-url> --ref <branch-or-sha> --output json",
-				"multica project resource add <project-id> --type local_directory",
+				".workpal/project/resources.json",
+				"workpal project resource list <project-id> --output json",
+				"workpal project resource add <project-id> --type github_repo --url <github-url> --output json",
+				"workpal project resource add <project-id> --type github_repo --url <github-url> --ref <branch-or-sha> --output json",
+				"workpal project resource add <project-id> --type local_directory",
 				"Project resources are durable and affect future tasks",
 				"github_repo.resource_ref.url",
 				"resource_ref.ref",
@@ -726,19 +726,19 @@ func TestPlatformSkillCoversPlatformContracts(t *testing.T) {
 				"docs/theming.md",
 				"scripts/theme-check.mjs",
 				"Deliver only when it reports **0 errors**",
-				"~/Library/Application Support/Multica/themes",
-				"%APPDATA%\\Multica\\themes",
-				"~/.config/Multica/themes",
+				"~/Library/Application Support/Workpal/themes",
+				"%APPDATA%\\Workpal\\themes",
+				"~/.config/Workpal/themes",
 				"does not switch to it",
 				"every save to the theme in use applies",
 				"**Import theme**",
-				"multica attachment upload <path>",
+				"workpal attachment upload <path>",
 			},
 		},
 		{
 			file: "references/skill-import.md",
 			want: []string{
-				"multica skill import --url <url> --output json",
+				"workpal skill import --url <url> --output json",
 				"/api/skills/import",
 				"clawhub.ai",
 				"skills.sh",
@@ -753,15 +753,15 @@ func TestPlatformSkillCoversPlatformContracts(t *testing.T) {
 				"409",
 				"existing_skill",
 				"legacy",
-				"multica skill list --output json",
+				"workpal skill list --output json",
 				"npx skills add",
-				"multica agent skills add <agent-id> --skill-ids <skill-id> --output json",
-				"multica agent skills list <agent-id> --output json",
+				"workpal agent skills add <agent-id> --skill-ids <skill-id> --output json",
+				"workpal agent skills list <agent-id> --output json",
 				"replace-all",
 				"`set` is the replacement path",
 			},
 			notWant: []string{
-				"multica agent skills set <agent-id> --skill-ids <skill-id>",
+				"workpal agent skills set <agent-id> --skill-ids <skill-id>",
 				"merge the new skill id with the existing ids",
 			},
 		},
@@ -896,7 +896,7 @@ func TestPlatformSkillTeachesTheParserContract(t *testing.T) {
 // Shipping it to every agent put its description in every agent's always-loaded
 // skill listing and its body in every task workdir, to be usable by one.
 func TestOnboardingSkillIsScopedToMika(t *testing.T) {
-	const onboarding = "multica-onboarding"
+	const onboarding = "workpal-onboarding"
 
 	ordinary := loadBuiltinSkills("")
 	if named(ordinary, onboarding) {

@@ -2,8 +2,8 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { beforeEach, describe, expect, it, vi } from "vitest";
-import type { Agent } from "@multica/core/types";
-import { agentListOptions, memberListOptions } from "@multica/core/workspace/queries";
+import type { Agent } from "@workpal/core/types";
+import { agentListOptions, memberListOptions } from "@workpal/core/workspace/queries";
 import { renderWithI18n } from "../../test/i18n";
 import { QuickChatAgentRow } from "./quick-chat-agent-row";
 
@@ -17,13 +17,13 @@ const h = vi.hoisted(() => ({
   },
 }));
 
-vi.mock("@multica/core/chat", () => ({
+vi.mock("@workpal/core/chat", () => ({
   useChatStore: Object.assign(
     (selector: (state: typeof h.chat) => unknown) => selector(h.chat),
     { getState: () => h.chat },
   ),
 }));
-vi.mock("@multica/core/auth", () => {
+vi.mock("@workpal/core/auth", () => {
   const state = { user: { id: "user-1" } };
   return {
     useAuthStore: Object.assign(
@@ -32,9 +32,9 @@ vi.mock("@multica/core/auth", () => {
     ),
   };
 });
-vi.mock("@multica/core/paths", () => ({ useCurrentWorkspace: () => ({ id: "ws-test" }) }));
-vi.mock("@multica/core/api", async (importOriginal) => ({
-  ...(await importOriginal<typeof import("@multica/core/api")>()),
+vi.mock("@workpal/core/paths", () => ({ useCurrentWorkspace: () => ({ id: "ws-test" }) }));
+vi.mock("@workpal/core/api", async (importOriginal) => ({
+  ...(await importOriginal<typeof import("@workpal/core/api")>()),
   api: { getBaseUrl: () => "http://localhost" },
 }));
 
@@ -103,7 +103,7 @@ describe("QuickChatAgentRow", () => {
     const user = userEvent.setup();
     renderRow();
 
-    const select = screen.getByRole("combobox", { name: "Ask Multica agent" });
+    const select = screen.getByRole("combobox", { name: "Ask Workpal agent" });
     expect(select).toHaveTextContent("Last used");
 
     await user.click(select);
@@ -118,7 +118,7 @@ describe("QuickChatAgentRow", () => {
     const user = userEvent.setup();
     renderRow();
 
-    const select = screen.getByRole("combobox", { name: "Ask Multica agent" });
+    const select = screen.getByRole("combobox", { name: "Ask Workpal agent" });
     expect(select).toHaveTextContent("Kepler");
 
     await user.click(select);
@@ -131,13 +131,13 @@ describe("QuickChatAgentRow", () => {
     h.chat.quickChatAgentId = "agent-3";
     renderRow();
 
-    expect(screen.getByRole("combobox", { name: "Ask Multica agent" })).toHaveTextContent("Last used");
+    expect(screen.getByRole("combobox", { name: "Ask Workpal agent" })).toHaveTextContent("Last used");
   });
 
   it("is disabled while the floating chat is off", () => {
     h.chat.floatingChatEnabled = false;
     renderRow();
 
-    expect(screen.getByRole("combobox", { name: "Ask Multica agent" })).toBeDisabled();
+    expect(screen.getByRole("combobox", { name: "Ask Workpal agent" })).toBeDisabled();
   });
 });

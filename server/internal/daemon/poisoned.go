@@ -3,8 +3,8 @@ package daemon
 import (
 	"strings"
 
-	"github.com/multica-ai/multica/server/pkg/agent"
-	"github.com/multica-ai/multica/server/pkg/taskfailure"
+	"workpal.local/workpal/server/pkg/agent"
+	"workpal.local/workpal/server/pkg/taskfailure"
 )
 
 // FailureReason values for tasks whose session is "poisoned" — i.e.

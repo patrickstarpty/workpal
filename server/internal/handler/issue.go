@@ -20,21 +20,21 @@ import (
 	"github.com/go-chi/chi/v5"
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgtype"
-	"github.com/multica-ai/multica/server/internal/channelmedia"
-	"github.com/multica-ai/multica/server/internal/dispatch"
-	"github.com/multica-ai/multica/server/internal/issueguard"
-	"github.com/multica-ai/multica/server/internal/issuestatus"
-	"github.com/multica-ai/multica/server/internal/issueworkflow"
-	"github.com/multica-ai/multica/server/internal/logger"
-	obsmetrics "github.com/multica-ai/multica/server/internal/metrics"
-	"github.com/multica-ai/multica/server/internal/middleware"
-	"github.com/multica-ai/multica/server/internal/projectaccess"
-	"github.com/multica-ai/multica/server/internal/qoderruntime"
-	"github.com/multica-ai/multica/server/internal/service"
-	"github.com/multica-ai/multica/server/internal/util"
-	agentpkg "github.com/multica-ai/multica/server/pkg/agent"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
-	"github.com/multica-ai/multica/server/pkg/protocol"
+	"workpal.local/workpal/server/internal/channelmedia"
+	"workpal.local/workpal/server/internal/dispatch"
+	"workpal.local/workpal/server/internal/issueguard"
+	"workpal.local/workpal/server/internal/issuestatus"
+	"workpal.local/workpal/server/internal/issueworkflow"
+	"workpal.local/workpal/server/internal/logger"
+	obsmetrics "workpal.local/workpal/server/internal/metrics"
+	"workpal.local/workpal/server/internal/middleware"
+	"workpal.local/workpal/server/internal/projectaccess"
+	"workpal.local/workpal/server/internal/qoderruntime"
+	"workpal.local/workpal/server/internal/service"
+	"workpal.local/workpal/server/internal/util"
+	agentpkg "workpal.local/workpal/server/pkg/agent"
+	db "workpal.local/workpal/server/pkg/db/generated"
+	"workpal.local/workpal/server/pkg/protocol"
 )
 
 // IssueResponse is the JSON response for an issue.
@@ -2822,7 +2822,7 @@ func (h *Handler) ChildIssueProgress(w http.ResponseWriter, r *http.Request) {
 // user picks an actor (agent or squad) in the modal and types one line of
 // natural language; the server validates the actor's reachability up front,
 // queues a quick-create task, and returns 202 immediately. The agent
-// translates the prompt into a `multica issue create` invocation in the
+// translates the prompt into a `workpal issue create` invocation in the
 // background; success and failure both surface as inbox notifications to
 // the requester.
 //
@@ -2832,7 +2832,7 @@ func (h *Handler) ChildIssueProgress(w http.ResponseWriter, r *http.Request) {
 // the squad, so it can choose to delegate to a squad member as usual.
 //
 // ProjectID is optional and lets the modal target a specific project so
-// the agent's `multica issue create` invocation passes `--project <uuid>`
+// the agent's `workpal issue create` invocation passes `--project <uuid>`
 // instead of letting it default. The frontend remembers the user's last
 // pick per workspace, so frequent users skip retyping "in project X".
 //
@@ -3182,7 +3182,7 @@ func (h *Handler) checkQuickCreateDaemonVersionAtLeast(ctx context.Context, sour
 }
 
 // readRuntimeCLIVersion pulls metadata.cli_version off a runtime row. The
-// metadata column is JSONB on the wire; the daemon stores the multica CLI
+// metadata column is JSONB on the wire; the daemon stores the workpal CLI
 // version under that key during registration (see DaemonRegister).
 func readRuntimeCLIVersion(metadata []byte) string {
 	if len(metadata) == 0 {
@@ -4844,7 +4844,7 @@ func (h *Handler) BatchUpdateIssues(w http.ResponseWriter, r *http.Request) {
 	// real-world cases that hit this path are caller mistakes (status placed
 	// at the top level, "update" misspelled as singular). Telling the truth
 	// here — `{"updated": 0}` — keeps the wire shape stable while making the
-	// count match reality. See multica-ai/multica#1660.
+	// count match reality. See workpal-ai/workpal#1660.
 	hasFieldUpdate := req.Updates.Title != nil ||
 		req.Updates.Description != nil ||
 		req.Updates.Status != nil ||

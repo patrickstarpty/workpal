@@ -7,7 +7,7 @@ import type {
   BatchUpdateIssuesResponse,
   Issue,
   UpdateIssueRequest,
-} from "@multica/core/types";
+} from "@workpal/core/types";
 import type { IssueCreateDefaults } from "./types";
 
 export type IssueSurfaceMutationOptions = {

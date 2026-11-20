@@ -15,11 +15,11 @@ func TestIsolatedDatabaseDSN(t *testing.T) {
 		"host=localhost port=5432 user=tester password='p@ss' dbname=original sslmode=disable",
 		"host=localhost port=5432 user=tester password='p@ss' database=original dbname=override sslmode=disable",
 	} {
-		config, err := pgx.ParseConfig(isolatedDatabaseDSN(t, dsn, "multica_test_target"))
+		config, err := pgx.ParseConfig(isolatedDatabaseDSN(t, dsn, "workpal_test_target"))
 		if err != nil {
 			t.Fatal(err)
 		}
-		if config.Database != "multica_test_target" || config.User != "tester" || config.Password != "p@ss" || config.TLSConfig != nil {
+		if config.Database != "workpal_test_target" || config.User != "tester" || config.Password != "p@ss" || config.TLSConfig != nil {
 			t.Fatal("database override did not preserve the other connection settings")
 		}
 	}

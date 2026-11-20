@@ -1,10 +1,10 @@
-import reactConfig from "@multica/eslint-config/react";
-import { ICON_LIBRARY_IMPORT_PATTERNS, REDUCED_MOTION_IMPORT } from "@multica/eslint-config/base";
-import { NO_ROUND_CONTROLS } from "@multica/eslint-config/control-shape";
+import reactConfig from "@workpal/eslint-config/react";
+import { ICON_LIBRARY_IMPORT_PATTERNS, REDUCED_MOTION_IMPORT } from "@workpal/eslint-config/base";
+import { NO_ROUND_CONTROLS } from "@workpal/eslint-config/control-shape";
 import i18next from "eslint-plugin-i18next";
 
 // Same guards as packages/views: every JSX text node goes through the
-// package's translator, and icons come from @multica/ui.
+// package's translator, and icons come from @workpal/ui.
 export default [
   ...reactConfig,
   {

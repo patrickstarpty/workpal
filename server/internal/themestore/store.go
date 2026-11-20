@@ -34,9 +34,9 @@ import (
 	"golang.org/x/sync/singleflight"
 )
 
-// DefaultIndexURL is the official registry, github.com/multica-ai/multica-themes.
+// DefaultIndexURL is the official registry, workpal.local/workpal-themes.
 // Its index is generated onto the `index` branch.
-const DefaultIndexURL = "https://raw.githubusercontent.com/multica-ai/multica-themes/index/index.json"
+const DefaultIndexURL = "https://raw.githubusercontent.com/workpal-ai/workpal-themes/index/index.json"
 
 const (
 	// MaxPackageBytes matches THEME_PACKAGE_MAX_BYTES in packages/core/appearance.
@@ -335,7 +335,7 @@ func (s *Store) get(ctx context.Context, u *url.URL, limit int64) ([]byte, error
 	if err != nil {
 		return nil, err
 	}
-	req.Header.Set("User-Agent", "multica-theme-store")
+	req.Header.Set("User-Agent", "workpal-theme-store")
 	res, err := s.client.Do(req)
 	if err != nil {
 		return nil, fmt.Errorf("%w: %v", ErrUpstream, err)

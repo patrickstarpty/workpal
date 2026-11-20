@@ -11,22 +11,22 @@ import (
 
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgtype"
-	"github.com/multica-ai/multica/server/internal/events"
-	composiointeg "github.com/multica-ai/multica/server/internal/integrations/composio"
-	"github.com/multica-ai/multica/server/internal/runtimeapps"
-	"github.com/multica-ai/multica/server/internal/util"
-	sdk "github.com/multica-ai/multica/server/pkg/composio"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
+	"workpal.local/workpal/server/internal/events"
+	composiointeg "workpal.local/workpal/server/internal/integrations/composio"
+	"workpal.local/workpal/server/internal/runtimeapps"
+	"workpal.local/workpal/server/internal/util"
+	sdk "workpal.local/workpal/server/pkg/composio"
+	db "workpal.local/workpal/server/pkg/db/generated"
 )
 
 // GatewayServerName is the MCP server name every run sees its apps under.
-const GatewayServerName = "multica_apps"
+const GatewayServerName = "workpal_apps"
 
 // GatewayPath is the API route of the MCP gateway.
 const GatewayPath = "/api/apps/mcp"
 
 // Provider tags gateway-served apps in a run's connected-app metadata.
-const Provider = "multica"
+const Provider = "workpal"
 
 // RequestTTL is how long a confirmation waits before it expires.
 const RequestTTL = 24 * time.Hour
@@ -80,7 +80,7 @@ type Config struct {
 	Composio *composiointeg.Service
 	// TokenSecret signs gateway tokens. Derive it with DeriveTokenSecret.
 	TokenSecret []byte
-	// PublicBaseURL is the API's public origin, e.g. "https://api.multica.ai".
+	// PublicBaseURL is the API's public origin, e.g. "https://workpal.invalid".
 	PublicBaseURL string
 	Bus           *events.Bus
 	Now           func() time.Time

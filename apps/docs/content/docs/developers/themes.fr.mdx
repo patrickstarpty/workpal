@@ -1,15 +1,15 @@
 ---
 title: Créer un thème
-description: Le format des thèmes Multica — manifeste, variables CSS, options et ancres —, comment écrire et vérifier un thème, et comment le publier dans la boutique de thèmes.
+description: Le format des thèmes Workpal — manifeste, variables CSS, options et ancres —, comment écrire et vérifier un thème, et comment le publier dans la boutique de thèmes.
 ---
 
 import { Callout } from "fumadocs-ui/components/callout";
 import { Step, Steps } from "fumadocs-ui/components/steps";
 
-Un thème Multica est un dossier avec un `manifest.json` et un `theme.css`, plus les polices et images utilisées par le CSS. Le CSS définit des variables publiques pour les modes clair et sombre et peut restyler un ensemble d'ancres stables ; le manifeste nomme le thème et peut déclarer des options que l'on règle dans **Paramètres → Apparence**. Un thème n'exécute jamais de JavaScript.
+Un thème Workpal est un dossier avec un `manifest.json` et un `theme.css`, plus les polices et images utilisées par le CSS. Le CSS définit des variables publiques pour les modes clair et sombre et peut restyler un ensemble d'ancres stables ; le manifeste nomme le thème et peut déclarer des options que l'on règle dans **Paramètres → Apparence**. Un thème n'exécute jamais de JavaScript.
 
 <Callout type="warn">
-  Le format des thèmes est une API bêta. Variables, ancres et manifeste peuvent changer jusqu'à ce qu'il soit déclaré stable. La liste complète et générée des variables et des ancres se trouve dans [`docs/theming.md`](https://github.com/multica-ai/multica/blob/main/docs/theming.md) ; cette page explique comment elles s'articulent.
+  Le format des thèmes est une API bêta. Variables, ancres et manifeste peuvent changer jusqu'à ce qu'il soit déclaré stable. La liste complète et générée des variables et des ancres se trouve dans `docs/theming.md` ; cette page explique comment elles s'articulent.
 </Callout>
 
 ## Démarrage rapide
@@ -34,7 +34,7 @@ Dans **Paramètres → Apparence**, choisissez le thème le plus proche de ce qu
 
 ### La vérifier
 
-Avant de la partager, lancez les vérifications depuis un clone du [dépôt Multica](https://github.com/multica-ai/multica) (voir [Vérifier et prévisualiser](#vérifier-et-prévisualiser)).
+Avant de la partager, lancez les vérifications depuis un clone du dépôt Workpal (voir [Vérifier et prévisualiser](#vérifier-et-prévisualiser)).
 
 </Step>
 </Steps>
@@ -121,7 +121,7 @@ L'app ne déclare jamais une variable de composant ; les composants la lisent av
 }
 ```
 
-La [référence des variables](https://github.com/multica-ai/multica/blob/main/docs/theming.md#variable-reference) liste chaque variable avec ses valeurs par défaut claire et sombre.
+La référence des variables liste chaque variable avec ses valeurs par défaut claire et sombre.
 
 ## Options
 
@@ -168,7 +168,7 @@ Un thème peut placer une image derrière l’application — un dégradé, une 
 - `--backdrop-color` est obligatoire avec un arrière-plan : la couleur unie affichée pendant le chargement, et celle sur laquelle `theme:check` mesure le verre.
 - `--glass-opacity` et `--glass-blur` fixent la part de la couleur de la page qui couvre l’arrière-plan et le flou de l’arrière-plan derrière elle. `--frame-glass-opacity` et `--frame-glass-blur` font de même pour le rail, la barre d’outils de la fenêtre, la barre d’onglets et la barre du bas.
 
-Utilisez-les plutôt qu’un `--app-shell` transparent ou un `background` sur `body` : l’application change alors d’arrière-plan sans faire clignoter la fenêtre. [`examples/themes/night-sky`](https://github.com/multica-ai/multica/tree/main/examples/themes/night-sky) en est un exemple complet.
+Utilisez-les plutôt qu’un `--app-shell` transparent ou un `background` sur `body` : l’application change alors d’arrière-plan sans faire clignoter la fenêtre. `examples/themes/night-sky` en est un exemple complet.
 
 ## Sélecteurs
 
@@ -183,7 +183,7 @@ Ciblez les ancres, les slots et les attributs d'état — pas les noms de classe
 .theme-dark [data-mc="issue-row"][data-priority="urgent"] { box-shadow: inset 2px 0 var(--priority-urgent); }
 ```
 
-La [référence des sélecteurs](https://github.com/multica-ai/multica/blob/main/docs/theming.md#selectors) liste chaque ancre, ses attributs et chaque slot.
+La référence des sélecteurs liste chaque ancre, ses attributs et chaque slot.
 
 ## Ce que le CSS ne peut pas faire
 
@@ -203,7 +203,7 @@ Tout ce qui charge une ressource est refusé, car le CSS peut lire le contenu de
 
 ## Vérifier et prévisualiser
 
-Depuis un clone du [dépôt Multica](https://github.com/multica-ai/multica) :
+Depuis un clone du dépôt Workpal :
 
 ```bash
 pnpm theme:check path/to/paper          # un dossier
@@ -217,24 +217,24 @@ pnpm theme:preview path/to/paper --out preview   # preview/light.png et preview/
 
 Si un thème masque ou casse une partie de l'interface pendant que vous travaillez dessus, ouvrez l'app avec `?theme=default`, ou maintenez **Maj** juste après le chargement ; voir [Quand un thème casse quelque chose](/themes#quand-un-thème-casse-quelque-chose).
 
-Le vérificateur fonctionne aussi sans installer le dépôt, depuis un clone partiel et Node 22.18 ou plus récent. Les agents reçoivent les mêmes commandes dans leur skill Multica intégré :
+Le vérificateur fonctionne aussi sans installer le dépôt, depuis un clone partiel et Node 22.18 ou plus récent. Les agents reçoivent les mêmes commandes dans leur skill Workpal intégré :
 
 ```bash
-git clone --depth 1 --filter=blob:none --sparse https://github.com/multica-ai/multica.git multica-themes
-git -C multica-themes sparse-checkout set docs scripts packages/core packages/ui
-node multica-themes/scripts/theme-check.mjs path/to/paper
+git clone --depth 1 --filter=blob:none --sparse https://code-host.invalid/workpal.git workpal-themes
+git -C workpal-themes sparse-checkout set docs scripts packages/core packages/ui
+node workpal-themes/scripts/theme-check.mjs path/to/paper
 ```
 
 ## Publier dans la boutique
 
-La boutique de thèmes liste les thèmes du registre [multica-ai/multica-themes](https://github.com/multica-ai/multica-themes). Son [guide de contribution](https://github.com/multica-ai/multica-themes/blob/main/CONTRIBUTING.md) donne les détails ; en bref :
+La boutique de thèmes liste les thèmes du registre workpal-ai/workpal-themes. Son guide de contribution donne les détails ; en bref :
 
 <Steps>
 <Step>
 
 ### Donner au thème son propre dépôt
 
-Gardez le thème dans un dépôt GitHub public. [multica-ai/multica-theme-sample](https://github.com/multica-ai/multica-theme-sample) est un modèle avec un workflow de publication.
+Gardez le thème dans un dépôt GitHub public. workpal-ai/workpal-theme-sample est un modèle avec un workflow de publication.
 
 </Step>
 <Step>
@@ -255,9 +255,9 @@ Ouvrez une pull request qui ajoute au registre un fichier `themes/<id>.json`, no
 
 Les nouvelles releases arrivent dans la boutique en une heure environ, après avoir passé les mêmes vérifications ; les personnes qui ont installé le thème voient alors une mise à jour. Une release qui échoue laisse la précédente en place. L'app n'installe que le `theme.zip` exact qui a passé les vérifications, et le lit avec le même analyseur et les mêmes vérifications CSS qu'un thème importé.
 
-Chaque carte de la boutique indique combien de fois le thème a été téléchargé depuis ce serveur Multica. Chaque installation et chaque mise à jour comptent une fois, et les thèmes pas encore installés sont classés du plus téléchargé au moins téléchargé.
+Chaque carte de la boutique indique combien de fois le thème a été téléchargé depuis ce serveur Workpal. Chaque installation et chaque mise à jour comptent une fois, et les thèmes pas encore installés sont classés du plus téléchargé au moins téléchargé.
 
 ## Étapes suivantes
 
 - [Thèmes et apparence](/themes) — installer, mettre à jour et supprimer des thèmes.
-- [`docs/theming.md`](https://github.com/multica-ai/multica/blob/main/docs/theming.md) — la référence générée des variables et des sélecteurs.
+- `docs/theming.md` — la référence générée des variables et des sélecteurs.

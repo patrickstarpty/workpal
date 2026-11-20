@@ -2,10 +2,10 @@
 
 import { useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { useWorkspaceId } from "@multica/core";
-import { projectListOptions } from "@multica/core/projects/queries";
-import { setVoiceContextWords } from "@multica/core/voice";
-import { agentListOptions, memberListOptions } from "@multica/core/workspace/queries";
+import { useWorkspaceId } from "@workpal/core";
+import { projectListOptions } from "@workpal/core/projects/queries";
+import { setVoiceContextWords } from "@workpal/core/voice";
+import { agentListOptions, memberListOptions } from "@workpal/core/workspace/queries";
 
 /**
  * Offer the workspace's agent, member and project names to the speech model

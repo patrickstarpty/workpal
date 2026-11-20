@@ -1,15 +1,15 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Dices, Pipette } from "@multica/ui/icons";
+import { Dices, Pipette } from "@workpal/ui/icons";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@multica/ui/components/ui/popover";
-import { IconButton } from "@multica/ui/components/common/icon-button";
-import { Input } from "@multica/ui/components/ui/input";
-import { cn } from "@multica/ui/lib/utils";
+} from "@workpal/ui/components/ui/popover";
+import { IconButton } from "@workpal/ui/components/common/icon-button";
+import { Input } from "@workpal/ui/components/ui/input";
+import { cn } from "@workpal/ui/lib/utils";
 import { useT } from "../i18n";
 import {
   type Hsv,

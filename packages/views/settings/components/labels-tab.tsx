@@ -1,8 +1,8 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { labelListOptions } from "@multica/core/labels";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { labelListOptions } from "@workpal/core/labels";
 import { useT } from "../../i18n";
 import { LabelManager, type LabelScope } from "../../labels/label-manager";
 import { useNavigation } from "../../navigation";

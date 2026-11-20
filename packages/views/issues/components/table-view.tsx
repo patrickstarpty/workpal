@@ -1,6 +1,6 @@
 "use client";
 
-import { subIssueCreateDefaults } from "@multica/core/issues";
+import { subIssueCreateDefaults } from "@workpal/core/issues";
 import { useStatusLabel } from "../utils/status-label";
 import {
   useCallback,
@@ -51,13 +51,13 @@ import {
   Plus,
   Search,
   X,
-} from "@multica/ui/icons";
+} from "@workpal/ui/icons";
 import { toast } from "sonner";
-import { DataTable } from "@multica/ui/components/ui/data-table";
-import { Button } from "@multica/ui/components/ui/button";
-import { IconButton } from "@multica/ui/components/common/icon-button";
-import { TooltipHint } from "@multica/ui/components/common/tooltip-hint";
-import { Input } from "@multica/ui/components/ui/input";
+import { DataTable } from "@workpal/ui/components/ui/data-table";
+import { Button } from "@workpal/ui/components/ui/button";
+import { IconButton } from "@workpal/ui/components/common/icon-button";
+import { TooltipHint } from "@workpal/ui/components/common/tooltip-hint";
+import { Input } from "@workpal/ui/components/ui/input";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -67,40 +67,40 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@multica/ui/components/ui/dropdown-menu";
+} from "@workpal/ui/components/ui/dropdown-menu";
 import {
   TableCell,
   TableRow,
-} from "@multica/ui/components/ui/table";
-import { Skeleton } from "@multica/ui/components/ui/skeleton";
-import { cn } from "@multica/ui/lib/utils";
-import { ApiError } from "@multica/core/api";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { isImeComposing } from "@multica/core/utils";
-import { useIssueStatuses } from "@multica/core/issue-statuses/hooks";
-import { useModalStore } from "@multica/core/modals";
+} from "@workpal/ui/components/ui/table";
+import { Skeleton } from "@workpal/ui/components/ui/skeleton";
+import { cn } from "@workpal/ui/lib/utils";
+import { ApiError } from "@workpal/core/api";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { isImeComposing } from "@workpal/core/utils";
+import { useIssueStatuses } from "@workpal/core/issue-statuses/hooks";
+import { useModalStore } from "@workpal/core/modals";
 import {
   issueKeys,
   issueTableGroupsOptions,
   issueTableRowPageOptions,
-} from "@multica/core/issues/queries";
+} from "@workpal/core/issues/queries";
 import {
   TABLE_SYSTEM_COLUMNS,
   propertyIdFromViewKey,
   type SortField,
   type TableColumnKey,
   type TableSystemColumnKey,
-} from "@multica/core/issues/stores/view-store";
-import { useViewStore } from "@multica/core/issues/stores/view-store-context";
-import { propertyListOptions } from "@multica/core/properties";
-import { projectListOptions } from "@multica/core/projects/queries";
-import { useWorkspacePaths } from "@multica/core/paths";
-import { buildActorNameResolver, useActorName } from "@multica/core/workspace/hooks";
+} from "@workpal/core/issues/stores/view-store";
+import { useViewStore } from "@workpal/core/issues/stores/view-store-context";
+import { propertyListOptions } from "@workpal/core/properties";
+import { projectListOptions } from "@workpal/core/projects/queries";
+import { useWorkspacePaths } from "@workpal/core/paths";
+import { buildActorNameResolver, useActorName } from "@workpal/core/workspace/hooks";
 import {
   agentListOptions,
   memberListOptions,
   squadListOptions,
-} from "@multica/core/workspace/queries";
+} from "@workpal/core/workspace/queries";
 import type {
   Issue,
   IssueProperty,
@@ -111,12 +111,12 @@ import type {
   IssueTableRowsResponse,
   Project,
   UpdateIssueRequest,
-} from "@multica/core/types";
+} from "@workpal/core/types";
 import {
   actorRefsFromValue,
   formatActorRef,
   isActorPropertyType,
-} from "@multica/core/types";
+} from "@workpal/core/types";
 import {
   useInfiniteQuery,
   useQueries,
@@ -167,7 +167,7 @@ import { ListLoadMoreFooter } from "./list-load-more-footer";
 import { IssueAgentActivityIndicator } from "./issue-agent-activity-indicator";
 import { IssueDuplicateOfMarker } from "./issue-duplicates";
 import { IssuePullRequestChips, useIssuePullRequestSummaries } from "./pull-request-chips";
-import { issuePullRequestSummariesOptions } from "@multica/core/github";
+import { issuePullRequestSummariesOptions } from "@workpal/core/github";
 
 // Enough placeholder rows to cover a typical viewport; the virtualizer only
 // mounts what fits, so overshooting costs nothing.

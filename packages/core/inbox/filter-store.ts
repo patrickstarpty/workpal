@@ -131,7 +131,7 @@ export const useInboxFilterStore = create<InboxFilterState>()(
     {
       // One entry per workspace inside a single key, like the issue view
       // filters: switching workspaces swaps the selection without a reload.
-      name: "multica_inbox_filters",
+      name: "workpal_inbox_filters",
       version: 1,
       storage: createJSONStorage(() => defaultStorage),
       partialize: (state) => ({ filtersByWorkspace: state.filtersByWorkspace }),

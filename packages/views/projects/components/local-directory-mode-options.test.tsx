@@ -2,8 +2,8 @@
 
 import { describe, it, expect, vi } from "vitest";
 import { fireEvent, render, screen } from "@testing-library/react";
-import { I18nProvider } from "@multica/core/i18n/react";
-import type { LocalDirectoryExecutionMode } from "@multica/core/types";
+import { I18nProvider } from "@workpal/core/i18n/react";
+import type { LocalDirectoryExecutionMode } from "@workpal/core/types";
 import enProjects from "../../locales/en/projects.json";
 import enCommon from "../../locales/en/common.json";
 import {
@@ -64,7 +64,7 @@ describe("LocalDirectoryModeOptions", () => {
 
     const option = worktreeOption();
     expect(option.hasAttribute("disabled")).toBe(true);
-    expect(screen.getByText(/Multica server is too old/i).textContent).toMatch(
+    expect(screen.getByText(/Workpal server is too old/i).textContent).toMatch(
       /Update the server/i,
     );
     fireEvent.click(option);

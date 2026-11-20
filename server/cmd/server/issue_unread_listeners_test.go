@@ -5,9 +5,9 @@ import (
 	"slices"
 	"testing"
 
-	"github.com/multica-ai/multica/server/internal/events"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
-	"github.com/multica-ai/multica/server/pkg/protocol"
+	"workpal.local/workpal/server/internal/events"
+	db "workpal.local/workpal/server/pkg/db/generated"
+	"workpal.local/workpal/server/pkg/protocol"
 )
 
 func issueUnreadRows(t *testing.T, issueID string) map[string][2]string {
@@ -35,8 +35,8 @@ func TestIssueUnread_RunEndMarksSubscribedMembers(t *testing.T) {
 	registerIssueUnreadListeners(bus, queries)
 
 	emails := []string{
-		"unread-subscriber@multica.ai", "unread-delegated@multica.ai",
-		"unread-opted-out@multica.ai", "unread-outsider@multica.ai",
+		"unread-subscriber@workpal.invalid", "unread-delegated@workpal.invalid",
+		"unread-opted-out@workpal.invalid", "unread-outsider@workpal.invalid",
 	}
 	t.Cleanup(func() {
 		for _, email := range emails {

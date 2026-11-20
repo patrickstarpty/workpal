@@ -3,7 +3,7 @@
 import { cleanup, fireEvent, screen } from "@testing-library/react";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import { renderWithI18n } from "../test/i18n";
-import { PALETTE_PRESETS, PALETTE_SLOTS } from "@multica/core/appearance";
+import { PALETTE_PRESETS, PALETTE_SLOTS } from "@workpal/core/appearance";
 import { ColorPickerPanel, COLOR_PICKER_PRESETS } from "./color-picker";
 
 afterEach(cleanup);

@@ -2,15 +2,15 @@
 
 import { useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { AlarmClock, Undo2 } from "@multica/ui/icons";
-import { Button } from "@multica/ui/components/ui/button";
-import { Skeleton } from "@multica/ui/components/ui/skeleton";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { useWorkspacePaths } from "@multica/core/paths";
-import { snoozedInboxOptions } from "@multica/core/inbox/queries";
-import { issueDetailOptions } from "@multica/core/issues/queries";
-import { useIssueStatuses } from "@multica/core/issue-statuses/hooks";
-import type { SnoozedInboxIssue } from "@multica/core/types";
+import { AlarmClock, Undo2 } from "@workpal/ui/icons";
+import { Button } from "@workpal/ui/components/ui/button";
+import { Skeleton } from "@workpal/ui/components/ui/skeleton";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { useWorkspacePaths } from "@workpal/core/paths";
+import { snoozedInboxOptions } from "@workpal/core/inbox/queries";
+import { issueDetailOptions } from "@workpal/core/issues/queries";
+import { useIssueStatuses } from "@workpal/core/issue-statuses/hooks";
+import type { SnoozedInboxIssue } from "@workpal/core/types";
 import { CollectionPageHeader, CollectionPageState } from "../../layout/collection-page";
 import {
   CollectionEmptyValue,

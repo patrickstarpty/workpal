@@ -1,7 +1,7 @@
 "use client";
 
-import type { SourceContextCommentSnapshot } from "@multica/core/types";
-import { cn } from "@multica/ui/lib/utils";
+import type { SourceContextCommentSnapshot } from "@workpal/core/types";
+import { cn } from "@workpal/ui/lib/utils";
 import { ReadonlyContent } from "../../editor";
 import { useT } from "../../i18n";
 

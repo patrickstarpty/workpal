@@ -10,7 +10,7 @@ import (
 
 func TestMarkdownImageLinks(t *testing.T) {
 	for _, tc := range []struct{ name, input, want string }{
-		{"artifact", "已交付\n![图片](https://multica.example/api/attachments/id/download)", "已交付\n[图片](https://multica.example/api/attachments/id/download)"},
+		{"artifact", "已交付\n![图片](https://workpal.example/api/attachments/id/download)", "已交付\n[图片](https://workpal.example/api/attachments/id/download)"},
 		{"title and parentheses", `![a [b]](<https://example/a(b).png> "title")`, `[a [b]](<https://example/a(b).png> "title")`},
 		{"multiple", "![一](a) ![二](b)", "[一](a) [二](b)"},
 		{"reference", "![a][ref]\n\n[ref]: https://example/image.png", "[a][ref]\n\n[ref]: https://example/image.png"},
@@ -38,12 +38,12 @@ func TestHTTPClient_MarkdownArtifactImageBecomesLink(t *testing.T) {
 		if err := json.Unmarshal([]byte(body["content"]), &card); err != nil {
 			t.Fatal(err)
 		}
-		if len(card.Body.Elements) != 1 || card.Body.Elements[0].Content != "[图片](https://multica.example/api/attachments/id/download)" {
+		if len(card.Body.Elements) != 1 || card.Body.Elements[0].Content != "[图片](https://workpal.example/api/attachments/id/download)" {
 			t.Fatalf("card contains invalid image key syntax: %+v", card)
 		}
 	})
 	_, err := newTestClient(fake, time.Now).SendMarkdownCard(context.Background(), SendMarkdownCardParams{
-		InstallationID: testCreds(), ChatID: "oc_test", Markdown: "![图片](https://multica.example/api/attachments/id/download)",
+		InstallationID: testCreds(), ChatID: "oc_test", Markdown: "![图片](https://workpal.example/api/attachments/id/download)",
 	})
 	if err != nil {
 		t.Fatal(err)

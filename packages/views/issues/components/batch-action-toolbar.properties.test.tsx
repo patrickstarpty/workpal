@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { act, fireEvent, screen } from "@testing-library/react";
-import type { Issue, IssueProperty } from "@multica/core/types";
+import type { Issue, IssueProperty } from "@workpal/core/types";
 import { renderWithI18n } from "../../test/i18n";
 import { BatchActionToolbar } from "./batch-action-toolbar";
 
@@ -10,18 +10,18 @@ const PROPERTIES = vi.hoisted(() => [
   { id: "notes", name: "Notes", type: "multi_text", config: {}, archived: false },
 ] as IssueProperty[]);
 
-vi.mock("@multica/core/issues/stores/selection-store", () => ({
+vi.mock("@workpal/core/issues/stores/selection-store", () => ({
   useIssueSelectionStore: (selector: (s: typeof selection) => unknown) => selector(selection),
 }));
-vi.mock("@multica/core/issues/use-issue-deletion", () => ({
+vi.mock("@workpal/core/issues/use-issue-deletion", () => ({
   useIssueDeletion: () => ({ canDelete: () => true }),
 }));
-vi.mock("@multica/core/issues/mutations", () => ({
+vi.mock("@workpal/core/issues/mutations", () => ({
   useBatchUpdateIssues: () => ({ mutateAsync: batchUpdate, isPending: false }),
   useBatchDeleteIssues: () => ({ mutateAsync: vi.fn(), isPending: false }),
 }));
-vi.mock("@multica/core/hooks", () => ({ useWorkspaceId: () => "ws-1" }));
-vi.mock("@multica/core/issue-workflows", () => ({
+vi.mock("@workpal/core/hooks", () => ({ useWorkspaceId: () => "ws-1" }));
+vi.mock("@workpal/core/issue-workflows", () => ({
   useIssueWorkflows: () => ({ workflows: [] }),
   sharedWorkflowStatusKeys: () => null,
 }));
@@ -29,8 +29,8 @@ vi.mock("@tanstack/react-query", async (importOriginal) => ({
   ...(await importOriginal<typeof import("@tanstack/react-query")>()),
   useQuery: () => ({ data: PROPERTIES }),
 }));
-vi.mock("@multica/core/paths", async (importOriginal) => ({
-  ...(await importOriginal<typeof import("@multica/core/paths")>()),
+vi.mock("@workpal/core/paths", async (importOriginal) => ({
+  ...(await importOriginal<typeof import("@workpal/core/paths")>()),
   useWorkspacePaths: () => ({ issueDetail: (id: string) => `/acme/issues/${id}` }),
 }));
 vi.mock("../../navigation", () => ({

@@ -16,8 +16,8 @@ import (
 
 	"github.com/go-chi/chi/v5"
 
-	"github.com/multica-ai/multica/server/internal/integrations/wecom"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
+	"workpal.local/workpal/server/internal/integrations/wecom"
+	db "workpal.local/workpal/server/pkg/db/generated"
 )
 
 // beginWecomInstallResponse tells the client which session to poll and how

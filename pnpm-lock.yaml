@@ -222,13 +222,13 @@ importers:
       '@fontsource-variable/inter':
         specifier: 'catalog:'
         version: 5.2.8
-      '@multica/core':
+      '@workpal/core':
         specifier: workspace:*
         version: link:packages/core
-      '@multica/ui':
+      '@workpal/ui':
         specifier: workspace:*
         version: link:packages/ui
-      '@multica/views':
+      '@workpal/views':
         specifier: workspace:*
         version: link:packages/views
       '@tanstack/react-query':
@@ -301,7 +301,7 @@ importers:
 
   apps/docs:
     dependencies:
-      '@multica/ui':
+      '@workpal/ui':
         specifier: workspace:*
         version: link:../../packages/ui
       fumadocs-core:
@@ -371,7 +371,7 @@ importers:
       '@fontsource-variable/inter':
         specifier: 'catalog:'
         version: 5.2.8
-      '@multica/ui':
+      '@workpal/ui':
         specifier: workspace:*
         version: link:../../packages/ui
       react:
@@ -387,10 +387,10 @@ importers:
         specifier: 'catalog:'
         version: 1.4.0
     devDependencies:
-      '@multica/eslint-config':
+      '@workpal/eslint-config':
         specifier: workspace:*
         version: link:../../packages/eslint-config
-      '@multica/tsconfig':
+      '@workpal/tsconfig':
         specifier: workspace:*
         version: link:../../packages/tsconfig
       '@storybook/react-vite':
@@ -429,16 +429,16 @@ importers:
       '@fontsource-variable/inter':
         specifier: 'catalog:'
         version: 5.2.8
-      '@multica/core':
+      '@workpal/core':
         specifier: workspace:*
         version: link:../../packages/core
-      '@multica/ee':
+      '@workpal/ee':
         specifier: workspace:*
         version: link:../../packages/ee
-      '@multica/ui':
+      '@workpal/ui':
         specifier: workspace:*
         version: link:../../packages/ui
-      '@multica/views':
+      '@workpal/views':
         specifier: workspace:*
         version: link:../../packages/views
       '@tanstack/react-query':
@@ -481,10 +481,10 @@ importers:
         specifier: 'catalog:'
         version: 5.0.12(@types/react@19.2.14)(immer@11.1.4)(react@19.2.3)(use-sync-external-store@1.6.0(react@19.2.3))
     devDependencies:
-      '@multica/eslint-config':
+      '@workpal/eslint-config':
         specifier: workspace:*
         version: link:../../packages/eslint-config
-      '@multica/vitest-setup':
+      '@workpal/vitest-setup':
         specifier: workspace:*
         version: link:../../packages/vitest-setup
       '@tailwindcss/postcss':
@@ -569,13 +569,13 @@ importers:
         specifier: 'catalog:'
         version: 5.0.12(@types/react@19.2.14)(immer@11.1.4)(react@19.2.3)(use-sync-external-store@1.6.0(react@19.2.3))
     devDependencies:
-      '@multica/eslint-config':
+      '@workpal/eslint-config':
         specifier: workspace:*
         version: link:../eslint-config
-      '@multica/tsconfig':
+      '@workpal/tsconfig':
         specifier: workspace:*
         version: link:../tsconfig
-      '@multica/vitest-setup':
+      '@workpal/vitest-setup':
         specifier: workspace:*
         version: link:../vitest-setup
       '@testing-library/react':
@@ -605,13 +605,13 @@ importers:
 
   packages/ee:
     dependencies:
-      '@multica/core':
+      '@workpal/core':
         specifier: workspace:*
         version: link:../core
-      '@multica/ui':
+      '@workpal/ui':
         specifier: workspace:*
         version: link:../ui
-      '@multica/views':
+      '@workpal/views':
         specifier: workspace:*
         version: link:../views
       '@tanstack/react-query':
@@ -639,13 +639,13 @@ importers:
         specifier: 'catalog:'
         version: 5.0.12(@types/react@19.2.14)(immer@11.1.4)(react@19.2.3)(use-sync-external-store@1.6.0(react@19.2.3))
     devDependencies:
-      '@multica/eslint-config':
+      '@workpal/eslint-config':
         specifier: workspace:*
         version: link:../eslint-config
-      '@multica/tsconfig':
+      '@workpal/tsconfig':
         specifier: workspace:*
         version: link:../tsconfig
-      '@multica/vitest-setup':
+      '@workpal/vitest-setup':
         specifier: workspace:*
         version: link:../vitest-setup
       '@testing-library/jest-dom':
@@ -714,10 +714,10 @@ importers:
 
   packages/plugin-sdk:
     devDependencies:
-      '@multica/eslint-config':
+      '@workpal/eslint-config':
         specifier: workspace:*
         version: link:../eslint-config
-      '@multica/tsconfig':
+      '@workpal/tsconfig':
         specifier: workspace:*
         version: link:../tsconfig
       '@typescript/native':
@@ -825,13 +825,13 @@ importers:
         specifier: 'catalog:'
         version: 3.5.0
     devDependencies:
-      '@multica/eslint-config':
+      '@workpal/eslint-config':
         specifier: workspace:*
         version: link:../eslint-config
-      '@multica/tsconfig':
+      '@workpal/tsconfig':
         specifier: workspace:*
         version: link:../tsconfig
-      '@multica/vitest-setup':
+      '@workpal/vitest-setup':
         specifier: workspace:*
         version: link:../vitest-setup
       '@testing-library/jest-dom':
@@ -894,10 +894,10 @@ importers:
       '@floating-ui/dom':
         specifier: ^1.7.6
         version: 1.7.6
-      '@multica/core':
+      '@workpal/core':
         specifier: workspace:*
         version: link:../core
-      '@multica/ui':
+      '@workpal/ui':
         specifier: workspace:*
         version: link:../ui
       '@tanstack/react-query':
@@ -1072,16 +1072,16 @@ importers:
         specifier: 'catalog:'
         version: 5.0.12(@types/react@19.2.14)(immer@11.1.4)(react@19.2.3)(use-sync-external-store@1.6.0(react@19.2.3))
     devDependencies:
-      '@multica/eslint-config':
+      '@workpal/eslint-config':
         specifier: workspace:*
         version: link:../eslint-config
-      '@multica/plugin-sdk':
+      '@workpal/plugin-sdk':
         specifier: workspace:*
         version: link:../plugin-sdk
-      '@multica/tsconfig':
+      '@workpal/tsconfig':
         specifier: workspace:*
         version: link:../tsconfig
-      '@multica/vitest-setup':
+      '@workpal/vitest-setup':
         specifier: workspace:*
         version: link:../vitest-setup
       '@testing-library/jest-dom':

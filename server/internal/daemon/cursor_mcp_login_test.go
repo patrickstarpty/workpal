@@ -9,7 +9,7 @@ import (
 	"sync/atomic"
 	"testing"
 
-	"github.com/multica-ai/multica/server/internal/daemon/execenv"
+	"workpal.local/workpal/server/internal/daemon/execenv"
 )
 
 func TestCursorMcpLoginNoticePosixCommand(t *testing.T) {
@@ -17,8 +17,8 @@ func TestCursorMcpLoginNoticePosixCommand(t *testing.T) {
 
 	got := cursorMcpLoginNotice{
 		Servers:       []string{"mobbin", "plugin-mobbin-mobbin"},
-		WorkDir:       "/Users/me/multica_workspaces/ws/mul-1-abc/workdir",
-		CursorDataDir: "/Users/me/multica_workspaces/ws/mul-1-abc/cursor-data",
+		WorkDir:       "/Users/me/workpal_workspaces/ws/mul-1-abc/workdir",
+		CursorDataDir: "/Users/me/workpal_workspaces/ws/mul-1-abc/cursor-data",
 		Executable:    "/Users/me/.local/bin/cursor-agent",
 		Host:          "Jiayuan's MacBook",
 		GOOS:          "darwin",
@@ -26,7 +26,7 @@ func TestCursorMcpLoginNoticePosixCommand(t *testing.T) {
 	for _, want := range []string{
 		"Cursor MCP login needed: mobbin, plugin-mobbin-mobbin.",
 		"on the runtime machine (Jiayuan's MacBook)",
-		"    cd /Users/me/multica_workspaces/ws/mul-1-abc/workdir && CURSOR_DATA_DIR=/Users/me/multica_workspaces/ws/mul-1-abc/cursor-data /Users/me/.local/bin/cursor-agent mcp login mobbin\n",
+		"    cd /Users/me/workpal_workspaces/ws/mul-1-abc/workdir && CURSOR_DATA_DIR=/Users/me/workpal_workspaces/ws/mul-1-abc/cursor-data /Users/me/.local/bin/cursor-agent mcp login mobbin\n",
 		"cursor-agent mcp login plugin-mobbin-mobbin\n",
 		"its next runs use it",
 	} {

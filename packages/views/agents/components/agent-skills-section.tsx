@@ -1,17 +1,17 @@
 "use client";
 
 import { useState } from "react";
-import { Loader2, Plus, Settings2, X } from "@multica/ui/icons";
+import { Loader2, Plus, Settings2, X } from "@workpal/ui/icons";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
-import type { Agent } from "@multica/core/types";
-import { api } from "@multica/core/api";
-import { useWorkspaceId } from "@multica/core/hooks";
+import type { Agent } from "@workpal/core/types";
+import { api } from "@workpal/core/api";
+import { useWorkspaceId } from "@workpal/core/hooks";
 import {
   skillListOptions,
   workspaceKeys,
-} from "@multica/core/workspace/queries";
-import { cn } from "@multica/ui/lib/utils";
+} from "@workpal/core/workspace/queries";
+import { cn } from "@workpal/ui/lib/utils";
 import { SkillIcon } from "../../skills/lib/skill-icon";
 import {
   ObjectSection,

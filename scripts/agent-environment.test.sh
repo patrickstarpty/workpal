@@ -57,10 +57,10 @@ count() { grep -cx "$1" "$repo/calls.log" || true; }
 
 # A process that stands in for a running start: its pid is what a claim names.
 live_claim() {
-  mkdir -p "$repo/.multica/agent-environments"
+  mkdir -p "$repo/.workpal/agent-environments"
   sleep 300 &
   pids+=("$!")
-  printf '%s\n' "$!" > "$repo/.multica/agent-environments/$1.claim"
+  printf '%s\n' "$!" > "$repo/.workpal/agent-environments/$1.claim"
 }
 
 # Kills and reaps a background job, so bash does not report it as terminated.
@@ -76,7 +76,7 @@ serve_component() {
 }
 
 start_in_background() {
-  MULTICA_PORT="$(free_port)" bash "$repo/scripts/agent-environment.sh" start "$1" > "$repo/start.log" 2>&1 &
+  WORKPAL_PORT="$(free_port)" bash "$repo/scripts/agent-environment.sh" start "$1" > "$repo/start.log" 2>&1 &
   start_pid=$!
   pids+=("$start_pid")
   local i
@@ -164,10 +164,10 @@ stop_job "$start_pid"
 # 5. A claim whose start was killed outright does not keep the environment.
 new_repo stale
 touch "$repo/registered"
-mkdir -p "$repo/.multica/agent-environments"
+mkdir -p "$repo/.workpal/agent-environments"
 sleep 0 & dead=$!
 wait "$dead"
-printf '%s\n' "$dead" > "$repo/.multica/agent-environments/desktop.claim"
+printf '%s\n' "$dead" > "$repo/.workpal/agent-environments/desktop.claim"
 bash "$repo/scripts/agent-environment.sh" stop web > /dev/null
 [ "$(count destroy)" = 1 ] || fail "a stale claim kept the environment alive"
 
@@ -222,15 +222,15 @@ new_repo stale-lock
 touch "$repo/registered"
 live_claim web
 live_claim desktop
-mkdir -p "$repo/.multica/agent-environments/lock.d" "$repo/bin"
-printf '%s\n' "$dead" > "$repo/.multica/agent-environments/lock.d/pid"
-cp "$repo/.multica/agent-environments/lock.d/pid" "$repo/stale-pid"
+mkdir -p "$repo/.workpal/agent-environments/lock.d" "$repo/bin"
+printf '%s\n' "$dead" > "$repo/.workpal/agent-environments/lock.d/pid"
+cp "$repo/.workpal/agent-environments/lock.d/pid" "$repo/stale-pid"
 real_cat="$(command -v cat)"
 real_rm="$(command -v rm)"
 cat > "$repo/bin/cat" <<'EOF'
 #!/usr/bin/env bash
 set -eu
-if [ "$1" = "$RACE_REPO/.multica/agent-environments/lock.d/pid" ] && [ ! -f "$RACE_REPO/$RACE_COMPONENT.observed" ]; then
+if [ "$1" = "$RACE_REPO/.workpal/agent-environments/lock.d/pid" ] && [ ! -f "$RACE_REPO/$RACE_COMPONENT.observed" ]; then
   touch "$RACE_REPO/$RACE_COMPONENT.observed"
   for i in $(seq 1 300); do
     [ ! -f "$RACE_REPO/web.observed" ] || [ ! -f "$RACE_REPO/desktop.observed" ] || break
@@ -291,8 +291,8 @@ wait "$second" || fail "second stale-lock stop failed"
 # The PID-specific format can also be reclaimed after a killed holder.
 new_repo stale-owner
 touch "$repo/registered"
-mkdir -p "$repo/.multica/agent-environments/lock.d"
-touch "$repo/.multica/agent-environments/lock.d/owner-$dead"
+mkdir -p "$repo/.workpal/agent-environments/lock.d"
+touch "$repo/.workpal/agent-environments/lock.d/owner-$dead"
 bash "$repo/scripts/agent-environment.sh" stop web > /dev/null
 [ "$(count destroy)" = 1 ] || fail "a dead PID-specific lock prevented cleanup"
 
@@ -301,7 +301,7 @@ bash "$repo/scripts/agent-environment.sh" stop web > /dev/null
 # its owner marker. A stop from the updated script waits for it.
 new_repo mixed-version
 touch "$repo/registered"
-lock_dir="$repo/.multica/agent-environments/lock.d"
+lock_dir="$repo/.workpal/agent-environments/lock.d"
 mkdir -p "$lock_dir"
 sleep 300 &
 old_holder=$!
@@ -317,7 +317,7 @@ EOF
 RACE_LOCK="$lock_dir" RACE_HOLDER="$old_holder" bash "$repo/scripts/agent-environment.sh" stop desktop > /dev/null &
 stopping=$!
 sleep 1
-[ ! -e "$repo/.multica/agent-environments/entered-while-held" ] || fail "a stop entered beside an earlier version's lock holder"
+[ ! -e "$repo/.workpal/agent-environments/entered-while-held" ] || fail "a stop entered beside an earlier version's lock holder"
 rm "$lock_dir/owner-$old_holder" && rmdir "$lock_dir"
 stop_job "$old_holder"
 wait "$stopping" || fail "stop behind an earlier version's lock failed"

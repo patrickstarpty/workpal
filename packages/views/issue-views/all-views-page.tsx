@@ -9,31 +9,31 @@ import {
   Plus,
   Star,
   Trash2,
-} from "@multica/ui/icons";
-import { cn } from "@multica/ui/lib/utils";
-import { IconButton } from "@multica/ui/components/common/icon-button";
-import { Button } from "@multica/ui/components/ui/button";
+} from "@workpal/ui/icons";
+import { cn } from "@workpal/ui/lib/utils";
+import { IconButton } from "@workpal/ui/components/common/icon-button";
+import { Button } from "@workpal/ui/components/ui/button";
 import {
   DropdownMenuItem,
   DropdownMenuSeparator,
-} from "@multica/ui/components/ui/dropdown-menu";
-import type { IssueView } from "@multica/core/api/schemas";
-import { useAuthStore } from "@multica/core/auth";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { useWorkspacePaths } from "@multica/core/paths";
-import { projectListOptions } from "@multica/core/projects/queries";
-import { memberListOptions } from "@multica/core/workspace/queries";
-import { issueViewEverywhereOptions } from "@multica/core/issue-views/queries";
-import { issueViewFilterCount } from "@multica/core/issue-views/baseline";
-import { issueViewSeedDefinition } from "@multica/core/issue-views/definition";
+} from "@workpal/ui/components/ui/dropdown-menu";
+import type { IssueView } from "@workpal/core/api/schemas";
+import { useAuthStore } from "@workpal/core/auth";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { useWorkspacePaths } from "@workpal/core/paths";
+import { projectListOptions } from "@workpal/core/projects/queries";
+import { memberListOptions } from "@workpal/core/workspace/queries";
+import { issueViewEverywhereOptions } from "@workpal/core/issue-views/queries";
+import { issueViewFilterCount } from "@workpal/core/issue-views/baseline";
+import { issueViewSeedDefinition } from "@workpal/core/issue-views/definition";
 import {
   BUILTIN_VIEW_KEYS,
   builtinViewItemId,
   savedViewItemId,
   type BuiltinViewKey,
-} from "@multica/core/issue-views/sidebar-views";
-import { issueViewTarget } from "@multica/core/issue-views/view-target";
-import { useActiveIssueViewStore } from "@multica/core/issue-views/active-view-store";
+} from "@workpal/core/issue-views/sidebar-views";
+import { issueViewTarget } from "@workpal/core/issue-views/view-target";
+import { useActiveIssueViewStore } from "@workpal/core/issue-views/active-view-store";
 import { ActorAvatar } from "../common/actor-avatar";
 import {
   CollectionCreateButton,

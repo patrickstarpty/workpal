@@ -14,7 +14,7 @@ import {
   watchSessionActivity,
 } from "./session-renewal";
 
-const TOKEN_KEY = "multica_token";
+const TOKEN_KEY = "workpal_token";
 // Shaped like the server's session JWTs; renewal only runs for that shape.
 const SESSION_V1 = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ2MSJ9.c2lnLXYx";
 const SESSION_V2 = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ2MiJ9.c2lnLXYy";

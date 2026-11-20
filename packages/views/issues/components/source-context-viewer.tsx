@@ -1,16 +1,16 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { AlertTriangle, ChevronRight, LocateFixed, Maximize2, Minimize2, XIcon } from "@multica/ui/icons";
-import { issueStatusCategory } from "@multica/core/issues";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { useIssueStatuses } from "@multica/core/issue-statuses/hooks";
-import type { Issue, IssueSourceContext, SourceContextCommentSnapshot } from "@multica/core/types";
-import { Button } from "@multica/ui/components/ui/button";
-import { IconButton } from "@multica/ui/components/common/icon-button";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@multica/ui/components/ui/dialog";
-import { cn } from "@multica/ui/lib/utils";
-import { useWorkspacePaths } from "@multica/core/paths";
+import { AlertTriangle, ChevronRight, LocateFixed, Maximize2, Minimize2, XIcon } from "@workpal/ui/icons";
+import { issueStatusCategory } from "@workpal/core/issues";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { useIssueStatuses } from "@workpal/core/issue-statuses/hooks";
+import type { Issue, IssueSourceContext, SourceContextCommentSnapshot } from "@workpal/core/types";
+import { Button } from "@workpal/ui/components/ui/button";
+import { IconButton } from "@workpal/ui/components/common/icon-button";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@workpal/ui/components/ui/dialog";
+import { cn } from "@workpal/ui/lib/utils";
+import { useWorkspacePaths } from "@workpal/core/paths";
 import { AppLink, useNavigation } from "../../navigation";
 import { useLocale, useT } from "../../i18n";
 import { ProgressRing } from "./progress-ring";

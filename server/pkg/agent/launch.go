@@ -45,7 +45,7 @@ func newAgentCommandLogArgs(invocationArgs []string, trustedPositionals ...trust
 	}
 }
 
-// Command is the identity of a runtime CLI: the executable Multica spawns plus
+// Command is the identity of a runtime CLI: the executable Workpal spawns plus
 // the argv prefix that belongs to the command itself rather than to any single
 // invocation.
 //
@@ -161,7 +161,7 @@ func (c Command) withProbeDirectory() (Command, func(), error) {
 	if err != nil {
 		return c, nil, err
 	}
-	dir, err := os.MkdirTemp("", "multica-probe-*")
+	dir, err := os.MkdirTemp("", "workpal-probe-*")
 	if err != nil {
 		return c, nil, err
 	}
@@ -550,7 +550,7 @@ func ValidateCustomArgs(agentType string, args []string) error {
 			isBlocked = isBlocked || sessionArg
 		}
 		if isBlocked {
-			return fmt.Errorf("custom_args: %q is managed by Multica for runtime %q and cannot be overridden; remove it from custom_args", flag, agentType)
+			return fmt.Errorf("custom_args: %q is managed by Workpal for runtime %q and cannot be overridden; remove it from custom_args", flag, agentType)
 		}
 	}
 	return nil

@@ -8,9 +8,9 @@
     "agent_link_no_access": "你沒有權限與該 AI 代理聊天。"
   },
   "fab": {
-    "running": "Multica 正在工作...",
+    "running": "Workpal 正在工作...",
     "unread_other": "{{count}} 條未讀對話",
-    "default": "問 Multica"
+    "default": "問 Workpal"
   },
   "bar": {
     "history": "對話記錄",
@@ -80,7 +80,7 @@
       "runtime_access_revoked": "執行時訪問已撤銷。請先將 AI 代理繫結到可用的執行時，再開始新的執行。",
       "manual": "這次回覆已取消。",
       "skill_bundle_unavailable": "沒能下載到 AI 代理的 skill，這次回覆沒有啟動。通常是網路連線問題，請重試。",
-      "runtime_cli_timeout": "本機 OpenClaw CLI 沒能在超時時間內響應，這次執行沒有啟動。這是本地啟動超時，不是網路問題——除非 CLI 變快或調大超時（MULTICA_OPENCLAW_CLI_TIMEOUT），否則重試也不會成功。",
+      "runtime_cli_timeout": "本機 OpenClaw CLI 沒能在超時時間內響應，這次執行沒有啟動。這是本地啟動超時，不是網路問題——除非 CLI 變快或調大超時（WORKPAL_OPENCLAW_CLI_TIMEOUT），否則重試也不會成功。",
       "environment_prepare_failed": "執行 AI 代理的那臺機器沒能把這次執行準備好，任務沒有啟動。下方的原始錯誤會說明是哪一步失敗——常見的是磁碟空間、權限、目錄仍被佔用，或本地配置讀不出來。與 AI 代理和模型廠商無關。",
       "provider_network": "與模型服務的連線中斷，回覆沒能完成。檢查網路後重試。",
       "provider_auth_or_access": "AI 代理的模型帳號登入已失效。重新登入後再試。",
@@ -166,7 +166,7 @@
     "first_time_pillars_suffix": "。",
     "first_time_actions": "讓它做一份總結、規劃你的一天，或交給它一個小任務。",
     "returning_title_named": "你好，我是 {{name}}",
-    "returning_title_default": "歡迎使用 Multica",
+    "returning_title_default": "歡迎使用 Workpal",
     "returning_subtitle": "試試問",
     "chat_with_named": "與 {{name}} 對話"
   },

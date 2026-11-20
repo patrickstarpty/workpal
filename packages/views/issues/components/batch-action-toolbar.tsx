@@ -1,9 +1,9 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { Ellipsis } from "@multica/ui/icons";
+import { Ellipsis } from "@workpal/ui/icons";
 import { toast } from "sonner";
-import { Button } from "@multica/ui/components/ui/button";
+import { Button } from "@workpal/ui/components/ui/button";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -13,28 +13,28 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@multica/ui/components/ui/alert-dialog";
-import { ContextMenu, ContextMenuContent } from "@multica/ui/components/ui/context-menu";
+} from "@workpal/ui/components/ui/alert-dialog";
+import { ContextMenu, ContextMenuContent } from "@workpal/ui/components/ui/context-menu";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuTrigger,
-} from "@multica/ui/components/ui/dropdown-menu";
+} from "@workpal/ui/components/ui/dropdown-menu";
 import { useQuery } from "@tanstack/react-query";
-import { useIssueDeletion } from "@multica/core/issues/use-issue-deletion";
+import { useIssueDeletion } from "@workpal/core/issues/use-issue-deletion";
 import {
   isListPropertyType,
   type BatchIssueLabelOps,
   type BatchIssuePropertyOps,
   type Issue,
   type UpdateIssueRequest,
-} from "@multica/core/types";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { commonIssueFields } from "@multica/core/issues/batch";
-import { sharedWorkflowStatusKeys, useIssueWorkflows } from "@multica/core/issue-workflows";
-import { projectListOptions } from "@multica/core/projects/queries";
-import { useBatchUpdateIssues, useBatchDeleteIssues } from "@multica/core/issues/mutations";
-import { useModalStore } from "@multica/core/modals";
+} from "@workpal/core/types";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { commonIssueFields } from "@workpal/core/issues/batch";
+import { sharedWorkflowStatusKeys, useIssueWorkflows } from "@workpal/core/issue-workflows";
+import { projectListOptions } from "@workpal/core/projects/queries";
+import { useBatchUpdateIssues, useBatchDeleteIssues } from "@workpal/core/issues/mutations";
+import { useModalStore } from "@workpal/core/modals";
 import { StatusPicker, PriorityPicker, AssigneePicker, DueDatePicker, StartDatePicker } from "./pickers";
 import { BatchLabelPicker } from "./pickers/batch-label-picker";
 import { CustomPropertyValueInput } from "./pickers/custom-property-picker";

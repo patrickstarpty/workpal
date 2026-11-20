@@ -8,12 +8,12 @@ import {
   useInstalledThemesStore,
   useThemeFolderStatus,
   useThemeSafeMode,
-} from "@multica/core/appearance";
+} from "@workpal/core/appearance";
 import { AppearanceSync } from "./appearance-sync";
 
 const html = () => document.documentElement;
-const sheet = () => document.getElementById("multica-appearance");
-const themeCss = () => document.getElementById("multica-theme-css");
+const sheet = () => document.getElementById("workpal-appearance");
+const themeCss = () => document.getElementById("workpal-theme-css");
 
 const PAPER = {
   apiVersion: 1,

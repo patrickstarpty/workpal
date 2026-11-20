@@ -5,8 +5,8 @@ import (
 	"errors"
 	"log/slog"
 
-	"github.com/multica-ai/multica/server/internal/daemon/execenv"
-	"github.com/multica-ai/multica/server/pkg/agent"
+	"workpal.local/workpal/server/internal/daemon/execenv"
+	"workpal.local/workpal/server/pkg/agent"
 )
 
 // gateOpenCodeResumeToSaneClock returns the retired pointer before changing

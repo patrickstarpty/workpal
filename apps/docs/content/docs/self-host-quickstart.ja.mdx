@@ -1,6 +1,6 @@
 ---
 title: セルフホストクイックスタート
-description: Docker Compose で Multica を起動し、ログインして、最初の実行用コンピュータを接続します。
+description: Docker Compose で Workpal を起動し、ログインして、最初の実行用コンピュータを接続します。
 ---
 
 import { Callout } from "fumadocs-ui/components/callout";
@@ -8,20 +8,20 @@ import { Step, Steps } from "fumadocs-ui/components/steps";
 import { Tab, Tabs } from "fumadocs-ui/components/tabs";
 import { Accordion, Accordions } from "fumadocs-ui/components/accordion";
 
-Multica のセルフホストは 2 つの部分に分かれます。
+Workpal のセルフホストは 2 つの部分に分かれます。
 
 | 構成要素 | 実行するもの | 置く場所 |
 |---|---|---|
-| **Multica サービス** | Web、API、PostgreSQL | Docker をインストールした 1 台のマシン |
-| **実行用コンピュータ** | Multica デーモンと AI コーディングツール | 開発者が実際に作業するコンピュータ |
+| **Workpal サービス** | Web、API、PostgreSQL | Docker をインストールした 1 台のマシン |
+| **実行用コンピュータ** | Workpal デーモンと AI コーディングツール | 開発者が実際に作業するコンピュータ |
 
-両者は同じマシンでも、別々のマシンでも構いません。セルフホストで置き換えるのは Multica Cloud の部分だけです。
+両者は同じマシンでも、別々のマシンでも構いません。セルフホストで置き換えるのは Workpal Cloud の部分だけです。
 
-このページでは Docker Compose を使います。Kubernetes でのデプロイは、リポジトリの [Self-hosting guide](https://github.com/multica-ai/multica/blob/main/SELF_HOSTING.md#kubernetes-deployment-alternative) を参照してください。
+このページでは Docker Compose を使います。Kubernetes でのデプロイは、リポジトリの Self-hosting guide を参照してください。
 
 ## 始める前に
 
-Multica サービスを実行するマシンには次が必要です。
+Workpal サービスを実行するマシンには次が必要です。
 
 - Docker Engine または Docker Desktop（`docker compose` が実行できること）
 - Git、Make、curl、OpenSSL
@@ -34,20 +34,20 @@ docker info
 docker compose version
 ```
 
-Multica は Compose v2（`docker compose`）を使います。旧版の `docker-compose` v1 はサポートされません。
+Workpal は Compose v2（`docker compose`）を使います。旧版の `docker-compose` v1 はサポートされません。
 
-実行用コンピュータには、Claude Code、Codex、Cursor などの [AI コーディングツール](/providers)を最低 1 つインストールし、ログインしておく必要があります。Multica CLI はステップ 5 でインストールします。
+実行用コンピュータには、Claude Code、Codex、Cursor などの [AI コーディングツール](/providers)を最低 1 つインストールし、ログインしておく必要があります。Workpal CLI はステップ 5 でインストールします。
 
 <Steps>
 <Step>
 
-## Multica を起動する [#1-multica-を起動する]
+## Workpal を起動する [#1-workpal-を起動する]
 
 サービスを実行するマシンで次を実行します。
 
 ```bash
-git clone --depth 1 https://github.com/multica-ai/multica.git
-cd multica
+git clone --depth 1 https://code-host.invalid/workpal.git
+cd workpal
 make selfhost
 ```
 
@@ -57,8 +57,8 @@ make selfhost
 <Accordion title="初回実行時に make selfhost が行うこと" id="what-make-selfhost-does">
 
 1. `.env.example` から `.env` を作成する
-2. `JWT_SECRET`、PostgreSQL パスワード、`MULTICA_VCS_SECRET_KEY`（セルフホストの Git 連携用の暗号化キー）をランダム生成する
-3. PostgreSQL、Multica backend、Multica frontend のイメージを取得する
+2. `JWT_SECRET`、PostgreSQL パスワード、`WORKPAL_VCS_SECRET_KEY`（セルフホストの Git 連携用の暗号化キー）をランダム生成する
+3. PostgreSQL、Workpal backend、Workpal frontend のイメージを取得する
 4. 永続化ボリュームを作成し、3 つのコンテナを起動する
 5. backend がヘルスチェックに応答し始めるまで待機する
 
@@ -109,7 +109,7 @@ backend コンテナは起動のたびにデータベースの migration を実�
 <Tabs items={["ローカルアクセス", "リモートアクセス"]}>
 <Tab value="ローカルアクセス">
 
-[http://localhost:3000](http://localhost:3000) をそのまま開きます。後で `multica setup self-host` を実行するときも、URL を渡す必要はありません。
+[http://localhost:3000](http://localhost:3000) をそのまま開きます。後で `workpal setup self-host` を実行するときも、URL を渡す必要はありません。
 
 </Tab>
 <Tab value="リモートアクセス" id="remote-access">
@@ -118,15 +118,15 @@ Docker Compose はデフォルトで `3000` と `8080` を `127.0.0.1` だけに
 
 以下では 2 つのドメインを例にします。
 
-- `app.example.com`: Multica Web
+- `app.example.com`: Workpal Web
 - `api.example.com`: API、ヘルスチェック、デーモン接続
 
 まず `.env` に公開 URL を設定します。
 
 ```bash
 FRONTEND_ORIGIN=https://app.example.com
-MULTICA_APP_URL=https://app.example.com
-MULTICA_PUBLIC_URL=https://api.example.com
+WORKPAL_APP_URL=https://app.example.com
+WORKPAL_PUBLIC_URL=https://api.example.com
 ```
 
 この構成ではブラウザのトラフィックがすべて app ドメインを経由し、cookie がドメインをまたがないため、`COOKIE_DOMAIN` の設定は不要です。ブラウザに api ドメインへ直接アクセスさせる場合は設定が必須です。[環境変数](/environment-variables)を参照してください。
@@ -163,8 +163,8 @@ api.example.com {
 <Tab value="単一オリジン">
 
 ```text
-multica.example.com {
-    # CLI の到達確認: `multica setup` は <server-url>/health に GET を送り 200 を要求する。
+workpal.example.com {
+    # CLI の到達確認: `workpal setup` は <server-url>/health に GET を送り 200 を要求する。
     # 古い frontend はこのパスを転送しないため、backend に直接ルーティングする
     handle /health {
         reverse_proxy 127.0.0.1:8080
@@ -195,7 +195,7 @@ multica.example.com {
 </Tab>
 </Tabs>
 
-**単一オリジン**（1 つのドメイン、または 1 台のホストに 1 つのポート。小規模サーバーで一般的な構成）では、デーモンが依存するパスを backend に明示的に転送し、残りを frontend に任せます。この場合は 2 つの URL をどちらもそこに向けます。`.env` の `FRONTEND_ORIGIN` と `MULTICA_APP_URL`、および `multica setup self-host` の `--server-url` と `--app-url` です。
+**単一オリジン**（1 つのドメイン、または 1 台のホストに 1 つのポート。小規模サーバーで一般的な構成）では、デーモンが依存するパスを backend に明示的に転送し、残りを frontend に任せます。この場合は 2 つの URL をどちらもそこに向けます。`.env` の `FRONTEND_ORIGIN` と `WORKPAL_APP_URL`、および `workpal setup self-host` の `--server-url` と `--app-url` です。
 
 `.env` を変更したら、`up -d` でコンテナを作り直して新しい設定を反映します。
 
@@ -205,12 +205,12 @@ curl -fsS https://api.example.com/readyz
 curl -fsS https://app.example.com/api/config | grep -o '"daemon_server_url":"[^"]*"'
 ```
 
-最後のコマンドは `daemon_server_url`、つまりデーモンが API に接続するための URL を出力します。`localhost` と出力される場合は `.env` がまだローカルのデフォルトのままです。`.env.example` からコピーした `${FRONTEND_PORT}` 参照に頼らず、`FRONTEND_ORIGIN` と `MULTICA_APP_URL` を公開 URL として明示的に設定し、コンテナを作り直してください。
+最後のコマンドは `daemon_server_url`、つまりデーモンが API に接続するための URL を出力します。`localhost` と出力される場合は `.env` がまだローカルのデフォルトのままです。`.env.example` からコピーした `${FRONTEND_PORT}` 参照に頼らず、`FRONTEND_ORIGIN` と `WORKPAL_APP_URL` を公開 URL として明示的に設定し、コンテナを作り直してください。
 
 <Accordions>
 <Accordion title="daemon_server_url の決まり方" id="how-daemon-server-url-is-resolved">
 
-`MULTICA_DAEMON_SERVER_URL` が設定されていればそれを、次に `MULTICA_PUBLIC_URL`、どちらも未設定ならアプリ URL（`MULTICA_APP_URL`、未設定なら `FRONTEND_ORIGIN` にフォールバック）を使います。`MULTICA_APP_URL` と `FRONTEND_ORIGIN` のどちらも未設定の場合、`MULTICA_DAEMON_SERVER_URL` や `MULTICA_PUBLIC_URL` が設定されていてもこのフィールドはレスポンスから丸ごと省略されます（上の grep は何も出力しません）。
+`WORKPAL_DAEMON_SERVER_URL` が設定されていればそれを、次に `WORKPAL_PUBLIC_URL`、どちらも未設定ならアプリ URL（`WORKPAL_APP_URL`、未設定なら `FRONTEND_ORIGIN` にフォールバック）を使います。`WORKPAL_APP_URL` と `FRONTEND_ORIGIN` のどちらも未設定の場合、`WORKPAL_DAEMON_SERVER_URL` や `WORKPAL_PUBLIC_URL` が設定されていてもこのフィールドはレスポンスから丸ごと省略されます（上の grep は何も出力しません）。
 
 </Accordion>
 </Accordions>
@@ -245,7 +245,7 @@ docker compose -f docker-compose.selfhost.yml logs backend \
 コードを入力して、最初のワークスペースを作成します。Resend または SMTP を設定すると認証コードはメールで送信され、メンバーがコンテナログを読む必要はなくなります。詳しくは[ログインとサインアップ設定](/auth-setup)を参照してください。
 
 <Callout type="warning">
-セルフホストのデプロイはデフォルトで `APP_ENV=production` を使い、固定の認証コードは有効になりません。公開インスタンスで `MULTICA_DEV_VERIFICATION_CODE` を設定しないでください。
+セルフホストのデプロイはデフォルトで `APP_ENV=production` を使い、固定の認証コードは有効になりません。公開インスタンスで `WORKPAL_DEV_VERIFICATION_CODE` を設定しないでください。
 </Callout>
 
 </Step>
@@ -259,39 +259,39 @@ docker compose -f docker-compose.selfhost.yml logs backend \
 実行はデーモンを実行しているユーザーの全権限で動作し、そのユーザーが読み書きできるものはすべて読み書きできます。個人アカウントではなく、専用の Unix ユーザー、コンテナ、または VM でデーモンを実行してください。[セキュリティモデル](/security-model)を参照してください。
 </Callout>
 
-まず Multica CLI をインストールします。
+まず Workpal CLI をインストールします。
 
 <Tabs groupId="os" persist items={["macOS / Linux", "Windows"]}>
 <Tab value="macOS / Linux">
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/multica-ai/multica/main/scripts/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/workpal-ai/workpal/main/scripts/install.sh | bash
 ```
 
 </Tab>
 <Tab value="Windows">
 
 ```powershell
-irm https://raw.githubusercontent.com/multica-ai/multica/main/scripts/install.ps1 | iex
+irm https://raw.githubusercontent.com/workpal-ai/workpal/main/scripts/install.ps1 | iex
 ```
 
 </Tab>
 </Tabs>
 
-次に CLI をサービスに接続します。Multica サービスが動いている場所に合わせて選んでください。
+次に CLI をサービスに接続します。Workpal サービスが動いている場所に合わせて選んでください。
 
 <Tabs items={["このコンピュータ", "別のマシン"]}>
 <Tab value="このコンピュータ">
 
 ```bash
-multica setup self-host
+workpal setup self-host
 ```
 
 </Tab>
 <Tab value="別のマシン">
 
 ```bash
-multica setup self-host \
+workpal setup self-host \
   --server-url https://api.example.com \
   --app-url https://app.example.com
 ```
@@ -299,12 +299,12 @@ multica setup self-host \
 </Tab>
 </Tabs>
 
-別のマシンの場合は、先ほど設定した 2 つの URL を渡します。このコマンドはまず `<server-url>/health` を確認し、次にブラウザを開いてログインを完了します。ログイン後はローカルに認証情報を保存し、デーモンを起動します。このステップで `Server not reachable` エラーが出る場合、`/health` のプローブが 200 を取得できていません。考えられる原因は 3 つです。プロキシがすべてのトラフィックをこのパスを転送しない古い frontend に向けている、プロキシが `/health` を backend にルーティングしていない、あるいは DNS・TLS・ファイアウォール・タイムアウト・backend からの 5xx といったより下位の障害です。詳細は[トラブルシューティング](/troubleshooting#multica-setup-reports-the-server-is-not-reachable)を参照してください。
+別のマシンの場合は、先ほど設定した 2 つの URL を渡します。このコマンドはまず `<server-url>/health` を確認し、次にブラウザを開いてログインを完了します。ログイン後はローカルに認証情報を保存し、デーモンを起動します。このステップで `Server not reachable` エラーが出る場合、`/health` のプローブが 200 を取得できていません。考えられる原因は 3 つです。プロキシがすべてのトラフィックをこのパスを転送しない古い frontend に向けている、プロキシが `/health` を backend にルーティングしていない、あるいは DNS・TLS・ファイアウォール・タイムアウト・backend からの 5xx といったより下位の障害です。詳細は[トラブルシューティング](/troubleshooting#workpal-setup-reports-the-server-is-not-reachable)を参照してください。
 
 接続状態を確認します。
 
 ```bash
-multica daemon status
+workpal daemon status
 ```
 
 正常であれば、出力に次が表示されます。
@@ -318,7 +318,7 @@ multica daemon status
 
 ## 最初の実行を完了する [#6-最初の実行を完了する]
 
-Multica に戻ります。ランタイム一覧にオンラインのランタイムが表示されたら、エージェントを作成し、最初のタスクを割り当てます。
+Workpal に戻ります。ランタイム一覧にオンラインのランタイムが表示されたら、エージェントを作成し、最初のタスクを割り当てます。
 
 実行ログが完了になり、タイムラインにエージェントの返信が現れれば、セルフホストのサービス、実行用コンピュータ、AI コーディングツールがつながっています。詳しい手順は[クイックスタート](/cloud-quickstart)のステップ 3〜5 を参照してください。
 
@@ -327,7 +327,7 @@ Multica に戻ります。ランタイム一覧にオンラインのランタイ
 
 ## よく使う管理コマンド
 
-以下のコマンドはすべて `multica` リポジトリのディレクトリで実行します。
+以下のコマンドはすべて `workpal` リポジトリのディレクトリで実行します。
 
 ```bash
 # 状態を確認する
@@ -354,15 +354,15 @@ docker compose -f docker-compose.selfhost.yml down
 
 ### イメージタグが固定されていないか確認する
 
-両方のイメージが `${MULTICA_IMAGE_TAG:-latest}` として解決され（`docker-compose.selfhost.yml`：`services.backend.image`、`services.frontend.image`）、`.env.example` は `MULTICA_IMAGE_TAG=latest` を同梱しています。
+両方のイメージが `${WORKPAL_IMAGE_TAG:-latest}` として解決され（`docker-compose.selfhost.yml`：`services.backend.image`、`services.frontend.image`）、`.env.example` は `WORKPAL_IMAGE_TAG=latest` を同梱しています。
 
 ```bash
-grep MULTICA_IMAGE_TAG .env
-# MULTICA_IMAGE_TAG=v0.4.5   ← 固定されている: 先に latest（または希望のリリース）へ変更する
+grep WORKPAL_IMAGE_TAG .env
+# WORKPAL_IMAGE_TAG=v0.4.5   ← 固定されている: 先に latest（または希望のリリース）へ変更する
 ```
 
 <Callout type="warning">
-**`MULTICA_IMAGE_TAG` を固定している場合、以下のコマンドではアップグレードされません。** `pull` は同じタグを取り直すだけで、古いバージョンのままです。エラーも警告も出ません。
+**`WORKPAL_IMAGE_TAG` を固定している場合、以下のコマンドではアップグレードされません。** `pull` は同じタグを取り直すだけで、古いバージョンのままです。エラーも警告も出ません。
 </Callout>
 
 </Step>
@@ -374,10 +374,10 @@ migration は前方向のみで巻き戻せないため、大事な環境をア�
 
 ```bash
 docker compose -f docker-compose.selfhost.yml exec -T postgres \
-  pg_dump -U multica multica > multica-backup.sql && gzip multica-backup.sql
+  pg_dump -U workpal workpal > workpal-backup.sql && gzip workpal-backup.sql
 ```
 
-`POSTGRES_USER` / `POSTGRES_DB` を `multica` のデフォルトから変更している場合は、`.env` の値に置き換えてください。データは `multica_pgdata` という名前付きボリュームにあり、`docker compose down` では消えませんが、`down -v` では消えます。
+`POSTGRES_USER` / `POSTGRES_DB` を `workpal` のデフォルトから変更している場合は、`.env` の値に置き換えてください。データは `workpal_pgdata` という名前付きボリュームにあり、`docker compose down` では消えませんが、`down -v` では消えます。
 
 <Callout type="warning">
 **`pg_dump` を直接 `gzip` にパイプしないでください。** シェルはパイプラインの**最後**のコマンドの終了ステータスを返すため、`pg_dump … | gzip > backup.sql.gz` はダンプが失敗しても `0` で終了し、形式としては完全に正当な、中身が空の 20 バイトのアーカイブが残ります。先にファイルへリダイレクトすれば `pg_dump` 自身の終了ステータスが効くようになり、`&&` は実際に成功したダンプだけを圧縮します。
@@ -394,7 +394,7 @@ docker compose -f docker-compose.selfhost.yml exec -T postgres \
 <Tab value="make selfhost">
 
 ```bash
-cd multica
+cd workpal
 git pull --ff-only
 make selfhost
 ```
@@ -403,7 +403,7 @@ make selfhost
 <Tab value="docker compose">
 
 ```bash
-cd multica
+cd workpal
 git pull --ff-only
 docker compose -f docker-compose.selfhost.yml pull
 docker compose -f docker-compose.selfhost.yml up -d
@@ -440,7 +440,7 @@ HTTP 200 かつ両方のチェックが `ok` でない場合、新しいバー�
 <Accordions type="multiple">
 <Accordion title="git pull が実際に更新するもの" id="what-git-pull-actually-does">
 
-`git pull` が更新するのは **`docker-compose.selfhost.yml` そのもの**です。新しい環境変数、新しいサービス、変更された healthcheck などです。新しい Multica のバージョンを取得する仕組み**ではありません**。
+`git pull` が更新するのは **`docker-compose.selfhost.yml` そのもの**です。新しい環境変数、新しいサービス、変更された healthcheck などです。新しい Workpal のバージョンを取得する仕組み**ではありません**。
 
 実際に動くバージョンを決めるのは `docker compose pull` で、そのタグが今どのイメージを指しているかを GHCR に問い合わせます。したがって数か月更新していない checkout でも今日の `latest` イメージを取得できますし、逆に `git pull` だけではイメージを取得してコンテナを作り直すまで何も変わりません。
 
@@ -454,7 +454,7 @@ HTTP 200 かつ両方のチェックが `ok` でない場合、新しいバー�
 
 Helm には独自のアップグレード経路があります。values ファイルで `images.backend.tag` / `images.frontend.tag` に目的のリリースを設定し、`helm upgrade` を実行してください。タグを変えると Pod スペックが変わるため、Kubernetes が新しいイメージを取得して Deployment をロールします。これが確実な経路です。
 
-`kubectl -n multica rollout restart` はそれ単体ではアップグレードに**なりません**。チャートは `pullPolicy: IfNotPresent` を同梱しているため（`deploy/helm/multica/values.yaml`）、そのタグをすでにキャッシュしているノードでは古いイメージが再利用され、restart しても何も変わりません。`MULTICA_IMAGE_TAG` の固定と同種の落とし穴です。浮動タグでこの方法を使いたい場合は、先に `images.backend.pullPolicy` / `images.frontend.pullPolicy` を `Always` に設定してください。リポジトリの [Self-hosting guide](https://github.com/multica-ai/multica/blob/main/SELF_HOSTING.md#kubernetes-deployment-alternative) を参照してください。
+`kubectl -n workpal rollout restart` はそれ単体ではアップグレードに**なりません**。チャートは `pullPolicy: IfNotPresent` を同梱しているため（`deploy/helm/workpal/values.yaml`）、そのタグをすでにキャッシュしているノードでは古いイメージが再利用され、restart しても何も変わりません。`WORKPAL_IMAGE_TAG` の固定と同種の落とし穴です。浮動タグでこの方法を使いたい場合は、先に `images.backend.pullPolicy` / `images.frontend.pullPolicy` を `Always` に設定してください。リポジトリの Self-hosting guide を参照してください。
 
 </Accordion>
 </Accordions>
@@ -465,9 +465,9 @@ Helm には独自のアップグレード経路があります。values ファ�
 |---|---|
 | `/readyz` が `ok` を返さない | `docker compose -f docker-compose.selfhost.yml logs backend postgres` を実行する。 |
 | 認証コードが届かない | コードを一度リクエストし、backend のログで `Verification code` を探す。 |
-| `setup self-host` が server に到達できないと報告する | 実行用コンピュータから `https://api.example.com/health` をリクエストし、DNS、TLS、リバースプロキシがすべて到達可能か確認する。404 が返る場合、プロキシが `/health` をこのパスを転送しない古い web リリースに向けているため、backend へ直接ルーティングすること（[トラブルシューティング](/troubleshooting#multica-setup-reports-the-server-is-not-reachable)）。 |
-| デーモンが `Agents` を表示しない | AI コーディングツールが `PATH` にありログイン済みであることを確認し、`multica daemon restart` を実行する。 |
-| タスクがキューにとどまり続ける | `multica daemon status` を実行し、デーモンが起動していてワークスペースに接続していることを確認する。 |
+| `setup self-host` が server に到達できないと報告する | 実行用コンピュータから `https://api.example.com/health` をリクエストし、DNS、TLS、リバースプロキシがすべて到達可能か確認する。404 が返る場合、プロキシが `/health` をこのパスを転送しない古い web リリースに向けているため、backend へ直接ルーティングすること（[トラブルシューティング](/troubleshooting#workpal-setup-reports-the-server-is-not-reachable)）。 |
+| デーモンが `Agents` を表示しない | AI コーディングツールが `PATH` にありログイン済みであることを確認し、`workpal daemon restart` を実行する。 |
+| タスクがキューにとどまり続ける | `workpal daemon status` を実行し、デーモンが起動していてワークスペースに接続していることを確認する。 |
 
 その他のケースは[トラブルシューティング](/troubleshooting)を参照してください。
 
@@ -475,5 +475,5 @@ Helm には独自のアップグレード経路があります。values ファ�
 
 - [ログインとサインアップ設定](/auth-setup) — メール、Google ログイン、サインアップ範囲を設定する。
 - [環境変数](/environment-variables) — サーバー設定の完全なリファレンス。
-- [Self-hosting guide](https://github.com/multica-ai/multica/blob/main/SELF_HOSTING.md) — Kubernetes、アップグレード、手動デプロイ。
+- Self-hosting guide — Kubernetes、アップグレード、手動デプロイ。
 - [デスクトップアプリ](/desktop-app) — デスクトップアプリをセルフホストのサービスに接続する。

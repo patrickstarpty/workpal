@@ -5,19 +5,19 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { act, cleanup, renderHook, waitFor } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import type { ReactNode } from "react";
-import { setApiInstance } from "@multica/core/api";
-import type { ApiClient } from "@multica/core/api/client";
+import { setApiInstance } from "@workpal/core/api";
+import type { ApiClient } from "@workpal/core/api/client";
 import {
   getIssueSurfaceViewStore,
   pruneIssueSurfaceViewStates,
-} from "@multica/core/issues/stores/surface-view-store";
-import { ViewStoreProvider } from "@multica/core/issues/stores/view-store-context";
+} from "@workpal/core/issues/stores/surface-view-store";
+import { ViewStoreProvider } from "@workpal/core/issues/stores/view-store-context";
 import type {
   Issue,
   IssueStatusEntry,
   IssueTableGroupsRequest,
   IssueTableRowsRequest,
-} from "@multica/core/types";
+} from "@workpal/core/types";
 import { useIssueSurfaceController } from "./use-issue-surface-controller";
 
 /**
@@ -30,8 +30,8 @@ import { useIssueSurfaceController } from "./use-issue-surface-controller";
  * - Each concrete status becomes a branch only after catalog resolution.
  */
 
-vi.mock("@multica/core/hooks", () => ({ useWorkspaceId: () => "ws-1" }));
-vi.mock("@multica/core/auth", () => ({
+vi.mock("@workpal/core/hooks", () => ({ useWorkspaceId: () => "ws-1" }));
+vi.mock("@workpal/core/auth", () => ({
   useAuthStore: (selector: (state: { user: { id: string } }) => unknown) =>
     selector({ user: { id: "user-1" } }),
 }));

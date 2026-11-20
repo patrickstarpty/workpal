@@ -7,7 +7,7 @@ import { DEFAULT_THEME_ID } from "./built-in-themes";
  * with `?theme=default` in the URL or by holding Shift while the app loads.
  */
 
-const SAFE_MODE_KEY = "multica_theme_safe_mode";
+const SAFE_MODE_KEY = "workpal_theme_safe_mode";
 
 function readSafeMode(): boolean {
   if (typeof window === "undefined") return false;

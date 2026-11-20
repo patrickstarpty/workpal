@@ -30,13 +30,13 @@ import {
   Plus,
   Trash2,
   UserRound,
-} from "@multica/ui/icons";
+} from "@workpal/ui/icons";
 import { toast } from "sonner";
-import { ApiError, clientErrorMessage } from "@multica/core/api";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { useCurrentWorkspace } from "@multica/core/paths";
-import { useIssueStatuses } from "@multica/core/issue-statuses/hooks";
-import { statusColumnKeys } from "@multica/core/issues";
+import { ApiError, clientErrorMessage } from "@workpal/core/api";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { useCurrentWorkspace } from "@workpal/core/paths";
+import { useIssueStatuses } from "@workpal/core/issue-statuses/hooks";
+import { statusColumnKeys } from "@workpal/core/issues";
 import {
   isFixedWorkflowStatus,
   statusAcceptsHandoff,
@@ -46,29 +46,29 @@ import {
   useUpdateIssueWorkflow,
   workflowMiddleKeys,
   workflowNextStatus,
-} from "@multica/core/issue-workflows";
-import { useActorName } from "@multica/core/workspace/hooks";
-import { projectListOptions } from "@multica/core/projects/queries";
+} from "@workpal/core/issue-workflows";
+import { useActorName } from "@workpal/core/workspace/hooks";
+import { projectListOptions } from "@workpal/core/projects/queries";
 import type {
   IssueWorkflow,
   IssueWorkflowMappingPlan,
   IssueWorkflowStep,
   IssueWorkflowStepInput,
-} from "@multica/core/types";
-import { Button } from "@multica/ui/components/ui/button";
-import { IconButton } from "@multica/ui/components/common/icon-button";
-import { TooltipHint } from "@multica/ui/components/common/tooltip-hint";
+} from "@workpal/core/types";
+import { Button } from "@workpal/ui/components/ui/button";
+import { IconButton } from "@workpal/ui/components/common/icon-button";
+import { TooltipHint } from "@workpal/ui/components/common/tooltip-hint";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@multica/ui/components/ui/dropdown-menu";
-import { Input } from "@multica/ui/components/ui/input";
-import { Spinner } from "@multica/ui/components/ui/spinner";
-import { Switch } from "@multica/ui/components/ui/switch";
-import { cn } from "@multica/ui/lib/utils";
+} from "@workpal/ui/components/ui/dropdown-menu";
+import { Input } from "@workpal/ui/components/ui/input";
+import { Spinner } from "@workpal/ui/components/ui/spinner";
+import { Switch } from "@workpal/ui/components/ui/switch";
+import { cn } from "@workpal/ui/lib/utils";
 import { StatusIcon } from "../issues/components/status-icon";
 import { useStatusLabel } from "../issues/utils/status-label";
 import { ActorAvatar } from "../common/actor-avatar";

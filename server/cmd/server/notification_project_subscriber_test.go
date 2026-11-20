@@ -6,10 +6,10 @@ import (
 	"slices"
 	"testing"
 
-	"github.com/multica-ai/multica/server/internal/events"
-	"github.com/multica-ai/multica/server/internal/handler"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
-	"github.com/multica-ai/multica/server/pkg/protocol"
+	"workpal.local/workpal/server/internal/events"
+	"workpal.local/workpal/server/internal/handler"
+	db "workpal.local/workpal/server/pkg/db/generated"
+	"workpal.local/workpal/server/pkg/protocol"
 )
 
 // createTestProject creates an empty project in the test workspace.
@@ -121,12 +121,12 @@ func TestNotification_ProjectSubscriber_IssueEvents(t *testing.T) {
 	queries := db.New(testPool)
 	bus := newNotificationBus(t, queries)
 
-	watcherEmail := "notif-project-watcher@multica.ai"
+	watcherEmail := "notif-project-watcher@workpal.invalid"
 	watcherID := createNotificationMember(t, watcherEmail)
 	t.Cleanup(func() { cleanupTestUser(t, watcherEmail) })
 
 	// Both an issue subscriber and a project watcher: notified once.
-	bothEmail := "notif-project-both@multica.ai"
+	bothEmail := "notif-project-both@workpal.invalid"
 	bothID := createNotificationMember(t, bothEmail)
 	t.Cleanup(func() { cleanupTestUser(t, bothEmail) })
 	enableStatusChanges(t, watcherID, bothID)
@@ -185,11 +185,11 @@ func TestNotification_ProjectSubscriber_LeaveOneIssue(t *testing.T) {
 	queries := db.New(testPool)
 	bus := newNotificationBus(t, queries)
 
-	watcherEmail := "notif-project-leave@multica.ai"
+	watcherEmail := "notif-project-leave@workpal.invalid"
 	watcherID := createNotificationMember(t, watcherEmail)
 	t.Cleanup(func() { cleanupTestUser(t, watcherEmail) })
 
-	commenterEmail := "notif-project-commenter@multica.ai"
+	commenterEmail := "notif-project-commenter@workpal.invalid"
 	commenterID := createNotificationMember(t, commenterEmail)
 	t.Cleanup(func() { cleanupTestUser(t, commenterEmail) })
 
@@ -235,7 +235,7 @@ func TestNotification_ProjectSubscriber_IssueCreatedRespectsMute(t *testing.T) {
 	queries := db.New(testPool)
 	bus := newNotificationBus(t, queries)
 
-	mutedEmail := "notif-project-muted@multica.ai"
+	mutedEmail := "notif-project-muted@workpal.invalid"
 	mutedID := createNotificationMember(t, mutedEmail)
 	t.Cleanup(func() { cleanupTestUser(t, mutedEmail) })
 

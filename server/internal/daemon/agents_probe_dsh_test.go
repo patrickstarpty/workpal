@@ -13,7 +13,7 @@ import (
 )
 
 // dshProbeFixture writes a fake dsh and controls the one filesystem fact the
-// classification turns on: whether the `multica` profile manifest is present.
+// classification turns on: whether the `workpal` profile manifest is present.
 // DSH_HOME is pinned so the answer never depends on the machine running the
 // test.
 //
@@ -28,7 +28,7 @@ func dshProbeFixture(t *testing.T, body string, manifest bool) string {
 	home := t.TempDir()
 	t.Setenv("DSH_HOME", home)
 	if manifest {
-		dir := filepath.Join(home, "profiles", dshMulticaProfileName)
+		dir := filepath.Join(home, "profiles", dshWorkpalProfileName)
 		if err := os.MkdirAll(dir, 0o755); err != nil {
 			t.Fatal(err)
 		}
@@ -62,7 +62,7 @@ func shortenDshProbeTimeoutForHang(t *testing.T) {
 // other failure mode is a statement about this instant, and treating them alike
 // is what let a momentary failure during a DSH upgrade demote a working runtime
 // and start overwriting an installation that was already there.
-func TestProbeDshMulticaProfile(t *testing.T) {
+func TestProbeDshWorkpalProfile(t *testing.T) {
 	if runtime.GOOS == "windows" {
 		t.Skip("shell fixture")
 	}
@@ -78,7 +78,7 @@ func TestProbeDshMulticaProfile(t *testing.T) {
 		},
 		{
 			name: "profile absent and the probe says so",
-			body: `printf '%s\n' 'profile "multica" does not exist' >&2; exit 1`,
+			body: `printf '%s\n' 'profile "workpal" does not exist' >&2; exit 1`,
 			want: dshProbeMissingProfile,
 		},
 		{
@@ -140,8 +140,8 @@ func TestProbeDshMulticaProfile(t *testing.T) {
 		path := dshProbeFixture(t, `exec sleep 30`, false)
 		ctx, cancel := context.WithCancel(context.Background())
 		cancel()
-		if got := probeDshMulticaProfile(ctx, path).verdict; got != dshProbeUnavailable {
-			t.Fatalf("probeDshMulticaProfile() = %v, want %v", got, dshProbeUnavailable)
+		if got := probeDshWorkpalProfile(ctx, path).verdict; got != dshProbeUnavailable {
+			t.Fatalf("probeDshWorkpalProfile() = %v, want %v", got, dshProbeUnavailable)
 		}
 	})
 
@@ -151,8 +151,8 @@ func TestProbeDshMulticaProfile(t *testing.T) {
 				shortenDshProbeTimeoutForHang(t)
 			}
 			path := dshProbeFixture(t, tc.body, tc.manifest)
-			if got := probeDshMulticaProfile(context.Background(), path).verdict; got != tc.want {
-				t.Fatalf("probeDshMulticaProfile() = %v, want %v", got, tc.want)
+			if got := probeDshWorkpalProfile(context.Background(), path).verdict; got != tc.want {
+				t.Fatalf("probeDshWorkpalProfile() = %v, want %v", got, tc.want)
 			}
 		})
 	}
@@ -164,7 +164,7 @@ func TestProbeDshMulticaProfile(t *testing.T) {
 		for _, manifest := range manifests {
 			home := t.TempDir()
 			t.Setenv("DSH_HOME", home)
-			dir := filepath.Join(home, "profiles", dshMulticaProfileName)
+			dir := filepath.Join(home, "profiles", dshWorkpalProfileName)
 			if err := os.MkdirAll(dir, 0o755); err != nil {
 				t.Fatal(err)
 			}
@@ -179,8 +179,8 @@ func TestProbeDshMulticaProfile(t *testing.T) {
 				t.Fatal(err)
 			}
 			start := time.Now()
-			if got := probeDshMulticaProfile(context.Background(), path).verdict; got != dshProbeMissingProfile {
-				t.Fatalf("probeDshMulticaProfile() = %v, want missing", got)
+			if got := probeDshWorkpalProfile(context.Background(), path).verdict; got != dshProbeMissingProfile {
+				t.Fatalf("probeDshWorkpalProfile() = %v, want missing", got)
 			}
 			if time.Since(start) > time.Second {
 				t.Fatal("an unreferenced manifest still ran the probe")
@@ -196,7 +196,7 @@ func TestProbeDshMulticaProfile(t *testing.T) {
 	t.Run("unparseable manifest still probes", func(t *testing.T) {
 		home := t.TempDir()
 		t.Setenv("DSH_HOME", home)
-		dir := filepath.Join(home, "profiles", dshMulticaProfileName)
+		dir := filepath.Join(home, "profiles", dshWorkpalProfileName)
 		if err := os.MkdirAll(dir, 0o755); err != nil {
 			t.Fatal(err)
 		}
@@ -210,8 +210,8 @@ func TestProbeDshMulticaProfile(t *testing.T) {
 		if err := os.WriteFile(path, []byte(script), 0o755); err != nil {
 			t.Fatal(err)
 		}
-		if got := probeDshMulticaProfile(context.Background(), path).verdict; got != dshProbeUnavailable {
-			t.Fatalf("probeDshMulticaProfile() = %v, want unavailable", got)
+		if got := probeDshWorkpalProfile(context.Background(), path).verdict; got != dshProbeUnavailable {
+			t.Fatalf("probeDshWorkpalProfile() = %v, want unavailable", got)
 		}
 		if _, err := os.Stat(marker); err != nil {
 			t.Fatal("dsh --probe did not run for an unparseable manifest")
@@ -258,7 +258,7 @@ func TestProbeBuiltinRuntime_DshFailureWithProfileInstalledIsNotCondemned(t *tes
 			record := filepath.Join(t.TempDir(), "provisioned.log")
 			// A bundle IS configured: the assertion is that these failures never
 			// reach the install path.
-			t.Setenv(dshProfileBundleEnv, "@multica-ai/dsh-runtime")
+			t.Setenv(dshProfileBundleEnv, "@workpal-ai/dsh-runtime")
 			t.Setenv("DSH_TEST_RECORD", record)
 
 			d := &Daemon{
@@ -295,7 +295,7 @@ func TestProbeBuiltinRuntime_DshFailureWithProfileInstalledIsNotCondemned(t *tes
 // Gating discovery on the profile instead — which this test used to assert —
 // is what made a missing profile invisible: dsh vanished from the availability
 // set with nothing on /health, in the log, or in `daemon status` to say why.
-func TestProbeAgentCLIsDiscoversDshWithoutMulticaProfile(t *testing.T) {
+func TestProbeAgentCLIsDiscoversDshWithoutWorkpalProfile(t *testing.T) {
 	if runtime.GOOS == "windows" {
 		t.Skip("shell fixture")
 	}
@@ -306,16 +306,16 @@ func TestProbeAgentCLIsDiscoversDshWithoutMulticaProfile(t *testing.T) {
 
 	fakeDir := t.TempDir()
 	path := filepath.Join(fakeDir, "dsh")
-	body := "#!/bin/sh\nset -eu\nprintf '%s\\n' 'missing multica profile' >&2\nexit 1\n"
+	body := "#!/bin/sh\nset -eu\nprintf '%s\\n' 'missing workpal profile' >&2\nexit 1\n"
 	if err := os.WriteFile(path, []byte(body), 0o755); err != nil {
 		t.Fatal(err)
 	}
 	t.Setenv("PATH", fakeDir)
-	t.Setenv("MULTICA_DSH_PATH", "")
+	t.Setenv("WORKPAL_DSH_PATH", "")
 
 	entry, found := probeAgentCLIs()["dsh"]
 	if !found {
-		t.Fatal("dsh was not discovered; discovery must not depend on the Multica runtime profile")
+		t.Fatal("dsh was not discovered; discovery must not depend on the Workpal runtime profile")
 	}
 	if want := canonicalExecutablePath(path); entry.Path != want {
 		t.Fatalf("dsh path = %q, want %q", entry.Path, want)
@@ -330,7 +330,7 @@ func TestProbeAgentCLIsDiscoversDshWithoutMulticaProfile(t *testing.T) {
 // The manifest is what decides, so the fixture owns it: a probe that fails over
 // an installed profile is not the same finding as one that fails with nothing
 // installed, and only the second may be installed over.
-func TestProbeBuiltinRuntime_DshWithoutMulticaProfile(t *testing.T) {
+func TestProbeBuiltinRuntime_DshWithoutWorkpalProfile(t *testing.T) {
 	if runtime.GOOS == "windows" {
 		t.Skip("shell fixture")
 	}
@@ -348,7 +348,7 @@ func TestProbeBuiltinRuntime_DshWithoutMulticaProfile(t *testing.T) {
 		},
 		{
 			name:        "profile missing",
-			probeBody:   `printf '%s\n' 'profile "multica" does not exist' >&2; exit 1`,
+			probeBody:   `printf '%s\n' 'profile "workpal" does not exist' >&2; exit 1`,
 			wantVerdict: builtinProbeMissingProfile,
 		},
 	}
@@ -393,7 +393,7 @@ func TestProbeBuiltinRuntime_DshBinaryGoneIsNotAProfileVerdict(t *testing.T) {
 }
 
 // dshDesktopBundleFixture writes a fake DSH Desktop bundled CLI that answers
-// `--probe` the way the Multica runtime profile does, and pins discovery to
+// `--probe` the way the Workpal runtime profile does, and pins discovery to
 // it. The DSH Desktop app ships its CLI inside the .app bundle and never
 // installs `dsh` onto PATH, so neither LookPath nor the login-shell sweep can
 // find it.
@@ -419,8 +419,8 @@ func dshDesktopBundleFixture(t *testing.T, mode os.FileMode) string {
 	t.Cleanup(func() { dshDesktopAppBundlePaths = originalBundles })
 
 	t.Setenv("PATH", t.TempDir())
-	t.Setenv("MULTICA_DSH_PATH", "")
-	t.Setenv("MULTICA_DSH_MODEL", "deepseek-official/deepseek-chat")
+	t.Setenv("WORKPAL_DSH_PATH", "")
+	t.Setenv("WORKPAL_DSH_MODEL", "deepseek-official/deepseek-chat")
 	return bundle
 }
 
@@ -441,7 +441,7 @@ func TestProbeAgentCLIsUsesDshDesktopAppBundleFallback(t *testing.T) {
 		t.Fatalf("dsh command = %q, want dsh", entry.Command)
 	}
 	if entry.Model != "deepseek-official/deepseek-chat" {
-		t.Fatalf("dsh model = %q, want the MULTICA_DSH_MODEL override", entry.Model)
+		t.Fatalf("dsh model = %q, want the WORKPAL_DSH_MODEL override", entry.Model)
 	}
 }
 
@@ -464,7 +464,7 @@ func TestProbeAgentCLIsIgnoresNonExecutableDshBundle(t *testing.T) {
 // `--version` included.
 //
 // Probing the profile before version detection reported that machine as "the
-// Multica runtime profile is not installed": a repair for a problem it did not
+// Workpal runtime profile is not installed": a repair for a problem it did not
 // have, sending the user to install a bundle while the actual fault was a CLI
 // that cannot execute — and, with a bundle configured, starting that install
 // against it. A CLI that cannot answer `--version` is not one this daemon has
@@ -491,7 +491,7 @@ func TestProbeBuiltinRuntime_DshThatCannotRunIsNotAProfileVerdict(t *testing.T) 
 	record := filepath.Join(t.TempDir(), "provisioned.log")
 	// A bundle IS configured: the assertion is that an unrunnable CLI never
 	// reaches the install path.
-	t.Setenv(dshProfileBundleEnv, "@multica-ai/dsh-runtime")
+	t.Setenv(dshProfileBundleEnv, "@workpal-ai/dsh-runtime")
 	t.Setenv("DSH_TEST_RECORD", record)
 
 	d := &Daemon{
@@ -574,16 +574,16 @@ func TestProbeBuiltinRuntime_DshLegacyProfile(t *testing.T) {
 		t.Skip("shell fixture")
 	}
 	for _, manifest := range []string{
-		`{"dsh":{"profile":{"bundles":["dsh-profile-multica"]}}}`,
-		`{"dependencies":{"@multica-ai/dsh-runtime":"0.0.0-local"},"dsh":{"profile":{"bundles":["dsh-profile-multica"]}}}`,
-		`{"dependencies":{"@multica-ai/dsh-runtime":"0.0.0-local"}}`,
-		`{"dsh":{"profile":{"bundles":["@multica-ai/dsh-runtime","dsh-profile-multica"]}}}`,
+		`{"dsh":{"profile":{"bundles":["dsh-profile-workpal"]}}}`,
+		`{"dependencies":{"@workpal-ai/dsh-runtime":"0.0.0-local"},"dsh":{"profile":{"bundles":["dsh-profile-workpal"]}}}`,
+		`{"dependencies":{"@workpal-ai/dsh-runtime":"0.0.0-local"}}`,
+		`{"dsh":{"profile":{"bundles":["@workpal-ai/dsh-runtime","dsh-profile-workpal"]}}}`,
 	} {
 		t.Run(manifest, func(t *testing.T) {
 			path := dshProbeFixture(t, dshProbeOKFrame, true)
 			home := os.Getenv("DSH_HOME")
 			writeDshProfileManifest(t, home, manifest)
-			t.Setenv(dshProfileBundleEnv, "@multica-ai/dsh-runtime")
+			t.Setenv(dshProfileBundleEnv, "@workpal-ai/dsh-runtime")
 			d := &Daemon{logger: slog.New(slog.NewTextHandler(io.Discard, nil)), agentVersions: map[string]string{}}
 			probe := d.probeBuiltinRuntime(context.Background(), "dsh", AgentEntry{Path: path, Command: "dsh"})
 			reason, verdict := probe.reason, probe.verdict
@@ -593,16 +593,16 @@ func TestProbeBuiltinRuntime_DshLegacyProfile(t *testing.T) {
 			if !strings.Contains(reason, "dsh.profile.bundles") {
 				t.Fatalf("missing migration guidance: %s", reason)
 			}
-			if err := provisionDshMulticaProfile(context.Background(), path, d.logger); err == nil {
+			if err := provisionDshWorkpalProfile(context.Background(), path, d.logger); err == nil {
 				t.Fatal("explicit provisioning did not refuse the existing bridge")
 			}
 			if d.dshInstallInFlight.Load() {
 				t.Fatal("migration started automatic provisioning")
 			}
-			if dshMulticaProfilePresent() {
+			if dshWorkpalProfilePresent() {
 				t.Fatal("invalid profile will not force a discovery round")
 			}
-			data, err := os.ReadFile(filepath.Join(home, "profiles", dshMulticaProfileName, "package.json"))
+			data, err := os.ReadFile(filepath.Join(home, "profiles", dshWorkpalProfileName, "package.json"))
 			if err != nil || string(data) != manifest {
 				t.Fatalf("profile changed: %s, %v", data, err)
 			}

@@ -11,7 +11,7 @@ import (
 
 	"gopkg.in/yaml.v3"
 
-	"github.com/multica-ai/multica/server/internal/util"
+	"workpal.local/workpal/server/internal/util"
 )
 
 // Hermes discovers skills in HERMES_HOME/skills before skills.external_dirs;
@@ -59,7 +59,7 @@ import (
 // HERMES_HOME to the overlay, and is written even when the source has none so
 // Hermes' project-.env fallback (loaded with override=True only when no user
 // .env loaded) can't relocate the home either.
-const hermesTaskLocalStateMarker = ".multica-task-local-state-v1"
+const hermesTaskLocalStateMarker = ".workpal-task-local-state-v1"
 
 var hermesOverriddenEntries = map[string]struct{}{
 	"skills":                   {},
@@ -712,26 +712,26 @@ func writeDerivedHermesConfig(sharedHome, hermesHome string, env map[string]stri
 // Only names are persisted; Hermes ignores names absent from the process env.
 func HermesTaskEnvPassthroughNames() []string {
 	return []string{
-		"MULTICA_TOKEN",
-		"MULTICA_TASK_CONFIG_ROOT",
-		"MULTICA_TASK_WORKSPACES_ROOT",
-		"MULTICA_SERVER_URL",
-		"MULTICA_DAEMON_PORT",
-		"MULTICA_WORKSPACE_ID",
-		"MULTICA_AGENT_NAME",
-		"MULTICA_AGENT_ID",
-		"MULTICA_TASK_ID",
-		"MULTICA_TASK_SLOT",
-		"MULTICA_AUTOPILOT_RUN_ID",
-		"MULTICA_AUTOPILOT_ID",
-		"MULTICA_QUICK_CREATE_TASK_ID",
-		"MULTICA_QUICK_CREATE_ATTACHMENT_IDS",
-		"MULTICA_QUICK_CREATE_DEFAULT_ASSIGNEE_TYPE",
-		"MULTICA_QUICK_CREATE_DEFAULT_ASSIGNEE_ID",
+		"WORKPAL_TOKEN",
+		"WORKPAL_TASK_CONFIG_ROOT",
+		"WORKPAL_TASK_WORKSPACES_ROOT",
+		"WORKPAL_SERVER_URL",
+		"WORKPAL_DAEMON_PORT",
+		"WORKPAL_WORKSPACE_ID",
+		"WORKPAL_AGENT_NAME",
+		"WORKPAL_AGENT_ID",
+		"WORKPAL_TASK_ID",
+		"WORKPAL_TASK_SLOT",
+		"WORKPAL_AUTOPILOT_RUN_ID",
+		"WORKPAL_AUTOPILOT_ID",
+		"WORKPAL_QUICK_CREATE_TASK_ID",
+		"WORKPAL_QUICK_CREATE_ATTACHMENT_IDS",
+		"WORKPAL_QUICK_CREATE_DEFAULT_ASSIGNEE_TYPE",
+		"WORKPAL_QUICK_CREATE_DEFAULT_ASSIGNEE_ID",
 	}
 }
 
-// setHermesTerminalEnvPassthrough lets Multica CLI calls in Hermes tool shells
+// setHermesTerminalEnvPassthrough lets Workpal CLI calls in Hermes tool shells
 // use the task environment already injected by the daemon. Only names are
 // persisted; user entries and other terminal settings remain intact.
 func setHermesTerminalEnvPassthrough(doc *yaml.Node) error {
@@ -894,7 +894,7 @@ func computeHermesExternalDirs(sharedHome string, existing []string, env map[str
 
 // writeHermesBoundSkills rebuilds the task-local skills/ dir from scratch so a
 // skill removed since the last run can't linger, then writes only the
-// Multica-bound skills. They keep their natural slug (no user skills share this
+// Workpal-bound skills. They keep their natural slug (no user skills share this
 // dir) and therefore take precedence over any same-named external skill.
 func writeHermesBoundSkills(hermesHome string, workspaceSkills []SkillContextForEnv, logger *slog.Logger, installed map[string]string) error {
 	skillsDir := filepath.Join(hermesHome, "skills")

@@ -34,7 +34,7 @@ type ExecOptions struct {
 	// PiSkillPaths contains only the SKILL.md files written for this task by
 	// the daemon. Pi loads them explicitly without trusting other project files.
 	PiSkillPaths []string
-	// SystemPrompt carries the Multica runtime brief for the few providers
+	// SystemPrompt carries the Workpal runtime brief for the few providers
 	// that cannot pick it up from disk. The daemon leaves it empty for every
 	// other provider (see daemon.providerNeedsInlineSystemPrompt), because the
 	// brief is already delivered as a per-task context file in the workdir —
@@ -99,23 +99,23 @@ type ExecOptions struct {
 	// knows the resume is gone, and the backend covers only the case the daemon
 	// cannot see — a live resume RPC rejected mid-run.
 	ResumeContinuityNotice string
-	// TaskToken is the task-scoped Multica API credential (mat_...) the server
-	// mints at claim time. CLI backends receive it as MULTICA_TOKEN in the
+	// TaskToken is the task-scoped Workpal API credential (mat_...) the server
+	// mints at claim time. CLI backends receive it as WORKPAL_TOKEN in the
 	// subprocess environment. Backends that delegate remotely (museapp) forward
-	// it in their wire request so the remote worker can call the Multica API
+	// it in their wire request so the remote worker can call the Workpal API
 	// with the same scoped identity. Empty when the server did not provide one.
 	TaskToken string
-	// MulticaServerURL is the Multica API base URL (e.g.
-	// https://multica.example.com). Remote backends forward it so the worker
-	// knows where to call; CLI backends get it as MULTICA_SERVER_URL.
-	MulticaServerURL string
-	// MulticaWorkspaceID is the workspace UUID for this task. Remote backends
+	// WorkpalServerURL is the Workpal API base URL (e.g.
+	// https://workpal.example.com). Remote backends forward it so the worker
+	// knows where to call; CLI backends get it as WORKPAL_SERVER_URL.
+	WorkpalServerURL string
+	// WorkpalWorkspaceID is the workspace UUID for this task. Remote backends
 	// forward it so the worker can pass it as a query param; CLI backends get
-	// it as MULTICA_WORKSPACE_ID.
-	MulticaWorkspaceID string
+	// it as WORKPAL_WORKSPACE_ID.
+	WorkpalWorkspaceID string
 	// ExtraArgs is honoured only by backends that opt in by reading it; the
 	// rest ignore it. Deliberately not enumerated here — the previous list
-	// went stale as backends were added, which is how MULTICA_QWENPAW_ARGS
+	// went stale as backends were added, which is how WORKPAL_QWENPAW_ARGS
 	// shipped plumbed but dropped. Grep for ExtraArgs to see today's set.
 	ExtraArgs        []string        // daemon-wide default CLI arguments appended before CustomArgs
 	CustomArgs       []string        // per-agent CLI arguments appended after ExtraArgs
@@ -158,7 +158,7 @@ type ExecOptions struct {
 	// through Claude Code's --settings flag. It currently carries restrictive
 	// runtime-skill overrides only; other providers ignore it.
 	ClaudeSettingsPath string
-	// CursorHookCommand is the argv of the multica hook relay (the daemon's own
+	// CursorHookCommand is the argv of the workpal hook relay (the daemon's own
 	// binary followed by CursorHookHelperArg). The cursor backend needs it, with
 	// EnableTaskSupplement, to accept additional messages; other providers
 	// ignore it.
@@ -412,7 +412,7 @@ type Config struct {
 // migration 254 to add reasonix, migration 313 to add dsh, migration 342 to
 // add mcode, migration 370 to add dim, migration 403 to add zeroclaw, and
 // migration 441 to add codearts): a custom runtime profile may
-// only be based on a backend Multica officially supports.
+// only be based on a backend Workpal officially supports.
 // qoder and qoderclicn share the same ACP backend; keeping both provider keys
 // lets the daemon auto-detect and register the international and China-region
 // binaries independently. traecli (Trae) has a New backend, launch
@@ -604,7 +604,7 @@ var launchHeaders = map[string]string{
 	"hermes":      "hermes acp",
 	"kimi":        "kimi acp",
 	"reasonix":    "reasonix acp",
-	"dsh":         "dsh --profile multica (stdio)",
+	"dsh":         "dsh --profile workpal (stdio)",
 	"kiro":        "kiro-cli acp",
 	"openclaw":    "openclaw agent (json)",
 	"opencode":    "opencode run (json)",

@@ -3,10 +3,10 @@
 import { useCallback, useRef, useState, type ReactNode } from "react";
 import { onlineManager, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
-import { Check, Folder, FolderMinus, FolderPlus, Pencil, Plus, Trash2 } from "@multica/ui/icons";
-import { Button } from "@multica/ui/components/ui/button";
-import { Input } from "@multica/ui/components/ui/input";
-import { Spinner } from "@multica/ui/components/ui/spinner";
+import { Check, Folder, FolderMinus, FolderPlus, Pencil, Plus, Trash2 } from "@workpal/ui/icons";
+import { Button } from "@workpal/ui/components/ui/button";
+import { Input } from "@workpal/ui/components/ui/input";
+import { Spinner } from "@workpal/ui/components/ui/spinner";
 import {
   Dialog,
   DialogContent,
@@ -14,7 +14,7 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "@multica/ui/components/ui/dialog";
+} from "@workpal/ui/components/ui/dialog";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -24,14 +24,14 @@ import {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
-} from "@multica/ui/components/ui/dropdown-menu";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { useModalStore } from "@multica/core/modals";
-import { useWSEvent, useWSReconnect } from "@multica/core/realtime";
-import type { Project, WSEventType } from "@multica/core/types";
-import { PillButton } from "@multica/views/common/pill-button";
-import type { ProjectFoldersExtension } from "@multica/views/extensions";
-import { CollectionRowMenu } from "@multica/views/layout/collection-list";
+} from "@workpal/ui/components/ui/dropdown-menu";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { useModalStore } from "@workpal/core/modals";
+import { useWSEvent, useWSReconnect } from "@workpal/core/realtime";
+import type { Project, WSEventType } from "@workpal/core/types";
+import { PillButton } from "@workpal/views/common/pill-button";
+import type { ProjectFoldersExtension } from "@workpal/views/extensions";
+import { CollectionRowMenu } from "@workpal/views/layout/collection-list";
 import { folderKeys, useCreateFolder, useDeleteFolder, useFileProject, useRenameFolder, type ProjectFolder } from "./data";
 import { useFoldersT } from "./i18n";
 import { useFolderDialogStore, useProjectFoldersState } from "./state";

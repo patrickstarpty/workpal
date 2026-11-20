@@ -43,7 +43,7 @@ export const useRailOrderStore = create<RailOrderState>()(
       },
     }),
     {
-      name: "multica_rail_order",
+      name: "workpal_rail_order",
       storage: createJSONStorage(() => defaultStorage),
       partialize: (state) => ({ order: state.order }),
       merge: (persisted, current) => {

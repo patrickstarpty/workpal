@@ -89,7 +89,7 @@ describe("ApiClient schema fallback", () => {
     it("uses the unified GitHub connect endpoint", async () => {
       stubFetchJson({
         configured: true,
-        url: "https://github.com/apps/multica/installations/new",
+        url: "https://github.com/apps/workpal/installations/new",
       });
       const client = new ApiClient("https://api.example.test");
 

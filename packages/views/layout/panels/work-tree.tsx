@@ -16,18 +16,18 @@ import {
 import { SortableContext, arrayMove, useSortable, verticalListSortingStrategy } from "@dnd-kit/sortable";
 import { restrictToFirstScrollableAncestor, restrictToVerticalAxis } from "@dnd-kit/modifiers";
 import { CSS } from "@dnd-kit/utilities";
-import { Folder, FolderKanban, FolderMinus, FolderOpen, Plus } from "@multica/ui/icons";
-import { cn } from "@multica/ui/lib/utils";
-import { IconButton } from "@multica/ui/components/common/icon-button";
+import { Folder, FolderKanban, FolderMinus, FolderOpen, Plus } from "@workpal/ui/icons";
+import { cn } from "@workpal/ui/lib/utils";
+import { IconButton } from "@workpal/ui/components/common/icon-button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@multica/ui/components/ui/dropdown-menu";
-import { useIssueStatuses } from "@multica/core/issue-statuses/hooks";
-import { issueKeys, issueTableFacetsOptions, sidebarIssuesOptions } from "@multica/core/issues/queries";
-import { filterDependencyState, statusCatalogSource } from "@multica/core/issues/surface/filter-dependency";
+} from "@workpal/ui/components/ui/dropdown-menu";
+import { useIssueStatuses } from "@workpal/core/issue-statuses/hooks";
+import { issueKeys, issueTableFacetsOptions, sidebarIssuesOptions } from "@workpal/core/issues/queries";
+import { filterDependencyState, statusCatalogSource } from "@workpal/core/issues/surface/filter-dependency";
 import {
   NO_PROJECT_FACET_KEY,
   NO_PROJECT_ORDER_ID,
@@ -38,21 +38,21 @@ import {
   projectSidebarRequest,
   projectSidebarSource,
   type SidebarIssuesRequest,
-} from "@multica/core/issues/sidebar-list";
-import { useSidebarProjectPrefs, useUpdateSidebarProjectPrefs } from "@multica/core/issues/sidebar-project-prefs";
-import { openCreateIssueWithPreference } from "@multica/core/issues/stores/create-mode-store";
-import { useSidebarKeptStore } from "@multica/core/issues/stores/sidebar-kept-store";
-import { useSidebarTreeStore, type SidebarIssueSettings } from "@multica/core/issues/stores/sidebar-tree-store";
-import { useModalStore } from "@multica/core/modals";
-import { useWorkspacePaths } from "@multica/core/paths";
+} from "@workpal/core/issues/sidebar-list";
+import { useSidebarProjectPrefs, useUpdateSidebarProjectPrefs } from "@workpal/core/issues/sidebar-project-prefs";
+import { openCreateIssueWithPreference } from "@workpal/core/issues/stores/create-mode-store";
+import { useSidebarKeptStore } from "@workpal/core/issues/stores/sidebar-kept-store";
+import { useSidebarTreeStore, type SidebarIssueSettings } from "@workpal/core/issues/stores/sidebar-tree-store";
+import { useModalStore } from "@workpal/core/modals";
+import { useWorkspacePaths } from "@workpal/core/paths";
 import {
   projectFolderTreeKey,
   sidebarProjectRowIds,
   sidebarProjectRows,
   type SidebarProjectRow,
-} from "@multica/core/projects/folder-tree";
-import type { SidebarFolder } from "@multica/core/projects/folder-tree";
-import type { Issue, ListIssuesResponse, Project } from "@multica/core/types";
+} from "@workpal/core/projects/folder-tree";
+import type { SidebarFolder } from "@workpal/core/projects/folder-tree";
+import type { Issue, ListIssuesResponse, Project } from "@workpal/core/types";
 import { useT } from "../../i18n";
 import {
   PANEL_ROW_CLASS,

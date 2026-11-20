@@ -1,6 +1,6 @@
 import { useLayoutEffect, type ReactNode } from "react";
 import type { Preview } from "@storybook/react-vite";
-import { TooltipProvider } from "@multica/ui/components/ui/tooltip";
+import { TooltipProvider } from "@workpal/ui/components/ui/tooltip";
 import { StoryEnvProvider } from "../src/voice-input/env";
 import type { Lang } from "../src/voice-input/copy";
 import type { VoiceSource } from "../src/voice-input/voice-session";

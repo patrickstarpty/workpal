@@ -91,7 +91,7 @@ export function formatSize(bytes: number): string {
 // A homepage click navigates to `/download?started=<key>` and leaves this
 // flag so that page starts the file. Reloading or sharing the link shows the
 // same page without downloading again.
-const PENDING_KEY = "multica-download-pending";
+const PENDING_KEY = "workpal-download-pending";
 
 export function markPendingDownload(key: DownloadKey) {
   try {

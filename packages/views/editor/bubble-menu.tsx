@@ -33,26 +33,26 @@ import type { Editor } from "@tiptap/core";
 import { posToDOMRect } from "@tiptap/core";
 import { NodeSelection } from "@tiptap/pm/state";
 import { toast } from "sonner";
-import { useCreateIssue } from "@multica/core/issues/mutations";
+import { useCreateIssue } from "@workpal/core/issues/mutations";
 import { useT } from "../i18n";
-import { createShortcutChord, type ShortcutChord } from "@multica/core/shortcuts";
+import { createShortcutChord, type ShortcutChord } from "@workpal/core/shortcuts";
 import { ShortcutKeycaps } from "../common/shortcut-keycaps";
-import { contextMenuOrigin } from "@multica/ui/lib/context-menu-origin";
-import { Toggle, toggleVariants } from "@multica/ui/components/ui/toggle";
-import { Separator } from "@multica/ui/components/ui/separator";
+import { contextMenuOrigin } from "@workpal/ui/lib/context-menu-origin";
+import { Toggle, toggleVariants } from "@workpal/ui/components/ui/toggle";
+import { Separator } from "@workpal/ui/components/ui/separator";
 import {
   Tooltip,
   TooltipTrigger,
   TooltipContent,
   TooltipProvider,
-} from "@multica/ui/components/ui/tooltip";
+} from "@workpal/ui/components/ui/tooltip";
 import {
   Popover,
   PopoverTrigger,
   PopoverContent,
-} from "@multica/ui/components/ui/popover";
-import { Input } from "@multica/ui/components/ui/input";
-import { IconButton } from "@multica/ui/components/common/icon-button";
+} from "@workpal/ui/components/ui/popover";
+import { Input } from "@workpal/ui/components/ui/input";
+import { IconButton } from "@workpal/ui/components/common/icon-button";
 import {
   Bold,
   Italic,
@@ -75,7 +75,7 @@ import {
   FilePlus,
   Loader2,
   MessageSquarePlus,
-} from "@multica/ui/icons";
+} from "@workpal/ui/icons";
 
 // Helpers
 

@@ -6,7 +6,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/multica-ai/multica/server/internal/daemon/execenv"
+	"workpal.local/workpal/server/internal/daemon/execenv"
 )
 
 // Composition tests for MUL-8145, in the style of
@@ -48,7 +48,7 @@ func leaderRuntimeBriefFor(t *testing.T, provider, instructions string, hasProje
 // builtInParentMoves are the built-in status moves a leader must not be told
 // to make on a workflow issue, in either half of its instructions.
 var builtInParentMoves = []string{
-	"multica issue status <issue-id> in_review",
+	"workpal issue status <issue-id> in_review",
 	"move the parent to `in_progress`",
 	"set `in_progress` FIRST",
 	"moves to `in_review`",
@@ -91,7 +91,7 @@ func TestOwningLeaderWithoutWorkflowKeepsBuiltInMoves(t *testing.T) {
 		t.Fatalf("owner protocol without a workflow must be the built-in form:\n%s", protocol)
 	}
 	compact := strings.Join(strings.Fields(protocol), " ")
-	for _, want := range []string{"move the parent to `in_progress`", "multica issue status <issue-id> in_review"} {
+	for _, want := range []string{"move the parent to `in_progress`", "workpal issue status <issue-id> in_review"} {
 		if !strings.Contains(compact, want) {
 			t.Errorf("owner protocol without a workflow lost %q", want)
 		}

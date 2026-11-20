@@ -12,10 +12,10 @@ import (
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgtype"
 
-	"github.com/multica-ai/multica/server/internal/integrations/channel"
-	"github.com/multica-ai/multica/server/internal/service"
-	"github.com/multica-ai/multica/server/internal/util"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
+	"workpal.local/workpal/server/internal/integrations/channel"
+	"workpal.local/workpal/server/internal/service"
+	"workpal.local/workpal/server/internal/util"
+	db "workpal.local/workpal/server/pkg/db/generated"
 )
 
 // Router is the channel-agnostic inbound pipeline — the generalization of the
@@ -366,7 +366,7 @@ func (r *Router) processClaimed(ctx context.Context, set ResolverSet, msg channe
 		return r.drop(ctx, set, msg, inst.ID, DropReasonNotAddressedInGroup), finalizeMark, nil
 	}
 
-	// 4. Identity check: map the platform sender to a Multica user and
+	// 4. Identity check: map the platform sender to a Workpal user and
 	//    re-verify workspace membership (no binding->member FK; MUL-3515 §4).
 	identity, err := set.Identity.ResolveSender(ctx, inst, msg)
 	if err != nil {

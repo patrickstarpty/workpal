@@ -7,7 +7,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/multica-ai/multica/server/internal/issuestatus"
+	"workpal.local/workpal/server/internal/issuestatus"
 )
 
 var categoryContractVersions = []string{

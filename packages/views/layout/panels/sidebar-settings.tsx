@@ -2,17 +2,17 @@
 
 import { useQuery } from "@tanstack/react-query";
 import { toast } from "sonner";
-import { SlidersHorizontal } from "@multica/ui/icons";
-import { cn } from "@multica/ui/lib/utils";
-import { Button } from "@multica/ui/components/ui/button";
-import { Popover, PopoverContent, PopoverTrigger } from "@multica/ui/components/ui/popover";
-import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@multica/ui/components/ui/select";
-import { Switch } from "@multica/ui/components/ui/switch";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { useIssueStatuses } from "@multica/core/issue-statuses/hooks";
-import { BUILTIN_VIEW_KEYS, builtinViewItemId } from "@multica/core/issue-views/sidebar-views";
-import { shownSidebarStatuses } from "@multica/core/issues/sidebar-list";
-import { useSidebarProjectPrefs, useUpdateSidebarProjectPrefs } from "@multica/core/issues/sidebar-project-prefs";
+import { SlidersHorizontal } from "@workpal/ui/icons";
+import { cn } from "@workpal/ui/lib/utils";
+import { Button } from "@workpal/ui/components/ui/button";
+import { Popover, PopoverContent, PopoverTrigger } from "@workpal/ui/components/ui/popover";
+import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@workpal/ui/components/ui/select";
+import { Switch } from "@workpal/ui/components/ui/switch";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { useIssueStatuses } from "@workpal/core/issue-statuses/hooks";
+import { BUILTIN_VIEW_KEYS, builtinViewItemId } from "@workpal/core/issue-views/sidebar-views";
+import { shownSidebarStatuses } from "@workpal/core/issues/sidebar-list";
+import { useSidebarProjectPrefs, useUpdateSidebarProjectPrefs } from "@workpal/core/issues/sidebar-project-prefs";
 import {
   DEFAULT_SIDEBAR_INBOX_SETTINGS,
   DEFAULT_SIDEBAR_ISSUE_SETTINGS,
@@ -24,13 +24,13 @@ import {
   type SidebarIssueSort,
   type SidebarProjectOrdering,
   type SidebarProjectSettings,
-} from "@multica/core/issues/stores/sidebar-tree-store";
-import { notificationPreferenceOptions } from "@multica/core/notification-preferences/queries";
-import { useUpdateNotificationPreferences } from "@multica/core/notification-preferences/mutations";
-import { notificationPreferenceValue } from "@multica/core/notification-preferences/patch";
-import { useWorkspacePaths } from "@multica/core/paths";
-import { PROJECT_STATUS_CONFIG, PROJECT_STATUS_ORDER } from "@multica/core/projects/config";
-import type { NotificationGroupKey, NotificationPreferences, ProjectStatus } from "@multica/core/types";
+} from "@workpal/core/issues/stores/sidebar-tree-store";
+import { notificationPreferenceOptions } from "@workpal/core/notification-preferences/queries";
+import { useUpdateNotificationPreferences } from "@workpal/core/notification-preferences/mutations";
+import { notificationPreferenceValue } from "@workpal/core/notification-preferences/patch";
+import { useWorkspacePaths } from "@workpal/core/paths";
+import { PROJECT_STATUS_CONFIG, PROJECT_STATUS_ORDER } from "@workpal/core/projects/config";
+import type { NotificationGroupKey, NotificationPreferences, ProjectStatus } from "@workpal/core/types";
 import { DisplayChip, SortDirectionButton } from "../../issues/components/display-parts";
 import { StatusIcon } from "../../issues/components/status-icon";
 import { sortDirectionLabelKey } from "../../issues/utils/sort-direction";

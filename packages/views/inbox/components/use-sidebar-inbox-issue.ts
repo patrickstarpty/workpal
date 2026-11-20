@@ -1,6 +1,6 @@
 "use client";
 
-import { useInboxSelectionStore } from "@multica/core/inbox/selection-store";
+import { useInboxSelectionStore } from "@workpal/core/inbox/selection-store";
 import { useHeldUntilArrival } from "../../navigation";
 
 /**

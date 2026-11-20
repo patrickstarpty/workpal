@@ -3,9 +3,9 @@
 import {
   issueStatusCategory,
   statusColumnKeys,
-} from "@multica/core/issues";
+} from "@workpal/core/issues";
 import { memo, useState, useCallback, useMemo, useEffect, useRef } from "react";
-import { cn } from "@multica/ui/lib/utils";
+import { cn } from "@workpal/ui/lib/utils";
 import { useIssuePeekActions } from "../surface/peek-context";
 import {
   DndContext,
@@ -24,7 +24,7 @@ import {
 import { SortableContext, useSortable, verticalListSortingStrategy, arrayMove } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { Virtuoso } from "react-virtuoso";
-import { ChevronRight, EyeOff, GripVertical, MoreHorizontal, Pencil, Plus } from "@multica/ui/icons";
+import { ChevronRight, EyeOff, GripVertical, MoreHorizontal, Pencil, Plus } from "@workpal/ui/icons";
 import { useQuery, useQueries, useQueryClient } from "@tanstack/react-query";
 import type {
   Issue,
@@ -33,29 +33,29 @@ import type {
   IssueTableGroupDescriptor,
   Project,
   UpdateIssueRequest,
-} from "@multica/core/types";
-import { useViewStore, useViewStoreApi } from "@multica/core/issues/stores/view-store-context";
+} from "@workpal/core/types";
+import { useViewStore, useViewStoreApi } from "@workpal/core/issues/stores/view-store-context";
 import { useViewBaseline } from "../surface/view-baseline-context";
 import { filterIssues, type IssueFilters } from "../utils/filter";
 import { getMoveAnchors } from "../utils/drag-utils";
-import type { SwimlaneGrouping } from "@multica/core/issues/stores/view-store";
-import { useWorkspacePaths } from "@multica/core/paths";
-import { useWorkspaceId } from "@multica/core/hooks";
-import type { IssueStatusCatalog } from "@multica/core/issue-statuses";
-import { useIssueStatuses } from "@multica/core/issue-statuses/hooks";
-import { useActorName } from "@multica/core/workspace/hooks";
-import { childrenByParentsOptions, issueKeys } from "@multica/core/issues/queries";
+import type { SwimlaneGrouping } from "@workpal/core/issues/stores/view-store";
+import { useWorkspacePaths } from "@workpal/core/paths";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import type { IssueStatusCatalog } from "@workpal/core/issue-statuses";
+import { useIssueStatuses } from "@workpal/core/issue-statuses/hooks";
+import { useActorName } from "@workpal/core/workspace/hooks";
+import { childrenByParentsOptions, issueKeys } from "@workpal/core/issues/queries";
 import {
   DropdownMenu,
   DropdownMenuTrigger,
   DropdownMenuContent,
   DropdownMenuItem,
-} from "@multica/ui/components/ui/dropdown-menu";
+} from "@workpal/ui/components/ui/dropdown-menu";
 import { sortIssues } from "../utils/sort";
-import { BUILT_IN_STATUS_ORDER, STATUS_CONFIG } from "@multica/core/issues/config";
+import { BUILT_IN_STATUS_ORDER, STATUS_CONFIG } from "@workpal/core/issues/config";
 import { DraggableBoardCard, BoardCardContent } from "./board-card";
 import { StatusIcon } from "./status-icon";
-import { Button } from "@multica/ui/components/ui/button";
+import { Button } from "@workpal/ui/components/ui/button";
 import { StatusHeading } from "./status-heading";
 import { InfiniteScrollSentinel } from "./infinite-scroll-sentinel";
 import { ListLoadMoreFooter } from "./list-load-more-footer";

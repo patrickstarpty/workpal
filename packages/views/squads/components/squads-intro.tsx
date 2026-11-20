@@ -1,10 +1,10 @@
 "use client";
 
-import { Crown, Plus, Users } from "@multica/ui/icons";
-import { Button } from "@multica/ui/components/ui/button";
-import { ActorAvatar } from "@multica/ui/components/common/actor-avatar";
-import { formatAvatarEmoji } from "@multica/ui/lib/avatar-emoji";
-import { cn } from "@multica/ui/lib/utils";
+import { Crown, Plus, Users } from "@workpal/ui/icons";
+import { Button } from "@workpal/ui/components/ui/button";
+import { ActorAvatar } from "@workpal/ui/components/common/actor-avatar";
+import { formatAvatarEmoji } from "@workpal/ui/lib/avatar-emoji";
+import { cn } from "@workpal/ui/lib/utils";
 import {
   FeatureIntro,
   FeatureIntroCarousel,

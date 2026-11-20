@@ -3,25 +3,25 @@
 import { useEffect, useRef, useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
-import { Loader2, Pencil, Plug, ShieldCheck } from "@multica/ui/icons";
-import { Badge } from "@multica/ui/components/ui/badge";
-import { Button } from "@multica/ui/components/ui/button";
-import { Input } from "@multica/ui/components/ui/input";
-import { Textarea } from "@multica/ui/components/ui/textarea";
-import { cn } from "@multica/ui/lib/utils";
-import { ApiError, api } from "@multica/core/api";
-import { useAuthStore } from "@multica/core/auth";
-import { useFeatureEnabled } from "@multica/core/config";
-import { COMPOSIO_MCP_APPS_FLAG } from "@multica/core/feature-flags";
-import { useWorkspaceId } from "@multica/core/hooks";
+import { Loader2, Pencil, Plug, ShieldCheck } from "@workpal/ui/icons";
+import { Badge } from "@workpal/ui/components/ui/badge";
+import { Button } from "@workpal/ui/components/ui/button";
+import { Input } from "@workpal/ui/components/ui/input";
+import { Textarea } from "@workpal/ui/components/ui/textarea";
+import { cn } from "@workpal/ui/lib/utils";
+import { ApiError, api } from "@workpal/core/api";
+import { useAuthStore } from "@workpal/core/auth";
+import { useFeatureEnabled } from "@workpal/core/config";
+import { COMPOSIO_MCP_APPS_FLAG } from "@workpal/core/feature-flags";
+import { useWorkspaceId } from "@workpal/core/hooks";
 import {
   chatAppRequestsOptions,
   connectedAppsKeys,
   issueAppRequestsOptions,
   useDecideAppRequest,
-} from "@multica/core/connected-apps";
-import { useActorName } from "@multica/core/workspace/hooks";
-import type { AppRequest } from "@multica/core/types";
+} from "@workpal/core/connected-apps";
+import { useActorName } from "@workpal/core/workspace/hooks";
+import type { AppRequest } from "@workpal/core/types";
 import { useLocale, useT } from "../i18n";
 import { currentPath, useNavigation } from "../navigation";
 import { isDesktopShell, openExternal } from "../platform";

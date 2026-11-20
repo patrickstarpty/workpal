@@ -1,7 +1,7 @@
 "use client";
 
-import { CalendarDays } from "@multica/ui/icons";
-import type { UpdateIssueRequest } from "@multica/core/types";
+import { CalendarDays } from "@workpal/ui/icons";
+import type { UpdateIssueRequest } from "@workpal/core/types";
 import { DateOnlyPicker } from "../../../common/date-only-picker";
 import { useT } from "../../../i18n";
 

@@ -2,9 +2,9 @@ import type { ReactNode } from "react";
 import { QueryClient, QueryClientProvider, QueryObserver } from "@tanstack/react-query";
 import { act, renderHook } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { issueKeys } from "@multica/core/issues/queries";
-import { useSidebarKeptStore } from "@multica/core/issues/stores/sidebar-kept-store";
-import type { Issue, ListIssuesResponse } from "@multica/core/types";
+import { issueKeys } from "@workpal/core/issues/queries";
+import { useSidebarKeptStore } from "@workpal/core/issues/stores/sidebar-kept-store";
+import type { Issue, ListIssuesResponse } from "@workpal/core/types";
 import { useIssueInTree } from "./work-tree";
 
 const WS = "ws-1";

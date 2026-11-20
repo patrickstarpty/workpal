@@ -2,8 +2,8 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { renderHook } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import type { ReactNode } from "react";
-import { ApiClient } from "@multica/core/api/client";
-import { getDevRecording, resetDevRecorder } from "@multica/core/diagnostics";
+import { ApiClient } from "@workpal/core/api/client";
+import { getDevRecording, resetDevRecorder } from "@workpal/core/diagnostics";
 import { useDevRecorder } from "./use-dev-metrics";
 
 let queryClient: QueryClient;

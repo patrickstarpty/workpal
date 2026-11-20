@@ -52,7 +52,7 @@ func discoverZcodeModels(ctx context.Context, runtimeCmd Command) (Catalog, erro
 	// The discovery session's workspace is a temp dir: the server treats the
 	// process cwd as the workspace, and running inside a real checkout would
 	// both pollute it and pick up its dotenv (design doc §6 R8).
-	tmp, err := os.MkdirTemp("", "multica-zcode-discovery-")
+	tmp, err := os.MkdirTemp("", "workpal-zcode-discovery-")
 	if err != nil {
 		return empty, nil
 	}

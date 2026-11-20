@@ -2,14 +2,14 @@
 
 import { useMemo } from "react";
 import { useQueries, useQuery } from "@tanstack/react-query";
-import { autopilotListOptions } from "@multica/core/autopilots/queries";
-import { selectRecentVisits, useRecentVisitsStore } from "@multica/core/command-bar";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { issueDetailOptions } from "@multica/core/issues/queries";
-import { selectRecentIssues, useRecentIssuesStore } from "@multica/core/issues/stores";
-import { projectListOptions } from "@multica/core/projects/queries";
-import { agentListOptions } from "@multica/core/workspace/queries";
-import type { Agent, Autopilot, Issue, Project } from "@multica/core/types";
+import { autopilotListOptions } from "@workpal/core/autopilots/queries";
+import { selectRecentVisits, useRecentVisitsStore } from "@workpal/core/command-bar";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { issueDetailOptions } from "@workpal/core/issues/queries";
+import { selectRecentIssues, useRecentIssuesStore } from "@workpal/core/issues/stores";
+import { projectListOptions } from "@workpal/core/projects/queries";
+import { agentListOptions } from "@workpal/core/workspace/queries";
+import type { Agent, Autopilot, Issue, Project } from "@workpal/core/types";
 
 export type RecentItem =
   | { type: "issue"; id: string; visitedAt: number; issue: Issue }

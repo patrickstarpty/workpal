@@ -8,7 +8,7 @@ import (
 	"testing"
 
 	"github.com/jackc/pgx/v5/pgtype"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
+	db "workpal.local/workpal/server/pkg/db/generated"
 )
 
 const testAgentID = "0f0e0d0c-0b0a-4909-8807-060504030201"
@@ -280,11 +280,11 @@ func TestBriefNamesStepCommandsAndHandlers(t *testing.T) {
 		"- `implement` Implement — hands off to Forge\n",
 		"- `code_review` Code review — hands off to Lin (project lead)   ← current\n",
 		"- `done` Done\n",
-		"Step done      → multica issue status MUL-7 done\n",
+		"Step done      → workpal issue status MUL-7 done\n",
 		// Each move names who the target step hands off to.
-		"Needs changes  → multica issue status MUL-7 implement — hands off to Forge\n",
+		"Needs changes  → workpal issue status MUL-7 implement — hands off to Forge\n",
 		"\nYour moves:\n",
-		"Can't proceed  → multica issue status MUL-7 blocked",
+		"Can't proceed  → workpal issue status MUL-7 blocked",
 	} {
 		if !strings.Contains(brief, want) {
 			t.Fatalf("brief is missing %q:\n%s", want, brief)
@@ -313,7 +313,7 @@ func TestBriefForMovedStep(t *testing.T) {
 						}
 					}
 					for _, leak := range []string{
-						"Implement it.", "Step instructions:", "You are handling", "Your moves:", "multica issue status",
+						"Implement it.", "Step instructions:", "You are handling", "Your moves:", "workpal issue status",
 						"Needs changes", "Can't proceed", "unless you are explicitly asked", "Before your run ends, either run",
 						"Lin\n", "\x01",
 					} {
@@ -446,7 +446,7 @@ func TestBriefPrintsBuiltInKeysOnce(t *testing.T) {
 	if !strings.Contains(brief, "- `todo`\n") || strings.Contains(brief, "`todo` todo") {
 		t.Fatalf("a built-in step should print its key once:\n%s", brief)
 	}
-	if !strings.Contains(brief, "Step done      → multica issue status MUL-1 done\n") {
+	if !strings.Contains(brief, "Step done      → workpal issue status MUL-1 done\n") {
 		t.Fatalf("the last own step should suggest done:\n%s", brief)
 	}
 }
@@ -455,7 +455,7 @@ func TestBriefWithoutBlockedPointsAtTheBackStatus(t *testing.T) {
 	def := withHandoffs(Definition{Name: "Lean", Steps: stepsFor(ArrangeKeys([]string{"implement", "code_review"}))},
 		[]Step{{StatusKey: "code_review", Handler: Handler{Type: HandlerProjectLead}, BackStatusKey: "implement"}})
 	brief := Brief(BriefInput{Workflow: def, StatusKey: "code_review", IssueIdentifier: "MUL-2"})
-	if strings.Contains(brief, "MUL-2 blocked") || !strings.Contains(brief, "Can't proceed  → comment why, then run Needs changes\n") || !strings.Contains(brief, "Needs changes  → multica issue status MUL-2 implement\n") {
+	if strings.Contains(brief, "MUL-2 blocked") || !strings.Contains(brief, "Can't proceed  → comment why, then run Needs changes\n") || !strings.Contains(brief, "Needs changes  → workpal issue status MUL-2 implement\n") {
 		t.Fatalf("a workflow without blocked should not suggest it:\n%s", brief)
 	}
 }
@@ -488,8 +488,8 @@ func TestBriefTreatsHandlerlessStepsAsOneSpan(t *testing.T) {
 			status: "todo",
 			want: []string{
 				`You are handling MUL-7. Its "todo" step has no handler, so the work the issue asks for is yours until it reaches the "in_review" step — hands off to Lin (project lead).`,
-				"Starting work  → multica issue status MUL-7 in_progress\n",
-				"Step done      → multica issue status MUL-7 in_review — hands off to Lin (project lead)\n",
+				"Starting work  → workpal issue status MUL-7 in_progress\n",
+				"Step done      → workpal issue status MUL-7 in_review — hands off to Lin (project lead)\n",
 				"finish all of the issue's work in this run before Step done",
 			},
 			wantNot: []string{"You are handling the", "MUL-7 done"},
@@ -499,7 +499,7 @@ func TestBriefTreatsHandlerlessStepsAsOneSpan(t *testing.T) {
 			def:    reviewedDefault,
 			status: "in_progress",
 			want: []string{
-				"Step done      → multica issue status MUL-7 in_review — hands off to Lin (project lead)\n",
+				"Step done      → workpal issue status MUL-7 in_review — hands off to Lin (project lead)\n",
 			},
 			wantNot: []string{"Starting work", "You are handling the"},
 		},
@@ -509,8 +509,8 @@ func TestBriefTreatsHandlerlessStepsAsOneSpan(t *testing.T) {
 			status: "todo",
 			want: []string{
 				`Its "todo" step has no handler, so the work the issue asks for is yours to finish.`,
-				"Starting work  → multica issue status MUL-7 in_progress\n",
-				"Step done      → multica issue status MUL-7 in_review\n",
+				"Starting work  → workpal issue status MUL-7 in_progress\n",
+				"Step done      → workpal issue status MUL-7 in_review\n",
 			},
 			wantNot: []string{"MUL-7 done"},
 		},
@@ -519,8 +519,8 @@ func TestBriefTreatsHandlerlessStepsAsOneSpan(t *testing.T) {
 			def:    short,
 			status: "todo",
 			want: []string{
-				"Starting work  → multica issue status MUL-7 in_progress\n",
-				"Step done      → multica issue status MUL-7 done\n",
+				"Starting work  → workpal issue status MUL-7 in_progress\n",
+				"Step done      → workpal issue status MUL-7 done\n",
 			},
 		},
 		{
@@ -529,7 +529,7 @@ func TestBriefTreatsHandlerlessStepsAsOneSpan(t *testing.T) {
 			status: "todo",
 			want: []string{
 				`until it reaches the "implement" step.`,
-				"Step done      → multica issue status MUL-7 implement\n",
+				"Step done      → workpal issue status MUL-7 implement\n",
 			},
 			wantNot: []string{"Starting work", "in_progress"},
 		},
@@ -541,8 +541,8 @@ func TestBriefTreatsHandlerlessStepsAsOneSpan(t *testing.T) {
 			def:    blockedOnlyDefault(),
 			status: "todo",
 			want: []string{
-				"Starting work  → multica issue status MUL-7 in_progress\n",
-				"Step done      → multica issue status MUL-7 in_review\n",
+				"Starting work  → workpal issue status MUL-7 in_progress\n",
+				"Step done      → workpal issue status MUL-7 in_review\n",
 			},
 			wantNot: []string{"MUL-7 done"},
 		},
@@ -561,7 +561,7 @@ func TestBriefTreatsHandlerlessStepsAsOneSpan(t *testing.T) {
 			status: "in_review",
 			want: []string{
 				`You are handling the "in_review" step of MUL-7.`,
-				"Step done      → multica issue status MUL-7 done\n",
+				"Step done      → workpal issue status MUL-7 done\n",
 			},
 			wantNot: []string{"Starting work", "Steps without a handler"},
 		},
@@ -589,7 +589,7 @@ func TestBriefKeepsStepWordingForLegacyDaemonsAndObservers(t *testing.T) {
 	def := Definition{Name: "Plain", Steps: stepsFor(ArrangeKeys([]string{"in_progress", "in_review"}))}
 	legacy := Brief(BriefInput{Workflow: def, StatusKey: "todo", IssueIdentifier: "MUL-7", LegacyRuntimeRules: true})
 	if !strings.Contains(legacy, `You are handling the "todo" step of MUL-7.`) || strings.Contains(legacy, "Starting work") ||
-		!strings.Contains(legacy, "Step done      → multica issue status MUL-7 in_progress\n") {
+		!strings.Contains(legacy, "Step done      → workpal issue status MUL-7 in_progress\n") {
 		t.Fatalf("legacy brief must keep the per-step wording:\n%s", legacy)
 	}
 	observer := Brief(BriefInput{Workflow: def, StatusKey: "todo", IssueIdentifier: "MUL-7", Observer: true})

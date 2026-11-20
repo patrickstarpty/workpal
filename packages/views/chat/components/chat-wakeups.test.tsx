@@ -1,13 +1,13 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import { I18nProvider } from "@multica/core/i18n/react";
+import { I18nProvider } from "@workpal/core/i18n/react";
 import { describe, expect, it, vi } from "vitest";
-import type { ChatMessage, ChatWakeup } from "@multica/core/types";
+import type { ChatMessage, ChatWakeup } from "@workpal/core/types";
 import enChat from "../../locales/en/chat.json";
 
 const cancelMutate = vi.hoisted(() => vi.fn());
 const retryMutate = vi.hoisted(() => vi.fn());
 
-vi.mock("@multica/core/chat/mutations", () => ({
+vi.mock("@workpal/core/chat/mutations", () => ({
   useCancelChatWakeup: () => ({ mutate: cancelMutate }),
   useRetryChatWakeup: () => ({ mutate: retryMutate, isPending: false }),
 }));

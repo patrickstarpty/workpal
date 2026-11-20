@@ -1,7 +1,7 @@
-import { useAuthStore } from "@multica/core/auth";
-import { useChatStore } from "@multica/core/chat";
-import { useConfigStore } from "@multica/core/config";
-import { useDevPromptStore, useSessionPromptStore } from "@multica/core/session-prompt";
+import { useAuthStore } from "@workpal/core/auth";
+import { useChatStore } from "@workpal/core/chat";
+import { useConfigStore } from "@workpal/core/config";
+import { useDevPromptStore, useSessionPromptStore } from "@workpal/core/session-prompt";
 import type { DevFeature, DevFeatureState } from "../dev-toolbar/actions";
 import { WHATS_NEW_RELEASES } from "./releases";
 import { useWhatsNew } from "./use-whats-new";

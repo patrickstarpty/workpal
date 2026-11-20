@@ -1,13 +1,13 @@
 import { act, cleanup, fireEvent, screen, waitFor } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { api } from "@multica/core/api";
-import { issueKeys } from "@multica/core/issues/queries";
-import type { AgentTask, Comment, TimelineEntry } from "@multica/core/types";
+import { api } from "@workpal/core/api";
+import { issueKeys } from "@workpal/core/issues/queries";
+import type { AgentTask, Comment, TimelineEntry } from "@workpal/core/types";
 import { renderWithI18n } from "../../test/i18n";
 import { formatAgentNames, SteerBadge, SteerReceipts } from "./steer-receipts";
 
-vi.mock("@multica/core/api", () => ({ api: {
+vi.mock("@workpal/core/api", () => ({ api: {
   retryTaskSupplement: vi.fn(), createComment: vi.fn(), listTasksByIssue: vi.fn(),
   previewCommentTriggers: vi.fn(),
 } }));
@@ -15,8 +15,8 @@ vi.mock("@multica/core/api", () => ({ api: {
 function recipients(...ids: string[]) {
   return { agents: ids.map((id) => ({ id, name: id, source: "mention_agent", reason: "" })) };
 }
-vi.mock("@multica/core/hooks", () => ({ useWorkspaceId: () => "workspace" }));
-vi.mock("@multica/core/workspace/hooks", () => ({
+vi.mock("@workpal/core/hooks", () => ({ useWorkspaceId: () => "workspace" }));
+vi.mock("@workpal/core/workspace/hooks", () => ({
   useActorName: () => ({ getActorName: (_type: string, id: string) => (id === "orion" ? "Orion" : "Lambda") }),
 }));
 

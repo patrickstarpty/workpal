@@ -2,9 +2,9 @@
 
 import { useMemo } from "react";
 import Link from "@/features/landing/components/landing-link";
-import { Globe } from "@multica/ui/icons";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@multica/ui/components/ui/select";
-import { cn } from "@multica/ui/lib/utils";
+import { Globe } from "@workpal/ui/icons";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@workpal/ui/components/ui/select";
+import { cn } from "@workpal/ui/lib/utils";
 import { docsHrefForLocale, localeLabels, locales, useLocale, type Locale } from "../i18n";
 import {
   DiscordMark,
@@ -14,15 +14,15 @@ import {
   githubUrl,
   twitterUrl,
 } from "../components/shared";
-import { MulticaWordmark } from "@multica/ui/components/common/multica-wordmark";
+import { WorkpalWordmark } from "@workpal/ui/components/common/workpal-wordmark";
 import { FooterWordmark } from "./footer-wordmark";
 import { Container, SiteTextLink, focusRing } from "./primitives";
 import { buildFooterGroups } from "./sitemap";
 
-const SOCIAL_LINKS = [
-  { label: "GitHub", href: githubUrl, Mark: GitHubMark },
-  { label: "Discord", href: discordUrl, Mark: DiscordMark },
-  { label: "X", href: twitterUrl, Mark: XMark },
+const SOCIAL_LINKS: {label:string;href:string;Mark:typeof GitHubMark}[] = [
+
+
+
 ];
 
 const LANGUAGE_ITEMS: { value: Locale; label: string }[] = locales.map((value) => ({ value, label: localeLabels[value] }));
@@ -40,7 +40,7 @@ export function SiteFooter() {
       <Container className="grid gap-site-block pt-site-section lg:grid-cols-[minmax(0,1fr)_minmax(0,3fr)] lg:gap-16">
         <div>
           <Link href="/" aria-label={t.site.header.home} className={cn("inline-flex items-center rounded-sm", focusRing)}>
-              <MulticaWordmark aria-hidden className="h-6 text-site-ink" />
+              <WorkpalWordmark aria-hidden className="h-6 text-site-ink" />
           </Link>
           <p className="mt-4 max-w-[18rem] text-site-small text-site-muted">
             {labels.tagline}

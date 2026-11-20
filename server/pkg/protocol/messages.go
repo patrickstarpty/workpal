@@ -37,12 +37,12 @@ const (
 	DaemonCapabilityForceRecheckV1 = "force-recheck-v1"
 
 	// DaemonCapabilityPlatformSkillV1 advertises that the daemon's runtime
-	// brief names the merged `multica-platform` skill instead of the
+	// brief names the merged `workpal-platform` skill instead of the
 	// per-domain built-ins it replaced (MUL-6986).
 	//
 	// The brief is assembled by the daemon, so a backend upgrade does not
 	// rewrite it: a daemon released before that merge still tells the agent to
-	// "read the `multica-working-on-issues` skill", a name this server no
+	// "read the `workpal-working-on-issues` skill", a name this server no
 	// longer ships. Without this gate the pointer dangles and the agent is left
 	// hunting for a skill that is not installed. When it is absent the server
 	// ships a redirect stub under the old name; when it is present it ships
@@ -50,7 +50,7 @@ const (
 	DaemonCapabilityPlatformSkillV1 = "platform-skill-v1"
 
 	// DaemonCapabilityCheckoutKeepsWorkV1 advertises that the daemon's
-	// `multica repo checkout` keeps an existing checkout that holds work
+	// `workpal repo checkout` keeps an existing checkout that holds work
 	// (uncommitted changes, untracked files, unpushed commits) instead of
 	// resetting it (MUL-7284).
 	//
@@ -89,7 +89,7 @@ const (
 	// message is presented as an agent's. Without it the server marks an
 	// agent's message in its content instead.
 	DaemonCapabilityTaskSupplementAuthorV1 = "task-supplement-author-v1"
-	// DaemonCapabilityCLICommentSteerV1 advertises that the multica CLI this
+	// DaemonCapabilityCLICommentSteerV1 advertises that the workpal CLI this
 	// daemon puts on the agent's PATH has `issue comment add --steer`. The
 	// server tells a squad leader about steering only then.
 	DaemonCapabilityCLICommentSteerV1 = "cli-comment-steer-v1"

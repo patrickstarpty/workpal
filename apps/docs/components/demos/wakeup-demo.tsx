@@ -1,9 +1,9 @@
 "use client";
 
 import { useEffect, useState, type ReactNode } from "react";
-import { Bell, ChevronDown, ChevronRight, Clock3, FastForward, Info, Plus, RefreshCw } from "@multica/ui/icons";
-import { Button } from "@multica/ui/components/ui/button";
-import { cn } from "@multica/ui/lib/utils";
+import { Bell, ChevronDown, ChevronRight, Clock3, FastForward, Info, Plus, RefreshCw } from "@workpal/ui/icons";
+import { Button } from "@workpal/ui/components/ui/button";
+import { cn } from "@workpal/ui/lib/utils";
 import {
   CoachMark,
   DemoAvatar,

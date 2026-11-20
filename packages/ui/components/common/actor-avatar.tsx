@@ -1,15 +1,15 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Bot, Users } from "@multica/ui/icons";
-import { cn } from "@multica/ui/lib/utils";
+import { Bot, Users } from "@workpal/ui/icons";
+import { cn } from "@workpal/ui/lib/utils";
 import {
   AVATAR_SIZE_PX,
   DEFAULT_AVATAR_SIZE,
   type AvatarSize,
-} from "@multica/ui/lib/avatar-size";
-import { parseAvatarEmoji } from "@multica/ui/lib/avatar-emoji";
-import { MulticaIcon } from "./multica-icon";
+} from "@workpal/ui/lib/avatar-size";
+import { parseAvatarEmoji } from "@workpal/ui/lib/avatar-emoji";
+import { WorkpalIcon } from "./workpal-icon";
 
 interface ActorAvatarProps {
   name: string;
@@ -60,7 +60,7 @@ function ActorAvatar({
         // The system mark draws a round tile; filling the box with the tile
         // colour keeps it whole when a theme squares the avatar.
         showsSystemMark
-          ? "bg-multica-ink dark:bg-multica-paper"
+          ? "bg-workpal-ink dark:bg-workpal-paper"
           : (!avatarUrl || emoji || imgError) && "bg-muted text-muted-foreground",
         className,
         // rounded-avatar stays last so a call-site `className` can never
@@ -87,7 +87,7 @@ function ActorAvatar({
         />
       ) : isSystem ? (
         // `size` only picks the optical size; the slot decides the rendered size.
-        <MulticaIcon shape="circle" size={AVATAR_SIZE_PX[size]} style={{ width: "100%", height: "100%" }} />
+        <WorkpalIcon shape="circle" size={AVATAR_SIZE_PX[size]} style={{ width: "100%", height: "100%" }} />
       ) : isAgent ? (
         <Bot style={{ width: scaled(0.55), height: scaled(0.55) }} />
       ) : isSquad ? (

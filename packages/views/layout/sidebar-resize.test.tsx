@@ -6,7 +6,7 @@ import {
   SidebarProvider,
   SidebarRail,
   useSidebar,
-} from "@multica/ui/components/ui/sidebar";
+} from "@workpal/ui/components/ui/sidebar";
 import { renderWithI18n } from "../test/i18n";
 
 /** No stored width: the theme's, or 280px when it sets none. */

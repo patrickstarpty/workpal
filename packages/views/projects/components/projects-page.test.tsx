@@ -2,7 +2,7 @@ import React from "react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { cleanup, fireEvent, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import type { Project } from "@multica/core/types";
+import type { Project } from "@workpal/core/types";
 import { renderWithI18n } from "../../test/i18n";
 import { NavigationProvider, type NavigationAdapter } from "../../navigation";
 import { ProjectsPage } from "./projects-page";
@@ -42,7 +42,7 @@ const mocks = vi.hoisted(() => ({
   },
 }));
 
-vi.mock("@multica/ui/lib/clipboard", () => ({
+vi.mock("@workpal/ui/lib/clipboard", () => ({
   copyText: mocks.copyText,
   copyTextAndHtml: mocks.copyTextAndHtml,
 }));
@@ -77,7 +77,7 @@ vi.mock("@tanstack/react-query", () => ({
   useQueryClient: () => ({ ensureQueryData: async () => ({ autopilots: [] }) }),
 }));
 
-vi.mock("@multica/core/projects", () => ({
+vi.mock("@workpal/core/projects", () => ({
   projectListOptions: () => ({ queryKey: ["projects"] }),
   isProjectArchived: (project: { archived_at?: string | null }) => !!project.archived_at,
   useUpdateProject: () => ({ mutate: mocks.updateProject }),
@@ -91,17 +91,17 @@ vi.mock("@multica/core/projects", () => ({
   useProjectsPagePrefsSync: () => mocks.savePrefs,
 }));
 
-vi.mock("@multica/core/pins", () => ({
+vi.mock("@workpal/core/pins", () => ({
   pinListOptions: () => ({ queryKey: ["pins"] }),
   useCreatePin: () => ({ mutate: mocks.createPin }),
   useDeletePin: () => ({ mutate: mocks.deletePin }),
 }));
 
-vi.mock("@multica/core/hooks", () => ({
+vi.mock("@workpal/core/hooks", () => ({
   useWorkspaceId: () => "workspace-1",
 }));
 
-vi.mock("@multica/core/paths", () => ({
+vi.mock("@workpal/core/paths", () => ({
   useWorkspacePaths: () => ({
     projectDetail: (id: string) => `/test-workspace/projects/${id}`,
     memberDetail: (id: string) => `/test-workspace/members/${id}`,
@@ -109,17 +109,17 @@ vi.mock("@multica/core/paths", () => ({
   }),
 }));
 
-vi.mock("@multica/core/auth", () => ({
+vi.mock("@workpal/core/auth", () => ({
   useAuthStore: (selector: (state: unknown) => unknown) =>
     selector({ user: { id: "user-1" } }),
 }));
 
-vi.mock("@multica/core/workspace/queries", () => ({
+vi.mock("@workpal/core/workspace/queries", () => ({
   memberListOptions: () => ({ queryKey: ["members"] }),
   agentListOptions: () => ({ queryKey: ["agents"] }),
 }));
 
-vi.mock("@multica/core/workspace/hooks", () => ({
+vi.mock("@workpal/core/workspace/hooks", () => ({
   useActorName: () => ({
     getActorName: () => "Test Lead",
     getActorInitials: () => "TL",
@@ -131,13 +131,13 @@ vi.mock("../../common/actor-avatar", () => ({
   ActorAvatar: () => null,
 }));
 
-vi.mock("@multica/core/modals", () => ({
+vi.mock("@workpal/core/modals", () => ({
   useModalStore: {
     getState: () => ({ open: mocks.openModal }),
   },
 }));
 
-vi.mock("@multica/ui/components/ui/dropdown-menu", () => {
+vi.mock("@workpal/ui/components/ui/dropdown-menu", () => {
   const RadioGroupContext = React.createContext<((value: string) => void) | undefined>(
     undefined,
   );
@@ -234,7 +234,7 @@ vi.mock("@multica/ui/components/ui/dropdown-menu", () => {
   };
 });
 
-vi.mock("@multica/ui/components/ui/popover", () => ({
+vi.mock("@workpal/ui/components/ui/popover", () => ({
   Popover: ({ children }: { children: React.ReactNode }) => <>{children}</>,
   PopoverTrigger: ({ render }: { render: React.ReactNode }) => <>{render}</>,
   PopoverContent: ({ children }: { children: React.ReactNode }) => (
@@ -242,7 +242,7 @@ vi.mock("@multica/ui/components/ui/popover", () => ({
   ),
 }));
 
-vi.mock("@multica/ui/components/ui/tooltip", () => ({
+vi.mock("@workpal/ui/components/ui/tooltip", () => ({
   Tooltip: ({ children }: { children: React.ReactNode }) => <>{children}</>,
   TooltipTrigger: ({ render }: { render: React.ReactNode }) => <>{render}</>,
   TooltipContent: ({ children }: { children: React.ReactNode }) => (

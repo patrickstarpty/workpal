@@ -97,12 +97,12 @@ AI 代理執行專案內的任務時，專案名稱和描述會加入本次執�
 - **CLI**：給 `project create` 或 `project update` 加上 `--visibility private`，用 `--member`（名稱、信箱或使用者 ID，可重複）指定初始名單。之後用 `project member list|add|remove` 管理名單。
 
 ```bash
-multica project create --title "Pricing revamp" --visibility private --member alice@example.com --member Bob
-multica project update <project-id> --visibility private --member alice@example.com
-multica project member add <project-id> carol@example.com
+workpal project create --title "Pricing revamp" --visibility private --member alice@example.com --member Bob
+workpal project update <project-id> --visibility private --member alice@example.com
+workpal project member add <project-id> carol@example.com
 ```
 
-把私有專案改回**整個工作區**後，所有工作區成員都能看到這個專案及其中的任務、評論和附件。在介面中儲存前會要求確認；`multica project update --visibility workspace` 則直接生效。
+把私有專案改回**整個工作區**後，所有工作區成員都能看到這個專案及其中的任務、評論和附件。在介面中儲存前會要求確認；`workpal project update --visibility workspace` 則直接生效。
 
 ### 工作區擁有者恢復存取 [#workspace-owner-recovery]
 

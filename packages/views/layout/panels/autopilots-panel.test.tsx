@@ -1,17 +1,17 @@
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { fireEvent, screen, within } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { api } from "@multica/core/api";
-import { useAutopilotsViewStore } from "@multica/core/autopilots/stores";
-import type { Autopilot } from "@multica/core/types";
+import { api } from "@workpal/core/api";
+import { useAutopilotsViewStore } from "@workpal/core/autopilots/stores";
+import type { Autopilot } from "@workpal/core/types";
 import { NavigationProvider, type NavigationAdapter } from "../../navigation";
 import { renderWithI18n } from "../../test/i18n";
 import { AutopilotsPanel } from "./autopilots-panel";
 
-vi.mock("@multica/core/api", () => ({
+vi.mock("@workpal/core/api", () => ({
   api: { listAutopilots: vi.fn(), listWorkspaceWakeups: vi.fn() },
 }));
-vi.mock("@multica/core/paths", () => ({
+vi.mock("@workpal/core/paths", () => ({
   useCurrentWorkspace: () => ({ id: "ws" }),
   useWorkspacePaths: () => ({
     autopilots: () => "/ws/autopilots",

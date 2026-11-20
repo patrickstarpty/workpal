@@ -29,27 +29,27 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { cleanup, screen, waitFor } from "@testing-library/react";
 import { Profiler } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { setApiInstance } from "@multica/core/api";
-import type { ApiClient } from "@multica/core/api/client";
-import { ViewStoreProvider } from "@multica/core/issues/stores/view-store-context";
-import { getIssueSurfaceViewStore } from "@multica/core/issues/stores/surface-view-store";
+import { setApiInstance } from "@workpal/core/api";
+import type { ApiClient } from "@workpal/core/api/client";
+import { ViewStoreProvider } from "@workpal/core/issues/stores/view-store-context";
+import { getIssueSurfaceViewStore } from "@workpal/core/issues/stores/surface-view-store";
 import type {
   Issue,
   IssueTableQuerySpec,
   IssueTableRowsRequest,
-} from "@multica/core/types";
+} from "@workpal/core/types";
 import { renderWithI18n } from "../../test/i18n";
 import { IssueSurfaceSelectionProvider } from "../surface/selection-context";
 import type { IssueSurfaceSelection } from "../surface/selection-context";
 import { TableView } from "./table-view";
 
-vi.mock("@multica/core/hooks", () => ({ useWorkspaceId: () => "ws-1" }));
+vi.mock("@workpal/core/hooks", () => ({ useWorkspaceId: () => "ws-1" }));
 
 const actorNames = vi.hoisted(() => {
   const getActorName = () => "Someone";
   return { getActorName, result: { getActorName } };
 });
-vi.mock("@multica/core/workspace/hooks", () => ({
+vi.mock("@workpal/core/workspace/hooks", () => ({
   useActorName: () => actorNames.result,
   buildActorNameResolver: () => actorNames.getActorName,
 }));
@@ -60,7 +60,7 @@ const authState = vi.hoisted(() => ({
     isAuthenticated: true,
   },
 }));
-vi.mock("@multica/core/auth", () => ({
+vi.mock("@workpal/core/auth", () => ({
   useAuthStore: Object.assign(
     (selector?: (state: unknown) => unknown) =>
       selector ? selector(authState.value) : authState.value,
@@ -85,10 +85,10 @@ vi.mock("../../navigation", () => ({
   useIntentNavigate: () => () => {},
 }));
 
-vi.mock("@multica/core/paths", async () => {
+vi.mock("@workpal/core/paths", async () => {
   const actual =
-    await vi.importActual<typeof import("@multica/core/paths")>(
-      "@multica/core/paths",
+    await vi.importActual<typeof import("@workpal/core/paths")>(
+      "@workpal/core/paths",
     );
   const workspacePaths = actual.paths.workspace("test");
   return { ...actual, useWorkspacePaths: () => workspacePaths };

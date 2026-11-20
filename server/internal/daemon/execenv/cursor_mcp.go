@@ -15,27 +15,27 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/multica-ai/multica/server/internal/cli"
+	"workpal.local/workpal/server/internal/cli"
 )
 
 const (
 	// CursorMcpAuthSourceEnv is an agent custom_env key the daemon consumes
 	// before launching cursor-agent. When set, it must point at an explicit
 	// mcp-auth.json file, or at a Cursor project data directory containing one.
-	// The key is intentionally not MULTICA_* because custom_env blocks those
+	// The key is intentionally not WORKPAL_* because custom_env blocks those
 	// from being set by users.
 	CursorMcpAuthSourceEnv = "CURSOR_MCP_AUTH_SOURCE"
 
 	cursorWorkspaceTrustedFile = ".workspace-trusted"
 	cursorMcpAuthFile          = "mcp-auth.json"
 
-	// cursorMcpAuthStoreRoot is the directory under the daemon's Multica
+	// cursorMcpAuthStoreRoot is the directory under the daemon's Workpal
 	// profile dir that holds each agent's persistent Cursor MCP OAuth state.
 	cursorMcpAuthStoreRoot = "cursor-mcp-auth"
 )
 
 // CursorMcpAuthStorePath returns the agent's persistent Cursor mcp-auth.json on
-// this machine, or "" when there is no agent to key on or the Multica profile
+// this machine, or "" when there is no agent to key on or the Workpal profile
 // dir cannot be resolved.
 //
 // Cursor keys MCP OAuth state by project directory, and every task runs in a
@@ -134,7 +134,7 @@ func prepareCursorMcpConfig(envRoot, workDir string, mcpConfig json.RawMessage, 
 	trustData, err := json.MarshalIndent(map[string]string{
 		"trustedAt":     "1970-01-01T00:00:00Z",
 		"workspacePath": projectRoot,
-		"trustMethod":   "multica-managed",
+		"trustMethod":   "workpal-managed",
 	}, "", "  ")
 	if err != nil {
 		return "", fmt.Errorf("marshal cursor workspace trust: %w", err)

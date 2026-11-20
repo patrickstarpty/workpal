@@ -9,8 +9,8 @@ import (
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgtype"
 
-	"github.com/multica-ai/multica/server/internal/integrations/channel"
-	"github.com/multica-ai/multica/server/internal/integrations/channel/engine"
+	"workpal.local/workpal/server/internal/integrations/channel"
+	"workpal.local/workpal/server/internal/integrations/channel/engine"
 )
 
 // This file is the Feishu ResolverSet: the platform-specific implementations
@@ -106,14 +106,14 @@ func (r *feishuIdentityResolver) ResolveSender(ctx context.Context, inst engine.
 		}
 		return engine.ResolvedIdentity{}, err
 	}
-	isMember, err := r.store.IsWorkspaceMember(ctx, inst.WorkspaceID, binding.MulticaUserID)
+	isMember, err := r.store.IsWorkspaceMember(ctx, inst.WorkspaceID, binding.WorkpalUserID)
 	if err != nil {
 		return engine.ResolvedIdentity{}, err
 	}
 	if !isMember {
 		return engine.ResolvedIdentity{}, engine.ErrSenderNotMember
 	}
-	return engine.ResolvedIdentity{UserID: binding.MulticaUserID}, nil
+	return engine.ResolvedIdentity{UserID: binding.WorkpalUserID}, nil
 }
 
 // ---- dedup ----

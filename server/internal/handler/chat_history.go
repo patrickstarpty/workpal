@@ -13,19 +13,19 @@ import (
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgtype"
 
-	"github.com/multica-ai/multica/server/internal/integrations/channel"
-	"github.com/multica-ai/multica/server/internal/integrations/slack"
-	"github.com/multica-ai/multica/server/internal/logger"
-	"github.com/multica-ai/multica/server/internal/util"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
-	"github.com/multica-ai/multica/server/pkg/protocol"
+	"workpal.local/workpal/server/internal/integrations/channel"
+	"workpal.local/workpal/server/internal/integrations/slack"
+	"workpal.local/workpal/server/internal/logger"
+	"workpal.local/workpal/server/internal/util"
+	db "workpal.local/workpal/server/pkg/db/generated"
+	"workpal.local/workpal/server/pkg/protocol"
 )
 
 // ChatChannelHistoryReader reads a chat session's bound IM-channel history. The
 // Slack reader (slack.History) satisfies it; a future platform registers its
 // own. Two operations back the two agent commands: ChannelOverview is the
-// channel table-of-contents (`multica chat history`), Thread reads one thread's
-// messages (`multica chat thread [id]`). Both are scoped server-side to the
+// channel table-of-contents (`workpal chat history`), Thread reads one thread's
+// messages (`workpal chat thread [id]`). Both are scoped server-side to the
 // session's own channel (MUL-3871).
 type ChatChannelHistoryReader interface {
 	ChannelOverview(ctx context.Context, chatSessionID pgtype.UUID, opts channel.HistoryOptions) (channel.HistoryPage, error)
@@ -53,9 +53,9 @@ type ChatChannelHistoryResponse struct {
 	Note string `json:"note,omitempty"`
 }
 
-// GetChatChannelHistory serves `multica chat history` — the channel overview:
+// GetChatChannelHistory serves `workpal chat history` — the channel overview:
 // recent top-level messages, each thread tagged with its id + reply count (no
-// thread contents). The agent drills into a thread with `multica chat thread`.
+// thread contents). The agent drills into a thread with `workpal chat thread`.
 //
 // A chat session that is NOT backed by an IM channel has no channel overview to
 // read — its history is the chat_message table itself (web chat, Feishu). For
@@ -87,9 +87,9 @@ func (h *Handler) GetChatChannelHistory(w http.ResponseWriter, r *http.Request) 
 
 // chatMessageHistory reads a chat session's own stored transcript (chat_message)
 // as a channel.HistoryPage, oldest-first, honoring the shared ?limit / ?before
-// paging contract. It backs `multica chat history` for sessions with no IM
+// paging contract. It backs `workpal chat history` for sessions with no IM
 // channel (web chat, Feishu, WeCom, DingTalk), whose history lives only in
-// Multica — there is no platform to read back. It pages through the same
+// Workpal — there is no platform to read back. It pages through the same
 // (created_at, id) cursor the frontend's message list uses, so an agent can walk
 // a long session back without re-reading the recent window each time.
 func (h *Handler) chatMessageHistory(r *http.Request, scope chatHistoryScope) (channel.HistoryPage, error) {
@@ -203,7 +203,7 @@ func transcriptAuthor(role channel.HistoryRole) string {
 	return "User"
 }
 
-// GetChatThread serves `multica chat thread [id]` — one thread's messages. With
+// GetChatThread serves `workpal chat thread [id]` — one thread's messages. With
 // ?id it reads that specific thread; without, the thread the session is in. The
 // channel stays server-pinned to the session, so the id is only a within-channel
 // locator.

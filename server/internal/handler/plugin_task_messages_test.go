@@ -3,17 +3,17 @@ package handler
 import (
 	"context"
 	"encoding/json"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
-	publicapiv1 "github.com/multica-ai/multica/server/pkg/publicapi/v1"
+	db "workpal.local/workpal/server/pkg/db/generated"
+	publicapiv1 "workpal.local/workpal/server/pkg/publicapi/v1"
 	"gopkg.in/yaml.v3"
 	"net/http"
 	"net/http/httptest"
 	"slices"
 	"testing"
 
-	"github.com/multica-ai/multica/server/internal/service"
-	"github.com/multica-ai/multica/server/internal/testutil"
-	"github.com/multica-ai/multica/server/pkg/plugincontract"
+	"workpal.local/workpal/server/internal/service"
+	"workpal.local/workpal/server/internal/testutil"
+	"workpal.local/workpal/server/pkg/plugincontract"
 )
 
 // The transcript endpoint, exercised through the paths that actually decide

@@ -1,5 +1,5 @@
 import { useEffect, useRef, type ComponentType } from "react";
-import { cn } from "@multica/ui/lib/utils";
+import { cn } from "@workpal/ui/lib/utils";
 import type { Lang } from "../copy";
 import { BANDS, SAMPLE_MS, useLevelSamples, useLevelStream, type LevelStream } from "./stream";
 

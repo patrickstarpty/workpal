@@ -2,17 +2,17 @@ import { afterEach, beforeEach, expect, it, vi } from "vitest";
 import { screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { setApiInstance } from "@multica/core/api";
-import type { ApiClient } from "@multica/core/api/client";
-import type { PrivateProjectOverview } from "@multica/core/types";
-import { EMPTY_PROJECT } from "@multica/core/api/schemas";
+import { setApiInstance } from "@workpal/core/api";
+import type { ApiClient } from "@workpal/core/api/client";
+import type { PrivateProjectOverview } from "@workpal/core/types";
+import { EMPTY_PROJECT } from "@workpal/core/api/schemas";
 import { renderWithI18n } from "../../test/i18n";
 import { PrivateProjectsSection } from "./private-projects-section";
 
 const toast = vi.hoisted(() => ({ success: vi.fn(), error: vi.fn() }));
 vi.mock("sonner", () => ({ toast }));
-vi.mock("@multica/core/hooks", () => ({ useWorkspaceId: () => "ws" }));
-vi.mock("@multica/core/paths", () => ({
+vi.mock("@workpal/core/hooks", () => ({ useWorkspaceId: () => "ws" }));
+vi.mock("@workpal/core/paths", () => ({
   useWorkspacePaths: () => ({ projectDetail: (id: string) => `/acme/projects/${id}` }),
 }));
 vi.mock("../../navigation", () => ({

@@ -7,7 +7,7 @@ import {
   Lock,
   MoreHorizontal,
   Trash2,
-} from "@multica/ui/icons";
+} from "@workpal/ui/icons";
 import { toast } from "sonner";
 import { useQuery } from "@tanstack/react-query";
 import type {
@@ -15,30 +15,30 @@ import type {
   Agent,
   MemberWithUser,
   RuntimeProfile,
-} from "@multica/core/types";
-import { useAuthStore } from "@multica/core/auth";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { memberListOptions, agentListOptions } from "@multica/core/workspace/queries";
+} from "@workpal/core/types";
+import { useAuthStore } from "@workpal/core/auth";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { memberListOptions, agentListOptions } from "@workpal/core/workspace/queries";
 import {
   deriveRuntimeHealth,
   isRuntimeUsableForUser,
   runtimeDisplayName,
   runtimeProfileListOptions,
-} from "@multica/core/runtimes";
-import { runtimeReportsRateLimits } from "@multica/core/runtimes/rate-limits";
+} from "@workpal/core/runtimes";
+import { runtimeReportsRateLimits } from "@workpal/core/runtimes/rate-limits";
 import {
   type AgentPresenceDetail,
   useWorkspacePresenceMap,
-} from "@multica/core/agents";
-import { useWorkspacePaths } from "@multica/core/paths";
-import { IconButton } from "@multica/ui/components/common/icon-button";
+} from "@workpal/core/agents";
+import { useWorkspacePaths } from "@workpal/core/paths";
+import { IconButton } from "@workpal/ui/components/common/icon-button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@multica/ui/components/ui/dropdown-menu";
-import { cn } from "@multica/ui/lib/utils";
+} from "@workpal/ui/components/ui/dropdown-menu";
+import { cn } from "@workpal/ui/lib/utils";
 import { ActorAvatar } from "../../common/actor-avatar";
 import {
   OBJECT_PAGE_BODY,
@@ -62,7 +62,7 @@ import { RuntimeConcurrencyField } from "./runtime-concurrency-field";
 import { DeleteRuntimeProfileDialog } from "./delete-runtime-profile-dialog";
 import { runtimeRowLabel } from "./runtime-machines";
 import { useT, useTimeAgo } from "../../i18n";
-import { TruncatedTooltip } from "@multica/ui/components/common/truncated-tooltip";
+import { TruncatedTooltip } from "@workpal/ui/components/common/truncated-tooltip";
 
 function getCliVersion(metadata: Record<string, unknown>): string | null {
   if (
@@ -170,7 +170,7 @@ export function RuntimeDetail({
     <>
       <ObjectPage
         type="runtime"
-        layoutId="multica_runtime_detail_layout"
+        layoutId="workpal_runtime_detail_layout"
         segments={[
           { href: paths.runtimes(), label: t(($) => $.page.title) },
           ...(machineHref && machineLabel

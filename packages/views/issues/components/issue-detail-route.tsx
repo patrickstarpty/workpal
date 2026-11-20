@@ -1,10 +1,10 @@
 "use client";
 
 import { useCallback, useEffect, useRef } from "react";
-import { useCanonicalIssue } from "@multica/core/issues/canonical-id";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { useWorkspacePaths } from "@multica/core/paths";
-import { useInboxSelectionStore } from "@multica/core/inbox/selection-store";
+import { useCanonicalIssue } from "@workpal/core/issues/canonical-id";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { useWorkspacePaths } from "@workpal/core/paths";
+import { useInboxSelectionStore } from "@workpal/core/inbox/selection-store";
 import { useNavigation } from "../../navigation";
 import { IssueDetail, IssueDetailSkeleton, IssueNotFound, IssueLoadError } from "./issue-detail";
 import { IssuePeekHost } from "./issue-peek";

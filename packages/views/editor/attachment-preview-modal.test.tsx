@@ -2,8 +2,8 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { act, fireEvent, render as rtlRender, screen, waitFor } from "@testing-library/react";
 import { focusManager, QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useState, type ReactElement } from "react";
-import type { Attachment } from "@multica/core/types";
-import { ApiError } from "@multica/core/api/client";
+import type { Attachment } from "@workpal/core/types";
+import { ApiError } from "@workpal/core/api/client";
 
 const { openExternalMock, isDesktopShellMock, copyImageMock, copyTextMock, toastMock } =
   vi.hoisted(() => ({
@@ -23,7 +23,7 @@ vi.mock("../platform/local-directory", () => ({
   isDesktopShell: isDesktopShellMock,
 }));
 
-vi.mock("@multica/ui/lib/clipboard", () => ({
+vi.mock("@workpal/ui/lib/clipboard", () => ({
   copyImage: copyImageMock,
   copyText: copyTextMock,
 }));
@@ -68,7 +68,7 @@ const {
   };
 });
 
-vi.mock("@multica/core/api", () => ({
+vi.mock("@workpal/core/api", () => ({
   api: {
     getAttachmentTextContent: getAttachmentTextContentMock,
     getAttachment: getAttachmentMock,
@@ -106,8 +106,8 @@ vi.mock("../navigation", () => ({
   }),
 }));
 
-vi.mock("@multica/core/paths", async (importOriginal) => {
-  const actual = await importOriginal<typeof import("@multica/core/paths")>();
+vi.mock("@workpal/core/paths", async (importOriginal) => {
+  const actual = await importOriginal<typeof import("@workpal/core/paths")>();
   return {
     ...actual,
     useWorkspaceSlug: () => slugState.value,

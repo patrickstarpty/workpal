@@ -4,7 +4,7 @@ import {
   LABEL_TEXT_COLORS,
   PALETTE_PRESETS,
   PALETTE_SLOTS,
-} from "@multica/core/appearance";
+} from "@workpal/core/appearance";
 import {
   TEXT_AVATAR_COLORS,
   TEXT_AVATAR_DEFAULT_COLOR,

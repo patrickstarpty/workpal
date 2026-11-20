@@ -18,7 +18,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/multica-ai/multica/server/pkg/httptransport"
+	"workpal.local/workpal/server/pkg/httptransport"
 )
 
 const (
@@ -88,7 +88,7 @@ func hostAllowed(host string, policies []string) bool {
 }
 
 func isPublicAddress(address netip.Addr) bool {
-	if !address.IsValid() || address.IsPrivate() || address.IsLoopback() || address.IsLinkLocalUnicast() || address.IsLinkLocalMulticast() || address.IsMulticast() || address.IsUnspecified() {
+	if !address.IsValid() || address.IsPrivate() || address.IsLoopback() || address.IsLinkLocalUnicast() || address.IsLinkLocalWorkpalst() || address.IsWorkpalst() || address.IsUnspecified() {
 		return false
 	}
 	// IANA special-purpose and metadata ranges not covered by netip's helpers.
@@ -207,7 +207,7 @@ func Discover(ctx context.Context, rawEndpoint string, allowedHosts, protocolVer
 		"params": map[string]any{
 			"protocolVersion": protocolVersion,
 			"capabilities":    map[string]any{},
-			"clientInfo":      map[string]any{"name": "multica-plugin-review", "version": "1"},
+			"clientInfo":      map[string]any{"name": "workpal-plugin-review", "version": "1"},
 		},
 	}
 	initializeResponse, responseHeaders, err := call(ctx, client, endpoint, headers, sessionID, initialize)

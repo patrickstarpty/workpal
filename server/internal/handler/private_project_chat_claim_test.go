@@ -9,8 +9,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/multica-ai/multica/server/internal/projectaccess"
-	"github.com/multica-ai/multica/server/internal/testutil"
+	"workpal.local/workpal/server/internal/projectaccess"
+	"workpal.local/workpal/server/internal/testutil"
 )
 
 // A chat bound to a private project (MUL-8472) hands the project's title,
@@ -30,7 +30,7 @@ func TestPrivateProjectChatClaimDropsContextAfterRemoval(t *testing.T) {
 		t.Run(tc.name, func(t *testing.T) {
 			ctx := context.Background()
 			marker := fmt.Sprintf("ppchat%d", time.Now().UnixNano())
-			member := createPlainMember(t, marker+"@multica.test")
+			member := createPlainMember(t, marker+"@workpal.test")
 			projectID := dbfx.Project(t, marker+" secret project", testutil.Cols{
 				"visibility":  projectaccess.VisibilityPrivate,
 				"description": marker + " secret description",

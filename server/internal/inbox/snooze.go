@@ -4,8 +4,8 @@ import (
 	"encoding/json"
 	"time"
 
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
-	"github.com/multica-ai/multica/server/pkg/protocol"
+	db "workpal.local/workpal/server/pkg/db/generated"
+	"workpal.local/workpal/server/pkg/protocol"
 )
 
 // MaxSnooze is how far ahead an issue can be snoozed.

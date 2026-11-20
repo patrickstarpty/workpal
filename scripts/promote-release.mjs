@@ -55,7 +55,7 @@ export async function validateRelease(tag, release, assets, readMetadata) {
       const arches = platform === "linux"
         ? arch === "x64" ? ["x64", "x86_64", "amd64"] : ["arm64", "aarch64"]
         : [arch];
-      const expected = arches.map((cpu) => `multica-desktop-${version}-${platform}-${cpu}`);
+      const expected = arches.map((cpu) => `workpal-desktop-${version}-${platform}-${cpu}`);
       let hasUpdatePackage = false;
       for (const file of metadata.files) {
         if (typeof file?.url !== "string") throw new Error("invalid files[].url");
@@ -79,7 +79,7 @@ export async function validateRelease(tag, release, assets, readMetadata) {
   for (const os of ["darwin", "linux", "windows"]) {
     for (const arch of ["amd64", "arm64"]) {
       const ext = os === "windows" ? "zip" : "tar.gz";
-      for (const name of [`multica_${os}_${arch}.${ext}`, `multica-cli-${version}-${os}-${arch}.${ext}`]) {
+      for (const name of [`workpal_${os}_${arch}.${ext}`, `workpal-cli-${version}-${os}-${arch}.${ext}`]) {
         if (!uploaded.has(name)) problems.push(`Missing ${name}`);
       }
     }
@@ -110,7 +110,7 @@ export async function main() {
   const tag = process.env.RELEASE_TAG;
   stableVersion(tag);
   const repo = process.env.GH_REPO;
-  if (repo !== "multica-ai/multica") throw new Error("GH_REPO must be multica-ai/multica");
+  if (repo !== "workpal-ai/workpal") throw new Error("GH_REPO must be workpal-ai/workpal");
   const api = (path) => JSON.parse(gh(["api", `repos/${repo}/${path}`]));
   const result = await promoteRelease({
     tag,

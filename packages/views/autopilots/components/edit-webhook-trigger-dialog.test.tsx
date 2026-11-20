@@ -2,7 +2,7 @@ import { describe, it, expect, vi, beforeEach } from "vitest";
 import { screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import type { AutopilotTrigger } from "@multica/core/types";
+import type { AutopilotTrigger } from "@workpal/core/types";
 import { renderWithI18n } from "../../test/i18n";
 
 // The editor a webhook row opens. The PATCH stays partial for the reason the
@@ -13,7 +13,7 @@ import { renderWithI18n } from "../../test/i18n";
 
 const mockUpdateTrigger = vi.hoisted(() => vi.fn());
 
-vi.mock("@multica/core/autopilots/mutations", () => ({
+vi.mock("@workpal/core/autopilots/mutations", () => ({
   useUpdateAutopilotTrigger: () => ({ mutateAsync: mockUpdateTrigger }),
 }));
 

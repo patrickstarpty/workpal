@@ -16,17 +16,17 @@ import {
   RotateCcw,
   Sun,
   TriangleAlert,
-} from "@multica/ui/icons";
-import { cn } from "@multica/ui/lib/utils";
-import { Badge } from "@multica/ui/components/ui/badge";
-import { Button } from "@multica/ui/components/ui/button";
+} from "@workpal/ui/icons";
+import { cn } from "@workpal/ui/lib/utils";
+import { Badge } from "@workpal/ui/components/ui/badge";
+import { Button } from "@workpal/ui/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@multica/ui/components/ui/dropdown-menu";
+} from "@workpal/ui/components/ui/dropdown-menu";
 import {
   Select,
   SelectContent,
@@ -36,11 +36,11 @@ import {
   SelectSeparator,
   SelectTrigger,
   SelectValue,
-} from "@multica/ui/components/ui/select";
-import { Input } from "@multica/ui/components/ui/input";
-import { Slider } from "@multica/ui/components/ui/slider";
-import { Switch } from "@multica/ui/components/ui/switch";
-import { useTheme } from "@multica/ui/components/common/theme-provider";
+} from "@workpal/ui/components/ui/select";
+import { Input } from "@workpal/ui/components/ui/input";
+import { Slider } from "@workpal/ui/components/ui/slider";
+import { Switch } from "@workpal/ui/components/ui/switch";
+import { useTheme } from "@workpal/ui/components/common/theme-provider";
 import {
   BUILT_IN_THEMES,
   CJK_FONTS,
@@ -84,9 +84,9 @@ import {
   type ThemeOptionValue,
   type ThemedColor,
   type UiFont,
-} from "@multica/core/appearance";
-import { storeThemeState, storeThemesOptions } from "@multica/core/appearance/theme-store";
-import { useConfigStore } from "@multica/core/config";
+} from "@workpal/core/appearance";
+import { storeThemeState, storeThemesOptions } from "@workpal/core/appearance/theme-store";
+import { useConfigStore } from "@workpal/core/config";
 import { useLocale, useT } from "../../i18n";
 import { SegmentedToggle } from "../../common/segmented-toggle";
 import { docsLocalePrefix } from "../../common/docs-locale";
@@ -349,7 +349,7 @@ function useThemeImport(): ThemeImport {
 }
 
 function themeGuideUrl(language: string): string {
-  return `https://multica.ai/docs${docsLocalePrefix(language)}/developers/themes`;
+  return `https://workpal.invalid/docs${docsLocalePrefix(language)}/developers/themes`;
 }
 
 function downloadFile(data: Uint8Array<ArrayBuffer>, name: string, type: string) {

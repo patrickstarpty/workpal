@@ -16,9 +16,9 @@ import {
   Search,
   Settings2,
   User,
-} from "@multica/ui/icons";
-import { Button } from "@multica/ui/components/ui/button";
-import type { QuestionnaireAnswers, Role, UseCase } from "@multica/core/onboarding";
+} from "@workpal/ui/icons";
+import { Button } from "@workpal/ui/components/ui/button";
+import type { QuestionnaireAnswers, Role, UseCase } from "@workpal/core/onboarding";
 import {
   StepFooter,
   StepHeading,

@@ -1,4 +1,3 @@
-// Copyright 2026 Multica. All rights reserved.
 
 package testutil
 

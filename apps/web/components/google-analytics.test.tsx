@@ -13,7 +13,7 @@ const { pushState, replaceState } = window.history;
 
 afterEach(() => {
   Object.assign(window.history, { pushState, replaceState });
-  for (const k of ["__multicaGoogleAnalytics", `ga-disable-${ID}`, "dataLayer", "gtag"]) delete w[k];
+  for (const k of ["__workpalGoogleAnalytics", `ga-disable-${ID}`, "dataLayer", "gtag"]) delete w[k];
   document.querySelectorAll("script").forEach((s) => s.remove());
   window.history.replaceState(null, "", "/");
 });
@@ -51,7 +51,7 @@ it("stops for the document after visiting a sensitive URL", () => {
 
 it("stops before a signed download click, but not for clean or blob links", () => {
   start("/about");
-  click("https://github.com/multica-ai/multica");
+  click("https://code-host.invalid/workpal");
   click("blob:https://app.example.invalid/uuid");
   expect(disabled()).toBe(false);
   click("https://cdn.example.invalid/a.pdf?Signature=s");
@@ -66,7 +66,7 @@ const pageTitles = () =>
   );
 
 it("pins page_title to route labels instead of the workspace document title", () => {
-  document.title = "Fix the secret launch · Multica";
+  document.title = "Fix the secret launch · Workpal";
   start("/acme/issues/MUL-1");
   window.history.pushState(null, "", "/acme/projects");
   window.history.replaceState(null, "", "/changelog");

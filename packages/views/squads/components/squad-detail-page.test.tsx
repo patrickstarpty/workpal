@@ -2,7 +2,7 @@ import type React from "react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import type { Issue, Squad, SquadMember, SquadMemberStatus } from "@multica/core/types";
+import type { Issue, Squad, SquadMember, SquadMemberStatus } from "@workpal/core/types";
 import { renderWithI18n } from "../../test/i18n";
 import { NavigationProvider, type NavigationAdapter } from "../../navigation";
 import { SquadDetailPage } from "./squad-detail-page";
@@ -35,18 +35,18 @@ vi.mock("@tanstack/react-query", () => ({
     isPending: false,
   }),
 }));
-vi.mock("@multica/core/workspace/queries", () => ({
+vi.mock("@workpal/core/workspace/queries", () => ({
   agentListOptions: () => ({ queryKey: ["agents"] }),
   memberListOptions: () => ({ queryKey: ["members"] }),
   squadMemberStatusOptions: () => ({ queryKey: ["member-status"] }),
   workspaceKeys: { squads: () => ["squads"] },
 }));
-vi.mock("@multica/core/api", () => ({ api: mocks.api }));
-vi.mock("@multica/core/auth", () => ({
+vi.mock("@workpal/core/api", () => ({ api: mocks.api }));
+vi.mock("@workpal/core/auth", () => ({
   useAuthStore: (select: (s: { user: { id: string } }) => unknown) => select({ user: { id: mocks.userId } }),
 }));
-vi.mock("@multica/core/hooks", () => ({ useWorkspaceId: () => "ws-1" }));
-vi.mock("@multica/core/paths", () => ({
+vi.mock("@workpal/core/hooks", () => ({ useWorkspaceId: () => "ws-1" }));
+vi.mock("@workpal/core/paths", () => ({
   useCurrentWorkspace: () => ({ id: "ws-1", slug: "acme" }),
   useWorkspacePaths: () => ({
     squads: () => "/acme/squads",
@@ -55,10 +55,10 @@ vi.mock("@multica/core/paths", () => ({
     issueDetail: (id: string) => `/acme/issues/${id}`,
   }),
 }));
-vi.mock("@multica/core/modals", () => ({
+vi.mock("@workpal/core/modals", () => ({
   useModalStore: { getState: () => ({ open: mocks.openModal }) },
 }));
-vi.mock("@multica/core/issue-statuses/hooks", () => ({
+vi.mock("@workpal/core/issue-statuses/hooks", () => ({
   useIssueStatuses: () => ({ categoryOf: () => "started", colorOf: () => undefined, iconOf: () => undefined }),
 }));
 vi.mock("../../issues/utils/status-label", () => ({
@@ -98,7 +98,7 @@ vi.mock("../../editor/title-editor", () => ({
     />
   ),
 }));
-vi.mock("@multica/ui/lib/clipboard", () => ({ copyText: mocks.copyText }));
+vi.mock("@workpal/ui/lib/clipboard", () => ({ copyText: mocks.copyText }));
 vi.mock("sonner", () => ({ toast: { success: vi.fn(), error: vi.fn() } }));
 
 // jsdom gives every element a zero-size rect, so a live resize handle claims
@@ -109,7 +109,7 @@ vi.mock("react-resizable-panels", () => ({
     current: { isCollapsed: () => false, expand: vi.fn(), collapse: vi.fn() },
   }),
 }));
-vi.mock("@multica/ui/components/ui/resizable", () => ({
+vi.mock("@workpal/ui/components/ui/resizable", () => ({
   ResizablePanelGroup: ({ children }: { children: React.ReactNode }) => <div>{children}</div>,
   ResizablePanel: ({ children }: { children: React.ReactNode }) => <div>{children}</div>,
   ResizableHandle: () => null,
@@ -186,7 +186,7 @@ function renderPage(search = "") {
     pathname: "/acme/squads/sq-1",
     searchParams: new URLSearchParams(search),
     hash: "",
-    getShareableUrl: (path) => `https://multica.test${path}`,
+    getShareableUrl: (path) => `https://workpal.test${path}`,
   };
   renderWithI18n(
     <NavigationProvider value={adapter}>
@@ -236,7 +236,7 @@ describe("SquadDetailPage", () => {
 
     await user.click(screen.getByRole("button", { name: "More actions" }));
     await user.click(await screen.findByRole("menuitem", { name: "Copy link" }));
-    expect(mocks.copyText).toHaveBeenCalledWith("https://multica.test/acme/squads/sq-1");
+    expect(mocks.copyText).toHaveBeenCalledWith("https://workpal.test/acme/squads/sq-1");
 
     await user.click(screen.getByRole("button", { name: "More actions" }));
     await user.click(await screen.findByRole("menuitem", { name: "Create Agent" }));

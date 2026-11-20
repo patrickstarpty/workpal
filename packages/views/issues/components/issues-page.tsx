@@ -1,10 +1,10 @@
 "use client";
 
-import { ListTodo, MessageSquare, Plus } from "@multica/ui/icons";
-import { Button } from "@multica/ui/components/ui/button";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { issueViewContainerKey, useActiveIssueViewStore } from "@multica/core/issue-views/active-view-store";
-import { useIssuesScope } from "@multica/core/issues/stores/issues-scope-store";
+import { ListTodo, MessageSquare, Plus } from "@workpal/ui/icons";
+import { Button } from "@workpal/ui/components/ui/button";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { issueViewContainerKey, useActiveIssueViewStore } from "@workpal/core/issue-views/active-view-store";
+import { useIssuesScope } from "@workpal/core/issues/stores/issues-scope-store";
 import { useStartChatWithDraft } from "../../chat/use-start-chat-with-draft";
 import { useT } from "../../i18n";
 import { CollectionPageState } from "../../layout/collection-page";

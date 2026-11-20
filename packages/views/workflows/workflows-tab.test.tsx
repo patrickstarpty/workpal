@@ -3,25 +3,25 @@
 import { cleanup, fireEvent, screen, within } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { buildIssueStatusCatalog } from "@multica/core/issue-statuses";
-import { projectListOptions } from "@multica/core/projects/queries";
-import { memberListOptions } from "@multica/core/workspace/queries";
-import type { IssueWorkflow, Project } from "@multica/core/types";
+import { buildIssueStatusCatalog } from "@workpal/core/issue-statuses";
+import { projectListOptions } from "@workpal/core/projects/queries";
+import { memberListOptions } from "@workpal/core/workspace/queries";
+import type { IssueWorkflow, Project } from "@workpal/core/types";
 import { renderWithI18n } from "../test/i18n";
 import { WorkflowsTab } from "./workflows-tab";
 
 const { workflows } = vi.hoisted(() => ({ workflows: [] as IssueWorkflow[] }));
 
-vi.mock("@multica/core/hooks", () => ({ useWorkspaceId: () => "ws-1" }));
-vi.mock("@multica/core/auth", () => ({
+vi.mock("@workpal/core/hooks", () => ({ useWorkspaceId: () => "ws-1" }));
+vi.mock("@workpal/core/auth", () => ({
   useAuthStore: (select: (s: { user: { id: string } }) => unknown) => select({ user: { id: "user-1" } }),
 }));
-vi.mock("@multica/core/paths", () => ({
+vi.mock("@workpal/core/paths", () => ({
   useWorkspacePaths: () => ({ projectDetail: (id: string) => `/acme/projects/${id}` }),
 }));
-vi.mock("@multica/core/issue-statuses/hooks", () => ({ useIssueStatuses: () => buildIssueStatusCatalog([]) }));
-vi.mock("@multica/core/workspace/hooks", () => ({ useActorName: () => ({ getActorName: () => "Lambda" }) }));
-vi.mock("@multica/core/issue-workflows", () => ({ useIssueWorkflows: () => ({ workflows, isLoaded: true }) }));
+vi.mock("@workpal/core/issue-statuses/hooks", () => ({ useIssueStatuses: () => buildIssueStatusCatalog([]) }));
+vi.mock("@workpal/core/workspace/hooks", () => ({ useActorName: () => ({ getActorName: () => "Lambda" }) }));
+vi.mock("@workpal/core/issue-workflows", () => ({ useIssueWorkflows: () => ({ workflows, isLoaded: true }) }));
 vi.mock("../navigation", () => ({
   AppLink: ({ href, children, ...props }: { href: string; children: React.ReactNode }) => (
     <a href={href} {...props}>
@@ -107,9 +107,9 @@ describe("WorkflowsTab list (MUL-8377)", () => {
       workflow({ id: "wf-release", name: "版本发布", project_ids: ["p1"] }),
       workflow({ id: "wf-community", name: "Community" }),
     );
-    renderTab([project("p1", "Multica 线上发布", "wf-release")]);
+    renderTab([project("p1", "Workpal 线上发布", "wf-release")]);
 
-    expect(screen.getByRole("button", { name: "Multica 线上发布" })).toBeTruthy();
+    expect(screen.getByRole("button", { name: "Workpal 线上发布" })).toBeTruthy();
     expect(screen.getByText("Not used yet")).toBeTruthy();
     expect(screen.getByText("Issues without a project")).toBeTruthy();
     expect(screen.getByRole("link", { name: "版本发布" }).getAttribute("href")).toBe(

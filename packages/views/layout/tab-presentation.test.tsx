@@ -2,28 +2,28 @@ import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import type { ReactNode } from "react";
 import { act, render, renderHook, waitFor } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { ApiError, setApiInstance, type ApiClient } from "@multica/core/api";
-import { createQueryClient } from "@multica/core/query-client";
-import type { Issue, ListIssueStatusesResponse } from "@multica/core/types";
-import { onIssueUpdated } from "@multica/core/issues";
-import { issueDetailOptions } from "@multica/core/issues/queries";
-import { issueStatusListOptions } from "@multica/core/issue-statuses/queries";
-import { projectDetailOptions } from "@multica/core/projects/queries";
-import { chatSessionsOptions } from "@multica/core/chat/queries";
+import { ApiError, setApiInstance, type ApiClient } from "@workpal/core/api";
+import { createQueryClient } from "@workpal/core/query-client";
+import type { Issue, ListIssueStatusesResponse } from "@workpal/core/types";
+import { onIssueUpdated } from "@workpal/core/issues";
+import { issueDetailOptions } from "@workpal/core/issues/queries";
+import { issueStatusListOptions } from "@workpal/core/issue-statuses/queries";
+import { projectDetailOptions } from "@workpal/core/projects/queries";
+import { chatSessionsOptions } from "@workpal/core/chat/queries";
 import {
   inboxListOptions,
   archivedInboxPagesOptions,
   archivedInboxLookupOptions,
-} from "@multica/core/inbox/queries";
-import { EMPTY_INBOX_FILTERS } from "@multica/core/inbox/filter-store";
-import { agentListOptions } from "@multica/core/workspace/queries";
-import { runtimeListOptions } from "@multica/core/runtimes/queries";
+} from "@workpal/core/inbox/queries";
+import { EMPTY_INBOX_FILTERS } from "@workpal/core/inbox/filter-store";
+import { agentListOptions } from "@workpal/core/workspace/queries";
+import { runtimeListOptions } from "@workpal/core/runtimes/queries";
 
 // Mutable workspace stub so a test can simulate "workspace not resolved yet".
 const ws = vi.hoisted(() => ({ current: { id: "ws1", slug: "acme" } as { id: string; slug: string } | null }));
 
-vi.mock("@multica/core/paths", async (importOriginal) => ({
-  ...(await importOriginal<typeof import("@multica/core/paths")>()),
+vi.mock("@workpal/core/paths", async (importOriginal) => ({
+  ...(await importOriginal<typeof import("@workpal/core/paths")>()),
   useCurrentWorkspace: () => ws.current,
 }));
 

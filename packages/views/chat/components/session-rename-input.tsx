@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { isImeComposing } from "@multica/core/utils";
-import { contextMenuOrigin } from "@multica/ui/lib/context-menu-origin";
+import { isImeComposing } from "@workpal/core/utils";
+import { contextMenuOrigin } from "@workpal/ui/lib/context-menu-origin";
 import { useT } from "../../i18n";
 
 /**

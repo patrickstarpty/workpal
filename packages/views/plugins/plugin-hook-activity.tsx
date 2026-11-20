@@ -1,10 +1,10 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import { AlertTriangle } from "@multica/ui/icons";
-import { pluginInvocationsOptions } from "@multica/core/plugins";
-import type { PluginHook, PluginInvocation } from "@multica/core/types";
-import { cn } from "@multica/ui/lib/utils";
+import { AlertTriangle } from "@workpal/ui/icons";
+import { pluginInvocationsOptions } from "@workpal/core/plugins";
+import type { PluginHook, PluginInvocation } from "@workpal/core/types";
+import { cn } from "@workpal/ui/lib/utils";
 import { useLocale, useT } from "../i18n";
 
 /**

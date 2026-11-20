@@ -1,4 +1,4 @@
-import { useSessionPromptStore } from "@multica/core/session-prompt";
+import { useSessionPromptStore } from "@workpal/core/session-prompt";
 import type { DevFeature } from "./actions";
 
 export const sessionPromptDevFeature: DevFeature = {

@@ -1,11 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { ChevronRight, Loader2, RefreshCw } from "@multica/ui/icons";
-import { Button } from "@multica/ui/components/ui/button";
-import { cn } from "@multica/ui/lib/utils";
-import type { SourceContextPreview } from "@multica/core/types";
-import { ApiError } from "@multica/core/api";
+import { ChevronRight, Loader2, RefreshCw } from "@workpal/ui/icons";
+import { Button } from "@workpal/ui/components/ui/button";
+import { cn } from "@workpal/ui/lib/utils";
+import type { SourceContextPreview } from "@workpal/core/types";
+import { ApiError } from "@workpal/core/api";
 import { SourceContextContent } from "../issues/components/source-context-content";
 import { useT } from "../i18n";
 

@@ -16,7 +16,7 @@ import (
 func piSkillInvocation(t *testing.T) (*SkillInvocation, string) {
 	t.Helper()
 	dir := t.TempDir()
-	skillDir := filepath.Join(dir, "first-multica")
+	skillDir := filepath.Join(dir, "first-workpal")
 	if err := os.MkdirAll(skillDir, 0o755); err != nil {
 		t.Fatal(err)
 	}
@@ -25,7 +25,7 @@ func piSkillInvocation(t *testing.T) (*SkillInvocation, string) {
 		PlatformPrompt: "Platform context",
 		UserMessage:    "run the review",
 		Skills: []ExplicitSkill{
-			{Name: "first-multica", Directory: skillDir, Body: "FIRST BODY"},
+			{Name: "first-workpal", Directory: skillDir, Body: "FIRST BODY"},
 			{Name: "second", Directory: filepath.Join(dir, "second"), Body: "SECOND BODY"},
 		},
 	}
@@ -36,7 +36,7 @@ func TestPiSkillPromptNativeAndFallback(t *testing.T) {
 	s, skillFile := piSkillInvocation(t)
 
 	native := s.piSkillPrompt([]string{skillFile}, nil)
-	if !strings.HasPrefix(native, "/skill:first-multica Platform context\nsecond line") {
+	if !strings.HasPrefix(native, "/skill:first-workpal Platform context\nsecond line") {
 		t.Fatalf("native prompt must lead with the pi skill token: %q", native)
 	}
 	if strings.Contains(native, "FIRST BODY") || !strings.Contains(native, "SECOND BODY") {
@@ -129,7 +129,7 @@ func TestPiExecuteSendsNativeSkillPromptOnStdin(t *testing.T) {
 		SkillInvocation: s,
 		PiSkillPaths:    []string{skillFile},
 	}, Config{BuiltinRuntime: true})
-	if !strings.HasPrefix(stdin, "/skill:first-multica ") {
+	if !strings.HasPrefix(stdin, "/skill:first-workpal ") {
 		t.Fatalf("pi must receive the native skill token first: %q", stdin)
 	}
 	if !strings.Contains(stdin, "Platform context") || !strings.Contains(stdin, "SECOND BODY") {
@@ -241,7 +241,7 @@ printf '%%s\n' '{"type":"agent_end"}'
 	if err := json.Unmarshal(raw, &frame); err != nil {
 		t.Fatalf("initial-prompt frame: %v (%s)", err, raw)
 	}
-	if frame.ID != "initial-prompt" || frame.Type != "prompt" || !strings.HasPrefix(frame.Message, "/skill:first-multica ") {
+	if frame.ID != "initial-prompt" || frame.Type != "prompt" || !strings.HasPrefix(frame.Message, "/skill:first-workpal ") {
 		t.Fatalf("RPC first frame must carry the native skill token: %s", raw)
 	}
 }

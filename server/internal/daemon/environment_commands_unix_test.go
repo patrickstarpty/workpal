@@ -13,8 +13,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/multica-ai/multica/server/internal/daemon/execenv"
-	"github.com/multica-ai/multica/server/internal/daemon/localenv"
+	"workpal.local/workpal/server/internal/daemon/execenv"
+	"workpal.local/workpal/server/internal/daemon/localenv"
 )
 
 type fakeEnvironmentController struct {
@@ -72,11 +72,11 @@ func TestEnvironmentCommandsStartReadStopAndRestart(t *testing.T) {
 	s := newEnvironmentService(Config{WorkspacesRoot: t.TempDir()}, ctl, nil, slog.New(slog.NewTextHandler(io.Discard, nil)))
 	envRoot := filepath.Join(s.workspacesRoot, "acme-ws", "acme-1-task")
 	repo := filepath.Join(envRoot, "workdir", "app")
-	if err := os.MkdirAll(filepath.Join(repo, ".multica"), 0o755); err != nil {
+	if err := os.MkdirAll(filepath.Join(repo, ".workpal"), 0o755); err != nil {
 		t.Fatal(err)
 	}
 	config := "[environments.worker]\nlabel = \"Queue worker\"\nstart = \"echo worker up; exec sleep 60\"\nurl = \"\"\n"
-	if err := os.WriteFile(filepath.Join(repo, ".multica", "environments.toml"), []byte(config), 0o644); err != nil {
+	if err := os.WriteFile(filepath.Join(repo, ".workpal", "environments.toml"), []byte(config), 0o644); err != nil {
 		t.Fatal(err)
 	}
 	if err := execenv.WriteGCMeta(envRoot, execenv.GCMeta{Kind: execenv.GCKindIssue, IssueID: "issue-a", TaskID: "task-a", WorkspaceID: "ws"}, s.logger); err != nil {

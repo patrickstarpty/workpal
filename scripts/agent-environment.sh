@@ -1,17 +1,17 @@
 #!/usr/bin/env bash
 # Runs this checkout's `make up` environment as a daemon-supervised environment
-# declared in .multica/environments.toml.
+# declared in .workpal/environments.toml.
 #
 #   agent-environment.sh start web|desktop
 #   agent-environment.sh stop  web|desktop
 #
 # The two models differ in two ways, and this script is the adapter:
 #
-#  1. The daemon hands out $MULTICA_PORT and reports http://localhost:$MULTICA_PORT.
+#  1. The daemon hands out $WORKPAL_PORT and reports http://localhost:$WORKPAL_PORT.
 #     dev-env.sh allocates its own ports, and the web app's origin, API URL and
 #     CORS settings are built from them. So the web app keeps its dev-env port,
-#     and $MULTICA_PORT answers with a redirect to it. Desktop has no URL;
-#     $MULTICA_PORT only answers once `up` has finished, which is what the
+#     and $WORKPAL_PORT answers with a redirect to it. Desktop has no URL;
+#     $WORKPAL_PORT only answers once `up` has finished, which is what the
 #     environment's ready check waits for.
 #  2. The daemon treats an environment as alive while the start command's
 #     process group is. dev-env.sh detaches every component into its own group
@@ -34,7 +34,7 @@ set -euo pipefail
 
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 DEV_ENV="$REPO_ROOT/scripts/dev-env.sh"
-STATE_DIR="$REPO_ROOT/.multica/agent-environments"
+STATE_DIR="$REPO_ROOT/.workpal/agent-environments"
 LOCK_DIR="$STATE_DIR/lock.d"
 BORROWED="$STATE_DIR/borrowed"
 
@@ -121,9 +121,9 @@ release_component() {
   if [ -n "$(claim_holder "$other")" ]; then
     echo "$other still uses the API and database; kept them."
   elif [ "$(component_state "$other")" != stopped ]; then
-    echo "$other is running outside 'multica env'; kept the API and database."
+    echo "$other is running outside 'workpal env'; kept the API and database."
   elif [ -f "$BORROWED" ]; then
-    echo "The environment existed before 'multica env start'; kept it."
+    echo "The environment existed before 'workpal env start'; kept it."
   else
     bash "$DEV_ENV" destroy --yes
   fi
@@ -155,7 +155,7 @@ finish_start() {
 cmd_start() {
   local component="$1" status
   other_component "$component" >/dev/null
-  : "${MULTICA_PORT:?MULTICA_PORT is not set; start this through 'multica env start <name>'.}"
+  : "${WORKPAL_PORT:?WORKPAL_PORT is not set; start this through 'workpal env start <name>'.}"
 
   # Electron listens on nothing by itself. The DevTools port is what lets the
   # daemon find the app among this environment's processes and offer its
@@ -182,7 +182,7 @@ cmd_start() {
 
     const status = JSON.parse(process.argv[1]);
     const component = process.argv[2];
-    const port = Number(process.env.MULTICA_PORT);
+    const port = Number(process.env.WORKPAL_PORT);
     // The port whose listener is the component: Next for web, the renderer
     // dev server for desktop, which goes away when the app is quit.
     const watched = component === "web" ? status.frontend_port : status.desktop_renderer_port;

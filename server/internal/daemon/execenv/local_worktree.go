@@ -66,20 +66,20 @@ const (
 	// repository: pointing GIT_INDEX_FILE at our own file is what keeps the
 	// capture off the user's index entirely — no writes to it, and no wait on
 	// .git/index.lock, which used to be able to end the task (#7434).
-	snapshotIndexFileName = ".multica-snapshot-index"
+	snapshotIndexFileName = ".workpal-snapshot-index"
 
 	// localStateRefPrefix namespaces the per-branch record of the user's
 	// directory. Outside refs/heads so it never appears in the user's
 	// `git branch`, and a ref rather than a loose object so `git gc` in their
 	// repo cannot reclaim a snapshot between two turns.
-	localStateRefPrefix = "refs/multica/local-state/"
+	localStateRefPrefix = "refs/workpal/local-state/"
 
 	// leftoverRefPrefix namespaces what a turn left uncommitted after making
-	// commits of its own: refs/multica/leftovers/<branch>/<task>. Hidden for
+	// commits of its own: refs/workpal/leftovers/<branch>/<task>. Hidden for
 	// the same reasons as the local-state record, and kept in its own namespace
 	// because a branch's record is a single ref while a branch collects one of
 	// these per turn.
-	leftoverRefPrefix = "refs/multica/leftovers/"
+	leftoverRefPrefix = "refs/workpal/leftovers/"
 
 	// maxLeftoverPathsInMessage caps the file list written into a leftover
 	// commit's message. The commit itself always carries every file; the list
@@ -971,7 +971,7 @@ func (w *LocalWorktree) saveLeftovers(tip string, logger *slog.Logger) (string, 
 // `git log`. The list is capped; the commit itself always carries every file.
 func leftoverCommitMessage(branch string, files []string) string {
 	var b strings.Builder
-	b.WriteString("multica: changes the agent left uncommitted\n\n")
+	b.WriteString("workpal: changes the agent left uncommitted\n\n")
 	fmt.Fprintf(&b, "The agent made commits of its own on %s in this run, so these changes\n", branch)
 	b.WriteString("were kept off the branch instead of being committed onto it. This\n")
 	b.WriteString("commit's parent is what the run delivered: `git show --stat <this commit>`\n")
@@ -1052,8 +1052,8 @@ func commitIdentityArgs(dir string) []string {
 		return nil
 	}
 	return []string{
-		"-c", "user.name=Multica Agent",
-		"-c", "user.email=agent@multica.local",
+		"-c", "user.name=Workpal Agent",
+		"-c", "user.email=agent@workpal.local",
 	}
 }
 
@@ -1194,7 +1194,7 @@ func captureUserSnapshot(gitRoot, envRoot, headSHA string, logger *slog.Logger) 
 	// commit object needs a committer, and without them the user's uncommitted
 	// work would be dropped on a technicality.
 	args := append(commitIdentityArgs(gitRoot), "commit-tree", tree, "-p", headSHA, "-m",
-		"multica: local directory snapshot\n\nThe tree of this commit is the user's working directory as a task saw it.")
+		"workpal: local directory snapshot\n\nThe tree of this commit is the user's working directory as a task saw it.")
 	snapshot, err := runGitTrimmed(gitRoot, args...)
 	if err != nil {
 		return "", fmt.Errorf("git commit-tree: %w", err)
@@ -1246,8 +1246,8 @@ func seedSnapshotIndex(gitRoot, path string) bool {
 // Matched at any depth, because an in_place resource may point at a
 // subdirectory of this repo.
 func snapshotExcludes() []string {
-	specs := make([]string, 0, len(multicaSidecarDirNames))
-	for _, name := range multicaSidecarDirNames {
+	specs := make([]string, 0, len(workpalSidecarDirNames))
+	for _, name := range workpalSidecarDirNames {
 		specs = append(specs, ":(exclude,glob)**/"+name+"/**")
 	}
 	return specs
@@ -1277,17 +1277,17 @@ func (o branchOwner) fingerprint() string {
 }
 
 const (
-	ownerTrailerWorkspace    = "Multica-Workspace"
-	ownerTrailerAgent        = "Multica-Agent"
-	ownerTrailerConversation = "Multica-Conversation"
+	ownerTrailerWorkspace    = "Workpal-Workspace"
+	ownerTrailerAgent        = "Workpal-Agent"
+	ownerTrailerConversation = "Workpal-Conversation"
 )
 
-// branchRecord is what refs/multica/local-state/<branch> holds: a commit whose
+// branchRecord is what refs/workpal/local-state/<branch> holds: a commit whose
 // TREE is the user's directory as the branch last carried it, whose SECOND
 // PARENT is the branch tip at that moment, and whose message names the owner.
 //
 // The checkpoint is what makes the record about this BRANCH rather than merely
-// about its name. Owner alone proved only that Multica once wrote a branch
+// about its name. Owner alone proved only that Workpal once wrote a branch
 // called this, and that stayed true after the user deleted it and created their
 // own under the same name — the next task then continued into their work
 // (MUL-6881 review). Requiring the checkpoint to still be an ancestor of the
@@ -1327,8 +1327,8 @@ func writeBranchRecord(gitRoot, branch, userState, checkpoint string, owner bran
 
 func branchRecordMessage(owner branchOwner) string {
 	var b strings.Builder
-	b.WriteString("multica: task branch record\n\n")
-	b.WriteString("Written by Multica for a local_directory task running in worktree mode. Its\n")
+	b.WriteString("workpal: task branch record\n\n")
+	b.WriteString("Written by Workpal for a local_directory task running in worktree mode. Its\n")
 	b.WriteString("tree is the user's working directory as this branch last carried it, and its\n")
 	b.WriteString("second parent is the branch tip at that moment — together they let the next\n")
 	b.WriteString("turn replay only what changed since, and prove the branch is still the one\n")
@@ -1649,7 +1649,7 @@ func replayUserState(worktreePath string, plan taskBranchPlan, snapshot string, 
 	// current one. Its parent is what git uses as the merge base, and that is
 	// the entire point: it is not reachable any other way.
 	args := append(commitIdentityArgs(worktreePath), "commit-tree", snapshot+"^{tree}", "-p", carried,
-		"-m", "multica: local directory edits to replay")
+		"-m", "workpal: local directory edits to replay")
 	increment, err := runGitTrimmed(worktreePath, args...)
 	if err != nil || increment == "" {
 		return replayResult{}, fmt.Errorf("execenv: could not describe your local edits for replay into the task worktree: %w", err)
@@ -1769,7 +1769,7 @@ func normalizeReplayBaseline(worktreePath, priorState, snapshot string, logger *
 	// only a comparison baseline: its committed HEAD changes never enter the
 	// task branch, which cherry-picks only baseline-to-current-snapshot edits.
 	args := append(commitIdentityArgs(worktreePath), "commit-tree", tree, "-p", currentHead,
-		"-m", "multica: previous local edits on the current HEAD")
+		"-m", "workpal: previous local edits on the current HEAD")
 	baseline, err := runGitTrimmed(worktreePath, args...)
 	if err != nil {
 		return "", fmt.Errorf("execenv: could not describe the normalized local snapshot: %w", err)
@@ -1822,7 +1822,7 @@ func replaceConflictedSnapshotPaths(worktreePath, tree, currentHead string, path
 	if len(paths) == 0 {
 		return "", errors.New("execenv: no conflicted snapshot paths to replace")
 	}
-	dir, err := os.MkdirTemp(filepath.Dir(worktreePath), ".multica-normalize-")
+	dir, err := os.MkdirTemp(filepath.Dir(worktreePath), ".workpal-normalize-")
 	if err != nil {
 		return "", fmt.Errorf("execenv: create private normalization index: %w", err)
 	}
@@ -2144,7 +2144,7 @@ func (w *LocalWorktree) repairWouldRevertBase(tip string, committedOnly bool) bo
 			return true // Present but not a plain file in the ancestor.
 		}
 		if scratch == "" {
-			if scratch, err = os.MkdirTemp("", "multica-repair-check-"); err != nil {
+			if scratch, err = os.MkdirTemp("", "workpal-repair-check-"); err != nil {
 				scratch = ""
 				return true
 			}
@@ -2192,7 +2192,7 @@ func treeEntryMode(gitRoot, treeish, path string) string {
 // change. Errors — including a missing index to seed from, without which the
 // recorded modes cannot be predicted — fail the caller closed.
 func stagedWorktreeTree(dir string) (string, error) {
-	tmp, err := os.MkdirTemp("", "multica-repair-index-")
+	tmp, err := os.MkdirTemp("", "workpal-repair-index-")
 	if err != nil {
 		return "", err
 	}
@@ -2321,7 +2321,7 @@ func dropBranch(gitRoot, branch string, logger *slog.Logger) {
 }
 
 // pruneOrphanedStateRefs drops the snapshot of any branch that is no longer
-// there. Multica deletes both together, but the branch is the user's to delete,
+// there. Workpal deletes both together, but the branch is the user's to delete,
 // rename or merge away at any time, and a ref left behind would pin their whole
 // working tree as of some past turn against `git gc` forever.
 //
@@ -2379,7 +2379,7 @@ func pruneOrphanedLeftoverRefs(gitRoot string, logger *slog.Logger) {
 		if !ok {
 			continue
 		}
-		// refs/multica/leftovers/<branch>/<key>: the branch is everything before
+		// refs/workpal/leftovers/<branch>/<key>: the branch is everything before
 		// the last segment.
 		cut := strings.LastIndex(rest, "/")
 		if cut <= 0 {
@@ -2424,7 +2424,7 @@ func checkUntrackedReplayable(gitRoot string, logger *slog.Logger) error {
 		skipped int
 	)
 	for _, rel := range strings.Split(out, "\x00") {
-		if rel == "" || isMulticaSidecarPath(rel) {
+		if rel == "" || isWorkpalSidecarPath(rel) {
 			continue
 		}
 		info, statErr := os.Lstat(filepath.Join(gitRoot, rel))
@@ -2459,26 +2459,26 @@ func checkUntrackedReplayable(gitRoot string, logger *slog.Logger) error {
 		gitRoot, skipped, maxUntrackedFiles, maxUntrackedBytes>>20)
 }
 
-// multicaSidecarDirNames are the directories Prepare writes into a workdir. A
+// workpalSidecarDirNames are the directories Prepare writes into a workdir. A
 // task running in_place on the same directory leaves these present as
 // untracked files for the length of its run, so a concurrent worktree snapshot
 // sees them. CLAUDE.md / AGENTS.md are deliberately absent: those are
 // ordinarily the user's own tracked files, and the runtime only injects a
 // marker block into them, which CleanupRuntimeConfig removes.
-var multicaSidecarDirNames = []string{
+var workpalSidecarDirNames = []string{
 	".agent_context",
-	".multica",
+	".workpal",
 }
 
-// isMulticaSidecarPath reports whether a repo-relative path is one of the
+// isWorkpalSidecarPath reports whether a repo-relative path is one of the
 // daemon's own sidecars rather than the user's content. Matched as a whole
 // path segment at ANY depth, not just the repo root: an in_place resource may
 // point at a subdirectory of this repo, in which case its sidecars sit at
 // <subdir>/.agent_context — replaying those would put another issue's brief
 // inside this task's worktree and commit it to the delivered branch.
-func isMulticaSidecarPath(rel string) bool {
+func isWorkpalSidecarPath(rel string) bool {
 	for _, seg := range strings.Split(filepath.ToSlash(rel), "/") {
-		for _, name := range multicaSidecarDirNames {
+		for _, name := range workpalSidecarDirNames {
 			if seg == name {
 				return true
 			}

@@ -1,12 +1,12 @@
 import { act, fireEvent, render, screen, waitFor } from "@testing-library/react";
 import { createRef, type ReactNode } from "react";
 import { describe, it, expect, vi, beforeEach } from "vitest";
-import { workspaceKeys } from "@multica/core/workspace/queries";
-import { issueKeys, PAGINATED_CATEGORIES } from "@multica/core/issues/queries";
-import { projectKeys } from "@multica/core/projects/queries";
-import { statusCategoryOfKey } from "@multica/core/issues";
-import { I18nProvider } from "@multica/core/i18n/react";
-import type { IssueStatusCategory, ListIssuesCache } from "@multica/core/types";
+import { workspaceKeys } from "@workpal/core/workspace/queries";
+import { issueKeys, PAGINATED_CATEGORIES } from "@workpal/core/issues/queries";
+import { projectKeys } from "@workpal/core/projects/queries";
+import { statusCategoryOfKey } from "@workpal/core/issues";
+import { I18nProvider } from "@workpal/core/i18n/react";
+import type { IssueStatusCategory, ListIssuesCache } from "@workpal/core/types";
 import type { QueryClient } from "@tanstack/react-query";
 import enCommon from "../../locales/en/common.json";
 import enAuth from "../../locales/en/auth.json";
@@ -53,11 +53,11 @@ function ZhI18nWrapper({ children }: { children: ReactNode }) {
 }
 
 // Mock the workspace id singleton — items() reads it imperatively.
-vi.mock("@multica/core/platform", () => ({
+vi.mock("@workpal/core/platform", () => ({
   getCurrentWsId: () => "ws-1",
 }));
 
-vi.mock("@multica/core/issue-statuses/hooks", () => ({
+vi.mock("@workpal/core/issue-statuses/hooks", () => ({
   useIssueStatuses: () => ({
     iconOf: () => null,
     colorOf: (status: string) =>
@@ -68,7 +68,7 @@ vi.mock("@multica/core/issue-statuses/hooks", () => ({
 // Mock the API so we control search responses + observe calls.
 const searchIssuesMock = vi.fn();
 const searchProjectsMock = vi.fn();
-vi.mock("@multica/core/api", () => ({
+vi.mock("@workpal/core/api", () => ({
   api: {
     get searchIssues() {
       return searchIssuesMock;
@@ -82,7 +82,7 @@ vi.mock("@multica/core/api", () => ({
 // Mock the auth store: items() reads `useAuthStore.getState()` imperatively
 // to identify the current user when filtering personal agents.
 const authState = { user: { id: "u1" } as { id: string } | null };
-vi.mock("@multica/core/auth", () => ({
+vi.mock("@workpal/core/auth", () => ({
   useAuthStore: { getState: () => authState },
 }));
 

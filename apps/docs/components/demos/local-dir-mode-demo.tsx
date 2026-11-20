@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { Check, Clock, FileText, Folder, GitBranch, Loader2, Pencil } from "@multica/ui/icons";
-import { Button } from "@multica/ui/components/ui/button";
-import { cn } from "@multica/ui/lib/utils";
+import { Check, Clock, FileText, Folder, GitBranch, Loader2, Pencil } from "@workpal/ui/icons";
+import { Button } from "@workpal/ui/components/ui/button";
+import { cn } from "@workpal/ui/lib/utils";
 import {
   CoachMark,
   DemoAvatar,

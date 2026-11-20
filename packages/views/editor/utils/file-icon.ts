@@ -13,7 +13,7 @@ import {
   FileVideo,
   ImageIcon,
   type IconComponent,
-} from "@multica/ui/icons";
+} from "@workpal/ui/icons";
 import { getPreviewKind } from "./preview";
 
 function extensionOf(filename: string): string {

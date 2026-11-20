@@ -1,26 +1,26 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { act, fireEvent, screen, waitFor, within } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { agentTaskSnapshotOptions } from "@multica/core/agents";
-import { api } from "@multica/core/api";
-import { createAuthStore, registerAuthStore } from "@multica/core/auth";
-import { WorkspaceSlugProvider } from "@multica/core/paths";
-import { runtimeListOptions } from "@multica/core/runtimes/queries";
-import type { Agent, AgentRuntime, AgentTask } from "@multica/core/types";
-import { useSidebarTreeStore } from "@multica/core/issues/stores/sidebar-tree-store";
+import { agentTaskSnapshotOptions } from "@workpal/core/agents";
+import { api } from "@workpal/core/api";
+import { createAuthStore, registerAuthStore } from "@workpal/core/auth";
+import { WorkspaceSlugProvider } from "@workpal/core/paths";
+import { runtimeListOptions } from "@workpal/core/runtimes/queries";
+import type { Agent, AgentRuntime, AgentTask } from "@workpal/core/types";
+import { useSidebarTreeStore } from "@workpal/core/issues/stores/sidebar-tree-store";
 import {
   agentListOptions,
   memberListOptions,
   skillListOptions,
   squadListOptions,
   workspaceListOptions,
-} from "@multica/core/workspace/queries";
+} from "@workpal/core/workspace/queries";
 import { NavigationProvider, type NavigationAdapter } from "../../navigation";
 import { renderWithI18n } from "../../test/i18n";
 import { TeamPanel } from "./team-panel";
 
-vi.mock("@multica/core/api", async (importOriginal) => ({
-  ...(await importOriginal<typeof import("@multica/core/api")>()),
+vi.mock("@workpal/core/api", async (importOriginal) => ({
+  ...(await importOriginal<typeof import("@workpal/core/api")>()),
   api: { getIssue: vi.fn(() => new Promise(() => {})), getBaseUrl: () => "http://localhost" },
 }));
 

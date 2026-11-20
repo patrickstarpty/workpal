@@ -9,7 +9,7 @@ import { createTestApi } from "../helpers";
 test("measure issue history entry against the local API", async ({ browser }) => {
   test.skip(process.env.PERF_SCENARIO !== "issue-history", "Requires an isolated local API and production build");
   test.setTimeout(600_000);
-  expect(process.env.MULTICA_DEV_PROFILE).toMatch(/^dev-/);
+  expect(process.env.WORKPAL_DEV_PROFILE).toMatch(/^dev-/);
   expect(process.env.DATABASE_URL).toBeTruthy();
   const api = await createTestApi();
   const db = new pg.Client(process.env.DATABASE_URL);
@@ -67,8 +67,8 @@ test("measure issue history entry against the local API", async ({ browser }) =>
           const context = await browser.newContext({ viewport: { width: 1440, height: 900 } });
           try {
             await context.addInitScript((token) => {
-              localStorage.setItem("multica_token", token!);
-              localStorage.setItem("multica:chat:isOpen", "false");
+              localStorage.setItem("workpal_token", token!);
+              localStorage.setItem("workpal:chat:isOpen", "false");
               const state = { longTasks: [] as number[] };
               (window as unknown as { __historyPerf: typeof state }).__historyPerf = state;
               new PerformanceObserver((entries) => {

@@ -19,13 +19,13 @@ import {
   useThemeFolderStatus,
   useThemeSafeMode,
   type ThemeFolderEntry,
-} from "@multica/core/appearance";
-import { getShortcutPlatform, getShortcutRuntime } from "@multica/core/shortcuts";
+} from "@workpal/core/appearance";
+import { getShortcutPlatform, getShortcutRuntime } from "@workpal/core/shortcuts";
 import { themeFolderAPI } from "../platform/theme-folder";
 import { removeBackdrop, syncBackdrop, type BackdropState } from "./backdrop-layer";
 
-const STYLE_ELEMENT_ID = "multica-appearance";
-const THEME_CSS_ELEMENT_ID = "multica-theme-css";
+const STYLE_ELEMENT_ID = "workpal-appearance";
+const THEME_CSS_ELEMENT_ID = "workpal-theme-css";
 /** Safe mode: Shift pressed within this long after load and held for SAFE_MODE_HOLD_MS. */
 const SAFE_MODE_WINDOW_MS = 3000;
 const SAFE_MODE_HOLD_MS = 700;

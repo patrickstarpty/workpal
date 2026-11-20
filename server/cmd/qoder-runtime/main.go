@@ -1,4 +1,4 @@
-// qoder-runtime runs a server-hosted Multica to Qoder Cloud Agents bridge.
+// qoder-runtime runs a server-hosted Workpal to Qoder Cloud Agents bridge.
 package main
 
 import (
@@ -13,7 +13,7 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.com/multica-ai/multica/server/internal/qoderruntime"
+	"workpal.local/workpal/server/internal/qoderruntime"
 )
 
 func main() {
@@ -49,7 +49,7 @@ func main() {
 
 func loadConfig(path string, getenv func(string) string) (qoderruntime.Config, error) {
 	cfg := qoderruntime.Config{
-		MulticaURL: getenv("MULTICA_SERVER_URL"), MulticaToken: getenv("MULTICA_TOKEN"), WorkspaceID: getenv("MULTICA_WORKSPACE_ID"),
+		WorkpalURL: getenv("WORKPAL_SERVER_URL"), WorkpalToken: getenv("WORKPAL_TOKEN"), WorkspaceID: getenv("WORKPAL_WORKSPACE_ID"),
 		QoderURL: getenv("QODER_CLOUD_BASE_URL"), QoderToken: getenv("QODER_CLOUD_TOKEN"), EnvironmentID: getenv("QODER_CLOUD_ENVIRONMENT_ID"),
 		StateDir: getenv("QODER_BRIDGE_STATE_DIR"), Name: getenv("QODER_BRIDGE_NAME"),
 	}

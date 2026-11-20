@@ -5,8 +5,8 @@ import (
 	"log/slog"
 	"time"
 
-	"github.com/multica-ai/multica/server/internal/handler"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
+	"workpal.local/workpal/server/internal/handler"
+	db "workpal.local/workpal/server/pkg/db/generated"
 )
 
 const environmentLogSweepInterval = time.Minute

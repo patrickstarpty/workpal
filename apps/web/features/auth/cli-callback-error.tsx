@@ -5,8 +5,8 @@ import {
   CardHeader,
   CardTitle,
   CardDescription,
-} from "@multica/ui/components/ui/card";
-import { useT } from "@multica/views/i18n";
+} from "@workpal/ui/components/ui/card";
+import { useT } from "@workpal/views/i18n";
 
 export function CliCallbackError() {
   const { t } = useT("auth");

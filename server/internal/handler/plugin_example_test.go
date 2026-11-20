@@ -14,10 +14,10 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/multica-ai/multica/server/internal/service"
-	"github.com/multica-ai/multica/server/internal/util/secretbox"
-	"github.com/multica-ai/multica/server/pkg/plugincontract"
-	"github.com/multica-ai/multica/server/pkg/remotemcp"
+	"workpal.local/workpal/server/internal/service"
+	"workpal.local/workpal/server/internal/util/secretbox"
+	"workpal.local/workpal/server/pkg/plugincontract"
+	"workpal.local/workpal/server/pkg/remotemcp"
 )
 
 // examples/plugins/deploy-sentinel, driven end to end.
@@ -64,7 +64,7 @@ func hostOf(t *testing.T, rawURL string) string {
 	return parsed.Hostname()
 }
 
-// stageExamplePlugin copies the example into a temp MULTICA_PLUGIN_DIR and
+// stageExamplePlugin copies the example into a temp WORKPAL_PLUGIN_DIR and
 // repoints its two endpoints (and the net: scopes that authorise them) at the
 // running test servers.
 func stageExamplePlugin(t *testing.T, servers exampleServers) (string, []string) {
@@ -168,7 +168,7 @@ func installExamplePlugin(t *testing.T, servers exampleServers) string {
 	// without a deployment key the engine refuses to call out at all.
 	plugins.DeploymentKey = bytes.Repeat([]byte{3}, 32)
 	plugins.Callbacks = service.NewCallbackTokens()
-	plugins.CallbackBaseURL = "https://plugin-api.multica.test/v1"
+	plugins.CallbackBaseURL = "https://plugin-api.workpal.test/v1"
 	t.Cleanup(func() { *plugins = previous })
 
 	// Publishing is what validates the whole artifact: the manifest, the surface
@@ -230,7 +230,7 @@ func quietServer(t *testing.T, handler http.HandlerFunc) *httptest.Server {
 //
 // remotemcp.Discover builds its own HTTP client, so the only way for it to
 // trust this certificate is the same one a plugin author uses locally —
-// MULTICA_PLUGIN_DEV_CA, pointing at a CA bundle.
+// WORKPAL_PLUGIN_DEV_CA, pointing at a CA bundle.
 func metricsServer(t *testing.T) *httptest.Server {
 	t.Helper()
 	server := httptest.NewTLSServer(http.HandlerFunc(serveMetricsMCP))
@@ -314,7 +314,7 @@ func TestExamplePluginHooksReachAnAgentAsTools(t *testing.T) {
 	}
 }
 
-// The whole round trip: an agent calls the tool, Multica signs the request, the
+// The whole round trip: an agent calls the tool, Workpal signs the request, the
 // plugin's own server sees that signature and answers, and the answer comes
 // back. Nothing is mocked except the author's business logic, which is theirs.
 func TestExamplePluginAgentHookRoundTripIsSigned(t *testing.T) {
@@ -328,8 +328,8 @@ func TestExamplePluginAgentHookRoundTripIsSigned(t *testing.T) {
 			Config  map[string]any `json:"config"`
 		}
 		_ = json.NewDecoder(r.Body).Decode(&payload)
-		seenSignature = r.Header.Get("X-Multica-Signature")
-		seenTimestamp = r.Header.Get("X-Multica-Timestamp")
+		seenSignature = r.Header.Get("X-Workpal-Signature")
+		seenTimestamp = r.Header.Get("X-Workpal-Timestamp")
 		seenHook, seenTrigger, seenConfig = payload.HookKey, payload.Trigger, payload.Config
 
 		w.Header().Set("Content-Type", "application/json")

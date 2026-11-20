@@ -5,7 +5,7 @@ import (
 	"slices"
 	"testing"
 
-	"github.com/multica-ai/multica/server/internal/testutil"
+	"workpal.local/workpal/server/internal/testutil"
 )
 
 func idleTableRowsRequest(projectID string, extra map[string]any) *http.Request {
@@ -77,7 +77,7 @@ func TestIssueTableIdleMatchesInboxActivity(t *testing.T) {
 
 func TestIssueTableIdleRespectsAgentVisibilityAndWorkspace(t *testing.T) {
 	projectID := dbfx.Project(t, "idle visibility")
-	memberID := dbfx.User(t, "idle member", "idle-member@multica.test")
+	memberID := dbfx.User(t, "idle member", "idle-member@workpal.test")
 	dbfx.Member(t, testWorkspaceID, memberID, "member")
 	privateAgent := dbfx.Agent(t, "private idle agent", testRuntimeID)
 	visibleAgent := dbfx.Agent(t, "visible idle agent", testRuntimeID, testutil.Cols{"owner_id": memberID})

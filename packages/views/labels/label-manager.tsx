@@ -2,21 +2,21 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { MoreHorizontal, Pencil, Plus, Search, Tag, Trash2 } from "@multica/ui/icons";
+import { MoreHorizontal, Pencil, Plus, Search, Tag, Trash2 } from "@workpal/ui/icons";
 import { toast } from "sonner";
-import { useWorkspaceId } from "@multica/core/hooks";
+import { useWorkspaceId } from "@workpal/core/hooks";
 import {
   labelListOptions,
   useCreateLabel,
   useDeleteLabel,
   useUpdateLabel,
-} from "@multica/core/labels";
-import type { Label, LabelResourceType } from "@multica/core/types";
-import { Button } from "@multica/ui/components/ui/button";
-import { IconButton } from "@multica/ui/components/common/icon-button";
-import { Input } from "@multica/ui/components/ui/input";
-import { Textarea } from "@multica/ui/components/ui/textarea";
-import { Label as FieldLabel } from "@multica/ui/components/ui/label";
+} from "@workpal/core/labels";
+import type { Label, LabelResourceType } from "@workpal/core/types";
+import { Button } from "@workpal/ui/components/ui/button";
+import { IconButton } from "@workpal/ui/components/common/icon-button";
+import { Input } from "@workpal/ui/components/ui/input";
+import { Textarea } from "@workpal/ui/components/ui/textarea";
+import { Label as FieldLabel } from "@workpal/ui/components/ui/label";
 import {
   Dialog,
   DialogContent,
@@ -24,7 +24,7 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "@multica/ui/components/ui/dialog";
+} from "@workpal/ui/components/ui/dialog";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -34,14 +34,14 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@multica/ui/components/ui/alert-dialog";
+} from "@workpal/ui/components/ui/alert-dialog";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@multica/ui/components/ui/dropdown-menu";
-import { cn } from "@multica/ui/lib/utils";
+} from "@workpal/ui/components/ui/dropdown-menu";
+import { cn } from "@workpal/ui/lib/utils";
 import { ColorPicker, COLOR_PICKER_PRESETS } from "../common/color-picker";
 import {
   CatalogHeader,
@@ -50,7 +50,7 @@ import {
   CatalogTable,
 } from "../settings/components/catalog-table";
 import { useLocale, useT } from "../i18n";
-import { paletteColor } from "@multica/core/appearance";
+import { paletteColor } from "@workpal/core/appearance";
 
 /**
  * Label catalogs a user can manage. Narrower than `LabelResourceType`:

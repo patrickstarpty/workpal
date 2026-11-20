@@ -16,7 +16,7 @@ func TestPreparePiSkillPaths(t *testing.T) {
 		{"bound", "pi", "", "review", true},
 		{"unassigned", "pi", "untrusted", "", false},
 		{"unrelated", "pi", "untrusted", "review", true},
-		{"collision", "pi", "review", "review-multica", true},
+		{"collision", "pi", "review", "review-workpal", true},
 		{"omp", "omp", "untrusted", "", true},
 	} {
 		t.Run(tc.name, func(t *testing.T) {

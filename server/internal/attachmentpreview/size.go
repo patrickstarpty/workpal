@@ -16,7 +16,7 @@ const (
 func ConfiguredMaxSizeBytes(raw string) int64 {
 	size, err := parseMaxSizeBytes(raw)
 	if err != nil {
-		slog.Warn("invalid MULTICA_MAX_PREVIEW_SIZE, using 2 MiB default", "error", err)
+		slog.Warn("invalid WORKPAL_MAX_PREVIEW_SIZE, using 2 MiB default", "error", err)
 		return DefaultMaxSizeBytes
 	}
 	return size

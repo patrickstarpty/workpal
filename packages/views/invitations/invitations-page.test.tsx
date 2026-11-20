@@ -52,7 +52,7 @@ vi.mock("../platform", () => ({
   DragStrip: () => null,
 }));
 
-vi.mock("@multica/core/auth", () => ({
+vi.mock("@workpal/core/auth", () => ({
   useAuthStore: Object.assign(
     (selector?: (s: unknown) => unknown) => {
       const state = { user: auth.user, refreshMe, setUser };
@@ -64,7 +64,7 @@ vi.mock("@multica/core/auth", () => ({
   ),
 }));
 
-vi.mock("@multica/core/api", () => ({
+vi.mock("@workpal/core/api", () => ({
   api: {
     getBaseUrl: () => "http://127.0.0.1:8080",
     acceptInvitation,
@@ -76,7 +76,7 @@ vi.mock("@multica/core/api", () => ({
   },
 }));
 
-import { I18nProvider } from "@multica/core/i18n/react";
+import { I18nProvider } from "@workpal/core/i18n/react";
 import enCommon from "../locales/en/common.json";
 import enInvite from "../locales/en/invite.json";
 import { InvitationsPage, type InvitationsPageProps } from "./invitations-page";

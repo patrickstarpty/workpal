@@ -17,9 +17,9 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/multica-ai/multica/server/internal/integrations/channel/engine"
-	"github.com/multica-ai/multica/server/internal/integrations/wecom"
-	"github.com/multica-ai/multica/server/internal/util/secretbox"
+	"workpal.local/workpal/server/internal/integrations/channel/engine"
+	"workpal.local/workpal/server/internal/integrations/wecom"
+	"workpal.local/workpal/server/internal/util/secretbox"
 )
 
 // TestWecomScanBeginErrorMatrix pins status + code for every refusal the scan

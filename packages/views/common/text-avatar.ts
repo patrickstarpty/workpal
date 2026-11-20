@@ -9,7 +9,7 @@ import {
   PALETTE_PRESETS,
   PALETTE_SLOTS,
   labelTextColor,
-} from "@multica/core/appearance";
+} from "@workpal/core/appearance";
 
 /** Square side of the generated PNG. */
 export const TEXT_AVATAR_SIZE = 256;

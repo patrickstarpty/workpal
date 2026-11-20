@@ -2,11 +2,11 @@
 
 import { useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { Bot, CircleDashed } from "@multica/ui/icons";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { isAgentRuntimeBound } from "@multica/core/agents";
-import { agentListOptions, squadListOptions } from "@multica/core/workspace/queries";
-import type { AutopilotAssigneeType } from "@multica/core/types";
+import { Bot, CircleDashed } from "@workpal/ui/icons";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { isAgentRuntimeBound } from "@workpal/core/agents";
+import { agentListOptions, squadListOptions } from "@workpal/core/workspace/queries";
+import type { AutopilotAssigneeType } from "@workpal/core/types";
 import { ActorAvatar } from "../../../common/actor-avatar";
 import {
   PropertyPicker,

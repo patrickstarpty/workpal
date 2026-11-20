@@ -3,14 +3,14 @@
 import { type ReactNode, useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { toast } from "sonner";
-import { AlarmClock, Archive, BellOff, BookCheck, CheckCheck, History, ListChecks, MoreHorizontal } from "@multica/ui/icons";
-import { IconButton } from "@multica/ui/components/common/icon-button";
-import { cn } from "@multica/ui/lib/utils";
-import { useIsCompact } from "@multica/ui/hooks/use-mobile";
-import { TooltipHint } from "@multica/ui/components/common/tooltip-hint";
-import { ShimmerText } from "@multica/ui/components/common/shimmer-text";
-import { Button, buttonVariants } from "@multica/ui/components/ui/button";
-import { HoverCard, HoverCardContent, HoverCardTrigger } from "@multica/ui/components/ui/hover-card";
+import { AlarmClock, Archive, BellOff, BookCheck, CheckCheck, History, ListChecks, MoreHorizontal } from "@workpal/ui/icons";
+import { IconButton } from "@workpal/ui/components/common/icon-button";
+import { cn } from "@workpal/ui/lib/utils";
+import { useIsCompact } from "@workpal/ui/hooks/use-mobile";
+import { TooltipHint } from "@workpal/ui/components/common/tooltip-hint";
+import { ShimmerText } from "@workpal/ui/components/common/shimmer-text";
+import { Button, buttonVariants } from "@workpal/ui/components/ui/button";
+import { HoverCard, HoverCardContent, HoverCardTrigger } from "@workpal/ui/components/ui/hover-card";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -18,25 +18,25 @@ import {
   DropdownMenuSeparator,
   DropdownMenuShortcut,
   DropdownMenuTrigger,
-} from "@multica/ui/components/ui/dropdown-menu";
-import { inboxTypeGroup, useInboxFilterStore } from "@multica/core/inbox/filter-store";
+} from "@workpal/ui/components/ui/dropdown-menu";
+import { inboxTypeGroup, useInboxFilterStore } from "@workpal/core/inbox/filter-store";
 import {
   useArchiveAllInbox,
   useArchiveAllReadInbox,
   useArchiveCompletedInbox,
   useMarkAllInboxRead,
   useMarkInboxRead,
-} from "@multica/core/inbox/mutations";
-import { snoozedInboxOptions, useInboxUnreadCount } from "@multica/core/inbox/queries";
-import { inboxRowTime, inboxSnoozeReturnedAt } from "@multica/core/inbox/snooze";
-import { useIssueStatuses } from "@multica/core/issue-statuses/hooks";
-import { issueDetailOptions } from "@multica/core/issues/queries";
-import { useSidebarTreeStore } from "@multica/core/issues/stores/sidebar-tree-store";
-import { useInboxSelectionStore } from "@multica/core/inbox/selection-store";
-import { inboxRowKey, nextInboxRow } from "@multica/core/inbox/open-row";
-import { useWorkspacePaths } from "@multica/core/paths";
-import type { InboxItem } from "@multica/core/types";
-import { useActorName } from "@multica/core/workspace/hooks";
+} from "@workpal/core/inbox/mutations";
+import { snoozedInboxOptions, useInboxUnreadCount } from "@workpal/core/inbox/queries";
+import { inboxRowTime, inboxSnoozeReturnedAt } from "@workpal/core/inbox/snooze";
+import { useIssueStatuses } from "@workpal/core/issue-statuses/hooks";
+import { issueDetailOptions } from "@workpal/core/issues/queries";
+import { useSidebarTreeStore } from "@workpal/core/issues/stores/sidebar-tree-store";
+import { useInboxSelectionStore } from "@workpal/core/inbox/selection-store";
+import { inboxRowKey, nextInboxRow } from "@workpal/core/inbox/open-row";
+import { useWorkspacePaths } from "@workpal/core/paths";
+import type { InboxItem } from "@workpal/core/types";
+import { useActorName } from "@workpal/core/workspace/hooks";
 import { AppLink, useNavigation } from "../../navigation";
 import { useViewStateWriter } from "../../platform";
 import { issueHighlightMementoKey } from "../../issues/components/issue-detail";

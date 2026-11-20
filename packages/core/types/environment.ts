@@ -1,4 +1,4 @@
-/** Where an environment came from: declared in `.multica/environments.toml`
+/** Where an environment came from: declared in `.workpal/environments.toml`
  *  and started by the daemon, or a server the daemon found listening inside
  *  a task directory. */
 export type IssueEnvironmentSource = "config" | "detected";

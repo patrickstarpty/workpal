@@ -34,20 +34,20 @@ import {
   Link as LinkIcon,
   Maximize2,
   Trash2,
-} from "@multica/ui/icons";
+} from "@workpal/ui/icons";
 import { useCallback, useState, type CSSProperties, type ReactNode } from "react";
 import { toast } from "sonner";
-import { cn } from "@multica/ui/lib/utils";
-import { copyText } from "@multica/ui/lib/clipboard";
-import { api } from "@multica/core/api";
-import { useConfigStore } from "@multica/core/config";
-import type { Attachment as AttachmentRecord } from "@multica/core/types";
+import { cn } from "@workpal/ui/lib/utils";
+import { copyText } from "@workpal/ui/lib/clipboard";
+import { api } from "@workpal/core/api";
+import { useConfigStore } from "@workpal/core/config";
+import type { Attachment as AttachmentRecord } from "@workpal/core/types";
 import {
   attachmentDownloadPath,
   attachmentIdFromDownloadURL,
   attachmentIdFromLocalUploadURL,
   attachmentIdFromStorageURL,
-} from "@multica/core/types/attachment-url";
+} from "@workpal/core/types/attachment-url";
 import { useT } from "../i18n";
 import { DeferredTooltip } from "../common/deferred-tooltip";
 import { useContextMenuScope } from "../common/context-menu-scope";

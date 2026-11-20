@@ -16,13 +16,13 @@ import (
 
 	"github.com/jackc/pgx/v5/pgtype"
 	"github.com/jackc/pgx/v5/pgxpool"
-	"github.com/multica-ai/multica/server/internal/events"
-	dbfx "github.com/multica-ai/multica/server/internal/testutil"
-	"github.com/multica-ai/multica/server/internal/util"
-	"github.com/multica-ai/multica/server/internal/util/secretbox"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
-	"github.com/multica-ai/multica/server/pkg/dbid"
-	"github.com/multica-ai/multica/server/pkg/protocol"
+	"workpal.local/workpal/server/internal/events"
+	dbfx "workpal.local/workpal/server/internal/testutil"
+	"workpal.local/workpal/server/internal/util"
+	"workpal.local/workpal/server/internal/util/secretbox"
+	db "workpal.local/workpal/server/pkg/db/generated"
+	"workpal.local/workpal/server/pkg/dbid"
+	"workpal.local/workpal/server/pkg/protocol"
 )
 
 var testPool *pgxpool.Pool
@@ -171,7 +171,7 @@ func TestLoginPersistsEncryptedCredentialsAndIdentity(t *testing.T) {
 		t.Fatalf("credentials cannot be read: %v", err)
 	}
 	binding, err := x.q.GetChannelUserBindingByUserID(context.Background(), db.GetChannelUserBindingByUserIDParams{InstallationID: inst.ID, ChannelUserID: creds.UserID})
-	if err != nil || binding.MulticaUserID != x.user {
+	if err != nil || binding.WorkpalUserID != x.user {
 		t.Fatalf("scanner not bound to initiator: %v", err)
 	}
 	row, err = x.q.GetWeixinLoginSession(context.Background(), db.GetWeixinLoginSessionParams{ID: id, WorkspaceID: x.workspace, InitiatorUserID: x.user})

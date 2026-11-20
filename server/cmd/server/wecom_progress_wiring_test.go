@@ -8,12 +8,12 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/multica-ai/multica/server/internal/analytics"
-	"github.com/multica-ai/multica/server/internal/events"
-	"github.com/multica-ai/multica/server/internal/integrations/wecom"
-	"github.com/multica-ai/multica/server/internal/realtime"
-	"github.com/multica-ai/multica/server/internal/util/secretbox"
-	"github.com/multica-ai/multica/server/pkg/protocol"
+	"workpal.local/workpal/server/internal/analytics"
+	"workpal.local/workpal/server/internal/events"
+	"workpal.local/workpal/server/internal/integrations/wecom"
+	"workpal.local/workpal/server/internal/realtime"
+	"workpal.local/workpal/server/internal/util/secretbox"
+	"workpal.local/workpal/server/pkg/protocol"
 )
 
 // The WeCom bubble's in-flight steps are driven entirely by two bus
@@ -57,7 +57,7 @@ func TestWecomProgressSubscribesOnTheRealBootPath(t *testing.T) {
 	withoutWecom := events.New()
 	NewRouter(nil, realtime.NewHub(), withoutWecom, analytics.NoopClient{}, nil)
 
-	t.Setenv("MULTICA_WECOM_SECRET_KEY", base64.StdEncoding.EncodeToString(key))
+	t.Setenv("WORKPAL_WECOM_SECRET_KEY", base64.StdEncoding.EncodeToString(key))
 	withWecom := events.New()
 	NewRouter(nil, realtime.NewHub(), withWecom, analytics.NoopClient{}, nil)
 
@@ -104,7 +104,7 @@ func TestWecomRelayHandsProgressToTheTypingIndicatorOnTheRealBootPath(t *testing
 	if _, err := rand.Read(key); err != nil {
 		t.Fatalf("generate a wecom secretbox key: %v", err)
 	}
-	t.Setenv("MULTICA_WECOM_SECRET_KEY", base64.StdEncoding.EncodeToString(key))
+	t.Setenv("WORKPAL_WECOM_SECRET_KEY", base64.StdEncoding.EncodeToString(key))
 
 	const warning = "nothing here shows them"
 	frame := []byte(`{"kind":"progress","installation_id":"11111111-1111-1111-1111-111111111111",` +

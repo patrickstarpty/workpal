@@ -3,9 +3,9 @@
 import { describe, expect, it, beforeEach, vi } from "vitest";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { I18nProvider } from "@multica/core/i18n/react";
-import { ApiError } from "@multica/core/api";
-import type { AgentRuntime, RuntimeProfile } from "@multica/core/types";
+import { I18nProvider } from "@workpal/core/i18n/react";
+import { ApiError } from "@workpal/core/api";
+import type { AgentRuntime, RuntimeProfile } from "@workpal/core/types";
 import enCommon from "../../locales/en/common.json";
 import enRuntimes from "../../locales/en/runtimes.json";
 
@@ -36,7 +36,7 @@ vi.mock("sonner", () => ({
   toast: { error: vi.fn(), success: vi.fn() },
 }));
 
-vi.mock("@multica/core/runtimes", () => ({
+vi.mock("@workpal/core/runtimes", () => ({
   deriveRuntimeHealth: () => "online",
   runtimeProfileListOptions: vi.fn((wsId: string) => ({
     queryKey: ["runtime-profiles", wsId, "list"],
@@ -340,7 +340,7 @@ describe("RuntimeProfilesDialog", () => {
       screen.getByRole("link", { name: "View setup guide" }),
     ).toHaveAttribute(
       "href",
-      "https://multica.ai/docs/daemon-runtimes#custom-runtime-profiles",
+      "https://workpal.invalid/docs/daemon-runtimes#custom-runtime-profiles",
     );
     expect(screen.getByText("Step 1 of 2")).toBeInTheDocument();
     expect(

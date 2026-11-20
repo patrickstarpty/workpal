@@ -4,8 +4,8 @@ import (
 	"context"
 
 	"github.com/jackc/pgx/v5/pgtype"
-	"github.com/multica-ai/multica/server/internal/issuestatus"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
+	"workpal.local/workpal/server/internal/issuestatus"
+	db "workpal.local/workpal/server/pkg/db/generated"
 )
 
 // RunEnqueueSource identifies which kind of issue write would start an agent

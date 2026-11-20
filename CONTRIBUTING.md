@@ -1,6 +1,6 @@
 # Contributing Guide
 
-This guide documents issue and pull request requirements and the local development workflow for contributors working on the Multica codebase.
+This guide documents issue and pull request requirements and the local development workflow for contributors working on the Workpal codebase.
 
 It covers:
 
@@ -16,15 +16,15 @@ It covers:
 
 ## Contribution Terms
 
-By submitting a contribution to Multica — a pull request, a patch, or any
-other work — you agree to condition 2 of the [Multica License](LICENSE):
+By submitting a contribution to Workpal — a pull request, a patch, or any
+other work — you agree to condition 2 of the [Workpal License](LICENSE):
 
-- your contribution is submitted under the Multica License as a whole (the
+- your contribution is submitted under the Workpal License as a whole (the
   additional conditions in Part I together with the incorporated Apache
   License 2.0 text in Part II), not under the Apache License 2.0 alone;
 - your contributed code may be used for commercial purposes, including the
   producer's cloud business operations;
-- the producer can adjust the Multica License to be more strict or relaxed
+- the producer can adjust the Workpal License to be more strict or relaxed
   as deemed necessary.
 
 See the [LICENSE](LICENSE) file for the full terms.
@@ -82,7 +82,7 @@ From the repository root, upload files to an existing PR with Node.js 22+ and
 [GitHub CLI 2.103.2+](https://github.com/cli/cli/releases/tag/v2.103.2):
 
 ```bash
-scripts/pr-shots --repo multica-ai/multica 123 ./before.png ./after.png ./demo.mp4
+scripts/pr-shots --repo workpal-ai/workpal 123 ./before.png ./after.png ./demo.mp4
 ```
 
 By default, the script appends attachments at the end of the PR description
@@ -111,7 +111,7 @@ To migrate an existing screenshot while keeping its caption and position, use
 Markdown image, such as `![Original caption](https://example.com/old.png)`:
 
 ```bash
-scripts/pr-shots --repo multica-ai/multica \
+scripts/pr-shots --repo workpal-ai/workpal \
   --replace https://example.com/old.png 123 ./after.png
 ```
 
@@ -202,9 +202,9 @@ body, and edit `pr.md` to add the evidence. Retain its other sections and closin
 issue references when saving it.
 
 ```bash
-gh pr view 123 --repo multica-ai/multica --json body --jq .body > ./pr.md
+gh pr view 123 --repo workpal-ai/workpal --json body --jq .body > ./pr.md
 # Edit pr.md to add the uploaded image Markdown under Screenshots.
-gh pr edit 123 --repo multica-ai/multica --body-file ./pr.md
+gh pr edit 123 --repo workpal-ai/workpal --body-file ./pr.md
 ```
 
 Check the upstream PR's rendered images and verify the URLs open while signed
@@ -220,7 +220,7 @@ URLs and attach only missing files in a new comment on the same evidence issue.
 
 Local development uses one shared PostgreSQL container and one database per checkout.
 
-- the main checkout usually uses `.env` and `POSTGRES_DB=multica`
+- the main checkout usually uses `.env` and `POSTGRES_DB=workpal`
 - each Git worktree uses its own `.env.worktree`
 - every checkout connects to the same PostgreSQL host: `localhost:5432`
 - isolation happens at the database level, not by starting a separate Docker Compose project
@@ -293,9 +293,9 @@ cp .env.example .env
 By default, `.env` points to:
 
 ```bash
-POSTGRES_DB=multica
+POSTGRES_DB=workpal
 POSTGRES_PORT=5432
-DATABASE_URL=postgres://multica:multica@localhost:5432/multica?sslmode=disable
+DATABASE_URL=postgres://workpal:workpal@localhost:5432/workpal?sslmode=disable
 PORT=8080
 FRONTEND_PORT=3000
 ```
@@ -311,11 +311,11 @@ make worktree-env
 That generates values like:
 
 ```bash
-POSTGRES_DB=multica_my_feature_702
+POSTGRES_DB=workpal_my_feature_702
 POSTGRES_PORT=5432
 PORT=18782
 FRONTEND_PORT=13702
-DATABASE_URL=postgres://multica:multica@localhost:5432/multica_my_feature_702?sslmode=disable
+DATABASE_URL=postgres://workpal:workpal@localhost:5432/workpal_my_feature_702?sslmode=disable
 ```
 
 Notes:
@@ -357,7 +357,7 @@ Three properties are worth knowing because the old flow lacked them:
 - **API, Web and Desktop renderer ports, database names and profiles are allocated, not recomputed.** The
   allocator starts from this directory's path hash, so a checkout keeps the
   numbers it has always had, and moves only when the registry or a live
-  listener says the slot is taken. The registry lives in `~/.multica/dev/`;
+  listener says the slot is taken. The registry lives in `~/.workpal/dev/`;
   deleting it and re-running `make up` is a supported recovery.
 - **Nothing reports success for something it has not reached.** The database is
   created and verified through `DATABASE_URL` — the same string the backend
@@ -453,8 +453,8 @@ make check-main
 Use a worktree when you want isolated data and separate app ports.
 
 ```bash
-git worktree add ../multica-feature -b feat/my-change main
-cd ../multica-feature
+git worktree add ../workpal-feature -b feat/my-change main
+cd ../workpal-feature
 make dev
 ```
 
@@ -468,13 +468,13 @@ make check-worktree   # verify
 
 ### Git Identity in Managed Task Checkouts
 
-`multica repo checkout` uses the user's system/global Git identity, including
+`workpal repo checkout` uses the user's system/global Git identity, including
 conditional includes evaluated in the checkout. Agent names determine branch
 names, not commit authors. The optional `Co-authored-by` trailer is independent
 of author and committer identity.
 
 Linked worktrees mask the shared cache's `user`, `author`, and `committer`
-name/email settings with private defaults in `multica-identity.config`, included
+name/email settings with private defaults in `workpal-identity.config`, included
 first by their `config.worktree`. Repeating checkout refreshes these defaults;
 explicit worktree settings and Git command/environment overrides take precedence.
 Conditional identities are snapshots: switching branches or changing global
@@ -502,7 +502,7 @@ from another checkout so database cleanup happens before Git removes the
 worktree directory:
 
 ```bash
-make remove-worktree WORKTREE=../multica-feature
+make remove-worktree WORKTREE=../workpal-feature
 ```
 
 The command refuses to remove the primary checkout, the current checkout, a
@@ -521,11 +521,11 @@ This is a first-class workflow.
 Example:
 
 - main checkout
-  - database: `multica`
+  - database: `workpal`
   - backend: `8080`
   - frontend: `3000`
 - worktree checkout
-  - database: `multica_my_feature_702`
+  - database: `workpal_my_feature_702`
   - backend: generated worktree port such as `18782`
   - frontend: generated worktree port such as `13702`
 
@@ -662,7 +662,7 @@ Run the local daemon:
 make daemon
 ```
 
-The daemon authenticates using the CLI's stored token (`multica login`).
+The daemon authenticates using the CLI's stored token (`workpal login`).
 It registers runtimes for all watched workspaces from the CLI config.
 
 ## Full-Stack Isolated Testing
@@ -676,7 +676,7 @@ make up C=api,web,daemon
 
 It creates the environment if needed, sets the fixed local verification code
 before the first launch, logs in as `dev@localhost`, mints a personal access
-token, creates a workspace, writes the CLI profile, builds `server/bin/multica`
+token, creates a workspace, writes the CLI profile, builds `server/bin/workpal`
 and starts the daemon from that binary. It then prints the URL, the login, the
 commit, and the stop command.
 
@@ -686,33 +686,33 @@ Two constraints are enforced rather than documented:
   its own executable path at startup and re-execs it as the
   execution-environment helper for every task; `go run` deletes that binary when
   the launcher exits, so the daemon would register, heartbeat, and then fail
-  every task with `fork/exec …/go-build…/exe/multica: no such file or directory`.
+  every task with `fork/exec …/go-build…/exe/workpal: no such file or directory`.
 - **Under a daemon-managed task, only the environment's own daemon starts.** A
-  checkout below a `.multica/daemon_task_context.json` marker is an agent's
+  checkout below a `.workpal/daemon_task_context.json` marker is an agent's
   workdir, and the CLI refuses `daemon start`, `stop` and `status` there so a
   task never operates your own daemon or profile. It makes one exception: an
   explicit `--profile` that the dev-env registry assigns to an environment (its
   CLI profile, or the `desktop-localhost-<backend port>` profile its Desktop
   signs in), pointed at that environment's API, from a process the task's
-  `MULTICA_*` identity was stripped from. `make up` launches the daemon and
+  `WORKPAL_*` identity was stripped from. `make up` launches the daemon and
   Desktop exactly that way, so an agent can run `make up C=api,web,daemon` and
   test a real agent run. `make destroy` stops the daemon and removes its profile.
 
 ### An environment that outlives the agent's run
 
 When a reviewer should open the app after the run ends, an agent inside a
-Multica task starts an environment this repository declares in
-`.multica/environments.toml`:
+Workpal task starts an environment this repository declares in
+`.workpal/environments.toml`:
 
 ```bash
-multica env start web          # make up C=api,web
-multica env start desktop      # make up C=desktop ARGS=--cdp
-multica env stop web
+workpal env start web          # make up C=api,web
+workpal env start desktop      # make up C=desktop ARGS=--cdp
+workpal env stop web
 ```
 
 The daemon lists each one in the issue sidebar and stops it after 24 hours.
 
-- `web` has the URL `http://localhost:$MULTICA_PORT`, which redirects to the web
+- `web` has the URL `http://localhost:$WORKPAL_PORT`, which redirects to the web
   app on the port `make up` allocated.
 - `desktop` has no URL. The sidebar shows it as an app, and Desktop on the same
   machine brings its window forward.
@@ -721,7 +721,7 @@ Both are this checkout's `make up` environment, so they share one API and
 database, and `make status` and `make env-exec` work as usual. Stopping one
 leaves the other running; stopping the last one, or the last one's app going
 away, runs `make destroy`. A component started with a plain `make up` counts
-as in use too, and an environment that existed before `multica env start` is
+as in use too, and an environment that existed before `workpal env start` is
 left in place, with its own owner and TTL. See
 [Local Environments](CLI_AND_DAEMON.md#local-environments) for the file format.
 
@@ -730,7 +730,7 @@ left in place, with its own owner and TTL. See
 Every `make up`, whatever components it starts, signs `dev@localhost` in,
 marks the user onboarded, and seeds the `dev` workspace with two issues. The
 token sits in the environment's CLI profile, so a Playwright script can open
-`/dev/issues` directly by setting it as `multica_token` in `localStorage`
+`/dev/issues` directly by setting it as `workpal_token` in `localStorage`
 before the first page load.
 
 For chat and Agent Builder content without a model or a daemon, add one-shot
@@ -807,7 +807,7 @@ make destroy ARGS="--yes"
 
 The script finds the window by its owner PID, the process listening on the
 CDP port that `make status` has verified for this environment. It never matches
-by app name or window title: a dev build is also called "Multica Canary", and
+by app name or window title: a dev build is also called "Workpal Canary", and
 its title is the current page, so either could pick up your own Desktop window.
 Transparent rounded corners are flattened onto white, and the colour profile is
 kept. The app running the command needs Screen Recording permission.
@@ -825,17 +825,17 @@ the page to show. It sees `DESKTOP_CAPTURE_STATE` set to `current`, `before` or
 
 ### Isolation Guarantee
 
-Nothing in this flow touches the system-installed `multica` or the default
-`~/.multica/config.json`:
+Nothing in this flow touches the system-installed `workpal` or the default
+`~/.workpal/config.json`:
 
 | Resource | System / Production | Local Dev (per environment) |
 |---|---|---|
-| Config | `~/.multica/config.json` | `~/.multica/profiles/dev-<slug>-<offset>/config.json` |
-| Daemon PID | `~/.multica/daemon.pid` | `~/.multica/profiles/dev-<slug>-<offset>/daemon.pid` |
-| Workspaces dir | `~/multica_workspaces/` | `~/multica_workspaces_dev-<slug>-<offset>/` |
-| Database | remote / production | local: `multica_<slug>_<offset>` |
-| Registry | — | `~/.multica/dev/envs/<name>/` |
-| Desktop profile | `desktop-api.multica.ai` | `desktop-localhost-<port>` |
+| Config | `~/.workpal/config.json` | `~/.workpal/profiles/dev-<slug>-<offset>/config.json` |
+| Daemon PID | `~/.workpal/daemon.pid` | `~/.workpal/profiles/dev-<slug>-<offset>/daemon.pid` |
+| Workspaces dir | `~/workpal_workspaces/` | `~/workpal_workspaces_dev-<slug>-<offset>/` |
+| Database | remote / production | local: `workpal_<slug>_<offset>` |
+| Registry | — | `~/.workpal/dev/envs/<name>/` |
+| Desktop profile | `workpal.invalid` | `desktop-localhost-<port>` |
 
 Multiple environments run simultaneously without conflict; `make list` shows
 all of them.
@@ -889,7 +889,7 @@ Look for:
 ### List All Local Databases in Shared PostgreSQL
 
 ```bash
-docker compose exec -T postgres psql -U multica -d postgres -At -c "select datname from pg_database order by datname;"
+docker compose exec -T postgres psql -U workpal -d postgres -At -c "select datname from pg_database order by datname;"
 ```
 
 ### Worktree Is Accidentally Using the Main Database
@@ -952,7 +952,7 @@ make db-drop ENV_FILE=.env.worktree
 The command prints the selected database and environment file, then requires a
 `y/N` confirmation. It only operates on the local Docker PostgreSQL service,
 protects PostgreSQL system databases, and refuses to drop the default main
-database `multica` unless `ALLOW_MAIN_DB_DROP=1` is explicitly supplied.
+database `workpal` unless `ALLOW_MAIN_DB_DROP=1` is explicitly supplied.
 Declining the confirmation is a successful no-op; when called by
 `make remove-worktree`, it also leaves the worktree in place.
 
@@ -979,15 +979,15 @@ make dev
 ### Feature Worktree
 
 ```bash
-git worktree add ../multica-feature -b feat/my-change main
-cd ../multica-feature
+git worktree add ../workpal-feature -b feat/my-change main
+cd ../workpal-feature
 make dev
 ```
 
 ### Return to a Previously Configured Worktree
 
 ```bash
-cd ../multica-feature
+cd ../workpal-feature
 make start-worktree
 ```
 

@@ -5,7 +5,7 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/multica-ai/multica/server/internal/integrations/channel"
+	"workpal.local/workpal/server/internal/integrations/channel"
 )
 
 func TestDingTalkCallbackWireDecodingBoundaries(t *testing.T) {

@@ -1,11 +1,11 @@
 "use client";
 
 import { useCallback } from "react";
-import { useWorkspaceId } from "@multica/core/hooks";
+import { useWorkspaceId } from "@workpal/core/hooks";
 import {
   useModalStore,
   type LimitRecoveryReason,
-} from "@multica/core/modals";
+} from "@workpal/core/modals";
 
 /** Opens the shared limit-recovery dialog without closing the current surface. */
 export function useLimitRecoveryPrompt(

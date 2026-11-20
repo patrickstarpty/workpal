@@ -2,18 +2,18 @@
 
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { ChevronDown, ChevronRight, Settings, Workflow } from "@multica/ui/icons";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { useIssueStatuses } from "@multica/core/issue-statuses/hooks";
+import { ChevronDown, ChevronRight, Settings, Workflow } from "@workpal/ui/icons";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { useIssueStatuses } from "@workpal/core/issue-statuses/hooks";
 import {
   resolveProjectWorkflow,
   statusAcceptsHandoff,
   useIssueWorkflows,
-} from "@multica/core/issue-workflows";
-import { useWorkspacePaths } from "@multica/core/paths";
-import { projectListOptions } from "@multica/core/projects/queries";
-import type { IssueWorkflow, Project } from "@multica/core/types";
-import { Button } from "@multica/ui/components/ui/button";
+} from "@workpal/core/issue-workflows";
+import { useWorkspacePaths } from "@workpal/core/paths";
+import { projectListOptions } from "@workpal/core/projects/queries";
+import type { IssueWorkflow, Project } from "@workpal/core/types";
+import { Button } from "@workpal/ui/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -22,9 +22,9 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@multica/ui/components/ui/dropdown-menu";
-import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from "@multica/ui/components/ui/sheet";
-import { cn } from "@multica/ui/lib/utils";
+} from "@workpal/ui/components/ui/dropdown-menu";
+import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from "@workpal/ui/components/ui/sheet";
+import { cn } from "@workpal/ui/lib/utils";
 import { ActorAvatar } from "../common/actor-avatar";
 import { StatusIcon } from "../issues/components/status-icon";
 import { useStatusLabel } from "../issues/utils/status-label";

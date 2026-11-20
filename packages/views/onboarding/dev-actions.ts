@@ -1,5 +1,5 @@
-import { needsSourceBackfill, SOURCE_BACKFILL_MAX_DISMISSALS } from "@multica/core/onboarding";
-import { useDevPromptStore, useSessionPromptStore } from "@multica/core/session-prompt";
+import { needsSourceBackfill, SOURCE_BACKFILL_MAX_DISMISSALS } from "@workpal/core/onboarding";
+import { useDevPromptStore, useSessionPromptStore } from "@workpal/core/session-prompt";
 import type { DevFeature } from "../dev-toolbar/actions";
 import { resetSourceBackfillDismissCount, useSourceBackfillDismissCount } from "./source-backfill-dismiss";
 

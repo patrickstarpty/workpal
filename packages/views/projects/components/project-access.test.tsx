@@ -2,19 +2,19 @@ import { afterEach, beforeEach, expect, it, vi } from "vitest";
 import { screen, waitFor, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { setApiInstance } from "@multica/core/api";
-import type { ApiClient } from "@multica/core/api/client";
-import type { Project, MemberWithUser } from "@multica/core/types";
-import { EMPTY_PROJECT } from "@multica/core/api/schemas";
+import { setApiInstance } from "@workpal/core/api";
+import type { ApiClient } from "@workpal/core/api/client";
+import type { Project, MemberWithUser } from "@workpal/core/types";
+import { EMPTY_PROJECT } from "@workpal/core/api/schemas";
 import { renderWithI18n } from "../../test/i18n";
 import { ProjectAccessControl, ProjectAccessDraftPicker } from "./project-access";
 import { ProjectLeadPicker } from "./project-lead-picker";
 
 const state = vi.hoisted(() => ({ viewer: "owner" }));
-vi.mock("@multica/core/hooks", () => ({ useWorkspaceId: () => "ws" }));
-vi.mock("@multica/core/auth", () => ({ useAuthStore: Object.assign((selector: (s: { user: { id: string } }) => unknown) => selector({ user: { id: state.viewer } }), { getState: () => ({ user: { id: state.viewer } }) }) }));
+vi.mock("@workpal/core/hooks", () => ({ useWorkspaceId: () => "ws" }));
+vi.mock("@workpal/core/auth", () => ({ useAuthStore: Object.assign((selector: (s: { user: { id: string } }) => unknown) => selector({ user: { id: state.viewer } }), { getState: () => ({ user: { id: state.viewer } }) }) }));
 vi.mock("../../common/actor-avatar", () => ({ ActorAvatar: () => <span aria-hidden="true" /> }));
-vi.mock("@multica/core/workspace/hooks", () => ({ useActorName: () => ({ getActorName: () => "Lead" }) }));
+vi.mock("@workpal/core/workspace/hooks", () => ({ useActorName: () => ({ getActorName: () => "Lead" }) }));
 
 const members: MemberWithUser[] = [
   { id: "1", workspace_id: "ws", user_id: "owner", name: "Owner", email: "owner@test", role: "owner", avatar_url: null, created_at: "" },

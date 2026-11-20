@@ -1,6 +1,6 @@
 import type { ComponentType } from "react";
-import type { SidebarFolder } from "@multica/core/projects/folder-tree";
-import type { Project } from "@multica/core/types";
+import type { SidebarFolder } from "@workpal/core/projects/folder-tree";
+import type { Project } from "@workpal/core/types";
 
 /**
  * Project folders are a commercial feature (packages/ee). The open-source

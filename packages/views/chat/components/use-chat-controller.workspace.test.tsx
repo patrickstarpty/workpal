@@ -2,9 +2,9 @@ import { useLayoutEffect, type ReactNode } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { act, cleanup, renderHook } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { createChatStore, registerChatStore } from "@multica/core/chat";
-import { setCurrentWorkspace } from "@multica/core/platform";
-import type { ChatSession, Project, StorageAdapter } from "@multica/core/types";
+import { createChatStore, registerChatStore } from "@workpal/core/chat";
+import { setCurrentWorkspace } from "@workpal/core/platform";
+import type { ChatSession, Project, StorageAdapter } from "@workpal/core/types";
 import { useChatController } from "./use-chat-controller";
 
 const route = vi.hoisted(() => ({ workspaceId: "ws-source", isActive: true }));
@@ -13,14 +13,14 @@ const data = vi.hoisted(() => ({
   projects: {} as Record<string, Project[]>,
 }));
 
-vi.mock("@multica/core/hooks", () => ({
+vi.mock("@workpal/core/hooks", () => ({
   useWorkspaceId: () => route.workspaceId,
 }));
-vi.mock("@multica/core/auth", () => ({
+vi.mock("@workpal/core/auth", () => ({
   useAuthStore: (selector: (state: { user: { id: string } }) => unknown) =>
     selector({ user: { id: "user-1" } }),
 }));
-vi.mock("@multica/core/agents", () => ({
+vi.mock("@workpal/core/agents", () => ({
   isAgentRuntimeBound: () => false,
   useAgentPresenceDetail: () => ({ availability: "online" }),
   useWorkspaceAgentAvailability: () => "available",
@@ -89,9 +89,9 @@ describe("useChatController workspace rehydration", () => {
     data.projects = { "ws-source": [], "ws-target": [targetProject] };
     await act(async () => setCurrentWorkspace("source", "ws-source"));
     const values = new Map<string, string>([
-      ["multica:chat:activeSessionId:source", sourceSession.id],
-      ["multica:chat:activeSessionId:target", targetSession.id],
-      ["multica:chat:selectedProjectId:target", targetProject.id],
+      ["workpal:chat:activeSessionId:source", sourceSession.id],
+      ["workpal:chat:activeSessionId:target", targetSession.id],
+      ["workpal:chat:selectedProjectId:target", targetProject.id],
     ]);
     storage = {
       getItem: (key) => values.get(key) ?? null,
@@ -111,10 +111,10 @@ describe("useChatController workspace rehydration", () => {
 
   function expectTargetSelection() {
     expect(store.getState().activeSessionId).toBe(targetSession.id);
-    expect(storage.getItem("multica:chat:activeSessionId:target")).toBe(targetSession.id);
+    expect(storage.getItem("workpal:chat:activeSessionId:target")).toBe(targetSession.id);
     expect(store.getState().selectedProjectId).toBe(targetProject.id);
-    expect(storage.getItem("multica:chat:selectedProjectId:target")).toBe(targetProject.id);
-    expect(storage.getItem("multica:chat:activeSessionId:source")).toBe(sourceSession.id);
+    expect(storage.getItem("workpal:chat:selectedProjectId:target")).toBe(targetProject.id);
+    expect(storage.getItem("workpal:chat:activeSessionId:source")).toBe(sourceSession.id);
   }
 
   it.each([false, true])("preserves the target selection while the source controller remains mounted (isActive=%s)", async (isActive) => {
@@ -159,8 +159,8 @@ describe("useChatController workspace rehydration", () => {
 
     expect(store.getState().activeSessionId).toBeNull();
     expect(store.getState().selectedProjectId).toBeNull();
-    expect(storage.getItem("multica:chat:activeSessionId:target")).toBeNull();
-    expect(storage.getItem("multica:chat:selectedProjectId:target")).toBeNull();
-    expect(storage.getItem("multica:chat:activeSessionId:source")).toBe(sourceSession.id);
+    expect(storage.getItem("workpal:chat:activeSessionId:target")).toBeNull();
+    expect(storage.getItem("workpal:chat:selectedProjectId:target")).toBeNull();
+    expect(storage.getItem("workpal:chat:activeSessionId:source")).toBe(sourceSession.id);
   });
 });

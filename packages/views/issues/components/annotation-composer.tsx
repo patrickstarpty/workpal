@@ -1,11 +1,11 @@
 "use client";
 
 import { useRef, useState, type ReactNode, type RefObject } from "react";
-import { ArrowUp, Loader2, Trash2 } from "@multica/ui/icons";
-import { createShortcutChord } from "@multica/core/shortcuts";
-import { Button } from "@multica/ui/components/ui/button";
-import { IconButton } from "@multica/ui/components/common/icon-button";
-import { MAX_REPLY_ANNOTATIONS, type ReplyAnnotation } from "@multica/core/drafts/reply-annotation";
+import { ArrowUp, Loader2, Trash2 } from "@workpal/ui/icons";
+import { createShortcutChord } from "@workpal/core/shortcuts";
+import { Button } from "@workpal/ui/components/ui/button";
+import { IconButton } from "@workpal/ui/components/common/icon-button";
+import { MAX_REPLY_ANNOTATIONS, type ReplyAnnotation } from "@workpal/core/drafts/reply-annotation";
 import { ContentEditor, type ContentEditorRef } from "../../editor";
 import { EditorOverlayOwnerContext } from "../../editor/overlay-owner";
 import { ShortcutKeycaps } from "../../common/shortcut-keycaps";

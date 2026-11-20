@@ -1,22 +1,22 @@
 "use client";
 
 import { Fragment, useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { ChevronRight, SearchIcon } from "@multica/ui/icons";
+import { ChevronRight, SearchIcon } from "@workpal/ui/icons";
 import { Command as CommandPrimitive } from "cmdk";
 import {
   selectCommandBarContexts,
   useCommandBarContextStore,
   useSearchStore,
-} from "@multica/core/command-bar";
-import { createShortcutChord } from "@multica/core/shortcuts";
-import { useWorkspaceSlug } from "@multica/core/paths";
+} from "@workpal/core/command-bar";
+import { createShortcutChord } from "@workpal/core/shortcuts";
+import { useWorkspaceSlug } from "@workpal/core/paths";
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
-} from "@multica/ui/components/ui/dialog";
+} from "@workpal/ui/components/ui/dialog";
 import { ShortcutKeycaps } from "../common/shortcut-keycaps";
 import { resolveClickIntent, useIntentNavigate, type LinkClickIntent } from "../navigation";
 import { useT } from "../i18n";

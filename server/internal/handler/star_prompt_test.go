@@ -62,7 +62,7 @@ func backdateStarPromptShowing(t *testing.T, userID string, days int) {
 }
 
 func TestClaimStarPromptShowingFrequency(t *testing.T) {
-	userID := starPromptUser(t, "star-prompt-frequency@multica.ai", 4)
+	userID := starPromptUser(t, "star-prompt-frequency@workpal.invalid", 4)
 
 	w := callStarPrompt(t, userID, "claim")
 	if w.Code != http.StatusOK {
@@ -95,7 +95,7 @@ func TestClaimStarPromptShowingFrequency(t *testing.T) {
 }
 
 func TestClaimStarPromptShowingWaitsForAccountAge(t *testing.T) {
-	userID := starPromptUser(t, "star-prompt-new-account@multica.ai", 1)
+	userID := starPromptUser(t, "star-prompt-new-account@workpal.invalid", 1)
 
 	if w := callStarPrompt(t, userID, "claim"); w.Code != http.StatusConflict {
 		t.Fatalf("claim on a new account: expected 409, got %d", w.Code)
@@ -106,7 +106,7 @@ func TestClaimStarPromptShowingWaitsForAccountAge(t *testing.T) {
 }
 
 func TestStarPromptStarredRetiresThePrompt(t *testing.T) {
-	userID := starPromptUser(t, "star-prompt-starred@multica.ai", 4)
+	userID := starPromptUser(t, "star-prompt-starred@workpal.invalid", 4)
 
 	w := callStarPrompt(t, userID, "starred")
 	if w.Code != http.StatusOK {
@@ -134,7 +134,7 @@ func TestStarPromptStarredRetiresThePrompt(t *testing.T) {
 }
 
 func TestGetMeAlwaysSerializesStarPromptCount(t *testing.T) {
-	userID := newWaitlistTestUser(t, "star-prompt-getme@multica.ai")
+	userID := newWaitlistTestUser(t, "star-prompt-getme@workpal.invalid")
 
 	req := httptest.NewRequest("GET", "/api/me", nil)
 	req.Header.Set("X-User-ID", userID)

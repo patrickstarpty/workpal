@@ -3,7 +3,7 @@ package daemon
 import (
 	"unicode/utf8"
 
-	"github.com/multica-ai/multica/server/internal/util"
+	"workpal.local/workpal/server/internal/util"
 )
 
 // toolOutputPreviewBudget keeps the existing byte budget for tool_result

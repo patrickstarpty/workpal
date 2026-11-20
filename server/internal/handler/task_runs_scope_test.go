@@ -7,7 +7,7 @@ import (
 	"sort"
 	"testing"
 
-	"github.com/multica-ai/multica/server/internal/testutil"
+	"workpal.local/workpal/server/internal/testutil"
 )
 
 // GET /api/issues/{id}/task-runs answers three different questions depending on

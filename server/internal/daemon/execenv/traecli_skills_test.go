@@ -27,7 +27,7 @@ func TestTraecliBriefLoadsSkillsFromFiles(t *testing.T) {
 			"`references/` and `scripts/`",
 			"from that skill's directory",
 			"- **review-helper** — Use when reviewing code. (file: `.traecli/skills/review-helper/SKILL.md`)",
-			"read `.traecli/skills/multica-platform/SKILL.md` and open the reference(s)",
+			"read `.traecli/skills/workpal-platform/SKILL.md` and open the reference(s)",
 			"for the domains your task touches",
 		} {
 			if !strings.Contains(brief, want) {
@@ -76,7 +76,7 @@ func TestTraecliBriefOmitsSkillsWithoutVisibleEntries(t *testing.T) {
 	t.Parallel()
 	for _, skills := range [][]SkillContextForEnv{
 		nil,
-		{{Name: "multica-platform", BuiltinName: "multica-platform", Content: "---\nname: multica-platform\ndisable-model-invocation: true\n---\n\nHidden body."}},
+		{{Name: "workpal-platform", BuiltinName: "workpal-platform", Content: "---\nname: workpal-platform\ndisable-model-invocation: true\n---\n\nHidden body."}},
 	} {
 		brief := buildMetaSkillContent("traecli", TaskContextForEnv{AgentSkills: skills})
 		if strings.Contains(brief, "## Skills") || strings.Contains(brief, ".traecli/skills/") {
@@ -117,7 +117,7 @@ func TestTraecliBriefPathsMatchPreparedSkills(t *testing.T) {
 				workDir = env.WorkDir
 			}
 			const userSkill = "User-owned skill."
-			for _, name := range []string{"review", "multica-platform"} {
+			for _, name := range []string{"review", "workpal-platform"} {
 				mustWrite(t, filepath.Join(workDir, ".traecli", "skills", name, "SKILL.md"), userSkill)
 			}
 			var env *Environment
@@ -148,7 +148,7 @@ func TestTraecliBriefPathsMatchPreparedSkills(t *testing.T) {
 			if err != nil {
 				t.Fatal(err)
 			}
-			for i, name := range []string{"review-multica", "review-multica-multica", "multica-platform-multica"} {
+			for i, name := range []string{"review-workpal", "review-workpal-workpal", "workpal-platform-workpal"} {
 				relPath := ".traecli/skills/" + name + "/SKILL.md"
 				data, err := os.ReadFile(filepath.Join(workDir, filepath.FromSlash(relPath)))
 				if err != nil {
@@ -167,14 +167,14 @@ func TestTraecliBriefPathsMatchPreparedSkills(t *testing.T) {
 					t.Errorf("skill body is stale: %s", data)
 				}
 			}
-			if !strings.Contains(brief, "read `.traecli/skills/multica-platform-multica/SKILL.md`") {
+			if !strings.Contains(brief, "read `.traecli/skills/workpal-platform-workpal/SKILL.md`") {
 				t.Error("platform hint does not follow its allocated skill path")
 			}
-			ref, err := os.ReadFile(filepath.Join(workDir, ".traecli", "skills", "review-multica", "references", "checks.md"))
+			ref, err := os.ReadFile(filepath.Join(workDir, ".traecli", "skills", "review-workpal", "references", "checks.md"))
 			if err != nil || string(ref) != task.AgentSkills[0].Files[0].Content {
 				t.Errorf("supporting reference = %q, error = %v", ref, err)
 			}
-			for _, name := range []string{"review", "multica-platform"} {
+			for _, name := range []string{"review", "workpal-platform"} {
 				data, err := os.ReadFile(filepath.Join(workDir, ".traecli", "skills", name, "SKILL.md"))
 				if err != nil || string(data) != userSkill {
 					t.Errorf("user-owned skill %q changed: %q, error = %v", name, data, err)

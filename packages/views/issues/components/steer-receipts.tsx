@@ -2,15 +2,15 @@
 
 import { useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { AlertCircle, Check, CornerDownRight, Loader2, RotateCcw } from "@multica/ui/icons";
+import { AlertCircle, Check, CornerDownRight, Loader2, RotateCcw } from "@workpal/ui/icons";
 import { toast } from "sonner";
-import { useCreateComment, useRetryTaskSupplement } from "@multica/core/issues/mutations";
-import { api } from "@multica/core/api";
-import { issueKeys, issueTasksOptions } from "@multica/core/issues/queries";
-import { commentSupplementReceipts, isSupplementInFlight } from "@multica/core/issues/run-steering";
-import type { AgentTask, CommentSupplementReceipt, TimelineEntry } from "@multica/core/types";
-import { useActorName } from "@multica/core/workspace/hooks";
-import { Button } from "@multica/ui/components/ui/button";
+import { useCreateComment, useRetryTaskSupplement } from "@workpal/core/issues/mutations";
+import { api } from "@workpal/core/api";
+import { issueKeys, issueTasksOptions } from "@workpal/core/issues/queries";
+import { commentSupplementReceipts, isSupplementInFlight } from "@workpal/core/issues/run-steering";
+import type { AgentTask, CommentSupplementReceipt, TimelineEntry } from "@workpal/core/types";
+import { useActorName } from "@workpal/core/workspace/hooks";
+import { Button } from "@workpal/ui/components/ui/button";
 import { useLocale, useT } from "../../i18n";
 
 const TERMINAL = new Set<AgentTask["status"]>(["completed", "failed", "cancelled"]);

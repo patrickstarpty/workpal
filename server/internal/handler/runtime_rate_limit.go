@@ -9,8 +9,8 @@ import (
 
 	"github.com/go-chi/chi/v5"
 	"github.com/jackc/pgx/v5/pgtype"
-	obsmetrics "github.com/multica-ai/multica/server/internal/metrics"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
+	obsmetrics "workpal.local/workpal/server/internal/metrics"
+	db "workpal.local/workpal/server/pkg/db/generated"
 )
 
 // Runtime rate limits (MUL-9427). While a task runs, the daemon forwards the

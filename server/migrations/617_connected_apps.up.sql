@@ -66,7 +66,7 @@ CREATE TABLE IF NOT EXISTS app_action_rule (
 -- A call an agent made that waits on a person: an action that needs
 -- confirmation, or an app the person still has to connect. The arguments are
 -- what the agent asked for; approved_arguments is what the approver accepted
--- (equal unless they edited it) and is exactly what Multica executes.
+-- (equal unless they edited it) and is exactly what Workpal executes.
 CREATE TABLE IF NOT EXISTS app_action_request (
     id                 UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     workspace_id       UUID NOT NULL,

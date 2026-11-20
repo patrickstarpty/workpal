@@ -2,8 +2,8 @@
 
 import { useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { agentTaskSnapshotOptions } from "@multica/core/agents";
-import { inboxListOptions } from "@multica/core/inbox/queries";
+import { agentTaskSnapshotOptions } from "@workpal/core/agents";
+import { inboxListOptions } from "@workpal/core/inbox/queries";
 import {
   effectiveInboxFilters,
   filterInboxItems,
@@ -11,8 +11,8 @@ import {
   inboxIssueFieldsSupport,
   inboxPriorityFilterSupport,
   useInboxFilters,
-} from "@multica/core/inbox/filter-store";
-import type { AgentTask, InboxItem } from "@multica/core/types";
+} from "@workpal/core/inbox/filter-store";
+import type { AgentTask, InboxItem } from "@workpal/core/types";
 import { deriveIssueSurfaceActivity } from "../../issues/surface/activity";
 import { useKeptOpenInboxRow } from "./use-kept-open-inbox-row";
 

@@ -4,7 +4,7 @@ import (
 	"context"
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgtype"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
+	db "workpal.local/workpal/server/pkg/db/generated"
 )
 
 func (f *fakePatcherQueries) GetChannelReplyTurn(_ context.Context, id pgtype.UUID) (db.GetChannelReplyTurnRow, error) {

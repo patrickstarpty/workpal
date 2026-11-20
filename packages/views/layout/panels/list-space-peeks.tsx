@@ -1,13 +1,13 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import { useChatStore } from "@multica/core/chat";
-import { useSetChatSessionArchived } from "@multica/core/chat/mutations";
-import { chatSessionsOptions } from "@multica/core/chat/queries";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { useWorkspacePaths } from "@multica/core/paths";
-import type { Agent, ChatSession } from "@multica/core/types";
-import { agentListOptions } from "@multica/core/workspace/queries";
+import { useChatStore } from "@workpal/core/chat";
+import { useSetChatSessionArchived } from "@workpal/core/chat/mutations";
+import { chatSessionsOptions } from "@workpal/core/chat/queries";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { useWorkspacePaths } from "@workpal/core/paths";
+import type { Agent, ChatSession } from "@workpal/core/types";
+import { agentListOptions } from "@workpal/core/workspace/queries";
 import { ChatThreadList } from "../../chat/components/chat-thread-list";
 import { useT } from "../../i18n";
 import { useNavigation } from "../../navigation";

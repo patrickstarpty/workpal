@@ -9,8 +9,8 @@ import (
 	"sync/atomic"
 	"testing"
 
-	"github.com/multica-ai/multica/server/pkg/agent"
-	"github.com/multica-ai/multica/server/pkg/protocol"
+	"workpal.local/workpal/server/pkg/agent"
+	"workpal.local/workpal/server/pkg/protocol"
 )
 
 // A version-mismatched receptionist must yield builtinProbeProtocolSkew
@@ -26,8 +26,8 @@ func TestProbeMuseAppReceptionistProtocolSkew(t *testing.T) {
 	srv := httptest.NewServer(mux)
 	defer srv.Close()
 
-	t.Setenv("MULTICA_MUSEAPP_ENDPOINT", srv.URL)
-	t.Setenv("MULTICA_MUSEAPP_TOKEN", "")
+	t.Setenv("WORKPAL_MUSEAPP_ENDPOINT", srv.URL)
+	t.Setenv("WORKPAL_MUSEAPP_TOKEN", "")
 
 	d := newTestDaemon(t)
 	_, _, verdict := d.probeMuseAppReceptionist(context.Background())
@@ -48,8 +48,8 @@ func TestProbeMuseAppReceptionistOK(t *testing.T) {
 	srv := httptest.NewServer(mux)
 	defer srv.Close()
 
-	t.Setenv("MULTICA_MUSEAPP_ENDPOINT", srv.URL)
-	t.Setenv("MULTICA_MUSEAPP_TOKEN", "")
+	t.Setenv("WORKPAL_MUSEAPP_ENDPOINT", srv.URL)
+	t.Setenv("WORKPAL_MUSEAPP_TOKEN", "")
 
 	d := newTestDaemon(t)
 	d.agentVersions = make(map[string]string)
@@ -77,7 +77,7 @@ var _ = agent.ErrMuseAppProtocolSkew
 
 // TestProbeMuseAppReceptionistNoEndpoint: missing endpoint yields unavailable.
 func TestProbeMuseAppReceptionistNoEndpoint(t *testing.T) {
-	t.Setenv("MULTICA_MUSEAPP_ENDPOINT", "")
+	t.Setenv("WORKPAL_MUSEAPP_ENDPOINT", "")
 	d := newTestDaemon(t)
 	_, _, verdict := d.probeMuseAppReceptionist(context.Background())
 	if verdict != builtinProbeUnavailable {
@@ -96,8 +96,8 @@ func TestMuseAppCleanupUnconfirmedOutranksCancellation(t *testing.T) {
 		_ = json.NewEncoder(w).Encode(map[string]bool{"ok": true})
 	}))
 	defer srv.Close()
-	t.Setenv("MULTICA_MUSEAPP_ENDPOINT", srv.URL)
-	t.Setenv("MULTICA_MUSEAPP_TOKEN", "")
+	t.Setenv("WORKPAL_MUSEAPP_ENDPOINT", srv.URL)
+	t.Setenv("WORKPAL_MUSEAPP_TOKEN", "")
 	backend, err := agent.New("museapp", agent.Config{})
 	if err != nil {
 		t.Fatal(err)

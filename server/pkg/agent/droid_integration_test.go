@@ -16,7 +16,7 @@ import (
 // the turn prompt nor SystemPrompt supplies it, and a tool read cannot pass.
 func TestDroidRealAgentsMDCanary(t *testing.T) {
 	requireRealAgentSmoke(t)
-	executable := os.Getenv("MULTICA_DROID_PATH")
+	executable := os.Getenv("WORKPAL_DROID_PATH")
 	if executable == "" {
 		executable = "droid"
 	}
@@ -47,7 +47,7 @@ func TestDroidRealAgentsMDCanary(t *testing.T) {
 
 func TestDroidRealTaskSmoke(t *testing.T) {
 	requireRealAgentSmoke(t)
-	executable := os.Getenv("MULTICA_DROID_PATH")
+	executable := os.Getenv("WORKPAL_DROID_PATH")
 	if executable == "" {
 		executable = "droid"
 	}
@@ -86,11 +86,11 @@ func TestDroidRealTaskSmoke(t *testing.T) {
 
 func TestDroidRealInvalidAuthentication(t *testing.T) {
 	requireRealAgentSmoke(t)
-	executable := os.Getenv("MULTICA_DROID_PATH")
+	executable := os.Getenv("WORKPAL_DROID_PATH")
 	if executable == "" {
 		executable = "droid"
 	}
-	const key = "fk-invalid-multica-smoke-credential"
+	const key = "fk-invalid-workpal-smoke-credential"
 	backend, err := New("droid", Config{ExecutablePath: executable, Env: map[string]string{"FACTORY_API_KEY": key}})
 	if err != nil {
 		t.Fatal(err)

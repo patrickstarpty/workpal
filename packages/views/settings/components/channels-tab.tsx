@@ -2,9 +2,9 @@
 
 import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { agentListOptions } from "@multica/core/workspace/queries";
-import { useWorkspacePaths } from "@multica/core/paths";
-import { Button } from "@multica/ui/components/ui/button";
+import { agentListOptions } from "@workpal/core/workspace/queries";
+import { useWorkspacePaths } from "@workpal/core/paths";
+import { Button } from "@workpal/ui/components/ui/button";
 import { ActorAvatar } from "../../common/actor-avatar";
 import { AppLink, useNavigation } from "../../navigation";
 import { useT } from "../../i18n";

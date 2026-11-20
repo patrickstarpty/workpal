@@ -3,10 +3,10 @@
 import { useState } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
-import { MoreHorizontal, Pause, Play, Unplug } from "@multica/ui/icons";
-import { Button } from "@multica/ui/components/ui/button";
-import { IconButton } from "@multica/ui/components/common/icon-button";
-import { Switch } from "@multica/ui/components/ui/switch";
+import { MoreHorizontal, Pause, Play, Unplug } from "@workpal/ui/icons";
+import { Button } from "@workpal/ui/components/ui/button";
+import { IconButton } from "@workpal/ui/components/common/icon-button";
+import { Switch } from "@workpal/ui/components/ui/switch";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -16,21 +16,21 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@multica/ui/components/ui/alert-dialog";
+} from "@workpal/ui/components/ui/alert-dialog";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@multica/ui/components/ui/dropdown-menu";
-import { useConfigStore } from "@multica/core/config";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { useCurrentMember } from "@multica/core/permissions";
-import { useCurrentWorkspace } from "@multica/core/paths";
-import { workspaceKeys } from "@multica/core/workspace/queries";
-import { deriveGitHubSettings, githubInstallationsOptions } from "@multica/core/github";
-import { api } from "@multica/core/api";
-import type { Workspace } from "@multica/core/types";
+} from "@workpal/ui/components/ui/dropdown-menu";
+import { useConfigStore } from "@workpal/core/config";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { useCurrentMember } from "@workpal/core/permissions";
+import { useCurrentWorkspace } from "@workpal/core/paths";
+import { workspaceKeys } from "@workpal/core/workspace/queries";
+import { deriveGitHubSettings, githubInstallationsOptions } from "@workpal/core/github";
+import { api } from "@workpal/core/api";
+import type { Workspace } from "@workpal/core/types";
 import { useT } from "../../i18n";
 import {
   SettingsCard,
@@ -299,7 +299,7 @@ export function CodeTab() {
               <>
                 {t(($) => $.github.feature_co_author_description_prefix)}{" "}
                 <code className="rounded-xs bg-muted px-1 py-0.5 text-caption">
-                  {"Co-authored-by: multica-agent <github@multica.ai>"}
+                  {"Co-authored-by: workpal-agent <github@workpal.invalid>"}
                 </code>
                 {t(($) => $.github.feature_co_author_description_suffix)}
               </>

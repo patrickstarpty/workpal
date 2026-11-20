@@ -2,17 +2,17 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { api } from "@multica/core/api";
-import { useAuthStore } from "@multica/core/auth";
-import { useCurrentWorkspace, useWorkspacePaths } from "@multica/core/paths";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { useModalStore } from "@multica/core/modals";
-import { useIssueStatuses } from "@multica/core/issue-statuses/hooks";
-import { resolvePublicFileUrl } from "@multica/core/workspace/avatar-url";
-import { isImeComposing } from "@multica/core/utils";
-import { getShortcut, shortcutMatchesEvent } from "@multica/core/shortcuts";
+import { api } from "@workpal/core/api";
+import { useAuthStore } from "@workpal/core/auth";
+import { useCurrentWorkspace, useWorkspacePaths } from "@workpal/core/paths";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { useModalStore } from "@workpal/core/modals";
+import { useIssueStatuses } from "@workpal/core/issue-statuses/hooks";
+import { resolvePublicFileUrl } from "@workpal/core/workspace/avatar-url";
+import { isImeComposing } from "@workpal/core/utils";
+import { getShortcut, shortcutMatchesEvent } from "@workpal/core/shortcuts";
 import { useLocale, useT, useTimeAgo } from "../../i18n";
-import { agentListOptions, memberListOptions, squadMemberStatusOptions, workspaceKeys } from "@multica/core/workspace/queries";
+import { agentListOptions, memberListOptions, squadMemberStatusOptions, workspaceKeys } from "@workpal/core/workspace/queries";
 import { AppLink, currentPath, useNavigation } from "../../navigation";
 import {
   OBJECT_PAGE_BODY,
@@ -42,13 +42,13 @@ import {
   Trash2,
   UserPlus,
   Users,
-} from "@multica/ui/icons";
-import { Button, buttonVariants } from "@multica/ui/components/ui/button";
-import { IconButton } from "@multica/ui/components/common/icon-button";
-import { Input } from "@multica/ui/components/ui/input";
-import { Label } from "@multica/ui/components/ui/label";
-import { Textarea } from "@multica/ui/components/ui/textarea";
-import { Skeleton } from "@multica/ui/components/ui/skeleton";
+} from "@workpal/ui/icons";
+import { Button, buttonVariants } from "@workpal/ui/components/ui/button";
+import { IconButton } from "@workpal/ui/components/common/icon-button";
+import { Input } from "@workpal/ui/components/ui/input";
+import { Label } from "@workpal/ui/components/ui/label";
+import { Textarea } from "@workpal/ui/components/ui/textarea";
+import { Skeleton } from "@workpal/ui/components/ui/skeleton";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -57,12 +57,12 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@multica/ui/components/ui/dropdown-menu";
+} from "@workpal/ui/components/ui/dropdown-menu";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@multica/ui/components/ui/popover";
+} from "@workpal/ui/components/ui/popover";
 import {
   Dialog,
   DialogContent,
@@ -70,7 +70,7 @@ import {
   DialogTitle,
   DialogDescription,
   DialogFooter,
-} from "@multica/ui/components/ui/dialog";
+} from "@workpal/ui/components/ui/dialog";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -80,10 +80,10 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@multica/ui/components/ui/alert-dialog";
-import { ActorAvatar as ActorAvatarBase } from "@multica/ui/components/common/actor-avatar";
-import { copyText } from "@multica/ui/lib/clipboard";
-import { cn } from "@multica/ui/lib/utils";
+} from "@workpal/ui/components/ui/alert-dialog";
+import { ActorAvatar as ActorAvatarBase } from "@workpal/ui/components/common/actor-avatar";
+import { copyText } from "@workpal/ui/lib/clipboard";
+import { cn } from "@workpal/ui/lib/utils";
 import { ActorAvatar } from "../../common/actor-avatar";
 import { AvatarUploadControl } from "../../common/avatar-upload-control";
 import { ContentEditor } from "../../editor/content-editor";
@@ -97,7 +97,7 @@ import {
   PickerEmpty,
 } from "../../issues/components/pickers/property-picker";
 import { toast } from "sonner";
-import type { Issue, Squad, SquadMember, SquadMemberStatus, Agent, MemberWithUser } from "@multica/core/types";
+import type { Issue, Squad, SquadMember, SquadMemberStatus, Agent, MemberWithUser } from "@workpal/core/types";
 import { matchesPinyin } from "../../editor/extensions/pinyin-match";
 
 const RECENT_WORK_LIMIT = 5;
@@ -246,7 +246,7 @@ export function SquadDetailPage() {
   };
 
   const segments = [{ href: p.squads(), label: t(($) => $.page.title) }];
-  const layoutId = "multica_squad_detail_layout";
+  const layoutId = "workpal_squad_detail_layout";
 
   if (!squad) {
     if (squadError) {

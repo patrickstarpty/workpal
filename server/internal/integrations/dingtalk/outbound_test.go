@@ -14,12 +14,12 @@ import (
 
 	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgtype"
-	"github.com/multica-ai/multica/server/internal/events"
-	"github.com/multica-ai/multica/server/internal/integrations/channel"
-	"github.com/multica-ai/multica/server/internal/integrations/channel/engine"
-	"github.com/multica-ai/multica/server/internal/util"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
-	"github.com/multica-ai/multica/server/pkg/protocol"
+	"workpal.local/workpal/server/internal/events"
+	"workpal.local/workpal/server/internal/integrations/channel"
+	"workpal.local/workpal/server/internal/integrations/channel/engine"
+	"workpal.local/workpal/server/internal/util"
+	db "workpal.local/workpal/server/pkg/db/generated"
+	"workpal.local/workpal/server/pkg/protocol"
 )
 
 type noDeliveryOutboundQueries struct{}
@@ -83,7 +83,7 @@ func TestOutboundFailsClosedWithoutTaskDeliverySnapshot(t *testing.T) {
 		Type:          protocol.EventChatDone,
 		TaskID:        "11111111-1111-1111-1111-111111111111",
 		ChatSessionID: "22222222-2222-2222-2222-222222222222",
-		Payload:       protocol.ChatDonePayload{Content: "must stay in Multica"},
+		Payload:       protocol.ChatDonePayload{Content: "must stay in Workpal"},
 	}
 	if err := o.processEvent(context.Background(), event); err != nil {
 		t.Fatalf("processEvent: %v", err)

@@ -11,9 +11,9 @@ import (
 	"strings"
 
 	"github.com/jackc/pgx/v5/pgtype"
-	"github.com/multica-ai/multica/server/internal/runtimeapps"
-	"github.com/multica-ai/multica/server/internal/util"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
+	"workpal.local/workpal/server/internal/runtimeapps"
+	"workpal.local/workpal/server/internal/util"
+	db "workpal.local/workpal/server/pkg/db/generated"
 )
 
 const (
@@ -193,7 +193,7 @@ func (s *Service) dispatch(ctx context.Context, rn *run, req rpcRequest) (rpcRes
 		resp.Result = map[string]any{
 			"protocolVersion": version,
 			"capabilities":    map[string]any{"tools": map[string]any{}},
-			"serverInfo":      map[string]any{"name": "multica-apps", "version": "1"},
+			"serverInfo":      map[string]any{"name": "workpal-apps", "version": "1"},
 			"instructions":    gatewayInstructions,
 		}
 	case "ping":
@@ -219,7 +219,7 @@ func (s *Service) dispatch(ctx context.Context, rn *run, req rpcRequest) (rpcRes
 	return resp, notification
 }
 
-const gatewayInstructions = "Multica apps. Use apps_list to see your apps, apps_search_tools to find a tool, apps_get_tool for its input schema, then apps_run_tool. " +
+const gatewayInstructions = "Workpal apps. Use apps_list to see your apps, apps_search_tools to find a tool, apps_get_tool for its input schema, then apps_run_tool. " +
 	"Allowed calls run immediately and return their result. Never work around a blocked call. " +
 	"If an account is not connected, use apps_request_connection and end your turn; you will be resumed after it is connected."
 

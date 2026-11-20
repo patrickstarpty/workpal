@@ -11,9 +11,9 @@ import {
   ArrowRight,
   BookOpen,
   type IconComponent,
-} from "@multica/ui/icons";
-import { Button, buttonVariants } from "@multica/ui/components/ui/button";
-import { cn } from "@multica/ui/lib/utils";
+} from "@workpal/ui/icons";
+import { Button, buttonVariants } from "@workpal/ui/components/ui/button";
+import { cn } from "@workpal/ui/lib/utils";
 import { docsLocalePrefix } from "../common/docs-locale";
 import { useLocale, useT } from "../i18n";
 
@@ -27,7 +27,7 @@ export type FeatureDocsSlug =
   | "issue-wakeups";
 
 export function featureDocsHref(slug: FeatureDocsSlug, language?: string): string {
-  return `https://multica.ai/docs${docsLocalePrefix(language)}/${slug}`;
+  return `http://127.0.0.1:4000/docs${docsLocalePrefix(language)}/${slug}`;
 }
 
 interface FeatureIntroProps {

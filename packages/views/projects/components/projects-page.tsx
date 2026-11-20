@@ -11,7 +11,7 @@ import {
   Pin,
   Rows3,
   Trash2,
-} from "@multica/ui/icons";
+} from "@workpal/ui/icons";
 import { useQuery } from "@tanstack/react-query";
 import {
   boardGroupBy,
@@ -26,25 +26,25 @@ import {
   type ProjectLayout,
   type ProjectListFilters,
   type ProjectSortField,
-} from "@multica/core/projects";
-import { PROJECT_STATUS_CONFIG } from "@multica/core/projects/config";
+} from "@workpal/core/projects";
+import { PROJECT_STATUS_CONFIG } from "@workpal/core/projects/config";
 import {
   pinListOptions,
   useCreatePin,
-} from "@multica/core/pins";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { useWorkspacePaths } from "@multica/core/paths";
-import { useAuthStore } from "@multica/core/auth";
-import { useActorName } from "@multica/core/workspace/hooks";
+} from "@workpal/core/pins";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { useWorkspacePaths } from "@workpal/core/paths";
+import { useAuthStore } from "@workpal/core/auth";
+import { useActorName } from "@workpal/core/workspace/hooks";
 import {
   agentListOptions,
   memberListOptions,
-} from "@multica/core/workspace/queries";
-import { canDeleteProject } from "@multica/core/projects/deletion-permissions";
-import { useModalStore } from "@multica/core/modals";
+} from "@workpal/core/workspace/queries";
+import { canDeleteProject } from "@workpal/core/projects/deletion-permissions";
+import { useModalStore } from "@workpal/core/modals";
 import { ActorAvatar } from "../../common/actor-avatar";
 import { FILTER_ITEM_CLASS, HoverCheck } from "../../common/hover-check";
-import { Button } from "@multica/ui/components/ui/button";
+import { Button } from "@workpal/ui/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -53,15 +53,15 @@ import {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
-} from "@multica/ui/components/ui/dropdown-menu";
-import { Toggle } from "@multica/ui/components/ui/toggle";
+} from "@workpal/ui/components/ui/dropdown-menu";
+import { Toggle } from "@workpal/ui/components/ui/toggle";
 import type {
   MemberWithUser,
   Project,
   ProjectPriority,
   ProjectStatus,
   UpdateProjectRequest,
-} from "@multica/core/types";
+} from "@workpal/core/types";
 import {
   CollectionCreateButton,
   CollectionFilterButton,
@@ -100,7 +100,7 @@ import {
   type ProjectGroupField,
 } from "./project-groups";
 import { PriorityIcon } from "../../issues/components/priority-icon";
-import { cn } from "@multica/ui/lib/utils";
+import { cn } from "@workpal/ui/lib/utils";
 
 // Sort order maps for the enum columns (header sort needs a total order).
 const PRIORITY_ORDER: Record<ProjectPriority, number> = {

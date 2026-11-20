@@ -18,14 +18,14 @@ import (
 	"testing"
 	"time"
 
-	"github.com/multica-ai/multica/server/pkg/agent"
+	"workpal.local/workpal/server/pkg/agent"
 )
 
 // Run against each installed Hermes release. Inference stays on a local fixture;
 // the test never loads the user's config, provider credentials or messaging accounts.
 func TestHermesManagedHomeRealACP(t *testing.T) {
-	if os.Getenv("MULTICA_RUN_REAL_AGENT_SMOKE") != "1" {
-		t.Skip("set MULTICA_RUN_REAL_AGENT_SMOKE=1 to run a real Hermes binary")
+	if os.Getenv("WORKPAL_RUN_REAL_AGENT_SMOKE") != "1" {
+		t.Skip("set WORKPAL_RUN_REAL_AGENT_SMOKE=1 to run a real Hermes binary")
 	}
 	cli, err := exec.LookPath("hermes")
 	if err != nil {

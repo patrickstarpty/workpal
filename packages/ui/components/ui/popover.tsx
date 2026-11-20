@@ -3,12 +3,12 @@
 import * as React from "react"
 import { Popover as PopoverPrimitive } from "@base-ui/react/popover"
 
-import { cn } from "@multica/ui/lib/utils"
+import { cn } from "@workpal/ui/lib/utils"
 import {
   ContextMenuOwnerProvider,
   useContextMenuOwner,
   useContextMenuOwnerRef,
-} from "@multica/ui/hooks/use-context-menu-owner"
+} from "@workpal/ui/hooks/use-context-menu-owner"
 
 function Popover({ onOpenChange, ...props }: PopoverPrimitive.Root.Props) {
   const owner = useContextMenuOwner(onOpenChange)

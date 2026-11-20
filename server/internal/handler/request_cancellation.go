@@ -5,7 +5,7 @@ import (
 	"errors"
 	"net/http"
 
-	"github.com/multica-ai/multica/server/internal/middleware"
+	"workpal.local/workpal/server/internal/middleware"
 )
 
 // A cancelled operation is a client cancellation only when its parent request

@@ -3,11 +3,11 @@
 import { useEffect, type ComponentProps, type ReactNode } from "react";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { motion, useIsPresent } from "motion/react";
-import type { AgentAvailability } from "@multica/core/agents";
-import type { ChatPendingTask, ChatQuickAction } from "@multica/core/types";
-import { chatMessagesPageOptions } from "@multica/core/chat/queries";
-import { hideQueuedChatMessages } from "@multica/core/chat/pending";
-import { useRegenerateChatQuickActions } from "@multica/core/chat/mutations";
+import type { AgentAvailability } from "@workpal/core/agents";
+import type { ChatPendingTask, ChatQuickAction } from "@workpal/core/types";
+import { chatMessagesPageOptions } from "@workpal/core/chat/queries";
+import { hideQueuedChatMessages } from "@workpal/core/chat/pending";
+import { useRegenerateChatQuickActions } from "@workpal/core/chat/mutations";
 import { ChatMessageList, ChatMessageSkeleton } from "./chat-message-list";
 import { useChatWakeups } from "./chat-wakeups";
 

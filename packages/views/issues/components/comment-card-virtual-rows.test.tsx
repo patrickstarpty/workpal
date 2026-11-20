@@ -2,7 +2,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { act, fireEvent, screen } from "@testing-library/react";
 import { forwardRef, type ReactNode } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import type { TimelineEntry } from "@multica/core/types";
+import type { TimelineEntry } from "@workpal/core/types";
 import { renderWithI18n } from "../../test/i18n";
 
 // Which threads mount their replies on demand (MUL-9409). The timeline's
@@ -10,7 +10,7 @@ import { renderWithI18n } from "../../test/i18n";
 // used to mount all of them at once; it now virtualizes by content as well as
 // by row count.
 
-vi.mock("@multica/core/api", () => ({
+vi.mock("@workpal/core/api", () => ({
   api: { uploadFile: vi.fn() },
   dispatchReasonCode: () => undefined,
   errorCode: () => undefined,
@@ -24,7 +24,7 @@ vi.mock("../../navigation", () => ({
   }),
 }));
 
-vi.mock("@multica/core/workspace/hooks", () => ({
+vi.mock("@workpal/core/workspace/hooks", () => ({
   useActorName: () => ({ getActorName: () => "Ada" }),
 }));
 

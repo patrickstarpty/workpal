@@ -26,11 +26,11 @@ import {
   SquarePen,
   X,
   type IconComponent,
-} from "@multica/ui/icons";
-import { cn } from "@multica/ui/lib/utils";
-import { ShimmerText } from "@multica/ui/components/common/shimmer-text";
-import { StatusIcon } from "@multica/views/issues/components/status-icon";
-import { PriorityIcon } from "@multica/views/issues/components/priority-icon";
+} from "@workpal/ui/icons";
+import { cn } from "@workpal/ui/lib/utils";
+import { ShimmerText } from "@workpal/ui/components/common/shimmer-text";
+import { StatusIcon } from "@workpal/views/issues/components/status-icon";
+import { PriorityIcon } from "@workpal/views/issues/components/priority-icon";
 import {
   APP_CARD,
   AppRail,

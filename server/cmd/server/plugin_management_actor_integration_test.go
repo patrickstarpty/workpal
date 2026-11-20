@@ -16,17 +16,17 @@ import (
 	"testing"
 
 	"github.com/google/uuid"
-	"github.com/multica-ai/multica/server/internal/analytics"
-	"github.com/multica-ai/multica/server/internal/auth"
-	"github.com/multica-ai/multica/server/internal/events"
-	"github.com/multica-ai/multica/server/internal/featureflags"
-	"github.com/multica-ai/multica/server/internal/handler"
-	"github.com/multica-ai/multica/server/internal/realtime"
-	"github.com/multica-ai/multica/server/internal/service"
-	dbfx "github.com/multica-ai/multica/server/internal/testutil"
-	"github.com/multica-ai/multica/server/internal/util"
-	"github.com/multica-ai/multica/server/pkg/featureflag"
-	"github.com/multica-ai/multica/server/pkg/plugincontract"
+	"workpal.local/workpal/server/internal/analytics"
+	"workpal.local/workpal/server/internal/auth"
+	"workpal.local/workpal/server/internal/events"
+	"workpal.local/workpal/server/internal/featureflags"
+	"workpal.local/workpal/server/internal/handler"
+	"workpal.local/workpal/server/internal/realtime"
+	"workpal.local/workpal/server/internal/service"
+	dbfx "workpal.local/workpal/server/internal/testutil"
+	"workpal.local/workpal/server/internal/util"
+	"workpal.local/workpal/server/pkg/featureflag"
+	"workpal.local/workpal/server/pkg/plugincontract"
 )
 
 const consentPluginManifest = `{
@@ -82,9 +82,9 @@ func newPluginConsentFixture(t *testing.T) *pluginConsentFixture {
 		_ = json.NewEncoder(w).Encode(map[string]any{"valid": true, "owner_id": f.UserID})
 	}))
 	t.Cleanup(fleet.Close)
-	t.Setenv("MULTICA_CLOUD_URL", fleet.URL)
-	t.Setenv("MULTICA_PLUGIN_SECRET_KEY", base64.StdEncoding.EncodeToString(bytes.Repeat([]byte{7}, 32)))
-	t.Setenv("MULTICA_PLUGIN_SURFACE_ORIGIN", "https://plugin-content.example.test")
+	t.Setenv("WORKPAL_CLOUD_URL", fleet.URL)
+	t.Setenv("WORKPAL_PLUGIN_SECRET_KEY", base64.StdEncoding.EncodeToString(bytes.Repeat([]byte{7}, 32)))
+	t.Setenv("WORKPAL_PLUGIN_SURFACE_ORIGIN", "https://plugin-content.example.test")
 	flags := featureflag.NewStaticProvider()
 	flags.Set(featureflags.PluginsV1, featureflag.Rule{Default: true})
 	router, h := NewRouterWithOptions(testPool, realtime.NewHub(), events.New(), analytics.NoopClient{}, nil,
@@ -160,7 +160,7 @@ func (f *pluginConsentFixture) request(method, path, token string, body any) *ht
 	req.Header.Set("X-Workspace-ID", f.db.WorkspaceID)
 	// Auth must discard this client assertion for both machine auth branches.
 	req.Header.Set("X-Actor-Source", "member")
-	req.Header.Set("X-Multica-Plugin-Installation", f.installationID)
+	req.Header.Set("X-Workpal-Plugin-Installation", f.installationID)
 	if path == f.base()+"/packages" && method == http.MethodPost {
 		req.Body = io.NopCloser(strings.NewReader(f.upload))
 		req.Header.Set("Content-Type", f.contentType)

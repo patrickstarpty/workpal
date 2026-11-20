@@ -1,25 +1,25 @@
 "use client";
 
 import { Suspense, lazy, useRef, useState } from "react";
-import { Bot, Camera, ImagePlus, Loader2, Type, Users, X } from "@multica/ui/icons";
+import { Bot, Camera, ImagePlus, Loader2, Type, Users, X } from "@workpal/ui/icons";
 import { toast } from "sonner";
-import { api } from "@multica/core/api";
-import { useFileUpload } from "@multica/core/hooks/use-file-upload";
-import { resolvePublicFileUrl } from "@multica/core/workspace/avatar-url";
+import { api } from "@workpal/core/api";
+import { useFileUpload } from "@workpal/core/hooks/use-file-upload";
+import { resolvePublicFileUrl } from "@workpal/core/workspace/avatar-url";
 import {
   AVATAR_EMOJI_SUGGESTIONS,
   formatAvatarEmoji,
   parseAvatarEmoji,
-} from "@multica/ui/lib/avatar-emoji";
+} from "@workpal/ui/lib/avatar-emoji";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@multica/ui/components/ui/popover";
-import { Separator } from "@multica/ui/components/ui/separator";
-import { TooltipHint } from "@multica/ui/components/common/tooltip-hint";
-import { DeferredTooltip } from "@multica/ui/components/common/deferred-tooltip";
-import { cn } from "@multica/ui/lib/utils";
+} from "@workpal/ui/components/ui/popover";
+import { Separator } from "@workpal/ui/components/ui/separator";
+import { TooltipHint } from "@workpal/ui/components/common/tooltip-hint";
+import { DeferredTooltip } from "@workpal/ui/components/common/deferred-tooltip";
+import { cn } from "@workpal/ui/lib/utils";
 import { useT } from "../i18n";
 import { AvatarCropDialog } from "./avatar-crop-dialog";
 import { TextAvatarDialog } from "./text-avatar-dialog";
@@ -27,7 +27,7 @@ import { TextAvatarDialog } from "./text-avatar-dialog";
 // The full emoji-mart picker is ~1MB of emoji data. Only the handful of
 // suggestions render eagerly; the searchable set loads when asked for.
 const EmojiPicker = lazy(() =>
-  import("@multica/ui/components/common/emoji-picker").then((m) => ({
+  import("@workpal/ui/components/common/emoji-picker").then((m) => ({
     default: m.EmojiPicker,
   })),
 );

@@ -20,7 +20,7 @@ import (
 
 // museappBackend implements Backend by delegating to a remote Muse receptionist
 // over HTTP. Unlike every other backend there is no local CLI to spawn: the
-// daemon advertises a museapp runtime exactly when MULTICA_MUSEAPP_ENDPOINT is configured
+// daemon advertises a museapp runtime exactly when WORKPAL_MUSEAPP_ENDPOINT is configured
 // (see probeAgentCLIs), and Execute POSTs the prompt to the receptionist,
 // streams its progress events into Messages, and resolves Result when the
 // receptionist reports a terminal state.
@@ -41,17 +41,17 @@ import (
 // Configuration comes from the daemon's own process environment so no CLI
 // discovery is involved:
 //
-//	MULTICA_MUSEAPP_ENDPOINT  base URL of the receptionist, e.g. http://127.0.0.1:8765.
+//	WORKPAL_MUSEAPP_ENDPOINT  base URL of the receptionist, e.g. http://127.0.0.1:8765.
 //	               Keep this on loopback: the bearer token is sent in the
 //	               clear over plain http, so a non-loopback http:// URL
 //	               would expose it on the network.
-//	MULTICA_MUSEAPP_TOKEN     bearer token for the receptionist (optional; sent only when set)
-//	MULTICA_MUSEAPP_MODEL     informational model label reported in the probe entry
+//	WORKPAL_MUSEAPP_TOKEN     bearer token for the receptionist (optional; sent only when set)
+//	WORKPAL_MUSEAPP_MODEL     informational model label reported in the probe entry
 //
 // Endpoint and receptionist-token resolution deliberately ignore cfg.Env.
 // It carries the agent's custom_env,
-// which any member who can edit the agent controls; honouring MULTICA_MUSEAPP_ENDPOINT
-// there would let them point this daemon at an arbitrary URL, and MULTICA_MUSEAPP_TOKEN
+// which any member who can edit the agent controls; honouring WORKPAL_MUSEAPP_ENDPOINT
+// there would let them point this daemon at an arbitrary URL, and WORKPAL_MUSEAPP_TOKEN
 // (which they cannot see) would still ride along from the process environment.
 // The probe only ever reads the process environment, so reading anything else
 // here would also mean probing one receptionist and running tasks on another.
@@ -71,9 +71,9 @@ const museappProtocolVersion = 1
 var ErrMuseAppProtocolSkew = fmt.Errorf("museapp backend: protocol skew")
 
 const (
-	museappEnvEndpoint = "MULTICA_MUSEAPP_ENDPOINT"
-	museappEnvToken    = "MULTICA_MUSEAPP_TOKEN"
-	museappEnvModel    = "MULTICA_MUSEAPP_MODEL"
+	museappEnvEndpoint = "WORKPAL_MUSEAPP_ENDPOINT"
+	museappEnvToken    = "WORKPAL_MUSEAPP_TOKEN"
+	museappEnvModel    = "WORKPAL_MUSEAPP_MODEL"
 )
 
 // museappPollInterval is the steady-state cadence for task status/event polls.
@@ -134,16 +134,16 @@ type museappExecuteRequest struct {
 	// daemon and the receptionist share a filesystem — the supported
 	// deployment runs both on the same host.
 	WorkDir string `json:"workdir,omitempty"`
-	// TaskToken is the task-scoped Multica API credential (mat_...). The
-	// receptionist hands it to the worker so the worker can call the Multica
+	// TaskToken is the task-scoped Workpal API credential (mat_...). The
+	// receptionist hands it to the worker so the worker can call the Workpal
 	// API (read issues, post comments) with the same scoped identity a CLI
-	// backend gets via MULTICA_TOKEN. Omitted when the daemon has none.
+	// backend gets via WORKPAL_TOKEN. Omitted when the daemon has none.
 	TaskToken string `json:"task_token,omitempty"`
-	// ServerURL is the Multica API base URL. The worker needs it to know
-	// where to call; CLI backends get it as MULTICA_SERVER_URL.
+	// ServerURL is the Workpal API base URL. The worker needs it to know
+	// where to call; CLI backends get it as WORKPAL_SERVER_URL.
 	ServerURL string `json:"server_url,omitempty"`
 	// WorkspaceID is the workspace UUID. The worker passes it as a query
-	// param on API calls; CLI backends get it as MULTICA_WORKSPACE_ID.
+	// param on API calls; CLI backends get it as WORKPAL_WORKSPACE_ID.
 	WorkspaceID string `json:"workspace_id,omitempty"`
 	// ProtocolVersion is the wire protocol version this backend speaks.
 	// The receptionist MUST validate it BEFORE creating the task and
@@ -223,7 +223,7 @@ func ProbeMuseAppReceptionist(ctx context.Context, endpoint, token string) (stri
 		return "", fmt.Errorf("museapp backend: read health response: %w", err)
 	}
 	if resp.StatusCode == http.StatusUnauthorized || resp.StatusCode == http.StatusForbidden {
-		return "", fmt.Errorf("museapp backend: health check HTTP %d: receptionist rejected credentials (check MULTICA_MUSEAPP_TOKEN)", resp.StatusCode)
+		return "", fmt.Errorf("museapp backend: health check HTTP %d: receptionist rejected credentials (check WORKPAL_MUSEAPP_TOKEN)", resp.StatusCode)
 	}
 	if resp.StatusCode < 200 || resp.StatusCode >= 300 {
 		return "", fmt.Errorf("museapp backend: health check HTTP %d: %s", resp.StatusCode, strings.TrimSpace(string(raw)))
@@ -289,8 +289,8 @@ func (b *museappBackend) Execute(ctx context.Context, prompt string, opts ExecOp
 		TimeoutS:        timeoutS,
 		WorkDir:         opts.Cwd,
 		TaskToken:       opts.TaskToken,
-		ServerURL:       opts.MulticaServerURL,
-		WorkspaceID:     opts.MulticaWorkspaceID,
+		ServerURL:       opts.WorkpalServerURL,
+		WorkspaceID:     opts.WorkpalWorkspaceID,
 		ProtocolVersion: museappProtocolVersion,
 	}, &execResp); err != nil {
 		cancel()
@@ -598,7 +598,7 @@ func (b *museappBackend) doJSONWithConfig(ctx context.Context, mc museappEndpoin
 		return fmt.Errorf("museapp backend: read response: %w", err)
 	}
 	if resp.StatusCode == http.StatusUnauthorized || resp.StatusCode == http.StatusForbidden {
-		return &museappHTTPStatusError{code: resp.StatusCode, message: fmt.Sprintf("museapp backend: %s %s: HTTP %d: receptionist rejected credentials (check MULTICA_MUSEAPP_TOKEN)", method, path, resp.StatusCode)}
+		return &museappHTTPStatusError{code: resp.StatusCode, message: fmt.Sprintf("museapp backend: %s %s: HTTP %d: receptionist rejected credentials (check WORKPAL_MUSEAPP_TOKEN)", method, path, resp.StatusCode)}
 	}
 	if resp.StatusCode < 200 || resp.StatusCode >= 300 {
 		return &museappHTTPStatusError{code: resp.StatusCode, message: fmt.Sprintf("museapp backend: %s %s: HTTP %d: %s", method, path, resp.StatusCode, strings.TrimSpace(string(raw)))}

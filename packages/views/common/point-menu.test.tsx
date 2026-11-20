@@ -29,7 +29,7 @@ describe("shouldOpenRowMenu", () => {
         }}
       >
         <span>plain text</span>
-        <a href="https://multica.ai">a link</a>
+        <a href="https://workpal.invalid">a link</a>
         <img alt="a picture" src="data:," />
         <pre>some code</pre>
         <table><tbody><tr><td>a cell</td></tr></tbody></table>

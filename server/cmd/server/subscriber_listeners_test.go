@@ -8,12 +8,12 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/multica-ai/multica/server/internal/events"
-	"github.com/multica-ai/multica/server/internal/handler"
-	"github.com/multica-ai/multica/server/internal/testutil"
-	"github.com/multica-ai/multica/server/internal/util"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
-	"github.com/multica-ai/multica/server/pkg/protocol"
+	"workpal.local/workpal/server/internal/events"
+	"workpal.local/workpal/server/internal/handler"
+	"workpal.local/workpal/server/internal/testutil"
+	"workpal.local/workpal/server/internal/util"
+	db "workpal.local/workpal/server/pkg/db/generated"
+	"workpal.local/workpal/server/pkg/protocol"
 )
 
 // subscriberTest helpers — reuse the integration test fixtures from TestMain
@@ -127,7 +127,7 @@ func TestSubscriberIssueCreated_CreatorAndAssignee(t *testing.T) {
 	bus := events.New()
 	registerSubscriberListeners(bus, testPool)
 
-	assigneeEmail := "subscriber-assignee-test@multica.ai"
+	assigneeEmail := "subscriber-assignee-test@workpal.invalid"
 	assigneeID := createTestUser(t, assigneeEmail)
 	t.Cleanup(func() { cleanupTestUser(t, assigneeEmail) })
 
@@ -208,7 +208,7 @@ func TestSubscriberIssueCreated_SelfAssign(t *testing.T) {
 
 func TestSubscriberDescriptionMentionsSkipNonRecipients(t *testing.T) {
 	fixture := testutil.New(testPool, testWorkspaceID, testUserID)
-	memberID := fixture.User(t, "Mentioned member", "subscriber-description-mentions@multica.ai")
+	memberID := fixture.User(t, "Mentioned member", "subscriber-description-mentions@workpal.invalid")
 	fixture.Member(t, testWorkspaceID, memberID, "member")
 	agentID := fixture.Agent(t, "Mentioned agent", "")
 	squadID := fixture.Squad(t, "Mentioned squad", agentID)
@@ -287,7 +287,7 @@ func TestSubscriberIssueUpdated_AssigneeChanged(t *testing.T) {
 	bus := events.New()
 	registerSubscriberListeners(bus, testPool)
 
-	assigneeEmail := "subscriber-new-assignee-test@multica.ai"
+	assigneeEmail := "subscriber-new-assignee-test@workpal.invalid"
 	assigneeID := createTestUser(t, assigneeEmail)
 	t.Cleanup(func() { cleanupTestUser(t, assigneeEmail) })
 
@@ -361,7 +361,7 @@ func TestSubscriberCommentCreated_CommenterSubscribed(t *testing.T) {
 	bus := events.New()
 	registerSubscriberListeners(bus, testPool)
 
-	commenterEmail := "subscriber-commenter-test@multica.ai"
+	commenterEmail := "subscriber-commenter-test@workpal.invalid"
 	commenterID := createTestUser(t, commenterEmail)
 	t.Cleanup(func() { cleanupTestUser(t, commenterEmail) })
 

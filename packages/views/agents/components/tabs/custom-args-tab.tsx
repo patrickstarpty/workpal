@@ -8,12 +8,12 @@ import {
   Save,
   Terminal,
   Trash2,
-} from "@multica/ui/icons";
-import type { Agent, RuntimeDevice } from "@multica/core/types";
-import { createSafeId } from "@multica/core/utils";
-import { Button } from "@multica/ui/components/ui/button";
-import { IconButton } from "@multica/ui/components/common/icon-button";
-import { Input } from "@multica/ui/components/ui/input";
+} from "@workpal/ui/icons";
+import type { Agent, RuntimeDevice } from "@workpal/core/types";
+import { createSafeId } from "@workpal/core/utils";
+import { Button } from "@workpal/ui/components/ui/button";
+import { IconButton } from "@workpal/ui/components/common/icon-button";
+import { Input } from "@workpal/ui/components/ui/input";
 import { toast } from "sonner";
 import { useT } from "../../../i18n";
 import {

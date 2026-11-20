@@ -40,8 +40,8 @@ the scenario. No server, daemon or real agent runs are involved.
 Build with a same-origin API URL so all requests reach the synthetic boundary:
 
 ```bash
-NEXT_PUBLIC_API_URL='' pnpm --filter @multica/web build
-NEXT_PUBLIC_API_URL='' pnpm --filter @multica/web exec next start --port 3000
+NEXT_PUBLIC_API_URL='' pnpm --filter @workpal/web build
+NEXT_PUBLIC_API_URL='' pnpm --filter @workpal/web exec next start --port 3000
 PLAYWRIGHT_BASE_URL=http://localhost:3000 pnpm exec playwright test --config=playwright.perf.config.ts agent-recent-work.spec.ts
 ```
 
@@ -133,7 +133,7 @@ inserted locally without dispatching agents. It never mocks HTTP or WebSocket
 responses. Run it explicitly with `PERF_SCENARIO=issue-history`.
 
 Start the API with `make up C=api ARGS="--ephemeral"`. Build each compared ref
-with `NEXT_PUBLIC_API_URL='' NEXT_PUBLIC_WS_URL='' pnpm --filter @multica/web build`,
+with `NEXT_PUBLIC_API_URL='' NEXT_PUBLIC_WS_URL='' pnpm --filter @workpal/web build`,
 then run its production server with `REMOTE_API_URL` pointing at that API.
 Run the **same spec from the head checkout** against each server:
 

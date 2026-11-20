@@ -14,7 +14,7 @@ import (
 
 	"github.com/go-chi/chi/v5"
 	chimw "github.com/go-chi/chi/v5/middleware"
-	api "github.com/multica-ai/multica/server/pkg/publicapi/v1"
+	api "workpal.local/workpal/server/pkg/publicapi/v1"
 )
 
 func allowTokens(header http.Header) []string {
@@ -82,7 +82,7 @@ func TestMethodNotAllowedResources(t *testing.T) {
 			if err := json.Unmarshal(response.Body.Bytes(), &problem); err != nil {
 				t.Fatal(err)
 			}
-			want := api.Problem{Type: "urn:multica:problem:method_not_allowed", Title: "Method Not Allowed", Status: 405, Code: "method_not_allowed", Detail: "method not allowed", RequestID: "request-allow", Error: "method not allowed"}
+			want := api.Problem{Type: "urn:workpal:problem:method_not_allowed", Title: "Method Not Allowed", Status: 405, Code: "method_not_allowed", Detail: "method not allowed", RequestID: "request-allow", Error: "method not allowed"}
 			if !reflect.DeepEqual(problem, want) {
 				t.Fatalf("problem=%+v want %+v", problem, want)
 			}

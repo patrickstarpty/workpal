@@ -9,15 +9,15 @@ import {
   type RefObject,
 } from "react";
 import { motion } from "motion/react";
-import { useReducedMotion } from "@multica/core/appearance";
+import { useReducedMotion } from "@workpal/core/appearance";
 import type { Layout, PanelSize } from "react-resizable-panels";
 import {
   isEditableShortcutTarget,
   shortcutMatchesEvent,
   useShortcut,
-} from "@multica/core/shortcuts";
-import { isImeComposing } from "@multica/core/utils";
-import { cn } from "@multica/ui/lib/utils";
+} from "@workpal/core/shortcuts";
+import { isImeComposing } from "@workpal/core/utils";
+import { cn } from "@workpal/ui/lib/utils";
 
 export const rightSidebarPanelMotionProps = {
   "data-right-sidebar-panel": "true",

@@ -1,8 +1,8 @@
 import { fireEvent, render, screen } from "@testing-library/react";
 import { describe, expect, it, vi } from "vitest";
-import { WorkspaceSlugProvider } from "@multica/core/paths";
-import { buildIssueStatusCatalog } from "@multica/core/issue-statuses";
-import type { InboxItem, IssueStatusEntry } from "@multica/core/types";
+import { WorkspaceSlugProvider } from "@workpal/core/paths";
+import { buildIssueStatusCatalog } from "@workpal/core/issue-statuses";
+import type { InboxItem, IssueStatusEntry } from "@workpal/core/types";
 import { NavigationProvider } from "../../navigation";
 import type { NavigationAdapter } from "../../navigation";
 import { InboxListItem } from "./inbox-list-item";
@@ -15,7 +15,7 @@ import { InboxListItem } from "./inbox-list-item";
 // exercises.
 let catalogEntries: IssueStatusEntry[] | undefined;
 
-vi.mock("@multica/core/issue-statuses/hooks", () => ({
+vi.mock("@workpal/core/issue-statuses/hooks", () => ({
   useIssueStatuses: () => buildIssueStatusCatalog(catalogEntries),
 }));
 

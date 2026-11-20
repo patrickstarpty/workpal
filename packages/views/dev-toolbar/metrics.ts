@@ -4,8 +4,8 @@ import type {
   DevFrameCount,
   DevRealtimeEvent,
   DevRequest,
-} from "@multica/core/diagnostics";
-import type { AgentTask } from "@multica/core/types";
+} from "@workpal/core/diagnostics";
+import type { AgentTask } from "@workpal/core/types";
 
 export type MetricTone = "normal" | "warn" | "bad";
 
@@ -108,7 +108,7 @@ function shellQuote(value: string): string {
 export function curlCommand(apiUrl: string, request: DevRequest, workspaceSlug: string | null): string | null {
   if (request.bodyNote !== null) return null;
   const parts = [`curl -X ${request.method} ${shellQuote(`${apiUrl.replace(/\/$/, "")}${request.path}`)}`];
-  parts.push(`-H "Authorization: Bearer $MULTICA_TOKEN"`);
+  parts.push(`-H "Authorization: Bearer $WORKPAL_TOKEN"`);
   if (workspaceSlug) parts.push(`-H ${shellQuote(`X-Workspace-Slug: ${workspaceSlug}`)}`);
   if (request.body !== null) {
     parts.push(`-H 'Content-Type: application/json'`);

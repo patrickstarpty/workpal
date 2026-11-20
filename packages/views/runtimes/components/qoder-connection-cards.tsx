@@ -12,7 +12,7 @@ import {
   RefreshCw,
   ShieldCheck,
   Trash2,
-} from "@multica/ui/icons";
+} from "@workpal/ui/icons";
 import { toast } from "sonner";
 import {
   MAX_CONCURRENCY,
@@ -24,7 +24,7 @@ import {
   useSaveQoder,
   type QoderConnection,
   type QoderInput,
-} from "@multica/core/runtimes/qoder";
+} from "@workpal/core/runtimes/qoder";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -34,10 +34,10 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@multica/ui/components/ui/alert-dialog";
-import { DeferredTooltip } from "@multica/ui/components/common/deferred-tooltip";
-import { IconButton } from "@multica/ui/components/common/icon-button";
-import { Button } from "@multica/ui/components/ui/button";
+} from "@workpal/ui/components/ui/alert-dialog";
+import { DeferredTooltip } from "@workpal/ui/components/common/deferred-tooltip";
+import { IconButton } from "@workpal/ui/components/common/icon-button";
+import { Button } from "@workpal/ui/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -45,28 +45,28 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "@multica/ui/components/ui/dialog";
+} from "@workpal/ui/components/ui/dialog";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@multica/ui/components/ui/dropdown-menu";
-import { Input } from "@multica/ui/components/ui/input";
+} from "@workpal/ui/components/ui/dropdown-menu";
+import { Input } from "@workpal/ui/components/ui/input";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@multica/ui/components/ui/popover";
+} from "@workpal/ui/components/ui/popover";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@multica/ui/components/ui/select";
-import { cn } from "@multica/ui/lib/utils";
+} from "@workpal/ui/components/ui/select";
+import { cn } from "@workpal/ui/lib/utils";
 import { openExternal } from "../../platform";
 import { useT } from "../../i18n";
 import { regionOf, RegionToggle } from "./qoder-connect-form";

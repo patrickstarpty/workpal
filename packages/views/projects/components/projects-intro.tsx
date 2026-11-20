@@ -8,12 +8,12 @@ import {
   FolderGit,
   FolderKanban,
   Plus,
-} from "@multica/ui/icons";
-import { Button } from "@multica/ui/components/ui/button";
-import { ActorAvatar } from "@multica/ui/components/common/actor-avatar";
-import { formatAvatarEmoji } from "@multica/ui/lib/avatar-emoji";
-import { cn } from "@multica/ui/lib/utils";
-import { PROJECT_STATUS_CONFIG } from "@multica/core/projects/config";
+} from "@workpal/ui/icons";
+import { Button } from "@workpal/ui/components/ui/button";
+import { ActorAvatar } from "@workpal/ui/components/common/actor-avatar";
+import { formatAvatarEmoji } from "@workpal/ui/lib/avatar-emoji";
+import { cn } from "@workpal/ui/lib/utils";
+import { PROJECT_STATUS_CONFIG } from "@workpal/core/projects/config";
 import {
   FeatureIntro,
   FeatureIntroCarousel,

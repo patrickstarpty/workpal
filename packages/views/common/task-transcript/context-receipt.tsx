@@ -2,17 +2,17 @@
 
 import { Fragment } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { taskContextReceiptOptions } from "@multica/core/agents";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { taskContextReceiptOptions } from "@workpal/core/agents";
 import type {
   ContextReceipt,
   ContextReceiptSource,
-} from "@multica/core/types/agent";
-import { Layers, TriangleAlert } from "@multica/ui/icons";
-import { cn } from "@multica/ui/lib/utils";
-import { IconButton } from "@multica/ui/components/common/icon-button";
-import { Popover, PopoverContent, PopoverTrigger } from "@multica/ui/components/ui/popover";
-import { providerDisplayName } from "@multica/core/runtimes";
+} from "@workpal/core/types/agent";
+import { Layers, TriangleAlert } from "@workpal/ui/icons";
+import { cn } from "@workpal/ui/lib/utils";
+import { IconButton } from "@workpal/ui/components/common/icon-button";
+import { Popover, PopoverContent, PopoverTrigger } from "@workpal/ui/components/ui/popover";
+import { providerDisplayName } from "@workpal/core/runtimes";
 import { useT } from "../../i18n";
 import { formatBytes } from "../format-bytes";
 

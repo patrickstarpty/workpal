@@ -2,9 +2,9 @@ import { describe, it, expect, vi, beforeEach } from "vitest";
 import { render, renderHook, waitFor } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import type { ReactNode } from "react";
-import { setApiInstance } from "@multica/core/api";
-import { ApiError } from "@multica/core/api/client";
-import type { ApiClient } from "@multica/core/api/client";
+import { setApiInstance } from "@workpal/core/api";
+import { ApiError } from "@workpal/core/api/client";
+import type { ApiClient } from "@workpal/core/api/client";
 import { NavigationProvider } from "../../navigation";
 import type { NavigationAdapter } from "../../navigation";
 import { IssueDetail, IssueDetailSkeleton } from "./issue-detail";
@@ -15,13 +15,13 @@ import {
   useCanonicalIssueUrl,
 } from "./issue-detail-route";
 
-vi.mock("@multica/core/hooks", () => ({
+vi.mock("@workpal/core/hooks", () => ({
   useWorkspaceId: () => "ws-1",
 }));
 
-vi.mock("@multica/core/paths", async () => {
-  const actual = await vi.importActual<typeof import("@multica/core/paths")>(
-    "@multica/core/paths",
+vi.mock("@workpal/core/paths", async () => {
+  const actual = await vi.importActual<typeof import("@workpal/core/paths")>(
+    "@workpal/core/paths",
   );
   return {
     ...actual,
@@ -41,7 +41,7 @@ function wrapper({ children }: { children: ReactNode }) {
     pathname: "/acme/issues/x",
     searchParams: new URLSearchParams(),
     hash: "",
-    getShareableUrl: (p: string) => `https://app.multica.com${p}`,
+    getShareableUrl: (p: string) => `https://workpal.invalid${p}`,
   };
   return <NavigationProvider value={adapter}>{children}</NavigationProvider>;
 }
@@ -185,7 +185,7 @@ describe("IssueDetailRoute with an identifier that names no issue", () => {
             pathname: "/acme/issues/ZZZ-134",
             searchParams: new URLSearchParams(),
             hash: "",
-            getShareableUrl: (p: string) => `https://app.multica.com${p}`,
+            getShareableUrl: (p: string) => `https://workpal.invalid${p}`,
           }}
         >
           <IssueDetailRoute routeId="ZZZ-134" />
@@ -207,7 +207,7 @@ describe("IssueDetailRoute with an identifier that names no issue", () => {
             pathname: "/acme/issues/ZZZ-134",
             searchParams: new URLSearchParams(),
             hash: "",
-            getShareableUrl: (p: string) => `https://app.multica.com${p}`,
+            getShareableUrl: (p: string) => `https://workpal.invalid${p}`,
           }}
         >
           <IssueDetailRoute routeId="ZZZ-134" />
@@ -229,7 +229,7 @@ describe("IssueDetailRoute loading sidebar layout", () => {
     [{ content: 80, sidebar: 20 }, true],
     [{ content: 100, sidebar: 0 }, false],
   ])("respects saved layout %j while resolving", (layout, sidebarVisible) => {
-    const storageKey = "react-resizable-panels:multica_issue_detail_layout";
+    const storageKey = "react-resizable-panels:workpal_issue_detail_layout";
     if (layout) localStorage.setItem(storageKey, JSON.stringify(layout));
     else localStorage.removeItem(storageKey);
     const getIssue = vi.fn(() => new Promise<never>(() => {}));
@@ -250,7 +250,7 @@ describe("IssueDetailRoute loading sidebar layout", () => {
 
 describe("IssueDetailSkeleton embedded layouts", () => {
   it("reads the host layout without borrowing the page layout", () => {
-    const pageKey = "react-resizable-panels:multica_issue_detail_layout";
+    const pageKey = "react-resizable-panels:workpal_issue_detail_layout";
     const hostKey = "react-resizable-panels:embedded-detail";
     localStorage.setItem(pageKey, JSON.stringify({ content: 80, sidebar: 20 }));
     localStorage.setItem(hostKey, JSON.stringify({ content: 100, sidebar: 0 }));
@@ -262,7 +262,7 @@ describe("IssueDetailSkeleton embedded layouts", () => {
   });
 
   it("keeps sidebar-free surfaces clear even when the saved layout is open", () => {
-    const storageKey = "react-resizable-panels:multica_issue_detail_layout";
+    const storageKey = "react-resizable-panels:workpal_issue_detail_layout";
     localStorage.setItem(storageKey, JSON.stringify({ content: 80, sidebar: 20 }));
     const view = render(wrapper({ children: <IssueDetailSkeleton sidebar={false} /> }));
     expect(view.container.querySelector(".w-80.border-l")).toBeNull();

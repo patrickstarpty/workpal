@@ -4,7 +4,7 @@ import (
 	"errors"
 	"net/http"
 
-	"github.com/multica-ai/multica/server/internal/service"
+	"workpal.local/workpal/server/internal/service"
 )
 
 func (h *Handler) writeChatSubmissionError(w http.ResponseWriter, err error) {

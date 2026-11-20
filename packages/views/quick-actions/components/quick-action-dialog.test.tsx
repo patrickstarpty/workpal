@@ -3,11 +3,11 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 import { renderWithI18n } from "../../test/i18n";
 
 const state = vi.hoisted(() => ({ role: "member" as string, create: vi.fn() }));
-vi.mock("@multica/core/hooks", () => ({ useWorkspaceId: () => "ws-1" }));
-vi.mock("@multica/core/permissions", () => ({ useCurrentMember: () => ({ role: state.role }) }));
-vi.mock("@multica/core/quick-actions", () => ({ useCreateQuickAction: () => ({ mutateAsync: state.create }) }));
+vi.mock("@workpal/core/hooks", () => ({ useWorkspaceId: () => "ws-1" }));
+vi.mock("@workpal/core/permissions", () => ({ useCurrentMember: () => ({ role: state.role }) }));
+vi.mock("@workpal/core/quick-actions", () => ({ useCreateQuickAction: () => ({ mutateAsync: state.create }) }));
 vi.mock("../../autopilots/components/pickers/agent-picker", () => ({ AgentPicker: () => null }));
-import type { QuickAction } from "@multica/core/types";
+import type { QuickAction } from "@workpal/core/types";
 import { CreateQuickActionDialog, QuickActionDialog } from "./quick-action-dialog";
 
 describe("shared quick action creation", () => {

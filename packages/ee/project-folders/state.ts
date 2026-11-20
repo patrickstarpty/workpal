@@ -1,7 +1,7 @@
 import { useCallback, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { create } from "zustand";
-import type { ProjectFolders } from "@multica/views/extensions";
+import type { ProjectFolders } from "@workpal/views/extensions";
 import { projectFolderListOptions, useFileProject, type ProjectFolder } from "./data";
 import { useFoldersT } from "./i18n";
 

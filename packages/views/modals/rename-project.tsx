@@ -9,11 +9,11 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "@multica/ui/components/ui/dialog";
-import { Button } from "@multica/ui/components/ui/button";
-import { Input } from "@multica/ui/components/ui/input";
-import { Spinner } from "@multica/ui/components/ui/spinner";
-import { useUpdateProject } from "@multica/core/projects/mutations";
+} from "@workpal/ui/components/ui/dialog";
+import { Button } from "@workpal/ui/components/ui/button";
+import { Input } from "@workpal/ui/components/ui/input";
+import { Spinner } from "@workpal/ui/components/ui/spinner";
+import { useUpdateProject } from "@workpal/core/projects/mutations";
 import { useT } from "../i18n";
 
 /**

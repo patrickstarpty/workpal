@@ -2,10 +2,10 @@ import type { ReactNode } from "react";
 import { act, fireEvent, render as rtlRender, screen } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { useSearchStore } from "@multica/core/command-bar";
-import { configStore } from "@multica/core/config";
-import { Command, Globe, Terminal } from "@multica/ui/icons";
-import type { User } from "@multica/core/types";
+import { useSearchStore } from "@workpal/core/command-bar";
+import { configStore } from "@workpal/core/config";
+import { Command, Globe, Terminal } from "@workpal/ui/icons";
+import type { User } from "@workpal/core/types";
 import enLayout from "../locales/en/layout.json";
 import { HelpLauncher } from "../layout/help-launcher";
 import type { WhatsNewRelease } from "./releases";
@@ -22,20 +22,20 @@ const authStore = vi.hoisted(() => {
   return create<{ user: Partial<User> | null }>(() => ({ user: null }));
 });
 
-vi.mock("@multica/core/auth", () => ({ useAuthStore: authStore }));
+vi.mock("@workpal/core/auth", () => ({ useAuthStore: authStore }));
 
-vi.mock("@multica/core/whats-new", async () => {
-  const actual = await vi.importActual<typeof import("@multica/core/whats-new")>("@multica/core/whats-new");
+vi.mock("@workpal/core/whats-new", async () => {
+  const actual = await vi.importActual<typeof import("@workpal/core/whats-new")>("@workpal/core/whats-new");
   return { ...actual, markWhatsNewSeen: mocks.markWhatsNewSeen };
 });
 
-vi.mock("@multica/core/paths", () => ({
+vi.mock("@workpal/core/paths", () => ({
   useWorkspacePaths: () => ({ runtimes: () => "/acme/runtimes", settings: () => "/acme/settings" }),
 }));
 
 vi.mock("../navigation", () => ({ useNavigation: () => ({ push: mocks.push }) }));
 
-vi.mock("@multica/ui/components/common/tooltip-hint", () => ({
+vi.mock("@workpal/ui/components/common/tooltip-hint", () => ({
   TooltipHint: ({ children }: { children: ReactNode }) => <>{children}</>,
 }));
 
@@ -191,7 +191,7 @@ describe("What's new from the Help menu", () => {
     expect(release("0.2.0")).not.toHaveTextContent("New");
     expect(screen.getByRole("link", { name: /v0.2.0 release notes/ })).toHaveAttribute(
       "href",
-      "https://multica.ai/changelog#release-0-2-0",
+      "https://workpal.invalid/changelog#release-0-2-0",
     );
   });
 

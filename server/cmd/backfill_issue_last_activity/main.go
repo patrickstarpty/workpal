@@ -23,8 +23,8 @@ import (
 	"time"
 
 	"github.com/jackc/pgx/v5/pgxpool"
-	"github.com/multica-ai/multica/server/internal/issueactivitybackfill"
-	"github.com/multica-ai/multica/server/internal/logger"
+	"workpal.local/workpal/server/internal/issueactivitybackfill"
+	"workpal.local/workpal/server/internal/logger"
 )
 
 const (
@@ -84,7 +84,7 @@ func run() error {
 	defer stop()
 	dbURL := os.Getenv("DATABASE_URL")
 	if dbURL == "" {
-		dbURL = "postgres://multica:multica@localhost:5432/multica?sslmode=disable"
+		dbURL = "postgres://workpal:workpal@localhost:5432/workpal?sslmode=disable"
 	}
 	pool, err := pgxpool.New(ctx, dbURL)
 	if err != nil {

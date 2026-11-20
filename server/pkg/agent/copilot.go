@@ -399,7 +399,7 @@ func (b *copilotBackend) Execute(ctx context.Context, prompt string, opts ExecOp
 	// Without it the run still works; it just reports no usage, as before.
 	usageFile := ""
 	if copilotUsageFileSupported(b.cfg) {
-		if dir, err := os.MkdirTemp("", "multica-copilot-usage-"); err != nil {
+		if dir, err := os.MkdirTemp("", "workpal-copilot-usage-"); err != nil {
 			b.cfg.Logger.Warn("copilot usage file unavailable", "error", err)
 		} else {
 			usageFile = filepath.Join(dir, "usage.json")

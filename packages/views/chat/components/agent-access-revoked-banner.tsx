@@ -1,7 +1,7 @@
 "use client";
 
-import { Lock } from "@multica/ui/icons";
-import { cn } from "@multica/ui/lib/utils";
+import { Lock } from "@workpal/ui/icons";
+import { cn } from "@workpal/ui/lib/utils";
 import { CHAT_COLUMN, CHAT_GUTTER } from "./chat-column";
 import { useT } from "../../i18n";
 

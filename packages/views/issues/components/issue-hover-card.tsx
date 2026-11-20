@@ -1,7 +1,7 @@
 "use client";
 
-import { issueStatusCategory } from "@multica/core/issues";
-import { useIssueStatuses } from "@multica/core/issue-statuses/hooks";
+import { issueStatusCategory } from "@workpal/core/issues";
+import { useIssueStatuses } from "@workpal/core/issue-statuses/hooks";
 import { useStatusLabel } from "./../utils/status-label";
 import { useCallback, type ReactNode } from "react";
 import { useQuery } from "@tanstack/react-query";
@@ -14,23 +14,23 @@ import {
   Tag,
   UserRound,
   type IconComponent,
-} from "@multica/ui/icons";
-import { childIssueProgressOptions, issueDetailOptions } from "@multica/core/issues/queries";
-import { formatDateOnly, isPastDateOnly } from "@multica/core/issues/date";
-import { agentTaskSnapshotOptions } from "@multica/core/agents";
-import { issuePullRequestsOptions } from "@multica/core/github";
-import { projectListOptions } from "@multica/core/projects";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { useActorName } from "@multica/core/workspace/hooks";
-import type { AgentTask, GitHubPullRequest, Issue } from "@multica/core/types";
+} from "@workpal/ui/icons";
+import { childIssueProgressOptions, issueDetailOptions } from "@workpal/core/issues/queries";
+import { formatDateOnly, isPastDateOnly } from "@workpal/core/issues/date";
+import { agentTaskSnapshotOptions } from "@workpal/core/agents";
+import { issuePullRequestsOptions } from "@workpal/core/github";
+import { projectListOptions } from "@workpal/core/projects";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { useActorName } from "@workpal/core/workspace/hooks";
+import type { AgentTask, GitHubPullRequest, Issue } from "@workpal/core/types";
 import {
   HoverCard,
   HoverCardTrigger,
   HoverCardContent,
-} from "@multica/ui/components/ui/hover-card";
-import { ShimmerText } from "@multica/ui/components/common/shimmer-text";
-import { Skeleton } from "@multica/ui/components/ui/skeleton";
-import { cn } from "@multica/ui/lib/utils";
+} from "@workpal/ui/components/ui/hover-card";
+import { ShimmerText } from "@workpal/ui/components/common/shimmer-text";
+import { Skeleton } from "@workpal/ui/components/ui/skeleton";
+import { cn } from "@workpal/ui/lib/utils";
 import { useLocale, useT, useTimeAgo } from "../../i18n";
 import { ActorAvatar } from "../../common/actor-avatar";
 import { LabelChip } from "../../labels/label-chip";

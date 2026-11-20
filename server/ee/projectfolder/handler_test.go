@@ -15,14 +15,14 @@ import (
 	"github.com/google/uuid"
 	"github.com/jackc/pgx/v5/pgxpool"
 
-	"github.com/multica-ai/multica/server/internal/analytics"
-	"github.com/multica-ai/multica/server/internal/events"
-	"github.com/multica-ai/multica/server/internal/extension"
-	"github.com/multica-ai/multica/server/internal/handler"
-	"github.com/multica-ai/multica/server/internal/realtime"
-	"github.com/multica-ai/multica/server/internal/service"
-	"github.com/multica-ai/multica/server/internal/testutil"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
+	"workpal.local/workpal/server/internal/analytics"
+	"workpal.local/workpal/server/internal/events"
+	"workpal.local/workpal/server/internal/extension"
+	"workpal.local/workpal/server/internal/handler"
+	"workpal.local/workpal/server/internal/realtime"
+	"workpal.local/workpal/server/internal/service"
+	"workpal.local/workpal/server/internal/testutil"
+	db "workpal.local/workpal/server/pkg/db/generated"
 )
 
 var (
@@ -36,7 +36,7 @@ func TestMain(m *testing.M) {
 	dbURL := os.Getenv("DATABASE_URL")
 	dbConfigured := dbURL != ""
 	if !dbConfigured {
-		dbURL = "postgres://multica:multica@localhost:5432/multica?sslmode=disable"
+		dbURL = "postgres://workpal:workpal@localhost:5432/workpal?sslmode=disable"
 	}
 	pool, err := pgxpool.New(ctx, dbURL)
 	if err == nil {
@@ -72,8 +72,8 @@ func newEnv(t *testing.T) env {
 	t.Helper()
 	fx := testutil.New(testPool, "", "")
 	suffix := uuid.NewString()[:8]
-	ownerID := fx.User(t, "Folder Owner", "folder-owner-"+suffix+"@multica.ai")
-	memberID := fx.User(t, "Folder Member", "folder-member-"+suffix+"@multica.ai")
+	ownerID := fx.User(t, "Folder Owner", "folder-owner-"+suffix+"@workpal.invalid")
+	memberID := fx.User(t, "Folder Member", "folder-member-"+suffix+"@workpal.invalid")
 	workspaceID := fx.Workspace(t, "Folder Tests", "folder-tests-"+suffix)
 	fx.Member(t, workspaceID, ownerID, "owner")
 	fx.Member(t, workspaceID, memberID, "member")

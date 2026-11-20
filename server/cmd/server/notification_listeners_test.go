@@ -6,11 +6,11 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/multica-ai/multica/server/internal/events"
-	"github.com/multica-ai/multica/server/internal/handler"
-	"github.com/multica-ai/multica/server/internal/util"
-	db "github.com/multica-ai/multica/server/pkg/db/generated"
-	"github.com/multica-ai/multica/server/pkg/protocol"
+	"workpal.local/workpal/server/internal/events"
+	"workpal.local/workpal/server/internal/handler"
+	"workpal.local/workpal/server/internal/util"
+	db "workpal.local/workpal/server/pkg/db/generated"
+	"workpal.local/workpal/server/pkg/protocol"
 )
 
 // notificationTest helpers — reuse the integration test fixtures from TestMain
@@ -120,7 +120,7 @@ func TestNotification_IssueCreated_AssigneeNotified(t *testing.T) {
 	queries := db.New(testPool)
 	bus := newNotificationBus(t, queries)
 
-	assigneeEmail := "notif-assignee-created@multica.ai"
+	assigneeEmail := "notif-assignee-created@workpal.invalid"
 	assigneeID := createNotificationMember(t, assigneeEmail)
 	t.Cleanup(func() { cleanupTestUser(t, assigneeEmail) })
 
@@ -280,11 +280,11 @@ func TestNotification_StatusChanged(t *testing.T) {
 	bus := newNotificationBus(t, queries)
 
 	// Create two extra users as subscribers
-	sub1Email := "notif-sub1-status@multica.ai"
+	sub1Email := "notif-sub1-status@workpal.invalid"
 	sub1ID := createNotificationMember(t, sub1Email)
 	t.Cleanup(func() { cleanupTestUser(t, sub1Email) })
 
-	sub2Email := "notif-sub2-status@multica.ai"
+	sub2Email := "notif-sub2-status@workpal.invalid"
 	sub2ID := createNotificationMember(t, sub2Email)
 	t.Cleanup(func() { cleanupTestUser(t, sub2Email) })
 	enableStatusChanges(t, sub1ID, sub2ID)
@@ -361,22 +361,22 @@ func TestNotification_StatusChanged_Muted(t *testing.T) {
 	queries := db.New(testPool)
 	bus := newNotificationBus(t, queries)
 
-	defaultEmail := "notif-default-status@multica.ai"
+	defaultEmail := "notif-default-status@workpal.invalid"
 	defaultID := createNotificationMember(t, defaultEmail)
 	t.Cleanup(func() { cleanupTestUser(t, defaultEmail) })
 
-	mutedEmail := "notif-muted-status@multica.ai"
+	mutedEmail := "notif-muted-status@workpal.invalid"
 	mutedID := createNotificationMember(t, mutedEmail)
 	t.Cleanup(func() { cleanupTestUser(t, mutedEmail) })
 	setNotificationPref(t, mutedID, "status_changes", "muted")
 
 	// A stored row without the key still applies the default.
-	otherPrefEmail := "notif-other-pref-status@multica.ai"
+	otherPrefEmail := "notif-other-pref-status@workpal.invalid"
 	otherPrefID := createNotificationMember(t, otherPrefEmail)
 	t.Cleanup(func() { cleanupTestUser(t, otherPrefEmail) })
 	setNotificationPref(t, otherPrefID, "comments", "muted")
 
-	optedInEmail := "notif-opted-in-status@multica.ai"
+	optedInEmail := "notif-opted-in-status@workpal.invalid"
 	optedInID := createNotificationMember(t, optedInEmail)
 	t.Cleanup(func() { cleanupTestUser(t, optedInEmail) })
 	enableStatusChanges(t, optedInID)
@@ -423,7 +423,7 @@ func TestNotification_ReactionAdded_Muted(t *testing.T) {
 		{"comments muted", `{"comments":"muted"}`, 1},
 	} {
 		t.Run(tc.name, func(t *testing.T) {
-			email := "notif-reaction-" + strings.ReplaceAll(tc.name, " ", "-") + "@multica.ai"
+			email := "notif-reaction-" + strings.ReplaceAll(tc.name, " ", "-") + "@workpal.invalid"
 			creatorID := createNotificationMember(t, email)
 			t.Cleanup(func() { cleanupTestUser(t, email) })
 
@@ -470,15 +470,15 @@ func TestNotification_CommentMentionIsOneNotification(t *testing.T) {
 	queries := db.New(testPool)
 	bus := newNotificationBus(t, queries)
 
-	mentionedEmail := "notif-comment-mentioned@multica.ai"
+	mentionedEmail := "notif-comment-mentioned@workpal.invalid"
 	mentionedID := createNotificationMember(t, mentionedEmail)
 	t.Cleanup(func() { cleanupTestUser(t, mentionedEmail) })
 
-	mutedEmail := "notif-comment-mentions-muted@multica.ai"
+	mutedEmail := "notif-comment-mentions-muted@workpal.invalid"
 	mutedID := createNotificationMember(t, mutedEmail)
 	t.Cleanup(func() { cleanupTestUser(t, mutedEmail) })
 
-	otherEmail := "notif-comment-other@multica.ai"
+	otherEmail := "notif-comment-other@workpal.invalid"
 	otherID := createNotificationMember(t, otherEmail)
 	t.Cleanup(func() { cleanupTestUser(t, otherEmail) })
 
@@ -547,11 +547,11 @@ func TestNotification_CommentCreated(t *testing.T) {
 	queries := db.New(testPool)
 	bus := newNotificationBus(t, queries)
 
-	commenterEmail := "notif-commenter@multica.ai"
+	commenterEmail := "notif-commenter@workpal.invalid"
 	commenterID := createNotificationMember(t, commenterEmail)
 	t.Cleanup(func() { cleanupTestUser(t, commenterEmail) })
 
-	sub1Email := "notif-sub1-comment@multica.ai"
+	sub1Email := "notif-sub1-comment@workpal.invalid"
 	sub1ID := createNotificationMember(t, sub1Email)
 	t.Cleanup(func() { cleanupTestUser(t, sub1Email) })
 
@@ -627,13 +627,13 @@ func TestNotification_SystemCommentSkipsInboxAndMentions(t *testing.T) {
 	bus := newNotificationBus(t, queries)
 
 	// Subscriber on the issue who would normally receive new_comment.
-	subEmail := "notif-system-comment-sub@multica.ai"
+	subEmail := "notif-system-comment-sub@workpal.invalid"
 	subID := createNotificationMember(t, subEmail)
 	t.Cleanup(func() { cleanupTestUser(t, subEmail) })
 
 	// A second member whose UUID we will smuggle into the system-comment
 	// body as a fake mention to prove the listener does not parse it.
-	targetEmail := "notif-system-comment-target@multica.ai"
+	targetEmail := "notif-system-comment-target@workpal.invalid"
 	targetID := createNotificationMember(t, targetEmail)
 	t.Cleanup(func() { cleanupTestUser(t, targetEmail) })
 
@@ -721,15 +721,15 @@ func TestNotification_AssigneeChanged(t *testing.T) {
 	queries := db.New(testPool)
 	bus := newNotificationBus(t, queries)
 
-	oldAssigneeEmail := "notif-old-assignee@multica.ai"
+	oldAssigneeEmail := "notif-old-assignee@workpal.invalid"
 	oldAssigneeID := createNotificationMember(t, oldAssigneeEmail)
 	t.Cleanup(func() { cleanupTestUser(t, oldAssigneeEmail) })
 
-	newAssigneeEmail := "notif-new-assignee@multica.ai"
+	newAssigneeEmail := "notif-new-assignee@workpal.invalid"
 	newAssigneeID := createNotificationMember(t, newAssigneeEmail)
 	t.Cleanup(func() { cleanupTestUser(t, newAssigneeEmail) })
 
-	bystanderEmail := "notif-bystander@multica.ai"
+	bystanderEmail := "notif-bystander@workpal.invalid"
 	bystanderID := createNotificationMember(t, bystanderEmail)
 	t.Cleanup(func() { cleanupTestUser(t, bystanderEmail) })
 
@@ -907,7 +907,7 @@ func TestNotification_PriorityChanged(t *testing.T) {
 	queries := db.New(testPool)
 	bus := newNotificationBus(t, queries)
 
-	sub1Email := "notif-sub1-priority@multica.ai"
+	sub1Email := "notif-sub1-priority@workpal.invalid"
 	sub1ID := createNotificationMember(t, sub1Email)
 	t.Cleanup(func() { cleanupTestUser(t, sub1Email) })
 
@@ -972,7 +972,7 @@ func TestNotification_DueDateChanged(t *testing.T) {
 	queries := db.New(testPool)
 	bus := newNotificationBus(t, queries)
 
-	sub1Email := "notif-sub1-duedate@multica.ai"
+	sub1Email := "notif-sub1-duedate@workpal.invalid"
 	sub1ID := createNotificationMember(t, sub1Email)
 	t.Cleanup(func() { cleanupTestUser(t, sub1Email) })
 
@@ -1033,7 +1033,7 @@ func TestNotification_StartDateChanged(t *testing.T) {
 	queries := db.New(testPool)
 	bus := newNotificationBus(t, queries)
 
-	sub1Email := "notif-sub1-startdate@multica.ai"
+	sub1Email := "notif-sub1-startdate@workpal.invalid"
 	sub1ID := createNotificationMember(t, sub1Email)
 	t.Cleanup(func() { cleanupTestUser(t, sub1Email) })
 
@@ -1093,7 +1093,7 @@ func TestNotification_ParentBubble_StatusChanged(t *testing.T) {
 	queries := db.New(testPool)
 	bus := newNotificationBus(t, queries)
 
-	parentSubEmail := "notif-parent-sub-status@multica.ai"
+	parentSubEmail := "notif-parent-sub-status@workpal.invalid"
 	parentSubID := createNotificationMember(t, parentSubEmail)
 	t.Cleanup(func() { cleanupTestUser(t, parentSubEmail) })
 	enableStatusChanges(t, parentSubID)
@@ -1157,11 +1157,11 @@ func TestNotification_ParentBubble_NewCommentSuppressed(t *testing.T) {
 	queries := db.New(testPool)
 	bus := newNotificationBus(t, queries)
 
-	commenterEmail := "notif-parent-bubble-commenter@multica.ai"
+	commenterEmail := "notif-parent-bubble-commenter@workpal.invalid"
 	commenterID := createNotificationMember(t, commenterEmail)
 	t.Cleanup(func() { cleanupTestUser(t, commenterEmail) })
 
-	parentSubEmail := "notif-parent-sub-comment@multica.ai"
+	parentSubEmail := "notif-parent-sub-comment@workpal.invalid"
 	parentSubID := createNotificationMember(t, parentSubEmail)
 	t.Cleanup(func() { cleanupTestUser(t, parentSubEmail) })
 
@@ -1209,7 +1209,7 @@ func TestNotification_ParentBubble_PriorityChangeSuppressed(t *testing.T) {
 	queries := db.New(testPool)
 	bus := newNotificationBus(t, queries)
 
-	parentSubEmail := "notif-parent-sub-priority@multica.ai"
+	parentSubEmail := "notif-parent-sub-priority@workpal.invalid"
 	parentSubID := createNotificationMember(t, parentSubEmail)
 	t.Cleanup(func() { cleanupTestUser(t, parentSubEmail) })
 
@@ -1319,7 +1319,7 @@ func TestNotification_StatusChange_ArchivesStaleTaskFailed(t *testing.T) {
 	queries := db.New(testPool)
 	bus := newNotificationBus(t, queries)
 
-	subEmail := "notif-archive-task-failed-sub@multica.ai"
+	subEmail := "notif-archive-task-failed-sub@workpal.invalid"
 	subID := createNotificationMember(t, subEmail)
 	t.Cleanup(func() { cleanupTestUser(t, subEmail) })
 
@@ -1441,7 +1441,7 @@ func TestNotification_StatusChange_DoneArchivesIssueInbox(t *testing.T) {
 	queries := db.New(testPool)
 	bus := newNotificationBus(t, queries)
 
-	subEmail := "notif-done-archive-sub@multica.ai"
+	subEmail := "notif-done-archive-sub@workpal.invalid"
 	subID := createNotificationMember(t, subEmail)
 	t.Cleanup(func() { cleanupTestUser(t, subEmail) })
 	enableStatusChanges(t, subID)
@@ -1503,7 +1503,7 @@ func TestNotification_StatusChange_DoneArchivesIssueInbox(t *testing.T) {
 func TestNotification_StatusChange_DoneKeepsInboxWhenNotArchivedByActor(t *testing.T) {
 	queries := db.New(testPool)
 
-	actorEmail := "notif-done-keep-actor@multica.ai"
+	actorEmail := "notif-done-keep-actor@workpal.invalid"
 	actorID := createNotificationMember(t, actorEmail)
 	t.Cleanup(func() { cleanupTestUser(t, actorEmail) })
 	if _, err := testPool.Exec(context.Background(), `

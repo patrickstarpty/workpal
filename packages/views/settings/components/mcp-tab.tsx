@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { ArrowRight, Blocks, Loader2, Plug, Plus, Server } from "@multica/ui/icons";
+import { ArrowRight, Blocks, Loader2, Plug, Plus, Server } from "@workpal/ui/icons";
 import { useQuery } from "@tanstack/react-query";
 import { toast } from "sonner";
 import {
@@ -13,21 +13,21 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@multica/ui/components/ui/alert-dialog";
-import { Badge } from "@multica/ui/components/ui/badge";
-import { Button } from "@multica/ui/components/ui/button";
-import { useCurrentWorkspace } from "@multica/core/paths";
-import { useCurrentMember } from "@multica/core/permissions";
-import { useFeatureEnabled } from "@multica/core/config";
-import { PLUGINS_V1_FLAG } from "@multica/core/feature-flags";
-import { cn } from "@multica/ui/lib/utils";
-import { workspaceMcpServersOptions } from "@multica/core/workspace/queries";
+} from "@workpal/ui/components/ui/alert-dialog";
+import { Badge } from "@workpal/ui/components/ui/badge";
+import { Button } from "@workpal/ui/components/ui/button";
+import { useCurrentWorkspace } from "@workpal/core/paths";
+import { useCurrentMember } from "@workpal/core/permissions";
+import { useFeatureEnabled } from "@workpal/core/config";
+import { PLUGINS_V1_FLAG } from "@workpal/core/feature-flags";
+import { cn } from "@workpal/ui/lib/utils";
+import { workspaceMcpServersOptions } from "@workpal/core/workspace/queries";
 import {
   useCreateWorkspaceMcpServer,
   useDeleteWorkspaceMcpServer,
   useUpdateWorkspaceMcpServer,
-} from "@multica/core/workspace/mutations";
-import type { WorkspaceMcpServer } from "@multica/core/types";
+} from "@workpal/core/workspace/mutations";
+import type { WorkspaceMcpServer } from "@workpal/core/types";
 import { McpServerDialog } from "../../agents/components/tabs/mcp-server-dialog";
 import type { ManagedMcpServer } from "../../agents/components/tabs/mcp-config-model";
 import { McpServerRow } from "../../common/mcp-server-row";

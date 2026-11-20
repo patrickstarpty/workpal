@@ -3,11 +3,11 @@
 import { useCallback, useEffect, useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
-import type { MemberWithUser } from "@multica/core/types";
-import { api } from "@multica/core/api";
-import { useWorkspaceId } from "@multica/core/hooks";
-import { workspaceKeys } from "@multica/core/workspace/queries";
-import { Button } from "@multica/ui/components/ui/button";
+import type { MemberWithUser } from "@workpal/core/types";
+import { api } from "@workpal/core/api";
+import { useWorkspaceId } from "@workpal/core/hooks";
+import { workspaceKeys } from "@workpal/core/workspace/queries";
+import { Button } from "@workpal/ui/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -15,8 +15,8 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "@multica/ui/components/ui/dialog";
-import { Archive, ArchiveRestore, Loader2 } from "@multica/ui/icons";
+} from "@workpal/ui/components/ui/dialog";
+import { Archive, ArchiveRestore, Loader2 } from "@workpal/ui/icons";
 import { useT } from "../../i18n";
 import { CollectionBatchBar } from "../../layout/collection-list";
 import { AccessPicker, type AccessChange } from "./inspector/access-picker";

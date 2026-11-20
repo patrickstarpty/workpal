@@ -5,8 +5,8 @@ import userEvent from "@testing-library/user-event";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { afterEach, describe, expect, it, vi } from "vitest";
 import type { ReactElement } from "react";
-import { api } from "@multica/core/api";
-import type { ContextReceipt } from "@multica/core/types/agent";
+import { api } from "@workpal/core/api";
+import type { ContextReceipt } from "@workpal/core/types/agent";
 import { renderWithI18n } from "../../test/i18n";
 import {
   ContextReceiptButton,
@@ -17,8 +17,8 @@ import {
   topLevelSources,
 } from "./context-receipt";
 
-vi.mock("@multica/core/hooks", () => ({ useWorkspaceId: () => "workspace" }));
-vi.mock("@multica/core/api", () => ({
+vi.mock("@workpal/core/hooks", () => ({ useWorkspaceId: () => "workspace" }));
+vi.mock("@workpal/core/api", () => ({
   api: { getTaskContextReceipt: vi.fn() },
 }));
 
@@ -150,7 +150,7 @@ describe("ContextReceiptView", () => {
       { kind: "agent_instructions", bytes: 8192, delivery: "embedded", parent: "runtime_brief", load: "unverified" },
       { kind: "task_prompt", bytes: 5120, delivery: "prompt", load: "delivered" },
       { kind: "skill", name: "short", bytes: 23552, delivery: "file", path: ".agents/skills/short/SKILL.md", load: "unverified" },
-      { kind: "skill", name: "multica-platform", bytes: 155524, sha256: "cb8cc2a583f2", delivery: "file", path: ".agents/skills/multica-platform/SKILL.md", load: "unverified" },
+      { kind: "skill", name: "workpal-platform", bytes: 155524, sha256: "cb8cc2a583f2", delivery: "file", path: ".agents/skills/workpal-platform/SKILL.md", load: "unverified" },
     ] };
     renderWithI18n(<ContextReceiptView receipt={multifile} />);
     expect(screen.getByText("4 sources")).toBeTruthy();
@@ -158,10 +158,10 @@ describe("ContextReceiptView", () => {
     expect(screen.getByText("Files on disk: 203 KB")).toBeTruthy();
     expect(screen.getByText("Instruction files: 28 KB")).toBeTruthy();
     expect(screen.getByText("Skill packages: 175 KB")).toBeTruthy();
-    const row = screen.getByText("Skill: multica-platform").closest("tr")!;
+    const row = screen.getByText("Skill: workpal-platform").closest("tr")!;
     expect(within(row).getByText("152 KB")).toBeTruthy();
     expect(within(row).getByText("Package")).toBeTruthy();
-    expect(within(row).getByText(".agents/skills/multica-platform/")).toBeTruthy();
+    expect(within(row).getByText(".agents/skills/workpal-platform/")).toBeTruthy();
     expect(within(row).queryByText(/SKILL\.md/)).toBeNull();
     expect(within(row).getByText("cb8cc2a583f2")).toBeTruthy();
     expect(within(row).getByText("Not verified")).toBeTruthy();
