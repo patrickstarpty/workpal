@@ -28,7 +28,7 @@ const EMPTY_SESSIONS: ChatSession[] = [];
 /** The star from the Workpal mark, in the text colour. */
 function WorkpalStar() {
   return (
-    <WorkpalIcon />
+    <WorkpalIcon aria-hidden="true" />
   );
 }
 const DEFAULT_MAX_CHIPS = 3;

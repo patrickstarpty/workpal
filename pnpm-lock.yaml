@@ -222,6 +222,9 @@ importers:
       '@fontsource-variable/inter':
         specifier: 'catalog:'
         version: 5.2.8
+      '@tanstack/react-query':
+        specifier: 'catalog:'
+        version: 5.96.2(react@19.2.3)
       '@workpal/core':
         specifier: workspace:*
         version: link:packages/core
@@ -231,9 +234,6 @@ importers:
       '@workpal/views':
         specifier: workspace:*
         version: link:packages/views
-      '@tanstack/react-query':
-        specifier: 'catalog:'
-        version: 5.96.2(react@19.2.3)
       i18next:
         specifier: 'catalog:'
         version: 26.0.8(@typescript/typescript6@6.0.2)
@@ -387,12 +387,6 @@ importers:
         specifier: 'catalog:'
         version: 1.4.0
     devDependencies:
-      '@workpal/eslint-config':
-        specifier: workspace:*
-        version: link:../../packages/eslint-config
-      '@workpal/tsconfig':
-        specifier: workspace:*
-        version: link:../../packages/tsconfig
       '@storybook/react-vite':
         specifier: ^10.6.7
         version: 10.6.7(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(@typescript/typescript6@6.0.2)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(storybook@10.6.7(@types/react@19.2.14)(react@19.2.3))(vite@8.0.1(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(@types/node@25.5.0)(jiti@2.7.0)(terser@5.47.1)(yaml@2.9.1))
@@ -411,6 +405,12 @@ importers:
       '@vitejs/plugin-react':
         specifier: 'catalog:'
         version: 6.0.1(babel-plugin-react-compiler@1.0.0)(vite@8.0.1(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(@types/node@25.5.0)(jiti@2.7.0)(terser@5.47.1)(yaml@2.9.1))
+      '@workpal/eslint-config':
+        specifier: workspace:*
+        version: link:../../packages/eslint-config
+      '@workpal/tsconfig':
+        specifier: workspace:*
+        version: link:../../packages/tsconfig
       storybook:
         specifier: ^10.6.7
         version: 10.6.7(@types/react@19.2.14)(react@19.2.3)
@@ -429,6 +429,9 @@ importers:
       '@fontsource-variable/inter':
         specifier: 'catalog:'
         version: 5.2.8
+      '@tanstack/react-query':
+        specifier: 'catalog:'
+        version: 5.96.2(react@19.2.3)
       '@workpal/core':
         specifier: workspace:*
         version: link:../../packages/core
@@ -441,9 +444,6 @@ importers:
       '@workpal/views':
         specifier: workspace:*
         version: link:../../packages/views
-      '@tanstack/react-query':
-        specifier: 'catalog:'
-        version: 5.96.2(react@19.2.3)
       dotenv:
         specifier: ^17.4.1
         version: 17.4.1
@@ -459,6 +459,9 @@ importers:
       next:
         specifier: 'catalog:'
         version: 16.4.5(@opentelemetry/api@1.9.1)(@playwright/test@1.58.2)(@types/node@25.5.0)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
+      next-themes:
+        specifier: 'catalog:'
+        version: 0.4.6(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       react:
         specifier: 'catalog:'
         version: 19.2.3
@@ -481,12 +484,6 @@ importers:
         specifier: 'catalog:'
         version: 5.0.12(@types/react@19.2.14)(immer@11.1.4)(react@19.2.3)(use-sync-external-store@1.6.0(react@19.2.3))
     devDependencies:
-      '@workpal/eslint-config':
-        specifier: workspace:*
-        version: link:../../packages/eslint-config
-      '@workpal/vitest-setup':
-        specifier: workspace:*
-        version: link:../../packages/vitest-setup
       '@tailwindcss/postcss':
         specifier: 'catalog:'
         version: 4.2.2
@@ -514,6 +511,12 @@ importers:
       '@vitejs/plugin-react':
         specifier: 'catalog:'
         version: 6.0.1(babel-plugin-react-compiler@1.0.0)(vite@8.0.1(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(@types/node@25.5.0)(jiti@2.7.0)(terser@5.47.1)(yaml@2.9.1))
+      '@workpal/eslint-config':
+        specifier: workspace:*
+        version: link:../../packages/eslint-config
+      '@workpal/vitest-setup':
+        specifier: workspace:*
+        version: link:../../packages/vitest-setup
       jsdom:
         specifier: 'catalog:'
         version: 29.0.1(@noble/hashes@1.8.0)
@@ -569,15 +572,6 @@ importers:
         specifier: 'catalog:'
         version: 5.0.12(@types/react@19.2.14)(immer@11.1.4)(react@19.2.3)(use-sync-external-store@1.6.0(react@19.2.3))
     devDependencies:
-      '@workpal/eslint-config':
-        specifier: workspace:*
-        version: link:../eslint-config
-      '@workpal/tsconfig':
-        specifier: workspace:*
-        version: link:../tsconfig
-      '@workpal/vitest-setup':
-        specifier: workspace:*
-        version: link:../vitest-setup
       '@testing-library/react':
         specifier: 'catalog:'
         version: 16.3.2(@testing-library/dom@10.4.1)(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
@@ -587,6 +581,15 @@ importers:
       '@typescript/native':
         specifier: 'catalog:'
         version: typescript@7.0.2
+      '@workpal/eslint-config':
+        specifier: workspace:*
+        version: link:../eslint-config
+      '@workpal/tsconfig':
+        specifier: workspace:*
+        version: link:../tsconfig
+      '@workpal/vitest-setup':
+        specifier: workspace:*
+        version: link:../vitest-setup
       jsdom:
         specifier: 'catalog:'
         version: 29.0.1(@noble/hashes@1.8.0)
@@ -605,6 +608,9 @@ importers:
 
   packages/ee:
     dependencies:
+      '@tanstack/react-query':
+        specifier: 'catalog:'
+        version: 5.96.2(react@19.2.3)
       '@workpal/core':
         specifier: workspace:*
         version: link:../core
@@ -614,9 +620,6 @@ importers:
       '@workpal/views':
         specifier: workspace:*
         version: link:../views
-      '@tanstack/react-query':
-        specifier: 'catalog:'
-        version: 5.96.2(react@19.2.3)
       i18next:
         specifier: 'catalog:'
         version: 26.0.8(@typescript/typescript6@6.0.2)
@@ -639,15 +642,6 @@ importers:
         specifier: 'catalog:'
         version: 5.0.12(@types/react@19.2.14)(immer@11.1.4)(react@19.2.3)(use-sync-external-store@1.6.0(react@19.2.3))
     devDependencies:
-      '@workpal/eslint-config':
-        specifier: workspace:*
-        version: link:../eslint-config
-      '@workpal/tsconfig':
-        specifier: workspace:*
-        version: link:../tsconfig
-      '@workpal/vitest-setup':
-        specifier: workspace:*
-        version: link:../vitest-setup
       '@testing-library/jest-dom':
         specifier: 'catalog:'
         version: 6.9.1
@@ -669,6 +663,15 @@ importers:
       '@vitejs/plugin-react':
         specifier: 'catalog:'
         version: 6.0.1(babel-plugin-react-compiler@1.0.0)(vite@8.0.1(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(@types/node@25.5.0)(jiti@2.7.0)(terser@5.47.1)(yaml@2.9.1))
+      '@workpal/eslint-config':
+        specifier: workspace:*
+        version: link:../eslint-config
+      '@workpal/tsconfig':
+        specifier: workspace:*
+        version: link:../tsconfig
+      '@workpal/vitest-setup':
+        specifier: workspace:*
+        version: link:../vitest-setup
       eslint:
         specifier: 'catalog:'
         version: 9.39.4(jiti@2.7.0)
@@ -714,15 +717,15 @@ importers:
 
   packages/plugin-sdk:
     devDependencies:
+      '@typescript/native':
+        specifier: 'catalog:'
+        version: typescript@7.0.2
       '@workpal/eslint-config':
         specifier: workspace:*
         version: link:../eslint-config
       '@workpal/tsconfig':
         specifier: workspace:*
         version: link:../tsconfig
-      '@typescript/native':
-        specifier: 'catalog:'
-        version: typescript@7.0.2
       typescript:
         specifier: 'catalog:'
         version: '@typescript/typescript6@6.0.2'
@@ -825,15 +828,6 @@ importers:
         specifier: 'catalog:'
         version: 3.5.0
     devDependencies:
-      '@workpal/eslint-config':
-        specifier: workspace:*
-        version: link:../eslint-config
-      '@workpal/tsconfig':
-        specifier: workspace:*
-        version: link:../tsconfig
-      '@workpal/vitest-setup':
-        specifier: workspace:*
-        version: link:../vitest-setup
       '@testing-library/jest-dom':
         specifier: 'catalog:'
         version: 6.9.1
@@ -861,6 +855,15 @@ importers:
       '@vitejs/plugin-react':
         specifier: 'catalog:'
         version: 6.0.1(babel-plugin-react-compiler@1.0.0)(vite@8.0.1(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(@types/node@25.5.0)(esbuild@0.25.12)(jiti@2.7.0)(terser@5.47.1)(yaml@2.9.1))
+      '@workpal/eslint-config':
+        specifier: workspace:*
+        version: link:../eslint-config
+      '@workpal/tsconfig':
+        specifier: workspace:*
+        version: link:../tsconfig
+      '@workpal/vitest-setup':
+        specifier: workspace:*
+        version: link:../vitest-setup
       esbuild:
         specifier: ^0.25.12
         version: 0.25.12
@@ -894,12 +897,6 @@ importers:
       '@floating-ui/dom':
         specifier: ^1.7.6
         version: 1.7.6
-      '@workpal/core':
-        specifier: workspace:*
-        version: link:../core
-      '@workpal/ui':
-        specifier: workspace:*
-        version: link:../ui
       '@tanstack/react-query':
         specifier: 'catalog:'
         version: 5.96.2(react@19.2.3)
@@ -972,6 +969,12 @@ importers:
       '@tiptap/suggestion':
         specifier: 3.31.3
         version: 3.31.3(@floating-ui/dom@1.7.6)(@tiptap/core@3.31.3(@tiptap/pm@3.31.3))(@tiptap/pm@3.31.3)
+      '@workpal/core':
+        specifier: workspace:*
+        version: link:../core
+      '@workpal/ui':
+        specifier: workspace:*
+        version: link:../ui
       cmdk:
         specifier: 'catalog:'
         version: 1.1.1(@types/react-dom@19.2.3(@types/react@19.2.14))(@types/react@19.2.14)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
@@ -1072,18 +1075,6 @@ importers:
         specifier: 'catalog:'
         version: 5.0.12(@types/react@19.2.14)(immer@11.1.4)(react@19.2.3)(use-sync-external-store@1.6.0(react@19.2.3))
     devDependencies:
-      '@workpal/eslint-config':
-        specifier: workspace:*
-        version: link:../eslint-config
-      '@workpal/plugin-sdk':
-        specifier: workspace:*
-        version: link:../plugin-sdk
-      '@workpal/tsconfig':
-        specifier: workspace:*
-        version: link:../tsconfig
-      '@workpal/vitest-setup':
-        specifier: workspace:*
-        version: link:../vitest-setup
       '@testing-library/jest-dom':
         specifier: 'catalog:'
         version: 6.9.1
@@ -1114,6 +1105,18 @@ importers:
       '@vitejs/plugin-react':
         specifier: 'catalog:'
         version: 6.0.1(babel-plugin-react-compiler@1.0.0)(vite@8.0.1(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.3)(@types/node@25.5.0)(jiti@2.7.0)(terser@5.47.1)(yaml@2.9.0))
+      '@workpal/eslint-config':
+        specifier: workspace:*
+        version: link:../eslint-config
+      '@workpal/plugin-sdk':
+        specifier: workspace:*
+        version: link:../plugin-sdk
+      '@workpal/tsconfig':
+        specifier: workspace:*
+        version: link:../tsconfig
+      '@workpal/vitest-setup':
+        specifier: workspace:*
+        version: link:../vitest-setup
       eslint:
         specifier: 'catalog:'
         version: 9.39.4(jiti@2.7.0)

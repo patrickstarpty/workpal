@@ -27,7 +27,29 @@ export function createServer({dbPath='server/data/workpal.sqlite',staticDir=reso
    if(method==='GET'&&path==='/api/me')return send(200,user);
    if(method==='GET'&&path==='/api/workspaces')return send(200,store.list('workspaces'));
    if(method==='GET'&&path===`/api/workspaces/${workspace.id}`)return send(200,workspace);
-   if(method==='GET'&&path.endsWith('/members'))return send(200,[{id:user.id,user_id:user.id,workspace_id:workspace.id,role:'owner',name:user.name,email:user.email,user}]);
+   if(method==='GET'&&/^\/api\/(issues|projects)\/search$/.test(path)){
+    const kind=path.split('/')[2],q=(url.searchParams.get('q')||'').toLowerCase();
+    const rows=store.list(kind).filter(row=>[row.title,row.identifier,row.description].some(v=>typeof v==='string'&&v.toLowerCase().includes(q)));
+    const offset=Math.max(0,Number(url.searchParams.get('offset'))||0),limit=Math.min(100,Math.max(1,Number(url.searchParams.get('limit'))||20));
+    return send(200,{[kind]:rows.slice(offset,offset+limit).map(row=>({...row,match_source:'title'}))});
+   }
+   if(method==='GET'&&path==='/api/issues/child-progress'){
+    const issues=store.list('issues');return send(200,{progress:issues.map(row=>{const children=issues.filter(c=>c.parent_issue_id===row.id);return {parent_issue_id:row.id,total:children.length,done:children.filter(c=>c.status==='done').length};}).filter(row=>row.total)});
+   }
+   if(method==='GET'&&path==='/api/chat/pending-tasks')return send(200,{tasks:[]});
+   if(method==='GET'&&path==='/api/chat/pending-tasks/has-any')return send(200,{has_pending:false});
+   if(method==='GET'&&['/api/agent-task-snapshot','/api/issue-wakeup-summaries','/api/issue-wakeup-paused'].includes(path))return send(200,[]);
+   if(method==='GET'&&/^\/api\/projects\/[^/]+\/resources$/.test(path))return send(200,{resources:[],total:0});
+   if(method==='GET'&&/^\/api\/projects\/[^/]+\/subscription$/.test(path))return send(200,{subscribed:false});
+   if(method==='GET'&&/^\/api\/projects\/[^/]+\/members$/.test(path))return send(200,{members:[],total:0,manager_id:user.id});
+   if(method==='GET'&&/^\/api\/runtimes\/[^/]+$/.test(path)){const row=store.get('runtimes',decodeURIComponent(path.split('/').at(-1)));if(!row)fail(404,'Runtime not found');return send(200,row);}
+   const squadMembers=path.match(/^\/api\/squads\/([^/]+)\/members(?:\/(status))?$/);
+   if(method==='GET'&&squadMembers){
+    const squad=store.get('squads',decodeURIComponent(squadMembers[1]));if(!squad)fail(404,'Squad not found');
+    const members=(squad.member_preview||[]).filter(m=>typeof m.member_id==='string'&&['agent','member'].includes(m.member_type)).map(m=>({...m,id:squad.id+':'+m.member_type+':'+m.member_id,squad_id:squad.id,created_at:squad.created_at}));
+    return send(200,squadMembers[2]?{members:members.map(m=>({member_type:m.member_type,member_id:m.member_id,status:m.member_type==='agent'?'offline':null,active_issues:[],last_active_at:null}))}:members);
+   }
+   if(method==='GET'&&/^\/api\/workspaces\/[^/]+\/members$/.test(path))return send(200,[{id:user.id,user_id:user.id,workspace_id:workspace.id,role:'owner',name:user.name,email:user.email,user}]);
    if(path.includes('preferences')){
     if(!['GET','PUT','PATCH'].includes(method))fail(405,'Method not allowed');
     const id=path+url.search;if(method==='GET')return send(200,store.get('preferences',id)?.value||{});

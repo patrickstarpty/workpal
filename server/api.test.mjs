@@ -32,3 +32,16 @@ test('repeated server shutdown closes SQLite only once',async()=>{
   assert.equal(error?.code,'ERR_SERVER_NOT_RUNNING');resolve();
  }));
 });
+
+test('search and squad members use endpoint-specific response shapes',async()=>{
+ const server=createServer({dbPath:':memory:'});await new Promise(r=>server.listen(0,'127.0.0.1',r));
+ const base=`http://127.0.0.1:${server.address().port}/api/`;
+ try{
+  const squads=await (await fetch(base+'squads')).json();
+  const members=await (await fetch(base+'squads/'+encodeURIComponent(squads[0].id)+'/members')).json();
+  assert.ok(members.length>0);for(const member of members){assert.equal(typeof member.member_id,'string');assert.ok(['member','agent'].includes(member.member_type));assert.equal(member.squad_id,squads[0].id);}
+  assert.equal((await fetch(base+'squads/missing/members')).status,404);
+  const result=await (await fetch(base+'issues/search?q=TAP-1022')).json();assert.ok(result.issues.some(row=>row.identifier==='TAP-1022'));assert.equal(result.issues[0].match_source,'title');
+  assert.deepEqual(await (await fetch(base+'projects/search?q=never-match-123')).json(),{projects:[]});
+ }finally{await new Promise(r=>{server.close(r);server.closeAllConnections();});}
+});

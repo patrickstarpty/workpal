@@ -241,6 +241,7 @@ export function SquadDetailPage() {
   });
 
   const getEntityName = (type: string, id: string) => {
+    if (typeof id !== "string" || !id) return "Unknown member";
     if (type === "agent") return agents.find((a: Agent) => a.id === id)?.name ?? id.slice(0, 8);
     return wsMembers.find((m) => m.user_id === id)?.name ?? id.slice(0, 8);
   };

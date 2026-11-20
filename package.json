@@ -6,10 +6,10 @@
   "scripts": {
     "dev:web": "node server/start.mjs --dev",
     "build": "pnpm --filter @workpal/web build",
-    "typecheck": "turbo typecheck --filter=!@workpal/mobile",
+    "typecheck": "turbo typecheck --filter=@workpal/web...",
     "test": "node --test server/*.test.mjs",
     "test:scripts": "node --test \"scripts/**/*.test.mjs\"",
-    "lint": "turbo lint --filter=!@workpal/mobile",
+    "lint": "turbo lint --filter=@workpal/web...",
     "knip": "knip",
     "check:ui-exports": "node scripts/check-ui-wildcard-exports.mjs",
     "check:ui-radii": "node scripts/check-ui-radius-tokens.mjs",
