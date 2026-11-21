@@ -2,8 +2,92 @@
 import ast
 import argparse
 import json
+import hashlib
+import subprocess
 import re
 from pathlib import Path
+
+
+PROTECTED_PREFIXES = ('server/go/', 'scripts/', 'docker/', 'deploy/', '.github/workflows/')
+PROTECTED_ROOTS = {'Makefile', '.env.example', '.dockerignore', 'package.json', 'pnpm-lock.yaml', 'pnpm-workspace.yaml'}
+PROFILE_FIELDS = ('go_version', 'GOOS', 'GOARCH', 'CGO_ENABLED', 'GOWORK', 'GOFLAGS', 'tags', 'edition', 'module_mode')
+
+
+def protected_input(name):
+    return (name.startswith(PROTECTED_PREFIXES) or name in PROTECTED_ROOTS
+            or ('/' not in name and ('Dockerfile' in name or name.startswith('docker-compose'))))
+
+
+def check_baseline(root: Path, manifest_path: Path, *, profile: dict) -> list[str]:
+    """Compare source inputs and declared build profile; does not claim a build ran."""
+    errors = []
+    try:
+        manifest = json.loads(manifest_path.read_text())
+        files, expected = manifest.get('files'), manifest.get('build_profile')
+        if not isinstance(files, dict) or not files:
+            return ['baseline: missing protected files']
+        if not isinstance(expected, dict) or not isinstance(profile, dict):
+            return ['baseline: missing build profile']
+        for field in PROFILE_FIELDS:
+            if field not in expected or field not in profile or expected[field] != profile[field]:
+                errors.append(f'baseline: build profile mismatch: {field}')
+        listed = subprocess.run(['git', '-C', str(root), 'ls-files', '-z', '--cached', '--others', '--exclude-standard'],
+                                check=True, capture_output=True).stdout.decode().split('\0')
+        discovered = {name for name in listed if name and protected_input(name)}
+        recorded = set(files)
+        for name in sorted(discovered - recorded):
+            errors.append(f'baseline: unrecorded input: {name}')
+        for name in sorted(recorded):
+            relative = Path(name)
+            if relative.is_absolute() or '..' in relative.parts or not protected_input(name):
+                errors.append(f'baseline: invalid protected path: {name}')
+                continue
+            path = root / relative
+            if not path.resolve().is_relative_to(root.resolve()) or path.is_symlink():
+                errors.append(f'baseline: unsafe input: {name}')
+            elif name not in discovered or not path.is_file():
+                errors.append(f'baseline: missing input: {name}')
+            elif hashlib.sha256(path.read_bytes()).hexdigest() != files[name]:
+                errors.append(f'baseline: changed input: {name}')
+    except (OSError, ValueError, AttributeError, TypeError, subprocess.SubprocessError):
+        errors.append('baseline: unreadable manifest or source enumeration failed')
+    return errors
+
+
+def check_handler_binding(root: Path, route: dict) -> list[str]:
+    """Validate explicit source bindings, never search globally by method name.
+
+    This is declaration validation, not proof of the route registration's type.
+    The Go registration audit must supply and validate the binding separately.
+    """
+    binding = route.get('handler_binding')
+    if binding is None:
+        return []
+    label = f"{route.get('method')} {route.get('path')}: handler binding"
+    try:
+        if not isinstance(binding, dict): return [f'{label}: malformed']
+        source = binding['source']
+        path, line = source.rsplit(':', 1)
+        relative = Path(path)
+        if not path.startswith('server/go/') or relative.is_absolute() or '..' in relative.parts or path.endswith('_test.go'):
+            return [f'{label}: invalid production source']
+        package = 'workpal.local/workpal/server/' + str(relative.parent.relative_to('server/go'))
+        if package != binding['package']:
+            return [f'{label}: package mismatch']
+        lines = (root / relative).read_text().splitlines()
+        number = int(line)
+        declaration = lines[number - 1] if 0 < number <= len(lines) else ''
+        pattern = (r'^func \(\w+ \*' + re.escape(binding['receiver']) + r'\) '
+                   + re.escape(binding['method']) + r'\(\w+ http.ResponseWriter, \w+ \*http.Request\)')
+        if not re.match(pattern, declaration):
+            return [f'{label}: receiver/method/signature mismatch']
+        fixtures = route.get('fixtures', {})
+        candidates = fixtures.get('source_handlers', []) if isinstance(fixtures, dict) else []
+        if candidates and any(not isinstance(c, dict) or c.get('source') != source for c in candidates):
+            return [f'{label}: conflicting source handler candidates']
+    except (OSError, ValueError, KeyError, TypeError, AttributeError):
+        return [f'{label}: unreadable binding']
+    return []
 
 
 def check_contracts(routes_path: Path, callers_path: Path, *, require_complete: bool) -> list[str]:
@@ -99,6 +183,7 @@ def check_contracts(routes_path: Path, callers_path: Path, *, require_complete: 
         if not isinstance(route, dict):
             errors.append('malformed route record')
             continue
+        errors.extend(check_handler_binding(root, route))
         references(route.get('sources'), 'route sources')
         key = route_key(route, 'route')
         if key is None:
@@ -132,6 +217,8 @@ def check_contracts(routes_path: Path, callers_path: Path, *, require_complete: 
         if isinstance(route.get('event'), dict):
             references(route['event'].get('sources'), f'{label} event')
         if require_complete:
+            if route.get('origin') == 'go' and not route.get('handler_binding'):
+                errors.append(f'{label}: missing handler binding')
             references(route.get('tests'), f'{label} tests', test=True)
             if route.get('status') == 'implemented':
                 fixtures = route.get('fixtures')
@@ -168,7 +255,15 @@ if __name__ == '__main__':
     parser.add_argument('--routes', type=Path, default=root / 'routes.json')
     parser.add_argument('--callers', type=Path, default=root / 'frontend-calls.json')
     parser.add_argument('--require-complete', action='store_true')
+    parser.add_argument('--baseline', type=Path, default=Path(__file__).resolve().parents[2] / 'docs/superpowers/evidence/2026-11-22-go-source-sha256.json')
+    parser.add_argument('--build-profile', type=Path, help='JSON build profile captured by the parity runner')
     args = parser.parse_args()
     diagnostics = check_contracts(args.routes, args.callers, require_complete=args.require_complete)
+    if args.require_complete:
+        try:
+            profile = json.loads(args.build_profile.read_text()) if args.build_profile else None
+        except (OSError, ValueError):
+            profile = None
+        diagnostics += check_baseline(Path(__file__).resolve().parents[2], args.baseline, profile=profile)
     print('\n'.join(diagnostics) if diagnostics else 'Contract checks passed')
     raise SystemExit(bool(diagnostics))

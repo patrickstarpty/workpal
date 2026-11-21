@@ -47,7 +47,7 @@ class ContractInventoryTests(unittest.TestCase):
 class HardeningTests(ContractInventoryTests):
     ref = 'server/tests/test_contract_inventory.py:1::test_empty_inventory_fails'
     def record(self):
-        return dict(method='GET', path='/ok', origin='go', sources=[self.ref], auth={'required':False}, scope={'kind':'process'}, fixtures={'request':{'body':None},'success':{'status':200,'body':{}},'errors':[{'status':400,'body':{'error':'bad'}}]}, dependencies={'tables':[]}, batch='one', status='implemented', tests=[self.ref])
+        return dict(method='GET', path='/ok', origin='local-extension', sources=[self.ref], auth={'required':False}, scope={'kind':'process'}, fixtures={'request':{'body':None},'success':{'status':200,'body':{}},'errors':[{'status':400,'body':{'error':'bad'}}]}, dependencies={'tables':[]}, batch='one', status='implemented', tests=[self.ref])
     def complete(self,r):
         return self.check({'routes':[r],'producers':[],'producer_coverage':{'complete':True,'sources':[self.ref],'reason':'Bounded scope has no jobs'}},{'coverage':{'complete':True},'calls':[{'route':{'method':'GET','path':'/ok'},'sources':[self.ref]}]},True)
     def test_legitimate_complete(self):
@@ -102,3 +102,36 @@ class ReadEventTests(HardeningTests):
 
 if __name__ == '__main__':
     unittest.main()
+
+class HandlerBindingTests(ContractInventoryTests):
+    def route(self):
+        return {'method':'GET','path':'/api/project-folders','origin':'go',
+                'sources':['server/go/ee/projectfolder/handler.go:52'],
+                'handler_binding':{'package':'workpal.local/workpal/server/ee/projectfolder',
+                    'receiver':'Service','method':'List','source':'server/go/ee/projectfolder/handler.go:138'}}
+
+    def test_correct_package_receiver_method_binding(self):
+        assert not any('handler binding' in e for e in self.check([self.route()],[]))
+
+    def test_other_receiver_with_same_name_rejected(self):
+        route=self.route()
+        route['handler_binding']['source']='server/go/internal/integrations/weixin/install.go:373'
+        assert any('handler binding' in e for e in self.check([route],[]))
+
+    def test_test_double_cannot_be_handler(self):
+        route=self.route()
+        route['handler_binding'].update(method='Delete',source='server/go/internal/handler/file_test.go:87')
+        assert any('handler binding' in e for e in self.check([route],[]))
+
+    def test_wrong_source_line_rejected(self):
+        route=self.route();route['handler_binding']['source']='server/go/ee/projectfolder/handler.go:139'
+        assert any('handler binding' in e for e in self.check([route],[]))
+
+    def test_ambiguous_legacy_candidates_rejected(self):
+        route=self.route();route['fixtures']={'source_handlers':[{'source':'server/go/ee/projectfolder/handler.go:138'},{'source':'server/go/internal/integrations/weixin/install.go:373'}]}
+        assert any('handler binding' in e for e in self.check([route],[]))
+
+class RequiredGoBindingTests(HardeningTests):
+    def test_go_route_cannot_claim_completion_without_binding(self):
+        route=self.record();route['origin']='go'
+        assert any('missing handler binding' in e for e in self.complete(route))
