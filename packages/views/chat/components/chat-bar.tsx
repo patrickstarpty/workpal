@@ -149,7 +149,6 @@ export function ChatBar() {
   const stateOf = (item: ChatBarSession) =>
     item.running ? t(($) => $.window.running) : item.unread ? t(($) => $.window.unread) : null;
 
-  const askLabel = t(($) => $.fab.default);
 
   return (
     <div ref={rootRef} data-slot="chat-bar" className="flex min-w-0 shrink-0 items-center gap-0.5">
@@ -217,11 +216,21 @@ export function ChatBar() {
         label={t(($) => $.window.new_chat_tooltip)}
         shortcut={<ActionShortcutKeycaps action="newChat" />}
       >
-        <button
+        <AskWorkpalButton onClick={askWorkpal} pressed={askPressed}/>
+      </TooltipHint>
+      <ChatBarHistory sessions={sessions} runningSessionIds={runningSessionIds} onSelect={openSession} />
+    </div>
+  );
+}
+
+export function AskWorkpalButton({onClick, pressed = false}: {onClick:()=>void; pressed?:boolean}) {
+ const {t} = useT("chat");
+ const askLabel = t(($) => $.fab.default);
+ return (        <button
           type="button"
           data-chat-anchor="new"
-          aria-pressed={askPressed}
-          onClick={askWorkpal}
+          aria-pressed={pressed}
+          onClick={onClick}
           className={BOTTOM_BAR_ITEM_CLASS}
         >
           {askLabel.includes("Workpal") ? (
@@ -234,9 +243,5 @@ export function ChatBar() {
           ) : (
             <><WorkpalIcon size={18} aria-hidden="true" />{askLabel}</>
           )}
-        </button>
-      </TooltipHint>
-      <ChatBarHistory sessions={sessions} runningSessionIds={runningSessionIds} onSelect={openSession} />
-    </div>
-  );
+        </button>);
 }

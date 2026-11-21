@@ -11,6 +11,7 @@ import {StageChat} from './stage-chat';
 import {CapabilityChat} from './capability-chat';
 
 export function CapabilityHub({view, navigate, enterWorkspace}: {view: CapabilityView; navigate: (path: string) => void; enterWorkspace: () => void}) {
+  const [workspaceId, setWorkspaceId] = useState<string | null>(null);
   const [chatStage, setChatStage] = useState<number | null>(null);
   const [openingSkillId, setOpeningSkillId] = useState<string | null>(null);
   const content = useRef<HTMLElement>(null);
@@ -35,5 +36,5 @@ export function CapabilityHub({view, navigate, enterWorkspace}: {view: Capabilit
     <main ref={content} id="capability-content" className="capability-content" data-mc="page" tabIndex={-1}>
       {view === 'overview' ? <Overview onStartStage={setChatStage} onOpenSkill={openSkill} onNavigate={next => {content.current?.scrollTo({top: 0, behavior: 'instant'}); changeView(next);}}/> : view === 'skills' ? <SkillHub initialSkillId={openingSkillId}/> : <AgentTeam onOpenSkill={openSkill}/>}
     </main>
-  </div>{chatStage===null && <CapabilityChat/>}{chatStage!==null && <StageChat stage={chatStage} onStageChange={setChatStage} onClose={()=>setChatStage(null)}/>}</div>;
+  </div>{chatStage===null && <CapabilityChat workspaceId={workspaceId} onWorkspaceChange={setWorkspaceId}/>}{chatStage!==null && <StageChat workspaceId={workspaceId} onWorkspaceChange={setWorkspaceId} stage={chatStage} onClose={()=>setChatStage(null)}/>}</div>;
 }

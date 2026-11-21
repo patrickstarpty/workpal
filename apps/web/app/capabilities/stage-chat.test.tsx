@@ -1,5 +1,4 @@
 import {render, screen, waitFor} from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
 import {beforeEach, expect, it, vi} from 'vitest';
 
 const mocks = vi.hoisted(() => ({workspace: null as string | null}));
@@ -20,13 +19,11 @@ beforeEach(() => {useChatStore.setState({isOpen:false,activeSessionId:null,input
 it('opens an unsent stage draft, preserves user text and replaces stage context on re-entry', async () => {
  const props={stage:0,onStageChange:vi.fn(),onClose:vi.fn()};
  const first=render(<StageChat {...props}/>);
- await screen.findByRole('combobox', {name:'Conversation stage'});
+ await waitFor(()=>expect(useChatStore.getState().isOpen).toBe(true));
+ expect(screen.queryByRole('combobox')).toBeNull();
  expect(mocks.workspace).toBe('team');
  expect(useChatStore.getState().inputDrafts.__new__).toContain('My existing requirements');
  expect(useChatStore.getState().activeSessionId).toBeNull();
- await userEvent.setup().selectOptions(screen.getByRole('combobox'), '2');
- expect(props.onStageChange).toHaveBeenCalledWith(2);
- expect(useChatStore.getState().inputDrafts.__new__).toMatch(/^\[03 · Build\]/);
  first.unmount();
  render(<StageChat {...props} stage={1}/>);
  await waitFor(()=>expect(useChatStore.getState().inputDrafts.__new__).toMatch(/^\[02 · Design\]/));

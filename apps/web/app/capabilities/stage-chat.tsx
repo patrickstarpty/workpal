@@ -27,23 +27,22 @@ function withStage(draft: string, stage: number) {
   return stageDraft(stage) + (previous ? draft.slice(previous.length) : draft);
 }
 
-export function StageChat({stage, onStageChange, onClose}: {stage: number; onStageChange: (stage: number)=>void; onClose: ()=>void}) {
+export function StageChat({stage, onClose, workspaceId, onWorkspaceChange}: {stage: number | null; onClose: ()=>void; workspaceId?: string | null; onWorkspaceChange?: (id:string)=>void}) {
   useEffect(() => {
     const trigger = document.activeElement;
     return () => { if (trigger instanceof HTMLElement && trigger.isConnected) trigger.focus({preventScroll: true}); };
   }, []);
   const query = useQuery({...workspaceListOptions(), retry: false});
   const [chosen, setChosen] = useState<string | null>(null);
-  const workspace = query.data?.find(w=>w.id===chosen) ?? (query.data?.length===1 ? query.data[0] : undefined);
+  const workspace = query.data?.find(w=>w.id===(chosen ?? workspaceId)) ?? (query.data?.length===1 ? query.data[0] : undefined);
   if (!workspace) return <Dialog open onOpenChange={open=>{if(!open)onClose();}}><DialogContent><DialogHeader><DialogTitle>Choose a workspace</DialogTitle></DialogHeader>
-    {query.isPending ? <p role="status">Loading workspaces…</p> : query.isError ? <><p role="alert">Unable to load workspaces.</p><Button onClick={()=>void query.refetch()}>Try again</Button></> : query.data?.length ? query.data.map(w=><Button key={w.id} variant="outline" onClick={()=>setChosen(w.id)}>{w.name}</Button>) : <p>Create a workspace using Enter Workspace to start a conversation.</p>}
+    {query.isPending ? <p role="status">Loading workspaces…</p> : query.isError ? <><p role="alert">Unable to load workspaces.</p><Button onClick={()=>void query.refetch()}>Try again</Button></> : query.data?.length ? query.data.map(w=><Button key={w.id} variant="outline" onClick={()=>{setChosen(w.id);onWorkspaceChange?.(w.id);}}>{w.name}</Button>) : <p>Create a workspace using Enter Workspace to start a conversation.</p>}
   </DialogContent></Dialog>;
-  return <BoundStageChat key={workspace.id} workspace={workspace} stage={stage} onStageChange={onStageChange} onClose={onClose}/>;
+  return <BoundStageChat key={workspace.id} workspace={workspace} stage={stage} onClose={onClose}/>;
 }
-function BoundStageChat({workspace, stage, onStageChange, onClose}: {workspace:{id:string;slug:string;name:string};stage:number;onStageChange:(stage:number)=>void;onClose:()=>void}) {
+function BoundStageChat({workspace, stage, onClose}: {workspace:{id:string;slug:string;name:string};stage:number | null;onClose:()=>void}) {
   const [ready, setReady] = useState(false);
   const open = useChatStore(s=>s.isOpen);
-  const activeSession = useChatStore(s=>s.activeSessionId);
   const initialStage = useRef(stage);
   useEffect(()=>{
     setCurrentWorkspace(workspace.slug, workspace.id);
@@ -53,7 +52,7 @@ function BoundStageChat({workspace, stage, onStageChange, onClose}: {workspace:{
       if (cancelled) return;
       const chat = useChatStore.getState();
       chat.startNewChat();
-      chat.setInputDraft(DRAFT_NEW_SESSION, withStage(chat.inputDrafts[DRAFT_NEW_SESSION] ?? '', initialStage.current));
+      if (initialStage.current !== null) chat.setInputDraft(DRAFT_NEW_SESSION, withStage(chat.inputDrafts[DRAFT_NEW_SESSION] ?? '', initialStage.current));
       setReady(true);
     });
     return () => {
@@ -66,11 +65,5 @@ function BoundStageChat({workspace, stage, onStageChange, onClose}: {workspace:{
   },[workspace.id,workspace.slug]);
   useEffect(()=>{if(ready&&!open)onClose();},[ready,open,onClose]);
   if(!ready)return null;
-  const changeStage=(index:number)=>{
-    const chat=useChatStore.getState();
-    const draft=chat.inputDrafts[DRAFT_NEW_SESSION] ?? '';
-    chat.setInputDraft(DRAFT_NEW_SESSION,withStage(draft,index));
-    onStageChange(index);
-  };
-  return <WorkspaceSlugProvider slug={workspace.slug}><div className="fixed inset-x-0 bottom-0 z-40 bg-app-shell"><AppBottomBar/></div><div className="fixed inset-0 z-50 pointer-events-none"><ChatWindow contextBar={!activeSession && <div className="flex flex-wrap items-center gap-2 border-b px-4 py-2 text-label"><span>{workspace.name}</span><label>Stage <select aria-label="Conversation stage" className="rounded border bg-background p-1" value={stage} onChange={e=>changeStage(Number(e.target.value))}>{stages.map((s,i)=><option key={s.id} value={i}>{String(i+1).padStart(2,'0')} · {s.name}</option>)}</select></label></div>}/></div></WorkspaceSlugProvider>;
+  return <WorkspaceSlugProvider slug={workspace.slug}><div className="fixed inset-x-0 bottom-0 z-40 bg-app-shell"><AppBottomBar/></div><div className="fixed inset-0 z-50 pointer-events-none"><ChatWindow/></div></WorkspaceSlugProvider>;
 }

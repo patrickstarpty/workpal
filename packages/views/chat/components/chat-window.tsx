@@ -74,7 +74,7 @@ const uiLogger = createLogger("chat.ui");
 const apiLogger = createLogger("chat.api");
 
 
-export function ChatWindow({contextBar}: {contextBar?: React.ReactNode} = {}) {
+export function ChatWindow() {
   const { t } = useT("chat");
   const isOpen = useChatStore((s) => s.isOpen);
   const isExpanded = useChatStore((s) => s.isExpanded);
@@ -344,7 +344,6 @@ export function ChatWindow({contextBar}: {contextBar?: React.ReactNode} = {}) {
       </div>
 
       {/* Messages / skeleton / empty state */}
-      {contextBar}
       <AnimatePresence initial={false}>
         {isOpen && (
           <ChatWindowMessages
