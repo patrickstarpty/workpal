@@ -103,3 +103,18 @@ def test_peer_disconnect_during_close_is_idempotent():
         await connection.close()
         assert connection.closed
     asyncio.run(exercise())
+
+
+def test_nonmember_cannot_open_workspace_socket(live):
+    client, app, login, workspace = live
+    from uuid import uuid4
+    from workpal_backend.auth.models import users
+    from workpal_backend.workspaces import service
+    with app.state.database.transaction() as session:
+        outsider = str(uuid4())
+        session.execute(users.insert().values(id=outsider, email='socket-private@example.com', name='Private', created_at='2026-01-01T00:00:00Z', updated_at='2026-01-01T00:00:00Z'))
+        service.create_workspace(session, outsider, 'Private', 'socket-private')
+    with pytest.raises(WebSocketDenialResponse) as denied:
+        with client.websocket_connect('/ws?workspace_slug=socket-private'):
+            pytest.fail('nonmember subscribed')
+    assert denied.value.status_code in (403, 404)

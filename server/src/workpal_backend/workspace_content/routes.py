@@ -37,11 +37,19 @@ DETAILS = {
 def execute(request, principal, operation):
     """Resolve explicit canonical workspace and membership before any content access."""
     slug = request.headers.get('x-workspace-slug')
-    if not slug or not slug.strip():
+    workspace_id = request.headers.get('x-workspace-id')
+    if not (slug and slug.strip()) and not workspace_id:
         raise HTTPException(400, 'X-Workspace-Slug is required')
     try:
         with request.app.state.database.transaction() as session:
-            workspace = repo.resolve_workspace(session, principal, slug)
+            if slug and slug.strip():
+                workspace = repo.resolve_workspace(session, principal, slug)
+            else:
+                service.require_workspace_access(session, principal, workspace_id)
+                row = session.execute(select(workspaces).where(workspaces.c.id == workspace_id)).mappings().one_or_none()
+                if row is None:
+                    raise service.WorkspaceAccessError('workspace not found')
+                workspace = dict(row)
             if request.method not in ('GET', 'HEAD', 'OPTIONS'):
                 # Recheck membership under SQLite's writer serialization so a
                 # concurrently revoked member cannot write after the initial read.
@@ -100,7 +108,7 @@ def collection_list(session, workspace, kind, params):
         rows = [row for row in rows if query in str(row.get('title') or row.get('name') or '').lower()]
     total = len(rows)
     rows = page(rows, params)
-    return {kind: rows, 'total': total} if kind in ('projects', 'issues', 'labels') else rows
+    return {kind: rows, 'total': total} if kind in ('projects', 'issues', 'labels', 'autopilots') else rows
 
 
 def validate_references(session, workspace, kind, body):
@@ -233,6 +241,8 @@ def record_endpoint(kind):
         def operation(session, workspace):
             # A path converter preserves imported IDs containing spaces or slashes.
             row = repo.get_record(session, workspace['id'], kind, record_path)
+            if row is None and kind == 'issues' and request.method == 'GET':
+                row = next((item for item in repo.list_records(session, workspace['id'], kind) if item.get('identifier') == record_path), None)
             if row is not None:
                 if request.method == 'GET':
                     return row
@@ -248,6 +258,18 @@ def record_endpoint(kind):
                     row = required_record(session, workspace['id'], kind, record_id)
                     if request.method == 'GET':
                         return detail(session, workspace, principal, kind, row, suffix)
+                    if kind == 'issues' and suffix == 'comments' and request.method == 'POST':
+                        if not isinstance(body.get('content'), str) or not body['content'].strip():
+                            raise HTTPException(400, 'Comment content is required')
+                        if set(body) - {'content', 'type', 'attachment_ids', 'suppress_agent_ids', 'steer_task_ids', 'parent_id'} or body.get('type', 'comment') != 'comment' or any(body.get(k) for k in ('attachment_ids', 'suppress_agent_ids', 'steer_task_ids', 'parent_id')):
+                            raise HTTPException(501, UNAVAILABLE)
+                        now = datetime.now(timezone.utc).isoformat()
+                        comment = {'id': str(uuid4()), 'issue_id': record_id,
+                                   'workspace_id': workspace['id'], 'content': body['content'],
+                                   'type': 'comment', 'author_type': 'member', 'author_id': principal.user_id,
+                                   'created_at': now, 'updated_at': now}
+                        repo.put_record(session, workspace['id'], 'comments', comment)
+                        return comment
                     raise HTTPException(501, UNAVAILABLE)
             if request.method == 'POST':
                 raise HTTPException(501, UNAVAILABLE)
@@ -393,10 +415,20 @@ for _path, _value in {
     '/api/chat/pending-tasks/has-any': {'has_pending': False}, '/api/agent-task-snapshot': [],
     '/api/issue-wakeup-summaries': [], '/api/issue-wakeup-paused': [],
     '/api/issue-workflows': {'workflows': [], 'total': 0}, '/api/agent-run-counts': [],
-    '/api/inbox/unread-summary': {}, '/api/inbox': [], '/api/pins': [],
+    '/api/inbox/unread-summary': [], '/api/inbox/snoozed': [], '/api/properties': {'properties': []}, '/api/inbox': [], '/api/pins': [],
     '/api/issue-views': [], '/api/notifications': [], '/api/connected-apps': [],
 }.items():
     router.add_api_route(_path, known_read_endpoint(_value), methods=METHODS)
+
+def unavailable_projection(request: Request, principal: Principal = Depends(require_principal)):
+    def operation(session, workspace):
+        raise HTTPException(501, UNAVAILABLE)
+    return execute(request, principal, operation)
+
+
+for _path in ('/api/working-agents', '/api/agent-activity-30d', '/api/search-index/manifest'):
+    router.add_api_route(_path, unavailable_projection, methods=METHODS)
+
 
 router.add_api_route('/api/runtimes', known_read_endpoint(collection='runtimes'), methods=METHODS)
 router.add_api_route('/api/runtimes/{record_path:path}', record_endpoint('runtimes'), methods=METHODS)

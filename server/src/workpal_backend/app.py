@@ -105,4 +105,7 @@ def create_app(settings):
     @app.exception_handler(RequestValidationError)
     async def invalid_request(request, exc):
         return JSONResponse({'error': 'invalid request'}, status_code=400)
+    if settings.frontend_dir is not None:
+        from .frontend import mount_frontend
+        mount_frontend(app, settings.frontend_dir)
     return app

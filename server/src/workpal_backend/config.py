@@ -7,6 +7,7 @@ ROOT = Path(__file__).resolve().parents[3]
 
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(populate_by_name=True, extra='ignore')
+    frontend_dir: Path | None = Field(default=None, validation_alias='WORKPAL_FRONTEND_DIR')
     database_url: str = Field(default='sqlite:///server/data/python/workpal.sqlite', validation_alias='WORKPAL_DATABASE_URL')
     redis_url: str = Field(default='redis://127.0.0.1:6379', validation_alias='REDIS_URL', repr=False)
     redis_key_prefix: str = Field(default='workpal:', validation_alias='REDIS_KEY_PREFIX')

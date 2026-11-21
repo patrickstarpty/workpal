@@ -7,7 +7,7 @@ import {join,resolve} from 'node:path';
 import {randomBytes} from 'node:crypto';
 import {DatabaseSync} from 'node:sqlite';
 import {chromium,expect} from '@playwright/test';
-import {openStore} from '../server/store.mjs';
+
 
 const run=promisify(execFile);
 const live=process.env.WORKPAL_QA_URL;
@@ -23,7 +23,11 @@ const env={...process.env,PYTHONPATH:resolve('server/src'),
 let child,browser,log,exited,passed=false;
 try{
  if(!live){
-  const store=openStore(join(state,'legacy.sqlite'));store.close();
+  // SQLite backup includes committed WAL content; the real source is read-only.
+  // No Node mock initialization or seed execution is allowed here.
+  await run('server/.venv/bin/python',['-c',
+   'import sqlite3,sys; source=sqlite3.connect("file:"+sys.argv[1]+"?mode=ro",uri=True); target=sqlite3.connect(sys.argv[2]); source.backup(target); target.close(); source.close()',
+   resolve('server/data/workpal.sqlite'),join(state,'legacy.sqlite')]);
   log=await open(join(state,'service.log'),'w');
   child=spawn(process.execPath,['scripts/python-web-dev.mjs'],{env,stdio:['ignore',log.fd,log.fd]});
   exited=new Promise(resolve=>child.once('exit',(code)=>resolve(code)));
@@ -58,8 +62,8 @@ try{
   await page.goto(base+'/#/home');await page.reload();
  }
  await page.getByRole('button',{name:'Enter Workspace',exact:true}).click();
- await expect(page).toHaveURL(/#\/review\/projects$/);
- await expect(page.getByRole('combobox',{name:'Workspace',exact:true})).toHaveValue('review');
+ await expect(page).toHaveURL(/#\/review\/issues$/);
+ await expect(page.getByRole('button', {name: 'Switch workspace', exact: true})).toBeVisible();
  await expect(page.getByRole('heading',{name:'Choose a workspace'})).toHaveCount(0);
  await expect(page.getByText('Developer Platform',{exact:true}).first()).toBeVisible();
  const headers={'X-Workspace-Slug':'review'};
@@ -87,7 +91,9 @@ try{
  await expect(page.getByRole('button',{name:'Enter Workspace',exact:true})).toBeVisible();
  await page.setViewportSize({width:390,height:844});
  await page.getByRole('button',{name:'Enter Workspace',exact:true}).click();
- await expect(page.getByRole('combobox',{name:'Workspace',exact:true})).toHaveValue('review');
+ await page.locator('[data-sidebar=trigger]').click();
+ await expect(page.getByRole('button', {name: 'Switch workspace', exact: true})).toBeVisible();
+ await page.keyboard.press('Escape');
  assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
  await page.setViewportSize({width:1440,height:1000});
  await page.getByRole('button',{name:'Account',exact:true}).click();

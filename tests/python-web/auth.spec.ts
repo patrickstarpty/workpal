@@ -23,24 +23,27 @@ test('live Python auth, membership routing and session expiration',async({page,c
  await page.getByLabel('Name',{exact:true}).fill('Private acceptance workspace');
  await page.getByLabel('Workspace URL').fill(slug);
  await page.getByRole('button',{name:'Create workspace',exact:true}).click();
- await expect(page.getByRole('combobox',{name:'Workspace',exact:true})).toHaveValue(slug);
+ await expect(page.getByRole('button', {name: 'Switch workspace', exact: true})).toBeVisible();
+ await expect(page).toHaveURL(new RegExp('#/'+slug+'/'));
  await page.goto('/#/'+slug+'/projects/deep-link');await page.reload();
- await expect(page.getByRole('combobox',{name:'Workspace',exact:true})).toHaveValue(slug);
+ await expect(page.getByRole('button', {name: 'Switch workspace', exact: true})).toBeVisible();
+ await expect(page).toHaveURL(new RegExp('#/'+slug+'/'));
  await page.goto('/#/unowned-private/projects');
  await expect(page.getByText('This workspace is unavailable or you do not have access.')).toBeVisible();
- await expect(page.getByRole('combobox',{name:'Workspace',exact:true})).toHaveCount(0);
+ await expect(page.getByRole('button', {name: 'Switch workspace', exact: true})).toHaveCount(0);
  const cookies=await context.cookies();const csrf=cookies.find(c=>c.name==='workpal_csrf_session')||cookies.find(c=>c.name==='workpal_csrf');
  expect(csrf).toBeTruthy();
  const second=slug+'-second';
  const response=await context.request.post('/api/workspaces',{data:{name:'Second acceptance workspace',slug:second},headers:{'X-CSRF-Token':csrf!.value}});
  expect(response.status(),await response.text()).toBe(201);
  await page.goto('/#/'+slug+'/projects/old-resource');
- await page.getByRole('combobox',{name:'Workspace',exact:true}).selectOption(second);
- await expect(page).toHaveURL(new RegExp('/'+second+'/projects$'));
+ await page.getByRole('button', {name: 'Switch workspace', exact: true}).click();
+ await page.getByRole('menuitem', {name: /Second acceptance workspace/}).click();
+ await expect(page).toHaveURL(new RegExp('/'+second+'/issues$'));
  await context.clearCookies();
  await page.reload();
  await expect(page.getByRole('button',{name:'Sign in',exact:true})).toBeVisible();
- await expect(page.getByRole('combobox',{name:'Workspace',exact:true})).toHaveCount(0);
+ await expect(page.getByRole('button', {name: 'Switch workspace', exact: true})).toHaveCount(0);
  await expect(page.getByText('Private acceptance workspace',{exact:true})).toHaveCount(0);
  expect(forbidden).toEqual([]);
 });
@@ -69,7 +72,8 @@ for(const action of ['logout','background401'] as const)test('live core session:
  expect(created.status(),await created.text()).toBe(201);
  await page.goto('/#/'+slug+'/projects');
  await page.reload();
- await expect(page.getByRole('combobox',{name:'Workspace',exact:true})).toHaveValue(slug);
+ await expect(page.getByRole('button', {name: 'Switch workspace', exact: true})).toBeVisible();
+ await expect(page).toHaveURL(new RegExp('#/'+slug+'/'));
  await expect(page.getByRole('button',{name:'Account',exact:true})).toBeVisible();
  const timeOrigin=await page.evaluate(()=>performance.timeOrigin);
  if(action==='logout'){
@@ -87,7 +91,7 @@ for(const action of ['logout','background401'] as const)test('live core session:
   await unauthorized;
  }
  await expect(page.getByRole('button',{name:'Sign in',exact:true})).toBeVisible();
- await expect(page.getByRole('combobox',{name:'Workspace',exact:true})).toHaveCount(0);
+ await expect(page.getByRole('button', {name: 'Switch workspace', exact: true})).toHaveCount(0);
  await expect(page.getByRole('button',{name:'Account',exact:true})).toHaveCount(0);
  await expect(page.getByText(slug,{exact:true})).toHaveCount(0);
  if(action==='background401')expect(await page.evaluate(()=>performance.timeOrigin)).toBe(timeOrigin);

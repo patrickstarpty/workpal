@@ -230,3 +230,114 @@ def test_autopilot_creator_keeps_native_member_reference(target, source):
         bodies = dict(conn.execute(select(records.c.id, records.c.body).where(records.c.kind == 'autopilots')).all())
     assert bodies['member']['created_by_id'] == result['mapping']['users']['patrick']
     assert bodies['agent']['created_by_id'] == 'patrick'
+
+
+def test_audit_blocks_unknown_deletion_despite_unchanged_manifest(target, source):
+    from workpal_backend.legacy_audit import audit
+    importer()(target.engine, source, 'dev@workpal.local')
+    assert audit(source, target.engine.url.database)['ok']
+    with target.engine.begin() as conn:
+        conn.exec_driver_sql("DELETE FROM workspace_records WHERE kind='comments'")
+    assert importer()(target.engine, source, 'dev@workpal.local')['total_records'] == 12
+    result = audit(source, target.engine.url.database)
+    assert not result['ok']
+    assert result['missing_unknown_reason'] == [['comments', 'comment-1']]
+    assert result['target_count'] == 11
+
+@pytest.mark.parametrize('mutation', ['counts', 'mapping', 'owner', 'member', 'position'])
+def test_audit_rejects_structural_corruption(target, source, mutation):
+    from workpal_backend.legacy_audit import audit
+    importer()(target.engine, source, 'dev@workpal.local')
+    with target.engine.begin() as conn:
+        sql = {
+            'counts': "UPDATE legacy_imports SET counts='{}'",
+            'mapping': "UPDATE legacy_imports SET mapping='{}'",
+            'owner': "UPDATE legacy_imports SET owner_id='missing'",
+            'member': "DELETE FROM members",
+            'position': "UPDATE workspace_records SET position=999 WHERE kind='issues'",
+        }[mutation]
+        conn.exec_driver_sql('PRAGMA foreign_keys=OFF')
+        if mutation == 'owner':
+            conn.exec_driver_sql("UPDATE legacy_imports SET owner_id=(SELECT id FROM users WHERE email='review@example.invalid')")
+            conn.exec_driver_sql("DELETE FROM members WHERE user_id=(SELECT id FROM users WHERE email='review@example.invalid')")
+        else:
+            conn.exec_driver_sql(sql)
+    assert not audit(source, target.engine.url.database)['ok']
+
+
+@pytest.mark.parametrize('change', ['add', 'edit', 'delete'])
+def test_audit_baseline_invalidated_by_later_writes(target, source, change):
+    from workpal_backend.legacy_audit import audit
+    importer()(target.engine, source, 'dev@workpal.local')
+    baseline = audit(source, target.engine.url.database)['source_checksum']
+    assert audit(source, target.engine.url.database, expected_checksum=baseline)['ok']
+    with sqlite3.connect(source) as conn:
+        if change == 'add':
+            conn.execute("INSERT INTO records VALUES('comments','new','{\"id\":\"new\"}')")
+        elif change == 'edit':
+            conn.execute("UPDATE records SET body=json_set(body,'$.title','later') WHERE kind='issues'")
+        else:
+            conn.execute("DELETE FROM records WHERE kind='comments'")
+    report = audit(source, target.engine.url.database, expected_checksum=baseline)
+    assert not report['ok'] and report['baseline_changed']
+    assert report['preflight_only']
+
+@pytest.mark.parametrize('raw', ['{"id":"TAP-1","secret":"DO_NOT_PRINT","id":"other"}', '{"id":"TAP-1","x":NaN}', '[]', '{broken'])
+def test_audit_cli_rejects_bad_json_without_disclosure(target, source, raw):
+    importer()(target.engine, source, 'dev@workpal.local')
+    with sqlite3.connect(source) as conn:
+        conn.execute("UPDATE records SET body=? WHERE kind='issues'", (raw,))
+    root = Path(__file__).resolve().parents[1]
+    before = source.read_bytes()
+    result = subprocess.run([sys.executable, str(root/'tools/audit_legacy_import.py'), '--source', str(source), '--target', str(target.engine.url.database)],
+                            env=dict(os.environ, PYTHONPATH=str(root/'src')), capture_output=True, text=True)
+    assert result.returncode == 1
+    assert json.loads(result.stdout)['ok'] is False
+    assert 'DO_NOT_PRINT' not in result.stdout + result.stderr
+    assert source.read_bytes() == before
+
+
+def test_audit_reports_edits_and_accepts_native_display_changes(target, source):
+    from workpal_backend.legacy_audit import audit
+    importer()(target.engine, source, 'dev@workpal.local')
+    with target.engine.begin() as conn:
+        conn.exec_driver_sql("UPDATE workspace_records SET body='{\"id\":\"TAP-1\",\"title\":\"later\"}' WHERE kind='issues'")
+        conn.exec_driver_sql("UPDATE workspaces SET name='Later'")
+        conn.exec_driver_sql("UPDATE users SET name='Later'")
+        conn.exec_driver_sql("UPDATE members SET role='member' WHERE user_id != ?", (OWNER_ID,))
+    report = audit(source, target.engine.url.database)
+    assert report['ok'] and report['current_body_changes'] == [['issues', 'TAP-1']]
+    with target.engine.connect() as conn:
+        assert 'later' in conn.exec_driver_sql("SELECT body FROM workspace_records WHERE kind='issues'").scalar()
+
+
+def test_audit_unknown_schema_fails(target, source):
+    from workpal_backend.legacy_audit import audit
+    importer()(target.engine, source, 'dev@workpal.local')
+    with sqlite3.connect(source) as conn:
+        conn.execute('CREATE TABLE unknown(secret TEXT)')
+    assert not audit(source, target.engine.url.database)['ok']
+
+@pytest.mark.parametrize('sql', [
+    "UPDATE legacy_imports SET mapping='{\"users\":{},\"users\":{}}'",
+    "UPDATE legacy_imports SET counts='{\"issues\":NaN}'",
+    "UPDATE workspace_records SET body='{\"id\":\"x\",\"id\":\"y\"}' WHERE kind='issues'",
+    "UPDATE workspace_records SET source_body='{}' WHERE kind='issues'",
+    "DELETE FROM workspace_records WHERE kind='comments'",
+])
+def test_audit_cli_failure_is_read_only(target, source, sql):
+    importer()(target.engine, source, 'dev@workpal.local')
+    with target.engine.begin() as conn:
+        conn.exec_driver_sql('PRAGMA ignore_check_constraints=ON')
+        conn.exec_driver_sql(sql)
+        conn.exec_driver_sql('PRAGMA ignore_check_constraints=OFF')
+    root = Path(__file__).resolve().parents[1]
+    path = Path(target.engine.url.database)
+    with sqlite3.connect(path) as conn:
+        before = '\n'.join(conn.iterdump())
+    result = subprocess.run([sys.executable, str(root/'tools/audit_legacy_import.py'), '--source', str(source), '--target', str(path)],
+                            env=dict(os.environ, PYTHONPATH=str(root/'src')), capture_output=True, text=True)
+    assert result.returncode == 1
+    assert json.loads(result.stdout)['ok'] is False
+    with sqlite3.connect(path) as conn:
+        assert '\n'.join(conn.iterdump()) == before

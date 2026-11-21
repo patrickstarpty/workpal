@@ -58,3 +58,20 @@ Install all workspace dependencies with `pnpm install`. Start the documentation 
 ## Branding
 
 Active source packages use `@workpal/*`; the Go module is `workpal.local/workpal/server`. No public service domain is configured. `.invalid` addresses in templates are non-resolving placeholders. Website/GitHub promotion entries are removed. Storage keys are copied to the Workpal namespace without overwriting existing values. The historical prototype archive is unchanged.
+
+### Python application entrypoints
+
+Prepare the Python environment as described in `server/README.md`, provision Redis,
+and export the explicit settings documented in `docs/python-environment.example` once in your
+shell. Supply authentication secrets through your secret manager; the example
+contains no secret. The launcher applies schema migrations, without importing
+legacy content or creating demo business records.
+
+`npm run dev` and `npm run dev:web` start Python, its worker and Vite (web port
+4174, API port 4175). `npm run build` builds the frontend; `npm start` serves that
+build with Python on port **4174**, preserving the previous user-facing port.
+`WORKPAL_PORT` overrides the Python port in either mode; `WORKPAL_WEB_PORT`
+controls Vite. FRONTEND_ORIGIN defaults to the corresponding user-facing origin.
+Ports must be free: the launcher never stops their existing owners. Redis and
+explicit database configuration are required; failures do not fall back to Node.
+Use `npm run dev:docs` for the independent documentation application.

@@ -1,6 +1,8 @@
 import {test, expect} from '@playwright/test';
 import {mkdir} from 'node:fs/promises';
 
+test.use({actionTimeout: 10000});
+
 // The configured launcher creates a dedicated database and never calls a model.
 test('login, capability home and workspace are three distinct layers', async ({page}) => {
   test.setTimeout(90000);
@@ -16,7 +18,7 @@ test('login, capability home and workspace are three distinct layers', async ({p
   await page.getByRole('button', {name: 'Sign in', exact: true}).click();
   await expect(page).toHaveURL(/#\/home$/);
   await expect(page.getByRole('heading', {name: 'One goal. A complete lifecycle.'})).toBeVisible();
-  await expect(page.getByRole('combobox', {name: 'Workspace', exact: true})).toHaveCount(0);
+  await expect(page.getByRole('button', {name: 'Switch workspace', exact: true})).toHaveCount(0);
   await expect(page.getByRole('button', {name: 'Appearance', exact: true})).toHaveCount(0);
   await expect(page.getByRole('button', {name: 'Enter Workspace', exact: true})).toBeVisible();
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'fwd');
@@ -30,12 +32,13 @@ test('login, capability home and workspace are three distinct layers', async ({p
 
   // A stage points to the same source-linked skill in the Hub.
   await page.getByRole('button', {name: /^Build: Code;/}).click();
-  await expect(page.locator('#stage-detail-title')).toBeFocused();
+  // Stage selection updates in place; retain keyboard focus on its trigger.
+  await expect(page.getByRole('button', {name: /^Build: Code;/})).toBeFocused();
   await page.getByRole('button', {name: 'test-driven-development', exact: true}).click();
   await expect(page).toHaveURL(/#\/home\/skills$/);
   await expect(page.getByRole('region', {name: 'Skill details'}).getByRole('heading')).toHaveText('test-driven-development');
   await expect(page.getByRole('region', {name: 'Skill details'}).getByRole('heading')).toBeFocused();
-  await page.getByRole('button', {name: 'Back to skills', exact: true}).click();
+  await page.getByRole('button', {name: 'Back to Skill Hub', exact: true}).click();
   await page.screenshot({path: 'outputs/capability-frontend/skill-hub-fwd-light.png', fullPage: true});
   const search = page.getByRole('searchbox', {name: 'Search skills'});
   const original = await search.elementHandle();
@@ -62,11 +65,10 @@ test('login, capability home and workspace are three distinct layers', async ({p
   await card.click();
   const detail = page.getByRole('region', {name: 'Skill details'}).getByRole('heading');
   await expect(detail).toBeFocused();
-  await card.click();
-  await expect(detail).toBeFocused();
+  // Detail replaces the card grid on narrow screens.
   const box = (await detail.boundingBox())!;
   expect(box.y).toBeGreaterThanOrEqual(0); expect(box.y + box.height).toBeLessThanOrEqual(844);
-  await page.getByRole('button', {name: 'Back to skills', exact: true}).click();
+  await page.getByRole('button', {name: 'Back to Skill Hub', exact: true}).click();
   expect(await page.evaluate(() => document.activeElement?.getAttribute('data-skill'))).toBe(id);
   await page.getByRole('button', {name: /^Browse Testing & review,/}).click();
   await expect(page.getByLabel('Skill type')).toHaveValue('quality');
@@ -79,18 +81,18 @@ test('login, capability home and workspace are three distinct layers', async ({p
   await expect(page.locator('#agent-title')).toHaveText('code simplifier');
   await expect(page.locator('#agent-title')).toBeFocused();
   await page.locator('[data-role-back]').click();
-  await page.locator('[data-squad-back]').click();
   await expect(page.getByRole('button', {name: 'Explore Engineering delivery squad', exact: true})).toBeFocused();
 
   // Appearance is managed inside Workspace and carries back to capabilities.
+  await page.setViewportSize({width:1440,height:900});
   await page.getByRole('button', {name: 'Enter Workspace', exact: true}).click();
   await expect(page.getByRole('heading', {name: 'Choose a workspace'})).toBeVisible();
   const slug = 'landing'; // This permitted workspace name must not collide with capability routes.
   await page.getByLabel('Name', {exact: true}).fill('Capability acceptance');
   await page.getByLabel('Workspace URL').fill(slug);
   await page.getByRole('button', {name: 'Create workspace', exact: true}).click();
-  await expect(page).toHaveURL(new RegExp(`#/${slug}/projects$`));
-  await expect(page.getByRole('combobox', {name: 'Workspace', exact: true})).toHaveValue(slug);
+  await expect(page).toHaveURL(new RegExp(`#/${slug}/issues$`));
+  await expect(page.getByRole('button', {name: 'Switch workspace', exact: true})).toBeVisible();
   const setWorkspaceAppearance = async (theme: string, mode: string) => {
     await page.getByRole('button', {name: 'Account', exact: true}).click();
     await page.getByRole('menuitem', {name: /^Theme/}).click();
@@ -104,16 +106,16 @@ test('login, capability home and workspace are three distinct layers', async ({p
   const enterCreatedWorkspace = async () => {
     await page.getByRole('button', {name: 'Enter Workspace', exact: true}).click();
     const chooser = page.getByRole('heading', {name: 'Choose a workspace'});
-    await expect(chooser.or(page.getByRole('combobox', {name: 'Workspace', exact: true}))).toBeVisible();
+    await expect(chooser.or(page.getByRole('button', {name: 'Switch workspace', exact: true}))).toBeVisible();
     if (await chooser.isVisible()) await page.getByRole('button', {name: 'Capability acceptance', exact: true}).click();
-    await expect(page.getByRole('combobox', {name: 'Workspace', exact: true})).toHaveValue(slug);
+    await expect(page.getByRole('button', {name: 'Switch workspace', exact: true})).toBeVisible();
   };
-  await page.getByRole('link', {name: 'AI capabilities', exact: true}).click();
+  await page.getByRole('link', {name: 'AI Hub', exact: true}).click();
   for (const theme of ['fwd', 'default']) for (const mode of ['light', 'dark']) {
     await page.setViewportSize({width: 1440, height: 900});
     await enterCreatedWorkspace();
     await setWorkspaceAppearance(theme, mode);
-    await page.getByRole('link', {name: 'AI capabilities', exact: true}).click();
+    await page.getByRole('link', {name: 'AI Hub', exact: true}).click();
     await expect(page.getByRole('button', {name: 'Appearance', exact: true})).toHaveCount(0);
     if (theme === 'fwd') await expect(page.locator('html')).toHaveAttribute('data-theme', 'fwd');
     else await expect(page.locator('html')).not.toHaveAttribute('data-theme');
@@ -142,28 +144,33 @@ test('login, capability home and workspace are three distinct layers', async ({p
   await page.screenshot({path: 'outputs/capability-frontend/team-mobile-dark.png', fullPage: true});
   await page.setViewportSize({width: 1440, height: 900});
   await enterCreatedWorkspace();
-  await expect(page).toHaveURL(new RegExp(`#/${slug}/projects$`));
+  await expect(page).toHaveURL(new RegExp(`#/${slug}/issues$`));
   await setWorkspaceAppearance('fwd', 'dark');
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'fwd');
   await page.setViewportSize({width: 390, height: 844});
   expect(await page.locator('[data-app-shell]').evaluate(node => node.getBoundingClientRect().bottom <= innerHeight + 1)).toBe(true);
   await page.goto('/#/landing/skills');
-  await expect(page.getByRole('combobox', {name: 'Workspace', exact: true})).toHaveValue(slug);
+  await page.locator('[data-sidebar=trigger]').click();
+  await expect(page.getByRole('button', {name: 'Switch workspace', exact: true})).toBeVisible();
   await expect(page.getByRole('navigation', {name: 'Capabilities'})).toHaveCount(0);
+  await page.keyboard.press('Escape');
   await expect(page.locator('html')).toHaveClass(/dark/);
   await expect(page.locator('html')).toHaveAttribute('data-theme', 'fwd');
-  await page.getByRole('link', {name: 'AI capabilities', exact: true}).click();
+  await page.getByRole('link', {name: 'AI Hub', exact: true}).click();
   await expect(page).toHaveURL(/#\/home$/);
   await page.reload();
   await expect(page.getByRole('button', {name: 'Enter Workspace', exact: true})).toBeVisible();
-  await expect(page.getByRole('combobox', {name: 'Workspace', exact: true})).toHaveCount(0);
+  await expect(page.getByRole('button', {name: 'Switch workspace', exact: true})).toHaveCount(0);
   await page.getByRole('button', {name: 'Enter Workspace', exact: true}).click();
   const chooser = page.getByRole('heading', {name: 'Choose a workspace'});
-  await expect(chooser.or(page.getByRole('combobox', {name: 'Workspace', exact: true}))).toBeVisible();
+  await expect(chooser.or(page.locator('[data-app-shell]'))).toBeVisible();
   if (await chooser.isVisible()) await page.getByRole('button', {name: 'Capability acceptance', exact: true}).click();
-  await expect(page).toHaveURL(new RegExp(`#/${slug}/projects$`));
+  await page.locator('[data-sidebar=trigger]').click();
+  await expect(page.getByRole('button', {name:'Switch workspace',exact:true})).toBeVisible();
+  await expect(page).toHaveURL(new RegExp(`#/${slug}/issues$`));
   await page.goto(`/#/${slug}/issues`); await page.reload();
-  await expect(page.getByRole('combobox', {name: 'Workspace', exact: true})).toHaveValue(slug);
+  await page.locator('[data-sidebar=trigger]').click();
+  await expect(page.getByRole('button', {name: 'Switch workspace', exact: true})).toBeVisible();
   await expect(page).toHaveURL(new RegExp(`#/${slug}/issues$`));
   expect(errors).toEqual([]);
   expect(requests.filter(path => /^\/(api|v1)\/.*\/(run|install|send)(\/|$)/.test(path))).toEqual([]);

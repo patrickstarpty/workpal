@@ -6,13 +6,17 @@ def main():
     parser = argparse.ArgumentParser()
     commands = parser.add_subparsers(dest='command', required=True)
     for command in ('migrate','serve','worker'):
-        commands.add_parser(command)
+        sub = commands.add_parser(command)
+        if command == 'serve':
+            sub.add_argument('--frontend-dir')
     legacy = commands.add_parser('import-legacy', help='Explicitly import an existing local legacy SQLite workspace')
     legacy.add_argument('--source', required=True)
     legacy.add_argument('--owner-email', required=True, help='An existing Python account to receive owner access')
     legacy.add_argument('--dry-run', action='store_true', help='Validate and report without migrations or writes')
     args = parser.parse_args()
     settings = Settings()
+    if args.command == 'serve' and args.frontend_dir:
+        settings.frontend_dir = args.frontend_dir
     if args.command == 'migrate': migrate(settings)
     elif args.command == 'import-legacy':
         import json

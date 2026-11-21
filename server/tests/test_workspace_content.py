@@ -72,8 +72,24 @@ def test_every_workspace_operation_requires_explicit_membership(content):
                                              created_at='2026-01-01T00:00:00Z', updated_at='2026-01-01T00:00:00Z'))
         foreign = service.create_workspace(session, outsider, 'Private', 'private-space')
     seed(app, foreign, 'projects', [{'id': 'secret', 'title': 'Private plan'}])
+    seed(app, foreign, 'issues', [{'id': 'private-issue', 'identifier': 'PRIVATE-1', 'title': 'Secret'}])
+    private = token | {'X-Workspace-Slug': foreign['slug']}
+    assert client.get('/api/issues/PRIVATE-1', headers=private).status_code == 404
+    assert client.post('/api/issues/private-issue/comments', headers=private, json={'content': 'intrusion'}).status_code == 404
+    for path in ('/api/properties', '/api/inbox/snoozed', '/api/inbox/unread-summary', '/api/working-agents', '/api/agent-activity-30d', '/api/search-index/manifest'):
+        assert client.get(path, headers=private).status_code == 404
     for path in ('/api/projects', '/api/projects/secret', '/api/issue-statuses', '/api/runtimes', '/api/chat/sessions', '/api/issue-view-preferences'):
         assert client.get(path, headers=token | {'X-Workspace-Slug': foreign['slug']}).status_code == 404
+    # Exercise the ID fallback against a real private workspace, not an unknown UUID.
+    private_headers = token | {'X-Workspace-ID': foreign['id']}
+    assert client.get('/api/projects', headers=private_headers).status_code == 404
+    assert client.get('/api/projects/secret', headers=private_headers).status_code == 404
+    assert client.post('/api/projects', headers=private_headers, json={'title': 'Intrusion'}).status_code == 404
+    assert client.patch('/api/projects/secret', headers=private_headers, json={'title': 'Intrusion'}).status_code == 404
+    assert client.delete('/api/projects/secret', headers=private_headers).status_code == 404
+    from workpal_backend.workspace_content import repository
+    with app.state.database.transaction() as session:
+        assert repository.get_record(session, foreign['id'], 'projects', 'secret')['title'] == 'Private plan'
     assert client.get('/api/projects/secret', headers=headers).status_code == 404
     assert client.patch('/api/projects/secret', headers=headers, json={'title': 'stolen'}).status_code == 404
     assert client.delete('/api/projects/secret', headers=headers).status_code == 404
@@ -237,3 +253,42 @@ def test_bootstrap_contains_native_user_payload(content):
     assert body['workspace']['id'] == workspace['id']
     assert body['projects'] == []
 
+
+
+def test_frontend_explicit_workspace_id_and_autopilot_list(content):
+    app, client, headers, workspace = content
+    scoped = {key: value for key, value in headers.items() if key != 'X-Workspace-Slug'}
+    scoped.update({'X-Workspace-Slug': '', 'X-Workspace-ID': workspace['id']})
+    assert client.get('/api/chat/sessions', headers=scoped).status_code == 200
+    assert client.get('/api/chat/sessions', headers=scoped | {'X-Workspace-ID': str(uuid4())}).status_code == 404
+    assert client.get('/api/autopilots', headers=headers).json() == {'autopilots': [], 'total': 0}
+
+
+def test_remaining_read_contracts(content):
+    app, client, headers, workspace = content
+    for path, expected in [('/api/inbox/unread-summary', []), ('/api/inbox/snoozed', []), ('/api/properties', {'properties': []})]:
+        response = client.get(path, headers=headers)
+        assert response.status_code == 200, response.text
+        assert response.json() == expected
+    for path in ('/api/working-agents', '/api/agent-activity-30d', '/api/search-index/manifest'):
+        assert client.get(path, headers=headers).status_code == 501
+
+
+def test_ordinary_comment_and_identifier_regression(content, settings):
+    app, client, headers, workspace = content
+    issue = client.post('/api/issues', headers=headers, json={'title': 'Persistent comment'}).json()
+    path = '/api/issues/' + issue['id'] + '/comments'
+    response = client.post(path, headers=headers, json={'content': 'literal <script> text'})
+    assert response.status_code == 200, response.text
+    comment = response.json()
+    assert comment['issue_id'] == issue['id']
+    for extra in ({'type': 'agent'}, {'attachment_ids': ['x']}, {'parent_id': 'x'}, {'unknown_field': True}):
+        assert client.post(path, headers=headers, json={'content': 'unsupported', **extra}).status_code == 501
+    assert client.post(path, headers={'X-Workspace-Slug': 'tap'}, json={'content': 'csrf'}).status_code == 403
+    with TestClient(create_app(settings)) as reopened:
+        assert reopened.get(path, headers=headers).json() == [comment]
+        assert reopened.get('/api/issues/' + issue['identifier'], headers=headers).json()['id'] == issue['id']
+    other = client.post('/api/workspaces', headers=headers, json={'name': 'Other', 'slug': 'other', 'issue_prefix': 'OTH'}).json()
+    foreign = headers | {'X-Workspace-Slug': other['slug']}
+    assert client.get('/api/issues/' + issue['identifier'], headers=foreign).status_code == 404
+    assert client.post(path, headers=foreign, json={'content': 'foreign'}).status_code == 404
