@@ -90,6 +90,50 @@ def check_handler_binding(root: Path, route: dict) -> list[str]:
     return []
 
 
+EXPECTED_PROFILE = dict(go_version='1.26.9', GOOS='linux', GOARCH='amd64',
+                        CGO_ENABLED='0', GOWORK='off', GOFLAGS='', tags=[],
+                        edition='default !oss including ee', module_mode='readonly')
+
+
+def check_execution_evidence(root: Path, route: dict) -> list[str]:
+    """Check immutable run records; test-source references alone cannot pass."""
+    label = f"{route.get('method')} {route.get('path')}: execution evidence"
+    def confined(name):
+        path = root / name
+        if Path(name).is_absolute() or not path.resolve().is_relative_to(root.resolve()) or path.is_symlink():
+            raise ValueError('unconfined evidence')
+        return path
+    try:
+        verification = route['verification']
+        data = confined(verification['report']).read_bytes()
+        if hashlib.sha256(data).hexdigest() != verification['sha256']:
+            return [f'{label}: report digest mismatch']
+        report = json.loads(data)
+        if report.get('status') != 'passed' or type(report.get('exit_code')) is not int or report['exit_code'] != 0 or type(report.get('skipped')) is not int or report['skipped'] != 0:
+            return [f'{label}: not a complete passing execution']
+        command = report.get('command')
+        if not isinstance(command, list) or not command or not all(isinstance(x, str) and x for x in command):
+            return [f'{label}: missing command']
+        identity = {'method': route.get('method'), 'path': route.get('path')}
+        if identity not in report.get('routes', []):
+            return [f'{label}: route not exercised']
+        profile = report.get('build_profile')
+        if not isinstance(profile, dict) or any(profile.get(k) != v for k, v in EXPECTED_PROFILE.items()):
+            return [f'{label}: build profile mismatch']
+        hashes = report.get('source_hashes')
+        if not isinstance(hashes, dict) or not hashes:
+            return [f'{label}: missing source hashes']
+        binding = route.get('handler_binding')
+        if binding and binding['source'].rsplit(':', 1)[0] not in hashes:
+            return [f'{label}: handler source not covered']
+        for name, digest in hashes.items():
+            if hashlib.sha256(confined(name).read_bytes()).hexdigest() != digest:
+                return [f'{label}: stale source {name}']
+    except (OSError, ValueError, KeyError, TypeError, AttributeError):
+        return [f'{label}: missing or malformed run record']
+    return []
+
+
 def check_contracts(routes_path: Path, callers_path: Path, *, require_complete: bool) -> list[str]:
     errors, seen = [], set()
     try:
@@ -217,6 +261,8 @@ def check_contracts(routes_path: Path, callers_path: Path, *, require_complete: 
         if isinstance(route.get('event'), dict):
             references(route['event'].get('sources'), f'{label} event')
         if require_complete:
+            if route.get('origin') == 'go':
+                errors.extend(check_execution_evidence(root, route))
             if route.get('origin') == 'go' and not route.get('handler_binding'):
                 errors.append(f'{label}: missing handler binding')
             references(route.get('tests'), f'{label} tests', test=True)

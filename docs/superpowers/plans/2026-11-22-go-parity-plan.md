@@ -1,6 +1,6 @@
-# Multica Go 逐项等价复刻实施计划（待用户审核）
+# Multica Go 逐项等价复刻实施计划（已批准，实施中）
 
-> **For agentic workers:** 用户明确要求先审核。本计划未经批准不得执行。批准后使用 executing-plans 或用户选定的执行方式逐项实施；禁止自动开始。
+> **For agentic workers:** 用户已在三项审阅修订后回复“可以了，你自己来做”，批准实施。使用 executing-plans 逐项执行，未批准的行为差异仍须停下提交审核。
 
 **Goal:** 按固定 Go 源码复刻后端行为，每个入口及其权限、数据、事务、事件和错误均有等价证据。
 
@@ -31,7 +31,7 @@
 
 **Files:** 本设计/计划、`docs/superpowers/evidence/2026-11-22-go-source-sha256.json`、现有工作区差异清单。
 
-- [ ] 用户明确批准设计、范围和实施计划；逐项记录批准的差异，默认无新增豁免。
+- [x] 用户明确批准设计、范围和实施计划；未新增任何 Go 行为差异豁免。
 - [ ] 校验完整受保护输入集合、摘要、固定 build profile 和 Git 基线，记录已有未提交代码；不把它们当作本次新实现或等价证据。
 - [ ] 确认隔离实现/验证工作区，真实服务和数据库保持原状。
 
@@ -46,7 +46,7 @@
 - [ ] 逐条追踪 handler→service→query→DDL→事件；记录成功及每个错误分支、身份矩阵、依赖和源码测试。
 - [ ] 审计现有 batch 证据和 Python 实现；只有来源和运行证据完整才能更新状态，不能照抄旧标签。
 - [ ] 先给检查器增加失败用例：受保护非 Go/SQL 文件或依赖锁变化、文件新增/删除、构建标签/环境漂移、把 !oss 与 oss 混用、同名不同 receiver 或测试替身误认入口、漏路由、缺中间件、遗漏非 HTTP producer、空夹具、陈旧摘要、未执行测试、无批准的排除项必须阻断。观察失败，再实现检查，验证通过。
-- [ ] 运行 `server/.venv/bin/python server/tools/check_contracts.py --require-complete`。本阶段仍有待实现条目时应失败；不能为通过检查而删项。
+- [ ] 运行 `server/.venv/bin/python server/tools/check_contracts.py --require-complete --build-profile docs/superpowers/evidence/2026-11-22-go-build-profile.json`。本阶段仍有待实现条目时应失败；不能为通过检查而删项。
 
 ## 任务 2：基准和差分验证框架
 
@@ -121,7 +121,7 @@
 
 - [ ] 逐入口及非 HTTP 账本无未核对、待实现、待验证；全部批准差异单独列出，未批准差异为零。
 - [ ] 完成检查器和受保护源码摘要检查通过；检查器本身不得接受空证据。
-- [ ] `server/.venv/bin/python server/tools/check_contracts.py --require-complete`、全量 Python/差分、`npm run check` 通过；跳过和环境故障不算通过。
+- [ ] `server/.venv/bin/python server/tools/check_contracts.py --require-complete --build-profile docs/superpowers/evidence/2026-11-22-go-build-profile.json`、全量 Python/差分、`npm run check` 通过；跳过和环境故障不算通过。
 - [ ] Playwright 验证各业务关键路径、权限、写入、刷新/重启、错误恢复、键盘/窄屏；局部 smoke 不替代契约验收。
 - [ ] 在隔离环境分别通过真实 `npm run dev` 与 `npm start` 的登录、上传/下载、WS、重启、Redis 不可用、端口冲突、SIGINT/SIGTERM 及子进程清理。
 - [ ] 交付逐项差异和证据，依本轮获批准的方案进入切换；若出现未批准的差异则停下提交审核。此门槛之前禁止以“还差备份”描述状态。
@@ -139,3 +139,17 @@
 ## 审核交付
 
 用户审核本文件和设计后再开始任务 0。当前没有开始上述任务，也没有因为本计划存在而获得实施授权。旧切换计划的未勾选项不能绕过本计划的 Go 等价门槛。
+
+## 执行记录（2026-11-22）
+
+已开始任务 1；整份计划未完成。保持当前 feature 分支和真实服务，测试使用隔离状态。先前配置/图片兼容/QA 改动保存为独立 checkpoint e47d49d3，不能记为 Go 等价。新门槛及绑定修正为 3f59fd11，批准文档和完整输入基线为 6e21ae2e。
+
+基线和绑定测试先红后绿，81 项及 30 subtests 通过；全量 npm run check 退出 0（713 Python tests + 30 subtests，Node 9，launcher 16，frontend build）。完整契约门槛仍失败，不能切换或删除 Node。
+
+Go 1.26.9 工具链已取得；linux/amd64 镜像在宿主仿真下曾退出 137，重试发生 TLS 证书解析 SIGSEGV。改用原生 linux/arm64 编译工具进程并显式保持目标 GOOS=linux / GOARCH=amd64，不改变基准目标。目标依赖图解析通过，默认 EE 包已确认，证据见 go-build-selection.json。尚无 Go 业务差分测试通过的声明。
+
+### Go 基线编译阻塞（等待用户决定）
+
+实际 Go 类型审计失败于 `server/go/pkg/remotemcp/client.go:91`：`netip.Addr.IsLinkLocalWorkpalst` / `IsWorkpalst` 不存在。检查还发现 `internal/integrations/wecom/media_guard.go` 与 `internal/handler/file.go` 有同类品牌替换。原始受保护文件未修改。
+
+已准备 `../evidence/2026-11-22-go-baseline-build-fix.patch`，仅将 3 文件中的 6 处调用恢复为标准库 `IsLinkLocalMulticast`、`IsInterfaceLocalMulticast`、`IsMulticast`。补丁只做了适用性检查，未应用；也没有声称修复后可完整编译。等待用户批准在独立参考副本应用并记录派生基线，不擅自更改已批准的 Go 源码基准。该阻塞不抹去已完成的检查器工作，也不能作为跳过 Go 验证的理由。

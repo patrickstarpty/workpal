@@ -1,0 +1,35 @@
+--- a/server/go/pkg/remotemcp/client.go
++++ b/server/go/pkg/remotemcp/client.go
+@@ -88,7 +88,7 @@
+ }
+ 
+ func isPublicAddress(address netip.Addr) bool {
+-	if !address.IsValid() || address.IsPrivate() || address.IsLoopback() || address.IsLinkLocalUnicast() || address.IsLinkLocalWorkpalst() || address.IsWorkpalst() || address.IsUnspecified() {
++	if !address.IsValid() || address.IsPrivate() || address.IsLoopback() || address.IsLinkLocalUnicast() || address.IsLinkLocalMulticast() || address.IsMulticast() || address.IsUnspecified() {
+ 		return false
+ 	}
+ 	// IANA special-purpose and metadata ranges not covered by netip's helpers.
+--- a/server/go/internal/integrations/wecom/media_guard.go
++++ b/server/go/internal/integrations/wecom/media_guard.go
+@@ -189,8 +189,8 @@
+ 		return false
+ 	}
+ 	if a.IsLoopback() || a.IsPrivate() || a.IsUnspecified() ||
+-		a.IsLinkLocalUnicast() || a.IsLinkLocalWorkpalst() ||
+-		a.IsInterfaceLocalWorkpalst() || a.IsWorkpalst() {
++		a.IsLinkLocalUnicast() || a.IsLinkLocalMulticast() ||
++		a.IsInterfaceLocalMulticast() || a.IsMulticast() {
+ 		return false
+ 	}
+ 	// Translation space first, and before the allow-list is consulted at all.
+--- a/server/go/internal/handler/file.go
++++ b/server/go/internal/handler/file.go
+@@ -1035,7 +1035,7 @@
+ 		return addr.IsLoopback() ||
+ 			addr.IsPrivate() ||
+ 			addr.IsLinkLocalUnicast() ||
+-			addr.IsLinkLocalWorkpalst() ||
++			addr.IsLinkLocalMulticast() ||
+ 			addr.IsUnspecified()
+ 	}
+ 	return false
