@@ -1,3 +1,5 @@
+> **2026-11-22：历史文档，暂停执行。** 用户要求重新按 Go 源码一比一复刻并先审核文档。以 [新设计](../specs/2026-11-22-go-parity-design.md) 和 [新实施计划](../plans/2026-11-22-go-parity-plan.md) 为待审核版本。下文原批准/进度不授权继续实施或删除 Node。
+
 # Python endpoint migration checklist
 
 All unchecked endpoints remain pending. Source handler bodies and inherited registration middleware are in routes.json. Each endpoint needs exact executable success, validation, permission, persistence/reopen and error fixtures before implementation acceptance. Do not treat embedded source as passing tests.

@@ -1,0 +1,542 @@
+{
+  "scope": "Existing source_handlers with h.* bound to internal/handler.Handler and projectfolder s.* bound via s := New(h) to projectfolder.Service; declaration verified in current files. This is not Go type checking or complete dynamic-registration analysis. Other expressions remain unverified. Underlying legacy contracts unchanged pending approved implementation.",
+  "scanned_routes": 547,
+  "corrections": [
+    {
+      "method": "POST",
+      "path": "/api/daemon/tasks/{id}/plugin-hooks",
+      "receiver": "Handler",
+      "handler": "h.InvokeAgentPluginHook",
+      "registration": "server/go/cmd/server/router.go:1690",
+      "resolved_handler": "server/go/internal/handler/plugin_agent_hook.go:29",
+      "rejected_as_entrypoint": [
+        "server/go/internal/daemon/client.go:1557"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/daemon/runtimes/{runtimeId}/tasks/{taskId}/prepare-lease",
+      "receiver": "Handler",
+      "handler": "h.ExtendTaskPrepareLease",
+      "registration": "server/go/cmd/server/router.go:1701",
+      "resolved_handler": "server/go/internal/handler/daemon.go:4749",
+      "rejected_as_entrypoint": [
+        "server/go/internal/daemon/client.go:468",
+        "server/go/internal/service/task.go:4707"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/daemon/runtimes/{runtimeId}/update/{updateId}/result",
+      "receiver": "Handler",
+      "handler": "h.ReportUpdateResult",
+      "registration": "server/go/cmd/server/router.go:1704",
+      "resolved_handler": "server/go/internal/handler/runtime_update.go:290",
+      "rejected_as_entrypoint": [
+        "server/go/internal/daemon/client.go:909"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/daemon/runtimes/{runtimeId}/models/{requestId}/result",
+      "receiver": "Handler",
+      "handler": "h.ReportModelListResult",
+      "registration": "server/go/cmd/server/router.go:1705",
+      "resolved_handler": "server/go/internal/handler/runtime_models.go:481",
+      "rejected_as_entrypoint": [
+        "server/go/internal/daemon/client.go:914"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/daemon/runtimes/{runtimeId}/local-skills/{requestId}/result",
+      "receiver": "Handler",
+      "handler": "h.ReportLocalSkillListResult",
+      "registration": "server/go/cmd/server/router.go:1706",
+      "resolved_handler": "server/go/internal/handler/runtime_local_skills.go:737",
+      "rejected_as_entrypoint": [
+        "server/go/internal/daemon/client.go:919"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/daemon/runtimes/{runtimeId}/local-skills/import/{requestId}/result",
+      "receiver": "Handler",
+      "handler": "h.ReportLocalSkillImportResult",
+      "registration": "server/go/cmd/server/router.go:1707",
+      "resolved_handler": "server/go/internal/handler/runtime_local_skills.go:803",
+      "rejected_as_entrypoint": [
+        "server/go/internal/daemon/client.go:924"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/daemon/runtimes/{runtimeId}/environment-commands/claim",
+      "receiver": "Handler",
+      "handler": "h.ClaimEnvironmentCommands",
+      "registration": "server/go/cmd/server/router.go:1708",
+      "resolved_handler": "server/go/internal/handler/issue_environment_control.go:425",
+      "rejected_as_entrypoint": [
+        "server/go/internal/daemon/client.go:793",
+        "server/go/internal/daemon/environment_commands_unix_test.go:28"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/daemon/runtimes/{runtimeId}/environment-commands/{commandId}/result",
+      "receiver": "Handler",
+      "handler": "h.ReportEnvironmentCommandResult",
+      "registration": "server/go/cmd/server/router.go:1709",
+      "resolved_handler": "server/go/internal/handler/issue_environment_control.go:456",
+      "rejected_as_entrypoint": [
+        "server/go/internal/daemon/client.go:803",
+        "server/go/internal/daemon/environment_commands_unix_test.go:36"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/daemon/tasks/{taskId}/status",
+      "receiver": "Handler",
+      "handler": "h.GetTaskStatus",
+      "registration": "server/go/cmd/server/router.go:1711",
+      "resolved_handler": "server/go/internal/handler/daemon.go:5739",
+      "rejected_as_entrypoint": [
+        "server/go/internal/daemon/client.go:876"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/daemon/tasks/{taskId}/start",
+      "receiver": "Handler",
+      "handler": "h.StartTask",
+      "registration": "server/go/cmd/server/router.go:1712",
+      "resolved_handler": "server/go/internal/handler/daemon.go:4777",
+      "rejected_as_entrypoint": [
+        "server/go/internal/daemon/client.go:515",
+        "server/go/internal/service/task.go:4613"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/daemon/tasks/{taskId}/supplements/claim",
+      "receiver": "Handler",
+      "handler": "h.ClaimTaskSupplement",
+      "registration": "server/go/cmd/server/router.go:1713",
+      "resolved_handler": "server/go/internal/handler/task_supplement.go:469",
+      "rejected_as_entrypoint": [
+        "server/go/internal/daemon/client.go:479"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/daemon/tasks/{taskId}/supplements/{commentId}/ack",
+      "receiver": "Handler",
+      "handler": "h.AckTaskSupplement",
+      "registration": "server/go/cmd/server/router.go:1714",
+      "resolved_handler": "server/go/internal/handler/task_supplement.go:512",
+      "rejected_as_entrypoint": [
+        "server/go/internal/daemon/client.go:492"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/daemon/tasks/{taskId}/wait-local-directory",
+      "receiver": "Handler",
+      "handler": "h.MarkTaskWaitingLocalDirectory",
+      "registration": "server/go/cmd/server/router.go:1715",
+      "resolved_handler": "server/go/internal/handler/daemon.go:4909",
+      "rejected_as_entrypoint": [
+        "server/go/internal/daemon/client.go:574",
+        "server/go/internal/service/task.go:4734"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/daemon/tasks/{taskId}/complete",
+      "receiver": "Handler",
+      "handler": "h.CompleteTask",
+      "registration": "server/go/cmd/server/router.go:1717",
+      "resolved_handler": "server/go/internal/handler/daemon.go:5019",
+      "rejected_as_entrypoint": [
+        "server/go/internal/daemon/client.go:672",
+        "server/go/internal/service/task.go:4833"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/daemon/tasks/{taskId}/fail",
+      "receiver": "Handler",
+      "handler": "h.FailTask",
+      "registration": "server/go/cmd/server/router.go:1718",
+      "resolved_handler": "server/go/internal/handler/daemon.go:5803",
+      "rejected_as_entrypoint": [
+        "server/go/internal/daemon/client.go:817",
+        "server/go/internal/service/task.go:5279"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/daemon/tasks/{taskId}/usage",
+      "receiver": "Handler",
+      "handler": "h.ReportTaskUsage",
+      "registration": "server/go/cmd/server/router.go:1719",
+      "resolved_handler": "server/go/internal/handler/daemon.go:5632",
+      "rejected_as_entrypoint": [
+        "server/go/internal/daemon/client.go:699"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/daemon/tasks/{taskId}/environments",
+      "receiver": "Handler",
+      "handler": "h.ReportTaskEnvironments",
+      "registration": "server/go/cmd/server/router.go:1720",
+      "resolved_handler": "server/go/internal/handler/issue_environment.go:168",
+      "rejected_as_entrypoint": [
+        "server/go/internal/daemon/client.go:733",
+        "server/go/internal/daemon/environments_test.go:32"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/daemon/tasks/{taskId}/environment-configs",
+      "receiver": "Handler",
+      "handler": "h.ReportTaskEnvironmentConfigs",
+      "registration": "server/go/cmd/server/router.go:1721",
+      "resolved_handler": "server/go/internal/handler/issue_environment_control.go:555",
+      "rejected_as_entrypoint": [
+        "server/go/internal/daemon/client.go:745",
+        "server/go/internal/daemon/environment_commands_unix_test.go:43"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/daemon/tasks/{taskId}/context-receipt",
+      "receiver": "Handler",
+      "handler": "h.ReportTaskContextReceipt",
+      "registration": "server/go/cmd/server/router.go:1722",
+      "resolved_handler": "server/go/internal/handler/task_context_receipt.go:88",
+      "rejected_as_entrypoint": [
+        "server/go/internal/daemon/client.go:757"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/daemon/tasks/{taskId}/rate-limits",
+      "receiver": "Handler",
+      "handler": "h.ReportTaskRateLimits",
+      "registration": "server/go/cmd/server/router.go:1723",
+      "resolved_handler": "server/go/internal/handler/runtime_rate_limit.go:117",
+      "rejected_as_entrypoint": [
+        "server/go/internal/daemon/client.go:766"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/daemon/tasks/{taskId}/messages",
+      "receiver": "Handler",
+      "handler": "h.ReportTaskMessages",
+      "registration": "server/go/cmd/server/router.go:1724",
+      "resolved_handler": "server/go/internal/handler/daemon.go:5894",
+      "rejected_as_entrypoint": [
+        "server/go/internal/daemon/client.go:666"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/daemon/tasks/{taskId}/cancel-ack",
+      "receiver": "Handler",
+      "handler": "h.AckTaskCancelled",
+      "registration": "server/go/cmd/server/router.go:1726",
+      "resolved_handler": "server/go/internal/handler/daemon.go:6088",
+      "rejected_as_entrypoint": [
+        "server/go/internal/daemon/client.go:615"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/daemon/issues/{issueId}/gc-check",
+      "receiver": "Handler",
+      "handler": "h.GetIssueGCCheck",
+      "registration": "server/go/cmd/server/router.go:1729",
+      "resolved_handler": "server/go/internal/handler/daemon.go:7004",
+      "rejected_as_entrypoint": [
+        "server/go/internal/daemon/client.go:1126"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/daemon/chat-sessions/{sessionId}/gc-check",
+      "receiver": "Handler",
+      "handler": "h.GetChatSessionGCCheck",
+      "registration": "server/go/cmd/server/router.go:1730",
+      "resolved_handler": "server/go/internal/handler/daemon.go:7052",
+      "rejected_as_entrypoint": [
+        "server/go/internal/daemon/client.go:1144"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/daemon/autopilot-runs/{runId}/gc-check",
+      "receiver": "Handler",
+      "handler": "h.GetAutopilotRunGCCheck",
+      "registration": "server/go/cmd/server/router.go:1731",
+      "resolved_handler": "server/go/internal/handler/daemon.go:7079",
+      "rejected_as_entrypoint": [
+        "server/go/internal/daemon/client.go:1163"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/daemon/tasks/{taskId}/gc-check",
+      "receiver": "Handler",
+      "handler": "h.GetTaskGCCheck",
+      "registration": "server/go/cmd/server/router.go:1732",
+      "resolved_handler": "server/go/internal/handler/daemon.go:7110",
+      "rejected_as_entrypoint": [
+        "server/go/internal/daemon/client.go:1180"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/daemon/tasks/{taskId}/session",
+      "receiver": "Handler",
+      "handler": "h.PinTaskSession",
+      "registration": "server/go/cmd/server/router.go:1735",
+      "resolved_handler": "server/go/internal/handler/task_lifecycle.go:71",
+      "rejected_as_entrypoint": [
+        "server/go/internal/daemon/client.go:852"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/upload-file",
+      "receiver": "Handler",
+      "handler": "h.UploadFile",
+      "registration": "server/go/cmd/server/router.go:1799",
+      "resolved_handler": "server/go/internal/handler/file.go:388",
+      "rejected_as_entrypoint": [
+        "server/go/internal/cli/client.go:494",
+        "server/go/internal/integrations/lark/outbound_media_test.go:51",
+        "server/go/internal/integrations/lark/http_client_media.go:203"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/workspaces/{id}/plugins/preview",
+      "receiver": "Handler",
+      "handler": "h.PreviewPlugin",
+      "registration": "server/go/cmd/server/router.go:1910",
+      "resolved_handler": "server/go/internal/handler/plugin.go:214",
+      "rejected_as_entrypoint": [
+        "server/go/internal/service/plugin.go:263"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/workspaces/{id}/plugins",
+      "receiver": "Handler",
+      "handler": "h.InstallPlugin",
+      "registration": "server/go/cmd/server/router.go:1911",
+      "resolved_handler": "server/go/internal/handler/plugin.go:241",
+      "rejected_as_entrypoint": [
+        "server/go/internal/service/plugin.go:340"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/issues/{id}",
+      "receiver": "Handler",
+      "handler": "h.GetIssue",
+      "registration": "server/go/cmd/server/router.go:2190",
+      "resolved_handler": "server/go/internal/handler/issue.go:2576",
+      "rejected_as_entrypoint": [
+        "server/go/cmd/server/scope_authorizer_test.go:28",
+        "server/go/cmd/server/scope_authorizer_test.go:198",
+        "server/go/cmd/server/scope_authorizer_test.go:215"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/issues/{id}/tasks/{taskId}/cancel",
+      "receiver": "Handler",
+      "handler": "h.CancelTask",
+      "registration": "server/go/cmd/server/router.go:2219",
+      "resolved_handler": "server/go/internal/handler/daemon.go:6337",
+      "rejected_as_entrypoint": [
+        "server/go/internal/service/task.go:2991"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/issues/{id}/rerun",
+      "receiver": "Handler",
+      "handler": "h.RerunIssue",
+      "registration": "server/go/cmd/server/router.go:2222",
+      "resolved_handler": "server/go/internal/handler/task_lifecycle.go:158",
+      "rejected_as_entrypoint": [
+        "server/go/internal/service/task.go:6150"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/tasks/{taskId}/retry-source-context",
+      "receiver": "Handler",
+      "handler": "h.RetrySourceContextQuickCreate",
+      "registration": "server/go/cmd/server/router.go:2256",
+      "resolved_handler": "server/go/internal/handler/task_lifecycle.go:277",
+      "rejected_as_entrypoint": [
+        "server/go/internal/service/task.go:1790"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/autopilots/{id}",
+      "receiver": "Handler",
+      "handler": "h.GetAutopilot",
+      "registration": "server/go/cmd/server/router.go:2381",
+      "resolved_handler": "server/go/internal/handler/autopilot.go:546",
+      "rejected_as_entrypoint": [
+        "server/go/cmd/server/private_project_realtime_test.go:102"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/agents/{id}",
+      "receiver": "Handler",
+      "handler": "h.GetAgent",
+      "registration": "server/go/cmd/server/router.go:2462",
+      "resolved_handler": "server/go/internal/handler/agent.go:1317",
+      "rejected_as_entrypoint": [
+        "server/go/internal/integrations/lark/outcome_replier_test.go:122",
+        "server/go/internal/integrations/lark/outbound_test.go:100"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/tasks/{taskId}/cancel",
+      "receiver": "Handler",
+      "handler": "h.CancelTaskByUser",
+      "registration": "server/go/cmd/server/router.go:2601",
+      "resolved_handler": "server/go/internal/handler/chat.go:1878",
+      "rejected_as_entrypoint": [
+        "server/go/internal/service/task.go:3008"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/chat/sessions",
+      "receiver": "Handler",
+      "handler": "h.CreateChatSession",
+      "registration": "server/go/cmd/server/router.go:2626",
+      "resolved_handler": "server/go/internal/handler/chat.go:40",
+      "rejected_as_entrypoint": [
+        "server/go/internal/integrations/channel/engine/session.go:95",
+        "server/go/internal/integrations/channel/engine/session_test.go:150"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/chat/sessions/{sessionId}",
+      "receiver": "Handler",
+      "handler": "h.GetChatSession",
+      "registration": "server/go/cmd/server/router.go:2629",
+      "resolved_handler": "server/go/internal/handler/chat.go:324",
+      "rejected_as_entrypoint": [
+        "server/go/internal/integrations/lark/outbound_test.go:94",
+        "server/go/internal/integrations/channel/engine/session.go:131",
+        "server/go/internal/integrations/channel/engine/router_test.go:462",
+        "server/go/internal/integrations/channel/engine/session_test.go:208",
+        "server/go/cmd/server/scope_authorizer_test.go:34",
+        "server/go/cmd/server/scope_authorizer_test.go:201",
+        "server/go/cmd/server/scope_authorizer_test.go:218"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/chat/sessions/{sessionId}/quick-actions/regenerate",
+      "receiver": "Handler",
+      "handler": "h.RegenerateChatQuickActions",
+      "registration": "server/go/cmd/server/router.go:2638",
+      "resolved_handler": "server/go/internal/handler/chat.go:1171",
+      "rejected_as_entrypoint": [
+        "server/go/internal/service/task.go:2258"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/chat/sessions/{sessionId}/messages",
+      "receiver": "Handler",
+      "handler": "h.ListChatMessages",
+      "registration": "server/go/cmd/server/router.go:2639",
+      "resolved_handler": "server/go/internal/handler/chat.go:1247",
+      "rejected_as_entrypoint": [
+        "server/go/internal/integrations/lark/http_client.go:686",
+        "server/go/internal/integrations/lark/outcome_replier_test.go:90",
+        "server/go/internal/integrations/lark/client.go:472",
+        "server/go/internal/integrations/lark/outbound_test.go:212",
+        "server/go/internal/integrations/lark/inbound_enricher_test.go:59",
+        "server/go/internal/integrations/lark/typing_indicator_test.go:63",
+        "server/go/internal/integrations/lark/inbound_enricher_budget_test.go:23"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/project-folders",
+      "receiver": "Service",
+      "handler": "s.List",
+      "registration": "server/go/ee/projectfolder/handler.go:52",
+      "resolved_handler": "server/go/ee/projectfolder/handler.go:138",
+      "rejected_as_entrypoint": [
+        "server/go/internal/integrations/weixin/install.go:373",
+        "server/go/internal/daemon/localenv/manager.go:334"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/project-folders",
+      "receiver": "Service",
+      "handler": "s.Create",
+      "registration": "server/go/ee/projectfolder/handler.go:53",
+      "resolved_handler": "server/go/ee/projectfolder/handler.go:172",
+      "rejected_as_entrypoint": [
+        "server/go/internal/handler/runtime_update.go:96",
+        "server/go/internal/handler/runtime_local_skills.go:253",
+        "server/go/internal/handler/runtime_local_skills.go:362",
+        "server/go/internal/handler/runtime_update_error_classification_test.go:20",
+        "server/go/internal/handler/runtime_local_skills_redis_store.go:82",
+        "server/go/internal/handler/runtime_local_skills_redis_store.go:276",
+        "server/go/internal/handler/runtime_models.go:222",
+        "server/go/internal/handler/runtime_update_redis_store.go:46",
+        "server/go/internal/handler/runtime_models_redis_store.go:52",
+        "server/go/internal/handler/request_cancellation_test.go:240",
+        "server/go/internal/integrations/lark/install_session_redis_store.go:106",
+        "server/go/internal/integrations/lark/install_session_store.go:117",
+        "server/go/internal/integrations/wecom/inbound_media_bind_db_test.go:148",
+        "server/go/internal/integrations/wecom/inbound_media_bind_db_test.go:451",
+        "server/go/internal/integrations/channel/engine/router_test.go:313",
+        "server/go/internal/maintenance/job.go:173",
+        "server/go/internal/service/chat_wakeup.go:252",
+        "server/go/internal/service/issue_wakeup.go:267",
+        "server/go/internal/service/issue.go:233"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/project-folders/{id}",
+      "receiver": "Service",
+      "handler": "s.Delete",
+      "registration": "server/go/ee/projectfolder/handler.go:57",
+      "resolved_handler": "server/go/ee/projectfolder/handler.go:253",
+      "rejected_as_entrypoint": [
+        "server/go/internal/handler/file_test.go:87",
+        "server/go/internal/storage/local.go:109",
+        "server/go/internal/storage/s3.go:354",
+        "server/go/internal/integrations/dingtalk/media_test.go:45",
+        "server/go/internal/integrations/lark/feishu_channel_test.go:69",
+        "server/go/internal/service/issue_wakeup_manage.go:108"
+      ]
+    }
+  ],
+  "unresolved_in_scanned_scope": []
+}

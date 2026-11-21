@@ -1,3 +1,5 @@
+> **2026-11-22：历史文档，暂停执行。** 用户要求重新按 Go 源码一比一复刻并先审核文档。以 [新设计](../specs/2026-11-22-go-parity-design.md) 和 [新实施计划](../plans/2026-11-22-go-parity-plan.md) 为待审核版本。下文原批准/进度不授权继续实施或删除 Node。
+
 # Python 前后端切换实施计划
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
