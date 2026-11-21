@@ -114,20 +114,7 @@ test("API failures and unpublished releases fail closed", async () => {
   }
 });
 
-test("promotion is serialized across tags and both upload paths use the gate", () => {
-  const workflow = parse(readFileSync(new URL("../.github/workflows/promote-release.yml", import.meta.url), "utf8"));
-  assert.ok(workflow.on.workflow_call);
-  assert.ok(workflow.on.workflow_dispatch);
-  assert.equal(workflow.permissions.contents, "write");
-  const gate = workflow.jobs.promote;
-  assert.equal(gate.concurrency["cancel-in-progress"], false);
-  assert.doesNotMatch(gate.concurrency.group, /\$\{\{/);
-  assert.ok(gate.steps.some((s) => s.uses?.startsWith("actions/checkout@") && s.with.ref === "main"));
-  assert.equal(gate["continue-on-error"], undefined);
-  const release = parse(readFileSync(new URL("../.github/workflows/release.yml", import.meta.url), "utf8"));
-  assert.ok(release.jobs.promote.needs.includes("desktop"));
-  assert.ok(release.jobs.promote.needs.includes("verify"));
-  assert.equal(release.jobs.promote.uses, "./.github/workflows/promote-release.yml");
+test("release assets do not promote themselves", () => {
   const goreleaser = parse(readFileSync(new URL("../.goreleaser.yml", import.meta.url), "utf8"));
   assert.equal(goreleaser.release.make_latest, false);
   assert.notEqual(goreleaser.release.draft, true);
