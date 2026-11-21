@@ -1,12 +1,9 @@
-import {createRequire} from 'node:module';
 import assert from 'node:assert/strict';
-import {createServer} from '../server/api.mjs';
-const require=createRequire(import.meta.url);
-const {chromium,expect}=require(process.env.WORKPAL_PLAYWRIGHT||'@playwright/test');
-const server=createServer({dbPath:':memory:'});await new Promise(r=>server.listen(0,'127.0.0.1',r));
-const base=`http://127.0.0.1:${server.address().port}`,browser=await chromium.launch();
-try{
- const page=await browser.newPage({viewport:{width:1440,height:1000}}),errors=[],failed=[];
+import {expect} from '@playwright/test';
+// Invoked by python-workspace-import-qa against an isolated imported SQLite.
+export async function verify(page, base, fixture){
+
+ const errors=[],failed=[];
  page.on('pageerror',e=>errors.push(e.message));page.on('response',r=>{if(r.url().includes('/api/dashboard/')&&r.status()>=400)failed.push(r.url());});
  await page.goto(base+'/#/review/issues/TAP-029');
  await expect(page.getByText('Cases to cover',{exact:true})).toBeVisible();
@@ -36,4 +33,5 @@ try{
  await page.screenshot({path:'/tmp/workpal-analytics-errors.png',fullPage:true});
  assert.deepEqual(errors,[]);assert.deepEqual(failed,[]);
  console.log('PASS: ticket rich text and discussion; Analytics charts, 7d/90d ranges, project filtering and Errors tab; no page exceptions');
-}finally{await browser.close();await new Promise(r=>{server.close(r);server.closeAllConnections();});}
+
+}

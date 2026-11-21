@@ -1,16 +1,9 @@
-import {createRequire} from 'node:module';
-import {resolve} from 'node:path';
 import assert from 'node:assert/strict';
-import {createServer} from '../server/api.mjs';
-import {fixture} from '../server/fixtures.mjs';
-const require=createRequire(import.meta.url);
-const {chromium,expect}=require(process.env.WORKPAL_PLAYWRIGHT||'@playwright/test');
-const server=createServer({dbPath:':memory:',staticDir:resolve('apps/web/dist')});
-await new Promise(r=>server.listen(0,'127.0.0.1',r));
-const base=`http://127.0.0.1:${server.address().port}`;
-const browser=await chromium.launch();
-try {
- const page=await browser.newPage({viewport:{width:1440,height:900}}),errors=[];
+import {expect} from '@playwright/test';
+// Invoked by python-workspace-import-qa against an isolated imported SQLite.
+export async function verify(page, base, fixture){
+
+ const errors=[];
  page.on('pageerror',error=>errors.push(error.message));
  const go=async path=>{await page.goto(`${base}/#/review/${path}`);await expect(page.getByRole('button',{name:'Switch workspace'})).toBeVisible();};
  await go('projects');
@@ -43,7 +36,7 @@ try {
  await page.getByRole('link',{name:'Analytics',exact:true}).click();await expect(page).toHaveURL(/\/usage$/);
  await expect(page.getByText('Leaderboard',{exact:true})).toBeVisible();
  console.log('PASS: Resources → Skills → skill detail; Analytics navigation');
- await go('squads');await page.getByText(fixture.squads[0].name,{exact:true}).first().click();
+ await go('squads');await page.getByRole('button',{name:'My squads',exact:true}).click();await page.getByRole('menuitemradio',{name:/All squads/}).click();await page.getByText(fixture.squads[0].name,{exact:true}).first().click();
  await expect(page).toHaveURL(/\/squads\//);
  await expect(page.getByText('Unknown member',{exact:true})).toHaveCount(0);
  await expect(page.getByText(fixture.squads[0].leader_id,{exact:true}).first()).toBeVisible();
@@ -55,4 +48,5 @@ try {
  }
  await go('missing-page');await expect(page.getByText('Page unavailable',{exact:true})).toBeVisible();
  assert.deepEqual(errors,[]);console.log('PASS: 14 desktop web routes, no page exceptions or horizontal document overflow; unknown route is explicit');
-}finally{await browser.close();await new Promise(r=>{server.close(r);server.closeAllConnections();});}
+
+}

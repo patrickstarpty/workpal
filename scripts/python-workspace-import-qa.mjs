@@ -96,6 +96,15 @@ try{
  await page.keyboard.press('Escape');
  assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth),false);
  await page.setViewportSize({width:1440,height:1000});
+ const fixture={skills:await (await request('skills')).json(),squads:await (await request('squads')).json()};
+ for(const name of ['avatar-channels','web-components','mock-data','contribution']){
+  console.log('RUN Python product QA:',name);
+  const extra=await browser.newPage({viewport:{width:1440,height:1000}});
+  await extra.context().addCookies(await page.context().cookies());
+  extra.setDefaultTimeout(10000);
+  await (await import(`./${name}-qa.mjs`)).verify(extra,base,fixture);
+  await extra.close();
+ }
  await page.getByRole('button',{name:'Account',exact:true}).click();
  const logout=page.waitForResponse(response=>response.url().endsWith('/auth/logout')&&response.request().method()==='POST');
  await page.getByRole('menuitem',{name:'Log out',exact:true}).click();

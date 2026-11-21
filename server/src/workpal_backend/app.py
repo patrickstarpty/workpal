@@ -94,6 +94,8 @@ def create_app(settings):
     app.include_router(realtime_router)
     from .workspace_content.analytics_routes import router as analytics_router
     app.include_router(analytics_router)
+    from .files.routes import router as file_router
+    app.include_router(file_router)
     from .workspace_content.routes import router as content_router
     app.include_router(content_router)
     @app.exception_handler(DatabaseBusy)

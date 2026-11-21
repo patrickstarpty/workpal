@@ -62,9 +62,11 @@ Active source packages use `@workpal/*`; the Go module is `workpal.local/workpal
 ### Python application entrypoints
 
 Prepare the Python environment as described in `server/README.md`, provision Redis,
-and export the explicit settings documented in `docs/python-environment.example` once in your
-shell. Supply authentication secrets through your secret manager; the example
-contains no secret. The launcher applies schema migrations, without importing
+and put the settings documented in `docs/python-environment.example` in the root
+`.env`. Generate AUTH_SECRET once with `openssl rand -hex 32` and keep that value
+in `.env` across restarts. The npm start/dev commands load this file automatically;
+explicit shell variables take precedence. `.env` is ignored by Git; keep its
+permissions at 600. The example contains no secret. The launcher applies schema migrations, without importing
 legacy content or creating demo business records.
 
 `npm run dev` and `npm run dev:web` start Python, its worker and Vite (web port

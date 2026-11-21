@@ -1,13 +1,11 @@
-import {createRequire} from 'node:module';
 import assert from 'node:assert/strict';
-import {createServer} from '../server/api.mjs';
-const require=createRequire(import.meta.url),{chromium,expect}=require(process.env.WORKPAL_PLAYWRIGHT||'@playwright/test');
-const server=createServer({dbPath:':memory:'});await new Promise(r=>server.listen(0,'127.0.0.1',r));
-const base=`http://127.0.0.1:${server.address().port}`,browser=await chromium.launch();
-try{
- const page=await browser.newPage({viewport:{width:1440,height:1000}}),errors=[];page.on('pageerror',e=>errors.push(e.message));
+import {expect} from '@playwright/test';
+// Invoked by python-workspace-import-qa against an isolated imported SQLite.
+export async function verify(page, base, fixture){
+
+ const errors=[];page.on('pageerror',e=>errors.push(e.message));
  await page.goto(base+'/#/review/usage');
- assert.deepEqual(await page.getByRole('tab').allTextContents(),['Usage','Contribution','Errors']);
+ await expect(page.getByRole('tab')).toHaveText(['Usage','Contribution','Errors']);
  await page.getByRole('tab',{name:'Contribution',exact:true}).click();await expect(page).toHaveURL(/tab=contribution/);
  await expect(page.getByText('Contribution by ticket',{exact:true})).toBeVisible();await expect(page.getByText('Daily contribution',{exact:true})).toBeVisible();
  await page.getByRole('button',{name:'Period',exact:true}).click();
@@ -30,4 +28,5 @@ try{
  await page.setViewportSize({width:390,height:844});await page.goto(base+'/#/review/usage?tab=contribution');await expect(page.getByText('Contribution by ticket',{exact:true})).toBeVisible();
  assert.equal(await page.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1),false);
  assert.deepEqual(errors,[]);console.log('PASS: second tab, deep link, charts, period/project filters, ticket navigation, JSON import/reload, menu links and narrow layout');
-}finally{await browser.close();await new Promise(r=>{server.close(r);server.closeAllConnections();});}
+
+}

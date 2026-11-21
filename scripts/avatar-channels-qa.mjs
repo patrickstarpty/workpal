@@ -1,11 +1,9 @@
-import {createRequire} from 'node:module';
 import assert from 'node:assert/strict';
-import {createServer} from '../server/api.mjs';
-const require=createRequire(import.meta.url),{chromium,expect}=require(process.env.WORKPAL_PLAYWRIGHT||'@playwright/test');
-const server=createServer({dbPath:':memory:'});await new Promise(r=>server.listen(0,'127.0.0.1',r));
-const base=`http://127.0.0.1:${server.address().port}`,browser=await chromium.launch();
-try{
- const page=await browser.newPage({viewport:{width:1440,height:1000}}),errors=[],channelRequests=[];
+import {expect} from '@playwright/test';
+// Invoked by python-workspace-import-qa against an isolated imported SQLite.
+export async function verify(page, base, fixture){
+
+ const errors=[],channelRequests=[];
  page.on('pageerror',e=>errors.push(e.message));page.on('request',r=>{if(/\/api\/(lark|slack|dingtalk|wecom|telegram|weixin)/.test(r.url()))channelRequests.push(r.url());});
  const url=base+'/#/review/agents/Product%20partner?view=general';await page.goto(url);
  await page.getByRole('button',{name:'Change avatar',exact:true}).click();
@@ -23,4 +21,5 @@ try{
  for(const name of ['Lark','Slack','DingTalk','WeCom','Telegram','WeChat'])await expect(page.getByText(name,{exact:true})).toHaveCount(0);
  assert.deepEqual(channelRequests,[]);assert.deepEqual(errors,[]);
  console.log('PASS: emoji and cropped image save/reload; agent and workspace show Teams only, no legacy channel requests');
-}finally{await browser.close();await new Promise(r=>{server.close(r);server.closeAllConnections();});}
+
+}
