@@ -15,7 +15,7 @@ Workpal は Go バックエンドと pnpm monorepo で構成されています�
 - Docker Engine または Docker Desktop
 - Git と Make
 
-バージョンについては、ルートの `package.json`、`server/go.mod`、CI workflow を信頼できる情報源としてください。
+バージョンについては、ルートの `package.json`、`server/go/go.mod`、CI workflow を信頼できる情報源としてください。
 
 ## 初回起動
 
@@ -124,13 +124,13 @@ API を追加または変更するときは `packages/core/api/` の zod schema 
 
 ## データベースの変更
 
-Migration は `server/migrations/`、クエリは `server/pkg/db/queries/` にあります。
+Migration は `server/go/migrations/`、クエリは `server/go/pkg/db/queries/` にあります。
 
 1. 次の未使用の数値 prefix を使い、`.up.sql` と `.down.sql` の両方を作成します。
 2. データベースの foreign key、cascade delete、cascade update を追加しません。関係の検証とクリーンアップはアプリケーション層で行います。
 3. 新しいインデックスはすべて `CREATE INDEX CONCURRENTLY` または `CREATE UNIQUE INDEX CONCURRENTLY` を使用します。
 4. concurrent index は、その 1 文だけを含む migration ファイルに分けます。
-5. クエリ変更後に `make sqlc` を実行し、生成された `server/pkg/db/generated/` の変更をコミットします。
+5. クエリ変更後に `make sqlc` を実行し、生成された `server/go/pkg/db/generated/` の変更をコミットします。
 6. sqlc の生成ファイルを直接編集しません。
 
 複数の書き込みをまとめて成功またはロールバックさせる必要がある場合は、service 層でアプリケーショントランザクションを使用します。

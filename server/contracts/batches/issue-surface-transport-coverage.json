@@ -1,0 +1,350 @@
+{
+  "version": 1,
+  "coverage": {
+    "complete": false,
+    "scope": [
+      "packages/views/issues/surface/use-issue-surface-controller.ts",
+      "packages/views/issues/surface/use-issue-surface-data.ts",
+      "packages/core/issues/surface/repository.ts"
+    ],
+    "disposition": "precise partial; root review required"
+  },
+  "method": "Static bounded body reads; no runtime, network, Git, model or backend verification. Standard React/TanStack contracts terminate tracing.",
+  "reuse": {
+    "artifact": "retry-callback-transport-coverage.json",
+    "ids": [
+      "client:2066",
+      "client:3046",
+      "client:3071",
+      "client:3167",
+      "client:3178",
+      "client:4517",
+      "client:4821",
+      "client:5210"
+    ],
+    "scope": "Only eight production retry dependency edges; does not close other callers."
+  },
+  "targets": [
+    {
+      "path": "packages/views/issues/surface/use-issue-surface-controller.ts",
+      "sha256": "8871358a471ec6a9d5d124d1851a4b8bb373af9eda022eda7bdcb7021ae78dd6",
+      "lines": 1135,
+      "status": "partial",
+      "anchors": [
+        245,
+        293,
+        321,
+        334,
+        477,
+        551,
+        586,
+        756,
+        802,
+        829,
+        873,
+        967,
+        1024,
+        1071
+      ]
+    },
+    {
+      "path": "packages/views/issues/surface/use-issue-surface-data.ts",
+      "sha256": "f061b37e6a133df4da3feca59eec8cb9821879e1aec947c2f1de0ba3f5d3321a",
+      "lines": 573,
+      "status": "partial",
+      "anchors": [
+        187,
+        192,
+        225,
+        384,
+        390,
+        428,
+        437,
+        442,
+        507,
+        535
+      ]
+    },
+    {
+      "path": "packages/core/issues/surface/repository.ts",
+      "sha256": "b87cb779745f8c1c8dbfaf95a712c6700cea3e69418bb601854761342eb896fe",
+      "lines": 21,
+      "status": "complete bounded transport wrapper",
+      "anchors": [
+        11,
+        16
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "anchor": "controller:293",
+      "contract": "propertyListOptions(wsId); active catalog select; no explicit enabled override",
+      "id": "client:4884"
+    },
+    {
+      "anchor": "controller:321; data:437,442; workflow-columns:29; issue-workflows/hooks:10-54",
+      "contract": "useColumnWorkflow always invokes workflow and project hooks even when hasStatusFilter returns null. Workflow enabled Boolean(wsId); project list enabled Boolean(wsId)&&Boolean(projectId). Same project ID reused from retry artifact.",
+      "id": "client:4692"
+    },
+    {
+      "anchor": "controller:756,802",
+      "contract": "Facet submenu/status request enabled !membershipUnresolved && (status surface || ((table || grouped) && active facet)); separate working_agents facet enabled !usesGantt && scope.type!==actor, without dependency gate. keepPreviousData.",
+      "id": "client:1430"
+    },
+    {
+      "anchor": "controller:1024",
+      "contract": "export invokes rows directly, ungrouped hierarchy disabled, limit100 cursor loop; rejects repeated cursors, missing/changed fingerprint, group/parent mismatch, duplicate issue IDs and final total mismatch. No query-cache write.",
+      "id": "client:1416"
+    },
+    {
+      "anchor": "repository:11-20; data:187; issues/queries:418-469",
+      "contract": "repository forwards ws/project and plan.queryFilter.assignee_types. Gantt enabled usesGantt overriding factory; scheduled=true listIssues offset loop bounded 10000; empty, short or total reached stops.",
+      "api": "listIssues"
+    },
+    {
+      "anchor": "data:384-426; issues/queries:556-569",
+      "contract": "child progress observer unconditional; select builds parent->done/total Map. Export Promise.all manually refetches requested projects/progress even if automatic projects query disabled; propagates errors and missing data.",
+      "id": "client:1817"
+    }
+  ],
+  "open_edges": [
+    {
+      "anchor": "controller:829,873",
+      "helper": "useIssueStatusBranches/useIssueGroupBranches",
+      "known": "row/group option factories resolve to client:1416/client:1402; factory bodies read at issues/queries:308-383",
+      "remaining": "Read entire branch helper bodies, retry/load-more/cursor state effects and all imported application helper bodies; no branch closure claimed."
+    },
+    {
+      "anchor": "controller:1071; use-issue-surface-actions:45-154",
+      "helper": "useIssueSurfaceActions",
+      "known": "Body read: update/move useUpdateIssue; batchUpdate mutateAsync; batchDelete mutateAsync; create opens modal only. Generic options success/error/settled callbacks are caller injections, not closed arbitrary transport.",
+      "remaining": "Trace production useUpdateIssue/useBatchUpdateIssues/useBatchDeleteIssues mutation bodies, optimistic cache rollback/invalidation, prefetch and concrete adapters. Also translation hooks and modal store body."
+    },
+    {
+      "anchor": "controller:245-292,384-390,967",
+      "helper": "workspace/auth/view/selection stores and pure app helpers",
+      "remaining": "Trace concrete store adapters including persistence and selection reset; imported date/filter/query-plan/activity/status helpers have not all been body-read. Controller 381-780 aggregate output truncated; targeted 380-600 reread, 600-780 still needs bounded reread."
+    }
+  ],
+  "local_effects": [
+    "controller:193 debounce schedules/clears window timer; React state for table search/facet; refs retain unread IDs until filter off",
+    "controller:384-390 corrects view mode via injected store action; persistence implementation remains open",
+    "data derives arrays/Sets/Maps; useQuery cache managed by standard TanStack contract; no direct storage write in target bodies",
+    "selection membership key excludes sort and running set; concrete selection helper effects remain open",
+    "No direct prefetch call observed in three targets; indirect mutation prefetch union remains unresolved"
+  ],
+  "limitations": [
+    "Request union is partial until open edges resolved; no backend support claim.",
+    "No observer-runtime enumeration or node_modules recursion.",
+    "No shared inventory edits."
+  ],
+  "validation": {
+    "hashes": "current bytes sha256",
+    "routes": "IDs copied from current frontend-calls.json; all references resolve",
+    "runtime": "not run; documentation-only"
+  },
+  "frontend_calls": [
+    {
+      "id": "client:1402",
+      "route": {
+        "method": "POST",
+        "path": "/api/issues/table/groups"
+      },
+      "sources": [
+        "packages/core/api/client.ts:1402"
+      ]
+    },
+    {
+      "id": "client:1416",
+      "route": {
+        "method": "POST",
+        "path": "/api/issues/table/rows"
+      },
+      "sources": [
+        "packages/core/api/client.ts:1416",
+        "packages/core/diagnostics/dev-recorder-realtime.test.tsx:211",
+        "packages/views/layout/panels/work-panel.test.tsx:784",
+        "packages/views/issues/surface/issue-surface.test.tsx:1022"
+      ]
+    },
+    {
+      "id": "client:1430",
+      "route": {
+        "method": "POST",
+        "path": "/api/issues/table/facets"
+      },
+      "sources": [
+        "packages/core/api/client.ts:1430"
+      ]
+    },
+    {
+      "id": "client:1817",
+      "route": {
+        "method": "GET",
+        "path": "/api/issues/child-progress"
+      },
+      "sources": [
+        "packages/core/api/client.ts:1817"
+      ]
+    },
+    {
+      "id": "client:2066",
+      "route": {
+        "method": "GET",
+        "path": "/api/agents"
+      },
+      "sources": [
+        "packages/core/api/client.ts:2066"
+      ]
+    },
+    {
+      "id": "client:3046",
+      "route": {
+        "method": "GET",
+        "path": "/api/agent-task-snapshot"
+      },
+      "sources": [
+        "packages/core/api/client.ts:3046"
+      ]
+    },
+    {
+      "id": "client:3071",
+      "route": {
+        "method": "GET",
+        "path": "/api/working-agents"
+      },
+      "sources": [
+        "packages/core/api/client.ts:3071",
+        "server/go/cmd/server/router.go:2615",
+        "server/go/internal/handler/agent.go:3139"
+      ]
+    },
+    {
+      "id": "client:3167",
+      "route": {
+        "method": "GET",
+        "path": "/api/issues/unread"
+      },
+      "sources": [
+        "packages/core/api/client.ts:3167"
+      ]
+    },
+    {
+      "id": "client:3178",
+      "route": {
+        "method": "GET",
+        "path": "/api/issues/subscribed"
+      },
+      "sources": [
+        "packages/core/api/client.ts:3178"
+      ]
+    },
+    {
+      "id": "client:4517",
+      "route": {
+        "method": "GET",
+        "path": "/api/projects"
+      },
+      "sources": [
+        "packages/core/api/client.ts:4517"
+      ]
+    },
+    {
+      "id": "client:4692",
+      "route": {
+        "method": "GET",
+        "path": "/api/issue-workflows"
+      },
+      "sources": [
+        "packages/core/api/client.ts:4692"
+      ]
+    },
+    {
+      "id": "client:4821",
+      "route": {
+        "method": "GET",
+        "path": "/api/issue-statuses"
+      },
+      "sources": [
+        "packages/core/api/client.ts:4821"
+      ]
+    },
+    {
+      "id": "client:4884",
+      "route": {
+        "method": "GET",
+        "path": "/api/properties"
+      },
+      "sources": [
+        "packages/core/api/client.ts:4884"
+      ]
+    },
+    {
+      "id": "client:5210",
+      "route": {
+        "method": "GET",
+        "path": "/api/squads/involved"
+      },
+      "sources": [
+        "packages/core/api/client.ts:5210"
+      ]
+    }
+  ],
+  "files": [
+    {
+      "path": "packages/views/issues/surface/use-issue-surface-controller.ts",
+      "sha256": "8871358a471ec6a9d5d124d1851a4b8bb373af9eda022eda7bdcb7021ae78dd6",
+      "lines": 1135,
+      "status": "partial",
+      "anchors": [
+        245,
+        293,
+        321,
+        334,
+        477,
+        551,
+        586,
+        756,
+        802,
+        829,
+        873,
+        967,
+        1024,
+        1071
+      ],
+      "whole_source": false
+    },
+    {
+      "path": "packages/views/issues/surface/use-issue-surface-data.ts",
+      "sha256": "f061b37e6a133df4da3feca59eec8cb9821879e1aec947c2f1de0ba3f5d3321a",
+      "lines": 573,
+      "status": "partial",
+      "anchors": [
+        187,
+        192,
+        225,
+        384,
+        390,
+        428,
+        437,
+        442,
+        507,
+        535
+      ],
+      "whole_source": false
+    },
+    {
+      "path": "packages/core/issues/surface/repository.ts",
+      "sha256": "b87cb779745f8c1c8dbfaf95a712c6700cea3e69418bb601854761342eb896fe",
+      "lines": 21,
+      "status": "complete bounded transport wrapper",
+      "anchors": [
+        11,
+        16
+      ],
+      "whole_source": true
+    }
+  ],
+  "parent_review": "Repository wrapper accepted after full wrapper and fetchProjectGanttIssues/projectGanttIssuesOptions body review. Controller/data remain partial; no other status promoted."
+}

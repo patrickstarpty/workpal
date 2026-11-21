@@ -1,3 +1,5 @@
+import {contribution,validateCommits} from './contribution.mjs';
+import {dashboardRows} from './mock-content.mjs';
 import {createServer as httpServer} from 'node:http';
 import {randomUUID} from 'node:crypto';
 import {readFile} from 'node:fs/promises';
@@ -21,6 +23,23 @@ export function createServer({dbPath='server/data/workpal.sqlite',staticDir=reso
    }
    const origin=req.headers.origin;
    if(origin&&origin!==`http://${req.headers.host}`&&!['http://127.0.0.1:4174','http://localhost:4174'].includes(origin))fail(403,'Origin not allowed');
+   if(method==='POST'&&path==='/api/upload-file'){
+    const chunks=[];let size=0;
+    for await(const chunk of req){size+=chunk.length;if(size>6*1024*1024)fail(413,'Avatar image must be smaller than 5 MB');chunks.push(chunk);}
+    let form;try{form=await new Request('http://localhost/upload',{method:'POST',headers:{'content-type':req.headers['content-type']||''},body:Buffer.concat(chunks)}).formData();}catch{fail(400,'Expected an image upload');}
+    const file=form.get('file');if(!file||typeof file==='string'||!file.size)fail(400,'Choose an image');
+    if(file.size>5*1024*1024)fail(413,'Avatar image must be smaller than 5 MB');
+    const bytes=Buffer.from(await file.arrayBuffer());
+    const mime=bytes.subarray(0,8).equals(Buffer.from([137,80,78,71,13,10,26,10]))?'image/png':bytes[0]===255&&bytes[1]===216&&bytes[2]===255?'image/jpeg':bytes.subarray(0,6).toString().match(/^GIF8[79]a$/)?'image/gif':bytes.subarray(0,4).toString()==='RIFF'&&bytes.subarray(8,12).toString()==='WEBP'?'image/webp':null;
+    if(!mime)fail(415,'Choose a PNG, JPEG, GIF or WebP image');
+    const id=randomUUID(),url='/api/files/'+id;
+    store.put('uploaded_files',{id,mime,data:bytes.toString('base64'),filename:file.name});
+    return send(201,{id,url,download_url:url,filename:file.name,size:file.size,content_type:mime});
+   }
+   if(method==='GET'&&/^\/api\/files\/[^/]+$/.test(path)){
+    const file=store.get('uploaded_files',path.split('/').at(-1));if(!file)fail(404,'Image not found');
+    res.writeHead(200,{'Content-Type':file.mime,'X-Content-Type-Options':'nosniff','Cache-Control':'private, max-age=3600'});res.end(Buffer.from(file.data,'base64'));return;
+   }
    const body=['POST','PUT','PATCH'].includes(method)?await readBody(req):{};
    const workspace=store.list('workspaces')[0],user=store.list('users')[0];
    if(method==='GET'&&path==='/api/bootstrap')return send(200,{workspace,user,projects:store.list('projects')});
@@ -35,6 +54,28 @@ export function createServer({dbPath='server/data/workpal.sqlite',staticDir=reso
    }
    if(method==='GET'&&path==='/api/issues/child-progress'){
     const issues=store.list('issues');return send(200,{progress:issues.map(row=>{const children=issues.filter(c=>c.parent_issue_id===row.id);return {parent_issue_id:row.id,total:children.length,done:children.filter(c=>c.status==='done').length};}).filter(row=>row.total)});
+   }
+   if(method==='GET'&&/^\/api\/dashboard\/(usage\/(daily|by-agent)|agent-runtime|runtime\/daily|failures\/(daily|by-agent))$/.test(path))return send(200,dashboardRows(store,path,url.searchParams));
+   if(path==='/api/dashboard/contribution'){
+    if(method==='GET')return send(200,contribution(store,url.searchParams));
+    if(method==='PUT'){
+     let commits;try{commits=validateCommits(body.commits);}catch(error){fail(400,error.message);}
+     store.put('contribution_data',{id:'workspace',commits});return send(200,{count:commits.length});
+    }
+   }
+   if(method==='GET'&&path==='/api/issues/unread')return send(200,[]);
+   const issueDetail=path.match(/^\/api\/issues\/([^/]+)\/(comments|timeline|children|labels|task-runs|wakeups|system-wakeups|duplicates|pull-requests|environments)$/);
+   if(method==='GET'&&issueDetail){
+    const id=decodeURIComponent(issueDetail[1]),kind=issueDetail[2],issue=store.get('issues',id);if(!issue)fail(404,'Issue not found');
+    const comments=store.list('comments').filter(c=>c.issue_id===id).sort((a,b)=>a.created_at.localeCompare(b.created_at));
+    if(kind==='comments')return send(200,comments);
+    if(kind==='timeline')return send(200,comments.map(c=>({...c,type:'comment',comment_type:c.type,actor_type:c.author_type,actor_id:c.author_id})));
+    if(kind==='children')return send(200,{issues:store.list('issues').filter(i=>i.parent_issue_id===id)});
+    if(kind==='labels')return send(200,issue.labels||[]);
+    if(kind==='pull-requests')return send(200,{pull_requests:[],auto_complete:null});
+    if(kind==='environments')return send(200,{environments:[],configs:[],pending_starts:[],failed_starts:[]});
+    if(kind==='duplicates')return send(200,{duplicate_of:null,duplicates:[]});
+    return send(200,[]);
    }
    if(method==='GET'&&path==='/api/chat/pending-tasks')return send(200,{tasks:[]});
    if(method==='GET'&&path==='/api/chat/pending-tasks/has-any')return send(200,{has_pending:false});

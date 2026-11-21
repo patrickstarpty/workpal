@@ -402,7 +402,7 @@ does require a custom image or a source build — the bundled
 > `schema_migrations` proves the migration ran, not that its objects exist. Run
 > `SELECT extname FROM pg_extension` to see what a database actually has. To
 > recover a missing comment-content search index, follow
-> `server/cmd/migrate/README.md`.
+> `server/go/cmd/migrate/README.md`.
 
 ### Using Docker Compose (Recommended)
 
@@ -426,10 +426,10 @@ The Docker Compose setup runs migrations automatically. If you need to run them 
 
 ```bash
 # Using the built binary
-./server/bin/migrate up
+./server/go/bin/migrate up
 
 # Or from source
-cd server && go run ./cmd/migrate up
+cd server/go && go run ./cmd/migrate up
 ```
 
 ## Usage Dashboard Rollup
@@ -503,10 +503,10 @@ If you prefer to build and run services manually:
 make build
 
 # Run database migrations
-DATABASE_URL="your-database-url" ./server/bin/migrate up
+DATABASE_URL="your-database-url" ./server/go/bin/migrate up
 
 # Start the backend server
-DATABASE_URL="your-database-url" PORT=8080 JWT_SECRET="your-secret" ./server/bin/server
+DATABASE_URL="your-database-url" PORT=8080 JWT_SECRET="your-secret" ./server/go/bin/server
 ```
 
 For the frontend:
@@ -745,7 +745,7 @@ kept as an alias for operator familiarity.
 The backend can expose Prometheus metrics on a separate management listener:
 
 ```bash
-METRICS_ADDR=127.0.0.1:9090 ./server/bin/server
+METRICS_ADDR=127.0.0.1:9090 ./server/go/bin/server
 curl http://127.0.0.1:9090/metrics
 ```
 

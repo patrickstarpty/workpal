@@ -1,0 +1,13 @@
+# Voice transport static coverage
+
+Audited all eight non-test executable sources in `packages/views/voice`; the JSON contains the exact file ledger and bounded wrapper evidence. The composer test is excluded. This is local source coverage, not whole-app or runtime coverage.
+
+Workspace words observes three HTTP reads: `client:2066` GET /api/agents, `client:3765` GET /api/workspaces/{id}/members, and `client:4517` GET /api/projects. Agents and projects request archived entries; hotwords filter archived agents only. Agents poll every 30 seconds only when a nonarchived agent is online or unstable. Cache, focus/reconnect and external invalidation refetches retain this union; global observer enumeration is not claimed. These observers are not gated by the voice setting. ApiClient uses baseUrl, contextual auth/workspace headers and included credentials; observer refusal can prevent dispatch, CSRF rejection can replay once, errors throw, and 401 invokes unauthorized handling.
+
+Recording, audio decoding, blobs, typed arrays, metering and canvas animation are local operations. No worker message or WebSocket transport is present in this folder. The 120-second recorder cap depends on successful metering. Desktop prepare/transcribe/model management and optional history save/update cross `window.desktopAPI.voice`; this is an injected native boundary, not an HTTP route or a verified native implementation. Model subscription wins the initial-list race; its unsubscribe is not used by the adapter. Web has no runtime when the injection is absent.
+
+Composer registration gates availability and cancels on scope/unregister. Core session tokens discard late results; silence avoids transcription, failure permits explicit retry, and optional history observes retention. Successful cleaned text reaches the injected insert callback; explicit send can then call injected submit. Actual composer-specific downstream submission routes are outside this folder and are not fabricated into the HTTP union. License URLs are external browser resources via native openExternal or window.open.
+
+Voice backend execution, native model downloads and history remain unimplemented; no output or capability is simulated. No microphone permission, browser, network, transcription or model operation was performed. No shared inventory, runtime source, data or git mutation was made.
+
+Validation: parsed generated JSON; checked exact eight-file non-test list, source existence/line bounds, and all three IDs/routes against the read-only frontend inventory. Active app source was unchanged; app checks were not run for these audit-only artifacts.

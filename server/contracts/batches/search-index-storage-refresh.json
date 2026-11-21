@@ -1,0 +1,261 @@
+{
+  "status": "bounded current-source review complete; root review pending",
+  "historical_identity": "Old semantic proof has no source hashes. These are NEW reviewed hashes, not evidence of historical identity.",
+  "files": [
+    {
+      "path": "packages/core/search-index/engine.ts",
+      "sha256": "49843f4a5a7cf59499ffc731a20d47837a59d6eb6fe3c2ba78c824e7612d5547",
+      "whole_source": true,
+      "line_count": 594,
+      "reviewed_ranges": [
+        [
+          1,
+          100
+        ],
+        [
+          101,
+          200
+        ],
+        [
+          201,
+          300
+        ],
+        [
+          301,
+          400
+        ],
+        [
+          401,
+          500
+        ],
+        [
+          501,
+          594
+        ]
+      ],
+      "old_disposition": "Pure in-memory maps, ranking, filtering, pagination, snippet/result construction and byte budget accounting; no transport. Does not fetch comment/issue/project resources.",
+      "comparison": "Current full body supports the file-local semantics; imported implementations remain explicit interfaces."
+    },
+    {
+      "path": "packages/core/search-index/store.ts",
+      "sha256": "8f09399e799150bebf51bc17a56cbcd71a99d397216665e16d7309988660e317",
+      "whole_source": true,
+      "line_count": 338,
+      "reviewed_ranges": [
+        [
+          1,
+          100
+        ],
+        [
+          101,
+          200
+        ],
+        [
+          201,
+          300
+        ],
+        [
+          301,
+          338
+        ]
+      ],
+      "old_disposition": "IndexedDB schema/meta/issues/comments/projects; atomic cursor+records writes; issue deletion also removes comments. open failure/blocked rejects and clears cached promise; versionchange closes connection. destroy marks store destroyed before closing and deleting (prevents reopening). deleteDatabase blocked waits, error rejects; enumerator absent indexedDB/databases returns without deletion. Prefix-matching unparsable names always deleted, selected valid owners deleted, individual delete errors swallowed. MemoryIndexStore and helpers are local, no network.",
+      "comparison": "Current full body supports the file-local semantics; imported implementations remain explicit interfaces. Destroyed guard applies to IdbIndexStore.open; MemoryIndexStore.destroy clears records but subsequent memory writes are not guarded. Database enumeration rejection propagates; individual deletion failures are swallowed."
+    },
+    {
+      "path": "packages/core/search-index/sync.ts",
+      "sha256": "ad270abfe82ed00f068aa081274f067e450a303c3d0e44cc7e462ff1fed70036",
+      "whole_source": true,
+      "line_count": 385,
+      "reviewed_ranges": [
+        [
+          1,
+          100
+        ],
+        [
+          101,
+          200
+        ],
+        [
+          201,
+          300
+        ],
+        [
+          301,
+          385
+        ]
+      ],
+      "old_disposition": "WorkspaceIndex loads schema-compatible local meta or resets. Bootstrap fetches manifest unless resuming progress, rejects over budget, snapshots 200/page until done, persists resumable afterNumber and original cursor then changes 500/page until has_more false. Reloads if another context advances cursor. Uses lock, coalesced rerun, 2s debounce and 5min polling. onChange only broadcasts serving. dispose clears timers/engine and optionally destroys store. Search reads local records and snippets; no per-hit API hydration. Budget 500MiB, recheck 24h. 410 resets and immediate retry; 403/404 reset and unavailable for 1h; other errors incl network/503/no tab/schema/IDB back off 5s exponential capped 5min times jitter 0.5..1.5. Failed catchup can serve last good copy for <10min; otherwise fallback. Too-large reset errors swallowed; no fabricated empty sync pages.",
+      "comparison": "Current full body supports the file-local semantics; imported implementations remain explicit interfaces. Disposal does not cancel an already awaited fetch/store operation; guards stop subsequent iterations. Server parity and source-comment performance measurements are not independently proven."
+    },
+    {
+      "path": "packages/core/search-index/testing.ts",
+      "sha256": "4d5ddfbb7f7ca48c48b26e36182694e5a91b05c1ad4c4027fb4a82a6189ff0d6",
+      "whole_source": true,
+      "line_count": 140,
+      "reviewed_ranges": [
+        [
+          1,
+          100
+        ],
+        [
+          101,
+          140
+        ]
+      ],
+      "old_disposition": "Non-.test source included: FakeServer fixtures and in-memory log implementation of IndexFetcher; manifest/snapshot/changes are local fake methods, not production network.",
+      "comparison": "Current full body supports the file-local semantics; imported implementations remain explicit interfaces."
+    },
+    {
+      "path": "packages/core/search-index/worker.ts",
+      "sha256": "a0efdaab79e904a84e77521c9c6f8e95085a63c0360db4bc8e87b2a923481587",
+      "whole_source": true,
+      "line_count": 41,
+      "reviewed_ranges": [
+        [
+          1,
+          41
+        ]
+      ],
+      "old_disposition": "Creates host with IndexedDB factory and database-deletion callback. navigator.locks serializes sync if available, else direct callback. Shared and dedicated worker entrypoints wire postMessage/onmessage, not HTTP.",
+      "comparison": "Current full body supports the file-local semantics; imported implementations remain explicit interfaces."
+    }
+  ],
+  "edges": [
+    {
+      "source": "packages/core/search-index/instance.ts:21",
+      "kind": "reused application transport interface; not a new whole-source review",
+      "method": "searchIssues",
+      "inventory": [
+        {
+          "id": "client:1448",
+          "method": "GET",
+          "path_expression": "/api/issues/search?${search}",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/search"
+          }
+        }
+      ],
+      "proof": "server/contracts/batches/search-index-transport-coverage.json"
+    },
+    {
+      "source": "packages/core/search-index/instance.ts:27",
+      "kind": "reused application transport interface; not a new whole-source review",
+      "method": "searchProjects",
+      "inventory": [
+        {
+          "id": "client:1463",
+          "method": "GET",
+          "path_expression": "/api/projects/search?${search}",
+          "route": {
+            "method": "GET",
+            "path": "/api/projects/search"
+          }
+        }
+      ],
+      "proof": "server/contracts/batches/search-index-transport-coverage.json"
+    },
+    {
+      "source": "packages/core/search-index/client.ts:236",
+      "kind": "reused application transport interface; not a new whole-source review",
+      "method": "getSearchIndexManifest",
+      "inventory": [
+        {
+          "id": "client:1477",
+          "method": "GET",
+          "path_expression": "/api/search-index/manifest",
+          "route": {
+            "method": "GET",
+            "path": "/api/search-index/manifest"
+          }
+        }
+      ],
+      "proof": "server/contracts/batches/search-index-transport-coverage.json"
+    },
+    {
+      "source": "packages/core/search-index/client.ts:239",
+      "kind": "reused application transport interface; not a new whole-source review",
+      "method": "getSearchIndexSnapshot",
+      "inventory": [
+        {
+          "id": "client:1492",
+          "method": "GET",
+          "path_expression": "/api/search-index/snapshot?${search}",
+          "route": {
+            "method": "GET",
+            "path": "/api/search-index/snapshot"
+          }
+        }
+      ],
+      "proof": "server/contracts/batches/search-index-transport-coverage.json"
+    },
+    {
+      "source": "packages/core/search-index/client.ts:242",
+      "kind": "reused application transport interface; not a new whole-source review",
+      "method": "getSearchIndexChanges",
+      "inventory": [
+        {
+          "id": "client:1505",
+          "method": "POST",
+          "path_expression": "/api/search-index/changes",
+          "route": {
+            "method": "POST",
+            "path": "/api/search-index/changes"
+          }
+        }
+      ],
+      "proof": "server/contracts/batches/search-index-transport-coverage.json"
+    },
+    {
+      "source": "packages/core/search-index/hooks.ts:45",
+      "kind": "reused application transport interface; not a new whole-source review",
+      "method": "listWorkspaces",
+      "inventory": [
+        {
+          "id": "client:3391",
+          "method": "GET",
+          "path_expression": "/api/workspaces",
+          "route": {
+            "method": "GET",
+            "path": "/api/workspaces"
+          }
+        }
+      ],
+      "proof": "server/contracts/batches/search-index-transport-coverage.json"
+    }
+  ],
+  "interfaces": {
+    "application": [
+      "server/contracts/batches/search-index-transport-coverage.json",
+      "server/contracts/batches/api-client-execution-closure.json",
+      "server/contracts/batches/active-web-auth-transport.json",
+      "server/contracts/batches/identity-workspace-transport-coverage.json"
+    ],
+    "boundaries": [
+      "IndexFetcher manifest/snapshot/changes are injected calls; production dispatch remains the inherited client.ts interface, not direct fetch in sync.ts.",
+      "SearchIndexHost and protocol are imported interfaces; worker messages and navigator.locks are local browser operations, not HTTP.",
+      "IndexedDB, IDBKeyRange, native locks and injected clocks/random/callbacks are explicit provider interfaces; no descendant recursion.",
+      "Workspace pending-deletion markers, query cache removal/cancellation and session/workspace resets are local effects in reused workspace/active-web proofs, distinct from API delete/list calls; those sources are not newly whole-reviewed.",
+      "Engine status normalization is an imported application interface; no server ranking equivalence independently established."
+    ]
+  },
+  "counts": {
+    "whole_sources": 5,
+    "whole_source_lines": 1498,
+    "read_chunks": 17,
+    "http_tuples": 6
+  },
+  "unread_ranges": [],
+  "limitations": [
+    "No runtime, tests, network, model execution or data access.",
+    "No global transport or backend completion claim; root review pending.",
+    "Only five named files whole-reviewed; reused proof interfaces do not imply fresh reads of their descendants."
+  ],
+  "root_review": {
+    "status": "accepted bounded current-source refresh",
+    "validation": "Recomputed all 5 source hashes and checked 6 exact inventory tuples.",
+    "review_scope": "Reviewed artifact dispositions and source excerpts for mutation settlement, worker dispatch, memory destruction and in-flight disposal. Full-body reads are attributed to implementer; root did not repeat every source line.",
+    "limitations": "No runtime verification, historical identity, whole-application coverage or backend implementation claim."
+  }
+}

@@ -9,7 +9,7 @@ import {
 } from "@workpal/ui/components/ui/item";
 import { useT } from "../../i18n";
 
-/** Mirrors `mikaAgentAvatarURL` in server/internal/handler/mika_agent.go.
+/** Mirrors `mikaAgentAvatarURL` in server/go/internal/handler/mika_agent.go.
  *  Placeholder until Mika has real artwork — these two must move together or
  *  onboarding shows one face and the created agent another. */
 export const MIKA_PLACEHOLDER_EMOJI = "🦄";

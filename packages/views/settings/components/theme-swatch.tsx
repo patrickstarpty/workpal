@@ -1,13 +1,10 @@
 "use client";
 
-import { useMemo } from "react";
 import {
-  BUILT_IN_THEMES,
-  DEFAULT_THEME_ID,
-  findBuiltInTheme,
+  SELECTABLE_THEMES,
+  activeTheme,
   themeModeVariables,
   useAppearanceStore,
-  useInstalledThemesStore,
   type Theme,
 } from "@workpal/core/appearance";
 import { useTheme } from "@workpal/ui/components/common/theme-provider";
@@ -33,15 +30,11 @@ export function useThemeLabel() {
 }
 
 /**
- * The themes a person can pick, built-in ones first, and the one in use:
- * Default when the chosen theme is no longer installed.
+ * The two themes offered everywhere in Workpal and the current selection.
  */
 export function useColorThemes(): { themes: readonly Theme[]; selected: Theme } {
   const chosen = useAppearanceStore((s) => s.theme);
-  const installed = useInstalledThemesStore((s) => s.themes);
-  const themes = useMemo(() => [...BUILT_IN_THEMES, ...installed], [installed]);
-  const selected = themes.find((theme) => theme.id === chosen) ?? findBuiltInTheme(DEFAULT_THEME_ID)!;
-  return { themes, selected };
+  return { themes: SELECTABLE_THEMES, selected: activeTheme({ theme: chosen }) };
 }
 
 type SwatchToken =

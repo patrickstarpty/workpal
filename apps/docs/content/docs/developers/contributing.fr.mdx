@@ -15,7 +15,7 @@ Workpal est composé d'un backend Go et d'un monorepo pnpm. Le moyen le plus sim
 - Docker Engine ou Docker Desktop
 - Git et Make
 
-Le `package.json` racine, `server/go.mod` et les workflows de CI font foi pour les versions.
+Le `package.json` racine, `server/go/go.mod` et les workflows de CI font foi pour les versions.
 
 ## Premier démarrage
 
@@ -139,13 +139,13 @@ Lorsque vous ajoutez ou modifiez une API, mettez à jour le schéma zod dans `pa
 
 ## Modifier la base de données
 
-Les migrations se trouvent dans `server/migrations/`, et les requêtes dans `server/pkg/db/queries/`.
+Les migrations se trouvent dans `server/go/migrations/`, et les requêtes dans `server/go/pkg/db/queries/`.
 
 1. Utilisez le prochain préfixe numérique inutilisé et créez à la fois `.up.sql` et `.down.sql`.
 2. N'ajoutez pas de clés étrangères en base de données, ni de suppressions ou de mises à jour en cascade. Garantissez les relations et le nettoyage dans la couche applicative.
 3. Tout nouvel index doit utiliser `CREATE INDEX CONCURRENTLY` ou `CREATE UNIQUE INDEX CONCURRENTLY`.
 4. Placez chaque index concurrent dans un fichier de migration qui ne contient que cette instruction.
-5. Exécutez `make sqlc` après avoir modifié des requêtes et committez les modifications générées dans `server/pkg/db/generated/`.
+5. Exécutez `make sqlc` après avoir modifié des requêtes et committez les modifications générées dans `server/go/pkg/db/generated/`.
 6. Ne modifiez pas directement les fichiers générés par sqlc.
 
 Utilisez une transaction applicative dans la couche service lorsque plusieurs écritures doivent réussir ou être annulées ensemble.

@@ -2,6 +2,7 @@
 import { beforeEach, describe, expect, it } from "vitest";
 import {
   APPEARANCE_STORAGE_KEY,
+  INSTALLED_THEMES_STORAGE_KEY,
   BUILT_IN_THEMES,
   DEFAULT_APPEARANCE,
   activeTheme,
@@ -34,10 +35,41 @@ describe("appearance store", () => {
     useAppearanceStore.setState(DEFAULT_APPEARANCE);
   });
 
+  it("starts with FWD and preserves an explicit Default selection after reloading", async () => {
+    expect(useAppearanceStore.getState().theme).toBe("fwd");
+    useAppearanceStore.getState().set({ theme: "default" });
+    await useAppearanceStore.persist.rehydrate();
+    expect(useAppearanceStore.getState().theme).toBe("default");
+  });
+
+  it.each(["pop", "github", "blueprint", "notion", "paper", "missing"])(
+    "migrates the retired %s selection without removing other preferences or installed themes",
+    async (theme) => {
+      useInstalledThemesStore.getState().install({ apiVersion: 1, id: "paper", name: "Paper", css: "" });
+      const installed = localStorage.getItem(INSTALLED_THEMES_STORAGE_KEY);
+      localStorage.setItem(APPEARANCE_STORAGE_KEY, JSON.stringify({
+        state: { theme, fontSize: 16, density: "compact", themeOptions: { paper: { hyphens: true } } },
+        version: 0,
+      }));
+      await useAppearanceStore.persist.rehydrate();
+      expect(useAppearanceStore.getState()).toMatchObject({
+        theme: "fwd", fontSize: 16, density: "compact", themeOptions: { paper: { hyphens: true } },
+      });
+      expect(localStorage.getItem(INSTALLED_THEMES_STORAGE_KEY)).toBe(installed);
+    },
+  );
+
+  it("keeps the selected theme when a legacy installer tries to select a custom theme", () => {
+    useAppearanceStore.getState().set({ theme: "default" });
+    useAppearanceStore.getState().set({ theme: "paper", fontSize: 16 });
+    expect(useAppearanceStore.getState()).toMatchObject({ theme: "default", fontSize: 16 });
+    expect(JSON.parse(localStorage.getItem(APPEARANCE_STORAGE_KEY)!).state.theme).toBe("default");
+  });
+
   it("saves the preferences on this device", () => {
-    useAppearanceStore.getState().set({ theme: "github", fontSize: 16, contentSize: 17 });
+    useAppearanceStore.getState().set({ theme: "fwd", fontSize: 16, contentSize: 17 });
     const saved = JSON.parse(localStorage.getItem(APPEARANCE_STORAGE_KEY) ?? "{}");
-    expect(saved.state).toMatchObject({ theme: "github", fontSize: 16, contentSize: 17 });
+    expect(saved.state).toMatchObject({ theme: "fwd", fontSize: 16, contentSize: 17 });
   });
 
   it("keeps option values per theme", () => {
@@ -63,7 +95,7 @@ describe("appearance store", () => {
       JSON.stringify({ state: { style: "pop", cjkFont: "kai", accent: "violet" }, version: 0 }),
     );
     await useAppearanceStore.persist.rehydrate();
-    expect(useAppearanceStore.getState()).toMatchObject({ theme: "pop", uiCjkFont: "kai" });
+    expect(useAppearanceStore.getState()).toMatchObject({ theme: "fwd", uiCjkFont: "kai" });
     expect(useAppearanceStore.getState()).not.toHaveProperty("accent");
   });
 });
@@ -83,8 +115,8 @@ describe("sanitizeAppearance", () => {
     expect(sanitizeAppearance(null)).toEqual(DEFAULT_APPEARANCE);
   });
 
-  it("keeps the id of a theme that may be installed later", () => {
-    expect(sanitizeAppearance({ theme: "solarized" }).theme).toBe("solarized");
+  it("falls back to FWD for an unavailable theme", () => {
+    expect(sanitizeAppearance({ theme: "solarized" }).theme).toBe("fwd");
   });
 
   it("accepts installed CJK families and follow-the-interface values", () => {
@@ -158,7 +190,7 @@ describe("appearanceStylesheet", () => {
   });
 
   it("writes contrast with selectors that outrank the theme's", () => {
-    const prefs = { ...DEFAULT_APPEARANCE, theme: "github", highContrast: true } as const;
+    const prefs = { ...DEFAULT_APPEARANCE, theme: "fwd", highContrast: true } as const;
     const css = appearanceStylesheet(activeTheme(prefs), prefs);
     expect(css).not.toContain("--brand");
     expect(css).toMatch(/:root:not\(\.dark\), :root\.dark \{ --muted-foreground: color-mix/);
@@ -217,12 +249,12 @@ describe("appearanceStylesheet", () => {
     expect(stored.themeOptions).toEqual({ paper: { a: true, b: "sky", c: 1.5, d: { light: "#fff" } } });
   });
 
-  it("falls back to the default theme in safe mode or when the theme is missing", () => {
+  it("uses Default in safe mode and FWD for unavailable themes", () => {
     expect(activeTheme({ ...DEFAULT_APPEARANCE, theme: "pop" }, true).id).toBe("default");
-    expect(activeTheme({ ...DEFAULT_APPEARANCE, theme: "not-installed" }).id).toBe("default");
+    expect(activeTheme({ ...DEFAULT_APPEARANCE, theme: "not-installed" }).id).toBe("fwd");
   });
 
-  it("applies an installed theme and its CSS", () => {
+  it("keeps custom theme records without applying their CSS", () => {
     const theme: Theme = {
       apiVersion: 1,
       id: "paper",
@@ -231,8 +263,9 @@ describe("appearanceStylesheet", () => {
     };
     useInstalledThemesStore.setState({ themes: [theme] });
     const active = activeTheme({ ...DEFAULT_APPEARANCE, theme: "paper" });
-    expect(active).toBe(theme);
-    expect(appearanceThemeCss(active)).toContain("hyphens: auto");
+    expect(active.id).toBe("fwd");
+    expect(appearanceThemeCss(active)).not.toContain("hyphens: auto");
+    expect(useInstalledThemesStore.getState().themes).toEqual([theme]);
     useInstalledThemesStore.setState({ themes: [] });
   });
 });

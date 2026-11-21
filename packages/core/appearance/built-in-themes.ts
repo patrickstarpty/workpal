@@ -966,13 +966,174 @@ const NOTION = builtInTheme({
   options: [NOTION_PAGE_FONT],
 });
 
+/**
+ * Inspired by FWD Hong Kong's orange (#e87722), green ink (#183028)
+ * and cream (#fef9f4), sampled from https://www.fwd.com.hk/en/.
+ * Keep Inter and use dark labels on orange for small-control contrast.
+ * Dark mode is a Workpal adaptation of the same palette.
+ */
+const FWD = builtInTheme({
+  id: "fwd",
+  name: "FWD",
+  description: "FWD orange, deep green ink and cream surfaces.",
+  tokens: {
+    light: {
+      // Orange leads; apricot, coral red, gold and peach form a warm series palette.
+      "chart-1": "oklch(0.68732 0.16562 51.437)",
+      "chart-2": "oklch(0.87 0.145 80)",
+      "chart-3": "oklch(0.68 0.17 22)",
+      "chart-4": "oklch(0.86 0.13 90)",
+      "chart-5": "oklch(0.83 0.095 43)",
+
+      "app-shell": "oklch(0.955 0.015 67.726)",
+      "background": "oklch(0.98458 0.00853 67.726)",
+      "page-canvas": "oklch(0.98458 0.00853 67.726)",
+      "surface": "oklch(0.991 0.004 67.726)",
+      "surface-raised": "oklch(0.991 0.004 67.726)",
+      "surface-hover": "oklch(0.96349 0.02373 63.499)",
+      "surface-selected": "oklch(0.925 0.062 60)",
+      "surface-border": "oklch(0.90088 0.01343 106.666)",
+      "foreground": "oklch(0.28662 0.03384 170.397)",
+      "surface-foreground": "oklch(0.28662 0.03384 170.397)",
+      "surface-selected-foreground": "oklch(0.28662 0.03384 170.397)",
+      "card": "oklch(0.991 0.004 67.726)",
+      "card-foreground": "oklch(0.28662 0.03384 170.397)",
+      "popover": "oklch(0.991 0.004 67.726)",
+      "popover-foreground": "oklch(0.28662 0.03384 170.397)",
+      "primary": "oklch(0.28662 0.03384 170.397)",
+      "primary-foreground": "oklch(0.98458 0.00853 67.726)",
+      "secondary": "oklch(0.96349 0.02373 63.499)",
+      "secondary-foreground": "oklch(0.28662 0.03384 170.397)",
+      "muted": "oklch(0.96349 0.02373 63.499)",
+      "muted-foreground": "oklch(0.46925 0.02917 163.393)",
+      "faint-foreground": "oklch(0.56776 0.02243 159.296)",
+      "accent": "oklch(0.96349 0.02373 63.499)",
+      "accent-foreground": "oklch(0.28662 0.03384 170.397)",
+      "border": "oklch(0.90088 0.01343 106.666)",
+      "input": "oklch(0.90088 0.01343 106.666)",
+      "ring": "oklch(0.52164 0.14086 46.334)",
+      "sidebar": "oklch(0.98458 0.00853 67.726)",
+      "sidebar-foreground": "oklch(0.28662 0.03384 170.397)",
+      "sidebar-accent": "oklch(0.925 0.062 60)",
+      "sidebar-accent-foreground": "oklch(0.28662 0.03384 170.397)",
+      "sidebar-border": "oklch(0.90088 0.01343 106.666)",
+      "brand": "oklch(0.52164 0.14086 46.334)",
+      "button-primary": "oklch(0.68732 0.16562 51.437)",
+      "button-primary-foreground": "oklch(0.28662 0.03384 170.397)",
+      "link-color": "oklch(0.52164 0.14086 46.334)",
+      "nav-item-active-background": "oklch(0.925 0.062 60)",
+      "nav-item-active-color": "oklch(0.28662 0.03384 170.397)",
+      "rail-item-active-background": "oklch(0.925 0.062 60)",
+      "rail-item-active-color": "oklch(0.52164 0.14086 46.334)",
+      "nav-item-hover-background": "oklch(0.925 0.062 60)",
+      "code-background": "oklch(0.96349 0.02373 63.499)",
+      "code-block-background": "oklch(0.991 0.004 67.726)",
+      "table-header-background": "oklch(0.96349 0.02373 63.499)",
+      "highlight-background": "oklch(0.925 0.062 60)",
+      "checkbox-color": "oklch(0.52164 0.14086 46.334)",
+      "switch-checked-background": "oklch(0.68732 0.16562 51.437)",
+      "switch-checked-thumb": "oklch(0.28662 0.03384 170.397)",
+      "radius": "0.5rem",
+      "card-radius": "1rem",
+      "page-radius": "1rem",
+      "menu-radius": "0.75rem",
+      "h1-weight": "700",
+      "h2-weight": "700",
+      "h1-letter-spacing": "-0.025em",
+      "page-shadow": "0 1px 8px rgb(24 48 40 / 0.08)",
+    },
+    dark: {
+      // Orange leads; apricot, coral red, gold and peach form a warm series palette.
+      "chart-1": "oklch(0.77 0.155 51.437)",
+      "chart-2": "oklch(0.89 0.14 80)",
+      "chart-3": "oklch(0.75 0.15 22)",
+      "chart-4": "oklch(0.89 0.12 90)",
+      "chart-5": "oklch(0.87 0.085 43)",
+
+      "app-shell": "oklch(0.225 0.02565 169.861)",
+      "background": "oklch(0.24721 0.02565 169.861)",
+      "page-canvas": "oklch(0.24721 0.02565 169.861)",
+      "surface": "oklch(0.28919 0.02994 167.181)",
+      "surface-raised": "oklch(0.28919 0.02994 167.181)",
+      "surface-hover": "oklch(0.33710 0.03496 163.083)",
+      "surface-selected": "oklch(0.35 0.045 60)",
+      "surface-border": "oklch(0.46509 0.03672 158.995)",
+      "foreground": "oklch(0.98458 0.00853 67.726)",
+      "surface-foreground": "oklch(0.98458 0.00853 67.726)",
+      "surface-selected-foreground": "oklch(0.98458 0.00853 67.726)",
+      "card": "oklch(0.28919 0.02994 167.181)",
+      "card-foreground": "oklch(0.98458 0.00853 67.726)",
+      "popover": "oklch(0.28919 0.02994 167.181)",
+      "popover-foreground": "oklch(0.98458 0.00853 67.726)",
+      "primary": "oklch(0.98458 0.00853 67.726)",
+      "primary-foreground": "oklch(0.24721 0.02565 169.861)",
+      "secondary": "oklch(0.33710 0.03496 163.083)",
+      "secondary-foreground": "oklch(0.98458 0.00853 67.726)",
+      "muted": "oklch(0.33710 0.03496 163.083)",
+      "muted-foreground": "oklch(0.83400 0.02133 156.735)",
+      "faint-foreground": "oklch(0.71370 0.03174 157.591)",
+      "accent": "oklch(0.33710 0.03496 163.083)",
+      "accent-foreground": "oklch(0.98458 0.00853 67.726)",
+      "border": "oklch(0.46509 0.03672 158.995)",
+      "input": "oklch(0.46509 0.03672 158.995)",
+      "ring": "oklch(0.81369 0.12805 59.248)",
+      "sidebar": "oklch(0.24721 0.02565 169.861)",
+      "sidebar-foreground": "oklch(0.98458 0.00853 67.726)",
+      "sidebar-accent": "oklch(0.35 0.045 60)",
+      "sidebar-accent-foreground": "oklch(0.98458 0.00853 67.726)",
+      "sidebar-border": "oklch(0.46509 0.03672 158.995)",
+      "brand": "oklch(0.81369 0.12805 59.248)",
+      "button-primary": "oklch(0.68732 0.16562 51.437)",
+      "button-primary-foreground": "oklch(0.28662 0.03384 170.397)",
+      "link-color": "oklch(0.81369 0.12805 59.248)",
+      "nav-item-active-background": "oklch(0.35 0.045 60)",
+      "nav-item-active-color": "oklch(0.81369 0.12805 59.248)",
+      "rail-item-active-background": "oklch(0.35 0.045 60)",
+      "rail-item-active-color": "oklch(0.81369 0.12805 59.248)",
+      "nav-item-hover-background": "oklch(0.35 0.045 60)",
+      "code-background": "oklch(0.33710 0.03496 163.083)",
+      "code-block-background": "oklch(0.28919 0.02994 167.181)",
+      "table-header-background": "oklch(0.33710 0.03496 163.083)",
+      "highlight-background": "oklch(0.35 0.045 60)",
+      "checkbox-color": "oklch(0.81369 0.12805 59.248)",
+      "switch-checked-background": "oklch(0.68732 0.16562 51.437)",
+      "switch-checked-thumb": "oklch(0.28662 0.03384 170.397)",
+      "radius": "0.5rem",
+      "card-radius": "1rem",
+      "page-radius": "1rem",
+      "menu-radius": "0.75rem",
+      "h1-weight": "700",
+      "h2-weight": "700",
+      "h1-letter-spacing": "-0.025em",
+      "page-shadow": "0 1px 8px rgb(24 48 40 / 0.08)",
+    },
+  },
+  css: [
+    // Chart grids stay subtle against cream and green surfaces.
+    '[data-slot="chart"] .recharts-cartesian-grid line { stroke: var(--surface-border); stroke-opacity: 0.55; stroke-dasharray: 3 5; }',
+    // Small, consistent orange accents keep the shell quiet.
+    '[data-mc="page"] { border-top: 2px solid #e87722; }',
+    '[data-mc="app-rail"] [aria-current="page"], [data-mc="nav-item"][data-active="true"] { box-shadow: inset 3px 0 0 #e87722; }',
+  ].join("\n"),
+});
+
 const DEFAULT = builtInTheme({
   id: DEFAULT_THEME_ID,
   name: "Default",
   tokens: { light: {}, dark: {} },
 });
 
-export const BUILT_IN_THEMES: readonly BuiltInTheme[] = [DEFAULT, POP, GITHUB, BLUEPRINT, NOTION];
+export const BUILT_IN_THEMES: readonly BuiltInTheme[] = [DEFAULT, POP, GITHUB, BLUEPRINT, NOTION, FWD];
+
+/** Themes offered by Workpal. Keep the legacy registry for stored packages and tooling. */
+export const SELECTABLE_THEMES: readonly BuiltInTheme[] = [FWD, DEFAULT];
+export const INITIAL_THEME_ID = FWD.id;
+/** Legacy import/store tooling stays available in source but is not offered in the product. */
+export const CUSTOM_THEMES_ENABLED = false;
+
+export function isSelectableTheme(id: unknown): id is string {
+  return SELECTABLE_THEMES.some((theme) => theme.id === id);
+}
 
 export function findBuiltInTheme(id: string): BuiltInTheme | undefined {
   return BUILT_IN_THEMES.find((theme) => theme.id === id);

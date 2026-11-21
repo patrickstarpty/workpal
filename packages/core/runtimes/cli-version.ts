@@ -122,7 +122,7 @@ function meetsMinCliVersion(detected: string | undefined | null, minimum: string
 /**
  * Capability a daemon advertises when it implements worktree mode for
  * local_directory resources. Mirrors `DaemonCapabilityLocalWorktreeV1` in
- * `server/pkg/protocol/messages.go`.
+ * `server/go/pkg/protocol/messages.go`.
  */
 export const LOCAL_WORKTREE_CAPABILITY = "local-worktree-v1";
 

@@ -1,0 +1,160 @@
+{
+  "version": 1,
+  "coverage_complete": false,
+  "coverage": "Partial static proof for root continuation; no descendant closure or backend support claim",
+  "files": [
+    {
+      "path": "packages/views/issues/actions/issue-actions-menu-items.tsx",
+      "whole_source": false,
+      "review_status": "Partial bounded read; full-body review outstanding"
+    },
+    {
+      "path": "packages/views/issues/components/comment-card.tsx",
+      "whole_source": false,
+      "review_status": "Partial bounded read; full-body review outstanding"
+    },
+    {
+      "path": "packages/views/issues/components/inline-comment-run.tsx",
+      "whole_source": false,
+      "review_status": "Partial bounded read; full-body review outstanding"
+    }
+  ],
+  "source_snapshots": [
+    {
+      "path": "packages/views/issues/actions/issue-actions-menu-items.tsx",
+      "sha256": "d06938bc8aed3eea77c52a94bb54ea9eacd238de1894880a1a253a08bed6c210",
+      "line_count": 639
+    },
+    {
+      "path": "packages/views/issues/components/comment-card.tsx",
+      "sha256": "7a73b902e970cd7582952cca944c342fff36a04d4e4fc087412c5a913678e8d6",
+      "line_count": 1742
+    },
+    {
+      "path": "packages/views/issues/components/inline-comment-run.tsx",
+      "sha256": "d2d6d48c80b5307898426677c9bb817c7461b69a7f362e5b7eb8ce1dc51491c3",
+      "line_count": 396
+    }
+  ],
+  "edges": [
+    {
+      "api_method": "rerunIssue",
+      "client_anchor": "packages/core/api/client.ts:3143",
+      "inventory": [
+        {
+          "id": "client:3144",
+          "method": "POST",
+          "path_expression": "/api/issues/${issueId}/rerun",
+          "route": {
+            "method": "POST",
+            "path": "/api/issues/{id}/rerun"
+          }
+        }
+      ]
+    },
+    {
+      "api_method": "cancelTask",
+      "client_anchor": "packages/core/api/client.ts:3132",
+      "inventory": [
+        {
+          "id": "client:3133",
+          "method": "POST",
+          "path_expression": "/api/issues/${issueId}/tasks/${taskId}/cancel",
+          "route": {
+            "method": "POST",
+            "path": "/api/issues/{id}/tasks/{taskId}/cancel"
+          }
+        }
+      ]
+    },
+    {
+      "api_method": "previewCommentTriggers",
+      "client_anchor": "packages/core/api/client.ts:1889",
+      "inventory": [
+        {
+          "id": "client:1890",
+          "method": "POST",
+          "path_expression": "/api/issues/${issueId}/comments/trigger-preview",
+          "route": {
+            "method": "POST",
+            "path": "/api/issues/{id}/comments/trigger-preview"
+          }
+        }
+      ]
+    },
+    {
+      "api_method": "runQuickAction",
+      "client_anchor": "packages/core/api/client.ts:4959",
+      "inventory": [
+        {
+          "id": "client:4960",
+          "method": "POST",
+          "path_expression": "/api/issues/${issueId}/quick-actions/${quickActionId}/run",
+          "route": {
+            "method": "POST",
+            "path": "/api/issues/{id}/quick-actions/{quickActionId}/run"
+          }
+        }
+      ]
+    },
+    {
+      "api_method": "listTasksByIssue",
+      "client_anchor": "packages/core/api/client.ts:3111",
+      "inventory": [
+        {
+          "id": "client:3116",
+          "method": "GET",
+          "path_expression": "/api/issues/${issueId}/task-runs${query}",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}/task-runs"
+          }
+        }
+      ]
+    },
+    {
+      "api_method": "listTimeline",
+      "client_anchor": "packages/core/api/client.ts:1925",
+      "inventory": [
+        {
+          "id": "client:1926",
+          "method": "GET",
+          "path_expression": "/api/issues/${issueId}/timeline",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}/timeline"
+          }
+        }
+      ]
+    }
+  ],
+  "reused_evidence": [
+    "server/contracts/batches/issue-query-transport-coverage.json",
+    "server/contracts/batches/issue-cache-transport-coverage.json",
+    "server/contracts/batches/composer-submit-coverage.json",
+    "server/contracts/batches/issue-composer-transport-coverage.json",
+    "server/contracts/batches/realtime-replay-transport-coverage.json",
+    "server/contracts/batches/draft-attachment-transport-coverage.json"
+  ],
+  "branch_behavior": [
+    "Menu issueTasksOptions is enabled for full variant; sidebar StopRunItems observes workspace task snapshot and passes task to injected onStopRun. Full quick actions query active catalog and invoke useQuickActionRunner; settled invalidates timeline, tasks, catalog.",
+    "Menu actions object is injected: updateField, pin, relation, delete-confirm, rename and navigation effects require caller proof; handoff opens modal instead of immediate status update. Clipboard handlers use cached workdir or issue text.",
+    "Edit state uses edit:issueId:commentId draft, upload gate, trigger preview and recipient actions with allowSteer false. Preview debounces mention signature 300ms, disables empty/note, retries false, same-context placeholder only. Recipient task observer enabled only with issueId and preview agents.",
+    "Edit submit checks cancelled flag; collects body referenced and retained standalone attachment ids; unchanged trimmed content and id set accepts without write. Calls injected onEdit with contentBase and suppression ids. revision_conflict retains draft; accepted cleanup consumes only unchanged submitted draft; unmounted cleanup preserves newer edits.",
+    "Comment menus delegate reply, reaction, resolution, subissue and copy-link callbacks. Delete uses confirmation. AttachmentList filters referenced attachments, orders standalone groups and passes attachment objects to renderer and download provider; native resource and renderer descendants remain boundaries.",
+    "TaskCommentRetryButton directly calls rerunIssue with pending guard and toast; no explicit cache invalidation in that callback. Inline cancel/retry hooks invalidate issue task key on success.",
+    "Inline transcript loads for running status, expanded inline presentation or full log. useTaskMessages additionally validates task id; mount/focus always refetch, enabled transition or live-to-ended causes refetch(cancelRefetch:false). Error buttons call refetch. Timeline steer observer enabled false reads cache only. Active elapsed timer is local."
+  ],
+  "remaining_effects": [
+    "Complete bounded reads of all three target bodies, direct own-hook closure, concrete observer tuples and per-prefix refetch union remain required.",
+    "ActorAvatar, ContentEditor, ReadonlyContent, AttachmentRenderer, ReplyInput, plugin menus, assignee picker and transcript StepBody descendant trees are not certified here.",
+    "Injected parent callbacks require concrete caller reconciliation; reused cache proof supplies conservative refetch candidates, not proof every candidate is reachable."
+  ],
+  "validation": {
+    "inventory_sha256": "2670eec069d89d20045a5bc1043d7031f2a1460a4180a0b10256315abee03d21",
+    "exact_inventory_tuples": true,
+    "source_snapshot_hashes": true,
+    "full_anchor_validation": false
+  },
+  "root_review": "pending"
+}

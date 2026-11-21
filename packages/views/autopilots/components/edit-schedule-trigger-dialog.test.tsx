@@ -141,7 +141,7 @@ describe("EditScheduleTriggerDialog", () => {
 // The PATCH is partial on purpose. A changed cron / timezone / enabled reads
 // server-side as a substantive edit: it republishes the rule version and moves
 // this trigger's accountability to whoever saved (`UpdateAutopilotTrigger` in
-// server/internal/handler/autopilot.go, MUL-4302). Since `parseCron` → `toCron`
+// server/go/internal/handler/autopilot.go, MUL-4302). Since `parseCron` → `toCron`
 // hands an untouched schedule back normalized — `TZ=` prefix and all, textually
 // different from the stored row — resending it would make a rename look like a
 // schedule change and carry that responsibility along with it.

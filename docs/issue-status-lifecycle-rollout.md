@@ -43,7 +43,7 @@ PR #7990 is subsequent work, not part of this release.
 ## Migration and release (MUL-7365)
 
 The supported upgrade entrypoint is the **matching revision's migration runner**
-(`cd server && go run ./cmd/migrate up`, with the approved target DATABASE_URL).
+(`cd server/go && go run ./cmd/migrate up`, with the approved target DATABASE_URL).
 Do not apply pending 469 directly with psql or use an older migration binary:
 469 contains the historical unbounded rewrite and is intentionally unchanged.
 Production deployment and database execution require a separate operator handoff.

@@ -10,7 +10,7 @@ import { ALLOW, deny, type Decision, type PermissionContext } from "./types";
 
 /**
  * Pure permission rules — single source of truth that mirrors the Go backend
- * gates in `server/internal/handler/`. Hooks in `use-resource-permissions.ts`
+ * gates in `server/go/internal/handler/`. Hooks in `use-resource-permissions.ts`
  * are thin wrappers that pull `PermissionContext` from auth + member queries
  * and forward to these.
  *
@@ -26,7 +26,7 @@ const isAdminLike = (role: MemberRole | null) =>
 
 /**
  * Update / archive / restore agent fields. The backend gates archive and
- * restore identically to edit (`server/internal/handler/agent.go:519-535`),
+ * restore identically to edit (`server/go/internal/handler/agent.go:519-535`),
  * so callers can use `canEditAgent` for all three.
  */
 export function canEditAgent(agent: Agent, ctx: PermissionContext): Decision {

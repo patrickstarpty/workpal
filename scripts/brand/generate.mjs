@@ -8,6 +8,7 @@ const uri=b=>`data:image/svg+xml;base64,${b.toString('base64')}`;
 const put=async(p,data)=>{const file=resolve(root,p);await mkdir(dirname(file),{recursive:true});await writeFile(file,data);};
 await put('packages/ui/lib/workpal-assets.ts',`export const WORKPAL_MARK=${JSON.stringify(uri(mark))};\nexport const WORKPAL_WORDMARK=${JSON.stringify(uri(word))};\n`);
 for(const base of ['apps/web/public','apps/docs/public']){
+ await put(`${base}/workpal-mark.svg`,mark);await put(`${base}/workpal-wordmark.svg`,word);
  await put(`${base}/favicon.svg`,mark);await put(`${base}/icons/icon.svg`,mark);
  for(const [name,size] of [['icon-192.png',192],['icon-512.png',512],['icon-maskable-512.png',512],['apple-touch-icon.png',180]])await put(`${base}/icons/${name}`,await sharp(mark).resize(size,size).png().toBuffer());
 }

@@ -8,7 +8,7 @@ import { renderWithI18n } from "../../test/i18n";
 // The editor a webhook row opens. The PATCH stays partial for the reason the
 // schedule dialog's does: a changed filter list or enabled flag republishes
 // the rule version and moves this trigger's accountability to the saver
-// (`UpdateAutopilotTrigger` in server/internal/handler/autopilot.go, MUL-4302),
+// (`UpdateAutopilotTrigger` in server/go/internal/handler/autopilot.go, MUL-4302),
 // so a rename must not carry them along.
 
 const mockUpdateTrigger = vi.hoisted(() => vi.fn());

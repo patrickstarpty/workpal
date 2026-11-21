@@ -21,9 +21,9 @@ const POLL_TIMEOUT_MS = 30_000;
 //
 // Timeout invariant: IMPORT_POLL_TIMEOUT_MS must exceed
 // runtimeLocalSkillPendingTimeout + runtimeLocalSkillRunningTimeout
-// (server/internal/handler/runtime_local_skills.go).
+// (server/go/internal/handler/runtime_local_skills.go).
 // See also IMPORT_CONCURRENCY in packages/views/.../runtime-local-skill-import-panel.tsx
-// and maxLocalSkillImportBatch in server/internal/handler/daemon.go.
+// and maxLocalSkillImportBatch in server/go/internal/handler/daemon.go.
 const IMPORT_POLL_TIMEOUT_MS = 4 * 60_000; // 4 minutes
 
 export async function resolveRuntimeLocalSkills(

@@ -2,7 +2,7 @@
 
 import { Monitor, Moon, Sun } from "@workpal/ui/icons";
 import { useTheme } from "next-themes";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { useEffect, useState, type ReactNode } from "react";
 import { Button } from "@workpal/ui/components/ui/button";
 import {
@@ -13,6 +13,7 @@ import {
 } from "@workpal/ui/components/ui/dropdown-menu";
 import { cn } from "@workpal/ui/lib/utils";
 import { i18n } from "@/lib/i18n";
+import { switchLocalePath } from "@/lib/switch-locale";
 import { localeLabels } from "@/lib/translations";
 
 // Sidebar-footer chrome: a language switch on the left and a theme switch
@@ -22,20 +23,6 @@ import { localeLabels } from "@/lib/translations";
 
 const BASE_PATH = "/docs";
 
-function switchLocalePath(pathname: string, target: string): string {
-  // Next strips basePath before the router, so `pathname` starts at `/`
-  // or `/<locale>/...`. Default-locale URLs are prefix-less.
-  const segments = pathname.split("/").filter(Boolean);
-  const first = segments[0];
-  const hasLocalePrefix =
-    first && i18n.languages.some((l) => l === first && l !== i18n.defaultLanguage);
-
-  const rest = hasLocalePrefix ? segments.slice(1) : segments;
-  const prefixed =
-    target === i18n.defaultLanguage ? rest : [target, ...rest];
-
-  return "/" + prefixed.join("/");
-}
 
 const THEME_OPTIONS: { value: string; label: string; icon: ReactNode }[] = [
   { value: "light", label: "Light", icon: <Sun className="size-4" /> },
@@ -44,7 +31,6 @@ const THEME_OPTIONS: { value: string; label: string; icon: ReactNode }[] = [
 ];
 
 export function DocsSettings({ locale }: { locale: string }) {
-  const router = useRouter();
   const pathname = usePathname();
   const { theme, setTheme } = useTheme();
 
@@ -57,42 +43,25 @@ export function DocsSettings({ locale }: { locale: string }) {
   const activeThemeOption =
     THEME_OPTIONS.find((o) => o.value === activeTheme) ?? THEME_OPTIONS[2]!;
 
-  const handleLocaleChange = (next: string) => {
-    if (next === locale) return;
-    const internal = pathname.startsWith(BASE_PATH)
-      ? pathname.slice(BASE_PATH.length) || "/"
-      : pathname;
-    router.push(switchLocalePath(internal, next));
-  };
+  const internal = pathname === BASE_PATH || pathname.startsWith(BASE_PATH + "/")
+    ? pathname.slice(BASE_PATH.length) || "/"
+    : pathname;
 
   return (
     <div className="flex w-full items-center justify-end gap-2">
       {/* Language — left pill. Shows current language name. */}
-      <DropdownMenu>
-        <DropdownMenuTrigger
-          render={
-            <Button
-              variant="ghost"
-              size="sm"
-              className="font-normal text-muted-foreground"
-              aria-label="Switch language"
-            >
-              {localeLabels[locale as keyof typeof localeLabels] ?? locale}
-            </Button>
-          }
-        />
-        <DropdownMenuContent align="start" side="top" className="min-w-[140px]">
-          {i18n.languages.map((lang) => (
-            <DropdownMenuItem
-              key={lang}
-              onClick={() => handleLocaleChange(lang)}
-              className={cn(lang === locale && "bg-accent")}
-            >
-              {localeLabels[lang as keyof typeof localeLabels]}
-            </DropdownMenuItem>
-          ))}
-        </DropdownMenuContent>
-      </DropdownMenu>
+      {/* Native disclosure + document links also work before client hydration.
+          Locale changes replace the root html language and translated page tree. */}
+      <details className="group relative">
+        <summary aria-label="Switch language" className="cursor-pointer list-none rounded-md px-2 py-1 text-sm text-muted-foreground hover:bg-accent focus-visible:outline-2 focus-visible:outline-ring [&::-webkit-details-marker]:hidden">
+          {localeLabels[locale as keyof typeof localeLabels] ?? locale}
+        </summary>
+        <nav aria-label="Documentation languages" className="absolute bottom-full right-0 z-50 mb-2 min-w-36 rounded-lg border bg-popover p-1.5 text-popover-foreground shadow-md">
+          {i18n.languages.map(lang => <a key={lang} href={`${BASE_PATH}${switchLocalePath(internal, lang)}`} hrefLang={lang} lang={lang} aria-current={lang === locale ? "page" : undefined} className={cn("block rounded-md px-2 py-1.5 text-sm hover:bg-accent focus-visible:outline-2 focus-visible:outline-ring", lang === locale && "bg-accent")}>
+            {localeLabels[lang as keyof typeof localeLabels]}
+          </a>)}
+        </nav>
+      </details>
 
       {/* Theme — right icon button. Matched height to the sm pill via
           the icon-sm size token; without this the icon variant defaults

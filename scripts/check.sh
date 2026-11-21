@@ -103,7 +103,7 @@ echo "==> [3/5] Go tests..."
 echo "==> Verifying Go test wrapper..."
 bash scripts/test-go.test.sh || { EXIT_CODE=1; exit 1; }
 echo "==> Running database migrations..."
-(cd server && go run ./cmd/migrate up) || { EXIT_CODE=1; exit 1; }
+(cd server/go && go run ./cmd/migrate up) || { EXIT_CODE=1; exit 1; }
 bash scripts/test-go.sh || { EXIT_CODE=1; exit 1; }
 
 # --------------------------------------------------------------------------
@@ -116,7 +116,7 @@ if curl -sf "http://localhost:${PORT}/health" > /dev/null 2>&1; then
   echo "    Backend already running on :$PORT"
 else
   echo "    Starting backend..."
-  (cd server && go run ./cmd/server) > /tmp/workpal-check-backend.log 2>&1 &
+  (cd server/go && go run ./cmd/server) > /tmp/workpal-check-backend.log 2>&1 &
   BACKEND_PID=$!
   STARTED_BACKEND=true
   wait_for_port "$PORT" "Backend" 90 "/health"

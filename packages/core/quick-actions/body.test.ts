@@ -4,7 +4,7 @@ import { readFileSync } from "node:fs";
 import { buildQuickActionBody } from "./body";
 
 const cases = JSON.parse(readFileSync(
-  new URL("../../../server/internal/handler/testdata/quick_action_bodies.json", import.meta.url),
+  new URL("../../../server/go/internal/handler/testdata/quick_action_bodies.json", import.meta.url),
   "utf8",
 )) as { name: string; action: Omit<Parameters<typeof buildQuickActionBody>[0], "target_missing">; expected: string }[];
 

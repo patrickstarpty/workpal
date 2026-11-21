@@ -17,7 +17,7 @@ import {
 type Mode = "in_place" | "worktree";
 type RunStatus = "idle" | "waiting" | "working" | "completed";
 
-// Branch names follow server/internal/daemon/execenv/local_worktree.go:
+// Branch names follow server/go/internal/daemon/execenv/local_worktree.go:
 // agent/<sanitized agent name>/<sanitized issue identifier>. The agent segment
 // keeps only a-z and 0-9, so names without Latin letters become "agent".
 const copy = {

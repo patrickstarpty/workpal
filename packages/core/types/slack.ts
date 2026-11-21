@@ -1,7 +1,7 @@
 /** A Slack bot installation bound to a single Workpal agent (MUL-3666).
  *
  * Wire shape mirrors `SlackInstallationResponse` in
- * `server/internal/handler/slack.go`. New fields the backend adds in the
+ * `server/go/internal/handler/slack.go`. New fields the backend adds in the
  * future MUST default to optional so older desktop builds keep parsing the
  * response — see CLAUDE.md → API Compatibility. */
 export interface SlackInstallation {

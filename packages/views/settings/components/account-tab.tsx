@@ -17,7 +17,7 @@ import {
 } from "./settings-layout";
 import { useAutoSave } from "./use-auto-save";
 
-// Mirror server/internal/handler/auth.go:MaxProfileDescriptionLen. Counted in
+// Mirror server/go/internal/handler/auth.go:MaxProfileDescriptionLen. Counted in
 // JS String.length (UTF-16 code units) here while the server counts runes,
 // so a profile full of supplementary-plane emoji will trip the client cap
 // before the server's — which is the safer direction of drift.
@@ -123,6 +123,7 @@ export function AccountTab() {
                         ? error.message
                         : t(($) => $.account.toast_avatar_failed),
                     );
+                    throw error;
                   }
                 }}
               />

@@ -476,7 +476,7 @@ migrate_database() {
   # `migrate up` connects with DATABASE_URL and pings before doing anything, so
   # a successful run is the proof that the application can reach the database
   # this script just prepared. That is why nothing above prints a checkmark.
-  if ! (cd "$REPO_ROOT/server" && go run ./cmd/migrate up) > "$LOG_DIR/migrate.log" 2>&1; then
+  if ! (cd "$REPO_ROOT/server/go" && go run ./cmd/migrate up) > "$LOG_DIR/migrate.log" 2>&1; then
     tail -5 "$LOG_DIR/migrate.log" | sed 's/^/    /' >&2 || true
     if grep -q '3D000\|does not exist' "$LOG_DIR/migrate.log"; then
       diagnose_database
@@ -943,7 +943,7 @@ daemon_stale_reason() {
 # Under a daemon-task marker the CLI refuses daemon commands for every profile
 # except one this registry assigns to an environment, reached without the task's
 # identity and pointed at that environment's API — exactly how CLEAN_ENV and
-# the profile written above launch it (server/cmd/workpal/dev_env_profile.go).
+# the profile written above launch it (server/go/cmd/workpal/dev_env_profile.go).
 start_daemon() {
   local status state pid build_commit bin_hash reason active
 
@@ -954,7 +954,7 @@ start_daemon() {
   # "fork/exec .../go-build.../exe/workpal: no such file or directory".
   info "Building $WORKPAL_BIN (a go run daemon would fail every task later)."
   build_commit="$(git -C "$REPO_ROOT" rev-parse HEAD 2>/dev/null || printf 'unknown')"
-  (cd "$REPO_ROOT/server" && go build -ldflags "-X main.buildCommit=$build_commit" -o bin/workpal ./cmd/workpal) || die "Failed to build the workpal CLI."
+  (cd "$REPO_ROOT/server/go" && go build -ldflags "-X main.buildCommit=$build_commit" -o bin/workpal ./cmd/workpal) || die "Failed to build the workpal CLI."
   bin_hash="$(file_sha256 "$WORKPAL_BIN")"
 
   status="$(daemon_status_json)"
@@ -1323,7 +1323,7 @@ component_state() {
           return 0
         fi
         running_commit="$(json_field "$status" cli_commit || true)"
-        # Measured against server/bin/workpal as it is now: an edit that has
+        # Measured against server/go/bin/workpal as it is now: an edit that has
         # not been rebuilt yet shows up only once `make up` compiles it.
         reason="$(daemon_stale_reason "$status" \
           "$(git -C "$DIR" rev-parse HEAD 2>/dev/null || printf 'unknown')" \
@@ -1465,9 +1465,9 @@ bind_paths() {
   DESKTOP_ENV_FILE="${DESKTOP_ENV_FILE:-$DIR/apps/desktop/.env.development.local}"
   DESKTOP_CDP_PORT="${DESKTOP_CDP_PORT:-}"
   EXPIRES_AT="${EXPIRES_AT:-}"
-  WORKPAL_BIN="$DIR/server/bin/workpal"
-  if [ ! -x "$WORKPAL_BIN" ] && [ -x "$REPO_ROOT/server/bin/workpal" ]; then
-    WORKPAL_BIN="$REPO_ROOT/server/bin/workpal"
+  WORKPAL_BIN="$DIR/server/go/bin/workpal"
+  if [ ! -x "$WORKPAL_BIN" ] && [ -x "$REPO_ROOT/server/go/bin/workpal" ]; then
+    WORKPAL_BIN="$REPO_ROOT/server/go/bin/workpal"
   fi
   mkdir -p "$LOG_DIR"
 }

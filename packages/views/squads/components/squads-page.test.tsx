@@ -162,7 +162,7 @@ describe("SquadsPage header", () => {
     });
     expect(screen.getByRole("link", { name: "Read the docs" })).toHaveAttribute(
       "href",
-      "https://workpal.invalid/docs/squads",
+      "http://127.0.0.1:4000/docs/squads",
     );
     await user.click(within(intro).getByRole("button", { name: "New squad" }));
     expect(mocks.openModal).toHaveBeenCalledWith("create-squad");

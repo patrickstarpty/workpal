@@ -1,0 +1,239 @@
+{
+  "version": 1,
+  "scope": "Six useComposerSubmit hosts; source audit only",
+  "coverage_complete": false,
+  "hosts": [
+    {
+      "host": "packages/views/chat/components/chat-input.tsx:500",
+      "source_chain": [
+        "packages/views/chat/components/chat-input.tsx:508",
+        "packages/views/chat/components/chat-input.tsx:629",
+        "packages/views/chat/chat-page.tsx:405",
+        "packages/views/chat/components/chat-window.tsx:422",
+        "packages/views/chat/components/use-chat-controller.ts:425",
+        "packages/core/chat/mutations.ts:171",
+        "packages/views/chat/components/use-chat-controller.ts:556",
+        "packages/views/agents/create/builder-conversation.tsx:143",
+        "packages/views/agents/create/builder-workspace.tsx:325",
+        "packages/views/agents/create/use-builder-session.ts:211"
+      ],
+      "existing_call_ids": [
+        "client:4129",
+        "client:4260"
+      ],
+      "semantics": "Annotation composition and page mention prefix are local. Main chat creates a session when necessary then posts message; builder forwards to useBuilderSession.send. Message endpoint may execute/steer/queue model work. commitInput clears only untouched sent draft and annotations; focus callback local."
+    },
+    {
+      "host": "packages/views/modals/quick-create-issue.tsx:441",
+      "source_chain": [
+        "packages/views/modals/quick-create-issue.tsx:464",
+        "packages/views/modals/quick-create-issue.tsx:479",
+        "packages/views/modals/quick-create-issue.tsx:563"
+      ],
+      "existing_call_ids": [
+        "client:1714",
+        "client:1673"
+      ],
+      "semantics": "Agent/squad quick create or anchored agent sub-issue starts model work. Actor/version/source and cloud attachment guards reject locally. Acceptance stores preferences and conditionally clears draft, closes or refocuses locally."
+    },
+    {
+      "host": "packages/views/modals/create-issue.tsx:534",
+      "source_chain": [
+        "packages/views/modals/create-issue.tsx:537",
+        "packages/views/modals/create-issue.tsx:553",
+        "packages/core/issues/mutations.ts:190",
+        "packages/views/modals/create-issue.tsx:576",
+        "packages/core/issues/mutations.ts:180",
+        "packages/views/modals/create-issue.tsx:606",
+        "packages/core/issues/mutations.ts:199",
+        "packages/views/modals/create-issue.tsx:645",
+        "packages/core/labels/mutations.ts:234",
+        "packages/views/modals/create-issue.tsx:814"
+      ],
+      "existing_call_ids": [
+        "client:1648",
+        "client:1714",
+        "client:1771",
+        "client:5032",
+        "client:3351"
+      ],
+      "semantics": "Title normalization permits title-only creation; description read separately. Manual issue/sub-issue write, queued child parent updates, legacy label attach only if response labels absent. Custom properties require config capability read. Acceptance preference/draft/reset/close effects local; no explicit model execution request in manual branch."
+    },
+    {
+      "host": "packages/views/issues/components/comment-input.tsx:174",
+      "source_chain": [
+        "packages/views/issues/components/comment-input.tsx:205",
+        "packages/views/issues/components/issue-detail.tsx:4415",
+        "packages/views/issues/hooks/use-issue-timeline.ts:344",
+        "packages/core/issues/mutations.ts:903",
+        "packages/views/issues/components/use-stop-runs-before-send.ts:20",
+        "packages/core/issues/mutations.ts:1284"
+      ],
+      "existing_call_ids": [
+        "client:1876",
+        "client:3133"
+      ],
+      "semantics": "Compose annotations locally; filter referenced uploads. Current matching restart preview optionally cancels runs before comment POST; cancellation failure rejects send. Reply passes current target parent_id and rejects missing/changed target. Comment trigger routing may cause server model execution. Acceptance clears unchanged draft/editor and recipients; issue-detail acceptance scrolls locally."
+    },
+    {
+      "host": "packages/views/issues/components/reply-input.tsx:193",
+      "source_chain": [
+        "packages/views/issues/components/reply-input.tsx:230",
+        "packages/views/issues/components/comment-card.tsx:1718",
+        "packages/views/issues/hooks/use-issue-timeline.ts:363",
+        "packages/core/issues/mutations.ts:903",
+        "packages/views/issues/components/use-stop-runs-before-send.ts:20",
+        "packages/core/issues/mutations.ts:1284"
+      ],
+      "existing_call_ids": [
+        "client:1876",
+        "client:3133"
+      ],
+      "semantics": "Compose annotations locally; filter referenced uploads. Current matching restart preview optionally cancels runs before comment POST; cancellation failure rejects send. Reply passes current target parent_id and rejects missing/changed target. Comment trigger routing may cause server model execution. Acceptance clears unchanged draft/editor and recipients; issue-detail acceptance scrolls locally."
+    },
+    {
+      "host": "packages/views/issues/components/comment-card.tsx:484",
+      "source_chain": [
+        "packages/views/issues/components/comment-card.tsx:511",
+        "packages/views/issues/components/issue-detail.tsx:3559",
+        "packages/views/issues/hooks/use-issue-timeline.ts:389",
+        "packages/core/issues/mutations.ts:974"
+      ],
+      "existing_call_ids": [
+        "client:1939"
+      ],
+      "semantics": "Cancelled edit rejects; unchanged body and attachment set accepts without write. Otherwise PUT comment with suppression and content base; conflicts retain edit. Acceptance clears unchanged local draft/edit state. Server trigger outcomes may include model work; no separate execution HTTP call here."
+    }
+  ],
+  "http_records": [
+    {
+      "id": "client:4129",
+      "route": {
+        "method": "POST",
+        "path": "/api/chat/sessions"
+      },
+      "sources": [
+        "packages/core/api/client.ts:4129"
+      ]
+    },
+    {
+      "id": "client:4260",
+      "route": {
+        "method": "POST",
+        "path": "/api/chat/sessions/{sessionId}/messages"
+      },
+      "sources": [
+        "packages/core/api/client.ts:4260"
+      ]
+    },
+    {
+      "id": "client:1714",
+      "route": {
+        "method": "POST",
+        "path": "/api/comments/{commentId}/sub-issues"
+      },
+      "sources": [
+        "packages/core/api/client.ts:1714"
+      ]
+    },
+    {
+      "id": "client:1673",
+      "route": {
+        "method": "POST",
+        "path": "/api/issues/quick-create"
+      },
+      "sources": [
+        "packages/core/api/client.ts:1673"
+      ]
+    },
+    {
+      "id": "client:1648",
+      "route": {
+        "method": "POST",
+        "path": "/api/issues"
+      },
+      "sources": [
+        "packages/core/api/client.ts:1648"
+      ]
+    },
+    {
+      "id": "client:1771",
+      "route": {
+        "method": "PUT",
+        "path": "/api/issues/{id}"
+      },
+      "sources": [
+        "packages/core/api/client.ts:1771"
+      ]
+    },
+    {
+      "id": "client:5032",
+      "route": {
+        "method": "POST",
+        "path": "/api/issues/{id}/labels"
+      },
+      "sources": [
+        "packages/core/api/client.ts:5032"
+      ]
+    },
+    {
+      "id": "client:3351",
+      "route": {
+        "method": "GET",
+        "path": "/api/config"
+      },
+      "sources": [
+        "packages/core/api/client.ts:3351"
+      ]
+    },
+    {
+      "id": "client:1876",
+      "route": {
+        "method": "POST",
+        "path": "/api/issues/{id}/comments"
+      },
+      "sources": [
+        "packages/core/api/client.ts:1876"
+      ]
+    },
+    {
+      "id": "client:3133",
+      "route": {
+        "method": "POST",
+        "path": "/api/issues/{id}/tasks/{taskId}/cancel"
+      },
+      "sources": [
+        "packages/core/api/client.ts:3133"
+      ]
+    },
+    {
+      "id": "client:1939",
+      "route": {
+        "method": "PUT",
+        "path": "/api/comments/{commentId}"
+      },
+      "sources": [
+        "packages/core/api/client.ts:1939"
+      ]
+    }
+  ],
+  "proposed_missing_http_records": [],
+  "shared_contract": "packages/views/editor/use-composer-submit.ts:161 awaits callback; upload gate rejects before submission; normalization, focus and draft effects are local. Upload transport is separately client:4078 POST /api/upload-file, already covered by editor ledger.",
+  "remaining_unresolved_caller_branches": [
+    "Builder encodeInput callback may transform content; not classified as HTTP. Query invalidation/refetch fanout is not exhaustively enumerated."
+  ],
+  "limitations": [
+    "No HTTP/model calls invoked. Global frontend coverage remains false. Parent review required."
+  ],
+  "parent_resolutions": {
+    "source_context_refetch": {
+      "sources": [
+        "packages/views/modals/create-issue-dialog.tsx:101",
+        "packages/core/issues/queries.ts:225",
+        "packages/core/api/client.ts:1680"
+      ],
+      "existing_call_id": "client:1680",
+      "route": "GET /api/comments/{commentId}/sub-issue-preview"
+    }
+  }
+}

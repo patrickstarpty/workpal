@@ -1,6 +1,6 @@
 // Display grouping for `agent_task_queue.failure_reason`.
 //
-// The backend taxonomy (server/pkg/taskfailure) has 26 reasons, which is far
+// The backend taxonomy (server/go/pkg/taskfailure) has 26 reasons, which is far
 // too many series for a stacked chart or a scannable breakdown list. These
 // seven classes are the granularity an operator actually acts on: an auth
 // spike means "go re-auth", a rate-limit spike means "back off or raise the

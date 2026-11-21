@@ -5,7 +5,7 @@
  *   1. Add a new branch returning a new PreviewKind literal.
  *   2. Add the corresponding renderer in attachment-preview-modal.tsx's dispatch.
  *   3. If the renderer needs the file body as text, update
- *      server/internal/handler/attachment_text_preview.json and regenerate the
+ *      server/go/internal/handler/attachment_text_preview.json and regenerate the
  *      TypeScript whitelist so the proxy endpoint accepts it too.
  *   4. If the renderer fetches a binary, decide whether to use download_url
  *      (CloudFront, no auth on the client side) or a new authenticated proxy.

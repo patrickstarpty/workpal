@@ -60,12 +60,12 @@ export function WebhookEventFilterSection({
   const payloadSupported = useConfigStore((state) => state.webhookPayloadConditionsSupported);
   const { errors } = resolveEventFilterDrafts(drafts);
   const docsHref = isTraditionalChinese(i18n.language)
-    ? `https://workpal.invalid/docs/zh-Hant/autopilots#${encodeURIComponent("事件過濾")}`
+    ? `http://127.0.0.1:4000/docs/zh-Hant/autopilots#${encodeURIComponent("事件過濾")}`
     : i18n.language?.startsWith("zh")
-      ? `https://workpal.invalid/docs/zh/autopilots#${encodeURIComponent("事件过滤")}`
+      ? `http://127.0.0.1:4000/docs/zh/autopilots#${encodeURIComponent("事件过滤")}`
       : i18n.language?.startsWith("fr")
-        ? `https://workpal.invalid/docs/fr/autopilots#${encodeURIComponent("filtres-dévénements")}`
-        : "https://workpal.invalid/docs/autopilots#event-filters";
+        ? `http://127.0.0.1:4000/docs/fr/autopilots#${encodeURIComponent("filtres-dévénements")}`
+        : "http://127.0.0.1:4000/docs/autopilots#event-filters";
 
   // A blocked save lands the user on the first field that blocked it.
   useEffect(() => {

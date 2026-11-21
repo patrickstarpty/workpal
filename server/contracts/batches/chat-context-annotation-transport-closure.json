@@ -1,0 +1,218 @@
+{
+  "version": 1,
+  "coverage": "Bounded context and annotation invoked helpers only; no chat page/window/controller closure",
+  "files": [
+    {
+      "path": "packages/views/chat/components/use-chat-context-items.ts",
+      "sha256": "b007c2600cbac3b00fc181d13f22d6fa6c08bd957dc44f923e3f78fbd3991178"
+    },
+    {
+      "path": "packages/views/chat/components/use-chat-annotations.ts",
+      "sha256": "679db106e1650861c0813049e1aa82701017acb547f0311faf93216bad9c170f"
+    },
+    {
+      "path": "packages/views/issues/components/use-comment-annotations.tsx",
+      "sha256": "27a4de160fe7243db2831eb85cc09ffb5cc879e95aa9f9a930bd41ef905a948e"
+    },
+    {
+      "path": "packages/views/issues/components/comment-annotation-selection.ts",
+      "sha256": "c0cd28d6e68f76b3c0dc7f9ebe32f7f8df1cba02d467d822eded2b6dc7ff00b8"
+    },
+    {
+      "path": "packages/core/chat/recent-context-store.ts",
+      "sha256": "b4ede5a101e63a0f8b404a74a72355f7ea3412ca00135311f119b96538473b3e"
+    },
+    {
+      "path": "packages/views/navigation/context.tsx",
+      "sha256": "976a7d339b879cbd3db29d4de73552bd7c0b268d2d86df8c7f9d8c1abb8bb847"
+    },
+    {
+      "path": "packages/core/issues/stores/comment-draft-store.ts",
+      "sha256": "699c6270150453b38cc68e957c1dea05c4997a96e0228f3ff1b91a7842c46fa6"
+    },
+    {
+      "path": "packages/core/platform/storage.ts",
+      "sha256": "75867acb53d6ba44c1617f7a770bb765955a4ace19b9bb44e1873cf9ee1556b2"
+    },
+    {
+      "path": "packages/core/platform/workspace-storage.ts",
+      "sha256": "86f0f2ab838823d3c5dd10de0126c5095e815cb8c34a000e0ba04b8d015cf5bb"
+    },
+    {
+      "path": "packages/core/drafts/reply-annotation.ts",
+      "sha256": "46119accabda75bbeed9410861a001c0889c0baeff20743f5a578a2089bdae18"
+    },
+    {
+      "path": "packages/core/chat/queries.ts",
+      "sha256": "7cf8eac14be017406936c6b0eb46dba319db13095a41077c5ff6527cc9c62f3d"
+    },
+    {
+      "path": "packages/core/api/client.ts",
+      "sha256": "779bb65b5b7ead815836f7c704ec3c370bafae203e4f92119fadce93e982a4d7"
+    }
+  ],
+  "semantics": [
+    "packages/views/chat/components/use-chat-context-items.ts:69-100: route parser decodes issue/project IDs or inbox issue search parameter; malformed percent encoding can throw. useNavigation reads context and throws without provider (packages/views/navigation/context.tsx:77). No push/replace invoked. Current detail queries enabled only by route type; no workspace/nonempty-ID or visibility gate.",
+    "packages/views/chat/components/use-chat-context-items.ts:101-125: at most eight recent entries use detail factories with staleTime 30000 and no enabled override. No mutation, invalidation or explicit refetch. Current item deduplicates recent by type:id. Query errors are not surfaced here; missing recent data uses stored label/status metadata.",
+    "packages/core/issues/queries.ts:507-512 and packages/core/projects/queries.ts:29-34: workspace-partitioned detail keys, queryFn calls getIssue/getProject; no signal consumed, no factory enabled gate. API issue malformed payload throws (client.ts:1611-1624); project malformed payload uses EMPTY_PROJECT (client.ts:4523-4526). Requests reject through query state.",
+    "packages/core/chat/recent-context-store.ts:36-115: persisted workpal_recent_contexts byWorkspace; selector returns empty for absent workspace. recordVisit deduplicates, timestamps, caps 20 entries and 50 workspaces; forget/prune local only. This hook only reads. defaultStorage (platform/storage.ts:4-17) accesses localStorage, SSR reads null/writes no-op; storage exceptions are not caught in adapter.",
+    "packages/views/chat/components/use-chat-annotations.ts:46-76: messages query enabled by nonempty session only, independently of annotation enabled. Sources are nonfailed assistant non-no_response nonblank persisted messages; draftKey chat:session. Annotation enabled additionally requires session. chat/queries.ts:154-165 uses Infinity staleTime, limit 50 and cursor pagination, no signal forwarding.",
+    "packages/views/chat/components/use-chat-annotations.ts:32-40,78-121: scroll edit may fetchNextPage(cancelRefetch:false) repeatedly until found/exhausted/page error. No mutation/invalidation. Missing source or 30-frame timeout toasts. New attempts/draft-key cleanup increment attempt and cancel RAF; stale promise continuation suppressed. Network is not aborted; pagination loop itself has no attempt check; .then has no rejection catch.",
+    "packages/views/issues/components/use-comment-annotations.tsx:75-142: selection gated by enabled/card/not busy; draftKey/enabled reset editor. Pointer/Escape/focus dismiss with IME/overlay ownership guards; focus microtask rechecks ownership. Document listeners removed on effect cleanup.",
+    "packages/views/issues/components/use-comment-annotations.tsx:149-210: local DOM quote anchoring; MutationObserver updates content ranges, disconnects on cleanup; CSS highlights deleted. edit scrolls locally. comment-annotation-selection.ts:9-75 indexes visible text and creates DOM ranges using pure locateReplyAnnotation; no transport.",
+    "packages/views/issues/components/use-comment-annotations.tsx:213-332: add validates source/quote and duplicate; confirm requires nonblank note, writes add/updateAnnotation; remove writes local store. Busy blocks edits/dismissal. Count 20/quote 4000 errors are local; pending highlight removed on cleanup. Composer receives issueId undefined in chat and optional host controls, not a newly asserted mutation endpoint.",
+    "packages/core/issues/stores/comment-draft-store.ts:112-167,245-319: getAnnotations stable empty; add validates key/note/quote, deduplicates and caps; update blank removes; remove preserves other draft content/uploads, deletes empty drafts. writeDraft timestamps meaningful changes. Persist workpal_comment_drafts:<slug>; merge empty namespace clears drafts; hydrate normalizes and prunes 30-day stale drafts. Registers workspace rehydration and local cleanup reset; no HTTP.",
+    "packages/core/platform/workspace-storage.ts:34-63,109-121: workspace switch coalesces subscriber/rehydration microtasks; storage resolves slug at call time, absent slug returns null/drops writes. Registration is module lifetime, no unregister exposed. No hook-induced network cleanup.",
+    "packages/core/api/client.ts:4207-4243: messages page sends limit and optional before_created_at/before_id; malformed page fallback empty terminal page. Initial cursorless ApiError 404 falls back to listChatMessages; cursor 404 and other errors rethrow. No AbortSignal supplied by these factories."
+  ],
+  "inventory": [
+    {
+      "id": "client:1612",
+      "method": "GET",
+      "path_expression": "/api/issues/${encodeURIComponent(id)}",
+      "route": {
+        "method": "GET",
+        "path": "/api/issues/{id}"
+      },
+      "sources": [
+        "packages/core/api/client.ts:1612"
+      ],
+      "transport": "ApiClient.fetch; baseUrl + path; bearer or cookie credentials; workspace header from client context",
+      "auth": "requires endpoint-specific reconciliation",
+      "status": "pending-reconciliation"
+    },
+    {
+      "id": "client:4201",
+      "method": "GET",
+      "path_expression": "/api/chat/sessions/${sessionId}/messages",
+      "route": {
+        "method": "GET",
+        "path": "/api/chat/sessions/{sessionId}/messages"
+      },
+      "sources": [
+        "packages/core/api/client.ts:4201"
+      ],
+      "transport": "ApiClient.fetch; baseUrl + path; bearer or cookie credentials; workspace header from client context",
+      "auth": "requires endpoint-specific reconciliation",
+      "status": "pending-reconciliation"
+    },
+    {
+      "id": "client:4218",
+      "method": "GET",
+      "path_expression": "/api/chat/sessions/${sessionId}/messages/page?${query.toString()}",
+      "route": {
+        "method": "GET",
+        "path": "/api/chat/sessions/{sessionId}/messages/page"
+      },
+      "sources": [
+        "packages/core/api/client.ts:4218"
+      ],
+      "transport": "ApiClient.fetch; baseUrl + path; bearer or cookie credentials; workspace header from client context",
+      "auth": "requires endpoint-specific reconciliation",
+      "status": "pending-reconciliation"
+    },
+    {
+      "id": "client:4524",
+      "method": "GET",
+      "path_expression": "/api/projects/${id}",
+      "route": {
+        "method": "GET",
+        "path": "/api/projects/{id}"
+      },
+      "sources": [
+        "packages/core/api/client.ts:4524"
+      ],
+      "transport": "ApiClient.fetch; baseUrl + path; bearer or cookie credentials; workspace header from client context",
+      "auth": "requires endpoint-specific reconciliation",
+      "status": "pending-reconciliation"
+    }
+  ],
+  "reused_evidence": [
+    {
+      "path": "server/contracts/batches/issue-query-transport-coverage.json",
+      "sha256": "3d4401929eee7294bc9f706a5c738a074300faffc6df01ec9275184d8a5be380",
+      "validated_files": [
+        "packages/core/issues/queries.ts",
+        "packages/core/projects/queries.ts",
+        "packages/core/workspace/queries.ts",
+        "packages/core/issue-statuses/queries.ts"
+      ]
+    },
+    {
+      "path": "server/contracts/batches/issue-composer-transport-coverage.json",
+      "sha256": "f2c1036ca9d134227d4e17739aba2e5476c9cfebf6809bb64a0663c49b572044",
+      "validated_files": [
+        "packages/views/issues/components/annotation-composer.tsx",
+        "packages/views/issues/components/comment-input.tsx",
+        "packages/views/issues/components/reply-input.tsx",
+        "packages/views/issues/components/composer-frame.tsx",
+        "packages/views/issues/components/use-comment-uploads.ts",
+        "packages/views/issues/hooks/use-comment-trigger-preview.ts",
+        "packages/views/issues/hooks/use-recipient-actions.ts",
+        "packages/views/issues/hooks/use-quick-action-menu.ts",
+        "packages/views/issues/hooks/use-sticky-composer.ts",
+        "packages/core/issues/run-steering.ts",
+        "packages/core/quick-actions/queries.ts",
+        "packages/core/quick-actions/body.ts",
+        "packages/ui/hooks/use-mobile.ts",
+        "packages/core/issues/stores/comment-composer-store.ts",
+        "packages/views/issues/components/use-comment-annotations.tsx"
+      ]
+    },
+    {
+      "path": "server/contracts/batches/chat-input-transport-coverage.json",
+      "sha256": "c9d61a77c3939b5c2edbe5d2aea4c91888166174575dfff5e7e2dedde34779fe",
+      "validated_files": [
+        "packages/views/chat/components/chat-add-menu.tsx",
+        "packages/views/chat/components/chat-input.tsx",
+        "packages/views/chat/components/use-chat-draft-restore.ts",
+        "server/contracts/batches/composer-submit-coverage.json",
+        "server/contracts/batches/chat-inbox-transport-coverage.json",
+        "server/contracts/batches/draft-attachment-transport-coverage.json",
+        "server/contracts/batches/voice-transport-coverage.json"
+      ]
+    },
+    {
+      "path": "server/contracts/batches/observer-local-state-transport-coverage.json",
+      "sha256": "1851b4d75f9b602380d14fa25c3aa055b2a364279168b3d7e0b958eff966e5a4",
+      "validated_files": [
+        "packages/core/api/index.ts",
+        "packages/core/api/realtime-observer.ts",
+        "packages/core/api/request-observer.ts",
+        "packages/core/diagnostics/dev-recorder.ts",
+        "packages/core/issues/stores/comment-draft-store.ts",
+        "packages/core/issues/stores/draft-store.ts",
+        "packages/core/chat/message-cache.ts"
+      ]
+    },
+    {
+      "path": "server/contracts/batches/chat-inbox-transport-coverage.json",
+      "sha256": "e79524ce8c9c2e7014f7098571c3e55c863fe90a92b7bc3c109772748711bbdc",
+      "validated_files": [
+        "packages/core/chat/queries.ts",
+        "packages/core/chat/store.ts",
+        "packages/core/inbox/queries.ts",
+        "packages/core/inbox/ws-updaters.ts",
+        "packages/core/api/client.ts",
+        "packages/core/platform/workspace-storage.ts",
+        "packages/core/drafts/cleanup-registry.ts",
+        "packages/core/drafts/draft-upload.ts",
+        "packages/core/inbox/selection-store.ts"
+      ]
+    }
+  ],
+  "external_boundaries": [
+    "Third-party React/TanStack/Zustand implementations and configured API server/auth behavior; no package certification or runtime/backend support claim.",
+    "Rendered composer/editor transport delegated to hash-validated issue-composer/chat-input proofs; host send controls remain caller-defined. Queue/archive excluded."
+  ],
+  "root_review": {
+    "status": "accepted_bounded_support",
+    "checks": [
+      "Context query route gates and recent request limits independently reviewed",
+      "Annotation pagination, stale continuation guard, 30-frame DOM retry and cleanup independently reviewed",
+      "Draft add/update/remove and workspace persistence independently reviewed",
+      "All source/reused hashes and four tuples validated"
+    ],
+    "runtime_verified": false
+  }
+}

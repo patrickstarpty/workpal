@@ -11,7 +11,7 @@ export const runtimeModelsKeys = {
 const POLL_INTERVAL_MS = 500;
 
 // The client must not give up on a request the server still considers live.
-// Those two windows are sequential, not overlapping (server/internal/handler/
+// Those two windows are sequential, not overlapping (server/go/internal/handler/
 // runtime_models.go):
 //
 //   - pending: measured from CreatedAt, so the daemon has up to 30s to CLAIM

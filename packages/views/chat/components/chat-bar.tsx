@@ -25,12 +25,6 @@ import { chatActivity, selectChatBarSessions, type ChatBarSession } from "./chat
 const EMPTY_SESSIONS: ChatSession[] = [];
 
 
-/** The star from the Workpal mark, in the text colour. */
-function WorkpalStar() {
-  return (
-    <WorkpalIcon aria-hidden="true" />
-  );
-}
 const DEFAULT_MAX_CHIPS = 3;
 
 /**
@@ -230,8 +224,16 @@ export function ChatBar() {
           onClick={askWorkpal}
           className={BOTTOM_BAR_ITEM_CLASS}
         >
-          <WorkpalStar />
-          {askLabel}
+          {askLabel.includes("Workpal") ? (
+            <>
+              <WorkpalIcon size={18} aria-hidden="true" />
+              <span>{askLabel.split("Workpal")[0]}</span>
+              <strong className="font-bold italic">Workpal</strong>
+              {askLabel.split("Workpal")[1]}
+            </>
+          ) : (
+            <><WorkpalIcon size={18} aria-hidden="true" />{askLabel}</>
+          )}
         </button>
       </TooltipHint>
       <ChatBarHistory sessions={sessions} runningSessionIds={runningSessionIds} onSelect={openSession} />

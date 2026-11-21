@@ -1,0 +1,3640 @@
+{
+  "version": 1,
+  "scope": "ApiClient declarations starting 2057–3019, final body ends 3020",
+  "coverage": {
+    "complete": true,
+    "whole_client": false,
+    "backend": false,
+    "runtime": false
+  },
+  "files": [
+    {
+      "path": "packages/core/api/client.ts",
+      "sha256": "779bb65b5b7ead815836f7c704ec3c370bafae203e4f92119fadce93e982a4d7",
+      "whole_source": false,
+      "reviewed_ranges": [
+        [
+          2057,
+          2156
+        ],
+        [
+          2157,
+          2256
+        ],
+        [
+          2257,
+          2356
+        ],
+        [
+          2357,
+          2456
+        ],
+        [
+          2457,
+          2556
+        ],
+        [
+          2557,
+          2656
+        ],
+        [
+          2657,
+          2756
+        ],
+        [
+          2757,
+          2856
+        ],
+        [
+          2857,
+          2956
+        ],
+        [
+          2957,
+          3056
+        ]
+      ]
+    }
+  ],
+  "snapshots": [
+    {
+      "path": "server/contracts/frontend-calls.json",
+      "sha256": "2670eec069d89d20045a5bc1043d7031f2a1460a4180a0b10256315abee03d21"
+    },
+    {
+      "path": "server/contracts/batches/api-client-execution-closure.json",
+      "sha256": "550a585c2351e0b2e8066bb11dd6690f17dff41641d78071e0f6479cdf3991e9"
+    }
+  ],
+  "reused_proofs": [
+    {
+      "path": "server/contracts/batches/api-client-execution-closure.json",
+      "status": "accepted_shared_execution_layer_only",
+      "source_hash_validated": true,
+      "scope": "shared fetch/fetchRaw, workspaceHeader, parseWithFallback and feature guards only; no wrapper closure inferred"
+    }
+  ],
+  "edges": [
+    {
+      "method": "undoUnsubscribeFromIssue",
+      "lines": [
+        2057,
+        2059
+      ],
+      "declaration": "implementation",
+      "source": "  async undoUnsubscribeFromIssue(issueId: string): Promise<void> {\n    await this.fetch(`/api/issues/${issueId}/unsubscribe/undo`, { method: \"POST\" });\n  }",
+      "requests": [
+        {
+          "line": 2058,
+          "source": "await this.fetch(`/api/issues/${issueId}/unsubscribe/undo`, { method: \"POST\" });",
+          "inventory": [
+            {
+              "id": "client:2058",
+              "method": "POST",
+              "path_expression": "/api/issues/${issueId}/unsubscribe/undo",
+              "route": {
+                "method": "POST",
+                "path": "/api/issues/{id}/unsubscribe/undo"
+              }
+            }
+          ],
+          "mapping_status": "exact request source-line match"
+        }
+      ],
+      "inventory": [
+        {
+          "id": "client:2058",
+          "method": "POST",
+          "path_expression": "/api/issues/${issueId}/unsubscribe/undo",
+          "route": {
+            "method": "POST",
+            "path": "/api/issues/{id}/unsubscribe/undo"
+          }
+        }
+      ],
+      "this_method_calls": [
+        "fetch"
+      ],
+      "capability_gates": [],
+      "parsing": [],
+      "query_builders": [],
+      "pagination": "Single request only; no automatic page iteration.",
+      "transport_errors": "No local catch; shared transport errors and subsequent decoding errors propagate.",
+      "cloud_source_only": false
+    },
+    {
+      "method": "listAgents",
+      "lines": [
+        2062,
+        2067
+      ],
+      "declaration": "implementation",
+      "source": "  async listAgents(params?: { workspace_id?: string; include_archived?: boolean }): Promise<Agent[]> {\n    const search = new URLSearchParams();\n    if (params?.workspace_id) search.set(\"workspace_id\", params.workspace_id);\n    if (params?.include_archived) search.set(\"include_archived\", \"true\");\n    return this.fetch(`/api/agents?${search}`);\n  }",
+      "requests": [
+        {
+          "line": 2066,
+          "source": "return this.fetch(`/api/agents?${search}`);",
+          "inventory": [
+            {
+              "id": "client:2066",
+              "method": "GET",
+              "path_expression": "/api/agents?${search}",
+              "route": {
+                "method": "GET",
+                "path": "/api/agents"
+              }
+            }
+          ],
+          "mapping_status": "exact request source-line match"
+        }
+      ],
+      "inventory": [
+        {
+          "id": "client:2066",
+          "method": "GET",
+          "path_expression": "/api/agents?${search}",
+          "route": {
+            "method": "GET",
+            "path": "/api/agents"
+          }
+        }
+      ],
+      "this_method_calls": [
+        "fetch"
+      ],
+      "capability_gates": [],
+      "parsing": [],
+      "query_builders": [
+        "const search = new URLSearchParams();",
+        "if (params?.workspace_id) search.set(\"workspace_id\", params.workspace_id);",
+        "if (params?.include_archived) search.set(\"include_archived\", \"true\");",
+        "return this.fetch(`/api/agents?${search}`);"
+      ],
+      "pagination": "Single request only; no automatic page iteration.",
+      "transport_errors": "No local catch; shared transport errors and subsequent decoding errors propagate.",
+      "cloud_source_only": false
+    },
+    {
+      "method": "getAgent",
+      "lines": [
+        2069,
+        2071
+      ],
+      "declaration": "implementation",
+      "source": "  async getAgent(id: string): Promise<Agent> {\n    return this.fetch(`/api/agents/${id}`);\n  }",
+      "requests": [
+        {
+          "line": 2070,
+          "source": "return this.fetch(`/api/agents/${id}`);",
+          "inventory": [
+            {
+              "id": "client:2070",
+              "method": "GET",
+              "path_expression": "/api/agents/${id}",
+              "route": {
+                "method": "GET",
+                "path": "/api/agents/{id}"
+              }
+            }
+          ],
+          "mapping_status": "exact request source-line match"
+        }
+      ],
+      "inventory": [
+        {
+          "id": "client:2070",
+          "method": "GET",
+          "path_expression": "/api/agents/${id}",
+          "route": {
+            "method": "GET",
+            "path": "/api/agents/{id}"
+          }
+        }
+      ],
+      "this_method_calls": [
+        "fetch"
+      ],
+      "capability_gates": [],
+      "parsing": [],
+      "query_builders": [],
+      "pagination": "Single request only; no automatic page iteration.",
+      "transport_errors": "No local catch; shared transport errors and subsequent decoding errors propagate.",
+      "cloud_source_only": false
+    },
+    {
+      "method": "createAgent",
+      "lines": [
+        2073,
+        2079
+      ],
+      "declaration": "implementation",
+      "source": "  async createAgent(data: CreateAgentRequest): Promise<Agent> {\n    assertAgentConversationStartersWriteSupported(data);\n    return this.fetch(\"/api/agents\", {\n      method: \"POST\",\n      body: JSON.stringify(data),\n    });\n  }",
+      "requests": [
+        {
+          "line": 2075,
+          "source": "return this.fetch(\"/api/agents\", {",
+          "inventory": [
+            {
+              "id": "client:2075",
+              "method": "POST",
+              "path_expression": "/api/agents",
+              "route": {
+                "method": "POST",
+                "path": "/api/agents"
+              }
+            }
+          ],
+          "mapping_status": "exact request source-line match"
+        }
+      ],
+      "inventory": [
+        {
+          "id": "client:2075",
+          "method": "POST",
+          "path_expression": "/api/agents",
+          "route": {
+            "method": "POST",
+            "path": "/api/agents"
+          }
+        }
+      ],
+      "this_method_calls": [
+        "fetch"
+      ],
+      "capability_gates": [
+        "assertAgentConversationStartersWriteSupported(data);"
+      ],
+      "parsing": [],
+      "query_builders": [],
+      "pagination": "Single request only; no automatic page iteration.",
+      "transport_errors": "No local catch; shared transport errors and subsequent decoding errors propagate.",
+      "cloud_source_only": false
+    },
+    {
+      "method": "createMikaAgent",
+      "lines": [
+        2090,
+        2108
+      ],
+      "declaration": "implementation",
+      "source": "  async createMikaAgent(\n    data: {\n      runtime_id: string;\n      language: \"en\" | \"zh\" | \"ko\" | \"ja\";\n      /** Empty means \"whatever the runtime defaults to\". */\n      model?: string;\n      /** Label for the onboarding conversation, used only if this call is the\n       *  one that creates it. The session's identity is the member and Mika,\n       *  never this string — it is localized. */\n      session_title?: string;\n    },\n    workspaceSlug?: string,\n  ): Promise<MikaBootstrapResponse> {\n    return this.fetch(\"/api/agents/mika\", {\n      method: \"POST\",\n      headers: workspaceHeader(workspaceSlug),\n      body: JSON.stringify(data),\n    });\n  }",
+      "requests": [
+        {
+          "line": 2103,
+          "source": "return this.fetch(\"/api/agents/mika\", {",
+          "inventory": [
+            {
+              "id": "client:2103",
+              "method": "POST",
+              "path_expression": "/api/agents/mika",
+              "route": {
+                "method": "POST",
+                "path": "/api/agents/mika"
+              }
+            }
+          ],
+          "mapping_status": "exact request source-line match"
+        }
+      ],
+      "inventory": [
+        {
+          "id": "client:2103",
+          "method": "POST",
+          "path_expression": "/api/agents/mika",
+          "route": {
+            "method": "POST",
+            "path": "/api/agents/mika"
+          }
+        }
+      ],
+      "this_method_calls": [
+        "fetch"
+      ],
+      "capability_gates": [],
+      "parsing": [],
+      "query_builders": [],
+      "pagination": "Single request only; no automatic page iteration.",
+      "transport_errors": "No local catch; shared transport errors and subsequent decoding errors propagate.",
+      "cloud_source_only": false
+    },
+    {
+      "method": "createAgentBuilderSession",
+      "lines": [
+        2110,
+        2124
+      ],
+      "declaration": "implementation",
+      "source": "  async createAgentBuilderSession(data: {\n    runtime_id: string;\n    model?: string;\n  }): Promise<AgentBuilderSession> {\n    const raw = await this.fetch<unknown>(\"/api/agent-builder/sessions\", {\n      method: \"POST\",\n      body: JSON.stringify(data),\n    });\n    return parseWithFallback(\n      raw,\n      AgentBuilderSessionSchema,\n      EMPTY_AGENT_BUILDER_SESSION,\n      { endpoint: \"POST /api/agent-builder/sessions\" },\n    );\n  }",
+      "requests": [
+        {
+          "line": 2114,
+          "source": "const raw = await this.fetch<unknown>(\"/api/agent-builder/sessions\", {",
+          "inventory": [
+            {
+              "id": "client:2114",
+              "method": "POST",
+              "path_expression": "/api/agent-builder/sessions",
+              "route": {
+                "method": "POST",
+                "path": "/api/agent-builder/sessions"
+              }
+            }
+          ],
+          "mapping_status": "exact request source-line match"
+        }
+      ],
+      "inventory": [
+        {
+          "id": "client:2114",
+          "method": "POST",
+          "path_expression": "/api/agent-builder/sessions",
+          "route": {
+            "method": "POST",
+            "path": "/api/agent-builder/sessions"
+          }
+        }
+      ],
+      "this_method_calls": [
+        "fetch"
+      ],
+      "capability_gates": [],
+      "parsing": [
+        "return parseWithFallback(",
+        "AgentBuilderSessionSchema,",
+        "EMPTY_AGENT_BUILDER_SESSION,"
+      ],
+      "query_builders": [],
+      "pagination": "Single request only; no automatic page iteration.",
+      "transport_errors": "No local catch; shared transport errors and subsequent decoding errors propagate.",
+      "cloud_source_only": false
+    },
+    {
+      "method": "listAgentBuilderSessions",
+      "lines": [
+        2134,
+        2148
+      ],
+      "declaration": "implementation",
+      "source": "  async listAgentBuilderSessions(): Promise<AgentBuilderSessionSummary[]> {\n    let raw: unknown;\n    try {\n      raw = await this.fetch<unknown>(\"/api/agent-builder/sessions\");\n    } catch (err) {\n      if (err instanceof ApiError && err.status === 404) return [];\n      throw err;\n    }\n    return parseWithFallback(\n      raw,\n      AgentBuilderSessionListSchema,\n      EMPTY_AGENT_BUILDER_SESSION_LIST,\n      { endpoint: \"GET /api/agent-builder/sessions\" },\n    ).sessions;\n  }",
+      "requests": [
+        {
+          "line": 2137,
+          "source": "raw = await this.fetch<unknown>(\"/api/agent-builder/sessions\");",
+          "inventory": [
+            {
+              "id": "client:2137",
+              "method": "GET",
+              "path_expression": "/api/agent-builder/sessions",
+              "route": {
+                "method": "GET",
+                "path": "/api/agent-builder/sessions"
+              }
+            }
+          ],
+          "mapping_status": "exact request source-line match"
+        }
+      ],
+      "inventory": [
+        {
+          "id": "client:2137",
+          "method": "GET",
+          "path_expression": "/api/agent-builder/sessions",
+          "route": {
+            "method": "GET",
+            "path": "/api/agent-builder/sessions"
+          }
+        }
+      ],
+      "this_method_calls": [
+        "fetch"
+      ],
+      "capability_gates": [],
+      "parsing": [
+        "return parseWithFallback(",
+        "AgentBuilderSessionListSchema,",
+        "EMPTY_AGENT_BUILDER_SESSION_LIST,"
+      ],
+      "query_builders": [],
+      "pagination": "Single request only; no automatic page iteration.",
+      "transport_errors": "404 returns [] only; other errors rethrown",
+      "cloud_source_only": false
+    },
+    {
+      "method": "saveAgentBuilderDraft",
+      "lines": [
+        2156,
+        2164
+      ],
+      "declaration": "implementation",
+      "source": "  async saveAgentBuilderDraft(\n    sessionId: string,\n    draft: StoredAgentDraft,\n  ): Promise<void> {\n    await this.fetch(`/api/agent-builder/sessions/${sessionId}/draft`, {\n      method: \"PUT\",\n      body: JSON.stringify({ draft }),\n    });\n  }",
+      "requests": [
+        {
+          "line": 2160,
+          "source": "await this.fetch(`/api/agent-builder/sessions/${sessionId}/draft`, {",
+          "inventory": [
+            {
+              "id": "client:2160",
+              "method": "PUT",
+              "path_expression": "/api/agent-builder/sessions/${sessionId}/draft",
+              "route": {
+                "method": "PUT",
+                "path": "/api/agent-builder/sessions/{sessionId}/draft"
+              }
+            }
+          ],
+          "mapping_status": "exact request source-line match"
+        }
+      ],
+      "inventory": [
+        {
+          "id": "client:2160",
+          "method": "PUT",
+          "path_expression": "/api/agent-builder/sessions/${sessionId}/draft",
+          "route": {
+            "method": "PUT",
+            "path": "/api/agent-builder/sessions/{sessionId}/draft"
+          }
+        }
+      ],
+      "this_method_calls": [
+        "fetch"
+      ],
+      "capability_gates": [],
+      "parsing": [],
+      "query_builders": [],
+      "pagination": "Single request only; no automatic page iteration.",
+      "transport_errors": "No local catch; shared transport errors and subsequent decoding errors propagate.",
+      "cloud_source_only": false
+    },
+    {
+      "method": "switchAgentBuilderRuntime",
+      "lines": [
+        2173,
+        2187
+      ],
+      "declaration": "implementation",
+      "source": "  async switchAgentBuilderRuntime(\n    sessionId: string,\n    data: { runtime_id: string },\n  ): Promise<AgentBuilderRuntimeSwitch> {\n    const raw = await this.fetch<unknown>(\n      `/api/agent-builder/sessions/${sessionId}/runtime`,\n      { method: \"PATCH\", body: JSON.stringify(data) },\n    );\n    return parseWithFallback(\n      raw,\n      AgentBuilderRuntimeSwitchSchema,\n      agentBuilderRuntimeSwitchFallback(data.runtime_id),\n      { endpoint: \"PATCH /api/agent-builder/sessions/{id}/runtime\" },\n    );\n  }",
+      "requests": [
+        {
+          "line": 2177,
+          "source": "const raw = await this.fetch<unknown>(",
+          "inventory": [
+            {
+              "id": "client:2177",
+              "method": "PATCH",
+              "path_expression": "/api/agent-builder/sessions/${sessionId}/runtime",
+              "route": {
+                "method": "PATCH",
+                "path": "/api/agent-builder/sessions/{sessionId}/runtime"
+              }
+            }
+          ],
+          "mapping_status": "exact request source-line match"
+        }
+      ],
+      "inventory": [
+        {
+          "id": "client:2177",
+          "method": "PATCH",
+          "path_expression": "/api/agent-builder/sessions/${sessionId}/runtime",
+          "route": {
+            "method": "PATCH",
+            "path": "/api/agent-builder/sessions/{sessionId}/runtime"
+          }
+        }
+      ],
+      "this_method_calls": [
+        "fetch"
+      ],
+      "capability_gates": [],
+      "parsing": [
+        "return parseWithFallback(",
+        "AgentBuilderRuntimeSwitchSchema,",
+        "agentBuilderRuntimeSwitchFallback(data.runtime_id),"
+      ],
+      "query_builders": [],
+      "pagination": "Single request only; no automatic page iteration.",
+      "transport_errors": "No local catch; shared transport errors and subsequent decoding errors propagate.",
+      "cloud_source_only": false
+    },
+    {
+      "method": "updateAgent",
+      "lines": [
+        2189,
+        2195
+      ],
+      "declaration": "implementation",
+      "source": "  async updateAgent(id: string, data: UpdateAgentRequest): Promise<Agent> {\n    assertAgentConversationStartersWriteSupported(data);\n    return this.fetch(`/api/agents/${id}`, {\n      method: \"PUT\",\n      body: JSON.stringify(data),\n    });\n  }",
+      "requests": [
+        {
+          "line": 2191,
+          "source": "return this.fetch(`/api/agents/${id}`, {",
+          "inventory": [
+            {
+              "id": "client:2191",
+              "method": "PUT",
+              "path_expression": "/api/agents/${id}",
+              "route": {
+                "method": "PUT",
+                "path": "/api/agents/{id}"
+              }
+            }
+          ],
+          "mapping_status": "exact request source-line match"
+        }
+      ],
+      "inventory": [
+        {
+          "id": "client:2191",
+          "method": "PUT",
+          "path_expression": "/api/agents/${id}",
+          "route": {
+            "method": "PUT",
+            "path": "/api/agents/{id}"
+          }
+        }
+      ],
+      "this_method_calls": [
+        "fetch"
+      ],
+      "capability_gates": [
+        "assertAgentConversationStartersWriteSupported(data);"
+      ],
+      "parsing": [],
+      "query_builders": [],
+      "pagination": "Single request only; no automatic page iteration.",
+      "transport_errors": "No local catch; shared transport errors and subsequent decoding errors propagate.",
+      "cloud_source_only": false
+    },
+    {
+      "method": "archiveAgent",
+      "lines": [
+        2197,
+        2199
+      ],
+      "declaration": "implementation",
+      "source": "  async archiveAgent(id: string): Promise<Agent> {\n    return this.fetch(`/api/agents/${id}/archive`, { method: \"POST\" });\n  }",
+      "requests": [
+        {
+          "line": 2198,
+          "source": "return this.fetch(`/api/agents/${id}/archive`, { method: \"POST\" });",
+          "inventory": [
+            {
+              "id": "client:2198",
+              "method": "POST",
+              "path_expression": "/api/agents/${id}/archive",
+              "route": {
+                "method": "POST",
+                "path": "/api/agents/{id}/archive"
+              }
+            }
+          ],
+          "mapping_status": "exact request source-line match"
+        }
+      ],
+      "inventory": [
+        {
+          "id": "client:2198",
+          "method": "POST",
+          "path_expression": "/api/agents/${id}/archive",
+          "route": {
+            "method": "POST",
+            "path": "/api/agents/{id}/archive"
+          }
+        }
+      ],
+      "this_method_calls": [
+        "fetch"
+      ],
+      "capability_gates": [],
+      "parsing": [],
+      "query_builders": [],
+      "pagination": "Single request only; no automatic page iteration.",
+      "transport_errors": "No local catch; shared transport errors and subsequent decoding errors propagate.",
+      "cloud_source_only": false
+    },
+    {
+      "method": "getAgentEnv",
+      "lines": [
+        2207,
+        2209
+      ],
+      "declaration": "implementation",
+      "source": "  async getAgentEnv(id: string): Promise<AgentEnvResponse> {\n    return this.fetch(`/api/agents/${id}/env`);\n  }",
+      "requests": [
+        {
+          "line": 2208,
+          "source": "return this.fetch(`/api/agents/${id}/env`);",
+          "inventory": [
+            {
+              "id": "client:2208",
+              "method": "GET",
+              "path_expression": "/api/agents/${id}/env",
+              "route": {
+                "method": "GET",
+                "path": "/api/agents/{id}/env"
+              }
+            }
+          ],
+          "mapping_status": "exact request source-line match"
+        }
+      ],
+      "inventory": [
+        {
+          "id": "client:2208",
+          "method": "GET",
+          "path_expression": "/api/agents/${id}/env",
+          "route": {
+            "method": "GET",
+            "path": "/api/agents/{id}/env"
+          }
+        }
+      ],
+      "this_method_calls": [
+        "fetch"
+      ],
+      "capability_gates": [],
+      "parsing": [],
+      "query_builders": [],
+      "pagination": "Single request only; no automatic page iteration.",
+      "transport_errors": "No local catch; shared transport errors and subsequent decoding errors propagate.",
+      "cloud_source_only": false
+    },
+    {
+      "method": "updateAgentEnv",
+      "lines": [
+        2219,
+        2224
+      ],
+      "declaration": "implementation",
+      "source": "  async updateAgentEnv(id: string, data: UpdateAgentEnvRequest): Promise<AgentEnvResponse> {\n    return this.fetch(`/api/agents/${id}/env`, {\n      method: \"PUT\",\n      body: JSON.stringify(data),\n    });\n  }",
+      "requests": [
+        {
+          "line": 2220,
+          "source": "return this.fetch(`/api/agents/${id}/env`, {",
+          "inventory": [
+            {
+              "id": "client:2220",
+              "method": "PUT",
+              "path_expression": "/api/agents/${id}/env",
+              "route": {
+                "method": "PUT",
+                "path": "/api/agents/{id}/env"
+              }
+            }
+          ],
+          "mapping_status": "exact request source-line match"
+        }
+      ],
+      "inventory": [
+        {
+          "id": "client:2220",
+          "method": "PUT",
+          "path_expression": "/api/agents/${id}/env",
+          "route": {
+            "method": "PUT",
+            "path": "/api/agents/{id}/env"
+          }
+        }
+      ],
+      "this_method_calls": [
+        "fetch"
+      ],
+      "capability_gates": [],
+      "parsing": [],
+      "query_builders": [],
+      "pagination": "Single request only; no automatic page iteration.",
+      "transport_errors": "No local catch; shared transport errors and subsequent decoding errors propagate.",
+      "cloud_source_only": false
+    },
+    {
+      "method": "restoreAgent",
+      "lines": [
+        2226,
+        2228
+      ],
+      "declaration": "implementation",
+      "source": "  async restoreAgent(id: string): Promise<Agent> {\n    return this.fetch(`/api/agents/${id}/restore`, { method: \"POST\" });\n  }",
+      "requests": [
+        {
+          "line": 2227,
+          "source": "return this.fetch(`/api/agents/${id}/restore`, { method: \"POST\" });",
+          "inventory": [
+            {
+              "id": "client:2227",
+              "method": "POST",
+              "path_expression": "/api/agents/${id}/restore",
+              "route": {
+                "method": "POST",
+                "path": "/api/agents/{id}/restore"
+              }
+            }
+          ],
+          "mapping_status": "exact request source-line match"
+        }
+      ],
+      "inventory": [
+        {
+          "id": "client:2227",
+          "method": "POST",
+          "path_expression": "/api/agents/${id}/restore",
+          "route": {
+            "method": "POST",
+            "path": "/api/agents/{id}/restore"
+          }
+        }
+      ],
+      "this_method_calls": [
+        "fetch"
+      ],
+      "capability_gates": [],
+      "parsing": [],
+      "query_builders": [],
+      "pagination": "Single request only; no automatic page iteration.",
+      "transport_errors": "No local catch; shared transport errors and subsequent decoding errors propagate.",
+      "cloud_source_only": false
+    },
+    {
+      "method": "cancelAgentTasks",
+      "lines": [
+        2234,
+        2236
+      ],
+      "declaration": "implementation",
+      "source": "  async cancelAgentTasks(id: string): Promise<{ cancelled: number }> {\n    return this.fetch(`/api/agents/${id}/cancel-tasks`, { method: \"POST\" });\n  }",
+      "requests": [
+        {
+          "line": 2235,
+          "source": "return this.fetch(`/api/agents/${id}/cancel-tasks`, { method: \"POST\" });",
+          "inventory": [
+            {
+              "id": "client:2235",
+              "method": "POST",
+              "path_expression": "/api/agents/${id}/cancel-tasks",
+              "route": {
+                "method": "POST",
+                "path": "/api/agents/{id}/cancel-tasks"
+              }
+            }
+          ],
+          "mapping_status": "exact request source-line match"
+        }
+      ],
+      "inventory": [
+        {
+          "id": "client:2235",
+          "method": "POST",
+          "path_expression": "/api/agents/${id}/cancel-tasks",
+          "route": {
+            "method": "POST",
+            "path": "/api/agents/{id}/cancel-tasks"
+          }
+        }
+      ],
+      "this_method_calls": [
+        "fetch"
+      ],
+      "capability_gates": [],
+      "parsing": [],
+      "query_builders": [],
+      "pagination": "Single request only; no automatic page iteration.",
+      "transport_errors": "No local catch; shared transport errors and subsequent decoding errors propagate.",
+      "cloud_source_only": false
+    },
+    {
+      "method": "listQoderEnvironments",
+      "lines": [
+        2238,
+        2240
+      ],
+      "declaration": "implementation",
+      "source": "  async listQoderEnvironments(wsId: string, token: string, baseUrl: string, signal?: AbortSignal) {\n    return parseQoderCatalog(await this.fetch(`/api/workspaces/${wsId}/qoder/environments`, { method: \"POST\", readOnly: true, body: JSON.stringify({ qoder_token: token, base_url: baseUrl }), signal }));\n  }",
+      "requests": [
+        {
+          "line": 2239,
+          "source": "return parseQoderCatalog(await this.fetch(`/api/workspaces/${wsId}/qoder/environments`, { method: \"POST\", readOnly: true, body: JSON.stringify({ qoder_token: token, base_url: baseUrl }), signal }));",
+          "inventory": [
+            {
+              "id": "client:2239",
+              "method": "POST",
+              "path_expression": "/api/workspaces/${wsId}/qoder/environments",
+              "route": {
+                "method": "POST",
+                "path": "/api/workspaces/{id}/qoder/environments"
+              }
+            }
+          ],
+          "mapping_status": "exact request source-line match"
+        }
+      ],
+      "inventory": [
+        {
+          "id": "client:2239",
+          "method": "POST",
+          "path_expression": "/api/workspaces/${wsId}/qoder/environments",
+          "route": {
+            "method": "POST",
+            "path": "/api/workspaces/{id}/qoder/environments"
+          }
+        }
+      ],
+      "this_method_calls": [
+        "fetch"
+      ],
+      "capability_gates": [],
+      "parsing": [
+        "return parseQoderCatalog(await this.fetch(`/api/workspaces/${wsId}/qoder/environments`, { method: \"POST\", readOnly: true, body: JSON.stringify({ qoder_token: token, base_url: baseUrl }), signal }));"
+      ],
+      "query_builders": [],
+      "pagination": "Single request only; no automatic page iteration.",
+      "transport_errors": "No local catch; shared transport errors and subsequent decoding errors propagate.",
+      "cloud_source_only": false
+    },
+    {
+      "method": "listQoderAgents",
+      "lines": [
+        2241,
+        2243
+      ],
+      "declaration": "implementation",
+      "source": "  async listQoderAgents(wsId: string) {\n    return parseQoderCatalog(await this.fetch(`/api/workspaces/${wsId}/qoder/agents`));\n  }",
+      "requests": [
+        {
+          "line": 2242,
+          "source": "return parseQoderCatalog(await this.fetch(`/api/workspaces/${wsId}/qoder/agents`));",
+          "inventory": [
+            {
+              "id": "client:2242",
+              "method": "GET",
+              "path_expression": "/api/workspaces/${wsId}/qoder/agents",
+              "route": {
+                "method": "GET",
+                "path": "/api/workspaces/{id}/qoder/agents"
+              }
+            }
+          ],
+          "mapping_status": "exact request source-line match"
+        }
+      ],
+      "inventory": [
+        {
+          "id": "client:2242",
+          "method": "GET",
+          "path_expression": "/api/workspaces/${wsId}/qoder/agents",
+          "route": {
+            "method": "GET",
+            "path": "/api/workspaces/{id}/qoder/agents"
+          }
+        }
+      ],
+      "this_method_calls": [
+        "fetch"
+      ],
+      "capability_gates": [],
+      "parsing": [
+        "return parseQoderCatalog(await this.fetch(`/api/workspaces/${wsId}/qoder/agents`));"
+      ],
+      "query_builders": [],
+      "pagination": "Single request only; no automatic page iteration.",
+      "transport_errors": "No local catch; shared transport errors and subsequent decoding errors propagate.",
+      "cloud_source_only": false
+    },
+    {
+      "method": "stopQoderConnection",
+      "lines": [
+        2244,
+        2246
+      ],
+      "declaration": "implementation",
+      "source": "  async stopQoderConnection(wsId: string) {\n    return parseQoderConnection(await this.fetch(`/api/workspaces/${wsId}/qoder/stop`, { method: \"POST\" }));\n  }",
+      "requests": [
+        {
+          "line": 2245,
+          "source": "return parseQoderConnection(await this.fetch(`/api/workspaces/${wsId}/qoder/stop`, { method: \"POST\" }));",
+          "inventory": [
+            {
+              "id": "client:2245",
+              "method": "POST",
+              "path_expression": "/api/workspaces/${wsId}/qoder/stop",
+              "route": {
+                "method": "POST",
+                "path": "/api/workspaces/{id}/qoder/stop"
+              }
+            }
+          ],
+          "mapping_status": "exact request source-line match"
+        }
+      ],
+      "inventory": [
+        {
+          "id": "client:2245",
+          "method": "POST",
+          "path_expression": "/api/workspaces/${wsId}/qoder/stop",
+          "route": {
+            "method": "POST",
+            "path": "/api/workspaces/{id}/qoder/stop"
+          }
+        }
+      ],
+      "this_method_calls": [
+        "fetch"
+      ],
+      "capability_gates": [],
+      "parsing": [
+        "return parseQoderConnection(await this.fetch(`/api/workspaces/${wsId}/qoder/stop`, { method: \"POST\" }));"
+      ],
+      "query_builders": [],
+      "pagination": "Single request only; no automatic page iteration.",
+      "transport_errors": "No local catch; shared transport errors and subsequent decoding errors propagate.",
+      "cloud_source_only": false
+    },
+    {
+      "method": "disconnectQoderConnection",
+      "lines": [
+        2249,
+        2251
+      ],
+      "declaration": "implementation",
+      "source": "  async disconnectQoderConnection(wsId: string, expectedActiveAgentIds: string[]) {\n    return parseQoderConnection(await this.fetch(`/api/workspaces/${wsId}/qoder`, { method: \"DELETE\", body: JSON.stringify({ expected_active_agent_ids: expectedActiveAgentIds }) }));\n  }",
+      "requests": [
+        {
+          "line": 2250,
+          "source": "return parseQoderConnection(await this.fetch(`/api/workspaces/${wsId}/qoder`, { method: \"DELETE\", body: JSON.stringify({ expected_active_agent_ids: expectedActiveAgentIds }) }));",
+          "inventory": [
+            {
+              "id": "client:2250",
+              "method": "DELETE",
+              "path_expression": "/api/workspaces/${wsId}/qoder",
+              "route": {
+                "method": "DELETE",
+                "path": "/api/workspaces/{id}/qoder"
+              }
+            }
+          ],
+          "mapping_status": "exact request source-line match"
+        }
+      ],
+      "inventory": [
+        {
+          "id": "client:2250",
+          "method": "DELETE",
+          "path_expression": "/api/workspaces/${wsId}/qoder",
+          "route": {
+            "method": "DELETE",
+            "path": "/api/workspaces/{id}/qoder"
+          }
+        }
+      ],
+      "this_method_calls": [
+        "fetch"
+      ],
+      "capability_gates": [],
+      "parsing": [
+        "return parseQoderConnection(await this.fetch(`/api/workspaces/${wsId}/qoder`, { method: \"DELETE\", body: JSON.stringify({ expected_active_agent_ids: expectedActiveAgentIds }) }));"
+      ],
+      "query_builders": [],
+      "pagination": "Single request only; no automatic page iteration.",
+      "transport_errors": "No local catch; shared transport errors and subsequent decoding errors propagate.",
+      "cloud_source_only": false
+    },
+    {
+      "method": "getQoderConnection",
+      "lines": [
+        2252,
+        2254
+      ],
+      "declaration": "implementation",
+      "source": "  async getQoderConnection(wsId: string) {\n    return parseQoderConnection(await this.fetch(`/api/workspaces/${wsId}/qoder`));\n  }",
+      "requests": [
+        {
+          "line": 2253,
+          "source": "return parseQoderConnection(await this.fetch(`/api/workspaces/${wsId}/qoder`));",
+          "inventory": [
+            {
+              "id": "client:2253",
+              "method": "GET",
+              "path_expression": "/api/workspaces/${wsId}/qoder",
+              "route": {
+                "method": "GET",
+                "path": "/api/workspaces/{id}/qoder"
+              }
+            }
+          ],
+          "mapping_status": "exact request source-line match"
+        }
+      ],
+      "inventory": [
+        {
+          "id": "client:2253",
+          "method": "GET",
+          "path_expression": "/api/workspaces/${wsId}/qoder",
+          "route": {
+            "method": "GET",
+            "path": "/api/workspaces/{id}/qoder"
+          }
+        }
+      ],
+      "this_method_calls": [
+        "fetch"
+      ],
+      "capability_gates": [],
+      "parsing": [
+        "return parseQoderConnection(await this.fetch(`/api/workspaces/${wsId}/qoder`));"
+      ],
+      "query_builders": [],
+      "pagination": "Single request only; no automatic page iteration.",
+      "transport_errors": "No local catch; shared transport errors and subsequent decoding errors propagate.",
+      "cloud_source_only": false
+    },
+    {
+      "method": "saveQoderConnection",
+      "lines": [
+        2256,
+        2258
+      ],
+      "declaration": "implementation",
+      "source": "  async saveQoderConnection(wsId: string, input: QoderInput) {\n    return parseQoderConnection(await this.fetch(`/api/workspaces/${wsId}/qoder`, { method: \"PUT\", body: JSON.stringify({ name: input.name, base_url: input.baseUrl, environment_id: input.environmentId, qoder_token: input.qoderToken, github_tokens: input.githubTokens, max_concurrency: input.maxConcurrency, run_timeout_minutes: input.runTimeoutMinutes }) }));\n  }",
+      "requests": [
+        {
+          "line": 2257,
+          "source": "return parseQoderConnection(await this.fetch(`/api/workspaces/${wsId}/qoder`, { method: \"PUT\", body: JSON.stringify({ name: input.name, base_url: input.baseUrl, environment_id: input.environmentId, qoder_token: input.qoderToken, github_tokens: input.githubTokens, max_concurrency: input.maxConcurrency, run_timeout_minutes: input.runTimeoutMinutes }) }));",
+          "inventory": [
+            {
+              "id": "client:2257",
+              "method": "PUT",
+              "path_expression": "/api/workspaces/${wsId}/qoder",
+              "route": {
+                "method": "PUT",
+                "path": "/api/workspaces/{id}/qoder"
+              }
+            }
+          ],
+          "mapping_status": "exact request source-line match"
+        }
+      ],
+      "inventory": [
+        {
+          "id": "client:2257",
+          "method": "PUT",
+          "path_expression": "/api/workspaces/${wsId}/qoder",
+          "route": {
+            "method": "PUT",
+            "path": "/api/workspaces/{id}/qoder"
+          }
+        }
+      ],
+      "this_method_calls": [
+        "fetch"
+      ],
+      "capability_gates": [],
+      "parsing": [
+        "return parseQoderConnection(await this.fetch(`/api/workspaces/${wsId}/qoder`, { method: \"PUT\", body: JSON.stringify({ name: input.name, base_url: input.baseUrl, environment_id: input.environmentId, qoder_token: input.qoderToken, github_tokens: input.githubTokens, max_concurrency: input.maxConcurrency, run_timeout_minutes: input.runTimeoutMinutes }) }));"
+      ],
+      "query_builders": [],
+      "pagination": "Single request only; no automatic page iteration.",
+      "transport_errors": "No local catch; shared transport errors and subsequent decoding errors propagate.",
+      "cloud_source_only": false
+    },
+    {
+      "method": "resumeQoderConnection",
+      "lines": [
+        2259,
+        2261
+      ],
+      "declaration": "implementation",
+      "source": "  async resumeQoderConnection(wsId: string, input: QoderInput) {\n    return parseQoderConnection(await this.fetch(`/api/workspaces/${wsId}/qoder/resume`, { method: \"POST\", body: JSON.stringify({ name: input.name, base_url: input.baseUrl, environment_id: input.environmentId, qoder_token: input.qoderToken, github_tokens: input.githubTokens, max_concurrency: input.maxConcurrency, run_timeout_minutes: input.runTimeoutMinutes }) }));\n  }",
+      "requests": [
+        {
+          "line": 2260,
+          "source": "return parseQoderConnection(await this.fetch(`/api/workspaces/${wsId}/qoder/resume`, { method: \"POST\", body: JSON.stringify({ name: input.name, base_url: input.baseUrl, environment_id: input.environmentId, qoder_token: input.qoderToken, github_tokens: input.githubTokens, max_concurrency: input.maxConcurrency, run_timeout_minutes: input.runTimeoutMinutes }) }));",
+          "inventory": [
+            {
+              "id": "client:2260",
+              "method": "POST",
+              "path_expression": "/api/workspaces/${wsId}/qoder/resume",
+              "route": {
+                "method": "POST",
+                "path": "/api/workspaces/{id}/qoder/resume"
+              }
+            }
+          ],
+          "mapping_status": "exact request source-line match"
+        }
+      ],
+      "inventory": [
+        {
+          "id": "client:2260",
+          "method": "POST",
+          "path_expression": "/api/workspaces/${wsId}/qoder/resume",
+          "route": {
+            "method": "POST",
+            "path": "/api/workspaces/{id}/qoder/resume"
+          }
+        }
+      ],
+      "this_method_calls": [
+        "fetch"
+      ],
+      "capability_gates": [],
+      "parsing": [
+        "return parseQoderConnection(await this.fetch(`/api/workspaces/${wsId}/qoder/resume`, { method: \"POST\", body: JSON.stringify({ name: input.name, base_url: input.baseUrl, environment_id: input.environmentId, qoder_token: input.qoderToken, github_tokens: input.githubTokens, max_concurrency: input.maxConcurrency, run_timeout_minutes: input.runTimeoutMinutes }) }));"
+      ],
+      "query_builders": [],
+      "pagination": "Single request only; no automatic page iteration.",
+      "transport_errors": "No local catch; shared transport errors and subsequent decoding errors propagate.",
+      "cloud_source_only": false
+    },
+    {
+      "method": "checkQoderConnection",
+      "lines": [
+        2262,
+        2264
+      ],
+      "declaration": "implementation",
+      "source": "  async checkQoderConnection(wsId: string, input: QoderInput): Promise<void> {\n    await this.fetch(`/api/workspaces/${wsId}/qoder/check`, { method: \"POST\", body: JSON.stringify({ name: input.name, base_url: input.baseUrl, environment_id: input.environmentId, qoder_token: input.qoderToken, github_tokens: input.githubTokens, max_concurrency: input.maxConcurrency, run_timeout_minutes: input.runTimeoutMinutes }) });\n  }",
+      "requests": [
+        {
+          "line": 2263,
+          "source": "await this.fetch(`/api/workspaces/${wsId}/qoder/check`, { method: \"POST\", body: JSON.stringify({ name: input.name, base_url: input.baseUrl, environment_id: input.environmentId, qoder_token: input.qoderToken, github_tokens: input.githubTokens, max_concurrency: input.maxConcurrency, run_timeout_minutes: input.runTimeoutMinutes }) });",
+          "inventory": [
+            {
+              "id": "client:2263",
+              "method": "POST",
+              "path_expression": "/api/workspaces/${wsId}/qoder/check",
+              "route": {
+                "method": "POST",
+                "path": "/api/workspaces/{id}/qoder/check"
+              }
+            }
+          ],
+          "mapping_status": "exact request source-line match"
+        }
+      ],
+      "inventory": [
+        {
+          "id": "client:2263",
+          "method": "POST",
+          "path_expression": "/api/workspaces/${wsId}/qoder/check",
+          "route": {
+            "method": "POST",
+            "path": "/api/workspaces/{id}/qoder/check"
+          }
+        }
+      ],
+      "this_method_calls": [
+        "fetch"
+      ],
+      "capability_gates": [],
+      "parsing": [],
+      "query_builders": [],
+      "pagination": "Single request only; no automatic page iteration.",
+      "transport_errors": "No local catch; shared transport errors and subsequent decoding errors propagate.",
+      "cloud_source_only": false
+    },
+    {
+      "method": "listRuntimes",
+      "lines": [
+        2266,
+        2280
+      ],
+      "declaration": "implementation",
+      "source": "  async listRuntimes(\n    params?: { workspace_id?: string; owner?: \"me\" },\n    workspaceSlug?: string,\n  ): Promise<AgentRuntime[]> {\n    const search = new URLSearchParams();\n    if (params?.workspace_id) search.set(\"workspace_id\", params.workspace_id);\n    if (params?.owner) search.set(\"owner\", params.owner);\n    // workspace_id alone is not enough: the server resolves the workspace from\n    // the slug header first, so a caller listing another workspace's runtimes\n    // must override the header too.\n    const raw = await this.fetch<unknown>(`/api/runtimes?${search}`, {\n      headers: workspaceHeader(workspaceSlug),\n    });\n    return parseWithFallback(raw, AgentRuntimeSchema.array(), [], { endpoint: \"listRuntimes\" });\n  }",
+      "requests": [
+        {
+          "line": 2276,
+          "source": "const raw = await this.fetch<unknown>(`/api/runtimes?${search}`, {",
+          "inventory": [
+            {
+              "id": "client:2276",
+              "method": "GET",
+              "path_expression": "/api/runtimes?${search}",
+              "route": {
+                "method": "GET",
+                "path": "/api/runtimes"
+              }
+            }
+          ],
+          "mapping_status": "exact request source-line match"
+        }
+      ],
+      "inventory": [
+        {
+          "id": "client:2276",
+          "method": "GET",
+          "path_expression": "/api/runtimes?${search}",
+          "route": {
+            "method": "GET",
+            "path": "/api/runtimes"
+          }
+        }
+      ],
+      "this_method_calls": [
+        "fetch"
+      ],
+      "capability_gates": [],
+      "parsing": [
+        "return parseWithFallback(raw, AgentRuntimeSchema.array(), [], { endpoint: \"listRuntimes\" });"
+      ],
+      "query_builders": [
+        "const search = new URLSearchParams();",
+        "if (params?.workspace_id) search.set(\"workspace_id\", params.workspace_id);",
+        "if (params?.owner) search.set(\"owner\", params.owner);",
+        "const raw = await this.fetch<unknown>(`/api/runtimes?${search}`, {"
+      ],
+      "pagination": "Single request only; no automatic page iteration.",
+      "transport_errors": "No local catch; shared transport errors and subsequent decoding errors propagate.",
+      "cloud_source_only": false
+    },
+    {
+      "method": "listCloudRuntimeNodes",
+      "lines": [
+        2282,
+        2298
+      ],
+      "declaration": "implementation",
+      "source": "  async listCloudRuntimeNodes(\n    params?: ListCloudRuntimeNodesParams,\n  ): Promise<CloudRuntimeNode[]> {\n    const search = new URLSearchParams();\n    if (params?.limit !== undefined) search.set(\"limit\", String(params.limit));\n    if (params?.offset !== undefined) search.set(\"offset\", String(params.offset));\n    const query = search.toString();\n    const raw = await this.fetch<unknown>(\n      `/api/cloud-runtime/nodes${query ? `?${query}` : \"\"}`,\n    );\n    return parseWithFallback(\n      raw,\n      CloudRuntimeNodeListSchema,\n      EMPTY_CLOUD_RUNTIME_NODE_LIST,\n      { endpoint: \"GET /api/cloud-runtime/nodes\" },\n    );\n  }",
+      "requests": [
+        {
+          "line": 2289,
+          "source": "const raw = await this.fetch<unknown>(",
+          "inventory": [
+            {
+              "id": "client:2289",
+              "method": "GET",
+              "path_expression": "/api/cloud-runtime/nodes${query ? `?${query}` : \"\"}",
+              "route": {
+                "method": "GET",
+                "path": "/api/cloud-runtime/nodes"
+              }
+            }
+          ],
+          "mapping_status": "exact request source-line match"
+        }
+      ],
+      "inventory": [
+        {
+          "id": "client:2289",
+          "method": "GET",
+          "path_expression": "/api/cloud-runtime/nodes${query ? `?${query}` : \"\"}",
+          "route": {
+            "method": "GET",
+            "path": "/api/cloud-runtime/nodes"
+          }
+        }
+      ],
+      "this_method_calls": [
+        "fetch"
+      ],
+      "capability_gates": [],
+      "parsing": [
+        "return parseWithFallback(",
+        "CloudRuntimeNodeListSchema,",
+        "EMPTY_CLOUD_RUNTIME_NODE_LIST,"
+      ],
+      "query_builders": [
+        "const search = new URLSearchParams();",
+        "if (params?.limit !== undefined) search.set(\"limit\", String(params.limit));",
+        "if (params?.offset !== undefined) search.set(\"offset\", String(params.offset));",
+        "const query = search.toString();"
+      ],
+      "pagination": "Single request only; no automatic page iteration.",
+      "transport_errors": "No local catch; shared transport errors and subsequent decoding errors propagate.",
+      "cloud_source_only": true
+    },
+    {
+      "method": "createCloudRuntimeNode",
+      "lines": [
+        2300,
+        2315
+      ],
+      "declaration": "implementation",
+      "source": "  async createCloudRuntimeNode(\n    data: CreateCloudRuntimeNodeRequest,\n  ): Promise<CloudRuntimeNode> {\n    const res = await this.fetchRaw(\"/api/cloud-runtime/nodes\", {\n      method: \"POST\",\n      body: JSON.stringify(data),\n      extraHeaders: { \"Content-Type\": \"application/json\" },\n    });\n    const raw = await res.json() as unknown;\n    return parseWithFallback(\n      raw,\n      CloudRuntimeNodeSchema,\n      EMPTY_CLOUD_RUNTIME_NODE,\n      { endpoint: \"POST /api/cloud-runtime/nodes\" },\n    );\n  }",
+      "requests": [
+        {
+          "line": 2303,
+          "source": "const res = await this.fetchRaw(\"/api/cloud-runtime/nodes\", {",
+          "inventory": [
+            {
+              "id": "client:2303",
+              "method": "POST",
+              "path_expression": "/api/cloud-runtime/nodes",
+              "route": {
+                "method": "POST",
+                "path": "/api/cloud-runtime/nodes"
+              }
+            }
+          ],
+          "mapping_status": "exact request source-line match"
+        }
+      ],
+      "inventory": [
+        {
+          "id": "client:2303",
+          "method": "POST",
+          "path_expression": "/api/cloud-runtime/nodes",
+          "route": {
+            "method": "POST",
+            "path": "/api/cloud-runtime/nodes"
+          }
+        }
+      ],
+      "this_method_calls": [
+        "fetchRaw"
+      ],
+      "capability_gates": [],
+      "parsing": [
+        "const raw = await res.json() as unknown;",
+        "return parseWithFallback(",
+        "CloudRuntimeNodeSchema,",
+        "EMPTY_CLOUD_RUNTIME_NODE,"
+      ],
+      "query_builders": [],
+      "pagination": "Single request only; no automatic page iteration.",
+      "transport_errors": "No local catch; shared transport errors and subsequent decoding errors propagate.",
+      "cloud_source_only": true
+    },
+    {
+      "method": "deleteCloudRuntimeNode",
+      "lines": [
+        2317,
+        2323
+      ],
+      "declaration": "implementation",
+      "source": "  async deleteCloudRuntimeNode(instanceId: string): Promise<void> {\n    await this.fetchRaw(\"/api/cloud-runtime/nodes\", {\n      method: \"DELETE\",\n      body: JSON.stringify({ instance_id: instanceId }),\n      extraHeaders: { \"Content-Type\": \"application/json\" },\n    });\n  }",
+      "requests": [
+        {
+          "line": 2318,
+          "source": "await this.fetchRaw(\"/api/cloud-runtime/nodes\", {",
+          "inventory": [
+            {
+              "id": "client:2318",
+              "method": "DELETE",
+              "path_expression": "/api/cloud-runtime/nodes",
+              "route": {
+                "method": "DELETE",
+                "path": "/api/cloud-runtime/nodes"
+              }
+            }
+          ],
+          "mapping_status": "exact request source-line match"
+        }
+      ],
+      "inventory": [
+        {
+          "id": "client:2318",
+          "method": "DELETE",
+          "path_expression": "/api/cloud-runtime/nodes",
+          "route": {
+            "method": "DELETE",
+            "path": "/api/cloud-runtime/nodes"
+          }
+        }
+      ],
+      "this_method_calls": [
+        "fetchRaw"
+      ],
+      "capability_gates": [],
+      "parsing": [],
+      "query_builders": [],
+      "pagination": "Single request only; no automatic page iteration.",
+      "transport_errors": "No local catch; shared transport errors and subsequent decoding errors propagate.",
+      "cloud_source_only": true
+    },
+    {
+      "method": "getCloudBillingBalance",
+      "lines": [
+        2330,
+        2335
+      ],
+      "declaration": "implementation",
+      "source": "  async getCloudBillingBalance(): Promise<BillingBalance> {\n    const raw = await this.fetch<unknown>(\"/api/cloud-billing/balance\");\n    return parseWithFallback(raw, BillingBalanceSchema, EMPTY_BILLING_BALANCE, {\n      endpoint: \"GET /api/cloud-billing/balance\",\n    });\n  }",
+      "requests": [
+        {
+          "line": 2331,
+          "source": "const raw = await this.fetch<unknown>(\"/api/cloud-billing/balance\");",
+          "inventory": [
+            {
+              "id": "client:2331",
+              "method": "GET",
+              "path_expression": "/api/cloud-billing/balance",
+              "route": {
+                "method": "GET",
+                "path": "/api/cloud-billing/balance"
+              }
+            }
+          ],
+          "mapping_status": "exact request source-line match"
+        }
+      ],
+      "inventory": [
+        {
+          "id": "client:2331",
+          "method": "GET",
+          "path_expression": "/api/cloud-billing/balance",
+          "route": {
+            "method": "GET",
+            "path": "/api/cloud-billing/balance"
+          }
+        }
+      ],
+      "this_method_calls": [
+        "fetch"
+      ],
+      "capability_gates": [],
+      "parsing": [
+        "return parseWithFallback(raw, BillingBalanceSchema, EMPTY_BILLING_BALANCE, {"
+      ],
+      "query_builders": [],
+      "pagination": "Single request only; no automatic page iteration.",
+      "transport_errors": "No local catch; shared transport errors and subsequent decoding errors propagate.",
+      "cloud_source_only": true
+    },
+    {
+      "method": "listCloudBillingTransactions",
+      "lines": [
+        2337,
+        2353
+      ],
+      "declaration": "implementation",
+      "source": "  async listCloudBillingTransactions(\n    params?: { page?: number; page_size?: number },\n  ): Promise<BillingTransactionsPage> {\n    const search = new URLSearchParams();\n    if (params?.page !== undefined) search.set(\"page\", String(params.page));\n    if (params?.page_size !== undefined) search.set(\"page_size\", String(params.page_size));\n    const query = search.toString();\n    const raw = await this.fetch<unknown>(\n      `/api/cloud-billing/transactions${query ? `?${query}` : \"\"}`,\n    );\n    return parseWithFallback(\n      raw,\n      BillingTransactionsPageSchema,\n      EMPTY_BILLING_TRANSACTIONS_PAGE,\n      { endpoint: \"GET /api/cloud-billing/transactions\" },\n    );\n  }",
+      "requests": [
+        {
+          "line": 2344,
+          "source": "const raw = await this.fetch<unknown>(",
+          "inventory": [
+            {
+              "id": "client:2344",
+              "method": "GET",
+              "path_expression": "/api/cloud-billing/transactions${query ? `?${query}` : \"\"}",
+              "route": {
+                "method": "GET",
+                "path": "/api/cloud-billing/transactions"
+              }
+            }
+          ],
+          "mapping_status": "exact request source-line match"
+        }
+      ],
+      "inventory": [
+        {
+          "id": "client:2344",
+          "method": "GET",
+          "path_expression": "/api/cloud-billing/transactions${query ? `?${query}` : \"\"}",
+          "route": {
+            "method": "GET",
+            "path": "/api/cloud-billing/transactions"
+          }
+        }
+      ],
+      "this_method_calls": [
+        "fetch"
+      ],
+      "capability_gates": [],
+      "parsing": [
+        "return parseWithFallback(",
+        "BillingTransactionsPageSchema,",
+        "EMPTY_BILLING_TRANSACTIONS_PAGE,"
+      ],
+      "query_builders": [
+        "const search = new URLSearchParams();",
+        "if (params?.page !== undefined) search.set(\"page\", String(params.page));",
+        "if (params?.page_size !== undefined) search.set(\"page_size\", String(params.page_size));",
+        "const query = search.toString();"
+      ],
+      "pagination": "Single request only; no automatic page iteration.",
+      "transport_errors": "No local catch; shared transport errors and subsequent decoding errors propagate.",
+      "cloud_source_only": true
+    },
+    {
+      "method": "listCloudBillingBatches",
+      "lines": [
+        2355,
+        2371
+      ],
+      "declaration": "implementation",
+      "source": "  async listCloudBillingBatches(\n    params?: { page?: number; page_size?: number },\n  ): Promise<BillingBatchesPage> {\n    const search = new URLSearchParams();\n    if (params?.page !== undefined) search.set(\"page\", String(params.page));\n    if (params?.page_size !== undefined) search.set(\"page_size\", String(params.page_size));\n    const query = search.toString();\n    const raw = await this.fetch<unknown>(\n      `/api/cloud-billing/batches${query ? `?${query}` : \"\"}`,\n    );\n    return parseWithFallback(\n      raw,\n      BillingBatchesPageSchema,\n      EMPTY_BILLING_BATCHES_PAGE,\n      { endpoint: \"GET /api/cloud-billing/batches\" },\n    );\n  }",
+      "requests": [
+        {
+          "line": 2362,
+          "source": "const raw = await this.fetch<unknown>(",
+          "inventory": [
+            {
+              "id": "client:2362",
+              "method": "GET",
+              "path_expression": "/api/cloud-billing/batches${query ? `?${query}` : \"\"}",
+              "route": {
+                "method": "GET",
+                "path": "/api/cloud-billing/batches"
+              }
+            }
+          ],
+          "mapping_status": "exact request source-line match"
+        }
+      ],
+      "inventory": [
+        {
+          "id": "client:2362",
+          "method": "GET",
+          "path_expression": "/api/cloud-billing/batches${query ? `?${query}` : \"\"}",
+          "route": {
+            "method": "GET",
+            "path": "/api/cloud-billing/batches"
+          }
+        }
+      ],
+      "this_method_calls": [
+        "fetch"
+      ],
+      "capability_gates": [],
+      "parsing": [
+        "return parseWithFallback(",
+        "BillingBatchesPageSchema,",
+        "EMPTY_BILLING_BATCHES_PAGE,"
+      ],
+      "query_builders": [
+        "const search = new URLSearchParams();",
+        "if (params?.page !== undefined) search.set(\"page\", String(params.page));",
+        "if (params?.page_size !== undefined) search.set(\"page_size\", String(params.page_size));",
+        "const query = search.toString();"
+      ],
+      "pagination": "Single request only; no automatic page iteration.",
+      "transport_errors": "No local catch; shared transport errors and subsequent decoding errors propagate.",
+      "cloud_source_only": true
+    },
+    {
+      "method": "listCloudBillingTopups",
+      "lines": [
+        2373,
+        2389
+      ],
+      "declaration": "implementation",
+      "source": "  async listCloudBillingTopups(\n    params?: { page?: number; page_size?: number },\n  ): Promise<BillingTopupsPage> {\n    const search = new URLSearchParams();\n    if (params?.page !== undefined) search.set(\"page\", String(params.page));\n    if (params?.page_size !== undefined) search.set(\"page_size\", String(params.page_size));\n    const query = search.toString();\n    const raw = await this.fetch<unknown>(\n      `/api/cloud-billing/topups${query ? `?${query}` : \"\"}`,\n    );\n    return parseWithFallback(\n      raw,\n      BillingTopupsPageSchema,\n      EMPTY_BILLING_TOPUPS_PAGE,\n      { endpoint: \"GET /api/cloud-billing/topups\" },\n    );\n  }",
+      "requests": [
+        {
+          "line": 2380,
+          "source": "const raw = await this.fetch<unknown>(",
+          "inventory": [
+            {
+              "id": "client:2380",
+              "method": "GET",
+              "path_expression": "/api/cloud-billing/topups${query ? `?${query}` : \"\"}",
+              "route": {
+                "method": "GET",
+                "path": "/api/cloud-billing/topups"
+              }
+            }
+          ],
+          "mapping_status": "exact request source-line match"
+        }
+      ],
+      "inventory": [
+        {
+          "id": "client:2380",
+          "method": "GET",
+          "path_expression": "/api/cloud-billing/topups${query ? `?${query}` : \"\"}",
+          "route": {
+            "method": "GET",
+            "path": "/api/cloud-billing/topups"
+          }
+        }
+      ],
+      "this_method_calls": [
+        "fetch"
+      ],
+      "capability_gates": [],
+      "parsing": [
+        "return parseWithFallback(",
+        "BillingTopupsPageSchema,",
+        "EMPTY_BILLING_TOPUPS_PAGE,"
+      ],
+      "query_builders": [
+        "const search = new URLSearchParams();",
+        "if (params?.page !== undefined) search.set(\"page\", String(params.page));",
+        "if (params?.page_size !== undefined) search.set(\"page_size\", String(params.page_size));",
+        "const query = search.toString();"
+      ],
+      "pagination": "Single request only; no automatic page iteration.",
+      "transport_errors": "No local catch; shared transport errors and subsequent decoding errors propagate.",
+      "cloud_source_only": true
+    },
+    {
+      "method": "listCloudBillingPriceTiers",
+      "lines": [
+        2391,
+        2399
+      ],
+      "declaration": "implementation",
+      "source": "  async listCloudBillingPriceTiers(): Promise<BillingPriceTier[]> {\n    const raw = await this.fetch<unknown>(\"/api/cloud-billing/price-tiers\");\n    return parseWithFallback(\n      raw,\n      BillingPriceTierListSchema,\n      EMPTY_BILLING_PRICE_TIER_LIST,\n      { endpoint: \"GET /api/cloud-billing/price-tiers\" },\n    );\n  }",
+      "requests": [
+        {
+          "line": 2392,
+          "source": "const raw = await this.fetch<unknown>(\"/api/cloud-billing/price-tiers\");",
+          "inventory": [
+            {
+              "id": "client:2392",
+              "method": "GET",
+              "path_expression": "/api/cloud-billing/price-tiers",
+              "route": {
+                "method": "GET",
+                "path": "/api/cloud-billing/price-tiers"
+              }
+            }
+          ],
+          "mapping_status": "exact request source-line match"
+        }
+      ],
+      "inventory": [
+        {
+          "id": "client:2392",
+          "method": "GET",
+          "path_expression": "/api/cloud-billing/price-tiers",
+          "route": {
+            "method": "GET",
+            "path": "/api/cloud-billing/price-tiers"
+          }
+        }
+      ],
+      "this_method_calls": [
+        "fetch"
+      ],
+      "capability_gates": [],
+      "parsing": [
+        "return parseWithFallback(",
+        "BillingPriceTierListSchema,",
+        "EMPTY_BILLING_PRICE_TIER_LIST,"
+      ],
+      "query_builders": [],
+      "pagination": "Single request only; no automatic page iteration.",
+      "transport_errors": "No local catch; shared transport errors and subsequent decoding errors propagate.",
+      "cloud_source_only": true
+    },
+    {
+      "method": "createCloudBillingCheckoutSession",
+      "lines": [
+        2401,
+        2416
+      ],
+      "declaration": "implementation",
+      "source": "  async createCloudBillingCheckoutSession(\n    data: CreateBillingCheckoutSessionRequest,\n  ): Promise<CreateBillingCheckoutSessionResponse> {\n    const res = await this.fetchRaw(\"/api/cloud-billing/checkout-sessions\", {\n      method: \"POST\",\n      body: JSON.stringify(data),\n      extraHeaders: { \"Content-Type\": \"application/json\" },\n    });\n    const raw = (await res.json()) as unknown;\n    return parseWithFallback(\n      raw,\n      CreateBillingCheckoutSessionResponseSchema,\n      EMPTY_CREATE_BILLING_CHECKOUT_SESSION_RESPONSE,\n      { endpoint: \"POST /api/cloud-billing/checkout-sessions\" },\n    );\n  }",
+      "requests": [
+        {
+          "line": 2404,
+          "source": "const res = await this.fetchRaw(\"/api/cloud-billing/checkout-sessions\", {",
+          "inventory": [
+            {
+              "id": "client:2404",
+              "method": "POST",
+              "path_expression": "/api/cloud-billing/checkout-sessions",
+              "route": {
+                "method": "POST",
+                "path": "/api/cloud-billing/checkout-sessions"
+              }
+            }
+          ],
+          "mapping_status": "exact request source-line match"
+        }
+      ],
+      "inventory": [
+        {
+          "id": "client:2404",
+          "method": "POST",
+          "path_expression": "/api/cloud-billing/checkout-sessions",
+          "route": {
+            "method": "POST",
+            "path": "/api/cloud-billing/checkout-sessions"
+          }
+        }
+      ],
+      "this_method_calls": [
+        "fetchRaw"
+      ],
+      "capability_gates": [],
+      "parsing": [
+        "const raw = (await res.json()) as unknown;",
+        "return parseWithFallback(",
+        "CreateBillingCheckoutSessionResponseSchema,",
+        "EMPTY_CREATE_BILLING_CHECKOUT_SESSION_RESPONSE,"
+      ],
+      "query_builders": [],
+      "pagination": "Single request only; no automatic page iteration.",
+      "transport_errors": "No local catch; shared transport errors and subsequent decoding errors propagate.",
+      "cloud_source_only": true
+    },
+    {
+      "method": "getCloudBillingCheckoutSession",
+      "lines": [
+        2418,
+        2434
+      ],
+      "declaration": "implementation",
+      "source": "  async getCloudBillingCheckoutSession(\n    sessionId: string,\n  ): Promise<BillingCheckoutSessionStatus> {\n    // Stripe session ids are `cs_<base62>` so they're URL-safe by\n    // construction; encodeURIComponent is paranoia for the case where a\n    // future Stripe format change adds a non-alphanumeric character. The\n    // server has its own allow-list rejection for unsafe ids.\n    const raw = await this.fetch<unknown>(\n      `/api/cloud-billing/checkout-sessions/${encodeURIComponent(sessionId)}`,\n    );\n    return parseWithFallback(\n      raw,\n      BillingCheckoutSessionStatusSchema,\n      EMPTY_BILLING_CHECKOUT_SESSION_STATUS,\n      { endpoint: \"GET /api/cloud-billing/checkout-sessions/{sessionId}\" },\n    );\n  }",
+      "requests": [
+        {
+          "line": 2425,
+          "source": "const raw = await this.fetch<unknown>(",
+          "inventory": [
+            {
+              "id": "client:2425",
+              "method": "GET",
+              "path_expression": "/api/cloud-billing/checkout-sessions/${encodeURIComponent(sessionId)}",
+              "route": {
+                "method": "GET",
+                "path": "/api/cloud-billing/checkout-sessions/{sessionId}"
+              }
+            }
+          ],
+          "mapping_status": "exact request source-line match"
+        }
+      ],
+      "inventory": [
+        {
+          "id": "client:2425",
+          "method": "GET",
+          "path_expression": "/api/cloud-billing/checkout-sessions/${encodeURIComponent(sessionId)}",
+          "route": {
+            "method": "GET",
+            "path": "/api/cloud-billing/checkout-sessions/{sessionId}"
+          }
+        }
+      ],
+      "this_method_calls": [
+        "fetch"
+      ],
+      "capability_gates": [],
+      "parsing": [
+        "return parseWithFallback(",
+        "BillingCheckoutSessionStatusSchema,",
+        "EMPTY_BILLING_CHECKOUT_SESSION_STATUS,"
+      ],
+      "query_builders": [],
+      "pagination": "Single request only; no automatic page iteration.",
+      "transport_errors": "No local catch; shared transport errors and subsequent decoding errors propagate.",
+      "cloud_source_only": true
+    },
+    {
+      "method": "createCloudBillingPortalSession",
+      "lines": [
+        2436,
+        2450
+      ],
+      "declaration": "implementation",
+      "source": "  async createCloudBillingPortalSession(): Promise<CreateBillingPortalSessionResponse> {\n    const res = await this.fetchRaw(\"/api/cloud-billing/portal-sessions\", {\n      method: \"POST\",\n      // Body is intentionally absent — the upstream endpoint requires no\n      // payload today. fetchRaw with no body skips the Content-Type\n      // default; that's fine because there's nothing to declare.\n    });\n    const raw = (await res.json()) as unknown;\n    return parseWithFallback(\n      raw,\n      CreateBillingPortalSessionResponseSchema,\n      EMPTY_CREATE_BILLING_PORTAL_SESSION_RESPONSE,\n      { endpoint: \"POST /api/cloud-billing/portal-sessions\" },\n    );\n  }",
+      "requests": [
+        {
+          "line": 2437,
+          "source": "const res = await this.fetchRaw(\"/api/cloud-billing/portal-sessions\", {",
+          "inventory": [
+            {
+              "id": "client:2437",
+              "method": "POST",
+              "path_expression": "/api/cloud-billing/portal-sessions",
+              "route": {
+                "method": "POST",
+                "path": "/api/cloud-billing/portal-sessions"
+              }
+            }
+          ],
+          "mapping_status": "exact request source-line match"
+        }
+      ],
+      "inventory": [
+        {
+          "id": "client:2437",
+          "method": "POST",
+          "path_expression": "/api/cloud-billing/portal-sessions",
+          "route": {
+            "method": "POST",
+            "path": "/api/cloud-billing/portal-sessions"
+          }
+        }
+      ],
+      "this_method_calls": [
+        "fetchRaw"
+      ],
+      "capability_gates": [],
+      "parsing": [
+        "const raw = (await res.json()) as unknown;",
+        "return parseWithFallback(",
+        "CreateBillingPortalSessionResponseSchema,",
+        "EMPTY_CREATE_BILLING_PORTAL_SESSION_RESPONSE,"
+      ],
+      "query_builders": [],
+      "pagination": "Single request only; no automatic page iteration.",
+      "transport_errors": "No local catch; shared transport errors and subsequent decoding errors propagate.",
+      "cloud_source_only": true
+    },
+    {
+      "method": "getWorkspaceSubscriptionSummary",
+      "lines": [
+        2462,
+        2470
+      ],
+      "declaration": "implementation",
+      "source": "  async getWorkspaceSubscriptionSummary(): Promise<WorkspaceSubscriptionSummary | null> {\n    const raw = await this.fetch<unknown>(\"/api/cloud-subscriptions/summary\");\n    return parseWithFallback<WorkspaceSubscriptionSummary | null>(\n      raw,\n      WorkspaceSubscriptionSummarySchema,\n      null,\n      { endpoint: \"GET /api/cloud-subscriptions/summary\" },\n    );\n  }",
+      "requests": [
+        {
+          "line": 2463,
+          "source": "const raw = await this.fetch<unknown>(\"/api/cloud-subscriptions/summary\");",
+          "inventory": [
+            {
+              "id": "client:2463",
+              "method": "GET",
+              "path_expression": "/api/cloud-subscriptions/summary",
+              "route": {
+                "method": "GET",
+                "path": "/api/cloud-subscriptions/summary"
+              }
+            }
+          ],
+          "mapping_status": "exact request source-line match"
+        }
+      ],
+      "inventory": [
+        {
+          "id": "client:2463",
+          "method": "GET",
+          "path_expression": "/api/cloud-subscriptions/summary",
+          "route": {
+            "method": "GET",
+            "path": "/api/cloud-subscriptions/summary"
+          }
+        }
+      ],
+      "this_method_calls": [
+        "fetch"
+      ],
+      "capability_gates": [],
+      "parsing": [
+        "return parseWithFallback<WorkspaceSubscriptionSummary | null>(",
+        "WorkspaceSubscriptionSummarySchema,",
+        "null,"
+      ],
+      "query_builders": [],
+      "pagination": "Single request only; no automatic page iteration.",
+      "transport_errors": "No local catch; shared transport errors and subsequent decoding errors propagate.",
+      "cloud_source_only": true
+    },
+    {
+      "method": "getWorkspaceSubscriptionPrices",
+      "lines": [
+        2472,
+        2480
+      ],
+      "declaration": "implementation",
+      "source": "  async getWorkspaceSubscriptionPrices(): Promise<WorkspaceSubscriptionPrices | null> {\n    const raw = await this.fetch<unknown>(\"/api/cloud-subscriptions/prices\");\n    return parseWithFallback<WorkspaceSubscriptionPrices | null>(\n      raw,\n      WorkspaceSubscriptionPricesSchema,\n      null,\n      { endpoint: \"GET /api/cloud-subscriptions/prices\" },\n    );\n  }",
+      "requests": [
+        {
+          "line": 2473,
+          "source": "const raw = await this.fetch<unknown>(\"/api/cloud-subscriptions/prices\");",
+          "inventory": [
+            {
+              "id": "client:2473",
+              "method": "GET",
+              "path_expression": "/api/cloud-subscriptions/prices",
+              "route": {
+                "method": "GET",
+                "path": "/api/cloud-subscriptions/prices"
+              }
+            }
+          ],
+          "mapping_status": "exact request source-line match"
+        }
+      ],
+      "inventory": [
+        {
+          "id": "client:2473",
+          "method": "GET",
+          "path_expression": "/api/cloud-subscriptions/prices",
+          "route": {
+            "method": "GET",
+            "path": "/api/cloud-subscriptions/prices"
+          }
+        }
+      ],
+      "this_method_calls": [
+        "fetch"
+      ],
+      "capability_gates": [],
+      "parsing": [
+        "return parseWithFallback<WorkspaceSubscriptionPrices | null>(",
+        "WorkspaceSubscriptionPricesSchema,",
+        "null,"
+      ],
+      "query_builders": [],
+      "pagination": "Single request only; no automatic page iteration.",
+      "transport_errors": "No local catch; shared transport errors and subsequent decoding errors propagate.",
+      "cloud_source_only": true
+    },
+    {
+      "method": "createWorkspaceSubscriptionCheckout",
+      "lines": [
+        2482,
+        2506
+      ],
+      "declaration": "implementation",
+      "source": "  async createWorkspaceSubscriptionCheckout(\n    data: CreateWorkspaceSubscriptionCheckoutRequest,\n  ): Promise<CreateWorkspaceSubscriptionCheckoutResponse | null> {\n    const res = await this.fetchRaw(\n      \"/api/cloud-subscriptions/checkout-sessions\",\n      {\n        method: \"POST\",\n        body: JSON.stringify({\n          interval: data.interval,\n          idempotency_key: data.idempotencyKey,\n        }),\n        extraHeaders: {\n          \"Content-Type\": \"application/json\",\n          \"Idempotency-Key\": data.idempotencyKey,\n        },\n      },\n    );\n    const raw = (await res.json()) as unknown;\n    return parseWithFallback<CreateWorkspaceSubscriptionCheckoutResponse | null>(\n      raw,\n      CreateWorkspaceSubscriptionCheckoutResponseSchema,\n      null,\n      { endpoint: \"POST /api/cloud-subscriptions/checkout-sessions\" },\n    );\n  }",
+      "requests": [
+        {
+          "line": 2485,
+          "source": "const res = await this.fetchRaw(",
+          "inventory": [
+            {
+              "id": "client:2485",
+              "method": "POST",
+              "path_expression": "/api/cloud-subscriptions/checkout-sessions",
+              "route": {
+                "method": "POST",
+                "path": "/api/cloud-subscriptions/checkout-sessions"
+              }
+            }
+          ],
+          "mapping_status": "exact request source-line match"
+        }
+      ],
+      "inventory": [
+        {
+          "id": "client:2485",
+          "method": "POST",
+          "path_expression": "/api/cloud-subscriptions/checkout-sessions",
+          "route": {
+            "method": "POST",
+            "path": "/api/cloud-subscriptions/checkout-sessions"
+          }
+        }
+      ],
+      "this_method_calls": [
+        "fetchRaw"
+      ],
+      "capability_gates": [],
+      "parsing": [
+        "const raw = (await res.json()) as unknown;",
+        "return parseWithFallback<CreateWorkspaceSubscriptionCheckoutResponse | null>(",
+        "CreateWorkspaceSubscriptionCheckoutResponseSchema,",
+        "null,"
+      ],
+      "query_builders": [],
+      "pagination": "Single request only; no automatic page iteration.",
+      "transport_errors": "No local catch; shared transport errors and subsequent decoding errors propagate.",
+      "cloud_source_only": true
+    },
+    {
+      "method": "reconcileWorkspaceSubscriptionSeats",
+      "lines": [
+        2508,
+        2521
+      ],
+      "declaration": "implementation",
+      "source": "  async reconcileWorkspaceSubscriptionSeats(): Promise<\n    WorkspaceSubscriptionSeatReconcileResult | null\n  > {\n    const res = await this.fetchRaw(\"/api/cloud-subscriptions/seats/reconcile\", {\n      method: \"POST\",\n    });\n    const raw = (await res.json()) as unknown;\n    return parseWithFallback<WorkspaceSubscriptionSeatReconcileResult | null>(\n      raw,\n      WorkspaceSubscriptionSeatReconcileResultSchema,\n      null,\n      { endpoint: \"POST /api/cloud-subscriptions/seats/reconcile\" },\n    );\n  }",
+      "requests": [
+        {
+          "line": 2511,
+          "source": "const res = await this.fetchRaw(\"/api/cloud-subscriptions/seats/reconcile\", {",
+          "inventory": [
+            {
+              "id": "client:2511",
+              "method": "POST",
+              "path_expression": "/api/cloud-subscriptions/seats/reconcile",
+              "route": {
+                "method": "POST",
+                "path": "/api/cloud-subscriptions/seats/reconcile"
+              }
+            }
+          ],
+          "mapping_status": "exact request source-line match"
+        }
+      ],
+      "inventory": [
+        {
+          "id": "client:2511",
+          "method": "POST",
+          "path_expression": "/api/cloud-subscriptions/seats/reconcile",
+          "route": {
+            "method": "POST",
+            "path": "/api/cloud-subscriptions/seats/reconcile"
+          }
+        }
+      ],
+      "this_method_calls": [
+        "fetchRaw"
+      ],
+      "capability_gates": [],
+      "parsing": [
+        "const raw = (await res.json()) as unknown;",
+        "return parseWithFallback<WorkspaceSubscriptionSeatReconcileResult | null>(",
+        "WorkspaceSubscriptionSeatReconcileResultSchema,",
+        "null,"
+      ],
+      "query_builders": [],
+      "pagination": "Single request only; no automatic page iteration.",
+      "transport_errors": "No local catch; shared transport errors and subsequent decoding errors propagate.",
+      "cloud_source_only": true
+    },
+    {
+      "method": "previewWorkspaceSeatPurchase",
+      "lines": [
+        2523,
+        2541
+      ],
+      "declaration": "implementation",
+      "source": "  async previewWorkspaceSeatPurchase(\n    data: PreviewWorkspaceSeatPurchaseRequest,\n  ): Promise<WorkspaceSeatPurchasePreview | null> {\n    const res = await this.fetchRaw(\n      \"/api/cloud-subscriptions/seats/purchase-preview\",\n      {\n        method: \"POST\",\n        body: JSON.stringify({ additional_seats: data.additionalSeats }),\n        extraHeaders: { \"Content-Type\": \"application/json\" },\n      },\n    );\n    const raw = (await res.json()) as unknown;\n    return parseWithFallback<WorkspaceSeatPurchasePreview | null>(\n      raw,\n      WorkspaceSeatPurchasePreviewSchema,\n      null,\n      { endpoint: \"POST /api/cloud-subscriptions/seats/purchase-preview\" },\n    );\n  }",
+      "requests": [
+        {
+          "line": 2526,
+          "source": "const res = await this.fetchRaw(",
+          "inventory": [
+            {
+              "id": "client:2526",
+              "method": "POST",
+              "path_expression": "/api/cloud-subscriptions/seats/purchase-preview",
+              "route": {
+                "method": "POST",
+                "path": "/api/cloud-subscriptions/seats/purchase-preview"
+              }
+            }
+          ],
+          "mapping_status": "exact request source-line match"
+        }
+      ],
+      "inventory": [
+        {
+          "id": "client:2526",
+          "method": "POST",
+          "path_expression": "/api/cloud-subscriptions/seats/purchase-preview",
+          "route": {
+            "method": "POST",
+            "path": "/api/cloud-subscriptions/seats/purchase-preview"
+          }
+        }
+      ],
+      "this_method_calls": [
+        "fetchRaw"
+      ],
+      "capability_gates": [],
+      "parsing": [
+        "const raw = (await res.json()) as unknown;",
+        "return parseWithFallback<WorkspaceSeatPurchasePreview | null>(",
+        "WorkspaceSeatPurchasePreviewSchema,",
+        "null,"
+      ],
+      "query_builders": [],
+      "pagination": "Single request only; no automatic page iteration.",
+      "transport_errors": "No local catch; shared transport errors and subsequent decoding errors propagate.",
+      "cloud_source_only": true
+    },
+    {
+      "method": "purchaseWorkspaceSeats",
+      "lines": [
+        2543,
+        2571
+      ],
+      "declaration": "implementation",
+      "source": "  async purchaseWorkspaceSeats(\n    data: PurchaseWorkspaceSeatsRequest,\n  ): Promise<PurchaseWorkspaceSeatsResponse | null> {\n    const res = await this.fetchRaw(\n      \"/api/cloud-subscriptions/seats/purchases\",\n      {\n        method: \"POST\",\n        body: JSON.stringify({\n          additional_seats: data.additionalSeats,\n          expected_current_seats: data.expectedCurrentSeats,\n          expected_purchase_version: data.expectedPurchaseVersion,\n          accepted_proration_amount: data.acceptedProrationAmount,\n          currency: data.currency,\n          idempotency_key: data.idempotencyKey,\n        }),\n        extraHeaders: {\n          \"Content-Type\": \"application/json\",\n          \"Idempotency-Key\": data.idempotencyKey,\n        },\n      },\n    );\n    const raw = (await res.json()) as unknown;\n    return parseWithFallback<PurchaseWorkspaceSeatsResponse | null>(\n      raw,\n      PurchaseWorkspaceSeatsResponseSchema,\n      null,\n      { endpoint: \"POST /api/cloud-subscriptions/seats/purchases\" },\n    );\n  }",
+      "requests": [
+        {
+          "line": 2546,
+          "source": "const res = await this.fetchRaw(",
+          "inventory": [
+            {
+              "id": "client:2546",
+              "method": "POST",
+              "path_expression": "/api/cloud-subscriptions/seats/purchases",
+              "route": {
+                "method": "POST",
+                "path": "/api/cloud-subscriptions/seats/purchases"
+              }
+            }
+          ],
+          "mapping_status": "exact request source-line match"
+        }
+      ],
+      "inventory": [
+        {
+          "id": "client:2546",
+          "method": "POST",
+          "path_expression": "/api/cloud-subscriptions/seats/purchases",
+          "route": {
+            "method": "POST",
+            "path": "/api/cloud-subscriptions/seats/purchases"
+          }
+        }
+      ],
+      "this_method_calls": [
+        "fetchRaw"
+      ],
+      "capability_gates": [],
+      "parsing": [
+        "const raw = (await res.json()) as unknown;",
+        "return parseWithFallback<PurchaseWorkspaceSeatsResponse | null>(",
+        "PurchaseWorkspaceSeatsResponseSchema,",
+        "null,"
+      ],
+      "query_builders": [],
+      "pagination": "Single request only; no automatic page iteration.",
+      "transport_errors": "No local catch; shared transport errors and subsequent decoding errors propagate.",
+      "cloud_source_only": true
+    },
+    {
+      "method": "createWorkspaceSubscriptionPortal",
+      "lines": [
+        2573,
+        2587
+      ],
+      "declaration": "implementation",
+      "source": "  async createWorkspaceSubscriptionPortal(\n    idempotencyKey: string,\n  ): Promise<CreateWorkspaceSubscriptionPortalResponse | null> {\n    const res = await this.fetchRaw(\"/api/cloud-subscriptions/portal-sessions\", {\n      method: \"POST\",\n      extraHeaders: { \"Idempotency-Key\": idempotencyKey },\n    });\n    const raw = (await res.json()) as unknown;\n    return parseWithFallback<CreateWorkspaceSubscriptionPortalResponse | null>(\n      raw,\n      CreateWorkspaceSubscriptionPortalResponseSchema,\n      null,\n      { endpoint: \"POST /api/cloud-subscriptions/portal-sessions\" },\n    );\n  }",
+      "requests": [
+        {
+          "line": 2576,
+          "source": "const res = await this.fetchRaw(\"/api/cloud-subscriptions/portal-sessions\", {",
+          "inventory": [
+            {
+              "id": "client:2576",
+              "method": "POST",
+              "path_expression": "/api/cloud-subscriptions/portal-sessions",
+              "route": {
+                "method": "POST",
+                "path": "/api/cloud-subscriptions/portal-sessions"
+              }
+            }
+          ],
+          "mapping_status": "exact request source-line match"
+        }
+      ],
+      "inventory": [
+        {
+          "id": "client:2576",
+          "method": "POST",
+          "path_expression": "/api/cloud-subscriptions/portal-sessions",
+          "route": {
+            "method": "POST",
+            "path": "/api/cloud-subscriptions/portal-sessions"
+          }
+        }
+      ],
+      "this_method_calls": [
+        "fetchRaw"
+      ],
+      "capability_gates": [],
+      "parsing": [
+        "const raw = (await res.json()) as unknown;",
+        "return parseWithFallback<CreateWorkspaceSubscriptionPortalResponse | null>(",
+        "CreateWorkspaceSubscriptionPortalResponseSchema,",
+        "null,"
+      ],
+      "query_builders": [],
+      "pagination": "Single request only; no automatic page iteration.",
+      "transport_errors": "No local catch; shared transport errors and subsequent decoding errors propagate.",
+      "cloud_source_only": true
+    },
+    {
+      "method": "deleteRuntime",
+      "lines": [
+        2589,
+        2591
+      ],
+      "declaration": "implementation",
+      "source": "  async deleteRuntime(runtimeId: string): Promise<void> {\n    await this.fetch(`/api/runtimes/${runtimeId}`, { method: \"DELETE\" });\n  }",
+      "requests": [
+        {
+          "line": 2590,
+          "source": "await this.fetch(`/api/runtimes/${runtimeId}`, { method: \"DELETE\" });",
+          "inventory": [
+            {
+              "id": "client:2590",
+              "method": "DELETE",
+              "path_expression": "/api/runtimes/${runtimeId}",
+              "route": {
+                "method": "DELETE",
+                "path": "/api/runtimes/{runtimeId}"
+              }
+            }
+          ],
+          "mapping_status": "exact request source-line match"
+        }
+      ],
+      "inventory": [
+        {
+          "id": "client:2590",
+          "method": "DELETE",
+          "path_expression": "/api/runtimes/${runtimeId}",
+          "route": {
+            "method": "DELETE",
+            "path": "/api/runtimes/{runtimeId}"
+          }
+        }
+      ],
+      "this_method_calls": [
+        "fetch"
+      ],
+      "capability_gates": [],
+      "parsing": [],
+      "query_builders": [],
+      "pagination": "Single request only; no automatic page iteration.",
+      "transport_errors": "No local catch; shared transport errors and subsequent decoding errors propagate.",
+      "cloud_source_only": false
+    },
+    {
+      "method": "unbindAgentsAndDeleteRuntime",
+      "lines": [
+        2606,
+        2620
+      ],
+      "declaration": "implementation",
+      "source": "  async unbindAgentsAndDeleteRuntime(\n    runtimeId: string,\n    expectedActiveAgentIds: string[],\n  ): Promise<{\n    status: string;\n    agents_unbound?: number;\n    agents_archived?: number;\n    tasks_cancelled: number;\n    autopilots_paused?: number;\n  }> {\n    return this.fetch(`/api/runtimes/${runtimeId}/unbind-agents-and-delete`, {\n      method: \"POST\",\n      body: JSON.stringify({ expected_active_agent_ids: expectedActiveAgentIds }),\n    });\n  }",
+      "requests": [
+        {
+          "line": 2616,
+          "source": "return this.fetch(`/api/runtimes/${runtimeId}/unbind-agents-and-delete`, {",
+          "inventory": [
+            {
+              "id": "client:2616",
+              "method": "POST",
+              "path_expression": "/api/runtimes/${runtimeId}/unbind-agents-and-delete",
+              "route": {
+                "method": "POST",
+                "path": "/api/runtimes/{runtimeId}/unbind-agents-and-delete"
+              }
+            }
+          ],
+          "mapping_status": "exact request source-line match"
+        }
+      ],
+      "inventory": [
+        {
+          "id": "client:2616",
+          "method": "POST",
+          "path_expression": "/api/runtimes/${runtimeId}/unbind-agents-and-delete",
+          "route": {
+            "method": "POST",
+            "path": "/api/runtimes/{runtimeId}/unbind-agents-and-delete"
+          }
+        }
+      ],
+      "this_method_calls": [
+        "fetch"
+      ],
+      "capability_gates": [],
+      "parsing": [],
+      "query_builders": [],
+      "pagination": "Single request only; no automatic page iteration.",
+      "transport_errors": "No local catch; shared transport errors and subsequent decoding errors propagate.",
+      "cloud_source_only": false
+    },
+    {
+      "method": "updateRuntime",
+      "lines": [
+        2622,
+        2644
+      ],
+      "declaration": "implementation",
+      "source": "  async updateRuntime(\n    runtimeId: string,\n    patch: {\n      visibility?: \"private\" | \"public\";\n      shared_with?: string[];\n      /**\n       * Custom display name. Pass an empty string to clear it (the server\n       * reverts to the default name). Omit to leave it unchanged — a JSON\n       * `null` is treated as \"unchanged\", not \"clear\". See MUL-4217.\n       */\n      custom_name?: string;\n      /** Apply custom_name to every runtime on the same machine. */\n      apply_to_machine?: boolean;\n      /** Runtime-wide concurrency cap; `null` removes it, omit to leave unchanged. */\n      max_concurrent_tasks?: number | null;\n    },\n  ): Promise<AgentRuntime> {\n    const raw = await this.fetch<unknown>(`/api/runtimes/${runtimeId}`, {\n      method: \"PATCH\",\n      body: JSON.stringify(patch),\n    });\n    return parseWithFallback(raw, AgentRuntimeSchema, EMPTY_RUNTIME, { endpoint: \"updateRuntime\" });\n  }",
+      "requests": [
+        {
+          "line": 2639,
+          "source": "const raw = await this.fetch<unknown>(`/api/runtimes/${runtimeId}`, {",
+          "inventory": [
+            {
+              "id": "client:2639",
+              "method": "PATCH",
+              "path_expression": "/api/runtimes/${runtimeId}",
+              "route": {
+                "method": "PATCH",
+                "path": "/api/runtimes/{runtimeId}"
+              }
+            }
+          ],
+          "mapping_status": "exact request source-line match"
+        }
+      ],
+      "inventory": [
+        {
+          "id": "client:2639",
+          "method": "PATCH",
+          "path_expression": "/api/runtimes/${runtimeId}",
+          "route": {
+            "method": "PATCH",
+            "path": "/api/runtimes/{runtimeId}"
+          }
+        }
+      ],
+      "this_method_calls": [
+        "fetch"
+      ],
+      "capability_gates": [],
+      "parsing": [
+        "return parseWithFallback(raw, AgentRuntimeSchema, EMPTY_RUNTIME, { endpoint: \"updateRuntime\" });"
+      ],
+      "query_builders": [],
+      "pagination": "Single request only; no automatic page iteration.",
+      "transport_errors": "No local catch; shared transport errors and subsequent decoding errors propagate.",
+      "cloud_source_only": false
+    },
+    {
+      "method": "revokeRuntimeWorkspaceAccess",
+      "lines": [
+        2650,
+        2664
+      ],
+      "declaration": "implementation",
+      "source": "  async revokeRuntimeWorkspaceAccess(\n    runtimeId: string,\n    expectedNonownerAgentIds: string[],\n    expectedTaskIds: string[],\n    sharedWith?: string[],\n  ): Promise<void> {\n    await this.fetch(`/api/runtimes/${runtimeId}/revoke-workspace-access`, {\n      method: \"POST\",\n      body: JSON.stringify({\n        expected_nonowner_agent_ids: expectedNonownerAgentIds,\n        expected_task_ids: expectedTaskIds,\n        shared_with: sharedWith,\n      }),\n    });\n  }",
+      "requests": [
+        {
+          "line": 2656,
+          "source": "await this.fetch(`/api/runtimes/${runtimeId}/revoke-workspace-access`, {",
+          "inventory": [
+            {
+              "id": "client:2656",
+              "method": "POST",
+              "path_expression": "/api/runtimes/${runtimeId}/revoke-workspace-access",
+              "route": {
+                "method": "POST",
+                "path": "/api/runtimes/{runtimeId}/revoke-workspace-access"
+              }
+            }
+          ],
+          "mapping_status": "exact request source-line match"
+        }
+      ],
+      "inventory": [
+        {
+          "id": "client:2656",
+          "method": "POST",
+          "path_expression": "/api/runtimes/${runtimeId}/revoke-workspace-access",
+          "route": {
+            "method": "POST",
+            "path": "/api/runtimes/{runtimeId}/revoke-workspace-access"
+          }
+        }
+      ],
+      "this_method_calls": [
+        "fetch"
+      ],
+      "capability_gates": [],
+      "parsing": [],
+      "query_builders": [],
+      "pagination": "Single request only; no automatic page iteration.",
+      "transport_errors": "No local catch; shared transport errors and subsequent decoding errors propagate.",
+      "cloud_source_only": false
+    },
+    {
+      "method": "listRuntimeProfiles",
+      "lines": [
+        2669,
+        2679
+      ],
+      "declaration": "implementation",
+      "source": "  async listRuntimeProfiles(workspaceId: string): Promise<RuntimeProfile[]> {\n    const res = await this.fetch<{ runtime_profiles?: RuntimeProfile[] }>(\n      `/api/workspaces/${workspaceId}/runtime-profiles`,\n    );\n    return parseWithFallback(\n      res.runtime_profiles ?? [],\n      RuntimeProfileListSchema,\n      [] as RuntimeProfile[],\n      { endpoint: \"listRuntimeProfiles\" },\n    );\n  }",
+      "requests": [
+        {
+          "line": 2670,
+          "source": "const res = await this.fetch<{ runtime_profiles?: RuntimeProfile[] }>(",
+          "inventory": [
+            {
+              "id": "client:2670",
+              "method": "GET",
+              "path_expression": "/api/workspaces/${workspaceId}/runtime-profiles",
+              "route": {
+                "method": "GET",
+                "path": "/api/workspaces/{id}/runtime-profiles"
+              }
+            }
+          ],
+          "mapping_status": "exact request source-line match"
+        }
+      ],
+      "inventory": [
+        {
+          "id": "client:2670",
+          "method": "GET",
+          "path_expression": "/api/workspaces/${workspaceId}/runtime-profiles",
+          "route": {
+            "method": "GET",
+            "path": "/api/workspaces/{id}/runtime-profiles"
+          }
+        }
+      ],
+      "this_method_calls": [
+        "fetch"
+      ],
+      "capability_gates": [],
+      "parsing": [
+        "return parseWithFallback(",
+        "RuntimeProfileListSchema,"
+      ],
+      "query_builders": [],
+      "pagination": "Single request only; no automatic page iteration.",
+      "transport_errors": "No local catch; shared transport errors and subsequent decoding errors propagate.",
+      "cloud_source_only": false
+    },
+    {
+      "method": "getRuntimeProfile",
+      "lines": [
+        2681,
+        2691
+      ],
+      "declaration": "implementation",
+      "source": "  async getRuntimeProfile(\n    workspaceId: string,\n    profileId: string,\n  ): Promise<RuntimeProfile> {\n    const result = await this.fetch<RuntimeProfile>(\n      `/api/workspaces/${workspaceId}/runtime-profiles/${profileId}`,\n    );\n    return parseWithFallback(result, RuntimeProfileSchema, result, {\n      endpoint: \"runtimeProfile\",\n    });\n  }",
+      "requests": [
+        {
+          "line": 2685,
+          "source": "const result = await this.fetch<RuntimeProfile>(",
+          "inventory": [
+            {
+              "id": "client:2685",
+              "method": "GET",
+              "path_expression": "/api/workspaces/${workspaceId}/runtime-profiles/${profileId}",
+              "route": {
+                "method": "GET",
+                "path": "/api/workspaces/{id}/runtime-profiles/{profileId}"
+              }
+            }
+          ],
+          "mapping_status": "exact request source-line match"
+        }
+      ],
+      "inventory": [
+        {
+          "id": "client:2685",
+          "method": "GET",
+          "path_expression": "/api/workspaces/${workspaceId}/runtime-profiles/${profileId}",
+          "route": {
+            "method": "GET",
+            "path": "/api/workspaces/{id}/runtime-profiles/{profileId}"
+          }
+        }
+      ],
+      "this_method_calls": [
+        "fetch"
+      ],
+      "capability_gates": [],
+      "parsing": [
+        "return parseWithFallback(result, RuntimeProfileSchema, result, {"
+      ],
+      "query_builders": [],
+      "pagination": "Single request only; no automatic page iteration.",
+      "transport_errors": "No local catch; shared transport errors and subsequent decoding errors propagate.",
+      "cloud_source_only": false
+    },
+    {
+      "method": "createRuntimeProfile",
+      "lines": [
+        2693,
+        2707
+      ],
+      "declaration": "implementation",
+      "source": "  async createRuntimeProfile(\n    workspaceId: string,\n    body: CreateRuntimeProfileRequest,\n  ): Promise<RuntimeProfile> {\n    const result = await this.fetch<RuntimeProfile>(\n      `/api/workspaces/${workspaceId}/runtime-profiles`,\n      {\n        method: \"POST\",\n        body: JSON.stringify(body),\n      },\n    );\n    return parseWithFallback(result, RuntimeProfileSchema, result, {\n      endpoint: \"runtimeProfile\",\n    });\n  }",
+      "requests": [
+        {
+          "line": 2697,
+          "source": "const result = await this.fetch<RuntimeProfile>(",
+          "inventory": [
+            {
+              "id": "client:2697",
+              "method": "POST",
+              "path_expression": "/api/workspaces/${workspaceId}/runtime-profiles",
+              "route": {
+                "method": "POST",
+                "path": "/api/workspaces/{id}/runtime-profiles"
+              }
+            }
+          ],
+          "mapping_status": "exact request source-line match"
+        }
+      ],
+      "inventory": [
+        {
+          "id": "client:2697",
+          "method": "POST",
+          "path_expression": "/api/workspaces/${workspaceId}/runtime-profiles",
+          "route": {
+            "method": "POST",
+            "path": "/api/workspaces/{id}/runtime-profiles"
+          }
+        }
+      ],
+      "this_method_calls": [
+        "fetch"
+      ],
+      "capability_gates": [],
+      "parsing": [
+        "return parseWithFallback(result, RuntimeProfileSchema, result, {"
+      ],
+      "query_builders": [],
+      "pagination": "Single request only; no automatic page iteration.",
+      "transport_errors": "No local catch; shared transport errors and subsequent decoding errors propagate.",
+      "cloud_source_only": false
+    },
+    {
+      "method": "updateRuntimeProfile",
+      "lines": [
+        2709,
+        2724
+      ],
+      "declaration": "implementation",
+      "source": "  async updateRuntimeProfile(\n    workspaceId: string,\n    profileId: string,\n    patch: UpdateRuntimeProfileRequest,\n  ): Promise<RuntimeProfile> {\n    const result = await this.fetch<RuntimeProfile>(\n      `/api/workspaces/${workspaceId}/runtime-profiles/${profileId}`,\n      {\n        method: \"PATCH\",\n        body: JSON.stringify(patch),\n      },\n    );\n    return parseWithFallback(result, RuntimeProfileSchema, result, {\n      endpoint: \"runtimeProfile\",\n    });\n  }",
+      "requests": [
+        {
+          "line": 2714,
+          "source": "const result = await this.fetch<RuntimeProfile>(",
+          "inventory": [
+            {
+              "id": "client:2714",
+              "method": "PATCH",
+              "path_expression": "/api/workspaces/${workspaceId}/runtime-profiles/${profileId}",
+              "route": {
+                "method": "PATCH",
+                "path": "/api/workspaces/{id}/runtime-profiles/{profileId}"
+              }
+            }
+          ],
+          "mapping_status": "exact request source-line match"
+        }
+      ],
+      "inventory": [
+        {
+          "id": "client:2714",
+          "method": "PATCH",
+          "path_expression": "/api/workspaces/${workspaceId}/runtime-profiles/${profileId}",
+          "route": {
+            "method": "PATCH",
+            "path": "/api/workspaces/{id}/runtime-profiles/{profileId}"
+          }
+        }
+      ],
+      "this_method_calls": [
+        "fetch"
+      ],
+      "capability_gates": [],
+      "parsing": [
+        "return parseWithFallback(result, RuntimeProfileSchema, result, {"
+      ],
+      "query_builders": [],
+      "pagination": "Single request only; no automatic page iteration.",
+      "transport_errors": "No local catch; shared transport errors and subsequent decoding errors propagate.",
+      "cloud_source_only": false
+    },
+    {
+      "method": "deleteRuntimeProfile",
+      "lines": [
+        2726,
+        2734
+      ],
+      "declaration": "implementation",
+      "source": "  async deleteRuntimeProfile(\n    workspaceId: string,\n    profileId: string,\n  ): Promise<void> {\n    await this.fetch(\n      `/api/workspaces/${workspaceId}/runtime-profiles/${profileId}`,\n      { method: \"DELETE\" },\n    );\n  }",
+      "requests": [
+        {
+          "line": 2730,
+          "source": "await this.fetch(",
+          "inventory": [
+            {
+              "id": "client:2730",
+              "method": "DELETE",
+              "path_expression": "/api/workspaces/${workspaceId}/runtime-profiles/${profileId}",
+              "route": {
+                "method": "DELETE",
+                "path": "/api/workspaces/{id}/runtime-profiles/{profileId}"
+              }
+            }
+          ],
+          "mapping_status": "exact request source-line match"
+        }
+      ],
+      "inventory": [
+        {
+          "id": "client:2730",
+          "method": "DELETE",
+          "path_expression": "/api/workspaces/${workspaceId}/runtime-profiles/${profileId}",
+          "route": {
+            "method": "DELETE",
+            "path": "/api/workspaces/{id}/runtime-profiles/{profileId}"
+          }
+        }
+      ],
+      "this_method_calls": [
+        "fetch"
+      ],
+      "capability_gates": [],
+      "parsing": [],
+      "query_builders": [],
+      "pagination": "Single request only; no automatic page iteration.",
+      "transport_errors": "No local catch; shared transport errors and subsequent decoding errors propagate.",
+      "cloud_source_only": false
+    },
+    {
+      "method": "getRuntimeRateLimits",
+      "lines": [
+        2736,
+        2744
+      ],
+      "declaration": "implementation",
+      "source": "  async getRuntimeRateLimits(runtimeId: string): Promise<RuntimeRateLimitsResponse> {\n    const raw = await this.fetch<unknown>(`/api/runtimes/${runtimeId}/rate-limits`);\n    return parseWithFallback<RuntimeRateLimitsResponse>(\n      raw,\n      RuntimeRateLimitsResponseSchema,\n      { rate_limits: null },\n      { endpoint: \"GET /api/runtimes/:id/rate-limits\" },\n    );\n  }",
+      "requests": [
+        {
+          "line": 2737,
+          "source": "const raw = await this.fetch<unknown>(`/api/runtimes/${runtimeId}/rate-limits`);",
+          "inventory": [
+            {
+              "id": "client:2737",
+              "method": "GET",
+              "path_expression": "/api/runtimes/${runtimeId}/rate-limits",
+              "route": {
+                "method": "GET",
+                "path": "/api/runtimes/{runtimeId}/rate-limits"
+              }
+            }
+          ],
+          "mapping_status": "exact request source-line match"
+        }
+      ],
+      "inventory": [
+        {
+          "id": "client:2737",
+          "method": "GET",
+          "path_expression": "/api/runtimes/${runtimeId}/rate-limits",
+          "route": {
+            "method": "GET",
+            "path": "/api/runtimes/{runtimeId}/rate-limits"
+          }
+        }
+      ],
+      "this_method_calls": [
+        "fetch"
+      ],
+      "capability_gates": [],
+      "parsing": [
+        "return parseWithFallback<RuntimeRateLimitsResponse>(",
+        "RuntimeRateLimitsResponseSchema,"
+      ],
+      "query_builders": [],
+      "pagination": "Single request only; no automatic page iteration.",
+      "transport_errors": "No local catch; shared transport errors and subsequent decoding errors propagate.",
+      "cloud_source_only": false
+    },
+    {
+      "method": "getRuntimeUsage",
+      "lines": [
+        2746,
+        2762
+      ],
+      "declaration": "implementation",
+      "source": "  async getRuntimeUsage(\n    runtimeId: string,\n    params?: { days?: number; tz?: string },\n  ): Promise<RuntimeUsage[]> {\n    const search = new URLSearchParams();\n    if (params?.days) search.set(\"days\", String(params.days));\n    // `tz` drives the calendar-day boundary for the trend chart (Viewing\n    // layer). Caller-supplied; the backend falls back to user.timezone /\n    // UTC if omitted.\n    if (params?.tz) search.set(\"tz\", params.tz);\n    const raw = await this.fetch<unknown>(\n      `/api/runtimes/${runtimeId}/usage?${search}`,\n    );\n    return parseWithFallback<RuntimeUsage[]>(raw, RuntimeUsageListSchema, [], {\n      endpoint: \"GET /api/runtimes/:id/usage\",\n    });\n  }",
+      "requests": [
+        {
+          "line": 2756,
+          "source": "const raw = await this.fetch<unknown>(",
+          "inventory": [
+            {
+              "id": "client:2756",
+              "method": "GET",
+              "path_expression": "/api/runtimes/${runtimeId}/usage?${search}",
+              "route": {
+                "method": "GET",
+                "path": "/api/runtimes/{runtimeId}/usage"
+              }
+            }
+          ],
+          "mapping_status": "exact request source-line match"
+        }
+      ],
+      "inventory": [
+        {
+          "id": "client:2756",
+          "method": "GET",
+          "path_expression": "/api/runtimes/${runtimeId}/usage?${search}",
+          "route": {
+            "method": "GET",
+            "path": "/api/runtimes/{runtimeId}/usage"
+          }
+        }
+      ],
+      "this_method_calls": [
+        "fetch"
+      ],
+      "capability_gates": [],
+      "parsing": [
+        "return parseWithFallback<RuntimeUsage[]>(raw, RuntimeUsageListSchema, [], {"
+      ],
+      "query_builders": [
+        "const search = new URLSearchParams();",
+        "if (params?.days) search.set(\"days\", String(params.days));",
+        "if (params?.tz) search.set(\"tz\", params.tz);",
+        "`/api/runtimes/${runtimeId}/usage?${search}`,"
+      ],
+      "pagination": "Single request only; no automatic page iteration.",
+      "transport_errors": "No local catch; shared transport errors and subsequent decoding errors propagate.",
+      "cloud_source_only": false
+    },
+    {
+      "method": "getRuntimeTaskActivity",
+      "lines": [
+        2764,
+        2781
+      ],
+      "declaration": "implementation",
+      "source": "  async getRuntimeTaskActivity(\n    runtimeId: string,\n    params?: { tz?: string },\n  ): Promise<RuntimeHourlyActivity[]> {\n    // Hour-of-day heatmap follows the viewer's tz, like the other reports on\n    // this page. Pass the viewer's IANA zone so the server buckets correctly.\n    const search = new URLSearchParams();\n    if (params?.tz) search.set(\"tz\", params.tz);\n    const raw = await this.fetch<unknown>(\n      `/api/runtimes/${runtimeId}/activity?${search}`,\n    );\n    return parseWithFallback<RuntimeHourlyActivity[]>(\n      raw,\n      RuntimeHourlyActivityListSchema,\n      [],\n      { endpoint: \"GET /api/runtimes/:id/activity\" },\n    );\n  }",
+      "requests": [
+        {
+          "line": 2772,
+          "source": "const raw = await this.fetch<unknown>(",
+          "inventory": [
+            {
+              "id": "client:2772",
+              "method": "GET",
+              "path_expression": "/api/runtimes/${runtimeId}/activity?${search}",
+              "route": {
+                "method": "GET",
+                "path": "/api/runtimes/{runtimeId}/activity"
+              }
+            }
+          ],
+          "mapping_status": "exact request source-line match"
+        }
+      ],
+      "inventory": [
+        {
+          "id": "client:2772",
+          "method": "GET",
+          "path_expression": "/api/runtimes/${runtimeId}/activity?${search}",
+          "route": {
+            "method": "GET",
+            "path": "/api/runtimes/{runtimeId}/activity"
+          }
+        }
+      ],
+      "this_method_calls": [
+        "fetch"
+      ],
+      "capability_gates": [],
+      "parsing": [
+        "return parseWithFallback<RuntimeHourlyActivity[]>(",
+        "RuntimeHourlyActivityListSchema,"
+      ],
+      "query_builders": [
+        "const search = new URLSearchParams();",
+        "if (params?.tz) search.set(\"tz\", params.tz);",
+        "`/api/runtimes/${runtimeId}/activity?${search}`,"
+      ],
+      "pagination": "Single request only; no automatic page iteration.",
+      "transport_errors": "No local catch; shared transport errors and subsequent decoding errors propagate.",
+      "cloud_source_only": false
+    },
+    {
+      "method": "getRuntimeUsageByAgent",
+      "lines": [
+        2783,
+        2799
+      ],
+      "declaration": "implementation",
+      "source": "  async getRuntimeUsageByAgent(\n    runtimeId: string,\n    params?: { days?: number; tz?: string },\n  ): Promise<RuntimeUsageByAgent[]> {\n    const search = new URLSearchParams();\n    if (params?.days) search.set(\"days\", String(params.days));\n    if (params?.tz) search.set(\"tz\", params.tz);\n    const raw = await this.fetch<unknown>(\n      `/api/runtimes/${runtimeId}/usage/by-agent?${search}`,\n    );\n    return parseWithFallback<RuntimeUsageByAgent[]>(\n      raw,\n      RuntimeUsageByAgentListSchema,\n      [],\n      { endpoint: \"GET /api/runtimes/:id/usage/by-agent\" },\n    );\n  }",
+      "requests": [
+        {
+          "line": 2790,
+          "source": "const raw = await this.fetch<unknown>(",
+          "inventory": [
+            {
+              "id": "client:2790",
+              "method": "GET",
+              "path_expression": "/api/runtimes/${runtimeId}/usage/by-agent?${search}",
+              "route": {
+                "method": "GET",
+                "path": "/api/runtimes/{runtimeId}/usage/by-agent"
+              }
+            }
+          ],
+          "mapping_status": "exact request source-line match"
+        }
+      ],
+      "inventory": [
+        {
+          "id": "client:2790",
+          "method": "GET",
+          "path_expression": "/api/runtimes/${runtimeId}/usage/by-agent?${search}",
+          "route": {
+            "method": "GET",
+            "path": "/api/runtimes/{runtimeId}/usage/by-agent"
+          }
+        }
+      ],
+      "this_method_calls": [
+        "fetch"
+      ],
+      "capability_gates": [],
+      "parsing": [
+        "return parseWithFallback<RuntimeUsageByAgent[]>(",
+        "RuntimeUsageByAgentListSchema,"
+      ],
+      "query_builders": [
+        "const search = new URLSearchParams();",
+        "if (params?.days) search.set(\"days\", String(params.days));",
+        "if (params?.tz) search.set(\"tz\", params.tz);",
+        "`/api/runtimes/${runtimeId}/usage/by-agent?${search}`,"
+      ],
+      "pagination": "Single request only; no automatic page iteration.",
+      "transport_errors": "No local catch; shared transport errors and subsequent decoding errors propagate.",
+      "cloud_source_only": false
+    },
+    {
+      "method": "getRuntimeUsageByHour",
+      "lines": [
+        2801,
+        2817
+      ],
+      "declaration": "implementation",
+      "source": "  async getRuntimeUsageByHour(\n    runtimeId: string,\n    params?: { days?: number; tz?: string },\n  ): Promise<RuntimeUsageByHour[]> {\n    const search = new URLSearchParams();\n    if (params?.days) search.set(\"days\", String(params.days));\n    if (params?.tz) search.set(\"tz\", params.tz);\n    const raw = await this.fetch<unknown>(\n      `/api/runtimes/${runtimeId}/usage/by-hour?${search}`,\n    );\n    return parseWithFallback<RuntimeUsageByHour[]>(\n      raw,\n      RuntimeUsageByHourListSchema,\n      [],\n      { endpoint: \"GET /api/runtimes/:id/usage/by-hour\" },\n    );\n  }",
+      "requests": [
+        {
+          "line": 2808,
+          "source": "const raw = await this.fetch<unknown>(",
+          "inventory": [
+            {
+              "id": "client:2808",
+              "method": "GET",
+              "path_expression": "/api/runtimes/${runtimeId}/usage/by-hour?${search}",
+              "route": {
+                "method": "GET",
+                "path": "/api/runtimes/{runtimeId}/usage/by-hour"
+              }
+            }
+          ],
+          "mapping_status": "exact request source-line match"
+        }
+      ],
+      "inventory": [
+        {
+          "id": "client:2808",
+          "method": "GET",
+          "path_expression": "/api/runtimes/${runtimeId}/usage/by-hour?${search}",
+          "route": {
+            "method": "GET",
+            "path": "/api/runtimes/{runtimeId}/usage/by-hour"
+          }
+        }
+      ],
+      "this_method_calls": [
+        "fetch"
+      ],
+      "capability_gates": [],
+      "parsing": [
+        "return parseWithFallback<RuntimeUsageByHour[]>(",
+        "RuntimeUsageByHourListSchema,"
+      ],
+      "query_builders": [
+        "const search = new URLSearchParams();",
+        "if (params?.days) search.set(\"days\", String(params.days));",
+        "if (params?.tz) search.set(\"tz\", params.tz);",
+        "`/api/runtimes/${runtimeId}/usage/by-hour?${search}`,"
+      ],
+      "pagination": "Single request only; no automatic page iteration.",
+      "transport_errors": "No local catch; shared transport errors and subsequent decoding errors propagate.",
+      "cloud_source_only": false
+    },
+    {
+      "method": "getDashboardUsageDaily",
+      "lines": [
+        2824,
+        2838
+      ],
+      "declaration": "implementation",
+      "source": "  async getDashboardUsageDaily(\n    params: { days?: number; project_id?: string | null; tz?: string },\n  ): Promise<DashboardUsageDaily[]> {\n    const search = new URLSearchParams();\n    if (params.days) search.set(\"days\", String(params.days));\n    if (params.project_id) search.set(\"project_id\", params.project_id);\n    if (params.tz) search.set(\"tz\", params.tz);\n    const raw = await this.fetch<unknown>(`/api/dashboard/usage/daily?${search}`);\n    return parseWithFallback<DashboardUsageDaily[]>(\n      raw,\n      DashboardUsageDailyListSchema,\n      [],\n      { endpoint: \"GET /api/dashboard/usage/daily\" },\n    );\n  }",
+      "requests": [
+        {
+          "line": 2831,
+          "source": "const raw = await this.fetch<unknown>(`/api/dashboard/usage/daily?${search}`);",
+          "inventory": [
+            {
+              "id": "client:2831",
+              "method": "GET",
+              "path_expression": "/api/dashboard/usage/daily?${search}",
+              "route": {
+                "method": "GET",
+                "path": "/api/dashboard/usage/daily"
+              }
+            }
+          ],
+          "mapping_status": "exact request source-line match"
+        }
+      ],
+      "inventory": [
+        {
+          "id": "client:2831",
+          "method": "GET",
+          "path_expression": "/api/dashboard/usage/daily?${search}",
+          "route": {
+            "method": "GET",
+            "path": "/api/dashboard/usage/daily"
+          }
+        }
+      ],
+      "this_method_calls": [
+        "fetch"
+      ],
+      "capability_gates": [],
+      "parsing": [
+        "return parseWithFallback<DashboardUsageDaily[]>(",
+        "DashboardUsageDailyListSchema,"
+      ],
+      "query_builders": [
+        "const search = new URLSearchParams();",
+        "if (params.days) search.set(\"days\", String(params.days));",
+        "if (params.project_id) search.set(\"project_id\", params.project_id);",
+        "if (params.tz) search.set(\"tz\", params.tz);",
+        "const raw = await this.fetch<unknown>(`/api/dashboard/usage/daily?${search}`);"
+      ],
+      "pagination": "Single request only; no automatic page iteration.",
+      "transport_errors": "No local catch; shared transport errors and subsequent decoding errors propagate.",
+      "cloud_source_only": false
+    },
+    {
+      "method": "getDashboardUsageByAgent",
+      "lines": [
+        2840,
+        2854
+      ],
+      "declaration": "implementation",
+      "source": "  async getDashboardUsageByAgent(\n    params: { days?: number; project_id?: string | null; tz?: string },\n  ): Promise<DashboardUsageByAgent[]> {\n    const search = new URLSearchParams();\n    if (params.days) search.set(\"days\", String(params.days));\n    if (params.project_id) search.set(\"project_id\", params.project_id);\n    if (params.tz) search.set(\"tz\", params.tz);\n    const raw = await this.fetch<unknown>(`/api/dashboard/usage/by-agent?${search}`);\n    return parseWithFallback<DashboardUsageByAgent[]>(\n      raw,\n      DashboardUsageByAgentListSchema,\n      [],\n      { endpoint: \"GET /api/dashboard/usage/by-agent\" },\n    );\n  }",
+      "requests": [
+        {
+          "line": 2847,
+          "source": "const raw = await this.fetch<unknown>(`/api/dashboard/usage/by-agent?${search}`);",
+          "inventory": [
+            {
+              "id": "client:2847",
+              "method": "GET",
+              "path_expression": "/api/dashboard/usage/by-agent?${search}",
+              "route": {
+                "method": "GET",
+                "path": "/api/dashboard/usage/by-agent"
+              }
+            }
+          ],
+          "mapping_status": "exact request source-line match"
+        }
+      ],
+      "inventory": [
+        {
+          "id": "client:2847",
+          "method": "GET",
+          "path_expression": "/api/dashboard/usage/by-agent?${search}",
+          "route": {
+            "method": "GET",
+            "path": "/api/dashboard/usage/by-agent"
+          }
+        }
+      ],
+      "this_method_calls": [
+        "fetch"
+      ],
+      "capability_gates": [],
+      "parsing": [
+        "return parseWithFallback<DashboardUsageByAgent[]>(",
+        "DashboardUsageByAgentListSchema,"
+      ],
+      "query_builders": [
+        "const search = new URLSearchParams();",
+        "if (params.days) search.set(\"days\", String(params.days));",
+        "if (params.project_id) search.set(\"project_id\", params.project_id);",
+        "if (params.tz) search.set(\"tz\", params.tz);",
+        "const raw = await this.fetch<unknown>(`/api/dashboard/usage/by-agent?${search}`);"
+      ],
+      "pagination": "Single request only; no automatic page iteration.",
+      "transport_errors": "No local catch; shared transport errors and subsequent decoding errors propagate.",
+      "cloud_source_only": false
+    },
+    {
+      "method": "getDashboardAgentRunTime",
+      "lines": [
+        2856,
+        2872
+      ],
+      "declaration": "implementation",
+      "source": "  async getDashboardAgentRunTime(\n    params: { days?: number; project_id?: string | null; tz?: string },\n  ): Promise<DashboardAgentRunTime[]> {\n    const search = new URLSearchParams();\n    if (params.days) search.set(\"days\", String(params.days));\n    if (params.project_id) search.set(\"project_id\", params.project_id);\n    // `tz` aligns the \"last N days\" cutoff with the viewer's calendar,\n    // matching the per-agent token card.\n    if (params.tz) search.set(\"tz\", params.tz);\n    const raw = await this.fetch<unknown>(`/api/dashboard/agent-runtime?${search}`);\n    return parseWithFallback<DashboardAgentRunTime[]>(\n      raw,\n      DashboardAgentRunTimeListSchema,\n      [],\n      { endpoint: \"GET /api/dashboard/agent-runtime\" },\n    );\n  }",
+      "requests": [
+        {
+          "line": 2865,
+          "source": "const raw = await this.fetch<unknown>(`/api/dashboard/agent-runtime?${search}`);",
+          "inventory": [
+            {
+              "id": "client:2865",
+              "method": "GET",
+              "path_expression": "/api/dashboard/agent-runtime?${search}",
+              "route": {
+                "method": "GET",
+                "path": "/api/dashboard/agent-runtime"
+              }
+            }
+          ],
+          "mapping_status": "exact request source-line match"
+        }
+      ],
+      "inventory": [
+        {
+          "id": "client:2865",
+          "method": "GET",
+          "path_expression": "/api/dashboard/agent-runtime?${search}",
+          "route": {
+            "method": "GET",
+            "path": "/api/dashboard/agent-runtime"
+          }
+        }
+      ],
+      "this_method_calls": [
+        "fetch"
+      ],
+      "capability_gates": [],
+      "parsing": [
+        "return parseWithFallback<DashboardAgentRunTime[]>(",
+        "DashboardAgentRunTimeListSchema,"
+      ],
+      "query_builders": [
+        "const search = new URLSearchParams();",
+        "if (params.days) search.set(\"days\", String(params.days));",
+        "if (params.project_id) search.set(\"project_id\", params.project_id);",
+        "if (params.tz) search.set(\"tz\", params.tz);",
+        "const raw = await this.fetch<unknown>(`/api/dashboard/agent-runtime?${search}`);"
+      ],
+      "pagination": "Single request only; no automatic page iteration.",
+      "transport_errors": "No local catch; shared transport errors and subsequent decoding errors propagate.",
+      "cloud_source_only": false
+    },
+    {
+      "method": "getDashboardRunTimeDaily",
+      "lines": [
+        2874,
+        2890
+      ],
+      "declaration": "implementation",
+      "source": "  async getDashboardRunTimeDaily(\n    params: { days?: number; project_id?: string | null; tz?: string },\n  ): Promise<DashboardRunTimeDaily[]> {\n    const search = new URLSearchParams();\n    if (params.days) search.set(\"days\", String(params.days));\n    if (params.project_id) search.set(\"project_id\", params.project_id);\n    // `tz` cuts the day buckets in the viewer's calendar so Time / Tasks\n    // align with the Cost / Tokens charts.\n    if (params.tz) search.set(\"tz\", params.tz);\n    const raw = await this.fetch<unknown>(`/api/dashboard/runtime/daily?${search}`);\n    return parseWithFallback<DashboardRunTimeDaily[]>(\n      raw,\n      DashboardRunTimeDailyListSchema,\n      [],\n      { endpoint: \"GET /api/dashboard/runtime/daily\" },\n    );\n  }",
+      "requests": [
+        {
+          "line": 2883,
+          "source": "const raw = await this.fetch<unknown>(`/api/dashboard/runtime/daily?${search}`);",
+          "inventory": [
+            {
+              "id": "client:2883",
+              "method": "GET",
+              "path_expression": "/api/dashboard/runtime/daily?${search}",
+              "route": {
+                "method": "GET",
+                "path": "/api/dashboard/runtime/daily"
+              }
+            }
+          ],
+          "mapping_status": "exact request source-line match"
+        }
+      ],
+      "inventory": [
+        {
+          "id": "client:2883",
+          "method": "GET",
+          "path_expression": "/api/dashboard/runtime/daily?${search}",
+          "route": {
+            "method": "GET",
+            "path": "/api/dashboard/runtime/daily"
+          }
+        }
+      ],
+      "this_method_calls": [
+        "fetch"
+      ],
+      "capability_gates": [],
+      "parsing": [
+        "return parseWithFallback<DashboardRunTimeDaily[]>(",
+        "DashboardRunTimeDailyListSchema,"
+      ],
+      "query_builders": [
+        "const search = new URLSearchParams();",
+        "if (params.days) search.set(\"days\", String(params.days));",
+        "if (params.project_id) search.set(\"project_id\", params.project_id);",
+        "if (params.tz) search.set(\"tz\", params.tz);",
+        "const raw = await this.fetch<unknown>(`/api/dashboard/runtime/daily?${search}`);"
+      ],
+      "pagination": "Single request only; no automatic page iteration.",
+      "transport_errors": "No local catch; shared transport errors and subsequent decoding errors propagate.",
+      "cloud_source_only": false
+    },
+    {
+      "method": "getDashboardFailuresDaily",
+      "lines": [
+        2892,
+        2908
+      ],
+      "declaration": "implementation",
+      "source": "  async getDashboardFailuresDaily(\n    params: { days?: number; project_id?: string | null; tz?: string },\n  ): Promise<DashboardFailureDaily[]> {\n    const search = new URLSearchParams();\n    if (params.days) search.set(\"days\", String(params.days));\n    if (params.project_id) search.set(\"project_id\", params.project_id);\n    // `tz` cuts the day buckets in the viewer's calendar so the Errors chart\n    // shares an x-axis with the other four metrics.\n    if (params.tz) search.set(\"tz\", params.tz);\n    const raw = await this.fetch<unknown>(`/api/dashboard/failures/daily?${search}`);\n    return parseWithFallback<DashboardFailureDaily[]>(\n      raw,\n      DashboardFailureDailyListSchema,\n      [],\n      { endpoint: \"GET /api/dashboard/failures/daily\" },\n    );\n  }",
+      "requests": [
+        {
+          "line": 2901,
+          "source": "const raw = await this.fetch<unknown>(`/api/dashboard/failures/daily?${search}`);",
+          "inventory": [
+            {
+              "id": "client:2901",
+              "method": "GET",
+              "path_expression": "/api/dashboard/failures/daily?${search}",
+              "route": {
+                "method": "GET",
+                "path": "/api/dashboard/failures/daily"
+              }
+            }
+          ],
+          "mapping_status": "exact request source-line match"
+        }
+      ],
+      "inventory": [
+        {
+          "id": "client:2901",
+          "method": "GET",
+          "path_expression": "/api/dashboard/failures/daily?${search}",
+          "route": {
+            "method": "GET",
+            "path": "/api/dashboard/failures/daily"
+          }
+        }
+      ],
+      "this_method_calls": [
+        "fetch"
+      ],
+      "capability_gates": [],
+      "parsing": [
+        "return parseWithFallback<DashboardFailureDaily[]>(",
+        "DashboardFailureDailyListSchema,"
+      ],
+      "query_builders": [
+        "const search = new URLSearchParams();",
+        "if (params.days) search.set(\"days\", String(params.days));",
+        "if (params.project_id) search.set(\"project_id\", params.project_id);",
+        "if (params.tz) search.set(\"tz\", params.tz);",
+        "const raw = await this.fetch<unknown>(`/api/dashboard/failures/daily?${search}`);"
+      ],
+      "pagination": "Single request only; no automatic page iteration.",
+      "transport_errors": "No local catch; shared transport errors and subsequent decoding errors propagate.",
+      "cloud_source_only": false
+    },
+    {
+      "method": "getDashboardFailuresByAgent",
+      "lines": [
+        2910,
+        2924
+      ],
+      "declaration": "implementation",
+      "source": "  async getDashboardFailuresByAgent(\n    params: { days?: number; project_id?: string | null; tz?: string },\n  ): Promise<DashboardFailureByAgent[]> {\n    const search = new URLSearchParams();\n    if (params.days) search.set(\"days\", String(params.days));\n    if (params.project_id) search.set(\"project_id\", params.project_id);\n    if (params.tz) search.set(\"tz\", params.tz);\n    const raw = await this.fetch<unknown>(`/api/dashboard/failures/by-agent?${search}`);\n    return parseWithFallback<DashboardFailureByAgent[]>(\n      raw,\n      DashboardFailureByAgentListSchema,\n      [],\n      { endpoint: \"GET /api/dashboard/failures/by-agent\" },\n    );\n  }",
+      "requests": [
+        {
+          "line": 2917,
+          "source": "const raw = await this.fetch<unknown>(`/api/dashboard/failures/by-agent?${search}`);",
+          "inventory": [
+            {
+              "id": "client:2917",
+              "method": "GET",
+              "path_expression": "/api/dashboard/failures/by-agent?${search}",
+              "route": {
+                "method": "GET",
+                "path": "/api/dashboard/failures/by-agent"
+              }
+            }
+          ],
+          "mapping_status": "exact request source-line match"
+        }
+      ],
+      "inventory": [
+        {
+          "id": "client:2917",
+          "method": "GET",
+          "path_expression": "/api/dashboard/failures/by-agent?${search}",
+          "route": {
+            "method": "GET",
+            "path": "/api/dashboard/failures/by-agent"
+          }
+        }
+      ],
+      "this_method_calls": [
+        "fetch"
+      ],
+      "capability_gates": [],
+      "parsing": [
+        "return parseWithFallback<DashboardFailureByAgent[]>(",
+        "DashboardFailureByAgentListSchema,"
+      ],
+      "query_builders": [
+        "const search = new URLSearchParams();",
+        "if (params.days) search.set(\"days\", String(params.days));",
+        "if (params.project_id) search.set(\"project_id\", params.project_id);",
+        "if (params.tz) search.set(\"tz\", params.tz);",
+        "const raw = await this.fetch<unknown>(`/api/dashboard/failures/by-agent?${search}`);"
+      ],
+      "pagination": "Single request only; no automatic page iteration.",
+      "transport_errors": "No local catch; shared transport errors and subsequent decoding errors propagate.",
+      "cloud_source_only": false
+    },
+    {
+      "method": "initiateUpdate",
+      "lines": [
+        2926,
+        2934
+      ],
+      "declaration": "implementation",
+      "source": "  async initiateUpdate(\n    runtimeId: string,\n    targetVersion: string,\n  ): Promise<RuntimeUpdate> {\n    return this.fetch(`/api/runtimes/${runtimeId}/update`, {\n      method: \"POST\",\n      body: JSON.stringify({ target_version: targetVersion }),\n    });\n  }",
+      "requests": [
+        {
+          "line": 2930,
+          "source": "return this.fetch(`/api/runtimes/${runtimeId}/update`, {",
+          "inventory": [
+            {
+              "id": "client:2930",
+              "method": "POST",
+              "path_expression": "/api/runtimes/${runtimeId}/update",
+              "route": {
+                "method": "POST",
+                "path": "/api/runtimes/{runtimeId}/update"
+              }
+            }
+          ],
+          "mapping_status": "exact request source-line match"
+        }
+      ],
+      "inventory": [
+        {
+          "id": "client:2930",
+          "method": "POST",
+          "path_expression": "/api/runtimes/${runtimeId}/update",
+          "route": {
+            "method": "POST",
+            "path": "/api/runtimes/{runtimeId}/update"
+          }
+        }
+      ],
+      "this_method_calls": [
+        "fetch"
+      ],
+      "capability_gates": [],
+      "parsing": [],
+      "query_builders": [],
+      "pagination": "Single request only; no automatic page iteration.",
+      "transport_errors": "No local catch; shared transport errors and subsequent decoding errors propagate.",
+      "cloud_source_only": false
+    },
+    {
+      "method": "getUpdateResult",
+      "lines": [
+        2936,
+        2941
+      ],
+      "declaration": "implementation",
+      "source": "  async getUpdateResult(\n    runtimeId: string,\n    updateId: string,\n  ): Promise<RuntimeUpdate> {\n    return this.fetch(`/api/runtimes/${runtimeId}/update/${updateId}`);\n  }",
+      "requests": [
+        {
+          "line": 2940,
+          "source": "return this.fetch(`/api/runtimes/${runtimeId}/update/${updateId}`);",
+          "inventory": [
+            {
+              "id": "client:2940",
+              "method": "GET",
+              "path_expression": "/api/runtimes/${runtimeId}/update/${updateId}",
+              "route": {
+                "method": "GET",
+                "path": "/api/runtimes/{runtimeId}/update/{updateId}"
+              }
+            }
+          ],
+          "mapping_status": "exact request source-line match"
+        }
+      ],
+      "inventory": [
+        {
+          "id": "client:2940",
+          "method": "GET",
+          "path_expression": "/api/runtimes/${runtimeId}/update/${updateId}",
+          "route": {
+            "method": "GET",
+            "path": "/api/runtimes/{runtimeId}/update/{updateId}"
+          }
+        }
+      ],
+      "this_method_calls": [
+        "fetch"
+      ],
+      "capability_gates": [],
+      "parsing": [],
+      "query_builders": [],
+      "pagination": "Single request only; no automatic page iteration.",
+      "transport_errors": "No local catch; shared transport errors and subsequent decoding errors propagate.",
+      "cloud_source_only": false
+    },
+    {
+      "method": "initiateListModels",
+      "lines": [
+        2948,
+        2967
+      ],
+      "declaration": "implementation",
+      "source": "  async initiateListModels(\n    runtimeId: string,\n    options: { force?: boolean } = {},\n    workspaceSlug?: string,\n  ): Promise<RuntimeModelListRequest> {\n    const query = options.force === true ? \"?force=true\" : \"\";\n    const raw = await this.fetch<unknown>(\n      `/api/runtimes/${runtimeId}/models${query}`,\n      {\n        method: \"POST\",\n        headers: workspaceHeader(workspaceSlug),\n      },\n    );\n    return parseWithFallback<RuntimeModelListRequest>(\n      raw,\n      RuntimeModelListRequestSchema,\n      { ...MALFORMED_RUNTIME_MODEL_LIST_REQUEST, runtime_id: runtimeId },\n      { endpoint: \"POST /api/runtimes/{id}/models\" },\n    );\n  }",
+      "requests": [
+        {
+          "line": 2954,
+          "source": "const raw = await this.fetch<unknown>(",
+          "inventory": [
+            {
+              "id": "client:2954",
+              "method": "POST",
+              "path_expression": "/api/runtimes/${runtimeId}/models${query}",
+              "route": {
+                "method": "POST",
+                "path": "/api/runtimes/{runtimeId}/models"
+              }
+            }
+          ],
+          "mapping_status": "exact request source-line match"
+        }
+      ],
+      "inventory": [
+        {
+          "id": "client:2954",
+          "method": "POST",
+          "path_expression": "/api/runtimes/${runtimeId}/models${query}",
+          "route": {
+            "method": "POST",
+            "path": "/api/runtimes/{runtimeId}/models"
+          }
+        }
+      ],
+      "this_method_calls": [
+        "fetch"
+      ],
+      "capability_gates": [],
+      "parsing": [
+        "return parseWithFallback<RuntimeModelListRequest>(",
+        "RuntimeModelListRequestSchema,",
+        "{ ...MALFORMED_RUNTIME_MODEL_LIST_REQUEST, runtime_id: runtimeId },"
+      ],
+      "query_builders": [
+        "const query = options.force === true ? \"?force=true\" : \"\";"
+      ],
+      "pagination": "Single request only; no automatic page iteration.",
+      "transport_errors": "No local catch; shared transport errors and subsequent decoding errors propagate.",
+      "cloud_source_only": false
+    },
+    {
+      "method": "getListModelsResult",
+      "lines": [
+        2969,
+        2988
+      ],
+      "declaration": "implementation",
+      "source": "  async getListModelsResult(\n    runtimeId: string,\n    requestId: string,\n    workspaceSlug?: string,\n  ): Promise<RuntimeModelListRequest> {\n    const raw = await this.fetch<unknown>(\n      `/api/runtimes/${runtimeId}/models/${requestId}`,\n      { headers: workspaceHeader(workspaceSlug) },\n    );\n    return parseWithFallback<RuntimeModelListRequest>(\n      raw,\n      RuntimeModelListRequestSchema,\n      {\n        ...MALFORMED_RUNTIME_MODEL_LIST_REQUEST,\n        id: requestId,\n        runtime_id: runtimeId,\n      },\n      { endpoint: \"GET /api/runtimes/{id}/models/{requestId}\" },\n    );\n  }",
+      "requests": [
+        {
+          "line": 2974,
+          "source": "const raw = await this.fetch<unknown>(",
+          "inventory": [
+            {
+              "id": "client:2974",
+              "method": "GET",
+              "path_expression": "/api/runtimes/${runtimeId}/models/${requestId}",
+              "route": {
+                "method": "GET",
+                "path": "/api/runtimes/{runtimeId}/models/{requestId}"
+              }
+            }
+          ],
+          "mapping_status": "exact request source-line match"
+        }
+      ],
+      "inventory": [
+        {
+          "id": "client:2974",
+          "method": "GET",
+          "path_expression": "/api/runtimes/${runtimeId}/models/${requestId}",
+          "route": {
+            "method": "GET",
+            "path": "/api/runtimes/{runtimeId}/models/{requestId}"
+          }
+        }
+      ],
+      "this_method_calls": [
+        "fetch"
+      ],
+      "capability_gates": [],
+      "parsing": [
+        "return parseWithFallback<RuntimeModelListRequest>(",
+        "RuntimeModelListRequestSchema,",
+        "...MALFORMED_RUNTIME_MODEL_LIST_REQUEST,"
+      ],
+      "query_builders": [],
+      "pagination": "Single request only; no automatic page iteration.",
+      "transport_errors": "No local catch; shared transport errors and subsequent decoding errors propagate.",
+      "cloud_source_only": false
+    },
+    {
+      "method": "initiateListLocalSkills",
+      "lines": [
+        2990,
+        2996
+      ],
+      "declaration": "implementation",
+      "source": "  async initiateListLocalSkills(\n    runtimeId: string,\n  ): Promise<RuntimeLocalSkillListRequest> {\n    return this.fetch(`/api/runtimes/${runtimeId}/local-skills`, {\n      method: \"POST\",\n    });\n  }",
+      "requests": [
+        {
+          "line": 2993,
+          "source": "return this.fetch(`/api/runtimes/${runtimeId}/local-skills`, {",
+          "inventory": [
+            {
+              "id": "client:2993",
+              "method": "POST",
+              "path_expression": "/api/runtimes/${runtimeId}/local-skills",
+              "route": {
+                "method": "POST",
+                "path": "/api/runtimes/{runtimeId}/local-skills"
+              }
+            }
+          ],
+          "mapping_status": "exact request source-line match"
+        }
+      ],
+      "inventory": [
+        {
+          "id": "client:2993",
+          "method": "POST",
+          "path_expression": "/api/runtimes/${runtimeId}/local-skills",
+          "route": {
+            "method": "POST",
+            "path": "/api/runtimes/{runtimeId}/local-skills"
+          }
+        }
+      ],
+      "this_method_calls": [
+        "fetch"
+      ],
+      "capability_gates": [],
+      "parsing": [],
+      "query_builders": [],
+      "pagination": "Single request only; no automatic page iteration.",
+      "transport_errors": "No local catch; shared transport errors and subsequent decoding errors propagate.",
+      "cloud_source_only": false
+    },
+    {
+      "method": "getListLocalSkillsResult",
+      "lines": [
+        2998,
+        3003
+      ],
+      "declaration": "implementation",
+      "source": "  async getListLocalSkillsResult(\n    runtimeId: string,\n    requestId: string,\n  ): Promise<RuntimeLocalSkillListRequest> {\n    return this.fetch(`/api/runtimes/${runtimeId}/local-skills/${requestId}`);\n  }",
+      "requests": [
+        {
+          "line": 3002,
+          "source": "return this.fetch(`/api/runtimes/${runtimeId}/local-skills/${requestId}`);",
+          "inventory": [
+            {
+              "id": "client:3002",
+              "method": "GET",
+              "path_expression": "/api/runtimes/${runtimeId}/local-skills/${requestId}",
+              "route": {
+                "method": "GET",
+                "path": "/api/runtimes/{runtimeId}/local-skills/{requestId}"
+              }
+            }
+          ],
+          "mapping_status": "exact request source-line match"
+        }
+      ],
+      "inventory": [
+        {
+          "id": "client:3002",
+          "method": "GET",
+          "path_expression": "/api/runtimes/${runtimeId}/local-skills/${requestId}",
+          "route": {
+            "method": "GET",
+            "path": "/api/runtimes/{runtimeId}/local-skills/{requestId}"
+          }
+        }
+      ],
+      "this_method_calls": [
+        "fetch"
+      ],
+      "capability_gates": [],
+      "parsing": [],
+      "query_builders": [],
+      "pagination": "Single request only; no automatic page iteration.",
+      "transport_errors": "No local catch; shared transport errors and subsequent decoding errors propagate.",
+      "cloud_source_only": false
+    },
+    {
+      "method": "initiateImportLocalSkill",
+      "lines": [
+        3005,
+        3013
+      ],
+      "declaration": "implementation",
+      "source": "  async initiateImportLocalSkill(\n    runtimeId: string,\n    data: CreateRuntimeLocalSkillImportRequest,\n  ): Promise<RuntimeLocalSkillImportRequest> {\n    return this.fetch(`/api/runtimes/${runtimeId}/local-skills/import`, {\n      method: \"POST\",\n      body: JSON.stringify(data),\n    });\n  }",
+      "requests": [
+        {
+          "line": 3009,
+          "source": "return this.fetch(`/api/runtimes/${runtimeId}/local-skills/import`, {",
+          "inventory": [
+            {
+              "id": "client:3009",
+              "method": "POST",
+              "path_expression": "/api/runtimes/${runtimeId}/local-skills/import",
+              "route": {
+                "method": "POST",
+                "path": "/api/runtimes/{runtimeId}/local-skills/import"
+              }
+            }
+          ],
+          "mapping_status": "exact request source-line match"
+        }
+      ],
+      "inventory": [
+        {
+          "id": "client:3009",
+          "method": "POST",
+          "path_expression": "/api/runtimes/${runtimeId}/local-skills/import",
+          "route": {
+            "method": "POST",
+            "path": "/api/runtimes/{runtimeId}/local-skills/import"
+          }
+        }
+      ],
+      "this_method_calls": [
+        "fetch"
+      ],
+      "capability_gates": [],
+      "parsing": [],
+      "query_builders": [],
+      "pagination": "Single request only; no automatic page iteration.",
+      "transport_errors": "No local catch; shared transport errors and subsequent decoding errors propagate.",
+      "cloud_source_only": false
+    },
+    {
+      "method": "getImportLocalSkillResult",
+      "lines": [
+        3015,
+        3020
+      ],
+      "declaration": "implementation",
+      "source": "  async getImportLocalSkillResult(\n    runtimeId: string,\n    requestId: string,\n  ): Promise<RuntimeLocalSkillImportRequest> {\n    return this.fetch(`/api/runtimes/${runtimeId}/local-skills/import/${requestId}`);\n  }",
+      "requests": [
+        {
+          "line": 3019,
+          "source": "return this.fetch(`/api/runtimes/${runtimeId}/local-skills/import/${requestId}`);",
+          "inventory": [
+            {
+              "id": "client:3019",
+              "method": "GET",
+              "path_expression": "/api/runtimes/${runtimeId}/local-skills/import/${requestId}",
+              "route": {
+                "method": "GET",
+                "path": "/api/runtimes/{runtimeId}/local-skills/import/{requestId}"
+              }
+            }
+          ],
+          "mapping_status": "exact request source-line match"
+        }
+      ],
+      "inventory": [
+        {
+          "id": "client:3019",
+          "method": "GET",
+          "path_expression": "/api/runtimes/${runtimeId}/local-skills/import/${requestId}",
+          "route": {
+            "method": "GET",
+            "path": "/api/runtimes/{runtimeId}/local-skills/import/{requestId}"
+          }
+        }
+      ],
+      "this_method_calls": [
+        "fetch"
+      ],
+      "capability_gates": [],
+      "parsing": [],
+      "query_builders": [],
+      "pagination": "Single request only; no automatic page iteration.",
+      "transport_errors": "No local catch; shared transport errors and subsequent decoding errors propagate.",
+      "cloud_source_only": false
+    }
+  ],
+  "helper_gaps": [],
+  "root_review": {
+    "status": "accepted_bounded_wrapper_section",
+    "checks": [
+      "Current source hash and all exact inventory tuple values verified",
+      "Independent runtime mutation and confirmation wrapper source sample",
+      "Named parser and runtime-switch fallback helper bodies read and classified"
+    ],
+    "limits": "No whole-client or backend support claim; third-party schema internals excluded."
+  },
+  "root_helper_review": {
+    "sources": [
+      {
+        "path": "packages/core/runtimes/qoder-schema.ts",
+        "sha256": "9461ab197848f308d95d54906a903dd51b04294de69eba54a7bf41a28069bca2"
+      },
+      {
+        "path": "packages/core/api/schemas.ts",
+        "sha256": "f75704eeb37705c0f72b4bd89ff89e848289f3fe7cee154b9bed7ff280be674d"
+      }
+    ],
+    "effects": [
+      "parseQoderConnection validates/transforms fields with declared safe fallback through parseWithFallback; logging seam inherited, no new request",
+      "parseQoderCatalog returns validated items or empty list, no new request",
+      "agentBuilderRuntimeSwitchFallback returns requested runtime id object only"
+    ]
+  }
+}

@@ -1,7 +1,7 @@
 /** A Telegram bot installation bound to a single Workpal agent.
  *
  * Wire shape mirrors `TelegramInstallationResponse` in
- * `server/internal/handler/telegram.go`. New fields the backend adds in the
+ * `server/go/internal/handler/telegram.go`. New fields the backend adds in the
  * future MUST default to optional so older desktop builds keep parsing the
  * response — see CLAUDE.md → API Compatibility. */
 export interface TelegramInstallation {

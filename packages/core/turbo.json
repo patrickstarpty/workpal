@@ -4,7 +4,7 @@
     "test": {
       "inputs": [
         "$TURBO_DEFAULT$",
-        "$TURBO_ROOT$/server/internal/handler/testdata/quick_action_bodies.json"
+        "$TURBO_ROOT$/server/go/internal/handler/testdata/quick_action_bodies.json"
       ]
     }
   }

@@ -340,7 +340,7 @@ describe("RuntimeProfilesDialog", () => {
       screen.getByRole("link", { name: "View setup guide" }),
     ).toHaveAttribute(
       "href",
-      "https://workpal.invalid/docs/daemon-runtimes#custom-runtime-profiles",
+      "http://127.0.0.1:4000/docs/daemon-runtimes#custom-runtime-profiles",
     );
     expect(screen.getByText("Step 1 of 2")).toBeInTheDocument();
     expect(

@@ -133,7 +133,7 @@ export interface IssueRelationContext {
 /**
  * Filter value that selects issues where a custom property is UNSET ("No
  * value"). Mirrors the backend sentinel in `parsePropertiesFilterParam`
- * (`server/internal/handler/property.go`); cannot collide with a real option id
+ * (`server/go/internal/handler/property.go`); cannot collide with a real option id
  * (select options are UUIDs, checkbox uses "true"/"false").
  */
 export const NO_PROPERTY_VALUE = PROPERTY_FILTER_NONE_VALUE;
@@ -141,7 +141,7 @@ export const NO_PROPERTY_VALUE = PROPERTY_FILTER_NONE_VALUE;
 /**
  * Match one stored value against one operator filter member. Mirrors the
  * server-side operator predicates in `parsePropertiesFilterParam`
- * (`server/internal/handler/property.go`):
+ * (`server/go/internal/handler/property.go`):
  *
  * - `contains` is a case-insensitive substring test over stored strings only
  *   (the server's guarded `ILIKE '%…%'`), so "Foo" and "foo" agree.

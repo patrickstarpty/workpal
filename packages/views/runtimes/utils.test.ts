@@ -491,7 +491,7 @@ describe("estimateCost", () => {
     // reasoning dial, not a different SKU, so both price at the base model's
     // tier — but only under the antigravity provider (the scoping stays
     // pinned by "keeps Cursor variant stripping scoped to Cursor rows"),
-    // mirroring priceForAntigravityModel in server/internal/metrics/pricing.go.
+    // mirroring priceForAntigravityModel in server/go/internal/metrics/pricing.go.
     const cost = (model: string) =>
       estimateCost({
         ...zeroUsage, provider: "antigravity", model,
@@ -613,7 +613,7 @@ describe("estimateCost", () => {
     // Dash-normalized 5.6 ids must also miss: the real Codex slug is dotted
     // (`gpt-5.6-luna`) and this resolver does NOT dash-normalize non-claude
     // ids, so a dashed variant surfaces as unmapped — matching the backend's
-    // literal-dot alias in server/internal/metrics/pricing.go (MUL-4347).
+    // literal-dot alias in server/go/internal/metrics/pricing.go (MUL-4347).
     expect(isModelPriced("gpt-5-6-luna")).toBe(false);
     expect(isModelPriced("gpt-5-6-sol")).toBe(false);
     expect(isModelPriced("gpt-6-astra")).toBe(true);
@@ -1098,7 +1098,7 @@ describe("estimateCost", () => {
       { ...zeroUsage, provider: "claude", model: "glm-5.3-flash", input_tokens: 1 },
     ])).toEqual([]);
     // Unknown suffixed variants stay unmapped, matching the anchored
-    // backend rules in server/internal/metrics/pricing.go.
+    // backend rules in server/go/internal/metrics/pricing.go.
     for (const model of ["glm-5.3-flashx", "glm-5.3-fast", "glm-5.3-extra"]) {
       expect(isModelPriced(model), model).toBe(false);
     }

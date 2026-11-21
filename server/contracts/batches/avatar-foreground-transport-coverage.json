@@ -1,0 +1,225 @@
+{
+  "version": 1,
+  "scope": [
+    "packages/views/common/avatar-crop-dialog.tsx",
+    "packages/views/common/avatar-upload-control.tsx",
+    "packages/views/common/text-avatar-dialog.tsx",
+    "packages/views/common/text-avatar.ts",
+    "packages/views/common/use-app-foreground.ts",
+    "packages/views/common/task-transcript/transcript-button.tsx",
+    "packages/views/common/avatar-crop.ts",
+    "packages/core/workspace/avatar-url.ts",
+    "packages/core/hooks/use-file-upload.ts"
+  ],
+  "coverage": {
+    "complete": false,
+    "global_frontend_complete": false,
+    "description": "Whole target bodies read; bounded supporting callbacks read; root review pending."
+  },
+  "files": [
+    {
+      "path": "packages/views/common/avatar-crop-dialog.tsx",
+      "sha256": "6702e3f84fd09ba589269a4d6d4739021c516fd5637e0eae34b7f34f6cea055f",
+      "whole_source": true
+    },
+    {
+      "path": "packages/views/common/avatar-upload-control.tsx",
+      "sha256": "ba4303abc3fb61c3b7e9db174fdf4be6e8ae02f9bcdeff2f0998425735ac7efa",
+      "whole_source": true
+    },
+    {
+      "path": "packages/views/common/text-avatar-dialog.tsx",
+      "sha256": "5f63356dc156ef44c8c1213e8d8f21ac30a0e3b27f09ae8297aea2b4a894c424",
+      "whole_source": true
+    },
+    {
+      "path": "packages/views/common/text-avatar.ts",
+      "sha256": "921bb5ebded14d5c464dfc8d2cd46a5d48d0fe4e0f398f3b184ddec3e8d74f79",
+      "whole_source": true
+    },
+    {
+      "path": "packages/views/common/use-app-foreground.ts",
+      "sha256": "84d2cccc987d0ac083bf75e0559c9a3819754f6c78097f0f9cc99df520807ece",
+      "whole_source": true
+    },
+    {
+      "path": "packages/views/common/task-transcript/transcript-button.tsx",
+      "sha256": "107263fefbacfe7140f9c830a8effd4e2d595cd70492c2324aeaf2ddf0b93b88",
+      "whole_source": true
+    },
+    {
+      "path": "packages/views/common/avatar-crop.ts",
+      "sha256": "6e9fbcacba1be6c5daf95df63a8028860f7fdaa6945141dd900d5bc80a0a35fd",
+      "whole_source": false
+    },
+    {
+      "path": "packages/core/workspace/avatar-url.ts",
+      "sha256": "293b4ea5130a2abe9112f33c6452464b8eceae119d49883ce4c7fbbdc16d84e7",
+      "whole_source": false
+    },
+    {
+      "path": "packages/core/hooks/use-file-upload.ts",
+      "sha256": "82ab928c6b762acc38c70b1a264bd9a5cafd62846ff27dafbb0bc65d8d5adf24",
+      "whole_source": false
+    }
+  ],
+  "edges": [
+    {
+      "source": "packages/views/common/avatar-upload-control.tsx:208",
+      "api_method": "uploadFile",
+      "inventory": [
+        {
+          "id": "client:4078",
+          "method": "POST",
+          "path_expression": "`${this.baseUrl}/api/upload-file`",
+          "route": {
+            "method": "POST",
+            "path": "/api/upload-file"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/views/settings/components/account-tab.tsx:118",
+      "api_method": "updateMe",
+      "inventory": [
+        {
+          "id": "client:1267",
+          "method": "PATCH",
+          "path_expression": "/api/me",
+          "route": {
+            "method": "PATCH",
+            "path": "/api/me"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/views/settings/components/workspace-tab.tsx:343",
+      "api_method": "updateWorkspace",
+      "inventory": [
+        {
+          "id": "client:3416",
+          "method": "PATCH",
+          "path_expression": "/api/workspaces/${id}",
+          "route": {
+            "method": "PATCH",
+            "path": "/api/workspaces/{id}"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/views/agents/components/agent-detail-page.tsx:271",
+      "api_method": "updateAgent",
+      "inventory": [
+        {
+          "id": "client:2191",
+          "method": "PUT",
+          "path_expression": "/api/agents/${id}",
+          "route": {
+            "method": "PUT",
+            "path": "/api/agents/{id}"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/views/squads/components/squad-detail-page.tsx:182",
+      "api_method": "updateSquad",
+      "inventory": [
+        {
+          "id": "client:5233",
+          "method": "PUT",
+          "path_expression": "/api/squads/${id}",
+          "route": {
+            "method": "PUT",
+            "path": "/api/squads/{id}"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/views/modals/create-squad.tsx:97",
+      "api_method": "createSquad",
+      "inventory": [
+        {
+          "id": "client:5226",
+          "method": "POST",
+          "path_expression": "/api/squads",
+          "route": {
+            "method": "POST",
+            "path": "/api/squads"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/views/agents/create/use-create-agent-submit.ts:82",
+      "api_method": "createAgent",
+      "inventory": [
+        {
+          "id": "client:2075",
+          "method": "POST",
+          "path_expression": "/api/agents",
+          "route": {
+            "method": "POST",
+            "path": "/api/agents"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/views/common/task-transcript/transcript-button.tsx:152",
+      "api_method": "listTaskMessages",
+      "inventory": [
+        {
+          "id": "client:3095",
+          "method": "GET",
+          "path_expression": "/api/tasks/${taskId}/messages",
+          "route": {
+            "method": "GET",
+            "path": "/api/tasks/{taskId}/messages"
+          }
+        }
+      ]
+    }
+  ],
+  "reused_evidence": [
+    {
+      "path": "server/contracts/batches/draft-attachment-transport-coverage.json",
+      "sha256": "496e9ff6f30b545e289ae4212951f2134b359510b0c4797621d7dc1889ef80e3"
+    },
+    {
+      "path": "server/contracts/batches/editor-transport-coverage.json",
+      "sha256": "1f941073efbfc5c5af384ed41e903a815ea8a373f29cf67a1d1228cbadcf1045"
+    }
+  ],
+  "unresolved_edges": [
+    {
+      "id": "E1",
+      "source": "packages/views/common/use-app-foreground.ts:72",
+      "boundary": "window.desktopAPI.getWindowForeground/onWindowForegroundChanged are injected native methods; no implementation found under apps/packages. No HTTP route or backend support inferred."
+    },
+    {
+      "id": "E2",
+      "source": "packages/views/common/avatar-upload-control.tsx:286",
+      "boundary": "img src is resolved raw value: relative API base, absolute remote, data or blob URL. Browser resource request and redirects depend on value; no fixed download endpoint inferred."
+    },
+    {
+      "id": "E3",
+      "source": "packages/views/common/task-transcript/transcript-button.tsx:216",
+      "boundary": "AgentTranscriptDialog downstream rendering/actions and supplied headerSlot remain outside this bounded button audit; no exhaustive descendant transport claim."
+    },
+    {
+      "id": "E4",
+      "source": "packages/views/common/avatar-upload-control.tsx:208",
+      "boundary": "Arbitrary replacement onUploaded/onEmojiSelected/onClear callbacks remain caller-defined; finite production persistence paths listed. Query invalidation fanout not exhaustively enumerated."
+    }
+  ],
+  "semantics": [
+    "Static source evidence only; no backend support assertion. Standard React, canvas, File, Blob and browser resource APIs terminate tracing.",
+    "Native injections and external resource origins are unsupported integration boundaries; no model execution."
+  ],
+  "parent_review": "Accepted bounded six-target transport evidence. Native injection and dynamic browser resources stay explicit boundaries; descendant renderer is outside button scope. Confirmed account/workspace persistence callbacks swallow errors, allowing false success toast; separate runtime correction required."
+}

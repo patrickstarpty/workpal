@@ -84,7 +84,7 @@ export function attachmentIdFromDownloadURL(rawURL: string): string | undefined 
 }
 
 // Storage object path the upload handler writes for workspace files:
-// `workspaces/<workspace-id>/<attachment-id><ext>` (server/internal/handler/file.go
+// `workspaces/<workspace-id>/<attachment-id><ext>` (server/go/internal/handler/file.go
 // uses the attachment id as the object name).
 const UUID_PATTERN = "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}";
 const WORKSPACE_STORAGE_PATH_RE = new RegExp(

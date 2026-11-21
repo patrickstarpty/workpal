@@ -1,0 +1,165 @@
+{
+  "version": 1,
+  "status": "current-source refresh complete; root review pending",
+  "historical_identity_claim": false,
+  "global_coverage_claim": false,
+  "backend_completion_claim": false,
+  "files": [
+    {
+      "path": "apps/web/proxy.ts",
+      "sha256": "2a25fa333d06a4ffc4a460194e1b0206ebec6ecbf1a5bb65a7cf927d43037a81",
+      "whole_source": true,
+      "reviewed_ranges": [
+        [
+          1,
+          100
+        ],
+        [
+          101,
+          175
+        ]
+      ],
+      "disposition": "Routing boundary: runtimeRewriteDestination selects destination outside this body; rewrite preserves incoming query. NextResponse rewrite forwards a resource request; redirect causes browser navigation, not a fetch issued here. Locale header/cookie reads and URL manipulation are local. Matcher explicitly includes /v1, /api except upload-file subtree, /auth, /docs, /ws; helper support alone does not prove matcher activation (notably /health). Legacy redirects use session/slug cookies; missing slug clears query; root redirect excludes official marketing host. No wildcard backend endpoint mapping asserted."
+    },
+    {
+      "path": "packages/core/analytics/exception-dedupe.ts",
+      "sha256": "5f48cbc3bb9cbcc64f3753b126602299e86dec008add952b6dbdbc5c48aa7242",
+      "whole_source": true,
+      "reviewed_ranges": [
+        [
+          1,
+          100
+        ],
+        [
+          101,
+          193
+        ]
+      ],
+      "disposition": "Local exception fingerprint and sessionStorage read/JSON/write only. First three retained per fingerprint; cap 50 fingerprints; unavailable/corrupt storage and write failures keep events. Last stack frame fields and filenames are text, never requested. Returns a drop decision to caller; no transport."
+    },
+    {
+      "path": "packages/core/analytics/index.ts",
+      "sha256": "c8f89eb97ee538a3168787f873702d35bea36696a50cfebf6014faebfb01538a",
+      "whole_source": true,
+      "reviewed_ranges": [
+        [
+          1,
+          100
+        ],
+        [
+          101,
+          200
+        ],
+        [
+          201,
+          300
+        ],
+        [
+          301,
+          400
+        ],
+        [
+          401,
+          451
+        ]
+      ],
+      "disposition": "SDK interface boundary: browser and nonempty key gate init; initialized instance reused. host is config.host or https://us.i.posthog.com, potentially same-origin. posthog.init/identify/capture/captureException delegate possible traffic; methods, paths, assets and delivery are SDK-owned and not enumerated. before_send drops benign exceptions then redacts and dedupes; exceptions enabled, automatic pageviews/clicks/heatmaps, recordings and surveys disabled. Pending identity/operations and properties are local; reset/register manage SDK state, not independently proven requests. onCaptured runs after capture handoff, not delivery; sendInstantly is an SDK option. /api/config and /api/me occur only in comments here. Signup UTM/referrer-origin parsing and bounded 30-day SameSite=Lax cookie write are local; no referrer fetch."
+    },
+    {
+      "path": "packages/views/runtimes/components/update-section.tsx",
+      "sha256": "b08c679773b22d6ebab5aa584bcfd0c5780db58861e18d119a9fe69512954ef1",
+      "whole_source": true,
+      "reviewed_ranges": [
+        [
+          1,
+          100
+        ],
+        [
+          101,
+          200
+        ],
+        [
+          201,
+          300
+        ],
+        [
+          301,
+          321
+        ]
+      ],
+      "disposition": "Browser GET literal https://code-host.invalid/api/workpal/releases/latest with Accept header; non-OK/errors return null; nonempty cached tag reused for ten minutes. Mount fetch applies even managed/read-only/offline. initiateUpdate and getUpdateResult cross injected api boundary; exact inventory tuples below. Handler requires latestVersion/runtimeId; primary button additionally newer parseable release, online, unmanaged and no status; retry calls same handler. Poll every 2000ms after initiation; completion/failure/timeout and unmount clean interval; poll errors ignored. Version comparison, React state, timers and completion callback are local. Prop version change can mark completion without poll delivery; no binary download here."
+    }
+  ],
+  "edges": [
+    {
+      "source": "packages/views/runtimes/components/update-section.tsx:169",
+      "inventory": [
+        {
+          "id": "client:2930",
+          "method": "POST",
+          "path_expression": "/api/runtimes/${runtimeId}/update",
+          "route": {
+            "method": "POST",
+            "path": "/api/runtimes/{runtimeId}/update"
+          }
+        }
+      ],
+      "disposition": "Existing pending-reconciliation backend API edge; no endpoint implementation or authorization validation claimed."
+    },
+    {
+      "source": "packages/views/runtimes/components/update-section.tsx:173",
+      "inventory": [
+        {
+          "id": "client:2940",
+          "method": "GET",
+          "path_expression": "/api/runtimes/${runtimeId}/update/${updateId}",
+          "route": {
+            "method": "GET",
+            "path": "/api/runtimes/{runtimeId}/update/{updateId}"
+          }
+        }
+      ],
+      "disposition": "Existing pending-reconciliation backend API edge; no endpoint implementation or authorization validation claimed."
+    },
+    {
+      "source": "apps/web/proxy.ts",
+      "inventory": [],
+      "disposition": "NextResponse routing/forwarding; no invented inventory mapping. See file disposition."
+    },
+    {
+      "source": "packages/core/analytics/exception-dedupe.ts",
+      "inventory": [],
+      "disposition": "local storage decision; no invented inventory mapping. See file disposition."
+    },
+    {
+      "source": "packages/core/analytics/index.ts",
+      "inventory": [],
+      "disposition": "PostHog SDK interface; no invented inventory mapping. See file disposition."
+    },
+    {
+      "source": "packages/views/runtimes/components/update-section.tsx",
+      "inventory": [],
+      "disposition": "literal browser release GET; no invented inventory mapping. See file disposition."
+    }
+  ],
+  "evidence_inspected": [
+    "server/contracts/batches/external-transport-coverage.md",
+    "server/contracts/batches/external-transport-coverage.json (relevant entries)",
+    "server/contracts/batches/transport-proof-pointer-reconciliation.md (target entries)",
+    "server/contracts/frontend-calls.json (client:2930 and client:2940)"
+  ],
+  "remaining_scope": [
+    "No target source ranges remain unread.",
+    "Root review pending.",
+    "SDK-owned endpoints, auxiliary browser resources and delivery remain unenumerated; no recursive third-party audit.",
+    "Environment-selected proxy backend/docs destinations and injected ApiClient base URL, dynamic IDs, endpoint auth/implementation remain unresolved concrete application edges; prior helper dispositions reused, not refreshed helper-body proof.",
+    "External release availability, response shape/redirect chain and runtime update execution are unverified."
+  ],
+  "validation": "JSON parsed; all four current SHA-256 hashes and continuous bounded reviewed ranges checked; both inventory tuples compared exactly. Static artifact validation only; no runtime/tests/network/model/integration calls.",
+  "root_review": {
+    "status": "accepted bounded current-source refresh",
+    "verification": "Checked 4 current source hashes, complete range partitions and 2 exact tuple occurrences.",
+    "review_scope": "Read all artifact dispositions and critical source excerpts for proxy forwarding, editor submission, preview prefetch, download selection and runtime polling. Full-body reads attributed to implementer.",
+    "limits": "No runtime, downstream exhaustive coverage, historical byte identity or backend support claim."
+  }
+}

@@ -433,7 +433,7 @@ curl -s localhost:8080/readyz
 
 Toute réponse autre qu'un HTTP 200 avec les deux vérifications à `ok` signifie que la nouvelle version n'a pas terminé ses migrations ; consultez les journaux du backend avant de lui envoyer du trafic.
 
-`/health` est une sonde de **vivacité** (liveness) : elle renvoie `{"status":"ok"}` tant que le processus tourne, y compris lorsque les migrations ont échoué. `/readyz` (`readyHandler`, enregistré dans `server/cmd/server/router.go` ; `/healthz` en est un alias) vérifie la base de données et l'ensemble des migrations appliquées : c'est donc elle qui détecte une mise à niveau ratée.
+`/health` est une sonde de **vivacité** (liveness) : elle renvoie `{"status":"ok"}` tant que le processus tourne, y compris lorsque les migrations ont échoué. `/readyz` (`readyHandler`, enregistré dans `server/go/cmd/server/router.go` ; `/healthz` en est un alias) vérifie la base de données et l'ensemble des migrations appliquées : c'est donc elle qui détecte une mise à niveau ratée.
 
 </Step>
 </Steps>

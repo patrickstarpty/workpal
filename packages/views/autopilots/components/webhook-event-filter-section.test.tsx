@@ -184,11 +184,11 @@ describe("WebhookEventFilterSection", () => {
   it.each([
     [
       "zh-Hans",
-      `https://workpal.invalid/docs/zh/autopilots#${encodeURIComponent("事件过滤")}`,
+      `http://127.0.0.1:4000/docs/zh/autopilots#${encodeURIComponent("事件过滤")}`,
     ],
     [
       "zh-Hant",
-      `https://workpal.invalid/docs/zh-Hant/autopilots#${encodeURIComponent("事件過濾")}`,
+      `http://127.0.0.1:4000/docs/zh-Hant/autopilots#${encodeURIComponent("事件過濾")}`,
     ],
   ] as const)("links the %s event filter docs section", (locale, href) => {
     renderEditor({}, locale);

@@ -118,7 +118,7 @@ export interface IssueCreatedPayload {
 export interface IssueUpdatedPayload {
   issue: Issue;
   // The server stamps issue:updated with which fields actually changed
-  // (server/internal/handler/issue.go publish). assignee_changed lets the
+  // (server/go/internal/handler/issue.go publish). assignee_changed lets the
   // realtime layer keep filtered myList caches in place on a non-membership
   // change instead of refetching; status_changed lets it reconcile board column
   // counts when a status change lands on an off-screen (unloaded) issue;

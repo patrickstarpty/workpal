@@ -1,0 +1,150 @@
+{
+  "batch": "onboarding",
+  "status": "source-derived; implementation and parity tests pending",
+  "method": "PATCH",
+  "path": "/api/me/onboarding",
+  "sources": [
+    "server/go/cmd/server/router.go:1766",
+    "server/go/cmd/server/router.go:1784",
+    "server/go/internal/handler/onboarding.go:130",
+    "server/go/internal/handler/onboarding.go:146",
+    "server/go/internal/handler/onboarding.go:172",
+    "server/go/internal/handler/onboarding.go:226",
+    "server/go/pkg/db/queries/user.sql:55",
+    "server/go/internal/handler/auth.go:67",
+    "server/go/internal/handler/auth.go:96",
+    "server/go/internal/middleware/auth.go:59",
+    "server/go/internal/auth/cookie.go:362",
+    "server/go/internal/handler/handler.go:941",
+    "server/src/workpal_backend/auth/models.py:5",
+    "server/src/workpal_backend/auth/profile.py:11",
+    "server/src/workpal_backend/workspaces/service.py:26",
+    "server/src/workpal_backend/workspaces/invitations.py:10",
+    "server/src/workpal_backend/auth/dependencies.py:14"
+  ],
+  "fixtures": [
+    {
+      "raw_body": "{}",
+      "status": 200,
+      "error": null
+    },
+    {
+      "raw_body": "null",
+      "status": 200,
+      "error": null
+    },
+    {
+      "raw_body": "{\"unknown\":1}",
+      "status": 200,
+      "error": null
+    },
+    {
+      "raw_body": "{\"questionnaire\":null}",
+      "status": 200,
+      "error": null
+    },
+    {
+      "raw_body": "{\"questionnaire\":{}}",
+      "status": 200,
+      "error": null
+    },
+    {
+      "raw_body": "{\"questionnaire\":42}",
+      "status": 200,
+      "error": null
+    },
+    {
+      "raw_body": "{\"questionnaire\":[]}",
+      "status": 200,
+      "error": null
+    },
+    {
+      "raw_body": "{\"questionnaire\":\"text\"}",
+      "status": 200,
+      "error": null
+    },
+    {
+      "raw_body": "{\"questionnaire\":false}",
+      "status": 200,
+      "error": null
+    },
+    {
+      "raw_body": "{\"questionnaire\":{\"role\":7}}",
+      "status": 200,
+      "error": null
+    },
+    {
+      "raw_body": "{\"questionnaire\":{\"version\":2,\"role\":\"engineer\",\"use_case\":[\"coding\"]}}",
+      "status": 200,
+      "error": null
+    },
+    {
+      "raw_body": "{\"questionnaire\":{\"role\":\"a\"},\"questionnaire\":{\"use_case\":\"b\"}}",
+      "status": 200,
+      "error": null
+    },
+    {
+      "raw_body": "{\"questionnaire\":{},\"questionnaire\":null}",
+      "status": 200,
+      "error": null
+    },
+    {
+      "raw_body": "{} {}",
+      "status": 200,
+      "error": null
+    },
+    {
+      "raw_body": "",
+      "status": 400,
+      "error": "invalid request body"
+    },
+    {
+      "raw_body": "[]",
+      "status": 400,
+      "error": "invalid request body"
+    },
+    {
+      "raw_body": "42",
+      "status": 400,
+      "error": "invalid request body"
+    },
+    {
+      "raw_body": "\"text\"",
+      "status": 400,
+      "error": "invalid request body"
+    },
+    {
+      "raw_body": "{\"questionnaire\":",
+      "status": 400,
+      "error": "invalid request body"
+    }
+  ],
+  "fixture_preconditions": "Existing authenticated user, successful SQL, questionnaire initially {\"old\":true}; each success changes updated_at. null/absent preserves; non-null replaces entire value. See Markdown for response and transitions.",
+  "events": {
+    "disposition": "none",
+    "producer": "Handler.PatchOnboarding",
+    "event_type": null,
+    "payload": null,
+    "scope": null,
+    "transaction_boundary": "GetUser then standalone UPDATE RETURNING; analytics after update; no explicit transaction or outbox",
+    "consumer": null,
+    "evidence": [
+      "server/go/internal/handler/onboarding.go:226-310",
+      "server/go/pkg/db/queries/user.sql:55-64"
+    ],
+    "tests": "planned: no business outbox on success, rejection or SQL error; analytics transition fixtures separately"
+  },
+  "sql_errors": [
+    {
+      "stage": "GetUser",
+      "status": null,
+      "error": null,
+      "behavior": "ignored; before defaults to {}"
+    },
+    {
+      "stage": "PatchUserOnboarding including missing row",
+      "status": 500,
+      "error": "failed to update onboarding"
+    }
+  ]
+}

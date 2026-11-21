@@ -14,7 +14,7 @@ release:
 builds:
   - id: workpal
     main: ./cmd/workpal
-    dir: server
+    dir: server/go
     binary: workpal
     ldflags:
       - -s -w

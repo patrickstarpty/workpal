@@ -1,0 +1,485 @@
+{
+  "version": 1,
+  "status": "Current bounded static source review; root review pending",
+  "root_review": "Accepted bounded current-source scope after independent source/hash/tuple review and missing concrete member query repair; no runtime/backend claim",
+  "backend_claim": false,
+  "scope": "Five own-source wrapper bodies only; no descendant or third-party recursion",
+  "files": [
+    {
+      "path": "packages/core/billing/workspace-subscription-queries.ts",
+      "sha256": "d0c3b13dcf95d305aa4764a3a0ffccd386c27ee0c20b3aa0b9170f3aef505211",
+      "whole_source": true,
+      "read_chunks": [
+        [
+          1,
+          73
+        ]
+      ]
+    },
+    {
+      "path": "packages/core/projects/access.ts",
+      "sha256": "78d5cc2755994b52e80503a18df666c82fa811bff6a329ad0f03b3ec64678bb6",
+      "whole_source": true,
+      "read_chunks": [
+        [
+          1,
+          84
+        ]
+      ]
+    },
+    {
+      "path": "packages/core/whats-new/index.ts",
+      "sha256": "0b96227f08ed4be6e5b406e273461571a273f509173a525b8af457095fdd7531",
+      "whole_source": true,
+      "read_chunks": [
+        [
+          1,
+          97
+        ]
+      ]
+    },
+    {
+      "path": "packages/core/star-prompt/index.ts",
+      "sha256": "2ba31a80a5127999751eb34546850dd6d87ebc9b3347e8422434da579ad19ec5",
+      "whole_source": true,
+      "read_chunks": [
+        [
+          1,
+          100
+        ],
+        [
+          101,
+          119
+        ]
+      ]
+    },
+    {
+      "path": "packages/views/agents/create/use-builder-draft-sync.ts",
+      "sha256": "797ea55cf8f152e9fae7223a7c696dfdb42fbd0b0de4e20cc95ef20a51311c97",
+      "whole_source": true,
+      "read_chunks": [
+        [
+          1,
+          100
+        ],
+        [
+          101,
+          137
+        ]
+      ]
+    },
+    {
+      "path": "packages/core/projects/queries.ts",
+      "sha256": "39315862d7770c602ebfda690e8dc691b6732cd833a36975a8638ba3ff25a0d6",
+      "whole_source": true,
+      "review": "root full supporting query factory source read"
+    }
+  ],
+  "edges": [
+    {
+      "path": "packages/core/billing/workspace-subscription-queries.ts",
+      "line": 33,
+      "callee": "api.getWorkspaceSubscriptionSummary",
+      "method": "getWorkspaceSubscriptionSummary",
+      "import_binding_verified": true,
+      "resolution": "current client method range",
+      "method_reference_inventory": [
+        {
+          "id": "client:2463",
+          "method": "GET",
+          "path_expression": "/api/cloud-subscriptions/summary",
+          "route": {
+            "method": "GET",
+            "path": "/api/cloud-subscriptions/summary"
+          }
+        }
+      ],
+      "inventory": [
+        {
+          "id": "client:2463",
+          "method": "GET",
+          "path_expression": "/api/cloud-subscriptions/summary",
+          "route": {
+            "method": "GET",
+            "path": "/api/cloud-subscriptions/summary"
+          }
+        }
+      ]
+    },
+    {
+      "path": "packages/core/billing/workspace-subscription-queries.ts",
+      "line": 66,
+      "callee": "api.getWorkspaceSubscriptionPrices",
+      "method": "getWorkspaceSubscriptionPrices",
+      "import_binding_verified": true,
+      "resolution": "current client method range",
+      "method_reference_inventory": [
+        {
+          "id": "client:2473",
+          "method": "GET",
+          "path_expression": "/api/cloud-subscriptions/prices",
+          "route": {
+            "method": "GET",
+            "path": "/api/cloud-subscriptions/prices"
+          }
+        }
+      ],
+      "inventory": [
+        {
+          "id": "client:2473",
+          "method": "GET",
+          "path_expression": "/api/cloud-subscriptions/prices",
+          "route": {
+            "method": "GET",
+            "path": "/api/cloud-subscriptions/prices"
+          }
+        }
+      ]
+    },
+    {
+      "path": "packages/core/projects/access.ts",
+      "line": 72,
+      "callee": "api.updateProject",
+      "method": "updateProject",
+      "import_binding_verified": true,
+      "resolution": "current client method range",
+      "method_reference_inventory": [
+        {
+          "id": "client:4537",
+          "method": "PUT",
+          "path_expression": "/api/projects/${id}",
+          "route": {
+            "method": "PUT",
+            "path": "/api/projects/{id}"
+          }
+        }
+      ],
+      "inventory": [
+        {
+          "id": "client:4537",
+          "method": "PUT",
+          "path_expression": "/api/projects/${id}",
+          "route": {
+            "method": "PUT",
+            "path": "/api/projects/{id}"
+          }
+        }
+      ]
+    },
+    {
+      "path": "packages/core/projects/access.ts",
+      "line": 74,
+      "callee": "api.addProjectMembers",
+      "method": "addProjectMembers",
+      "import_binding_verified": true,
+      "resolution": "current client method range",
+      "method_reference_inventory": [
+        {
+          "id": "client:4587",
+          "method": "POST",
+          "path_expression": "/api/projects/${id}/members",
+          "route": {
+            "method": "POST",
+            "path": "/api/projects/{id}/members"
+          }
+        }
+      ],
+      "inventory": [
+        {
+          "id": "client:4587",
+          "method": "POST",
+          "path_expression": "/api/projects/${id}/members",
+          "route": {
+            "method": "POST",
+            "path": "/api/projects/{id}/members"
+          }
+        }
+      ]
+    },
+    {
+      "path": "packages/core/projects/access.ts",
+      "line": 76,
+      "callee": "api.removeProjectMember",
+      "method": "removeProjectMember",
+      "import_binding_verified": true,
+      "resolution": "current client method range",
+      "method_reference_inventory": [
+        {
+          "id": "client:4596",
+          "method": "DELETE",
+          "path_expression": "/api/projects/${id}/members/${userId}",
+          "route": {
+            "method": "DELETE",
+            "path": "/api/projects/{id}/members/{userId}"
+          }
+        }
+      ],
+      "inventory": [
+        {
+          "id": "client:4596",
+          "method": "DELETE",
+          "path_expression": "/api/projects/${id}/members/${userId}",
+          "route": {
+            "method": "DELETE",
+            "path": "/api/projects/{id}/members/{userId}"
+          }
+        }
+      ]
+    },
+    {
+      "path": "packages/core/whats-new/index.ts",
+      "line": 91,
+      "callee": "api.markWhatsNewSeen",
+      "method": "markWhatsNewSeen",
+      "import_binding_verified": true,
+      "resolution": "current client method range",
+      "method_reference_inventory": [
+        {
+          "id": "client:1242",
+          "method": "POST",
+          "path_expression": "/api/me/whats-new/seen",
+          "route": {
+            "method": "POST",
+            "path": "/api/me/whats-new/seen"
+          }
+        }
+      ],
+      "inventory": [
+        {
+          "id": "client:1242",
+          "method": "POST",
+          "path_expression": "/api/me/whats-new/seen",
+          "route": {
+            "method": "POST",
+            "path": "/api/me/whats-new/seen"
+          }
+        }
+      ]
+    },
+    {
+      "path": "packages/core/star-prompt/index.ts",
+      "line": 73,
+      "callee": "api.listIssues",
+      "method": "listIssues",
+      "import_binding_verified": true,
+      "resolution": "current client method range",
+      "method_reference_inventory": [
+        {
+          "id": "client:1329",
+          "method": "POST",
+          "path_expression": "/api/issues/query",
+          "route": {
+            "method": "POST",
+            "path": "/api/issues/query"
+          }
+        },
+        {
+          "id": "client:1344",
+          "method": "GET",
+          "path_expression": "/api/issues?${search}",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues"
+          }
+        }
+      ],
+      "inventory": [
+        {
+          "id": "client:1344",
+          "method": "GET",
+          "path_expression": "/api/issues?${search}",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues"
+          }
+        }
+      ]
+    },
+    {
+      "path": "packages/core/star-prompt/index.ts",
+      "line": 106,
+      "callee": "api.claimStarPromptShowing",
+      "method": "claimStarPromptShowing",
+      "import_binding_verified": true,
+      "resolution": "current client method range",
+      "method_reference_inventory": [
+        {
+          "id": "client:1253",
+          "method": "POST",
+          "path_expression": "/api/me/star-prompt/claim",
+          "route": {
+            "method": "POST",
+            "path": "/api/me/star-prompt/claim"
+          }
+        }
+      ],
+      "inventory": [
+        {
+          "id": "client:1253",
+          "method": "POST",
+          "path_expression": "/api/me/star-prompt/claim",
+          "route": {
+            "method": "POST",
+            "path": "/api/me/star-prompt/claim"
+          }
+        }
+      ]
+    },
+    {
+      "path": "packages/core/star-prompt/index.ts",
+      "line": 118,
+      "callee": "api.markStarPromptStarred",
+      "method": "markStarPromptStarred",
+      "import_binding_verified": true,
+      "resolution": "current client method range",
+      "method_reference_inventory": [
+        {
+          "id": "client:1260",
+          "method": "POST",
+          "path_expression": "/api/me/star-prompt/starred",
+          "route": {
+            "method": "POST",
+            "path": "/api/me/star-prompt/starred"
+          }
+        }
+      ],
+      "inventory": [
+        {
+          "id": "client:1260",
+          "method": "POST",
+          "path_expression": "/api/me/star-prompt/starred",
+          "route": {
+            "method": "POST",
+            "path": "/api/me/star-prompt/starred"
+          }
+        }
+      ]
+    },
+    {
+      "path": "packages/views/agents/create/use-builder-draft-sync.ts",
+      "line": 95,
+      "callee": "api.saveAgentBuilderDraft",
+      "method": "saveAgentBuilderDraft",
+      "import_binding_verified": true,
+      "resolution": "current client method range",
+      "method_reference_inventory": [
+        {
+          "id": "client:2160",
+          "method": "PUT",
+          "path_expression": "/api/agent-builder/sessions/${sessionId}/draft",
+          "route": {
+            "method": "PUT",
+            "path": "/api/agent-builder/sessions/{sessionId}/draft"
+          }
+        }
+      ],
+      "inventory": [
+        {
+          "id": "client:2160",
+          "method": "PUT",
+          "path_expression": "/api/agent-builder/sessions/${sessionId}/draft",
+          "route": {
+            "method": "PUT",
+            "path": "/api/agent-builder/sessions/{sessionId}/draft"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/projects/access.ts:54 -> projects/queries.ts:36",
+      "gate": "private project, user present, known non-owner/admin role",
+      "inventory": [
+        {
+          "id": "client:4561",
+          "method": "GET",
+          "path_expression": "/api/projects/${id}/members",
+          "route": {
+            "method": "GET",
+            "path": "/api/projects/{id}/members"
+          }
+        }
+      ]
+    }
+  ],
+  "boundaries": [
+    {
+      "path": "packages/core/billing/workspace-subscription-queries.ts",
+      "review": "Workspace summary/prices options are enabled only for nonempty wsId; keys include workspace. Summary stale 30s, focus refetch. Prices truthy data stale 10min, null/undefined zero; focus refetch and retry false. No billing implementation inferred."
+    },
+    {
+      "path": "packages/core/projects/access.ts",
+      "review": "Access helpers: missing user denies; owner/admin allowed; otherwise private managerId or nullish member-lead fallback must match. Nonprivate lead changes allowed. Manager query uses injected projectMembersOptions with enabled private+user+known nonprivileged role, returns manager_id or null. No recursive query review. Mutation always network mode, retry false; offline throws before mutually exclusive visibility/update, add singleton, remove branches. onSettled awaits project invalidation then issue invalidation even on mutation failure; first invalidation rejection prevents second. No optimistic update or permission gate inside mutation."
+    },
+    {
+      "path": "packages/core/whats-new/index.ts",
+      "review": "Version helpers parse numeric prefix, sort/filter releases by server cap; unknown cap unrestricted. Unread requires user and defined marker; parsed seen compares version, else release date strictly after creation day. mark seen no user returns; optimistic marker only on current requester account. Await API, apply response only matching id. Failure rolls back only if current marker still requested version, with account guard, then rethrows. No cache invalidation or cancellation."
+    },
+    {
+      "path": "packages/core/star-prompt/index.ts",
+      "review": "Due predicate requires recorded count, unstarred, count<2, finite creation >=3 days and finite previous showing >=30 days. This predicate and done threshold 3 are not enforced by claim function. Moment store reports/clears locally. Done query workspace+agent key, stale zero, limit 1 done category agent filter, returns total; no enabled gate. No ids or created_by_user_id means GET only; POST and compatibility recursion unreachable here. claim without user false; awaited response updates only matching current/requester id, success true even if account changed; any failure false. Starred without user returns; optimistic timestamp then awaited response with same identity guards; rejection propagates with no rollback."
+    },
+    {
+      "path": "packages/views/agents/create/use-builder-draft-sync.ts",
+      "review": "Injected stored/storedSettled/runtimeId/draft/setDraft interface, no fetch of stored here. Restore once when session present, not restored, settled; stored seeds markers/saved ref and converts with server runtime; sets restored even absent stored. Autosave only session+restored, converts draft and markers, skips equality to saved. Pending ref and 800ms timer; cleanup clears timer only, no request abort. Save eagerly records saved and clears pending, fires PUT; catch clears saved for next edit, no immediate retry/error UI. Latest callback ref used by unmount cleanup to flush pending. Restore state/refs are not reset on sessionId change within same mounted hook; teardown assumptions belong to caller. No serialization or stale-response guard on overlapping failures."
+    }
+  ],
+  "proof_reuse": "api-client-section-reconciliation.json",
+  "validation": {
+    "json": "round-trip parsed",
+    "current_source_hashes": "5/5 matched",
+    "api_client_reuse_hash": "matched reconciliation current bytes",
+    "tuples": "exact candidate tuples preserved; listIssues POST excluded from reachable inventory",
+    "runtime_tests": "not run; static review only"
+  },
+  "root_project_refetch": {
+    "source": "packages/core/projects/queries.ts:1-55",
+    "inventory": [
+      {
+        "id": "client:4517",
+        "method": "GET",
+        "path_expression": "/api/projects?${search}",
+        "route": {
+          "method": "GET",
+          "path": "/api/projects"
+        }
+      },
+      {
+        "id": "client:4524",
+        "method": "GET",
+        "path_expression": "/api/projects/${id}",
+        "route": {
+          "method": "GET",
+          "path": "/api/projects/{id}"
+        }
+      },
+      {
+        "id": "client:4561",
+        "method": "GET",
+        "path_expression": "/api/projects/${id}/members",
+        "route": {
+          "method": "GET",
+          "path": "/api/projects/{id}/members"
+        }
+      },
+      {
+        "id": "client:4602",
+        "method": "GET",
+        "path_expression": "/api/projects/private",
+        "route": {
+          "method": "GET",
+          "path": "/api/projects/private"
+        }
+      },
+      {
+        "id": "client:4569",
+        "method": "GET",
+        "path_expression": "/api/projects/${id}/subscription",
+        "route": {
+          "method": "GET",
+          "path": "/api/projects/{id}/subscription"
+        }
+      }
+    ],
+    "behavior": "Enabled active project observers may refetch; then issue prefix uses finite issue-query proof. First awaited invalidation failure prevents second."
+  }
+}

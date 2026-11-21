@@ -14,7 +14,7 @@ import type {
  *
  * Matching and ranking mirror the server's `/api/issues/search` and
  * `/api/projects/search` (buildSearchQuery / buildProjectSearchQuery in
- * server/internal/handler) so a local result list is the one the server would
+ * server/go/internal/handler) so a local result list is the one the server would
  * return. Only lowercased text lives here; full records are read back from the
  * store for the page being returned, which keeps memory close to one copy of
  * the text.

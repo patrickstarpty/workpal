@@ -1,0 +1,631 @@
+{
+  "version": 1,
+  "scope": "bounded static plugin surface transport callback union",
+  "closure": "Closed for six ALLOWED_PATHS families times five methods, frame launch and hosted document navigation; no runtime enumeration or repository-wide closure claimed.",
+  "matrix": [
+    {
+      "bridge_path_family": "/context",
+      "scope_values": [],
+      "bridge_methods": [
+        "GET",
+        "POST",
+        "PATCH",
+        "PUT",
+        "DELETE"
+      ],
+      "registered_methods": [
+        "GET"
+      ],
+      "unsupported_methods": [
+        "POST",
+        "PATCH",
+        "PUT",
+        "DELETE"
+      ],
+      "decision": "All five verbs pass bridge validation; only registered methods have a supported server target. Other verbs remain unsupported, not invented routes.",
+      "evidence": [
+        "packages/views/plugins/surface-bridge.ts:25",
+        "server/go/cmd/server/router.go:111",
+        "server/go/cmd/server/router.go:1762",
+        "server/go/pkg/publicapi/v1/routes.go:14"
+      ]
+    },
+    {
+      "bridge_path_family": "/issues/{issue_ref}",
+      "scope_values": [],
+      "bridge_methods": [
+        "GET",
+        "POST",
+        "PATCH",
+        "PUT",
+        "DELETE"
+      ],
+      "registered_methods": [
+        "GET",
+        "PATCH"
+      ],
+      "unsupported_methods": [
+        "POST",
+        "PUT",
+        "DELETE"
+      ],
+      "decision": "All five verbs pass bridge validation; only registered methods have a supported server target. Other verbs remain unsupported, not invented routes.",
+      "evidence": [
+        "packages/views/plugins/surface-bridge.ts:25",
+        "server/go/cmd/server/router.go:111",
+        "server/go/cmd/server/router.go:1762",
+        "server/go/pkg/publicapi/v1/routes.go:14"
+      ]
+    },
+    {
+      "bridge_path_family": "/issues/{issue_ref}/comments",
+      "scope_values": [],
+      "bridge_methods": [
+        "GET",
+        "POST",
+        "PATCH",
+        "PUT",
+        "DELETE"
+      ],
+      "registered_methods": [
+        "GET",
+        "POST"
+      ],
+      "unsupported_methods": [
+        "PATCH",
+        "PUT",
+        "DELETE"
+      ],
+      "decision": "All five verbs pass bridge validation; only registered methods have a supported server target. Other verbs remain unsupported, not invented routes.",
+      "evidence": [
+        "packages/views/plugins/surface-bridge.ts:25",
+        "server/go/cmd/server/router.go:111",
+        "server/go/cmd/server/router.go:1762",
+        "server/go/pkg/publicapi/v1/routes.go:14"
+      ]
+    },
+    {
+      "bridge_path_family": "/storage/{scope}",
+      "scope_values": [
+        "workspace",
+        "user"
+      ],
+      "bridge_methods": [
+        "GET",
+        "POST",
+        "PATCH",
+        "PUT",
+        "DELETE"
+      ],
+      "registered_methods": [
+        "GET"
+      ],
+      "unsupported_methods": [
+        "POST",
+        "PATCH",
+        "PUT",
+        "DELETE"
+      ],
+      "decision": "All five verbs pass bridge validation; only registered methods have a supported server target. Other verbs remain unsupported, not invented routes.",
+      "evidence": [
+        "packages/views/plugins/surface-bridge.ts:25",
+        "server/go/cmd/server/router.go:111",
+        "server/go/cmd/server/router.go:1762",
+        "server/go/pkg/publicapi/v1/routes.go:14"
+      ]
+    },
+    {
+      "bridge_path_family": "/storage/{scope}/{key}",
+      "scope_values": [
+        "workspace",
+        "user"
+      ],
+      "bridge_methods": [
+        "GET",
+        "POST",
+        "PATCH",
+        "PUT",
+        "DELETE"
+      ],
+      "registered_methods": [
+        "GET",
+        "PUT",
+        "DELETE"
+      ],
+      "unsupported_methods": [
+        "POST",
+        "PATCH"
+      ],
+      "decision": "All five verbs pass bridge validation; only registered methods have a supported server target. Other verbs remain unsupported, not invented routes.",
+      "evidence": [
+        "packages/views/plugins/surface-bridge.ts:25",
+        "server/go/cmd/server/router.go:111",
+        "server/go/cmd/server/router.go:1762",
+        "server/go/pkg/publicapi/v1/routes.go:14"
+      ]
+    },
+    {
+      "bridge_path_family": "/hooks/{key}",
+      "scope_values": [],
+      "bridge_methods": [
+        "GET",
+        "POST",
+        "PATCH",
+        "PUT",
+        "DELETE"
+      ],
+      "registered_methods": [
+        "POST"
+      ],
+      "unsupported_methods": [
+        "GET",
+        "PATCH",
+        "PUT",
+        "DELETE"
+      ],
+      "decision": "All five verbs pass bridge validation; only registered methods have a supported server target. Other verbs remain unsupported, not invented routes.",
+      "evidence": [
+        "packages/views/plugins/surface-bridge.ts:25",
+        "server/go/cmd/server/router.go:111",
+        "server/go/cmd/server/router.go:1762",
+        "server/go/pkg/publicapi/v1/routes.go:14"
+      ]
+    }
+  ],
+  "existing_calls": [
+    {
+      "id": "client:3595",
+      "method": "GET",
+      "path_expression": "/api/workspaces/${workspaceId}/plugins/${installationId}/surfaces/${encodeURIComponent(surfaceKey)}/launch",
+      "route": {
+        "method": "GET",
+        "path": "/api/workspaces/{id}/plugins/{installationId}/surfaces/{surfaceKey}/launch"
+      },
+      "sources": [
+        "packages/core/api/client.ts:3595",
+        "server/go/cmd/server/router.go:1867",
+        "server/go/internal/handler/plugin_surface.go:152"
+      ],
+      "transport": "ApiClient.fetch; baseUrl + path; bearer or cookie credentials; workspace header from client context",
+      "auth": "requires endpoint-specific reconciliation",
+      "status": "route-mapped",
+      "audit_actual_method": "GET",
+      "audit_note": "Existing ID preserved; route.method is authoritative for dynamic wrapper; inventory top-level GET is not the callback verb."
+    },
+    {
+      "id": "client:3663",
+      "method": "GET",
+      "path_expression": "/api/plugin-bridge/v1${request.path}${query}",
+      "route": {
+        "method": "GET",
+        "path": "/api/plugin-bridge/v1/context"
+      },
+      "sources": [
+        "packages/core/api/client.ts:3663",
+        "server/go/cmd/server/router.go:1759",
+        "server/go/internal/handler/plugin_action.go:270"
+      ],
+      "transport": "ApiClient.fetch; baseUrl + path; bearer or cookie credentials; workspace header from client context",
+      "auth": "requires endpoint-specific reconciliation",
+      "status": "route-mapped",
+      "audit_actual_method": "GET",
+      "audit_note": "Existing ID preserved; route.method is authoritative for dynamic wrapper; inventory top-level GET is not the callback verb."
+    },
+    {
+      "id": "client:3684",
+      "method": "POST",
+      "path_expression": "/api/plugin-bridge/v1/hooks/${encodeURIComponent(hookKey)}",
+      "route": {
+        "method": "POST",
+        "path": "/api/plugin-bridge/v1/hooks/{key}"
+      },
+      "sources": [
+        "packages/core/api/client.ts:3684",
+        "server/go/cmd/server/router.go:1762",
+        "server/go/internal/handler/plugin_hook.go:32"
+      ],
+      "transport": "ApiClient.fetch; baseUrl + path; bearer or cookie credentials; workspace header from client context",
+      "auth": "requires endpoint-specific reconciliation",
+      "status": "route-mapped",
+      "audit_actual_method": "POST",
+      "audit_note": "Existing ID preserved; route.method is authoritative for dynamic wrapper; inventory top-level GET is not the callback verb."
+    },
+    {
+      "id": "client:3663:remaining-variant-1",
+      "method": "GET",
+      "path_expression": "/api/plugin-bridge/v1${request.path}${query}",
+      "route": {
+        "method": "GET",
+        "path": "/api/plugin-bridge/v1/issues/{issue_ref}"
+      },
+      "sources": [
+        "packages/core/api/client.ts:3663",
+        "server/go/cmd/server/router.go:1759",
+        "server/go/internal/handler/plugin_action.go:270",
+        "server/go/internal/handler/plugin_action.go:330"
+      ],
+      "transport": "ApiClient.fetch; baseUrl + path; bearer or cookie credentials; workspace header from client context",
+      "auth": "requires endpoint-specific reconciliation",
+      "status": "route-mapped",
+      "audit_actual_method": "GET",
+      "audit_note": "Existing ID preserved; route.method is authoritative for dynamic wrapper; inventory top-level GET is not the callback verb."
+    },
+    {
+      "id": "client:3663:remaining-variant-2",
+      "method": "GET",
+      "path_expression": "/api/plugin-bridge/v1${request.path}${query}",
+      "route": {
+        "method": "PATCH",
+        "path": "/api/plugin-bridge/v1/issues/{issue_ref}"
+      },
+      "sources": [
+        "packages/core/api/client.ts:3663",
+        "server/go/cmd/server/router.go:1759",
+        "server/go/internal/handler/plugin_action.go:270",
+        "server/go/internal/handler/plugin_action.go:351"
+      ],
+      "transport": "ApiClient.fetch; baseUrl + path; bearer or cookie credentials; workspace header from client context",
+      "auth": "requires endpoint-specific reconciliation",
+      "status": "route-mapped",
+      "audit_actual_method": "PATCH",
+      "audit_note": "Existing ID preserved; route.method is authoritative for dynamic wrapper; inventory top-level GET is not the callback verb."
+    },
+    {
+      "id": "client:3663:remaining-variant-3",
+      "method": "GET",
+      "path_expression": "/api/plugin-bridge/v1${request.path}${query}",
+      "route": {
+        "method": "GET",
+        "path": "/api/plugin-bridge/v1/issues/{issue_ref}"
+      },
+      "sources": [
+        "packages/core/api/client.ts:3663",
+        "server/go/cmd/server/router.go:1759",
+        "server/go/internal/handler/plugin_action.go:270",
+        "server/go/internal/handler/plugin_action.go:330"
+      ],
+      "transport": "ApiClient.fetch; baseUrl + path; bearer or cookie credentials; workspace header from client context",
+      "auth": "requires endpoint-specific reconciliation",
+      "status": "route-mapped",
+      "audit_actual_method": "GET",
+      "audit_note": "Existing ID preserved; route.method is authoritative for dynamic wrapper; inventory top-level GET is not the callback verb."
+    },
+    {
+      "id": "client:3663:remaining-variant-4",
+      "method": "GET",
+      "path_expression": "/api/plugin-bridge/v1${request.path}${query}",
+      "route": {
+        "method": "PATCH",
+        "path": "/api/plugin-bridge/v1/issues/{issue_ref}"
+      },
+      "sources": [
+        "packages/core/api/client.ts:3663",
+        "server/go/cmd/server/router.go:1759",
+        "server/go/internal/handler/plugin_action.go:270",
+        "server/go/internal/handler/plugin_action.go:351"
+      ],
+      "transport": "ApiClient.fetch; baseUrl + path; bearer or cookie credentials; workspace header from client context",
+      "auth": "requires endpoint-specific reconciliation",
+      "status": "route-mapped",
+      "audit_actual_method": "PATCH",
+      "audit_note": "Existing ID preserved; route.method is authoritative for dynamic wrapper; inventory top-level GET is not the callback verb."
+    },
+    {
+      "id": "client:3663:remaining-variant-5",
+      "method": "GET",
+      "path_expression": "/api/plugin-bridge/v1${request.path}${query}",
+      "route": {
+        "method": "GET",
+        "path": "/api/plugin-bridge/v1/issues/{issue_ref}/comments"
+      },
+      "sources": [
+        "packages/core/api/client.ts:3663",
+        "server/go/cmd/server/router.go:1759",
+        "server/go/internal/handler/plugin_action.go:270",
+        "server/go/internal/handler/plugin_action.go:574"
+      ],
+      "transport": "ApiClient.fetch; baseUrl + path; bearer or cookie credentials; workspace header from client context",
+      "auth": "requires endpoint-specific reconciliation",
+      "status": "route-mapped",
+      "audit_actual_method": "GET",
+      "audit_note": "Existing ID preserved; route.method is authoritative for dynamic wrapper; inventory top-level GET is not the callback verb."
+    },
+    {
+      "id": "client:3663:remaining-variant-6",
+      "method": "GET",
+      "path_expression": "/api/plugin-bridge/v1${request.path}${query}",
+      "route": {
+        "method": "POST",
+        "path": "/api/plugin-bridge/v1/issues/{issue_ref}/comments"
+      },
+      "sources": [
+        "packages/core/api/client.ts:3663",
+        "server/go/cmd/server/router.go:1759",
+        "server/go/internal/handler/plugin_action.go:270",
+        "server/go/internal/handler/plugin_action.go:625"
+      ],
+      "transport": "ApiClient.fetch; baseUrl + path; bearer or cookie credentials; workspace header from client context",
+      "auth": "requires endpoint-specific reconciliation",
+      "status": "route-mapped",
+      "audit_actual_method": "POST",
+      "audit_note": "Existing ID preserved; route.method is authoritative for dynamic wrapper; inventory top-level GET is not the callback verb."
+    },
+    {
+      "id": "client:3663:remaining-variant-7",
+      "method": "GET",
+      "path_expression": "/api/plugin-bridge/v1${request.path}${query}",
+      "route": {
+        "method": "GET",
+        "path": "/api/plugin-bridge/v1/issues/{issue_ref}/comments"
+      },
+      "sources": [
+        "packages/core/api/client.ts:3663",
+        "server/go/cmd/server/router.go:1759",
+        "server/go/internal/handler/plugin_action.go:270",
+        "server/go/internal/handler/plugin_action.go:574"
+      ],
+      "transport": "ApiClient.fetch; baseUrl + path; bearer or cookie credentials; workspace header from client context",
+      "auth": "requires endpoint-specific reconciliation",
+      "status": "route-mapped",
+      "audit_actual_method": "GET",
+      "audit_note": "Existing ID preserved; route.method is authoritative for dynamic wrapper; inventory top-level GET is not the callback verb."
+    },
+    {
+      "id": "client:3663:remaining-variant-8",
+      "method": "GET",
+      "path_expression": "/api/plugin-bridge/v1${request.path}${query}",
+      "route": {
+        "method": "POST",
+        "path": "/api/plugin-bridge/v1/issues/{issue_ref}/comments"
+      },
+      "sources": [
+        "packages/core/api/client.ts:3663",
+        "server/go/cmd/server/router.go:1759",
+        "server/go/internal/handler/plugin_action.go:270",
+        "server/go/internal/handler/plugin_action.go:625"
+      ],
+      "transport": "ApiClient.fetch; baseUrl + path; bearer or cookie credentials; workspace header from client context",
+      "auth": "requires endpoint-specific reconciliation",
+      "status": "route-mapped",
+      "audit_actual_method": "POST",
+      "audit_note": "Existing ID preserved; route.method is authoritative for dynamic wrapper; inventory top-level GET is not the callback verb."
+    },
+    {
+      "id": "client:3663:remaining-variant-9",
+      "method": "GET",
+      "path_expression": "/api/plugin-bridge/v1${request.path}${query}",
+      "route": {
+        "method": "GET",
+        "path": "/api/plugin-bridge/v1/tasks/{task_id}/messages"
+      },
+      "sources": [
+        "packages/core/api/client.ts:3663",
+        "server/go/cmd/server/router.go:1759",
+        "server/go/internal/handler/plugin_action.go:270",
+        "server/go/internal/handler/plugin_action.go:425"
+      ],
+      "transport": "ApiClient.fetch; baseUrl + path; bearer or cookie credentials; workspace header from client context",
+      "auth": "requires endpoint-specific reconciliation",
+      "status": "route-mapped",
+      "audit_actual_method": "GET",
+      "audit_note": "Existing ID preserved; route.method is authoritative for dynamic wrapper; inventory top-level GET is not the callback verb."
+    },
+    {
+      "id": "client:3663:remaining-variant-10",
+      "method": "GET",
+      "path_expression": "/api/plugin-bridge/v1${request.path}${query}",
+      "route": {
+        "method": "GET",
+        "path": "/api/plugin-bridge/v1/storage/{scope}"
+      },
+      "sources": [
+        "packages/core/api/client.ts:3663",
+        "server/go/cmd/server/router.go:1759",
+        "server/go/internal/handler/plugin_action.go:270",
+        "server/go/internal/handler/plugin_action.go:756"
+      ],
+      "transport": "ApiClient.fetch; baseUrl + path; bearer or cookie credentials; workspace header from client context",
+      "auth": "requires endpoint-specific reconciliation",
+      "status": "route-mapped",
+      "audit_actual_method": "GET",
+      "audit_note": "Existing ID preserved; route.method is authoritative for dynamic wrapper; inventory top-level GET is not the callback verb."
+    },
+    {
+      "id": "client:3663:remaining-variant-11",
+      "method": "GET",
+      "path_expression": "/api/plugin-bridge/v1${request.path}${query}",
+      "route": {
+        "method": "GET",
+        "path": "/api/plugin-bridge/v1/storage/{scope}/{key}"
+      },
+      "sources": [
+        "packages/core/api/client.ts:3663",
+        "server/go/cmd/server/router.go:1759",
+        "server/go/internal/handler/plugin_action.go:270",
+        "server/go/internal/handler/plugin_action.go:780"
+      ],
+      "transport": "ApiClient.fetch; baseUrl + path; bearer or cookie credentials; workspace header from client context",
+      "auth": "requires endpoint-specific reconciliation",
+      "status": "route-mapped",
+      "audit_actual_method": "GET",
+      "audit_note": "Existing ID preserved; route.method is authoritative for dynamic wrapper; inventory top-level GET is not the callback verb."
+    },
+    {
+      "id": "client:3663:remaining-variant-12",
+      "method": "GET",
+      "path_expression": "/api/plugin-bridge/v1${request.path}${query}",
+      "route": {
+        "method": "PUT",
+        "path": "/api/plugin-bridge/v1/storage/{scope}/{key}"
+      },
+      "sources": [
+        "packages/core/api/client.ts:3663",
+        "server/go/cmd/server/router.go:1759",
+        "server/go/internal/handler/plugin_action.go:270",
+        "server/go/internal/handler/plugin_action.go:798"
+      ],
+      "transport": "ApiClient.fetch; baseUrl + path; bearer or cookie credentials; workspace header from client context",
+      "auth": "requires endpoint-specific reconciliation",
+      "status": "route-mapped",
+      "audit_actual_method": "PUT",
+      "audit_note": "Existing ID preserved; route.method is authoritative for dynamic wrapper; inventory top-level GET is not the callback verb."
+    },
+    {
+      "id": "client:3663:remaining-variant-13",
+      "method": "GET",
+      "path_expression": "/api/plugin-bridge/v1${request.path}${query}",
+      "route": {
+        "method": "DELETE",
+        "path": "/api/plugin-bridge/v1/storage/{scope}/{key}"
+      },
+      "sources": [
+        "packages/core/api/client.ts:3663",
+        "server/go/cmd/server/router.go:1759",
+        "server/go/internal/handler/plugin_action.go:270",
+        "server/go/internal/handler/plugin_action.go:820"
+      ],
+      "transport": "ApiClient.fetch; baseUrl + path; bearer or cookie credentials; workspace header from client context",
+      "auth": "requires endpoint-specific reconciliation",
+      "status": "route-mapped",
+      "audit_actual_method": "DELETE",
+      "audit_note": "Existing ID preserved; route.method is authoritative for dynamic wrapper; inventory top-level GET is not the callback verb."
+    },
+    {
+      "id": "client:3663:remaining-variant-14",
+      "method": "GET",
+      "path_expression": "/api/plugin-bridge/v1${request.path}${query}",
+      "route": {
+        "method": "GET",
+        "path": "/api/plugin-bridge/v1/storage/{scope}/{key}"
+      },
+      "sources": [
+        "packages/core/api/client.ts:3663",
+        "server/go/cmd/server/router.go:1759",
+        "server/go/internal/handler/plugin_action.go:270",
+        "server/go/internal/handler/plugin_action.go:780"
+      ],
+      "transport": "ApiClient.fetch; baseUrl + path; bearer or cookie credentials; workspace header from client context",
+      "auth": "requires endpoint-specific reconciliation",
+      "status": "route-mapped",
+      "audit_actual_method": "GET",
+      "audit_note": "Existing ID preserved; route.method is authoritative for dynamic wrapper; inventory top-level GET is not the callback verb."
+    },
+    {
+      "id": "client:3663:remaining-variant-15",
+      "method": "GET",
+      "path_expression": "/api/plugin-bridge/v1${request.path}${query}",
+      "route": {
+        "method": "PUT",
+        "path": "/api/plugin-bridge/v1/storage/{scope}/{key}"
+      },
+      "sources": [
+        "packages/core/api/client.ts:3663",
+        "server/go/cmd/server/router.go:1759",
+        "server/go/internal/handler/plugin_action.go:270",
+        "server/go/internal/handler/plugin_action.go:798"
+      ],
+      "transport": "ApiClient.fetch; baseUrl + path; bearer or cookie credentials; workspace header from client context",
+      "auth": "requires endpoint-specific reconciliation",
+      "status": "route-mapped",
+      "audit_actual_method": "PUT",
+      "audit_note": "Existing ID preserved; route.method is authoritative for dynamic wrapper; inventory top-level GET is not the callback verb."
+    },
+    {
+      "id": "client:3663:remaining-variant-16",
+      "method": "GET",
+      "path_expression": "/api/plugin-bridge/v1${request.path}${query}",
+      "route": {
+        "method": "DELETE",
+        "path": "/api/plugin-bridge/v1/storage/{scope}/{key}"
+      },
+      "sources": [
+        "packages/core/api/client.ts:3663",
+        "server/go/cmd/server/router.go:1759",
+        "server/go/internal/handler/plugin_action.go:270",
+        "server/go/internal/handler/plugin_action.go:820"
+      ],
+      "transport": "ApiClient.fetch; baseUrl + path; bearer or cookie credentials; workspace header from client context",
+      "auth": "requires endpoint-specific reconciliation",
+      "status": "route-mapped",
+      "audit_actual_method": "DELETE",
+      "audit_note": "Existing ID preserved; route.method is authoritative for dynamic wrapper; inventory top-level GET is not the callback verb."
+    },
+    {
+      "id": "client:3663:remaining-variant-17",
+      "method": "GET",
+      "path_expression": "/api/plugin-bridge/v1${request.path}${query}",
+      "route": {
+        "method": "GET",
+        "path": "/api/plugin-bridge/v1/storage/{scope}/{key}"
+      },
+      "sources": [
+        "packages/core/api/client.ts:3663",
+        "server/go/cmd/server/router.go:1759",
+        "server/go/internal/handler/plugin_action.go:270",
+        "server/go/internal/handler/plugin_action.go:780"
+      ],
+      "transport": "ApiClient.fetch; baseUrl + path; bearer or cookie credentials; workspace header from client context",
+      "auth": "requires endpoint-specific reconciliation",
+      "status": "route-mapped",
+      "audit_actual_method": "GET",
+      "audit_note": "Existing ID preserved; route.method is authoritative for dynamic wrapper; inventory top-level GET is not the callback verb."
+    },
+    {
+      "id": "client:3663:remaining-variant-18",
+      "method": "GET",
+      "path_expression": "/api/plugin-bridge/v1${request.path}${query}",
+      "route": {
+        "method": "PUT",
+        "path": "/api/plugin-bridge/v1/storage/{scope}/{key}"
+      },
+      "sources": [
+        "packages/core/api/client.ts:3663",
+        "server/go/cmd/server/router.go:1759",
+        "server/go/internal/handler/plugin_action.go:270",
+        "server/go/internal/handler/plugin_action.go:798"
+      ],
+      "transport": "ApiClient.fetch; baseUrl + path; bearer or cookie credentials; workspace header from client context",
+      "auth": "requires endpoint-specific reconciliation",
+      "status": "route-mapped",
+      "audit_actual_method": "PUT",
+      "audit_note": "Existing ID preserved; route.method is authoritative for dynamic wrapper; inventory top-level GET is not the callback verb."
+    },
+    {
+      "id": "client:3663:remaining-variant-19",
+      "method": "GET",
+      "path_expression": "/api/plugin-bridge/v1${request.path}${query}",
+      "route": {
+        "method": "DELETE",
+        "path": "/api/plugin-bridge/v1/storage/{scope}/{key}"
+      },
+      "sources": [
+        "packages/core/api/client.ts:3663",
+        "server/go/cmd/server/router.go:1759",
+        "server/go/internal/handler/plugin_action.go:270",
+        "server/go/internal/handler/plugin_action.go:820"
+      ],
+      "transport": "ApiClient.fetch; baseUrl + path; bearer or cookie credentials; workspace header from client context",
+      "auth": "requires endpoint-specific reconciliation",
+      "status": "route-mapped",
+      "audit_actual_method": "DELETE",
+      "audit_note": "Existing ID preserved; route.method is authoritative for dynamic wrapper; inventory top-level GET is not the callback verb."
+    }
+  ],
+  "sources": [
+    "packages/views/plugins/surface-bridge.ts",
+    "packages/views/plugins/plugin-surface-frame.tsx",
+    "packages/views/plugins/surface-document.ts",
+    "packages/core/plugins/queries.ts",
+    "packages/views/plugins/plugin-panel-section.tsx",
+    "packages/views/plugins/plugin-modal-surface.tsx",
+    "packages/core/api/client.ts",
+    "server/go/cmd/server/router.go",
+    "server/go/pkg/publicapi/v1/routes.go",
+    "server/go/internal/handler/plugin_action.go",
+    "server/go/internal/handler/plugin_surface.go"
+  ],
+  "gaps": [
+    "No integration, plugin execution, runtime observation, Python implementation or authorization success claimed.",
+    "Raw dynamic segments may contain query/hash/percent escapes or dot segments; bridge regex is not URL normalization. Only canonical family mappings are closed."
+  ]
+}

@@ -40,7 +40,7 @@ describe("FeatureIntro", () => {
     expect(screen.getByRole("heading", { level: 2, name: "Work as a team" })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "New squad" })).toBeInTheDocument();
     const docs = screen.getByRole("link", { name: "Read the docs" });
-    expect(docs).toHaveAttribute("href", "https://workpal.invalid/docs/squads");
+    expect(docs).toHaveAttribute("href", "http://127.0.0.1:4000/docs/squads");
     expect(docs).toHaveAttribute("target", "_blank");
   });
 
@@ -48,7 +48,7 @@ describe("FeatureIntro", () => {
     renderIntro("zh-Hans");
     expect(screen.getByRole("link", { name: "阅读文档" })).toHaveAttribute(
       "href",
-      "https://workpal.invalid/docs/zh/squads",
+      "http://127.0.0.1:4000/docs/zh/squads",
     );
   });
 

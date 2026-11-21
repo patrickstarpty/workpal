@@ -53,7 +53,7 @@ const RETRY_DELAYS_MS = [1_000, 2_000, 4_000, 8_000, 16_000, 30_000] as const;
  * event. It matches the server's own floor, so it never overrides a value the
  * server actually chose — a floor above that would silently let an active
  * session expire. See minSessionRenewCheckInterval in
- * server/internal/auth/session.go.
+ * server/go/internal/auth/session.go.
  */
 const MIN_CHECK_INTERVAL_MS = 5 * 1000;
 
@@ -61,7 +61,7 @@ const MIN_CHECK_INTERVAL_MS = 5 * 1000;
  * Whether a stored credential is the kind `/api/auth/refresh` can renew.
  *
  * The server renews only its own UI session JWTs and answers 400 for anything
- * else (RefreshSession in server/internal/handler/session.go). A personal
+ * else (RefreshSession in server/go/internal/handler/session.go). A personal
  * access token (`mul_`), agent task token (`mat_`) or cloud-node PAT (`mcn_`)
  * still authenticates every other request, so it can legitimately sit in
  * `workpal_token` — the local dev environment signs the browser in with its

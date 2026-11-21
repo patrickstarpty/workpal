@@ -261,7 +261,7 @@ function SubscriberPopoverContent({
    * list until the query resolves — so an unresolved query renders everyone as
    * unsubscribed. Acting on that is not a harmless no-op: an explicit subscribe
    * rewrites the target's reason to 'manual' and clears any opt-out scope
-   * (server/pkg/db/queries/subscriber.sql), which would quietly discard a
+   * (server/go/pkg/db/queries/subscriber.sql), which would quietly discard a
    * delegated subscription or someone's deliberate opt-out. So these rows wait
    * for a real answer, not just for the in-flight mutation (MUL-5714).
    */
@@ -4217,7 +4217,7 @@ export function IssueDetail({ issueId, onDelete, onDone, onUnsubscribeArchive, d
                        zero children the two are different server writes,
                        because a subtree tombstone also keeps FUTURE children
                        from re-subscribing the user
-                       (server/pkg/db/queries/subscriber.sql). Declining one
+                       (server/go/pkg/db/queries/subscriber.sql). Declining one
                        issue must not silently opt someone out of a tree that
                        does not exist yet. While the child count is unknown we
                        keep the menu below — it never picks a scope for the

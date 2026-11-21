@@ -532,16 +532,13 @@ describe("SearchCommand", () => {
         "theme:light",
         "theme:dark",
         "theme:system",
+        "color-theme:fwd",
         "color-theme:default",
-        "color-theme:pop",
-        "color-theme:github",
-        "color-theme:blueprint",
-        "color-theme:notion",
       ]);
       expect(screen.getByLabelText("Current mode").closest("[cmdk-item]")).toHaveAttribute("data-value", "theme:dark");
       expect(screen.getByLabelText("Current theme").closest("[cmdk-item]")).toHaveAttribute(
         "data-value",
-        "color-theme:default",
+        "color-theme:fwd",
       );
 
       await user.click(screen.getByText("Light"));
@@ -551,23 +548,23 @@ describe("SearchCommand", () => {
 
     it("switches the colour theme from the theme submenu", async () => {
       const user = userEvent.setup();
-      useAppearanceStore.setState({ theme: "github" });
+      useAppearanceStore.setState({ theme: "default" });
       renderSearch();
       await user.type(input(), "主题");
       await user.click(await rowText("Change theme..."));
 
       expect(screen.getByLabelText("Current theme").closest("[cmdk-item]")).toHaveAttribute(
         "data-value",
-        "color-theme:github",
+        "color-theme:default",
       );
-      await user.click(screen.getByText("Pop"));
+      await user.click(screen.getByText("FWD"));
 
-      expect(useAppearanceStore.getState().theme).toBe("pop");
+      expect(useAppearanceStore.getState().theme).toBe("fwd");
       expect(mockSetTheme).not.toHaveBeenCalled();
       expect(useSearchStore.getState().open).toBe(false);
     });
 
-    it("finds installed themes by id and truncates a long name", async () => {
+    it("does not offer stored custom themes in search", async () => {
       const user = userEvent.setup();
       const name = "A very long community theme name, forty!";
       useInstalledThemesStore.setState({
@@ -580,15 +577,16 @@ describe("SearchCommand", () => {
       await user.click(await rowText("Change theme..."));
       await user.type(screen.getByPlaceholderText("Filter..."), "solar");
 
-      expect(renderedHeadings()).toEqual(["Theme"]);
-      expect(renderedValues()).toEqual(["color-theme:solarized"]);
-      expect(await rowText(name)).toHaveClass("min-w-0", "flex-1", "truncate");
+      expect(renderedHeadings()).toEqual([]);
+      expect(renderedValues()).toEqual([]);
+      expect(screen.queryByText(name)).not.toBeInTheDocument();
 
       await user.keyboard("{Enter}");
-      expect(useAppearanceStore.getState().theme).toBe("solarized");
+      expect(useAppearanceStore.getState().theme).toBe("fwd");
+      expect(useInstalledThemesStore.getState().themes[0]?.id).toBe("solarized");
     });
 
-    it("marks Default when the chosen theme is no longer installed", async () => {
+    it("marks FWD when the chosen theme is unavailable", async () => {
       const user = userEvent.setup();
       useAppearanceStore.setState({ theme: "uninstalled" });
       renderSearch();
@@ -597,7 +595,7 @@ describe("SearchCommand", () => {
 
       expect(screen.getByLabelText("Current theme").closest("[cmdk-item]")).toHaveAttribute(
         "data-value",
-        "color-theme:default",
+        "color-theme:fwd",
       );
     });
 

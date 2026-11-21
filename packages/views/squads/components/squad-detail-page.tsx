@@ -163,7 +163,7 @@ export function SquadDetailPage() {
   const isWorkspaceAdmin = myRole === "owner" || myRole === "admin";
   // Per-squad management gate: workspace owner/admin manage every squad; the
   // creator manages the squads they created. Mirrors canManageSquad in
-  // server/internal/handler/squad.go so editable controls appear exactly when
+  // server/go/internal/handler/squad.go so editable controls appear exactly when
   // the API will accept the write, and everyone else gets a read-only view
   // instead of controls that 403 (MUL-4223).
   const canManage =
@@ -593,7 +593,7 @@ function SquadMembersSection({
   memberStatusById: Map<string, SquadMemberStatus>;
   // When false, add/leader/remove controls and role editing are hidden; the
   // roster stays visible and read-only. See canManageSquad in
-  // server/internal/handler/squad.go.
+  // server/go/internal/handler/squad.go.
   canManage: boolean;
   isLeader: (m: SquadMember) => boolean;
   isArchived: (m: SquadMember) => boolean;
@@ -765,7 +765,7 @@ function SquadMembersSection({
 }
 
 // The squad leader's prompt picks these up at task claim time
-// (server/internal/handler/daemon.go).
+// (server/go/internal/handler/daemon.go).
 function SquadInstructionsSection({
   squad,
   canManage,

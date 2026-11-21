@@ -1,5 +1,5 @@
 /** Wire shapes of the Connected Apps API (MUL-8516). Mirrors the response
- * types in `server/internal/handler/connected_apps.go`. New backend fields
+ * types in `server/go/internal/handler/connected_apps.go`. New backend fields
  * must stay optional here so older desktop builds keep parsing. */
 
 /** Whose account an agent's app acts as: the workspace's team account, or

@@ -213,13 +213,13 @@ ${CODE_BLOCK}
 const ISSUE_COMMENT = `Found it: the prepare lease is extended before the cache copy starts, so a slow copy always needs a second extension. Moving the extension after the copy fixes the latency on my machine.
 
 \`\`\`diff
---- a/server/internal/daemon/prepare.go
-+++ b/server/internal/daemon/prepare.go
+--- a/server/go/internal/daemon/prepare.go
++++ b/server/go/internal/daemon/prepare.go
 @@ -112,11 +112,11 @@ func (p *Preparer) Prepare(ctx context.Context, task *Task) error {
 -	if err := p.client.ExtendPrepareLease(ctx, task.RuntimeID, task.ID); err != nil {
 -		return fmt.Errorf("extend prepare lease for task %s on runtime %s: %w", task.ID, task.RuntimeID, err)
 -	}
- 	if err := p.cache.CopyInto(ctx, task.WorkDir, cache.Options{Include: []string{"node_modules", ".turbo", "server/bin"}, Concurrency: 8}); err != nil {
+ 	if err := p.cache.CopyInto(ctx, task.WorkDir, cache.Options{Include: []string{"node_modules", ".turbo", "server/go/bin"}, Concurrency: 8}); err != nil {
  		return fmt.Errorf("copy dependency cache into %s: %w", task.WorkDir, err)
  	}
 +	if err := p.client.ExtendPrepareLease(ctx, task.RuntimeID, task.ID); err != nil {

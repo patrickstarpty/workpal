@@ -15,7 +15,7 @@ Workpal 是 Go backend 與 pnpm monorepo。最簡單的本地啟動方式是 `ma
 - Docker Engine 或 Docker Desktop；
 - Git 和 Make。
 
-版本以根目錄 `package.json`、`server/go.mod` 和 CI workflow 為準。
+版本以根目錄 `package.json`、`server/go/go.mod` 和 CI workflow 為準。
 
 ## 第一次啟動
 
@@ -124,13 +124,13 @@ Web 與 Desktop 都需要的功能按職責放置：
 
 ## 修改資料庫
 
-Migration 位於 `server/migrations/`，查詢位於 `server/pkg/db/queries/`。
+Migration 位於 `server/go/migrations/`，查詢位於 `server/go/pkg/db/queries/`。
 
 1. 使用下一個未佔用的數字前綴，同時建立 `.up.sql` 和 `.down.sql`；
 2. 不新增資料庫 foreign key、級聯刪除或級聯更新；關係檢查和清理由應用層完成；
 3. 每個新索引都使用 `CREATE INDEX CONCURRENTLY` 或 `CREATE UNIQUE INDEX CONCURRENTLY`；
 4. 一個 concurrent index 單獨放在只包含這一條語句的 migration 檔案中；
-5. 修改查詢後執行 `make sqlc`，提交生成的 `server/pkg/db/generated/` 變化；
+5. 修改查詢後執行 `make sqlc`，提交生成的 `server/go/pkg/db/generated/` 變化；
 6. 不直接編輯 sqlc 產生的檔案。
 
 需要讓多項寫操作一起成功或回滾時，在 service 層使用應用事務。

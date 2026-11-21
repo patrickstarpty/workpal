@@ -23,7 +23,7 @@ function cleanHttpUrl(raw: string | undefined): string | undefined {
 // The API base names the backend ORIGIN, never its `/api` endpoint: every
 // caller already carries its own prefix (`packages/core/api/client.ts` sends
 // `/api/**`, avatars resolve `/api/avatars/**`, realtime connects `/ws`), and
-// the backend serves these at the root (server/cmd/server/router.go). A base
+// the backend serves these at the root (server/go/cmd/server/router.go). A base
 // ending in `/api` therefore yields `/api/api/**` requests — the most common
 // self-hosting mistake (#6619, MUL-5922). Strip that one suffix instead of
 // honouring it. Any other path is preserved: a reverse

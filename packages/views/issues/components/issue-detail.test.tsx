@@ -4176,7 +4176,7 @@ describe("IssueDetail (shared)", () => {
     // opt_out_scope='issue'; the subtree route writes 'subtree', which also
     // blocks FUTURE children from re-subscribing the user. Collapsing the menu
     // must not quietly upgrade a one-issue opt-out into a whole-tree one
-    // (server/pkg/db/queries/subscriber.sql).
+    // (server/go/pkg/db/queries/subscriber.sql).
     it("uses the root-only route, never the subtree one", async () => {
       renderIssueDetail();
 
@@ -4323,7 +4323,7 @@ describe("IssueDetail (shared)", () => {
   // renders everyone — including people who ARE subscribed — as unchecked.
   // Clicking one of those rows sends an explicit subscribe, which rewrites the
   // target's reason to 'manual' and clears any opt-out scope
-  // (server/pkg/db/queries/subscriber.sql), discarding a delegated
+  // (server/go/pkg/db/queries/subscriber.sql), discarding a delegated
   // subscription or a deliberate opt-out (MUL-5714).
   describe("subscriber picker before the query resolves", () => {
     // The picker sits next to the subscribe control in the Activity header.

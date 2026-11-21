@@ -158,7 +158,7 @@ export function WorkspaceTab() {
   const currentMember = members.find((m) => m.user_id === user?.id) ?? null;
   const canManageWorkspace = currentMember?.role === "owner" || currentMember?.role === "admin";
   const isOwner = currentMember?.role === "owner";
-  // Mirror the backend invariant (server/internal/handler/workspace.go:569):
+  // Mirror the backend invariant (server/go/internal/handler/workspace.go:569):
   // a workspace must always have at least one owner, so the sole owner can't
   // leave. Pre-flight here instead of letting the 400 round-trip become a
   // confusing toast — disable Leave and tell the user what they need to do.
@@ -354,6 +354,7 @@ export function WorkspaceTab() {
                         ? error.message
                         : t(($) => $.workspace.toast_logo_failed),
                     );
+                    throw error;
                   }
                 }}
               />

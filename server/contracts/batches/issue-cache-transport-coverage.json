@@ -1,0 +1,2102 @@
+{
+  "version": 1,
+  "scope": [
+    "packages/core/issues/cache-coordinator.ts"
+  ],
+  "coverage": "Whole target static review; root review pending. No backend or global completion claim.",
+  "files": [
+    {
+      "path": "packages/core/issues/cache-coordinator.ts",
+      "sha256": "70108d123cb72357156bac5077f30ae263d782684ac39ea69622d5b285fa020c",
+      "whole_source": true
+    },
+    {
+      "path": "packages/core/issues/cache-helpers.ts",
+      "sha256": "cbb6f0199247f45d53edea6d949d991061b1b44aa23fc19e7881a86fdc066a37",
+      "whole_source": true
+    },
+    {
+      "path": "packages/core/issues/surface/membership.ts",
+      "sha256": "b83ea287e17646a5f8d6f96f55c579bc5a43a0023e8240e5ddc89bb1714648c0",
+      "whole_source": true
+    },
+    {
+      "path": "packages/core/issues/status-category.ts",
+      "sha256": "2bb7ccdfc42e10c75e81b14421110ebd360dc46a76f563b0cb5c5e69c9caa94b",
+      "whole_source": true
+    },
+    {
+      "path": "packages/core/inbox/ws-updaters.ts",
+      "sha256": "710af5cdd2f59c397d6f9a1b16146b923d08f70c0f619181074503db0f81c175",
+      "whole_source": true
+    },
+    {
+      "path": "packages/core/inbox/queries.ts",
+      "sha256": "4612025ba86f4e32cb272acb366861d824988ba6fa7648df230e425072a4454d",
+      "whole_source": false
+    },
+    {
+      "path": "packages/core/issues/queries.ts",
+      "sha256": "10d939b302cbeca9280944c5b5ad0e3e8e042130d2c714496a6b6da6daf53c3e",
+      "whole_source": false
+    }
+  ],
+  "exports": [
+    {
+      "name": "IssueFlatCache",
+      "source": "packages/core/issues/cache-coordinator.ts:39"
+    },
+    {
+      "name": "IssueTableRowCache",
+      "source": "packages/core/issues/cache-coordinator.ts:40"
+    },
+    {
+      "name": "IssueCacheChangeResult",
+      "source": "packages/core/issues/cache-coordinator.ts:54"
+    },
+    {
+      "name": "bucketedListEntries",
+      "source": "packages/core/issues/cache-coordinator.ts:110"
+    },
+    {
+      "name": "flatListEntries",
+      "source": "packages/core/issues/cache-coordinator.ts:122"
+    },
+    {
+      "name": "tableRowEntries",
+      "source": "packages/core/issues/cache-coordinator.ts:134"
+    },
+    {
+      "name": "sidebarListEntries",
+      "source": "packages/core/issues/cache-coordinator.ts:148"
+    },
+    {
+      "name": "issueArrayEntries",
+      "source": "packages/core/issues/cache-coordinator.ts:164"
+    },
+    {
+      "name": "applyIssueChange",
+      "source": "packages/core/issues/cache-coordinator.ts:307"
+    },
+    {
+      "name": "rollbackIssueChange",
+      "source": "packages/core/issues/cache-coordinator.ts:582"
+    },
+    {
+      "name": "invalidateIssueDerivatives",
+      "source": "packages/core/issues/cache-coordinator.ts:626"
+    },
+    {
+      "name": "invalidateSidebarListsForIssue",
+      "source": "packages/core/issues/cache-coordinator.ts:652"
+    },
+    {
+      "name": "invalidateUpdatedAtSortedIssueLists",
+      "source": "packages/core/issues/cache-coordinator.ts:706"
+    },
+    {
+      "name": "invalidateLastActivitySortedIssueLists",
+      "source": "packages/core/issues/cache-coordinator.ts:719"
+    },
+    {
+      "name": "invalidateStaleListKeys",
+      "source": "packages/core/issues/cache-coordinator.ts:731"
+    }
+  ],
+  "edges": [
+    {
+      "source": "packages/core/issues/cache-coordinator.ts:626",
+      "action": "invalidateIssueDerivatives",
+      "kind": "possible-active-observer-refetch-conservative-union",
+      "inventory": [
+        {
+          "id": "client:3116",
+          "method": "GET",
+          "path_expression": "/api/issues/${issueId}/task-runs${query}",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}/task-runs"
+          }
+        },
+        {
+          "id": "client:1680",
+          "method": "GET",
+          "path_expression": "/api/comments/${anchorCommentId}/sub-issue-preview",
+          "route": {
+            "method": "GET",
+            "path": "/api/comments/{commentId}/sub-issue-preview"
+          }
+        },
+        {
+          "id": "client:1402",
+          "method": "POST",
+          "path_expression": "/api/issues/table/groups",
+          "route": {
+            "method": "POST",
+            "path": "/api/issues/table/groups"
+          }
+        },
+        {
+          "id": "client:1416",
+          "method": "POST",
+          "path_expression": "/api/issues/table/rows",
+          "route": {
+            "method": "POST",
+            "path": "/api/issues/table/rows"
+          }
+        },
+        {
+          "id": "client:1430",
+          "method": "POST",
+          "path_expression": "/api/issues/table/facets",
+          "route": {
+            "method": "POST",
+            "path": "/api/issues/table/facets"
+          }
+        },
+        {
+          "id": "client:1344",
+          "method": "GET",
+          "path_expression": "/api/issues?${search}",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues"
+          }
+        },
+        {
+          "id": "client:1612",
+          "method": "GET",
+          "path_expression": "/api/issues/${encodeURIComponent(id)}",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}"
+          }
+        },
+        {
+          "id": "client:1817",
+          "method": "GET",
+          "path_expression": "/api/issues/child-progress",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/child-progress"
+          }
+        },
+        {
+          "id": "client:1785",
+          "method": "GET",
+          "path_expression": "/api/issues/${id}/duplicates",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}/duplicates"
+          }
+        },
+        {
+          "id": "client:1795",
+          "method": "GET",
+          "path_expression": "/api/issues/${id}/children",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}/children"
+          }
+        },
+        {
+          "id": "client:1806",
+          "method": "GET",
+          "path_expression": "/api/issues/children?parent_ids=${parentIds.join(\",\")}",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/children"
+          }
+        },
+        {
+          "id": "client:1926",
+          "method": "GET",
+          "path_expression": "/api/issues/${issueId}/timeline",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}/timeline"
+          }
+        },
+        {
+          "id": "client:1861",
+          "method": "GET",
+          "path_expression": "/api/issues/${issueId}/comments${query}",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}/comments"
+          }
+        },
+        {
+          "id": "client:2002",
+          "method": "GET",
+          "path_expression": "/api/issues/${issueId}/subscribers",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}/subscribers"
+          }
+        },
+        {
+          "id": "client:5536",
+          "method": "GET",
+          "path_expression": "/api/issues/${issueId}/environments",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}/environments"
+          }
+        },
+        {
+          "id": "client:3129",
+          "method": "GET",
+          "path_expression": "/api/issues/${issueId}/usage",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}/usage"
+          }
+        },
+        {
+          "id": "client:4427",
+          "method": "GET",
+          "path_expression": "/api/issues/${issueId}/attachments",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}/attachments"
+          }
+        },
+        {
+          "id": "client:4517",
+          "method": "GET",
+          "path_expression": "/api/projects?${search}",
+          "route": {
+            "method": "GET",
+            "path": "/api/projects"
+          }
+        },
+        {
+          "id": "client:4524",
+          "method": "GET",
+          "path_expression": "/api/projects/${id}",
+          "route": {
+            "method": "GET",
+            "path": "/api/projects/{id}"
+          }
+        },
+        {
+          "id": "client:4561",
+          "method": "GET",
+          "path_expression": "/api/projects/${id}/members",
+          "route": {
+            "method": "GET",
+            "path": "/api/projects/{id}/members"
+          }
+        },
+        {
+          "id": "client:4602",
+          "method": "GET",
+          "path_expression": "/api/projects/private",
+          "route": {
+            "method": "GET",
+            "path": "/api/projects/private"
+          }
+        },
+        {
+          "id": "client:4569",
+          "method": "GET",
+          "path_expression": "/api/projects/${id}/subscription",
+          "route": {
+            "method": "GET",
+            "path": "/api/projects/{id}/subscription"
+          }
+        },
+        {
+          "id": "client:3391",
+          "method": "GET",
+          "path_expression": "/api/workspaces",
+          "route": {
+            "method": "GET",
+            "path": "/api/workspaces"
+          }
+        },
+        {
+          "id": "client:3765",
+          "method": "GET",
+          "path_expression": "/api/workspaces/${workspaceId}/members",
+          "route": {
+            "method": "GET",
+            "path": "/api/workspaces/{id}/members"
+          }
+        },
+        {
+          "id": "client:2066",
+          "method": "GET",
+          "path_expression": "/api/agents?${search}",
+          "route": {
+            "method": "GET",
+            "path": "/api/agents"
+          }
+        },
+        {
+          "id": "client:2070",
+          "method": "GET",
+          "path_expression": "/api/agents/${id}",
+          "route": {
+            "method": "GET",
+            "path": "/api/agents/{id}"
+          }
+        },
+        {
+          "id": "client:5203",
+          "method": "GET",
+          "path_expression": "/api/squads",
+          "route": {
+            "method": "GET",
+            "path": "/api/squads"
+          }
+        },
+        {
+          "id": "client:5210",
+          "method": "GET",
+          "path_expression": "/api/squads/involved",
+          "route": {
+            "method": "GET",
+            "path": "/api/squads/involved"
+          }
+        },
+        {
+          "id": "client:5264",
+          "method": "GET",
+          "path_expression": "/api/squads/${squadId}/members/status",
+          "route": {
+            "method": "GET",
+            "path": "/api/squads/{id}/members/status"
+          }
+        },
+        {
+          "id": "client:3876",
+          "method": "GET",
+          "path_expression": "/api/skills",
+          "route": {
+            "method": "GET",
+            "path": "/api/skills"
+          }
+        },
+        {
+          "id": "client:3891",
+          "method": "GET",
+          "path_expression": "/api/skills/${id}",
+          "route": {
+            "method": "GET",
+            "path": "/api/skills/{id}"
+          }
+        },
+        {
+          "id": "client:3967",
+          "method": "GET",
+          "path_expression": "/api/skills/${skillId}/versions",
+          "route": {
+            "method": "GET",
+            "path": "/api/skills/{id}/versions"
+          }
+        },
+        {
+          "id": "client:3977",
+          "method": "GET",
+          "path_expression": "/api/skills/${skillId}/versions/${version}",
+          "route": {
+            "method": "GET",
+            "path": "/api/skills/{id}/versions/{version}"
+          }
+        },
+        {
+          "id": "client:3796",
+          "method": "GET",
+          "path_expression": "/api/workspaces/${workspaceId}/invitations",
+          "route": {
+            "method": "GET",
+            "path": "/api/workspaces/{id}/invitations"
+          }
+        },
+        {
+          "id": "client:3836",
+          "method": "GET",
+          "path_expression": "/api/workspaces/${workspaceId}/share-links",
+          "route": {
+            "method": "GET",
+            "path": "/api/workspaces/{id}/share-links"
+          }
+        },
+        {
+          "id": "client:3806",
+          "method": "GET",
+          "path_expression": "/api/invitations",
+          "route": {
+            "method": "GET",
+            "path": "/api/invitations"
+          }
+        },
+        {
+          "id": "client:1935",
+          "method": "GET",
+          "path_expression": "/api/assignee-frequency",
+          "route": {
+            "method": "GET",
+            "path": "/api/assignee-frequency"
+          }
+        },
+        {
+          "id": "client:3441",
+          "method": "GET",
+          "path_expression": "/api/workspaces/${workspaceId}/mcp-servers",
+          "route": {
+            "method": "GET",
+            "path": "/api/workspaces/{id}/mcp-servers"
+          }
+        },
+        {
+          "id": "client:3493",
+          "method": "GET",
+          "path_expression": "/api/agents/${agentId}/mcp-servers",
+          "route": {
+            "method": "GET",
+            "path": "/api/agents/{id}/mcp-servers"
+          }
+        },
+        {
+          "id": "client:4821",
+          "method": "GET",
+          "path_expression": "/api/issue-statuses${query}",
+          "route": {
+            "method": "GET",
+            "path": "/api/issue-statuses"
+          }
+        },
+        {
+          "id": "client:3232",
+          "method": "GET",
+          "path_expression": "/api/inbox/archived/page?${params}",
+          "route": {
+            "method": "GET",
+            "path": "/api/inbox/archived/page"
+          }
+        },
+        {
+          "id": "client:3241",
+          "method": "GET",
+          "path_expression": "/api/inbox/archived/facets?${this.archivedInboxParams(filters)}",
+          "route": {
+            "method": "GET",
+            "path": "/api/inbox/archived/facets"
+          }
+        }
+      ],
+      "precision": "Superset from corrected 45-factory evidence plus archive page/facets; predicates and prefix restrictions below apply. Not a request count or all-observer closure."
+    },
+    {
+      "source": "packages/core/issues/cache-coordinator.ts:652",
+      "action": "invalidateSidebarListsForIssue",
+      "kind": "possible-active-observer-refetch-conservative-union",
+      "inventory": [
+        {
+          "id": "client:3116",
+          "method": "GET",
+          "path_expression": "/api/issues/${issueId}/task-runs${query}",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}/task-runs"
+          }
+        },
+        {
+          "id": "client:1680",
+          "method": "GET",
+          "path_expression": "/api/comments/${anchorCommentId}/sub-issue-preview",
+          "route": {
+            "method": "GET",
+            "path": "/api/comments/{commentId}/sub-issue-preview"
+          }
+        },
+        {
+          "id": "client:1402",
+          "method": "POST",
+          "path_expression": "/api/issues/table/groups",
+          "route": {
+            "method": "POST",
+            "path": "/api/issues/table/groups"
+          }
+        },
+        {
+          "id": "client:1416",
+          "method": "POST",
+          "path_expression": "/api/issues/table/rows",
+          "route": {
+            "method": "POST",
+            "path": "/api/issues/table/rows"
+          }
+        },
+        {
+          "id": "client:1430",
+          "method": "POST",
+          "path_expression": "/api/issues/table/facets",
+          "route": {
+            "method": "POST",
+            "path": "/api/issues/table/facets"
+          }
+        },
+        {
+          "id": "client:1344",
+          "method": "GET",
+          "path_expression": "/api/issues?${search}",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues"
+          }
+        },
+        {
+          "id": "client:1612",
+          "method": "GET",
+          "path_expression": "/api/issues/${encodeURIComponent(id)}",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}"
+          }
+        },
+        {
+          "id": "client:1817",
+          "method": "GET",
+          "path_expression": "/api/issues/child-progress",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/child-progress"
+          }
+        },
+        {
+          "id": "client:1785",
+          "method": "GET",
+          "path_expression": "/api/issues/${id}/duplicates",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}/duplicates"
+          }
+        },
+        {
+          "id": "client:1795",
+          "method": "GET",
+          "path_expression": "/api/issues/${id}/children",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}/children"
+          }
+        },
+        {
+          "id": "client:1806",
+          "method": "GET",
+          "path_expression": "/api/issues/children?parent_ids=${parentIds.join(\",\")}",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/children"
+          }
+        },
+        {
+          "id": "client:1926",
+          "method": "GET",
+          "path_expression": "/api/issues/${issueId}/timeline",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}/timeline"
+          }
+        },
+        {
+          "id": "client:1861",
+          "method": "GET",
+          "path_expression": "/api/issues/${issueId}/comments${query}",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}/comments"
+          }
+        },
+        {
+          "id": "client:2002",
+          "method": "GET",
+          "path_expression": "/api/issues/${issueId}/subscribers",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}/subscribers"
+          }
+        },
+        {
+          "id": "client:5536",
+          "method": "GET",
+          "path_expression": "/api/issues/${issueId}/environments",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}/environments"
+          }
+        },
+        {
+          "id": "client:3129",
+          "method": "GET",
+          "path_expression": "/api/issues/${issueId}/usage",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}/usage"
+          }
+        },
+        {
+          "id": "client:4427",
+          "method": "GET",
+          "path_expression": "/api/issues/${issueId}/attachments",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}/attachments"
+          }
+        },
+        {
+          "id": "client:4517",
+          "method": "GET",
+          "path_expression": "/api/projects?${search}",
+          "route": {
+            "method": "GET",
+            "path": "/api/projects"
+          }
+        },
+        {
+          "id": "client:4524",
+          "method": "GET",
+          "path_expression": "/api/projects/${id}",
+          "route": {
+            "method": "GET",
+            "path": "/api/projects/{id}"
+          }
+        },
+        {
+          "id": "client:4561",
+          "method": "GET",
+          "path_expression": "/api/projects/${id}/members",
+          "route": {
+            "method": "GET",
+            "path": "/api/projects/{id}/members"
+          }
+        },
+        {
+          "id": "client:4602",
+          "method": "GET",
+          "path_expression": "/api/projects/private",
+          "route": {
+            "method": "GET",
+            "path": "/api/projects/private"
+          }
+        },
+        {
+          "id": "client:4569",
+          "method": "GET",
+          "path_expression": "/api/projects/${id}/subscription",
+          "route": {
+            "method": "GET",
+            "path": "/api/projects/{id}/subscription"
+          }
+        },
+        {
+          "id": "client:3391",
+          "method": "GET",
+          "path_expression": "/api/workspaces",
+          "route": {
+            "method": "GET",
+            "path": "/api/workspaces"
+          }
+        },
+        {
+          "id": "client:3765",
+          "method": "GET",
+          "path_expression": "/api/workspaces/${workspaceId}/members",
+          "route": {
+            "method": "GET",
+            "path": "/api/workspaces/{id}/members"
+          }
+        },
+        {
+          "id": "client:2066",
+          "method": "GET",
+          "path_expression": "/api/agents?${search}",
+          "route": {
+            "method": "GET",
+            "path": "/api/agents"
+          }
+        },
+        {
+          "id": "client:2070",
+          "method": "GET",
+          "path_expression": "/api/agents/${id}",
+          "route": {
+            "method": "GET",
+            "path": "/api/agents/{id}"
+          }
+        },
+        {
+          "id": "client:5203",
+          "method": "GET",
+          "path_expression": "/api/squads",
+          "route": {
+            "method": "GET",
+            "path": "/api/squads"
+          }
+        },
+        {
+          "id": "client:5210",
+          "method": "GET",
+          "path_expression": "/api/squads/involved",
+          "route": {
+            "method": "GET",
+            "path": "/api/squads/involved"
+          }
+        },
+        {
+          "id": "client:5264",
+          "method": "GET",
+          "path_expression": "/api/squads/${squadId}/members/status",
+          "route": {
+            "method": "GET",
+            "path": "/api/squads/{id}/members/status"
+          }
+        },
+        {
+          "id": "client:3876",
+          "method": "GET",
+          "path_expression": "/api/skills",
+          "route": {
+            "method": "GET",
+            "path": "/api/skills"
+          }
+        },
+        {
+          "id": "client:3891",
+          "method": "GET",
+          "path_expression": "/api/skills/${id}",
+          "route": {
+            "method": "GET",
+            "path": "/api/skills/{id}"
+          }
+        },
+        {
+          "id": "client:3967",
+          "method": "GET",
+          "path_expression": "/api/skills/${skillId}/versions",
+          "route": {
+            "method": "GET",
+            "path": "/api/skills/{id}/versions"
+          }
+        },
+        {
+          "id": "client:3977",
+          "method": "GET",
+          "path_expression": "/api/skills/${skillId}/versions/${version}",
+          "route": {
+            "method": "GET",
+            "path": "/api/skills/{id}/versions/{version}"
+          }
+        },
+        {
+          "id": "client:3796",
+          "method": "GET",
+          "path_expression": "/api/workspaces/${workspaceId}/invitations",
+          "route": {
+            "method": "GET",
+            "path": "/api/workspaces/{id}/invitations"
+          }
+        },
+        {
+          "id": "client:3836",
+          "method": "GET",
+          "path_expression": "/api/workspaces/${workspaceId}/share-links",
+          "route": {
+            "method": "GET",
+            "path": "/api/workspaces/{id}/share-links"
+          }
+        },
+        {
+          "id": "client:3806",
+          "method": "GET",
+          "path_expression": "/api/invitations",
+          "route": {
+            "method": "GET",
+            "path": "/api/invitations"
+          }
+        },
+        {
+          "id": "client:1935",
+          "method": "GET",
+          "path_expression": "/api/assignee-frequency",
+          "route": {
+            "method": "GET",
+            "path": "/api/assignee-frequency"
+          }
+        },
+        {
+          "id": "client:3441",
+          "method": "GET",
+          "path_expression": "/api/workspaces/${workspaceId}/mcp-servers",
+          "route": {
+            "method": "GET",
+            "path": "/api/workspaces/{id}/mcp-servers"
+          }
+        },
+        {
+          "id": "client:3493",
+          "method": "GET",
+          "path_expression": "/api/agents/${agentId}/mcp-servers",
+          "route": {
+            "method": "GET",
+            "path": "/api/agents/{id}/mcp-servers"
+          }
+        },
+        {
+          "id": "client:4821",
+          "method": "GET",
+          "path_expression": "/api/issue-statuses${query}",
+          "route": {
+            "method": "GET",
+            "path": "/api/issue-statuses"
+          }
+        },
+        {
+          "id": "client:3232",
+          "method": "GET",
+          "path_expression": "/api/inbox/archived/page?${params}",
+          "route": {
+            "method": "GET",
+            "path": "/api/inbox/archived/page"
+          }
+        },
+        {
+          "id": "client:3241",
+          "method": "GET",
+          "path_expression": "/api/inbox/archived/facets?${this.archivedInboxParams(filters)}",
+          "route": {
+            "method": "GET",
+            "path": "/api/inbox/archived/facets"
+          }
+        }
+      ],
+      "precision": "Superset from corrected 45-factory evidence plus archive page/facets; predicates and prefix restrictions below apply. Not a request count or all-observer closure."
+    },
+    {
+      "source": "packages/core/issues/cache-coordinator.ts:706",
+      "action": "invalidateUpdatedAtSortedIssueLists",
+      "kind": "possible-active-observer-refetch-conservative-union",
+      "inventory": [
+        {
+          "id": "client:3116",
+          "method": "GET",
+          "path_expression": "/api/issues/${issueId}/task-runs${query}",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}/task-runs"
+          }
+        },
+        {
+          "id": "client:1680",
+          "method": "GET",
+          "path_expression": "/api/comments/${anchorCommentId}/sub-issue-preview",
+          "route": {
+            "method": "GET",
+            "path": "/api/comments/{commentId}/sub-issue-preview"
+          }
+        },
+        {
+          "id": "client:1402",
+          "method": "POST",
+          "path_expression": "/api/issues/table/groups",
+          "route": {
+            "method": "POST",
+            "path": "/api/issues/table/groups"
+          }
+        },
+        {
+          "id": "client:1416",
+          "method": "POST",
+          "path_expression": "/api/issues/table/rows",
+          "route": {
+            "method": "POST",
+            "path": "/api/issues/table/rows"
+          }
+        },
+        {
+          "id": "client:1430",
+          "method": "POST",
+          "path_expression": "/api/issues/table/facets",
+          "route": {
+            "method": "POST",
+            "path": "/api/issues/table/facets"
+          }
+        },
+        {
+          "id": "client:1344",
+          "method": "GET",
+          "path_expression": "/api/issues?${search}",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues"
+          }
+        },
+        {
+          "id": "client:1612",
+          "method": "GET",
+          "path_expression": "/api/issues/${encodeURIComponent(id)}",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}"
+          }
+        },
+        {
+          "id": "client:1817",
+          "method": "GET",
+          "path_expression": "/api/issues/child-progress",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/child-progress"
+          }
+        },
+        {
+          "id": "client:1785",
+          "method": "GET",
+          "path_expression": "/api/issues/${id}/duplicates",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}/duplicates"
+          }
+        },
+        {
+          "id": "client:1795",
+          "method": "GET",
+          "path_expression": "/api/issues/${id}/children",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}/children"
+          }
+        },
+        {
+          "id": "client:1806",
+          "method": "GET",
+          "path_expression": "/api/issues/children?parent_ids=${parentIds.join(\",\")}",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/children"
+          }
+        },
+        {
+          "id": "client:1926",
+          "method": "GET",
+          "path_expression": "/api/issues/${issueId}/timeline",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}/timeline"
+          }
+        },
+        {
+          "id": "client:1861",
+          "method": "GET",
+          "path_expression": "/api/issues/${issueId}/comments${query}",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}/comments"
+          }
+        },
+        {
+          "id": "client:2002",
+          "method": "GET",
+          "path_expression": "/api/issues/${issueId}/subscribers",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}/subscribers"
+          }
+        },
+        {
+          "id": "client:5536",
+          "method": "GET",
+          "path_expression": "/api/issues/${issueId}/environments",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}/environments"
+          }
+        },
+        {
+          "id": "client:3129",
+          "method": "GET",
+          "path_expression": "/api/issues/${issueId}/usage",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}/usage"
+          }
+        },
+        {
+          "id": "client:4427",
+          "method": "GET",
+          "path_expression": "/api/issues/${issueId}/attachments",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}/attachments"
+          }
+        },
+        {
+          "id": "client:4517",
+          "method": "GET",
+          "path_expression": "/api/projects?${search}",
+          "route": {
+            "method": "GET",
+            "path": "/api/projects"
+          }
+        },
+        {
+          "id": "client:4524",
+          "method": "GET",
+          "path_expression": "/api/projects/${id}",
+          "route": {
+            "method": "GET",
+            "path": "/api/projects/{id}"
+          }
+        },
+        {
+          "id": "client:4561",
+          "method": "GET",
+          "path_expression": "/api/projects/${id}/members",
+          "route": {
+            "method": "GET",
+            "path": "/api/projects/{id}/members"
+          }
+        },
+        {
+          "id": "client:4602",
+          "method": "GET",
+          "path_expression": "/api/projects/private",
+          "route": {
+            "method": "GET",
+            "path": "/api/projects/private"
+          }
+        },
+        {
+          "id": "client:4569",
+          "method": "GET",
+          "path_expression": "/api/projects/${id}/subscription",
+          "route": {
+            "method": "GET",
+            "path": "/api/projects/{id}/subscription"
+          }
+        },
+        {
+          "id": "client:3391",
+          "method": "GET",
+          "path_expression": "/api/workspaces",
+          "route": {
+            "method": "GET",
+            "path": "/api/workspaces"
+          }
+        },
+        {
+          "id": "client:3765",
+          "method": "GET",
+          "path_expression": "/api/workspaces/${workspaceId}/members",
+          "route": {
+            "method": "GET",
+            "path": "/api/workspaces/{id}/members"
+          }
+        },
+        {
+          "id": "client:2066",
+          "method": "GET",
+          "path_expression": "/api/agents?${search}",
+          "route": {
+            "method": "GET",
+            "path": "/api/agents"
+          }
+        },
+        {
+          "id": "client:2070",
+          "method": "GET",
+          "path_expression": "/api/agents/${id}",
+          "route": {
+            "method": "GET",
+            "path": "/api/agents/{id}"
+          }
+        },
+        {
+          "id": "client:5203",
+          "method": "GET",
+          "path_expression": "/api/squads",
+          "route": {
+            "method": "GET",
+            "path": "/api/squads"
+          }
+        },
+        {
+          "id": "client:5210",
+          "method": "GET",
+          "path_expression": "/api/squads/involved",
+          "route": {
+            "method": "GET",
+            "path": "/api/squads/involved"
+          }
+        },
+        {
+          "id": "client:5264",
+          "method": "GET",
+          "path_expression": "/api/squads/${squadId}/members/status",
+          "route": {
+            "method": "GET",
+            "path": "/api/squads/{id}/members/status"
+          }
+        },
+        {
+          "id": "client:3876",
+          "method": "GET",
+          "path_expression": "/api/skills",
+          "route": {
+            "method": "GET",
+            "path": "/api/skills"
+          }
+        },
+        {
+          "id": "client:3891",
+          "method": "GET",
+          "path_expression": "/api/skills/${id}",
+          "route": {
+            "method": "GET",
+            "path": "/api/skills/{id}"
+          }
+        },
+        {
+          "id": "client:3967",
+          "method": "GET",
+          "path_expression": "/api/skills/${skillId}/versions",
+          "route": {
+            "method": "GET",
+            "path": "/api/skills/{id}/versions"
+          }
+        },
+        {
+          "id": "client:3977",
+          "method": "GET",
+          "path_expression": "/api/skills/${skillId}/versions/${version}",
+          "route": {
+            "method": "GET",
+            "path": "/api/skills/{id}/versions/{version}"
+          }
+        },
+        {
+          "id": "client:3796",
+          "method": "GET",
+          "path_expression": "/api/workspaces/${workspaceId}/invitations",
+          "route": {
+            "method": "GET",
+            "path": "/api/workspaces/{id}/invitations"
+          }
+        },
+        {
+          "id": "client:3836",
+          "method": "GET",
+          "path_expression": "/api/workspaces/${workspaceId}/share-links",
+          "route": {
+            "method": "GET",
+            "path": "/api/workspaces/{id}/share-links"
+          }
+        },
+        {
+          "id": "client:3806",
+          "method": "GET",
+          "path_expression": "/api/invitations",
+          "route": {
+            "method": "GET",
+            "path": "/api/invitations"
+          }
+        },
+        {
+          "id": "client:1935",
+          "method": "GET",
+          "path_expression": "/api/assignee-frequency",
+          "route": {
+            "method": "GET",
+            "path": "/api/assignee-frequency"
+          }
+        },
+        {
+          "id": "client:3441",
+          "method": "GET",
+          "path_expression": "/api/workspaces/${workspaceId}/mcp-servers",
+          "route": {
+            "method": "GET",
+            "path": "/api/workspaces/{id}/mcp-servers"
+          }
+        },
+        {
+          "id": "client:3493",
+          "method": "GET",
+          "path_expression": "/api/agents/${agentId}/mcp-servers",
+          "route": {
+            "method": "GET",
+            "path": "/api/agents/{id}/mcp-servers"
+          }
+        },
+        {
+          "id": "client:4821",
+          "method": "GET",
+          "path_expression": "/api/issue-statuses${query}",
+          "route": {
+            "method": "GET",
+            "path": "/api/issue-statuses"
+          }
+        },
+        {
+          "id": "client:3232",
+          "method": "GET",
+          "path_expression": "/api/inbox/archived/page?${params}",
+          "route": {
+            "method": "GET",
+            "path": "/api/inbox/archived/page"
+          }
+        },
+        {
+          "id": "client:3241",
+          "method": "GET",
+          "path_expression": "/api/inbox/archived/facets?${this.archivedInboxParams(filters)}",
+          "route": {
+            "method": "GET",
+            "path": "/api/inbox/archived/facets"
+          }
+        }
+      ],
+      "precision": "Superset from corrected 45-factory evidence plus archive page/facets; predicates and prefix restrictions below apply. Not a request count or all-observer closure."
+    },
+    {
+      "source": "packages/core/issues/cache-coordinator.ts:719",
+      "action": "invalidateLastActivitySortedIssueLists",
+      "kind": "possible-active-observer-refetch-conservative-union",
+      "inventory": [
+        {
+          "id": "client:3116",
+          "method": "GET",
+          "path_expression": "/api/issues/${issueId}/task-runs${query}",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}/task-runs"
+          }
+        },
+        {
+          "id": "client:1680",
+          "method": "GET",
+          "path_expression": "/api/comments/${anchorCommentId}/sub-issue-preview",
+          "route": {
+            "method": "GET",
+            "path": "/api/comments/{commentId}/sub-issue-preview"
+          }
+        },
+        {
+          "id": "client:1402",
+          "method": "POST",
+          "path_expression": "/api/issues/table/groups",
+          "route": {
+            "method": "POST",
+            "path": "/api/issues/table/groups"
+          }
+        },
+        {
+          "id": "client:1416",
+          "method": "POST",
+          "path_expression": "/api/issues/table/rows",
+          "route": {
+            "method": "POST",
+            "path": "/api/issues/table/rows"
+          }
+        },
+        {
+          "id": "client:1430",
+          "method": "POST",
+          "path_expression": "/api/issues/table/facets",
+          "route": {
+            "method": "POST",
+            "path": "/api/issues/table/facets"
+          }
+        },
+        {
+          "id": "client:1344",
+          "method": "GET",
+          "path_expression": "/api/issues?${search}",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues"
+          }
+        },
+        {
+          "id": "client:1612",
+          "method": "GET",
+          "path_expression": "/api/issues/${encodeURIComponent(id)}",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}"
+          }
+        },
+        {
+          "id": "client:1817",
+          "method": "GET",
+          "path_expression": "/api/issues/child-progress",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/child-progress"
+          }
+        },
+        {
+          "id": "client:1785",
+          "method": "GET",
+          "path_expression": "/api/issues/${id}/duplicates",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}/duplicates"
+          }
+        },
+        {
+          "id": "client:1795",
+          "method": "GET",
+          "path_expression": "/api/issues/${id}/children",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}/children"
+          }
+        },
+        {
+          "id": "client:1806",
+          "method": "GET",
+          "path_expression": "/api/issues/children?parent_ids=${parentIds.join(\",\")}",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/children"
+          }
+        },
+        {
+          "id": "client:1926",
+          "method": "GET",
+          "path_expression": "/api/issues/${issueId}/timeline",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}/timeline"
+          }
+        },
+        {
+          "id": "client:1861",
+          "method": "GET",
+          "path_expression": "/api/issues/${issueId}/comments${query}",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}/comments"
+          }
+        },
+        {
+          "id": "client:2002",
+          "method": "GET",
+          "path_expression": "/api/issues/${issueId}/subscribers",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}/subscribers"
+          }
+        },
+        {
+          "id": "client:5536",
+          "method": "GET",
+          "path_expression": "/api/issues/${issueId}/environments",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}/environments"
+          }
+        },
+        {
+          "id": "client:3129",
+          "method": "GET",
+          "path_expression": "/api/issues/${issueId}/usage",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}/usage"
+          }
+        },
+        {
+          "id": "client:4427",
+          "method": "GET",
+          "path_expression": "/api/issues/${issueId}/attachments",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}/attachments"
+          }
+        },
+        {
+          "id": "client:4517",
+          "method": "GET",
+          "path_expression": "/api/projects?${search}",
+          "route": {
+            "method": "GET",
+            "path": "/api/projects"
+          }
+        },
+        {
+          "id": "client:4524",
+          "method": "GET",
+          "path_expression": "/api/projects/${id}",
+          "route": {
+            "method": "GET",
+            "path": "/api/projects/{id}"
+          }
+        },
+        {
+          "id": "client:4561",
+          "method": "GET",
+          "path_expression": "/api/projects/${id}/members",
+          "route": {
+            "method": "GET",
+            "path": "/api/projects/{id}/members"
+          }
+        },
+        {
+          "id": "client:4602",
+          "method": "GET",
+          "path_expression": "/api/projects/private",
+          "route": {
+            "method": "GET",
+            "path": "/api/projects/private"
+          }
+        },
+        {
+          "id": "client:4569",
+          "method": "GET",
+          "path_expression": "/api/projects/${id}/subscription",
+          "route": {
+            "method": "GET",
+            "path": "/api/projects/{id}/subscription"
+          }
+        },
+        {
+          "id": "client:3391",
+          "method": "GET",
+          "path_expression": "/api/workspaces",
+          "route": {
+            "method": "GET",
+            "path": "/api/workspaces"
+          }
+        },
+        {
+          "id": "client:3765",
+          "method": "GET",
+          "path_expression": "/api/workspaces/${workspaceId}/members",
+          "route": {
+            "method": "GET",
+            "path": "/api/workspaces/{id}/members"
+          }
+        },
+        {
+          "id": "client:2066",
+          "method": "GET",
+          "path_expression": "/api/agents?${search}",
+          "route": {
+            "method": "GET",
+            "path": "/api/agents"
+          }
+        },
+        {
+          "id": "client:2070",
+          "method": "GET",
+          "path_expression": "/api/agents/${id}",
+          "route": {
+            "method": "GET",
+            "path": "/api/agents/{id}"
+          }
+        },
+        {
+          "id": "client:5203",
+          "method": "GET",
+          "path_expression": "/api/squads",
+          "route": {
+            "method": "GET",
+            "path": "/api/squads"
+          }
+        },
+        {
+          "id": "client:5210",
+          "method": "GET",
+          "path_expression": "/api/squads/involved",
+          "route": {
+            "method": "GET",
+            "path": "/api/squads/involved"
+          }
+        },
+        {
+          "id": "client:5264",
+          "method": "GET",
+          "path_expression": "/api/squads/${squadId}/members/status",
+          "route": {
+            "method": "GET",
+            "path": "/api/squads/{id}/members/status"
+          }
+        },
+        {
+          "id": "client:3876",
+          "method": "GET",
+          "path_expression": "/api/skills",
+          "route": {
+            "method": "GET",
+            "path": "/api/skills"
+          }
+        },
+        {
+          "id": "client:3891",
+          "method": "GET",
+          "path_expression": "/api/skills/${id}",
+          "route": {
+            "method": "GET",
+            "path": "/api/skills/{id}"
+          }
+        },
+        {
+          "id": "client:3967",
+          "method": "GET",
+          "path_expression": "/api/skills/${skillId}/versions",
+          "route": {
+            "method": "GET",
+            "path": "/api/skills/{id}/versions"
+          }
+        },
+        {
+          "id": "client:3977",
+          "method": "GET",
+          "path_expression": "/api/skills/${skillId}/versions/${version}",
+          "route": {
+            "method": "GET",
+            "path": "/api/skills/{id}/versions/{version}"
+          }
+        },
+        {
+          "id": "client:3796",
+          "method": "GET",
+          "path_expression": "/api/workspaces/${workspaceId}/invitations",
+          "route": {
+            "method": "GET",
+            "path": "/api/workspaces/{id}/invitations"
+          }
+        },
+        {
+          "id": "client:3836",
+          "method": "GET",
+          "path_expression": "/api/workspaces/${workspaceId}/share-links",
+          "route": {
+            "method": "GET",
+            "path": "/api/workspaces/{id}/share-links"
+          }
+        },
+        {
+          "id": "client:3806",
+          "method": "GET",
+          "path_expression": "/api/invitations",
+          "route": {
+            "method": "GET",
+            "path": "/api/invitations"
+          }
+        },
+        {
+          "id": "client:1935",
+          "method": "GET",
+          "path_expression": "/api/assignee-frequency",
+          "route": {
+            "method": "GET",
+            "path": "/api/assignee-frequency"
+          }
+        },
+        {
+          "id": "client:3441",
+          "method": "GET",
+          "path_expression": "/api/workspaces/${workspaceId}/mcp-servers",
+          "route": {
+            "method": "GET",
+            "path": "/api/workspaces/{id}/mcp-servers"
+          }
+        },
+        {
+          "id": "client:3493",
+          "method": "GET",
+          "path_expression": "/api/agents/${agentId}/mcp-servers",
+          "route": {
+            "method": "GET",
+            "path": "/api/agents/{id}/mcp-servers"
+          }
+        },
+        {
+          "id": "client:4821",
+          "method": "GET",
+          "path_expression": "/api/issue-statuses${query}",
+          "route": {
+            "method": "GET",
+            "path": "/api/issue-statuses"
+          }
+        },
+        {
+          "id": "client:3232",
+          "method": "GET",
+          "path_expression": "/api/inbox/archived/page?${params}",
+          "route": {
+            "method": "GET",
+            "path": "/api/inbox/archived/page"
+          }
+        },
+        {
+          "id": "client:3241",
+          "method": "GET",
+          "path_expression": "/api/inbox/archived/facets?${this.archivedInboxParams(filters)}",
+          "route": {
+            "method": "GET",
+            "path": "/api/inbox/archived/facets"
+          }
+        }
+      ],
+      "precision": "Superset from corrected 45-factory evidence plus archive page/facets; predicates and prefix restrictions below apply. Not a request count or all-observer closure."
+    },
+    {
+      "source": "packages/core/issues/cache-coordinator.ts:731",
+      "action": "invalidateStaleListKeys",
+      "kind": "possible-active-observer-refetch-conservative-union",
+      "inventory": [
+        {
+          "id": "client:3116",
+          "method": "GET",
+          "path_expression": "/api/issues/${issueId}/task-runs${query}",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}/task-runs"
+          }
+        },
+        {
+          "id": "client:1680",
+          "method": "GET",
+          "path_expression": "/api/comments/${anchorCommentId}/sub-issue-preview",
+          "route": {
+            "method": "GET",
+            "path": "/api/comments/{commentId}/sub-issue-preview"
+          }
+        },
+        {
+          "id": "client:1402",
+          "method": "POST",
+          "path_expression": "/api/issues/table/groups",
+          "route": {
+            "method": "POST",
+            "path": "/api/issues/table/groups"
+          }
+        },
+        {
+          "id": "client:1416",
+          "method": "POST",
+          "path_expression": "/api/issues/table/rows",
+          "route": {
+            "method": "POST",
+            "path": "/api/issues/table/rows"
+          }
+        },
+        {
+          "id": "client:1430",
+          "method": "POST",
+          "path_expression": "/api/issues/table/facets",
+          "route": {
+            "method": "POST",
+            "path": "/api/issues/table/facets"
+          }
+        },
+        {
+          "id": "client:1344",
+          "method": "GET",
+          "path_expression": "/api/issues?${search}",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues"
+          }
+        },
+        {
+          "id": "client:1612",
+          "method": "GET",
+          "path_expression": "/api/issues/${encodeURIComponent(id)}",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}"
+          }
+        },
+        {
+          "id": "client:1817",
+          "method": "GET",
+          "path_expression": "/api/issues/child-progress",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/child-progress"
+          }
+        },
+        {
+          "id": "client:1785",
+          "method": "GET",
+          "path_expression": "/api/issues/${id}/duplicates",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}/duplicates"
+          }
+        },
+        {
+          "id": "client:1795",
+          "method": "GET",
+          "path_expression": "/api/issues/${id}/children",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}/children"
+          }
+        },
+        {
+          "id": "client:1806",
+          "method": "GET",
+          "path_expression": "/api/issues/children?parent_ids=${parentIds.join(\",\")}",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/children"
+          }
+        },
+        {
+          "id": "client:1926",
+          "method": "GET",
+          "path_expression": "/api/issues/${issueId}/timeline",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}/timeline"
+          }
+        },
+        {
+          "id": "client:1861",
+          "method": "GET",
+          "path_expression": "/api/issues/${issueId}/comments${query}",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}/comments"
+          }
+        },
+        {
+          "id": "client:2002",
+          "method": "GET",
+          "path_expression": "/api/issues/${issueId}/subscribers",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}/subscribers"
+          }
+        },
+        {
+          "id": "client:5536",
+          "method": "GET",
+          "path_expression": "/api/issues/${issueId}/environments",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}/environments"
+          }
+        },
+        {
+          "id": "client:3129",
+          "method": "GET",
+          "path_expression": "/api/issues/${issueId}/usage",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}/usage"
+          }
+        },
+        {
+          "id": "client:4427",
+          "method": "GET",
+          "path_expression": "/api/issues/${issueId}/attachments",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}/attachments"
+          }
+        },
+        {
+          "id": "client:4517",
+          "method": "GET",
+          "path_expression": "/api/projects?${search}",
+          "route": {
+            "method": "GET",
+            "path": "/api/projects"
+          }
+        },
+        {
+          "id": "client:4524",
+          "method": "GET",
+          "path_expression": "/api/projects/${id}",
+          "route": {
+            "method": "GET",
+            "path": "/api/projects/{id}"
+          }
+        },
+        {
+          "id": "client:4561",
+          "method": "GET",
+          "path_expression": "/api/projects/${id}/members",
+          "route": {
+            "method": "GET",
+            "path": "/api/projects/{id}/members"
+          }
+        },
+        {
+          "id": "client:4602",
+          "method": "GET",
+          "path_expression": "/api/projects/private",
+          "route": {
+            "method": "GET",
+            "path": "/api/projects/private"
+          }
+        },
+        {
+          "id": "client:4569",
+          "method": "GET",
+          "path_expression": "/api/projects/${id}/subscription",
+          "route": {
+            "method": "GET",
+            "path": "/api/projects/{id}/subscription"
+          }
+        },
+        {
+          "id": "client:3391",
+          "method": "GET",
+          "path_expression": "/api/workspaces",
+          "route": {
+            "method": "GET",
+            "path": "/api/workspaces"
+          }
+        },
+        {
+          "id": "client:3765",
+          "method": "GET",
+          "path_expression": "/api/workspaces/${workspaceId}/members",
+          "route": {
+            "method": "GET",
+            "path": "/api/workspaces/{id}/members"
+          }
+        },
+        {
+          "id": "client:2066",
+          "method": "GET",
+          "path_expression": "/api/agents?${search}",
+          "route": {
+            "method": "GET",
+            "path": "/api/agents"
+          }
+        },
+        {
+          "id": "client:2070",
+          "method": "GET",
+          "path_expression": "/api/agents/${id}",
+          "route": {
+            "method": "GET",
+            "path": "/api/agents/{id}"
+          }
+        },
+        {
+          "id": "client:5203",
+          "method": "GET",
+          "path_expression": "/api/squads",
+          "route": {
+            "method": "GET",
+            "path": "/api/squads"
+          }
+        },
+        {
+          "id": "client:5210",
+          "method": "GET",
+          "path_expression": "/api/squads/involved",
+          "route": {
+            "method": "GET",
+            "path": "/api/squads/involved"
+          }
+        },
+        {
+          "id": "client:5264",
+          "method": "GET",
+          "path_expression": "/api/squads/${squadId}/members/status",
+          "route": {
+            "method": "GET",
+            "path": "/api/squads/{id}/members/status"
+          }
+        },
+        {
+          "id": "client:3876",
+          "method": "GET",
+          "path_expression": "/api/skills",
+          "route": {
+            "method": "GET",
+            "path": "/api/skills"
+          }
+        },
+        {
+          "id": "client:3891",
+          "method": "GET",
+          "path_expression": "/api/skills/${id}",
+          "route": {
+            "method": "GET",
+            "path": "/api/skills/{id}"
+          }
+        },
+        {
+          "id": "client:3967",
+          "method": "GET",
+          "path_expression": "/api/skills/${skillId}/versions",
+          "route": {
+            "method": "GET",
+            "path": "/api/skills/{id}/versions"
+          }
+        },
+        {
+          "id": "client:3977",
+          "method": "GET",
+          "path_expression": "/api/skills/${skillId}/versions/${version}",
+          "route": {
+            "method": "GET",
+            "path": "/api/skills/{id}/versions/{version}"
+          }
+        },
+        {
+          "id": "client:3796",
+          "method": "GET",
+          "path_expression": "/api/workspaces/${workspaceId}/invitations",
+          "route": {
+            "method": "GET",
+            "path": "/api/workspaces/{id}/invitations"
+          }
+        },
+        {
+          "id": "client:3836",
+          "method": "GET",
+          "path_expression": "/api/workspaces/${workspaceId}/share-links",
+          "route": {
+            "method": "GET",
+            "path": "/api/workspaces/{id}/share-links"
+          }
+        },
+        {
+          "id": "client:3806",
+          "method": "GET",
+          "path_expression": "/api/invitations",
+          "route": {
+            "method": "GET",
+            "path": "/api/invitations"
+          }
+        },
+        {
+          "id": "client:1935",
+          "method": "GET",
+          "path_expression": "/api/assignee-frequency",
+          "route": {
+            "method": "GET",
+            "path": "/api/assignee-frequency"
+          }
+        },
+        {
+          "id": "client:3441",
+          "method": "GET",
+          "path_expression": "/api/workspaces/${workspaceId}/mcp-servers",
+          "route": {
+            "method": "GET",
+            "path": "/api/workspaces/{id}/mcp-servers"
+          }
+        },
+        {
+          "id": "client:3493",
+          "method": "GET",
+          "path_expression": "/api/agents/${agentId}/mcp-servers",
+          "route": {
+            "method": "GET",
+            "path": "/api/agents/{id}/mcp-servers"
+          }
+        },
+        {
+          "id": "client:4821",
+          "method": "GET",
+          "path_expression": "/api/issue-statuses${query}",
+          "route": {
+            "method": "GET",
+            "path": "/api/issue-statuses"
+          }
+        },
+        {
+          "id": "client:3232",
+          "method": "GET",
+          "path_expression": "/api/inbox/archived/page?${params}",
+          "route": {
+            "method": "GET",
+            "path": "/api/inbox/archived/page"
+          }
+        },
+        {
+          "id": "client:3241",
+          "method": "GET",
+          "path_expression": "/api/inbox/archived/facets?${this.archivedInboxParams(filters)}",
+          "route": {
+            "method": "GET",
+            "path": "/api/inbox/archived/facets"
+          }
+        }
+      ],
+      "precision": "Superset from corrected 45-factory evidence plus archive page/facets; predicates and prefix restrictions below apply. Not a request count or all-observer closure."
+    }
+  ],
+  "direct_http_inventory": [],
+  "prefix_union": {
+    "scans": [
+      "issueKeys.list(wsId)",
+      "issueKeys.myAll(wsId)",
+      "issueKeys.flatAll(wsId)",
+      "issueKeys.tableAll(wsId)",
+      "issueKeys.sidebarAll(wsId)",
+      "arbitrary prefix passed to issueArrayEntries"
+    ],
+    "patches": [
+      "issueKeys.detail(wsId,id)",
+      "inboxKeys.list(wsId)",
+      "inboxKeys.archived(wsId)"
+    ],
+    "invalidations": [
+      "issueKeys.assigneeGroupsAll(wsId)",
+      "issueKeys.myAssigneeGroupsAll(wsId)",
+      "issueKeys.projectGanttAll(wsId)",
+      "projectKeys.all(wsId) if statusOrProjectChanged",
+      "issueKeys.sidebarAll(wsId) if refreshSidebar ?? statusOrProjectChanged",
+      "issueKeys.sidebarAll(wsId) with source/loaded-issue predicate",
+      "issueKeys.all(wsId) with top-level object sort_by or nested sort.field updated_at/last_activity",
+      "exact supplied stale keys; inbox cancellation first"
+    ],
+    "returned_stale": [
+      "bucketed/flat keys determined by membership, status/category and sort changes",
+      "existing archive descendant keys only (length exceeds archive prefix)",
+      "existing inbox facet keys"
+    ]
+  },
+  "semantics": [
+    "No retry policy, revision counter, lock or mutation lifecycle is implemented here. acceptCurrent is caller supplied, defaults true, and guards loaded entities per projection; it does not guard inbox projections or all stale-key decisions.",
+    "applyIssueChange synchronously snapshots and patches; it returns staleKeys without invalidating those keys. Inbox helper preserves prior invalidation with refetchType none.",
+    "rollback restores captured snapshots without revision admission or concurrency arbitration; undefined detail/inbox snapshots are skipped; archive snapshot tuples are replayed.",
+    "invalidateStaleListKeys deduplicates hashKey within one invocation. Inbox exact cancelQueries promise chains exact invalidation; function returns without awaiting chains. Other invalidations are unawaited.",
+    "Possible active observer refetch depends on query presence/enabled state/options. Inactive stale queries may fetch later. No guaranteed HTTP count.",
+    "Shape guards: byStatus bucketed, pages array flat (includes export-shaped siblings), rows array table, issues array sidebar, Array.isArray generic issue arrays."
+  ],
+  "remaining_edges": [
+    "Arbitrary issueArrayEntries prefix and externally supplied staleKeys can address query factories beyond finite inherited union.",
+    "Injected acceptCurrent callback effects remain caller-owned; realtime revision policy reused as evidence, not implemented here.",
+    "Concrete mounted observer set and generic query-client/global retry defaults not audited; conservative union includes unrelated inherited factories.",
+    "Transitive status catalog/config helpers and sidebar sentinel definition are not whole-source audited here.",
+    "Mutation settlement, parent/children bookkeeping and realtime event dispatch remain caller scope; existing evidence reused."
+  ],
+  "reused_evidence": [
+    {
+      "path": "server/contracts/batches/issue-query-transport-coverage.json",
+      "sha256": "3d4401929eee7294bc9f706a5c738a074300faffc6df01ec9275184d8a5be380"
+    },
+    {
+      "path": "server/contracts/batches/realtime-replay-transport-coverage.json",
+      "sha256": "9c5ecde22ef53fce66db88685e51314380bb2abfb44d6d5aa508740df135f216"
+    },
+    {
+      "path": "server/contracts/batches/issue-surface-action-transport.json",
+      "sha256": "7653591b25031fab4281ae815815a8e7ae154dbb5f31e8e3590bd19d858cdadf"
+    }
+  ],
+  "root_review": {
+    "status": "accepted bounded coordinator source scope",
+    "checks": "Root checked rollback snapshot behavior and complete invalidation helper tail including exact inbox cancellation ordering. Reused prior coordinator and query union evidence; hash/tuple validation during integration. Conservative request union is not an executed request claim."
+  }
+}

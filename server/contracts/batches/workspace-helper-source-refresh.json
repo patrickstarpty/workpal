@@ -1,0 +1,1170 @@
+{
+  "scope": [
+    "packages/core/workspace/index.ts",
+    "packages/core/workspace/mutations.ts",
+    "packages/core/workspace/pending-delete.ts",
+    "packages/core/workspace/sort-workspaces.ts",
+    "packages/core/workspace/workspace-url.ts"
+  ],
+  "status": "Finite current-source refresh complete; root review pending; no global or backend completion.",
+  "historical_identity": "Old semantic audit lacks source hashes. These are NEW reviewed current-source hashes, not evidence of historical identity.",
+  "files": [
+    {
+      "path": "packages/core/workspace/index.ts",
+      "sha256": "caf88cf4a54d9a8ea522b81ea12fc5513697acd0eb620d2e5d2837e34cbd41cb",
+      "whole_source": true,
+      "line_count": 3,
+      "read_ranges": [
+        [
+          1,
+          3
+        ]
+      ],
+      "comparison": "Confirmed file-local semantics against current full body; historical byte identity unknown.",
+      "semantics": "Reexports queries/mutations/hooks; no independent transport."
+    },
+    {
+      "path": "packages/core/workspace/mutations.ts",
+      "sha256": "adda48f2f085d43f47bad8324aec43a6a7ab3ce33e3900f52fc06e2945a07665",
+      "whole_source": true,
+      "line_count": 198,
+      "read_ranges": [
+        [
+          1,
+          100
+        ],
+        [
+          101,
+          198
+        ]
+      ],
+      "comparison": "Confirmed file-local semantics against current full body; historical byte identity unknown.",
+      "semantics": "Create seeds list on success; failure invalidates list. Leave/delete invalidate list on settled; success forgets local search index; delete clears slug storage only after success, pending mark removed on error. MCP create invalidates library; update/delete invalidate library plus agents prefix; assignment writes invalidate agent MCP key. Pin cancels list queries, optimistic local sort, restores on error, invalidates settled. Invalidations can refetch active matching observers; they are not unconditional sends."
+    },
+    {
+      "path": "packages/core/workspace/pending-delete.ts",
+      "sha256": "f078428d74d68e05d95ef785b766b1095e571bc3a2839c3d3878ff2e0a58f511",
+      "whole_source": true,
+      "line_count": 32,
+      "read_ranges": [
+        [
+          1,
+          32
+        ]
+      ],
+      "comparison": "Confirmed file-local semantics against current full body; historical byte identity unknown.",
+      "semantics": "Per-tab Set suppresses self-delete realtime echo; no websocket connection or send."
+    },
+    {
+      "path": "packages/core/workspace/sort-workspaces.ts",
+      "sha256": "874c4c332e18ca9cacdfd131ccb00d14af797835fb45fc5d3b453f3ce7a2d02e",
+      "whole_source": true,
+      "line_count": 10,
+      "read_ranges": [
+        [
+          1,
+          10
+        ]
+      ],
+      "comparison": "Confirmed file-local semantics against current full body; historical byte identity unknown.",
+      "semantics": "Pure copy/sort by pin time then creation; no I/O."
+    },
+    {
+      "path": "packages/core/workspace/workspace-url.ts",
+      "sha256": "677079fbc96fc385c53963d8df46e4885d3a2d8f311363366871246a5c22e457",
+      "whole_source": true,
+      "line_count": 31,
+      "read_ranges": [
+        [
+          1,
+          31
+        ]
+      ],
+      "comparison": "Confirmed file-local semantics against current full body; historical byte identity unknown.",
+      "semantics": "Pure display host parsing with brand fallback; new URL parses text only; config mentioned in comments is not fetched here."
+    }
+  ],
+  "edges": [
+    {
+      "source": "packages/core/workspace/mutations.ts:23",
+      "method": "createWorkspace",
+      "callee": "packages/core/api/client.ts:3408",
+      "call_ids": [
+        "client:3409"
+      ],
+      "route_ids": [
+        {
+          "method": "POST",
+          "path": "/api/workspaces"
+        }
+      ],
+      "unresolved": null,
+      "inventory_calls": [
+        {
+          "id": "client:3409",
+          "method": "POST",
+          "path_expression": "/api/workspaces",
+          "route": {
+            "method": "POST",
+            "path": "/api/workspaces"
+          },
+          "sources": [
+            "packages/core/api/client.ts:3409",
+            "apps/web/app/python-session.tsx:28"
+          ],
+          "transport": "ApiClient.fetch; baseUrl + path; bearer or cookie credentials; workspace header from client context",
+          "auth": "requires endpoint-specific reconciliation",
+          "status": "route-mapped"
+        }
+      ],
+      "inventory_routes": [
+        {
+          "method": "POST",
+          "path": "/api/workspaces",
+          "origin": "go",
+          "sources": [
+            "server/go/cmd/server/router.go:1829",
+            "server/go/internal/handler/workspace.go:249"
+          ],
+          "auth": {
+            "middleware": [
+              "server/go/cmd/server/router.go:1767: middleware.Auth(queries, patCache, cloudPATVerifier, cfSigner)",
+              "server/go/cmd/server/router.go:1768: middleware.RefreshCloudFrontCookies(cfSigner)"
+            ],
+            "route_middleware": null,
+            "handler": "h.CreateWorkspace"
+          },
+          "scope": {
+            "evidence": [
+              "server/go/internal/handler/workspace.go:249"
+            ]
+          },
+          "fixtures": {
+            "success": {
+              "status": 201,
+              "body": {
+                "id": "11111111-1111-4111-8111-111111111111",
+                "name": "Acme",
+                "slug": "acme",
+                "description": null,
+                "context": null,
+                "settings": {},
+                "repos": [],
+                "issue_prefix": "ACME",
+                "avatar_url": null,
+                "created_at": "2026-11-21T00:00:00Z",
+                "updated_at": "2026-11-21T00:00:00Z"
+              }
+            },
+            "provenance": "Reviewed Go batch example; dynamic identifiers/timestamps are illustrative. Python assertions referenced in tests; full parity remains pending."
+          },
+          "dependencies": {
+            "sql_queries": [],
+            "review_status": "pending exact service/SQL dependency tracing"
+          },
+          "batch": "workspaces",
+          "status": "pending",
+          "tests": [
+            "server/tests/test_workspace_http.py:6::test_workspace_http",
+            "server/tests/test_workspace_http.py:34::test_denial_rollback_busy_and_policy",
+            "server/tests/test_workspace_http.py:79::test_authentication_database_busy_is_retryable"
+          ],
+          "event": {
+            "disposition": "unresolved",
+            "sources": [
+              "server/go/cmd/server/router.go:1829",
+              "server/go/internal/handler/workspace.go:249"
+            ],
+            "reason": "Handler evidence captured; direct and indirect producer tracing and transaction/consumer classification remain unverified."
+          },
+          "registration_path": "/api/workspaces/",
+          "implementation_evidence": [
+            "server/src/workpal_backend/workspaces/routes.py:1"
+          ],
+          "remaining_obligations": [
+            "Exact complete Go/Python response and error parity, including dynamic fields and middleware behavior, remains unproven.",
+            "Task7 daemon refresh producer: transactional outbox, commit/rollback/recovery and duplicate-consumer evidence missing; no workspace:created event."
+          ]
+        }
+      ]
+    },
+    {
+      "source": "packages/core/workspace/mutations.ts:48",
+      "method": "leaveWorkspace",
+      "callee": "packages/core/api/client.ts:3788",
+      "call_ids": [
+        "client:3789"
+      ],
+      "route_ids": [
+        {
+          "method": "POST",
+          "path": "/api/workspaces/{id}/leave"
+        }
+      ],
+      "unresolved": null,
+      "inventory_calls": [
+        {
+          "id": "client:3789",
+          "method": "POST",
+          "path_expression": "/api/workspaces/${workspaceId}/leave",
+          "route": {
+            "method": "POST",
+            "path": "/api/workspaces/{id}/leave"
+          },
+          "sources": [
+            "packages/core/api/client.ts:3789"
+          ],
+          "transport": "ApiClient.fetch; baseUrl + path; bearer or cookie credentials; workspace header from client context",
+          "auth": "requires endpoint-specific reconciliation",
+          "status": "route-mapped"
+        }
+      ],
+      "inventory_routes": [
+        {
+          "method": "POST",
+          "path": "/api/workspaces/{id}/leave",
+          "origin": "go",
+          "sources": [
+            "server/go/cmd/server/router.go:1837",
+            "server/go/internal/handler/workspace.go:783"
+          ],
+          "auth": {
+            "middleware": [
+              "server/go/cmd/server/router.go:1767: middleware.Auth(queries, patCache, cloudPATVerifier, cfSigner)",
+              "server/go/cmd/server/router.go:1768: middleware.RefreshCloudFrontCookies(cfSigner)",
+              "server/go/cmd/server/router.go:1833: middleware.RequireWorkspaceMemberFromURL(queries, \"id\")"
+            ],
+            "route_middleware": null,
+            "handler": "h.LeaveWorkspace"
+          },
+          "scope": {
+            "evidence": [
+              "server/go/internal/handler/workspace.go:783"
+            ]
+          },
+          "fixtures": {
+            "source_handlers": [
+              {
+                "source": "server/go/internal/handler/workspace.go:783",
+                "body": "func (h *Handler) LeaveWorkspace(w http.ResponseWriter, r *http.Request) {\n\tworkspaceID := workspaceIDFromURL(r, \"id\")\n\tmember, ok := h.workspaceMember(w, r, workspaceID)\n\tif !ok {\n\t\treturn\n\t}\n\n\tif member.Role == \"owner\" {\n\t\tmembers, err := h.Queries.ListMembers(r.Context(), member.WorkspaceID)\n\t\tif err != nil {\n\t\t\twriteError(w, http.StatusInternalServerError, \"failed to leave workspace\")\n\t\t\treturn\n\t\t}\n\t\tif countOwners(members) <= 1 {\n\t\t\twriteError(w, http.StatusBadRequest, \"workspace must have at least one owner\")\n\t\t\treturn\n\t\t}\n\t}\n\n\tresult, err := h.revokeAndRemoveMember(r.Context(), member.WorkspaceID, member.UserID, member.ID, member.UserID)\n\tif err != nil {\n\t\tslog.Warn(\"leave workspace failed\", append(logger.RequestAttrs(r), \"error\", err, \"workspace_id\", workspaceID)...)\n\t\twriteError(w, http.StatusInternalServerError, \"failed to leave workspace\")\n\t\treturn\n\t}\n\th.Hub.DisconnectMember(uuidToString(member.WorkspaceID), uuidToString(member.UserID), uuidToString(member.ID))\n\th.settleMemberCapacityRelease(r.Context(), uuid.UUID(member.WorkspaceID.Bytes), uuid.UUID(member.ID.Bytes))\n\n\th.MembershipCache.Invalidate(r.Context(), uuidToString(member.UserID), workspaceID)\n\n\tuserID := requestUserID(r)\n\tlogRevocation(result, workspaceID, uuidToString(member.UserID))\n\th.publishRevocation(r.Context(), result, workspaceID, \"member\", userID)\n\n\tslog.Info(\"member removed\", append(logger.RequestAttrs(r), \"member_id\", uuidToString(member.ID), \"workspace_id\", workspaceID, \"user_id\", uuidToString(member.UserID))...)\n\th.publish(protocol.EventMemberRemoved, workspaceID, \"member\", userID, map[string]any{\n\t\t\"member_id\":    uuidToString(member.ID),\n\t\t\"workspace_id\": workspaceID,\n\t\t\"user_id\":      uuidToString(member.UserID),\n\t})\n\th.notifyDaemonWorkspacesChanged(uuidToString(member.UserID))\n\n\tw.WriteHeader(http.StatusNoContent)\n}"
+              }
+            ],
+            "note": "Source contract evidence; executable Python fixtures remain pending.",
+            "review_status": "pending exact request/response/error fixture extraction"
+          },
+          "dependencies": {
+            "sql_queries": [],
+            "review_status": "pending exact service/SQL dependency tracing"
+          },
+          "batch": "workspaces",
+          "status": "pending",
+          "tests": [],
+          "event": {
+            "disposition": "unresolved",
+            "sources": [
+              "server/go/cmd/server/router.go:1837",
+              "server/go/internal/handler/workspace.go:783"
+            ],
+            "reason": "Handler evidence captured; direct and indirect producer tracing and transaction/consumer classification remain unverified."
+          },
+          "registration_path": "/api/workspaces/{id}/leave"
+        }
+      ]
+    },
+    {
+      "source": "packages/core/workspace/mutations.ts:61",
+      "method": "deleteWorkspace",
+      "callee": "packages/core/api/client.ts:3865",
+      "call_ids": [
+        "client:3866"
+      ],
+      "route_ids": [
+        {
+          "method": "DELETE",
+          "path": "/api/workspaces/{id}"
+        }
+      ],
+      "unresolved": null,
+      "inventory_calls": [
+        {
+          "id": "client:3866",
+          "method": "DELETE",
+          "path_expression": "/api/workspaces/${workspaceId}",
+          "route": {
+            "method": "DELETE",
+            "path": "/api/workspaces/{id}"
+          },
+          "sources": [
+            "packages/core/api/client.ts:3866"
+          ],
+          "transport": "ApiClient.fetch; baseUrl + path; bearer or cookie credentials; workspace header from client context",
+          "auth": "requires endpoint-specific reconciliation",
+          "status": "route-mapped"
+        }
+      ],
+      "inventory_routes": [
+        {
+          "method": "DELETE",
+          "path": "/api/workspaces/{id}",
+          "origin": "go",
+          "sources": [
+            "server/go/cmd/server/router.go:1925",
+            "server/go/internal/handler/workspace.go:1141"
+          ],
+          "auth": {
+            "middleware": [
+              "server/go/cmd/server/router.go:1767: middleware.Auth(queries, patCache, cloudPATVerifier, cfSigner)",
+              "server/go/cmd/server/router.go:1768: middleware.RefreshCloudFrontCookies(cfSigner)"
+            ],
+            "route_middleware": "middleware.RequireWorkspaceRoleFromURL(queries, \"id\", \"owner\")",
+            "handler": "h.DeleteWorkspace"
+          },
+          "scope": {
+            "evidence": [
+              "server/go/internal/handler/workspace.go:1141"
+            ]
+          },
+          "fixtures": {
+            "success": {
+              "status": 204,
+              "body": null
+            },
+            "provenance": "Reviewed Go batch example; dynamic identifiers/timestamps are illustrative. Python assertions referenced in tests; full parity remains pending."
+          },
+          "dependencies": {
+            "sql_queries": [
+              "DeleteChatPinnedAgentsByWorkspace",
+              "DeleteChatTaskSupplementsByWorkspace",
+              "DeleteIssueSourceContextsForWorkspace",
+              "DeleteIssueStatusEntriesForWorkspace",
+              "DeleteIssueWorkflowsForWorkspace",
+              "DeleteSeatCapacityConfirmIntentsForWorkspaceDeletion",
+              "DeleteSourceContextAttachmentsByWorkspace",
+              "DeleteWorkspace",
+              "DeleteWorkspaceAdministration",
+              "DeleteWorkspaceAgents",
+              "DeleteWorkspaceAutopilotChildren",
+              "DeleteWorkspaceAutopilotQuotaPeriods",
+              "DeleteWorkspaceAutopilotQuotaReservations",
+              "DeleteWorkspaceAutopilotRuns",
+              "DeleteWorkspaceAutopilots",
+              "DeleteWorkspaceChatMessages",
+              "DeleteWorkspaceComments",
+              "DeleteWorkspaceCommunicationRoots",
+              "DeleteWorkspaceConnections",
+              "DeleteWorkspaceEntitlementLimitOverages",
+              "DeleteWorkspaceIssueRoots",
+              "DeleteWorkspaceLeafData",
+              "DeleteWorkspacePluginData",
+              "DeleteWorkspacePullRequests",
+              "DeleteWorkspaceRuntimesAndProjects",
+              "DeleteWorkspaceSearchIndexChanges",
+              "DeleteWorkspaceSquadsAndSkills",
+              "Exec",
+              "LockTaskUsageRollupForWorkspaceDelete",
+              "PrepareSeatCapacityInvitationReleasesForWorkspaceDeletion",
+              "PrepareSeatCapacityMemberReleasesForWorkspaceDeletion",
+              "PrepareSeatCapacityOperationReleasesForWorkspaceDeletion",
+              "PrepareWorkspaceDeletionLinks",
+              "SetWorkspaceTeardownMode"
+            ],
+            "review_status": "pending exact service/SQL dependency tracing"
+          },
+          "batch": "workspaces",
+          "status": "pending",
+          "tests": [
+            "server/tests/test_workspace_http.py:6::test_workspace_http",
+            "server/tests/test_workspace_http.py:34::test_denial_rollback_busy_and_policy",
+            "server/tests/test_workspace_http.py:79::test_authentication_database_busy_is_retryable"
+          ],
+          "event": {
+            "disposition": "unresolved",
+            "sources": [
+              "server/go/cmd/server/router.go:1925",
+              "server/go/internal/handler/workspace.go:1141"
+            ],
+            "reason": "Handler evidence captured; direct and indirect producer tracing and transaction/consumer classification remain unverified."
+          },
+          "registration_path": "/api/workspaces/{id}/",
+          "implementation_evidence": [
+            "server/src/workpal_backend/workspaces/routes.py:1"
+          ],
+          "remaining_obligations": [
+            "Exact complete Go/Python response and error parity, including dynamic fields and middleware behavior, remains unproven."
+          ]
+        }
+      ]
+    },
+    {
+      "source": "packages/core/workspace/mutations.ts:105",
+      "method": "createWorkspaceMcpServer",
+      "callee": "packages/core/api/client.ts:3451",
+      "call_ids": [
+        "client:3456"
+      ],
+      "route_ids": [
+        {
+          "method": "POST",
+          "path": "/api/workspaces/{id}/mcp-servers"
+        }
+      ],
+      "unresolved": null,
+      "inventory_calls": [
+        {
+          "id": "client:3456",
+          "method": "POST",
+          "path_expression": "/api/workspaces/${workspaceId}/mcp-servers",
+          "route": {
+            "method": "POST",
+            "path": "/api/workspaces/{id}/mcp-servers"
+          },
+          "sources": [
+            "packages/core/api/client.ts:3456",
+            "server/go/cmd/server/router.go:1883",
+            "server/go/internal/handler/workspace_mcp_api.go:153"
+          ],
+          "transport": "ApiClient.fetch; baseUrl + path; bearer or cookie credentials; workspace header from client context",
+          "auth": "requires endpoint-specific reconciliation",
+          "status": "route-mapped"
+        }
+      ],
+      "inventory_routes": [
+        {
+          "method": "POST",
+          "path": "/api/workspaces/{id}/mcp-servers",
+          "origin": "go",
+          "sources": [
+            "server/go/cmd/server/router.go:1883",
+            "server/go/internal/handler/workspace_mcp_api.go:153"
+          ],
+          "auth": {
+            "middleware": [
+              "server/go/cmd/server/router.go:1767: middleware.Auth(queries, patCache, cloudPATVerifier, cfSigner)",
+              "server/go/cmd/server/router.go:1768: middleware.RefreshCloudFrontCookies(cfSigner)",
+              "server/go/cmd/server/router.go:1871: middleware.RequireWorkspaceRoleFromURL(queries, \"id\", \"owner\", \"admin\")"
+            ],
+            "route_middleware": null,
+            "handler": "h.CreateWorkspaceMcpServer"
+          },
+          "scope": {
+            "evidence": [
+              "server/go/internal/handler/workspace_mcp_api.go:153"
+            ]
+          },
+          "fixtures": {
+            "source_handlers": [
+              {
+                "source": "server/go/internal/handler/workspace_mcp_api.go:153",
+                "body": "func (h *Handler) CreateWorkspaceMcpServer(w http.ResponseWriter, r *http.Request) {\n\tworkspaceID := workspaceIDFromURL(r, \"id\")\n\tidUUID, ok := parseUUIDOrBadRequest(w, workspaceID, \"workspace id\")\n\tif !ok {\n\t\treturn\n\t}\n\tif !h.requireWorkspaceMcpWriter(w, r, workspaceID) {\n\t\treturn\n\t}\n\n\tvar req WorkspaceMcpServerRequest\n\tif err := json.NewDecoder(r.Body).Decode(&req); err != nil {\n\t\twriteError(w, http.StatusBadRequest, \"invalid request body\")\n\t\treturn\n\t}\n\tname := strings.TrimSpace(req.Name)\n\tif err := validateWorkspaceMcpServerName(name); err != nil {\n\t\twriteError(w, http.StatusBadRequest, err.Error())\n\t\treturn\n\t}\n\tif err := validateWorkspaceMcpServerEntry(req.Config); err != nil {\n\t\twriteError(w, http.StatusBadRequest, err.Error())\n\t\treturn\n\t}\n\n\ttx, err := h.TxStarter.Begin(r.Context())\n\tif err != nil {\n\t\twriteError(w, http.StatusInternalServerError, \"failed to create the MCP server\")\n\t\treturn\n\t}\n\tdefer tx.Rollback(r.Context())\n\tqtx := h.Queries.WithTx(tx)\n\n\t// Join the workspace teardown fence (#5219): this table has no FK, so\n\t// without the shared lock a create committing after DeleteWorkspace swept\n\t// would leave a row pointing at a workspace that no longer exists.\n\tif _, err := qtx.LockWorkspaceForChatSessionCreate(r.Context(), idUUID); err != nil {\n\t\twriteError(w, http.StatusNotFound, \"workspace not found\")\n\t\treturn\n\t}\n\n\tserver, err := qtx.CreateWorkspaceMcpServer(r.Context(), db.CreateWorkspaceMcpServerParams{\n\t\tWorkspaceID: idUUID,\n\t\tName:        name,\n\t\tConfig:      append([]byte(nil), req.Config...),\n\t\tCreatedBy:   parseUUID(requestUserID(r)),\n\t})\n\tif err != nil {\n\t\tif isUniqueViolation(err) {\n\t\t\twriteError(w, http.StatusConflict, \"an MCP server with this name already exists in the workspace\")\n\t\t\treturn\n\t\t}\n\t\tslog.Warn(\"create workspace mcp server failed\", append(logger.RequestAttrs(r), \"error\", err, \"workspace_id\", workspaceID)...)\n\t\twriteError(w, http.StatusInternalServerError, \"failed to create the MCP server\")\n\t\treturn\n\t}\n\tif err := tx.Commit(r.Context()); err != nil {\n\t\twriteError(w, http.StatusInternalServerError, \"failed to create the MCP server\")\n\t\treturn\n\t}\n\t// Name only — never the entry — so the audit trail cannot become a second\n\t// copy of the workspace's credentials.\n\tslog.Info(\"workspace mcp server created\", append(logger.RequestAttrs(r),\n\t\t\"workspace_id\", workspaceID, \"server_id\", uuidToString(server.ID), \"name\", server.Name)...)\n\twriteJSON(w, http.StatusCreated, workspaceMcpServerToResponse(server))\n}"
+              }
+            ],
+            "note": "Source contract evidence; executable Python fixtures remain pending.",
+            "review_status": "pending exact request/response/error fixture extraction"
+          },
+          "dependencies": {
+            "sql_queries": [],
+            "review_status": "pending exact service/SQL dependency tracing"
+          },
+          "batch": "workspaces",
+          "status": "pending",
+          "tests": [],
+          "event": {
+            "disposition": "unresolved",
+            "sources": [
+              "server/go/cmd/server/router.go:1883",
+              "server/go/internal/handler/workspace_mcp_api.go:153"
+            ],
+            "reason": "Handler evidence captured; direct and indirect producer tracing and transaction/consumer classification remain unverified."
+          },
+          "registration_path": "/api/workspaces/{id}/mcp-servers"
+        }
+      ]
+    },
+    {
+      "source": "packages/core/workspace/mutations.ts:118",
+      "method": "updateWorkspaceMcpServer",
+      "callee": "packages/core/api/client.ts:3469",
+      "call_ids": [
+        "client:3474"
+      ],
+      "route_ids": [
+        {
+          "method": "PUT",
+          "path": "/api/workspaces/{id}/mcp-servers/{serverId}"
+        }
+      ],
+      "unresolved": null,
+      "inventory_calls": [
+        {
+          "id": "client:3474",
+          "method": "PUT",
+          "path_expression": "/api/workspaces/${workspaceId}/mcp-servers/${encodeURIComponent(serverId)}",
+          "route": {
+            "method": "PUT",
+            "path": "/api/workspaces/{id}/mcp-servers/{serverId}"
+          },
+          "sources": [
+            "packages/core/api/client.ts:3474",
+            "server/go/cmd/server/router.go:1884",
+            "server/go/internal/handler/workspace_mcp_api.go:222"
+          ],
+          "transport": "ApiClient.fetch; baseUrl + path; bearer or cookie credentials; workspace header from client context",
+          "auth": "requires endpoint-specific reconciliation",
+          "status": "route-mapped"
+        }
+      ],
+      "inventory_routes": [
+        {
+          "method": "PUT",
+          "path": "/api/workspaces/{id}/mcp-servers/{serverId}",
+          "origin": "go",
+          "sources": [
+            "server/go/cmd/server/router.go:1884",
+            "server/go/internal/handler/workspace_mcp_api.go:222"
+          ],
+          "auth": {
+            "middleware": [
+              "server/go/cmd/server/router.go:1767: middleware.Auth(queries, patCache, cloudPATVerifier, cfSigner)",
+              "server/go/cmd/server/router.go:1768: middleware.RefreshCloudFrontCookies(cfSigner)",
+              "server/go/cmd/server/router.go:1871: middleware.RequireWorkspaceRoleFromURL(queries, \"id\", \"owner\", \"admin\")"
+            ],
+            "route_middleware": null,
+            "handler": "h.UpdateWorkspaceMcpServer"
+          },
+          "scope": {
+            "evidence": [
+              "server/go/internal/handler/workspace_mcp_api.go:222"
+            ]
+          },
+          "fixtures": {
+            "source_handlers": [
+              {
+                "source": "server/go/internal/handler/workspace_mcp_api.go:222",
+                "body": "func (h *Handler) UpdateWorkspaceMcpServer(w http.ResponseWriter, r *http.Request) {\n\tworkspaceID := workspaceIDFromURL(r, \"id\")\n\tidUUID, ok := parseUUIDOrBadRequest(w, workspaceID, \"workspace id\")\n\tif !ok {\n\t\treturn\n\t}\n\tif !h.requireWorkspaceMcpWriter(w, r, workspaceID) {\n\t\treturn\n\t}\n\tserverUUID, ok := parseUUIDOrBadRequest(w, chi.URLParam(r, \"serverId\"), \"server id\")\n\tif !ok {\n\t\treturn\n\t}\n\n\tvar req WorkspaceMcpServerRequest\n\tif err := json.NewDecoder(r.Body).Decode(&req); err != nil {\n\t\twriteError(w, http.StatusBadRequest, \"invalid request body\")\n\t\treturn\n\t}\n\tparams := db.UpdateWorkspaceMcpServerParams{ID: serverUUID, WorkspaceID: idUUID}\n\tif name := strings.TrimSpace(req.Name); name != \"\" {\n\t\tif err := validateWorkspaceMcpServerName(name); err != nil {\n\t\t\twriteError(w, http.StatusBadRequest, err.Error())\n\t\t\treturn\n\t\t}\n\t\tparams.Name = pgtype.Text{String: name, Valid: true}\n\t}\n\tif len(req.Config) > 0 {\n\t\tif err := validateWorkspaceMcpServerEntry(req.Config); err != nil {\n\t\t\twriteError(w, http.StatusBadRequest, err.Error())\n\t\t\treturn\n\t\t}\n\t\tparams.Config = append([]byte(nil), req.Config...)\n\t}\n\n\tserver, err := h.Queries.UpdateWorkspaceMcpServer(r.Context(), params)\n\tif err != nil {\n\t\tif isUniqueViolation(err) {\n\t\t\twriteError(w, http.StatusConflict, \"an MCP server with this name already exists in the workspace\")\n\t\t\treturn\n\t\t}\n\t\twriteError(w, http.StatusNotFound, \"MCP server not found\")\n\t\treturn\n\t}\n\tslog.Info(\"workspace mcp server updated\", append(logger.RequestAttrs(r),\n\t\t\"workspace_id\", workspaceID, \"server_id\", uuidToString(server.ID), \"name\", server.Name)...)\n\twriteJSON(w, http.StatusOK, workspaceMcpServerToResponse(server))\n}"
+              }
+            ],
+            "note": "Source contract evidence; executable Python fixtures remain pending.",
+            "review_status": "pending exact request/response/error fixture extraction"
+          },
+          "dependencies": {
+            "sql_queries": [],
+            "review_status": "pending exact service/SQL dependency tracing"
+          },
+          "batch": "workspaces",
+          "status": "pending",
+          "tests": [],
+          "event": {
+            "disposition": "unresolved",
+            "sources": [
+              "server/go/cmd/server/router.go:1884",
+              "server/go/internal/handler/workspace_mcp_api.go:222"
+            ],
+            "reason": "Handler evidence captured; direct and indirect producer tracing and transaction/consumer classification remain unverified."
+          },
+          "registration_path": "/api/workspaces/{id}/mcp-servers/{serverId}"
+        }
+      ]
+    },
+    {
+      "source": "packages/core/workspace/mutations.ts:132",
+      "method": "deleteWorkspaceMcpServer",
+      "callee": "packages/core/api/client.ts:3484",
+      "call_ids": [
+        "client:3485"
+      ],
+      "route_ids": [
+        {
+          "method": "DELETE",
+          "path": "/api/workspaces/{id}/mcp-servers/{serverId}"
+        }
+      ],
+      "unresolved": null,
+      "inventory_calls": [
+        {
+          "id": "client:3485",
+          "method": "DELETE",
+          "path_expression": "/api/workspaces/${workspaceId}/mcp-servers/${encodeURIComponent(serverId)}",
+          "route": {
+            "method": "DELETE",
+            "path": "/api/workspaces/{id}/mcp-servers/{serverId}"
+          },
+          "sources": [
+            "packages/core/api/client.ts:3485",
+            "server/go/cmd/server/router.go:1885",
+            "server/go/internal/handler/workspace_mcp_api.go:274"
+          ],
+          "transport": "ApiClient.fetch; baseUrl + path; bearer or cookie credentials; workspace header from client context",
+          "auth": "requires endpoint-specific reconciliation",
+          "status": "route-mapped"
+        }
+      ],
+      "inventory_routes": [
+        {
+          "method": "DELETE",
+          "path": "/api/workspaces/{id}/mcp-servers/{serverId}",
+          "origin": "go",
+          "sources": [
+            "server/go/cmd/server/router.go:1885",
+            "server/go/internal/handler/workspace_mcp_api.go:274"
+          ],
+          "auth": {
+            "middleware": [
+              "server/go/cmd/server/router.go:1767: middleware.Auth(queries, patCache, cloudPATVerifier, cfSigner)",
+              "server/go/cmd/server/router.go:1768: middleware.RefreshCloudFrontCookies(cfSigner)",
+              "server/go/cmd/server/router.go:1871: middleware.RequireWorkspaceRoleFromURL(queries, \"id\", \"owner\", \"admin\")"
+            ],
+            "route_middleware": null,
+            "handler": "h.DeleteWorkspaceMcpServer"
+          },
+          "scope": {
+            "evidence": [
+              "server/go/internal/handler/workspace_mcp_api.go:274"
+            ]
+          },
+          "fixtures": {
+            "source_handlers": [
+              {
+                "source": "server/go/internal/handler/workspace_mcp_api.go:274",
+                "body": "func (h *Handler) DeleteWorkspaceMcpServer(w http.ResponseWriter, r *http.Request) {\n\tworkspaceID := workspaceIDFromURL(r, \"id\")\n\tidUUID, ok := parseUUIDOrBadRequest(w, workspaceID, \"workspace id\")\n\tif !ok {\n\t\treturn\n\t}\n\tif !h.requireWorkspaceMcpWriter(w, r, workspaceID) {\n\t\treturn\n\t}\n\tserverUUID, ok := parseUUIDOrBadRequest(w, chi.URLParam(r, \"serverId\"), \"server id\")\n\tif !ok {\n\t\treturn\n\t}\n\n\ttx, err := h.TxStarter.Begin(r.Context())\n\tif err != nil {\n\t\twriteError(w, http.StatusInternalServerError, \"failed to delete the MCP server\")\n\t\treturn\n\t}\n\tdefer tx.Rollback(r.Context())\n\tqtx := h.Queries.WithTx(tx)\n\n\t// Exclusive row lock first: an assignment writer holds this row FOR SHARE\n\t// while it inserts, so taking it here means a concurrent add either lands\n\t// before this transaction (and is swept below) or waits and then finds the\n\t// server gone. Without it the add could insert after the sweep, leaving a\n\t// binding to a server that no longer exists.\n\tif _, err := qtx.LockWorkspaceMcpServerForUpdate(r.Context(), db.LockWorkspaceMcpServerForUpdateParams{\n\t\tID:          serverUUID,\n\t\tWorkspaceID: idUUID,\n\t}); err != nil {\n\t\twriteError(w, http.StatusNotFound, \"MCP server not found\")\n\t\treturn\n\t}\n\n\trows, err := qtx.DeleteWorkspaceMcpServer(r.Context(), db.DeleteWorkspaceMcpServerParams{\n\t\tID:          serverUUID,\n\t\tWorkspaceID: idUUID,\n\t})\n\tif err != nil {\n\t\tslog.Warn(\"delete workspace mcp server failed\", append(logger.RequestAttrs(r), \"error\", err, \"workspace_id\", workspaceID)...)\n\t\twriteError(w, http.StatusInternalServerError, \"failed to delete the MCP server\")\n\t\treturn\n\t}\n\tif rows == 0 {\n\t\twriteError(w, http.StatusNotFound, \"MCP server not found\")\n\t\treturn\n\t}\n\tif err := qtx.DeleteAgentMcpServersByServer(r.Context(), serverUUID); err != nil {\n\t\tslog.Warn(\"sweep agent mcp bindings failed\", append(logger.RequestAttrs(r), \"error\", err, \"workspace_id\", workspaceID)...)\n\t\twriteError(w, http.StatusInternalServerError, \"failed to delete the MCP server\")\n\t\treturn\n\t}\n\tif err := tx.Commit(r.Context()); err != nil {\n\t\twriteError(w, http.StatusInternalServerError, \"failed to delete the MCP server\")\n\t\treturn\n\t}\n\tslog.Info(\"workspace mcp server deleted\", append(logger.RequestAttrs(r),\n\t\t\"workspace_id\", workspaceID, \"server_id\", uuidToString(serverUUID))...)\n\tw.WriteHeader(http.StatusNoContent)\n}"
+              }
+            ],
+            "note": "Source contract evidence; executable Python fixtures remain pending.",
+            "review_status": "pending exact request/response/error fixture extraction"
+          },
+          "dependencies": {
+            "sql_queries": [],
+            "review_status": "pending exact service/SQL dependency tracing"
+          },
+          "batch": "workspaces",
+          "status": "pending",
+          "tests": [],
+          "event": {
+            "disposition": "unresolved",
+            "sources": [
+              "server/go/cmd/server/router.go:1885",
+              "server/go/internal/handler/workspace_mcp_api.go:274"
+            ],
+            "reason": "Handler evidence captured; direct and indirect producer tracing and transaction/consumer classification remain unverified."
+          },
+          "registration_path": "/api/workspaces/{id}/mcp-servers/{serverId}"
+        }
+      ]
+    },
+    {
+      "source": "packages/core/workspace/mutations.ts:160",
+      "method": "addAgentMcpServer",
+      "callee": "packages/core/api/client.ts:3503",
+      "call_ids": [
+        "client:3504"
+      ],
+      "route_ids": [
+        {
+          "method": "POST",
+          "path": "/api/agents/{id}/mcp-servers"
+        }
+      ],
+      "unresolved": null,
+      "inventory_calls": [
+        {
+          "id": "client:3504",
+          "method": "POST",
+          "path_expression": "/api/agents/${agentId}/mcp-servers",
+          "route": {
+            "method": "POST",
+            "path": "/api/agents/{id}/mcp-servers"
+          },
+          "sources": [
+            "packages/core/api/client.ts:3504",
+            "server/go/cmd/server/router.go:2485",
+            "server/go/internal/handler/workspace_mcp_api.go:395"
+          ],
+          "transport": "ApiClient.fetch; baseUrl + path; bearer or cookie credentials; workspace header from client context",
+          "auth": "requires endpoint-specific reconciliation",
+          "status": "route-mapped"
+        }
+      ],
+      "inventory_routes": [
+        {
+          "method": "POST",
+          "path": "/api/agents/{id}/mcp-servers",
+          "origin": "go",
+          "sources": [
+            "server/go/cmd/server/router.go:2485",
+            "server/go/internal/handler/workspace_mcp_api.go:395"
+          ],
+          "auth": {
+            "middleware": [
+              "server/go/cmd/server/router.go:1767: middleware.Auth(queries, patCache, cloudPATVerifier, cfSigner)",
+              "server/go/cmd/server/router.go:1768: middleware.RefreshCloudFrontCookies(cfSigner)",
+              "server/go/cmd/server/router.go:2149: middleware.RequireWorkspaceMember(queries)"
+            ],
+            "route_middleware": null,
+            "handler": "h.AddAgentMcpServer"
+          },
+          "scope": {
+            "evidence": [
+              "server/go/internal/handler/workspace_mcp_api.go:395"
+            ]
+          },
+          "fixtures": {
+            "source_handlers": [
+              {
+                "source": "server/go/internal/handler/workspace_mcp_api.go:395",
+                "body": "func (h *Handler) AddAgentMcpServer(w http.ResponseWriter, r *http.Request) {\n\tagent, ok := h.requireAgentMcpWriter(w, r)\n\tif !ok {\n\t\treturn\n\t}\n\tvar req AddAgentMcpServerRequest\n\tif err := json.NewDecoder(r.Body).Decode(&req); err != nil {\n\t\twriteError(w, http.StatusBadRequest, \"invalid request body\")\n\t\treturn\n\t}\n\tserverUUID, ok := parseUUIDOrBadRequest(w, strings.TrimSpace(req.ServerID), \"server_id\")\n\tif !ok {\n\t\treturn\n\t}\n\ttx, err := h.TxStarter.Begin(r.Context())\n\tif err != nil {\n\t\twriteError(w, http.StatusInternalServerError, \"failed to add the MCP server\")\n\t\treturn\n\t}\n\tdefer tx.Rollback(r.Context())\n\tqtx := h.Queries.WithTx(tx)\n\n\t// Same fence as every other workspace-scoped insert (#5219): the binding\n\t// has no FK, so a write committing after DeleteWorkspace swept would\n\t// outlive the agent and the server it names.\n\tif _, err := qtx.LockWorkspaceForChatSessionCreate(r.Context(), agent.WorkspaceID); err != nil {\n\t\twriteError(w, http.StatusNotFound, \"workspace not found\")\n\t\treturn\n\t}\n\t// Scope check AND the delete protocol in one statement: the row must\n\t// belong to this agent's workspace — an id from another workspace would\n\t// bind across the tenant boundary — and holding it FOR SHARE serializes\n\t// this insert against DeleteWorkspaceMcpServer's sweep.\n\tif _, err := qtx.LockWorkspaceMcpServerForShare(r.Context(), db.LockWorkspaceMcpServerForShareParams{\n\t\tID:          serverUUID,\n\t\tWorkspaceID: agent.WorkspaceID,\n\t}); err != nil {\n\t\twriteError(w, http.StatusNotFound, \"MCP server not found in this workspace\")\n\t\treturn\n\t}\n\tif err := qtx.AddAgentMcpServer(r.Context(), db.AddAgentMcpServerParams{\n\t\tAgentID:  agent.ID,\n\t\tServerID: serverUUID,\n\t}); err != nil {\n\t\tslog.Warn(\"add agent mcp server failed\", append(logger.RequestAttrs(r), \"error\", err, \"agent_id\", uuidToString(agent.ID))...)\n\t\twriteError(w, http.StatusInternalServerError, \"failed to add the MCP server\")\n\t\treturn\n\t}\n\tif err := tx.Commit(r.Context()); err != nil {\n\t\twriteError(w, http.StatusInternalServerError, \"failed to add the MCP server\")\n\t\treturn\n\t}\n\tslog.Info(\"agent mcp server added\", append(logger.RequestAttrs(r),\n\t\t\"agent_id\", uuidToString(agent.ID), \"server_id\", uuidToString(serverUUID))...)\n\th.writeAgentMcpServers(w, r, agent.ID)\n}"
+              }
+            ],
+            "note": "Source contract evidence; executable Python fixtures remain pending.",
+            "review_status": "pending exact request/response/error fixture extraction"
+          },
+          "dependencies": {
+            "sql_queries": [],
+            "review_status": "pending exact service/SQL dependency tracing"
+          },
+          "batch": "agents",
+          "status": "pending",
+          "tests": [],
+          "event": {
+            "disposition": "unresolved",
+            "sources": [
+              "server/go/cmd/server/router.go:2485",
+              "server/go/internal/handler/workspace_mcp_api.go:395"
+            ],
+            "reason": "Handler evidence captured; direct and indirect producer tracing and transaction/consumer classification remain unverified."
+          },
+          "registration_path": "/api/agents/{id}/mcp-servers"
+        }
+      ]
+    },
+    {
+      "source": "packages/core/workspace/mutations.ts:165",
+      "method": "setAgentMcpServerEnabled",
+      "callee": "packages/core/api/client.ts:3513",
+      "call_ids": [
+        "client:3518"
+      ],
+      "route_ids": [
+        {
+          "method": "PUT",
+          "path": "/api/agents/{id}/mcp-servers/{serverId}/enabled"
+        }
+      ],
+      "unresolved": null,
+      "inventory_calls": [
+        {
+          "id": "client:3518",
+          "method": "PUT",
+          "path_expression": "/api/agents/${agentId}/mcp-servers/${encodeURIComponent(serverId)}/enabled",
+          "route": {
+            "method": "PUT",
+            "path": "/api/agents/{id}/mcp-servers/{serverId}/enabled"
+          },
+          "sources": [
+            "packages/core/api/client.ts:3518",
+            "server/go/cmd/server/router.go:2486",
+            "server/go/internal/handler/workspace_mcp_api.go:459"
+          ],
+          "transport": "ApiClient.fetch; baseUrl + path; bearer or cookie credentials; workspace header from client context",
+          "auth": "requires endpoint-specific reconciliation",
+          "status": "route-mapped"
+        }
+      ],
+      "inventory_routes": [
+        {
+          "method": "PUT",
+          "path": "/api/agents/{id}/mcp-servers/{serverId}/enabled",
+          "origin": "go",
+          "sources": [
+            "server/go/cmd/server/router.go:2486",
+            "server/go/internal/handler/workspace_mcp_api.go:459"
+          ],
+          "auth": {
+            "middleware": [
+              "server/go/cmd/server/router.go:1767: middleware.Auth(queries, patCache, cloudPATVerifier, cfSigner)",
+              "server/go/cmd/server/router.go:1768: middleware.RefreshCloudFrontCookies(cfSigner)",
+              "server/go/cmd/server/router.go:2149: middleware.RequireWorkspaceMember(queries)"
+            ],
+            "route_middleware": null,
+            "handler": "h.SetAgentMcpServerEnabled"
+          },
+          "scope": {
+            "evidence": [
+              "server/go/internal/handler/workspace_mcp_api.go:459"
+            ]
+          },
+          "fixtures": {
+            "source_handlers": [
+              {
+                "source": "server/go/internal/handler/workspace_mcp_api.go:459",
+                "body": "func (h *Handler) SetAgentMcpServerEnabled(w http.ResponseWriter, r *http.Request) {\n\tagent, ok := h.requireAgentMcpWriter(w, r)\n\tif !ok {\n\t\treturn\n\t}\n\tserverUUID, ok := parseUUIDOrBadRequest(w, chi.URLParam(r, \"serverId\"), \"server id\")\n\tif !ok {\n\t\treturn\n\t}\n\tvar req SetAgentMcpServerEnabledRequest\n\tif err := json.NewDecoder(r.Body).Decode(&req); err != nil {\n\t\twriteError(w, http.StatusBadRequest, \"invalid request body\")\n\t\treturn\n\t}\n\tif req.Enabled == nil {\n\t\twriteError(w, http.StatusBadRequest, \"enabled is required\")\n\t\treturn\n\t}\n\trows, err := h.Queries.SetAgentMcpServerEnabled(r.Context(), db.SetAgentMcpServerEnabledParams{\n\t\tAgentID:  agent.ID,\n\t\tServerID: serverUUID,\n\t\tEnabled:  *req.Enabled,\n\t})\n\tif err != nil {\n\t\twriteError(w, http.StatusInternalServerError, \"failed to update the MCP server\")\n\t\treturn\n\t}\n\tif rows == 0 {\n\t\twriteError(w, http.StatusNotFound, \"this MCP server is not assigned to the agent\")\n\t\treturn\n\t}\n\tslog.Info(\"agent mcp server toggled\", append(logger.RequestAttrs(r),\n\t\t\"agent_id\", uuidToString(agent.ID), \"server_id\", uuidToString(serverUUID), \"enabled\", *req.Enabled)...)\n\th.writeAgentMcpServers(w, r, agent.ID)\n}"
+              }
+            ],
+            "note": "Source contract evidence; executable Python fixtures remain pending.",
+            "review_status": "pending exact request/response/error fixture extraction"
+          },
+          "dependencies": {
+            "sql_queries": [],
+            "review_status": "pending exact service/SQL dependency tracing"
+          },
+          "batch": "agents",
+          "status": "pending",
+          "tests": [],
+          "event": {
+            "disposition": "unresolved",
+            "sources": [
+              "server/go/cmd/server/router.go:2486",
+              "server/go/internal/handler/workspace_mcp_api.go:459"
+            ],
+            "reason": "Handler evidence captured; direct and indirect producer tracing and transaction/consumer classification remain unverified."
+          },
+          "registration_path": "/api/agents/{id}/mcp-servers/{serverId}/enabled"
+        }
+      ]
+    },
+    {
+      "source": "packages/core/workspace/mutations.ts:170",
+      "method": "removeAgentMcpServer",
+      "callee": "packages/core/api/client.ts:3527",
+      "call_ids": [
+        "client:3528"
+      ],
+      "route_ids": [
+        {
+          "method": "DELETE",
+          "path": "/api/agents/{id}/mcp-servers/{serverId}"
+        }
+      ],
+      "unresolved": null,
+      "inventory_calls": [
+        {
+          "id": "client:3528",
+          "method": "DELETE",
+          "path_expression": "/api/agents/${agentId}/mcp-servers/${encodeURIComponent(serverId)}",
+          "route": {
+            "method": "DELETE",
+            "path": "/api/agents/{id}/mcp-servers/{serverId}"
+          },
+          "sources": [
+            "packages/core/api/client.ts:3528",
+            "server/go/cmd/server/router.go:2487",
+            "server/go/internal/handler/workspace_mcp_api.go:497"
+          ],
+          "transport": "ApiClient.fetch; baseUrl + path; bearer or cookie credentials; workspace header from client context",
+          "auth": "requires endpoint-specific reconciliation",
+          "status": "route-mapped"
+        }
+      ],
+      "inventory_routes": [
+        {
+          "method": "DELETE",
+          "path": "/api/agents/{id}/mcp-servers/{serverId}",
+          "origin": "go",
+          "sources": [
+            "server/go/cmd/server/router.go:2487",
+            "server/go/internal/handler/workspace_mcp_api.go:497"
+          ],
+          "auth": {
+            "middleware": [
+              "server/go/cmd/server/router.go:1767: middleware.Auth(queries, patCache, cloudPATVerifier, cfSigner)",
+              "server/go/cmd/server/router.go:1768: middleware.RefreshCloudFrontCookies(cfSigner)",
+              "server/go/cmd/server/router.go:2149: middleware.RequireWorkspaceMember(queries)"
+            ],
+            "route_middleware": null,
+            "handler": "h.RemoveAgentMcpServer"
+          },
+          "scope": {
+            "evidence": [
+              "server/go/internal/handler/workspace_mcp_api.go:497"
+            ]
+          },
+          "fixtures": {
+            "source_handlers": [
+              {
+                "source": "server/go/internal/handler/workspace_mcp_api.go:497",
+                "body": "func (h *Handler) RemoveAgentMcpServer(w http.ResponseWriter, r *http.Request) {\n\tagent, ok := h.requireAgentMcpWriter(w, r)\n\tif !ok {\n\t\treturn\n\t}\n\tserverUUID, ok := parseUUIDOrBadRequest(w, chi.URLParam(r, \"serverId\"), \"server id\")\n\tif !ok {\n\t\treturn\n\t}\n\trows, err := h.Queries.RemoveAgentMcpServer(r.Context(), db.RemoveAgentMcpServerParams{\n\t\tAgentID:  agent.ID,\n\t\tServerID: serverUUID,\n\t})\n\tif err != nil {\n\t\twriteError(w, http.StatusInternalServerError, \"failed to remove the MCP server\")\n\t\treturn\n\t}\n\tif rows == 0 {\n\t\twriteError(w, http.StatusNotFound, \"this MCP server is not assigned to the agent\")\n\t\treturn\n\t}\n\tslog.Info(\"agent mcp server removed\", append(logger.RequestAttrs(r),\n\t\t\"agent_id\", uuidToString(agent.ID), \"server_id\", uuidToString(serverUUID))...)\n\th.writeAgentMcpServers(w, r, agent.ID)\n}"
+              }
+            ],
+            "note": "Source contract evidence; executable Python fixtures remain pending.",
+            "review_status": "pending exact request/response/error fixture extraction"
+          },
+          "dependencies": {
+            "sql_queries": [],
+            "review_status": "pending exact service/SQL dependency tracing"
+          },
+          "batch": "agents",
+          "status": "pending",
+          "tests": [],
+          "event": {
+            "disposition": "unresolved",
+            "sources": [
+              "server/go/cmd/server/router.go:2487",
+              "server/go/internal/handler/workspace_mcp_api.go:497"
+            ],
+            "reason": "Handler evidence captured; direct and indirect producer tracing and transaction/consumer classification remain unverified."
+          },
+          "registration_path": "/api/agents/{id}/mcp-servers/{serverId}"
+        }
+      ]
+    },
+    {
+      "source": "packages/core/workspace/mutations.ts:177",
+      "method": "setWorkspacePinned",
+      "callee": "packages/core/api/client.ts:3397",
+      "call_ids": [
+        "client:3398"
+      ],
+      "route_ids": [
+        {
+          "method": "PUT",
+          "path": "/api/workspaces/{id}/pin"
+        }
+      ],
+      "unresolved": null,
+      "inventory_calls": [
+        {
+          "id": "client:3398",
+          "method": "PUT",
+          "path_expression": "/api/workspaces/${id}/pin",
+          "route": {
+            "method": "PUT",
+            "path": "/api/workspaces/{id}/pin"
+          },
+          "sources": [
+            "packages/core/api/client.ts:3398"
+          ],
+          "transport": "ApiClient.fetch; baseUrl + path; bearer or cookie credentials; workspace header from client context",
+          "auth": "requires endpoint-specific reconciliation",
+          "status": "route-mapped"
+        }
+      ],
+      "inventory_routes": [
+        {
+          "method": "PUT",
+          "path": "/api/workspaces/{id}/pin",
+          "origin": "go",
+          "sources": [
+            "server/go/cmd/server/router.go:1835",
+            "server/go/internal/handler/workspace.go:191"
+          ],
+          "auth": {
+            "middleware": [
+              "server/go/cmd/server/router.go:1767: middleware.Auth(queries, patCache, cloudPATVerifier, cfSigner)",
+              "server/go/cmd/server/router.go:1768: middleware.RefreshCloudFrontCookies(cfSigner)",
+              "server/go/cmd/server/router.go:1833: middleware.RequireWorkspaceMemberFromURL(queries, \"id\")"
+            ],
+            "route_middleware": null,
+            "handler": "h.SetWorkspacePinned"
+          },
+          "scope": {
+            "evidence": [
+              "server/go/internal/handler/workspace.go:191"
+            ]
+          },
+          "fixtures": {
+            "source_handlers": [
+              {
+                "source": "server/go/internal/handler/workspace.go:191",
+                "body": "func (h *Handler) SetWorkspacePinned(w http.ResponseWriter, r *http.Request) {\n\tid, ok := parseUUIDOrBadRequest(w, workspaceIDFromURL(r, \"id\"), \"workspace id\")\n\tif !ok {\n\t\treturn\n\t}\n\tmember, ok := h.workspaceMember(w, r, uuidToString(id))\n\tif !ok {\n\t\treturn\n\t}\n\tvar req struct {\n\t\tPinned *bool `json:\"pinned\"`\n\t}\n\tif err := json.NewDecoder(r.Body).Decode(&req); err != nil || req.Pinned == nil {\n\t\twriteError(w, http.StatusBadRequest, \"pinned must be a boolean\")\n\t\treturn\n\t}\n\tpinnedAt, err := h.Queries.SetWorkspacePinned(r.Context(), db.SetWorkspacePinnedParams{\n\t\tWorkspaceID: id, UserID: member.UserID, Pinned: *req.Pinned,\n\t})\n\tif errors.Is(err, pgx.ErrNoRows) {\n\t\twriteError(w, http.StatusNotFound, \"workspace not found\")\n\t\treturn\n\t}\n\tif err != nil {\n\t\twriteError(w, http.StatusInternalServerError, \"failed to update workspace pin\")\n\t\treturn\n\t}\n\tvar result *string\n\tif pinnedAt.Valid {\n\t\tvalue := timestampToString(pinnedAt)\n\t\tresult = &value\n\t}\n\twriteJSON(w, http.StatusOK, map[string]any{\"pinned_at\": result})\n}"
+              }
+            ],
+            "note": "Source contract evidence; executable Python fixtures remain pending.",
+            "review_status": "pending exact request/response/error fixture extraction"
+          },
+          "dependencies": {
+            "sql_queries": [],
+            "review_status": "pending exact service/SQL dependency tracing"
+          },
+          "batch": "workspaces",
+          "status": "pending",
+          "tests": [],
+          "event": {
+            "disposition": "unresolved",
+            "sources": [
+              "server/go/cmd/server/router.go:1835",
+              "server/go/internal/handler/workspace.go:191"
+            ],
+            "reason": "Handler evidence captured; direct and indirect producer tracing and transaction/consumer classification remain unverified."
+          },
+          "registration_path": "/api/workspaces/{id}/pin"
+        }
+      ]
+    }
+  ],
+  "reused_interfaces": [
+    {
+      "proof": "search-index-transport-coverage.json",
+      "call": {
+        "id": "client:1448",
+        "method": "GET",
+        "path_expression": "/api/issues/search?${search}",
+        "route": {
+          "method": "GET",
+          "path": "/api/issues/search"
+        },
+        "sources": [
+          "packages/core/api/client.ts:1448"
+        ],
+        "transport": "ApiClient.fetch; baseUrl + path; bearer or cookie credentials; workspace header from client context",
+        "auth": "requires endpoint-specific reconciliation",
+        "status": "pending-reconciliation"
+      },
+      "route_ids": [
+        {
+          "method": "GET",
+          "path": "/api/issues/search"
+        }
+      ]
+    },
+    {
+      "proof": "search-index-transport-coverage.json",
+      "call": {
+        "id": "client:1463",
+        "method": "GET",
+        "path_expression": "/api/projects/search?${search}",
+        "route": {
+          "method": "GET",
+          "path": "/api/projects/search"
+        },
+        "sources": [
+          "packages/core/api/client.ts:1463"
+        ],
+        "transport": "ApiClient.fetch; baseUrl + path; bearer or cookie credentials; workspace header from client context",
+        "auth": "requires endpoint-specific reconciliation",
+        "status": "pending-reconciliation"
+      },
+      "route_ids": [
+        {
+          "method": "GET",
+          "path": "/api/projects/search"
+        }
+      ]
+    },
+    {
+      "proof": "search-index-transport-coverage.json",
+      "call": {
+        "id": "client:1477",
+        "method": "GET",
+        "path_expression": "/api/search-index/manifest",
+        "route": {
+          "method": "GET",
+          "path": "/api/search-index/manifest"
+        },
+        "sources": [
+          "packages/core/api/client.ts:1477"
+        ],
+        "transport": "ApiClient.fetch; baseUrl + path; bearer or cookie credentials; workspace header from client context",
+        "auth": "requires endpoint-specific reconciliation",
+        "status": "pending-reconciliation"
+      },
+      "route_ids": [
+        {
+          "method": "GET",
+          "path": "/api/search-index/manifest"
+        }
+      ]
+    },
+    {
+      "proof": "search-index-transport-coverage.json",
+      "call": {
+        "id": "client:1492",
+        "method": "GET",
+        "path_expression": "/api/search-index/snapshot?${search}",
+        "route": {
+          "method": "GET",
+          "path": "/api/search-index/snapshot"
+        },
+        "sources": [
+          "packages/core/api/client.ts:1492"
+        ],
+        "transport": "ApiClient.fetch; baseUrl + path; bearer or cookie credentials; workspace header from client context",
+        "auth": "requires endpoint-specific reconciliation",
+        "status": "pending-reconciliation"
+      },
+      "route_ids": [
+        {
+          "method": "GET",
+          "path": "/api/search-index/snapshot"
+        }
+      ]
+    },
+    {
+      "proof": "search-index-transport-coverage.json",
+      "call": {
+        "id": "client:1505",
+        "method": "POST",
+        "path_expression": "/api/search-index/changes",
+        "route": {
+          "method": "POST",
+          "path": "/api/search-index/changes"
+        },
+        "sources": [
+          "packages/core/api/client.ts:1505"
+        ],
+        "transport": "ApiClient.fetch; baseUrl + path; bearer or cookie credentials; workspace header from client context",
+        "auth": "requires endpoint-specific reconciliation",
+        "status": "pending-reconciliation"
+      },
+      "route_ids": [
+        {
+          "method": "POST",
+          "path": "/api/search-index/changes"
+        }
+      ]
+    },
+    {
+      "proof": "search-index-transport-coverage.json",
+      "call": {
+        "id": "client:3391",
+        "method": "GET",
+        "path_expression": "/api/workspaces",
+        "route": {
+          "method": "GET",
+          "path": "/api/workspaces"
+        },
+        "sources": [
+          "packages/core/api/client.ts:3391",
+          "apps/web/app/join/page.tsx:61",
+          "apps/web/app/join/page.tsx:78",
+          "apps/web/app/auth/callback/page.tsx:115",
+          "packages/views/auth/login-page.tsx:219"
+        ],
+        "transport": "ApiClient.fetch; baseUrl + path; bearer or cookie credentials; workspace header from client context",
+        "auth": "requires endpoint-specific reconciliation",
+        "status": "route-mapped"
+      },
+      "route_ids": [
+        {
+          "method": "GET",
+          "path": "/api/workspaces"
+        }
+      ]
+    },
+    {
+      "proof": "active-web-auth-transport.json",
+      "validated_transport_candidates": 142,
+      "validation": "Each call_id, route tuple and ordered inventory_sources array equals frontend-calls.json."
+    }
+  ],
+  "boundaries": [
+    "API client dispatch is reused through existing inventory mappings; no API descendant source is claimed whole reviewed.",
+    "Search-index proof: forget is local worker messaging and IndexedDB deletion; client runFetch dispatches manifest/snapshot/changes API calls. Search fallbacks and list query belong to that reused interface, not direct workspace mutation calls.",
+    "Active-web proof: session query cancellation/removal, identity and rehydration are local effects; conditional websocket connection belongs to the reused application interface. No session write occurs in these five workspace bodies.",
+    "React Query, native URL/Date/Set, injected storage and native worker/IndexedDB providers are explicit interfaces; no descendant recursion. Invalidations can trigger active observers but are not unconditional HTTP sends.",
+    "index reexports queries/hooks without whole-source review of those descendants."
+  ],
+  "unread_ranges": [],
+  "validation": {
+    "actual_whole_source_file_count": 5,
+    "total_source_lines": 274,
+    "direct_api_edge_count": 10,
+    "search_interface_tuple_count": 6,
+    "json": "parsed",
+    "hashes": "recomputed from current bytes",
+    "runtime_tests_network_models": "not run"
+  },
+  "root_review": {
+    "status": "accepted bounded current-source refresh",
+    "validation": "Recomputed all 5 source hashes and checked 10 exact inventory tuples.",
+    "review_scope": "Reviewed artifact dispositions and source excerpts for mutation settlement, worker dispatch, memory destruction and in-flight disposal. Full-body reads are attributed to implementer; root did not repeat every source line.",
+    "limitations": "No runtime verification, historical identity, whole-application coverage or backend implementation claim."
+  }
+}

@@ -4,7 +4,7 @@ import {
 } from "../../common/docs-locale";
 
 export function daemonRuntimesDocsHref(language?: string): string {
-  return `https://workpal.invalid/docs${docsLocalePrefix(language)}/daemon-runtimes`;
+  return `http://127.0.0.1:4000/docs${docsLocalePrefix(language)}/daemon-runtimes`;
 }
 
 export function customRuntimeDocsHref(language?: string): string {

@@ -320,7 +320,7 @@ assert_start_api() {
 # changes outside server/ do not, and undoing an edit restores it.
 assert_api_source_fingerprint() (
   local repo="$tmp_dir/fingerprint-repo" clean
-  mkdir -p "$repo/server/bin"
+  mkdir -p "$repo/server/go/bin"
   git -C "$repo" init -q
   printf 'package main\n' > "$repo/server/main.go"
   printf 'bin/\n' > "$repo/server/.gitignore"
@@ -345,7 +345,7 @@ assert_api_source_fingerprint() (
   [ -n "$clean" ] || fail "fingerprint of a clean tree is empty"
   [ "$(api_source_fingerprint)" = "$clean" ] || fail "fingerprint is not stable"
 
-  printf 'built\n' > "$repo/server/bin/workpal"
+  printf 'built\n' > "$repo/server/go/bin/workpal"
   printf 'edited\n' >> "$repo/README.md"
   fingerprint_is "ignored file and edit outside server/" same >/dev/null
 
@@ -553,10 +553,10 @@ head_commit="$(git -C "$root_dir" rev-parse HEAD)"
 old_commit=0123456789abcdef0123456789abcdef01234567
 old_short="$(git -C "$root_dir" rev-parse --short "$old_commit")"
 daemon_fake="$tmp_dir/daemon-fake"
-mkdir -p "$daemon_fake/server/bin" "$daemon_fake/go-bin"
+mkdir -p "$daemon_fake/server/go/bin" "$daemon_fake/go-bin"
 printf '#!/usr/bin/env bash\nexit 0\n' > "$daemon_fake/go-bin/go"
 chmod +x "$daemon_fake/go-bin/go"
-cat > "$daemon_fake/server/bin/workpal" <<'EOF'
+cat > "$daemon_fake/server/go/bin/workpal" <<'EOF'
 #!/usr/bin/env bash
 printf '%s\n' "$*" >> "$FAKE_DAEMON/calls"
 case "$1 $2" in
@@ -567,7 +567,7 @@ case "$1 $2" in
       "$(cat "$FAKE_DAEMON/start_commit")" > "$FAKE_DAEMON/status" ;;
 esac
 EOF
-chmod +x "$daemon_fake/server/bin/workpal"
+chmod +x "$daemon_fake/server/go/bin/workpal"
 
 # Args: case, commit the running daemon reports, recorded "<pid> <hash>" (or
 # "-" for none), commit a fresh start reports, expected exit, expected output,
@@ -584,7 +584,7 @@ assert_start_daemon() (
   source "$root_dir/scripts/dev-env.sh"
   PATH="$daemon_fake/go-bin:$PATH"
   DIR="$root_dir" PROFILE=dev-test STATE_DIR="$FAKE_DAEMON" PROFILE_DIR="$FAKE_DAEMON"
-  WORKSPACES_ROOT="$FAKE_DAEMON/ws" WORKPAL_BIN="$daemon_fake/server/bin/workpal"
+  WORKSPACES_ROOT="$FAKE_DAEMON/ws" WORKPAL_BIN="$daemon_fake/server/go/bin/workpal"
   bin_hash="$(file_sha256 "$WORKPAL_BIN")"
   [ -n "$bin_hash" ] || fail "file_sha256 printed nothing"
   case "$recorded" in
@@ -620,7 +620,7 @@ assert_daemon_state() (
   # shellcheck disable=SC1090
   source "$root_dir/scripts/dev-env.sh"
   DIR="$root_dir" PROFILE=dev-test STATE_DIR="$FAKE_DAEMON" PROFILE_DIR="$FAKE_DAEMON"
-  WORKSPACES_ROOT="$FAKE_DAEMON/ws" WORKPAL_BIN="$daemon_fake/server/bin/workpal"
+  WORKSPACES_ROOT="$FAKE_DAEMON/ws" WORKPAL_BIN="$daemon_fake/server/go/bin/workpal"
   [ "$recorded" = - ] || printf '5001 %s\n' "$(file_sha256 "$WORKPAL_BIN")" > "$(daemon_build_file)"
   row="$(component_state daemon)"
   [ "${row%%|*}" = "$expected_state" ] || fail "$case_name: daemon state row '$row', want $expected_state"
@@ -706,10 +706,10 @@ desktop_daemon="$(sleep 60 > /dev/null 2>&1 & printf '%s' "$!")"
 printf '%s\n' "$desktop_daemon" > "$desktop_profile_dir/daemon.pid"
 fake_checkout="$tmp_dir/fake-checkout"
 stop_mode="$tmp_dir/daemon-stop-mode"
-mkdir -p "$fake_checkout/server/bin"
+mkdir -p "$fake_checkout/server/go/bin"
 # The fake CLI stops the daemon only in "kill" mode. "lies" exits 0 with the
 # daemon still alive, like a plain `daemon stop` that is still finishing a run.
-cat > "$fake_checkout/server/bin/workpal" <<EOF
+cat > "$fake_checkout/server/go/bin/workpal" <<EOF
 #!/usr/bin/env bash
 [ "\$*" = "daemon stop --force --profile desktop-localhost-18080" ] || exit 0
 case "\$(cat "$stop_mode")" in
@@ -721,14 +721,14 @@ case "\$(cat "$stop_mode")" in
   *) exit 1 ;;
 esac
 EOF
-chmod +x "$fake_checkout/server/bin/workpal"
+chmod +x "$fake_checkout/server/go/bin/workpal"
 
 printf 'lies' > "$stop_mode"
 status=0
 (
   # shellcheck disable=SC1090
   source "$root_dir/scripts/dev-env.sh"
-  BACKEND_PORT=18080 WORKPAL_BIN="$fake_checkout/server/bin/workpal" DIR="$fake_checkout"
+  BACKEND_PORT=18080 WORKPAL_BIN="$fake_checkout/server/go/bin/workpal" DIR="$fake_checkout"
   stop_desktop_daemon
 ) > "$out" 2>&1 || status=$?
 [ "$status" -ne 0 ] || fail "stop_desktop_daemon trusted a stop that left the daemon running"

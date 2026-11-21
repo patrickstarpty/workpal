@@ -30,7 +30,7 @@ function makeRuntime(overrides: Partial<AgentRuntime> = {}): AgentRuntime {
 
 // This truth table is the client half of a contract the server enforces with
 // the identical predicate (canUseRuntimeForAgent in
-// server/internal/handler/runtime.go). Keep the two in step: a runtime this
+// server/go/internal/handler/runtime.go). Keep the two in step: a runtime this
 // says is usable but the server refuses is a picker that 403s on submit —
 // the MUL-6126 bug — and the reverse is a runtime the UI hides for no reason.
 describe("isRuntimeUsableForUser", () => {

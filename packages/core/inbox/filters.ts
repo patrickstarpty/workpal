@@ -11,7 +11,7 @@ import { isInboxItemSnoozed } from "./snooze";
 
 /**
  * Notification kinds, grouped the way a reader thinks about them. Mirrored by
- * the CASE in `server/pkg/db/queries/inbox_archive.sql`; any kind not listed
+ * the CASE in `server/go/pkg/db/queries/inbox_archive.sql`; any kind not listed
  * (quick create, autopilot, kinds added later) is "system".
  */
 export type InboxTypeGroup =

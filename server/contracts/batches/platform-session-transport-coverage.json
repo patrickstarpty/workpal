@@ -1,0 +1,181 @@
+{
+  "version": 1,
+  "scope": "Task1 static source audit of four platform/session targets only",
+  "files": [
+    {
+      "path": "packages/core/platform/core-provider.tsx",
+      "sha256": "dd11b5714ae9485e66c6ebfb7716e90cba2595d334521de59cfe63da238f6f51",
+      "whole_source": true,
+      "read_ranges": [
+        [
+          1,
+          240
+        ]
+      ]
+    },
+    {
+      "path": "packages/core/platform/session-renewal.ts",
+      "sha256": "f277180b2d5c8b7087beda9aca8f66d23bece9d6f10961977fa155f9d79d0068",
+      "whole_source": true,
+      "read_ranges": [
+        [
+          1,
+          250
+        ]
+      ]
+    },
+    {
+      "path": "packages/core/platform/system-notification.ts",
+      "sha256": "5ec67750e30fd9cea6b06798100cd1489d21b58afecaffe182c77ad8173ffea4",
+      "whole_source": true,
+      "read_ranges": [
+        [
+          1,
+          150
+        ]
+      ]
+    },
+    {
+      "path": "packages/core/platform/types.ts",
+      "sha256": "3ed19d3f5a2f1ff9739d57af9c8c73e127aea9baa2df681aafd8c408285850ca",
+      "whole_source": true,
+      "read_ranges": [
+        [
+          1,
+          49
+        ]
+      ]
+    },
+    {
+      "path": "packages/core/api/client.ts",
+      "sha256": "779bb65b5b7ead815836f7c704ec3c370bafae203e4f92119fadce93e982a4d7",
+      "whole_source": false
+    },
+    {
+      "path": "packages/core/api/schemas.ts",
+      "sha256": "f75704eeb37705c0f72b4bd89ff89e848289f3fe7cee154b9bed7ff280be674d",
+      "whole_source": false
+    },
+    {
+      "path": "packages/core/auth/store.ts",
+      "sha256": "bdf848809606d29488ffb8135f88db3e0c55f22ebb93c2d6dc92b97442b6aaae",
+      "whole_source": false
+    },
+    {
+      "path": "packages/core/platform/storage.ts",
+      "sha256": "75867acb53d6ba44c1617f7a770bb765955a4ace19b9bb44e1873cf9ee1556b2",
+      "whole_source": false
+    },
+    {
+      "path": "packages/core/paths/paths.ts",
+      "sha256": "a63f8f935dc9a522a6cc70c500547004e7f2cf7d9a990e4237760f0ad295853c",
+      "whole_source": false
+    },
+    {
+      "path": "apps/web/app/main.tsx",
+      "sha256": "e664408f45c8e174479152b06a640927642b6606a492843d53cd60a86f6ea6eb",
+      "whole_source": false
+    },
+    {
+      "path": "apps/web/components/web-notification-bridge.tsx",
+      "sha256": "41e80e06a8d708d4fc7621bbd29b77079999af3fcd2b5cdd3fd7d8762cf1f37d",
+      "whole_source": false
+    }
+  ],
+  "edges": [
+    {
+      "source": "packages/core/platform/session-renewal.ts:141",
+      "chain": "renewNow -> ApiClient.refreshSession -> fetch -> fetchRaw -> fetch",
+      "inventory": [
+        {
+          "id": "client:1185",
+          "method": "POST",
+          "path_expression": "/api/auth/refresh",
+          "route": {
+            "method": "POST",
+            "path": "/api/auth/refresh"
+          }
+        }
+      ]
+    }
+  ],
+  "branch_behavior": [
+    "CoreProvider initCore is module singleton and useMemo reads boot inputs once. Configures shortcuts locally, registers ApiClient/auth/chat stores and schema logger. Token mode hydrates workpal_token and reads storage on every credential lookup; cookie mode omits reader and renewal creation. defaultStorage is SSR-safe localStorage, not HTTP. Injected storage implementations remain host boundaries.",
+    "Provider renewal effect subscribes every auth-store update to maybeRenew, installs activity listeners, immediately checks, and cleans subscription/listeners on unmount. Visibility only when visible; focus/pointerdown/keydown trigger checks; SSR watcher no-op. No interval. Freeze watchdog is a child helper, not renewal transport.",
+    "renewNow collapses inFlight; skips unauthenticated, missing token and non-three-part base64url-shaped token. Shape check does not validate JWT signature/expiry. maybeRenew obeys deadline; renewNow bypasses deadline. Success cadence floors at 5s. Invalid/zero cadence and rejection schedule 1/2/4/8/16/30s capped backoff; no automatic retry timer. renewed plus token may apply even with invalid cadence, only if still authenticated and stored credential unchanged. Storage write precedes setToken. reset clears deadline/failures/inFlight and does not cancel an outstanding request.",
+    "refreshSession -> fetch -> fetchRaw -> standard fetch(baseUrl + /api/auth/refresh), POST, credentials include, JSON content type, request id, current bearer/workspace/CSRF/client identity headers. Observer may refuse before send. Replayable-body CSRF rejection retries once with rebuilt headers. Non-ok throws ApiError; 401 compares current credential with captured credential, ignores replaced credentials, otherwise clears client token and calls CoreProvider onUnauthorized -> authStore.sessionExpired. That removes stored token before idempotence guard; token mode clears workspace, resets analytics, invokes onSessionExpired ?? onLogout, marks unauthenticated and expired according to prior credential. This hook does not call logout HTTP. Active web omits all three auth callbacks.",
+    "Refresh schema defaults renewed false/cadence zero and fallback preserves existing credential; response JSON decoding and validation remain helper boundaries as reused auth evidence. Renewal catch backs off, does not itself clear auth; 401 teardown already occurred upstream. Storage/logger callback throws also enter promise catch; early storage reads are before promise catch.",
+    "Notification desktop showNotification injection takes precedence, without permission gate or catch; native focus suppression delegated to host. Browser support requires window.Notification function; unsupported returns sentinel, permission request only for default and catches to current permission. Granted construction uses title/body/tag only: no icon/image/resource URL. Constructor failure silently returns. Click best-effort focuses, closes then invokes registered singleton handler; close/handler exceptions are not swallowed. Null registration removes handler.",
+    "systemNotificationPath requires slug, prioritizes chatSessionId over issueKey, encodes slug through paths.workspace and selector with encodeURIComponent. Missing selectors returns null. These are navigation paths, not API routes. Retained WebNotificationBridge keeps latest navigation push in ref, registers path builder callback, cleans to null; mounted in retained Next dashboard layout. Active Vite main does not mount it, so do not infer that click routing is active there.",
+    "CoreProvider renders QueryProvider/AuthInitializer/ClientUsageReporter/WSProvider and optional LocaleAdapterProvider/UserLocaleSync; these child components are not target callbacks. Reuse active-web-auth and realtime replay coverage for their own query/socket unions rather than attributing every descendant request to provider. Desktop suppresses usage reporter; locale sync requires adapter and syncUserLocale. Active web adapter returns en/preferences en and persist no-op, sync false, same-origin API and WS, defaultStorage, no identity/auth callback injection.",
+    "Types.ts declares identity and provider inputs only; opaque callback/adapter declarations are not transport. Browser Notification, DOM events, localStorage, React/Zustand subscription semantics and standard fetch are stopping boundaries. No backend support, runtime results or global closure asserted."
+  ],
+  "reused_evidence": [
+    {
+      "path": "server/contracts/batches/active-web-auth-transport.json",
+      "sha256": "7715490bcdc6b9db985bdb75d055e4608e8b4290a94b5b687713d09c9bd04c24",
+      "current_file_hash_matches": [],
+      "stale_file_hashes": []
+    },
+    {
+      "path": "server/contracts/batches/realtime-replay-transport-coverage.json",
+      "sha256": "9c5ecde22ef53fce66db88685e51314380bb2abfb44d6d5aa508740df135f216",
+      "current_file_hash_matches": [
+        "packages/core/realtime/hooks.ts",
+        "packages/core/realtime/provider.tsx",
+        "packages/core/realtime/use-realtime-sync.ts",
+        "packages/core/api/ws-client.ts",
+        "packages/core/api/realtime-observer.ts",
+        "packages/core/diagnostics/dev-recorder.ts",
+        "packages/core/issues/ws-updaters.ts",
+        "packages/core/issues/cache-coordinator.ts",
+        "packages/core/inbox/ws-updaters.ts",
+        "packages/core/issues/unread.ts",
+        "packages/core/issues/subscribed.ts",
+        "packages/core/platform/system-notification.ts",
+        "apps/web/components/web-notification-bridge.tsx"
+      ],
+      "stale_file_hashes": []
+    },
+    {
+      "path": "server/contracts/batches/platform-host-transport-coverage.json",
+      "sha256": "2009830d5077094406bee049b7eef8a602868d7b6d20ccdd6370e8c8a5d3bd1f",
+      "current_file_hash_matches": [
+        "packages/views/platform/local-directory.ts",
+        "packages/views/platform/local-voice.ts",
+        "packages/views/platform/open-external.ts",
+        "packages/views/platform/scroll-restoration.tsx",
+        "packages/views/platform/theme-folder.ts",
+        "packages/views/platform/use-desktop-unread-badge.ts",
+        "packages/views/platform/use-immersive-mode.ts",
+        "apps/web/platform/scroll-restoration.tsx",
+        "apps/web/components/web-providers.tsx",
+        "packages/core/inbox/queries.ts",
+        "packages/core/chat/queries.ts",
+        "packages/core/chat/unread.ts",
+        "packages/core/api/client.ts",
+        "packages/views/settings/components/appearance-tab.tsx"
+      ],
+      "stale_file_hashes": []
+    }
+  ],
+  "inventory_evidence": {
+    "path": "server/contracts/frontend-calls.json",
+    "sha256": "6abba909f844102f7b967a4fea091c57e17cd650bb1d0aedbccd40ffcc30828b",
+    "exact_tuple_validated": true
+  },
+  "unresolved_edges": [
+    {
+      "source": "packages/core/platform/system-notification.ts:getNativeNotificationAPI/showSystemNotification",
+      "boundary": "globalThis.desktopAPI.showNotification(payload): injected native implementation absent from active web; no native HTTP inferred."
+    },
+    {
+      "source": "packages/core/platform/core-provider.tsx:InitCoreOptions/CoreProviderProps",
+      "boundary": "Alternative injected storage, auth lifecycle hooks and locale adapters require concrete host evidence; active Vite implementations resolved above, no arbitrary-host closure."
+    }
+  ],
+  "root_review": {
+    "status": "accepted bounded active-web target scope",
+    "verification": "Read complete renewal and system notification modules; checked CoreProvider hooks and active Vite cookieAuth configuration. Reused proof hashes verified. Alternative native/host adapter boundaries remain explicit; no runtime verification."
+  }
+}

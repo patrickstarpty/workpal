@@ -15,7 +15,7 @@ Workpal is a Go backend and pnpm monorepo. The simplest way to start locally is 
 - Docker Engine or Docker Desktop
 - Git and Make
 
-Treat the root `package.json`, `server/go.mod`, and CI workflows as the source of truth for versions.
+Treat the root `package.json`, `server/go/go.mod`, and CI workflows as the source of truth for versions.
 
 ## First start
 
@@ -139,13 +139,13 @@ When adding or changing an API, update the zod schema in `packages/core/api/` an
 
 ## Changing the database
 
-Migrations live in `server/migrations/`, and queries live in `server/pkg/db/queries/`.
+Migrations live in `server/go/migrations/`, and queries live in `server/go/pkg/db/queries/`.
 
 1. Use the next unused numeric prefix and create both `.up.sql` and `.down.sql`.
 2. Do not add database foreign keys, cascade deletes, or cascade updates. Enforce relationships and cleanup in the application layer.
 3. Every new index must use `CREATE INDEX CONCURRENTLY` or `CREATE UNIQUE INDEX CONCURRENTLY`.
 4. Put each concurrent index in a migration file containing only that statement.
-5. Run `make sqlc` after changing queries and commit the generated changes in `server/pkg/db/generated/`.
+5. Run `make sqlc` after changing queries and commit the generated changes in `server/go/pkg/db/generated/`.
 6. Do not edit sqlc-generated files directly.
 
 Use an application transaction in the service layer when multiple writes must succeed or roll back together.

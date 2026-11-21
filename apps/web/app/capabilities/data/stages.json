@@ -1,0 +1,193 @@
+[
+  {
+    "id": "plan",
+    "name": "Plan",
+    "focus": "Make the goal clear enough to act on.",
+    "summary": "Turn the upload-recovery request into scope, constraints and acceptance criteria.",
+    "input": "A business goal, existing behavior and constraints",
+    "outputs": [
+      "intent.md"
+    ],
+    "outline": [
+      [
+        "Problem",
+        "What happens when an upload is interrupted?"
+      ],
+      [
+        "Outcome",
+        "What should a user be able to recover?"
+      ],
+      [
+        "Constraints",
+        "Which permissions and file limits must hold?"
+      ]
+    ],
+    "human": "Confirm the problem and scope",
+    "agents": [
+      "intent",
+      "planner",
+      "researcher"
+    ],
+    "chartVerb": "Clarify",
+    "chartArtifact": "intent.md"
+  },
+  {
+    "id": "design",
+    "name": "Design",
+    "focus": "Connect the request to the existing system.",
+    "summary": "Explore upload state, retries and document identity before choosing a recovery approach.",
+    "input": "Accepted intent and repository context",
+    "outputs": [
+      "spec.md"
+    ],
+    "outline": [
+      [
+        "Behavior",
+        "Recovery states and user actions"
+      ],
+      [
+        "System boundaries",
+        "Document identity, parser attempts and storage"
+      ],
+      [
+        "Open decisions",
+        "Retention and retry semantics"
+      ]
+    ],
+    "human": "Choose the approach and settle tradeoffs",
+    "agents": [
+      "design-role",
+      "researcher",
+      "adversarial"
+    ],
+    "chartVerb": "Design",
+    "chartArtifact": "spec.md"
+  },
+  {
+    "id": "build",
+    "name": "Build",
+    "focus": "Turn the accepted design into a change.",
+    "summary": "Plan the implementation, add regression coverage and simplify unnecessary complexity.",
+    "input": "Accepted design, implementation plan and conventions",
+    "outputs": [
+      "Change set"
+    ],
+    "outline": [
+      [
+        "Implementation",
+        "Upload recovery and retry handling"
+      ],
+      [
+        "Tests",
+        "Interrupted connections and repeated retries"
+      ],
+      [
+        "Change summary",
+        "Files touched and behavior affected"
+      ]
+    ],
+    "human": "Review scope changes and technical risks",
+    "agents": [
+      "implementation",
+      "simplifier"
+    ],
+    "chartVerb": "Code",
+    "chartArtifact": "Code + tests"
+  },
+  {
+    "id": "test",
+    "name": "Test",
+    "focus": "Make the behavior independently checkable.",
+    "summary": "Give the verifier the plan and the changed flow, with clear behavior to inspect.",
+    "input": "The change, agreed behavior and runnable checks",
+    "outputs": [
+      "Verification report"
+    ],
+    "outline": [
+      [
+        "Checks performed",
+        "Main recovery flow and neighboring behavior"
+      ],
+      [
+        "Observations",
+        "What was actually seen when checks ran"
+      ],
+      [
+        "Findings",
+        "Any behavior that differs from the plan"
+      ]
+    ],
+    "human": "Assess evidence and unresolved findings",
+    "agents": [
+      "verifier",
+      "pr-review",
+      "adversarial"
+    ],
+    "chartVerb": "Verify",
+    "chartArtifact": "Evidence"
+  },
+  {
+    "id": "deploy",
+    "name": "Deploy",
+    "focus": "Make the release decision reviewable.",
+    "summary": "Collect release requirements and recovery steps for a named decision owner.",
+    "input": "Reviewed change, verification evidence and environment rules",
+    "outputs": [
+      "Release checklist"
+    ],
+    "outline": [
+      [
+        "Readiness",
+        "Required checks and outstanding issues"
+      ],
+      [
+        "Authorization",
+        "Who may authorize this release"
+      ],
+      [
+        "Recovery",
+        "Rollback conditions and procedure"
+      ]
+    ],
+    "human": "Authorize the release",
+    "agents": [
+      "pipeline",
+      "verifier"
+    ],
+    "chartVerb": "Ship",
+    "chartArtifact": "Release"
+  },
+  {
+    "id": "maintain",
+    "name": "Maintain",
+    "focus": "Bring findings back into the next change.",
+    "summary": "Use incident evidence to define follow-up work and improve reusable knowledge.",
+    "input": "Incident records, user feedback or monitoring findings",
+    "outputs": [
+      "Next intent.md"
+    ],
+    "outline": [
+      [
+        "Evidence",
+        "Observed problem and affected behavior"
+      ],
+      [
+        "Follow-up",
+        "Proposed change and its boundaries"
+      ],
+      [
+        "Learning",
+        "Regression cases and knowledge to update"
+      ]
+    ],
+    "human": "Prioritize the follow-up",
+    "agents": [
+      "monitoring",
+      "security",
+      "oncall",
+      "researcher"
+    ],
+    "chartVerb": "Improve",
+    "chartArtifact": "Learning"
+  }
+]

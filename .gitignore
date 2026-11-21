@@ -42,11 +42,11 @@ storybook-static
 coverage
 
 # Go
-server/bin/
-server/tmp/
-server/migrate
-server/daemon
-server/workpal
+server/go/bin/
+server/go/tmp/
+server/go/migrate
+server/go/daemon
+server/go/workpal
 
 # Test artifacts
 test-results/
@@ -55,6 +55,7 @@ apps/web/test-results/
 # context (agent workspace)
 .context
 .agent_context/
+.superpowers/
 .workpal/*
 !.workpal/environments.toml
 
@@ -73,6 +74,8 @@ _features/
 *.app
 server/server
 data/
+!apps/web/app/capabilities/data/
+!apps/web/app/capabilities/data/*.json
 .kilo
 .idea
 .gstack/
@@ -85,3 +88,7 @@ perf-report/
 !apps/mobile/.env.production.example
 
 assets/workpal-prototype/.venv-workpal/
+
+# Python backend local environment
+server/.venv/
+server/.pytest_cache/

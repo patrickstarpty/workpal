@@ -1,0 +1,431 @@
+{
+  "version": 1,
+  "coverage": "finished finite helper section audit; global coverage false",
+  "whole_source": false,
+  "files": [
+    {
+      "path": "packages/views/issues/components/issue-detail.tsx",
+      "sha256": "afbc077580392ae3b7ec41e28c087ee215dc3103c426f505fee9d96f5d8f9f1a",
+      "whole_source": false,
+      "reviewed_ranges": [
+        [
+          1,
+          100
+        ],
+        [
+          101,
+          200
+        ],
+        [
+          201,
+          300
+        ],
+        [
+          301,
+          400
+        ],
+        [
+          401,
+          500
+        ],
+        [
+          501,
+          600
+        ],
+        [
+          601,
+          700
+        ],
+        [
+          701,
+          800
+        ],
+        [
+          801,
+          900
+        ],
+        [
+          901,
+          1000
+        ],
+        [
+          1001,
+          1100
+        ],
+        [
+          1101,
+          1200
+        ],
+        [
+          1201,
+          1300
+        ],
+        [
+          1301,
+          1400
+        ],
+        [
+          1401,
+          1485
+        ],
+        [
+          4554,
+          4580
+        ]
+      ]
+    }
+  ],
+  "snapshots": [
+    {
+      "path": "packages/views/issues/components/issue-detail.tsx",
+      "start": 1,
+      "end": 100,
+      "code": "\"use client\";\n\nimport { subIssueCreateDefaults } from \"@workpal/core/issues\";\nimport {\n  issueBehavesAs,\n  issueBehavesAsAny,\n  issueStatusCategory,\n} from \"@workpal/core/issues\";\nimport { IssueFlowCard } from \"../../workflows/issue-flow-card\";\nimport { IssueAppRequests } from \"../../common/app-requests\";\nimport { useStatusLabel } from \"../utils/status-label\";\nimport { priorityLabel } from \"../utils/priority-label\";\nimport { useIssueStatuses } from \"@workpal/core/issue-statuses/hooks\";\nimport { useState, useEffect, useCallback, useMemo, useRef, useId, Fragment, type ComponentProps, type ReactNode } from \"react\";\nimport { Virtuoso, type ListRange, type VirtuosoHandle } from \"react-virtuoso\";\nimport { useDefaultLayout, usePanelRef } from \"react-resizable-panels\";\nimport { AppLink, useBackOrReplace } from \"../../navigation\";\nimport { IssueDuplicateBanner, IssueDuplicatesSection, isDuplicateIssue } from \"./issue-duplicates\";\nimport {\n  AlertTriangle,\n  Archive,\n  Calendar,\n  CalendarClock,\n  CalendarDays,\n  ChevronDown,\n  ChevronLeft,\n  ChevronRight,\n  CircleCheck,\n  FileQuestion,\n  Loader2,\n  Milestone,\n  MoreHorizontal,\n  PanelRight,\n  Pin,\n  PinOff,\n  Plus,\n  SlidersHorizontal,\n  Tag,\n  Unlink,\n  Users,\n  ArrowDown,\n} from \"@workpal/ui/icons\";\nimport { BreadcrumbHeader, type BreadcrumbSegment } from \"../../layout/breadcrumb-header\";\nimport { Skeleton } from \"@workpal/ui/components/ui/skeleton\";\nimport { Button } from \"@workpal/ui/components/ui/button\";\nimport { IconButton } from \"@workpal/ui/components/common/icon-button\";\nimport { ResizablePanelGroup, ResizablePanel, ResizableHandle } from \"@workpal/ui/components/ui/resizable\";\nimport { Sheet, SheetContent } from \"@workpal/ui/components/ui/sheet\";\nimport { useIsMobile } from \"@workpal/ui/hooks/use-mobile\";\nimport { ContentEditor, type ContentEditorRef, TitleEditor, type TitleEditorRef, useFileDropZone, FileDropOverlay, useLazyEditor, useEditorUpload, PreviewSequenceProvider, collectPreviewSequence } from \"../../editor\";\nimport {\n  WAKEUP_ACTIVITY_ACTIONS,\n  WakeupActivityIcon,\n  formatWakeupActivity,\n  wakeupActivityChip,\n} from \"./wakeup-activity\";\nimport { useWakeupText } from \"./wakeup-presentation\";\nimport type { ImageSequenceBlock } from \"@workpal/core/attachments/image-sequence\";\nimport { FileUploadButton } from \"@workpal/ui/components/common/file-upload-button\";\nimport {\n  Tooltip,\n  TooltipTrigger,\n  TooltipContent,\n} from \"@workpal/ui/components/ui/tooltip\";\nimport {\n  DropdownMenu,\n  DropdownMenuTrigger,\n  DropdownMenuContent,\n  DropdownMenuItem,\n} from \"@workpal/ui/components/ui/dropdown-menu\";\nimport { Popover, PopoverTrigger, PopoverContent } from \"@workpal/ui/components/ui/popover\";\nimport { KeyUpdatesSubscriptionBadge } from \"./key-updates-subscription-badge\";\nimport { Checkbox } from \"@workpal/ui/components/ui/checkbox\";\nimport { Command, CommandInput, CommandList, CommandEmpty, CommandGroup, CommandItem } from \"@workpal/ui/components/ui/command\";\nimport { AvatarGroup, AvatarGroupCount } from \"@workpal/ui/components/ui/avatar\";\nimport { ActorAvatar } from \"../../common/actor-avatar\";\nimport { MemberProfileCard } from \"../../members/member-profile-card\";\nimport { HoverCard, HoverCardTrigger, HoverCardContent } from \"@workpal/ui/components/ui/hover-card\";\nimport { ActionShortcutKeycaps } from \"../../common/shortcut-keycaps\";\nimport { UnsubscribeArchiveButton } from \"../../inbox/components/unsubscribe-archive-button\";\nimport type { InboxUnsubscribeScope } from \"@workpal/core/inbox/mutations\";\nimport { PropRow } from \"../../common/prop-row\";\nimport { TimelineHandoff } from \"../../workflows/timeline-handoff\";\nimport { PropertyIcon } from \"../../common/property-icon\";\nimport type { Attachment, Issue, IssueProperty, IssueStatus, IssueStatusCategory, IssuePriority, TimelineEntry, UpdateIssueRequest } from \"@workpal/core/types\";\nimport { contentReferencesAttachment } from \"@workpal/core/types\";\nimport { isBuiltInIssueStatus } from \"@workpal/core/issue-statuses\";\nimport { commentLandingTarget, isDeletedComment } from \"@workpal/core/issues/comment-deletion\";\nimport { formatDateOnly, isPastDateOnly } from \"@workpal/core/issues/date\";\nimport { useUpdateIssue } from \"@workpal/core/issues/mutations\";\nimport { toast } from \"sonner\";\nimport { errorCode } from \"@workpal/core/api\";\nimport { StatusIcon } from \"./status-icon\";\nimport { PriorityIcon } from \"./priority-icon\";\nimport { StatusPicker } from \"./pickers/status-picker\";\nimport { PriorityPicker } from \"./pickers/priority-picker\";\nimport { StagePicker, maxSiblingStage } from \"./pickers/stage-picker\";\nimport { StartDatePicker } from \"./pickers/start-date-picker\";\nimport { DueDatePicker } from \"./pickers/due-date-picker\";\nimport { AssigneePicker } from \"./pickers/assignee-picker\";"
+    },
+    {
+      "path": "packages/views/issues/components/issue-detail.tsx",
+      "start": 101,
+      "end": 200,
+      "code": "import { LabelPicker } from \"./pickers/label-picker\";\nimport { CustomPropertyValueEditor, CustomPropertyValueDisplay } from \"./pickers/custom-property-picker\";\nimport { Switch } from \"@workpal/ui/components/ui/switch\";\nimport { IssueActionsDropdown, useIssuePageMenu, useIssueActions, useArchivedInboxItemId, IssueActionsContextMenu, IssueContextMenuProvider, IssueInboxActions } from \"../actions\";\nimport { LabelChip } from \"../../labels/label-chip\";\nimport { IssueAgentActivityIndicator } from \"./issue-agent-activity-indicator\";\nimport { SubIssuesAgentWorkingChip } from \"./sub-issues-agent-working-chip\";\nimport { IssueProjectPicker } from \"../../projects/components/issue-project-picker\";\nimport { IssuePropertyPills } from \"./issue-property-pills\";\nimport { LocalDirectoryHint } from \"../../projects/components/local-directory-hint\";\nimport { useNewRunIds } from \"./use-run-comment-motion\";\nimport { AgentRunComment, CommentCard } from \"./comment-card\";\nimport { EMPTY_COMMENT_RUNS, buildCommentRunView, orderTimelineWithRuns, type CommentRun } from \"./comment-runs\";\nimport { issueTasksOptions } from \"@workpal/core/issues/queries\";\nimport { SourceContextBadge } from \"./source-context-viewer\";\nimport { RevisionConflictCompare } from \"./revision-conflict-compare\";\nimport { CommentInput } from \"./comment-input\";\nimport { useCommentAnnotations } from \"./use-comment-annotations\";\nimport { CurrentIssueRenderContextProvider } from \"../current-issue-render-context\";\nimport { ResolvedThreadBar } from \"./resolved-thread-bar\";\nimport { ThreadMinimap, type ThreadMinimapThread } from \"./thread-minimap\";\nimport { collectThreadParticipants, collectThreadReplies, deriveThreadResolution } from \"./thread-utils\";\nimport { IssueAgentHeaderChip } from \"./issue-agent-header-chip\";\nimport { IssueWakeupHeaderChip } from \"./issue-wakeup-header-chip\";\nimport { ExecutionLogSection } from \"./execution-log-section\";\nimport { WakeupsSection } from \"./wakeups-section\";\nimport { QuickActionsSection } from \"./quick-actions-section\";\nimport { PluginPanelSection } from \"../../plugins\";\nimport { PullRequestsSection } from \"./pull-requests-section\";\nimport { IssueEnvironmentsSection } from \"./issue-environments-section\";\nimport { useGitHubSettings } from \"@workpal/core/github\";\nimport { useFeatureEnabled } from \"@workpal/core/config\";\nimport { PLUGINS_V1_FLAG } from \"@workpal/core/feature-flags\";\nimport { DeliverablesSection } from \"./deliverables/deliverables-section\";\nimport { IssueAppsSection } from \"./issue-apps-section\";\nimport { DeliverablesOverview } from \"./deliverables/deliverables-overview\";\nimport {\n  DESCRIPTION_BLOCK_ID,\n  useDeliverableDetails,\n  type DeliverableOrigin,\n} from \"./deliverables/deliverable-details\";\nimport { collectDeliverableFiles, deliverableInventoryFromAttachments, mergeDeliverableSources } from \"@workpal/core/attachments/deliverables\";\nimport { AttachmentVersionsProvider } from \"./deliverables/attachment-versions\";\nimport {\n  OpenDeliverableOnLoad,\n  useCopyDeliverableLink,\n  useDeliverableLinkSession,\n  useFreshTimelineRead,\n} from \"./deliverables/deliverable-link\";\nimport { useQuery } from \"@tanstack/react-query\";\nimport { useIssueReadState } from \"@workpal/core/issues/read-state\";\nimport { useAuthStore } from \"@workpal/core/auth\";\nimport { useWorkspacePaths } from \"@workpal/core/paths\";\nimport { useActorName } from \"@workpal/core/workspace/hooks\";\nimport { useWorkspaceId } from \"@workpal/core/hooks\";\nimport {\n  useProjectWorkflow,\n} from \"@workpal/core/issue-workflows\";\nimport { useRecentContextStore } from \"@workpal/core/chat\";\nimport { useRegisterCommandBarContext } from \"../../search/register-context\";\nimport { useModalStore } from \"@workpal/core/modals\";\nimport { issueListOptions, issueDetailOptions, childIssuesOptions, childIssueProgressOptions, issueAttachmentsOptions } from \"@workpal/core/issues/queries\";\nimport { projectDetailOptions } from \"@workpal/core/projects/queries\";\nimport { ProjectIcon } from \"../../projects/components/project-icon\";\nimport { issueLabelsOptions } from \"@workpal/core/labels\";\nimport { propertyListOptions } from \"@workpal/core/properties\";\nimport { memberListOptions, agentListOptions } from \"@workpal/core/workspace/queries\";\nimport {\n  selectExpandedResolved,\n  useCommentCollapseStore,\n  useCommentComposerStore,\n  useRecentIssuesStore,\n  useResolvedExpandStore,\n  useSubIssuesCollapseStore,\n  useSubIssueDisplayStore,\n  SUB_ISSUE_ROW_PROPERTY_KEYS,\n  type SubIssueRowProperties,\n  type SubIssueRowPropertyKey,\n  ISSUE_SIDEBAR_SECTIONS,\n  type IssueSidebarSection,\n} from \"@workpal/core/issues/stores\";\nimport { BatchActionToolbar } from \"./batch-action-toolbar\";\nimport {\n  IssueSurfaceSelectionProvider,\n  useCreateIssueSurfaceSelection,\n  useIssueSurfaceSelection,\n} from \"../surface/selection-context\";\nimport { useIssueTimeline } from \"../hooks/use-issue-timeline\";\nimport { useIssueReactions } from \"../hooks/use-issue-reactions\";\nimport { useIssueSubscribers } from \"../hooks/use-issue-subscribers\";\nimport { useMarkIssueReadWhileViewing } from \"../hooks/use-mark-issue-read-while-viewing\";\nimport { useMarkIssueInboxReadWhileViewing } from \"../hooks/use-mark-issue-inbox-read-while-viewing\";\nimport { ReactionBar } from \"@workpal/ui/components/common/reaction-bar\";\nimport { useLocale, useTimeAgo } from \"../../i18n\";\nimport {\n  useRestoredScrollOffset,\n  useRestoredScrollRef,\n  useRestoredViewState,\n  useViewStateWriter,\n} from \"../../platform\";"
+    },
+    {
+      "path": "packages/views/issues/components/issue-detail.tsx",
+      "start": 201,
+      "end": 300,
+      "code": "import { cn } from \"@workpal/ui/lib/utils\";\nimport { TruncatedTooltip } from \"@workpal/ui/components/common/truncated-tooltip\";\nimport { CollectionPageState } from \"../../layout/collection-page\";\nimport { PAGE_GUTTER, usePageHeaderTitleBar } from \"../../layout/page-header\";\nimport { READING_COLUMN } from \"../../layout/reading-column\";\nimport { useShowInSidebar } from \"../../layout/panels/show-in-sidebar\";\n\nimport { ProgressRing } from \"./progress-ring\";\nimport { matchesPinyin } from \"../../editor/extensions/pinyin-match\";\nimport { MetadataSection } from \"./metadata-section\";\nimport { IssueSidebarSectionHeader, IssueSidebarPropertyGrid } from \"./issue-sidebar-section\";\nimport { IssueSidebarSections, letSidebarSettingsDragKeysThrough } from \"./issue-sidebar-settings\";\nimport { useT } from \"../../i18n\";\nimport { useIssueDetailScrollRestore } from \"../hooks/use-issue-detail-scroll-restore\";\nimport { useIssueTimelineAnchor } from \"../hooks/use-issue-timeline-anchor\";\nimport { scrollToTimelineComment } from \"../utils/scroll-to-timeline-comment\";\nimport { useJumpToLatest } from \"../hooks/use-jump-to-latest\";\nimport { useNewCommentsWhileAway } from \"../hooks/use-new-comments-while-away\";\nimport { useInPageFind } from \"../hooks/use-in-page-find\";\nimport { useStickyComposer } from \"../hooks/use-sticky-composer\";\nimport { FindBar } from \"./find-bar\";\nimport {\n  AnimatedRightSidebar,\n  getAnimatedRightSidebarInitialOpen,\n  rightSidebarPanelMotionProps,\n  useAnimatedRightSidebarState,\n  useRightSidebarShortcut,\n} from \"../../layout/animated-right-sidebar\";\n\n/**\n * Memento entry recording that the comment-highlight deep link for this\n * issue already landed on the current route (value: the consumed comment\n * id). Lets a remount that merely restores the view (tab switch back) skip\n * the jump-and-highlight, while a fresh selection — which clears the entry\n * (see InboxPage.handleSelect) — runs it again.\n */\nexport function issueHighlightMementoKey(issueId: string): string {\n  return `highlight:${issueId}`;\n}\n\n// Shared by the subscribe button and the unsubscribe menu trigger so the two\n// stay one control visually — they occupy the same slot and only differ in\n// what a click does.\nconst SUBSCRIPTION_ACTION_CLASS =\n  \"text-label text-muted-foreground hover:text-foreground transition-colors disabled:pointer-events-none disabled:opacity-50\";\n\nfunction SubscriberPopoverContent({\n  members,\n  agents,\n  subscribers,\n  toggleSubscriber,\n  togglesDisabled,\n  t,\n}: {\n  members: { user_id: string; name: string }[];\n  agents: { id: string; name: string; archived_at?: string | null }[];\n  subscribers: { user_type: string; user_id: string }[];\n  toggleSubscriber: (id: string, type: \"member\" | \"agent\", subscribed: boolean) => void;\n  /**\n   * Every checkbox here is drawn from `subscribers`, which defaults to an empty\n   * list until the query resolves — so an unresolved query renders everyone as\n   * unsubscribed. Acting on that is not a harmless no-op: an explicit subscribe\n   * rewrites the target's reason to 'manual' and clears any opt-out scope\n   * (server/go/pkg/db/queries/subscriber.sql), which would quietly discard a\n   * delegated subscription or someone's deliberate opt-out. So these rows wait\n   * for a real answer, not just for the in-flight mutation (MUL-5714).\n   */\n  togglesDisabled: boolean;\n  t: ActivityT;\n}) {\n  const [search, setSearch] = useState(\"\");\n  const q = search.trim().toLowerCase();\n\n  const uniqueMembers = members.filter((m, i, arr) => arr.findIndex((x) => x.user_id === m.user_id) === i);\n  const activeAgents = agents.filter((a) => !a.archived_at);\n\n  const filteredMembers = q\n    ? uniqueMembers.filter((m) => m.name.toLowerCase().includes(q) || matchesPinyin(m.name, q))\n    : uniqueMembers;\n  const filteredAgents = q\n    ? activeAgents.filter((a) => a.name.toLowerCase().includes(q) || matchesPinyin(a.name, q))\n    : activeAgents;\n\n  return (\n    <PopoverContent align=\"end\" className=\"w-64 p-0\">\n      <Command shouldFilter={false}>\n        <CommandInput\n          placeholder={t(($) => $.detail.change_subscribers_placeholder)}\n          value={search}\n          onValueChange={setSearch}\n        />\n        <CommandList className=\"max-h-64\">\n          {filteredMembers.length === 0 && filteredAgents.length === 0 && (\n            <CommandEmpty>{t(($) => $.detail.no_subscribers_results)}</CommandEmpty>\n          )}\n          {filteredMembers.length > 0 && (\n            <CommandGroup heading={t(($) => $.detail.members_group)}>\n              {filteredMembers.map((m) => {\n                const sub = subscribers.find((s) => s.user_type === \"member\" && s.user_id === m.user_id);\n                const isSubbed = !!sub;"
+    },
+    {
+      "path": "packages/views/issues/components/issue-detail.tsx",
+      "start": 301,
+      "end": 400,
+      "code": "                return (\n                  <CommandItem\n                    key={`member-${m.user_id}`}\n                    onSelect={() => toggleSubscriber(m.user_id, \"member\", isSubbed)}\n                    disabled={togglesDisabled}\n                    className=\"flex items-center gap-2.5\"\n                  >\n                    <Checkbox checked={isSubbed} className=\"pointer-events-none\" />\n                    <ActorAvatar actorType=\"member\" actorId={m.user_id} size=\"md\" />\n                    <span className=\"truncate flex-1\">{m.name}</span>\n                  </CommandItem>\n                );\n              })}\n            </CommandGroup>\n          )}\n          {filteredAgents.length > 0 && (\n            <CommandGroup heading={t(($) => $.detail.agents_group)}>\n              {filteredAgents.map((a) => {\n                const sub = subscribers.find((s) => s.user_type === \"agent\" && s.user_id === a.id);\n                const isSubbed = !!sub;\n                return (\n                  <CommandItem\n                    key={`agent-${a.id}`}\n                    onSelect={() => toggleSubscriber(a.id, \"agent\", isSubbed)}\n                    disabled={togglesDisabled}\n                    className=\"flex items-center gap-2.5\"\n                  >\n                    <Checkbox checked={isSubbed} className=\"pointer-events-none\" />\n                    <ActorAvatar actorType=\"agent\" actorId={a.id} size=\"md\" showStatusDot />\n                    <span className=\"truncate flex-1\">{a.name}</span>\n                  </CommandItem>\n                );\n              })}\n            </CommandGroup>\n          )}\n        </CommandList>\n      </Command>\n    </PopoverContent>\n  );\n}\n\nfunction shortDate(date: string | null, locale: string): string {\n  if (!date) return \"—\";\n  return formatDateOnly(date, { month: \"short\", day: \"numeric\" }, locale);\n}\n\ntype ActivityT = ReturnType<typeof useT<\"issues\">>[\"t\"];\n\n/**\n * Labels a status key from the activity feed. `resolveLabel` is the workspace\n * catalog resolver, which names custom statuses; without it — or for a status\n * since deleted — a built-in still gets its i18n name and anything else falls\n * back to the raw key. (MUL-6243)\n */\nfunction statusLabel(\n  status: string,\n  t: ActivityT,\n  resolveLabel?: (statusKey: string) => string,\n): string {\n  if (resolveLabel) return resolveLabel(status);\n  if (isBuiltInIssueStatus(status)) {\n    return t(($) => $.status[status]);\n  }\n  return status;\n}\n\nfunction formatActivity(\n  entry: TimelineEntry,\n  t: ActivityT,\n  locale: string,\n  resolveActorName?: (type: string, id: string) => string,\n  resolveStatusLabel?: (statusKey: string) => string,\n  requesterName?: string,\n): string {\n  const details = (entry.details ?? {}) as Record<string, string>;\n  switch (entry.action) {\n    case \"created\":\n      if (requesterName && entry.actor_type === \"agent\") {\n        return t(($) => $.activity.created_on_behalf_of, { name: requesterName });\n      }\n      return t(($) => $.activity.created);\n    case \"status_changed\":\n      // PR auto-complete (MUL-7429) says why the status moved.\n      if (details.source === \"pr_automation\") {\n        return t(($) => $.activity.status_changed_pr, {\n          from: statusLabel(details.from ?? \"?\", t, resolveStatusLabel),\n          to: statusLabel(details.to ?? \"?\", t, resolveStatusLabel),\n          prs: details.pull_requests ?? \"\",\n        });\n      }\n      return t(($) => $.activity.status_changed, {\n        from: statusLabel(details.from ?? \"?\", t, resolveStatusLabel),\n        to: statusLabel(details.to ?? \"?\", t, resolveStatusLabel),\n      });\n    case \"pr_auto_complete_changed\":\n      return (entry.details as { disabled?: unknown } | undefined)?.disabled === true\n        ? t(($) => $.activity.pr_auto_complete_disabled)\n        : t(($) => $.activity.pr_auto_complete_enabled);\n    case \"priority_changed\":\n      return t(($) => $.activity.priority_changed, {"
+    },
+    {
+      "path": "packages/views/issues/components/issue-detail.tsx",
+      "start": 401,
+      "end": 500,
+      "code": "        from: priorityLabel(details.from ?? \"?\", t),\n        to: priorityLabel(details.to ?? \"?\", t),\n      });\n    case \"assignee_changed\": {\n      const isSelfAssign = details.to_type === entry.actor_type && details.to_id === entry.actor_id;\n      if (isSelfAssign) return t(($) => $.activity.self_assigned);\n      const toName = details.to_id && details.to_type && resolveActorName\n        ? resolveActorName(details.to_type, details.to_id)\n        : null;\n      if (toName) return t(($) => $.activity.assigned_to, { name: toName });\n      if (details.from_id && !details.to_id) return t(($) => $.activity.removed_assignee);\n      return t(($) => $.activity.changed_assignee);\n    }\n    case \"start_date_changed\": {\n      if (!details.to) return t(($) => $.activity.start_date_removed);\n      const formatted = formatDateOnly(details.to, { month: \"short\", day: \"numeric\" }, locale);\n      return t(($) => $.activity.start_date_set, { date: formatted });\n    }\n    case \"due_date_changed\": {\n      if (!details.to) return t(($) => $.activity.due_date_removed);\n      const formatted = formatDateOnly(details.to, { month: \"short\", day: \"numeric\" }, locale);\n      return t(($) => $.activity.due_date_set, { date: formatted });\n    }\n    case \"title_changed\":\n      return t(($) => $.activity.title_renamed, {\n        from: details.from ?? \"?\",\n        to: details.to ?? \"?\",\n      });\n    case \"description_updated\":\n      return t(($) => $.activity.description_updated);\n    case \"duplicate_marked\":\n      return t(($) => $.activity.duplicate_marked, {\n        identifier: details.original_identifier || \"?\",\n      });\n    case \"duplicate_unmarked\": {\n      const identifier = details.original_identifier || \"?\";\n      if (details.reason === \"original_deleted\") {\n        return t(($) => $.activity.duplicate_unmarked_original_deleted, { identifier });\n      }\n      // The row stands in for the status row of the reopen, so it says where\n      // the status went.\n      if (details.to) {\n        return t(($) => $.activity.duplicate_unmarked_to, {\n          identifier,\n          status: statusLabel(details.to, t, resolveStatusLabel),\n        });\n      }\n      return t(($) => $.activity.duplicate_unmarked, { identifier });\n    }\n    case \"duplicate_added\":\n      return t(($) => $.activity.duplicate_added, {\n        identifier: details.duplicate_identifier || \"?\",\n      });\n    case \"duplicate_removed\":\n      return t(($) => $.activity.duplicate_removed, {\n        identifier: details.duplicate_identifier || \"?\",\n      });\n    case \"task_completed\":\n      return t(($) => $.activity.task_completed, { count: entry.coalesced_count ?? 1 });\n    case \"task_failed\":\n      return t(($) => $.activity.task_failed, { count: entry.coalesced_count ?? 1 });\n    case \"squad_leader_evaluated\": {\n      const reason = details.reason?.trim();\n      switch (details.outcome) {\n        case \"action\":\n          return reason\n            ? t(($) => $.activity.squad_leader_action_reason, { reason })\n            : t(($) => $.activity.squad_leader_action);\n        case \"no_action\":\n          return reason\n            ? t(($) => $.activity.squad_leader_no_action_reason, { reason })\n            : t(($) => $.activity.squad_leader_no_action);\n        case \"failed\":\n          return reason\n            ? t(($) => $.activity.squad_leader_failed_reason, { reason })\n            : t(($) => $.activity.squad_leader_failed);\n        default:\n          return t(($) => $.activity.squad_leader_evaluated);\n      }\n    }\n    case \"environment_controlled\": {\n      const name = details.label || details.name || \"?\";\n      switch (details.action) {\n        case \"stop\":\n          return t(($) => $.activity.environment_stopped, { name });\n        case \"restart\":\n          return t(($) => $.activity.environment_restarted, { name });\n        default:\n          return t(($) => $.activity.environment_started, { name });\n      }\n    }\n    default:\n      return entry.action ?? \"\";\n  }\n}\n\n/**\n * The issue a duplicate-mark activity (MUL-7349) names, when it can still be\n * opened. A mark removed because its original was deleted has nowhere to\n * link, so it renders as plain text."
+    },
+    {
+      "path": "packages/views/issues/components/issue-detail.tsx",
+      "start": 501,
+      "end": 600,
+      "code": " */\nfunction duplicateActivityLink(entry: TimelineEntry): { id: string; identifier: string } | null {\n  const details = (entry.details ?? {}) as Record<string, string>;\n  switch (entry.action) {\n    case \"duplicate_marked\":\n    case \"duplicate_unmarked\":\n      if (details.reason === \"original_deleted\") return null;\n      return details.original_id && details.original_identifier\n        ? { id: details.original_id, identifier: details.original_identifier }\n        : null;\n    case \"duplicate_added\":\n    case \"duplicate_removed\":\n      return details.duplicate_id && details.duplicate_identifier\n        ? { id: details.duplicate_id, identifier: details.duplicate_identifier }\n        : null;\n    default:\n      return null;\n  }\n}\n\n/** Activity copy with the issue it names turned into a link. */\nfunction ActivityText({ entry, text }: { entry: TimelineEntry; text: string }) {\n  const paths = useWorkspacePaths();\n  const link = duplicateActivityLink(entry);\n  const at = link ? text.indexOf(link.identifier) : -1;\n  if (!link || at < 0) return <>{text}</>;\n  return (\n    <>\n      {text.slice(0, at)}\n      <AppLink\n        href={paths.issueDetail(link.id)}\n        newTabTitle={link.identifier}\n        className=\"font-medium text-foreground underline-offset-4 hover:underline\"\n      >\n        {link.identifier}\n      </AppLink>\n      {text.slice(at + link.identifier.length)}\n    </>\n  );\n}\n\n// Helpers\n\n// Stable reference for threads with no replies. Inline `[]` would create a\n// new array on every render and bust React.memo on CommentCard / ResolvedThreadBar.\nconst EMPTY_REPLIES: TimelineEntry[] = [];\n\n// Sidebar progressive disclosure\n//\n// Properties shown in the sidebar split into two groups:\n//   - core: always rendered (status / assignee / project)\n//   - optional: rendered only when the issue has a value for that field OR\n//     the user explicitly added it via \"+ Add property\" in this session\n//     (priority / due_date / labels)\n//\n// Parent is not in either group — it has its own standalone section below\n// the Properties block, rendered only when the issue actually has a parent.\n//\n// `OPTIONAL_PROP_KEYS` is the open set — adding a new optional field\n// means appending here, wiring its row in the JSX switch below, and\n// adding a locale key. The picker, visibility rules, and add-property\n// menu all flow from this one list.\n// `stage` is only meaningful for a sub-issue (relative to its siblings), so\n// its row and add-property entry are gated on `issue.parent_issue_id` at the\n// render site below — it stays in this list so seeding/visibility flow through\n// the same machinery as the other optional props.\nconst OPTIONAL_PROP_KEYS = [\"priority\", \"stage\", \"start_date\", \"due_date\", \"labels\"] as const;\ntype OptionalPropKey = (typeof OPTIONAL_PROP_KEYS)[number];\n\nfunction isOptionalPropSet(\n  issue: Issue,\n  key: OptionalPropKey,\n  attachedLabelsCount: number,\n): boolean {\n  switch (key) {\n    case \"priority\":\n      return issue.priority !== \"none\";\n    case \"stage\":\n      return issue.stage !== null && issue.stage !== undefined;\n    case \"start_date\":\n      return !!issue.start_date;\n    case \"due_date\":\n      return !!issue.due_date;\n    case \"labels\":\n      return attachedLabelsCount > 0;\n  }\n}\n\nconst SIDEBAR_SUB_ISSUES_LIMIT = 10;\n\n// groupSubIssuesByStage orders a parent's children for display: staged groups\n// ascending by stage, then the unstaged group (stage === null) last. Callers\n// render a per-group stage header only when the set is actually staged.\nexport function groupSubIssuesByStage(\n  children: Issue[],\n): { stage: number | null; items: Issue[] }[] {\n  const byStage = new Map<number, Issue[]>();\n  const unstaged: Issue[] = [];\n  for (const c of children) {\n    if (c.stage != null) {"
+    },
+    {
+      "path": "packages/views/issues/components/issue-detail.tsx",
+      "start": 601,
+      "end": 700,
+      "code": "      const arr = byStage.get(c.stage);\n      if (arr) arr.push(c);\n      else byStage.set(c.stage, [c]);\n    } else {\n      unstaged.push(c);\n    }\n  }\n  const groups: { stage: number | null; items: Issue[] }[] = [...byStage.keys()]\n    .sort((a, b) => a - b)\n    .map((s) => ({ stage: s, items: byStage.get(s) as Issue[] }));\n  if (unstaged.length > 0) groups.push({ stage: null, items: unstaged });\n  return groups;\n}\n\n// Shallow array equality by element identity. Used to reuse the previous\n// render's per-thread reply slice when nothing in *this* thread changed,\n// even if the surrounding `timeline` array was rebuilt by a WS event in\n// some unrelated thread.\nfunction shallowEqualEntries(a: TimelineEntry[], b: TimelineEntry[]): boolean {\n  if (a === b) return true;\n  if (a.length !== b.length) return false;\n  for (let i = 0; i < a.length; i++) {\n    if (a[i] !== b[i]) return false;\n  }\n  return true;\n}\n\nfunction JumpToLatestButton({\n  onClick,\n  label,\n  hasNew = false,\n}: {\n  onClick: () => void;\n  label: string;\n  /** New comments arrived while the reader was away; `label` counts them. */\n  hasNew?: boolean;\n}) {\n  return (\n    <Button\n      type=\"button\"\n      variant=\"outline\"\n      size=\"sm\"\n      onClick={onClick}\n      className=\"absolute bottom-full left-1/2 mb-6 -translate-x-1/2 bg-background shadow-md dark:bg-background dark:hover:bg-muted\"\n    >\n      {hasNew ? (\n        <>\n          <span aria-hidden=\"true\" className=\"size-1.5 rounded-full bg-brand\" />\n          {label}\n          <ArrowDown />\n        </>\n      ) : (\n        <>\n          <ArrowDown />\n          {label}\n        </>\n      )}\n    </Button>\n  );\n}\n\n// Flat per-item shape consumed by <Virtuoso>. Virtuoso needs a flat array\n// where each entry is one rendered row; we keep the grouping logic from\n// `timelineView.groups` (consecutive same-actor activities still collapse\n// into one activity-group row) but project it into a discriminated union\n// the itemContent dispatcher can switch on.\ntype TimelineItem =\n  | { kind: \"run\"; id: string; run: CommentRun; entry?: TimelineEntry }\n  | { kind: \"comment\"; id: string; entry: TimelineEntry }\n  | { kind: \"resolved-bar\"; id: string; entry: TimelineEntry }\n  | { kind: \"activity-group\"; id: string; entries: TimelineEntry[] };\n\ntype RawTimelineGroup = {\n  type: \"comment\" | \"activities\";\n  entries: TimelineEntry[];\n} | { type: \"run\"; run: CommentRun; entry?: TimelineEntry };\n\nfunction flattenGroups(\n  groups: ReadonlyArray<RawTimelineGroup>,\n  expandedResolved: ReadonlySet<string>,\n): TimelineItem[] {\n  const out: TimelineItem[] = [];\n  for (const group of groups) {\n    if (group.type === \"run\") {\n      out.push({ kind: \"run\", id: group.entry?.id ?? group.run.task.id, run: group.run, entry: group.entry });\n    } else if (group.type === \"comment\") {\n      const entry = group.entries[0]!;\n      const isResolved = !!entry.resolved_at;\n      const isExpanded = expandedResolved.has(entry.id);\n      out.push(\n        isResolved && !isExpanded\n          ? { kind: \"resolved-bar\", id: entry.id, entry }\n          : { kind: \"comment\", id: entry.id, entry },\n      );\n    } else {\n      out.push({\n        kind: \"activity-group\",\n        id: group.entries[0]!.id,\n        entries: group.entries,\n      });"
+    },
+    {
+      "path": "packages/views/issues/components/issue-detail.tsx",
+      "start": 701,
+      "end": 800,
+      "code": "    }\n  }\n  return out;\n}\n\nfunction TimelineSkeleton() {\n  return (\n    <div className=\"mt-4 flex flex-col gap-3\">\n      {[0, 1].map((i) => (\n        <div key={i} className=\"flex gap-3 p-4\">\n          <Skeleton className=\"h-10 w-10 shrink-0 rounded-full\" />\n          <div className=\"flex-1 space-y-2\">\n            <Skeleton className=\"h-4 w-32\" />\n            <Skeleton className=\"h-4 w-full\" />\n            <Skeleton className=\"h-4 w-4/5\" />\n          </div>\n        </div>\n      ))}\n    </div>\n  );\n}\n\n// When the trailing block is expanded, we still truncate its body to the most\n// recent N entries — a single block of 50 status flips drowns the comment area\n// as badly as N blocks of 1 would. Older entries fold behind a \"Show N more\n// activities\" line that expands in place.\nconst LAST_ACTIVITY_BLOCK_VISIBLE_LIMIT = 8;\n\n// Collapsible wrapper for an activity block. Older blocks default to a single\n// \"N activities\" summary line so the timeline isn't dominated by status /\n// priority / assignee churn; the trailing block stays expanded because it\n// usually answers \"what just happened?\". Expansion state is owned by the\n// parent so it survives Virtuoso's mount/unmount on scroll.\nfunction ActivityBlock({\n  entries,\n  expanded,\n  onToggle,\n  truncateOlder,\n  showOlder,\n  onToggleShowOlder,\n  getActorName,\n  resolveStatusLabel,\n  resolveStatusCategory,\n  resolveStatusColor,\n  resolveStatusIcon,\n  t,\n  timeAgo,\n  locale,\n  requesterName,\n}: {\n  entries: TimelineEntry[];\n  expanded: boolean;\n  onToggle: () => void;\n  // Trailing block only: when true, the body shows only the most recent\n  // LAST_ACTIVITY_BLOCK_VISIBLE_LIMIT entries with the older ones folded\n  // behind a \"Show N more activities\" inline toggle.\n  truncateOlder: boolean;\n  showOlder: boolean;\n  onToggleShowOlder: () => void;\n  getActorName: (type: string, id: string) => string;\n  resolveStatusLabel: (statusKey: string) => string;\n  resolveStatusCategory: (statusKey: string) => IssueStatusCategory;\n  /** A custom status's own `#rrggbb`; null for built-ins and unknown keys. */\n  resolveStatusColor: (statusKey: string) => string | null;\n  resolveStatusIcon: (statusKey: string) => string | null;\n  t: ActivityT;\n  timeAgo: (dateStr: string) => string;\n  locale: string;\n  requesterName?: string;\n}) {\n  const wakeupText = useWakeupText();\n  if (!expanded) {\n    const count = entries.length;\n    return (\n      <div className=\"pb-3 px-4 max-md:px-3\">\n        <button\n          type=\"button\"\n          onClick={onToggle}\n          className=\"flex items-center gap-1.5 text-label text-muted-foreground transition-colors hover:text-foreground\"\n        >\n          <ChevronRight className=\"h-3 w-3 shrink-0\" />\n          <span>{t(($) => $.activity.activity_count, { count })}</span>\n        </button>\n      </div>\n    );\n  }\n  const hiddenOlderCount =\n    truncateOlder && !showOlder && entries.length > LAST_ACTIVITY_BLOCK_VISIBLE_LIMIT\n      ? entries.length - LAST_ACTIVITY_BLOCK_VISIBLE_LIMIT\n      : 0;\n  const visibleEntries =\n    hiddenOlderCount > 0 ? entries.slice(-LAST_ACTIVITY_BLOCK_VISIBLE_LIMIT) : entries;\n  // Hide the \"v N activities\" collapse header while we're in the truncated\n  // default state. The \"Show N more\" link is the only control users need\n  // when they're glancing at recent activity — stacking two chevron rows\n  // looked like nested folds and added visual noise without value. Once the\n  // user explicitly reveals older entries, the header reappears so they can\n  // fold the whole block back to a single count line.\n  const showHeader = hiddenOlderCount === 0;\n  return ("
+    },
+    {
+      "path": "packages/views/issues/components/issue-detail.tsx",
+      "start": 801,
+      "end": 900,
+      "code": "    <div className=\"pb-3 px-4 max-md:px-3 flex flex-col gap-3\">\n      {showHeader && (\n        <button\n          type=\"button\"\n          onClick={onToggle}\n          className=\"flex items-center gap-1.5 text-label text-muted-foreground transition-colors hover:text-foreground\"\n        >\n          <ChevronDown className=\"h-3 w-3 shrink-0\" />\n          <span>{t(($) => $.activity.activity_count, { count: entries.length })}</span>\n        </button>\n      )}\n      {hiddenOlderCount > 0 && (\n        <button\n          type=\"button\"\n          onClick={onToggleShowOlder}\n          className=\"flex items-center gap-1.5 text-label text-muted-foreground transition-colors hover:text-foreground\"\n        >\n          <ChevronRight className=\"h-3 w-3 shrink-0\" />\n          <span>{t(($) => $.activity.show_more_activities, { count: hiddenOlderCount })}</span>\n        </button>\n      )}\n      {visibleEntries.map((entry) => {\n        const details = (entry.details ?? {}) as Record<string, string>;\n        // Duplicate rows replace the status rows of the same write, so they\n        // carry the status glyph those rows would have had.\n        const isStatusChange = entry.action === \"status_changed\";\n        const markedDuplicate = entry.action === \"duplicate_marked\";\n        const unmarkedDuplicate = entry.action === \"duplicate_unmarked\" && !!details.to;\n        const isPriorityChange = entry.action === \"priority_changed\";\n        const isStartDateChange = entry.action === \"start_date_changed\";\n        const isDueDateChange = entry.action === \"due_date_changed\";\n\n        const isWakeup = WAKEUP_ACTIVITY_ACTIONS.has(entry.action ?? \"\");\n        const chip = isWakeup ? wakeupActivityChip(entry, t, wakeupText, getActorName) : null;\n        let leadIcon: React.ReactNode;\n        if (isWakeup) {\n          leadIcon = <WakeupActivityIcon entry={entry} />;\n        } else if ((isStatusChange && details.to) || markedDuplicate || unmarkedDuplicate) {\n          const to = markedDuplicate ? \"cancelled\" : details.to;\n          leadIcon = (\n            <StatusIcon\n              status={to as IssueStatus}\n              category={resolveStatusCategory(to ?? \"\")}\n              color={resolveStatusColor(to ?? \"\")}\n              icon={resolveStatusIcon(to ?? \"\")}\n              className=\"h-4 w-4 shrink-0\"\n            />\n          );\n        } else if (isPriorityChange && details.to) {\n          leadIcon = <PriorityIcon priority={details.to as IssuePriority} className=\"h-4 w-4 shrink-0\" />;\n        } else if (isStartDateChange) {\n          leadIcon = <CalendarClock className=\"h-4 w-4 shrink-0 text-muted-foreground\" />;\n        } else if (isDueDateChange) {\n          leadIcon = <Calendar className=\"h-4 w-4 shrink-0 text-muted-foreground\" />;\n        } else {\n          leadIcon = (\n            <ActorAvatar\n              actorType={entry.actor_type}\n              actorId={entry.actor_id}\n              name={entry.actor_name}\n              avatarUrl={entry.actor_avatar_url}\n              profileRequiresDirectoryEntry\n              size=\"sm\"\n            />\n          );\n        }\n\n        const handoff = isStatusChange && !!details.handoff_to_id;\n        return (\n          <div key={entry.id} className=\"text-label text-muted-foreground\">\n            <div className=\"flex items-center\">\n              <div className=\"mr-2 flex w-4 shrink-0 justify-center\">{leadIcon}</div>\n              <div className=\"flex min-w-0 flex-1 items-center gap-1\">\n                {/* The platform's own entries read as a sentence without an actor. */}\n                {!(isWakeup && entry.actor_type === \"system\") && (\n                  <span className=\"shrink-0 font-medium\">\n                    {entry.actor_name || getActorName(entry.actor_type, entry.actor_id)}\n                  </span>\n                )}\n                <span className=\"truncate\">\n                  <ActivityText\n                    entry={entry}\n                    text={isWakeup\n                      ? formatWakeupActivity(entry, t, wakeupText, getActorName)\n                      : formatActivity(entry, t, locale, getActorName, resolveStatusLabel, requesterName)}\n                  />\n                </span>\n                {chip && (\n                  <span className=\"ml-auto inline-flex max-w-48 shrink-0 items-center gap-1 truncate rounded-xs bg-muted px-1.5 py-0.5 text-micro text-muted-foreground\">\n                    {chip}\n                  </span>\n                )}\n                {(entry.coalesced_count ?? 1) > 1 && entry.action !== \"task_completed\" && entry.action !== \"task_failed\" && (\n                  <span className=\"shrink-0 rounded-xs bg-muted px-1.5 py-0.5 text-caption font-medium tabular-nums text-muted-foreground\">\n                    {t(($) => $.activity.coalesced_badge, { count: entry.coalesced_count ?? 1 })}\n                  </span>\n                )}\n                <Tooltip>\n                  <TooltipTrigger render={\n                    <span className={cn(\"shrink-0 cursor-default\", !chip && \"ml-auto\")}>"
+    },
+    {
+      "path": "packages/views/issues/components/issue-detail.tsx",
+      "start": 901,
+      "end": 1000,
+      "code": "                      {timeAgo(entry.created_at)}\n                    </span>\n                  } />\n                  <TooltipContent side=\"top\">{new Date(entry.created_at).toLocaleString(locale)}</TooltipContent>\n                </Tooltip>\n              </div>\n            </div>\n            {handoff && <div className=\"ml-6\"><TimelineHandoff details={details} /></div>}\n          </div>\n        );\n      })}\n    </div>\n  );\n}\n\n// SubIssueRow — sub-issue list item with inline status & assignee editing\n\nfunction SubIssueRow({\n  child,\n  childProgress,\n  rowProps,\n  customProperties,\n}: {\n  child: Issue;\n  /** The sub-issue's OWN children progress (it can itself be a parent). */\n  childProgress?: { done: number; total: number };\n  /** User-level display preference: which built-in fields the row shows. */\n  rowProps: SubIssueRowProperties;\n  /** Workspace custom properties the user opted into showing on rows. */\n  customProperties: IssueProperty[];\n}) {\n  const { t } = useT(\"issues\");\n  const locale = useLocale();\n  const paths = useWorkspacePaths();\n  const updateIssue = useUpdateIssue();\n  const { selectedIds, toggle: toggleSelected } = useIssueSurfaceSelection();\n  const selected = selectedIds.has(child.id);\n  const childStatusCatalog = useIssueStatuses(useWorkspaceId());\n  // Category, not key: a custom status in the done/cancelled categories is\n  // finished work and has to strike through like any other. (MUL-6243)\n  const isDone = issueBehavesAsAny(child, [\"done\", \"closed\"]);\n  const labels = rowProps.labels ? (child.labels ?? []) : [];\n  const customPropsWithValue = customProperties.filter(\n    (p) => child.properties?.[p.id] !== undefined,\n  );\n\n  const handleUpdate = useCallback(\n    (updates: Partial<UpdateIssueRequest>) => {\n      updateIssue.mutate(\n        {\n          id: child.id,\n          ...updates,\n        },\n        {\n          onError: (err) =>\n            toast.error(\n              err instanceof Error && err.message\n                ? err.message\n                : t(($) => $.detail.update_failed),\n            ),\n        },\n      );\n    },\n    [child.id, updateIssue, t],\n  );\n\n  // AppLink wraps only the title/identifier area. Pickers and checkbox are\n  // siblings, so their clicks never navigate — no stopPropagation acrobatics\n  // and no risk of the native checkbox / picker triggers being blocked.\n  // Right-click anywhere on the row opens the shared issue actions menu\n  // (priority, labels, dates, delete, …) — the same menu as list rows.\n  return (\n    <IssueActionsContextMenu issue={child}>\n      <div\n        className={cn(\n          \"flex items-center gap-2.5 px-3 py-2 hover:bg-accent/50 transition-colors group/row\",\n          selected && \"bg-accent/30\",\n        )}\n      >\n        {/* Priority ⇄ checkbox slot, mirroring the main list rows: the\n            priority icon yields to the selection checkbox on hover/focus.\n            Opacity (not display) swap keeps the checkbox keyboard-tabbable. */}\n        <div className=\"relative flex h-4 w-4 shrink-0 items-center justify-center\">\n          {rowProps.priority && (\n            <PriorityIcon\n              priority={child.priority}\n              className={cn(\n                \"transition-opacity\",\n                selected\n                  ? \"opacity-0\"\n                  : \"group-hover/row:opacity-0 group-focus-within/row:opacity-0\",\n              )}\n            />\n          )}\n          <input\n            type=\"checkbox\"\n            checked={selected}\n            onChange={() => toggleSelected(child.id)}\n            aria-label={t(($) => $.detail.select_sub_issue_aria, {\n              identifier: child.identifier,"
+    },
+    {
+      "path": "packages/views/issues/components/issue-detail.tsx",
+      "start": 1001,
+      "end": 1100,
+      "code": "            })}\n            className={cn(\n              \"absolute inset-0 cursor-pointer accent-primary transition-opacity\",\n              selected\n                ? \"opacity-100\"\n                : \"opacity-0 group-hover/row:opacity-100 focus-visible:opacity-100\",\n            )}\n          />\n        </div>\n        <StatusPicker\n          status={child.status}\n          onUpdate={handleUpdate}\n          projectId={child.project_id}\n          issue={child}\n          align=\"start\"\n          trigger={\n            <StatusIcon\n              status={child.status}\n              category={childStatusCatalog.categoryOf(child.status)}\n              color={childStatusCatalog.colorOf(child.status)}\n              icon={childStatusCatalog.iconOf(child.status)}\n              className=\"h-[15px] w-[15px] shrink-0\"\n            />\n          }\n        />\n        <AppLink\n          href={paths.issueDetail(child.id)}\n          className=\"flex min-w-0 flex-1 items-center gap-2.5\"\n        >\n          <span className=\"text-caption text-muted-foreground tabular-nums shrink-0\">\n            {child.identifier}\n          </span>\n          <IssueAgentActivityIndicator issueId={child.id} />\n          <span className=\"flex min-w-0 flex-1 items-center gap-1.5\">\n            <span\n              className={cn(\n                \"text-body truncate\",\n                isDone\n                  ? \"text-muted-foreground\"\n                  : \"group-hover/row:text-foreground\",\n              )}\n            >\n              {child.title}\n            </span>\n            {labels.length > 0 && (\n              <span className=\"hidden max-w-[200px] shrink-0 items-center gap-1 overflow-hidden md:inline-flex\">\n                {labels.slice(0, 2).map((label) => (\n                  <LabelChip key={label.id} label={label} />\n                ))}\n                {labels.length > 2 && (\n                  <span className=\"text-micro text-muted-foreground\">\n                    +{labels.length - 2}\n                  </span>\n                )}\n              </span>\n            )}\n            {customPropsWithValue.length > 0 && (\n              <span className=\"hidden max-w-[260px] shrink-0 items-center gap-1 overflow-hidden md:inline-flex\">\n                {customPropsWithValue.slice(0, 3).map((property) => (\n                  <span\n                    key={property.id}\n                    className=\"inline-flex max-w-[120px] items-center gap-1 rounded-full bg-muted/60 px-1.5 py-0.5 text-micro text-muted-foreground\"\n                  >\n                    <PropertyIcon property={property} className=\"size-3 text-micro\" />\n                    <CustomPropertyValueDisplay\n                      property={property}\n                      value={child.properties?.[property.id]}\n                    />\n                  </span>\n                ))}\n              </span>\n            )}\n            {rowProps.childProgress && childProgress && childProgress.total > 0 && (\n              <span className=\"inline-flex shrink-0 items-center gap-1 rounded-full bg-muted/60 px-1.5 py-0.5\">\n                <ProgressRing\n                  done={childProgress.done}\n                  total={childProgress.total}\n                  size={11}\n                />\n                <span className=\"text-micro text-muted-foreground tabular-nums font-medium\">\n                  {childProgress.done}/{childProgress.total}\n                </span>\n              </span>\n            )}\n          </span>\n        </AppLink>\n        {rowProps.dueDate && child.due_date && (\n          <DueDatePicker\n            dueDate={child.due_date}\n            onUpdate={handleUpdate}\n            align=\"end\"\n            trigger={\n              <span\n                className={cn(\n                  \"flex shrink-0 items-center gap-1 text-caption tabular-nums\",\n                  !isDone && isPastDateOnly(child.due_date)\n                    ? \"text-destructive\"\n                    : \"text-muted-foreground\",\n                )}\n              >"
+    },
+    {
+      "path": "packages/views/issues/components/issue-detail.tsx",
+      "start": 1101,
+      "end": 1200,
+      "code": "                <CalendarDays className=\"size-3\" />\n                {shortDate(child.due_date, locale)}\n              </span>\n            }\n          />\n        )}\n        {rowProps.assignee && (\n          <AssigneePicker\n            assigneeType={child.assignee_type}\n            assigneeId={child.assignee_id}\n            onUpdate={handleUpdate}\n            align=\"end\"\n            trigger={\n              child.assignee_type && child.assignee_id ? (\n                <ActorAvatar\n                  actorType={child.assignee_type}\n                  actorId={child.assignee_id}\n                  size=\"sm\"\n                  className=\"shrink-0\"\n                />\n              ) : (\n                <span\n                  aria-hidden\n                  className=\"h-5 w-5 rounded-full border border-dashed border-muted-foreground/30 shrink-0\"\n                />\n              )\n            }\n          />\n        )}\n      </div>\n    </IssueActionsContextMenu>\n  );\n}\n\n// SubIssueDisplayPopover — per-user \"which properties do rows show\" control\n\n// Reuses the main Display panel's `card_*` labels — the property names are\n// identical, so the sub-issues control needs no locale keys of its own.\nconst SUB_ISSUE_ROW_PROPERTY_LABEL_KEY: Record<\n  SubIssueRowPropertyKey,\n  \"card_priority\" | \"card_labels\" | \"card_child_progress\" | \"card_due_date\" | \"card_assignee\"\n> = {\n  priority: \"card_priority\",\n  labels: \"card_labels\",\n  childProgress: \"card_child_progress\",\n  dueDate: \"card_due_date\",\n  assignee: \"card_assignee\",\n};\n\nfunction SubIssueDisplayPopover({\n  workspaceProperties,\n}: {\n  workspaceProperties: IssueProperty[];\n}) {\n  const { t } = useT(\"issues\");\n  const rowProperties = useSubIssueDisplayStore((s) => s.rowProperties);\n  const rowPropertyIds = useSubIssueDisplayStore((s) => s.rowPropertyIds);\n  const toggleRowProperty = useSubIssueDisplayStore((s) => s.toggleRowProperty);\n  const toggleRowPropertyId = useSubIssueDisplayStore((s) => s.toggleRowPropertyId);\n\n  return (\n    <Popover>\n      <Tooltip>\n        <PopoverTrigger\n          render={\n            <TooltipTrigger\n              render={\n                <button\n                  type=\"button\"\n                  className=\"inline-flex h-7 w-7 items-center justify-center rounded-md text-muted-foreground hover:bg-accent hover:text-foreground transition-colors\"\n                  aria-label={t(($) => $.display.tooltip)}\n                >\n                  <SlidersHorizontal className=\"h-3.5 w-3.5\" />\n                </button>\n              }\n            />\n          }\n        />\n        <TooltipContent side=\"bottom\">{t(($) => $.display.tooltip)}</TooltipContent>\n      </Tooltip>\n      <PopoverContent align=\"end\" className=\"w-56 p-0\">\n        <div className=\"px-3 py-2.5\">\n          <div className=\"space-y-2\">\n            {SUB_ISSUE_ROW_PROPERTY_KEYS.map((key) => (\n              <label\n                key={key}\n                className=\"flex cursor-pointer items-center justify-between\"\n              >\n                <span className=\"text-body\">\n                  {t(($) => $.display[SUB_ISSUE_ROW_PROPERTY_LABEL_KEY[key]])}\n                </span>\n                <Switch\n                  size=\"sm\"\n                  checked={rowProperties[key]}\n                  onCheckedChange={() => toggleRowProperty(key)}\n                />\n              </label>\n            ))}\n            {workspaceProperties.map((property) => (\n              <label"
+    },
+    {
+      "path": "packages/views/issues/components/issue-detail.tsx",
+      "start": 1201,
+      "end": 1300,
+      "code": "                key={property.id}\n                className=\"flex cursor-pointer items-center justify-between gap-3\"\n              >\n                <span className=\"flex min-w-0 items-center gap-1.5 truncate text-body\">\n                  <PropertyIcon property={property} className=\"size-3.5 text-caption\" />\n                  <span className=\"truncate\">{property.name}</span>\n                </span>\n                <Switch\n                  size=\"sm\"\n                  checked={rowPropertyIds.includes(property.id)}\n                  onCheckedChange={() => toggleRowPropertyId(property.id)}\n                />\n              </label>\n            ))}\n          </div>\n        </div>\n      </PopoverContent>\n    </Popover>\n  );\n}\n\n// Props\n\ninterface IssueDetailProps {\n  issueId: string;\n  onDelete?: () => void;\n  /** Called after the issue is marked as done via the toolbar button. */\n  onDone?: () => void;\n  /**\n   * The Inbox's \"unsubscribe & archive\", shown next to Done on issues that\n   * are not the viewer's own. Only read alongside `onDone`.\n   */\n  onUnsubscribeArchive?: (scope: InboxUnsubscribeScope) => void;\n  defaultSidebarOpen?: boolean;\n  layoutId?: string;\n  /** When set, the issue detail will auto-scroll to this comment and briefly highlight it. */\n  highlightCommentId?: string;\n  /**\n   * Bump to replay the `highlightCommentId` landing on an already-mounted\n   * detail. A remount replays it by itself (fresh mount, cleared memento\n   * entry); this token is for a host that asks again with neither remount\n   * nor guaranteed re-render. The bump both re-arms the landing guard and\n   * forces the render that re-reads the cleared memento entry.\n   */\n  highlightRequestToken?: number;\n  /** The app confirmation an Inbox notification points at; its card scrolls\n   * into view and flashes, replayed by `highlightRequestToken`. */\n  highlightAppRequestId?: string;\n  /**\n   * Far-left header slot, replacing the mobile sidebar trigger. A host that\n   * embeds this detail one level deep (the inbox, on a phone) passes its own\n   * \"back\" control here instead of stacking a second 48px bar above us — the\n   * breadcrumb this header already renders names the issue's container, not\n   * the surface the reader arrived from, so only the host can spell that trip.\n   */\n  leadingAction?: ReactNode;\n  /**\n   * `\"peek\"` renders the detail inside the board's side peek (`IssuePeekHost`):\n   * a single column with the core properties as pills under the title, no\n   * properties sidebar, and `trailingActions` where the sidebar toggle sits.\n   */\n  variant?: \"page\" | \"peek\";\n  /** Peek only: host controls at the end of the header (open full page, close). */\n  trailingActions?: ReactNode;\n  /** A bar the host shows under the header, above the scrolling body. */\n  notice?: ReactNode;\n  /**\n   * Read the viewer's inbox notifications on this issue while it is on screen\n   * (MUL-8588). The inbox turns this off for the issue it has open: it reads\n   * the notification it selected itself, and keeps one marked unread there.\n   */\n  readsInbox?: boolean;\n  /** The route already completed the authoritative detail read this mount. */\n  skipInitialRefetch?: boolean;\n  /**\n   * Route only: the file name of a `/deliverables/<name>` link. Opens the\n   * newest upload of that deliverable once the timeline has loaded.\n   */\n  openDeliverable?: string;\n  /**\n   * Route only: the deliverable link has been dealt with (the viewer it\n   * opened closed, or the file is missing); the route puts the plain issue\n   * address back.\n   */\n  onDeliverableLinkDone?: () => void;\n}\n\n/**\n * The header row a loading or failed detail shows where the breadcrumb goes,\n * at the same height, so the page does not jump when the issue lands.\n */\nfunction DetailStateBar({ children, trailing }: { children?: ReactNode; trailing?: ReactNode }) {\n  const titleBar = usePageHeaderTitleBar();\n  return (\n    <div\n      className={cn(\"flex h-12 shrink-0 items-center gap-2 border-b\", PAGE_GUTTER, titleBar.className)}\n      style={titleBar.style}\n    >\n      {children}\n      {trailing && <div className=\"ml-auto flex shrink-0 items-center gap-1\">{trailing}</div>}"
+    },
+    {
+      "path": "packages/views/issues/components/issue-detail.tsx",
+      "start": 1301,
+      "end": 1400,
+      "code": "    </div>\n  );\n}\n\n// Not found\n\n/**\n * Exported so `IssueDetailRoute` can render it for an identifier that names no\n * issue. The route must NOT fall through to `IssueDetail` in that case: doing\n * so mounts a second observer on the already-failed query, which refetches it\n * and restarts the resolve/remount cycle indefinitely.\n */\nexport function IssueNotFound({\n  showBackLink = true,\n  leading,\n  trailing,\n}: {\n  showBackLink?: boolean;\n  /**\n   * Host-supplied way back, mirrored from `IssueDetailProps.leadingAction`. A\n   * host that hands its whole screen to this component (the inbox, on a phone)\n   * has no bar of its own left, so this state has to carry the trip back or\n   * there is none.\n   */\n  leading?: ReactNode;\n  /** Host controls at the end of the bar — the side peek's close button. */\n  trailing?: ReactNode;\n}) {\n  const { t } = useT(\"issues\");\n  const backOrReplace = useBackOrReplace();\n  const paths = useWorkspacePaths();\n  const titleBar = usePageHeaderTitleBar();\n\n  return (\n    <div className=\"flex flex-1 min-h-0 flex-col\">\n      {(leading || trailing || titleBar.active) && (\n        <DetailStateBar trailing={trailing}>{leading}</DetailStateBar>\n      )}\n      <CollectionPageState\n        icon={FileQuestion}\n        title={t(($) => $.detail.not_found_title)}\n        description={t(($) => $.detail.not_found)}\n        actions={\n          showBackLink ? (\n            <Button variant=\"outline\" size=\"sm\" onClick={() => backOrReplace(paths.issues())}>\n              <ChevronLeft aria-hidden=\"true\" />\n              {t(($) => $.detail.back)}\n            </Button>\n          ) : undefined\n        }\n      />\n    </div>\n  );\n}\n\n/** Safe primary-read failure; host navigation remains available during retry. */\nexport function IssueLoadError({\n  showBackLink = true,\n  leading,\n  trailing,\n  onRetry,\n  isRetrying,\n}: {\n  showBackLink?: boolean;\n  leading?: ReactNode;\n  trailing?: ReactNode;\n  onRetry: () => Promise<void>;\n  isRetrying: boolean;\n}) {\n  const { t } = useT(\"issues\");\n  const backOrReplace = useBackOrReplace();\n  const paths = useWorkspacePaths();\n  const titleBar = usePageHeaderTitleBar();\n\n  return (\n    <div className=\"flex flex-1 min-h-0 flex-col\">\n      {(leading || trailing || titleBar.active) && (\n        <DetailStateBar trailing={trailing}>{leading}</DetailStateBar>\n      )}\n      <CollectionPageState\n        icon={AlertTriangle}\n        title={t(($) => $.detail.load_failed)}\n        actions={\n          <>\n            <Button size=\"sm\" disabled={isRetrying} aria-busy={isRetrying} onClick={() => { void onRetry(); }}>\n              {isRetrying && <Loader2 aria-hidden=\"true\" className=\"animate-spin\" />}\n              {t(($) => $.detail.load_retry)}\n            </Button>\n            {showBackLink && (\n              <Button variant=\"outline\" size=\"sm\" onClick={() => backOrReplace(paths.issues())}>\n                <ChevronLeft aria-hidden=\"true\" />\n                {t(($) => $.detail.back)}\n              </Button>\n            )}\n          </>\n        }\n      />\n    </div>\n  );\n}"
+    },
+    {
+      "path": "packages/views/issues/components/issue-detail.tsx",
+      "start": 1401,
+      "end": 1485,
+      "code": "\n// Loading skeleton\n\nconst ISSUE_DETAIL_LAYOUT_ID = \"workpal_issue_detail_layout\";\nconst REVEALED_WAKEUPS: readonly IssueSidebarSection[] = [\"wakeups\"];\n\n/**\n * Exported so `IssueDetailRoute` can show the identical frame while it resolves\n * an identifier URL to its issue — the two waits are indistinguishable to the\n * user, and rendering the same skeleton keeps them that way.\n */\nexport function IssueDetailSkeleton({\n  leading,\n  trailing,\n  sidebar = true,\n  layoutId = ISSUE_DETAIL_LAYOUT_ID,\n}: { leading?: ReactNode; trailing?: ReactNode; sidebar?: boolean; layoutId?: string } = {}) {\n  const { defaultLayout } = useDefaultLayout({ id: layoutId });\n  const sidebarOpen = sidebar && getAnimatedRightSidebarInitialOpen(true, defaultLayout);\n\n  return (\n    <div className=\"flex flex-1 min-h-0 flex-col\">\n      {/* The way back is real from the first frame, not once the issue lands:\n          a host that gave up its own bar for `leadingAction` has nothing else\n          to offer while this skeleton owns the screen. */}\n      <DetailStateBar trailing={trailing}>\n        {leading ?? (\n          <>\n            <Skeleton className=\"h-4 w-16\" />\n            <Skeleton className=\"h-4 w-4\" />\n            <Skeleton className=\"h-4 w-24\" />\n          </>\n        )}\n      </DetailStateBar>\n      <div className=\"flex flex-1 min-h-0\">\n        {/* Same scrollbar-gutter as the loaded scroller below, so the skeleton\n            column doesn't shift sideways when real content mounts. */}\n        <div className=\"@container flex-1 overflow-y-auto [scrollbar-gutter:stable_both-edges]\">\n          {/* Width and gutters match the loaded column exactly (see its\n              comment), so the skeleton doesn't reflow sideways when real\n              content mounts. */}\n          <div className={cn(READING_COLUMN, \"px-[var(--space-sm,0.75rem)] py-[var(--space-lg,1.5rem)] space-y-6 md:px-[var(--space-xl,2rem)] md:py-[var(--space-xl,2rem)]\")}>\n            <Skeleton className=\"h-8 w-3/4\" />\n            <div className=\"space-y-2\">\n              <Skeleton className=\"h-4 w-full\" />\n              <Skeleton className=\"h-4 w-5/6\" />\n              <Skeleton className=\"h-4 w-2/3\" />\n            </div>\n            <Skeleton className=\"h-px w-full\" />\n            <div className=\"space-y-3\">\n              <Skeleton className=\"h-4 w-20\" />\n              <div className=\"flex items-start gap-3\">\n                <Skeleton className=\"h-8 w-8 shrink-0 rounded-full\" />\n                <div className=\"flex-1 space-y-2\">\n                  <Skeleton className=\"h-4 w-32\" />\n                  <Skeleton className=\"h-16 w-full rounded-lg\" />\n                </div>\n              </div>\n            </div>\n          </div>\n        </div>\n        {sidebarOpen && (\n          <div className=\"hidden md:block w-80 border-l p-4 space-y-5\">\n            {Array.from({ length: 4 }).map((_, i) => (\n              <div key={i} className=\"flex items-center gap-2\">\n                <Skeleton className=\"h-3 w-16 shrink-0\" />\n                <Skeleton className=\"h-5 w-24\" />\n              </div>\n            ))}\n            <Skeleton className=\"h-px w-full\" />\n            {Array.from({ length: 3 }).map((_, i) => (\n              <div key={i} className=\"flex items-center gap-2\">\n                <Skeleton className=\"h-3 w-16 shrink-0\" />\n                <Skeleton className=\"h-4 w-28\" />\n              </div>\n            ))}\n          </div>\n        )}\n      </div>\n    </div>\n  );\n}\n\n// IssueDetail\n"
+    },
+    {
+      "path": "packages/views/issues/components/issue-detail.tsx",
+      "start": 4554,
+      "end": 4580,
+      "code": "function IssueDetailActionsDropdown({\n  locateInSidebar,\n  ...props\n}: Omit<ComponentProps<typeof IssueActionsDropdown>, \"onShowInSidebar\"> & { locateInSidebar: boolean }) {\n  const showInSidebar = useShowInSidebar(props.issue);\n  return <IssueActionsDropdown {...props} onShowInSidebar={locateInSidebar ? (showInSidebar ?? undefined) : undefined} />;\n}\n\n/** The workflow the issue follows through its project (MUL-7420). */\nfunction IssueWorkflowPropRow({\n  projectId,\n  status,\n  label,\n}: {\n  projectId: string | null;\n  status: string;\n  label: string;\n}) {\n  const wsId = useWorkspaceId();\n  const workflow = useProjectWorkflow(wsId, projectId);\n  if (!workflow) return null;\n  return (\n    <PropRow label={label}>\n      <IssueFlowCard projectId={projectId} currentStatus={status} />\n    </PropRow>\n  );\n}"
+    }
+  ],
+  "semantic_notes": [
+    {
+      "range": [
+        1,
+        100
+      ],
+      "note": "Imports only; imported main-body resources are not invoked helper requests."
+    },
+    {
+      "range": [
+        101,
+        200
+      ],
+      "note": "Remaining imports; no observer activation from imports."
+    },
+    {
+      "range": [
+        201,
+        300
+      ],
+      "note": "Memento key; subscriber search, member deduplication and active-agent filtering."
+    },
+    {
+      "range": [
+        301,
+        400
+      ],
+      "note": "Subscriber callbacks pass current subscribed boolean; disabled until authoritative data; date/status/activity formatting."
+    },
+    {
+      "range": [
+        401,
+        500
+      ],
+      "note": "Activity formatting handles assignment/date/duplicate/task/environment events without writes."
+    },
+    {
+      "range": [
+        501,
+        600
+      ],
+      "note": "Duplicate link derivation and optional property visibility."
+    },
+    {
+      "range": [
+        601,
+        700
+      ],
+      "note": "Stable stage grouping, identity equality and timeline flattening; jump callback."
+    },
+    {
+      "range": [
+        701,
+        800
+      ],
+      "note": "Skeleton and ActivityBlock parent-owned expansion with latest-eight truncation."
+    },
+    {
+      "range": [
+        801,
+        900
+      ],
+      "note": "Activity icons/text/chips/actor display are presentation; no mutation."
+    },
+    {
+      "range": [
+        901,
+        1000
+      ],
+      "note": "SubIssueRow hooks, provider selection and update callback with toast failure."
+    },
+    {
+      "range": [
+        1001,
+        1100
+      ],
+      "note": "Status/date/assignee pickers delegate updates; navigation and label/custom/progress presentation."
+    },
+    {
+      "range": [
+        1101,
+        1200
+      ],
+      "note": "Assignee avatar; display preference store selectors and builtin toggles."
+    },
+    {
+      "range": [
+        1201,
+        1300
+      ],
+      "note": "Custom preference toggle; props document injected host callbacks and nodes."
+    },
+    {
+      "range": [
+        1301,
+        1400
+      ],
+      "note": "Notfound navigation and load error supplied retry; no own query."
+    },
+    {
+      "range": [
+        1401,
+        1485
+      ],
+      "note": "Skeleton reads saved layout and initial sidebar state; no issue read."
+    },
+    {
+      "range": [
+        4554,
+        4580
+      ],
+      "note": "Trailing actions adapt sidebar callback; workflow row mounts project workflow hook and conditional card."
+    }
+  ],
+  "helper_callback_effects": {
+    "SubscriberPopoverContent": "search state only; onSelect calls injected toggleSubscriber(id,type,isSubbed); no subscription endpoint owned here",
+    "ActivityBlock": "useWakeupText presentation; onToggle/onToggleShowOlder injected; ActivityText workspace navigation; TimelineHandoff descendant boundary",
+    "SubIssueRow": "useUpdateIssue; handleUpdate merges child.id and picker patch, reports error toast; selection provider owns toggle; useIssueStatuses workspace-gated observer; pickers/context menu/avatar/activity indicator descendants retain own proofs",
+    "SubIssueDisplayPopover": "global persisted Zustand workpal_sub_issue_display via defaultStorage; builtin boolean and custom ID membership toggles; merge preserves new defaults",
+    "IssueNotFound": "i18n/paths/header hooks; backOrReplace(paths.issues()); no failed query observer",
+    "IssueLoadError": "same navigation hooks; supplied onRetry promise invoked void; disabled/busy while retrying; request belongs to host",
+    "IssueDetailSkeleton": "useDefaultLayout(layoutId), initial sidebar open; host leading/trailing ReactNodes opaque",
+    "IssueDetailActionsDropdown": "useShowInSidebar(issue) callback supplied only when locateInSidebar; shared dropdown/menu proof owns actions",
+    "IssueWorkflowPropRow": "workspace context -> useProjectWorkflow -> workflows observer enabled wsId; projects observer enabled wsId && projectId; null suppresses IssueFlowCard; card descendants outside section"
+  },
+  "inventory": [
+    {
+      "id": "client:1771",
+      "method": "PUT",
+      "path_expression": "/api/issues/${id}",
+      "route": {
+        "method": "PUT",
+        "path": "/api/issues/{id}"
+      },
+      "owner": "SubIssueRow.handleUpdate",
+      "gate": "picker edit; no move_intent supplied by this helper"
+    },
+    {
+      "id": "client:4517",
+      "method": "GET",
+      "path_expression": "/api/projects?${search}",
+      "route": {
+        "method": "GET",
+        "path": "/api/projects"
+      },
+      "owner": "useProjectWorkflow",
+      "gate": "workspace and project ID"
+    },
+    {
+      "id": "client:4692",
+      "method": "GET",
+      "path_expression": "/api/issue-workflows",
+      "route": {
+        "method": "GET",
+        "path": "/api/issue-workflows"
+      },
+      "owner": "useProjectWorkflow",
+      "gate": "workspace"
+    },
+    {
+      "id": "client:4821",
+      "method": "GET",
+      "path_expression": "/api/issue-statuses${query}",
+      "route": {
+        "method": "GET",
+        "path": "/api/issue-statuses"
+      },
+      "owner": "useIssueStatuses",
+      "gate": "workspace; catalog query parameters delegated to existing proof"
+    }
+  ],
+  "reused_evidence": [
+    {
+      "path": "server/contracts/batches/issue-mutations-transport-coverage.json",
+      "sha256": "43c8266c0e7248f5f12b8736bf795e424ab2771f21bea3eac4b210bf89dbd70a",
+      "scope": "Reuse only reached helper semantics; imported main-body descendants excluded"
+    },
+    {
+      "path": "server/contracts/batches/issue-menu-transport-coverage.json",
+      "sha256": "d253dfff7430e808a54b417802bb90d65d115b2eab1570a7b69408b321b428cd",
+      "scope": "Reuse only reached helper semantics; imported main-body descendants excluded"
+    },
+    {
+      "path": "server/contracts/batches/inline-run-transport-coverage.json",
+      "sha256": "1597fb182445a08c9bc584d730d2898637180b229ad20ae8b1c9eca4624b3811",
+      "scope": "Reuse only reached helper semantics; imported main-body descendants excluded"
+    },
+    {
+      "path": "server/contracts/batches/comment-card-transport-coverage.json",
+      "sha256": "e25aa6210f4ebc2707240f830723c334b6ad95965f62438c4f1c73c2c40f6b76",
+      "scope": "Reuse only reached helper semantics; imported main-body descendants excluded"
+    },
+    {
+      "path": "server/contracts/batches/avatar-foreground-transport-coverage.json",
+      "sha256": "e77f14f94346e57e519f019aee88faa75ffee16dedae2a0d9ecd6c5f32d8b374",
+      "scope": "Reuse only reached helper semantics; imported main-body descendants excluded"
+    },
+    {
+      "path": "server/contracts/batches/status-helper-transport-coverage.json",
+      "sha256": "d4d8b8e63d50e3c57cd863d6abf3db89cf224ae14dd7b2fe86f02a404cdbb812",
+      "scope": "Reuse only reached helper semantics; imported main-body descendants excluded"
+    },
+    {
+      "path": "server/contracts/batches/platform-host-transport-coverage.json",
+      "sha256": "2009830d5077094406bee049b7eef8a602868d7b6d20ccdd6370e8c8a5d3bd1f",
+      "scope": "Reuse only reached helper semantics; imported main-body descendants excluded"
+    },
+    {
+      "path": "server/contracts/batches/platform-session-transport-coverage.json",
+      "sha256": "eac07a4a7a7d18d3e8d38feaec6efd9ffb6655b0ff269075bb06fb5c240e97b0",
+      "scope": "Reuse only reached helper semantics; imported main-body descendants excluded"
+    }
+  ],
+  "pure_helpers": [
+    "issueHighlightMementoKey",
+    "shortDate",
+    "statusLabel",
+    "formatActivity",
+    "duplicateActivityLink",
+    "isOptionalPropSet",
+    "groupSubIssuesByStage",
+    "shallowEqualEntries",
+    "flattenGroups"
+  ],
+  "resources": [
+    "EMPTY_REPLIES",
+    "OPTIONAL_PROP_KEYS",
+    "SIDEBAR_SUB_ISSUES_LIMIT",
+    "LAST_ACTIVITY_BLOCK_VISIBLE_LIMIT",
+    "SUB_ISSUE_ROW_PROPERTY_LABEL_KEY",
+    "ISSUE_DETAIL_LAYOUT_ID",
+    "REVEALED_WAKEUPS",
+    "TimelineItem/RawTimelineGroup/IssueDetailProps types"
+  ],
+  "boundaries": [
+    "IssueDetail main body 1486-4553 excluded; no whole-file completion claim",
+    "Imports alone create no request inventory; comment-card/inline proof reused only as explicit imported boundaries",
+    "Injected subscriber/retry/jump/expansion callbacks and leading/trailing nodes belong to parent/provider; no guessed requests",
+    "useIssueSurfaceSelection requires ancestor provider; helper does not create it",
+    "StatusPicker, DueDatePicker, AssigneePicker, ActorAvatar, IssueActionsContextMenu, IssueActionsDropdown, IssueAgentActivityIndicator, TimelineHandoff, IssueFlowCard and navigation/platform internals retain descendant/provider boundaries",
+    "useUpdateIssue cache cancellation/optimism/rollback/reconciliation/invalidation reuse exact mutation proof; refetch superset is not an actual request tuple trace",
+    "No runtime/tests/network/model/data/git or shared ledger changes"
+  ],
+  "validation": {
+    "runtime_verified": false,
+    "all_requested_ranges_reviewed": true
+  },
+  "root_section_review": {
+    "status": "accepted_finite_section_source_evidence",
+    "checks": [
+      "Current source hash and exact inventory tuple values verified",
+      "Root independently inspected relevant client method bodies or SubIssueRow update callback"
+    ],
+    "limits": "Only declared reviewed ranges; whole file remains false. Supporting helper evidence and main sections remain separately tracked."
+  }
+}

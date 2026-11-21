@@ -1,0 +1,418 @@
+{
+  "review_date": "2026-11-21",
+  "status": "finite current-source review complete; root review pending",
+  "historical_comparison": "Prior dispositions have no prior full-source hashes. Confirmed means statement agrees with current source, not unchanged historical bytes. No historical byte identity or changed-code claim.",
+  "files": [
+    {
+      "path": "packages/core/auth/utils.ts",
+      "sha256": "4e5587980441adb106f4c1390438d3f23fcc0a7c03cccba57947d99917b98e4c",
+      "whole_source": true,
+      "line_count": 21,
+      "read_ranges": [
+        [
+          1,
+          21
+        ]
+      ],
+      "comparison": "confirmed",
+      "current_semantics": "Pure relative redirect validation; returns text, does not navigate or fetch."
+    },
+    {
+      "path": "packages/core/onboarding/index.ts",
+      "sha256": "c1f6e1281127843d82927653ca480249f0717c618c8c893043f7d4b6398ca9eb",
+      "whole_source": true,
+      "line_count": 33,
+      "read_ranges": [
+        [
+          1,
+          33
+        ]
+      ],
+      "comparison": "confirmed",
+      "current_semantics": "Reexports store, predicates, queries, bootstrap and constants; no independent transport."
+    },
+    {
+      "path": "packages/core/onboarding/mika.ts",
+      "sha256": "d37207c1bdb6af4aa38df73b6250be87938d0f5033915d8d89c892a6d4c3f345",
+      "whole_source": true,
+      "line_count": 56,
+      "read_ranges": [
+        [
+          1,
+          56
+        ]
+      ],
+      "comparison": "confirmed",
+      "current_semantics": "Pure system_key and session.last_message predicates; no provisioning occurs here."
+    },
+    {
+      "path": "packages/core/onboarding/needs-backfill.ts",
+      "sha256": "f4ea2dd21d59bf71eed2bcbb18d44d4a1ca02e0df7e1d4ea79125b913e82eb06",
+      "whole_source": true,
+      "line_count": 74,
+      "read_ranges": [
+        [
+          1,
+          74
+        ]
+      ],
+      "comparison": "confirmed",
+      "current_semantics": "Pure user/dismiss-count predicate; handles legacy string source and array source; no request."
+    },
+    {
+      "path": "packages/core/onboarding/queries.ts",
+      "sha256": "2c15cadd1e4a4009117c642ca33a24e498a6b2489cff15b4d4faa78ba063e81d",
+      "whole_source": true,
+      "line_count": 34,
+      "read_ranges": [
+        [
+          1,
+          34
+        ]
+      ],
+      "comparison": "confirmed",
+      "current_semantics": "listIssues asks done category, agent/squad assignees, limit 1; reads total. Key under issue prefix permits mutation/realtime refetch; stale 30s; consumer controls enabled."
+    },
+    {
+      "path": "packages/core/onboarding/step-order.ts",
+      "sha256": "b4479f657ceaa50ac5969ffb66389842ea05c9c9b5b05f51c0e04f176b5b1763",
+      "whole_source": true,
+      "line_count": 13,
+      "read_ranges": [
+        [
+          1,
+          13
+        ]
+      ],
+      "comparison": "confirmed",
+      "current_semantics": "Runtime array of persisted step names only."
+    },
+    {
+      "path": "packages/core/onboarding/store.ts",
+      "sha256": "58b4710ed8fe681e0d9fceaea864877450506fed625d9e323ea64812e6bcdb01",
+      "whole_source": true,
+      "line_count": 83,
+      "read_ranges": [
+        [
+          1,
+          83
+        ]
+      ],
+      "comparison": "confirmed",
+      "current_semantics": "Questionnaire PATCH then local setUser; conditional nonempty source/role/use-case sends PostHog person properties (buffered before initialization). Completion sends optional body iff completionPath or workspaceId truthy, then refreshMe -> getMe. Waitlist sends interest only; no completion or runtime provisioning."
+    },
+    {
+      "path": "packages/core/onboarding/types.ts",
+      "sha256": "d6567cfdac15799f0591b44f7ff25e4211f946480f5091d792525b000413e3d5",
+      "whole_source": true,
+      "line_count": 77,
+      "read_ranges": [
+        [
+          1,
+          77
+        ]
+      ],
+      "comparison": "confirmed",
+      "current_semantics": "Type declarations only; no executable runtime source."
+    },
+    {
+      "path": "packages/core/onboarding/use-bootstrap-mika.ts",
+      "sha256": "b3e61f9a1ef5562ee25c77b1cb9ace96d74bb29c18c50d46213b3f093eff8880",
+      "whole_source": true,
+      "line_count": 106,
+      "read_ranges": [
+        [
+          1,
+          100
+        ],
+        [
+          101,
+          106
+        ]
+      ],
+      "comparison": "confirmed",
+      "current_semantics": "Sequential createMikaAgent with explicit workspaceSlug -> require onboarding_session or throw -> startMikaOnboarding same slug. No fabricated session or runtime response. Success invalidates agent list, chat sessions, messages and paginated messages. Runtime-backed execution/provisioning unsupported for this audit; existing parse fallback started:false is not evidence of execution."
+    }
+  ],
+  "edges": [
+    {
+      "source": "packages/core/onboarding/queries.ts:24",
+      "method": "listIssues",
+      "inventory": [
+        {
+          "id": "client:1329",
+          "method": "POST",
+          "path_expression": "/api/issues/query",
+          "route": {
+            "method": "POST",
+            "path": "/api/issues/query"
+          }
+        },
+        {
+          "id": "client:1344",
+          "method": "GET",
+          "path_expression": "/api/issues?${search}",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/onboarding/store.ts:21",
+      "method": "patchOnboarding",
+      "inventory": [
+        {
+          "id": "client:1232",
+          "method": "PATCH",
+          "path_expression": "/api/me/onboarding",
+          "route": {
+            "method": "PATCH",
+            "path": "/api/me/onboarding"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/onboarding/store.ts:61",
+      "method": "markOnboardingComplete",
+      "inventory": [
+        {
+          "id": "client:1207",
+          "method": "POST",
+          "path_expression": "/api/me/onboarding/complete",
+          "route": {
+            "method": "POST",
+            "path": "/api/me/onboarding/complete"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/onboarding/store.ts:82",
+      "method": "joinCloudWaitlist",
+      "inventory": [
+        {
+          "id": "client:1220",
+          "method": "POST",
+          "path_expression": "/api/me/onboarding/cloud-waitlist",
+          "route": {
+            "method": "POST",
+            "path": "/api/me/onboarding/cloud-waitlist"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/onboarding/use-bootstrap-mika.ts:48",
+      "method": "createMikaAgent",
+      "inventory": [
+        {
+          "id": "client:2103",
+          "method": "POST",
+          "path_expression": "/api/agents/mika",
+          "route": {
+            "method": "POST",
+            "path": "/api/agents/mika"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/onboarding/use-bootstrap-mika.ts:70",
+      "method": "startMikaOnboarding",
+      "inventory": [
+        {
+          "id": "client:4281",
+          "method": "POST",
+          "path_expression": "/api/chat/sessions/${sessionId}/onboarding",
+          "route": {
+            "method": "POST",
+            "path": "/api/chat/sessions/{sessionId}/onboarding"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/onboarding/store.ts:66 via auth refreshMe",
+      "inventory": [
+        {
+          "id": "client:1185",
+          "method": "POST",
+          "path_expression": "/api/auth/refresh",
+          "route": {
+            "method": "POST",
+            "path": "/api/auth/refresh"
+          }
+        }
+      ]
+    }
+  ],
+  "unread_ranges": [],
+  "limitations": [
+    "No runtime/tests/network/model/data/git operations.",
+    "No backend support, server idempotency, analytics delivery or actual model execution verified. Source comments describing server behavior are not independent server evidence.",
+    "No global/backend completion; root review pending."
+  ],
+  "detailed_interfaces": {
+    "api": [
+      {
+        "source": "packages/core/onboarding/queries.ts:24",
+        "method": "listIssues",
+        "callee": "packages/core/api/client.ts:1277",
+        "call_ids": [
+          "client:1329",
+          "client:1344"
+        ],
+        "route_ids": [
+          {
+            "method": "POST",
+            "path": "/api/issues/query"
+          },
+          {
+            "method": "GET",
+            "path": "/api/issues"
+          }
+        ],
+        "unresolved": null,
+        "proof": "identity-workspace-transport-coverage.json (accepted API proof reused; not re-audited)"
+      },
+      {
+        "source": "packages/core/onboarding/store.ts:21",
+        "method": "patchOnboarding",
+        "callee": "packages/core/api/client.ts:1229",
+        "call_ids": [
+          "client:1232"
+        ],
+        "route_ids": [
+          {
+            "method": "PATCH",
+            "path": "/api/me/onboarding"
+          }
+        ],
+        "unresolved": null,
+        "proof": "identity-workspace-transport-coverage.json (accepted API proof reused; not re-audited)"
+      },
+      {
+        "source": "packages/core/onboarding/store.ts:61",
+        "method": "markOnboardingComplete",
+        "callee": "packages/core/api/client.ts:1203",
+        "call_ids": [
+          "client:1207"
+        ],
+        "route_ids": [
+          {
+            "method": "POST",
+            "path": "/api/me/onboarding/complete"
+          }
+        ],
+        "unresolved": null,
+        "proof": "identity-workspace-transport-coverage.json (accepted API proof reused; not re-audited)"
+      },
+      {
+        "source": "packages/core/onboarding/store.ts:82",
+        "method": "joinCloudWaitlist",
+        "callee": "packages/core/api/client.ts:1216",
+        "call_ids": [
+          "client:1220"
+        ],
+        "route_ids": [
+          {
+            "method": "POST",
+            "path": "/api/me/onboarding/cloud-waitlist"
+          }
+        ],
+        "unresolved": null,
+        "proof": "identity-workspace-transport-coverage.json (accepted API proof reused; not re-audited)"
+      },
+      {
+        "source": "packages/core/onboarding/use-bootstrap-mika.ts:48",
+        "method": "createMikaAgent",
+        "callee": "packages/core/api/client.ts:2090",
+        "call_ids": [
+          "client:2103"
+        ],
+        "route_ids": [
+          {
+            "method": "POST",
+            "path": "/api/agents/mika"
+          }
+        ],
+        "unresolved": null,
+        "proof": "identity-workspace-transport-coverage.json (accepted API proof reused; not re-audited)"
+      },
+      {
+        "source": "packages/core/onboarding/use-bootstrap-mika.ts:70",
+        "method": "startMikaOnboarding",
+        "callee": "packages/core/api/client.ts:4274",
+        "call_ids": [
+          "client:4281"
+        ],
+        "route_ids": [
+          {
+            "method": "POST",
+            "path": "/api/chat/sessions/{sessionId}/onboarding"
+          }
+        ],
+        "unresolved": null,
+        "proof": "identity-workspace-transport-coverage.json (accepted API proof reused; not re-audited)"
+      }
+    ],
+    "imported_interfaces": [
+      {
+        "source": "packages/core/onboarding/store.ts",
+        "interfaces": [
+          "api.patchOnboarding",
+          "api.markOnboardingComplete",
+          "api.joinCloudWaitlist",
+          "useAuthStore.getState().setUser",
+          "useAuthStore.getState().refreshMe -> getMe",
+          "setPersonProperties (external analytics SDK; buffering per accepted proof)"
+        ]
+      },
+      {
+        "source": "packages/core/onboarding/queries.ts",
+        "interfaces": [
+          "queryOptions queryFn (consumer-triggered)",
+          "issueKeys.all",
+          "api.listIssues"
+        ]
+      },
+      {
+        "source": "packages/core/onboarding/use-bootstrap-mika.ts",
+        "interfaces": [
+          "api.createMikaAgent",
+          "api.startMikaOnboarding",
+          "useMutation mutationFn/onSuccess",
+          "queryClient.invalidateQueries",
+          "workspaceKeys.agents",
+          "chatKeys.sessions/messages/messagesPage"
+        ]
+      }
+    ],
+    "caller_injected_interfaces": [
+      "bootstrapMika input workspaceSlug/runtimeId/model/title/language",
+      "useBootstrapMika workspaceId for invalidation keys",
+      "needsSourceBackfill user and dismissCount",
+      "memberNeedsMikaSetup agents and member sessions",
+      "query consumer enabled/lifecycle; matching active observers determine invalidation refetch"
+    ],
+    "local": [
+      "sanitizeNextUrl returns text only: rejects empty, non-single-slash prefix, ASCII 00-1f and backslash; does not decode or navigate",
+      "Mika identified by system_key=mika; first matching agent/session; missing or falsy last_message requires setup",
+      "backfill requires onboarded user, dismissal count <3, no source or skip; legacy nonempty string counts answered; separate minimum done issue threshold=3",
+      "persisted order about_you/workspace/runtime; welcome unpersisted",
+      "index reexports only; types declarations only"
+    ],
+    "accepted_proofs": [
+      "identity-workspace-transport-coverage.json",
+      "active-web-auth-transport.json"
+    ],
+    "callback_boundary": [
+      "Imported implementations and caller callbacks are interfaces, not recursively audited here. Accepted active-web-auth proof closes active web auth injections only."
+    ]
+  },
+  "source_count": 9,
+  "root_review": "accepted9current-source reviews, corrected requested/reported count10; hashes and mappings verified; independent store/query/bootstrap source reads"
+}

@@ -2,9 +2,8 @@ import { useSyncExternalStore } from "react";
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 import { defaultStorage } from "../platform/storage";
-import { findTheme } from "./installed-themes";
 import { THEME_ID_PATTERN, themeCss } from "./theme-package";
-import { DEFAULT_THEME_ID, findBuiltInTheme } from "./built-in-themes";
+import { DEFAULT_THEME_ID, INITIAL_THEME_ID, findBuiltInTheme, isSelectableTheme } from "./built-in-themes";
 import { isLocalFont, localFontFamily, type LocalFont } from "./local-fonts";
 import {
   themeOptionAttributes,
@@ -85,7 +84,7 @@ export interface AppearancePreferences {
 }
 
 export const DEFAULT_APPEARANCE: AppearancePreferences = {
-  theme: DEFAULT_THEME_ID,
+  theme: INITIAL_THEME_ID,
   themeOptions: {},
   uiFont: "inter",
   uiCjkFont: "sans",
@@ -141,10 +140,9 @@ function sanitizeThemeOptions(value: unknown): Record<string, ThemeOptionValues>
 
 /**
  * Reads whatever is stored, field by field, falling back to the default for
- * anything missing or unknown. The theme id is kept even when no such theme
- * is installed yet (installed themes load from their own storage); an
- * unknown id renders as the default theme. Older versions stored `style`
- * instead of `theme` and `cjkFont` instead of `uiCjkFont`.
+ * anything missing or unknown. Retired and custom selections become FWD;
+ * their saved options and installed packages stay intact. Older versions
+ * stored `style` instead of `theme` and `cjkFont` instead of `uiCjkFont`.
  */
 export function sanitizeAppearance(stored: unknown): AppearancePreferences {
   const p = (stored && typeof stored === "object" ? stored : {}) as Record<string, unknown>;
@@ -157,7 +155,7 @@ export function sanitizeAppearance(stored: unknown): AppearancePreferences {
   return {
     theme: pick(
       "theme",
-      (v): v is string => typeof v === "string" && THEME_ID_PATTERN.test(v),
+      isSelectableTheme,
       p.theme ?? p.style,
     ),
     themeOptions: sanitizeThemeOptions(p.themeOptions),
@@ -261,11 +259,10 @@ export function appearanceRootVariables(
   };
 }
 
-/** The theme to render: the chosen one, or Default in safe mode or when it is not installed. */
+/** Render an available theme, FWD for retired selections, or Default in safe mode. */
 export function activeTheme(prefs: Pick<AppearancePreferences, "theme">, safeMode = false): Theme {
-  const fallback = findBuiltInTheme(DEFAULT_THEME_ID)!;
-  if (safeMode) return fallback;
-  return findTheme(prefs.theme) ?? fallback;
+  if (safeMode) return findBuiltInTheme(DEFAULT_THEME_ID)!;
+  return findBuiltInTheme(isSelectableTheme(prefs.theme) ? prefs.theme : INITIAL_THEME_ID)!;
 }
 
 const BOTH_MODES = ":root:not(.dark), :root.dark";
@@ -328,7 +325,10 @@ export const useAppearanceStore = create<AppearanceState>()(
   persist(
     (set) => ({
       ...DEFAULT_APPEARANCE,
-      set: (patch) => set(patch),
+      set: (patch) => set((state) => ({
+        ...patch,
+        theme: patch.theme === undefined || !isSelectableTheme(patch.theme) ? state.theme : patch.theme,
+      })),
       setThemeOption: (themeId, optionId, value) =>
         set((state) => ({
           themeOptions: {

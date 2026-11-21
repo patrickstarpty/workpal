@@ -1,0 +1,252 @@
+{
+  "version": 1,
+  "scope": "Single target static audit; root review required",
+  "coverage_complete": false,
+  "files": [
+    {
+      "path": "packages/views/autopilots/components/autopilot-detail-page.tsx",
+      "sha256": "e275591bedc1642e705326ffd4240504580f5069a1b7de5e93c8736f81d16cf4",
+      "whole_source": true
+    },
+    {
+      "path": "packages/core/autopilots/queries.ts",
+      "sha256": "d29582f08592db89fa3a6969196fc47596c8d15207dd5e9dd45a88aa38784f34",
+      "whole_source": false
+    },
+    {
+      "path": "packages/core/autopilots/mutations.ts",
+      "sha256": "f54efb03a7c40837d3f7ee041295375d2e84f32ee7ccbee84027b30df0ab35ad",
+      "whole_source": false
+    },
+    {
+      "path": "packages/views/autopilots/components/use-run-autopilot-now.ts",
+      "sha256": "ffb49a6607fd81184f4d76aaba0d956c0388e926e77af198b2aedefee2da5d92",
+      "whole_source": false
+    }
+  ],
+  "snapshots": {
+    "meaning": "Mutation cache values prevList/prevDetail, not source snapshots",
+    "update": [
+      "prevList",
+      "prevDetail"
+    ],
+    "delete": [
+      "prevList"
+    ]
+  },
+  "edges": [
+    {
+      "api_method": "getAutopilot",
+      "client_anchor": "packages/core/api/client.ts:5283",
+      "inventory": [
+        {
+          "id": "client:5284",
+          "method": "GET",
+          "path_expression": "/api/autopilots/${id}",
+          "route": {
+            "method": "GET",
+            "path": "/api/autopilots/{id}"
+          }
+        }
+      ]
+    },
+    {
+      "api_method": "listAutopilotRuns",
+      "client_anchor": "packages/core/api/client.ts:5355",
+      "inventory": [
+        {
+          "id": "client:5359",
+          "method": "GET",
+          "path_expression": "/api/autopilots/${id}/runs?${search}",
+          "route": {
+            "method": "GET",
+            "path": "/api/autopilots/{id}/runs"
+          }
+        }
+      ]
+    },
+    {
+      "api_method": "getAutopilotRun",
+      "client_anchor": "packages/core/api/client.ts:5365",
+      "inventory": [
+        {
+          "id": "client:5366",
+          "method": "GET",
+          "path_expression": "/api/autopilots/${autopilotId}/runs/${runId}",
+          "route": {
+            "method": "GET",
+            "path": "/api/autopilots/{id}/runs/{runId}"
+          }
+        }
+      ]
+    },
+    {
+      "api_method": "updateAutopilot",
+      "client_anchor": "packages/core/api/client.ts:5294",
+      "inventory": [
+        {
+          "id": "client:5295",
+          "method": "PATCH",
+          "path_expression": "/api/autopilots/${id}",
+          "route": {
+            "method": "PATCH",
+            "path": "/api/autopilots/{id}"
+          }
+        }
+      ]
+    },
+    {
+      "api_method": "deleteAutopilot",
+      "client_anchor": "packages/core/api/client.ts:5301",
+      "inventory": [
+        {
+          "id": "client:5302",
+          "method": "DELETE",
+          "path_expression": "/api/autopilots/${id}",
+          "route": {
+            "method": "DELETE",
+            "path": "/api/autopilots/{id}"
+          }
+        }
+      ]
+    },
+    {
+      "api_method": "triggerAutopilot",
+      "client_anchor": "packages/core/api/client.ts:5321",
+      "inventory": [
+        {
+          "id": "client:5325",
+          "method": "POST",
+          "path_expression": "/api/autopilots/${id}/trigger",
+          "route": {
+            "method": "POST",
+            "path": "/api/autopilots/{id}/trigger"
+          }
+        }
+      ]
+    },
+    {
+      "api_method": "createAutopilotTrigger",
+      "client_anchor": "packages/core/api/client.ts:5369",
+      "inventory": [
+        {
+          "id": "client:5371",
+          "method": "POST",
+          "path_expression": "/api/autopilots/${autopilotId}/triggers",
+          "route": {
+            "method": "POST",
+            "path": "/api/autopilots/{id}/triggers"
+          }
+        }
+      ]
+    },
+    {
+      "api_method": "deleteAutopilotTrigger",
+      "client_anchor": "packages/core/api/client.ts:5385",
+      "inventory": [
+        {
+          "id": "client:5386",
+          "method": "DELETE",
+          "path_expression": "/api/autopilots/${autopilotId}/triggers/${triggerId}",
+          "route": {
+            "method": "DELETE",
+            "path": "/api/autopilots/{id}/triggers/{triggerId}"
+          }
+        }
+      ]
+    },
+    {
+      "api_method": "rotateAutopilotTriggerWebhookToken",
+      "client_anchor": "packages/core/api/client.ts:5402",
+      "inventory": [
+        {
+          "id": "client:5406",
+          "method": "POST",
+          "path_expression": "/api/autopilots/${autopilotId}/triggers/${triggerId}/rotate-webhook-token",
+          "route": {
+            "method": "POST",
+            "path": "/api/autopilots/{id}/triggers/{triggerId}/rotate-webhook-token"
+          }
+        }
+      ]
+    },
+    {
+      "api_method": "cancelTaskById",
+      "client_anchor": "packages/core/api/client.ts:4405",
+      "inventory": [
+        {
+          "id": "client:4417",
+          "method": "POST",
+          "path_expression": "/api/tasks/${taskId}/cancel${query}",
+          "route": {
+            "method": "POST",
+            "path": "/api/tasks/{taskId}/cancel"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/views/autopilots/components/schedule-editor/validate.ts:48",
+      "inventory": [
+        {
+          "id": "client:5393",
+          "method": "GET",
+          "path_expression": "/api/autopilots/cron-preview?${search}",
+          "route": {
+            "method": "GET",
+            "path": "/api/autopilots/cron-preview"
+          }
+        }
+      ],
+      "scope": "Root-resolved own submit hook: fetchQuery cronPreviewOptions; staleTime 30s retry false. Explicit ApiError 400 blocks submit, all other errors permit write attempt."
+    }
+  ],
+  "branches": [
+    "Page:1053 detail and runs mount before loading/not-found returns; factories have no workspace/id enabled gate and no custom interval. Run detail:147 mounts through transcript header for webhook task rows; factory defaults enabled true. Query keys partition workspace, autopilot and run IDs.",
+    "Permissions:1132 can_write !== false; can_manage_access ?? canWrite passed to edit child. Controls hide on explicit read-only; handlers do not independently enforce authorization. Run requires active and !pending. Archived disables status switch only; other write controls remain governed by canWrite. Pause reason banners only navigate.",
+    "TriggerRow:361 delete/rotate use autopilotId and trigger.id; success toast/close, errors toast; delete finally resets busy. Rotation pending blocks repeat UI/close. Schedule/webhook editors are imported children; API kind has no edit action. Disabled triggers hide next_run_at.",
+    "AddTriggerDialog:609 exists only while open. Schedule requires !submitting, scheduleValid, await ensureAccepted(config), then nonempty trimmed cron. Sends cron, timezone || undefined, trimmed label || undefined. Webhook sends kind/trimmed label. Success closes/resets; rejection preserves fields; finally clears submitting. Schedule edits clear rejection and are disabled during submit.",
+    "Subscribers:760 create_issue only; member query enabled canWrite, independent of picker open. Draft starts from member subscriber IDs; close compares length/membership, resets draft/filter and replaces entire list only when changed. Nonmember subscribers are not preserved in this write. Error toast; no local retry.",
+    "Properties:858 project detail enabled Boolean(projectId), independent of canWrite; updates status, assignee pair, execution_mode, project_id with equality guards except status. Query loading/unavailable project fallbacks. Actor name hooks also register directory queries (reuse core-query evidence).",
+    "Update hook: optimistic list/detail fields exclude subscribers; snapshots separate from source hashes. Cancel list query without awaiting; snapshot list/detail, restore existing snapshots on error; invalidate detail and list on settled. Subscriber authoritative payload arrives through invalidation.",
+    "Delete hook: await cancel list, snapshot list, remove row/decrement total and remove detail query. Error restores list only, not removed detail. Settled invalidates list. Page success navigates list; error resets deleting and toasts.",
+    "Trigger create/delete/rotate invalidate detail on settled with no optimistic patch. Manual trigger invalidates runs/detail on settled. Shared run-now helper distinguishes issue_created/running success, skipped warning and other statuses error; classified dispatch errors or client error fallback.",
+    "StopRunButton:166 POST cancellation by taskId without queued options; busy guard, failure resets busy/toast; success stays busy, no local patch/invalidation. Source comment relies on run_done refetch; event delivery is not proven here. Render only canWrite, task_id, no issue_id, running.",
+    "Run rows split skipped into collapsible group with no stop permission; issue rows navigate. Synthetic AgentTask is display input, not execution. Transcript content is child-owned. Runs error defaults empty; detail failure without data appears not found; no explicit refresh action in target.",
+    "Dynamic resources: webhook URL built from trigger, API base, window origin and passed to WebhookUrlField; not invoked as webhook here. Share URL uses navigation adapter then copyText. ActorAvatar and ReadonlyContent can own dynamic image/link resources; do not infer fixed resource endpoints from URL values. Navigation/clipboard are platform boundaries."
+  ],
+  "reuse": [
+    {
+      "path": "server/contracts/batches/core-query-transport-coverage.json",
+      "sha256": "890c8ba6a1eb1a5d0dc2402164db5c9b4a2369a088ecdd90c26ddc352edbe491"
+    },
+    {
+      "path": "server/contracts/batches/voice-transport-coverage.json",
+      "sha256": "c43ffa5d02f1fa4d7c6060d7a66196ee55ba3e310baaa4b7d9ffdfbc0ba7ee12"
+    },
+    {
+      "path": "server/contracts/batches/editor-transport-coverage.json",
+      "sha256": "1f941073efbfc5c5af384ed41e903a815ea8a373f29cf67a1d1228cbadcf1045"
+    },
+    {
+      "path": "server/contracts/batches/creation-dialog-transport-coverage.json",
+      "sha256": "4188c0ad23a7aced4b436663f5b86f9f01f8ded7f07a1f3cb55329610bc4daea"
+    },
+    {
+      "path": "server/contracts/batches/avatar-foreground-transport-coverage.json",
+      "sha256": "e77f14f94346e57e519f019aee88faa75ffee16dedae2a0d9ecd6c5f32d8b374"
+    }
+  ],
+  "child_boundaries": [
+    "AutopilotDialog and EditScheduleTriggerDialog/EditWebhookTriggerDialog: creation evidence reused; no child mutation attributed to this file",
+    "ScheduleEditor/useScheduleSubmitGate: validation and preview delegated; no child route closure claimed",
+    "WebhookDeliveriesSection: receives hasWebhookTrigger; list/detail/replay remain child-owned",
+    "TranscriptButton: voice evidence reused; transcript transport remains child-owned",
+    "ActorAvatar, AgentPicker, ProjectPicker, ReadonlyContent, command context and ObjectPage: supporting boundaries; no whole-module closure claimed"
+  ],
+  "review_status": "Prepared for root review; no runtime/backend/global closure claim",
+  "root_review": {
+    "status": "accepted bounded target scope",
+    "checks": "Root read own schedule submit gate and concrete query/client; added preview GET edge missed by child-boundary classification. Hash/tuple validation; no scheduler/backend capability claim."
+  }
+}

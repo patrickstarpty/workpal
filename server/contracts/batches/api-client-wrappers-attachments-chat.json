@@ -1,0 +1,2660 @@
+{
+  "version": 1,
+  "scope": "finite ApiClient wrappers 4099 through last complete method before 5100",
+  "whole_source": false,
+  "status": "static audit; root review pending; no backend claim",
+  "source": {
+    "path": "packages/core/api/client.ts",
+    "sha256": "779bb65b5b7ead815836f7c704ec3c370bafae203e4f92119fadce93e982a4d7",
+    "start": 4099,
+    "end": 5085
+  },
+  "boundary": {
+    "next_method": "listIssueViews",
+    "start": 5090,
+    "end": 5100,
+    "disposition": "crossing method excluded whole for next section; not split"
+  },
+  "proofs": [
+    {
+      "path": "server/contracts/batches/api-client-execution-closure.json",
+      "sha256": "550a585c2351e0b2e8066bb11dd6690f17dff41641d78071e0f6479cdf3991e9",
+      "source_hash_checks": [
+        {
+          "path": "packages/core/api/client.ts",
+          "expected": "779bb65b5b7ead815836f7c704ec3c370bafae203e4f92119fadce93e982a4d7",
+          "actual": "779bb65b5b7ead815836f7c704ec3c370bafae203e4f92119fadce93e982a4d7",
+          "matches": true
+        }
+      ]
+    },
+    {
+      "path": "server/contracts/batches/schema-data-transport-coverage.json",
+      "sha256": "cf5a8661dd7305cd787958b1f8f34d13e30326d3477a32edea2e7a487fd72021",
+      "source_hash_checks": [
+        {
+          "path": "packages/core/types/agent.ts",
+          "expected": "a1c494eb9f71de1f08350415eb1b41777387e601da6ace53ba4d639d193c640b",
+          "actual": "a1c494eb9f71de1f08350415eb1b41777387e601da6ace53ba4d639d193c640b",
+          "matches": true
+        },
+        {
+          "path": "packages/core/api/schemas.ts",
+          "expected": "f75704eeb37705c0f72b4bd89ff89e848289f3fe7cee154b9bed7ff280be674d",
+          "actual": "f75704eeb37705c0f72b4bd89ff89e848289f3fe7cee154b9bed7ff280be674d",
+          "matches": true
+        },
+        {
+          "path": "packages/views/dashboard/utils.ts",
+          "expected": "0291f572d74f9a3c8bfd995563b4be97d8ff2a3ba63dcdaef3ccf70fadfcbf22",
+          "actual": "0291f572d74f9a3c8bfd995563b4be97d8ff2a3ba63dcdaef3ccf70fadfcbf22",
+          "matches": true
+        }
+      ]
+    },
+    {
+      "path": "server/contracts/batches/schema-callback-transport-coverage.json",
+      "sha256": "a861f683eee43acb00571aa2216c95c104ce20001ed3d817928082af454f2cd3",
+      "source_hash_checks": [
+        {
+          "path": "packages/core/api/schemas.ts",
+          "expected": "f75704eeb37705c0f72b4bd89ff89e848289f3fe7cee154b9bed7ff280be674d",
+          "actual": "f75704eeb37705c0f72b4bd89ff89e848289f3fe7cee154b9bed7ff280be674d",
+          "matches": true
+        }
+      ]
+    }
+  ],
+  "declarations": [
+    {
+      "name": "listChatSessions",
+      "start": 4101,
+      "end": 4112,
+      "source": "async listChatSessions(\n    params?: { status?: string },\n    workspace?: WorkspaceScope,\n  ): Promise<ChatSession[]> {\n    const query = params?.status ? `?status=${params.status}` : \"\";\n    const raw: unknown = await this.fetch(`/api/chat/sessions${query}`, {\n      headers: workspaceHeader(workspace),\n    });\n    return parseWithFallback(raw, ChatSessionListSchema, EMPTY_CHAT_SESSION_LIST, {\n      endpoint: \"GET /api/chat/sessions\",\n    });\n  }",
+      "requests": [
+        {
+          "start": 4106,
+          "end": 4108,
+          "source": "this.fetch(`/api/chat/sessions${query}`, {\n      headers: workspaceHeader(workspace),\n    })",
+          "transport": "this.fetch",
+          "actual_method": "GET",
+          "inventory": [
+            {
+              "id": "client:4106",
+              "method": "GET",
+              "path_expression": "/api/chat/sessions${query}",
+              "route": {
+                "method": "GET",
+                "path": "/api/chat/sessions"
+              }
+            }
+          ],
+          "mapping": "source-line matched; method checked against declaration",
+          "method_identity_verified": true
+        }
+      ]
+    },
+    {
+      "name": "getChatSession",
+      "start": 4114,
+      "end": 4119,
+      "source": "async getChatSession(id: string): Promise<ChatSession> {\n    const raw: unknown = await this.fetch(`/api/chat/sessions/${id}`);\n    return parseWithFallback(raw, ChatSessionSchema, EMPTY_CHAT_SESSION, {\n      endpoint: \"GET /api/chat/sessions/:id\",\n    });\n  }",
+      "requests": [
+        {
+          "start": 4115,
+          "end": 4115,
+          "source": "this.fetch(`/api/chat/sessions/${id}`)",
+          "transport": "this.fetch",
+          "actual_method": "GET",
+          "inventory": [
+            {
+              "id": "client:4115",
+              "method": "GET",
+              "path_expression": "/api/chat/sessions/${id}",
+              "route": {
+                "method": "GET",
+                "path": "/api/chat/sessions/{sessionId}"
+              }
+            }
+          ],
+          "mapping": "source-line matched; method checked against declaration",
+          "method_identity_verified": true
+        }
+      ]
+    },
+    {
+      "name": "createChatSession",
+      "start": 4121,
+      "end": 4134,
+      "source": "async createChatSession(\n    data: {\n      agent_id: string;\n      title?: string;\n      project_id?: string | null;\n    },\n    workspaceSlug?: string,\n  ): Promise<ChatSession> {\n    return this.fetch(\"/api/chat/sessions\", {\n      method: \"POST\",\n      headers: workspaceHeader(workspaceSlug),\n      body: JSON.stringify(data),\n    });\n  }",
+      "requests": [
+        {
+          "start": 4129,
+          "end": 4133,
+          "source": "this.fetch(\"/api/chat/sessions\", {\n      method: \"POST\",\n      headers: workspaceHeader(workspaceSlug),\n      body: JSON.stringify(data),\n    })",
+          "transport": "this.fetch",
+          "actual_method": "\"POST\"",
+          "inventory": [
+            {
+              "id": "client:4129",
+              "method": "POST",
+              "path_expression": "/api/chat/sessions",
+              "route": {
+                "method": "POST",
+                "path": "/api/chat/sessions"
+              }
+            }
+          ],
+          "mapping": "source-line matched; method checked against declaration",
+          "method_identity_verified": true
+        }
+      ]
+    },
+    {
+      "name": "deleteChatSession",
+      "start": 4136,
+      "end": 4138,
+      "source": "async deleteChatSession(id: string): Promise<void> {\n    await this.fetch(`/api/chat/sessions/${id}`, { method: \"DELETE\" });\n  }",
+      "requests": [
+        {
+          "start": 4137,
+          "end": 4137,
+          "source": "this.fetch(`/api/chat/sessions/${id}`, { method: \"DELETE\" })",
+          "transport": "this.fetch",
+          "actual_method": "\"DELETE\"",
+          "inventory": [
+            {
+              "id": "client:4137",
+              "method": "DELETE",
+              "path_expression": "/api/chat/sessions/${id}",
+              "route": {
+                "method": "DELETE",
+                "path": "/api/chat/sessions/{sessionId}"
+              }
+            }
+          ],
+          "mapping": "source-line matched; method checked against declaration",
+          "method_identity_verified": true
+        }
+      ]
+    },
+    {
+      "name": "regenerateChatQuickActions",
+      "start": 4150,
+      "end": 4158,
+      "source": "async regenerateChatQuickActions(\n    sessionId: string,\n    messageId: string,\n  ): Promise<void> {\n    await this.fetch(`/api/chat/sessions/${sessionId}/quick-actions/regenerate`, {\n      method: \"POST\",\n      body: JSON.stringify({ message_id: messageId }),\n    });\n  }",
+      "requests": [
+        {
+          "start": 4154,
+          "end": 4157,
+          "source": "this.fetch(`/api/chat/sessions/${sessionId}/quick-actions/regenerate`, {\n      method: \"POST\",\n      body: JSON.stringify({ message_id: messageId }),\n    })",
+          "transport": "this.fetch",
+          "actual_method": "\"POST\"",
+          "inventory": [
+            {
+              "id": "client:4154",
+              "method": "POST",
+              "path_expression": "/api/chat/sessions/${sessionId}/quick-actions/regenerate",
+              "route": {
+                "method": "POST",
+                "path": "/api/chat/sessions/{sessionId}/quick-actions/regenerate"
+              }
+            }
+          ],
+          "mapping": "source-line matched; method checked against declaration",
+          "method_identity_verified": true
+        }
+      ]
+    },
+    {
+      "name": "updateChatSession",
+      "start": 4160,
+      "end": 4168,
+      "source": "async updateChatSession(\n    id: string,\n    data: { title: string } | { project_id: string | null },\n  ): Promise<ChatSession> {\n    return this.fetch(`/api/chat/sessions/${id}`, {\n      method: \"PATCH\",\n      body: JSON.stringify(data),\n    });\n  }",
+      "requests": [
+        {
+          "start": 4164,
+          "end": 4167,
+          "source": "this.fetch(`/api/chat/sessions/${id}`, {\n      method: \"PATCH\",\n      body: JSON.stringify(data),\n    })",
+          "transport": "this.fetch",
+          "actual_method": "\"PATCH\"",
+          "inventory": [
+            {
+              "id": "client:4164",
+              "method": "PATCH",
+              "path_expression": "/api/chat/sessions/${id}",
+              "route": {
+                "method": "PATCH",
+                "path": "/api/chat/sessions/{sessionId}"
+              }
+            }
+          ],
+          "mapping": "source-line matched; method checked against declaration",
+          "method_identity_verified": true
+        }
+      ]
+    },
+    {
+      "name": "setChatSessionPinned",
+      "start": 4170,
+      "end": 4175,
+      "source": "async setChatSessionPinned(id: string, pinned: boolean): Promise<ChatSession> {\n    return this.fetch(`/api/chat/sessions/${id}/pin`, {\n      method: \"PATCH\",\n      body: JSON.stringify({ pinned }),\n    });\n  }",
+      "requests": [
+        {
+          "start": 4171,
+          "end": 4174,
+          "source": "this.fetch(`/api/chat/sessions/${id}/pin`, {\n      method: \"PATCH\",\n      body: JSON.stringify({ pinned }),\n    })",
+          "transport": "this.fetch",
+          "actual_method": "\"PATCH\"",
+          "inventory": [
+            {
+              "id": "client:4171",
+              "method": "PATCH",
+              "path_expression": "/api/chat/sessions/${id}/pin",
+              "route": {
+                "method": "PATCH",
+                "path": "/api/chat/sessions/{sessionId}/pin"
+              }
+            }
+          ],
+          "mapping": "source-line matched; method checked against declaration",
+          "method_identity_verified": true
+        }
+      ]
+    },
+    {
+      "name": "setChatSessionArchived",
+      "start": 4177,
+      "end": 4182,
+      "source": "async setChatSessionArchived(id: string, archived: boolean): Promise<ChatSession> {\n    return this.fetch(`/api/chat/sessions/${id}/archive`, {\n      method: \"PATCH\",\n      body: JSON.stringify({ archived }),\n    });\n  }",
+      "requests": [
+        {
+          "start": 4178,
+          "end": 4181,
+          "source": "this.fetch(`/api/chat/sessions/${id}/archive`, {\n      method: \"PATCH\",\n      body: JSON.stringify({ archived }),\n    })",
+          "transport": "this.fetch",
+          "actual_method": "\"PATCH\"",
+          "inventory": [
+            {
+              "id": "client:4178",
+              "method": "PATCH",
+              "path_expression": "/api/chat/sessions/${id}/archive",
+              "route": {
+                "method": "PATCH",
+                "path": "/api/chat/sessions/{sessionId}/archive"
+              }
+            }
+          ],
+          "mapping": "source-line matched; method checked against declaration",
+          "method_identity_verified": true
+        }
+      ]
+    },
+    {
+      "name": "listChatPinnedAgents",
+      "start": 4185,
+      "end": 4187,
+      "source": "async listChatPinnedAgents(workspace?: WorkspaceScope): Promise<ChatPinnedAgent[]> {\n    return this.fetch(\"/api/chat/pinned-agents\", { headers: workspaceHeader(workspace) });\n  }",
+      "requests": [
+        {
+          "start": 4186,
+          "end": 4186,
+          "source": "this.fetch(\"/api/chat/pinned-agents\", { headers: workspaceHeader(workspace) })",
+          "transport": "this.fetch",
+          "actual_method": "GET",
+          "inventory": [
+            {
+              "id": "client:4186",
+              "method": "GET",
+              "path_expression": "/api/chat/pinned-agents",
+              "route": {
+                "method": "GET",
+                "path": "/api/chat/pinned-agents"
+              }
+            }
+          ],
+          "mapping": "source-line matched; method checked against declaration",
+          "method_identity_verified": true
+        }
+      ]
+    },
+    {
+      "name": "pinChatAgent",
+      "start": 4189,
+      "end": 4194,
+      "source": "async pinChatAgent(agentId: string): Promise<ChatPinnedAgent> {\n    return this.fetch(\"/api/chat/pinned-agents\", {\n      method: \"POST\",\n      body: JSON.stringify({ agent_id: agentId }),\n    });\n  }",
+      "requests": [
+        {
+          "start": 4190,
+          "end": 4193,
+          "source": "this.fetch(\"/api/chat/pinned-agents\", {\n      method: \"POST\",\n      body: JSON.stringify({ agent_id: agentId }),\n    })",
+          "transport": "this.fetch",
+          "actual_method": "\"POST\"",
+          "inventory": [
+            {
+              "id": "client:4190",
+              "method": "POST",
+              "path_expression": "/api/chat/pinned-agents",
+              "route": {
+                "method": "POST",
+                "path": "/api/chat/pinned-agents"
+              }
+            }
+          ],
+          "mapping": "source-line matched; method checked against declaration",
+          "method_identity_verified": true
+        }
+      ]
+    },
+    {
+      "name": "unpinChatAgent",
+      "start": 4196,
+      "end": 4198,
+      "source": "async unpinChatAgent(agentId: string): Promise<void> {\n    await this.fetch(`/api/chat/pinned-agents/${agentId}`, { method: \"DELETE\" });\n  }",
+      "requests": [
+        {
+          "start": 4197,
+          "end": 4197,
+          "source": "this.fetch(`/api/chat/pinned-agents/${agentId}`, { method: \"DELETE\" })",
+          "transport": "this.fetch",
+          "actual_method": "\"DELETE\"",
+          "inventory": [
+            {
+              "id": "client:4197",
+              "method": "DELETE",
+              "path_expression": "/api/chat/pinned-agents/${agentId}",
+              "route": {
+                "method": "DELETE",
+                "path": "/api/chat/pinned-agents/{agentId}"
+              }
+            }
+          ],
+          "mapping": "source-line matched; method checked against declaration",
+          "method_identity_verified": true
+        }
+      ]
+    },
+    {
+      "name": "listChatMessages",
+      "start": 4200,
+      "end": 4205,
+      "source": "async listChatMessages(sessionId: string): Promise<ChatMessage[]> {\n    const raw: unknown = await this.fetch(`/api/chat/sessions/${sessionId}/messages`);\n    return parseWithFallback(raw, ChatMessageListSchema, EMPTY_CHAT_MESSAGE_LIST, {\n      endpoint: \"GET /api/chat/sessions/:id/messages\",\n    });\n  }",
+      "requests": [
+        {
+          "start": 4201,
+          "end": 4201,
+          "source": "this.fetch(`/api/chat/sessions/${sessionId}/messages`)",
+          "transport": "this.fetch",
+          "actual_method": "GET",
+          "inventory": [
+            {
+              "id": "client:4201",
+              "method": "GET",
+              "path_expression": "/api/chat/sessions/${sessionId}/messages",
+              "route": {
+                "method": "GET",
+                "path": "/api/chat/sessions/{sessionId}/messages"
+              }
+            }
+          ],
+          "mapping": "source-line matched; method checked against declaration",
+          "method_identity_verified": true
+        }
+      ]
+    },
+    {
+      "name": "listChatMessagesPage",
+      "start": 4207,
+      "end": 4244,
+      "source": "async listChatMessagesPage(\n    sessionId: string,\n    params: { before?: { created_at: string; id: string } | null; limit?: number } = {},\n  ): Promise<ChatMessagesPage> {\n    const limit = params.limit ?? 50;\n    const query = new URLSearchParams({ limit: String(limit) });\n    if (params.before) {\n      query.set(\"before_created_at\", params.before.created_at);\n      query.set(\"before_id\", params.before.id);\n    }\n    try {\n      const raw: unknown = await this.fetch(\n        `/api/chat/sessions/${sessionId}/messages/page?${query.toString()}`,\n      );\n      return parseWithFallback(\n        raw,\n        ChatMessagesPageSchema,\n        { messages: [], limit, has_more: false, next_cursor: null },\n        {\n          endpoint: \"GET /api/chat/sessions/:id/messages/page\",\n        },\n      );\n    } catch (err) {\n      // Deployment-order compatibility: a backend deployed before this endpoint\n      // existed returns 404 for the unknown route. Fall back to the legacy\n      // full-list endpoint so chat never white-screens regardless of whether\n      // the server or the client deploys first. Only the initial (cursorless)\n      // page falls back — the legacy endpoint returns every message at once, so\n      // the fallback page reports has_more: false and there is no follow-up\n      // request to translate. A 404 on a cursor request is an unexpected state\n      // and propagates instead of duplicating the whole list.\n      if (err instanceof ApiError && err.status === 404 && !params.before) {\n        const messages = await this.listChatMessages(sessionId);\n        return { messages, limit, has_more: false, next_cursor: null };\n      }\n      throw err;\n    }\n  }",
+      "requests": [
+        {
+          "start": 4218,
+          "end": 4220,
+          "source": "this.fetch(\n        `/api/chat/sessions/${sessionId}/messages/page?${query.toString()}`,\n      )",
+          "transport": "this.fetch",
+          "actual_method": "GET",
+          "inventory": [
+            {
+              "id": "client:4218",
+              "method": "GET",
+              "path_expression": "/api/chat/sessions/${sessionId}/messages/page?${query.toString()}",
+              "route": {
+                "method": "GET",
+                "path": "/api/chat/sessions/{sessionId}/messages/page"
+              }
+            }
+          ],
+          "mapping": "source-line matched; method checked against declaration",
+          "method_identity_verified": true
+        }
+      ]
+    },
+    {
+      "name": "sendChatMessage",
+      "start": 4246,
+      "end": 4272,
+      "source": "async sendChatMessage(\n    sessionId: string,\n    content: string,\n    attachmentIds?: string[],\n    options?: { queue?: boolean },\n  ): Promise<SendChatMessageResponse> {\n    const body: {\n      content: string;\n      steer: boolean;\n      attachment_ids?: string[];\n    } = { content, steer: options?.queue !== true };\n    if (attachmentIds && attachmentIds.length > 0) {\n      body.attachment_ids = attachmentIds;\n    }\n    const raw = await this.fetch<unknown>(`/api/chat/sessions/${sessionId}/messages`, {\n      method: \"POST\",\n      body: JSON.stringify(body),\n    });\n    const response = parseWithFallback<SendChatMessageResponse | null>(\n      raw,\n      SendChatMessageResponseSchema,\n      null,\n      { endpoint: \"POST /api/chat/sessions/:id/messages\" },\n    );\n    if (!response) throw new Error(\"invalid send chat message response\");\n    return response;\n  }",
+      "requests": [
+        {
+          "start": 4260,
+          "end": 4263,
+          "source": "this.fetch<unknown>(`/api/chat/sessions/${sessionId}/messages`, {\n      method: \"POST\",\n      body: JSON.stringify(body),\n    })",
+          "transport": "this.fetch",
+          "actual_method": "\"POST\"",
+          "inventory": [
+            {
+              "id": "client:4260",
+              "method": "POST",
+              "path_expression": "/api/chat/sessions/${sessionId}/messages",
+              "route": {
+                "method": "POST",
+                "path": "/api/chat/sessions/{sessionId}/messages"
+              }
+            }
+          ],
+          "mapping": "source-line matched; method checked against declaration",
+          "method_identity_verified": true
+        }
+      ]
+    },
+    {
+      "name": "startMikaOnboarding",
+      "start": 4274,
+      "end": 4292,
+      "source": "async startMikaOnboarding(\n    sessionId: string,\n    data: {\n      language: \"en\" | \"zh\" | \"ko\" | \"ja\";\n    },\n    workspaceSlug?: string,\n  ): Promise<StartMikaOnboardingResponse> {\n    const raw = await this.fetch<unknown>(`/api/chat/sessions/${sessionId}/onboarding`, {\n      method: \"POST\",\n      headers: workspaceHeader(workspaceSlug),\n      body: JSON.stringify(data),\n    });\n    return parseWithFallback(\n      raw,\n      StartMikaOnboardingResponseSchema,\n      { started: false },\n      { endpoint: \"POST /api/chat/sessions/:id/onboarding\" },\n    );\n  }",
+      "requests": [
+        {
+          "start": 4281,
+          "end": 4285,
+          "source": "this.fetch<unknown>(`/api/chat/sessions/${sessionId}/onboarding`, {\n      method: \"POST\",\n      headers: workspaceHeader(workspaceSlug),\n      body: JSON.stringify(data),\n    })",
+          "transport": "this.fetch",
+          "actual_method": "\"POST\"",
+          "inventory": [
+            {
+              "id": "client:4281",
+              "method": "POST",
+              "path_expression": "/api/chat/sessions/${sessionId}/onboarding",
+              "route": {
+                "method": "POST",
+                "path": "/api/chat/sessions/{sessionId}/onboarding"
+              }
+            }
+          ],
+          "mapping": "source-line matched; method checked against declaration",
+          "method_identity_verified": true
+        }
+      ]
+    },
+    {
+      "name": "getPendingChatTask",
+      "start": 4294,
+      "end": 4299,
+      "source": "async getPendingChatTask(sessionId: string): Promise<ChatPendingTask> {\n    const raw = await this.fetch<unknown>(`/api/chat/sessions/${sessionId}/pending-task`);\n    return parseWithFallback(raw, ChatPendingTaskSchema, EMPTY_CHAT_PENDING_TASK, {\n      endpoint: \"GET /api/chat/sessions/:id/pending-task\",\n    });\n  }",
+      "requests": [
+        {
+          "start": 4295,
+          "end": 4295,
+          "source": "this.fetch<unknown>(`/api/chat/sessions/${sessionId}/pending-task`)",
+          "transport": "this.fetch",
+          "actual_method": "GET",
+          "inventory": [
+            {
+              "id": "client:4295",
+              "method": "GET",
+              "path_expression": "/api/chat/sessions/${sessionId}/pending-task",
+              "route": {
+                "method": "GET",
+                "path": "/api/chat/sessions/{sessionId}/pending-task"
+              }
+            }
+          ],
+          "mapping": "source-line matched; method checked against declaration",
+          "method_identity_verified": true
+        }
+      ]
+    },
+    {
+      "name": "prioritizeQueuedChatTask",
+      "start": 4301,
+      "end": 4315,
+      "source": "async prioritizeQueuedChatTask(\n    sessionId: string,\n    taskId: string,\n  ): Promise<PrioritizeQueuedChatTaskResponse> {\n    const raw = await this.fetch<unknown>(\n      `/api/chat/sessions/${sessionId}/queued-tasks/${taskId}/prioritize`,\n      { method: \"POST\" },\n    );\n    return parseWithFallback(\n      raw,\n      PrioritizeQueuedChatTaskResponseSchema,\n      EMPTY_PRIORITIZE_QUEUED_CHAT_TASK_RESPONSE,\n      { endpoint: \"POST /api/chat/sessions/:id/queued-tasks/:taskId/prioritize\" },\n    );\n  }",
+      "requests": [
+        {
+          "start": 4305,
+          "end": 4308,
+          "source": "this.fetch<unknown>(\n      `/api/chat/sessions/${sessionId}/queued-tasks/${taskId}/prioritize`,\n      { method: \"POST\" },\n    )",
+          "transport": "this.fetch",
+          "actual_method": "\"POST\"",
+          "inventory": [
+            {
+              "id": "client:4305",
+              "method": "POST",
+              "path_expression": "/api/chat/sessions/${sessionId}/queued-tasks/${taskId}/prioritize",
+              "route": {
+                "method": "POST",
+                "path": "/api/chat/sessions/{sessionId}/queued-tasks/{taskId}/prioritize"
+              }
+            }
+          ],
+          "mapping": "source-line matched; method checked against declaration",
+          "method_identity_verified": true
+        }
+      ]
+    },
+    {
+      "name": "clearQueuedChatTasks",
+      "start": 4317,
+      "end": 4321,
+      "source": "async clearQueuedChatTasks(sessionId: string): Promise<void> {\n    await this.fetch(`/api/chat/sessions/${sessionId}/queued-tasks`, {\n      method: \"DELETE\",\n    });\n  }",
+      "requests": [
+        {
+          "start": 4318,
+          "end": 4320,
+          "source": "this.fetch(`/api/chat/sessions/${sessionId}/queued-tasks`, {\n      method: \"DELETE\",\n    })",
+          "transport": "this.fetch",
+          "actual_method": "\"DELETE\"",
+          "inventory": [
+            {
+              "id": "client:4318",
+              "method": "DELETE",
+              "path_expression": "/api/chat/sessions/${sessionId}/queued-tasks",
+              "route": {
+                "method": "DELETE",
+                "path": "/api/chat/sessions/{sessionId}/queued-tasks"
+              }
+            }
+          ],
+          "mapping": "source-line matched; method checked against declaration",
+          "method_identity_verified": true
+        }
+      ]
+    },
+    {
+      "name": "listChatDraftRestores",
+      "start": 4328,
+      "end": 4341,
+      "source": "async listChatDraftRestores(sessionId: string): Promise<ChatDraftRestoresResponse> {\n    let raw: unknown;\n    try {\n      raw = await this.fetch<unknown>(`/api/chat/sessions/${sessionId}/draft-restores`);\n    } catch (err) {\n      if (err instanceof ApiError && err.status === 404) {\n        return { restores: [] };\n      }\n      throw err;\n    }\n    return parseWithFallback(raw, ChatDraftRestoresResponseSchema, EMPTY_CHAT_DRAFT_RESTORES, {\n      endpoint: \"GET /api/chat/sessions/{id}/draft-restores\",\n    });\n  }",
+      "requests": [
+        {
+          "start": 4331,
+          "end": 4331,
+          "source": "this.fetch<unknown>(`/api/chat/sessions/${sessionId}/draft-restores`)",
+          "transport": "this.fetch",
+          "actual_method": "GET",
+          "inventory": [
+            {
+              "id": "client:4331",
+              "method": "GET",
+              "path_expression": "/api/chat/sessions/${sessionId}/draft-restores",
+              "route": {
+                "method": "GET",
+                "path": "/api/chat/sessions/{sessionId}/draft-restores"
+              }
+            }
+          ],
+          "mapping": "source-line matched; method checked against declaration",
+          "method_identity_verified": true
+        }
+      ]
+    },
+    {
+      "name": "consumeChatDraftRestore",
+      "start": 4344,
+      "end": 4348,
+      "source": "async consumeChatDraftRestore(sessionId: string, restoreId: string): Promise<void> {\n    await this.fetch(`/api/chat/sessions/${sessionId}/draft-restores/${restoreId}`, {\n      method: \"DELETE\",\n    });\n  }",
+      "requests": [
+        {
+          "start": 4345,
+          "end": 4347,
+          "source": "this.fetch(`/api/chat/sessions/${sessionId}/draft-restores/${restoreId}`, {\n      method: \"DELETE\",\n    })",
+          "transport": "this.fetch",
+          "actual_method": "\"DELETE\"",
+          "inventory": [
+            {
+              "id": "client:4345",
+              "method": "DELETE",
+              "path_expression": "/api/chat/sessions/${sessionId}/draft-restores/${restoreId}",
+              "route": {
+                "method": "DELETE",
+                "path": "/api/chat/sessions/{sessionId}/draft-restores/{restoreId}"
+              }
+            }
+          ],
+          "mapping": "source-line matched; method checked against declaration",
+          "method_identity_verified": true
+        }
+      ]
+    },
+    {
+      "name": "listChatSessionWakeups",
+      "start": 4351,
+      "end": 4362,
+      "source": "async listChatSessionWakeups(sessionId: string): Promise<ChatWakeup[]> {\n    let raw: unknown;\n    try {\n      raw = await this.fetch<unknown>(`/api/chat/sessions/${sessionId}/wakeups`);\n    } catch (err) {\n      if (err instanceof ApiError && err.status === 404) return [];\n      throw err;\n    }\n    return parseWithFallback(raw, ChatWakeupListSchema, EMPTY_CHAT_WAKEUP_LIST, {\n      endpoint: \"GET /api/chat/sessions/{id}/wakeups\",\n    });\n  }",
+      "requests": [
+        {
+          "start": 4354,
+          "end": 4354,
+          "source": "this.fetch<unknown>(`/api/chat/sessions/${sessionId}/wakeups`)",
+          "transport": "this.fetch",
+          "actual_method": "GET",
+          "inventory": [
+            {
+              "id": "client:4354",
+              "method": "GET",
+              "path_expression": "/api/chat/sessions/${sessionId}/wakeups",
+              "route": {
+                "method": "GET",
+                "path": "/api/chat/sessions/{sessionId}/wakeups"
+              }
+            }
+          ],
+          "mapping": "source-line matched; method checked against declaration",
+          "method_identity_verified": true
+        }
+      ]
+    },
+    {
+      "name": "cancelChatWakeup",
+      "start": 4364,
+      "end": 4368,
+      "source": "async cancelChatWakeup(sessionId: string, wakeupId: string): Promise<void> {\n    await this.fetch(`/api/chat/sessions/${sessionId}/wakeups/${wakeupId}/cancel`, {\n      method: \"POST\",\n    });\n  }",
+      "requests": [
+        {
+          "start": 4365,
+          "end": 4367,
+          "source": "this.fetch(`/api/chat/sessions/${sessionId}/wakeups/${wakeupId}/cancel`, {\n      method: \"POST\",\n    })",
+          "transport": "this.fetch",
+          "actual_method": "\"POST\"",
+          "inventory": [
+            {
+              "id": "client:4365",
+              "method": "POST",
+              "path_expression": "/api/chat/sessions/${sessionId}/wakeups/${wakeupId}/cancel",
+              "route": {
+                "method": "POST",
+                "path": "/api/chat/sessions/{sessionId}/wakeups/{wakeupId}/cancel"
+              }
+            }
+          ],
+          "mapping": "source-line matched; method checked against declaration",
+          "method_identity_verified": true
+        }
+      ]
+    },
+    {
+      "name": "retryChatWakeup",
+      "start": 4370,
+      "end": 4374,
+      "source": "async retryChatWakeup(sessionId: string, wakeupId: string): Promise<void> {\n    await this.fetch(`/api/chat/sessions/${sessionId}/wakeups/${wakeupId}/retry`, {\n      method: \"POST\",\n    });\n  }",
+      "requests": [
+        {
+          "start": 4371,
+          "end": 4373,
+          "source": "this.fetch(`/api/chat/sessions/${sessionId}/wakeups/${wakeupId}/retry`, {\n      method: \"POST\",\n    })",
+          "transport": "this.fetch",
+          "actual_method": "\"POST\"",
+          "inventory": [
+            {
+              "id": "client:4371",
+              "method": "POST",
+              "path_expression": "/api/chat/sessions/${sessionId}/wakeups/${wakeupId}/retry",
+              "route": {
+                "method": "POST",
+                "path": "/api/chat/sessions/{sessionId}/wakeups/{wakeupId}/retry"
+              }
+            }
+          ],
+          "mapping": "source-line matched; method checked against declaration",
+          "method_identity_verified": true
+        }
+      ]
+    },
+    {
+      "name": "listMyChatWakeups",
+      "start": 4376,
+      "end": 4387,
+      "source": "async listMyChatWakeups(): Promise<ChatWakeup[]> {\n    let raw: unknown;\n    try {\n      raw = await this.fetch<unknown>(`/api/chat/my-wakeups`);\n    } catch (err) {\n      if (err instanceof ApiError && err.status === 404) return [];\n      throw err;\n    }\n    return parseWithFallback(raw, ChatWakeupListSchema, EMPTY_CHAT_WAKEUP_LIST, {\n      endpoint: \"GET /api/chat/my-wakeups\",\n    });\n  }",
+      "requests": [
+        {
+          "start": 4379,
+          "end": 4379,
+          "source": "this.fetch<unknown>(`/api/chat/my-wakeups`)",
+          "transport": "this.fetch",
+          "actual_method": "GET",
+          "inventory": [
+            {
+              "id": "client:4379",
+              "method": "GET",
+              "path_expression": "/api/chat/my-wakeups",
+              "route": {
+                "method": "GET",
+                "path": "/api/chat/my-wakeups"
+              }
+            }
+          ],
+          "mapping": "source-line matched; method checked against declaration",
+          "method_identity_verified": true
+        }
+      ]
+    },
+    {
+      "name": "listPendingChatTasks",
+      "start": 4389,
+      "end": 4391,
+      "source": "async listPendingChatTasks(workspace?: WorkspaceScope): Promise<PendingChatTasksResponse> {\n    return this.fetch(`/api/chat/pending-tasks`, { headers: workspaceHeader(workspace) });\n  }",
+      "requests": [
+        {
+          "start": 4390,
+          "end": 4390,
+          "source": "this.fetch(`/api/chat/pending-tasks`, { headers: workspaceHeader(workspace) })",
+          "transport": "this.fetch",
+          "actual_method": "GET",
+          "inventory": [
+            {
+              "id": "client:4390",
+              "method": "GET",
+              "path_expression": "/api/chat/pending-tasks",
+              "route": {
+                "method": "GET",
+                "path": "/api/chat/pending-tasks"
+              }
+            }
+          ],
+          "mapping": "source-line matched; method checked against declaration",
+          "method_identity_verified": true
+        }
+      ]
+    },
+    {
+      "name": "hasAnyPendingChatTasks",
+      "start": 4393,
+      "end": 4395,
+      "source": "async hasAnyPendingChatTasks(workspace?: WorkspaceScope): Promise<HasPendingChatTasksResponse> {\n    return this.fetch(`/api/chat/pending-tasks/has-any`, { headers: workspaceHeader(workspace) });\n  }",
+      "requests": [
+        {
+          "start": 4394,
+          "end": 4394,
+          "source": "this.fetch(`/api/chat/pending-tasks/has-any`, { headers: workspaceHeader(workspace) })",
+          "transport": "this.fetch",
+          "actual_method": "GET",
+          "inventory": [
+            {
+              "id": "client:4394",
+              "method": "GET",
+              "path_expression": "/api/chat/pending-tasks/has-any",
+              "route": {
+                "method": "GET",
+                "path": "/api/chat/pending-tasks/has-any"
+              }
+            }
+          ],
+          "mapping": "source-line matched; method checked against declaration",
+          "method_identity_verified": true
+        }
+      ]
+    },
+    {
+      "name": "markChatSessionRead",
+      "start": 4397,
+      "end": 4399,
+      "source": "async markChatSessionRead(sessionId: string): Promise<void> {\n    await this.fetch(`/api/chat/sessions/${sessionId}/read`, { method: \"POST\" });\n  }",
+      "requests": [
+        {
+          "start": 4398,
+          "end": 4398,
+          "source": "this.fetch(`/api/chat/sessions/${sessionId}/read`, { method: \"POST\" })",
+          "transport": "this.fetch",
+          "actual_method": "\"POST\"",
+          "inventory": [
+            {
+              "id": "client:4398",
+              "method": "POST",
+              "path_expression": "/api/chat/sessions/${sessionId}/read",
+              "route": {
+                "method": "POST",
+                "path": "/api/chat/sessions/{sessionId}/read"
+              }
+            }
+          ],
+          "mapping": "source-line matched; method checked against declaration",
+          "method_identity_verified": true
+        }
+      ]
+    },
+    {
+      "name": "cancelTaskById",
+      "start": 4405,
+      "end": 4424,
+      "source": "async cancelTaskById(\n    taskId: string,\n    options?: { queuedAction?: \"edit\" | \"remove\"; sessionId?: string },\n  ): Promise<CancelTaskResponse> {\n    const params = new URLSearchParams();\n    if (options?.queuedAction) {\n      if (!options.sessionId) throw new Error(\"sessionId is required for queued-only cancellation\");\n      params.set(\"expected_status\", \"queued\");\n      params.set(\"chat_session_id\", options.sessionId);\n      params.set(\"queue_action\", options.queuedAction);\n    }\n    const query = params.size > 0 ? `?${params}` : \"\";\n    const raw = await this.fetch<unknown>(`/api/tasks/${taskId}/cancel${query}`, {\n      method: \"POST\",\n      headers: { \"X-Client-Capabilities\": CHAT_DRAFT_RESTORE_CAPABILITY },\n    });\n    return parseWithFallback(raw, CancelTaskResponseSchema, EMPTY_CANCEL_TASK_RESPONSE, {\n      endpoint: \"POST /api/tasks/{taskId}/cancel\",\n    });\n  }",
+      "requests": [
+        {
+          "start": 4417,
+          "end": 4420,
+          "source": "this.fetch<unknown>(`/api/tasks/${taskId}/cancel${query}`, {\n      method: \"POST\",\n      headers: { \"X-Client-Capabilities\": CHAT_DRAFT_RESTORE_CAPABILITY },\n    })",
+          "transport": "this.fetch",
+          "actual_method": "\"POST\"",
+          "inventory": [
+            {
+              "id": "client:4417",
+              "method": "POST",
+              "path_expression": "/api/tasks/${taskId}/cancel${query}",
+              "route": {
+                "method": "POST",
+                "path": "/api/tasks/{taskId}/cancel"
+              }
+            }
+          ],
+          "mapping": "source-line matched; method checked against declaration",
+          "method_identity_verified": true
+        }
+      ]
+    },
+    {
+      "name": "listAttachments",
+      "start": 4426,
+      "end": 4431,
+      "source": "async listAttachments(issueId: string): Promise<Attachment[]> {\n    const raw = await this.fetch<unknown>(`/api/issues/${issueId}/attachments`);\n    return parseWithFallback<Attachment[]>(raw, AttachmentListSchema, [], {\n      endpoint: \"GET /api/issues/:id/attachments\",\n    });\n  }",
+      "requests": [
+        {
+          "start": 4427,
+          "end": 4427,
+          "source": "this.fetch<unknown>(`/api/issues/${issueId}/attachments`)",
+          "transport": "this.fetch",
+          "actual_method": "GET",
+          "inventory": [
+            {
+              "id": "client:4427",
+              "method": "GET",
+              "path_expression": "/api/issues/${issueId}/attachments",
+              "route": {
+                "method": "GET",
+                "path": "/api/issues/{id}/attachments"
+              }
+            }
+          ],
+          "mapping": "source-line matched; method checked against declaration",
+          "method_identity_verified": true
+        }
+      ]
+    },
+    {
+      "name": "getAttachment",
+      "start": 4437,
+      "end": 4442,
+      "source": "async getAttachment(id: string): Promise<Attachment> {\n    const raw = await this.fetch<unknown>(`/api/attachments/${id}`);\n    return parseWithFallback(raw, AttachmentResponseSchema, EMPTY_ATTACHMENT, {\n      endpoint: \"GET /api/attachments/{id}\",\n    });\n  }",
+      "requests": [
+        {
+          "start": 4438,
+          "end": 4438,
+          "source": "this.fetch<unknown>(`/api/attachments/${id}`)",
+          "transport": "this.fetch",
+          "actual_method": "GET",
+          "inventory": [
+            {
+              "id": "client:4438",
+              "method": "GET",
+              "path_expression": "/api/attachments/${id}",
+              "route": {
+                "method": "GET",
+                "path": "/api/attachments/{id}"
+              }
+            }
+          ],
+          "mapping": "source-line matched; method checked against declaration",
+          "method_identity_verified": true
+        }
+      ]
+    },
+    {
+      "name": "getAttachmentForDownload",
+      "start": 4446,
+      "end": 4451,
+      "source": "async getAttachmentForDownload(id: string): Promise<Attachment> {\n    const raw = await this.fetch<unknown>(`/api/attachments/${id}/download-metadata`);\n    return parseWithFallback(raw, AttachmentResponseSchema, EMPTY_ATTACHMENT, {\n      endpoint: \"GET /api/attachments/{id}/download-metadata\",\n    });\n  }",
+      "requests": [
+        {
+          "start": 4447,
+          "end": 4447,
+          "source": "this.fetch<unknown>(`/api/attachments/${id}/download-metadata`)",
+          "transport": "this.fetch",
+          "actual_method": "GET",
+          "inventory": [
+            {
+              "id": "client:4447",
+              "method": "GET",
+              "path_expression": "/api/attachments/${id}/download-metadata",
+              "route": {
+                "method": "GET",
+                "path": "/api/attachments/{id}/download-metadata"
+              }
+            }
+          ],
+          "mapping": "source-line matched; method checked against declaration",
+          "method_identity_verified": true
+        }
+      ]
+    },
+    {
+      "name": "deleteAttachment",
+      "start": 4453,
+      "end": 4455,
+      "source": "async deleteAttachment(id: string): Promise<void> {\n    await this.fetch(`/api/attachments/${id}`, { method: \"DELETE\" });\n  }",
+      "requests": [
+        {
+          "start": 4454,
+          "end": 4454,
+          "source": "this.fetch(`/api/attachments/${id}`, { method: \"DELETE\" })",
+          "transport": "this.fetch",
+          "actual_method": "\"DELETE\"",
+          "inventory": [
+            {
+              "id": "client:4454",
+              "method": "DELETE",
+              "path_expression": "/api/attachments/${id}",
+              "route": {
+                "method": "DELETE",
+                "path": "/api/attachments/{id}"
+              }
+            }
+          ],
+          "mapping": "source-line matched; method checked against declaration",
+          "method_identity_verified": true
+        }
+      ]
+    },
+    {
+      "name": "getAttachmentTextContent",
+      "start": 4470,
+      "end": 4487,
+      "source": "async getAttachmentTextContent(\n    id: string,\n  ): Promise<{ text: string; originalContentType: string }> {\n    let res: Response;\n    try {\n      res = await this.fetchRaw(`/api/attachments/${id}/content`);\n    } catch (err) {\n      if (err instanceof ApiError) {\n        if (err.status === 413) throw new PreviewTooLargeError();\n        if (err.status === 415) throw new PreviewUnsupportedError();\n      }\n      throw err;\n    }\n    return {\n      text: await res.text(),\n      originalContentType: res.headers.get(\"X-Original-Content-Type\") ?? \"\",\n    };\n  }",
+      "requests": [
+        {
+          "start": 4475,
+          "end": 4475,
+          "source": "this.fetchRaw(`/api/attachments/${id}/content`)",
+          "transport": "this.fetchRaw",
+          "actual_method": "GET",
+          "inventory": [
+            {
+              "id": "client:4475",
+              "method": "GET",
+              "path_expression": "/api/attachments/${id}/content",
+              "route": {
+                "method": "GET",
+                "path": "/api/attachments/{id}/content"
+              }
+            }
+          ],
+          "mapping": "source-line matched; method checked against declaration",
+          "method_identity_verified": true
+        }
+      ]
+    },
+    {
+      "name": "getAttachmentBlob",
+      "start": 4507,
+      "end": 4510,
+      "source": "async getAttachmentBlob(id: string, signal?: AbortSignal): Promise<Blob> {\n    const res = await this.fetchRaw(`/api/attachments/${id}/download`, { signal });\n    return res.blob();\n  }",
+      "requests": [
+        {
+          "start": 4508,
+          "end": 4508,
+          "source": "this.fetchRaw(`/api/attachments/${id}/download`, { signal })",
+          "transport": "this.fetchRaw",
+          "actual_method": "GET",
+          "inventory": [
+            {
+              "id": "client:4508",
+              "method": "GET",
+              "path_expression": "/api/attachments/${id}/download",
+              "route": {
+                "method": "GET",
+                "path": "/api/attachments/{id}/download"
+              }
+            }
+          ],
+          "mapping": "source-line matched; method checked against declaration",
+          "method_identity_verified": true
+        }
+      ]
+    },
+    {
+      "name": "listProjects",
+      "start": 4513,
+      "end": 4521,
+      "source": "async listProjects(params?: { status?: string; include_archived?: boolean }): Promise<ListProjectsResponse> {\n    const search = new URLSearchParams();\n    if (params?.status) search.set(\"status\", params.status);\n    if (params?.include_archived) search.set(\"include_archived\", \"true\");\n    const raw = await this.fetch<unknown>(`/api/projects?${search}`);\n    return parseWithFallback(raw, ListProjectsResponseSchema, EMPTY_LIST_PROJECTS_RESPONSE, {\n      endpoint: \"GET /api/projects\",\n    });\n  }",
+      "requests": [
+        {
+          "start": 4517,
+          "end": 4517,
+          "source": "this.fetch<unknown>(`/api/projects?${search}`)",
+          "transport": "this.fetch",
+          "actual_method": "GET",
+          "inventory": [
+            {
+              "id": "client:4517",
+              "method": "GET",
+              "path_expression": "/api/projects?${search}",
+              "route": {
+                "method": "GET",
+                "path": "/api/projects"
+              }
+            }
+          ],
+          "mapping": "source-line matched; method checked against declaration",
+          "method_identity_verified": true
+        }
+      ]
+    },
+    {
+      "name": "getProject",
+      "start": 4523,
+      "end": 4526,
+      "source": "async getProject(id: string): Promise<Project> {\n    const raw = await this.fetch<unknown>(`/api/projects/${id}`);\n    return parseWithFallback(raw, ProjectSchema, EMPTY_PROJECT, { endpoint: \"GET /api/projects/:id\" });\n  }",
+      "requests": [
+        {
+          "start": 4524,
+          "end": 4524,
+          "source": "this.fetch<unknown>(`/api/projects/${id}`)",
+          "transport": "this.fetch",
+          "actual_method": "GET",
+          "inventory": [
+            {
+              "id": "client:4524",
+              "method": "GET",
+              "path_expression": "/api/projects/${id}",
+              "route": {
+                "method": "GET",
+                "path": "/api/projects/{id}"
+              }
+            }
+          ],
+          "mapping": "source-line matched; method checked against declaration",
+          "method_identity_verified": true
+        }
+      ]
+    },
+    {
+      "name": "createProject",
+      "start": 4528,
+      "end": 4534,
+      "source": "async createProject(data: CreateProjectRequest): Promise<Project> {\n    const raw = await this.fetch<unknown>(\"/api/projects\", {\n      method: \"POST\",\n      body: JSON.stringify(data),\n    });\n    return parseWithFallback(raw, ProjectSchema, EMPTY_PROJECT, { endpoint: \"POST /api/projects\" });\n  }",
+      "requests": [
+        {
+          "start": 4529,
+          "end": 4532,
+          "source": "this.fetch<unknown>(\"/api/projects\", {\n      method: \"POST\",\n      body: JSON.stringify(data),\n    })",
+          "transport": "this.fetch",
+          "actual_method": "\"POST\"",
+          "inventory": [
+            {
+              "id": "client:4529",
+              "method": "POST",
+              "path_expression": "/api/projects",
+              "route": {
+                "method": "POST",
+                "path": "/api/projects"
+              }
+            }
+          ],
+          "mapping": "source-line matched; method checked against declaration",
+          "method_identity_verified": true
+        }
+      ]
+    },
+    {
+      "name": "updateProject",
+      "start": 4536,
+      "end": 4542,
+      "source": "async updateProject(id: string, data: UpdateProjectRequest): Promise<Project> {\n    const raw = await this.fetch<unknown>(`/api/projects/${id}`, {\n      method: \"PUT\",\n      body: JSON.stringify(data),\n    });\n    return parseWithFallback(raw, ProjectSchema, EMPTY_PROJECT, { endpoint: \"PUT /api/projects/:id\" });\n  }",
+      "requests": [
+        {
+          "start": 4537,
+          "end": 4540,
+          "source": "this.fetch<unknown>(`/api/projects/${id}`, {\n      method: \"PUT\",\n      body: JSON.stringify(data),\n    })",
+          "transport": "this.fetch",
+          "actual_method": "\"PUT\"",
+          "inventory": [
+            {
+              "id": "client:4537",
+              "method": "PUT",
+              "path_expression": "/api/projects/${id}",
+              "route": {
+                "method": "PUT",
+                "path": "/api/projects/{id}"
+              }
+            }
+          ],
+          "mapping": "source-line matched; method checked against declaration",
+          "method_identity_verified": true
+        }
+      ]
+    },
+    {
+      "name": "deleteProject",
+      "start": 4544,
+      "end": 4546,
+      "source": "async deleteProject(id: string): Promise<void> {\n    await this.fetch(`/api/projects/${id}`, { method: \"DELETE\" });\n  }",
+      "requests": [
+        {
+          "start": 4545,
+          "end": 4545,
+          "source": "this.fetch(`/api/projects/${id}`, { method: \"DELETE\" })",
+          "transport": "this.fetch",
+          "actual_method": "\"DELETE\"",
+          "inventory": [
+            {
+              "id": "client:4545",
+              "method": "DELETE",
+              "path_expression": "/api/projects/${id}",
+              "route": {
+                "method": "DELETE",
+                "path": "/api/projects/{id}"
+              }
+            }
+          ],
+          "mapping": "source-line matched; method checked against declaration",
+          "method_identity_verified": true
+        }
+      ]
+    },
+    {
+      "name": "archiveProject",
+      "start": 4548,
+      "end": 4553,
+      "source": "async archiveProject(id: string): Promise<ArchiveProjectResponse> {\n    const raw = await this.fetch<unknown>(`/api/projects/${id}/archive`, { method: \"POST\" });\n    return parseWithFallback(raw, ArchiveProjectResponseSchema, { ...EMPTY_PROJECT, paused_autopilot_ids: [] }, {\n      endpoint: \"POST /api/projects/:id/archive\",\n    });\n  }",
+      "requests": [
+        {
+          "start": 4549,
+          "end": 4549,
+          "source": "this.fetch<unknown>(`/api/projects/${id}/archive`, { method: \"POST\" })",
+          "transport": "this.fetch",
+          "actual_method": "\"POST\"",
+          "inventory": [
+            {
+              "id": "client:4549",
+              "method": "POST",
+              "path_expression": "/api/projects/${id}/archive",
+              "route": {
+                "method": "POST",
+                "path": "/api/projects/{id}/archive"
+              }
+            }
+          ],
+          "mapping": "source-line matched; method checked against declaration",
+          "method_identity_verified": true
+        }
+      ]
+    },
+    {
+      "name": "restoreProject",
+      "start": 4555,
+      "end": 4558,
+      "source": "async restoreProject(id: string): Promise<Project> {\n    const raw = await this.fetch<unknown>(`/api/projects/${id}/restore`, { method: \"POST\" });\n    return parseWithFallback(raw, ProjectSchema, EMPTY_PROJECT, { endpoint: \"POST /api/projects/:id/restore\" });\n  }",
+      "requests": [
+        {
+          "start": 4556,
+          "end": 4556,
+          "source": "this.fetch<unknown>(`/api/projects/${id}/restore`, { method: \"POST\" })",
+          "transport": "this.fetch",
+          "actual_method": "\"POST\"",
+          "inventory": [
+            {
+              "id": "client:4556",
+              "method": "POST",
+              "path_expression": "/api/projects/${id}/restore",
+              "route": {
+                "method": "POST",
+                "path": "/api/projects/{id}/restore"
+              }
+            }
+          ],
+          "mapping": "source-line matched; method checked against declaration",
+          "method_identity_verified": true
+        }
+      ]
+    },
+    {
+      "name": "getProjectMembers",
+      "start": 4560,
+      "end": 4565,
+      "source": "async getProjectMembers(id: string): Promise<ListProjectMembersResponse> {\n    const raw = await this.fetch<unknown>(`/api/projects/${id}/members`);\n    return parseWithFallback(raw, ListProjectMembersResponseSchema, { members: [], total: 0, manager_id: null }, {\n      endpoint: \"GET /api/projects/:id/members\",\n    });\n  }",
+      "requests": [
+        {
+          "start": 4561,
+          "end": 4561,
+          "source": "this.fetch<unknown>(`/api/projects/${id}/members`)",
+          "transport": "this.fetch",
+          "actual_method": "GET",
+          "inventory": [
+            {
+              "id": "client:4561",
+              "method": "GET",
+              "path_expression": "/api/projects/${id}/members",
+              "route": {
+                "method": "GET",
+                "path": "/api/projects/{id}/members"
+              }
+            }
+          ],
+          "mapping": "source-line matched; method checked against declaration",
+          "method_identity_verified": true
+        }
+      ]
+    },
+    {
+      "name": "getProjectSubscription",
+      "start": 4567,
+      "end": 4572,
+      "source": "async getProjectSubscription(id: string): Promise<boolean> {\n    return this.parseProjectSubscription(\n      await this.fetch<unknown>(`/api/projects/${id}/subscription`),\n      \"GET /api/projects/:id/subscription\",\n    );\n  }",
+      "requests": [
+        {
+          "start": 4569,
+          "end": 4569,
+          "source": "this.fetch<unknown>(`/api/projects/${id}/subscription`)",
+          "transport": "this.fetch",
+          "actual_method": "GET",
+          "inventory": [
+            {
+              "id": "client:4569",
+              "method": "GET",
+              "path_expression": "/api/projects/${id}/subscription",
+              "route": {
+                "method": "GET",
+                "path": "/api/projects/{id}/subscription"
+              }
+            }
+          ],
+          "mapping": "source-line matched; method checked against declaration",
+          "method_identity_verified": true
+        }
+      ]
+    },
+    {
+      "name": "setProjectSubscription",
+      "start": 4574,
+      "end": 4580,
+      "source": "async setProjectSubscription(id: string, subscribed: boolean): Promise<boolean> {\n    const method = subscribed ? \"PUT\" : \"DELETE\";\n    return this.parseProjectSubscription(\n      await this.fetch<unknown>(`/api/projects/${id}/subscription`, { method }),\n      `${method} /api/projects/:id/subscription`,\n    );\n  }",
+      "requests": [
+        {
+          "start": 4577,
+          "end": 4577,
+          "source": "this.fetch<unknown>(`/api/projects/${id}/subscription`, { method })",
+          "transport": "this.fetch",
+          "actual_method": "method (subscribed ? PUT : DELETE)",
+          "inventory": [
+            {
+              "id": "client:4577",
+              "method": "PUT",
+              "path_expression": "/api/projects/${id}/subscription",
+              "route": {
+                "method": "PUT",
+                "path": "/api/projects/{id}/subscription"
+              }
+            },
+            {
+              "id": "client:4577:unsubscribe",
+              "method": "DELETE",
+              "path_expression": "/api/projects/${id}/subscription",
+              "route": {
+                "method": "DELETE",
+                "path": "/api/projects/{id}/subscription"
+              }
+            }
+          ],
+          "mapping": "source-line matched; method checked against declaration",
+          "method_identity_verified": true,
+          "method_branches": {
+            "subscribed": "PUT",
+            "otherwise": "DELETE"
+          }
+        }
+      ]
+    },
+    {
+      "name": "parseProjectSubscription",
+      "start": 4582,
+      "end": 4584,
+      "source": "private parseProjectSubscription(raw: unknown, endpoint: string): boolean {\n    return parseWithFallback(raw, ProjectSubscriptionSchema, { subscribed: false }, { endpoint }).subscribed;\n  }",
+      "requests": []
+    },
+    {
+      "name": "addProjectMembers",
+      "start": 4586,
+      "end": 4593,
+      "source": "async addProjectMembers(id: string, userIds: string[]): Promise<ListProjectMembersResponse> {\n    const raw = await this.fetch<unknown>(`/api/projects/${id}/members`, {\n      method: \"POST\", body: JSON.stringify({ user_ids: userIds }),\n    });\n    return parseWithFallback(raw, ListProjectMembersResponseSchema, { members: [], total: 0, manager_id: null }, {\n      endpoint: \"POST /api/projects/:id/members\",\n    });\n  }",
+      "requests": [
+        {
+          "start": 4587,
+          "end": 4589,
+          "source": "this.fetch<unknown>(`/api/projects/${id}/members`, {\n      method: \"POST\", body: JSON.stringify({ user_ids: userIds }),\n    })",
+          "transport": "this.fetch",
+          "actual_method": "\"POST\"",
+          "inventory": [
+            {
+              "id": "client:4587",
+              "method": "POST",
+              "path_expression": "/api/projects/${id}/members",
+              "route": {
+                "method": "POST",
+                "path": "/api/projects/{id}/members"
+              }
+            }
+          ],
+          "mapping": "source-line matched; method checked against declaration",
+          "method_identity_verified": true
+        }
+      ]
+    },
+    {
+      "name": "removeProjectMember",
+      "start": 4595,
+      "end": 4597,
+      "source": "async removeProjectMember(id: string, userId: string): Promise<void> {\n    await this.fetch(`/api/projects/${id}/members/${userId}`, { method: \"DELETE\" });\n  }",
+      "requests": [
+        {
+          "start": 4596,
+          "end": 4596,
+          "source": "this.fetch(`/api/projects/${id}/members/${userId}`, { method: \"DELETE\" })",
+          "transport": "this.fetch",
+          "actual_method": "\"DELETE\"",
+          "inventory": [
+            {
+              "id": "client:4596",
+              "method": "DELETE",
+              "path_expression": "/api/projects/${id}/members/${userId}",
+              "route": {
+                "method": "DELETE",
+                "path": "/api/projects/{id}/members/{userId}"
+              }
+            }
+          ],
+          "mapping": "source-line matched; method checked against declaration",
+          "method_identity_verified": true
+        }
+      ]
+    },
+    {
+      "name": "listPrivateProjectsForOwner",
+      "start": 4601,
+      "end": 4606,
+      "source": "async listPrivateProjectsForOwner(): Promise<ListPrivateProjectsResponse> {\n    const raw = await this.fetch<unknown>(\"/api/projects/private\");\n    return parseWithFallback(raw, ListPrivateProjectsResponseSchema, { projects: [], total: 0 }, {\n      endpoint: \"GET /api/projects/private\",\n    });\n  }",
+      "requests": [
+        {
+          "start": 4602,
+          "end": 4602,
+          "source": "this.fetch<unknown>(\"/api/projects/private\")",
+          "transport": "this.fetch",
+          "actual_method": "GET",
+          "inventory": [
+            {
+              "id": "client:4602",
+              "method": "GET",
+              "path_expression": "/api/projects/private",
+              "route": {
+                "method": "GET",
+                "path": "/api/projects/private"
+              }
+            }
+          ],
+          "mapping": "source-line matched; method checked against declaration",
+          "method_identity_verified": true
+        }
+      ]
+    },
+    {
+      "name": "joinPrivateProject",
+      "start": 4608,
+      "end": 4611,
+      "source": "async joinPrivateProject(id: string): Promise<Project> {\n    const raw = await this.fetch<unknown>(`/api/projects/${id}/join`, { method: \"POST\" });\n    return parseWithFallback(raw, ProjectSchema, EMPTY_PROJECT, { endpoint: \"POST /api/projects/:id/join\" });\n  }",
+      "requests": [
+        {
+          "start": 4609,
+          "end": 4609,
+          "source": "this.fetch<unknown>(`/api/projects/${id}/join`, { method: \"POST\" })",
+          "transport": "this.fetch",
+          "actual_method": "\"POST\"",
+          "inventory": [
+            {
+              "id": "client:4609",
+              "method": "POST",
+              "path_expression": "/api/projects/${id}/join",
+              "route": {
+                "method": "POST",
+                "path": "/api/projects/{id}/join"
+              }
+            }
+          ],
+          "mapping": "source-line matched; method checked against declaration",
+          "method_identity_verified": true
+        }
+      ]
+    },
+    {
+      "name": "listProjectResources",
+      "start": 4614,
+      "end": 4618,
+      "source": "async listProjectResources(\n    projectId: string,\n  ): Promise<ListProjectResourcesResponse> {\n    return this.fetch(`/api/projects/${projectId}/resources`);\n  }",
+      "requests": [
+        {
+          "start": 4617,
+          "end": 4617,
+          "source": "this.fetch(`/api/projects/${projectId}/resources`)",
+          "transport": "this.fetch",
+          "actual_method": "GET",
+          "inventory": [
+            {
+              "id": "client:4617",
+              "method": "GET",
+              "path_expression": "/api/projects/${projectId}/resources",
+              "route": {
+                "method": "GET",
+                "path": "/api/projects/{id}/resources"
+              }
+            }
+          ],
+          "mapping": "source-line matched; method checked against declaration",
+          "method_identity_verified": true
+        }
+      ]
+    },
+    {
+      "name": "createProjectResource",
+      "start": 4620,
+      "end": 4628,
+      "source": "async createProjectResource(\n    projectId: string,\n    data: CreateProjectResourceRequest,\n  ): Promise<ProjectResource> {\n    return this.fetch(`/api/projects/${projectId}/resources`, {\n      method: \"POST\",\n      body: JSON.stringify(data),\n    });\n  }",
+      "requests": [
+        {
+          "start": 4624,
+          "end": 4627,
+          "source": "this.fetch(`/api/projects/${projectId}/resources`, {\n      method: \"POST\",\n      body: JSON.stringify(data),\n    })",
+          "transport": "this.fetch",
+          "actual_method": "\"POST\"",
+          "inventory": [
+            {
+              "id": "client:4624",
+              "method": "POST",
+              "path_expression": "/api/projects/${projectId}/resources",
+              "route": {
+                "method": "POST",
+                "path": "/api/projects/{id}/resources"
+              }
+            }
+          ],
+          "mapping": "source-line matched; method checked against declaration",
+          "method_identity_verified": true
+        }
+      ]
+    },
+    {
+      "name": "updateProjectResource",
+      "start": 4630,
+      "end": 4639,
+      "source": "async updateProjectResource(\n    projectId: string,\n    resourceId: string,\n    data: UpdateProjectResourceRequest,\n  ): Promise<ProjectResource> {\n    return this.fetch(`/api/projects/${projectId}/resources/${resourceId}`, {\n      method: \"PUT\",\n      body: JSON.stringify(data),\n    });\n  }",
+      "requests": [
+        {
+          "start": 4635,
+          "end": 4638,
+          "source": "this.fetch(`/api/projects/${projectId}/resources/${resourceId}`, {\n      method: \"PUT\",\n      body: JSON.stringify(data),\n    })",
+          "transport": "this.fetch",
+          "actual_method": "\"PUT\"",
+          "inventory": [
+            {
+              "id": "client:4635",
+              "method": "PUT",
+              "path_expression": "/api/projects/${projectId}/resources/${resourceId}",
+              "route": {
+                "method": "PUT",
+                "path": "/api/projects/{id}/resources/{resourceId}"
+              }
+            }
+          ],
+          "mapping": "source-line matched; method checked against declaration",
+          "method_identity_verified": true
+        }
+      ]
+    },
+    {
+      "name": "deleteProjectResource",
+      "start": 4641,
+      "end": 4648,
+      "source": "async deleteProjectResource(\n    projectId: string,\n    resourceId: string,\n  ): Promise<void> {\n    await this.fetch(`/api/projects/${projectId}/resources/${resourceId}`, {\n      method: \"DELETE\",\n    });\n  }",
+      "requests": [
+        {
+          "start": 4645,
+          "end": 4647,
+          "source": "this.fetch(`/api/projects/${projectId}/resources/${resourceId}`, {\n      method: \"DELETE\",\n    })",
+          "transport": "this.fetch",
+          "actual_method": "\"DELETE\"",
+          "inventory": [
+            {
+              "id": "client:4645",
+              "method": "DELETE",
+              "path_expression": "/api/projects/${projectId}/resources/${resourceId}",
+              "route": {
+                "method": "DELETE",
+                "path": "/api/projects/{id}/resources/{resourceId}"
+              }
+            }
+          ],
+          "mapping": "source-line matched; method checked against declaration",
+          "method_identity_verified": true
+        }
+      ]
+    },
+    {
+      "name": "listLabels",
+      "start": 4651,
+      "end": 4656,
+      "source": "async listLabels(resourceType: LabelResourceType = \"issue\"): Promise<ListLabelsResponse> {\n    const raw = await this.fetch<unknown>(`/api/labels?resource_type=${resourceType}`);\n    return parseWithFallback(raw, ListLabelsResponseSchema, EMPTY_LIST_LABELS_RESPONSE, {\n      endpoint: \"GET /api/labels\",\n    });\n  }",
+      "requests": [
+        {
+          "start": 4652,
+          "end": 4652,
+          "source": "this.fetch<unknown>(`/api/labels?resource_type=${resourceType}`)",
+          "transport": "this.fetch",
+          "actual_method": "GET",
+          "inventory": [
+            {
+              "id": "client:4652",
+              "method": "GET",
+              "path_expression": "/api/labels?resource_type=${resourceType}",
+              "route": {
+                "method": "GET",
+                "path": "/api/labels"
+              }
+            }
+          ],
+          "mapping": "source-line matched; method checked against declaration",
+          "method_identity_verified": true
+        }
+      ]
+    },
+    {
+      "name": "getLabel",
+      "start": 4658,
+      "end": 4663,
+      "source": "async getLabel(id: string): Promise<Label> {\n    const raw = await this.fetch<unknown>(`/api/labels/${id}`);\n    return parseWithFallback(raw, LabelSchema, EMPTY_LABEL, {\n      endpoint: \"GET /api/labels/{id}\",\n    });\n  }",
+      "requests": [
+        {
+          "start": 4659,
+          "end": 4659,
+          "source": "this.fetch<unknown>(`/api/labels/${id}`)",
+          "transport": "this.fetch",
+          "actual_method": "GET",
+          "inventory": [
+            {
+              "id": "client:4659",
+              "method": "GET",
+              "path_expression": "/api/labels/${id}",
+              "route": {
+                "method": "GET",
+                "path": "/api/labels/{id}"
+              }
+            }
+          ],
+          "mapping": "source-line matched; method checked against declaration",
+          "method_identity_verified": true
+        }
+      ]
+    },
+    {
+      "name": "createLabel",
+      "start": 4665,
+      "end": 4673,
+      "source": "async createLabel(data: CreateLabelRequest): Promise<Label> {\n    const raw = await this.fetch<unknown>(`/api/labels`, {\n      method: \"POST\",\n      body: JSON.stringify(data),\n    });\n    return parseWithFallback(raw, LabelSchema, EMPTY_LABEL, {\n      endpoint: \"POST /api/labels\",\n    });\n  }",
+      "requests": [
+        {
+          "start": 4666,
+          "end": 4669,
+          "source": "this.fetch<unknown>(`/api/labels`, {\n      method: \"POST\",\n      body: JSON.stringify(data),\n    })",
+          "transport": "this.fetch",
+          "actual_method": "\"POST\"",
+          "inventory": [
+            {
+              "id": "client:4666",
+              "method": "POST",
+              "path_expression": "/api/labels",
+              "route": {
+                "method": "POST",
+                "path": "/api/labels"
+              }
+            }
+          ],
+          "mapping": "source-line matched; method checked against declaration",
+          "method_identity_verified": true
+        }
+      ]
+    },
+    {
+      "name": "updateLabel",
+      "start": 4675,
+      "end": 4683,
+      "source": "async updateLabel(id: string, data: UpdateLabelRequest): Promise<Label> {\n    const raw = await this.fetch<unknown>(`/api/labels/${id}`, {\n      method: \"PUT\",\n      body: JSON.stringify(data),\n    });\n    return parseWithFallback(raw, LabelSchema, EMPTY_LABEL, {\n      endpoint: \"PUT /api/labels/{id}\",\n    });\n  }",
+      "requests": [
+        {
+          "start": 4676,
+          "end": 4679,
+          "source": "this.fetch<unknown>(`/api/labels/${id}`, {\n      method: \"PUT\",\n      body: JSON.stringify(data),\n    })",
+          "transport": "this.fetch",
+          "actual_method": "\"PUT\"",
+          "inventory": [
+            {
+              "id": "client:4676",
+              "method": "PUT",
+              "path_expression": "/api/labels/${id}",
+              "route": {
+                "method": "PUT",
+                "path": "/api/labels/{id}"
+              }
+            }
+          ],
+          "mapping": "source-line matched; method checked against declaration",
+          "method_identity_verified": true
+        }
+      ]
+    },
+    {
+      "name": "deleteLabel",
+      "start": 4685,
+      "end": 4687,
+      "source": "async deleteLabel(id: string): Promise<void> {\n    await this.fetch(`/api/labels/${id}`, { method: \"DELETE\" });\n  }",
+      "requests": [
+        {
+          "start": 4686,
+          "end": 4686,
+          "source": "this.fetch(`/api/labels/${id}`, { method: \"DELETE\" })",
+          "transport": "this.fetch",
+          "actual_method": "\"DELETE\"",
+          "inventory": [
+            {
+              "id": "client:4686",
+              "method": "DELETE",
+              "path_expression": "/api/labels/${id}",
+              "route": {
+                "method": "DELETE",
+                "path": "/api/labels/{id}"
+              }
+            }
+          ],
+          "mapping": "source-line matched; method checked against declaration",
+          "method_identity_verified": true
+        }
+      ]
+    },
+    {
+      "name": "listIssueWorkflows",
+      "start": 4691,
+      "end": 4696,
+      "source": "async listIssueWorkflows(): Promise<ListIssueWorkflowsResponse> {\n    const raw = await this.fetch<unknown>(`/api/issue-workflows`);\n    return parseWithFallback(raw, ListIssueWorkflowsResponseSchema, EMPTY_LIST_ISSUE_WORKFLOWS_RESPONSE, {\n      endpoint: \"GET /api/issue-workflows\",\n    });\n  }",
+      "requests": [
+        {
+          "start": 4692,
+          "end": 4692,
+          "source": "this.fetch<unknown>(`/api/issue-workflows`)",
+          "transport": "this.fetch",
+          "actual_method": "GET",
+          "inventory": [
+            {
+              "id": "client:4692",
+              "method": "GET",
+              "path_expression": "/api/issue-workflows",
+              "route": {
+                "method": "GET",
+                "path": "/api/issue-workflows"
+              }
+            }
+          ],
+          "mapping": "source-line matched; method checked against declaration",
+          "method_identity_verified": true
+        }
+      ]
+    },
+    {
+      "name": "createIssueWorkflow",
+      "start": 4698,
+      "end": 4706,
+      "source": "async createIssueWorkflow(data: IssueWorkflowWriteRequest): Promise<IssueWorkflow> {\n    const raw = await this.fetch<unknown>(`/api/issue-workflows`, {\n      method: \"POST\",\n      body: JSON.stringify(data),\n    });\n    return parseWithFallback(raw, IssueWorkflowSchema, EMPTY_ISSUE_WORKFLOW, {\n      endpoint: \"POST /api/issue-workflows\",\n    });\n  }",
+      "requests": [
+        {
+          "start": 4699,
+          "end": 4702,
+          "source": "this.fetch<unknown>(`/api/issue-workflows`, {\n      method: \"POST\",\n      body: JSON.stringify(data),\n    })",
+          "transport": "this.fetch",
+          "actual_method": "\"POST\"",
+          "inventory": [
+            {
+              "id": "client:4699",
+              "method": "POST",
+              "path_expression": "/api/issue-workflows",
+              "route": {
+                "method": "POST",
+                "path": "/api/issue-workflows"
+              }
+            }
+          ],
+          "mapping": "source-line matched; method checked against declaration",
+          "method_identity_verified": true
+        }
+      ]
+    },
+    {
+      "name": "updateIssueWorkflow",
+      "start": 4714,
+      "end": 4722,
+      "source": "async updateIssueWorkflow(id: string, data: IssueWorkflowWriteRequest): Promise<IssueWorkflow> {\n    const raw = await this.fetch<unknown>(`/api/issue-workflows/${id}`, {\n      method: \"PATCH\",\n      body: JSON.stringify({ ...data, dry_run: false }),\n    });\n    return parseWithFallback(raw, IssueWorkflowSchema, EMPTY_ISSUE_WORKFLOW, {\n      endpoint: \"PATCH /api/issue-workflows/{id}\",\n    });\n  }",
+      "requests": [
+        {
+          "start": 4715,
+          "end": 4718,
+          "source": "this.fetch<unknown>(`/api/issue-workflows/${id}`, {\n      method: \"PATCH\",\n      body: JSON.stringify({ ...data, dry_run: false }),\n    })",
+          "transport": "this.fetch",
+          "actual_method": "\"PATCH\"",
+          "inventory": [
+            {
+              "id": "client:4715",
+              "method": "PATCH",
+              "path_expression": "/api/issue-workflows/${id}",
+              "route": {
+                "method": "PATCH",
+                "path": "/api/issue-workflows/{id}"
+              }
+            }
+          ],
+          "mapping": "source-line matched; method checked against declaration",
+          "method_identity_verified": true
+        }
+      ]
+    },
+    {
+      "name": "dryRunIssueWorkflowUpdate",
+      "start": 4724,
+      "end": 4732,
+      "source": "async dryRunIssueWorkflowUpdate(id: string, data: IssueWorkflowWriteRequest): Promise<IssueWorkflowDryRunResponse> {\n    const raw = await this.fetch<unknown>(`/api/issue-workflows/${id}`, {\n      method: \"PATCH\",\n      body: JSON.stringify({ ...data, dry_run: true }),\n    });\n    return parseWithFallback(raw, IssueWorkflowDryRunResponseSchema, EMPTY_ISSUE_WORKFLOW_DRY_RUN, {\n      endpoint: \"PATCH /api/issue-workflows/{id} (dry run)\",\n    });\n  }",
+      "requests": [
+        {
+          "start": 4725,
+          "end": 4728,
+          "source": "this.fetch<unknown>(`/api/issue-workflows/${id}`, {\n      method: \"PATCH\",\n      body: JSON.stringify({ ...data, dry_run: true }),\n    })",
+          "transport": "this.fetch",
+          "actual_method": "\"PATCH\"",
+          "inventory": [
+            {
+              "id": "client:4725",
+              "method": "PATCH",
+              "path_expression": "/api/issue-workflows/${id}",
+              "route": {
+                "method": "PATCH",
+                "path": "/api/issue-workflows/{id}"
+              }
+            }
+          ],
+          "mapping": "source-line matched; method checked against declaration",
+          "method_identity_verified": true
+        }
+      ]
+    },
+    {
+      "name": "deleteIssueWorkflow",
+      "start": 4734,
+      "end": 4736,
+      "source": "async deleteIssueWorkflow(id: string): Promise<void> {\n    await this.fetch(`/api/issue-workflows/${id}`, { method: \"DELETE\" });\n  }",
+      "requests": [
+        {
+          "start": 4735,
+          "end": 4735,
+          "source": "this.fetch(`/api/issue-workflows/${id}`, { method: \"DELETE\" })",
+          "transport": "this.fetch",
+          "actual_method": "\"DELETE\"",
+          "inventory": [
+            {
+              "id": "client:4735",
+              "method": "DELETE",
+              "path_expression": "/api/issue-workflows/${id}",
+              "route": {
+                "method": "DELETE",
+                "path": "/api/issue-workflows/{id}"
+              }
+            }
+          ],
+          "mapping": "source-line matched; method checked against declaration",
+          "method_identity_verified": true
+        }
+      ]
+    },
+    {
+      "name": "previewWorkflowBrief",
+      "start": 4742,
+      "end": 4754,
+      "source": "async previewWorkflowBrief(\n    workflowId: string,\n    data: SetWorkflowHandoffRequest & { status_key: string; project_id?: string },\n  ): Promise<string> {\n    const raw = await this.fetch<unknown>(`/api/issue-workflows/${workflowId}/brief`, {\n      method: \"POST\",\n      body: JSON.stringify(data),\n    });\n    const parsed = parseWithFallback(raw, IssueWorkflowBriefPreviewSchema, { brief: \"\" }, {\n      endpoint: \"POST /api/issue-workflows/{id}/brief\",\n    });\n    return parsed.brief;\n  }",
+      "requests": [
+        {
+          "start": 4746,
+          "end": 4749,
+          "source": "this.fetch<unknown>(`/api/issue-workflows/${workflowId}/brief`, {\n      method: \"POST\",\n      body: JSON.stringify(data),\n    })",
+          "transport": "this.fetch",
+          "actual_method": "\"POST\"",
+          "inventory": [
+            {
+              "id": "client:4746",
+              "method": "POST",
+              "path_expression": "/api/issue-workflows/${workflowId}/brief",
+              "route": {
+                "method": "POST",
+                "path": "/api/issue-workflows/{id}/brief"
+              }
+            }
+          ],
+          "mapping": "source-line matched; method checked against declaration",
+          "method_identity_verified": true
+        }
+      ]
+    },
+    {
+      "name": "setWorkflowHandoff",
+      "start": 4762,
+      "end": 4776,
+      "source": "async setWorkflowHandoff(\n    workflowId: string,\n    statusKey: string,\n    data: SetWorkflowHandoffRequest,\n    copyForProjectId?: string,\n  ): Promise<IssueWorkflow> {\n    const body = copyForProjectId ? { ...data, copy_for_project_id: copyForProjectId } : data;\n    const raw = await this.fetch<unknown>(\n      `/api/issue-workflows/${workflowId}/handoffs/${encodeURIComponent(statusKey)}`,\n      { method: \"PUT\", body: JSON.stringify(body) },\n    );\n    return parseWithFallback(raw, IssueWorkflowSchema, EMPTY_ISSUE_WORKFLOW, {\n      endpoint: \"PUT /api/issue-workflows/{id}/handoffs/{status}\",\n    });\n  }",
+      "requests": [
+        {
+          "start": 4769,
+          "end": 4772,
+          "source": "this.fetch<unknown>(\n      `/api/issue-workflows/${workflowId}/handoffs/${encodeURIComponent(statusKey)}`,\n      { method: \"PUT\", body: JSON.stringify(body) },\n    )",
+          "transport": "this.fetch",
+          "actual_method": "\"PUT\"",
+          "inventory": [
+            {
+              "id": "client:4769",
+              "method": "PUT",
+              "path_expression": "/api/issue-workflows/${workflowId}/handoffs/${encodeURIComponent(statusKey)}",
+              "route": {
+                "method": "PUT",
+                "path": "/api/issue-workflows/{id}/handoffs/{status}"
+              }
+            }
+          ],
+          "mapping": "source-line matched; method checked against declaration",
+          "method_identity_verified": true
+        }
+      ]
+    },
+    {
+      "name": "previewWorkflowHandoff",
+      "start": 4785,
+      "end": 4793,
+      "source": "async previewWorkflowHandoff(issueId: string, status: string, projectId?: string): Promise<WorkflowHandoffPreview> {\n    const query = new URLSearchParams();\n    if (status) query.set(\"status\", status);\n    if (projectId) query.set(\"project_id\", projectId);\n    const raw = await this.fetch<unknown>(`/api/issues/${issueId}/workflow-handoff?${query.toString()}`);\n    return parseWithFallback(raw, WorkflowHandoffPreviewSchema, EMPTY_WORKFLOW_HANDOFF_PREVIEW, {\n      endpoint: \"GET /api/issues/{id}/workflow-handoff\",\n    });\n  }",
+      "requests": [
+        {
+          "start": 4789,
+          "end": 4789,
+          "source": "this.fetch<unknown>(`/api/issues/${issueId}/workflow-handoff?${query.toString()}`)",
+          "transport": "this.fetch",
+          "actual_method": "GET",
+          "inventory": [
+            {
+              "id": "client:4789",
+              "method": "GET",
+              "path_expression": "/api/issues/${issueId}/workflow-handoff?${query.toString()}",
+              "route": {
+                "method": "GET",
+                "path": "/api/issues/{id}/workflow-handoff"
+              }
+            }
+          ],
+          "mapping": "source-line matched; method checked against declaration",
+          "method_identity_verified": true
+        }
+      ]
+    },
+    {
+      "name": "setProjectWorkflow",
+      "start": 4799,
+      "end": 4804,
+      "source": "async setProjectWorkflow(projectId: string, data: SetProjectWorkflowRequest): Promise<void> {\n    await this.fetch<unknown>(`/api/projects/${projectId}/workflow`, {\n      method: \"POST\",\n      body: JSON.stringify({ ...data, dry_run: false }),\n    });\n  }",
+      "requests": [
+        {
+          "start": 4800,
+          "end": 4803,
+          "source": "this.fetch<unknown>(`/api/projects/${projectId}/workflow`, {\n      method: \"POST\",\n      body: JSON.stringify({ ...data, dry_run: false }),\n    })",
+          "transport": "this.fetch",
+          "actual_method": "\"POST\"",
+          "inventory": [
+            {
+              "id": "client:4800",
+              "method": "POST",
+              "path_expression": "/api/projects/${projectId}/workflow",
+              "route": {
+                "method": "POST",
+                "path": "/api/projects/{id}/workflow"
+              }
+            }
+          ],
+          "mapping": "source-line matched; method checked against declaration",
+          "method_identity_verified": true
+        }
+      ]
+    },
+    {
+      "name": "dryRunProjectWorkflow",
+      "start": 4806,
+      "end": 4815,
+      "source": "async dryRunProjectWorkflow(projectId: string, workflowId: string | null): Promise<IssueWorkflowDryRunResponse> {\n    const raw = await this.fetch<unknown>(`/api/projects/${projectId}/workflow`, {\n      method: \"POST\",\n      readOnly: true,\n      body: JSON.stringify({ workflow_id: workflowId, dry_run: true }),\n    });\n    return parseWithFallback(raw, IssueWorkflowDryRunResponseSchema, EMPTY_ISSUE_WORKFLOW_DRY_RUN, {\n      endpoint: \"POST /api/projects/{id}/workflow (dry run)\",\n    });\n  }",
+      "requests": [
+        {
+          "start": 4807,
+          "end": 4811,
+          "source": "this.fetch<unknown>(`/api/projects/${projectId}/workflow`, {\n      method: \"POST\",\n      readOnly: true,\n      body: JSON.stringify({ workflow_id: workflowId, dry_run: true }),\n    })",
+          "transport": "this.fetch",
+          "actual_method": "\"POST\"",
+          "inventory": [
+            {
+              "id": "client:4807",
+              "method": "POST",
+              "path_expression": "/api/projects/${projectId}/workflow",
+              "route": {
+                "method": "POST",
+                "path": "/api/projects/{id}/workflow"
+              }
+            }
+          ],
+          "mapping": "source-line matched; method checked against declaration",
+          "method_identity_verified": true
+        }
+      ]
+    },
+    {
+      "name": "listIssueStatuses",
+      "start": 4819,
+      "end": 4825,
+      "source": "async listIssueStatuses(includeArchived = false): Promise<ListIssueStatusesResponse> {\n    const query = includeArchived ? \"?include_archived=true\" : \"\";\n    const raw = await this.fetch<unknown>(`/api/issue-statuses${query}`);\n    return parseWithFallback(raw, ListIssueStatusesResponseSchema, EMPTY_LIST_ISSUE_STATUSES_RESPONSE, {\n      endpoint: \"GET /api/issue-statuses\",\n    });\n  }",
+      "requests": [
+        {
+          "start": 4821,
+          "end": 4821,
+          "source": "this.fetch<unknown>(`/api/issue-statuses${query}`)",
+          "transport": "this.fetch",
+          "actual_method": "GET",
+          "inventory": [
+            {
+              "id": "client:4821",
+              "method": "GET",
+              "path_expression": "/api/issue-statuses${query}",
+              "route": {
+                "method": "GET",
+                "path": "/api/issue-statuses"
+              }
+            }
+          ],
+          "mapping": "source-line matched; method checked against declaration",
+          "method_identity_verified": true
+        }
+      ]
+    },
+    {
+      "name": "createIssueStatus",
+      "start": 4827,
+      "end": 4835,
+      "source": "async createIssueStatus(data: CreateIssueStatusRequest): Promise<IssueStatusEntry> {\n    const raw = await this.fetch<unknown>(`/api/issue-statuses`, {\n      method: \"POST\",\n      body: JSON.stringify(data),\n    });\n    return parseWithFallback(raw, IssueStatusEntrySchema, EMPTY_ISSUE_STATUS_ENTRY, {\n      endpoint: \"POST /api/issue-statuses\",\n    });\n  }",
+      "requests": [
+        {
+          "start": 4828,
+          "end": 4831,
+          "source": "this.fetch<unknown>(`/api/issue-statuses`, {\n      method: \"POST\",\n      body: JSON.stringify(data),\n    })",
+          "transport": "this.fetch",
+          "actual_method": "\"POST\"",
+          "inventory": [
+            {
+              "id": "client:4828",
+              "method": "POST",
+              "path_expression": "/api/issue-statuses",
+              "route": {
+                "method": "POST",
+                "path": "/api/issue-statuses"
+              }
+            }
+          ],
+          "mapping": "source-line matched; method checked against declaration",
+          "method_identity_verified": true
+        }
+      ]
+    },
+    {
+      "name": "updateIssueStatus",
+      "start": 4837,
+      "end": 4845,
+      "source": "async updateIssueStatus(id: string, data: UpdateIssueStatusRequest): Promise<IssueStatusEntry> {\n    const raw = await this.fetch<unknown>(`/api/issue-statuses/${id}`, {\n      method: \"PATCH\",\n      body: JSON.stringify(data),\n    });\n    return parseWithFallback(raw, IssueStatusEntrySchema, EMPTY_ISSUE_STATUS_ENTRY, {\n      endpoint: \"PATCH /api/issue-statuses/{id}\",\n    });\n  }",
+      "requests": [
+        {
+          "start": 4838,
+          "end": 4841,
+          "source": "this.fetch<unknown>(`/api/issue-statuses/${id}`, {\n      method: \"PATCH\",\n      body: JSON.stringify(data),\n    })",
+          "transport": "this.fetch",
+          "actual_method": "\"PATCH\"",
+          "inventory": [
+            {
+              "id": "client:4838",
+              "method": "PATCH",
+              "path_expression": "/api/issue-statuses/${id}",
+              "route": {
+                "method": "PATCH",
+                "path": "/api/issue-statuses/{id}"
+              }
+            }
+          ],
+          "mapping": "source-line matched; method checked against declaration",
+          "method_identity_verified": true
+        }
+      ]
+    },
+    {
+      "name": "reorderIssueStatuses",
+      "start": 4853,
+      "end": 4865,
+      "source": "async reorderIssueStatuses(\n    category: IssueStatusCategory,\n    ids: string[],\n    includeSystem = false,\n  ): Promise<ListIssueStatusesResponse> {\n    const raw = await this.fetch<unknown>(`/api/issue-statuses/reorder`, {\n      method: \"PATCH\",\n      body: JSON.stringify({ category, ids, include_system: includeSystem }),\n    });\n    return parseWithFallback(raw, ListIssueStatusesResponseSchema, EMPTY_LIST_ISSUE_STATUSES_RESPONSE, {\n      endpoint: \"PATCH /api/issue-statuses/reorder\",\n    });\n  }",
+      "requests": [
+        {
+          "start": 4858,
+          "end": 4861,
+          "source": "this.fetch<unknown>(`/api/issue-statuses/reorder`, {\n      method: \"PATCH\",\n      body: JSON.stringify({ category, ids, include_system: includeSystem }),\n    })",
+          "transport": "this.fetch",
+          "actual_method": "\"PATCH\"",
+          "inventory": [
+            {
+              "id": "client:4858",
+              "method": "PATCH",
+              "path_expression": "/api/issue-statuses/reorder",
+              "route": {
+                "method": "PATCH",
+                "path": "/api/issue-statuses/reorder"
+              }
+            }
+          ],
+          "mapping": "source-line matched; method checked against declaration",
+          "method_identity_verified": true
+        }
+      ]
+    },
+    {
+      "name": "archiveIssueStatus",
+      "start": 4872,
+      "end": 4877,
+      "source": "async archiveIssueStatus(id: string): Promise<IssueStatusEntry> {\n    const raw = await this.fetch<unknown>(`/api/issue-statuses/${id}`, { method: \"DELETE\" });\n    return parseWithFallback(raw, IssueStatusEntrySchema, EMPTY_ISSUE_STATUS_ENTRY, {\n      endpoint: \"DELETE /api/issue-statuses/{id}\",\n    });\n  }",
+      "requests": [
+        {
+          "start": 4873,
+          "end": 4873,
+          "source": "this.fetch<unknown>(`/api/issue-statuses/${id}`, { method: \"DELETE\" })",
+          "transport": "this.fetch",
+          "actual_method": "\"DELETE\"",
+          "inventory": [
+            {
+              "id": "client:4873",
+              "method": "DELETE",
+              "path_expression": "/api/issue-statuses/${id}",
+              "route": {
+                "method": "DELETE",
+                "path": "/api/issue-statuses/{id}"
+              }
+            }
+          ],
+          "mapping": "source-line matched; method checked against declaration",
+          "method_identity_verified": true
+        }
+      ]
+    },
+    {
+      "name": "listProperties",
+      "start": 4880,
+      "end": 4899,
+      "source": "async listProperties(includeArchived = false): Promise<ListPropertiesResponse> {\n    const suffix = includeArchived ? \"?include_archived=true\" : \"\";\n    let raw: unknown;\n    try {\n      raw = await this.fetch<unknown>(`/api/properties${suffix}`);\n    } catch (error) {\n      // A backend predating custom properties 404s here (e.g. after a\n      // server-only rollback). Treat it as an empty catalog: the property\n      // UI sections disappear and the active-catalog reconciliation strips\n      // persisted property sorts/filters, so no property params ever reach\n      // the old server. Other errors keep normal query-error semantics.\n      if (error instanceof Error && \"status\" in error && (error as { status?: number }).status === 404) {\n        return EMPTY_LIST_PROPERTIES_RESPONSE;\n      }\n      throw error;\n    }\n    return parseWithFallback(raw, ListPropertiesResponseSchema, EMPTY_LIST_PROPERTIES_RESPONSE, {\n      endpoint: \"GET /api/properties\",\n    });\n  }",
+      "requests": [
+        {
+          "start": 4884,
+          "end": 4884,
+          "source": "this.fetch<unknown>(`/api/properties${suffix}`)",
+          "transport": "this.fetch",
+          "actual_method": "GET",
+          "inventory": [
+            {
+              "id": "client:4884",
+              "method": "GET",
+              "path_expression": "/api/properties${suffix}",
+              "route": {
+                "method": "GET",
+                "path": "/api/properties"
+              }
+            }
+          ],
+          "mapping": "source-line matched; method checked against declaration",
+          "method_identity_verified": true
+        }
+      ]
+    },
+    {
+      "name": "listQuickActions",
+      "start": 4913,
+      "end": 4927,
+      "source": "async listQuickActions(opts?: { includeArchived?: boolean }): Promise<ListQuickActionsResponse> {\n    const suffix = opts?.includeArchived === true ? \"?include_archived=true\" : \"\";\n    let raw: unknown;\n    try {\n      raw = await this.fetch<unknown>(`/api/quick-actions${suffix}`);\n    } catch (error) {\n      if (error instanceof Error && \"status\" in error && (error as { status?: number }).status === 404) {\n        return EMPTY_LIST_QUICK_ACTIONS_RESPONSE;\n      }\n      throw error;\n    }\n    return parseWithFallback(raw, ListQuickActionsResponseSchema, EMPTY_LIST_QUICK_ACTIONS_RESPONSE, {\n      endpoint: \"GET /api/quick-actions\",\n    });\n  }",
+      "requests": [
+        {
+          "start": 4917,
+          "end": 4917,
+          "source": "this.fetch<unknown>(`/api/quick-actions${suffix}`)",
+          "transport": "this.fetch",
+          "actual_method": "GET",
+          "inventory": [
+            {
+              "id": "client:4917",
+              "method": "GET",
+              "path_expression": "/api/quick-actions${suffix}",
+              "route": {
+                "method": "GET",
+                "path": "/api/quick-actions"
+              }
+            }
+          ],
+          "mapping": "source-line matched; method checked against declaration",
+          "method_identity_verified": true
+        }
+      ]
+    },
+    {
+      "name": "createQuickAction",
+      "start": 4929,
+      "end": 4937,
+      "source": "async createQuickAction(data: CreateQuickActionRequest): Promise<QuickAction> {\n    const raw = await this.fetch<unknown>(`/api/quick-actions`, {\n      method: \"POST\",\n      body: JSON.stringify(data),\n    });\n    return parseWithFallback(raw, QuickActionSchema, EMPTY_QUICK_ACTION, {\n      endpoint: \"POST /api/quick-actions\",\n    });\n  }",
+      "requests": [
+        {
+          "start": 4930,
+          "end": 4933,
+          "source": "this.fetch<unknown>(`/api/quick-actions`, {\n      method: \"POST\",\n      body: JSON.stringify(data),\n    })",
+          "transport": "this.fetch",
+          "actual_method": "\"POST\"",
+          "inventory": [
+            {
+              "id": "client:4930",
+              "method": "POST",
+              "path_expression": "/api/quick-actions",
+              "route": {
+                "method": "POST",
+                "path": "/api/quick-actions"
+              }
+            }
+          ],
+          "mapping": "source-line matched; method checked against declaration",
+          "method_identity_verified": true
+        }
+      ]
+    },
+    {
+      "name": "updateQuickAction",
+      "start": 4939,
+      "end": 4947,
+      "source": "async updateQuickAction(id: string, data: UpdateQuickActionRequest): Promise<QuickAction> {\n    const raw = await this.fetch<unknown>(`/api/quick-actions/${id}`, {\n      method: \"PATCH\",\n      body: JSON.stringify(data),\n    });\n    return parseWithFallback(raw, QuickActionSchema, EMPTY_QUICK_ACTION, {\n      endpoint: \"PATCH /api/quick-actions/{id}\",\n    });\n  }",
+      "requests": [
+        {
+          "start": 4940,
+          "end": 4943,
+          "source": "this.fetch<unknown>(`/api/quick-actions/${id}`, {\n      method: \"PATCH\",\n      body: JSON.stringify(data),\n    })",
+          "transport": "this.fetch",
+          "actual_method": "\"PATCH\"",
+          "inventory": [
+            {
+              "id": "client:4940",
+              "method": "PATCH",
+              "path_expression": "/api/quick-actions/${id}",
+              "route": {
+                "method": "PATCH",
+                "path": "/api/quick-actions/{id}"
+              }
+            }
+          ],
+          "mapping": "source-line matched; method checked against declaration",
+          "method_identity_verified": true
+        }
+      ]
+    },
+    {
+      "name": "deleteQuickAction",
+      "start": 4949,
+      "end": 4951,
+      "source": "async deleteQuickAction(id: string): Promise<void> {\n    await this.fetch<void>(`/api/quick-actions/${id}`, { method: \"DELETE\" });\n  }",
+      "requests": [
+        {
+          "start": 4950,
+          "end": 4950,
+          "source": "this.fetch<void>(`/api/quick-actions/${id}`, { method: \"DELETE\" })",
+          "transport": "this.fetch",
+          "actual_method": "\"DELETE\"",
+          "inventory": [
+            {
+              "id": "client:4950",
+              "method": "DELETE",
+              "path_expression": "/api/quick-actions/${id}",
+              "route": {
+                "method": "DELETE",
+                "path": "/api/quick-actions/{id}"
+              }
+            }
+          ],
+          "mapping": "source-line matched; method checked against declaration",
+          "method_identity_verified": true
+        }
+      ]
+    },
+    {
+      "name": "runQuickAction",
+      "start": 4959,
+      "end": 4966,
+      "source": "async runQuickAction(issueId: string, quickActionId: string): Promise<Comment> {\n    const raw = await this.fetch<unknown>(`/api/issues/${issueId}/quick-actions/${quickActionId}/run`, {\n      method: \"POST\",\n    });\n    return parseWithFallback(raw, CommentSchema, EMPTY_COMMENT, {\n      endpoint: \"POST /api/issues/{id}/quick-actions/{quickActionId}/run\",\n    });\n  }",
+      "requests": [
+        {
+          "start": 4960,
+          "end": 4962,
+          "source": "this.fetch<unknown>(`/api/issues/${issueId}/quick-actions/${quickActionId}/run`, {\n      method: \"POST\",\n    })",
+          "transport": "this.fetch",
+          "actual_method": "\"POST\"",
+          "inventory": [
+            {
+              "id": "client:4960",
+              "method": "POST",
+              "path_expression": "/api/issues/${issueId}/quick-actions/${quickActionId}/run",
+              "route": {
+                "method": "POST",
+                "path": "/api/issues/{id}/quick-actions/{quickActionId}/run"
+              }
+            }
+          ],
+          "mapping": "source-line matched; method checked against declaration",
+          "method_identity_verified": true
+        }
+      ]
+    },
+    {
+      "name": "renderQuickAction",
+      "start": 4975,
+      "end": 4983,
+      "source": "async renderQuickAction(issueId: string, quickActionId: string): Promise<string> {\n    const raw = await this.fetch<unknown>(`/api/issues/${issueId}/quick-actions/${quickActionId}/render`, {\n      method: \"POST\",\n    });\n    const parsed = parseWithFallback(raw, QuickActionRenderSchema, { content: \"\" }, {\n      endpoint: \"POST /api/issues/{id}/quick-actions/{quickActionId}/render\",\n    });\n    return parsed.content;\n  }",
+      "requests": [
+        {
+          "start": 4976,
+          "end": 4978,
+          "source": "this.fetch<unknown>(`/api/issues/${issueId}/quick-actions/${quickActionId}/render`, {\n      method: \"POST\",\n    })",
+          "transport": "this.fetch",
+          "actual_method": "\"POST\"",
+          "inventory": [
+            {
+              "id": "client:4976",
+              "method": "POST",
+              "path_expression": "/api/issues/${issueId}/quick-actions/${quickActionId}/render",
+              "route": {
+                "method": "POST",
+                "path": "/api/issues/{id}/quick-actions/{quickActionId}/render"
+              }
+            }
+          ],
+          "mapping": "source-line matched; method checked against declaration",
+          "method_identity_verified": true
+        }
+      ]
+    },
+    {
+      "name": "createProperty",
+      "start": 4985,
+      "end": 4993,
+      "source": "async createProperty(data: CreatePropertyRequest): Promise<IssueProperty> {\n    const raw = await this.fetch<unknown>(`/api/properties`, {\n      method: \"POST\",\n      body: JSON.stringify(data),\n    });\n    return parseWithFallback(raw, IssuePropertySchema, EMPTY_ISSUE_PROPERTY, {\n      endpoint: \"POST /api/properties\",\n    });\n  }",
+      "requests": [
+        {
+          "start": 4986,
+          "end": 4989,
+          "source": "this.fetch<unknown>(`/api/properties`, {\n      method: \"POST\",\n      body: JSON.stringify(data),\n    })",
+          "transport": "this.fetch",
+          "actual_method": "\"POST\"",
+          "inventory": [
+            {
+              "id": "client:4986",
+              "method": "POST",
+              "path_expression": "/api/properties",
+              "route": {
+                "method": "POST",
+                "path": "/api/properties"
+              }
+            }
+          ],
+          "mapping": "source-line matched; method checked against declaration",
+          "method_identity_verified": true
+        }
+      ]
+    },
+    {
+      "name": "updateProperty",
+      "start": 4995,
+      "end": 5003,
+      "source": "async updateProperty(id: string, data: UpdatePropertyRequest): Promise<IssueProperty> {\n    const raw = await this.fetch<unknown>(`/api/properties/${id}`, {\n      method: \"PATCH\",\n      body: JSON.stringify(data),\n    });\n    return parseWithFallback(raw, IssuePropertySchema, EMPTY_ISSUE_PROPERTY, {\n      endpoint: \"PATCH /api/properties/{id}\",\n    });\n  }",
+      "requests": [
+        {
+          "start": 4996,
+          "end": 4999,
+          "source": "this.fetch<unknown>(`/api/properties/${id}`, {\n      method: \"PATCH\",\n      body: JSON.stringify(data),\n    })",
+          "transport": "this.fetch",
+          "actual_method": "\"PATCH\"",
+          "inventory": [
+            {
+              "id": "client:4996",
+              "method": "PATCH",
+              "path_expression": "/api/properties/${id}",
+              "route": {
+                "method": "PATCH",
+                "path": "/api/properties/{id}"
+              }
+            }
+          ],
+          "mapping": "source-line matched; method checked against declaration",
+          "method_identity_verified": true
+        }
+      ]
+    },
+    {
+      "name": "setIssueProperty",
+      "start": 5005,
+      "end": 5013,
+      "source": "async setIssueProperty(issueId: string, propertyId: string, value: IssuePropertyValue): Promise<IssuePropertiesResponse> {\n    const raw = await this.fetch<unknown>(`/api/issues/${issueId}/properties/${propertyId}`, {\n      method: \"PUT\",\n      body: JSON.stringify({ value }),\n    });\n    return parseWithFallback(raw, IssuePropertiesResponseSchema, EMPTY_ISSUE_PROPERTIES_RESPONSE, {\n      endpoint: \"PUT /api/issues/{id}/properties/{propertyId}\",\n    });\n  }",
+      "requests": [
+        {
+          "start": 5006,
+          "end": 5009,
+          "source": "this.fetch<unknown>(`/api/issues/${issueId}/properties/${propertyId}`, {\n      method: \"PUT\",\n      body: JSON.stringify({ value }),\n    })",
+          "transport": "this.fetch",
+          "actual_method": "\"PUT\"",
+          "inventory": [
+            {
+              "id": "client:5006",
+              "method": "PUT",
+              "path_expression": "/api/issues/${issueId}/properties/${propertyId}",
+              "route": {
+                "method": "PUT",
+                "path": "/api/issues/{id}/properties/{propertyId}"
+              }
+            }
+          ],
+          "mapping": "source-line matched; method checked against declaration",
+          "method_identity_verified": true
+        }
+      ]
+    },
+    {
+      "name": "unsetIssueProperty",
+      "start": 5015,
+      "end": 5022,
+      "source": "async unsetIssueProperty(issueId: string, propertyId: string): Promise<IssuePropertiesResponse> {\n    const raw = await this.fetch<unknown>(`/api/issues/${issueId}/properties/${propertyId}`, {\n      method: \"DELETE\",\n    });\n    return parseWithFallback(raw, IssuePropertiesResponseSchema, EMPTY_ISSUE_PROPERTIES_RESPONSE, {\n      endpoint: \"DELETE /api/issues/{id}/properties/{propertyId}\",\n    });\n  }",
+      "requests": [
+        {
+          "start": 5016,
+          "end": 5018,
+          "source": "this.fetch<unknown>(`/api/issues/${issueId}/properties/${propertyId}`, {\n      method: \"DELETE\",\n    })",
+          "transport": "this.fetch",
+          "actual_method": "\"DELETE\"",
+          "inventory": [
+            {
+              "id": "client:5016",
+              "method": "DELETE",
+              "path_expression": "/api/issues/${issueId}/properties/${propertyId}",
+              "route": {
+                "method": "DELETE",
+                "path": "/api/issues/{id}/properties/{propertyId}"
+              }
+            }
+          ],
+          "mapping": "source-line matched; method checked against declaration",
+          "method_identity_verified": true
+        }
+      ]
+    },
+    {
+      "name": "listLabelsForIssue",
+      "start": 5024,
+      "end": 5029,
+      "source": "async listLabelsForIssue(issueId: string): Promise<IssueLabelsResponse> {\n    const raw = await this.fetch<unknown>(`/api/issues/${issueId}/labels`);\n    return parseWithFallback(raw, ResourceLabelsResponseSchema, EMPTY_RESOURCE_LABELS_RESPONSE, {\n      endpoint: \"GET /api/issues/{id}/labels\",\n    });\n  }",
+      "requests": [
+        {
+          "start": 5025,
+          "end": 5025,
+          "source": "this.fetch<unknown>(`/api/issues/${issueId}/labels`)",
+          "transport": "this.fetch",
+          "actual_method": "GET",
+          "inventory": [
+            {
+              "id": "client:5025",
+              "method": "GET",
+              "path_expression": "/api/issues/${issueId}/labels",
+              "route": {
+                "method": "GET",
+                "path": "/api/issues/{id}/labels"
+              }
+            }
+          ],
+          "mapping": "source-line matched; method checked against declaration",
+          "method_identity_verified": true
+        }
+      ]
+    },
+    {
+      "name": "attachLabel",
+      "start": 5031,
+      "end": 5039,
+      "source": "async attachLabel(issueId: string, labelId: string): Promise<IssueLabelsResponse> {\n    const raw = await this.fetch<unknown>(`/api/issues/${issueId}/labels`, {\n      method: \"POST\",\n      body: JSON.stringify({ label_id: labelId }),\n    });\n    return parseWithFallback(raw, ResourceLabelsResponseSchema, EMPTY_RESOURCE_LABELS_RESPONSE, {\n      endpoint: \"POST /api/issues/{id}/labels\",\n    });\n  }",
+      "requests": [
+        {
+          "start": 5032,
+          "end": 5035,
+          "source": "this.fetch<unknown>(`/api/issues/${issueId}/labels`, {\n      method: \"POST\",\n      body: JSON.stringify({ label_id: labelId }),\n    })",
+          "transport": "this.fetch",
+          "actual_method": "\"POST\"",
+          "inventory": [
+            {
+              "id": "client:5032",
+              "method": "POST",
+              "path_expression": "/api/issues/${issueId}/labels",
+              "route": {
+                "method": "POST",
+                "path": "/api/issues/{id}/labels"
+              }
+            }
+          ],
+          "mapping": "source-line matched; method checked against declaration",
+          "method_identity_verified": true
+        }
+      ]
+    },
+    {
+      "name": "detachLabel",
+      "start": 5041,
+      "end": 5048,
+      "source": "async detachLabel(issueId: string, labelId: string): Promise<IssueLabelsResponse> {\n    const raw = await this.fetch<unknown>(`/api/issues/${issueId}/labels/${labelId}`, {\n      method: \"DELETE\",\n    });\n    return parseWithFallback(raw, ResourceLabelsResponseSchema, EMPTY_RESOURCE_LABELS_RESPONSE, {\n      endpoint: \"DELETE /api/issues/{id}/labels/{labelId}\",\n    });\n  }",
+      "requests": [
+        {
+          "start": 5042,
+          "end": 5044,
+          "source": "this.fetch<unknown>(`/api/issues/${issueId}/labels/${labelId}`, {\n      method: \"DELETE\",\n    })",
+          "transport": "this.fetch",
+          "actual_method": "\"DELETE\"",
+          "inventory": [
+            {
+              "id": "client:5042",
+              "method": "DELETE",
+              "path_expression": "/api/issues/${issueId}/labels/${labelId}",
+              "route": {
+                "method": "DELETE",
+                "path": "/api/issues/{id}/labels/{labelId}"
+              }
+            }
+          ],
+          "mapping": "source-line matched; method checked against declaration",
+          "method_identity_verified": true
+        }
+      ]
+    },
+    {
+      "name": "listLabelsForResource",
+      "start": 5050,
+      "end": 5058,
+      "source": "async listLabelsForResource(\n    resourceType: \"agent\" | \"skill\",\n    resourceId: string,\n  ): Promise<ResourceLabelsResponse> {\n    const raw = await this.fetch<unknown>(`/api/${resourceType === \"agent\" ? \"agents\" : \"skills\"}/${resourceId}/labels`);\n    return parseWithFallback(raw, ResourceLabelsResponseSchema, EMPTY_RESOURCE_LABELS_RESPONSE, {\n      endpoint: `GET /api/${resourceType === \"agent\" ? \"agents\" : \"skills\"}/{id}/labels`,\n    });\n  }",
+      "requests": [
+        {
+          "start": 5054,
+          "end": 5054,
+          "source": "this.fetch<unknown>(`/api/${resourceType === \"agent\" ? \"agents\" : \"skills\"}/${resourceId}/labels`)",
+          "transport": "this.fetch",
+          "actual_method": "GET",
+          "inventory": [
+            {
+              "id": "client:5054",
+              "method": "GET",
+              "path_expression": "/api/${resourceType === \"agent\" ? \"agents\" : \"skills\"}/${resourceId}/labels",
+              "route": {
+                "method": "GET",
+                "path": "/api/agents/{id}/labels"
+              }
+            },
+            {
+              "id": "client:5054:remaining-variant-1",
+              "method": "GET",
+              "path_expression": "/api/${resourceType === \"agent\" ? \"agents\" : \"skills\"}/${resourceId}/labels",
+              "route": {
+                "method": "GET",
+                "path": "/api/skills/{id}/labels"
+              }
+            }
+          ],
+          "mapping": "source-line matched; method checked against declaration",
+          "method_identity_verified": true
+        }
+      ]
+    },
+    {
+      "name": "attachLabelToResource",
+      "start": 5060,
+      "end": 5072,
+      "source": "async attachLabelToResource(\n    resourceType: \"agent\" | \"skill\",\n    resourceId: string,\n    labelId: string,\n  ): Promise<ResourceLabelsResponse> {\n    const raw = await this.fetch<unknown>(`/api/${resourceType === \"agent\" ? \"agents\" : \"skills\"}/${resourceId}/labels`, {\n      method: \"POST\",\n      body: JSON.stringify({ label_id: labelId }),\n    });\n    return parseWithFallback(raw, ResourceLabelsResponseSchema, EMPTY_RESOURCE_LABELS_RESPONSE, {\n      endpoint: `POST /api/${resourceType === \"agent\" ? \"agents\" : \"skills\"}/{id}/labels`,\n    });\n  }",
+      "requests": [
+        {
+          "start": 5065,
+          "end": 5068,
+          "source": "this.fetch<unknown>(`/api/${resourceType === \"agent\" ? \"agents\" : \"skills\"}/${resourceId}/labels`, {\n      method: \"POST\",\n      body: JSON.stringify({ label_id: labelId }),\n    })",
+          "transport": "this.fetch",
+          "actual_method": "\"POST\"",
+          "inventory": [
+            {
+              "id": "client:5065",
+              "method": "POST",
+              "path_expression": "/api/${resourceType === \"agent\" ? \"agents\" : \"skills\"}/${resourceId}/labels",
+              "route": {
+                "method": "POST",
+                "path": "/api/agents/{id}/labels"
+              }
+            },
+            {
+              "id": "client:5065:remaining-variant-1",
+              "method": "POST",
+              "path_expression": "/api/${resourceType === \"agent\" ? \"agents\" : \"skills\"}/${resourceId}/labels",
+              "route": {
+                "method": "POST",
+                "path": "/api/skills/{id}/labels"
+              }
+            }
+          ],
+          "mapping": "source-line matched; method checked against declaration",
+          "method_identity_verified": true
+        }
+      ]
+    },
+    {
+      "name": "detachLabelFromResource",
+      "start": 5074,
+      "end": 5085,
+      "source": "async detachLabelFromResource(\n    resourceType: \"agent\" | \"skill\",\n    resourceId: string,\n    labelId: string,\n  ): Promise<ResourceLabelsResponse> {\n    const raw = await this.fetch<unknown>(`/api/${resourceType === \"agent\" ? \"agents\" : \"skills\"}/${resourceId}/labels/${labelId}`, {\n      method: \"DELETE\",\n    });\n    return parseWithFallback(raw, ResourceLabelsResponseSchema, EMPTY_RESOURCE_LABELS_RESPONSE, {\n      endpoint: `DELETE /api/${resourceType === \"agent\" ? \"agents\" : \"skills\"}/{id}/labels/{labelId}`,\n    });\n  }",
+      "requests": [
+        {
+          "start": 5079,
+          "end": 5081,
+          "source": "this.fetch<unknown>(`/api/${resourceType === \"agent\" ? \"agents\" : \"skills\"}/${resourceId}/labels/${labelId}`, {\n      method: \"DELETE\",\n    })",
+          "transport": "this.fetch",
+          "actual_method": "\"DELETE\"",
+          "inventory": [
+            {
+              "id": "client:5079",
+              "method": "DELETE",
+              "path_expression": "/api/${resourceType === \"agent\" ? \"agents\" : \"skills\"}/${resourceId}/labels/${labelId}",
+              "route": {
+                "method": "DELETE",
+                "path": "/api/agents/{id}/labels/{labelId}"
+              }
+            },
+            {
+              "id": "client:5079:remaining-variant-1",
+              "method": "DELETE",
+              "path_expression": "/api/${resourceType === \"agent\" ? \"agents\" : \"skills\"}/${resourceId}/labels/${labelId}",
+              "route": {
+                "method": "DELETE",
+                "path": "/api/skills/{id}/labels/{labelId}"
+              }
+            }
+          ],
+          "mapping": "source-line matched; method checked against declaration",
+          "method_identity_verified": true
+        }
+      ]
+    }
+  ],
+  "tail": {
+    "class_end": 6216,
+    "declarations": [],
+    "disposition": "No trailing top-level declarations after ApiClient class"
+  },
+  "named_helpers": [
+    "parseProjectSubscription: local parseWithFallback ProjectSubscriptionSchema; returns subscribed; no request",
+    "workspaceHeader and shared fetch/fetchRaw and parsing/error helpers: reuse checked execution/schema proofs"
+  ],
+  "limitations": [
+    "Dynamic resourceType agent/skill routes remain literal conditional expressions in inventory; no invented concrete mappings",
+    "setProjectSubscription method is subscribed ? PUT : DELETE; inventory method variable requires explicit dynamic disposition",
+    "Source text records all exact query/body/header branches and parse/error handling; shared implementation inherited from checked proofs",
+    "No runtime, network, model, database or backend execution performed"
+  ],
+  "inventory_snapshot": {
+    "path": "server/contracts/frontend-calls.json",
+    "sha256": "2670eec069d89d20045a5bc1043d7031f2a1460a4180a0b10256315abee03d21"
+  },
+  "validation": {
+    "json": true,
+    "declaration_spans": true,
+    "inventory_tuples": true,
+    "static_method_identity": true,
+    "source_hashes": true
+  },
+  "root_boundary_completion": {
+    "name": "listIssueViews",
+    "start": 5090,
+    "end": 5100,
+    "source": "  async listIssueViews(params: {\n    scope_type: string;\n    scope_id?: string | null;\n  }): Promise<IssueView[]> {\n    const qs = new URLSearchParams({ scope_type: params.scope_type });\n    if (params.scope_id) qs.set(\"scope_id\", params.scope_id);\n    const raw = await this.fetch<unknown>(`/api/issue-views?${qs.toString()}`);\n    return parseWithFallback(raw, IssueViewListSchema, [], {\n      endpoint: \"GET /api/issue-views\",\n    });\n  }",
+    "inventory": [
+      {
+        "id": "client:5096",
+        "method": "GET",
+        "path_expression": "/api/issue-views?${qs.toString()}",
+        "route": {
+          "method": "GET",
+          "path": "/api/issue-views"
+        }
+      }
+    ],
+    "behavior": "scope_type always in URLSearchParams; scope_id added only when truthy. Shared GET then schema parse with empty list fallback; no additional request."
+  },
+  "root_review": {
+    "status": "partial",
+    "source_declarations_verified": 90,
+    "copied_tuple_occurrences_verified": 93,
+    "boundary_gap": "Root directly reviewed and added listIssueViews, omitted between the two assigned sections",
+    "remaining": "Named helper and shared schema proof reconciliation before whole-client closure."
+  }
+}

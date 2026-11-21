@@ -89,7 +89,7 @@ backend:
       # When true (default) the chart provisions a PersistentVolumeClaim for
       # /app/data/uploads and mounts it into the backend pod. The backend only
       # uses this directory when S3 is NOT configured (`backend.config.s3Bucket`
-      # empty) — see server/cmd/server/router.go for the storage selection.
+      # empty) — see server/go/cmd/server/router.go for the storage selection.
       #
       # Set to false when you have configured S3/CloudFront and don't want the
       # chart to declare the uploads PVC at all. The default access mode is

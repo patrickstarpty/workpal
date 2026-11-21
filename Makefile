@@ -194,7 +194,7 @@ env-exec: ## Run a command with this environment's variables (ARGS="-- pnpm dev:
 # The commit ldflag is what makes /health's identity useful: without it every
 # environment reports "unknown" and cannot prove which revision it is serving.
 api-dev: ## Run only the Go backend for the current env file
-	cd server && go run -ldflags "-X main.commit=$(COMMIT)" ./cmd/server
+	cd server/go && go run -ldflags "-X main.commit=$(COMMIT)" ./cmd/server
 
 web-dev: ## Run only the Next.js dev server for the current env file
 	pnpm dev:web
@@ -212,7 +212,7 @@ setup: ## Prepare the current checkout from its env file: install deps, ensure D
 	pnpm install
 	@bash scripts/ensure-postgres.sh "$(ENV_FILE)"
 	@echo "==> Running migrations..."
-	cd server && go run ./cmd/migrate up
+	cd server/go && go run ./cmd/migrate up
 	@echo ""
 	@echo "✓ Setup complete! Run 'make start' to launch the app."
 
@@ -223,10 +223,10 @@ start: ## Start backend and frontend for the current checkout and run migrations
 	@echo "Frontend: http://localhost:$(FRONTEND_PORT)"
 	@bash scripts/ensure-postgres.sh "$(ENV_FILE)"
 	@echo "Running migrations..."
-	cd server && go run ./cmd/migrate up
+	cd server/go && go run ./cmd/migrate up
 	@echo "Starting backend and frontend..."
 	@trap 'kill 0' EXIT; \
-		(cd server && go run ./cmd/server) & \
+		(cd server/go && go run ./cmd/server) & \
 		pnpm dev:web & \
 		wait
 
@@ -274,7 +274,7 @@ db-reset: ## Drop and recreate the current env's database, then re-run all migra
 		-c "DROP DATABASE IF EXISTS \"$(POSTGRES_DB)\" WITH (FORCE);" \
 		-c "CREATE DATABASE \"$(POSTGRES_DB)\";"
 	@echo "==> Running migrations..."
-	cd server && go run ./cmd/migrate up
+	cd server/go && go run ./cmd/migrate up
 	@echo ""
 	@echo "✓ Database '$(POSTGRES_DB)' reset. Run 'make start' to launch the app."
 
@@ -323,7 +323,7 @@ dev: ## Bootstrap this checkout end-to-end: create env if needed, ensure DB, mig
 server: ## Run only the Go server for the current checkout
 	$(REQUIRE_ENV)
 	@bash scripts/ensure-postgres.sh "$(ENV_FILE)"
-	cd server && go run ./cmd/server
+	cd server/go && go run ./cmd/server
 
 daemon: ## Restart the local agent daemon using the CLI's stored auth/session
 	@$(MAKE) workpal WORKPAL_ARGS="daemon restart --profile local"
@@ -332,7 +332,7 @@ cli: ## Run the workpal CLI with ARGS or WORKPAL_ARGS from source
 	@$(MAKE) workpal WORKPAL_ARGS="$(WORKPAL_ARGS)"
 
 workpal: ## Run the workpal CLI entrypoint directly from the Go source tree
-	cd server && go run -ldflags "-X main.version=$(VERSION) -X main.commit=$(COMMIT) -X main.buildCommit=$(BUILD_COMMIT) -X main.date=$(DATE)" ./cmd/workpal $(WORKPAL_ARGS)
+	cd server/go && go run -ldflags "-X main.version=$(VERSION) -X main.commit=$(COMMIT) -X main.buildCommit=$(BUILD_COMMIT) -X main.date=$(DATE)" ./cmd/workpal $(WORKPAL_ARGS)
 
 VERSION ?= $(shell git describe --tags --match 'v[0-9]*' --always --dirty 2>/dev/null || echo dev)
 COMMIT  ?= $(shell git rev-parse --short HEAD 2>/dev/null || echo unknown)
@@ -350,15 +350,15 @@ DATE    ?= $(shell date -u '+%Y-%m-%dT%H:%M:%SZ')
 # recursive one — which prints `go: Command not found` on frontend-only
 # checkouts with no Go toolchain installed.
 build: EXE = $(if $(filter windows,$(or $(GOOS),$(shell go env GOOS))),.exe,)
-build: ## Build the server, CLI, and migrate binaries into server/bin
-	cd server && go build -ldflags "-X main.version=$(VERSION) -X main.commit=$(COMMIT)" -o bin/server$(EXE) ./cmd/server
-	cd server && go build -ldflags "-X main.version=$(VERSION) -X main.commit=$(COMMIT) -X main.buildCommit=$(BUILD_COMMIT) -X main.date=$(DATE)" -o bin/workpal$(EXE) ./cmd/workpal
-	cd server && go build -o bin/migrate$(EXE) ./cmd/migrate
+build: ## Build the server, CLI, and migrate binaries into server/go/bin
+	cd server/go && go build -ldflags "-X main.version=$(VERSION) -X main.commit=$(COMMIT)" -o bin/server$(EXE) ./cmd/server
+	cd server/go && go build -ldflags "-X main.version=$(VERSION) -X main.commit=$(COMMIT) -X main.buildCommit=$(BUILD_COMMIT) -X main.date=$(DATE)" -o bin/workpal$(EXE) ./cmd/workpal
+	cd server/go && go build -o bin/migrate$(EXE) ./cmd/migrate
 
 test: ## Run Go tests after ensuring the target DB exists and migrations are applied
 	$(REQUIRE_ENV)
 	@bash scripts/ensure-postgres.sh "$(ENV_FILE)"
-	cd server && go run ./cmd/migrate up
+	cd server/go && go run ./cmd/migrate up
 	bash scripts/test-go.sh --race
 
 # Database
@@ -367,21 +367,21 @@ test: ## Run Go tests after ensuring the target DB exists and migrations are app
 migrate-up: ## Create the target DB if needed, then apply database migrations
 	$(REQUIRE_ENV)
 	@bash scripts/ensure-postgres.sh "$(ENV_FILE)"
-	cd server && go run ./cmd/migrate up
+	cd server/go && go run ./cmd/migrate up
 
 migrate-down: ## Create the target DB if needed, then roll back database migrations
 	$(REQUIRE_ENV)
 	@bash scripts/ensure-postgres.sh "$(ENV_FILE)"
-	cd server && go run ./cmd/migrate down
+	cd server/go && go run ./cmd/migrate down
 
 sqlc: ## Regenerate sqlc code
-	cd server && go run github.com/sqlc-dev/sqlc/cmd/sqlc@v1.31.1 generate
+	cd server/go && go run github.com/sqlc-dev/sqlc/cmd/sqlc@v1.31.1 generate
 
 # Cleanup
 ##@ Cleanup
 
 clean: ## Remove build caches, generated binaries, and temp files
-	rm -rf server/bin server/tmp
+	rm -rf server/go/bin server/go/tmp
 	rm -rf apps/*/.next apps/*/.source apps/*/.expo
 	rm -rf apps/*/out apps/*/dist apps/*/dist-electron packages/*/dist
 	rm -rf .turbo apps/*/.turbo packages/*/.turbo

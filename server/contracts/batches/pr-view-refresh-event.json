@@ -1,0 +1,63 @@
+{
+  "batch": "pr-view-refresh-event",
+  "contract_kind": "bounded source contract, not completed implementation/inventory",
+  "route": {
+    "method": "GET",
+    "path": "/api/issues/{id}/pull-requests"
+  },
+  "producers": [
+    {
+      "id": "ghsnapshot.Manager.process.snapshot-applied",
+      "kind": "background",
+      "sources": [
+        "server/go/internal/integrations/ghsnapshot/refresh.go:214",
+        "server/go/internal/integrations/ghsnapshot/refresh.go:236",
+        "server/go/internal/handler/github.go:1250"
+      ],
+      "event": {
+        "disposition": "required",
+        "reason": "View refresh conditionally persists a snapshot and check rows; successful application requires client invalidation.",
+        "producer": "ghsnapshot.Manager.worker -> process -> applySnapshot -> Handler.broadcastPRSnapshotApplied; background job, GET is trigger only",
+        "type": "pull_request:updated",
+        "payload": {
+          "pull_request": "githubPullRequestToResponse(pr, h.PRRefresh.Enabled()), reread after commit",
+          "linked_issue_ids": "UUID string array from ListIssueIDsForPullRequest, possibly empty"
+        },
+        "scope": "PR workspaceID; actorType system, actorID empty in Go; no task/chat scope. Private audience intersects membership of all linked private projects; unresolved projects retain workspace fanout; resolution errors drop.",
+        "transaction": "Per PR Begin -> head-guarded snapshot UPDATE -> check DELETE/INSERT -> Commit -> optional onApplied. Guard miss/errors emit nothing. Go has a post-commit publication gap. Python requires durable outbox append in the same transaction as snapshot/check writes, with after-commit retryable delivery; no append on rollback/guard miss. This producer is not implemented here.",
+        "consumer": "Bus SubscribeAll -> workspace or private workspace-member scope -> authenticated websocket subscribers -> frontend pull_request prefix handler invalidates [github,pull-requests]; active issue list refetches.",
+        "sources": [
+          "server/go/internal/handler/github.go:1125",
+          "server/go/internal/handler/github.go:1150",
+          "server/go/internal/integrations/ghsnapshot/refresh.go:204",
+          "server/go/internal/handler/github.go:1263"
+        ],
+        "producer_sources": [
+          "server/go/internal/integrations/ghsnapshot/refresh.go:214",
+          "server/go/internal/integrations/ghsnapshot/refresh.go:236",
+          "server/go/internal/integrations/ghsnapshot/refresh.go:288",
+          "server/go/internal/handler/github.go:1250",
+          "server/go/internal/handler/handler.go:579"
+        ],
+        "transaction_sources": [
+          "server/go/internal/integrations/ghsnapshot/refresh.go:410",
+          "server/go/internal/integrations/ghsnapshot/refresh.go:433",
+          "server/go/internal/integrations/ghsnapshot/refresh.go:438",
+          "server/go/internal/integrations/ghsnapshot/refresh.go:455",
+          "server/src/workpal_backend/infrastructure/outbox.py:19"
+        ],
+        "consumer_sources": [
+          "server/go/cmd/server/listeners.go:287",
+          "server/go/cmd/server/listeners.go:339",
+          "server/go/cmd/server/listeners.go:375",
+          "server/go/cmd/server/private_project_realtime.go:110",
+          "server/go/cmd/server/private_project_realtime.go:228",
+          "server/go/internal/realtime/hub.go:799",
+          "packages/core/realtime/use-realtime-sync.ts:1094",
+          "packages/core/realtime/use-realtime-sync.ts:1229",
+          "packages/core/github/queries.ts:64"
+        ]
+      }
+    }
+  ]
+}

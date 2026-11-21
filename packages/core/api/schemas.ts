@@ -2234,7 +2234,7 @@ export const DashboardRunTimeDailyListSchema = z.array(DashboardRunTimeDailySche
 
 // Failure rollups. `failure_reason` is an open string on purpose — it carries
 // the backend's canonical taxonomy, which grows as new classifier rules land
-// (server/pkg/taskfailure). Pinning it to a z.enum would make an installed
+// (server/go/pkg/taskfailure). Pinning it to a z.enum would make an installed
 // desktop client drop rows for a reason its build predates; the client folds
 // unrecognised reasons into an "other" display class instead. The empty
 // string is the succeeded bucket, so `.default("")` is a meaningful default

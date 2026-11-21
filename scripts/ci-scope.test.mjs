@@ -24,13 +24,13 @@ for (const [name, files, selected] of [
   ["docs test", ["apps/docs/lib/unrendered-bold.test.ts"], ["quality", "docs"]],
   ["web changelog", ["apps/web/features/landing/i18n/en.ts"], ["frontend", "quality"]],
   ["mobile UI", ["apps/mobile/app/index.tsx"], ["quality"]],
-  ["migration only", ["server/migrations/999_example.up.sql"], ["backend", "sqlc"]],
-  ["agent process code", ["server/pkg/agent/cursor_background.go"], ["backend", "runtime"]],
-  ["daemon dependency", ["server/internal/skill/service.go"], ["backend", "runtime"]],
-  ["process-group control", ["server/internal/daemon/processtree/controller_unix.go"], ["backend", "runtime", "processtree"]],
-  ["process-group caller", ["server/internal/daemon/gc.go"], ["backend", "runtime"]],
-  ["native test compilation dependency", ["server/pkg/db/generated/issues.sql.go"], ["backend", "sqlc", "runtime"]],
-  ["Go dependencies", ["server/go.mod", "server/go.sum"], ["backend", "runtime"]],
+  ["migration only", ["server/go/migrations/999_example.up.sql"], ["backend", "sqlc"]],
+  ["agent process code", ["server/go/pkg/agent/cursor_background.go"], ["backend", "runtime"]],
+  ["daemon dependency", ["server/go/internal/skill/service.go"], ["backend", "runtime"]],
+  ["process-group control", ["server/go/internal/daemon/processtree/controller_unix.go"], ["backend", "runtime", "processtree"]],
+  ["process-group caller", ["server/go/internal/daemon/gc.go"], ["backend", "runtime"]],
+  ["native test compilation dependency", ["server/go/pkg/db/generated/issues.sql.go"], ["backend", "sqlc", "runtime"]],
+  ["Go dependencies", ["server/go/go.mod", "server/go/go.sum"], ["backend", "runtime"]],
   ["Helm only", ["deploy/helm/workpal/templates/deployment.yaml"], ["scripts"]],
   ["container entrypoint", ["docker/entrypoint.sh"], ["scripts"]],
   ["selfhost config", [".env.example"], ["backend", "scripts", "installer"]],
@@ -42,20 +42,20 @@ for (const [name, files, selected] of [
   ["cleanup script", ["scripts/drop-database.sh"], ["scripts"]],
   ["check script regression tests", ["scripts/check.test.sh"], ["scripts"]],
   ["performance harness", ["scripts/perf-compare.test.sh"], ["scripts"]],
-  ["attachment preview source", ["server/internal/handler/attachment_text_preview.json"], ["backend", "runtime", "scripts"]],
+  ["attachment preview source", ["server/go/internal/handler/attachment_text_preview.json"], ["backend", "runtime", "scripts"]],
   ["attachment preview output", ["packages/views/editor/utils/text-preview-whitelist.generated.ts"], ["frontend", "quality", "scripts"]],
-  ["reserved slug source", ["server/internal/handler/reserved_slugs.json"], ["backend", "runtime", "scripts"]],
+  ["reserved slug source", ["server/go/internal/handler/reserved_slugs.json"], ["backend", "runtime", "scripts"]],
   ["reserved slug output", ["packages/core/paths/reserved-slugs.ts"], ["frontend", "quality", "scripts"]],
-  ["integration key gates", ["server/cmd/server/router.go"], ["backend", "runtime", "scripts"]],
+  ["integration key gates", ["server/go/cmd/server/router.go"], ["backend", "runtime", "scripts"]],
   ["brand source", ["packages/ui/lib/workpal-brand.ts"], ["frontend", "quality"]],
-  ["CLI brand copy", ["server/cmd/workpal/cmd_auth.go"], ["backend", "runtime", "quality"]],
+  ["CLI brand copy", ["server/go/cmd/workpal/cmd_auth.go"], ["backend", "runtime", "quality"]],
   ["mobile brand copy", ["apps/mobile/components/brand/workpal-logo.tsx"], ["quality"]],
   ["README logo", ["docs/assets/logo-dark.svg"], ["quality"]],
   ["brand generator", ["scripts/brand/sync.mjs"], ["quality"]],
   ["PR evidence uploader", ["scripts/pr-shots"], ["quality"]],
   ["cross-module runtime contract", ["packages/core/runtimes/cli-version.ts"], ["frontend", "backend", "runtime", "quality"]],
   ["inbox type contract", ["packages/core/types/inbox.ts"], ["frontend", "backend", "quality"]],
-  ["shared quick action body contract", ["server/internal/handler/testdata/quick_action_bodies.json"], ["frontend", "backend", "runtime"]],
+  ["shared quick action body contract", ["server/go/internal/handler/testdata/quick_action_bodies.json"], ["frontend", "backend", "runtime"]],
   ["lockfile", ["pnpm-lock.yaml"], ["frontend", "quality", "docs"]],
   ["workspace catalog", ["pnpm-workspace.yaml"], ["frontend", "quality", "docs"]],
   ["workspace package patch", ["patches/example.patch"], ["frontend", "quality", "docs"]],
@@ -63,7 +63,7 @@ for (const [name, files, selected] of [
   ["radius policy", ["scripts/check-ui-radius-tokens.mjs"], ["quality"]],
   ["shared quality action", [".github/actions/frontend-quality/action.yml"], ["frontend", "quality"]],
   ["new bitmap", ["apps/web/public/hero.png"], ["frontend", "quality", "images"]],
-  ["mixed docs and migration", ["apps/docs/content/guide.mdx", "server/migrations/999_example.up.sql"], ["quality", "docs", "backend", "sqlc"]],
+  ["mixed docs and migration", ["apps/docs/content/guide.mdx", "server/go/migrations/999_example.up.sql"], ["quality", "docs", "backend", "sqlc"]],
   ["CI configuration", [".github/ci-paths.json"], Object.keys(filters)],
 ]) {
   test(`PR and main select only affected scopes: ${name}`, () => {
@@ -405,8 +405,8 @@ test("the Go test scan follows relative paths, constants and repo-root helpers",
   const root = mkdtempSync(join(tmpdir(), "ci-scope-go-"));
   t.after(() => rmSync(root, { recursive: true, force: true }));
   const files = {
-    "server/pkg/a/config.go": 'package a\n\nconst ConfigPath = ".workpal/environments.toml"\n',
-    "server/pkg/a/a_test.go": [
+    "server/go/pkg/a/config.go": 'package a\n\nconst ConfigPath = ".workpal/environments.toml"\n',
+    "server/go/pkg/a/a_test.go": [
       "package a",
       'const repoRoot = "../../.."',
       "func readRepoFile(name string) { os.ReadFile(filepath.Join(repoRoot, name)) }",
@@ -424,7 +424,7 @@ test("the Go test scan follows relative paths, constants and repo-root helpers",
     ".env.example": "",
     "scripts/check.sh": "",
     "examples/plugins/demo/workpal.plugin.json": "",
-    "server/migrations/1.up.sql": "",
+    "server/go/migrations/1.up.sql": "",
     "docs/commented.md": "",
   };
   for (const [file, body] of Object.entries(files)) {
@@ -436,5 +436,5 @@ test("the Go test scan follows relative paths, constants and repo-root helpers",
     [".env.example", ".workpal/environments.toml", "examples/plugins", "scripts/check.sh"]);
   const missing = uncoveredReads(root, reads, [".env.example", "examples/plugins/**", "scripts/*.sh"]);
   assert.equal(missingFilterMessage(missing).split("\n").at(-1),
-    '  ".workpal/environments.toml"  (read by server/pkg/a/a_test.go)');
+    '  ".workpal/environments.toml"  (read by server/go/pkg/a/a_test.go)');
 });

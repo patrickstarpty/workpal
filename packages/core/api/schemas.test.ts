@@ -1338,7 +1338,7 @@ describe("dashboard + runtime usage schema drift", () => {
     // tag, which would strip the field from exactly the SUCCESS rows and turn
     // every window into a 100% error rate. Deflating a rate under drift is
     // the milder failure. TestDashboardFailureWireContractKeepsEmptyReason
-    // (server/internal/handler/dashboard_test.go) guards the other side by
+    // (server/go/internal/handler/dashboard_test.go) guards the other side by
     // pinning that the server always emits the field.
     expect(daily[0]?.failure_reason).toBe("");
     expect(daily[0]?.task_count).toBe(0);

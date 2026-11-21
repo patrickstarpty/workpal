@@ -1,0 +1,253 @@
+{
+  "version": 1,
+  "coverage": {
+    "complete": false,
+    "scope": [
+      "packages/views/editor/attachment.tsx",
+      "packages/views/editor/use-editor-upload.ts",
+      "packages/views/editor/paste-as-file.ts",
+      "packages/views/editor/use-composer-submit.ts",
+      "packages/views/editor/preview-sequence-context.tsx",
+      "packages/views/modals/use-issue-create-uploads.ts"
+    ],
+    "finite_ledger_completed": true,
+    "global_coverage_claim": false
+  },
+  "calls": [
+    {
+      "source": "packages/views/editor/attachment.tsx:325",
+      "transport_kind": "indirect authenticated API",
+      "resolved_targets": [
+        "GET /api/attachments/{id}",
+        "GET /api/attachments/{id}/download"
+      ],
+      "existing_frontend_call_ids": [
+        "client:4438",
+        "client:4508"
+      ],
+      "note": "useResignedInlineMedia: metadata only for auth-gated cross-origin/API-base URLs; bytes only image fallback without signed storage URL"
+    },
+    {
+      "source": "packages/views/editor/attachment.tsx:382",
+      "transport_kind": "indirect metadata + native download",
+      "resolved_targets": [
+        "GET /api/attachments/{id}",
+        "attachment_download_url or proxy signed-download or /api/attachments/{id}/download?workspace_slug=..."
+      ],
+      "existing_frontend_call_ids": [
+        "client:4438"
+      ],
+      "note": "useDownloadAttachment default workspace mode; browser anchor or injected desktopAPI.downloadURL"
+    },
+    {
+      "source": "packages/views/editor/attachment.tsx:384",
+      "transport_kind": "resolver or external navigation",
+      "resolved_targets": [
+        "matched attachment metadata/download as above",
+        "unmatched input URL via desktopAPI.openExternal or window.open"
+      ],
+      "existing_frontend_call_ids": [
+        "client:4438"
+      ],
+      "note": "attachment-download-context resolves records locally before download; absent provider opens supplied URL"
+    },
+    {
+      "source": "packages/views/editor/attachment.tsx:589",
+      "transport_kind": "native img src",
+      "resolved_targets": [
+        "GET /api/attachments/{id}/download",
+        "GET /api/attachments/{id}/signed-download?exp=...&sig=...",
+        "server-provided signed HTTP(S) storage/CDN URL",
+        "input HTTP(S)/relative URL",
+        "blob: or data: (local bytes)"
+      ],
+      "existing_frontend_call_ids": [
+        "editor:attachment-image:download",
+        "editor:attachment-image:signed-download"
+      ],
+      "note": "src from :423; selection :247-258 prefers signed download, legacy local API, unsigned configured CDN, markdown_url, storage, fallback; :219 absolutizes relative paths",
+      "review_note": "Known backend branches integrated; arbitrary runtime URL branches remain scoped in this ledger."
+    },
+    {
+      "source": "packages/views/editor/attachment.tsx:347",
+      "transport_kind": "delegated preview",
+      "resolved_targets": [
+        "GET /api/attachments/{id}/download",
+        "GET /api/attachments/{id}/signed-download?exp=...&sig=...",
+        "server-provided signed HTTP(S) storage/CDN URL",
+        "input HTTP(S)/relative URL",
+        "blob: or data: (local bytes)",
+        "GET /api/attachments/{id}",
+        "GET /api/attachments/{id}/content"
+      ],
+      "existing_frontend_call_ids": [
+        "client:4438",
+        "client:4475",
+        "client:4508"
+      ],
+      "note": "also :357 and :345 sequence dispatch; modal text query, inline/stream refresh, browser image/video/audio/PDF resources"
+    },
+    {
+      "source": "packages/views/editor/use-editor-upload.ts:31",
+      "transport_kind": "injected ApiClient upload",
+      "resolved_targets": [
+        "POST baseUrl/api/upload-file"
+      ],
+      "existing_frontend_call_ids": [
+        "client:4078"
+      ],
+      "note": "use-file-upload.ts:76 invokes uploadFile; multipart file plus optional context; cookies and authHeaders; no presign PUT"
+    },
+    {
+      "source": "packages/views/editor/use-composer-submit.ts:161",
+      "transport_kind": "injected async callback",
+      "resolved_targets": [
+        "caller-defined onSubmit(content)"
+      ],
+      "existing_frontend_call_ids": [],
+      "note": "No endpoint selected in this source; opaque parameter, exception E1",
+      "review_note": "Callback is not an HTTP method or route. Six useComposerSubmit hosts require tracing before transport coverage can close."
+    },
+    {
+      "source": "packages/views/editor/preview-sequence-context.tsx:308",
+      "transport_kind": "delegated preview",
+      "resolved_targets": [
+        "GET /api/attachments/{id}/download",
+        "GET /api/attachments/{id}/signed-download?exp=...&sig=...",
+        "server-provided signed HTTP(S) storage/CDN URL",
+        "input HTTP(S)/relative URL",
+        "blob: or data: (local bytes)",
+        "GET /api/attachments/{id}",
+        "GET /api/attachments/{id}/content"
+      ],
+      "existing_frontend_call_ids": [
+        "client:4438",
+        "client:4475",
+        "client:4508"
+      ],
+      "note": "toPreviewSource :136 forwards record or URL; same modal path as attachment"
+    },
+    {
+      "source": "packages/views/editor/preview-sequence-context.tsx:367",
+      "transport_kind": "indirect image prefetch",
+      "resolved_targets": [
+        "GET /api/attachments/{id}/download",
+        "GET /api/attachments/{id}/signed-download?exp=...&sig=...",
+        "server-provided signed HTTP(S) storage/CDN URL",
+        "input HTTP(S)/relative URL",
+        "blob: or data: (local bytes)",
+        "GET /api/attachments/{id}"
+      ],
+      "existing_frontend_call_ids": [
+        "client:4438",
+        "client:4508"
+      ],
+      "note": "also :373; PreviewImagePrefetch :410 uses re-sign hook then :420 probe.src; blob fallback may GET download"
+    },
+    {
+      "source": "packages/views/modals/use-issue-create-uploads.ts:109",
+      "transport_kind": "coordinated upload",
+      "resolved_targets": [
+        "POST baseUrl/api/upload-file"
+      ],
+      "existing_frontend_call_ids": [
+        "client:4078"
+      ],
+      "note": "use-coordinated-uploads.ts:415 injects singleton api; upload-coordinator.ts:78 uploadFile; empty context {} so no issue/comment/chat binding yet"
+    }
+  ],
+  "sources": [
+    {
+      "path": "packages/views/editor/attachment.tsx",
+      "executable_source_review": "reviewed",
+      "calls": [
+        "packages/views/editor/attachment.tsx:325",
+        "packages/views/editor/attachment.tsx:382",
+        "packages/views/editor/attachment.tsx:384",
+        "packages/views/editor/attachment.tsx:589",
+        "packages/views/editor/attachment.tsx:347"
+      ],
+      "local_paths": [
+        {
+          "source": "packages/views/editor/attachment.tsx:470",
+          "evidence": "AttachmentCard href is a capability/visibility prop, not a DOM anchor; attachment-card.tsx:170 uses it to compute canPreview and :178 canDownload. Clipboard :484 copies text; normalize/ID helpers only compute strings."
+        }
+      ]
+    },
+    {
+      "path": "packages/views/editor/use-editor-upload.ts",
+      "executable_source_review": "reviewed",
+      "calls": [
+        "packages/views/editor/use-editor-upload.ts:31"
+      ],
+      "local_paths": [
+        {
+          "source": "packages/views/editor/use-editor-upload.ts:23",
+          "evidence": "Failure toast/state only outside delegated upload."
+        }
+      ]
+    },
+    {
+      "path": "packages/views/editor/paste-as-file.ts",
+      "executable_source_review": "reviewed",
+      "calls": [],
+      "local_paths": [
+        {
+          "source": "packages/views/editor/paste-as-file.ts:24",
+          "evidence": "Only executable export is numeric PASTE_AS_FILE_THRESHOLD=4000; no upload, File creation or transport."
+        }
+      ]
+    },
+    {
+      "path": "packages/views/editor/use-composer-submit.ts",
+      "executable_source_review": "reviewed",
+      "calls": [
+        "packages/views/editor/use-composer-submit.ts:161"
+      ],
+      "local_paths": [
+        {
+          "source": "packages/views/editor/use-composer-submit.ts:98",
+          "evidence": "State, markdown normalization, gate check, animation frame and DOM focus are local; onAccepted/normalize/afterAccepted are caller callbacks, not identified API implementations."
+        }
+      ]
+    },
+    {
+      "path": "packages/views/editor/preview-sequence-context.tsx",
+      "executable_source_review": "reviewed",
+      "calls": [
+        "packages/views/editor/preview-sequence-context.tsx:308",
+        "packages/views/editor/preview-sequence-context.tsx:367"
+      ],
+      "local_paths": [
+        {
+          "source": "packages/views/editor/preview-sequence-context.tsx:214",
+          "evidence": "Sequence snapshot/index/broken-image tracking and callbacks update local state; imported image-sequence collection parses/matches content, no bytes fetched by collection. describeItem/onOpened/onClosed/locate/overview callbacks are host-defined."
+        }
+      ]
+    },
+    {
+      "path": "packages/views/modals/use-issue-create-uploads.ts",
+      "executable_source_review": "reviewed",
+      "calls": [
+        "packages/views/modals/use-issue-create-uploads.ts:109"
+      ],
+      "local_paths": [
+        {
+          "source": "packages/views/modals/use-issue-create-uploads.ts:49",
+          "evidence": "Binding mutates draft store, filters/maps attachment records and appends markdown; removal is local draft removal, not DELETE attachment."
+        }
+      ]
+    }
+  ],
+  "unresolved_exceptions": [
+    {
+      "id": "E1",
+      "source": "packages/views/editor/use-composer-submit.ts:161",
+      "reason": "Injected onSubmit has no implementation in this module; endpoint varies by host. Caller enumeration outside these six sources is not asserted."
+    },
+    {
+      "id": "E2",
+      "reason": "Input/server-returned URLs and host callbacks are runtime values; concrete origins and callback side effects cannot be statically enumerated. Native resource loads may follow server redirects; arbitrary HTML preview subresources are content-defined."
+    }
+  ]
+}

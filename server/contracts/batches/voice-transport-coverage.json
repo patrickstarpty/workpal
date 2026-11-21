@@ -1,0 +1,207 @@
+{
+  "scope": [
+    "packages/views/voice"
+  ],
+  "status": "complete bounded static non-test executable source ledger; global coverage remains false",
+  "files": [
+    {
+      "path": "packages/views/voice/dialog-footer.tsx",
+      "anchor": "packages/views/voice/dialog-footer.tsx:1",
+      "line_count": 28,
+      "disposition": "Composition of HUD/setup/error/strip and supplied children; no independent transport."
+    },
+    {
+      "path": "packages/views/voice/engine.ts",
+      "anchor": "packages/views/voice/engine.ts:1",
+      "line_count": 79,
+      "disposition": "Effect connects singleton runtime factory. Missing desktop voice API yields null. OfflineAudioContext decodes Blob at 16kHz and averages channels locally; Float32Array passed to native transcribe. prepare passes modelId/language/hotwords. Optional history.save sends Uint8Array, mimeType, durationMs, keepDays; update swallows rejection. watchModels subscribes then lists; event wins race over initial list, list rejection ignored. Returned native unsubscribe is not consumed here."
+    },
+    {
+      "path": "packages/views/voice/index.ts",
+      "anchor": "packages/views/voice/index.ts:1",
+      "line_count": 7,
+      "disposition": "Reexports only; no independent transport."
+    },
+    {
+      "path": "packages/views/voice/recorder.ts",
+      "anchor": "packages/views/voice/recorder.ts:1",
+      "line_count": 170,
+      "disposition": "Local getUserMedia with exact saved device; only OverconstrainedError/NotFoundError falls back to default. Permission/security and missing-device errors mapped explicitly. MediaRecorder MIME negotiation, 250ms chunks, Blob assembly; AudioContext analyser and 50ms meter. 120s limit depends on functioning meter; metering failure sets peak=1 and has no independent limit timer. Speech requires >=400ms, peak>=0.04 and nonempty blob. discard/late start stops tracks; release closes audio. No HTTP, WS, worker or resource URL."
+    },
+    {
+      "path": "packages/views/voice/use-composer-voice.ts",
+      "anchor": "packages/views/voice/use-composer-voice.ts:1",
+      "line_count": 115,
+      "disposition": "Availability requires enabled, engineAvailable, media capability and !disabled; hidden suppresses registration. No permission request in support probe. Registers insert/submit/activate/isShown callbacks, reads latest refs, scope/listening cleanup unregisters and cancels owning session. Actual composer callback implementations are injected boundary, not enumerated app-wide."
+    },
+    {
+      "path": "packages/views/voice/voice-models.tsx",
+      "anchor": "packages/views/voice/voice-models.tsx:1",
+      "line_count": 220,
+      "disposition": "Native downloadModel for absent/retry, cancelDownload for downloading, deleteModel only ready/manage. Choosing ready model and setup preferred ID updates local persisted settings. Setup close cancels, ready start toggles. License URL opens external resource via platform wrapper. Model rows null until snapshot; recommended locale selection is local."
+    },
+    {
+      "path": "packages/views/voice/voice-ui.tsx",
+      "anchor": "packages/views/voice/voice-ui.tsx:1",
+      "line_count": 381,
+      "disposition": "Pointer press/release/cancel and keyboard click dispatch core session callbacks. Strip stop(false) inserts, stop(true) requests injected submit. Escape/shortcut handling in core. Error retry excludes unavailable. Canvas/ResizeObserver/RAF/matchMedia are local rendering; no resource URL, HTTP, WS or worker."
+    },
+    {
+      "path": "packages/views/voice/workspace-words.tsx",
+      "anchor": "packages/views/voice/workspace-words.tsx:1",
+      "line_count": 32,
+      "disposition": "Three useQuery observers independently of voice enabled/engine state: agentListOptions, memberListOptions, projectListOptions. Nonarchived agent names, all member names and project titles form context words; workspace cleanup clears context. No mutation or transcription request."
+    }
+  ],
+  "excluded": [
+    "packages/views/voice/use-composer-voice.test.tsx"
+  ],
+  "closure_sources": [
+    {
+      "path": "packages/views/platform/local-voice.ts",
+      "anchor": "packages/views/platform/local-voice.ts:1",
+      "line_count": 47
+    },
+    {
+      "path": "packages/views/platform/open-external.ts",
+      "anchor": "packages/views/platform/open-external.ts:1",
+      "line_count": 40
+    },
+    {
+      "path": "packages/core/voice/session.ts",
+      "anchor": "packages/core/voice/session.ts:1",
+      "line_count": 529
+    },
+    {
+      "path": "packages/core/voice/models.ts",
+      "anchor": "packages/core/voice/models.ts:1",
+      "line_count": 56
+    },
+    {
+      "path": "packages/core/voice/store.ts",
+      "anchor": "packages/core/voice/store.ts:1",
+      "line_count": 131
+    },
+    {
+      "path": "packages/core/voice/hotwords.ts",
+      "anchor": "packages/core/voice/hotwords.ts:1",
+      "line_count": 30
+    },
+    {
+      "path": "packages/core/voice/history.ts",
+      "anchor": "packages/core/voice/history.ts:1",
+      "line_count": 35
+    },
+    {
+      "path": "packages/core/platform/storage.ts",
+      "anchor": "packages/core/platform/storage.ts:1",
+      "line_count": 17
+    },
+    {
+      "path": "packages/core/workspace/queries.ts",
+      "anchor": "packages/core/workspace/queries.ts:1",
+      "line_count": 255
+    },
+    {
+      "path": "packages/core/projects/queries.ts",
+      "anchor": "packages/core/projects/queries.ts:1",
+      "line_count": 56
+    },
+    {
+      "path": "packages/core/api/client.ts",
+      "anchor": "packages/core/api/client.ts:1",
+      "line_count": 6216
+    }
+  ],
+  "http_union": [
+    {
+      "id": "client:2066",
+      "method": "GET",
+      "path_expression": "/api/agents?${search}",
+      "route": {
+        "method": "GET",
+        "path": "/api/agents"
+      },
+      "sources": [
+        "packages/core/api/client.ts:2066"
+      ],
+      "transport": "ApiClient.fetch; baseUrl + path; bearer or cookie credentials; workspace header from client context",
+      "auth": "requires endpoint-specific reconciliation",
+      "status": "pending-reconciliation"
+    },
+    {
+      "id": "client:3765",
+      "method": "GET",
+      "path_expression": "/api/workspaces/${workspaceId}/members",
+      "route": {
+        "method": "GET",
+        "path": "/api/workspaces/{id}/members"
+      },
+      "sources": [
+        "packages/core/api/client.ts:3765"
+      ],
+      "transport": "ApiClient.fetch; baseUrl + path; bearer or cookie credentials; workspace header from client context",
+      "auth": "requires endpoint-specific reconciliation",
+      "status": "route-mapped"
+    },
+    {
+      "id": "client:4517",
+      "method": "GET",
+      "path_expression": "/api/projects?${search}",
+      "route": {
+        "method": "GET",
+        "path": "/api/projects"
+      },
+      "sources": [
+        "packages/core/api/client.ts:4517"
+      ],
+      "transport": "ApiClient.fetch; baseUrl + path; bearer or cookie credentials; workspace header from client context",
+      "auth": "requires endpoint-specific reconciliation",
+      "status": "pending-reconciliation"
+    }
+  ],
+  "query_branches": {
+    "agents": "workspace_id iff truthy wsId; include_archived=true. 30s polling iff any nonarchived agent online/unstable; otherwise false. Key workspaces/wsId/agents.",
+    "members": "workspaceId interpolated into route; key workspaces/wsId/members.",
+    "projects": "include_archived=true; no workspace query parameter; client context supplies workspace header. key projects/wsId/list; select response.projects.",
+    "refetch": "No enabled guard in these factories. Mount/cache freshness, focus/reconnect and external invalidations can refetch the same three-call union. No new WS connection/send/listener in voice folder. Global invalidator/observer enumeration is outside scope."
+  },
+  "native_boundary": {
+    "object": "window.desktopAPI.voice",
+    "guard": "window exists and listModels/onModelsChanged/transcribe truthy; other methods assumed by cast, not independently guarded",
+    "used": [
+      "listModels",
+      "onModelsChanged",
+      "prepare",
+      "transcribe",
+      "downloadModel",
+      "cancelDownload",
+      "deleteModel",
+      "history.save (optional history)",
+      "history.update (optional history)"
+    ],
+    "not_used_here": [
+      "history.list",
+      "history.onChanged",
+      "history.audio",
+      "history.remove",
+      "history.setRetention",
+      "history.clear"
+    ],
+    "implementation": "Injected preload boundary only; no native implementation, channel names, download hosts, workers or production capability proven."
+  },
+  "resources": [
+    "model.licenseUrl -> openExternal: SSR no-op; desktopAPI.openExternal when present; otherwise window.open(_blank,noopener,noreferrer). same-tab branch exists in wrapper but is not requested by this caller. URL is dynamic resource, not an API route."
+  ],
+  "session_closure": "connectVoiceRuntime is once-only even if factory returns null. Missing runtime no recording; missing ready model opens setup. prepare precedes recorder.start. Session tokens suppress late results after cancellation/unregister/scope change. Silence avoids transcribe; short <250ms cancels. Optional history saved only retention != off; status done/failed/interrupted, retry reuses failed clip when canRetry else begins new recording. Native failure model-missing opens setup, engine-unavailable gives unavailable, other failures retryable. Cleaned text inserted with up to 20 delayed retries; optional submit only after successful insert and explicit send. Injected submit may have downstream transport outside this bounded union; no invented send route.",
+  "local_operations": "MediaRecorder, AudioContext, OfflineAudioContext, Blob/ArrayBuffer/typed arrays, canvas and timers are local browser APIs. No worker/postMessage transport exists in audited folder or inspected voice runtime adapter. Settings persist workpal_voice_input through defaultStorage localStorage; context hotwords dedupe/cap60 locally.",
+  "backend_disposition": "Voice transcription/model execution/download/native history capabilities remain unimplemented in the local backend; this audit adds no endpoints, fake output or execution. Existing call inventory status is preserved.",
+  "validation": {
+    "json_parse": true,
+    "exact_file_list": true,
+    "source_paths_and_line_bounds": true,
+    "known_call_ids_and_routes": true,
+    "runtime_executed": false,
+    "global_source_coverage": false
+  }
+}

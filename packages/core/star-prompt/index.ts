@@ -9,7 +9,7 @@ import type { User } from "../types";
 
 const DAY_MS = 24 * 60 * 60 * 1000;
 
-// Mirrors server/internal/handler/star_prompt.go, which has the final say.
+// Mirrors server/go/internal/handler/star_prompt.go, which has the final say.
 // The client checks first only so it does not ask for a showing it cannot get.
 export const STAR_PROMPT_MAX_SHOWINGS = 2;
 export const STAR_PROMPT_COOLDOWN_MS = 30 * DAY_MS;

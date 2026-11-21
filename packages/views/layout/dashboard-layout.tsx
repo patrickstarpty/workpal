@@ -22,6 +22,9 @@ interface DashboardLayoutProps {
   extra?: ReactNode;
   /** Loading indicator */
   loadingIndicator?: ReactNode;
+  /** Hosts with a persistent appearance boundary can keep it across entry routes. */
+  syncAppearance?: boolean;
+  bottomBarStart?: ReactNode;
 }
 
 /**
@@ -43,10 +46,12 @@ export function DashboardLayout({
   children,
   extra,
   loadingIndicator,
+  syncAppearance = true,
+  bottomBarStart,
 }: DashboardLayoutProps) {
   return (
     <>
-      <AppearanceSync />
+      {syncAppearance && <AppearanceSync />}
       <DashboardGuard
         loadingFallback={
           <div className="flex h-svh items-center justify-center">
@@ -76,7 +81,7 @@ export function DashboardLayout({
                   <SourceBackfillModal />
                   {extra}
                 </AppShellCard>
-                <AppBottomBar />
+                <AppBottomBar leading={bottomBarStart} />
               </div>
             </ShellRouteDataPrefetch>
           </AppShellProvider>

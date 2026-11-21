@@ -168,7 +168,7 @@ describe("agent messaging channels", () => {
         await screen.findByRole("menuitem", { name: "Troubleshooting" }),
       );
       expect(state.open).toHaveBeenCalledWith(
-        "https://workpal.invalid/docs/lark-bot-integration",
+        "http://127.0.0.1:4000/docs/lark-bot-integration",
       );
     },
   );
@@ -437,7 +437,7 @@ describe("shared connection dialog", () => {
     ).toBeTruthy();
     fireEvent.click(guide);
     expect(state.open).toHaveBeenCalledWith(
-      "https://workpal.invalid/docs/weixin-bot-integration",
+      "http://127.0.0.1:4000/docs/weixin-bot-integration",
     );
     // The footer's Close; the header's icon button shares the name.
     fireEvent.click(screen.getAllByRole("button", { name: "Close" })[0]!);

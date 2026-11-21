@@ -16,7 +16,7 @@ brew install workpal-ai/tap/workpal
 git clone https://code-host.invalid/workpal.git
 cd workpal
 make build
-cp server/bin/workpal /usr/local/bin/workpal
+cp server/go/bin/workpal /usr/local/bin/workpal
 ```
 
 ### Update
@@ -1232,7 +1232,7 @@ workpal daemon status --output json
 ## Error Messages
 
 The CLI funnels command errors returned to the top-level handler through a
-single user-facing translation layer (`server/internal/cli/errors.go`) so that
+single user-facing translation layer (`server/go/internal/cli/errors.go`) so that
 what you see on the terminal is a short, actionable sentence rather than a raw
 Go error, an HTTP status line, or an internal `resolve issue: ...` chain. (A
 few commands print their own output or run deliberate fast probes — for example

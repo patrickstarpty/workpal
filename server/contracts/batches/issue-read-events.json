@@ -1,0 +1,154 @@
+[
+  {
+    "method": "GET",
+    "path": "/api/issues",
+    "event": {
+      "disposition": "none",
+      "sources": [
+        "server/go/internal/handler/issue.go:1347",
+        "server/go/cmd/server/router.go:2165",
+        "server/go/internal/handler/handler.go:1083",
+        "server/go/internal/handler/handler.go:1234",
+        "server/go/internal/handler/project_access.go:18",
+        "server/go/internal/issuestatus/issuestatus.go:583"
+      ],
+      "reason": "Registered handler and reachable issue-domain enrichment helpers select and project existing state; no domain write, lazy persistent creation, event publish or outbox requirement.",
+      "side_effects": [
+        "Response serialization and diagnostic logging; inherited middleware behavior remains separately scoped."
+      ]
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/api/issues/{id}",
+    "event": {
+      "disposition": "none",
+      "sources": [
+        "server/go/internal/handler/issue.go:2576",
+        "server/go/cmd/server/router.go:2165",
+        "server/go/internal/handler/handler.go:1083",
+        "server/go/internal/handler/handler.go:1234",
+        "server/go/internal/handler/project_access.go:18",
+        "server/go/internal/issuestatus/issuestatus.go:583"
+      ],
+      "reason": "Registered handler and reachable issue-domain enrichment helpers select and project existing state; no domain write, lazy persistent creation, event publish or outbox requirement.",
+      "side_effects": [
+        "Response serialization and diagnostic logging; inherited middleware behavior remains separately scoped."
+      ]
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/api/issues/{id}/comments",
+    "event": {
+      "disposition": "none",
+      "sources": [
+        "server/go/internal/handler/comment.go:349",
+        "server/go/cmd/server/router.go:2165",
+        "server/go/internal/handler/handler.go:1083",
+        "server/go/internal/handler/handler.go:1234",
+        "server/go/internal/handler/project_access.go:18",
+        "server/go/internal/issuestatus/issuestatus.go:583"
+      ],
+      "reason": "Registered handler and reachable issue-domain enrichment helpers select and project existing state; no domain write, lazy persistent creation, event publish or outbox requirement.",
+      "side_effects": [
+        "Response serialization and diagnostic logging; inherited middleware behavior remains separately scoped."
+      ]
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/api/issues/{id}/timeline",
+    "event": {
+      "disposition": "none",
+      "sources": [
+        "server/go/internal/handler/activity.go:156",
+        "server/go/cmd/server/router.go:2165",
+        "server/go/internal/handler/handler.go:1083",
+        "server/go/internal/handler/handler.go:1234",
+        "server/go/internal/handler/project_access.go:18",
+        "server/go/internal/issuestatus/issuestatus.go:583"
+      ],
+      "reason": "Registered handler and reachable issue-domain enrichment helpers select and project existing state; no domain write, lazy persistent creation, event publish or outbox requirement.",
+      "side_effects": [
+        "Response serialization and diagnostic logging; inherited middleware behavior remains separately scoped."
+      ]
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/api/issues/{id}/subscribers",
+    "event": {
+      "disposition": "none",
+      "sources": [
+        "server/go/internal/handler/subscriber.go:45",
+        "server/go/cmd/server/router.go:2165",
+        "server/go/internal/handler/handler.go:1083",
+        "server/go/internal/handler/handler.go:1234",
+        "server/go/internal/handler/project_access.go:18",
+        "server/go/internal/issuestatus/issuestatus.go:583"
+      ],
+      "reason": "Registered handler and reachable issue-domain enrichment helpers select and project existing state; no domain write, lazy persistent creation, event publish or outbox requirement.",
+      "side_effects": [
+        "Response serialization and diagnostic logging; inherited middleware behavior remains separately scoped."
+      ]
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/api/issues/{id}/attachments",
+    "event": {
+      "disposition": "none",
+      "sources": [
+        "server/go/internal/handler/file.go:676",
+        "server/go/cmd/server/router.go:2165",
+        "server/go/internal/handler/handler.go:1083",
+        "server/go/internal/handler/handler.go:1234",
+        "server/go/internal/handler/project_access.go:18",
+        "server/go/internal/issuestatus/issuestatus.go:583"
+      ],
+      "reason": "Registered handler and reachable issue-domain enrichment helpers select and project existing state; no domain write, lazy persistent creation, event publish or outbox requirement.",
+      "side_effects": [
+        "Response serialization and diagnostic logging; inherited middleware behavior remains separately scoped."
+      ]
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/api/issues/{id}/children",
+    "event": {
+      "disposition": "none",
+      "sources": [
+        "server/go/internal/handler/issue.go:2643",
+        "server/go/cmd/server/router.go:2165",
+        "server/go/internal/handler/handler.go:1083",
+        "server/go/internal/handler/handler.go:1234",
+        "server/go/internal/handler/project_access.go:18",
+        "server/go/internal/issuestatus/issuestatus.go:583"
+      ],
+      "reason": "Registered handler and reachable issue-domain enrichment helpers select and project existing state; no domain write, lazy persistent creation, event publish or outbox requirement.",
+      "side_effects": [
+        "Response serialization and diagnostic logging; inherited middleware behavior remains separately scoped."
+      ]
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/api/issues/{id}/duplicates",
+    "event": {
+      "disposition": "none",
+      "sources": [
+        "server/go/internal/handler/issue_duplicate.go:167",
+        "server/go/cmd/server/router.go:2165",
+        "server/go/internal/handler/handler.go:1083",
+        "server/go/internal/handler/handler.go:1234",
+        "server/go/internal/handler/project_access.go:18",
+        "server/go/internal/issuestatus/issuestatus.go:583"
+      ],
+      "reason": "Registered handler and reachable issue-domain enrichment helpers select and project existing state; no domain write, lazy persistent creation, event publish or outbox requirement.",
+      "side_effects": [
+        "Response serialization and diagnostic logging; inherited middleware behavior remains separately scoped."
+      ]
+    }
+  }
+]

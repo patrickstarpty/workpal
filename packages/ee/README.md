@@ -2,7 +2,7 @@
 
 Commercial client features. Files here are covered
 by [LICENSE](./LICENSE), not by the Workpal License. The server half lives in
-`server/ee`.
+`server/go/ee`.
 
 - **Dependency direction.** This package may import `@workpal/core`, `@workpal/ui`
   and `@workpal/views`; those never import `@workpal/ee`.

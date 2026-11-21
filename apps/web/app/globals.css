@@ -8,10 +8,10 @@
 @import "./custom.css";
 @import "./landing.css";
 
-/* The marketing site is light-only: `.landing-light` re-declares the tokens
-   (custom.css), and `dark:` utilities inside it must not fire either. The
-   exclusion sits in `:where()` so `dark:` keeps its (0,2,0) specificity. */
-@custom-variant dark (&:is(.dark *):where(:not(.landing-light, .landing-light *)));
+/* Marketing and sign-in re-declare their own light tokens; dark utilities
+   must not fire inside either surface. Keep the exclusion in :where() so
+   the dark variant retains its (0,2,0) specificity elsewhere. */
+@custom-variant dark (&:is(.dark *):where(:not(.landing-light, .landing-light *, .login-entry, .login-entry *)));
 
 @source "../../../packages/ui/**/*.{ts,tsx}";
 @source "../../../packages/core/**/*.{ts,tsx}";

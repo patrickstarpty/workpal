@@ -1,0 +1,281 @@
+{
+  "version": 1,
+  "coverage": "Bounded static source audit of five target bodies only; no backend support or global closure claim",
+  "files": [
+    {
+      "path": "packages/views/issues/components/infinite-scroll-sentinel.tsx",
+      "sha256": "f9dd668440a9c285b4f63d0c30d00603334e5aa3498adb822775ba06c166c4ba",
+      "whole_source": true,
+      "disposition": "Observer captures node, observes with rootMargin, disconnects on cleanup/rebuild; ref updated each render. Each intersecting callback invokes latest injected onVisible. No loading gate, explicit debounce or fetch exists; loading/label only render spinner text."
+    },
+    {
+      "path": "packages/views/issues/components/issue-chip.tsx",
+      "sha256": "e65a963ddc255fd42b4c0ead3fb18c88d83ee87013bade036f50b7f615ce2fa8",
+      "whole_source": true,
+      "disposition": "useChipIssue observes list then enables detail only absent list match; focus callback suppresses ApiError 404 only. Status hook still runs before children override or fallback; override does not suppress queries. Chip renders text/status, no link/media."
+    },
+    {
+      "path": "packages/views/issues/components/issue-hover-card.tsx",
+      "sha256": "272106fedecb2da866bbbaa1f09ebd9bd6643353deddc260049203892307b4f7",
+      "whole_source": true,
+      "disposition": "Hover wrapper delegates mount timing to UI library. Body detail pending skeleton; error or absent data terminal label; success mounts Details. Details observes status twice through label hook, actor directories, conditional plugin installations, workspace child progress and task snapshot; projects only with project_id, parent only with parent id; PR query with issue id. selectIssueTasks filters snapshot locally; running assignee beats queued. Description flattened to text, first open/draft PR else first; labels capped at three, date/progress conditional. Avatar children explicitly disable hover/profile links; no direct media element or navigation callback in target."
+    },
+    {
+      "path": "packages/views/issues/components/issue-mention-card.tsx",
+      "sha256": "91e8c333814626e52d1c9c6eeeefc439bf1bebc1644a9b273d6c9c96818ec3ee",
+      "whole_source": true,
+      "disposition": "Provider/hover/link are child components. Loaded issue enables context callback: stop propagation then yield to editor/selected text else openMenu(issue,event). Peek host adds handlers: primary shift without meta/control/alt prevents selection on mousedown and prevents navigation then toggle(issueId) on click. Other clicks delegated AppLink. Current issue overrides chip content but does not skip chip queries. AppLink prefetch on hover/focus is independent of hover-card opening."
+    },
+    {
+      "path": "packages/views/layout/tab-presentation.tsx",
+      "sha256": "4bf7bb6de2101769d7752d5703fb933553917a1dc3899d28b8aa3872f1a36955",
+      "whole_source": true,
+      "disposition": "All inbox active/archive/page/lookup, project/autopilot/skill, actor directories, runtime and chat observers explicitly disabled. Canonical issue enabled only fetch and direct issue or known issue-backed inbox row, internally workspace/id gated; identifier resolution seeds UUID initialData and mirrors identifier cache without replacing existing row. Status fetch only fetch + workspace + direct issue. No retry callback returned by canonical hook is invoked here. Title/visual switches and pending fallbacks local. Actor visual falls back before workspace, otherwise child avatar profileLink=false with hover/dot absent; project icon is text, not URL."
+    }
+  ],
+  "edges": [
+    {
+      "source": "packages/core/agents/queries.ts:60",
+      "api_method": "getAgentTaskSnapshot",
+      "client_anchor": "packages/core/api/client.ts:3045",
+      "kind": "query-or-mutation",
+      "inventory": [
+        {
+          "id": "client:3046",
+          "method": "GET",
+          "path_expression": "/api/agent-task-snapshot",
+          "route": {
+            "method": "GET",
+            "path": "/api/agent-task-snapshot"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/workspace/queries.ts:54",
+      "api_method": "listAgents",
+      "client_anchor": "packages/core/api/client.ts:2062",
+      "kind": "query-or-mutation",
+      "inventory": [
+        {
+          "id": "client:2066",
+          "method": "GET",
+          "path_expression": "/api/agents?${search}",
+          "route": {
+            "method": "GET",
+            "path": "/api/agents"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/workspace/queries.ts:105",
+      "api_method": "listSquads",
+      "client_anchor": "packages/core/api/client.ts:5202",
+      "kind": "query-or-mutation",
+      "inventory": [
+        {
+          "id": "client:5203",
+          "method": "GET",
+          "path_expression": "/api/squads",
+          "route": {
+            "method": "GET",
+            "path": "/api/squads"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/issues/queries.ts:390",
+      "factory": "issueListOptions",
+      "api_method": "listIssues",
+      "client_anchor": "packages/core/api/client.ts:1277",
+      "kind": "possible-refetch-union",
+      "inventory": [
+        {
+          "id": "client:1344",
+          "method": "GET",
+          "path_expression": "/api/issues?${search}",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues"
+          }
+        }
+      ],
+      "parent_branch_review": "queryFn passes empty filter and declared IssueSort. Ordinary typed production callers have no ids; GET. The underlying generic listIssues client separately supports POST for truthy ids and creator fallback, but that is not this factory normal argument contract."
+    },
+    {
+      "source": "packages/core/issues/queries.ts:507",
+      "factory": "issueDetailOptions",
+      "api_method": "getIssue",
+      "client_anchor": "packages/core/api/client.ts:1611",
+      "kind": "possible-refetch-union",
+      "inventory": [
+        {
+          "id": "client:1612",
+          "method": "GET",
+          "path_expression": "/api/issues/${encodeURIComponent(id)}",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/issues/queries.ts:556",
+      "factory": "childIssueProgressOptions",
+      "api_method": "getChildIssueProgress",
+      "client_anchor": "packages/core/api/client.ts:1814",
+      "kind": "possible-refetch-union",
+      "inventory": [
+        {
+          "id": "client:1817",
+          "method": "GET",
+          "path_expression": "/api/issues/child-progress",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/child-progress"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/projects/queries.ts:21",
+      "factory": "projectListOptions",
+      "api_method": "listProjects",
+      "client_anchor": "packages/core/api/client.ts:4513",
+      "kind": "possible-refetch-union",
+      "inventory": [
+        {
+          "id": "client:4517",
+          "method": "GET",
+          "path_expression": "/api/projects?${search}",
+          "route": {
+            "method": "GET",
+            "path": "/api/projects"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/workspace/queries.ts:43",
+      "factory": "memberListOptions",
+      "api_method": "listMembers",
+      "client_anchor": "packages/core/api/client.ts:3764",
+      "kind": "possible-refetch-union",
+      "inventory": [
+        {
+          "id": "client:3765",
+          "method": "GET",
+          "path_expression": "/api/workspaces/${workspaceId}/members",
+          "route": {
+            "method": "GET",
+            "path": "/api/workspaces/{id}/members"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/workspace/queries.ts:50",
+      "factory": "agentListOptions",
+      "api_method": "listAgents",
+      "client_anchor": "packages/core/api/client.ts:2062",
+      "kind": "possible-refetch-union",
+      "inventory": [
+        {
+          "id": "client:2066",
+          "method": "GET",
+          "path_expression": "/api/agents?${search}",
+          "route": {
+            "method": "GET",
+            "path": "/api/agents"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/workspace/queries.ts:102",
+      "factory": "squadListOptions",
+      "api_method": "listSquads",
+      "client_anchor": "packages/core/api/client.ts:5202",
+      "kind": "possible-refetch-union",
+      "inventory": [
+        {
+          "id": "client:5203",
+          "method": "GET",
+          "path_expression": "/api/squads",
+          "route": {
+            "method": "GET",
+            "path": "/api/squads"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/issue-statuses/queries.ts:27",
+      "factory": "issueStatusListOptions",
+      "api_method": "listIssueStatuses",
+      "client_anchor": "packages/core/api/client.ts:4819",
+      "kind": "possible-refetch-union",
+      "inventory": [
+        {
+          "id": "client:4821",
+          "method": "GET",
+          "path_expression": "/api/issue-statuses${query}",
+          "route": {
+            "method": "GET",
+            "path": "/api/issue-statuses"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/api/client.ts:5525",
+      "inventory": [
+        {
+          "id": "client:5525",
+          "method": "GET",
+          "path_expression": "/api/issues/${issueId}/pull-requests",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}/pull-requests"
+          }
+        }
+      ]
+    }
+  ],
+  "reused_evidence": [
+    "server/contracts/batches/plugin-surface-transport-coverage.json",
+    "server/contracts/batches/active-web-auth-transport.json",
+    "server/contracts/batches/identity-workspace-transport-coverage.json",
+    "server/contracts/batches/editor-preview-transport-coverage.json",
+    "server/contracts/batches/core-query-transport-coverage.json",
+    "server/contracts/batches/issue-query-transport-coverage.json"
+  ],
+  "branch_behavior": [
+    "Observer captures node, observes with rootMargin, disconnects on cleanup/rebuild; ref updated each render. Each intersecting callback invokes latest injected onVisible. No loading gate, explicit debounce or fetch exists; loading/label only render spinner text.",
+    "useChipIssue observes list then enables detail only absent list match; focus callback suppresses ApiError 404 only. Status hook still runs before children override or fallback; override does not suppress queries. Chip renders text/status, no link/media.",
+    "Hover wrapper delegates mount timing to UI library. Body detail pending skeleton; error or absent data terminal label; success mounts Details. Details observes status twice through label hook, actor directories, conditional plugin installations, workspace child progress and task snapshot; projects only with project_id, parent only with parent id; PR query with issue id. selectIssueTasks filters snapshot locally; running assignee beats queued. Description flattened to text, first open/draft PR else first; labels capped at three, date/progress conditional. Avatar children explicitly disable hover/profile links; no direct media element or navigation callback in target.",
+    "Provider/hover/link are child components. Loaded issue enables context callback: stop propagation then yield to editor/selected text else openMenu(issue,event). Peek host adds handlers: primary shift without meta/control/alt prevents selection on mousedown and prevents navigation then toggle(issueId) on click. Other clicks delegated AppLink. Current issue overrides chip content but does not skip chip queries. AppLink prefetch on hover/focus is independent of hover-card opening.",
+    "All inbox active/archive/page/lookup, project/autopilot/skill, actor directories, runtime and chat observers explicitly disabled. Canonical issue enabled only fetch and direct issue or known issue-backed inbox row, internally workspace/id gated; identifier resolution seeds UUID initialData and mirrors identifier cache without replacing existing row. Status fetch only fetch + workspace + direct issue. No retry callback returned by canonical hook is invoked here. Title/visual switches and pending fallbacks local. Actor visual falls back before workspace, otherwise child avatar profileLink=false with hover/dot absent; project icon is text, not URL."
+  ],
+  "unresolved_edges": [
+    "InfiniteScrollSentinel.onVisibleRef.current: arbitrary supplied () => void; caller pagination/fetch behavior is outside five targets.",
+    "IssueMentionLink peek.toggle(issueId): injected IssuePeekActionsContext provider implementation and resulting panel descendants outside scope.",
+    "IssueMentionLink openMenu(issue,event): sidebar context-menu child/provider action descendants outside scope; target opens menu, does not select a mutation.",
+    "AppLink navigation push/openInNewTab/getShareableUrl/prefetch and RouteDataPrefetchContext(href): injected adapters/providers; concrete AppLink dispatch reviewed, provider transport union not certified here.",
+    "ActorAvatar child resolves directory avatar_url through resolvePublicFileUrl: leading slash concatenated with trimmed API base, other strings preserved. Native image resource URLs may be relative, arbitrary-host, data or blob; no inventory API tuple inferred. Entire avatar/UI descendant trees not certified.",
+    "useActorName feature flag provider and plugin installation gate depend on existing plugin evidence; no whole descendant closure asserted."
+  ],
+  "boundaries": "React, TanStack Query, Base UI, IntersectionObserver, DOM selection, regex/string/date behavior are library/standard boundaries. Hover timing/cache scheduling are not measured request counts. Editor-preview evidence distinguishes native resources from authenticated API transport.",
+  "validation": {
+    "json": true,
+    "exact_inventory_tuples": true,
+    "inventory_sha256": "6abba909f844102f7b967a4fea091c57e17cd650bb1d0aedbccd40ffcc30828b"
+  },
+  "root_review": {
+    "status": "accepted bounded target scope",
+    "checks": "Root read sentinel and chip bodies; checked tab observer enabled gates and hover query sites. Exact hashes/tuples verified by integration. Injected host and descendant boundaries retained. PR read may produce events per existing pr-view-refresh-event contract; no read-only backend assumption."
+  }
+}

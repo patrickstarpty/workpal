@@ -90,7 +90,7 @@ describe("ThemesButton", () => {
 
     const parsed = parseTheme({ manifest: manifest("paper", "Paper", "1.0.0"), css });
     if (!parsed.ok) throw new Error("fixture");
-    useInstalledThemesStore.getState().install(parsed.theme);
+    act(() => useInstalledThemesStore.getState().install(parsed.theme));
     rerender(<ThemesButton />);
     await user.click(screen.getByRole("button", { name: "Manage" }));
     expect(screen.getByText("The themes you installed.")).toBeTruthy();
@@ -98,7 +98,7 @@ describe("ThemesButton", () => {
     expect(api.listStoreThemes).not.toHaveBeenCalled();
   });
 
-  it("lists and searches the store, installs a theme and removes it", async () => {
+  it("keeps legacy store installs from activating a theme outside the available choices", async () => {
     const user = userEvent.setup();
     renderButton();
     await user.click(screen.getByRole("button", { name: "Manage" }));
@@ -115,8 +115,10 @@ describe("ThemesButton", () => {
     const [installInk] = screen.getAllByRole("button", { name: "Install" });
     await user.click(installInk!);
     await waitFor(() => expect(useInstalledThemesStore.getState().fromStore).toEqual({ ink: "1.0.0" }));
-    expect(useAppearanceStore.getState().theme).toBe("ink");
-    expect(await screen.findByRole("button", { name: "In use" })).toBeTruthy();
+    expect(useAppearanceStore.getState().theme).toBe("fwd");
+    await user.click(await screen.findByRole("button", { name: "Use" }));
+    expect(useAppearanceStore.getState().theme).toBe("fwd");
+    expect(screen.queryByRole("button", { name: "In use" })).toBeNull();
     // The card stays where it was while the window is open.
     expect(screen.getAllByRole("heading", { level: 3 }).map((h) => h.textContent)).toEqual(["Ink", "Sand"]);
     await user.click(screen.getByRole("switch", { name: "Show installed only" }));
@@ -124,7 +126,7 @@ describe("ThemesButton", () => {
 
     await user.click(screen.getByRole("button", { name: "Remove Ink" }));
     expect(useInstalledThemesStore.getState().themes).toEqual([]);
-    expect(useAppearanceStore.getState().theme).toBe("default");
+    expect(useAppearanceStore.getState().theme).toBe("fwd");
   });
 
   it("shows how often each store theme was downloaded, most downloaded first, and recounts after an install", async () => {

@@ -28,9 +28,9 @@ case "${1:-}" in
     fi
     printf '%s\n' \
       github.com/workpal-ai/workpal/server \
-      github.com/workpal-ai/workpal/server/internal/daemon \
-      github.com/workpal-ai/workpal/server/pkg/agent \
-      github.com/workpal-ai/workpal/server/pkg/agent/internal/testutil
+      github.com/workpal-ai/workpal/server/go/internal/daemon \
+      github.com/workpal-ai/workpal/server/go/pkg/agent \
+      github.com/workpal-ai/workpal/server/go/pkg/agent/internal/testutil
     ;;
   test)
     printf '%s\n' "$*" >>"$WORKPAL_TEST_GO_CALLS"
@@ -43,7 +43,7 @@ esac
 FAKE
 chmod 755 "$BIN_DIR/go"
 
-regular_call='test -race github.com/workpal-ai/workpal/server github.com/workpal-ai/workpal/server/internal/daemon'
+regular_call='test -race github.com/workpal-ai/workpal/server github.com/workpal-ai/workpal/server/go/internal/daemon'
 agent_call='test -race -p 2 -parallel 2 ./pkg/agent/...'
 
 # $1: case label; $2: expected go calls, one per line. Clears the log after.

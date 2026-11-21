@@ -36,7 +36,7 @@ import {
 
 const DINGTALK_CHAT_MANAGE_PERMISSION = "qyapi_chat_manage";
 
-export function AgentChannelLinks({ agent }: { agent: Agent }) {
+export function DisabledAgentChannelLinks({ agent }: { agent: Agent }) {
   const { connections } = useMessagingChannels();
   const links = connections.filter(
     (entry) => entry.installation.agent_id === agent.id,
@@ -86,7 +86,7 @@ function AgentChannelContact({
   ) : null;
 }
 
-export function AgentChannelsSection({ agent }: { agent: Agent }) {
+export function DisabledAgentChannelsSection({ agent }: { agent: Agent }) {
   const { t } = useT("settings");
   const { queries, connections, canManage, available, isAdmin } =
     useMessagingChannels();
@@ -313,7 +313,7 @@ function AgentChannelRow({
                   <DropdownMenuItem
                     onClick={() =>
                       openExternal(
-                        `https://workpal.invalid/docs${docsLocalePrefix(i18n.language)}/lark-bot-integration`,
+                        `http://127.0.0.1:4000/docs${docsLocalePrefix(i18n.language)}/lark-bot-integration`,
                       )
                     }
                   >
@@ -376,4 +376,10 @@ function AgentChannelRow({
       />
     </div>
   );
+}
+
+// External channel integrations are disabled for the local workspace.
+export function AgentChannelLinks(_props: {agent: Agent}) { return null; }
+export function AgentChannelsSection(_props: {agent: Agent}) {
+ return <ObjectSection title="Channels"><div className="flex items-center justify-between gap-3 py-3 text-body"><span>Microsoft Teams</span><span className="text-caption text-muted-foreground">Not configured</span></div></ObjectSection>;
 }

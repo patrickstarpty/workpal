@@ -1,0 +1,272 @@
+{
+  "version": 1,
+  "scope": [
+    "packages/views/members/member-profile-card.tsx",
+    "packages/views/squads/components/squad-detail-page.tsx"
+  ],
+  "files": [
+    {
+      "path": "packages/views/members/member-profile-card.tsx",
+      "sha256": "b594c037b47fb3bc3d04f02564467478d638bb68052f23c570f5f380fd354942",
+      "whole_source": true
+    },
+    {
+      "path": "packages/views/squads/components/squad-detail-page.tsx",
+      "sha256": "737ac4d8523505505c3efeb357350b4e31d66c292d3494d41fe7586d4af7fe70",
+      "whole_source": true
+    }
+  ],
+  "helpers": [
+    {
+      "name": "MemberProfileCard",
+      "anchor": "packages/views/members/member-profile-card.tsx:28"
+    },
+    {
+      "name": "RoleBadge",
+      "anchor": "packages/views/members/member-profile-card.tsx:105"
+    },
+    {
+      "name": "OwnedAgentsSection",
+      "anchor": "packages/views/members/member-profile-card.tsx:118"
+    },
+    {
+      "name": "SquadDetailPage",
+      "anchor": "packages/views/squads/components/squad-detail-page.tsx:105"
+    },
+    {
+      "name": "SquadBodySkeleton",
+      "anchor": "packages/views/squads/components/squad-detail-page.tsx:516"
+    },
+    {
+      "name": "SquadPanelSkeleton",
+      "anchor": "packages/views/squads/components/squad-detail-page.tsx:538"
+    },
+    {
+      "name": "SquadAvatar",
+      "anchor": "packages/views/squads/components/squad-detail-page.tsx:551"
+    },
+    {
+      "name": "SquadMembersSection",
+      "anchor": "packages/views/squads/components/squad-detail-page.tsx:579"
+    },
+    {
+      "name": "SquadInstructionsSection",
+      "anchor": "packages/views/squads/components/squad-detail-page.tsx:769"
+    },
+    {
+      "name": "SquadRecentWorkSection",
+      "anchor": "packages/views/squads/components/squad-detail-page.tsx:866"
+    },
+    {
+      "name": "SquadProperties",
+      "anchor": "packages/views/squads/components/squad-detail-page.tsx:914"
+    },
+    {
+      "name": "AddMemberDialog",
+      "anchor": "packages/views/squads/components/squad-detail-page.tsx:1023"
+    },
+    {
+      "name": "RoleEditor",
+      "anchor": "packages/views/squads/components/squad-detail-page.tsx:1176"
+    },
+    {
+      "name": "SquadDescriptionEditor",
+      "anchor": "packages/views/squads/components/squad-detail-page.tsx:1242"
+    }
+  ],
+  "edges": [
+    {
+      "api_method": "getSquad",
+      "client_anchor": "packages/core/api/client.ts:5218",
+      "id": "client:5219",
+      "method": "GET",
+      "path_expression": "/api/squads/${id}",
+      "route": {
+        "method": "GET",
+        "path": "/api/squads/{id}"
+      }
+    },
+    {
+      "api_method": "listSquadMembers",
+      "client_anchor": "packages/core/api/client.ts:5243",
+      "id": "client:5244",
+      "method": "GET",
+      "path_expression": "/api/squads/${squadId}/members",
+      "route": {
+        "method": "GET",
+        "path": "/api/squads/{id}/members"
+      }
+    },
+    {
+      "api_method": "getSquadMemberStatus",
+      "client_anchor": "packages/core/api/client.ts:5263",
+      "id": "client:5264",
+      "method": "GET",
+      "path_expression": "/api/squads/${squadId}/members/status",
+      "route": {
+        "method": "GET",
+        "path": "/api/squads/{id}/members/status"
+      }
+    },
+    {
+      "api_method": "listIssues",
+      "client_anchor": "packages/core/api/client.ts:1277",
+      "id": "client:1329",
+      "method": "POST",
+      "path_expression": "/api/issues/query",
+      "route": {
+        "method": "POST",
+        "path": "/api/issues/query"
+      }
+    },
+    {
+      "api_method": "listIssues",
+      "client_anchor": "packages/core/api/client.ts:1277",
+      "id": "client:1344",
+      "method": "GET",
+      "path_expression": "/api/issues?${search}",
+      "route": {
+        "method": "GET",
+        "path": "/api/issues"
+      }
+    },
+    {
+      "api_method": "listMembers",
+      "client_anchor": "packages/core/api/client.ts:3764",
+      "id": "client:3765",
+      "method": "GET",
+      "path_expression": "/api/workspaces/${workspaceId}/members",
+      "route": {
+        "method": "GET",
+        "path": "/api/workspaces/{id}/members"
+      }
+    },
+    {
+      "api_method": "listAgents",
+      "client_anchor": "packages/core/api/client.ts:2062",
+      "id": "client:2066",
+      "method": "GET",
+      "path_expression": "/api/agents?${search}",
+      "route": {
+        "method": "GET",
+        "path": "/api/agents"
+      }
+    },
+    {
+      "api_method": "getWorkspaceAgentRunCounts",
+      "client_anchor": "packages/core/api/client.ts:3086",
+      "id": "client:3087",
+      "method": "GET",
+      "path_expression": "/api/agent-run-counts",
+      "route": {
+        "method": "GET",
+        "path": "/api/agent-run-counts"
+      }
+    },
+    {
+      "api_method": "updateSquad",
+      "client_anchor": "packages/core/api/client.ts:5232",
+      "id": "client:5233",
+      "method": "PUT",
+      "path_expression": "/api/squads/${id}",
+      "route": {
+        "method": "PUT",
+        "path": "/api/squads/{id}"
+      }
+    },
+    {
+      "api_method": "addSquadMember",
+      "client_anchor": "packages/core/api/client.ts:5247",
+      "id": "client:5248",
+      "method": "POST",
+      "path_expression": "/api/squads/${squadId}/members",
+      "route": {
+        "method": "POST",
+        "path": "/api/squads/{id}/members"
+      }
+    },
+    {
+      "api_method": "removeSquadMember",
+      "client_anchor": "packages/core/api/client.ts:5251",
+      "id": "client:5252",
+      "method": "DELETE",
+      "path_expression": "/api/squads/${squadId}/members",
+      "route": {
+        "method": "DELETE",
+        "path": "/api/squads/{id}/members"
+      }
+    },
+    {
+      "api_method": "updateSquadMemberRole",
+      "client_anchor": "packages/core/api/client.ts:5255",
+      "id": "client:5256",
+      "method": "PATCH",
+      "path_expression": "/api/squads/${squadId}/members/role",
+      "route": {
+        "method": "PATCH",
+        "path": "/api/squads/{id}/members/role"
+      }
+    },
+    {
+      "api_method": "deleteSquad",
+      "client_anchor": "packages/core/api/client.ts:5239",
+      "id": "client:5240",
+      "method": "DELETE",
+      "path_expression": "/api/squads/${id}",
+      "route": {
+        "method": "DELETE",
+        "path": "/api/squads/{id}"
+      }
+    },
+    {
+      "api_method": "listSquads",
+      "client_anchor": "packages/core/api/client.ts:5202",
+      "id": "client:5203",
+      "method": "GET",
+      "path_expression": "/api/squads",
+      "route": {
+        "method": "GET",
+        "path": "/api/squads"
+      }
+    },
+    {
+      "api_method": "listInvolvedSquadIds",
+      "client_anchor": "packages/core/api/client.ts:5209",
+      "id": "client:5210",
+      "method": "GET",
+      "path_expression": "/api/squads/involved",
+      "route": {
+        "method": "GET",
+        "path": "/api/squads/involved"
+      }
+    },
+    {
+      "api_method": "listIssueStatuses",
+      "client_anchor": "packages/core/api/client.ts:4819",
+      "id": "client:4821",
+      "method": "GET",
+      "path_expression": "/api/issue-statuses${query}",
+      "route": {
+        "method": "GET",
+        "path": "/api/issue-statuses"
+      }
+    }
+  ],
+  "reused_evidence": [
+    "server/contracts/batches/identity-workspace-transport-coverage.json",
+    "server/contracts/batches/core-query-transport-coverage.json",
+    "server/contracts/batches/avatar-foreground-transport-coverage.json",
+    "server/contracts/batches/creation-dialog-transport-coverage.json",
+    "server/contracts/batches/editor-transport-coverage.json",
+    "server/contracts/batches/status-helper-transport-coverage.json"
+  ],
+  "analysis": "# Member and squad transport audit\n\nBounded static source audit of MemberProfileCard and SquadDetailPage, including every local function body. No backend support or global closure claim.\n\nMemberProfileCard starts members, agents and workspace 30-day run-count observers before its loading/unavailable returns. It resolves by user_id, excludes archived owned agents, sorts by run count descending then name, and shows two plus overflow. RoleBadge maps owner/admin/other locally. OwnedAgentsSection navigates to agent detail and delegates avatar/status rendering without nested hover cards.\n\nSquadDetailPage derives squadId from the last pathname segment. Detail, roster, status and recent issues require workspace.id and squadId; members/agents factories have no enabled guard. Recent work sends squad assignee filter, updated_at descending, limit five. Status maps member_id to snapshots. Workspace role owner/admin or creator equality grants canManage. This is a UI gate, not server authorization proof. Missing detail shows skeleton or error state.\n\nArchived squads suppress assign-work, archive/create-agent actions, roster edits, leader picker and instructions edits. Name, description and avatar controls use canManage alone, including archived squads. Assign work opens create-issue with squad assignee defaults; create-agent navigates with encoded squad query. Copy link uses clipboard and shareable URL, no API call in this body.\n\nUpdate mutation sends optional name/description/instructions/avatar_url/leader_id, seeds detail cache, explicitly refetches detail and roster, and invalidates squads prefix. Leader mutation sends leader_id and refetches detail/roster plus prefix invalidation. Add sends member_type/member_id and trimmed role or undefined; remove sends type/id; role PATCH sends type/id/role. These three refetch roster only. Delete invalidates prefix then navigates to squad list. Errors show toast; no synthetic successful outputs.\n\nThe prefix union includes listSquads, listInvolvedSquadIds, getSquad, listSquadMembers, getSquadMemberStatus and the recent listIssues observer. Invalidation may refetch active matching observers; explicit refetches are separate and may overlap. It does not imply every observer runs or expand to unrelated workspace trees.\n\nSquadMembersSection grants leader selection only to nonarchived agent nonleaders; removal excludes leader; role editing uses passed management gate. Agent detail navigation remains visible without management. Status issue links navigate only. SquadProperties filters leader candidates to nonarchived agents, skips unchanged leader, renders four avatar previews and local timestamps. SquadAvatar computes initials and resolves dynamic public image URL.\n\nAddMemberDialog excludes existing roster targets via parent filters and archived agents, searches names/pinyin locally, requires target and not submitting, submits optional role, closes on success and restores submitting on failure. RoleEditor trims, skips unchanged trimmed values, commits blur/Enter, cancels Escape and retains edit on failure. SquadDescriptionEditor skips unchanged/discard, saves raw draft on blur/send shortcut, retains failed draft for retry, and displays pending text. saveName trims, rejects empty/discard, resets on error. SquadInstructionsSection saves raw editor value only when dirty, preserves editing on failure, cancels locally; ContentEditor disables mentions. RecentWorkSection and useStatusLabel delegate status catalog observers; duplicate keys can share cache. Skeleton helpers are render-only.\n\nChild boundaries: ActorAvatar, AvatarUploadControl, ContentEditor/ReadonlyContent, title editor, status hooks, modal issue creation and agent creation are delegated to existing evidence, not counted as local helper bodies. Avatar upload may precede the parent's updateSquad avatar callback. Public avatar URLs and rich content resources are dynamic browser resources, not fixed authenticated route tuples. Creation navigation/modal opening alone does not execute creation. Existing identity/workspace evidence supplies context and query behavior; core-query and avatar evidence supply child observer/resource unions; editor and status evidence retain their own bounds.\n\nValidation: JSON parsed; all listed file hashes recomputed; helper and client anchors checked; every edge ID/method/path_expression/route matched exactly against frontend-calls.json. No app runtime, git, data, network, models or integrations operated.\n",
+  "limitations": [
+    "Child evidence retains its own scope; no global or backend completion claim.",
+    "Dynamic resource URLs do not establish fixed route identities."
+  ],
+  "root_review": {
+    "status": "accepted bounded two-target scope",
+    "checks": "Root checked squad mutation callbacks/refetches and permission/source gates; hashes/tuples verified by ledger integration. UI permissions are not backend proof; child boundaries retained."
+  }
+}

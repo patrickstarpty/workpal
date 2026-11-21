@@ -135,7 +135,7 @@ const CANCELLATION_FAILURE_REASONS: ReadonlySet<string> = new Set([
 
 // Failures a retry cannot fix until someone changes configuration: the
 // non-retryable auth, quota, config, model, CLI, and runtime-ownership
-// reasons documented in server/pkg/taskfailure.
+// reasons documented in server/go/pkg/taskfailure.
 const ACTION_REQUIRED_FAILURE_REASONS: ReadonlySet<string> = new Set([
   "runtime_access_denied",
   "agent_error.provider_auth_or_access",

@@ -676,7 +676,7 @@ make up C=api,web,daemon
 
 It creates the environment if needed, sets the fixed local verification code
 before the first launch, logs in as `dev@localhost`, mints a personal access
-token, creates a workspace, writes the CLI profile, builds `server/bin/workpal`
+token, creates a workspace, writes the CLI profile, builds `server/go/bin/workpal`
 and starts the daemon from that binary. It then prints the URL, the login, the
 commit, and the stop command.
 

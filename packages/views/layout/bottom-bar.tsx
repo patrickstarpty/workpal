@@ -1,4 +1,5 @@
 "use client";
+import type { ReactNode } from "react";
 
 import { TriangleAlert } from "@workpal/ui/icons";
 import { useChatStore } from "@workpal/core/chat";
@@ -48,7 +49,7 @@ function TeamStatus({ wsId }: { wsId: string }) {
  * used to take. Below `md` there is no bar and quick chat is the floating
  * launcher.
  */
-export function AppBottomBar() {
+export function AppBottomBar({ leading }: { leading?: ReactNode } = {}) {
   const { t } = useT("layout");
   const wsId = useCurrentWorkspace()?.id;
   const isMobile = useIsMobile();
@@ -56,7 +57,8 @@ export function AppBottomBar() {
   const { pathname } = useNavigation();
   const chatPath = useWorkspacePaths().chat();
 
-  if (!wsId || isMobile) return null;
+  if (!wsId) return null;
+  if (isMobile) return leading ? <div className="fixed bottom-[calc(var(--chat-launcher-inset)+env(safe-area-inset-bottom))] left-[calc(var(--chat-launcher-inset)+env(safe-area-inset-left))] z-40">{leading}</div> : null;
   // Same gates as the floating window: the Settings preference, and the Chat
   // tab, which already shows the conversation full-page.
   const showChat = floatingChatEnabled && !isFloatingChatRouteSuppressed(pathname, chatPath);
@@ -70,7 +72,7 @@ export function AppBottomBar() {
       // column as the page header's trailing action.
       className="hidden h-8 shrink-0 items-center justify-between gap-4 pr-[18px] pl-3 md:flex"
     >
-      <TeamStatus wsId={wsId} />
+      <div className="flex min-w-0 items-center gap-3">{leading}<TeamStatus wsId={wsId} /></div>
       {showChat && <ChatBar />}
     </footer>
   );

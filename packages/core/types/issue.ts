@@ -223,7 +223,7 @@ export interface Issue {
   position: number;
   // Ordered barrier group among sibling sub-issues (null = unstaged). The
   // parent assignee is woken when a stage closes while a later one waits;
-  // see server/internal/service/issue_wakeup_system.go.
+  // see server/go/internal/service/issue_wakeup_system.go.
   stage: number | null;
   // Calendar days as date-only "YYYY-MM-DD" (no time, no timezone). Use the
   // helpers in @workpal/core/issues/date to format/compare — never `new Date()`

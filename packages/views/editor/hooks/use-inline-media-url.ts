@@ -20,7 +20,7 @@ import {
 } from "@workpal/core/types/attachment-url";
 
 // Keep refetches well inside the server's signed-URL TTL (30 min default,
-// server/internal/handler/file.go) so a re-render never serves an expired
+// server/go/internal/handler/file.go) so a re-render never serves an expired
 // signature from the query cache.
 const RESIGN_STALE_MS = 20 * 60 * 1000;
 

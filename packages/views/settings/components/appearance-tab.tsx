@@ -47,6 +47,7 @@ import {
   CODE_FONTS,
   CONTENT_LEADINGS,
   CONTENT_SIZES,
+  CUSTOM_THEMES_ENABLED,
   DEFAULT_APPEARANCE,
   DEFAULT_FONT_SIZE,
   DENSITIES,
@@ -242,9 +243,9 @@ function ColorSection() {
               <SelectContent align="end" className="min-w-64">
                 <SelectGroup>
                   <SelectLabel>{t(($) => $.appearance.theme.built_in)}</SelectLabel>
-                  {BUILT_IN_THEMES.map((manifest) => option(manifest))}
+                  {themes.map((manifest) => option(manifest))}
                 </SelectGroup>
-                {imported.length > 0 ? (
+                {CUSTOM_THEMES_ENABLED && imported.length > 0 ? (
                   <>
                     <SelectSeparator />
                     <SelectGroup>
@@ -253,7 +254,7 @@ function ColorSection() {
                     </SelectGroup>
                   </>
                 ) : null}
-                {fromFolder.length > 0 ? (
+                {CUSTOM_THEMES_ENABLED && fromFolder.length > 0 ? (
                   <>
                     <SelectSeparator />
                     <SelectGroup>
@@ -264,12 +265,12 @@ function ColorSection() {
                 ) : null}
               </SelectContent>
             </Select>
-            <ThemesButton />
+            {CUSTOM_THEMES_ENABLED ? <ThemesButton /> : null}
           </div>
         </SettingsRow>
-        <StoreThemesRow />
-        <OwnThemeRow theme={activeTheme({ theme }, safeMode.active)} />
-        {folderProblems.length > 0 ? (
+        {CUSTOM_THEMES_ENABLED ? <StoreThemesRow /> : null}
+        {CUSTOM_THEMES_ENABLED ? <OwnThemeRow theme={activeTheme({ theme }, safeMode.active)} /> : null}
+        {CUSTOM_THEMES_ENABLED && folderProblems.length > 0 ? (
           <div role="status" className="space-y-1.5 px-4 py-3 text-caption">
             <div className="flex items-center gap-2">
               <TriangleAlert aria-hidden="true" className="size-3.5 shrink-0 text-warning" />
@@ -349,7 +350,7 @@ function useThemeImport(): ThemeImport {
 }
 
 function themeGuideUrl(language: string): string {
-  return `https://workpal.invalid/docs${docsLocalePrefix(language)}/developers/themes`;
+  return `http://127.0.0.1:4000/docs${docsLocalePrefix(language)}/developers/themes`;
 }
 
 function downloadFile(data: Uint8Array<ArrayBuffer>, name: string, type: string) {

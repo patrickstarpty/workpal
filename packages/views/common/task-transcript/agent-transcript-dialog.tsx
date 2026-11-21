@@ -848,7 +848,7 @@ export function AgentTranscriptDialog({
   // Two separate things, deliberately not one string (#7411):
   //   • `reasonLabel` — the localized reason, derived from the stable
   //     `failure_reason` enum. This is the user-facing explanation.
-  //   • `task.error` — the raw diagnostic the server/daemon persisted, in
+  //   • `task.error` — the raw diagnostic the server/go/daemon persisted, in
   //     English, for classification and logs. Kept readable (it is how you
   //     find "which worktree holds my preserved work" and "which machine
   //     needs upgrading") but labelled as a technical detail rather than

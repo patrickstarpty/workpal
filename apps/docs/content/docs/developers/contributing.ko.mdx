@@ -15,7 +15,7 @@ Workpal는 Go backend와 pnpm monorepo로 구성됩니다. 로컬에서 시작�
 - Docker Engine 또는 Docker Desktop
 - Git과 Make
 
-버전은 루트 `package.json`, `server/go.mod`, CI workflow를 기준으로 확인합니다.
+버전은 루트 `package.json`, `server/go/go.mod`, CI workflow를 기준으로 확인합니다.
 
 ## 처음 시작
 
@@ -124,13 +124,13 @@ API를 추가하거나 변경하면 `packages/core/api/`의 zod schema도 업데
 
 ## 데이터베이스 변경
 
-Migration은 `server/migrations/`에 있고 query는 `server/pkg/db/queries/`에 있습니다.
+Migration은 `server/go/migrations/`에 있고 query는 `server/go/pkg/db/queries/`에 있습니다.
 
 1. 다음 사용하지 않은 숫자 접두사를 사용해 `.up.sql`과 `.down.sql`을 모두 만듭니다.
 2. 데이터베이스 foreign key, cascade delete, cascade update를 추가하지 않습니다. 관계 검사와 정리는 애플리케이션 계층에서 수행합니다.
 3. 모든 새 index는 `CREATE INDEX CONCURRENTLY` 또는 `CREATE UNIQUE INDEX CONCURRENTLY`를 사용합니다.
 4. concurrent index 하나는 해당 문장만 포함한 별도 migration 파일에 둡니다.
-5. query를 수정한 뒤 `make sqlc`를 실행하고 생성된 `server/pkg/db/generated/` 변경 사항을 commit합니다.
+5. query를 수정한 뒤 `make sqlc`를 실행하고 생성된 `server/go/pkg/db/generated/` 변경 사항을 commit합니다.
 6. sqlc 생성 파일을 직접 수정하지 않습니다.
 
 여러 쓰기 작업이 함께 성공하거나 rollback되어야 하면 service 계층에서 애플리케이션 transaction을 사용합니다.

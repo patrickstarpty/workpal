@@ -103,7 +103,7 @@ approve.
 
 ## Tested
 
-`server/internal/handler/plugin_example_test.go` installs **this manifest**,
+`server/go/internal/handler/plugin_example_test.go` installs **this manifest**,
 not a copy, and drives it: the skill lands in the skill table, the agent tool
 list contains exactly the hooks that declare the `agent` trigger, an agent hook
 call goes out signed and comes back, and the `metrics` tools are discovered,

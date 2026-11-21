@@ -1,0 +1,530 @@
+{
+  "evidence": "Source-derived; not executed Go parity",
+  "user_response": {
+    "id": "11111111-1111-4111-8111-111111111111",
+    "name": "Example",
+    "email": "user@example.com",
+    "avatar_url": null,
+    "language": null,
+    "timezone": null,
+    "onboarded_at": null,
+    "onboarding_questionnaire": {},
+    "profile_description": "",
+    "whats_new_seen_version": null,
+    "star_prompt_shown_count": 0,
+    "star_prompt_last_shown_at": null,
+    "star_prompt_starred_at": null,
+    "created_at": "2026-11-20T00:00:00Z",
+    "updated_at": "2026-11-21T00:00:00Z"
+  },
+  "fixtures": [
+    {
+      "route": "complete",
+      "body": {},
+      "status": 200,
+      "response": {
+        "id": "11111111-1111-4111-8111-111111111111",
+        "name": "Example",
+        "email": "user@example.com",
+        "avatar_url": null,
+        "language": null,
+        "timezone": null,
+        "onboarded_at": "2026-11-21T00:00:00Z",
+        "onboarding_questionnaire": {},
+        "profile_description": "",
+        "whats_new_seen_version": null,
+        "star_prompt_shown_count": 0,
+        "star_prompt_last_shown_at": null,
+        "star_prompt_starred_at": null,
+        "created_at": "2026-11-20T00:00:00Z",
+        "updated_at": "2026-11-21T00:00:00Z"
+      }
+    },
+    {
+      "route": "complete",
+      "body": null,
+      "status": 200,
+      "response": {
+        "id": "11111111-1111-4111-8111-111111111111",
+        "name": "Example",
+        "email": "user@example.com",
+        "avatar_url": null,
+        "language": null,
+        "timezone": null,
+        "onboarded_at": "2026-11-21T00:00:00Z",
+        "onboarding_questionnaire": {},
+        "profile_description": "",
+        "whats_new_seen_version": null,
+        "star_prompt_shown_count": 0,
+        "star_prompt_last_shown_at": null,
+        "star_prompt_starred_at": null,
+        "created_at": "2026-11-20T00:00:00Z",
+        "updated_at": "2026-11-21T00:00:00Z"
+      }
+    },
+    {
+      "route": "complete",
+      "body": {
+        "completion_path": "full"
+      },
+      "status": 200,
+      "response": {
+        "id": "11111111-1111-4111-8111-111111111111",
+        "name": "Example",
+        "email": "user@example.com",
+        "avatar_url": null,
+        "language": null,
+        "timezone": null,
+        "onboarded_at": "2026-11-21T00:00:00Z",
+        "onboarding_questionnaire": {},
+        "profile_description": "",
+        "whats_new_seen_version": null,
+        "star_prompt_shown_count": 0,
+        "star_prompt_last_shown_at": null,
+        "star_prompt_starred_at": null,
+        "created_at": "2026-11-20T00:00:00Z",
+        "updated_at": "2026-11-21T00:00:00Z"
+      }
+    },
+    {
+      "route": "complete",
+      "body": {
+        "completion_path": "runtime_skipped"
+      },
+      "status": 200,
+      "response": {
+        "id": "11111111-1111-4111-8111-111111111111",
+        "name": "Example",
+        "email": "user@example.com",
+        "avatar_url": null,
+        "language": null,
+        "timezone": null,
+        "onboarded_at": "2026-11-21T00:00:00Z",
+        "onboarding_questionnaire": {},
+        "profile_description": "",
+        "whats_new_seen_version": null,
+        "star_prompt_shown_count": 0,
+        "star_prompt_last_shown_at": null,
+        "star_prompt_starred_at": null,
+        "created_at": "2026-11-20T00:00:00Z",
+        "updated_at": "2026-11-21T00:00:00Z"
+      }
+    },
+    {
+      "route": "complete",
+      "body": {
+        "completion_path": "cloud_waitlist"
+      },
+      "status": 200,
+      "response": {
+        "id": "11111111-1111-4111-8111-111111111111",
+        "name": "Example",
+        "email": "user@example.com",
+        "avatar_url": null,
+        "language": null,
+        "timezone": null,
+        "onboarded_at": "2026-11-21T00:00:00Z",
+        "onboarding_questionnaire": {},
+        "profile_description": "",
+        "whats_new_seen_version": null,
+        "star_prompt_shown_count": 0,
+        "star_prompt_last_shown_at": null,
+        "star_prompt_starred_at": null,
+        "created_at": "2026-11-20T00:00:00Z",
+        "updated_at": "2026-11-21T00:00:00Z"
+      }
+    },
+    {
+      "route": "complete",
+      "body": {
+        "completion_path": "skip_existing"
+      },
+      "status": 200,
+      "response": {
+        "id": "11111111-1111-4111-8111-111111111111",
+        "name": "Example",
+        "email": "user@example.com",
+        "avatar_url": null,
+        "language": null,
+        "timezone": null,
+        "onboarded_at": "2026-11-21T00:00:00Z",
+        "onboarding_questionnaire": {},
+        "profile_description": "",
+        "whats_new_seen_version": null,
+        "star_prompt_shown_count": 0,
+        "star_prompt_last_shown_at": null,
+        "star_prompt_starred_at": null,
+        "created_at": "2026-11-20T00:00:00Z",
+        "updated_at": "2026-11-21T00:00:00Z"
+      }
+    },
+    {
+      "route": "complete",
+      "body": {
+        "completion_path": "invite_accept"
+      },
+      "status": 200,
+      "response": {
+        "id": "11111111-1111-4111-8111-111111111111",
+        "name": "Example",
+        "email": "user@example.com",
+        "avatar_url": null,
+        "language": null,
+        "timezone": null,
+        "onboarded_at": "2026-11-21T00:00:00Z",
+        "onboarding_questionnaire": {},
+        "profile_description": "",
+        "whats_new_seen_version": null,
+        "star_prompt_shown_count": 0,
+        "star_prompt_last_shown_at": null,
+        "star_prompt_starred_at": null,
+        "created_at": "2026-11-20T00:00:00Z",
+        "updated_at": "2026-11-21T00:00:00Z"
+      }
+    },
+    {
+      "route": "complete",
+      "body": {
+        "completion_path": "unknown"
+      },
+      "status": 200,
+      "response": {
+        "id": "11111111-1111-4111-8111-111111111111",
+        "name": "Example",
+        "email": "user@example.com",
+        "avatar_url": null,
+        "language": null,
+        "timezone": null,
+        "onboarded_at": "2026-11-21T00:00:00Z",
+        "onboarding_questionnaire": {},
+        "profile_description": "",
+        "whats_new_seen_version": null,
+        "star_prompt_shown_count": 0,
+        "star_prompt_last_shown_at": null,
+        "star_prompt_starred_at": null,
+        "created_at": "2026-11-20T00:00:00Z",
+        "updated_at": "2026-11-21T00:00:00Z"
+      }
+    },
+    {
+      "route": "complete",
+      "body": {
+        "completion_path": "arbitrary"
+      },
+      "status": 200,
+      "response": {
+        "id": "11111111-1111-4111-8111-111111111111",
+        "name": "Example",
+        "email": "user@example.com",
+        "avatar_url": null,
+        "language": null,
+        "timezone": null,
+        "onboarded_at": "2026-11-21T00:00:00Z",
+        "onboarding_questionnaire": {},
+        "profile_description": "",
+        "whats_new_seen_version": null,
+        "star_prompt_shown_count": 0,
+        "star_prompt_last_shown_at": null,
+        "star_prompt_starred_at": null,
+        "created_at": "2026-11-20T00:00:00Z",
+        "updated_at": "2026-11-21T00:00:00Z"
+      }
+    },
+    {
+      "route": "complete",
+      "body": {
+        "workspace_id": "11111111-1111-4111-8111-111111111111"
+      },
+      "status": 200,
+      "response": {
+        "id": "11111111-1111-4111-8111-111111111111",
+        "name": "Example",
+        "email": "user@example.com",
+        "avatar_url": null,
+        "language": null,
+        "timezone": null,
+        "onboarded_at": "2026-11-21T00:00:00Z",
+        "onboarding_questionnaire": {},
+        "profile_description": "",
+        "whats_new_seen_version": null,
+        "star_prompt_shown_count": 0,
+        "star_prompt_last_shown_at": null,
+        "star_prompt_starred_at": null,
+        "created_at": "2026-11-20T00:00:00Z",
+        "updated_at": "2026-11-21T00:00:00Z"
+      }
+    },
+    {
+      "route": "complete",
+      "body": {
+        "workspace_id": "bad"
+      },
+      "status": 400,
+      "response": {
+        "error": "invalid workspace_id"
+      }
+    },
+    {
+      "route": "complete",
+      "body": {
+        "completion_path": 1
+      },
+      "status": 400,
+      "response": {
+        "error": "invalid request body"
+      }
+    },
+    {
+      "route": "complete",
+      "body": "{",
+      "status": 400,
+      "response": {
+        "error": "invalid request body"
+      }
+    },
+    {
+      "route": "complete",
+      "precondition": "middleware rejection or injected database failure after valid input",
+      "status": 401,
+      "response": {
+        "error": "missing authorization"
+      }
+    },
+    {
+      "route": "complete",
+      "precondition": "middleware rejection or injected database failure after valid input",
+      "status": 401,
+      "response": {
+        "error": "invalid token"
+      }
+    },
+    {
+      "route": "complete",
+      "precondition": "middleware rejection or injected database failure after valid input",
+      "status": 403,
+      "response": {
+        "error": "CSRF validation failed"
+      }
+    },
+    {
+      "route": "complete",
+      "precondition": "middleware rejection or injected database failure after valid input",
+      "status": 500,
+      "response": {
+        "error": "failed to complete onboarding"
+      }
+    },
+    {
+      "route": "cloud-waitlist",
+      "body": {
+        "email": " User@Example.com ",
+        "reason": " hello "
+      },
+      "status": 200,
+      "response": {
+        "id": "11111111-1111-4111-8111-111111111111",
+        "name": "Example",
+        "email": "user@example.com",
+        "avatar_url": null,
+        "language": null,
+        "timezone": null,
+        "onboarded_at": null,
+        "onboarding_questionnaire": {},
+        "profile_description": "",
+        "whats_new_seen_version": null,
+        "star_prompt_shown_count": 0,
+        "star_prompt_last_shown_at": null,
+        "star_prompt_starred_at": null,
+        "created_at": "2026-11-20T00:00:00Z",
+        "updated_at": "2026-11-21T00:00:00Z"
+      }
+    },
+    {
+      "route": "cloud-waitlist",
+      "body": {
+        "email": "user@example.com"
+      },
+      "status": 200,
+      "response": {
+        "id": "11111111-1111-4111-8111-111111111111",
+        "name": "Example",
+        "email": "user@example.com",
+        "avatar_url": null,
+        "language": null,
+        "timezone": null,
+        "onboarded_at": null,
+        "onboarding_questionnaire": {},
+        "profile_description": "",
+        "whats_new_seen_version": null,
+        "star_prompt_shown_count": 0,
+        "star_prompt_last_shown_at": null,
+        "star_prompt_starred_at": null,
+        "created_at": "2026-11-20T00:00:00Z",
+        "updated_at": "2026-11-21T00:00:00Z"
+      }
+    },
+    {
+      "route": "cloud-waitlist",
+      "body": {
+        "email": "Name <user@example.com>"
+      },
+      "status": 200,
+      "response": {
+        "id": "11111111-1111-4111-8111-111111111111",
+        "name": "Example",
+        "email": "user@example.com",
+        "avatar_url": null,
+        "language": null,
+        "timezone": null,
+        "onboarded_at": null,
+        "onboarding_questionnaire": {},
+        "profile_description": "",
+        "whats_new_seen_version": null,
+        "star_prompt_shown_count": 0,
+        "star_prompt_last_shown_at": null,
+        "star_prompt_starred_at": null,
+        "created_at": "2026-11-20T00:00:00Z",
+        "updated_at": "2026-11-21T00:00:00Z"
+      }
+    },
+    {
+      "route": "cloud-waitlist",
+      "body": {
+        "email": "u@example.com",
+        "reason": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      },
+      "status": 200,
+      "response": {
+        "id": "11111111-1111-4111-8111-111111111111",
+        "name": "Example",
+        "email": "user@example.com",
+        "avatar_url": null,
+        "language": null,
+        "timezone": null,
+        "onboarded_at": null,
+        "onboarding_questionnaire": {},
+        "profile_description": "",
+        "whats_new_seen_version": null,
+        "star_prompt_shown_count": 0,
+        "star_prompt_last_shown_at": null,
+        "star_prompt_starred_at": null,
+        "created_at": "2026-11-20T00:00:00Z",
+        "updated_at": "2026-11-21T00:00:00Z"
+      }
+    },
+    {
+      "route": "cloud-waitlist",
+      "body": null,
+      "status": 400,
+      "response": {
+        "error": "email is required"
+      }
+    },
+    {
+      "route": "cloud-waitlist",
+      "body": {},
+      "status": 400,
+      "response": {
+        "error": "email is required"
+      }
+    },
+    {
+      "route": "cloud-waitlist",
+      "body": {
+        "email": "bad"
+      },
+      "status": 400,
+      "response": {
+        "error": "email is invalid"
+      }
+    },
+    {
+      "route": "cloud-waitlist",
+      "body": {
+        "email": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      },
+      "status": 400,
+      "response": {
+        "error": "email is too long"
+      }
+    },
+    {
+      "route": "cloud-waitlist",
+      "body": {
+        "email": 1
+      },
+      "status": 400,
+      "response": {
+        "error": "invalid request body"
+      }
+    },
+    {
+      "route": "cloud-waitlist",
+      "body": {
+        "email": "u@example.com",
+        "reason": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      },
+      "status": 400,
+      "response": {
+        "error": "reason is too long"
+      }
+    },
+    {
+      "route": "cloud-waitlist",
+      "body": "{",
+      "status": 400,
+      "response": {
+        "error": "invalid request body"
+      }
+    },
+    {
+      "route": "cloud-waitlist",
+      "precondition": "middleware rejection or injected database failure after valid input",
+      "status": 401,
+      "response": {
+        "error": "missing authorization"
+      }
+    },
+    {
+      "route": "cloud-waitlist",
+      "precondition": "middleware rejection or injected database failure after valid input",
+      "status": 401,
+      "response": {
+        "error": "invalid token"
+      }
+    },
+    {
+      "route": "cloud-waitlist",
+      "precondition": "middleware rejection or injected database failure after valid input",
+      "status": 403,
+      "response": {
+        "error": "CSRF validation failed"
+      }
+    },
+    {
+      "route": "cloud-waitlist",
+      "precondition": "middleware rejection or injected database failure after valid input",
+      "status": 500,
+      "response": {
+        "error": "failed to join waitlist"
+      }
+    }
+  ],
+  "proposed_python_body_limit_bytes": 16384,
+  "go_body_limit": null,
+  "notes": [
+    "Repeat completion preserves onboarded_at, advances updated_at, skips sequential repeat event.",
+    "Waitlist repeat overwrites email/reason, advances updated_at and emits every time.",
+    "Reason blank becomes SQL NULL; limits use UTF-8 byte length after trimming.",
+    "Go unknown fields and trailing JSON are not rejected by single Decode; null string fields decode to empty strings.",
+    "Completion only decodes when ContentLength > 0; unknown-length bodies are ignored.",
+    "Proposed bounded Python transport rejects >16384 bytes with 413 request body too large; this is a deliberate difference."
+  ],
+  "unsupported_proposal": {
+    "status": 501,
+    "response": {
+      "error": "Cloud provisioning is not supported"
+    },
+    "writes": 0
+  }
+}

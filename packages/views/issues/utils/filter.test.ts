@@ -677,7 +677,7 @@ describe("property filters", () => {
 });
 
 // Scalar operator members (#7692): the matrix mirrors the server predicates in
-// server/internal/handler/property.go — contains is a case-insensitive
+// server/go/internal/handler/property.go — contains is a case-insensitive
 // substring over stored strings only, gt/gte/lt/lte match stored numbers, and
 // before/after compare "YYYY-MM-DD" strings lexicographically. A missing key
 // never matches an operator, matching the server's NULL ->> semantics.

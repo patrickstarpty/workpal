@@ -166,7 +166,7 @@ it.each(["invitation:accepted", "invitation:declined"] as const)(
 // The tests above feed (payload, actorId, actorType) directly — the shape
 // ws-client hands to handlers — but they cannot catch drift in that shape
 // itself. These drive a real WSClient through a fake WebSocket and feed the
-// exact frames server/cmd/server/listeners.go marshals for these events
+// exact frames server/go/cmd/server/listeners.go marshals for these events
 // ({type, payload, actor_id, actor_type}), pinning frame → onmessage unpack
 // → handler → gate end to end.
 class FakeWebSocket {

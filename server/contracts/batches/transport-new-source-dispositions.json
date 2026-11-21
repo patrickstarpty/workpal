@@ -1,0 +1,215 @@
+{
+  "version": 1,
+  "scope": "finite three-source own-body static disposition",
+  "coverage_complete": false,
+  "finite_scope_complete": true,
+  "root_review": {
+    "status": "accepted finite three-source scope",
+    "checks": [
+      "Current full-source hashes and5exacttuples",
+      "Independent repository gate/write source reads",
+      "Complete logo and analytics-loader body reads"
+    ],
+    "limits": "Third-party loaded code/providers excluded; no backend/runtime claim"
+  },
+  "files": [
+    {
+      "path": "packages/views/settings/components/repositories-section.tsx",
+      "sha256": "4c334ee0a79775f6ecf32e90c5818e4c2eccd66b86af7bdcc0bc4e28b0271b5d",
+      "whole_source": true
+    },
+    {
+      "path": "packages/views/common/composio-toolkit-logo.tsx",
+      "sha256": "8fa0805fe9e0bfc0c90388a4df7d3283cf57a9467e9a847d18f2d8f14e02ca47",
+      "whole_source": true
+    },
+    {
+      "path": "apps/web/lib/google-analytics.ts",
+      "sha256": "8a577530b225b7d18290c5629248a06ddbfe2106584e3b0ac95161991f7c209a",
+      "whole_source": true
+    }
+  ],
+  "edges": [
+    {
+      "source": "packages/views/settings/components/repositories-section.tsx",
+      "site": "persist:349",
+      "gate": "workspace required; saving state; saveDraft requires draft/nonblank URL/no duplicate; removal confirmation; import skips archived/duplicate/invalid identities and persists only nonempty additions. Updates workspaceKeys.list cache, no invalidation/refetch.",
+      "inventory": [
+        {
+          "id": "client:3416",
+          "method": "PATCH",
+          "path_expression": "/api/workspaces/${id}",
+          "route": {
+            "method": "PATCH",
+            "path": "/api/workspaces/{id}"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/views/settings/components/repositories-section.tsx",
+      "site": "useCurrentMember:145 -> memberListOptions",
+      "gate": "No enabled override in memberListOptions; selects current auth user membership.",
+      "inventory": [
+        {
+          "id": "client:3765",
+          "method": "GET",
+          "path_expression": "/api/workspaces/${workspaceId}/members",
+          "route": {
+            "method": "GET",
+            "path": "/api/workspaces/{id}/members"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/views/settings/components/repositories-section.tsx",
+      "site": "githubInstallationsOptions:176",
+      "gate": "enabled !!wsId && owner/admin",
+      "inventory": [
+        {
+          "id": "client:5487",
+          "method": "GET",
+          "path_expression": "/api/workspaces/${workspaceId}/github/installations",
+          "route": {
+            "method": "GET",
+            "path": "/api/workspaces/{id}/github/installations"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/views/settings/components/repositories-section.tsx",
+      "site": "githubInstallationRepositoriesOptions:189",
+      "gate": "Own enabled override: picker open && canManageGitHub && browse configured && selected installation truthy; overrides helper wsId gate. page=1 initially, per_page=100; next_page ?? undefined. Automatic fetchNextPage when preselecting selected repository set && hasNextPage && !isFetchingNextPage && !isError. Manual fetchNextPage shown with hasNextPage, disabled while fetching.",
+      "inventory": [
+        {
+          "id": "client:5507",
+          "method": "GET",
+          "path_expression": "/api/workspaces/${workspaceId}/github/installations/${installationId}/repositories${suffix}",
+          "route": {
+            "method": "GET",
+            "path": "/api/workspaces/{id}/github/installations/{installationId}/repositories"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/views/settings/components/repositories-section.tsx",
+      "site": "connectGitHub callback:477 -> supplied connection.connect",
+      "gate": "UI canManageGitHub; disabled connecting or !configured. Supplied callback provenance use-connect-github.ts: getGitHubConnectURL(wsId,{desktop:isDesktopShell()}); desktop=1 only desktop; opens returned URL only configured && url; desktop begins connection store. Prop callback is not created here.",
+      "inventory": [
+        {
+          "id": "client:5475",
+          "method": "GET",
+          "path_expression": "/api/workspaces/${workspaceId}/github/connect${options?.desktop ? \"?desktop=1\" : \"\"}",
+          "route": {
+            "method": "GET",
+            "path": "/api/workspaces/{id}/github/connect"
+          }
+        }
+      ]
+    }
+  ],
+  "validation": "Static SHA256 and exact tuple uniqueness verified against existing frontend-calls; JSON round-trip verified. No runtime/tests/network/models/git/data edits.",
+  "detailed_dispositions": {
+    "application_api": [
+      {
+        "source": "packages/views/settings/components/repositories-section.tsx",
+        "site": "persist:349",
+        "existing_evidence": "server/contracts/frontend-calls.json",
+        "existing_id": "client:3416",
+        "tuple": {
+          "method": "PATCH",
+          "path": "/api/workspaces/{id}"
+        },
+        "path_expression": "/api/workspaces/${id}",
+        "gate": "workspace required; saving state; saveDraft requires draft/nonblank URL/no duplicate; removal confirmation; import skips archived/duplicate/invalid identities and persists only nonempty additions. Updates workspaceKeys.list cache, no invalidation/refetch."
+      },
+      {
+        "source": "packages/views/settings/components/repositories-section.tsx",
+        "site": "useCurrentMember:145 -> memberListOptions",
+        "existing_evidence": "server/contracts/frontend-calls.json",
+        "existing_id": "client:3765",
+        "tuple": {
+          "method": "GET",
+          "path": "/api/workspaces/{id}/members"
+        },
+        "path_expression": "/api/workspaces/${workspaceId}/members",
+        "gate": "No enabled override in memberListOptions; selects current auth user membership."
+      },
+      {
+        "source": "packages/views/settings/components/repositories-section.tsx",
+        "site": "githubInstallationsOptions:176",
+        "existing_evidence": "server/contracts/frontend-calls.json",
+        "existing_id": "client:5487",
+        "tuple": {
+          "method": "GET",
+          "path": "/api/workspaces/{id}/github/installations"
+        },
+        "path_expression": "/api/workspaces/${workspaceId}/github/installations",
+        "gate": "enabled !!wsId && owner/admin"
+      },
+      {
+        "source": "packages/views/settings/components/repositories-section.tsx",
+        "site": "githubInstallationRepositoriesOptions:189",
+        "existing_evidence": "server/contracts/frontend-calls.json",
+        "existing_id": "client:5507",
+        "tuple": {
+          "method": "GET",
+          "path": "/api/workspaces/{id}/github/installations/{installationId}/repositories"
+        },
+        "path_expression": "/api/workspaces/${workspaceId}/github/installations/${installationId}/repositories${suffix}",
+        "gate": "Own enabled override: picker open && canManageGitHub && browse configured && selected installation truthy; overrides helper wsId gate. page=1 initially, per_page=100; next_page ?? undefined. Automatic fetchNextPage when preselecting selected repository set && hasNextPage && !isFetchingNextPage && !isError. Manual fetchNextPage shown with hasNextPage, disabled while fetching."
+      },
+      {
+        "source": "packages/views/settings/components/repositories-section.tsx",
+        "site": "connectGitHub callback:477 -> supplied connection.connect",
+        "existing_evidence": "server/contracts/frontend-calls.json",
+        "existing_id": "client:5475",
+        "tuple": {
+          "method": "GET",
+          "path": "/api/workspaces/{id}/github/connect"
+        },
+        "path_expression": "/api/workspaces/${workspaceId}/github/connect${options?.desktop ? \"?desktop=1\" : \"\"}",
+        "gate": "UI canManageGitHub; disabled connecting or !configured. Supplied callback provenance use-connect-github.ts: getGitHubConnectURL(wsId,{desktop:isDesktopShell()}); desktop=1 only desktop; opens returned URL only configured && url; desktop begins connection store. Prop callback is not created here."
+      }
+    ],
+    "external_resources": [
+      {
+        "source": "packages/views/common/composio-toolkit-logo.tsx",
+        "construction": "https://logos.composio.dev/api/ + encodeURIComponent(slug.trim().toLowerCase()); blank slug => empty; dark adds ?theme=dark",
+        "sink": "img src light/dark",
+        "gates": "uniqueNonEmpty trims/deduplicates: light [fallbackLogo,dynamicLightLogo], dark [dynamicDarkLogo,fallbackLogo,dynamicLightLogo]; independent onError increments; reset on slug/fallbackLogo; absent candidate renders initial. CSS theme visibility is not a network gate; fallbackLogo is caller-supplied opaque URL."
+      },
+      {
+        "source": "apps/web/lib/google-analytics.ts",
+        "construction": "https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(measurementId)}",
+        "sink": "async script appended to document.head",
+        "gates": "same measurementId sentinel returns; maybeLoad skips stopped/loaded and defers sensitive current URL. Called initially, after successful push/replace and popstate. loaded sensitive current/target navigation permanently stops this install; sensitive click/auxclick/form stops; blob interaction exempt. Script internals and downstream telemetry endpoints excluded."
+      }
+    ],
+    "local_helpers": [
+      {
+        "source": "packages/views/settings/components/repositories-section.tsx",
+        "helpers": "repositoryIdentity; persist; saveDraft; removeRepository; openGitHubPicker; closeGitHubPicker; toggleGitHubRepository; importGitHubRepositories; callback effects; resetConnection",
+        "disposition": "Identity parses text only, never clones/fetches URL. Search/filter/selection are local. Callback params are consumed once after permission/loading gates and removed with navigation.replace. resetConnection supplied store reset; no API. useCurrentWorkspace/cache and useWorkspaceId/context do not independently fetch."
+      },
+      {
+        "source": "packages/views/common/composio-toolkit-logo.tsx",
+        "helpers": "composioToolkitLogoUrl; uniqueNonEmpty; failure state effects",
+        "disposition": "URL construction and img resource edges above; no application API."
+      },
+      {
+        "source": "apps/web/lib/google-analytics.ts",
+        "helpers": "stop; load; pinPageTitle; maybeLoad; wrap; onPopState; onLinkInteraction; interactionLinkHref; isSensitiveInteractionUrl; imported analyticsPageTitle/isSensitiveAnalyticsUrl/sanitizeAnalyticsUrl",
+        "disposition": "Config helpers in apps/web/config/google-analytics.ts are local pure URL/title transforms; no API. gtag queues js/set/config arguments locally; config uses sanitized location/referrer; title uses route label. Link helper resolves href/xlink:href against document.baseURI, malformed URL returns raw. History resolves target against location. Observing URLs does not fetch them."
+      }
+    ],
+    "excluded": [
+      "Child component bodies not recursively expanded",
+      "Third-party logo server and gtag script internals",
+      "Runtime behavior, backend implementation and whole-application completion"
+    ]
+  }
+}

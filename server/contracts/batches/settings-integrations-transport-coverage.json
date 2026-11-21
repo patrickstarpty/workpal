@@ -1,0 +1,827 @@
+{
+  "version": 1,
+  "scope": [
+    "packages/views/settings/components/plugins-tab.tsx",
+    "packages/views/settings/components/lark-channel-authorization.tsx",
+    "packages/views/skills/components/create-skill-dialog.tsx"
+  ],
+  "coverage": "bounded static frontend callback audit; no backend support or global coverage claim",
+  "files": [
+    {
+      "path": "packages/views/settings/components/plugins-tab.tsx",
+      "sha256": "01319d3233266e3941c6722b62892fb3a1dc169d52a88cb87cabeb4c8c196e7e",
+      "whole_source": true,
+      "exports": [
+        {
+          "name": "PluginsTab",
+          "anchor": "packages/views/settings/components/plugins-tab.tsx:677"
+        }
+      ],
+      "disposition": "Complete target source read"
+    },
+    {
+      "path": "packages/views/settings/components/lark-channel-authorization.tsx",
+      "sha256": "05963db3b5ed4827d18965a18a985ba663a66db9ecf92283294399b032d3ae8b",
+      "whole_source": true,
+      "exports": [
+        {
+          "name": "LarkChannelAuthorization",
+          "anchor": "packages/views/settings/components/lark-channel-authorization.tsx:15"
+        }
+      ],
+      "disposition": "Complete target source read"
+    },
+    {
+      "path": "packages/views/skills/components/create-skill-dialog.tsx",
+      "sha256": "92b41b82ca82ae43f55f35316cfcb7b73cfb31c07fb58d9f42bf58b25731d24e",
+      "whole_source": true,
+      "exports": [
+        {
+          "name": "CreateSkillMethod",
+          "anchor": "packages/views/skills/components/create-skill-dialog.tsx:56"
+        },
+        {
+          "name": "CreateSkillDialog",
+          "anchor": "packages/views/skills/components/create-skill-dialog.tsx:809"
+        }
+      ],
+      "disposition": "Complete target source read"
+    },
+    {
+      "path": "packages/core/plugins/queries.ts",
+      "sha256": "9af5000968a140b65bc015bb67794e9d3e394cdf05611a7d9eef8b9abf4fbee5",
+      "whole_source": true,
+      "exports": [
+        {
+          "name": "pluginKeys",
+          "anchor": "packages/core/plugins/queries.ts:4"
+        },
+        {
+          "name": "pluginInstallationsOptions",
+          "anchor": "packages/core/plugins/queries.ts:10"
+        },
+        {
+          "name": "pluginPackagesOptions",
+          "anchor": "packages/core/plugins/queries.ts:19"
+        },
+        {
+          "name": "pluginSurfaceLaunchOptions",
+          "anchor": "packages/core/plugins/queries.ts:28"
+        },
+        {
+          "name": "pluginInvocationsOptions",
+          "anchor": "packages/core/plugins/queries.ts:57"
+        },
+        {
+          "name": "pluginMCPToolsOptions",
+          "anchor": "packages/core/plugins/queries.ts:74"
+        }
+      ],
+      "disposition": "Supporting module; bounded transport proof"
+    },
+    {
+      "path": "packages/core/plugins/mutations.ts",
+      "sha256": "4698b07fbe4bf8f7bd5b6038f72ea5efe7584d5a6bc7fc3a9e615f38e53d39f5",
+      "whole_source": true,
+      "exports": [
+        {
+          "name": "usePreviewPlugin",
+          "anchor": "packages/core/plugins/mutations.ts:16"
+        },
+        {
+          "name": "usePublishPluginPackage",
+          "anchor": "packages/core/plugins/mutations.ts:26"
+        },
+        {
+          "name": "usePublishLocalPluginPackage",
+          "anchor": "packages/core/plugins/mutations.ts:35"
+        },
+        {
+          "name": "useDeletePluginPackage",
+          "anchor": "packages/core/plugins/mutations.ts:43"
+        },
+        {
+          "name": "useInstallPlugin",
+          "anchor": "packages/core/plugins/mutations.ts:51"
+        },
+        {
+          "name": "useConfigurePlugin",
+          "anchor": "packages/core/plugins/mutations.ts:59"
+        },
+        {
+          "name": "useSetPluginEnabled",
+          "anchor": "packages/core/plugins/mutations.ts:68"
+        },
+        {
+          "name": "useApprovePluginMCPTools",
+          "anchor": "packages/core/plugins/mutations.ts:84"
+        },
+        {
+          "name": "useUninstallPlugin",
+          "anchor": "packages/core/plugins/mutations.ts:92"
+        },
+        {
+          "name": "useInvokePluginHook",
+          "anchor": "packages/core/plugins/mutations.ts:112"
+        },
+        {
+          "name": "useRotatePluginToken",
+          "anchor": "packages/core/plugins/mutations.ts:124"
+        },
+        {
+          "name": "useRevokePluginToken",
+          "anchor": "packages/core/plugins/mutations.ts:132"
+        }
+      ],
+      "disposition": "Supporting module; bounded transport proof"
+    },
+    {
+      "path": "packages/core/lark/queries.ts",
+      "sha256": "2f761c875a2f508d1508c2e906025f9384ad9dba246d2fa31b3c16e8d5f09ea5",
+      "whole_source": true,
+      "exports": [
+        {
+          "name": "larkKeys",
+          "anchor": "packages/core/lark/queries.ts:7"
+        },
+        {
+          "name": "larkInstallationsOptions",
+          "anchor": "packages/core/lark/queries.ts:12"
+        }
+      ],
+      "disposition": "Supporting module; bounded transport proof"
+    },
+    {
+      "path": "packages/core/skills/pack-archive.ts",
+      "sha256": "b374bb944548a26c2cc8c2f4b4ef6a445a25f0e2df5466d1dff7df461c565bdf",
+      "whole_source": true,
+      "exports": [
+        {
+          "name": "MAX_SKILL_FILE_BYTES",
+          "anchor": "packages/core/skills/pack-archive.ts:4"
+        },
+        {
+          "name": "MAX_SKILL_BUNDLE_BYTES",
+          "anchor": "packages/core/skills/pack-archive.ts:6"
+        },
+        {
+          "name": "MAX_SKILL_FILE_COUNT",
+          "anchor": "packages/core/skills/pack-archive.ts:8"
+        },
+        {
+          "name": "MAX_SKILL_ARCHIVE_BYTES",
+          "anchor": "packages/core/skills/pack-archive.ts:10"
+        },
+        {
+          "name": "SkillArchiveEntry",
+          "anchor": "packages/core/skills/pack-archive.ts:14"
+        },
+        {
+          "name": "PreparedSkillArchiveError",
+          "anchor": "packages/core/skills/pack-archive.ts:19"
+        },
+        {
+          "name": "PreparedSkillArchive",
+          "anchor": "packages/core/skills/pack-archive.ts:26"
+        },
+        {
+          "name": "isSkillArchiveFilename",
+          "anchor": "packages/core/skills/pack-archive.ts:42"
+        },
+        {
+          "name": "wrapExistingSkillArchive",
+          "anchor": "packages/core/skills/pack-archive.ts:47"
+        },
+        {
+          "name": "prepareSkillArchiveFromEntries",
+          "anchor": "packages/core/skills/pack-archive.ts:67"
+        },
+        {
+          "name": "SkillArchiveMemberMeta",
+          "anchor": "packages/core/skills/pack-archive.ts:132"
+        },
+        {
+          "name": "SkillArchiveSelection",
+          "anchor": "packages/core/skills/pack-archive.ts:137"
+        },
+        {
+          "name": "selectSkillArchiveMembers",
+          "anchor": "packages/core/skills/pack-archive.ts:153"
+        },
+        {
+          "name": "prepareSkillArchiveFromPickerFiles",
+          "anchor": "packages/core/skills/pack-archive.ts:224"
+        },
+        {
+          "name": "DiscoveredSkillArchive",
+          "anchor": "packages/core/skills/pack-archive.ts:250"
+        },
+        {
+          "name": "SkillArchiveDiscovery",
+          "anchor": "packages/core/skills/pack-archive.ts:257"
+        },
+        {
+          "name": "discoverSkillArchivesFromPickerFiles",
+          "anchor": "packages/core/skills/pack-archive.ts:262"
+        },
+        {
+          "name": "packStoreZip",
+          "anchor": "packages/core/skills/pack-archive.ts:370"
+        },
+        {
+          "name": "isIgnoredArchiveEntry",
+          "anchor": "packages/core/skills/pack-archive.ts:466"
+        },
+        {
+          "name": "isLikelyBinaryFilePath",
+          "anchor": "packages/core/skills/pack-archive.ts:475"
+        }
+      ],
+      "disposition": "Supporting module; bounded transport proof"
+    },
+    {
+      "path": "packages/core/skills/frontmatter.ts",
+      "sha256": "bcb27b5da19b795535da52ed8c27d989085e63029bc9e163745594724457f9c5",
+      "whole_source": true,
+      "exports": [
+        {
+          "name": "SkillFrontmatter",
+          "anchor": "packages/core/skills/frontmatter.ts:8"
+        },
+        {
+          "name": "ParsedFrontmatter",
+          "anchor": "packages/core/skills/frontmatter.ts:10"
+        },
+        {
+          "name": "parseFrontmatter",
+          "anchor": "packages/core/skills/frontmatter.ts:15"
+        },
+        {
+          "name": "skillImportReconciliationName",
+          "anchor": "packages/core/skills/frontmatter.ts:52"
+        }
+      ],
+      "disposition": "Supporting module; bounded transport proof"
+    },
+    {
+      "path": "packages/views/platform/open-external.ts",
+      "sha256": "2275f53be840291d6cf24f0d8c285d651d7ce765a085c066bd3544fc3a02e5c9",
+      "whole_source": true,
+      "exports": [
+        {
+          "name": "openExternal",
+          "anchor": "packages/views/platform/open-external.ts:16"
+        }
+      ],
+      "disposition": "Supporting module; bounded transport proof"
+    },
+    {
+      "path": "packages/core/workspace/queries.ts",
+      "sha256": "1b16ae9e020e75a5a92cebc5270a14c58d97f6b7b0fe033d2f1d2c2d837d093a",
+      "whole_source": false,
+      "exports": [],
+      "disposition": "Supporting module; bounded transport proof"
+    },
+    {
+      "path": "packages/core/api/client.ts",
+      "sha256": "779bb65b5b7ead815836f7c704ec3c370bafae203e4f92119fadce93e982a4d7",
+      "whole_source": false,
+      "exports": [],
+      "disposition": "Supporting module; bounded transport proof"
+    }
+  ],
+  "edges": [
+    {
+      "source": "packages/core/api/client.ts:3422",
+      "api_method": "listPluginInstallations",
+      "client_anchor": "packages/core/api/client.ts:3422",
+      "kind": "query-or-mutation",
+      "inventory": [
+        {
+          "id": "client:3425",
+          "method": "GET",
+          "path_expression": "/api/workspaces/${workspaceId}/plugins",
+          "route": {
+            "method": "GET",
+            "path": "/api/workspaces/{id}/plugins"
+          }
+        }
+      ],
+      "client_branch_source": "  async listPluginInstallations(workspaceId: string): Promise<PluginInstallationListResponse> {\n    let raw: unknown;\n    try {\n      raw = await this.fetch<unknown>(`/api/workspaces/${workspaceId}/plugins`);\n    } catch (error) {\n      if (error instanceof ApiError && error.status === 404) return EMPTY_PLUGIN_INSTALLATION_LIST;\n      throw error;\n    }\n    return parseWithFallback(raw, PluginInstallationListResponseSchema, EMPTY_PLUGIN_INSTALLATION_LIST, {\n      endpoint: \"GET /api/workspaces/{id}/plugins\",\n    });\n  }\n\n  /**\n   * The workspace's MCP server library. The response carries identity and\n   * transport only — the stored entries are write-only server-side, so there\n   * is nothing here to redact.\n   */"
+    },
+    {
+      "source": "packages/core/api/client.ts:3538",
+      "api_method": "listPluginPackages",
+      "client_anchor": "packages/core/api/client.ts:3538",
+      "kind": "query-or-mutation",
+      "inventory": [
+        {
+          "id": "client:3539",
+          "method": "GET",
+          "path_expression": "/api/workspaces/${workspaceId}/plugins/packages",
+          "route": {
+            "method": "GET",
+            "path": "/api/workspaces/{id}/plugins/packages"
+          }
+        }
+      ],
+      "client_branch_source": "  async listPluginPackages(workspaceId: string): Promise<PluginPackageListResponse> {\n    const raw = await this.fetch<unknown>(`/api/workspaces/${workspaceId}/plugins/packages`);\n    return parseWithFallback(raw, PluginPackageListResponseSchema, EMPTY_PLUGIN_PACKAGE_LIST, {\n      endpoint: \"GET /api/workspaces/{id}/plugins/packages\",\n    });\n  }\n\n  /**\n   * Publishes an artifact bundle: a zip holding the manifest and every file it\n   * names. This is the whole publishing path — a plugin author needs no server\n   * of their own, and nothing about a published version changes afterwards.\n   *\n   * Not routed through `this.fetch`, for the same reason uploadFile is not: the\n   * browser has to set the multipart boundary itself.\n   */"
+    },
+    {
+      "source": "packages/core/api/client.ts:3553",
+      "api_method": "publishPluginPackage",
+      "client_anchor": "packages/core/api/client.ts:3553",
+      "kind": "query-or-mutation",
+      "inventory": [
+        {
+          "id": "client:3558",
+          "method": "POST",
+          "path_expression": "`${this.baseUrl}/api/workspaces/${workspaceId}/plugins/packages`",
+          "route": {
+            "method": "POST",
+            "path": "/api/workspaces/{id}/plugins/packages"
+          }
+        }
+      ],
+      "client_branch_source": "  async publishPluginPackage(workspaceId: string, bundle: File): Promise<PluginPackage> {\n    const formData = new FormData();\n    formData.append(\"bundle\", bundle);\n\n    const credentialUsed = this.getToken();\n    const res = await fetch(`${this.baseUrl}/api/workspaces/${workspaceId}/plugins/packages`, {\n      method: \"POST\",\n      headers: this.authHeaders(),\n      body: formData,\n      credentials: \"include\",\n    });\n    if (!res.ok) {\n      if (res.status === 401) this.handleUnauthorized(credentialUsed);\n      throw new Error(await this.parseErrorMessage(res, `Publishing failed: ${res.status}`));\n    }\n    const raw = (await res.json()) as unknown;\n    return parseWithFallback(raw, PluginPackageSchema, EMPTY_PLUGIN_PACKAGE, {\n      endpoint: \"POST /api/workspaces/{id}/plugins/packages\",\n    });\n  }\n\n  /**\n   * Publishes from a directory the operator hosts (WORKPAL_PLUGIN_DIR) — the\n   * development channel, so iterating on a surface does not mean zipping and\n   * uploading after every edit. It still produces an immutable version.\n   */"
+    },
+    {
+      "source": "packages/core/api/client.ts:3589",
+      "api_method": "deletePluginPackage",
+      "client_anchor": "packages/core/api/client.ts:3589",
+      "kind": "query-or-mutation",
+      "inventory": [
+        {
+          "id": "client:3590",
+          "method": "DELETE",
+          "path_expression": "/api/workspaces/${workspaceId}/plugins/packages/${packageId}",
+          "route": {
+            "method": "DELETE",
+            "path": "/api/workspaces/{id}/plugins/packages/{packageId}"
+          }
+        }
+      ],
+      "client_branch_source": "  async deletePluginPackage(workspaceId: string, packageId: string): Promise<void> {\n    await this.fetch<void>(`/api/workspaces/${workspaceId}/plugins/packages/${packageId}`, { method: \"DELETE\" });\n  }\n\n  /** Mint one hosted document URL and its single-use bridge proof. */"
+    },
+    {
+      "source": "packages/core/api/client.ts:3607",
+      "api_method": "previewPlugin",
+      "client_anchor": "packages/core/api/client.ts:3607",
+      "kind": "query-or-mutation",
+      "inventory": [
+        {
+          "id": "client:3608",
+          "method": "POST",
+          "path_expression": "/api/workspaces/${workspaceId}/plugins/preview",
+          "route": {
+            "method": "POST",
+            "path": "/api/workspaces/{id}/plugins/preview"
+          }
+        }
+      ],
+      "client_branch_source": "  async previewPlugin(workspaceId: string, request: PluginPreviewRequest): Promise<PluginPreview> {\n    const raw = await this.fetch<unknown>(`/api/workspaces/${workspaceId}/plugins/preview`, {\n      method: \"POST\",\n      readOnly: true,\n      body: JSON.stringify(request),\n    });\n    return parseWithFallback(raw, PluginPreviewSchema, EMPTY_PLUGIN_PREVIEW, {\n      endpoint: \"POST /api/workspaces/{id}/plugins/preview\",\n    });\n  }"
+    },
+    {
+      "source": "packages/core/api/client.ts:3618",
+      "api_method": "installPlugin",
+      "client_anchor": "packages/core/api/client.ts:3618",
+      "kind": "query-or-mutation",
+      "inventory": [
+        {
+          "id": "client:3619",
+          "method": "POST",
+          "path_expression": "/api/workspaces/${workspaceId}/plugins",
+          "route": {
+            "method": "POST",
+            "path": "/api/workspaces/{id}/plugins"
+          }
+        }
+      ],
+      "client_branch_source": "  async installPlugin(workspaceId: string, request: PluginInstallRequest): Promise<PluginInstallation> {\n    const raw = await this.fetch<unknown>(`/api/workspaces/${workspaceId}/plugins`, {\n      method: \"POST\",\n      body: JSON.stringify(request),\n    });\n    return parseWithFallback(raw, PluginInstallationSchema, EMPTY_PLUGIN_INSTALLATION, {\n      endpoint: \"POST /api/workspaces/{id}/plugins\",\n    });\n  }"
+    },
+    {
+      "source": "packages/core/api/client.ts:3628",
+      "api_method": "configurePlugin",
+      "client_anchor": "packages/core/api/client.ts:3628",
+      "kind": "query-or-mutation",
+      "inventory": [
+        {
+          "id": "client:3629",
+          "method": "PUT",
+          "path_expression": "/api/workspaces/${workspaceId}/plugins/${installationId}/config",
+          "route": {
+            "method": "PUT",
+            "path": "/api/workspaces/{id}/plugins/{installationId}/config"
+          }
+        }
+      ],
+      "client_branch_source": "  async configurePlugin(workspaceId: string, installationId: string, request: PluginConfigRequest): Promise<PluginInstallation> {\n    const raw = await this.fetch<unknown>(`/api/workspaces/${workspaceId}/plugins/${installationId}/config`, {\n      method: \"PUT\",\n      body: JSON.stringify(request),\n    });\n    return parseWithFallback(raw, PluginInstallationSchema, EMPTY_PLUGIN_INSTALLATION, {\n      endpoint: \"PUT /api/workspaces/{id}/plugins/{installationId}/config\",\n    });\n  }"
+    },
+    {
+      "source": "packages/core/api/client.ts:3638",
+      "api_method": "setPluginEnabled",
+      "client_anchor": "packages/core/api/client.ts:3638",
+      "kind": "query-or-mutation",
+      "inventory": [
+        {
+          "id": "client:3640",
+          "method": "POST",
+          "path_expression": "/api/workspaces/${workspaceId}/plugins/${installationId}/${action}",
+          "route": {
+            "method": "POST",
+            "path": "/api/workspaces/{id}/plugins/{installationId}/enable"
+          }
+        },
+        {
+          "id": "client:3640:remaining-variant-1",
+          "method": "POST",
+          "path_expression": "/api/workspaces/${workspaceId}/plugins/${installationId}/${action}",
+          "route": {
+            "method": "POST",
+            "path": "/api/workspaces/{id}/plugins/{installationId}/disable"
+          }
+        }
+      ],
+      "client_branch_source": "  async setPluginEnabled(workspaceId: string, installationId: string, enabled: boolean): Promise<PluginInstallation> {\n    const action = enabled ? \"enable\" : \"disable\";\n    const raw = await this.fetch<unknown>(`/api/workspaces/${workspaceId}/plugins/${installationId}/${action}`, {\n      method: \"POST\",\n    });\n    return parseWithFallback(raw, PluginInstallationSchema, EMPTY_PLUGIN_INSTALLATION, {\n      endpoint: `POST /api/workspaces/{id}/plugins/{installationId}/${action}`,\n    });\n  }\n\n  /**\n   * Performs one Action API call on behalf of a plugin surface.\n   *\n   * The surface has no credential — it asked the host over postMessage, and\n   * this re-issues the call on the signed-in user's session. The installation\n   * travels in a header the iframe cannot set for itself; the server derives\n   * the workspace from it rather than trusting anything the client sends.\n   */"
+    },
+    {
+      "source": "packages/core/api/client.ts:3757",
+      "api_method": "uninstallPlugin",
+      "client_anchor": "packages/core/api/client.ts:3757",
+      "kind": "query-or-mutation",
+      "inventory": [
+        {
+          "id": "client:3758",
+          "method": "DELETE",
+          "path_expression": "/api/workspaces/${workspaceId}/plugins/${installationId}",
+          "route": {
+            "method": "DELETE",
+            "path": "/api/workspaces/{id}/plugins/{installationId}"
+          }
+        }
+      ],
+      "client_branch_source": "  async uninstallPlugin(workspaceId: string, installationId: string): Promise<void> {\n    await this.fetch(`/api/workspaces/${workspaceId}/plugins/${installationId}`, {\n      method: \"DELETE\",\n    });\n  }\n\n  // Members"
+    },
+    {
+      "source": "packages/core/api/client.ts:5679",
+      "api_method": "beginLarkInstall",
+      "client_anchor": "packages/core/api/client.ts:5679",
+      "kind": "query-or-mutation",
+      "inventory": [
+        {
+          "id": "client:5693",
+          "method": "POST",
+          "path_expression": "/api/workspaces/${workspaceId}/lark/install/begin?${search.toString()}",
+          "route": {
+            "method": "POST",
+            "path": "/api/workspaces/{id}/lark/install/begin"
+          }
+        }
+      ],
+      "client_branch_source": "  async beginLarkInstall(\n    workspaceId: string,\n    agentId: string,\n    region: \"feishu\" | \"lark\",\n  ): Promise<BeginLarkInstallResponse> {\n    // The user picks the cloud explicitly in the UI (\"Bind to Feishu\"\n    // vs \"Bind to Lark\"), and the backend POSTs the device-flow `begin`\n    // against the corresponding accounts host (accounts.feishu.cn vs\n    // accounts.larksuite.com) so the QR renders against the right\n    // cloud up front. Empty / omitted region still resolves to Feishu\n    // server-side (RegionOrDefault) — we surface region as a required\n    // arg here so every call site is forced to make a deliberate\n    // choice rather than silently defaulting to mainland.\n    const search = new URLSearchParams({ agent_id: agentId, region });\n    return this.fetch(`/api/workspaces/${workspaceId}/lark/install/begin?${search.toString()}`, {\n      method: \"POST\",\n    });\n  }"
+    },
+    {
+      "source": "packages/core/api/client.ts:5698",
+      "api_method": "getLarkInstallStatus",
+      "client_anchor": "packages/core/api/client.ts:5698",
+      "kind": "query-or-mutation",
+      "inventory": [
+        {
+          "id": "client:5699",
+          "method": "GET",
+          "path_expression": "/api/workspaces/${workspaceId}/lark/install/${sessionId}/status",
+          "route": {
+            "method": "GET",
+            "path": "/api/workspaces/{id}/lark/install/{sessionId}/status"
+          }
+        }
+      ],
+      "client_branch_source": "  async getLarkInstallStatus(workspaceId: string, sessionId: string): Promise<LarkInstallStatusResponse> {\n    return this.fetch(`/api/workspaces/${workspaceId}/lark/install/${sessionId}/status`);\n  }"
+    },
+    {
+      "source": "packages/core/api/client.ts:5669",
+      "api_method": "listLarkInstallations",
+      "client_anchor": "packages/core/api/client.ts:5669",
+      "kind": "possible-refetch-union",
+      "inventory": [
+        {
+          "id": "client:5672",
+          "method": "GET",
+          "path_expression": "/api/workspaces/${workspaceId}/lark/installations",
+          "route": {
+            "method": "GET",
+            "path": "/api/workspaces/{id}/lark/installations"
+          }
+        }
+      ],
+      "client_branch_source": "  async listLarkInstallations(workspaceId: string): Promise<ListLarkInstallationsResponse> {\n    const endpoint = `/api/workspaces/${workspaceId}/lark/installations`;\n    return parseWithFallback(\n      await this.fetch(endpoint),\n      ListLarkInstallationsResponseSchema,\n      EMPTY_LIST_LARK_INSTALLATIONS_RESPONSE,\n      { endpoint },\n    );\n  }",
+      "inventory_gap": "No current frontend-calls ID for GET endpoint-variable branch. Do not substitute DELETE client:5703 or invent ID.",
+      "observed_transport": {
+        "method": "GET",
+        "path_expression": "/api/workspaces/${workspaceId}/lark/installations",
+        "client_anchor": "packages/core/api/client.ts:5672"
+      },
+      "root_reconciliation": "Resolved missing inventory entry from concrete endpoint assignment and registered Go GET route; runtime remains pending."
+    },
+    {
+      "source": "packages/core/api/client.ts:3894",
+      "api_method": "createSkill",
+      "client_anchor": "packages/core/api/client.ts:3894",
+      "kind": "query-or-mutation",
+      "inventory": [
+        {
+          "id": "client:3895",
+          "method": "POST",
+          "path_expression": "/api/skills",
+          "route": {
+            "method": "POST",
+            "path": "/api/skills"
+          }
+        }
+      ],
+      "client_branch_source": "  async createSkill(data: CreateSkillRequest): Promise<Skill> {\n    return this.fetch(\"/api/skills\", {\n      method: \"POST\",\n      body: JSON.stringify(data),\n    });\n  }"
+    },
+    {
+      "source": "packages/core/api/client.ts:3912",
+      "api_method": "importSkill",
+      "client_anchor": "packages/core/api/client.ts:3912",
+      "kind": "query-or-mutation",
+      "inventory": [
+        {
+          "id": "client:3913",
+          "method": "POST",
+          "path_expression": "/api/skills/import",
+          "route": {
+            "method": "POST",
+            "path": "/api/skills/import"
+          }
+        }
+      ],
+      "client_branch_source": "  async importSkill(data: { url: string }): Promise<Skill> {\n    return this.fetch(\"/api/skills/import\", {\n      method: \"POST\",\n      body: JSON.stringify(data),\n    });\n  }\n\n  /**\n   * Imports a skill from a local .skill / .zip archive. Not routed through\n   * `this.fetch`: the browser has to set the multipart boundary itself.\n   *\n   * The archive path always returns a structured `{ status, skill, reason }`\n   * body. Created/updated responses yield the skill; anything else throws\n   * with the server's reason (or `error`) so the dialog can show it.\n   */"
+    },
+    {
+      "source": "packages/core/api/client.ts:3927",
+      "api_method": "importSkillArchive",
+      "client_anchor": "packages/core/api/client.ts:3927",
+      "kind": "query-or-mutation",
+      "inventory": [
+        {
+          "id": "client:3938",
+          "method": "POST",
+          "path_expression": "/api/skills/import",
+          "route": {
+            "method": "POST",
+            "path": "/api/skills/import"
+          }
+        }
+      ],
+      "client_branch_source": "  async importSkillArchive(\n    file: File,\n    onConflict?: \"fail\" | \"overwrite\" | \"rename\" | \"skip\",\n    options?: { workspaceSlug: string },\n  ): Promise<Skill> {\n    const formData = new FormData();\n    formData.append(\"file\", file, file.name || \"skill.zip\");\n    if (onConflict) formData.append(\"on_conflict\", onConflict);\n\n    let res: Response;\n    try {\n      res = await this.fetchRaw(\"/api/skills/import\", {\n        method: \"POST\",\n        body: formData,\n        // Pin retries to the workspace that owns this import queue.\n        headers: options ? { \"X-Workspace-Slug\": options.workspaceSlug } : undefined,\n      });\n    } catch (err) {\n      throw remapSkillImportError(err);\n    }\n\n    const raw = (await res.json()) as unknown;\n    return skillFromImportResult(raw, \"POST /api/skills/import\");\n  }\n\n  // Re-downloads the skill from its stored config.origin source, replacing\n  // name/description/content/files in place while preserving the skill id and\n  // its agent bindings."
+    },
+    {
+      "source": "packages/core/api/client.ts:3872",
+      "api_method": "listSkills",
+      "client_anchor": "packages/core/api/client.ts:3872",
+      "kind": "query-or-mutation",
+      "inventory": [
+        {
+          "id": "client:3876",
+          "method": "GET",
+          "path_expression": "/api/skills",
+          "route": {
+            "method": "GET",
+            "path": "/api/skills"
+          }
+        }
+      ],
+      "client_branch_source": "  async listSkills(options?: {\n    requireValidResponse?: boolean;\n    workspaceSlug?: string;\n  }): Promise<SkillSummary[]> {\n    const raw = await this.fetch<unknown>(\"/api/skills\", {\n      headers: options?.workspaceSlug ? { \"X-Workspace-Slug\": options.workspaceSlug } : undefined,\n    });\n    // Rendering can degrade to an empty list; absence checks must fail closed.\n    const skills = parseWithFallback<SkillSummary[] | null>(\n      raw,\n      options?.requireValidResponse ? SkillSummaryListSchema.removeDefault() : SkillSummaryListSchema,\n      options?.requireValidResponse ? null : EMPTY_SKILL_SUMMARY_LIST,\n      { endpoint: \"GET /api/skills\" },\n    );\n    if (skills === null) throw new Error(\"Invalid skill list response\");\n    return skills;\n  }"
+    },
+    {
+      "source": "packages/core/api/client.ts:3890",
+      "api_method": "getSkill",
+      "client_anchor": "packages/core/api/client.ts:3890",
+      "kind": "possible-refetch-union",
+      "inventory": [
+        {
+          "id": "client:3891",
+          "method": "GET",
+          "path_expression": "/api/skills/${id}",
+          "route": {
+            "method": "GET",
+            "path": "/api/skills/{id}"
+          }
+        }
+      ],
+      "client_branch_source": "  async getSkill(id: string): Promise<Skill> {\n    return this.fetch(`/api/skills/${id}`);\n  }"
+    },
+    {
+      "source": "packages/core/api/client.ts:3966",
+      "api_method": "listSkillVersions",
+      "client_anchor": "packages/core/api/client.ts:3966",
+      "kind": "possible-refetch-union",
+      "inventory": [
+        {
+          "id": "client:3967",
+          "method": "GET",
+          "path_expression": "/api/skills/${skillId}/versions",
+          "route": {
+            "method": "GET",
+            "path": "/api/skills/{id}/versions"
+          }
+        }
+      ],
+      "client_branch_source": "  async listSkillVersions(skillId: string): Promise<SkillVersionSummary[]> {\n    const raw = await this.fetch<unknown>(`/api/skills/${skillId}/versions`);\n    return parseWithFallback(\n      raw,\n      SkillVersionSummaryListSchema,\n      EMPTY_SKILL_VERSION_SUMMARY_LIST,\n      { endpoint: \"GET /api/skills/:id/versions\" },\n    );\n  }"
+    },
+    {
+      "source": "packages/core/api/client.ts:3976",
+      "api_method": "getSkillVersion",
+      "client_anchor": "packages/core/api/client.ts:3976",
+      "kind": "possible-refetch-union",
+      "inventory": [
+        {
+          "id": "client:3977",
+          "method": "GET",
+          "path_expression": "/api/skills/${skillId}/versions/${version}",
+          "route": {
+            "method": "GET",
+            "path": "/api/skills/{id}/versions/{version}"
+          }
+        }
+      ],
+      "client_branch_source": "  async getSkillVersion(skillId: string, version: number): Promise<SkillVersion> {\n    const raw = await this.fetch<unknown>(\n      `/api/skills/${skillId}/versions/${version}`,\n    );\n    return parseWithFallback(raw, SkillVersionSchema, EMPTY_SKILL_VERSION, {\n      endpoint: \"GET /api/skills/:id/versions/:version\",\n    });\n  }\n\n  // Writes the version's snapshot back to the skill. The server records the\n  // result as a new latest version."
+    },
+    {
+      "source": "packages/core/api/client.ts:2062",
+      "api_method": "listAgents",
+      "client_anchor": "packages/core/api/client.ts:2062",
+      "kind": "possible-refetch-union",
+      "inventory": [
+        {
+          "id": "client:2066",
+          "method": "GET",
+          "path_expression": "/api/agents?${search}",
+          "route": {
+            "method": "GET",
+            "path": "/api/agents"
+          }
+        }
+      ],
+      "client_branch_source": "  async listAgents(params?: { workspace_id?: string; include_archived?: boolean }): Promise<Agent[]> {\n    const search = new URLSearchParams();\n    if (params?.workspace_id) search.set(\"workspace_id\", params.workspace_id);\n    if (params?.include_archived) search.set(\"include_archived\", \"true\");\n    return this.fetch(`/api/agents?${search}`);\n  }"
+    },
+    {
+      "source": "packages/core/api/client.ts:2069",
+      "api_method": "getAgent",
+      "client_anchor": "packages/core/api/client.ts:2069",
+      "kind": "possible-refetch-union",
+      "inventory": [
+        {
+          "id": "client:2070",
+          "method": "GET",
+          "path_expression": "/api/agents/${id}",
+          "route": {
+            "method": "GET",
+            "path": "/api/agents/{id}"
+          }
+        }
+      ],
+      "client_branch_source": "  async getAgent(id: string): Promise<Agent> {\n    return this.fetch(`/api/agents/${id}`);\n  }"
+    },
+    {
+      "source": "packages/core/api/client.ts:3764",
+      "api_method": "listMembers",
+      "client_anchor": "packages/core/api/client.ts:3764",
+      "kind": "query-or-mutation",
+      "inventory": [
+        {
+          "id": "client:3765",
+          "method": "GET",
+          "path_expression": "/api/workspaces/${workspaceId}/members",
+          "route": {
+            "method": "GET",
+            "path": "/api/workspaces/{id}/members"
+          }
+        }
+      ],
+      "client_branch_source": "  async listMembers(workspaceId: string): Promise<MemberWithUser[]> {\n    return this.fetch(`/api/workspaces/${workspaceId}/members`);\n  }"
+    },
+    {
+      "source": "packages/core/api/client.ts:3390",
+      "api_method": "listWorkspaces",
+      "client_anchor": "packages/core/api/client.ts:3390",
+      "kind": "query-or-mutation",
+      "inventory": [
+        {
+          "id": "client:3391",
+          "method": "GET",
+          "path_expression": "/api/workspaces",
+          "route": {
+            "method": "GET",
+            "path": "/api/workspaces"
+          }
+        }
+      ],
+      "client_branch_source": "  async listWorkspaces(): Promise<Workspace[]> {\n    const raw = await this.fetch<unknown>(\"/api/workspaces\");\n    return parseWithFallback(raw, WorkspaceListItemSchema.array(), [] as Workspace[], {\n      endpoint: \"GET /api/workspaces\",\n    }) as Workspace[];\n  }"
+    },
+    {
+      "source": "packages/core/api/client.ts:3594",
+      "api_method": "getPluginSurfaceLaunch",
+      "client_anchor": "packages/core/api/client.ts:3594",
+      "kind": "query-or-mutation",
+      "inventory": [
+        {
+          "id": "client:3595",
+          "method": "GET",
+          "path_expression": "/api/workspaces/${workspaceId}/plugins/${installationId}/surfaces/${encodeURIComponent(surfaceKey)}/launch",
+          "route": {
+            "method": "GET",
+            "path": "/api/workspaces/{id}/plugins/{installationId}/surfaces/{surfaceKey}/launch"
+          }
+        }
+      ],
+      "client_branch_source": "  async getPluginSurfaceLaunch(workspaceId: string, installationId: string, surfaceKey: string): Promise<PluginSurfaceLaunch> {\n    const raw = await this.fetch<unknown>(\n      `/api/workspaces/${workspaceId}/plugins/${installationId}/surfaces/${encodeURIComponent(surfaceKey)}/launch`,\n    );\n    return parseWithFallback(raw, PluginSurfaceLaunchSchema, EMPTY_PLUGIN_SURFACE_LAUNCH, {\n      endpoint: \"GET /api/workspaces/{id}/plugins/{installationId}/surfaces/{surfaceKey}/launch\",\n    });\n  }\n\n  /**\n   * Step one of the two-step install. Nothing is written: the response is what\n   * the consent screen shows before an installation exists.\n   */"
+    },
+    {
+      "source": "packages/core/api/client.ts:3698",
+      "api_method": "listPluginInvocations",
+      "client_anchor": "packages/core/api/client.ts:3698",
+      "kind": "query-or-mutation",
+      "inventory": [
+        {
+          "id": "client:3699",
+          "method": "GET",
+          "path_expression": "/api/workspaces/${workspaceId}/plugins/${installationId}/invocations",
+          "route": {
+            "method": "GET",
+            "path": "/api/workspaces/{id}/plugins/{installationId}/invocations"
+          }
+        }
+      ],
+      "client_branch_source": "  async listPluginInvocations(workspaceId: string, installationId: string): Promise<PluginInvocation[]> {\n    const raw = await this.fetch<unknown>(`/api/workspaces/${workspaceId}/plugins/${installationId}/invocations`);\n    return parseWithFallback(raw, PluginInvocationListSchema, { invocations: [] }, {\n      endpoint: \"GET /api/workspaces/{id}/plugins/{installationId}/invocations\",\n    }).invocations;\n  }"
+    },
+    {
+      "source": "packages/core/api/client.ts:3726",
+      "api_method": "listPluginMCPTools",
+      "client_anchor": "packages/core/api/client.ts:3726",
+      "kind": "query-or-mutation",
+      "inventory": [
+        {
+          "id": "client:3727",
+          "method": "GET",
+          "path_expression": "/api/workspaces/${workspaceId}/plugins/${installationId}/mcp/${encodeURIComponent(hookKey)}/tools",
+          "route": {
+            "method": "GET",
+            "path": "/api/workspaces/{id}/plugins/{installationId}/mcp/{hookKey}/tools"
+          }
+        }
+      ],
+      "client_branch_source": "  async listPluginMCPTools(workspaceId: string, installationId: string, hookKey: string): Promise<PluginMCPTool[]> {\n    const raw = await this.fetch<unknown>(\n      `/api/workspaces/${workspaceId}/plugins/${installationId}/mcp/${encodeURIComponent(hookKey)}/tools`,\n    );\n    return parseWithFallback(raw, PluginMCPToolListSchema, { tools: [] }, {\n      endpoint: \"GET /api/workspaces/{id}/plugins/{installationId}/mcp/{hookKey}/tools\",\n    }).tools;\n  }\n\n  /**\n   * Pins the approved tool set for one hook.\n   *\n   * `tools` is the COMPLETE set, not a delta — removing one is the same request\n   * shape as adding one, so there is no way to think you revoked something and\n   * have it stay. An empty array withdraws the hook entirely.\n   */"
+    }
+  ],
+  "reused_evidence": [
+    {
+      "path": "server/contracts/batches/plugin-surface-transport-coverage.json",
+      "sha256": "50831397fab1ca6623f3e7ddbd38fdd1136d0ef57719f02f75e1c8fef2eba33c"
+    },
+    {
+      "path": "server/contracts/batches/core-query-transport-coverage.json",
+      "sha256": "890c8ba6a1eb1a5d0dc2402164db5c9b4a2369a088ecdd90c26ddc352edbe491"
+    },
+    {
+      "path": "server/contracts/batches/identity-workspace-transport-coverage.json",
+      "sha256": "42b2ae40aae052cb197b79b0947d3e0681d5f5c334bc19fc57c7016d58466f7e"
+    }
+  ],
+  "semantics": [
+    "PluginsTab: workspace list/current member identity reads reuse identity proof; installations query enabled only for nonempty wsId. Owner/admin mounts publish/package list and enables management controls. UI role gates do not prove server permission enforcement.",
+    "ZIP picker sends first File unchanged as multipart bundle. Client publishPluginPackage uses direct browser fetch with authHeaders, credentials include, handles 401, parses errors/schema; finally clears input. No ZIP unpack or command execution in target.",
+    "Review sends version_id; confirm sends preview.version_id and all preview.scopes as granted_scopes. Cancel only clears preview. Delete, enable/disable, uninstall and configure use core mutations. Configuration copies existing values and adds only nonempty newly typed secrets; empty secret does not clear stored value. Number empty/NaN becomes undefined; bool strict true; enum/string remain text.",
+    "Plugin mutation onSettled invalidates pluginKeys.all(wsId), including failure. Possible active-query union: installed, packages, surface launch, invocations, MCP tools. Preview has no invalidation. Local publishing/token rotation/manual hook mutation are not target callbacks. Nested activity/MCP panels are separate supporting-component boundaries, not whole-source target claims.",
+    "Lark begin on mount and scan-again POSTs agent_id and region encoded with URLSearchParams. Response fields become local session state. Delayed serial poll uses max(2000,pollIntervalSeconds*1000); pending and transient exceptions schedule next timeout. Success invalidates lark installations then toast; error status stops; ApiError 404 session_lost, 401/403 forbidden stop. Cleanup cancels timer/continuation but does not abort in-flight HTTP. No client expiry timer; expiry depends on response, so transient failures can keep polling. Success schedules onClose after 800ms.",
+    "QR code is local inline SVG; response qr_code_url is also an unvalidated href opened by user in _blank with noopener noreferrer. No fixed authorization host or ApiClient call ID is invented for browser navigation. Lark installations refetch can poll every 5s while active installation lacks first_message_received_at.",
+    "Manual skill submit trims name and description; only name must be nonempty; creates JSON with those fields only, no content/execution. URL submit sends trimmed nonempty text in JSON url; substring source detection affects labels only, not validation or fetching. Browse buttons use fixed https://clawhub.ai, https://skills.sh and https://github.com through openExternal; web opens noopener,noreferrer, desktop bridge is boundary, SSR no-op.",
+    "seedAfterCreate sets detail cache locally then invalidates skills and agents prefixes. Possible active union includes skill list/detail/version list/version detail and agent list/detail; no guaranteed request count. refetchType none suppresses refetch after workspace change. Parent onCreated and onClose are opaque callback boundaries.",
+    "Folder picker snapshots live FileList before clearing input; generation guards suppress stale discovery. Directory attributes and synchronous click open browser picker. Archive picker wraps original File (size cap only, not extension/content validation). Folder discovery groups shallow SKILL.md roots, excludes ignored paths and binary/oversized supporting entries before reading; selected bytes form STORE ZIP and UTF-8/YAML preview. Limits: entry 1MiB, supporting total 8MiB, supporting count 512, archive 16MiB. Existing archives are not unpacked; reconciliationName null.",
+    "Local submit serially prepares selected eligible items and posts multipart file plus on_conflict=fail, pinning X-Workspace-Slug. Workspace id/slug subscription, mounted/cancelled/running guards stop future work; stop does not abort current upload. Response workspace must match owner. Transport/non-ApiError, >=500 and 408 after upload are uncertain and excluded from retry. Check results calls strict listSkills with pinned slug, rejects invalid/mismatched list, invalidates with none and permits retry only for known reconciliationName absent from list. Unknown archive identity stays uncertain.",
+    "Standard React/TanStack/browser File/FormData/Blob/TextDecoder/timer/URL semantics, YAML package and UI libraries terminate tracing; no node_modules recursion. RuntimeLocalSkillImportPanel and plugin activity/approval child component internals remain separate scope boundaries; no runtime execution or support claim.",
+    "Independent review: no unresolved transport edge in the three target callbacks. Child surfaces remain separate scope: RuntimeLocalSkillImportPanel (runtime method), PluginHookActivity (has hooks), PluginScheduleActivity (scheduled hooks), PluginMCPApproval (MCP contributions). Parent onCreated/onClose and desktop openExternal bridge remain opaque callback/platform boundaries. These boundaries do not claim child-source closure."
+  ],
+  "unresolved_edges": [],
+  "scope_boundaries": [
+    {
+      "source": "packages/views/skills/components/create-skill-dialog.tsx",
+      "boundary": "RuntimeLocalSkillImportPanel mounted for runtime method; separate supporting-component scope, not expanded by this target audit"
+    },
+    {
+      "source": "packages/views/settings/components/plugins-tab.tsx",
+      "boundary": "PluginHookActivity, PluginScheduleActivity, PluginMCPApproval mounted conditionally; separate supporting-component scope"
+    }
+  ],
+  "root_review": {
+    "status": "accepted bounded target callback scope",
+    "checks": "Current source hashes and 27 exact inventory tuples; spot checks of Lark serial polling, plugin onSettled prefix invalidation, skill cache seeding and concrete parent callbacks. No runtime verification.",
+    "parent_callback_evidence": [
+      "packages/views/skills/components/skills-page.tsx:381",
+      "packages/views/skills/components/skills-page.tsx:513"
+    ],
+    "parent_callback_behavior": "The only non-test CreateSkillDialog host in apps/packages supplies onCreated -> navigation.push(paths.skillDetail(skill.id)); onClose -> setCreateMethod(null). Destination mounting remains routing boundary, not a claim of no later requests."
+  }
+}

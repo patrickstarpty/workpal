@@ -1,0 +1,1308 @@
+{
+  "version": 1,
+  "coverage": "Finite render section3495-4553 accepted after callback, branch tuple and local provider reconciliation; whole_source false because other sections separate.",
+  "whole_source": false,
+  "root_review": "accepted finite render section; no whole IssueDetail or backend completion claim",
+  "files": [
+    {
+      "path": "packages/views/issues/components/issue-detail.tsx",
+      "sha256": "afbc077580392ae3b7ec41e28c087ee215dc3103c426f505fee9d96f5d8f9f1a",
+      "whole_source": false
+    }
+  ],
+  "snapshots": [
+    {
+      "path": "packages/views/issues/components/issue-detail.tsx",
+      "start": 3495,
+      "end": 3594,
+      "code": "\n  const sidebarContent = (\n    <IssueSidebarSections\n      sections={sidebarSections}\n      available={ISSUE_SIDEBAR_SECTIONS.filter(\n        (section) => (section !== \"pull_requests\" || githubSettings.prSidebar) && (section !== \"plugins\" || pluginsEnabled),\n      )}\n      revealed={revealedWakeupsFor === id ? REVEALED_WAKEUPS : undefined}\n      onRevealEnd={() => setRevealedWakeupsFor(null)}\n    />\n  );\n\n  // Shared row renderer for both timeline render modes (flat / virtualized).\n  // The wrapper `id=\"comment-...\"` is the deep-link target — equivalent to\n  // a native `<a href=\"#comment-...\">` anchor. A run that left no comment is\n  // addressed by its task id, which the sidebar's unread link lands on.\n  const renderItem = (_i: number, item: TimelineItem): React.ReactElement => {\n    if (item.kind === \"run\") {\n      const reply = item.entry;\n      return <div className=\"pb-3\" id={`comment-${item.id}`}>\n        {reply?.resolved_at && !expandedResolved.has(reply.id) ? <ResolvedThreadBar\n          entry={reply} replies={timelineView.threadReplies.get(reply.id) ?? EMPTY_REPLIES}\n          onExpand={() => toggleResolvedExpand(reply.id, true)} /> : <AgentRunComment run={item.run} entering={enteringRunIds.has(item.run.task.id)} standalone\n          highlightedId={highlightedId}\n          commentProps={reply ? {\n            issueId: id, replyScrollParent: isFlatTimeline ? null : scrollContainerEl, entry: reply, replies: timelineView.threadReplies.get(reply.id) ?? EMPTY_REPLIES,\n            currentUserId: user?.id, canModerate: canModerateComments, onReply: submitReply,\n            onReplyAccepted: scrollToTimelineBottom, onEdit: editComment, onDelete: deleteComment,\n            onToggleReaction: handleToggleReaction, onCreateSubIssue: openCommentSubIssue,\n            onResolveToggle: handleResolveToggle,\n            onCopyLink: actions.copyCommentLink, onJumpToComment: jumpToComment,\n            onCollapseResolved: reply.resolved_at ? () => toggleResolvedExpand(reply.id, false) : undefined,\n            expandedResolvedIds: expandedResolved, onResolvedExpandChange: toggleResolvedExpand,\n            highlightedCommentId: highlightedId,\n            runs: commentRuns.get(reply.id) ?? EMPTY_COMMENT_RUNS, enteringRunIds,\n          } : undefined} />}\n      </div>;\n    }\n    if (item.kind === \"resolved-bar\") {\n      return (\n        <div className=\"pb-3\" id={`comment-${item.id}`}>\n          <ResolvedThreadBar\n            entry={item.entry}\n            replies={timelineView.threadReplies.get(item.id) ?? EMPTY_REPLIES}\n            onExpand={() => toggleResolvedExpand(item.id, true)}\n          />\n        </div>\n      );\n    }\n    if (item.kind === \"comment\") {\n      const isResolved = !!item.entry.resolved_at;\n      return (\n        <div className=\"pb-3\" id={`comment-${item.id}`}>\n          <CommentCard\n            issueId={id}\n            replyScrollParent={isFlatTimeline ? null : scrollContainerEl}\n            runs={commentRuns.get(item.id) ?? EMPTY_COMMENT_RUNS}\n            enteringRunIds={enteringRunIds}\n            entry={item.entry}\n            replies={timelineView.threadReplies.get(item.id) ?? EMPTY_REPLIES}\n            currentUserId={user?.id}\n            canModerate={canModerateComments}\n            onReply={submitReply}\n            onReplyAccepted={scrollToTimelineBottom}\n            onEdit={editComment}\n            onDelete={deleteComment}\n            onToggleReaction={handleToggleReaction}\n            onCreateSubIssue={openCommentSubIssue}\n            onResolveToggle={handleResolveToggle}\n            onCopyLink={actions.copyCommentLink}\n            onJumpToComment={jumpToComment}\n            onCollapseResolved={isResolved ? () => toggleResolvedExpand(item.id, false) : undefined}\n            expandedResolvedIds={expandedResolved}\n            onResolvedExpandChange={toggleResolvedExpand}\n            highlightedCommentId={highlightedId}\n          />\n        </div>\n      );\n    }\n    // activity-group\n    const expanded = expandedActivityIds.has(item.id)\n      ? true\n      : collapsedActivityIds.has(item.id)\n        ? false\n        : item.id === lastActivityGroupId;\n    const truncateOlder = item.id === lastActivityGroupId;\n    const showOlder = showOlderActivityIds.has(item.id);\n    return (\n      <ActivityBlock\n        entries={item.entries}\n        expanded={expanded}\n        onToggle={() => toggleActivityBlock(item.id, expanded)}\n        truncateOlder={truncateOlder}\n        showOlder={showOlder}\n        onToggleShowOlder={() => showOlderActivities(item.id)}\n        getActorName={getActorName}\n        resolveStatusLabel={resolveStatusLabel}\n        resolveStatusCategory={resolveStatusCategory}\n        resolveStatusColor={resolveStatusColor}\n        resolveStatusIcon={resolveStatusIcon}"
+    },
+    {
+      "path": "packages/views/issues/components/issue-detail.tsx",
+      "start": 3595,
+      "end": 3694,
+      "code": "        t={t}\n        timeAgo={timeAgo}\n        locale={locale}\n        requesterName={requesterName}\n      />\n    );\n  };\n\n  // Breadcrumb shows the single most-direct container, never a fabricated chain.\n  // project_id and parent_issue_id are orthogonal (a sub-issue can live in a\n  // different project than its parent), so we never render both: parent wins,\n  // else project, else nothing. The project is still shown in the properties\n  // panel. The workspace name is intentionally absent — \"all issues\" is a view,\n  // not a container.\n  const breadcrumbSegments: BreadcrumbSegment[] = parentIssue\n    ? [{ href: paths.issueDetail(parentIssue.id), label: parentIssue.identifier }]\n    : breadcrumbProject\n      ? [\n          {\n            href: paths.projectDetail(breadcrumbProject.id),\n            className: \"flex items-center gap-1 min-w-0 max-w-72\",\n            label: (\n              <>\n                <ProjectIcon project={breadcrumbProject} size=\"sm\" />\n                <span className=\"min-w-0 truncate\">{breadcrumbProject.title}</span>\n              </>\n            ),\n          },\n        ]\n      : [];\n\n  const titleSizeClass = isPeek ? \"text-title-lg font-semibold\" : \"text-display-sm font-semibold\";\n\n  const detailContent = (\n    <CurrentIssueRenderContextProvider value={currentIssueRenderContext}>\n    <div\n      data-mc=\"issue-detail\"\n      data-status={issue.status}\n      data-priority={issue.priority}\n      data-view={isPeek ? \"peek\" : \"page\"}\n      className=\"relative flex h-full min-w-0 flex-1 flex-col\"\n    >\n        {/* In-page find bar — floats over the top-right of the content column\n            (below the breadcrumb header), outside the scroll container so it\n            stays put while the timeline scrolls and its own text isn't walked.\n            z-30: must beat every sticky affordance pinned at the timeline's\n            top-0 (comment headers z-10, resolve collapse bars z-20) — at equal\n            z the later-in-DOM sticky bar paints over the find bar and orphans\n            its close button (MUL-4414). On desktop it also steps inside the\n            thread rail's right-edge strip, so an open find bar can't cover\n            the topmost ticks. */}\n        {find.open && (\n          <FindBar\n            find={find}\n            className={cn(\"absolute top-14 z-30\", isMobile ? \"right-4\" : \"right-10\")}\n          />\n        )}\n        <BreadcrumbHeader\n          leading={leadingAction}\n          segments={breadcrumbSegments}\n          leaf={\n            <AppLink\n              href={paths.issueDetail(issue.id)}\n              className=\"flex min-w-0 transition-opacity hover:opacity-80\"\n            >\n              <span className=\"truncate font-medium text-foreground\">\n                {isPeek ? issue.identifier : `${issue.identifier} ${issue.title}`}\n              </span>\n            </AppLink>\n          }\n          actions={\n            <>\n            {/* Live \"agent is working\" chip, leftmost in the right cluster so\n                it never overlaps the title (which truncates to make room).\n                It self-hides when no agent is active. */}\n            <IssueAgentHeaderChip issueId={id} onJumpToRun={jumpToRun} />\n            <IssueWakeupHeaderChip issueId={id} onOpen={openWakeups} />\n            {!onDone && !isPeek && (\n              <IssueInboxActions\n                issueId={id}\n                onMarkDone={\n                  issueBehavesAsAny(issue, [\"done\", \"closed\"])\n                    ? undefined\n                    : (onSaved) => handleUpdateField({ status: \"done\" }, { onSuccess: onSaved })\n                }\n              />\n            )}\n            {onDone && onUnsubscribeArchive && (\n              <UnsubscribeArchiveButton issueId={id} userId={user?.id} onConfirm={onUnsubscribeArchive} />\n            )}\n            {onDone && !issueBehavesAsAny(issue, [\"done\", \"closed\"]) && (\n              <IconButton\n                label={t(($) => $.detail.mark_done_tooltip)}\n                tooltipSide=\"bottom\"\n                className=\"text-muted-foreground\"\n                onClick={() => { handleUpdateField({ status: \"done\" }); onDone?.(); }}\n              >\n                <CircleCheck />\n              </IconButton>\n            )}"
+    },
+    {
+      "path": "packages/views/issues/components/issue-detail.tsx",
+      "start": 3695,
+      "end": 3794,
+      "code": "            {onDone && issueBehavesAs(issue, \"done\") && (\n              <IconButton\n                label={t(($) => $.detail.archive_tooltip)}\n                tooltipSide=\"bottom\"\n                className=\"text-muted-foreground\"\n                onClick={() => { onDone(); }}\n              >\n                <Archive />\n              </IconButton>\n            )}\n            <IconButton\n              label={actions.isPinned ? t(($) => $.detail.unpin_tooltip) : t(($) => $.detail.pin_tooltip)}\n              tooltipSide=\"bottom\"\n              className={cn(\"text-muted-foreground\", actions.isPinned && \"text-foreground\")}\n              onClick={actions.togglePin}\n            >\n              {actions.isPinned ? <PinOff /> : <Pin />}\n            </IconButton>\n            <IssueDetailActionsDropdown\n              issue={issue}\n              locateInSidebar={!isPeek}\n              align=\"end\"\n              // When a parent passes `onDelete`, we detect deletion via effect\n              // above and skip navigation. Otherwise the modal takes us back\n              // to the list we came from, falling back to all issues.\n              onDeletedFallbackPath={onDelete ? undefined : paths.issues()}\n              archivedInboxItemId={archivedInboxItemId}\n              rowMenu={pageMenu.rowMenu}\n              trigger={\n                <IconButton\n                  label={tCommon(($) => $.more_actions)}\n                  tooltipSide=\"bottom\"\n                  className=\"text-muted-foreground\"\n                >\n                  <MoreHorizontal />\n                </IconButton>\n              }\n            />\n            {isPeek ? (\n              trailingActions\n            ) : (\n              <IconButton\n                label={t(($) => $.detail.sidebar_tooltip)}\n                shortcut={<ActionShortcutKeycaps action=\"toggleRightSidebar\" />}\n                tooltipSide=\"bottom\"\n                variant={sidebarOpen ? \"secondary\" : \"ghost\"}\n                className={sidebarOpen ? \"\" : \"text-muted-foreground\"}\n                onClick={handleToggleSidebar}\n              >\n                <PanelRight />\n              </IconButton>\n            )}\n            </>\n          }\n        />\n        {notice}\n\n        {/* scrollbar-gutter both-edges: with classic (space-taking) scrollbars —\n            macOS with a mouse or \"always show\", Windows, Linux — the global\n            `scrollbar-width: thin` carves ~11px off the right side only, so the\n            centered column reads 32px left vs 43px right (MUL-4404). Mirroring\n            the gutter restores symmetry; overlay-scrollbar platforms reserve\n            nothing and render unchanged. */}\n        <div\n          ref={attachScrollContainer}\n          data-tab-scroll-root={isPeek ? undefined : scrollContainerKey}\n          className=\"@container relative flex-1 overflow-y-auto [scrollbar-gutter:stable_both-edges]\"\n          onContextMenu={pageMenu.onContextMenu}\n        >\n        {/* Gutters: 32px is a comfortable reading margin on a desktop column\n            but eats 16% of a 393px phone, so below `md` they drop to 12px.\n            `max-md:pb-chat-launcher` reserves the launcher's corner at the end\n            of the scroll: below `md` the composer is not pinned (see\n            `useStickyComposer`), so it lands here — right where the launcher\n            floats — once the reader scrolls to the bottom. */}\n        <div\n          className={cn(\n            // The peek is already a narrow column, so it takes a tighter gutter\n            // and never reaches the chat launcher's corner (see IssuePeekHost).\n            isPeek\n              ? \"mx-auto w-full px-6 py-5\"\n              : cn(READING_COLUMN, \"px-[var(--space-sm,0.75rem)] py-[var(--space-lg,1.5rem)] max-md:pb-chat-launcher md:px-[var(--space-xl,2rem)] md:py-[var(--space-xl,2rem)]\"),\n          )}\n        >\n          <IssueDuplicateBanner\n            issue={issue}\n            onUnmark={() =>\n              handleUpdateField(\n                { status: \"todo\" },\n                { onSuccess: () => toast.success(t(($) => $.duplicates.unmark_toast)) },\n              )\n            }\n          />\n          <div id={descriptionSectionId}>\n          <div data-mc=\"issue-title\">\n          {titleLazy.active && (\n            <div className={titleLazy.ready ? undefined : \"hidden\"}>\n              <TitleEditor\n                key={`title-${id}-${titleResetToken}`}\n                ref={titleEditorRef}"
+    },
+    {
+      "path": "packages/views/issues/components/issue-detail.tsx",
+      "start": 3795,
+      "end": 3894,
+      "code": "                defaultValue={titleConflictDraft ?? issue.title}\n                placeholder={t(($) => $.detail.title_placeholder)}\n                className={cn(\"w-full leading-snug\", titleSizeClass)}\n                onReady={titleLazy.onReady}\n                onBlur={(value) => {\n                  const trimmed = value.trim();\n                  if (trimmed && trimmed !== issue.title) {\n                    handleUpdateField({\n                      title: trimmed,\n                      title_base: titleBaseRef.current,\n                    }, {\n                      onSuccess: (serverIssue) => {\n                        setTitleConflictDraft(null);\n                        titleBaseRef.current = serverIssue.title;\n                      },\n                      onError: (error) => {\n                        if (errorCode(error) === \"revision_conflict\") {\n                          setTitleConflictDraft(trimmed);\n                        }\n                      },\n                    });\n                  }\n                }}\n              />\n            </div>\n          )}\n          {!titleLazy.ready && (\n            <div\n              role=\"button\"\n              tabIndex={0}\n              className={cn(\"w-full cursor-text leading-snug\", titleSizeClass)}\n              onClick={(e) => {\n                // A drag-selection (copying the title) must not summon the editor.\n                const sel = window.getSelection();\n                if (sel && !sel.isCollapsed) return;\n                titleBaseRef.current = issue.title;\n                titleLazy.activate({ x: e.clientX, y: e.clientY });\n              }}\n              onKeyDown={(e) => {\n                if (e.key === \"Enter\" || e.key === \" \") {\n                  e.preventDefault();\n                  titleBaseRef.current = issue.title;\n                  titleLazy.activate();\n                }\n              }}\n            >\n              {issue.title}\n            </div>\n          )}\n          </div>\n          {titleConflictDraft !== null ? (\n            <RevisionConflictCompare\n              className=\"mt-2\"\n              title={t(($) => $.revision.compare_title)}\n              serverLabel={t(($) => $.revision.server_version)}\n              localLabel={t(($) => $.revision.local_version)}\n              serverValue={issue.title}\n              localValue={titleConflictDraft}\n              serverAction={(\n                <Button\n                  type=\"button\"\n                  size=\"sm\"\n                  variant=\"outline\"\n                  onClick={() => {\n                    // Local-only: the server already holds this title, so\n                    // discarding writes nothing. The remount is what puts it\n                    // back into the editor (see titleResetToken).\n                    setTitleConflictDraft(null);\n                    titleBaseRef.current = issue.title;\n                    setTitleResetToken((token) => token + 1);\n                  }}\n                >\n                  {t(($) => $.revision.use_server)}\n                </Button>\n              )}\n              localAction={(\n                <Button\n                  type=\"button\"\n                  size=\"sm\"\n                  variant=\"outline\"\n                  onClick={() => {\n                    const draft = titleConflictDraft.trim();\n                    if (!draft) return;\n                    handleUpdateField(\n                      { title: draft, title_base: issue.title },\n                      {\n                        onSuccess: (serverIssue) => {\n                          setTitleConflictDraft(null);\n                          titleBaseRef.current = serverIssue.title;\n                        },\n                      },\n                    );\n                  }}\n                >\n                  {t(($) => $.revision.keep_local)}\n                </Button>\n              )}\n            />\n          ) : null}\n"
+    },
+    {
+      "path": "packages/views/issues/components/issue-detail.tsx",
+      "start": 3895,
+      "end": 3994,
+      "code": "          {parentIssue && !issue.source_context && (\n            <AppLink\n              href={paths.issueDetail(parentIssue.id)}\n              className=\"mt-2 inline-flex max-w-full items-center gap-1.5 text-label text-muted-foreground hover:text-foreground transition-colors group/parent\"\n            >\n              <span className=\"shrink-0\">{t(($) => $.detail.sub_issue_of)}</span>\n              <StatusIcon\n                  status={parentIssue.status}\n                  color={resolveStatusColor(parentIssue.status)}\n                  icon={resolveStatusIcon(parentIssue.status)}\n                  category={issueStatusCategory(parentIssue) ?? undefined}\n                  className=\"h-3.5 w-3.5 shrink-0\"\n                />\n              <span className=\"tabular-nums shrink-0\">{parentIssue.identifier}</span>\n              <span className=\"truncate group-hover/parent:text-foreground\">\n                {parentIssue.title}\n              </span>\n              {parentChildIssues.length > 0 && (() => {\n                const done = parentChildIssues.filter((c) => issueBehavesAs(c, \"done\")).length;\n                return (\n                  <span className=\"ml-1 inline-flex items-center gap-1 rounded-full bg-muted/60 px-1.5 py-0.5 shrink-0\">\n                    <ProgressRing done={done} total={parentChildIssues.length} size={11} />\n                    <span className=\"tabular-nums text-micro font-medium\">\n                      {done}/{parentChildIssues.length}\n                    </span>\n                  </span>\n                );\n              })()}\n            </AppLink>\n          )}\n\n          {isPeek && (\n            <div className=\"mt-3\">\n              <IssuePropertyPills\n                issue={issue}\n                onUpdate={handleUpdateField}\n                onMarkDuplicate={actions.openMarkDuplicate}\n                isDuplicate={isDuplicateIssue(issue)}\n              />\n            </div>\n          )}\n\n          {issue.source_context && (\n            <SourceContextBadge\n              context={issue.source_context}\n              parentIssue={parentIssue}\n              parentProgress={parentChildIssues.length > 0\n                ? {\n                    done: parentChildIssues.filter((child) => issueBehavesAs(child, \"done\")).length,\n                    total: parentChildIssues.length,\n                  }\n                : undefined}\n              refetchIssue={async () => {\n                const result = await refetchIssue();\n                return result.isError ? null : result.data;\n              }}\n            />\n          )}\n\n          <div\n            {...descDropZoneProps}\n            {...descriptionAnnotations.captureProps}\n            ref={descriptionAnnotations.cardRef}\n            className=\"relative mt-5 rounded-lg\"\n            onFocusCapture={() => {\n              if (!descriptionEditingRef.current) {\n                descriptionEditingRef.current = true;\n              }\n            }}\n            onBlurCapture={(event) => {\n              if (!event.currentTarget.contains(event.relatedTarget)) {\n                descriptionEditingRef.current = false;\n              }\n            }}\n          >\n            {descriptionAnnotations.popup}\n            <div data-comment-content={descriptionSourceId}>\n              <ContentEditor\n                ref={descEditorRef}\n                key={id}\n                value={issue.description ?? \"\"}\n                placeholder={t(($) => $.detail.desc_placeholder)}\n                onUpdate={(md, baseMarkdown) => {\n                  // Bind any pending uploads still referenced in the markdown\n                  // so they appear in `issueAttachments` after refresh and the\n                  // editor's text/code preview keeps working past reload.\n                  //\n                  // Match with `contentReferencesAttachment`, NOT `md.includes(a.url)`:\n                  // the editor persists the durable `markdownLink`\n                  // (`/api/attachments/<id>/download` / `markdown_url`) into the\n                  // body, never the raw storage `a.url`. A bare `md.includes(a.url)`\n                  // therefore never matches, so the upload is never linked via\n                  // `attachment_ids`. After reload it's absent from\n                  // `issueAttachments`, the renderer can't resolve it to a\n                  // freshly-signed `download_url`, and the persisted auth-gated\n                  // download endpoint fails to load as a native <img> on clients\n                  // whose origin isn't the API host (Desktop/Electron, mobile\n                  // webview) — while still working on web via the cookie/proxy.\n                  // This mirrors the comment/reply/chat composers, which already\n                  // bind via `contentReferencesAttachment` (MUL-3130 / MUL-3192)."
+    },
+    {
+      "path": "packages/views/issues/components/issue-detail.tsx",
+      "start": 3995,
+      "end": 4094,
+      "code": "                  const ids = descPendingAttachmentsRef.current\n                    .filter((a) => contentReferencesAttachment(md, a))\n                    .map((a) => a.id);\n                  queueDescriptionSave({\n                    markdown: md,\n                    baseMarkdown,\n                    attachmentIds: ids,\n                  });\n                }}\n                onUploadFile={handleDescriptionUpload}\n                debounceMs={1500}\n                // Closing the issue modal must save what the user last saw —\n                // without the flush, a paste followed by a quick close loses\n                // the image markdown and its attachment_ids bind (MUL-3254).\n                flushPendingOnUnmount\n                currentIssueId={id}\n                selectionAction={descriptionSelectionAction}\n                attachments={descEditorAttachments}\n              />\n            </div>\n\n            <div className=\"flex items-center gap-1 mt-3\">\n              <ReactionBar\n                reactions={issueReactions}\n                currentUserId={user?.id}\n                onToggle={handleToggleIssueReaction}\n                getActorName={getActorName}\n              />\n              <FileUploadButton\n                size=\"sm\"\n                multiple\n                onSelect={(file) => descEditorRef.current?.uploadFile(file)}\n              />\n            </div>\n            {descDragOver && <FileDropOverlay />}\n          </div>\n\n          </div>\n\n          {/* Sub-issues — Linear-style */}\n          {childIssues.length === 0 && (\n            <div className=\"mt-6\">\n              <button\n                type=\"button\"\n                className=\"inline-flex items-center gap-1.5 text-label text-muted-foreground hover:text-foreground transition-colors\"\n                onClick={() => actions.openCreateSubIssue()}\n              >\n                <Plus className=\"h-3.5 w-3.5\" />\n                <span>{t(($) => $.detail.add_sub_issues)}</span>\n              </button>\n            </div>\n          )}\n          {childIssues.length > 0 && (() => {\n            return (\n              // Provider hosts the shared right-click actions menu the rows\n              // delegate to (one singleton menu, not one per row).\n              <IssueContextMenuProvider>\n              <IssueSurfaceSelectionProvider selection={subIssueSelection}>\n              <div ref={subIssuesSectionRef} id={subIssuesSectionId} className=\"mt-10 group/sub-issues\">\n                {/* Header */}\n                <div className=\"flex items-center gap-2 mb-2\">\n                  <button\n                    type=\"button\"\n                    onClick={() => setSubIssuesCollapsed((v) => !v)}\n                    className=\"flex items-center gap-1.5 text-body font-medium text-foreground hover:text-foreground/80 transition-colors\"\n                  >\n                    <ChevronDown\n                      className={cn(\n                        \"h-3.5 w-3.5 text-muted-foreground transition-transform\",\n                        subIssuesCollapsed && \"-rotate-90\",\n                      )}\n                    />\n                    <span>{t(($) => $.detail.sub_issues_label)}</span>\n                  </button>\n                  <div className=\"inline-flex items-center gap-1.5 rounded-full bg-muted/60 px-2 py-0.5\">\n                    <ProgressRing done={doneChildCount} total={childIssues.length} size={11} />\n                    <span className=\"text-micro text-muted-foreground tabular-nums font-medium\">\n                      {doneChildCount}/{childIssues.length}\n                    </span>\n                  </div>\n                  {/* issue.id, not the route param — the endpoint takes a\n                      UUID and the route may carry a human-readable id. */}\n                  <SubIssuesAgentWorkingChip parentIssueId={issue.id} />\n                  <input\n                    type=\"checkbox\"\n                    checked={allChildrenSelected}\n                    ref={(el) => {\n                      if (el) el.indeterminate = someChildrenSelected && !allChildrenSelected;\n                    }}\n                    onChange={handleToggleSelectAllChildren}\n                    aria-label={t(($) => $.detail.select_all_sub_issues_aria)}\n                    className={cn(\n                      \"ml-1 cursor-pointer accent-primary transition-opacity\",\n                      someChildrenSelected\n                        ? \"opacity-100\"\n                        : \"opacity-0 group-hover/sub-issues:opacity-100 focus-visible:opacity-100\",\n                    )}\n                  />\n                  <div className=\"ml-auto flex items-center gap-0.5\">\n                    <SubIssueDisplayPopover workspaceProperties={activeWorkspaceProperties} />"
+    },
+    {
+      "path": "packages/views/issues/components/issue-detail.tsx",
+      "start": 4095,
+      "end": 4194,
+      "code": "                    <Tooltip>\n                      <TooltipTrigger\n                        render={\n                          <button\n                            type=\"button\"\n                            className=\"inline-flex h-7 w-7 items-center justify-center rounded-md text-muted-foreground hover:bg-accent hover:text-foreground transition-colors\"\n                            onClick={() => actions.openCreateSubIssue()}\n                            aria-label={t(($) => $.detail.add_sub_issue_aria)}\n                          >\n                            <Plus className=\"h-4 w-4\" />\n                          </button>\n                        }\n                      />\n                      <TooltipContent side=\"bottom\">{t(($) => $.detail.add_sub_issue_tooltip)}</TooltipContent>\n                    </Tooltip>\n                  </div>\n                </div>\n\n                {/* Inline batch toolbar — appears next to the rows when\n                    selections exist, instead of as a far-away fixed bar. */}\n                <BatchActionToolbar\n                  issues={childIssues}\n                  placement=\"inline\"\n                  clearSelectionOnApply\n                />\n\n                {/* List */}\n                {!subIssuesCollapsed && (() => {\n                  const groups = groupSubIssuesByStage(childIssues);\n                  const staged = childIssues.some((c) => c.stage != null);\n                  return (\n                    <div className=\"overflow-hidden rounded-lg border bg-card/30 divide-y divide-border/60\">\n                      {groups.map(({ stage: groupStage, items }) => (\n                        <Fragment key={groupStage ?? \"unstaged\"}>\n                          {staged && (\n                            <div className=\"bg-muted/40 px-3 py-1 text-micro font-medium uppercase tracking-wider text-muted-foreground\">\n                              {groupStage == null\n                                ? t(($) => $.stage.none)\n                                : t(($) => $.stage.value, { n: groupStage })}\n                            </div>\n                          )}\n                          {items.map((child) => (\n                            <SubIssueRow\n                              key={child.id}\n                              child={child}\n                              childProgress={subIssueProgress?.get(child.id)}\n                              rowProps={subIssueRowProps}\n                              customProperties={subIssueCustomProps}\n                            />\n                          ))}\n                        </Fragment>\n                      ))}\n                    </div>\n                  );\n                })()}\n              </div>\n              </IssueSurfaceSelectionProvider>\n              </IssueContextMenuProvider>\n            );\n          })()}\n\n          <div className=\"my-8 border-t\" />\n\n          {/* Activity / Comments */}\n          <div data-mc=\"issue-activity\" data-comment-images={commentImageLayout}>\n            <div className=\"flex items-center justify-between\">\n              <div className=\"flex items-center gap-3\">\n                <h2 className=\"text-title-sm font-semibold\">{t(($) => $.detail.activity_section)}</h2>\n              </div>\n              <div className=\"flex items-center gap-2\">\n                {/* A delegated subscription is one the user never opted into\n                    by hand — their agent created this issue for them. Saying\n                    so is what keeps it from reading as the product quietly\n                    adding them to things (MUL-5483). The server's delivery\n                    tier decides it: a project watcher's delegated row still\n                    gets every event (MUL-9360). */}\n                {isSubscribed && subscriptionDelivery === \"delegated\" && (\n                  <Tooltip>\n                    {/* Quiet surface, not plain body text: this is metadata\n                        explaining a state, and must not read as a second\n                        action sitting next to Unsubscribe. Uses the shared\n                        caption role rather than an ad-hoc size (MUL-5451). */}\n                    <TooltipTrigger className=\"cursor-default rounded-full bg-muted px-2 py-0.5 text-caption text-muted-foreground\">\n                      {t(($) => $.detail.delegated_subscription_badge)}\n                    </TooltipTrigger>\n                    <TooltipContent side=\"top\" className=\"max-w-64\">\n                      {t(($) => $.detail.delegated_subscription_hint)}\n                    </TooltipContent>\n                  </Tooltip>\n                )}\n                {isSubscribed && (\n                  <KeyUpdatesSubscriptionBadge\n                    delivery={subscriptionDelivery}\n                    pending={togglePending}\n                    onFollowAll={followAllActivity}\n                  />\n                )}\n                {/* Inherited from the project: say so, and that leaving\n                    here only covers this issue, so Unsubscribe is not read as\n                    leaving the whole project. */}"
+    },
+    {
+      "path": "packages/views/issues/components/issue-detail.tsx",
+      "start": 4195,
+      "end": 4294,
+      "code": "                {isSubscribed && subscriptionReason === \"project\" && (\n                  <Tooltip>\n                    <TooltipTrigger className=\"cursor-default rounded-full bg-muted px-2 py-0.5 text-caption text-muted-foreground\">\n                      {t(($) => $.detail.project_subscription_badge)}\n                    </TooltipTrigger>\n                    <TooltipContent side=\"top\" className=\"max-w-64\">\n                      {t(($) => $.detail.project_subscription_hint)}\n                    </TooltipContent>\n                  </Tooltip>\n                )}\n                {/* Nothing until the subscribers query resolves: the default\n                    empty list reads as \"not subscribed\" for everyone, so\n                    rendering it flashes Subscribe at someone who is already\n                    subscribed, and a click landing in that window sends a\n                    subscribe instead of the unsubscribe they meant. An\n                    unresolved state is better shown as no control than as the\n                    wrong one (MUL-5714). */}\n                {subscriptionKnown &&\n                  (!isSubscribed || (childCountKnown && childIssues.length === 0) ? (\n                    /* One button, no menu, when there is nothing for the\n                       subtree option to cover. This is the root-only path\n                       (opt_out_scope='issue'), NOT the subtree one: even at\n                       zero children the two are different server writes,\n                       because a subtree tombstone also keeps FUTURE children\n                       from re-subscribing the user\n                       (server/go/pkg/db/queries/subscriber.sql). Declining one\n                       issue must not silently opt someone out of a tree that\n                       does not exist yet. While the child count is unknown we\n                       keep the menu below — it never picks a scope for the\n                       user. */\n                    <button\n                      type=\"button\"\n                      onClick={handleToggleSubscribe}\n                      disabled={togglePending || !user?.id}\n                      className={SUBSCRIPTION_ACTION_CLASS}\n                    >\n                      {isSubscribed\n                        ? t(($) => $.detail.unsubscribe)\n                        : t(($) => $.detail.subscribe)}\n                    </button>\n                  ) : (\n                    <DropdownMenu>\n                      <DropdownMenuTrigger\n                        disabled={togglePending || subtreePending || !user?.id}\n                        className={SUBSCRIPTION_ACTION_CLASS}\n                      >\n                        {t(($) => $.detail.unsubscribe)}\n                      </DropdownMenuTrigger>\n                      {/* onClick, not onSelect: Base UI's Menu.Item exposes no\n                          onSelect (that is the Radix spelling), and because its\n                          props extend the full div attribute set, an onSelect\n                          typechecks and silently lands on the DOM node as the\n                          native text-selection event — the handler never runs\n                          (MUL-5710). */}\n                      <DropdownMenuContent align=\"end\">\n                        <DropdownMenuItem\n                          onClick={handleToggleSubscribe}\n                          disabled={togglePending}\n                        >\n                          {t(($) => $.detail.unsubscribe_this)}\n                        </DropdownMenuItem>\n                        <DropdownMenuItem\n                          onClick={handleUnsubscribeSubtree}\n                          disabled={subtreePending}\n                        >\n                          {t(($) => $.detail.unsubscribe_subtree)}\n                        </DropdownMenuItem>\n                      </DropdownMenuContent>\n                    </DropdownMenu>\n                  ))}\n                <Popover>\n                  <PopoverTrigger className=\"cursor-pointer hover:opacity-80 transition-opacity\">\n                    {subscribers.length > 0 ? (\n                      <AvatarGroup>\n                        {subscribers.slice(0, 4).map((sub) => (\n                          <ActorAvatar\n                            key={`${sub.user_type}-${sub.user_id}`}\n                            actorType={sub.user_type}\n                            actorId={sub.user_id}\n                            size=\"md\"\n                            enableHoverCard\n                          />\n                        ))}\n                        {subscribers.length > 4 && (\n                          <AvatarGroupCount>+{subscribers.length - 4}</AvatarGroupCount>\n                        )}\n                      </AvatarGroup>\n                    ) : (\n                      <span className=\"flex items-center justify-center h-6 w-6 rounded-full border border-dashed border-muted-foreground/30 text-muted-foreground\">\n                        <Users className=\"h-3 w-3\" />\n                      </span>\n                    )}\n                  </PopoverTrigger>\n                  <SubscriberPopoverContent\n                    members={members}\n                    agents={agents}\n                    subscribers={subscribers}\n                    toggleSubscriber={toggleSubscriber}\n                    togglesDisabled={\n                      !subscriptionKnown || togglePending || !user?.id"
+    },
+    {
+      "path": "packages/views/issues/components/issue-detail.tsx",
+      "start": 4295,
+      "end": 4394,
+      "code": "                    }\n                    t={t}\n                  />\n                </Popover>\n              </div>\n            </div>\n\n            <LocalDirectoryHint\n              projectId={issue.project_id}\n              assignedAgent={issue.assignee_type === \"agent\"\n                ? agents.find((agent) => agent.id === issue.assignee_id) ?? null\n                : undefined}\n            />\n\n            {/* The \"agent is working\" live signal now lives in the header\n                (IssueAgentHeaderChip) so it stays in one fixed place and\n                doesn't compete with sticky banners in this content column.\n                The per-task timeline + past runs live in the right panel\n                via ExecutionLogSection. */}\n\n            {/* Timeline entries — virtualized via react-virtuoso to keep\n                first-paint cost O(viewport) instead of O(N). On a 500-comment\n                issue the unvirtualized .map froze the page for several\n                seconds (markdown parse + lowlight code highlight runs per\n                CommentCard on mount).\n\n                customScrollParent guard: callback ref populates after the\n                first commit. Without this null guard Virtuoso falls back to\n                its own scroller, grabs 0 height inside overflow-y-auto, and\n                miscomputes total-height on first paint. */}\n            {timelineLoading && timelineView.groups.length === 0 ? (\n              <TimelineSkeleton />\n            ) : (\n              // Only in-page find needs every row mounted for DOM text search.\n              // Browsing and comment deep links keep viewport-sized rendering.\n              !isFlatTimeline ? (\n                !scrollContainerEl ? (\n                  // Skeleton while the callback ref populates so the gap\n                  // between IssueDetail mount and Virtuoso mount doesn't\n                  // flash empty.\n                  <TimelineSkeleton />\n                ) : (\n                  <div ref={virtualTimelineRef} className=\"mt-4\">\n                    <Virtuoso\n                      key={`${wsId}:${id}`}\n                      ref={virtuosoRef}\n                      customScrollParent={scrollContainerEl}\n                      data={items}\n                      initialScrollTop={readingAnchor ? undefined : restoredScrollTop}\n                      increaseViewportBy={{ top: 800, bottom: 800 }}\n                      totalListHeightChanged={handleTimelineHeightChange}\n                      rangeChanged={handleTimelineRangeChanged}\n                      computeItemKey={(_i, item) => `${item.kind}:${item.kind === \"run\" ? item.run.task.id : item.id}`}\n                      // Also load-bearing for long threads: keepThreadRowAnchored\n                      // corrects after Virtuoso's resize handling in the same frame.\n                      skipAnimationFrameInResizeObserver\n                      // followOutput intentionally NOT set. Virtuoso treats\n                      // it as a sticky \"is at bottom\" flag and resets\n                      // scrollTop to maxScrollTop on every height-change\n                      // tick — issue-detail is document-shaped, not chat.\n                      itemContent={renderItem}\n                    />\n                  </div>\n                )\n              ) : (\n                <div className=\"mt-4\">\n                  {items.map((item, i) => (\n                    <Fragment key={`${item.kind}:${item.kind === \"run\" ? item.run.task.id : item.id}`}>\n                      {renderItem(i, item)}\n                    </Fragment>\n                  ))}\n                </div>\n              )\n            )}\n\n          </div>\n\n          {/* Bottom comment input — no avatar, full width. Direct child of\n              the content column (not the Activity section): a sticky box\n              can't leave its containing block, and the Activity div only\n              spans the timeline — at column level `sticky bottom-0` can pin\n              the composer across the whole scroll range.\n\n              Sticky treatment, bottom edge: opaque bg-background\n              under/around the card (its rounded\n              corners would otherwise leak scrolled text), a 16px gradient\n              fade above (exactly the mt-4 gap, so at rest it sits over the\n              page background and is invisible), and pb-4 so the card floats\n              off the viewport edge — with -mb-4 giving the padding back to\n              the column's py-8 so the at-rest layout doesn't shift. */}\n          {/* \"Jump to latest\" (MUL-8324, MUL-8951) floats centered just above the\n              composer's top edge. With the sticky composer it rides the\n              composer itself; without it, a zero-height sticky anchor pins\n              it to the viewport bottom until the composer scrolls in. */}\n          {!stickyComposer && jumpToLatest.visible && (\n            <div className=\"sticky bottom-0 z-10 h-0\">\n              <JumpToLatestButton onClick={onJumpToLatest} label={jumpToLatestLabel} hasNew={!!firstNewCommentId} />\n            </div>\n          )}\n          <IssueAppRequests issueId={id} highlightId={highlightAppRequestId} highlightToken={highlightRequestToken} />"
+    },
+    {
+      "path": "packages/views/issues/components/issue-detail.tsx",
+      "start": 4395,
+      "end": 4494,
+      "code": "          <div\n            ref={composerRef}\n            data-comment-images={commentImageLayout}\n            className={cn(\n              \"mt-4\",\n              stickyComposer &&\n                \"sticky bottom-0 z-10 -mb-4 bg-background pb-4 before:pointer-events-none before:absolute before:inset-x-0 before:bottom-full before:h-4 before:bg-gradient-to-t before:from-background before:to-transparent\",\n            )}\n          >\n            {/* key={id}: web's /issues/[id] route doesn't remount on\n                issueId change, so without an explicit key the editor\n                keeps the previous issue's in-memory content and the\n                next keystroke would flush it into the new issue's\n                draft key. */}\n            {stickyComposer && jumpToLatest.visible && (\n              <JumpToLatestButton onClick={onJumpToLatest} label={jumpToLatestLabel} hasNew={!!firstNewCommentId} />\n            )}\n            <CommentInput\n              key={id}\n              issueId={id}\n              onSubmit={submitComment}\n              annotationComposer={descriptionAnnotations.composer}\n              onAccepted={scrollToTimelineBottom}\n              onEditAnnotation={(annotationId) => descriptionAnnotations.editAnnotation(annotationId, true)}\n            />\n          </div>\n        </div>\n        </div>\n\n        {/* Thread quick-jump rail — rides the scroll container's right edge,\n            next to the scrollbar, where the pointer already is while\n            scrolling (MUL-4522). right-3 is the inset that works in both\n            scrollbar modes: it clears a classic scrollbar's ~11px gutter,\n            and the rail's own 20px width lands it exactly on the content\n            column's px-8 padding when the gutter is 0 (overlay scrollbars),\n            so it covers neither the scrollbar nor body text. It also clears\n            the resize handle's 4px drag strip at the panel edge. Hover\n            opens the outline; clicking jumps to a section or comment. Hidden on mobile: no\n            hover, and the gutter is too tight. */}\n        {!isMobile && !isPeek && (\n          <ThreadMinimap\n            threads={minimapThreads}\n            description={{\n              targetId: descriptionSectionId,\n              title: issue.title,\n              onJump: () => {\n                if (scrollContainerEl) scrollContainerEl.scrollTop = 0;\n              },\n            }}\n            subIssues={childIssues.length > 0 ? {\n              targetId: subIssuesSectionId,\n              done: doneChildCount,\n              total: childIssues.length,\n              onJump: jumpToSubIssues,\n            } : undefined}\n            scrollContainerEl={scrollContainerEl}\n            onJump={jumpToMinimapTarget}\n            className=\"absolute bottom-0 right-3 top-12\"\n          />\n        )}\n      </div>\n    </CurrentIssueRenderContextProvider>\n  );\n\n  // Hosts the one viewer this issue's files page through — see\n  // PreviewSequenceProvider. Wraps the column and the sidebar, so the\n  // description's files, the timeline's and the sidebar's deliverables all\n  // open into one sequence. The versions provider lets each comment's file\n  // cards mark a re-uploaded file `v2`.\n  const withPreview = (layout: ReactNode) => (\n    <PreviewSequenceProvider\n      items={previewSequence}\n      describeItem={describeDeliverable}\n      onOpenOverview={openOverviewFromViewer}\n      onOpened={deliverableLink.onViewerOpened}\n      onClosed={deliverableLink.onViewerClosed}\n    >\n      <AttachmentVersionsProvider files={deliverableFiles}>{layout}</AttachmentVersionsProvider>\n      {openDeliverable && (\n        <OpenDeliverableOnLoad\n          name={openDeliverable}\n          files={deliverableFiles}\n          read={deliverableLinkRead}\n          onOpenedInViewer={deliverableLink.onOpenedInViewer}\n          onDone={onDeliverableLinkDoneStable}\n        />\n      )}\n      <DeliverablesOverview\n        open={overview.open}\n        onClose={closeOverview}\n        returnKey={overview.returnKey}\n        identifier={issue.identifier}\n        files={deliverableFiles}\n        commentById={commentById}\n        onLocate={locateOrigin}\n        onCopyLink={copyDeliverableLink}\n      />\n    </PreviewSequenceProvider>\n  );\n"
+    },
+    {
+      "path": "packages/views/issues/components/issue-detail.tsx",
+      "start": 4495,
+      "end": 4553,
+      "code": "  // The peek has no room for the properties sidebar: its core properties are\n  // the pills under the title, and the rest is one click away on the page.\n  if (isPeek) {\n    return withPreview(<div className=\"flex flex-1 min-h-0\">{detailContent}</div>);\n  }\n\n  if (isMobile) {\n    return withPreview(\n      <div className=\"flex flex-1 min-h-0\">\n        {detailContent}\n        <Sheet open={mobileSidebarOpen} onOpenChange={setMobileSidebarOpen}>\n          <SheetContent\n            side=\"right\"\n            showCloseButton={false}\n            className=\"w-[320px] overflow-y-auto [scrollbar-gutter:stable] px-2 py-4\"\n            onKeyDown={letSidebarSettingsDragKeysThrough}\n          >\n            {sidebarContent}\n          </SheetContent>\n        </Sheet>\n      </div>,\n    );\n  }\n\n  return withPreview(\n    <ResizablePanelGroup orientation=\"horizontal\" className=\"flex-1 min-h-0\" defaultLayout={defaultLayout} onLayoutChanged={onLayoutChanged}>\n      <ResizablePanel id=\"content\" minSize=\"50%\">\n        {detailContent}\n      </ResizablePanel>\n      <ResizableHandle />\n      <ResizablePanel\n        id=\"sidebar\"\n        {...rightSidebarPanelMotionProps}\n        data-right-sidebar-motion={desktopSidebarMotionEnabled ? \"enabled\" : undefined}\n        defaultSize={desktopSidebarOpen ? 320 : 0}\n        minSize={260}\n        maxSize={420}\n        collapsible\n        groupResizeBehavior=\"preserve-pixel-size\"\n        panelRef={sidebarRef}\n        onResize={handleDesktopSidebarResize}\n      >\n        {/* Sections inset their own bodies and rows, so the panel itself only\n            needs a narrow gutter. pt-2.5 centres the first 28px section\n            header on the 48px page header beside it. */}\n        <AnimatedRightSidebar open={desktopSidebarVisualOpen} motionEnabled={desktopSidebarMotionEnabled} contentClassName=\"px-2 pt-2.5 pb-4\">\n          {sidebarContent}\n        </AnimatedRightSidebar>\n      </ResizablePanel>\n    </ResizablePanelGroup>,\n  );\n}\n\n/**\n * The ⋯ menu with \"Show in sidebar\". `useShowInSidebar` reads the shell and\n * sidebar contexts, which change on every nav toggle; reading them here\n * instead of in `IssueDetail` keeps a toggle from re-rendering the whole\n * page (MUL-9426).\n */"
+    }
+  ],
+  "edges": [
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:3668-3679",
+      "handler": "IssueInboxActions.onMarkDone",
+      "kind": "I/O",
+      "effects": "handleUpdateField({status:done}, {onSuccess:onSaved}); onSaved only after success.",
+      "inventory": [
+        {
+          "id": "client:1771",
+          "method": "PUT",
+          "path_expression": "/api/issues/${id}",
+          "route": {
+            "method": "PUT",
+            "path": "/api/issues/{id}"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:3680-3694",
+      "handler": "standalone Done",
+      "kind": "I/O and parent boundary",
+      "effects": "Starts status done mutation then immediately invokes parent onDone without waiting.",
+      "inventory": [
+        {
+          "id": "client:1771",
+          "method": "PUT",
+          "path_expression": "/api/issues/${id}",
+          "route": {
+            "method": "PUT",
+            "path": "/api/issues/{id}"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:3695-3703",
+      "handler": "archive",
+      "kind": "parent boundary",
+      "effects": "Only invokes parent onDone; no own archive request.",
+      "inventory": []
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:3704-3713",
+      "handler": "actions.togglePin",
+      "kind": "I/O",
+      "effects": "use-issue-actions.ts:175-182 -> useCreatePin/useDeletePin -> api.createPin/deletePin. Cache update/rollback; invalidate pinKeys.list on settlement.",
+      "inventory": [
+        {
+          "id": "client:5184",
+          "method": "POST",
+          "path_expression": "/api/pins",
+          "route": {
+            "method": "POST",
+            "path": "/api/pins"
+          }
+        },
+        {
+          "id": "client:5191",
+          "method": "DELETE",
+          "path_expression": "/api/pins/${itemType}/${itemId}",
+          "route": {
+            "method": "DELETE",
+            "path": "/api/pins/{itemType}/{itemId}"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:3781-3894",
+      "handler": "title blur / keep local / duplicate unmark",
+      "kind": "I/O",
+      "effects": "Title trims and guards; title_base sent. Success clears conflict and updates base; revision_conflict preserves draft. Keep-local uses current server title as base. Duplicate unmark sends todo with success toast.",
+      "inventory": [
+        {
+          "id": "client:1771",
+          "method": "PUT",
+          "path_expression": "/api/issues/${id}",
+          "route": {
+            "method": "PUT",
+            "path": "/api/issues/{id}"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:3823-3870",
+      "handler": "title activation / use server",
+      "kind": "local",
+      "effects": "Selection guard; Enter/Space preventDefault; activate lazy editor. Use-server clears draft, copies base and increments reset token; no write.",
+      "inventory": []
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:3947-3953",
+      "handler": "SourceContextBadge.refetchIssue",
+      "kind": "I/O",
+      "effects": "Await refetchIssue; return null on isError, else result.data.",
+      "inventory": [
+        {
+          "id": "client:1612",
+          "method": "GET",
+          "path_expression": "/api/issues/${encodeURIComponent(id)}",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:3979-4003",
+      "handler": "ContentEditor.onUpdate",
+      "kind": "I/O",
+      "effects": "Filter pending attachments referenced by markdown; queue latest description save with baseMarkdown and IDs. Edit-section interface at 3067 reaches api.updateIssue, no move_intent.",
+      "inventory": [
+        {
+          "id": "client:1771",
+          "method": "PUT",
+          "path_expression": "/api/issues/${id}",
+          "route": {
+            "method": "PUT",
+            "path": "/api/issues/{id}"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:4004-4004",
+      "handler": "handleDescriptionUpload",
+      "kind": "I/O; unresolved upload interface",
+      "effects": "issue-detail.tsx:2841-2854 awaits uploadWithToast then appends successful attachment to ref/state.",
+      "inventory": [
+        {
+          "id": "client:4078",
+          "method": "POST",
+          "path_expression": "`${this.baseUrl}/api/upload-file`",
+          "route": {
+            "method": "POST",
+            "path": "/api/upload-file"
+          }
+        }
+      ],
+      "root_verified_effects": "4004 -> handleDescriptionUpload2841 -> useEditorUpload -> useFileUpload(api,onError) -> api.uploadFile. No issue/comment/chat context is supplied by this callback. Oversize rejects before request; upload error invokes toast then returns null; success appends pending attachments locally. Later description mutation binds IDs. No refetch in upload hook."
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:3957-3971",
+      "handler": "description focus/blur capture",
+      "kind": "local",
+      "effects": "Set editing ref; blur clears only when relatedTarget outside currentTarget.",
+      "inventory": []
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:4026-4026",
+      "handler": "FileUploadButton.onSelect",
+      "kind": "child boundary",
+      "effects": "Calls descEditorRef.current?.uploadFile(file). Imperative editor child interface; descendant internals excluded.",
+      "inventory": []
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:4058-4090",
+      "handler": "subissue disclosure / checkbox ref",
+      "kind": "local",
+      "effects": "Toggle collapsed state; assign indeterminate from partial selection.",
+      "inventory": []
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:4440-4445",
+      "handler": "minimap description.onJump",
+      "kind": "local",
+      "effects": "Set scrollContainerEl.scrollTop=0 if mounted.",
+      "inventory": []
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:4505-4505",
+      "handler": "Sheet.onOpenChange",
+      "kind": "local",
+      "effects": "Set mobileSidebarOpen.",
+      "inventory": []
+    }
+  ],
+  "inventory": [
+    {
+      "id": "client:1771",
+      "method": "PUT",
+      "path_expression": "/api/issues/${id}",
+      "route": {
+        "method": "PUT",
+        "path": "/api/issues/{id}"
+      }
+    },
+    {
+      "id": "client:5184",
+      "method": "POST",
+      "path_expression": "/api/pins",
+      "route": {
+        "method": "POST",
+        "path": "/api/pins"
+      }
+    },
+    {
+      "id": "client:5191",
+      "method": "DELETE",
+      "path_expression": "/api/pins/${itemType}/${itemId}",
+      "route": {
+        "method": "DELETE",
+        "path": "/api/pins/{itemType}/{itemId}"
+      }
+    },
+    {
+      "id": "client:1612",
+      "method": "GET",
+      "path_expression": "/api/issues/${encodeURIComponent(id)}",
+      "route": {
+        "method": "GET",
+        "path": "/api/issues/{id}"
+      }
+    }
+  ],
+  "reused_evidence": [
+    {
+      "path": "server/contracts/batches/issue-detail-helper-sections.json",
+      "sha256": "6602827dcae48895a5d575273c4f0a5d991affcae0962223782259b90ba0d19f",
+      "source_hashes_match": true,
+      "use": "Source-hash/interface reference; document hash is observational, not a stability prerequisite.",
+      "coverage": "finished finite helper section audit; global coverage false"
+    },
+    {
+      "path": "server/contracts/batches/issue-detail-query-section.json",
+      "sha256": "d32ba85c3456f19e2601bb48a88c631e58008e8356245a5a3d95f2df864c5fee",
+      "source_hashes_match": true,
+      "use": "Source-hash/interface reference; document hash is observational, not a stability prerequisite.",
+      "coverage": "Own body preserved; timeline/reaction/subscriber invoked bodies closed and exact query/mutation edge mappings added; remaining boundaries explicitly listed"
+    },
+    {
+      "path": "server/contracts/batches/issue-detail-edit-section.json",
+      "sha256": "b51da16ada791916cf6f489fa06d616f8d0dd51a8906a51469c743bd221ecce0",
+      "source_hashes_match": true,
+      "use": "Source-hash/interface reference; document hash is observational, not a stability prerequisite.",
+      "coverage": "INCOMPLETE: direct section reviewed; dependency proof validation and root closure outstanding"
+    },
+    {
+      "path": "server/contracts/batches/issue-mutations-transport-coverage.json",
+      "sha256": "43c8266c0e7248f5f12b8736bf795e424ab2771f21bea3eac4b210bf89dbd70a",
+      "source_hashes_match": true,
+      "use": "Source-hash/interface reference; document hash is observational, not a stability prerequisite.",
+      "coverage": "Bounded whole target accepted after root exact-method tuple reconciliation. Global coverage false; no runtime/backend claim."
+    },
+    {
+      "path": "server/contracts/batches/issue-query-transport-coverage.json",
+      "sha256": "3d4401929eee7294bc9f706a5c738a074300faffc6df01ec9275184d8a5be380",
+      "source_hashes_match": true,
+      "use": "Source-hash/interface reference; document hash is observational, not a stability prerequisite.",
+      "coverage": "Finite conservative static query factory union; no backend support claim."
+    }
+  ],
+  "observations": [
+    "Title blur trims nonempty changed titles and passes title_base to handleUpdateField. Success clears conflict draft and replaces base; revision_conflict retains trimmed draft.",
+    "Use-server title action only clears local draft, updates base and increments remount token. Keep-local retries handleUpdateField using current issue.title as base.",
+    "Description update filters pending attachment references and queues markdown/baseMarkdown/attachmentIds. onUploadFile invokes handleDescriptionUpload; FileUploadButton invokes editor imperative uploadFile, a child boundary requiring separate proof.",
+    "Timeline renderer supplies reply/edit/delete/reaction/resolve handlers; local expansion, scroll, jump and activity toggles require individual closure. Descendant internals remain boundaries.",
+    "Inbox Done invokes onSaved only on success; standalone Done invokes onDone immediately after starting mutation; archive only invokes parent onDone. Dropdown is a child boundary."
+  ],
+  "remaining": [],
+  "validation": {
+    "json": "parsed",
+    "source_hashes": "checked",
+    "snapshots": "all 11 exact captures preserved; individually read <=100 lines per source call",
+    "tuples": "copied exact four-field tuples from frontend-calls.json after called-method matching",
+    "runtime_support": "not asserted"
+  },
+  "callback_inventory": [
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:3503",
+      "prop": "onRevealEnd",
+      "expression_start": "() => setRevealedWakeupsFor(null)}",
+      "scope": "own callback or bounded supplied interface; see edges and reused proofs"
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:3517",
+      "prop": "onExpand",
+      "expression_start": "() => toggleResolvedExpand(reply.id, true)} /> : <AgentRunComment run={item.run} entering={enteringRunIds.has(item.run.task.id)} standalone",
+      "scope": "own callback or bounded supplied interface; see edges and reused proofs"
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:3539",
+      "prop": "onExpand",
+      "expression_start": "() => toggleResolvedExpand(item.id, true)}",
+      "scope": "own callback or bounded supplied interface; see edges and reused proofs"
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:3557",
+      "prop": "onReply",
+      "expression_start": "submitReply}",
+      "scope": "own callback or bounded supplied interface; see edges and reused proofs"
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:3558",
+      "prop": "onReplyAccepted",
+      "expression_start": "scrollToTimelineBottom}",
+      "scope": "own callback or bounded supplied interface; see edges and reused proofs"
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:3559",
+      "prop": "onEdit",
+      "expression_start": "editComment}",
+      "scope": "own callback or bounded supplied interface; see edges and reused proofs"
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:3560",
+      "prop": "onDelete",
+      "expression_start": "deleteComment}",
+      "scope": "own callback or bounded supplied interface; see edges and reused proofs"
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:3561",
+      "prop": "onToggleReaction",
+      "expression_start": "handleToggleReaction}",
+      "scope": "own callback or bounded supplied interface; see edges and reused proofs"
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:3562",
+      "prop": "onCreateSubIssue",
+      "expression_start": "openCommentSubIssue}",
+      "scope": "own callback or bounded supplied interface; see edges and reused proofs"
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:3563",
+      "prop": "onResolveToggle",
+      "expression_start": "handleResolveToggle}",
+      "scope": "own callback or bounded supplied interface; see edges and reused proofs"
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:3564",
+      "prop": "onCopyLink",
+      "expression_start": "actions.copyCommentLink}",
+      "scope": "own callback or bounded supplied interface; see edges and reused proofs"
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:3565",
+      "prop": "onJumpToComment",
+      "expression_start": "jumpToComment}",
+      "scope": "own callback or bounded supplied interface; see edges and reused proofs"
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:3566",
+      "prop": "onCollapseResolved",
+      "expression_start": "isResolved ? () => toggleResolvedExpand(item.id, false) : undefined}",
+      "scope": "own callback or bounded supplied interface; see edges and reused proofs"
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:3568",
+      "prop": "onResolvedExpandChange",
+      "expression_start": "toggleResolvedExpand}",
+      "scope": "own callback or bounded supplied interface; see edges and reused proofs"
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:3586",
+      "prop": "onToggle",
+      "expression_start": "() => toggleActivityBlock(item.id, expanded)}",
+      "scope": "own callback or bounded supplied interface; see edges and reused proofs"
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:3589",
+      "prop": "onToggleShowOlder",
+      "expression_start": "() => showOlderActivities(item.id)}",
+      "scope": "own callback or bounded supplied interface; see edges and reused proofs"
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:3670",
+      "prop": "onJumpToRun",
+      "expression_start": "jumpToRun} />",
+      "scope": "own callback or bounded supplied interface; see edges and reused proofs"
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:3671",
+      "prop": "onOpen",
+      "expression_start": "openWakeups} />",
+      "scope": "own callback or bounded supplied interface; see edges and reused proofs"
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:3675",
+      "prop": "onMarkDone",
+      "expression_start": "",
+      "scope": "own callback or bounded supplied interface; see edges and reused proofs"
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:3683",
+      "prop": "onConfirm",
+      "expression_start": "onUnsubscribeArchive} />",
+      "scope": "own callback or bounded supplied interface; see edges and reused proofs"
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:3690",
+      "prop": "onClick",
+      "expression_start": "() => { handleUpdateField({ status: \"done\" }); onDone?.(); }}",
+      "scope": "own callback or bounded supplied interface; see edges and reused proofs"
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:3700",
+      "prop": "onClick",
+      "expression_start": "() => { onDone(); }}",
+      "scope": "own callback or bounded supplied interface; see edges and reused proofs"
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:3709",
+      "prop": "onClick",
+      "expression_start": "actions.togglePin}",
+      "scope": "own callback or bounded supplied interface; see edges and reused proofs"
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:3720",
+      "prop": "onDeletedFallbackPath",
+      "expression_start": "onDelete ? undefined : paths.issues()}",
+      "scope": "own callback or bounded supplied interface; see edges and reused proofs"
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:3742",
+      "prop": "onClick",
+      "expression_start": "handleToggleSidebar}",
+      "scope": "own callback or bounded supplied interface; see edges and reused proofs"
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:3759",
+      "prop": "ref",
+      "expression_start": "attachScrollContainer}",
+      "scope": "own callback or bounded supplied interface; see edges and reused proofs"
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:3762",
+      "prop": "onContextMenu",
+      "expression_start": "pageMenu.onContextMenu}",
+      "scope": "own callback or bounded supplied interface; see edges and reused proofs"
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:3781",
+      "prop": "onUnmark",
+      "expression_start": "() =>",
+      "scope": "own callback or bounded supplied interface; see edges and reused proofs"
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:3794",
+      "prop": "ref",
+      "expression_start": "titleEditorRef}",
+      "scope": "own callback or bounded supplied interface; see edges and reused proofs"
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:3798",
+      "prop": "onReady",
+      "expression_start": "titleLazy.onReady}",
+      "scope": "own callback or bounded supplied interface; see edges and reused proofs"
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:3799",
+      "prop": "onBlur",
+      "expression_start": "(value) => {",
+      "scope": "own callback or bounded supplied interface; see edges and reused proofs"
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:3826",
+      "prop": "onClick",
+      "expression_start": "(e) => {",
+      "scope": "own callback or bounded supplied interface; see edges and reused proofs"
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:3833",
+      "prop": "onKeyDown",
+      "expression_start": "(e) => {",
+      "scope": "own callback or bounded supplied interface; see edges and reused proofs"
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:3858",
+      "prop": "onClick",
+      "expression_start": "() => {",
+      "scope": "own callback or bounded supplied interface; see edges and reused proofs"
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:3875",
+      "prop": "onClick",
+      "expression_start": "() => {",
+      "scope": "own callback or bounded supplied interface; see edges and reused proofs"
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:3930",
+      "prop": "onUpdate",
+      "expression_start": "handleUpdateField}",
+      "scope": "own callback or bounded supplied interface; see edges and reused proofs"
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:3931",
+      "prop": "onMarkDuplicate",
+      "expression_start": "actions.openMarkDuplicate}",
+      "scope": "own callback or bounded supplied interface; see edges and reused proofs"
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:3957",
+      "prop": "ref",
+      "expression_start": "descriptionAnnotations.cardRef}",
+      "scope": "own callback or bounded supplied interface; see edges and reused proofs"
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:3959",
+      "prop": "onFocusCapture",
+      "expression_start": "() => {",
+      "scope": "own callback or bounded supplied interface; see edges and reused proofs"
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:3964",
+      "prop": "onBlurCapture",
+      "expression_start": "(event) => {",
+      "scope": "own callback or bounded supplied interface; see edges and reused proofs"
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:3973",
+      "prop": "ref",
+      "expression_start": "descEditorRef}",
+      "scope": "own callback or bounded supplied interface; see edges and reused proofs"
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:3977",
+      "prop": "onUpdate",
+      "expression_start": "(md, baseMarkdown) => {",
+      "scope": "own callback or bounded supplied interface; see edges and reused proofs"
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:4004",
+      "prop": "onUploadFile",
+      "expression_start": "handleDescriptionUpload}",
+      "scope": "own callback or bounded supplied interface; see edges and reused proofs"
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:4020",
+      "prop": "onToggle",
+      "expression_start": "handleToggleIssueReaction}",
+      "scope": "own callback or bounded supplied interface; see edges and reused proofs"
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:4026",
+      "prop": "onSelect",
+      "expression_start": "(file) => descEditorRef.current?.uploadFile(file)}",
+      "scope": "own callback or bounded supplied interface; see edges and reused proofs"
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:4040",
+      "prop": "onClick",
+      "expression_start": "() => actions.openCreateSubIssue()}",
+      "scope": "own callback or bounded supplied interface; see edges and reused proofs"
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:4053",
+      "prop": "ref",
+      "expression_start": "subIssuesSectionRef} id={subIssuesSectionId} className=\"mt-10 group/sub-issues\">",
+      "scope": "own callback or bounded supplied interface; see edges and reused proofs"
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:4058",
+      "prop": "onClick",
+      "expression_start": "() => setSubIssuesCollapsed((v) => !v)}",
+      "scope": "own callback or bounded supplied interface; see edges and reused proofs"
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:4081",
+      "prop": "ref",
+      "expression_start": "(el) => {",
+      "scope": "own callback or bounded supplied interface; see edges and reused proofs"
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:4084",
+      "prop": "onChange",
+      "expression_start": "handleToggleSelectAllChildren}",
+      "scope": "own callback or bounded supplied interface; see edges and reused proofs"
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:4101",
+      "prop": "onClick",
+      "expression_start": "() => actions.openCreateSubIssue()}",
+      "scope": "own callback or bounded supplied interface; see edges and reused proofs"
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:4189",
+      "prop": "onFollowAll",
+      "expression_start": "followAllActivity}",
+      "scope": "own callback or bounded supplied interface; see edges and reused proofs"
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:4227",
+      "prop": "onClick",
+      "expression_start": "handleToggleSubscribe}",
+      "scope": "own callback or bounded supplied interface; see edges and reused proofs"
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:4251",
+      "prop": "onClick",
+      "expression_start": "handleToggleSubscribe}",
+      "scope": "own callback or bounded supplied interface; see edges and reused proofs"
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:4257",
+      "prop": "onClick",
+      "expression_start": "handleUnsubscribeSubtree}",
+      "scope": "own callback or bounded supplied interface; see edges and reused proofs"
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:4292",
+      "prop": "toggleSubscriber",
+      "expression_start": "toggleSubscriber}",
+      "scope": "own callback or bounded supplied interface; see edges and reused proofs"
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:4337",
+      "prop": "ref",
+      "expression_start": "virtualTimelineRef} className=\"mt-4\">",
+      "scope": "own callback or bounded supplied interface; see edges and reused proofs"
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:4340",
+      "prop": "ref",
+      "expression_start": "virtuosoRef}",
+      "scope": "own callback or bounded supplied interface; see edges and reused proofs"
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:4345",
+      "prop": "totalListHeightChanged",
+      "expression_start": "handleTimelineHeightChange}",
+      "scope": "own callback or bounded supplied interface; see edges and reused proofs"
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:4346",
+      "prop": "rangeChanged",
+      "expression_start": "handleTimelineRangeChanged}",
+      "scope": "own callback or bounded supplied interface; see edges and reused proofs"
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:4347",
+      "prop": "computeItemKey",
+      "expression_start": "(_i, item) => `${item.kind}:${item.kind === \"run\" ? item.run.task.id : item.id}`}",
+      "scope": "own callback or bounded supplied interface; see edges and reused proofs"
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:4355",
+      "prop": "itemContent",
+      "expression_start": "renderItem}",
+      "scope": "own callback or bounded supplied interface; see edges and reused proofs"
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:4391",
+      "prop": "onClick",
+      "expression_start": "onJumpToLatest} label={jumpToLatestLabel} hasNew={!!firstNewCommentId} />",
+      "scope": "own callback or bounded supplied interface; see edges and reused proofs"
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:4396",
+      "prop": "ref",
+      "expression_start": "composerRef}",
+      "scope": "own callback or bounded supplied interface; see edges and reused proofs"
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:4410",
+      "prop": "onClick",
+      "expression_start": "onJumpToLatest} label={jumpToLatestLabel} hasNew={!!firstNewCommentId} />",
+      "scope": "own callback or bounded supplied interface; see edges and reused proofs"
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:4415",
+      "prop": "onSubmit",
+      "expression_start": "submitComment}",
+      "scope": "own callback or bounded supplied interface; see edges and reused proofs"
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:4417",
+      "prop": "onAccepted",
+      "expression_start": "scrollToTimelineBottom}",
+      "scope": "own callback or bounded supplied interface; see edges and reused proofs"
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:4418",
+      "prop": "onEditAnnotation",
+      "expression_start": "(annotationId) => descriptionAnnotations.editAnnotation(annotationId, true)}",
+      "scope": "own callback or bounded supplied interface; see edges and reused proofs"
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:4451",
+      "prop": "onJump",
+      "expression_start": "jumpToMinimapTarget}",
+      "scope": "own callback or bounded supplied interface; see edges and reused proofs"
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:4467",
+      "prop": "describeItem",
+      "expression_start": "describeDeliverable}",
+      "scope": "own callback or bounded supplied interface; see edges and reused proofs"
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:4468",
+      "prop": "onOpenOverview",
+      "expression_start": "openOverviewFromViewer}",
+      "scope": "own callback or bounded supplied interface; see edges and reused proofs"
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:4469",
+      "prop": "onOpened",
+      "expression_start": "deliverableLink.onViewerOpened}",
+      "scope": "own callback or bounded supplied interface; see edges and reused proofs"
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:4470",
+      "prop": "onClosed",
+      "expression_start": "deliverableLink.onViewerClosed}",
+      "scope": "own callback or bounded supplied interface; see edges and reused proofs"
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:4478",
+      "prop": "onOpenedInViewer",
+      "expression_start": "deliverableLink.onOpenedInViewer}",
+      "scope": "own callback or bounded supplied interface; see edges and reused proofs"
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:4479",
+      "prop": "onDone",
+      "expression_start": "onDeliverableLinkDoneStable}",
+      "scope": "own callback or bounded supplied interface; see edges and reused proofs"
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:4484",
+      "prop": "onClose",
+      "expression_start": "closeOverview}",
+      "scope": "own callback or bounded supplied interface; see edges and reused proofs"
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:4489",
+      "prop": "onLocate",
+      "expression_start": "locateOrigin}",
+      "scope": "own callback or bounded supplied interface; see edges and reused proofs"
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:4490",
+      "prop": "onCopyLink",
+      "expression_start": "copyDeliverableLink}",
+      "scope": "own callback or bounded supplied interface; see edges and reused proofs"
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:4505",
+      "prop": "onOpenChange",
+      "expression_start": "setMobileSidebarOpen}>",
+      "scope": "own callback or bounded supplied interface; see edges and reused proofs"
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:4510",
+      "prop": "onKeyDown",
+      "expression_start": "letSidebarSettingsDragKeysThrough}",
+      "scope": "own callback or bounded supplied interface; see edges and reused proofs"
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:4520",
+      "prop": "onLayoutChanged",
+      "expression_start": "onLayoutChanged}>",
+      "scope": "own callback or bounded supplied interface; see edges and reused proofs"
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:4535",
+      "prop": "onResize",
+      "expression_start": "handleDesktopSidebarResize}",
+      "scope": "own callback or bounded supplied interface; see edges and reused proofs"
+    }
+  ],
+  "finite_refetch_references": [
+    {
+      "proof": "issue-mutations-transport-coverage.json",
+      "edge_source": "query invalidation and helper calls",
+      "meaning": "Finite conservative possible query-refetch superset only; active observers/gates determine requests."
+    },
+    {
+      "proof": "issue-query-transport-coverage.json",
+      "factories": [
+        "issueDetailOptions",
+        "issueTimelineOptions",
+        "issueCommentThreadOptions",
+        "issueSubscribersOptions",
+        "issueReactionsOptions",
+        "issueAttachmentsOptions",
+        "childIssuesOptions",
+        "childIssueProgressOptions"
+      ],
+      "meaning": "Factory interfaces, not unconditional requests."
+    },
+    {
+      "source": "packages/core/pins/mutations.ts:8-47",
+      "query_key": "pinKeys.list(wsId,userId)",
+      "inventory": [
+        {
+          "id": "client:5180",
+          "method": "GET",
+          "path_expression": "/api/pins?include=view",
+          "route": {
+            "method": "GET",
+            "path": "/api/pins"
+          }
+        }
+      ]
+    }
+  ],
+  "root_upload_sources": [
+    {
+      "path": "packages/views/editor/use-editor-upload.ts",
+      "sha256": "577b4d53238fb342b44c63108a72c89e16c80b22e90fa0823dbcf3614f37c7c8"
+    },
+    {
+      "path": "packages/core/hooks/use-file-upload.ts",
+      "sha256": "82ab928c6b762acc38c70b1a264bd9a5cafd62846ff27dafbb0bc65d8d5adf24"
+    }
+  ],
+  "bounded_callback_reconciliation": {
+    "scope": [
+      [
+        3495,
+        3594
+      ],
+      [
+        4185,
+        4294
+      ]
+    ],
+    "status": "accepted finite callback interfaces and exact direct-request branches",
+    "mapping": [
+      {
+        "callbacks": "onReply at 3521-3524 and 3557-3563",
+        "handler": "submitReply",
+        "classification": "request",
+        "definition": "use-issue-timeline.ts:363-386",
+        "effects": "Hook invokes useCreateComment; resolve first clears root expansion locally.",
+        "proof": {
+          "artifact": "issue-detail-query-section.json",
+          "edge_source": "useCreateComment",
+          "mutation_proof": "issue-mutations-transport-coverage.json",
+          "query_proof": "issue-query-transport-coverage.json",
+          "finite_refetch": "Reuse invoked_mutation_exports entry for useCreateComment and mutation proof invalidation expansion; possible requests depend on active observers and gates."
+        },
+        "inventory": [
+          {
+            "id": "client:1876",
+            "method": "POST",
+            "path_expression": "/api/issues/${issueId}/comments",
+            "route": {
+              "method": "POST",
+              "path": "/api/issues/{id}/comments"
+            }
+          }
+        ],
+        "root_branch_review": "Matched actual handler -> hook mutation -> client method; referenced finite refetch expansion remains observer/gate dependent."
+      },
+      {
+        "callbacks": "onEdit at 3521-3524 and 3557-3563",
+        "handler": "editComment",
+        "classification": "request",
+        "definition": "use-issue-timeline.ts:389-401",
+        "effects": "Hook invokes useUpdateComment; resolve first clears root expansion locally.",
+        "proof": {
+          "artifact": "issue-detail-query-section.json",
+          "edge_source": "useUpdateComment",
+          "mutation_proof": "issue-mutations-transport-coverage.json",
+          "query_proof": "issue-query-transport-coverage.json",
+          "finite_refetch": "Reuse invoked_mutation_exports entry for useUpdateComment and mutation proof invalidation expansion; possible requests depend on active observers and gates."
+        },
+        "inventory": [
+          {
+            "id": "client:1939",
+            "method": "PUT",
+            "path_expression": "/api/comments/${commentId}",
+            "route": {
+              "method": "PUT",
+              "path": "/api/comments/{commentId}"
+            }
+          }
+        ],
+        "root_branch_review": "Matched actual handler -> hook mutation -> client method; referenced finite refetch expansion remains observer/gate dependent."
+      },
+      {
+        "callbacks": "onDelete at 3521-3524 and 3557-3563",
+        "handler": "deleteComment",
+        "classification": "request",
+        "definition": "use-issue-timeline.ts:403-415",
+        "effects": "Hook invokes useDeleteComment; resolve first clears root expansion locally.",
+        "proof": {
+          "artifact": "issue-detail-query-section.json",
+          "edge_source": "useDeleteComment",
+          "mutation_proof": "issue-mutations-transport-coverage.json",
+          "query_proof": "issue-query-transport-coverage.json",
+          "finite_refetch": "Reuse invoked_mutation_exports entry for useDeleteComment and mutation proof invalidation expansion; possible requests depend on active observers and gates."
+        },
+        "inventory": [
+          {
+            "id": "client:1961",
+            "method": "DELETE",
+            "path_expression": "/api/comments/${commentId}",
+            "route": {
+              "method": "DELETE",
+              "path": "/api/comments/{commentId}"
+            }
+          },
+          {
+            "id": "client:1961:keep-replies",
+            "method": "DELETE",
+            "path_expression": "/api/comments/${commentId}/keep-replies",
+            "route": {
+              "method": "DELETE",
+              "path": "/api/comments/{commentId}/keep-replies"
+            }
+          }
+        ],
+        "root_branch_review": "Matched actual handler -> hook mutation -> client method; referenced finite refetch expansion remains observer/gate dependent."
+      },
+      {
+        "callbacks": "onToggleReaction at 3521-3524 and 3557-3563",
+        "handler": "handleToggleReaction",
+        "classification": "request",
+        "definition": "use-issue-timeline.ts:497-509",
+        "effects": "Hook invokes useToggleCommentReaction; resolve first clears root expansion locally.",
+        "proof": {
+          "artifact": "issue-detail-query-section.json",
+          "edge_source": "useToggleCommentReaction",
+          "mutation_proof": "issue-mutations-transport-coverage.json",
+          "query_proof": "issue-query-transport-coverage.json",
+          "finite_refetch": "Reuse invoked_mutation_exports entry for useToggleCommentReaction and mutation proof invalidation expansion; possible requests depend on active observers and gates."
+        },
+        "inventory": [
+          {
+            "id": "client:1973",
+            "method": "POST",
+            "path_expression": "/api/comments/${commentId}/reactions",
+            "route": {
+              "method": "POST",
+              "path": "/api/comments/{commentId}/reactions"
+            }
+          },
+          {
+            "id": "client:1980",
+            "method": "DELETE",
+            "path_expression": "/api/comments/${commentId}/reactions",
+            "route": {
+              "method": "DELETE",
+              "path": "/api/comments/{commentId}/reactions"
+            }
+          }
+        ],
+        "root_branch_review": "Matched actual handler -> hook mutation -> client method; referenced finite refetch expansion remains observer/gate dependent."
+      },
+      {
+        "callbacks": "onResolveToggle at 3521-3524 and 3557-3563",
+        "handler": "handleResolveToggle",
+        "classification": "request",
+        "definition": "use-issue-timeline.ts:418-435; issue-detail.tsx:1843-1858",
+        "effects": "Hook invokes useResolveComment; resolve first clears root expansion locally.",
+        "proof": {
+          "artifact": "issue-detail-query-section.json",
+          "edge_source": "useResolveComment",
+          "mutation_proof": "issue-mutations-transport-coverage.json",
+          "query_proof": "issue-query-transport-coverage.json",
+          "finite_refetch": "Reuse invoked_mutation_exports entry for useResolveComment and mutation proof invalidation expansion; possible requests depend on active observers and gates."
+        },
+        "inventory": [
+          {
+            "id": "client:1965",
+            "method": "POST",
+            "path_expression": "/api/comments/${commentId}/resolve",
+            "route": {
+              "method": "POST",
+              "path": "/api/comments/{commentId}/resolve"
+            }
+          },
+          {
+            "id": "client:1969",
+            "method": "DELETE",
+            "path_expression": "/api/comments/${commentId}/resolve",
+            "route": {
+              "method": "DELETE",
+              "path": "/api/comments/{commentId}/resolve"
+            }
+          }
+        ],
+        "root_branch_review": "Matched actual handler -> hook mutation -> client method; referenced finite refetch expansion remains observer/gate dependent."
+      },
+      {
+        "callbacks": "onReplyAccepted:3522,3558",
+        "handler": "scrollToTimelineBottom",
+        "classification": "local",
+        "definition": "issue-detail.tsx:1642-1644",
+        "effects": "Sets pending posted comment ID; existing query-section scrolling proof applies.",
+        "proof": null
+      },
+      {
+        "callbacks": "onExpand:3517,3539; onCollapseResolved:3526,3566; onResolvedExpandChange:3527,3568",
+        "handler": "toggleResolvedExpand",
+        "classification": "local",
+        "definition": "issue-detail.tsx:1658-1669",
+        "effects": "Writes session expansion; collapse schedules nearest DOM scroll.",
+        "proof": null
+      },
+      {
+        "callbacks": "onCreateSubIssue:3523,3562",
+        "handler": "openCommentSubIssue",
+        "classification": "local",
+        "definition": "issue-detail.tsx:1764-1771",
+        "effects": "Opens quick-create modal with defaults and anchor; modal descendants excluded.",
+        "proof": null
+      },
+      {
+        "callbacks": "onJumpToComment:3525,3565",
+        "handler": "jumpToComment",
+        "classification": "local",
+        "definition": "issue-detail.tsx:2238-2250",
+        "effects": "DOM lookup and scroll then flashJumpTarget; query-section bounded local jump proof.",
+        "proof": null
+      },
+      {
+        "callbacks": "onToggle:3586",
+        "handler": "toggleActivityBlock",
+        "classification": "local",
+        "definition": "issue-detail.tsx:1688-1714",
+        "effects": "Updates local expanded/collapsed sets.",
+        "proof": null
+      },
+      {
+        "callbacks": "onToggleShowOlder:3589",
+        "handler": "showOlderActivities",
+        "classification": "local",
+        "definition": "issue-detail.tsx:1715-1723",
+        "effects": "Adds local show-older set member.",
+        "proof": null
+      },
+      {
+        "callbacks": "onRevealEnd:3503",
+        "handler": "setRevealedWakeupsFor",
+        "classification": "local",
+        "definition": "issue-detail.tsx:3503",
+        "effects": "Sets local state null.",
+        "proof": null
+      },
+      {
+        "callbacks": "onFollowAll:4189",
+        "handler": "followAllActivity",
+        "classification": "request",
+        "definition": "use-issue-subscribers.ts:193-208",
+        "effects": "Requires user and no in-flight toggle; passes subscribed=false explicitly (subscribe).",
+        "proof": {
+          "artifact": "issue-detail-query-section.json",
+          "edge_source": "useToggleIssueSubscriber",
+          "mutation_proof": "issue-mutations-transport-coverage.json",
+          "query_proof": "issue-query-transport-coverage.json",
+          "finite_refetch": "subscribers(issueId), or subscribersAll for subtree; member with workspace also refreshSubscribedIssues. Finite proof expansion only; observer/gate dependent."
+        },
+        "inventory": [
+          {
+            "id": "client:2012",
+            "method": "POST",
+            "path_expression": "/api/issues/${issueId}/subscribe",
+            "route": {
+              "method": "POST",
+              "path": "/api/issues/{id}/subscribe"
+            }
+          }
+        ],
+        "root_branch_review": "Matched actual handler -> hook mutation -> client method; referenced finite refetch expansion remains observer/gate dependent."
+      },
+      {
+        "callbacks": "onClick:4227,4251",
+        "handler": "handleToggleSubscribe",
+        "classification": "request",
+        "definition": "use-issue-subscribers.ts:188-190",
+        "effects": "Requires user; toggleSubscriber passes current own subscription state; serializes with ref.",
+        "proof": {
+          "artifact": "issue-detail-query-section.json",
+          "edge_source": "useToggleIssueSubscriber",
+          "mutation_proof": "issue-mutations-transport-coverage.json",
+          "query_proof": "issue-query-transport-coverage.json",
+          "finite_refetch": "subscribers(issueId), or subscribersAll for subtree; member with workspace also refreshSubscribedIssues. Finite proof expansion only; observer/gate dependent."
+        },
+        "inventory": [
+          {
+            "id": "client:2012",
+            "method": "POST",
+            "path_expression": "/api/issues/${issueId}/subscribe",
+            "route": {
+              "method": "POST",
+              "path": "/api/issues/{id}/subscribe"
+            }
+          },
+          {
+            "id": "client:2023",
+            "method": "POST",
+            "path_expression": "/api/issues/${issueId}/unsubscribe",
+            "route": {
+              "method": "POST",
+              "path": "/api/issues/{id}/unsubscribe"
+            }
+          }
+        ],
+        "root_branch_review": "Matched actual handler -> hook mutation -> client method; referenced finite refetch expansion remains observer/gate dependent."
+      },
+      {
+        "callbacks": "toggleSubscriber:4292",
+        "handler": "toggleSubscriber",
+        "classification": "request",
+        "definition": "use-issue-subscribers.ts:159-186",
+        "effects": "Supplied member/agent and current state; serializes; error toast and settlement unlock.",
+        "proof": {
+          "artifact": "issue-detail-query-section.json",
+          "edge_source": "useToggleIssueSubscriber",
+          "mutation_proof": "issue-mutations-transport-coverage.json",
+          "query_proof": "issue-query-transport-coverage.json",
+          "finite_refetch": "subscribers(issueId), or subscribersAll for subtree; member with workspace also refreshSubscribedIssues. Finite proof expansion only; observer/gate dependent."
+        },
+        "inventory": [
+          {
+            "id": "client:2012",
+            "method": "POST",
+            "path_expression": "/api/issues/${issueId}/subscribe",
+            "route": {
+              "method": "POST",
+              "path": "/api/issues/{id}/subscribe"
+            }
+          },
+          {
+            "id": "client:2023",
+            "method": "POST",
+            "path_expression": "/api/issues/${issueId}/unsubscribe",
+            "route": {
+              "method": "POST",
+              "path": "/api/issues/{id}/unsubscribe"
+            }
+          }
+        ],
+        "root_branch_review": "Matched actual handler -> hook mutation -> client method; referenced finite refetch expansion remains observer/gate dependent."
+      },
+      {
+        "callbacks": "onClick:4257",
+        "handler": "handleUnsubscribeSubtree",
+        "classification": "request",
+        "definition": "use-issue-subscribers.ts:217-232",
+        "effects": "Requires user; no optimistic change; success/error toasts, plain non-JSON 404 unsupported.",
+        "proof": {
+          "artifact": "issue-detail-query-section.json",
+          "edge_source": "useUnsubscribeFromIssueSubtree",
+          "mutation_proof": "issue-mutations-transport-coverage.json",
+          "query_proof": "issue-query-transport-coverage.json",
+          "finite_refetch": "subscribers(issueId), or subscribersAll for subtree; member with workspace also refreshSubscribedIssues. Finite proof expansion only; observer/gate dependent."
+        },
+        "inventory": [
+          {
+            "id": "client:2046",
+            "method": "POST",
+            "path_expression": "/api/issues/${issueId}/unsubscribe/subtree",
+            "route": {
+              "method": "POST",
+              "path": "/api/issues/{id}/unsubscribe/subtree"
+            }
+          }
+        ],
+        "root_branch_review": "Matched actual handler -> hook mutation -> client method; referenced finite refetch expansion remains observer/gate dependent."
+      },
+      {
+        "callbacks": "onCopyLink:3525,3564",
+        "handler": "actions.copyCommentLink",
+        "classification": "local clipboard with injected navigation URL builder",
+        "definition": "packages/views/issues/actions/use-issue-actions.ts:211-229; packages/ui/lib/clipboard.ts:15-95",
+        "effects": "No issue URL means no-op. Builds comment fragment, writes Clipboard API or DOM execCommand fallback, shows success/failure toast. No HTTP from this callback; injected navigation.getShareableUrl remains provider boundary.",
+        "proof": null
+      },
+      {
+        "callbacks": "getActorName:3590; resolveStatusLabel/Category/Color/Icon:3591-3594",
+        "handler": "actor/status resolver interfaces",
+        "classification": "local returned resolvers; hook query effects accounted separately",
+        "definition": "workspace/hooks.ts:65-129; issue-detail.tsx:1524-1530; status-label.ts:25-44; issue-statuses/hooks.ts:12-33; issue-statuses/queries.ts:174-210",
+        "effects": "Actor callback reads captured name maps. Status label reads catalog and i18n; category/color/icon callbacks read catalog maps and constants. Calling returned resolvers adds no request. Hook instantiation independently subscribes to member/agent/squad/plugin directories and status catalog; plugin gate is feature flag and nonempty workspace, catalog requires workspace.",
+        "proof": null
+      }
+    ],
+    "missing_definitions": [],
+    "tuple_policy": "Direct branch tuples independently reconciled by root; existing finite invalidation/query proofs reused, not all-route expansion.",
+    "validation": [
+      {
+        "proof": "issue-detail-query-section.json",
+        "sha256": "d32ba85c3456f19e2601bb48a88c631e58008e8356245a5a3d95f2df864c5fee",
+        "source_hash_mismatches": []
+      },
+      {
+        "proof": "issue-mutations-transport-coverage.json",
+        "sha256": "43c8266c0e7248f5f12b8736bf795e424ab2771f21bea3eac4b210bf89dbd70a",
+        "source_hash_mismatches": []
+      },
+      {
+        "proof": "issue-query-transport-coverage.json",
+        "sha256": "3d4401929eee7294bc9f706a5c738a074300faffc6df01ec9275184d8a5be380",
+        "source_hash_mismatches": []
+      }
+    ],
+    "root_review": "Directly read renderer, timeline callbacks, subscriber callback bodies and resolve/reaction/subscriber mutation branches; copied exact client tuples. Local resolver gaps closed previously."
+  },
+  "root_resolver_sources": [
+    {
+      "path": "packages/views/issues/actions/use-issue-actions.ts",
+      "sha256": "44c9bedc3eb28eb5e6ae5545132cb950227e6f0028a7767662e794c442f2b114"
+    },
+    {
+      "path": "packages/ui/lib/clipboard.ts",
+      "sha256": "240d379c6ed7d12ee29ea91e6f85048dfc346f42a45d42ff1039abe7bc17d4a5"
+    },
+    {
+      "path": "packages/core/workspace/hooks.ts",
+      "sha256": "7531c31b1caa51b0254eff7738c3ed14cd831a467c311d9aa8cce3ddff2964d3"
+    },
+    {
+      "path": "packages/views/issues/utils/status-label.ts",
+      "sha256": "15b642495cedbc22414e2a1d99ab2c350871c8bb6d919be46f22f00874bb1f54"
+    },
+    {
+      "path": "packages/core/issue-statuses/hooks.ts",
+      "sha256": "6a46a26af0f7d647b8c2a95188c01e6d79d77dce89f29af8766ca891b13856ae"
+    },
+    {
+      "path": "packages/core/issue-statuses/queries.ts",
+      "sha256": "4fdf01e78b7a60b42272518d2feb160ade1fc773f59a75f559f675f03f4a904d"
+    }
+  ],
+  "root_local_render_closure": {
+    "path": "server/contracts/batches/issue-detail-local-render-closure.json",
+    "sha256": "30d199d65a5fb3c087e7e713a7bd8b851f511577390163b473a446cd3b98c291",
+    "scope": "Exact remaining sidebar/scroll/menu/selection/measurement/jump/annotation/preview/layout callbacks; named third-party and host boundaries explicit"
+  }
+}

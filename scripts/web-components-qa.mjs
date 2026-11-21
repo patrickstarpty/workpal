@@ -41,7 +41,7 @@ try {
  await expect(page.locator('[data-page-error]')).toHaveCount(0);
  await expect(page.getByText(fixture.skills[0].name,{exact:true}).first()).toBeVisible();
  await page.getByRole('link',{name:'Analytics',exact:true}).click();await expect(page).toHaveURL(/\/usage$/);
- await expect(page.getByText('No usage yet',{exact:true})).toBeVisible();
+ await expect(page.getByText('Leaderboard',{exact:true})).toBeVisible();
  console.log('PASS: Resources → Skills → skill detail; Analytics navigation');
  await go('squads');await page.getByText(fixture.squads[0].name,{exact:true}).first().click();
  await expect(page).toHaveURL(/\/squads\//);

@@ -1,0 +1,889 @@
+{
+  "scope": [
+    "packages/core/auth",
+    "packages/core/onboarding",
+    "packages/core/workspace"
+  ],
+  "status": "source ledger complete; dependency closure partial",
+  "route_identity": "Existing routes.json has no standalone route IDs: route_ids preserve existing method/path identities, never invented IDs.",
+  "files": [
+    {
+      "path": "packages/core/auth/index.ts",
+      "anchor": "packages/core/auth/index.ts:1",
+      "line_count": 40,
+      "disposition": "Reexports store/utils; registration and Proxy forward injected Zustand store; no independent request.",
+      "transports": []
+    },
+    {
+      "path": "packages/core/auth/store.ts",
+      "anchor": "packages/core/auth/store.ts:1",
+      "line_count": 188,
+      "disposition": "sendCode, verifyCode, Google and token login follow API methods. cookieAuth suppresses token persistence for code/Google; token login always persists. Cookie logout alone sends logout (errors swallowed). Expiry clears credentials, skips duplicate teardown, clears workspace only in token mode. onLogin/onLogout/onSessionExpired are injected callbacks with unknown shell effects. identify/reset analytics use PostHog when initialized, otherwise identify buffers. StorageAdapter is injected, not inherently HTTP. setCurrentWorkspace queues subscriber and rehydrate callbacks on slug change; subscriber transports remain external dependencies.",
+      "transports": [
+        {
+          "source": "packages/core/auth/store.ts:72",
+          "method": "sendCode",
+          "callee": "packages/core/api/client.ts:1146",
+          "call_ids": [
+            "client:1147"
+          ],
+          "route_ids": [
+            {
+              "method": "POST",
+              "path": "/auth/send-code"
+            }
+          ],
+          "unresolved": null
+        },
+        {
+          "source": "packages/core/auth/store.ts:76",
+          "method": "verifyCode",
+          "callee": "packages/core/api/client.ts:1153",
+          "call_ids": [
+            "client:1154"
+          ],
+          "route_ids": [
+            {
+              "method": "POST",
+              "path": "/auth/verify-code"
+            }
+          ],
+          "unresolved": null
+        },
+        {
+          "source": "packages/core/auth/store.ts:80",
+          "method": "setToken",
+          "callee": "packages/core/api/client.ts:909",
+          "call_ids": [],
+          "route_ids": [],
+          "unresolved": "No existing call mapping; local accessor or mapping gap"
+        },
+        {
+          "source": "packages/core/auth/store.ts:89",
+          "method": "googleLogin",
+          "callee": "packages/core/api/client.ts:1160",
+          "call_ids": [
+            "client:1161"
+          ],
+          "route_ids": [
+            {
+              "method": "POST",
+              "path": "/auth/google"
+            }
+          ],
+          "unresolved": null
+        },
+        {
+          "source": "packages/core/auth/store.ts:92",
+          "method": "setToken",
+          "callee": "packages/core/api/client.ts:909",
+          "call_ids": [],
+          "route_ids": [],
+          "unresolved": "No existing call mapping; local accessor or mapping gap"
+        },
+        {
+          "source": "packages/core/auth/store.ts:102",
+          "method": "setToken",
+          "callee": "packages/core/api/client.ts:909",
+          "call_ids": [],
+          "route_ids": [],
+          "unresolved": "No existing call mapping; local accessor or mapping gap"
+        },
+        {
+          "source": "packages/core/auth/store.ts:103",
+          "method": "getMe",
+          "callee": "packages/core/api/client.ts:1196",
+          "call_ids": [
+            "client:1197"
+          ],
+          "route_ids": [
+            {
+              "method": "GET",
+              "path": "/api/me"
+            }
+          ],
+          "unresolved": null
+        },
+        {
+          "source": "packages/core/auth/store.ts:113",
+          "method": "logout",
+          "callee": "packages/core/api/client.ts:1167",
+          "call_ids": [
+            "client:1168"
+          ],
+          "route_ids": [
+            {
+              "method": "POST",
+              "path": "/auth/logout"
+            }
+          ],
+          "unresolved": null
+        },
+        {
+          "source": "packages/core/auth/store.ts:116",
+          "method": "setToken",
+          "callee": "packages/core/api/client.ts:909",
+          "call_ids": [],
+          "route_ids": [],
+          "unresolved": "No existing call mapping; local accessor or mapping gap"
+        },
+        {
+          "source": "packages/core/auth/store.ts:158",
+          "method": "setToken",
+          "callee": "packages/core/api/client.ts:909",
+          "call_ids": [],
+          "route_ids": [],
+          "unresolved": "No existing call mapping; local accessor or mapping gap"
+        },
+        {
+          "source": "packages/core/auth/store.ts:184",
+          "method": "getMe",
+          "callee": "packages/core/api/client.ts:1196",
+          "call_ids": [
+            "client:1197"
+          ],
+          "route_ids": [
+            {
+              "method": "GET",
+              "path": "/api/me"
+            }
+          ],
+          "unresolved": null
+        }
+      ]
+    },
+    {
+      "path": "packages/core/auth/utils.ts",
+      "anchor": "packages/core/auth/utils.ts:1",
+      "line_count": 21,
+      "disposition": "Pure relative redirect validation; returns text, does not navigate or fetch.",
+      "transports": []
+    },
+    {
+      "path": "packages/core/onboarding/index.ts",
+      "anchor": "packages/core/onboarding/index.ts:1",
+      "line_count": 33,
+      "disposition": "Reexports store, predicates, queries, bootstrap and constants; no independent transport.",
+      "transports": []
+    },
+    {
+      "path": "packages/core/onboarding/mika.ts",
+      "anchor": "packages/core/onboarding/mika.ts:1",
+      "line_count": 56,
+      "disposition": "Pure system_key and session.last_message predicates; no provisioning occurs here.",
+      "transports": []
+    },
+    {
+      "path": "packages/core/onboarding/needs-backfill.ts",
+      "anchor": "packages/core/onboarding/needs-backfill.ts:1",
+      "line_count": 74,
+      "disposition": "Pure user/dismiss-count predicate; handles legacy string source and array source; no request.",
+      "transports": []
+    },
+    {
+      "path": "packages/core/onboarding/queries.ts",
+      "anchor": "packages/core/onboarding/queries.ts:1",
+      "line_count": 34,
+      "disposition": "listIssues asks done category, agent/squad assignees, limit 1; reads total. Key under issue prefix permits mutation/realtime refetch; stale 30s; consumer controls enabled.",
+      "transports": [
+        {
+          "source": "packages/core/onboarding/queries.ts:24",
+          "method": "listIssues",
+          "callee": "packages/core/api/client.ts:1277",
+          "call_ids": [
+            "client:1329",
+            "client:1344"
+          ],
+          "route_ids": [
+            {
+              "method": "POST",
+              "path": "/api/issues/query"
+            },
+            {
+              "method": "GET",
+              "path": "/api/issues"
+            }
+          ],
+          "unresolved": null
+        }
+      ]
+    },
+    {
+      "path": "packages/core/onboarding/step-order.ts",
+      "anchor": "packages/core/onboarding/step-order.ts:1",
+      "line_count": 13,
+      "disposition": "Runtime array of persisted step names only.",
+      "transports": []
+    },
+    {
+      "path": "packages/core/onboarding/store.ts",
+      "anchor": "packages/core/onboarding/store.ts:1",
+      "line_count": 83,
+      "disposition": "Questionnaire PATCH then local setUser; conditional nonempty source/role/use-case sends PostHog person properties (buffered before initialization). Completion sends optional body iff completionPath or workspaceId truthy, then refreshMe -> getMe. Waitlist sends interest only; no completion or runtime provisioning.",
+      "transports": [
+        {
+          "source": "packages/core/onboarding/store.ts:21",
+          "method": "patchOnboarding",
+          "callee": "packages/core/api/client.ts:1229",
+          "call_ids": [
+            "client:1232"
+          ],
+          "route_ids": [
+            {
+              "method": "PATCH",
+              "path": "/api/me/onboarding"
+            }
+          ],
+          "unresolved": null
+        },
+        {
+          "source": "packages/core/onboarding/store.ts:61",
+          "method": "markOnboardingComplete",
+          "callee": "packages/core/api/client.ts:1203",
+          "call_ids": [
+            "client:1207"
+          ],
+          "route_ids": [
+            {
+              "method": "POST",
+              "path": "/api/me/onboarding/complete"
+            }
+          ],
+          "unresolved": null
+        },
+        {
+          "source": "packages/core/onboarding/store.ts:82",
+          "method": "joinCloudWaitlist",
+          "callee": "packages/core/api/client.ts:1216",
+          "call_ids": [
+            "client:1220"
+          ],
+          "route_ids": [
+            {
+              "method": "POST",
+              "path": "/api/me/onboarding/cloud-waitlist"
+            }
+          ],
+          "unresolved": null
+        }
+      ]
+    },
+    {
+      "path": "packages/core/onboarding/types.ts",
+      "anchor": "packages/core/onboarding/types.ts:1",
+      "line_count": 77,
+      "disposition": "Type declarations only; no executable runtime source.",
+      "transports": []
+    },
+    {
+      "path": "packages/core/onboarding/use-bootstrap-mika.ts",
+      "anchor": "packages/core/onboarding/use-bootstrap-mika.ts:1",
+      "line_count": 106,
+      "disposition": "Sequential createMikaAgent with explicit workspaceSlug -> require onboarding_session or throw -> startMikaOnboarding same slug. No fabricated session or runtime response. Success invalidates agent list, chat sessions, messages and paginated messages. Runtime-backed execution/provisioning unsupported for this audit; existing parse fallback started:false is not evidence of execution.",
+      "transports": [
+        {
+          "source": "packages/core/onboarding/use-bootstrap-mika.ts:48",
+          "method": "createMikaAgent",
+          "callee": "packages/core/api/client.ts:2090",
+          "call_ids": [
+            "client:2103"
+          ],
+          "route_ids": [
+            {
+              "method": "POST",
+              "path": "/api/agents/mika"
+            }
+          ],
+          "unresolved": null
+        },
+        {
+          "source": "packages/core/onboarding/use-bootstrap-mika.ts:70",
+          "method": "startMikaOnboarding",
+          "callee": "packages/core/api/client.ts:4274",
+          "call_ids": [
+            "client:4281"
+          ],
+          "route_ids": [
+            {
+              "method": "POST",
+              "path": "/api/chat/sessions/{sessionId}/onboarding"
+            }
+          ],
+          "unresolved": null
+        }
+      ]
+    },
+    {
+      "path": "packages/core/workspace/avatar-url.ts",
+      "anchor": "packages/core/workspace/avatar-url.ts:1",
+      "line_count": 12,
+      "disposition": "Pure resource URL resolver: absent -> null; non-slash unchanged; slash prefixed with trimmed API base. getBaseUrl local accessor. Returned dynamic avatar URL may later cause browser image fetch; no authenticated API request or fixed route can be inferred.",
+      "transports": [
+        {
+          "source": "packages/core/workspace/avatar-url.ts:11",
+          "method": "getBaseUrl",
+          "callee": "packages/core/api/client.ts:905",
+          "call_ids": [],
+          "route_ids": [],
+          "unresolved": "No existing call mapping; local accessor or mapping gap"
+        }
+      ]
+    },
+    {
+      "path": "packages/core/workspace/hooks.ts",
+      "anchor": "packages/core/workspace/hooks.ts:1",
+      "line_count": 197,
+      "disposition": "useWorkspaceList enabled option gates list query and exposes refetch. useActorName subscribes member/agent/squad queries plus plugin installations only when feature flag and nonempty workspace. Names/initials/hasActor are local projections; member/agent/squad avatars use resource resolver. Feature flag reads config state; no direct config request here.",
+      "transports": []
+    },
+    {
+      "path": "packages/core/workspace/index.ts",
+      "anchor": "packages/core/workspace/index.ts:1",
+      "line_count": 3,
+      "disposition": "Reexports queries/mutations/hooks; no independent transport.",
+      "transports": []
+    },
+    {
+      "path": "packages/core/workspace/mutations.ts",
+      "anchor": "packages/core/workspace/mutations.ts:1",
+      "line_count": 198,
+      "disposition": "Create seeds list on success; failure invalidates list. Leave/delete invalidate list on settled; success forgets local search index; delete clears slug storage only after success, pending mark removed on error. MCP create invalidates library; update/delete invalidate library plus agents prefix; assignment writes invalidate agent MCP key. Pin cancels list queries, optimistic local sort, restores on error, invalidates settled. Invalidations can refetch active matching observers; they are not unconditional sends.",
+      "transports": [
+        {
+          "source": "packages/core/workspace/mutations.ts:23",
+          "method": "createWorkspace",
+          "callee": "packages/core/api/client.ts:3408",
+          "call_ids": [
+            "client:3409"
+          ],
+          "route_ids": [
+            {
+              "method": "POST",
+              "path": "/api/workspaces"
+            }
+          ],
+          "unresolved": null
+        },
+        {
+          "source": "packages/core/workspace/mutations.ts:48",
+          "method": "leaveWorkspace",
+          "callee": "packages/core/api/client.ts:3788",
+          "call_ids": [
+            "client:3789"
+          ],
+          "route_ids": [
+            {
+              "method": "POST",
+              "path": "/api/workspaces/{id}/leave"
+            }
+          ],
+          "unresolved": null
+        },
+        {
+          "source": "packages/core/workspace/mutations.ts:61",
+          "method": "deleteWorkspace",
+          "callee": "packages/core/api/client.ts:3865",
+          "call_ids": [
+            "client:3866"
+          ],
+          "route_ids": [
+            {
+              "method": "DELETE",
+              "path": "/api/workspaces/{id}"
+            }
+          ],
+          "unresolved": null
+        },
+        {
+          "source": "packages/core/workspace/mutations.ts:105",
+          "method": "createWorkspaceMcpServer",
+          "callee": "packages/core/api/client.ts:3451",
+          "call_ids": [
+            "client:3456"
+          ],
+          "route_ids": [
+            {
+              "method": "POST",
+              "path": "/api/workspaces/{id}/mcp-servers"
+            }
+          ],
+          "unresolved": null
+        },
+        {
+          "source": "packages/core/workspace/mutations.ts:118",
+          "method": "updateWorkspaceMcpServer",
+          "callee": "packages/core/api/client.ts:3469",
+          "call_ids": [
+            "client:3474"
+          ],
+          "route_ids": [
+            {
+              "method": "PUT",
+              "path": "/api/workspaces/{id}/mcp-servers/{serverId}"
+            }
+          ],
+          "unresolved": null
+        },
+        {
+          "source": "packages/core/workspace/mutations.ts:132",
+          "method": "deleteWorkspaceMcpServer",
+          "callee": "packages/core/api/client.ts:3484",
+          "call_ids": [
+            "client:3485"
+          ],
+          "route_ids": [
+            {
+              "method": "DELETE",
+              "path": "/api/workspaces/{id}/mcp-servers/{serverId}"
+            }
+          ],
+          "unresolved": null
+        },
+        {
+          "source": "packages/core/workspace/mutations.ts:160",
+          "method": "addAgentMcpServer",
+          "callee": "packages/core/api/client.ts:3503",
+          "call_ids": [
+            "client:3504"
+          ],
+          "route_ids": [
+            {
+              "method": "POST",
+              "path": "/api/agents/{id}/mcp-servers"
+            }
+          ],
+          "unresolved": null
+        },
+        {
+          "source": "packages/core/workspace/mutations.ts:165",
+          "method": "setAgentMcpServerEnabled",
+          "callee": "packages/core/api/client.ts:3513",
+          "call_ids": [
+            "client:3518"
+          ],
+          "route_ids": [
+            {
+              "method": "PUT",
+              "path": "/api/agents/{id}/mcp-servers/{serverId}/enabled"
+            }
+          ],
+          "unresolved": null
+        },
+        {
+          "source": "packages/core/workspace/mutations.ts:170",
+          "method": "removeAgentMcpServer",
+          "callee": "packages/core/api/client.ts:3527",
+          "call_ids": [
+            "client:3528"
+          ],
+          "route_ids": [
+            {
+              "method": "DELETE",
+              "path": "/api/agents/{id}/mcp-servers/{serverId}"
+            }
+          ],
+          "unresolved": null
+        },
+        {
+          "source": "packages/core/workspace/mutations.ts:177",
+          "method": "setWorkspacePinned",
+          "callee": "packages/core/api/client.ts:3397",
+          "call_ids": [
+            "client:3398"
+          ],
+          "route_ids": [
+            {
+              "method": "PUT",
+              "path": "/api/workspaces/{id}/pin"
+            }
+          ],
+          "unresolved": null
+        }
+      ]
+    },
+    {
+      "path": "packages/core/workspace/pending-delete.ts",
+      "anchor": "packages/core/workspace/pending-delete.ts:1",
+      "line_count": 32,
+      "disposition": "Per-tab Set suppresses self-delete realtime echo; no websocket connection or send.",
+      "transports": []
+    },
+    {
+      "path": "packages/core/workspace/queries.ts",
+      "anchor": "packages/core/workspace/queries.ts:1",
+      "line_count": 255,
+      "disposition": "Query factories only execute through consumers. Slug lookup shares list request. Agent list polls 30s only for unarchived online/unstable agents. Agent detail requires workspace+agent, retry false. Squads/involved require workspace; status requires workspace+squad and focus refetch, stale30s. Skill detail/versions require skill; version detail also non-null version and infinite stale. Invitations focus refetch stale30s. Share links enabled argument AND workspace. MCP list requires nonempty workspace; assignment list requires agent. cacheAgentResponse and selectSkillAssignments are local folds/writes.",
+      "transports": [
+        {
+          "source": "packages/core/workspace/queries.ts:31",
+          "method": "listWorkspaces",
+          "callee": "packages/core/api/client.ts:3390",
+          "call_ids": [
+            "client:3391"
+          ],
+          "route_ids": [
+            {
+              "method": "GET",
+              "path": "/api/workspaces"
+            }
+          ],
+          "unresolved": null
+        },
+        {
+          "source": "packages/core/workspace/queries.ts:46",
+          "method": "listMembers",
+          "callee": "packages/core/api/client.ts:3764",
+          "call_ids": [
+            "client:3765"
+          ],
+          "route_ids": [
+            {
+              "method": "GET",
+              "path": "/api/workspaces/{id}/members"
+            }
+          ],
+          "unresolved": null
+        },
+        {
+          "source": "packages/core/workspace/queries.ts:54",
+          "method": "listAgents",
+          "callee": "packages/core/api/client.ts:2062",
+          "call_ids": [
+            "client:2066"
+          ],
+          "route_ids": [
+            {
+              "method": "GET",
+              "path": "/api/agents"
+            }
+          ],
+          "unresolved": null
+        },
+        {
+          "source": "packages/core/workspace/queries.ts:72",
+          "method": "getAgent",
+          "callee": "packages/core/api/client.ts:2069",
+          "call_ids": [
+            "client:2070"
+          ],
+          "route_ids": [
+            {
+              "method": "GET",
+              "path": "/api/agents/{id}"
+            }
+          ],
+          "unresolved": null
+        },
+        {
+          "source": "packages/core/workspace/queries.ts:105",
+          "method": "listSquads",
+          "callee": "packages/core/api/client.ts:5202",
+          "call_ids": [
+            "client:5203"
+          ],
+          "route_ids": [
+            {
+              "method": "GET",
+              "path": "/api/squads"
+            }
+          ],
+          "unresolved": null
+        },
+        {
+          "source": "packages/core/workspace/queries.ts:117",
+          "method": "listInvolvedSquadIds",
+          "callee": "packages/core/api/client.ts:5209",
+          "call_ids": [
+            "client:5210"
+          ],
+          "route_ids": [
+            {
+              "method": "GET",
+              "path": "/api/squads/involved"
+            }
+          ],
+          "unresolved": null
+        },
+        {
+          "source": "packages/core/workspace/queries.ts:129",
+          "method": "getSquadMemberStatus",
+          "callee": "packages/core/api/client.ts:5263",
+          "call_ids": [
+            "client:5264"
+          ],
+          "route_ids": [
+            {
+              "method": "GET",
+              "path": "/api/squads/{id}/members/status"
+            }
+          ],
+          "unresolved": null
+        },
+        {
+          "source": "packages/core/workspace/queries.ts:139",
+          "method": "listSkills",
+          "callee": "packages/core/api/client.ts:3872",
+          "call_ids": [
+            "client:3876"
+          ],
+          "route_ids": [
+            {
+              "method": "GET",
+              "path": "/api/skills"
+            }
+          ],
+          "unresolved": null
+        },
+        {
+          "source": "packages/core/workspace/queries.ts:146",
+          "method": "getSkill",
+          "callee": "packages/core/api/client.ts:3890",
+          "call_ids": [
+            "client:3891"
+          ],
+          "route_ids": [
+            {
+              "method": "GET",
+              "path": "/api/skills/{id}"
+            }
+          ],
+          "unresolved": null
+        },
+        {
+          "source": "packages/core/workspace/queries.ts:156",
+          "method": "listSkillVersions",
+          "callee": "packages/core/api/client.ts:3966",
+          "call_ids": [
+            "client:3967"
+          ],
+          "route_ids": [
+            {
+              "method": "GET",
+              "path": "/api/skills/{id}/versions"
+            }
+          ],
+          "unresolved": null
+        },
+        {
+          "source": "packages/core/workspace/queries.ts:169",
+          "method": "getSkillVersion",
+          "callee": "packages/core/api/client.ts:3976",
+          "call_ids": [
+            "client:3977"
+          ],
+          "route_ids": [
+            {
+              "method": "GET",
+              "path": "/api/skills/{id}/versions/{version}"
+            }
+          ],
+          "unresolved": null
+        },
+        {
+          "source": "packages/core/workspace/queries.ts:206",
+          "method": "listWorkspaceInvitations",
+          "callee": "packages/core/api/client.ts:3795",
+          "call_ids": [
+            "client:3796"
+          ],
+          "route_ids": [
+            {
+              "method": "GET",
+              "path": "/api/workspaces/{id}/invitations"
+            }
+          ],
+          "unresolved": null
+        },
+        {
+          "source": "packages/core/workspace/queries.ts:213",
+          "method": "listShareLinks",
+          "callee": "packages/core/api/client.ts:3835",
+          "call_ids": [
+            "client:3836"
+          ],
+          "route_ids": [
+            {
+              "method": "GET",
+              "path": "/api/workspaces/{id}/share-links"
+            }
+          ],
+          "unresolved": null
+        },
+        {
+          "source": "packages/core/workspace/queries.ts:221",
+          "method": "listMyInvitations",
+          "callee": "packages/core/api/client.ts:3805",
+          "call_ids": [
+            "client:3806"
+          ],
+          "route_ids": [
+            {
+              "method": "GET",
+              "path": "/api/invitations"
+            }
+          ],
+          "unresolved": null
+        },
+        {
+          "source": "packages/core/workspace/queries.ts:231",
+          "method": "getAssigneeFrequency",
+          "callee": "packages/core/api/client.ts:1934",
+          "call_ids": [
+            "client:1935"
+          ],
+          "route_ids": [
+            {
+              "method": "GET",
+              "path": "/api/assignee-frequency"
+            }
+          ],
+          "unresolved": null
+        },
+        {
+          "source": "packages/core/workspace/queries.ts:243",
+          "method": "listWorkspaceMcpServers",
+          "callee": "packages/core/api/client.ts:3440",
+          "call_ids": [
+            "client:3441"
+          ],
+          "route_ids": [
+            {
+              "method": "GET",
+              "path": "/api/workspaces/{id}/mcp-servers"
+            }
+          ],
+          "unresolved": null
+        },
+        {
+          "source": "packages/core/workspace/queries.ts:252",
+          "method": "listAgentMcpServers",
+          "callee": "packages/core/api/client.ts:3492",
+          "call_ids": [
+            "client:3493"
+          ],
+          "route_ids": [
+            {
+              "method": "GET",
+              "path": "/api/agents/{id}/mcp-servers"
+            }
+          ],
+          "unresolved": null
+        }
+      ]
+    },
+    {
+      "path": "packages/core/workspace/sort-workspaces.ts",
+      "anchor": "packages/core/workspace/sort-workspaces.ts:1",
+      "line_count": 10,
+      "disposition": "Pure copy/sort by pin time then creation; no I/O.",
+      "transports": []
+    },
+    {
+      "path": "packages/core/workspace/workspace-url.ts",
+      "anchor": "packages/core/workspace/workspace-url.ts:1",
+      "line_count": 31,
+      "disposition": "Pure display host parsing with brand fallback; new URL parses text only; config mentioned in comments is not fetched here.",
+      "transports": []
+    }
+  ],
+  "traced_fanout": [
+    {
+      "method": "getMe",
+      "callee": "packages/core/api/client.ts:1196",
+      "call_ids": [
+        "client:1197"
+      ],
+      "route_ids": [
+        {
+          "method": "GET",
+          "path": "/api/me"
+        }
+      ],
+      "unresolved": null
+    },
+    {
+      "method": "listPluginInstallations",
+      "callee": "packages/core/api/client.ts:3422",
+      "call_ids": [
+        "client:3425"
+      ],
+      "route_ids": [
+        {
+          "method": "GET",
+          "path": "/api/workspaces/{id}/plugins"
+        }
+      ],
+      "unresolved": null
+    },
+    {
+      "method": "listChatSessions",
+      "callee": "packages/core/api/client.ts:4101",
+      "call_ids": [
+        "client:4106"
+      ],
+      "route_ids": [
+        {
+          "method": "GET",
+          "path": "/api/chat/sessions"
+        }
+      ],
+      "unresolved": null
+    },
+    {
+      "method": "listChatMessages",
+      "callee": "packages/core/api/client.ts:4200",
+      "call_ids": [
+        "client:4201"
+      ],
+      "route_ids": [
+        {
+          "method": "GET",
+          "path": "/api/chat/sessions/{sessionId}/messages"
+        }
+      ],
+      "unresolved": null
+    },
+    {
+      "method": "listAgents",
+      "callee": "packages/core/api/client.ts:2062",
+      "call_ids": [
+        "client:2066"
+      ],
+      "route_ids": [
+        {
+          "method": "GET",
+          "path": "/api/agents"
+        }
+      ],
+      "unresolved": null
+    },
+    {
+      "method": "listAgentMcpServers",
+      "callee": "packages/core/api/client.ts:3492",
+      "call_ids": [
+        "client:3493"
+      ],
+      "route_ids": [
+        {
+          "method": "GET",
+          "path": "/api/agents/{id}/mcp-servers"
+        }
+      ],
+      "unresolved": null
+    }
+  ],
+  "unresolved_dependencies": [
+    "Injected AuthStoreOptions storage and shell callbacks are arbitrary implementations; no exhaustive shell audit claimed.",
+    "Workspace slug subscribers/rehydration callbacks can reconnect external WS providers; registration closure outside scope.",
+    "PostHog configured host and SDK delivery are external, not authenticated backend routes.",
+    "Dynamic avatar values and eventual browser resource consumers do not have fixed route identities.",
+    "Search-index forget worker/IndexedDB implementation and broad agents/chat/issue invalidation observer closure require further callee evidence.",
+    "Runtime provisioning and kickoff support not exercised or proven by route mapping."
+  ],
+  "execution": "Read-only source audit; no models, provisioning, network, git or data operations.",
+  "followup_closure": {
+    "active_web_auth_callbacks": "server/contracts/batches/active-web-auth-transport.json",
+    "search_index_cleanup": "server/contracts/batches/search-index-transport-coverage.json",
+    "decision": "For the active Web entry, injected auth callbacks/storage and search-index cleanup are traced. Static query-factory union suffices to enumerate possible refetch endpoints; runtime observer execution is not a source-coverage prerequisite. Other applications and global source coverage remain outside this audit."
+  }
+}

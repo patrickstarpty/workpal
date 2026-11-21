@@ -65,14 +65,14 @@ afterEach(() => {
 describe("AccountMenu theme submenu", () => {
   it("shows the mode and the active colour theme on the Theme row", () => {
     theme.current = "dark";
-    useAppearanceStore.setState({ theme: "github" });
+    useAppearanceStore.setState({ theme: "fwd" });
     renderWithI18n(<AccountMenu />);
     fireEvent.click(screen.getByRole("button", { name: "Account" }));
 
-    expect(screen.getByRole("menuitem", { name: /Theme/ })).toHaveTextContent("Dark·GitHub");
+    expect(screen.getByRole("menuitem", { name: /Theme/ })).toHaveTextContent("Dark·FWD");
   });
 
-  it("truncates a long installed theme name instead of the row label", () => {
+  it("shows FWD for a retired selection without exposing the stored custom theme", () => {
     const name = "A very long community theme name, forty!";
     useInstalledThemesStore.setState({
       themes: [{ apiVersion: 1, id: "long", name, css: "" }],
@@ -85,18 +85,22 @@ describe("AccountMenu theme submenu", () => {
 
     const row = screen.getByRole("menuitem", { name: /Theme/ });
     expect(within(row).getByText("Theme")).toHaveClass("shrink-0");
-    expect(within(row).getByText(name)).toHaveClass("truncate");
+    expect(within(row).getByText("FWD")).toHaveClass("truncate");
+    expect(within(row).queryByText(name)).not.toBeInTheDocument();
+    expect(useInstalledThemesStore.getState().themes[0]?.name).toBe(name);
   });
 
   it("switches the colour theme and keeps the menu open to compare", async () => {
     openThemeMenu();
 
-    const pop = await screen.findByRole("menuitemradio", { name: "Pop" });
-    expect(screen.getByRole("menuitemradio", { name: "Default" })).toHaveAttribute("aria-checked", "true");
-    fireEvent.click(pop);
+    const defaults = await screen.findByRole("menuitemradio", { name: "Default" });
+    expect(screen.getByRole("menuitemradio", { name: "FWD" })).toHaveAttribute("aria-checked", "true");
+    const names = screen.getAllByRole("menuitemradio").map((item) => item.textContent);
+    expect(names).toEqual(["Light", "Dark", "System", "FWD", "Default"]);
+    fireEvent.click(defaults);
 
-    expect(useAppearanceStore.getState().theme).toBe("pop");
-    expect(screen.getByRole("menuitemradio", { name: "Pop" })).toHaveAttribute("aria-checked", "true");
+    expect(useAppearanceStore.getState().theme).toBe("default");
+    expect(screen.getByRole("menuitemradio", { name: "Default" })).toHaveAttribute("aria-checked", "true");
   });
 
   it("switches between light, dark and system and closes like before", async () => {
@@ -107,7 +111,7 @@ describe("AccountMenu theme submenu", () => {
     fireEvent.click(within(mode).getByRole("menuitemradio", { name: "Dark" }));
 
     expect(theme.setTheme).toHaveBeenCalledWith("dark");
-    await waitFor(() => expect(screen.queryByRole("menuitemradio", { name: "Pop" })).not.toBeInTheDocument());
+    await waitFor(() => expect(screen.queryByRole("menuitemradio", { name: "Default" })).not.toBeInTheDocument());
   });
 
   it("links to the appearance settings", async () => {

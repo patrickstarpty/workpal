@@ -23,7 +23,7 @@ describe("feature-flags hash", () => {
   });
 
   // Pinned (key, identifier) -> bucket values that MUST agree with the
-  // Go-side server/pkg/featureflag/hash_test.go::TestPercentBucketCrossLanguageGolden.
+  // Go-side server/go/pkg/featureflag/hash_test.go::TestPercentBucketCrossLanguageGolden.
   // The shared golden table is the single source of truth for "same user,
   // same bucket" across backend and frontend; if either side drifts, both
   // tests fail and one must be brought back in sync.

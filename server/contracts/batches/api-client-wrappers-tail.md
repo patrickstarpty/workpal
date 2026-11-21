@@ -1,0 +1,124 @@
+# ApiClient tail static transport audit
+
+Root review pending. Whole source false. No backend claim or runtime verification.
+
+Scope: createIssueView at 5102 through class close 6216. No crossing method at 5100: preceding listIssueViews ends at 5100. No trailing top-level executable or type-only declarations. Exact declarations and request sites are retained in JSON. All requests use shared fetch, directly or via issueEnvironmentCommand; no direct global fetch in this section.
+
+Shared execution and schema proofs are reused with checked source hashes recorded in JSON. Type annotations inside declarations are erased, while bodies execute. Named helpers remain explicitly attributed rather than marked broadly unknown.
+
+- `createIssueView`: 5102–5112; request 5103: POST, mapped
+- `updateIssueView`: 5114–5132; request 5125: PATCH, mapped
+- `getIssueView`: 5134–5139; request 5135: GET, mapped
+- `deleteIssueView`: 5141–5143; request 5142: DELETE, mapped
+- `getIssueViewPreference`: 5145–5155; request 5151: GET, mapped
+- `putIssueViewPreference`: 5157–5173; request 5165: PUT, mapped
+- `listPins`: 5176–5181; request 5180: GET, mapped
+- `createPin`: 5183–5188; request 5184: POST, mapped
+- `deletePin`: 5190–5192; request 5191: DELETE, mapped
+- `reorderPins`: 5194–5199; request 5195: PUT, mapped
+- `listSquads`: 5202–5207; request 5203: GET, mapped
+- `listInvolvedSquadIds`: 5209–5216; request 5210: GET, mapped
+- `getSquad`: 5218–5223; request 5219: GET, mapped
+- `createSquad`: 5225–5230; request 5226: POST, mapped
+- `updateSquad`: 5232–5237; request 5233: PUT, mapped
+- `deleteSquad`: 5239–5241; request 5240: DELETE, mapped
+- `listSquadMembers`: 5243–5245; request 5244: GET, mapped
+- `addSquadMember`: 5247–5249; request 5248: POST, mapped
+- `removeSquadMember`: 5251–5253; request 5252: DELETE, mapped
+- `updateSquadMemberRole`: 5255–5257; request 5256: PATCH, mapped
+- `getSquadMemberStatus`: 5263–5268; request 5264: GET, mapped
+- `listAutopilots`: 5271–5281; request 5274: GET, mapped
+- `getAutopilot`: 5283–5285; request 5284: GET, mapped
+- `createAutopilot`: 5287–5292; request 5288: POST, mapped
+- `updateAutopilot`: 5294–5299; request 5295: PATCH, mapped
+- `deleteAutopilot`: 5301–5303; request 5302: DELETE, mapped
+- `grantAutopilotAccess`: 5308–5313; request 5309: POST, mapped
+- `revokeAutopilotAccess`: 5315–5319; request 5316: DELETE, mapped
+- `triggerAutopilot`: 5321–5332; request 5325: POST, mapped
+- `getAutopilotQuotaUsage`: 5334–5353; request 5335: GET, mapped
+- `listAutopilotRuns`: 5355–5360; request 5359: GET, mapped
+- `getAutopilotRun`: 5365–5367; request 5366: GET, mapped
+- `createAutopilotTrigger`: 5369–5375; request 5371: POST, mapped
+- `updateAutopilotTrigger`: 5377–5383; request 5379: PATCH, mapped
+- `deleteAutopilotTrigger`: 5385–5387; request 5386: DELETE, mapped
+- `cronPreview`: 5389–5400; request 5393: GET, mapped
+- `rotateAutopilotTriggerWebhookToken`: 5402–5410; request 5406: POST, mapped
+- `listAutopilotDeliveries`: 5417–5433; request 5424: GET, mapped
+- `getAutopilotDelivery`: 5435–5448; request 5439: GET, mapped
+- `replayAutopilotDelivery`: 5454–5468; request 5458: POST, mapped
+- `getGitHubConnectURL`: 5471–5484; request 5475: GET, mapped
+- `listGitHubInstallations`: 5486–5496; request 5487: GET, mapped
+- `listGitHubInstallationRepositories`: 5498–5516; request 5507: GET, mapped
+- `deleteGitHubInstallation`: 5518–5522; request 5519: DELETE, mapped
+- `listIssuePullRequests`: 5524–5532; request 5525: GET, mapped
+- `listIssueEnvironments`: 5535–5543; request 5536: GET, mapped
+- `stopIssueEnvironment`: 5546–5548; request 5547: POST, mapped
+- `restartIssueEnvironment`: 5551–5553; request 5552: POST, mapped
+- `readIssueEnvironmentLogs`: 5556–5558; request 5557: POST, mapped
+- `startIssueEnvironment`: 5561–5566; request 5562: POST, mapped
+- `getIssueEnvironmentCommand`: 5568–5570; request 5569: GET, mapped
+- `issueEnvironmentCommand`: 5572–5579; request 5573: dynamic init; default GET, missing inventory at request source line; dynamic helper
+- `listIssuePullRequestSummaries`: 5582–5590; request 5583: GET, mapped
+- `linkIssuePullRequest`: 5593–5607; request 5597: POST, mapped
+- `unlinkIssuePullRequest`: 5610–5621; request 5611: DELETE, mapped
+- `setIssuePRAutoComplete`: 5624–5635; request 5625: PUT, mapped
+- `listVCSConnections`: 5638–5640; request 5639: GET, mapped
+- `connectVCS`: 5642–5650; request 5646: POST, mapped
+- `deleteVCSConnection`: 5652–5656; request 5653: DELETE, mapped
+- `rotateVCSWebhook`: 5658–5666; request 5662: POST, mapped
+- `listLarkInstallations`: 5669–5677; request 5672: GET, mapped
+- `beginLarkInstall`: 5679–5696; request 5693: POST, mapped
+- `getLarkInstallStatus`: 5698–5700; request 5699: GET, mapped
+- `deleteLarkInstallation`: 5702–5706; request 5703: DELETE, mapped
+- `redeemLarkBindingToken`: 5708–5713; request 5709: POST, mapped
+- `listComposioToolkits`: 5722–5724; request 5723: GET, mapped
+- `listComposioConnections`: 5727–5729; request 5728: GET, mapped
+- `beginComposioConnect`: 5733–5738; request 5734: POST, mapped
+- `deleteComposioConnection`: 5741–5745; request 5742: DELETE, mapped
+- `getAppsOverview`: 5750–5753; request 5751: GET, mapped
+- `listAppCatalog`: 5757–5760; request 5758: GET, mapped
+- `connectApp`: 5764–5773; request 5765: POST, mapped
+- `disconnectTeamApp`: 5775–5777; request 5776: DELETE, mapped
+- `getTeamAppImpact`: 5779–5782; request 5780: GET, mapped
+- `updateAppSettings`: 5787–5796; request 5791: PUT, mapped
+- `listAppTools`: 5798–5801; request 5799: GET, mapped
+- `updateAppToolClass`: 5804–5809; request 5805: PUT, mapped
+- `listIssueAppCalls`: 5811–5814; request 5812: GET, mapped
+- `getAppRules`: 5816–5819; request 5817: GET, mapped
+- `updateAppRules`: 5821–5831; request 5826: PUT, mapped
+- `listAppActivity`: 5833–5836; request 5834: GET, mapped
+- `listAgentApps`: 5838–5841; request 5839: GET, mapped
+- `updateAgentApps`: 5843–5849; request 5844: PUT, mapped
+- `listAppRequests`: 5854–5866; request 5862: GET, mapped
+- `approveAppRequest`: 5868–5874; request 5869: POST, mapped
+- `rejectAppRequest`: 5876–5882; request 5877: POST, mapped
+- `listSlackInstallations`: 5885–5887; request 5886: GET, mapped
+- `registerSlackBYO`: 5892–5902; request 5898: POST, mapped
+- `deleteSlackInstallation`: 5904–5908; request 5905: DELETE, mapped
+- `redeemSlackBindingToken`: 5910–5915; request 5911: POST, mapped
+- `listDingTalkInstallations`: 5918–5928; request 5921: GET, mapped
+- `listDingTalkGroups`: 5930–5957; request 5937: GET, mapped
+- `listAgentDingTalkGroups`: 5959–5981; request 5966: GET, mapped
+- `forgetDingTalkGroup`: 5983–5992; request 5988: DELETE, mapped
+- `registerDingTalkBYO`: 5998–6014; request 6004: POST, mapped
+- `deleteDingTalkInstallation`: 6016–6020; request 6017: DELETE, mapped
+- `redeemDingTalkBindingToken`: 6022–6035; request 6025: POST, mapped
+- `listWecomInstallations`: 6041–6049; request 6042: GET, mapped
+- `registerWecomBYO`: 6055–6071; request 6061: POST, mapped
+- `beginWecomInstall`: 6080–6099; request 6086: POST, mapped
+- `getWecomInstallStatus`: 6103–6116; request 6107: GET, mapped
+- `deleteWecomInstallation`: 6118–6122; request 6119: DELETE, mapped
+- `redeemWecomBindingToken`: 6131–6142; request 6132: POST, mapped
+- `listWeixinInstallations`: 6144–6147; request 6145: GET, mapped
+- `beginWeixinLogin`: 6149–6153; request 6151: POST, mapped
+- `pollWeixinLogin`: 6155–6158; request 6156: POST, mapped
+- `cancelWeixinLogin`: 6160–6162; request 6161: DELETE, mapped
+- `deleteWeixinInstallation`: 6164–6166; request 6165: DELETE, mapped
+- `listTelegramInstallations`: 6168–6178; request 6171: GET, mapped
+- `registerTelegramBot`: 6180–6196; request 6186: POST, mapped
+- `deleteTelegramInstallation`: 6198–6202; request 6199: DELETE, mapped
+- `redeemTelegramBindingToken`: 6204–6215; request 6205: POST, mapped
+
+## Root dynamic command review
+
+The private issueEnvironmentCommand helper has five explicit callers at client.ts:5547,5552,5557,5562,5569. Their existing inventory entries cover four POST operations and one GET lookup. Path/init pass unchanged; UUID substitution only changes parsing diagnostics. This resolves the helper transport target without adding an invented route. Every recorded declaration and copied tuple was checked against current source/inventory. Other named helper semantics and full-client coverage remain pending.

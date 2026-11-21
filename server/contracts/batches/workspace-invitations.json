@@ -1,0 +1,398 @@
+{
+  "batch": "workspace-invitations",
+  "status": "source-derived; implementation pending",
+  "executed_go_parity": false,
+  "routes": [
+    {
+      "method": "POST",
+      "path": "/api/workspaces/{id}/members",
+      "handler": "CreateInvitation",
+      "success_status": 201,
+      "policy": "owner/admin",
+      "source": "server/go/cmd/server/router.go",
+      "handler_source": "server/go/internal/handler/invitation.go"
+    },
+    {
+      "method": "GET",
+      "path": "/api/workspaces/{id}/invitations",
+      "handler": "ListWorkspaceInvitations",
+      "success_status": 200,
+      "policy": "member",
+      "source": "server/go/cmd/server/router.go",
+      "handler_source": "server/go/internal/handler/invitation.go"
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/workspaces/{id}/invitations/{invitationId}",
+      "handler": "RevokeInvitation",
+      "success_status": 204,
+      "policy": "owner/admin",
+      "source": "server/go/cmd/server/router.go",
+      "handler_source": "server/go/internal/handler/invitation.go"
+    },
+    {
+      "method": "GET",
+      "path": "/api/invitations",
+      "handler": "ListMyInvitations",
+      "success_status": 200,
+      "policy": "authenticated user",
+      "source": "server/go/cmd/server/router.go",
+      "handler_source": "server/go/internal/handler/invitation.go"
+    },
+    {
+      "method": "GET",
+      "path": "/api/invitations/{id}",
+      "handler": "GetMyInvitation",
+      "success_status": 200,
+      "policy": "recipient",
+      "source": "server/go/cmd/server/router.go",
+      "handler_source": "server/go/internal/handler/invitation.go"
+    },
+    {
+      "method": "POST",
+      "path": "/api/invitations/{id}/accept",
+      "handler": "AcceptInvitation",
+      "success_status": 200,
+      "policy": "recipient",
+      "source": "server/go/cmd/server/router.go",
+      "handler_source": "server/go/internal/handler/invitation.go"
+    },
+    {
+      "method": "GET",
+      "path": "/api/me",
+      "handler": "GetMe",
+      "success_status": 200,
+      "policy": "authenticated user",
+      "source": "server/go/cmd/server/router.go",
+      "handler_source": "server/go/internal/handler/auth.go"
+    }
+  ],
+  "fixtures": {
+    "create_request": {
+      "email": " Invitee@Example.com ",
+      "role": "admin"
+    },
+    "normalized_email": "invitee@example.com",
+    "default_role": "member",
+    "empty_list": [],
+    "revoke_response": {
+      "status": 204,
+      "body": null
+    },
+    "handler_error_catalog": [
+      {
+        "status_symbol": "StatusBadRequest",
+        "body": {
+          "error": "invalid request body"
+        }
+      },
+      {
+        "status_symbol": "StatusBadRequest",
+        "body": {
+          "error": "email is required"
+        }
+      },
+      {
+        "status_symbol": "StatusBadRequest",
+        "body": {
+          "error": "invalid member role"
+        }
+      },
+      {
+        "status_symbol": "StatusBadRequest",
+        "body": {
+          "error": "cannot invite as owner"
+        }
+      },
+      {
+        "status_symbol": "StatusConflict",
+        "body": {
+          "error": "user is already a member"
+        }
+      },
+      {
+        "status_symbol": "StatusInternalServerError",
+        "body": {
+          "error": "failed to create invitation"
+        }
+      },
+      {
+        "status_symbol": "StatusInternalServerError",
+        "body": {
+          "error": "failed to release expired invitation capacity"
+        }
+      },
+      {
+        "status_symbol": "StatusConflict",
+        "body": {
+          "error": "invitation already pending for this email"
+        }
+      },
+      {
+        "status_symbol": "StatusInternalServerError",
+        "body": {
+          "error": "failed to create invitation"
+        }
+      },
+      {
+        "status_symbol": "StatusConflict",
+        "body": {
+          "error": "invitation already pending for this email"
+        }
+      },
+      {
+        "status_symbol": "StatusInternalServerError",
+        "body": {
+          "error": "failed to create invitation"
+        }
+      },
+      {
+        "status_symbol": "StatusInternalServerError",
+        "body": {
+          "error": "failed to list invitations"
+        }
+      },
+      {
+        "status_symbol": "StatusNotFound",
+        "body": {
+          "error": "invitation not found"
+        }
+      },
+      {
+        "status_symbol": "StatusInternalServerError",
+        "body": {
+          "error": "failed to revoke invitation"
+        }
+      },
+      {
+        "status_symbol": "StatusInternalServerError",
+        "body": {
+          "error": "failed to revoke invitation"
+        }
+      },
+      {
+        "status_symbol": "StatusNotFound",
+        "body": {
+          "error": "invitation not found"
+        }
+      },
+      {
+        "status_symbol": "StatusInternalServerError",
+        "body": {
+          "error": "failed to revoke invitation"
+        }
+      },
+      {
+        "status_symbol": "StatusInternalServerError",
+        "body": {
+          "error": "failed to revoke invitation"
+        }
+      },
+      {
+        "status_symbol": "StatusNotFound",
+        "body": {
+          "error": "invitation not found"
+        }
+      },
+      {
+        "status_symbol": "StatusInternalServerError",
+        "body": {
+          "error": "failed to load user"
+        }
+      },
+      {
+        "status_symbol": "StatusForbidden",
+        "body": {
+          "error": "invitation does not belong to you"
+        }
+      },
+      {
+        "status_symbol": "StatusInternalServerError",
+        "body": {
+          "error": "failed to load user"
+        }
+      },
+      {
+        "status_symbol": "StatusInternalServerError",
+        "body": {
+          "error": "failed to list invitations"
+        }
+      },
+      {
+        "status_symbol": "StatusNotFound",
+        "body": {
+          "error": "invitation not found"
+        }
+      },
+      {
+        "status_symbol": "StatusInternalServerError",
+        "body": {
+          "error": "failed to load user"
+        }
+      },
+      {
+        "status_symbol": "StatusForbidden",
+        "body": {
+          "error": "invitation does not belong to you"
+        }
+      },
+      {
+        "status_symbol": "StatusInternalServerError",
+        "body": {
+          "error": "failed to load membership"
+        }
+      },
+      {
+        "status_symbol": "StatusBadRequest",
+        "body": {
+          "error": "invitation is not pending"
+        }
+      },
+      {
+        "status_symbol": "StatusGone",
+        "body": {
+          "error": "invitation has expired"
+        }
+      },
+      {
+        "status_symbol": "StatusInternalServerError",
+        "body": {
+          "error": "failed to accept invitation"
+        }
+      },
+      {
+        "status_symbol": "StatusInternalServerError",
+        "body": {
+          "error": "failed to accept invitation"
+        }
+      },
+      {
+        "status_symbol": "StatusConflict",
+        "body": {
+          "error": "you are already a member of this workspace"
+        }
+      },
+      {
+        "status_symbol": "StatusInternalServerError",
+        "body": {
+          "error": "failed to create membership"
+        }
+      },
+      {
+        "status_symbol": "StatusInternalServerError",
+        "body": {
+          "error": "failed to mark user onboarded"
+        }
+      },
+      {
+        "status_symbol": "StatusInternalServerError",
+        "body": {
+          "error": "failed to accept invitation"
+        }
+      },
+      {
+        "status_symbol": "StatusInternalServerError",
+        "body": {
+          "error": "failed to accept invitation"
+        }
+      },
+      {
+        "status_symbol": "StatusNotFound",
+        "body": {
+          "error": "invitation not found"
+        }
+      },
+      {
+        "status_symbol": "StatusInternalServerError",
+        "body": {
+          "error": "failed to load user"
+        }
+      },
+      {
+        "status_symbol": "StatusForbidden",
+        "body": {
+          "error": "invitation does not belong to you"
+        }
+      },
+      {
+        "status_symbol": "StatusInternalServerError",
+        "body": {
+          "error": "failed to decline invitation"
+        }
+      },
+      {
+        "status_symbol": "StatusInternalServerError",
+        "body": {
+          "error": "failed to decline invitation"
+        }
+      },
+      {
+        "status_symbol": "StatusInternalServerError",
+        "body": {
+          "error": "failed to decline invitation"
+        }
+      },
+      {
+        "status_symbol": "StatusInternalServerError",
+        "body": {
+          "error": "failed to decline invitation"
+        }
+      }
+    ]
+  },
+  "sources": [
+    {
+      "path": "server/go/cmd/server/router.go",
+      "sha256": "e214dfb54ab8085897d16e9d6713048753ef4d6b6b0407bfbff52b8d5deb4a63"
+    },
+    {
+      "path": "server/go/internal/handler/invitation.go",
+      "sha256": "f8b98c1af02c7980c51cd8da20234b7ba9396ca0083eed5d04efb7748eda50ae"
+    },
+    {
+      "path": "server/go/internal/handler/invitation_rate_limiter.go",
+      "sha256": "950096edcccb118bd0cbd82d0afd2cc11e532c263fd05fd6a9cdc723fa27b25d"
+    },
+    {
+      "path": "server/go/internal/handler/seat_capacity.go",
+      "sha256": "3f7d37a0c1d3098aeea1e555a70da52ecb652dff3dc314eb407a512ebe5b3376"
+    },
+    {
+      "path": "server/go/internal/middleware/workspace.go",
+      "sha256": "d8b1eb22b5a7da16396facd1ebb87e16d7d7915cad68cef3aa9f69187cca5d7e"
+    },
+    {
+      "path": "server/go/internal/handler/auth.go",
+      "sha256": "3b6e9a3f1d67fbcb08f0ff3dc0630cc7e73e635da521fcfbccda98e805f580eb"
+    },
+    {
+      "path": "server/go/internal/handler/workspace.go",
+      "sha256": "5dbdb2504746341794c0982df99408eadf343100cdc261a8d2fffd509c2c32c8"
+    },
+    {
+      "path": "server/go/pkg/db/queries/invitation.sql",
+      "sha256": "f6740af1e59be443bb0113c43308d54bed6c9cf0568add14e0b7507c6c776e83"
+    },
+    {
+      "path": "server/go/pkg/db/queries/member.sql",
+      "sha256": "d48c70eaff9f62f662ab47c42fdee1f50bf5dc7ce068ae1f167d5f1feeedd0dc"
+    },
+    {
+      "path": "server/go/migrations/041_workspace_invitation.up.sql",
+      "sha256": "0e860646f6ade01268b502642817a200e868476b1721107b526883c287db5f25"
+    },
+    {
+      "path": "server/go/cmd/server/listeners.go",
+      "sha256": "367141ba8584f32ca1de337f65afcfbc7cb1dc0ae65012d0848812722dd303c9"
+    },
+    {
+      "path": "packages/core/api/client.ts",
+      "sha256": "779bb65b5b7ead815836f7c704ec3c370bafae203e4f92119fadce93e982a4d7"
+    },
+    {
+      "path": "server/go/internal/handler/invitation_test.go",
+      "sha256": "4b09a95491bd634c97751e4f62c68c15e436f68936a636cb787f516d86e2beae"
+    }
+  ],
+  "tests_status": "TDD cases specified in companion markdown; not executed"
+}

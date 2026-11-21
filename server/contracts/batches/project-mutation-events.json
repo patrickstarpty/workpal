@@ -1,0 +1,222 @@
+{
+  "kind": "Bounded source audit, not runtime verification; exactly three HTTP operations",
+  "routes": [
+    {
+      "method": "POST",
+      "path": "/api/projects",
+      "sources": [
+        "server/go/cmd/server/router.go:2330",
+        "server/go/internal/handler/project.go:515",
+        "server/go/pkg/db/queries/project.sql:49"
+      ],
+      "event": {
+        "disposition": "required",
+        "reason": "Successful source branch explicitly publishes; conditional types are enumerated.",
+        "producer": "CreateProject -> Handler.publish -> Bus.Publish; ActorType member, ActorID requireUserID/requestUserID (not resolved creator actor)",
+        "type": [
+          "project:created",
+          "project_resource:created"
+        ],
+        "payload": {
+          "project:created": "{project: ProjectResponse}; metadata with resource_count, no resources array",
+          "project_resource:created": "{resource: ProjectResourceResponse, project_id: project UUID}; once per inserted resource, request order"
+        },
+        "scope": "WorkspaceID resolved by handler; no task/chat/member-private hint. Audience lookup narrows existing private projects to project members, no admin bypass; lookup error drops. project:* invalidates cache. Deleted project no longer in private map => workspace fanout, including private deletion ID; visibility becoming workspace similarly widens.",
+        "transaction": "No resources and workspace visibility: single CreateProject INSERT, publish after return. Otherwise Begin/create/private members+visibility/resources/Commit, then project event and resource events. No members_changed on private create.",
+        "consumer": "Generic project prefix invalidates project/workflow/issue-table/saved-view queries. members_changed shares project prefix. project_resource prefix has no generic handler in this dispatcher; no resource-specific frontend listener found in packages/core.",
+        "sources": [
+          "server/go/internal/handler/project.go:515",
+          "server/go/pkg/db/queries/project.sql:49",
+          "server/go/internal/handler/handler.go:792",
+          "server/go/internal/events/bus.go:95",
+          "server/go/cmd/server/listeners.go:287",
+          "server/go/cmd/server/private_project_realtime.go:112"
+        ],
+        "producer_sources": [
+          "server/go/internal/handler/project.go:515",
+          "server/go/pkg/db/queries/project.sql:49",
+          "server/go/internal/handler/handler.go:792",
+          "server/go/internal/events/bus.go:95"
+        ],
+        "transaction_sources": [
+          "server/go/internal/handler/project.go:515",
+          "server/go/pkg/db/queries/project.sql:49"
+        ],
+        "consumer_sources": [
+          "packages/core/realtime/use-realtime-sync.ts:950",
+          "packages/core/realtime/use-realtime-sync.ts:1231",
+          "server/go/cmd/server/listeners.go:287",
+          "server/go/cmd/server/private_project_realtime.go:112"
+        ]
+      },
+      "fixture_refs": [
+        "project-mutation-events.json#/fixtures/post"
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/api/projects/{id}",
+      "sources": [
+        "server/go/cmd/server/router.go:2333",
+        "server/go/internal/handler/project.go:634",
+        "server/go/pkg/db/queries/project.sql:56",
+        "server/go/internal/handler/project_member.go:295",
+        "server/go/internal/handler/project_member.go:599",
+        "server/go/pkg/db/queries/project_member.sql:97"
+      ],
+      "event": {
+        "disposition": "required",
+        "reason": "Successful source branch explicitly publishes; conditional types are enumerated.",
+        "producer": "UpdateProject -> Handler.publish -> Bus.Publish; ActorType member, ActorID requireUserID/requestUserID (not resolved creator actor)",
+        "type": [
+          "project:members_changed",
+          "project:updated"
+        ],
+        "payload": {
+          "project:members_changed": "{project_id: UUID}; only len(access.addIDs)>0, even if inserts were duplicates; precedes updated",
+          "project:updated": "{project: ProjectResponse}; post-write issue stats/resource count loaded; emitted on every successful update including empty body"
+        },
+        "scope": "WorkspaceID resolved by handler; no task/chat/member-private hint. Audience lookup narrows existing private projects to project members, no admin bypass; lookup error drops. project:* invalidates cache. Deleted project no longer in private map => workspace fanout, including private deletion ID; visibility becoming workspace similarly widens.",
+        "transaction": "writeProjectUpdate: access.empty => one UPDATE without explicit transaction. Otherwise Begin/UPDATE/add members/visibility/touch search entries/Commit; conditional members_changed after commit; updated after helper returns.",
+        "consumer": "Generic project prefix invalidates project/workflow/issue-table/saved-view queries. members_changed shares project prefix. project_resource prefix has no generic handler in this dispatcher; no resource-specific frontend listener found in packages/core.",
+        "sources": [
+          "server/go/internal/handler/project.go:634",
+          "server/go/pkg/db/queries/project.sql:56",
+          "server/go/internal/handler/project_member.go:295",
+          "server/go/internal/handler/project_member.go:599",
+          "server/go/pkg/db/queries/project_member.sql:97",
+          "server/go/internal/handler/handler.go:792",
+          "server/go/internal/events/bus.go:95",
+          "server/go/cmd/server/listeners.go:287",
+          "server/go/cmd/server/private_project_realtime.go:112"
+        ],
+        "producer_sources": [
+          "server/go/internal/handler/project.go:634",
+          "server/go/pkg/db/queries/project.sql:56",
+          "server/go/internal/handler/project_member.go:295",
+          "server/go/internal/handler/project_member.go:599",
+          "server/go/pkg/db/queries/project_member.sql:97",
+          "server/go/internal/handler/handler.go:792",
+          "server/go/internal/events/bus.go:95"
+        ],
+        "transaction_sources": [
+          "server/go/internal/handler/project.go:634",
+          "server/go/pkg/db/queries/project.sql:56",
+          "server/go/internal/handler/project_member.go:295",
+          "server/go/internal/handler/project_member.go:599",
+          "server/go/pkg/db/queries/project_member.sql:97"
+        ],
+        "consumer_sources": [
+          "packages/core/realtime/use-realtime-sync.ts:950",
+          "packages/core/realtime/use-realtime-sync.ts:1231",
+          "server/go/cmd/server/listeners.go:287",
+          "server/go/cmd/server/private_project_realtime.go:112"
+        ]
+      },
+      "fixture_refs": [
+        "project-mutation-events.json#/fixtures/put"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/projects/{id}",
+      "sources": [
+        "server/go/cmd/server/router.go:2334",
+        "server/go/internal/handler/project.go:784",
+        "server/go/pkg/db/queries/project.sql:71",
+        "server/go/pkg/db/queries/chat.sql:6",
+        "server/go/pkg/db/queries/issue_view.sql:75",
+        "server/go/migrations/034_projects.up.sql:19",
+        "server/go/migrations/065_project_resources.up.sql:7"
+      ],
+      "event": {
+        "disposition": "required",
+        "reason": "Successful source branch explicitly publishes; conditional types are enumerated.",
+        "producer": "DeleteProject -> Handler.publish -> Bus.Publish; ActorType member, ActorID requireUserID/requestUserID (not resolved creator actor)",
+        "type": [
+          "project:deleted"
+        ],
+        "payload": {
+          "project:deleted": "{project_id: UUID}"
+        },
+        "scope": "WorkspaceID resolved by handler; no task/chat/member-private hint. Audience lookup narrows existing private projects to project members, no admin bypass; lookup error drops. project:* invalidates cache. Deleted project no longer in private map => workspace fanout, including private deletion ID; visibility becoming workspace similarly widens.",
+        "transaction": "Begin/LockProjectForDelete FOR UPDATE/clear chat context/delete scoped views/members/subscribers/DeleteProject/Commit; publish after commit. All error returns before publish; deferred rollback.",
+        "consumer": "Generic project prefix invalidates project/workflow/issue-table/saved-view queries. members_changed shares project prefix. project_resource prefix has no generic handler in this dispatcher; no resource-specific frontend listener found in packages/core.",
+        "sources": [
+          "server/go/internal/handler/project.go:784",
+          "server/go/pkg/db/queries/project.sql:71",
+          "server/go/pkg/db/queries/chat.sql:6",
+          "server/go/pkg/db/queries/issue_view.sql:75",
+          "server/go/migrations/034_projects.up.sql:19",
+          "server/go/migrations/065_project_resources.up.sql:7",
+          "server/go/internal/handler/handler.go:792",
+          "server/go/internal/events/bus.go:95",
+          "server/go/cmd/server/listeners.go:287",
+          "server/go/cmd/server/private_project_realtime.go:112"
+        ],
+        "producer_sources": [
+          "server/go/internal/handler/project.go:784",
+          "server/go/pkg/db/queries/project.sql:71",
+          "server/go/pkg/db/queries/chat.sql:6",
+          "server/go/pkg/db/queries/issue_view.sql:75",
+          "server/go/migrations/034_projects.up.sql:19",
+          "server/go/migrations/065_project_resources.up.sql:7",
+          "server/go/internal/handler/handler.go:792",
+          "server/go/internal/events/bus.go:95"
+        ],
+        "transaction_sources": [
+          "server/go/internal/handler/project.go:784",
+          "server/go/pkg/db/queries/project.sql:71",
+          "server/go/pkg/db/queries/chat.sql:6",
+          "server/go/pkg/db/queries/issue_view.sql:75",
+          "server/go/migrations/034_projects.up.sql:19",
+          "server/go/migrations/065_project_resources.up.sql:7"
+        ],
+        "consumer_sources": [
+          "packages/core/realtime/use-realtime-sync.ts:950",
+          "packages/core/realtime/use-realtime-sync.ts:1231",
+          "server/go/cmd/server/listeners.go:287",
+          "server/go/cmd/server/private_project_realtime.go:112"
+        ]
+      },
+      "fixture_refs": [
+        "project-mutation-events.json#/fixtures/delete"
+      ]
+    }
+  ],
+  "fixtures": {
+    "post": {
+      "source_fixture": "project-list-create.json#/POST/fixtures/0",
+      "expected_types": [
+        "project:created"
+      ],
+      "branches": [
+        "private-only => project:created only",
+        "N resources => project:created then N project_resource:created",
+        "failure before commit => no publication"
+      ]
+    },
+    "put": {
+      "source_fixture": "project-detail-update-delete.json#/fixtures/1",
+      "expected_types": [
+        "project:updated"
+      ],
+      "branches": [
+        "nonempty prepared addIDs => project:members_changed then project:updated",
+        "visibility-only without addIDs => project:updated",
+        "rejected write/commit => neither"
+      ]
+    },
+    "delete": {
+      "source_fixture": "project-detail-update-delete.json#/fixtures/2",
+      "expected_types": [
+        "project:deleted"
+      ],
+      "branches": [
+        "cleanup failure/commit failure => none",
+        "cascaded resources and detached issues => no per-resource or per-issue bus events"
+      ]
+    }
+  },
+  "gaps": "Go publication is synchronous in-process and outside DB write/commit; no durable outbox, delivery acknowledgement or replay here. A crash after write and before publish loses events; multiple publishes can be partial. Python caller-owned outbox should atomically persist intended event rows with mutation, then dispatch after commit; this is a migration requirement, not implemented/runtime evidence. Search change records are data writes, not additional bus events."
+}

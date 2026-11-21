@@ -11,7 +11,7 @@ type Role = "owner" | "admin" | "member";
 const ROLES: Role[] = ["owner", "admin", "member"];
 
 // Mirrors the role matrix on the members & roles page and the server checks in
-// server/internal/handler/workspace.go and invitation.go.
+// server/go/internal/handler/workspace.go and invitation.go.
 const CAN: Role[][] = [
   ["owner", "admin", "member"],
   ["owner", "admin"],

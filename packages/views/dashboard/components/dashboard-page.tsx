@@ -66,6 +66,7 @@ import {
 import { ProjectFilter, TimeRangeFilter } from "./dashboard-filters";
 import { UsageTrendCard } from "./usage-trend-card";
 import { Leaderboard } from "./leaderboard";
+import { ContributionTab } from "./contribution-tab";
 import { ErrorsTab } from "./errors-tab";
 
 // Stable references — `data ?? []` would create a new empty array on
@@ -80,7 +81,7 @@ const EMPTY_FAILURE_BY_AGENT: import("@workpal/core/types").DashboardFailureByAg
   [];
 const EMPTY_AGENTS: Agent[] = [];
 
-type DashboardTab = "usage" | "errors";
+type DashboardTab = "usage" | "contribution" | "errors";
 const TAB_QUERY_KEY = "tab";
 const DEFAULT_TAB: DashboardTab = "usage";
 
@@ -161,7 +162,7 @@ export function DashboardPage() {
   // flipping tabs does not stack up history entries. An unknown ?tab= value
   // falls back to Usage rather than rendering nothing.
   const tabFromUrl = navigation.searchParams.get(TAB_QUERY_KEY);
-  const tab: DashboardTab = tabFromUrl === "errors" ? "errors" : DEFAULT_TAB;
+  const tab: DashboardTab = (tabFromUrl === "errors" || tabFromUrl === "contribution") ? tabFromUrl : DEFAULT_TAB;
   const handleTabChange = (next: string) => {
     const params = new URLSearchParams(navigation.searchParams);
     if (next === DEFAULT_TAB) params.delete(TAB_QUERY_KEY);
@@ -337,7 +338,7 @@ export function DashboardPage() {
   // Totals / classes / reasons are derived from the DATE-BUCKETED rollup after
   // the same `dailyCutoffIso` trim the charts use, not from the per-agent one.
   // `parseSinceParamInTZ` deliberately returns N+1 calendar days of headroom
-  // (see sinceFromDays in server/internal/handler/runtime.go), and only a
+  // (see sinceFromDays in server/go/internal/handler/runtime.go), and only a
   // series carrying a date can trim that back client-side. Reading these off
   // the per-agent rollup put the summary one calendar day wider than the chart
   // beside it — at 1D the chart could show no failures while the tile counted
@@ -461,10 +462,10 @@ export function DashboardPage() {
       onValueChange={handleTabChange}
       className="flex h-full min-h-0 flex-col gap-0"
     >
-      {/* The two tabs are views of the same data, so they sit beside the
-          title; both share the range and project filter, which is why the
+      {/* The tabs share the same date and project scope, so they sit beside the
+          title; they share the range and project filter, which is why the
           filters live in the header and not inside a tab. */}
-      <PageHeader>
+      <PageHeader className="h-auto min-h-12 flex-wrap py-1 sm:h-12 sm:flex-nowrap sm:py-0">
         <div className="flex min-w-0 flex-1 items-center gap-2 self-stretch">
           <h1 className="flex min-w-0 items-center gap-2 px-2 text-body font-medium">
             <BarChart3 aria-hidden="true" className="size-4 shrink-0 text-muted-foreground" />
@@ -477,6 +478,7 @@ export function DashboardPage() {
             >
               {t(($) => $.tab_usage)}
             </TabsTrigger>
+            <TabsTrigger value="contribution" className="h-full rounded-none px-2.5 group-data-horizontal/tabs:after:bottom-0">Contribution</TabsTrigger>
             <TabsTrigger
               value="errors"
               className="h-full rounded-none px-2.5 group-data-horizontal/tabs:after:bottom-0"
@@ -606,6 +608,7 @@ export function DashboardPage() {
             )}
           </TabsContent>
 
+          <TabsContent value="contribution"><ContributionTab wsId={wsId} days={days} projectId={projectId} tz={viewTZ} /></TabsContent>
           <TabsContent value="errors">
             {errorsLoading ? (
               <DashboardSkeleton />

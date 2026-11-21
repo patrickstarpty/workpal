@@ -6,6 +6,16 @@ import { I18nProvider } from "@workpal/core/i18n/react";
 import enCommon from "../../locales/en/common.json";
 import enSettings from "../../locales/en/settings.json";
 
+const avatarSave = vi.hoisted(() => ({ current: undefined as undefined | ((url: string) => Promise<unknown>) }));
+const mockUpdateMe = vi.hoisted(() => vi.fn());
+
+vi.mock("../../common/avatar-upload-control", () => ({
+  AvatarUploadControl: (props: { onUploaded: (url: string) => Promise<unknown> }) => {
+    avatarSave.current = props.onUploaded;
+    return null;
+  },
+}));
+
 const mockUpdateWorkspace = vi.hoisted(() => vi.fn());
 const mockInvalidateQueries = vi.hoisted(() => vi.fn());
 const mockToastSuccess = vi.hoisted(() => vi.fn());
@@ -63,6 +73,7 @@ vi.mock("@workpal/core/workspace/mutations", () => ({
 vi.mock("@workpal/core/api", () => ({
   api: {
     updateWorkspace: mockUpdateWorkspace,
+    updateMe: mockUpdateMe,
     getBaseUrl: () => "http://127.0.0.1:8080",
   },
 }));
@@ -93,6 +104,7 @@ vi.mock("sonner", () => ({
 }));
 
 import { WorkspaceTab } from "./workspace-tab";
+import { AccountTab } from "./account-tab";
 
 const TEST_RESOURCES = {
   en: { common: enCommon, settings: enSettings },
@@ -132,6 +144,15 @@ describe("WorkspaceTab — automatic updates", () => {
 
   afterEach(() => {
     vi.useRealTimers();
+  });
+
+  it.each(["account", "workspace"] as const)("propagates %s avatar persistence failure to the upload control", async (kind) => {
+    const failure = new Error("avatar persistence unavailable");
+    (kind === "account" ? mockUpdateMe : mockUpdateWorkspace).mockRejectedValueOnce(failure);
+    render(kind === "account" ? <AccountTab /> : <WorkspaceTab />, { wrapper: I18nWrapper });
+    expect(avatarSave.current).toBeTypeOf("function");
+    await expect(avatarSave.current!("/uploads/avatar.png")).rejects.toBe(failure);
+    expect(mockToastSuccess).not.toHaveBeenCalled();
   });
 
   function setupUser() {

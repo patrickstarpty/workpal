@@ -22,7 +22,7 @@ import {
   type ChannelConnection,
 } from "./use-messaging-channels";
 
-export function ChannelsTab() {
+export function DisabledChannelsTab() {
   const { t } = useT("settings");
   const navigation = useNavigation();
   const paths = useWorkspacePaths();
@@ -210,4 +210,9 @@ export function ChannelsTab() {
       ) : null}
     </SettingsTab>
   );
+}
+
+// Keep legacy channel setup code dormant until these integrations are enabled.
+export function ChannelsTab() {
+ return <SettingsTab title="Channels" scope="workspace"><SettingsCard><div className="flex items-center justify-between gap-3 p-4 text-body"><span>Microsoft Teams</span><span className="text-caption text-muted-foreground">Not configured</span></div></SettingsCard></SettingsTab>;
 }

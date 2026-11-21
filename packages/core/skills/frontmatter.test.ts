@@ -101,7 +101,7 @@ describe("parseFrontmatter", () => {
 
   // A structured value where a scalar belongs (authoring mistake) must keep the
   // sibling name and JSON-encode the value. This mirrors the Go
-  // ParseSkillFrontmatter behaviour in server/internal/skill so both sides agree.
+  // ParseSkillFrontmatter behaviour in server/go/internal/skill so both sides agree.
   it("keeps sibling name and JSON-encodes a sequence value", () => {
     const { frontmatter } = parseFrontmatter(
       "---\nname: my-skill\ndescription:\n  - first feature\n  - second feature\n---\nbody",

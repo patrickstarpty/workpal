@@ -1,0 +1,515 @@
+{
+  "version": 1,
+  "coverage": "Bounded target static evidence accepted by root; global coverage remains false.",
+  "files": [
+    {
+      "path": "packages/views/issues/components/swimlane-view.tsx",
+      "sha256": "c36d85855738f9a77136be1adbddc5f03cfca9467fcd07a1213e2fabad2934c3",
+      "whole_source": true,
+      "reviewed_ranges": [
+        [
+          1,
+          100
+        ],
+        [
+          101,
+          200
+        ],
+        [
+          201,
+          300
+        ],
+        [
+          301,
+          400
+        ],
+        [
+          401,
+          500
+        ],
+        [
+          501,
+          600
+        ],
+        [
+          601,
+          700
+        ],
+        [
+          701,
+          800
+        ],
+        [
+          801,
+          900
+        ],
+        [
+          901,
+          1000
+        ],
+        [
+          1001,
+          1100
+        ],
+        [
+          1101,
+          1200
+        ],
+        [
+          1201,
+          1300
+        ],
+        [
+          1301,
+          1400
+        ],
+        [
+          1401,
+          1500
+        ],
+        [
+          1501,
+          1600
+        ],
+        [
+          1601,
+          1700
+        ],
+        [
+          1701,
+          1800
+        ],
+        [
+          1801,
+          1900
+        ],
+        [
+          1901,
+          1902
+        ]
+      ]
+    }
+  ],
+  "snapshots": [
+    {
+      "path": "server/contracts/frontend-calls.json",
+      "sha256": "2670eec069d89d20045a5bc1043d7031f2a1460a4180a0b10256315abee03d21"
+    }
+  ],
+  "reused_evidence": [
+    {
+      "path": "server/contracts/batches/issue-mutations-transport-coverage.json",
+      "sha256": "43c8266c0e7248f5f12b8736bf795e424ab2771f21bea3eac4b210bf89dbd70a",
+      "source_validation": [
+        {
+          "path": "packages/core/issues/mutations.ts",
+          "matches": true
+        },
+        {
+          "path": "packages/views/modals/create-issue.tsx",
+          "matches": true
+        },
+        {
+          "path": "packages/core/labels/mutations.ts",
+          "matches": true
+        },
+        {
+          "path": "packages/core/issue-workflows/hooks.ts",
+          "matches": true
+        },
+        {
+          "path": "packages/core/issue-workflows/queries.ts",
+          "matches": true
+        },
+        {
+          "path": "packages/core/issue-statuses/hooks.ts",
+          "matches": true
+        },
+        {
+          "path": "packages/core/issue-statuses/queries.ts",
+          "matches": true
+        },
+        {
+          "path": "packages/core/properties/queries.ts",
+          "matches": true
+        },
+        {
+          "path": "packages/core/workspace/hooks.ts",
+          "matches": true
+        },
+        {
+          "path": "packages/views/workflows/step-handler.ts",
+          "matches": true
+        },
+        {
+          "path": "packages/views/modals/source-context-preview.tsx",
+          "matches": true
+        },
+        {
+          "path": "packages/core/api/client.ts",
+          "matches": true
+        },
+        {
+          "path": "packages/views/issues/components/comment-card.tsx",
+          "matches": true
+        },
+        {
+          "path": "packages/views/issues/actions/issue-actions-menu-items.tsx",
+          "matches": true
+        },
+        {
+          "path": "packages/core/issues/cache-coordinator.ts",
+          "matches": true
+        },
+        {
+          "path": "packages/core/issues/cache-helpers.ts",
+          "matches": true
+        },
+        {
+          "path": "packages/core/issues/surface/membership.ts",
+          "matches": true
+        },
+        {
+          "path": "packages/core/issues/status-category.ts",
+          "matches": true
+        },
+        {
+          "path": "packages/core/inbox/ws-updaters.ts",
+          "matches": true
+        },
+        {
+          "path": "packages/core/inbox/queries.ts",
+          "matches": true
+        },
+        {
+          "path": "packages/core/issues/queries.ts",
+          "matches": true
+        },
+        {
+          "path": "packages/core/projects/queries.ts",
+          "matches": true
+        },
+        {
+          "path": "packages/core/workspace/queries.ts",
+          "matches": true
+        },
+        {
+          "path": "packages/core/issues/ws-updaters.ts",
+          "matches": true
+        },
+        {
+          "path": "packages/core/issues/delete-cache.ts",
+          "matches": true
+        },
+        {
+          "path": "packages/core/issues/stores/recent-issues-store.ts",
+          "matches": true
+        },
+        {
+          "path": "packages/core/platform/storage.ts",
+          "matches": true
+        },
+        {
+          "path": "packages/core/agents/queries.ts",
+          "matches": true
+        },
+        {
+          "path": "packages/core/inbox/filters.ts",
+          "matches": true
+        },
+        {
+          "path": "packages/core/labels/queries.ts",
+          "matches": true
+        },
+        {
+          "path": "packages/views/issues/components/inline-comment-run.tsx",
+          "matches": true
+        },
+        {
+          "path": "packages/core/chat/queries.ts",
+          "matches": true
+        },
+        {
+          "path": "packages/core/plugins/queries.ts",
+          "matches": true
+        },
+        {
+          "path": "packages/views/common/task-transcript/use-trace-issue-labels.ts",
+          "matches": true
+        },
+        {
+          "path": "packages/views/common/task-transcript/trace-issue-labels.ts",
+          "matches": true
+        },
+        {
+          "path": "packages/core/issues/subscribed.ts",
+          "matches": true
+        },
+        {
+          "path": "packages/core/issues/timeline-sort.ts",
+          "matches": true
+        },
+        {
+          "path": "packages/core/issues/comment-deletion.ts",
+          "matches": true
+        }
+      ]
+    },
+    {
+      "path": "server/contracts/batches/issue-cache-transport-coverage.json",
+      "sha256": "ca8ac1b4269c453cb9920c1ea565e909b513dc0cb74abe462467e24bf9b71b65",
+      "source_validation": [
+        {
+          "path": "packages/core/issues/cache-coordinator.ts",
+          "matches": true
+        },
+        {
+          "path": "packages/core/issues/cache-helpers.ts",
+          "matches": true
+        },
+        {
+          "path": "packages/core/issues/surface/membership.ts",
+          "matches": true
+        },
+        {
+          "path": "packages/core/issues/status-category.ts",
+          "matches": true
+        },
+        {
+          "path": "packages/core/inbox/ws-updaters.ts",
+          "matches": true
+        },
+        {
+          "path": "packages/core/inbox/queries.ts",
+          "matches": true
+        },
+        {
+          "path": "packages/core/issues/queries.ts",
+          "matches": true
+        }
+      ]
+    },
+    {
+      "path": "server/contracts/batches/issue-query-transport-coverage.json",
+      "sha256": "3d4401929eee7294bc9f706a5c738a074300faffc6df01ec9275184d8a5be380",
+      "source_validation": [
+        {
+          "path": "packages/core/issues/queries.ts",
+          "matches": true
+        },
+        {
+          "path": "packages/core/projects/queries.ts",
+          "matches": true
+        },
+        {
+          "path": "packages/core/workspace/queries.ts",
+          "matches": true
+        },
+        {
+          "path": "packages/core/issue-statuses/queries.ts",
+          "matches": true
+        }
+      ]
+    },
+    {
+      "path": "server/contracts/batches/issue-ws-updaters-transport-coverage.json",
+      "sha256": "6f932de903917f7209c1e07b9f5bf28b0b896573e89e352a2e40608d1b3995f1",
+      "source_validation": [
+        {
+          "path": "packages/core/issues/ws-updaters.ts",
+          "matches": true
+        }
+      ]
+    },
+    {
+      "path": "server/contracts/batches/issue-surface-transport-coverage.json",
+      "sha256": "f3fbc1491408c67becbed98a6b9ed80f14d7c27199c247e6553e9244dea56d55",
+      "source_validation": [
+        {
+          "path": "packages/views/issues/surface/use-issue-surface-controller.ts",
+          "matches": true
+        },
+        {
+          "path": "packages/views/issues/surface/use-issue-surface-data.ts",
+          "matches": true
+        },
+        {
+          "path": "packages/core/issues/surface/repository.ts",
+          "matches": true
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "inventory": [
+        {
+          "id": "client:1402",
+          "method": "POST",
+          "path_expression": "/api/issues/table/groups",
+          "route": {
+            "method": "POST",
+            "path": "/api/issues/table/groups"
+          }
+        }
+      ],
+      "selection": "Actual invoked body: listChildrenByParents, moveIssue, issueTableGroups/Rows, issueStatusList; no adjacent-method inclusion."
+    },
+    {
+      "inventory": [
+        {
+          "id": "client:1416",
+          "method": "POST",
+          "path_expression": "/api/issues/table/rows",
+          "route": {
+            "method": "POST",
+            "path": "/api/issues/table/rows"
+          }
+        }
+      ],
+      "selection": "Actual invoked body: listChildrenByParents, moveIssue, issueTableGroups/Rows, issueStatusList; no adjacent-method inclusion."
+    },
+    {
+      "inventory": [
+        {
+          "id": "client:1778",
+          "method": "POST",
+          "path_expression": "/api/issues/${id}/move",
+          "route": {
+            "method": "POST",
+            "path": "/api/issues/{id}/move"
+          }
+        }
+      ],
+      "selection": "Actual invoked body: listChildrenByParents, moveIssue, issueTableGroups/Rows, issueStatusList; no adjacent-method inclusion."
+    },
+    {
+      "inventory": [
+        {
+          "id": "client:1806",
+          "method": "GET",
+          "path_expression": "/api/issues/children?parent_ids=${parentIds.join(\",\")}",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/children"
+          }
+        }
+      ],
+      "selection": "Actual invoked body: listChildrenByParents, moveIssue, issueTableGroups/Rows, issueStatusList; no adjacent-method inclusion."
+    },
+    {
+      "inventory": [
+        {
+          "id": "client:4821",
+          "method": "GET",
+          "path_expression": "/api/issue-statuses${query}",
+          "route": {
+            "method": "GET",
+            "path": "/api/issue-statuses"
+          }
+        }
+      ],
+      "selection": "Actual invoked body: listChildrenByParents, moveIssue, issueTableGroups/Rows, issueStatusList; no adjacent-method inclusion."
+    },
+    {
+      "source": "packages/core/workspace/hooks.ts:94",
+      "kind": "invoked actor-name queries",
+      "gates": "Member/agent/squad factories retain their existing gates; plugin list requires PLUGINS_V1 flag and nonempty workspace. Naming alone does not suppress these observers.",
+      "inventory": [
+        {
+          "id": "client:3765",
+          "method": "GET",
+          "path_expression": "/api/workspaces/${workspaceId}/members",
+          "route": {
+            "method": "GET",
+            "path": "/api/workspaces/{id}/members"
+          }
+        },
+        {
+          "id": "client:2066",
+          "method": "GET",
+          "path_expression": "/api/agents?${search}",
+          "route": {
+            "method": "GET",
+            "path": "/api/agents"
+          }
+        },
+        {
+          "id": "client:5203",
+          "method": "GET",
+          "path_expression": "/api/squads",
+          "route": {
+            "method": "GET",
+            "path": "/api/squads"
+          }
+        },
+        {
+          "id": "client:3425",
+          "method": "GET",
+          "path_expression": "/api/workspaces/${workspaceId}/plugins",
+          "route": {
+            "method": "GET",
+            "path": "/api/workspaces/{id}/plugins"
+          }
+        }
+      ]
+    }
+  ],
+  "exclusions": [
+    "Arbitrary rendered descendants including board cards, avatars, links and status headings are outside bounded target closure.",
+    "Third-party React, TanStack, dnd-kit and Virtuoso internals are excluded.",
+    "No backend support or exhaustive runtime observer claim."
+  ],
+  "review": {
+    "status": "accepted_bounded_target",
+    "checks": [
+      "Independent drop guard/position/anchor/settlement source review",
+      "Read local sorting, filter entry and invoked predicate bodies, drag anchor helper, view hide/order/collapse actions and persistence seam",
+      "Added actor-name query fanout omitted by draft",
+      "Validated source/reused proof hashes and exact tuples"
+    ],
+    "limits": "Native scroll/navigation providers and supplied load/retry/create/move callbacks retain explicit host contracts; rendered descendant trees and full helper modules are not globally certified. No runtime/backend claim."
+  },
+  "root_supporting_sources": [
+    {
+      "path": "packages/views/issues/utils/drag-utils.ts",
+      "sha256": "40630f2da9ccacddb30d0a028b3b91e6fe0f4cc28908be5bb4764b1d2aa6147f",
+      "whole_source": false
+    },
+    {
+      "path": "packages/views/issues/utils/filter.ts",
+      "sha256": "744d6902a50173c9847be00d1cf31d9afd092392b5e35680c45ace23ce622caa",
+      "whole_source": false
+    },
+    {
+      "path": "packages/views/issues/utils/sort.ts",
+      "sha256": "70050e94c43dc1b36429d89efe6d9be6e90881a7ac6f33209d7075a2b9500326",
+      "whole_source": false
+    },
+    {
+      "path": "packages/core/issues/stores/view-store.ts",
+      "sha256": "69d8fb7c61c9dde00b58d579e9eeb7cf8ff3f526043f2e2aadf7ac3981c92285",
+      "whole_source": false
+    },
+    {
+      "path": "packages/core/issues/stores/filter-tree.ts",
+      "sha256": "3122cfd613792f21023ae5b3d787d53cb26344874b126866a8ad923d16c5a15c",
+      "whole_source": false
+    },
+    {
+      "path": "packages/core/issues/date.ts",
+      "sha256": "ae1e45adee2f1fc338933bc9eb4e5e35576e028657bfa46753629e436f9ed0b6",
+      "whole_source": false
+    },
+    {
+      "path": "packages/views/issues/surface/peek-context.tsx",
+      "sha256": "24b256313ea0447b6af794da328ee4ed767992ee7c52bf40e56eefbceb834364",
+      "whole_source": false
+    },
+    {
+      "path": "packages/core/workspace/hooks.ts",
+      "sha256": "7531c31b1caa51b0254eff7738c3ed14cd831a467c311d9aa8cce3ddff2964d3",
+      "whole_source": false
+    }
+  ]
+}

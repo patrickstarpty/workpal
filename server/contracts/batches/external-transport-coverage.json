@@ -1,0 +1,199 @@
+{
+  "version": 1,
+  "coverage": {
+    "complete": false,
+    "scope": [
+      "packages/core/analytics/index.ts",
+      "packages/core/analytics/exception-dedupe.ts",
+      "apps/web/features/landing/utils/github-release.ts",
+      "packages/views/runtimes/components/update-section.tsx",
+      "apps/web/proxy.ts"
+    ],
+    "finite_ledger_completed": true,
+    "global_coverage_claim": false
+  },
+  "calls": [
+    {
+      "source": "packages/core/analytics/index.ts:113",
+      "transport_kind": "external analytics SDK",
+      "resolved_targets": [
+        "config.host || https://us.i.posthog.com"
+      ],
+      "existing_frontend_call_ids": [],
+      "target_selection_constraints": "Browser only; nonempty config.key required; initialized instance reused. posthog-js owns methods, paths, batching and auxiliary requests: no concrete ingestion endpoint is asserted. before_send at :148 drops benign exceptions, redacts then deduplicates; auto pageview/click/heatmap, recording and surveys disabled; exception autocapture enabled.",
+      "non_route_transport": {
+        "id": "proposed:external:posthog-sdk",
+        "method": null,
+        "path": null,
+        "scope": "external SDK transport; not a Python backend route",
+        "sources": [
+          "packages/core/analytics/index.ts:114"
+        ]
+      }
+    },
+    {
+      "source": "packages/core/analytics/index.ts:291",
+      "transport_kind": "external analytics SDK handoff",
+      "resolved_targets": [
+        "configured PostHog SDK instance"
+      ],
+      "existing_frontend_call_ids": [],
+      "target_selection_constraints": "captureNow sends event with optional send_instantly; callback confirms handoff only. identify :184/:219, queued exceptions :196, explicit exceptions :321, person $set :346 also delegate. Pre-init operations buffer; reset :231 and register :178/:236 manage SDK state. No /api/config or /api/me request occurs here; those appear only in comments."
+    },
+    {
+      "source": "apps/web/features/landing/utils/github-release.ts:84",
+      "transport_kind": "server-side external release fetch",
+      "resolved_targets": [
+        "GET https://code-host.invalid/api/workpal/releases?per_page=5"
+      ],
+      "existing_frontend_call_ids": [],
+      "target_selection_constraints": "Literal URL at :43; no substitution to api.github.com. Accept and API-version headers :63; optional server GITHUB_TOKEN :73; 300-second revalidation :46/:85; 3000ms abort :51/:78. Filter draft/prerelease :98; choose first complete asset set, otherwise first stable release :130. Returned html_url and browser_download_url are values, not fetched here.",
+      "proposed_record": {
+        "id": "proposed:external:landing-releases",
+        "method": "GET",
+        "url": "https://code-host.invalid/api/workpal/releases?per_page=5",
+        "scope": "external release metadata; exclude from Python backend routes"
+      }
+    },
+    {
+      "source": "packages/views/runtimes/components/update-section.tsx:27",
+      "transport_kind": "browser external release fetch",
+      "resolved_targets": [
+        "GET https://code-host.invalid/api/workpal/releases/latest"
+      ],
+      "existing_frontend_call_ids": [],
+      "target_selection_constraints": "Literal :15; Accept header only; successful nonempty tag cached 10 minutes :17/:23/:32. Mount :134 calls even for managed/read-only/offline runtime. Errors/non-OK return null. No GitHub installation/connect backend endpoint.",
+      "proposed_record": {
+        "id": "proposed:external:runtime-latest-release",
+        "method": "GET",
+        "url": "https://code-host.invalid/api/workpal/releases/latest",
+        "scope": "external release metadata; exclude from Python backend routes"
+      }
+    },
+    {
+      "source": "packages/views/runtimes/components/update-section.tsx:169",
+      "transport_kind": "backend API via injected singleton",
+      "resolved_targets": [
+        "POST baseUrl/api/runtimes/{runtimeId}/update"
+      ],
+      "existing_frontend_call_ids": [
+        "client:2930"
+      ],
+      "target_selection_constraints": "api proxy packages/core/api/index.ts:44 binds injected instance. packages/core/api/client.ts:2930 sends JSON target_version=latestVersion. Handler guard :160 requires latestVersion/runtimeId. Main UI additionally requires newer parseable release, online, no status, unmanaged; failed retry :309 uses same handler. IDs interpolated without encoding by wrapper. Empty baseUrl is same-origin; injected nonempty base selects deployment backend, not release host."
+    },
+    {
+      "source": "packages/views/runtimes/components/update-section.tsx:173",
+      "transport_kind": "backend API polling",
+      "resolved_targets": [
+        "GET baseUrl/api/runtimes/{runtimeId}/update/{updateId}"
+      ],
+      "existing_frontend_call_ids": [
+        "client:2940"
+      ],
+      "target_selection_constraints": "packages/core/api/client.ts:2940; updateId from initiation response; 2000ms interval :193; completed/failed/timeout clears interval, polling exceptions ignored; cleanup on unmount and before update :124/:131/:161. packages/core/api/client.ts:1071 concatenates baseUrl+path with credentials include and shared auth headers."
+    },
+    {
+      "source": "apps/web/proxy.ts:97",
+      "transport_kind": "middleware forwarding",
+      "resolved_targets": [
+        "configured backend + incoming /v1, /api, /ws, /health or eligible /auth path",
+        "DOCS_URL + incoming /docs path"
+      ],
+      "existing_frontend_call_ids": [],
+      "target_selection_constraints": "apps/web/config/runtime-urls.ts:110 selects only known prefixes/exact paths; :57 prefers valid HTTP(S) REMOTE_API_URL then NEXT_PUBLIC_API_URL; :66 DOCS_URL. Trim trailing slash, strip terminal /api from API base (:32), preserve other prefixes; no runtime localhost fallback. :143 excludes /auth/callback and /auth/hg-sso/callback subtrees. apps/web/proxy.ts:100 copies incoming query. Matcher :165 excludes /api/upload-file subtree; helper support does not imply matcher activation. Incoming methods/resources are forwarded, not a new enumerated API call.",
+      "non_route_transport": {
+        "id": "proposed:forwarding:runtime-proxy",
+        "method": "incoming method",
+        "path": "incoming matched path",
+        "scope": "forwarding rule; concrete API calls belong to their callers"
+      }
+    }
+  ],
+  "sources": [
+    {
+      "path": "packages/core/analytics/index.ts",
+      "executable_source_review": "reviewed in full",
+      "calls": [
+        "packages/core/analytics/index.ts:113",
+        "packages/core/analytics/index.ts:291"
+      ],
+      "local_paths": [
+        {
+          "source": "packages/core/analytics/index.ts:398",
+          "evidence": "UTM/referrer parsing and bounded signup cookie write :429 are local; referrer URL parsing does not fetch. SDK reset/register are not independently asserted HTTP calls."
+        }
+      ]
+    },
+    {
+      "path": "packages/core/analytics/exception-dedupe.ts",
+      "executable_source_review": "reviewed in full",
+      "calls": [],
+      "local_paths": [
+        {
+          "source": "packages/core/analytics/exception-dedupe.ts:40",
+          "evidence": "Full module performs fingerprint hashing, JSON and sessionStorage get/set only (:66/:83/:186). Keeps first three per fingerprint; caps 50 distinct; storage failures fail open. Stack filenames are text, never fetched."
+        }
+      ]
+    },
+    {
+      "path": "apps/web/features/landing/utils/github-release.ts",
+      "executable_source_review": "reviewed in full",
+      "calls": [
+        "apps/web/features/landing/utils/github-release.ts:84"
+      ],
+      "local_paths": [
+        {
+          "source": "apps/web/features/landing/utils/github-release.ts:130",
+          "evidence": "Release/asset selection and empty fallback are local; imported apps/web/features/landing/utils/parse-release-assets.ts:98 maps asset names to returned browser_download_url strings without transport or origin validation."
+        }
+      ]
+    },
+    {
+      "path": "packages/views/runtimes/components/update-section.tsx",
+      "executable_source_review": "reviewed in full",
+      "calls": [
+        "packages/views/runtimes/components/update-section.tsx:27",
+        "packages/views/runtimes/components/update-section.tsx:169",
+        "packages/views/runtimes/components/update-section.tsx:173"
+      ],
+      "local_paths": [
+        {
+          "source": "packages/views/runtimes/components/update-section.tsx:50",
+          "evidence": "Version parsing/comparison, React state, timers and display are local. No binary download is performed by this component."
+        }
+      ]
+    },
+    {
+      "path": "apps/web/proxy.ts",
+      "executable_source_review": "reviewed in full",
+      "calls": [
+        "apps/web/proxy.ts:97"
+      ],
+      "local_paths": [
+        {
+          "source": "apps/web/proxy.ts:54",
+          "evidence": "Locale rewrites use cloned incoming URL; redirects :116/:146 use same origin and cookie-derived pathname. nextWithLocale :41 forwards headers locally. These are navigation/routing decisions, not HTTP fetch calls."
+        }
+      ]
+    }
+  ],
+  "scope_decisions": [
+    "Literal release requests target the configured source constants, outside Python route inventory. PostHog SDK destinations are configurable and may be same-origin; their unresolved methods/paths remain in this ledger, not globally excluded by host assumption.",
+    "Runtime update requests remain backend API calls even though target_version originates in external release metadata. Existing IDs remain pending reconciliation; this audit does not implement or validate operations.",
+    "Forwarding rules do not create wildcard endpoint claims; docs forwarding is a separately configured service."
+  ],
+  "unresolved_exceptions": [
+    {
+      "id": "E1",
+      "reason": "PostHog config.host and SDK-owned methods, endpoint paths, auxiliary assets and runtime delivery are not enumerated by these sources; configured host may be same-origin or external."
+    },
+    {
+      "id": "E2",
+      "reason": "Injected ApiClient baseUrl, runtime/update IDs, environment backend/docs bases and incoming paths/query remain dynamic. No environment values or live destinations were inspected."
+    },
+    {
+      "id": "E3",
+      "reason": "Release response html_url and browser_download_url values are unvalidated dynamic strings; no resource request for them occurs in the audited fetcher. Consumers and redirect chains outside scope are not claimed covered."
+    }
+  ]
+}

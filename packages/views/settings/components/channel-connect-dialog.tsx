@@ -108,7 +108,7 @@ function ChannelConnectSteps({
   };
   const openGuide = () =>
     openExternal(
-      `https://workpal.invalid/docs${docsLocalePrefix(i18n.language)}/${channel}-bot-integration`,
+      `http://127.0.0.1:4000/docs${docsLocalePrefix(i18n.language)}/${channel}-bot-integration`,
     );
   const scanWecom =
     channel === "wecom" &&

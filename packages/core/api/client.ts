@@ -593,7 +593,7 @@ import {
 /** Identifies the calling client to the server.
  *  Sent on every HTTP request as X-Client-Platform / X-Client-Version /
  *  X-Client-OS so the backend can log, gate, or split metrics by client.
- *  See server/internal/middleware/client.go for the receiving end. */
+ *  See server/go/internal/middleware/client.go for the receiving end. */
 export interface ApiClientIdentity {
   /** Logical client kind. Server expects: "web" | "desktop" | "cli" | "daemon". */
   platform?: string;
@@ -866,7 +866,7 @@ function dingTalkGroupSearch(params: ListDingTalkGroupsParams): string {
 }
 
 // The server's exact wording for a rejected CSRF token
-// (server/internal/middleware/auth.go). Matched rather than inferred from the
+// (server/go/internal/middleware/auth.go). Matched rather than inferred from the
 // status, because 403 also covers real authorization failures that must not
 // be retried.
 const CSRF_REJECTED_ERROR = "CSRF validation failed";

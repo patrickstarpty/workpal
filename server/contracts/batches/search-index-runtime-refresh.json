@@ -1,0 +1,257 @@
+{
+  "status": "bounded current-source review complete; root review pending",
+  "files": [
+    {
+      "path": "packages/core/search-index/client.ts",
+      "sha256": "a132891a806e86cb621174ee5b7673622a3ff1030c3faf45ab4ddfda3971fa3b",
+      "whole_source": true,
+      "line_count": 317,
+      "reviewed_ranges": [
+        [
+          1,
+          100
+        ],
+        [
+          101,
+          200
+        ],
+        [
+          201,
+          300
+        ],
+        [
+          301,
+          317
+        ]
+      ],
+      "old_disposition": "attach starts channel and best-effort storage.persist; same target/slug is no-op. detach/poke/search/ping/close/pageshow are local messages. SharedWorker constructor failure falls through to dedicated Worker; unavailable platform/constructor failure yields null and failed flag. hello gates usability. Worker error resolves outstanding searches null. Search requires target/channel/serving, times out at 1500ms, null stops serving. runFetch dispatches only manifest/snapshot/changes to API then posts success or status-bearing failure. forget clears matching target/serving, posts forget only on usable channel, independently enumerates/deletes matching workspace databases swallowing rejection. It does not start a worker or await worker acknowledgment. wipe waits acknowledgment or 5s then deletes locally; prune posts or locally deletes excluding shown target.",
+      "comparison": "Confirmed file-local semantics against current complete body; imported implementations remain proof interfaces. Clarification: timeout resolves null without clearing serving; a null worker response clears serving. getApi() executes before runFetch try, so provider acquisition exceptions are not converted to fetch-result errors."
+    },
+    {
+      "path": "packages/core/search-index/host.ts",
+      "sha256": "1247835ab771a916e1fd212a291874422aba3a7d0bdfd78fc0887699dcc79697",
+      "whole_source": true,
+      "line_count": 329,
+      "reviewed_ranges": [
+        [
+          1,
+          100
+        ],
+        [
+          101,
+          200
+        ],
+        [
+          201,
+          300
+        ],
+        [
+          301,
+          329
+        ]
+      ],
+      "old_disposition": "connect sends hello. Message dispatch handles attach/detach/poke/ping/search/fetch-result/wipe/forget/prune/close locally. attach creates WorkspaceIndex with onChange -> broadcastServing (local port callbacks), updates slug and syncs. Last detach releases after 60s. forget destroys all matching workspace entries across users, clears release timers, nulls attached port targets, broadcasts serving:false, disposes(true) swallowing failure, then deletes matching databases swallowing failure. No HTTP delete. prune retains attached copies; wipe acknowledges after destruction. Search errors return null. fetcherFor delegates three ops to most recently active attached tab; PortGoneError/disconnect/60s timeout tries next candidate, other errors propagate. Silent ports swept after 10min; later messages restore suspended attachment. Pending requests are not explicitly cancelled by forget; disposal guards later sync iterations.",
+      "comparison": "Confirmed file-local semantics against current complete body; imported implementations remain proof interfaces."
+    },
+    {
+      "path": "packages/core/search-index/hooks.ts",
+      "sha256": "dbe0ee29db23e4e343e28b21a9d5f2928a89c9ff5e24741d3ffe3c7c47a1ed3f",
+      "whole_source": true,
+      "line_count": 70,
+      "reviewed_ranges": [
+        [
+          1,
+          70
+        ]
+      ],
+      "old_disposition": "Truthy user/workspace/slug attaches, cleanup detaches. workspaceListOptions enabled iff userId -> listWorkspaces; available list prunes. WS on listed issue/comment/project events and reconnect only pokes; visibility visible pokes. Registers/unregisters listeners; does not open/send websocket. Observer-triggered sync coalesces and uses same bounded call union.",
+      "comparison": "Confirmed file-local semantics against current complete body; imported implementations remain proof interfaces."
+    },
+    {
+      "path": "packages/core/search-index/instance.ts",
+      "sha256": "1c77f39d03a439f438b085e68da08e02e4ec4c0ee9d348f7d1b84174eec41f76",
+      "whole_source": true,
+      "line_count": 43,
+      "reviewed_ranges": [
+        [
+          1,
+          43
+        ]
+      ],
+      "old_disposition": "Singleton injects bound api proxy and worker factory. forgetLocalSearchIndex -> client.forget; wipe -> client.wipe. searchIssues/searchProjects await local result then nullish server fallback; local rejection is not caught here. Readiness is local.",
+      "comparison": "Confirmed file-local semantics against current complete body; imported implementations remain proof interfaces."
+    },
+    {
+      "path": "packages/core/search-index/index.ts",
+      "sha256": "fc1491b72c5715ab8ac7fe595951a8c070a2deba9848327907eb5f3acd5bd5cd",
+      "whole_source": true,
+      "line_count": 9,
+      "reviewed_ranges": [
+        [
+          1,
+          9
+        ]
+      ],
+      "old_disposition": "Reexports only; no independent transport.",
+      "comparison": "Confirmed file-local semantics against current complete body; imported implementations remain proof interfaces."
+    },
+    {
+      "path": "packages/core/search-index/protocol.ts",
+      "sha256": "afb4d520260ce4f0de2aaf1b86fe7eb5dcb7c477764674d83d4f686b2b383352",
+      "whole_source": true,
+      "line_count": 46,
+      "reviewed_ranges": [
+        [
+          1,
+          46
+        ]
+      ],
+      "old_disposition": "Types for local port messages, three FetchOps and user:workspace key only. post is WorkerChannel.post/postMessage, never an HTTP POST.",
+      "comparison": "Confirmed file-local semantics against current complete body; imported implementations remain proof interfaces."
+    }
+  ],
+  "edges": [
+    {
+      "source": "packages/core/search-index/instance.ts:21",
+      "kind": "client API dispatch or nullish search fallback",
+      "method": "searchIssues",
+      "inventory": [
+        {
+          "id": "client:1448",
+          "method": "GET",
+          "path_expression": "/api/issues/search?${search}",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/search"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/search-index/instance.ts:27",
+      "kind": "client API dispatch or nullish search fallback",
+      "method": "searchProjects",
+      "inventory": [
+        {
+          "id": "client:1463",
+          "method": "GET",
+          "path_expression": "/api/projects/search?${search}",
+          "route": {
+            "method": "GET",
+            "path": "/api/projects/search"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/search-index/client.ts:236",
+      "kind": "client API dispatch or nullish search fallback",
+      "method": "getSearchIndexManifest",
+      "inventory": [
+        {
+          "id": "client:1477",
+          "method": "GET",
+          "path_expression": "/api/search-index/manifest",
+          "route": {
+            "method": "GET",
+            "path": "/api/search-index/manifest"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/search-index/client.ts:239",
+      "kind": "client API dispatch or nullish search fallback",
+      "method": "getSearchIndexSnapshot",
+      "inventory": [
+        {
+          "id": "client:1492",
+          "method": "GET",
+          "path_expression": "/api/search-index/snapshot?${search}",
+          "route": {
+            "method": "GET",
+            "path": "/api/search-index/snapshot"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/search-index/client.ts:242",
+      "kind": "client API dispatch or nullish search fallback",
+      "method": "getSearchIndexChanges",
+      "inventory": [
+        {
+          "id": "client:1505",
+          "method": "POST",
+          "path_expression": "/api/search-index/changes",
+          "route": {
+            "method": "POST",
+            "path": "/api/search-index/changes"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/search-index/hooks.ts:45",
+      "kind": "query proof interface",
+      "method": "listWorkspaces",
+      "inventory": [
+        {
+          "id": "client:3391",
+          "method": "GET",
+          "path_expression": "/api/workspaces",
+          "route": {
+            "method": "GET",
+            "path": "/api/workspaces"
+          }
+        }
+      ]
+    }
+  ],
+  "counts": {
+    "whole_source_files": 6,
+    "whole_source_lines": 814,
+    "read_chunks": 12,
+    "edges": 6,
+    "inventory_tuples": 6
+  },
+  "unread_whole_source_ranges": [],
+  "historical_identity": "Old semantic audit has no source hashes. These are NEW reviewed hashes; historical source identity is unknown.",
+  "interfaces": [
+    {
+      "path": "server/contracts/batches/search-index-transport-coverage.json",
+      "sha256": "3cc073de3779f8c6f59427ea5878b42370bee06bbbb693d9616091e02adf342d",
+      "whole_source": false
+    },
+    {
+      "path": "server/contracts/batches/api-client-execution-closure.json",
+      "sha256": "550a585c2351e0b2e8066bb11dd6690f17dff41641d78071e0f6479cdf3991e9",
+      "whole_source": false
+    },
+    {
+      "path": "server/contracts/batches/active-web-auth-transport.json",
+      "sha256": "7715490bcdc6b9db985bdb75d055e4608e8b4290a94b5b687713d09c9bd04c24",
+      "whole_source": false
+    },
+    {
+      "path": "server/contracts/batches/identity-workspace-transport-coverage.json",
+      "sha256": "42b2ae40aae052cb197b79b0947d3e0681d5f5c334bc19fc57c7016d58466f7e",
+      "whole_source": false
+    }
+  ],
+  "boundaries": [
+    "WorkerChannel/PortLike post and postMessage are local worker messages, not HTTP POST. Only client runFetch dispatches manifest/snapshot/changes through injected API; instance nullish fallback invokes server search.",
+    "IndexedDB deletion, persistent storage, Worker/SharedWorker and browser lifecycle are explicit native/storage interfaces; store/sync/engine/worker descendants were not recursively reviewed.",
+    "React/useQuery and WSClient listener lifecycle are imported interfaces. workspaceListOptions reuses listWorkspaces proof; hooks subscribes/pokes without opening or sending a websocket.",
+    "Workspace pending-deletion markers, query-cache cancellation/removal and session/current-workspace effects belong to inherited workspace/active-web proofs, not additional API routes or newly reviewed whole sources. forget/wipe/prune here clear local target/serving and delegate local memory/storage deletion.",
+    "API execution/auth/base URL/observers reuse current API and active-web proofs; no arbitrary injected-provider or global observer completion claim."
+  ],
+  "validation": "JSON parsed; six file hashes and contiguous <=100-line complete read ranges verified; six inventory tuples matched exactly by id/method/path_expression/route. No runtime/tests/network/model execution.",
+  "root_review": {
+    "status": "accepted bounded current-source refresh",
+    "validation": "Recomputed all 6 source hashes and checked 6 exact inventory tuples.",
+    "review_scope": "Reviewed artifact dispositions and source excerpts for mutation settlement, worker dispatch, memory destruction and in-flight disposal. Full-body reads are attributed to implementer; root did not repeat every source line.",
+    "limitations": "No runtime verification, historical identity, whole-application coverage or backend implementation claim."
+  },
+  "global_backend_completion": false
+}

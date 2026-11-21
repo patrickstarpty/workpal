@@ -432,7 +432,7 @@ curl -s localhost:8080/readyz
 
 只要不是 HTTP 200 且两项都是 `ok`，就说明新版本没把 migration 跑完，先去看 backend 日志，别急着放流量进来。
 
-`/health` 是 **liveness** 探针，只要进程还活着就返回 `{"status":"ok"}`，migration 失败了它照样是 ok。`/readyz`（`server/cmd/server/router.go` 中注册的 `readyHandler`，`/healthz` 是它的别名）会检查数据库和已应用的 migration 集合，升级出问题能被它拦下来。
+`/health` 是 **liveness** 探针，只要进程还活着就返回 `{"status":"ok"}`，migration 失败了它照样是 ok。`/readyz`（`server/go/cmd/server/router.go` 中注册的 `readyHandler`，`/healthz` 是它的别名）会检查数据库和已应用的 migration 集合，升级出问题能被它拦下来。
 
 </Step>
 </Steps>

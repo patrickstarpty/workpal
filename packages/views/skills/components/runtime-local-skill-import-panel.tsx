@@ -107,9 +107,9 @@ const INITIAL_BULK_STATE: BulkImportState = {
  * Max concurrent imports. Higher = faster but more daemon/network pressure.
  *
  * Timeout invariant: IMPORT_CONCURRENCY × heartbeat period (~15s) must stay
- * within runtimeLocalSkillPendingTimeout (server/internal/handler/runtime_local_skills.go)
+ * within runtimeLocalSkillPendingTimeout (server/go/internal/handler/runtime_local_skills.go)
  * and IMPORT_POLL_TIMEOUT_MS (packages/core/runtimes/local-skills.ts).
- * See also maxLocalSkillImportBatch in server/internal/handler/daemon.go.
+ * See also maxLocalSkillImportBatch in server/go/internal/handler/daemon.go.
  */
 const IMPORT_CONCURRENCY = 10;
 

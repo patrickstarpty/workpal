@@ -1,0 +1,365 @@
+{
+  "version": 1,
+  "coverage": {
+    "complete": false,
+    "scope": "web-shell-and-proxies excluding apps/web/features/landing/i18n",
+    "finite_file_dispositions_complete": true,
+    "backend_support_claim": false
+  },
+  "entry_evidence": [
+    "apps/web/package.json dev/build use Vite; dev:next/build:next retain Next",
+    "apps/web/index.html loads /app/main.tsx; main mounts CoreProvider/PythonSession/LocalPage; python-session imports VerificationLogin",
+    "apps/web/app/layout.tsx imports and mounts WebProviders and conditional GoogleAnalytics for retained Next"
+  ],
+  "reused_proof": [
+    "transport-source-ledger.json",
+    "transport-source-ledger.md",
+    "external-transport-coverage.json",
+    "active-web-auth-transport.json",
+    ".superpowers/sdd/2026-11-21-python-go-backend/task1-direct-transports.md"
+  ],
+  "static_union_policy": "Reuse active-web-auth-transport conservative possible API/query union; no runtime observer enumeration required. Entry distinction is not global unreachable proof.",
+  "files": [
+    {
+      "path": "apps/web/app/(auth)/login/page.tsx",
+      "status": "full-source-static-disposition",
+      "reviewed_lines": [
+        1,
+        261
+      ],
+      "sha256": "4527500e355f5c25217b933df20e26b0392c3527f165f5eea6bf4378abdbd398",
+      "anchor": {
+        "line": 1,
+        "text": "\"use client\";"
+      },
+      "semantic_disposition": "Retained Next login entry: invitation check only before onboarding; authenticated arrival ensures workspace query unless next/CLI/desktop branch; desktop branch issues CLI token then workpal:// callback (including retry button). LoginPage delegates send/verify, getMe, workspace list and CLI authorization; Google client ID gates OAuth browser navigation. Sanitized next and router navigation are pages, not API endpoints. Cache/cookie/state work is local.",
+      "existing_calls": [
+        {
+          "id": "client:1147",
+          "route": {
+            "method": "POST",
+            "path": "/auth/send-code"
+          },
+          "status": "route-mapped"
+        },
+        {
+          "id": "client:1154",
+          "route": {
+            "method": "POST",
+            "path": "/auth/verify-code"
+          },
+          "status": "route-mapped"
+        },
+        {
+          "id": "client:1197",
+          "route": {
+            "method": "GET",
+            "path": "/api/me"
+          },
+          "status": "route-mapped"
+        },
+        {
+          "id": "client:1267",
+          "route": {
+            "method": "PATCH",
+            "path": "/api/me"
+          },
+          "status": "route-mapped"
+        },
+        {
+          "id": "client:3391",
+          "route": {
+            "method": "GET",
+            "path": "/api/workspaces"
+          },
+          "status": "route-mapped"
+        },
+        {
+          "id": "client:3409",
+          "route": {
+            "method": "POST",
+            "path": "/api/workspaces"
+          },
+          "status": "route-mapped"
+        },
+        {
+          "id": "client:1172",
+          "route": {
+            "method": "POST",
+            "path": "/api/cli-token"
+          },
+          "status": "route-mapped"
+        },
+        {
+          "id": "client:3806",
+          "route": {
+            "method": "GET",
+            "path": "/api/invitations"
+          },
+          "status": "route-mapped"
+        }
+      ],
+      "open_edges": [
+        "CLI validated loopback callback and workpal:// handoff are browser/native delivery, not backend support; external OAuth navigation is not a Python route."
+      ],
+      "missing_decision": "No new fixed backend route inferred; existing inventory decisions retained. External/native/browser resources excluded from backend support."
+    },
+    {
+      "path": "apps/web/app/(landing)/download/page.tsx",
+      "status": "full-source-static-disposition",
+      "reviewed_lines": [
+        1,
+        23
+      ],
+      "sha256": "b9674d6318c9ad52b1fddf644a75f39c1e566e8c50fcf302a2bb13ea188002fd",
+      "anchor": {
+        "line": 1,
+        "text": "import type { Metadata } from \"next\";"
+      },
+      "semantic_disposition": "Retained Next server page: metadata helper plus parallel release helper, request-platform and searchParams; validates started key, passes release/platform to DownloadClient. Release helper GETs literal https://code-host.invalid/api/workpal/releases?per_page=5 with optional server GITHUB_TOKEN, 300s cache and 3s abort; filters draft/prerelease, picks complete or first stable, returns empty on error. Asset URLs are values passed to browser UI, not additional HTTP API calls here.",
+      "existing_calls": [],
+      "open_edges": [
+        "DownloadClient/browser asset destinations depend on release payload; no invented backend download route. Metadata/platform helper transitive coverage not closed by this file."
+      ],
+      "missing_decision": "No new fixed backend route inferred; existing inventory decisions retained. External/native/browser resources excluded from backend support."
+    },
+    {
+      "path": "apps/web/app/api/upload-file/route.ts",
+      "status": "full-source-static-disposition",
+      "reviewed_lines": [
+        1,
+        11
+      ],
+      "sha256": "4e7f8257a68d8fbcc17c2ad776292d98f9a104a8d2f5c333e1ae7d7da577e39d",
+      "anchor": {
+        "line": 1,
+        "text": "import { proxyUpload } from \"@/platform/upload-proxy\";"
+      },
+      "semantic_disposition": "Retained Next nodejs handler exports POST and OPTIONS only; both return proxyUpload(request), no parsing or second request.",
+      "existing_calls": [
+        {
+          "id": "upload-proxy:66:POST",
+          "route": {
+            "method": "POST",
+            "path": "/api/upload-file"
+          },
+          "status": "route-mapped"
+        },
+        {
+          "id": "upload-proxy:66:OPTIONS",
+          "route": {
+            "method": "OPTIONS",
+            "path": "/api/upload-file"
+          },
+          "status": "scope-decision",
+          "decision": {
+            "reason": "Transport handled by global CORS policy rather than a separately registered upload handler. Router installs cors.Handler with OPTIONS allowed. No claim of missing backend support based only on absent explicit route; forwarded preflight origin/header behavior and Python parity remain unverified.",
+            "sources": [
+              "apps/web/app/api/upload-file/route.ts:9",
+              "apps/web/platform/upload-proxy.ts:66",
+              "server/go/cmd/server/router.go:1545"
+            ]
+          }
+        }
+      ],
+      "open_edges": [
+        "OPTIONS is existing scope-decision under global CORS, not missing route support."
+      ],
+      "missing_decision": "No new fixed backend route inferred; existing inventory decisions retained. External/native/browser resources excluded from backend support."
+    },
+    {
+      "path": "apps/web/app/verification-login.tsx",
+      "status": "full-source-static-disposition",
+      "reviewed_lines": [
+        1,
+        9
+      ],
+      "sha256": "629f888321a0876c7da00fcb6b9ef8401ac15bcad752facd738fbcc42b1b474c",
+      "anchor": {
+        "line": 1,
+        "text": "import {LoginEntry} from './login-entry';"
+      },
+      "semantic_disposition": "Active Vite unauthenticated entry via python-session: config effect GET credentials include, development_auth strictly true seeds defaults; cancellation suppresses state updates but does not abort request; retry re-runs config. Form prevents default and delegates verifyCode; local error/busy state; no browser form endpoint.",
+      "existing_calls": [
+        {
+          "id": "client:1154",
+          "route": {
+            "method": "POST",
+            "path": "/auth/verify-code"
+          },
+          "status": "route-mapped"
+        },
+        {
+          "id": "client:3351",
+          "route": {
+            "method": "GET",
+            "path": "/api/config"
+          },
+          "status": "route-mapped"
+        },
+        {
+          "id": "verification-login:7",
+          "route": {
+            "method": "GET",
+            "path": "/api/config"
+          },
+          "status": "route-mapped"
+        }
+      ],
+      "open_edges": [],
+      "missing_decision": "No new fixed backend route inferred; existing inventory decisions retained. External/native/browser resources excluded from backend support."
+    },
+    {
+      "path": "apps/web/components/web-providers.tsx",
+      "status": "full-source-static-disposition",
+      "reviewed_lines": [
+        1,
+        113
+      ],
+      "sha256": "45c7fe326029a9063f5a57dced7743027e11c8d114ce5ff3aa776ad47b579b2a",
+      "anchor": {
+        "line": 1,
+        "text": "\"use client\";"
+      },
+      "semantic_disposition": "Retained Next layout provider: legacy localStorage token selects bearer versus cookie mode; passes optional apiBaseUrl and explicit wsUrl or same-origin ws/wss /ws to CoreProvider. Identity/version, cookie locale adapter and login/logout cookies configure shared client. CoreProvider creates ApiClient singleton, auth initialization, WSProvider, usage reporter and conditional token renewal; locale sync may call API. Development-only dynamic toolbar is conditional on devToolbarApiUrl. No direct fetch or native invocation in this file.",
+      "existing_calls": [],
+      "open_edges": [
+        "Conservative shared CoreProvider/query union reused from active-web-auth-transport; dev toolbar transitive sources remain outside this ten-file closure. Native preload presence elsewhere does not establish native backend support."
+      ],
+      "missing_decision": "No new fixed backend route inferred; existing inventory decisions retained. External/native/browser resources excluded from backend support."
+    },
+    {
+      "path": "apps/web/config/google-analytics.ts",
+      "status": "full-source-static-disposition",
+      "reviewed_lines": [
+        1,
+        162
+      ],
+      "sha256": "d9b50c658c37cf42443981e1a3cc366a22c200727251cd65788b94a04fc1c00e",
+      "anchor": {
+        "line": 1,
+        "text": "import { RESERVED_SLUGS } from \"@workpal/core/paths\";"
+      },
+      "semantic_disposition": "Pure config and URL transformations: validates opt-in GA ID, allowlists campaign query keys, redacts invite capability path, drops hash, rejects non-HTTP URLs, classifies sensitivity and emits fixed route titles. No request here. Next layout conditionally mounts GoogleAnalytics; installer queues gtag and creates external googletagmanager script, defers sensitive initial URL and permanently disables after sensitive post-load navigation/link/form interaction. Link/form observation does not issue their endpoint requests.",
+      "existing_calls": [],
+      "open_edges": [
+        "Google SDK collection destinations remain external SDK-owned; no backend route or existing call ID is invented."
+      ],
+      "missing_decision": "No new fixed backend route inferred; existing inventory decisions retained. External/native/browser resources excluded from backend support."
+    },
+    {
+      "path": "apps/web/features/landing/components/contact-sales-page-client.tsx",
+      "status": "full-source-static-disposition",
+      "reviewed_lines": [
+        1,
+        595
+      ],
+      "sha256": "7196311b46b5433c2ef148e2f9e0fd91b03f407fe0ab594bb79a299be37af3bb",
+      "anchor": {
+        "line": 1,
+        "text": "\"use client\";"
+      },
+      "semantic_disposition": "Retained landing form: input/select/consent components update local state; preventDefault, busy/free-email guards then POST /api/contact-sales JSON with snake_case fields and default same-origin credentials; success resets state and scrolls; handles 429, error JSON and exceptions. Home Link is navigation; form has no action transport.",
+      "existing_calls": [
+        {
+          "id": "contact-sales:105",
+          "route": {
+            "method": "POST",
+            "path": "/api/contact-sales"
+          },
+          "status": "route-mapped"
+        }
+      ],
+      "open_edges": [
+        "SiteHeader/Footer transitive browser resources are outside this source closure."
+      ],
+      "missing_decision": "No new fixed backend route inferred; existing inventory decisions retained. External/native/browser resources excluded from backend support."
+    },
+    {
+      "path": "apps/web/features/landing/utils/parse-release-assets.ts",
+      "status": "full-source-static-disposition",
+      "reviewed_lines": [
+        1,
+        138
+      ],
+      "sha256": "392b68b27deb69cbf698ec736be851a334865615048ac83894ba6d3bb1179426",
+      "anchor": {
+        "line": 1,
+        "text": "/**"
+      },
+      "semantic_disposition": "Pure full module: maps artifact filenames to twelve desktop keys, normalizes Linux aliases, skips auxiliary/CLI files, copies browser_download_url without fetching/validating it; sizes and any/complete checks are local. Returned URLs may later become browser downloads; neither route identity nor trusted origin follows from filename.",
+      "existing_calls": [],
+      "open_edges": [
+        "Payload-selected browser resource destinations are intentionally dynamic, not unresolved HTTP API routes."
+      ],
+      "missing_decision": "No new fixed backend route inferred; existing inventory decisions retained. External/native/browser resources excluded from backend support."
+    },
+    {
+      "path": "apps/web/features/landing/utils/use-github-stars.ts",
+      "status": "full-source-static-disposition",
+      "reviewed_lines": [
+        1,
+        51
+      ],
+      "sha256": "93f4a7b78ffb6be17499523b9e117a3266058a2e97237e399414b75db5dc5db5",
+      "anchor": {
+        "line": 1,
+        "text": "\"use client\";"
+      },
+      "semantic_disposition": "Full hook: module cache/inFlight coalesces helper call, caches number/null, clears promise, effect active flag protects state; reexports formatStarCount. Current packages/core/github/stars.ts fetchGithubStars returns null immediately; comments about live GitHub fetch do not describe current execution. No HTTP/native transport.",
+      "existing_calls": [],
+      "open_edges": [],
+      "missing_decision": "No new fixed backend route inferred; existing inventory decisions retained. External/native/browser resources excluded from backend support."
+    },
+    {
+      "path": "apps/web/platform/upload-proxy.ts",
+      "status": "full-source-static-disposition",
+      "reviewed_lines": [
+        1,
+        84
+      ],
+      "sha256": "aaf5c8cea99331b1be08d36ccc5f3c34bc96de715fedd43cf7ec4873e028a7f8",
+      "anchor": {
+        "line": 1,
+        "text": "import {"
+      },
+      "semantic_disposition": "Full forwarding implementation: default fetchImpl=fetch is injectable; development resolver versus production resolver chooses configured HTTP API base, strips /api suffix in resolver; absent origin returns 503. Appends /api/upload-file to base path, preserves incoming search, forwards method/body/signal, manual redirect and duplex half. Preserves auth/cookie/CSRF except named connection/hop headers; strips length/expect, sets forwarded host/identity encoding. Streams response with status/headers; strips encoding/length; abort rethrows, other failures 502. No native branch or signed URL follow-up.",
+      "existing_calls": [
+        {
+          "id": "upload-proxy:66:POST",
+          "route": {
+            "method": "POST",
+            "path": "/api/upload-file"
+          },
+          "status": "route-mapped"
+        },
+        {
+          "id": "upload-proxy:66:OPTIONS",
+          "route": {
+            "method": "OPTIONS",
+            "path": "/api/upload-file"
+          },
+          "status": "scope-decision",
+          "decision": {
+            "reason": "Transport handled by global CORS policy rather than a separately registered upload handler. Router installs cors.Handler with OPTIONS allowed. No claim of missing backend support based only on absent explicit route; forwarded preflight origin/header behavior and Python parity remain unverified.",
+            "sources": [
+              "apps/web/app/api/upload-file/route.ts:9",
+              "apps/web/platform/upload-proxy.ts:66",
+              "server/go/cmd/server/router.go:1545"
+            ]
+          }
+        }
+      ],
+      "open_edges": [
+        "Injected fetch can implement arbitrary behavior; static default plus declared injection contract is sufficient, not runtime enumeration. Forwarded preflight semantics/Python parity remain unverified; existing OPTIONS middleware decision retained."
+      ],
+      "missing_decision": "No new fixed backend route inferred; existing inventory decisions retained. External/native/browser resources excluded from backend support."
+    }
+  ],
+  "limitations": [
+    "Ten full files only; imported subtrees are not all closed.",
+    "No network/browser/model/runtime/backend support validation.",
+    "Shared ledger/inventory unchanged; i18n belongs to another owner."
+  ],
+  "parent_review": "Added omitted existing CLI token and invitation query IDs. Eight file dispositions accepted. Download page and WebProviders remain pending transitive helper/dev-toolbar closure; external destinations and fetch injection are explicit boundary contracts, not invented backend routes."
+}

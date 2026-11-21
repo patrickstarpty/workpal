@@ -3,7 +3,7 @@
  *
  * The same (key, identifier) pair MUST always produce the same bucket;
  * otherwise users would flip in and out of experiments across requests. The
- * algorithm matches the Go-side server/pkg/featureflag/hash.go byte-for-byte
+ * algorithm matches the Go-side server/go/pkg/featureflag/hash.go byte-for-byte
  * so a flag evaluated on the frontend and on the backend lands in the same
  * bucket for the same user. Cross-language equality is exercised by golden
  * tests on both sides; see hash.test.ts and hash_test.go.
@@ -58,7 +58,7 @@ function fnv1a(parts: ReadonlyArray<string>): number {
 /**
  * bucketFor returns a deterministic bucket in [0, 100) for the supplied
  * (key, identifier) pair. Identical to the Go bucketFor in
- * server/pkg/featureflag/hash.go.
+ * server/go/pkg/featureflag/hash.go.
  */
 export function bucketFor(key: string, identifier: string): number {
   return fnv1a([key, identifier]) % 100;

@@ -1,0 +1,23 @@
+# ApiClient shared execution proof
+
+Static review only; root review pending. This closes the shared execution layer, not client.ts or backend support. Source hash, exact inclusive reviewed ranges, AST declarations, and separate inventory/audit snapshot hashes are in the companion JSON. All source reads used chunks of at most 100 lines.
+
+**setup**. Constructor preserves base URL verbatim; no normalization or validation. Shared getToken callback wins even when null; undefined falls back to instance token. setToken only updates instance. No storage writes or automatic renewal here.
+
+**headers**. Request ID then authHeaders then extraHeaders then init.headers object spread; last wins. Headers instances/tuple arrays are not normalized. credentials include forced after init. Auth adds truthy bearer, ambient workspace slug, CSRF and identity platform/version/os. Cookies split on semicolon-space, raw values without decode. Prefer session CSRF unless same rejected value; fall back token-bound then session. workspaceHeader object suppresses slug and supplies workspace ID.
+
+**retry**. Only one replay for 403 with cloned JSON error exactly CSRF validation failed and replayable undefined/null/string/FormData/URLSearchParams body. Streams/Blob/ArrayBuffer excluded. Same rid, rebuilt headers, same signal/body; no network/401/429/5xx retries. Credential captured before first send, even if retry uses newer token. refreshSession is explicit POST and fallback parser; no token installation.
+
+**cancellation**. RequestInit signal forwarded. Abort rejection reported observer status null/error aborted then rethrown. No owned controller or logout cancellation. Upload forwards signal; plugin publish and text preview expose none. Blob download forwards signal.
+
+**parsing**. Non-ok parses JSON once; nonempty string error or status fallback, raw body on ApiError. 404 warn, others error. 401 clears instance token and invokes onUnauthorized only if current token equals captured token; shared storage and workspace remain untouched. Success observer ends before JSON/text/blob decode, so decode failures can follow success event. JSON path sets content-type even GET, 204 returns undefined otherwise json without validation.
+
+**callbacks**. Observer refuse before logging/start/send; truthy refusal throws Error. onStart receives string body otherwise null. onEnd receives terminal HTTP outcome or transport error. Observer/logger/token-reader/unauthorized callbacks unguarded; exceptions can interrupt completion. Logs contain paths and server errors; observer can receive submitted text. No credentials printed by audit.
+
+**bypasses**. publishPluginPackage and uploadFile own direct global fetch, multipart browser boundary, authHeaders and include cookies, captured credential 401 handling, plain Error via parseErrorMessage and schema fallback success. Neither request observer nor CSRF replay nor X-Request-ID header. Upload generates log-only rid and logs HTTP outcomes; network rejection lacks end log. Publish has no transport logs. Attachment text/blob use fetchRaw; text maps 413/415 to typed errors and reads original type header. No separate streaming execution in reviewed shared declarations; remaining wrappers are not inferred closed.
+
+**module_helpers**. ApiError and code/reason/client-message classifiers are pure. Feature guards read configStore and throw before writes. Property snapshot assertion can throw after successful create. remapSkillImportError preserves status/body; skillFromImportResult validates fallback and throws missing result. subscriberTarget/workspaceHeader/dingTalkGroupSearch build values only. No helper here installs skills.
+
+**dependencies**. utils request ID uses crypto.randomUUID then secure getRandomValues fallback (may throw); workspace-storage getCurrentSlug reads singleton; request-observer mutable module singleton is captured per request; schema parseWithFallback safeParse logs issues and received value via mutable schema logger and returns fallback. logger defaults noop. Imported configStore, schemas and fallback constants retain their own ownership; no transitive whole-source claim.
+
+The JSON enumerates 454 remaining AST method declarations (including overload declarations) with exact ranges. These are the finite semantic reconciliation queue outside this proof, not 454 newly discovered unsupported operations. Existing evidence links are navigation candidates only: reuse scoped audits and frontend-calls rather than rereading already proved wrappers. Mapping a route is not semantic coverage. No broad regex absence inference was used.

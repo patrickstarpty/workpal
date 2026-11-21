@@ -432,7 +432,7 @@ curl -s localhost:8080/readyz
 
 HTTP 200이면서 두 검사가 모두 `ok`가 아니라면 새 버전이 migration을 마치지 못한 것입니다. 트래픽을 보내기 전에 backend 로그를 확인하세요.
 
-`/health`는 **liveness** 프로브라서 프로세스가 살아 있기만 하면 `{"status":"ok"}`를 반환하며, migration이 실패했더라도 마찬가지입니다. `/readyz`(`server/cmd/server/router.go`에 등록된 `readyHandler`, `/healthz`는 별칭)는 데이터베이스와 적용된 migration 집합을 확인하므로, 잘못된 업그레이드를 잡아내는 것은 이쪽입니다.
+`/health`는 **liveness** 프로브라서 프로세스가 살아 있기만 하면 `{"status":"ok"}`를 반환하며, migration이 실패했더라도 마찬가지입니다. `/readyz`(`server/go/cmd/server/router.go`에 등록된 `readyHandler`, `/healthz`는 별칭)는 데이터베이스와 적용된 migration 집합을 확인하므로, 잘못된 업그레이드를 잡아내는 것은 이쪽입니다.
 
 </Step>
 </Steps>

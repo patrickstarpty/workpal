@@ -1,0 +1,2614 @@
+{
+  "version": 1,
+  "scope": "Active apps/web/app/main.tsx -> CoreProvider -> PythonSession and WSProvider only; static source audit, no global coverage claim",
+  "parent_ledger": "server/contracts/batches/identity-workspace-transport-coverage.json",
+  "auth_injection": {
+    "source": "apps/web/app/main.tsx:47",
+    "storage": "packages/core/platform/storage.ts:4 defaultStorage: localStorage only",
+    "onLogin": "omitted; undefined in createAuthStore and AuthInitializer",
+    "onLogout": "omitted; undefined",
+    "onSessionExpired": "omitted; undefined",
+    "cookieAuth": true,
+    "renewal": "CoreProvider token renewal branch is not created"
+  },
+  "workspace_chain": {
+    "source": "apps/web/app/python-session.tsx:23",
+    "effects": "cancel/remove queries locally, setCurrentWorkspace; slug change queues subscribers and registered rehydrators; cleanup clears identity",
+    "subscribers": [
+      "packages/core/realtime/provider.tsx:72",
+      "packages/core/realtime/provider.tsx:77"
+    ],
+    "ws": "user + slug required; disconnect old connection; cookie upgrade to same-origin /ws?workspace_slug=...; no token auth frame in this mode",
+    "rehydration_registrations": [
+      {
+        "path": "packages/core/chat/store.ts",
+        "line": 760
+      },
+      {
+        "path": "packages/core/navigation/store.ts",
+        "line": 49
+      },
+      {
+        "path": "packages/core/collections/view-store.ts",
+        "line": 213
+      },
+      {
+        "path": "packages/core/issues/stores/comment-draft-store.ts",
+        "line": 301
+      },
+      {
+        "path": "packages/core/issues/stores/issues-scope-store.ts",
+        "line": 58
+      },
+      {
+        "path": "packages/core/issues/stores/surface-view-store.ts",
+        "line": 180
+      },
+      {
+        "path": "packages/core/issues/stores/draft-store.ts",
+        "line": 382
+      },
+      {
+        "path": "packages/core/issues/stores/comment-collapse-store.ts",
+        "line": 65
+      },
+      {
+        "path": "packages/core/issues/stores/quick-create-store.ts",
+        "line": 60
+      },
+      {
+        "path": "packages/core/issues/stores/my-issues-view-store.ts",
+        "line": 71
+      },
+      {
+        "path": "packages/core/issues/stores/actor-issues-view-store.ts",
+        "line": 46
+      },
+      {
+        "path": "packages/core/issues/stores/sidebar-tree-store.ts",
+        "line": 212
+      },
+      {
+        "path": "packages/core/issues/stores/issue-create-settings-store.ts",
+        "line": 91
+      },
+      {
+        "path": "packages/core/issues/stores/view-store.ts",
+        "line": 1011
+      },
+      {
+        "path": "packages/core/issues/stores/view-store.ts",
+        "line": 1020
+      }
+    ],
+    "rehydration_disposition": "persist rehydrate reads workspace-namespaced localStorage; chat callback reads injected defaultStorage and sets memory; surface registry resets memory after hydration. No HTTP inside these registrations."
+  },
+  "transport_candidates": [
+    {
+      "call_id": "client:1154",
+      "route": {
+        "method": "POST",
+        "path": "/auth/verify-code"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:1154",
+        "apps/web/app/verification-login.tsx:8",
+        "packages/views/auth/login-page.tsx:206",
+        "packages/views/auth/login-page.tsx:218"
+      ],
+      "query_factory_evidence": []
+    },
+    {
+      "call_id": "client:1168",
+      "route": {
+        "method": "POST",
+        "path": "/auth/logout"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:1168"
+      ],
+      "query_factory_evidence": []
+    },
+    {
+      "call_id": "client:1197",
+      "route": {
+        "method": "GET",
+        "path": "/api/me"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:1197",
+        "packages/views/auth/login-page.tsx:138",
+        "packages/views/auth/login-page.tsx:151",
+        "packages/core/platform/auth-initializer.tsx:296"
+      ],
+      "query_factory_evidence": []
+    },
+    {
+      "call_id": "client:1402",
+      "route": {
+        "method": "POST",
+        "path": "/api/issues/table/groups"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:1402"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/issues/queries.ts",
+          "line": 317,
+          "method": "listIssueTableGroups"
+        }
+      ]
+    },
+    {
+      "call_id": "client:1416",
+      "route": {
+        "method": "POST",
+        "path": "/api/issues/table/rows"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:1416",
+        "packages/core/diagnostics/dev-recorder-realtime.test.tsx:211",
+        "packages/views/layout/panels/work-panel.test.tsx:784",
+        "packages/views/issues/surface/issue-surface.test.tsx:1022"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/issues/queries.ts",
+          "line": 352,
+          "method": "listIssueTableRows"
+        },
+        {
+          "path": "packages/core/issues/queries.ts",
+          "line": 479,
+          "method": "listIssueTableRows"
+        }
+      ]
+    },
+    {
+      "call_id": "client:1430",
+      "route": {
+        "method": "POST",
+        "path": "/api/issues/table/facets"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:1430"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/issues/queries.ts",
+          "line": 378,
+          "method": "listIssueTableFacets"
+        }
+      ]
+    },
+    {
+      "call_id": "client:1477",
+      "route": {
+        "method": "GET",
+        "path": "/api/search-index/manifest"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:1477"
+      ],
+      "query_factory_evidence": []
+    },
+    {
+      "call_id": "client:1492",
+      "route": {
+        "method": "GET",
+        "path": "/api/search-index/snapshot"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:1492"
+      ],
+      "query_factory_evidence": []
+    },
+    {
+      "call_id": "client:1505",
+      "route": {
+        "method": "POST",
+        "path": "/api/search-index/changes"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:1505"
+      ],
+      "query_factory_evidence": []
+    },
+    {
+      "call_id": "client:1612",
+      "route": {
+        "method": "GET",
+        "path": "/api/issues/{id}"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:1612"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/issues/queries.ts",
+          "line": 510,
+          "method": "getIssue"
+        },
+        {
+          "path": "packages/core/issues/queries.ts",
+          "line": 541,
+          "method": "getIssue"
+        },
+        {
+          "path": "packages/core/issues/queries.ts",
+          "line": 694,
+          "method": "getIssue"
+        }
+      ]
+    },
+    {
+      "call_id": "client:1680",
+      "route": {
+        "method": "GET",
+        "path": "/api/comments/{commentId}/sub-issue-preview"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:1680",
+        "packages/views/modals/create-issue-dialog.tsx:101",
+        "packages/core/issues/queries.ts:225"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/issues/queries.ts",
+          "line": 225,
+          "method": "getCommentSubIssuePreview"
+        }
+      ]
+    },
+    {
+      "call_id": "client:1785",
+      "route": {
+        "method": "GET",
+        "path": "/api/issues/{id}/duplicates"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:1785"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/issues/queries.ts",
+          "line": 574,
+          "method": "listIssueDuplicates"
+        }
+      ]
+    },
+    {
+      "call_id": "client:1795",
+      "route": {
+        "method": "GET",
+        "path": "/api/issues/{id}/children"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:1795"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/issues/queries.ts",
+          "line": 585,
+          "method": "listChildIssues"
+        }
+      ]
+    },
+    {
+      "call_id": "client:1806",
+      "route": {
+        "method": "GET",
+        "path": "/api/issues/children"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:1806"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/issues/queries.ts",
+          "line": 624,
+          "method": "listChildrenByParents"
+        }
+      ]
+    },
+    {
+      "call_id": "client:1817",
+      "route": {
+        "method": "GET",
+        "path": "/api/issues/child-progress"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:1817"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/issues/queries.ts",
+          "line": 559,
+          "method": "getChildIssueProgress"
+        }
+      ]
+    },
+    {
+      "call_id": "client:1861",
+      "route": {
+        "method": "GET",
+        "path": "/api/issues/{id}/comments"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:1861"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/issues/queries.ts",
+          "line": 681,
+          "method": "listComments"
+        }
+      ]
+    },
+    {
+      "call_id": "client:1926",
+      "route": {
+        "method": "GET",
+        "path": "/api/issues/{id}/timeline"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:1926"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/issues/queries.ts",
+          "line": 673,
+          "method": "listTimeline"
+        }
+      ]
+    },
+    {
+      "call_id": "client:1935",
+      "route": {
+        "method": "GET",
+        "path": "/api/assignee-frequency"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:1935"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/workspace/queries.ts",
+          "line": 231,
+          "method": "getAssigneeFrequency"
+        }
+      ]
+    },
+    {
+      "call_id": "client:2002",
+      "route": {
+        "method": "GET",
+        "path": "/api/issues/{id}/subscribers"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:2002"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/issues/queries.ts",
+          "line": 703,
+          "method": "listIssueSubscribers"
+        }
+      ]
+    },
+    {
+      "call_id": "client:2066",
+      "route": {
+        "method": "GET",
+        "path": "/api/agents"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:2066"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/workspace/queries.ts",
+          "line": 54,
+          "method": "listAgents"
+        }
+      ]
+    },
+    {
+      "call_id": "client:2070",
+      "route": {
+        "method": "GET",
+        "path": "/api/agents/{id}"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:2070"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/workspace/queries.ts",
+          "line": 72,
+          "method": "getAgent"
+        }
+      ]
+    },
+    {
+      "call_id": "client:2137",
+      "route": {
+        "method": "GET",
+        "path": "/api/agent-builder/sessions"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:2137"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/agents/queries.ts",
+          "line": 150,
+          "method": "listAgentBuilderSessions"
+        }
+      ]
+    },
+    {
+      "call_id": "client:2276",
+      "route": {
+        "method": "GET",
+        "path": "/api/runtimes"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:2276"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/runtimes/queries.ts",
+          "line": 72,
+          "method": "listRuntimes"
+        }
+      ]
+    },
+    {
+      "call_id": "client:2331",
+      "route": {
+        "method": "GET",
+        "path": "/api/cloud-billing/balance"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:2331"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/billing/queries.ts",
+          "line": 33,
+          "method": "getCloudBillingBalance"
+        }
+      ]
+    },
+    {
+      "call_id": "client:2344",
+      "route": {
+        "method": "GET",
+        "path": "/api/cloud-billing/transactions"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:2344",
+        "server/go/cmd/server/router.go:2114",
+        "server/go/internal/handler/cloud_billing.go:366"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/billing/queries.ts",
+          "line": 47,
+          "method": "listCloudBillingTransactions"
+        }
+      ]
+    },
+    {
+      "call_id": "client:2362",
+      "route": {
+        "method": "GET",
+        "path": "/api/cloud-billing/batches"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:2362",
+        "server/go/cmd/server/router.go:2115",
+        "server/go/internal/handler/cloud_billing.go:377"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/billing/queries.ts",
+          "line": 58,
+          "method": "listCloudBillingBatches"
+        }
+      ]
+    },
+    {
+      "call_id": "client:2380",
+      "route": {
+        "method": "GET",
+        "path": "/api/cloud-billing/topups"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:2380",
+        "server/go/cmd/server/router.go:2116",
+        "server/go/internal/handler/cloud_billing.go:385"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/billing/queries.ts",
+          "line": 69,
+          "method": "listCloudBillingTopups"
+        }
+      ]
+    },
+    {
+      "call_id": "client:2392",
+      "route": {
+        "method": "GET",
+        "path": "/api/cloud-billing/price-tiers"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:2392"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/billing/queries.ts",
+          "line": 77,
+          "method": "listCloudBillingPriceTiers"
+        }
+      ]
+    },
+    {
+      "call_id": "client:2425",
+      "route": {
+        "method": "GET",
+        "path": "/api/cloud-billing/checkout-sessions/{sessionId}"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:2425"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/billing/queries.ts",
+          "line": 96,
+          "method": "getCloudBillingCheckoutSession"
+        }
+      ]
+    },
+    {
+      "call_id": "client:2463",
+      "route": {
+        "method": "GET",
+        "path": "/api/cloud-subscriptions/summary"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:2463"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/billing/workspace-subscription-queries.ts",
+          "line": 33,
+          "method": "getWorkspaceSubscriptionSummary"
+        }
+      ]
+    },
+    {
+      "call_id": "client:2473",
+      "route": {
+        "method": "GET",
+        "path": "/api/cloud-subscriptions/prices"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:2473"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/billing/workspace-subscription-queries.ts",
+          "line": 66,
+          "method": "getWorkspaceSubscriptionPrices"
+        }
+      ]
+    },
+    {
+      "call_id": "client:2737",
+      "route": {
+        "method": "GET",
+        "path": "/api/runtimes/{runtimeId}/rate-limits"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:2737"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/runtimes/queries.ts",
+          "line": 24,
+          "method": "getRuntimeRateLimits"
+        }
+      ]
+    },
+    {
+      "call_id": "client:2756",
+      "route": {
+        "method": "GET",
+        "path": "/api/runtimes/{runtimeId}/usage"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:2756"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/runtimes/queries.ts",
+          "line": 38,
+          "method": "getRuntimeUsage"
+        }
+      ]
+    },
+    {
+      "call_id": "client:2790",
+      "route": {
+        "method": "GET",
+        "path": "/api/runtimes/{runtimeId}/usage/by-agent"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:2790"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/runtimes/queries.ts",
+          "line": 50,
+          "method": "getRuntimeUsageByAgent"
+        }
+      ]
+    },
+    {
+      "call_id": "client:2808",
+      "route": {
+        "method": "GET",
+        "path": "/api/runtimes/{runtimeId}/usage/by-hour"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:2808"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/runtimes/queries.ts",
+          "line": 58,
+          "method": "getRuntimeUsageByHour"
+        }
+      ]
+    },
+    {
+      "call_id": "client:2831",
+      "route": {
+        "method": "GET",
+        "path": "/api/dashboard/usage/daily"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:2831"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/dashboard/queries.ts",
+          "line": 81,
+          "method": "getDashboardUsageDaily"
+        }
+      ]
+    },
+    {
+      "call_id": "client:2847",
+      "route": {
+        "method": "GET",
+        "path": "/api/dashboard/usage/by-agent"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:2847"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/dashboard/queries.ts",
+          "line": 106,
+          "method": "getDashboardUsageByAgent"
+        }
+      ]
+    },
+    {
+      "call_id": "client:2865",
+      "route": {
+        "method": "GET",
+        "path": "/api/dashboard/agent-runtime"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:2865"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/dashboard/queries.ts",
+          "line": 131,
+          "method": "getDashboardAgentRunTime"
+        }
+      ]
+    },
+    {
+      "call_id": "client:2883",
+      "route": {
+        "method": "GET",
+        "path": "/api/dashboard/runtime/daily"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:2883"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/dashboard/queries.ts",
+          "line": 156,
+          "method": "getDashboardRunTimeDaily"
+        }
+      ]
+    },
+    {
+      "call_id": "client:2901",
+      "route": {
+        "method": "GET",
+        "path": "/api/dashboard/failures/daily"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:2901"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/dashboard/queries.ts",
+          "line": 181,
+          "method": "getDashboardFailuresDaily"
+        }
+      ]
+    },
+    {
+      "call_id": "client:2917",
+      "route": {
+        "method": "GET",
+        "path": "/api/dashboard/failures/by-agent"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:2917"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/dashboard/queries.ts",
+          "line": 206,
+          "method": "getDashboardFailuresByAgent"
+        }
+      ]
+    },
+    {
+      "call_id": "client:3028",
+      "route": {
+        "method": "GET",
+        "path": "/api/agents/{id}/tasks"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:3028",
+        "server/go/cmd/server/router.go:2469",
+        "server/go/internal/handler/agent.go:2987"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/agents/queries.ts",
+          "line": 133,
+          "method": "listAgentTasksPage"
+        }
+      ]
+    },
+    {
+      "call_id": "client:3046",
+      "route": {
+        "method": "GET",
+        "path": "/api/agent-task-snapshot"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:3046"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/agents/queries.ts",
+          "line": 60,
+          "method": "getAgentTaskSnapshot"
+        }
+      ]
+    },
+    {
+      "call_id": "client:3071",
+      "route": {
+        "method": "GET",
+        "path": "/api/working-agents"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:3071",
+        "server/go/cmd/server/router.go:2615",
+        "server/go/internal/handler/agent.go:3139"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/agents/queries.ts",
+          "line": 85,
+          "method": "getWorkspaceWorkingAgents"
+        }
+      ]
+    },
+    {
+      "call_id": "client:3079",
+      "route": {
+        "method": "GET",
+        "path": "/api/agent-activity-30d"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:3079"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/agents/queries.ts",
+          "line": 101,
+          "method": "getWorkspaceAgentActivity30d"
+        }
+      ]
+    },
+    {
+      "call_id": "client:3087",
+      "route": {
+        "method": "GET",
+        "path": "/api/agent-run-counts"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:3087"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/agents/queries.ts",
+          "line": 113,
+          "method": "getWorkspaceAgentRunCounts"
+        }
+      ]
+    },
+    {
+      "call_id": "client:3095",
+      "route": {
+        "method": "GET",
+        "path": "/api/tasks/{taskId}/messages"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:3095"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/chat/queries.ts",
+          "line": 228,
+          "method": "listTaskMessages"
+        }
+      ]
+    },
+    {
+      "call_id": "client:3102",
+      "route": {
+        "method": "GET",
+        "path": "/api/tasks/{taskId}/context-receipt"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:3102"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/agents/queries.ts",
+          "line": 175,
+          "method": "getTaskContextReceipt"
+        }
+      ]
+    },
+    {
+      "call_id": "client:3116",
+      "route": {
+        "method": "GET",
+        "path": "/api/issues/{id}/task-runs"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:3116"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/issues/queries.ts",
+          "line": 31,
+          "method": "listTasksByIssue"
+        },
+        {
+          "path": "packages/core/issues/queries.ts",
+          "line": 32,
+          "method": "listTasksByIssue"
+        }
+      ]
+    },
+    {
+      "call_id": "client:3129",
+      "route": {
+        "method": "GET",
+        "path": "/api/issues/{id}/usage"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:3129"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/issues/queries.ts",
+          "line": 729,
+          "method": "getIssueUsage"
+        }
+      ]
+    },
+    {
+      "call_id": "client:3196",
+      "route": {
+        "method": "GET",
+        "path": "/api/inbox"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:3196"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/inbox/queries.ts",
+          "line": 27,
+          "method": "listInbox"
+        }
+      ]
+    },
+    {
+      "call_id": "client:3232",
+      "route": {
+        "method": "GET",
+        "path": "/api/inbox/archived/page"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:3232"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/inbox/queries.ts",
+          "line": 71,
+          "method": "listArchivedInboxPage"
+        },
+        {
+          "path": "packages/core/inbox/queries.ts",
+          "line": 83,
+          "method": "listArchivedInboxPage"
+        }
+      ]
+    },
+    {
+      "call_id": "client:3241",
+      "route": {
+        "method": "GET",
+        "path": "/api/inbox/archived/facets"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:3241"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/inbox/queries.ts",
+          "line": 99,
+          "method": "getArchivedInboxFacets"
+        }
+      ]
+    },
+    {
+      "call_id": "client:3255",
+      "route": {
+        "method": "GET",
+        "path": "/api/inbox/snoozed"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:3255"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/inbox/queries.ts",
+          "line": 38,
+          "method": "listSnoozedInbox"
+        }
+      ]
+    },
+    {
+      "call_id": "client:3278",
+      "route": {
+        "method": "GET",
+        "path": "/api/inbox/unread-summary"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:3278"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/inbox/queries.ts",
+          "line": 136,
+          "method": "getInboxUnreadSummary"
+        }
+      ]
+    },
+    {
+      "call_id": "client:3320",
+      "route": {
+        "method": "GET",
+        "path": "/api/notification-preferences"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:3320"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/notification-preferences/queries.ts",
+          "line": 18,
+          "method": "getNotificationPreferences"
+        }
+      ]
+    },
+    {
+      "call_id": "client:3351",
+      "route": {
+        "method": "GET",
+        "path": "/api/config"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:3351",
+        "packages/core/platform/auth-initializer.tsx:62",
+        "packages/views/modals/create-issue.tsx:534"
+      ],
+      "query_factory_evidence": []
+    },
+    {
+      "call_id": "client:3391",
+      "route": {
+        "method": "GET",
+        "path": "/api/workspaces"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:3391",
+        "apps/web/app/join/page.tsx:61",
+        "apps/web/app/join/page.tsx:78",
+        "apps/web/app/auth/callback/page.tsx:115",
+        "packages/views/auth/login-page.tsx:219"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/workspace/queries.ts",
+          "line": 31,
+          "method": "listWorkspaces"
+        }
+      ]
+    },
+    {
+      "call_id": "client:3409",
+      "route": {
+        "method": "POST",
+        "path": "/api/workspaces"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:3409",
+        "apps/web/app/python-session.tsx:28"
+      ],
+      "query_factory_evidence": []
+    },
+    {
+      "call_id": "client:3425",
+      "route": {
+        "method": "GET",
+        "path": "/api/workspaces/{id}/plugins"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:3425",
+        "server/go/cmd/server/router.go:1863",
+        "server/go/internal/handler/plugin.go:181"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/plugins/queries.ts",
+          "line": 13,
+          "method": "listPluginInstallations"
+        }
+      ]
+    },
+    {
+      "call_id": "client:3441",
+      "route": {
+        "method": "GET",
+        "path": "/api/workspaces/{id}/mcp-servers"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:3441",
+        "server/go/cmd/server/router.go:1859",
+        "server/go/internal/handler/workspace_mcp_api.go:90"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/workspace/queries.ts",
+          "line": 243,
+          "method": "listWorkspaceMcpServers"
+        }
+      ]
+    },
+    {
+      "call_id": "client:3493",
+      "route": {
+        "method": "GET",
+        "path": "/api/agents/{id}/mcp-servers"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:3493",
+        "server/go/cmd/server/router.go:2484",
+        "server/go/internal/handler/workspace_mcp_api.go:338"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/workspace/queries.ts",
+          "line": 252,
+          "method": "listAgentMcpServers"
+        }
+      ]
+    },
+    {
+      "call_id": "client:3539",
+      "route": {
+        "method": "GET",
+        "path": "/api/workspaces/{id}/plugins/packages"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:3539",
+        "server/go/cmd/server/router.go:1897",
+        "server/go/internal/handler/plugin_package.go:21"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/plugins/queries.ts",
+          "line": 22,
+          "method": "listPluginPackages"
+        }
+      ]
+    },
+    {
+      "call_id": "client:3595",
+      "route": {
+        "method": "GET",
+        "path": "/api/workspaces/{id}/plugins/{installationId}/surfaces/{surfaceKey}/launch"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:3595",
+        "server/go/cmd/server/router.go:1867",
+        "server/go/internal/handler/plugin_surface.go:152"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/plugins/queries.ts",
+          "line": 42,
+          "method": "getPluginSurfaceLaunch"
+        }
+      ]
+    },
+    {
+      "call_id": "client:3699",
+      "route": {
+        "method": "GET",
+        "path": "/api/workspaces/{id}/plugins/{installationId}/invocations"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:3699",
+        "server/go/cmd/server/router.go:1912",
+        "server/go/internal/handler/plugin_hook.go:125"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/plugins/queries.ts",
+          "line": 60,
+          "method": "listPluginInvocations"
+        }
+      ]
+    },
+    {
+      "call_id": "client:3727",
+      "route": {
+        "method": "GET",
+        "path": "/api/workspaces/{id}/plugins/{installationId}/mcp/{hookKey}/tools"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:3727",
+        "server/go/cmd/server/router.go:1917",
+        "server/go/internal/handler/plugin_mcp.go:32"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/plugins/queries.ts",
+          "line": 77,
+          "method": "listPluginMCPTools"
+        }
+      ]
+    },
+    {
+      "call_id": "client:3765",
+      "route": {
+        "method": "GET",
+        "path": "/api/workspaces/{id}/members"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:3765"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/workspace/queries.ts",
+          "line": 46,
+          "method": "listMembers"
+        }
+      ]
+    },
+    {
+      "call_id": "client:3796",
+      "route": {
+        "method": "GET",
+        "path": "/api/workspaces/{id}/invitations"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:3796"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/workspace/queries.ts",
+          "line": 206,
+          "method": "listWorkspaceInvitations"
+        }
+      ]
+    },
+    {
+      "call_id": "client:3806",
+      "route": {
+        "method": "GET",
+        "path": "/api/invitations"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:3806",
+        "apps/web/app/auth/callback/page.tsx:136",
+        "apps/web/app/(auth)/login/page.tsx:48"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/workspace/queries.ts",
+          "line": 221,
+          "method": "listMyInvitations"
+        }
+      ]
+    },
+    {
+      "call_id": "client:3836",
+      "route": {
+        "method": "GET",
+        "path": "/api/workspaces/{id}/share-links"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:3836"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/workspace/queries.ts",
+          "line": 213,
+          "method": "listShareLinks"
+        }
+      ]
+    },
+    {
+      "call_id": "client:3876",
+      "route": {
+        "method": "GET",
+        "path": "/api/skills"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:3876"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/workspace/queries.ts",
+          "line": 139,
+          "method": "listSkills"
+        }
+      ]
+    },
+    {
+      "call_id": "client:3891",
+      "route": {
+        "method": "GET",
+        "path": "/api/skills/{id}"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:3891"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/workspace/queries.ts",
+          "line": 146,
+          "method": "getSkill"
+        }
+      ]
+    },
+    {
+      "call_id": "client:3967",
+      "route": {
+        "method": "GET",
+        "path": "/api/skills/{id}/versions"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:3967",
+        "server/go/cmd/server/router.go:2527",
+        "server/go/internal/handler/skill_version.go:204"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/workspace/queries.ts",
+          "line": 156,
+          "method": "listSkillVersions"
+        }
+      ]
+    },
+    {
+      "call_id": "client:3977",
+      "route": {
+        "method": "GET",
+        "path": "/api/skills/{id}/versions/{version}"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:3977",
+        "server/go/cmd/server/router.go:2528",
+        "server/go/internal/handler/skill_version.go:248"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/workspace/queries.ts",
+          "line": 169,
+          "method": "getSkillVersion"
+        }
+      ]
+    },
+    {
+      "call_id": "client:4106",
+      "route": {
+        "method": "GET",
+        "path": "/api/chat/sessions"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:4106",
+        "server/go/cmd/server/router.go:2627",
+        "server/go/internal/handler/chat.go:158"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/chat/queries.ts",
+          "line": 83,
+          "method": "listChatSessions"
+        }
+      ]
+    },
+    {
+      "call_id": "client:4115",
+      "route": {
+        "method": "GET",
+        "path": "/api/chat/sessions/{sessionId}"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:4115",
+        "server/go/cmd/server/router.go:2629",
+        "server/go/internal/handler/chat.go:324",
+        "server/go/internal/integrations/lark/outbound_test.go:94",
+        "server/go/internal/integrations/channel/engine/session.go:131",
+        "server/go/internal/integrations/channel/engine/router_test.go:462",
+        "server/go/internal/integrations/channel/engine/session_test.go:208",
+        "server/go/cmd/server/scope_authorizer_test.go:34",
+        "server/go/cmd/server/scope_authorizer_test.go:201",
+        "server/go/cmd/server/scope_authorizer_test.go:218"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/chat/queries.ts",
+          "line": 139,
+          "method": "getChatSession"
+        }
+      ]
+    },
+    {
+      "call_id": "client:4186",
+      "route": {
+        "method": "GET",
+        "path": "/api/chat/pinned-agents"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:4186"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/chat/queries.ts",
+          "line": 131,
+          "method": "listChatPinnedAgents"
+        }
+      ]
+    },
+    {
+      "call_id": "client:4201",
+      "route": {
+        "method": "GET",
+        "path": "/api/chat/sessions/{sessionId}/messages"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:4201"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/chat/queries.ts",
+          "line": 148,
+          "method": "listChatMessages"
+        }
+      ]
+    },
+    {
+      "call_id": "client:4218",
+      "route": {
+        "method": "GET",
+        "path": "/api/chat/sessions/{sessionId}/messages/page"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:4218"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/chat/queries.ts",
+          "line": 158,
+          "method": "listChatMessagesPage"
+        }
+      ]
+    },
+    {
+      "call_id": "client:4295",
+      "route": {
+        "method": "GET",
+        "path": "/api/chat/sessions/{sessionId}/pending-task"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:4295"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/chat/queries.ts",
+          "line": 175,
+          "method": "getPendingChatTask"
+        }
+      ]
+    },
+    {
+      "call_id": "client:4331",
+      "route": {
+        "method": "GET",
+        "path": "/api/chat/sessions/{sessionId}/draft-restores"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:4331"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/chat/queries.ts",
+          "line": 195,
+          "method": "listChatDraftRestores"
+        }
+      ]
+    },
+    {
+      "call_id": "client:4354",
+      "route": {
+        "method": "GET",
+        "path": "/api/chat/sessions/{sessionId}/wakeups"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:4354"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/chat/queries.ts",
+          "line": 205,
+          "method": "listChatSessionWakeups"
+        }
+      ]
+    },
+    {
+      "call_id": "client:4379",
+      "route": {
+        "method": "GET",
+        "path": "/api/chat/my-wakeups"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:4379"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/chat/queries.ts",
+          "line": 214,
+          "method": "listMyChatWakeups"
+        }
+      ]
+    },
+    {
+      "call_id": "client:4390",
+      "route": {
+        "method": "GET",
+        "path": "/api/chat/pending-tasks"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:4390"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/chat/queries.ts",
+          "line": 364,
+          "method": "listPendingChatTasks"
+        }
+      ]
+    },
+    {
+      "call_id": "client:4394",
+      "route": {
+        "method": "GET",
+        "path": "/api/chat/pending-tasks/has-any"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:4394"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/chat/queries.ts",
+          "line": 379,
+          "method": "hasAnyPendingChatTasks"
+        }
+      ]
+    },
+    {
+      "call_id": "client:4427",
+      "route": {
+        "method": "GET",
+        "path": "/api/issues/{id}/attachments"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:4427"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/issues/queries.ts",
+          "line": 740,
+          "method": "listAttachments"
+        }
+      ]
+    },
+    {
+      "call_id": "client:4517",
+      "route": {
+        "method": "GET",
+        "path": "/api/projects"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:4517"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/projects/queries.ts",
+          "line": 24,
+          "method": "listProjects"
+        }
+      ]
+    },
+    {
+      "call_id": "client:4524",
+      "route": {
+        "method": "GET",
+        "path": "/api/projects/{id}"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:4524"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/projects/queries.ts",
+          "line": 32,
+          "method": "getProject"
+        }
+      ]
+    },
+    {
+      "call_id": "client:4561",
+      "route": {
+        "method": "GET",
+        "path": "/api/projects/{id}/members"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:4561"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/projects/queries.ts",
+          "line": 39,
+          "method": "getProjectMembers"
+        }
+      ]
+    },
+    {
+      "call_id": "client:4569",
+      "route": {
+        "method": "GET",
+        "path": "/api/projects/{id}/subscription"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:4569"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/projects/queries.ts",
+          "line": 54,
+          "method": "getProjectSubscription"
+        }
+      ]
+    },
+    {
+      "call_id": "client:4602",
+      "route": {
+        "method": "GET",
+        "path": "/api/projects/private"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:4602"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/projects/queries.ts",
+          "line": 46,
+          "method": "listPrivateProjectsForOwner"
+        }
+      ]
+    },
+    {
+      "call_id": "client:4617",
+      "route": {
+        "method": "GET",
+        "path": "/api/projects/{id}/resources"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:4617"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/projects/resource-queries.ts",
+          "line": 18,
+          "method": "listProjectResources"
+        }
+      ]
+    },
+    {
+      "call_id": "client:4624",
+      "route": {
+        "method": "POST",
+        "path": "/api/projects/{id}/resources"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:4624"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/projects/resource-queries.ts",
+          "line": 27,
+          "method": "createProjectResource"
+        }
+      ]
+    },
+    {
+      "call_id": "client:4635",
+      "route": {
+        "method": "PUT",
+        "path": "/api/projects/{id}/resources/{resourceId}"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:4635"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/projects/resource-queries.ts",
+          "line": 58,
+          "method": "updateProjectResource"
+        }
+      ]
+    },
+    {
+      "call_id": "client:4645",
+      "route": {
+        "method": "DELETE",
+        "path": "/api/projects/{id}/resources/{resourceId}"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:4645"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/projects/resource-queries.ts",
+          "line": 85,
+          "method": "deleteProjectResource"
+        }
+      ]
+    },
+    {
+      "call_id": "client:4652",
+      "route": {
+        "method": "GET",
+        "path": "/api/labels"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:4652"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/labels/queries.ts",
+          "line": 20,
+          "method": "listLabels"
+        }
+      ]
+    },
+    {
+      "call_id": "client:4692",
+      "route": {
+        "method": "GET",
+        "path": "/api/issue-workflows"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:4692"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/issue-workflows/queries.ts",
+          "line": 38,
+          "method": "listIssueWorkflows"
+        }
+      ]
+    },
+    {
+      "call_id": "client:4789",
+      "route": {
+        "method": "GET",
+        "path": "/api/issues/{id}/workflow-handoff"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:4789"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/issue-workflows/queries.ts",
+          "line": 29,
+          "method": "previewWorkflowHandoff"
+        }
+      ]
+    },
+    {
+      "call_id": "client:4821",
+      "route": {
+        "method": "GET",
+        "path": "/api/issue-statuses"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:4821"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/issue-statuses/queries.ts",
+          "line": 35,
+          "method": "listIssueStatuses"
+        }
+      ]
+    },
+    {
+      "call_id": "client:4884",
+      "route": {
+        "method": "GET",
+        "path": "/api/properties"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:4884"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/properties/queries.ts",
+          "line": 13,
+          "method": "listProperties"
+        }
+      ]
+    },
+    {
+      "call_id": "client:4917",
+      "route": {
+        "method": "GET",
+        "path": "/api/quick-actions"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:4917",
+        "server/go/cmd/server/router.go:2261",
+        "server/go/internal/handler/quick_action.go:469"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/quick-actions/queries.ts",
+          "line": 21,
+          "method": "listQuickActions"
+        }
+      ]
+    },
+    {
+      "call_id": "client:5025",
+      "route": {
+        "method": "GET",
+        "path": "/api/issues/{id}/labels"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:5025"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/labels/queries.ts",
+          "line": 41,
+          "method": "listLabelsForIssue"
+        }
+      ]
+    },
+    {
+      "call_id": "client:5054",
+      "route": {
+        "method": "GET",
+        "path": "/api/agents/{id}/labels"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:5054",
+        "server/go/cmd/server/router.go:2474",
+        "server/go/internal/handler/label.go:572"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/labels/queries.ts",
+          "line": 32,
+          "method": "listLabelsForResource"
+        }
+      ]
+    },
+    {
+      "call_id": "client:5096",
+      "route": {
+        "method": "GET",
+        "path": "/api/issue-views"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:5096"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/issue-views/queries.ts",
+          "line": 25,
+          "method": "listIssueViews"
+        },
+        {
+          "path": "packages/core/issue-views/queries.ts",
+          "line": 29,
+          "method": "listIssueViews"
+        },
+        {
+          "path": "packages/core/issue-views/queries.ts",
+          "line": 30,
+          "method": "listIssueViews"
+        },
+        {
+          "path": "packages/core/issue-views/queries.ts",
+          "line": 42,
+          "method": "listIssueViews"
+        }
+      ]
+    },
+    {
+      "call_id": "client:5135",
+      "route": {
+        "method": "GET",
+        "path": "/api/issue-views/{id}"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:5135"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/issue-views/queries.ts",
+          "line": 51,
+          "method": "getIssueView"
+        }
+      ]
+    },
+    {
+      "call_id": "client:5180",
+      "route": {
+        "method": "GET",
+        "path": "/api/pins"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:5180"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/pins/queries.ts",
+          "line": 12,
+          "method": "listPins"
+        }
+      ]
+    },
+    {
+      "call_id": "client:5203",
+      "route": {
+        "method": "GET",
+        "path": "/api/squads"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:5203"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/workspace/queries.ts",
+          "line": 105,
+          "method": "listSquads"
+        }
+      ]
+    },
+    {
+      "call_id": "client:5210",
+      "route": {
+        "method": "GET",
+        "path": "/api/squads/involved"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:5210"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/workspace/queries.ts",
+          "line": 117,
+          "method": "listInvolvedSquadIds"
+        }
+      ]
+    },
+    {
+      "call_id": "client:5264",
+      "route": {
+        "method": "GET",
+        "path": "/api/squads/{id}/members/status"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:5264",
+        "server/go/cmd/server/router.go:2364",
+        "server/go/internal/handler/squad.go:681"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/workspace/queries.ts",
+          "line": 129,
+          "method": "getSquadMemberStatus"
+        }
+      ]
+    },
+    {
+      "call_id": "client:5274",
+      "route": {
+        "method": "GET",
+        "path": "/api/autopilots"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:5274"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/autopilots/queries.ts",
+          "line": 35,
+          "method": "listAutopilots"
+        }
+      ]
+    },
+    {
+      "call_id": "client:5284",
+      "route": {
+        "method": "GET",
+        "path": "/api/autopilots/{id}"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:5284"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/autopilots/queries.ts",
+          "line": 43,
+          "method": "getAutopilot"
+        }
+      ]
+    },
+    {
+      "call_id": "client:5335",
+      "route": {
+        "method": "GET",
+        "path": "/api/autopilots/usage"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:5335"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/autopilots/queries.ts",
+          "line": 25,
+          "method": "getAutopilotQuotaUsage"
+        }
+      ]
+    },
+    {
+      "call_id": "client:5359",
+      "route": {
+        "method": "GET",
+        "path": "/api/autopilots/{id}/runs"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:5359"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/autopilots/queries.ts",
+          "line": 50,
+          "method": "listAutopilotRuns"
+        }
+      ]
+    },
+    {
+      "call_id": "client:5366",
+      "route": {
+        "method": "GET",
+        "path": "/api/autopilots/{id}/runs/{runId}"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:5366",
+        "server/go/cmd/server/router.go:2386",
+        "server/go/internal/handler/autopilot.go:2359"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/autopilots/queries.ts",
+          "line": 67,
+          "method": "getAutopilotRun"
+        }
+      ]
+    },
+    {
+      "call_id": "client:5393",
+      "route": {
+        "method": "GET",
+        "path": "/api/autopilots/cron-preview"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:5393"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/autopilots/queries.ts",
+          "line": 114,
+          "method": "cronPreview"
+        }
+      ]
+    },
+    {
+      "call_id": "client:5424",
+      "route": {
+        "method": "GET",
+        "path": "/api/autopilots/{id}/deliveries"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:5424",
+        "server/go/cmd/server/router.go:2387",
+        "server/go/internal/handler/webhook_delivery.go:164"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/autopilots/queries.ts",
+          "line": 83,
+          "method": "listAutopilotDeliveries"
+        }
+      ]
+    },
+    {
+      "call_id": "client:5439",
+      "route": {
+        "method": "GET",
+        "path": "/api/autopilots/{id}/deliveries/{deliveryId}"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:5439",
+        "server/go/cmd/server/router.go:2388",
+        "server/go/internal/handler/webhook_delivery.go:212"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/autopilots/queries.ts",
+          "line": 99,
+          "method": "getAutopilotDelivery"
+        }
+      ]
+    },
+    {
+      "call_id": "client:5487",
+      "route": {
+        "method": "GET",
+        "path": "/api/workspaces/{id}/github/installations"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:5487",
+        "server/go/cmd/server/router.go:1843",
+        "server/go/internal/handler/github.go:733"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/github/queries.ts",
+          "line": 19,
+          "method": "listGitHubInstallations"
+        }
+      ]
+    },
+    {
+      "call_id": "client:5507",
+      "route": {
+        "method": "GET",
+        "path": "/api/workspaces/{id}/github/installations/{installationId}/repositories"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:5507",
+        "server/go/cmd/server/router.go:1933",
+        "server/go/internal/handler/github.go:769"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/github/queries.ts",
+          "line": 30,
+          "method": "listGitHubInstallationRepositories"
+        }
+      ]
+    },
+    {
+      "call_id": "client:5525",
+      "route": {
+        "method": "GET",
+        "path": "/api/issues/{id}/pull-requests"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:5525"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/github/queries.ts",
+          "line": 65,
+          "method": "listIssuePullRequests"
+        }
+      ]
+    },
+    {
+      "call_id": "client:5536",
+      "route": {
+        "method": "GET",
+        "path": "/api/issues/{id}/environments"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:5536"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/issues/queries.ts",
+          "line": 713,
+          "method": "listIssueEnvironments"
+        }
+      ]
+    },
+    {
+      "call_id": "client:5583",
+      "route": {
+        "method": "GET",
+        "path": "/api/issues/pull-requests"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:5583"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/github/queries.ts",
+          "line": 52,
+          "method": "listIssuePullRequestSummaries"
+        }
+      ]
+    },
+    {
+      "call_id": "client:5639",
+      "route": {
+        "method": "GET",
+        "path": "/api/workspaces/{id}/vcs/connections"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:5639",
+        "server/go/cmd/server/router.go:1847",
+        "server/go/internal/handler/vcs.go:110"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/vcs/queries.ts",
+          "line": 12,
+          "method": "listVCSConnections"
+        }
+      ]
+    },
+    {
+      "call_id": "client:5723",
+      "route": {
+        "method": "GET",
+        "path": "/api/integrations/composio/toolkits"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:5723"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/composio/queries.ts",
+          "line": 17,
+          "method": "listComposioToolkits"
+        }
+      ]
+    },
+    {
+      "call_id": "client:5728",
+      "route": {
+        "method": "GET",
+        "path": "/api/integrations/composio/connections"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:5728"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/composio/queries.ts",
+          "line": 25,
+          "method": "listComposioConnections"
+        }
+      ]
+    },
+    {
+      "call_id": "client:5751",
+      "route": {
+        "method": "GET",
+        "path": "/api/apps"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:5751"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/connected-apps/queries.ts",
+          "line": 29,
+          "method": "getAppsOverview"
+        }
+      ]
+    },
+    {
+      "call_id": "client:5758",
+      "route": {
+        "method": "GET",
+        "path": "/api/apps/catalog"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:5758",
+        "server/go/cmd/server/router.go:2687",
+        "server/go/internal/handler/connected_apps.go:277"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/connected-apps/queries.ts",
+          "line": 36,
+          "method": "listAppCatalog"
+        }
+      ]
+    },
+    {
+      "call_id": "client:5780",
+      "route": {
+        "method": "GET",
+        "path": "/api/apps/team/impact"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:5780"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/connected-apps/queries.ts",
+          "line": 56,
+          "method": "getTeamAppImpact"
+        }
+      ]
+    },
+    {
+      "call_id": "client:5812",
+      "route": {
+        "method": "GET",
+        "path": "/api/app-calls"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:5812"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/connected-apps/queries.ts",
+          "line": 44,
+          "method": "listIssueAppCalls"
+        }
+      ]
+    },
+    {
+      "call_id": "client:5834",
+      "route": {
+        "method": "GET",
+        "path": "/api/apps/activity"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:5834"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/connected-apps/queries.ts",
+          "line": 50,
+          "method": "listAppActivity"
+        }
+      ]
+    },
+    {
+      "call_id": "client:5839",
+      "route": {
+        "method": "GET",
+        "path": "/api/agents/{id}/apps"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:5839",
+        "server/go/cmd/server/router.go:2464",
+        "server/go/internal/handler/connected_apps.go:826"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/connected-apps/queries.ts",
+          "line": 62,
+          "method": "listAgentApps"
+        }
+      ]
+    },
+    {
+      "call_id": "client:5862",
+      "route": {
+        "method": "GET",
+        "path": "/api/app-requests"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:5862",
+        "server/go/cmd/server/router.go:2702",
+        "server/go/internal/handler/connected_apps.go:1014"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/connected-apps/queries.ts",
+          "line": 68,
+          "method": "listAppRequests"
+        },
+        {
+          "path": "packages/core/connected-apps/queries.ts",
+          "line": 74,
+          "method": "listAppRequests"
+        }
+      ]
+    },
+    {
+      "call_id": "client:5886",
+      "route": {
+        "method": "GET",
+        "path": "/api/workspaces/{id}/slack/installations"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:5886",
+        "server/go/cmd/server/router.go:1982",
+        "server/go/internal/handler/slack.go:56"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/slack/queries.ts",
+          "line": 16,
+          "method": "listSlackInstallations"
+        }
+      ]
+    },
+    {
+      "call_id": "client:5921",
+      "route": {
+        "method": "GET",
+        "path": "/api/workspaces/{id}/dingtalk/installations"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:5921",
+        "server/go/cmd/server/router.go:2000",
+        "server/go/internal/handler/dingtalk.go:133"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/dingtalk/queries.ts",
+          "line": 23,
+          "method": "listDingTalkInstallations"
+        }
+      ]
+    },
+    {
+      "call_id": "client:5937",
+      "route": {
+        "method": "GET",
+        "path": "/api/workspaces/{id}/dingtalk/groups"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:5937",
+        "server/go/cmd/server/router.go:2001",
+        "server/go/internal/handler/dingtalk.go:213"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/dingtalk/queries.ts",
+          "line": 30,
+          "method": "listDingTalkGroups"
+        },
+        {
+          "path": "packages/core/dingtalk/queries.ts",
+          "line": 61,
+          "method": "listDingTalkGroups"
+        }
+      ]
+    },
+    {
+      "call_id": "client:5966",
+      "route": {
+        "method": "GET",
+        "path": "/api/agents/{id}/dingtalk/groups"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:5966",
+        "server/go/cmd/server/router.go:2470",
+        "server/go/internal/handler/dingtalk.go:251"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/dingtalk/queries.ts",
+          "line": 45,
+          "method": "listAgentDingTalkGroups"
+        },
+        {
+          "path": "packages/core/dingtalk/queries.ts",
+          "line": 79,
+          "method": "listAgentDingTalkGroups"
+        }
+      ]
+    },
+    {
+      "call_id": "client:6042",
+      "route": {
+        "method": "GET",
+        "path": "/api/workspaces/{id}/wecom/installations"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:6042",
+        "server/go/cmd/server/router.go:1983",
+        "server/go/internal/handler/wecom_web.go:76"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/wecom/queries.ts",
+          "line": 18,
+          "method": "listWecomInstallations"
+        }
+      ]
+    },
+    {
+      "call_id": "client:6145",
+      "route": {
+        "method": "GET",
+        "path": "/api/workspaces/{id}/weixin/installations"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:6145",
+        "server/go/cmd/server/router.go:2009",
+        "server/go/internal/handler/weixin.go:34"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/weixin/queries.ts",
+          "line": 15,
+          "method": "listWeixinInstallations"
+        }
+      ]
+    },
+    {
+      "call_id": "client:6171",
+      "route": {
+        "method": "GET",
+        "path": "/api/workspaces/{id}/telegram/installations"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:6171",
+        "server/go/cmd/server/router.go:2020",
+        "server/go/internal/handler/telegram.go:53"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/telegram/queries.ts",
+          "line": 15,
+          "method": "listTelegramInstallations"
+        }
+      ]
+    },
+    {
+      "call_id": "client:5054:remaining-variant-1",
+      "route": {
+        "method": "GET",
+        "path": "/api/skills/{id}/labels"
+      },
+      "inventory_sources": [
+        "packages/core/api/client.ts:5054",
+        "server/go/cmd/server/router.go:2474",
+        "server/go/internal/handler/label.go:572",
+        "server/go/cmd/server/router.go:2521",
+        "server/go/internal/handler/label.go:635"
+      ],
+      "query_factory_evidence": [
+        {
+          "path": "packages/core/labels/queries.ts",
+          "line": 32,
+          "method": "listLabelsForResource"
+        }
+      ]
+    },
+    {
+      "call_id": "ws-client:106",
+      "route": {
+        "method": "GET",
+        "path": "/ws"
+      },
+      "inventory_sources": [
+        "packages/core/api/ws-client.ts:106"
+      ],
+      "query_factory_evidence": []
+    },
+    {
+      "call_id": "verification-login:7",
+      "route": {
+        "method": "GET",
+        "path": "/api/config"
+      },
+      "inventory_sources": [
+        "apps/web/app/verification-login.tsx:7"
+      ],
+      "query_factory_evidence": []
+    }
+  ],
+  "query_union_policy": "Conservative static union of core query-factory methods, not assertion every candidate mounts or every invalidation sends. IDs/routes copied from existing inventory; query_factory_evidence identifies source candidates. Realtime reconnect and instance replacement invalidate matching workspace query prefixes.",
+  "local_effects": [
+    "AuthInitializer unauthenticated effect calls clearClientSessionData: draft reset, localStorage sweep, cookie deletion, worker/IndexedDB wipe, queryClient.clear; none is HTTP",
+    "PythonSession cancelQueries/removeQueries are cache operations; invalidateQueries may refetch enabled observers",
+    "search-index hook attaches worker; client.runFetch dispatches getSearchIndexManifest/getSearchIndexSnapshot/getSearchIndexChanges with explicit workspaceSlug; prune/detach/wipe are local worker operations"
+  ],
+  "dynamic_resources": {
+    "source": "packages/core/workspace/avatar-url.ts:1",
+    "classification": "Returned arbitrary URL may become browser image I/O; slash values use API base; no fixed route identity inferred"
+  },
+  "unresolved_active_web_callbacks": [],
+  "limitations": [
+    "Static conservative query union does not prove runtime mounting or backend support.",
+    "PostHog SDK delivery remains external analytics, not an invented backend route.",
+    "No desktop/mobile closure or global source coverage claimed."
+  ]
+}

@@ -2,3 +2,10 @@
 @source '../../../packages/views/**/*.tsx';
 @source './full-entry.tsx';
 html,body,#root{height:100%;margin:0}
+
+/* The dashboard owns the whole workspace viewport. */
+.workspace-session-content [data-app-shell]{height:100%;min-height:0}
+.workspace-ai-hub{display:inline-flex;align-items:center;justify-content:center;height:24px;padding:0 8px;border-radius:var(--radius);font-size:12px;font-weight:700;color:var(--muted-foreground);white-space:nowrap}
+.workspace-ai-hub:hover{background:var(--surface-hover);color:var(--foreground)}
+.workspace-ai-hub:focus-visible{outline:2px solid var(--ring);outline-offset:2px}
+@media(max-width:767px){.workspace-ai-hub{height:var(--chat-launcher-size);padding:0 16px;border-radius:999px;background:var(--surface-raised);box-shadow:var(--floating-shadow);border:1px solid var(--surface-border)}}

@@ -38,7 +38,7 @@ while [ "$#" -gt 0 ]; do
   esac
 done
 
-cd "$REPO_ROOT/server"
+cd "$REPO_ROOT/server/go"
 
 if [ "$only" != agent ]; then
   packages=$(go list ./...)

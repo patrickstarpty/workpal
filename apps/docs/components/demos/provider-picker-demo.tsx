@@ -12,9 +12,9 @@ const NEEDS: Need[] = ["resume", "mcp", "model"];
 const needIcon: Record<Need, typeof History> = { resume: History, mcp: Plug, model: Cpu };
 
 // Capabilities as the code declares them: resume — the backend resumes a stored
-// session (server/pkg/agent/<provider>.go); mcp — providerSupportsMcpConfig
+// session (server/go/pkg/agent/<provider>.go); mcp — providerSupportsMcpConfig
 // (packages/core/agents/mcp-support.ts); model — ModelSelectionSupported
-// (server/pkg/agent/models.go). Keep in step with the table on the providers page.
+// (server/go/pkg/agent/models.go). Keep in step with the table on the providers page.
 const TOOLS: { name: string; resume: boolean; mcp: boolean; model: boolean }[] = [
   { name: "Antigravity", resume: true, mcp: false, model: true },
   { name: "Claude Code", resume: true, mcp: true, model: true },

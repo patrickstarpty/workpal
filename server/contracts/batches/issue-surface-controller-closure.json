@@ -1,0 +1,1477 @@
+{
+  "version": 1,
+  "scope": [
+    "packages/views/issues/surface/issue-surface.tsx",
+    "packages/views/issues/surface/use-issue-surface-controller.ts"
+  ],
+  "coverage": "Bounded targets accepted; global coverage false.",
+  "method": "Static reads only; both targets read as <=100-line source chunks, rereading truncated aggregate ranges. No runtime/tests/network/model/data/git operations or children.",
+  "files": [
+    {
+      "path": "packages/views/issues/surface/issue-surface.tsx",
+      "sha256": "ee424febe23f9110abd2a3b2d6e88de8b9df5aa76dfe14ec675c72f428568f5d",
+      "whole_source": true
+    },
+    {
+      "path": "packages/views/issues/surface/use-issue-surface-controller.ts",
+      "sha256": "8871358a471ec6a9d5d124d1851a4b8bb373af9eda022eda7bdcb7021ae78dd6",
+      "whole_source": true
+    },
+    {
+      "path": "packages/core/issues/stores/surface-view-store.ts",
+      "sha256": "5d5956d9b841d26dedafb5a782a3130127d55b1edee6c75cf182c91bc5e80347",
+      "whole_source": true
+    },
+    {
+      "path": "packages/views/issues/surface/selection-context.tsx",
+      "sha256": "7370aca07cfd9afe6e667e43e60ed62dc14be989dcd39e1105d867cbedd1af1a",
+      "whole_source": true
+    },
+    {
+      "path": "packages/core/issue-views/use-active-view.ts",
+      "sha256": "ae09151fbb1d411fe0844eb5ba1c2b7b7afce0495fea6a37afeeddaf0b5ea312",
+      "whole_source": true
+    },
+    {
+      "path": "packages/core/issues/wakeups.ts",
+      "sha256": "3a34b9dae9fef802c0e2137da5f41222c1c8c3aa0446fb9eedee2c0a92941249",
+      "whole_source": true
+    },
+    {
+      "path": "packages/core/issue-views/queries.ts",
+      "sha256": "5f04125920259ec0794cbf2b0813a892c07183c97b1a1227ae0049c152bd79b4",
+      "whole_source": true
+    },
+    {
+      "path": "packages/views/issues/surface/use-issue-surface-data.ts",
+      "sha256": "f061b37e6a133df4da3feca59eec8cb9821879e1aec947c2f1de0ba3f5d3321a",
+      "whole_source": true
+    },
+    {
+      "path": "packages/views/issues/utils/workflow-columns.ts",
+      "sha256": "410de2e9be4a2156ec7e8f2bab9847c3d730f27f227de9956e4beaa5cb07c435",
+      "whole_source": true
+    },
+    {
+      "path": "packages/core/issues/surface/filter-dependency.ts",
+      "sha256": "2a7f47faf6f23a13b2898d0291c04891faf1a0051ec80911b4592aa76c2d78a5",
+      "whole_source": true
+    },
+    {
+      "path": "packages/core/issues/unread.ts",
+      "sha256": "841b7428051c81d3d3f83f2d4ff5195ebf2989c8772b42b13b2940a999ac92b1",
+      "whole_source": true
+    },
+    {
+      "path": "packages/views/issues/surface/use-issue-surface-actions.ts",
+      "sha256": "8d511d0e0182281313aab37e7fba0e29d8428fbcb7e4306e3dd35d3d68a73789",
+      "whole_source": true
+    },
+    {
+      "path": "packages/core/issue-workflows/hooks.ts",
+      "sha256": "76c17295fbf0f71ef797580a1ed6fd1392d0aa2d27303e2a3cf9006aef46b529",
+      "whole_source": true
+    },
+    {
+      "path": "packages/core/issue-workflows/queries.ts",
+      "sha256": "f3845150af57564511f5ac2e3f6b2b96ffd3d35352001c8484a62d3514ab3185",
+      "whole_source": true
+    },
+    {
+      "path": "packages/core/platform/workspace-storage.ts",
+      "sha256": "86f0f2ab838823d3c5dd10de0126c5095e815cb8c34a000e0ba04b8d015cf5bb",
+      "whole_source": true
+    },
+    {
+      "path": "packages/core/issue-views/active-view-store.ts",
+      "sha256": "638e8244870fa3f3a9e2539c1de142ee5f32fd1329805ecbd6e8d9f1df27c16e",
+      "whole_source": true
+    },
+    {
+      "path": "packages/core/modals/store.ts",
+      "sha256": "4ec4b6d57279d8cb0ad07728cdf6548d076bbc4fd1804ad6eddc94f36c8c6120",
+      "whole_source": true
+    },
+    {
+      "path": "packages/core/platform/storage.ts",
+      "sha256": "75867acb53d6ba44c1617f7a770bb765955a4ace19b9bb44e1873cf9ee1556b2",
+      "whole_source": true
+    },
+    {
+      "path": "packages/core/issues/surface/query-plan.ts",
+      "sha256": "02b3524ac8f4e75748c00f1f12acca7d706c34c6575d35b199973f1b19e7aed0",
+      "whole_source": true
+    },
+    {
+      "path": "packages/core/issues/surface/scope.ts",
+      "sha256": "d527301bd97d58354657c79fefb2fc97d550af136d32a7e486061ed2fefcc732",
+      "whole_source": true
+    },
+    {
+      "path": "packages/core/api/client.ts",
+      "sha256": "779bb65b5b7ead815836f7c704ec3c370bafae203e4f92119fadce93e982a4d7",
+      "whole_source": false
+    },
+    {
+      "path": "packages/core/issues/stores/view-store.ts",
+      "sha256": "69d8fb7c61c9dde00b58d579e9eeb7cf8ff3f526043f2e2aadf7ac3981c92285",
+      "whole_source": false
+    }
+  ],
+  "snapshots": [
+    {
+      "path": "packages/views/issues/surface/issue-surface.tsx",
+      "start": 1,
+      "end": 100,
+      "code": "\"use client\";\n\nimport { useCallback, useEffect, useMemo, useState, type ReactNode } from \"react\";\nimport type { StoreApi } from \"zustand/vanilla\";\nimport type { IssueViewState } from \"@workpal/core/issues/stores/view-store\";\nimport type { IssueViewBaseline } from \"@workpal/core/issue-views/baseline\";\nimport { AlertTriangle, FilterX, ListTodo, Plus } from \"@workpal/ui/icons\";\nimport { Button } from \"@workpal/ui/components/ui/button\";\nimport { Skeleton } from \"@workpal/ui/components/ui/skeleton\";\nimport { cn } from \"@workpal/ui/lib/utils\";\nimport { useWorkspaceId } from \"@workpal/core/hooks\";\nimport { useModalStore } from \"@workpal/core/modals\";\nimport { useQuery } from \"@tanstack/react-query\";\nimport { workspaceWakeupSummariesOptions } from \"@workpal/core/issues/wakeups\";\nimport {\n  useViewStore,\n  ViewStoreProvider,\n} from \"@workpal/core/issues/stores/view-store-context\";\nimport {\n  getIssueSurfaceViewStore,\n  seedIssueSurfaceViewState,\n} from \"@workpal/core/issues/stores/surface-view-store\";\nimport { useActiveIssueView } from \"@workpal/core/issue-views/use-active-view\";\nimport { filteredBuiltinBaseline } from \"@workpal/core/issue-views/builtin-issue-views\";\nimport {\n  issueViewDefinitionFromState,\n  issueViewSeedDefinition,\n  sameFilterMeaning,\n} from \"@workpal/core/issue-views/definition\";\nimport { ViewBaselineProvider, useViewBaseline } from \"./view-baseline-context\";\nimport type { IssueViewScope } from \"@workpal/core/issue-views/queries\";\nimport {\n  actorKindForViewVariant,\n  issueScopeKey,\n  myRelationForViewVariant,\n  type IssueScope,\n} from \"@workpal/core/issues/surface/scope\";\nimport type { Issue } from \"@workpal/core/types\";\nimport { BoardView } from \"../components/board-view\";\nimport { BOARD_COL_WIDTH } from \"../components/board-column\";\nimport { BatchActionToolbar } from \"../components/batch-action-toolbar\";\nimport { GanttView } from \"../components/gantt-view\";\nimport { ListView } from \"../components/list-view\";\nimport { SwimLaneView } from \"../components/swimlane-view\";\nimport { TableView } from \"../components/table-view\";\nimport { useT } from \"../../i18n\";\nimport { CollectionPageState } from \"../../layout/collection-page\";\nimport { IssueContextMenuProvider } from \"../actions\";\nimport { IssueSurfaceActionsProvider } from \"./actions-context\";\nimport { IssuePeekHost } from \"../components/issue-peek\";\nimport { IssueSurfaceSelectionProvider } from \"./selection-context\";\nimport { ColumnStatusesProvider } from \"./column-statuses-context\";\nimport type { IssueCreateDefaults, IssueSurfaceProps } from \"./types\";\nimport {\n  useIssueSurfaceController,\n  type FilterDependencyKind,\n  type IssueSurfaceController,\n} from \"./use-issue-surface-controller\";\n\nexport interface IssueSurfaceRenderContext {\n  controller: IssueSurfaceController;\n  issues: Issue[];\n}\n\ninterface IssueSurfaceComponentProps extends IssueSurfaceProps {\n  renderHeader?: (context: IssueSurfaceRenderContext) => ReactNode;\n  renderEmpty?: (context: IssueSurfaceRenderContext) => ReactNode;\n  renderLoading?: (context: IssueSurfaceRenderContext) => ReactNode;\n  clientFilter?: (issue: Issue) => boolean;\n  showClientEmpty?: (context: IssueSurfaceRenderContext) => boolean;\n  batchToolbar?: \"always\" | \"list\" | \"never\";\n  contentClassName?: string;\n}\n\n/** An explicit, caller-owned store bypasses saved views and persisted surfaces. */\nexport function IssueSurfaceWithStore({ store, baseline, ...props }: Omit<IssueSurfaceComponentProps, \"surfaceKey\"> & {\n  store: StoreApi<IssueViewState>;\n  baseline: IssueViewBaseline;\n}) {\n  const wsId = useWorkspaceId();\n  return <ViewStoreProvider store={store}>\n    <ViewBaselineProvider baseline={baseline}>\n      <IssueSurfaceContent key={wsId} {...props} />\n    </ViewBaselineProvider>\n  </ViewStoreProvider>;\n}\n\nexport function IssueSurface({\n  scope,\n  modes,\n  surfaceKey,\n  createDefaults,\n  allowCreate = true,\n  search,\n  renderHeader,\n  renderEmpty,\n  renderLoading,\n  clientFilter,\n  showClientEmpty,\n  batchToolbar = \"always\","
+    },
+    {
+      "path": "packages/views/issues/surface/issue-surface.tsx",
+      "start": 101,
+      "end": 200,
+      "code": "  contentClassName,\n}: IssueSurfaceComponentProps) {\n  const wsId = useWorkspaceId();\n  // Saved views exist on workspace / my / project surfaces only.\n  const viewScope: IssueViewScope | null =\n    scope.type === \"workspace\"\n      ? { scope_type: \"workspace\" }\n      : scope.type === \"my\"\n        ? { scope_type: \"my\" }\n        : scope.type === \"project\"\n          ? { scope_type: \"project\", scope_id: scope.projectId }\n          : null;\n  const { activeView } = useActiveIssueView(wsId, viewScope);\n\n  // An open saved view swaps the surface onto its own view-preference key:\n  // display/extra-filter adjustments persist per user per view, and the\n  // underlying built-in surface state is never touched (no draft machinery).\n  const resolvedSurfaceKey = activeView\n    ? `view:${activeView.id}`\n    : (surfaceKey ?? issueScopeKey(scope));\n  const seedDefinition = activeView\n    ? { ...activeView.query, ...activeView.display }\n    : null;\n  // While a view is open, the scope axis the view captured belongs to the\n  // VIEW, not to whichever tab the user stood on: workspace/project views\n  // carry an assignee-type variant, my views a relation variant. The user's\n  // own tab state is never touched — it is exactly where they left it when\n  // the view closes (or vanishes). A variant-free view resolves to the\n  // unrestricted axis value.\n  const effectiveScope: IssueScope =\n    activeView && (scope.type === \"workspace\" || scope.type === \"project\")\n      ? { ...scope, actorKind: actorKindForViewVariant(activeView.scope_variant) }\n      : activeView && scope.type === \"my\"\n        ? { ...scope, relation: myRelationForViewVariant(activeView.scope_variant) }\n        : scope;\n  const viewBaseline = filteredBuiltinBaseline(activeView);\n  const store = useMemo(() => {\n    // First-open seeding happens HERE, at store-creation time for this key:\n    // no React component has subscribed to the new key's store yet, so the\n    // setState inside cannot cascade into an in-render update loop (it did\n    // when this ran in the component body).\n    if (seedDefinition) {\n      seedIssueSurfaceViewState(resolvedSurfaceKey, seedDefinition);\n    }\n    const viewStore = getIssueSurfaceViewStore(resolvedSurfaceKey);\n    if (viewBaseline) keepFixedFilters(viewStore, viewBaseline);\n    return viewStore;\n    // eslint-disable-next-line react-hooks/exhaustive-deps -- seed identity follows the key\n  }, [resolvedSurfaceKey]);\n  // Seeding happens once per key, but the stored state can be replaced later:\n  // a workspace switch reloads it from that workspace's preferences, which may\n  // never have held the condition. Re-apply it whenever it goes missing.\n  useEffect(() => {\n    if (!viewBaseline) return;\n    keepFixedFilters(store, viewBaseline);\n    return store.subscribe(() => keepFixedFilters(store, viewBaseline));\n  }, [store, viewBaseline]);\n\n  // Every change of this key tears down and remounts the ENTIRE surface\n  // (providers, DnD, all columns/cards) — by design for data-window changes,\n  // but expensive enough that unexpected flips are performance bugs. Dev-only\n  // breadcrumb so a Performance trace showing double mounts can be tied to\n  // the exact key transition.\n  const contentKey = `${wsId}:${issueScopeKey(effectiveScope)}:${activeView ? `view:${activeView.id}` : \"default\"}`;\n  useEffect(() => {\n    if (process.env.NODE_ENV !== \"production\") {\n      console.warn(`[issue-surface] mount ${contentKey}`);\n    }\n  }, [contentKey]);\n\n  return (\n    <ViewStoreProvider store={store}>\n      <ViewBaselineProvider baseline={viewBaseline}>\n        {/* Remount on data-window change: the list queries keep the previous\n            key's data as a placeholder (keepPreviousData) so sort/filter\n            changes within ONE surface never flash a skeleton — but reusing the\n            mounted observer across windows made project A's cards impersonate\n            project B (with isLoading=false, so no skeleton either) until B's\n            fetch landed. A window-keyed remount gives the new window a fresh\n            observer: cold window → skeleton, warm window → instant cache hit.\n            The window identity is wsId + scope — wsId is required because the\n            workspace layout does not remount on workspace switch and two\n            workspaces share the same scope key (e.g. \"workspace:all\"). Keyed\n            by data identity, not surfaceKey (view-preference identity). */}\n        <IssueSurfaceContent\n          key={contentKey}\n          scope={effectiveScope}\n          modes={modes}\n          createDefaults={createDefaults}\n          allowCreate={allowCreate}\n          search={search}\n          renderHeader={renderHeader}\n          renderEmpty={renderEmpty}\n          renderLoading={renderLoading}\n          clientFilter={clientFilter}\n          showClientEmpty={showClientEmpty}\n          batchToolbar={batchToolbar}\n          contentClassName={contentClassName}\n        />\n      </ViewBaselineProvider>"
+    },
+    {
+      "path": "packages/views/issues/surface/issue-surface.tsx",
+      "start": 201,
+      "end": 300,
+      "code": "    </ViewStoreProvider>\n  );\n}\n\n/**\n * Holds a built-in view to its condition: exactly the relations and agent\n * filter it is defined by. Other dimensions narrow it; these would widen it,\n * since a dimension's values are ORed (Subscribed + Assigned is \"subscribed\n * or assigned\").\n */\nfunction keepFixedFilters(store: StoreApi<IssueViewState>, baseline: IssueViewBaseline) {\n  const state = store.getState();\n  const patch: Partial<IssueViewState> = {};\n  if (baseline.agentRunning && (!state.agentRunningFilter || state.agentIdleFilter)) {\n    Object.assign(patch, { agentRunningFilter: true, agentIdleFilter: false });\n  }\n  const relations = baseline.raw.relationFilters;\n  if (\n    relations.length > 0 &&\n    (relations.length !== state.relationFilters.length ||\n      relations.some((relation) => !state.relationFilters.includes(relation)))\n  ) {\n    patch.relationFilters = [...relations];\n  }\n  if (relations.length > 0 && state.negatedFilters.includes(\"relation\")) {\n    patch.negatedFilters = state.negatedFilters.filter((dimension) => dimension !== \"relation\");\n  }\n  if (Object.keys(patch).length > 0) store.setState(patch);\n}\n\nfunction IssueSurfaceContent({\n  scope,\n  modes,\n  createDefaults,\n  allowCreate = true,\n  search,\n  renderHeader,\n  renderEmpty,\n  renderLoading,\n  clientFilter,\n  showClientEmpty,\n  batchToolbar,\n  contentClassName,\n}: Omit<IssueSurfaceComponentProps, \"surfaceKey\">) {\n  const workspaceId = useWorkspaceId();\n  // One polling owner for the whole surface; individual cards only select cache data.\n  useQuery({ ...workspaceWakeupSummariesOptions(workspaceId), refetchInterval: 10_000 });\n  const { t } = useT(\"projects\");\n  const controller = useIssueSurfaceController({\n    scope,\n    modes,\n    createDefaults,\n    search,\n  });\n  const [tableLoadedIssues, setTableLoadedIssues] = useState<Issue[]>([]);\n  const handleTableLoadedIssuesChange = useCallback((next: Issue[]) => {\n    setTableLoadedIssues((current) =>\n      current.length === next.length &&\n      current.every((issue, index) => issue === next[index])\n        ? current\n        : next,\n    );\n  }, []);\n  useEffect(() => {\n    if (controller.viewMode !== \"table\") setTableLoadedIssues([]);\n  }, [controller.viewMode]);\n  const issues = useMemo(\n    () =>\n      clientFilter\n        ? controller.issues.filter((issue) => clientFilter(issue))\n        : controller.issues,\n    [clientFilter, controller.issues],\n  );\n  const swimlaneIssues = useMemo(\n    () =>\n      clientFilter\n        ? controller.swimlaneIssues.filter((issue) => clientFilter(issue))\n        : controller.swimlaneIssues,\n    [clientFilter, controller.swimlaneIssues],\n  );\n  const renderContext = useMemo(\n    () => ({ controller, issues }),\n    [controller, issues],\n  );\n  const openCreateIssue = useCallback(\n    (defaults?: IssueCreateDefaults) => {\n      controller.openCreateIssue(defaults);\n    },\n    [controller],\n  );\n  const shouldShowClientEmpty =\n    !!clientFilter &&\n    issues.length === 0 &&\n    (showClientEmpty ? showClientEmpty(renderContext) : true);\n  const shouldShowBatchToolbar =\n    batchToolbar !== \"never\" &&\n    (batchToolbar === \"always\" ||\n      controller.viewMode === \"list\" ||\n      controller.viewMode === \"table\");\n"
+    },
+    {
+      "path": "packages/views/issues/surface/issue-surface.tsx",
+      "start": 301,
+      "end": 400,
+      "code": "  return (\n    <IssueSurfaceActionsProvider actions={controller.actions}>\n      {/* One shared right-click menu for every card/row this surface renders\n          — see IssueContextMenuProvider. Inside the actions provider so the\n          singleton's useIssueActions routes updates through surface\n          actions. */}\n      <IssueContextMenuProvider>\n      <IssueSurfaceSelectionProvider selection={controller.selection}>\n      <ColumnStatusesProvider statuses={controller.columnStatuses}>\n        {renderHeader?.(renderContext)}\n        {/* Every view opens the side peek on Shift+Click. The host wraps the\n            loading and empty states too, so a view switch that briefly shows\n            a skeleton keeps the peek open. */}\n        <IssuePeekHost>\n        {/* A failed filter dependency precedes loading/empty/content on\n            purpose. Row fetching is suspended while it is down, so every\n            branch below would render an unexplained empty surface with no way\n            out. */}\n        {controller.filterDependencyError ? (\n          <FilterDependencyErrorState\n            kind={controller.filterDependencyError.kind}\n            onRetry={controller.filterDependencyError.retry}\n          />\n        ) : controller.isLoading ? (\n          renderLoading ? (\n            renderLoading(renderContext)\n          ) : (\n            <IssueSurfaceSkeleton mode={controller.viewMode} />\n          )\n        ) : controller.isEmpty || shouldShowClientEmpty ? (\n          // A filtered-empty surface is NOT an empty surface. Claiming \"no\n          // issues here yet\" and offering to create one is wrong when the rows\n          // exist and a filter is hiding them — and it is the state the\n          // agents-working chip drops you into most often (MUL-5525). This\n          // branch precedes `renderEmpty` on purpose: every surface's own empty\n          // copy describes the unfiltered case.\n          controller.hasActiveFilters ? (\n            <FilteredEmptyState />\n          ) : renderEmpty ? (\n            renderEmpty(renderContext)\n          ) : (\n            <CollectionPageState\n              icon={ListTodo}\n              title={t(($) => $.detail.empty_issues_title)}\n              description={t(($) => $.detail.empty_issues_hint)}\n              actions={\n                allowCreate && <>\n                  <Button size=\"sm\" onClick={() => controller.openCreateIssue()}>\n                    <Plus aria-hidden=\"true\" />\n                    {t(($) => $.detail.empty_issues_new_button)}\n                  </Button>\n                  {scope.type === \"project\" ? (\n                    <Button\n                      variant=\"outline\"\n                      size=\"sm\"\n                      onClick={() =>\n                        useModalStore\n                          .getState()\n                          .open(\"project-add-issue\", { projectId: scope.projectId })\n                      }\n                    >\n                      {t(($) => $.detail.empty_issues_add_existing)}\n                    </Button>\n                  ) : null}\n                </>\n              }\n            />\n          )\n        ) : (\n          <div className={cn(\"flex flex-col flex-1 min-h-0\", contentClassName)}>\n            {controller.viewMode === \"board\" && (\n              <BoardView\n                issues={issues}\n                visibleStatuses={controller.visibleStatuses}\n                onMoveIssue={controller.moveIssue}\n                childProgressMap={controller.childProgressMap}\n                projectMap={controller.projectMap}\n                projectId={controller.projectId}\n                onCreateIssue={allowCreate ? openCreateIssue : undefined}\n                statusPagination={controller.statusPagination}\n                groupBranches={controller.groupBranches}\n              />\n            )}\n            {controller.viewMode === \"list\" && (\n              <ListView\n                issues={issues}\n                visibleStatuses={controller.visibleStatuses}\n                childProgressMap={controller.childProgressMap}\n                projectMap={controller.projectMap}\n                projectId={controller.projectId}\n                onMoveIssue={controller.moveIssue}\n                onCreateIssue={allowCreate ? openCreateIssue : undefined}\n                statusPagination={controller.statusPagination!}\n              />\n            )}\n            {controller.viewMode === \"table\" && (\n              <TableView\n                serverQuery={controller.tableQuerySpec}\n                childProgressMap={controller.childProgressMap}\n                search={controller.tableSearch}"
+    },
+    {
+      "path": "packages/views/issues/surface/issue-surface.tsx",
+      "start": 401,
+      "end": 500,
+      "code": "                onSearchChange={controller.setTableSearch}\n                onLoadedIssuesChange={handleTableLoadedIssuesChange}\n                onCreateIssue={openCreateIssue}\n                exportIssues={controller.exportTableIssues}\n                resolveExportLookups={controller.resolveTableExportLookups}\n              />\n            )}\n            {controller.viewMode === \"gantt\" && (\n              <GanttView issues={controller.filteredGanttIssues} />\n            )}\n            {controller.viewMode === \"swimlane\" && (\n              <SwimLaneView\n                issues={issues}\n                unfilteredIssues={swimlaneIssues}\n                activeFilters={controller.activeFilters}\n                visibleStatuses={controller.visibleStatuses}\n                onMoveIssue={controller.moveIssue}\n                childProgressMap={controller.childProgressMap}\n                projectMap={controller.projectMap}\n                projectId={controller.projectId}\n                onCreateIssue={allowCreate ? openCreateIssue : undefined}\n                groupBranches={controller.groupBranches}\n              />\n            )}\n          </div>\n        )}\n        </IssuePeekHost>\n        {shouldShowBatchToolbar && (\n          <BatchActionToolbar\n            issues={\n              controller.viewMode === \"table\" ? tableLoadedIssues : issues\n            }\n          />\n        )}\n      </ColumnStatusesProvider>\n      </IssueSurfaceSelectionProvider>\n      </IssueContextMenuProvider>\n    </IssueSurfaceActionsProvider>\n  );\n}\n\n/**\n * Missing filter dependencies must offer recovery instead of claiming that\n * the filter matched no issues.\n */\nfunction FilterDependencyErrorState({\n  kind,\n  onRetry,\n}: {\n  kind: FilterDependencyKind;\n  onRetry: () => void;\n}) {\n  const { t } = useT(\"issues\");\n  return (\n    <CollectionPageState\n      role=\"alert\"\n      tone=\"warning\"\n      icon={AlertTriangle}\n      title={\n        kind === \"working\"\n          ? t(($) => $.working_filter_error.title)\n          : kind === \"unread\"\n            ? t(($) => $.unread_filter_error.title)\n            : kind === \"relation\"\n              ? t(($) => $.relation_filter_error.title)\n              : t(($) => $.status_catalog_error.title)\n      }\n      description={\n        kind === \"status\"\n          ? t(($) => $.status_catalog_error.hint)\n          : kind === \"relation\"\n            ? t(($) => $.relation_filter_error.hint)\n            : undefined\n      }\n      actions={\n        <Button variant=\"outline\" size=\"sm\" onClick={onRetry}>\n          {t(($) => $.status_catalog_error.retry)}\n        </Button>\n      }\n    />\n  );\n}\n\nfunction FilteredEmptyState() {\n  const { t } = useT(\"issues\");\n  const clearFilters = useViewStore((s) => s.clearFilters);\n  const resetFiltersTo = useViewStore((s) => s.resetFiltersTo);\n  const setDateFilter = useViewStore((s) => s.setDateFilter);\n  // Inside a saved view \"clear\" returns to the view's own conditions — the\n  // baseline is not clearable from here (only the edit dialog changes it).\n  const baseline = useViewBaseline();\n  const handleClear = baseline\n    ? () => {\n        resetFiltersTo(baseline.raw);\n        setDateFilter(null);\n      }\n    : clearFilters;\n  const baselineQuery = useMemo(\n    () => (baseline ? issueViewSeedDefinition({ query: { ...baseline.raw }, display: {} }).query : null),\n    [baseline],"
+    },
+    {
+      "path": "packages/views/issues/surface/issue-surface.tsx",
+      "start": 501,
+      "end": 593,
+      "code": "  );\n  // Only the view's own conditions are on, so there is nothing to clear.\n  const atBaseline = useViewStore(\n    // Date intervals are user filters, but intentionally live outside the\n    // saved-view definition and its baseline snapshot.\n    (s) => !s.dateFilter && !!baselineQuery && sameFilterMeaning(baselineQuery, issueViewDefinitionFromState(s).query),\n  );\n\n  return (\n    <CollectionPageState\n      size=\"compact\"\n      icon={FilterX}\n      title={\n        atBaseline && baseline?.unread\n          ? t(($) => $.filtered_empty.unread_title)\n          : t(($) => $.filtered_empty.title)\n      }\n      actions={\n        atBaseline ? undefined : (\n          <Button variant=\"outline\" size=\"sm\" onClick={handleClear}>\n            {t(($) => $.filtered_empty.clear_button)}\n          </Button>\n        )\n      }\n    />\n  );\n}\n\n// Table is deliberately absent. It owns its own placeholders, drawn as rows\n// inside its real grid so the header, column widths and toolbar are up before\n// any data is — a surface-level stand-in would replace all of that with bars\n// of a different shape and then jump when the rows arrived. For the same\n// reason list and board are drawn box-for-box with `ListView` (40px group\n// header, issue-row-height rows) and `BoardView` (fixed-width columns, plain\n// one-line cards).\nfunction IssueSurfaceSkeleton({ mode }: { mode: string }) {\n  if (mode === \"list\") {\n    return (\n      <div className=\"flex-1 min-h-0 overflow-hidden p-2 pt-0\">\n        <div className=\"space-y-1\">\n          {[4, 3].map((rows, g) => (\n            <div key={g}>\n              <div className=\"flex h-10 items-center gap-2 rounded-lg bg-muted px-3\">\n                <Skeleton className=\"size-3.5 rounded-full\" />\n                <Skeleton className=\"h-3.5 w-20\" />\n              </div>\n              {Array.from({ length: rows }).map((_, i) => (\n                <div key={i} className=\"flex h-[var(--issue-row-height)] items-center gap-2 px-4\">\n                  <Skeleton className=\"size-4 shrink-0 rounded-full\" />\n                  <span className=\"min-w-16 shrink-0\">\n                    <Skeleton className=\"h-3 w-12\" />\n                  </span>\n                  <Skeleton className=\"h-3.5 w-full max-w-80\" />\n                </div>\n              ))}\n            </div>\n          ))}\n        </div>\n      </div>\n    );\n  }\n\n  return (\n    <div className=\"flex flex-1 min-h-0 gap-4 overflow-hidden p-2\">\n      {[3, 2, 2, 1, 1].map((cards, c) => (\n        <div\n          key={c}\n          style={{ width: BOARD_COL_WIDTH }}\n          className=\"flex shrink-0 flex-col rounded-xl bg-muted/40 p-2\"\n        >\n          <div className=\"mb-2 flex h-6 items-center gap-2 px-1.5\">\n            <Skeleton className=\"size-2.5 rounded-full\" />\n            <Skeleton className=\"h-3.5 w-20\" />\n          </div>\n          <div className=\"p-1\">\n            {Array.from({ length: cards }).map((_, i) => (\n              <div key={i} className={i === 0 ? undefined : \"pt-2\"}>\n                <div className=\"rounded-lg border-[0.5px] border-surface-border bg-surface px-2.5 py-3\">\n                  <div className=\"flex h-4 items-center\">\n                    <Skeleton className=\"h-3 w-14\" />\n                  </div>\n                  <div className=\"mt-1 flex h-5 items-center\">\n                    <Skeleton className=\"h-3.5 w-4/5\" />\n                  </div>\n                </div>\n              </div>\n            ))}\n          </div>\n        </div>\n      ))}\n    </div>\n  );\n}"
+    },
+    {
+      "path": "packages/views/issues/surface/use-issue-surface-controller.ts",
+      "start": 1,
+      "end": 100,
+      "code": "\"use client\";\n\nimport { useCallback, useEffect, useMemo, useRef, useState } from \"react\";\nimport { hashKey, keepPreviousData, useQuery } from \"@tanstack/react-query\";\nimport { api } from \"@workpal/core/api\";\nimport type {\n  Issue,\n  IssueStatus,\n  IssueTableFacetSpec,\n  IssueTableFacetsResponse,\n  IssueTableGroupsRequest,\n  IssueTableNegatableFilter,\n  IssueTableQuerySpec,\n  Project,\n  WorkingAgentSummary,\n} from \"@workpal/core/types\";\nimport { agentTaskSnapshotOptions, workspaceWorkingAgentsOptions } from \"@workpal/core/agents/queries\";\nimport { deriveIssueSurfaceActivity } from \"./activity\";\nimport { useWorkspaceId } from \"@workpal/core/hooks\";\nimport { useIssueStatuses } from \"@workpal/core/issue-statuses/hooks\";\nimport { useColumnWorkflow, workflowColumns } from \"../utils/workflow-columns\";\nimport { statusFilterColumns, visibleStatusKeys } from \"@workpal/core/issues\";\nimport { dateOnlyToLocalDate, todayDateOnly } from \"@workpal/core/issues/date\";\nimport { useIssueUnreadIds } from \"@workpal/core/issues/unread\";\nimport {\n  advancedFilterToTableQuery,\n  advancedFilterUsesField,\n  advancedFilterUsesValue,\n  FILTER_DIMENSION_TABLE_FIELD,\n  statusColumnFilter,\n  propertyIdOfField,\n  withoutAdvancedFilterConditions,\n} from \"@workpal/core/issues/stores/filter-tree\";\nimport type { IssueSortParam } from \"@workpal/core/issues/queries\";\nimport { issueTableFacetsOptions } from \"@workpal/core/issues/queries\";\nimport {\n  buildIssueSurfaceQueryPlan,\n  type IssueSurfaceQueryPlan,\n} from \"@workpal/core/issues/surface/query-plan\";\nimport {\n  assigneeTypesForActorKind,\n  type IssueScope,\n} from \"@workpal/core/issues/surface/scope\";\nimport {\n  combineFilterDependencies,\n  filterDependencyState,\n  statusCatalogSource,\n  type FilterDependencyState,\n} from \"@workpal/core/issues/surface/filter-dependency\";\nimport type {\n  IssueDateFilter,\n  NegatableFilterDimension,\n  SortField,\n} from \"@workpal/core/issues/stores/view-store\";\nimport { propertyListOptions } from \"@workpal/core/properties\";\nimport {\n  effectiveNegatedFilters,\n  propertyIdFromViewKey,\n} from \"@workpal/core/issues/stores/view-store\";\nimport { useViewStore } from \"@workpal/core/issues/stores/view-store-context\";\nimport { useAuthStore } from \"@workpal/core/auth\";\nimport { agentListOptions, involvedSquadIdsOptions } from \"@workpal/core/workspace/queries\";\nimport { subscribedIssueIdsOptions } from \"@workpal/core/issues/subscribed\";\nimport { useShallow } from \"zustand/react/shallow\";\nimport type { IssueFilters, IssueRelationContext } from \"../utils/filter\";\nimport type { ChildProgress } from \"../components/list-row\";\nimport { IssueTableExportIntegrityError } from \"../components/table-view-model\";\nimport type { IssueSurfaceMode } from \"./types\";\nimport type { IssueSurfaceActions } from \"./actions-context\";\nimport {\n  type IssueSurfaceSelection,\n  useCreateIssueSurfaceSelection,\n} from \"./selection-context\";\nimport type { IssueCreateDefaults } from \"./types\";\nimport {\n  useIssueSurfaceActions,\n  type MoveIssueUpdates,\n} from \"./use-issue-surface-actions\";\nimport { useIssueSurfaceData } from \"./use-issue-surface-data\";\nimport {\n  useIssueStatusBranches,\n  type IssueStatusPagination,\n} from \"./use-issue-status-branches\";\nimport {\n  useIssueGroupBranches,\n  type IssueGroupBranches,\n} from \"./use-issue-group-branches\";\n\n/** Which filter's data failed, for the error state's copy. */\nexport type FilterDependencyKind = \"status\" | \"working\" | \"unread\" | \"relation\";\n\nexport interface FilterDependencyError {\n  kind: FilterDependencyKind;\n  retry: () => void;\n}\n\ninterface UseIssueSurfaceControllerInput {\n  scope: IssueScope;\n  modes: IssueSurfaceMode[];\n  createDefaults?: IssueCreateDefaults;"
+    },
+    {
+      "path": "packages/views/issues/surface/use-issue-surface-controller.ts",
+      "start": 101,
+      "end": 200,
+      "code": "  search?: string;\n}\n\nexport interface IssueSurfaceController {\n  scopeKey: string;\n  projectId?: string;\n  createDefaults: IssueCreateDefaults;\n  viewMode: IssueSurfaceMode;\n  allowGantt: boolean;\n  surfaceIssues: Issue[];\n  projectIssues: Issue[];\n  issues: Issue[];\n  swimlaneIssues: Issue[];\n  /** Agents currently working inside THIS surface, under the surface's active\n   *  filters — the header chip's count, so clicking it leaves exactly these\n   *  agents' rows (MUL-4884, MUL-5525). `undefined` means the projection has\n   *  not resolved yet; the chip renders an indeterminate state rather than a\n   *  number it cannot stand behind. */\n  workingAgents: WorkingAgentSummary[] | undefined;\n  filteredGanttIssues: Issue[];\n  sort: IssueSortParam;\n  ganttIssues: Issue[];\n  visibleStatuses: IssueStatus[];\n  /** Columns the viewer can show or hide from Display, in column order. */\n  columnStatuses: IssueStatus[];\n  /** Exact server counts plus cursor controls for List/status Board. */\n  statusPagination?: IssueStatusPagination;\n  /** Exact group catalog plus independent row cursors for Assignee/Property\n   * Board and compound Swimlane cells. */\n  groupBranches?: IssueGroupBranches;\n  activeFilters: Omit<IssueFilters, \"statusFilters\">;\n  /** Any filter that `clearFilters()` would reset is on. Lets an empty surface\n   *  say \"your filters hid everything\" instead of \"there is nothing here\". */\n  hasActiveFilters: boolean;\n  actions: IssueSurfaceActions;\n  selection: IssueSurfaceSelection;\n  childProgressMap: Map<string, ChildProgress>;\n  projectMap: Map<string, Project>;\n  resolveTableExportLookups: (needs: {\n    projects: boolean;\n    childProgress: boolean;\n  }) => Promise<{\n    projectMap: Map<string, Project>;\n    childProgressMap: Map<string, ChildProgress>;\n  }>;\n  tableSearch: string;\n  /** Canonical server-owned Table membership. */\n  tableQuerySpec: IssueTableQuerySpec;\n  /** Exact disjunctive counts for the active server-backed filter submenu. */\n  tableFacetCounts?: IssueTableFacetsResponse;\n  /** Whether scopedIssues is a complete client window for local count use. */\n  facetCountsExact: boolean;\n  /** Load one server facet when its filter submenu is opened. */\n  setActiveTableFacet: (facet: IssueTableFacetSpec | null) => void;\n  setTableSearch: (query: string) => void;\n  exportTableIssues: () => Promise<Issue[]>;\n  isLoading: boolean;\n  /** See IssueSurfaceData.isRefreshing — placeholder-backed revalidation. */\n  isRefreshing: boolean;\n  isEmpty: boolean;\n  /** Data an active filter needs failed to load, so the filter cannot be\n   *  honoured. The surface shows a retryable error instead of rows. */\n  filterDependencyError: FilterDependencyError | null;\n  openCreateIssue: (defaults?: IssueCreateDefaults) => void;\n  moveIssue: (\n    issueId: string,\n    updates: MoveIssueUpdates,\n    onSettled?: () => void,\n  ) => void;\n}\n\nfunction issueDateFilterToApiParams(filter: IssueDateFilter | null) {\n  if (!filter) return {};\n\n  const from = dateOnlyToLocalDate(filter.from);\n  const to = dateOnlyToLocalDate(filter.to);\n  if (!from || !to) return {};\n\n  const start = from <= to ? from : to;\n  const endSource = from <= to ? to : from;\n  const end = new Date(endSource);\n  end.setDate(end.getDate() + 1);\n\n  return {\n    date_field: filter.field,\n    date_start: start.toISOString(),\n    date_end: end.toISOString(),\n  };\n}\n\nfunction useDebouncedTableSearch(value: string, delayMs = 250) {\n  const [debouncedValue, setDebouncedValue] = useState(value.trim());\n\n  useEffect(() => {\n    const timer = window.setTimeout(\n      () => setDebouncedValue(value.trim()),\n      delayMs,\n    );\n    return () => window.clearTimeout(timer);\n  }, [delayMs, value]);"
+    },
+    {
+      "path": "packages/views/issues/surface/use-issue-surface-controller.ts",
+      "start": 201,
+      "end": 300,
+      "code": "\n  return debouncedValue;\n}\n\n/** One shared reference for every un-settled list default in this hook.\n *\n * `const { data = [] } = useQuery(...)` allocates a new array on every render\n * for as long as the query has no data — which is the whole window right after\n * a workspace switch. Downstream that array is a memo dependency, so the empty\n * default alone was enough to rebuild the derived Sets, the table query spec,\n * and the branch query list once per render (MUL-5477). */\nconst EMPTY_LIST: never[] = [];\n\nconst TABLE_NEGATE_FIELD: Record<NegatableFilterDimension, IssueTableNegatableFilter> =\n  FILTER_DIMENSION_TABLE_FIELD;\n\n/**\n * Pin a derived value's identity to its CONTENT.\n *\n * `tableQuerySpec` is rebuilt from 17 dependencies, so any one of them losing\n * referential stability hands every consumer a new object even though the query\n * it describes is unchanged. Consumers use it as a memo dependency and, in the\n * Table's case, as the source of a `useQueries` list — so a new-but-equal spec\n * rebuilt that list on every render.\n *\n * Hashed with TanStack's own `hashKey` rather than `JSON.stringify` so this\n * agrees exactly with how the same spec is hashed into a `queryKey`: object\n * keys are sorted, so two specs that resolve to one query also resolve to one\n * identity here.\n */\nfunction useStableByContent<T>(value: T): T {\n  const contentKey = hashKey([value]);\n  // eslint-disable-next-line react-hooks/exhaustive-deps -- identity follows the content hash, not the reference\n  return useMemo(() => value, [contentKey]);\n}\n\nexport function useIssueSurfaceController({\n  scope,\n  modes,\n  createDefaults,\n  search = \"\",\n}: UseIssueSurfaceControllerInput): IssueSurfaceController {\n  const wsId = useWorkspaceId();\n  const queryPlan = useMemo<IssueSurfaceQueryPlan>(\n    () => buildIssueSurfaceQueryPlan(scope),\n    [scope],\n  );\n  const scopeKey = queryPlan.scopeKey;\n  const projectId = scope.type === \"project\" ? scope.projectId : undefined;\n\n  const viewMode = useViewStore((s) => s.viewMode);\n  const setViewMode = useViewStore((s) => s.setViewMode);\n  const grouping = useViewStore((s) => s.grouping);\n  const sortBy = useViewStore((s) => s.sortBy);\n  const sortDirection = useViewStore((s) => s.sortDirection);\n  const dateFilter = useViewStore((s) => s.dateFilter);\n  const statusFilters = useViewStore((s) => s.statusFilters);\n  const priorityFilters = useViewStore((s) => s.priorityFilters);\n  const assigneeFilters = useViewStore((s) => s.assigneeFilters);\n  const includeNoAssignee = useViewStore((s) => s.includeNoAssignee);\n  const creatorFilters = useViewStore((s) => s.creatorFilters);\n  const projectFilters = useViewStore((s) => s.projectFilters);\n  const includeNoProject = useViewStore((s) => s.includeNoProject);\n  const projectStatusFilters = useViewStore((s) => s.projectStatusFilters);\n  const labelFilters = useViewStore((s) => s.labelFilters);\n  const storedRelationFilters = useViewStore((s) => s.relationFilters);\n  const dueDateFilters = useViewStore((s) => s.dueDateFilters);\n  const storedAdvancedFilter = useViewStore((s) => s.advancedFilter);\n  const negatedFilters = useViewStore(useShallow(effectiveNegatedFilters));\n  const propertyFilters = useViewStore((s) => s.propertyFilters);\n  const agentRunningFilter = useViewStore((s) => s.agentRunningFilter);\n  const agentIdleFilter = useViewStore((s) => s.agentIdleFilter);\n  const unreadFilter = useViewStore((s) => s.unreadFilter);\n  const showSubIssues = useViewStore((s) => s.showSubIssues);\n  const ganttShowCompleted = useViewStore((s) => s.ganttShowCompleted);\n  const cardProperties = useViewStore((s) => s.cardProperties);\n  const swimlaneGrouping = useViewStore((s) => s.swimlaneGrouping);\n  const tableColumns = useViewStore((s) => s.tableColumns);\n  const tableGrouping = useViewStore((s) => s.tableGrouping);\n  const listCollapsedStatuses = useViewStore((s) => s.listCollapsedStatuses);\n  const hiddenStatusKeys = useViewStore((s) => s.hiddenStatuses);\n  const catalog = useIssueStatuses(wsId);\n  const statusNegated = negatedFilters.includes(\"status\");\n  const [tableSearch, setTableSearch] = useState(\"\");\n  // A \"my issues\" surface already scopes by relation; the menu hides the\n  // dimension there, and a persisted value must not silently narrow it.\n  const relationFilters = scope.type === \"my\" ? EMPTY_LIST : storedRelationFilters;\n  // Active property catalog. Persisted view state can outlive definitions\n  // (archive/delete): filters keyed by a non-active definition are stripped\n  // before they reach the predicates, and a sort on a non-active definition\n  // degrades to manual order — matching what the header already shows.\n  const { data: workspaceProperties = EMPTY_LIST, isSuccess: catalogSettled } = useQuery(propertyListOptions(wsId));\n  const activePropertyIds = useMemo(\n    () => new Set(workspaceProperties.map((p) => p.id)),\n    [workspaceProperties],\n  );\n  // The same rule for the rule tree, and a project surface already fixes the\n  // project; conditions on a non-active property go like flat ones do.\n  // Pruned: empty rows the panel is still editing filter nothing.\n  const advancedFilter = useMemo(() => {"
+    },
+    {
+      "path": "packages/views/issues/surface/use-issue-surface-controller.ts",
+      "start": 301,
+      "end": 400,
+      "code": "    const fixed: readonly string[] = [\n      ...(scope.type === \"my\" ? [\"relation\"] : []),\n      ...(scope.type === \"project\" ? [\"project\"] : []),\n    ];\n    return withoutAdvancedFilterConditions(storedAdvancedFilter, (condition) => {\n      if (fixed.includes(condition.field)) return true;\n      const propertyId = propertyIdOfField(condition.field);\n      return propertyId !== null && catalogSettled && !activePropertyIds.has(propertyId);\n    });\n  }, [activePropertyIds, catalogSettled, scope.type, storedAdvancedFilter]);\n  // Columns follow a status the tree requires as they follow the simple one.\n  const columnStatus = useMemo(\n    () => statusColumnFilter(statusFilters, statusNegated, advancedFilter, hiddenStatusKeys),\n    [advancedFilter, hiddenStatusKeys, statusFilters, statusNegated],\n  );\n  const { workflow: projectWorkflow } = useColumnWorkflow(\n    wsId,\n    projectId,\n    columnStatus.statuses.length > 0 && !columnStatus.negated,\n  );\n  const advancedTableFilter = useMemo(\n    () => advancedFilterToTableQuery(advancedFilter),\n    [advancedFilter],\n  );\n  // Due-date buckets resolve against the viewer's calendar day. Sent only\n  // when a bucket is in play, so other queries keep one cache key across\n  // midnight.\n  const usesDueDates =\n    dueDateFilters.length > 0 || advancedFilterUsesField(advancedFilter, \"dueDate\");\n  const today = usesDueDates ? todayDateOnly() : undefined;\n  const userId = useAuthStore((s) => s.user?.id);\n  // Each relation value reads only its own dependency, so a slow or failed\n  // agent list never switches off \"subscribed\" (and vice versa).\n  const usesMyAgents =\n    relationFilters.includes(\"my_agents\") ||\n    advancedFilterUsesValue(advancedFilter, \"relation\", \"my_agents\");\n  const usesSubscribed =\n    relationFilters.includes(\"subscribed\") ||\n    advancedFilterUsesValue(advancedFilter, \"relation\", \"subscribed\");\n  const agentsQuery = useQuery({\n    ...agentListOptions(wsId),\n    enabled: usesMyAgents,\n  });\n  const agents = agentsQuery.data;\n  const involvedSquadIdsQuery = useQuery({\n    ...involvedSquadIdsOptions(wsId),\n    enabled: usesMyAgents,\n  });\n  const involvedSquadIds = involvedSquadIdsQuery.data;\n  const subscribedIssueIdsQuery = useQuery({\n    ...subscribedIssueIdsOptions(wsId),\n    enabled: usesSubscribed,\n  });\n  const subscribedIssueIds = subscribedIssueIdsQuery.data;\n  const relationSources = [\n    usesMyAgents && agentsQuery,\n    usesMyAgents && involvedSquadIdsQuery,\n    usesSubscribed && subscribedIssueIdsQuery,\n  ];\n  const relationContext = useMemo<IssueRelationContext | undefined>(() => {\n    if (!userId) return undefined;\n    return {\n      userId,\n      ...(usesMyAgents && agents\n        ? {\n            myAgentIds: new Set(\n              agents.filter((agent) => agent.owner_id === userId).map((agent) => agent.id),\n            ),\n          }\n        : {}),\n      ...(usesMyAgents && involvedSquadIds ? { mySquadIds: new Set(involvedSquadIds) } : {}),\n      ...(usesSubscribed && subscribedIssueIds\n        ? { subscribedIssueIds: new Set(subscribedIssueIds) }\n        : {}),\n    };\n  }, [agents, involvedSquadIds, subscribedIssueIds, userId, usesMyAgents, usesSubscribed]);\n\n  const allowedModes = useMemo(() => new Set<IssueSurfaceMode>(modes), [modes]);\n  const fallbackMode = modes[0] ?? \"list\";\n  const effectiveViewMode = allowedModes.has(viewMode as IssueSurfaceMode)\n    ? (viewMode as IssueSurfaceMode)\n    : fallbackMode;\n\n  useEffect(() => {\n    if (!allowedModes.has(viewMode as IssueSurfaceMode)) {\n      setViewMode(fallbackMode);\n    }\n  }, [allowedModes, fallbackMode, setViewMode, viewMode]);\n\n  const resolvedCreateDefaults = useMemo(\n    () => ({ ...queryPlan.createDefaults, ...createDefaults }),\n    [createDefaults, queryPlan.createDefaults],\n  );\n\n  const dateParams = useMemo(\n    () => issueDateFilterToApiParams(dateFilter),\n    [dateFilter],\n  );\n  const effectivePropertyFilters = useMemo(() => {\n    // While the catalog is still loading (or errored), persisted filters are"
+    },
+    {
+      "path": "packages/views/issues/surface/use-issue-surface-controller.ts",
+      "start": 401,
+      "end": 500,
+      "code": "    // passed through UNCHANGED: treating a cold catalog as confirmed-empty\n    // would silently drop the user's filters on first paint (clean-room\n    // review F6). Old servers 404 into a SETTLED empty catalog, so the\n    // stripping below still protects that path.\n    if (!catalogSettled) return propertyFilters;\n    const entries = Object.entries(propertyFilters).filter(\n      ([propertyId, selected]) => selected.length > 0 && activePropertyIds.has(propertyId),\n    );\n    if (entries.length === Object.keys(propertyFilters).length) return propertyFilters;\n    return Object.fromEntries(entries);\n  }, [activePropertyIds, catalogSettled, propertyFilters]);\n\n  // Custom-property sorts and filters are served by the backend: the sort\n  // param carries `property:<id>` (typed ORDER BY expression server-side)\n  // and the window bag carries the property filter, so results are correct\n  // across pagination — not just the loaded window. A sort pinned to a\n  // non-active definition degrades to position order.\n  const rawPropertySortId = propertyIdFromViewKey(sortBy);\n  const propertySortId =\n    rawPropertySortId && (!catalogSettled || activePropertyIds.has(rawPropertySortId))\n      ? rawPropertySortId\n      : null;\n  const sort = useMemo<IssueSortParam>(() => {\n    const sortBy_: IssueSortParam[\"sort_by\"] = propertySortId\n      ? `property:${propertySortId}`\n      : rawPropertySortId\n        ? \"position\"\n        : (sortBy as Exclude<SortField, `property:${string}`>);\n    return {\n      sort_by: sortBy_,\n      sort_direction: sortBy_ !== \"position\" ? sortDirection : undefined,\n      ...dateParams,\n      ...(Object.keys(effectivePropertyFilters).length > 0\n        ? { properties: effectivePropertyFilters }\n        : {}),\n    };\n  }, [dateParams, effectivePropertyFilters, propertySortId, rawPropertySortId, sortBy, sortDirection]);\n\n  const groupingPropertyId = propertyIdFromViewKey(grouping);\n  const activeGroupingProperty = groupingPropertyId\n    ? workspaceProperties.find(\n        (property) =>\n          property.id === groupingPropertyId && property.type === \"select\",\n      ) ?? null\n    : null;\n  const effectiveGrouping =\n    groupingPropertyId && catalogSettled && !activeGroupingProperty\n      ? \"status\"\n      : grouping;\n  const usesGantt = effectiveViewMode === \"gantt\" && !!projectId;\n  const usesTable = effectiveViewMode === \"table\";\n  const activeSearch = usesTable ? tableSearch : search;\n  const debouncedActiveSearch = useDebouncedTableSearch(activeSearch);\n  const usesServerStatusSurface =\n    effectiveViewMode === \"list\" ||\n    (effectiveViewMode === \"board\" && effectiveGrouping === \"status\");\n  const usesServerGroupSurface =\n    (effectiveViewMode === \"board\" && effectiveGrouping !== \"status\") ||\n    effectiveViewMode === \"swimlane\";\n  const usesServerFacets =\n    usesTable || usesServerStatusSurface || usesServerGroupSurface;\n  const statusColumnsForFilters = useMemo(\n    // Exclusion needs no category: it only removes the listed keys.\n    () =>\n      columnStatus.negated\n        ? ({ state: \"resolved\", columns: new Set<IssueStatus>() } as const)\n        : statusFilterColumns(columnStatus.statuses, catalog),\n    [catalog, columnStatus],\n  );\n  /**\n   * A custom-status filter is routed through the catalog, and status columns\n   * come from it. Until it answers, fetching is suspended: with the filter\n   * unresolved the visible column set falls back to ALL categories, so\n   * fetching anyway would briefly show the UNFILTERED board to someone who\n   * opened a saved `qa` view.\n   */\n  const statusDependency = filterDependencyState(\n    statusColumnsForFilters.state !== \"resolved\" ||\n      usesServerStatusSurface ||\n      effectiveViewMode === \"swimlane\",\n    [statusCatalogSource(catalog)],\n  );\n  const statusFilterUnresolved = statusDependency.unresolved;\n\n  // Display preferences hide individual columns; status filters independently\n  // select exact keys. Selecting a key explicitly restores its hidden column.\n  const serverStatuses = useMemo<IssueStatus[]>(\n    () => {\n      const visible = workflowColumns(\n        visibleStatusKeys(\n          columnStatus.statuses,\n          columnStatus.hiddenStatuses,\n          catalog,\n          columnStatus.negated,\n        ),\n        projectWorkflow,\n      );\n      return effectiveViewMode === \"list\"\n        ? visible.filter((status) => !listCollapsedStatuses.includes(status))\n        : visible;"
+    },
+    {
+      "path": "packages/views/issues/surface/use-issue-surface-controller.ts",
+      "start": 501,
+      "end": 600,
+      "code": "    },\n    [\n      effectiveViewMode,\n      listCollapsedStatuses,\n      catalog,\n      columnStatus,\n      projectWorkflow,\n    ],\n  );\n\n  const projectFilterState = useMemo(\n    () => ({\n      projectFilters: scope.type === \"project\" ? [] : projectFilters,\n      includeNoProject: scope.type === \"project\" ? false : includeNoProject,\n    }),\n    [includeNoProject, projectFilters, scope.type],\n  );\n  const { projectFilters: viewProjectFilters, includeNoProject: viewIncludeNoProject } =\n    projectFilterState;\n\n  // Exactly the filters `clearFilters()` resets, so an empty surface that\n  // reports \"filters hid everything\" can always offer a button that fixes it.\n  // Display toggles (show sub-issues) and per-surface search are deliberately\n  // out: they have their own affordances and clearing filters would not undo\n  // them.\n  const hasActiveFilters =\n    statusFilters.length > 0 ||\n    priorityFilters.length > 0 ||\n    assigneeFilters.length > 0 ||\n    includeNoAssignee ||\n    creatorFilters.length > 0 ||\n    viewProjectFilters.length > 0 ||\n    viewIncludeNoProject ||\n    projectStatusFilters.length > 0 ||\n    labelFilters.length > 0 ||\n    relationFilters.length > 0 ||\n    dueDateFilters.length > 0 ||\n    advancedFilter !== null ||\n    Object.keys(effectivePropertyFilters).length > 0 ||\n    dateFilter != null ||\n    agentRunningFilter === true ||\n    agentIdleFilter === true ||\n    unreadFilter === true;\n\n  const workingAgentMineRelation =\n    scope.type === \"my\"\n      ? scope.relation === \"all\"\n        ? \"any\"\n        : scope.relation\n      : undefined;\n  const workingAgentsProjection = useQuery({\n    ...workspaceWorkingAgentsOptions(wsId, \"issue\", workingAgentMineRelation),\n    // Ordinary surfaces get their chip count from the scoped facet. Only an\n    // active working filter or Gantt's canvas count consumes the issue ids.\n    enabled: usesGantt || agentRunningFilter,\n  });\n  const workspaceWorkingAgents = workingAgentsProjection.data ?? EMPTY_LIST;\n  const idleTasksProjection = useQuery({\n    ...agentTaskSnapshotOptions(wsId),\n    enabled: agentIdleFilter,\n  });\n  const idleTasks = agentIdleFilter ? idleTasksProjection.data : undefined;\n  const activeIssueIDs = useMemo(\n    () => idleTasks === undefined\n      ? undefined\n      : new Set(deriveIssueSurfaceActivity(idleTasks).activityByIssueId.keys()),\n    [idleTasks],\n  );\n  const workingDependency = combineFilterDependencies(\n    filterDependencyState(agentRunningFilter, [workingAgentsProjection]),\n    filterDependencyState(agentIdleFilter, [idleTasksProjection]),\n  );\n  const workingFilterUnresolved = workingDependency.unresolved;\n  const workingIssueIDs = useMemo(() => {\n    const issueIDs = new Set<string>();\n    for (const agent of workspaceWorkingAgents) {\n      for (const issueID of agent.issue_ids) issueIDs.add(issueID);\n    }\n    return issueIDs;\n  }, [workspaceWorkingAgents]);\n\n  // The unread filter matches the viewer's unread list. An issue read while\n  // the filter is on stays in the set, so it keeps its place on screen (and\n  // the query keeps its identity) until the filter turns off or the surface\n  // unmounts; a newly unread issue grows the set and refetches.\n  const unreadProjection = useIssueUnreadIds(wsId, unreadFilter);\n  const unreadIssueList = unreadProjection.data;\n  const unreadDependency = filterDependencyState(unreadFilter, [unreadProjection]);\n  const unreadFilterUnresolved = unreadDependency.unresolved;\n  const keptUnreadRef = useRef<Set<string>>(new Set());\n  const unreadIssueIDs = useMemo<ReadonlySet<string>>(() => {\n    if (!unreadFilter) {\n      keptUnreadRef.current = new Set();\n      return keptUnreadRef.current;\n    }\n    for (const issueID of unreadIssueList ?? EMPTY_LIST) keptUnreadRef.current.add(issueID);\n    return new Set(keptUnreadRef.current);\n  }, [unreadFilter, unreadIssueList]);\n  const membershipUnresolved = workingFilterUnresolved || unreadFilterUnresolved;\n"
+    },
+    {
+      "path": "packages/views/issues/surface/use-issue-surface-controller.ts",
+      "start": 601,
+      "end": 700,
+      "code": "  const derivedTableQuerySpec = useMemo<IssueTableQuerySpec>(() => {\n    let queryScope: IssueTableQuerySpec[\"scope\"];\n    switch (scope.type) {\n      case \"workspace\": {\n        const assigneeTypes = assigneeTypesForActorKind(scope.actorKind);\n        queryScope = {\n          kind: \"workspace\",\n          ...(assigneeTypes ? { assignee_types: assigneeTypes } : {}),\n        };\n        break;\n      }\n      case \"project\": {\n        const assigneeTypes = assigneeTypesForActorKind(scope.actorKind);\n        queryScope = {\n          kind: \"project\",\n          project_id: scope.projectId,\n          ...(assigneeTypes ? { assignee_types: assigneeTypes } : {}),\n        };\n        break;\n      }\n      case \"my\":\n        queryScope = {\n          kind: \"my\",\n          relation: scope.relation === \"all\" ? \"any\" : scope.relation,\n        };\n        break;\n      case \"actor\":\n        queryScope = {\n          kind: scope.relation === \"assigned\" ? \"assignee\" : \"creator\",\n          actor: { type: scope.actorType, id: scope.actorId },\n        };\n        break;\n      case \"team\":\n        throw new Error(\"Team issue scope is not supported by the Table query\");\n    }\n\n    const date =\n      dateParams.date_field && dateParams.date_start && dateParams.date_end\n        ? {\n            field: dateParams.date_field,\n            start: dateParams.date_start,\n            end: dateParams.date_end,\n          }\n        : undefined;\n    const negate = negatedFilters\n      .filter((dimension) =>\n        // A project surface drops the project dimension; and on a \"my\"\n        // surface the relation dimension (see `relationFilters`).\n        dimension === \"project\"\n          ? viewProjectFilters.length > 0 || viewIncludeNoProject\n          : dimension === \"relation\"\n            ? relationFilters.length > 0\n            : true,\n      )\n      .map((dimension) => TABLE_NEGATE_FIELD[dimension]);\n    return {\n      scope: queryScope,\n      filters: {\n        ...(statusFilters.length > 0 ? { statuses: statusFilters } : {}),\n        ...(priorityFilters.length > 0 ? { priorities: priorityFilters } : {}),\n        ...(assigneeFilters.length > 0 ? { assignees: assigneeFilters } : {}),\n        ...(includeNoAssignee ? { include_no_assignee: true } : {}),\n        ...(creatorFilters.length > 0 ? { creators: creatorFilters } : {}),\n        ...(viewProjectFilters.length > 0\n          ? { project_ids: viewProjectFilters }\n          : {}),\n        ...(viewIncludeNoProject ? { include_no_project: true } : {}),\n        ...(projectStatusFilters.length > 0\n          ? { project_statuses: projectStatusFilters }\n          : {}),\n        ...(labelFilters.length > 0 ? { label_ids: labelFilters } : {}),\n        ...(relationFilters.length > 0 ? { relations: relationFilters } : {}),\n        ...(dueDateFilters.length > 0 ? { due_dates: dueDateFilters } : {}),\n        ...(today ? { today } : {}),\n        ...(negate.length > 0 ? { negate } : {}),\n        ...(advancedTableFilter ? { advanced: advancedTableFilter } : {}),\n        ...(Object.keys(effectivePropertyFilters).length > 0\n          ? { properties: effectivePropertyFilters }\n          : {}),\n        ...(date ? { date } : {}),\n        // Unknown membership must not create a temporary match-nothing query\n        // key. Dependent fetches stay gated until the projection resolves.\n        ...(agentRunningFilter && !workingFilterUnresolved\n          ? { working_issue_ids: [...workingIssueIDs] }\n          : {}),\n        ...(agentIdleFilter ? { idle_only: true } : {}),\n        ...(unreadFilter && !unreadFilterUnresolved\n          ? { unread_issue_ids: [...unreadIssueIDs].sort() }\n          : {}),\n        include_sub_issues: showSubIssues,\n      },\n      ...(debouncedActiveSearch ? { search: debouncedActiveSearch } : {}),\n      sort: {\n        field: sort.sort_by ?? \"position\",\n        direction: sort.sort_direction ?? \"asc\",\n      },\n    };\n  }, [\n    advancedTableFilter,\n    agentRunningFilter,"
+    },
+    {
+      "path": "packages/views/issues/surface/use-issue-surface-controller.ts",
+      "start": 701,
+      "end": 800,
+      "code": "    agentIdleFilter,\n    assigneeFilters,\n    creatorFilters,\n    dateParams,\n    debouncedActiveSearch,\n    dueDateFilters,\n    effectivePropertyFilters,\n    includeNoAssignee,\n    labelFilters,\n    negatedFilters,\n    priorityFilters,\n    projectStatusFilters,\n    relationFilters,\n    scope,\n    showSubIssues,\n    sort.sort_by,\n    sort.sort_direction,\n    statusFilters,\n    today,\n    unreadFilter,\n    unreadFilterUnresolved,\n    unreadIssueIDs,\n    viewIncludeNoProject,\n    viewProjectFilters,\n    workingFilterUnresolved,\n    workingIssueIDs,\n  ]);\n  // Every consumer below — the facet request, the status/group branch hooks and\n  // the Table's own `useQueries` list — keys off this object's identity. Pin it\n  // to the content so an unstable dependency upstream cannot rebuild all of\n  // them for a query that did not change.\n  const tableQuerySpec = useStableByContent(derivedTableQuerySpec);\n\n  const [activeTableFacet, setActiveTableFacet] =\n    useState<IssueTableFacetSpec | null>(null);\n  const requestedFacets = useMemo<IssueTableFacetSpec[]>(() => {\n    const facets: IssueTableFacetSpec[] = [];\n    if (usesServerStatusSurface) facets.push({ kind: \"status\" });\n    if (\n      activeTableFacet &&\n      !facets.some(\n        (facet) =>\n          facet.kind === activeTableFacet.kind &&\n          (facet.kind !== \"property\" ||\n            activeTableFacet.kind !== \"property\" ||\n            facet.property_id === activeTableFacet.property_id),\n      )\n    ) {\n      facets.push(activeTableFacet);\n    }\n    // The request shape remains total while disabled.\n    return facets.length > 0 ? facets : [{ kind: \"status\" }];\n  }, [activeTableFacet, usesServerStatusSurface]);\n  const tableFacetRequest = useMemo(\n    () => ({\n      query: tableQuerySpec,\n      facets: requestedFacets,\n      // Status surfaces consume the facet total as their authoritative empty\n      // state. Table rows/groups already own the displayed total.\n      include_total: usesServerStatusSurface,\n    }),\n    [requestedFacets, tableQuerySpec, usesServerStatusSurface],\n  );\n  const tableFacetsQuery = useQuery({\n    ...issueTableFacetsOptions(wsId, tableFacetRequest),\n    placeholderData: keepPreviousData,\n    // Counts are only visible inside one open filter submenu. Eagerly loading\n    // every custom-property facet made a Table mount issue up to 47 SQL\n    // statements and repeatedly scan the issue table after invalidation.\n    enabled:\n      !membershipUnresolved && (\n        usesServerStatusSurface ||\n        ((usesTable || usesServerGroupSurface) && activeTableFacet !== null)\n      ),\n  });\n  // The header chip's count, kept on its own query rather than folded into the\n  // submenu facet request above. Two reasons: that request is deliberately\n  // lazy (an always-on facet would re-enable it for Table/grouped surfaces on\n  // mount), and this spec drops both activity filters so toggling the filter\n  // does not change the query identity — the number must not flicker when you\n  // click the very chip it labels.\n  const workingAgentsQuerySpec = useMemo<IssueTableQuerySpec>(() => {\n    if (!agentRunningFilter && !agentIdleFilter) return tableQuerySpec;\n    const { working_issue_ids: _working, idle_only: _idle, ...filters } = tableQuerySpec.filters;\n    return { ...tableQuerySpec, filters };\n  }, [agentRunningFilter, agentIdleFilter, tableQuerySpec]);\n  const workingAgentsFacetRequest = useMemo(\n    () => ({\n      query: workingAgentsQuerySpec,\n      facets: [{ kind: \"working_agents\" } as const],\n      include_total: false,\n    }),\n    [workingAgentsQuerySpec],\n  );\n  const workingAgentsFacetQuery = useQuery({\n    ...issueTableFacetsOptions(wsId, workingAgentsFacetRequest),\n    placeholderData: keepPreviousData,\n    // Gantt owns its own count: its canvas projection is client-side and not\n    // expressible as a Table query spec, so a facet answer would over-count.\n    //"
+    },
+    {
+      "path": "packages/views/issues/surface/use-issue-surface-controller.ts",
+      "start": 801,
+      "end": 900,
+      "code": "    // The actor panel (member / agent detail) renders no agents-working chip at\n    // all, so nothing would read the answer; its filter menu toggles\n    // `agentRunningFilter` through the issue ids above, not this count. Skip\n    // the aggregation rather than pay for it on every panel mount. Adding the\n    // chip to that header means dropping this clause.\n    enabled: !usesGantt && scope.type !== \"actor\",\n  });\n  const facetWorkingAgents = useMemo<WorkingAgentSummary[] | undefined>(() => {\n    const facet = workingAgentsFacetQuery.data?.facets.find(\n      (candidate) => candidate.kind === \"working_agents\",\n    );\n    // A backend without this facet (older deploy) answers with an error or a\n    // response that omits it. Stay indeterminate instead of claiming zero.\n    if (!facet) return undefined;\n    return facet.values.map((value) => ({\n      id: value.key,\n      running_task_count: value.count,\n    }));\n  }, [workingAgentsFacetQuery.data]);\n  useEffect(() => {\n    if (!usesServerFacets) setActiveTableFacet(null);\n  }, [usesServerFacets]);\n  const requestActiveTableFacet = useCallback(\n    (facet: IssueTableFacetSpec | null) => {\n      setActiveTableFacet(usesServerFacets ? facet : null);\n    },\n    [usesServerFacets],\n  );\n  const serverStatusBranches = useIssueStatusBranches({\n    wsId,\n    query: tableQuerySpec,\n    statuses: serverStatuses,\n    facets: tableFacetsQuery.data,\n    facetsPending: tableFacetsQuery.isPending,\n    facetsFetching: tableFacetsQuery.isFetching,\n    enabled: usesServerStatusSurface && !statusFilterUnresolved && !membershipUnresolved,\n  });\n  const serverGroupSpec = useMemo<IssueTableGroupsRequest[\"group\"]>(() => {\n    if (effectiveViewMode === \"swimlane\") {\n      return {\n        kind: \"compound\",\n        primary: swimlaneGrouping,\n        secondary: \"status\",\n        secondary_values: serverStatuses,\n      };\n    }\n    if (effectiveGrouping === \"project\") return { kind: \"project\" };\n    const propertyId = propertyIdFromViewKey(effectiveGrouping);\n    if (propertyId) {\n      return {\n        kind: \"property\",\n        property_id: propertyId,\n        include_empty: true,\n      };\n    }\n    return { kind: \"assignee\" };\n  }, [\n    effectiveGrouping,\n    effectiveViewMode,\n    serverStatuses,\n    swimlaneGrouping,\n  ]);\n  const serverGroupQuery = useMemo<IssueTableQuerySpec>(() => {\n    if (effectiveViewMode !== \"swimlane\") return tableQuerySpec;\n    // Status is the secondary axis here: its columns already apply it.\n    const { statuses: _statuses, negate, ...filters } = tableQuerySpec.filters;\n    const otherNegate = negate?.filter((field) => field !== \"statuses\") ?? [];\n    return {\n      ...tableQuerySpec,\n      filters: { ...filters, ...(otherNegate.length > 0 ? { negate: otherNegate } : {}) },\n    };\n  }, [effectiveViewMode, tableQuerySpec]);\n  const serverGroupBranches = useIssueGroupBranches({\n    wsId,\n    query: serverGroupQuery,\n    group: serverGroupSpec,\n    secondaryValues:\n      effectiveViewMode === \"swimlane\" ? serverStatuses : undefined,\n    observeEmptyBranches:\n      effectiveViewMode === \"swimlane\" ||\n      (effectiveViewMode === \"board\" && activeGroupingProperty !== null),\n    enabled: usesServerGroupSurface && !statusFilterUnresolved && !membershipUnresolved,\n  });\n\n  // Selection is only meaningful within the current membership window: batch\n  // actions act on selected ids while export/common-field consumers intersect\n  // with visible rows, so a selection that survives a membership change lets\n  // \"1 selected\" mean different sets to different consumers (round-2 review\n  // P1#2). Reset whenever any membership-affecting input changes. Sort is\n  // excluded on purpose — reordering does not change membership. The live\n  // running set is also excluded: while the agents-working filter is on, a\n  // task finishing should not wipe the user's selection mid-action.\n  const membershipKey = useMemo(\n    () =>\n      JSON.stringify([\n        statusFilters,\n        priorityFilters,\n        assigneeFilters,\n        includeNoAssignee,\n        creatorFilters,"
+    },
+    {
+      "path": "packages/views/issues/surface/use-issue-surface-controller.ts",
+      "start": 901,
+      "end": 1000,
+      "code": "        viewProjectFilters,\n        viewIncludeNoProject,\n        projectStatusFilters,\n        labelFilters,\n        relationFilters,\n        dueDateFilters,\n        advancedTableFilter,\n        today,\n        negatedFilters,\n        effectivePropertyFilters,\n        agentRunningFilter,\n        agentIdleFilter,\n        unreadFilter,\n        showSubIssues,\n        dateParams,\n        debouncedActiveSearch,\n      ]),\n    [\n      advancedTableFilter,\n      agentRunningFilter,\n      agentIdleFilter,\n      unreadFilter,\n      assigneeFilters,\n      creatorFilters,\n      dateParams,\n      debouncedActiveSearch,\n      dueDateFilters,\n      effectivePropertyFilters,\n      includeNoAssignee,\n      labelFilters,\n      negatedFilters,\n      priorityFilters,\n      projectStatusFilters,\n      relationFilters,\n      showSubIssues,\n      statusFilters,\n      today,\n      viewIncludeNoProject,\n      viewProjectFilters,\n    ],\n  );\n  const selection = useCreateIssueSurfaceSelection(\n    scopeKey,\n    `${scopeKey}:${effectiveViewMode}:${membershipKey}`,\n  );\n\n  const data = useIssueSurfaceData({\n    wsId,\n    queryPlan,\n    projectId,\n    usesGantt,\n    usesTable,\n    serverStatusBranches,\n    serverGroupBranches,\n    ganttShowCompleted,\n    statusFilters,\n    hiddenStatusKeys,\n    statusDependency,\n    priorityFilters,\n    assigneeFilters,\n    includeNoAssignee,\n    agentRunningFilter,\n    unreadFilter,\n    agentIdleFilter,\n    activeIssueIDs,\n    creatorFilters,\n    projectFilters: viewProjectFilters,\n    includeNoProject: viewIncludeNoProject,\n    projectStatusFilters,\n    labelFilters,\n    relationFilters,\n    relationContext,\n    relationSources,\n    dueDateFilters,\n    advancedFilter,\n    today,\n    negatedFilters,\n    propertyFilters: effectivePropertyFilters,\n    workingIssueIDs,\n    unreadIssueIDs,\n    showSubIssues,\n    loadProjects:\n      // The client-side project-status predicate (Gantt / swimlane extras)\n      // cannot be evaluated without the catalog, so the filter itself has to\n      // pull it in.\n      projectStatusFilters.length > 0 ||\n      advancedFilterUsesField(advancedFilter, \"projectStatus\") ||\n      cardProperties.project ||\n      (usesTable && tableColumns.some((column) => column.key === \"project\")) ||\n      // Project group headers resolve their title through the projects query,\n      // so grouping by project has to load it even when no card/column shows\n      // the project itself.\n      (usesTable && tableGrouping === \"project\") ||\n      (effectiveViewMode === \"board\" && effectiveGrouping === \"project\") ||\n      (effectiveViewMode === \"swimlane\" && swimlaneGrouping === \"project\"),\n  });\n\n  // Gantt draws a client-materialized canvas, so its chip counts the agents\n  // holding those canvas rows. Every other view mode takes the server facet.\n  const workingAgents = useMemo<WorkingAgentSummary[] | undefined>(() => {"
+    },
+    {
+      "path": "packages/views/issues/surface/use-issue-surface-controller.ts",
+      "start": 1001,
+      "end": 1100,
+      "code": "    if (!usesGantt) return facetWorkingAgents;\n    const rows = data.ganttWorkingScopeIssues;\n    if (!rows || workingAgentsProjection.data === undefined) return undefined;\n    const visible = new Set(rows.map((issue) => issue.id));\n    const summaries: WorkingAgentSummary[] = [];\n    for (const agent of workspaceWorkingAgents) {\n      const running = agent.issue_ids.filter((id) => visible.has(id)).length;\n      if (running > 0) {\n        summaries.push({ id: agent.id, running_task_count: running });\n      }\n    }\n    return summaries;\n  }, [\n    data.ganttWorkingScopeIssues,\n    facetWorkingAgents,\n    usesGantt,\n    workspaceWorkingAgents,\n    workingAgentsProjection.data,\n  ]);\n\n  const exportTableIssues = useCallback(async () => {\n    const issues: Issue[] = [];\n    const seenIssueIds = new Set<string>();\n    const seenCursors = new Set<string>();\n    let fingerprint: string | null = null;\n    let expectedTotal: number | null = null;\n    let cursor: string | null = null;\n    do {\n      if (cursor !== null) {\n        if (seenCursors.has(cursor)) throw new IssueTableExportIntegrityError();\n        seenCursors.add(cursor);\n      }\n      const page = await api.listIssueTableRows({\n        query: tableQuerySpec,\n        group: { kind: \"none\" },\n        group_key: null,\n        hierarchy: { enabled: false },\n        parent_id: null,\n        page: { limit: 100, cursor },\n      });\n      // parseWithFallback deliberately protects interactive views from schema\n      // drift with an empty response. Export must fail closed instead: an empty\n      // fingerprint is the fallback sentinel and must never create a truncated\n      // CSV that looks successful.\n      if (!page.query_fingerprint) throw new IssueTableExportIntegrityError();\n      fingerprint ??= page.query_fingerprint;\n      if (cursor === null) expectedTotal = page.total;\n      if (\n        page.query_fingerprint !== fingerprint ||\n        page.group_key !== null ||\n        page.parent_id !== null\n      ) {\n        throw new IssueTableExportIntegrityError();\n      }\n      for (const row of page.rows) {\n        if (seenIssueIds.has(row.issue.id)) {\n          throw new IssueTableExportIntegrityError();\n        }\n        seenIssueIds.add(row.issue.id);\n        issues.push(row.issue);\n      }\n      cursor = page.next_cursor;\n    } while (cursor);\n    if (issues.length !== (expectedTotal ?? 0)) {\n      throw new IssueTableExportIntegrityError();\n    }\n    return issues;\n  }, [tableQuerySpec]);\n\n  const { actions, openCreateIssue, moveIssue } = useIssueSurfaceActions({\n    createDefaults: resolvedCreateDefaults,\n  });\n\n  const {\n    ganttWorkingScopeIssues: _ganttWorkingScope,\n    projectCatalogDependency,\n    relationDependency,\n    ...surfaceData\n  } = data;\n  // In the order the surface reports them when several fail at once.\n  const dependencies: [FilterDependencyKind, FilterDependencyState][] = [\n    [\"status\", combineFilterDependencies(statusDependency, projectCatalogDependency)],\n    [\"working\", workingDependency],\n    [\"unread\", unreadDependency],\n    [\"relation\", relationDependency],\n  ];\n  const failedDependency = dependencies.find(([, state]) => state.error);\n\n  return {\n    scopeKey,\n    projectId,\n    createDefaults: resolvedCreateDefaults,\n    viewMode: effectiveViewMode,\n    allowGantt: allowedModes.has(\"gantt\") && !!projectId,\n    ...surfaceData,\n    isLoading: data.isLoading || workingDependency.pending || unreadDependency.pending,\n    workingAgents,\n    hasActiveFilters,\n    statusPagination: usesServerStatusSurface\n      ? data.statusPagination"
+    },
+    {
+      "path": "packages/views/issues/surface/use-issue-surface-controller.ts",
+      "start": 1101,
+      "end": 1135,
+      "code": "      : undefined,\n    groupBranches: usesServerGroupSurface\n      ? serverGroupBranches\n      : undefined,\n    // Keep TableView mounted for an empty search result so its local search\n    // control remains available to refine or clear the query. Include the\n    // debounced value as well to avoid a brief empty-screen flash while a\n    // cleared query is waiting to re-fetch the unsearched window.\n    isEmpty:\n      !membershipUnresolved &&\n      data.isEmpty &&\n      !data.isRefreshing &&\n      !(usesTable && (tableSearch.trim() || debouncedActiveSearch)),\n    filterDependencyError: failedDependency\n      ? { kind: failedDependency[0], retry: failedDependency[1].retry }\n      : null,\n    sort,\n    actions,\n    selection,\n    tableSearch,\n    tableQuerySpec,\n    tableFacetCounts:\n      usesServerStatusSurface ||\n      ((usesTable || usesServerGroupSurface) && activeTableFacet !== null)\n        ? tableFacetsQuery.data\n        : undefined,\n    facetCountsExact:\n      !usesTable && !usesServerStatusSurface && !usesServerGroupSurface,\n    setActiveTableFacet: requestActiveTableFacet,\n    setTableSearch,\n    openCreateIssue,\n    moveIssue,\n    exportTableIssues,\n  };\n}"
+    }
+  ],
+  "reused_evidence": [
+    {
+      "path": "server/contracts/batches/issue-surface-transport-coverage.json",
+      "sha256": "f3fbc1491408c67becbed98a6b9ed80f14d7c27199c247e6553e9244dea56d55",
+      "validated_sources": [
+        {
+          "path": "packages/views/issues/surface/use-issue-surface-controller.ts",
+          "sha256": "8871358a471ec6a9d5d124d1851a4b8bb373af9eda022eda7bdcb7021ae78dd6"
+        },
+        {
+          "path": "packages/views/issues/surface/use-issue-surface-data.ts",
+          "sha256": "f061b37e6a133df4da3feca59eec8cb9821879e1aec947c2f1de0ba3f5d3321a"
+        },
+        {
+          "path": "packages/core/issues/surface/repository.ts",
+          "sha256": "b87cb779745f8c1c8dbfaf95a712c6700cea3e69418bb601854761342eb896fe"
+        }
+      ],
+      "boundary": "Only explicitly bounded facts; whole-source status of dependencies is not promoted by reuse."
+    },
+    {
+      "path": "server/contracts/batches/issue-surface-action-transport.json",
+      "sha256": "7653591b25031fab4281ae815815a8e7ae154dbb5f31e8e3590bd19d858cdadf",
+      "validated_sources": [
+        {
+          "path": "packages/views/issues/surface/use-issue-status-branches.ts",
+          "sha256": "8d1acb764817b793e5c3a2a483fd91e067f7ca976921a8d3c1177d7dbf5d3d0a"
+        },
+        {
+          "path": "packages/views/issues/surface/use-issue-group-branches.ts",
+          "sha256": "3fa88dd94db99b95604ecd7237ae6bbcaec3fb2631797bd796b87d795b584adb"
+        },
+        {
+          "path": "packages/views/issues/surface/use-issue-surface-actions.ts",
+          "sha256": "8d511d0e0182281313aab37e7fba0e29d8428fbcb7e4306e3dd35d3d68a73789"
+        },
+        {
+          "path": "packages/views/issues/surface/use-issue-surface-controller.ts",
+          "sha256": "8871358a471ec6a9d5d124d1851a4b8bb373af9eda022eda7bdcb7021ae78dd6"
+        },
+        {
+          "path": "packages/core/issues/mutations.ts",
+          "sha256": "9b81f4b0b396a1d714b40c42115eb95af59a56b28e1ce515774f691c6770de4e"
+        },
+        {
+          "path": "packages/core/issues/delete-cache.ts",
+          "sha256": "06063942dde73286312d7e82ad1091207d98a20f0a77903c04bfcdcd85ce4088"
+        },
+        {
+          "path": "packages/core/issues/status-category.ts",
+          "sha256": "2bb7ccdfc42e10c75e81b14421110ebd360dc46a76f563b0cb5c5e69c9caa94b"
+        },
+        {
+          "path": "packages/core/issues/queries.ts",
+          "sha256": "10d939b302cbeca9280944c5b5ad0e3e8e042130d2c714496a6b6da6daf53c3e"
+        },
+        {
+          "path": "packages/core/api/client.ts",
+          "sha256": "779bb65b5b7ead815836f7c704ec3c370bafae203e4f92119fadce93e982a4d7"
+        },
+        {
+          "path": "packages/core/inbox/ws-updaters.ts",
+          "sha256": "710af5cdd2f59c397d6f9a1b16146b923d08f70c0f619181074503db0f81c175"
+        },
+        {
+          "path": "packages/core/issues/cache-coordinator.ts",
+          "sha256": "70108d123cb72357156bac5077f30ae263d782684ac39ea69622d5b285fa020c"
+        },
+        {
+          "path": "packages/core/issue-statuses/hooks.ts",
+          "sha256": "6a46a26af0f7d647b8c2a95188c01e6d79d77dce89f29af8766ca891b13856ae"
+        }
+      ],
+      "boundary": "Only explicitly bounded facts; whole-source status of dependencies is not promoted by reuse."
+    },
+    {
+      "path": "server/contracts/batches/issue-mutations-transport-coverage.json",
+      "sha256": "43c8266c0e7248f5f12b8736bf795e424ab2771f21bea3eac4b210bf89dbd70a",
+      "validated_sources": [
+        {
+          "path": "packages/core/issues/mutations.ts",
+          "sha256": "9b81f4b0b396a1d714b40c42115eb95af59a56b28e1ce515774f691c6770de4e"
+        },
+        {
+          "path": "packages/views/modals/create-issue.tsx",
+          "sha256": "063ee4b223b0212f9575e8faa912304546810e579420e8eaef6d4ffc08336043"
+        },
+        {
+          "path": "packages/core/labels/mutations.ts",
+          "sha256": "33294dde9f3402f3469d4adef66162a65018c7e2c9cff1fd0bdd868595bfd043"
+        },
+        {
+          "path": "packages/core/issue-workflows/hooks.ts",
+          "sha256": "76c17295fbf0f71ef797580a1ed6fd1392d0aa2d27303e2a3cf9006aef46b529"
+        },
+        {
+          "path": "packages/core/issue-workflows/queries.ts",
+          "sha256": "f3845150af57564511f5ac2e3f6b2b96ffd3d35352001c8484a62d3514ab3185"
+        },
+        {
+          "path": "packages/core/issue-statuses/hooks.ts",
+          "sha256": "6a46a26af0f7d647b8c2a95188c01e6d79d77dce89f29af8766ca891b13856ae"
+        },
+        {
+          "path": "packages/core/issue-statuses/queries.ts",
+          "sha256": "4fdf01e78b7a60b42272518d2feb160ade1fc773f59a75f559f675f03f4a904d"
+        },
+        {
+          "path": "packages/core/properties/queries.ts",
+          "sha256": "026994a0e30c6943515ccdc0f915e81a1c373be48fc5d0babf98526b55302aa5"
+        },
+        {
+          "path": "packages/core/workspace/hooks.ts",
+          "sha256": "7531c31b1caa51b0254eff7738c3ed14cd831a467c311d9aa8cce3ddff2964d3"
+        },
+        {
+          "path": "packages/views/workflows/step-handler.ts",
+          "sha256": "45cea49d41dfdcc339638d2a70fe020908ff64ce32db452916f7f30e293026c5"
+        },
+        {
+          "path": "packages/views/modals/source-context-preview.tsx",
+          "sha256": "231e9be98189a1f2f0d712d2eb222e6e0f255e803dc8b1d9149536b1358c0aa6"
+        },
+        {
+          "path": "packages/core/api/client.ts",
+          "sha256": "779bb65b5b7ead815836f7c704ec3c370bafae203e4f92119fadce93e982a4d7"
+        },
+        {
+          "path": "packages/views/issues/components/comment-card.tsx",
+          "sha256": "7a73b902e970cd7582952cca944c342fff36a04d4e4fc087412c5a913678e8d6"
+        },
+        {
+          "path": "packages/views/issues/actions/issue-actions-menu-items.tsx",
+          "sha256": "d06938bc8aed3eea77c52a94bb54ea9eacd238de1894880a1a253a08bed6c210"
+        },
+        {
+          "path": "packages/core/issues/cache-coordinator.ts",
+          "sha256": "70108d123cb72357156bac5077f30ae263d782684ac39ea69622d5b285fa020c"
+        },
+        {
+          "path": "packages/core/issues/cache-helpers.ts",
+          "sha256": "cbb6f0199247f45d53edea6d949d991061b1b44aa23fc19e7881a86fdc066a37"
+        },
+        {
+          "path": "packages/core/issues/surface/membership.ts",
+          "sha256": "b83ea287e17646a5f8d6f96f55c579bc5a43a0023e8240e5ddc89bb1714648c0"
+        },
+        {
+          "path": "packages/core/issues/status-category.ts",
+          "sha256": "2bb7ccdfc42e10c75e81b14421110ebd360dc46a76f563b0cb5c5e69c9caa94b"
+        },
+        {
+          "path": "packages/core/inbox/ws-updaters.ts",
+          "sha256": "710af5cdd2f59c397d6f9a1b16146b923d08f70c0f619181074503db0f81c175"
+        },
+        {
+          "path": "packages/core/inbox/queries.ts",
+          "sha256": "4612025ba86f4e32cb272acb366861d824988ba6fa7648df230e425072a4454d"
+        },
+        {
+          "path": "packages/core/issues/queries.ts",
+          "sha256": "10d939b302cbeca9280944c5b5ad0e3e8e042130d2c714496a6b6da6daf53c3e"
+        },
+        {
+          "path": "packages/core/projects/queries.ts",
+          "sha256": "39315862d7770c602ebfda690e8dc691b6732cd833a36975a8638ba3ff25a0d6"
+        },
+        {
+          "path": "packages/core/workspace/queries.ts",
+          "sha256": "1b16ae9e020e75a5a92cebc5270a14c58d97f6b7b0fe033d2f1d2c2d837d093a"
+        },
+        {
+          "path": "packages/core/issues/ws-updaters.ts",
+          "sha256": "137eff80c057f21056bbc368ad1a59090289e6d2bac470e069d0ae3b8bf24c33"
+        },
+        {
+          "path": "packages/core/issues/delete-cache.ts",
+          "sha256": "06063942dde73286312d7e82ad1091207d98a20f0a77903c04bfcdcd85ce4088"
+        },
+        {
+          "path": "packages/core/issues/stores/recent-issues-store.ts",
+          "sha256": "ec12a6e98d24acfc35630fcdd1c448fda35be0cfa1708716886a2ce3b381f785"
+        },
+        {
+          "path": "packages/core/platform/storage.ts",
+          "sha256": "75867acb53d6ba44c1617f7a770bb765955a4ace19b9bb44e1873cf9ee1556b2"
+        },
+        {
+          "path": "packages/core/agents/queries.ts",
+          "sha256": "025f015886abe362104b169f55c1504ecfba0e1bb01c9059b31618274f913d64"
+        },
+        {
+          "path": "packages/core/inbox/filters.ts",
+          "sha256": "085a7b7bba07a9f6eee46ee102bbb4e13eeabb37312e4f1c96ae167be9b24342"
+        },
+        {
+          "path": "packages/core/labels/queries.ts",
+          "sha256": "ece104fc62253b55ced08b4e1453a17faea01f2f9f36206c8dea71c765eb89d0"
+        },
+        {
+          "path": "packages/views/issues/components/inline-comment-run.tsx",
+          "sha256": "d2d6d48c80b5307898426677c9bb817c7461b69a7f362e5b7eb8ce1dc51491c3"
+        },
+        {
+          "path": "packages/core/chat/queries.ts",
+          "sha256": "7cf8eac14be017406936c6b0eb46dba319db13095a41077c5ff6527cc9c62f3d"
+        },
+        {
+          "path": "packages/core/plugins/queries.ts",
+          "sha256": "9af5000968a140b65bc015bb67794e9d3e394cdf05611a7d9eef8b9abf4fbee5"
+        },
+        {
+          "path": "packages/views/common/task-transcript/use-trace-issue-labels.ts",
+          "sha256": "eb08808fcf5c7ad3ad430e88faa2119badd39f67f62c8580a44604c7724ddd71"
+        },
+        {
+          "path": "packages/views/common/task-transcript/trace-issue-labels.ts",
+          "sha256": "c7efacc397b06a4621c3436c89166e13b6d37c53a7b102605ff424c084b04f57"
+        },
+        {
+          "path": "packages/core/issues/subscribed.ts",
+          "sha256": "e17fcc73e4762d74379067581d7b7645b8334b12e6b1bd5ed8dad68b6103380d"
+        },
+        {
+          "path": "packages/core/issues/timeline-sort.ts",
+          "sha256": "c1a9ddae839cf26b0ca1103c2673b386cdbd7da4f3e9ba0c1a31a2e35c168e15"
+        },
+        {
+          "path": "packages/core/issues/comment-deletion.ts",
+          "sha256": "13e82cf958bbfdb59d5659ba9b36b7d0e23a8979574b5822a84888c1a00d79e6"
+        }
+      ],
+      "boundary": "Only explicitly bounded facts; whole-source status of dependencies is not promoted by reuse."
+    },
+    {
+      "path": "server/contracts/batches/issue-cache-transport-coverage.json",
+      "sha256": "ca8ac1b4269c453cb9920c1ea565e909b513dc0cb74abe462467e24bf9b71b65",
+      "validated_sources": [
+        {
+          "path": "packages/core/issues/cache-coordinator.ts",
+          "sha256": "70108d123cb72357156bac5077f30ae263d782684ac39ea69622d5b285fa020c"
+        },
+        {
+          "path": "packages/core/issues/cache-helpers.ts",
+          "sha256": "cbb6f0199247f45d53edea6d949d991061b1b44aa23fc19e7881a86fdc066a37"
+        },
+        {
+          "path": "packages/core/issues/surface/membership.ts",
+          "sha256": "b83ea287e17646a5f8d6f96f55c579bc5a43a0023e8240e5ddc89bb1714648c0"
+        },
+        {
+          "path": "packages/core/issues/status-category.ts",
+          "sha256": "2bb7ccdfc42e10c75e81b14421110ebd360dc46a76f563b0cb5c5e69c9caa94b"
+        },
+        {
+          "path": "packages/core/inbox/ws-updaters.ts",
+          "sha256": "710af5cdd2f59c397d6f9a1b16146b923d08f70c0f619181074503db0f81c175"
+        },
+        {
+          "path": "packages/core/inbox/queries.ts",
+          "sha256": "4612025ba86f4e32cb272acb366861d824988ba6fa7648df230e425072a4454d"
+        },
+        {
+          "path": "packages/core/issues/queries.ts",
+          "sha256": "10d939b302cbeca9280944c5b5ad0e3e8e042130d2c714496a6b6da6daf53c3e"
+        }
+      ],
+      "boundary": "Only explicitly bounded facts; whole-source status of dependencies is not promoted by reuse."
+    },
+    {
+      "path": "server/contracts/batches/issue-query-transport-coverage.json",
+      "sha256": "3d4401929eee7294bc9f706a5c738a074300faffc6df01ec9275184d8a5be380",
+      "validated_sources": [
+        {
+          "path": "packages/core/issues/queries.ts",
+          "sha256": "10d939b302cbeca9280944c5b5ad0e3e8e042130d2c714496a6b6da6daf53c3e"
+        },
+        {
+          "path": "packages/core/projects/queries.ts",
+          "sha256": "39315862d7770c602ebfda690e8dc691b6732cd833a36975a8638ba3ff25a0d6"
+        },
+        {
+          "path": "packages/core/workspace/queries.ts",
+          "sha256": "1b16ae9e020e75a5a92cebc5270a14c58d97f6b7b0fe033d2f1d2c2d837d093a"
+        },
+        {
+          "path": "packages/core/issue-statuses/queries.ts",
+          "sha256": "4fdf01e78b7a60b42272518d2feb160ade1fc773f59a75f559f675f03f4a904d"
+        }
+      ],
+      "boundary": "Only explicitly bounded facts; whole-source status of dependencies is not promoted by reuse."
+    },
+    {
+      "path": "server/contracts/batches/issue-ws-updaters-transport-coverage.json",
+      "sha256": "6f932de903917f7209c1e07b9f5bf28b0b896573e89e352a2e40608d1b3995f1",
+      "validated_sources": [
+        {
+          "path": "packages/core/issues/ws-updaters.ts",
+          "sha256": "137eff80c057f21056bbc368ad1a59090289e6d2bac470e069d0ae3b8bf24c33"
+        }
+      ],
+      "boundary": "Only explicitly bounded facts; whole-source status of dependencies is not promoted by reuse."
+    }
+  ],
+  "edges": [
+    {
+      "source": "issue-surface.tsx:113 -> useActiveIssueView -> issueViewListOptions",
+      "kind": "automatic-query",
+      "gate_or_branch": "workspace/my/project scope and nonempty wsId; explicit-store variant bypasses this hook",
+      "inventory": [
+        {
+          "id": "client:5096",
+          "method": "GET",
+          "path_expression": "/api/issue-views?${qs.toString()}",
+          "route": {
+            "method": "GET",
+            "path": "/api/issue-views"
+          }
+        }
+      ]
+    },
+    {
+      "source": "issue-surface.tsx:247 -> workspaceWakeupSummariesOptions",
+      "kind": "automatic-query",
+      "gate_or_branch": "nonempty workspaceId; staleTime 10000; surface refetchInterval 10000; malformed payload throws",
+      "inventory": [
+        {
+          "id": "client:1547",
+          "method": "GET",
+          "path_expression": "/api/issue-wakeup-summaries",
+          "route": {
+            "method": "GET",
+            "path": "/api/issue-wakeup-summaries"
+          }
+        }
+      ]
+    },
+    {
+      "source": "controller:293",
+      "kind": "automatic-query",
+      "gate_or_branch": "property catalog factory; no caller enabled override",
+      "inventory": [
+        {
+          "id": "client:4884",
+          "method": "GET",
+          "path_expression": "/api/properties${suffix}",
+          "route": {
+            "method": "GET",
+            "path": "/api/properties"
+          }
+        }
+      ]
+    },
+    {
+      "source": "controller:316; data:437,442 -> useColumnWorkflow",
+      "kind": "automatic-query",
+      "gate_or_branch": "workflow enabled Boolean(wsId); projects Boolean(wsId)&&Boolean(projectId); both hooks execute before hasStatusFilter early return",
+      "inventory": [
+        {
+          "id": "client:4692",
+          "method": "GET",
+          "path_expression": "/api/issue-workflows",
+          "route": {
+            "method": "GET",
+            "path": "/api/issue-workflows"
+          }
+        },
+        {
+          "id": "client:4517",
+          "method": "GET",
+          "path_expression": "/api/projects?${search}",
+          "route": {
+            "method": "GET",
+            "path": "/api/projects"
+          }
+        }
+      ]
+    },
+    {
+      "source": "controller:340-354",
+      "kind": "automatic-query",
+      "gate_or_branch": "agents and involved squads only usesMyAgents; subscribed ids only usesSubscribed; scope my removes stored relation filters",
+      "inventory": [
+        {
+          "id": "client:2066",
+          "method": "GET",
+          "path_expression": "/api/agents?${search}",
+          "route": {
+            "method": "GET",
+            "path": "/api/agents"
+          }
+        },
+        {
+          "id": "client:5210",
+          "method": "GET",
+          "path_expression": "/api/squads/involved",
+          "route": {
+            "method": "GET",
+            "path": "/api/squads/involved"
+          }
+        },
+        {
+          "id": "client:3178",
+          "method": "GET",
+          "path_expression": "/api/issues/subscribed",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/subscribed"
+          }
+        }
+      ]
+    },
+    {
+      "source": "controller:551-563",
+      "kind": "automatic-query",
+      "gate_or_branch": "working projection usesGantt||agentRunningFilter; task snapshot agentIdleFilter; my all becomes any",
+      "inventory": [
+        {
+          "id": "client:3071",
+          "method": "GET",
+          "path_expression": "/api/working-agents${query ? `?${query}` : \"\"}",
+          "route": {
+            "method": "GET",
+            "path": "/api/working-agents"
+          }
+        },
+        {
+          "id": "client:3046",
+          "method": "GET",
+          "path_expression": "/api/agent-task-snapshot",
+          "route": {
+            "method": "GET",
+            "path": "/api/agent-task-snapshot"
+          }
+        }
+      ]
+    },
+    {
+      "source": "controller:586 -> useIssueUnreadIds",
+      "kind": "automatic-query",
+      "gate_or_branch": "unreadFilter && !!wsId; only expose error when not fetching and data undefined",
+      "inventory": [
+        {
+          "id": "client:3167",
+          "method": "GET",
+          "path_expression": "/api/issues/unread${query}",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/unread"
+          }
+        }
+      ]
+    },
+    {
+      "source": "controller:764,795",
+      "kind": "automatic-query",
+      "gate_or_branch": "membership resolved AND (status surface OR ((table OR grouped) AND active facet)); independent working_agents facet !usesGantt && scope.type!=actor, drops working/idle filters, include_total false; no membership/status gate on independent facet",
+      "inventory": [
+        {
+          "id": "client:1430",
+          "method": "POST",
+          "path_expression": "/api/issues/table/facets",
+          "route": {
+            "method": "POST",
+            "path": "/api/issues/table/facets"
+          }
+        }
+      ]
+    },
+    {
+      "source": "controller:829,873",
+      "kind": "dynamic-query-and-retry",
+      "gate_or_branch": "status/group mode && !statusFilterUnresolved && !membershipUnresolved; status pages vs compound/project/property/assignee group pages; accepted bounded action evidence for cursor/loadMore/retry",
+      "inventory": [
+        {
+          "id": "client:1402",
+          "method": "POST",
+          "path_expression": "/api/issues/table/groups",
+          "route": {
+            "method": "POST",
+            "path": "/api/issues/table/groups"
+          }
+        },
+        {
+          "id": "client:1416",
+          "method": "POST",
+          "path_expression": "/api/issues/table/rows",
+          "route": {
+            "method": "POST",
+            "path": "/api/issues/table/rows"
+          }
+        }
+      ]
+    },
+    {
+      "source": "controller:947 -> data",
+      "kind": "automatic-query",
+      "gate_or_branch": "scheduled Gantt only usesGantt; project catalog loadProjects; child progress observer unconditional; workflow observers also execute",
+      "inventory": [
+        {
+          "id": "client:1344",
+          "method": "GET",
+          "path_expression": "/api/issues?${search}",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues"
+          }
+        },
+        {
+          "id": "client:4517",
+          "method": "GET",
+          "path_expression": "/api/projects?${search}",
+          "route": {
+            "method": "GET",
+            "path": "/api/projects"
+          }
+        },
+        {
+          "id": "client:1817",
+          "method": "GET",
+          "path_expression": "/api/issues/child-progress",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/child-progress"
+          }
+        }
+      ]
+    },
+    {
+      "source": "controller:1021-1068",
+      "kind": "direct-export",
+      "gate_or_branch": "callback invocation only; ungrouped, hierarchy false,parent null,limit100; cursor loop rejects repeated cursor, empty/changed fingerprint, nonnull group/parent,duplicate IDs,final count mismatch; no cache write",
+      "inventory": [
+        {
+          "id": "client:1416",
+          "method": "POST",
+          "path_expression": "/api/issues/table/rows",
+          "route": {
+            "method": "POST",
+            "path": "/api/issues/table/rows"
+          }
+        }
+      ]
+    },
+    {
+      "source": "data:390-426 resolveTableExportLookups",
+      "kind": "manual-refetch",
+      "gate_or_branch": "Promise.all only requested lookup flags; manual project refetch works despite automatic disabled; throw query error or missing requested data",
+      "inventory": [
+        {
+          "id": "client:4517",
+          "method": "GET",
+          "path_expression": "/api/projects?${search}",
+          "route": {
+            "method": "GET",
+            "path": "/api/projects"
+          }
+        },
+        {
+          "id": "client:1817",
+          "method": "GET",
+          "path_expression": "/api/issues/child-progress",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/child-progress"
+          }
+        }
+      ]
+    },
+    {
+      "source": "useUpdateIssue",
+      "kind": "exact invoked client request branches reviewed by root",
+      "inventory": [
+        {
+          "id": "client:1771",
+          "method": "PUT",
+          "path_expression": "/api/issues/${id}",
+          "route": {
+            "method": "PUT",
+            "path": "/api/issues/{id}"
+          }
+        },
+        {
+          "id": "client:1778",
+          "method": "POST",
+          "path_expression": "/api/issues/${id}/move",
+          "route": {
+            "method": "POST",
+            "path": "/api/issues/{id}/move"
+          }
+        }
+      ],
+      "gate_or_branch": "Only invoked through useIssueSurfaceActions callbacks, never automatic mutation on render"
+    },
+    {
+      "source": "useBatchUpdateIssues",
+      "kind": "exact invoked client request branches reviewed by root",
+      "inventory": [
+        {
+          "id": "client:1835",
+          "method": "POST",
+          "path_expression": "/api/issues/batch-update",
+          "route": {
+            "method": "POST",
+            "path": "/api/issues/batch-update"
+          }
+        }
+      ],
+      "gate_or_branch": "Only invoked through useIssueSurfaceActions callbacks, never automatic mutation on render"
+    },
+    {
+      "source": "useBatchDeleteIssues",
+      "kind": "exact invoked client request branches reviewed by root",
+      "inventory": [
+        {
+          "id": "client:1852",
+          "method": "POST",
+          "path_expression": "/api/issues/batch-delete",
+          "route": {
+            "method": "POST",
+            "path": "/api/issues/batch-delete"
+          }
+        }
+      ],
+      "gate_or_branch": "Only invoked through useIssueSurfaceActions callbacks, never automatic mutation on render"
+    },
+    {
+      "source": "surface actions -> update/batchUpdate/batchDelete -> accepted mutation/cache/revision invalidations",
+      "kind": "finite-conservative-possible-refetch-union",
+      "inventory": [
+        {
+          "id": "client:1344",
+          "method": "GET",
+          "path_expression": "/api/issues?${search}",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues"
+          }
+        },
+        {
+          "id": "client:1402",
+          "method": "POST",
+          "path_expression": "/api/issues/table/groups",
+          "route": {
+            "method": "POST",
+            "path": "/api/issues/table/groups"
+          }
+        },
+        {
+          "id": "client:1416",
+          "method": "POST",
+          "path_expression": "/api/issues/table/rows",
+          "route": {
+            "method": "POST",
+            "path": "/api/issues/table/rows"
+          }
+        },
+        {
+          "id": "client:1430",
+          "method": "POST",
+          "path_expression": "/api/issues/table/facets",
+          "route": {
+            "method": "POST",
+            "path": "/api/issues/table/facets"
+          }
+        },
+        {
+          "id": "client:1612",
+          "method": "GET",
+          "path_expression": "/api/issues/${encodeURIComponent(id)}",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}"
+          }
+        },
+        {
+          "id": "client:1680",
+          "method": "GET",
+          "path_expression": "/api/comments/${anchorCommentId}/sub-issue-preview",
+          "route": {
+            "method": "GET",
+            "path": "/api/comments/{commentId}/sub-issue-preview"
+          }
+        },
+        {
+          "id": "client:1785",
+          "method": "GET",
+          "path_expression": "/api/issues/${id}/duplicates",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}/duplicates"
+          }
+        },
+        {
+          "id": "client:1795",
+          "method": "GET",
+          "path_expression": "/api/issues/${id}/children",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}/children"
+          }
+        },
+        {
+          "id": "client:1806",
+          "method": "GET",
+          "path_expression": "/api/issues/children?parent_ids=${parentIds.join(\",\")}",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/children"
+          }
+        },
+        {
+          "id": "client:1817",
+          "method": "GET",
+          "path_expression": "/api/issues/child-progress",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/child-progress"
+          }
+        },
+        {
+          "id": "client:1861",
+          "method": "GET",
+          "path_expression": "/api/issues/${issueId}/comments${query}",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}/comments"
+          }
+        },
+        {
+          "id": "client:1890",
+          "method": "POST",
+          "path_expression": "/api/issues/${issueId}/comments/trigger-preview",
+          "route": {
+            "method": "POST",
+            "path": "/api/issues/{id}/comments/trigger-preview"
+          }
+        },
+        {
+          "id": "client:1926",
+          "method": "GET",
+          "path_expression": "/api/issues/${issueId}/timeline",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}/timeline"
+          }
+        },
+        {
+          "id": "client:1935",
+          "method": "GET",
+          "path_expression": "/api/assignee-frequency",
+          "route": {
+            "method": "GET",
+            "path": "/api/assignee-frequency"
+          }
+        },
+        {
+          "id": "client:2002",
+          "method": "GET",
+          "path_expression": "/api/issues/${issueId}/subscribers",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}/subscribers"
+          }
+        },
+        {
+          "id": "client:2066",
+          "method": "GET",
+          "path_expression": "/api/agents?${search}",
+          "route": {
+            "method": "GET",
+            "path": "/api/agents"
+          }
+        },
+        {
+          "id": "client:2070",
+          "method": "GET",
+          "path_expression": "/api/agents/${id}",
+          "route": {
+            "method": "GET",
+            "path": "/api/agents/{id}"
+          }
+        },
+        {
+          "id": "client:3028",
+          "method": "GET",
+          "path_expression": "/api/agents/${agentId}/tasks?${search}",
+          "route": {
+            "method": "GET",
+            "path": "/api/agents/{id}/tasks"
+          }
+        },
+        {
+          "id": "client:3046",
+          "method": "GET",
+          "path_expression": "/api/agent-task-snapshot",
+          "route": {
+            "method": "GET",
+            "path": "/api/agent-task-snapshot"
+          }
+        },
+        {
+          "id": "client:3079",
+          "method": "GET",
+          "path_expression": "/api/agent-activity-30d",
+          "route": {
+            "method": "GET",
+            "path": "/api/agent-activity-30d"
+          }
+        },
+        {
+          "id": "client:3087",
+          "method": "GET",
+          "path_expression": "/api/agent-run-counts",
+          "route": {
+            "method": "GET",
+            "path": "/api/agent-run-counts"
+          }
+        },
+        {
+          "id": "client:3095",
+          "method": "GET",
+          "path_expression": "/api/tasks/${taskId}/messages",
+          "route": {
+            "method": "GET",
+            "path": "/api/tasks/{taskId}/messages"
+          }
+        },
+        {
+          "id": "client:3116",
+          "method": "GET",
+          "path_expression": "/api/issues/${issueId}/task-runs${query}",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}/task-runs"
+          }
+        },
+        {
+          "id": "client:3129",
+          "method": "GET",
+          "path_expression": "/api/issues/${issueId}/usage",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}/usage"
+          }
+        },
+        {
+          "id": "client:3167",
+          "method": "GET",
+          "path_expression": "/api/issues/unread${query}",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/unread"
+          }
+        },
+        {
+          "id": "client:3178",
+          "method": "GET",
+          "path_expression": "/api/issues/subscribed",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/subscribed"
+          }
+        },
+        {
+          "id": "client:3196",
+          "method": "GET",
+          "path_expression": "/api/inbox",
+          "route": {
+            "method": "GET",
+            "path": "/api/inbox"
+          }
+        },
+        {
+          "id": "client:3232",
+          "method": "GET",
+          "path_expression": "/api/inbox/archived/page?${params}",
+          "route": {
+            "method": "GET",
+            "path": "/api/inbox/archived/page"
+          }
+        },
+        {
+          "id": "client:3241",
+          "method": "GET",
+          "path_expression": "/api/inbox/archived/facets?${this.archivedInboxParams(filters)}",
+          "route": {
+            "method": "GET",
+            "path": "/api/inbox/archived/facets"
+          }
+        },
+        {
+          "id": "client:3255",
+          "method": "GET",
+          "path_expression": "/api/inbox/snoozed",
+          "route": {
+            "method": "GET",
+            "path": "/api/inbox/snoozed"
+          }
+        },
+        {
+          "id": "client:3278",
+          "method": "GET",
+          "path_expression": "/api/inbox/unread-summary",
+          "route": {
+            "method": "GET",
+            "path": "/api/inbox/unread-summary"
+          }
+        },
+        {
+          "id": "client:3391",
+          "method": "GET",
+          "path_expression": "/api/workspaces",
+          "route": {
+            "method": "GET",
+            "path": "/api/workspaces"
+          }
+        },
+        {
+          "id": "client:3425",
+          "method": "GET",
+          "path_expression": "/api/workspaces/${workspaceId}/plugins",
+          "route": {
+            "method": "GET",
+            "path": "/api/workspaces/{id}/plugins"
+          }
+        },
+        {
+          "id": "client:3441",
+          "method": "GET",
+          "path_expression": "/api/workspaces/${workspaceId}/mcp-servers",
+          "route": {
+            "method": "GET",
+            "path": "/api/workspaces/{id}/mcp-servers"
+          }
+        },
+        {
+          "id": "client:3493",
+          "method": "GET",
+          "path_expression": "/api/agents/${agentId}/mcp-servers",
+          "route": {
+            "method": "GET",
+            "path": "/api/agents/{id}/mcp-servers"
+          }
+        },
+        {
+          "id": "client:3765",
+          "method": "GET",
+          "path_expression": "/api/workspaces/${workspaceId}/members",
+          "route": {
+            "method": "GET",
+            "path": "/api/workspaces/{id}/members"
+          }
+        },
+        {
+          "id": "client:3796",
+          "method": "GET",
+          "path_expression": "/api/workspaces/${workspaceId}/invitations",
+          "route": {
+            "method": "GET",
+            "path": "/api/workspaces/{id}/invitations"
+          }
+        },
+        {
+          "id": "client:3806",
+          "method": "GET",
+          "path_expression": "/api/invitations",
+          "route": {
+            "method": "GET",
+            "path": "/api/invitations"
+          }
+        },
+        {
+          "id": "client:3836",
+          "method": "GET",
+          "path_expression": "/api/workspaces/${workspaceId}/share-links",
+          "route": {
+            "method": "GET",
+            "path": "/api/workspaces/{id}/share-links"
+          }
+        },
+        {
+          "id": "client:3876",
+          "method": "GET",
+          "path_expression": "/api/skills",
+          "route": {
+            "method": "GET",
+            "path": "/api/skills"
+          }
+        },
+        {
+          "id": "client:3891",
+          "method": "GET",
+          "path_expression": "/api/skills/${id}",
+          "route": {
+            "method": "GET",
+            "path": "/api/skills/{id}"
+          }
+        },
+        {
+          "id": "client:3967",
+          "method": "GET",
+          "path_expression": "/api/skills/${skillId}/versions",
+          "route": {
+            "method": "GET",
+            "path": "/api/skills/{id}/versions"
+          }
+        },
+        {
+          "id": "client:3977",
+          "method": "GET",
+          "path_expression": "/api/skills/${skillId}/versions/${version}",
+          "route": {
+            "method": "GET",
+            "path": "/api/skills/{id}/versions/{version}"
+          }
+        },
+        {
+          "id": "client:4427",
+          "method": "GET",
+          "path_expression": "/api/issues/${issueId}/attachments",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}/attachments"
+          }
+        },
+        {
+          "id": "client:4517",
+          "method": "GET",
+          "path_expression": "/api/projects?${search}",
+          "route": {
+            "method": "GET",
+            "path": "/api/projects"
+          }
+        },
+        {
+          "id": "client:4524",
+          "method": "GET",
+          "path_expression": "/api/projects/${id}",
+          "route": {
+            "method": "GET",
+            "path": "/api/projects/{id}"
+          }
+        },
+        {
+          "id": "client:4561",
+          "method": "GET",
+          "path_expression": "/api/projects/${id}/members",
+          "route": {
+            "method": "GET",
+            "path": "/api/projects/{id}/members"
+          }
+        },
+        {
+          "id": "client:4569",
+          "method": "GET",
+          "path_expression": "/api/projects/${id}/subscription",
+          "route": {
+            "method": "GET",
+            "path": "/api/projects/{id}/subscription"
+          }
+        },
+        {
+          "id": "client:4602",
+          "method": "GET",
+          "path_expression": "/api/projects/private",
+          "route": {
+            "method": "GET",
+            "path": "/api/projects/private"
+          }
+        },
+        {
+          "id": "client:4692",
+          "method": "GET",
+          "path_expression": "/api/issue-workflows",
+          "route": {
+            "method": "GET",
+            "path": "/api/issue-workflows"
+          }
+        },
+        {
+          "id": "client:4821",
+          "method": "GET",
+          "path_expression": "/api/issue-statuses${query}",
+          "route": {
+            "method": "GET",
+            "path": "/api/issue-statuses"
+          }
+        },
+        {
+          "id": "client:4917",
+          "method": "GET",
+          "path_expression": "/api/quick-actions${suffix}",
+          "route": {
+            "method": "GET",
+            "path": "/api/quick-actions"
+          }
+        },
+        {
+          "id": "client:5025",
+          "method": "GET",
+          "path_expression": "/api/issues/${issueId}/labels",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}/labels"
+          }
+        },
+        {
+          "id": "client:5180",
+          "method": "GET",
+          "path_expression": "/api/pins?include=view",
+          "route": {
+            "method": "GET",
+            "path": "/api/pins"
+          }
+        },
+        {
+          "id": "client:5203",
+          "method": "GET",
+          "path_expression": "/api/squads",
+          "route": {
+            "method": "GET",
+            "path": "/api/squads"
+          }
+        },
+        {
+          "id": "client:5210",
+          "method": "GET",
+          "path_expression": "/api/squads/involved",
+          "route": {
+            "method": "GET",
+            "path": "/api/squads/involved"
+          }
+        },
+        {
+          "id": "client:5264",
+          "method": "GET",
+          "path_expression": "/api/squads/${squadId}/members/status",
+          "route": {
+            "method": "GET",
+            "path": "/api/squads/{id}/members/status"
+          }
+        },
+        {
+          "id": "client:5536",
+          "method": "GET",
+          "path_expression": "/api/issues/${issueId}/environments",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}/environments"
+          }
+        }
+      ],
+      "boundary": "Superset inherited from accepted bounded helper audits, including unrelated factories under broad prefixes. Not guaranteed HTTP, not exact mounted observers, not arbitrary supplied query keys. No mutation endpoints are inferred from nearby client methods."
+    },
+    {
+      "source": "use-issue-surface-controller.ts -> useIssueStatuses",
+      "kind": "automatic-query",
+      "gate_or_branch": "Status catalog hook; existing workspace-enabled factory; archived statuses included by hook",
+      "inventory": [
+        {
+          "id": "client:4821",
+          "method": "GET",
+          "path_expression": "/api/issue-statuses${query}",
+          "route": {
+            "method": "GET",
+            "path": "/api/issue-statuses"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/hooks.tsx:13 -> paths/hooks.tsx:56",
+      "kind": "workspace identity observer",
+      "gate_or_branch": "workspace list query executes before absent-slug return",
+      "inventory": [
+        {
+          "id": "client:3391",
+          "method": "GET",
+          "path_expression": "/api/workspaces",
+          "route": {
+            "method": "GET",
+            "path": "/api/workspaces"
+          }
+        }
+      ]
+    }
+  ],
+  "local_effects": [
+    "Surface key selects view:<id> or caller/scope key; first saved-view seed only absent local registry entry. Store memo depends resolvedSurfaceKey. wsId/scope/view content key remounts data window; explicit store remount uses wsId.",
+    "keepFixedFilters patches running=true/idle=false and exact baseline relations, removes relation negation only if baseline relations nonempty; subscribe reapplies missing baseline. setState only when patch nonempty.",
+    "Surface stores are module Map entries; registry subscription persists partialized state with updatedAt through workspace-aware defaultStorage into localStorage workpal_issue_surface_views:<slug>. No slug means reads null and writes dropped. Rehydration resets cached stores under suppression then releases in finally. Active-view map is not persisted.",
+    "Controller subscribes view/auth/workspace inputs; disallowed view mode effect writes fallbackMode and normalizes grouping sort via store action. Search timer trims after250ms and clears on change/unmount; table search is local. Date endpoints reorder and end advances one day; invalid endpoints omit interval.",
+    "Property catalog settled removes inactive/empty flat filters, prunes inactive advanced property conditions and fixed project/my relation conditions; invalid property sort becomes position and invalid select grouping becomes status. No direct persistence of derived pruning.",
+    "Unread ref accumulates IDs while enabled, retains read IDs, resets off. Working IDs deduplicate; idle snapshot derives active IDs. Membership key excludes sort and changing live running IDs. Surface selection resets synchronously on resetKey change; toggle/select/deselect/clear clone Sets; no global selection write from this hook.",
+    "Facet callback accepts facet only server-facet modes; effect clears otherwise. Requested facets deduplicate status/property identity; total requested only status surfaces. Query spec pinned by hashKey content.",
+    "Loaded table issue callback preserves array identity if item references equal; leaving table clears it. Client filters affect displayed issue arrays; batch toolbar uses loaded table rows in table mode. No network inferred from arbitrary rendered children.",
+    "Filter dependency considers only sources with data undefined; errors with cached data do not block. Retry only failed unresolved sources; combine retries failed states. Reporting precedence status+project, working, unread, relation. Rendering precedence dependency error, loading, empty/client empty, content.",
+    "Filtered-empty clear invokes clearFilters or resetFiltersTo(baseline.raw) plus setDateFilter(null); baseline equality hides clear. clearFilters resets filter arrays/booleans/tree/date but not search/display toggles. Create and add-existing only write modal/data state; modal contents excluded.",
+    "actions.moveIssue delegates updateIssue; controller.moveIssue instead strips before/after anchors into move_intent. Update callback forwards success/error/settled; revision-conflict-specific toast. Batch update forwards ops; delete awaits mutateAsync. Caller callbacks excluded.",
+    "Accepted update/batch mutation evidence: cancel/snapshot/optimistic coordinator patches; failure rollback and owner invalidation; authoritative revision reconciliation; settle derivative/table/parent refresh. Batch partial counts rollback/refetch; delete full success cleanup/recent/inbox pruning vs partial restore. Cache writes/invalidation are conditional, never unconditional requests."
+  ],
+  "remaining_edges": [],
+  "exclusions": [
+    "Arbitrary rendered descendants (including modal bodies, toolbar, table internals, peek/menu providers) and caller-injected render/filter/mutation callbacks.",
+    "Third-party React/Zustand/TanStack internals, concrete runtime observer set, global retry defaults, server behavior/backend support and actual requests.",
+    "Arbitrary caller-supplied cache prefixes and stale keys beyond accepted finite conservative union."
+  ],
+  "validation": {
+    "source_hashes": "All reused files[] hashes match current bytes; reused tuples equal exact frontend-calls tuples.",
+    "runtime": "Not run, per instruction; documentation only"
+  },
+  "root_review": {
+    "status": "accepted_bounded_targets",
+    "checks": [
+      "Corrected source-to-query associations from real factories",
+      "Added status catalog and workspace identity observer",
+      "Attached reviewed pure/local helper effect proof with current hashes"
+    ],
+    "limits": "Whole target body plus finite invoked helper effects; predicate parity, arbitrary descendants, caller callbacks and backend runtime remain separate."
+  },
+  "root_partial_review": {
+    "status": "mapping_corrections_verified_helpers_pending",
+    "corrections": [
+      "Subscription ids map to client:3178",
+      "Working agents map to client:3071 plus task snapshot client:3046",
+      "Unread ids map to client:3167",
+      "Added invoked status catalog client:4821"
+    ],
+    "evidence": [
+      "packages/views/issues/surface/use-issue-surface-controller.ts:340",
+      "packages/views/issues/surface/use-issue-surface-controller.ts:551",
+      "packages/views/issues/surface/use-issue-surface-controller.ts:586",
+      "packages/core/issues/subscribed.ts:15",
+      "packages/core/issues/unread.ts:58",
+      "packages/core/agents/queries.ts:70"
+    ]
+  },
+  "historical_remaining_edges": [
+    "Pure application helpers filter-tree/definition/builtin baseline/date/activity and applyIssueFilters are not independently whole-source audited in this artifact. Their exact predicate semantics remain outside the claimed helper closure.",
+    "view-store sanitizer/partialize/normalizeSortForGrouping and auth/workspace/i18n adapters not whole-source audited; storage path and directly invoked setters reviewed, no global adapter closure claimed."
+  ],
+  "helper_effect_proof": {
+    "path": "server/contracts/batches/surface-local-helper-closure.json",
+    "sha256": "dd475004a84bd8d8f49a7ca60bbeac71e6d641eb86f1f0cc862310fca0ef8c29"
+  }
+}

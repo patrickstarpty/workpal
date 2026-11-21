@@ -29,7 +29,7 @@ export interface Attachment {
   /**
    * Durable URL the client persists into markdown bodies.
    *
-   * The server (`buildMarkdownURL` in server/internal/handler/file.go)
+   * The server (`buildMarkdownURL` in server/go/internal/handler/file.go)
    * computes this per deployment policy:
    *   - public CDN path when storage URL is itself absolute and unsigned;
    *   - otherwise `<WORKPAL_PUBLIC_URL>/api/attachments/<id>/download`,
