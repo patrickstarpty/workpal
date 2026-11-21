@@ -1,15 +1,17 @@
 import {catalog, stages} from './data';
+import {Button} from '@workpal/ui/components/ui/button';
+const actions = ['plan', 'design', 'build', 'test', 'deploy', 'improve'];
 
-export function DeliveryChart({stage, onSelect}: {stage: number; onSelect: (stage: number) => void}) {
+export function DeliveryChart({stage, onSelect, onStart}: {onStart: (stage: number) => void; stage: number; onSelect: (stage: number) => void}) {
   return <figure className="cap-chart" aria-labelledby="delivery-chart-title">
     <figcaption className="chart-heading"><div><p className="eyebrow">Overview · Delivery loop</p><h2 id="delivery-chart-title">One goal. A complete lifecycle.</h2></div><span className="chart-note">Select a stage</span></figcaption>
     <div className="delivery-loop">
       <span className="delivery-bridge delivery-bridge-start" aria-hidden="true"/>
       <span className="delivery-bridge delivery-bridge-end" aria-hidden="true"/>
       <div className="delivery-control">Human direction <span>Goals · judgment · decisions</span></div>
-      {stages.map((item, index) => <button key={item.id} type="button" className="delivery-node" style={{gridArea: `phase${index}`}} data-chart-stage={index} aria-pressed={index === stage} aria-label={`${item.name}: ${item.chartVerb}; expected artifact ${item.chartArtifact}`} onClick={() => onSelect(index)}>
+      {stages.map((item, index) => <div key={item.id} className="delivery-node" style={{gridArea: `phase${index}`}} data-chart-stage={index} data-selected={index === stage}><button type="button" className="delivery-select" aria-pressed={index === stage} aria-label={`${item.name}: ${item.chartVerb}; expected artifact ${item.chartArtifact}`} onClick={() => onSelect(index)}>
         <span className="delivery-step"><span className="delivery-index">{String(index + 1).padStart(2, '0')}</span><span>{item.name}</span></span><strong>{item.chartVerb}</strong><span className="delivery-artifact">{item.chartArtifact}</span>
-      </button>)}
+      </button><div className="delivery-action">{index === stage && <Button size="sm" onClick={()=>onStart(index)}>Let’s {actions[index]}</Button>}</div></div>)}
     </div>
     <p className="chart-note chart-footnote">Feedback can return to any stage. People own the critical decisions.</p>
   </figure>;

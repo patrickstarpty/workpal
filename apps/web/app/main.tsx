@@ -48,7 +48,7 @@ function App() {
   return <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
     <CoreProvider localeAdapter={{getUserChoice:()=>"en",getSystemPreferences:()=>["en"],persist:()=>{}}} locale="en" resources={{en:resources}} cookieAuth wsUrl={`${location.protocol==='https:'?'wss:':'ws:'}//${location.host}/ws`} apiBaseUrl={location.origin} syncUserLocale={false}>
       <AppearanceSync/>
-      <PythonSession pathname={url.pathname} route={path} navigate={nav.replace} landing={<CapabilityHub view={capability ?? 'overview'} navigate={nav.push} enterWorkspace={()=>nav.push('/workspaces')}/>}>
+      <PythonSession pathname={url.pathname} route={path} navigate={nav.replace} landing={<NavigationProvider value={nav}><CapabilityHub view={capability ?? 'overview'} navigate={nav.push} enterWorkspace={()=>nav.push('/workspaces')}/></NavigationProvider>}>
         {slug=><WorkspaceSlugProvider slug={slug}><NavigationProvider value={nav}>
         <DashboardLayout syncAppearance={false} bottomBarStart={<a className="workspace-ai-hub" href="#/home">AI Hub</a>} extra={<><SearchCommand/><FloatingChat/></>}>
           <Boundary key={url.pathname}><LocalPage pathname={url.pathname} workspaceSlug={slug}/></Boundary>

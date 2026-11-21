@@ -6,7 +6,7 @@ import {capabilityView} from './routes';
 
 it('updates a lifecycle stage in place and opens the referenced skill', async () => {
   const open = vi.fn();
-  render(<Overview onOpenSkill={open} onNavigate={vi.fn()}/>);
+  render(<Overview onOpenSkill={open} onNavigate={vi.fn()} onStartStage={vi.fn()}/>);
   const user = userEvent.setup();
   await user.click(screen.getByRole('button', {name: /^Build: Code;/}));
   expect(screen.getByRole('button', {name: /^Build: Code;/})).toHaveFocus();
@@ -29,4 +29,16 @@ it('only treats explicit entry routes as capability views, preserving workspace 
   expect(capabilityView('/review/issues/task-123')).toBeNull();
   expect(capabilityView('/home/unknown')).toBeNull();
   expect(capabilityView('/%ZZ/projects')).toBeNull();
+});
+
+it('offers only the selected stage action and starts that stage without navigating on selection', async () => {
+  const start = vi.fn();
+  render(<Overview onOpenSkill={vi.fn()} onNavigate={vi.fn()} onStartStage={start}/>);
+  const user = userEvent.setup();
+  expect(screen.getByRole('button', {name: 'Let’s plan'})).toBeVisible();
+  await user.click(screen.getByRole('button', {name: /^Build: Code;/}));
+  expect(start).not.toHaveBeenCalled();
+  expect(screen.queryByRole('button', {name: 'Let’s plan'})).toBeNull();
+  await user.click(screen.getByRole('button', {name: 'Let’s build'}));
+  expect(start).toHaveBeenCalledExactlyOnceWith(2);
 });

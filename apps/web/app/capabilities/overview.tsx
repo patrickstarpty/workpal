@@ -3,12 +3,12 @@ import {Button} from '@workpal/ui/components/ui/button';
 import {catalog, roles, stages} from './data';
 import {DeliveryChart} from './capability-charts';
 
-export function Overview({onOpenSkill, onNavigate}: {onOpenSkill: (id: string) => void; onNavigate: (view: 'skills' | 'team') => void}) {
+export function Overview({onOpenSkill, onNavigate, onStartStage}: {onStartStage: (stage: number) => void; onOpenSkill: (id: string) => void; onNavigate: (view: 'skills' | 'team') => void}) {
   const [stageIndex, setStageIndex] = useState(0);
   const stage = stages[stageIndex]!;
   const selectStage = (index: number) => setStageIndex(index);
   return <>
-    <DeliveryChart stage={stageIndex} onSelect={selectStage}/>
+    <DeliveryChart stage={stageIndex} onSelect={selectStage} onStart={onStartStage}/>
     <div className="hero"><p className="eyebrow">AI-native software development</p><h1>From intent to working software.</h1><p className="subtitle">People set direction. Agents carry context through planning, implementation and verification. Skills make good methods reusable.</p></div>
     <div className="scenario"><h2>One request, across the lifecycle</h2><span className="tag">Recover an interrupted document upload</span></div>
     <div className="stages" aria-label="Delivery stages">{stages.map((item, index) => <button className="stage" type="button" key={item.id} aria-pressed={stageIndex === index} onClick={() => selectStage(index)}>{String(index + 1).padStart(2, '0')} {item.name}</button>)}</div>

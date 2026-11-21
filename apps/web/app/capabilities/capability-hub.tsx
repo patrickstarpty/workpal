@@ -7,14 +7,18 @@ import {SkillHub} from './skill-hub';
 import {AgentTeam} from './agent-team';
 import {capabilityPath, type CapabilityView} from './routes';
 import './capabilities.css';
+import {StageChat} from './stage-chat';
+import {CapabilityChat} from './capability-chat';
 
 export function CapabilityHub({view, navigate, enterWorkspace}: {view: CapabilityView; navigate: (path: string) => void; enterWorkspace: () => void}) {
+  const [chatStage, setChatStage] = useState<number | null>(null);
   const [openingSkillId, setOpeningSkillId] = useState<string | null>(null);
   const content = useRef<HTMLElement>(null);
   const previousView = useRef<CapabilityView | null>(null);
   useLayoutEffect(() => {
     if (previousView.current === view) return;
     previousView.current = view;
+    content.current?.scrollTo({top: 0});
     // Cross-page skill links focus their specific detail after it mounts.
     if (view === 'skills' && openingSkillId) return;
     content.current?.focus({preventScroll: true});
@@ -29,7 +33,7 @@ export function CapabilityHub({view, navigate, enterWorkspace}: {view: Capabilit
       <Button size="sm" onClick={enterWorkspace}>Enter Workspace</Button>
     </header>
     <main ref={content} id="capability-content" className="capability-content" data-mc="page" tabIndex={-1}>
-      {view === 'overview' ? <Overview onOpenSkill={openSkill} onNavigate={next => {window.scrollTo({top: 0, behavior: 'instant'}); changeView(next);}}/> : view === 'skills' ? <SkillHub initialSkillId={openingSkillId}/> : <AgentTeam onOpenSkill={openSkill}/>}
+      {view === 'overview' ? <Overview onStartStage={setChatStage} onOpenSkill={openSkill} onNavigate={next => {content.current?.scrollTo({top: 0, behavior: 'instant'}); changeView(next);}}/> : view === 'skills' ? <SkillHub initialSkillId={openingSkillId}/> : <AgentTeam onOpenSkill={openSkill}/>}
     </main>
-  </div></div>;
+  </div>{chatStage===null && <CapabilityChat/>}{chatStage!==null && <StageChat stage={chatStage} onStageChange={setChatStage} onClose={()=>setChatStage(null)}/>}</div>;
 }
