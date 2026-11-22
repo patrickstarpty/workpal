@@ -13,10 +13,10 @@ describe("Agent Team navigation", () => {
     await user.click(screen.getByRole("button", { name: "Explore Discovery & design squad" }));
     expect(screen.getByRole("heading", { level: 1, name: "Discovery & design" })).toHaveFocus();
 
-    await user.click(screen.getByRole("button", { name: /Intent capture Turn a business request/ }));
-    expect(screen.getByRole("heading", { level: 1, name: "Intent capture" })).toHaveFocus();
-    await user.click(screen.getByRole("button", { name: "Requirements & design" }));
-    expect(screen.getByRole("heading", { level: 1, name: "Requirements & design" })).toHaveFocus();
+    await user.click(screen.getByRole("button", { name: /Product Strategist Turn a business request/ }));
+    expect(screen.getByRole("heading", { level: 1, name: "Product Strategist" })).toHaveFocus();
+    await user.click(screen.getByRole("button", { name: "Software Architect" }));
+    expect(screen.getByRole("heading", { level: 1, name: "Software Architect" })).toHaveFocus();
 
     await user.click(screen.getByRole("button", { name: "Back to Agent Team" }));
     expect(screen.getByRole("button", { name: "Explore Discovery & design squad" })).toHaveFocus();
@@ -43,25 +43,25 @@ describe("Agent Team navigation", () => {
     render(<AgentTeam onOpenSkill={onOpenSkill} />);
 
     const matrix = screen.getByRole("table", { name: "Shared specialist connections to squads" });
-    expect(within(matrix).getByRole("cell", { name: "Engineering delivery: calls on verifier" })).toBeInTheDocument();
-    expect(within(matrix).getByRole("cell", { name: "Discovery & design: no proposed connection to verifier" })).toBeInTheDocument();
-    await user.click(within(matrix).getByRole("button", { name: "verifier" }));
-    expect(screen.getByRole("heading", { level: 1, name: "verifier" })).toHaveFocus();
+    expect(within(matrix).getByRole("cell", { name: "Engineering delivery: calls on QA Engineer" })).toBeInTheDocument();
+    expect(within(matrix).getByRole("cell", { name: "Discovery & design: no proposed connection to QA Engineer" })).toBeInTheDocument();
+    await user.click(within(matrix).getByRole("button", { name: "QA Engineer" }));
+    expect(screen.getByRole("heading", { level: 1, name: "QA Engineer" })).toHaveFocus();
     await user.click(screen.getByRole("button", { name: "qa-only" }));
     expect(onOpenSkill).toHaveBeenCalledExactlyOnceWith("gstack:qa-only/SKILL.md");
 
     await user.click(screen.getByRole("button", { name: "Back to Agent Team" }));
-    expect(within(screen.getByRole("table", { name: "Shared specialist connections to squads" })).getByRole("button", { name: "verifier" })).toHaveFocus();
+    expect(within(screen.getByRole("table", { name: "Shared specialist connections to squads" })).getByRole("button", { name: "QA Engineer" })).toHaveFocus();
   });
 
   it("keeps a shared-pool role as the return target after collaborator navigation", async () => {
     const user = userEvent.setup();
     render(<AgentTeam onOpenSkill={() => {}} />);
 
-    await user.click(screen.getByRole("button", { name: /code simplifier Reduce unnecessary complexity/ }));
-    await user.click(screen.getByRole("button", { name: "Implementation" }));
-    expect(screen.getByRole("heading", { level: 1, name: "Implementation" })).toHaveFocus();
+    await user.click(screen.getByRole("button", { name: /Refactoring Engineer Reduce unnecessary complexity/ }));
+    await user.click(screen.getByRole("button", { name: "Implementation Engineer" }));
+    expect(screen.getByRole("heading", { level: 1, name: "Implementation Engineer" })).toHaveFocus();
     await user.click(screen.getByRole("button", { name: "Back to Agent Team" }));
-    expect(screen.getByRole("button", { name: /code simplifier Reduce unnecessary complexity/ })).toHaveFocus();
+    expect(screen.getByRole("button", { name: /Refactoring Engineer Reduce unnecessary complexity/ })).toHaveFocus();
   });
 });

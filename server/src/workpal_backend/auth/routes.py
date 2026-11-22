@@ -17,7 +17,7 @@ router = APIRouter()
 COOKIES = ('workpal_auth', 'workpal_csrf_session', 'workpal_csrf')
 
 def supported(request, email):
-    if not request.app.state.settings.dev_auth or email.strip().lower() != 'dev@workpal.local':
+    if not request.app.state.settings.dev_auth or email.strip().lower() not in ('dev@workpal.local', 'workpal@fwd.com'):
         raise HTTPException(501, 'Email delivery is not supported')
 
 @router.get('/api/config')
@@ -25,7 +25,7 @@ def config(request: Request):
     return dict(development_auth=request.app.state.settings.dev_auth,
         cdn_domain='', allow_signup=False, daemon_setup_target='self_host',
         workspace_creation_disabled=request.app.state.settings.disable_workspace_creation,
-        posthog_key='', posthog_host='', analytics_environment='', feature_flags={},
+        posthog_key='', posthog_host='', analytics_environment='', feature_flags={'issue_assignment_without_runtime': True},
         vcs_integration_available=False, theme_store_enabled=False,
         local_worktree_supported=False, agent_conversation_starters_supported=False,
         webhook_payload_conditions_supported=False, issue_create_properties_supported=False,

@@ -1,6 +1,7 @@
 import {render, screen} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import {expect, it, vi} from 'vitest';
+vi.mock('./workflow-tickets-data',()=>({workflowSlug:'workpal-team',loadWorkflowTickets:vi.fn().mockResolvedValue([])}));
 import {Overview} from './overview';
 import {capabilityView} from './routes';
 
@@ -41,4 +42,15 @@ it('offers only the selected stage action and starts that stage without navigati
   expect(screen.queryByRole('button', {name: 'Let’s plan'})).toBeNull();
   await user.click(screen.getByRole('button', {name: 'Let’s build'}));
   expect(start).toHaveBeenCalledExactlyOnceWith(2);
+});
+
+it('does not repeat the top navigation as footer promotions',()=>{
+ render(<Overview onOpenSkill={vi.fn()} onNavigate={vi.fn()} onStartStage={vi.fn()}/>);
+ expect(screen.queryByRole('button',{name:'Explore skills'})).toBeNull();
+ expect(screen.queryByRole('button',{name:'Explore squads'})).toBeNull();
+});
+
+it('shows workflow tickets for the selected stage',()=>{
+ render(<Overview onOpenSkill={vi.fn()} onNavigate={vi.fn()} onStartStage={vi.fn()}/>);
+ expect(screen.getByLabelText('Workflow tickets')).toBeVisible();
 });

@@ -118,3 +118,9 @@ describe("filterSkills", () => {
     ]);
   });
 });
+
+it('gives every registered role a traceable workflow source and every squad a named lead', () => {
+ for(const role of roles){expect(role.sourceUrl).toMatch(/^https:\/\/github.com\//);expect(role.sourceAuthor).toBeTruthy();}
+ for(const squad of squads)expect(roles.some(role=>role.name===squad.lead)).toBe(true);
+ expect(roles.some(role=>role.sourceAuthor==='Andrej Karpathy')).toBe(true);
+});

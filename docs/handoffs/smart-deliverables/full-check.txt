@@ -1,0 +1,213 @@
+
+> workpal@0.2.0 check
+> node --check server/api.mjs && node --check server/store.mjs && npm test && npm run test:python && npm run test:launcher && npm run build
+
+
+> workpal@0.2.0 test
+> node --test server/*.test.mjs
+
+TAP version 13
+# (node:80873) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: HTTP CRUD persists across restart, validates input and rejects execution
+ok 1 - HTTP CRUD persists across restart, validates input and rejects execution
+  ---
+  duration_ms: 318.561333
+  type: 'test'
+  ...
+# Subtest: repeated server shutdown closes SQLite only once
+ok 2 - repeated server shutdown closes SQLite only once
+  ---
+  duration_ms: 100.862375
+  type: 'test'
+  ...
+# Subtest: search and squad members use endpoint-specific response shapes
+ok 3 - search and squad members use endpoint-specific response shapes
+  ---
+  duration_ms: 87.012916
+  type: 'test'
+  ...
+# (node:80874) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: avatar upload and agent selection persist across restart; reject non-images
+ok 4 - avatar upload and agent selection persist across restart; reject non-images
+  ---
+  duration_ms: 343.212708
+  type: 'test'
+  ...
+# Subtest: brand storage migration copies drafts without overwriting either version
+ok 5 - brand storage migration copies drafts without overwriting either version
+  ---
+  duration_ms: 1.805875
+  type: 'test'
+  ...
+# (node:80876) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: contribution uses explicit attribution, deduplicates shared commits, filters dates/projects and inherits squads
+ok 6 - contribution uses explicit attribution, deduplicates shared commits, filters dates/projects and inherits squads
+  ---
+  duration_ms: 135.606875
+  type: 'test'
+  ...
+# Subtest: contribution import rejects invalid records without replacing saved data
+ok 7 - contribution import rejects invalid records without replacing saved data
+  ---
+  duration_ms: 269.944709
+  type: 'test'
+  ...
+# (node:80877) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: dashboard rollups reconcile across metrics, agents, projects and ranges
+ok 8 - dashboard rollups reconcile across metrics, agents, projects and ranges
+  ---
+  duration_ms: 213.020875
+  type: 'test'
+  ...
+# Subtest: content migration preserves user edits and deleted tickets and runs only once
+ok 9 - content migration preserves user edits and deleted tickets and runs only once
+  ---
+  duration_ms: 302.154333
+  type: 'test'
+  ...
+1..9
+# tests 9
+# suites 0
+# pass 9
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 787.027375
+
+> workpal@0.2.0 test:python
+> server/.venv/bin/python -m pytest server/tests -q
+
+........................................................................ [  3%]
+........................................................................ [  7%]
+........................................................................ [ 11%]
+........................................................................ [ 14%]
+........................................................................ [ 18%]
+........................................................................ [ 22%]
+........................................................................ [ 26%]
+.................................................................................................................. [ 31%]
+........................................................................ [ 35%]
+........................................................................ [ 39%]
+........................................................................ [ 43%]
+........................................................................ [ 46%]
+........................................................................ [ 50%]
+........................................................................ [ 54%]
+........................................................................ [ 57%]
+........................................................................ [ 61%]
+........................................................................ [ 65%]
+.....................................................F.................. [ 69%]
+........................................................................ [ 72%]
+........................................................................ [ 76%]
+........................................................................ [ 80%]
+........................................................................ [ 83%]
+........................................................................ [ 87%]
+........................................................................ [ 91%]
+........................................................................ [ 95%]
+........................................................................ [ 98%]
+........................                                                 [100%]
+=================================== FAILURES ===================================
+_____________ test_authorized_delivery_and_failed_fanout[context2] _____________
+
+settings = Settings(frontend_dir=None, database_url='sqlite:////private/var/folders/zn/dg1zfbv96p19qstvcpgsjvyr0000gn/T/pytest-of...ai-native/workpal/server/data/python/uploads'), worker_poll_interval=1.0, reconcile_interval=60.0, busy_timeout_ms=250)
+context = '中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中...中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文中文'
+isolated_relay_redis_port = 63588
+
+    @pytest.mark.parametrize('context', [None, 'x' * 70000, '中文' * 70000])
+    def test_authorized_delivery_and_failed_fanout(settings, context, isolated_relay_redis_port):
+        from workpal_backend.auth.service import get_or_create_development_user
+        from workpal_backend.workspaces import service
+        from workpal_backend.infrastructure.delivery import OutboxDelivery
+        from workpal_backend.realtime.protocol import project_event
+        async def exercise():
+            settings.redis_url = f'redis://127.0.0.1:{isolated_relay_redis_port}'
+            settings.redis_key_prefix = 'test:consumer:' + uuid4().hex + ':'
+            migrate(settings)
+            db = Database(settings)
+            resources = RedisResources(settings)
+            delivery = OutboxDelivery(settings)
+            frames = []
+            class Sink:
+                fail = True
+                async def publish(self, event):
+                    if self.fail: raise RuntimeError('fanout failed')
+                    frames.append(project_event(event, event['workspaceID']))
+            sink = Sink()
+            consumer = RealtimeConsumer(db, resources, sink)
+            try:
+                with db.transaction() as s:
+                    uid = get_or_create_development_user(s, 'dev@workpal.local')['id']
+                    ws = service.create_workspace(s, uid, 'Original', 'bridge-test')
+                    result = service.update_workspace(s, {'identity_kind':'session','user_id':uid}, ws['id'], {'name':'Updated', 'context':context})
+                assert delivery.dispatch(db) == 1
+                with pytest.raises(RuntimeError): await consumer.tick()
+                assert consumer._position() == '0-0'
+                sink.fail = False
+                assert await consumer.tick()
+                assert frames == [{'type':'workspace:updated','payload':{'workspace':result},'actor_id':uid,'actor_type':'member'}]
+                with db.transaction() as s:
+                    result = service.update_workspace(s, {'identity_kind':'session','user_id':uid}, ws['id'], {'name':'Again'})
+                assert delivery.dispatch(db) == 1
+                assert await consumer.tick()
+                assert frames[-1]['payload']['workspace'] == result
+                assert len(frames) == 2
+                with db.transaction() as s:
+                    assert not s.execute(select(quarantine)).first()
+            finally:
+                await resources.client.delete(consumer.channel)
+                delivery.close()
+                await resources.close()
+                db.close()
+>       asyncio.run(exercise())
+
+server/tests/test_realtime_consumer.py:100: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/runners.py:190: in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/runners.py:118: in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/asyncio/base_events.py:653: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    async def exercise():
+        settings.redis_url = f'redis://127.0.0.1:{isolated_relay_redis_port}'
+        settings.redis_key_prefix = 'test:consumer:' + uuid4().hex + ':'
+        migrate(settings)
+        db = Database(settings)
+        resources = RedisResources(settings)
+        delivery = OutboxDelivery(settings)
+        frames = []
+        class Sink:
+            fail = True
+            async def publish(self, event):
+                if self.fail: raise RuntimeError('fanout failed')
+                frames.append(project_event(event, event['workspaceID']))
+        sink = Sink()
+        consumer = RealtimeConsumer(db, resources, sink)
+        try:
+            with db.transaction() as s:
+                uid = get_or_create_development_user(s, 'dev@workpal.local')['id']
+                ws = service.create_workspace(s, uid, 'Original', 'bridge-test')
+                result = service.update_workspace(s, {'identity_kind':'session','user_id':uid}, ws['id'], {'name':'Updated', 'context':context})
+>           assert delivery.dispatch(db) == 1
+E           assert 0 == 1
+E            +  where 0 = dispatch(<workpal_backend.infrastructure.database.Database object at 0x16947c310>)
+E            +    where dispatch = <workpal_backend.infrastructure.delivery.OutboxDelivery object at 0x1690fbb50>.dispatch
+
+server/tests/test_realtime_consumer.py:81: AssertionError
+=============================== warnings summary ===============================
+server/.venv/lib/python3.11/site-packages/fastapi/testclient.py:1
+  /Users/patrick/Desktop/Workspace/ai-native/workpal/server/.venv/lib/python3.11/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED server/tests/test_realtime_consumer.py::test_authorized_delivery_and_failed_fanout[context2]
+1 failed, 1937 passed, 1 warning, 30 subtests passed in 303.90s (0:05:03)

@@ -17,12 +17,12 @@ Settings: WORKPAL_DATABASE_URL (SQLite file URL), REDIS_URL, REDIS_KEY_PREFIX, W
 
 ## Import the previous local workspace
 
-Keep the source at `server/data/workpal.sqlite`; do not point Python directly at that file. Stop writers and back up both databases through SQLite's backup API before a real import. The destination account must already exist (the local default account is `dev@workpal.local`). With `WORKPAL_DATABASE_URL` set to the intended Python database:
+Keep the source at `server/data/workpal.sqlite`; do not point Python directly at that file. Stop writers and back up both databases through SQLite's backup API before a real import. The destination account must already exist (the local default account is `workpal@fwd.com`). With `WORKPAL_DATABASE_URL` set to the intended Python database:
 
 ```sh
-server/.venv/bin/python -m workpal_backend.cli import-legacy --source server/data/workpal.sqlite --owner-email dev@workpal.local --dry-run
+server/.venv/bin/python -m workpal_backend.cli import-legacy --source server/data/workpal.sqlite --owner-email workpal@fwd.com --dry-run
 server/.venv/bin/python -m workpal_backend.cli migrate
-server/.venv/bin/python -m workpal_backend.cli import-legacy --source server/data/workpal.sqlite --owner-email dev@workpal.local
+server/.venv/bin/python -m workpal_backend.cli import-legacy --source server/data/workpal.sqlite --owner-email workpal@fwd.com
 ```
 
 Dry-run makes no changes and can report that migration 0014 is still needed. The import requires the source's single-workspace schema, runs atomically, retains all original JSON bodies, maps historical identities to native UUIDs, and grants the existing destination account owner access. An identical rerun skips the import, preserving later edits/deletions; a changed source or conflicting destination is rejected. Projects, tasks, comments, skills, squads, runtimes, stored analytics and contribution records are read from the Python database after import.
@@ -34,3 +34,34 @@ Imported history is the existing local dataset, not new measured model output. S
 ## Repository layout
 
 Python lives directly in `server/` (`src/`, `tests/`, `migrations/`, `contracts/`, `tools/`). Original Go sources and migrations are archived in `server/go/`. Node mock files and `seed.json` remain in `server/`; existing records remain in `server/data/`.
+
+## Local workflow team catalog
+
+`apps/web/app/capabilities/data/role-profiles.json` records the original workflow
+URL and author for each Workpal role. Job titles and squad compositions are
+Workpal adaptations, not claims that the authors published those exact squads.
+The sources are Lauren Tan's pstack, Garry Tan's gstack, Matt Pocock's skills and
+Andrej Karpathy's autoresearch. Every source URL identifies a repository revision.
+
+With the same environment as the local service, run
+`server/.venv/bin/python scripts/register-workflow-team.py` to register the catalog
+in the `review` workspace for `workpal@fwd.com`. It requires development auth,
+backs up SQLite first, inserts missing `workflow-*` records and preserves existing
+records on reruns. It registers offline role descriptions and squad membership;
+it does not install skills, execute agents or produce experimental results.
+
+## Recorded lifecycle delivery
+
+`server/.venv/bin/python scripts/register-lifecycle.py`, using the service's
+environment, registers the `Workflow team delivery` project and six linked stage
+tickets after the workflow team is registered. It requires a healthy local API
+and a successful source-team check log, retained in
+`server/data/lifecycle-evidence/source-team-check.log` (or the initial
+`/tmp/workpal-sourced-team-check.log`). It backs up SQLite first and preserves
+existing ticket and comment records on reruns. Source skills are registered as
+instruction references, not installed executable integrations.
+
+Stages 01–05 describe observed local configuration work; 06 is pending upkeep.
+Evidence notes identify setup tooling, record their actual insertion time, and
+never impersonate an agent run. Earlier `fixture_source` discussions are labelled
+as authored historical references on read; their stored text is preserved.

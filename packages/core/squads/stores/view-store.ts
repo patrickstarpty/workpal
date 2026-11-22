@@ -73,6 +73,6 @@ export const useSquadsViewStore = createCollectionViewStore<
   sortDefaultDirection: SQUAD_SORT_DEFAULT_DIRECTION,
   defaultHiddenColumns: SQUAD_DEFAULT_HIDDEN_COLUMNS,
   emptyFilters: EMPTY_SQUAD_FILTERS,
-  extraState: { scope: "mine" },
+  extraState: { scope: "all" },
   extraActions: (set) => ({ setScope: (scope) => set({ scope }) }),
 });

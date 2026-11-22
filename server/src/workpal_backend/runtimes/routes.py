@@ -27,6 +27,15 @@ def list_runtimes(request:Request,principal=Depends(require_principal)):
         with request.app.state.database.transaction() as session:
             rows=session.execute(text('SELECT * FROM agent_runtime WHERE workspace_id=:workspace'+clause+
                 ' ORDER BY workpal_timestamp_order(created_at) ASC'),dict(workspace=workspace,user=user)).mappings().all()
+            # The local imported dataset predates canonical machine registration.
+            # Expose its offline records only to local development administrators;
+            # canonical runtimes and production visibility keep their own contract.
+            if not rows and request.app.state.settings.dev_auth and member['role'] in ('owner','admin'):
+                from workpal_backend.workspace_content.repository import list_records
+                legacy = list_records(session, workspace, 'runtimes')
+                if query_first(request,'owner') == 'me':
+                    legacy = [row for row in legacy if row.get('owner_id') == user]
+                return GoJSONResponse([{**row, 'status': 'offline', 'custom_name': row.get('custom_name') or row.get('name')} for row in legacy])
             return GoJSONResponse([public(row) for row in rows])
     except (SQLAlchemyError,DatabaseBusy):
         return GoJSONResponse({'error':'failed to list runtimes'},status_code=500)

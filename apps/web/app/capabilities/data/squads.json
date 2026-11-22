@@ -1,70 +1,173 @@
 {
-  "definition": "Workpal's proposed squad grouping brings together responsibilities from the AI-native SDLC playbook. These are suggested role assignments, not deployed agents or an official Anthropic squad taxonomy. Shared specialists join a task on demand and retain their own scope; they are not permanent members of every squad.",
-  "sharedSpecialists": ["researcher", "simplifier", "verifier", "adversarial"],
+  "definition": "Workpal squad compositions adapt public workflows. Role profiles link to their original methods; these authors do not endorse or operate these squads.",
+  "sharedSpecialists": [
+    "researcher",
+    "simplifier",
+    "verifier",
+    "adversarial"
+  ],
   "squads": [
     {
       "id": "discovery",
       "name": "Discovery & design",
       "mission": "Turn a business goal into a design the team can build and verify.",
-      "lead": "main agent",
-      "capabilities": ["Clarify intent and acceptance criteria", "Explore architecture and design choices", "Prepare an implementation plan"],
-      "core": ["intent", "design-role", "planner"],
-      "specialists": ["researcher", "adversarial"],
+      "lead": "Product Strategist",
+      "capabilities": [
+        "Clarify intent and acceptance criteria",
+        "Explore architecture and design choices",
+        "Prepare an implementation plan"
+      ],
+      "core": [
+        "intent",
+        "design-role",
+        "planner"
+      ],
+      "specialists": [
+        "researcher",
+        "adversarial"
+      ],
       "output": "Agreed brief, design specification and implementation plan",
       "trigger": "A new request, unresolved design decision or incident follow-up needs a clear direction.",
       "humanDecision": "Confirm the goal, choose the approach and accept the plan.",
       "handoffs": [
-        {"squadId": "delivery", "artifact": "Accepted design and implementation plan"},
-        {"squadId": "assurance", "artifact": "Acceptance criteria and design decisions"}
+        {
+          "squadId": "delivery",
+          "artifact": "Accepted design and implementation plan"
+        },
+        {
+          "squadId": "assurance",
+          "artifact": "Acceptance criteria and design decisions"
+        }
       ]
     },
     {
       "id": "delivery",
       "name": "Engineering delivery",
       "mission": "Build the accepted change and resolve findings through review.",
-      "lead": "main agent",
-      "capabilities": ["Implement scoped changes with regression coverage", "Simplify code with specialist help", "Resolve review findings and failing checks"],
-      "core": ["implementation", "review-fixes"],
-      "specialists": ["researcher", "simplifier", "verifier"],
+      "lead": "Engineering Lead",
+      "capabilities": [
+        "Implement scoped changes with regression coverage",
+        "Simplify code with specialist help",
+        "Resolve review findings and failing checks"
+      ],
+      "core": [
+        "implementation",
+        "review-fixes"
+      ],
+      "specialists": [
+        "researcher",
+        "simplifier",
+        "verifier"
+      ],
       "output": "Reviewable code change, tests and change summary",
       "trigger": "An accepted plan or actionable review finding is ready for implementation.",
       "humanDecision": "Resolve scope changes and authorize actions outside the agreed task.",
       "handoffs": [
-        {"squadId": "assurance", "artifact": "Change, intended behavior and check results"},
-        {"squadId": "discovery", "artifact": "Design questions or scope changes"}
+        {
+          "squadId": "assurance",
+          "artifact": "Change, intended behavior and check results"
+        },
+        {
+          "squadId": "discovery",
+          "artifact": "Design questions or scope changes"
+        }
       ]
     },
     {
       "id": "assurance",
       "name": "Verification & review",
       "mission": "Give decision owners independent evidence about the proposed change.",
-      "lead": "main agent",
-      "capabilities": ["Review changes against intent and standards", "Verify behavior with fresh context", "Challenge assumptions and surface unresolved risks"],
-      "core": ["pr-review"],
-      "specialists": ["verifier", "adversarial"],
+      "lead": "Code Reviewer",
+      "capabilities": [
+        "Review changes against intent and standards",
+        "Verify behavior with fresh context",
+        "Challenge assumptions and surface unresolved risks"
+      ],
+      "core": [
+        "pr-review"
+      ],
+      "specialists": [
+        "verifier",
+        "adversarial"
+      ],
       "output": "Verification evidence, prioritized findings and open decisions",
       "trigger": "A change or decision needs an independent review before it proceeds.",
       "humanDecision": "Assess unresolved findings; code owners retain the merge decision.",
       "handoffs": [
-        {"squadId": "delivery", "artifact": "Actionable findings and verification gaps"},
-        {"squadId": "operations", "artifact": "Reviewed change and verification evidence"}
+        {
+          "squadId": "delivery",
+          "artifact": "Actionable findings and verification gaps"
+        },
+        {
+          "squadId": "operations",
+          "artifact": "Reviewed change and verification evidence"
+        }
       ]
     },
     {
       "id": "operations",
       "name": "Reliability & security",
       "mission": "Prepare releases and turn operational evidence into a bounded response.",
-      "lead": "main agent",
-      "capabilities": ["Prepare releases and diagnose pipeline failures", "Investigate monitoring events and incidents", "Validate security findings for human triage"],
-      "core": ["pipeline", "monitoring", "security", "oncall"],
-      "specialists": ["researcher", "verifier", "adversarial"],
+      "lead": "Release Engineer",
+      "capabilities": [
+        "Prepare releases and diagnose pipeline failures",
+        "Investigate monitoring events and incidents",
+        "Validate security findings for human triage"
+      ],
+      "core": [
+        "pipeline",
+        "monitoring",
+        "security",
+        "oncall"
+      ],
+      "specialists": [
+        "researcher",
+        "verifier",
+        "adversarial"
+      ],
       "output": "Release preparation, incident diagnosis and validated findings",
       "trigger": "A release request, pipeline failure, configured alert, incident or scheduled scan needs attention.",
       "humanDecision": "Authorize production actions, triage security findings and decide on high-impact recovery.",
       "handoffs": [
-        {"squadId": "delivery", "artifact": "Scoped fixes and diagnostic evidence"},
-        {"squadId": "discovery", "artifact": "Incident lessons and proposed follow-up work"},
-        {"squadId": "assurance", "artifact": "Changes or recovery proposals needing independent review"}
+        {
+          "squadId": "delivery",
+          "artifact": "Scoped fixes and diagnostic evidence"
+        },
+        {
+          "squadId": "discovery",
+          "artifact": "Incident lessons and proposed follow-up work"
+        },
+        {
+          "squadId": "assurance",
+          "artifact": "Changes or recovery proposals needing independent review"
+        }
+      ]
+    },
+    {
+      "id": "experiments",
+      "name": "Research & experiments",
+      "mission": "Turn an optimization question into a reproducible experiment and an evidence-based decision.",
+      "lead": "Research Scientist",
+      "capabilities": [
+        "Define a baseline and fixed evaluation",
+        "Prepare bounded experiments",
+        "Record evidence and retain justified improvements"
+      ],
+      "core": [
+        "experimenter"
+      ],
+      "specialists": [
+        "researcher",
+        "verifier"
+      ],
+      "output": "Experiment proposal and results ledger when evidence is supplied",
+      "trigger": "A measurable research or optimization question needs investigation.",
+      "humanDecision": "Approve the experiment budget and any execution outside Workpal.",
+      "handoffs": [
+        {
+          "squadId": "delivery",
+          "artifact": "A supported improvement proposal and reproducible evaluation"
+        }
       ]
     }
   ]

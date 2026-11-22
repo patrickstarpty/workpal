@@ -1,0 +1,10 @@
+
+> @workpal/views@0.0.0 typecheck /Users/patrick/Desktop/Workspace/ai-native/workpal/packages/views
+> tsc --noEmit
+
+../ui/components/common/workpal-graphics.tsx(8,7): error TS6133: 'THIN_STAR' is declared but its value is never read.
+../ui/components/common/workpal-graphics.tsx(38,9): error TS6133: 'delayOf' is declared but its value is never read.
+../ui/lib/workpal-brand.ts(96,10): error TS6133: 'buildWordmark' is declared but its value is never read.
+/Users/patrick/Desktop/Workspace/ai-native/workpal/packages/views:
+ ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL  @workpal/views@0.0.0 typecheck: `tsc --noEmit`
+Exit status 1

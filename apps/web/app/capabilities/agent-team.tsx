@@ -1,3 +1,4 @@
+import {ActorAvatar} from '@workpal/ui/components/common/actor-avatar';
 import {ArrowLeft} from '@workpal/ui/icons';
 import { useLayoutEffect, useRef, useState, type CSSProperties } from "react";
 import { Button } from "@workpal/ui/components/ui/button";
@@ -11,9 +12,6 @@ function rolesFor(ids: string[]) {
   return ids.map((id) => roles.find((role) => role.id === id)).filter((role): role is AgentRole => Boolean(role));
 }
 
-function initials(name: string) {
-  return name.split(/[\s&-]+/).filter(Boolean).slice(0, 2).map((part) => part[0]).join("").toUpperCase();
-}
 
 function TeamChart({ openSquad, openRole, registerTrigger }: {
   openSquad: OpenProfile;
@@ -56,7 +54,7 @@ function TeamChart({ openSquad, openRole, registerTrigger }: {
                     <button type="button" className="wp-team-chart-role" key={role.id} data-chart-agent={role.id}
                       aria-label={`View ${role.name} role profile`} ref={registerTrigger(`chart-role-${squad.id}-${role.id}`)}
                       onClick={() => openRole(role.id, `chart-role-${squad.id}-${role.id}`)}>
-                      <span className="wp-team-chart-mark" aria-hidden="true">{initials(role.name)}</span><span className="wp-team-chart-role-name">{role.name}</span>
+                      <span aria-hidden="true"><ActorAvatar name={role.name} initials="" avatarUrl={role.avatarUrl} isAgent size="md"/></span><span className="wp-team-chart-role-name">{role.name}</span>
                     </button>
                   ))}
                 </div>
@@ -66,7 +64,7 @@ function TeamChart({ openSquad, openRole, registerTrigger }: {
                 <div>{rolesFor(squad.specialists).map((role) => (
                   <button type="button" key={role.id} data-chart-agent={role.id} aria-label={`View ${role.name} role profile`}
                     ref={registerTrigger(`chart-support-${squad.id}-${role.id}`)} onClick={() => openRole(role.id, `chart-support-${squad.id}-${role.id}`)}>
-                    <span className="wp-team-chart-mark" aria-hidden="true">{initials(role.name)}</span>
+                    <span aria-hidden="true"><ActorAvatar name={role.name} initials="" avatarUrl={role.avatarUrl} isAgent size="md"/></span>
                   </button>
                 ))}</div>
               </div>
@@ -97,7 +95,7 @@ function TeamChart({ openSquad, openRole, registerTrigger }: {
         {shared.map((role) => (
           <button type="button" key={role.id} data-chart-agent={role.id} ref={registerTrigger(`chart-pool-${role.id}`)}
             onClick={() => openRole(role.id, `chart-pool-${role.id}`)}>
-            <span className="wp-team-chart-mark" aria-hidden="true">{initials(role.name)}</span><span>{role.name}</span>
+            <span aria-hidden="true"><ActorAvatar name={role.name} initials="" avatarUrl={role.avatarUrl} isAgent size="md"/></span><span>{role.name}</span>
           </button>
         ))}
       </div>
@@ -115,7 +113,7 @@ function RoleButtons({ ids, origin, openRole, registerTrigger }: {
   return rolesFor(ids).map((role) => (
     <button type="button" className="role-item" key={role.id} data-agent={role.id}
       ref={registerTrigger(`${origin}-${role.id}`)} onClick={() => openRole(role.id, `${origin}-${role.id}`)}>
-      <strong>{role.name}</strong>{" "}<span>{role.mission}</span>
+      <span aria-hidden="true"><ActorAvatar name={role.name} initials="" avatarUrl={role.avatarUrl} isAgent size="md"/></span><strong>{role.name}</strong>{" "}<span>{role.mission}</span>
     </button>
   ));
 }
@@ -175,7 +173,7 @@ export function AgentTeam({ onOpenSkill }: { onOpenSkill: (id: string) => void }
         <ArrowLeft aria-hidden="true"/>Back to Agent Team
       </Button>
       <section className="panel agent-profile" aria-labelledby="agent-title">
-        <div><p className="eyebrow">Role profile · {selectedRole.mode}</p><h1 id="agent-title" tabIndex={-1} ref={titleRef}>{selectedRole.name}</h1><p className="section-description">{selectedRole.mission}</p></div>
+        <div><p className="eyebrow">Role profile · {selectedRole.mode}</p><h1 id="agent-title" tabIndex={-1} ref={titleRef}><span aria-hidden="true" className="inline-flex align-middle mr-3"><ActorAvatar name={selectedRole.name} initials="" avatarUrl={selectedRole.avatarUrl} isAgent size="xl"/></span>{selectedRole.name}</h1><p className="section-description">{selectedRole.mission}</p></div>
         <div className="profile-pair"><div><span className="label">Engage when</span><p className="value">{selectedRole.trigger}</p></div><div><span className="label">Expected output</span><p className="value">{selectedRole.output}</p></div></div>
         <div><span className="label">Required context</span><p className="value">{selectedRole.input}</p></div>
         <div><span className="label">Proposed scope</span><p className="value">{selectedRole.scope}</p></div>
@@ -188,7 +186,7 @@ export function AgentTeam({ onOpenSkill }: { onOpenSkill: (id: string) => void }
           {rolesFor(selectedRole.collaborators).map((role) => <Button type="button" variant="outline" size="sm" className="chip" key={role.id}
             data-related-agent={role.id} onClick={() => openRole(role.id)}>{role.name}</Button>)}
         </div></div>
-        <details className="profile-basis"><summary>Role definition</summary><p className="small">{selectedRole.basis}</p></details>
+        <details className="profile-basis"><summary>Role definition</summary><p className="small">{selectedRole.basis}</p><a href={selectedRole.sourceUrl} target="_blank" rel="noreferrer">Source workflow · {selectedRole.sourceAuthor}</a></details>
       </section>
     </section>;
   }

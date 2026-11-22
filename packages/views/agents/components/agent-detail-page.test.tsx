@@ -122,6 +122,11 @@ vi.mock("../../common/actor-avatar", () => ({
   ActorAvatar: () => <div>actor-avatar</div>,
 }));
 
+vi.mock("../../common/avatar-upload-control", () => ({
+  AvatarUploadControl: ({onEmojiSelected}: {onEmojiSelected: (value: string) => Promise<unknown>}) =>
+    <button onClick={() => void onEmojiSelected("emoji:🦊")}>Change avatar</button>,
+}));
+
 const agentsRef = vi.hoisted(() => ({ current: [] as unknown[] }));
 const membersRef = vi.hoisted(() => ({ current: [] as unknown[] }));
 // When set, the member query never resolves — the "membership still loading"
@@ -828,5 +833,22 @@ describe("AgentDetailPage more actions", () => {
     expect(
       within(openMoreActions()).queryByRole("menuitem", { name: /Cancel all/ }),
     ).not.toBeInTheDocument();
+  });
+});
+
+describe("AgentDetailPage avatar editing", () => {
+  it("saves an emoji directly from the detail header", async () => {
+    agentsRef.current = [{...baseAgent, owner_id: "user-1"}];
+    mockUpdateAgent.mockResolvedValue({...baseAgent, avatar_url: "emoji:🦊"});
+    renderPage();
+    fireEvent.click(await screen.findByRole("button", {name: "Change avatar"}));
+    await waitFor(() => expect(mockUpdateAgent).toHaveBeenCalledWith("agent-1", {avatar_url: "emoji:🦊"}));
+  });
+  it("keeps the header avatar read-only for a non-owner member", async () => {
+    currentUserRef.current = {id: "other"};
+    membersRef.current = [{user_id: "other", role: "member"}];
+    renderPage();
+    await screen.findByRole("button", {name: "Settings"});
+    expect(screen.queryByRole("button", {name: "Change avatar"})).toBeNull();
   });
 });

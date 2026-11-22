@@ -1,0 +1,293 @@
+
+> workpal@0.2.0 check
+> node --check server/api.mjs && node --check server/store.mjs && npm test && npm run test:python && npm run test:launcher && npm run build
+
+
+> workpal@0.2.0 test
+> node --test server/*.test.mjs
+
+TAP version 13
+# (node:30750) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: HTTP CRUD persists across restart, validates input and rejects execution
+ok 1 - HTTP CRUD persists across restart, validates input and rejects execution
+  ---
+  duration_ms: 137.896292
+  type: 'test'
+  ...
+# Subtest: repeated server shutdown closes SQLite only once
+ok 2 - repeated server shutdown closes SQLite only once
+  ---
+  duration_ms: 58.130916
+  type: 'test'
+  ...
+# Subtest: search and squad members use endpoint-specific response shapes
+ok 3 - search and squad members use endpoint-specific response shapes
+  ---
+  duration_ms: 58.836791
+  type: 'test'
+  ...
+# (node:30751) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: avatar upload and agent selection persist across restart; reject non-images
+ok 4 - avatar upload and agent selection persist across restart; reject non-images
+  ---
+  duration_ms: 119.980917
+  type: 'test'
+  ...
+# Subtest: brand storage migration copies drafts without overwriting either version
+ok 5 - brand storage migration copies drafts without overwriting either version
+  ---
+  duration_ms: 0.512917
+  type: 'test'
+  ...
+# (node:30753) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: contribution uses explicit attribution, deduplicates shared commits, filters dates/projects and inherits squads
+ok 6 - contribution uses explicit attribution, deduplicates shared commits, filters dates/projects and inherits squads
+  ---
+  duration_ms: 83.612542
+  type: 'test'
+  ...
+# Subtest: contribution import rejects invalid records without replacing saved data
+ok 7 - contribution import rejects invalid records without replacing saved data
+  ---
+  duration_ms: 99.312792
+  type: 'test'
+  ...
+# (node:30754) ExperimentalWarning: SQLite is an experimental feature and might change at any time
+# (Use `node --trace-warnings ...` to show where the warning was created)
+# Subtest: dashboard rollups reconcile across metrics, agents, projects and ranges
+ok 8 - dashboard rollups reconcile across metrics, agents, projects and ranges
+  ---
+  duration_ms: 118.03575
+  type: 'test'
+  ...
+# Subtest: content migration preserves user edits and deleted tickets and runs only once
+ok 9 - content migration preserves user edits and deleted tickets and runs only once
+  ---
+  duration_ms: 141.227583
+  type: 'test'
+  ...
+1..9
+# tests 9
+# suites 0
+# pass 9
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 475.214334
+
+> workpal@0.2.0 test:python
+> server/.venv/bin/python -m pytest server/tests -q
+
+........................................................................ [  3%]
+........................................................................ [  7%]
+........................................................................ [ 11%]
+........................................................................ [ 14%]
+........................................................................ [ 18%]
+........................................................................ [ 22%]
+........................................................................ [ 26%]
+.................................................................................................................. [ 31%]
+........................................................................ [ 35%]
+........................................................................ [ 39%]
+........................................................................ [ 43%]
+........................................................................ [ 46%]
+........................................................................ [ 50%]
+........................................................................ [ 54%]
+........................................................................ [ 57%]
+........................................................................ [ 61%]
+........................................................................ [ 65%]
+........................................................................ [ 69%]
+........................................................................ [ 72%]
+........................................................................ [ 76%]
+........................................................................ [ 80%]
+........................................................................ [ 83%]
+........................................................................ [ 87%]
+........................................................................ [ 91%]
+........................................................................ [ 95%]
+........................................................................ [ 98%]
+......................                                                   [100%]
+=============================== warnings summary ===============================
+server/.venv/lib/python3.11/site-packages/fastapi/testclient.py:1
+  /Users/patrick/Desktop/Workspace/ai-native/workpal/server/.venv/lib/python3.11/site-packages/fastapi/testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
+    from starlette.testclient import TestClient as TestClient  # noqa
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+1936 passed, 1 warning, 30 subtests passed in 188.56s (0:03:08)
+
+> workpal@0.2.0 test:launcher
+> node --test scripts/workpal-start.test.mjs tests/python-web/launcher.test.mjs
+
+TAP version 13
+# Subtest: production requires a frontend build before spawning
+ok 1 - production requires a frontend build before spawning
+  ---
+  duration_ms: 0.838125
+  type: 'test'
+  ...
+# Subtest: requires explicit Redis configuration
+ok 2 - requires explicit Redis configuration
+  ---
+  duration_ms: 0.647375
+  type: 'test'
+  ...
+# Subtest: requires explicit database configuration
+ok 3 - requires explicit database configuration
+  ---
+  duration_ms: 0.116875
+  type: 'test'
+  ...
+# Subtest: occupied port is rejected without touching owner
+ok 4 - occupied port is rejected without touching owner
+  ---
+  duration_ms: 7.404959
+  type: 'test'
+  ...
+# Subtest: migration failure propagates and prevents API startup
+ok 5 - migration failure propagates and prevents API startup
+  ---
+  duration_ms: 24.977208
+  type: 'test'
+  ...
+# Subtest: missing Python reports startup failure without a PID cleanup error
+ok 6 - missing Python reports startup failure without a PID cleanup error
+  ---
+  duration_ms: 1.352667
+  type: 'test'
+  ...
+# Subtest: real launch serves health and releases both ports on SIGTERM
+ok 7 - real launch serves health and releases both ports on SIGTERM
+  ---
+  duration_ms: 1954.127458
+  type: 'test'
+  ...
+# Subtest: real worker schedules and launcher cleans up on SIGTERM
+ok 8 - real worker schedules and launcher cleans up on SIGTERM
+  ---
+  duration_ms: 1202.886792
+  type: 'test'
+  ...
+# Subtest: real worker schedules and launcher cleans up on SIGINT
+ok 9 - real worker schedules and launcher cleans up on SIGINT
+  ---
+  duration_ms: 1186.060875
+  type: 'test'
+  ...
+# Subtest: worker crash terminates API sibling
+ok 10 - worker crash terminates API sibling
+  ---
+  duration_ms: 582.4245
+  type: 'test'
+  ...
+# Subtest: exited worker descendants are cleaned up (ignore TERM: false)
+ok 11 - exited worker descendants are cleaned up (ignore TERM: false)
+  ---
+  duration_ms: 99.853875
+  type: 'test'
+  ...
+# Subtest: exited worker descendants are cleaned up (ignore TERM: true)
+ok 12 - exited worker descendants are cleaned up (ignore TERM: true)
+  ---
+  duration_ms: 4105.09525
+  type: 'test'
+  ...
+# Subtest: real production serves frontend and API and releases port on SIGTERM
+ok 13 - real production serves frontend and API and releases port on SIGTERM
+  ---
+  duration_ms: 1454.40075
+  type: 'test'
+  ...
+# Subtest: serve failure cleans up siblings
+ok 14 - serve failure cleans up siblings
+  ---
+  duration_ms: 77.6965
+  type: 'test'
+  ...
+# Subtest: readiness failure cleans up siblings
+ok 15 - readiness failure cleans up siblings
+  ---
+  duration_ms: 256.748958
+  type: 'test'
+  ...
+# Subtest: unavailable Redis does not gate Go-compatible readiness
+ok 16 - unavailable Redis does not gate Go-compatible readiness
+  ---
+  duration_ms: 1270.214792
+  type: 'test'
+  ...
+1..16
+# tests 16
+# suites 0
+# pass 16
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 12271.20425
+
+> workpal@0.2.0 build
+> pnpm --filter @workpal/web build
+
+
+> @workpal/web@0.10.0 build /Users/patrick/Desktop/Workspace/ai-native/workpal/apps/web
+> vite build
+
+vite v8.0.1 building client environment for production...
+[2Ktransforming...Found 2 warnings while optimizing generated CSS:
+
+Issue #1:
+[2m│   }[22m
+[2m│ }[22m
+[2m│[22m ::highlight(workpal-find) {
+[2m┆[22m             [33m[2m^--[22m 'highlight' is not recognized as a valid pseudo-element. Did you mean ':highlight' (pseudo-class) or is this a typo?[39m
+[2m┆[22m
+[2m│   background-color: var(--find-match);[22m
+[2m│   color: var(--find-match-foreground);[22m
+
+Issue #2:
+[2m│   color: var(--find-match-foreground);[22m
+[2m│ }[22m
+[2m│[22m ::highlight(workpal-find-active) {
+[2m┆[22m             [33m[2m^--[22m 'highlight' is not recognized as a valid pseudo-element. Did you mean ':highlight' (pseudo-class) or is this a typo?[39m
+[2m┆[22m
+[2m│   background-color: var(--find-match-active);[22m
+[2m│   color: var(--find-match-foreground);[22m
+
+✓ 6683 modules transformed.
+rendering chunks...
+[lightningcss minify] 'highlight' is not recognized as a valid pseudo-element. Did you mean ':highlight' (pseudo-class) or is this a typo?
+2396 |  }
+2397 |  /*! tailwindcss v4.2.2 | MIT License | https://tailwindcss.com */
+2398 |  ...ile-offset-left) - var(--mobile-offset-right))}}::highlight(workpal-find){background-color:var(--find-match);color...
+     |                                                                 ^
+[lightningcss minify] 'highlight' is not recognized as a valid pseudo-element. Did you mean ':highlight' (pseudo-class) or is this a typo?
+2396 |  }
+2397 |  /*! tailwindcss v4.2.2 | MIT License | https://tailwindcss.com */
+2398 |  ...-find-match);color:var(--find-match-foreground)}::highlight(workpal-find-active){background-color:var(--find-match...
+     |                                                                 ^
+✗ Build failed in 3.17s
+error during build:
+Build failed with 1 error:
+
+[31m[MISSING_EXPORT] Error:[0m "useFeatureFlag" is not exported by "../../packages/core/config/index.ts".
+   [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m ../../packages/views/issues/components/pickers/assignee-picker.tsx:5:10 [38;5;246m][0m
+   [38;5;246m│[0m
+ [38;5;246m5 │[0m [38;5;249mi[0m[38;5;249mm[0m[38;5;249mp[0m[38;5;249mo[0m[38;5;249mr[0m[38;5;249mt[0m[38;5;249m [0m[38;5;249m{[0m[38;5;249m [0museFeatureFlag[38;5;249m [0m[38;5;249m}[0m[38;5;249m [0m[38;5;249mf[0m[38;5;249mr[0m[38;5;249mo[0m[38;5;249mm[0m[38;5;249m [0m[38;5;249m"[0m[38;5;249m@[0m[38;5;249mw[0m[38;5;249mo[0m[38;5;249mr[0m[38;5;249mk[0m[38;5;249mp[0m[38;5;249ma[0m[38;5;249ml[0m[38;5;249m/[0m[38;5;249mc[0m[38;5;249mo[0m[38;5;249mr[0m[38;5;249me[0m[38;5;249m/[0m[38;5;249mc[0m[38;5;249mo[0m[38;5;249mn[0m[38;5;249mf[0m[38;5;249mi[0m[38;5;249mg[0m[38;5;249m"[0m[38;5;249m;[0m
+ [38;5;240m  │[0m          ───────┬──────  
+ [38;5;240m  │[0m                 ╰──────── Missing export
+[38;5;246m───╯[0m
+
+    at aggregateBindingErrorsIntoJsError (file:///Users/patrick/Desktop/Workspace/ai-native/workpal/node_modules/.pnpm/rolldown@1.0.0-rc.10_@emnapi+core@1.11.2_@emnapi+runtime@1.11.3/node_modules/rolldown/dist/shared/error-BO4SlZV_.mjs:48:18)
+    at unwrapBindingResult (file:///Users/patrick/Desktop/Workspace/ai-native/workpal/node_modules/.pnpm/rolldown@1.0.0-rc.10_@emnapi+core@1.11.2_@emnapi+runtime@1.11.3/node_modules/rolldown/dist/shared/error-BO4SlZV_.mjs:18:128)
+    at #build (file:///Users/patrick/Desktop/Workspace/ai-native/workpal/node_modules/.pnpm/rolldown@1.0.0-rc.10_@emnapi+core@1.11.2_@emnapi+runtime@1.11.3/node_modules/rolldown/dist/shared/rolldown-build-yQC7KN8K.mjs:3311:34)
+    at async buildEnvironment (file:///Users/patrick/Desktop/Workspace/ai-native/workpal/node_modules/.pnpm/vite@8.0.1_@emnapi+core@1.11.2_@emnapi+runtime@1.11.3_@types+node@25.5.0_esbuild@0.25.1_ff72ea579f336d72a0fdbc4cfbfce372/node_modules/vite/dist/node/chunks/node.js:32817:64)
+    at async Object.build (file:///Users/patrick/Desktop/Workspace/ai-native/workpal/node_modules/.pnpm/vite@8.0.1_@emnapi+core@1.11.2_@emnapi+runtime@1.11.3_@types+node@25.5.0_esbuild@0.25.1_ff72ea579f336d72a0fdbc4cfbfce372/node_modules/vite/dist/node/chunks/node.js:33239:19)
+    at async Object.buildApp (file:///Users/patrick/Desktop/Workspace/ai-native/workpal/node_modules/.pnpm/vite@8.0.1_@emnapi+core@1.11.2_@emnapi+runtime@1.11.3_@types+node@25.5.0_esbuild@0.25.1_ff72ea579f336d72a0fdbc4cfbfce372/node_modules/vite/dist/node/chunks/node.js:33236:153)
+    at async CAC.<anonymous> (file:///Users/patrick/Desktop/Workspace/ai-native/workpal/node_modules/.pnpm/vite@8.0.1_@emnapi+core@1.11.2_@emnapi+runtime@1.11.3_@types+node@25.5.0_esbuild@0.25.1_ff72ea579f336d72a0fdbc4cfbfce372/node_modules/vite/dist/node/cli.js:778:3) {
+  errors: [Getter/Setter]
+}
+/Users/patrick/Desktop/Workspace/ai-native/workpal/apps/web:
+ ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL  @workpal/web@0.10.0 build: `vite build`
+Exit status 1

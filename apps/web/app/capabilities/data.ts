@@ -44,6 +44,7 @@ export interface SkillCatalog {
 
 export interface AgentRole {
   id: string;
+  avatarUrl: string;
   name: string;
   mode: string;
   mission: string;
@@ -55,6 +56,8 @@ export interface AgentRole {
   collaborators: string[];
   skills: string[];
   basis: string;
+  sourceAuthor: string;
+  sourceUrl: string;
 }
 
 export interface Squad {

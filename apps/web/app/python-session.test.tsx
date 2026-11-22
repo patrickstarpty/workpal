@@ -4,11 +4,11 @@ import {VerificationLogin} from './verification-login';
 const retry=vi.hoisted(()=>vi.fn());
 const verify=vi.hoisted(()=>vi.fn().mockResolvedValue({}));
 vi.mock('../../../packages/core/auth',()=>({useAuthStore: Object.assign((select:any)=>select(state),{getState:()=>({verifyCode:verify,retryAuthentication:retry})})}));
-afterEach(()=>{vi.unstubAllGlobals();vi.clearAllMocks();state.status='authenticated';state.expired=false;});
+afterEach(()=>{vi.unstubAllGlobals();vi.clearAllMocks();state.status='authenticated';state.expired=false;localStorage.clear();});
 it('prefills only with server capability and waits for editable manual submission',async()=>{
  vi.stubGlobal('fetch',vi.fn().mockResolvedValue(new Response(JSON.stringify({development_auth:true}))));
  render(<VerificationLogin/>);
- const email=await screen.findByDisplayValue('dev@workpal.local');
+ const email=await screen.findByDisplayValue('workpal@fwd.com');
  expect(screen.getAllByRole('textbox')).toHaveLength(1);
  expect(screen.queryByLabelText('Verification code')).toBeNull();
  expect(verify).not.toHaveBeenCalled();
@@ -27,14 +27,14 @@ it('shows a failed verification without fabricating a session',async()=>{
  verify.mockRejectedValueOnce(Error('unauthorized'));
  vi.stubGlobal('fetch',vi.fn().mockResolvedValue(new Response('{"development_auth":true}')));
  render(<VerificationLogin/>);
- await screen.findByDisplayValue('dev@workpal.local');
+ await screen.findByDisplayValue('workpal@fwd.com');
  fireEvent.click(screen.getByRole('button',{name:'Sign in'}));
  expect(await screen.findByRole('alert')).toHaveTextContent('Unable to sign in');
 });
 
 import {QueryClient,QueryClientProvider} from '@tanstack/react-query';
 import {PythonSession} from './python-session';
-const state=vi.hoisted(()=>({status:'authenticated',expired:false}));
+const state=vi.hoisted(()=>({status:'authenticated',expired:false,user:{id:'user-1'}}));
 const list=vi.hoisted(()=>vi.fn());
 vi.mock('../../../packages/core/api',()=>({api:{listWorkspaces:list}}));
 vi.mock('../../../packages/core/platform',()=>({setCurrentWorkspace:vi.fn()}));
@@ -179,4 +179,46 @@ it('switches resource routes to projects and clears private caches before render
  mounted.rerender(view('/other/projects'));await screen.findByText('Private other');
  expect(setCurrentWorkspace).toHaveBeenLastCalledWith('other','b');
  expect(client.getQueryData(['config'])).toEqual({public:true});expect(client.getQueryData(['auth'])).toEqual({valid:true});
+});
+it('requires a fresh sign-in on each application mount even with a saved session',async()=>{
+ vi.stubGlobal('fetch',vi.fn().mockResolvedValue(new Response('{"development_auth":true}')));
+ state.status='authenticated';const navigate=vi.fn();
+ render(<PythonSession requireEntry pathname="/home" navigate={navigate} landing={<p>Capabilities</p>}>{()=> <p>Private</p>}</PythonSession>);
+ await screen.findByDisplayValue('workpal@fwd.com');
+ expect(screen.queryByText('Capabilities')).toBeNull();
+ expect(navigate).toHaveBeenCalledWith('/login');
+ fireEvent.click(screen.getByRole('button',{name:'Sign in'}));
+ await screen.findByText('Capabilities');
+});
+
+for(const path of ['/','/workspaces','/landing'])it('defaults to SMART from '+path+' when accessible',async()=>{
+ list.mockResolvedValue([{id:'a',slug:'review',name:'TAP'},{id:'smart',slug:'workpal-team',name:'SMART'}]);const navigate=vi.fn();
+ render(<QueryClientProvider client={new QueryClient()}><PythonSession pathname={path} navigate={navigate}>{()=> <p>Private</p>}</PythonSession></QueryClientProvider>);
+ await waitFor(()=>expect(navigate).toHaveBeenCalledWith('/workpal-team/issues'));
+});
+it('preserves explicit TAP links even when SMART is the default',async()=>{
+ list.mockResolvedValue([{id:'a',slug:'review',name:'TAP'},{id:'smart',slug:'workpal-team',name:'SMART'}]);const navigate=vi.fn();
+ render(<QueryClientProvider client={new QueryClient()}><PythonSession pathname="/review/issues/existing" navigate={navigate}>{slug=><p>Private {slug}</p>}</PythonSession></QueryClientProvider>);
+ expect(await screen.findByText('Private review')).toBeVisible();expect(navigate).not.toHaveBeenCalled();
+});
+
+it('remembers the last accessible workspace after remounting',async()=>{
+ const memberships=[{id:'a',slug:'review',name:'TAP'},{id:'smart',slug:'workpal-team',name:'SMART'}];
+ list.mockResolvedValue(memberships);const navigate=vi.fn();
+ const first=render(<QueryClientProvider client={new QueryClient()}><PythonSession pathname="/review/issues/existing" navigate={navigate}>{slug=><p>Private {slug}</p>}</PythonSession></QueryClientProvider>);
+ await screen.findByText('Private review');first.unmount();
+ render(<QueryClientProvider client={new QueryClient()}><PythonSession pathname="/workspaces" navigate={navigate}>{()=> <p>Private</p>}</PythonSession></QueryClientProvider>);
+ await waitFor(()=>expect(navigate).toHaveBeenCalledWith('/review/issues'));
+});
+it('falls back to SMART when the remembered membership is unavailable',async()=>{
+ localStorage.setItem('workpal:last-workspace:user-1','revoked');
+ list.mockResolvedValue([{id:'a',slug:'review',name:'TAP'},{id:'smart',slug:'workpal-team',name:'SMART'}]);const navigate=vi.fn();
+ render(<QueryClientProvider client={new QueryClient()}><PythonSession pathname="/workspaces" navigate={navigate}>{()=> <p>Private</p>}</PythonSession></QueryClientProvider>);
+ await waitFor(()=>expect(navigate).toHaveBeenCalledWith('/workpal-team/issues'));
+});
+it('does not reuse another account workspace preference',async()=>{
+ localStorage.setItem('workpal:last-workspace:another-user','a');
+ list.mockResolvedValue([{id:'a',slug:'review',name:'TAP'},{id:'smart',slug:'workpal-team',name:'SMART'}]);const navigate=vi.fn();
+ render(<QueryClientProvider client={new QueryClient()}><PythonSession pathname="/workspaces" navigate={navigate}>{()=> <p>Private</p>}</PythonSession></QueryClientProvider>);
+ await waitFor(()=>expect(navigate).toHaveBeenCalledWith('/workpal-team/issues'));
 });

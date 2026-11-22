@@ -292,3 +292,130 @@ def test_ordinary_comment_and_identifier_regression(content, settings):
     foreign = headers | {'X-Workspace-Slug': other['slug']}
     assert client.get('/api/issues/' + issue['identifier'], headers=foreign).status_code == 404
     assert client.post(path, headers=foreign, json={'content': 'foreign'}).status_code == 404
+
+
+def test_authored_history_is_labelled_without_rewriting_storage(content):
+    from workpal_backend.workspace_content.repository import get_record
+    app, client, headers, workspace = content
+    issue = client.post('/api/issues', headers=headers, json={'title':'History provenance'}).json()
+    seed(app, workspace, 'comments', [{'id':'authored-note','issue_id':issue['id'],'content':'Original note','fixture_source':'authored-review-v1'}])
+    for suffix in ['comments','timeline']:
+        note = client.get(f"/api/issues/{issue['id']}/{suffix}",headers=headers).json()[0]
+        assert 'not a verified execution record' in note['content']
+        assert 'Original note' in note['content']
+    with app.state.database.transaction() as session:
+        assert get_record(session,workspace['id'],'comments','authored-note')['content']=='Original note'
+
+
+def test_rich_issue_history_and_read_only_run_transcripts(content):
+    app, client, headers, workspace = content
+    seed(app, workspace, 'issues', [{'id': 'delivery', 'title': 'Delivery'}])
+    seed(app, workspace, 'comments', [{'id': 'note', 'issue_id': 'delivery', 'author_type': 'agent',
+        'author_id': 'engineer', 'content': 'Ready for review', 'created_at': '2026-11-22T09:02:00Z'}])
+    seed(app, workspace, 'activities', [{'id': 'started', 'issue_id': 'delivery', 'type': 'activity',
+        'actor_type': 'agent', 'actor_id': 'engineer', 'action': 'status_changed',
+        'details': {'from': 'todo', 'to': 'in_progress'}, 'created_at': '2026-11-22T09:00:00Z'}])
+    seed(app, workspace, 'task_runs', [{'id': 'run', 'issue_id': 'delivery', 'status': 'completed'}])
+    seed(app, workspace, 'task_messages', [{'id': 'm2', 'task_id': 'run', 'seq': 2, 'type': 'text', 'content': 'Done'},
+                                         {'id': 'm1', 'task_id': 'run', 'seq': 1, 'type': 'tool_use', 'tool': 'Read'}])
+    seed(app, workspace, 'attachments', [{'id': 'brief', 'issue_id': 'delivery', 'filename': 'brief.md'}])
+    timeline = client.get('/api/issues/delivery/timeline', headers=headers).json()
+    assert [row['id'] for row in timeline] == ['started', 'note']
+    assert timeline[1]['actor_id'] == 'engineer'
+    assert client.get('/api/issues/delivery/task-runs?view=timeline', headers=headers).json()[0]['id'] == 'run'
+    assert client.get('/api/issues/delivery/attachments', headers=headers).json()[0]['filename'] == 'brief.md'
+    response = client.get('/api/tasks/run/messages', headers=headers)
+    assert response.status_code == 200
+    assert [row['seq'] for row in response.json()] == [1, 2]
+    assert client.get('/api/tasks/run/context-receipt', headers=headers).json() == {'receipt': None}
+    assert client.get('/api/tasks/missing/messages', headers=headers).status_code == 404
+    other = client.post('/api/workspaces', headers=headers, json={'name': 'Other', 'slug': 'other', 'issue_prefix': 'OTH'}).json()
+    assert other['id'] != workspace['id']
+    assert client.get('/api/tasks/run/messages', headers=headers | {'X-Workspace-Slug': 'other'}).status_code == 404
+    client.cookies.clear()
+    assert client.get('/api/tasks/run/messages').status_code == 401
+    assert client.post('/api/tasks/run/retry', headers=headers).status_code == 501
+
+
+def test_parent_run_scope_includes_descendants_without_cycles(content):
+    app, client, headers, workspace = content
+    seed(app, workspace, 'issues', [{'id': 'parent', 'parent_issue_id': 'child'},
+        {'id': 'child', 'parent_issue_id': 'parent'}, {'id': 'unrelated'}])
+    seed(app, workspace, 'task_runs', [{'id': 'child-run', 'issue_id': 'child'}, {'id': 'other-run', 'issue_id': 'unrelated'}])
+    assert client.get('/api/issues/parent/task-runs', headers=headers).json() == []
+    response = client.get('/api/issues/parent/task-runs?scope=subtree', headers=headers)
+    assert response.status_code == 200
+    assert [r['id'] for r in response.json()] == ['child-run']
+
+
+def test_authored_attachment_preview_is_text_and_workspace_scoped(content):
+    app, client, headers, workspace = content
+    seed(app, workspace, 'issues', [{'id': 'delivery'}])
+    seed(app, workspace, 'attachments', [{'id': 'brief', 'issue_id': 'delivery', 'filename': 'brief.md', 'content_type': 'text/markdown'}])
+    seed(app, workspace, 'attachment_contents', [{'id': 'brief', 'text': '# Scope\n<script>literal</script>'}])
+    response = client.get('/api/attachments/brief/content', headers=headers)
+    assert response.status_code == 200
+    assert response.text == '# Scope\n<script>literal</script>'
+    assert response.headers['content-type'].startswith('text/plain')
+    assert response.headers['x-original-content-type'] == 'text/markdown'
+    assert client.get('/api/attachments/brief', headers=headers).json()['filename'] == 'brief.md'
+    assert client.get('/api/attachments/missing/content', headers=headers).status_code == 404
+    client.post('/api/workspaces', headers=headers, json={'name': 'Other', 'slug': 'other', 'issue_prefix': 'OTH'})
+    assert client.get('/api/attachments/brief/content', headers=headers | {'X-Workspace-Slug': 'other'}).status_code == 404
+    assert client.delete('/api/attachments/brief', headers=headers).status_code == 501
+
+
+def test_squad_and_agent_assignment_are_distinct_and_audited(content):
+    app, client, headers, workspace = content
+    assert client.get('/api/config').json()['feature_flags']['issue_assignment_without_runtime'] is True
+    seed(app, workspace, 'agents', [{'id':'same-id','name':'Developer'}])
+    seed(app, workspace, 'squads', [{'id':'same-id','name':'Delivery squad'}])
+    issue = client.post('/api/issues', headers=headers, json={'title':'Deliver recovery','assignee_type':'squad','assignee_id':'same-id'}).json()
+    direct = client.post('/api/issues', headers=headers, json={'title':'Review recovery','assignee_type':'agent','assignee_id':'same-id'}).json()
+    squad_work = client.get('/api/issues?assignee_filters=squad:same-id', headers=headers).json()
+    assert [row['id'] for row in squad_work['issues']] == [issue['id']]
+    assert squad_work['total'] == 1
+    agent_work = client.get('/api/issues?assignee_filters=agent:same-id', headers=headers).json()
+    assert [row['id'] for row in agent_work['issues']] == [direct['id']]
+    changed = client.put('/api/issues/'+issue['id'], headers=headers, json={'assignee_type':'agent','assignee_id':'same-id'})
+    assert changed.status_code == 200
+    timeline = client.get('/api/issues/'+issue['id']+'/timeline', headers=headers).json()
+    event = [e for e in timeline if e.get('action')=='assignee_changed'][-1]
+    assert event['details'] == {'from_type':'squad','from_id':'same-id','to_type':'agent','to_id':'same-id'}
+    assert event['actor_type'] == 'member'
+    assert event['actor_id'] == client.get('/api/me', headers=headers).json()['id']
+    client.put('/api/issues/'+issue['id'], headers=headers, json={'assignee_type':'agent','assignee_id':'same-id'})
+    assert client.get('/api/issues/'+issue['id']+'/timeline', headers=headers).json() == timeline
+    client.patch('/api/issues/'+issue['id'], headers=headers, json={'assignee_type':None,'assignee_id':None})
+    assert client.get('/api/issues?assignee_filters=agent:same-id', headers=headers).json()['total'] == 1
+
+
+def test_assignment_rejects_foreign_squad_without_history(content):
+    app, client, headers, workspace = content
+    issue = client.post('/api/issues', headers=headers, json={'title':'Local work'}).json()
+    other = client.post('/api/workspaces', headers=headers, json={'name':'Other','slug':'squad-other'}).json()
+    seed(app, other, 'squads', [{'id':'foreign','name':'Private squad'}])
+    before = client.get('/api/issues/'+issue['id']+'/timeline', headers=headers).json()
+    response = client.put('/api/issues/'+issue['id'], headers=headers, json={'assignee_type':'squad','assignee_id':'foreign'})
+    assert response.status_code == 404
+    assert client.get('/api/issues/'+issue['id']+'/timeline', headers=headers).json() == before
+
+
+def test_changing_only_assignee_type_validates_the_existing_identity(content):
+    app, client, headers, workspace = content
+    seed(app, workspace, 'agents', [{'id':'developer','name':'Developer'}])
+    issue=client.post('/api/issues', headers=headers, json={'title':'Scoped change','assignee_type':'agent','assignee_id':'developer'}).json()
+    response=client.patch('/api/issues/'+issue['id'], headers=headers, json={'assignee_type':'squad'})
+    assert response.status_code == 404
+    assert client.get('/api/issues/'+issue['id'], headers=headers).json()['assignee_type']=='agent'
+
+
+def test_unassigned_only_filter_does_not_include_owned_work(content):
+    app, client, headers, workspace = content
+    seed(app, workspace, 'agents', [{'id':'developer','name':'Developer'}])
+    assigned=client.post('/api/issues', headers=headers, json={'title':'Assigned','assignee_type':'agent','assignee_id':'developer'}).json()
+    unassigned=client.post('/api/issues', headers=headers, json={'title':'Unassigned'}).json()
+    response=client.get('/api/issues?include_no_assignee=true', headers=headers).json()
+    assert [row['id'] for row in response['issues']]==[unassigned['id']]
+    mixed=client.get('/api/issues?include_no_assignee=true&assignee_filters=agent:developer', headers=headers).json()
+    assert {row['id'] for row in mixed['issues']}=={assigned['id'],unassigned['id']}

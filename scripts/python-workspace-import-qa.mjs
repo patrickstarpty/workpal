@@ -47,14 +47,14 @@ try{
  const errors=[];
  page.on('pageerror',error=>errors.push(error.message));
  await page.goto(base+'/#/home');
- await expect(page.getByLabel('Email',{exact:true})).toHaveValue('dev@workpal.local');
+ await expect(page.getByLabel('Email',{exact:true})).toHaveValue('workpal@fwd.com');
  await expect(page.getByLabel('Verification code')).toHaveCount(0);
  await page.getByRole('button',{name:'Sign in',exact:true}).click();
  await expect(page.getByRole('button',{name:'Enter Workspace',exact:true})).toBeVisible();
  if(!live){
   await page.getByRole('button',{name:'Enter Workspace',exact:true}).click();
   await expect(page.getByRole('heading',{name:'Choose a workspace'})).toBeVisible();
-  const args=['-m','workpal_backend.cli','import-legacy','--source',join(state,'legacy.sqlite'),'--owner-email','dev@workpal.local'];
+  const args=['-m','workpal_backend.cli','import-legacy','--source',join(state,'legacy.sqlite'),'--owner-email','workpal@fwd.com'];
   await run('server/.venv/bin/python',[...args,'--dry-run'],{env});
   assert.deepEqual(await (await page.request.get(base+'/api/workspaces')).json(),[]);
   await run('server/.venv/bin/python',args,{env});

@@ -4,7 +4,7 @@ import {useAuthStore} from '../../../packages/core/auth';
 import {Button} from '@workpal/ui/components/ui/button';
 import {Input} from '@workpal/ui/components/ui/input';
 
-export function VerificationLogin() {
+export function VerificationLogin({onSignedIn}: {onSignedIn?:()=>void} = {}) {
   const expired = useAuthStore(state => state.expired);
   const [email, setEmail] = useState('');
   const [error, setError] = useState('');
@@ -23,7 +23,7 @@ export function VerificationLogin() {
         if (!active) return;
         const enabled = config.development_auth === true;
         setDevelopmentAuth(enabled);
-        if (enabled) setEmail(value => value || 'dev@workpal.local');
+        if (enabled) setEmail(value => value || 'workpal@fwd.com');
         else setError('Email sign-in is not available on this server.');
       })
       .catch(() => {if (active) setError('Unable to load sign-in options. Try again.');})
@@ -41,6 +41,7 @@ export function VerificationLogin() {
         // The server explicitly enables this local development credential.
         // Keep verification on the backend while temporarily hiding its field.
         await useAuthStore.getState().verifyCode(email, '888888');
+        onSignedIn?.();
       } catch {
         setError('Unable to sign in. Check your email, then try again.');
       } finally {setBusy(false);}

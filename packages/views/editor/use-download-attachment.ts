@@ -167,6 +167,16 @@ export function useDownloadAttachment(
         // storage mode, so a bare `<a download>` navigation both authenticates
         // and downloads — instead of previewing media inline or 401ing in
         // token-mode.
+        if (fresh.authenticated_download) {
+          const blob = await api.getAttachmentBlob(attachmentId);
+          const url = URL.createObjectURL(blob);
+          const anchor = document.createElement("a");
+          anchor.href = url;
+          anchor.download = fresh.filename;
+          anchor.click();
+          setTimeout(() => URL.revokeObjectURL(url), 1000);
+          return;
+        }
         const forced = forcedAttachmentUrl(fresh.attachment_download_url);
         if (forced) {
           triggerBrowserDownload(forced);

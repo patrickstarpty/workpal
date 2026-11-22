@@ -131,6 +131,7 @@ import { IssueEnvironmentsSection } from "./issue-environments-section";
 import { useGitHubSettings } from "@workpal/core/github";
 import { useFeatureEnabled } from "@workpal/core/config";
 import { PLUGINS_V1_FLAG } from "@workpal/core/feature-flags";
+import { EvidenceRegister } from "./deliverables/evidence-register";
 import { DeliverablesSection } from "./deliverables/deliverables-section";
 import { IssueAppsSection } from "./issue-apps-section";
 import { DeliverablesOverview } from "./deliverables/deliverables-overview";
@@ -3437,11 +3438,11 @@ export function IssueDetail({ issueId, onDelete, onDone, onUnsubscribeArchive, d
     // Deliverables — the files this issue's comments delivered. Hidden
     // while there are none.
     deliverables: (
-      <DeliverablesSection
+      <><EvidenceRegister key={id} issueId={id} onLocate={(commentId)=>locateOrigin({kind:"comment",commentId})} /><DeliverablesSection
         files={deliverableFiles}
         onOpenOverview={openOverview}
         onCopyLink={copyDeliverableLink}
-      />
+      /></>
     ),
     // Apps the issue's runs used. Hidden until one makes a call.
     apps: <IssueAppsSection issueId={id} />,

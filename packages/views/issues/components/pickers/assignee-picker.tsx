@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import { Lock, UserMinus } from "@workpal/ui/icons";
 import type { Agent, IssueAssigneeType, UpdateIssueRequest } from "@workpal/core/types";
 import { useQuery } from "@tanstack/react-query";
+import { useFeatureEnabled } from "@workpal/core/config";
 import { useAuthStore } from "@workpal/core/auth";
 import { isAgentRuntimeBound } from "@workpal/core/agents";
 import { canAssignAgentToIssue } from "@workpal/core/permissions";
@@ -200,6 +201,7 @@ export function AssigneePickerPanel({
 }
 
 function useAssigneeChoices(filter: string) {
+  const assignmentWithoutRuntime = useFeatureEnabled("issue_assignment_without_runtime", false);
   const user = useAuthStore((s) => s.user);
   const wsId = useWorkspaceId();
   const { data: members = [] } = useQuery(memberListOptions(wsId));
@@ -233,7 +235,7 @@ function useAssigneeChoices(filter: string) {
     .sort((a, b) => getFreq("squad", b.id) - getFreq("squad", a.id));
   const runnableAgentIds = new Set(
     agents
-      .filter((agent) => !agent.archived_at && isAgentRuntimeBound(agent))
+      .filter((agent) => !agent.archived_at && (assignmentWithoutRuntime || isAgentRuntimeBound(agent)))
       .map((agent) => agent.id),
   );
 
@@ -244,6 +246,7 @@ function useAssigneeChoices(filter: string) {
     filteredAgents,
     filteredSquads,
     runnableAgentIds,
+    assignmentWithoutRuntime,
   };
 }
 
@@ -263,7 +266,7 @@ function AssigneeOptions({
   onPick: (updates: Partial<UpdateIssueRequest>) => void;
 }) {
   const { t } = useT("issues");
-  const { userId, memberRole, filteredMembers, filteredAgents, filteredSquads, runnableAgentIds } =
+  const { userId, memberRole, filteredMembers, filteredAgents, filteredSquads, runnableAgentIds, assignmentWithoutRuntime } =
     choices;
 
   const isSelected = (type: string, id: string) =>
@@ -317,7 +320,7 @@ function AssigneeOptions({
                   ? memberRole
                   : null,
             });
-            const runtimeBound = isAgentRuntimeBound(a);
+            const runtimeBound = assignmentWithoutRuntime || isAgentRuntimeBound(a);
             const allowed = decision.allowed && runtimeBound;
             return (
               <PickerItem

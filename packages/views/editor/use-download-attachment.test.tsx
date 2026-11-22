@@ -3,6 +3,7 @@ import { act, renderHook, waitFor } from "@testing-library/react";
 
 // Hoisted mock for the API singleton: vi.mock factories cannot reference
 // outside-of-scope vars, but vi.hoisted runs before the import graph.
+const getAttachmentBlobMock = vi.hoisted(() => vi.fn());
 const getAttachmentMock = vi.hoisted(() => vi.fn());
 const getAttachmentForDownloadMock = vi.hoisted(() => vi.fn());
 const getBaseUrlMock = vi.hoisted(() => vi.fn(() => ""));
@@ -13,6 +14,7 @@ const useWorkspaceSlugMock = vi.hoisted(() =>
 vi.mock("@workpal/core/api", () => ({
   api: {
     getAttachment: getAttachmentMock,
+    getAttachmentBlob: getAttachmentBlobMock,
     getAttachmentForDownload: getAttachmentForDownloadMock,
     getBaseUrl: getBaseUrlMock,
   },
@@ -550,3 +552,16 @@ describe("useDownloadAttachment (desktop)", () => {
     expect(downloadURL).toHaveBeenCalledWith(forced);
   });
 });
+
+ it("downloads authenticated local evidence with headers through the API client", async () => {
+    getAttachmentMock.mockResolvedValueOnce({authenticated_download:true, filename:"report.md"});
+    getAttachmentBlobMock.mockResolvedValueOnce(new Blob(["actual report"]));
+    const create = vi.fn(()=>"blob:evidence");
+    Object.defineProperty(URL,"createObjectURL",{configurable:true,value:create});
+    Object.defineProperty(URL,"revokeObjectURL",{configurable:true,value:vi.fn()});
+    const click = vi.spyOn(HTMLAnchorElement.prototype,"click").mockImplementation(function(this:HTMLAnchorElement){expect(this.download).toBe("report.md");});
+    const {result}=renderHook(()=>useDownloadAttachment());
+    await act(async()=>{await result.current("revision");});
+    expect(getAttachmentBlobMock).toHaveBeenCalledWith("revision");
+    expect(click).toHaveBeenCalledOnce();
+ });

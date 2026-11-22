@@ -1,4 +1,5 @@
 export interface Attachment {
+  authenticated_download?: boolean;
   id: string;
   workspace_id: string;
   issue_id: string | null;

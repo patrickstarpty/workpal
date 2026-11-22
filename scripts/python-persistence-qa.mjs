@@ -60,7 +60,7 @@ try{
  page.setDefaultTimeout(15000);
  await page.goto(base+'/#/home');
  await page.getByRole('button',{name:'Sign in',exact:true}).click();
- await run('server/.venv/bin/python',['-m','workpal_backend.cli','import-legacy','--source',join(state,'legacy.sqlite'),'--owner-email','dev@workpal.local'],{env});
+ await run('server/.venv/bin/python',['-m','workpal_backend.cli','import-legacy','--source',join(state,'legacy.sqlite'),'--owner-email','workpal@fwd.com'],{env});
  await page.getByRole('button',{name:'Enter Workspace',exact:true}).click();
  await expect(page).toHaveURL(/#\/review\/issues$/);
  

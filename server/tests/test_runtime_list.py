@@ -130,3 +130,19 @@ def test_order_uses_timestamp_instant_not_text(runtimes):
     result=client.get('/api/runtimes',headers=headers()).json()
     assert [row['name'] for row in result]==['mine','shared','public']
     assert result[-1]['created_at']=='2026-01-01T00:00:00Z'
+
+
+def test_local_demo_admin_can_read_preserved_runtimes(runtimes):
+    from workpal_backend.workspace_content.repository import put_record
+    client,app,workspace,(owner,member,_),rows,headers=runtimes
+    with app.state.database.transaction() as session:
+        session.execute(text('DELETE FROM agent_runtime'))
+        put_record(session,workspace['id'],'runtimes',{'id':'legacy-runtime','name':'Local CLI','status':'offline','owner_id':owner,'workspace_id':workspace['id']})
+    app.state.settings.dev_auth=True
+    result = client.get('/api/runtimes',headers=headers(owner)).json()[0]
+    assert result['id']=='legacy-runtime'
+    assert result['custom_name']=='Local CLI'
+    assert result['status']=='offline'
+    assert client.get('/api/runtimes',headers=headers(member)).json()==[]
+    app.state.settings.dev_auth=False
+    assert client.get('/api/runtimes',headers=headers(owner)).json()==[]

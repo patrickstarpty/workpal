@@ -1,0 +1,25 @@
+============================= test session starts ==============================
+platform darwin -- Python 3.11.3, pytest-9.2.0, pluggy-1.7.0 -- /Users/patrick/Desktop/Workspace/ai-native/workpal/server/.venv/bin/python
+cachedir: .pytest_cache
+rootdir: /Users/patrick/Desktop/Workspace/ai-native/workpal/server
+configfile: pyproject.toml
+plugins: anyio-4.16.0
+collecting ... collected 15 items
+
+server/tests/test_upload_recovery.py::test_recovery[False] PASSED        [  6%]
+server/tests/test_upload_recovery.py::test_recovery[True] PASSED         [ 13%]
+server/tests/test_upload_recovery.py::test_fencing_and_claim_winner PASSED [ 20%]
+server/tests/test_upload_recovery.py::test_live_and_ready_preserved_and_finalize_rollback PASSED [ 26%]
+server/tests/test_upload_recovery.py::test_retry_outside_transaction PASSED [ 33%]
+server/tests/test_upload_worker_recovery.py::test_cli_scheduled_recovery PASSED [ 40%]
+server/tests/test_attachment_uploads.py::test_storage_configuration_and_auth_precede_parsing PASSED [ 46%]
+server/tests/test_attachment_uploads.py::test_workspace_upload_uses_sniff_extension_key_then_persists_and_projects PASSED [ 53%]
+server/tests/test_attachment_uploads.py::test_avatar_upload_ignores_associations_and_does_not_create_record PASSED [ 60%]
+server/tests/test_attachment_uploads.py::test_binding_denial_never_uploads_object PASSED [ 66%]
+server/tests/test_attachment_uploads.py::test_database_failure_preserves_uploaded_object_and_returns_usable_link PASSED [ 73%]
+server/tests/test_attachment_uploads.py::test_comment_lock_refusal_deletes_uploaded_object PASSED [ 80%]
+server/tests/test_attachment_uploads.py::test_cancelled_record_write_does_not_delete_possibly_committed_object PASSED [ 86%]
+server/tests/test_attachment_uploads.py::test_cancelled_upload_and_non_cancelled_failure_are_distinct PASSED [ 93%]
+server/tests/test_attachment_uploads.py::test_upload_event_receives_raw_resolved_actor_without_an_extra_lookup PASSED [100%]
+
+============================== 15 passed in 7.80s ==============================

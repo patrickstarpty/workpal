@@ -1,0 +1,178 @@
+diff --git a/server/src/workpal_backend/workspace_content/routes.py b/server/src/workpal_backend/workspace_content/routes.py
+index 904ce4a9..db0fb181 100644
+--- a/server/src/workpal_backend/workspace_content/routes.py
++++ b/server/src/workpal_backend/workspace_content/routes.py
+@@ -6,7 +6,7 @@ from uuid import uuid4
+ from urllib.parse import urlencode
+ 
+ from fastapi import APIRouter, Depends, HTTPException, Request
+-from fastapi.responses import JSONResponse
++from fastapi.responses import JSONResponse, Response
+ from sqlalchemy import select, update
+ from starlette.concurrency import run_in_threadpool
+ 
+@@ -16,12 +16,13 @@ from workpal_backend.auth.service import get_user
+ from workpal_backend.workspaces import service
+ from workpal_backend.workspaces.models import issue_status, members, workspaces
+ from . import repository as repo
++from . import evidence
+ 
+ router = APIRouter()
+ COLLECTIONS = ('projects', 'issues', 'agents', 'skills', 'squads', 'autopilots', 'labels')
+ METHODS = ['GET', 'POST', 'PUT', 'PATCH', 'DELETE']
+ UNAVAILABLE = 'This operation is unavailable in the local backend.'
+-ISSUE_DETAILS = {'comments', 'timeline', 'children', 'labels', 'task-runs', 'wakeups',
++ISSUE_DETAILS = {'evidence', 'comments', 'timeline', 'children', 'labels', 'task-runs', 'wakeups',
+                  'system-wakeups', 'duplicates', 'pull-requests', 'environments',
+                  'subscribers', 'attachments', 'activity', 'tasks', 'runs'}
+ DETAILS = {
+@@ -106,6 +107,23 @@ def collection_list(session, workspace, kind, params):
+     if 'q' in params:
+         query = params['q'].lower()
+         rows = [row for row in rows if query in str(row.get('title') or row.get('name') or '').lower()]
++    if kind == 'issues':
++        if 'assignee_filters' in params:
++            pairs = set()
++            for token in params['assignee_filters'].split(','):
++                actor_type, separator, identity = token.partition(':')
++                if not separator or actor_type not in ('agent', 'squad', 'member') or not identity:
++                    raise HTTPException(400, 'Invalid assignee filter')
++                pairs.add((actor_type, identity))
++            rows = [row for row in rows if (row.get('assignee_type'), row.get('assignee_id')) in pairs
++                    or (params.get('include_no_assignee') == 'true' and not row.get('assignee_id'))]
++        elif params.get('include_no_assignee') == 'true':
++            rows = [row for row in rows if not row.get('assignee_id')]
++        for field in ('assignee_id', 'assignee_type'):
++            if field in params:
++                rows = [row for row in rows if row.get(field) == params[field]]
++        if params.get('sort') in ('created_at', 'updated_at'):
++            rows.sort(key=lambda row: row.get(params['sort']) or '', reverse=params.get('direction') == 'desc')
+     total = len(rows)
+     rows = page(rows, params)
+     return {kind: rows, 'total': total} if kind in ('projects', 'issues', 'labels', 'autopilots') else rows
+@@ -156,9 +174,13 @@ def save_collection(session, workspace, principal, kind, body, old=None):
+         raise HTTPException(400, 'position must be a finite number')
+     references = {**(old or {}), **body}
+     # Validate only relationships supplied by the client, preserving historical data.
++    touched = set(body)
++    for prefix in ('assignee', 'lead'):
++        if touched & {prefix + '_id', prefix + '_type'}:
++            touched.update({prefix + '_id', prefix + '_type'})
+     validate_references(session, workspace, kind, {key: references.get(key) for key in
+         ('project_id', 'parent_issue_id', 'runtime_id', 'assignee_id', 'assignee_type', 'lead_id', 'lead_type')
+-        if key in body or (key.endswith('_type') and key.replace('_type', '_id') in body)})
++        if key in touched})
+     now = datetime.now(timezone.utc).isoformat(timespec='milliseconds').replace('+00:00', 'Z')
+     record_id = old['id'] if old else str(uuid4())
+     defaults = dict(id=record_id, workspace_id=workspace['id'], created_at=now,
+@@ -180,19 +202,51 @@ def save_collection(session, workspace, principal, kind, body, old=None):
+     changes = {key: value for key, value in body.items() if key not in protected}
+     row = {**defaults, **(old or {}), **changes, 'updated_at': now}
+     row['id'], row['workspace_id'] = record_id, workspace['id']
+-    return repo.put_record(session, workspace['id'], kind, row)
+-
+-
+-def detail(session, workspace, principal, kind, record, operation):
++    saved = repo.put_record(session, workspace['id'], kind, row)
++    if kind == 'issues':
++        previous = old or {}
++        before = (previous.get('assignee_type'), previous.get('assignee_id'))
++        after = (row.get('assignee_type'), row.get('assignee_id'))
++        if before != after:
++            repo.put_record(session, workspace['id'], 'activities', {
++                'id': str(uuid4()), 'workspace_id': workspace['id'], 'issue_id': record_id,
++                'type': 'activity', 'action': 'assignee_changed', 'actor_type': 'member',
++                'actor_id': principal.user_id, 'created_at': now,
++                'details': {'from_type': before[0], 'from_id': before[1], 'to_type': after[0], 'to_id': after[1]},
++            })
++    return saved
++
++
++def detail(session, workspace, principal, kind, record, operation, params=None):
+     workspace_id, record_id = workspace['id'], record['id']
+     if kind == 'issues':
++        if operation == 'evidence':
++            return evidence.inventory(session, workspace_id, record_id)
+         if operation in ('comments', 'timeline'):
+             comments = sorted((row for row in repo.list_records(session, workspace_id, 'comments')
+                                if row.get('issue_id') == record_id), key=lambda row: row.get('created_at') or '')
++            comments = [{**row, 'content': '**Evidence pending — this record has no verified delivery evidence.**\n\n' + str(row.get('content', ''))} if row.get('_fixture') else row for row in comments]
++            comments = [{**row, 'content': '**Historical reference note — authored example, not a verified execution record.**\n\n' + str(row.get('content', ''))} if row.get('fixture_source') else row for row in comments]
+             if operation == 'comments':
+                 return comments
+-            return [{**row, 'type': 'comment', 'comment_type': row.get('type'),
+-                     'actor_type': row.get('author_type'), 'actor_id': row.get('author_id')} for row in comments]
++            entries = [{**row, 'type': 'comment', 'comment_type': row.get('type'),
++                        'actor_type': row.get('author_type'), 'actor_id': row.get('author_id')} for row in comments]
++            entries.extend(row for row in repo.list_records(session, workspace_id, 'activities')
++                           if row.get('issue_id') == record_id)
++            return sorted(entries, key=lambda row: (row.get('created_at') or '', row['id']))
++        if operation in ('task-runs', 'tasks', 'runs', 'attachments', 'activity'):
++            collection = {'attachments': 'attachments', 'activity': 'activities'}.get(operation, 'task_runs')
++            issue_ids = {record_id}
++            if collection == 'task_runs' and (params or {}).get('scope') == 'subtree':
++                issues = repo.list_records(session, workspace_id, 'issues')
++                while True:
++                    children = {row['id'] for row in issues if row.get('parent_issue_id') in issue_ids}
++                    if children <= issue_ids:
++                        break
++                    issue_ids.update(children)
++            rows = [row for row in repo.list_records(session, workspace_id, collection)
++                    if row.get('issue_id') in issue_ids]
++            return sorted(rows, key=lambda row: (row.get('created_at') or '', row['id']))
+         if operation == 'children':
+             return {'issues': [row for row in repo.list_records(session, workspace_id, 'issues') if row.get('parent_issue_id') == record_id]}
+         if operation == 'labels':
+@@ -256,8 +310,10 @@ def record_endpoint(kind):
+                 if record_path.endswith('/' + suffix):
+                     record_id = record_path[:-len(suffix) - 1]
+                     row = required_record(session, workspace['id'], kind, record_id)
++                    if kind == 'issues' and suffix == 'evidence' and request.method == 'POST':
++                        return evidence.publish(session, workspace, principal, row, body)
+                     if request.method == 'GET':
+-                        return detail(session, workspace, principal, kind, row, suffix)
++                        return detail(session, workspace, principal, kind, row, suffix, request.query_params)
+                     if kind == 'issues' and suffix == 'comments' and request.method == 'POST':
+                         if not isinstance(body.get('content'), str) or not body['content'].strip():
+                             raise HTTPException(400, 'Comment content is required')
+@@ -438,3 +494,40 @@ router.add_api_route('/api/chat/sessions/{record_path:path}', record_endpoint('s
+ for _kind in COLLECTIONS:
+     router.add_api_route(f'/api/{_kind}', collection_endpoint(_kind), methods=METHODS)
+     router.add_api_route(f'/api/{_kind}/{{record_path:path}}', record_endpoint(_kind), methods=METHODS)
++
++
++@router.api_route('/api/tasks/{task_id}/{operation}', methods=METHODS)
++def task_detail(task_id: str, operation: str, request: Request, principal: Principal = Depends(require_principal)):
++    def read(session, workspace):
++        task = required_record(session, workspace['id'], 'task_runs', task_id)
++        required_record(session, workspace['id'], 'issues', task['issue_id'])
++        if request.method != 'GET':
++            raise HTTPException(501, UNAVAILABLE)
++        if operation == 'messages':
++            return sorted((row for row in repo.list_records(session, workspace['id'], 'task_messages')
++                           if row.get('task_id') == task_id), key=lambda row: row.get('seq', 0))
++        if operation == 'context-receipt':
++            return {'receipt': task.get('context_receipt')}
++        raise HTTPException(501, UNAVAILABLE)
++    return execute(request, principal, read)
++
++
++@router.api_route('/api/attachments/{attachment_id}', methods=METHODS)
++@router.api_route('/api/attachments/{attachment_id}/{operation}', methods=METHODS)
++def attachment_detail(attachment_id: str, request: Request, operation: str = 'metadata',
++                      principal: Principal = Depends(require_principal)):
++    def read(session, workspace):
++        attachment = required_record(session, workspace['id'], 'attachments', attachment_id)
++        required_record(session, workspace['id'], 'issues', attachment['issue_id'])
++        if request.method != 'GET':
++            raise HTTPException(501, UNAVAILABLE)
++        if operation in ('metadata', 'download-metadata'):
++            return attachment
++        if operation in ('content', 'download'):
++            content = required_record(session, workspace['id'], 'attachment_contents', attachment_id)
++            return Response(content['text'], media_type='text/plain', headers={
++                'X-Original-Content-Type': attachment.get('content_type', 'text/plain'),
++                'X-Content-Type-Options': 'nosniff', 'Cache-Control': 'private, no-store',
++            })
++        raise HTTPException(501, UNAVAILABLE)
++    return execute(request, principal, read)

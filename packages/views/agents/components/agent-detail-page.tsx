@@ -79,6 +79,7 @@ import {
   ObjectPage,
 } from "../../layout/object-page";
 import { ActorAvatar } from "../../common/actor-avatar";
+import { AvatarUploadControl } from "../../common/avatar-upload-control";
 import { useT } from "../../i18n";
 import { availabilityConfig } from "../presence";
 import {
@@ -675,7 +676,7 @@ export function AgentDetailPage({ agentId }: AgentDetailPageProps) {
         <div className={cn(OBJECT_PAGE_BODY, "space-y-8")}>
           <div className="space-y-4">
             <ObjectIdentity
-              media={<AgentMark agent={agent} presence={presence} />}
+              media={<AgentMark agent={agent} presence={presence} onAvatarChange={canEdit.allowed ? (avatar_url) => handleUpdate(agent.id, {avatar_url}) : undefined} />}
               title={agent.name}
               description={agent.description || undefined}
               trailing={
@@ -814,20 +815,22 @@ export function AgentDetailPage({ agentId }: AgentDetailPageProps) {
 function AgentMark({
   agent,
   presence,
+  onAvatarChange,
 }: {
   agent: Agent;
   presence: AgentPresenceDetail | null;
+  onAvatarChange?: (avatarUrl: string) => Promise<void>;
 }) {
   const { t } = useT("agents");
   return (
     <span className="relative inline-flex [--avatar-slot-size:3rem]">
-      <ActorAvatar
+      {onAvatarChange ? <AvatarUploadControl variant="agent" value={agent.avatar_url ?? null} name={agent.name} size={48} onUploaded={onAvatarChange} onEmojiSelected={onAvatarChange}/> : <ActorAvatar
         actorType="agent"
         actorId={agent.id}
         size="2xl"
         profileLink={false}
         className="ring-1 ring-border"
-      />
+      />}
       {presence ? (
         <span
           role="img"
@@ -835,7 +838,7 @@ function AgentMark({
             status: t(($) => $.availability[presence.availability]),
           })}
           className={cn(
-            "absolute -right-0.5 -bottom-0.5 size-3 rounded-full ring-2 ring-background",
+            "pointer-events-none absolute -right-0.5 -bottom-0.5 size-3 rounded-full ring-2 ring-background",
             availabilityConfig[presence.availability].dotClass,
           )}
         />

@@ -68,3 +68,18 @@ def test_concurrent_creation(settings):
             assert session.scalar(select(func.count()).select_from(users)) == 1
     finally:
         db.close()
+
+
+def test_demo_email_rename_preserves_identity(settings):
+    migrate(settings)
+    db = Database(settings)
+    try:
+        with db.transaction() as session:
+            old = get_or_create_development_user(session, 'dev@workpal.local')
+        with db.transaction() as session:
+            renamed = get_or_create_development_user(session, 'workpal@fwd.com')
+            assert renamed['id'] == old['id']
+            assert renamed['email'] == 'workpal@fwd.com'
+            assert get_or_create_development_user(session, 'dev@workpal.local')['id'] == old['id']
+    finally:
+        db.close()
