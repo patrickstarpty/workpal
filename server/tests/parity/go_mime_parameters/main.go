@@ -1,0 +1,3 @@
+package main
+import("encoding/base64";"encoding/json";"mime";"os")
+func main(){var fixtures []string;if e:=json.NewDecoder(os.Stdin).Decode(&fixtures);e!=nil{panic(e)};out:=[]any{};for _,f:=range fixtures{raw,e:=base64.StdEncoding.DecodeString(f);if e!=nil{panic(e)};media,params,err:=mime.ParseMediaType(string(raw));var values map[string]string;if params!=nil{values=map[string]string{};for k,v:=range params{values[k]=base64.StdEncoding.EncodeToString([]byte(v))}};message:="";if err!=nil{message=err.Error()};out=append(out,map[string]any{"media":media,"params":values,"error":message})};json.NewEncoder(os.Stdout).Encode(out)}

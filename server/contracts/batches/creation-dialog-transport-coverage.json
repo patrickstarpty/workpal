@@ -1,0 +1,392 @@
+{
+  "version": 1,
+  "scope": "Creation dialog static source audit; root review required",
+  "coverage_complete": false,
+  "files": [
+    {
+      "path": "packages/views/modals/create-squad.tsx",
+      "sha256": "963fc0995c5cc7ba47ec10280c085438b2c37a0b88ce1ba850e5ce83488dbd8b",
+      "whole_source": true
+    },
+    {
+      "path": "packages/views/modals/feedback.tsx",
+      "sha256": "7f54f3be01d4e73644f5a69f3e663e8ca024acf20c25a90aa165b709249a52ba",
+      "whole_source": true
+    },
+    {
+      "path": "packages/views/modals/quick-create-issue.tsx",
+      "sha256": "e1fcd232bae569bd6ef72c19e9a2e4b25b168aa451d449f9776643f8b795d34c",
+      "whole_source": true
+    },
+    {
+      "path": "packages/views/modals/use-issue-create-uploads.ts",
+      "sha256": "5cddc6ebac83f34f8781ab1a3242ffdd1841a609124b66e021c964872524a6af",
+      "whole_source": true
+    },
+    {
+      "path": "packages/core/feedback/mutations.ts",
+      "sha256": "cf75b94b20b44cd44b13bd5b208494f627b53858295ae9a801b5c8cef2579b61",
+      "whole_source": true
+    },
+    {
+      "path": "packages/core/feedback/draft-store.ts",
+      "sha256": "33d28c9e287f2db45dcfffdf214af5d11bd1d44311b63873c9414b3c8362cf41",
+      "whole_source": true
+    },
+    {
+      "path": "packages/views/editor/use-editor-upload.ts",
+      "sha256": "577b4d53238fb342b44c63108a72c89e16c80b22e90fa0823dbcf3614f37c7c8",
+      "whole_source": false
+    },
+    {
+      "path": "packages/core/workspace/queries.ts",
+      "sha256": "1b16ae9e020e75a5a92cebc5270a14c58d97f6b7b0fe033d2f1d2c2d837d093a",
+      "whole_source": true
+    },
+    {
+      "path": "packages/core/runtimes/queries.ts",
+      "sha256": "7bdbc4bfa199c0f605e052c851eb8d494b4c051edb83626ffc35874c1620eaff",
+      "whole_source": true
+    },
+    {
+      "path": "packages/core/drafts/create-draft-store.ts",
+      "sha256": "b9391676b8cf971b8f0c23c973f4885d9b208922dc4e969ce5f0869b21b6c576",
+      "whole_source": true
+    },
+    {
+      "path": "packages/core/feedback/types.ts",
+      "sha256": "f0b0167527e4ab5ce52b2b59072ea7652bcc7de63f363541e2d3f941fe971b6a",
+      "whole_source": true
+    },
+    {
+      "path": "packages/core/projects/queries.ts",
+      "sha256": "39315862d7770c602ebfda690e8dc691b6732cd833a36975a8638ba3ff25a0d6",
+      "whole_source": true
+    },
+    {
+      "path": "packages/core/runtimes/cli-version.ts",
+      "sha256": "261eb4bb84bde0672507f4d3bd15ac5dbe76f68cc042f323c4b91f4c2d2cab44",
+      "whole_source": true
+    },
+    {
+      "path": "packages/core/api/client.ts",
+      "sha256": "779bb65b5b7ead815836f7c704ec3c370bafae203e4f92119fadce93e982a4d7",
+      "whole_source": false,
+      "reviewed_ranges": [
+        [
+          2058,
+          2072
+        ],
+        [
+          2260,
+          2283
+        ],
+        [
+          4510,
+          4523
+        ]
+      ],
+      "note": "Only bounded helper slices reviewed in this continuation; existing endpoint evidence reused for other tuples."
+    }
+  ],
+  "edges": [
+    {
+      "source": "packages/views/modals/create-squad.tsx",
+      "inventory": [
+        {
+          "id": "client:3765",
+          "method": "GET",
+          "path_expression": "/api/workspaces/${workspaceId}/members",
+          "route": {
+            "method": "GET",
+            "path": "/api/workspaces/{id}/members"
+          }
+        },
+        {
+          "id": "client:3769",
+          "method": "POST",
+          "path_expression": "/api/workspaces/${workspaceId}/members",
+          "route": {
+            "method": "POST",
+            "path": "/api/workspaces/{id}/members"
+          }
+        },
+        {
+          "id": "client:5203",
+          "method": "GET",
+          "path_expression": "/api/squads",
+          "route": {
+            "method": "GET",
+            "path": "/api/squads"
+          }
+        },
+        {
+          "id": "client:5226",
+          "method": "POST",
+          "path_expression": "/api/squads",
+          "route": {
+            "method": "POST",
+            "path": "/api/squads"
+          }
+        },
+        {
+          "id": "client:5244",
+          "method": "GET",
+          "path_expression": "/api/squads/${squadId}/members",
+          "route": {
+            "method": "GET",
+            "path": "/api/squads/{id}/members"
+          }
+        },
+        {
+          "id": "client:5248",
+          "method": "POST",
+          "path_expression": "/api/squads/${squadId}/members",
+          "route": {
+            "method": "POST",
+            "path": "/api/squads/{id}/members"
+          }
+        },
+        {
+          "id": "client:5252",
+          "method": "DELETE",
+          "path_expression": "/api/squads/${squadId}/members",
+          "route": {
+            "method": "DELETE",
+            "path": "/api/squads/{id}/members"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/views/modals/feedback.tsx",
+      "inventory": [
+        {
+          "id": "client:1754",
+          "method": "POST",
+          "path_expression": "/api/feedback",
+          "route": {
+            "method": "POST",
+            "path": "/api/feedback"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/views/modals/quick-create-issue.tsx",
+      "inventory": [
+        {
+          "id": "client:1673",
+          "method": "POST",
+          "path_expression": "/api/issues/quick-create",
+          "route": {
+            "method": "POST",
+            "path": "/api/issues/quick-create"
+          }
+        },
+        {
+          "id": "client:1680",
+          "method": "GET",
+          "path_expression": "/api/comments/${anchorCommentId}/sub-issue-preview",
+          "route": {
+            "method": "GET",
+            "path": "/api/comments/{commentId}/sub-issue-preview"
+          }
+        },
+        {
+          "id": "client:1714",
+          "method": "POST",
+          "path_expression": "/api/comments/${anchorCommentId}/sub-issues",
+          "route": {
+            "method": "POST",
+            "path": "/api/comments/{commentId}/sub-issues"
+          }
+        },
+        {
+          "id": "client:4529",
+          "method": "POST",
+          "path_expression": "/api/projects",
+          "route": {
+            "method": "POST",
+            "path": "/api/projects"
+          }
+        },
+        {
+          "id": "client:5203",
+          "method": "GET",
+          "path_expression": "/api/squads",
+          "route": {
+            "method": "GET",
+            "path": "/api/squads"
+          }
+        },
+        {
+          "id": "client:5226",
+          "method": "POST",
+          "path_expression": "/api/squads",
+          "route": {
+            "method": "POST",
+            "path": "/api/squads"
+          }
+        }
+      ]
+    },
+    {
+      "source": "reused issue-query factories and squad invalidation union",
+      "inventory": [
+        {
+          "id": "client:2066",
+          "method": "GET",
+          "path_expression": "/api/agents?${search}",
+          "route": {
+            "method": "GET",
+            "path": "/api/agents"
+          }
+        },
+        {
+          "id": "client:3765",
+          "method": "GET",
+          "path_expression": "/api/workspaces/${workspaceId}/members",
+          "route": {
+            "method": "GET",
+            "path": "/api/workspaces/{id}/members"
+          }
+        },
+        {
+          "id": "client:4517",
+          "method": "GET",
+          "path_expression": "/api/projects?${search}",
+          "route": {
+            "method": "GET",
+            "path": "/api/projects"
+          }
+        },
+        {
+          "id": "client:5203",
+          "method": "GET",
+          "path_expression": "/api/squads",
+          "route": {
+            "method": "GET",
+            "path": "/api/squads"
+          }
+        },
+        {
+          "id": "client:5210",
+          "method": "GET",
+          "path_expression": "/api/squads/involved",
+          "route": {
+            "method": "GET",
+            "path": "/api/squads/involved"
+          }
+        },
+        {
+          "id": "client:5264",
+          "method": "GET",
+          "path_expression": "/api/squads/${squadId}/members/status",
+          "route": {
+            "method": "GET",
+            "path": "/api/squads/{id}/members/status"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/runtimes/queries.ts runtimeListOptions -> ApiClient.listRuntimes",
+      "inventory": [
+        {
+          "id": "client:2276",
+          "method": "GET",
+          "path_expression": "/api/runtimes?${search}",
+          "route": {
+            "method": "GET",
+            "path": "/api/runtimes"
+          }
+        }
+      ]
+    }
+  ],
+  "branches": [
+    "Squad: nonempty trimmed name, leader and !creating gate. POST create then unawaited squads-prefix invalidation. Selected members POST concurrently with per-member warning and allSettled; member-prefix invalidation follows even failures. Close/toast/navigation follow. Outer failure resets creating. Close does not abort request; clear avatar only changes local state.",
+    "Feedback: initial message merges incoming text unless already included; editor updates persist draft. Submit rejects pending/uploading/empty/>10000 latest trimmed markdown. POST includes share URL/workspace/kind/context; success clears draft and closes, failure toasts and retains draft. Mutation has no invalidation. Close does not abort upload or mutation.",
+    "Quick-create: member/agent/runtime/squad/project queries; actor resolution, visibility and project stale-id sweep are local. Version, source preview, cloud attachments and upload gates reject locally. Referenced attachment IDs only; anchored agent POST or ordinary quick-create POST. Structured source errors can await injected preview refetch. No explicit query invalidation after success. Preferences update; identity snapshot and mounted guard preserve newer drafts; untouched draft clears, then keep-open resets editor/refocus or closes.",
+    "Quick-create switch: upload gate blocks mode change; shared fields and optional manual assist-init persist locally; parent carry goes to injected shell callback. Settings saves prompt before navigation. Voice inserts text or invokes same submit. Close does not cancel create; RAF cleanup cancels focus only.",
+    "Issue upload binding: shared pool deduplicates client IDs, settles only extant rows, strips signed URLs, records failure/removal locally; mode-captured body append survives mode switch. Empty issue context passed to coordinated engine; cancellation semantics reused from draft-attachment audit.",
+    "Query closure: memberListOptions -> listMembers client:3765; agentListOptions -> listAgents client:2066 with workspace_id and include_archived=true, polling 30s only for nonarchived online/unstable cached agents; projectListOptions -> listProjects client:4517 with include_archived=true and selects projects; runtimeListOptions -> listRuntimes client:2276 with workspace_id, optional owner and workspace header override. Runtime response uses schema fallback to []; project list uses schema fallback. These helpers establish frontend calls only.",
+    "CLI guards are local: metadata.cli_version must be string; trimmed empty/unparsable is missing, numeric semver below 0.2.21 is too_old; explicit priority or due date additionally needs 0.4.3. git-describe development shape passes. Host blocks only with a visible selected runtime bound to the agent and provider other than qoder_cloud; absent row defers precheck. No server behavior verified.",
+    "Feedback context validator accepts only object kind desktop_route_error, string trigger, object error with string name/message and absent-or-string stack; extra fields are not stripped. Invalid context omitted by host. Draft factory merges patches into fresh draft objects, clones defaults on clear, persists via workspace-aware JSON storage by default, merges defaults on rehydration, registers workspace rehydration and cleanup callbacks. Storage adapters and lifecycle callback invocation are boundary dependencies, not independently verified here."
+  ],
+  "reuse": [
+    "composer-submit-coverage",
+    "draft-attachment-transport-coverage",
+    "issue-query-transport-coverage",
+    "voice-transport-coverage",
+    "avatar-foreground-transport-coverage"
+  ],
+  "child_components": {
+    "local": "LeaderPicker, AdditionalMembersPicker, MemberChip, ActorPicker perform local filtering/selection; ActorAvatar remains separate child resource/query boundary.",
+    "external": "ContentEditor, AvatarUploadControl/crop/text dialogs, ProjectPicker, DueDatePicker, PriorityPicker, SourceContextPreviewCard and voice footer are separate components; host review does not imply full child source coverage."
+  },
+  "remaining_edges": [
+    "Squads-prefix factory union from issue-query: listSquads, listInvolvedSquadIds, getSquadMemberStatus; member key is members, distinct from members-status. Other mounted observer fanout and navigation destination are outside host closure.",
+    "Injected preview refetch reused composer parent resolution client:1680; arbitrary injected replacements are boundary. Standard React/Tanstack/browser libraries stop traversal.",
+    "Avatar upload/crop/text and browser resource behavior reuse avatar-foreground proof; editor upload/composer/attachment and voice behavior reuse named batches. Property picker internals, ActorAvatar resources, navigation destinations, arbitrary injected callback replacements and mounted observer fanout remain explicit child/caller boundaries; no entire descendant-tree claim.",
+    "Draft persistence adapters (workspace-storage, defaultStorage, cleanup-registry), Zustand persistence internals, React/Tanstack and browser standard libraries terminate this bounded trace. No adapter lifecycle or storage runtime claim."
+  ],
+  "limitations": [
+    "No backend support or global closure claim. No git, runtime, data, network, model or integration calls. No shared inventory or ledger edits. Truncated initial combined read was discarded as proof; target bodies reread in bounded chunks."
+  ],
+  "anchors": [
+    {
+      "path": "packages/views/modals/create-squad.tsx",
+      "text": "const handleSubmit = async () => {"
+    },
+    {
+      "path": "packages/views/modals/feedback.tsx",
+      "text": "const handleSubmit = async () => {"
+    },
+    {
+      "path": "packages/views/modals/quick-create-issue.tsx",
+      "text": "const composer = useComposerSubmit({"
+    }
+  ],
+  "inventory_snapshot": {
+    "path": "server/contracts/frontend-calls.json",
+    "sha256": "6abba909f844102f7b967a4fea091c57e17cd650bb1d0aedbccd40ffcc30828b",
+    "validation": "All recorded id/method/path_expression/route tuples equal current calls entries; snapshot is not whole-source review."
+  },
+  "reused_evidence": [
+    {
+      "path": "server/contracts/batches/composer-submit-coverage.json",
+      "sha256": "72181e13716c9550a9abb6f5144f27502faf8e8377971dfc78006b28bfbba59c"
+    },
+    {
+      "path": "server/contracts/batches/draft-attachment-transport-coverage.json",
+      "sha256": "496e9ff6f30b545e289ae4212951f2134b359510b0c4797621d7dc1889ef80e3"
+    },
+    {
+      "path": "server/contracts/batches/issue-query-transport-coverage.json",
+      "sha256": "3d4401929eee7294bc9f706a5c738a074300faffc6df01ec9275184d8a5be380"
+    },
+    {
+      "path": "server/contracts/batches/voice-transport-coverage.json",
+      "sha256": "c43ffa5d02f1fa4d7c6060d7a66196ee55ba3e310baaa4b7d9ffdfbc0ba7ee12"
+    },
+    {
+      "path": "server/contracts/batches/avatar-foreground-transport-coverage.json",
+      "sha256": "e77f14f94346e57e519f019aee88faa75ffee16dedae2a0d9ecd6c5f32d8b374"
+    }
+  ],
+  "bounded_semantic_closure": {
+    "targets": [
+      "packages/views/modals/create-squad.tsx",
+      "packages/views/modals/feedback.tsx",
+      "packages/views/modals/quick-create-issue.tsx"
+    ],
+    "status": "Finite host transport and local guard closure recorded with explicit residual boundaries; root integration/review pending.",
+    "global_complete": false
+  },
+  "root_review": {
+    "status": "accepted bounded three-target scope",
+    "checks": "Root checked feedback validator, concrete runtime query transport and draft factory; exact hashes/tuples validated during ledger integration. Residual child/adapter boundaries retained, no runtime support claim."
+  }
+}

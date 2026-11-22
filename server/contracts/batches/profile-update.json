@@ -1,0 +1,154 @@
+{
+  "batch": "profile-update",
+  "status": "source-derived; implementation and parity tests pending",
+  "method": "PATCH",
+  "path": "/api/me",
+  "sources": [
+    "server/go/cmd/server/router.go:1766",
+    "server/go/internal/middleware/auth.go:59",
+    "server/go/internal/auth/cookie.go:362",
+    "server/go/internal/handler/auth.go:519",
+    "server/go/internal/handler/auth.go:802",
+    "server/go/internal/handler/auth.go:67",
+    "server/go/internal/handler/avatar.go:150",
+    "server/go/internal/handler/avatar.go:206",
+    "server/go/pkg/db/queries/user.sql:35",
+    "server/src/workpal_backend/auth/models.py:5"
+  ],
+  "response_fields": [
+    "id",
+    "name",
+    "email",
+    "avatar_url",
+    "language",
+    "timezone",
+    "onboarded_at",
+    "onboarding_questionnaire",
+    "profile_description",
+    "whats_new_seen_version",
+    "star_prompt_shown_count",
+    "star_prompt_last_shown_at",
+    "star_prompt_starred_at",
+    "created_at",
+    "updated_at"
+  ],
+  "fixtures": [
+    {
+      "raw_body": "{}",
+      "status": 200,
+      "error": null
+    },
+    {
+      "raw_body": "null",
+      "status": 200,
+      "error": null
+    },
+    {
+      "raw_body": "{\"name\":null}",
+      "status": 200,
+      "error": null
+    },
+    {
+      "raw_body": "{\"name\":\"  Ada  \"}",
+      "status": 200,
+      "error": null
+    },
+    {
+      "raw_body": "{\"name\":\" \"}",
+      "status": 400,
+      "error": "name is required"
+    },
+    {
+      "raw_body": "{\"language\":\"\"}",
+      "status": 400,
+      "error": "unsupported language"
+    },
+    {
+      "raw_body": "{\"language\":\" EN \"}",
+      "status": 400,
+      "error": "unsupported language"
+    },
+    {
+      "raw_body": "{\"timezone\":\"\"}",
+      "status": 200,
+      "error": null
+    },
+    {
+      "raw_body": "{\"timezone\":\"No/Such\"}",
+      "status": 400,
+      "error": "invalid timezone"
+    },
+    {
+      "raw_body": "{\"avatar_url\":\"\"}",
+      "status": 200,
+      "error": null
+    },
+    {
+      "raw_body": "{\"profile_description\":\"\"}",
+      "status": 200,
+      "error": null
+    },
+    {
+      "raw_body": "{\"name\":\"Ada\",\"name\":null}",
+      "status": 200,
+      "error": null
+    },
+    {
+      "raw_body": "{\"name\":7,\"name\":\"Ada\"}",
+      "status": 400,
+      "error": "invalid request body"
+    },
+    {
+      "raw_body": "[]",
+      "status": 400,
+      "error": "invalid request body"
+    },
+    {
+      "raw_body": "",
+      "status": 400,
+      "error": "invalid request body"
+    },
+    {
+      "raw_body": "{} {}",
+      "status": 200,
+      "error": null
+    },
+    {
+      "raw_body": "{\"unknown\":1}",
+      "status": 200,
+      "error": null
+    }
+  ],
+  "fixture_preconditions": "Existing authenticated user; storage=nil; valid unchanged fields. Successful cases advance updated_at; exact seed response in Markdown.",
+  "events": {
+    "disposition": "none",
+    "producer": "Handler.UpdateMe",
+    "event_type": null,
+    "payload": null,
+    "scope": null,
+    "transaction_boundary": "GetUser then standalone UPDATE RETURNING; no explicit transaction",
+    "consumer": null,
+    "evidence": [
+      "server/go/internal/handler/auth.go:802-881",
+      "server/go/pkg/db/queries/user.sql:35-48"
+    ],
+    "tests": "planned: assert no outbox records for success, rejection and SQL failure"
+  },
+  "sql_errors": [
+    {
+      "stage": "GetUser",
+      "status": 404,
+      "error": "user not found"
+    },
+    {
+      "stage": "avatar attachment lookup",
+      "status": 403,
+      "error": "avatar_url must reference a standalone image upload, not a file attached to an issue, comment, or chat"
+    },
+    {
+      "stage": "UpdateUser",
+      "status": 500,
+      "error": "failed to update user"
+    }
+  ]
+}

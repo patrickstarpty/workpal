@@ -1,0 +1,31 @@
+package main
+import (
+ "encoding/json"
+ "fmt"
+ "go/ast"
+ "go/constant"
+ "strconv"
+ "go/types"
+ "os"
+ "strings"
+ "golang.org/x/tools/go/packages"
+)
+type Binding struct { Kind string `json:"kind"`; Registration string `json:"registration"`; Method string `json:"method"`; PathExpression string `json:"path_expression"`; HandlerPackage string `json:"handler_package"`; Handler string `json:"handler"`; Receiver string `json:"receiver"`; Source string `json:"source"` }
+func main(){
+ env:=append(os.Environ(),"GOOS=linux","GOARCH=amd64","CGO_ENABLED=0","GOWORK=off","GOFLAGS=")
+ cfg:=&packages.Config{Mode:packages.NeedName|packages.NeedFiles|packages.NeedCompiledGoFiles|packages.NeedImports|packages.NeedTypes|packages.NeedSyntax|packages.NeedTypesInfo,Env:env,Tests:false,BuildFlags:[]string{"-mod=readonly","-p=1"}}
+ pkgs,err:=packages.Load(cfg,"./cmd/server","./ee/...");if err!=nil{panic(err)};if packages.PrintErrors(pkgs)>0{os.Exit(1)}
+ out:=[]Binding{}
+ for _,p:=range pkgs{for _,f:=range p.Syntax{ast.Inspect(f,func(n ast.Node)bool{
+ c,ok:=n.(*ast.CallExpr);if !ok{return true};s,ok:=c.Fun.(*ast.SelectorExpr);if !ok{return true}
+ sel:=p.TypesInfo.Selections[s];if sel==nil||sel.Obj().Pkg()==nil||sel.Obj().Pkg().Path()!="github.com/go-chi/chi/v5"{return true}
+ verb:=strings.ToUpper(s.Sel.Name);switch verb{case "GET","POST","PUT","PATCH","DELETE","HEAD","OPTIONS","HANDLE":default:return true};if len(c.Args)<2{return true}
+ value:=p.TypesInfo.Types[c.Args[0]].Value;if value==nil||value.Kind()!=constant.String{return true};literal:=strconv.Quote(constant.StringVal(value))
+ b:=Binding{Kind:"method",Registration:p.Fset.Position(c.Pos()).String(),Method:verb,PathExpression:literal}
+ handler:=c.Args[1];var obj types.Object
+ switch e:=handler.(type){case *ast.SelectorExpr:obj=p.TypesInfo.Uses[e.Sel];case *ast.Ident:obj=p.TypesInfo.Uses[e];case *ast.CallExpr:b.Kind="factory";switch callee:=e.Fun.(type){case *ast.Ident:obj=p.TypesInfo.Uses[callee];case *ast.SelectorExpr:obj=p.TypesInfo.Uses[callee.Sel]};case *ast.FuncLit:b.Kind="closure";b.Handler="anonymous";b.HandlerPackage=p.PkgPath;b.Source=p.Fset.Position(e.Pos()).String()}
+ if fn,ok:=obj.(*types.Func);ok{b.Handler=fn.Name();if fn.Pkg()!=nil{b.HandlerPackage=fn.Pkg().Path()};b.Source=p.Fset.Position(fn.Pos()).String();if sig,ok:=fn.Type().(*types.Signature);ok&&sig.Recv()!=nil{b.Receiver=types.TypeString(sig.Recv().Type(),func(pkg *types.Package)string{return pkg.Path()})}}
+ out=append(out,b);return true
+ })}}
+ data,err:=json.MarshalIndent(out,"","  ");if err!=nil{panic(err)};fmt.Println(string(data))
+}

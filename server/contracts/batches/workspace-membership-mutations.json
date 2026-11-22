@@ -1,0 +1,236 @@
+{
+  "status": "source-traced; Go and Python parity unexecuted",
+  "routes": [
+    {
+      "method": "PATCH",
+      "path": "/api/workspaces/{id}/members/{memberId}",
+      "success": 200,
+      "guard": [
+        "owner",
+        "admin"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/workspaces/{id}/members/{memberId}",
+      "success": 204,
+      "body": null,
+      "guard": [
+        "owner",
+        "admin"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/workspaces/{id}/leave",
+      "success": 204,
+      "body": null,
+      "guard": [
+        "owner",
+        "admin",
+        "member"
+      ]
+    }
+  ],
+  "fixtures": [
+    {
+      "operation": "update",
+      "body": {},
+      "status": 400,
+      "response": {
+        "error": "role is required"
+      }
+    },
+    {
+      "operation": "update",
+      "body": {
+        "role": null
+      },
+      "status": 400,
+      "response": {
+        "error": "role is required"
+      }
+    },
+    {
+      "operation": "update",
+      "body": {
+        "role": " "
+      },
+      "status": 400,
+      "response": {
+        "error": "role is required"
+      }
+    },
+    {
+      "operation": "update",
+      "body": {
+        "role": "OWNER"
+      },
+      "status": 400,
+      "response": {
+        "error": "invalid member role"
+      }
+    },
+    {
+      "operation": "update",
+      "body": {
+        "role": 3
+      },
+      "status": 400,
+      "response": {
+        "error": "invalid request body"
+      }
+    },
+    {
+      "status": 404,
+      "response": {
+        "error": "member not found"
+      },
+      "source": "server/go/internal/handler/workspace.go"
+    },
+    {
+      "status": 403,
+      "response": {
+        "error": "insufficient permissions"
+      },
+      "source": "server/go/internal/handler/workspace.go"
+    },
+    {
+      "status": 400,
+      "response": {
+        "error": "workspace must have at least one owner"
+      },
+      "source": "server/go/internal/handler/workspace.go"
+    },
+    {
+      "status": 500,
+      "response": {
+        "error": "failed to update member"
+      },
+      "source": "server/go/internal/handler/workspace.go"
+    },
+    {
+      "status": 500,
+      "response": {
+        "error": "failed to load member"
+      },
+      "source": "server/go/internal/handler/workspace.go"
+    },
+    {
+      "status": 500,
+      "response": {
+        "error": "failed to delete member"
+      },
+      "source": "server/go/internal/handler/workspace.go"
+    },
+    {
+      "status": 500,
+      "response": {
+        "error": "failed to leave workspace"
+      },
+      "source": "server/go/internal/handler/workspace.go"
+    }
+  ],
+  "sql_dependencies": {
+    "DeleteAutopilotSubscribersByMember": {
+      "source": "server/go/pkg/db/queries/autopilot.sql",
+      "sql": "-- name: DeleteAutopilotSubscribersByMember :exec\n-- Autopilot subscribers carry no FK, so member removal must prune them in the\n-- same application transaction. Scope through the autopilot's workspace: the\n-- same user may remain subscribed to autopilots in another workspace.\nDELETE FROM autopilot_subscriber AS s\nUSING autopilot AS a\nWHERE s.autopilot_id = a.id\n  AND a.workspace_id = sqlc.arg(workspace_id)\n  AND s.user_type = 'member'\n  AND s.user_id = sqlc.arg(user_id);\n\n-- =====================\n-- Autopilot Collaborators\n-- ====================="
+    },
+    "DeletePrivateQuickActionsByCreator": {
+      "source": "server/go/pkg/db/queries/quick_action.sql",
+      "sql": "-- name: DeletePrivateQuickActionsByCreator :exec\n-- Run when a member leaves or is removed. A private action is visible and\n-- runnable ONLY by its creator, so once they are gone nobody can see it, run\n-- it, or clean it up \u2014 while it still counts against the workspace's active\n-- limit. Public actions are workspace furniture and deliberately survive their\n-- author's departure.\nDELETE FROM quick_action\nWHERE workspace_id = $1 AND created_by_id = $2 AND visibility = 'private';"
+    },
+    "CancelPendingAppActionRequestsForApprover": {
+      "source": "server/go/pkg/db/queries/connected_apps.sql",
+      "sql": "-- name: CancelPendingAppActionRequestsForApprover :many\n-- A member leaving the workspace withdraws everything waiting on them.\nUPDATE app_action_request\nSET status = 'cancelled', updated_at = now()\nWHERE workspace_id = $1 AND approver_user_id = $2 AND status = 'pending'\nRETURNING *;"
+    },
+    "DeleteChannelUserBindingsByWorkspaceMember": {
+      "source": "server/go/pkg/db/queries/channel.sql",
+      "sql": "-- name: DeleteChannelUserBindingsByWorkspaceMember :exec\n-- Application-layer integrity (replaces the old member-FK ON DELETE\n-- CASCADE): prune every binding for a user who has been removed from a\n-- workspace, across all installations in that workspace.\nDELETE FROM channel_user_binding\nWHERE workspace_id = $1 AND workpal_user_id = $2;"
+    },
+    "DeleteProjectSubscribersByUser": {
+      "source": "server/go/pkg/db/queries/project_subscriber.sql",
+      "sql": "-- name: DeleteProjectSubscribersByUser :exec\n-- A member leaving the workspace stops watching every project in it.\nDELETE FROM project_subscriber\nWHERE workspace_id = sqlc.arg('workspace_id') AND user_id = sqlc.arg('user_id');"
+    },
+    "DeleteSubscriptionsByMember": {
+      "source": "server/go/pkg/db/queries/subscriber.sql",
+      "sql": "-- name: DeleteSubscriptionsByMember :exec\n-- Drop a departing member's subscriptions across the workspace, in the same tx\n-- as the member-row delete (MUL-5483 review round 7).\n--\n-- Same application-layer cleanup rule the surrounding revoke path already\n-- applies to channel bindings and invocation grants: issue_subscriber carries\n-- no FK, so nothing removes these implicitly. Without it a revoked member keeps\n-- accruing inbox rows, and re-inviting them silently restores visibility of\n-- every issue they used to watch.\n--\n-- A hard DELETE, not a tombstone: a tombstone means \"this person chose to\n-- leave this issue\" and would suppress re-subscription if they rejoin, which\n-- is not what a workspace revoke means.\nDELETE FROM issue_subscriber s\nUSING issue i\nWHERE s.issue_id = i.id\n  AND i.workspace_id = $1\n  AND s.user_type = 'member'\n  AND s.user_id = $2;"
+    },
+    "LockSubscriberWrites": {
+      "source": "server/go/pkg/db/queries/subscriber.sql",
+      "sql": "-- name: LockSubscriberWrites :exec\n-- Transaction-scoped serialization boundary for (workspace, user) subscriber\n-- state (MUL-5483 review round 7).\n--\n-- Three paths race over the same question \u2014 \"should this user be an active\n-- watcher?\" \u2014 and each one is a check in one statement followed by a write in\n-- another:\n--\n--   * the delegated rule: is the user a member / not opted out, then insert;\n--   * subtree unsubscribe: tombstone the tree, which must cover children the\n--     agent files a moment later;\n--   * member revoke: delete the member row and their subscriptions.\n--\n-- Row locks cannot close this. The interleaving that breaks the escape hatch\n-- inserts a subscriber for an issue that did not exist when the opt-out was\n-- written, so there is no row to lock \u2014 a phantom, which under READ COMMITTED\n-- needs an explicit lock object. Every path above takes THIS lock first, so\n-- their lock ordering is identical and they cannot deadlock against each other.\n--\n-- Keyed on (workspace, user) rather than the issue: an opt-out is about a\n-- person and a tree, and the tree's membership is exactly what is changing.\n--\n-- The key is derived from the UUID VALUE, not from however the caller happened\n-- to spell it. ::uuid parses the input and the outer ::text renders PostgreSQL's\n-- canonical lowercase form, so 'AB\u2026' and 'ab\u2026' \u2014 the same UUID everywhere else\n-- in this file, and to every membership query \u2014 also produce the same lock.\n-- Hashing the raw string instead let an uppercase request take a DIFFERENT lock\n-- from the canonical holder, which silently reopened the very race this lock\n-- exists to close. Casting at the DB boundary keeps that guarantee even if a\n-- future caller forgets to canonicalize.\nSELECT pg_advisory_xact_lock(\n    hashtext((sqlc.arg(workspace_id)::uuid)::text),\n    hashtext((sqlc.arg(user_id)::uuid)::text)\n);"
+    },
+    "CancelAgentTasksByRuntimeOrAgent": {
+      "source": "server/go/pkg/db/queries/runtime.sql",
+      "sql": "-- name: CancelAgentTasksByRuntimeOrAgent :many\n-- Cancels every active task that either lives on one of the given runtimes\n-- OR belongs to one of the given agents. Used by the member-revocation flow:\n-- the runtime-side covers tasks queued against the leaving member's runtimes;\n-- the agent-side covers tasks pinned to a different runtime that those agents\n-- left behind from a prior UpdateAgent (agent.runtime_id can change, but\n-- agent_task_queue.runtime_id does not get rewritten when it does, so a task\n-- queued on runtime A by agent X \u2014 later moved to runtime B \u2014 survives the\n-- runtime-only revoke and could still be claimed because ClaimAgentTask does\n-- not gate on agent.archived_at).\n--\n-- We use 'cancelled' rather than 'failed' so the daemon's per-task status\n-- poller (watchTaskCancellation) interrupts the running agent gracefully.\n-- Returns the affected rows so the caller can broadcast task:cancelled and\n-- reconcile per-agent status.\n--\n-- The status list must cover EVERY non-terminal status, not just the ones the\n-- daemon is actively working: 'deferred' (migration 128, comment-routing\n-- escalation) was missing here and only went unnoticed because the runtime\n-- delete used to cascade those rows away. Since MUL-5559 the runtime delete\n-- unbinds history rows instead, and agent_task_queue_active_requires_runtime\n-- rejects an active row without a runtime \u2014 so a missed status now surfaces as\n-- a failed delete (runtime_delete_not_drained) instead of silent data loss.\nUPDATE agent_task_queue\nSET status = 'cancelled', completed_at = now(),\n    cancelled_by_type = 'system', cancelled_by_id = NULL, cancelled_by_name = NULL\nWHERE (runtime_id = ANY(@runtime_ids::uuid[]) OR agent_id = ANY(@agent_ids::uuid[]))\n  AND status IN ('queued', 'dispatched', 'running', 'waiting_local_directory', 'deferred')\nRETURNING *;"
+    },
+    "ForceOfflineRuntimesByIDs": {
+      "source": "server/go/pkg/db/queries/runtime.sql",
+      "sql": "-- name: ForceOfflineRuntimesByIDs :many\n-- Unconditionally flips a known set of runtime IDs to offline. Distinct from\n-- MarkRuntimesOfflineByIDs (which keeps a stale-window predicate so the\n-- sweeper cannot demote a runtime that just heartbeated): this variant is\n-- used by intentional revocation paths \u2014 e.g. removing a workspace member \u2014\n-- where the caller has already decided the runtime should be offline\n-- regardless of recent liveness.\nUPDATE agent_runtime\nSET status = 'offline', updated_at = now()\nWHERE id = ANY(@runtime_ids::uuid[]) AND status = 'online'\nRETURNING id, workspace_id, owner_id, daemon_id, provider;"
+    },
+    "ListAgentRuntimesByOwner": {
+      "source": "server/go/pkg/db/queries/runtime.sql",
+      "sql": "-- name: ListAgentRuntimesByOwner :many\nSELECT * FROM agent_runtime\nWHERE workspace_id = $1 AND owner_id = $2\nORDER BY created_at ASC;"
+    },
+    "ListSharedAgentRuntimesForUpdate": {
+      "source": "server/go/pkg/db/queries/runtime.sql",
+      "sql": "-- name: ListSharedAgentRuntimesForUpdate :many\nSELECT * FROM agent_runtime\nWHERE workspace_id = @workspace_id AND @user_id::uuid = ANY(shared_with)\nORDER BY id\nFOR NO KEY UPDATE;"
+    },
+    "LockRuntimeShareMemberRemoval": {
+      "source": "server/go/pkg/db/queries/runtime.sql",
+      "sql": "-- name: LockRuntimeShareMemberRemoval :one\n-- Prevent new grants until membership deletion commits. Grant writers use\n-- NOWAIT on this row, so they never wait while holding a runtime we need.\nSELECT id FROM member\nWHERE workspace_id = @workspace_id AND user_id = @user_id\nFOR UPDATE;"
+    },
+    "UpdateAgentRuntimeVisibility": {
+      "source": "server/go/pkg/db/queries/runtime.sql",
+      "sql": "-- name: UpdateAgentRuntimeVisibility :one\n-- Replaces the runtime's access policy: private admits owner plus shared_with;\n-- public admits any workspace member. Default for new rows is private\n-- (see migration 083). Gated at the handler layer to the runtime owner only:\n-- visibility is consent to use that person's machine, not a workspace-governance\n-- setting.\nUPDATE agent_runtime\nSET visibility = @visibility, shared_with = @shared_with::uuid[], updated_at = now()\nWHERE id = @id\nRETURNING *;"
+    },
+    "WithdrawChatTaskSupplementsByTasks": {
+      "source": "server/go/pkg/db/queries/chat_supplement.sql",
+      "sql": "-- name: WithdrawChatTaskSupplementsByTasks :exec\nUPDATE chat_task_supplement SET status = 'withdrawn'\nWHERE task_id = ANY(@task_ids::uuid[]) AND status IN ('pending', 'delivering');"
+    },
+    "DeleteDaemonTokensByWorkspaceAndDaemons": {
+      "source": "server/go/pkg/db/queries/daemon_token.sql",
+      "sql": "-- name: DeleteDaemonTokensByWorkspaceAndDaemons :many\n-- Deletes every daemon_token row matching the (workspace_id, daemon_id)\n-- pairs implied by `daemon_ids`. Used by the member-revocation flow to\n-- nuke tokens for all runtimes a leaving member owned in one shot.\n-- Returns token_hash so the caller can invalidate auth.DaemonTokenCache\n-- before the 10-minute TTL expires \u2014 without that invalidate, a daemon\n-- can keep using its stale token until cache eviction even though the\n-- DB row is gone.\nDELETE FROM daemon_token\nWHERE workspace_id = @workspace_id\n  AND daemon_id = ANY(@daemon_ids::text[])\nRETURNING token_hash;"
+    },
+    "ArchiveAgentsByRuntime": {
+      "source": "server/go/pkg/db/queries/agent.sql",
+      "sql": "-- name: ArchiveAgentsByRuntime :many\n-- Bulk-archives every active agent bound to any runtime in the given set.\n-- Used when revoking a leaving member's runtimes so agents pinned to those\n-- runtimes can no longer be assigned new work. Returns the affected rows so\n-- the caller can broadcast agent:archived per agent.\n--\n-- System agents are exempt: they belong to the workspace rather than to the\n-- member who happened to create them, and the workspace's entry point runs\n-- through one. Archiving Mika because a colleague left would take the default\n-- agent away from everyone. Its runtime does go offline with the departure, so\n-- it needs rebinding \u2014 but it stays visible and recoverable instead of\n-- vanishing.\nUPDATE agent\nSET archived_at = now(), archived_by = @archived_by, updated_at = now()\nWHERE runtime_id = ANY(@runtime_ids::uuid[]) AND archived_at IS NULL\n  AND (system_key IS NULL OR system_key = '')\nRETURNING *;"
+    },
+    "DeleteIssueViewPreferencesByUser": {
+      "source": "server/go/pkg/db/queries/issue_view.sql",
+      "sql": "-- name: DeleteIssueViewPreferencesByUser :exec\nDELETE FROM issue_view_preference\nWHERE workspace_id = $1 AND user_id = $2;"
+    },
+    "DeletePrivateIssueViewsByOwner": {
+      "source": "server/go/pkg/db/queries/issue_view.sql",
+      "sql": "-- name: DeletePrivateIssueViewsByOwner :exec\n-- Member removal: a departed member's private views are unreachable by every\n-- remaining member while still consuming their quota \u2014 same rule as private\n-- quick actions. Shared views are workspace furniture and survive. Pins on\n-- the deleted views fall in the same statement (see DeleteIssueView).\nWITH deleted AS (\n    DELETE FROM issue_view\n    WHERE issue_view.workspace_id = $1 AND issue_view.owner_id = $2 AND issue_view.visibility = 'private'\n    RETURNING issue_view.id\n)\nDELETE FROM pinned_item\nWHERE pinned_item.item_type = 'view'\n  AND pinned_item.workspace_id = $1\n  AND pinned_item.item_id IN (SELECT deleted.id FROM deleted);"
+    },
+    "DeleteProjectMembersByUser": {
+      "source": "server/go/pkg/db/queries/project_member.sql",
+      "sql": "-- name: DeleteProjectMembersByUser :exec\n-- A member leaving the workspace leaves every private project in it.\nDELETE FROM project_member\nWHERE workspace_id = sqlc.arg('workspace_id') AND user_id = sqlc.arg('user_id');"
+    },
+    "DeleteMember": {
+      "source": "server/go/pkg/db/queries/member.sql",
+      "sql": "-- name: DeleteMember :exec\nDELETE FROM member WHERE id = $1;"
+    },
+    "DeleteAgentInvocationTargetsByMember": {
+      "source": "server/go/pkg/db/queries/agent_invocation_target.sql",
+      "sql": "-- name: DeleteAgentInvocationTargetsByMember :exec\n-- Removes member-target grants pointing at a leaving user, SCOPED to a single\n-- workspace. A user may belong to multiple workspaces; removing them from one\n-- must NOT touch their invocation grants on agents in another workspace. Joins\n-- through agent (agent_invocation_target has no workspace_id column and no FK)\n-- to bound the delete to @workspace_id.\nDELETE FROM agent_invocation_target ait\nUSING agent a\nWHERE ait.agent_id = a.id\n  AND a.workspace_id = @workspace_id\n  AND ait.target_type = 'member'\n  AND ait.target_id = @target_id;"
+    }
+  },
+  "sources": [
+    "server/go/internal/handler/workspace.go",
+    "server/go/internal/handler/workspace_revoke.go",
+    "server/go/internal/handler/runtime_sharing.go",
+    "server/go/internal/handler/runtime.go",
+    "server/go/pkg/db/queries/member.sql",
+    "server/go/internal/middleware/workspace.go",
+    "server/src/workpal_backend/workspaces/service.py",
+    "server/src/workpal_backend/workspaces/routes.py",
+    "server/src/workpal_backend/realtime/protocol.py",
+    "server/src/workpal_backend/realtime/hub.py",
+    "server/src/workpal_backend/realtime/consumer.py",
+    "docs/superpowers/plans/2026-11-21-python-go-backend.md",
+    "docs/superpowers/specs/2026-11-21-python-go-backend.md"
+  ],
+  "unsupported": "No production model execution, daemon, capacity or external integration may be simulated as successful; pending dependencies block full removal parity."
+}

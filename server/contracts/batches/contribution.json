@@ -1,0 +1,128 @@
+{
+  "batch": "contribution",
+  "status": "contract traced; implementation pending",
+  "origin": "local-extension",
+  "evidence": "server/contracts/batches/contribution.md",
+  "requested_evidence_path": ".superpowers/sdd/2026-11-21-python-go-backend/contracts-contribution.md",
+  "sources": [
+    "server/api.mjs:59-65",
+    "server/api.mjs:11",
+    "server/api.mjs:149",
+    "server/contribution.mjs:6-46",
+    "server/store.mjs:8-16",
+    "server/store.mjs:36",
+    "server/contribution.test.mjs:6-35",
+    "packages/views/dashboard/components/contribution-tab.tsx:16-65",
+    "packages/core/api/client.ts:960-974",
+    "packages/core/api/client.ts:1141"
+  ],
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/api/dashboard/contribution",
+      "request": {
+        "query": [
+          "days",
+          "tz",
+          "project_id"
+        ],
+        "scope": "X-Workspace-Slug via client authHeaders; Task 3 membership guard"
+      },
+      "response": {
+        "totals": [
+          "commits",
+          "tickets",
+          "added",
+          "deleted",
+          "agentLines",
+          "humanLines"
+        ],
+        "daily": [
+          "date",
+          "commits",
+          "agentLines",
+          "humanLines"
+        ],
+        "rows": [
+          "id",
+          "identifier",
+          "title",
+          "team",
+          "commits",
+          "added",
+          "deleted",
+          "agentLines",
+          "humanLines"
+        ],
+        "excluded": "number"
+      },
+      "event": {
+        "disposition": "none",
+        "reason": "Read-only aggregation; server/contribution.mjs:17-46"
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/api/dashboard/contribution",
+      "request": {
+        "commits": "array <=20000; required repository,sha,message,at,additions,deletions; paired optional agentLines,humanLines"
+      },
+      "response_fixture": {
+        "status": 200,
+        "body": {
+          "count": 0
+        },
+        "source": "server/contribution.test.mjs:32-33 and server/api.mjs:63"
+      },
+      "auth": "Task 3 authenticated workspace owner/admin; private visibility is independent",
+      "event": {
+        "disposition": "none",
+        "reason": "server/api.mjs:59-65 only performs synchronous upsert; contribution-tab.tsx invalidates caller query; no wire event producer"
+      }
+    }
+  ],
+  "fixtures": [
+    {
+      "kind": "assertions from deterministic source test, not measured agent data",
+      "source": "server/contribution.test.mjs:6-23",
+      "query": "days=1&tz=Asia/Shanghai",
+      "now": "2026-11-21T01:00:00Z",
+      "asserted": {
+        "commits": 2,
+        "agentLines": 80,
+        "humanLines": 120,
+        "row_count": 2,
+        "daily_commits": 2,
+        "first_team": "Review squad"
+      }
+    },
+    {
+      "status": 400,
+      "request": {
+        "commits": [
+          {}
+        ]
+      },
+      "body": {
+        "error": "Each commit needs repository, sha, message, at (ISO date), and non-negative integer additions and deletions."
+      },
+      "source": "server/contribution.test.mjs:29-31 asserts status and unchanged state; exact message derived from server/contribution.mjs:9 and api.mjs:149, not asserted by source test"
+    },
+    {
+      "status": 200,
+      "request": {
+        "commits": []
+      },
+      "body": {
+        "count": 0
+      },
+      "source": "server/contribution.test.mjs:32-33 status/zero aggregates; count body derived from api.mjs:63"
+    }
+  ],
+  "verification": {
+    "command": "node --test server/contribution.test.mjs",
+    "observed": "2 passed, 0 failed",
+    "python": "pending; no implementation or parity claim"
+  },
+  "work_items": "See companion markdown for exact schema, signatures, source-derived semantics and Task 5 test checklist."
+}

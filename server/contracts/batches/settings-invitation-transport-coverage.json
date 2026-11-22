@@ -1,0 +1,1020 @@
+{
+  "version": 1,
+  "scope": [
+    "packages/views/settings/components/account-tab.tsx",
+    "packages/views/settings/components/workspace-tab.tsx",
+    "packages/views/settings/components/settings-layout.tsx",
+    "packages/views/invitations/use-invitation-actions.ts"
+  ],
+  "coverage": "whole target sources; bounded static transport audit; root review pending; no backend support or global coverage claim",
+  "files": [
+    {
+      "path": "packages/views/settings/components/account-tab.tsx",
+      "sha256": "b3e4c0928afd8efe6a5427b35959bc6e55fa99c2f509af8a3cb304f09deeaa29",
+      "whole_source": true
+    },
+    {
+      "path": "packages/views/settings/components/workspace-tab.tsx",
+      "sha256": "11135a20819cebe2a140918802c21c74cd211d338da8f74907db061891387180",
+      "whole_source": true
+    },
+    {
+      "path": "packages/views/settings/components/settings-layout.tsx",
+      "sha256": "e6897d559ad066f68c3c4fdd7fed669d757fc32cef7956d29af856dadac57ff4",
+      "whole_source": true
+    },
+    {
+      "path": "packages/views/invitations/use-invitation-actions.ts",
+      "sha256": "06908799091f53d78270cb4b66eb88721d8aa1036c2cdc66f35f18c940c88620",
+      "whole_source": true
+    },
+    {
+      "path": "packages/views/settings/components/use-auto-save.ts",
+      "sha256": "577d64af2b14ee23fdbb1c6e4b7b2d457a319952e553f072fdba288db6c65a78",
+      "whole_source": true
+    },
+    {
+      "path": "packages/views/settings/components/private-projects-section.tsx",
+      "sha256": "ad48e391ae72acdd7c83410b7ef8fe24cbb6a8c569743e7adcbacafb928e18db",
+      "whole_source": true
+    },
+    {
+      "path": "packages/views/settings/components/delete-workspace-dialog.tsx",
+      "sha256": "9e09e3aa6ae96db4738eed349496e304577d620fd23dbacc455e83d343a1de81",
+      "whole_source": true
+    },
+    {
+      "path": "packages/core/projects/queries.ts",
+      "sha256": "39315862d7770c602ebfda690e8dc691b6732cd833a36975a8638ba3ff25a0d6",
+      "whole_source": true
+    },
+    {
+      "path": "packages/core/projects/mutations.ts",
+      "sha256": "9bb69f81d02f8cfbd9bbf462e90a1b22d481b947ad777d49690f12d25c11bf3a",
+      "whole_source": false
+    }
+  ],
+  "edges": [
+    {
+      "source": "packages/views/settings/components/account-tab.tsx:68",
+      "api_method": "updateMe",
+      "client_anchor": "packages/core/api/client.ts:1266",
+      "kind": "direct",
+      "inventory": [
+        {
+          "id": "client:1267",
+          "method": "PATCH",
+          "path_expression": "/api/me",
+          "route": {
+            "method": "PATCH",
+            "path": "/api/me"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/views/settings/components/account-tab.tsx:118",
+      "api_method": "updateMe",
+      "client_anchor": "packages/core/api/client.ts:1266",
+      "kind": "direct",
+      "inventory": [
+        {
+          "id": "client:1267",
+          "method": "PATCH",
+          "path_expression": "/api/me",
+          "route": {
+            "method": "PATCH",
+            "path": "/api/me"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/views/settings/components/workspace-tab.tsx:207",
+      "api_method": "updateWorkspace",
+      "client_anchor": "packages/core/api/client.ts:3415",
+      "kind": "direct",
+      "inventory": [
+        {
+          "id": "client:3416",
+          "method": "PATCH",
+          "path_expression": "/api/workspaces/${id}",
+          "route": {
+            "method": "PATCH",
+            "path": "/api/workspaces/{id}"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/views/settings/components/workspace-tab.tsx:232",
+      "api_method": "updateWorkspace",
+      "client_anchor": "packages/core/api/client.ts:3415",
+      "kind": "direct",
+      "inventory": [
+        {
+          "id": "client:3416",
+          "method": "PATCH",
+          "path_expression": "/api/workspaces/${id}",
+          "route": {
+            "method": "PATCH",
+            "path": "/api/workspaces/{id}"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/views/settings/components/workspace-tab.tsx:343",
+      "api_method": "updateWorkspace",
+      "client_anchor": "packages/core/api/client.ts:3415",
+      "kind": "direct",
+      "inventory": [
+        {
+          "id": "client:3416",
+          "method": "PATCH",
+          "path_expression": "/api/workspaces/${id}",
+          "route": {
+            "method": "PATCH",
+            "path": "/api/workspaces/{id}"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/views/invitations/use-invitation-actions.ts:23",
+      "api_method": "acceptInvitation",
+      "client_anchor": "packages/core/api/client.ts:3813",
+      "kind": "direct",
+      "inventory": [
+        {
+          "id": "client:3814",
+          "method": "POST",
+          "path_expression": "/api/invitations/${invitationId}/accept",
+          "route": {
+            "method": "POST",
+            "path": "/api/invitations/{id}/accept"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/views/invitations/use-invitation-actions.ts:33",
+      "api_method": "markOnboardingComplete",
+      "client_anchor": "packages/core/api/client.ts:1203",
+      "kind": "direct",
+      "inventory": [
+        {
+          "id": "client:1207",
+          "method": "POST",
+          "path_expression": "/api/me/onboarding/complete",
+          "route": {
+            "method": "POST",
+            "path": "/api/me/onboarding/complete"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/views/invitations/use-invitation-actions.ts:62",
+      "api_method": "declineInvitation",
+      "client_anchor": "packages/core/api/client.ts:3819",
+      "kind": "direct",
+      "inventory": [
+        {
+          "id": "client:3820",
+          "method": "POST",
+          "path_expression": "/api/invitations/${invitationId}/decline",
+          "route": {
+            "method": "POST",
+            "path": "/api/invitations/{id}/decline"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/projects/queries.ts:24",
+      "api_method": "listProjects",
+      "client_anchor": "packages/core/api/client.ts:4513",
+      "kind": "mounted-descendant",
+      "inventory": [
+        {
+          "id": "client:4517",
+          "method": "GET",
+          "path_expression": "/api/projects?${search}",
+          "route": {
+            "method": "GET",
+            "path": "/api/projects"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/projects/queries.ts:32",
+      "api_method": "getProject",
+      "client_anchor": "packages/core/api/client.ts:4523",
+      "kind": "mounted-descendant",
+      "inventory": [
+        {
+          "id": "client:4524",
+          "method": "GET",
+          "path_expression": "/api/projects/${id}",
+          "route": {
+            "method": "GET",
+            "path": "/api/projects/{id}"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/projects/queries.ts:39",
+      "api_method": "getProjectMembers",
+      "client_anchor": "packages/core/api/client.ts:4560",
+      "kind": "mounted-descendant",
+      "inventory": [
+        {
+          "id": "client:4561",
+          "method": "GET",
+          "path_expression": "/api/projects/${id}/members",
+          "route": {
+            "method": "GET",
+            "path": "/api/projects/{id}/members"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/projects/queries.ts:46",
+      "api_method": "listPrivateProjectsForOwner",
+      "client_anchor": "packages/core/api/client.ts:4601",
+      "kind": "mounted-descendant",
+      "inventory": [
+        {
+          "id": "client:4602",
+          "method": "GET",
+          "path_expression": "/api/projects/private",
+          "route": {
+            "method": "GET",
+            "path": "/api/projects/private"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/projects/queries.ts:54",
+      "api_method": "getProjectSubscription",
+      "client_anchor": "packages/core/api/client.ts:4567",
+      "kind": "mounted-descendant",
+      "inventory": [
+        {
+          "id": "client:4569",
+          "method": "GET",
+          "path_expression": "/api/projects/${id}/subscription",
+          "route": {
+            "method": "GET",
+            "path": "/api/projects/{id}/subscription"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/projects/mutations.ts:16",
+      "api_method": "createProject",
+      "client_anchor": "packages/core/api/client.ts:4528",
+      "kind": "mounted-descendant",
+      "inventory": [
+        {
+          "id": "client:4529",
+          "method": "POST",
+          "path_expression": "/api/projects",
+          "route": {
+            "method": "POST",
+            "path": "/api/projects"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/projects/mutations.ts:35",
+      "api_method": "updateProject",
+      "client_anchor": "packages/core/api/client.ts:4536",
+      "kind": "mounted-descendant",
+      "inventory": [
+        {
+          "id": "client:4537",
+          "method": "PUT",
+          "path_expression": "/api/projects/${id}",
+          "route": {
+            "method": "PUT",
+            "path": "/api/projects/{id}"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/projects/mutations.ts:82",
+      "api_method": "deleteProject",
+      "client_anchor": "packages/core/api/client.ts:4544",
+      "kind": "mounted-descendant",
+      "inventory": [
+        {
+          "id": "client:4545",
+          "method": "DELETE",
+          "path_expression": "/api/projects/${id}",
+          "route": {
+            "method": "DELETE",
+            "path": "/api/projects/{id}"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/projects/mutations.ts:125",
+      "api_method": "archiveProject",
+      "client_anchor": "packages/core/api/client.ts:4548",
+      "kind": "mounted-descendant",
+      "inventory": [
+        {
+          "id": "client:4549",
+          "method": "POST",
+          "path_expression": "/api/projects/${id}/archive",
+          "route": {
+            "method": "POST",
+            "path": "/api/projects/{id}/archive"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/projects/mutations.ts:141",
+      "api_method": "restoreProject",
+      "client_anchor": "packages/core/api/client.ts:4555",
+      "kind": "mounted-descendant",
+      "inventory": [
+        {
+          "id": "client:4556",
+          "method": "POST",
+          "path_expression": "/api/projects/${id}/restore",
+          "route": {
+            "method": "POST",
+            "path": "/api/projects/{id}/restore"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/projects/mutations.ts:157",
+      "api_method": "joinPrivateProject",
+      "client_anchor": "packages/core/api/client.ts:4608",
+      "kind": "mounted-descendant",
+      "inventory": [
+        {
+          "id": "client:4609",
+          "method": "POST",
+          "path_expression": "/api/projects/${id}/join",
+          "route": {
+            "method": "POST",
+            "path": "/api/projects/{id}/join"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/projects/mutations.ts:170",
+      "api_method": "setProjectSubscription",
+      "client_anchor": "packages/core/api/client.ts:4574",
+      "kind": "mounted-descendant",
+      "inventory": [
+        {
+          "id": "client:4577",
+          "method": "PUT",
+          "path_expression": "/api/projects/${id}/subscription",
+          "route": {
+            "method": "PUT",
+            "path": "/api/projects/{id}/subscription"
+          }
+        },
+        {
+          "id": "client:4577:unsubscribe",
+          "method": "DELETE",
+          "path_expression": "/api/projects/${id}/subscription",
+          "route": {
+            "method": "DELETE",
+            "path": "/api/projects/{id}/subscription"
+          }
+        }
+      ]
+    },
+    {
+      "source": "reused identity-workspace / active-web-auth evidence",
+      "api_method": "leaveWorkspace",
+      "client_anchor": "packages/core/api/client.ts:3788",
+      "kind": "indirect query/mutation",
+      "inventory": [
+        {
+          "id": "client:3789",
+          "method": "POST",
+          "path_expression": "/api/workspaces/${workspaceId}/leave",
+          "route": {
+            "method": "POST",
+            "path": "/api/workspaces/{id}/leave"
+          }
+        }
+      ]
+    },
+    {
+      "source": "reused identity-workspace / active-web-auth evidence",
+      "api_method": "deleteWorkspace",
+      "client_anchor": "packages/core/api/client.ts:3865",
+      "kind": "indirect query/mutation",
+      "inventory": [
+        {
+          "id": "client:3866",
+          "method": "DELETE",
+          "path_expression": "/api/workspaces/${workspaceId}",
+          "route": {
+            "method": "DELETE",
+            "path": "/api/workspaces/{id}"
+          }
+        }
+      ]
+    },
+    {
+      "source": "reused identity-workspace / active-web-auth evidence",
+      "api_method": "listMembers",
+      "client_anchor": "packages/core/api/client.ts:3764",
+      "kind": "indirect query/mutation",
+      "inventory": [
+        {
+          "id": "client:3765",
+          "method": "GET",
+          "path_expression": "/api/workspaces/${workspaceId}/members",
+          "route": {
+            "method": "GET",
+            "path": "/api/workspaces/{id}/members"
+          }
+        }
+      ]
+    },
+    {
+      "source": "reused identity-workspace / active-web-auth evidence",
+      "api_method": "listWorkspaces",
+      "client_anchor": "packages/core/api/client.ts:3390",
+      "kind": "indirect query/mutation",
+      "inventory": [
+        {
+          "id": "client:3391",
+          "method": "GET",
+          "path_expression": "/api/workspaces",
+          "route": {
+            "method": "GET",
+            "path": "/api/workspaces"
+          }
+        }
+      ]
+    },
+    {
+      "source": "reused identity-workspace / active-web-auth evidence",
+      "api_method": "listMyInvitations",
+      "client_anchor": "packages/core/api/client.ts:3805",
+      "kind": "indirect query/mutation",
+      "inventory": [
+        {
+          "id": "client:3806",
+          "method": "GET",
+          "path_expression": "/api/invitations",
+          "route": {
+            "method": "GET",
+            "path": "/api/invitations"
+          }
+        }
+      ]
+    },
+    {
+      "source": "reused identity-workspace / active-web-auth evidence",
+      "api_method": "getMe",
+      "client_anchor": "packages/core/api/client.ts:1196",
+      "kind": "indirect query/mutation",
+      "inventory": [
+        {
+          "id": "client:1197",
+          "method": "GET",
+          "path_expression": "/api/me",
+          "route": {
+            "method": "GET",
+            "path": "/api/me"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/projects/queries.ts:1",
+      "api_method": "listProjects",
+      "client_anchor": "packages/core/api/client.ts:4513",
+      "kind": "project-prefix possible refetch",
+      "inventory": [
+        {
+          "id": "client:4517",
+          "method": "GET",
+          "path_expression": "/api/projects?${search}",
+          "route": {
+            "method": "GET",
+            "path": "/api/projects"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/projects/queries.ts:1",
+      "api_method": "getProject",
+      "client_anchor": "packages/core/api/client.ts:4523",
+      "kind": "project-prefix possible refetch",
+      "inventory": [
+        {
+          "id": "client:4524",
+          "method": "GET",
+          "path_expression": "/api/projects/${id}",
+          "route": {
+            "method": "GET",
+            "path": "/api/projects/{id}"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/projects/queries.ts:1",
+      "api_method": "getProjectMembers",
+      "client_anchor": "packages/core/api/client.ts:4560",
+      "kind": "project-prefix possible refetch",
+      "inventory": [
+        {
+          "id": "client:4561",
+          "method": "GET",
+          "path_expression": "/api/projects/${id}/members",
+          "route": {
+            "method": "GET",
+            "path": "/api/projects/{id}/members"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/projects/queries.ts:1",
+      "api_method": "getProjectSubscription",
+      "client_anchor": "packages/core/api/client.ts:4567",
+      "kind": "project-prefix possible refetch",
+      "inventory": [
+        {
+          "id": "client:4569",
+          "method": "GET",
+          "path_expression": "/api/projects/${id}/subscription",
+          "route": {
+            "method": "GET",
+            "path": "/api/projects/{id}/subscription"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/projects/queries.ts:1",
+      "api_method": "listPrivateProjectsForOwner",
+      "client_anchor": "packages/core/api/client.ts:4601",
+      "kind": "project-prefix possible refetch",
+      "inventory": [
+        {
+          "id": "client:4602",
+          "method": "GET",
+          "path_expression": "/api/projects/private",
+          "route": {
+            "method": "GET",
+            "path": "/api/projects/private"
+          }
+        }
+      ]
+    }
+  ],
+  "reused_evidence": [
+    "server/contracts/batches/identity-workspace-transport-coverage.json",
+    "server/contracts/batches/active-web-auth-transport.json",
+    "server/contracts/batches/avatar-foreground-transport-coverage.json",
+    "server/contracts/batches/retry-callback-transport-coverage.json",
+    "server/contracts/batches/issue-query-transport-coverage.json",
+    "server/contracts/batches/core-query-transport-coverage.json"
+  ],
+  "query_refetch_union": {
+    "issue_prefix": "issueKeys.all(wsId): reuse reviewed issue-query edges as conservative upper bound; only matching active observers refetch",
+    "issue_inventory": [
+      {
+        "id": "client:3116",
+        "method": "GET",
+        "path_expression": "/api/issues/${issueId}/task-runs${query}",
+        "route": {
+          "method": "GET",
+          "path": "/api/issues/{id}/task-runs"
+        }
+      },
+      {
+        "id": "client:1680",
+        "method": "GET",
+        "path_expression": "/api/comments/${anchorCommentId}/sub-issue-preview",
+        "route": {
+          "method": "GET",
+          "path": "/api/comments/{commentId}/sub-issue-preview"
+        }
+      },
+      {
+        "id": "client:1402",
+        "method": "POST",
+        "path_expression": "/api/issues/table/groups",
+        "route": {
+          "method": "POST",
+          "path": "/api/issues/table/groups"
+        }
+      },
+      {
+        "id": "client:1416",
+        "method": "POST",
+        "path_expression": "/api/issues/table/rows",
+        "route": {
+          "method": "POST",
+          "path": "/api/issues/table/rows"
+        }
+      },
+      {
+        "id": "client:1430",
+        "method": "POST",
+        "path_expression": "/api/issues/table/facets",
+        "route": {
+          "method": "POST",
+          "path": "/api/issues/table/facets"
+        }
+      },
+      {
+        "id": "client:1344",
+        "method": "GET",
+        "path_expression": "/api/issues?${search}",
+        "route": {
+          "method": "GET",
+          "path": "/api/issues"
+        }
+      },
+      {
+        "id": "client:1344",
+        "method": "GET",
+        "path_expression": "/api/issues?${search}",
+        "route": {
+          "method": "GET",
+          "path": "/api/issues"
+        }
+      },
+      {
+        "id": "client:1416",
+        "method": "POST",
+        "path_expression": "/api/issues/table/rows",
+        "route": {
+          "method": "POST",
+          "path": "/api/issues/table/rows"
+        }
+      },
+      {
+        "id": "client:1612",
+        "method": "GET",
+        "path_expression": "/api/issues/${encodeURIComponent(id)}",
+        "route": {
+          "method": "GET",
+          "path": "/api/issues/{id}"
+        }
+      },
+      {
+        "id": "client:1612",
+        "method": "GET",
+        "path_expression": "/api/issues/${encodeURIComponent(id)}",
+        "route": {
+          "method": "GET",
+          "path": "/api/issues/{id}"
+        }
+      },
+      {
+        "id": "client:1817",
+        "method": "GET",
+        "path_expression": "/api/issues/child-progress",
+        "route": {
+          "method": "GET",
+          "path": "/api/issues/child-progress"
+        }
+      },
+      {
+        "id": "client:1785",
+        "method": "GET",
+        "path_expression": "/api/issues/${id}/duplicates",
+        "route": {
+          "method": "GET",
+          "path": "/api/issues/{id}/duplicates"
+        }
+      },
+      {
+        "id": "client:1795",
+        "method": "GET",
+        "path_expression": "/api/issues/${id}/children",
+        "route": {
+          "method": "GET",
+          "path": "/api/issues/{id}/children"
+        }
+      },
+      {
+        "id": "client:1806",
+        "method": "GET",
+        "path_expression": "/api/issues/children?parent_ids=${parentIds.join(\",\")}",
+        "route": {
+          "method": "GET",
+          "path": "/api/issues/children"
+        }
+      },
+      {
+        "id": "client:1926",
+        "method": "GET",
+        "path_expression": "/api/issues/${issueId}/timeline",
+        "route": {
+          "method": "GET",
+          "path": "/api/issues/{id}/timeline"
+        }
+      },
+      {
+        "id": "client:1861",
+        "method": "GET",
+        "path_expression": "/api/issues/${issueId}/comments${query}",
+        "route": {
+          "method": "GET",
+          "path": "/api/issues/{id}/comments"
+        }
+      },
+      {
+        "id": "client:1612",
+        "method": "GET",
+        "path_expression": "/api/issues/${encodeURIComponent(id)}",
+        "route": {
+          "method": "GET",
+          "path": "/api/issues/{id}"
+        }
+      },
+      {
+        "id": "client:2002",
+        "method": "GET",
+        "path_expression": "/api/issues/${issueId}/subscribers",
+        "route": {
+          "method": "GET",
+          "path": "/api/issues/{id}/subscribers"
+        }
+      },
+      {
+        "id": "client:5536",
+        "method": "GET",
+        "path_expression": "/api/issues/${issueId}/environments",
+        "route": {
+          "method": "GET",
+          "path": "/api/issues/{id}/environments"
+        }
+      },
+      {
+        "id": "client:3129",
+        "method": "GET",
+        "path_expression": "/api/issues/${issueId}/usage",
+        "route": {
+          "method": "GET",
+          "path": "/api/issues/{id}/usage"
+        }
+      },
+      {
+        "id": "client:4427",
+        "method": "GET",
+        "path_expression": "/api/issues/${issueId}/attachments",
+        "route": {
+          "method": "GET",
+          "path": "/api/issues/{id}/attachments"
+        }
+      },
+      {
+        "id": "client:4517",
+        "method": "GET",
+        "path_expression": "/api/projects?${search}",
+        "route": {
+          "method": "GET",
+          "path": "/api/projects"
+        }
+      },
+      {
+        "id": "client:4524",
+        "method": "GET",
+        "path_expression": "/api/projects/${id}",
+        "route": {
+          "method": "GET",
+          "path": "/api/projects/{id}"
+        }
+      },
+      {
+        "id": "client:4561",
+        "method": "GET",
+        "path_expression": "/api/projects/${id}/members",
+        "route": {
+          "method": "GET",
+          "path": "/api/projects/{id}/members"
+        }
+      },
+      {
+        "id": "client:4602",
+        "method": "GET",
+        "path_expression": "/api/projects/private",
+        "route": {
+          "method": "GET",
+          "path": "/api/projects/private"
+        }
+      },
+      {
+        "id": "client:4569",
+        "method": "GET",
+        "path_expression": "/api/projects/${id}/subscription",
+        "route": {
+          "method": "GET",
+          "path": "/api/projects/{id}/subscription"
+        }
+      },
+      {
+        "id": "client:3391",
+        "method": "GET",
+        "path_expression": "/api/workspaces",
+        "route": {
+          "method": "GET",
+          "path": "/api/workspaces"
+        }
+      },
+      {
+        "id": "client:3391",
+        "method": "GET",
+        "path_expression": "/api/workspaces",
+        "route": {
+          "method": "GET",
+          "path": "/api/workspaces"
+        }
+      },
+      {
+        "id": "client:3765",
+        "method": "GET",
+        "path_expression": "/api/workspaces/${workspaceId}/members",
+        "route": {
+          "method": "GET",
+          "path": "/api/workspaces/{id}/members"
+        }
+      },
+      {
+        "id": "client:2066",
+        "method": "GET",
+        "path_expression": "/api/agents?${search}",
+        "route": {
+          "method": "GET",
+          "path": "/api/agents"
+        }
+      },
+      {
+        "id": "client:2070",
+        "method": "GET",
+        "path_expression": "/api/agents/${id}",
+        "route": {
+          "method": "GET",
+          "path": "/api/agents/{id}"
+        }
+      },
+      {
+        "id": "client:5203",
+        "method": "GET",
+        "path_expression": "/api/squads",
+        "route": {
+          "method": "GET",
+          "path": "/api/squads"
+        }
+      },
+      {
+        "id": "client:5210",
+        "method": "GET",
+        "path_expression": "/api/squads/involved",
+        "route": {
+          "method": "GET",
+          "path": "/api/squads/involved"
+        }
+      },
+      {
+        "id": "client:5264",
+        "method": "GET",
+        "path_expression": "/api/squads/${squadId}/members/status",
+        "route": {
+          "method": "GET",
+          "path": "/api/squads/{id}/members/status"
+        }
+      },
+      {
+        "id": "client:3876",
+        "method": "GET",
+        "path_expression": "/api/skills",
+        "route": {
+          "method": "GET",
+          "path": "/api/skills"
+        }
+      },
+      {
+        "id": "client:3891",
+        "method": "GET",
+        "path_expression": "/api/skills/${id}",
+        "route": {
+          "method": "GET",
+          "path": "/api/skills/{id}"
+        }
+      },
+      {
+        "id": "client:3967",
+        "method": "GET",
+        "path_expression": "/api/skills/${skillId}/versions",
+        "route": {
+          "method": "GET",
+          "path": "/api/skills/{id}/versions"
+        }
+      },
+      {
+        "id": "client:3977",
+        "method": "GET",
+        "path_expression": "/api/skills/${skillId}/versions/${version}",
+        "route": {
+          "method": "GET",
+          "path": "/api/skills/{id}/versions/{version}"
+        }
+      },
+      {
+        "id": "client:3796",
+        "method": "GET",
+        "path_expression": "/api/workspaces/${workspaceId}/invitations",
+        "route": {
+          "method": "GET",
+          "path": "/api/workspaces/{id}/invitations"
+        }
+      },
+      {
+        "id": "client:3836",
+        "method": "GET",
+        "path_expression": "/api/workspaces/${workspaceId}/share-links",
+        "route": {
+          "method": "GET",
+          "path": "/api/workspaces/{id}/share-links"
+        }
+      },
+      {
+        "id": "client:3806",
+        "method": "GET",
+        "path_expression": "/api/invitations",
+        "route": {
+          "method": "GET",
+          "path": "/api/invitations"
+        }
+      },
+      {
+        "id": "client:1935",
+        "method": "GET",
+        "path_expression": "/api/assignee-frequency",
+        "route": {
+          "method": "GET",
+          "path": "/api/assignee-frequency"
+        }
+      },
+      {
+        "id": "client:3441",
+        "method": "GET",
+        "path_expression": "/api/workspaces/${workspaceId}/mcp-servers",
+        "route": {
+          "method": "GET",
+          "path": "/api/workspaces/{id}/mcp-servers"
+        }
+      },
+      {
+        "id": "client:3493",
+        "method": "GET",
+        "path_expression": "/api/agents/${agentId}/mcp-servers",
+        "route": {
+          "method": "GET",
+          "path": "/api/agents/{id}/mcp-servers"
+        }
+      },
+      {
+        "id": "client:4821",
+        "method": "GET",
+        "path_expression": "/api/issue-statuses${query}",
+        "route": {
+          "method": "GET",
+          "path": "/api/issue-statuses"
+        }
+      }
+    ],
+    "project_prefix": "projectKeys.all(wsId): five project query methods in edges",
+    "workspace_list": "listWorkspaces",
+    "my_invitations": "listMyInvitations"
+  },
+  "unresolved_edges": [
+    "Navigation destination mounting and arbitrary SettingsTab children/actions/breadcrumb/header onDetailChange callbacks are app-specific effects outside this bounded closure; no exhaustive destination transport claim."
+  ],
+  "semantics": []
+}

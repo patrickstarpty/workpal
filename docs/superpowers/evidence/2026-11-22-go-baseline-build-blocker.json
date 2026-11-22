@@ -1,0 +1,28 @@
+{
+  "status": "approved_reference_copy_patch_applied_type_audit_passed",
+  "reason": "frozen Go baseline references nonexistent netip.Addr methods after branding substitution",
+  "compiler_exit_code": 1,
+  "changes": [
+    {
+      "path": "server/go/pkg/remotemcp/client.go",
+      "old_sha256": "d00fe553e355f4bde9115ca3a8cc6c843a56eb2685f059dd55435f3811e9df2c",
+      "candidate_sha256": "4105c5a7260adbe32d175275ed2af4b899126456eda017177117ce8fa91b4f33",
+      "restored_calls": 2
+    },
+    {
+      "path": "server/go/internal/integrations/wecom/media_guard.go",
+      "old_sha256": "a412681688e4e4c0c09142b36177f85f58a4dce832956900603545ef84cfd328",
+      "candidate_sha256": "7f75c56c283afc9ece2c21693aec9fccb703e6cfea931d18f8b043af32c27e84",
+      "restored_calls": 3
+    },
+    {
+      "path": "server/go/internal/handler/file.go",
+      "old_sha256": "686be2579bd04d92a1536cb1893d15d641f5bef110c835ea09b8cba6c7a57050",
+      "candidate_sha256": "21a0b8e11c6c7a6dd96259dc8775105d8aa2816e7255d539de8d869e7e3bbab1",
+      "restored_calls": 1
+    }
+  ],
+  "approval": "User permitted the reference-copy repair and derived baseline explicitly",
+  "derived_baseline": "2026-11-22-go-derived-baseline.json",
+  "validation": "Go/types audit exits 0 after the approved patch; no behavioral parity result claimed"
+}

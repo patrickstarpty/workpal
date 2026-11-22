@@ -1,0 +1,180 @@
+{
+  "version": 1,
+  "whole_source": false,
+  "closure_complete": true,
+  "root_review": "accepted finite named callback transport scope after independent source review and checked reused source hashes; whole source remains false",
+  "source": "packages/views/issues/components/issue-detail.tsx",
+  "observations": [
+    {
+      "definition": "2976-2990",
+      "callback": "handleToggleSidebar",
+      "effects": "mobile state; desktop injected panel isCollapsed/expand/collapse, animation frame and beginDesktopSidebarToggle"
+    },
+    {
+      "definition": "1632-1640",
+      "callback": "attachScrollContainer",
+      "effects": "ref assignment, state, restoreScrollRef provider call"
+    },
+    {
+      "definition": "2568-2571",
+      "callback": "handleToggleSelectAllChildren",
+      "effects": "selectIds/deselectIds provider calls"
+    },
+    {
+      "definition": "2091-2093",
+      "callback": "handleTimelineHeightChange",
+      "effects": "local measured issue state"
+    },
+    {
+      "definition": "2101-2104",
+      "callback": "handleTimelineRangeChanged",
+      "effects": "local timeline tail state"
+    },
+    {
+      "definition": "2340-2347",
+      "callback": "onJumpToLatest",
+      "effects": "clearNewComments then jumpToMinimapTarget, or jumpLatest; provider closure pending"
+    },
+    {
+      "definition": "2783-2799",
+      "callback": "locateOrigin",
+      "effects": "description DOM scroll; comment deliverableJump state with downstream effect closure pending"
+    },
+    {
+      "definition": "2815-2817",
+      "callback": "onDeliverableLinkDoneStable",
+      "effects": "injected onDeliverableLinkDone callback"
+    },
+    {
+      "definition": "2829-2839",
+      "callback": "openOverviewFromViewer/closeOverview",
+      "effects": "overview state and deliverableLink session callbacks"
+    }
+  ],
+  "remaining": [],
+  "inventory_tuples": [
+    {
+      "id": "client:1926",
+      "method": "GET",
+      "path_expression": "/api/issues/${issueId}/timeline",
+      "route": {
+        "method": "GET",
+        "path": "/api/issues/{id}/timeline"
+      }
+    },
+    {
+      "id": "client:1861",
+      "method": "GET",
+      "path_expression": "/api/issues/${issueId}/comments${query}",
+      "route": {
+        "method": "GET",
+        "path": "/api/issues/{id}/comments"
+      }
+    }
+  ],
+  "inventory_note": "Confirmed fresh timeline request only; remaining preview/jump effects still require reconciliation.",
+  "root_verified_effects": [
+    {
+      "callback": "pageMenu.onContextMenu",
+      "source": "packages/views/issues/actions/issue-actions-dropdown.tsx:41; packages/views/common/point-menu.ts:1-109",
+      "effect": "Desktop-shell gate and DOM/content guards; local point menu state only. Child menu actions are separate."
+    },
+    {
+      "callback": "handleToggleSelectAllChildren",
+      "source": "packages/views/issues/surface/selection-context.tsx:24-79",
+      "effect": "select/deselect clone and update local Set; no request."
+    },
+    {
+      "callback": "handleDesktopSidebarResize/beginToggle",
+      "source": "packages/views/layout/animated-right-sidebar.tsx:50-98",
+      "effect": "Local panel open/visual/motion state and bounded timer; no request."
+    },
+    {
+      "callback": "attachScrollContainer",
+      "source": "packages/views/platform/scroll-restoration.tsx:158-175",
+      "effect": "Restores scroll properties and registers element through supplied adapter; adapter boundary retained, active web adapter covered by platform proof."
+    },
+    {
+      "callback": "deliverableLinkRead",
+      "source": "packages/views/issues/components/deliverables/deliverable-link.tsx:70-105; packages/core/issues/queries.ts:670",
+      "effect": "Non-undefined deliverable name triggers fetchQuery timeline with staleTime0 retry1; cancellation suppresses state completion but does not abort request."
+    },
+    {
+      "callback": "deliverableLink viewer/overview callbacks",
+      "source": "packages/views/issues/components/deliverables/deliverable-link.tsx:123-163",
+      "effect": "Local sessionRef transitions, deferred microtask closure and injected onDone only."
+    },
+    {
+      "callback": "onJumpToLatest and minimap jump",
+      "source": "issue-detail.tsx:2250-2347; use-jump-to-latest.ts:29-146; use-new-comments-while-away.ts:72",
+      "effect": "Clears local new-ID list; existing reply/root lookup chooses local expansion and virtualized/DOM scrolling. Bottom jump follows layout with RAF up to 2000ms or user interruption. No direct fetch."
+    },
+    {
+      "callback": "locateOrigin comment branch",
+      "source": "issue-detail.tsx:1493-1504,1827,2783-2799; use-issue-timeline.ts:93-110; core/issues/queries.ts:677",
+      "effect": "Sets focused deliverable comment. When main timeline finished loading and lacks focus ID, conditional comment-thread GET runs. Description origin only scrolls to top. Landing expansion/scroll/memento effects are separate."
+    },
+    {
+      "callback": "descriptionAnnotations.editAnnotation",
+      "source": "issue-detail.tsx:1752-1759; use-comment-annotations.tsx:197-211; comment-annotation-selection.ts:58-76",
+      "effect": "Description binding supplies no onOpen callback. Finds annotation/source/range, optionally scrolls, updates editor selection/error local state. DOM text/range helpers reuse checked annotation proof; no mutation/fetch by edit."
+    },
+    {
+      "callback": "describeDeliverable and copyDeliverableLink",
+      "source": "deliverable-details.tsx:45-115; deliverable-link.tsx:27-50",
+      "effect": "Builds preview descriptors from existing files/comment map. Locate closes injected viewer then invokes host locateOrigin; copy builds injected shareable URL and clipboard/toast. VersionSwitcher/DeliverableInfo are explicit descendant boundaries covered separately by checked deliverable proof."
+    }
+  ],
+  "root_proof_validation": [
+    {
+      "path": "server/contracts/batches/deliverable-transport-coverage.json",
+      "sha256": "1cda60587c666955b84616320dd3cf7449e3be6aa7436bb1d89035a90b342f5d",
+      "source_hashes_checked": 5
+    },
+    {
+      "path": "server/contracts/batches/chat-context-annotation-transport-closure.json",
+      "sha256": "99ea6be9d82f05549154f2148056a6ba644d5e65623759771c25c08cad028026",
+      "source_hashes_checked": 12
+    },
+    {
+      "path": "server/contracts/batches/platform-host-transport-coverage.json",
+      "sha256": "2009830d5077094406bee049b7eef8a602868d7b6d20ccdd6370e8c8a5d3bd1f",
+      "source_hashes_checked": 14
+    }
+  ],
+  "root_source_hashes": [
+    {
+      "path": "packages/views/issues/components/issue-detail.tsx",
+      "sha256": "afbc077580392ae3b7ec41e28c087ee215dc3103c426f505fee9d96f5d8f9f1a"
+    },
+    {
+      "path": "packages/views/issues/hooks/use-jump-to-latest.ts",
+      "sha256": "e2b7bba216a265f85d0ff08abb68caeb638cb112aa26819ee7af943518428307"
+    },
+    {
+      "path": "packages/views/issues/hooks/use-new-comments-while-away.ts",
+      "sha256": "2951ba6a17d40d63c683e8f59a7417e5e12af5e668ae7941281ca702da621afc"
+    },
+    {
+      "path": "packages/views/issues/components/deliverables/deliverable-details.tsx",
+      "sha256": "7d9716f8f763a3e2f8d4bce9264461fd36eceef57f97b2c02eecac8d908d1b45"
+    },
+    {
+      "path": "packages/views/issues/components/deliverables/deliverable-link.tsx",
+      "sha256": "21a49f933d0793a61c6dddbe472a4854cfebec3ab5beca4e48c45e02fa223e52"
+    },
+    {
+      "path": "packages/views/issues/components/use-comment-annotations.tsx",
+      "sha256": "27a4de160fe7243db2831eb85cc09ffb5cc879e95aa9f9a930bd41ef905a948e"
+    },
+    {
+      "path": "packages/views/issues/components/comment-annotation-selection.ts",
+      "sha256": "c0cd28d6e68f76b3c0dc7f9ebe32f7f8df1cba02d467d822eded2b6dc7ff00b8"
+    }
+  ],
+  "boundaries": [
+    "react-resizable-panels layout persistence and imperative panel API are third-party interfaces, no internal library audit",
+    "Injected navigation, completion and scroll-restoration adapters retain host contracts; active web host proof reused",
+    "Preview descendants/resources use separate hash-checked deliverable proof; no full descendant-tree or backend support claim"
+  ]
+}

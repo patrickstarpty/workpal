@@ -1,0 +1,60 @@
+{
+  "scope": "Actual unmodified Go readPump/writePump and Python canonical transport on loopback sockets. One empty Ping at54s and read timeout at60s; unsolicited Pong at2s extends closure to62s without shifting Ping. Raw elapsed timings retained; both must independently meet documented scheduler windows (early tolerance0.5s/late1.5s). Go unregister boundary delays queue close until reader TCP close to remove graceful-close race. No all-scheduling or slow-peer write-deadline certification.",
+  "fixtures": [
+    false,
+    true
+  ],
+  "go": [
+    {
+      "close_code": 1006,
+      "closed_at": 60.064899527,
+      "pings": [
+        {
+          "at": 54.064876399,
+          "payload": ""
+        }
+      ]
+    },
+    {
+      "close_code": 1006,
+      "closed_at": 62.011245528,
+      "pings": [
+        {
+          "at": 54.062860858,
+          "payload": ""
+        }
+      ]
+    }
+  ],
+  "python": [
+    {
+      "pings": [
+        {
+          "payload": "",
+          "at": 54.00249837501906
+        }
+      ],
+      "closed_at": 60.003231833921745,
+      "close_code": 1006
+    },
+    {
+      "pings": [
+        {
+          "payload": "",
+          "at": 54.003230708884075
+        }
+      ],
+      "closed_at": 62.03294699988328,
+      "close_code": 1006
+    }
+  ],
+  "failures": [],
+  "source_sha256": {
+    "server/go/internal/realtime/hub.go": "33970bffe2c3d5c423dbdb57d6793d422a1ba8f0a3ae7f657faf51295fd9e57a",
+    "server/tests/parity/go_ws_keepalive/main.go": "704d17ae8ca233dbf504c320a3d37f9516bd288d0436b682fdaed8f16606448a",
+    "server/tests/parity/go_ws_keepalive/wrapper.go": "6ded6ab732ab8b9ca872d9a9637de6b77547892e2943450e99d5d989a7498a61",
+    "server/src/workpal_backend/realtime/transport.py": "8730839e861f504747a0b7b023c5472c149439e3cebd69b40b830b9765c392dc",
+    "server/src/workpal_backend/realtime/hub.py": "cc7cc0cf6eb698c9d47253383cdbe6ade493eb2dc89f1851e47ca9669da20169",
+    "server/tools/run_ws_keepalive_parity.py": "50eb738776e1d29995555d7cfb3d5b5d924d03892bd68e8dbeb919bdf55a9f91"
+  }
+}

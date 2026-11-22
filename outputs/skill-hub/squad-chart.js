@@ -1,0 +1,22 @@
+function teamChart(){
+ const squads=squadCatalog.squads;
+ const shared=squadCatalog.sharedSpecialists.map(id=>roleProfiles.find(role=>role.id===id)).filter(Boolean);
+ const coreCount=new Set(squads.flatMap(squad=>squad.core)).size;
+ const roles=ids=>ids.map(id=>roleProfiles.find(role=>role.id===id)).filter(Boolean);
+ const initials=name=>name.split(/[\s&-]+/).filter(Boolean).slice(0,2).map(part=>part[0]).join('').toUpperCase();
+ const roleButton=role=>'<button type="button" class="wp-team-chart-role" data-chart-agent="'+esc(role.id)+'" aria-label="View '+esc(role.name)+' role profile"><span class="wp-team-chart-mark" aria-hidden="true">'+esc(initials(role.name))+'</span><span class="wp-team-chart-role-name">'+esc(role.name)+'</span></button>';
+ return '<figure class="cap-chart wp-team-chart" aria-labelledby="wp-team-chart-title" style="--wp-team-chart-squad-count:'+squads.length+'">'+
+ '<figcaption class="wp-team-chart-caption"><div><p class="wp-team-chart-eyebrow">Proposed lineup</p><h2 id="wp-team-chart-title">Your team, at a glance</h2></div><p class="wp-team-chart-totals"><span><strong>'+squads.length+'</strong> squads</span><span><strong>'+coreCount+'</strong> core roles</span><span><strong>'+shared.length+'</strong> shared specialists</span></p></figcaption>'+
+ '<div class="wp-team-chart-direction"><div class="wp-team-chart-side-label">Direction</div><div class="wp-team-chart-human"><strong>Human direction</strong><span>Goals, decisions & approvals</span></div></div>'+
+ '<div class="wp-team-chart-branches" aria-hidden="true"><span></span></div>'+
+ '<div class="wp-team-chart-squad-row"><div class="wp-team-chart-side-label">Squad lineups<span>One lead per squad</span></div><div class="wp-team-chart-lineups">'+squads.map((squad,index)=>
+ '<article class="wp-team-chart-squad"><button type="button" class="wp-team-chart-squad-button" data-chart-squad="'+esc(squad.id)+'" aria-label="Explore '+esc(squad.name)+' squad"><span class="wp-team-chart-squad-number" aria-hidden="true">'+String(index+1).padStart(2,'0')+'</span><strong>'+esc(squad.name)+'</strong></button>'+
+ '<div class="wp-team-chart-lead"><span class="wp-team-chart-lead-dot" aria-hidden="true"></span><span>'+esc(squad.lead)+'<small>Squad lead</small></span></div>'+
+ '<div class="wp-team-chart-core"><span>'+squad.core.length+' core '+(squad.core.length===1?'role':'roles')+'</span><div class="wp-team-chart-role-marks">'+roles(squad.core).map(roleButton).join('')+'</div></div>'+
+ '<div class="wp-team-chart-mobile-support"><span>Shared support</span><div>'+roles(squad.specialists).map(role=>'<button type="button" data-chart-agent="'+esc(role.id)+'" aria-label="View '+esc(role.name)+' role profile"><span class="wp-team-chart-mark" aria-hidden="true">'+esc(initials(role.name))+'</span></button>').join('')+'</div></div></article>').join('')+'</div></div>'+
+ '<div class="wp-team-chart-pool-heading"><strong>Shared specialists</strong><span><span>On demand</span><span class="wp-team-chart-desktop-legend"> · <span class="wp-team-chart-legend-dot" aria-hidden="true"></span> connected to squad</span></span></div>'+
+ '<div class="wp-team-chart-connections" role="table" aria-label="Shared specialist connections to squads"><div class="wp-team-chart-a11y" role="row"><span role="columnheader">Specialist</span>'+squads.map(squad=>'<span role="columnheader">'+esc(squad.name)+'</span>').join('')+'</div>'+shared.map(role=>
+ '<div class="wp-team-chart-connection-row" role="row"><div class="wp-team-chart-specialist-cell" role="rowheader"><button type="button" class="wp-team-chart-specialist" data-chart-agent="'+esc(role.id)+'">'+esc(role.name)+'</button></div>'+squads.map(squad=>{const connected=squad.specialists.includes(role.id);return '<div class="wp-team-chart-connection-cell'+(connected?' is-connected':'')+'" role="cell"><span class="wp-team-chart-connection-mark" aria-hidden="true"></span><span class="wp-team-chart-a11y">'+esc(squad.name)+': '+(connected?'calls on ':'no proposed connection to ')+esc(role.name)+'</span></div>';}).join('')+'</div>').join('')+'</div>'+
+ '<div class="wp-team-chart-mobile-pool">'+shared.map(role=>'<button type="button" data-chart-agent="'+esc(role.id)+'"><span class="wp-team-chart-mark" aria-hidden="true">'+esc(initials(role.name))+'</span><span>'+esc(role.name)+'</span></button>').join('')+'</div>'+
+ '<p class="wp-team-chart-note">Proposed roles, not headcount. Specialists are shared across squads.</p></figure>';
+}

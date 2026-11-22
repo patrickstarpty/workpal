@@ -1,0 +1,576 @@
+{
+  "version": 1,
+  "scope": [
+    "packages/views/issues/components/issue-detail.tsx"
+  ],
+  "coverage": "Root accepted current bounded application transport source coverage",
+  "method": "Static filesystem reads only. Aggregate source read was truncated; it does not establish complete own-body coverage. No runtime, tests, network, model, data, git, shared inventory or ledger operations; no children.",
+  "files": [
+    {
+      "path": "packages/views/issues/components/issue-detail.tsx",
+      "sha256": "afbc077580392ae3b7ec41e28c087ee215dc3103c426f505fee9d96f5d8f9f1a",
+      "whole_source": true
+    }
+  ],
+  "snapshots": [
+    {
+      "path": "server/contracts/batches/issue-mutations-transport-coverage.json",
+      "sha256": "43c8266c0e7248f5f12b8736bf795e424ab2771f21bea3eac4b210bf89dbd70a",
+      "source_entries": 38,
+      "source_hashes_validated": true,
+      "reuse_status": "candidate; proof content and executed-symbol applicability still require review"
+    },
+    {
+      "path": "server/contracts/batches/issue-query-transport-coverage.json",
+      "sha256": "3d4401929eee7294bc9f706a5c738a074300faffc6df01ec9275184d8a5be380",
+      "source_entries": 4,
+      "source_hashes_validated": true,
+      "reuse_status": "candidate; proof content and executed-symbol applicability still require review"
+    },
+    {
+      "path": "server/contracts/batches/issue-cache-transport-coverage.json",
+      "sha256": "ca8ac1b4269c453cb9920c1ea565e909b513dc0cb74abe462467e24bf9b71b65",
+      "source_entries": 7,
+      "source_hashes_validated": true,
+      "reuse_status": "candidate; proof content and executed-symbol applicability still require review"
+    },
+    {
+      "path": "server/contracts/batches/issue-ws-updaters-transport-coverage.json",
+      "sha256": "6f932de903917f7209c1e07b9f5bf28b0b896573e89e352a2e40608d1b3995f1",
+      "source_entries": 1,
+      "source_hashes_validated": true,
+      "reuse_status": "candidate; proof content and executed-symbol applicability still require review"
+    },
+    {
+      "path": "server/contracts/batches/comment-card-transport-coverage.json",
+      "sha256": "e25aa6210f4ebc2707240f830723c334b6ad95965f62438c4f1c73c2c40f6b76",
+      "source_entries": 1,
+      "source_hashes_validated": true,
+      "reuse_status": "candidate; proof content and executed-symbol applicability still require review"
+    },
+    {
+      "path": "server/contracts/batches/inline-run-transport-coverage.json",
+      "sha256": "1597fb182445a08c9bc584d730d2898637180b229ad20ae8b1c9eca4624b3811",
+      "source_entries": 10,
+      "source_hashes_validated": true,
+      "reuse_status": "candidate; proof content and executed-symbol applicability still require review"
+    },
+    {
+      "path": "server/contracts/batches/issue-composer-transport-coverage.json",
+      "sha256": "f2c1036ca9d134227d4e17739aba2e5476c9cfebf6809bb64a0663c49b572044",
+      "source_entries": 15,
+      "source_hashes_validated": true,
+      "reuse_status": "candidate; proof content and executed-symbol applicability still require review"
+    },
+    {
+      "path": "server/contracts/batches/editor-transport-coverage.json",
+      "sha256": "1f941073efbfc5c5af384ed41e903a815ea8a373f29cf67a1d1228cbadcf1045",
+      "source_entries": 0,
+      "source_hashes_validated": false,
+      "reuse_status": "candidate; proof content and executed-symbol applicability still require review"
+    },
+    {
+      "path": "server/contracts/batches/issue-menu-transport-coverage.json",
+      "sha256": "d253dfff7430e808a54b417802bb90d65d115b2eab1570a7b69408b321b428cd",
+      "source_entries": 1,
+      "source_hashes_validated": true,
+      "reuse_status": "candidate; proof content and executed-symbol applicability still require review"
+    }
+  ],
+  "edges": [
+    {
+      "source": "Composed section evidence; conditional direct/query/refetch possibilities, not unconditional requests",
+      "inventory": [
+        {
+          "id": "client:1771",
+          "method": "PUT",
+          "path_expression": "/api/issues/${id}",
+          "route": {
+            "method": "PUT",
+            "path": "/api/issues/{id}"
+          }
+        },
+        {
+          "id": "client:4517",
+          "method": "GET",
+          "path_expression": "/api/projects?${search}",
+          "route": {
+            "method": "GET",
+            "path": "/api/projects"
+          }
+        },
+        {
+          "id": "client:4692",
+          "method": "GET",
+          "path_expression": "/api/issue-workflows",
+          "route": {
+            "method": "GET",
+            "path": "/api/issue-workflows"
+          }
+        },
+        {
+          "id": "client:4821",
+          "method": "GET",
+          "path_expression": "/api/issue-statuses${query}",
+          "route": {
+            "method": "GET",
+            "path": "/api/issue-statuses"
+          }
+        },
+        {
+          "id": "client:3167",
+          "method": "GET",
+          "path_expression": "/api/issues/unread${query}",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/unread"
+          }
+        },
+        {
+          "id": "client:3187",
+          "method": "POST",
+          "path_expression": "/api/issues/${issueId}/read",
+          "route": {
+            "method": "POST",
+            "path": "/api/issues/{id}/read"
+          }
+        },
+        {
+          "id": "client:3295",
+          "method": "POST",
+          "path_expression": "/api/inbox/issues/${issueId}/read",
+          "route": {
+            "method": "POST",
+            "path": "/api/inbox/issues/{issueId}/read"
+          }
+        },
+        {
+          "id": "client:3116",
+          "method": "GET",
+          "path_expression": "/api/issues/${issueId}/task-runs${query}",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}/task-runs"
+          }
+        },
+        {
+          "id": "client:1344",
+          "method": "GET",
+          "path_expression": "/api/issues?${search}",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues"
+          }
+        },
+        {
+          "id": "client:1612",
+          "method": "GET",
+          "path_expression": "/api/issues/${encodeURIComponent(id)}",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}"
+          }
+        },
+        {
+          "id": "client:1926",
+          "method": "GET",
+          "path_expression": "/api/issues/${issueId}/timeline",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}/timeline"
+          }
+        },
+        {
+          "id": "client:1861",
+          "method": "GET",
+          "path_expression": "/api/issues/${issueId}/comments${query}",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}/comments"
+          }
+        },
+        {
+          "id": "client:2002",
+          "method": "GET",
+          "path_expression": "/api/issues/${issueId}/subscribers",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}/subscribers"
+          }
+        },
+        {
+          "id": "client:3391",
+          "method": "GET",
+          "path_expression": "/api/workspaces",
+          "route": {
+            "method": "GET",
+            "path": "/api/workspaces"
+          }
+        },
+        {
+          "id": "client:3765",
+          "method": "GET",
+          "path_expression": "/api/workspaces/${workspaceId}/members",
+          "route": {
+            "method": "GET",
+            "path": "/api/workspaces/{id}/members"
+          }
+        },
+        {
+          "id": "client:2066",
+          "method": "GET",
+          "path_expression": "/api/agents?${search}",
+          "route": {
+            "method": "GET",
+            "path": "/api/agents"
+          }
+        },
+        {
+          "id": "client:5203",
+          "method": "GET",
+          "path_expression": "/api/squads",
+          "route": {
+            "method": "GET",
+            "path": "/api/squads"
+          }
+        },
+        {
+          "id": "client:1876",
+          "method": "POST",
+          "path_expression": "/api/issues/${issueId}/comments",
+          "route": {
+            "method": "POST",
+            "path": "/api/issues/{id}/comments"
+          }
+        },
+        {
+          "id": "client:1939",
+          "method": "PUT",
+          "path_expression": "/api/comments/${commentId}",
+          "route": {
+            "method": "PUT",
+            "path": "/api/comments/{commentId}"
+          }
+        },
+        {
+          "id": "client:1961",
+          "method": "DELETE",
+          "path_expression": "/api/comments/${commentId}",
+          "route": {
+            "method": "DELETE",
+            "path": "/api/comments/{commentId}"
+          }
+        },
+        {
+          "id": "client:1961:keep-replies",
+          "method": "DELETE",
+          "path_expression": "/api/comments/${commentId}/keep-replies",
+          "route": {
+            "method": "DELETE",
+            "path": "/api/comments/{commentId}/keep-replies"
+          }
+        },
+        {
+          "id": "client:1965",
+          "method": "POST",
+          "path_expression": "/api/comments/${commentId}/resolve",
+          "route": {
+            "method": "POST",
+            "path": "/api/comments/{commentId}/resolve"
+          }
+        },
+        {
+          "id": "client:1969",
+          "method": "DELETE",
+          "path_expression": "/api/comments/${commentId}/resolve",
+          "route": {
+            "method": "DELETE",
+            "path": "/api/comments/{commentId}/resolve"
+          }
+        },
+        {
+          "id": "client:1973",
+          "method": "POST",
+          "path_expression": "/api/comments/${commentId}/reactions",
+          "route": {
+            "method": "POST",
+            "path": "/api/comments/{commentId}/reactions"
+          }
+        },
+        {
+          "id": "client:1980",
+          "method": "DELETE",
+          "path_expression": "/api/comments/${commentId}/reactions",
+          "route": {
+            "method": "DELETE",
+            "path": "/api/comments/{commentId}/reactions"
+          }
+        },
+        {
+          "id": "client:1987",
+          "method": "POST",
+          "path_expression": "/api/issues/${issueId}/reactions",
+          "route": {
+            "method": "POST",
+            "path": "/api/issues/{id}/reactions"
+          }
+        },
+        {
+          "id": "client:1994",
+          "method": "DELETE",
+          "path_expression": "/api/issues/${issueId}/reactions",
+          "route": {
+            "method": "DELETE",
+            "path": "/api/issues/{id}/reactions"
+          }
+        },
+        {
+          "id": "client:2012",
+          "method": "POST",
+          "path_expression": "/api/issues/${issueId}/subscribe",
+          "route": {
+            "method": "POST",
+            "path": "/api/issues/{id}/subscribe"
+          }
+        },
+        {
+          "id": "client:2023",
+          "method": "POST",
+          "path_expression": "/api/issues/${issueId}/unsubscribe",
+          "route": {
+            "method": "POST",
+            "path": "/api/issues/{id}/unsubscribe"
+          }
+        },
+        {
+          "id": "client:2046",
+          "method": "POST",
+          "path_expression": "/api/issues/${issueId}/unsubscribe/subtree",
+          "route": {
+            "method": "POST",
+            "path": "/api/issues/{id}/unsubscribe/subtree"
+          }
+        },
+        {
+          "id": "client:3351",
+          "method": "GET",
+          "path_expression": "/api/config",
+          "route": {
+            "method": "GET",
+            "path": "/api/config"
+          }
+        },
+        {
+          "id": "client:3425",
+          "method": "GET",
+          "path_expression": "/api/workspaces/${workspaceId}/plugins",
+          "route": {
+            "method": "GET",
+            "path": "/api/workspaces/{id}/plugins"
+          }
+        },
+        {
+          "id": "client:4078",
+          "method": "POST",
+          "path_expression": "`${this.baseUrl}/api/upload-file`",
+          "route": {
+            "method": "POST",
+            "path": "/api/upload-file"
+          }
+        },
+        {
+          "id": "client:5180",
+          "method": "GET",
+          "path_expression": "/api/pins?include=view",
+          "route": {
+            "method": "GET",
+            "path": "/api/pins"
+          }
+        },
+        {
+          "id": "client:4427",
+          "method": "GET",
+          "path_expression": "/api/issues/${issueId}/attachments",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}/attachments"
+          }
+        },
+        {
+          "id": "client:4524",
+          "method": "GET",
+          "path_expression": "/api/projects/${id}",
+          "route": {
+            "method": "GET",
+            "path": "/api/projects/{id}"
+          }
+        },
+        {
+          "id": "client:1795",
+          "method": "GET",
+          "path_expression": "/api/issues/${id}/children",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}/children"
+          }
+        },
+        {
+          "id": "client:1817",
+          "method": "GET",
+          "path_expression": "/api/issues/child-progress",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/child-progress"
+          }
+        },
+        {
+          "id": "client:5025",
+          "method": "GET",
+          "path_expression": "/api/issues/${issueId}/labels",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}/labels"
+          }
+        },
+        {
+          "id": "client:4884",
+          "method": "GET",
+          "path_expression": "/api/properties${suffix}",
+          "route": {
+            "method": "GET",
+            "path": "/api/properties"
+          }
+        },
+        {
+          "id": "client:3232",
+          "method": "GET",
+          "path_expression": "/api/inbox/archived/page?${params}",
+          "route": {
+            "method": "GET",
+            "path": "/api/inbox/archived/page"
+          }
+        },
+        {
+          "id": "client:5184",
+          "method": "POST",
+          "path_expression": "/api/pins",
+          "route": {
+            "method": "POST",
+            "path": "/api/pins"
+          }
+        },
+        {
+          "id": "client:5191",
+          "method": "DELETE",
+          "path_expression": "/api/pins/${itemType}/${itemId}",
+          "route": {
+            "method": "DELETE",
+            "path": "/api/pins/{itemType}/{itemId}"
+          }
+        }
+      ]
+    }
+  ],
+  "confirmed_observations": [
+    {
+      "range": [
+        1734,
+        1759
+      ],
+      "behavior": "Detail options use refetchOnMount false when skipInitialRefetch, otherwise always. List seeding requires description != null. Read markers receive issue.id or empty string; inbox marker also receives readsInbox. Description annotations enabled only with user and issue."
+    },
+    {
+      "range": [
+        1764,
+        1829
+      ],
+      "behavior": "Comment subissue callback returns without issue, otherwise opens quick-create modal with defaults and anchor_comment_id. Visits record on issue availability. onDelete fires once after previously loaded issue becomes missing and loading ends. Timeline hook receives issue id, user id and optional deliverable comment id; task query receives id."
+    },
+    {
+      "range": [
+        1843,
+        1862
+      ],
+      "behavior": "Resolve wrapper walks parent links to root, clears root expansion, then invokes toggleResolveComment."
+    },
+    {
+      "range": [
+        2445,
+        2493
+      ],
+      "behavior": "Attachments queried by issue id. Parent detail and parent children enabled by parent id; breadcrumb project by project id; children by issue presence; progress only when children nonempty. Child count known requires success and not fetching."
+    },
+    {
+      "range": [
+        2841,
+        2878
+      ],
+      "behavior": "Upload awaits uploadWithToast; only truthy result is appended to pending attachment ref/state. Issue change clears pending attachment collection. Shared issue actions supply updateField; archived inbox lookup enabled when onDone absent. Labels and archived-inclusive property catalog queried."
+    }
+  ],
+  "unresolved": [
+    "Complete all 4580 own-source lines in independently returned <=100-line untruncated chunks; earlier aggregate output was truncated.",
+    "Read candidate proof contents and map each executed hook/direct call to applicable hash-validated proof. Editor proof has no files entries and needs separate snapshot validation.",
+    "Resolve bounded concrete own helpers, description/title save conflict and settlement branches, read/inbox/timeline/reactions/subscribers hooks, deliverable-link and UI resource cleanup.",
+    "Derive exact frontend-calls tuples from invoked client method bodies; no tuples inferred from adjacent ranges.",
+    "Enumerate finite possible-refetch union after mutation/cache/ws proof applicability is established.",
+    "Trace local persistence, timers, animation frames, listeners, observers and cleanup across own helpers."
+  ],
+  "exclusions": [
+    "Rendered arbitrary descendant trees beyond explicit own callback wiring",
+    "Native host adapters",
+    "Third-party internals"
+  ],
+  "frontend_calls": [],
+  "root_composed_acceptance": {
+    "status": "accepted bounded application source transport coverage",
+    "sections": [
+      {
+        "path": "server/contracts/batches/issue-detail-helper-sections.json",
+        "sha256": "6602827dcae48895a5d575273c4f0a5d991affcae0962223782259b90ba0d19f"
+      },
+      {
+        "path": "server/contracts/batches/issue-detail-query-section.json",
+        "sha256": "31ae15406a43f29c30666ff3f9394d31d68e2064b2adabb70896213cf07618d0"
+      },
+      {
+        "path": "server/contracts/batches/issue-detail-edit-section.json",
+        "sha256": "58e2a0231597b392b7d8c43daa6f2762915d72f491c58871aed1354afc88a940"
+      },
+      {
+        "path": "server/contracts/batches/issue-detail-render-section.json",
+        "sha256": "dc5b91bd8db87cfcd1ee65667a9907230eb9d0188d4c0b2a1026888994c4bd1d"
+      }
+    ],
+    "ranges": [
+      [
+        1,
+        1485
+      ],
+      [
+        1486,
+        2439
+      ],
+      [
+        2440,
+        3494
+      ],
+      [
+        3495,
+        4553
+      ],
+      [
+        4554,
+        4580
+      ]
+    ],
+    "checks": [
+      "Complete source partition with independent source spot checks",
+      "Invoked callback definitions and actual client branches reconciled",
+      "Query gates, local effects, resource and injected provider boundaries explicit"
+    ],
+    "limits": "No backend support/parity/network execution; child component and third-party internals retain separately audited or explicit interfaces"
+  },
+  "whole_source": true,
+  "root_review": "accepted composed sections"
+}

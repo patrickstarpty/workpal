@@ -1,0 +1,646 @@
+{
+  "source": {
+    "id": "gstack",
+    "label": "gstack",
+    "author": "Garry Tan",
+    "repo": "garrytan/gstack",
+    "commitSha": "a529769efd989ac5e83e4ee09f1ac7b199e686d3",
+    "repositoryUrl": "https://github.com/garrytan/gstack",
+    "retrievedAt": "2026-11-20T18:34:11.318Z",
+    "licenseUrl": "https://github.com/garrytan/gstack/blob/a529769efd989ac5e83e4ee09f1ac7b199e686d3/LICENSE",
+    "licenseSummary": "MIT"
+  },
+  "skills": [
+    {
+      "id": "gstack:autoplan/SKILL.md",
+      "name": "autoplan",
+      "description": "Auto-review pipeline — runs the CEO, design, eng and DX reviews in order (lean run: one reviewer), auto-deciding. Use for: run all reviews, automatic review pipeline. (gstack)",
+      "path": "autoplan/SKILL.md",
+      "url": "https://github.com/garrytan/gstack/blob/a529769efd989ac5e83e4ee09f1ac7b199e686d3/autoplan/SKILL.md",
+      "blobSha": "b20173b01ba41d1b514c8ab56a5e7a694a0ef82b",
+      "scope": "skill"
+    },
+    {
+      "id": "gstack:benchmark-models/SKILL.md",
+      "name": "benchmark-models",
+      "description": "Cross-model benchmark for gstack skills. Use for: cross model benchmark, compare claude gpt gemini. (gstack)",
+      "path": "benchmark-models/SKILL.md",
+      "url": "https://github.com/garrytan/gstack/blob/a529769efd989ac5e83e4ee09f1ac7b199e686d3/benchmark-models/SKILL.md",
+      "blobSha": "89700ac12549fefaae09e31c9120fd713cdd43cd",
+      "scope": "skill"
+    },
+    {
+      "id": "gstack:benchmark/SKILL.md",
+      "name": "benchmark",
+      "description": "Web performance regression detection. Use for: web performance benchmark, check page speed. (gstack)",
+      "path": "benchmark/SKILL.md",
+      "url": "https://github.com/garrytan/gstack/blob/a529769efd989ac5e83e4ee09f1ac7b199e686d3/benchmark/SKILL.md",
+      "blobSha": "2bca6d8cf7a7ba35e96995333fa1d7856e9c7791",
+      "scope": "skill"
+    },
+    {
+      "id": "gstack:browse/SKILL.md",
+      "name": "browse",
+      "description": "Drive a real browser through Aside: open a page, read it, click through a flow, take screenshots, check console errors. Use for: browse a page, open this url, take page screenshot. (gstack)",
+      "path": "browse/SKILL.md",
+      "url": "https://github.com/garrytan/gstack/blob/a529769efd989ac5e83e4ee09f1ac7b199e686d3/browse/SKILL.md",
+      "blobSha": "f5f38edfa602a9a3cc76d8de26c9dc876129cdca",
+      "scope": "skill"
+    },
+    {
+      "id": "gstack:browser-skills/hackernews-frontpage/SKILL.md",
+      "name": "hackernews-frontpage",
+      "description": "Scrape the Hacker News front page (titles, points, comment counts).",
+      "path": "browser-skills/hackernews-frontpage/SKILL.md",
+      "url": "https://github.com/garrytan/gstack/blob/a529769efd989ac5e83e4ee09f1ac7b199e686d3/browser-skills/hackernews-frontpage/SKILL.md",
+      "blobSha": "aa90258f6b9332fff82ed1903f9268181d9d7873",
+      "scope": "browser-skill"
+    },
+    {
+      "id": "gstack:canary/SKILL.md",
+      "name": "canary",
+      "description": "Post-deploy canary monitoring. Use for: monitor after deploy, canary check. (gstack)",
+      "path": "canary/SKILL.md",
+      "url": "https://github.com/garrytan/gstack/blob/a529769efd989ac5e83e4ee09f1ac7b199e686d3/canary/SKILL.md",
+      "blobSha": "0304e4051fbce9236355abe3aee1940b889d02a9",
+      "scope": "skill"
+    },
+    {
+      "id": "gstack:captain/SKILL.md",
+      "name": "captain",
+      "description": "Run a crew of coding agents from one controller (also /crew): lanes send READY blocks and never merge; the controller merges through trains, keeps the digest, relays approvals, fixes flakes daily. Use for: captain, crew. (gstack)",
+      "path": "captain/SKILL.md",
+      "url": "https://github.com/garrytan/gstack/blob/a529769efd989ac5e83e4ee09f1ac7b199e686d3/captain/SKILL.md",
+      "blobSha": "7b1fe49c1f40ab9b1861731a30f4bad9aa362866",
+      "scope": "skill"
+    },
+    {
+      "id": "gstack:capy/skill/gstack/SKILL.md",
+      "name": "gstack",
+      "description": "Install and use gstack in Capy and Claude Code. Load at session start to check this machine, and for gstack planning, code review, debugging, QA, design, security, documentation, and shipping workflows.",
+      "path": "capy/skill/gstack/SKILL.md",
+      "url": "https://github.com/garrytan/gstack/blob/a529769efd989ac5e83e4ee09f1ac7b199e686d3/capy/skill/gstack/SKILL.md",
+      "blobSha": "303cf135b287281a3d28f1d4aa5e5a50d354ef1f",
+      "scope": "variant"
+    },
+    {
+      "id": "gstack:careful/SKILL.md",
+      "name": "careful",
+      "description": "Safety guardrails for destructive commands. Use for: be careful, warn before destructive, safety mode. (gstack)",
+      "path": "careful/SKILL.md",
+      "url": "https://github.com/garrytan/gstack/blob/a529769efd989ac5e83e4ee09f1ac7b199e686d3/careful/SKILL.md",
+      "blobSha": "f5c81f613838f1c82ab0fc507b4dd60e0459d2df",
+      "scope": "skill"
+    },
+    {
+      "id": "gstack:codex/SKILL.md",
+      "name": "codex",
+      "description": "OpenAI Codex CLI wrapper — three modes. Use for: codex review, second opinion, outside voice challenge. (gstack)",
+      "path": "codex/SKILL.md",
+      "url": "https://github.com/garrytan/gstack/blob/a529769efd989ac5e83e4ee09f1ac7b199e686d3/codex/SKILL.md",
+      "blobSha": "db27067cef6222ba9f5dfe3e73836a756151ebdb",
+      "scope": "skill"
+    },
+    {
+      "id": "gstack:context-restore/SKILL.md",
+      "name": "context-restore",
+      "description": "Restore working context saved earlier by /context-save. Use for: resume where i left off, restore context, where was i. (gstack)",
+      "path": "context-restore/SKILL.md",
+      "url": "https://github.com/garrytan/gstack/blob/a529769efd989ac5e83e4ee09f1ac7b199e686d3/context-restore/SKILL.md",
+      "blobSha": "f2ca67787c113d8bdb63ec4eeef123a546a2b43e",
+      "scope": "skill"
+    },
+    {
+      "id": "gstack:context-save/SKILL.md",
+      "name": "context-save",
+      "description": "Save working context. Use for: save progress, save state, save my work, context save. (gstack)",
+      "path": "context-save/SKILL.md",
+      "url": "https://github.com/garrytan/gstack/blob/a529769efd989ac5e83e4ee09f1ac7b199e686d3/context-save/SKILL.md",
+      "blobSha": "2daf1dbe97b2c9dc0e106371dd53f2634f9260af",
+      "scope": "skill"
+    },
+    {
+      "id": "gstack:cso/SKILL.md",
+      "name": "cso",
+      "description": "Security audit: supported static findings; qualified profiles add reproduction and repair candidates. Use for: security audit, check for vulnerabilities. (gstack)",
+      "path": "cso/SKILL.md",
+      "url": "https://github.com/garrytan/gstack/blob/a529769efd989ac5e83e4ee09f1ac7b199e686d3/cso/SKILL.md",
+      "blobSha": "7852aecf346ccdd0fe7a8aebb9711706c5607c0d",
+      "scope": "skill"
+    },
+    {
+      "id": "gstack:design-consultation/SKILL.md",
+      "name": "design-consultation",
+      "description": "Design consultation: understands your product, researches the landscape, proposes a complete design system (aesthetic, typography, color, layout, spacing, motion), and generates font+color preview... (gstack)",
+      "path": "design-consultation/SKILL.md",
+      "url": "https://github.com/garrytan/gstack/blob/a529769efd989ac5e83e4ee09f1ac7b199e686d3/design-consultation/SKILL.md",
+      "blobSha": "fdabd14834d50666923738afc9b981bdf2232fdf",
+      "scope": "skill"
+    },
+    {
+      "id": "gstack:design-html/SKILL.md",
+      "name": "design-html",
+      "description": "Design finalization: generates production-quality Pretext-native HTML/CSS. Use for: build the design, code the mockup, make design real. (gstack)",
+      "path": "design-html/SKILL.md",
+      "url": "https://github.com/garrytan/gstack/blob/a529769efd989ac5e83e4ee09f1ac7b199e686d3/design-html/SKILL.md",
+      "blobSha": "2f7be80a19c9f4a2ffb7ce26d1b06b894d53a89c",
+      "scope": "skill"
+    },
+    {
+      "id": "gstack:design-motion/SKILL.md",
+      "name": "design-motion",
+      "description": "Design motion: animate an approved design into a seamless MP4 and GIF loop. Use for: animate this design, make a showcase loop. (gstack)",
+      "path": "design-motion/SKILL.md",
+      "url": "https://github.com/garrytan/gstack/blob/a529769efd989ac5e83e4ee09f1ac7b199e686d3/design-motion/SKILL.md",
+      "blobSha": "42162b8703587e2e01460664e665f07baaf9c1eb",
+      "scope": "skill"
+    },
+    {
+      "id": "gstack:design-review/SKILL.md",
+      "name": "design-review",
+      "description": "Designer's eye QA: finds visual inconsistency, spacing issues, hierarchy problems, AI slop patterns, and slow interactions — then fixes them; --build checks UI while you build it. Use for: visual design audit, design qa. (gstack)",
+      "path": "design-review/SKILL.md",
+      "url": "https://github.com/garrytan/gstack/blob/a529769efd989ac5e83e4ee09f1ac7b199e686d3/design-review/SKILL.md",
+      "blobSha": "43062db7d03f83cdc3128c003fb06a0a4f789efc",
+      "scope": "skill"
+    },
+    {
+      "id": "gstack:design-shotgun/SKILL.md",
+      "name": "design-shotgun",
+      "description": "Design shotgun: generate multiple AI design variants, open a comparison board, collect structured feedback, and iterate. Use for: explore design variants, show me design options. (gstack)",
+      "path": "design-shotgun/SKILL.md",
+      "url": "https://github.com/garrytan/gstack/blob/a529769efd989ac5e83e4ee09f1ac7b199e686d3/design-shotgun/SKILL.md",
+      "blobSha": "7e9f8b5836dc2383d3e920e817b7f5409ae2d18c",
+      "scope": "skill"
+    },
+    {
+      "id": "gstack:deslop-shared-libs/SKILL.md",
+      "name": "deslop-shared-libs",
+      "description": "Find worthwhile shared-code extractions in recent work. Use for: find code worth sharing. (gstack)",
+      "path": "deslop-shared-libs/SKILL.md",
+      "url": "https://github.com/garrytan/gstack/blob/a529769efd989ac5e83e4ee09f1ac7b199e686d3/deslop-shared-libs/SKILL.md",
+      "blobSha": "a5988668810021f95bf227e825e3f795d04a2bbd",
+      "scope": "skill"
+    },
+    {
+      "id": "gstack:devex-review/SKILL.md",
+      "name": "devex-review",
+      "description": "Live developer experience audit. Use for: live dx audit, test developer experience. (gstack)",
+      "path": "devex-review/SKILL.md",
+      "url": "https://github.com/garrytan/gstack/blob/a529769efd989ac5e83e4ee09f1ac7b199e686d3/devex-review/SKILL.md",
+      "blobSha": "4a3a02f4648500e7660aa5067f287f1ef554233d",
+      "scope": "skill"
+    },
+    {
+      "id": "gstack:diagram/SKILL.md",
+      "name": "diagram",
+      "description": "Turn an English description (or mermaid source) into a diagram triplet: the source, an editable .excalidraw file you can open on excalidraw.com, and rendered SVG + PNG. Use for: make a diagram, draw a diagram. (gstack)",
+      "path": "diagram/SKILL.md",
+      "url": "https://github.com/garrytan/gstack/blob/a529769efd989ac5e83e4ee09f1ac7b199e686d3/diagram/SKILL.md",
+      "blobSha": "7989b237dd449cba411c4eda4bdce26654a7a044",
+      "scope": "skill"
+    },
+    {
+      "id": "gstack:document-generate/SKILL.md",
+      "name": "document-generate",
+      "description": "Generate missing documentation from scratch for a feature, module, or entire project. Use for: write docs for this, generate documentation. (gstack)",
+      "path": "document-generate/SKILL.md",
+      "url": "https://github.com/garrytan/gstack/blob/a529769efd989ac5e83e4ee09f1ac7b199e686d3/document-generate/SKILL.md",
+      "blobSha": "372570ce3f24ffdfb006a60fa65454d3d0c804fd",
+      "scope": "skill"
+    },
+    {
+      "id": "gstack:document-release/SKILL.md",
+      "name": "document-release",
+      "description": "Release documentation audit. Use for: update docs after ship, document what changed. (gstack)",
+      "path": "document-release/SKILL.md",
+      "url": "https://github.com/garrytan/gstack/blob/a529769efd989ac5e83e4ee09f1ac7b199e686d3/document-release/SKILL.md",
+      "blobSha": "8d34673fde10fd770ba7e10dcfdc978050bc0048",
+      "scope": "skill"
+    },
+    {
+      "id": "gstack:eval-plan/SKILL.md",
+      "name": "eval-plan",
+      "description": "Preregister a paid eval (bars, arms, decoys, stop rules), dry-run it at zero cost,\nthen run a three-item priced pilot whose spend table gates approval. (gstack)\n",
+      "path": "eval-plan/SKILL.md",
+      "url": "https://github.com/garrytan/gstack/blob/a529769efd989ac5e83e4ee09f1ac7b199e686d3/eval-plan/SKILL.md",
+      "blobSha": "c4c4c23cb805ad8a3b7c774246e8f5c457933106",
+      "scope": "skill"
+    },
+    {
+      "id": "gstack:freeze/SKILL.md",
+      "name": "freeze",
+      "description": "Restrict file edits to a specific directory for the session. Use for: freeze edits to directory, lock editing scope. (gstack)",
+      "path": "freeze/SKILL.md",
+      "url": "https://github.com/garrytan/gstack/blob/a529769efd989ac5e83e4ee09f1ac7b199e686d3/freeze/SKILL.md",
+      "blobSha": "da4b5100801234079968c374efa53d8b7f21f4e6",
+      "scope": "skill"
+    },
+    {
+      "id": "gstack:gstack-upgrade/SKILL.md",
+      "name": "gstack-upgrade",
+      "description": "Upgrade gstack to the latest version. Use for: upgrade gstack, update gstack version.",
+      "path": "gstack-upgrade/SKILL.md",
+      "url": "https://github.com/garrytan/gstack/blob/a529769efd989ac5e83e4ee09f1ac7b199e686d3/gstack-upgrade/SKILL.md",
+      "blobSha": "7c351ee1cd67d0ae857da4c1b083793c07292974",
+      "scope": "skill"
+    },
+    {
+      "id": "gstack:guard/SKILL.md",
+      "name": "guard",
+      "description": "Full safety mode: destructive command warnings + directory-scoped edits. Use for: full safety mode, guard against mistakes. (gstack)",
+      "path": "guard/SKILL.md",
+      "url": "https://github.com/garrytan/gstack/blob/a529769efd989ac5e83e4ee09f1ac7b199e686d3/guard/SKILL.md",
+      "blobSha": "a6c1230e297f4e5175d66d8aa70ee383b4923d79",
+      "scope": "skill"
+    },
+    {
+      "id": "gstack:health/SKILL.md",
+      "name": "health",
+      "description": "Code quality dashboard. Use for: code health check, quality dashboard. (gstack)",
+      "path": "health/SKILL.md",
+      "url": "https://github.com/garrytan/gstack/blob/a529769efd989ac5e83e4ee09f1ac7b199e686d3/health/SKILL.md",
+      "blobSha": "07c1fc34e11b01c3b77f632cbfdd9c666b1a75be",
+      "scope": "skill"
+    },
+    {
+      "id": "gstack:ios-clean/SKILL.md",
+      "name": "ios-clean",
+      "description": "Remove the DebugBridge SPM package and all #if DEBUG wiring from an iOS app. Use for: clean the ios debug bridge, remove debugbridge. (gstack)",
+      "path": "ios-clean/SKILL.md",
+      "url": "https://github.com/garrytan/gstack/blob/a529769efd989ac5e83e4ee09f1ac7b199e686d3/ios-clean/SKILL.md",
+      "blobSha": "59a9ee8f61207f320b6b4c8b4eba16cb3b8de2bb",
+      "scope": "skill"
+    },
+    {
+      "id": "gstack:ios-design-review/SKILL.md",
+      "name": "ios-design-review",
+      "description": "Visual design audit for iOS apps on real hardware. Use for: review the ios design, audit the iphone app visuals. (gstack)",
+      "path": "ios-design-review/SKILL.md",
+      "url": "https://github.com/garrytan/gstack/blob/a529769efd989ac5e83e4ee09f1ac7b199e686d3/ios-design-review/SKILL.md",
+      "blobSha": "a2bcd4ba0b39d3de6b03bcb3a4eee7709baa6cf4",
+      "scope": "skill"
+    },
+    {
+      "id": "gstack:ios-fix/SKILL.md",
+      "name": "ios-fix",
+      "description": "Autonomous iOS bug fixer. Use for: fix this ios bug, patch the iphone app. (gstack)",
+      "path": "ios-fix/SKILL.md",
+      "url": "https://github.com/garrytan/gstack/blob/a529769efd989ac5e83e4ee09f1ac7b199e686d3/ios-fix/SKILL.md",
+      "blobSha": "fe247f12b9cc2c069913788e36cc23dc810e3aa8",
+      "scope": "skill"
+    },
+    {
+      "id": "gstack:ios-qa/SKILL.md",
+      "name": "ios-qa",
+      "description": "Live-device iOS QA for SwiftUI apps. Use for: ios qa, test the iphone app, test the ipad app. (gstack)",
+      "path": "ios-qa/SKILL.md",
+      "url": "https://github.com/garrytan/gstack/blob/a529769efd989ac5e83e4ee09f1ac7b199e686d3/ios-qa/SKILL.md",
+      "blobSha": "a86fc56aa71b58be8421bf529ec7dd67c349f284",
+      "scope": "skill"
+    },
+    {
+      "id": "gstack:ios-sync/SKILL.md",
+      "name": "ios-sync",
+      "description": "Regenerate the iOS debug bridge against the latest upstream gstack templates. Use for: resync the ios debug bridge, regenerate ios accessors. (gstack)",
+      "path": "ios-sync/SKILL.md",
+      "url": "https://github.com/garrytan/gstack/blob/a529769efd989ac5e83e4ee09f1ac7b199e686d3/ios-sync/SKILL.md",
+      "blobSha": "1227b920e93888ba40fa1d0331f58e3a9aa97e7d",
+      "scope": "skill"
+    },
+    {
+      "id": "gstack:land-and-deploy/SKILL.md",
+      "name": "land-and-deploy",
+      "description": "Land and deploy workflow. Use for: merge and deploy, land the pr, ship to production. (gstack)",
+      "path": "land-and-deploy/SKILL.md",
+      "url": "https://github.com/garrytan/gstack/blob/a529769efd989ac5e83e4ee09f1ac7b199e686d3/land-and-deploy/SKILL.md",
+      "blobSha": "4d536a697a0678e03529eea936e06343983a2e04",
+      "scope": "skill"
+    },
+    {
+      "id": "gstack:landing-report/SKILL.md",
+      "name": "landing-report",
+      "description": "Read-only queue dashboard for workspace-aware ship. Use for: landing report, version queue, ship queue. (gstack)",
+      "path": "landing-report/SKILL.md",
+      "url": "https://github.com/garrytan/gstack/blob/a529769efd989ac5e83e4ee09f1ac7b199e686d3/landing-report/SKILL.md",
+      "blobSha": "0f3a6f8289162a38756fd9226f9080827822a98c",
+      "scope": "skill"
+    },
+    {
+      "id": "gstack:learn/SKILL.md",
+      "name": "learn",
+      "description": "Manage project learnings. Use for: show learnings, what have we learned.",
+      "path": "learn/SKILL.md",
+      "url": "https://github.com/garrytan/gstack/blob/a529769efd989ac5e83e4ee09f1ac7b199e686d3/learn/SKILL.md",
+      "blobSha": "12804cc4c266a8fb81dd29f5d0da00c175a42eb3",
+      "scope": "skill"
+    },
+    {
+      "id": "gstack:make-pdf/SKILL.md",
+      "name": "make-pdf",
+      "description": "Turn any markdown file into a publication-quality PDF. Use for: markdown to pdf, generate pdf, make pdf, export pdf. (gstack)",
+      "path": "make-pdf/SKILL.md",
+      "url": "https://github.com/garrytan/gstack/blob/a529769efd989ac5e83e4ee09f1ac7b199e686d3/make-pdf/SKILL.md",
+      "blobSha": "b0fec62243c4b2c866cb1e28500200f0e6001980",
+      "scope": "skill"
+    },
+    {
+      "id": "gstack:modernize/SKILL.md",
+      "name": "modernize",
+      "description": "Bring an aging PR onto its current base and decide: MODERNIZE, REWORK or CLOSE. Use for: modernize this pr, rebase this old pr. (gstack)",
+      "path": "modernize/SKILL.md",
+      "url": "https://github.com/garrytan/gstack/blob/a529769efd989ac5e83e4ee09f1ac7b199e686d3/modernize/SKILL.md",
+      "blobSha": "d365312bdc6028efc2e02f581084f96eb58148e8",
+      "scope": "skill"
+    },
+    {
+      "id": "gstack:office-hours/SKILL.md",
+      "name": "office-hours",
+      "description": "YC Office Hours — two modes. Use for: brainstorm this, is this worth building. (gstack)",
+      "path": "office-hours/SKILL.md",
+      "url": "https://github.com/garrytan/gstack/blob/a529769efd989ac5e83e4ee09f1ac7b199e686d3/office-hours/SKILL.md",
+      "blobSha": "212a3855f6c696435e5722ccb5949113b067f825",
+      "scope": "skill"
+    },
+    {
+      "id": "gstack:open-gstack-browser/SKILL.md",
+      "name": "open-gstack-browser",
+      "description": "Launch GStack Browser — AI-controlled Chromium with the sidebar extension baked in. Use for: open gstack browser, launch chromium.",
+      "path": "open-gstack-browser/SKILL.md",
+      "url": "https://github.com/garrytan/gstack/blob/a529769efd989ac5e83e4ee09f1ac7b199e686d3/open-gstack-browser/SKILL.md",
+      "blobSha": "bbf5b7a467bd6d03f7fafaef7fc3b6fa16320582",
+      "scope": "skill"
+    },
+    {
+      "id": "gstack:openclaw/skills/gstack-openclaw-ceo-review/SKILL.md",
+      "name": "gstack-openclaw-ceo-review",
+      "description": "Use when asked to review a plan, challenge a proposal, run a CEO review, poke holes in an approach, think bigger about scope, or decide whether to expand or reduce the plan.",
+      "path": "openclaw/skills/gstack-openclaw-ceo-review/SKILL.md",
+      "url": "https://github.com/garrytan/gstack/blob/a529769efd989ac5e83e4ee09f1ac7b199e686d3/openclaw/skills/gstack-openclaw-ceo-review/SKILL.md",
+      "blobSha": "c0b191cfb5a5d0e7ecd7318df70a2cc0328a1338",
+      "scope": "variant"
+    },
+    {
+      "id": "gstack:openclaw/skills/gstack-openclaw-office-hours/SKILL.md",
+      "name": "gstack-openclaw-office-hours",
+      "description": "Use when asked to brainstorm, evaluate whether an idea is worth building, run office hours, or think through a new product idea or design direction before any code is written.",
+      "path": "openclaw/skills/gstack-openclaw-office-hours/SKILL.md",
+      "url": "https://github.com/garrytan/gstack/blob/a529769efd989ac5e83e4ee09f1ac7b199e686d3/openclaw/skills/gstack-openclaw-office-hours/SKILL.md",
+      "blobSha": "9d52b3134e65a40454d3ee4172910e32cb4aaef0",
+      "scope": "variant"
+    },
+    {
+      "id": "gstack:openclaw/skills/gstack-openclaw-retro/SKILL.md",
+      "name": "gstack-openclaw-retro",
+      "description": "Weekly engineering retrospective. Analyzes commit history, work patterns, and code quality metrics with persistent history and trend tracking. Team-aware with per-person contributions, praise, and growth areas. Use when asked for weekly retro, what shipped this week, or engineering retrospective.",
+      "path": "openclaw/skills/gstack-openclaw-retro/SKILL.md",
+      "url": "https://github.com/garrytan/gstack/blob/a529769efd989ac5e83e4ee09f1ac7b199e686d3/openclaw/skills/gstack-openclaw-retro/SKILL.md",
+      "blobSha": "1e823b3f0936afe054d639cc4f336b475a4e92e8",
+      "scope": "variant"
+    },
+    {
+      "id": "gstack:pair-agent/SKILL.md",
+      "name": "pair-agent",
+      "description": "Pair a remote AI agent with your browser. Use for: pair with agent, connect remote agent. (gstack)",
+      "path": "pair-agent/SKILL.md",
+      "url": "https://github.com/garrytan/gstack/blob/a529769efd989ac5e83e4ee09f1ac7b199e686d3/pair-agent/SKILL.md",
+      "blobSha": "01c3629031b9c27f698adfcca5c760c356eb7fdd",
+      "scope": "skill"
+    },
+    {
+      "id": "gstack:plan-ceo-review/SKILL.md",
+      "name": "plan-ceo-review",
+      "description": "CEO/founder-mode plan review. Use for: think bigger, expand scope, strategy review. (gstack)",
+      "path": "plan-ceo-review/SKILL.md",
+      "url": "https://github.com/garrytan/gstack/blob/a529769efd989ac5e83e4ee09f1ac7b199e686d3/plan-ceo-review/SKILL.md",
+      "blobSha": "cf2ce6cfc7a10c0d6212d83ac76b07e242b8729b",
+      "scope": "skill"
+    },
+    {
+      "id": "gstack:plan-design-review/SKILL.md",
+      "name": "plan-design-review",
+      "description": "Designer's eye plan review — interactive, like CEO and Eng review. Use for: design plan review, review ux plan. (gstack)",
+      "path": "plan-design-review/SKILL.md",
+      "url": "https://github.com/garrytan/gstack/blob/a529769efd989ac5e83e4ee09f1ac7b199e686d3/plan-design-review/SKILL.md",
+      "blobSha": "05cb75c1a8e1dc0ebb39e57c0d6b071b025d4a54",
+      "scope": "skill"
+    },
+    {
+      "id": "gstack:plan-devex-review/SKILL.md",
+      "name": "plan-devex-review",
+      "description": "Interactive developer experience plan review. Use for: developer experience review, dx plan review. (gstack)",
+      "path": "plan-devex-review/SKILL.md",
+      "url": "https://github.com/garrytan/gstack/blob/a529769efd989ac5e83e4ee09f1ac7b199e686d3/plan-devex-review/SKILL.md",
+      "blobSha": "cb1f793574a586dd56d14583ed27cef83db03649",
+      "scope": "skill"
+    },
+    {
+      "id": "gstack:plan-eng-review/SKILL.md",
+      "name": "plan-eng-review",
+      "description": "Use when you plan a feature before building it, or review a plan: locks in architecture, data flow, diagrams, edge cases, test coverage and performance. Use for: plan a feature, review architecture, eng plan review. (gstack)",
+      "path": "plan-eng-review/SKILL.md",
+      "url": "https://github.com/garrytan/gstack/blob/a529769efd989ac5e83e4ee09f1ac7b199e686d3/plan-eng-review/SKILL.md",
+      "blobSha": "ad0e7bbb2da34ef33417f2696290b148f86275bf",
+      "scope": "skill"
+    },
+    {
+      "id": "gstack:plan-tune/SKILL.md",
+      "name": "plan-tune",
+      "description": "Self-tuning question sensitivity + developer psychographic for gstack (v1: observational). Use for: tune questions, stop asking me that. (gstack)",
+      "path": "plan-tune/SKILL.md",
+      "url": "https://github.com/garrytan/gstack/blob/a529769efd989ac5e83e4ee09f1ac7b199e686d3/plan-tune/SKILL.md",
+      "blobSha": "f769b3037e16f147a4b99c3781bc41610860b6a2",
+      "scope": "skill"
+    },
+    {
+      "id": "gstack:qa-only/SKILL.md",
+      "name": "qa-only",
+      "description": "Report browser/API/CLI/job/worker/webhook bugs. Use for: qa report only, just report bugs, test but dont fix. (gstack)",
+      "path": "qa-only/SKILL.md",
+      "url": "https://github.com/garrytan/gstack/blob/a529769efd989ac5e83e4ee09f1ac7b199e686d3/qa-only/SKILL.md",
+      "blobSha": "22679c8bb264209a52ab06ac65754be53e56a75d",
+      "scope": "skill"
+    },
+    {
+      "id": "gstack:qa/SKILL.md",
+      "name": "qa",
+      "description": "Use when you test the site, API or CLI and fix bugs. Use for: qa test this, find bugs on site, test the site. (gstack)",
+      "path": "qa/SKILL.md",
+      "url": "https://github.com/garrytan/gstack/blob/a529769efd989ac5e83e4ee09f1ac7b199e686d3/qa/SKILL.md",
+      "blobSha": "581adba24cd68f878bf10fe8fee5b9eac916054f",
+      "scope": "skill"
+    },
+    {
+      "id": "gstack:qm/sandbox/skills/gstack-plan/SKILL.md",
+      "name": "gstack-plan",
+      "description": "Use before building a feature: challenge the scope, then review architecture, code quality, tests and performance, and end with a plan to build. (gstack)",
+      "path": "qm/sandbox/skills/gstack-plan/SKILL.md",
+      "url": "https://github.com/garrytan/gstack/blob/a529769efd989ac5e83e4ee09f1ac7b199e686d3/qm/sandbox/skills/gstack-plan/SKILL.md",
+      "blobSha": "b1b80dbeea586bf80dfdb4ee026299e3e91f774c",
+      "scope": "variant"
+    },
+    {
+      "id": "gstack:retro/SKILL.md",
+      "name": "retro",
+      "description": "Weekly engineering retrospective. Use for: weekly retro, what did we ship. (gstack)",
+      "path": "retro/SKILL.md",
+      "url": "https://github.com/garrytan/gstack/blob/a529769efd989ac5e83e4ee09f1ac7b199e686d3/retro/SKILL.md",
+      "blobSha": "89a355e5ec30717780fbdbdbc4e4606a5990c1c1",
+      "scope": "skill"
+    },
+    {
+      "id": "gstack:review/SKILL.md",
+      "name": "review",
+      "description": "Use when you review a diff before it lands: local changes, a branch or a PR. Use for: review my changes, look over my diff, review this pr. (gstack)",
+      "path": "review/SKILL.md",
+      "url": "https://github.com/garrytan/gstack/blob/a529769efd989ac5e83e4ee09f1ac7b199e686d3/review/SKILL.md",
+      "blobSha": "6d59c741ea14bee39523180d3a2d612ff1fca243",
+      "scope": "skill"
+    },
+    {
+      "id": "gstack:runaway-stopper/SKILL.md",
+      "name": "runaway-stopper",
+      "description": "Find runaway Capy threads and subagents, stop or rotate them safely, and prevent repeats. Use for: find runaway threads, stop runaway jobs. (gstack)",
+      "path": "runaway-stopper/SKILL.md",
+      "url": "https://github.com/garrytan/gstack/blob/a529769efd989ac5e83e4ee09f1ac7b199e686d3/runaway-stopper/SKILL.md",
+      "blobSha": "da448484cd4e5c53d9083bdb67b8017989b40ff2",
+      "scope": "skill"
+    },
+    {
+      "id": "gstack:scrape/SKILL.md",
+      "name": "scrape",
+      "description": "Pull data from a web page through the Aside browser — your real, already signed-in sessions. Use for: scrape this page, get data from, pull from. (gstack)",
+      "path": "scrape/SKILL.md",
+      "url": "https://github.com/garrytan/gstack/blob/a529769efd989ac5e83e4ee09f1ac7b199e686d3/scrape/SKILL.md",
+      "blobSha": "56d50b1086583632a49496325fca21a4c13a8522",
+      "scope": "skill"
+    },
+    {
+      "id": "gstack:setup-browser-cookies/SKILL.md",
+      "name": "setup-browser-cookies",
+      "description": "Import cookies from your real Chromium browser into the headless browse session. Use for: import browser cookies, login to test site. (gstack)",
+      "path": "setup-browser-cookies/SKILL.md",
+      "url": "https://github.com/garrytan/gstack/blob/a529769efd989ac5e83e4ee09f1ac7b199e686d3/setup-browser-cookies/SKILL.md",
+      "blobSha": "1934b7fc8210b472444f7e308d399258438b4e4d",
+      "scope": "skill"
+    },
+    {
+      "id": "gstack:setup-deploy/SKILL.md",
+      "name": "setup-deploy",
+      "description": "Configure deployment settings for /land-and-deploy. Use for: configure deploy, setup deployment.",
+      "path": "setup-deploy/SKILL.md",
+      "url": "https://github.com/garrytan/gstack/blob/a529769efd989ac5e83e4ee09f1ac7b199e686d3/setup-deploy/SKILL.md",
+      "blobSha": "86ea7de8ae5b996d6f4b6c49c73f89bfdd0762c6",
+      "scope": "skill"
+    },
+    {
+      "id": "gstack:setup-gbrain/SKILL.md",
+      "name": "setup-gbrain",
+      "description": "Set up gbrain for this coding agent: install the CLI, initialize a local PGLite or Supabase brain, register MCP, capture per-remote trust policy. Use for: setup gbrain, install gbrain, connect gbrain. (gstack)",
+      "path": "setup-gbrain/SKILL.md",
+      "url": "https://github.com/garrytan/gstack/blob/a529769efd989ac5e83e4ee09f1ac7b199e686d3/setup-gbrain/SKILL.md",
+      "blobSha": "9cbd9303b81d3d5ce53503a224cf4c3342fabf61",
+      "scope": "skill"
+    },
+    {
+      "id": "gstack:ship/SKILL.md",
+      "name": "ship",
+      "description": "Ship it: merge the base, run tests, review the diff, bump VERSION and CHANGELOG, push and create a PR. Use for: ship it, create a pr, push to main. (gstack)",
+      "path": "ship/SKILL.md",
+      "url": "https://github.com/garrytan/gstack/blob/a529769efd989ac5e83e4ee09f1ac7b199e686d3/ship/SKILL.md",
+      "blobSha": "884378d695bbfa4786bf03bca2593ccf0e90d45d",
+      "scope": "skill"
+    },
+    {
+      "id": "gstack:SKILL.md",
+      "name": "gstack",
+      "description": "Picks the gstack skill that fits a request: planning, review, QA, shipping, docs, security or design. Use for: gstack, which gstack skill, route this with gstack. (gstack)",
+      "path": "SKILL.md",
+      "url": "https://github.com/garrytan/gstack/blob/a529769efd989ac5e83e4ee09f1ac7b199e686d3/SKILL.md",
+      "blobSha": "faf14f9248297926bf162304d45cc92e928e4b62",
+      "scope": "skill"
+    },
+    {
+      "id": "gstack:skillify/SKILL.md",
+      "name": "skillify",
+      "description": "Codify the most recent successful /scrape flow into a permanent browser-skill on disk. Use for: skillify, codify this scrape, save this scrape. (gstack)",
+      "path": "skillify/SKILL.md",
+      "url": "https://github.com/garrytan/gstack/blob/a529769efd989ac5e83e4ee09f1ac7b199e686d3/skillify/SKILL.md",
+      "blobSha": "d0aa8ba9194f85322c614be20fa4cbc0c84e2f3a",
+      "scope": "skill"
+    },
+    {
+      "id": "gstack:spec/SKILL.md",
+      "name": "spec",
+      "description": "Turn vague intent into a precise, executable spec in five phases. Use for: spec this out, file an issue, write up a ticket. (gstack)",
+      "path": "spec/SKILL.md",
+      "url": "https://github.com/garrytan/gstack/blob/a529769efd989ac5e83e4ee09f1ac7b199e686d3/spec/SKILL.md",
+      "blobSha": "221352f54b8798500355c4d8610d19e2dc9b9943",
+      "scope": "skill"
+    },
+    {
+      "id": "gstack:sync-gbrain/SKILL.md",
+      "name": "sync-gbrain",
+      "description": "Keep gbrain current with this repo's code and refresh agent search guidance in CLAUDE.md. Use for: sync gbrain, refresh gbrain, reindex repo. (gstack)",
+      "path": "sync-gbrain/SKILL.md",
+      "url": "https://github.com/garrytan/gstack/blob/a529769efd989ac5e83e4ee09f1ac7b199e686d3/sync-gbrain/SKILL.md",
+      "blobSha": "06db3b5d652b8050ba70d6a5cfc1ebab0705aa81",
+      "scope": "skill"
+    },
+    {
+      "id": "gstack:test-audit/SKILL.md",
+      "name": "test-audit",
+      "description": "Find low-value or duplicate tests and the test-only code they keep alive. Use for: audit the test suite, find low-value tests. (gstack)",
+      "path": "test-audit/SKILL.md",
+      "url": "https://github.com/garrytan/gstack/blob/a529769efd989ac5e83e4ee09f1ac7b199e686d3/test-audit/SKILL.md",
+      "blobSha": "feee1f13787d58c38afc7e08670b6395e81dd16c",
+      "scope": "skill"
+    },
+    {
+      "id": "gstack:ubicloud/SKILL.md",
+      "name": "ubicloud",
+      "description": "Run a heavy suite, build or eval on an ephemeral 16-vCPU Ubicloud VM: TTL-named VMs, a reaper, quota preflight and a hang watchdog. Use for: run on ubicloud, ubicloud vm, remote test run. (gstack)",
+      "path": "ubicloud/SKILL.md",
+      "url": "https://github.com/garrytan/gstack/blob/a529769efd989ac5e83e4ee09f1ac7b199e686d3/ubicloud/SKILL.md",
+      "blobSha": "a6ba4f60c8080ad5beff5cc5d6498eb66bfe759b",
+      "scope": "skill"
+    },
+    {
+      "id": "gstack:unfreeze/SKILL.md",
+      "name": "unfreeze",
+      "description": "Clear the freeze boundary set by /freeze, allowing edits to all directories again. Use for: unfreeze edits, unlock all directories. (gstack)",
+      "path": "unfreeze/SKILL.md",
+      "url": "https://github.com/garrytan/gstack/blob/a529769efd989ac5e83e4ee09f1ac7b199e686d3/unfreeze/SKILL.md",
+      "blobSha": "5c86cd3aa1b3c962560424a444bfce88713d406c",
+      "scope": "skill"
+    },
+    {
+      "id": "gstack:verify/SKILL.md",
+      "name": "verify",
+      "description": "Use when coding: run the checks and tests /ship picks until green. Use for: verify my change, run the checks, make the tests pass. (gstack)",
+      "path": "verify/SKILL.md",
+      "url": "https://github.com/garrytan/gstack/blob/a529769efd989ac5e83e4ee09f1ac7b199e686d3/verify/SKILL.md",
+      "blobSha": "f132cd2d51209eb6146e0284087ad1a1a49d319f",
+      "scope": "skill"
+    },
+    {
+      "id": "gstack:write-skill/SKILL.md",
+      "name": "write-skill",
+      "description": "Write a new agent skill or improve one without bloat: the edit ladder, levels, drift and size checks, full diets. Use for: write a skill, improve this skill. (gstack)",
+      "path": "write-skill/SKILL.md",
+      "url": "https://github.com/garrytan/gstack/blob/a529769efd989ac5e83e4ee09f1ac7b199e686d3/write-skill/SKILL.md",
+      "blobSha": "2f72b267b748380b0374f2127910ca6cda0e7648",
+      "scope": "skill"
+    }
+  ],
+  "excluded": [
+    {
+      "path": "test/fixtures/context-bill/tree-a/alpha/SKILL.md",
+      "reason": "Test fixture, not a distributed skill"
+    },
+    {
+      "path": "test/fixtures/context-bill/tree-a/beta/SKILL.md",
+      "reason": "Test fixture, not a distributed skill"
+    }
+  ]
+}

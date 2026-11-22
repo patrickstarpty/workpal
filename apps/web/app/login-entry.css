@@ -1,0 +1,75 @@
+.login-entry {
+  /* The sign-in entry keeps its FWD light identity independently of app themes. */
+  color-scheme: light;
+  --background: oklch(0.98458 0.00853 67.726);
+  --foreground: oklch(0.28662 0.03384 170.397);
+  --card: oklch(0.991 0.004 67.726);
+  --card-foreground: var(--foreground);
+  --muted: oklch(0.96349 0.02373 63.499);
+  --muted-foreground: oklch(0.46925 0.02917 163.393);
+  --border: oklch(0.90088 0.01343 106.666);
+  --input: var(--border);
+  --ring: oklch(0.52164 0.14086 46.334);
+  --destructive: oklch(0.577 0.245 27.325);
+  --primary: oklch(0.68732 0.16562 51.437);
+  --primary-foreground: var(--foreground);
+  --button-primary: var(--primary);
+  --button-primary-foreground: var(--primary-foreground);
+  --button-primary-border: transparent;
+  --input-radius: 8px;
+  --button-radius: 8px;
+  --button-radius-sm: 6px;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: max(32px, env(safe-area-inset-top)) max(24px, env(safe-area-inset-right))
+    max(32px, env(safe-area-inset-bottom)) max(24px, env(safe-area-inset-left));
+  background: linear-gradient(110deg, rgb(27 23 18 / .38), rgb(27 23 18 / .22)),
+    url("/images/welcome-celebration-restored.png") center / cover no-repeat;
+  background-color: #8b6a49;
+  color: var(--foreground);
+}
+.login-entry-card {
+  width: 100%;
+  max-width: 440px;
+  padding: 40px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--card);
+  color: var(--card-foreground);
+  text-align: left;
+  box-shadow: 0 16px 56px rgb(24 30 25 / .18), 0 1px 2px rgb(24 30 25 / .08);
+}
+.login-entry-brand { display: flex; align-items: center; gap: 10px; }
+.login-entry-mark { flex: none; width: 32px; height: 32px; }
+.login-entry-wordmark { display: block; width: 136px; height: auto; }
+.login-entry-heading { margin: 28px 0; }
+.login-entry-heading h1 {
+  margin: 0;
+  font-size: 28px;
+  line-height: 36px;
+  font-weight: 600;
+  letter-spacing: -.025em;
+  text-wrap: balance;
+}
+.login-entry-form { display: flex; flex-direction: column; gap: 20px; }
+.login-entry-field { display: flex; flex-direction: column; gap: 8px; }
+.login-entry-field label { font-size: 14px; line-height: 20px; font-weight: 500; }
+.login-entry-field [data-slot="input"] { height: 52px; padding: 12px 14px; font-size: 16px; line-height: 24px; }
+.login-entry-form [data-slot="button"] { width: 100%; min-height: 48px; font-size: 15px; font-weight: 600; touch-action: manipulation; }
+.login-entry [data-slot="button"][data-variant="default"] { border-color: transparent; }
+.login-entry [data-slot="button"][data-variant="default"]:not(:disabled):hover {
+  background-color: color-mix(in oklab, var(--primary) 90%, var(--foreground));
+}
+.login-entry-error { margin: 4px 0 0; color: var(--destructive); font-size: 13px; line-height: 20px; overflow-wrap: anywhere; }
+.login-entry-notice { margin: 0 0 20px; color: var(--muted-foreground); font-size: 14px; line-height: 22px; }
+.login-entry-retry { margin-top: 12px; }
+@media (max-width: 520px) {
+  .login-entry { padding: max(24px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right)) max(24px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left)); }
+  .login-entry-card { padding: 32px 24px; }
+  .login-entry-heading h1 { font-size: 26px; line-height: 34px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .login-entry [data-slot="input"], .login-entry [data-slot="button"] { transition: none; }
+}

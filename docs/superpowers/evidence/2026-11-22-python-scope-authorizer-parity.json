@@ -1,0 +1,475 @@
+{
+  "scope": "Original scope authorizer decision/error/query order against isolated rows. No frame decoder, transport, SQL or revocation timing equivalence certified.",
+  "fixtures": [
+    {
+      "Scope": "chat",
+      "User": "00000000-0000-0000-0000-000000000001",
+      "Workspace": "00000000-0000-0000-0000-000000000002",
+      "ID": "00000000-0000-0000-0000-000000000003",
+      "Issue": false,
+      "Orphan": false,
+      "Failure": "",
+      "Missing": false
+    },
+    {
+      "Scope": "chat",
+      "User": "00000000-0000-0000-0000-000000000009",
+      "Workspace": "00000000-0000-0000-0000-000000000002",
+      "ID": "00000000-0000-0000-0000-000000000003",
+      "Issue": false,
+      "Orphan": false,
+      "Failure": "",
+      "Missing": false
+    },
+    {
+      "Scope": "chat",
+      "User": "",
+      "Workspace": "00000000-0000-0000-0000-000000000002",
+      "ID": "00000000-0000-0000-0000-000000000003",
+      "Issue": false,
+      "Orphan": false,
+      "Failure": "",
+      "Missing": false
+    },
+    {
+      "Scope": "chat",
+      "User": "00000000-0000-0000-0000-000000000001",
+      "Workspace": "00000000-0000-0000-0000-000000000009",
+      "ID": "00000000-0000-0000-0000-000000000003",
+      "Issue": false,
+      "Orphan": false,
+      "Failure": "",
+      "Missing": false
+    },
+    {
+      "Scope": "chat",
+      "User": "00000000-0000-0000-0000-000000000001",
+      "Workspace": "bad",
+      "ID": "00000000-0000-0000-0000-000000000003",
+      "Issue": false,
+      "Orphan": false,
+      "Failure": "",
+      "Missing": false
+    },
+    {
+      "Scope": "chat",
+      "User": "00000000-0000-0000-0000-000000000001",
+      "Workspace": "00000000-0000-0000-0000-000000000002",
+      "ID": "bad",
+      "Issue": false,
+      "Orphan": false,
+      "Failure": "",
+      "Missing": false
+    },
+    {
+      "Scope": "unknown",
+      "User": "00000000-0000-0000-0000-000000000001",
+      "Workspace": "00000000-0000-0000-0000-000000000002",
+      "ID": "00000000-0000-0000-0000-000000000003",
+      "Issue": false,
+      "Orphan": false,
+      "Failure": "",
+      "Missing": false
+    },
+    {
+      "Scope": "task",
+      "User": "00000000-0000-0000-0000-000000000001",
+      "Workspace": "00000000-0000-0000-0000-000000000002",
+      "ID": "00000000-0000-0000-0000-000000000004",
+      "Issue": false,
+      "Orphan": false,
+      "Failure": "",
+      "Missing": false
+    },
+    {
+      "Scope": "task",
+      "User": "00000000-0000-0000-0000-000000000009",
+      "Workspace": "00000000-0000-0000-0000-000000000002",
+      "ID": "00000000-0000-0000-0000-000000000004",
+      "Issue": false,
+      "Orphan": false,
+      "Failure": "",
+      "Missing": false
+    },
+    {
+      "Scope": "task",
+      "User": "",
+      "Workspace": "00000000-0000-0000-0000-000000000002",
+      "ID": "00000000-0000-0000-0000-000000000004",
+      "Issue": true,
+      "Orphan": false,
+      "Failure": "",
+      "Missing": false
+    },
+    {
+      "Scope": "task",
+      "User": "00000000-0000-0000-0000-000000000001",
+      "Workspace": "00000000-0000-0000-0000-000000000002",
+      "ID": "00000000-0000-0000-0000-000000000004",
+      "Issue": false,
+      "Orphan": true,
+      "Failure": "",
+      "Missing": false
+    },
+    {
+      "Scope": "task",
+      "User": "00000000-0000-0000-0000-000000000001",
+      "Workspace": "00000000-0000-0000-0000-000000000002",
+      "ID": "00000000-0000-0000-0000-000000000004",
+      "Issue": false,
+      "Orphan": false,
+      "Failure": "task",
+      "Missing": false
+    },
+    {
+      "Scope": "task",
+      "User": "00000000-0000-0000-0000-000000000001",
+      "Workspace": "00000000-0000-0000-0000-000000000002",
+      "ID": "00000000-0000-0000-0000-000000000004",
+      "Issue": false,
+      "Orphan": false,
+      "Failure": "task",
+      "Missing": true
+    },
+    {
+      "Scope": "task",
+      "User": "00000000-0000-0000-0000-000000000001",
+      "Workspace": "00000000-0000-0000-0000-000000000002",
+      "ID": "00000000-0000-0000-0000-000000000004",
+      "Issue": false,
+      "Orphan": false,
+      "Failure": "chat",
+      "Missing": false
+    },
+    {
+      "Scope": "task",
+      "User": "00000000-0000-0000-0000-000000000001",
+      "Workspace": "00000000-0000-0000-0000-000000000002",
+      "ID": "00000000-0000-0000-0000-000000000004",
+      "Issue": false,
+      "Orphan": false,
+      "Failure": "chat",
+      "Missing": true
+    },
+    {
+      "Scope": "task",
+      "User": "00000000-0000-0000-0000-000000000001",
+      "Workspace": "00000000-0000-0000-0000-000000000002",
+      "ID": "00000000-0000-0000-0000-000000000004",
+      "Issue": true,
+      "Orphan": false,
+      "Failure": "issue",
+      "Missing": false
+    },
+    {
+      "Scope": "task",
+      "User": "00000000-0000-0000-0000-000000000001",
+      "Workspace": "00000000-0000-0000-0000-000000000002",
+      "ID": "00000000-0000-0000-0000-000000000004",
+      "Issue": true,
+      "Orphan": false,
+      "Failure": "issue",
+      "Missing": true
+    },
+    {
+      "Scope": "chat",
+      "User": "00000000-0000-0000-0000-000000000001",
+      "Workspace": "00000000-0000-0000-0000-000000000002",
+      "ID": "00000000-0000-0000-0000-000000000003",
+      "Issue": false,
+      "Orphan": false,
+      "Failure": "chat",
+      "Missing": false
+    },
+    {
+      "Scope": "chat",
+      "User": "00000000-0000-0000-0000-000000000001",
+      "Workspace": "00000000-0000-0000-0000-000000000002",
+      "ID": "00000000-0000-0000-0000-000000000003",
+      "Issue": false,
+      "Orphan": false,
+      "Failure": "chat",
+      "Missing": true
+    }
+  ],
+  "go": [
+    {
+      "allowed": true,
+      "calls": [
+        "chat"
+      ],
+      "error": ""
+    },
+    {
+      "allowed": false,
+      "calls": [
+        "chat"
+      ],
+      "error": ""
+    },
+    {
+      "allowed": false,
+      "calls": [
+        "chat"
+      ],
+      "error": ""
+    },
+    {
+      "allowed": false,
+      "calls": [
+        "chat"
+      ],
+      "error": ""
+    },
+    {
+      "allowed": false,
+      "calls": [],
+      "error": ""
+    },
+    {
+      "allowed": false,
+      "calls": [],
+      "error": ""
+    },
+    {
+      "allowed": false,
+      "calls": [],
+      "error": ""
+    },
+    {
+      "allowed": true,
+      "calls": [
+        "task",
+        "chat"
+      ],
+      "error": ""
+    },
+    {
+      "allowed": false,
+      "calls": [
+        "task",
+        "chat"
+      ],
+      "error": ""
+    },
+    {
+      "allowed": true,
+      "calls": [
+        "task",
+        "issue"
+      ],
+      "error": ""
+    },
+    {
+      "allowed": false,
+      "calls": [
+        "task"
+      ],
+      "error": ""
+    },
+    {
+      "allowed": false,
+      "calls": [
+        "task"
+      ],
+      "error": "database down"
+    },
+    {
+      "allowed": false,
+      "calls": [
+        "task"
+      ],
+      "error": ""
+    },
+    {
+      "allowed": false,
+      "calls": [
+        "task",
+        "chat"
+      ],
+      "error": "database down"
+    },
+    {
+      "allowed": false,
+      "calls": [
+        "task",
+        "chat"
+      ],
+      "error": ""
+    },
+    {
+      "allowed": false,
+      "calls": [
+        "task",
+        "issue"
+      ],
+      "error": "database down"
+    },
+    {
+      "allowed": false,
+      "calls": [
+        "task",
+        "issue"
+      ],
+      "error": ""
+    },
+    {
+      "allowed": false,
+      "calls": [
+        "chat"
+      ],
+      "error": "database down"
+    },
+    {
+      "allowed": false,
+      "calls": [
+        "chat"
+      ],
+      "error": ""
+    }
+  ],
+  "python": [
+    {
+      "allowed": true,
+      "error": "",
+      "calls": [
+        "chat"
+      ]
+    },
+    {
+      "allowed": false,
+      "error": "",
+      "calls": [
+        "chat"
+      ]
+    },
+    {
+      "allowed": false,
+      "error": "",
+      "calls": [
+        "chat"
+      ]
+    },
+    {
+      "allowed": false,
+      "error": "",
+      "calls": [
+        "chat"
+      ]
+    },
+    {
+      "allowed": false,
+      "error": "",
+      "calls": []
+    },
+    {
+      "allowed": false,
+      "error": "",
+      "calls": []
+    },
+    {
+      "allowed": false,
+      "error": "",
+      "calls": []
+    },
+    {
+      "allowed": true,
+      "error": "",
+      "calls": [
+        "task",
+        "chat"
+      ]
+    },
+    {
+      "allowed": false,
+      "error": "",
+      "calls": [
+        "task",
+        "chat"
+      ]
+    },
+    {
+      "allowed": true,
+      "error": "",
+      "calls": [
+        "task",
+        "issue"
+      ]
+    },
+    {
+      "allowed": false,
+      "error": "",
+      "calls": [
+        "task"
+      ]
+    },
+    {
+      "allowed": false,
+      "error": "database down",
+      "calls": [
+        "task"
+      ]
+    },
+    {
+      "allowed": false,
+      "error": "",
+      "calls": [
+        "task"
+      ]
+    },
+    {
+      "allowed": false,
+      "error": "database down",
+      "calls": [
+        "task",
+        "chat"
+      ]
+    },
+    {
+      "allowed": false,
+      "error": "",
+      "calls": [
+        "task",
+        "chat"
+      ]
+    },
+    {
+      "allowed": false,
+      "error": "database down",
+      "calls": [
+        "task",
+        "issue"
+      ]
+    },
+    {
+      "allowed": false,
+      "error": "",
+      "calls": [
+        "task",
+        "issue"
+      ]
+    },
+    {
+      "allowed": false,
+      "error": "database down",
+      "calls": [
+        "chat"
+      ]
+    },
+    {
+      "allowed": false,
+      "error": "",
+      "calls": [
+        "chat"
+      ]
+    }
+  ],
+  "mismatches": [],
+  "source_sha256": {
+    "server/go/cmd/server/scope_authorizer.go": "c9a162eaac364deaf35d1f8955f86eb22b25eee6c2ee9ec50182c41ac1cf91e5",
+    "server/tests/parity/go_scope_authorizer/main.go": "96422800912fed6ef84a364c9cfbb8c3b9f0c49ecbf991bd128c573e8fd67259",
+    "server/src/workpal_backend/realtime/scope_authorizer.py": "5722957efaa8fcb434689d10eb13f04d589b0917df420ac400ef9a0fc3c3b1f3",
+    "server/src/workpal_backend/infrastructure/query_errors.py": "63bd371d9a2855de98749f0c0de4e1186277e013625ac813e3243d072f96b3fc"
+  },
+  "binary_sha256": "2adac78e5354712f846221d6353f1915b0f7edfc760bd0e8263fda90ccef0578"
+}

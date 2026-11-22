@@ -1,0 +1,94 @@
+{
+  "batch": "identity-lookup",
+  "status": "source-derived; parity not executed",
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/api/me",
+      "public": false,
+      "implemented_python": true
+    }
+  ],
+  "sources": [
+    "server/go/cmd/server/router.go:1782",
+    "server/go/internal/handler/auth.go:67",
+    "server/go/internal/handler/auth.go:96",
+    "server/go/internal/handler/auth.go:498",
+    "server/go/internal/handler/handler.go:941",
+    "server/go/internal/handler/avatar.go:173",
+    "server/go/internal/middleware/auth.go:59",
+    "server/go/pkg/db/queries/user.sql:1",
+    "server/src/workpal_backend/auth/routes.py:90",
+    "server/src/workpal_backend/auth/service.py:12",
+    "server/src/workpal_backend/auth/dependencies.py:13",
+    "server/src/workpal_backend/auth/sessions.py:13",
+    "server/src/workpal_backend/auth/models.py:5",
+    "packages/core/api/client.ts:1196",
+    "packages/core/auth/store.ts:103",
+    "packages/core/auth/store.ts:184",
+    "packages/views/auth/login-page.tsx:138"
+  ],
+  "fixtures": [
+    {
+      "name": "persisted development session",
+      "setup": "Persist exactly the supplied user; sign a normal live session for its id with dev auth enabled",
+      "status": 200,
+      "body": {
+        "id": "11111111-1111-4111-8111-111111111111",
+        "name": "Development User",
+        "email": "dev@workpal.local",
+        "avatar_url": null,
+        "language": null,
+        "timezone": null,
+        "onboarded_at": null,
+        "onboarding_questionnaire": {},
+        "profile_description": "",
+        "whats_new_seen_version": null,
+        "star_prompt_shown_count": 0,
+        "star_prompt_last_shown_at": null,
+        "star_prompt_starred_at": null,
+        "created_at": "2026-11-21T00:00:00Z",
+        "updated_at": "2026-11-21T00:00:00Z"
+      }
+    },
+    {
+      "name": "anonymous Go middleware",
+      "status": 401,
+      "raw_body": "{\"error\":\"missing authorization\"}\n"
+    },
+    {
+      "name": "invalid Go token",
+      "status": 401,
+      "raw_body": "{\"error\":\"invalid token\"}\n"
+    },
+    {
+      "name": "handler missing identity",
+      "status": 401,
+      "body": {
+        "error": "user not authenticated"
+      }
+    },
+    {
+      "name": "deleted user Go handler",
+      "status": 401,
+      "body": {
+        "error": "user not found"
+      }
+    },
+    {
+      "name": "Go query failure",
+      "status": 500,
+      "body": {
+        "error": "failed to load user"
+      }
+    }
+  ],
+  "policy": "Only approved development login establishes local sessions. No public directory, email lookup endpoint, external verification or invented identity support.",
+  "effects": "GetUser SELECT by authenticated id; no handler writes, membership query, business event or outbox producer. Authentication may renew cookies.",
+  "next_files": [
+    "server/src/workpal_backend/auth/routes.py",
+    "server/src/workpal_backend/auth/service.py",
+    "server/src/workpal_backend/auth/dependencies.py",
+    "server/tests/test_identity_lookup_contracts.py"
+  ]
+}

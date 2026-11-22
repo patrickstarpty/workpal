@@ -1,0 +1,1175 @@
+{
+  "version": 1,
+  "coverage_complete": false,
+  "files": [
+    {
+      "path": "packages/views/issues/components/comment-card.tsx",
+      "whole_source": true,
+      "sha256": "7a73b902e970cd7582952cca944c342fff36a04d4e4fc087412c5a913678e8d6"
+    }
+  ],
+  "source_snapshot": {
+    "path": "packages/views/issues/components/comment-card.tsx",
+    "sha256": "7a73b902e970cd7582952cca944c342fff36a04d4e4fc087412c5a913678e8d6",
+    "line_count": 1742,
+    "source": "\"use client\";\n\nimport { Fragment, memo, useCallback, useEffect, useRef, useState, type ReactNode } from \"react\";\nimport { CheckCircle2, ChevronRight, CornerUpLeft, ListChevronsDownUp, Copy, Link2, Loader2, MessageSquare, MessageSquarePlus, MoreHorizontal, Pencil, Plus, RotateCcw, SmilePlus, Trash2 } from \"@workpal/ui/icons\";\nimport { toast } from \"sonner\";\nimport { Card } from \"@workpal/ui/components/ui/card\";\nimport { Button, buttonVariants } from \"@workpal/ui/components/ui/button\";\nimport {\n  DropdownMenu,\n  DropdownMenuTrigger,\n  DropdownMenuContent,\n} from \"@workpal/ui/components/ui/dropdown-menu\";\nimport { Tooltip, TooltipTrigger, TooltipContent } from \"@workpal/ui/components/ui/tooltip\";\nimport {\n  AlertDialog,\n  AlertDialogAction,\n  AlertDialogCancel,\n  AlertDialogContent,\n  AlertDialogDescription,\n  AlertDialogFooter,\n  AlertDialogHeader,\n  AlertDialogTitle,\n} from \"@workpal/ui/components/ui/alert-dialog\";\nimport { ActorAvatar } from \"../../common/actor-avatar\";\nimport { shouldOpenRowMenu, useRowMenu } from \"../../common/point-menu\";\nimport { MenuActionGroups, useContextMenuScope } from \"../../common/context-menu-scope\";\nimport { dropdownPrimitives } from \"../../common/menu-primitives\";\nimport type { RowActionItem } from \"../../common/row-actions-menu\";\nimport { DeferredTooltip } from \"../../common/deferred-tooltip\";\nimport { ReactionBar } from \"@workpal/ui/components/common/reaction-bar\";\nimport { QuickEmojiPicker } from \"@workpal/ui/components/common/quick-emoji-picker\";\nimport { cn } from \"@workpal/ui/lib/utils\";\nimport { copyText } from \"@workpal/ui/lib/clipboard\";\nimport { useActorName } from \"@workpal/core/workspace/hooks\";\nimport { useLocale, useTimeAgo } from \"../../i18n\";\nimport { ContentEditor, type ContentEditorRef, ReadonlyContent, useFileDropZone, FileDropOverlay, Attachment as AttachmentRenderer, AttachmentDownloadProvider, useUploadGate, useComposerSubmit } from \"../../editor\";\nimport { useCommentUploads } from \"./use-comment-uploads\";\nimport { FileUploadButton } from \"@workpal/ui/components/common/file-upload-button\";\nimport { api, dispatchReasonCode, errorCode } from \"@workpal/core/api\";\nimport { ReplyInput, type ReplyInputHandle } from \"./reply-input\";\nimport { VirtualThreadRow, shouldVirtualizeThreadRows } from \"./virtual-thread-row\";\nimport { CommentTriggerChips } from \"./comment-trigger-chips\";\nimport { AppCallChips } from \"./app-call-chips\";\nimport { useCommentTriggerPreview } from \"../hooks/use-comment-trigger-preview\";\nimport { useRecipientActions } from \"../hooks/use-recipient-actions\";\nimport { SteerBadge, SteerReceipts } from \"./steer-receipts\";\nimport type { AgentTask, TimelineEntry, Attachment } from \"@workpal/core/types\";\nimport { contentReferencesAttachment } from \"@workpal/core/types\";\nimport { isDeletedComment } from \"@workpal/core/issues/comment-deletion\";\nimport { commentSupplementReceipts, isSupplementInFlight } from \"@workpal/core/issues/run-steering\";\nimport { useConfigStore } from \"@workpal/core/config\";\nimport {\n  orderStandaloneAttachments,\n  selectStandaloneAttachments,\n  standaloneAttachmentGroup,\n} from \"@workpal/core/attachments/image-sequence\";\nimport { useCommentCollapseStore, useCommentDraftStore } from \"@workpal/core/issues/stores\";\nimport { useT } from \"../../i18n\";\nimport { CommentsFoldBar } from \"./resolved-thread-bar\";\nimport { deriveThreadResolution } from \"./thread-utils\";\nimport { RevisionConflictCompare } from \"./revision-conflict-compare\";\nimport { InlineCommentRun, PlacedInlineCommentRun, useInlineCommentRunState, type InlineCommentRunState } from \"./inline-comment-run\";\nimport { EMPTY_COMMENT_RUNS, isRunFailureNotice, orderThreadWithRuns, type CommentRun, type ThreadRunSlot } from \"./comment-runs\";\nimport { descriptionPreview } from \"./description-preview\";\nimport { useCommentAnnotations } from \"./use-comment-annotations\";\nimport { useAttachmentVersions } from \"./deliverables/attachment-versions\";\nimport { VersionBadge } from \"./deliverables/version-badge\";\nimport { useRunCommentMotion } from \"./use-run-comment-motion\";\nimport { WakeupSourceChip } from \"./wakeup-source-chip\";\n\nconst commentActionClassName =\n  \"text-muted-foreground aria-expanded:bg-transparent aria-expanded:hover:bg-muted dark:aria-expanded:hover:bg-muted/50\";\n\nconst highlightedCommentBackgroundClass =\n  \"bg-[color-mix(in_srgb,var(--card)_95%,var(--brand)_5%)]\";\nconst stickyHeaderFadeClass =\n  \"after:pointer-events-none after:absolute after:inset-x-0 after:top-full after:h-1 after:bg-[inherit] after:[mask-image:linear-gradient(to_bottom,#000,transparent)] after:[-webkit-mask-image:linear-gradient(to_bottom,#000,transparent)]\";\n\nfunction StickyHeaderShell({\n  className,\n  sticky = true,\n  highlighted,\n  children,\n}: {\n  className?: string;\n  sticky?: boolean;\n  highlighted?: boolean;\n  children: ReactNode;\n}) {\n  if (!sticky) {\n    return (\n      <div className={cn(highlighted && highlightedCommentBackgroundClass, className)}>\n        {children}\n      </div>\n    );\n  }\n\n  // `mb-1` reserves room for the fade's `h-1` below the header, so at rest the\n  // fade covers empty space instead of the first line of the body. Callers\n  // take the same 4px out of their bottom padding.\n  return (\n    <div\n      className={cn(\n        \"sticky top-0 z-10 mb-1 transition-colors duration-700\",\n        !highlighted && stickyHeaderFadeClass,\n        highlighted ? highlightedCommentBackgroundClass : \"bg-card\",\n        className,\n      )}\n    >\n      {children}\n    </div>\n  );\n}\n\n// Types\n\ninterface CommentCardProps {\n  issueId: string;\n  replyScrollParent?: HTMLElement | null;\n  runs?: CommentRun[];\n  runViewState?: InlineCommentRunState;\n  enteringRunIds?: ReadonlySet<string>;\n  entry: TimelineEntry;\n  /**\n   * Flat list of every nested reply under this thread root, in render order.\n   * Computed once in `issue-detail.tsx`'s `timelineView` and stabilized so\n   * the array reference only changes when *this* thread's replies change —\n   * an unrelated thread receiving a new reply must NOT bust this card's\n   * memo. Passing the full Map here used to do exactly that.\n   */\n  replies: TimelineEntry[];\n  currentUserId?: string;\n  /**\n   * True when the current user is a workspace owner/admin and can therefore\n   * moderate comments authored by anyone — restoring the admin override that\n   * the backend already grants at `comment.go:507-512`. Computed once in\n   * `issue-detail.tsx` and threaded down so neither this component nor\n   * `CommentRow` has to rerun the rule per row.\n   */\n  canModerate?: boolean;\n  onReply: (parentId: string, content: string, attachmentIds?: string[], suppressAgentIds?: string[], steerTaskIds?: string[]) => Promise<string | boolean>;\n  onReplyAccepted?: (commentId: string) => void;\n  onEdit: (commentId: string, content: string, attachmentIds: string[], suppressAgentIds?: string[], contentBase?: string) => Promise<void>;\n  onDelete: (commentId: string) => void;\n  onToggleReaction: (commentId: string, emoji: string) => void;\n  onCreateSubIssue?: (commentId: string, prompt?: string) => void;\n  /** Resolve/unresolve any comment in this thread (commentId = the target row). */\n  onResolveToggle?: (commentId: string, resolved: boolean) => void;\n  /** Copy a deep link (`#comment-…`) to a single comment in this thread. */\n  onCopyLink?: (commentId: string) => void;\n  /** Scroll to and flash a comment in this thread. */\n  onJumpToComment?: (commentId: string) => void;\n  /**\n   * When non-null, the thread root is currently rendered as a resolved-but-\n   * expanded card. Pass a \"Collapse\" affordance into the header so the user\n   * can fold the thread back to the bar; the parent owns the session state.\n   */\n  onCollapseResolved?: () => void;\n  /**\n   * Per-session set of thread ROOT ids whose reply-resolution fold is expanded.\n   * Used only when a REPLY is the resolution (root-resolution folding is handled\n   * one level up in issue-detail's resolved-bar). Keyed on root id.\n   */\n  expandedResolvedIds?: ReadonlySet<string>;\n  onResolvedExpandChange?: (rootId: string, expand: boolean) => void;\n  /** ID of the comment to highlight (flash animation). */\n  highlightedCommentId?: string | null;\n}\n\n// Shared delete confirmation dialog\n\nfunction DeleteCommentDialog({\n  open,\n  onOpenChange,\n  onConfirm,\n  hasReplies,\n}: {\n  open: boolean;\n  onOpenChange: (open: boolean) => void;\n  onConfirm: () => void;\n  hasReplies?: boolean;\n}) {\n  const { t } = useT(\"issues\");\n  // Only a server that declares it keeps the replies (#8296); an older one\n  // deletes them with the comment, and the copy must say so.\n  const keepsReplies = useConfigStore((s) => s.commentDeleteKeepRepliesSupported);\n  return (\n    <AlertDialog open={open} onOpenChange={onOpenChange}>\n      <AlertDialogContent>\n        <AlertDialogHeader>\n          <AlertDialogTitle>{t(($) => $.comment.delete_title)}</AlertDialogTitle>\n          <AlertDialogDescription>\n            {!hasReplies\n              ? t(($) => $.comment.delete_desc)\n              : keepsReplies\n                ? t(($) => $.comment.delete_desc_replies_kept)\n                : t(($) => $.comment.delete_desc_with_replies)}\n          </AlertDialogDescription>\n        </AlertDialogHeader>\n        <AlertDialogFooter>\n          <AlertDialogCancel>{t(($) => $.comment.cancel_action)}</AlertDialogCancel>\n          <AlertDialogAction variant=\"destructive\" onClick={onConfirm}>\n            {t(($) => $.comment.delete_action)}\n          </AlertDialogAction>\n        </AlertDialogFooter>\n      </AlertDialogContent>\n    </AlertDialog>\n  );\n}\n\n// Standalone attachment list — renders attachments not already in the markdown\n\nexport function AttachmentList({\n  attachments,\n  content,\n  className,\n  onRemove,\n}: {\n  attachments?: Attachment[];\n  content?: string;\n  className?: string;\n  onRemove?: (attachmentId: string) => void;\n}) {\n  const versions = useAttachmentVersions();\n  if (!attachments?.length) return null;\n  // Skip attachments whose URL (stable or legacy) is already referenced in the\n  // markdown content, and duplicates of the same file that are referenced.\n  // Shared with the image-sequence builder (MUL-5752) so the cards rendered\n  // here and the images the viewer pages through can't disagree — as is the\n  // grouping below, so paging follows the screen (MUL-7649).\n  const standalone = orderStandaloneAttachments(\n    selectStandaloneAttachments(content, attachments),\n  );\n  if (!standalone.length) return null;\n\n  const images = standalone.filter((a) => standaloneAttachmentGroup(a) === \"image\");\n  const files = standalone.filter((a) => standaloneAttachmentGroup(a) === \"file\");\n  const render = (a: Attachment) => {\n    const version = versions?.get(a.id);\n    return (\n      <AttachmentRenderer\n        key={a.id}\n        attachment={{ kind: \"record\", attachment: a }}\n        layout=\"card\"\n        badge={version ? <VersionBadge version={version} /> : undefined}\n        editable={!!onRemove}\n        onDelete={onRemove ? () => onRemove(a.id) : undefined}\n      />\n    );\n  };\n\n  // Images stack at full size so they read without opening (MUL-7736), or —\n  // under the timeline's \"thumbnails\" image preference — sit in a row of\n  // thumbnails (editor/styles/attachment.css, MUL-9037). Every other file —\n  // HTML too: an uploaded file is a deliverable to open, not part of the\n  // text — is a card in a grid, not a full-width row each.\n  return (\n    <AttachmentDownloadProvider attachments={attachments}>\n      <div className={cn(\"flex flex-col gap-2\", className)}>\n        {images.length > 0 && (\n          <div data-comment-image-list className=\"flex flex-col items-start gap-2\">{images.map(render)}</div>\n        )}\n        {files.length > 0 && (\n          <div className=\"grid grid-cols-[repeat(auto-fill,minmax(min(15rem,100%),1fr))] gap-2\">\n            {files.map(render)}\n          </div>\n        )}\n      </div>\n    </AttachmentDownloadProvider>\n  );\n}\n\nfunction collectActiveAttachmentIds(\n  content: string,\n  attachments: Attachment[],\n  retainedStandaloneIds?: Set<string> | null,\n): string[] {\n  const ids = new Set<string>();\n  for (const attachment of attachments) {\n    if (contentReferencesAttachment(content, attachment)) ids.add(attachment.id);\n  }\n  for (const id of retainedStandaloneIds ?? []) ids.add(id);\n  return [...ids];\n}\n\nfunction sameIdSet(a: string[], b: string[]): boolean {\n  if (a.length !== b.length) return false;\n  const set = new Set(a);\n  return b.every((id) => set.has(id));\n}\n\nfunction initialStandaloneAttachmentIds(entry: TimelineEntry): Set<string> {\n  const content = entry.content ?? \"\";\n  return new Set(\n    (entry.attachments ?? [])\n      .filter((attachment) => !contentReferencesAttachment(content, attachment))\n      .map((attachment) => attachment.id),\n  );\n}\n\nfunction retryableAgentFailureComment(entry: TimelineEntry): entry is TimelineEntry & { source_task_id: string } {\n  return (\n    entry.actor_type === \"agent\" &&\n    entry.comment_type === \"system\" &&\n    typeof entry.source_task_id === \"string\" &&\n    entry.source_task_id.length > 0\n  );\n}\n\nfunction TaskCommentRetryButton({\n  issueId,\n  taskId,\n  className,\n}: {\n  issueId: string;\n  taskId: string;\n  className?: string;\n}) {\n  const { t } = useT(\"issues\");\n  const [retrying, setRetrying] = useState(false);\n\n  const handleRetry = async () => {\n    if (retrying) return;\n    setRetrying(true);\n    try {\n      await api.rerunIssue(issueId, taskId);\n    } catch (e) {\n      // Rerun re-checks the operator's invoke permission (MUL-4525); a\n      // structured 403 is a permission block, not a transient failure.\n      toast.error(\n        dispatchReasonCode(e) === \"invocation_not_allowed\"\n          ? t(($) => $.execution_log.retry_blocked)\n          : e instanceof Error\n            ? e.message\n            : t(($) => $.execution_log.retry_failed),\n      );\n    } finally {\n      setRetrying(false);\n    }\n  };\n\n  return (\n    <div className={cn(\"flex\", className)}>\n      <Button\n        type=\"button\"\n        size=\"sm\"\n        variant=\"outline\"\n        onClick={handleRetry}\n        disabled={retrying}\n        aria-label={t(($) => $.execution_log.retry_task_aria)}\n      >\n        {retrying ? (\n          <Loader2 className=\"h-3.5 w-3.5 animate-spin\" />\n        ) : (\n          <RotateCcw className=\"h-3.5 w-3.5\" />\n        )}\n        {t(($) => $.execution_log.retry_task_tooltip)}\n      </Button>\n    </div>\n  );\n}\n\n// Shared edit-attachment state hook\n\nconst NEVER_STEER = () => false;\n\nfunction useEditAttachmentState(\n  issueId: string,\n  entry: TimelineEntry,\n  onEdit: (commentId: string, content: string, attachmentIds: string[], suppressAgentIds?: string[], contentBase?: string) => Promise<void>,\n) {\n  const { t } = useT(\"issues\");\n  const { t: tEditor } = useT(\"editor\");\n  const [editing, setEditing] = useState(false);\n  const [initialValue, setInitialValue] = useState(entry.content ?? \"\");\n  const [initialContentBase, setInitialContentBase] = useState(entry.content ?? \"\");\n  const [revisionConflict, setRevisionConflict] = useState(false);\n  const editorRef = useRef<ContentEditorRef>(null);\n  // Saving mid-upload would persist the edit without the file the user just\n  // pasted in — same failure as posting a new comment.\n  const uploadGate = useUploadGate(editorRef);\n  const cancelledRef = useRef(false);\n  const [content, setContent] = useState(entry.content ?? \"\");\n  // Uploads for this edit session (MUL-5181) — coordinator-owned, persisted in\n  // the draft store keyed by the edit draft so scroll-out/close no longer drops\n  // an in-flight upload.\n  const draftKey = `edit:${issueId}:${entry.id}` as const;\n  // `gate` widens the editor gate with coordinator-owned placeholders — see\n  // CommentInput.\n  const { uploads, attachments: pendingAttachments, handleUpload, removeUpload, gate } =\n    useCommentUploads(draftKey, { issueId }, uploadGate, editorRef);\n  const [retainedStandaloneIds, setRetainedStandaloneIds] = useState<Set<string> | null>(null);\n  const triggerPreview = useCommentTriggerPreview({\n    issueId,\n    parentId: entry.parent_id ?? undefined,\n    editingCommentId: entry.id,\n    content: editing ? content : \"\",\n  });\n  // An edit neither steers nor stops a run: it can only skip a recipient.\n  const { recipients, routing, setAction: setRecipientAction, reset: resetRecipients } = useRecipientActions({\n    issueId,\n    agents: triggerPreview.agents,\n    allowSteer: false,\n    steerByDefault: NEVER_STEER,\n    resetKey: `${issueId}:${entry.id}:${entry.parent_id ?? \"\"}`,\n  });\n\n  const editorAttachments = pendingAttachments.length > 0\n    ? [...(entry.attachments ?? []), ...pendingAttachments]\n    : entry.attachments;\n\n  useEffect(() => {\n    if (revisionConflict) setInitialContentBase(entry.content ?? \"\");\n  }, [entry.content, revisionConflict]);\n\n  const { isDragOver, dropZoneProps } = useFileDropZone({\n    onDrop: (files) => files.forEach((f) => editorRef.current?.uploadFile(f)),\n    enabled: editing,\n  });\n\n  const getDraft = useCommentDraftStore.getState().getDraft;\n  const setDraft = useCommentDraftStore((s) => s.setDraft);\n  const clearDraft = useCommentDraftStore((s) => s.clearDraft);\n\n  const standaloneEditAttachments = (entry.attachments ?? []).filter((a) =>\n    retainedStandaloneIds?.has(a.id),\n  );\n\n  const resetState = () => {\n    setEditing(false);\n    setRevisionConflict(false);\n    setContent(entry.content ?? \"\");\n    resetRecipients();\n    setRetainedStandaloneIds(null);\n    // clearDraft drops both the edit text and its pending attachments.\n    clearDraft(draftKey);\n  };\n\n  const startEdit = () => {\n    cancelledRef.current = false;\n    const draft = getDraft(draftKey) ?? entry.content ?? \"\";\n    setInitialValue(draft);\n    setInitialContentBase(entry.content ?? \"\");\n    setContent(draft);\n    setRetainedStandaloneIds(initialStandaloneAttachmentIds(entry));\n    setEditing(true);\n  };\n\n  const cancelEdit = () => {\n    cancelledRef.current = true;\n    resetState();\n  };\n\n  /**\n   * Discard the local draft and continue from the version the server holds.\n   * Local-only — the server already stores this content, so nothing is written.\n   * The editor is dirty (that is why the conflict exists), so `adoptContent` is\n   * the only channel that lands: a plain `defaultValue` change is mount-only.\n   */\n  const adoptServerVersion = () => {\n    const serverContent = entry.content ?? \"\";\n    editorRef.current?.adoptContent(serverContent);\n    setContent(serverContent);\n    setDraft(draftKey, serverContent);\n    setInitialContentBase(serverContent);\n    setRevisionConflict(false);\n  };\n\n  // Await-then-render save (MUL-5181): shared submit contract, with the edit-\n  // only concerns folded into onSubmit — the cancel-race guard, the no-op\n  // short-circuit, and the failure toast. The hook owns the empty guard,\n  // upload re-check, single-flight, and lock/spin via `submitting`.\n  // Stale-submit guard (MUL-5181 P0) — see CommentInput. The edit hook lives\n  // in CommentRow, so \"unmounted\" here means the issue detail closed.\n  const editMountedRef = useRef(true);\n  useEffect(() => {\n    editMountedRef.current = true;\n    return () => {\n      editMountedRef.current = false;\n    };\n  }, []);\n  const submittedEntryRef = useRef<unknown>(null);\n\n  const { submitting: saving, submit: saveEdit } = useComposerSubmit({\n    editorRef,\n    uploadGate: gate,\n    onSubmit: async (trimmed) => {\n      // A save racing a just-pressed Cancel must never reach the server.\n      if (cancelledRef.current) return false;\n      // Flush pending debounce before snapshotting — see CommentInput.\n      const pendingMd = editorRef.current?.flushPendingUpdate?.();\n      if (pendingMd != null) setDraft(draftKey, pendingMd);\n      submittedEntryRef.current = useCommentDraftStore.getState().drafts[draftKey];\n      const activeIds = collectActiveAttachmentIds(\n        trimmed,\n        [...(entry.attachments ?? []), ...pendingAttachments],\n        // Body-referenced + retained-standalone only (MUL-5181): an upload the\n        // user removed from the body is really unbound. Close-surviving\n        // uploads are written back into the body by the settle handler.\n        retainedStandaloneIds,\n      );\n      const attachmentsChanged = !sameIdSet(activeIds, (entry.attachments ?? []).map((a) => a.id));\n      // Nothing changed — close the editor without a write. Accepted, so\n      // onAccepted resets the edit state.\n      if (trimmed === (entry.content ?? \"\").trim() && !attachmentsChanged) {\n        return true;\n      }\n      const { suppressAgentIds } = routing;\n      try {\n        await onEdit(\n          entry.id,\n          trimmed,\n          activeIds,\n          suppressAgentIds.length > 0 ? suppressAgentIds : undefined,\n          initialContentBase,\n        );\n        setRevisionConflict(false);\n        return true;\n      } catch (err) {\n        if (errorCode(err) === \"revision_conflict\") {\n          setRevisionConflict(true);\n        }\n        toast.error(\n          errorCode(err) === \"revision_conflict\"\n            ? t(($) => $.revision.conflict)\n            : err instanceof Error && err.message\n            ? err.message\n            : t(($) => $.comment.update_failed),\n        );\n        return false;\n      }\n    },\n    onAccepted: () => {\n      // Success may only consume the entry it submitted: edits made during the\n      // save survive, and the editor then STAYS in edit mode on them.\n      const lateMd = editorRef.current?.flushPendingUpdate?.();\n      if (lateMd != null) setDraft(draftKey, lateMd);\n      const store = useCommentDraftStore.getState();\n      const live = store.drafts[draftKey];\n      const untouched = live === undefined || live === submittedEntryRef.current;\n      if (!editMountedRef.current) {\n        if (untouched) store.clearDraft(draftKey);\n        return;\n      }\n      if (!untouched) return;\n      resetState();\n    },\n  });\n\n  return {\n    editing,\n    saving,\n    uploading: gate.uploading,\n    onUploadingChange: gate.onUploadingChange,\n    uploadingLabel: tEditor(($) => $.upload.in_progress),\n    editorRef,\n    editorAttachments,\n    handleUpload,\n    uploads,\n    removeUpload,\n    isDragOver,\n    dropZoneProps,\n    triggerPreview,\n    content,\n    recipients,\n    setRecipientAction,\n    draftKey,\n    setDraft,\n    setContent,\n    clearDraft,\n    initialValue,\n    standaloneEditAttachments,\n    retainedStandaloneIds,\n    setRetainedStandaloneIds,\n    startEdit,\n    cancelEdit,\n    saveEdit,\n    revisionConflict,\n    adoptServerVersion,\n  };\n}\n\nfunction CommentRevisionConflict({\n  serverContent,\n  localContent,\n  onKeepLocal,\n  onUseServer,\n  saving,\n}: {\n  serverContent: string;\n  localContent: string;\n  onKeepLocal: () => void;\n  onUseServer: () => void;\n  saving?: boolean;\n}) {\n  const { t } = useT(\"issues\");\n  return (\n    <RevisionConflictCompare\n      className=\"mt-2\"\n      title={t(($) => $.revision.compare_comment)}\n      serverLabel={t(($) => $.revision.server_version)}\n      localLabel={t(($) => $.revision.local_version)}\n      serverValue={serverContent}\n      localValue={localContent}\n      serverAction={(\n        <Button\n          type=\"button\"\n          size=\"sm\"\n          variant=\"outline\"\n          onClick={onUseServer}\n        >\n          {t(($) => $.revision.use_server)}\n        </Button>\n      )}\n      localAction={(\n        <Button\n          type=\"button\"\n          size=\"sm\"\n          variant=\"outline\"\n          disabled={saving}\n          onClick={onKeepLocal}\n        >\n          {t(($) => $.revision.keep_local)}\n        </Button>\n      )}\n    />\n  );\n}\n\n// Single comment row (used for both parent and replies within the same Card)\n\n/**\n * A comment's menu, the same groups on its ⋯ button, on right-click, and as\n * the \"Comment actions\" submenu of content inside it: answer it, change it,\n * take it elsewhere, then delete alone.\n */\nfunction useCommentMenuGroups({\n  entry,\n  editing,\n  canEdit,\n  canDelete,\n  resolve,\n  onStartEdit,\n  onReply,\n  onAddReaction,\n  onCopyLink,\n  onCreateSubIssue,\n  onDelete,\n}: {\n  entry: TimelineEntry;\n  editing: boolean;\n  canEdit: boolean;\n  canDelete: boolean;\n  resolve?: Pick<RowActionItem, \"icon\" | \"label\" | \"onSelect\">;\n  onStartEdit: () => void;\n  onReply?: () => void;\n  onAddReaction: () => void;\n  onCopyLink?: (commentId: string) => void;\n  onCreateSubIssue?: (commentId: string, prompt?: string) => void;\n  onDelete: () => void;\n}): RowActionItem[][] {\n  const { t } = useT(\"issues\");\n  const respond: RowActionItem[] = [];\n  if (onReply) {\n    respond.push({ key: \"reply\", icon: <CornerUpLeft className=\"h-3.5 w-3.5\" />, label: t(($) => $.comment.reply_action), onSelect: onReply });\n  }\n  if (!editing) {\n    respond.push({ key: \"react\", icon: <SmilePlus className=\"h-3.5 w-3.5\" />, label: t(($) => $.comment.add_reaction), onSelect: onAddReaction });\n  }\n  if (canEdit) {\n    respond.push({ key: \"edit\", icon: <Pencil className=\"h-3.5 w-3.5\" />, label: t(($) => $.comment.edit_action), onSelect: onStartEdit });\n  }\n  const act: RowActionItem[] = [];\n  if (resolve) act.push({ key: \"resolve\", ...resolve });\n  if (onCreateSubIssue && entry.comment_type === \"comment\") {\n    act.push({\n      key: \"sub-issue\",\n      icon: <MessageSquarePlus className=\"h-3.5 w-3.5\" aria-hidden />,\n      label: t(($) => $.source_context.create_action),\n      onSelect: () => onCreateSubIssue(entry.id),\n    });\n  }\n  const share: RowActionItem[] = [{\n    key: \"copy\",\n    icon: <Copy className=\"h-3.5 w-3.5\" />,\n    label: t(($) => $.comment.copy_action),\n    onSelect: () => {\n      void copyText(entry.content ?? \"\").then((ok) => {\n        if (ok) toast.success(t(($) => $.comment.copied_toast));\n      });\n    },\n  }];\n  if (onCopyLink) {\n    share.push({ key: \"copy-link\", icon: <Link2 className=\"h-3.5 w-3.5\" />, label: t(($) => $.comment.copy_link_action), onSelect: () => onCopyLink(entry.id) });\n  }\n  const remove: RowActionItem[] = canDelete\n    ? [{ key: \"delete\", icon: <Trash2 className=\"h-3.5 w-3.5\" />, label: t(($) => $.comment.delete_action), danger: true, onSelect: onDelete }]\n    : [];\n  return [respond, act, share, remove];\n}\n\n/**\n * Registers a comment as the scope of content menus inside it: a link, a\n * mention or selected text there carries the comment's actions in a submenu,\n * and selected text can become a sub-issue.\n */\nfunction useCommentScope(\n  entry: TimelineEntry,\n  groups: RowActionItem[][] | null,\n  onCreateSubIssue?: (commentId: string, prompt?: string) => void,\n) {\n  const { t } = useT(\"issues\");\n  return useContextMenuScope(() => groups && {\n    label: t(($) => $.comment.actions_label),\n    icon: <MessageSquare className=\"h-3.5 w-3.5\" />,\n    groups,\n    selectionActions: onCreateSubIssue && entry.comment_type === \"comment\"\n      ? (text) => [{\n          key: \"create-issue\",\n          icon: <Plus className=\"h-3.5 w-3.5\" />,\n          label: t(($) => $.comment.create_issue_from_selection),\n          onSelect: () => onCreateSubIssue(entry.id, quoteMarkdown(text)),\n        }]\n      : undefined,\n  });\n}\n\nfunction quoteMarkdown(text: string) {\n  return text.trim().split(\"\\n\").map((line) => `> ${line}`).join(\"\\n\");\n}\n\n/** Runs an action a menu item picked once the menu has closed, so the menu\n *  does not hand focus back to its trigger over whatever the action opened. */\nfunction useAfterMenuClose() {\n  const pendingRef = useRef(false);\n  const finalFocus = useCallback(() => !pendingRef.current, []);\n  const schedule = useCallback((action: () => void) => () => {\n    pendingRef.current = true;\n    setTimeout(() => {\n      action();\n      setTimeout(() => { pendingRef.current = false; }, 300);\n    }, 0);\n  }, []);\n  return { finalFocus, schedule };\n}\n\nfunction CommentRow({\n  runHeader,\n  runMetadata,\n  replyTo,\n  issueId,\n  entry,\n  currentUserId,\n  canModerate = false,\n  isResolution = false,\n  isHighlighted = false,\n  hasReplies = false,\n  onEdit,\n  onDelete,\n  onToggleReaction,\n  onCreateSubIssue,\n  onResolveToggle,\n  onCopyLink,\n  onFocusReply,\n}: {\n  runHeader?: ReactNode;\n  runMetadata?: ReactNode;\n  replyTo?: ReactNode;\n  issueId: string;\n  entry: TimelineEntry;\n  currentUserId?: string;\n  canModerate?: boolean;\n  /** True when this reply is the thread's resolution (shows the green badge). */\n  isResolution?: boolean;\n  /** True when other replies answer this one; they are kept when it is deleted. */\n  hasReplies?: boolean;\n  /** True when this row is the deep-link target currently being highlighted. */\n  isHighlighted?: boolean;\n  onEdit: (commentId: string, content: string, attachmentIds: string[], suppressAgentIds?: string[], contentBase?: string) => Promise<void>;\n  onDelete: (commentId: string) => void;\n  onToggleReaction: (commentId: string, emoji: string) => void;\n  onCreateSubIssue?: (commentId: string, prompt?: string) => void;\n  onResolveToggle?: (commentId: string, resolved: boolean) => void;\n  onCopyLink?: (commentId: string) => void;\n  /** Moves the caret into the thread's reply box. */\n  onFocusReply?: () => void;\n}) {\n  const { t } = useT(\"issues\");\n  const locale = useLocale();\n  const timeAgo = useTimeAgo();\n  const { getActorName } = useActorName();\n\n  const edit = useEditAttachmentState(issueId, entry, onEdit);\n\n  const isOwn = entry.actor_type === \"member\" && entry.actor_id === currentUserId;\n  // A message that steered a run is part of that run's input: it cannot be\n  // rewritten, and it cannot be removed while a turn is still receiving it.\n  const receipts = commentSupplementReceipts(entry);\n  const canEditEntry = receipts.length === 0 && (isOwn || (canModerate && entry.actor_type === \"member\"));\n  const canDeleteEntry = !receipts.some(isSupplementInFlight) && (isOwn || canModerate);\n  const [confirmDelete, setConfirmDelete] = useState(false);\n  // Right-click on the comment opens its ⋯ menu at the cursor; links, images\n  // and selected text inside it keep their own menu.\n  const rowMenu = useRowMenu();\n  const [reactionOpen, setReactionOpen] = useState(false);\n  const afterClose = useAfterMenuClose();\n  const menuGroups = useCommentMenuGroups({\n    entry,\n    editing: edit.editing,\n    canEdit: canEditEntry,\n    canDelete: canDeleteEntry,\n    resolve: onResolveToggle && (isResolution\n      ? { icon: <RotateCcw className=\"h-3.5 w-3.5\" />, label: t(($) => $.comment.resolve.unresolve_action), onSelect: () => onResolveToggle(entry.id, false) }\n      : { icon: <CheckCircle2 className=\"h-3.5 w-3.5\" />, label: t(($) => $.comment.resolve.resolve_with_comment_action), onSelect: () => onResolveToggle(entry.id, true) }),\n    onStartEdit: edit.startEdit,\n    onReply: onFocusReply && afterClose.schedule(onFocusReply),\n    onAddReaction: afterClose.schedule(() => setReactionOpen(true)),\n    onCopyLink,\n    onCreateSubIssue,\n    onDelete: () => setConfirmDelete(true),\n  });\n  const scopeRef = useCommentScope(entry, edit.editing ? null : menuGroups, onCreateSubIssue);\n\n  const reactions = entry.reactions ?? [];\n\n  // A deleted reply renders nothing at all. Its row is kept only so the\n  // replies to it keep a direct parent (#8296), and the thread renders those\n  // replies flat, in its place — a placeholder row would say nothing they do\n  // not already say. Callers drop this row's chrome too, so the thread shows\n  // no empty divider where it was.\n  if (isDeletedComment(entry)) return null;\n\n  return (\n    <div\n      ref={scopeRef}\n      data-comment-block\n      className=\"pb-3\"\n      onContextMenu={(e) => {\n        if (edit.editing || !shouldOpenRowMenu(e, { deferToContent: true })) return;\n        rowMenu.openAtPointer(e);\n      }}\n    >\n      {/* Header pins to the timeline's scroll parent within this reply's own\n          row box, so a LONG reply keeps its\n          author + actions visible while you scroll its body, then releases once\n          this reply ends. The header stays opaque and matches this comment's\n          highlight state while it occludes the body scrolling underneath. */}\n      <StickyHeaderShell\n        highlighted={isHighlighted}\n        className=\"flex items-center gap-2.5 px-4 max-md:px-3 pt-3 pb-1\"\n      >\n        <ActorAvatar\n          actorType={entry.actor_type}\n          actorId={entry.actor_id}\n          name={entry.actor_name}\n          avatarUrl={entry.actor_avatar_url}\n          profileRequiresDirectoryEntry\n          size=\"md\"\n          enableHoverCard\n          showStatusDot\n        />\n        <span className=\"cursor-pointer text-body font-medium\">\n          {entry.actor_name || getActorName(entry.actor_type, entry.actor_id)}\n        </span>\n        <Tooltip>\n          <TooltipTrigger\n            render={\n              <span className=\"text-label text-muted-foreground cursor-default\">\n                {timeAgo(entry.created_at)}\n              </span>\n            }\n          />\n          <TooltipContent side=\"top\">\n            {new Date(entry.created_at).toLocaleString(locale)}\n          </TooltipContent>\n        </Tooltip>\n\n        <SteerBadge issueId={issueId} entry={entry} />\n        {runHeader}\n\n        {entry.actor_type === \"agent\" && entry.source_task_id && (\n          <WakeupSourceChip issueId={issueId} taskId={entry.source_task_id} />\n        )}\n\n        {isResolution && (\n          <span className=\"text-caption font-medium text-success\">\n            {t(($) => $.comment.resolve.resolution_badge)}\n          </span>\n        )}\n\n        <div data-comment-actions className=\"ml-auto flex shrink-0 items-center gap-0.5\">\n          {!edit.editing && <QuickEmojiPicker\n            onSelect={(emoji) => onToggleReaction(entry.id, emoji)}\n            ariaLabel={t(($) => $.comment.add_reaction)}\n            align=\"end\"\n            open={reactionOpen}\n            onOpenChange={setReactionOpen}\n            className={buttonVariants({ variant: \"ghost\", size: \"icon-sm\", className: commentActionClassName })}\n          />}\n          <DropdownMenu open={rowMenu.menu.open} onOpenChange={rowMenu.onOpenChange}>\n            <DeferredTooltip\n              content={t(($) => $.comment.more_actions)}\n              trigger={\n                <DropdownMenuTrigger\n                  render={\n                    <Button\n                      variant=\"ghost\"\n                      size=\"icon-sm\"\n                      className={commentActionClassName}\n                      aria-label={t(($) => $.comment.more_actions)}\n                    >\n                      <MoreHorizontal className=\"h-4 w-4\" aria-hidden />\n                    </Button>\n                  }\n                />\n              }\n            />\n            <DropdownMenuContent\n              align={rowMenu.menu.point ? \"start\" : \"end\"}\n              anchor={rowMenu.anchor}\n              finalFocus={afterClose.finalFocus}\n              className=\"w-auto min-w-44\"\n            >\n              <MenuActionGroups groups={menuGroups} primitives={dropdownPrimitives} />\n            </DropdownMenuContent>\n          </DropdownMenu>\n          <DeleteCommentDialog\n            open={confirmDelete}\n            onOpenChange={setConfirmDelete}\n            onConfirm={() => onDelete(entry.id)}\n            hasReplies={hasReplies}\n          />\n        </div>\n      </StickyHeaderShell>\n      {replyTo && <div className=\"pl-12 pr-4 max-md:pl-3 max-md:pr-3 pb-1.5\">{replyTo}</div>}\n\n      {edit.editing ? (\n        <div\n          {...edit.dropZoneProps}\n          className=\"relative pl-12 pr-4 max-md:pl-3 max-md:pr-3 pt-1\"\n          onKeyDown={(e) => { if (e.key === \"Escape\") edit.cancelEdit(); }}\n        >\n          <div className=\"text-body leading-relaxed\">\n            <ContentEditor\n              ref={edit.editorRef}\n              defaultValue={edit.initialValue}\n              placeholder={t(($) => $.comment.edit_placeholder)}\n              onUpdate={(md) => {\n                edit.setContent(md);\n                if (md.trim().length > 0) edit.setDraft(edit.draftKey, md);\n                else edit.clearDraft(edit.draftKey);\n              }}\n              onSubmit={edit.saveEdit}\n              onUploadFile={edit.handleUpload}\n              onUploadingChange={edit.onUploadingChange}\n              debounceMs={100}\n              currentIssueId={issueId}\n              attachments={edit.editorAttachments}\n            />\n          </div>\n          {edit.revisionConflict ? (\n            <CommentRevisionConflict\n              serverContent={entry.content ?? \"\"}\n              localContent={edit.content}\n              onKeepLocal={() => void edit.saveEdit()}\n              onUseServer={edit.adoptServerVersion}\n              saving={edit.saving}\n            />\n          ) : null}\n          {edit.standaloneEditAttachments.length > 0 && (\n            <AttachmentList\n              attachments={edit.standaloneEditAttachments}\n              className=\"mt-2 max-w-full\"\n              onRemove={(attachmentId) =>\n                edit.setRetainedStandaloneIds((ids) => {\n                  const next = new Set(ids ?? []);\n                  next.delete(attachmentId);\n                  return next;\n                })\n              }\n            />\n          )}\n          <div className=\"flex items-center justify-between gap-2 mt-2\">\n            <div className=\"min-w-0 flex-1\">\n              <CommentTriggerChips\n                recipients={edit.recipients}\n                blocked={edit.triggerPreview.blocked}\n                hasAllMembersMention={edit.triggerPreview.hasAllMembersMention}\n                draftContent={edit.content}\n                onActionChange={edit.setRecipientAction}\n              />\n            </div>\n            <div className=\"flex shrink-0 items-center gap-2\">\n              <FileUploadButton\n                size=\"sm\"\n                multiple\n                onSelect={(file) => edit.editorRef.current?.uploadFile(file)}\n              />\n              <Button size=\"sm\" variant=\"ghost\" onClick={edit.cancelEdit} disabled={edit.saving}>{t(($) => $.comment.cancel_edit)}</Button>\n              <Button\n                size=\"sm\"\n                variant=\"outline\"\n                onClick={edit.saveEdit}\n                disabled={edit.saving || edit.uploading}\n                aria-disabled={edit.uploading || undefined}\n                aria-busy={edit.uploading || undefined}\n              >\n                {edit.saving && <Loader2 className=\"h-3.5 w-3.5 animate-spin\" />}\n                {edit.uploading ? edit.uploadingLabel : t(($) => $.comment.save_action)}\n              </Button>\n            </div>\n          </div>\n          {edit.isDragOver && <FileDropOverlay />}\n        </div>\n      ) : (\n        <>\n          <div tabIndex={currentUserId ? 0 : undefined} role=\"group\"\n            aria-label={t(($) => $.reply.annotations.source_label, { name: entry.actor_name || getActorName(entry.actor_type, entry.actor_id) })}\n            data-comment-content={entry.id} className=\"pl-12 pr-4 max-md:pl-3 max-md:pr-3 text-body leading-relaxed text-foreground\">\n            <ReadonlyContent content={entry.content ?? \"\"} attachments={entry.attachments} />\n          </div>\n          <AttachmentList attachments={entry.attachments} content={entry.content} className=\"mt-1.5 pl-12 pr-4 max-md:pl-3 max-md:pr-3\" />\n          <div className=\"pl-12 pr-4 max-md:pl-3 max-md:pr-3\">\n            <SteerReceipts issueId={issueId} entry={entry} />\n            {entry.actor_type === \"agent\" && entry.source_task_id && (\n              <AppCallChips issueId={issueId} taskId={entry.source_task_id} />\n            )}\n          </div>\n          {retryableAgentFailureComment(entry) && (\n            <TaskCommentRetryButton\n              issueId={issueId}\n              taskId={entry.source_task_id}\n              className=\"mt-2 pl-12 pr-4 max-md:pl-3 max-md:pr-3\"\n            />\n          )}\n        </>\n      )}\n      <div className=\"pl-12 pr-4 max-md:pl-3 max-md:pr-3\">{runMetadata}</div>\n      {!edit.editing && <ReactionBar\n        reactions={reactions}\n        showPicker={false}\n        currentUserId={currentUserId}\n        onToggle={(emoji) => onToggleReaction(entry.id, emoji)}\n        getActorName={getActorName}\n        className=\"mt-1.5 pl-12 pr-4 max-md:pl-3 max-md:pr-3\"\n      />}\n    </div>\n  );\n}\n\n/** Names the input a run answers once other rows separate the two (MUL-7628). */\nfunction ReplyToQuote({ entry, onJump }: { entry: TimelineEntry; onJump?: (commentId: string) => void }) {\n  const { t } = useT(\"issues\");\n  const { getActorName } = useActorName();\n  const label = t(($) => $.comment.replying_to, {\n    name: entry.actor_name || getActorName(entry.actor_type, entry.actor_id),\n    preview: descriptionPreview(entry.content ?? \"\"),\n  });\n  return (\n    <button type=\"button\" disabled={!onJump} onClick={() => onJump?.(entry.id)} title={label}\n      className=\"flex max-w-full min-w-0 items-center gap-1.5 rounded-xs text-left text-caption text-muted-foreground hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:hover:text-muted-foreground\">\n      <CornerUpLeft aria-hidden className=\"size-3 shrink-0\" />\n      <span className=\"min-w-0 truncate\">{label}</span>\n    </button>\n  );\n}\n\ntype AgentRunCommentProps = {\n  run: CommentRun;\n  managedAnchor?: boolean;\n  standalone?: boolean;\n  entering?: boolean;\n  commentProps?: CommentCardProps;\n  /** The input this run answers, shown when the thread no longer places the two together. */\n  replyTo?: ReactNode;\n  /** The flashed jump target: the slot's comment id, or the run's task id until it has one. */\n  highlightedId?: string | null;\n};\n\nfunction shallowEqual<T extends object>(a: T | undefined, b: T | undefined): boolean {\n  if (a === b) return true;\n  if (!a || !b) return false;\n  const keys = Object.keys(a) as (keyof T)[];\n  if (keys.length !== Object.keys(b).length) return false;\n  return keys.every((key) => Object.is(a[key], b[key]));\n}\n\n/**\n * The timeline rebuilds `commentProps` on every render, so a plain shallow\n * compare would never match. Its fields are the same stable values\n * `CommentCard` already memoizes on; compare them one level down. Without\n * this every agent reply on screen re-rendered on each Virtuoso range or\n * height update — every frame of a sidebar toggle (MUL-9426).\n */\nfunction agentRunCommentPropsEqual(prev: AgentRunCommentProps, next: AgentRunCommentProps): boolean {\n  const { commentProps: prevComment, ...prevRest } = prev;\n  const { commentProps: nextComment, ...nextRest } = next;\n  return shallowEqual(prevRest, nextRest) && shallowEqual(prevComment, nextComment);\n}\n\n/** A run without a persisted reply still belongs to the agent, never its trigger author. */\nexport const AgentRunComment = memo(AgentRunCommentImpl, agentRunCommentPropsEqual);\n\nfunction AgentRunCommentImpl({ run, standalone = false, commentProps, entering = false, replyTo, highlightedId, managedAnchor = false }: AgentRunCommentProps) {\n  const viewState = useInlineCommentRunState();\n  const replyEntry = commentProps?.entry;\n  // A deleted reply renders nothing in a run slot either (see CommentRow), so\n  // the slot falls back to the run's own activity block: the run happened, and\n  // it still carries `hasReply`, so it never prints the deleted body as its\n  // output. A deleted thread ROOT keeps rendering — it heads its own thread.\n  const replyHidden = !standalone && !!replyEntry && isDeletedComment(replyEntry);\n  // The platform's failure notice only restates how the run ended, so the\n  // run's own block takes its slot and says it once (MUL-7692). A standalone\n  // notice that people replied to still heads its thread as a card.\n  const notice = replyEntry && !replyHidden && isRunFailureNotice(replyEntry, run.task)\n    && !(standalone && commentProps?.replies.some((entry) => !isDeletedComment(entry)))\n    ? replyEntry : undefined;\n  const reply = replyHidden || notice ? undefined : replyEntry;\n  // The notice keeps its deep-link target and highlight in the run's slot.\n  const slotEntry = reply ?? notice;\n  const motionRef = useRunCommentMotion(entering, reply?.id, run.task.status);\n  const highlighted = (highlightedId ?? commentProps?.highlightedCommentId) === (slotEntry?.id ?? run.task.id);\n  return (\n    <div ref={motionRef} data-run-slot-id={run.task.id}\n      data-run-comment-id={!reply ? run.task.id : undefined}\n      id={!standalone && !managedAnchor ? `comment-${slotEntry?.id ?? run.task.id}` : undefined}\n      className={cn(\"transition-colors duration-700\", standalone ? !reply && \"rounded-xl border\" : \"border-t border-border/50\", !reply && \"py-1.5\",\n        highlighted ? highlightedCommentBackgroundClass : standalone && !reply && \"bg-card\")}>\n      {commentProps && reply ? standalone ? (\n        <CommentCard {...commentProps} runs={commentProps.runs ?? [run]} runViewState={viewState} />\n      ) : (\n        <CommentRow {...commentProps}\n          isHighlighted={commentProps.highlightedCommentId === reply?.id}\n          isResolution={!!reply?.resolved_at}\n          replyTo={replyTo}\n          runHeader={<PlacedInlineCommentRun run={run} viewState={viewState} presentation=\"header\" />}\n          runMetadata={<PlacedInlineCommentRun run={run} viewState={viewState} />} />\n      ) : <div className=\"px-4 max-md:px-3\">\n        <InlineCommentRun run={run} viewState={viewState} showIdentity replyTo={replyTo} replacesFailureNotice={!!notice} />\n      </div>}\n    </div>\n  );\n}\n\n// CommentCard — One Card per thread (parent + all replies flat inside)\n\n// A quick action posts an ordinary comment and is rendered as one (MUL-5465).\n// It briefly had a collapsed one-line header that expanded to reveal the\n// prompt, on the theory that repeated runs would bury the discussion. In\n// practice the prompts are short, the header restated what the body already\n// said, and the disclosure only added a click between the reader and the text.\n// Provenance still lives on `quick_action_id`; it is data, not decoration.\n\nfunction CommentCardImpl({\n  issueId,\n  replyScrollParent,\n  runs = EMPTY_COMMENT_RUNS,\n  runViewState,\n  enteringRunIds,\n  entry,\n  replies,\n  currentUserId,\n  canModerate = false,\n  onReply,\n  onReplyAccepted,\n  onEdit,\n  onDelete,\n  onToggleReaction,\n  onCreateSubIssue,\n  onResolveToggle,\n  onCopyLink,\n  onJumpToComment,\n  onCollapseResolved,\n  expandedResolvedIds,\n  onResolvedExpandChange,\n  highlightedCommentId,\n}: CommentCardProps) {\n  const { t } = useT(\"issues\");\n  const locale = useLocale();\n  const timeAgo = useTimeAgo();\n  const { getActorName } = useActorName();\n  const replyTarget = useCommentDraftStore((s) => s.drafts[`reply:${issueId}:${entry.id}`]?.replyTarget);\n  const replyTargetId = replyTarget?.commentId ?? entry.id;\n  // A deleted target's tombstone is as gone as a removed row.\n  const isReplyTargetMissing = (id: string) => id !== entry.id\n    && !replies.some((r) => r.id === id && !isDeletedComment(r));\n  const replyTargetMissing = !!replyTarget && isReplyTargetMissing(replyTargetId);\n  // A reply here goes into the running turn of a run that belongs to this\n  // thread by default; another thread's turn is only reached by choice.\n  const steerThreadRunByDefault = useCallback(\n    (task: AgentTask) => runs.some((run) => run.task.id === task.id),\n    [runs],\n  );\n  const annotation = useCommentAnnotations({\n    issueId,\n    draftKey: `reply:${issueId}:${entry.id}`,\n    sources: [entry, ...replies].filter((e) => e.type === \"comment\" && !isDeletedComment(e))\n      .map((e) => ({ id: e.id, name: e.actor_name || getActorName(e.actor_type, e.actor_id), revision: e.revision })),\n    enabled: !!currentUserId,\n    onOpen: () => { if (replyFolded) onResolvedExpandChange?.(entry.id, true); },\n  });\n  const isCollapsed = useCommentCollapseStore((s) => s.isCollapsed(issueId, entry.id));\n  const toggleCollapse = useCommentCollapseStore((s) => s.toggle);\n  const open = !isCollapsed;\n  const handleToggle = useCallback(\n    () => toggleCollapse(issueId, entry.id),\n    [toggleCollapse, issueId, entry.id],\n  );\n\n  const edit = useEditAttachmentState(issueId, entry, onEdit);\n\n  const isOwn = entry.actor_type === \"member\" && entry.actor_id === currentUserId;\n  const receipts = commentSupplementReceipts(entry);\n  const canEditEntry = receipts.length === 0 && (isOwn || (canModerate && entry.actor_type === \"member\"));\n  const canDeleteEntry = !receipts.some(isSupplementInFlight) && (isOwn || canModerate);\n  const [confirmDelete, setConfirmDelete] = useState(false);\n  const rowMenu = useRowMenu();\n  const [reactionOpen, setReactionOpen] = useState(false);\n  const afterClose = useAfterMenuClose();\n  const replyBoxRef = useRef<ReplyInputHandle>(null);\n  const revealReplyBox = () => {\n    if (replyFolded) onResolvedExpandChange?.(entry.id, true);\n    if (!open) toggleCollapse(issueId, entry.id);\n  };\n  const focusReply = () => {\n    revealReplyBox();\n    requestAnimationFrame(() => replyBoxRef.current?.focus());\n  };\n  const menuGroups = useCommentMenuGroups({\n    entry,\n    editing: edit.editing,\n    canEdit: canEditEntry,\n    canDelete: canDeleteEntry,\n    resolve: onResolveToggle && (entry.resolved_at\n      ? { icon: <RotateCcw className=\"h-3.5 w-3.5\" />, label: t(($) => $.comment.resolve.unresolve_thread_action), onSelect: () => onResolveToggle(entry.id, false) }\n      : { icon: <CheckCircle2 className=\"h-3.5 w-3.5\" />, label: t(($) => $.comment.resolve.resolve_thread_action), onSelect: () => onResolveToggle(entry.id, true) }),\n    onStartEdit: edit.startEdit,\n    onReply: currentUserId ? afterClose.schedule(focusReply) : undefined,\n    onAddReaction: afterClose.schedule(() => setReactionOpen(true)),\n    onCopyLink,\n    onCreateSubIssue,\n    onDelete: () => setConfirmDelete(true),\n  });\n  const rootScopeRef = useCommentScope(entry, !open || isDeletedComment(entry) || edit.editing ? null : menuGroups, onCreateSubIssue);\n  // Selected text gets the same \"Add to reply\" as the selection bubble.\n  const threadScopeRef = useContextMenuScope(() => currentUserId ? {\n    selectionActions: () => [\n      {\n        key: \"annotate\",\n        icon: <MessageSquarePlus className=\"h-3.5 w-3.5\" />,\n        label: t(($) => $.reply.annotations.add),\n        onSelect: () => { annotation.addSelection(); },\n      },\n    ],\n  } : null);\n  const annotationCardRef = annotation.cardRef;\n  const cardRef = useCallback((node: HTMLDivElement | null) => {\n    annotationCardRef(node);\n    threadScopeRef(node);\n  }, [annotationCardRef, threadScopeRef]);\n\n  const allNestedReplies = replies;\n  // What the thread shows. Tombstones are excluded from display and counts but\n  // stay in `allNestedReplies`, which run anchoring and \"has replies\" reason\n  // over. Every tombstone has at least one live descendant (the server prunes\n  // one that loses its last reply), so no content hides behind this.\n  const visibleReplies = allNestedReplies.filter((reply) => !isDeletedComment(reply));\n  // A failure notice heading a thread keeps the thread's header; its run line\n  // below says how the run ended, so the raw body and its button are dropped.\n  const noticeRun = runs.find((run) => run.hasReply && run.commentId === entry.id && isRunFailureNotice(entry, run.task));\n  const renderRuns = (commentId: string, presentation: \"inline\" | \"header\" = \"inline\") => runs.filter((run) => run.commentId === commentId && run.hasReply\n    && (!run.anchorCommentId || run.anchorCommentId === commentId || replyFolded))\n    .map((run) => <PlacedInlineCommentRun key={run.task.id} run={run} presentation={presentation}\n      viewState={run.commentId === entry.id ? runViewState : undefined} replacesFailureNotice={run === noticeRun} />);\n\n  // A run slot renders the run's latest comment, or its activity until it\n  // posts one.\n  const renderThreadRow = (row: TimelineEntry | ThreadRunSlot, managedAnchor = false) => \"run\" in row ? (\n    <AgentRunComment key={row.run.task.id} run={row.run} managedAnchor={managedAnchor} entering={enteringRunIds?.has(row.run.task.id)}\n      highlightedId={highlightedCommentId}\n      replyTo={row.replyTo && <ReplyToQuote entry={row.replyTo} onJump={onJumpToComment} />}\n      commentProps={row.reply ? {\n        issueId, entry: row.reply, replies: [], currentUserId, canModerate, onReply, onEdit, onDelete,\n        onToggleReaction, onCreateSubIssue, onResolveToggle, onCopyLink, highlightedCommentId, enteringRunIds,\n      } : undefined} />\n  ) : renderReply(row, managedAnchor);\n\n  const renderReply = (reply: TimelineEntry, managedAnchor: boolean) => (\n    <Fragment key={reply.id}>\n      {/* A tombstone keeps its place in the thread but contributes no row\n          of its own. */}\n      {!isDeletedComment(reply) && (\n        <div\n          data-mc=\"comment-reply\"\n          data-author-type={reply.actor_type}\n          id={managedAnchor ? undefined : `comment-${reply.id}`}\n          className={cn(\n            \"border-t border-border/50 transition-colors duration-700\",\n            highlightedCommentId === reply.id && highlightedCommentBackgroundClass,\n          )}\n        >\n          <CommentRow\n            issueId={issueId}\n            entry={reply}\n            runHeader={renderRuns(reply.id, \"header\")}\n            runMetadata={renderRuns(reply.id)}\n            currentUserId={currentUserId}\n            canModerate={canModerate}\n            isResolution={reply.id === replyResolutionId}\n            isHighlighted={highlightedCommentId === reply.id}\n            hasReplies={repliedToIds.has(reply.id)}\n            onEdit={onEdit}\n            onDelete={onDelete}\n            onToggleReaction={onToggleReaction}\n            onCreateSubIssue={onCreateSubIssue}\n            onResolveToggle={onResolveToggle}\n            onCopyLink={onCopyLink}\n            onFocusReply={currentUserId ? focusReply : undefined}\n          />\n        </div>\n      )}\n    </Fragment>\n  );\n\n  const replyCount = visibleReplies.length;\n  const repliedToIds = new Set(allNestedReplies.map((reply) => reply.parent_id));\n  const deleted = isDeletedComment(entry);\n  const contentPreview = (entry.content ?? \"\").replace(/\\n/g, \" \").slice(0, 80);\n  const reactions = entry.reactions ?? [];\n\n  const isHighlighted = highlightedCommentId === entry.id;\n  const toggleLabel = open ? t(($) => $.comment.collapse_thread) : t(($) => $.comment.expand_thread);\n\n  // Reply-resolution display. When a REPLY is the thread's resolution, the other\n  // replies fold behind a bar and the resolution stays visible (root-resolution\n  // is handled one level up in issue-detail's resolved-bar, so kind \"root\" here\n  // renders the normal full thread under the Collapse header).\n  const resolution = deriveThreadResolution(entry, allNestedReplies);\n  const replyResolutionId = resolution.kind === \"reply\" ? resolution.resolutionId : null;\n  const threadExpanded = !!expandedResolvedIds?.has(entry.id);\n  const replyFolded = replyResolutionId != null && !threadExpanded;\n  const foldedReplies = replyResolutionId\n    ? visibleReplies.filter((r) => r.id !== replyResolutionId)\n    : visibleReplies;\n  const resolutionReply = replyResolutionId\n    ? allNestedReplies.find((r) => r.id === replyResolutionId) ?? null\n    : null;\n  // Replies and run slots in the order they happened (MUL-7628). Folded, the\n  // resolution stays visible along with any run that has not replied yet.\n  const threadRows = replyFolded\n    ? orderThreadWithRuns(entry, resolutionReply ? [resolutionReply] : [], runs.filter((run) => !run.hasReply\n      && (run.anchorCommentId === entry.id || run.anchorCommentId === replyResolutionId)))\n    : orderThreadWithRuns(entry, allNestedReplies, runs);\n\n  // Long threads mount replies on demand: many rows, or few rows carrying a\n  // lot of Markdown (MUL-9409). Short threads render inline, but through the\n  // same wrapper, so crossing the threshold never remounts a row (an open\n  // reply editor survives a new long report arriving).\n  const virtualizeRows = !!replyScrollParent && shouldVirtualizeThreadRows(\n    threadRows.map((row) => (\"run\" in row ? row.reply?.content : row.content)?.length ?? 0),\n  );\n  const renderRows = () => threadRows.map((row) => {\n    if (!replyScrollParent) return renderThreadRow(row);\n    if (!(\"run\" in row) && isDeletedComment(row)) return null;\n    const anchorId = \"run\" in row\n      ? (row.reply && !isDeletedComment(row.reply) ? row.reply.id : row.run.task.id)\n      : row.id;\n    // Keyed like the inline rows: a run slot keeps its task key when its reply\n    // arrives, so the slot (and its open activity panel) stays mounted.\n    return <VirtualThreadRow key={\"run\" in row ? row.run.task.id : row.id} id={`comment-${anchorId}`} virtualize={virtualizeRows}\n      taskId={\"run\" in row ? row.run.task.id : undefined} scrollParent={replyScrollParent}>\n      {() => renderThreadRow(row, virtualizeRows)}\n    </VirtualThreadRow>;\n  });\n\n  // Pin the root comment's header to the timeline's scroll parent while the\n  // thread is open, so a LONG root comment keeps its author + actions visible\n  // as you scroll its body (overflow-clip on the Card anchors this to the\n  // timeline, not the card — see below). The root-section wrapper below scopes\n  // its containing block to the header + body, so it releases the moment the\n  // replies begin — exactly one header is pinned at a time. Each reply pins its\n  // header the same way, scoped to its own row (see CommentRow). Skip the root\n  // header whenever a resolution collapse bar already owns the top-0 sticky slot\n  // (root resolved + expanded, or reply-resolution expanded): two sticky bars at\n  // the same offset would stack and hide one.\n  const stickyHeader =\n    open && !onCollapseResolved && !(replyResolutionId != null && threadExpanded);\n\n  return (\n    // overflow-clip (not -hidden) clips the rounded corners WITHOUT creating a\n    // scroll container, so the sticky collapse affordances below resolve to the\n    // timeline's scroll parent instead of this card. See PR #3623.\n    <Card data-mc=\"comment\" data-author-type={entry.actor_type} ref={cardRef} {...annotation.captureProps} className=\"!py-0 !gap-0 overflow-clip transition-colors duration-700\">\n      {annotation.popup}\n      {onCollapseResolved && (\n        <button\n          type=\"button\"\n          onClick={onCollapseResolved}\n          data-thread-sticky-bar\n          className=\"sticky top-0 z-20 flex w-full items-center gap-2.5 border-b border-border/50 bg-muted px-4 max-md:px-3 py-2.5 text-left text-body text-muted-foreground transition-colors cursor-pointer hover:bg-accent hover:text-accent-foreground\"\n          aria-label={t(($) => $.comment.resolve.collapse)}\n        >\n          <ListChevronsDownUp className=\"h-3.5 w-3.5\" />\n          {t(($) => $.comment.resolve.collapse)}\n        </button>\n      )}\n      {/* root-section — the sticky header's containing block. It wraps ONLY\n            the header + root body, so the header releases the moment you scroll\n            past the body into the replies (which render OUTSIDE this wrapper).\n            That is what keeps exactly one header pinned at a time: without this\n            wrapper the header's containing block is the whole thread and it\n            stays stuck behind every reply. */}\n        <div\n          ref={rootScopeRef}\n          data-comment-block\n          className={cn(\"transition-colors duration-700\", isHighlighted && highlightedCommentBackgroundClass)}\n          // Same right-click as a reply's; only while the thread is open, since\n          // the menu lives in the open header.\n          onContextMenu={(e) => {\n            if (!open || deleted || edit.editing || !shouldOpenRowMenu(e, { deferToContent: true })) return;\n            rowMenu.openAtPointer(e);\n          }}\n        >\n          {/* Keep the author aligned with replies; thread controls sit on the right. */}\n          <StickyHeaderShell\n            sticky={stickyHeader}\n            highlighted={isHighlighted}\n            className={cn(\"px-4 max-md:px-3\", !open ? \"py-3\" : stickyHeader ? \"pt-3 pb-1\" : \"pt-3 pb-2\")}\n          >\n            <div className=\"flex items-center gap-2.5\">\n              {deleted ? (\n                // The thread's root was deleted; its replies still hang off it.\n                <span className=\"min-w-0 truncate text-body italic text-muted-foreground\">\n                  {t(($) => $.comment.deleted_placeholder)}\n                </span>\n              ) : (\n                <>\n                  <ActorAvatar\n                    actorType={entry.actor_type}\n                    actorId={entry.actor_id}\n                    name={entry.actor_name}\n                    avatarUrl={entry.actor_avatar_url}\n                    profileRequiresDirectoryEntry\n                    size=\"md\"\n                    enableHoverCard\n                    showStatusDot\n                  />\n                  <span className=\"shrink-0 cursor-pointer text-body font-medium\">\n                    {entry.actor_name || getActorName(entry.actor_type, entry.actor_id)}\n                  </span>\n                  <Tooltip>\n                    <TooltipTrigger\n                      render={\n                        <span className=\"shrink-0 text-label text-muted-foreground cursor-default\">\n                          {timeAgo(entry.created_at)}\n                        </span>\n                      }\n                    />\n                    <TooltipContent side=\"top\">\n                      {new Date(entry.created_at).toLocaleString(locale)}\n                    </TooltipContent>\n                  </Tooltip>\n\n                  <SteerBadge issueId={issueId} entry={entry} />\n                  {renderRuns(entry.id, \"header\")}\n                  {entry.actor_type === \"agent\" && entry.source_task_id && (\n                    <WakeupSourceChip issueId={issueId} taskId={entry.source_task_id} />\n                  )}\n                </>\n              )}\n\n              {!open && contentPreview && (\n                <span className=\"min-w-0 flex-1 truncate text-label text-muted-foreground\">\n                  {contentPreview}\n                </span>\n              )}\n              {!open && replyCount > 0 && (\n                <span className=\"shrink-0 text-label text-muted-foreground\">\n                  {t(($) => $.comment.reply_count, { count: replyCount })}\n                </span>\n              )}\n\n              <div data-comment-actions className=\"ml-auto flex shrink-0 items-center gap-0.5\">\n                {open && !deleted && <>\n                  {!edit.editing && <QuickEmojiPicker\n                    onSelect={(emoji) => onToggleReaction(entry.id, emoji)}\n                    ariaLabel={t(($) => $.comment.add_reaction)}\n                    align=\"end\"\n                    open={reactionOpen}\n                    onOpenChange={setReactionOpen}\n                    className={buttonVariants({ variant: \"ghost\", size: \"icon-sm\", className: commentActionClassName })}\n                  />}\n                  <DropdownMenu open={rowMenu.menu.open} onOpenChange={rowMenu.onOpenChange}>\n                    <DeferredTooltip\n                      content={t(($) => $.comment.more_actions)}\n                      trigger={\n                        <DropdownMenuTrigger\n                          render={\n                            <Button\n                              variant=\"ghost\"\n                              size=\"icon-sm\"\n                              className={commentActionClassName}\n                              aria-label={t(($) => $.comment.more_actions)}\n                            >\n                              <MoreHorizontal className=\"h-4 w-4\" aria-hidden />\n                            </Button>\n                          }\n                        />\n                      }\n                    />\n                    <DropdownMenuContent\n                      align={rowMenu.menu.point ? \"start\" : \"end\"}\n                      anchor={rowMenu.anchor}\n                      finalFocus={afterClose.finalFocus}\n                      className=\"w-auto min-w-44\"\n                    >\n                      <MenuActionGroups groups={menuGroups} primitives={dropdownPrimitives} />\n                    </DropdownMenuContent>\n                  </DropdownMenu>\n                  <DeleteCommentDialog\n                    open={confirmDelete}\n                    onOpenChange={setConfirmDelete}\n                    onConfirm={() => onDelete(entry.id)}\n                    hasReplies={replyCount > 0}\n                  />\n                </>}\n                <DeferredTooltip\n                  content={toggleLabel}\n                  trigger={\n                    <Button\n                      type=\"button\"\n                      variant=\"ghost\"\n                      size=\"icon-sm\"\n                      aria-label={toggleLabel}\n                      aria-expanded={open}\n                      aria-controls={open ? `comment-body-${entry.id}` : undefined}\n                      onClick={handleToggle}\n                      className={commentActionClassName}\n                    >\n                      <ChevronRight aria-hidden className={cn(\"h-3.5 w-3.5 transition-transform motion-reduce:transition-none\", open && \"rotate-90\")} />\n                    </Button>\n                  }\n                />\n              </div>\n            </div>\n          </StickyHeaderShell>\n\n        {/* Root comment body. Avoid Base UI's Panel here: every mounted panel\n            probes computed styles to detect animations, forcing a style\n            recalculation across long issue-detail documents. */}\n        {open && !deleted && (\n          <div id={`comment-body-${entry.id}`} className=\"px-4 max-md:px-3 pb-3\">\n            {edit.editing ? (\n              <div\n                {...edit.dropZoneProps}\n                className=\"relative pl-8 max-md:pl-0\"\n                onKeyDown={(e) => { if (e.key === \"Escape\") edit.cancelEdit(); }}\n              >\n                <div className=\"text-body leading-relaxed\">\n                  <ContentEditor\n                    ref={edit.editorRef}\n                    defaultValue={edit.initialValue}\n                    placeholder={t(($) => $.comment.edit_placeholder)}\n                    onUpdate={(md) => {\n                      edit.setContent(md);\n                      if (md.trim().length > 0) edit.setDraft(edit.draftKey, md);\n                      else edit.clearDraft(edit.draftKey);\n                    }}\n                    onSubmit={edit.saveEdit}\n                    onUploadFile={edit.handleUpload}\n                    onUploadingChange={edit.onUploadingChange}\n                    debounceMs={100}\n                    currentIssueId={issueId}\n                    attachments={edit.editorAttachments}\n                  />\n                </div>\n                {edit.revisionConflict ? (\n                  <CommentRevisionConflict\n                    serverContent={entry.content ?? \"\"}\n                    localContent={edit.content}\n                    onKeepLocal={() => void edit.saveEdit()}\n                    onUseServer={edit.adoptServerVersion}\n                    saving={edit.saving}\n                  />\n                ) : null}\n                <div className=\"flex items-center justify-between mt-2\">\n                  <div className=\"flex min-w-0 flex-1 flex-col gap-1\">\n                    {edit.standaloneEditAttachments.length > 0 && (\n                      <AttachmentList\n                        attachments={edit.standaloneEditAttachments}\n                        className=\"max-w-full\"\n                        onRemove={(attachmentId) =>\n                          edit.setRetainedStandaloneIds((ids) => {\n                            const next = new Set(ids ?? []);\n                            next.delete(attachmentId);\n                            return next;\n                          })\n                        }\n                        />\n                      )}\n                    <CommentTriggerChips\n                      recipients={edit.recipients}\n                      blocked={edit.triggerPreview.blocked}\n                      hasAllMembersMention={edit.triggerPreview.hasAllMembersMention}\n                      draftContent={edit.content}\n                      onActionChange={edit.setRecipientAction}\n                    />\n                    <FileUploadButton\n                      size=\"sm\"\n                      multiple\n                      onSelect={(file) => edit.editorRef.current?.uploadFile(file)}\n                    />\n                  </div>\n                  <div className=\"flex items-center gap-2\">\n                    <Button size=\"sm\" variant=\"ghost\" onClick={edit.cancelEdit} disabled={edit.saving}>{t(($) => $.comment.cancel_edit)}</Button>\n                    <Button\n                      size=\"sm\"\n                      variant=\"outline\"\n                      onClick={edit.saveEdit}\n                      disabled={edit.saving || edit.uploading}\n                      aria-disabled={edit.uploading || undefined}\n                      aria-busy={edit.uploading || undefined}\n                    >\n                      {edit.saving && <Loader2 className=\"h-3.5 w-3.5 animate-spin\" />}\n                      {edit.uploading ? edit.uploadingLabel : t(($) => $.comment.save_action)}\n                    </Button>\n                  </div>\n                </div>\n                {edit.isDragOver && <FileDropOverlay />}\n              </div>\n            ) : !noticeRun && (\n              <>\n                <div tabIndex={currentUserId ? 0 : undefined} role=\"group\"\n            aria-label={t(($) => $.reply.annotations.source_label, { name: entry.actor_name || getActorName(entry.actor_type, entry.actor_id) })}\n            data-comment-content={entry.id} className=\"pl-8 max-md:pl-0 text-body leading-relaxed text-foreground\">\n                  <ReadonlyContent content={entry.content ?? \"\"} attachments={entry.attachments} />\n                </div>\n                <AttachmentList attachments={entry.attachments} content={entry.content} className=\"mt-1.5 pl-8 max-md:pl-0\" />\n                <div className=\"pl-8 max-md:pl-0\">\n                  <SteerReceipts issueId={issueId} entry={entry} />\n                  {entry.actor_type === \"agent\" && entry.source_task_id && (\n                    <AppCallChips issueId={issueId} taskId={entry.source_task_id} />\n                  )}\n                </div>\n                {retryableAgentFailureComment(entry) && (\n                  <TaskCommentRetryButton\n                    issueId={issueId}\n                    taskId={entry.source_task_id}\n                    className=\"mt-2 pl-8 max-md:pl-0\"\n                  />\n                )}\n              </>\n            )}\n            <div className=\"pl-8 max-md:pl-0\">{renderRuns(entry.id)}</div>\n            {!edit.editing && <ReactionBar\n              reactions={reactions}\n              showPicker={false}\n              currentUserId={currentUserId}\n              onToggle={(emoji) => onToggleReaction(entry.id, emoji)}\n              getActorName={getActorName}\n              className=\"mt-1.5 pl-8 max-md:pl-0\"\n            />}\n          </div>\n        )}\n        </div>\n\n        {/* Replies + reply input — rendered OUTSIDE root-section so the root\n            header's sticky containing block ends with the body. Gated on `open`\n            to mirror the body Panel's collapse visibility. */}\n        {open && (\n          <>\n          {replyFolded ? (\n            <>\n              {/* reply-mode folded: other replies behind a bar, resolution pinned below */}\n              {foldedReplies.length > 0 && (\n                <div className=\"border-t border-border/50 px-4 max-md:px-3 py-2.5\">\n                  <CommentsFoldBar\n                    replies={foldedReplies}\n                    onExpand={() => onResolvedExpandChange?.(entry.id, true)}\n                  />\n                </div>\n              )}\n              {renderRows()}\n            </>\n          ) : (\n            <>\n              {/* reply-mode expanded: a Collapse affordance to fold back */}\n              {replyResolutionId != null && onResolvedExpandChange && (\n                <button\n                  type=\"button\"\n                  onClick={() => onResolvedExpandChange(entry.id, false)}\n                  data-thread-sticky-bar\n                  className=\"sticky top-0 z-20 flex w-full items-center gap-2.5 border-t border-border/50 bg-muted px-4 max-md:px-3 py-2.5 text-left text-body text-muted-foreground transition-colors cursor-pointer hover:bg-accent hover:text-accent-foreground\"\n                  aria-label={t(($) => $.comment.resolve.collapse)}\n                >\n                  <ListChevronsDownUp className=\"h-3.5 w-3.5\" />\n                  {t(($) => $.comment.resolve.collapse)}\n                </button>\n              )}\n              {/* Replies — chronological; the resolution keeps its place with a badge */}\n              {renderRows()}\n\n              {/* Reply input */}\n              <div className=\"border-t border-border/50 px-4 max-md:px-3 py-2.5\">\n                <ReplyInput\n                  handleRef={replyBoxRef}\n                  issueId={issueId}\n                  parentId={replyTargetId}\n                  targetMissing={replyTargetMissing}\n                  annotationComposer={annotation.composer}\n                  placeholder={t(($) => $.reply.placeholder)}\n                  size=\"sm\"\n                  avatarType=\"member\"\n                  avatarId={currentUserId ?? \"\"}\n                  draftKey={`reply:${issueId}:${entry.id}`}\n                  onEditAnnotation={(id) => annotation.editAnnotation(id, true)}\n                  steerByDefault={steerThreadRunByDefault}\n                  onSubmit={(content, attachmentIds, suppressAgentIds, steerTaskIds) => {\n                    // The popup can save the first annotation and submit in the same event.\n                    const targetId = useCommentDraftStore.getState().drafts[`reply:${issueId}:${entry.id}`]?.replyTarget?.commentId ?? entry.id;\n                    return isReplyTargetMissing(targetId) ? Promise.resolve(false)\n                      : onReply(targetId, content, attachmentIds, suppressAgentIds, steerTaskIds);\n                  }}\n                  onAccepted={onReplyAccepted}\n                />\n              </div>\n            </>\n          )}\n          </>\n        )}\n    </Card>\n  );\n}\n\n// Memoized so a long timeline (e.g. Inbox-embedded IssueDetail with thousands\n// of comments) does not re-render every card on each parent state update or\n// WS-driven cache refresh. Default shallow comparison is sufficient: the\n// timeline grouping is useMemo'd in issue-detail.tsx (stable Map ref), and\n// every callback is stabilized via useCallback in use-issue-timeline.ts.\nconst CommentCard = memo(CommentCardImpl);\n\nexport { CommentCard, type CommentCardProps };\n"
+  },
+  "read_ranges": [
+    [
+      1,
+      100
+    ],
+    [
+      101,
+      200
+    ],
+    [
+      201,
+      300
+    ],
+    [
+      301,
+      400
+    ],
+    [
+      401,
+      500
+    ],
+    [
+      501,
+      600
+    ],
+    [
+      601,
+      700
+    ],
+    [
+      701,
+      800
+    ],
+    [
+      801,
+      900
+    ],
+    [
+      901,
+      1000
+    ],
+    [
+      1001,
+      1100
+    ],
+    [
+      1101,
+      1200
+    ],
+    [
+      1201,
+      1300
+    ],
+    [
+      1301,
+      1400
+    ],
+    [
+      1401,
+      1500
+    ],
+    [
+      1501,
+      1600
+    ],
+    [
+      1601,
+      1700
+    ],
+    [
+      1701,
+      1742
+    ]
+  ],
+  "own_function_callback_lexical_index": [
+    {
+      "line": 79,
+      "source": "function StickyHeaderShell({"
+    },
+    {
+      "line": 141,
+      "source": "onReply: (parentId: string, content: string, attachmentIds?: string[], suppressAgentIds?: string[], steerTaskIds?: string[]) => Promise<string | boolean>;"
+    },
+    {
+      "line": 142,
+      "source": "onReplyAccepted?: (commentId: string) => void;"
+    },
+    {
+      "line": 143,
+      "source": "onEdit: (commentId: string, content: string, attachmentIds: string[], suppressAgentIds?: string[], contentBase?: string) => Promise<void>;"
+    },
+    {
+      "line": 144,
+      "source": "onDelete: (commentId: string) => void;"
+    },
+    {
+      "line": 145,
+      "source": "onToggleReaction: (commentId: string, emoji: string) => void;"
+    },
+    {
+      "line": 146,
+      "source": "onCreateSubIssue?: (commentId: string, prompt?: string) => void;"
+    },
+    {
+      "line": 148,
+      "source": "onResolveToggle?: (commentId: string, resolved: boolean) => void;"
+    },
+    {
+      "line": 150,
+      "source": "onCopyLink?: (commentId: string) => void;"
+    },
+    {
+      "line": 152,
+      "source": "onJumpToComment?: (commentId: string) => void;"
+    },
+    {
+      "line": 158,
+      "source": "onCollapseResolved?: () => void;"
+    },
+    {
+      "line": 165,
+      "source": "onResolvedExpandChange?: (rootId: string, expand: boolean) => void;"
+    },
+    {
+      "line": 172,
+      "source": "function DeleteCommentDialog({"
+    },
+    {
+      "line": 179,
+      "source": "onOpenChange: (open: boolean) => void;"
+    },
+    {
+      "line": 180,
+      "source": "onConfirm: () => void;"
+    },
+    {
+      "line": 186,
+      "source": "const keepsReplies = useConfigStore((s) => s.commentDeleteKeepRepliesSupported);"
+    },
+    {
+      "line": 191,
+      "source": "<AlertDialogTitle>{t(($) => $.comment.delete_title)}</AlertDialogTitle>"
+    },
+    {
+      "line": 194,
+      "source": "? t(($) => $.comment.delete_desc)"
+    },
+    {
+      "line": 196,
+      "source": "? t(($) => $.comment.delete_desc_replies_kept)"
+    },
+    {
+      "line": 197,
+      "source": ": t(($) => $.comment.delete_desc_with_replies)}"
+    },
+    {
+      "line": 201,
+      "source": "<AlertDialogCancel>{t(($) => $.comment.cancel_action)}</AlertDialogCancel>"
+    },
+    {
+      "line": 203,
+      "source": "{t(($) => $.comment.delete_action)}"
+    },
+    {
+      "line": 213,
+      "source": "export function AttachmentList({"
+    },
+    {
+      "line": 222,
+      "source": "onRemove?: (attachmentId: string) => void;"
+    },
+    {
+      "line": 236,
+      "source": "const images = standalone.filter((a) => standaloneAttachmentGroup(a) === \"image\");"
+    },
+    {
+      "line": 237,
+      "source": "const files = standalone.filter((a) => standaloneAttachmentGroup(a) === \"file\");"
+    },
+    {
+      "line": 238,
+      "source": "const render = (a: Attachment) => {"
+    },
+    {
+      "line": 247,
+      "source": "onDelete={onRemove ? () => onRemove(a.id) : undefined}"
+    },
+    {
+      "line": 273,
+      "source": "function collectActiveAttachmentIds("
+    },
+    {
+      "line": 286,
+      "source": "function sameIdSet(a: string[], b: string[]): boolean {"
+    },
+    {
+      "line": 289,
+      "source": "return b.every((id) => set.has(id));"
+    },
+    {
+      "line": 292,
+      "source": "function initialStandaloneAttachmentIds(entry: TimelineEntry): Set<string> {"
+    },
+    {
+      "line": 296,
+      "source": ".filter((attachment) => !contentReferencesAttachment(content, attachment))"
+    },
+    {
+      "line": 297,
+      "source": ".map((attachment) => attachment.id),"
+    },
+    {
+      "line": 301,
+      "source": "function retryableAgentFailureComment(entry: TimelineEntry): entry is TimelineEntry & { source_task_id: string } {"
+    },
+    {
+      "line": 310,
+      "source": "function TaskCommentRetryButton({"
+    },
+    {
+      "line": 322,
+      "source": "const handleRetry = async () => {"
+    },
+    {
+      "line": 332,
+      "source": "? t(($) => $.execution_log.retry_blocked)"
+    },
+    {
+      "line": 335,
+      "source": ": t(($) => $.execution_log.retry_failed),"
+    },
+    {
+      "line": 350,
+      "source": "aria-label={t(($) => $.execution_log.retry_task_aria)}"
+    },
+    {
+      "line": 357,
+      "source": "{t(($) => $.execution_log.retry_task_tooltip)}"
+    },
+    {
+      "line": 365,
+      "source": "const NEVER_STEER = () => false;"
+    },
+    {
+      "line": 367,
+      "source": "function useEditAttachmentState("
+    },
+    {
+      "line": 370,
+      "source": "onEdit: (commentId: string, content: string, attachmentIds: string[], suppressAgentIds?: string[], contentBase?: string) => Promise<void>,"
+    },
+    {
+      "line": 412,
+      "source": "useEffect(() => {"
+    },
+    {
+      "line": 417,
+      "source": "onDrop: (files) => files.forEach((f) => editorRef.current?.uploadFile(f)),"
+    },
+    {
+      "line": 422,
+      "source": "const setDraft = useCommentDraftStore((s) => s.setDraft);"
+    },
+    {
+      "line": 423,
+      "source": "const clearDraft = useCommentDraftStore((s) => s.clearDraft);"
+    },
+    {
+      "line": 425,
+      "source": "const standaloneEditAttachments = (entry.attachments ?? []).filter((a) =>"
+    },
+    {
+      "line": 429,
+      "source": "const resetState = () => {"
+    },
+    {
+      "line": 439,
+      "source": "const startEdit = () => {"
+    },
+    {
+      "line": 449,
+      "source": "const cancelEdit = () => {"
+    },
+    {
+      "line": 460,
+      "source": "const adoptServerVersion = () => {"
+    },
+    {
+      "line": 476,
+      "source": "useEffect(() => {"
+    },
+    {
+      "line": 478,
+      "source": "return () => {"
+    },
+    {
+      "line": 487,
+      "source": "onSubmit: async (trimmed) => {"
+    },
+    {
+      "line": 502,
+      "source": "const attachmentsChanged = !sameIdSet(activeIds, (entry.attachments ?? []).map((a) => a.id));"
+    },
+    {
+      "line": 525,
+      "source": "? t(($) => $.revision.conflict)"
+    },
+    {
+      "line": 528,
+      "source": ": t(($) => $.comment.update_failed),"
+    },
+    {
+      "line": 533,
+      "source": "onAccepted: () => {"
+    },
+    {
+      "line": 555,
+      "source": "uploadingLabel: tEditor(($) => $.upload.in_progress),"
+    },
+    {
+      "line": 583,
+      "source": "function CommentRevisionConflict({"
+    },
+    {
+      "line": 592,
+      "source": "onKeepLocal: () => void;"
+    },
+    {
+      "line": 593,
+      "source": "onUseServer: () => void;"
+    },
+    {
+      "line": 600,
+      "source": "title={t(($) => $.revision.compare_comment)}"
+    },
+    {
+      "line": 601,
+      "source": "serverLabel={t(($) => $.revision.server_version)}"
+    },
+    {
+      "line": 602,
+      "source": "localLabel={t(($) => $.revision.local_version)}"
+    },
+    {
+      "line": 612,
+      "source": "{t(($) => $.revision.use_server)}"
+    },
+    {
+      "line": 623,
+      "source": "{t(($) => $.revision.keep_local)}"
+    },
+    {
+      "line": 637,
+      "source": "function useCommentMenuGroups({"
+    },
+    {
+      "line": 655,
+      "source": "onStartEdit: () => void;"
+    },
+    {
+      "line": 656,
+      "source": "onReply?: () => void;"
+    },
+    {
+      "line": 657,
+      "source": "onAddReaction: () => void;"
+    },
+    {
+      "line": 658,
+      "source": "onCopyLink?: (commentId: string) => void;"
+    },
+    {
+      "line": 659,
+      "source": "onCreateSubIssue?: (commentId: string, prompt?: string) => void;"
+    },
+    {
+      "line": 660,
+      "source": "onDelete: () => void;"
+    },
+    {
+      "line": 665,
+      "source": "respond.push({ key: \"reply\", icon: <CornerUpLeft className=\"h-3.5 w-3.5\" />, label: t(($) => $.comment.reply_action), onSelect: onReply });"
+    },
+    {
+      "line": 668,
+      "source": "respond.push({ key: \"react\", icon: <SmilePlus className=\"h-3.5 w-3.5\" />, label: t(($) => $.comment.add_reaction), onSelect: onAddReaction });"
+    },
+    {
+      "line": 671,
+      "source": "respond.push({ key: \"edit\", icon: <Pencil className=\"h-3.5 w-3.5\" />, label: t(($) => $.comment.edit_action), onSelect: onStartEdit });"
+    },
+    {
+      "line": 679,
+      "source": "label: t(($) => $.source_context.create_action),"
+    },
+    {
+      "line": 680,
+      "source": "onSelect: () => onCreateSubIssue(entry.id),"
+    },
+    {
+      "line": 686,
+      "source": "label: t(($) => $.comment.copy_action),"
+    },
+    {
+      "line": 687,
+      "source": "onSelect: () => {"
+    },
+    {
+      "line": 688,
+      "source": "void copyText(entry.content ?? \"\").then((ok) => {"
+    },
+    {
+      "line": 689,
+      "source": "if (ok) toast.success(t(($) => $.comment.copied_toast));"
+    },
+    {
+      "line": 694,
+      "source": "share.push({ key: \"copy-link\", icon: <Link2 className=\"h-3.5 w-3.5\" />, label: t(($) => $.comment.copy_link_action), onSelect: () => onCopyLink(entry.id) });"
+    },
+    {
+      "line": 697,
+      "source": "? [{ key: \"delete\", icon: <Trash2 className=\"h-3.5 w-3.5\" />, label: t(($) => $.comment.delete_action), danger: true, onSelect: onDelete }]"
+    },
+    {
+      "line": 707,
+      "source": "function useCommentScope("
+    },
+    {
+      "line": 710,
+      "source": "onCreateSubIssue?: (commentId: string, prompt?: string) => void,"
+    },
+    {
+      "line": 713,
+      "source": "return useContextMenuScope(() => groups && {"
+    },
+    {
+      "line": 714,
+      "source": "label: t(($) => $.comment.actions_label),"
+    },
+    {
+      "line": 718,
+      "source": "? (text) => [{"
+    },
+    {
+      "line": 721,
+      "source": "label: t(($) => $.comment.create_issue_from_selection),"
+    },
+    {
+      "line": 722,
+      "source": "onSelect: () => onCreateSubIssue(entry.id, quoteMarkdown(text)),"
+    },
+    {
+      "line": 728,
+      "source": "function quoteMarkdown(text: string) {"
+    },
+    {
+      "line": 729,
+      "source": "return text.trim().split(\"\\n\").map((line) => `> ${line}`).join(\"\\n\");"
+    },
+    {
+      "line": 734,
+      "source": "function useAfterMenuClose() {"
+    },
+    {
+      "line": 736,
+      "source": "const finalFocus = useCallback(() => !pendingRef.current, []);"
+    },
+    {
+      "line": 737,
+      "source": "const schedule = useCallback((action: () => void) => () => {"
+    },
+    {
+      "line": 739,
+      "source": "setTimeout(() => {"
+    },
+    {
+      "line": 741,
+      "source": "setTimeout(() => { pendingRef.current = false; }, 300);"
+    },
+    {
+      "line": 747,
+      "source": "function CommentRow({"
+    },
+    {
+      "line": 779,
+      "source": "onEdit: (commentId: string, content: string, attachmentIds: string[], suppressAgentIds?: string[], contentBase?: string) => Promise<void>;"
+    },
+    {
+      "line": 780,
+      "source": "onDelete: (commentId: string) => void;"
+    },
+    {
+      "line": 781,
+      "source": "onToggleReaction: (commentId: string, emoji: string) => void;"
+    },
+    {
+      "line": 782,
+      "source": "onCreateSubIssue?: (commentId: string, prompt?: string) => void;"
+    },
+    {
+      "line": 783,
+      "source": "onResolveToggle?: (commentId: string, resolved: boolean) => void;"
+    },
+    {
+      "line": 784,
+      "source": "onCopyLink?: (commentId: string) => void;"
+    },
+    {
+      "line": 786,
+      "source": "onFocusReply?: () => void;"
+    },
+    {
+      "line": 813,
+      "source": "? { icon: <RotateCcw className=\"h-3.5 w-3.5\" />, label: t(($) => $.comment.resolve.unresolve_action), onSelect: () => onResolveToggle(entry.id, false) }"
+    },
+    {
+      "line": 814,
+      "source": ": { icon: <CheckCircle2 className=\"h-3.5 w-3.5\" />, label: t(($) => $.comment.resolve.resolve_with_comment_action), onSelect: () => onResolveToggle(entry.id, true) }),"
+    },
+    {
+      "line": 817,
+      "source": "onAddReaction: afterClose.schedule(() => setReactionOpen(true)),"
+    },
+    {
+      "line": 820,
+      "source": "onDelete: () => setConfirmDelete(true),"
+    },
+    {
+      "line": 838,
+      "source": "onContextMenu={(e) => {"
+    },
+    {
+      "line": 887,
+      "source": "{t(($) => $.comment.resolve.resolution_badge)}"
+    },
+    {
+      "line": 893,
+      "source": "onSelect={(emoji) => onToggleReaction(entry.id, emoji)}"
+    },
+    {
+      "line": 894,
+      "source": "ariaLabel={t(($) => $.comment.add_reaction)}"
+    },
+    {
+      "line": 902,
+      "source": "content={t(($) => $.comment.more_actions)}"
+    },
+    {
+      "line": 910,
+      "source": "aria-label={t(($) => $.comment.more_actions)}"
+    },
+    {
+      "line": 930,
+      "source": "onConfirm={() => onDelete(entry.id)}"
+    },
+    {
+      "line": 941,
+      "source": "onKeyDown={(e) => { if (e.key === \"Escape\") edit.cancelEdit(); }}"
+    },
+    {
+      "line": 947,
+      "source": "placeholder={t(($) => $.comment.edit_placeholder)}"
+    },
+    {
+      "line": 948,
+      "source": "onUpdate={(md) => {"
+    },
+    {
+      "line": 965,
+      "source": "onKeepLocal={() => void edit.saveEdit()}"
+    },
+    {
+      "line": 974,
+      "source": "onRemove={(attachmentId) =>"
+    },
+    {
+      "line": 975,
+      "source": "edit.setRetainedStandaloneIds((ids) => {"
+    },
+    {
+      "line": 997,
+      "source": "onSelect={(file) => edit.editorRef.current?.uploadFile(file)}"
+    },
+    {
+      "line": 999,
+      "source": "<Button size=\"sm\" variant=\"ghost\" onClick={edit.cancelEdit} disabled={edit.saving}>{t(($) => $.comment.cancel_edit)}</Button>"
+    },
+    {
+      "line": 1009,
+      "source": "{edit.uploading ? edit.uploadingLabel : t(($) => $.comment.save_action)}"
+    },
+    {
+      "line": 1018,
+      "source": "aria-label={t(($) => $.reply.annotations.source_label, { name: entry.actor_name || getActorName(entry.actor_type, entry.actor_id) })}"
+    },
+    {
+      "line": 1043,
+      "source": "onToggle={(emoji) => onToggleReaction(entry.id, emoji)}"
+    },
+    {
+      "line": 1052,
+      "source": "function ReplyToQuote({ entry, onJump }: { entry: TimelineEntry; onJump?: (commentId: string) => void }) {"
+    },
+    {
+      "line": 1055,
+      "source": "const label = t(($) => $.comment.replying_to, {"
+    },
+    {
+      "line": 1060,
+      "source": "<button type=\"button\" disabled={!onJump} onClick={() => onJump?.(entry.id)} title={label}"
+    },
+    {
+      "line": 1080,
+      "source": "function shallowEqual<T extends object>(a: T | undefined, b: T | undefined): boolean {"
+    },
+    {
+      "line": 1085,
+      "source": "return keys.every((key) => Object.is(a[key], b[key]));"
+    },
+    {
+      "line": 1095,
+      "source": "function agentRunCommentPropsEqual(prev: AgentRunCommentProps, next: AgentRunCommentProps): boolean {"
+    },
+    {
+      "line": 1104,
+      "source": "function AgentRunCommentImpl({ run, standalone = false, commentProps, entering = false, replyTo, highlightedId, managedAnchor = false }: AgentRunCommentProps) {"
+    },
+    {
+      "line": 1116,
+      "source": "&& !(standalone && commentProps?.replies.some((entry) => !isDeletedComment(entry)))"
+    },
+    {
+      "line": 1154,
+      "source": "function CommentCardImpl({"
+    },
+    {
+      "line": 1182,
+      "source": "const replyTarget = useCommentDraftStore((s) => s.drafts[`reply:${issueId}:${entry.id}`]?.replyTarget);"
+    },
+    {
+      "line": 1185,
+      "source": "const isReplyTargetMissing = (id: string) => id !== entry.id"
+    },
+    {
+      "line": 1186,
+      "source": "&& !replies.some((r) => r.id === id && !isDeletedComment(r));"
+    },
+    {
+      "line": 1191,
+      "source": "(task: AgentTask) => runs.some((run) => run.task.id === task.id),"
+    },
+    {
+      "line": 1197,
+      "source": "sources: [entry, ...replies].filter((e) => e.type === \"comment\" && !isDeletedComment(e))"
+    },
+    {
+      "line": 1198,
+      "source": ".map((e) => ({ id: e.id, name: e.actor_name || getActorName(e.actor_type, e.actor_id), revision: e.revision })),"
+    },
+    {
+      "line": 1200,
+      "source": "onOpen: () => { if (replyFolded) onResolvedExpandChange?.(entry.id, true); },"
+    },
+    {
+      "line": 1202,
+      "source": "const isCollapsed = useCommentCollapseStore((s) => s.isCollapsed(issueId, entry.id));"
+    },
+    {
+      "line": 1203,
+      "source": "const toggleCollapse = useCommentCollapseStore((s) => s.toggle);"
+    },
+    {
+      "line": 1206,
+      "source": "() => toggleCollapse(issueId, entry.id),"
+    },
+    {
+      "line": 1221,
+      "source": "const revealReplyBox = () => {"
+    },
+    {
+      "line": 1225,
+      "source": "const focusReply = () => {"
+    },
+    {
+      "line": 1227,
+      "source": "requestAnimationFrame(() => replyBoxRef.current?.focus());"
+    },
+    {
+      "line": 1235,
+      "source": "? { icon: <RotateCcw className=\"h-3.5 w-3.5\" />, label: t(($) => $.comment.resolve.unresolve_thread_action), onSelect: () => onResolveToggle(entry.id, false) }"
+    },
+    {
+      "line": 1236,
+      "source": ": { icon: <CheckCircle2 className=\"h-3.5 w-3.5\" />, label: t(($) => $.comment.resolve.resolve_thread_action), onSelect: () => onResolveToggle(entry.id, true) }),"
+    },
+    {
+      "line": 1239,
+      "source": "onAddReaction: afterClose.schedule(() => setReactionOpen(true)),"
+    },
+    {
+      "line": 1242,
+      "source": "onDelete: () => setConfirmDelete(true),"
+    },
+    {
+      "line": 1246,
+      "source": "const threadScopeRef = useContextMenuScope(() => currentUserId ? {"
+    },
+    {
+      "line": 1247,
+      "source": "selectionActions: () => ["
+    },
+    {
+      "line": 1251,
+      "source": "label: t(($) => $.reply.annotations.add),"
+    },
+    {
+      "line": 1252,
+      "source": "onSelect: () => { annotation.addSelection(); },"
+    },
+    {
+      "line": 1257,
+      "source": "const cardRef = useCallback((node: HTMLDivElement | null) => {"
+    },
+    {
+      "line": 1267,
+      "source": "const visibleReplies = allNestedReplies.filter((reply) => !isDeletedComment(reply));"
+    },
+    {
+      "line": 1270,
+      "source": "const noticeRun = runs.find((run) => run.hasReply && run.commentId === entry.id && isRunFailureNotice(entry, run.task));"
+    },
+    {
+      "line": 1271,
+      "source": "const renderRuns = (commentId: string, presentation: \"inline\" | \"header\" = \"inline\") => runs.filter((run) => run.commentId === commentId && run.hasReply"
+    },
+    {
+      "line": 1273,
+      "source": ".map((run) => <PlacedInlineCommentRun key={run.task.id} run={run} presentation={presentation}"
+    },
+    {
+      "line": 1278,
+      "source": "const renderThreadRow = (row: TimelineEntry | ThreadRunSlot, managedAnchor = false) => \"run\" in row ? ("
+    },
+    {
+      "line": 1288,
+      "source": "const renderReply = (reply: TimelineEntry, managedAnchor: boolean) => ("
+    },
+    {
+      "line": 1326,
+      "source": "const repliedToIds = new Set(allNestedReplies.map((reply) => reply.parent_id));"
+    },
+    {
+      "line": 1332,
+      "source": "const toggleLabel = open ? t(($) => $.comment.collapse_thread) : t(($) => $.comment.expand_thread);"
+    },
+    {
+      "line": 1343,
+      "source": "? visibleReplies.filter((r) => r.id !== replyResolutionId)"
+    },
+    {
+      "line": 1346,
+      "source": "? allNestedReplies.find((r) => r.id === replyResolutionId) ?? null"
+    },
+    {
+      "line": 1351,
+      "source": "? orderThreadWithRuns(entry, resolutionReply ? [resolutionReply] : [], runs.filter((run) => !run.hasReply"
+    },
+    {
+      "line": 1360,
+      "source": "threadRows.map((row) => (\"run\" in row ? row.reply?.content : row.content)?.length ?? 0),"
+    },
+    {
+      "line": 1362,
+      "source": "const renderRows = () => threadRows.map((row) => {"
+    },
+    {
+      "line": 1372,
+      "source": "{() => renderThreadRow(row, virtualizeRows)}"
+    },
+    {
+      "line": 1401,
+      "source": "aria-label={t(($) => $.comment.resolve.collapse)}"
+    },
+    {
+      "line": 1404,
+      "source": "{t(($) => $.comment.resolve.collapse)}"
+    },
+    {
+      "line": 1419,
+      "source": "onContextMenu={(e) => {"
+    },
+    {
+      "line": 1434,
+      "source": "{t(($) => $.comment.deleted_placeholder)}"
+    },
+    {
+      "line": 1479,
+      "source": "{t(($) => $.comment.reply_count, { count: replyCount })}"
+    },
+    {
+      "line": 1486,
+      "source": "onSelect={(emoji) => onToggleReaction(entry.id, emoji)}"
+    },
+    {
+      "line": 1487,
+      "source": "ariaLabel={t(($) => $.comment.add_reaction)}"
+    },
+    {
+      "line": 1495,
+      "source": "content={t(($) => $.comment.more_actions)}"
+    },
+    {
+      "line": 1503,
+      "source": "aria-label={t(($) => $.comment.more_actions)}"
+    },
+    {
+      "line": 1523,
+      "source": "onConfirm={() => onDelete(entry.id)}"
+    },
+    {
+      "line": 1557,
+      "source": "onKeyDown={(e) => { if (e.key === \"Escape\") edit.cancelEdit(); }}"
+    },
+    {
+      "line": 1563,
+      "source": "placeholder={t(($) => $.comment.edit_placeholder)}"
+    },
+    {
+      "line": 1564,
+      "source": "onUpdate={(md) => {"
+    },
+    {
+      "line": 1581,
+      "source": "onKeepLocal={() => void edit.saveEdit()}"
+    },
+    {
+      "line": 1592,
+      "source": "onRemove={(attachmentId) =>"
+    },
+    {
+      "line": 1593,
+      "source": "edit.setRetainedStandaloneIds((ids) => {"
+    },
+    {
+      "line": 1611,
+      "source": "onSelect={(file) => edit.editorRef.current?.uploadFile(file)}"
+    },
+    {
+      "line": 1615,
+      "source": "<Button size=\"sm\" variant=\"ghost\" onClick={edit.cancelEdit} disabled={edit.saving}>{t(($) => $.comment.cancel_edit)}</Button>"
+    },
+    {
+      "line": 1625,
+      "source": "{edit.uploading ? edit.uploadingLabel : t(($) => $.comment.save_action)}"
+    },
+    {
+      "line": 1634,
+      "source": "aria-label={t(($) => $.reply.annotations.source_label, { name: entry.actor_name || getActorName(entry.actor_type, entry.actor_id) })}"
+    },
+    {
+      "line": 1659,
+      "source": "onToggle={(emoji) => onToggleReaction(entry.id, emoji)}"
+    },
+    {
+      "line": 1679,
+      "source": "onExpand={() => onResolvedExpandChange?.(entry.id, true)}"
+    },
+    {
+      "line": 1691,
+      "source": "onClick={() => onResolvedExpandChange(entry.id, false)}"
+    },
+    {
+      "line": 1694,
+      "source": "aria-label={t(($) => $.comment.resolve.collapse)}"
+    },
+    {
+      "line": 1697,
+      "source": "{t(($) => $.comment.resolve.collapse)}"
+    },
+    {
+      "line": 1711,
+      "source": "placeholder={t(($) => $.reply.placeholder)}"
+    },
+    {
+      "line": 1716,
+      "source": "onEditAnnotation={(id) => annotation.editAnnotation(id, true)}"
+    },
+    {
+      "line": 1718,
+      "source": "onSubmit={(content, attachmentIds, suppressAgentIds, steerTaskIds) => {"
+    }
+  ],
+  "edges": [
+    {
+      "api_method": "rerunIssue",
+      "client_anchor": "packages/core/api/client.ts:3143",
+      "inventory": [
+        {
+          "id": "client:3144",
+          "method": "POST",
+          "path_expression": "/api/issues/${issueId}/rerun",
+          "route": {
+            "method": "POST",
+            "path": "/api/issues/{id}/rerun"
+          }
+        }
+      ]
+    },
+    {
+      "api_method": "cancelTask",
+      "client_anchor": "packages/core/api/client.ts:3132",
+      "inventory": [
+        {
+          "id": "client:3133",
+          "method": "POST",
+          "path_expression": "/api/issues/${issueId}/tasks/${taskId}/cancel",
+          "route": {
+            "method": "POST",
+            "path": "/api/issues/{id}/tasks/{taskId}/cancel"
+          }
+        }
+      ]
+    },
+    {
+      "api_method": "previewCommentTriggers",
+      "client_anchor": "packages/core/api/client.ts:1889",
+      "inventory": [
+        {
+          "id": "client:1890",
+          "method": "POST",
+          "path_expression": "/api/issues/${issueId}/comments/trigger-preview",
+          "route": {
+            "method": "POST",
+            "path": "/api/issues/{id}/comments/trigger-preview"
+          }
+        }
+      ]
+    },
+    {
+      "api_method": "runQuickAction",
+      "client_anchor": "packages/core/api/client.ts:4959",
+      "inventory": [
+        {
+          "id": "client:4960",
+          "method": "POST",
+          "path_expression": "/api/issues/${issueId}/quick-actions/${quickActionId}/run",
+          "route": {
+            "method": "POST",
+            "path": "/api/issues/{id}/quick-actions/{quickActionId}/run"
+          }
+        }
+      ],
+      "reachability": "Unproven inherited edge; no call in comment-card or inline-comment-run. Excluded from reachable transport union."
+    },
+    {
+      "api_method": "listTasksByIssue",
+      "client_anchor": "packages/core/api/client.ts:3111",
+      "inventory": [
+        {
+          "id": "client:3116",
+          "method": "GET",
+          "path_expression": "/api/issues/${issueId}/task-runs${query}",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}/task-runs"
+          }
+        }
+      ]
+    },
+    {
+      "api_method": "listTimeline",
+      "client_anchor": "packages/core/api/client.ts:1925",
+      "inventory": [
+        {
+          "id": "client:1926",
+          "method": "GET",
+          "path_expression": "/api/issues/${issueId}/timeline",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}/timeline"
+          }
+        }
+      ]
+    },
+    {
+      "api_method": "updateComment",
+      "client_anchor": "packages/core/api/client.ts:1938",
+      "inventory": [
+        {
+          "id": "client:1939",
+          "method": "PUT",
+          "path_expression": "/api/comments/${commentId}",
+          "route": {
+            "method": "PUT",
+            "path": "/api/comments/{commentId}"
+          }
+        }
+      ],
+      "reachability": "Concrete issue timeline callback through core comment mutation"
+    },
+    {
+      "api_method": "deleteComment",
+      "client_anchor": "packages/core/api/client.ts:1957",
+      "inventory": [
+        {
+          "id": "client:1961",
+          "method": "DELETE",
+          "path_expression": "/api/comments/${commentId}",
+          "route": {
+            "method": "DELETE",
+            "path": "/api/comments/{commentId}"
+          }
+        },
+        {
+          "id": "client:1961:keep-replies",
+          "method": "DELETE",
+          "path_expression": "/api/comments/${commentId}/keep-replies",
+          "route": {
+            "method": "DELETE",
+            "path": "/api/comments/{commentId}/keep-replies"
+          }
+        }
+      ],
+      "reachability": "Concrete issue timeline callback through core comment mutation"
+    },
+    {
+      "api_method": "resolveComment",
+      "client_anchor": "packages/core/api/client.ts:1964",
+      "inventory": [
+        {
+          "id": "client:1965",
+          "method": "POST",
+          "path_expression": "/api/comments/${commentId}/resolve",
+          "route": {
+            "method": "POST",
+            "path": "/api/comments/{commentId}/resolve"
+          }
+        }
+      ],
+      "reachability": "Concrete issue timeline callback through core comment mutation"
+    },
+    {
+      "api_method": "unresolveComment",
+      "client_anchor": "packages/core/api/client.ts:1968",
+      "inventory": [
+        {
+          "id": "client:1969",
+          "method": "DELETE",
+          "path_expression": "/api/comments/${commentId}/resolve",
+          "route": {
+            "method": "DELETE",
+            "path": "/api/comments/{commentId}/resolve"
+          }
+        }
+      ],
+      "reachability": "Concrete issue timeline callback through core comment mutation"
+    },
+    {
+      "api_method": "addReaction",
+      "client_anchor": "packages/core/api/client.ts:1972",
+      "inventory": [
+        {
+          "id": "client:1973",
+          "method": "POST",
+          "path_expression": "/api/comments/${commentId}/reactions",
+          "route": {
+            "method": "POST",
+            "path": "/api/comments/{commentId}/reactions"
+          }
+        }
+      ],
+      "reachability": "Concrete issue timeline callback through core comment mutation"
+    },
+    {
+      "api_method": "removeReaction",
+      "client_anchor": "packages/core/api/client.ts:1979",
+      "inventory": [
+        {
+          "id": "client:1980",
+          "method": "DELETE",
+          "path_expression": "/api/comments/${commentId}/reactions",
+          "route": {
+            "method": "DELETE",
+            "path": "/api/comments/{commentId}/reactions"
+          }
+        }
+      ],
+      "reachability": "Concrete issue timeline callback through core comment mutation"
+    }
+  ],
+  "reused_evidence": [
+    {
+      "path": "server/contracts/batches/issue-action-card-transport-coverage.json",
+      "sha256": "71544ad280c3395c1ca06c21e9576a01e4a3d944e84c01e12a8fbd8ec4445837"
+    },
+    {
+      "path": "server/contracts/batches/issue-composer-transport-coverage.json",
+      "sha256": "f2c1036ca9d134227d4e17739aba2e5476c9cfebf6809bb64a0663c49b572044"
+    },
+    {
+      "path": "server/contracts/batches/issue-query-transport-coverage.json",
+      "sha256": "3d4401929eee7294bc9f706a5c738a074300faffc6df01ec9275184d8a5be380"
+    },
+    {
+      "path": "server/contracts/batches/issue-cache-transport-coverage.json",
+      "sha256": "ca8ac1b4269c453cb9920c1ea565e909b513dc0cb74abe462467e24bf9b71b65"
+    },
+    {
+      "path": "server/contracts/batches/inline-run-transport-coverage.json",
+      "sha256": "1597fb182445a08c9bc584d730d2898637180b229ad20ae8b1c9eca4624b3811"
+    },
+    {
+      "path": "server/contracts/batches/editor-transport-coverage.json",
+      "sha256": "1f941073efbfc5c5af384ed41e903a815ea8a373f29cf67a1d1228cbadcf1045"
+    },
+    {
+      "path": "server/contracts/batches/voice-transport-coverage.json",
+      "sha256": "c43ffa5d02f1fa4d7c6060d7a66196ee55ba3e310baaa4b7d9ffdfbc0ba7ee12"
+    },
+    {
+      "path": "server/contracts/batches/draft-attachment-transport-coverage.json",
+      "sha256": "496e9ff6f30b545e289ae4212951f2134b359510b0c4797621d7dc1889ef80e3"
+    }
+  ],
+  "audit": "Static audit of comment-card.tsx only. No backend or global closure claim.\n\nOwn behavior: StickyHeaderShell renders layout. DeleteCommentDialog selects capability-dependent copy and delegates confirmation. AttachmentList filters body references, groups and orders files/images, resolves version badges and delegates removal/download rendering. collectActiveAttachmentIds unions body references and retained standalone ids; sameIdSet compares ids; initialStandaloneAttachmentIds excludes body references. retryableAgentFailureComment requires agent/system/nonempty source task. TaskCommentRetryButton guards pending, awaits rerunIssue, reports invocation_not_allowed distinctly and resets pending finally; it performs no explicit invalidation.\n\nuseEditAttachmentState owns edit:issue:comment drafts. startEdit restores draft and snapshots server base; cancel marks cancellation and resets text/recipients/retained ids and clears draft. Conflict effect refreshes contentBase from latest entry. adoptServerVersion changes editor/draft/base locally. Drop uploads each file only while editing. Submit flushes debounce, snapshots draft identity, unions attachments, accepts unchanged content/id-set without mutation, otherwise awaits onEdit(id,trimmed,activeIds,suppression,base). revision_conflict retains draft and exposes comparison; keep-local resubmits against refreshed base. Accepted flushes again and consumes only unchanged submitted draft; unmounted acceptance clears only untouched draft. Composer upload/single-flight/empty guards reuse composer evidence.\n\nuseCommentMenuGroups gates edit/delete, reactions when not editing, optional reply/resolve/copy-link/subissue. Copy uses clipboard promise and success toast. useCommentScope adds selected text subissue through quoteMarkdown. useAfterMenuClose defers action at 0ms and resets pending at 300ms; finalFocus returns inverse pending. No timer cleanup here. CommentRow hides deleted replies; supplement receipts block edits and in-flight supplement blocks deletes; own/moderation gates are UI gates. Confirmation delegates delete; reaction controls delegate emoji; Escape cancels; editor updates persist nonblank drafts or clear blank; removal updates retained Set; file selection delegates upload.\n\nReplyToQuote delegates jump. shallowEqual and agentRunCommentPropsEqual compare render props. AgentRunCommentImpl chooses persisted reply/card/row or activity, hides deleted reply body, replaces failure notice, and passes inline run state. CommentCardImpl reads reply target from draft; missing nonroot/deleted target returns false at submission time after rereading store. steerThreadRunByDefault checks thread task membership. Annotation onOpen expands folded replies; cardRef composes refs. Collapse, focus (requestAnimationFrame), reaction-open, scope selection, rendering filters/maps, run slots, tombstones, resolution fold and virtualization are local composition. Reply submission forwards current target and attachment/suppression/steering ids; accepted callback remains host supplied.\n\nConcrete parent: issue-detail.tsx:1823-1859 obtains useIssueTimeline callbacks and task observer. :3559-3563 passes editComment/deleteComment/reaction/resolve. use-issue-timeline.ts:389 editComment awaits updateComment with contentBase and attachment/suppression ids; errors propagate to card. :403 delete catches/toasts; :418 resolution catches/toasts. issue-detail :1843 clears root resolved-expansion before delegation. :363 reply requires user/nonblank and calls createComment with parentId, returns id or false. These are concrete mutation boundaries, not opaque callback closure.\n\nQueries: no direct useQuery in target. Reused composer preview is enabled for nonempty debounced mention signature (blank/note disabled), 300ms debounce, retry false, same-context placeholder only; recipient tasks enabled for issueId plus agents, timeline view, staleTime 30000 and focus refetch. Edit allowSteer=false and NEVER_STEER forbid edit steering. Inline transcript gates running/expanded/full-log, validates task id; mount/focus refetch always and enabled/live-ended transitions refetch(cancelRefetch:false), error buttons refetch; disabled steer observer reads cache only. Inline cancel/retry invalidates issue task key; card retry does not. Existing query/cache evidence supplies conservative refetch candidates, not universal reachability.\n\nResidual boundaries: host subissue dialog, copy-link/jump, accepted callback, ActorAvatar directory/hover, AppCallChips, WakeupSourceChip, SteerReceipts, virtual row and motion internals remain bounded descendants. Editor/ReadonlyContent/attachment renderer/download resources reuse editor and upload evidence without certifying arbitrary descendants; voice is only reused through reply/annotation composer. No model/integration execution claim.\n",
+  "validation": {
+    "source_snapshot_hashes": true,
+    "exact_inventory_tuples": "Root integration validates all copied tuples; reachability restrictions remain explicit.",
+    "full_anchor_validation": false,
+    "live_slice_inventory_tuples": true,
+    "live_slice_client_expression_anchors": true,
+    "json_parse": true
+  },
+  "root_review": {
+    "status": "accepted bounded target and concrete comment callback scope",
+    "checks": "Root checked update rollback/settlement and reaction adapter/server-timeline lookup; exact current edge tuples and target hash validated during integration. Inherited quick-action is explicitly excluded; descendants remain bounded."
+  },
+  "live_slice_sources": [
+    {
+      "path": "packages/views/issues/hooks/use-issue-timeline.ts",
+      "sha256": "7feb9d4ee652aafd3cf02cfda249b97ed4551e70d40914705bb0d97d1b33192b",
+      "whole_source": false,
+      "anchors": "389-550"
+    },
+    {
+      "path": "packages/core/issues/mutations.ts",
+      "sha256": "9b81f4b0b396a1d714b40c42115eb95af59a56b28e1ce515774f691c6770de4e",
+      "whole_source": false,
+      "anchors": "956-1151"
+    },
+    {
+      "path": "packages/core/api/client.ts",
+      "sha256": "779bb65b5b7ead815836f7c704ec3c370bafae203e4f92119fadce93e982a4d7",
+      "whole_source": false,
+      "anchors": "1938-1984"
+    }
+  ],
+  "live_slice_audit": "Live slice validated: use-issue-timeline.ts:389 edit forwards content/attachmentIds/suppressAgentIds/contentBase to useUpdateComment:956; errors propagate. Delete:403 catches/toasts useDeleteComment:1009; capability read at mutation time selects keep-replies. Resolve:418 catches/toasts useResolveComment:1088, resolved selects POST, false DELETE. Reaction:439 useMutationState filters pending [toggleCommentReaction,issueId]; derived timeline removes existing.id or adds member/user emoji once; no cache optimistic write. :503 timelineRef tracks server timeline; toggle requires userId and finds member/user/emoji before calling useToggleCommentReaction:1132; existing selects removeReaction, absent addReaction. Both carry emoji JSON body. Pending overlay disappears on settlement; every four mutation hooks invalidates issueKeys.timeline(issueId) onSettled. Update cancels timeline, snapshots and filters retained attachments, rolls back error; success auxiliary revision or owner projection fallback plus last-activity list invalidation. Delete success applies tombstone or removes subtree and invalidates owner projections plus last-activity lists. Resolve cancels/snapshots/rolls back, clears other resolutions only within cycle-guarded thread on resolve; unresolve touches target. Timeline settlement and owner/list invalidations reuse issue-query/cache evidence for conservative enabled-observer refetch union; composer/inline-run evidence retained, not universal descendant reachability. runQuickAction inherited tuple is unproven for this card and excluded from reachable union. Bounded descendants and arbitrary host adapters remain as previously recorded. Finite concrete comment callback transport mapping complete; no backend/global closure claim."
+}

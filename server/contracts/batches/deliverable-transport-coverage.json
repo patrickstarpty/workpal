@@ -1,0 +1,342 @@
+{
+  "version": 1,
+  "scope": "Finite five-target static audit; no backend support conclusion",
+  "files": [
+    {
+      "path": "packages/views/issues/components/deliverables/attachment-versions.tsx",
+      "sha256": "89dc2f3c59eaf6d7e36a39c9bc4532a985992186210e0cece285f8e7db8365cd",
+      "whole_source": true,
+      "line_count": 39,
+      "read_chunks": [
+        [
+          1,
+          39
+        ]
+      ],
+      "disposition": "Context builds attachment id to one-based version map only for multi-version files. children is an opaque render boundary; no upload or resource operation."
+    },
+    {
+      "path": "packages/views/issues/components/deliverables/deliverable-details.tsx",
+      "sha256": "7d9716f8f763a3e2f8d4bce9264461fd36eceef57f97b2c02eecac8d908d1b45",
+      "whole_source": true,
+      "line_count": 367,
+      "read_chunks": [
+        [
+          1,
+          120
+        ],
+        [
+          121,
+          240
+        ],
+        [
+          241,
+          360
+        ],
+        [
+          361,
+          367
+        ]
+      ],
+      "disposition": "Origin resolves description, known comment, or none. locate closes controls before injected onLocate; copy exists only for deliverable plus supplied onCopyLink. Version menu newest first disables absent session ids then controls.goTo; sibling button goes to sibling key. DeliverableInfo and UploaderName call useActorName, which subscribes member/agent/squad directories and feature-gated plugin installations. ActorAvatar descendant receives profileLink=false, no hover or presence opt-in; avatar resource remains descendant boundary. DeliverableThumbnail descendant loads images only; nonimages render local icons. Formatting, descriptions, grouping and lookup are local."
+    },
+    {
+      "path": "packages/views/issues/components/deliverables/deliverable-link.tsx",
+      "sha256": "21a49f933d0793a61c6dddbe472a4854cfebec3ab5beca4e48c45e02fa223e52",
+      "whole_source": true,
+      "line_count": 225,
+      "read_chunks": [
+        [
+          1,
+          120
+        ],
+        [
+          121,
+          225
+        ]
+      ],
+      "disposition": "Copy requires issueRef; paths.issueDeliverable plus navigation.getShareableUrl computes address, copyText clipboard promise selects success/error toast. No HTTP inferred from share URL. Fresh read skips undefined name, fetchQuery issueTimelineOptions staleTime=0 retry=1; cancellation suppresses settlement; failed stays failed; ready waits dataUpdatedAt >= recorded cache timestamp. Session off/viewer/overview transitions call onDone only at finish; overview close microtask lets synchronous viewer handoff win. Open-on-load skips pending/already handled; failed toast retains link; missing file calls onDone; ready latest file openAt(stayOnError=true) succeeds into viewer, else useOpenAttachment then onDone. Helper tries sequence, standalone tryOpen(full attachment), finally download(id). No upload."
+    },
+    {
+      "path": "packages/views/issues/components/deliverables/deliverables-overview.tsx",
+      "sha256": "10182455ff84dcc49e8db239ac28e72bf0594b8f92fb22559b30e2cf10c4a169",
+      "whole_source": true,
+      "line_count": 426,
+      "read_chunks": [
+        [
+          1,
+          120
+        ],
+        [
+          121,
+          240
+        ],
+        [
+          241,
+          360
+        ],
+        [
+          361,
+          426
+        ]
+      ],
+      "disposition": "Immersive hook invokes optional desktop setImmersiveMode(true) only while open, false on cleanup; native boundary. G handler only while open and returnKey present, ignores modifiers, closes then openAt(returnKey). Dialog close calls onClose. Tile closes then opens selected displayed latest via useOpenAttachment; locate closes then injected origin callback; copy optional filename callback. Filter state/count/group sorting local: images expanded per version, other files latest; comment fallback uploader. CommentGroup useActorName introduces directory queries. DeliverableThumbnail and ActorAvatar are descendant resource boundaries; VersionBadge local. No upload."
+    },
+    {
+      "path": "packages/views/issues/components/deliverables/version-badge.tsx",
+      "sha256": "be018c9958a1bfd36de8cbd04b12ce59f188296d6f890f24f3b6951901369002",
+      "whole_source": true,
+      "line_count": 29,
+      "read_chunks": [
+        [
+          1,
+          29
+        ]
+      ],
+      "disposition": "Class composition and translated decorative version label only; no transport."
+    }
+  ],
+  "edges": [
+    {
+      "source": "packages/views/issues/components/deliverables/deliverable-details.tsx:198",
+      "anchor": "  const { getActorName } = useActorName();",
+      "detail": "useActorName -> memberListOptions/agentListOptions/squadListOptions; pluginInstallationsOptions enabled only plugins flag and nonempty wsId. Reuse identity-workspace and issue-query audits.",
+      "inventory": [
+        {
+          "id": "client:3765",
+          "method": "GET",
+          "path_expression": "/api/workspaces/${workspaceId}/members",
+          "route": {
+            "method": "GET",
+            "path": "/api/workspaces/{id}/members"
+          }
+        },
+        {
+          "id": "client:2066",
+          "method": "GET",
+          "path_expression": "/api/agents?${search}",
+          "route": {
+            "method": "GET",
+            "path": "/api/agents"
+          }
+        },
+        {
+          "id": "client:5203",
+          "method": "GET",
+          "path_expression": "/api/squads",
+          "route": {
+            "method": "GET",
+            "path": "/api/squads"
+          }
+        },
+        {
+          "id": "client:3425",
+          "method": "GET",
+          "path_expression": "/api/workspaces/${workspaceId}/plugins",
+          "route": {
+            "method": "GET",
+            "path": "/api/workspaces/{id}/plugins"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/views/issues/components/deliverables/deliverable-details.tsx:281",
+      "anchor": "                      <DeliverableThumbnail",
+      "detail": "Descendant boundary: image only -> useResignedInlineMedia(metadata then conditional blob fallback); img src browser resource. Reuse editor-preview audit; not own direct request.",
+      "inventory": [
+        {
+          "id": "client:4438",
+          "method": "GET",
+          "path_expression": "/api/attachments/${id}",
+          "route": {
+            "method": "GET",
+            "path": "/api/attachments/{id}"
+          }
+        },
+        {
+          "id": "client:4508",
+          "method": "GET",
+          "path_expression": "/api/attachments/${id}/download",
+          "route": {
+            "method": "GET",
+            "path": "/api/attachments/{id}/download"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/views/issues/components/deliverables/deliverables-overview.tsx:310",
+      "anchor": "  const { getActorName } = useActorName();",
+      "detail": "useActorName -> memberListOptions/agentListOptions/squadListOptions; pluginInstallationsOptions enabled only plugins flag and nonempty wsId. Reuse identity-workspace and issue-query audits.",
+      "inventory": [
+        {
+          "id": "client:3765",
+          "method": "GET",
+          "path_expression": "/api/workspaces/${workspaceId}/members",
+          "route": {
+            "method": "GET",
+            "path": "/api/workspaces/{id}/members"
+          }
+        },
+        {
+          "id": "client:2066",
+          "method": "GET",
+          "path_expression": "/api/agents?${search}",
+          "route": {
+            "method": "GET",
+            "path": "/api/agents"
+          }
+        },
+        {
+          "id": "client:5203",
+          "method": "GET",
+          "path_expression": "/api/squads",
+          "route": {
+            "method": "GET",
+            "path": "/api/squads"
+          }
+        },
+        {
+          "id": "client:3425",
+          "method": "GET",
+          "path_expression": "/api/workspaces/${workspaceId}/plugins",
+          "route": {
+            "method": "GET",
+            "path": "/api/workspaces/{id}/plugins"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/views/issues/components/deliverables/deliverables-overview.tsx:411",
+      "anchor": "        <DeliverableThumbnail attachment={latest} className=\"size-full\" />",
+      "detail": "Descendant boundary: image only -> useResignedInlineMedia(metadata then conditional blob fallback); img src browser resource. Reuse editor-preview audit; not own direct request.",
+      "inventory": [
+        {
+          "id": "client:4438",
+          "method": "GET",
+          "path_expression": "/api/attachments/${id}",
+          "route": {
+            "method": "GET",
+            "path": "/api/attachments/{id}"
+          }
+        },
+        {
+          "id": "client:4508",
+          "method": "GET",
+          "path_expression": "/api/attachments/${id}/download",
+          "route": {
+            "method": "GET",
+            "path": "/api/attachments/{id}/download"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/views/issues/components/deliverables/deliverable-link.tsx:89",
+      "anchor": "    qc.fetchQuery({ ...issueTimelineOptions(issueId), staleTime: 0, retry: 1 }).then(",
+      "detail": "issueTimelineOptions -> api.getIssueTimeline; retry and cache timestamp branches preserved in file disposition.",
+      "inventory": [
+        {
+          "id": "client:1926",
+          "method": "GET",
+          "path_expression": "/api/issues/${issueId}/timeline",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}/timeline"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/views/issues/components/deliverables/deliverable-link.tsx:198",
+      "anchor": "  const { open, modal } = useOpenAttachment();",
+      "detail": "useOpenAttachment -> sequence openAt, standalone tryOpen, download fallback. Preview metadata/content/bytes and native media resources reuse editor-preview; download getAttachment and web anchor/native downloadURL reuse draft-attachment. No markdown resolver input here, so client:4447 not selected by this helper.",
+      "inventory": [
+        {
+          "id": "client:4438",
+          "method": "GET",
+          "path_expression": "/api/attachments/${id}",
+          "route": {
+            "method": "GET",
+            "path": "/api/attachments/{id}"
+          }
+        },
+        {
+          "id": "client:4475",
+          "method": "GET",
+          "path_expression": "/api/attachments/${id}/content",
+          "route": {
+            "method": "GET",
+            "path": "/api/attachments/{id}/content"
+          }
+        },
+        {
+          "id": "client:4508",
+          "method": "GET",
+          "path_expression": "/api/attachments/${id}/download",
+          "route": {
+            "method": "GET",
+            "path": "/api/attachments/{id}/download"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/views/issues/components/deliverables/deliverables-overview.tsx:78",
+      "anchor": "  const { open: openAttachment, modal } = useOpenAttachment();",
+      "detail": "useOpenAttachment -> sequence openAt, standalone tryOpen, download fallback. Preview metadata/content/bytes and native media resources reuse editor-preview; download getAttachment and web anchor/native downloadURL reuse draft-attachment. No markdown resolver input here, so client:4447 not selected by this helper.",
+      "inventory": [
+        {
+          "id": "client:4438",
+          "method": "GET",
+          "path_expression": "/api/attachments/${id}",
+          "route": {
+            "method": "GET",
+            "path": "/api/attachments/{id}"
+          }
+        },
+        {
+          "id": "client:4475",
+          "method": "GET",
+          "path_expression": "/api/attachments/${id}/content",
+          "route": {
+            "method": "GET",
+            "path": "/api/attachments/{id}/content"
+          }
+        },
+        {
+          "id": "client:4508",
+          "method": "GET",
+          "path_expression": "/api/attachments/${id}/download",
+          "route": {
+            "method": "GET",
+            "path": "/api/attachments/{id}/download"
+          }
+        }
+      ]
+    }
+  ],
+  "reused_evidence": [
+    "server/contracts/batches/editor-preview-transport-coverage.json",
+    "server/contracts/batches/draft-attachment-transport-coverage.json",
+    "server/contracts/batches/issue-query-transport-coverage.json",
+    "server/contracts/batches/identity-workspace-transport-coverage.json"
+  ],
+  "remaining_edges": [],
+  "boundaries": [
+    "Injected onLocate/onDone/onClose/onCopyLink and controls: caller contracts, arbitrary replacements not enumerated.",
+    "Browser image/media/PDF/avatar resources use supplied or server URLs, signed capabilities, blob/data URLs; no invented API inventory tuple for arbitrary URL.",
+    "React, TanStack query scheduling, UI primitives, DOM listeners, microtasks and clipboard terminate as library/browser operations.",
+    "Descendant preview modal can render authored HTML with arbitrary subresources as recorded in editor-preview; finite API union does not enumerate those hosts."
+  ],
+  "root_review": {
+    "status": "accepted bounded target-source scope",
+    "checks": "Exact source anchors checked; root read timeline freshness/open fallback and complete useOpenAttachment/DeliverableThumbnail helpers. Hash/tuple validation via ledger integration. No runtime verification.",
+    "supporting_hashes": {
+      "packages/views/issues/components/deliverables/use-open-attachment.ts": "578dbc69390b176fa29019771096f6cbdc9ab42e29d06bae15e0402fea749513",
+      "packages/views/issues/components/deliverables/deliverable-thumbnail.tsx": "b1ed58c188bcc98ef2821228fe4ab52bb6f9a55831d210a4039731fc8a30b333"
+    }
+  }
+}

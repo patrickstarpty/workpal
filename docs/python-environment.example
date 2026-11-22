@@ -1,0 +1,13 @@
+# Put these settings in the root .env; npm start/dev load it automatically.
+# Keep existing values on subsequent starts; explicit shell variables take precedence.
+WORKPAL_DATABASE_URL=sqlite:////absolute/path/to/workpal.sqlite
+REDIS_URL=redis://127.0.0.1:26379
+REDIS_KEY_PREFIX=workpal:local:
+WORKPAL_HOST=127.0.0.1
+WORKPAL_ENV=development
+# Generate once with openssl rand -hex 32 and save as AUTH_SECRET in .env.
+# Keep .env private (chmod 600 .env); never regenerate the secret on each start.
+# Enable WORKPAL_DEV_AUTH=true only for local development login.
+# npm start defaults to 4174; development uses web 4174 and API 4175.
+# WORKPAL_PORT overrides the Python API/listening port in both modes.
+# WORKPAL_WEB_PORT overrides the Vite port in development only.

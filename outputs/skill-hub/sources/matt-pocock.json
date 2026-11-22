@@ -1,0 +1,406 @@
+{
+  "source": {
+    "id": "matt-pocock",
+    "label": "Matt Pocock",
+    "author": "Matt Pocock",
+    "repo": "mattpocock/skills",
+    "commitSha": "abeeaf95660ba9e8b7c753eb38f441ca707a8823",
+    "repositoryUrl": "https://github.com/mattpocock/skills",
+    "retrievedAt": "2026-11-20T18:34:47.037Z",
+    "licenseUrl": "https://github.com/mattpocock/skills/blob/abeeaf95660ba9e8b7c753eb38f441ca707a8823/LICENSE",
+    "licenseSummary": "MIT License. Copyright (c) 2026 Matt Pocock. Preserve the copyright and permission notice when redistributing copies or substantial portions; provided without warranty."
+  },
+  "skills": [
+    {
+      "id": "matt-pocock:skills/engineering/ask-matt/SKILL.md",
+      "name": "ask-matt",
+      "description": "Ask which skill or flow fits your situation. A router over the skills in this repo.",
+      "path": "skills/engineering/ask-matt/SKILL.md",
+      "url": "https://github.com/mattpocock/skills/blob/abeeaf95660ba9e8b7c753eb38f441ca707a8823/skills/engineering/ask-matt/SKILL.md",
+      "blobSha": "4bfeeb61dae548b8b7754c4fba7bd40ab3926099",
+      "scope": "skill",
+      "categoryHint": "engineering"
+    },
+    {
+      "id": "matt-pocock:skills/engineering/code-review/SKILL.md",
+      "name": "code-review",
+      "description": "Review the changes since a fixed point (commit, branch, tag, or merge-base) along two axes: Standards (does the code follow this repo's documented coding standards?) and Spec (does the code match what the originating issue/spec asked for?). Runs both reviews in parallel sub-agents and reports them side by side. Use when the user wants to review a branch, a PR, work-in-progress changes, or asks to \"review since X\".",
+      "path": "skills/engineering/code-review/SKILL.md",
+      "url": "https://github.com/mattpocock/skills/blob/abeeaf95660ba9e8b7c753eb38f441ca707a8823/skills/engineering/code-review/SKILL.md",
+      "blobSha": "83183e0ad36fd0eef25d37c7e483284b7e34c1f0",
+      "scope": "skill",
+      "categoryHint": "engineering"
+    },
+    {
+      "id": "matt-pocock:skills/engineering/codebase-design/SKILL.md",
+      "name": "codebase-design",
+      "description": "Shared vocabulary for designing deep modules. Use when the user wants to design or improve a module's interface, find deepening opportunities, decide where a seam goes, make code more testable or AI-navigable, or when another skill needs the deep-module vocabulary.",
+      "path": "skills/engineering/codebase-design/SKILL.md",
+      "url": "https://github.com/mattpocock/skills/blob/abeeaf95660ba9e8b7c753eb38f441ca707a8823/skills/engineering/codebase-design/SKILL.md",
+      "blobSha": "3f63c8146dd2604b419c929e9876b90c30d410e9",
+      "scope": "skill",
+      "categoryHint": "engineering"
+    },
+    {
+      "id": "matt-pocock:skills/engineering/diagnosing-bugs/SKILL.md",
+      "name": "diagnosing-bugs",
+      "description": "Diagnosis loop for hard bugs and performance regressions. Use when the user says \"diagnose\"/\"debug this\", or reports something broken/throwing/failing/slow.",
+      "path": "skills/engineering/diagnosing-bugs/SKILL.md",
+      "url": "https://github.com/mattpocock/skills/blob/abeeaf95660ba9e8b7c753eb38f441ca707a8823/skills/engineering/diagnosing-bugs/SKILL.md",
+      "blobSha": "d039541ddd1c46e6ddbd662fe99d49b686fc5e12",
+      "scope": "skill",
+      "categoryHint": "engineering"
+    },
+    {
+      "id": "matt-pocock:skills/engineering/domain-modeling/SKILL.md",
+      "name": "domain-modeling",
+      "description": "Build and sharpen a project's domain model. Use when discussing codebase terminology, writing or editing a GLOSSARY.md, or recording or editing an ADR.",
+      "path": "skills/engineering/domain-modeling/SKILL.md",
+      "url": "https://github.com/mattpocock/skills/blob/abeeaf95660ba9e8b7c753eb38f441ca707a8823/skills/engineering/domain-modeling/SKILL.md",
+      "blobSha": "a4438c6879c517d1a08e2b5fbca049b632688dfe",
+      "scope": "skill",
+      "categoryHint": "engineering"
+    },
+    {
+      "id": "matt-pocock:skills/engineering/grill-with-docs/SKILL.md",
+      "name": "grill-with-docs",
+      "description": "A relentless interview to sharpen a plan or design, which also creates docs (ADR's and glossary) as we go.",
+      "path": "skills/engineering/grill-with-docs/SKILL.md",
+      "url": "https://github.com/mattpocock/skills/blob/abeeaf95660ba9e8b7c753eb38f441ca707a8823/skills/engineering/grill-with-docs/SKILL.md",
+      "blobSha": "62b9efb6f991d1b229adee7506962f13ced0c499",
+      "scope": "skill",
+      "categoryHint": "engineering"
+    },
+    {
+      "id": "matt-pocock:skills/engineering/implement-spec/SKILL.md",
+      "name": "implement-spec",
+      "description": "Implement the result of /to-spec and /to-tickets in code.",
+      "path": "skills/engineering/implement-spec/SKILL.md",
+      "url": "https://github.com/mattpocock/skills/blob/abeeaf95660ba9e8b7c753eb38f441ca707a8823/skills/engineering/implement-spec/SKILL.md",
+      "blobSha": "73d36c23958bd04423ba3ded1c90ff0d0b858b72",
+      "scope": "skill",
+      "categoryHint": "engineering"
+    },
+    {
+      "id": "matt-pocock:skills/engineering/implement/SKILL.md",
+      "name": "implement",
+      "description": "Implement a piece of work based on a spec or set of tickets.",
+      "path": "skills/engineering/implement/SKILL.md",
+      "url": "https://github.com/mattpocock/skills/blob/abeeaf95660ba9e8b7c753eb38f441ca707a8823/skills/engineering/implement/SKILL.md",
+      "blobSha": "bd49e472984c7b99aac40286fdae749bb955a842",
+      "scope": "skill",
+      "categoryHint": "engineering"
+    },
+    {
+      "id": "matt-pocock:skills/engineering/improve-codebase-architecture/SKILL.md",
+      "name": "improve-codebase-architecture",
+      "description": "Scan a codebase for deepening opportunities, present them as a visual HTML report, then grill through whichever one you pick.",
+      "path": "skills/engineering/improve-codebase-architecture/SKILL.md",
+      "url": "https://github.com/mattpocock/skills/blob/abeeaf95660ba9e8b7c753eb38f441ca707a8823/skills/engineering/improve-codebase-architecture/SKILL.md",
+      "blobSha": "f1eabb568464f03ae79a3346fc1918fdde6d8285",
+      "scope": "skill",
+      "categoryHint": "engineering"
+    },
+    {
+      "id": "matt-pocock:skills/engineering/pr/SKILL.md",
+      "name": "pr",
+      "description": "Use when writing a PR body.",
+      "path": "skills/engineering/pr/SKILL.md",
+      "url": "https://github.com/mattpocock/skills/blob/abeeaf95660ba9e8b7c753eb38f441ca707a8823/skills/engineering/pr/SKILL.md",
+      "blobSha": "84dd4fb2f068e9f6282690235d20dd505b418119",
+      "scope": "skill",
+      "categoryHint": "engineering"
+    },
+    {
+      "id": "matt-pocock:skills/engineering/prototype/SKILL.md",
+      "name": "prototype",
+      "description": "Build a throwaway prototype to answer a design question. Use when the user wants to sanity-check whether a state model or logic feels right, or explore what a UI should look like.",
+      "path": "skills/engineering/prototype/SKILL.md",
+      "url": "https://github.com/mattpocock/skills/blob/abeeaf95660ba9e8b7c753eb38f441ca707a8823/skills/engineering/prototype/SKILL.md",
+      "blobSha": "a0044501fe0d385b4d8575b610188ede9b236ccf",
+      "scope": "skill",
+      "categoryHint": "engineering"
+    },
+    {
+      "id": "matt-pocock:skills/engineering/research/SKILL.md",
+      "name": "research",
+      "description": "Investigate a question against high-trust primary sources and capture the findings as a Markdown file in the repo. Use when the user wants a topic researched, docs or API facts gathered, or reading legwork delegated to a background agent.",
+      "path": "skills/engineering/research/SKILL.md",
+      "url": "https://github.com/mattpocock/skills/blob/abeeaf95660ba9e8b7c753eb38f441ca707a8823/skills/engineering/research/SKILL.md",
+      "blobSha": "ffc9eb89849cc4cf74962ce93d786ffd17c6a5dc",
+      "scope": "skill",
+      "categoryHint": "engineering"
+    },
+    {
+      "id": "matt-pocock:skills/engineering/retro/SKILL.md",
+      "name": "retro",
+      "description": "Conduct a retrospective on a coding session.",
+      "path": "skills/engineering/retro/SKILL.md",
+      "url": "https://github.com/mattpocock/skills/blob/abeeaf95660ba9e8b7c753eb38f441ca707a8823/skills/engineering/retro/SKILL.md",
+      "blobSha": "12149acf2dd23b4514dec57b04a6293eaa1352fa",
+      "scope": "skill",
+      "categoryHint": "engineering"
+    },
+    {
+      "id": "matt-pocock:skills/engineering/setup-matt-pocock-skills/SKILL.md",
+      "name": "setup-matt-pocock-skills",
+      "description": "Configure this repo for the engineering skills: set up its issue tracker, triage label vocabulary, and domain doc layout. Run once before first use of the other engineering skills.",
+      "path": "skills/engineering/setup-matt-pocock-skills/SKILL.md",
+      "url": "https://github.com/mattpocock/skills/blob/abeeaf95660ba9e8b7c753eb38f441ca707a8823/skills/engineering/setup-matt-pocock-skills/SKILL.md",
+      "blobSha": "2df0b07981718fa5d9a51526dfbcaee87e3a543d",
+      "scope": "skill",
+      "categoryHint": "engineering"
+    },
+    {
+      "id": "matt-pocock:skills/engineering/tdd/SKILL.md",
+      "name": "tdd",
+      "description": "Test-driven development. Use when the user wants to build features or fix bugs test-first, mentions \"red-green-refactor\", or wants integration tests.",
+      "path": "skills/engineering/tdd/SKILL.md",
+      "url": "https://github.com/mattpocock/skills/blob/abeeaf95660ba9e8b7c753eb38f441ca707a8823/skills/engineering/tdd/SKILL.md",
+      "blobSha": "01eadaa34e7c9a63a67d6dc3cce1cc81b0e49985",
+      "scope": "skill",
+      "categoryHint": "engineering"
+    },
+    {
+      "id": "matt-pocock:skills/engineering/to-spec/SKILL.md",
+      "name": "to-spec",
+      "description": "Turn the current conversation into a spec and publish it to the project issue tracker: no interview, just synthesis of what you've already discussed.",
+      "path": "skills/engineering/to-spec/SKILL.md",
+      "url": "https://github.com/mattpocock/skills/blob/abeeaf95660ba9e8b7c753eb38f441ca707a8823/skills/engineering/to-spec/SKILL.md",
+      "blobSha": "3f52599ae2a4347aee5a07432c2707518e691a7f",
+      "scope": "skill",
+      "categoryHint": "engineering"
+    },
+    {
+      "id": "matt-pocock:skills/engineering/to-tickets/SKILL.md",
+      "name": "to-tickets",
+      "description": "Break a plan, spec, or the current conversation into a set of tracer-bullet tickets, each declaring its blocking edges, published to the configured tracker (edges as text in one file per ticket locally, or native blocking links on a real tracker).",
+      "path": "skills/engineering/to-tickets/SKILL.md",
+      "url": "https://github.com/mattpocock/skills/blob/abeeaf95660ba9e8b7c753eb38f441ca707a8823/skills/engineering/to-tickets/SKILL.md",
+      "blobSha": "9b77a01db9460c99c22d03c910c349f890f12c0e",
+      "scope": "skill",
+      "categoryHint": "engineering"
+    },
+    {
+      "id": "matt-pocock:skills/engineering/triage/SKILL.md",
+      "name": "triage",
+      "description": "Move issues and external PRs through a state machine of triage roles, categorise, verify, grill if needed, and write agent-ready briefs.",
+      "path": "skills/engineering/triage/SKILL.md",
+      "url": "https://github.com/mattpocock/skills/blob/abeeaf95660ba9e8b7c753eb38f441ca707a8823/skills/engineering/triage/SKILL.md",
+      "blobSha": "3fd5617e906cf9b71a6b17424791adb905fc248b",
+      "scope": "skill",
+      "categoryHint": "engineering"
+    },
+    {
+      "id": "matt-pocock:skills/engineering/wayfinder/SKILL.md",
+      "name": "wayfinder",
+      "description": "Plan a huge chunk of work (more than one agent session can hold) as a shared map of decision tickets on your issue tracker, and resolve them one at a time until the way to the destination is clear.",
+      "path": "skills/engineering/wayfinder/SKILL.md",
+      "url": "https://github.com/mattpocock/skills/blob/abeeaf95660ba9e8b7c753eb38f441ca707a8823/skills/engineering/wayfinder/SKILL.md",
+      "blobSha": "975d6bf9c0a49d18a651f3335e0b4dcf8650fe31",
+      "scope": "skill",
+      "categoryHint": "engineering"
+    },
+    {
+      "id": "matt-pocock:skills/engineering/wizard/SKILL.md",
+      "name": "wizard",
+      "description": "Generate an interactive bash wizard that walks a human through steps only they can perform. Use when provisioning infrastructure, setting up credentials or CI secrets, walking an unfamiliar third-party dashboard, or running a one-off migration or cutover. Don't invoke this for steps the agent can perform itself.",
+      "path": "skills/engineering/wizard/SKILL.md",
+      "url": "https://github.com/mattpocock/skills/blob/abeeaf95660ba9e8b7c753eb38f441ca707a8823/skills/engineering/wizard/SKILL.md",
+      "blobSha": "c4294ad8298b9b95fc727496b1b802b1f7363fba",
+      "scope": "skill",
+      "categoryHint": "engineering"
+    },
+    {
+      "id": "matt-pocock:skills/in-progress/chief-of-staff/SKILL.md",
+      "name": "chief-of-staff",
+      "description": "Pursue a long-running goal in a single session by co-ordinating subagents.",
+      "path": "skills/in-progress/chief-of-staff/SKILL.md",
+      "url": "https://github.com/mattpocock/skills/blob/abeeaf95660ba9e8b7c753eb38f441ca707a8823/skills/in-progress/chief-of-staff/SKILL.md",
+      "blobSha": "22f0b6626f07bfdfa78b70d006742dfa2260e9c4",
+      "scope": "in-progress",
+      "categoryHint": "in-progress"
+    },
+    {
+      "id": "matt-pocock:skills/in-progress/claude-handoff/SKILL.md",
+      "name": "claude-handoff",
+      "description": "Hand the current conversation off to a fresh background agent that picks up the work immediately.",
+      "path": "skills/in-progress/claude-handoff/SKILL.md",
+      "url": "https://github.com/mattpocock/skills/blob/abeeaf95660ba9e8b7c753eb38f441ca707a8823/skills/in-progress/claude-handoff/SKILL.md",
+      "blobSha": "77f82fc59c89c3a83ed5a92521dc2869f0533724",
+      "scope": "in-progress",
+      "categoryHint": "in-progress"
+    },
+    {
+      "id": "matt-pocock:skills/in-progress/loop-me/SKILL.md",
+      "name": "loop-me",
+      "description": "Grill me about specs for the workflows I want to build, within this workspace.",
+      "path": "skills/in-progress/loop-me/SKILL.md",
+      "url": "https://github.com/mattpocock/skills/blob/abeeaf95660ba9e8b7c753eb38f441ca707a8823/skills/in-progress/loop-me/SKILL.md",
+      "blobSha": "e58a474ca80feffdeb28842bc3bdee37da6510e7",
+      "scope": "in-progress",
+      "categoryHint": "in-progress"
+    },
+    {
+      "id": "matt-pocock:skills/in-progress/setup-ts-deep-modules/SKILL.md",
+      "name": "setup-ts-deep-modules",
+      "description": "Wire dependency-cruiser into a TypeScript repo so each package is a deep module, with implementation hidden in subfolders and reachable only through its entry-point files. User-invoked.",
+      "path": "skills/in-progress/setup-ts-deep-modules/SKILL.md",
+      "url": "https://github.com/mattpocock/skills/blob/abeeaf95660ba9e8b7c753eb38f441ca707a8823/skills/in-progress/setup-ts-deep-modules/SKILL.md",
+      "blobSha": "7e30047eaeda175de5d93886596a37baf365bb90",
+      "scope": "in-progress",
+      "categoryHint": "in-progress"
+    },
+    {
+      "id": "matt-pocock:skills/in-progress/software-factory/SKILL.md",
+      "name": "software-factory",
+      "description": "Shared language for designing a software factory: the tasks it runs and the services it plugs into.",
+      "path": "skills/in-progress/software-factory/SKILL.md",
+      "url": "https://github.com/mattpocock/skills/blob/abeeaf95660ba9e8b7c753eb38f441ca707a8823/skills/in-progress/software-factory/SKILL.md",
+      "blobSha": "ba4adc45935e8c24d6bed9b869792e4436ad5979",
+      "scope": "in-progress",
+      "categoryHint": "in-progress"
+    },
+    {
+      "id": "matt-pocock:skills/in-progress/writing-beats/SKILL.md",
+      "name": "writing-beats",
+      "description": "Writing, exploit; assemble raw material into a journey of beats, grounding each term before a beat leans on it.",
+      "path": "skills/in-progress/writing-beats/SKILL.md",
+      "url": "https://github.com/mattpocock/skills/blob/abeeaf95660ba9e8b7c753eb38f441ca707a8823/skills/in-progress/writing-beats/SKILL.md",
+      "blobSha": "3d3b25b605491adc5c62ae5423127717a94b9632",
+      "scope": "in-progress",
+      "categoryHint": "in-progress"
+    },
+    {
+      "id": "matt-pocock:skills/in-progress/writing-fragments/SKILL.md",
+      "name": "writing-fragments",
+      "description": "Writing, explore: mine raw fragments, no structure yet.",
+      "path": "skills/in-progress/writing-fragments/SKILL.md",
+      "url": "https://github.com/mattpocock/skills/blob/abeeaf95660ba9e8b7c753eb38f441ca707a8823/skills/in-progress/writing-fragments/SKILL.md",
+      "blobSha": "c7c889b880cf9c8d289119dea5ff240641b615ca",
+      "scope": "in-progress",
+      "categoryHint": "in-progress"
+    },
+    {
+      "id": "matt-pocock:skills/in-progress/writing-shape/SKILL.md",
+      "name": "writing-shape",
+      "description": "Writing, exploit: shape raw material into an article, paragraph by paragraph.",
+      "path": "skills/in-progress/writing-shape/SKILL.md",
+      "url": "https://github.com/mattpocock/skills/blob/abeeaf95660ba9e8b7c753eb38f441ca707a8823/skills/in-progress/writing-shape/SKILL.md",
+      "blobSha": "02f2866d13e72504e010f2ad3458eb9b36b876db",
+      "scope": "in-progress",
+      "categoryHint": "in-progress"
+    },
+    {
+      "id": "matt-pocock:skills/misc/git-guardrails-claude-code/SKILL.md",
+      "name": "git-guardrails-claude-code",
+      "description": "Set up Claude Code hooks to block dangerous git commands (push, reset --hard, clean, branch -D, etc.) before they execute. Use when user wants to prevent destructive git operations, add git safety hooks, or block git push/reset in Claude Code.",
+      "path": "skills/misc/git-guardrails-claude-code/SKILL.md",
+      "url": "https://github.com/mattpocock/skills/blob/abeeaf95660ba9e8b7c753eb38f441ca707a8823/skills/misc/git-guardrails-claude-code/SKILL.md",
+      "blobSha": "58bcdd875b164093b95f436fa32a65c6cb5eb572",
+      "scope": "skill",
+      "categoryHint": "misc"
+    },
+    {
+      "id": "matt-pocock:skills/misc/migrate-to-shoehorn/SKILL.md",
+      "name": "migrate-to-shoehorn",
+      "description": "Migrate test files from `as` type assertions to @total-typescript/shoehorn. Use when user mentions shoehorn, wants to replace `as` in tests, or needs partial test data.",
+      "path": "skills/misc/migrate-to-shoehorn/SKILL.md",
+      "url": "https://github.com/mattpocock/skills/blob/abeeaf95660ba9e8b7c753eb38f441ca707a8823/skills/misc/migrate-to-shoehorn/SKILL.md",
+      "blobSha": "ae4f965e204fc93cedbc4e2c306e92829d93f800",
+      "scope": "skill",
+      "categoryHint": "misc"
+    },
+    {
+      "id": "matt-pocock:skills/misc/scaffold-exercises/SKILL.md",
+      "name": "scaffold-exercises",
+      "description": "Create exercise directory structures with sections, problems, solutions, and explainers that pass linting. Use when user wants to scaffold exercises, create exercise stubs, or set up a new course section.",
+      "path": "skills/misc/scaffold-exercises/SKILL.md",
+      "url": "https://github.com/mattpocock/skills/blob/abeeaf95660ba9e8b7c753eb38f441ca707a8823/skills/misc/scaffold-exercises/SKILL.md",
+      "blobSha": "d87df28e7d8abb4e57ecc6e47d71c274d16054c7",
+      "scope": "skill",
+      "categoryHint": "misc"
+    },
+    {
+      "id": "matt-pocock:skills/misc/setup-pre-commit/SKILL.md",
+      "name": "setup-pre-commit",
+      "description": "Set up Husky pre-commit hooks with lint-staged (Prettier), type checking, and tests in the current repo. Use when user wants to add pre-commit hooks, set up Husky, configure lint-staged, or add commit-time formatting/typechecking/testing.",
+      "path": "skills/misc/setup-pre-commit/SKILL.md",
+      "url": "https://github.com/mattpocock/skills/blob/abeeaf95660ba9e8b7c753eb38f441ca707a8823/skills/misc/setup-pre-commit/SKILL.md",
+      "blobSha": "1b9708168263067adb4684d06ebb8f4ccfe9682c",
+      "scope": "skill",
+      "categoryHint": "misc"
+    },
+    {
+      "id": "matt-pocock:skills/productivity/grill-me/SKILL.md",
+      "name": "grill-me",
+      "description": "A relentless interview to sharpen a plan or design.",
+      "path": "skills/productivity/grill-me/SKILL.md",
+      "url": "https://github.com/mattpocock/skills/blob/abeeaf95660ba9e8b7c753eb38f441ca707a8823/skills/productivity/grill-me/SKILL.md",
+      "blobSha": "3947ff9c4ad980d14fc07fccbf659d47c114e81d",
+      "scope": "skill",
+      "categoryHint": "productivity"
+    },
+    {
+      "id": "matt-pocock:skills/productivity/grilling/SKILL.md",
+      "name": "grilling",
+      "description": "Grill the user relentlessly about a plan, decision, or idea. Use when the user wants to stress-test their thinking, or uses any 'grill' trigger phrases.",
+      "path": "skills/productivity/grilling/SKILL.md",
+      "url": "https://github.com/mattpocock/skills/blob/abeeaf95660ba9e8b7c753eb38f441ca707a8823/skills/productivity/grilling/SKILL.md",
+      "blobSha": "d2f09a18e6a6c65c55f1271ba08dfeaf06f0bed3",
+      "scope": "skill",
+      "categoryHint": "productivity"
+    },
+    {
+      "id": "matt-pocock:skills/productivity/handoff/SKILL.md",
+      "name": "handoff",
+      "description": "Compact the current conversation into a handoff document for another agent to pick up.",
+      "path": "skills/productivity/handoff/SKILL.md",
+      "url": "https://github.com/mattpocock/skills/blob/abeeaf95660ba9e8b7c753eb38f441ca707a8823/skills/productivity/handoff/SKILL.md",
+      "blobSha": "a224edc643a20ddb989f9bca1547440169159810",
+      "scope": "skill",
+      "categoryHint": "productivity"
+    },
+    {
+      "id": "matt-pocock:skills/productivity/teach/SKILL.md",
+      "name": "teach",
+      "description": "Teach the user a new skill or concept, within this workspace.",
+      "path": "skills/productivity/teach/SKILL.md",
+      "url": "https://github.com/mattpocock/skills/blob/abeeaf95660ba9e8b7c753eb38f441ca707a8823/skills/productivity/teach/SKILL.md",
+      "blobSha": "493fa3bae0dada971c4dfb965790e56920b1dced",
+      "scope": "skill",
+      "categoryHint": "productivity"
+    },
+    {
+      "id": "matt-pocock:skills/productivity/to-questionnaire/SKILL.md",
+      "name": "to-questionnaire",
+      "description": "Turn a decision you can't fully answer into a questionnaire for someone else to fill in.",
+      "path": "skills/productivity/to-questionnaire/SKILL.md",
+      "url": "https://github.com/mattpocock/skills/blob/abeeaf95660ba9e8b7c753eb38f441ca707a8823/skills/productivity/to-questionnaire/SKILL.md",
+      "blobSha": "dadd0c00d6a350acaa15bb9ca1b96b20ead684ca",
+      "scope": "skill",
+      "categoryHint": "productivity"
+    },
+    {
+      "id": "matt-pocock:skills/productivity/wait-what/SKILL.md",
+      "name": "wait-what",
+      "description": "Stop. That last message did not land: re-pitch it.",
+      "path": "skills/productivity/wait-what/SKILL.md",
+      "url": "https://github.com/mattpocock/skills/blob/abeeaf95660ba9e8b7c753eb38f441ca707a8823/skills/productivity/wait-what/SKILL.md",
+      "blobSha": "9b15cd1a7dda0854ca093e29e3e0de57e241b2ac",
+      "scope": "skill",
+      "categoryHint": "productivity"
+    },
+    {
+      "id": "matt-pocock:skills/productivity/writing-for-agents/SKILL.md",
+      "name": "writing-for-agents",
+      "description": "Writing documents for agents. Use when creating or editing skills, or modifying AGENTS.md or CLAUDE.md.",
+      "path": "skills/productivity/writing-for-agents/SKILL.md",
+      "url": "https://github.com/mattpocock/skills/blob/abeeaf95660ba9e8b7c753eb38f441ca707a8823/skills/productivity/writing-for-agents/SKILL.md",
+      "blobSha": "a37608daf6e835e767deecfb498facecaaba82ba",
+      "scope": "skill",
+      "categoryHint": "productivity"
+    }
+  ],
+  "excluded": []
+}

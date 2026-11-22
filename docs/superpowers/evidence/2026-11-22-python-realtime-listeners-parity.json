@@ -1,0 +1,3591 @@
+{
+  "scope": "Original full Go registerListeners typed-before-global routing, exact payload bytes including struct order/null/omitempty and string pointers, first workspace exclusion and event counts. Audience boundary injected. Not production producer/async Redis broadcaster integration, SQL or transport certification.",
+  "fixtures": [
+    {
+      "Event": {
+        "type": "inbox:archived",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": null
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "inbox:archived",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": []
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "inbox:archived",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {}
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "inbox:archived",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "recipient_id": "u"
+        }
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "inbox:archived",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "item": {
+            "recipient_id": "nested"
+          }
+        }
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "inbox:archived",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "recipient_id": "u",
+          "item": {
+            "recipient_id": "nested"
+          }
+        }
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "inbox:archived",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "recipient_id": 3,
+          "item": {
+            "recipient_id": "nested"
+          }
+        }
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "inbox:batch-archived",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": null
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "inbox:batch-archived",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": []
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "inbox:batch-archived",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {}
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "inbox:batch-archived",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "recipient_id": "u"
+        }
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "inbox:batch-archived",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "item": {
+            "recipient_id": "nested"
+          }
+        }
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "inbox:batch-archived",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "recipient_id": "u",
+          "item": {
+            "recipient_id": "nested"
+          }
+        }
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "inbox:batch-archived",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "recipient_id": 3,
+          "item": {
+            "recipient_id": "nested"
+          }
+        }
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "inbox:batch-read",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": null
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "inbox:batch-read",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": []
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "inbox:batch-read",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {}
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "inbox:batch-read",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "recipient_id": "u"
+        }
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "inbox:batch-read",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "item": {
+            "recipient_id": "nested"
+          }
+        }
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "inbox:batch-read",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "recipient_id": "u",
+          "item": {
+            "recipient_id": "nested"
+          }
+        }
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "inbox:batch-read",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "recipient_id": 3,
+          "item": {
+            "recipient_id": "nested"
+          }
+        }
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "inbox:deleted",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": null
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "inbox:deleted",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": []
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "inbox:deleted",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {}
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "inbox:deleted",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "recipient_id": "u"
+        }
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "inbox:deleted",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "item": {
+            "recipient_id": "nested"
+          }
+        }
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "inbox:deleted",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "recipient_id": "u",
+          "item": {
+            "recipient_id": "nested"
+          }
+        }
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "inbox:deleted",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "recipient_id": 3,
+          "item": {
+            "recipient_id": "nested"
+          }
+        }
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "inbox:new",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": null
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "inbox:new",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": []
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "inbox:new",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {}
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "inbox:new",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "recipient_id": "u"
+        }
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "inbox:new",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "item": {
+            "recipient_id": "nested"
+          }
+        }
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "inbox:new",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "recipient_id": "u",
+          "item": {
+            "recipient_id": "nested"
+          }
+        }
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "inbox:new",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "recipient_id": 3,
+          "item": {
+            "recipient_id": "nested"
+          }
+        }
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "inbox:read",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": null
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "inbox:read",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": []
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "inbox:read",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {}
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "inbox:read",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "recipient_id": "u"
+        }
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "inbox:read",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "item": {
+            "recipient_id": "nested"
+          }
+        }
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "inbox:read",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "recipient_id": "u",
+          "item": {
+            "recipient_id": "nested"
+          }
+        }
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "inbox:read",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "recipient_id": 3,
+          "item": {
+            "recipient_id": "nested"
+          }
+        }
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "inbox:snoozed",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": null
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "inbox:snoozed",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": []
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "inbox:snoozed",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {}
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "inbox:snoozed",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "recipient_id": "u"
+        }
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "inbox:snoozed",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "item": {
+            "recipient_id": "nested"
+          }
+        }
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "inbox:snoozed",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "recipient_id": "u",
+          "item": {
+            "recipient_id": "nested"
+          }
+        }
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "inbox:snoozed",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "recipient_id": 3,
+          "item": {
+            "recipient_id": "nested"
+          }
+        }
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "inbox:unarchived",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": null
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "inbox:unarchived",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": []
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "inbox:unarchived",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {}
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "inbox:unarchived",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "recipient_id": "u"
+        }
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "inbox:unarchived",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "item": {
+            "recipient_id": "nested"
+          }
+        }
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "inbox:unarchived",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "recipient_id": "u",
+          "item": {
+            "recipient_id": "nested"
+          }
+        }
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "inbox:unarchived",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "recipient_id": 3,
+          "item": {
+            "recipient_id": "nested"
+          }
+        }
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "inbox:unsnoozed",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": null
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "inbox:unsnoozed",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": []
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "inbox:unsnoozed",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {}
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "inbox:unsnoozed",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "recipient_id": "u"
+        }
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "inbox:unsnoozed",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "item": {
+            "recipient_id": "nested"
+          }
+        }
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "inbox:unsnoozed",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "recipient_id": "u",
+          "item": {
+            "recipient_id": "nested"
+          }
+        }
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "inbox:unsnoozed",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "recipient_id": 3,
+          "item": {
+            "recipient_id": "nested"
+          }
+        }
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "invitation:created",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": null
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "invitation:created",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": []
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "invitation:created",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {}
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "invitation:created",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "recipient_id": "u"
+        }
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "invitation:created",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "item": {
+            "recipient_id": "nested"
+          }
+        }
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "invitation:created",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "recipient_id": "u",
+          "item": {
+            "recipient_id": "nested"
+          }
+        }
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "invitation:created",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "recipient_id": 3,
+          "item": {
+            "recipient_id": "nested"
+          }
+        }
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "invitation:revoked",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": null
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "invitation:revoked",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": []
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "invitation:revoked",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {}
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "invitation:revoked",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "recipient_id": "u"
+        }
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "invitation:revoked",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "item": {
+            "recipient_id": "nested"
+          }
+        }
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "invitation:revoked",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "recipient_id": "u",
+          "item": {
+            "recipient_id": "nested"
+          }
+        }
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "invitation:revoked",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "recipient_id": 3,
+          "item": {
+            "recipient_id": "nested"
+          }
+        }
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "issue_unread:changed",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": null
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "issue_unread:changed",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": []
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "issue_unread:changed",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {}
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "issue_unread:changed",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "recipient_id": "u"
+        }
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "issue_unread:changed",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "item": {
+            "recipient_id": "nested"
+          }
+        }
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "issue_unread:changed",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "recipient_id": "u",
+          "item": {
+            "recipient_id": "nested"
+          }
+        }
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "issue_unread:changed",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "recipient_id": 3,
+          "item": {
+            "recipient_id": "nested"
+          }
+        }
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "invitation:created",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "invitation": {
+            "id": "i",
+            "invitee_user_id": null,
+            "inviter_name": "<name>",
+            "workspace_name": ""
+          }
+        }
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "invitation:created",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "invitation": {
+            "id": "i",
+            "invitee_user_id": null,
+            "inviter_name": "<name>",
+            "workspace_name": ""
+          }
+        }
+      },
+      "Mode": "invitation_pointer",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "invitation:created",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "invitation": {
+            "id": "i",
+            "invitee_user_id": null,
+            "inviter_name": "<name>",
+            "workspace_name": ""
+          }
+        }
+      },
+      "Mode": "invitation_struct",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "invitation:revoked",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "invitee_user_id": null
+        }
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "invitation:revoked",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "invitee_user_id": null
+        }
+      },
+      "Mode": "revoked_pointer",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "invitation:created",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "invitation": {
+            "id": "i",
+            "invitee_user_id": "",
+            "inviter_name": "<name>",
+            "workspace_name": ""
+          }
+        }
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "invitation:created",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "invitation": {
+            "id": "i",
+            "invitee_user_id": "",
+            "inviter_name": "<name>",
+            "workspace_name": ""
+          }
+        }
+      },
+      "Mode": "invitation_pointer",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "invitation:created",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "invitation": {
+            "id": "i",
+            "invitee_user_id": "",
+            "inviter_name": "<name>",
+            "workspace_name": ""
+          }
+        }
+      },
+      "Mode": "invitation_struct",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "invitation:revoked",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "invitee_user_id": ""
+        }
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "invitation:revoked",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "invitee_user_id": ""
+        }
+      },
+      "Mode": "revoked_pointer",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "invitation:created",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "invitation": {
+            "id": "i",
+            "invitee_user_id": "u",
+            "inviter_name": "<name>",
+            "workspace_name": ""
+          }
+        }
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "invitation:created",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "invitation": {
+            "id": "i",
+            "invitee_user_id": "u",
+            "inviter_name": "<name>",
+            "workspace_name": ""
+          }
+        }
+      },
+      "Mode": "invitation_pointer",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "invitation:created",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "invitation": {
+            "id": "i",
+            "invitee_user_id": "u",
+            "inviter_name": "<name>",
+            "workspace_name": ""
+          }
+        }
+      },
+      "Mode": "invitation_struct",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "invitation:revoked",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "invitee_user_id": "u"
+        }
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "invitation:revoked",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "invitee_user_id": "u"
+        }
+      },
+      "Mode": "revoked_pointer",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "invitation:accepted",
+        "workspaceID": "",
+        "actorID": "",
+        "actorType": "member",
+        "payload": {}
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "invitation:accepted",
+        "workspaceID": "",
+        "actorID": "u",
+        "actorType": "member",
+        "payload": {}
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "invitation:accepted",
+        "workspaceID": "w",
+        "actorID": "",
+        "actorType": "member",
+        "payload": {}
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "invitation:accepted",
+        "workspaceID": "w",
+        "actorID": "u",
+        "actorType": "member",
+        "payload": {}
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "invitation:declined",
+        "workspaceID": "",
+        "actorID": "",
+        "actorType": "member",
+        "payload": {}
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "invitation:declined",
+        "workspaceID": "",
+        "actorID": "u",
+        "actorType": "member",
+        "payload": {}
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "invitation:declined",
+        "workspaceID": "w",
+        "actorID": "",
+        "actorType": "member",
+        "payload": {}
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "invitation:declined",
+        "workspaceID": "w",
+        "actorID": "u",
+        "actorType": "member",
+        "payload": {}
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "member:added",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "member": {
+            "user_id": "",
+            "name": "<name>",
+            "avatar_url": null
+          }
+        }
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "member:added",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "member": {
+            "user_id": "u",
+            "name": "<name>",
+            "avatar_url": null
+          }
+        }
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "member:added",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "member": {
+            "user_id": "",
+            "name": "<name>",
+            "avatar_url": null
+          }
+        }
+      },
+      "Mode": "member_struct",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "member:added",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "member": {
+            "user_id": "u",
+            "name": "<name>",
+            "avatar_url": null
+          }
+        }
+      },
+      "Mode": "member_struct",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "member:added",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "member": {
+            "user_id": 3
+          }
+        }
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "inbox:new",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "item": {
+            "recipient_id": "u"
+          }
+        }
+      },
+      "Mode": "bad_marshal",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "member:added",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "member": {
+            "user_id": "u"
+          }
+        }
+      },
+      "Mode": "bad_marshal",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "issue:updated",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "prev_title": "hidden",
+          "issue": {
+            "title": "shown"
+          }
+        }
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "issue:updated",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {}
+      },
+      "Mode": "",
+      "Recipients": [
+        "u",
+        "u",
+        "v"
+      ],
+      "Private": true,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "issue:updated",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {}
+      },
+      "Mode": "",
+      "Recipients": [],
+      "Private": true,
+      "Failure": false
+    }
+  ],
+  "go": [
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [
+        {
+          "scope": "user",
+          "id": "u",
+          "exclude": [],
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"recipient_id\":\"u\"},\"type\":\"inbox:archived\"}"
+        }
+      ],
+      "events": {
+        "inbox:archived": 1
+      }
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [
+        {
+          "scope": "user",
+          "id": "u",
+          "exclude": [],
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"item\":{\"recipient_id\":\"nested\"},\"recipient_id\":\"u\"},\"type\":\"inbox:archived\"}"
+        }
+      ],
+      "events": {
+        "inbox:archived": 1
+      }
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [
+        {
+          "scope": "user",
+          "id": "u",
+          "exclude": [],
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"recipient_id\":\"u\"},\"type\":\"inbox:batch-archived\"}"
+        }
+      ],
+      "events": {
+        "inbox:batch-archived": 1
+      }
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [
+        {
+          "scope": "user",
+          "id": "u",
+          "exclude": [],
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"item\":{\"recipient_id\":\"nested\"},\"recipient_id\":\"u\"},\"type\":\"inbox:batch-archived\"}"
+        }
+      ],
+      "events": {
+        "inbox:batch-archived": 1
+      }
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [
+        {
+          "scope": "user",
+          "id": "u",
+          "exclude": [],
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"recipient_id\":\"u\"},\"type\":\"inbox:batch-read\"}"
+        }
+      ],
+      "events": {
+        "inbox:batch-read": 1
+      }
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [
+        {
+          "scope": "user",
+          "id": "u",
+          "exclude": [],
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"item\":{\"recipient_id\":\"nested\"},\"recipient_id\":\"u\"},\"type\":\"inbox:batch-read\"}"
+        }
+      ],
+      "events": {
+        "inbox:batch-read": 1
+      }
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [
+        {
+          "scope": "user",
+          "id": "u",
+          "exclude": [],
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"recipient_id\":\"u\"},\"type\":\"inbox:deleted\"}"
+        }
+      ],
+      "events": {
+        "inbox:deleted": 1
+      }
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [
+        {
+          "scope": "user",
+          "id": "u",
+          "exclude": [],
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"item\":{\"recipient_id\":\"nested\"},\"recipient_id\":\"u\"},\"type\":\"inbox:deleted\"}"
+        }
+      ],
+      "events": {
+        "inbox:deleted": 1
+      }
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [
+        {
+          "scope": "user",
+          "id": "nested",
+          "exclude": [],
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"item\":{\"recipient_id\":\"nested\"}},\"type\":\"inbox:new\"}"
+        }
+      ],
+      "events": {
+        "inbox:new": 1
+      }
+    },
+    {
+      "calls": [
+        {
+          "scope": "user",
+          "id": "nested",
+          "exclude": [],
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"item\":{\"recipient_id\":\"nested\"},\"recipient_id\":\"u\"},\"type\":\"inbox:new\"}"
+        }
+      ],
+      "events": {
+        "inbox:new": 1
+      }
+    },
+    {
+      "calls": [
+        {
+          "scope": "user",
+          "id": "nested",
+          "exclude": [],
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"item\":{\"recipient_id\":\"nested\"},\"recipient_id\":3},\"type\":\"inbox:new\"}"
+        }
+      ],
+      "events": {
+        "inbox:new": 1
+      }
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [
+        {
+          "scope": "user",
+          "id": "u",
+          "exclude": [],
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"recipient_id\":\"u\"},\"type\":\"inbox:read\"}"
+        }
+      ],
+      "events": {
+        "inbox:read": 1
+      }
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [
+        {
+          "scope": "user",
+          "id": "u",
+          "exclude": [],
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"item\":{\"recipient_id\":\"nested\"},\"recipient_id\":\"u\"},\"type\":\"inbox:read\"}"
+        }
+      ],
+      "events": {
+        "inbox:read": 1
+      }
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [
+        {
+          "scope": "user",
+          "id": "u",
+          "exclude": [],
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"recipient_id\":\"u\"},\"type\":\"inbox:snoozed\"}"
+        }
+      ],
+      "events": {
+        "inbox:snoozed": 1
+      }
+    },
+    {
+      "calls": [
+        {
+          "scope": "user",
+          "id": "nested",
+          "exclude": [],
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"item\":{\"recipient_id\":\"nested\"}},\"type\":\"inbox:snoozed\"}"
+        }
+      ],
+      "events": {
+        "inbox:snoozed": 1
+      }
+    },
+    {
+      "calls": [
+        {
+          "scope": "user",
+          "id": "u",
+          "exclude": [],
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"item\":{\"recipient_id\":\"nested\"},\"recipient_id\":\"u\"},\"type\":\"inbox:snoozed\"}"
+        }
+      ],
+      "events": {
+        "inbox:snoozed": 1
+      }
+    },
+    {
+      "calls": [
+        {
+          "scope": "user",
+          "id": "nested",
+          "exclude": [],
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"item\":{\"recipient_id\":\"nested\"},\"recipient_id\":3},\"type\":\"inbox:snoozed\"}"
+        }
+      ],
+      "events": {
+        "inbox:snoozed": 1
+      }
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [
+        {
+          "scope": "user",
+          "id": "u",
+          "exclude": [],
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"recipient_id\":\"u\"},\"type\":\"inbox:unarchived\"}"
+        }
+      ],
+      "events": {
+        "inbox:unarchived": 1
+      }
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [
+        {
+          "scope": "user",
+          "id": "u",
+          "exclude": [],
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"item\":{\"recipient_id\":\"nested\"},\"recipient_id\":\"u\"},\"type\":\"inbox:unarchived\"}"
+        }
+      ],
+      "events": {
+        "inbox:unarchived": 1
+      }
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [
+        {
+          "scope": "user",
+          "id": "u",
+          "exclude": [],
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"recipient_id\":\"u\"},\"type\":\"inbox:unsnoozed\"}"
+        }
+      ],
+      "events": {
+        "inbox:unsnoozed": 1
+      }
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [
+        {
+          "scope": "user",
+          "id": "u",
+          "exclude": [],
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"item\":{\"recipient_id\":\"nested\"},\"recipient_id\":\"u\"},\"type\":\"inbox:unsnoozed\"}"
+        }
+      ],
+      "events": {
+        "inbox:unsnoozed": 1
+      }
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [
+        {
+          "scope": "user",
+          "id": "u",
+          "exclude": [],
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"recipient_id\":\"u\"},\"type\":\"issue_unread:changed\"}"
+        }
+      ],
+      "events": {
+        "issue_unread:changed": 1
+      }
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [
+        {
+          "scope": "user",
+          "id": "u",
+          "exclude": [],
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"item\":{\"recipient_id\":\"nested\"},\"recipient_id\":\"u\"},\"type\":\"issue_unread:changed\"}"
+        }
+      ],
+      "events": {
+        "issue_unread:changed": 1
+      }
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [
+        {
+          "scope": "user",
+          "id": "u",
+          "exclude": [],
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"invitation\":{\"id\":\"i\",\"invitee_user_id\":\"u\",\"inviter_name\":\"\\u003cname\\u003e\",\"workspace_name\":\"\"}},\"type\":\"invitation:created\"}"
+        }
+      ],
+      "events": {
+        "invitation:created": 1
+      }
+    },
+    {
+      "calls": [
+        {
+          "scope": "user",
+          "id": "u",
+          "exclude": [],
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"invitation\":{\"id\":\"i\",\"workspace_id\":\"\",\"inviter_id\":\"\",\"invitee_email\":\"\",\"invitee_user_id\":\"u\",\"role\":\"\",\"status\":\"\",\"created_at\":\"\",\"updated_at\":\"\",\"expires_at\":\"\",\"inviter_name\":\"\\u003cname\\u003e\"}},\"type\":\"invitation:created\"}"
+        }
+      ],
+      "events": {
+        "invitation:created": 1
+      }
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [
+        {
+          "scope": "user",
+          "id": "u",
+          "exclude": [],
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"invitee_user_id\":\"u\"},\"type\":\"invitation:revoked\"}"
+        }
+      ],
+      "events": {
+        "invitation:revoked": 1
+      }
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [
+        {
+          "scope": "user",
+          "id": "u",
+          "exclude": [
+            ""
+          ],
+          "data": "{\"actor_id\":\"u\",\"actor_type\":\"member\",\"payload\":{},\"type\":\"invitation:accepted\"}"
+        }
+      ],
+      "events": {
+        "invitation:accepted": 1
+      }
+    },
+    {
+      "calls": [
+        {
+          "scope": "workspace",
+          "id": "w",
+          "exclude": [],
+          "data": "{\"actor_id\":\"\",\"actor_type\":\"member\",\"payload\":{},\"type\":\"invitation:accepted\"}"
+        }
+      ],
+      "events": {
+        "invitation:accepted": 1
+      }
+    },
+    {
+      "calls": [
+        {
+          "scope": "user",
+          "id": "u",
+          "exclude": [
+            "w"
+          ],
+          "data": "{\"actor_id\":\"u\",\"actor_type\":\"member\",\"payload\":{},\"type\":\"invitation:accepted\"}"
+        },
+        {
+          "scope": "workspace",
+          "id": "w",
+          "exclude": [],
+          "data": "{\"actor_id\":\"u\",\"actor_type\":\"member\",\"payload\":{},\"type\":\"invitation:accepted\"}"
+        }
+      ],
+      "events": {
+        "invitation:accepted": 2
+      }
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [
+        {
+          "scope": "user",
+          "id": "u",
+          "exclude": [
+            ""
+          ],
+          "data": "{\"actor_id\":\"u\",\"actor_type\":\"member\",\"payload\":{},\"type\":\"invitation:declined\"}"
+        }
+      ],
+      "events": {
+        "invitation:declined": 1
+      }
+    },
+    {
+      "calls": [
+        {
+          "scope": "workspace",
+          "id": "w",
+          "exclude": [],
+          "data": "{\"actor_id\":\"\",\"actor_type\":\"member\",\"payload\":{},\"type\":\"invitation:declined\"}"
+        }
+      ],
+      "events": {
+        "invitation:declined": 1
+      }
+    },
+    {
+      "calls": [
+        {
+          "scope": "user",
+          "id": "u",
+          "exclude": [
+            "w"
+          ],
+          "data": "{\"actor_id\":\"u\",\"actor_type\":\"member\",\"payload\":{},\"type\":\"invitation:declined\"}"
+        },
+        {
+          "scope": "workspace",
+          "id": "w",
+          "exclude": [],
+          "data": "{\"actor_id\":\"u\",\"actor_type\":\"member\",\"payload\":{},\"type\":\"invitation:declined\"}"
+        }
+      ],
+      "events": {
+        "invitation:declined": 2
+      }
+    },
+    {
+      "calls": [
+        {
+          "scope": "workspace",
+          "id": "w",
+          "exclude": [],
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"member\":{\"avatar_url\":null,\"name\":\"\\u003cname\\u003e\",\"user_id\":\"\"}},\"type\":\"member:added\"}"
+        }
+      ],
+      "events": {
+        "member:added": 1
+      }
+    },
+    {
+      "calls": [
+        {
+          "scope": "user",
+          "id": "u",
+          "exclude": [
+            "w"
+          ],
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"member\":{\"avatar_url\":null,\"name\":\"\\u003cname\\u003e\",\"user_id\":\"u\"}},\"type\":\"member:added\"}"
+        },
+        {
+          "scope": "workspace",
+          "id": "w",
+          "exclude": [],
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"member\":{\"avatar_url\":null,\"name\":\"\\u003cname\\u003e\",\"user_id\":\"u\"}},\"type\":\"member:added\"}"
+        }
+      ],
+      "events": {
+        "member:added": 2
+      }
+    },
+    {
+      "calls": [
+        {
+          "scope": "workspace",
+          "id": "w",
+          "exclude": [],
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"member\":{\"id\":\"\",\"workspace_id\":\"\",\"user_id\":\"\",\"role\":\"\",\"created_at\":\"\",\"name\":\"\\u003cname\\u003e\",\"email\":\"\",\"avatar_url\":null}},\"type\":\"member:added\"}"
+        }
+      ],
+      "events": {
+        "member:added": 1
+      }
+    },
+    {
+      "calls": [
+        {
+          "scope": "user",
+          "id": "u",
+          "exclude": [
+            "w"
+          ],
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"member\":{\"id\":\"\",\"workspace_id\":\"\",\"user_id\":\"u\",\"role\":\"\",\"created_at\":\"\",\"name\":\"\\u003cname\\u003e\",\"email\":\"\",\"avatar_url\":null}},\"type\":\"member:added\"}"
+        },
+        {
+          "scope": "workspace",
+          "id": "w",
+          "exclude": [],
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"member\":{\"id\":\"\",\"workspace_id\":\"\",\"user_id\":\"u\",\"role\":\"\",\"created_at\":\"\",\"name\":\"\\u003cname\\u003e\",\"email\":\"\",\"avatar_url\":null}},\"type\":\"member:added\"}"
+        }
+      ],
+      "events": {
+        "member:added": 2
+      }
+    },
+    {
+      "calls": [
+        {
+          "scope": "workspace",
+          "id": "w",
+          "exclude": [],
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"member\":{\"user_id\":3}},\"type\":\"member:added\"}"
+        }
+      ],
+      "events": {
+        "member:added": 1
+      }
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [
+        {
+          "scope": "workspace",
+          "id": "w",
+          "exclude": [],
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"issue\":{\"title\":\"shown\"}},\"type\":\"issue:updated\"}"
+        }
+      ],
+      "events": {
+        "issue:updated": 1
+      }
+    },
+    {
+      "calls": [
+        {
+          "scope": "workspace_member",
+          "id": "w:u",
+          "exclude": [],
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{},\"type\":\"issue:updated\"}"
+        },
+        {
+          "scope": "workspace_member",
+          "id": "w:u",
+          "exclude": [],
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{},\"type\":\"issue:updated\"}"
+        },
+        {
+          "scope": "workspace_member",
+          "id": "w:v",
+          "exclude": [],
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{},\"type\":\"issue:updated\"}"
+        }
+      ],
+      "events": {
+        "issue:updated": 1
+      }
+    },
+    {
+      "calls": [],
+      "events": {
+        "issue:updated": 1
+      }
+    }
+  ],
+  "python": [
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [
+        {
+          "scope": "user",
+          "id": "u",
+          "exclude": [],
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"recipient_id\":\"u\"},\"type\":\"inbox:archived\"}"
+        }
+      ],
+      "events": {
+        "inbox:archived": 1
+      }
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [
+        {
+          "scope": "user",
+          "id": "u",
+          "exclude": [],
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"item\":{\"recipient_id\":\"nested\"},\"recipient_id\":\"u\"},\"type\":\"inbox:archived\"}"
+        }
+      ],
+      "events": {
+        "inbox:archived": 1
+      }
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [
+        {
+          "scope": "user",
+          "id": "u",
+          "exclude": [],
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"recipient_id\":\"u\"},\"type\":\"inbox:batch-archived\"}"
+        }
+      ],
+      "events": {
+        "inbox:batch-archived": 1
+      }
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [
+        {
+          "scope": "user",
+          "id": "u",
+          "exclude": [],
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"item\":{\"recipient_id\":\"nested\"},\"recipient_id\":\"u\"},\"type\":\"inbox:batch-archived\"}"
+        }
+      ],
+      "events": {
+        "inbox:batch-archived": 1
+      }
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [
+        {
+          "scope": "user",
+          "id": "u",
+          "exclude": [],
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"recipient_id\":\"u\"},\"type\":\"inbox:batch-read\"}"
+        }
+      ],
+      "events": {
+        "inbox:batch-read": 1
+      }
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [
+        {
+          "scope": "user",
+          "id": "u",
+          "exclude": [],
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"item\":{\"recipient_id\":\"nested\"},\"recipient_id\":\"u\"},\"type\":\"inbox:batch-read\"}"
+        }
+      ],
+      "events": {
+        "inbox:batch-read": 1
+      }
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [
+        {
+          "scope": "user",
+          "id": "u",
+          "exclude": [],
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"recipient_id\":\"u\"},\"type\":\"inbox:deleted\"}"
+        }
+      ],
+      "events": {
+        "inbox:deleted": 1
+      }
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [
+        {
+          "scope": "user",
+          "id": "u",
+          "exclude": [],
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"item\":{\"recipient_id\":\"nested\"},\"recipient_id\":\"u\"},\"type\":\"inbox:deleted\"}"
+        }
+      ],
+      "events": {
+        "inbox:deleted": 1
+      }
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [
+        {
+          "scope": "user",
+          "id": "nested",
+          "exclude": [],
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"item\":{\"recipient_id\":\"nested\"}},\"type\":\"inbox:new\"}"
+        }
+      ],
+      "events": {
+        "inbox:new": 1
+      }
+    },
+    {
+      "calls": [
+        {
+          "scope": "user",
+          "id": "nested",
+          "exclude": [],
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"item\":{\"recipient_id\":\"nested\"},\"recipient_id\":\"u\"},\"type\":\"inbox:new\"}"
+        }
+      ],
+      "events": {
+        "inbox:new": 1
+      }
+    },
+    {
+      "calls": [
+        {
+          "scope": "user",
+          "id": "nested",
+          "exclude": [],
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"item\":{\"recipient_id\":\"nested\"},\"recipient_id\":3},\"type\":\"inbox:new\"}"
+        }
+      ],
+      "events": {
+        "inbox:new": 1
+      }
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [
+        {
+          "scope": "user",
+          "id": "u",
+          "exclude": [],
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"recipient_id\":\"u\"},\"type\":\"inbox:read\"}"
+        }
+      ],
+      "events": {
+        "inbox:read": 1
+      }
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [
+        {
+          "scope": "user",
+          "id": "u",
+          "exclude": [],
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"item\":{\"recipient_id\":\"nested\"},\"recipient_id\":\"u\"},\"type\":\"inbox:read\"}"
+        }
+      ],
+      "events": {
+        "inbox:read": 1
+      }
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [
+        {
+          "scope": "user",
+          "id": "u",
+          "exclude": [],
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"recipient_id\":\"u\"},\"type\":\"inbox:snoozed\"}"
+        }
+      ],
+      "events": {
+        "inbox:snoozed": 1
+      }
+    },
+    {
+      "calls": [
+        {
+          "scope": "user",
+          "id": "nested",
+          "exclude": [],
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"item\":{\"recipient_id\":\"nested\"}},\"type\":\"inbox:snoozed\"}"
+        }
+      ],
+      "events": {
+        "inbox:snoozed": 1
+      }
+    },
+    {
+      "calls": [
+        {
+          "scope": "user",
+          "id": "u",
+          "exclude": [],
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"item\":{\"recipient_id\":\"nested\"},\"recipient_id\":\"u\"},\"type\":\"inbox:snoozed\"}"
+        }
+      ],
+      "events": {
+        "inbox:snoozed": 1
+      }
+    },
+    {
+      "calls": [
+        {
+          "scope": "user",
+          "id": "nested",
+          "exclude": [],
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"item\":{\"recipient_id\":\"nested\"},\"recipient_id\":3},\"type\":\"inbox:snoozed\"}"
+        }
+      ],
+      "events": {
+        "inbox:snoozed": 1
+      }
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [
+        {
+          "scope": "user",
+          "id": "u",
+          "exclude": [],
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"recipient_id\":\"u\"},\"type\":\"inbox:unarchived\"}"
+        }
+      ],
+      "events": {
+        "inbox:unarchived": 1
+      }
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [
+        {
+          "scope": "user",
+          "id": "u",
+          "exclude": [],
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"item\":{\"recipient_id\":\"nested\"},\"recipient_id\":\"u\"},\"type\":\"inbox:unarchived\"}"
+        }
+      ],
+      "events": {
+        "inbox:unarchived": 1
+      }
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [
+        {
+          "scope": "user",
+          "id": "u",
+          "exclude": [],
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"recipient_id\":\"u\"},\"type\":\"inbox:unsnoozed\"}"
+        }
+      ],
+      "events": {
+        "inbox:unsnoozed": 1
+      }
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [
+        {
+          "scope": "user",
+          "id": "u",
+          "exclude": [],
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"item\":{\"recipient_id\":\"nested\"},\"recipient_id\":\"u\"},\"type\":\"inbox:unsnoozed\"}"
+        }
+      ],
+      "events": {
+        "inbox:unsnoozed": 1
+      }
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [
+        {
+          "scope": "user",
+          "id": "u",
+          "exclude": [],
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"recipient_id\":\"u\"},\"type\":\"issue_unread:changed\"}"
+        }
+      ],
+      "events": {
+        "issue_unread:changed": 1
+      }
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [
+        {
+          "scope": "user",
+          "id": "u",
+          "exclude": [],
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"item\":{\"recipient_id\":\"nested\"},\"recipient_id\":\"u\"},\"type\":\"issue_unread:changed\"}"
+        }
+      ],
+      "events": {
+        "issue_unread:changed": 1
+      }
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [
+        {
+          "scope": "user",
+          "id": "u",
+          "exclude": [],
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"invitation\":{\"id\":\"i\",\"invitee_user_id\":\"u\",\"inviter_name\":\"\\u003cname\\u003e\",\"workspace_name\":\"\"}},\"type\":\"invitation:created\"}"
+        }
+      ],
+      "events": {
+        "invitation:created": 1
+      }
+    },
+    {
+      "calls": [
+        {
+          "scope": "user",
+          "id": "u",
+          "exclude": [],
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"invitation\":{\"id\":\"i\",\"workspace_id\":\"\",\"inviter_id\":\"\",\"invitee_email\":\"\",\"invitee_user_id\":\"u\",\"role\":\"\",\"status\":\"\",\"created_at\":\"\",\"updated_at\":\"\",\"expires_at\":\"\",\"inviter_name\":\"\\u003cname\\u003e\"}},\"type\":\"invitation:created\"}"
+        }
+      ],
+      "events": {
+        "invitation:created": 1
+      }
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [
+        {
+          "scope": "user",
+          "id": "u",
+          "exclude": [],
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"invitee_user_id\":\"u\"},\"type\":\"invitation:revoked\"}"
+        }
+      ],
+      "events": {
+        "invitation:revoked": 1
+      }
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [
+        {
+          "scope": "user",
+          "id": "u",
+          "exclude": [
+            ""
+          ],
+          "data": "{\"actor_id\":\"u\",\"actor_type\":\"member\",\"payload\":{},\"type\":\"invitation:accepted\"}"
+        }
+      ],
+      "events": {
+        "invitation:accepted": 1
+      }
+    },
+    {
+      "calls": [
+        {
+          "scope": "workspace",
+          "id": "w",
+          "exclude": [],
+          "data": "{\"actor_id\":\"\",\"actor_type\":\"member\",\"payload\":{},\"type\":\"invitation:accepted\"}"
+        }
+      ],
+      "events": {
+        "invitation:accepted": 1
+      }
+    },
+    {
+      "calls": [
+        {
+          "scope": "user",
+          "id": "u",
+          "exclude": [
+            "w"
+          ],
+          "data": "{\"actor_id\":\"u\",\"actor_type\":\"member\",\"payload\":{},\"type\":\"invitation:accepted\"}"
+        },
+        {
+          "scope": "workspace",
+          "id": "w",
+          "exclude": [],
+          "data": "{\"actor_id\":\"u\",\"actor_type\":\"member\",\"payload\":{},\"type\":\"invitation:accepted\"}"
+        }
+      ],
+      "events": {
+        "invitation:accepted": 2
+      }
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [
+        {
+          "scope": "user",
+          "id": "u",
+          "exclude": [
+            ""
+          ],
+          "data": "{\"actor_id\":\"u\",\"actor_type\":\"member\",\"payload\":{},\"type\":\"invitation:declined\"}"
+        }
+      ],
+      "events": {
+        "invitation:declined": 1
+      }
+    },
+    {
+      "calls": [
+        {
+          "scope": "workspace",
+          "id": "w",
+          "exclude": [],
+          "data": "{\"actor_id\":\"\",\"actor_type\":\"member\",\"payload\":{},\"type\":\"invitation:declined\"}"
+        }
+      ],
+      "events": {
+        "invitation:declined": 1
+      }
+    },
+    {
+      "calls": [
+        {
+          "scope": "user",
+          "id": "u",
+          "exclude": [
+            "w"
+          ],
+          "data": "{\"actor_id\":\"u\",\"actor_type\":\"member\",\"payload\":{},\"type\":\"invitation:declined\"}"
+        },
+        {
+          "scope": "workspace",
+          "id": "w",
+          "exclude": [],
+          "data": "{\"actor_id\":\"u\",\"actor_type\":\"member\",\"payload\":{},\"type\":\"invitation:declined\"}"
+        }
+      ],
+      "events": {
+        "invitation:declined": 2
+      }
+    },
+    {
+      "calls": [
+        {
+          "scope": "workspace",
+          "id": "w",
+          "exclude": [],
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"member\":{\"avatar_url\":null,\"name\":\"\\u003cname\\u003e\",\"user_id\":\"\"}},\"type\":\"member:added\"}"
+        }
+      ],
+      "events": {
+        "member:added": 1
+      }
+    },
+    {
+      "calls": [
+        {
+          "scope": "user",
+          "id": "u",
+          "exclude": [
+            "w"
+          ],
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"member\":{\"avatar_url\":null,\"name\":\"\\u003cname\\u003e\",\"user_id\":\"u\"}},\"type\":\"member:added\"}"
+        },
+        {
+          "scope": "workspace",
+          "id": "w",
+          "exclude": [],
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"member\":{\"avatar_url\":null,\"name\":\"\\u003cname\\u003e\",\"user_id\":\"u\"}},\"type\":\"member:added\"}"
+        }
+      ],
+      "events": {
+        "member:added": 2
+      }
+    },
+    {
+      "calls": [
+        {
+          "scope": "workspace",
+          "id": "w",
+          "exclude": [],
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"member\":{\"id\":\"\",\"workspace_id\":\"\",\"user_id\":\"\",\"role\":\"\",\"created_at\":\"\",\"name\":\"\\u003cname\\u003e\",\"email\":\"\",\"avatar_url\":null}},\"type\":\"member:added\"}"
+        }
+      ],
+      "events": {
+        "member:added": 1
+      }
+    },
+    {
+      "calls": [
+        {
+          "scope": "user",
+          "id": "u",
+          "exclude": [
+            "w"
+          ],
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"member\":{\"id\":\"\",\"workspace_id\":\"\",\"user_id\":\"u\",\"role\":\"\",\"created_at\":\"\",\"name\":\"\\u003cname\\u003e\",\"email\":\"\",\"avatar_url\":null}},\"type\":\"member:added\"}"
+        },
+        {
+          "scope": "workspace",
+          "id": "w",
+          "exclude": [],
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"member\":{\"id\":\"\",\"workspace_id\":\"\",\"user_id\":\"u\",\"role\":\"\",\"created_at\":\"\",\"name\":\"\\u003cname\\u003e\",\"email\":\"\",\"avatar_url\":null}},\"type\":\"member:added\"}"
+        }
+      ],
+      "events": {
+        "member:added": 2
+      }
+    },
+    {
+      "calls": [
+        {
+          "scope": "workspace",
+          "id": "w",
+          "exclude": [],
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"member\":{\"user_id\":3}},\"type\":\"member:added\"}"
+        }
+      ],
+      "events": {
+        "member:added": 1
+      }
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [
+        {
+          "scope": "workspace",
+          "id": "w",
+          "exclude": [],
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"issue\":{\"title\":\"shown\"}},\"type\":\"issue:updated\"}"
+        }
+      ],
+      "events": {
+        "issue:updated": 1
+      }
+    },
+    {
+      "calls": [
+        {
+          "scope": "workspace_member",
+          "id": "w:u",
+          "exclude": [],
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{},\"type\":\"issue:updated\"}"
+        },
+        {
+          "scope": "workspace_member",
+          "id": "w:u",
+          "exclude": [],
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{},\"type\":\"issue:updated\"}"
+        },
+        {
+          "scope": "workspace_member",
+          "id": "w:v",
+          "exclude": [],
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{},\"type\":\"issue:updated\"}"
+        }
+      ],
+      "events": {
+        "issue:updated": 1
+      }
+    },
+    {
+      "calls": [],
+      "events": {
+        "issue:updated": 1
+      }
+    }
+  ],
+  "mismatches": [],
+  "source_sha256": {
+    "server/go/cmd/server/listeners.go": "367141ba8584f32ca1de337f65afcfbc7cb1dc0ae65012d0848812722dd303c9",
+    "server/go/internal/handler/invitation.go": "f8b98c1af02c7980c51cd8da20234b7ba9396ca0083eed5d04efb7748eda50ae",
+    "server/go/internal/handler/workspace.go": "5dbdb2504746341794c0982df99408eadf343100cdc261a8d2fffd509c2c32c8",
+    "server/tests/parity/go_realtime_listeners/main.go": "e691033baa0b40fe9659fdae77374d900d60fb63e49ab414c854afe264374e66",
+    "server/src/workpal_backend/realtime/listeners.py": "bc4f37e92abef04a9db16cd6058900ed888386968d8948e1e4f48d6b2a92e691",
+    "server/src/workpal_backend/realtime/event_payloads.py": "8df8e382d84338cc9e7b3bbcad6799459badec208822547e793f63b9e5342fce",
+    "server/src/workpal_backend/realtime/forwarding.py": "df47f99f091de289f46da4695d3e93a30bb37cb330a3766a4cf208d94e53537b",
+    "server/src/workpal_backend/infrastructure/events.py": "d5fa328402fa8b2ee3db01b2bad331d159ce7ab4a4b57d07ac135ffb59e1c0b8"
+  }
+}

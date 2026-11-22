@@ -1,0 +1,8 @@
+package handler
+import("context";"net/http/httptest";"time";"workpal.local/workpal/server/internal/auth";"workpal.local/workpal/server/internal/storage";db "workpal.local/workpal/server/pkg/db/generated")
+type ParityURLFixture struct{URL,Store,CDN,PublicURL,Mode,Capability string;Signed,Presigner bool;TTL int64}
+type parityURLStorage struct{storage.Storage;domain string}
+func(s parityURLStorage)CdnDomain()string{return s.domain}
+type parityURLPresigner struct{parityURLStorage}
+func(s parityURLPresigner)PresignGetWithContentDisposition(context.Context,string,time.Duration,string)(string,error){panic("unexpected signing")}
+func ParityAttachmentURL(f ParityURLFixture)any{h:=&Handler{cfg:Config{PublicURL:f.PublicURL,AttachmentDownloadMode:f.Mode,AttachmentDownloadURLTTL:time.Duration(f.TTL)}};switch f.Store{case "local":h.Storage=&storage.LocalStorage{};case "remote":h.Storage=parityURLStorage{domain:f.CDN}};if f.Presigner{h.Storage=parityURLPresigner{parityURLStorage{domain:f.CDN}}};if f.Signed{h.CFSigner=&auth.CloudFrontSigner{}};mode,valid:=normalizeAttachmentDownloadMode(f.Mode);r:=httptest.NewRequest("GET","http://internal",nil);r.Header.Set("X-Client-Capabilities",f.Capability);return map[string]any{"proxy":shouldProxyAttachmentURL(f.URL),"resolved":h.resolveAttachmentDownloadMode(f.URL),"durable":isDurablePublicURL(f.URL),"public":h.storageURLIsPubliclyReadable(f.URL),"markdown":h.buildMarkdownURL(db.Attachment{Url:f.URL},"attachment"),"mode":mode,"valid_mode":valid,"ttl":int64(h.attachmentDownloadURLTTL()),"stable":attachmentURLModeFromRequest(r)==attachmentURLModeStable}}

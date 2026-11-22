@@ -1,0 +1,337 @@
+{
+  "version": 1,
+  "coverage": {
+    "bounded_complete": false,
+    "global_complete": false,
+    "disposition": "Root review required; incomplete indirect observer union"
+  },
+  "method": "Actual static callback body reads; no runtime, inventory, data, Git or network writes; no children; ordinary TanStack/React contracts terminate library tracing; no node_modules.",
+  "prerequisites": [
+    "issue-surface-transport-coverage.json/.md",
+    "retry-callback-transport-coverage.json/.md"
+  ],
+  "files": [
+    {
+      "path": "packages/views/issues/surface/use-issue-status-branches.ts",
+      "sha256": "8d1acb764817b793e5c3a2a483fd91e067f7ca976921a8d3c1177d7dbf5d3d0a",
+      "reviewed_ranges": [
+        [
+          1,
+          461
+        ]
+      ],
+      "lines": 461
+    },
+    {
+      "path": "packages/views/issues/surface/use-issue-group-branches.ts",
+      "sha256": "3fa88dd94db99b95604ecd7237ae6bbcaec3fb2631797bd796b87d795b584adb",
+      "reviewed_ranges": [
+        [
+          1,
+          508
+        ]
+      ],
+      "lines": 508
+    },
+    {
+      "path": "packages/views/issues/surface/use-issue-surface-actions.ts",
+      "sha256": "8d511d0e0182281313aab37e7fba0e29d8428fbcb7e4306e3dd35d3d68a73789",
+      "reviewed_ranges": [
+        [
+          1,
+          152
+        ]
+      ],
+      "lines": 152
+    },
+    {
+      "path": "packages/views/issues/surface/use-issue-surface-controller.ts",
+      "sha256": "8871358a471ec6a9d5d124d1851a4b8bb373af9eda022eda7bdcb7021ae78dd6",
+      "reviewed_ranges": [
+        [
+          600,
+          900
+        ]
+      ],
+      "lines": 1135
+    },
+    {
+      "path": "packages/core/issues/mutations.ts",
+      "sha256": "9b81f4b0b396a1d714b40c42115eb95af59a56b28e1ce515774f691c6770de4e",
+      "reviewed_ranges": [
+        [
+          90,
+          145
+        ],
+        [
+          193,
+          437
+        ],
+        [
+          541,
+          880
+        ]
+      ],
+      "lines": 1307
+    },
+    {
+      "path": "packages/core/issues/delete-cache.ts",
+      "sha256": "06063942dde73286312d7e82ad1091207d98a20f0a77903c04bfcdcd85ce4088",
+      "reviewed_ranges": [
+        [
+          1,
+          222
+        ]
+      ],
+      "lines": 222
+    },
+    {
+      "path": "packages/core/issues/status-category.ts",
+      "sha256": "2bb7ccdfc42e10c75e81b14421110ebd360dc46a76f563b0cb5c5e69c9caa94b",
+      "reviewed_ranges": [
+        [
+          1,
+          198
+        ]
+      ],
+      "lines": 198
+    },
+    {
+      "path": "packages/core/issues/queries.ts",
+      "sha256": "10d939b302cbeca9280944c5b5ad0e3e8e042130d2c714496a6b6da6daf53c3e",
+      "reviewed_ranges": [
+        [
+          1,
+          180
+        ],
+        [
+          308,
+          383
+        ]
+      ],
+      "lines": 743
+    },
+    {
+      "path": "packages/core/api/client.ts",
+      "sha256": "779bb65b5b7ead815836f7c704ec3c370bafae203e4f92119fadce93e982a4d7",
+      "reviewed_ranges": [
+        [
+          1401,
+          1442
+        ],
+        [
+          1770,
+          1783
+        ],
+        [
+          1830,
+          1856
+        ]
+      ],
+      "lines": 6216
+    },
+    {
+      "path": "packages/core/inbox/ws-updaters.ts",
+      "sha256": "710af5cdd2f59c397d6f9a1b16146b923d08f70c0f619181074503db0f81c175",
+      "reviewed_ranges": [
+        [
+          1,
+          80
+        ],
+        [
+          127,
+          270
+        ]
+      ],
+      "lines": 270
+    },
+    {
+      "path": "packages/core/issues/cache-coordinator.ts",
+      "sha256": "70108d123cb72357156bac5077f30ae263d782684ac39ea69622d5b285fa020c",
+      "reviewed_ranges": [
+        [
+          1,
+          530
+        ],
+        [
+          550,
+          650
+        ],
+        [
+          731,
+          746
+        ]
+      ],
+      "lines": 746
+    },
+    {
+      "path": "packages/core/issue-statuses/hooks.ts",
+      "sha256": "6a46a26af0f7d647b8c2a95188c01e6d79d77dce89f29af8766ca891b13856ae",
+      "reviewed_ranges": [
+        [
+          1,
+          32
+        ]
+      ],
+      "lines": 32
+    }
+  ],
+  "frontend_calls": [
+    {
+      "id": "client:1402",
+      "method": "POST",
+      "path_expression": "/api/issues/table/groups",
+      "route": {
+        "method": "POST",
+        "path": "/api/issues/table/groups"
+      },
+      "sources": [
+        "packages/core/api/client.ts:1402"
+      ],
+      "transport": "ApiClient.fetch; baseUrl + path; bearer or cookie credentials; workspace header from client context",
+      "auth": "requires endpoint-specific reconciliation",
+      "status": "pending-reconciliation"
+    },
+    {
+      "id": "client:1416",
+      "method": "POST",
+      "path_expression": "/api/issues/table/rows",
+      "route": {
+        "method": "POST",
+        "path": "/api/issues/table/rows"
+      },
+      "sources": [
+        "packages/core/api/client.ts:1416",
+        "packages/core/diagnostics/dev-recorder-realtime.test.tsx:211",
+        "packages/views/layout/panels/work-panel.test.tsx:784",
+        "packages/views/issues/surface/issue-surface.test.tsx:1022"
+      ],
+      "transport": "ApiClient.fetch; baseUrl + path; bearer or cookie credentials; workspace header from client context",
+      "auth": "requires endpoint-specific reconciliation",
+      "status": "pending-reconciliation"
+    },
+    {
+      "id": "client:1430",
+      "method": "POST",
+      "path_expression": "/api/issues/table/facets",
+      "route": {
+        "method": "POST",
+        "path": "/api/issues/table/facets"
+      },
+      "sources": [
+        "packages/core/api/client.ts:1430"
+      ],
+      "transport": "ApiClient.fetch; baseUrl + path; bearer or cookie credentials; workspace header from client context",
+      "auth": "requires endpoint-specific reconciliation",
+      "status": "pending-reconciliation"
+    },
+    {
+      "id": "client:1771",
+      "method": "PUT",
+      "path_expression": "/api/issues/${id}",
+      "route": {
+        "method": "PUT",
+        "path": "/api/issues/{id}"
+      },
+      "sources": [
+        "packages/core/api/client.ts:1771",
+        "packages/views/issues/components/table-view.tsx:1167",
+        "packages/views/issues/components/board-card.tsx:99",
+        "packages/views/modals/create-issue.tsx:534"
+      ],
+      "transport": "ApiClient.fetch; baseUrl + path; bearer or cookie credentials; workspace header from client context",
+      "auth": "requires endpoint-specific reconciliation",
+      "status": "pending-reconciliation"
+    },
+    {
+      "id": "client:1778",
+      "method": "POST",
+      "path_expression": "/api/issues/${id}/move",
+      "route": {
+        "method": "POST",
+        "path": "/api/issues/{id}/move"
+      },
+      "sources": [
+        "packages/core/api/client.ts:1778",
+        "packages/views/issues/surface/use-issue-surface-controller.test.tsx:619"
+      ],
+      "transport": "ApiClient.fetch; baseUrl + path; bearer or cookie credentials; workspace header from client context",
+      "auth": "requires endpoint-specific reconciliation",
+      "status": "pending-reconciliation"
+    },
+    {
+      "id": "client:1835",
+      "method": "POST",
+      "path_expression": "/api/issues/batch-update",
+      "route": {
+        "method": "POST",
+        "path": "/api/issues/batch-update"
+      },
+      "sources": [
+        "packages/core/api/client.ts:1835"
+      ],
+      "transport": "ApiClient.fetch; baseUrl + path; bearer or cookie credentials; workspace header from client context",
+      "auth": "requires endpoint-specific reconciliation",
+      "status": "pending-reconciliation"
+    },
+    {
+      "id": "client:1852",
+      "method": "POST",
+      "path_expression": "/api/issues/batch-delete",
+      "route": {
+        "method": "POST",
+        "path": "/api/issues/batch-delete"
+      },
+      "sources": [
+        "packages/core/api/client.ts:1852"
+      ],
+      "transport": "ApiClient.fetch; baseUrl + path; bearer or cookie credentials; workspace header from client context",
+      "auth": "requires endpoint-specific reconciliation",
+      "status": "pending-reconciliation"
+    },
+    {
+      "id": "client:4821",
+      "method": "GET",
+      "path_expression": "/api/issue-statuses${query}",
+      "route": {
+        "method": "GET",
+        "path": "/api/issue-statuses"
+      },
+      "sources": [
+        "packages/core/api/client.ts:4821"
+      ],
+      "transport": "ApiClient.fetch; baseUrl + path; bearer or cookie credentials; workspace header from client context",
+      "auth": "requires endpoint-specific reconciliation",
+      "status": "pending-reconciliation"
+    }
+  ],
+  "findings": [
+    "Status branches: identity includes wsId/query/status group; initialize each status with null head, rebase on identity/new statuses. Enabled false produces no targets. Heads retain settled nonerror placeholders, cleared on workspace change. Rows deduplicate IDs per status and reject mismatched exact status. Head fetching hides tails; revision/fetch effect trims chains to null head. loadMore appends only nonempty unseen next_cursor for matching identity. Retry refetches active nonexact tableRows prefix, covering cursor pages. Facets own totals; global loading/refresh tracks heads, not tails.",
+    "Group branches: infinite groups factory starts null cursor, limit100, next_cursor; retry false. Descriptors flatten secondary groups with visible-status filtering. No row observer until loadMore installs null head; later appends unseen cursor. Rows limit50 hierarchy false parent null; descriptor matching validates actor/project/parent/property/status or secondary category and deduplicates per branch. Head revisions trim tails. Retry uses active row prefix; retryGroups invokes refetch; loadMoreGroups checks hasNextPage and !isFetchingNextPage. Group first page total authoritative. Identity includes query/group but excludes wsId; placeholder map has no workspace clear in this body.",
+    "Controller 600-780 read without truncation: constructs scope (team throws), date/filter/negation/search/sort query, omits unresolved working/unread membership IDs, stabilizes by content; facets status/active submenu and include_total; facet automatic enabled !membershipUnresolved && (status surface || table/group with active facet). 829-885 wires status/group hooks with !statusFilterUnresolved && !membershipUnresolved; swimlane removes statuses and status negation and uses compound secondary exact status; empty property/swimlane branches observable.",
+    "Actions: update forwards caller success/error/settled with revision-conflict toast; returned actions.moveIssue delegates ordinary update, while separately returned moveIssue strips anchors into move_intent. Create opens modal only. batchUpdate forwards ids/updates/ops; delete awaits mutation. Arbitrary injected callbacks are outside concrete production union.",
+    "Update mutation sends PUT or POST move (strips optimistic position); synchronous cancellation and coordinator patch excludes control/description metadata. Failure restores coordinator/parent snapshots and invalidates loaded owner prefixes. Success reconciles authoritative non-property fields only against lower revisions, then revision reconciliation and stale-key invalidation. Settled refreshes derivatives/table, optional attachments/duplicates/old+new children/progress/batched children. Agent done reports star prompt.",
+    "Batch update awaits cancellation; first-wins snapshots per hash across list/flat/table/sidebar/detail/inbox/children. Failure rollback; partial updated count also rollback and owner refetch; labels/properties force owner refetch. Settled derivative/table/stale-key/parent invalidation. Batch API throws unsupported ops if confirmed count lacks results.",
+    "Batch delete snapshots/prunes list/my/flat and discovered parent children; failure restores. Full success forgets recent context, cleans scoped caches, prunes inbox; partial count restores and invalidates all issues/dependencies/inbox summary. Settled list/flat/table/assignee/Gantt/sidebar/projects/parent invalidation.",
+    "Inbox update rereads are owed if interrupted, failed or in flight, paid at terminal mutation-cache event only when no workspace issue-write remains pending. Inbox refresh cancels then invalidates. Full delete prunes inbox and selection and refreshes summary/archive pages/lookup/facets, plus all inbox on interruption. No direct prefetch in reviewed mutation/coordinator/delete/inbox updater bodies."
+  ],
+  "open_edges": [
+    "Complete indirect observer API-ID/route union for every invalidated cache prefix remains unclosed; do not equate invalidation with unconditional HTTP.",
+    "Coordinator output was truncated at part of 531-549; membership/cache-helper dependencies, ws revision helper and star prompt bodies remain unreviewed.",
+    "Modal/i18n/recent-context/recent-issues/inbox selection concrete helper bodies remain unreviewed.",
+    "Store/date/filter/selection controller/data edges outside bounded task remain open; no full controller/data closure."
+  ],
+  "validation": "JSON parsed; hashes from local bytes. Documentation only. No runtime checks.",
+  "parent_review": {
+    "status": "partial-evidence-accepted-no-source-closure",
+    "reviewed_additional_ranges": {
+      "packages/core/issues/cache-coordinator.ts": [
+        [
+          525,
+          555
+        ]
+      ]
+    },
+    "decision": "Branch and direct mutation mappings retained. Missing cache/query helper union remains explicit; no master-ledger source promoted. Use reviewed query-factory union rather than enumerate runtime observers."
+  }
+}

@@ -1,0 +1,2343 @@
+{
+  "scope": "PAT handler boundary with seeded lifecycle, fixture identity, isolated PostgreSQL/SQLite; not middleware, random issuance or full lifecycle",
+  "unobserved_channels": [
+    "events",
+    "external_calls"
+  ],
+  "source_hashes": {
+    "server/go/internal/handler/personal_access_token.go": "1a69eb0bce4758e557ffea239b2942a69fe2514d05d56f2baf9c121e9c52ac53",
+    "server/go/pkg/db/queries/personal_access_token.sql": "e2b2b9b8d8b0e421d2a5a4d9caa1e4dc682b1163b05fc87ee5c087a049c84f92",
+    "server/go/migrations/011_personal_access_tokens.up.sql": "53b887713e846707d0175d4d662ecb7c274b3176528db62f4d5c92d966c83942",
+    "server/tests/parity/go_pat/main.go": "1cdf6ffea318e81b5acb83be86b899890fc9daf404cae9ee650763e483572c6a"
+  },
+  "binary_sha256": "22ccb4158fd915ef9b9ae632a2ac64bca9ba4644267a610e7962d484e693c989",
+  "fixtures": [
+    {
+      "method": "GET",
+      "path": "/api/tokens",
+      "body": ""
+    },
+    {
+      "method": "POST",
+      "path": "/api/tokens",
+      "body": "{}"
+    },
+    {
+      "method": "POST",
+      "path": "/api/tokens",
+      "body": "null"
+    },
+    {
+      "method": "POST",
+      "path": "/api/tokens",
+      "body": "{\"name\":5,\"name\":\"A\"}"
+    },
+    {
+      "method": "POST",
+      "path": "/api/tokens",
+      "body": "{\"name\":\"A\",\"expires_in_days\":1.5}"
+    },
+    {
+      "method": "POST",
+      "path": "/api/tokens",
+      "body": "{\"name\":\"A\",\"expires_in_days\":9223372036854775808}"
+    },
+    {
+      "method": "POST",
+      "path": "/api/tokens/current/renew",
+      "body": ""
+    },
+    {
+      "method": "POST",
+      "path": "/api/tokens/current/renew",
+      "body": "",
+      "authorization": "Bearer mul_absent"
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/tokens/not-uuid",
+      "body": ""
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/tokens/22222222-2222-4222-8222-222222222222",
+      "body": ""
+    },
+    {
+      "method": "POST",
+      "path": "/api/tokens",
+      "body": "{",
+      "actor": "task_token"
+    },
+    {
+      "method": "GET",
+      "path": "/api/tokens",
+      "body": "",
+      "actor": "cloud_pat"
+    },
+    {
+      "method": "POST",
+      "path": "/api/tokens",
+      "body": "{\"name\":\"bad\\u0000name\"}"
+    },
+    {
+      "method": "POST",
+      "path": "/api/tokens/current/renew",
+      "body": "",
+      "authorization": "Bearer mul_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/tokens/33333333-3333-4333-8333-333333333333",
+      "body": ""
+    },
+    {
+      "method": "GET",
+      "path": "/api/tokens",
+      "body": ""
+    },
+    {
+      "method": "POST",
+      "path": "/api/tokens/current/renew",
+      "body": "",
+      "authorization": "Bearer mul_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/tokens/33333333-3333-4333-8333-333333333333",
+      "body": ""
+    },
+    {
+      "method": "POST",
+      "path": "/api/tokens/current/renew",
+      "body": "",
+      "authorization": "Bearer mul_bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+    },
+    {
+      "method": "POST",
+      "path": "/api/tokens/current/renew",
+      "body": "",
+      "authorization": "Bearer mul_cccccccccccccccccccccccccccccccccccccccc"
+    }
+  ],
+  "seeds": [
+    {
+      "id": "33333333-3333-4333-8333-333333333333",
+      "name": "seed",
+      "token_hash": "ae84763d263fcb65bcd4204e725f897a37a95026e81e9ab95717dff02f6bb382",
+      "token_prefix": "mul_aaaaaaaa",
+      "created_at": "2026-01-01T00:00:00Z"
+    },
+    {
+      "id": "44444444-4444-4444-8444-444444444444",
+      "name": "far",
+      "token_hash": "4c67cd42695f2f0cebb9a98e9ea162196c5793b415765733fe0d5ecf4d497bb9",
+      "token_prefix": "mul_bbbbbbbb",
+      "created_at": "2026-01-01T00:00:00Z",
+      "expires_at": "2035-01-01T00:00:00Z"
+    },
+    {
+      "id": "55555555-5555-4555-8555-555555555555",
+      "name": "expired",
+      "token_hash": "8356cbd8ca0ff150fd815b63f7858d6d3990faf88c258cc4fac2e34991b42a9f",
+      "token_prefix": "mul_cccccccc",
+      "created_at": "2026-01-01T00:00:00Z",
+      "expires_at": "2000-01-01T00:00:00Z"
+    }
+  ],
+  "go": [
+    {
+      "body": [
+        {
+          "created_at": "2026-01-01T00:00:00Z",
+          "expires_at": null,
+          "id": "33333333-3333-4333-8333-333333333333",
+          "last_used_at": null,
+          "name": "seed",
+          "token_prefix": "mul_aaaaaaaa"
+        },
+        {
+          "created_at": "2026-01-01T00:00:00Z",
+          "expires_at": "2035-01-01T00:00:00Z",
+          "id": "44444444-4444-4444-8444-444444444444",
+          "last_used_at": null,
+          "name": "far",
+          "token_prefix": "mul_bbbbbbbb"
+        },
+        {
+          "created_at": "2026-01-01T00:00:00Z",
+          "expires_at": "2000-01-01T00:00:00Z",
+          "id": "55555555-5555-4555-8555-555555555555",
+          "last_used_at": null,
+          "name": "expired",
+          "token_prefix": "mul_cccccccc"
+        }
+      ],
+      "events": null,
+      "external_calls": null,
+      "headers": {
+        "content-length": [
+          "532"
+        ],
+        "content-type": [
+          "application/json"
+        ]
+      },
+      "state": {
+        "tokens": [
+          {
+            "created_at": 1767225600,
+            "expires_at": null,
+            "id": "33333333-3333-4333-8333-333333333333",
+            "last_used_at": null,
+            "name": "seed",
+            "revoked": false,
+            "token_hash": "ae84763d263fcb65bcd4204e725f897a37a95026e81e9ab95717dff02f6bb382",
+            "token_prefix": "mul_aaaaaaaa",
+            "user_id": "11111111-1111-4111-8111-111111111111"
+          },
+          {
+            "created_at": 1767225600,
+            "expires_at": 2051222400,
+            "id": "44444444-4444-4444-8444-444444444444",
+            "last_used_at": null,
+            "name": "far",
+            "revoked": false,
+            "token_hash": "4c67cd42695f2f0cebb9a98e9ea162196c5793b415765733fe0d5ecf4d497bb9",
+            "token_prefix": "mul_bbbbbbbb",
+            "user_id": "11111111-1111-4111-8111-111111111111"
+          },
+          {
+            "created_at": 1767225600,
+            "expires_at": 946684800,
+            "id": "55555555-5555-4555-8555-555555555555",
+            "last_used_at": null,
+            "name": "expired",
+            "revoked": false,
+            "token_hash": "8356cbd8ca0ff150fd815b63f7858d6d3990faf88c258cc4fac2e34991b42a9f",
+            "token_prefix": "mul_cccccccc",
+            "user_id": "11111111-1111-4111-8111-111111111111"
+          }
+        ]
+      },
+      "status": 200,
+      "wire_body": "[{\"id\":\"33333333-3333-4333-8333-333333333333\",\"name\":\"seed\",\"token_prefix\":\"mul_aaaaaaaa\",\"expires_at\":null,\"last_used_at\":null,\"created_at\":\"2026-01-01T00:00:00Z\"},{\"id\":\"44444444-4444-4444-8444-444444444444\",\"name\":\"far\",\"token_prefix\":\"mul_bbbbbbbb\",\"expires_at\":\"2035-01-01T00:00:00Z\",\"last_used_at\":null,\"created_at\":\"2026-01-01T00:00:00Z\"},{\"id\":\"55555555-5555-4555-8555-555555555555\",\"name\":\"expired\",\"token_prefix\":\"mul_cccccccc\",\"expires_at\":\"2000-01-01T00:00:00Z\",\"last_used_at\":null,\"created_at\":\"2026-01-01T00:00:00Z\"}]\n"
+    },
+    {
+      "body": {
+        "error": "name is required"
+      },
+      "events": null,
+      "external_calls": null,
+      "headers": {
+        "content-length": [
+          "29"
+        ],
+        "content-type": [
+          "application/json"
+        ]
+      },
+      "state": {
+        "tokens": [
+          {
+            "created_at": 1767225600,
+            "expires_at": null,
+            "id": "33333333-3333-4333-8333-333333333333",
+            "last_used_at": null,
+            "name": "seed",
+            "revoked": false,
+            "token_hash": "ae84763d263fcb65bcd4204e725f897a37a95026e81e9ab95717dff02f6bb382",
+            "token_prefix": "mul_aaaaaaaa",
+            "user_id": "11111111-1111-4111-8111-111111111111"
+          },
+          {
+            "created_at": 1767225600,
+            "expires_at": 2051222400,
+            "id": "44444444-4444-4444-8444-444444444444",
+            "last_used_at": null,
+            "name": "far",
+            "revoked": false,
+            "token_hash": "4c67cd42695f2f0cebb9a98e9ea162196c5793b415765733fe0d5ecf4d497bb9",
+            "token_prefix": "mul_bbbbbbbb",
+            "user_id": "11111111-1111-4111-8111-111111111111"
+          },
+          {
+            "created_at": 1767225600,
+            "expires_at": 946684800,
+            "id": "55555555-5555-4555-8555-555555555555",
+            "last_used_at": null,
+            "name": "expired",
+            "revoked": false,
+            "token_hash": "8356cbd8ca0ff150fd815b63f7858d6d3990faf88c258cc4fac2e34991b42a9f",
+            "token_prefix": "mul_cccccccc",
+            "user_id": "11111111-1111-4111-8111-111111111111"
+          }
+        ]
+      },
+      "status": 400,
+      "wire_body": "{\"error\":\"name is required\"}\n"
+    },
+    {
+      "body": {
+        "error": "name is required"
+      },
+      "events": null,
+      "external_calls": null,
+      "headers": {
+        "content-length": [
+          "29"
+        ],
+        "content-type": [
+          "application/json"
+        ]
+      },
+      "state": {
+        "tokens": [
+          {
+            "created_at": 1767225600,
+            "expires_at": null,
+            "id": "33333333-3333-4333-8333-333333333333",
+            "last_used_at": null,
+            "name": "seed",
+            "revoked": false,
+            "token_hash": "ae84763d263fcb65bcd4204e725f897a37a95026e81e9ab95717dff02f6bb382",
+            "token_prefix": "mul_aaaaaaaa",
+            "user_id": "11111111-1111-4111-8111-111111111111"
+          },
+          {
+            "created_at": 1767225600,
+            "expires_at": 2051222400,
+            "id": "44444444-4444-4444-8444-444444444444",
+            "last_used_at": null,
+            "name": "far",
+            "revoked": false,
+            "token_hash": "4c67cd42695f2f0cebb9a98e9ea162196c5793b415765733fe0d5ecf4d497bb9",
+            "token_prefix": "mul_bbbbbbbb",
+            "user_id": "11111111-1111-4111-8111-111111111111"
+          },
+          {
+            "created_at": 1767225600,
+            "expires_at": 946684800,
+            "id": "55555555-5555-4555-8555-555555555555",
+            "last_used_at": null,
+            "name": "expired",
+            "revoked": false,
+            "token_hash": "8356cbd8ca0ff150fd815b63f7858d6d3990faf88c258cc4fac2e34991b42a9f",
+            "token_prefix": "mul_cccccccc",
+            "user_id": "11111111-1111-4111-8111-111111111111"
+          }
+        ]
+      },
+      "status": 400,
+      "wire_body": "{\"error\":\"name is required\"}\n"
+    },
+    {
+      "body": {
+        "error": "invalid request body"
+      },
+      "events": null,
+      "external_calls": null,
+      "headers": {
+        "content-length": [
+          "33"
+        ],
+        "content-type": [
+          "application/json"
+        ]
+      },
+      "state": {
+        "tokens": [
+          {
+            "created_at": 1767225600,
+            "expires_at": null,
+            "id": "33333333-3333-4333-8333-333333333333",
+            "last_used_at": null,
+            "name": "seed",
+            "revoked": false,
+            "token_hash": "ae84763d263fcb65bcd4204e725f897a37a95026e81e9ab95717dff02f6bb382",
+            "token_prefix": "mul_aaaaaaaa",
+            "user_id": "11111111-1111-4111-8111-111111111111"
+          },
+          {
+            "created_at": 1767225600,
+            "expires_at": 2051222400,
+            "id": "44444444-4444-4444-8444-444444444444",
+            "last_used_at": null,
+            "name": "far",
+            "revoked": false,
+            "token_hash": "4c67cd42695f2f0cebb9a98e9ea162196c5793b415765733fe0d5ecf4d497bb9",
+            "token_prefix": "mul_bbbbbbbb",
+            "user_id": "11111111-1111-4111-8111-111111111111"
+          },
+          {
+            "created_at": 1767225600,
+            "expires_at": 946684800,
+            "id": "55555555-5555-4555-8555-555555555555",
+            "last_used_at": null,
+            "name": "expired",
+            "revoked": false,
+            "token_hash": "8356cbd8ca0ff150fd815b63f7858d6d3990faf88c258cc4fac2e34991b42a9f",
+            "token_prefix": "mul_cccccccc",
+            "user_id": "11111111-1111-4111-8111-111111111111"
+          }
+        ]
+      },
+      "status": 400,
+      "wire_body": "{\"error\":\"invalid request body\"}\n"
+    },
+    {
+      "body": {
+        "error": "invalid request body"
+      },
+      "events": null,
+      "external_calls": null,
+      "headers": {
+        "content-length": [
+          "33"
+        ],
+        "content-type": [
+          "application/json"
+        ]
+      },
+      "state": {
+        "tokens": [
+          {
+            "created_at": 1767225600,
+            "expires_at": null,
+            "id": "33333333-3333-4333-8333-333333333333",
+            "last_used_at": null,
+            "name": "seed",
+            "revoked": false,
+            "token_hash": "ae84763d263fcb65bcd4204e725f897a37a95026e81e9ab95717dff02f6bb382",
+            "token_prefix": "mul_aaaaaaaa",
+            "user_id": "11111111-1111-4111-8111-111111111111"
+          },
+          {
+            "created_at": 1767225600,
+            "expires_at": 2051222400,
+            "id": "44444444-4444-4444-8444-444444444444",
+            "last_used_at": null,
+            "name": "far",
+            "revoked": false,
+            "token_hash": "4c67cd42695f2f0cebb9a98e9ea162196c5793b415765733fe0d5ecf4d497bb9",
+            "token_prefix": "mul_bbbbbbbb",
+            "user_id": "11111111-1111-4111-8111-111111111111"
+          },
+          {
+            "created_at": 1767225600,
+            "expires_at": 946684800,
+            "id": "55555555-5555-4555-8555-555555555555",
+            "last_used_at": null,
+            "name": "expired",
+            "revoked": false,
+            "token_hash": "8356cbd8ca0ff150fd815b63f7858d6d3990faf88c258cc4fac2e34991b42a9f",
+            "token_prefix": "mul_cccccccc",
+            "user_id": "11111111-1111-4111-8111-111111111111"
+          }
+        ]
+      },
+      "status": 400,
+      "wire_body": "{\"error\":\"invalid request body\"}\n"
+    },
+    {
+      "body": {
+        "error": "invalid request body"
+      },
+      "events": null,
+      "external_calls": null,
+      "headers": {
+        "content-length": [
+          "33"
+        ],
+        "content-type": [
+          "application/json"
+        ]
+      },
+      "state": {
+        "tokens": [
+          {
+            "created_at": 1767225600,
+            "expires_at": null,
+            "id": "33333333-3333-4333-8333-333333333333",
+            "last_used_at": null,
+            "name": "seed",
+            "revoked": false,
+            "token_hash": "ae84763d263fcb65bcd4204e725f897a37a95026e81e9ab95717dff02f6bb382",
+            "token_prefix": "mul_aaaaaaaa",
+            "user_id": "11111111-1111-4111-8111-111111111111"
+          },
+          {
+            "created_at": 1767225600,
+            "expires_at": 2051222400,
+            "id": "44444444-4444-4444-8444-444444444444",
+            "last_used_at": null,
+            "name": "far",
+            "revoked": false,
+            "token_hash": "4c67cd42695f2f0cebb9a98e9ea162196c5793b415765733fe0d5ecf4d497bb9",
+            "token_prefix": "mul_bbbbbbbb",
+            "user_id": "11111111-1111-4111-8111-111111111111"
+          },
+          {
+            "created_at": 1767225600,
+            "expires_at": 946684800,
+            "id": "55555555-5555-4555-8555-555555555555",
+            "last_used_at": null,
+            "name": "expired",
+            "revoked": false,
+            "token_hash": "8356cbd8ca0ff150fd815b63f7858d6d3990faf88c258cc4fac2e34991b42a9f",
+            "token_prefix": "mul_cccccccc",
+            "user_id": "11111111-1111-4111-8111-111111111111"
+          }
+        ]
+      },
+      "status": 400,
+      "wire_body": "{\"error\":\"invalid request body\"}\n"
+    },
+    {
+      "body": {
+        "error": "only personal access tokens can be renewed"
+      },
+      "events": null,
+      "external_calls": null,
+      "headers": {
+        "content-length": [
+          "55"
+        ],
+        "content-type": [
+          "application/json"
+        ]
+      },
+      "state": {
+        "tokens": [
+          {
+            "created_at": 1767225600,
+            "expires_at": null,
+            "id": "33333333-3333-4333-8333-333333333333",
+            "last_used_at": null,
+            "name": "seed",
+            "revoked": false,
+            "token_hash": "ae84763d263fcb65bcd4204e725f897a37a95026e81e9ab95717dff02f6bb382",
+            "token_prefix": "mul_aaaaaaaa",
+            "user_id": "11111111-1111-4111-8111-111111111111"
+          },
+          {
+            "created_at": 1767225600,
+            "expires_at": 2051222400,
+            "id": "44444444-4444-4444-8444-444444444444",
+            "last_used_at": null,
+            "name": "far",
+            "revoked": false,
+            "token_hash": "4c67cd42695f2f0cebb9a98e9ea162196c5793b415765733fe0d5ecf4d497bb9",
+            "token_prefix": "mul_bbbbbbbb",
+            "user_id": "11111111-1111-4111-8111-111111111111"
+          },
+          {
+            "created_at": 1767225600,
+            "expires_at": 946684800,
+            "id": "55555555-5555-4555-8555-555555555555",
+            "last_used_at": null,
+            "name": "expired",
+            "revoked": false,
+            "token_hash": "8356cbd8ca0ff150fd815b63f7858d6d3990faf88c258cc4fac2e34991b42a9f",
+            "token_prefix": "mul_cccccccc",
+            "user_id": "11111111-1111-4111-8111-111111111111"
+          }
+        ]
+      },
+      "status": 400,
+      "wire_body": "{\"error\":\"only personal access tokens can be renewed\"}\n"
+    },
+    {
+      "body": {
+        "error": "token is no longer valid"
+      },
+      "events": null,
+      "external_calls": null,
+      "headers": {
+        "content-length": [
+          "37"
+        ],
+        "content-type": [
+          "application/json"
+        ]
+      },
+      "state": {
+        "tokens": [
+          {
+            "created_at": 1767225600,
+            "expires_at": null,
+            "id": "33333333-3333-4333-8333-333333333333",
+            "last_used_at": null,
+            "name": "seed",
+            "revoked": false,
+            "token_hash": "ae84763d263fcb65bcd4204e725f897a37a95026e81e9ab95717dff02f6bb382",
+            "token_prefix": "mul_aaaaaaaa",
+            "user_id": "11111111-1111-4111-8111-111111111111"
+          },
+          {
+            "created_at": 1767225600,
+            "expires_at": 2051222400,
+            "id": "44444444-4444-4444-8444-444444444444",
+            "last_used_at": null,
+            "name": "far",
+            "revoked": false,
+            "token_hash": "4c67cd42695f2f0cebb9a98e9ea162196c5793b415765733fe0d5ecf4d497bb9",
+            "token_prefix": "mul_bbbbbbbb",
+            "user_id": "11111111-1111-4111-8111-111111111111"
+          },
+          {
+            "created_at": 1767225600,
+            "expires_at": 946684800,
+            "id": "55555555-5555-4555-8555-555555555555",
+            "last_used_at": null,
+            "name": "expired",
+            "revoked": false,
+            "token_hash": "8356cbd8ca0ff150fd815b63f7858d6d3990faf88c258cc4fac2e34991b42a9f",
+            "token_prefix": "mul_cccccccc",
+            "user_id": "11111111-1111-4111-8111-111111111111"
+          }
+        ]
+      },
+      "status": 401,
+      "wire_body": "{\"error\":\"token is no longer valid\"}\n"
+    },
+    {
+      "body": {
+        "error": "invalid token id"
+      },
+      "events": null,
+      "external_calls": null,
+      "headers": {
+        "content-length": [
+          "29"
+        ],
+        "content-type": [
+          "application/json"
+        ]
+      },
+      "state": {
+        "tokens": [
+          {
+            "created_at": 1767225600,
+            "expires_at": null,
+            "id": "33333333-3333-4333-8333-333333333333",
+            "last_used_at": null,
+            "name": "seed",
+            "revoked": false,
+            "token_hash": "ae84763d263fcb65bcd4204e725f897a37a95026e81e9ab95717dff02f6bb382",
+            "token_prefix": "mul_aaaaaaaa",
+            "user_id": "11111111-1111-4111-8111-111111111111"
+          },
+          {
+            "created_at": 1767225600,
+            "expires_at": 2051222400,
+            "id": "44444444-4444-4444-8444-444444444444",
+            "last_used_at": null,
+            "name": "far",
+            "revoked": false,
+            "token_hash": "4c67cd42695f2f0cebb9a98e9ea162196c5793b415765733fe0d5ecf4d497bb9",
+            "token_prefix": "mul_bbbbbbbb",
+            "user_id": "11111111-1111-4111-8111-111111111111"
+          },
+          {
+            "created_at": 1767225600,
+            "expires_at": 946684800,
+            "id": "55555555-5555-4555-8555-555555555555",
+            "last_used_at": null,
+            "name": "expired",
+            "revoked": false,
+            "token_hash": "8356cbd8ca0ff150fd815b63f7858d6d3990faf88c258cc4fac2e34991b42a9f",
+            "token_prefix": "mul_cccccccc",
+            "user_id": "11111111-1111-4111-8111-111111111111"
+          }
+        ]
+      },
+      "status": 400,
+      "wire_body": "{\"error\":\"invalid token id\"}\n"
+    },
+    {
+      "body": null,
+      "events": null,
+      "external_calls": null,
+      "headers": {},
+      "state": {
+        "tokens": [
+          {
+            "created_at": 1767225600,
+            "expires_at": null,
+            "id": "33333333-3333-4333-8333-333333333333",
+            "last_used_at": null,
+            "name": "seed",
+            "revoked": false,
+            "token_hash": "ae84763d263fcb65bcd4204e725f897a37a95026e81e9ab95717dff02f6bb382",
+            "token_prefix": "mul_aaaaaaaa",
+            "user_id": "11111111-1111-4111-8111-111111111111"
+          },
+          {
+            "created_at": 1767225600,
+            "expires_at": 2051222400,
+            "id": "44444444-4444-4444-8444-444444444444",
+            "last_used_at": null,
+            "name": "far",
+            "revoked": false,
+            "token_hash": "4c67cd42695f2f0cebb9a98e9ea162196c5793b415765733fe0d5ecf4d497bb9",
+            "token_prefix": "mul_bbbbbbbb",
+            "user_id": "11111111-1111-4111-8111-111111111111"
+          },
+          {
+            "created_at": 1767225600,
+            "expires_at": 946684800,
+            "id": "55555555-5555-4555-8555-555555555555",
+            "last_used_at": null,
+            "name": "expired",
+            "revoked": false,
+            "token_hash": "8356cbd8ca0ff150fd815b63f7858d6d3990faf88c258cc4fac2e34991b42a9f",
+            "token_prefix": "mul_cccccccc",
+            "user_id": "11111111-1111-4111-8111-111111111111"
+          }
+        ]
+      },
+      "status": 204,
+      "wire_body": ""
+    },
+    {
+      "body": {
+        "error": "this endpoint is only available to human actors"
+      },
+      "events": null,
+      "external_calls": null,
+      "headers": {
+        "content-length": [
+          "60"
+        ],
+        "content-type": [
+          "application/json"
+        ]
+      },
+      "state": {
+        "tokens": [
+          {
+            "created_at": 1767225600,
+            "expires_at": null,
+            "id": "33333333-3333-4333-8333-333333333333",
+            "last_used_at": null,
+            "name": "seed",
+            "revoked": false,
+            "token_hash": "ae84763d263fcb65bcd4204e725f897a37a95026e81e9ab95717dff02f6bb382",
+            "token_prefix": "mul_aaaaaaaa",
+            "user_id": "11111111-1111-4111-8111-111111111111"
+          },
+          {
+            "created_at": 1767225600,
+            "expires_at": 2051222400,
+            "id": "44444444-4444-4444-8444-444444444444",
+            "last_used_at": null,
+            "name": "far",
+            "revoked": false,
+            "token_hash": "4c67cd42695f2f0cebb9a98e9ea162196c5793b415765733fe0d5ecf4d497bb9",
+            "token_prefix": "mul_bbbbbbbb",
+            "user_id": "11111111-1111-4111-8111-111111111111"
+          },
+          {
+            "created_at": 1767225600,
+            "expires_at": 946684800,
+            "id": "55555555-5555-4555-8555-555555555555",
+            "last_used_at": null,
+            "name": "expired",
+            "revoked": false,
+            "token_hash": "8356cbd8ca0ff150fd815b63f7858d6d3990faf88c258cc4fac2e34991b42a9f",
+            "token_prefix": "mul_cccccccc",
+            "user_id": "11111111-1111-4111-8111-111111111111"
+          }
+        ]
+      },
+      "status": 403,
+      "wire_body": "{\"error\":\"this endpoint is only available to human actors\"}\n"
+    },
+    {
+      "body": {
+        "error": "this endpoint is only available to human actors"
+      },
+      "events": null,
+      "external_calls": null,
+      "headers": {
+        "content-length": [
+          "60"
+        ],
+        "content-type": [
+          "application/json"
+        ]
+      },
+      "state": {
+        "tokens": [
+          {
+            "created_at": 1767225600,
+            "expires_at": null,
+            "id": "33333333-3333-4333-8333-333333333333",
+            "last_used_at": null,
+            "name": "seed",
+            "revoked": false,
+            "token_hash": "ae84763d263fcb65bcd4204e725f897a37a95026e81e9ab95717dff02f6bb382",
+            "token_prefix": "mul_aaaaaaaa",
+            "user_id": "11111111-1111-4111-8111-111111111111"
+          },
+          {
+            "created_at": 1767225600,
+            "expires_at": 2051222400,
+            "id": "44444444-4444-4444-8444-444444444444",
+            "last_used_at": null,
+            "name": "far",
+            "revoked": false,
+            "token_hash": "4c67cd42695f2f0cebb9a98e9ea162196c5793b415765733fe0d5ecf4d497bb9",
+            "token_prefix": "mul_bbbbbbbb",
+            "user_id": "11111111-1111-4111-8111-111111111111"
+          },
+          {
+            "created_at": 1767225600,
+            "expires_at": 946684800,
+            "id": "55555555-5555-4555-8555-555555555555",
+            "last_used_at": null,
+            "name": "expired",
+            "revoked": false,
+            "token_hash": "8356cbd8ca0ff150fd815b63f7858d6d3990faf88c258cc4fac2e34991b42a9f",
+            "token_prefix": "mul_cccccccc",
+            "user_id": "11111111-1111-4111-8111-111111111111"
+          }
+        ]
+      },
+      "status": 403,
+      "wire_body": "{\"error\":\"this endpoint is only available to human actors\"}\n"
+    },
+    {
+      "body": {
+        "error": "failed to create token"
+      },
+      "events": null,
+      "external_calls": null,
+      "headers": {
+        "content-length": [
+          "35"
+        ],
+        "content-type": [
+          "application/json"
+        ]
+      },
+      "state": {
+        "tokens": [
+          {
+            "created_at": 1767225600,
+            "expires_at": null,
+            "id": "33333333-3333-4333-8333-333333333333",
+            "last_used_at": null,
+            "name": "seed",
+            "revoked": false,
+            "token_hash": "ae84763d263fcb65bcd4204e725f897a37a95026e81e9ab95717dff02f6bb382",
+            "token_prefix": "mul_aaaaaaaa",
+            "user_id": "11111111-1111-4111-8111-111111111111"
+          },
+          {
+            "created_at": 1767225600,
+            "expires_at": 2051222400,
+            "id": "44444444-4444-4444-8444-444444444444",
+            "last_used_at": null,
+            "name": "far",
+            "revoked": false,
+            "token_hash": "4c67cd42695f2f0cebb9a98e9ea162196c5793b415765733fe0d5ecf4d497bb9",
+            "token_prefix": "mul_bbbbbbbb",
+            "user_id": "11111111-1111-4111-8111-111111111111"
+          },
+          {
+            "created_at": 1767225600,
+            "expires_at": 946684800,
+            "id": "55555555-5555-4555-8555-555555555555",
+            "last_used_at": null,
+            "name": "expired",
+            "revoked": false,
+            "token_hash": "8356cbd8ca0ff150fd815b63f7858d6d3990faf88c258cc4fac2e34991b42a9f",
+            "token_prefix": "mul_cccccccc",
+            "user_id": "11111111-1111-4111-8111-111111111111"
+          }
+        ]
+      },
+      "status": 500,
+      "wire_body": "{\"error\":\"failed to create token\"}\n"
+    },
+    {
+      "body": {
+        "expires_at": "",
+        "renewed": false
+      },
+      "events": null,
+      "external_calls": null,
+      "headers": {
+        "content-length": [
+          "34"
+        ],
+        "content-type": [
+          "application/json"
+        ]
+      },
+      "state": {
+        "tokens": [
+          {
+            "created_at": 1767225600,
+            "expires_at": null,
+            "id": "33333333-3333-4333-8333-333333333333",
+            "last_used_at": null,
+            "name": "seed",
+            "revoked": false,
+            "token_hash": "ae84763d263fcb65bcd4204e725f897a37a95026e81e9ab95717dff02f6bb382",
+            "token_prefix": "mul_aaaaaaaa",
+            "user_id": "11111111-1111-4111-8111-111111111111"
+          },
+          {
+            "created_at": 1767225600,
+            "expires_at": 2051222400,
+            "id": "44444444-4444-4444-8444-444444444444",
+            "last_used_at": null,
+            "name": "far",
+            "revoked": false,
+            "token_hash": "4c67cd42695f2f0cebb9a98e9ea162196c5793b415765733fe0d5ecf4d497bb9",
+            "token_prefix": "mul_bbbbbbbb",
+            "user_id": "11111111-1111-4111-8111-111111111111"
+          },
+          {
+            "created_at": 1767225600,
+            "expires_at": 946684800,
+            "id": "55555555-5555-4555-8555-555555555555",
+            "last_used_at": null,
+            "name": "expired",
+            "revoked": false,
+            "token_hash": "8356cbd8ca0ff150fd815b63f7858d6d3990faf88c258cc4fac2e34991b42a9f",
+            "token_prefix": "mul_cccccccc",
+            "user_id": "11111111-1111-4111-8111-111111111111"
+          }
+        ]
+      },
+      "status": 200,
+      "wire_body": "{\"expires_at\":\"\",\"renewed\":false}\n"
+    },
+    {
+      "body": null,
+      "events": null,
+      "external_calls": null,
+      "headers": {},
+      "state": {
+        "tokens": [
+          {
+            "created_at": 1767225600,
+            "expires_at": null,
+            "id": "33333333-3333-4333-8333-333333333333",
+            "last_used_at": null,
+            "name": "seed",
+            "revoked": true,
+            "token_hash": "ae84763d263fcb65bcd4204e725f897a37a95026e81e9ab95717dff02f6bb382",
+            "token_prefix": "mul_aaaaaaaa",
+            "user_id": "11111111-1111-4111-8111-111111111111"
+          },
+          {
+            "created_at": 1767225600,
+            "expires_at": 2051222400,
+            "id": "44444444-4444-4444-8444-444444444444",
+            "last_used_at": null,
+            "name": "far",
+            "revoked": false,
+            "token_hash": "4c67cd42695f2f0cebb9a98e9ea162196c5793b415765733fe0d5ecf4d497bb9",
+            "token_prefix": "mul_bbbbbbbb",
+            "user_id": "11111111-1111-4111-8111-111111111111"
+          },
+          {
+            "created_at": 1767225600,
+            "expires_at": 946684800,
+            "id": "55555555-5555-4555-8555-555555555555",
+            "last_used_at": null,
+            "name": "expired",
+            "revoked": false,
+            "token_hash": "8356cbd8ca0ff150fd815b63f7858d6d3990faf88c258cc4fac2e34991b42a9f",
+            "token_prefix": "mul_cccccccc",
+            "user_id": "11111111-1111-4111-8111-111111111111"
+          }
+        ]
+      },
+      "status": 204,
+      "wire_body": ""
+    },
+    {
+      "body": [
+        {
+          "created_at": "2026-01-01T00:00:00Z",
+          "expires_at": "2035-01-01T00:00:00Z",
+          "id": "44444444-4444-4444-8444-444444444444",
+          "last_used_at": null,
+          "name": "far",
+          "token_prefix": "mul_bbbbbbbb"
+        },
+        {
+          "created_at": "2026-01-01T00:00:00Z",
+          "expires_at": "2000-01-01T00:00:00Z",
+          "id": "55555555-5555-4555-8555-555555555555",
+          "last_used_at": null,
+          "name": "expired",
+          "token_prefix": "mul_cccccccc"
+        }
+      ],
+      "events": null,
+      "external_calls": null,
+      "headers": {
+        "content-length": [
+          "368"
+        ],
+        "content-type": [
+          "application/json"
+        ]
+      },
+      "state": {
+        "tokens": [
+          {
+            "created_at": 1767225600,
+            "expires_at": null,
+            "id": "33333333-3333-4333-8333-333333333333",
+            "last_used_at": null,
+            "name": "seed",
+            "revoked": true,
+            "token_hash": "ae84763d263fcb65bcd4204e725f897a37a95026e81e9ab95717dff02f6bb382",
+            "token_prefix": "mul_aaaaaaaa",
+            "user_id": "11111111-1111-4111-8111-111111111111"
+          },
+          {
+            "created_at": 1767225600,
+            "expires_at": 2051222400,
+            "id": "44444444-4444-4444-8444-444444444444",
+            "last_used_at": null,
+            "name": "far",
+            "revoked": false,
+            "token_hash": "4c67cd42695f2f0cebb9a98e9ea162196c5793b415765733fe0d5ecf4d497bb9",
+            "token_prefix": "mul_bbbbbbbb",
+            "user_id": "11111111-1111-4111-8111-111111111111"
+          },
+          {
+            "created_at": 1767225600,
+            "expires_at": 946684800,
+            "id": "55555555-5555-4555-8555-555555555555",
+            "last_used_at": null,
+            "name": "expired",
+            "revoked": false,
+            "token_hash": "8356cbd8ca0ff150fd815b63f7858d6d3990faf88c258cc4fac2e34991b42a9f",
+            "token_prefix": "mul_cccccccc",
+            "user_id": "11111111-1111-4111-8111-111111111111"
+          }
+        ]
+      },
+      "status": 200,
+      "wire_body": "[{\"id\":\"44444444-4444-4444-8444-444444444444\",\"name\":\"far\",\"token_prefix\":\"mul_bbbbbbbb\",\"expires_at\":\"2035-01-01T00:00:00Z\",\"last_used_at\":null,\"created_at\":\"2026-01-01T00:00:00Z\"},{\"id\":\"55555555-5555-4555-8555-555555555555\",\"name\":\"expired\",\"token_prefix\":\"mul_cccccccc\",\"expires_at\":\"2000-01-01T00:00:00Z\",\"last_used_at\":null,\"created_at\":\"2026-01-01T00:00:00Z\"}]\n"
+    },
+    {
+      "body": {
+        "error": "token is no longer valid"
+      },
+      "events": null,
+      "external_calls": null,
+      "headers": {
+        "content-length": [
+          "37"
+        ],
+        "content-type": [
+          "application/json"
+        ]
+      },
+      "state": {
+        "tokens": [
+          {
+            "created_at": 1767225600,
+            "expires_at": null,
+            "id": "33333333-3333-4333-8333-333333333333",
+            "last_used_at": null,
+            "name": "seed",
+            "revoked": true,
+            "token_hash": "ae84763d263fcb65bcd4204e725f897a37a95026e81e9ab95717dff02f6bb382",
+            "token_prefix": "mul_aaaaaaaa",
+            "user_id": "11111111-1111-4111-8111-111111111111"
+          },
+          {
+            "created_at": 1767225600,
+            "expires_at": 2051222400,
+            "id": "44444444-4444-4444-8444-444444444444",
+            "last_used_at": null,
+            "name": "far",
+            "revoked": false,
+            "token_hash": "4c67cd42695f2f0cebb9a98e9ea162196c5793b415765733fe0d5ecf4d497bb9",
+            "token_prefix": "mul_bbbbbbbb",
+            "user_id": "11111111-1111-4111-8111-111111111111"
+          },
+          {
+            "created_at": 1767225600,
+            "expires_at": 946684800,
+            "id": "55555555-5555-4555-8555-555555555555",
+            "last_used_at": null,
+            "name": "expired",
+            "revoked": false,
+            "token_hash": "8356cbd8ca0ff150fd815b63f7858d6d3990faf88c258cc4fac2e34991b42a9f",
+            "token_prefix": "mul_cccccccc",
+            "user_id": "11111111-1111-4111-8111-111111111111"
+          }
+        ]
+      },
+      "status": 401,
+      "wire_body": "{\"error\":\"token is no longer valid\"}\n"
+    },
+    {
+      "body": null,
+      "events": null,
+      "external_calls": null,
+      "headers": {},
+      "state": {
+        "tokens": [
+          {
+            "created_at": 1767225600,
+            "expires_at": null,
+            "id": "33333333-3333-4333-8333-333333333333",
+            "last_used_at": null,
+            "name": "seed",
+            "revoked": true,
+            "token_hash": "ae84763d263fcb65bcd4204e725f897a37a95026e81e9ab95717dff02f6bb382",
+            "token_prefix": "mul_aaaaaaaa",
+            "user_id": "11111111-1111-4111-8111-111111111111"
+          },
+          {
+            "created_at": 1767225600,
+            "expires_at": 2051222400,
+            "id": "44444444-4444-4444-8444-444444444444",
+            "last_used_at": null,
+            "name": "far",
+            "revoked": false,
+            "token_hash": "4c67cd42695f2f0cebb9a98e9ea162196c5793b415765733fe0d5ecf4d497bb9",
+            "token_prefix": "mul_bbbbbbbb",
+            "user_id": "11111111-1111-4111-8111-111111111111"
+          },
+          {
+            "created_at": 1767225600,
+            "expires_at": 946684800,
+            "id": "55555555-5555-4555-8555-555555555555",
+            "last_used_at": null,
+            "name": "expired",
+            "revoked": false,
+            "token_hash": "8356cbd8ca0ff150fd815b63f7858d6d3990faf88c258cc4fac2e34991b42a9f",
+            "token_prefix": "mul_cccccccc",
+            "user_id": "11111111-1111-4111-8111-111111111111"
+          }
+        ]
+      },
+      "status": 204,
+      "wire_body": ""
+    },
+    {
+      "body": {
+        "expires_at": "2035-01-01T00:00:00Z",
+        "renewed": false
+      },
+      "events": null,
+      "external_calls": null,
+      "headers": {
+        "content-length": [
+          "54"
+        ],
+        "content-type": [
+          "application/json"
+        ]
+      },
+      "state": {
+        "tokens": [
+          {
+            "created_at": 1767225600,
+            "expires_at": null,
+            "id": "33333333-3333-4333-8333-333333333333",
+            "last_used_at": null,
+            "name": "seed",
+            "revoked": true,
+            "token_hash": "ae84763d263fcb65bcd4204e725f897a37a95026e81e9ab95717dff02f6bb382",
+            "token_prefix": "mul_aaaaaaaa",
+            "user_id": "11111111-1111-4111-8111-111111111111"
+          },
+          {
+            "created_at": 1767225600,
+            "expires_at": 2051222400,
+            "id": "44444444-4444-4444-8444-444444444444",
+            "last_used_at": null,
+            "name": "far",
+            "revoked": false,
+            "token_hash": "4c67cd42695f2f0cebb9a98e9ea162196c5793b415765733fe0d5ecf4d497bb9",
+            "token_prefix": "mul_bbbbbbbb",
+            "user_id": "11111111-1111-4111-8111-111111111111"
+          },
+          {
+            "created_at": 1767225600,
+            "expires_at": 946684800,
+            "id": "55555555-5555-4555-8555-555555555555",
+            "last_used_at": null,
+            "name": "expired",
+            "revoked": false,
+            "token_hash": "8356cbd8ca0ff150fd815b63f7858d6d3990faf88c258cc4fac2e34991b42a9f",
+            "token_prefix": "mul_cccccccc",
+            "user_id": "11111111-1111-4111-8111-111111111111"
+          }
+        ]
+      },
+      "status": 200,
+      "wire_body": "{\"expires_at\":\"2035-01-01T00:00:00Z\",\"renewed\":false}\n"
+    },
+    {
+      "body": {
+        "error": "token is no longer valid"
+      },
+      "events": null,
+      "external_calls": null,
+      "headers": {
+        "content-length": [
+          "37"
+        ],
+        "content-type": [
+          "application/json"
+        ]
+      },
+      "state": {
+        "tokens": [
+          {
+            "created_at": 1767225600,
+            "expires_at": null,
+            "id": "33333333-3333-4333-8333-333333333333",
+            "last_used_at": null,
+            "name": "seed",
+            "revoked": true,
+            "token_hash": "ae84763d263fcb65bcd4204e725f897a37a95026e81e9ab95717dff02f6bb382",
+            "token_prefix": "mul_aaaaaaaa",
+            "user_id": "11111111-1111-4111-8111-111111111111"
+          },
+          {
+            "created_at": 1767225600,
+            "expires_at": 2051222400,
+            "id": "44444444-4444-4444-8444-444444444444",
+            "last_used_at": null,
+            "name": "far",
+            "revoked": false,
+            "token_hash": "4c67cd42695f2f0cebb9a98e9ea162196c5793b415765733fe0d5ecf4d497bb9",
+            "token_prefix": "mul_bbbbbbbb",
+            "user_id": "11111111-1111-4111-8111-111111111111"
+          },
+          {
+            "created_at": 1767225600,
+            "expires_at": 946684800,
+            "id": "55555555-5555-4555-8555-555555555555",
+            "last_used_at": null,
+            "name": "expired",
+            "revoked": false,
+            "token_hash": "8356cbd8ca0ff150fd815b63f7858d6d3990faf88c258cc4fac2e34991b42a9f",
+            "token_prefix": "mul_cccccccc",
+            "user_id": "11111111-1111-4111-8111-111111111111"
+          }
+        ]
+      },
+      "status": 401,
+      "wire_body": "{\"error\":\"token is no longer valid\"}\n"
+    }
+  ],
+  "python": [
+    {
+      "status": 200,
+      "headers": {
+        "content-length": [
+          "532"
+        ],
+        "content-type": [
+          "application/json"
+        ]
+      },
+      "body": [
+        {
+          "id": "33333333-3333-4333-8333-333333333333",
+          "name": "seed",
+          "token_prefix": "mul_aaaaaaaa",
+          "expires_at": null,
+          "last_used_at": null,
+          "created_at": "2026-01-01T00:00:00Z"
+        },
+        {
+          "id": "44444444-4444-4444-8444-444444444444",
+          "name": "far",
+          "token_prefix": "mul_bbbbbbbb",
+          "expires_at": "2035-01-01T00:00:00Z",
+          "last_used_at": null,
+          "created_at": "2026-01-01T00:00:00Z"
+        },
+        {
+          "id": "55555555-5555-4555-8555-555555555555",
+          "name": "expired",
+          "token_prefix": "mul_cccccccc",
+          "expires_at": "2000-01-01T00:00:00Z",
+          "last_used_at": null,
+          "created_at": "2026-01-01T00:00:00Z"
+        }
+      ],
+      "wire_body": "[{\"id\":\"33333333-3333-4333-8333-333333333333\",\"name\":\"seed\",\"token_prefix\":\"mul_aaaaaaaa\",\"expires_at\":null,\"last_used_at\":null,\"created_at\":\"2026-01-01T00:00:00Z\"},{\"id\":\"44444444-4444-4444-8444-444444444444\",\"name\":\"far\",\"token_prefix\":\"mul_bbbbbbbb\",\"expires_at\":\"2035-01-01T00:00:00Z\",\"last_used_at\":null,\"created_at\":\"2026-01-01T00:00:00Z\"},{\"id\":\"55555555-5555-4555-8555-555555555555\",\"name\":\"expired\",\"token_prefix\":\"mul_cccccccc\",\"expires_at\":\"2000-01-01T00:00:00Z\",\"last_used_at\":null,\"created_at\":\"2026-01-01T00:00:00Z\"}]\n",
+      "state": {
+        "tokens": [
+          {
+            "id": "33333333-3333-4333-8333-333333333333",
+            "user_id": "11111111-1111-4111-8111-111111111111",
+            "name": "seed",
+            "token_hash": "ae84763d263fcb65bcd4204e725f897a37a95026e81e9ab95717dff02f6bb382",
+            "token_prefix": "mul_aaaaaaaa",
+            "expires_at": null,
+            "last_used_at": null,
+            "revoked": false,
+            "created_at": 1767225600.0
+          },
+          {
+            "id": "44444444-4444-4444-8444-444444444444",
+            "user_id": "11111111-1111-4111-8111-111111111111",
+            "name": "far",
+            "token_hash": "4c67cd42695f2f0cebb9a98e9ea162196c5793b415765733fe0d5ecf4d497bb9",
+            "token_prefix": "mul_bbbbbbbb",
+            "expires_at": 2051222400.0,
+            "last_used_at": null,
+            "revoked": false,
+            "created_at": 1767225600.0
+          },
+          {
+            "id": "55555555-5555-4555-8555-555555555555",
+            "user_id": "11111111-1111-4111-8111-111111111111",
+            "name": "expired",
+            "token_hash": "8356cbd8ca0ff150fd815b63f7858d6d3990faf88c258cc4fac2e34991b42a9f",
+            "token_prefix": "mul_cccccccc",
+            "expires_at": 946684800.0,
+            "last_used_at": null,
+            "revoked": false,
+            "created_at": 1767225600.0
+          }
+        ]
+      },
+      "events": null,
+      "external_calls": null
+    },
+    {
+      "status": 400,
+      "headers": {
+        "content-length": [
+          "29"
+        ],
+        "content-type": [
+          "application/json"
+        ]
+      },
+      "body": {
+        "error": "name is required"
+      },
+      "wire_body": "{\"error\":\"name is required\"}\n",
+      "state": {
+        "tokens": [
+          {
+            "id": "33333333-3333-4333-8333-333333333333",
+            "user_id": "11111111-1111-4111-8111-111111111111",
+            "name": "seed",
+            "token_hash": "ae84763d263fcb65bcd4204e725f897a37a95026e81e9ab95717dff02f6bb382",
+            "token_prefix": "mul_aaaaaaaa",
+            "expires_at": null,
+            "last_used_at": null,
+            "revoked": false,
+            "created_at": 1767225600.0
+          },
+          {
+            "id": "44444444-4444-4444-8444-444444444444",
+            "user_id": "11111111-1111-4111-8111-111111111111",
+            "name": "far",
+            "token_hash": "4c67cd42695f2f0cebb9a98e9ea162196c5793b415765733fe0d5ecf4d497bb9",
+            "token_prefix": "mul_bbbbbbbb",
+            "expires_at": 2051222400.0,
+            "last_used_at": null,
+            "revoked": false,
+            "created_at": 1767225600.0
+          },
+          {
+            "id": "55555555-5555-4555-8555-555555555555",
+            "user_id": "11111111-1111-4111-8111-111111111111",
+            "name": "expired",
+            "token_hash": "8356cbd8ca0ff150fd815b63f7858d6d3990faf88c258cc4fac2e34991b42a9f",
+            "token_prefix": "mul_cccccccc",
+            "expires_at": 946684800.0,
+            "last_used_at": null,
+            "revoked": false,
+            "created_at": 1767225600.0
+          }
+        ]
+      },
+      "events": null,
+      "external_calls": null
+    },
+    {
+      "status": 400,
+      "headers": {
+        "content-length": [
+          "29"
+        ],
+        "content-type": [
+          "application/json"
+        ]
+      },
+      "body": {
+        "error": "name is required"
+      },
+      "wire_body": "{\"error\":\"name is required\"}\n",
+      "state": {
+        "tokens": [
+          {
+            "id": "33333333-3333-4333-8333-333333333333",
+            "user_id": "11111111-1111-4111-8111-111111111111",
+            "name": "seed",
+            "token_hash": "ae84763d263fcb65bcd4204e725f897a37a95026e81e9ab95717dff02f6bb382",
+            "token_prefix": "mul_aaaaaaaa",
+            "expires_at": null,
+            "last_used_at": null,
+            "revoked": false,
+            "created_at": 1767225600.0
+          },
+          {
+            "id": "44444444-4444-4444-8444-444444444444",
+            "user_id": "11111111-1111-4111-8111-111111111111",
+            "name": "far",
+            "token_hash": "4c67cd42695f2f0cebb9a98e9ea162196c5793b415765733fe0d5ecf4d497bb9",
+            "token_prefix": "mul_bbbbbbbb",
+            "expires_at": 2051222400.0,
+            "last_used_at": null,
+            "revoked": false,
+            "created_at": 1767225600.0
+          },
+          {
+            "id": "55555555-5555-4555-8555-555555555555",
+            "user_id": "11111111-1111-4111-8111-111111111111",
+            "name": "expired",
+            "token_hash": "8356cbd8ca0ff150fd815b63f7858d6d3990faf88c258cc4fac2e34991b42a9f",
+            "token_prefix": "mul_cccccccc",
+            "expires_at": 946684800.0,
+            "last_used_at": null,
+            "revoked": false,
+            "created_at": 1767225600.0
+          }
+        ]
+      },
+      "events": null,
+      "external_calls": null
+    },
+    {
+      "status": 400,
+      "headers": {
+        "content-length": [
+          "33"
+        ],
+        "content-type": [
+          "application/json"
+        ]
+      },
+      "body": {
+        "error": "invalid request body"
+      },
+      "wire_body": "{\"error\":\"invalid request body\"}\n",
+      "state": {
+        "tokens": [
+          {
+            "id": "33333333-3333-4333-8333-333333333333",
+            "user_id": "11111111-1111-4111-8111-111111111111",
+            "name": "seed",
+            "token_hash": "ae84763d263fcb65bcd4204e725f897a37a95026e81e9ab95717dff02f6bb382",
+            "token_prefix": "mul_aaaaaaaa",
+            "expires_at": null,
+            "last_used_at": null,
+            "revoked": false,
+            "created_at": 1767225600.0
+          },
+          {
+            "id": "44444444-4444-4444-8444-444444444444",
+            "user_id": "11111111-1111-4111-8111-111111111111",
+            "name": "far",
+            "token_hash": "4c67cd42695f2f0cebb9a98e9ea162196c5793b415765733fe0d5ecf4d497bb9",
+            "token_prefix": "mul_bbbbbbbb",
+            "expires_at": 2051222400.0,
+            "last_used_at": null,
+            "revoked": false,
+            "created_at": 1767225600.0
+          },
+          {
+            "id": "55555555-5555-4555-8555-555555555555",
+            "user_id": "11111111-1111-4111-8111-111111111111",
+            "name": "expired",
+            "token_hash": "8356cbd8ca0ff150fd815b63f7858d6d3990faf88c258cc4fac2e34991b42a9f",
+            "token_prefix": "mul_cccccccc",
+            "expires_at": 946684800.0,
+            "last_used_at": null,
+            "revoked": false,
+            "created_at": 1767225600.0
+          }
+        ]
+      },
+      "events": null,
+      "external_calls": null
+    },
+    {
+      "status": 400,
+      "headers": {
+        "content-length": [
+          "33"
+        ],
+        "content-type": [
+          "application/json"
+        ]
+      },
+      "body": {
+        "error": "invalid request body"
+      },
+      "wire_body": "{\"error\":\"invalid request body\"}\n",
+      "state": {
+        "tokens": [
+          {
+            "id": "33333333-3333-4333-8333-333333333333",
+            "user_id": "11111111-1111-4111-8111-111111111111",
+            "name": "seed",
+            "token_hash": "ae84763d263fcb65bcd4204e725f897a37a95026e81e9ab95717dff02f6bb382",
+            "token_prefix": "mul_aaaaaaaa",
+            "expires_at": null,
+            "last_used_at": null,
+            "revoked": false,
+            "created_at": 1767225600.0
+          },
+          {
+            "id": "44444444-4444-4444-8444-444444444444",
+            "user_id": "11111111-1111-4111-8111-111111111111",
+            "name": "far",
+            "token_hash": "4c67cd42695f2f0cebb9a98e9ea162196c5793b415765733fe0d5ecf4d497bb9",
+            "token_prefix": "mul_bbbbbbbb",
+            "expires_at": 2051222400.0,
+            "last_used_at": null,
+            "revoked": false,
+            "created_at": 1767225600.0
+          },
+          {
+            "id": "55555555-5555-4555-8555-555555555555",
+            "user_id": "11111111-1111-4111-8111-111111111111",
+            "name": "expired",
+            "token_hash": "8356cbd8ca0ff150fd815b63f7858d6d3990faf88c258cc4fac2e34991b42a9f",
+            "token_prefix": "mul_cccccccc",
+            "expires_at": 946684800.0,
+            "last_used_at": null,
+            "revoked": false,
+            "created_at": 1767225600.0
+          }
+        ]
+      },
+      "events": null,
+      "external_calls": null
+    },
+    {
+      "status": 400,
+      "headers": {
+        "content-length": [
+          "33"
+        ],
+        "content-type": [
+          "application/json"
+        ]
+      },
+      "body": {
+        "error": "invalid request body"
+      },
+      "wire_body": "{\"error\":\"invalid request body\"}\n",
+      "state": {
+        "tokens": [
+          {
+            "id": "33333333-3333-4333-8333-333333333333",
+            "user_id": "11111111-1111-4111-8111-111111111111",
+            "name": "seed",
+            "token_hash": "ae84763d263fcb65bcd4204e725f897a37a95026e81e9ab95717dff02f6bb382",
+            "token_prefix": "mul_aaaaaaaa",
+            "expires_at": null,
+            "last_used_at": null,
+            "revoked": false,
+            "created_at": 1767225600.0
+          },
+          {
+            "id": "44444444-4444-4444-8444-444444444444",
+            "user_id": "11111111-1111-4111-8111-111111111111",
+            "name": "far",
+            "token_hash": "4c67cd42695f2f0cebb9a98e9ea162196c5793b415765733fe0d5ecf4d497bb9",
+            "token_prefix": "mul_bbbbbbbb",
+            "expires_at": 2051222400.0,
+            "last_used_at": null,
+            "revoked": false,
+            "created_at": 1767225600.0
+          },
+          {
+            "id": "55555555-5555-4555-8555-555555555555",
+            "user_id": "11111111-1111-4111-8111-111111111111",
+            "name": "expired",
+            "token_hash": "8356cbd8ca0ff150fd815b63f7858d6d3990faf88c258cc4fac2e34991b42a9f",
+            "token_prefix": "mul_cccccccc",
+            "expires_at": 946684800.0,
+            "last_used_at": null,
+            "revoked": false,
+            "created_at": 1767225600.0
+          }
+        ]
+      },
+      "events": null,
+      "external_calls": null
+    },
+    {
+      "status": 400,
+      "headers": {
+        "content-length": [
+          "55"
+        ],
+        "content-type": [
+          "application/json"
+        ]
+      },
+      "body": {
+        "error": "only personal access tokens can be renewed"
+      },
+      "wire_body": "{\"error\":\"only personal access tokens can be renewed\"}\n",
+      "state": {
+        "tokens": [
+          {
+            "id": "33333333-3333-4333-8333-333333333333",
+            "user_id": "11111111-1111-4111-8111-111111111111",
+            "name": "seed",
+            "token_hash": "ae84763d263fcb65bcd4204e725f897a37a95026e81e9ab95717dff02f6bb382",
+            "token_prefix": "mul_aaaaaaaa",
+            "expires_at": null,
+            "last_used_at": null,
+            "revoked": false,
+            "created_at": 1767225600.0
+          },
+          {
+            "id": "44444444-4444-4444-8444-444444444444",
+            "user_id": "11111111-1111-4111-8111-111111111111",
+            "name": "far",
+            "token_hash": "4c67cd42695f2f0cebb9a98e9ea162196c5793b415765733fe0d5ecf4d497bb9",
+            "token_prefix": "mul_bbbbbbbb",
+            "expires_at": 2051222400.0,
+            "last_used_at": null,
+            "revoked": false,
+            "created_at": 1767225600.0
+          },
+          {
+            "id": "55555555-5555-4555-8555-555555555555",
+            "user_id": "11111111-1111-4111-8111-111111111111",
+            "name": "expired",
+            "token_hash": "8356cbd8ca0ff150fd815b63f7858d6d3990faf88c258cc4fac2e34991b42a9f",
+            "token_prefix": "mul_cccccccc",
+            "expires_at": 946684800.0,
+            "last_used_at": null,
+            "revoked": false,
+            "created_at": 1767225600.0
+          }
+        ]
+      },
+      "events": null,
+      "external_calls": null
+    },
+    {
+      "status": 401,
+      "headers": {
+        "content-length": [
+          "37"
+        ],
+        "content-type": [
+          "application/json"
+        ]
+      },
+      "body": {
+        "error": "token is no longer valid"
+      },
+      "wire_body": "{\"error\":\"token is no longer valid\"}\n",
+      "state": {
+        "tokens": [
+          {
+            "id": "33333333-3333-4333-8333-333333333333",
+            "user_id": "11111111-1111-4111-8111-111111111111",
+            "name": "seed",
+            "token_hash": "ae84763d263fcb65bcd4204e725f897a37a95026e81e9ab95717dff02f6bb382",
+            "token_prefix": "mul_aaaaaaaa",
+            "expires_at": null,
+            "last_used_at": null,
+            "revoked": false,
+            "created_at": 1767225600.0
+          },
+          {
+            "id": "44444444-4444-4444-8444-444444444444",
+            "user_id": "11111111-1111-4111-8111-111111111111",
+            "name": "far",
+            "token_hash": "4c67cd42695f2f0cebb9a98e9ea162196c5793b415765733fe0d5ecf4d497bb9",
+            "token_prefix": "mul_bbbbbbbb",
+            "expires_at": 2051222400.0,
+            "last_used_at": null,
+            "revoked": false,
+            "created_at": 1767225600.0
+          },
+          {
+            "id": "55555555-5555-4555-8555-555555555555",
+            "user_id": "11111111-1111-4111-8111-111111111111",
+            "name": "expired",
+            "token_hash": "8356cbd8ca0ff150fd815b63f7858d6d3990faf88c258cc4fac2e34991b42a9f",
+            "token_prefix": "mul_cccccccc",
+            "expires_at": 946684800.0,
+            "last_used_at": null,
+            "revoked": false,
+            "created_at": 1767225600.0
+          }
+        ]
+      },
+      "events": null,
+      "external_calls": null
+    },
+    {
+      "status": 400,
+      "headers": {
+        "content-length": [
+          "29"
+        ],
+        "content-type": [
+          "application/json"
+        ]
+      },
+      "body": {
+        "error": "invalid token id"
+      },
+      "wire_body": "{\"error\":\"invalid token id\"}\n",
+      "state": {
+        "tokens": [
+          {
+            "id": "33333333-3333-4333-8333-333333333333",
+            "user_id": "11111111-1111-4111-8111-111111111111",
+            "name": "seed",
+            "token_hash": "ae84763d263fcb65bcd4204e725f897a37a95026e81e9ab95717dff02f6bb382",
+            "token_prefix": "mul_aaaaaaaa",
+            "expires_at": null,
+            "last_used_at": null,
+            "revoked": false,
+            "created_at": 1767225600.0
+          },
+          {
+            "id": "44444444-4444-4444-8444-444444444444",
+            "user_id": "11111111-1111-4111-8111-111111111111",
+            "name": "far",
+            "token_hash": "4c67cd42695f2f0cebb9a98e9ea162196c5793b415765733fe0d5ecf4d497bb9",
+            "token_prefix": "mul_bbbbbbbb",
+            "expires_at": 2051222400.0,
+            "last_used_at": null,
+            "revoked": false,
+            "created_at": 1767225600.0
+          },
+          {
+            "id": "55555555-5555-4555-8555-555555555555",
+            "user_id": "11111111-1111-4111-8111-111111111111",
+            "name": "expired",
+            "token_hash": "8356cbd8ca0ff150fd815b63f7858d6d3990faf88c258cc4fac2e34991b42a9f",
+            "token_prefix": "mul_cccccccc",
+            "expires_at": 946684800.0,
+            "last_used_at": null,
+            "revoked": false,
+            "created_at": 1767225600.0
+          }
+        ]
+      },
+      "events": null,
+      "external_calls": null
+    },
+    {
+      "status": 204,
+      "headers": {},
+      "body": null,
+      "wire_body": "",
+      "state": {
+        "tokens": [
+          {
+            "id": "33333333-3333-4333-8333-333333333333",
+            "user_id": "11111111-1111-4111-8111-111111111111",
+            "name": "seed",
+            "token_hash": "ae84763d263fcb65bcd4204e725f897a37a95026e81e9ab95717dff02f6bb382",
+            "token_prefix": "mul_aaaaaaaa",
+            "expires_at": null,
+            "last_used_at": null,
+            "revoked": false,
+            "created_at": 1767225600.0
+          },
+          {
+            "id": "44444444-4444-4444-8444-444444444444",
+            "user_id": "11111111-1111-4111-8111-111111111111",
+            "name": "far",
+            "token_hash": "4c67cd42695f2f0cebb9a98e9ea162196c5793b415765733fe0d5ecf4d497bb9",
+            "token_prefix": "mul_bbbbbbbb",
+            "expires_at": 2051222400.0,
+            "last_used_at": null,
+            "revoked": false,
+            "created_at": 1767225600.0
+          },
+          {
+            "id": "55555555-5555-4555-8555-555555555555",
+            "user_id": "11111111-1111-4111-8111-111111111111",
+            "name": "expired",
+            "token_hash": "8356cbd8ca0ff150fd815b63f7858d6d3990faf88c258cc4fac2e34991b42a9f",
+            "token_prefix": "mul_cccccccc",
+            "expires_at": 946684800.0,
+            "last_used_at": null,
+            "revoked": false,
+            "created_at": 1767225600.0
+          }
+        ]
+      },
+      "events": null,
+      "external_calls": null
+    },
+    {
+      "status": 403,
+      "headers": {
+        "content-length": [
+          "60"
+        ],
+        "content-type": [
+          "application/json"
+        ]
+      },
+      "body": {
+        "error": "this endpoint is only available to human actors"
+      },
+      "wire_body": "{\"error\":\"this endpoint is only available to human actors\"}\n",
+      "state": {
+        "tokens": [
+          {
+            "id": "33333333-3333-4333-8333-333333333333",
+            "user_id": "11111111-1111-4111-8111-111111111111",
+            "name": "seed",
+            "token_hash": "ae84763d263fcb65bcd4204e725f897a37a95026e81e9ab95717dff02f6bb382",
+            "token_prefix": "mul_aaaaaaaa",
+            "expires_at": null,
+            "last_used_at": null,
+            "revoked": false,
+            "created_at": 1767225600.0
+          },
+          {
+            "id": "44444444-4444-4444-8444-444444444444",
+            "user_id": "11111111-1111-4111-8111-111111111111",
+            "name": "far",
+            "token_hash": "4c67cd42695f2f0cebb9a98e9ea162196c5793b415765733fe0d5ecf4d497bb9",
+            "token_prefix": "mul_bbbbbbbb",
+            "expires_at": 2051222400.0,
+            "last_used_at": null,
+            "revoked": false,
+            "created_at": 1767225600.0
+          },
+          {
+            "id": "55555555-5555-4555-8555-555555555555",
+            "user_id": "11111111-1111-4111-8111-111111111111",
+            "name": "expired",
+            "token_hash": "8356cbd8ca0ff150fd815b63f7858d6d3990faf88c258cc4fac2e34991b42a9f",
+            "token_prefix": "mul_cccccccc",
+            "expires_at": 946684800.0,
+            "last_used_at": null,
+            "revoked": false,
+            "created_at": 1767225600.0
+          }
+        ]
+      },
+      "events": null,
+      "external_calls": null
+    },
+    {
+      "status": 403,
+      "headers": {
+        "content-length": [
+          "60"
+        ],
+        "content-type": [
+          "application/json"
+        ]
+      },
+      "body": {
+        "error": "this endpoint is only available to human actors"
+      },
+      "wire_body": "{\"error\":\"this endpoint is only available to human actors\"}\n",
+      "state": {
+        "tokens": [
+          {
+            "id": "33333333-3333-4333-8333-333333333333",
+            "user_id": "11111111-1111-4111-8111-111111111111",
+            "name": "seed",
+            "token_hash": "ae84763d263fcb65bcd4204e725f897a37a95026e81e9ab95717dff02f6bb382",
+            "token_prefix": "mul_aaaaaaaa",
+            "expires_at": null,
+            "last_used_at": null,
+            "revoked": false,
+            "created_at": 1767225600.0
+          },
+          {
+            "id": "44444444-4444-4444-8444-444444444444",
+            "user_id": "11111111-1111-4111-8111-111111111111",
+            "name": "far",
+            "token_hash": "4c67cd42695f2f0cebb9a98e9ea162196c5793b415765733fe0d5ecf4d497bb9",
+            "token_prefix": "mul_bbbbbbbb",
+            "expires_at": 2051222400.0,
+            "last_used_at": null,
+            "revoked": false,
+            "created_at": 1767225600.0
+          },
+          {
+            "id": "55555555-5555-4555-8555-555555555555",
+            "user_id": "11111111-1111-4111-8111-111111111111",
+            "name": "expired",
+            "token_hash": "8356cbd8ca0ff150fd815b63f7858d6d3990faf88c258cc4fac2e34991b42a9f",
+            "token_prefix": "mul_cccccccc",
+            "expires_at": 946684800.0,
+            "last_used_at": null,
+            "revoked": false,
+            "created_at": 1767225600.0
+          }
+        ]
+      },
+      "events": null,
+      "external_calls": null
+    },
+    {
+      "status": 500,
+      "headers": {
+        "content-length": [
+          "35"
+        ],
+        "content-type": [
+          "application/json"
+        ]
+      },
+      "body": {
+        "error": "failed to create token"
+      },
+      "wire_body": "{\"error\":\"failed to create token\"}\n",
+      "state": {
+        "tokens": [
+          {
+            "id": "33333333-3333-4333-8333-333333333333",
+            "user_id": "11111111-1111-4111-8111-111111111111",
+            "name": "seed",
+            "token_hash": "ae84763d263fcb65bcd4204e725f897a37a95026e81e9ab95717dff02f6bb382",
+            "token_prefix": "mul_aaaaaaaa",
+            "expires_at": null,
+            "last_used_at": null,
+            "revoked": false,
+            "created_at": 1767225600.0
+          },
+          {
+            "id": "44444444-4444-4444-8444-444444444444",
+            "user_id": "11111111-1111-4111-8111-111111111111",
+            "name": "far",
+            "token_hash": "4c67cd42695f2f0cebb9a98e9ea162196c5793b415765733fe0d5ecf4d497bb9",
+            "token_prefix": "mul_bbbbbbbb",
+            "expires_at": 2051222400.0,
+            "last_used_at": null,
+            "revoked": false,
+            "created_at": 1767225600.0
+          },
+          {
+            "id": "55555555-5555-4555-8555-555555555555",
+            "user_id": "11111111-1111-4111-8111-111111111111",
+            "name": "expired",
+            "token_hash": "8356cbd8ca0ff150fd815b63f7858d6d3990faf88c258cc4fac2e34991b42a9f",
+            "token_prefix": "mul_cccccccc",
+            "expires_at": 946684800.0,
+            "last_used_at": null,
+            "revoked": false,
+            "created_at": 1767225600.0
+          }
+        ]
+      },
+      "events": null,
+      "external_calls": null
+    },
+    {
+      "status": 200,
+      "headers": {
+        "content-length": [
+          "34"
+        ],
+        "content-type": [
+          "application/json"
+        ]
+      },
+      "body": {
+        "expires_at": "",
+        "renewed": false
+      },
+      "wire_body": "{\"expires_at\":\"\",\"renewed\":false}\n",
+      "state": {
+        "tokens": [
+          {
+            "id": "33333333-3333-4333-8333-333333333333",
+            "user_id": "11111111-1111-4111-8111-111111111111",
+            "name": "seed",
+            "token_hash": "ae84763d263fcb65bcd4204e725f897a37a95026e81e9ab95717dff02f6bb382",
+            "token_prefix": "mul_aaaaaaaa",
+            "expires_at": null,
+            "last_used_at": null,
+            "revoked": false,
+            "created_at": 1767225600.0
+          },
+          {
+            "id": "44444444-4444-4444-8444-444444444444",
+            "user_id": "11111111-1111-4111-8111-111111111111",
+            "name": "far",
+            "token_hash": "4c67cd42695f2f0cebb9a98e9ea162196c5793b415765733fe0d5ecf4d497bb9",
+            "token_prefix": "mul_bbbbbbbb",
+            "expires_at": 2051222400.0,
+            "last_used_at": null,
+            "revoked": false,
+            "created_at": 1767225600.0
+          },
+          {
+            "id": "55555555-5555-4555-8555-555555555555",
+            "user_id": "11111111-1111-4111-8111-111111111111",
+            "name": "expired",
+            "token_hash": "8356cbd8ca0ff150fd815b63f7858d6d3990faf88c258cc4fac2e34991b42a9f",
+            "token_prefix": "mul_cccccccc",
+            "expires_at": 946684800.0,
+            "last_used_at": null,
+            "revoked": false,
+            "created_at": 1767225600.0
+          }
+        ]
+      },
+      "events": null,
+      "external_calls": null
+    },
+    {
+      "status": 204,
+      "headers": {},
+      "body": null,
+      "wire_body": "",
+      "state": {
+        "tokens": [
+          {
+            "id": "33333333-3333-4333-8333-333333333333",
+            "user_id": "11111111-1111-4111-8111-111111111111",
+            "name": "seed",
+            "token_hash": "ae84763d263fcb65bcd4204e725f897a37a95026e81e9ab95717dff02f6bb382",
+            "token_prefix": "mul_aaaaaaaa",
+            "expires_at": null,
+            "last_used_at": null,
+            "revoked": true,
+            "created_at": 1767225600.0
+          },
+          {
+            "id": "44444444-4444-4444-8444-444444444444",
+            "user_id": "11111111-1111-4111-8111-111111111111",
+            "name": "far",
+            "token_hash": "4c67cd42695f2f0cebb9a98e9ea162196c5793b415765733fe0d5ecf4d497bb9",
+            "token_prefix": "mul_bbbbbbbb",
+            "expires_at": 2051222400.0,
+            "last_used_at": null,
+            "revoked": false,
+            "created_at": 1767225600.0
+          },
+          {
+            "id": "55555555-5555-4555-8555-555555555555",
+            "user_id": "11111111-1111-4111-8111-111111111111",
+            "name": "expired",
+            "token_hash": "8356cbd8ca0ff150fd815b63f7858d6d3990faf88c258cc4fac2e34991b42a9f",
+            "token_prefix": "mul_cccccccc",
+            "expires_at": 946684800.0,
+            "last_used_at": null,
+            "revoked": false,
+            "created_at": 1767225600.0
+          }
+        ]
+      },
+      "events": null,
+      "external_calls": null
+    },
+    {
+      "status": 200,
+      "headers": {
+        "content-length": [
+          "368"
+        ],
+        "content-type": [
+          "application/json"
+        ]
+      },
+      "body": [
+        {
+          "id": "44444444-4444-4444-8444-444444444444",
+          "name": "far",
+          "token_prefix": "mul_bbbbbbbb",
+          "expires_at": "2035-01-01T00:00:00Z",
+          "last_used_at": null,
+          "created_at": "2026-01-01T00:00:00Z"
+        },
+        {
+          "id": "55555555-5555-4555-8555-555555555555",
+          "name": "expired",
+          "token_prefix": "mul_cccccccc",
+          "expires_at": "2000-01-01T00:00:00Z",
+          "last_used_at": null,
+          "created_at": "2026-01-01T00:00:00Z"
+        }
+      ],
+      "wire_body": "[{\"id\":\"44444444-4444-4444-8444-444444444444\",\"name\":\"far\",\"token_prefix\":\"mul_bbbbbbbb\",\"expires_at\":\"2035-01-01T00:00:00Z\",\"last_used_at\":null,\"created_at\":\"2026-01-01T00:00:00Z\"},{\"id\":\"55555555-5555-4555-8555-555555555555\",\"name\":\"expired\",\"token_prefix\":\"mul_cccccccc\",\"expires_at\":\"2000-01-01T00:00:00Z\",\"last_used_at\":null,\"created_at\":\"2026-01-01T00:00:00Z\"}]\n",
+      "state": {
+        "tokens": [
+          {
+            "id": "33333333-3333-4333-8333-333333333333",
+            "user_id": "11111111-1111-4111-8111-111111111111",
+            "name": "seed",
+            "token_hash": "ae84763d263fcb65bcd4204e725f897a37a95026e81e9ab95717dff02f6bb382",
+            "token_prefix": "mul_aaaaaaaa",
+            "expires_at": null,
+            "last_used_at": null,
+            "revoked": true,
+            "created_at": 1767225600.0
+          },
+          {
+            "id": "44444444-4444-4444-8444-444444444444",
+            "user_id": "11111111-1111-4111-8111-111111111111",
+            "name": "far",
+            "token_hash": "4c67cd42695f2f0cebb9a98e9ea162196c5793b415765733fe0d5ecf4d497bb9",
+            "token_prefix": "mul_bbbbbbbb",
+            "expires_at": 2051222400.0,
+            "last_used_at": null,
+            "revoked": false,
+            "created_at": 1767225600.0
+          },
+          {
+            "id": "55555555-5555-4555-8555-555555555555",
+            "user_id": "11111111-1111-4111-8111-111111111111",
+            "name": "expired",
+            "token_hash": "8356cbd8ca0ff150fd815b63f7858d6d3990faf88c258cc4fac2e34991b42a9f",
+            "token_prefix": "mul_cccccccc",
+            "expires_at": 946684800.0,
+            "last_used_at": null,
+            "revoked": false,
+            "created_at": 1767225600.0
+          }
+        ]
+      },
+      "events": null,
+      "external_calls": null
+    },
+    {
+      "status": 401,
+      "headers": {
+        "content-length": [
+          "37"
+        ],
+        "content-type": [
+          "application/json"
+        ]
+      },
+      "body": {
+        "error": "token is no longer valid"
+      },
+      "wire_body": "{\"error\":\"token is no longer valid\"}\n",
+      "state": {
+        "tokens": [
+          {
+            "id": "33333333-3333-4333-8333-333333333333",
+            "user_id": "11111111-1111-4111-8111-111111111111",
+            "name": "seed",
+            "token_hash": "ae84763d263fcb65bcd4204e725f897a37a95026e81e9ab95717dff02f6bb382",
+            "token_prefix": "mul_aaaaaaaa",
+            "expires_at": null,
+            "last_used_at": null,
+            "revoked": true,
+            "created_at": 1767225600.0
+          },
+          {
+            "id": "44444444-4444-4444-8444-444444444444",
+            "user_id": "11111111-1111-4111-8111-111111111111",
+            "name": "far",
+            "token_hash": "4c67cd42695f2f0cebb9a98e9ea162196c5793b415765733fe0d5ecf4d497bb9",
+            "token_prefix": "mul_bbbbbbbb",
+            "expires_at": 2051222400.0,
+            "last_used_at": null,
+            "revoked": false,
+            "created_at": 1767225600.0
+          },
+          {
+            "id": "55555555-5555-4555-8555-555555555555",
+            "user_id": "11111111-1111-4111-8111-111111111111",
+            "name": "expired",
+            "token_hash": "8356cbd8ca0ff150fd815b63f7858d6d3990faf88c258cc4fac2e34991b42a9f",
+            "token_prefix": "mul_cccccccc",
+            "expires_at": 946684800.0,
+            "last_used_at": null,
+            "revoked": false,
+            "created_at": 1767225600.0
+          }
+        ]
+      },
+      "events": null,
+      "external_calls": null
+    },
+    {
+      "status": 204,
+      "headers": {},
+      "body": null,
+      "wire_body": "",
+      "state": {
+        "tokens": [
+          {
+            "id": "33333333-3333-4333-8333-333333333333",
+            "user_id": "11111111-1111-4111-8111-111111111111",
+            "name": "seed",
+            "token_hash": "ae84763d263fcb65bcd4204e725f897a37a95026e81e9ab95717dff02f6bb382",
+            "token_prefix": "mul_aaaaaaaa",
+            "expires_at": null,
+            "last_used_at": null,
+            "revoked": true,
+            "created_at": 1767225600.0
+          },
+          {
+            "id": "44444444-4444-4444-8444-444444444444",
+            "user_id": "11111111-1111-4111-8111-111111111111",
+            "name": "far",
+            "token_hash": "4c67cd42695f2f0cebb9a98e9ea162196c5793b415765733fe0d5ecf4d497bb9",
+            "token_prefix": "mul_bbbbbbbb",
+            "expires_at": 2051222400.0,
+            "last_used_at": null,
+            "revoked": false,
+            "created_at": 1767225600.0
+          },
+          {
+            "id": "55555555-5555-4555-8555-555555555555",
+            "user_id": "11111111-1111-4111-8111-111111111111",
+            "name": "expired",
+            "token_hash": "8356cbd8ca0ff150fd815b63f7858d6d3990faf88c258cc4fac2e34991b42a9f",
+            "token_prefix": "mul_cccccccc",
+            "expires_at": 946684800.0,
+            "last_used_at": null,
+            "revoked": false,
+            "created_at": 1767225600.0
+          }
+        ]
+      },
+      "events": null,
+      "external_calls": null
+    },
+    {
+      "status": 200,
+      "headers": {
+        "content-length": [
+          "54"
+        ],
+        "content-type": [
+          "application/json"
+        ]
+      },
+      "body": {
+        "expires_at": "2035-01-01T00:00:00Z",
+        "renewed": false
+      },
+      "wire_body": "{\"expires_at\":\"2035-01-01T00:00:00Z\",\"renewed\":false}\n",
+      "state": {
+        "tokens": [
+          {
+            "id": "33333333-3333-4333-8333-333333333333",
+            "user_id": "11111111-1111-4111-8111-111111111111",
+            "name": "seed",
+            "token_hash": "ae84763d263fcb65bcd4204e725f897a37a95026e81e9ab95717dff02f6bb382",
+            "token_prefix": "mul_aaaaaaaa",
+            "expires_at": null,
+            "last_used_at": null,
+            "revoked": true,
+            "created_at": 1767225600.0
+          },
+          {
+            "id": "44444444-4444-4444-8444-444444444444",
+            "user_id": "11111111-1111-4111-8111-111111111111",
+            "name": "far",
+            "token_hash": "4c67cd42695f2f0cebb9a98e9ea162196c5793b415765733fe0d5ecf4d497bb9",
+            "token_prefix": "mul_bbbbbbbb",
+            "expires_at": 2051222400.0,
+            "last_used_at": null,
+            "revoked": false,
+            "created_at": 1767225600.0
+          },
+          {
+            "id": "55555555-5555-4555-8555-555555555555",
+            "user_id": "11111111-1111-4111-8111-111111111111",
+            "name": "expired",
+            "token_hash": "8356cbd8ca0ff150fd815b63f7858d6d3990faf88c258cc4fac2e34991b42a9f",
+            "token_prefix": "mul_cccccccc",
+            "expires_at": 946684800.0,
+            "last_used_at": null,
+            "revoked": false,
+            "created_at": 1767225600.0
+          }
+        ]
+      },
+      "events": null,
+      "external_calls": null
+    },
+    {
+      "status": 401,
+      "headers": {
+        "content-length": [
+          "37"
+        ],
+        "content-type": [
+          "application/json"
+        ]
+      },
+      "body": {
+        "error": "token is no longer valid"
+      },
+      "wire_body": "{\"error\":\"token is no longer valid\"}\n",
+      "state": {
+        "tokens": [
+          {
+            "id": "33333333-3333-4333-8333-333333333333",
+            "user_id": "11111111-1111-4111-8111-111111111111",
+            "name": "seed",
+            "token_hash": "ae84763d263fcb65bcd4204e725f897a37a95026e81e9ab95717dff02f6bb382",
+            "token_prefix": "mul_aaaaaaaa",
+            "expires_at": null,
+            "last_used_at": null,
+            "revoked": true,
+            "created_at": 1767225600.0
+          },
+          {
+            "id": "44444444-4444-4444-8444-444444444444",
+            "user_id": "11111111-1111-4111-8111-111111111111",
+            "name": "far",
+            "token_hash": "4c67cd42695f2f0cebb9a98e9ea162196c5793b415765733fe0d5ecf4d497bb9",
+            "token_prefix": "mul_bbbbbbbb",
+            "expires_at": 2051222400.0,
+            "last_used_at": null,
+            "revoked": false,
+            "created_at": 1767225600.0
+          },
+          {
+            "id": "55555555-5555-4555-8555-555555555555",
+            "user_id": "11111111-1111-4111-8111-111111111111",
+            "name": "expired",
+            "token_hash": "8356cbd8ca0ff150fd815b63f7858d6d3990faf88c258cc4fac2e34991b42a9f",
+            "token_prefix": "mul_cccccccc",
+            "expires_at": 946684800.0,
+            "last_used_at": null,
+            "revoked": false,
+            "created_at": 1767225600.0
+          }
+        ]
+      },
+      "events": null,
+      "external_calls": null
+    }
+  ],
+  "mismatches": [],
+  "normalization": [
+    "HTTP header names lowercased; values preserved"
+  ],
+  "go_exit_code": 0
+}

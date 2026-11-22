@@ -1,0 +1,7681 @@
+{
+  "scope": "Original Go sharded PublishWithID command args/bytes and stream presence, errors, counters and opt-in expiry/retry. Redis command boundary recorder, not actual Go Redis I/O. Clock normalized. No ULID, timeout/cancellation, metrics endpoint, subscription or lifecycle equivalence certified.",
+  "fixtures": [
+    {
+      "Scope": "user",
+      "ID": "u",
+      "Exclude": "w",
+      "EventID": "e",
+      "Frame": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+      "Enabled": false,
+      "MaxLen": 7,
+      "Failure": "",
+      "Count": 2
+    },
+    {
+      "Scope": "workspace",
+      "ID": "w",
+      "Exclude": "w",
+      "EventID": "e",
+      "Frame": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+      "Enabled": false,
+      "MaxLen": 7,
+      "Failure": "",
+      "Count": 2
+    },
+    {
+      "Scope": "global",
+      "ID": "all",
+      "Exclude": "w",
+      "EventID": "e",
+      "Frame": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+      "Enabled": false,
+      "MaxLen": 7,
+      "Failure": "",
+      "Count": 2
+    },
+    {
+      "Scope": "daemon_runtime",
+      "ID": "r",
+      "Exclude": "w",
+      "EventID": "e",
+      "Frame": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+      "Enabled": false,
+      "MaxLen": 7,
+      "Failure": "",
+      "Count": 2
+    },
+    {
+      "Scope": "",
+      "ID": "",
+      "Exclude": "w",
+      "EventID": "e",
+      "Frame": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+      "Enabled": false,
+      "MaxLen": 7,
+      "Failure": "",
+      "Count": 2
+    },
+    {
+      "Scope": "user",
+      "ID": "u",
+      "Exclude": "w",
+      "EventID": "e",
+      "Frame": "b3BhcXVl/w==",
+      "Enabled": false,
+      "MaxLen": 7,
+      "Failure": "",
+      "Count": 2
+    },
+    {
+      "Scope": "workspace",
+      "ID": "w",
+      "Exclude": "w",
+      "EventID": "e",
+      "Frame": "b3BhcXVl/w==",
+      "Enabled": false,
+      "MaxLen": 7,
+      "Failure": "",
+      "Count": 2
+    },
+    {
+      "Scope": "global",
+      "ID": "all",
+      "Exclude": "w",
+      "EventID": "e",
+      "Frame": "b3BhcXVl/w==",
+      "Enabled": false,
+      "MaxLen": 7,
+      "Failure": "",
+      "Count": 2
+    },
+    {
+      "Scope": "daemon_runtime",
+      "ID": "r",
+      "Exclude": "w",
+      "EventID": "e",
+      "Frame": "b3BhcXVl/w==",
+      "Enabled": false,
+      "MaxLen": 7,
+      "Failure": "",
+      "Count": 2
+    },
+    {
+      "Scope": "",
+      "ID": "",
+      "Exclude": "w",
+      "EventID": "e",
+      "Frame": "b3BhcXVl/w==",
+      "Enabled": false,
+      "MaxLen": 7,
+      "Failure": "",
+      "Count": 2
+    },
+    {
+      "Scope": "user",
+      "ID": "u",
+      "Exclude": "w",
+      "EventID": "e",
+      "Frame": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+      "Enabled": false,
+      "MaxLen": 7,
+      "Failure": "write",
+      "Count": 2
+    },
+    {
+      "Scope": "workspace",
+      "ID": "w",
+      "Exclude": "w",
+      "EventID": "e",
+      "Frame": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+      "Enabled": false,
+      "MaxLen": 7,
+      "Failure": "write",
+      "Count": 2
+    },
+    {
+      "Scope": "global",
+      "ID": "all",
+      "Exclude": "w",
+      "EventID": "e",
+      "Frame": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+      "Enabled": false,
+      "MaxLen": 7,
+      "Failure": "write",
+      "Count": 2
+    },
+    {
+      "Scope": "daemon_runtime",
+      "ID": "r",
+      "Exclude": "w",
+      "EventID": "e",
+      "Frame": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+      "Enabled": false,
+      "MaxLen": 7,
+      "Failure": "write",
+      "Count": 2
+    },
+    {
+      "Scope": "",
+      "ID": "",
+      "Exclude": "w",
+      "EventID": "e",
+      "Frame": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+      "Enabled": false,
+      "MaxLen": 7,
+      "Failure": "write",
+      "Count": 2
+    },
+    {
+      "Scope": "user",
+      "ID": "u",
+      "Exclude": "w",
+      "EventID": "e",
+      "Frame": "b3BhcXVl/w==",
+      "Enabled": false,
+      "MaxLen": 7,
+      "Failure": "write",
+      "Count": 2
+    },
+    {
+      "Scope": "workspace",
+      "ID": "w",
+      "Exclude": "w",
+      "EventID": "e",
+      "Frame": "b3BhcXVl/w==",
+      "Enabled": false,
+      "MaxLen": 7,
+      "Failure": "write",
+      "Count": 2
+    },
+    {
+      "Scope": "global",
+      "ID": "all",
+      "Exclude": "w",
+      "EventID": "e",
+      "Frame": "b3BhcXVl/w==",
+      "Enabled": false,
+      "MaxLen": 7,
+      "Failure": "write",
+      "Count": 2
+    },
+    {
+      "Scope": "daemon_runtime",
+      "ID": "r",
+      "Exclude": "w",
+      "EventID": "e",
+      "Frame": "b3BhcXVl/w==",
+      "Enabled": false,
+      "MaxLen": 7,
+      "Failure": "write",
+      "Count": 2
+    },
+    {
+      "Scope": "",
+      "ID": "",
+      "Exclude": "w",
+      "EventID": "e",
+      "Frame": "b3BhcXVl/w==",
+      "Enabled": false,
+      "MaxLen": 7,
+      "Failure": "write",
+      "Count": 2
+    },
+    {
+      "Scope": "user",
+      "ID": "u",
+      "Exclude": "w",
+      "EventID": "e",
+      "Frame": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+      "Enabled": false,
+      "MaxLen": 7,
+      "Failure": "expiry",
+      "Count": 2
+    },
+    {
+      "Scope": "workspace",
+      "ID": "w",
+      "Exclude": "w",
+      "EventID": "e",
+      "Frame": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+      "Enabled": false,
+      "MaxLen": 7,
+      "Failure": "expiry",
+      "Count": 2
+    },
+    {
+      "Scope": "global",
+      "ID": "all",
+      "Exclude": "w",
+      "EventID": "e",
+      "Frame": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+      "Enabled": false,
+      "MaxLen": 7,
+      "Failure": "expiry",
+      "Count": 2
+    },
+    {
+      "Scope": "daemon_runtime",
+      "ID": "r",
+      "Exclude": "w",
+      "EventID": "e",
+      "Frame": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+      "Enabled": false,
+      "MaxLen": 7,
+      "Failure": "expiry",
+      "Count": 2
+    },
+    {
+      "Scope": "",
+      "ID": "",
+      "Exclude": "w",
+      "EventID": "e",
+      "Frame": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+      "Enabled": false,
+      "MaxLen": 7,
+      "Failure": "expiry",
+      "Count": 2
+    },
+    {
+      "Scope": "user",
+      "ID": "u",
+      "Exclude": "w",
+      "EventID": "e",
+      "Frame": "b3BhcXVl/w==",
+      "Enabled": false,
+      "MaxLen": 7,
+      "Failure": "expiry",
+      "Count": 2
+    },
+    {
+      "Scope": "workspace",
+      "ID": "w",
+      "Exclude": "w",
+      "EventID": "e",
+      "Frame": "b3BhcXVl/w==",
+      "Enabled": false,
+      "MaxLen": 7,
+      "Failure": "expiry",
+      "Count": 2
+    },
+    {
+      "Scope": "global",
+      "ID": "all",
+      "Exclude": "w",
+      "EventID": "e",
+      "Frame": "b3BhcXVl/w==",
+      "Enabled": false,
+      "MaxLen": 7,
+      "Failure": "expiry",
+      "Count": 2
+    },
+    {
+      "Scope": "daemon_runtime",
+      "ID": "r",
+      "Exclude": "w",
+      "EventID": "e",
+      "Frame": "b3BhcXVl/w==",
+      "Enabled": false,
+      "MaxLen": 7,
+      "Failure": "expiry",
+      "Count": 2
+    },
+    {
+      "Scope": "",
+      "ID": "",
+      "Exclude": "w",
+      "EventID": "e",
+      "Frame": "b3BhcXVl/w==",
+      "Enabled": false,
+      "MaxLen": 7,
+      "Failure": "expiry",
+      "Count": 2
+    },
+    {
+      "Scope": "user",
+      "ID": "u",
+      "Exclude": "w",
+      "EventID": "e",
+      "Frame": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+      "Enabled": true,
+      "MaxLen": 7,
+      "Failure": "",
+      "Count": 2
+    },
+    {
+      "Scope": "workspace",
+      "ID": "w",
+      "Exclude": "w",
+      "EventID": "e",
+      "Frame": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+      "Enabled": true,
+      "MaxLen": 7,
+      "Failure": "",
+      "Count": 2
+    },
+    {
+      "Scope": "global",
+      "ID": "all",
+      "Exclude": "w",
+      "EventID": "e",
+      "Frame": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+      "Enabled": true,
+      "MaxLen": 7,
+      "Failure": "",
+      "Count": 2
+    },
+    {
+      "Scope": "daemon_runtime",
+      "ID": "r",
+      "Exclude": "w",
+      "EventID": "e",
+      "Frame": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+      "Enabled": true,
+      "MaxLen": 7,
+      "Failure": "",
+      "Count": 2
+    },
+    {
+      "Scope": "",
+      "ID": "",
+      "Exclude": "w",
+      "EventID": "e",
+      "Frame": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+      "Enabled": true,
+      "MaxLen": 7,
+      "Failure": "",
+      "Count": 2
+    },
+    {
+      "Scope": "user",
+      "ID": "u",
+      "Exclude": "w",
+      "EventID": "e",
+      "Frame": "b3BhcXVl/w==",
+      "Enabled": true,
+      "MaxLen": 7,
+      "Failure": "",
+      "Count": 2
+    },
+    {
+      "Scope": "workspace",
+      "ID": "w",
+      "Exclude": "w",
+      "EventID": "e",
+      "Frame": "b3BhcXVl/w==",
+      "Enabled": true,
+      "MaxLen": 7,
+      "Failure": "",
+      "Count": 2
+    },
+    {
+      "Scope": "global",
+      "ID": "all",
+      "Exclude": "w",
+      "EventID": "e",
+      "Frame": "b3BhcXVl/w==",
+      "Enabled": true,
+      "MaxLen": 7,
+      "Failure": "",
+      "Count": 2
+    },
+    {
+      "Scope": "daemon_runtime",
+      "ID": "r",
+      "Exclude": "w",
+      "EventID": "e",
+      "Frame": "b3BhcXVl/w==",
+      "Enabled": true,
+      "MaxLen": 7,
+      "Failure": "",
+      "Count": 2
+    },
+    {
+      "Scope": "",
+      "ID": "",
+      "Exclude": "w",
+      "EventID": "e",
+      "Frame": "b3BhcXVl/w==",
+      "Enabled": true,
+      "MaxLen": 7,
+      "Failure": "",
+      "Count": 2
+    },
+    {
+      "Scope": "user",
+      "ID": "u",
+      "Exclude": "w",
+      "EventID": "e",
+      "Frame": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+      "Enabled": true,
+      "MaxLen": 7,
+      "Failure": "write",
+      "Count": 2
+    },
+    {
+      "Scope": "workspace",
+      "ID": "w",
+      "Exclude": "w",
+      "EventID": "e",
+      "Frame": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+      "Enabled": true,
+      "MaxLen": 7,
+      "Failure": "write",
+      "Count": 2
+    },
+    {
+      "Scope": "global",
+      "ID": "all",
+      "Exclude": "w",
+      "EventID": "e",
+      "Frame": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+      "Enabled": true,
+      "MaxLen": 7,
+      "Failure": "write",
+      "Count": 2
+    },
+    {
+      "Scope": "daemon_runtime",
+      "ID": "r",
+      "Exclude": "w",
+      "EventID": "e",
+      "Frame": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+      "Enabled": true,
+      "MaxLen": 7,
+      "Failure": "write",
+      "Count": 2
+    },
+    {
+      "Scope": "",
+      "ID": "",
+      "Exclude": "w",
+      "EventID": "e",
+      "Frame": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+      "Enabled": true,
+      "MaxLen": 7,
+      "Failure": "write",
+      "Count": 2
+    },
+    {
+      "Scope": "user",
+      "ID": "u",
+      "Exclude": "w",
+      "EventID": "e",
+      "Frame": "b3BhcXVl/w==",
+      "Enabled": true,
+      "MaxLen": 7,
+      "Failure": "write",
+      "Count": 2
+    },
+    {
+      "Scope": "workspace",
+      "ID": "w",
+      "Exclude": "w",
+      "EventID": "e",
+      "Frame": "b3BhcXVl/w==",
+      "Enabled": true,
+      "MaxLen": 7,
+      "Failure": "write",
+      "Count": 2
+    },
+    {
+      "Scope": "global",
+      "ID": "all",
+      "Exclude": "w",
+      "EventID": "e",
+      "Frame": "b3BhcXVl/w==",
+      "Enabled": true,
+      "MaxLen": 7,
+      "Failure": "write",
+      "Count": 2
+    },
+    {
+      "Scope": "daemon_runtime",
+      "ID": "r",
+      "Exclude": "w",
+      "EventID": "e",
+      "Frame": "b3BhcXVl/w==",
+      "Enabled": true,
+      "MaxLen": 7,
+      "Failure": "write",
+      "Count": 2
+    },
+    {
+      "Scope": "",
+      "ID": "",
+      "Exclude": "w",
+      "EventID": "e",
+      "Frame": "b3BhcXVl/w==",
+      "Enabled": true,
+      "MaxLen": 7,
+      "Failure": "write",
+      "Count": 2
+    },
+    {
+      "Scope": "user",
+      "ID": "u",
+      "Exclude": "w",
+      "EventID": "e",
+      "Frame": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+      "Enabled": true,
+      "MaxLen": 7,
+      "Failure": "expiry",
+      "Count": 2
+    },
+    {
+      "Scope": "workspace",
+      "ID": "w",
+      "Exclude": "w",
+      "EventID": "e",
+      "Frame": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+      "Enabled": true,
+      "MaxLen": 7,
+      "Failure": "expiry",
+      "Count": 2
+    },
+    {
+      "Scope": "global",
+      "ID": "all",
+      "Exclude": "w",
+      "EventID": "e",
+      "Frame": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+      "Enabled": true,
+      "MaxLen": 7,
+      "Failure": "expiry",
+      "Count": 2
+    },
+    {
+      "Scope": "daemon_runtime",
+      "ID": "r",
+      "Exclude": "w",
+      "EventID": "e",
+      "Frame": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+      "Enabled": true,
+      "MaxLen": 7,
+      "Failure": "expiry",
+      "Count": 2
+    },
+    {
+      "Scope": "",
+      "ID": "",
+      "Exclude": "w",
+      "EventID": "e",
+      "Frame": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+      "Enabled": true,
+      "MaxLen": 7,
+      "Failure": "expiry",
+      "Count": 2
+    },
+    {
+      "Scope": "user",
+      "ID": "u",
+      "Exclude": "w",
+      "EventID": "e",
+      "Frame": "b3BhcXVl/w==",
+      "Enabled": true,
+      "MaxLen": 7,
+      "Failure": "expiry",
+      "Count": 2
+    },
+    {
+      "Scope": "workspace",
+      "ID": "w",
+      "Exclude": "w",
+      "EventID": "e",
+      "Frame": "b3BhcXVl/w==",
+      "Enabled": true,
+      "MaxLen": 7,
+      "Failure": "expiry",
+      "Count": 2
+    },
+    {
+      "Scope": "global",
+      "ID": "all",
+      "Exclude": "w",
+      "EventID": "e",
+      "Frame": "b3BhcXVl/w==",
+      "Enabled": true,
+      "MaxLen": 7,
+      "Failure": "expiry",
+      "Count": 2
+    },
+    {
+      "Scope": "daemon_runtime",
+      "ID": "r",
+      "Exclude": "w",
+      "EventID": "e",
+      "Frame": "b3BhcXVl/w==",
+      "Enabled": true,
+      "MaxLen": 7,
+      "Failure": "expiry",
+      "Count": 2
+    },
+    {
+      "Scope": "",
+      "ID": "",
+      "Exclude": "w",
+      "EventID": "e",
+      "Frame": "b3BhcXVl/w==",
+      "Enabled": true,
+      "MaxLen": 7,
+      "Failure": "expiry",
+      "Count": 2
+    }
+  ],
+  "go": [
+    {
+      "errors": [
+        "",
+        ""
+      ],
+      "expires": [],
+      "metrics": [
+        2,
+        0,
+        0
+      ],
+      "seen": [
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "writes": [
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:1",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+            "scope": "dXNlcg==",
+            "scope_id": "dQ==",
+            "workspace_id": "dw=="
+          }
+        },
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:1",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+            "scope": "dXNlcg==",
+            "scope_id": "dQ==",
+            "workspace_id": "dw=="
+          }
+        }
+      ]
+    },
+    {
+      "errors": [
+        "",
+        ""
+      ],
+      "expires": [],
+      "metrics": [
+        2,
+        0,
+        0
+      ],
+      "seen": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        true
+      ],
+      "writes": [
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:7",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+            "scope": "d29ya3NwYWNl",
+            "scope_id": "dw==",
+            "workspace_id": "dw=="
+          }
+        },
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:7",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+            "scope": "d29ya3NwYWNl",
+            "scope_id": "dw==",
+            "workspace_id": "dw=="
+          }
+        }
+      ]
+    },
+    {
+      "errors": [
+        "",
+        ""
+      ],
+      "expires": [],
+      "metrics": [
+        2,
+        0,
+        0
+      ],
+      "seen": [
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "writes": [
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:1",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+            "scope": "Z2xvYmFs",
+            "scope_id": "YWxs",
+            "workspace_id": "dw=="
+          }
+        },
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:1",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+            "scope": "Z2xvYmFs",
+            "scope_id": "YWxs",
+            "workspace_id": "dw=="
+          }
+        }
+      ]
+    },
+    {
+      "errors": [
+        "",
+        ""
+      ],
+      "expires": [],
+      "metrics": [
+        2,
+        0,
+        0
+      ],
+      "seen": [
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "writes": [
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:0",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+            "scope": "ZGFlbW9uX3J1bnRpbWU=",
+            "scope_id": "cg==",
+            "workspace_id": "dw=="
+          }
+        },
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:0",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+            "scope": "ZGFlbW9uX3J1bnRpbWU=",
+            "scope_id": "cg==",
+            "workspace_id": "dw=="
+          }
+        }
+      ]
+    },
+    {
+      "errors": [
+        "",
+        ""
+      ],
+      "expires": [],
+      "metrics": [
+        2,
+        0,
+        0
+      ],
+      "seen": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        true
+      ],
+      "writes": [
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:7",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+            "scope": "",
+            "scope_id": "",
+            "workspace_id": "dw=="
+          }
+        },
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:7",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+            "scope": "",
+            "scope_id": "",
+            "workspace_id": "dw=="
+          }
+        }
+      ]
+    },
+    {
+      "errors": [
+        "",
+        ""
+      ],
+      "expires": [],
+      "metrics": [
+        2,
+        0,
+        0
+      ],
+      "seen": [
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "writes": [
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:1",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w==",
+            "scope": "dXNlcg==",
+            "scope_id": "dQ==",
+            "workspace_id": "dw=="
+          }
+        },
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:1",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w==",
+            "scope": "dXNlcg==",
+            "scope_id": "dQ==",
+            "workspace_id": "dw=="
+          }
+        }
+      ]
+    },
+    {
+      "errors": [
+        "",
+        ""
+      ],
+      "expires": [],
+      "metrics": [
+        2,
+        0,
+        0
+      ],
+      "seen": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        true
+      ],
+      "writes": [
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:7",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w==",
+            "scope": "d29ya3NwYWNl",
+            "scope_id": "dw==",
+            "workspace_id": "dw=="
+          }
+        },
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:7",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w==",
+            "scope": "d29ya3NwYWNl",
+            "scope_id": "dw==",
+            "workspace_id": "dw=="
+          }
+        }
+      ]
+    },
+    {
+      "errors": [
+        "",
+        ""
+      ],
+      "expires": [],
+      "metrics": [
+        2,
+        0,
+        0
+      ],
+      "seen": [
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "writes": [
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:1",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w==",
+            "scope": "Z2xvYmFs",
+            "scope_id": "YWxs",
+            "workspace_id": "dw=="
+          }
+        },
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:1",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w==",
+            "scope": "Z2xvYmFs",
+            "scope_id": "YWxs",
+            "workspace_id": "dw=="
+          }
+        }
+      ]
+    },
+    {
+      "errors": [
+        "",
+        ""
+      ],
+      "expires": [],
+      "metrics": [
+        2,
+        0,
+        0
+      ],
+      "seen": [
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "writes": [
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:0",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w==",
+            "scope": "ZGFlbW9uX3J1bnRpbWU=",
+            "scope_id": "cg==",
+            "workspace_id": "dw=="
+          }
+        },
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:0",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w==",
+            "scope": "ZGFlbW9uX3J1bnRpbWU=",
+            "scope_id": "cg==",
+            "workspace_id": "dw=="
+          }
+        }
+      ]
+    },
+    {
+      "errors": [
+        "",
+        ""
+      ],
+      "expires": [],
+      "metrics": [
+        2,
+        0,
+        0
+      ],
+      "seen": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        true
+      ],
+      "writes": [
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:7",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w==",
+            "scope": "",
+            "scope_id": "",
+            "workspace_id": "dw=="
+          }
+        },
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:7",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w==",
+            "scope": "",
+            "scope_id": "",
+            "workspace_id": "dw=="
+          }
+        }
+      ]
+    },
+    {
+      "errors": [
+        "write unavailable",
+        "write unavailable"
+      ],
+      "expires": [],
+      "metrics": [
+        0,
+        2,
+        0
+      ],
+      "seen": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "writes": [
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:1",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+            "scope": "dXNlcg==",
+            "scope_id": "dQ==",
+            "workspace_id": "dw=="
+          }
+        },
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:1",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+            "scope": "dXNlcg==",
+            "scope_id": "dQ==",
+            "workspace_id": "dw=="
+          }
+        }
+      ]
+    },
+    {
+      "errors": [
+        "write unavailable",
+        "write unavailable"
+      ],
+      "expires": [],
+      "metrics": [
+        0,
+        2,
+        0
+      ],
+      "seen": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "writes": [
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:7",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+            "scope": "d29ya3NwYWNl",
+            "scope_id": "dw==",
+            "workspace_id": "dw=="
+          }
+        },
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:7",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+            "scope": "d29ya3NwYWNl",
+            "scope_id": "dw==",
+            "workspace_id": "dw=="
+          }
+        }
+      ]
+    },
+    {
+      "errors": [
+        "write unavailable",
+        "write unavailable"
+      ],
+      "expires": [],
+      "metrics": [
+        0,
+        2,
+        0
+      ],
+      "seen": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "writes": [
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:1",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+            "scope": "Z2xvYmFs",
+            "scope_id": "YWxs",
+            "workspace_id": "dw=="
+          }
+        },
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:1",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+            "scope": "Z2xvYmFs",
+            "scope_id": "YWxs",
+            "workspace_id": "dw=="
+          }
+        }
+      ]
+    },
+    {
+      "errors": [
+        "write unavailable",
+        "write unavailable"
+      ],
+      "expires": [],
+      "metrics": [
+        0,
+        2,
+        0
+      ],
+      "seen": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "writes": [
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:0",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+            "scope": "ZGFlbW9uX3J1bnRpbWU=",
+            "scope_id": "cg==",
+            "workspace_id": "dw=="
+          }
+        },
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:0",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+            "scope": "ZGFlbW9uX3J1bnRpbWU=",
+            "scope_id": "cg==",
+            "workspace_id": "dw=="
+          }
+        }
+      ]
+    },
+    {
+      "errors": [
+        "write unavailable",
+        "write unavailable"
+      ],
+      "expires": [],
+      "metrics": [
+        0,
+        2,
+        0
+      ],
+      "seen": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "writes": [
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:7",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+            "scope": "",
+            "scope_id": "",
+            "workspace_id": "dw=="
+          }
+        },
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:7",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+            "scope": "",
+            "scope_id": "",
+            "workspace_id": "dw=="
+          }
+        }
+      ]
+    },
+    {
+      "errors": [
+        "write unavailable",
+        "write unavailable"
+      ],
+      "expires": [],
+      "metrics": [
+        0,
+        2,
+        0
+      ],
+      "seen": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "writes": [
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:1",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w==",
+            "scope": "dXNlcg==",
+            "scope_id": "dQ==",
+            "workspace_id": "dw=="
+          }
+        },
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:1",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w==",
+            "scope": "dXNlcg==",
+            "scope_id": "dQ==",
+            "workspace_id": "dw=="
+          }
+        }
+      ]
+    },
+    {
+      "errors": [
+        "write unavailable",
+        "write unavailable"
+      ],
+      "expires": [],
+      "metrics": [
+        0,
+        2,
+        0
+      ],
+      "seen": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "writes": [
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:7",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w==",
+            "scope": "d29ya3NwYWNl",
+            "scope_id": "dw==",
+            "workspace_id": "dw=="
+          }
+        },
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:7",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w==",
+            "scope": "d29ya3NwYWNl",
+            "scope_id": "dw==",
+            "workspace_id": "dw=="
+          }
+        }
+      ]
+    },
+    {
+      "errors": [
+        "write unavailable",
+        "write unavailable"
+      ],
+      "expires": [],
+      "metrics": [
+        0,
+        2,
+        0
+      ],
+      "seen": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "writes": [
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:1",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w==",
+            "scope": "Z2xvYmFs",
+            "scope_id": "YWxs",
+            "workspace_id": "dw=="
+          }
+        },
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:1",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w==",
+            "scope": "Z2xvYmFs",
+            "scope_id": "YWxs",
+            "workspace_id": "dw=="
+          }
+        }
+      ]
+    },
+    {
+      "errors": [
+        "write unavailable",
+        "write unavailable"
+      ],
+      "expires": [],
+      "metrics": [
+        0,
+        2,
+        0
+      ],
+      "seen": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "writes": [
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:0",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w==",
+            "scope": "ZGFlbW9uX3J1bnRpbWU=",
+            "scope_id": "cg==",
+            "workspace_id": "dw=="
+          }
+        },
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:0",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w==",
+            "scope": "ZGFlbW9uX3J1bnRpbWU=",
+            "scope_id": "cg==",
+            "workspace_id": "dw=="
+          }
+        }
+      ]
+    },
+    {
+      "errors": [
+        "write unavailable",
+        "write unavailable"
+      ],
+      "expires": [],
+      "metrics": [
+        0,
+        2,
+        0
+      ],
+      "seen": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "writes": [
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:7",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w==",
+            "scope": "",
+            "scope_id": "",
+            "workspace_id": "dw=="
+          }
+        },
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:7",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w==",
+            "scope": "",
+            "scope_id": "",
+            "workspace_id": "dw=="
+          }
+        }
+      ]
+    },
+    {
+      "errors": [
+        "",
+        ""
+      ],
+      "expires": [],
+      "metrics": [
+        2,
+        0,
+        0
+      ],
+      "seen": [
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "writes": [
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:1",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+            "scope": "dXNlcg==",
+            "scope_id": "dQ==",
+            "workspace_id": "dw=="
+          }
+        },
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:1",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+            "scope": "dXNlcg==",
+            "scope_id": "dQ==",
+            "workspace_id": "dw=="
+          }
+        }
+      ]
+    },
+    {
+      "errors": [
+        "",
+        ""
+      ],
+      "expires": [],
+      "metrics": [
+        2,
+        0,
+        0
+      ],
+      "seen": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        true
+      ],
+      "writes": [
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:7",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+            "scope": "d29ya3NwYWNl",
+            "scope_id": "dw==",
+            "workspace_id": "dw=="
+          }
+        },
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:7",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+            "scope": "d29ya3NwYWNl",
+            "scope_id": "dw==",
+            "workspace_id": "dw=="
+          }
+        }
+      ]
+    },
+    {
+      "errors": [
+        "",
+        ""
+      ],
+      "expires": [],
+      "metrics": [
+        2,
+        0,
+        0
+      ],
+      "seen": [
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "writes": [
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:1",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+            "scope": "Z2xvYmFs",
+            "scope_id": "YWxs",
+            "workspace_id": "dw=="
+          }
+        },
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:1",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+            "scope": "Z2xvYmFs",
+            "scope_id": "YWxs",
+            "workspace_id": "dw=="
+          }
+        }
+      ]
+    },
+    {
+      "errors": [
+        "",
+        ""
+      ],
+      "expires": [],
+      "metrics": [
+        2,
+        0,
+        0
+      ],
+      "seen": [
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "writes": [
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:0",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+            "scope": "ZGFlbW9uX3J1bnRpbWU=",
+            "scope_id": "cg==",
+            "workspace_id": "dw=="
+          }
+        },
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:0",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+            "scope": "ZGFlbW9uX3J1bnRpbWU=",
+            "scope_id": "cg==",
+            "workspace_id": "dw=="
+          }
+        }
+      ]
+    },
+    {
+      "errors": [
+        "",
+        ""
+      ],
+      "expires": [],
+      "metrics": [
+        2,
+        0,
+        0
+      ],
+      "seen": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        true
+      ],
+      "writes": [
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:7",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+            "scope": "",
+            "scope_id": "",
+            "workspace_id": "dw=="
+          }
+        },
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:7",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+            "scope": "",
+            "scope_id": "",
+            "workspace_id": "dw=="
+          }
+        }
+      ]
+    },
+    {
+      "errors": [
+        "",
+        ""
+      ],
+      "expires": [],
+      "metrics": [
+        2,
+        0,
+        0
+      ],
+      "seen": [
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "writes": [
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:1",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w==",
+            "scope": "dXNlcg==",
+            "scope_id": "dQ==",
+            "workspace_id": "dw=="
+          }
+        },
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:1",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w==",
+            "scope": "dXNlcg==",
+            "scope_id": "dQ==",
+            "workspace_id": "dw=="
+          }
+        }
+      ]
+    },
+    {
+      "errors": [
+        "",
+        ""
+      ],
+      "expires": [],
+      "metrics": [
+        2,
+        0,
+        0
+      ],
+      "seen": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        true
+      ],
+      "writes": [
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:7",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w==",
+            "scope": "d29ya3NwYWNl",
+            "scope_id": "dw==",
+            "workspace_id": "dw=="
+          }
+        },
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:7",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w==",
+            "scope": "d29ya3NwYWNl",
+            "scope_id": "dw==",
+            "workspace_id": "dw=="
+          }
+        }
+      ]
+    },
+    {
+      "errors": [
+        "",
+        ""
+      ],
+      "expires": [],
+      "metrics": [
+        2,
+        0,
+        0
+      ],
+      "seen": [
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "writes": [
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:1",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w==",
+            "scope": "Z2xvYmFs",
+            "scope_id": "YWxs",
+            "workspace_id": "dw=="
+          }
+        },
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:1",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w==",
+            "scope": "Z2xvYmFs",
+            "scope_id": "YWxs",
+            "workspace_id": "dw=="
+          }
+        }
+      ]
+    },
+    {
+      "errors": [
+        "",
+        ""
+      ],
+      "expires": [],
+      "metrics": [
+        2,
+        0,
+        0
+      ],
+      "seen": [
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "writes": [
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:0",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w==",
+            "scope": "ZGFlbW9uX3J1bnRpbWU=",
+            "scope_id": "cg==",
+            "workspace_id": "dw=="
+          }
+        },
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:0",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w==",
+            "scope": "ZGFlbW9uX3J1bnRpbWU=",
+            "scope_id": "cg==",
+            "workspace_id": "dw=="
+          }
+        }
+      ]
+    },
+    {
+      "errors": [
+        "",
+        ""
+      ],
+      "expires": [],
+      "metrics": [
+        2,
+        0,
+        0
+      ],
+      "seen": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        true
+      ],
+      "writes": [
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:7",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w==",
+            "scope": "",
+            "scope_id": "",
+            "workspace_id": "dw=="
+          }
+        },
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:7",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w==",
+            "scope": "",
+            "scope_id": "",
+            "workspace_id": "dw=="
+          }
+        }
+      ]
+    },
+    {
+      "errors": [
+        "",
+        ""
+      ],
+      "expires": [
+        {
+          "key": "ws:relay:shard:1",
+          "ttl_ns": 900000000000
+        }
+      ],
+      "metrics": [
+        2,
+        0,
+        0
+      ],
+      "seen": [
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "writes": [
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:1",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+            "scope": "dXNlcg==",
+            "scope_id": "dQ==",
+            "workspace_id": "dw=="
+          }
+        },
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:1",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+            "scope": "dXNlcg==",
+            "scope_id": "dQ==",
+            "workspace_id": "dw=="
+          }
+        }
+      ]
+    },
+    {
+      "errors": [
+        "",
+        ""
+      ],
+      "expires": [
+        {
+          "key": "ws:relay:shard:7",
+          "ttl_ns": 900000000000
+        }
+      ],
+      "metrics": [
+        2,
+        0,
+        0
+      ],
+      "seen": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        true
+      ],
+      "writes": [
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:7",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+            "scope": "d29ya3NwYWNl",
+            "scope_id": "dw==",
+            "workspace_id": "dw=="
+          }
+        },
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:7",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+            "scope": "d29ya3NwYWNl",
+            "scope_id": "dw==",
+            "workspace_id": "dw=="
+          }
+        }
+      ]
+    },
+    {
+      "errors": [
+        "",
+        ""
+      ],
+      "expires": [
+        {
+          "key": "ws:relay:shard:1",
+          "ttl_ns": 900000000000
+        }
+      ],
+      "metrics": [
+        2,
+        0,
+        0
+      ],
+      "seen": [
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "writes": [
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:1",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+            "scope": "Z2xvYmFs",
+            "scope_id": "YWxs",
+            "workspace_id": "dw=="
+          }
+        },
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:1",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+            "scope": "Z2xvYmFs",
+            "scope_id": "YWxs",
+            "workspace_id": "dw=="
+          }
+        }
+      ]
+    },
+    {
+      "errors": [
+        "",
+        ""
+      ],
+      "expires": [
+        {
+          "key": "ws:relay:shard:0",
+          "ttl_ns": 900000000000
+        }
+      ],
+      "metrics": [
+        2,
+        0,
+        0
+      ],
+      "seen": [
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "writes": [
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:0",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+            "scope": "ZGFlbW9uX3J1bnRpbWU=",
+            "scope_id": "cg==",
+            "workspace_id": "dw=="
+          }
+        },
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:0",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+            "scope": "ZGFlbW9uX3J1bnRpbWU=",
+            "scope_id": "cg==",
+            "workspace_id": "dw=="
+          }
+        }
+      ]
+    },
+    {
+      "errors": [
+        "",
+        ""
+      ],
+      "expires": [
+        {
+          "key": "ws:relay:shard:7",
+          "ttl_ns": 900000000000
+        }
+      ],
+      "metrics": [
+        2,
+        0,
+        0
+      ],
+      "seen": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        true
+      ],
+      "writes": [
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:7",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+            "scope": "",
+            "scope_id": "",
+            "workspace_id": "dw=="
+          }
+        },
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:7",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+            "scope": "",
+            "scope_id": "",
+            "workspace_id": "dw=="
+          }
+        }
+      ]
+    },
+    {
+      "errors": [
+        "",
+        ""
+      ],
+      "expires": [
+        {
+          "key": "ws:relay:shard:1",
+          "ttl_ns": 900000000000
+        }
+      ],
+      "metrics": [
+        2,
+        0,
+        0
+      ],
+      "seen": [
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "writes": [
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:1",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w==",
+            "scope": "dXNlcg==",
+            "scope_id": "dQ==",
+            "workspace_id": "dw=="
+          }
+        },
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:1",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w==",
+            "scope": "dXNlcg==",
+            "scope_id": "dQ==",
+            "workspace_id": "dw=="
+          }
+        }
+      ]
+    },
+    {
+      "errors": [
+        "",
+        ""
+      ],
+      "expires": [
+        {
+          "key": "ws:relay:shard:7",
+          "ttl_ns": 900000000000
+        }
+      ],
+      "metrics": [
+        2,
+        0,
+        0
+      ],
+      "seen": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        true
+      ],
+      "writes": [
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:7",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w==",
+            "scope": "d29ya3NwYWNl",
+            "scope_id": "dw==",
+            "workspace_id": "dw=="
+          }
+        },
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:7",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w==",
+            "scope": "d29ya3NwYWNl",
+            "scope_id": "dw==",
+            "workspace_id": "dw=="
+          }
+        }
+      ]
+    },
+    {
+      "errors": [
+        "",
+        ""
+      ],
+      "expires": [
+        {
+          "key": "ws:relay:shard:1",
+          "ttl_ns": 900000000000
+        }
+      ],
+      "metrics": [
+        2,
+        0,
+        0
+      ],
+      "seen": [
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "writes": [
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:1",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w==",
+            "scope": "Z2xvYmFs",
+            "scope_id": "YWxs",
+            "workspace_id": "dw=="
+          }
+        },
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:1",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w==",
+            "scope": "Z2xvYmFs",
+            "scope_id": "YWxs",
+            "workspace_id": "dw=="
+          }
+        }
+      ]
+    },
+    {
+      "errors": [
+        "",
+        ""
+      ],
+      "expires": [
+        {
+          "key": "ws:relay:shard:0",
+          "ttl_ns": 900000000000
+        }
+      ],
+      "metrics": [
+        2,
+        0,
+        0
+      ],
+      "seen": [
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "writes": [
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:0",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w==",
+            "scope": "ZGFlbW9uX3J1bnRpbWU=",
+            "scope_id": "cg==",
+            "workspace_id": "dw=="
+          }
+        },
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:0",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w==",
+            "scope": "ZGFlbW9uX3J1bnRpbWU=",
+            "scope_id": "cg==",
+            "workspace_id": "dw=="
+          }
+        }
+      ]
+    },
+    {
+      "errors": [
+        "",
+        ""
+      ],
+      "expires": [
+        {
+          "key": "ws:relay:shard:7",
+          "ttl_ns": 900000000000
+        }
+      ],
+      "metrics": [
+        2,
+        0,
+        0
+      ],
+      "seen": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        true
+      ],
+      "writes": [
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:7",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w==",
+            "scope": "",
+            "scope_id": "",
+            "workspace_id": "dw=="
+          }
+        },
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:7",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w==",
+            "scope": "",
+            "scope_id": "",
+            "workspace_id": "dw=="
+          }
+        }
+      ]
+    },
+    {
+      "errors": [
+        "write unavailable",
+        "write unavailable"
+      ],
+      "expires": [],
+      "metrics": [
+        0,
+        2,
+        0
+      ],
+      "seen": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "writes": [
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:1",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+            "scope": "dXNlcg==",
+            "scope_id": "dQ==",
+            "workspace_id": "dw=="
+          }
+        },
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:1",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+            "scope": "dXNlcg==",
+            "scope_id": "dQ==",
+            "workspace_id": "dw=="
+          }
+        }
+      ]
+    },
+    {
+      "errors": [
+        "write unavailable",
+        "write unavailable"
+      ],
+      "expires": [],
+      "metrics": [
+        0,
+        2,
+        0
+      ],
+      "seen": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "writes": [
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:7",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+            "scope": "d29ya3NwYWNl",
+            "scope_id": "dw==",
+            "workspace_id": "dw=="
+          }
+        },
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:7",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+            "scope": "d29ya3NwYWNl",
+            "scope_id": "dw==",
+            "workspace_id": "dw=="
+          }
+        }
+      ]
+    },
+    {
+      "errors": [
+        "write unavailable",
+        "write unavailable"
+      ],
+      "expires": [],
+      "metrics": [
+        0,
+        2,
+        0
+      ],
+      "seen": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "writes": [
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:1",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+            "scope": "Z2xvYmFs",
+            "scope_id": "YWxs",
+            "workspace_id": "dw=="
+          }
+        },
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:1",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+            "scope": "Z2xvYmFs",
+            "scope_id": "YWxs",
+            "workspace_id": "dw=="
+          }
+        }
+      ]
+    },
+    {
+      "errors": [
+        "write unavailable",
+        "write unavailable"
+      ],
+      "expires": [],
+      "metrics": [
+        0,
+        2,
+        0
+      ],
+      "seen": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "writes": [
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:0",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+            "scope": "ZGFlbW9uX3J1bnRpbWU=",
+            "scope_id": "cg==",
+            "workspace_id": "dw=="
+          }
+        },
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:0",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+            "scope": "ZGFlbW9uX3J1bnRpbWU=",
+            "scope_id": "cg==",
+            "workspace_id": "dw=="
+          }
+        }
+      ]
+    },
+    {
+      "errors": [
+        "write unavailable",
+        "write unavailable"
+      ],
+      "expires": [],
+      "metrics": [
+        0,
+        2,
+        0
+      ],
+      "seen": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "writes": [
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:7",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+            "scope": "",
+            "scope_id": "",
+            "workspace_id": "dw=="
+          }
+        },
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:7",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+            "scope": "",
+            "scope_id": "",
+            "workspace_id": "dw=="
+          }
+        }
+      ]
+    },
+    {
+      "errors": [
+        "write unavailable",
+        "write unavailable"
+      ],
+      "expires": [],
+      "metrics": [
+        0,
+        2,
+        0
+      ],
+      "seen": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "writes": [
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:1",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w==",
+            "scope": "dXNlcg==",
+            "scope_id": "dQ==",
+            "workspace_id": "dw=="
+          }
+        },
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:1",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w==",
+            "scope": "dXNlcg==",
+            "scope_id": "dQ==",
+            "workspace_id": "dw=="
+          }
+        }
+      ]
+    },
+    {
+      "errors": [
+        "write unavailable",
+        "write unavailable"
+      ],
+      "expires": [],
+      "metrics": [
+        0,
+        2,
+        0
+      ],
+      "seen": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "writes": [
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:7",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w==",
+            "scope": "d29ya3NwYWNl",
+            "scope_id": "dw==",
+            "workspace_id": "dw=="
+          }
+        },
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:7",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w==",
+            "scope": "d29ya3NwYWNl",
+            "scope_id": "dw==",
+            "workspace_id": "dw=="
+          }
+        }
+      ]
+    },
+    {
+      "errors": [
+        "write unavailable",
+        "write unavailable"
+      ],
+      "expires": [],
+      "metrics": [
+        0,
+        2,
+        0
+      ],
+      "seen": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "writes": [
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:1",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w==",
+            "scope": "Z2xvYmFs",
+            "scope_id": "YWxs",
+            "workspace_id": "dw=="
+          }
+        },
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:1",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w==",
+            "scope": "Z2xvYmFs",
+            "scope_id": "YWxs",
+            "workspace_id": "dw=="
+          }
+        }
+      ]
+    },
+    {
+      "errors": [
+        "write unavailable",
+        "write unavailable"
+      ],
+      "expires": [],
+      "metrics": [
+        0,
+        2,
+        0
+      ],
+      "seen": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "writes": [
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:0",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w==",
+            "scope": "ZGFlbW9uX3J1bnRpbWU=",
+            "scope_id": "cg==",
+            "workspace_id": "dw=="
+          }
+        },
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:0",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w==",
+            "scope": "ZGFlbW9uX3J1bnRpbWU=",
+            "scope_id": "cg==",
+            "workspace_id": "dw=="
+          }
+        }
+      ]
+    },
+    {
+      "errors": [
+        "write unavailable",
+        "write unavailable"
+      ],
+      "expires": [],
+      "metrics": [
+        0,
+        2,
+        0
+      ],
+      "seen": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "writes": [
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:7",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w==",
+            "scope": "",
+            "scope_id": "",
+            "workspace_id": "dw=="
+          }
+        },
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:7",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w==",
+            "scope": "",
+            "scope_id": "",
+            "workspace_id": "dw=="
+          }
+        }
+      ]
+    },
+    {
+      "errors": [
+        "",
+        ""
+      ],
+      "expires": [
+        {
+          "key": "ws:relay:shard:1",
+          "ttl_ns": 900000000000
+        },
+        {
+          "key": "ws:relay:shard:1",
+          "ttl_ns": 900000000000
+        }
+      ],
+      "metrics": [
+        2,
+        0,
+        2
+      ],
+      "seen": [
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "writes": [
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:1",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+            "scope": "dXNlcg==",
+            "scope_id": "dQ==",
+            "workspace_id": "dw=="
+          }
+        },
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:1",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+            "scope": "dXNlcg==",
+            "scope_id": "dQ==",
+            "workspace_id": "dw=="
+          }
+        }
+      ]
+    },
+    {
+      "errors": [
+        "",
+        ""
+      ],
+      "expires": [
+        {
+          "key": "ws:relay:shard:7",
+          "ttl_ns": 900000000000
+        },
+        {
+          "key": "ws:relay:shard:7",
+          "ttl_ns": 900000000000
+        }
+      ],
+      "metrics": [
+        2,
+        0,
+        2
+      ],
+      "seen": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        true
+      ],
+      "writes": [
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:7",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+            "scope": "d29ya3NwYWNl",
+            "scope_id": "dw==",
+            "workspace_id": "dw=="
+          }
+        },
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:7",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+            "scope": "d29ya3NwYWNl",
+            "scope_id": "dw==",
+            "workspace_id": "dw=="
+          }
+        }
+      ]
+    },
+    {
+      "errors": [
+        "",
+        ""
+      ],
+      "expires": [
+        {
+          "key": "ws:relay:shard:1",
+          "ttl_ns": 900000000000
+        },
+        {
+          "key": "ws:relay:shard:1",
+          "ttl_ns": 900000000000
+        }
+      ],
+      "metrics": [
+        2,
+        0,
+        2
+      ],
+      "seen": [
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "writes": [
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:1",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+            "scope": "Z2xvYmFs",
+            "scope_id": "YWxs",
+            "workspace_id": "dw=="
+          }
+        },
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:1",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+            "scope": "Z2xvYmFs",
+            "scope_id": "YWxs",
+            "workspace_id": "dw=="
+          }
+        }
+      ]
+    },
+    {
+      "errors": [
+        "",
+        ""
+      ],
+      "expires": [
+        {
+          "key": "ws:relay:shard:0",
+          "ttl_ns": 900000000000
+        },
+        {
+          "key": "ws:relay:shard:0",
+          "ttl_ns": 900000000000
+        }
+      ],
+      "metrics": [
+        2,
+        0,
+        2
+      ],
+      "seen": [
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "writes": [
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:0",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+            "scope": "ZGFlbW9uX3J1bnRpbWU=",
+            "scope_id": "cg==",
+            "workspace_id": "dw=="
+          }
+        },
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:0",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+            "scope": "ZGFlbW9uX3J1bnRpbWU=",
+            "scope_id": "cg==",
+            "workspace_id": "dw=="
+          }
+        }
+      ]
+    },
+    {
+      "errors": [
+        "",
+        ""
+      ],
+      "expires": [
+        {
+          "key": "ws:relay:shard:7",
+          "ttl_ns": 900000000000
+        },
+        {
+          "key": "ws:relay:shard:7",
+          "ttl_ns": 900000000000
+        }
+      ],
+      "metrics": [
+        2,
+        0,
+        2
+      ],
+      "seen": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        true
+      ],
+      "writes": [
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:7",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+            "scope": "",
+            "scope_id": "",
+            "workspace_id": "dw=="
+          }
+        },
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:7",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+            "scope": "",
+            "scope_id": "",
+            "workspace_id": "dw=="
+          }
+        }
+      ]
+    },
+    {
+      "errors": [
+        "",
+        ""
+      ],
+      "expires": [
+        {
+          "key": "ws:relay:shard:1",
+          "ttl_ns": 900000000000
+        },
+        {
+          "key": "ws:relay:shard:1",
+          "ttl_ns": 900000000000
+        }
+      ],
+      "metrics": [
+        2,
+        0,
+        2
+      ],
+      "seen": [
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "writes": [
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:1",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w==",
+            "scope": "dXNlcg==",
+            "scope_id": "dQ==",
+            "workspace_id": "dw=="
+          }
+        },
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:1",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w==",
+            "scope": "dXNlcg==",
+            "scope_id": "dQ==",
+            "workspace_id": "dw=="
+          }
+        }
+      ]
+    },
+    {
+      "errors": [
+        "",
+        ""
+      ],
+      "expires": [
+        {
+          "key": "ws:relay:shard:7",
+          "ttl_ns": 900000000000
+        },
+        {
+          "key": "ws:relay:shard:7",
+          "ttl_ns": 900000000000
+        }
+      ],
+      "metrics": [
+        2,
+        0,
+        2
+      ],
+      "seen": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        true
+      ],
+      "writes": [
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:7",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w==",
+            "scope": "d29ya3NwYWNl",
+            "scope_id": "dw==",
+            "workspace_id": "dw=="
+          }
+        },
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:7",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w==",
+            "scope": "d29ya3NwYWNl",
+            "scope_id": "dw==",
+            "workspace_id": "dw=="
+          }
+        }
+      ]
+    },
+    {
+      "errors": [
+        "",
+        ""
+      ],
+      "expires": [
+        {
+          "key": "ws:relay:shard:1",
+          "ttl_ns": 900000000000
+        },
+        {
+          "key": "ws:relay:shard:1",
+          "ttl_ns": 900000000000
+        }
+      ],
+      "metrics": [
+        2,
+        0,
+        2
+      ],
+      "seen": [
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "writes": [
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:1",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w==",
+            "scope": "Z2xvYmFs",
+            "scope_id": "YWxs",
+            "workspace_id": "dw=="
+          }
+        },
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:1",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w==",
+            "scope": "Z2xvYmFs",
+            "scope_id": "YWxs",
+            "workspace_id": "dw=="
+          }
+        }
+      ]
+    },
+    {
+      "errors": [
+        "",
+        ""
+      ],
+      "expires": [
+        {
+          "key": "ws:relay:shard:0",
+          "ttl_ns": 900000000000
+        },
+        {
+          "key": "ws:relay:shard:0",
+          "ttl_ns": 900000000000
+        }
+      ],
+      "metrics": [
+        2,
+        0,
+        2
+      ],
+      "seen": [
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "writes": [
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:0",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w==",
+            "scope": "ZGFlbW9uX3J1bnRpbWU=",
+            "scope_id": "cg==",
+            "workspace_id": "dw=="
+          }
+        },
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:0",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w==",
+            "scope": "ZGFlbW9uX3J1bnRpbWU=",
+            "scope_id": "cg==",
+            "workspace_id": "dw=="
+          }
+        }
+      ]
+    },
+    {
+      "errors": [
+        "",
+        ""
+      ],
+      "expires": [
+        {
+          "key": "ws:relay:shard:7",
+          "ttl_ns": 900000000000
+        },
+        {
+          "key": "ws:relay:shard:7",
+          "ttl_ns": 900000000000
+        }
+      ],
+      "metrics": [
+        2,
+        0,
+        2
+      ],
+      "seen": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        true
+      ],
+      "writes": [
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:7",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w==",
+            "scope": "",
+            "scope_id": "",
+            "workspace_id": "dw=="
+          }
+        },
+        {
+          "approximate": true,
+          "key": "ws:relay:shard:7",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w==",
+            "scope": "",
+            "scope_id": "",
+            "workspace_id": "dw=="
+          }
+        }
+      ]
+    }
+  ],
+  "python": [
+    {
+      "seen": [
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "writes": [
+        {
+          "key": "ws:relay:shard:1",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "scope": "dXNlcg==",
+            "scope_id": "dQ==",
+            "workspace_id": "dw==",
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9"
+          },
+          "maxlen": 7,
+          "approximate": true
+        },
+        {
+          "key": "ws:relay:shard:1",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "scope": "dXNlcg==",
+            "scope_id": "dQ==",
+            "workspace_id": "dw==",
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9"
+          },
+          "maxlen": 7,
+          "approximate": true
+        }
+      ],
+      "expires": [],
+      "errors": [
+        "",
+        ""
+      ],
+      "metrics": [
+        2,
+        0,
+        0
+      ]
+    },
+    {
+      "seen": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        true
+      ],
+      "writes": [
+        {
+          "key": "ws:relay:shard:7",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "scope": "d29ya3NwYWNl",
+            "scope_id": "dw==",
+            "workspace_id": "dw==",
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9"
+          },
+          "maxlen": 7,
+          "approximate": true
+        },
+        {
+          "key": "ws:relay:shard:7",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "scope": "d29ya3NwYWNl",
+            "scope_id": "dw==",
+            "workspace_id": "dw==",
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9"
+          },
+          "maxlen": 7,
+          "approximate": true
+        }
+      ],
+      "expires": [],
+      "errors": [
+        "",
+        ""
+      ],
+      "metrics": [
+        2,
+        0,
+        0
+      ]
+    },
+    {
+      "seen": [
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "writes": [
+        {
+          "key": "ws:relay:shard:1",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "scope": "Z2xvYmFs",
+            "scope_id": "YWxs",
+            "workspace_id": "dw==",
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9"
+          },
+          "maxlen": 7,
+          "approximate": true
+        },
+        {
+          "key": "ws:relay:shard:1",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "scope": "Z2xvYmFs",
+            "scope_id": "YWxs",
+            "workspace_id": "dw==",
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9"
+          },
+          "maxlen": 7,
+          "approximate": true
+        }
+      ],
+      "expires": [],
+      "errors": [
+        "",
+        ""
+      ],
+      "metrics": [
+        2,
+        0,
+        0
+      ]
+    },
+    {
+      "seen": [
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "writes": [
+        {
+          "key": "ws:relay:shard:0",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "scope": "ZGFlbW9uX3J1bnRpbWU=",
+            "scope_id": "cg==",
+            "workspace_id": "dw==",
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9"
+          },
+          "maxlen": 7,
+          "approximate": true
+        },
+        {
+          "key": "ws:relay:shard:0",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "scope": "ZGFlbW9uX3J1bnRpbWU=",
+            "scope_id": "cg==",
+            "workspace_id": "dw==",
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9"
+          },
+          "maxlen": 7,
+          "approximate": true
+        }
+      ],
+      "expires": [],
+      "errors": [
+        "",
+        ""
+      ],
+      "metrics": [
+        2,
+        0,
+        0
+      ]
+    },
+    {
+      "seen": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        true
+      ],
+      "writes": [
+        {
+          "key": "ws:relay:shard:7",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "scope": "",
+            "scope_id": "",
+            "workspace_id": "dw==",
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9"
+          },
+          "maxlen": 7,
+          "approximate": true
+        },
+        {
+          "key": "ws:relay:shard:7",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "scope": "",
+            "scope_id": "",
+            "workspace_id": "dw==",
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9"
+          },
+          "maxlen": 7,
+          "approximate": true
+        }
+      ],
+      "expires": [],
+      "errors": [
+        "",
+        ""
+      ],
+      "metrics": [
+        2,
+        0,
+        0
+      ]
+    },
+    {
+      "seen": [
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "writes": [
+        {
+          "key": "ws:relay:shard:1",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "",
+            "scope": "dXNlcg==",
+            "scope_id": "dQ==",
+            "workspace_id": "dw==",
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w=="
+          },
+          "maxlen": 7,
+          "approximate": true
+        },
+        {
+          "key": "ws:relay:shard:1",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "",
+            "scope": "dXNlcg==",
+            "scope_id": "dQ==",
+            "workspace_id": "dw==",
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w=="
+          },
+          "maxlen": 7,
+          "approximate": true
+        }
+      ],
+      "expires": [],
+      "errors": [
+        "",
+        ""
+      ],
+      "metrics": [
+        2,
+        0,
+        0
+      ]
+    },
+    {
+      "seen": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        true
+      ],
+      "writes": [
+        {
+          "key": "ws:relay:shard:7",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "",
+            "scope": "d29ya3NwYWNl",
+            "scope_id": "dw==",
+            "workspace_id": "dw==",
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w=="
+          },
+          "maxlen": 7,
+          "approximate": true
+        },
+        {
+          "key": "ws:relay:shard:7",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "",
+            "scope": "d29ya3NwYWNl",
+            "scope_id": "dw==",
+            "workspace_id": "dw==",
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w=="
+          },
+          "maxlen": 7,
+          "approximate": true
+        }
+      ],
+      "expires": [],
+      "errors": [
+        "",
+        ""
+      ],
+      "metrics": [
+        2,
+        0,
+        0
+      ]
+    },
+    {
+      "seen": [
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "writes": [
+        {
+          "key": "ws:relay:shard:1",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "",
+            "scope": "Z2xvYmFs",
+            "scope_id": "YWxs",
+            "workspace_id": "dw==",
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w=="
+          },
+          "maxlen": 7,
+          "approximate": true
+        },
+        {
+          "key": "ws:relay:shard:1",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "",
+            "scope": "Z2xvYmFs",
+            "scope_id": "YWxs",
+            "workspace_id": "dw==",
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w=="
+          },
+          "maxlen": 7,
+          "approximate": true
+        }
+      ],
+      "expires": [],
+      "errors": [
+        "",
+        ""
+      ],
+      "metrics": [
+        2,
+        0,
+        0
+      ]
+    },
+    {
+      "seen": [
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "writes": [
+        {
+          "key": "ws:relay:shard:0",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "",
+            "scope": "ZGFlbW9uX3J1bnRpbWU=",
+            "scope_id": "cg==",
+            "workspace_id": "dw==",
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w=="
+          },
+          "maxlen": 7,
+          "approximate": true
+        },
+        {
+          "key": "ws:relay:shard:0",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "",
+            "scope": "ZGFlbW9uX3J1bnRpbWU=",
+            "scope_id": "cg==",
+            "workspace_id": "dw==",
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w=="
+          },
+          "maxlen": 7,
+          "approximate": true
+        }
+      ],
+      "expires": [],
+      "errors": [
+        "",
+        ""
+      ],
+      "metrics": [
+        2,
+        0,
+        0
+      ]
+    },
+    {
+      "seen": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        true
+      ],
+      "writes": [
+        {
+          "key": "ws:relay:shard:7",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "",
+            "scope": "",
+            "scope_id": "",
+            "workspace_id": "dw==",
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w=="
+          },
+          "maxlen": 7,
+          "approximate": true
+        },
+        {
+          "key": "ws:relay:shard:7",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "",
+            "scope": "",
+            "scope_id": "",
+            "workspace_id": "dw==",
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w=="
+          },
+          "maxlen": 7,
+          "approximate": true
+        }
+      ],
+      "expires": [],
+      "errors": [
+        "",
+        ""
+      ],
+      "metrics": [
+        2,
+        0,
+        0
+      ]
+    },
+    {
+      "seen": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "writes": [
+        {
+          "key": "ws:relay:shard:1",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "scope": "dXNlcg==",
+            "scope_id": "dQ==",
+            "workspace_id": "dw==",
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9"
+          },
+          "maxlen": 7,
+          "approximate": true
+        },
+        {
+          "key": "ws:relay:shard:1",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "scope": "dXNlcg==",
+            "scope_id": "dQ==",
+            "workspace_id": "dw==",
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9"
+          },
+          "maxlen": 7,
+          "approximate": true
+        }
+      ],
+      "expires": [],
+      "errors": [
+        "write unavailable",
+        "write unavailable"
+      ],
+      "metrics": [
+        0,
+        2,
+        0
+      ]
+    },
+    {
+      "seen": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "writes": [
+        {
+          "key": "ws:relay:shard:7",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "scope": "d29ya3NwYWNl",
+            "scope_id": "dw==",
+            "workspace_id": "dw==",
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9"
+          },
+          "maxlen": 7,
+          "approximate": true
+        },
+        {
+          "key": "ws:relay:shard:7",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "scope": "d29ya3NwYWNl",
+            "scope_id": "dw==",
+            "workspace_id": "dw==",
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9"
+          },
+          "maxlen": 7,
+          "approximate": true
+        }
+      ],
+      "expires": [],
+      "errors": [
+        "write unavailable",
+        "write unavailable"
+      ],
+      "metrics": [
+        0,
+        2,
+        0
+      ]
+    },
+    {
+      "seen": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "writes": [
+        {
+          "key": "ws:relay:shard:1",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "scope": "Z2xvYmFs",
+            "scope_id": "YWxs",
+            "workspace_id": "dw==",
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9"
+          },
+          "maxlen": 7,
+          "approximate": true
+        },
+        {
+          "key": "ws:relay:shard:1",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "scope": "Z2xvYmFs",
+            "scope_id": "YWxs",
+            "workspace_id": "dw==",
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9"
+          },
+          "maxlen": 7,
+          "approximate": true
+        }
+      ],
+      "expires": [],
+      "errors": [
+        "write unavailable",
+        "write unavailable"
+      ],
+      "metrics": [
+        0,
+        2,
+        0
+      ]
+    },
+    {
+      "seen": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "writes": [
+        {
+          "key": "ws:relay:shard:0",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "scope": "ZGFlbW9uX3J1bnRpbWU=",
+            "scope_id": "cg==",
+            "workspace_id": "dw==",
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9"
+          },
+          "maxlen": 7,
+          "approximate": true
+        },
+        {
+          "key": "ws:relay:shard:0",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "scope": "ZGFlbW9uX3J1bnRpbWU=",
+            "scope_id": "cg==",
+            "workspace_id": "dw==",
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9"
+          },
+          "maxlen": 7,
+          "approximate": true
+        }
+      ],
+      "expires": [],
+      "errors": [
+        "write unavailable",
+        "write unavailable"
+      ],
+      "metrics": [
+        0,
+        2,
+        0
+      ]
+    },
+    {
+      "seen": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "writes": [
+        {
+          "key": "ws:relay:shard:7",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "scope": "",
+            "scope_id": "",
+            "workspace_id": "dw==",
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9"
+          },
+          "maxlen": 7,
+          "approximate": true
+        },
+        {
+          "key": "ws:relay:shard:7",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "scope": "",
+            "scope_id": "",
+            "workspace_id": "dw==",
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9"
+          },
+          "maxlen": 7,
+          "approximate": true
+        }
+      ],
+      "expires": [],
+      "errors": [
+        "write unavailable",
+        "write unavailable"
+      ],
+      "metrics": [
+        0,
+        2,
+        0
+      ]
+    },
+    {
+      "seen": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "writes": [
+        {
+          "key": "ws:relay:shard:1",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "",
+            "scope": "dXNlcg==",
+            "scope_id": "dQ==",
+            "workspace_id": "dw==",
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w=="
+          },
+          "maxlen": 7,
+          "approximate": true
+        },
+        {
+          "key": "ws:relay:shard:1",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "",
+            "scope": "dXNlcg==",
+            "scope_id": "dQ==",
+            "workspace_id": "dw==",
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w=="
+          },
+          "maxlen": 7,
+          "approximate": true
+        }
+      ],
+      "expires": [],
+      "errors": [
+        "write unavailable",
+        "write unavailable"
+      ],
+      "metrics": [
+        0,
+        2,
+        0
+      ]
+    },
+    {
+      "seen": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "writes": [
+        {
+          "key": "ws:relay:shard:7",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "",
+            "scope": "d29ya3NwYWNl",
+            "scope_id": "dw==",
+            "workspace_id": "dw==",
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w=="
+          },
+          "maxlen": 7,
+          "approximate": true
+        },
+        {
+          "key": "ws:relay:shard:7",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "",
+            "scope": "d29ya3NwYWNl",
+            "scope_id": "dw==",
+            "workspace_id": "dw==",
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w=="
+          },
+          "maxlen": 7,
+          "approximate": true
+        }
+      ],
+      "expires": [],
+      "errors": [
+        "write unavailable",
+        "write unavailable"
+      ],
+      "metrics": [
+        0,
+        2,
+        0
+      ]
+    },
+    {
+      "seen": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "writes": [
+        {
+          "key": "ws:relay:shard:1",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "",
+            "scope": "Z2xvYmFs",
+            "scope_id": "YWxs",
+            "workspace_id": "dw==",
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w=="
+          },
+          "maxlen": 7,
+          "approximate": true
+        },
+        {
+          "key": "ws:relay:shard:1",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "",
+            "scope": "Z2xvYmFs",
+            "scope_id": "YWxs",
+            "workspace_id": "dw==",
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w=="
+          },
+          "maxlen": 7,
+          "approximate": true
+        }
+      ],
+      "expires": [],
+      "errors": [
+        "write unavailable",
+        "write unavailable"
+      ],
+      "metrics": [
+        0,
+        2,
+        0
+      ]
+    },
+    {
+      "seen": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "writes": [
+        {
+          "key": "ws:relay:shard:0",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "",
+            "scope": "ZGFlbW9uX3J1bnRpbWU=",
+            "scope_id": "cg==",
+            "workspace_id": "dw==",
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w=="
+          },
+          "maxlen": 7,
+          "approximate": true
+        },
+        {
+          "key": "ws:relay:shard:0",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "",
+            "scope": "ZGFlbW9uX3J1bnRpbWU=",
+            "scope_id": "cg==",
+            "workspace_id": "dw==",
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w=="
+          },
+          "maxlen": 7,
+          "approximate": true
+        }
+      ],
+      "expires": [],
+      "errors": [
+        "write unavailable",
+        "write unavailable"
+      ],
+      "metrics": [
+        0,
+        2,
+        0
+      ]
+    },
+    {
+      "seen": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "writes": [
+        {
+          "key": "ws:relay:shard:7",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "",
+            "scope": "",
+            "scope_id": "",
+            "workspace_id": "dw==",
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w=="
+          },
+          "maxlen": 7,
+          "approximate": true
+        },
+        {
+          "key": "ws:relay:shard:7",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "",
+            "scope": "",
+            "scope_id": "",
+            "workspace_id": "dw==",
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w=="
+          },
+          "maxlen": 7,
+          "approximate": true
+        }
+      ],
+      "expires": [],
+      "errors": [
+        "write unavailable",
+        "write unavailable"
+      ],
+      "metrics": [
+        0,
+        2,
+        0
+      ]
+    },
+    {
+      "seen": [
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "writes": [
+        {
+          "key": "ws:relay:shard:1",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "scope": "dXNlcg==",
+            "scope_id": "dQ==",
+            "workspace_id": "dw==",
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9"
+          },
+          "maxlen": 7,
+          "approximate": true
+        },
+        {
+          "key": "ws:relay:shard:1",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "scope": "dXNlcg==",
+            "scope_id": "dQ==",
+            "workspace_id": "dw==",
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9"
+          },
+          "maxlen": 7,
+          "approximate": true
+        }
+      ],
+      "expires": [],
+      "errors": [
+        "",
+        ""
+      ],
+      "metrics": [
+        2,
+        0,
+        0
+      ]
+    },
+    {
+      "seen": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        true
+      ],
+      "writes": [
+        {
+          "key": "ws:relay:shard:7",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "scope": "d29ya3NwYWNl",
+            "scope_id": "dw==",
+            "workspace_id": "dw==",
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9"
+          },
+          "maxlen": 7,
+          "approximate": true
+        },
+        {
+          "key": "ws:relay:shard:7",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "scope": "d29ya3NwYWNl",
+            "scope_id": "dw==",
+            "workspace_id": "dw==",
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9"
+          },
+          "maxlen": 7,
+          "approximate": true
+        }
+      ],
+      "expires": [],
+      "errors": [
+        "",
+        ""
+      ],
+      "metrics": [
+        2,
+        0,
+        0
+      ]
+    },
+    {
+      "seen": [
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "writes": [
+        {
+          "key": "ws:relay:shard:1",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "scope": "Z2xvYmFs",
+            "scope_id": "YWxs",
+            "workspace_id": "dw==",
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9"
+          },
+          "maxlen": 7,
+          "approximate": true
+        },
+        {
+          "key": "ws:relay:shard:1",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "scope": "Z2xvYmFs",
+            "scope_id": "YWxs",
+            "workspace_id": "dw==",
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9"
+          },
+          "maxlen": 7,
+          "approximate": true
+        }
+      ],
+      "expires": [],
+      "errors": [
+        "",
+        ""
+      ],
+      "metrics": [
+        2,
+        0,
+        0
+      ]
+    },
+    {
+      "seen": [
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "writes": [
+        {
+          "key": "ws:relay:shard:0",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "scope": "ZGFlbW9uX3J1bnRpbWU=",
+            "scope_id": "cg==",
+            "workspace_id": "dw==",
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9"
+          },
+          "maxlen": 7,
+          "approximate": true
+        },
+        {
+          "key": "ws:relay:shard:0",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "scope": "ZGFlbW9uX3J1bnRpbWU=",
+            "scope_id": "cg==",
+            "workspace_id": "dw==",
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9"
+          },
+          "maxlen": 7,
+          "approximate": true
+        }
+      ],
+      "expires": [],
+      "errors": [
+        "",
+        ""
+      ],
+      "metrics": [
+        2,
+        0,
+        0
+      ]
+    },
+    {
+      "seen": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        true
+      ],
+      "writes": [
+        {
+          "key": "ws:relay:shard:7",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "scope": "",
+            "scope_id": "",
+            "workspace_id": "dw==",
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9"
+          },
+          "maxlen": 7,
+          "approximate": true
+        },
+        {
+          "key": "ws:relay:shard:7",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "scope": "",
+            "scope_id": "",
+            "workspace_id": "dw==",
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9"
+          },
+          "maxlen": 7,
+          "approximate": true
+        }
+      ],
+      "expires": [],
+      "errors": [
+        "",
+        ""
+      ],
+      "metrics": [
+        2,
+        0,
+        0
+      ]
+    },
+    {
+      "seen": [
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "writes": [
+        {
+          "key": "ws:relay:shard:1",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "",
+            "scope": "dXNlcg==",
+            "scope_id": "dQ==",
+            "workspace_id": "dw==",
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w=="
+          },
+          "maxlen": 7,
+          "approximate": true
+        },
+        {
+          "key": "ws:relay:shard:1",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "",
+            "scope": "dXNlcg==",
+            "scope_id": "dQ==",
+            "workspace_id": "dw==",
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w=="
+          },
+          "maxlen": 7,
+          "approximate": true
+        }
+      ],
+      "expires": [],
+      "errors": [
+        "",
+        ""
+      ],
+      "metrics": [
+        2,
+        0,
+        0
+      ]
+    },
+    {
+      "seen": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        true
+      ],
+      "writes": [
+        {
+          "key": "ws:relay:shard:7",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "",
+            "scope": "d29ya3NwYWNl",
+            "scope_id": "dw==",
+            "workspace_id": "dw==",
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w=="
+          },
+          "maxlen": 7,
+          "approximate": true
+        },
+        {
+          "key": "ws:relay:shard:7",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "",
+            "scope": "d29ya3NwYWNl",
+            "scope_id": "dw==",
+            "workspace_id": "dw==",
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w=="
+          },
+          "maxlen": 7,
+          "approximate": true
+        }
+      ],
+      "expires": [],
+      "errors": [
+        "",
+        ""
+      ],
+      "metrics": [
+        2,
+        0,
+        0
+      ]
+    },
+    {
+      "seen": [
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "writes": [
+        {
+          "key": "ws:relay:shard:1",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "",
+            "scope": "Z2xvYmFs",
+            "scope_id": "YWxs",
+            "workspace_id": "dw==",
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w=="
+          },
+          "maxlen": 7,
+          "approximate": true
+        },
+        {
+          "key": "ws:relay:shard:1",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "",
+            "scope": "Z2xvYmFs",
+            "scope_id": "YWxs",
+            "workspace_id": "dw==",
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w=="
+          },
+          "maxlen": 7,
+          "approximate": true
+        }
+      ],
+      "expires": [],
+      "errors": [
+        "",
+        ""
+      ],
+      "metrics": [
+        2,
+        0,
+        0
+      ]
+    },
+    {
+      "seen": [
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "writes": [
+        {
+          "key": "ws:relay:shard:0",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "",
+            "scope": "ZGFlbW9uX3J1bnRpbWU=",
+            "scope_id": "cg==",
+            "workspace_id": "dw==",
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w=="
+          },
+          "maxlen": 7,
+          "approximate": true
+        },
+        {
+          "key": "ws:relay:shard:0",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "",
+            "scope": "ZGFlbW9uX3J1bnRpbWU=",
+            "scope_id": "cg==",
+            "workspace_id": "dw==",
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w=="
+          },
+          "maxlen": 7,
+          "approximate": true
+        }
+      ],
+      "expires": [],
+      "errors": [
+        "",
+        ""
+      ],
+      "metrics": [
+        2,
+        0,
+        0
+      ]
+    },
+    {
+      "seen": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        true
+      ],
+      "writes": [
+        {
+          "key": "ws:relay:shard:7",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "",
+            "scope": "",
+            "scope_id": "",
+            "workspace_id": "dw==",
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w=="
+          },
+          "maxlen": 7,
+          "approximate": true
+        },
+        {
+          "key": "ws:relay:shard:7",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "",
+            "scope": "",
+            "scope_id": "",
+            "workspace_id": "dw==",
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w=="
+          },
+          "maxlen": 7,
+          "approximate": true
+        }
+      ],
+      "expires": [],
+      "errors": [
+        "",
+        ""
+      ],
+      "metrics": [
+        2,
+        0,
+        0
+      ]
+    },
+    {
+      "seen": [
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "writes": [
+        {
+          "key": "ws:relay:shard:1",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "scope": "dXNlcg==",
+            "scope_id": "dQ==",
+            "workspace_id": "dw==",
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9"
+          },
+          "maxlen": 7,
+          "approximate": true
+        },
+        {
+          "key": "ws:relay:shard:1",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "scope": "dXNlcg==",
+            "scope_id": "dQ==",
+            "workspace_id": "dw==",
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9"
+          },
+          "maxlen": 7,
+          "approximate": true
+        }
+      ],
+      "expires": [
+        {
+          "key": "ws:relay:shard:1",
+          "ttl_ns": 900000000000
+        }
+      ],
+      "errors": [
+        "",
+        ""
+      ],
+      "metrics": [
+        2,
+        0,
+        0
+      ]
+    },
+    {
+      "seen": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        true
+      ],
+      "writes": [
+        {
+          "key": "ws:relay:shard:7",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "scope": "d29ya3NwYWNl",
+            "scope_id": "dw==",
+            "workspace_id": "dw==",
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9"
+          },
+          "maxlen": 7,
+          "approximate": true
+        },
+        {
+          "key": "ws:relay:shard:7",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "scope": "d29ya3NwYWNl",
+            "scope_id": "dw==",
+            "workspace_id": "dw==",
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9"
+          },
+          "maxlen": 7,
+          "approximate": true
+        }
+      ],
+      "expires": [
+        {
+          "key": "ws:relay:shard:7",
+          "ttl_ns": 900000000000
+        }
+      ],
+      "errors": [
+        "",
+        ""
+      ],
+      "metrics": [
+        2,
+        0,
+        0
+      ]
+    },
+    {
+      "seen": [
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "writes": [
+        {
+          "key": "ws:relay:shard:1",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "scope": "Z2xvYmFs",
+            "scope_id": "YWxs",
+            "workspace_id": "dw==",
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9"
+          },
+          "maxlen": 7,
+          "approximate": true
+        },
+        {
+          "key": "ws:relay:shard:1",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "scope": "Z2xvYmFs",
+            "scope_id": "YWxs",
+            "workspace_id": "dw==",
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9"
+          },
+          "maxlen": 7,
+          "approximate": true
+        }
+      ],
+      "expires": [
+        {
+          "key": "ws:relay:shard:1",
+          "ttl_ns": 900000000000
+        }
+      ],
+      "errors": [
+        "",
+        ""
+      ],
+      "metrics": [
+        2,
+        0,
+        0
+      ]
+    },
+    {
+      "seen": [
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "writes": [
+        {
+          "key": "ws:relay:shard:0",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "scope": "ZGFlbW9uX3J1bnRpbWU=",
+            "scope_id": "cg==",
+            "workspace_id": "dw==",
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9"
+          },
+          "maxlen": 7,
+          "approximate": true
+        },
+        {
+          "key": "ws:relay:shard:0",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "scope": "ZGFlbW9uX3J1bnRpbWU=",
+            "scope_id": "cg==",
+            "workspace_id": "dw==",
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9"
+          },
+          "maxlen": 7,
+          "approximate": true
+        }
+      ],
+      "expires": [
+        {
+          "key": "ws:relay:shard:0",
+          "ttl_ns": 900000000000
+        }
+      ],
+      "errors": [
+        "",
+        ""
+      ],
+      "metrics": [
+        2,
+        0,
+        0
+      ]
+    },
+    {
+      "seen": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        true
+      ],
+      "writes": [
+        {
+          "key": "ws:relay:shard:7",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "scope": "",
+            "scope_id": "",
+            "workspace_id": "dw==",
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9"
+          },
+          "maxlen": 7,
+          "approximate": true
+        },
+        {
+          "key": "ws:relay:shard:7",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "scope": "",
+            "scope_id": "",
+            "workspace_id": "dw==",
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9"
+          },
+          "maxlen": 7,
+          "approximate": true
+        }
+      ],
+      "expires": [
+        {
+          "key": "ws:relay:shard:7",
+          "ttl_ns": 900000000000
+        }
+      ],
+      "errors": [
+        "",
+        ""
+      ],
+      "metrics": [
+        2,
+        0,
+        0
+      ]
+    },
+    {
+      "seen": [
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "writes": [
+        {
+          "key": "ws:relay:shard:1",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "",
+            "scope": "dXNlcg==",
+            "scope_id": "dQ==",
+            "workspace_id": "dw==",
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w=="
+          },
+          "maxlen": 7,
+          "approximate": true
+        },
+        {
+          "key": "ws:relay:shard:1",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "",
+            "scope": "dXNlcg==",
+            "scope_id": "dQ==",
+            "workspace_id": "dw==",
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w=="
+          },
+          "maxlen": 7,
+          "approximate": true
+        }
+      ],
+      "expires": [
+        {
+          "key": "ws:relay:shard:1",
+          "ttl_ns": 900000000000
+        }
+      ],
+      "errors": [
+        "",
+        ""
+      ],
+      "metrics": [
+        2,
+        0,
+        0
+      ]
+    },
+    {
+      "seen": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        true
+      ],
+      "writes": [
+        {
+          "key": "ws:relay:shard:7",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "",
+            "scope": "d29ya3NwYWNl",
+            "scope_id": "dw==",
+            "workspace_id": "dw==",
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w=="
+          },
+          "maxlen": 7,
+          "approximate": true
+        },
+        {
+          "key": "ws:relay:shard:7",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "",
+            "scope": "d29ya3NwYWNl",
+            "scope_id": "dw==",
+            "workspace_id": "dw==",
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w=="
+          },
+          "maxlen": 7,
+          "approximate": true
+        }
+      ],
+      "expires": [
+        {
+          "key": "ws:relay:shard:7",
+          "ttl_ns": 900000000000
+        }
+      ],
+      "errors": [
+        "",
+        ""
+      ],
+      "metrics": [
+        2,
+        0,
+        0
+      ]
+    },
+    {
+      "seen": [
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "writes": [
+        {
+          "key": "ws:relay:shard:1",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "",
+            "scope": "Z2xvYmFs",
+            "scope_id": "YWxs",
+            "workspace_id": "dw==",
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w=="
+          },
+          "maxlen": 7,
+          "approximate": true
+        },
+        {
+          "key": "ws:relay:shard:1",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "",
+            "scope": "Z2xvYmFs",
+            "scope_id": "YWxs",
+            "workspace_id": "dw==",
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w=="
+          },
+          "maxlen": 7,
+          "approximate": true
+        }
+      ],
+      "expires": [
+        {
+          "key": "ws:relay:shard:1",
+          "ttl_ns": 900000000000
+        }
+      ],
+      "errors": [
+        "",
+        ""
+      ],
+      "metrics": [
+        2,
+        0,
+        0
+      ]
+    },
+    {
+      "seen": [
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "writes": [
+        {
+          "key": "ws:relay:shard:0",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "",
+            "scope": "ZGFlbW9uX3J1bnRpbWU=",
+            "scope_id": "cg==",
+            "workspace_id": "dw==",
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w=="
+          },
+          "maxlen": 7,
+          "approximate": true
+        },
+        {
+          "key": "ws:relay:shard:0",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "",
+            "scope": "ZGFlbW9uX3J1bnRpbWU=",
+            "scope_id": "cg==",
+            "workspace_id": "dw==",
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w=="
+          },
+          "maxlen": 7,
+          "approximate": true
+        }
+      ],
+      "expires": [
+        {
+          "key": "ws:relay:shard:0",
+          "ttl_ns": 900000000000
+        }
+      ],
+      "errors": [
+        "",
+        ""
+      ],
+      "metrics": [
+        2,
+        0,
+        0
+      ]
+    },
+    {
+      "seen": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        true
+      ],
+      "writes": [
+        {
+          "key": "ws:relay:shard:7",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "",
+            "scope": "",
+            "scope_id": "",
+            "workspace_id": "dw==",
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w=="
+          },
+          "maxlen": 7,
+          "approximate": true
+        },
+        {
+          "key": "ws:relay:shard:7",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "",
+            "scope": "",
+            "scope_id": "",
+            "workspace_id": "dw==",
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w=="
+          },
+          "maxlen": 7,
+          "approximate": true
+        }
+      ],
+      "expires": [
+        {
+          "key": "ws:relay:shard:7",
+          "ttl_ns": 900000000000
+        }
+      ],
+      "errors": [
+        "",
+        ""
+      ],
+      "metrics": [
+        2,
+        0,
+        0
+      ]
+    },
+    {
+      "seen": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "writes": [
+        {
+          "key": "ws:relay:shard:1",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "scope": "dXNlcg==",
+            "scope_id": "dQ==",
+            "workspace_id": "dw==",
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9"
+          },
+          "maxlen": 7,
+          "approximate": true
+        },
+        {
+          "key": "ws:relay:shard:1",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "scope": "dXNlcg==",
+            "scope_id": "dQ==",
+            "workspace_id": "dw==",
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9"
+          },
+          "maxlen": 7,
+          "approximate": true
+        }
+      ],
+      "expires": [],
+      "errors": [
+        "write unavailable",
+        "write unavailable"
+      ],
+      "metrics": [
+        0,
+        2,
+        0
+      ]
+    },
+    {
+      "seen": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "writes": [
+        {
+          "key": "ws:relay:shard:7",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "scope": "d29ya3NwYWNl",
+            "scope_id": "dw==",
+            "workspace_id": "dw==",
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9"
+          },
+          "maxlen": 7,
+          "approximate": true
+        },
+        {
+          "key": "ws:relay:shard:7",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "scope": "d29ya3NwYWNl",
+            "scope_id": "dw==",
+            "workspace_id": "dw==",
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9"
+          },
+          "maxlen": 7,
+          "approximate": true
+        }
+      ],
+      "expires": [],
+      "errors": [
+        "write unavailable",
+        "write unavailable"
+      ],
+      "metrics": [
+        0,
+        2,
+        0
+      ]
+    },
+    {
+      "seen": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "writes": [
+        {
+          "key": "ws:relay:shard:1",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "scope": "Z2xvYmFs",
+            "scope_id": "YWxs",
+            "workspace_id": "dw==",
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9"
+          },
+          "maxlen": 7,
+          "approximate": true
+        },
+        {
+          "key": "ws:relay:shard:1",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "scope": "Z2xvYmFs",
+            "scope_id": "YWxs",
+            "workspace_id": "dw==",
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9"
+          },
+          "maxlen": 7,
+          "approximate": true
+        }
+      ],
+      "expires": [],
+      "errors": [
+        "write unavailable",
+        "write unavailable"
+      ],
+      "metrics": [
+        0,
+        2,
+        0
+      ]
+    },
+    {
+      "seen": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "writes": [
+        {
+          "key": "ws:relay:shard:0",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "scope": "ZGFlbW9uX3J1bnRpbWU=",
+            "scope_id": "cg==",
+            "workspace_id": "dw==",
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9"
+          },
+          "maxlen": 7,
+          "approximate": true
+        },
+        {
+          "key": "ws:relay:shard:0",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "scope": "ZGFlbW9uX3J1bnRpbWU=",
+            "scope_id": "cg==",
+            "workspace_id": "dw==",
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9"
+          },
+          "maxlen": 7,
+          "approximate": true
+        }
+      ],
+      "expires": [],
+      "errors": [
+        "write unavailable",
+        "write unavailable"
+      ],
+      "metrics": [
+        0,
+        2,
+        0
+      ]
+    },
+    {
+      "seen": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "writes": [
+        {
+          "key": "ws:relay:shard:7",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "scope": "",
+            "scope_id": "",
+            "workspace_id": "dw==",
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9"
+          },
+          "maxlen": 7,
+          "approximate": true
+        },
+        {
+          "key": "ws:relay:shard:7",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "scope": "",
+            "scope_id": "",
+            "workspace_id": "dw==",
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9"
+          },
+          "maxlen": 7,
+          "approximate": true
+        }
+      ],
+      "expires": [],
+      "errors": [
+        "write unavailable",
+        "write unavailable"
+      ],
+      "metrics": [
+        0,
+        2,
+        0
+      ]
+    },
+    {
+      "seen": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "writes": [
+        {
+          "key": "ws:relay:shard:1",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "",
+            "scope": "dXNlcg==",
+            "scope_id": "dQ==",
+            "workspace_id": "dw==",
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w=="
+          },
+          "maxlen": 7,
+          "approximate": true
+        },
+        {
+          "key": "ws:relay:shard:1",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "",
+            "scope": "dXNlcg==",
+            "scope_id": "dQ==",
+            "workspace_id": "dw==",
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w=="
+          },
+          "maxlen": 7,
+          "approximate": true
+        }
+      ],
+      "expires": [],
+      "errors": [
+        "write unavailable",
+        "write unavailable"
+      ],
+      "metrics": [
+        0,
+        2,
+        0
+      ]
+    },
+    {
+      "seen": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "writes": [
+        {
+          "key": "ws:relay:shard:7",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "",
+            "scope": "d29ya3NwYWNl",
+            "scope_id": "dw==",
+            "workspace_id": "dw==",
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w=="
+          },
+          "maxlen": 7,
+          "approximate": true
+        },
+        {
+          "key": "ws:relay:shard:7",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "",
+            "scope": "d29ya3NwYWNl",
+            "scope_id": "dw==",
+            "workspace_id": "dw==",
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w=="
+          },
+          "maxlen": 7,
+          "approximate": true
+        }
+      ],
+      "expires": [],
+      "errors": [
+        "write unavailable",
+        "write unavailable"
+      ],
+      "metrics": [
+        0,
+        2,
+        0
+      ]
+    },
+    {
+      "seen": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "writes": [
+        {
+          "key": "ws:relay:shard:1",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "",
+            "scope": "Z2xvYmFs",
+            "scope_id": "YWxs",
+            "workspace_id": "dw==",
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w=="
+          },
+          "maxlen": 7,
+          "approximate": true
+        },
+        {
+          "key": "ws:relay:shard:1",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "",
+            "scope": "Z2xvYmFs",
+            "scope_id": "YWxs",
+            "workspace_id": "dw==",
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w=="
+          },
+          "maxlen": 7,
+          "approximate": true
+        }
+      ],
+      "expires": [],
+      "errors": [
+        "write unavailable",
+        "write unavailable"
+      ],
+      "metrics": [
+        0,
+        2,
+        0
+      ]
+    },
+    {
+      "seen": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "writes": [
+        {
+          "key": "ws:relay:shard:0",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "",
+            "scope": "ZGFlbW9uX3J1bnRpbWU=",
+            "scope_id": "cg==",
+            "workspace_id": "dw==",
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w=="
+          },
+          "maxlen": 7,
+          "approximate": true
+        },
+        {
+          "key": "ws:relay:shard:0",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "",
+            "scope": "ZGFlbW9uX3J1bnRpbWU=",
+            "scope_id": "cg==",
+            "workspace_id": "dw==",
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w=="
+          },
+          "maxlen": 7,
+          "approximate": true
+        }
+      ],
+      "expires": [],
+      "errors": [
+        "write unavailable",
+        "write unavailable"
+      ],
+      "metrics": [
+        0,
+        2,
+        0
+      ]
+    },
+    {
+      "seen": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "writes": [
+        {
+          "key": "ws:relay:shard:7",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "",
+            "scope": "",
+            "scope_id": "",
+            "workspace_id": "dw==",
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w=="
+          },
+          "maxlen": 7,
+          "approximate": true
+        },
+        {
+          "key": "ws:relay:shard:7",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "",
+            "scope": "",
+            "scope_id": "",
+            "workspace_id": "dw==",
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w=="
+          },
+          "maxlen": 7,
+          "approximate": true
+        }
+      ],
+      "expires": [],
+      "errors": [
+        "write unavailable",
+        "write unavailable"
+      ],
+      "metrics": [
+        0,
+        2,
+        0
+      ]
+    },
+    {
+      "seen": [
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "writes": [
+        {
+          "key": "ws:relay:shard:1",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "scope": "dXNlcg==",
+            "scope_id": "dQ==",
+            "workspace_id": "dw==",
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9"
+          },
+          "maxlen": 7,
+          "approximate": true
+        },
+        {
+          "key": "ws:relay:shard:1",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "scope": "dXNlcg==",
+            "scope_id": "dQ==",
+            "workspace_id": "dw==",
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9"
+          },
+          "maxlen": 7,
+          "approximate": true
+        }
+      ],
+      "expires": [
+        {
+          "key": "ws:relay:shard:1",
+          "ttl_ns": 900000000000
+        },
+        {
+          "key": "ws:relay:shard:1",
+          "ttl_ns": 900000000000
+        }
+      ],
+      "errors": [
+        "",
+        ""
+      ],
+      "metrics": [
+        2,
+        0,
+        2
+      ]
+    },
+    {
+      "seen": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        true
+      ],
+      "writes": [
+        {
+          "key": "ws:relay:shard:7",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "scope": "d29ya3NwYWNl",
+            "scope_id": "dw==",
+            "workspace_id": "dw==",
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9"
+          },
+          "maxlen": 7,
+          "approximate": true
+        },
+        {
+          "key": "ws:relay:shard:7",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "scope": "d29ya3NwYWNl",
+            "scope_id": "dw==",
+            "workspace_id": "dw==",
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9"
+          },
+          "maxlen": 7,
+          "approximate": true
+        }
+      ],
+      "expires": [
+        {
+          "key": "ws:relay:shard:7",
+          "ttl_ns": 900000000000
+        },
+        {
+          "key": "ws:relay:shard:7",
+          "ttl_ns": 900000000000
+        }
+      ],
+      "errors": [
+        "",
+        ""
+      ],
+      "metrics": [
+        2,
+        0,
+        2
+      ]
+    },
+    {
+      "seen": [
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "writes": [
+        {
+          "key": "ws:relay:shard:1",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "scope": "Z2xvYmFs",
+            "scope_id": "YWxs",
+            "workspace_id": "dw==",
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9"
+          },
+          "maxlen": 7,
+          "approximate": true
+        },
+        {
+          "key": "ws:relay:shard:1",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "scope": "Z2xvYmFs",
+            "scope_id": "YWxs",
+            "workspace_id": "dw==",
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9"
+          },
+          "maxlen": 7,
+          "approximate": true
+        }
+      ],
+      "expires": [
+        {
+          "key": "ws:relay:shard:1",
+          "ttl_ns": 900000000000
+        },
+        {
+          "key": "ws:relay:shard:1",
+          "ttl_ns": 900000000000
+        }
+      ],
+      "errors": [
+        "",
+        ""
+      ],
+      "metrics": [
+        2,
+        0,
+        2
+      ]
+    },
+    {
+      "seen": [
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "writes": [
+        {
+          "key": "ws:relay:shard:0",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "scope": "ZGFlbW9uX3J1bnRpbWU=",
+            "scope_id": "cg==",
+            "workspace_id": "dw==",
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9"
+          },
+          "maxlen": 7,
+          "approximate": true
+        },
+        {
+          "key": "ws:relay:shard:0",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "scope": "ZGFlbW9uX3J1bnRpbWU=",
+            "scope_id": "cg==",
+            "workspace_id": "dw==",
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9"
+          },
+          "maxlen": 7,
+          "approximate": true
+        }
+      ],
+      "expires": [
+        {
+          "key": "ws:relay:shard:0",
+          "ttl_ns": 900000000000
+        },
+        {
+          "key": "ws:relay:shard:0",
+          "ttl_ns": 900000000000
+        }
+      ],
+      "errors": [
+        "",
+        ""
+      ],
+      "metrics": [
+        2,
+        0,
+        2
+      ]
+    },
+    {
+      "seen": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        true
+      ],
+      "writes": [
+        {
+          "key": "ws:relay:shard:7",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "scope": "",
+            "scope_id": "",
+            "workspace_id": "dw==",
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9"
+          },
+          "maxlen": 7,
+          "approximate": true
+        },
+        {
+          "key": "ws:relay:shard:7",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "scope": "",
+            "scope_id": "",
+            "workspace_id": "dw==",
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9"
+          },
+          "maxlen": 7,
+          "approximate": true
+        }
+      ],
+      "expires": [
+        {
+          "key": "ws:relay:shard:7",
+          "ttl_ns": 900000000000
+        },
+        {
+          "key": "ws:relay:shard:7",
+          "ttl_ns": 900000000000
+        }
+      ],
+      "errors": [
+        "",
+        ""
+      ],
+      "metrics": [
+        2,
+        0,
+        2
+      ]
+    },
+    {
+      "seen": [
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "writes": [
+        {
+          "key": "ws:relay:shard:1",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "",
+            "scope": "dXNlcg==",
+            "scope_id": "dQ==",
+            "workspace_id": "dw==",
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w=="
+          },
+          "maxlen": 7,
+          "approximate": true
+        },
+        {
+          "key": "ws:relay:shard:1",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "",
+            "scope": "dXNlcg==",
+            "scope_id": "dQ==",
+            "workspace_id": "dw==",
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w=="
+          },
+          "maxlen": 7,
+          "approximate": true
+        }
+      ],
+      "expires": [
+        {
+          "key": "ws:relay:shard:1",
+          "ttl_ns": 900000000000
+        },
+        {
+          "key": "ws:relay:shard:1",
+          "ttl_ns": 900000000000
+        }
+      ],
+      "errors": [
+        "",
+        ""
+      ],
+      "metrics": [
+        2,
+        0,
+        2
+      ]
+    },
+    {
+      "seen": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        true
+      ],
+      "writes": [
+        {
+          "key": "ws:relay:shard:7",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "",
+            "scope": "d29ya3NwYWNl",
+            "scope_id": "dw==",
+            "workspace_id": "dw==",
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w=="
+          },
+          "maxlen": 7,
+          "approximate": true
+        },
+        {
+          "key": "ws:relay:shard:7",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "",
+            "scope": "d29ya3NwYWNl",
+            "scope_id": "dw==",
+            "workspace_id": "dw==",
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w=="
+          },
+          "maxlen": 7,
+          "approximate": true
+        }
+      ],
+      "expires": [
+        {
+          "key": "ws:relay:shard:7",
+          "ttl_ns": 900000000000
+        },
+        {
+          "key": "ws:relay:shard:7",
+          "ttl_ns": 900000000000
+        }
+      ],
+      "errors": [
+        "",
+        ""
+      ],
+      "metrics": [
+        2,
+        0,
+        2
+      ]
+    },
+    {
+      "seen": [
+        false,
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "writes": [
+        {
+          "key": "ws:relay:shard:1",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "",
+            "scope": "Z2xvYmFs",
+            "scope_id": "YWxs",
+            "workspace_id": "dw==",
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w=="
+          },
+          "maxlen": 7,
+          "approximate": true
+        },
+        {
+          "key": "ws:relay:shard:1",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "",
+            "scope": "Z2xvYmFs",
+            "scope_id": "YWxs",
+            "workspace_id": "dw==",
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w=="
+          },
+          "maxlen": 7,
+          "approximate": true
+        }
+      ],
+      "expires": [
+        {
+          "key": "ws:relay:shard:1",
+          "ttl_ns": 900000000000
+        },
+        {
+          "key": "ws:relay:shard:1",
+          "ttl_ns": 900000000000
+        }
+      ],
+      "errors": [
+        "",
+        ""
+      ],
+      "metrics": [
+        2,
+        0,
+        2
+      ]
+    },
+    {
+      "seen": [
+        true,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false
+      ],
+      "writes": [
+        {
+          "key": "ws:relay:shard:0",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "",
+            "scope": "ZGFlbW9uX3J1bnRpbWU=",
+            "scope_id": "cg==",
+            "workspace_id": "dw==",
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w=="
+          },
+          "maxlen": 7,
+          "approximate": true
+        },
+        {
+          "key": "ws:relay:shard:0",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "",
+            "scope": "ZGFlbW9uX3J1bnRpbWU=",
+            "scope_id": "cg==",
+            "workspace_id": "dw==",
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w=="
+          },
+          "maxlen": 7,
+          "approximate": true
+        }
+      ],
+      "expires": [
+        {
+          "key": "ws:relay:shard:0",
+          "ttl_ns": 900000000000
+        },
+        {
+          "key": "ws:relay:shard:0",
+          "ttl_ns": 900000000000
+        }
+      ],
+      "errors": [
+        "",
+        ""
+      ],
+      "metrics": [
+        2,
+        0,
+        2
+      ]
+    },
+    {
+      "seen": [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        true
+      ],
+      "writes": [
+        {
+          "key": "ws:relay:shard:7",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "",
+            "scope": "",
+            "scope_id": "",
+            "workspace_id": "dw==",
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w=="
+          },
+          "maxlen": 7,
+          "approximate": true
+        },
+        {
+          "key": "ws:relay:shard:7",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "",
+            "scope": "",
+            "scope_id": "",
+            "workspace_id": "dw==",
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w=="
+          },
+          "maxlen": 7,
+          "approximate": true
+        }
+      ],
+      "expires": [
+        {
+          "key": "ws:relay:shard:7",
+          "ttl_ns": 900000000000
+        },
+        {
+          "key": "ws:relay:shard:7",
+          "ttl_ns": 900000000000
+        }
+      ],
+      "errors": [
+        "",
+        ""
+      ],
+      "metrics": [
+        2,
+        0,
+        2
+      ]
+    }
+  ],
+  "mismatches": [],
+  "source_sha256": {
+    "server/go/internal/realtime/sharded_stream_relay.go": "672a624544ff57afd22973d160a4b5c47e8f0f4b65918cf5bc7b751ab63b0da2",
+    "server/go/internal/realtime/stream_retention.go": "04bdc8af4a8ae51dc50aa6f27e23eae051d9a1b2631fa71ab4911fdfde6918fc",
+    "server/tests/parity/go_sharded_publish/main.go": "1f0c9d12d0b8e3c3081d9fff6b3f7718fb8edbc52a07ef3867368fd14063f397",
+    "server/tests/parity/go_sharded_publish/wrapper.go": "9a42c062eb7a3817816dc5e7df5fd8a19070800c042b11de535464fc7640ea90",
+    "server/src/workpal_backend/realtime/sharded_publisher.py": "65b0fbc0dd0ff6c13cabf00a0ee52788b6b04a8f31a92d13847fc802eca0afa6",
+    "server/src/workpal_backend/realtime/sharded_config.py": "d3c033c35f8f22cabe8c1c6bd05b2b8d6dcd1406f817ff53052af3c26fccfd7e",
+    "server/src/workpal_backend/realtime/stream_retention.py": "a1241c9b9005eba38a834494abdddfb29587880dd373d17f2b89eb0ed6c99c37",
+    "server/src/workpal_backend/realtime/relay_envelope.py": "2b1db1f7394cac21b8b1e7f06caa250eba7f205ce484d7f6c6381ac3e5a25d0d"
+  },
+  "binary_sha256": "57369f4dd700ef962daa1caf4627e58fb66348080187a8adb9c36fd7d0ee528d"
+}

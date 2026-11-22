@@ -1,0 +1,270 @@
+{
+  "version": 1,
+  "coverage": {
+    "bounded_retry_callback_complete": true,
+    "global_complete": false,
+    "scope": "Production filter dependency retry callbacks only; not entire controller/source transport audit"
+  },
+  "method": "Static source only; standard React/query API semantics are boundary contracts; no runtime, git, network or third-party internal audit.",
+  "files": [
+    {
+      "path": "packages/core/issues/surface/filter-dependency.ts",
+      "sha256": "2a7f47faf6f23a13b2898d0291c04891faf1a0051ec80911b4592aa76c2d78a5",
+      "lines": 102
+    },
+    {
+      "path": "packages/views/issues/surface/use-issue-surface-controller.ts",
+      "sha256": "8871358a471ec6a9d5d124d1851a4b8bb373af9eda022eda7bdcb7021ae78dd6",
+      "lines": 1135
+    },
+    {
+      "path": "packages/views/issues/surface/use-issue-surface-data.ts",
+      "sha256": "f061b37e6a133df4da3feca59eec8cb9821879e1aec947c2f1de0ba3f5d3321a",
+      "lines": 573
+    },
+    {
+      "path": "packages/core/agents/queries.ts",
+      "sha256": "025f015886abe362104b169f55c1504ecfba0e1bb01c9059b31618274f913d64",
+      "lines": 179
+    },
+    {
+      "path": "packages/core/workspace/queries.ts",
+      "sha256": "1b16ae9e020e75a5a92cebc5270a14c58d97f6b7b0fe033d2f1d2c2d837d093a",
+      "lines": 255
+    },
+    {
+      "path": "packages/core/issues/unread.ts",
+      "sha256": "841b7428051c81d3d3f83f2d4ff5195ebf2989c8772b42b13b2940a999ac92b1",
+      "lines": 108
+    },
+    {
+      "path": "packages/core/issues/subscribed.ts",
+      "sha256": "e17fcc73e4762d74379067581d7b7645b8334b12e6b1bd5ed8dad68b6103380d",
+      "lines": 38
+    },
+    {
+      "path": "packages/core/projects/queries.ts",
+      "sha256": "39315862d7770c602ebfda690e8dc691b6732cd833a36975a8638ba3ff25a0d6",
+      "lines": 56
+    },
+    {
+      "path": "packages/core/issue-statuses/hooks.ts",
+      "sha256": "6a46a26af0f7d647b8c2a95188c01e6d79d77dce89f29af8766ca891b13856ae",
+      "lines": 32
+    },
+    {
+      "path": "packages/core/issue-statuses/queries.ts",
+      "sha256": "4fdf01e78b7a60b42272518d2feb160ade1fc773f59a75f559f675f03f4a904d",
+      "lines": 230
+    },
+    {
+      "path": "packages/core/api/client.ts",
+      "sha256": "779bb65b5b7ead815836f7c704ec3c370bafae203e4f92119fadce93e982a4d7",
+      "lines": 6216
+    },
+    {
+      "path": "server/contracts/frontend-calls.json",
+      "sha256": "5f37065fe36fb5c189b654214e2fdac1130c0193517fb7506298b199d5407d00",
+      "lines": 7897
+    }
+  ],
+  "targets": [
+    {
+      "path": "packages/core/issues/surface/filter-dependency.ts",
+      "status": "closed-bounded-production-retry",
+      "anchors": [
+        55,
+        77,
+        94
+      ]
+    },
+    {
+      "path": "packages/views/issues/surface/use-issue-surface-controller.ts",
+      "status": "partial-file; bounded callback edges closed",
+      "anchors": [
+        334,
+        355,
+        477,
+        551,
+        574,
+        586,
+        836,
+        882,
+        973,
+        1082,
+        1115
+      ]
+    },
+    {
+      "path": "packages/views/issues/surface/use-issue-surface-data.ts",
+      "status": "partial-file; bounded injected dependency edges closed",
+      "anchors": [
+        192,
+        225,
+        231
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "target": "status",
+      "status": "closed",
+      "anchors": "controller:477; filter-dependency:94; issue-statuses/hooks:12-32; issue-statuses/queries:28-43",
+      "inventory_id": "client:4821",
+      "contract": "Catalog observer enabled Boolean(wsId); dependency active for unresolved status columns, server status surface or swimlane. retry forwards observer refetch; include_archived=true."
+    },
+    {
+      "target": "project",
+      "status": "closed",
+      "anchors": "use-issue-surface-data:192-233; projects/queries:21-27; controller:982-995",
+      "inventory_id": "client:4517",
+      "contract": "Observer enabled loadProjects: project-status simple/advanced filter, project card property, table project column/group, board project group or swimlane project group. Dependency active only client predicates (!usesTable && (usesGantt || !serverStatusBranches.enabled)) and project-status simple/advanced filter. include_archived=true; select projects."
+    },
+    {
+      "target": "running",
+      "status": "closed",
+      "anchors": "controller:544-577; agents/queries:71-94",
+      "inventory_id": "client:3071",
+      "contract": "Observer enabled usesGantt || agentRunningFilter; dependency active only agentRunningFilter. type=issue; my scope maps all to any, otherwise scope.relation; other scopes omit mine relation; parent omitted. Query builds scope=mine and relation when present. 30s staleTime, 5min gcTime, focus refetch true."
+    },
+    {
+      "target": "idle",
+      "status": "closed",
+      "anchors": "controller:558-577; agents/queries:57-66",
+      "inventory_id": "client:3046",
+      "contract": "Observer and dependency enabled/active agentIdleFilter; raw snapshot query, same stale/gc/focus options as running."
+    },
+    {
+      "target": "unread",
+      "status": "closed",
+      "anchors": "controller:586-589; issues/unread:15-20,52-65",
+      "inventory_id": "client:3167",
+      "contract": "Observer enabled unreadFilter && !!wsId; select maps issue_id. Source error requires isError && !isFetching && data===undefined. Client 3162-3175 accumulates pages, URL-encodes cursor, stops on absent or immediately repeated cursor; parseWithFallback uses EMPTY_ISSUE_UNREAD_PAGE. No one-request claim."
+    },
+    {
+      "target": "relation agents",
+      "status": "closed",
+      "anchors": "controller:334-359; workspace/queries:50-67",
+      "inventory_id": "client:2066",
+      "contract": "usesMyAgents means simple or advanced relation my_agents; observer enabled usesMyAgents. workspace_id=wsId if truthy, include_archived=true. refetchInterval 30000 only if data has nonarchived online/unstable agent; otherwise false."
+    },
+    {
+      "target": "relation squads",
+      "status": "closed",
+      "anchors": "controller:334-359; workspace/queries:114-120",
+      "inventory_id": "client:5210",
+      "contract": "Same usesMyAgents source gate. Controller enabled overrides factory enabled !!wsId after spreading options. Client 5209-5216 parses squad_ids and throws on malformed body."
+    },
+    {
+      "target": "relation subscriptions",
+      "status": "closed",
+      "anchors": "controller:337-359; issues/subscribed:15-20",
+      "inventory_id": "client:3178",
+      "contract": "usesSubscribed means simple or advanced subscribed relation; observer enabled usesSubscribed. Client 3177-3184 parses issue_ids and throws on malformed body."
+    }
+  ],
+  "frontend_calls": [
+    {
+      "id": "client:2066",
+      "route": {
+        "method": "GET",
+        "path": "/api/agents"
+      },
+      "sources": [
+        "packages/core/api/client.ts:2066"
+      ],
+      "status": "pending-reconciliation"
+    },
+    {
+      "id": "client:3046",
+      "route": {
+        "method": "GET",
+        "path": "/api/agent-task-snapshot"
+      },
+      "sources": [
+        "packages/core/api/client.ts:3046"
+      ],
+      "status": "pending-reconciliation"
+    },
+    {
+      "id": "client:3071",
+      "route": {
+        "method": "GET",
+        "path": "/api/working-agents"
+      },
+      "sources": [
+        "packages/core/api/client.ts:3071",
+        "server/go/cmd/server/router.go:2615",
+        "server/go/internal/handler/agent.go:3139"
+      ],
+      "status": "pending-reconciliation"
+    },
+    {
+      "id": "client:3167",
+      "route": {
+        "method": "GET",
+        "path": "/api/issues/unread"
+      },
+      "sources": [
+        "packages/core/api/client.ts:3167"
+      ],
+      "status": "pending-reconciliation"
+    },
+    {
+      "id": "client:3178",
+      "route": {
+        "method": "GET",
+        "path": "/api/issues/subscribed"
+      },
+      "sources": [
+        "packages/core/api/client.ts:3178"
+      ],
+      "status": "pending-reconciliation"
+    },
+    {
+      "id": "client:4517",
+      "route": {
+        "method": "GET",
+        "path": "/api/projects"
+      },
+      "sources": [
+        "packages/core/api/client.ts:4517"
+      ],
+      "status": "pending-reconciliation"
+    },
+    {
+      "id": "client:4821",
+      "route": {
+        "method": "GET",
+        "path": "/api/issue-statuses"
+      },
+      "sources": [
+        "packages/core/api/client.ts:4821"
+      ],
+      "status": "pending-reconciliation"
+    },
+    {
+      "id": "client:5210",
+      "route": {
+        "method": "GET",
+        "path": "/api/squads/involved"
+      },
+      "sources": [
+        "packages/core/api/client.ts:5210"
+      ],
+      "status": "pending-reconciliation"
+    }
+  ],
+  "retry_contract": "Inactive or defined-data sources resolve, including stale data with error. False entries ignored. Undefined failed sources captured; retry invokes only these without awaiting, catching or deduplication. combine captures error states only. Controller 1082-1088 orders status (catalog+projects), working (running+idle), unread, relation; find exposes only first failing category at 1115-1117. Relation retry uses injected sources only when client predicates active. Enabled flags govern automatic query execution, not a blanket prohibition on manual refetch.",
+  "gating": "controller 599 membershipUnresolved joins working/unread. Status branches 836 and group branches 882 require !statusFilterUnresolved && !membershipUnresolved. Data project/relation pending contribute loading, errors suppress empty (data final return). Controller empty also requires !membershipUnresolved. No claim every controller fetch is gated by every dependency.",
+  "limitations": [
+    "Possible transport union, not runtime count, successful backend behavior or global coverage.",
+    "Shared ApiClient.fetch and parseWithFallback internals are boundaries, not re-audited.",
+    "Unrelated controller queries, export lookups, mutations, workflow and branch internals remain outside this bounded closure."
+  ],
+  "validation": {
+    "inventory_ids_routes_sources": "All eight referenced IDs resolved against current frontend-calls.json; source anchor present.",
+    "hashes": "SHA-256 of current local bytes",
+    "runtime": "not run"
+  }
+}

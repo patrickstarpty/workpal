@@ -1,0 +1,436 @@
+{
+  "scope": "Current Python parser replay against saved actual PostgreSQL observations; not a new PostgreSQL execution, and not transaction snapshot generation/concurrency parity.",
+  "reference_observations": "docs/superpowers/evidence/2026-11-22-project-search-current-differences.json",
+  "reference_sha256": "1c8ec6b96993a4bd413b8e7417ef18d9958af4e2c92257bc203a7b36b6d8e8e9",
+  "python_source_sha256": "5ba8fd2b868e32bf4782983fbe7bc11a32d22dfa204c908c760c4deae88357de",
+  "fixtures": [
+    "3:3:",
+    "3:6:4",
+    "3:6:5,4",
+    "3:6:4,4",
+    "0:0:",
+    "0:1:",
+    "5:3:",
+    "3:6:2",
+    "3:6:6",
+    " 3:3:",
+    "3:3: ",
+    "03:06:04",
+    "3:18446744073709551615:4",
+    "3:18446744073709551616:",
+    "invalid",
+    "+3:6:4",
+    "3: 6:4",
+    "3:6: 4",
+    "3 :6:4",
+    "3:6:4 ",
+    "3:6:4,",
+    "1:1:",
+    "2:2:",
+    "-1:-1:",
+    "3:-1:4",
+    "3:6:+4",
+    "3:6:-0",
+    "3:6:0004",
+    "3:6:4,3",
+    "3:6:3,3",
+    "3:6:5,5",
+    "3:6:4,5",
+    "\t3:6:4"
+  ],
+  "go": [
+    {
+      "accepted": true,
+      "state": {
+        "canonical": "3:3:",
+        "visible": false
+      }
+    },
+    {
+      "accepted": true,
+      "state": {
+        "canonical": "3:6:4",
+        "visible": false
+      }
+    },
+    {
+      "accepted": false,
+      "state": null
+    },
+    {
+      "accepted": true,
+      "state": {
+        "canonical": "3:6:4",
+        "visible": false
+      }
+    },
+    {
+      "accepted": false,
+      "state": null
+    },
+    {
+      "accepted": false,
+      "state": null
+    },
+    {
+      "accepted": false,
+      "state": null
+    },
+    {
+      "accepted": false,
+      "state": null
+    },
+    {
+      "accepted": false,
+      "state": null
+    },
+    {
+      "accepted": true,
+      "state": {
+        "canonical": "3:3:",
+        "visible": false
+      }
+    },
+    {
+      "accepted": false,
+      "state": null
+    },
+    {
+      "accepted": true,
+      "state": {
+        "canonical": "3:6:4",
+        "visible": false
+      }
+    },
+    {
+      "accepted": true,
+      "state": {
+        "canonical": "3:18446744073709551615:4",
+        "visible": false
+      }
+    },
+    {
+      "accepted": true,
+      "state": {
+        "canonical": "3:18446744073709551615:",
+        "visible": true
+      }
+    },
+    {
+      "accepted": false,
+      "state": null
+    },
+    {
+      "accepted": true,
+      "state": {
+        "canonical": "3:6:4",
+        "visible": false
+      }
+    },
+    {
+      "accepted": true,
+      "state": {
+        "canonical": "3:6:4",
+        "visible": false
+      }
+    },
+    {
+      "accepted": true,
+      "state": {
+        "canonical": "3:6:4",
+        "visible": false
+      }
+    },
+    {
+      "accepted": false,
+      "state": null
+    },
+    {
+      "accepted": false,
+      "state": null
+    },
+    {
+      "accepted": true,
+      "state": {
+        "canonical": "3:6:4",
+        "visible": false
+      }
+    },
+    {
+      "accepted": true,
+      "state": {
+        "canonical": "1:1:",
+        "visible": false
+      }
+    },
+    {
+      "accepted": true,
+      "state": {
+        "canonical": "2:2:",
+        "visible": false
+      }
+    },
+    {
+      "accepted": true,
+      "state": {
+        "canonical": "18446744073709551615:18446744073709551615:",
+        "visible": true
+      }
+    },
+    {
+      "accepted": true,
+      "state": {
+        "canonical": "3:18446744073709551615:4",
+        "visible": false
+      }
+    },
+    {
+      "accepted": true,
+      "state": {
+        "canonical": "3:6:4",
+        "visible": false
+      }
+    },
+    {
+      "accepted": false,
+      "state": null
+    },
+    {
+      "accepted": true,
+      "state": {
+        "canonical": "3:6:4",
+        "visible": false
+      }
+    },
+    {
+      "accepted": false,
+      "state": null
+    },
+    {
+      "accepted": true,
+      "state": {
+        "canonical": "3:6:3",
+        "visible": true
+      }
+    },
+    {
+      "accepted": true,
+      "state": {
+        "canonical": "3:6:5",
+        "visible": true
+      }
+    },
+    {
+      "accepted": true,
+      "state": {
+        "canonical": "3:6:4,5",
+        "visible": false
+      }
+    },
+    {
+      "accepted": true,
+      "state": {
+        "canonical": "3:6:4",
+        "visible": false
+      }
+    }
+  ],
+  "python": [
+    {
+      "accepted": true,
+      "state": {
+        "canonical": "3:3:",
+        "visible": false
+      }
+    },
+    {
+      "accepted": true,
+      "state": {
+        "canonical": "3:6:4",
+        "visible": false
+      }
+    },
+    {
+      "accepted": false,
+      "state": null
+    },
+    {
+      "accepted": true,
+      "state": {
+        "canonical": "3:6:4",
+        "visible": false
+      }
+    },
+    {
+      "accepted": false,
+      "state": null
+    },
+    {
+      "accepted": false,
+      "state": null
+    },
+    {
+      "accepted": false,
+      "state": null
+    },
+    {
+      "accepted": false,
+      "state": null
+    },
+    {
+      "accepted": false,
+      "state": null
+    },
+    {
+      "accepted": true,
+      "state": {
+        "canonical": "3:3:",
+        "visible": false
+      }
+    },
+    {
+      "accepted": false,
+      "state": null
+    },
+    {
+      "accepted": true,
+      "state": {
+        "canonical": "3:6:4",
+        "visible": false
+      }
+    },
+    {
+      "accepted": true,
+      "state": {
+        "canonical": "3:18446744073709551615:4",
+        "visible": false
+      }
+    },
+    {
+      "accepted": true,
+      "state": {
+        "canonical": "3:18446744073709551615:",
+        "visible": true
+      }
+    },
+    {
+      "accepted": false,
+      "state": null
+    },
+    {
+      "accepted": true,
+      "state": {
+        "canonical": "3:6:4",
+        "visible": false
+      }
+    },
+    {
+      "accepted": true,
+      "state": {
+        "canonical": "3:6:4",
+        "visible": false
+      }
+    },
+    {
+      "accepted": true,
+      "state": {
+        "canonical": "3:6:4",
+        "visible": false
+      }
+    },
+    {
+      "accepted": false,
+      "state": null
+    },
+    {
+      "accepted": false,
+      "state": null
+    },
+    {
+      "accepted": true,
+      "state": {
+        "canonical": "3:6:4",
+        "visible": false
+      }
+    },
+    {
+      "accepted": true,
+      "state": {
+        "canonical": "1:1:",
+        "visible": false
+      }
+    },
+    {
+      "accepted": true,
+      "state": {
+        "canonical": "2:2:",
+        "visible": false
+      }
+    },
+    {
+      "accepted": true,
+      "state": {
+        "canonical": "18446744073709551615:18446744073709551615:",
+        "visible": true
+      }
+    },
+    {
+      "accepted": true,
+      "state": {
+        "canonical": "3:18446744073709551615:4",
+        "visible": false
+      }
+    },
+    {
+      "accepted": true,
+      "state": {
+        "canonical": "3:6:4",
+        "visible": false
+      }
+    },
+    {
+      "accepted": false,
+      "state": null
+    },
+    {
+      "accepted": true,
+      "state": {
+        "canonical": "3:6:4",
+        "visible": false
+      }
+    },
+    {
+      "accepted": false,
+      "state": null
+    },
+    {
+      "accepted": true,
+      "state": {
+        "canonical": "3:6:3",
+        "visible": true
+      }
+    },
+    {
+      "accepted": true,
+      "state": {
+        "canonical": "3:6:5",
+        "visible": true
+      }
+    },
+    {
+      "accepted": true,
+      "state": {
+        "canonical": "3:6:4,5",
+        "visible": false
+      }
+    },
+    {
+      "accepted": true,
+      "state": {
+        "canonical": "3:6:4",
+        "visible": false
+      }
+    }
+  ],
+  "mismatches": []
+}

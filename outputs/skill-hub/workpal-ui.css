@@ -1,0 +1,47 @@
+/* Component fallbacks stay on the consuming element, as in Workpal's UI kit. */
+body{font-family:var(--font-sans);color:var(--foreground)}
+#workpal-concept{font-family:var(--font-sans);font-size:var(--text-body);line-height:var(--text-body--line-height)}
+#workpal-concept button,#workpal-concept input,#workpal-concept select{font-family:inherit}
+#page{background:var(--page-canvas);color:var(--foreground);border:1px solid var(--page-border-color,var(--surface-border));border-radius:var(--page-radius,calc(var(--radius)*1.5));padding:16px;box-shadow:var(--page-shadow,none)}
+.masthead{gap:12px;padding:10px 12px;margin-bottom:8px;border:0;border-radius:var(--page-radius,calc(var(--radius)*1.5));background:var(--app-shell);color:var(--foreground)}
+.brand{font-size:var(--text-title-lg);font-weight:600;letter-spacing:-.04em;text-align:left}
+.nav{gap:4px}
+.nav button{padding:6px 10px;border-radius:var(--nav-item-radius,var(--radius));color:var(--nav-item-color,var(--muted-foreground));font-size:var(--text-label);min-height:32px}
+.nav button:hover{background:var(--nav-item-hover-background,var(--surface-hover));color:var(--nav-item-hover-color,var(--foreground))}
+.nav button[aria-current=page]{box-shadow:none;background:var(--nav-item-active-background,var(--surface-selected));color:var(--nav-item-active-color,var(--surface-selected-foreground))}
+.primary,.plain,.filters button{min-height:var(--button-height-default);padding:4px var(--button-padding-default);border-radius:var(--button-radius,var(--radius));font-size:var(--text-label);line-height:var(--text-label--line-height);font-weight:500}
+.primary{background:var(--button-primary,var(--primary));color:var(--button-primary-foreground,var(--primary-foreground));border-color:var(--button-primary-border,transparent)}
+.primary:hover{background:color-mix(in oklab,var(--button-primary,var(--primary)) 90%,var(--foreground))}
+.plain,.filters button{background:var(--background);border-color:var(--input);color:var(--foreground)}
+.plain:hover,.filters button:hover{background:var(--surface-hover)}
+.filters button[aria-pressed=true]{background:var(--surface-selected);color:var(--surface-selected-foreground);border-color:var(--surface-border)}
+button:disabled{opacity:.5}
+button:focus-visible,summary:focus-visible,input:focus-visible,select:focus-visible,[tabindex="-1"]:focus-visible{outline:2px solid var(--ring);outline-offset:3px}
+h1{font-size:var(--text-display-sm);line-height:var(--text-display-sm--line-height);font-weight:var(--h1-weight,500);letter-spacing:var(--h1-letter-spacing,-.02em)}
+h2,.cap-chart h2,.wp-team-chart-caption h2{font-size:var(--text-title-lg);line-height:var(--text-title-lg--line-height);font-weight:var(--h2-weight,500);letter-spacing:var(--h2-letter-spacing,-.015em)}
+h3{font-size:var(--text-title-sm);line-height:var(--text-title-sm--line-height);font-weight:var(--h3-weight,500)}
+.panel,.squad-card,.skill-card{background:var(--surface);color:var(--surface-foreground);border:1px solid var(--surface-border);border-radius:var(--card-radius,calc(var(--radius)*1.5));box-shadow:var(--surface-shadow)}
+.role-item,.delivery-node,.wp-team-chart-squad{background:var(--surface);color:var(--surface-foreground);border-color:var(--surface-border);border-radius:var(--card-radius,calc(var(--radius)*1.5))}
+.role-item:hover,.skill-card:hover{background:var(--surface-hover);color:var(--foreground)}
+.delivery-node[aria-pressed=true],.role-item[aria-pressed=true]{background:var(--surface-selected);color:var(--surface-selected-foreground);border-color:var(--ring)}
+.skill-card[aria-pressed=true]{border-color:var(--ring)}
+.chip,.type-tag{border-radius:var(--label-radius,calc(var(--radius)*.75));background:var(--secondary);color:var(--secondary-foreground)}
+.catalog-controls input,.catalog-controls select,.appearance-panel select{min-height:32px;padding:6px 10px;background:var(--surface);color:var(--foreground);border:1px solid var(--input);border-radius:var(--input-radius,var(--radius));font-size:var(--text-label);line-height:var(--text-label--line-height)}
+.delivery-control{background:var(--page-canvas)}
+.coverage-heading h2 strong{font-size:var(--text-display);line-height:var(--text-display--line-height);letter-spacing:-.04em}
+.coverage-row:hover,.coverage-row[aria-pressed=true]{background:var(--surface-selected);color:var(--surface-selected-foreground)}
+.coverage-track{background:var(--surface-hover)}
+.coverage-axis,.coverage-label{overflow-wrap:anywhere}
+.cap-chart{margin-top:8px}
+.cap-chart.wp-team-chart{margin-top:8px}
+.source-line a,.source-link{color:var(--link-color,var(--foreground))}
+.appearance-menu{position:relative;flex:none}
+.appearance-menu>summary{list-style:none;min-height:32px;padding:6px 10px;border-radius:var(--button-radius,var(--radius));color:var(--muted-foreground);font-size:var(--text-label);line-height:var(--text-label--line-height)}
+.appearance-menu>summary::-webkit-details-marker{display:none}
+.appearance-menu[open]>summary,.appearance-menu>summary:hover{background:var(--surface-hover);color:var(--foreground)}
+.appearance-panel{position:absolute;right:0;top:calc(100% + 6px);z-index:10;display:grid;gap:12px;width:220px;max-width:calc(100vw - 32px);padding:16px;background:var(--surface-raised);color:var(--foreground);border:1px solid var(--surface-border);border-radius:var(--menu-radius,calc(var(--radius)*1.5));box-shadow:var(--menu-shadow)}
+.appearance-panel label{display:grid;gap:5px;font-size:var(--text-label)}
+.wp-team-chart-role-name{box-shadow:var(--menu-shadow);border-radius:var(--tooltip-radius,var(--radius));color:var(--foreground);background:var(--surface-raised)}
+.wp-team-chart-lineups,.wp-team-chart-connection-row{gap:8px}
+@media(max-width:540px){#page{padding:12px}.masthead{gap:6px}.nav{gap:2px}.nav button{padding:6px 9px}.appearance-menu{order:2}.masthead>.primary{order:2}.nav{order:3}.brand{flex-basis:100%}.appearance-menu>summary{padding-left:0}.appearance-panel{left:0;right:auto}.catalog-controls input,.catalog-controls select,.appearance-panel select{font-size:var(--text-title-sm)}.delivery-loop{gap:8px}.delivery-node strong{font-size:var(--text-title-sm)}.coverage-row,.coverage-axis{grid-template-columns:minmax(100px,1.1fr) minmax(0,1fr) 24px}}
+@media(prefers-reduced-motion:reduce){#workpal-concept *{transition:none!important;scroll-behavior:auto!important}}

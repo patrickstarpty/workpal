@@ -1,0 +1,1845 @@
+{
+  "version": 1,
+  "scope": [
+    "packages/core/issues/mutations.ts"
+  ],
+  "coverage": "Bounded whole target accepted after root exact-method tuple reconciliation. Global coverage false; no runtime/backend claim.",
+  "files": [
+    {
+      "path": "packages/core/issues/mutations.ts",
+      "sha256": "9b81f4b0b396a1d714b40c42115eb95af59a56b28e1ce515774f691c6770de4e",
+      "whole_source": true
+    },
+    {
+      "path": "packages/views/modals/create-issue.tsx",
+      "sha256": "063ee4b223b0212f9575e8faa912304546810e579420e8eaef6d4ffc08336043",
+      "whole_source": false,
+      "reviewed_ranges": [
+        [
+          1,
+          100
+        ],
+        [
+          101,
+          200
+        ],
+        [
+          201,
+          300
+        ],
+        [
+          301,
+          400
+        ],
+        [
+          401,
+          500
+        ],
+        [
+          501,
+          600
+        ],
+        [
+          601,
+          700
+        ],
+        [
+          701,
+          800
+        ],
+        [
+          801,
+          900
+        ],
+        [
+          901,
+          1000
+        ],
+        [
+          1001,
+          1100
+        ],
+        [
+          1101,
+          1200
+        ],
+        [
+          1201,
+          1300
+        ],
+        [
+          1301,
+          1400
+        ],
+        [
+          1401,
+          1500
+        ],
+        [
+          1501,
+          1598
+        ]
+      ]
+    },
+    {
+      "path": "packages/core/labels/mutations.ts",
+      "sha256": "33294dde9f3402f3469d4adef66162a65018c7e2c9cff1fd0bdd868595bfd043",
+      "whole_source": false
+    },
+    {
+      "path": "packages/core/issue-workflows/hooks.ts",
+      "sha256": "76c17295fbf0f71ef797580a1ed6fd1392d0aa2d27303e2a3cf9006aef46b529",
+      "whole_source": false
+    },
+    {
+      "path": "packages/core/issue-workflows/queries.ts",
+      "sha256": "f3845150af57564511f5ac2e3f6b2b96ffd3d35352001c8484a62d3514ab3185",
+      "whole_source": false
+    },
+    {
+      "path": "packages/core/issue-statuses/hooks.ts",
+      "sha256": "6a46a26af0f7d647b8c2a95188c01e6d79d77dce89f29af8766ca891b13856ae",
+      "whole_source": false
+    },
+    {
+      "path": "packages/core/issue-statuses/queries.ts",
+      "sha256": "4fdf01e78b7a60b42272518d2feb160ade1fc773f59a75f559f675f03f4a904d",
+      "whole_source": false,
+      "reviewed_ranges": [
+        [
+          1,
+          230
+        ]
+      ],
+      "exports": [
+        {
+          "name": "issueStatusKeys",
+          "anchor": "packages/core/issue-statuses/queries.ts:22"
+        },
+        {
+          "name": "issueStatusListOptions",
+          "anchor": "packages/core/issue-statuses/queries.ts:27"
+        },
+        {
+          "name": "IssueStatusCatalog",
+          "anchor": "packages/core/issue-statuses/queries.ts:50"
+        },
+        {
+          "name": "compareIssueStatusEntries",
+          "anchor": "packages/core/issue-statuses/queries.ts:140"
+        },
+        {
+          "name": "isIssueStatusCategory",
+          "anchor": "packages/core/issue-statuses/queries.ts:156"
+        },
+        {
+          "name": "isBuiltInIssueStatus",
+          "anchor": "packages/core/issue-statuses/queries.ts:160"
+        },
+        {
+          "name": "issueStatusColor",
+          "anchor": "packages/core/issue-statuses/queries.ts:173"
+        },
+        {
+          "name": "buildIssueStatusCatalog",
+          "anchor": "packages/core/issue-statuses/queries.ts:182"
+        }
+      ]
+    },
+    {
+      "path": "packages/core/properties/queries.ts",
+      "sha256": "026994a0e30c6943515ccdc0f915e81a1c373be48fc5d0babf98526b55302aa5",
+      "whole_source": false
+    },
+    {
+      "path": "packages/core/workspace/hooks.ts",
+      "sha256": "7531c31b1caa51b0254eff7738c3ed14cd831a467c311d9aa8cce3ddff2964d3",
+      "whole_source": false
+    },
+    {
+      "path": "packages/views/workflows/step-handler.ts",
+      "sha256": "45cea49d41dfdcc339638d2a70fe020908ff64ce32db452916f7f30e293026c5",
+      "whole_source": false
+    },
+    {
+      "path": "packages/views/modals/source-context-preview.tsx",
+      "sha256": "231e9be98189a1f2f0d712d2eb222e6e0f255e803dc8b1d9149536b1358c0aa6",
+      "whole_source": false
+    },
+    {
+      "path": "packages/core/api/client.ts",
+      "sha256": "779bb65b5b7ead815836f7c704ec3c370bafae203e4f92119fadce93e982a4d7",
+      "whole_source": false
+    },
+    {
+      "path": "packages/views/issues/components/comment-card.tsx",
+      "whole_source": false,
+      "sha256": "7a73b902e970cd7582952cca944c342fff36a04d4e4fc087412c5a913678e8d6"
+    },
+    {
+      "path": "packages/views/issues/actions/issue-actions-menu-items.tsx",
+      "sha256": "d06938bc8aed3eea77c52a94bb54ea9eacd238de1894880a1a253a08bed6c210",
+      "whole_source": false
+    },
+    {
+      "path": "packages/core/issues/cache-coordinator.ts",
+      "sha256": "70108d123cb72357156bac5077f30ae263d782684ac39ea69622d5b285fa020c",
+      "whole_source": false
+    },
+    {
+      "path": "packages/core/issues/cache-helpers.ts",
+      "sha256": "cbb6f0199247f45d53edea6d949d991061b1b44aa23fc19e7881a86fdc066a37",
+      "whole_source": false
+    },
+    {
+      "path": "packages/core/issues/surface/membership.ts",
+      "sha256": "b83ea287e17646a5f8d6f96f55c579bc5a43a0023e8240e5ddc89bb1714648c0",
+      "whole_source": false
+    },
+    {
+      "path": "packages/core/issues/status-category.ts",
+      "sha256": "2bb7ccdfc42e10c75e81b14421110ebd360dc46a76f563b0cb5c5e69c9caa94b",
+      "whole_source": false
+    },
+    {
+      "path": "packages/core/inbox/ws-updaters.ts",
+      "sha256": "710af5cdd2f59c397d6f9a1b16146b923d08f70c0f619181074503db0f81c175",
+      "whole_source": false
+    },
+    {
+      "path": "packages/core/inbox/queries.ts",
+      "sha256": "4612025ba86f4e32cb272acb366861d824988ba6fa7648df230e425072a4454d",
+      "whole_source": false
+    },
+    {
+      "path": "packages/core/issues/queries.ts",
+      "sha256": "10d939b302cbeca9280944c5b5ad0e3e8e042130d2c714496a6b6da6daf53c3e",
+      "whole_source": false
+    },
+    {
+      "path": "packages/core/projects/queries.ts",
+      "sha256": "39315862d7770c602ebfda690e8dc691b6732cd833a36975a8638ba3ff25a0d6",
+      "whole_source": false,
+      "reviewed_ranges": [
+        [
+          1,
+          56
+        ]
+      ],
+      "exports": [
+        {
+          "name": "projectKeys",
+          "anchor": "packages/core/projects/queries.ts:4"
+        },
+        {
+          "name": "projectListOptions",
+          "anchor": "packages/core/projects/queries.ts:21"
+        },
+        {
+          "name": "projectDetailOptions",
+          "anchor": "packages/core/projects/queries.ts:29"
+        },
+        {
+          "name": "projectMembersOptions",
+          "anchor": "packages/core/projects/queries.ts:36"
+        },
+        {
+          "name": "privateProjectOverviewOptions",
+          "anchor": "packages/core/projects/queries.ts:43"
+        },
+        {
+          "name": "projectSubscriptionOptions",
+          "anchor": "packages/core/projects/queries.ts:51"
+        }
+      ]
+    },
+    {
+      "path": "packages/core/workspace/queries.ts",
+      "sha256": "1b16ae9e020e75a5a92cebc5270a14c58d97f6b7b0fe033d2f1d2c2d837d093a",
+      "whole_source": false
+    },
+    {
+      "path": "packages/core/issues/ws-updaters.ts",
+      "sha256": "137eff80c057f21056bbc368ad1a59090289e6d2bac470e069d0ae3b8bf24c33",
+      "whole_source": false,
+      "reviewed_ranges": [
+        [
+          1,
+          100
+        ],
+        [
+          101,
+          200
+        ],
+        [
+          201,
+          300
+        ],
+        [
+          301,
+          400
+        ],
+        [
+          401,
+          500
+        ],
+        [
+          501,
+          600
+        ],
+        [
+          601,
+          700
+        ],
+        [
+          701,
+          793
+        ]
+      ]
+    },
+    {
+      "path": "packages/core/issues/delete-cache.ts",
+      "sha256": "06063942dde73286312d7e82ad1091207d98a20f0a77903c04bfcdcd85ce4088",
+      "whole_source": false
+    },
+    {
+      "path": "packages/core/issues/stores/recent-issues-store.ts",
+      "sha256": "ec12a6e98d24acfc35630fcdd1c448fda35be0cfa1708716886a2ce3b381f785",
+      "whole_source": false
+    },
+    {
+      "path": "packages/core/platform/storage.ts",
+      "sha256": "75867acb53d6ba44c1617f7a770bb765955a4ace19b9bb44e1873cf9ee1556b2",
+      "whole_source": false
+    },
+    {
+      "path": "packages/core/agents/queries.ts",
+      "sha256": "025f015886abe362104b169f55c1504ecfba0e1bb01c9059b31618274f913d64",
+      "whole_source": false
+    },
+    {
+      "path": "packages/core/inbox/filters.ts",
+      "sha256": "085a7b7bba07a9f6eee46ee102bbb4e13eeabb37312e4f1c96ae167be9b24342",
+      "whole_source": false
+    },
+    {
+      "path": "packages/core/labels/queries.ts",
+      "sha256": "ece104fc62253b55ced08b4e1453a17faea01f2f9f36206c8dea71c765eb89d0",
+      "whole_source": false
+    },
+    {
+      "path": "packages/views/issues/components/inline-comment-run.tsx",
+      "sha256": "d2d6d48c80b5307898426677c9bb817c7461b69a7f362e5b7eb8ce1dc51491c3",
+      "whole_source": false
+    },
+    {
+      "path": "packages/core/chat/queries.ts",
+      "sha256": "7cf8eac14be017406936c6b0eb46dba319db13095a41077c5ff6527cc9c62f3d",
+      "whole_source": false
+    },
+    {
+      "path": "packages/core/plugins/queries.ts",
+      "sha256": "9af5000968a140b65bc015bb67794e9d3e394cdf05611a7d9eef8b9abf4fbee5",
+      "whole_source": false
+    },
+    {
+      "path": "packages/views/common/task-transcript/use-trace-issue-labels.ts",
+      "sha256": "eb08808fcf5c7ad3ad430e88faa2119badd39f67f62c8580a44604c7724ddd71",
+      "whole_source": false
+    },
+    {
+      "path": "packages/views/common/task-transcript/trace-issue-labels.ts",
+      "sha256": "c7efacc397b06a4621c3436c89166e13b6d37c53a7b102605ff424c084b04f57",
+      "whole_source": false
+    },
+    {
+      "path": "packages/core/issues/subscribed.ts",
+      "sha256": "e17fcc73e4762d74379067581d7b7645b8334b12e6b1bd5ed8dad68b6103380d",
+      "whole_source": true
+    },
+    {
+      "path": "packages/core/issues/timeline-sort.ts",
+      "sha256": "c1a9ddae839cf26b0ca1103c2673b386cdbd7da4f3e9ba0c1a31a2e35c168e15",
+      "whole_source": true
+    },
+    {
+      "path": "packages/core/issues/comment-deletion.ts",
+      "sha256": "13e82cf958bbfdb59d5659ba9b36b7d0e23a8979574b5822a84888c1a00d79e6",
+      "whole_source": true
+    }
+  ],
+  "snapshots": [
+    {
+      "path": "packages/core/issues/mutations.ts",
+      "start": 1,
+      "end": 100,
+      "code": "import { issueBehavesAs, normalizeStatusPatch } from \"./status-category\";\nimport {\n  hashKey,\n  useMutation,\n  useQueryClient,\n  type QueryClient,\n  type QueryKey,\n} from \"@tanstack/react-query\";\nimport { api } from \"../api\";\nimport { issueKeys } from \"./queries\";\nimport { projectKeys } from \"../projects/queries\";\nimport { inboxKeys, type ArchivedInboxCache } from \"../inbox/queries\";\nimport {\n  cancelInboxLists,\n  isInboxListRequestInFlight,\n  onInboxInvalidate,\n  onInboxIssuesDeleted,\n  onInboxSummaryInvalidate,\n} from \"../inbox/ws-updaters\";\nimport {\n  applyIssueChange,\n  invalidateIssueDerivatives,\n  invalidateLastActivitySortedIssueLists,\n  invalidateStaleListKeys,\n  rollbackIssueChange,\n  type IssueFlatCache,\n  type IssueTableRowCache,\n} from \"./cache-coordinator\";\nimport { issueChangedDims } from \"./surface/membership\";\nimport { addIssueToBuckets } from \"./cache-helpers\";\nimport {\n  cleanupDeletedIssueCaches,\n  collectDeletedIssueCacheMetadata,\n  invalidateDeletedIssueDependentCaches,\n  invalidateDeletedIssueParentCaches,\n  invalidateIssueScopedCaches,\n  pruneDeletedIssueFromListCaches,\n  pruneDeletedIssueFromParentChildrenCaches,\n} from \"./delete-cache\";\nimport { useWorkspaceId } from \"../hooks\";\nimport { refreshSubscribedIssues } from \"./subscribed\";\nimport { getCurrentWsId } from \"../platform/workspace-storage\";\nimport { useRecentContextStore } from \"../chat/recent-context-store\";\nimport { useRecentIssuesStore } from \"./stores\";\nimport { useStarPromptStore } from \"../star-prompt\";\nimport type { InboxItem, Issue, IssueReaction } from \"../types\";\nimport type {\n  CreateCommentSubIssueManualRequest,\n  CreateIssueRequest,\n  ListIssuesCache,\n  ListIssuesResponse,\n  MoveIssueRequest,\n  UpdateIssueRequest,\n  BatchIssueLabelOps,\n  BatchIssuePropertyOps,\n} from \"../types\";\nimport type { TimelineEntry, IssueSubscriber, Reaction } from \"../types\";\nimport { sortTimelineEntriesAsc } from \"./timeline-sort\";\nimport { applyCommentDeletion, removeCommentSubtree } from \"./comment-deletion\";\nimport { configStore } from \"../config\";\nimport {\n  onIssueAuxiliaryRevision,\n  invalidateIssueOwnerProjections,\n  reconcileIssueFullSnapshotRevision,\n} from \"./ws-updaters\";\n\n// Shared mutation variable types — used by both mutation hooks and\n// useMutationState consumers to keep the type assertion in sync.\n\nexport type ToggleCommentReactionVars = {\n  commentId: string;\n  emoji: string;\n  existing: Reaction | undefined;\n};\n\nexport type ToggleIssueReactionVars = {\n  emoji: string;\n  existing: IssueReaction | undefined;\n};\n\nexport type UpdateIssueMutationInput = {\n  id: string;\n  /**\n   * Present only for drag/drop. `position` remains in the optimistic patch,\n   * while the request sent to the server contains relative anchors instead.\n   */\n  move_intent?: Pick<MoveIssueRequest, \"before_id\" | \"after_id\">;\n} & UpdateIssueRequest;\n\n// Per-status pagination\n\n// Issue CRUD\n\n// Shared by the single and batch update hooks, so the inbox re-read can wait\n// for the last of them (see `owedInboxRereads`).\nconst ISSUE_WRITE = \"issue-write\";\nconst issueWriteMutationKey = (wsId: string) => [ISSUE_WRITE, wsId] as const;\n\n// Workspaces whose inbox lists owe a re-read, per client.\nconst inboxRereadsOwed = new WeakMap<QueryClient, Set<string>>();"
+    },
+    {
+      "path": "packages/core/issues/mutations.ts",
+      "start": 101,
+      "end": 200,
+      "code": "\n// A client's owed re-reads, each paid once its workspace has no issue write\n// left in flight. Issued earlier, the re-read could read a pending write's old\n// value and land after that write's patch, reverting a saved change. The check\n// runs when a write reaches its terminal state, not in onSettled: TanStack\n// calls onSettled while the mutation still counts as pending, so two writes\n// settling in the same tick would each count the other and both skip\n// (MUL-7286).\nfunction owedInboxRereads(qc: QueryClient): Set<string> {\n  const existing = inboxRereadsOwed.get(qc);\n  if (existing) return existing;\n  const owed = new Set<string>();\n  inboxRereadsOwed.set(qc, owed);\n  qc.getMutationCache().subscribe((event) => {\n    if (event.type !== \"updated\") return;\n    if (event.action.type !== \"success\" && event.action.type !== \"error\") return;\n    const [kind, wsId] = event.mutation.options.mutationKey ?? [];\n    if (kind !== ISSUE_WRITE || typeof wsId !== \"string\") return;\n    if (!owed.has(wsId)) return;\n    if (qc.isMutating({ mutationKey: issueWriteMutationKey(wsId) }) > 0) return;\n    owed.delete(wsId);\n    void onInboxInvalidate(qc, wsId);\n  });\n  return owed;\n}\n\n// Inbox side of settling a status / priority write. It patched the inbox rows\n// optimistically, so the lists owe a re-read only when the write left them\n// behind the server: onMutate interrupted one of their requests (see\n// `cancelInboxLists`), a failure restored their rollback snapshot, or a list\n// request is still out and may have read the server before this write\n// committed. Otherwise the patch was the whole change, and no request is added.\nfunction settleInboxAfterIssueWrite(\n  qc: QueryClient,\n  wsId: string,\n  // Set by onMutate for status / priority writes only.\n  inboxWrite: { interrupted: boolean } | undefined,\n  failed: boolean,\n) {\n  if (!inboxWrite) return;\n  if (inboxWrite.interrupted || failed || isInboxListRequestInFlight(qc, wsId)) {\n    owedInboxRereads(qc).add(wsId);\n  }\n}\n\nfunction useIssueCreateMutation<TVariables>(\n  mutationFn: (variables: TVariables) => Promise<Issue>,\n) {\n  const qc = useQueryClient();\n  const wsId = useWorkspaceId();\n  return useMutation({\n    mutationFn,\n    onSuccess: (newIssue) => {\n      for (const [key, data] of qc.getQueriesData<ListIssuesCache>({ queryKey: issueKeys.list(wsId) })) {\n        if (data) qc.setQueryData<ListIssuesCache>(key, addIssueToBuckets(data, newIssue));\n      }\n      // Surface the just-created issue in cmd+k's Recent list without\n      // requiring the user to open it first.\n      useRecentIssuesStore.getState().recordVisit(wsId, newIssue.id);\n      // Invalidate parent's children query so sub-issues list updates immediately\n      if (newIssue.parent_issue_id) {\n        qc.invalidateQueries({ queryKey: issueKeys.children(wsId, newIssue.parent_issue_id) });\n        qc.invalidateQueries({ queryKey: issueKeys.childProgress(wsId) });\n      }\n    },\n    onSettled: () => {\n      qc.invalidateQueries({ queryKey: issueKeys.list(wsId) });\n      qc.invalidateQueries({ queryKey: issueKeys.flatAll(wsId) });\n      qc.invalidateQueries({ queryKey: issueKeys.tableAll(wsId) });\n      qc.invalidateQueries({ queryKey: issueKeys.assigneeGroupsAll(wsId) });\n      qc.invalidateQueries({ queryKey: issueKeys.myAssigneeGroupsAll(wsId) });\n      qc.invalidateQueries({ queryKey: issueKeys.projectGanttAll(wsId) });\n      qc.invalidateQueries({ queryKey: issueKeys.sidebarAll(wsId) });\n      qc.invalidateQueries({ queryKey: projectKeys.all(wsId) });\n    },\n  });\n}\n\nexport function useCreateIssue() {\n  return useIssueCreateMutation((data: CreateIssueRequest) => api.createIssue(data));\n}\n\nexport function useCreateCommentSubIssue() {\n  return useIssueCreateMutation(({\n    anchorCommentId,\n    data,\n  }: {\n    anchorCommentId: string;\n    data: CreateCommentSubIssueManualRequest;\n  }) => api.createCommentSubIssue(anchorCommentId, data));\n}\n\nexport function useUpdateIssue() {\n  const qc = useQueryClient();\n  const wsId = useWorkspaceId();\n  return useMutation({\n    mutationKey: issueWriteMutationKey(wsId),\n    mutationFn: ({ id, move_intent: moveIntent, ...data }: UpdateIssueMutationInput) => {\n      if (!moveIntent) return api.updateIssue(id, data);\n      const { position: _optimisticPosition, ...target } = data;"
+    },
+    {
+      "path": "packages/core/issues/mutations.ts",
+      "start": 201,
+      "end": 300,
+      "code": "      return api.moveIssue(id, { ...target, ...moveIntent });\n    },\n    onMutate: ({ id, move_intent: _moveIntent, ...data }) => {\n      // suppress_run is a write-time control field, not an Issue column.\n      // description_base is merge metadata, while description itself\n      // is resolved against that base on the server and therefore is not safe\n      // to predict optimistically. Keep the authoritative raw description in\n      // cache so hidden channel-media markers remain available as the base for\n      // a rapid follow-up edit. mutationFn still sends the full payload.\n      const {\n        suppress_run: _suppressRun,\n        stop_previous_assignee_runs: _stopPreviousAssigneeRuns,\n        enter_workflow_step: _enterWorkflowStep,\n        duplicate_of_issue_id: _duplicateOfIssueId,\n        description: _description,\n        description_base: _descriptionBase,\n        title_base: _titleBase,\n        expected_revision: _expectedRevision,\n        ...patch\n      } = data;\n      // Fire-and-forget cancelQueries — keeps onMutate synchronous so the\n      // cache update happens in the same tick as mutate(). Awaiting would\n      // yield to the event loop, letting @dnd-kit reset its visual state\n      // before the optimistic update lands.\n      qc.cancelQueries({ queryKey: issueKeys.list(wsId) });\n      qc.cancelQueries({ queryKey: issueKeys.myAll(wsId) });\n      qc.cancelQueries({ queryKey: issueKeys.flatAll(wsId) });\n      qc.cancelQueries({ queryKey: issueKeys.tableAll(wsId) });\n      const inboxWrite =\n        patch.status !== undefined || patch.priority !== undefined\n          ? { interrupted: cancelInboxLists(qc, wsId) }\n          : undefined;\n      const prevDetail = qc.getQueryData<Issue>(issueKeys.detail(wsId, id));\n      // The coordinator owns the cross-cache rules: surgical patch/rebucket\n      // where the card is loaded and still belongs, surgical REMOVE where the\n      // change moves it off a filtered surface, stale-key bookkeeping where\n      // the server result may have drifted (invalidated on settle, not here —\n      // a mid-flight refetch would stomp the optimistic state).\n      const change = applyIssueChange(qc, wsId, id, patch as Partial<Issue>, {\n        changed: issueChangedDims(patch, prevDetail),\n        baseIssue: prevDetail,\n      });\n\n      // Resolve parent_issue_id from the freshest source so we can keep the\n      // parent's children cache in sync (used by the parent issue's\n      // sub-issues list). Falls back to scanning loaded children caches —\n      // when the user navigates straight to a parent's detail page, the\n      // child may live only there, not in detail/list.\n      let parentId: string | null =\n        prevDetail?.parent_issue_id ??\n        change.prevIssue?.parent_issue_id ??\n        null;\n      if (!parentId) {\n        const childrenCaches = qc.getQueriesData<Issue[]>({\n          queryKey: [...issueKeys.all(wsId), \"children\"],\n        });\n        for (const [key, data] of childrenCaches) {\n          if (!data?.some((c) => c.id === id)) continue;\n          const candidate = key[key.length - 1];\n          if (typeof candidate === \"string\") {\n            parentId = candidate;\n            break;\n          }\n        }\n      }\n      const prevChildren = parentId\n        ? qc.getQueryData<Issue[]>(issueKeys.children(wsId, parentId))\n        : undefined;\n\n      if (parentId) {\n        // When the write re-parents this issue away from `parentId` (detach\n        // to standalone, or move under a different parent), prune it from the\n        // old parent's children cache. The parent's sub-issues list renders\n        // that array directly, so a bare patch to parent_issue_id: null would\n        // leave an orphaned row in the list until the settle refetch lands.\n        // onError restores prevChildren, so the prune rolls back on failure.\n        const detachedFromParent =\n          Object.prototype.hasOwnProperty.call(patch, \"parent_issue_id\") &&\n          patch.parent_issue_id !== parentId;\n        qc.setQueryData<Issue[]>(\n          issueKeys.children(wsId, parentId),\n          (old) =>\n            detachedFromParent\n              ? old?.filter((c) => c.id !== id)\n              : old?.map((c) => (c.id === id ? { ...c, ...normalizeStatusPatch(patch) } : c)),\n        );\n      }\n      return { change, prevChildren, parentId, id, inboxWrite };\n    },\n    onError: (_err, vars, ctx) => {\n      if (ctx) {\n        rollbackIssueChange(qc, wsId, ctx.id, ctx.change);\n      }\n      if (ctx?.parentId && ctx.prevChildren !== undefined) {\n        qc.setQueryData(\n          issueKeys.children(wsId, ctx.parentId),\n          ctx.prevChildren,\n        );\n      }\n      // A remote revision may have landed through WS after onMutate captured"
+    },
+    {
+      "path": "packages/core/issues/mutations.ts",
+      "start": 301,
+      "end": 400,
+      "code": "      // its rollback snapshot. Restoring that snapshot on any failed request\n      // can therefore transiently put an older entity back into cache; refresh\n      // every loaded owner projection after rollback. A revision conflict is\n      // the common case, but transport/5xx failures have the same interleave.\n      qc.invalidateQueries({ queryKey: issueKeys.detail(wsId, vars.id) });\n      qc.invalidateQueries({ queryKey: issueKeys.list(wsId) });\n      qc.invalidateQueries({ queryKey: issueKeys.myAll(wsId) });\n      qc.invalidateQueries({ queryKey: issueKeys.flatAll(wsId) });\n      qc.invalidateQueries({ queryKey: issueKeys.tableAll(wsId) });\n    },\n    onSuccess: (serverIssue, vars) => {\n      // Reconcile with the authoritative server entity by patching the one card\n      // in place — NOT by invalidating + refetching the list. The list refetch\n      // is what made a successful move flicker: the optimistic card was already\n      // in the right place, then the refetch replaced the whole column and the\n      // card re-landed. updateIssue returns the full issue and a position update\n      // touches only that row, so a surgical patch is the authoritative\n      // reconcile and is a visual no-op when the optimistic value matched.\n      //\n      // baseIssue = serverIssue: membership moves were already handled\n      // optimistically; against the post-write entity the changed dims come\n      // out false unless the server coerced a different value, so this pass\n      // is the plain surgical patch it always was.\n      const {\n        suppress_run: _suppressRun,\n        stop_previous_assignee_runs: _stopPreviousAssigneeRuns,\n        enter_workflow_step: _enterWorkflowStep,\n        duplicate_of_issue_id: _duplicateOfIssueId,\n        description_base: _descriptionBase,\n        move_intent: _moveIntent,\n        id: _id,\n        ...intent\n      } = vars;\n      // Drop `properties` from the reconcile payload: the bag is owned by the\n      // property mutation pipeline (single-key atomic writes + its own\n      // optimistic state). An UpdateIssue snapshot taken before a concurrent\n      // property write resolves would otherwise overwrite the newer bag\n      // (clean-room review F3 response-ordering race).\n      const { properties: _staleBag, ...reconcilable } = serverIssue;\n      const reconcile = applyIssueChange(qc, wsId, serverIssue.id, reconcilable as typeof serverIssue, {\n        changed: issueChangedDims(intent, serverIssue),\n        baseIssue: serverIssue,\n        // The HTTP response can arrive after a newer WS event. Reconcile the\n        // committed snapshot only into projections that have not already\n        // advanced beyond it; otherwise an older successful response would\n        // undo a later remote write in cache.\n        acceptCurrent: (current) =>\n          current.revision === undefined ||\n          (serverIssue.revision !== undefined &&\n            serverIssue.revision > current.revision),\n      });\n      reconcileIssueFullSnapshotRevision(\n        qc,\n        wsId,\n        serverIssue.id,\n        serverIssue.revision,\n      );\n      // The server has committed — safe to flush any drift it reported now.\n      invalidateStaleListKeys(qc, reconcile.staleKeys);\n      if (\n        vars.status !== undefined &&\n        serverIssue.assignee_type === \"agent\" &&\n        serverIssue.assignee_id &&\n        issueBehavesAs(serverIssue, \"done\")\n      ) {\n        useStarPromptStore.getState().reportAgentIssueDone({\n          wsId,\n          agentId: serverIssue.assignee_id,\n          issueId: serverIssue.id,\n        });\n      }\n    },\n    onSettled: (_data, err, vars, ctx) => {\n      settleInboxAfterIssueWrite(qc, wsId, ctx?.inboxWrite, err !== null);\n      // The issue's own list + detail caches are reconciled surgically in\n      // onSuccess / onError, so they are deliberately NOT invalidated here — a\n      // full-list refetch on settle is what made drags flicker. Only aggregate\n      // caches that cannot be patched from a single issue are refreshed, plus\n      // the specific list keys the coordinator flagged as drifted (unknown\n      // membership, enter/leave beyond the loaded window, bucket-count drift).\n      // Those stale keys are the surgical replacement for the old blanket\n      // \"invalidate myAll on project move\" safety net (MUL-3669 / #4548): the\n      // old project's loaded list already had the card removed in onMutate,\n      // and only genuinely undecidable lists refetch here.\n      invalidateIssueDerivatives(qc, wsId, {\n        statusOrProjectChanged:\n          vars.status !== undefined ||\n          Object.prototype.hasOwnProperty.call(vars, \"project_id\"),\n      });\n      qc.invalidateQueries({ queryKey: issueKeys.tableAll(wsId) });\n      if (ctx) {\n        invalidateStaleListKeys(qc, ctx.change.staleKeys);\n      }\n      // Refresh the issue's attachments cache when the description editor\n      // bound new uploads — the description editor reads `issueAttachments`\n      // to resolve text-preview Eye gates, and unlike other mutations this\n      // payload mutates the attachment join table.\n      if (vars.attachment_ids?.length) {\n        qc.invalidateQueries({ queryKey: issueKeys.attachments(vars.id) });\n      }"
+    },
+    {
+      "path": "packages/core/issues/mutations.ts",
+      "start": 401,
+      "end": 500,
+      "code": "      // A duplicate mark is not on Issue; refresh both sides now rather than\n      // waiting for the realtime echo.\n      if (vars.duplicate_of_issue_id) {\n        qc.invalidateQueries({ queryKey: issueKeys.duplicates(wsId, vars.id) });\n        qc.invalidateQueries({\n          queryKey: issueKeys.duplicates(wsId, vars.duplicate_of_issue_id),\n        });\n      }\n      // Invalidate old parent's children cache\n      if (ctx?.parentId) {\n        qc.invalidateQueries({\n          queryKey: issueKeys.children(wsId, ctx.parentId),\n        });\n        qc.invalidateQueries({ queryKey: issueKeys.childProgress(wsId) });\n      }\n      // Invalidate new parent's children cache when parent_issue_id changed\n      const newParentId = vars.parent_issue_id;\n      if (newParentId && newParentId !== ctx?.parentId) {\n        qc.invalidateQueries({\n          queryKey: issueKeys.children(wsId, newParentId),\n        });\n        qc.invalidateQueries({ queryKey: issueKeys.childProgress(wsId) });\n      }\n      // Invalidate the batched-children cache only when the parent link\n      // actually changed. The WS path (ws-updaters.ts) invalidates\n      // unconditionally because it doesn't know what the server change\n      // touched; here onMutate already patched issueKeys.children(parent)\n      // optimistically, so we only need to flush when the parent relation\n      // itself moved.\n      if (ctx?.parentId || newParentId) {\n        qc.invalidateQueries({ queryKey: issueKeys.childrenByParentsAll(wsId) });\n      }\n    },\n  });\n}\n\nexport function useDeleteIssue() {\n  const qc = useQueryClient();\n  const wsId = useWorkspaceId();\n  return useMutation({\n    mutationFn: (id: string) => api.deleteIssue(id),\n    onMutate: async (id) => {\n      await Promise.all([\n        qc.cancelQueries({ queryKey: issueKeys.list(wsId) }),\n        qc.cancelQueries({ queryKey: issueKeys.myAll(wsId) }),\n        qc.cancelQueries({ queryKey: issueKeys.flatAll(wsId) }),\n      ]);\n      const metadata = collectDeletedIssueCacheMetadata(qc, wsId, id);\n      await Promise.all(\n        metadata.parentIssueIds.map((parentId) =>\n          qc.cancelQueries({ queryKey: issueKeys.children(wsId, parentId) }),\n        ),\n      );\n      const prevLists = qc.getQueriesData<ListIssuesCache>({ queryKey: issueKeys.list(wsId) });\n      const prevMyLists = qc.getQueriesData<ListIssuesCache>({\n        queryKey: issueKeys.myAll(wsId),\n      });\n      const prevFlatLists = qc.getQueriesData<IssueFlatCache>({\n        queryKey: issueKeys.flatAll(wsId),\n      });\n      const prevDetail = qc.getQueryData<Issue>(issueKeys.detail(wsId, id));\n      const prevChildren = new Map<string, Issue[] | undefined>();\n      for (const parentId of metadata.parentIssueIds) {\n        prevChildren.set(\n          parentId,\n          qc.getQueryData<Issue[]>(issueKeys.children(wsId, parentId)),\n        );\n      }\n\n      pruneDeletedIssueFromListCaches(qc, wsId, id);\n      pruneDeletedIssueFromParentChildrenCaches(qc, wsId, id, metadata);\n      qc.removeQueries({ queryKey: issueKeys.detail(wsId, id) });\n      return {\n        id,\n        metadata,\n        prevLists,\n        prevMyLists,\n        prevFlatLists,\n        prevDetail,\n        prevChildren,\n      };\n    },\n    onError: (_err, _id, ctx) => {\n      if (ctx?.prevLists) {\n        for (const [key, snapshot] of ctx.prevLists) {\n          qc.setQueryData(key, snapshot);\n        }\n      }\n      if (ctx?.prevMyLists) {\n        for (const [key, snapshot] of ctx.prevMyLists) {\n          qc.setQueryData(key, snapshot);\n        }\n      }\n      if (ctx?.prevFlatLists) {\n        for (const [key, snapshot] of ctx.prevFlatLists) {\n          qc.setQueryData(key, snapshot);\n        }\n      }\n      if (ctx?.prevDetail) {\n        qc.setQueryData(issueKeys.detail(wsId, ctx.id), ctx.prevDetail);"
+    },
+    {
+      "path": "packages/core/issues/mutations.ts",
+      "start": 501,
+      "end": 600,
+      "code": "      }\n      if (ctx?.prevChildren) {\n        for (const [parentId, snapshot] of ctx.prevChildren) {\n          qc.setQueryData(issueKeys.children(wsId, parentId), snapshot);\n        }\n      }\n    },\n    onSuccess: (_data, id, ctx) => {\n      useRecentContextStore.getState().forgetContext(wsId, { type: \"issue\", id });\n      cleanupDeletedIssueCaches(qc, wsId, id, ctx?.metadata);\n      // The deleting client's own inbox rows go with the issue; the WS echo\n      // (`issue:deleted` → `onInboxIssueDeleted`) is the backstop, not the\n      // plan — a dropped socket would leave ghost rows that 404 on click.\n      void onInboxIssuesDeleted(qc, wsId, [id]);\n    },\n    onSettled: (_data, _err, _id, ctx) => {\n      qc.invalidateQueries({ queryKey: issueKeys.list(wsId) });\n      qc.invalidateQueries({ queryKey: issueKeys.flatAll(wsId) });\n      qc.invalidateQueries({ queryKey: issueKeys.tableAll(wsId) });\n      qc.invalidateQueries({ queryKey: issueKeys.assigneeGroupsAll(wsId) });\n      qc.invalidateQueries({ queryKey: issueKeys.myAssigneeGroupsAll(wsId) });\n      qc.invalidateQueries({ queryKey: issueKeys.projectGanttAll(wsId) });\n      qc.invalidateQueries({ queryKey: issueKeys.sidebarAll(wsId) });\n      qc.invalidateQueries({ queryKey: projectKeys.all(wsId) });\n      if (ctx?.metadata) invalidateDeletedIssueParentCaches(qc, wsId, ctx.metadata);\n    },\n  });\n}\n\ninterface BatchUpdateSnapshots {\n  prevLists?: Iterable<readonly [QueryKey, unknown]>;\n  prevFlatLists?: Iterable<readonly [QueryKey, unknown]>;\n  prevTableRows?: Iterable<readonly [QueryKey, unknown]>;\n  prevSidebarLists?: Iterable<readonly [QueryKey, unknown]>;\n  prevDetailById?: Iterable<readonly [string, unknown]>;\n  prevInboxList?: unknown;\n  prevArchivedInboxCaches?: Iterable<readonly [QueryKey, unknown]>;\n  prevChildren?: Iterable<readonly [string, unknown]>;\n}\n\nexport function useBatchUpdateIssues() {\n  const qc = useQueryClient();\n  const wsId = useWorkspaceId();\n  const rollback = (ctx: BatchUpdateSnapshots | undefined) => {\n    for (const [key, snapshot] of ctx?.prevLists ?? []) qc.setQueryData(key, snapshot);\n    for (const [key, snapshot] of ctx?.prevFlatLists ?? []) qc.setQueryData(key, snapshot);\n    for (const [key, snapshot] of ctx?.prevTableRows ?? []) qc.setQueryData(key, snapshot);\n    for (const [key, snapshot] of ctx?.prevSidebarLists ?? []) qc.setQueryData(key, snapshot);\n    for (const [id, snapshot] of ctx?.prevDetailById ?? []) qc.setQueryData(issueKeys.detail(wsId, id), snapshot);\n    if (ctx?.prevInboxList !== undefined) qc.setQueryData(inboxKeys.list(wsId), ctx.prevInboxList);\n    for (const [key, snapshot] of ctx?.prevArchivedInboxCaches ?? []) qc.setQueryData(key, snapshot);\n    for (const [parentId, snapshot] of ctx?.prevChildren ?? []) {\n      qc.setQueryData(issueKeys.children(wsId, parentId), snapshot);\n    }\n  };\n  return useMutation({\n    mutationKey: issueWriteMutationKey(wsId),\n    mutationFn: ({\n      ids,\n      updates,\n      labels,\n      properties,\n    }: {\n      ids: string[];\n      updates: UpdateIssueRequest;\n      labels?: BatchIssueLabelOps;\n      properties?: BatchIssuePropertyOps;\n    }) =>\n      labels || properties\n        ? api.batchUpdateIssues(ids, updates, { labels, properties })\n        : api.batchUpdateIssues(ids, updates),\n    onMutate: async ({ ids, updates }) => {\n      // Control and description-merge fields are not safe optimistic cache\n      // patches. The server resolves description against description_base, so\n      // preserve the authoritative raw description (including media markers)\n      // until a refetch returns the committed result.\n      const {\n        suppress_run: _suppressRun,\n        stop_previous_assignee_runs: _stopPreviousAssigneeRuns,\n        enter_workflow_step: _enterWorkflowStep,\n        description: _description,\n        description_base: _descriptionBase,\n        ...patch\n      } = updates;\n      await qc.cancelQueries({ queryKey: issueKeys.list(wsId) });\n      await qc.cancelQueries({ queryKey: issueKeys.myAll(wsId) });\n      await qc.cancelQueries({ queryKey: issueKeys.flatAll(wsId) });\n      await qc.cancelQueries({ queryKey: issueKeys.tableAll(wsId) });\n      const inboxWrite =\n        patch.status !== undefined || patch.priority !== undefined\n          ? { interrupted: cancelInboxLists(qc, wsId) }\n          : undefined;\n\n      // Run every issue through the coordinator — the same rules table the\n      // single-issue update uses, so a batch edit patches/removes across the\n      // workspace board AND every filtered myList surface identically.\n      // Snapshots are first-wins per cache key: after the first issue's\n      // application a cache already carries partial patches, so only the\n      // first snapshot per key is pristine for rollback.\n      const prevListByHash = new Map<string, [QueryKey, ListIssuesCache]>();"
+    },
+    {
+      "path": "packages/core/issues/mutations.ts",
+      "start": 601,
+      "end": 700,
+      "code": "      const prevFlatListByHash = new Map<string, [QueryKey, IssueFlatCache]>();\n      const prevTableRowByHash = new Map<\n        string,\n        [QueryKey, IssueTableRowCache]\n      >();\n      const prevSidebarListByHash = new Map<string, [QueryKey, ListIssuesResponse]>();\n      const prevDetailById = new Map<string, Issue>();\n      let prevInboxList: InboxItem[] | undefined;\n      let prevArchivedInboxCaches: [QueryKey, ArchivedInboxCache | undefined][] | undefined;\n      const staleKeys: QueryKey[] = [];\n      for (const id of ids) {\n        const base = qc.getQueryData<Issue>(issueKeys.detail(wsId, id));\n        const change = applyIssueChange(qc, wsId, id, patch as Partial<Issue>, {\n          changed: issueChangedDims(patch, base),\n          baseIssue: base,\n        });\n        for (const [key, snapshot] of change.prevLists) {\n          const hash = hashKey(key);\n          if (!prevListByHash.has(hash)) prevListByHash.set(hash, [key, snapshot]);\n        }\n        for (const [key, snapshot] of change.prevFlatLists) {\n          const hash = hashKey(key);\n          if (!prevFlatListByHash.has(hash)) {\n            prevFlatListByHash.set(hash, [key, snapshot]);\n          }\n        }\n        for (const [key, snapshot] of change.prevTableRows) {\n          const hash = hashKey(key);\n          if (!prevTableRowByHash.has(hash)) {\n            prevTableRowByHash.set(hash, [key, snapshot]);\n          }\n        }\n        for (const [key, snapshot] of change.prevSidebarLists) {\n          const hash = hashKey(key);\n          if (!prevSidebarListByHash.has(hash)) {\n            prevSidebarListByHash.set(hash, [key, snapshot]);\n          }\n        }\n        if (change.prevDetail) prevDetailById.set(id, change.prevDetail);\n        if (prevInboxList === undefined && change.prevInboxList !== undefined) {\n          prevInboxList = change.prevInboxList;\n        }\n        if (\n          prevArchivedInboxCaches === undefined &&\n          change.prevArchivedInboxCaches !== undefined\n        ) {\n          prevArchivedInboxCaches = change.prevArchivedInboxCaches;\n        }\n        staleKeys.push(...change.staleKeys);\n      }\n\n      // Mirror the optimistic patch into any loaded children cache so\n      // sub-issue rows on a parent's detail page reflect the change too.\n      const idSet = new Set(ids);\n      const childrenCaches = qc.getQueriesData<Issue[]>({\n        queryKey: [...issueKeys.all(wsId), \"children\"],\n      });\n      const prevChildren = new Map<string, Issue[] | undefined>();\n      const affectedParentIds = new Set<string>();\n      for (const [key, data] of childrenCaches) {\n        if (!data?.some((c) => idSet.has(c.id))) continue;\n        const parentId = key[key.length - 1];\n        if (typeof parentId !== \"string\") continue;\n        affectedParentIds.add(parentId);\n        prevChildren.set(parentId, data);\n        qc.setQueryData<Issue[]>(issueKeys.children(wsId, parentId), (old) =>\n          old?.map((c) => (idSet.has(c.id) ? { ...c, ...normalizeStatusPatch(patch) } : c)),\n        );\n      }\n\n      return {\n        prevLists: [...prevListByHash.values()],\n        prevFlatLists: [...prevFlatListByHash.values()],\n        prevTableRows: [...prevTableRowByHash.values()],\n        prevSidebarLists: [...prevSidebarListByHash.values()],\n        prevDetailById,\n        prevInboxList,\n        prevArchivedInboxCaches,\n        inboxWrite,\n        staleKeys,\n        prevChildren,\n        affectedParentIds,\n      };\n    },\n    onError: (_err, _vars, ctx) => rollback(ctx),\n    // The server skips items its per-issue guards refuse (a status the\n    // issue's workflow does not list, an assignee it cannot take) and reports\n    // only how many it wrote. Which ones were skipped is unknown, so the\n    // optimistic writes are undone and the affected caches refetched.\n    onSuccess: (data, { ids }, ctx) => {\n      if (data.updated >= ids.length) return;\n      rollback(ctx);\n      qc.invalidateQueries({ queryKey: issueKeys.list(wsId) });\n      qc.invalidateQueries({ queryKey: issueKeys.myAll(wsId) });\n      qc.invalidateQueries({ queryKey: issueKeys.flatAll(wsId) });\n      for (const id of ids) qc.invalidateQueries({ queryKey: issueKeys.detail(wsId, id) });\n    },\n    onSettled: (_data, err, _vars, ctx) => {\n      settleInboxAfterIssueWrite(qc, wsId, ctx?.inboxWrite, err !== null);\n      // Deliberately NOT invalidating issueKeys.list / myAll here: the onMutate"
+    },
+    {
+      "path": "packages/core/issues/mutations.ts",
+      "start": 701,
+      "end": 800,
+      "code": "      // pass above is a complete surgical reconcile for the loaded bucketed\n      // boards, so a full-board refetch on settle would only re-introduce the\n      // flicker the single-issue update already removed. Aggregate / grouped\n      // caches that cannot be recomputed from a single-issue patch are\n      // refreshed below, plus the specific keys the coordinator flagged as\n      // drifted — the surgical replacement for the old blanket \"invalidate\n      // myAll on project move\" safety net (MUL-3669 / #4548).\n      // Label and property writes are not patched optimistically; the\n      // realtime events usually land first, and this catches a dropped socket.\n      if (_vars.labels || _vars.properties) {\n        qc.invalidateQueries({ queryKey: issueKeys.list(wsId) });\n        qc.invalidateQueries({ queryKey: issueKeys.myAll(wsId) });\n        qc.invalidateQueries({ queryKey: issueKeys.flatAll(wsId) });\n        for (const id of _vars.ids) qc.invalidateQueries({ queryKey: issueKeys.detail(wsId, id) });\n      }\n      invalidateIssueDerivatives(qc, wsId, {\n        statusOrProjectChanged:\n          _vars.updates.status !== undefined ||\n          Object.prototype.hasOwnProperty.call(_vars.updates, \"project_id\"),\n      });\n      qc.invalidateQueries({ queryKey: issueKeys.tableAll(wsId) });\n      if (ctx) {\n        invalidateStaleListKeys(qc, ctx.staleKeys);\n      }\n      if (ctx?.affectedParentIds && ctx.affectedParentIds.size > 0) {\n        for (const parentId of ctx.affectedParentIds) {\n          qc.invalidateQueries({\n            queryKey: issueKeys.children(wsId, parentId),\n          });\n        }\n        qc.invalidateQueries({ queryKey: issueKeys.childProgress(wsId) });\n      }\n    },\n  });\n}\n\nexport function useBatchDeleteIssues() {\n  const qc = useQueryClient();\n  const wsId = useWorkspaceId();\n  return useMutation({\n    mutationFn: (ids: string[]) => api.batchDeleteIssues(ids),\n    onMutate: async (ids) => {\n      await Promise.all([\n        qc.cancelQueries({ queryKey: issueKeys.list(wsId) }),\n        qc.cancelQueries({ queryKey: issueKeys.myAll(wsId) }),\n        qc.cancelQueries({ queryKey: issueKeys.flatAll(wsId) }),\n      ]);\n      const metadataById = new Map(\n        ids.map((id) => [\n          id,\n          collectDeletedIssueCacheMetadata(qc, wsId, id),\n        ]),\n      );\n      const parentIssueIds = new Set<string>();\n      for (const metadata of metadataById.values()) {\n        for (const parentId of metadata.parentIssueIds) {\n          parentIssueIds.add(parentId);\n        }\n      }\n      await Promise.all(\n        Array.from(parentIssueIds).map((parentId) =>\n          qc.cancelQueries({ queryKey: issueKeys.children(wsId, parentId) }),\n        ),\n      );\n      const prevLists = qc.getQueriesData<ListIssuesCache>({ queryKey: issueKeys.list(wsId) });\n      const prevMyLists = qc.getQueriesData<ListIssuesCache>({\n        queryKey: issueKeys.myAll(wsId),\n      });\n      const prevFlatLists = qc.getQueriesData<IssueFlatCache>({\n        queryKey: issueKeys.flatAll(wsId),\n      });\n      const prevChildren = new Map<string, Issue[] | undefined>();\n      for (const parentId of parentIssueIds) {\n        prevChildren.set(\n          parentId,\n          qc.getQueryData<Issue[]>(issueKeys.children(wsId, parentId)),\n        );\n      }\n\n      for (const id of ids) {\n        const metadata = metadataById.get(id);\n        pruneDeletedIssueFromListCaches(qc, wsId, id);\n        if (metadata) {\n          pruneDeletedIssueFromParentChildrenCaches(qc, wsId, id, metadata);\n        }\n      }\n      return {\n        prevLists,\n        prevMyLists,\n        prevFlatLists,\n        prevChildren,\n        parentIssueIds,\n        metadataById,\n      };\n    },\n    onError: (_err, _ids, ctx) => {\n      if (ctx?.prevLists) {\n        for (const [key, snapshot] of ctx.prevLists) {\n          qc.setQueryData(key, snapshot);\n        }"
+    },
+    {
+      "path": "packages/core/issues/mutations.ts",
+      "start": 801,
+      "end": 900,
+      "code": "      }\n      if (ctx?.prevMyLists) {\n        for (const [key, snapshot] of ctx.prevMyLists) {\n          qc.setQueryData(key, snapshot);\n        }\n      }\n      if (ctx?.prevFlatLists) {\n        for (const [key, snapshot] of ctx.prevFlatLists) {\n          qc.setQueryData(key, snapshot);\n        }\n      }\n      if (ctx?.prevChildren) {\n        for (const [parentId, snapshot] of ctx.prevChildren) {\n          qc.setQueryData(issueKeys.children(wsId, parentId), snapshot);\n        }\n      }\n    },\n    onSuccess: (data, ids, ctx) => {\n      if (data.deleted === ids.length) {\n        const { forgetContext } = useRecentContextStore.getState();\n        for (const id of ids) {\n          forgetContext(wsId, { type: \"issue\", id });\n          cleanupDeletedIssueCaches(qc, wsId, id, ctx?.metadataById.get(id));\n        }\n        // Same inbox ownership as the single delete: prune this client's rows\n        // now instead of waiting for the `issue:deleted` echoes.\n        void onInboxIssuesDeleted(qc, wsId, ids);\n        return;\n      }\n\n      if (ctx?.prevLists) {\n        for (const [key, snapshot] of ctx.prevLists) {\n          qc.setQueryData(key, snapshot);\n        }\n      }\n      if (ctx?.prevMyLists) {\n        for (const [key, snapshot] of ctx.prevMyLists) {\n          qc.setQueryData(key, snapshot);\n        }\n      }\n      if (ctx?.prevFlatLists) {\n        for (const [key, snapshot] of ctx.prevFlatLists) {\n          qc.setQueryData(key, snapshot);\n        }\n      }\n      if (ctx?.prevChildren) {\n        for (const [parentId, snapshot] of ctx.prevChildren) {\n          qc.setQueryData(issueKeys.children(wsId, parentId), snapshot);\n        }\n      }\n      for (const id of ids) {\n        invalidateIssueScopedCaches(qc, wsId, id);\n      }\n      qc.invalidateQueries({ queryKey: issueKeys.all(wsId) });\n      invalidateDeletedIssueDependentCaches(qc, wsId);\n      // The server skipped some of the batch and only reports the count, so\n      // which inbox rows survived is unknowable client-side — re-read the\n      // inbox instead of pruning by id.\n      void onInboxInvalidate(qc, wsId);\n      void onInboxSummaryInvalidate(qc);\n    },\n    onSettled: (_data, _err, _ids, ctx) => {\n      qc.invalidateQueries({ queryKey: issueKeys.list(wsId) });\n      qc.invalidateQueries({ queryKey: issueKeys.flatAll(wsId) });\n      qc.invalidateQueries({ queryKey: issueKeys.tableAll(wsId) });\n      qc.invalidateQueries({ queryKey: issueKeys.assigneeGroupsAll(wsId) });\n      qc.invalidateQueries({ queryKey: issueKeys.myAssigneeGroupsAll(wsId) });\n      qc.invalidateQueries({ queryKey: issueKeys.projectGanttAll(wsId) });\n      qc.invalidateQueries({ queryKey: issueKeys.sidebarAll(wsId) });\n      qc.invalidateQueries({ queryKey: projectKeys.all(wsId) });\n      if (ctx?.parentIssueIds && ctx.parentIssueIds.size > 0) {\n        invalidateDeletedIssueParentCaches(qc, wsId, {\n          parentIssueIds: Array.from(ctx.parentIssueIds),\n        });\n      }\n    },\n  });\n}\n\n// Comments / Timeline\n\ntype TimelineCache = TimelineEntry[];\n\nexport function useCreateComment(issueId: string) {\n  const qc = useQueryClient();\n  const wsId = useWorkspaceId();\n  return useMutation({\n    mutationFn: ({\n      content,\n      type,\n      parentId,\n      attachmentIds,\n      suppressAgentIds,\n      steerTaskIds,\n    }: {\n      content: string;\n      type?: string;\n      parentId?: string;\n      attachmentIds?: string[];\n      suppressAgentIds?: string[];"
+    },
+    {
+      "path": "packages/core/issues/mutations.ts",
+      "start": 901,
+      "end": 1000,
+      "code": "      /** Running turns this comment goes into instead of a follow-up run. */\n      steerTaskIds?: string[];\n    }) => api.createComment(issueId, content, type, parentId, attachmentIds, suppressAgentIds, steerTaskIds),\n    onSuccess: (comment) => {\n      if (comment.issue_revision) {\n        onIssueAuxiliaryRevision(qc, wsId, issueId, comment.issue_revision);\n      } else {\n        invalidateIssueOwnerProjections(qc, wsId, issueId);\n      }\n      invalidateLastActivitySortedIssueLists(qc, wsId);\n      const entry: TimelineEntry = {\n        type: \"comment\",\n        id: comment.id,\n        actor_type: comment.author_type,\n        actor_id: comment.author_id,\n        content: comment.content,\n        parent_id: comment.parent_id,\n        comment_type: comment.type,\n        reactions: comment.reactions ?? [],\n        attachments: comment.attachments ?? [],\n        created_at: comment.created_at,\n        updated_at: comment.updated_at,\n        supplements: comment.supplements,\n      };\n      const steered = !!comment.supplements?.length;\n      // Dedupe by id: the `comment:created` WS event may have already added\n      // this entry from the broadcast path before this onSuccess fires. Skip\n      // the append if the entry is already in the cache — but keep the\n      // steering receipts, which that broadcast predates.\n      qc.setQueryData<TimelineCache>(issueKeys.timeline(issueId), (old) => {\n        if (!old) return [entry];\n        if (old.some((e) => e.id === entry.id)) {\n          return steered\n            ? old.map((e) => (e.id === entry.id && !e.supplements?.length ? { ...e, supplements: entry.supplements } : e))\n            : old;\n        }\n        return sortTimelineEntriesAsc([...old, entry]);\n      });\n      // A steered turn now lists this comment among its inputs.\n      if (steered) qc.invalidateQueries({ queryKey: issueKeys.tasks(issueId) });\n      // Posting a comment changes the trigger answer itself (the enqueued\n      // task now dedupes follow-up triggers), so cached previews for this\n      // issue are stale the moment the create lands.\n      qc.invalidateQueries({ queryKey: issueKeys.commentTriggerPreview(issueId) });\n    },\n    // No onSettled invalidate. The `comment:created` WS broadcast keeps\n    // the timeline cache fresh after a successful create, and reconnect\n    // recovery in useIssueTimeline already invalidates if the connection\n    // dropped. Re-fetching on every submit replaces every entry's\n    // reference, which forces every memoized CommentCard subtree to\n    // re-render (visible as a flash across sibling threads during AI\n    // streaming).\n  });\n}\n\nexport function useUpdateComment(issueId: string) {\n  const qc = useQueryClient();\n  const wsId = useWorkspaceId();\n  return useMutation({\n    mutationFn: ({\n      commentId,\n      content,\n      attachmentIds,\n      suppressAgentIds,\n      contentBase,\n      expectedRevision,\n    }: {\n      commentId: string;\n      content: string;\n      attachmentIds: string[];\n      suppressAgentIds?: string[];\n      contentBase?: string;\n      expectedRevision?: number;\n    }) => api.updateComment(commentId, content, attachmentIds, suppressAgentIds, contentBase, expectedRevision),\n    onMutate: async ({ commentId, content, attachmentIds }) => {\n      await qc.cancelQueries({ queryKey: issueKeys.timeline(issueId) });\n      const prev = qc.getQueryData<TimelineCache>(issueKeys.timeline(issueId));\n      const kept = new Set(attachmentIds);\n      qc.setQueryData<TimelineCache>(issueKeys.timeline(issueId), (old) =>\n        old?.map((e) =>\n          e.id === commentId\n            ? { ...e, content, attachments: e.attachments?.filter((a) => kept.has(a.id)) }\n            : e,\n        ),\n      );\n      return { prev };\n    },\n    onError: (_err, _vars, ctx) => {\n      if (ctx?.prev !== undefined) {\n        qc.setQueryData(issueKeys.timeline(issueId), ctx.prev);\n      }\n    },\n    onSuccess: (comment) => {\n      if (comment.issue_revision) {\n        onIssueAuxiliaryRevision(qc, wsId, issueId, comment.issue_revision);\n      } else {\n        // Mixed-version fallback: an older backend may have committed the\n        // aggregate revision without returning it.\n        invalidateIssueOwnerProjections(qc, wsId, issueId);\n      }"
+    },
+    {
+      "path": "packages/core/issues/mutations.ts",
+      "start": 1001,
+      "end": 1100,
+      "code": "      invalidateLastActivitySortedIssueLists(qc, wsId);\n    },\n    onSettled: () => {\n      qc.invalidateQueries({ queryKey: issueKeys.timeline(issueId) });\n    },\n  });\n}\n\nexport function useDeleteComment(issueId: string) {\n  const qc = useQueryClient();\n  const wsId = useWorkspaceId();\n  return useMutation({\n    // The capability is read when the delete runs, so the route matches the\n    // copy the confirmation showed. Older servers delete the replies too.\n    mutationFn: async (commentId: string) => {\n      const keepReplies = configStore.getState().commentDeleteKeepRepliesSupported;\n      await api.deleteComment(commentId, { keepReplies });\n      return keepReplies;\n    },\n    // Not optimistic: whether the comment disappears or stays as a tombstone\n    // depends on replies only the server sees for certain (#8296). Once it\n    // confirms, mirror its outcome; realtime events and the settle refetch\n    // reconcile the rest.\n    onSuccess: (keptReplies, commentId) => {\n      qc.setQueryData<TimelineCache>(issueKeys.timeline(issueId), (old) => {\n        if (!old) return old;\n        return keptReplies\n          ? applyCommentDeletion(old, commentId, new Date().toISOString())\n          : removeCommentSubtree(old, commentId);\n      });\n      // The endpoint remains 204 for compatibility, so the local caller has\n      // no body carrying issue_revision. The realtime event will narrow this\n      // with its revision when connected; this is the no-WS safety net.\n      invalidateIssueOwnerProjections(qc, wsId, issueId);\n      invalidateLastActivitySortedIssueLists(qc, wsId);\n    },\n    onSettled: () => {\n      qc.invalidateQueries({ queryKey: issueKeys.timeline(issueId) });\n    },\n  });\n}\n\n// Every comment id in the same thread as `commentId` — the thread root plus\n// every descendant. Mirrors the server's thread walk in\n// ClearOtherThreadResolutions so the resolve optimistic update can clear sibling\n// resolutions exactly as the backend will, instead of briefly showing two\n// resolutions until the refetch settles.\nfunction collectThreadCommentIds(\n  entries: TimelineCache,\n  commentId: string,\n): Set<string> {\n  const byId = new Map<string, TimelineEntry>();\n  for (const e of entries) {\n    if (e.type === \"comment\") byId.set(e.id, e);\n  }\n  // Walk up to the thread root (cycle-guarded against malformed parent chains).\n  let rootId = commentId;\n  const guard = new Set<string>();\n  let cur = byId.get(commentId);\n  while (cur?.parent_id && byId.has(cur.parent_id) && !guard.has(cur.id)) {\n    guard.add(cur.id);\n    rootId = cur.parent_id;\n    cur = byId.get(cur.parent_id);\n  }\n  // Expand back down over the whole subtree.\n  const childrenByParent = new Map<string, string[]>();\n  for (const e of byId.values()) {\n    if (e.parent_id) {\n      const list = childrenByParent.get(e.parent_id) ?? [];\n      list.push(e.id);\n      childrenByParent.set(e.parent_id, list);\n    }\n  }\n  const ids = new Set<string>([rootId]);\n  const stack = [rootId];\n  while (stack.length > 0) {\n    const id = stack.pop()!;\n    for (const child of childrenByParent.get(id) ?? []) {\n      if (!ids.has(child)) {\n        ids.add(child);\n        stack.push(child);\n      }\n    }\n  }\n  return ids;\n}\n\nexport function useResolveComment(issueId: string) {\n  const qc = useQueryClient();\n  return useMutation({\n    mutationFn: ({ commentId, resolved }: { commentId: string; resolved: boolean }) =>\n      resolved ? api.resolveComment(commentId) : api.unresolveComment(commentId),\n    onMutate: async ({ commentId, resolved }) => {\n      await qc.cancelQueries({ queryKey: issueKeys.timeline(issueId) });\n      const prev = qc.getQueryData<TimelineCache>(issueKeys.timeline(issueId));\n      qc.setQueryData<TimelineCache>(issueKeys.timeline(issueId), (old) => {\n        if (!old) return old;\n        // Resolving makes this comment the sole resolution in its thread, so\n        // mirror the server (ClearOtherThreadResolutions) and clear every other\n        // resolution in the same thread. Without this the cache shows two"
+    },
+    {
+      "path": "packages/core/issues/mutations.ts",
+      "start": 1101,
+      "end": 1200,
+      "code": "        // resolutions until the settle refetch, which is exactly the flash the\n        // single-resolution fix removes. Unresolve only clears its own row.\n        const threadIds = resolved ? collectThreadCommentIds(old, commentId) : null;\n        return old.map((e) => {\n          if (e.id === commentId) {\n            return {\n              ...e,\n              resolved_at: resolved ? new Date().toISOString() : null,\n              resolved_by_type: resolved ? e.resolved_by_type ?? null : null,\n              resolved_by_id: resolved ? e.resolved_by_id ?? null : null,\n            };\n          }\n          if (resolved && e.resolved_at && threadIds?.has(e.id)) {\n            return { ...e, resolved_at: null, resolved_by_type: null, resolved_by_id: null };\n          }\n          return e;\n        });\n      });\n      return { prev };\n    },\n    onError: (_err, _vars, ctx) => {\n      if (ctx?.prev !== undefined) {\n        qc.setQueryData(issueKeys.timeline(issueId), ctx.prev);\n      }\n    },\n    onSettled: () => {\n      qc.invalidateQueries({ queryKey: issueKeys.timeline(issueId) });\n    },\n  });\n}\n\nexport function useToggleCommentReaction(issueId: string) {\n  const qc = useQueryClient();\n  return useMutation({\n    mutationKey: [\"toggleCommentReaction\", issueId] as const,\n    mutationFn: async ({\n      commentId,\n      emoji,\n      existing,\n    }: ToggleCommentReactionVars) => {\n      if (existing) {\n        await api.removeReaction(commentId, emoji);\n        return null;\n      }\n      return api.addReaction(commentId, emoji);\n    },\n    onSettled: () => {\n      qc.invalidateQueries({ queryKey: issueKeys.timeline(issueId) });\n    },\n  });\n}\n\n// Issue-level Reactions\n\nexport function useToggleIssueReaction(issueId: string) {\n  const qc = useQueryClient();\n  const wsId = useWorkspaceId();\n  return useMutation({\n    mutationKey: [\"toggleIssueReaction\", issueId] as const,\n    mutationFn: async ({\n      emoji,\n      existing,\n    }: ToggleIssueReactionVars) => {\n      if (existing) {\n        await api.removeIssueReaction(issueId, emoji);\n        return null;\n      }\n      return api.addIssueReaction(issueId, emoji);\n    },\n    onSuccess: (reaction) => {\n      onIssueAuxiliaryRevision(qc, wsId, issueId, reaction?.issue_revision);\n    },\n    onSettled: () => {\n      qc.invalidateQueries({ queryKey: issueKeys.reactions(issueId) });\n    },\n  });\n}\n\n// Issue Subscribers\n\nexport function useToggleIssueSubscriber(issueId: string) {\n  const qc = useQueryClient();\n  return useMutation({\n    mutationFn: async ({\n      userId,\n      userType,\n      subscribed,\n    }: {\n      userId: string;\n      userType: \"member\" | \"agent\";\n      subscribed: boolean;\n    }) => {\n      if (subscribed) {\n        await api.unsubscribeFromIssue(issueId, userId, userType);\n      } else {\n        await api.subscribeToIssue(issueId, userId, userType);\n      }\n    },\n    onMutate: async ({ userId, userType, subscribed }) => {\n      await qc.cancelQueries({ queryKey: issueKeys.subscribers(issueId) });"
+    },
+    {
+      "path": "packages/core/issues/mutations.ts",
+      "start": 1201,
+      "end": 1300,
+      "code": "      const prev = qc.getQueryData<IssueSubscriber[]>(\n        issueKeys.subscribers(issueId),\n      );\n\n      if (subscribed) {\n        qc.setQueryData<IssueSubscriber[]>(\n          issueKeys.subscribers(issueId),\n          (old) =>\n            old?.filter(\n              (s) => !(s.user_id === userId && s.user_type === userType),\n            ),\n        );\n      } else {\n        const temp: IssueSubscriber = {\n          issue_id: issueId,\n          user_type: userType,\n          user_id: userId,\n          reason: \"manual\",\n          created_at: new Date().toISOString(),\n        };\n        qc.setQueryData<IssueSubscriber[]>(\n          issueKeys.subscribers(issueId),\n          (old) => {\n            // An explicit subscribe rewrites an existing row's reason to\n            // manual. The delivery tier is the server's to report, so it is\n            // dropped until onSettled refetches it.\n            if (\n              old?.some(\n                (s) => s.user_id === userId && s.user_type === userType,\n              )\n            )\n              return old.map((s) =>\n                s.user_id === userId && s.user_type === userType\n                  ? { ...s, reason: \"manual\" as const, delivery: undefined }\n                  : s,\n              );\n            return [...(old ?? []), temp];\n          },\n        );\n      }\n      return { prev };\n    },\n    onError: (_err, _vars, ctx) => {\n      if (ctx?.prev)\n        qc.setQueryData(issueKeys.subscribers(issueId), ctx.prev);\n    },\n    onSettled: (_data, _err, { userType }) => {\n      qc.invalidateQueries({ queryKey: issueKeys.subscribers(issueId) });\n      const wsId = getCurrentWsId();\n      if (wsId && userType === \"member\") void refreshSubscribedIssues(qc, wsId);\n    },\n  });\n}\n\n/**\n * Leave an issue AND its whole sub-tree (MUL-5483). Not optimistic: it writes\n * to an unknown number of other issues' subscriber lists, so there is nothing\n * determinate to patch — invalidate every subscriber query instead and let the\n * server be the source of truth.\n */\nexport function useUnsubscribeFromIssueSubtree(issueId: string) {\n  const qc = useQueryClient();\n  return useMutation({\n    mutationFn: async ({\n      userId,\n      userType,\n    }: {\n      userId: string;\n      userType: \"member\" | \"agent\";\n    }) => {\n      await api.unsubscribeFromIssueSubtree(issueId, userId, userType);\n    },\n    onSettled: (_data, _err, { userType }) => {\n      qc.invalidateQueries({ queryKey: issueKeys.subscribersAll() });\n      const wsId = getCurrentWsId();\n      if (wsId && userType === \"member\") void refreshSubscribedIssues(qc, wsId);\n    },\n  });\n}\n\nexport function useCancelIssueRun(issueId: string) {\n  const client = useQueryClient();\n  return useMutation({\n    mutationFn: (taskId: string) => api.cancelTask(issueId, taskId),\n    onSuccess: () => client.invalidateQueries({ queryKey: issueKeys.tasks(issueId) }),\n  });\n}\n\nexport function useRetryTaskSupplement(issueId: string) {\n  const client = useQueryClient();\n  return useMutation({\n    mutationFn: ({ taskId, commentId }: { taskId: string; commentId: string }) =>\n      api.retryTaskSupplement(issueId, taskId, commentId),\n    onSettled: () => {\n      client.invalidateQueries({ queryKey: issueKeys.timeline(issueId) });\n      client.invalidateQueries({ queryKey: issueKeys.tasks(issueId) });\n    },\n  });\n}\n"
+    },
+    {
+      "path": "packages/core/issues/mutations.ts",
+      "start": 1301,
+      "end": 1307,
+      "code": "export function useRetryIssueRun(issueId: string) {\n  const client = useQueryClient();\n  return useMutation({\n    mutationFn: (taskId: string) => api.rerunIssue(issueId, taskId),\n    onSuccess: () => client.invalidateQueries({ queryKey: issueKeys.tasks(issueId) }),\n  });\n}"
+    }
+  ],
+  "reused_evidence": [
+    {
+      "path": "server/contracts/batches/create-issue-transport-coverage.json",
+      "sha256": "bc48561dd770029c38891e2e442f99fdf526b50d1cc35fce0a48c2c4463702ef",
+      "validated_sources": [
+        "packages/views/modals/create-issue.tsx",
+        "packages/core/issues/mutations.ts",
+        "packages/core/labels/mutations.ts",
+        "packages/core/issue-workflows/hooks.ts",
+        "packages/core/issue-workflows/queries.ts",
+        "packages/core/issue-statuses/hooks.ts",
+        "packages/core/issue-statuses/queries.ts",
+        "packages/core/properties/queries.ts",
+        "packages/core/workspace/hooks.ts",
+        "packages/views/workflows/step-handler.ts",
+        "packages/views/modals/source-context-preview.tsx",
+        "packages/core/api/client.ts"
+      ],
+      "scope": "Only invoked helper and query semantics; no descendant observer certification"
+    },
+    {
+      "path": "server/contracts/batches/comment-card-transport-coverage.json",
+      "sha256": "e25aa6210f4ebc2707240f830723c334b6ad95965f62438c4f1c73c2c40f6b76",
+      "validated_sources": [
+        "packages/views/issues/components/comment-card.tsx"
+      ],
+      "scope": "Only invoked helper and query semantics; no descendant observer certification"
+    },
+    {
+      "path": "server/contracts/batches/issue-menu-transport-coverage.json",
+      "sha256": "d253dfff7430e808a54b417802bb90d65d115b2eab1570a7b69408b321b428cd",
+      "validated_sources": [
+        "packages/views/issues/actions/issue-actions-menu-items.tsx"
+      ],
+      "scope": "Only invoked helper and query semantics; no descendant observer certification"
+    },
+    {
+      "path": "server/contracts/batches/issue-cache-transport-coverage.json",
+      "sha256": "ca8ac1b4269c453cb9920c1ea565e909b513dc0cb74abe462467e24bf9b71b65",
+      "validated_sources": [
+        "packages/core/issues/cache-coordinator.ts",
+        "packages/core/issues/cache-helpers.ts",
+        "packages/core/issues/surface/membership.ts",
+        "packages/core/issues/status-category.ts",
+        "packages/core/inbox/ws-updaters.ts",
+        "packages/core/inbox/queries.ts",
+        "packages/core/issues/queries.ts"
+      ],
+      "scope": "Only invoked helper and query semantics; no descendant observer certification"
+    },
+    {
+      "path": "server/contracts/batches/issue-query-transport-coverage.json",
+      "sha256": "3d4401929eee7294bc9f706a5c738a074300faffc6df01ec9275184d8a5be380",
+      "validated_sources": [
+        "packages/core/issues/queries.ts",
+        "packages/core/projects/queries.ts",
+        "packages/core/workspace/queries.ts",
+        "packages/core/issue-statuses/queries.ts"
+      ],
+      "scope": "Only invoked helper and query semantics; no descendant observer certification"
+    },
+    {
+      "path": "server/contracts/batches/issue-ws-updaters-transport-coverage.json",
+      "sha256": "6f932de903917f7209c1e07b9f5bf28b0b896573e89e352a2e40608d1b3995f1",
+      "validated_sources": [
+        "packages/core/issues/ws-updaters.ts",
+        "packages/core/issues/delete-cache.ts",
+        "packages/core/issues/stores/recent-issues-store.ts",
+        "packages/core/platform/storage.ts",
+        "packages/core/agents/queries.ts",
+        "packages/core/inbox/ws-updaters.ts",
+        "packages/core/inbox/queries.ts",
+        "packages/core/inbox/filters.ts",
+        "packages/core/issues/cache-helpers.ts",
+        "packages/core/labels/queries.ts",
+        "packages/core/api/client.ts"
+      ],
+      "scope": "Only invoked helper and query semantics; no descendant observer certification"
+    },
+    {
+      "path": "server/contracts/batches/inline-run-transport-coverage.json",
+      "sha256": "1597fb182445a08c9bc584d730d2898637180b229ad20ae8b1c9eca4624b3811",
+      "validated_sources": [
+        "packages/views/issues/components/inline-comment-run.tsx",
+        "packages/core/chat/queries.ts",
+        "packages/core/issues/mutations.ts",
+        "packages/core/issues/queries.ts",
+        "packages/core/workspace/hooks.ts",
+        "packages/core/workspace/queries.ts",
+        "packages/core/plugins/queries.ts",
+        "packages/views/common/task-transcript/use-trace-issue-labels.ts",
+        "packages/views/common/task-transcript/trace-issue-labels.ts",
+        "packages/core/api/client.ts"
+      ],
+      "scope": "Only invoked helper and query semantics; no descendant observer certification"
+    }
+  ],
+  "exports": [
+    {
+      "export": "useCreateIssue",
+      "line": 179,
+      "direct_api": [
+        "createIssue"
+      ],
+      "callback_and_gate_index": [],
+      "source_snapshot_range": "See separate snapshots for complete callback bodies, including multiline gates"
+    },
+    {
+      "export": "useCreateCommentSubIssue",
+      "line": 183,
+      "direct_api": [
+        "createCommentSubIssue"
+      ],
+      "callback_and_gate_index": [],
+      "source_snapshot_range": "See separate snapshots for complete callback bodies, including multiline gates"
+    },
+    {
+      "export": "useUpdateIssue",
+      "line": 193,
+      "direct_api": [
+        "updateIssue",
+        "moveIssue"
+      ],
+      "callback_and_gate_index": [
+        "if (!moveIntent) return api.updateIssue(id, data);",
+        "onMutate: ({ id, move_intent: _moveIntent, ...data }) => {",
+        "// Fire-and-forget cancelQueries — keeps onMutate synchronous so the",
+        "qc.cancelQueries({ queryKey: issueKeys.list(wsId) });",
+        "qc.cancelQueries({ queryKey: issueKeys.myAll(wsId) });",
+        "qc.cancelQueries({ queryKey: issueKeys.flatAll(wsId) });",
+        "qc.cancelQueries({ queryKey: issueKeys.tableAll(wsId) });",
+        "// the server result may have drifted (invalidated on settle, not here —",
+        "if (!parentId) {",
+        "if (!data?.some((c) => c.id === id)) continue;",
+        "if (typeof candidate === \"string\") {",
+        "if (parentId) {",
+        "qc.setQueryData<Issue[]>(",
+        "onError: (_err, vars, ctx) => {",
+        "if (ctx) {",
+        "rollbackIssueChange(qc, wsId, ctx.id, ctx.change);",
+        "if (ctx?.parentId && ctx.prevChildren !== undefined) {",
+        "qc.setQueryData(",
+        "// its rollback snapshot. Restoring that snapshot on any failed request",
+        "// every loaded owner projection after rollback. A revision conflict is",
+        "qc.invalidateQueries({ queryKey: issueKeys.detail(wsId, vars.id) });",
+        "qc.invalidateQueries({ queryKey: issueKeys.list(wsId) });",
+        "qc.invalidateQueries({ queryKey: issueKeys.myAll(wsId) });",
+        "qc.invalidateQueries({ queryKey: issueKeys.flatAll(wsId) });",
+        "qc.invalidateQueries({ queryKey: issueKeys.tableAll(wsId) });",
+        "onSuccess: (serverIssue, vars) => {",
+        "invalidateStaleListKeys(qc, reconcile.staleKeys);",
+        "if (",
+        "onSettled: (_data, err, vars, ctx) => {",
+        "// onSuccess / onError, so they are deliberately NOT invalidated here — a",
+        "// \"invalidate myAll on project move\" safety net (MUL-3669 / #4548): the",
+        "invalidateIssueDerivatives(qc, wsId, {",
+        "qc.invalidateQueries({ queryKey: issueKeys.tableAll(wsId) });",
+        "if (ctx) {",
+        "invalidateStaleListKeys(qc, ctx.change.staleKeys);",
+        "if (vars.attachment_ids?.length) {",
+        "qc.invalidateQueries({ queryKey: issueKeys.attachments(vars.id) });",
+        "if (vars.duplicate_of_issue_id) {",
+        "qc.invalidateQueries({ queryKey: issueKeys.duplicates(wsId, vars.id) });",
+        "qc.invalidateQueries({",
+        "if (ctx?.parentId) {",
+        "qc.invalidateQueries({",
+        "qc.invalidateQueries({ queryKey: issueKeys.childProgress(wsId) });",
+        "if (newParentId && newParentId !== ctx?.parentId) {",
+        "qc.invalidateQueries({",
+        "qc.invalidateQueries({ queryKey: issueKeys.childProgress(wsId) });",
+        "// actually changed. The WS path (ws-updaters.ts) invalidates",
+        "if (ctx?.parentId || newParentId) {",
+        "qc.invalidateQueries({ queryKey: issueKeys.childrenByParentsAll(wsId) });"
+      ],
+      "source_snapshot_range": "See separate snapshots for complete callback bodies, including multiline gates"
+    },
+    {
+      "export": "useDeleteIssue",
+      "line": 437,
+      "direct_api": [
+        "deleteIssue"
+      ],
+      "callback_and_gate_index": [
+        "onMutate: async (id) => {",
+        "qc.cancelQueries({ queryKey: issueKeys.list(wsId) }),",
+        "qc.cancelQueries({ queryKey: issueKeys.myAll(wsId) }),",
+        "qc.cancelQueries({ queryKey: issueKeys.flatAll(wsId) }),",
+        "qc.cancelQueries({ queryKey: issueKeys.children(wsId, parentId) }),",
+        "qc.removeQueries({ queryKey: issueKeys.detail(wsId, id) });",
+        "onError: (_err, _id, ctx) => {",
+        "if (ctx?.prevLists) {",
+        "qc.setQueryData(key, snapshot);",
+        "if (ctx?.prevMyLists) {",
+        "qc.setQueryData(key, snapshot);",
+        "if (ctx?.prevFlatLists) {",
+        "qc.setQueryData(key, snapshot);",
+        "if (ctx?.prevDetail) {",
+        "qc.setQueryData(issueKeys.detail(wsId, ctx.id), ctx.prevDetail);",
+        "if (ctx?.prevChildren) {",
+        "qc.setQueryData(issueKeys.children(wsId, parentId), snapshot);",
+        "onSuccess: (_data, id, ctx) => {",
+        "onSettled: (_data, _err, _id, ctx) => {",
+        "qc.invalidateQueries({ queryKey: issueKeys.list(wsId) });",
+        "qc.invalidateQueries({ queryKey: issueKeys.flatAll(wsId) });",
+        "qc.invalidateQueries({ queryKey: issueKeys.tableAll(wsId) });",
+        "qc.invalidateQueries({ queryKey: issueKeys.assigneeGroupsAll(wsId) });",
+        "qc.invalidateQueries({ queryKey: issueKeys.myAssigneeGroupsAll(wsId) });",
+        "qc.invalidateQueries({ queryKey: issueKeys.projectGanttAll(wsId) });",
+        "qc.invalidateQueries({ queryKey: issueKeys.sidebarAll(wsId) });",
+        "qc.invalidateQueries({ queryKey: projectKeys.all(wsId) });",
+        "if (ctx?.metadata) invalidateDeletedIssueParentCaches(qc, wsId, ctx.metadata);"
+      ],
+      "source_snapshot_range": "See separate snapshots for complete callback bodies, including multiline gates"
+    },
+    {
+      "export": "useBatchUpdateIssues",
+      "line": 541,
+      "direct_api": [
+        "batchUpdateIssues"
+      ],
+      "callback_and_gate_index": [
+        "const rollback = (ctx: BatchUpdateSnapshots | undefined) => {",
+        "for (const [key, snapshot] of ctx?.prevLists ?? []) qc.setQueryData(key, snapshot);",
+        "for (const [key, snapshot] of ctx?.prevFlatLists ?? []) qc.setQueryData(key, snapshot);",
+        "for (const [key, snapshot] of ctx?.prevTableRows ?? []) qc.setQueryData(key, snapshot);",
+        "for (const [key, snapshot] of ctx?.prevSidebarLists ?? []) qc.setQueryData(key, snapshot);",
+        "for (const [id, snapshot] of ctx?.prevDetailById ?? []) qc.setQueryData(issueKeys.detail(wsId, id), snapshot);",
+        "if (ctx?.prevInboxList !== undefined) qc.setQueryData(inboxKeys.list(wsId), ctx.prevInboxList);",
+        "for (const [key, snapshot] of ctx?.prevArchivedInboxCaches ?? []) qc.setQueryData(key, snapshot);",
+        "qc.setQueryData(issueKeys.children(wsId, parentId), snapshot);",
+        "? api.batchUpdateIssues(ids, updates, { labels, properties })",
+        "onMutate: async ({ ids, updates }) => {",
+        "await qc.cancelQueries({ queryKey: issueKeys.list(wsId) });",
+        "await qc.cancelQueries({ queryKey: issueKeys.myAll(wsId) });",
+        "await qc.cancelQueries({ queryKey: issueKeys.flatAll(wsId) });",
+        "await qc.cancelQueries({ queryKey: issueKeys.tableAll(wsId) });",
+        "// first snapshot per key is pristine for rollback.",
+        "if (!prevListByHash.has(hash)) prevListByHash.set(hash, [key, snapshot]);",
+        "if (!prevFlatListByHash.has(hash)) {",
+        "if (!prevTableRowByHash.has(hash)) {",
+        "if (!prevSidebarListByHash.has(hash)) {",
+        "if (change.prevDetail) prevDetailById.set(id, change.prevDetail);",
+        "if (prevInboxList === undefined && change.prevInboxList !== undefined) {",
+        "if (",
+        "if (!data?.some((c) => idSet.has(c.id))) continue;",
+        "if (typeof parentId !== \"string\") continue;",
+        "qc.setQueryData<Issue[]>(issueKeys.children(wsId, parentId), (old) =>",
+        "onError: (_err, _vars, ctx) => rollback(ctx),",
+        "onSuccess: (data, { ids }, ctx) => {",
+        "if (data.updated >= ids.length) return;",
+        "rollback(ctx);",
+        "qc.invalidateQueries({ queryKey: issueKeys.list(wsId) });",
+        "qc.invalidateQueries({ queryKey: issueKeys.myAll(wsId) });",
+        "qc.invalidateQueries({ queryKey: issueKeys.flatAll(wsId) });",
+        "for (const id of ids) qc.invalidateQueries({ queryKey: issueKeys.detail(wsId, id) });",
+        "onSettled: (_data, err, _vars, ctx) => {",
+        "// drifted — the surgical replacement for the old blanket \"invalidate",
+        "if (_vars.labels || _vars.properties) {",
+        "qc.invalidateQueries({ queryKey: issueKeys.list(wsId) });",
+        "qc.invalidateQueries({ queryKey: issueKeys.myAll(wsId) });",
+        "qc.invalidateQueries({ queryKey: issueKeys.flatAll(wsId) });",
+        "for (const id of _vars.ids) qc.invalidateQueries({ queryKey: issueKeys.detail(wsId, id) });",
+        "invalidateIssueDerivatives(qc, wsId, {",
+        "qc.invalidateQueries({ queryKey: issueKeys.tableAll(wsId) });",
+        "if (ctx) {",
+        "invalidateStaleListKeys(qc, ctx.staleKeys);",
+        "if (ctx?.affectedParentIds && ctx.affectedParentIds.size > 0) {",
+        "qc.invalidateQueries({",
+        "qc.invalidateQueries({ queryKey: issueKeys.childProgress(wsId) });"
+      ],
+      "source_snapshot_range": "See separate snapshots for complete callback bodies, including multiline gates"
+    },
+    {
+      "export": "useBatchDeleteIssues",
+      "line": 737,
+      "direct_api": [
+        "batchDeleteIssues"
+      ],
+      "callback_and_gate_index": [
+        "onMutate: async (ids) => {",
+        "qc.cancelQueries({ queryKey: issueKeys.list(wsId) }),",
+        "qc.cancelQueries({ queryKey: issueKeys.myAll(wsId) }),",
+        "qc.cancelQueries({ queryKey: issueKeys.flatAll(wsId) }),",
+        "qc.cancelQueries({ queryKey: issueKeys.children(wsId, parentId) }),",
+        "if (metadata) {",
+        "onError: (_err, _ids, ctx) => {",
+        "if (ctx?.prevLists) {",
+        "qc.setQueryData(key, snapshot);",
+        "if (ctx?.prevMyLists) {",
+        "qc.setQueryData(key, snapshot);",
+        "if (ctx?.prevFlatLists) {",
+        "qc.setQueryData(key, snapshot);",
+        "if (ctx?.prevChildren) {",
+        "qc.setQueryData(issueKeys.children(wsId, parentId), snapshot);",
+        "onSuccess: (data, ids, ctx) => {",
+        "if (data.deleted === ids.length) {",
+        "if (ctx?.prevLists) {",
+        "qc.setQueryData(key, snapshot);",
+        "if (ctx?.prevMyLists) {",
+        "qc.setQueryData(key, snapshot);",
+        "if (ctx?.prevFlatLists) {",
+        "qc.setQueryData(key, snapshot);",
+        "if (ctx?.prevChildren) {",
+        "qc.setQueryData(issueKeys.children(wsId, parentId), snapshot);",
+        "invalidateIssueScopedCaches(qc, wsId, id);",
+        "qc.invalidateQueries({ queryKey: issueKeys.all(wsId) });",
+        "invalidateDeletedIssueDependentCaches(qc, wsId);",
+        "onSettled: (_data, _err, _ids, ctx) => {",
+        "qc.invalidateQueries({ queryKey: issueKeys.list(wsId) });",
+        "qc.invalidateQueries({ queryKey: issueKeys.flatAll(wsId) });",
+        "qc.invalidateQueries({ queryKey: issueKeys.tableAll(wsId) });",
+        "qc.invalidateQueries({ queryKey: issueKeys.assigneeGroupsAll(wsId) });",
+        "qc.invalidateQueries({ queryKey: issueKeys.myAssigneeGroupsAll(wsId) });",
+        "qc.invalidateQueries({ queryKey: issueKeys.projectGanttAll(wsId) });",
+        "qc.invalidateQueries({ queryKey: issueKeys.sidebarAll(wsId) });",
+        "qc.invalidateQueries({ queryKey: projectKeys.all(wsId) });",
+        "if (ctx?.parentIssueIds && ctx.parentIssueIds.size > 0) {",
+        "invalidateDeletedIssueParentCaches(qc, wsId, {"
+      ],
+      "source_snapshot_range": "See separate snapshots for complete callback bodies, including multiline gates"
+    },
+    {
+      "export": "useCreateComment",
+      "line": 884,
+      "direct_api": [
+        "createComment"
+      ],
+      "callback_and_gate_index": [
+        "onSuccess: (comment) => {",
+        "if (comment.issue_revision) {",
+        "invalidateIssueOwnerProjections(qc, wsId, issueId);",
+        "invalidateLastActivitySortedIssueLists(qc, wsId);",
+        "qc.setQueryData<TimelineCache>(issueKeys.timeline(issueId), (old) => {",
+        "if (!old) return [entry];",
+        "if (old.some((e) => e.id === entry.id)) {",
+        "if (steered) qc.invalidateQueries({ queryKey: issueKeys.tasks(issueId) });",
+        "qc.invalidateQueries({ queryKey: issueKeys.commentTriggerPreview(issueId) });",
+        "// No onSettled invalidate. The `comment:created` WS broadcast keeps",
+        "// recovery in useIssueTimeline already invalidates if the connection"
+      ],
+      "source_snapshot_range": "See separate snapshots for complete callback bodies, including multiline gates"
+    },
+    {
+      "export": "useUpdateComment",
+      "line": 956,
+      "direct_api": [
+        "updateComment"
+      ],
+      "callback_and_gate_index": [
+        "onMutate: async ({ commentId, content, attachmentIds }) => {",
+        "await qc.cancelQueries({ queryKey: issueKeys.timeline(issueId) });",
+        "qc.setQueryData<TimelineCache>(issueKeys.timeline(issueId), (old) =>",
+        "onError: (_err, _vars, ctx) => {",
+        "if (ctx?.prev !== undefined) {",
+        "qc.setQueryData(issueKeys.timeline(issueId), ctx.prev);",
+        "onSuccess: (comment) => {",
+        "if (comment.issue_revision) {",
+        "invalidateIssueOwnerProjections(qc, wsId, issueId);",
+        "invalidateLastActivitySortedIssueLists(qc, wsId);",
+        "onSettled: () => {",
+        "qc.invalidateQueries({ queryKey: issueKeys.timeline(issueId) });"
+      ],
+      "source_snapshot_range": "See separate snapshots for complete callback bodies, including multiline gates"
+    },
+    {
+      "export": "useDeleteComment",
+      "line": 1009,
+      "direct_api": [
+        "deleteComment"
+      ],
+      "callback_and_gate_index": [
+        "onSuccess: (keptReplies, commentId) => {",
+        "qc.setQueryData<TimelineCache>(issueKeys.timeline(issueId), (old) => {",
+        "if (!old) return old;",
+        "invalidateIssueOwnerProjections(qc, wsId, issueId);",
+        "invalidateLastActivitySortedIssueLists(qc, wsId);",
+        "onSettled: () => {",
+        "qc.invalidateQueries({ queryKey: issueKeys.timeline(issueId) });",
+        "if (e.type === \"comment\") byId.set(e.id, e);",
+        "if (e.parent_id) {",
+        "if (!ids.has(child)) {"
+      ],
+      "source_snapshot_range": "See separate snapshots for complete callback bodies, including multiline gates"
+    },
+    {
+      "export": "useResolveComment",
+      "line": 1088,
+      "direct_api": [
+        "resolveComment",
+        "unresolveComment"
+      ],
+      "callback_and_gate_index": [
+        "resolved ? api.resolveComment(commentId) : api.unresolveComment(commentId),",
+        "onMutate: async ({ commentId, resolved }) => {",
+        "await qc.cancelQueries({ queryKey: issueKeys.timeline(issueId) });",
+        "qc.setQueryData<TimelineCache>(issueKeys.timeline(issueId), (old) => {",
+        "if (!old) return old;",
+        "if (e.id === commentId) {",
+        "if (resolved && e.resolved_at && threadIds?.has(e.id)) {",
+        "onError: (_err, _vars, ctx) => {",
+        "if (ctx?.prev !== undefined) {",
+        "qc.setQueryData(issueKeys.timeline(issueId), ctx.prev);",
+        "onSettled: () => {",
+        "qc.invalidateQueries({ queryKey: issueKeys.timeline(issueId) });"
+      ],
+      "source_snapshot_range": "See separate snapshots for complete callback bodies, including multiline gates"
+    },
+    {
+      "export": "useToggleCommentReaction",
+      "line": 1132,
+      "direct_api": [
+        "removeReaction",
+        "addReaction"
+      ],
+      "callback_and_gate_index": [
+        "if (existing) {",
+        "onSettled: () => {",
+        "qc.invalidateQueries({ queryKey: issueKeys.timeline(issueId) });"
+      ],
+      "source_snapshot_range": "See separate snapshots for complete callback bodies, including multiline gates"
+    },
+    {
+      "export": "useToggleIssueReaction",
+      "line": 1155,
+      "direct_api": [
+        "removeIssueReaction",
+        "addIssueReaction"
+      ],
+      "callback_and_gate_index": [
+        "if (existing) {",
+        "onSuccess: (reaction) => {",
+        "onSettled: () => {",
+        "qc.invalidateQueries({ queryKey: issueKeys.reactions(issueId) });"
+      ],
+      "source_snapshot_range": "See separate snapshots for complete callback bodies, including multiline gates"
+    },
+    {
+      "export": "useToggleIssueSubscriber",
+      "line": 1181,
+      "direct_api": [
+        "unsubscribeFromIssue",
+        "subscribeToIssue"
+      ],
+      "callback_and_gate_index": [
+        "if (subscribed) {",
+        "onMutate: async ({ userId, userType, subscribed }) => {",
+        "await qc.cancelQueries({ queryKey: issueKeys.subscribers(issueId) });",
+        "if (subscribed) {",
+        "qc.setQueryData<IssueSubscriber[]>(",
+        "qc.setQueryData<IssueSubscriber[]>(",
+        "if (",
+        "onError: (_err, _vars, ctx) => {",
+        "if (ctx?.prev)",
+        "qc.setQueryData(issueKeys.subscribers(issueId), ctx.prev);",
+        "onSettled: (_data, _err, { userType }) => {",
+        "qc.invalidateQueries({ queryKey: issueKeys.subscribers(issueId) });",
+        "if (wsId && userType === \"member\") void refreshSubscribedIssues(qc, wsId);",
+        "* determinate to patch — invalidate every subscriber query instead and let the"
+      ],
+      "source_snapshot_range": "See separate snapshots for complete callback bodies, including multiline gates"
+    },
+    {
+      "export": "useUnsubscribeFromIssueSubtree",
+      "line": 1261,
+      "direct_api": [
+        "unsubscribeFromIssueSubtree"
+      ],
+      "callback_and_gate_index": [
+        "onSettled: (_data, _err, { userType }) => {",
+        "qc.invalidateQueries({ queryKey: issueKeys.subscribersAll() });",
+        "if (wsId && userType === \"member\") void refreshSubscribedIssues(qc, wsId);"
+      ],
+      "source_snapshot_range": "See separate snapshots for complete callback bodies, including multiline gates"
+    },
+    {
+      "export": "useCancelIssueRun",
+      "line": 1281,
+      "direct_api": [
+        "cancelTask"
+      ],
+      "callback_and_gate_index": [
+        "onSuccess: () => client.invalidateQueries({ queryKey: issueKeys.tasks(issueId) }),"
+      ],
+      "source_snapshot_range": "See separate snapshots for complete callback bodies, including multiline gates"
+    },
+    {
+      "export": "useRetryTaskSupplement",
+      "line": 1289,
+      "direct_api": [
+        "retryTaskSupplement"
+      ],
+      "callback_and_gate_index": [
+        "onSettled: () => {",
+        "client.invalidateQueries({ queryKey: issueKeys.timeline(issueId) });",
+        "client.invalidateQueries({ queryKey: issueKeys.tasks(issueId) });"
+      ],
+      "source_snapshot_range": "See separate snapshots for complete callback bodies, including multiline gates"
+    },
+    {
+      "export": "useRetryIssueRun",
+      "line": 1301,
+      "direct_api": [
+        "rerunIssue"
+      ],
+      "callback_and_gate_index": [
+        "onSuccess: () => client.invalidateQueries({ queryKey: issueKeys.tasks(issueId) }),"
+      ],
+      "source_snapshot_range": "See separate snapshots for complete callback bodies, including multiline gates"
+    }
+  ],
+  "edges": [
+    {
+      "source": "useCreateIssue",
+      "kind": "exact invoked client request branches reviewed by root",
+      "inventory": [
+        {
+          "id": "client:1648",
+          "method": "POST",
+          "path_expression": "/api/issues",
+          "route": {
+            "method": "POST",
+            "path": "/api/issues"
+          }
+        },
+        {
+          "id": "client:3351",
+          "method": "GET",
+          "path_expression": "/api/config",
+          "route": {
+            "method": "GET",
+            "path": "/api/config"
+          }
+        }
+      ]
+    },
+    {
+      "source": "useCreateCommentSubIssue",
+      "kind": "exact invoked client request branches reviewed by root",
+      "inventory": [
+        {
+          "id": "client:1714",
+          "method": "POST",
+          "path_expression": "/api/comments/${anchorCommentId}/sub-issues",
+          "route": {
+            "method": "POST",
+            "path": "/api/comments/{commentId}/sub-issues"
+          }
+        },
+        {
+          "id": "client:3351",
+          "method": "GET",
+          "path_expression": "/api/config",
+          "route": {
+            "method": "GET",
+            "path": "/api/config"
+          }
+        }
+      ]
+    },
+    {
+      "source": "useUpdateIssue",
+      "kind": "exact invoked client request branches reviewed by root",
+      "inventory": [
+        {
+          "id": "client:1771",
+          "method": "PUT",
+          "path_expression": "/api/issues/${id}",
+          "route": {
+            "method": "PUT",
+            "path": "/api/issues/{id}"
+          }
+        },
+        {
+          "id": "client:1778",
+          "method": "POST",
+          "path_expression": "/api/issues/${id}/move",
+          "route": {
+            "method": "POST",
+            "path": "/api/issues/{id}/move"
+          }
+        }
+      ]
+    },
+    {
+      "source": "useDeleteIssue",
+      "kind": "exact invoked client request branches reviewed by root",
+      "inventory": [
+        {
+          "id": "client:1827",
+          "method": "DELETE",
+          "path_expression": "/api/issues/${id}",
+          "route": {
+            "method": "DELETE",
+            "path": "/api/issues/{id}"
+          }
+        }
+      ]
+    },
+    {
+      "source": "useBatchUpdateIssues",
+      "kind": "exact invoked client request branches reviewed by root",
+      "inventory": [
+        {
+          "id": "client:1835",
+          "method": "POST",
+          "path_expression": "/api/issues/batch-update",
+          "route": {
+            "method": "POST",
+            "path": "/api/issues/batch-update"
+          }
+        }
+      ]
+    },
+    {
+      "source": "useBatchDeleteIssues",
+      "kind": "exact invoked client request branches reviewed by root",
+      "inventory": [
+        {
+          "id": "client:1852",
+          "method": "POST",
+          "path_expression": "/api/issues/batch-delete",
+          "route": {
+            "method": "POST",
+            "path": "/api/issues/batch-delete"
+          }
+        }
+      ]
+    },
+    {
+      "source": "useCreateComment",
+      "kind": "exact invoked client request branches reviewed by root",
+      "inventory": [
+        {
+          "id": "client:1876",
+          "method": "POST",
+          "path_expression": "/api/issues/${issueId}/comments",
+          "route": {
+            "method": "POST",
+            "path": "/api/issues/{id}/comments"
+          }
+        }
+      ]
+    },
+    {
+      "source": "useUpdateComment",
+      "kind": "exact invoked client request branches reviewed by root",
+      "inventory": [
+        {
+          "id": "client:1939",
+          "method": "PUT",
+          "path_expression": "/api/comments/${commentId}",
+          "route": {
+            "method": "PUT",
+            "path": "/api/comments/{commentId}"
+          }
+        }
+      ]
+    },
+    {
+      "source": "useDeleteComment",
+      "kind": "exact invoked client request branches reviewed by root",
+      "inventory": [
+        {
+          "id": "client:1961",
+          "method": "DELETE",
+          "path_expression": "/api/comments/${commentId}",
+          "route": {
+            "method": "DELETE",
+            "path": "/api/comments/{commentId}"
+          }
+        },
+        {
+          "id": "client:1961:keep-replies",
+          "method": "DELETE",
+          "path_expression": "/api/comments/${commentId}/keep-replies",
+          "route": {
+            "method": "DELETE",
+            "path": "/api/comments/{commentId}/keep-replies"
+          }
+        }
+      ]
+    },
+    {
+      "source": "useResolveComment",
+      "kind": "exact invoked client request branches reviewed by root",
+      "inventory": [
+        {
+          "id": "client:1965",
+          "method": "POST",
+          "path_expression": "/api/comments/${commentId}/resolve",
+          "route": {
+            "method": "POST",
+            "path": "/api/comments/{commentId}/resolve"
+          }
+        },
+        {
+          "id": "client:1969",
+          "method": "DELETE",
+          "path_expression": "/api/comments/${commentId}/resolve",
+          "route": {
+            "method": "DELETE",
+            "path": "/api/comments/{commentId}/resolve"
+          }
+        }
+      ]
+    },
+    {
+      "source": "useToggleCommentReaction",
+      "kind": "exact invoked client request branches reviewed by root",
+      "inventory": [
+        {
+          "id": "client:1973",
+          "method": "POST",
+          "path_expression": "/api/comments/${commentId}/reactions",
+          "route": {
+            "method": "POST",
+            "path": "/api/comments/{commentId}/reactions"
+          }
+        },
+        {
+          "id": "client:1980",
+          "method": "DELETE",
+          "path_expression": "/api/comments/${commentId}/reactions",
+          "route": {
+            "method": "DELETE",
+            "path": "/api/comments/{commentId}/reactions"
+          }
+        }
+      ]
+    },
+    {
+      "source": "useToggleIssueReaction",
+      "kind": "exact invoked client request branches reviewed by root",
+      "inventory": [
+        {
+          "id": "client:1987",
+          "method": "POST",
+          "path_expression": "/api/issues/${issueId}/reactions",
+          "route": {
+            "method": "POST",
+            "path": "/api/issues/{id}/reactions"
+          }
+        },
+        {
+          "id": "client:1994",
+          "method": "DELETE",
+          "path_expression": "/api/issues/${issueId}/reactions",
+          "route": {
+            "method": "DELETE",
+            "path": "/api/issues/{id}/reactions"
+          }
+        }
+      ]
+    },
+    {
+      "source": "useToggleIssueSubscriber",
+      "kind": "exact invoked client request branches reviewed by root",
+      "inventory": [
+        {
+          "id": "client:2012",
+          "method": "POST",
+          "path_expression": "/api/issues/${issueId}/subscribe",
+          "route": {
+            "method": "POST",
+            "path": "/api/issues/{id}/subscribe"
+          }
+        },
+        {
+          "id": "client:2023",
+          "method": "POST",
+          "path_expression": "/api/issues/${issueId}/unsubscribe",
+          "route": {
+            "method": "POST",
+            "path": "/api/issues/{id}/unsubscribe"
+          }
+        }
+      ]
+    },
+    {
+      "source": "useUnsubscribeFromIssueSubtree",
+      "kind": "exact invoked client request branches reviewed by root",
+      "inventory": [
+        {
+          "id": "client:2046",
+          "method": "POST",
+          "path_expression": "/api/issues/${issueId}/unsubscribe/subtree",
+          "route": {
+            "method": "POST",
+            "path": "/api/issues/{id}/unsubscribe/subtree"
+          }
+        }
+      ]
+    },
+    {
+      "source": "useCancelIssueRun",
+      "kind": "exact invoked client request branches reviewed by root",
+      "inventory": [
+        {
+          "id": "client:3133",
+          "method": "POST",
+          "path_expression": "/api/issues/${issueId}/tasks/${taskId}/cancel",
+          "route": {
+            "method": "POST",
+            "path": "/api/issues/{id}/tasks/{taskId}/cancel"
+          }
+        }
+      ]
+    },
+    {
+      "source": "useRetryTaskSupplement",
+      "kind": "exact invoked client request branches reviewed by root",
+      "inventory": [
+        {
+          "id": "client:3123",
+          "method": "POST",
+          "path_expression": "/api/issues/${issueId}/tasks/${taskId}/supplements/${commentId}/retry",
+          "route": {
+            "method": "POST",
+            "path": "/api/issues/{id}/tasks/{taskId}/supplements/{commentId}/retry"
+          }
+        }
+      ]
+    },
+    {
+      "source": "useRetryIssueRun",
+      "kind": "exact invoked client request branches reviewed by root",
+      "inventory": [
+        {
+          "id": "client:3144",
+          "method": "POST",
+          "path_expression": "/api/issues/${issueId}/rerun",
+          "route": {
+            "method": "POST",
+            "path": "/api/issues/{id}/rerun"
+          }
+        }
+      ]
+    },
+    {
+      "source": "query invalidation and helper calls",
+      "kind": "conservative possible query-refetch superset; excludes mutation endpoints",
+      "inventory": [
+        {
+          "id": "client:1344",
+          "method": "GET",
+          "path_expression": "/api/issues?${search}",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues"
+          }
+        },
+        {
+          "id": "client:1402",
+          "method": "POST",
+          "path_expression": "/api/issues/table/groups",
+          "route": {
+            "method": "POST",
+            "path": "/api/issues/table/groups"
+          }
+        },
+        {
+          "id": "client:1416",
+          "method": "POST",
+          "path_expression": "/api/issues/table/rows",
+          "route": {
+            "method": "POST",
+            "path": "/api/issues/table/rows"
+          }
+        },
+        {
+          "id": "client:1430",
+          "method": "POST",
+          "path_expression": "/api/issues/table/facets",
+          "route": {
+            "method": "POST",
+            "path": "/api/issues/table/facets"
+          }
+        },
+        {
+          "id": "client:1612",
+          "method": "GET",
+          "path_expression": "/api/issues/${encodeURIComponent(id)}",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}"
+          }
+        },
+        {
+          "id": "client:1680",
+          "method": "GET",
+          "path_expression": "/api/comments/${anchorCommentId}/sub-issue-preview",
+          "route": {
+            "method": "GET",
+            "path": "/api/comments/{commentId}/sub-issue-preview"
+          }
+        },
+        {
+          "id": "client:1785",
+          "method": "GET",
+          "path_expression": "/api/issues/${id}/duplicates",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}/duplicates"
+          }
+        },
+        {
+          "id": "client:1795",
+          "method": "GET",
+          "path_expression": "/api/issues/${id}/children",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}/children"
+          }
+        },
+        {
+          "id": "client:1806",
+          "method": "GET",
+          "path_expression": "/api/issues/children?parent_ids=${parentIds.join(\",\")}",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/children"
+          }
+        },
+        {
+          "id": "client:1817",
+          "method": "GET",
+          "path_expression": "/api/issues/child-progress",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/child-progress"
+          }
+        },
+        {
+          "id": "client:1861",
+          "method": "GET",
+          "path_expression": "/api/issues/${issueId}/comments${query}",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}/comments"
+          }
+        },
+        {
+          "id": "client:1890",
+          "method": "POST",
+          "path_expression": "/api/issues/${issueId}/comments/trigger-preview",
+          "route": {
+            "method": "POST",
+            "path": "/api/issues/{id}/comments/trigger-preview"
+          }
+        },
+        {
+          "id": "client:1926",
+          "method": "GET",
+          "path_expression": "/api/issues/${issueId}/timeline",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}/timeline"
+          }
+        },
+        {
+          "id": "client:1935",
+          "method": "GET",
+          "path_expression": "/api/assignee-frequency",
+          "route": {
+            "method": "GET",
+            "path": "/api/assignee-frequency"
+          }
+        },
+        {
+          "id": "client:2002",
+          "method": "GET",
+          "path_expression": "/api/issues/${issueId}/subscribers",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}/subscribers"
+          }
+        },
+        {
+          "id": "client:2066",
+          "method": "GET",
+          "path_expression": "/api/agents?${search}",
+          "route": {
+            "method": "GET",
+            "path": "/api/agents"
+          }
+        },
+        {
+          "id": "client:2070",
+          "method": "GET",
+          "path_expression": "/api/agents/${id}",
+          "route": {
+            "method": "GET",
+            "path": "/api/agents/{id}"
+          }
+        },
+        {
+          "id": "client:3028",
+          "method": "GET",
+          "path_expression": "/api/agents/${agentId}/tasks?${search}",
+          "route": {
+            "method": "GET",
+            "path": "/api/agents/{id}/tasks"
+          }
+        },
+        {
+          "id": "client:3046",
+          "method": "GET",
+          "path_expression": "/api/agent-task-snapshot",
+          "route": {
+            "method": "GET",
+            "path": "/api/agent-task-snapshot"
+          }
+        },
+        {
+          "id": "client:3079",
+          "method": "GET",
+          "path_expression": "/api/agent-activity-30d",
+          "route": {
+            "method": "GET",
+            "path": "/api/agent-activity-30d"
+          }
+        },
+        {
+          "id": "client:3087",
+          "method": "GET",
+          "path_expression": "/api/agent-run-counts",
+          "route": {
+            "method": "GET",
+            "path": "/api/agent-run-counts"
+          }
+        },
+        {
+          "id": "client:3095",
+          "method": "GET",
+          "path_expression": "/api/tasks/${taskId}/messages",
+          "route": {
+            "method": "GET",
+            "path": "/api/tasks/{taskId}/messages"
+          }
+        },
+        {
+          "id": "client:3116",
+          "method": "GET",
+          "path_expression": "/api/issues/${issueId}/task-runs${query}",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}/task-runs"
+          }
+        },
+        {
+          "id": "client:3129",
+          "method": "GET",
+          "path_expression": "/api/issues/${issueId}/usage",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}/usage"
+          }
+        },
+        {
+          "id": "client:3167",
+          "method": "GET",
+          "path_expression": "/api/issues/unread${query}",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/unread"
+          }
+        },
+        {
+          "id": "client:3178",
+          "method": "GET",
+          "path_expression": "/api/issues/subscribed",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/subscribed"
+          }
+        },
+        {
+          "id": "client:3196",
+          "method": "GET",
+          "path_expression": "/api/inbox",
+          "route": {
+            "method": "GET",
+            "path": "/api/inbox"
+          }
+        },
+        {
+          "id": "client:3232",
+          "method": "GET",
+          "path_expression": "/api/inbox/archived/page?${params}",
+          "route": {
+            "method": "GET",
+            "path": "/api/inbox/archived/page"
+          }
+        },
+        {
+          "id": "client:3241",
+          "method": "GET",
+          "path_expression": "/api/inbox/archived/facets?${this.archivedInboxParams(filters)}",
+          "route": {
+            "method": "GET",
+            "path": "/api/inbox/archived/facets"
+          }
+        },
+        {
+          "id": "client:3255",
+          "method": "GET",
+          "path_expression": "/api/inbox/snoozed",
+          "route": {
+            "method": "GET",
+            "path": "/api/inbox/snoozed"
+          }
+        },
+        {
+          "id": "client:3278",
+          "method": "GET",
+          "path_expression": "/api/inbox/unread-summary",
+          "route": {
+            "method": "GET",
+            "path": "/api/inbox/unread-summary"
+          }
+        },
+        {
+          "id": "client:3391",
+          "method": "GET",
+          "path_expression": "/api/workspaces",
+          "route": {
+            "method": "GET",
+            "path": "/api/workspaces"
+          }
+        },
+        {
+          "id": "client:3425",
+          "method": "GET",
+          "path_expression": "/api/workspaces/${workspaceId}/plugins",
+          "route": {
+            "method": "GET",
+            "path": "/api/workspaces/{id}/plugins"
+          }
+        },
+        {
+          "id": "client:3441",
+          "method": "GET",
+          "path_expression": "/api/workspaces/${workspaceId}/mcp-servers",
+          "route": {
+            "method": "GET",
+            "path": "/api/workspaces/{id}/mcp-servers"
+          }
+        },
+        {
+          "id": "client:3493",
+          "method": "GET",
+          "path_expression": "/api/agents/${agentId}/mcp-servers",
+          "route": {
+            "method": "GET",
+            "path": "/api/agents/{id}/mcp-servers"
+          }
+        },
+        {
+          "id": "client:3765",
+          "method": "GET",
+          "path_expression": "/api/workspaces/${workspaceId}/members",
+          "route": {
+            "method": "GET",
+            "path": "/api/workspaces/{id}/members"
+          }
+        },
+        {
+          "id": "client:3796",
+          "method": "GET",
+          "path_expression": "/api/workspaces/${workspaceId}/invitations",
+          "route": {
+            "method": "GET",
+            "path": "/api/workspaces/{id}/invitations"
+          }
+        },
+        {
+          "id": "client:3806",
+          "method": "GET",
+          "path_expression": "/api/invitations",
+          "route": {
+            "method": "GET",
+            "path": "/api/invitations"
+          }
+        },
+        {
+          "id": "client:3836",
+          "method": "GET",
+          "path_expression": "/api/workspaces/${workspaceId}/share-links",
+          "route": {
+            "method": "GET",
+            "path": "/api/workspaces/{id}/share-links"
+          }
+        },
+        {
+          "id": "client:3876",
+          "method": "GET",
+          "path_expression": "/api/skills",
+          "route": {
+            "method": "GET",
+            "path": "/api/skills"
+          }
+        },
+        {
+          "id": "client:3891",
+          "method": "GET",
+          "path_expression": "/api/skills/${id}",
+          "route": {
+            "method": "GET",
+            "path": "/api/skills/{id}"
+          }
+        },
+        {
+          "id": "client:3967",
+          "method": "GET",
+          "path_expression": "/api/skills/${skillId}/versions",
+          "route": {
+            "method": "GET",
+            "path": "/api/skills/{id}/versions"
+          }
+        },
+        {
+          "id": "client:3977",
+          "method": "GET",
+          "path_expression": "/api/skills/${skillId}/versions/${version}",
+          "route": {
+            "method": "GET",
+            "path": "/api/skills/{id}/versions/{version}"
+          }
+        },
+        {
+          "id": "client:4427",
+          "method": "GET",
+          "path_expression": "/api/issues/${issueId}/attachments",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}/attachments"
+          }
+        },
+        {
+          "id": "client:4517",
+          "method": "GET",
+          "path_expression": "/api/projects?${search}",
+          "route": {
+            "method": "GET",
+            "path": "/api/projects"
+          }
+        },
+        {
+          "id": "client:4524",
+          "method": "GET",
+          "path_expression": "/api/projects/${id}",
+          "route": {
+            "method": "GET",
+            "path": "/api/projects/{id}"
+          }
+        },
+        {
+          "id": "client:4561",
+          "method": "GET",
+          "path_expression": "/api/projects/${id}/members",
+          "route": {
+            "method": "GET",
+            "path": "/api/projects/{id}/members"
+          }
+        },
+        {
+          "id": "client:4569",
+          "method": "GET",
+          "path_expression": "/api/projects/${id}/subscription",
+          "route": {
+            "method": "GET",
+            "path": "/api/projects/{id}/subscription"
+          }
+        },
+        {
+          "id": "client:4602",
+          "method": "GET",
+          "path_expression": "/api/projects/private",
+          "route": {
+            "method": "GET",
+            "path": "/api/projects/private"
+          }
+        },
+        {
+          "id": "client:4692",
+          "method": "GET",
+          "path_expression": "/api/issue-workflows",
+          "route": {
+            "method": "GET",
+            "path": "/api/issue-workflows"
+          }
+        },
+        {
+          "id": "client:4821",
+          "method": "GET",
+          "path_expression": "/api/issue-statuses${query}",
+          "route": {
+            "method": "GET",
+            "path": "/api/issue-statuses"
+          }
+        },
+        {
+          "id": "client:4917",
+          "method": "GET",
+          "path_expression": "/api/quick-actions${suffix}",
+          "route": {
+            "method": "GET",
+            "path": "/api/quick-actions"
+          }
+        },
+        {
+          "id": "client:5025",
+          "method": "GET",
+          "path_expression": "/api/issues/${issueId}/labels",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}/labels"
+          }
+        },
+        {
+          "id": "client:5180",
+          "method": "GET",
+          "path_expression": "/api/pins?include=view",
+          "route": {
+            "method": "GET",
+            "path": "/api/pins"
+          }
+        },
+        {
+          "id": "client:5203",
+          "method": "GET",
+          "path_expression": "/api/squads",
+          "route": {
+            "method": "GET",
+            "path": "/api/squads"
+          }
+        },
+        {
+          "id": "client:5210",
+          "method": "GET",
+          "path_expression": "/api/squads/involved",
+          "route": {
+            "method": "GET",
+            "path": "/api/squads/involved"
+          }
+        },
+        {
+          "id": "client:5264",
+          "method": "GET",
+          "path_expression": "/api/squads/${squadId}/members/status",
+          "route": {
+            "method": "GET",
+            "path": "/api/squads/{id}/members/status"
+          }
+        },
+        {
+          "id": "client:5536",
+          "method": "GET",
+          "path_expression": "/api/issues/${issueId}/environments",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}/environments"
+          }
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "Arbitrary observer trees, injected callbacks and third-party internals excluded.",
+    "Optimistic rollback restores saved cache snapshots without transaction isolation; concurrent HTTP/WS writes can be overwritten transiently.",
+    "No runtime, network, tests, model, data or git operations performed.",
+    "Read union is a conservative superset across registered observers, not guaranteed requests or a per-hook exact trace. Shared client internals remain separately audited."
+  ],
+  "root_review": {
+    "status": "accepted_bounded_target",
+    "corrections": [
+      "Replaced range-based direct candidates with exact invoked method requests",
+      "Retained conditional getConfig for both create methods",
+      "Removed write-only endpoints from inherited refetch union",
+      "Added subscribed IDs, inbox list, snoozed and unread summary query tuples"
+    ],
+    "checks": [
+      "Read invoked ApiClient method bodies including overload implementation and dynamic keep-replies delete",
+      "Reviewed delete-comment capability branch and subscription cancel/invalidation helper",
+      "Validated all source and reused proof hashes and exact inventory tuples"
+    ],
+    "runtime_verified": false
+  }
+}

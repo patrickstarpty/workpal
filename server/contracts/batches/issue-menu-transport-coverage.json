@@ -1,0 +1,362 @@
+{
+  "version": 1,
+  "files": [
+    {
+      "path": "packages/views/issues/actions/issue-actions-menu-items.tsx",
+      "sha256": "d06938bc8aed3eea77c52a94bb54ea9eacd238de1894880a1a253a08bed6c210",
+      "whole_source": true
+    }
+  ],
+  "captured_code": [],
+  "edges": [
+    {
+      "source": "packages/core/api/client.ts:3046",
+      "inventory": [
+        {
+          "id": "client:3046",
+          "method": "GET",
+          "path_expression": "/api/agent-task-snapshot",
+          "route": {
+            "method": "GET",
+            "path": "/api/agent-task-snapshot"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/api/client.ts:3167",
+      "inventory": [
+        {
+          "id": "client:3167",
+          "method": "GET",
+          "path_expression": "/api/issues/unread${query}",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/unread"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/api/client.ts:3187",
+      "inventory": [
+        {
+          "id": "client:3187",
+          "method": "POST",
+          "path_expression": "/api/issues/${issueId}/read",
+          "route": {
+            "method": "POST",
+            "path": "/api/issues/{id}/read"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/api/client.ts:3191",
+      "inventory": [
+        {
+          "id": "client:3191",
+          "method": "POST",
+          "path_expression": "/api/issues/${issueId}/unread",
+          "route": {
+            "method": "POST",
+            "path": "/api/issues/{id}/unread"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/api/client.ts:2066",
+      "inventory": [
+        {
+          "id": "client:2066",
+          "method": "GET",
+          "path_expression": "/api/agents?${search}",
+          "route": {
+            "method": "GET",
+            "path": "/api/agents"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/api/client.ts:3425",
+      "inventory": [
+        {
+          "id": "client:3425",
+          "method": "GET",
+          "path_expression": "/api/workspaces/${workspaceId}/plugins",
+          "route": {
+            "method": "GET",
+            "path": "/api/workspaces/{id}/plugins"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/api/client.ts:3765",
+      "inventory": [
+        {
+          "id": "client:3765",
+          "method": "GET",
+          "path_expression": "/api/workspaces/${workspaceId}/members",
+          "route": {
+            "method": "GET",
+            "path": "/api/workspaces/{id}/members"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/api/client.ts:4517",
+      "inventory": [
+        {
+          "id": "client:4517",
+          "method": "GET",
+          "path_expression": "/api/projects?${search}",
+          "route": {
+            "method": "GET",
+            "path": "/api/projects"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/api/client.ts:4692",
+      "inventory": [
+        {
+          "id": "client:4692",
+          "method": "GET",
+          "path_expression": "/api/issue-workflows",
+          "route": {
+            "method": "GET",
+            "path": "/api/issue-workflows"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/api/client.ts:4917",
+      "inventory": [
+        {
+          "id": "client:4917",
+          "method": "GET",
+          "path_expression": "/api/quick-actions${suffix}",
+          "route": {
+            "method": "GET",
+            "path": "/api/quick-actions"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/api/client.ts:4960",
+      "inventory": [
+        {
+          "id": "client:4960",
+          "method": "POST",
+          "path_expression": "/api/issues/${issueId}/quick-actions/${quickActionId}/run",
+          "route": {
+            "method": "POST",
+            "path": "/api/issues/{id}/quick-actions/{quickActionId}/run"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/api/client.ts:5203",
+      "inventory": [
+        {
+          "id": "client:5203",
+          "method": "GET",
+          "path_expression": "/api/squads",
+          "route": {
+            "method": "GET",
+            "path": "/api/squads"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/api/client.ts:3116",
+      "inventory": [
+        {
+          "id": "client:3116",
+          "method": "GET",
+          "path_expression": "/api/issues/${issueId}/task-runs${query}",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}/task-runs"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/api/client.ts:4821",
+      "inventory": [
+        {
+          "id": "client:4821",
+          "method": "GET",
+          "path_expression": "/api/issue-statuses${query}",
+          "route": {
+            "method": "GET",
+            "path": "/api/issue-statuses"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/api/client.ts:1926",
+      "inventory": [
+        {
+          "id": "client:1926",
+          "method": "GET",
+          "path_expression": "/api/issues/${issueId}/timeline",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}/timeline"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/api/client.ts:1771",
+      "inventory": [
+        {
+          "id": "client:1771",
+          "method": "PUT",
+          "path_expression": "/api/issues/${id}",
+          "route": {
+            "method": "PUT",
+            "path": "/api/issues/{id}"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/views/issues/actions/use-issue-actions.ts:175",
+      "inventory": [
+        {
+          "id": "client:5180",
+          "method": "GET",
+          "path_expression": "/api/pins?include=view",
+          "route": {
+            "method": "GET",
+            "path": "/api/pins"
+          }
+        },
+        {
+          "id": "client:5184",
+          "method": "POST",
+          "path_expression": "/api/pins",
+          "route": {
+            "method": "POST",
+            "path": "/api/pins"
+          }
+        },
+        {
+          "id": "client:5191",
+          "method": "DELETE",
+          "path_expression": "/api/pins/${itemType}/${itemId}",
+          "route": {
+            "method": "DELETE",
+            "path": "/api/pins/{itemType}/{itemId}"
+          }
+        }
+      ],
+      "scope": "Concrete default actions provider pin branch; injected replacements remain outside scope."
+    }
+  ],
+  "source_disposition": [
+    "1-104: imports and injected props; no transport execution.",
+    "105-199: status handoff opens modal when changed workflow step hands off, else updateField; deletion permission; unread hooks; task query enabled !sidebar overrides factory enabled; cached workdir and identifier clipboard with error/success toasts.",
+    "200-325: full rename/create/quick actions; both variants status and priority; assignee picker delegates updateField/onClose.",
+    "326-388: full start/due today,+1,+7 and conditional null clear updates.",
+    "389-480: navigation, pin, optional locate, inbox child, sidebar read/unread, copy callbacks; sidebar stop child requires callback.",
+    "481-545: full parent/set/add/duplicate (workflow allows cancelled), plugin children and permission-disabled delete confirmation passing fallback path.",
+    "546-639: ItemLabel local presentation; SubmenuPanel minHeight and propagation except Escape/Tab; AssigneeName actor hook; active quick-action catalog and runner; StopRunItems snapshot running selection and injected onStopRun(task)."
+  ],
+  "own_hook_queries": [
+    "Deletion: memberListOptions; agentListOptions enabled role == member. Status label/catalog hooks: issueStatusListOptions(true), enabled Boolean(wsId). Workflow list enabled Boolean(wsId), project list enabled Boolean(wsId)&&Boolean(projectId).",
+    "Unread key issue-unread/wsId, enabled sidebar issue.id (full empty string). Writes POST read/unread: cancel, snapshot, optimistic cache, rollback on error, settled invalidate same key; retry failures<2 on unknown/5xx, exponential capped delay.",
+    "Task query issueTasksOptions(issue.id,false,timeline): client:3116 view=timeline, stale30000/focus true. Quick-action catalog default includeArchived=false; active filter; runner mutateAsync POST then outcome toast, invocation_not_allowed or general error toast.",
+    "Actor names: member/agent/squad queries; plugin installations enabled feature flag && wsId.length>0. Agent catalog include_archived=true/workspace_id and conditional 30s online/unstable polling. StopRunItems snapshot stale30000/gc300000/focus true, selects running issue tasks, no own cancel write."
+  ],
+  "injected_actions": "Conditional concrete useIssueActions provider: null guards; updateField run-confirm gate then surface update or useUpdateIssue (reused surface/cache/query evidence); ordinary field/removeParent writes PUT client:1771. removeParent clears parent_issue_id and stage. Rename/create/set-parent/add-child/duplicate/delete open modal only. Navigation/copy local. Pin mutations remain dependency boundary; arbitrary injected actions are not certified.",
+  "refetch_union": {
+    "quick_action_onSettled": {
+      "issueKeys.timeline(issueId)": [
+        "client:1926"
+      ],
+      "issueKeys.tasks(issueId)": [
+        "client:3116"
+      ],
+      "quickActionKeys.all(wsId)": [
+        "client:4917"
+      ]
+    },
+    "unread_onSettled": {
+      "issueUnreadKeys.all(wsId)": [
+        "client:3167"
+      ]
+    },
+    "semantics": "Active matching observer candidates only; tasks prefix includes history suffix, catalog prefix includes archived variants. No unconditional HTTP. No snapshot invalidation in runner."
+  },
+  "boundaries": [
+    "AssigneePickerPanel",
+    "InboxRestoreMenuItem",
+    "PluginHookMenuItems",
+    "PluginModalMenuItems",
+    "modal implementations",
+    "pin dependencies",
+    "injected onStopRun/onShowInSidebar",
+    "arbitrary actions implementations"
+  ],
+  "reused_evidence": [
+    "issue-action-card-transport-coverage.json",
+    "issue-surface-action-transport.json",
+    "issue-cache-transport-coverage.json",
+    "issue-query-transport-coverage.json"
+  ],
+  "validation": {
+    "inventory_sha256": "2670eec069d89d20045a5bc1043d7031f2a1460a4180a0b10256315abee03d21",
+    "exact_current_tuples": true,
+    "client_anchors_checked": true,
+    "read_chunks": [
+      [
+        1,
+        120
+      ],
+      [
+        121,
+        240
+      ],
+      [
+        241,
+        360
+      ],
+      [
+        361,
+        480
+      ],
+      [
+        481,
+        600
+      ],
+      [
+        601,
+        639
+      ]
+    ],
+    "root_review": "Full target disposition reviewed; descendants separate; no backend/global claim"
+  },
+  "root_review": {
+    "status": "accepted bounded menu source scope",
+    "pin_supplement": "Default provider togglePin checks issueId then creates/deletes issue pin. Create appends cache on success; delete snapshots/optimistically filters and restores on failure; both settle invalidate user/workspace pin list. Reorder not invoked here. Native/caller boundaries retained.",
+    "support_hashes": {
+      "packages/core/pins/queries.ts": "d2e18a90b34a4c0a4f4d4cab6df40c48b7a7573e266a2c0bad10558722e597c7",
+      "packages/core/pins/mutations.ts": "29f93bcfb957c19a8f71e194f899c08302f1c5aa967f193df4315df9ce04bbec",
+      "packages/views/issues/actions/use-issue-actions.ts": "44c9bedc3eb28eb5e6ae5545132cb950227e6f0028a7767662e794c442f2b114"
+    }
+  }
+}

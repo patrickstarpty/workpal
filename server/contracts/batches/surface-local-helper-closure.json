@@ -1,0 +1,703 @@
+{
+  "version": 1,
+  "scope": [
+    "packages/views/issues/surface/issue-surface.tsx",
+    "packages/views/issues/surface/use-issue-surface-controller.ts"
+  ],
+  "coverage": {
+    "finite_helper_effect_gap_closed": true,
+    "exact_predicate_parity": false,
+    "global_complete": false,
+    "root_review": "pending"
+  },
+  "method": "Static source reads only. Complete invoked bodies read in chunks <=100 lines; truncated aggregate portions reread. No runtime/tests/network/model/data/git operations or children.",
+  "functions": [
+    {
+      "path": "packages/core/issues/stores/filter-tree.ts",
+      "function": "export function propertyFilterField(propertyId: string): PropertyFilterField {",
+      "start": 91,
+      "end": 93,
+      "sha256": "3122cfd613792f21023ae5b3d787d53cb26344874b126866a8ad923d16c5a15c",
+      "range_sha256": "dc4fdbba8eb00128e856951b637df8c87d747fa0774335a0d5641e836281f6cb"
+    },
+    {
+      "path": "packages/core/issues/stores/filter-tree.ts",
+      "function": "export function propertyIdOfField(field: AdvancedFilterField): string | null {",
+      "start": 96,
+      "end": 98,
+      "sha256": "3122cfd613792f21023ae5b3d787d53cb26344874b126866a8ad923d16c5a15c",
+      "range_sha256": "c6df7b07727a9bf7bb73d784026d9fa15833f5df909fb1342532339ed32bb3f8"
+    },
+    {
+      "path": "packages/core/issues/stores/filter-tree.ts",
+      "function": "export function isPropertyCondition(condition: AdvancedFilterCondition): condition is PropertyFilterCondition {",
+      "start": 125,
+      "end": 127,
+      "sha256": "3122cfd613792f21023ae5b3d787d53cb26344874b126866a8ad923d16c5a15c",
+      "range_sha256": "ecafd5f312c8b9a4716343612481e06809e86a6298de815782a02c08214fdf65"
+    },
+    {
+      "path": "packages/core/issues/stores/filter-tree.ts",
+      "function": "export function createFilterCondition(",
+      "start": 172,
+      "end": 193,
+      "sha256": "3122cfd613792f21023ae5b3d787d53cb26344874b126866a8ad923d16c5a15c",
+      "range_sha256": "4d1f4034ef8368d518ef6f2d9fe0e2b2561130aa55d6e10ce852bb021573db0f"
+    },
+    {
+      "path": "packages/core/issues/stores/filter-tree.ts",
+      "function": "export function createFilterCondition(",
+      "start": 177,
+      "end": 193,
+      "sha256": "3122cfd613792f21023ae5b3d787d53cb26344874b126866a8ad923d16c5a15c",
+      "range_sha256": "cfd5fef99c1c256e32c6b207760e2bda6ca2b6c13b90343e1fe52980fa10ff63"
+    },
+    {
+      "path": "packages/core/issues/stores/filter-tree.ts",
+      "function": "export function createFilterCondition(",
+      "start": 182,
+      "end": 193,
+      "sha256": "3122cfd613792f21023ae5b3d787d53cb26344874b126866a8ad923d16c5a15c",
+      "range_sha256": "31eae0c6dddb6a6ed59886921cd7b5d236911e81434656aea754a61e411ad333"
+    },
+    {
+      "path": "packages/core/issues/stores/filter-tree.ts",
+      "function": "export function createFilterCondition(",
+      "start": 187,
+      "end": 193,
+      "sha256": "3122cfd613792f21023ae5b3d787d53cb26344874b126866a8ad923d16c5a15c",
+      "range_sha256": "9be1b0c56b14786424240d6dcb256b6f66915cbd5e8f1705742b0448ce6e1b68"
+    },
+    {
+      "path": "packages/core/issues/stores/filter-tree.ts",
+      "function": "export function createFilterGroup(",
+      "start": 195,
+      "end": 200,
+      "sha256": "3122cfd613792f21023ae5b3d787d53cb26344874b126866a8ad923d16c5a15c",
+      "range_sha256": "cb254e31f981610da8b47fda8153d6fa6fd228573e9f4224c93e0bd5617aa74e"
+    },
+    {
+      "path": "packages/core/issues/stores/filter-tree.ts",
+      "function": "function dayNumber(dateOnly: string | null | undefined): number | null {",
+      "start": 207,
+      "end": 210,
+      "sha256": "3122cfd613792f21023ae5b3d787d53cb26344874b126866a8ad923d16c5a15c",
+      "range_sha256": "e14b94bacb1972576a7623d841bf51da31675934218c2dee279300cb8c6a219c"
+    },
+    {
+      "path": "packages/core/issues/stores/filter-tree.ts",
+      "function": "export function dueDateMatches(",
+      "start": 214,
+      "end": 236,
+      "sha256": "3122cfd613792f21023ae5b3d787d53cb26344874b126866a8ad923d16c5a15c",
+      "range_sha256": "bea955422b48d4090e2ef62013dbe86e2dc4f7d50809bae4188ed2ac2d1214ef"
+    },
+    {
+      "path": "packages/core/issues/stores/filter-tree.ts",
+      "function": "export function countAdvancedConditions(group: AdvancedFilterGroup | null | undefined): number {",
+      "start": 242,
+      "end": 250,
+      "sha256": "3122cfd613792f21023ae5b3d787d53cb26344874b126866a8ad923d16c5a15c",
+      "range_sha256": "f732a736f5ac483dde9c8b7e61669f65baef1f8643a8951bd30e78968e0998e0"
+    },
+    {
+      "path": "packages/core/issues/stores/filter-tree.ts",
+      "function": "export function pruneAdvancedFilter(",
+      "start": 257,
+      "end": 271,
+      "sha256": "3122cfd613792f21023ae5b3d787d53cb26344874b126866a8ad923d16c5a15c",
+      "range_sha256": "6ffc6dfceb0c9679425a15efbd6788e310b948b724c15b3cbee50522c1ad792c"
+    },
+    {
+      "path": "packages/core/issues/stores/filter-tree.ts",
+      "function": "function knownValues(field: NegatableFilterDimension, values: string[]): string[] {",
+      "start": 275,
+      "end": 296,
+      "sha256": "3122cfd613792f21023ae5b3d787d53cb26344874b126866a8ad923d16c5a15c",
+      "range_sha256": "a8f65269f3da1d6edc9736e951a912a2aac8f3e998522d585826a9b269cc4aaa"
+    },
+    {
+      "path": "packages/core/issues/stores/filter-tree.ts",
+      "function": "function sanitizeNode(raw: unknown, depth: number): AdvancedFilterNode | null {",
+      "start": 298,
+      "end": 331,
+      "sha256": "3122cfd613792f21023ae5b3d787d53cb26344874b126866a8ad923d16c5a15c",
+      "range_sha256": "37f02d36f8c79fde4b2461ea881ab6344d3387496fe2511bdf7db692518391ae"
+    },
+    {
+      "path": "packages/core/issues/stores/filter-tree.ts",
+      "function": "export function sanitizeAdvancedFilter(raw: unknown): AdvancedFilterGroup | null {",
+      "start": 338,
+      "end": 341,
+      "sha256": "3122cfd613792f21023ae5b3d787d53cb26344874b126866a8ad923d16c5a15c",
+      "range_sha256": "511d9039914acf3ce331b27276ab69e1e001fd06f62868048c78ea099a486ee9"
+    },
+    {
+      "path": "packages/core/issues/stores/filter-tree.ts",
+      "function": "function actorValue(actor: { type: string; id: string }): string {",
+      "start": 343,
+      "end": 345,
+      "sha256": "3122cfd613792f21023ae5b3d787d53cb26344874b126866a8ad923d16c5a15c",
+      "range_sha256": "52eb66ce79d844c63b84ff2a5330c7e38ac2936216632162323576a3f6f592dd"
+    },
+    {
+      "path": "packages/core/issues/stores/filter-tree.ts",
+      "function": "function parseActorValue(value: string): { type: \"member\" | \"agent\" | \"squad\"; id: string } | null {",
+      "start": 347,
+      "end": 353,
+      "sha256": "3122cfd613792f21023ae5b3d787d53cb26344874b126866a8ad923d16c5a15c",
+      "range_sha256": "634df1cc45455ff0708725ef302dda9e3d9287239dbd3a19b5fa4cf5a514e85a"
+    },
+    {
+      "path": "packages/core/issues/stores/filter-tree.ts",
+      "function": "export function simpleFieldValues(",
+      "start": 356,
+      "end": 383,
+      "sha256": "3122cfd613792f21023ae5b3d787d53cb26344874b126866a8ad923d16c5a15c",
+      "range_sha256": "99cfc03cb76485d5ab4297077aa11050501ea00284a138cfdfd22fc75e716c9c"
+    },
+    {
+      "path": "packages/core/issues/stores/filter-tree.ts",
+      "function": "export function advancedFilterFromSimple(",
+      "start": 388,
+      "end": 402,
+      "sha256": "3122cfd613792f21023ae5b3d787d53cb26344874b126866a8ad923d16c5a15c",
+      "range_sha256": "0066b1baeccb7e98d2f5abe9864b3ac54ceb33a1d24c02135bc559c5ce891141"
+    },
+    {
+      "path": "packages/core/issues/stores/filter-tree.ts",
+      "function": "export function simpleFromAdvancedFilter(",
+      "start": 409,
+      "end": 472,
+      "sha256": "3122cfd613792f21023ae5b3d787d53cb26344874b126866a8ad923d16c5a15c",
+      "range_sha256": "bc3be1355c6c2163538b49da6308f609f73d98563a718bff7d66cdafc4dbc710"
+    },
+    {
+      "path": "packages/core/issues/stores/filter-tree.ts",
+      "function": "export function withoutAdvancedFilterConditions(",
+      "start": 475,
+      "end": 487,
+      "sha256": "3122cfd613792f21023ae5b3d787d53cb26344874b126866a8ad923d16c5a15c",
+      "range_sha256": "83c32b2054b0ea55e41d5f3d38c7bdad007d2db8fdb2d70bf65d89f2b02bfd78"
+    },
+    {
+      "path": "packages/core/issues/stores/filter-tree.ts",
+      "function": "export function withoutAdvancedFilterFields(",
+      "start": 491,
+      "end": 499,
+      "sha256": "3122cfd613792f21023ae5b3d787d53cb26344874b126866a8ad923d16c5a15c",
+      "range_sha256": "3c1b63149c4e6dd7bea6a081d15860101faec39e20ab60a7496c05fd62e4e6e9"
+    },
+    {
+      "path": "packages/core/issues/stores/filter-tree.ts",
+      "function": "export function foldPropertyFiltersIntoTree(",
+      "start": 506,
+      "end": 518,
+      "sha256": "3122cfd613792f21023ae5b3d787d53cb26344874b126866a8ad923d16c5a15c",
+      "range_sha256": "5efccf07fd282ab8e560dc15d3511bf3e9a8e3350981baf85b81d4fc55a9218b"
+    },
+    {
+      "path": "packages/core/issues/stores/filter-tree.ts",
+      "function": "export function editAdvancedFilter(",
+      "start": 525,
+      "end": 541,
+      "sha256": "3122cfd613792f21023ae5b3d787d53cb26344874b126866a8ad923d16c5a15c",
+      "range_sha256": "5d95607617e601d39d5f45a3e6cdb71c5348de2cfc2d988df96ad786faf7922f"
+    },
+    {
+      "path": "packages/core/issues/stores/filter-tree.ts",
+      "function": "export function advancedFilterConditionSlots(group: AdvancedFilterGroup | null | undefined): number {",
+      "start": 545,
+      "end": 551,
+      "sha256": "3122cfd613792f21023ae5b3d787d53cb26344874b126866a8ad923d16c5a15c",
+      "range_sha256": "84cdd96962723fef001e6265331e9688fa2e5c799901e2a701d7781cb8661606"
+    },
+    {
+      "path": "packages/core/issues/stores/filter-tree.ts",
+      "function": "export function advancedFilterUsesField(",
+      "start": 557,
+      "end": 565,
+      "sha256": "3122cfd613792f21023ae5b3d787d53cb26344874b126866a8ad923d16c5a15c",
+      "range_sha256": "600f1a4e038df6e3849b30850aef014d9db0b99e50995f203b6fa0998e83be1f"
+    },
+    {
+      "path": "packages/core/issues/stores/filter-tree.ts",
+      "function": "export function advancedFilterUsesValue(",
+      "start": 568,
+      "end": 579,
+      "sha256": "3122cfd613792f21023ae5b3d787d53cb26344874b126866a8ad923d16c5a15c",
+      "range_sha256": "4f7d68524afb892e71e4d196cc7bc80955946a34e72c2588d85c1c783da86c63"
+    },
+    {
+      "path": "packages/core/issues/stores/filter-tree.ts",
+      "function": "export function advancedFilterToTableQuery(",
+      "start": 582,
+      "end": 596,
+      "sha256": "3122cfd613792f21023ae5b3d787d53cb26344874b126866a8ad923d16c5a15c",
+      "range_sha256": "66c73547f9d70aeb55ca9098b7a168418e6ea3e00c0079477a80f437c7e0021d"
+    },
+    {
+      "path": "packages/core/issues/stores/filter-tree.ts",
+      "function": "export function statusColumnFilter<S extends string>(",
+      "start": 613,
+      "end": 644,
+      "sha256": "3122cfd613792f21023ae5b3d787d53cb26344874b126866a8ad923d16c5a15c",
+      "range_sha256": "2121ba660291a3bcf232dada17c856d7d2614ef6f1b7ffd767ac3661fc4c913d"
+    },
+    {
+      "path": "packages/core/issues/stores/filter-tree.ts",
+      "function": "export function advancedFilterSignature(group: AdvancedFilterGroup | null | undefined): string {",
+      "start": 647,
+      "end": 655,
+      "sha256": "3122cfd613792f21023ae5b3d787d53cb26344874b126866a8ad923d16c5a15c",
+      "range_sha256": "dc0509d12e80ab4b7c3c1f84ba62ffd879fffd383cf54fa0c78573e1c85bc0c9"
+    },
+    {
+      "path": "packages/core/issue-views/definition.ts",
+      "function": "export function issueViewDefinitionFromState(state: IssueViewState): IssueViewDefinition {",
+      "start": 26,
+      "end": 64,
+      "sha256": "54f4c8327446aaddad4bedc12d58ae37ce02494813acfaf6e80d4e00e2be05e9",
+      "range_sha256": "57df43f97a7d166c9e97e581b4e3cdaf04ee50c6f6fe630c9cb01d2db73c7285"
+    },
+    {
+      "path": "packages/core/issue-views/definition.ts",
+      "function": "export function issueViewSeedDefinition(",
+      "start": 70,
+      "end": 77,
+      "sha256": "54f4c8327446aaddad4bedc12d58ae37ce02494813acfaf6e80d4e00e2be05e9",
+      "range_sha256": "21424df4a6ce45ca14fd3ab1e5c2bd3be3cb428c0f7734cc4497fb18b203e176"
+    },
+    {
+      "path": "packages/core/issue-views/definition.ts",
+      "function": "function stableStringify(value: unknown): string {",
+      "start": 79,
+      "end": 85,
+      "sha256": "54f4c8327446aaddad4bedc12d58ae37ce02494813acfaf6e80d4e00e2be05e9",
+      "range_sha256": "922f03b40d04b0339d4b3f1c0faa7fb63f0d5650668ca388145c8a99a30c94f7"
+    },
+    {
+      "path": "packages/core/issue-views/definition.ts",
+      "function": "function filterMeaning(query: Record<string, unknown>): Record<string, unknown> {",
+      "start": 105,
+      "end": 118,
+      "sha256": "54f4c8327446aaddad4bedc12d58ae37ce02494813acfaf6e80d4e00e2be05e9",
+      "range_sha256": "07d2d2ec3192cec39d3f1ba4c35fc8da64802113c4ea7299399deb8c8ef2b196"
+    },
+    {
+      "path": "packages/core/issue-views/definition.ts",
+      "function": "export function sameFilterMeaning(",
+      "start": 121,
+      "end": 126,
+      "sha256": "54f4c8327446aaddad4bedc12d58ae37ce02494813acfaf6e80d4e00e2be05e9",
+      "range_sha256": "dc57cd7a164b3020b128c2ca8c32cc354603d881a76d89a2f5b7639c090e3671"
+    },
+    {
+      "path": "packages/core/issue-views/definition.ts",
+      "function": "export function modifiedFilterDimensions(",
+      "start": 132,
+      "end": 159,
+      "sha256": "54f4c8327446aaddad4bedc12d58ae37ce02494813acfaf6e80d4e00e2be05e9",
+      "range_sha256": "17684cc083d8ddd16dc75761ffe5421b4f00292142e3bee626b254f6f13ec3e5"
+    },
+    {
+      "path": "packages/core/issue-views/definition.ts",
+      "function": "export function isIssueViewUndefined(",
+      "start": 166,
+      "end": 176,
+      "sha256": "54f4c8327446aaddad4bedc12d58ae37ce02494813acfaf6e80d4e00e2be05e9",
+      "range_sha256": "68f7d5e29d155f9bdca714cb9d87b9728a889d4f2c8e28a6cf19414e5bb2e22a"
+    },
+    {
+      "path": "packages/core/issue-views/definition.ts",
+      "function": "export function isIssueViewModified(",
+      "start": 179,
+      "end": 189,
+      "sha256": "54f4c8327446aaddad4bedc12d58ae37ce02494813acfaf6e80d4e00e2be05e9",
+      "range_sha256": "ee477ef557fb1f45914aaac108343747d5bad2e7248a5397f34fc86728ff9e35"
+    },
+    {
+      "path": "packages/core/issue-views/builtin-issue-views.ts",
+      "function": "function builtinView(key: FilteredBuiltinViewKey): IssueView {",
+      "start": 20,
+      "end": 37,
+      "sha256": "9315e3457081befbb698bc4dcbd21e6e53a611de2e4a2049bc56ba95bb25969c",
+      "range_sha256": "91c58be1b8695a6627be354542ba06bd9971bc7e97206b2a018366333f6d20a1"
+    },
+    {
+      "path": "packages/core/issue-views/builtin-issue-views.ts",
+      "function": "export function isFilteredBuiltinViewKey(id: string | null | undefined): id is FilteredBuiltinViewKey {",
+      "start": 55,
+      "end": 57,
+      "sha256": "9315e3457081befbb698bc4dcbd21e6e53a611de2e4a2049bc56ba95bb25969c",
+      "range_sha256": "3ad5d29ec4477b7b1a52f398f234a5305062d3aac914579d3989e514f6f5242b"
+    },
+    {
+      "path": "packages/core/issue-views/builtin-issue-views.ts",
+      "function": "export function filteredBuiltinView(id: string | null | undefined): IssueView | null {",
+      "start": 60,
+      "end": 62,
+      "sha256": "9315e3457081befbb698bc4dcbd21e6e53a611de2e4a2049bc56ba95bb25969c",
+      "range_sha256": "6c16f3edaf6ef2790d4e9c591899d8ef33d8867b2251f44de151dc858f6c1ba8"
+    },
+    {
+      "path": "packages/core/issue-views/builtin-issue-views.ts",
+      "function": "export function filteredBuiltinBaseline(view: Pick<IssueView, \"id\"> | null | undefined): IssueViewBaseline | null {",
+      "start": 64,
+      "end": 66,
+      "sha256": "9315e3457081befbb698bc4dcbd21e6e53a611de2e4a2049bc56ba95bb25969c",
+      "range_sha256": "555aa9c01a5de6a03452f688e9c5979e89b425c7d7afff14d846c4315f516423"
+    },
+    {
+      "path": "packages/core/issue-views/baseline.ts",
+      "function": "export function actorFilterKey(actor: ActorFilterValue): string {",
+      "start": 52,
+      "end": 54,
+      "sha256": "940fe37aff85249b8534c59f75d5a4227e340fa877f74b127717b69acd090bcc",
+      "range_sha256": "492c4f043080f7d1fd4bd3d2395a7e23dc8f52dd70513ebab6480a1a5f99f882"
+    },
+    {
+      "path": "packages/core/issue-views/baseline.ts",
+      "function": "function stringArray(v: unknown): string[] {",
+      "start": 56,
+      "end": 58,
+      "sha256": "940fe37aff85249b8534c59f75d5a4227e340fa877f74b127717b69acd090bcc",
+      "range_sha256": "7fb541e982e16fb9f896ac42890c663056dd37f7fa8878a16c96118a04bccf03"
+    },
+    {
+      "path": "packages/core/issue-views/baseline.ts",
+      "function": "function propertyFilterValueArray(v: unknown): PropertyFilterValue[] {",
+      "start": 67,
+      "end": 74,
+      "sha256": "940fe37aff85249b8534c59f75d5a4227e340fa877f74b127717b69acd090bcc",
+      "range_sha256": "5472d7707ba0b7737b3f6e5042515ae80ec8d77c16824348d188abc7f18c9ef8"
+    },
+    {
+      "path": "packages/core/issue-views/baseline.ts",
+      "function": "function actorArray(v: unknown): ActorFilterValue[] {",
+      "start": 76,
+      "end": 82,
+      "sha256": "940fe37aff85249b8534c59f75d5a4227e340fa877f74b127717b69acd090bcc",
+      "range_sha256": "9acd56092fd06c5d18856017410d7024796cd3a3808abbe433fb2aa579c288bf"
+    },
+    {
+      "path": "packages/core/issue-views/baseline.ts",
+      "function": "export function baselineFromQuery(query: Record<string, unknown>): IssueViewBaseline {",
+      "start": 84,
+      "end": 184,
+      "sha256": "940fe37aff85249b8534c59f75d5a4227e340fa877f74b127717b69acd090bcc",
+      "range_sha256": "8516c4ec3a6f79d98104630b48d3292e35e6ef9e97ddd127a2861dc073c04830"
+    },
+    {
+      "path": "packages/core/issue-views/baseline.ts",
+      "function": "export function issueViewFilterCount(query: Record<string, unknown>): number {",
+      "start": 187,
+      "end": 207,
+      "sha256": "940fe37aff85249b8534c59f75d5a4227e340fa877f74b127717b69acd090bcc",
+      "range_sha256": "a953c3e308ca3da51adb05c9467c5ded953cfb5e13e46ea13a9b1663e09bc517"
+    },
+    {
+      "path": "packages/core/issues/date.ts",
+      "function": "function pad(n: number): string {",
+      "start": 13,
+      "end": 15,
+      "sha256": "ae1e45adee2f1fc338933bc9eb4e5e35576e028657bfa46753629e436f9ed0b6",
+      "range_sha256": "e0f7640ec75605374afe1b014200dac7846af023cab909a370d8913bb1dc63fb"
+    },
+    {
+      "path": "packages/core/issues/date.ts",
+      "function": "export function toDateOnly(date: Date): string {",
+      "start": 22,
+      "end": 24,
+      "sha256": "ae1e45adee2f1fc338933bc9eb4e5e35576e028657bfa46753629e436f9ed0b6",
+      "range_sha256": "b68ca3390a1a31ed111e9b564eab3ae6053c2b0e3db18bb377d487476ca4feaf"
+    },
+    {
+      "path": "packages/core/issues/date.ts",
+      "function": "export function todayDateOnly(): string {",
+      "start": 27,
+      "end": 29,
+      "sha256": "ae1e45adee2f1fc338933bc9eb4e5e35576e028657bfa46753629e436f9ed0b6",
+      "range_sha256": "2cc97d5b0571268f614d63d67d6da4ca6a1a1889fc5d0557027b49dafeb09fb4"
+    },
+    {
+      "path": "packages/core/issues/date.ts",
+      "function": "export function addDaysDateOnly(days: number): string {",
+      "start": 32,
+      "end": 36,
+      "sha256": "ae1e45adee2f1fc338933bc9eb4e5e35576e028657bfa46753629e436f9ed0b6",
+      "range_sha256": "829ef45bf0799e823c9678b2cc93724afaa8d6d2ba62d3c762af5aa506c908a9"
+    },
+    {
+      "path": "packages/core/issues/date.ts",
+      "function": "function parseParts(value: string): [number, number, number] | null {",
+      "start": 42,
+      "end": 48,
+      "sha256": "ae1e45adee2f1fc338933bc9eb4e5e35576e028657bfa46753629e436f9ed0b6",
+      "range_sha256": "789da536418c17dd868a616e0409fe531e8e605576ff4c3bec3f393cbdb8c166"
+    },
+    {
+      "path": "packages/core/issues/date.ts",
+      "function": "export function dateOnlyToUTCDate(",
+      "start": 55,
+      "end": 62,
+      "sha256": "ae1e45adee2f1fc338933bc9eb4e5e35576e028657bfa46753629e436f9ed0b6",
+      "range_sha256": "a6f30efd6ab3d91743e71f6b2693bb6de9cc407eb2d7678cb31830f4a7675658"
+    },
+    {
+      "path": "packages/core/issues/date.ts",
+      "function": "export function dateOnlyToLocalDate(",
+      "start": 68,
+      "end": 75,
+      "sha256": "ae1e45adee2f1fc338933bc9eb4e5e35576e028657bfa46753629e436f9ed0b6",
+      "range_sha256": "59396685069eff2e24f1e964d0bdeb83e9a5ea043df2b0f68617c2d7feaf2837"
+    },
+    {
+      "path": "packages/core/issues/date.ts",
+      "function": "export function formatDateOnly(",
+      "start": 81,
+      "end": 89,
+      "sha256": "ae1e45adee2f1fc338933bc9eb4e5e35576e028657bfa46753629e436f9ed0b6",
+      "range_sha256": "dd858b89db76f5aaad6f36d00e4fa4037ce07c4717b8d553c6439eb7829696b6"
+    },
+    {
+      "path": "packages/core/issues/date.ts",
+      "function": "export function isPastDateOnly(value: string | null | undefined): boolean {",
+      "start": 92,
+      "end": 97,
+      "sha256": "ae1e45adee2f1fc338933bc9eb4e5e35576e028657bfa46753629e436f9ed0b6",
+      "range_sha256": "18c2e1042490609ffd60e2af78622e9af388c9ffd432b91fb26e3577ef85691f"
+    },
+    {
+      "path": "packages/views/issues/surface/activity.ts",
+      "function": "function isQueuedTaskStatus(status: AgentTask[\"status\"], wakeupId?: string) {",
+      "start": 21,
+      "end": 27,
+      "sha256": "b9cc175d1eabeb617685c841589ed33db8911a4d03da9a3c9dc58836c4f586bc",
+      "range_sha256": "eb7ecc27d4a7e2f0f6f01396cc36ec7b01334b2a0ec80459070c5e495a24ca3e"
+    },
+    {
+      "path": "packages/views/issues/surface/activity.ts",
+      "function": "export function selectIssueTasks(",
+      "start": 43,
+      "end": 55,
+      "sha256": "b9cc175d1eabeb617685c841589ed33db8911a4d03da9a3c9dc58836c4f586bc",
+      "range_sha256": "9ee82efb4d15fc9f742538652e6bd47eb87b4a3eb7304323f4a0c8ba78978382"
+    },
+    {
+      "path": "packages/views/issues/surface/activity.ts",
+      "function": "export function deriveIssueSurfaceActivity(",
+      "start": 57,
+      "end": 93,
+      "sha256": "b9cc175d1eabeb617685c841589ed33db8911a4d03da9a3c9dc58836c4f586bc",
+      "range_sha256": "0be40e233a86fef0eadb10a1b0a0cdaa91e7c5540f03abe28978cd92077bf053"
+    },
+    {
+      "path": "packages/views/issues/surface/activity.ts",
+      "function": "export function useIssueSurfaceActivity(): IssueSurfaceActivity {",
+      "start": 95,
+      "end": 99,
+      "sha256": "b9cc175d1eabeb617685c841589ed33db8911a4d03da9a3c9dc58836c4f586bc",
+      "range_sha256": "ef19994ac8cbf0b4fc33a8011b6bfd0c88d8366e7fe576ed530c3511975f2090"
+    },
+    {
+      "path": "packages/core/issues/stores/view-store.ts",
+      "function": "filterDimensionHasSelection",
+      "start": 177,
+      "end": 201,
+      "sha256": "69d8fb7c61c9dde00b58d579e9eeb7cf8ff3f526043f2e2aadf7ac3981c92285",
+      "range_sha256": "5c6292a3840fc9620a10812db6b5986754097795aa020757558bd3f37a76c931"
+    },
+    {
+      "path": "packages/core/issues/stores/view-store.ts",
+      "function": "effectiveNegatedFilters",
+      "start": 207,
+      "end": 214,
+      "sha256": "69d8fb7c61c9dde00b58d579e9eeb7cf8ff3f526043f2e2aadf7ac3981c92285",
+      "range_sha256": "b566c0f7e11c630d36ea0f76618581b37e64ebb22b46e7862fecf860183b77d4"
+    },
+    {
+      "path": "packages/core/issues/stores/view-store.ts",
+      "function": "normalizeSortForGrouping",
+      "start": 300,
+      "end": 308,
+      "sha256": "69d8fb7c61c9dde00b58d579e9eeb7cf8ff3f526043f2e2aadf7ac3981c92285",
+      "range_sha256": "c8584d860b62dc9f4d3782c95e6ef53de2f17df9782ab9cbc780f4ae68530654"
+    },
+    {
+      "path": "packages/core/issues/stores/view-store.ts",
+      "function": "partialize",
+      "start": 820,
+      "end": 861,
+      "sha256": "69d8fb7c61c9dde00b58d579e9eeb7cf8ff3f526043f2e2aadf7ac3981c92285",
+      "range_sha256": "bdcd2e8468b924386f5509fb19e1bfd4dc7f69a81bf6bdb4b5fc0dddbbf2bf74"
+    },
+    {
+      "path": "packages/core/issues/stores/view-store.ts",
+      "function": "mergeViewStatePersisted",
+      "start": 875,
+      "end": 1004,
+      "sha256": "69d8fb7c61c9dde00b58d579e9eeb7cf8ff3f526043f2e2aadf7ac3981c92285",
+      "range_sha256": "3a4f4deee35ec4a8834b0f1ebb5f05dce4b4e25b174078536367a71ad6dfb21a"
+    },
+    {
+      "path": "packages/core/utils.ts",
+      "function": "generateUUID",
+      "start": 1,
+      "end": 17,
+      "sha256": "8f97765f4d7c91a4bcfc14f6ccbae895e98e79397a7dd019ff8de6e1a3c0c1e4",
+      "range_sha256": "74bc07f013bb1e045652211614b7df053f7565938af1c168fede90e3af10c9c5"
+    },
+    {
+      "path": "packages/core/utils.ts",
+      "function": "createSafeId",
+      "start": 22,
+      "end": 34,
+      "sha256": "8f97765f4d7c91a4bcfc14f6ccbae895e98e79397a7dd019ff8de6e1a3c0c1e4",
+      "range_sha256": "fbbda3ffe49543ba061ed815ea23c9c1343290cdacbab8794d56fd2158826d5d"
+    },
+    {
+      "path": "packages/core/types/property.ts",
+      "function": "isKnownPropertyFilterOp",
+      "start": 246,
+      "end": 248,
+      "sha256": "ec3c18bcb9a327aa4c4c6f057bdb5ad8db32b1c678ceabb65adbb1d8e91bf673",
+      "range_sha256": "f39135897ac6c08d6546e16ebacb1b90c4732152c3b376ef4dec64136ecfee94"
+    },
+    {
+      "path": "packages/core/types/property.ts",
+      "function": "propertyFilterValueKey",
+      "start": 265,
+      "end": 267,
+      "sha256": "ec3c18bcb9a327aa4c4c6f057bdb5ad8db32b1c678ceabb65adbb1d8e91bf673",
+      "range_sha256": "6e3d764c2c390ee320477f0eff5287ab83bdd930fe8193bcecfabcb3b3c74378"
+    },
+    {
+      "path": "packages/core/types/property.ts",
+      "function": "isPropertyOperatorFilter",
+      "start": 269,
+      "end": 277,
+      "sha256": "ec3c18bcb9a327aa4c4c6f057bdb5ad8db32b1c678ceabb65adbb1d8e91bf673",
+      "range_sha256": "be98be3a29c418a1ef7048a1fcc490342186b32e7a08a06b270f4a9172adeaf6"
+    }
+  ],
+  "reused_support": {
+    "artifact": "server/contracts/batches/swimlane-transport-coverage.json",
+    "sha256": "264a0121aaff48a407e709bb10b16a6c6c336f34d7b348572821133aa6811d12",
+    "source_hash_checks": [
+      {
+        "path": "packages/views/issues/utils/filter.ts",
+        "sha256": "744d6902a50173c9847be00d1cf31d9afd092392b5e35680c45ace23ce622caa",
+        "whole_source": false,
+        "matches": true
+      },
+      {
+        "path": "packages/views/issues/utils/sort.ts",
+        "sha256": "70050e94c43dc1b36429d89efe6d9be6e90881a7ac6f33209d7075a2b9500326",
+        "whole_source": false,
+        "matches": true
+      },
+      {
+        "path": "packages/core/issues/stores/view-store.ts",
+        "sha256": "69d8fb7c61c9dde00b58d579e9eeb7cf8ff3f526043f2e2aadf7ac3981c92285",
+        "whole_source": false,
+        "matches": true
+      },
+      {
+        "path": "packages/core/issues/stores/filter-tree.ts",
+        "sha256": "3122cfd613792f21023ae5b3d787d53cb26344874b126866a8ad923d16c5a15c",
+        "whole_source": false,
+        "matches": true
+      },
+      {
+        "path": "packages/core/issues/date.ts",
+        "sha256": "ae1e45adee2f1fc338933bc9eb4e5e35576e028657bfa46753629e436f9ed0b6",
+        "whole_source": false,
+        "matches": true
+      },
+      {
+        "path": "packages/core/workspace/hooks.ts",
+        "sha256": "7531c31b1caa51b0254eff7738c3ed14cd831a467c311d9aa8cce3ddff2964d3",
+        "whole_source": false,
+        "matches": true
+      }
+    ],
+    "disposition": "Reuse accepted applyIssueFilters, sort and store support; no new request."
+  },
+  "caller_edges": [
+    "IssueSurface -> filteredBuiltinBaseline -> isFilteredBuiltinViewKey / module BASELINES -> baselineFromQuery -> sanitizer and property value guards/keys",
+    "IssueSurface -> issueViewDefinitionFromState -> effectiveNegatedFilters / pruneAdvancedFilter; issueViewSeedDefinition -> vanilla createStore(viewStoreSlice).getState -> mergeViewStatePersisted -> sanitizeAdvancedFilter / foldPropertyFiltersIntoTree / normalizeSortForGrouping",
+    "sameFilterMeaning -> stableStringify / filterMeaning -> sanitizeAdvancedFilter / simpleFromAdvancedFilter / filterDimensionHasSelection / advancedFilterSignature",
+    "controller -> withoutAdvancedFilterConditions -> recursive strip / pruneAdvancedFilter; statusColumnFilter -> prune / local visit; advancedFilterToTableQuery -> prune / local convert / isPropertyCondition; advancedFilterUsesField / advancedFilterUsesValue recurse over supplied tree",
+    "controller -> dateOnlyToLocalDate -> parseParts; todayDateOnly -> toDateOnly -> pad",
+    "controller -> deriveIssueSurfaceActivity -> isQueuedTaskStatus; useIssueSurfaceActivity is NOT invoked by this controller",
+    "surface registry -> persist options partialize; merge -> local statusesFromStorage/isRecord and sanitizer; store setters -> normalizeSortForGrouping"
+  ],
+  "dispositions": {
+    "transformation": "Filter tree, definitions, builtin baseline, date parsing, activity derivation, partialize and merge operate on supplied/local values. No API, fetch, storage or subscription calls in these bodies. Local arrays/maps/sets may be mutated during construction.",
+    "host_reads": "todayDateOnly reads Date clock. createFilterCondition/createFilterGroup and sanitizeNode missing-id path call createSafeId -> crypto.randomUUID, fallback generateUUID -> crypto.getRandomValues, throwing if unavailable. Value construction with entropy is not deterministic pure math; no transport or persistence.",
+    "local_persistence": "partialize only selects fields, omitting dateFilter. Actual localStorage writes and workspace rehydration remain in accepted surface-view-store/workspace-storage proof. createStore(viewStoreSlice) in seed definition is ephemeral and has no persist middleware.",
+    "subscription": "No new subscription in audited value helpers. Existing surface store.subscribe and auth/workspace selectors remain parent proof boundaries.",
+    "transport": "No new frontend-calls tuple introduced. Parent corrected subscription client:3178, working client:3071 plus snapshot client:3046, unread client:3167 and status client:4821 remain authoritative; imported activity hook does not imply invocation."
+  },
+  "boundaries": [
+    "Third-party React/Zustand/TanStack implementations; native Date/JSON/crypto and collections terminate traversal.",
+    "Caller callbacks and arbitrary component trees excluded. Exact predicate parity is separate from side-effect closure."
+  ],
+  "root_review": {
+    "status": "accepted_bounded_helper_effects",
+    "checks": [
+      "71 current function file/range hashes and six reused support hashes validated",
+      "Independent saved-view ephemeral default-store construction read",
+      "Auth/workspace/view/i18n accessors read directly; missing prior proof reference superseded"
+    ],
+    "runtime_verified": false
+  },
+  "root_adapter_review": {
+    "status": "direct_scoped_source_review_replaces_missing_prior_hash_reference",
+    "sources": [
+      {
+        "path": "packages/core/hooks.tsx",
+        "sha256": "2efe17614e9f6dbd23753b77475e5fe63b0d024209363e0d84ed64a73c611c3b",
+        "whole_source": false
+      },
+      {
+        "path": "packages/core/paths/hooks.tsx",
+        "sha256": "b10176beb112541c91a92551ddc5e1db6e07afa5f66a0221f934fda59ca750a5",
+        "whole_source": false
+      },
+      {
+        "path": "packages/core/workspace/queries.ts",
+        "sha256": "1b16ae9e020e75a5a92cebc5270a14c58d97f6b7b0fe033d2f1d2c2d837d093a",
+        "whole_source": false
+      },
+      {
+        "path": "packages/core/auth/index.ts",
+        "sha256": "d58b7c88eb046c4a8f85a304e53df1e772accc6b8b5962e1d9cd82e8d17daffe",
+        "whole_source": false
+      },
+      {
+        "path": "packages/core/issues/stores/view-store-context.tsx",
+        "sha256": "218902be9bfd0e471c5756158a9d50cd5f90ab126ddde22cf83b5f4e0ec19a59",
+        "whole_source": false
+      },
+      {
+        "path": "packages/views/i18n/use-t.ts",
+        "sha256": "d3b2178fe8e2005915ba2e465cdaeffa889c129dcbb5042404f80363420ec7ae",
+        "whole_source": false
+      },
+      {
+        "path": "packages/views/i18n/resources-types.ts",
+        "sha256": "cbecab44b0a9909ae80d3b92ee8ee17380a6e936963c65aa66f7d6186585328d",
+        "whole_source": false
+      }
+    ],
+    "effects": [
+      "Auth proxy invokes registered store selector; no network in accessor",
+      "Workspace accessor invokes workspaceListOptions before checking slug; GET /api/workspaces remains possible",
+      "View store context selects registered store or throws",
+      "useT aliases third-party useTranslation; resources-types contains type augmentation and third-party imports, not an application HTTP adapter"
+    ],
+    "limits": "Configured providers and third-party internals remain bounded; no whole-adapter claim."
+  }
+}

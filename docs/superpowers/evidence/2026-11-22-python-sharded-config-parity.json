@@ -1,0 +1,5178 @@
+{
+  "scope": "Original Go sharded config Normalized/Validate/RetentionConfig, duration text and FNV32a scope+NUL+ID hashing. Includes signed-duration overflow and uint32 shard divisor cast. No stream IO/lifecycle certification.",
+  "fixtures": [
+    {
+      "Config": {
+        "Shards": 0,
+        "StreamMaxLen": 0,
+        "ReadCount": 0,
+        "ReadBlock": 0,
+        "ReplayGrace": 0,
+        "TrimHorizon": 0,
+        "StreamTTL": 0,
+        "TTLRefreshInterval": 0,
+        "MaintenanceInterval": 0,
+        "StreamTTLEnabled": false
+      },
+      "Keys": [
+        {
+          "Scope": "d29ya3NwYWNl",
+          "ID": "dw=="
+        },
+        {
+          "Scope": "YWI=",
+          "ID": "Yw=="
+        },
+        {
+          "Scope": "YQ==",
+          "ID": "YmM="
+        },
+        {
+          "Scope": "5Lit5paH",
+          "ID": "aWQ="
+        },
+        {
+          "Scope": "c2NvcGU=",
+          "ID": "/w=="
+        },
+        {
+          "Scope": "",
+          "ID": ""
+        }
+      ]
+    },
+    {
+      "Config": {
+        "Shards": 8,
+        "StreamMaxLen": 2000,
+        "ReadCount": 128,
+        "ReadBlock": 5000000000,
+        "ReplayGrace": 300000000000,
+        "TrimHorizon": 600000000000,
+        "StreamTTL": 900000000000,
+        "TTLRefreshInterval": 30000000000,
+        "MaintenanceInterval": 60000000000,
+        "StreamTTLEnabled": false
+      },
+      "Keys": [
+        {
+          "Scope": "d29ya3NwYWNl",
+          "ID": "dw=="
+        },
+        {
+          "Scope": "YWI=",
+          "ID": "Yw=="
+        },
+        {
+          "Scope": "YQ==",
+          "ID": "YmM="
+        },
+        {
+          "Scope": "5Lit5paH",
+          "ID": "aWQ="
+        },
+        {
+          "Scope": "c2NvcGU=",
+          "ID": "/w=="
+        },
+        {
+          "Scope": "",
+          "ID": ""
+        }
+      ]
+    },
+    {
+      "Config": {
+        "Shards": 0,
+        "StreamMaxLen": 0,
+        "ReadCount": 0,
+        "ReadBlock": 0,
+        "ReplayGrace": 3,
+        "TrimHorizon": 3,
+        "StreamTTL": 2,
+        "TTLRefreshInterval": 0,
+        "MaintenanceInterval": 0,
+        "StreamTTLEnabled": false
+      },
+      "Keys": [
+        {
+          "Scope": "d29ya3NwYWNl",
+          "ID": "dw=="
+        },
+        {
+          "Scope": "YWI=",
+          "ID": "Yw=="
+        },
+        {
+          "Scope": "YQ==",
+          "ID": "YmM="
+        },
+        {
+          "Scope": "5Lit5paH",
+          "ID": "aWQ="
+        },
+        {
+          "Scope": "c2NvcGU=",
+          "ID": "/w=="
+        },
+        {
+          "Scope": "",
+          "ID": ""
+        }
+      ]
+    },
+    {
+      "Config": {
+        "Shards": 0,
+        "StreamMaxLen": 0,
+        "ReadCount": 0,
+        "ReadBlock": 0,
+        "ReplayGrace": 4611686018427387904,
+        "TrimHorizon": 0,
+        "StreamTTL": 0,
+        "TTLRefreshInterval": 0,
+        "MaintenanceInterval": 0,
+        "StreamTTLEnabled": false
+      },
+      "Keys": [
+        {
+          "Scope": "d29ya3NwYWNl",
+          "ID": "dw=="
+        },
+        {
+          "Scope": "YWI=",
+          "ID": "Yw=="
+        },
+        {
+          "Scope": "YQ==",
+          "ID": "YmM="
+        },
+        {
+          "Scope": "5Lit5paH",
+          "ID": "aWQ="
+        },
+        {
+          "Scope": "c2NvcGU=",
+          "ID": "/w=="
+        },
+        {
+          "Scope": "",
+          "ID": ""
+        }
+      ]
+    },
+    {
+      "Config": {
+        "Shards": 0,
+        "StreamMaxLen": 0,
+        "ReadCount": 0,
+        "ReadBlock": 0,
+        "ReplayGrace": 9223372036854775807,
+        "TrimHorizon": 0,
+        "StreamTTL": 0,
+        "TTLRefreshInterval": 0,
+        "MaintenanceInterval": 0,
+        "StreamTTLEnabled": false
+      },
+      "Keys": [
+        {
+          "Scope": "d29ya3NwYWNl",
+          "ID": "dw=="
+        },
+        {
+          "Scope": "YWI=",
+          "ID": "Yw=="
+        },
+        {
+          "Scope": "YQ==",
+          "ID": "YmM="
+        },
+        {
+          "Scope": "5Lit5paH",
+          "ID": "aWQ="
+        },
+        {
+          "Scope": "c2NvcGU=",
+          "ID": "/w=="
+        },
+        {
+          "Scope": "",
+          "ID": ""
+        }
+      ]
+    },
+    {
+      "Config": {
+        "Shards": 4294967297,
+        "StreamMaxLen": 0,
+        "ReadCount": 0,
+        "ReadBlock": 0,
+        "ReplayGrace": 0,
+        "TrimHorizon": 0,
+        "StreamTTL": 0,
+        "TTLRefreshInterval": 0,
+        "MaintenanceInterval": 0,
+        "StreamTTLEnabled": false
+      },
+      "Keys": [
+        {
+          "Scope": "d29ya3NwYWNl",
+          "ID": "dw=="
+        },
+        {
+          "Scope": "YWI=",
+          "ID": "Yw=="
+        },
+        {
+          "Scope": "YQ==",
+          "ID": "YmM="
+        },
+        {
+          "Scope": "5Lit5paH",
+          "ID": "aWQ="
+        },
+        {
+          "Scope": "c2NvcGU=",
+          "ID": "/w=="
+        },
+        {
+          "Scope": "",
+          "ID": ""
+        }
+      ]
+    },
+    {
+      "Config": {
+        "Shards": -1,
+        "StreamMaxLen": 2000,
+        "ReadCount": 128,
+        "ReadBlock": 5000000000,
+        "ReplayGrace": 300000000000,
+        "TrimHorizon": 600000000000,
+        "StreamTTL": 900000000000,
+        "TTLRefreshInterval": 30000000000,
+        "MaintenanceInterval": 60000000000,
+        "StreamTTLEnabled": false
+      },
+      "Keys": [
+        {
+          "Scope": "d29ya3NwYWNl",
+          "ID": "dw=="
+        },
+        {
+          "Scope": "YWI=",
+          "ID": "Yw=="
+        },
+        {
+          "Scope": "YQ==",
+          "ID": "YmM="
+        },
+        {
+          "Scope": "5Lit5paH",
+          "ID": "aWQ="
+        },
+        {
+          "Scope": "c2NvcGU=",
+          "ID": "/w=="
+        },
+        {
+          "Scope": "",
+          "ID": ""
+        }
+      ]
+    },
+    {
+      "Config": {
+        "Shards": 0,
+        "StreamMaxLen": 2000,
+        "ReadCount": 128,
+        "ReadBlock": 5000000000,
+        "ReplayGrace": 300000000000,
+        "TrimHorizon": 600000000000,
+        "StreamTTL": 900000000000,
+        "TTLRefreshInterval": 30000000000,
+        "MaintenanceInterval": 60000000000,
+        "StreamTTLEnabled": false
+      },
+      "Keys": [
+        {
+          "Scope": "d29ya3NwYWNl",
+          "ID": "dw=="
+        },
+        {
+          "Scope": "YWI=",
+          "ID": "Yw=="
+        },
+        {
+          "Scope": "YQ==",
+          "ID": "YmM="
+        },
+        {
+          "Scope": "5Lit5paH",
+          "ID": "aWQ="
+        },
+        {
+          "Scope": "c2NvcGU=",
+          "ID": "/w=="
+        },
+        {
+          "Scope": "",
+          "ID": ""
+        }
+      ]
+    },
+    {
+      "Config": {
+        "Shards": 1,
+        "StreamMaxLen": 2000,
+        "ReadCount": 128,
+        "ReadBlock": 5000000000,
+        "ReplayGrace": 300000000000,
+        "TrimHorizon": 600000000000,
+        "StreamTTL": 900000000000,
+        "TTLRefreshInterval": 30000000000,
+        "MaintenanceInterval": 60000000000,
+        "StreamTTLEnabled": false
+      },
+      "Keys": [
+        {
+          "Scope": "d29ya3NwYWNl",
+          "ID": "dw=="
+        },
+        {
+          "Scope": "YWI=",
+          "ID": "Yw=="
+        },
+        {
+          "Scope": "YQ==",
+          "ID": "YmM="
+        },
+        {
+          "Scope": "5Lit5paH",
+          "ID": "aWQ="
+        },
+        {
+          "Scope": "c2NvcGU=",
+          "ID": "/w=="
+        },
+        {
+          "Scope": "",
+          "ID": ""
+        }
+      ]
+    },
+    {
+      "Config": {
+        "Shards": 9223372036854775807,
+        "StreamMaxLen": 2000,
+        "ReadCount": 128,
+        "ReadBlock": 5000000000,
+        "ReplayGrace": 300000000000,
+        "TrimHorizon": 600000000000,
+        "StreamTTL": 900000000000,
+        "TTLRefreshInterval": 30000000000,
+        "MaintenanceInterval": 60000000000,
+        "StreamTTLEnabled": false
+      },
+      "Keys": [
+        {
+          "Scope": "d29ya3NwYWNl",
+          "ID": "dw=="
+        },
+        {
+          "Scope": "YWI=",
+          "ID": "Yw=="
+        },
+        {
+          "Scope": "YQ==",
+          "ID": "YmM="
+        },
+        {
+          "Scope": "5Lit5paH",
+          "ID": "aWQ="
+        },
+        {
+          "Scope": "c2NvcGU=",
+          "ID": "/w=="
+        },
+        {
+          "Scope": "",
+          "ID": ""
+        }
+      ]
+    },
+    {
+      "Config": {
+        "Shards": 8,
+        "StreamMaxLen": -1,
+        "ReadCount": 128,
+        "ReadBlock": 5000000000,
+        "ReplayGrace": 300000000000,
+        "TrimHorizon": 600000000000,
+        "StreamTTL": 900000000000,
+        "TTLRefreshInterval": 30000000000,
+        "MaintenanceInterval": 60000000000,
+        "StreamTTLEnabled": false
+      },
+      "Keys": [
+        {
+          "Scope": "d29ya3NwYWNl",
+          "ID": "dw=="
+        },
+        {
+          "Scope": "YWI=",
+          "ID": "Yw=="
+        },
+        {
+          "Scope": "YQ==",
+          "ID": "YmM="
+        },
+        {
+          "Scope": "5Lit5paH",
+          "ID": "aWQ="
+        },
+        {
+          "Scope": "c2NvcGU=",
+          "ID": "/w=="
+        },
+        {
+          "Scope": "",
+          "ID": ""
+        }
+      ]
+    },
+    {
+      "Config": {
+        "Shards": 8,
+        "StreamMaxLen": 0,
+        "ReadCount": 128,
+        "ReadBlock": 5000000000,
+        "ReplayGrace": 300000000000,
+        "TrimHorizon": 600000000000,
+        "StreamTTL": 900000000000,
+        "TTLRefreshInterval": 30000000000,
+        "MaintenanceInterval": 60000000000,
+        "StreamTTLEnabled": false
+      },
+      "Keys": [
+        {
+          "Scope": "d29ya3NwYWNl",
+          "ID": "dw=="
+        },
+        {
+          "Scope": "YWI=",
+          "ID": "Yw=="
+        },
+        {
+          "Scope": "YQ==",
+          "ID": "YmM="
+        },
+        {
+          "Scope": "5Lit5paH",
+          "ID": "aWQ="
+        },
+        {
+          "Scope": "c2NvcGU=",
+          "ID": "/w=="
+        },
+        {
+          "Scope": "",
+          "ID": ""
+        }
+      ]
+    },
+    {
+      "Config": {
+        "Shards": 8,
+        "StreamMaxLen": 1,
+        "ReadCount": 128,
+        "ReadBlock": 5000000000,
+        "ReplayGrace": 300000000000,
+        "TrimHorizon": 600000000000,
+        "StreamTTL": 900000000000,
+        "TTLRefreshInterval": 30000000000,
+        "MaintenanceInterval": 60000000000,
+        "StreamTTLEnabled": false
+      },
+      "Keys": [
+        {
+          "Scope": "d29ya3NwYWNl",
+          "ID": "dw=="
+        },
+        {
+          "Scope": "YWI=",
+          "ID": "Yw=="
+        },
+        {
+          "Scope": "YQ==",
+          "ID": "YmM="
+        },
+        {
+          "Scope": "5Lit5paH",
+          "ID": "aWQ="
+        },
+        {
+          "Scope": "c2NvcGU=",
+          "ID": "/w=="
+        },
+        {
+          "Scope": "",
+          "ID": ""
+        }
+      ]
+    },
+    {
+      "Config": {
+        "Shards": 8,
+        "StreamMaxLen": 9223372036854775807,
+        "ReadCount": 128,
+        "ReadBlock": 5000000000,
+        "ReplayGrace": 300000000000,
+        "TrimHorizon": 600000000000,
+        "StreamTTL": 900000000000,
+        "TTLRefreshInterval": 30000000000,
+        "MaintenanceInterval": 60000000000,
+        "StreamTTLEnabled": false
+      },
+      "Keys": [
+        {
+          "Scope": "d29ya3NwYWNl",
+          "ID": "dw=="
+        },
+        {
+          "Scope": "YWI=",
+          "ID": "Yw=="
+        },
+        {
+          "Scope": "YQ==",
+          "ID": "YmM="
+        },
+        {
+          "Scope": "5Lit5paH",
+          "ID": "aWQ="
+        },
+        {
+          "Scope": "c2NvcGU=",
+          "ID": "/w=="
+        },
+        {
+          "Scope": "",
+          "ID": ""
+        }
+      ]
+    },
+    {
+      "Config": {
+        "Shards": 8,
+        "StreamMaxLen": 2000,
+        "ReadCount": -1,
+        "ReadBlock": 5000000000,
+        "ReplayGrace": 300000000000,
+        "TrimHorizon": 600000000000,
+        "StreamTTL": 900000000000,
+        "TTLRefreshInterval": 30000000000,
+        "MaintenanceInterval": 60000000000,
+        "StreamTTLEnabled": false
+      },
+      "Keys": [
+        {
+          "Scope": "d29ya3NwYWNl",
+          "ID": "dw=="
+        },
+        {
+          "Scope": "YWI=",
+          "ID": "Yw=="
+        },
+        {
+          "Scope": "YQ==",
+          "ID": "YmM="
+        },
+        {
+          "Scope": "5Lit5paH",
+          "ID": "aWQ="
+        },
+        {
+          "Scope": "c2NvcGU=",
+          "ID": "/w=="
+        },
+        {
+          "Scope": "",
+          "ID": ""
+        }
+      ]
+    },
+    {
+      "Config": {
+        "Shards": 8,
+        "StreamMaxLen": 2000,
+        "ReadCount": 0,
+        "ReadBlock": 5000000000,
+        "ReplayGrace": 300000000000,
+        "TrimHorizon": 600000000000,
+        "StreamTTL": 900000000000,
+        "TTLRefreshInterval": 30000000000,
+        "MaintenanceInterval": 60000000000,
+        "StreamTTLEnabled": false
+      },
+      "Keys": [
+        {
+          "Scope": "d29ya3NwYWNl",
+          "ID": "dw=="
+        },
+        {
+          "Scope": "YWI=",
+          "ID": "Yw=="
+        },
+        {
+          "Scope": "YQ==",
+          "ID": "YmM="
+        },
+        {
+          "Scope": "5Lit5paH",
+          "ID": "aWQ="
+        },
+        {
+          "Scope": "c2NvcGU=",
+          "ID": "/w=="
+        },
+        {
+          "Scope": "",
+          "ID": ""
+        }
+      ]
+    },
+    {
+      "Config": {
+        "Shards": 8,
+        "StreamMaxLen": 2000,
+        "ReadCount": 1,
+        "ReadBlock": 5000000000,
+        "ReplayGrace": 300000000000,
+        "TrimHorizon": 600000000000,
+        "StreamTTL": 900000000000,
+        "TTLRefreshInterval": 30000000000,
+        "MaintenanceInterval": 60000000000,
+        "StreamTTLEnabled": false
+      },
+      "Keys": [
+        {
+          "Scope": "d29ya3NwYWNl",
+          "ID": "dw=="
+        },
+        {
+          "Scope": "YWI=",
+          "ID": "Yw=="
+        },
+        {
+          "Scope": "YQ==",
+          "ID": "YmM="
+        },
+        {
+          "Scope": "5Lit5paH",
+          "ID": "aWQ="
+        },
+        {
+          "Scope": "c2NvcGU=",
+          "ID": "/w=="
+        },
+        {
+          "Scope": "",
+          "ID": ""
+        }
+      ]
+    },
+    {
+      "Config": {
+        "Shards": 8,
+        "StreamMaxLen": 2000,
+        "ReadCount": 9223372036854775807,
+        "ReadBlock": 5000000000,
+        "ReplayGrace": 300000000000,
+        "TrimHorizon": 600000000000,
+        "StreamTTL": 900000000000,
+        "TTLRefreshInterval": 30000000000,
+        "MaintenanceInterval": 60000000000,
+        "StreamTTLEnabled": false
+      },
+      "Keys": [
+        {
+          "Scope": "d29ya3NwYWNl",
+          "ID": "dw=="
+        },
+        {
+          "Scope": "YWI=",
+          "ID": "Yw=="
+        },
+        {
+          "Scope": "YQ==",
+          "ID": "YmM="
+        },
+        {
+          "Scope": "5Lit5paH",
+          "ID": "aWQ="
+        },
+        {
+          "Scope": "c2NvcGU=",
+          "ID": "/w=="
+        },
+        {
+          "Scope": "",
+          "ID": ""
+        }
+      ]
+    },
+    {
+      "Config": {
+        "Shards": 8,
+        "StreamMaxLen": 2000,
+        "ReadCount": 128,
+        "ReadBlock": -1,
+        "ReplayGrace": 300000000000,
+        "TrimHorizon": 600000000000,
+        "StreamTTL": 900000000000,
+        "TTLRefreshInterval": 30000000000,
+        "MaintenanceInterval": 60000000000,
+        "StreamTTLEnabled": false
+      },
+      "Keys": [
+        {
+          "Scope": "d29ya3NwYWNl",
+          "ID": "dw=="
+        },
+        {
+          "Scope": "YWI=",
+          "ID": "Yw=="
+        },
+        {
+          "Scope": "YQ==",
+          "ID": "YmM="
+        },
+        {
+          "Scope": "5Lit5paH",
+          "ID": "aWQ="
+        },
+        {
+          "Scope": "c2NvcGU=",
+          "ID": "/w=="
+        },
+        {
+          "Scope": "",
+          "ID": ""
+        }
+      ]
+    },
+    {
+      "Config": {
+        "Shards": 8,
+        "StreamMaxLen": 2000,
+        "ReadCount": 128,
+        "ReadBlock": 0,
+        "ReplayGrace": 300000000000,
+        "TrimHorizon": 600000000000,
+        "StreamTTL": 900000000000,
+        "TTLRefreshInterval": 30000000000,
+        "MaintenanceInterval": 60000000000,
+        "StreamTTLEnabled": false
+      },
+      "Keys": [
+        {
+          "Scope": "d29ya3NwYWNl",
+          "ID": "dw=="
+        },
+        {
+          "Scope": "YWI=",
+          "ID": "Yw=="
+        },
+        {
+          "Scope": "YQ==",
+          "ID": "YmM="
+        },
+        {
+          "Scope": "5Lit5paH",
+          "ID": "aWQ="
+        },
+        {
+          "Scope": "c2NvcGU=",
+          "ID": "/w=="
+        },
+        {
+          "Scope": "",
+          "ID": ""
+        }
+      ]
+    },
+    {
+      "Config": {
+        "Shards": 8,
+        "StreamMaxLen": 2000,
+        "ReadCount": 128,
+        "ReadBlock": 1,
+        "ReplayGrace": 300000000000,
+        "TrimHorizon": 600000000000,
+        "StreamTTL": 900000000000,
+        "TTLRefreshInterval": 30000000000,
+        "MaintenanceInterval": 60000000000,
+        "StreamTTLEnabled": false
+      },
+      "Keys": [
+        {
+          "Scope": "d29ya3NwYWNl",
+          "ID": "dw=="
+        },
+        {
+          "Scope": "YWI=",
+          "ID": "Yw=="
+        },
+        {
+          "Scope": "YQ==",
+          "ID": "YmM="
+        },
+        {
+          "Scope": "5Lit5paH",
+          "ID": "aWQ="
+        },
+        {
+          "Scope": "c2NvcGU=",
+          "ID": "/w=="
+        },
+        {
+          "Scope": "",
+          "ID": ""
+        }
+      ]
+    },
+    {
+      "Config": {
+        "Shards": 8,
+        "StreamMaxLen": 2000,
+        "ReadCount": 128,
+        "ReadBlock": 9223372036854775807,
+        "ReplayGrace": 300000000000,
+        "TrimHorizon": 600000000000,
+        "StreamTTL": 900000000000,
+        "TTLRefreshInterval": 30000000000,
+        "MaintenanceInterval": 60000000000,
+        "StreamTTLEnabled": false
+      },
+      "Keys": [
+        {
+          "Scope": "d29ya3NwYWNl",
+          "ID": "dw=="
+        },
+        {
+          "Scope": "YWI=",
+          "ID": "Yw=="
+        },
+        {
+          "Scope": "YQ==",
+          "ID": "YmM="
+        },
+        {
+          "Scope": "5Lit5paH",
+          "ID": "aWQ="
+        },
+        {
+          "Scope": "c2NvcGU=",
+          "ID": "/w=="
+        },
+        {
+          "Scope": "",
+          "ID": ""
+        }
+      ]
+    },
+    {
+      "Config": {
+        "Shards": 8,
+        "StreamMaxLen": 2000,
+        "ReadCount": 128,
+        "ReadBlock": 5000000000,
+        "ReplayGrace": -1,
+        "TrimHorizon": 600000000000,
+        "StreamTTL": 900000000000,
+        "TTLRefreshInterval": 30000000000,
+        "MaintenanceInterval": 60000000000,
+        "StreamTTLEnabled": false
+      },
+      "Keys": [
+        {
+          "Scope": "d29ya3NwYWNl",
+          "ID": "dw=="
+        },
+        {
+          "Scope": "YWI=",
+          "ID": "Yw=="
+        },
+        {
+          "Scope": "YQ==",
+          "ID": "YmM="
+        },
+        {
+          "Scope": "5Lit5paH",
+          "ID": "aWQ="
+        },
+        {
+          "Scope": "c2NvcGU=",
+          "ID": "/w=="
+        },
+        {
+          "Scope": "",
+          "ID": ""
+        }
+      ]
+    },
+    {
+      "Config": {
+        "Shards": 8,
+        "StreamMaxLen": 2000,
+        "ReadCount": 128,
+        "ReadBlock": 5000000000,
+        "ReplayGrace": 0,
+        "TrimHorizon": 600000000000,
+        "StreamTTL": 900000000000,
+        "TTLRefreshInterval": 30000000000,
+        "MaintenanceInterval": 60000000000,
+        "StreamTTLEnabled": false
+      },
+      "Keys": [
+        {
+          "Scope": "d29ya3NwYWNl",
+          "ID": "dw=="
+        },
+        {
+          "Scope": "YWI=",
+          "ID": "Yw=="
+        },
+        {
+          "Scope": "YQ==",
+          "ID": "YmM="
+        },
+        {
+          "Scope": "5Lit5paH",
+          "ID": "aWQ="
+        },
+        {
+          "Scope": "c2NvcGU=",
+          "ID": "/w=="
+        },
+        {
+          "Scope": "",
+          "ID": ""
+        }
+      ]
+    },
+    {
+      "Config": {
+        "Shards": 8,
+        "StreamMaxLen": 2000,
+        "ReadCount": 128,
+        "ReadBlock": 5000000000,
+        "ReplayGrace": 1,
+        "TrimHorizon": 600000000000,
+        "StreamTTL": 900000000000,
+        "TTLRefreshInterval": 30000000000,
+        "MaintenanceInterval": 60000000000,
+        "StreamTTLEnabled": false
+      },
+      "Keys": [
+        {
+          "Scope": "d29ya3NwYWNl",
+          "ID": "dw=="
+        },
+        {
+          "Scope": "YWI=",
+          "ID": "Yw=="
+        },
+        {
+          "Scope": "YQ==",
+          "ID": "YmM="
+        },
+        {
+          "Scope": "5Lit5paH",
+          "ID": "aWQ="
+        },
+        {
+          "Scope": "c2NvcGU=",
+          "ID": "/w=="
+        },
+        {
+          "Scope": "",
+          "ID": ""
+        }
+      ]
+    },
+    {
+      "Config": {
+        "Shards": 8,
+        "StreamMaxLen": 2000,
+        "ReadCount": 128,
+        "ReadBlock": 5000000000,
+        "ReplayGrace": 9223372036854775807,
+        "TrimHorizon": 600000000000,
+        "StreamTTL": 900000000000,
+        "TTLRefreshInterval": 30000000000,
+        "MaintenanceInterval": 60000000000,
+        "StreamTTLEnabled": false
+      },
+      "Keys": [
+        {
+          "Scope": "d29ya3NwYWNl",
+          "ID": "dw=="
+        },
+        {
+          "Scope": "YWI=",
+          "ID": "Yw=="
+        },
+        {
+          "Scope": "YQ==",
+          "ID": "YmM="
+        },
+        {
+          "Scope": "5Lit5paH",
+          "ID": "aWQ="
+        },
+        {
+          "Scope": "c2NvcGU=",
+          "ID": "/w=="
+        },
+        {
+          "Scope": "",
+          "ID": ""
+        }
+      ]
+    },
+    {
+      "Config": {
+        "Shards": 8,
+        "StreamMaxLen": 2000,
+        "ReadCount": 128,
+        "ReadBlock": 5000000000,
+        "ReplayGrace": 300000000000,
+        "TrimHorizon": -1,
+        "StreamTTL": 900000000000,
+        "TTLRefreshInterval": 30000000000,
+        "MaintenanceInterval": 60000000000,
+        "StreamTTLEnabled": false
+      },
+      "Keys": [
+        {
+          "Scope": "d29ya3NwYWNl",
+          "ID": "dw=="
+        },
+        {
+          "Scope": "YWI=",
+          "ID": "Yw=="
+        },
+        {
+          "Scope": "YQ==",
+          "ID": "YmM="
+        },
+        {
+          "Scope": "5Lit5paH",
+          "ID": "aWQ="
+        },
+        {
+          "Scope": "c2NvcGU=",
+          "ID": "/w=="
+        },
+        {
+          "Scope": "",
+          "ID": ""
+        }
+      ]
+    },
+    {
+      "Config": {
+        "Shards": 8,
+        "StreamMaxLen": 2000,
+        "ReadCount": 128,
+        "ReadBlock": 5000000000,
+        "ReplayGrace": 300000000000,
+        "TrimHorizon": 0,
+        "StreamTTL": 900000000000,
+        "TTLRefreshInterval": 30000000000,
+        "MaintenanceInterval": 60000000000,
+        "StreamTTLEnabled": false
+      },
+      "Keys": [
+        {
+          "Scope": "d29ya3NwYWNl",
+          "ID": "dw=="
+        },
+        {
+          "Scope": "YWI=",
+          "ID": "Yw=="
+        },
+        {
+          "Scope": "YQ==",
+          "ID": "YmM="
+        },
+        {
+          "Scope": "5Lit5paH",
+          "ID": "aWQ="
+        },
+        {
+          "Scope": "c2NvcGU=",
+          "ID": "/w=="
+        },
+        {
+          "Scope": "",
+          "ID": ""
+        }
+      ]
+    },
+    {
+      "Config": {
+        "Shards": 8,
+        "StreamMaxLen": 2000,
+        "ReadCount": 128,
+        "ReadBlock": 5000000000,
+        "ReplayGrace": 300000000000,
+        "TrimHorizon": 1,
+        "StreamTTL": 900000000000,
+        "TTLRefreshInterval": 30000000000,
+        "MaintenanceInterval": 60000000000,
+        "StreamTTLEnabled": false
+      },
+      "Keys": [
+        {
+          "Scope": "d29ya3NwYWNl",
+          "ID": "dw=="
+        },
+        {
+          "Scope": "YWI=",
+          "ID": "Yw=="
+        },
+        {
+          "Scope": "YQ==",
+          "ID": "YmM="
+        },
+        {
+          "Scope": "5Lit5paH",
+          "ID": "aWQ="
+        },
+        {
+          "Scope": "c2NvcGU=",
+          "ID": "/w=="
+        },
+        {
+          "Scope": "",
+          "ID": ""
+        }
+      ]
+    },
+    {
+      "Config": {
+        "Shards": 8,
+        "StreamMaxLen": 2000,
+        "ReadCount": 128,
+        "ReadBlock": 5000000000,
+        "ReplayGrace": 300000000000,
+        "TrimHorizon": 9223372036854775807,
+        "StreamTTL": 900000000000,
+        "TTLRefreshInterval": 30000000000,
+        "MaintenanceInterval": 60000000000,
+        "StreamTTLEnabled": false
+      },
+      "Keys": [
+        {
+          "Scope": "d29ya3NwYWNl",
+          "ID": "dw=="
+        },
+        {
+          "Scope": "YWI=",
+          "ID": "Yw=="
+        },
+        {
+          "Scope": "YQ==",
+          "ID": "YmM="
+        },
+        {
+          "Scope": "5Lit5paH",
+          "ID": "aWQ="
+        },
+        {
+          "Scope": "c2NvcGU=",
+          "ID": "/w=="
+        },
+        {
+          "Scope": "",
+          "ID": ""
+        }
+      ]
+    },
+    {
+      "Config": {
+        "Shards": 8,
+        "StreamMaxLen": 2000,
+        "ReadCount": 128,
+        "ReadBlock": 5000000000,
+        "ReplayGrace": 300000000000,
+        "TrimHorizon": 600000000000,
+        "StreamTTL": -1,
+        "TTLRefreshInterval": 30000000000,
+        "MaintenanceInterval": 60000000000,
+        "StreamTTLEnabled": false
+      },
+      "Keys": [
+        {
+          "Scope": "d29ya3NwYWNl",
+          "ID": "dw=="
+        },
+        {
+          "Scope": "YWI=",
+          "ID": "Yw=="
+        },
+        {
+          "Scope": "YQ==",
+          "ID": "YmM="
+        },
+        {
+          "Scope": "5Lit5paH",
+          "ID": "aWQ="
+        },
+        {
+          "Scope": "c2NvcGU=",
+          "ID": "/w=="
+        },
+        {
+          "Scope": "",
+          "ID": ""
+        }
+      ]
+    },
+    {
+      "Config": {
+        "Shards": 8,
+        "StreamMaxLen": 2000,
+        "ReadCount": 128,
+        "ReadBlock": 5000000000,
+        "ReplayGrace": 300000000000,
+        "TrimHorizon": 600000000000,
+        "StreamTTL": 0,
+        "TTLRefreshInterval": 30000000000,
+        "MaintenanceInterval": 60000000000,
+        "StreamTTLEnabled": false
+      },
+      "Keys": [
+        {
+          "Scope": "d29ya3NwYWNl",
+          "ID": "dw=="
+        },
+        {
+          "Scope": "YWI=",
+          "ID": "Yw=="
+        },
+        {
+          "Scope": "YQ==",
+          "ID": "YmM="
+        },
+        {
+          "Scope": "5Lit5paH",
+          "ID": "aWQ="
+        },
+        {
+          "Scope": "c2NvcGU=",
+          "ID": "/w=="
+        },
+        {
+          "Scope": "",
+          "ID": ""
+        }
+      ]
+    },
+    {
+      "Config": {
+        "Shards": 8,
+        "StreamMaxLen": 2000,
+        "ReadCount": 128,
+        "ReadBlock": 5000000000,
+        "ReplayGrace": 300000000000,
+        "TrimHorizon": 600000000000,
+        "StreamTTL": 1,
+        "TTLRefreshInterval": 30000000000,
+        "MaintenanceInterval": 60000000000,
+        "StreamTTLEnabled": false
+      },
+      "Keys": [
+        {
+          "Scope": "d29ya3NwYWNl",
+          "ID": "dw=="
+        },
+        {
+          "Scope": "YWI=",
+          "ID": "Yw=="
+        },
+        {
+          "Scope": "YQ==",
+          "ID": "YmM="
+        },
+        {
+          "Scope": "5Lit5paH",
+          "ID": "aWQ="
+        },
+        {
+          "Scope": "c2NvcGU=",
+          "ID": "/w=="
+        },
+        {
+          "Scope": "",
+          "ID": ""
+        }
+      ]
+    },
+    {
+      "Config": {
+        "Shards": 8,
+        "StreamMaxLen": 2000,
+        "ReadCount": 128,
+        "ReadBlock": 5000000000,
+        "ReplayGrace": 300000000000,
+        "TrimHorizon": 600000000000,
+        "StreamTTL": 9223372036854775807,
+        "TTLRefreshInterval": 30000000000,
+        "MaintenanceInterval": 60000000000,
+        "StreamTTLEnabled": false
+      },
+      "Keys": [
+        {
+          "Scope": "d29ya3NwYWNl",
+          "ID": "dw=="
+        },
+        {
+          "Scope": "YWI=",
+          "ID": "Yw=="
+        },
+        {
+          "Scope": "YQ==",
+          "ID": "YmM="
+        },
+        {
+          "Scope": "5Lit5paH",
+          "ID": "aWQ="
+        },
+        {
+          "Scope": "c2NvcGU=",
+          "ID": "/w=="
+        },
+        {
+          "Scope": "",
+          "ID": ""
+        }
+      ]
+    },
+    {
+      "Config": {
+        "Shards": 8,
+        "StreamMaxLen": 2000,
+        "ReadCount": 128,
+        "ReadBlock": 5000000000,
+        "ReplayGrace": 300000000000,
+        "TrimHorizon": 600000000000,
+        "StreamTTL": 900000000000,
+        "TTLRefreshInterval": -1,
+        "MaintenanceInterval": 60000000000,
+        "StreamTTLEnabled": false
+      },
+      "Keys": [
+        {
+          "Scope": "d29ya3NwYWNl",
+          "ID": "dw=="
+        },
+        {
+          "Scope": "YWI=",
+          "ID": "Yw=="
+        },
+        {
+          "Scope": "YQ==",
+          "ID": "YmM="
+        },
+        {
+          "Scope": "5Lit5paH",
+          "ID": "aWQ="
+        },
+        {
+          "Scope": "c2NvcGU=",
+          "ID": "/w=="
+        },
+        {
+          "Scope": "",
+          "ID": ""
+        }
+      ]
+    },
+    {
+      "Config": {
+        "Shards": 8,
+        "StreamMaxLen": 2000,
+        "ReadCount": 128,
+        "ReadBlock": 5000000000,
+        "ReplayGrace": 300000000000,
+        "TrimHorizon": 600000000000,
+        "StreamTTL": 900000000000,
+        "TTLRefreshInterval": 0,
+        "MaintenanceInterval": 60000000000,
+        "StreamTTLEnabled": false
+      },
+      "Keys": [
+        {
+          "Scope": "d29ya3NwYWNl",
+          "ID": "dw=="
+        },
+        {
+          "Scope": "YWI=",
+          "ID": "Yw=="
+        },
+        {
+          "Scope": "YQ==",
+          "ID": "YmM="
+        },
+        {
+          "Scope": "5Lit5paH",
+          "ID": "aWQ="
+        },
+        {
+          "Scope": "c2NvcGU=",
+          "ID": "/w=="
+        },
+        {
+          "Scope": "",
+          "ID": ""
+        }
+      ]
+    },
+    {
+      "Config": {
+        "Shards": 8,
+        "StreamMaxLen": 2000,
+        "ReadCount": 128,
+        "ReadBlock": 5000000000,
+        "ReplayGrace": 300000000000,
+        "TrimHorizon": 600000000000,
+        "StreamTTL": 900000000000,
+        "TTLRefreshInterval": 1,
+        "MaintenanceInterval": 60000000000,
+        "StreamTTLEnabled": false
+      },
+      "Keys": [
+        {
+          "Scope": "d29ya3NwYWNl",
+          "ID": "dw=="
+        },
+        {
+          "Scope": "YWI=",
+          "ID": "Yw=="
+        },
+        {
+          "Scope": "YQ==",
+          "ID": "YmM="
+        },
+        {
+          "Scope": "5Lit5paH",
+          "ID": "aWQ="
+        },
+        {
+          "Scope": "c2NvcGU=",
+          "ID": "/w=="
+        },
+        {
+          "Scope": "",
+          "ID": ""
+        }
+      ]
+    },
+    {
+      "Config": {
+        "Shards": 8,
+        "StreamMaxLen": 2000,
+        "ReadCount": 128,
+        "ReadBlock": 5000000000,
+        "ReplayGrace": 300000000000,
+        "TrimHorizon": 600000000000,
+        "StreamTTL": 900000000000,
+        "TTLRefreshInterval": 9223372036854775807,
+        "MaintenanceInterval": 60000000000,
+        "StreamTTLEnabled": false
+      },
+      "Keys": [
+        {
+          "Scope": "d29ya3NwYWNl",
+          "ID": "dw=="
+        },
+        {
+          "Scope": "YWI=",
+          "ID": "Yw=="
+        },
+        {
+          "Scope": "YQ==",
+          "ID": "YmM="
+        },
+        {
+          "Scope": "5Lit5paH",
+          "ID": "aWQ="
+        },
+        {
+          "Scope": "c2NvcGU=",
+          "ID": "/w=="
+        },
+        {
+          "Scope": "",
+          "ID": ""
+        }
+      ]
+    },
+    {
+      "Config": {
+        "Shards": 8,
+        "StreamMaxLen": 2000,
+        "ReadCount": 128,
+        "ReadBlock": 5000000000,
+        "ReplayGrace": 300000000000,
+        "TrimHorizon": 600000000000,
+        "StreamTTL": 900000000000,
+        "TTLRefreshInterval": 30000000000,
+        "MaintenanceInterval": -1,
+        "StreamTTLEnabled": false
+      },
+      "Keys": [
+        {
+          "Scope": "d29ya3NwYWNl",
+          "ID": "dw=="
+        },
+        {
+          "Scope": "YWI=",
+          "ID": "Yw=="
+        },
+        {
+          "Scope": "YQ==",
+          "ID": "YmM="
+        },
+        {
+          "Scope": "5Lit5paH",
+          "ID": "aWQ="
+        },
+        {
+          "Scope": "c2NvcGU=",
+          "ID": "/w=="
+        },
+        {
+          "Scope": "",
+          "ID": ""
+        }
+      ]
+    },
+    {
+      "Config": {
+        "Shards": 8,
+        "StreamMaxLen": 2000,
+        "ReadCount": 128,
+        "ReadBlock": 5000000000,
+        "ReplayGrace": 300000000000,
+        "TrimHorizon": 600000000000,
+        "StreamTTL": 900000000000,
+        "TTLRefreshInterval": 30000000000,
+        "MaintenanceInterval": 0,
+        "StreamTTLEnabled": false
+      },
+      "Keys": [
+        {
+          "Scope": "d29ya3NwYWNl",
+          "ID": "dw=="
+        },
+        {
+          "Scope": "YWI=",
+          "ID": "Yw=="
+        },
+        {
+          "Scope": "YQ==",
+          "ID": "YmM="
+        },
+        {
+          "Scope": "5Lit5paH",
+          "ID": "aWQ="
+        },
+        {
+          "Scope": "c2NvcGU=",
+          "ID": "/w=="
+        },
+        {
+          "Scope": "",
+          "ID": ""
+        }
+      ]
+    },
+    {
+      "Config": {
+        "Shards": 8,
+        "StreamMaxLen": 2000,
+        "ReadCount": 128,
+        "ReadBlock": 5000000000,
+        "ReplayGrace": 300000000000,
+        "TrimHorizon": 600000000000,
+        "StreamTTL": 900000000000,
+        "TTLRefreshInterval": 30000000000,
+        "MaintenanceInterval": 1,
+        "StreamTTLEnabled": false
+      },
+      "Keys": [
+        {
+          "Scope": "d29ya3NwYWNl",
+          "ID": "dw=="
+        },
+        {
+          "Scope": "YWI=",
+          "ID": "Yw=="
+        },
+        {
+          "Scope": "YQ==",
+          "ID": "YmM="
+        },
+        {
+          "Scope": "5Lit5paH",
+          "ID": "aWQ="
+        },
+        {
+          "Scope": "c2NvcGU=",
+          "ID": "/w=="
+        },
+        {
+          "Scope": "",
+          "ID": ""
+        }
+      ]
+    },
+    {
+      "Config": {
+        "Shards": 8,
+        "StreamMaxLen": 2000,
+        "ReadCount": 128,
+        "ReadBlock": 5000000000,
+        "ReplayGrace": 300000000000,
+        "TrimHorizon": 600000000000,
+        "StreamTTL": 900000000000,
+        "TTLRefreshInterval": 30000000000,
+        "MaintenanceInterval": 9223372036854775807,
+        "StreamTTLEnabled": false
+      },
+      "Keys": [
+        {
+          "Scope": "d29ya3NwYWNl",
+          "ID": "dw=="
+        },
+        {
+          "Scope": "YWI=",
+          "ID": "Yw=="
+        },
+        {
+          "Scope": "YQ==",
+          "ID": "YmM="
+        },
+        {
+          "Scope": "5Lit5paH",
+          "ID": "aWQ="
+        },
+        {
+          "Scope": "c2NvcGU=",
+          "ID": "/w=="
+        },
+        {
+          "Scope": "",
+          "ID": ""
+        }
+      ]
+    },
+    {
+      "Config": {
+        "Shards": 8,
+        "StreamMaxLen": 2000,
+        "ReadCount": 128,
+        "ReadBlock": 5000000000,
+        "ReplayGrace": 300000000000,
+        "TrimHorizon": 600000000000,
+        "StreamTTL": 900000000000,
+        "TTLRefreshInterval": 30000000000,
+        "MaintenanceInterval": 60000000000,
+        "StreamTTLEnabled": true
+      },
+      "Keys": [
+        {
+          "Scope": "d29ya3NwYWNl",
+          "ID": "dw=="
+        },
+        {
+          "Scope": "YWI=",
+          "ID": "Yw=="
+        },
+        {
+          "Scope": "YQ==",
+          "ID": "YmM="
+        },
+        {
+          "Scope": "5Lit5paH",
+          "ID": "aWQ="
+        },
+        {
+          "Scope": "c2NvcGU=",
+          "ID": "/w=="
+        },
+        {
+          "Scope": "",
+          "ID": ""
+        }
+      ]
+    }
+  ],
+  "go": [
+    {
+      "durations": [
+        "0s",
+        "0s",
+        "0s",
+        "0s",
+        "0s",
+        "0s"
+      ],
+      "error": "ReplayGrace must be positive",
+      "hashes": [
+        7,
+        7,
+        3,
+        2,
+        2,
+        7
+      ],
+      "normalized": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "normalized_error": "",
+      "retention": [
+        2000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ]
+    },
+    {
+      "durations": [
+        "5s",
+        "5m0s",
+        "10m0s",
+        "15m0s",
+        "30s",
+        "1m0s"
+      ],
+      "error": "",
+      "hashes": [
+        7,
+        7,
+        3,
+        2,
+        2,
+        7
+      ],
+      "normalized": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "normalized_error": "",
+      "retention": [
+        2000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ]
+    },
+    {
+      "durations": [
+        "0s",
+        "3ns",
+        "3ns",
+        "2ns",
+        "0s",
+        "0s"
+      ],
+      "error": "TrimHorizon (3ns) must be greater than ReplayGrace (3ns)",
+      "hashes": [
+        7,
+        7,
+        3,
+        2,
+        2,
+        7
+      ],
+      "normalized": [
+        8,
+        2000,
+        128,
+        5000000000,
+        3,
+        6,
+        9,
+        3,
+        3,
+        false
+      ],
+      "normalized_error": "",
+      "retention": [
+        2000,
+        6,
+        9,
+        3,
+        3,
+        false
+      ]
+    },
+    {
+      "durations": [
+        "0s",
+        "1281023h53m38.427387904s",
+        "0s",
+        "0s",
+        "0s",
+        "0s"
+      ],
+      "error": "TrimHorizon (0s) must be greater than ReplayGrace (1281023h53m38.427387904s)",
+      "hashes": [
+        7,
+        7,
+        3,
+        2,
+        2,
+        7
+      ],
+      "normalized": [
+        8,
+        2000,
+        128,
+        5000000000,
+        4611686018427387904,
+        -9223372036854775808,
+        0,
+        1,
+        1,
+        false
+      ],
+      "normalized_error": "TrimHorizon (-2562047h47m16.854775808s) must be greater than ReplayGrace (1281023h53m38.427387904s)",
+      "retention": [
+        2000,
+        -9223372036854775808,
+        0,
+        1,
+        1,
+        false
+      ]
+    },
+    {
+      "durations": [
+        "0s",
+        "2562047h47m16.854775807s",
+        "0s",
+        "0s",
+        "0s",
+        "0s"
+      ],
+      "error": "TrimHorizon (0s) must be greater than ReplayGrace (2562047h47m16.854775807s)",
+      "hashes": [
+        7,
+        7,
+        3,
+        2,
+        2,
+        7
+      ],
+      "normalized": [
+        8,
+        2000,
+        128,
+        5000000000,
+        9223372036854775807,
+        -2,
+        0,
+        1,
+        1,
+        false
+      ],
+      "normalized_error": "TrimHorizon (-2ns) must be greater than ReplayGrace (2562047h47m16.854775807s)",
+      "retention": [
+        2000,
+        -2,
+        0,
+        1,
+        1,
+        false
+      ]
+    },
+    {
+      "durations": [
+        "0s",
+        "0s",
+        "0s",
+        "0s",
+        "0s",
+        "0s"
+      ],
+      "error": "ReplayGrace must be positive",
+      "hashes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "normalized": [
+        4294967297,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "normalized_error": "",
+      "retention": [
+        2000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ]
+    },
+    {
+      "durations": [
+        "5s",
+        "5m0s",
+        "10m0s",
+        "15m0s",
+        "30s",
+        "1m0s"
+      ],
+      "error": "",
+      "hashes": [
+        7,
+        7,
+        3,
+        2,
+        2,
+        7
+      ],
+      "normalized": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "normalized_error": "",
+      "retention": [
+        2000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ]
+    },
+    {
+      "durations": [
+        "5s",
+        "5m0s",
+        "10m0s",
+        "15m0s",
+        "30s",
+        "1m0s"
+      ],
+      "error": "",
+      "hashes": [
+        7,
+        7,
+        3,
+        2,
+        2,
+        7
+      ],
+      "normalized": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "normalized_error": "",
+      "retention": [
+        2000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ]
+    },
+    {
+      "durations": [
+        "5s",
+        "5m0s",
+        "10m0s",
+        "15m0s",
+        "30s",
+        "1m0s"
+      ],
+      "error": "",
+      "hashes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "normalized": [
+        1,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "normalized_error": "",
+      "retention": [
+        2000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ]
+    },
+    {
+      "durations": [
+        "5s",
+        "5m0s",
+        "10m0s",
+        "15m0s",
+        "30s",
+        "1m0s"
+      ],
+      "error": "",
+      "hashes": [
+        1714075823,
+        4018473767,
+        1620527011,
+        3069448402,
+        1588634634,
+        84696351
+      ],
+      "normalized": [
+        9223372036854775807,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "normalized_error": "",
+      "retention": [
+        2000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ]
+    },
+    {
+      "durations": [
+        "5s",
+        "5m0s",
+        "10m0s",
+        "15m0s",
+        "30s",
+        "1m0s"
+      ],
+      "error": "",
+      "hashes": [
+        7,
+        7,
+        3,
+        2,
+        2,
+        7
+      ],
+      "normalized": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "normalized_error": "",
+      "retention": [
+        2000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ]
+    },
+    {
+      "durations": [
+        "5s",
+        "5m0s",
+        "10m0s",
+        "15m0s",
+        "30s",
+        "1m0s"
+      ],
+      "error": "",
+      "hashes": [
+        7,
+        7,
+        3,
+        2,
+        2,
+        7
+      ],
+      "normalized": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "normalized_error": "",
+      "retention": [
+        2000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ]
+    },
+    {
+      "durations": [
+        "5s",
+        "5m0s",
+        "10m0s",
+        "15m0s",
+        "30s",
+        "1m0s"
+      ],
+      "error": "",
+      "hashes": [
+        7,
+        7,
+        3,
+        2,
+        2,
+        7
+      ],
+      "normalized": [
+        8,
+        1,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "normalized_error": "",
+      "retention": [
+        1,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ]
+    },
+    {
+      "durations": [
+        "5s",
+        "5m0s",
+        "10m0s",
+        "15m0s",
+        "30s",
+        "1m0s"
+      ],
+      "error": "",
+      "hashes": [
+        7,
+        7,
+        3,
+        2,
+        2,
+        7
+      ],
+      "normalized": [
+        8,
+        9223372036854775807,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "normalized_error": "",
+      "retention": [
+        9223372036854775807,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ]
+    },
+    {
+      "durations": [
+        "5s",
+        "5m0s",
+        "10m0s",
+        "15m0s",
+        "30s",
+        "1m0s"
+      ],
+      "error": "",
+      "hashes": [
+        7,
+        7,
+        3,
+        2,
+        2,
+        7
+      ],
+      "normalized": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "normalized_error": "",
+      "retention": [
+        2000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ]
+    },
+    {
+      "durations": [
+        "5s",
+        "5m0s",
+        "10m0s",
+        "15m0s",
+        "30s",
+        "1m0s"
+      ],
+      "error": "",
+      "hashes": [
+        7,
+        7,
+        3,
+        2,
+        2,
+        7
+      ],
+      "normalized": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "normalized_error": "",
+      "retention": [
+        2000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ]
+    },
+    {
+      "durations": [
+        "5s",
+        "5m0s",
+        "10m0s",
+        "15m0s",
+        "30s",
+        "1m0s"
+      ],
+      "error": "",
+      "hashes": [
+        7,
+        7,
+        3,
+        2,
+        2,
+        7
+      ],
+      "normalized": [
+        8,
+        2000,
+        1,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "normalized_error": "",
+      "retention": [
+        2000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ]
+    },
+    {
+      "durations": [
+        "5s",
+        "5m0s",
+        "10m0s",
+        "15m0s",
+        "30s",
+        "1m0s"
+      ],
+      "error": "",
+      "hashes": [
+        7,
+        7,
+        3,
+        2,
+        2,
+        7
+      ],
+      "normalized": [
+        8,
+        2000,
+        9223372036854775807,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "normalized_error": "",
+      "retention": [
+        2000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ]
+    },
+    {
+      "durations": [
+        "-1ns",
+        "5m0s",
+        "10m0s",
+        "15m0s",
+        "30s",
+        "1m0s"
+      ],
+      "error": "",
+      "hashes": [
+        7,
+        7,
+        3,
+        2,
+        2,
+        7
+      ],
+      "normalized": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "normalized_error": "",
+      "retention": [
+        2000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ]
+    },
+    {
+      "durations": [
+        "0s",
+        "5m0s",
+        "10m0s",
+        "15m0s",
+        "30s",
+        "1m0s"
+      ],
+      "error": "",
+      "hashes": [
+        7,
+        7,
+        3,
+        2,
+        2,
+        7
+      ],
+      "normalized": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "normalized_error": "",
+      "retention": [
+        2000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ]
+    },
+    {
+      "durations": [
+        "1ns",
+        "5m0s",
+        "10m0s",
+        "15m0s",
+        "30s",
+        "1m0s"
+      ],
+      "error": "",
+      "hashes": [
+        7,
+        7,
+        3,
+        2,
+        2,
+        7
+      ],
+      "normalized": [
+        8,
+        2000,
+        128,
+        1,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "normalized_error": "",
+      "retention": [
+        2000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ]
+    },
+    {
+      "durations": [
+        "2562047h47m16.854775807s",
+        "5m0s",
+        "10m0s",
+        "15m0s",
+        "30s",
+        "1m0s"
+      ],
+      "error": "",
+      "hashes": [
+        7,
+        7,
+        3,
+        2,
+        2,
+        7
+      ],
+      "normalized": [
+        8,
+        2000,
+        128,
+        9223372036854775807,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "normalized_error": "",
+      "retention": [
+        2000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ]
+    },
+    {
+      "durations": [
+        "5s",
+        "-1ns",
+        "10m0s",
+        "15m0s",
+        "30s",
+        "1m0s"
+      ],
+      "error": "ReplayGrace must be positive",
+      "hashes": [
+        7,
+        7,
+        3,
+        2,
+        2,
+        7
+      ],
+      "normalized": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "normalized_error": "",
+      "retention": [
+        2000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ]
+    },
+    {
+      "durations": [
+        "5s",
+        "0s",
+        "10m0s",
+        "15m0s",
+        "30s",
+        "1m0s"
+      ],
+      "error": "ReplayGrace must be positive",
+      "hashes": [
+        7,
+        7,
+        3,
+        2,
+        2,
+        7
+      ],
+      "normalized": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "normalized_error": "",
+      "retention": [
+        2000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ]
+    },
+    {
+      "durations": [
+        "5s",
+        "1ns",
+        "10m0s",
+        "15m0s",
+        "30s",
+        "1m0s"
+      ],
+      "error": "",
+      "hashes": [
+        7,
+        7,
+        3,
+        2,
+        2,
+        7
+      ],
+      "normalized": [
+        8,
+        2000,
+        128,
+        5000000000,
+        1,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "normalized_error": "",
+      "retention": [
+        2000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ]
+    },
+    {
+      "durations": [
+        "5s",
+        "2562047h47m16.854775807s",
+        "10m0s",
+        "15m0s",
+        "30s",
+        "1m0s"
+      ],
+      "error": "TrimHorizon (10m0s) must be greater than ReplayGrace (2562047h47m16.854775807s)",
+      "hashes": [
+        7,
+        7,
+        3,
+        2,
+        2,
+        7
+      ],
+      "normalized": [
+        8,
+        2000,
+        128,
+        5000000000,
+        9223372036854775807,
+        -2,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "normalized_error": "TrimHorizon (-2ns) must be greater than ReplayGrace (2562047h47m16.854775807s)",
+      "retention": [
+        2000,
+        -2,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ]
+    },
+    {
+      "durations": [
+        "5s",
+        "5m0s",
+        "-1ns",
+        "15m0s",
+        "30s",
+        "1m0s"
+      ],
+      "error": "TrimHorizon (-1ns) must be greater than ReplayGrace (5m0s)",
+      "hashes": [
+        7,
+        7,
+        3,
+        2,
+        2,
+        7
+      ],
+      "normalized": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "normalized_error": "",
+      "retention": [
+        2000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ]
+    },
+    {
+      "durations": [
+        "5s",
+        "5m0s",
+        "0s",
+        "15m0s",
+        "30s",
+        "1m0s"
+      ],
+      "error": "TrimHorizon (0s) must be greater than ReplayGrace (5m0s)",
+      "hashes": [
+        7,
+        7,
+        3,
+        2,
+        2,
+        7
+      ],
+      "normalized": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "normalized_error": "",
+      "retention": [
+        2000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ]
+    },
+    {
+      "durations": [
+        "5s",
+        "5m0s",
+        "1ns",
+        "15m0s",
+        "30s",
+        "1m0s"
+      ],
+      "error": "TrimHorizon (1ns) must be greater than ReplayGrace (5m0s)",
+      "hashes": [
+        7,
+        7,
+        3,
+        2,
+        2,
+        7
+      ],
+      "normalized": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "normalized_error": "",
+      "retention": [
+        2000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ]
+    },
+    {
+      "durations": [
+        "5s",
+        "5m0s",
+        "2562047h47m16.854775807s",
+        "15m0s",
+        "30s",
+        "1m0s"
+      ],
+      "error": "StreamTTL (15m0s) must be at least TrimHorizon (2562047h47m16.854775807s)",
+      "hashes": [
+        7,
+        7,
+        3,
+        2,
+        2,
+        7
+      ],
+      "normalized": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        9223372036854775807,
+        -9223371736854775809,
+        1,
+        1,
+        false
+      ],
+      "normalized_error": "StreamTTL (-2562047h42m16.854775809s) must be at least TrimHorizon (2562047h47m16.854775807s)",
+      "retention": [
+        2000,
+        9223372036854775807,
+        -9223371736854775809,
+        1,
+        1,
+        false
+      ]
+    },
+    {
+      "durations": [
+        "5s",
+        "5m0s",
+        "10m0s",
+        "-1ns",
+        "30s",
+        "1m0s"
+      ],
+      "error": "StreamTTL (-1ns) must be at least TrimHorizon (10m0s)",
+      "hashes": [
+        7,
+        7,
+        3,
+        2,
+        2,
+        7
+      ],
+      "normalized": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "normalized_error": "",
+      "retention": [
+        2000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ]
+    },
+    {
+      "durations": [
+        "5s",
+        "5m0s",
+        "10m0s",
+        "0s",
+        "30s",
+        "1m0s"
+      ],
+      "error": "StreamTTL (0s) must be at least TrimHorizon (10m0s)",
+      "hashes": [
+        7,
+        7,
+        3,
+        2,
+        2,
+        7
+      ],
+      "normalized": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "normalized_error": "",
+      "retention": [
+        2000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ]
+    },
+    {
+      "durations": [
+        "5s",
+        "5m0s",
+        "10m0s",
+        "1ns",
+        "30s",
+        "1m0s"
+      ],
+      "error": "StreamTTL (1ns) must be at least TrimHorizon (10m0s)",
+      "hashes": [
+        7,
+        7,
+        3,
+        2,
+        2,
+        7
+      ],
+      "normalized": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "normalized_error": "",
+      "retention": [
+        2000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ]
+    },
+    {
+      "durations": [
+        "5s",
+        "5m0s",
+        "10m0s",
+        "2562047h47m16.854775807s",
+        "30s",
+        "1m0s"
+      ],
+      "error": "",
+      "hashes": [
+        7,
+        7,
+        3,
+        2,
+        2,
+        7
+      ],
+      "normalized": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        9223372036854775807,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "normalized_error": "",
+      "retention": [
+        2000,
+        600000000000,
+        9223372036854775807,
+        30000000000,
+        60000000000,
+        false
+      ]
+    },
+    {
+      "durations": [
+        "5s",
+        "5m0s",
+        "10m0s",
+        "15m0s",
+        "-1ns",
+        "1m0s"
+      ],
+      "error": "TTLRefreshInterval (-1ns) must be positive and less than StreamTTL (15m0s)",
+      "hashes": [
+        7,
+        7,
+        3,
+        2,
+        2,
+        7
+      ],
+      "normalized": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "normalized_error": "",
+      "retention": [
+        2000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ]
+    },
+    {
+      "durations": [
+        "5s",
+        "5m0s",
+        "10m0s",
+        "15m0s",
+        "0s",
+        "1m0s"
+      ],
+      "error": "TTLRefreshInterval (0s) must be positive and less than StreamTTL (15m0s)",
+      "hashes": [
+        7,
+        7,
+        3,
+        2,
+        2,
+        7
+      ],
+      "normalized": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "normalized_error": "",
+      "retention": [
+        2000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ]
+    },
+    {
+      "durations": [
+        "5s",
+        "5m0s",
+        "10m0s",
+        "15m0s",
+        "1ns",
+        "1m0s"
+      ],
+      "error": "",
+      "hashes": [
+        7,
+        7,
+        3,
+        2,
+        2,
+        7
+      ],
+      "normalized": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        1,
+        60000000000,
+        false
+      ],
+      "normalized_error": "",
+      "retention": [
+        2000,
+        600000000000,
+        900000000000,
+        1,
+        60000000000,
+        false
+      ]
+    },
+    {
+      "durations": [
+        "5s",
+        "5m0s",
+        "10m0s",
+        "15m0s",
+        "2562047h47m16.854775807s",
+        "1m0s"
+      ],
+      "error": "TTLRefreshInterval (2562047h47m16.854775807s) must be positive and less than StreamTTL (15m0s)",
+      "hashes": [
+        7,
+        7,
+        3,
+        2,
+        2,
+        7
+      ],
+      "normalized": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "normalized_error": "",
+      "retention": [
+        2000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ]
+    },
+    {
+      "durations": [
+        "5s",
+        "5m0s",
+        "10m0s",
+        "15m0s",
+        "30s",
+        "-1ns"
+      ],
+      "error": "MaintenanceInterval (-1ns) must be positive and less than StreamTTL (15m0s)",
+      "hashes": [
+        7,
+        7,
+        3,
+        2,
+        2,
+        7
+      ],
+      "normalized": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "normalized_error": "",
+      "retention": [
+        2000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ]
+    },
+    {
+      "durations": [
+        "5s",
+        "5m0s",
+        "10m0s",
+        "15m0s",
+        "30s",
+        "0s"
+      ],
+      "error": "MaintenanceInterval (0s) must be positive and less than StreamTTL (15m0s)",
+      "hashes": [
+        7,
+        7,
+        3,
+        2,
+        2,
+        7
+      ],
+      "normalized": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "normalized_error": "",
+      "retention": [
+        2000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ]
+    },
+    {
+      "durations": [
+        "5s",
+        "5m0s",
+        "10m0s",
+        "15m0s",
+        "30s",
+        "1ns"
+      ],
+      "error": "",
+      "hashes": [
+        7,
+        7,
+        3,
+        2,
+        2,
+        7
+      ],
+      "normalized": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        1,
+        false
+      ],
+      "normalized_error": "",
+      "retention": [
+        2000,
+        600000000000,
+        900000000000,
+        30000000000,
+        1,
+        false
+      ]
+    },
+    {
+      "durations": [
+        "5s",
+        "5m0s",
+        "10m0s",
+        "15m0s",
+        "30s",
+        "2562047h47m16.854775807s"
+      ],
+      "error": "MaintenanceInterval (2562047h47m16.854775807s) must be positive and less than StreamTTL (15m0s)",
+      "hashes": [
+        7,
+        7,
+        3,
+        2,
+        2,
+        7
+      ],
+      "normalized": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "normalized_error": "",
+      "retention": [
+        2000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ]
+    },
+    {
+      "durations": [
+        "5s",
+        "5m0s",
+        "10m0s",
+        "15m0s",
+        "30s",
+        "1m0s"
+      ],
+      "error": "",
+      "hashes": [
+        7,
+        7,
+        3,
+        2,
+        2,
+        7
+      ],
+      "normalized": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        true
+      ],
+      "normalized_error": "",
+      "retention": [
+        2000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        true
+      ]
+    }
+  ],
+  "python": [
+    {
+      "normalized": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "error": "ReplayGrace must be positive",
+      "normalized_error": "",
+      "hashes": [
+        7,
+        7,
+        3,
+        2,
+        2,
+        7
+      ],
+      "retention": [
+        2000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "durations": [
+        "0s",
+        "0s",
+        "0s",
+        "0s",
+        "0s",
+        "0s"
+      ]
+    },
+    {
+      "normalized": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "error": "",
+      "normalized_error": "",
+      "hashes": [
+        7,
+        7,
+        3,
+        2,
+        2,
+        7
+      ],
+      "retention": [
+        2000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "durations": [
+        "5s",
+        "5m0s",
+        "10m0s",
+        "15m0s",
+        "30s",
+        "1m0s"
+      ]
+    },
+    {
+      "normalized": [
+        8,
+        2000,
+        128,
+        5000000000,
+        3,
+        6,
+        9,
+        3,
+        3,
+        false
+      ],
+      "error": "TrimHorizon (3ns) must be greater than ReplayGrace (3ns)",
+      "normalized_error": "",
+      "hashes": [
+        7,
+        7,
+        3,
+        2,
+        2,
+        7
+      ],
+      "retention": [
+        2000,
+        6,
+        9,
+        3,
+        3,
+        false
+      ],
+      "durations": [
+        "0s",
+        "3ns",
+        "3ns",
+        "2ns",
+        "0s",
+        "0s"
+      ]
+    },
+    {
+      "normalized": [
+        8,
+        2000,
+        128,
+        5000000000,
+        4611686018427387904,
+        -9223372036854775808,
+        0,
+        1,
+        1,
+        false
+      ],
+      "error": "TrimHorizon (0s) must be greater than ReplayGrace (1281023h53m38.427387904s)",
+      "normalized_error": "TrimHorizon (-2562047h47m16.854775808s) must be greater than ReplayGrace (1281023h53m38.427387904s)",
+      "hashes": [
+        7,
+        7,
+        3,
+        2,
+        2,
+        7
+      ],
+      "retention": [
+        2000,
+        -9223372036854775808,
+        0,
+        1,
+        1,
+        false
+      ],
+      "durations": [
+        "0s",
+        "1281023h53m38.427387904s",
+        "0s",
+        "0s",
+        "0s",
+        "0s"
+      ]
+    },
+    {
+      "normalized": [
+        8,
+        2000,
+        128,
+        5000000000,
+        9223372036854775807,
+        -2,
+        0,
+        1,
+        1,
+        false
+      ],
+      "error": "TrimHorizon (0s) must be greater than ReplayGrace (2562047h47m16.854775807s)",
+      "normalized_error": "TrimHorizon (-2ns) must be greater than ReplayGrace (2562047h47m16.854775807s)",
+      "hashes": [
+        7,
+        7,
+        3,
+        2,
+        2,
+        7
+      ],
+      "retention": [
+        2000,
+        -2,
+        0,
+        1,
+        1,
+        false
+      ],
+      "durations": [
+        "0s",
+        "2562047h47m16.854775807s",
+        "0s",
+        "0s",
+        "0s",
+        "0s"
+      ]
+    },
+    {
+      "normalized": [
+        4294967297,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "error": "ReplayGrace must be positive",
+      "normalized_error": "",
+      "hashes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "retention": [
+        2000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "durations": [
+        "0s",
+        "0s",
+        "0s",
+        "0s",
+        "0s",
+        "0s"
+      ]
+    },
+    {
+      "normalized": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "error": "",
+      "normalized_error": "",
+      "hashes": [
+        7,
+        7,
+        3,
+        2,
+        2,
+        7
+      ],
+      "retention": [
+        2000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "durations": [
+        "5s",
+        "5m0s",
+        "10m0s",
+        "15m0s",
+        "30s",
+        "1m0s"
+      ]
+    },
+    {
+      "normalized": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "error": "",
+      "normalized_error": "",
+      "hashes": [
+        7,
+        7,
+        3,
+        2,
+        2,
+        7
+      ],
+      "retention": [
+        2000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "durations": [
+        "5s",
+        "5m0s",
+        "10m0s",
+        "15m0s",
+        "30s",
+        "1m0s"
+      ]
+    },
+    {
+      "normalized": [
+        1,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "error": "",
+      "normalized_error": "",
+      "hashes": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "retention": [
+        2000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "durations": [
+        "5s",
+        "5m0s",
+        "10m0s",
+        "15m0s",
+        "30s",
+        "1m0s"
+      ]
+    },
+    {
+      "normalized": [
+        9223372036854775807,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "error": "",
+      "normalized_error": "",
+      "hashes": [
+        1714075823,
+        4018473767,
+        1620527011,
+        3069448402,
+        1588634634,
+        84696351
+      ],
+      "retention": [
+        2000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "durations": [
+        "5s",
+        "5m0s",
+        "10m0s",
+        "15m0s",
+        "30s",
+        "1m0s"
+      ]
+    },
+    {
+      "normalized": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "error": "",
+      "normalized_error": "",
+      "hashes": [
+        7,
+        7,
+        3,
+        2,
+        2,
+        7
+      ],
+      "retention": [
+        2000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "durations": [
+        "5s",
+        "5m0s",
+        "10m0s",
+        "15m0s",
+        "30s",
+        "1m0s"
+      ]
+    },
+    {
+      "normalized": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "error": "",
+      "normalized_error": "",
+      "hashes": [
+        7,
+        7,
+        3,
+        2,
+        2,
+        7
+      ],
+      "retention": [
+        2000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "durations": [
+        "5s",
+        "5m0s",
+        "10m0s",
+        "15m0s",
+        "30s",
+        "1m0s"
+      ]
+    },
+    {
+      "normalized": [
+        8,
+        1,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "error": "",
+      "normalized_error": "",
+      "hashes": [
+        7,
+        7,
+        3,
+        2,
+        2,
+        7
+      ],
+      "retention": [
+        1,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "durations": [
+        "5s",
+        "5m0s",
+        "10m0s",
+        "15m0s",
+        "30s",
+        "1m0s"
+      ]
+    },
+    {
+      "normalized": [
+        8,
+        9223372036854775807,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "error": "",
+      "normalized_error": "",
+      "hashes": [
+        7,
+        7,
+        3,
+        2,
+        2,
+        7
+      ],
+      "retention": [
+        9223372036854775807,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "durations": [
+        "5s",
+        "5m0s",
+        "10m0s",
+        "15m0s",
+        "30s",
+        "1m0s"
+      ]
+    },
+    {
+      "normalized": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "error": "",
+      "normalized_error": "",
+      "hashes": [
+        7,
+        7,
+        3,
+        2,
+        2,
+        7
+      ],
+      "retention": [
+        2000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "durations": [
+        "5s",
+        "5m0s",
+        "10m0s",
+        "15m0s",
+        "30s",
+        "1m0s"
+      ]
+    },
+    {
+      "normalized": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "error": "",
+      "normalized_error": "",
+      "hashes": [
+        7,
+        7,
+        3,
+        2,
+        2,
+        7
+      ],
+      "retention": [
+        2000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "durations": [
+        "5s",
+        "5m0s",
+        "10m0s",
+        "15m0s",
+        "30s",
+        "1m0s"
+      ]
+    },
+    {
+      "normalized": [
+        8,
+        2000,
+        1,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "error": "",
+      "normalized_error": "",
+      "hashes": [
+        7,
+        7,
+        3,
+        2,
+        2,
+        7
+      ],
+      "retention": [
+        2000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "durations": [
+        "5s",
+        "5m0s",
+        "10m0s",
+        "15m0s",
+        "30s",
+        "1m0s"
+      ]
+    },
+    {
+      "normalized": [
+        8,
+        2000,
+        9223372036854775807,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "error": "",
+      "normalized_error": "",
+      "hashes": [
+        7,
+        7,
+        3,
+        2,
+        2,
+        7
+      ],
+      "retention": [
+        2000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "durations": [
+        "5s",
+        "5m0s",
+        "10m0s",
+        "15m0s",
+        "30s",
+        "1m0s"
+      ]
+    },
+    {
+      "normalized": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "error": "",
+      "normalized_error": "",
+      "hashes": [
+        7,
+        7,
+        3,
+        2,
+        2,
+        7
+      ],
+      "retention": [
+        2000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "durations": [
+        "-1ns",
+        "5m0s",
+        "10m0s",
+        "15m0s",
+        "30s",
+        "1m0s"
+      ]
+    },
+    {
+      "normalized": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "error": "",
+      "normalized_error": "",
+      "hashes": [
+        7,
+        7,
+        3,
+        2,
+        2,
+        7
+      ],
+      "retention": [
+        2000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "durations": [
+        "0s",
+        "5m0s",
+        "10m0s",
+        "15m0s",
+        "30s",
+        "1m0s"
+      ]
+    },
+    {
+      "normalized": [
+        8,
+        2000,
+        128,
+        1,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "error": "",
+      "normalized_error": "",
+      "hashes": [
+        7,
+        7,
+        3,
+        2,
+        2,
+        7
+      ],
+      "retention": [
+        2000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "durations": [
+        "1ns",
+        "5m0s",
+        "10m0s",
+        "15m0s",
+        "30s",
+        "1m0s"
+      ]
+    },
+    {
+      "normalized": [
+        8,
+        2000,
+        128,
+        9223372036854775807,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "error": "",
+      "normalized_error": "",
+      "hashes": [
+        7,
+        7,
+        3,
+        2,
+        2,
+        7
+      ],
+      "retention": [
+        2000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "durations": [
+        "2562047h47m16.854775807s",
+        "5m0s",
+        "10m0s",
+        "15m0s",
+        "30s",
+        "1m0s"
+      ]
+    },
+    {
+      "normalized": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "error": "ReplayGrace must be positive",
+      "normalized_error": "",
+      "hashes": [
+        7,
+        7,
+        3,
+        2,
+        2,
+        7
+      ],
+      "retention": [
+        2000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "durations": [
+        "5s",
+        "-1ns",
+        "10m0s",
+        "15m0s",
+        "30s",
+        "1m0s"
+      ]
+    },
+    {
+      "normalized": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "error": "ReplayGrace must be positive",
+      "normalized_error": "",
+      "hashes": [
+        7,
+        7,
+        3,
+        2,
+        2,
+        7
+      ],
+      "retention": [
+        2000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "durations": [
+        "5s",
+        "0s",
+        "10m0s",
+        "15m0s",
+        "30s",
+        "1m0s"
+      ]
+    },
+    {
+      "normalized": [
+        8,
+        2000,
+        128,
+        5000000000,
+        1,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "error": "",
+      "normalized_error": "",
+      "hashes": [
+        7,
+        7,
+        3,
+        2,
+        2,
+        7
+      ],
+      "retention": [
+        2000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "durations": [
+        "5s",
+        "1ns",
+        "10m0s",
+        "15m0s",
+        "30s",
+        "1m0s"
+      ]
+    },
+    {
+      "normalized": [
+        8,
+        2000,
+        128,
+        5000000000,
+        9223372036854775807,
+        -2,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "error": "TrimHorizon (10m0s) must be greater than ReplayGrace (2562047h47m16.854775807s)",
+      "normalized_error": "TrimHorizon (-2ns) must be greater than ReplayGrace (2562047h47m16.854775807s)",
+      "hashes": [
+        7,
+        7,
+        3,
+        2,
+        2,
+        7
+      ],
+      "retention": [
+        2000,
+        -2,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "durations": [
+        "5s",
+        "2562047h47m16.854775807s",
+        "10m0s",
+        "15m0s",
+        "30s",
+        "1m0s"
+      ]
+    },
+    {
+      "normalized": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "error": "TrimHorizon (-1ns) must be greater than ReplayGrace (5m0s)",
+      "normalized_error": "",
+      "hashes": [
+        7,
+        7,
+        3,
+        2,
+        2,
+        7
+      ],
+      "retention": [
+        2000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "durations": [
+        "5s",
+        "5m0s",
+        "-1ns",
+        "15m0s",
+        "30s",
+        "1m0s"
+      ]
+    },
+    {
+      "normalized": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "error": "TrimHorizon (0s) must be greater than ReplayGrace (5m0s)",
+      "normalized_error": "",
+      "hashes": [
+        7,
+        7,
+        3,
+        2,
+        2,
+        7
+      ],
+      "retention": [
+        2000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "durations": [
+        "5s",
+        "5m0s",
+        "0s",
+        "15m0s",
+        "30s",
+        "1m0s"
+      ]
+    },
+    {
+      "normalized": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "error": "TrimHorizon (1ns) must be greater than ReplayGrace (5m0s)",
+      "normalized_error": "",
+      "hashes": [
+        7,
+        7,
+        3,
+        2,
+        2,
+        7
+      ],
+      "retention": [
+        2000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "durations": [
+        "5s",
+        "5m0s",
+        "1ns",
+        "15m0s",
+        "30s",
+        "1m0s"
+      ]
+    },
+    {
+      "normalized": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        9223372036854775807,
+        -9223371736854775809,
+        1,
+        1,
+        false
+      ],
+      "error": "StreamTTL (15m0s) must be at least TrimHorizon (2562047h47m16.854775807s)",
+      "normalized_error": "StreamTTL (-2562047h42m16.854775809s) must be at least TrimHorizon (2562047h47m16.854775807s)",
+      "hashes": [
+        7,
+        7,
+        3,
+        2,
+        2,
+        7
+      ],
+      "retention": [
+        2000,
+        9223372036854775807,
+        -9223371736854775809,
+        1,
+        1,
+        false
+      ],
+      "durations": [
+        "5s",
+        "5m0s",
+        "2562047h47m16.854775807s",
+        "15m0s",
+        "30s",
+        "1m0s"
+      ]
+    },
+    {
+      "normalized": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "error": "StreamTTL (-1ns) must be at least TrimHorizon (10m0s)",
+      "normalized_error": "",
+      "hashes": [
+        7,
+        7,
+        3,
+        2,
+        2,
+        7
+      ],
+      "retention": [
+        2000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "durations": [
+        "5s",
+        "5m0s",
+        "10m0s",
+        "-1ns",
+        "30s",
+        "1m0s"
+      ]
+    },
+    {
+      "normalized": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "error": "StreamTTL (0s) must be at least TrimHorizon (10m0s)",
+      "normalized_error": "",
+      "hashes": [
+        7,
+        7,
+        3,
+        2,
+        2,
+        7
+      ],
+      "retention": [
+        2000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "durations": [
+        "5s",
+        "5m0s",
+        "10m0s",
+        "0s",
+        "30s",
+        "1m0s"
+      ]
+    },
+    {
+      "normalized": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "error": "StreamTTL (1ns) must be at least TrimHorizon (10m0s)",
+      "normalized_error": "",
+      "hashes": [
+        7,
+        7,
+        3,
+        2,
+        2,
+        7
+      ],
+      "retention": [
+        2000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "durations": [
+        "5s",
+        "5m0s",
+        "10m0s",
+        "1ns",
+        "30s",
+        "1m0s"
+      ]
+    },
+    {
+      "normalized": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        9223372036854775807,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "error": "",
+      "normalized_error": "",
+      "hashes": [
+        7,
+        7,
+        3,
+        2,
+        2,
+        7
+      ],
+      "retention": [
+        2000,
+        600000000000,
+        9223372036854775807,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "durations": [
+        "5s",
+        "5m0s",
+        "10m0s",
+        "2562047h47m16.854775807s",
+        "30s",
+        "1m0s"
+      ]
+    },
+    {
+      "normalized": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "error": "TTLRefreshInterval (-1ns) must be positive and less than StreamTTL (15m0s)",
+      "normalized_error": "",
+      "hashes": [
+        7,
+        7,
+        3,
+        2,
+        2,
+        7
+      ],
+      "retention": [
+        2000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "durations": [
+        "5s",
+        "5m0s",
+        "10m0s",
+        "15m0s",
+        "-1ns",
+        "1m0s"
+      ]
+    },
+    {
+      "normalized": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "error": "TTLRefreshInterval (0s) must be positive and less than StreamTTL (15m0s)",
+      "normalized_error": "",
+      "hashes": [
+        7,
+        7,
+        3,
+        2,
+        2,
+        7
+      ],
+      "retention": [
+        2000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "durations": [
+        "5s",
+        "5m0s",
+        "10m0s",
+        "15m0s",
+        "0s",
+        "1m0s"
+      ]
+    },
+    {
+      "normalized": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        1,
+        60000000000,
+        false
+      ],
+      "error": "",
+      "normalized_error": "",
+      "hashes": [
+        7,
+        7,
+        3,
+        2,
+        2,
+        7
+      ],
+      "retention": [
+        2000,
+        600000000000,
+        900000000000,
+        1,
+        60000000000,
+        false
+      ],
+      "durations": [
+        "5s",
+        "5m0s",
+        "10m0s",
+        "15m0s",
+        "1ns",
+        "1m0s"
+      ]
+    },
+    {
+      "normalized": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "error": "TTLRefreshInterval (2562047h47m16.854775807s) must be positive and less than StreamTTL (15m0s)",
+      "normalized_error": "",
+      "hashes": [
+        7,
+        7,
+        3,
+        2,
+        2,
+        7
+      ],
+      "retention": [
+        2000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "durations": [
+        "5s",
+        "5m0s",
+        "10m0s",
+        "15m0s",
+        "2562047h47m16.854775807s",
+        "1m0s"
+      ]
+    },
+    {
+      "normalized": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "error": "MaintenanceInterval (-1ns) must be positive and less than StreamTTL (15m0s)",
+      "normalized_error": "",
+      "hashes": [
+        7,
+        7,
+        3,
+        2,
+        2,
+        7
+      ],
+      "retention": [
+        2000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "durations": [
+        "5s",
+        "5m0s",
+        "10m0s",
+        "15m0s",
+        "30s",
+        "-1ns"
+      ]
+    },
+    {
+      "normalized": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "error": "MaintenanceInterval (0s) must be positive and less than StreamTTL (15m0s)",
+      "normalized_error": "",
+      "hashes": [
+        7,
+        7,
+        3,
+        2,
+        2,
+        7
+      ],
+      "retention": [
+        2000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "durations": [
+        "5s",
+        "5m0s",
+        "10m0s",
+        "15m0s",
+        "30s",
+        "0s"
+      ]
+    },
+    {
+      "normalized": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        1,
+        false
+      ],
+      "error": "",
+      "normalized_error": "",
+      "hashes": [
+        7,
+        7,
+        3,
+        2,
+        2,
+        7
+      ],
+      "retention": [
+        2000,
+        600000000000,
+        900000000000,
+        30000000000,
+        1,
+        false
+      ],
+      "durations": [
+        "5s",
+        "5m0s",
+        "10m0s",
+        "15m0s",
+        "30s",
+        "1ns"
+      ]
+    },
+    {
+      "normalized": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "error": "MaintenanceInterval (2562047h47m16.854775807s) must be positive and less than StreamTTL (15m0s)",
+      "normalized_error": "",
+      "hashes": [
+        7,
+        7,
+        3,
+        2,
+        2,
+        7
+      ],
+      "retention": [
+        2000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "durations": [
+        "5s",
+        "5m0s",
+        "10m0s",
+        "15m0s",
+        "30s",
+        "2562047h47m16.854775807s"
+      ]
+    },
+    {
+      "normalized": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        true
+      ],
+      "error": "",
+      "normalized_error": "",
+      "hashes": [
+        7,
+        7,
+        3,
+        2,
+        2,
+        7
+      ],
+      "retention": [
+        2000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        true
+      ],
+      "durations": [
+        "5s",
+        "5m0s",
+        "10m0s",
+        "15m0s",
+        "30s",
+        "1m0s"
+      ]
+    }
+  ],
+  "mismatches": [],
+  "source_sha256": {
+    "server/go/internal/realtime/sharded_stream_relay.go": "672a624544ff57afd22973d160a4b5c47e8f0f4b65918cf5bc7b751ab63b0da2",
+    "server/go/internal/realtime/stream_retention.go": "04bdc8af4a8ae51dc50aa6f27e23eae051d9a1b2631fa71ab4911fdfde6918fc",
+    "server/tests/parity/go_sharded_config/main.go": "1d46f5c789668ba4c54e8d67ebd36c3ee781e469131fc31ef124632a57ef5b44",
+    "server/tests/parity/go_sharded_config/wrapper.go": "ba28851e789dfe16937668eaf9e1e42f4128ffce366723911f92990af460ce57",
+    "server/src/workpal_backend/realtime/sharded_config.py": "d3c033c35f8f22cabe8c1c6bd05b2b8d6dcd1406f817ff53052af3c26fccfd7e",
+    "server/src/workpal_backend/realtime/stream_retention.py": "a1241c9b9005eba38a834494abdddfb29587880dd373d17f2b89eb0ed6c99c37"
+  }
+}

@@ -1,0 +1,233 @@
+{
+  "version": 1,
+  "date": "2026-11-21",
+  "bounded_scope_complete": true,
+  "root_review": {
+    "status": "accepted bounded current-source refresh",
+    "verification": "Checked 4 current source hashes, complete range partitions and 9 exact tuple occurrences.",
+    "review_scope": "Read all artifact dispositions and critical source excerpts for proxy forwarding, editor submission, preview prefetch, download selection and runtime polling. Full-body reads attributed to implementer.",
+    "limits": "No runtime, downstream exhaustive coverage, historical byte identity or backend support claim."
+  },
+  "global_coverage_complete": false,
+  "backend_completion_claim": false,
+  "hash_semantics": "SHA-256 proves currently reviewed bytes only, not historical identity.",
+  "files": [
+    {
+      "path": "packages/views/editor/attachment.tsx",
+      "sha256": "ef13ff980fbd2466ceac8853dd161738906280f506d065d30799f6c6adad922e",
+      "whole_source": true,
+      "reviewed_ranges": [
+        [
+          1,
+          100
+        ],
+        [
+          101,
+          200
+        ],
+        [
+          201,
+          300
+        ],
+        [
+          301,
+          400
+        ],
+        [
+          401,
+          500
+        ],
+        [
+          501,
+          600
+        ],
+        [
+          601,
+          657
+        ]
+      ],
+      "disposition": "Normalizes record/URL inputs and selects signed, CDN, markdown or legacy URLs; api.getBaseUrl is configuration access, not HTTP. Native img src is a browser resource load; HTTP(S)/relative resources differ from local blob/data. useResignedInlineMedia delegates metadata/byte fallback. Download extracts identity then delegates download or resolver/external opening. Preview first tries sequence then full/URL modal. Clipboard copy and toast are local/browser interfaces; onDelete is injected, not an attachment DELETE. Cards receive callbacks, not transport instructions."
+    },
+    {
+      "path": "packages/views/editor/paste-as-file.ts",
+      "sha256": "2718abe4f5e36b1d5e5b5618e9d89b9d7abca24ff42439ef4d754c2e13bed5f7",
+      "whole_source": true,
+      "reviewed_ranges": [
+        [
+          1,
+          23
+        ]
+      ],
+      "disposition": "Exports only PASTE_AS_FILE_THRESHOLD=4000. Comments describe consumers; no File construction, paste handling, upload or HTTP occurs in this module."
+    },
+    {
+      "path": "packages/views/editor/preview-sequence-context.tsx",
+      "sha256": "c7321ab6181aa9ac65a6b0822175b55a3d979a43204cfb9a337ad68a17117efe",
+      "whole_source": true,
+      "reviewed_ranges": [
+        [
+          1,
+          100
+        ],
+        [
+          101,
+          200
+        ],
+        [
+          201,
+          300
+        ],
+        [
+          301,
+          380
+        ]
+      ],
+      "disposition": "Collects previewable sequence via imported pure collector. openAt freezes an array snapshot, tracks index/pinned key and resets broken set. Navigation skips broken keys without wrapping; pinned failures remain, others advance forward then reverse. goTo can explicitly select a known key. Closing retains session until modal exit. describeItem and lifecycle/locate/copy/overview actions are host interfaces. Modal and immediate image-neighbor PreviewImagePrefetch mounts can initiate downstream resource/metadata work; state navigation itself is local, not a new route."
+    },
+    {
+      "path": "packages/views/editor/use-composer-submit.ts",
+      "sha256": "17c5930a144fc9ffda4a27c213c247f87b9ab404d5bcc785ce8c7039bc7780a0",
+      "whole_source": true,
+      "reviewed_ranges": [
+        [
+          1,
+          100
+        ],
+        [
+          101,
+          176
+        ]
+      ],
+      "disposition": "Reads markdown and normalizes before empty/single-flight/upload-gate guards. Locks ref/state, awaits injected onSubmit, invokes onAccepted only on truthy acceptance, catches failures and unlocks in finally. No send endpoint selected here. Focus mode resolved from latest options after acceptance; animation frame uses latest editor/container refs, ownership check for refocus, mount guard and cancellation on unmount. Draft clearing is caller responsibility, not performed by hook; custom normalization, gate and editor methods remain interfaces."
+    }
+  ],
+  "edges": [
+    {
+      "source": "attachment.tsx:325-329",
+      "kind": "delegated inline media",
+      "inventory": [
+        {
+          "id": "client:4438",
+          "method": "GET",
+          "path_expression": "/api/attachments/${id}",
+          "route": {
+            "method": "GET",
+            "path": "/api/attachments/{id}"
+          }
+        },
+        {
+          "id": "client:4508",
+          "method": "GET",
+          "path_expression": "/api/attachments/${id}/download",
+          "route": {
+            "method": "GET",
+            "path": "/api/attachments/{id}/download"
+          }
+        }
+      ],
+      "disposition": "Existing inline-media proof supplies metadata and authenticated byte fallback; no direct fetch in target."
+    },
+    {
+      "source": "attachment.tsx:371-385",
+      "kind": "delegated download/external open",
+      "inventory": [
+        {
+          "id": "client:4438",
+          "method": "GET",
+          "path_expression": "/api/attachments/${id}",
+          "route": {
+            "method": "GET",
+            "path": "/api/attachments/{id}"
+          }
+        },
+        {
+          "id": "client:4447",
+          "method": "GET",
+          "path_expression": "/api/attachments/${id}/download-metadata",
+          "route": {
+            "method": "GET",
+            "path": "/api/attachments/{id}/download-metadata"
+          }
+        }
+      ],
+      "disposition": "Workspace download and resolver boundary reuse draft-attachment proof; arbitrary URLs/native adapters are not canonical API routes."
+    },
+    {
+      "source": "attachment.tsx:589",
+      "kind": "browser image resource",
+      "inventory": [
+        {
+          "id": "editor:attachment-image:download",
+          "method": "GET",
+          "path_expression": "Image src from normalized attachment URL / refreshed download_url: /api/attachments/{id}/download",
+          "route": {
+            "method": "GET",
+            "path": "/api/attachments/{id}/download"
+          }
+        },
+        {
+          "id": "editor:attachment-image:signed-download",
+          "method": "GET",
+          "path_expression": "Image src from normalized attachment URL / refreshed download_url: /api/attachments/{id}/signed-download",
+          "route": {
+            "method": "GET",
+            "path": "/api/attachments/{id}/signed-download"
+          }
+        }
+      ],
+      "disposition": "Known API-shaped branches only; arbitrary storage/CDN/input origins, redirects, relative resources and blob/data remain data-dependent."
+    },
+    {
+      "source": "preview-sequence-context.tsx:305-379",
+      "kind": "modal and neighbor prefetch delegation",
+      "inventory": [
+        {
+          "id": "client:4438",
+          "method": "GET",
+          "path_expression": "/api/attachments/${id}",
+          "route": {
+            "method": "GET",
+            "path": "/api/attachments/{id}"
+          }
+        },
+        {
+          "id": "client:4475",
+          "method": "GET",
+          "path_expression": "/api/attachments/${id}/content",
+          "route": {
+            "method": "GET",
+            "path": "/api/attachments/{id}/content"
+          }
+        },
+        {
+          "id": "client:4508",
+          "method": "GET",
+          "path_expression": "/api/attachments/${id}/download",
+          "route": {
+            "method": "GET",
+            "path": "/api/attachments/{id}/download"
+          }
+        }
+      ],
+      "disposition": "Reuses preview proof API union, conditional by source/kind; mounting is not evidence every endpoint executes."
+    },
+    {
+      "source": "use-composer-submit.ts:161",
+      "kind": "injected submit callback",
+      "inventory": [],
+      "disposition": "Six concrete host families are described by composer-submit-coverage; their historical chains are reused, not current-hash refreshed here. No route inferred from generic callback."
+    }
+  ],
+  "reused_evidence": [
+    "server/contracts/batches/editor-transport-coverage.json",
+    "server/contracts/batches/editor-preview-transport-coverage.json",
+    "server/contracts/batches/composer-submit-coverage.json",
+    "server/contracts/batches/draft-attachment-transport-coverage.json"
+  ],
+  "boundaries": [
+    "React, UI/query libraries and browser clipboard/DOM/animation/resource machinery are interfaces; third-party implementations not recursively audited.",
+    "Concrete application edges outside refreshed bodies: inline-media hook; download hook/resolver and web/native adapters; AttachmentPreviewModal and PreviewImagePrefetch implementations; host describeItem/lifecycle/locate/copy/overview callbacks; composer host normalization, gate, editor and submit/acceptance callbacks. Existing proofs are reused, not a current-byte re-audit of these implementations.",
+    "Unresolved concrete scope: current downstream host/adapter hashes and query invalidation fanout; runtime URL origins, signatures, redirects and native adapter behavior; authored HTML subresources in downstream viewers. No invented inventory mapping for these branches."
+  ],
+  "execution": "Static source and evidence reads only; no git, application runtime/tests, network/model/integration calls or data/shared ledger edits."
+}

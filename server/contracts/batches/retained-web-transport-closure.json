@@ -1,0 +1,869 @@
+{
+  "version": 1,
+  "coverage": {
+    "complete": false,
+    "bounded_helper_edges_closed": true,
+    "backend_support_claim": false,
+    "scope": "two retained Next target helper edges; shared descendant unions reused"
+  },
+  "files": [
+    {
+      "path": "apps/web/app/(landing)/download/page.tsx",
+      "sha256": "b9674d6318c9ad52b1fddf644a75f39c1e566e8c50fcf302a2bb13ea188002fd",
+      "whole_source": true,
+      "read_ranges": [
+        [
+          1,
+          23
+        ]
+      ],
+      "anchor": {
+        "line": 1,
+        "text": "import type { Metadata } from \"next\";"
+      }
+    },
+    {
+      "path": "apps/web/app/(landing)/download/download-client.tsx",
+      "sha256": "8c55dfbb429a466e82a107c40f91559ece033d162f62ff384707bf480b5c75a4",
+      "whole_source": true,
+      "read_ranges": [
+        [
+          1,
+          60
+        ]
+      ],
+      "anchor": {
+        "line": 1,
+        "text": "\"use client\";"
+      }
+    },
+    {
+      "path": "apps/web/components/web-providers.tsx",
+      "sha256": "45c7fe326029a9063f5a57dced7743027e11c8d114ce5ff3aa776ad47b579b2a",
+      "whole_source": true,
+      "read_ranges": [
+        [
+          1,
+          113
+        ]
+      ],
+      "anchor": {
+        "line": 1,
+        "text": "\"use client\";"
+      }
+    },
+    {
+      "path": "apps/web/components/web-dev-toolbar.tsx",
+      "sha256": "a0d8a7284a26ec9f709402b099ed4b032d6bba15575b40b9d6b694eb4bbacd25",
+      "whole_source": true,
+      "read_ranges": [
+        [
+          1,
+          13
+        ]
+      ],
+      "anchor": {
+        "line": 1,
+        "text": "\"use client\";"
+      }
+    },
+    {
+      "path": "apps/web/features/auth/auth-cookie.ts",
+      "sha256": "1a57710bae2f7f6f99402ba13ddb6efc9f7a871bd4b16ae921824fb95f4bd1c6",
+      "whole_source": true,
+      "read_ranges": [
+        [
+          1,
+          9
+        ]
+      ],
+      "anchor": {
+        "line": 1,
+        "text": "const COOKIE_NAME = \"workpal_logged_in\";"
+      }
+    },
+    {
+      "path": "apps/web/platform/user-locale-sync.ts",
+      "sha256": "73d8fdf090ed4ab60afeee95e3da2fcb00e0931f7fd3ca13e3590ba8dbe0d28d",
+      "whole_source": true,
+      "read_ranges": [
+        [
+          1,
+          11
+        ]
+      ],
+      "anchor": {
+        "line": 1,
+        "text": "\"use client\";"
+      }
+    },
+    {
+      "path": "apps/web/package.json",
+      "sha256": "09dd3a13207ff1cd21644c7f69fdd5e285ffc5c3650d6f10c824f65585f08ee1",
+      "whole_source": true,
+      "read_ranges": [
+        [
+          1,
+          57
+        ]
+      ],
+      "anchor": {
+        "line": 1,
+        "text": "{"
+      }
+    },
+    {
+      "path": "apps/web/index.html",
+      "sha256": "1b0259341456a5f9896a8dece583f7acebd36bfcc217e1d5b5eee7585c46838b",
+      "whole_source": true,
+      "read_ranges": [
+        [
+          1,
+          1
+        ]
+      ],
+      "anchor": {
+        "line": 1,
+        "text": "<!doctype html><html lang=\"en\"><head><meta charset=\"UTF-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><link rel=\"icon\" href=\"/favicon.svg\"><title>Workpal</title></head><body><div id=\"root\"></div><script type=\"module\" src=\"/app/main.tsx\"></script></body></html>"
+      }
+    },
+    {
+      "path": "apps/web/app/main.tsx",
+      "sha256": "e664408f45c8e174479152b06a640927642b6606a492843d53cd60a86f6ea6eb",
+      "whole_source": true,
+      "read_ranges": [
+        [
+          1,
+          59
+        ]
+      ],
+      "anchor": {
+        "line": 1,
+        "text": "import {ThemeProvider} from 'next-themes';"
+      }
+    },
+    {
+      "path": "packages/core/platform/auth-initializer.tsx",
+      "sha256": "7865f143bfad8b3bd9c6acab96f600e218b3895aec2d3d52a449759ef5bdac5e",
+      "whole_source": true,
+      "read_ranges": [
+        [
+          1,
+          411
+        ]
+      ],
+      "anchor": {
+        "line": 1,
+        "text": "\"use client\";"
+      }
+    },
+    {
+      "path": "apps/web/features/landing/components/download/use-detected-platform.ts",
+      "sha256": "d1e3cb86d2fe70a1b4c6aa3bd3b93cbb054d27d910d9ec3ea38c2c682665e846",
+      "whole_source": true,
+      "read_ranges": [
+        [
+          1,
+          25
+        ]
+      ],
+      "anchor": {
+        "line": 1,
+        "text": "\"use client\";"
+      }
+    },
+    {
+      "path": "apps/web/features/landing/components/download/hero.tsx",
+      "sha256": "5e22e20c7aebe80db6408931ae2b8022be54bd52c74ad64136995801ee2164f2",
+      "whole_source": true,
+      "read_ranges": [
+        [
+          1,
+          108
+        ]
+      ],
+      "anchor": {
+        "line": 1,
+        "text": "\"use client\";"
+      }
+    },
+    {
+      "path": "apps/web/features/landing/components/download/all-platforms.tsx",
+      "sha256": "a2f6dbd4e30afa36aa5c6a877216e0e0167d5cb965ad668e6061acde9a7d5c76",
+      "whole_source": true,
+      "read_ranges": [
+        [
+          1,
+          122
+        ]
+      ],
+      "anchor": {
+        "line": 1,
+        "text": "\"use client\";"
+      }
+    },
+    {
+      "path": "apps/web/features/landing/components/download/started.tsx",
+      "sha256": "20e406a94fe7baf1ae391b6612fc0a24455794e29a7c1e807c3f85d486e566c2",
+      "whole_source": true,
+      "read_ranges": [
+        [
+          1,
+          200
+        ]
+      ],
+      "anchor": {
+        "line": 1,
+        "text": "\"use client\";"
+      }
+    },
+    {
+      "path": "apps/web/features/landing/components/download/other-downloads.tsx",
+      "sha256": "11a7058df43faffdd9c1bf29c61b1d9a6730db3182af01557b24df0aa76c1ab7",
+      "whole_source": true,
+      "read_ranges": [
+        [
+          1,
+          112
+        ]
+      ],
+      "anchor": {
+        "line": 1,
+        "text": "\"use client\";"
+      }
+    },
+    {
+      "path": "apps/web/features/landing/components/download/cli-section.tsx",
+      "sha256": "20beb25ee30c062fe1311e732ec81490ec54947f77329a1a0bd894ccfce022a0",
+      "whole_source": true,
+      "read_ranges": [
+        [
+          1,
+          88
+        ]
+      ],
+      "anchor": {
+        "line": 1,
+        "text": "\"use client\";"
+      }
+    },
+    {
+      "path": "apps/web/features/landing/components/download/download-link.tsx",
+      "sha256": "170c71ba3766c6eade89efd68477fd53758a1f4d9a23903a59bd5e0d806e34c0",
+      "whole_source": true,
+      "read_ranges": [
+        [
+          1,
+          54
+        ]
+      ],
+      "anchor": {
+        "line": 1,
+        "text": "\"use client\";"
+      }
+    },
+    {
+      "path": "apps/web/features/landing/utils/github-release.ts",
+      "sha256": "0258716791434d4fbde930c9ab4d2f7fb3d8871c78891835c8567cab557cc5ec",
+      "whole_source": true,
+      "read_ranges": [
+        [
+          1,
+          161
+        ]
+      ],
+      "anchor": {
+        "line": 1,
+        "text": "import {"
+      }
+    },
+    {
+      "path": "apps/web/features/landing/utils/parse-release-assets.ts",
+      "sha256": "392b68b27deb69cbf698ec736be851a334865615048ac83894ba6d3bb1179426",
+      "whole_source": true,
+      "read_ranges": [
+        [
+          1,
+          138
+        ]
+      ],
+      "anchor": {
+        "line": 1,
+        "text": "/**"
+      }
+    },
+    {
+      "path": "apps/web/features/landing/utils/download-target.ts",
+      "sha256": "5379cd7563d425116fe6548ad829898b4af46958a9cc6063e963cf063f842d98",
+      "whole_source": true,
+      "read_ranges": [
+        [
+          1,
+          112
+        ]
+      ],
+      "anchor": {
+        "line": 1,
+        "text": "import type { DetectResult } from \"./os-detect\";"
+      }
+    },
+    {
+      "path": "apps/web/features/landing/utils/request-platform.ts",
+      "sha256": "b3f3383e592bc26e430d481adbb8fdb04288bca10b87208a72b884e2ffe7ea4c",
+      "whole_source": true,
+      "read_ranges": [
+        [
+          1,
+          11
+        ]
+      ],
+      "anchor": {
+        "line": 1,
+        "text": "import { headers } from \"next/headers\";"
+      }
+    },
+    {
+      "path": "apps/web/features/landing/utils/page-metadata.ts",
+      "sha256": "823d87994f5ff5aa0653a65e94fbfc56bb75a1fc9ff748606455263195225f61",
+      "whole_source": true,
+      "read_ranges": [
+        [
+          1,
+          31
+        ]
+      ],
+      "anchor": {
+        "line": 1,
+        "text": "import type { Metadata } from \"next\";"
+      }
+    },
+    {
+      "path": "apps/web/features/landing/utils/os-detect.ts",
+      "sha256": "836377bf41af8194c6bc8c7687ea7f8ff48b4a83289e8c43da2dcce0123c543a",
+      "whole_source": true,
+      "read_ranges": [
+        [
+          1,
+          121
+        ]
+      ],
+      "anchor": {
+        "line": 1,
+        "text": "/**"
+      }
+    },
+    {
+      "path": "packages/views/dev-toolbar/index.ts",
+      "sha256": "8bf4fe03f70c89973104919bb96541912e055f1042c53d97848067d2eb284239",
+      "whole_source": true,
+      "read_ranges": [
+        [
+          1,
+          1
+        ]
+      ],
+      "anchor": {
+        "line": 1,
+        "text": "export { DevToolbar, type DevToolbarProps } from \"./dev-toolbar\";"
+      }
+    },
+    {
+      "path": "packages/views/dev-toolbar/dev-toolbar.tsx",
+      "sha256": "30fe9fee5bf599509f60c630d60be296c4baab2f9b83e5651bb768ca5175dac2",
+      "whole_source": true,
+      "read_ranges": [
+        [
+          1,
+          281
+        ]
+      ],
+      "anchor": {
+        "line": 1,
+        "text": "\"use client\";"
+      }
+    },
+    {
+      "path": "packages/views/dev-toolbar/actions.ts",
+      "sha256": "55ff214ed95a7f08a8c1c8dc5d7de41622591f345a205bb4ec34da3525e1093e",
+      "whole_source": true,
+      "read_ranges": [
+        [
+          1,
+          100
+        ]
+      ],
+      "anchor": {
+        "line": 1,
+        "text": "import type { QueryClient } from \"@tanstack/react-query\";"
+      }
+    },
+    {
+      "path": "packages/views/dev-toolbar/registry.ts",
+      "sha256": "5145f130e7c51e5883e59dab8932019a2d71d470f948862a9c6259f6cf4f8ce4",
+      "whole_source": true,
+      "read_ranges": [
+        [
+          1,
+          24
+        ]
+      ],
+      "anchor": {
+        "line": 1,
+        "text": "import { sourceSurveyDevFeature } from \"../onboarding/dev-actions\";"
+      }
+    },
+    {
+      "path": "packages/views/dev-toolbar/diagnostics-dev-actions.ts",
+      "sha256": "0057cdb4672429314230fee3bbd5f3ed5eacb1813628903cd86781f2157362cf",
+      "whole_source": true,
+      "read_ranges": [
+        [
+          1,
+          53
+        ]
+      ],
+      "anchor": {
+        "line": 1,
+        "text": "import { clearDevErrors, clearDevRequests } from \"@workpal/core/diagnostics\";"
+      }
+    },
+    {
+      "path": "packages/views/dev-toolbar/session-prompt-dev-actions.ts",
+      "sha256": "005091d1744c64d7cd13ebd808377a84b34ad2d79b8f221c998d0d9aca88d668",
+      "whole_source": true,
+      "read_ranges": [
+        [
+          1,
+          26
+        ]
+      ],
+      "anchor": {
+        "line": 1,
+        "text": "import { useSessionPromptStore } from \"@workpal/core/session-prompt\";"
+      }
+    },
+    {
+      "path": "packages/views/dev-toolbar/use-dev-metrics.ts",
+      "sha256": "dc343e1350fd9934a9a908900aef91bd2e95a8dc142ecd28881c0c903960fb7f",
+      "whole_source": true,
+      "read_ranges": [
+        [
+          1,
+          83
+        ]
+      ],
+      "anchor": {
+        "line": 1,
+        "text": "\"use client\";"
+      }
+    },
+    {
+      "path": "packages/views/dev-toolbar/actions-panel.tsx",
+      "sha256": "278a5f480fa564b0e946fd8436423c1cc8541da577179677da0effb9e0ed2a7b",
+      "whole_source": true,
+      "read_ranges": [
+        [
+          1,
+          427
+        ]
+      ],
+      "anchor": {
+        "line": 1,
+        "text": "\"use client\";"
+      }
+    },
+    {
+      "path": "packages/views/dev-toolbar/realtime-panels.tsx",
+      "sha256": "93d7660cee6efe2945089979a8061965f07c96ff69c57bcb3dcfbded2e52144c",
+      "whole_source": true,
+      "read_ranges": [
+        [
+          1,
+          432
+        ]
+      ],
+      "anchor": {
+        "line": 1,
+        "text": "\"use client\";"
+      }
+    },
+    {
+      "path": "packages/views/dev-toolbar/panels.tsx",
+      "sha256": "f2854b1d5c25ef6f40a336d932f7b5fcfe4a6639851be03c47dd33f685d4d798",
+      "whole_source": true,
+      "read_ranges": [
+        [
+          1,
+          442
+        ]
+      ],
+      "anchor": {
+        "line": 1,
+        "text": "\"use client\";"
+      }
+    },
+    {
+      "path": "packages/views/dev-toolbar/metrics.ts",
+      "sha256": "dd6e8cacc2e1f52b93eda352726e3b483f33633a1c376fa6204139672ca0bbb4",
+      "whole_source": true,
+      "read_ranges": [
+        [
+          1,
+          218
+        ]
+      ],
+      "anchor": {
+        "line": 1,
+        "text": "import type {"
+      }
+    },
+    {
+      "path": "packages/views/onboarding/dev-actions.ts",
+      "sha256": "2aef79d7d24fac1838a31753052c8e74bc0334a69ab4f6f9221503e943fe8366",
+      "whole_source": true,
+      "read_ranges": [
+        [
+          1,
+          35
+        ]
+      ],
+      "anchor": {
+        "line": 1,
+        "text": "import { needsSourceBackfill, SOURCE_BACKFILL_MAX_DISMISSALS } from \"@workpal/core/onboarding\";"
+      }
+    },
+    {
+      "path": "packages/views/star-prompt/dev-actions.ts",
+      "sha256": "0f4d7857ffa80c8f73eb94460e7ed4b3967f5945fabad3cf634f787e613d0b8d",
+      "whole_source": true,
+      "read_ranges": [
+        [
+          1,
+          36
+        ]
+      ],
+      "anchor": {
+        "line": 1,
+        "text": "import { useDevPromptStore, useSessionPromptStore } from \"@workpal/core/session-prompt\";"
+      }
+    },
+    {
+      "path": "packages/views/whats-new/dev-actions.ts",
+      "sha256": "e5aaa7f930f01e5c1963e88ada29ca3bb4fb5391d229b0273bd462e77398c2ed",
+      "whole_source": true,
+      "read_ranges": [
+        [
+          1,
+          92
+        ]
+      ],
+      "anchor": {
+        "line": 1,
+        "text": "import { useAuthStore } from \"@workpal/core/auth\";"
+      }
+    },
+    {
+      "path": "packages/core/agents/queries.ts",
+      "sha256": "025f015886abe362104b169f55c1504ecfba0e1bb01c9059b31618274f913d64",
+      "whole_source": true,
+      "read_ranges": [
+        [
+          1,
+          179
+        ]
+      ],
+      "anchor": {
+        "line": 1,
+        "text": "import { infiniteQueryOptions, queryOptions } from \"@tanstack/react-query\";"
+      }
+    },
+    {
+      "path": "packages/core/workspace/queries.ts",
+      "sha256": "1b16ae9e020e75a5a92cebc5270a14c58d97f6b7b0fe033d2f1d2c2d837d093a",
+      "whole_source": true,
+      "read_ranges": [
+        [
+          1,
+          255
+        ]
+      ],
+      "anchor": {
+        "line": 1,
+        "text": "import { queryOptions, type QueryClient } from \"@tanstack/react-query\";"
+      }
+    },
+    {
+      "path": "packages/core/runtimes/queries.ts",
+      "sha256": "7bdbc4bfa199c0f605e052c851eb8d494b4c051edb83626ffc35874c1620eaff",
+      "whole_source": true,
+      "read_ranges": [
+        [
+          1,
+          74
+        ]
+      ],
+      "anchor": {
+        "line": 1,
+        "text": "import { queryOptions } from \"@tanstack/react-query\";"
+      }
+    },
+    {
+      "path": "packages/core/api/client.ts",
+      "sha256": "779bb65b5b7ead815836f7c704ec3c370bafae203e4f92119fadce93e982a4d7",
+      "whole_source": false,
+      "read_ranges": [
+        [
+          2058,
+          2070
+        ],
+        [
+          2266,
+          2282
+        ],
+        [
+          3040,
+          3053
+        ],
+        [
+          3760,
+          3772
+        ]
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "source": "packages/views/dev-toolbar/dev-toolbar.tsx:useCurrentWorkspace/useWorkspaceAgents -> realtime-panels.tsx:TasksPanel",
+      "inventory": [
+        {
+          "id": "client:2066",
+          "method": "GET",
+          "path_expression": "/api/agents?${search}",
+          "route": {
+            "method": "GET",
+            "path": "/api/agents"
+          }
+        },
+        {
+          "id": "client:2276",
+          "method": "GET",
+          "path_expression": "/api/runtimes?${search}",
+          "route": {
+            "method": "GET",
+            "path": "/api/runtimes"
+          }
+        },
+        {
+          "id": "client:3046",
+          "method": "GET",
+          "path_expression": "/api/agent-task-snapshot",
+          "route": {
+            "method": "GET",
+            "path": "/api/agent-task-snapshot"
+          }
+        },
+        {
+          "id": "client:3765",
+          "method": "GET",
+          "path_expression": "/api/workspaces/${workspaceId}/members",
+          "route": {
+            "method": "GET",
+            "path": "/api/workspaces/{id}/members"
+          }
+        }
+      ]
+    }
+  ],
+  "reused_evidence": [
+    {
+      "path": "server/contracts/batches/external-transport-coverage.json",
+      "sha256": "d2fc2d5d5808cc353b4a25445cd702035ce372d6d8e4964c0e91a331aa71a382",
+      "file_hash_checks": []
+    },
+    {
+      "path": "server/contracts/batches/active-web-auth-transport.json",
+      "sha256": "7715490bcdc6b9db985bdb75d055e4608e8b4290a94b5b687713d09c9bd04c24",
+      "file_hash_checks": []
+    },
+    {
+      "path": "server/contracts/batches/platform-session-transport-coverage.json",
+      "sha256": "eac07a4a7a7d18d3e8d38feaec6efd9ffb6655b0ff269075bb06fb5c240e97b0",
+      "file_hash_checks": [
+        {
+          "path": "packages/core/platform/core-provider.tsx",
+          "matches": true
+        },
+        {
+          "path": "packages/core/platform/session-renewal.ts",
+          "matches": true
+        },
+        {
+          "path": "packages/core/platform/system-notification.ts",
+          "matches": true
+        },
+        {
+          "path": "packages/core/platform/types.ts",
+          "matches": true
+        },
+        {
+          "path": "packages/core/api/client.ts",
+          "matches": true
+        },
+        {
+          "path": "packages/core/api/schemas.ts",
+          "matches": true
+        },
+        {
+          "path": "packages/core/auth/store.ts",
+          "matches": true
+        },
+        {
+          "path": "packages/core/platform/storage.ts",
+          "matches": true
+        },
+        {
+          "path": "packages/core/paths/paths.ts",
+          "matches": true
+        },
+        {
+          "path": "apps/web/app/main.tsx",
+          "matches": true
+        },
+        {
+          "path": "apps/web/components/web-notification-bridge.tsx",
+          "matches": true
+        }
+      ]
+    },
+    {
+      "path": "server/contracts/batches/realtime-replay-transport-coverage.json",
+      "sha256": "9c5ecde22ef53fce66db88685e51314380bb2abfb44d6d5aa508740df135f216",
+      "file_hash_checks": [
+        {
+          "path": "packages/core/realtime/hooks.ts",
+          "matches": true
+        },
+        {
+          "path": "packages/core/realtime/provider.tsx",
+          "matches": true
+        },
+        {
+          "path": "packages/core/realtime/use-realtime-sync.ts",
+          "matches": true
+        },
+        {
+          "path": "packages/core/api/ws-client.ts",
+          "matches": true
+        },
+        {
+          "path": "packages/core/api/realtime-observer.ts",
+          "matches": true
+        },
+        {
+          "path": "packages/core/diagnostics/dev-recorder.ts",
+          "matches": true
+        },
+        {
+          "path": "packages/core/issues/ws-updaters.ts",
+          "matches": true
+        },
+        {
+          "path": "packages/core/issues/cache-coordinator.ts",
+          "matches": true
+        },
+        {
+          "path": "packages/core/inbox/ws-updaters.ts",
+          "matches": true
+        },
+        {
+          "path": "packages/core/issues/unread.ts",
+          "matches": true
+        },
+        {
+          "path": "packages/core/issues/subscribed.ts",
+          "matches": true
+        },
+        {
+          "path": "packages/core/platform/system-notification.ts",
+          "matches": true
+        },
+        {
+          "path": "apps/web/components/web-notification-bridge.tsx",
+          "matches": true
+        }
+      ]
+    },
+    {
+      "path": "server/contracts/batches/web-shell-transport-coverage.json",
+      "sha256": "e5166dbaff35dd67b9215482bc31fed8d6f7dcd7ba2b1943655e8d7c01a0ea82",
+      "file_hash_checks": [
+        {
+          "path": "apps/web/app/(auth)/login/page.tsx",
+          "matches": true
+        },
+        {
+          "path": "apps/web/app/(landing)/download/page.tsx",
+          "matches": true
+        },
+        {
+          "path": "apps/web/app/api/upload-file/route.ts",
+          "matches": true
+        },
+        {
+          "path": "apps/web/app/verification-login.tsx",
+          "matches": true
+        },
+        {
+          "path": "apps/web/components/web-providers.tsx",
+          "matches": true
+        },
+        {
+          "path": "apps/web/config/google-analytics.ts",
+          "matches": true
+        },
+        {
+          "path": "apps/web/features/landing/components/contact-sales-page-client.tsx",
+          "matches": true
+        },
+        {
+          "path": "apps/web/features/landing/utils/parse-release-assets.ts",
+          "matches": true
+        },
+        {
+          "path": "apps/web/features/landing/utils/use-github-stars.ts",
+          "matches": true
+        },
+        {
+          "path": "apps/web/platform/upload-proxy.ts",
+          "matches": true
+        }
+      ]
+    }
+  ],
+  "inventory_evidence": {
+    "path": "server/contracts/frontend-calls.json",
+    "sha256": "2670eec069d89d20045a5bc1043d7031f2a1460a4180a0b10256315abee03d21",
+    "exact_tuple_validated": true
+  },
+  "branch_behavior": [
+    "Retained Next download/page and WebProviders are not mounted by the default Vite index.html -> app/main.tsx entry. Vite dev/build and retained dev:next/build:next are distinct. No default-app execution claim.",
+    "DownloadPage awaits release/platform/searchParams; started accepts only twelve known keys. Metadata emits canonical/alternate/share-image descriptors, not a fetch. Request platform reads headers; OS refinement reads navigator high-entropy hints, not HTTP.",
+    "Release fetch is literal GET https://code-host.invalid/api/workpal/releases?per_page=5, optional server token, 300-second cache, 3-second abort, stable/complete selection and empty fallback. Asset parser copies unvalidated browser_download_url; filenames do not constrain URL origin or scheme.",
+    "DownloadClient pending handoff consumes/removes sessionStorage flag and assigns selected href once. DownloadLink preserves modified/default-prevented clicks; handoff prevents default, stores key, pushes localized /download?started=key. Otherwise native anchor follows href and deferred onStart changes local view. Hero primary/alternate and all twelve format links share this path; absent assets render unavailable. Started retry is native anchor to same href; back only clears state/replaces page route.",
+    "Release htmlUrl or literal all-releases URL is browser navigation. workpal://open is native handoff, not API. Community links are browser resources. CLI text is displayed/copied, never executed. Browser navigation may retrieve resources or redirect; no Python route, trusted host, successful download or native support inferred.",
+    "WebProviders legacy localStorage flag selects token/cookie mode; same-origin ws/wss /ws fallback or supplied wsUrl; API base and identity forwarded to singleton CoreProvider. Reuse platform-session, active-web auth and realtime proofs for initialization, renewal, locale synchronization, usage and socket behavior, including their unresolved host boundaries.",
+    "onLogin=setLoggedInCookie writes workpal_logged_in=1 for one year, path=/, SameSite=Lax; onLogout clears max-age=0. AuthInitializer calls onLogin after getMe success; logout/session-expiry teardown and analytics reset reuse platform-session/auth proof. No extra cookie endpoint. Config posthog_key gates initAnalytics with configured host/environment/version; successful identity calls identifyAnalytics. Reuse external SDK proof; no invented collection path; host may be same-origin.",
+    "Dev toolbar loads only development plus truthy devToolbarApiUrl. Wrapper navigation.push is page routing. apiUrl feeds displayed host and copied curl text, not fetch target. Member/runtime/task queries require wsId; TasksPanel also observes agents. Agents include_archived=true and workspace_id, polls 30 seconds only when nonarchived online/unstable rows exist. Snapshot stale 30 seconds and focus refresh; runtimes use shared query defaults.",
+    "Toolbar cache exact invalidation and all-query invalidate/reset can refetch registered active observers: reuse active-web conservative possible query/API union, not runtime enumeration. Recorder subscriptions/performance/DOM/timers are local; clear events/errors/requests local. Replay and drop/reconnect use realtime proof and its cache union, not a new replay endpoint. Copy payload/request/curl uses clipboard, never executes text.",
+    "Dev actions registry contains session reset, source survey, star card, whats-new deck, query cache and errors. Prompt triggers hand off to mounted feature consumers; setting seen-version mutates local auth user, dismissal reset is browser-local. Subsequent mounted feature actions remain within conservative shared caller union; no new endpoint attributed merely to trigger. Synthetic errors can reach configured exception SDK through existing analytics boundary.",
+    "Bounded closure covers concrete helper/callback edges, not all UI imports, landing i18n/site shell, arbitrary injected hosts, SDK internals, redirect chains or every mounted prompt consumer. Existing inventory reconciliation statuses remain unchanged; no backend support or global completeness assertion."
+  ],
+  "validation": {
+    "hashes_anchors_tuples": "validated statically; reused stale hashes explicitly recorded",
+    "runtime": "not run; no git/data/network/model/integration operations"
+  },
+  "root_review": {
+    "status": "accepted retained-source bounded scope",
+    "checks": "Root read WebProviders wiring and release fetch implementation; active Vite entry distinction retained. Hash/tuple integration validates evidence. No default runtime/SDK/host execution claim."
+  }
+}

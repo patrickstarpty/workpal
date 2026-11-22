@@ -1,0 +1,7918 @@
+{
+  "scope": "Original Go register/subscribe/unsubscribe/remove and callback replacement. Rooms unordered; removal callback batch unordered due Go map iteration. Includes connection/subscription/room metric snapshots. No send channel shutdown, concurrent callback ordering, or transport lifecycle certification.",
+  "fixtures": [
+    {
+      "Clients": [
+        {
+          "Workspace": "w",
+          "User": "u",
+          "Stopped": false
+        },
+        {
+          "Workspace": "w",
+          "User": "v",
+          "Stopped": false
+        },
+        {
+          "Workspace": "other",
+          "User": "u",
+          "Stopped": false
+        },
+        {
+          "Workspace": "",
+          "User": "u",
+          "Stopped": false
+        },
+        {
+          "Workspace": "w",
+          "User": "",
+          "Stopped": false
+        },
+        {
+          "Workspace": "w",
+          "User": "stopped",
+          "Stopped": true
+        }
+      ],
+      "Steps": [
+        {
+          "Op": "subscribe",
+          "Client": 0,
+          "Scope": "chat",
+          "ID": "c"
+        },
+        {
+          "Op": "register",
+          "Client": 0,
+          "Scope": "",
+          "ID": ""
+        },
+        {
+          "Op": "register",
+          "Client": 1,
+          "Scope": "",
+          "ID": ""
+        },
+        {
+          "Op": "register",
+          "Client": 2,
+          "Scope": "",
+          "ID": ""
+        },
+        {
+          "Op": "register",
+          "Client": 3,
+          "Scope": "",
+          "ID": ""
+        },
+        {
+          "Op": "register",
+          "Client": 4,
+          "Scope": "",
+          "ID": ""
+        },
+        {
+          "Op": "register",
+          "Client": 5,
+          "Scope": "",
+          "ID": ""
+        },
+        {
+          "Op": "register",
+          "Client": 0,
+          "Scope": "",
+          "ID": ""
+        },
+        {
+          "Op": "subscribe",
+          "Client": 0,
+          "Scope": "chat",
+          "ID": "c"
+        },
+        {
+          "Op": "subscribe",
+          "Client": 0,
+          "Scope": "chat",
+          "ID": "c"
+        },
+        {
+          "Op": "subscribe",
+          "Client": 1,
+          "Scope": "chat",
+          "ID": "c"
+        },
+        {
+          "Op": "unsubscribe",
+          "Client": 0,
+          "Scope": "chat",
+          "ID": "c"
+        },
+        {
+          "Op": "unsubscribe",
+          "Client": 0,
+          "Scope": "chat",
+          "ID": "c"
+        },
+        {
+          "Op": "unsubscribe",
+          "Client": 1,
+          "Scope": "chat",
+          "ID": "c"
+        },
+        {
+          "Op": "subscribe",
+          "Client": 0,
+          "Scope": "",
+          "ID": "x"
+        },
+        {
+          "Op": "subscribe",
+          "Client": 0,
+          "Scope": "chat",
+          "ID": ""
+        },
+        {
+          "Op": "unsubscribe",
+          "Client": 0,
+          "Scope": "",
+          "ID": ""
+        },
+        {
+          "Op": "remove",
+          "Client": 0,
+          "Scope": "",
+          "ID": ""
+        },
+        {
+          "Op": "remove",
+          "Client": 0,
+          "Scope": "",
+          "ID": ""
+        },
+        {
+          "Op": "subscribe",
+          "Client": 0,
+          "Scope": "chat",
+          "ID": "c"
+        },
+        {
+          "Op": "remove",
+          "Client": 1,
+          "Scope": "",
+          "ID": ""
+        },
+        {
+          "Op": "remove",
+          "Client": 2,
+          "Scope": "",
+          "ID": ""
+        },
+        {
+          "Op": "remove",
+          "Client": 3,
+          "Scope": "",
+          "ID": ""
+        },
+        {
+          "Op": "remove",
+          "Client": 4,
+          "Scope": "",
+          "ID": ""
+        }
+      ]
+    },
+    {
+      "Clients": [
+        {
+          "Workspace": "w",
+          "User": "u",
+          "Stopped": false
+        },
+        {
+          "Workspace": "w",
+          "User": "v",
+          "Stopped": false
+        },
+        {
+          "Workspace": "other",
+          "User": "u",
+          "Stopped": false
+        },
+        {
+          "Workspace": "",
+          "User": "u",
+          "Stopped": false
+        },
+        {
+          "Workspace": "w",
+          "User": "",
+          "Stopped": false
+        },
+        {
+          "Workspace": "w",
+          "User": "stopped",
+          "Stopped": true
+        }
+      ],
+      "Steps": [
+        {
+          "Op": "disable",
+          "Client": 0,
+          "Scope": "",
+          "ID": ""
+        },
+        {
+          "Op": "register",
+          "Client": 0,
+          "Scope": "",
+          "ID": ""
+        },
+        {
+          "Op": "enable",
+          "Client": 0,
+          "Scope": "",
+          "ID": ""
+        },
+        {
+          "Op": "subscribe",
+          "Client": 0,
+          "Scope": "user",
+          "ID": "v"
+        },
+        {
+          "Op": "unsubscribe",
+          "Client": 0,
+          "Scope": "workspace",
+          "ID": "w"
+        },
+        {
+          "Op": "subscribe",
+          "Client": 0,
+          "Scope": "workspace",
+          "ID": "w"
+        },
+        {
+          "Op": "remove",
+          "Client": 0,
+          "Scope": "",
+          "ID": ""
+        }
+      ]
+    }
+  ],
+  "go": [
+    [
+      {
+        "callbacks": [],
+        "metrics": {
+          "active_connections": 0,
+          "active_scope_rooms": {},
+          "connects_total": 0,
+          "disconnects_total": 0,
+          "events_sent_by_type": {},
+          "inbound_too_large_total": 0,
+          "membership_removals_dropped_total": 0,
+          "messages_dropped_total": 0,
+          "messages_sent_total": 0,
+          "redis": {
+            "ack_total": 0,
+            "connected": false,
+            "evicted_keys": 0,
+            "last_error": "",
+            "last_xadd_lag_micros": 0,
+            "max_memory_bytes": 0,
+            "mirror_divergence_total": 0,
+            "mirror_primary_errors": 0,
+            "mirror_secondary_errors": 0,
+            "node_id": "",
+            "retention_errors": 0,
+            "stream_missing_total": 0,
+            "stream_trimmed_total": 0,
+            "streams": {},
+            "streams_without_ttl": 0,
+            "used_memory_bytes": 0,
+            "xadd_errors": 0,
+            "xadd_total": 0,
+            "xread_errors": 0,
+            "xread_total": 0
+          },
+          "slow_evictions_total": 0,
+          "subscribe_denied_total": {},
+          "subscribes_total": {},
+          "unsubscribes_total": {}
+        },
+        "present": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "result": false,
+        "rooms": [],
+        "subscriptions": [
+          [],
+          [],
+          [],
+          [],
+          [],
+          []
+        ]
+      },
+      {
+        "callbacks": [
+          [
+            "first",
+            "workspace",
+            "w"
+          ],
+          [
+            "first",
+            "user",
+            "u"
+          ],
+          [
+            "first",
+            "workspace_member",
+            "w:u"
+          ]
+        ],
+        "metrics": {
+          "active_connections": 1,
+          "active_scope_rooms": {
+            "user": 1,
+            "workspace": 1,
+            "workspace_member": 1
+          },
+          "connects_total": 1,
+          "disconnects_total": 0,
+          "events_sent_by_type": {},
+          "inbound_too_large_total": 0,
+          "membership_removals_dropped_total": 0,
+          "messages_dropped_total": 0,
+          "messages_sent_total": 0,
+          "redis": {
+            "ack_total": 0,
+            "connected": false,
+            "evicted_keys": 0,
+            "last_error": "",
+            "last_xadd_lag_micros": 0,
+            "max_memory_bytes": 0,
+            "mirror_divergence_total": 0,
+            "mirror_primary_errors": 0,
+            "mirror_secondary_errors": 0,
+            "node_id": "",
+            "retention_errors": 0,
+            "stream_missing_total": 0,
+            "stream_trimmed_total": 0,
+            "streams": {},
+            "streams_without_ttl": 0,
+            "used_memory_bytes": 0,
+            "xadd_errors": 0,
+            "xadd_total": 0,
+            "xread_errors": 0,
+            "xread_total": 0
+          },
+          "slow_evictions_total": 0,
+          "subscribe_denied_total": {},
+          "subscribes_total": {
+            "user": 1,
+            "workspace": 1,
+            "workspace_member": 1
+          },
+          "unsubscribes_total": {}
+        },
+        "present": [
+          true,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "result": null,
+        "rooms": [
+          [
+            "user",
+            "u"
+          ],
+          [
+            "workspace",
+            "w"
+          ],
+          [
+            "workspace_member",
+            "w:u"
+          ]
+        ],
+        "subscriptions": [
+          [
+            [
+              "user",
+              "u"
+            ],
+            [
+              "workspace",
+              "w"
+            ],
+            [
+              "workspace_member",
+              "w:u"
+            ]
+          ],
+          [],
+          [],
+          [],
+          [],
+          []
+        ]
+      },
+      {
+        "callbacks": [
+          [
+            "first",
+            "user",
+            "v"
+          ],
+          [
+            "first",
+            "workspace_member",
+            "w:v"
+          ]
+        ],
+        "metrics": {
+          "active_connections": 2,
+          "active_scope_rooms": {
+            "user": 2,
+            "workspace": 1,
+            "workspace_member": 2
+          },
+          "connects_total": 2,
+          "disconnects_total": 0,
+          "events_sent_by_type": {},
+          "inbound_too_large_total": 0,
+          "membership_removals_dropped_total": 0,
+          "messages_dropped_total": 0,
+          "messages_sent_total": 0,
+          "redis": {
+            "ack_total": 0,
+            "connected": false,
+            "evicted_keys": 0,
+            "last_error": "",
+            "last_xadd_lag_micros": 0,
+            "max_memory_bytes": 0,
+            "mirror_divergence_total": 0,
+            "mirror_primary_errors": 0,
+            "mirror_secondary_errors": 0,
+            "node_id": "",
+            "retention_errors": 0,
+            "stream_missing_total": 0,
+            "stream_trimmed_total": 0,
+            "streams": {},
+            "streams_without_ttl": 0,
+            "used_memory_bytes": 0,
+            "xadd_errors": 0,
+            "xadd_total": 0,
+            "xread_errors": 0,
+            "xread_total": 0
+          },
+          "slow_evictions_total": 0,
+          "subscribe_denied_total": {},
+          "subscribes_total": {
+            "user": 2,
+            "workspace": 2,
+            "workspace_member": 2
+          },
+          "unsubscribes_total": {}
+        },
+        "present": [
+          true,
+          true,
+          false,
+          false,
+          false,
+          false
+        ],
+        "result": null,
+        "rooms": [
+          [
+            "user",
+            "u"
+          ],
+          [
+            "user",
+            "v"
+          ],
+          [
+            "workspace",
+            "w"
+          ],
+          [
+            "workspace_member",
+            "w:u"
+          ],
+          [
+            "workspace_member",
+            "w:v"
+          ]
+        ],
+        "subscriptions": [
+          [
+            [
+              "user",
+              "u"
+            ],
+            [
+              "workspace",
+              "w"
+            ],
+            [
+              "workspace_member",
+              "w:u"
+            ]
+          ],
+          [
+            [
+              "user",
+              "v"
+            ],
+            [
+              "workspace",
+              "w"
+            ],
+            [
+              "workspace_member",
+              "w:v"
+            ]
+          ],
+          [],
+          [],
+          [],
+          []
+        ]
+      },
+      {
+        "callbacks": [
+          [
+            "first",
+            "workspace",
+            "other"
+          ],
+          [
+            "first",
+            "workspace_member",
+            "other:u"
+          ]
+        ],
+        "metrics": {
+          "active_connections": 3,
+          "active_scope_rooms": {
+            "user": 2,
+            "workspace": 2,
+            "workspace_member": 3
+          },
+          "connects_total": 3,
+          "disconnects_total": 0,
+          "events_sent_by_type": {},
+          "inbound_too_large_total": 0,
+          "membership_removals_dropped_total": 0,
+          "messages_dropped_total": 0,
+          "messages_sent_total": 0,
+          "redis": {
+            "ack_total": 0,
+            "connected": false,
+            "evicted_keys": 0,
+            "last_error": "",
+            "last_xadd_lag_micros": 0,
+            "max_memory_bytes": 0,
+            "mirror_divergence_total": 0,
+            "mirror_primary_errors": 0,
+            "mirror_secondary_errors": 0,
+            "node_id": "",
+            "retention_errors": 0,
+            "stream_missing_total": 0,
+            "stream_trimmed_total": 0,
+            "streams": {},
+            "streams_without_ttl": 0,
+            "used_memory_bytes": 0,
+            "xadd_errors": 0,
+            "xadd_total": 0,
+            "xread_errors": 0,
+            "xread_total": 0
+          },
+          "slow_evictions_total": 0,
+          "subscribe_denied_total": {},
+          "subscribes_total": {
+            "user": 3,
+            "workspace": 3,
+            "workspace_member": 3
+          },
+          "unsubscribes_total": {}
+        },
+        "present": [
+          true,
+          true,
+          true,
+          false,
+          false,
+          false
+        ],
+        "result": null,
+        "rooms": [
+          [
+            "user",
+            "u"
+          ],
+          [
+            "user",
+            "v"
+          ],
+          [
+            "workspace",
+            "other"
+          ],
+          [
+            "workspace",
+            "w"
+          ],
+          [
+            "workspace_member",
+            "other:u"
+          ],
+          [
+            "workspace_member",
+            "w:u"
+          ],
+          [
+            "workspace_member",
+            "w:v"
+          ]
+        ],
+        "subscriptions": [
+          [
+            [
+              "user",
+              "u"
+            ],
+            [
+              "workspace",
+              "w"
+            ],
+            [
+              "workspace_member",
+              "w:u"
+            ]
+          ],
+          [
+            [
+              "user",
+              "v"
+            ],
+            [
+              "workspace",
+              "w"
+            ],
+            [
+              "workspace_member",
+              "w:v"
+            ]
+          ],
+          [
+            [
+              "user",
+              "u"
+            ],
+            [
+              "workspace",
+              "other"
+            ],
+            [
+              "workspace_member",
+              "other:u"
+            ]
+          ],
+          [],
+          [],
+          []
+        ]
+      },
+      {
+        "callbacks": [],
+        "metrics": {
+          "active_connections": 4,
+          "active_scope_rooms": {
+            "user": 2,
+            "workspace": 2,
+            "workspace_member": 3
+          },
+          "connects_total": 4,
+          "disconnects_total": 0,
+          "events_sent_by_type": {},
+          "inbound_too_large_total": 0,
+          "membership_removals_dropped_total": 0,
+          "messages_dropped_total": 0,
+          "messages_sent_total": 0,
+          "redis": {
+            "ack_total": 0,
+            "connected": false,
+            "evicted_keys": 0,
+            "last_error": "",
+            "last_xadd_lag_micros": 0,
+            "max_memory_bytes": 0,
+            "mirror_divergence_total": 0,
+            "mirror_primary_errors": 0,
+            "mirror_secondary_errors": 0,
+            "node_id": "",
+            "retention_errors": 0,
+            "stream_missing_total": 0,
+            "stream_trimmed_total": 0,
+            "streams": {},
+            "streams_without_ttl": 0,
+            "used_memory_bytes": 0,
+            "xadd_errors": 0,
+            "xadd_total": 0,
+            "xread_errors": 0,
+            "xread_total": 0
+          },
+          "slow_evictions_total": 0,
+          "subscribe_denied_total": {},
+          "subscribes_total": {
+            "user": 4,
+            "workspace": 3,
+            "workspace_member": 3
+          },
+          "unsubscribes_total": {}
+        },
+        "present": [
+          true,
+          true,
+          true,
+          true,
+          false,
+          false
+        ],
+        "result": null,
+        "rooms": [
+          [
+            "user",
+            "u"
+          ],
+          [
+            "user",
+            "v"
+          ],
+          [
+            "workspace",
+            "other"
+          ],
+          [
+            "workspace",
+            "w"
+          ],
+          [
+            "workspace_member",
+            "other:u"
+          ],
+          [
+            "workspace_member",
+            "w:u"
+          ],
+          [
+            "workspace_member",
+            "w:v"
+          ]
+        ],
+        "subscriptions": [
+          [
+            [
+              "user",
+              "u"
+            ],
+            [
+              "workspace",
+              "w"
+            ],
+            [
+              "workspace_member",
+              "w:u"
+            ]
+          ],
+          [
+            [
+              "user",
+              "v"
+            ],
+            [
+              "workspace",
+              "w"
+            ],
+            [
+              "workspace_member",
+              "w:v"
+            ]
+          ],
+          [
+            [
+              "user",
+              "u"
+            ],
+            [
+              "workspace",
+              "other"
+            ],
+            [
+              "workspace_member",
+              "other:u"
+            ]
+          ],
+          [
+            [
+              "user",
+              "u"
+            ]
+          ],
+          [],
+          []
+        ]
+      },
+      {
+        "callbacks": [],
+        "metrics": {
+          "active_connections": 5,
+          "active_scope_rooms": {
+            "user": 2,
+            "workspace": 2,
+            "workspace_member": 3
+          },
+          "connects_total": 5,
+          "disconnects_total": 0,
+          "events_sent_by_type": {},
+          "inbound_too_large_total": 0,
+          "membership_removals_dropped_total": 0,
+          "messages_dropped_total": 0,
+          "messages_sent_total": 0,
+          "redis": {
+            "ack_total": 0,
+            "connected": false,
+            "evicted_keys": 0,
+            "last_error": "",
+            "last_xadd_lag_micros": 0,
+            "max_memory_bytes": 0,
+            "mirror_divergence_total": 0,
+            "mirror_primary_errors": 0,
+            "mirror_secondary_errors": 0,
+            "node_id": "",
+            "retention_errors": 0,
+            "stream_missing_total": 0,
+            "stream_trimmed_total": 0,
+            "streams": {},
+            "streams_without_ttl": 0,
+            "used_memory_bytes": 0,
+            "xadd_errors": 0,
+            "xadd_total": 0,
+            "xread_errors": 0,
+            "xread_total": 0
+          },
+          "slow_evictions_total": 0,
+          "subscribe_denied_total": {},
+          "subscribes_total": {
+            "user": 4,
+            "workspace": 4,
+            "workspace_member": 3
+          },
+          "unsubscribes_total": {}
+        },
+        "present": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          false
+        ],
+        "result": null,
+        "rooms": [
+          [
+            "user",
+            "u"
+          ],
+          [
+            "user",
+            "v"
+          ],
+          [
+            "workspace",
+            "other"
+          ],
+          [
+            "workspace",
+            "w"
+          ],
+          [
+            "workspace_member",
+            "other:u"
+          ],
+          [
+            "workspace_member",
+            "w:u"
+          ],
+          [
+            "workspace_member",
+            "w:v"
+          ]
+        ],
+        "subscriptions": [
+          [
+            [
+              "user",
+              "u"
+            ],
+            [
+              "workspace",
+              "w"
+            ],
+            [
+              "workspace_member",
+              "w:u"
+            ]
+          ],
+          [
+            [
+              "user",
+              "v"
+            ],
+            [
+              "workspace",
+              "w"
+            ],
+            [
+              "workspace_member",
+              "w:v"
+            ]
+          ],
+          [
+            [
+              "user",
+              "u"
+            ],
+            [
+              "workspace",
+              "other"
+            ],
+            [
+              "workspace_member",
+              "other:u"
+            ]
+          ],
+          [
+            [
+              "user",
+              "u"
+            ]
+          ],
+          [
+            [
+              "workspace",
+              "w"
+            ]
+          ],
+          []
+        ]
+      },
+      {
+        "callbacks": [],
+        "metrics": {
+          "active_connections": 5,
+          "active_scope_rooms": {
+            "user": 2,
+            "workspace": 2,
+            "workspace_member": 3
+          },
+          "connects_total": 5,
+          "disconnects_total": 0,
+          "events_sent_by_type": {},
+          "inbound_too_large_total": 0,
+          "membership_removals_dropped_total": 0,
+          "messages_dropped_total": 0,
+          "messages_sent_total": 0,
+          "redis": {
+            "ack_total": 0,
+            "connected": false,
+            "evicted_keys": 0,
+            "last_error": "",
+            "last_xadd_lag_micros": 0,
+            "max_memory_bytes": 0,
+            "mirror_divergence_total": 0,
+            "mirror_primary_errors": 0,
+            "mirror_secondary_errors": 0,
+            "node_id": "",
+            "retention_errors": 0,
+            "stream_missing_total": 0,
+            "stream_trimmed_total": 0,
+            "streams": {},
+            "streams_without_ttl": 0,
+            "used_memory_bytes": 0,
+            "xadd_errors": 0,
+            "xadd_total": 0,
+            "xread_errors": 0,
+            "xread_total": 0
+          },
+          "slow_evictions_total": 0,
+          "subscribe_denied_total": {},
+          "subscribes_total": {
+            "user": 4,
+            "workspace": 4,
+            "workspace_member": 3
+          },
+          "unsubscribes_total": {}
+        },
+        "present": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          false
+        ],
+        "result": null,
+        "rooms": [
+          [
+            "user",
+            "u"
+          ],
+          [
+            "user",
+            "v"
+          ],
+          [
+            "workspace",
+            "other"
+          ],
+          [
+            "workspace",
+            "w"
+          ],
+          [
+            "workspace_member",
+            "other:u"
+          ],
+          [
+            "workspace_member",
+            "w:u"
+          ],
+          [
+            "workspace_member",
+            "w:v"
+          ]
+        ],
+        "subscriptions": [
+          [
+            [
+              "user",
+              "u"
+            ],
+            [
+              "workspace",
+              "w"
+            ],
+            [
+              "workspace_member",
+              "w:u"
+            ]
+          ],
+          [
+            [
+              "user",
+              "v"
+            ],
+            [
+              "workspace",
+              "w"
+            ],
+            [
+              "workspace_member",
+              "w:v"
+            ]
+          ],
+          [
+            [
+              "user",
+              "u"
+            ],
+            [
+              "workspace",
+              "other"
+            ],
+            [
+              "workspace_member",
+              "other:u"
+            ]
+          ],
+          [
+            [
+              "user",
+              "u"
+            ]
+          ],
+          [
+            [
+              "workspace",
+              "w"
+            ]
+          ],
+          []
+        ]
+      },
+      {
+        "callbacks": [],
+        "metrics": {
+          "active_connections": 6,
+          "active_scope_rooms": {
+            "user": 2,
+            "workspace": 2,
+            "workspace_member": 3
+          },
+          "connects_total": 6,
+          "disconnects_total": 0,
+          "events_sent_by_type": {},
+          "inbound_too_large_total": 0,
+          "membership_removals_dropped_total": 0,
+          "messages_dropped_total": 0,
+          "messages_sent_total": 0,
+          "redis": {
+            "ack_total": 0,
+            "connected": false,
+            "evicted_keys": 0,
+            "last_error": "",
+            "last_xadd_lag_micros": 0,
+            "max_memory_bytes": 0,
+            "mirror_divergence_total": 0,
+            "mirror_primary_errors": 0,
+            "mirror_secondary_errors": 0,
+            "node_id": "",
+            "retention_errors": 0,
+            "stream_missing_total": 0,
+            "stream_trimmed_total": 0,
+            "streams": {},
+            "streams_without_ttl": 0,
+            "used_memory_bytes": 0,
+            "xadd_errors": 0,
+            "xadd_total": 0,
+            "xread_errors": 0,
+            "xread_total": 0
+          },
+          "slow_evictions_total": 0,
+          "subscribe_denied_total": {},
+          "subscribes_total": {
+            "user": 4,
+            "workspace": 4,
+            "workspace_member": 3
+          },
+          "unsubscribes_total": {}
+        },
+        "present": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          false
+        ],
+        "result": null,
+        "rooms": [
+          [
+            "user",
+            "u"
+          ],
+          [
+            "user",
+            "v"
+          ],
+          [
+            "workspace",
+            "other"
+          ],
+          [
+            "workspace",
+            "w"
+          ],
+          [
+            "workspace_member",
+            "other:u"
+          ],
+          [
+            "workspace_member",
+            "w:u"
+          ],
+          [
+            "workspace_member",
+            "w:v"
+          ]
+        ],
+        "subscriptions": [
+          [
+            [
+              "user",
+              "u"
+            ],
+            [
+              "workspace",
+              "w"
+            ],
+            [
+              "workspace_member",
+              "w:u"
+            ]
+          ],
+          [
+            [
+              "user",
+              "v"
+            ],
+            [
+              "workspace",
+              "w"
+            ],
+            [
+              "workspace_member",
+              "w:v"
+            ]
+          ],
+          [
+            [
+              "user",
+              "u"
+            ],
+            [
+              "workspace",
+              "other"
+            ],
+            [
+              "workspace_member",
+              "other:u"
+            ]
+          ],
+          [
+            [
+              "user",
+              "u"
+            ]
+          ],
+          [
+            [
+              "workspace",
+              "w"
+            ]
+          ],
+          []
+        ]
+      },
+      {
+        "callbacks": [
+          [
+            "first",
+            "chat",
+            "c"
+          ]
+        ],
+        "metrics": {
+          "active_connections": 6,
+          "active_scope_rooms": {
+            "chat": 1,
+            "user": 2,
+            "workspace": 2,
+            "workspace_member": 3
+          },
+          "connects_total": 6,
+          "disconnects_total": 0,
+          "events_sent_by_type": {},
+          "inbound_too_large_total": 0,
+          "membership_removals_dropped_total": 0,
+          "messages_dropped_total": 0,
+          "messages_sent_total": 0,
+          "redis": {
+            "ack_total": 0,
+            "connected": false,
+            "evicted_keys": 0,
+            "last_error": "",
+            "last_xadd_lag_micros": 0,
+            "max_memory_bytes": 0,
+            "mirror_divergence_total": 0,
+            "mirror_primary_errors": 0,
+            "mirror_secondary_errors": 0,
+            "node_id": "",
+            "retention_errors": 0,
+            "stream_missing_total": 0,
+            "stream_trimmed_total": 0,
+            "streams": {},
+            "streams_without_ttl": 0,
+            "used_memory_bytes": 0,
+            "xadd_errors": 0,
+            "xadd_total": 0,
+            "xread_errors": 0,
+            "xread_total": 0
+          },
+          "slow_evictions_total": 0,
+          "subscribe_denied_total": {},
+          "subscribes_total": {
+            "chat": 1,
+            "user": 4,
+            "workspace": 4,
+            "workspace_member": 3
+          },
+          "unsubscribes_total": {}
+        },
+        "present": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          false
+        ],
+        "result": true,
+        "rooms": [
+          [
+            "chat",
+            "c"
+          ],
+          [
+            "user",
+            "u"
+          ],
+          [
+            "user",
+            "v"
+          ],
+          [
+            "workspace",
+            "other"
+          ],
+          [
+            "workspace",
+            "w"
+          ],
+          [
+            "workspace_member",
+            "other:u"
+          ],
+          [
+            "workspace_member",
+            "w:u"
+          ],
+          [
+            "workspace_member",
+            "w:v"
+          ]
+        ],
+        "subscriptions": [
+          [
+            [
+              "chat",
+              "c"
+            ],
+            [
+              "user",
+              "u"
+            ],
+            [
+              "workspace",
+              "w"
+            ],
+            [
+              "workspace_member",
+              "w:u"
+            ]
+          ],
+          [
+            [
+              "user",
+              "v"
+            ],
+            [
+              "workspace",
+              "w"
+            ],
+            [
+              "workspace_member",
+              "w:v"
+            ]
+          ],
+          [
+            [
+              "user",
+              "u"
+            ],
+            [
+              "workspace",
+              "other"
+            ],
+            [
+              "workspace_member",
+              "other:u"
+            ]
+          ],
+          [
+            [
+              "user",
+              "u"
+            ]
+          ],
+          [
+            [
+              "workspace",
+              "w"
+            ]
+          ],
+          []
+        ]
+      },
+      {
+        "callbacks": [],
+        "metrics": {
+          "active_connections": 6,
+          "active_scope_rooms": {
+            "chat": 1,
+            "user": 2,
+            "workspace": 2,
+            "workspace_member": 3
+          },
+          "connects_total": 6,
+          "disconnects_total": 0,
+          "events_sent_by_type": {},
+          "inbound_too_large_total": 0,
+          "membership_removals_dropped_total": 0,
+          "messages_dropped_total": 0,
+          "messages_sent_total": 0,
+          "redis": {
+            "ack_total": 0,
+            "connected": false,
+            "evicted_keys": 0,
+            "last_error": "",
+            "last_xadd_lag_micros": 0,
+            "max_memory_bytes": 0,
+            "mirror_divergence_total": 0,
+            "mirror_primary_errors": 0,
+            "mirror_secondary_errors": 0,
+            "node_id": "",
+            "retention_errors": 0,
+            "stream_missing_total": 0,
+            "stream_trimmed_total": 0,
+            "streams": {},
+            "streams_without_ttl": 0,
+            "used_memory_bytes": 0,
+            "xadd_errors": 0,
+            "xadd_total": 0,
+            "xread_errors": 0,
+            "xread_total": 0
+          },
+          "slow_evictions_total": 0,
+          "subscribe_denied_total": {},
+          "subscribes_total": {
+            "chat": 1,
+            "user": 4,
+            "workspace": 4,
+            "workspace_member": 3
+          },
+          "unsubscribes_total": {}
+        },
+        "present": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          false
+        ],
+        "result": false,
+        "rooms": [
+          [
+            "chat",
+            "c"
+          ],
+          [
+            "user",
+            "u"
+          ],
+          [
+            "user",
+            "v"
+          ],
+          [
+            "workspace",
+            "other"
+          ],
+          [
+            "workspace",
+            "w"
+          ],
+          [
+            "workspace_member",
+            "other:u"
+          ],
+          [
+            "workspace_member",
+            "w:u"
+          ],
+          [
+            "workspace_member",
+            "w:v"
+          ]
+        ],
+        "subscriptions": [
+          [
+            [
+              "chat",
+              "c"
+            ],
+            [
+              "user",
+              "u"
+            ],
+            [
+              "workspace",
+              "w"
+            ],
+            [
+              "workspace_member",
+              "w:u"
+            ]
+          ],
+          [
+            [
+              "user",
+              "v"
+            ],
+            [
+              "workspace",
+              "w"
+            ],
+            [
+              "workspace_member",
+              "w:v"
+            ]
+          ],
+          [
+            [
+              "user",
+              "u"
+            ],
+            [
+              "workspace",
+              "other"
+            ],
+            [
+              "workspace_member",
+              "other:u"
+            ]
+          ],
+          [
+            [
+              "user",
+              "u"
+            ]
+          ],
+          [
+            [
+              "workspace",
+              "w"
+            ]
+          ],
+          []
+        ]
+      },
+      {
+        "callbacks": [],
+        "metrics": {
+          "active_connections": 6,
+          "active_scope_rooms": {
+            "chat": 1,
+            "user": 2,
+            "workspace": 2,
+            "workspace_member": 3
+          },
+          "connects_total": 6,
+          "disconnects_total": 0,
+          "events_sent_by_type": {},
+          "inbound_too_large_total": 0,
+          "membership_removals_dropped_total": 0,
+          "messages_dropped_total": 0,
+          "messages_sent_total": 0,
+          "redis": {
+            "ack_total": 0,
+            "connected": false,
+            "evicted_keys": 0,
+            "last_error": "",
+            "last_xadd_lag_micros": 0,
+            "max_memory_bytes": 0,
+            "mirror_divergence_total": 0,
+            "mirror_primary_errors": 0,
+            "mirror_secondary_errors": 0,
+            "node_id": "",
+            "retention_errors": 0,
+            "stream_missing_total": 0,
+            "stream_trimmed_total": 0,
+            "streams": {},
+            "streams_without_ttl": 0,
+            "used_memory_bytes": 0,
+            "xadd_errors": 0,
+            "xadd_total": 0,
+            "xread_errors": 0,
+            "xread_total": 0
+          },
+          "slow_evictions_total": 0,
+          "subscribe_denied_total": {},
+          "subscribes_total": {
+            "chat": 2,
+            "user": 4,
+            "workspace": 4,
+            "workspace_member": 3
+          },
+          "unsubscribes_total": {}
+        },
+        "present": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          false
+        ],
+        "result": true,
+        "rooms": [
+          [
+            "chat",
+            "c"
+          ],
+          [
+            "user",
+            "u"
+          ],
+          [
+            "user",
+            "v"
+          ],
+          [
+            "workspace",
+            "other"
+          ],
+          [
+            "workspace",
+            "w"
+          ],
+          [
+            "workspace_member",
+            "other:u"
+          ],
+          [
+            "workspace_member",
+            "w:u"
+          ],
+          [
+            "workspace_member",
+            "w:v"
+          ]
+        ],
+        "subscriptions": [
+          [
+            [
+              "chat",
+              "c"
+            ],
+            [
+              "user",
+              "u"
+            ],
+            [
+              "workspace",
+              "w"
+            ],
+            [
+              "workspace_member",
+              "w:u"
+            ]
+          ],
+          [
+            [
+              "chat",
+              "c"
+            ],
+            [
+              "user",
+              "v"
+            ],
+            [
+              "workspace",
+              "w"
+            ],
+            [
+              "workspace_member",
+              "w:v"
+            ]
+          ],
+          [
+            [
+              "user",
+              "u"
+            ],
+            [
+              "workspace",
+              "other"
+            ],
+            [
+              "workspace_member",
+              "other:u"
+            ]
+          ],
+          [
+            [
+              "user",
+              "u"
+            ]
+          ],
+          [
+            [
+              "workspace",
+              "w"
+            ]
+          ],
+          []
+        ]
+      },
+      {
+        "callbacks": [],
+        "metrics": {
+          "active_connections": 6,
+          "active_scope_rooms": {
+            "chat": 1,
+            "user": 2,
+            "workspace": 2,
+            "workspace_member": 3
+          },
+          "connects_total": 6,
+          "disconnects_total": 0,
+          "events_sent_by_type": {},
+          "inbound_too_large_total": 0,
+          "membership_removals_dropped_total": 0,
+          "messages_dropped_total": 0,
+          "messages_sent_total": 0,
+          "redis": {
+            "ack_total": 0,
+            "connected": false,
+            "evicted_keys": 0,
+            "last_error": "",
+            "last_xadd_lag_micros": 0,
+            "max_memory_bytes": 0,
+            "mirror_divergence_total": 0,
+            "mirror_primary_errors": 0,
+            "mirror_secondary_errors": 0,
+            "node_id": "",
+            "retention_errors": 0,
+            "stream_missing_total": 0,
+            "stream_trimmed_total": 0,
+            "streams": {},
+            "streams_without_ttl": 0,
+            "used_memory_bytes": 0,
+            "xadd_errors": 0,
+            "xadd_total": 0,
+            "xread_errors": 0,
+            "xread_total": 0
+          },
+          "slow_evictions_total": 0,
+          "subscribe_denied_total": {},
+          "subscribes_total": {
+            "chat": 2,
+            "user": 4,
+            "workspace": 4,
+            "workspace_member": 3
+          },
+          "unsubscribes_total": {
+            "chat": 1
+          }
+        },
+        "present": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          false
+        ],
+        "result": true,
+        "rooms": [
+          [
+            "chat",
+            "c"
+          ],
+          [
+            "user",
+            "u"
+          ],
+          [
+            "user",
+            "v"
+          ],
+          [
+            "workspace",
+            "other"
+          ],
+          [
+            "workspace",
+            "w"
+          ],
+          [
+            "workspace_member",
+            "other:u"
+          ],
+          [
+            "workspace_member",
+            "w:u"
+          ],
+          [
+            "workspace_member",
+            "w:v"
+          ]
+        ],
+        "subscriptions": [
+          [
+            [
+              "user",
+              "u"
+            ],
+            [
+              "workspace",
+              "w"
+            ],
+            [
+              "workspace_member",
+              "w:u"
+            ]
+          ],
+          [
+            [
+              "chat",
+              "c"
+            ],
+            [
+              "user",
+              "v"
+            ],
+            [
+              "workspace",
+              "w"
+            ],
+            [
+              "workspace_member",
+              "w:v"
+            ]
+          ],
+          [
+            [
+              "user",
+              "u"
+            ],
+            [
+              "workspace",
+              "other"
+            ],
+            [
+              "workspace_member",
+              "other:u"
+            ]
+          ],
+          [
+            [
+              "user",
+              "u"
+            ]
+          ],
+          [
+            [
+              "workspace",
+              "w"
+            ]
+          ],
+          []
+        ]
+      },
+      {
+        "callbacks": [],
+        "metrics": {
+          "active_connections": 6,
+          "active_scope_rooms": {
+            "chat": 1,
+            "user": 2,
+            "workspace": 2,
+            "workspace_member": 3
+          },
+          "connects_total": 6,
+          "disconnects_total": 0,
+          "events_sent_by_type": {},
+          "inbound_too_large_total": 0,
+          "membership_removals_dropped_total": 0,
+          "messages_dropped_total": 0,
+          "messages_sent_total": 0,
+          "redis": {
+            "ack_total": 0,
+            "connected": false,
+            "evicted_keys": 0,
+            "last_error": "",
+            "last_xadd_lag_micros": 0,
+            "max_memory_bytes": 0,
+            "mirror_divergence_total": 0,
+            "mirror_primary_errors": 0,
+            "mirror_secondary_errors": 0,
+            "node_id": "",
+            "retention_errors": 0,
+            "stream_missing_total": 0,
+            "stream_trimmed_total": 0,
+            "streams": {},
+            "streams_without_ttl": 0,
+            "used_memory_bytes": 0,
+            "xadd_errors": 0,
+            "xadd_total": 0,
+            "xread_errors": 0,
+            "xread_total": 0
+          },
+          "slow_evictions_total": 0,
+          "subscribe_denied_total": {},
+          "subscribes_total": {
+            "chat": 2,
+            "user": 4,
+            "workspace": 4,
+            "workspace_member": 3
+          },
+          "unsubscribes_total": {
+            "chat": 1
+          }
+        },
+        "present": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          false
+        ],
+        "result": false,
+        "rooms": [
+          [
+            "chat",
+            "c"
+          ],
+          [
+            "user",
+            "u"
+          ],
+          [
+            "user",
+            "v"
+          ],
+          [
+            "workspace",
+            "other"
+          ],
+          [
+            "workspace",
+            "w"
+          ],
+          [
+            "workspace_member",
+            "other:u"
+          ],
+          [
+            "workspace_member",
+            "w:u"
+          ],
+          [
+            "workspace_member",
+            "w:v"
+          ]
+        ],
+        "subscriptions": [
+          [
+            [
+              "user",
+              "u"
+            ],
+            [
+              "workspace",
+              "w"
+            ],
+            [
+              "workspace_member",
+              "w:u"
+            ]
+          ],
+          [
+            [
+              "chat",
+              "c"
+            ],
+            [
+              "user",
+              "v"
+            ],
+            [
+              "workspace",
+              "w"
+            ],
+            [
+              "workspace_member",
+              "w:v"
+            ]
+          ],
+          [
+            [
+              "user",
+              "u"
+            ],
+            [
+              "workspace",
+              "other"
+            ],
+            [
+              "workspace_member",
+              "other:u"
+            ]
+          ],
+          [
+            [
+              "user",
+              "u"
+            ]
+          ],
+          [
+            [
+              "workspace",
+              "w"
+            ]
+          ],
+          []
+        ]
+      },
+      {
+        "callbacks": [
+          [
+            "last",
+            "chat",
+            "c"
+          ]
+        ],
+        "metrics": {
+          "active_connections": 6,
+          "active_scope_rooms": {
+            "chat": 0,
+            "user": 2,
+            "workspace": 2,
+            "workspace_member": 3
+          },
+          "connects_total": 6,
+          "disconnects_total": 0,
+          "events_sent_by_type": {},
+          "inbound_too_large_total": 0,
+          "membership_removals_dropped_total": 0,
+          "messages_dropped_total": 0,
+          "messages_sent_total": 0,
+          "redis": {
+            "ack_total": 0,
+            "connected": false,
+            "evicted_keys": 0,
+            "last_error": "",
+            "last_xadd_lag_micros": 0,
+            "max_memory_bytes": 0,
+            "mirror_divergence_total": 0,
+            "mirror_primary_errors": 0,
+            "mirror_secondary_errors": 0,
+            "node_id": "",
+            "retention_errors": 0,
+            "stream_missing_total": 0,
+            "stream_trimmed_total": 0,
+            "streams": {},
+            "streams_without_ttl": 0,
+            "used_memory_bytes": 0,
+            "xadd_errors": 0,
+            "xadd_total": 0,
+            "xread_errors": 0,
+            "xread_total": 0
+          },
+          "slow_evictions_total": 0,
+          "subscribe_denied_total": {},
+          "subscribes_total": {
+            "chat": 2,
+            "user": 4,
+            "workspace": 4,
+            "workspace_member": 3
+          },
+          "unsubscribes_total": {
+            "chat": 2
+          }
+        },
+        "present": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          false
+        ],
+        "result": true,
+        "rooms": [
+          [
+            "user",
+            "u"
+          ],
+          [
+            "user",
+            "v"
+          ],
+          [
+            "workspace",
+            "other"
+          ],
+          [
+            "workspace",
+            "w"
+          ],
+          [
+            "workspace_member",
+            "other:u"
+          ],
+          [
+            "workspace_member",
+            "w:u"
+          ],
+          [
+            "workspace_member",
+            "w:v"
+          ]
+        ],
+        "subscriptions": [
+          [
+            [
+              "user",
+              "u"
+            ],
+            [
+              "workspace",
+              "w"
+            ],
+            [
+              "workspace_member",
+              "w:u"
+            ]
+          ],
+          [
+            [
+              "user",
+              "v"
+            ],
+            [
+              "workspace",
+              "w"
+            ],
+            [
+              "workspace_member",
+              "w:v"
+            ]
+          ],
+          [
+            [
+              "user",
+              "u"
+            ],
+            [
+              "workspace",
+              "other"
+            ],
+            [
+              "workspace_member",
+              "other:u"
+            ]
+          ],
+          [
+            [
+              "user",
+              "u"
+            ]
+          ],
+          [
+            [
+              "workspace",
+              "w"
+            ]
+          ],
+          []
+        ]
+      },
+      {
+        "callbacks": [],
+        "metrics": {
+          "active_connections": 6,
+          "active_scope_rooms": {
+            "chat": 0,
+            "user": 2,
+            "workspace": 2,
+            "workspace_member": 3
+          },
+          "connects_total": 6,
+          "disconnects_total": 0,
+          "events_sent_by_type": {},
+          "inbound_too_large_total": 0,
+          "membership_removals_dropped_total": 0,
+          "messages_dropped_total": 0,
+          "messages_sent_total": 0,
+          "redis": {
+            "ack_total": 0,
+            "connected": false,
+            "evicted_keys": 0,
+            "last_error": "",
+            "last_xadd_lag_micros": 0,
+            "max_memory_bytes": 0,
+            "mirror_divergence_total": 0,
+            "mirror_primary_errors": 0,
+            "mirror_secondary_errors": 0,
+            "node_id": "",
+            "retention_errors": 0,
+            "stream_missing_total": 0,
+            "stream_trimmed_total": 0,
+            "streams": {},
+            "streams_without_ttl": 0,
+            "used_memory_bytes": 0,
+            "xadd_errors": 0,
+            "xadd_total": 0,
+            "xread_errors": 0,
+            "xread_total": 0
+          },
+          "slow_evictions_total": 0,
+          "subscribe_denied_total": {},
+          "subscribes_total": {
+            "chat": 2,
+            "user": 4,
+            "workspace": 4,
+            "workspace_member": 3
+          },
+          "unsubscribes_total": {
+            "chat": 2
+          }
+        },
+        "present": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          false
+        ],
+        "result": false,
+        "rooms": [
+          [
+            "user",
+            "u"
+          ],
+          [
+            "user",
+            "v"
+          ],
+          [
+            "workspace",
+            "other"
+          ],
+          [
+            "workspace",
+            "w"
+          ],
+          [
+            "workspace_member",
+            "other:u"
+          ],
+          [
+            "workspace_member",
+            "w:u"
+          ],
+          [
+            "workspace_member",
+            "w:v"
+          ]
+        ],
+        "subscriptions": [
+          [
+            [
+              "user",
+              "u"
+            ],
+            [
+              "workspace",
+              "w"
+            ],
+            [
+              "workspace_member",
+              "w:u"
+            ]
+          ],
+          [
+            [
+              "user",
+              "v"
+            ],
+            [
+              "workspace",
+              "w"
+            ],
+            [
+              "workspace_member",
+              "w:v"
+            ]
+          ],
+          [
+            [
+              "user",
+              "u"
+            ],
+            [
+              "workspace",
+              "other"
+            ],
+            [
+              "workspace_member",
+              "other:u"
+            ]
+          ],
+          [
+            [
+              "user",
+              "u"
+            ]
+          ],
+          [
+            [
+              "workspace",
+              "w"
+            ]
+          ],
+          []
+        ]
+      },
+      {
+        "callbacks": [],
+        "metrics": {
+          "active_connections": 6,
+          "active_scope_rooms": {
+            "chat": 0,
+            "user": 2,
+            "workspace": 2,
+            "workspace_member": 3
+          },
+          "connects_total": 6,
+          "disconnects_total": 0,
+          "events_sent_by_type": {},
+          "inbound_too_large_total": 0,
+          "membership_removals_dropped_total": 0,
+          "messages_dropped_total": 0,
+          "messages_sent_total": 0,
+          "redis": {
+            "ack_total": 0,
+            "connected": false,
+            "evicted_keys": 0,
+            "last_error": "",
+            "last_xadd_lag_micros": 0,
+            "max_memory_bytes": 0,
+            "mirror_divergence_total": 0,
+            "mirror_primary_errors": 0,
+            "mirror_secondary_errors": 0,
+            "node_id": "",
+            "retention_errors": 0,
+            "stream_missing_total": 0,
+            "stream_trimmed_total": 0,
+            "streams": {},
+            "streams_without_ttl": 0,
+            "used_memory_bytes": 0,
+            "xadd_errors": 0,
+            "xadd_total": 0,
+            "xread_errors": 0,
+            "xread_total": 0
+          },
+          "slow_evictions_total": 0,
+          "subscribe_denied_total": {},
+          "subscribes_total": {
+            "chat": 2,
+            "user": 4,
+            "workspace": 4,
+            "workspace_member": 3
+          },
+          "unsubscribes_total": {
+            "chat": 2
+          }
+        },
+        "present": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          false
+        ],
+        "result": false,
+        "rooms": [
+          [
+            "user",
+            "u"
+          ],
+          [
+            "user",
+            "v"
+          ],
+          [
+            "workspace",
+            "other"
+          ],
+          [
+            "workspace",
+            "w"
+          ],
+          [
+            "workspace_member",
+            "other:u"
+          ],
+          [
+            "workspace_member",
+            "w:u"
+          ],
+          [
+            "workspace_member",
+            "w:v"
+          ]
+        ],
+        "subscriptions": [
+          [
+            [
+              "user",
+              "u"
+            ],
+            [
+              "workspace",
+              "w"
+            ],
+            [
+              "workspace_member",
+              "w:u"
+            ]
+          ],
+          [
+            [
+              "user",
+              "v"
+            ],
+            [
+              "workspace",
+              "w"
+            ],
+            [
+              "workspace_member",
+              "w:v"
+            ]
+          ],
+          [
+            [
+              "user",
+              "u"
+            ],
+            [
+              "workspace",
+              "other"
+            ],
+            [
+              "workspace_member",
+              "other:u"
+            ]
+          ],
+          [
+            [
+              "user",
+              "u"
+            ]
+          ],
+          [
+            [
+              "workspace",
+              "w"
+            ]
+          ],
+          []
+        ]
+      },
+      {
+        "callbacks": [],
+        "metrics": {
+          "active_connections": 6,
+          "active_scope_rooms": {
+            "chat": 0,
+            "user": 2,
+            "workspace": 2,
+            "workspace_member": 3
+          },
+          "connects_total": 6,
+          "disconnects_total": 0,
+          "events_sent_by_type": {},
+          "inbound_too_large_total": 0,
+          "membership_removals_dropped_total": 0,
+          "messages_dropped_total": 0,
+          "messages_sent_total": 0,
+          "redis": {
+            "ack_total": 0,
+            "connected": false,
+            "evicted_keys": 0,
+            "last_error": "",
+            "last_xadd_lag_micros": 0,
+            "max_memory_bytes": 0,
+            "mirror_divergence_total": 0,
+            "mirror_primary_errors": 0,
+            "mirror_secondary_errors": 0,
+            "node_id": "",
+            "retention_errors": 0,
+            "stream_missing_total": 0,
+            "stream_trimmed_total": 0,
+            "streams": {},
+            "streams_without_ttl": 0,
+            "used_memory_bytes": 0,
+            "xadd_errors": 0,
+            "xadd_total": 0,
+            "xread_errors": 0,
+            "xread_total": 0
+          },
+          "slow_evictions_total": 0,
+          "subscribe_denied_total": {},
+          "subscribes_total": {
+            "chat": 2,
+            "user": 4,
+            "workspace": 4,
+            "workspace_member": 3
+          },
+          "unsubscribes_total": {
+            "chat": 2
+          }
+        },
+        "present": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          false
+        ],
+        "result": false,
+        "rooms": [
+          [
+            "user",
+            "u"
+          ],
+          [
+            "user",
+            "v"
+          ],
+          [
+            "workspace",
+            "other"
+          ],
+          [
+            "workspace",
+            "w"
+          ],
+          [
+            "workspace_member",
+            "other:u"
+          ],
+          [
+            "workspace_member",
+            "w:u"
+          ],
+          [
+            "workspace_member",
+            "w:v"
+          ]
+        ],
+        "subscriptions": [
+          [
+            [
+              "user",
+              "u"
+            ],
+            [
+              "workspace",
+              "w"
+            ],
+            [
+              "workspace_member",
+              "w:u"
+            ]
+          ],
+          [
+            [
+              "user",
+              "v"
+            ],
+            [
+              "workspace",
+              "w"
+            ],
+            [
+              "workspace_member",
+              "w:v"
+            ]
+          ],
+          [
+            [
+              "user",
+              "u"
+            ],
+            [
+              "workspace",
+              "other"
+            ],
+            [
+              "workspace_member",
+              "other:u"
+            ]
+          ],
+          [
+            [
+              "user",
+              "u"
+            ]
+          ],
+          [
+            [
+              "workspace",
+              "w"
+            ]
+          ],
+          []
+        ]
+      },
+      {
+        "callbacks": [
+          [
+            "last",
+            "workspace_member",
+            "w:u"
+          ]
+        ],
+        "metrics": {
+          "active_connections": 5,
+          "active_scope_rooms": {
+            "chat": 0,
+            "user": 2,
+            "workspace": 2,
+            "workspace_member": 2
+          },
+          "connects_total": 6,
+          "disconnects_total": 1,
+          "events_sent_by_type": {},
+          "inbound_too_large_total": 0,
+          "membership_removals_dropped_total": 0,
+          "messages_dropped_total": 0,
+          "messages_sent_total": 0,
+          "redis": {
+            "ack_total": 0,
+            "connected": false,
+            "evicted_keys": 0,
+            "last_error": "",
+            "last_xadd_lag_micros": 0,
+            "max_memory_bytes": 0,
+            "mirror_divergence_total": 0,
+            "mirror_primary_errors": 0,
+            "mirror_secondary_errors": 0,
+            "node_id": "",
+            "retention_errors": 0,
+            "stream_missing_total": 0,
+            "stream_trimmed_total": 0,
+            "streams": {},
+            "streams_without_ttl": 0,
+            "used_memory_bytes": 0,
+            "xadd_errors": 0,
+            "xadd_total": 0,
+            "xread_errors": 0,
+            "xread_total": 0
+          },
+          "slow_evictions_total": 0,
+          "subscribe_denied_total": {},
+          "subscribes_total": {
+            "chat": 2,
+            "user": 4,
+            "workspace": 4,
+            "workspace_member": 3
+          },
+          "unsubscribes_total": {
+            "chat": 2
+          }
+        },
+        "present": [
+          false,
+          true,
+          true,
+          true,
+          true,
+          false
+        ],
+        "result": null,
+        "rooms": [
+          [
+            "user",
+            "u"
+          ],
+          [
+            "user",
+            "v"
+          ],
+          [
+            "workspace",
+            "other"
+          ],
+          [
+            "workspace",
+            "w"
+          ],
+          [
+            "workspace_member",
+            "other:u"
+          ],
+          [
+            "workspace_member",
+            "w:v"
+          ]
+        ],
+        "subscriptions": [
+          [],
+          [
+            [
+              "user",
+              "v"
+            ],
+            [
+              "workspace",
+              "w"
+            ],
+            [
+              "workspace_member",
+              "w:v"
+            ]
+          ],
+          [
+            [
+              "user",
+              "u"
+            ],
+            [
+              "workspace",
+              "other"
+            ],
+            [
+              "workspace_member",
+              "other:u"
+            ]
+          ],
+          [
+            [
+              "user",
+              "u"
+            ]
+          ],
+          [
+            [
+              "workspace",
+              "w"
+            ]
+          ],
+          []
+        ]
+      },
+      {
+        "callbacks": [],
+        "metrics": {
+          "active_connections": 5,
+          "active_scope_rooms": {
+            "chat": 0,
+            "user": 2,
+            "workspace": 2,
+            "workspace_member": 2
+          },
+          "connects_total": 6,
+          "disconnects_total": 1,
+          "events_sent_by_type": {},
+          "inbound_too_large_total": 0,
+          "membership_removals_dropped_total": 0,
+          "messages_dropped_total": 0,
+          "messages_sent_total": 0,
+          "redis": {
+            "ack_total": 0,
+            "connected": false,
+            "evicted_keys": 0,
+            "last_error": "",
+            "last_xadd_lag_micros": 0,
+            "max_memory_bytes": 0,
+            "mirror_divergence_total": 0,
+            "mirror_primary_errors": 0,
+            "mirror_secondary_errors": 0,
+            "node_id": "",
+            "retention_errors": 0,
+            "stream_missing_total": 0,
+            "stream_trimmed_total": 0,
+            "streams": {},
+            "streams_without_ttl": 0,
+            "used_memory_bytes": 0,
+            "xadd_errors": 0,
+            "xadd_total": 0,
+            "xread_errors": 0,
+            "xread_total": 0
+          },
+          "slow_evictions_total": 0,
+          "subscribe_denied_total": {},
+          "subscribes_total": {
+            "chat": 2,
+            "user": 4,
+            "workspace": 4,
+            "workspace_member": 3
+          },
+          "unsubscribes_total": {
+            "chat": 2
+          }
+        },
+        "present": [
+          false,
+          true,
+          true,
+          true,
+          true,
+          false
+        ],
+        "result": null,
+        "rooms": [
+          [
+            "user",
+            "u"
+          ],
+          [
+            "user",
+            "v"
+          ],
+          [
+            "workspace",
+            "other"
+          ],
+          [
+            "workspace",
+            "w"
+          ],
+          [
+            "workspace_member",
+            "other:u"
+          ],
+          [
+            "workspace_member",
+            "w:v"
+          ]
+        ],
+        "subscriptions": [
+          [],
+          [
+            [
+              "user",
+              "v"
+            ],
+            [
+              "workspace",
+              "w"
+            ],
+            [
+              "workspace_member",
+              "w:v"
+            ]
+          ],
+          [
+            [
+              "user",
+              "u"
+            ],
+            [
+              "workspace",
+              "other"
+            ],
+            [
+              "workspace_member",
+              "other:u"
+            ]
+          ],
+          [
+            [
+              "user",
+              "u"
+            ]
+          ],
+          [
+            [
+              "workspace",
+              "w"
+            ]
+          ],
+          []
+        ]
+      },
+      {
+        "callbacks": [],
+        "metrics": {
+          "active_connections": 5,
+          "active_scope_rooms": {
+            "chat": 0,
+            "user": 2,
+            "workspace": 2,
+            "workspace_member": 2
+          },
+          "connects_total": 6,
+          "disconnects_total": 1,
+          "events_sent_by_type": {},
+          "inbound_too_large_total": 0,
+          "membership_removals_dropped_total": 0,
+          "messages_dropped_total": 0,
+          "messages_sent_total": 0,
+          "redis": {
+            "ack_total": 0,
+            "connected": false,
+            "evicted_keys": 0,
+            "last_error": "",
+            "last_xadd_lag_micros": 0,
+            "max_memory_bytes": 0,
+            "mirror_divergence_total": 0,
+            "mirror_primary_errors": 0,
+            "mirror_secondary_errors": 0,
+            "node_id": "",
+            "retention_errors": 0,
+            "stream_missing_total": 0,
+            "stream_trimmed_total": 0,
+            "streams": {},
+            "streams_without_ttl": 0,
+            "used_memory_bytes": 0,
+            "xadd_errors": 0,
+            "xadd_total": 0,
+            "xread_errors": 0,
+            "xread_total": 0
+          },
+          "slow_evictions_total": 0,
+          "subscribe_denied_total": {},
+          "subscribes_total": {
+            "chat": 2,
+            "user": 4,
+            "workspace": 4,
+            "workspace_member": 3
+          },
+          "unsubscribes_total": {
+            "chat": 2
+          }
+        },
+        "present": [
+          false,
+          true,
+          true,
+          true,
+          true,
+          false
+        ],
+        "result": false,
+        "rooms": [
+          [
+            "user",
+            "u"
+          ],
+          [
+            "user",
+            "v"
+          ],
+          [
+            "workspace",
+            "other"
+          ],
+          [
+            "workspace",
+            "w"
+          ],
+          [
+            "workspace_member",
+            "other:u"
+          ],
+          [
+            "workspace_member",
+            "w:v"
+          ]
+        ],
+        "subscriptions": [
+          [],
+          [
+            [
+              "user",
+              "v"
+            ],
+            [
+              "workspace",
+              "w"
+            ],
+            [
+              "workspace_member",
+              "w:v"
+            ]
+          ],
+          [
+            [
+              "user",
+              "u"
+            ],
+            [
+              "workspace",
+              "other"
+            ],
+            [
+              "workspace_member",
+              "other:u"
+            ]
+          ],
+          [
+            [
+              "user",
+              "u"
+            ]
+          ],
+          [
+            [
+              "workspace",
+              "w"
+            ]
+          ],
+          []
+        ]
+      },
+      {
+        "callbacks": [
+          [
+            "last",
+            "user",
+            "v"
+          ],
+          [
+            "last",
+            "workspace_member",
+            "w:v"
+          ]
+        ],
+        "metrics": {
+          "active_connections": 4,
+          "active_scope_rooms": {
+            "chat": 0,
+            "user": 1,
+            "workspace": 2,
+            "workspace_member": 1
+          },
+          "connects_total": 6,
+          "disconnects_total": 2,
+          "events_sent_by_type": {},
+          "inbound_too_large_total": 0,
+          "membership_removals_dropped_total": 0,
+          "messages_dropped_total": 0,
+          "messages_sent_total": 0,
+          "redis": {
+            "ack_total": 0,
+            "connected": false,
+            "evicted_keys": 0,
+            "last_error": "",
+            "last_xadd_lag_micros": 0,
+            "max_memory_bytes": 0,
+            "mirror_divergence_total": 0,
+            "mirror_primary_errors": 0,
+            "mirror_secondary_errors": 0,
+            "node_id": "",
+            "retention_errors": 0,
+            "stream_missing_total": 0,
+            "stream_trimmed_total": 0,
+            "streams": {},
+            "streams_without_ttl": 0,
+            "used_memory_bytes": 0,
+            "xadd_errors": 0,
+            "xadd_total": 0,
+            "xread_errors": 0,
+            "xread_total": 0
+          },
+          "slow_evictions_total": 0,
+          "subscribe_denied_total": {},
+          "subscribes_total": {
+            "chat": 2,
+            "user": 4,
+            "workspace": 4,
+            "workspace_member": 3
+          },
+          "unsubscribes_total": {
+            "chat": 2
+          }
+        },
+        "present": [
+          false,
+          false,
+          true,
+          true,
+          true,
+          false
+        ],
+        "result": null,
+        "rooms": [
+          [
+            "user",
+            "u"
+          ],
+          [
+            "workspace",
+            "other"
+          ],
+          [
+            "workspace",
+            "w"
+          ],
+          [
+            "workspace_member",
+            "other:u"
+          ]
+        ],
+        "subscriptions": [
+          [],
+          [],
+          [
+            [
+              "user",
+              "u"
+            ],
+            [
+              "workspace",
+              "other"
+            ],
+            [
+              "workspace_member",
+              "other:u"
+            ]
+          ],
+          [
+            [
+              "user",
+              "u"
+            ]
+          ],
+          [
+            [
+              "workspace",
+              "w"
+            ]
+          ],
+          []
+        ]
+      },
+      {
+        "callbacks": [
+          [
+            "last",
+            "workspace",
+            "other"
+          ],
+          [
+            "last",
+            "workspace_member",
+            "other:u"
+          ]
+        ],
+        "metrics": {
+          "active_connections": 3,
+          "active_scope_rooms": {
+            "chat": 0,
+            "user": 1,
+            "workspace": 1,
+            "workspace_member": 0
+          },
+          "connects_total": 6,
+          "disconnects_total": 3,
+          "events_sent_by_type": {},
+          "inbound_too_large_total": 0,
+          "membership_removals_dropped_total": 0,
+          "messages_dropped_total": 0,
+          "messages_sent_total": 0,
+          "redis": {
+            "ack_total": 0,
+            "connected": false,
+            "evicted_keys": 0,
+            "last_error": "",
+            "last_xadd_lag_micros": 0,
+            "max_memory_bytes": 0,
+            "mirror_divergence_total": 0,
+            "mirror_primary_errors": 0,
+            "mirror_secondary_errors": 0,
+            "node_id": "",
+            "retention_errors": 0,
+            "stream_missing_total": 0,
+            "stream_trimmed_total": 0,
+            "streams": {},
+            "streams_without_ttl": 0,
+            "used_memory_bytes": 0,
+            "xadd_errors": 0,
+            "xadd_total": 0,
+            "xread_errors": 0,
+            "xread_total": 0
+          },
+          "slow_evictions_total": 0,
+          "subscribe_denied_total": {},
+          "subscribes_total": {
+            "chat": 2,
+            "user": 4,
+            "workspace": 4,
+            "workspace_member": 3
+          },
+          "unsubscribes_total": {
+            "chat": 2
+          }
+        },
+        "present": [
+          false,
+          false,
+          false,
+          true,
+          true,
+          false
+        ],
+        "result": null,
+        "rooms": [
+          [
+            "user",
+            "u"
+          ],
+          [
+            "workspace",
+            "w"
+          ]
+        ],
+        "subscriptions": [
+          [],
+          [],
+          [],
+          [
+            [
+              "user",
+              "u"
+            ]
+          ],
+          [
+            [
+              "workspace",
+              "w"
+            ]
+          ],
+          []
+        ]
+      },
+      {
+        "callbacks": [
+          [
+            "last",
+            "user",
+            "u"
+          ]
+        ],
+        "metrics": {
+          "active_connections": 2,
+          "active_scope_rooms": {
+            "chat": 0,
+            "user": 0,
+            "workspace": 1,
+            "workspace_member": 0
+          },
+          "connects_total": 6,
+          "disconnects_total": 4,
+          "events_sent_by_type": {},
+          "inbound_too_large_total": 0,
+          "membership_removals_dropped_total": 0,
+          "messages_dropped_total": 0,
+          "messages_sent_total": 0,
+          "redis": {
+            "ack_total": 0,
+            "connected": false,
+            "evicted_keys": 0,
+            "last_error": "",
+            "last_xadd_lag_micros": 0,
+            "max_memory_bytes": 0,
+            "mirror_divergence_total": 0,
+            "mirror_primary_errors": 0,
+            "mirror_secondary_errors": 0,
+            "node_id": "",
+            "retention_errors": 0,
+            "stream_missing_total": 0,
+            "stream_trimmed_total": 0,
+            "streams": {},
+            "streams_without_ttl": 0,
+            "used_memory_bytes": 0,
+            "xadd_errors": 0,
+            "xadd_total": 0,
+            "xread_errors": 0,
+            "xread_total": 0
+          },
+          "slow_evictions_total": 0,
+          "subscribe_denied_total": {},
+          "subscribes_total": {
+            "chat": 2,
+            "user": 4,
+            "workspace": 4,
+            "workspace_member": 3
+          },
+          "unsubscribes_total": {
+            "chat": 2
+          }
+        },
+        "present": [
+          false,
+          false,
+          false,
+          false,
+          true,
+          false
+        ],
+        "result": null,
+        "rooms": [
+          [
+            "workspace",
+            "w"
+          ]
+        ],
+        "subscriptions": [
+          [],
+          [],
+          [],
+          [],
+          [
+            [
+              "workspace",
+              "w"
+            ]
+          ],
+          []
+        ]
+      },
+      {
+        "callbacks": [
+          [
+            "last",
+            "workspace",
+            "w"
+          ]
+        ],
+        "metrics": {
+          "active_connections": 1,
+          "active_scope_rooms": {
+            "chat": 0,
+            "user": 0,
+            "workspace": 0,
+            "workspace_member": 0
+          },
+          "connects_total": 6,
+          "disconnects_total": 5,
+          "events_sent_by_type": {},
+          "inbound_too_large_total": 0,
+          "membership_removals_dropped_total": 0,
+          "messages_dropped_total": 0,
+          "messages_sent_total": 0,
+          "redis": {
+            "ack_total": 0,
+            "connected": false,
+            "evicted_keys": 0,
+            "last_error": "",
+            "last_xadd_lag_micros": 0,
+            "max_memory_bytes": 0,
+            "mirror_divergence_total": 0,
+            "mirror_primary_errors": 0,
+            "mirror_secondary_errors": 0,
+            "node_id": "",
+            "retention_errors": 0,
+            "stream_missing_total": 0,
+            "stream_trimmed_total": 0,
+            "streams": {},
+            "streams_without_ttl": 0,
+            "used_memory_bytes": 0,
+            "xadd_errors": 0,
+            "xadd_total": 0,
+            "xread_errors": 0,
+            "xread_total": 0
+          },
+          "slow_evictions_total": 0,
+          "subscribe_denied_total": {},
+          "subscribes_total": {
+            "chat": 2,
+            "user": 4,
+            "workspace": 4,
+            "workspace_member": 3
+          },
+          "unsubscribes_total": {
+            "chat": 2
+          }
+        },
+        "present": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "result": null,
+        "rooms": [],
+        "subscriptions": [
+          [],
+          [],
+          [],
+          [],
+          [],
+          []
+        ]
+      }
+    ],
+    [
+      {
+        "callbacks": [],
+        "metrics": {
+          "active_connections": 0,
+          "active_scope_rooms": {},
+          "connects_total": 0,
+          "disconnects_total": 0,
+          "events_sent_by_type": {},
+          "inbound_too_large_total": 0,
+          "membership_removals_dropped_total": 0,
+          "messages_dropped_total": 0,
+          "messages_sent_total": 0,
+          "redis": {
+            "ack_total": 0,
+            "connected": false,
+            "evicted_keys": 0,
+            "last_error": "",
+            "last_xadd_lag_micros": 0,
+            "max_memory_bytes": 0,
+            "mirror_divergence_total": 0,
+            "mirror_primary_errors": 0,
+            "mirror_secondary_errors": 0,
+            "node_id": "",
+            "retention_errors": 0,
+            "stream_missing_total": 0,
+            "stream_trimmed_total": 0,
+            "streams": {},
+            "streams_without_ttl": 0,
+            "used_memory_bytes": 0,
+            "xadd_errors": 0,
+            "xadd_total": 0,
+            "xread_errors": 0,
+            "xread_total": 0
+          },
+          "slow_evictions_total": 0,
+          "subscribe_denied_total": {},
+          "subscribes_total": {},
+          "unsubscribes_total": {}
+        },
+        "present": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "result": null,
+        "rooms": [],
+        "subscriptions": [
+          [],
+          [],
+          [],
+          [],
+          [],
+          []
+        ]
+      },
+      {
+        "callbacks": [],
+        "metrics": {
+          "active_connections": 1,
+          "active_scope_rooms": {
+            "user": 1,
+            "workspace": 1,
+            "workspace_member": 1
+          },
+          "connects_total": 1,
+          "disconnects_total": 0,
+          "events_sent_by_type": {},
+          "inbound_too_large_total": 0,
+          "membership_removals_dropped_total": 0,
+          "messages_dropped_total": 0,
+          "messages_sent_total": 0,
+          "redis": {
+            "ack_total": 0,
+            "connected": false,
+            "evicted_keys": 0,
+            "last_error": "",
+            "last_xadd_lag_micros": 0,
+            "max_memory_bytes": 0,
+            "mirror_divergence_total": 0,
+            "mirror_primary_errors": 0,
+            "mirror_secondary_errors": 0,
+            "node_id": "",
+            "retention_errors": 0,
+            "stream_missing_total": 0,
+            "stream_trimmed_total": 0,
+            "streams": {},
+            "streams_without_ttl": 0,
+            "used_memory_bytes": 0,
+            "xadd_errors": 0,
+            "xadd_total": 0,
+            "xread_errors": 0,
+            "xread_total": 0
+          },
+          "slow_evictions_total": 0,
+          "subscribe_denied_total": {},
+          "subscribes_total": {
+            "user": 1,
+            "workspace": 1,
+            "workspace_member": 1
+          },
+          "unsubscribes_total": {}
+        },
+        "present": [
+          true,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "result": null,
+        "rooms": [
+          [
+            "user",
+            "u"
+          ],
+          [
+            "workspace",
+            "w"
+          ],
+          [
+            "workspace_member",
+            "w:u"
+          ]
+        ],
+        "subscriptions": [
+          [
+            [
+              "user",
+              "u"
+            ],
+            [
+              "workspace",
+              "w"
+            ],
+            [
+              "workspace_member",
+              "w:u"
+            ]
+          ],
+          [],
+          [],
+          [],
+          [],
+          []
+        ]
+      },
+      {
+        "callbacks": [],
+        "metrics": {
+          "active_connections": 1,
+          "active_scope_rooms": {
+            "user": 1,
+            "workspace": 1,
+            "workspace_member": 1
+          },
+          "connects_total": 1,
+          "disconnects_total": 0,
+          "events_sent_by_type": {},
+          "inbound_too_large_total": 0,
+          "membership_removals_dropped_total": 0,
+          "messages_dropped_total": 0,
+          "messages_sent_total": 0,
+          "redis": {
+            "ack_total": 0,
+            "connected": false,
+            "evicted_keys": 0,
+            "last_error": "",
+            "last_xadd_lag_micros": 0,
+            "max_memory_bytes": 0,
+            "mirror_divergence_total": 0,
+            "mirror_primary_errors": 0,
+            "mirror_secondary_errors": 0,
+            "node_id": "",
+            "retention_errors": 0,
+            "stream_missing_total": 0,
+            "stream_trimmed_total": 0,
+            "streams": {},
+            "streams_without_ttl": 0,
+            "used_memory_bytes": 0,
+            "xadd_errors": 0,
+            "xadd_total": 0,
+            "xread_errors": 0,
+            "xread_total": 0
+          },
+          "slow_evictions_total": 0,
+          "subscribe_denied_total": {},
+          "subscribes_total": {
+            "user": 1,
+            "workspace": 1,
+            "workspace_member": 1
+          },
+          "unsubscribes_total": {}
+        },
+        "present": [
+          true,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "result": null,
+        "rooms": [
+          [
+            "user",
+            "u"
+          ],
+          [
+            "workspace",
+            "w"
+          ],
+          [
+            "workspace_member",
+            "w:u"
+          ]
+        ],
+        "subscriptions": [
+          [
+            [
+              "user",
+              "u"
+            ],
+            [
+              "workspace",
+              "w"
+            ],
+            [
+              "workspace_member",
+              "w:u"
+            ]
+          ],
+          [],
+          [],
+          [],
+          [],
+          []
+        ]
+      },
+      {
+        "callbacks": [
+          [
+            "first",
+            "user",
+            "v"
+          ]
+        ],
+        "metrics": {
+          "active_connections": 1,
+          "active_scope_rooms": {
+            "user": 2,
+            "workspace": 1,
+            "workspace_member": 1
+          },
+          "connects_total": 1,
+          "disconnects_total": 0,
+          "events_sent_by_type": {},
+          "inbound_too_large_total": 0,
+          "membership_removals_dropped_total": 0,
+          "messages_dropped_total": 0,
+          "messages_sent_total": 0,
+          "redis": {
+            "ack_total": 0,
+            "connected": false,
+            "evicted_keys": 0,
+            "last_error": "",
+            "last_xadd_lag_micros": 0,
+            "max_memory_bytes": 0,
+            "mirror_divergence_total": 0,
+            "mirror_primary_errors": 0,
+            "mirror_secondary_errors": 0,
+            "node_id": "",
+            "retention_errors": 0,
+            "stream_missing_total": 0,
+            "stream_trimmed_total": 0,
+            "streams": {},
+            "streams_without_ttl": 0,
+            "used_memory_bytes": 0,
+            "xadd_errors": 0,
+            "xadd_total": 0,
+            "xread_errors": 0,
+            "xread_total": 0
+          },
+          "slow_evictions_total": 0,
+          "subscribe_denied_total": {},
+          "subscribes_total": {
+            "user": 2,
+            "workspace": 1,
+            "workspace_member": 1
+          },
+          "unsubscribes_total": {}
+        },
+        "present": [
+          true,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "result": true,
+        "rooms": [
+          [
+            "user",
+            "u"
+          ],
+          [
+            "user",
+            "v"
+          ],
+          [
+            "workspace",
+            "w"
+          ],
+          [
+            "workspace_member",
+            "w:u"
+          ]
+        ],
+        "subscriptions": [
+          [
+            [
+              "user",
+              "u"
+            ],
+            [
+              "user",
+              "v"
+            ],
+            [
+              "workspace",
+              "w"
+            ],
+            [
+              "workspace_member",
+              "w:u"
+            ]
+          ],
+          [],
+          [],
+          [],
+          [],
+          []
+        ]
+      },
+      {
+        "callbacks": [
+          [
+            "last",
+            "workspace",
+            "w"
+          ]
+        ],
+        "metrics": {
+          "active_connections": 1,
+          "active_scope_rooms": {
+            "user": 2,
+            "workspace": 0,
+            "workspace_member": 1
+          },
+          "connects_total": 1,
+          "disconnects_total": 0,
+          "events_sent_by_type": {},
+          "inbound_too_large_total": 0,
+          "membership_removals_dropped_total": 0,
+          "messages_dropped_total": 0,
+          "messages_sent_total": 0,
+          "redis": {
+            "ack_total": 0,
+            "connected": false,
+            "evicted_keys": 0,
+            "last_error": "",
+            "last_xadd_lag_micros": 0,
+            "max_memory_bytes": 0,
+            "mirror_divergence_total": 0,
+            "mirror_primary_errors": 0,
+            "mirror_secondary_errors": 0,
+            "node_id": "",
+            "retention_errors": 0,
+            "stream_missing_total": 0,
+            "stream_trimmed_total": 0,
+            "streams": {},
+            "streams_without_ttl": 0,
+            "used_memory_bytes": 0,
+            "xadd_errors": 0,
+            "xadd_total": 0,
+            "xread_errors": 0,
+            "xread_total": 0
+          },
+          "slow_evictions_total": 0,
+          "subscribe_denied_total": {},
+          "subscribes_total": {
+            "user": 2,
+            "workspace": 1,
+            "workspace_member": 1
+          },
+          "unsubscribes_total": {
+            "workspace": 1
+          }
+        },
+        "present": [
+          true,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "result": true,
+        "rooms": [
+          [
+            "user",
+            "u"
+          ],
+          [
+            "user",
+            "v"
+          ],
+          [
+            "workspace_member",
+            "w:u"
+          ]
+        ],
+        "subscriptions": [
+          [
+            [
+              "user",
+              "u"
+            ],
+            [
+              "user",
+              "v"
+            ],
+            [
+              "workspace_member",
+              "w:u"
+            ]
+          ],
+          [],
+          [],
+          [],
+          [],
+          []
+        ]
+      },
+      {
+        "callbacks": [
+          [
+            "first",
+            "workspace",
+            "w"
+          ]
+        ],
+        "metrics": {
+          "active_connections": 1,
+          "active_scope_rooms": {
+            "user": 2,
+            "workspace": 1,
+            "workspace_member": 1
+          },
+          "connects_total": 1,
+          "disconnects_total": 0,
+          "events_sent_by_type": {},
+          "inbound_too_large_total": 0,
+          "membership_removals_dropped_total": 0,
+          "messages_dropped_total": 0,
+          "messages_sent_total": 0,
+          "redis": {
+            "ack_total": 0,
+            "connected": false,
+            "evicted_keys": 0,
+            "last_error": "",
+            "last_xadd_lag_micros": 0,
+            "max_memory_bytes": 0,
+            "mirror_divergence_total": 0,
+            "mirror_primary_errors": 0,
+            "mirror_secondary_errors": 0,
+            "node_id": "",
+            "retention_errors": 0,
+            "stream_missing_total": 0,
+            "stream_trimmed_total": 0,
+            "streams": {},
+            "streams_without_ttl": 0,
+            "used_memory_bytes": 0,
+            "xadd_errors": 0,
+            "xadd_total": 0,
+            "xread_errors": 0,
+            "xread_total": 0
+          },
+          "slow_evictions_total": 0,
+          "subscribe_denied_total": {},
+          "subscribes_total": {
+            "user": 2,
+            "workspace": 2,
+            "workspace_member": 1
+          },
+          "unsubscribes_total": {
+            "workspace": 1
+          }
+        },
+        "present": [
+          true,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "result": true,
+        "rooms": [
+          [
+            "user",
+            "u"
+          ],
+          [
+            "user",
+            "v"
+          ],
+          [
+            "workspace",
+            "w"
+          ],
+          [
+            "workspace_member",
+            "w:u"
+          ]
+        ],
+        "subscriptions": [
+          [
+            [
+              "user",
+              "u"
+            ],
+            [
+              "user",
+              "v"
+            ],
+            [
+              "workspace",
+              "w"
+            ],
+            [
+              "workspace_member",
+              "w:u"
+            ]
+          ],
+          [],
+          [],
+          [],
+          [],
+          []
+        ]
+      },
+      {
+        "callbacks": [
+          [
+            "last",
+            "user",
+            "u"
+          ],
+          [
+            "last",
+            "user",
+            "v"
+          ],
+          [
+            "last",
+            "workspace",
+            "w"
+          ],
+          [
+            "last",
+            "workspace_member",
+            "w:u"
+          ]
+        ],
+        "metrics": {
+          "active_connections": 0,
+          "active_scope_rooms": {
+            "user": 0,
+            "workspace": 0,
+            "workspace_member": 0
+          },
+          "connects_total": 1,
+          "disconnects_total": 1,
+          "events_sent_by_type": {},
+          "inbound_too_large_total": 0,
+          "membership_removals_dropped_total": 0,
+          "messages_dropped_total": 0,
+          "messages_sent_total": 0,
+          "redis": {
+            "ack_total": 0,
+            "connected": false,
+            "evicted_keys": 0,
+            "last_error": "",
+            "last_xadd_lag_micros": 0,
+            "max_memory_bytes": 0,
+            "mirror_divergence_total": 0,
+            "mirror_primary_errors": 0,
+            "mirror_secondary_errors": 0,
+            "node_id": "",
+            "retention_errors": 0,
+            "stream_missing_total": 0,
+            "stream_trimmed_total": 0,
+            "streams": {},
+            "streams_without_ttl": 0,
+            "used_memory_bytes": 0,
+            "xadd_errors": 0,
+            "xadd_total": 0,
+            "xread_errors": 0,
+            "xread_total": 0
+          },
+          "slow_evictions_total": 0,
+          "subscribe_denied_total": {},
+          "subscribes_total": {
+            "user": 2,
+            "workspace": 2,
+            "workspace_member": 1
+          },
+          "unsubscribes_total": {
+            "workspace": 1
+          }
+        },
+        "present": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "result": null,
+        "rooms": [],
+        "subscriptions": [
+          [],
+          [],
+          [],
+          [],
+          [],
+          []
+        ]
+      }
+    ]
+  ],
+  "python": [
+    [
+      {
+        "result": false,
+        "callbacks": [],
+        "rooms": [],
+        "subscriptions": [
+          [],
+          [],
+          [],
+          [],
+          [],
+          []
+        ],
+        "present": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "metrics": {
+          "connects_total": 0,
+          "disconnects_total": 0,
+          "active_connections": 0,
+          "slow_evictions_total": 0,
+          "messages_sent_total": 0,
+          "messages_dropped_total": 0,
+          "membership_removals_dropped_total": 0,
+          "inbound_too_large_total": 0,
+          "events_sent_by_type": {},
+          "subscribes_total": {},
+          "unsubscribes_total": {},
+          "subscribe_denied_total": {},
+          "active_scope_rooms": {},
+          "redis": {
+            "connected": false,
+            "node_id": "",
+            "xadd_total": 0,
+            "xadd_errors": 0,
+            "xread_total": 0,
+            "xread_errors": 0,
+            "ack_total": 0,
+            "last_xadd_lag_micros": 0,
+            "mirror_primary_errors": 0,
+            "mirror_secondary_errors": 0,
+            "mirror_divergence_total": 0,
+            "stream_missing_total": 0,
+            "retention_errors": 0,
+            "used_memory_bytes": 0,
+            "max_memory_bytes": 0,
+            "evicted_keys": 0,
+            "last_error": "",
+            "stream_trimmed_total": 0,
+            "streams_without_ttl": 0,
+            "streams": {}
+          }
+        }
+      },
+      {
+        "result": null,
+        "callbacks": [
+          [
+            "first",
+            "workspace",
+            "w"
+          ],
+          [
+            "first",
+            "user",
+            "u"
+          ],
+          [
+            "first",
+            "workspace_member",
+            "w:u"
+          ]
+        ],
+        "rooms": [
+          [
+            "user",
+            "u"
+          ],
+          [
+            "workspace",
+            "w"
+          ],
+          [
+            "workspace_member",
+            "w:u"
+          ]
+        ],
+        "subscriptions": [
+          [
+            [
+              "user",
+              "u"
+            ],
+            [
+              "workspace",
+              "w"
+            ],
+            [
+              "workspace_member",
+              "w:u"
+            ]
+          ],
+          [],
+          [],
+          [],
+          [],
+          []
+        ],
+        "present": [
+          true,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "metrics": {
+          "connects_total": 1,
+          "disconnects_total": 0,
+          "active_connections": 1,
+          "slow_evictions_total": 0,
+          "messages_sent_total": 0,
+          "messages_dropped_total": 0,
+          "membership_removals_dropped_total": 0,
+          "inbound_too_large_total": 0,
+          "events_sent_by_type": {},
+          "subscribes_total": {
+            "workspace": 1,
+            "user": 1,
+            "workspace_member": 1
+          },
+          "unsubscribes_total": {},
+          "subscribe_denied_total": {},
+          "active_scope_rooms": {
+            "workspace": 1,
+            "user": 1,
+            "workspace_member": 1
+          },
+          "redis": {
+            "connected": false,
+            "node_id": "",
+            "xadd_total": 0,
+            "xadd_errors": 0,
+            "xread_total": 0,
+            "xread_errors": 0,
+            "ack_total": 0,
+            "last_xadd_lag_micros": 0,
+            "mirror_primary_errors": 0,
+            "mirror_secondary_errors": 0,
+            "mirror_divergence_total": 0,
+            "stream_missing_total": 0,
+            "retention_errors": 0,
+            "used_memory_bytes": 0,
+            "max_memory_bytes": 0,
+            "evicted_keys": 0,
+            "last_error": "",
+            "stream_trimmed_total": 0,
+            "streams_without_ttl": 0,
+            "streams": {}
+          }
+        }
+      },
+      {
+        "result": null,
+        "callbacks": [
+          [
+            "first",
+            "user",
+            "v"
+          ],
+          [
+            "first",
+            "workspace_member",
+            "w:v"
+          ]
+        ],
+        "rooms": [
+          [
+            "user",
+            "u"
+          ],
+          [
+            "user",
+            "v"
+          ],
+          [
+            "workspace",
+            "w"
+          ],
+          [
+            "workspace_member",
+            "w:u"
+          ],
+          [
+            "workspace_member",
+            "w:v"
+          ]
+        ],
+        "subscriptions": [
+          [
+            [
+              "user",
+              "u"
+            ],
+            [
+              "workspace",
+              "w"
+            ],
+            [
+              "workspace_member",
+              "w:u"
+            ]
+          ],
+          [
+            [
+              "user",
+              "v"
+            ],
+            [
+              "workspace",
+              "w"
+            ],
+            [
+              "workspace_member",
+              "w:v"
+            ]
+          ],
+          [],
+          [],
+          [],
+          []
+        ],
+        "present": [
+          true,
+          true,
+          false,
+          false,
+          false,
+          false
+        ],
+        "metrics": {
+          "connects_total": 2,
+          "disconnects_total": 0,
+          "active_connections": 2,
+          "slow_evictions_total": 0,
+          "messages_sent_total": 0,
+          "messages_dropped_total": 0,
+          "membership_removals_dropped_total": 0,
+          "inbound_too_large_total": 0,
+          "events_sent_by_type": {},
+          "subscribes_total": {
+            "workspace": 2,
+            "user": 2,
+            "workspace_member": 2
+          },
+          "unsubscribes_total": {},
+          "subscribe_denied_total": {},
+          "active_scope_rooms": {
+            "workspace": 1,
+            "user": 2,
+            "workspace_member": 2
+          },
+          "redis": {
+            "connected": false,
+            "node_id": "",
+            "xadd_total": 0,
+            "xadd_errors": 0,
+            "xread_total": 0,
+            "xread_errors": 0,
+            "ack_total": 0,
+            "last_xadd_lag_micros": 0,
+            "mirror_primary_errors": 0,
+            "mirror_secondary_errors": 0,
+            "mirror_divergence_total": 0,
+            "stream_missing_total": 0,
+            "retention_errors": 0,
+            "used_memory_bytes": 0,
+            "max_memory_bytes": 0,
+            "evicted_keys": 0,
+            "last_error": "",
+            "stream_trimmed_total": 0,
+            "streams_without_ttl": 0,
+            "streams": {}
+          }
+        }
+      },
+      {
+        "result": null,
+        "callbacks": [
+          [
+            "first",
+            "workspace",
+            "other"
+          ],
+          [
+            "first",
+            "workspace_member",
+            "other:u"
+          ]
+        ],
+        "rooms": [
+          [
+            "user",
+            "u"
+          ],
+          [
+            "user",
+            "v"
+          ],
+          [
+            "workspace",
+            "other"
+          ],
+          [
+            "workspace",
+            "w"
+          ],
+          [
+            "workspace_member",
+            "other:u"
+          ],
+          [
+            "workspace_member",
+            "w:u"
+          ],
+          [
+            "workspace_member",
+            "w:v"
+          ]
+        ],
+        "subscriptions": [
+          [
+            [
+              "user",
+              "u"
+            ],
+            [
+              "workspace",
+              "w"
+            ],
+            [
+              "workspace_member",
+              "w:u"
+            ]
+          ],
+          [
+            [
+              "user",
+              "v"
+            ],
+            [
+              "workspace",
+              "w"
+            ],
+            [
+              "workspace_member",
+              "w:v"
+            ]
+          ],
+          [
+            [
+              "user",
+              "u"
+            ],
+            [
+              "workspace",
+              "other"
+            ],
+            [
+              "workspace_member",
+              "other:u"
+            ]
+          ],
+          [],
+          [],
+          []
+        ],
+        "present": [
+          true,
+          true,
+          true,
+          false,
+          false,
+          false
+        ],
+        "metrics": {
+          "connects_total": 3,
+          "disconnects_total": 0,
+          "active_connections": 3,
+          "slow_evictions_total": 0,
+          "messages_sent_total": 0,
+          "messages_dropped_total": 0,
+          "membership_removals_dropped_total": 0,
+          "inbound_too_large_total": 0,
+          "events_sent_by_type": {},
+          "subscribes_total": {
+            "workspace": 3,
+            "user": 3,
+            "workspace_member": 3
+          },
+          "unsubscribes_total": {},
+          "subscribe_denied_total": {},
+          "active_scope_rooms": {
+            "workspace": 2,
+            "user": 2,
+            "workspace_member": 3
+          },
+          "redis": {
+            "connected": false,
+            "node_id": "",
+            "xadd_total": 0,
+            "xadd_errors": 0,
+            "xread_total": 0,
+            "xread_errors": 0,
+            "ack_total": 0,
+            "last_xadd_lag_micros": 0,
+            "mirror_primary_errors": 0,
+            "mirror_secondary_errors": 0,
+            "mirror_divergence_total": 0,
+            "stream_missing_total": 0,
+            "retention_errors": 0,
+            "used_memory_bytes": 0,
+            "max_memory_bytes": 0,
+            "evicted_keys": 0,
+            "last_error": "",
+            "stream_trimmed_total": 0,
+            "streams_without_ttl": 0,
+            "streams": {}
+          }
+        }
+      },
+      {
+        "result": null,
+        "callbacks": [],
+        "rooms": [
+          [
+            "user",
+            "u"
+          ],
+          [
+            "user",
+            "v"
+          ],
+          [
+            "workspace",
+            "other"
+          ],
+          [
+            "workspace",
+            "w"
+          ],
+          [
+            "workspace_member",
+            "other:u"
+          ],
+          [
+            "workspace_member",
+            "w:u"
+          ],
+          [
+            "workspace_member",
+            "w:v"
+          ]
+        ],
+        "subscriptions": [
+          [
+            [
+              "user",
+              "u"
+            ],
+            [
+              "workspace",
+              "w"
+            ],
+            [
+              "workspace_member",
+              "w:u"
+            ]
+          ],
+          [
+            [
+              "user",
+              "v"
+            ],
+            [
+              "workspace",
+              "w"
+            ],
+            [
+              "workspace_member",
+              "w:v"
+            ]
+          ],
+          [
+            [
+              "user",
+              "u"
+            ],
+            [
+              "workspace",
+              "other"
+            ],
+            [
+              "workspace_member",
+              "other:u"
+            ]
+          ],
+          [
+            [
+              "user",
+              "u"
+            ]
+          ],
+          [],
+          []
+        ],
+        "present": [
+          true,
+          true,
+          true,
+          true,
+          false,
+          false
+        ],
+        "metrics": {
+          "connects_total": 4,
+          "disconnects_total": 0,
+          "active_connections": 4,
+          "slow_evictions_total": 0,
+          "messages_sent_total": 0,
+          "messages_dropped_total": 0,
+          "membership_removals_dropped_total": 0,
+          "inbound_too_large_total": 0,
+          "events_sent_by_type": {},
+          "subscribes_total": {
+            "workspace": 3,
+            "user": 4,
+            "workspace_member": 3
+          },
+          "unsubscribes_total": {},
+          "subscribe_denied_total": {},
+          "active_scope_rooms": {
+            "workspace": 2,
+            "user": 2,
+            "workspace_member": 3
+          },
+          "redis": {
+            "connected": false,
+            "node_id": "",
+            "xadd_total": 0,
+            "xadd_errors": 0,
+            "xread_total": 0,
+            "xread_errors": 0,
+            "ack_total": 0,
+            "last_xadd_lag_micros": 0,
+            "mirror_primary_errors": 0,
+            "mirror_secondary_errors": 0,
+            "mirror_divergence_total": 0,
+            "stream_missing_total": 0,
+            "retention_errors": 0,
+            "used_memory_bytes": 0,
+            "max_memory_bytes": 0,
+            "evicted_keys": 0,
+            "last_error": "",
+            "stream_trimmed_total": 0,
+            "streams_without_ttl": 0,
+            "streams": {}
+          }
+        }
+      },
+      {
+        "result": null,
+        "callbacks": [],
+        "rooms": [
+          [
+            "user",
+            "u"
+          ],
+          [
+            "user",
+            "v"
+          ],
+          [
+            "workspace",
+            "other"
+          ],
+          [
+            "workspace",
+            "w"
+          ],
+          [
+            "workspace_member",
+            "other:u"
+          ],
+          [
+            "workspace_member",
+            "w:u"
+          ],
+          [
+            "workspace_member",
+            "w:v"
+          ]
+        ],
+        "subscriptions": [
+          [
+            [
+              "user",
+              "u"
+            ],
+            [
+              "workspace",
+              "w"
+            ],
+            [
+              "workspace_member",
+              "w:u"
+            ]
+          ],
+          [
+            [
+              "user",
+              "v"
+            ],
+            [
+              "workspace",
+              "w"
+            ],
+            [
+              "workspace_member",
+              "w:v"
+            ]
+          ],
+          [
+            [
+              "user",
+              "u"
+            ],
+            [
+              "workspace",
+              "other"
+            ],
+            [
+              "workspace_member",
+              "other:u"
+            ]
+          ],
+          [
+            [
+              "user",
+              "u"
+            ]
+          ],
+          [
+            [
+              "workspace",
+              "w"
+            ]
+          ],
+          []
+        ],
+        "present": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          false
+        ],
+        "metrics": {
+          "connects_total": 5,
+          "disconnects_total": 0,
+          "active_connections": 5,
+          "slow_evictions_total": 0,
+          "messages_sent_total": 0,
+          "messages_dropped_total": 0,
+          "membership_removals_dropped_total": 0,
+          "inbound_too_large_total": 0,
+          "events_sent_by_type": {},
+          "subscribes_total": {
+            "workspace": 4,
+            "user": 4,
+            "workspace_member": 3
+          },
+          "unsubscribes_total": {},
+          "subscribe_denied_total": {},
+          "active_scope_rooms": {
+            "workspace": 2,
+            "user": 2,
+            "workspace_member": 3
+          },
+          "redis": {
+            "connected": false,
+            "node_id": "",
+            "xadd_total": 0,
+            "xadd_errors": 0,
+            "xread_total": 0,
+            "xread_errors": 0,
+            "ack_total": 0,
+            "last_xadd_lag_micros": 0,
+            "mirror_primary_errors": 0,
+            "mirror_secondary_errors": 0,
+            "mirror_divergence_total": 0,
+            "stream_missing_total": 0,
+            "retention_errors": 0,
+            "used_memory_bytes": 0,
+            "max_memory_bytes": 0,
+            "evicted_keys": 0,
+            "last_error": "",
+            "stream_trimmed_total": 0,
+            "streams_without_ttl": 0,
+            "streams": {}
+          }
+        }
+      },
+      {
+        "result": null,
+        "callbacks": [],
+        "rooms": [
+          [
+            "user",
+            "u"
+          ],
+          [
+            "user",
+            "v"
+          ],
+          [
+            "workspace",
+            "other"
+          ],
+          [
+            "workspace",
+            "w"
+          ],
+          [
+            "workspace_member",
+            "other:u"
+          ],
+          [
+            "workspace_member",
+            "w:u"
+          ],
+          [
+            "workspace_member",
+            "w:v"
+          ]
+        ],
+        "subscriptions": [
+          [
+            [
+              "user",
+              "u"
+            ],
+            [
+              "workspace",
+              "w"
+            ],
+            [
+              "workspace_member",
+              "w:u"
+            ]
+          ],
+          [
+            [
+              "user",
+              "v"
+            ],
+            [
+              "workspace",
+              "w"
+            ],
+            [
+              "workspace_member",
+              "w:v"
+            ]
+          ],
+          [
+            [
+              "user",
+              "u"
+            ],
+            [
+              "workspace",
+              "other"
+            ],
+            [
+              "workspace_member",
+              "other:u"
+            ]
+          ],
+          [
+            [
+              "user",
+              "u"
+            ]
+          ],
+          [
+            [
+              "workspace",
+              "w"
+            ]
+          ],
+          []
+        ],
+        "present": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          false
+        ],
+        "metrics": {
+          "connects_total": 5,
+          "disconnects_total": 0,
+          "active_connections": 5,
+          "slow_evictions_total": 0,
+          "messages_sent_total": 0,
+          "messages_dropped_total": 0,
+          "membership_removals_dropped_total": 0,
+          "inbound_too_large_total": 0,
+          "events_sent_by_type": {},
+          "subscribes_total": {
+            "workspace": 4,
+            "user": 4,
+            "workspace_member": 3
+          },
+          "unsubscribes_total": {},
+          "subscribe_denied_total": {},
+          "active_scope_rooms": {
+            "workspace": 2,
+            "user": 2,
+            "workspace_member": 3
+          },
+          "redis": {
+            "connected": false,
+            "node_id": "",
+            "xadd_total": 0,
+            "xadd_errors": 0,
+            "xread_total": 0,
+            "xread_errors": 0,
+            "ack_total": 0,
+            "last_xadd_lag_micros": 0,
+            "mirror_primary_errors": 0,
+            "mirror_secondary_errors": 0,
+            "mirror_divergence_total": 0,
+            "stream_missing_total": 0,
+            "retention_errors": 0,
+            "used_memory_bytes": 0,
+            "max_memory_bytes": 0,
+            "evicted_keys": 0,
+            "last_error": "",
+            "stream_trimmed_total": 0,
+            "streams_without_ttl": 0,
+            "streams": {}
+          }
+        }
+      },
+      {
+        "result": null,
+        "callbacks": [],
+        "rooms": [
+          [
+            "user",
+            "u"
+          ],
+          [
+            "user",
+            "v"
+          ],
+          [
+            "workspace",
+            "other"
+          ],
+          [
+            "workspace",
+            "w"
+          ],
+          [
+            "workspace_member",
+            "other:u"
+          ],
+          [
+            "workspace_member",
+            "w:u"
+          ],
+          [
+            "workspace_member",
+            "w:v"
+          ]
+        ],
+        "subscriptions": [
+          [
+            [
+              "user",
+              "u"
+            ],
+            [
+              "workspace",
+              "w"
+            ],
+            [
+              "workspace_member",
+              "w:u"
+            ]
+          ],
+          [
+            [
+              "user",
+              "v"
+            ],
+            [
+              "workspace",
+              "w"
+            ],
+            [
+              "workspace_member",
+              "w:v"
+            ]
+          ],
+          [
+            [
+              "user",
+              "u"
+            ],
+            [
+              "workspace",
+              "other"
+            ],
+            [
+              "workspace_member",
+              "other:u"
+            ]
+          ],
+          [
+            [
+              "user",
+              "u"
+            ]
+          ],
+          [
+            [
+              "workspace",
+              "w"
+            ]
+          ],
+          []
+        ],
+        "present": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          false
+        ],
+        "metrics": {
+          "connects_total": 6,
+          "disconnects_total": 0,
+          "active_connections": 6,
+          "slow_evictions_total": 0,
+          "messages_sent_total": 0,
+          "messages_dropped_total": 0,
+          "membership_removals_dropped_total": 0,
+          "inbound_too_large_total": 0,
+          "events_sent_by_type": {},
+          "subscribes_total": {
+            "workspace": 4,
+            "user": 4,
+            "workspace_member": 3
+          },
+          "unsubscribes_total": {},
+          "subscribe_denied_total": {},
+          "active_scope_rooms": {
+            "workspace": 2,
+            "user": 2,
+            "workspace_member": 3
+          },
+          "redis": {
+            "connected": false,
+            "node_id": "",
+            "xadd_total": 0,
+            "xadd_errors": 0,
+            "xread_total": 0,
+            "xread_errors": 0,
+            "ack_total": 0,
+            "last_xadd_lag_micros": 0,
+            "mirror_primary_errors": 0,
+            "mirror_secondary_errors": 0,
+            "mirror_divergence_total": 0,
+            "stream_missing_total": 0,
+            "retention_errors": 0,
+            "used_memory_bytes": 0,
+            "max_memory_bytes": 0,
+            "evicted_keys": 0,
+            "last_error": "",
+            "stream_trimmed_total": 0,
+            "streams_without_ttl": 0,
+            "streams": {}
+          }
+        }
+      },
+      {
+        "result": true,
+        "callbacks": [
+          [
+            "first",
+            "chat",
+            "c"
+          ]
+        ],
+        "rooms": [
+          [
+            "chat",
+            "c"
+          ],
+          [
+            "user",
+            "u"
+          ],
+          [
+            "user",
+            "v"
+          ],
+          [
+            "workspace",
+            "other"
+          ],
+          [
+            "workspace",
+            "w"
+          ],
+          [
+            "workspace_member",
+            "other:u"
+          ],
+          [
+            "workspace_member",
+            "w:u"
+          ],
+          [
+            "workspace_member",
+            "w:v"
+          ]
+        ],
+        "subscriptions": [
+          [
+            [
+              "chat",
+              "c"
+            ],
+            [
+              "user",
+              "u"
+            ],
+            [
+              "workspace",
+              "w"
+            ],
+            [
+              "workspace_member",
+              "w:u"
+            ]
+          ],
+          [
+            [
+              "user",
+              "v"
+            ],
+            [
+              "workspace",
+              "w"
+            ],
+            [
+              "workspace_member",
+              "w:v"
+            ]
+          ],
+          [
+            [
+              "user",
+              "u"
+            ],
+            [
+              "workspace",
+              "other"
+            ],
+            [
+              "workspace_member",
+              "other:u"
+            ]
+          ],
+          [
+            [
+              "user",
+              "u"
+            ]
+          ],
+          [
+            [
+              "workspace",
+              "w"
+            ]
+          ],
+          []
+        ],
+        "present": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          false
+        ],
+        "metrics": {
+          "connects_total": 6,
+          "disconnects_total": 0,
+          "active_connections": 6,
+          "slow_evictions_total": 0,
+          "messages_sent_total": 0,
+          "messages_dropped_total": 0,
+          "membership_removals_dropped_total": 0,
+          "inbound_too_large_total": 0,
+          "events_sent_by_type": {},
+          "subscribes_total": {
+            "workspace": 4,
+            "user": 4,
+            "workspace_member": 3,
+            "chat": 1
+          },
+          "unsubscribes_total": {},
+          "subscribe_denied_total": {},
+          "active_scope_rooms": {
+            "workspace": 2,
+            "user": 2,
+            "workspace_member": 3,
+            "chat": 1
+          },
+          "redis": {
+            "connected": false,
+            "node_id": "",
+            "xadd_total": 0,
+            "xadd_errors": 0,
+            "xread_total": 0,
+            "xread_errors": 0,
+            "ack_total": 0,
+            "last_xadd_lag_micros": 0,
+            "mirror_primary_errors": 0,
+            "mirror_secondary_errors": 0,
+            "mirror_divergence_total": 0,
+            "stream_missing_total": 0,
+            "retention_errors": 0,
+            "used_memory_bytes": 0,
+            "max_memory_bytes": 0,
+            "evicted_keys": 0,
+            "last_error": "",
+            "stream_trimmed_total": 0,
+            "streams_without_ttl": 0,
+            "streams": {}
+          }
+        }
+      },
+      {
+        "result": false,
+        "callbacks": [],
+        "rooms": [
+          [
+            "chat",
+            "c"
+          ],
+          [
+            "user",
+            "u"
+          ],
+          [
+            "user",
+            "v"
+          ],
+          [
+            "workspace",
+            "other"
+          ],
+          [
+            "workspace",
+            "w"
+          ],
+          [
+            "workspace_member",
+            "other:u"
+          ],
+          [
+            "workspace_member",
+            "w:u"
+          ],
+          [
+            "workspace_member",
+            "w:v"
+          ]
+        ],
+        "subscriptions": [
+          [
+            [
+              "chat",
+              "c"
+            ],
+            [
+              "user",
+              "u"
+            ],
+            [
+              "workspace",
+              "w"
+            ],
+            [
+              "workspace_member",
+              "w:u"
+            ]
+          ],
+          [
+            [
+              "user",
+              "v"
+            ],
+            [
+              "workspace",
+              "w"
+            ],
+            [
+              "workspace_member",
+              "w:v"
+            ]
+          ],
+          [
+            [
+              "user",
+              "u"
+            ],
+            [
+              "workspace",
+              "other"
+            ],
+            [
+              "workspace_member",
+              "other:u"
+            ]
+          ],
+          [
+            [
+              "user",
+              "u"
+            ]
+          ],
+          [
+            [
+              "workspace",
+              "w"
+            ]
+          ],
+          []
+        ],
+        "present": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          false
+        ],
+        "metrics": {
+          "connects_total": 6,
+          "disconnects_total": 0,
+          "active_connections": 6,
+          "slow_evictions_total": 0,
+          "messages_sent_total": 0,
+          "messages_dropped_total": 0,
+          "membership_removals_dropped_total": 0,
+          "inbound_too_large_total": 0,
+          "events_sent_by_type": {},
+          "subscribes_total": {
+            "workspace": 4,
+            "user": 4,
+            "workspace_member": 3,
+            "chat": 1
+          },
+          "unsubscribes_total": {},
+          "subscribe_denied_total": {},
+          "active_scope_rooms": {
+            "workspace": 2,
+            "user": 2,
+            "workspace_member": 3,
+            "chat": 1
+          },
+          "redis": {
+            "connected": false,
+            "node_id": "",
+            "xadd_total": 0,
+            "xadd_errors": 0,
+            "xread_total": 0,
+            "xread_errors": 0,
+            "ack_total": 0,
+            "last_xadd_lag_micros": 0,
+            "mirror_primary_errors": 0,
+            "mirror_secondary_errors": 0,
+            "mirror_divergence_total": 0,
+            "stream_missing_total": 0,
+            "retention_errors": 0,
+            "used_memory_bytes": 0,
+            "max_memory_bytes": 0,
+            "evicted_keys": 0,
+            "last_error": "",
+            "stream_trimmed_total": 0,
+            "streams_without_ttl": 0,
+            "streams": {}
+          }
+        }
+      },
+      {
+        "result": true,
+        "callbacks": [],
+        "rooms": [
+          [
+            "chat",
+            "c"
+          ],
+          [
+            "user",
+            "u"
+          ],
+          [
+            "user",
+            "v"
+          ],
+          [
+            "workspace",
+            "other"
+          ],
+          [
+            "workspace",
+            "w"
+          ],
+          [
+            "workspace_member",
+            "other:u"
+          ],
+          [
+            "workspace_member",
+            "w:u"
+          ],
+          [
+            "workspace_member",
+            "w:v"
+          ]
+        ],
+        "subscriptions": [
+          [
+            [
+              "chat",
+              "c"
+            ],
+            [
+              "user",
+              "u"
+            ],
+            [
+              "workspace",
+              "w"
+            ],
+            [
+              "workspace_member",
+              "w:u"
+            ]
+          ],
+          [
+            [
+              "chat",
+              "c"
+            ],
+            [
+              "user",
+              "v"
+            ],
+            [
+              "workspace",
+              "w"
+            ],
+            [
+              "workspace_member",
+              "w:v"
+            ]
+          ],
+          [
+            [
+              "user",
+              "u"
+            ],
+            [
+              "workspace",
+              "other"
+            ],
+            [
+              "workspace_member",
+              "other:u"
+            ]
+          ],
+          [
+            [
+              "user",
+              "u"
+            ]
+          ],
+          [
+            [
+              "workspace",
+              "w"
+            ]
+          ],
+          []
+        ],
+        "present": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          false
+        ],
+        "metrics": {
+          "connects_total": 6,
+          "disconnects_total": 0,
+          "active_connections": 6,
+          "slow_evictions_total": 0,
+          "messages_sent_total": 0,
+          "messages_dropped_total": 0,
+          "membership_removals_dropped_total": 0,
+          "inbound_too_large_total": 0,
+          "events_sent_by_type": {},
+          "subscribes_total": {
+            "workspace": 4,
+            "user": 4,
+            "workspace_member": 3,
+            "chat": 2
+          },
+          "unsubscribes_total": {},
+          "subscribe_denied_total": {},
+          "active_scope_rooms": {
+            "workspace": 2,
+            "user": 2,
+            "workspace_member": 3,
+            "chat": 1
+          },
+          "redis": {
+            "connected": false,
+            "node_id": "",
+            "xadd_total": 0,
+            "xadd_errors": 0,
+            "xread_total": 0,
+            "xread_errors": 0,
+            "ack_total": 0,
+            "last_xadd_lag_micros": 0,
+            "mirror_primary_errors": 0,
+            "mirror_secondary_errors": 0,
+            "mirror_divergence_total": 0,
+            "stream_missing_total": 0,
+            "retention_errors": 0,
+            "used_memory_bytes": 0,
+            "max_memory_bytes": 0,
+            "evicted_keys": 0,
+            "last_error": "",
+            "stream_trimmed_total": 0,
+            "streams_without_ttl": 0,
+            "streams": {}
+          }
+        }
+      },
+      {
+        "result": true,
+        "callbacks": [],
+        "rooms": [
+          [
+            "chat",
+            "c"
+          ],
+          [
+            "user",
+            "u"
+          ],
+          [
+            "user",
+            "v"
+          ],
+          [
+            "workspace",
+            "other"
+          ],
+          [
+            "workspace",
+            "w"
+          ],
+          [
+            "workspace_member",
+            "other:u"
+          ],
+          [
+            "workspace_member",
+            "w:u"
+          ],
+          [
+            "workspace_member",
+            "w:v"
+          ]
+        ],
+        "subscriptions": [
+          [
+            [
+              "user",
+              "u"
+            ],
+            [
+              "workspace",
+              "w"
+            ],
+            [
+              "workspace_member",
+              "w:u"
+            ]
+          ],
+          [
+            [
+              "chat",
+              "c"
+            ],
+            [
+              "user",
+              "v"
+            ],
+            [
+              "workspace",
+              "w"
+            ],
+            [
+              "workspace_member",
+              "w:v"
+            ]
+          ],
+          [
+            [
+              "user",
+              "u"
+            ],
+            [
+              "workspace",
+              "other"
+            ],
+            [
+              "workspace_member",
+              "other:u"
+            ]
+          ],
+          [
+            [
+              "user",
+              "u"
+            ]
+          ],
+          [
+            [
+              "workspace",
+              "w"
+            ]
+          ],
+          []
+        ],
+        "present": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          false
+        ],
+        "metrics": {
+          "connects_total": 6,
+          "disconnects_total": 0,
+          "active_connections": 6,
+          "slow_evictions_total": 0,
+          "messages_sent_total": 0,
+          "messages_dropped_total": 0,
+          "membership_removals_dropped_total": 0,
+          "inbound_too_large_total": 0,
+          "events_sent_by_type": {},
+          "subscribes_total": {
+            "workspace": 4,
+            "user": 4,
+            "workspace_member": 3,
+            "chat": 2
+          },
+          "unsubscribes_total": {
+            "chat": 1
+          },
+          "subscribe_denied_total": {},
+          "active_scope_rooms": {
+            "workspace": 2,
+            "user": 2,
+            "workspace_member": 3,
+            "chat": 1
+          },
+          "redis": {
+            "connected": false,
+            "node_id": "",
+            "xadd_total": 0,
+            "xadd_errors": 0,
+            "xread_total": 0,
+            "xread_errors": 0,
+            "ack_total": 0,
+            "last_xadd_lag_micros": 0,
+            "mirror_primary_errors": 0,
+            "mirror_secondary_errors": 0,
+            "mirror_divergence_total": 0,
+            "stream_missing_total": 0,
+            "retention_errors": 0,
+            "used_memory_bytes": 0,
+            "max_memory_bytes": 0,
+            "evicted_keys": 0,
+            "last_error": "",
+            "stream_trimmed_total": 0,
+            "streams_without_ttl": 0,
+            "streams": {}
+          }
+        }
+      },
+      {
+        "result": false,
+        "callbacks": [],
+        "rooms": [
+          [
+            "chat",
+            "c"
+          ],
+          [
+            "user",
+            "u"
+          ],
+          [
+            "user",
+            "v"
+          ],
+          [
+            "workspace",
+            "other"
+          ],
+          [
+            "workspace",
+            "w"
+          ],
+          [
+            "workspace_member",
+            "other:u"
+          ],
+          [
+            "workspace_member",
+            "w:u"
+          ],
+          [
+            "workspace_member",
+            "w:v"
+          ]
+        ],
+        "subscriptions": [
+          [
+            [
+              "user",
+              "u"
+            ],
+            [
+              "workspace",
+              "w"
+            ],
+            [
+              "workspace_member",
+              "w:u"
+            ]
+          ],
+          [
+            [
+              "chat",
+              "c"
+            ],
+            [
+              "user",
+              "v"
+            ],
+            [
+              "workspace",
+              "w"
+            ],
+            [
+              "workspace_member",
+              "w:v"
+            ]
+          ],
+          [
+            [
+              "user",
+              "u"
+            ],
+            [
+              "workspace",
+              "other"
+            ],
+            [
+              "workspace_member",
+              "other:u"
+            ]
+          ],
+          [
+            [
+              "user",
+              "u"
+            ]
+          ],
+          [
+            [
+              "workspace",
+              "w"
+            ]
+          ],
+          []
+        ],
+        "present": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          false
+        ],
+        "metrics": {
+          "connects_total": 6,
+          "disconnects_total": 0,
+          "active_connections": 6,
+          "slow_evictions_total": 0,
+          "messages_sent_total": 0,
+          "messages_dropped_total": 0,
+          "membership_removals_dropped_total": 0,
+          "inbound_too_large_total": 0,
+          "events_sent_by_type": {},
+          "subscribes_total": {
+            "workspace": 4,
+            "user": 4,
+            "workspace_member": 3,
+            "chat": 2
+          },
+          "unsubscribes_total": {
+            "chat": 1
+          },
+          "subscribe_denied_total": {},
+          "active_scope_rooms": {
+            "workspace": 2,
+            "user": 2,
+            "workspace_member": 3,
+            "chat": 1
+          },
+          "redis": {
+            "connected": false,
+            "node_id": "",
+            "xadd_total": 0,
+            "xadd_errors": 0,
+            "xread_total": 0,
+            "xread_errors": 0,
+            "ack_total": 0,
+            "last_xadd_lag_micros": 0,
+            "mirror_primary_errors": 0,
+            "mirror_secondary_errors": 0,
+            "mirror_divergence_total": 0,
+            "stream_missing_total": 0,
+            "retention_errors": 0,
+            "used_memory_bytes": 0,
+            "max_memory_bytes": 0,
+            "evicted_keys": 0,
+            "last_error": "",
+            "stream_trimmed_total": 0,
+            "streams_without_ttl": 0,
+            "streams": {}
+          }
+        }
+      },
+      {
+        "result": true,
+        "callbacks": [
+          [
+            "last",
+            "chat",
+            "c"
+          ]
+        ],
+        "rooms": [
+          [
+            "user",
+            "u"
+          ],
+          [
+            "user",
+            "v"
+          ],
+          [
+            "workspace",
+            "other"
+          ],
+          [
+            "workspace",
+            "w"
+          ],
+          [
+            "workspace_member",
+            "other:u"
+          ],
+          [
+            "workspace_member",
+            "w:u"
+          ],
+          [
+            "workspace_member",
+            "w:v"
+          ]
+        ],
+        "subscriptions": [
+          [
+            [
+              "user",
+              "u"
+            ],
+            [
+              "workspace",
+              "w"
+            ],
+            [
+              "workspace_member",
+              "w:u"
+            ]
+          ],
+          [
+            [
+              "user",
+              "v"
+            ],
+            [
+              "workspace",
+              "w"
+            ],
+            [
+              "workspace_member",
+              "w:v"
+            ]
+          ],
+          [
+            [
+              "user",
+              "u"
+            ],
+            [
+              "workspace",
+              "other"
+            ],
+            [
+              "workspace_member",
+              "other:u"
+            ]
+          ],
+          [
+            [
+              "user",
+              "u"
+            ]
+          ],
+          [
+            [
+              "workspace",
+              "w"
+            ]
+          ],
+          []
+        ],
+        "present": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          false
+        ],
+        "metrics": {
+          "connects_total": 6,
+          "disconnects_total": 0,
+          "active_connections": 6,
+          "slow_evictions_total": 0,
+          "messages_sent_total": 0,
+          "messages_dropped_total": 0,
+          "membership_removals_dropped_total": 0,
+          "inbound_too_large_total": 0,
+          "events_sent_by_type": {},
+          "subscribes_total": {
+            "workspace": 4,
+            "user": 4,
+            "workspace_member": 3,
+            "chat": 2
+          },
+          "unsubscribes_total": {
+            "chat": 2
+          },
+          "subscribe_denied_total": {},
+          "active_scope_rooms": {
+            "workspace": 2,
+            "user": 2,
+            "workspace_member": 3,
+            "chat": 0
+          },
+          "redis": {
+            "connected": false,
+            "node_id": "",
+            "xadd_total": 0,
+            "xadd_errors": 0,
+            "xread_total": 0,
+            "xread_errors": 0,
+            "ack_total": 0,
+            "last_xadd_lag_micros": 0,
+            "mirror_primary_errors": 0,
+            "mirror_secondary_errors": 0,
+            "mirror_divergence_total": 0,
+            "stream_missing_total": 0,
+            "retention_errors": 0,
+            "used_memory_bytes": 0,
+            "max_memory_bytes": 0,
+            "evicted_keys": 0,
+            "last_error": "",
+            "stream_trimmed_total": 0,
+            "streams_without_ttl": 0,
+            "streams": {}
+          }
+        }
+      },
+      {
+        "result": false,
+        "callbacks": [],
+        "rooms": [
+          [
+            "user",
+            "u"
+          ],
+          [
+            "user",
+            "v"
+          ],
+          [
+            "workspace",
+            "other"
+          ],
+          [
+            "workspace",
+            "w"
+          ],
+          [
+            "workspace_member",
+            "other:u"
+          ],
+          [
+            "workspace_member",
+            "w:u"
+          ],
+          [
+            "workspace_member",
+            "w:v"
+          ]
+        ],
+        "subscriptions": [
+          [
+            [
+              "user",
+              "u"
+            ],
+            [
+              "workspace",
+              "w"
+            ],
+            [
+              "workspace_member",
+              "w:u"
+            ]
+          ],
+          [
+            [
+              "user",
+              "v"
+            ],
+            [
+              "workspace",
+              "w"
+            ],
+            [
+              "workspace_member",
+              "w:v"
+            ]
+          ],
+          [
+            [
+              "user",
+              "u"
+            ],
+            [
+              "workspace",
+              "other"
+            ],
+            [
+              "workspace_member",
+              "other:u"
+            ]
+          ],
+          [
+            [
+              "user",
+              "u"
+            ]
+          ],
+          [
+            [
+              "workspace",
+              "w"
+            ]
+          ],
+          []
+        ],
+        "present": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          false
+        ],
+        "metrics": {
+          "connects_total": 6,
+          "disconnects_total": 0,
+          "active_connections": 6,
+          "slow_evictions_total": 0,
+          "messages_sent_total": 0,
+          "messages_dropped_total": 0,
+          "membership_removals_dropped_total": 0,
+          "inbound_too_large_total": 0,
+          "events_sent_by_type": {},
+          "subscribes_total": {
+            "workspace": 4,
+            "user": 4,
+            "workspace_member": 3,
+            "chat": 2
+          },
+          "unsubscribes_total": {
+            "chat": 2
+          },
+          "subscribe_denied_total": {},
+          "active_scope_rooms": {
+            "workspace": 2,
+            "user": 2,
+            "workspace_member": 3,
+            "chat": 0
+          },
+          "redis": {
+            "connected": false,
+            "node_id": "",
+            "xadd_total": 0,
+            "xadd_errors": 0,
+            "xread_total": 0,
+            "xread_errors": 0,
+            "ack_total": 0,
+            "last_xadd_lag_micros": 0,
+            "mirror_primary_errors": 0,
+            "mirror_secondary_errors": 0,
+            "mirror_divergence_total": 0,
+            "stream_missing_total": 0,
+            "retention_errors": 0,
+            "used_memory_bytes": 0,
+            "max_memory_bytes": 0,
+            "evicted_keys": 0,
+            "last_error": "",
+            "stream_trimmed_total": 0,
+            "streams_without_ttl": 0,
+            "streams": {}
+          }
+        }
+      },
+      {
+        "result": false,
+        "callbacks": [],
+        "rooms": [
+          [
+            "user",
+            "u"
+          ],
+          [
+            "user",
+            "v"
+          ],
+          [
+            "workspace",
+            "other"
+          ],
+          [
+            "workspace",
+            "w"
+          ],
+          [
+            "workspace_member",
+            "other:u"
+          ],
+          [
+            "workspace_member",
+            "w:u"
+          ],
+          [
+            "workspace_member",
+            "w:v"
+          ]
+        ],
+        "subscriptions": [
+          [
+            [
+              "user",
+              "u"
+            ],
+            [
+              "workspace",
+              "w"
+            ],
+            [
+              "workspace_member",
+              "w:u"
+            ]
+          ],
+          [
+            [
+              "user",
+              "v"
+            ],
+            [
+              "workspace",
+              "w"
+            ],
+            [
+              "workspace_member",
+              "w:v"
+            ]
+          ],
+          [
+            [
+              "user",
+              "u"
+            ],
+            [
+              "workspace",
+              "other"
+            ],
+            [
+              "workspace_member",
+              "other:u"
+            ]
+          ],
+          [
+            [
+              "user",
+              "u"
+            ]
+          ],
+          [
+            [
+              "workspace",
+              "w"
+            ]
+          ],
+          []
+        ],
+        "present": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          false
+        ],
+        "metrics": {
+          "connects_total": 6,
+          "disconnects_total": 0,
+          "active_connections": 6,
+          "slow_evictions_total": 0,
+          "messages_sent_total": 0,
+          "messages_dropped_total": 0,
+          "membership_removals_dropped_total": 0,
+          "inbound_too_large_total": 0,
+          "events_sent_by_type": {},
+          "subscribes_total": {
+            "workspace": 4,
+            "user": 4,
+            "workspace_member": 3,
+            "chat": 2
+          },
+          "unsubscribes_total": {
+            "chat": 2
+          },
+          "subscribe_denied_total": {},
+          "active_scope_rooms": {
+            "workspace": 2,
+            "user": 2,
+            "workspace_member": 3,
+            "chat": 0
+          },
+          "redis": {
+            "connected": false,
+            "node_id": "",
+            "xadd_total": 0,
+            "xadd_errors": 0,
+            "xread_total": 0,
+            "xread_errors": 0,
+            "ack_total": 0,
+            "last_xadd_lag_micros": 0,
+            "mirror_primary_errors": 0,
+            "mirror_secondary_errors": 0,
+            "mirror_divergence_total": 0,
+            "stream_missing_total": 0,
+            "retention_errors": 0,
+            "used_memory_bytes": 0,
+            "max_memory_bytes": 0,
+            "evicted_keys": 0,
+            "last_error": "",
+            "stream_trimmed_total": 0,
+            "streams_without_ttl": 0,
+            "streams": {}
+          }
+        }
+      },
+      {
+        "result": false,
+        "callbacks": [],
+        "rooms": [
+          [
+            "user",
+            "u"
+          ],
+          [
+            "user",
+            "v"
+          ],
+          [
+            "workspace",
+            "other"
+          ],
+          [
+            "workspace",
+            "w"
+          ],
+          [
+            "workspace_member",
+            "other:u"
+          ],
+          [
+            "workspace_member",
+            "w:u"
+          ],
+          [
+            "workspace_member",
+            "w:v"
+          ]
+        ],
+        "subscriptions": [
+          [
+            [
+              "user",
+              "u"
+            ],
+            [
+              "workspace",
+              "w"
+            ],
+            [
+              "workspace_member",
+              "w:u"
+            ]
+          ],
+          [
+            [
+              "user",
+              "v"
+            ],
+            [
+              "workspace",
+              "w"
+            ],
+            [
+              "workspace_member",
+              "w:v"
+            ]
+          ],
+          [
+            [
+              "user",
+              "u"
+            ],
+            [
+              "workspace",
+              "other"
+            ],
+            [
+              "workspace_member",
+              "other:u"
+            ]
+          ],
+          [
+            [
+              "user",
+              "u"
+            ]
+          ],
+          [
+            [
+              "workspace",
+              "w"
+            ]
+          ],
+          []
+        ],
+        "present": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          false
+        ],
+        "metrics": {
+          "connects_total": 6,
+          "disconnects_total": 0,
+          "active_connections": 6,
+          "slow_evictions_total": 0,
+          "messages_sent_total": 0,
+          "messages_dropped_total": 0,
+          "membership_removals_dropped_total": 0,
+          "inbound_too_large_total": 0,
+          "events_sent_by_type": {},
+          "subscribes_total": {
+            "workspace": 4,
+            "user": 4,
+            "workspace_member": 3,
+            "chat": 2
+          },
+          "unsubscribes_total": {
+            "chat": 2
+          },
+          "subscribe_denied_total": {},
+          "active_scope_rooms": {
+            "workspace": 2,
+            "user": 2,
+            "workspace_member": 3,
+            "chat": 0
+          },
+          "redis": {
+            "connected": false,
+            "node_id": "",
+            "xadd_total": 0,
+            "xadd_errors": 0,
+            "xread_total": 0,
+            "xread_errors": 0,
+            "ack_total": 0,
+            "last_xadd_lag_micros": 0,
+            "mirror_primary_errors": 0,
+            "mirror_secondary_errors": 0,
+            "mirror_divergence_total": 0,
+            "stream_missing_total": 0,
+            "retention_errors": 0,
+            "used_memory_bytes": 0,
+            "max_memory_bytes": 0,
+            "evicted_keys": 0,
+            "last_error": "",
+            "stream_trimmed_total": 0,
+            "streams_without_ttl": 0,
+            "streams": {}
+          }
+        }
+      },
+      {
+        "result": null,
+        "callbacks": [
+          [
+            "last",
+            "workspace_member",
+            "w:u"
+          ]
+        ],
+        "rooms": [
+          [
+            "user",
+            "u"
+          ],
+          [
+            "user",
+            "v"
+          ],
+          [
+            "workspace",
+            "other"
+          ],
+          [
+            "workspace",
+            "w"
+          ],
+          [
+            "workspace_member",
+            "other:u"
+          ],
+          [
+            "workspace_member",
+            "w:v"
+          ]
+        ],
+        "subscriptions": [
+          [],
+          [
+            [
+              "user",
+              "v"
+            ],
+            [
+              "workspace",
+              "w"
+            ],
+            [
+              "workspace_member",
+              "w:v"
+            ]
+          ],
+          [
+            [
+              "user",
+              "u"
+            ],
+            [
+              "workspace",
+              "other"
+            ],
+            [
+              "workspace_member",
+              "other:u"
+            ]
+          ],
+          [
+            [
+              "user",
+              "u"
+            ]
+          ],
+          [
+            [
+              "workspace",
+              "w"
+            ]
+          ],
+          []
+        ],
+        "present": [
+          false,
+          true,
+          true,
+          true,
+          true,
+          false
+        ],
+        "metrics": {
+          "connects_total": 6,
+          "disconnects_total": 1,
+          "active_connections": 5,
+          "slow_evictions_total": 0,
+          "messages_sent_total": 0,
+          "messages_dropped_total": 0,
+          "membership_removals_dropped_total": 0,
+          "inbound_too_large_total": 0,
+          "events_sent_by_type": {},
+          "subscribes_total": {
+            "workspace": 4,
+            "user": 4,
+            "workspace_member": 3,
+            "chat": 2
+          },
+          "unsubscribes_total": {
+            "chat": 2
+          },
+          "subscribe_denied_total": {},
+          "active_scope_rooms": {
+            "workspace": 2,
+            "user": 2,
+            "workspace_member": 2,
+            "chat": 0
+          },
+          "redis": {
+            "connected": false,
+            "node_id": "",
+            "xadd_total": 0,
+            "xadd_errors": 0,
+            "xread_total": 0,
+            "xread_errors": 0,
+            "ack_total": 0,
+            "last_xadd_lag_micros": 0,
+            "mirror_primary_errors": 0,
+            "mirror_secondary_errors": 0,
+            "mirror_divergence_total": 0,
+            "stream_missing_total": 0,
+            "retention_errors": 0,
+            "used_memory_bytes": 0,
+            "max_memory_bytes": 0,
+            "evicted_keys": 0,
+            "last_error": "",
+            "stream_trimmed_total": 0,
+            "streams_without_ttl": 0,
+            "streams": {}
+          }
+        }
+      },
+      {
+        "result": null,
+        "callbacks": [],
+        "rooms": [
+          [
+            "user",
+            "u"
+          ],
+          [
+            "user",
+            "v"
+          ],
+          [
+            "workspace",
+            "other"
+          ],
+          [
+            "workspace",
+            "w"
+          ],
+          [
+            "workspace_member",
+            "other:u"
+          ],
+          [
+            "workspace_member",
+            "w:v"
+          ]
+        ],
+        "subscriptions": [
+          [],
+          [
+            [
+              "user",
+              "v"
+            ],
+            [
+              "workspace",
+              "w"
+            ],
+            [
+              "workspace_member",
+              "w:v"
+            ]
+          ],
+          [
+            [
+              "user",
+              "u"
+            ],
+            [
+              "workspace",
+              "other"
+            ],
+            [
+              "workspace_member",
+              "other:u"
+            ]
+          ],
+          [
+            [
+              "user",
+              "u"
+            ]
+          ],
+          [
+            [
+              "workspace",
+              "w"
+            ]
+          ],
+          []
+        ],
+        "present": [
+          false,
+          true,
+          true,
+          true,
+          true,
+          false
+        ],
+        "metrics": {
+          "connects_total": 6,
+          "disconnects_total": 1,
+          "active_connections": 5,
+          "slow_evictions_total": 0,
+          "messages_sent_total": 0,
+          "messages_dropped_total": 0,
+          "membership_removals_dropped_total": 0,
+          "inbound_too_large_total": 0,
+          "events_sent_by_type": {},
+          "subscribes_total": {
+            "workspace": 4,
+            "user": 4,
+            "workspace_member": 3,
+            "chat": 2
+          },
+          "unsubscribes_total": {
+            "chat": 2
+          },
+          "subscribe_denied_total": {},
+          "active_scope_rooms": {
+            "workspace": 2,
+            "user": 2,
+            "workspace_member": 2,
+            "chat": 0
+          },
+          "redis": {
+            "connected": false,
+            "node_id": "",
+            "xadd_total": 0,
+            "xadd_errors": 0,
+            "xread_total": 0,
+            "xread_errors": 0,
+            "ack_total": 0,
+            "last_xadd_lag_micros": 0,
+            "mirror_primary_errors": 0,
+            "mirror_secondary_errors": 0,
+            "mirror_divergence_total": 0,
+            "stream_missing_total": 0,
+            "retention_errors": 0,
+            "used_memory_bytes": 0,
+            "max_memory_bytes": 0,
+            "evicted_keys": 0,
+            "last_error": "",
+            "stream_trimmed_total": 0,
+            "streams_without_ttl": 0,
+            "streams": {}
+          }
+        }
+      },
+      {
+        "result": false,
+        "callbacks": [],
+        "rooms": [
+          [
+            "user",
+            "u"
+          ],
+          [
+            "user",
+            "v"
+          ],
+          [
+            "workspace",
+            "other"
+          ],
+          [
+            "workspace",
+            "w"
+          ],
+          [
+            "workspace_member",
+            "other:u"
+          ],
+          [
+            "workspace_member",
+            "w:v"
+          ]
+        ],
+        "subscriptions": [
+          [],
+          [
+            [
+              "user",
+              "v"
+            ],
+            [
+              "workspace",
+              "w"
+            ],
+            [
+              "workspace_member",
+              "w:v"
+            ]
+          ],
+          [
+            [
+              "user",
+              "u"
+            ],
+            [
+              "workspace",
+              "other"
+            ],
+            [
+              "workspace_member",
+              "other:u"
+            ]
+          ],
+          [
+            [
+              "user",
+              "u"
+            ]
+          ],
+          [
+            [
+              "workspace",
+              "w"
+            ]
+          ],
+          []
+        ],
+        "present": [
+          false,
+          true,
+          true,
+          true,
+          true,
+          false
+        ],
+        "metrics": {
+          "connects_total": 6,
+          "disconnects_total": 1,
+          "active_connections": 5,
+          "slow_evictions_total": 0,
+          "messages_sent_total": 0,
+          "messages_dropped_total": 0,
+          "membership_removals_dropped_total": 0,
+          "inbound_too_large_total": 0,
+          "events_sent_by_type": {},
+          "subscribes_total": {
+            "workspace": 4,
+            "user": 4,
+            "workspace_member": 3,
+            "chat": 2
+          },
+          "unsubscribes_total": {
+            "chat": 2
+          },
+          "subscribe_denied_total": {},
+          "active_scope_rooms": {
+            "workspace": 2,
+            "user": 2,
+            "workspace_member": 2,
+            "chat": 0
+          },
+          "redis": {
+            "connected": false,
+            "node_id": "",
+            "xadd_total": 0,
+            "xadd_errors": 0,
+            "xread_total": 0,
+            "xread_errors": 0,
+            "ack_total": 0,
+            "last_xadd_lag_micros": 0,
+            "mirror_primary_errors": 0,
+            "mirror_secondary_errors": 0,
+            "mirror_divergence_total": 0,
+            "stream_missing_total": 0,
+            "retention_errors": 0,
+            "used_memory_bytes": 0,
+            "max_memory_bytes": 0,
+            "evicted_keys": 0,
+            "last_error": "",
+            "stream_trimmed_total": 0,
+            "streams_without_ttl": 0,
+            "streams": {}
+          }
+        }
+      },
+      {
+        "result": null,
+        "callbacks": [
+          [
+            "last",
+            "user",
+            "v"
+          ],
+          [
+            "last",
+            "workspace_member",
+            "w:v"
+          ]
+        ],
+        "rooms": [
+          [
+            "user",
+            "u"
+          ],
+          [
+            "workspace",
+            "other"
+          ],
+          [
+            "workspace",
+            "w"
+          ],
+          [
+            "workspace_member",
+            "other:u"
+          ]
+        ],
+        "subscriptions": [
+          [],
+          [],
+          [
+            [
+              "user",
+              "u"
+            ],
+            [
+              "workspace",
+              "other"
+            ],
+            [
+              "workspace_member",
+              "other:u"
+            ]
+          ],
+          [
+            [
+              "user",
+              "u"
+            ]
+          ],
+          [
+            [
+              "workspace",
+              "w"
+            ]
+          ],
+          []
+        ],
+        "present": [
+          false,
+          false,
+          true,
+          true,
+          true,
+          false
+        ],
+        "metrics": {
+          "connects_total": 6,
+          "disconnects_total": 2,
+          "active_connections": 4,
+          "slow_evictions_total": 0,
+          "messages_sent_total": 0,
+          "messages_dropped_total": 0,
+          "membership_removals_dropped_total": 0,
+          "inbound_too_large_total": 0,
+          "events_sent_by_type": {},
+          "subscribes_total": {
+            "workspace": 4,
+            "user": 4,
+            "workspace_member": 3,
+            "chat": 2
+          },
+          "unsubscribes_total": {
+            "chat": 2
+          },
+          "subscribe_denied_total": {},
+          "active_scope_rooms": {
+            "workspace": 2,
+            "user": 1,
+            "workspace_member": 1,
+            "chat": 0
+          },
+          "redis": {
+            "connected": false,
+            "node_id": "",
+            "xadd_total": 0,
+            "xadd_errors": 0,
+            "xread_total": 0,
+            "xread_errors": 0,
+            "ack_total": 0,
+            "last_xadd_lag_micros": 0,
+            "mirror_primary_errors": 0,
+            "mirror_secondary_errors": 0,
+            "mirror_divergence_total": 0,
+            "stream_missing_total": 0,
+            "retention_errors": 0,
+            "used_memory_bytes": 0,
+            "max_memory_bytes": 0,
+            "evicted_keys": 0,
+            "last_error": "",
+            "stream_trimmed_total": 0,
+            "streams_without_ttl": 0,
+            "streams": {}
+          }
+        }
+      },
+      {
+        "result": null,
+        "callbacks": [
+          [
+            "last",
+            "workspace",
+            "other"
+          ],
+          [
+            "last",
+            "workspace_member",
+            "other:u"
+          ]
+        ],
+        "rooms": [
+          [
+            "user",
+            "u"
+          ],
+          [
+            "workspace",
+            "w"
+          ]
+        ],
+        "subscriptions": [
+          [],
+          [],
+          [],
+          [
+            [
+              "user",
+              "u"
+            ]
+          ],
+          [
+            [
+              "workspace",
+              "w"
+            ]
+          ],
+          []
+        ],
+        "present": [
+          false,
+          false,
+          false,
+          true,
+          true,
+          false
+        ],
+        "metrics": {
+          "connects_total": 6,
+          "disconnects_total": 3,
+          "active_connections": 3,
+          "slow_evictions_total": 0,
+          "messages_sent_total": 0,
+          "messages_dropped_total": 0,
+          "membership_removals_dropped_total": 0,
+          "inbound_too_large_total": 0,
+          "events_sent_by_type": {},
+          "subscribes_total": {
+            "workspace": 4,
+            "user": 4,
+            "workspace_member": 3,
+            "chat": 2
+          },
+          "unsubscribes_total": {
+            "chat": 2
+          },
+          "subscribe_denied_total": {},
+          "active_scope_rooms": {
+            "workspace": 1,
+            "user": 1,
+            "workspace_member": 0,
+            "chat": 0
+          },
+          "redis": {
+            "connected": false,
+            "node_id": "",
+            "xadd_total": 0,
+            "xadd_errors": 0,
+            "xread_total": 0,
+            "xread_errors": 0,
+            "ack_total": 0,
+            "last_xadd_lag_micros": 0,
+            "mirror_primary_errors": 0,
+            "mirror_secondary_errors": 0,
+            "mirror_divergence_total": 0,
+            "stream_missing_total": 0,
+            "retention_errors": 0,
+            "used_memory_bytes": 0,
+            "max_memory_bytes": 0,
+            "evicted_keys": 0,
+            "last_error": "",
+            "stream_trimmed_total": 0,
+            "streams_without_ttl": 0,
+            "streams": {}
+          }
+        }
+      },
+      {
+        "result": null,
+        "callbacks": [
+          [
+            "last",
+            "user",
+            "u"
+          ]
+        ],
+        "rooms": [
+          [
+            "workspace",
+            "w"
+          ]
+        ],
+        "subscriptions": [
+          [],
+          [],
+          [],
+          [],
+          [
+            [
+              "workspace",
+              "w"
+            ]
+          ],
+          []
+        ],
+        "present": [
+          false,
+          false,
+          false,
+          false,
+          true,
+          false
+        ],
+        "metrics": {
+          "connects_total": 6,
+          "disconnects_total": 4,
+          "active_connections": 2,
+          "slow_evictions_total": 0,
+          "messages_sent_total": 0,
+          "messages_dropped_total": 0,
+          "membership_removals_dropped_total": 0,
+          "inbound_too_large_total": 0,
+          "events_sent_by_type": {},
+          "subscribes_total": {
+            "workspace": 4,
+            "user": 4,
+            "workspace_member": 3,
+            "chat": 2
+          },
+          "unsubscribes_total": {
+            "chat": 2
+          },
+          "subscribe_denied_total": {},
+          "active_scope_rooms": {
+            "workspace": 1,
+            "user": 0,
+            "workspace_member": 0,
+            "chat": 0
+          },
+          "redis": {
+            "connected": false,
+            "node_id": "",
+            "xadd_total": 0,
+            "xadd_errors": 0,
+            "xread_total": 0,
+            "xread_errors": 0,
+            "ack_total": 0,
+            "last_xadd_lag_micros": 0,
+            "mirror_primary_errors": 0,
+            "mirror_secondary_errors": 0,
+            "mirror_divergence_total": 0,
+            "stream_missing_total": 0,
+            "retention_errors": 0,
+            "used_memory_bytes": 0,
+            "max_memory_bytes": 0,
+            "evicted_keys": 0,
+            "last_error": "",
+            "stream_trimmed_total": 0,
+            "streams_without_ttl": 0,
+            "streams": {}
+          }
+        }
+      },
+      {
+        "result": null,
+        "callbacks": [
+          [
+            "last",
+            "workspace",
+            "w"
+          ]
+        ],
+        "rooms": [],
+        "subscriptions": [
+          [],
+          [],
+          [],
+          [],
+          [],
+          []
+        ],
+        "present": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "metrics": {
+          "connects_total": 6,
+          "disconnects_total": 5,
+          "active_connections": 1,
+          "slow_evictions_total": 0,
+          "messages_sent_total": 0,
+          "messages_dropped_total": 0,
+          "membership_removals_dropped_total": 0,
+          "inbound_too_large_total": 0,
+          "events_sent_by_type": {},
+          "subscribes_total": {
+            "workspace": 4,
+            "user": 4,
+            "workspace_member": 3,
+            "chat": 2
+          },
+          "unsubscribes_total": {
+            "chat": 2
+          },
+          "subscribe_denied_total": {},
+          "active_scope_rooms": {
+            "workspace": 0,
+            "user": 0,
+            "workspace_member": 0,
+            "chat": 0
+          },
+          "redis": {
+            "connected": false,
+            "node_id": "",
+            "xadd_total": 0,
+            "xadd_errors": 0,
+            "xread_total": 0,
+            "xread_errors": 0,
+            "ack_total": 0,
+            "last_xadd_lag_micros": 0,
+            "mirror_primary_errors": 0,
+            "mirror_secondary_errors": 0,
+            "mirror_divergence_total": 0,
+            "stream_missing_total": 0,
+            "retention_errors": 0,
+            "used_memory_bytes": 0,
+            "max_memory_bytes": 0,
+            "evicted_keys": 0,
+            "last_error": "",
+            "stream_trimmed_total": 0,
+            "streams_without_ttl": 0,
+            "streams": {}
+          }
+        }
+      }
+    ],
+    [
+      {
+        "result": null,
+        "callbacks": [],
+        "rooms": [],
+        "subscriptions": [
+          [],
+          [],
+          [],
+          [],
+          [],
+          []
+        ],
+        "present": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "metrics": {
+          "connects_total": 0,
+          "disconnects_total": 0,
+          "active_connections": 0,
+          "slow_evictions_total": 0,
+          "messages_sent_total": 0,
+          "messages_dropped_total": 0,
+          "membership_removals_dropped_total": 0,
+          "inbound_too_large_total": 0,
+          "events_sent_by_type": {},
+          "subscribes_total": {},
+          "unsubscribes_total": {},
+          "subscribe_denied_total": {},
+          "active_scope_rooms": {},
+          "redis": {
+            "connected": false,
+            "node_id": "",
+            "xadd_total": 0,
+            "xadd_errors": 0,
+            "xread_total": 0,
+            "xread_errors": 0,
+            "ack_total": 0,
+            "last_xadd_lag_micros": 0,
+            "mirror_primary_errors": 0,
+            "mirror_secondary_errors": 0,
+            "mirror_divergence_total": 0,
+            "stream_missing_total": 0,
+            "retention_errors": 0,
+            "used_memory_bytes": 0,
+            "max_memory_bytes": 0,
+            "evicted_keys": 0,
+            "last_error": "",
+            "stream_trimmed_total": 0,
+            "streams_without_ttl": 0,
+            "streams": {}
+          }
+        }
+      },
+      {
+        "result": null,
+        "callbacks": [],
+        "rooms": [
+          [
+            "user",
+            "u"
+          ],
+          [
+            "workspace",
+            "w"
+          ],
+          [
+            "workspace_member",
+            "w:u"
+          ]
+        ],
+        "subscriptions": [
+          [
+            [
+              "user",
+              "u"
+            ],
+            [
+              "workspace",
+              "w"
+            ],
+            [
+              "workspace_member",
+              "w:u"
+            ]
+          ],
+          [],
+          [],
+          [],
+          [],
+          []
+        ],
+        "present": [
+          true,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "metrics": {
+          "connects_total": 1,
+          "disconnects_total": 0,
+          "active_connections": 1,
+          "slow_evictions_total": 0,
+          "messages_sent_total": 0,
+          "messages_dropped_total": 0,
+          "membership_removals_dropped_total": 0,
+          "inbound_too_large_total": 0,
+          "events_sent_by_type": {},
+          "subscribes_total": {
+            "workspace": 1,
+            "user": 1,
+            "workspace_member": 1
+          },
+          "unsubscribes_total": {},
+          "subscribe_denied_total": {},
+          "active_scope_rooms": {
+            "workspace": 1,
+            "user": 1,
+            "workspace_member": 1
+          },
+          "redis": {
+            "connected": false,
+            "node_id": "",
+            "xadd_total": 0,
+            "xadd_errors": 0,
+            "xread_total": 0,
+            "xread_errors": 0,
+            "ack_total": 0,
+            "last_xadd_lag_micros": 0,
+            "mirror_primary_errors": 0,
+            "mirror_secondary_errors": 0,
+            "mirror_divergence_total": 0,
+            "stream_missing_total": 0,
+            "retention_errors": 0,
+            "used_memory_bytes": 0,
+            "max_memory_bytes": 0,
+            "evicted_keys": 0,
+            "last_error": "",
+            "stream_trimmed_total": 0,
+            "streams_without_ttl": 0,
+            "streams": {}
+          }
+        }
+      },
+      {
+        "result": null,
+        "callbacks": [],
+        "rooms": [
+          [
+            "user",
+            "u"
+          ],
+          [
+            "workspace",
+            "w"
+          ],
+          [
+            "workspace_member",
+            "w:u"
+          ]
+        ],
+        "subscriptions": [
+          [
+            [
+              "user",
+              "u"
+            ],
+            [
+              "workspace",
+              "w"
+            ],
+            [
+              "workspace_member",
+              "w:u"
+            ]
+          ],
+          [],
+          [],
+          [],
+          [],
+          []
+        ],
+        "present": [
+          true,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "metrics": {
+          "connects_total": 1,
+          "disconnects_total": 0,
+          "active_connections": 1,
+          "slow_evictions_total": 0,
+          "messages_sent_total": 0,
+          "messages_dropped_total": 0,
+          "membership_removals_dropped_total": 0,
+          "inbound_too_large_total": 0,
+          "events_sent_by_type": {},
+          "subscribes_total": {
+            "workspace": 1,
+            "user": 1,
+            "workspace_member": 1
+          },
+          "unsubscribes_total": {},
+          "subscribe_denied_total": {},
+          "active_scope_rooms": {
+            "workspace": 1,
+            "user": 1,
+            "workspace_member": 1
+          },
+          "redis": {
+            "connected": false,
+            "node_id": "",
+            "xadd_total": 0,
+            "xadd_errors": 0,
+            "xread_total": 0,
+            "xread_errors": 0,
+            "ack_total": 0,
+            "last_xadd_lag_micros": 0,
+            "mirror_primary_errors": 0,
+            "mirror_secondary_errors": 0,
+            "mirror_divergence_total": 0,
+            "stream_missing_total": 0,
+            "retention_errors": 0,
+            "used_memory_bytes": 0,
+            "max_memory_bytes": 0,
+            "evicted_keys": 0,
+            "last_error": "",
+            "stream_trimmed_total": 0,
+            "streams_without_ttl": 0,
+            "streams": {}
+          }
+        }
+      },
+      {
+        "result": true,
+        "callbacks": [
+          [
+            "first",
+            "user",
+            "v"
+          ]
+        ],
+        "rooms": [
+          [
+            "user",
+            "u"
+          ],
+          [
+            "user",
+            "v"
+          ],
+          [
+            "workspace",
+            "w"
+          ],
+          [
+            "workspace_member",
+            "w:u"
+          ]
+        ],
+        "subscriptions": [
+          [
+            [
+              "user",
+              "u"
+            ],
+            [
+              "user",
+              "v"
+            ],
+            [
+              "workspace",
+              "w"
+            ],
+            [
+              "workspace_member",
+              "w:u"
+            ]
+          ],
+          [],
+          [],
+          [],
+          [],
+          []
+        ],
+        "present": [
+          true,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "metrics": {
+          "connects_total": 1,
+          "disconnects_total": 0,
+          "active_connections": 1,
+          "slow_evictions_total": 0,
+          "messages_sent_total": 0,
+          "messages_dropped_total": 0,
+          "membership_removals_dropped_total": 0,
+          "inbound_too_large_total": 0,
+          "events_sent_by_type": {},
+          "subscribes_total": {
+            "workspace": 1,
+            "user": 2,
+            "workspace_member": 1
+          },
+          "unsubscribes_total": {},
+          "subscribe_denied_total": {},
+          "active_scope_rooms": {
+            "workspace": 1,
+            "user": 2,
+            "workspace_member": 1
+          },
+          "redis": {
+            "connected": false,
+            "node_id": "",
+            "xadd_total": 0,
+            "xadd_errors": 0,
+            "xread_total": 0,
+            "xread_errors": 0,
+            "ack_total": 0,
+            "last_xadd_lag_micros": 0,
+            "mirror_primary_errors": 0,
+            "mirror_secondary_errors": 0,
+            "mirror_divergence_total": 0,
+            "stream_missing_total": 0,
+            "retention_errors": 0,
+            "used_memory_bytes": 0,
+            "max_memory_bytes": 0,
+            "evicted_keys": 0,
+            "last_error": "",
+            "stream_trimmed_total": 0,
+            "streams_without_ttl": 0,
+            "streams": {}
+          }
+        }
+      },
+      {
+        "result": true,
+        "callbacks": [
+          [
+            "last",
+            "workspace",
+            "w"
+          ]
+        ],
+        "rooms": [
+          [
+            "user",
+            "u"
+          ],
+          [
+            "user",
+            "v"
+          ],
+          [
+            "workspace_member",
+            "w:u"
+          ]
+        ],
+        "subscriptions": [
+          [
+            [
+              "user",
+              "u"
+            ],
+            [
+              "user",
+              "v"
+            ],
+            [
+              "workspace_member",
+              "w:u"
+            ]
+          ],
+          [],
+          [],
+          [],
+          [],
+          []
+        ],
+        "present": [
+          true,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "metrics": {
+          "connects_total": 1,
+          "disconnects_total": 0,
+          "active_connections": 1,
+          "slow_evictions_total": 0,
+          "messages_sent_total": 0,
+          "messages_dropped_total": 0,
+          "membership_removals_dropped_total": 0,
+          "inbound_too_large_total": 0,
+          "events_sent_by_type": {},
+          "subscribes_total": {
+            "workspace": 1,
+            "user": 2,
+            "workspace_member": 1
+          },
+          "unsubscribes_total": {
+            "workspace": 1
+          },
+          "subscribe_denied_total": {},
+          "active_scope_rooms": {
+            "workspace": 0,
+            "user": 2,
+            "workspace_member": 1
+          },
+          "redis": {
+            "connected": false,
+            "node_id": "",
+            "xadd_total": 0,
+            "xadd_errors": 0,
+            "xread_total": 0,
+            "xread_errors": 0,
+            "ack_total": 0,
+            "last_xadd_lag_micros": 0,
+            "mirror_primary_errors": 0,
+            "mirror_secondary_errors": 0,
+            "mirror_divergence_total": 0,
+            "stream_missing_total": 0,
+            "retention_errors": 0,
+            "used_memory_bytes": 0,
+            "max_memory_bytes": 0,
+            "evicted_keys": 0,
+            "last_error": "",
+            "stream_trimmed_total": 0,
+            "streams_without_ttl": 0,
+            "streams": {}
+          }
+        }
+      },
+      {
+        "result": true,
+        "callbacks": [
+          [
+            "first",
+            "workspace",
+            "w"
+          ]
+        ],
+        "rooms": [
+          [
+            "user",
+            "u"
+          ],
+          [
+            "user",
+            "v"
+          ],
+          [
+            "workspace",
+            "w"
+          ],
+          [
+            "workspace_member",
+            "w:u"
+          ]
+        ],
+        "subscriptions": [
+          [
+            [
+              "user",
+              "u"
+            ],
+            [
+              "user",
+              "v"
+            ],
+            [
+              "workspace",
+              "w"
+            ],
+            [
+              "workspace_member",
+              "w:u"
+            ]
+          ],
+          [],
+          [],
+          [],
+          [],
+          []
+        ],
+        "present": [
+          true,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "metrics": {
+          "connects_total": 1,
+          "disconnects_total": 0,
+          "active_connections": 1,
+          "slow_evictions_total": 0,
+          "messages_sent_total": 0,
+          "messages_dropped_total": 0,
+          "membership_removals_dropped_total": 0,
+          "inbound_too_large_total": 0,
+          "events_sent_by_type": {},
+          "subscribes_total": {
+            "workspace": 2,
+            "user": 2,
+            "workspace_member": 1
+          },
+          "unsubscribes_total": {
+            "workspace": 1
+          },
+          "subscribe_denied_total": {},
+          "active_scope_rooms": {
+            "workspace": 1,
+            "user": 2,
+            "workspace_member": 1
+          },
+          "redis": {
+            "connected": false,
+            "node_id": "",
+            "xadd_total": 0,
+            "xadd_errors": 0,
+            "xread_total": 0,
+            "xread_errors": 0,
+            "ack_total": 0,
+            "last_xadd_lag_micros": 0,
+            "mirror_primary_errors": 0,
+            "mirror_secondary_errors": 0,
+            "mirror_divergence_total": 0,
+            "stream_missing_total": 0,
+            "retention_errors": 0,
+            "used_memory_bytes": 0,
+            "max_memory_bytes": 0,
+            "evicted_keys": 0,
+            "last_error": "",
+            "stream_trimmed_total": 0,
+            "streams_without_ttl": 0,
+            "streams": {}
+          }
+        }
+      },
+      {
+        "result": null,
+        "callbacks": [
+          [
+            "last",
+            "user",
+            "u"
+          ],
+          [
+            "last",
+            "user",
+            "v"
+          ],
+          [
+            "last",
+            "workspace",
+            "w"
+          ],
+          [
+            "last",
+            "workspace_member",
+            "w:u"
+          ]
+        ],
+        "rooms": [],
+        "subscriptions": [
+          [],
+          [],
+          [],
+          [],
+          [],
+          []
+        ],
+        "present": [
+          false,
+          false,
+          false,
+          false,
+          false,
+          false
+        ],
+        "metrics": {
+          "connects_total": 1,
+          "disconnects_total": 1,
+          "active_connections": 0,
+          "slow_evictions_total": 0,
+          "messages_sent_total": 0,
+          "messages_dropped_total": 0,
+          "membership_removals_dropped_total": 0,
+          "inbound_too_large_total": 0,
+          "events_sent_by_type": {},
+          "subscribes_total": {
+            "workspace": 2,
+            "user": 2,
+            "workspace_member": 1
+          },
+          "unsubscribes_total": {
+            "workspace": 1
+          },
+          "subscribe_denied_total": {},
+          "active_scope_rooms": {
+            "workspace": 0,
+            "user": 0,
+            "workspace_member": 0
+          },
+          "redis": {
+            "connected": false,
+            "node_id": "",
+            "xadd_total": 0,
+            "xadd_errors": 0,
+            "xread_total": 0,
+            "xread_errors": 0,
+            "ack_total": 0,
+            "last_xadd_lag_micros": 0,
+            "mirror_primary_errors": 0,
+            "mirror_secondary_errors": 0,
+            "mirror_divergence_total": 0,
+            "stream_missing_total": 0,
+            "retention_errors": 0,
+            "used_memory_bytes": 0,
+            "max_memory_bytes": 0,
+            "evicted_keys": 0,
+            "last_error": "",
+            "stream_trimmed_total": 0,
+            "streams_without_ttl": 0,
+            "streams": {}
+          }
+        }
+      }
+    ]
+  ],
+  "mismatches": [],
+  "source_sha256": {
+    "server/go/internal/realtime/hub.go": "33970bffe2c3d5c423dbdb57d6793d422a1ba8f0a3ae7f657faf51295fd9e57a",
+    "server/go/internal/realtime/membership.go": "94be251b5be0bcdc2a863652f210e6f6f47f5d8a2947270abbec679133ea40fd",
+    "server/tests/parity/go_hub_subscriptions/main.go": "d22d65c430cdc769ff9d2ac6b256549d3905383687447c8808723a039c58a02f",
+    "server/tests/parity/go_hub_subscriptions/wrapper.go": "029c37147009e30277fd417f6f3d83ea0a2351c7c3b404e3b525efcd5c36c2ad",
+    "server/src/workpal_backend/realtime/hub.py": "c63cab50b5a339920478e96b63a3848ed133fb11e5cb83d6aa3b531c327d3ac4",
+    "server/src/workpal_backend/realtime/routes.py": "52c3e45e494d5f390d55780cd9721541660f8614a88842e4b6d175a448f81c1c",
+    "server/src/workpal_backend/realtime/metrics.py": "ea4b6d77c74980550055c51c29433a6275b0f70bc6b84013528b7d412a110fe6",
+    "server/src/workpal_backend/realtime/relay_metrics.py": "36dde5e15f24b28e5abf835285b15235cc2054a6bff00dee06799586dfcb5460",
+    "server/go/internal/realtime/metrics.go": "034108ea4f442eea5c6c25e0acf97a85f6a1d1b9656d2ba3c92098f294ef461d"
+  },
+  "binary_sha256": "e824448ae41422de435a29f7d1587e430af8610045d90220698df1b5eed9fa98"
+}

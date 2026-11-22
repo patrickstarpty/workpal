@@ -1,0 +1,283 @@
+{
+  "status": "bounded current-source review complete; root review pending",
+  "files": [
+    {
+      "path": "packages/views/voice/dialog-footer.tsx",
+      "sha256": "1798cf676bf866cc7ef39b9c446d52cb80576f687988964bb66ae88252e136cb",
+      "whole_source": true,
+      "line_count": 28,
+      "reviewed_ranges": [
+        [
+          1,
+          28
+        ]
+      ],
+      "old_disposition": "Composition of HUD/setup/error/strip and supplied children; no independent transport.",
+      "comparison": "Current source supports the file-local disposition; imported implementation claims remain inherited, not freshly proven."
+    },
+    {
+      "path": "packages/views/voice/engine.ts",
+      "sha256": "52cca1f87b9464a3ff2a82bb8a75645fa8f4c39400eddd2bf411b9ef3997ebcb",
+      "whole_source": true,
+      "line_count": 79,
+      "reviewed_ranges": [
+        [
+          1,
+          79
+        ]
+      ],
+      "old_disposition": "Effect connects singleton runtime factory. Missing desktop voice API yields null. OfflineAudioContext decodes Blob at 16kHz and averages channels locally; Float32Array passed to native transcribe. prepare passes modelId/language/hotwords. Optional history.save sends Uint8Array, mimeType, durationMs, keepDays; update swallows rejection. watchModels subscribes then lists; event wins race over initial list, list rejection ignored. Returned native unsubscribe is not consumed here.",
+      "comparison": "Current source supports the file-local disposition; imported implementation claims remain inherited, not freshly proven."
+    },
+    {
+      "path": "packages/views/voice/index.ts",
+      "sha256": "3222686bd470113c026d46a8eaac2ab713fe3d2e3feb4c9899885ecde719565b",
+      "whole_source": true,
+      "line_count": 7,
+      "reviewed_ranges": [
+        [
+          1,
+          7
+        ]
+      ],
+      "old_disposition": "Reexports only; no independent transport.",
+      "comparison": "Current source supports the file-local disposition; imported implementation claims remain inherited, not freshly proven."
+    },
+    {
+      "path": "packages/views/voice/recorder.ts",
+      "sha256": "64ae8632ec512772d829d1baf1baa1a76915e14c8e24d61a4b515ce52d31e0b0",
+      "whole_source": true,
+      "line_count": 170,
+      "reviewed_ranges": [
+        [
+          1,
+          100
+        ],
+        [
+          101,
+          170
+        ]
+      ],
+      "old_disposition": "Local getUserMedia with exact saved device; only OverconstrainedError/NotFoundError falls back to default. Permission/security and missing-device errors mapped explicitly. MediaRecorder MIME negotiation, 250ms chunks, Blob assembly; AudioContext analyser and 50ms meter. 120s limit depends on functioning meter; metering failure sets peak=1 and has no independent limit timer. Speech requires >=400ms, peak>=0.04 and nonempty blob. discard/late start stops tracks; release closes audio. No HTTP, WS, worker or resource URL.",
+      "comparison": "Current source supports the file-local disposition; imported implementation claims remain inherited, not freshly proven."
+    },
+    {
+      "path": "packages/views/voice/use-composer-voice.ts",
+      "sha256": "99ff79ebf5b20b1c16578d53f6cb4d0dbcb2810c9c6b765fa6cd6caf016d9aaf",
+      "whole_source": true,
+      "line_count": 115,
+      "reviewed_ranges": [
+        [
+          1,
+          100
+        ],
+        [
+          101,
+          115
+        ]
+      ],
+      "old_disposition": "Availability requires enabled, engineAvailable, media capability and !disabled; hidden suppresses registration. No permission request in support probe. Registers insert/submit/activate/isShown callbacks, reads latest refs, scope/listening cleanup unregisters and cancels owning session. Actual composer callback implementations are injected boundary, not enumerated app-wide.",
+      "comparison": "Current source supports the file-local disposition; imported implementation claims remain inherited, not freshly proven. Cleanup returns registerVoiceTarget unsubscribe; cancellation semantics belong to imported core and are inherited only."
+    },
+    {
+      "path": "packages/views/voice/voice-models.tsx",
+      "sha256": "628d910862da7590ca2e04fc60853c86b5a6993c7fca661c7d3f9b287bc1d793",
+      "whole_source": true,
+      "line_count": 220,
+      "reviewed_ranges": [
+        [
+          1,
+          100
+        ],
+        [
+          101,
+          200
+        ],
+        [
+          201,
+          220
+        ]
+      ],
+      "old_disposition": "Native downloadModel for absent/retry, cancelDownload for downloading, deleteModel only ready/manage. Choosing ready model and setup preferred ID updates local persisted settings. Setup close cancels, ready start toggles. License URL opens external resource via platform wrapper. Model rows null until snapshot; recommended locale selection is local.",
+      "comparison": "Current source supports the file-local disposition; imported implementation claims remain inherited, not freshly proven."
+    },
+    {
+      "path": "packages/views/voice/voice-ui.tsx",
+      "sha256": "3d086337ec3ab30be5e62d5a39e1390a41761f12625c1a388012a8b16e830adb",
+      "whole_source": true,
+      "line_count": 381,
+      "reviewed_ranges": [
+        [
+          1,
+          100
+        ],
+        [
+          101,
+          200
+        ],
+        [
+          201,
+          300
+        ],
+        [
+          301,
+          381
+        ]
+      ],
+      "old_disposition": "Pointer press/release/cancel and keyboard click dispatch core session callbacks. Strip stop(false) inserts, stop(true) requests injected submit. Escape/shortcut handling in core. Error retry excludes unavailable. Canvas/ResizeObserver/RAF/matchMedia are local rendering; no resource URL, HTTP, WS or worker.",
+      "comparison": "Current source supports the file-local disposition; imported implementation claims remain inherited, not freshly proven."
+    },
+    {
+      "path": "packages/views/voice/workspace-words.tsx",
+      "sha256": "9fc504f68a3f34c3449405d8b5e07143ccaaf635029b887d36683f634fcbc67e",
+      "whole_source": true,
+      "line_count": 32,
+      "reviewed_ranges": [
+        [
+          1,
+          32
+        ]
+      ],
+      "old_disposition": "Three useQuery observers independently of voice enabled/engine state: agentListOptions, memberListOptions, projectListOptions. Nonarchived agent names, all member names and project titles form context words; workspace cleanup clears context. No mutation or transcription request.",
+      "comparison": "Current source supports the file-local disposition; imported implementation claims remain inherited, not freshly proven."
+    },
+    {
+      "path": "packages/core/api/client.ts",
+      "sha256": "779bb65b5b7ead815836f7c704ec3c370bafae203e4f92119fadce93e982a4d7",
+      "whole_source": false,
+      "line_count": 6216,
+      "reviewed_ranges": [
+        [
+          2040,
+          2080
+        ],
+        [
+          3750,
+          3780
+        ],
+        [
+          4500,
+          4530
+        ]
+      ],
+      "unread_ranges": [
+        [
+          1,
+          2039
+        ],
+        [
+          2081,
+          3749
+        ],
+        [
+          3781,
+          4499
+        ],
+        [
+          4531,
+          6216
+        ]
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "source": "packages/views/voice/workspace-words.tsx:17-19",
+      "kind": "query/API and possible refetch",
+      "inventory": [
+        {
+          "id": "client:2066",
+          "method": "GET",
+          "path_expression": "/api/agents?${search}",
+          "route": {
+            "method": "GET",
+            "path": "/api/agents"
+          }
+        },
+        {
+          "id": "client:3765",
+          "method": "GET",
+          "path_expression": "/api/workspaces/${workspaceId}/members",
+          "route": {
+            "method": "GET",
+            "path": "/api/workspaces/{id}/members"
+          }
+        },
+        {
+          "id": "client:4517",
+          "method": "GET",
+          "path_expression": "/api/projects?${search}",
+          "route": {
+            "method": "GET",
+            "path": "/api/projects"
+          }
+        }
+      ],
+      "mapping": "Current listAgents/listMembers/listProjects fetch expressions verified; IDs reused from existing proof, not current line identity.",
+      "refetch": {
+        "agents": "workspace_id iff truthy wsId; include_archived=true. 30s polling iff any nonarchived agent online/unstable; otherwise false. Key workspaces/wsId/agents.",
+        "members": "workspaceId interpolated into route; key workspaces/wsId/members.",
+        "projects": "include_archived=true; no workspace query parameter; client context supplies workspace header. key projects/wsId/list; select response.projects.",
+        "refetch": "No enabled guard in these factories. Mount/cache freshness, focus/reconnect and external invalidations can refetch the same three-call union. No new WS connection/send/listener in voice folder. Global invalidator/observer enumeration is outside scope."
+      }
+    }
+  ],
+  "counts": {
+    "whole_sources": 8,
+    "whole_source_lines": 1032,
+    "partial_sources": 1,
+    "http_tuples": 3
+  },
+  "unread_whole_source_ranges": [],
+  "native_boundary": {
+    "provider": "window.desktopAPI.voice via injected localVoiceAPI",
+    "implementation_followed": false,
+    "methods": [
+      "listModels",
+      "onModelsChanged",
+      "prepare",
+      "transcribe",
+      "downloadModel",
+      "cancelDownload",
+      "deleteModel",
+      "history.save (optional history)",
+      "history.update (optional history)"
+    ]
+  },
+  "inherited_only": {
+    "native_guard": "window exists and listModels/onModelsChanged/transcribe truthy; other methods assumed by cast, not independently guarded",
+    "session_closure": "connectVoiceRuntime is once-only even if factory returns null. Missing runtime no recording; missing ready model opens setup. prepare precedes recorder.start. Session tokens suppress late results after cancellation/unregister/scope change. Silence avoids transcribe; short <250ms cancels. Optional history saved only retention != off; status done/failed/interrupted, retry reuses failed clip when canRetry else begins new recording. Native failure model-missing opens setup, engine-unavailable gives unavailable, other failures retryable. Cleaned text inserted with up to 20 delayed retries; optional submit only after successful insert and explicit send. Injected submit may have downstream transport outside this bounded union; no invented send route.",
+    "query_factory_refetch": {
+      "agents": "workspace_id iff truthy wsId; include_archived=true. 30s polling iff any nonarchived agent online/unstable; otherwise false. Key workspaces/wsId/agents.",
+      "members": "workspaceId interpolated into route; key workspaces/wsId/members.",
+      "projects": "include_archived=true; no workspace query parameter; client context supplies workspace header. key projects/wsId/list; select response.projects.",
+      "refetch": "No enabled guard in these factories. Mount/cache freshness, focus/reconnect and external invalidations can refetch the same three-call union. No new WS connection/send/listener in voice folder. Global invalidator/observer enumeration is outside scope."
+    },
+    "resource_wrapper": [
+      "model.licenseUrl -> openExternal: SSR no-op; desktopAPI.openExternal when present; otherwise window.open(_blank,noopener,noreferrer). same-tab branch exists in wrapper but is not requested by this caller. URL is dynamic resource, not an API route."
+    ]
+  },
+  "scope_notes": [
+    "Old semantic proof has no source hashes; no historical byte identity or unchanged-bytes claim.",
+    "Current hashes identify current file bytes; whole_source false means only listed ranges reviewed.",
+    "No third-party or descendant-tree recursion. Composer insert/submit/activate remain injected interfaces.",
+    "No runtime, tests, network, models, git, data, shared inventory or ledger edits.",
+    "No global or backend coverage claim."
+  ],
+  "validation": {
+    "json_parse": true,
+    "hashes": true,
+    "tuples": true,
+    "global_source_coverage": false,
+    "root_review": "pending"
+  },
+  "root_review": {
+    "status": "accepted finite eight current-source reviews",
+    "checks": [
+      "Current source hashes and3exacttuples validated",
+      "Independent native engine and workspace-word observer reads",
+      "API client previously root-reviewed whole-source proof reused; child partial unread client ranges do not reopen that proof"
+    ],
+    "limits": "Native provider implementation/execution excluded; no voice backend support or historical byte identity claim"
+  }
+}

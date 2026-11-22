@@ -1,0 +1,429 @@
+{
+  "scope": "Only identity/workspace persisted schema; source audit, not global completion or executed PostgreSQL equivalence",
+  "status": "gaps_found",
+  "tables": {
+    "users": {
+      "go_table": "user",
+      "migration": "server/migrations/versions/0002_auth.py",
+      "fields": [
+        {
+          "name": "id",
+          "local_type": "String",
+          "nullable": false,
+          "declaration": "primary_key=True",
+          "source": "server/src/workpal_backend/auth/models.py:9"
+        },
+        {
+          "name": "email",
+          "local_type": "String",
+          "nullable": false,
+          "declaration": "nullable=False, unique=True",
+          "source": "server/src/workpal_backend/auth/models.py:10"
+        },
+        {
+          "name": "name",
+          "local_type": "String",
+          "nullable": false,
+          "declaration": "nullable=False",
+          "source": "server/src/workpal_backend/auth/models.py:11"
+        },
+        {
+          "name": "avatar_url",
+          "local_type": "String",
+          "nullable": true,
+          "declaration": "",
+          "source": "server/src/workpal_backend/auth/models.py:12"
+        },
+        {
+          "name": "language",
+          "local_type": "String(20)",
+          "nullable": true,
+          "declaration": "",
+          "source": "server/src/workpal_backend/auth/models.py:13"
+        },
+        {
+          "name": "timezone",
+          "local_type": "String",
+          "nullable": true,
+          "declaration": "",
+          "source": "server/src/workpal_backend/auth/models.py:14"
+        },
+        {
+          "name": "onboarded_at",
+          "local_type": "String",
+          "nullable": true,
+          "declaration": "",
+          "source": "server/src/workpal_backend/auth/models.py:15"
+        },
+        {
+          "name": "cloud_waitlist_email",
+          "local_type": "String",
+          "nullable": true,
+          "declaration": "",
+          "source": "server/src/workpal_backend/auth/models.py:16"
+        },
+        {
+          "name": "cloud_waitlist_reason",
+          "local_type": "String",
+          "nullable": true,
+          "declaration": "",
+          "source": "server/src/workpal_backend/auth/models.py:17"
+        },
+        {
+          "name": "onboarding_questionnaire",
+          "local_type": "QuestionnaireJSON()",
+          "nullable": false,
+          "declaration": "nullable=False, server_default=text(\"'{}'\"",
+          "source": "server/src/workpal_backend/auth/models.py:18"
+        },
+        {
+          "name": "profile_description",
+          "local_type": "String",
+          "nullable": false,
+          "declaration": "nullable=False, server_default=text(\"''\"",
+          "source": "server/src/workpal_backend/auth/models.py:19"
+        },
+        {
+          "name": "whats_new_seen_version",
+          "local_type": "String",
+          "nullable": true,
+          "declaration": "",
+          "source": "server/src/workpal_backend/auth/models.py:20"
+        },
+        {
+          "name": "star_prompt_shown_count",
+          "local_type": "Integer",
+          "nullable": false,
+          "declaration": "nullable=False, server_default=text('0'",
+          "source": "server/src/workpal_backend/auth/models.py:21"
+        },
+        {
+          "name": "star_prompt_last_shown_at",
+          "local_type": "String",
+          "nullable": true,
+          "declaration": "",
+          "source": "server/src/workpal_backend/auth/models.py:22"
+        },
+        {
+          "name": "star_prompt_starred_at",
+          "local_type": "String",
+          "nullable": true,
+          "declaration": "",
+          "source": "server/src/workpal_backend/auth/models.py:23"
+        },
+        {
+          "name": "created_at",
+          "local_type": "String",
+          "nullable": false,
+          "declaration": "nullable=False",
+          "source": "server/src/workpal_backend/auth/models.py:24"
+        },
+        {
+          "name": "updated_at",
+          "local_type": "String",
+          "nullable": false,
+          "declaration": "nullable=False",
+          "source": "server/src/workpal_backend/auth/models.py:25"
+        }
+      ]
+    },
+    "workspaces": {
+      "go_table": "workspace",
+      "migration": "server/migrations/versions/0003_workspaces.py",
+      "fields": [
+        {
+          "name": "id",
+          "local_type": "String",
+          "nullable": false,
+          "declaration": "primary_key=True",
+          "source": "server/src/workpal_backend/workspaces/models.py:4"
+        },
+        {
+          "name": "name",
+          "local_type": "String",
+          "nullable": false,
+          "declaration": "nullable=False",
+          "source": "server/src/workpal_backend/workspaces/models.py:4"
+        },
+        {
+          "name": "slug",
+          "local_type": "String",
+          "nullable": false,
+          "declaration": "nullable=False, unique=True",
+          "source": "server/src/workpal_backend/workspaces/models.py:4"
+        },
+        {
+          "name": "description",
+          "local_type": "String",
+          "nullable": true,
+          "declaration": "",
+          "source": "server/src/workpal_backend/workspaces/models.py:5"
+        },
+        {
+          "name": "context",
+          "local_type": "String",
+          "nullable": true,
+          "declaration": "",
+          "source": "server/src/workpal_backend/workspaces/models.py:5"
+        },
+        {
+          "name": "avatar_url",
+          "local_type": "String",
+          "nullable": true,
+          "declaration": "",
+          "source": "server/src/workpal_backend/workspaces/models.py:5"
+        },
+        {
+          "name": "settings",
+          "local_type": "JSON",
+          "nullable": false,
+          "declaration": "nullable=False, server_default=text(\"'{}'\"",
+          "source": "server/src/workpal_backend/workspaces/models.py:6"
+        },
+        {
+          "name": "repos",
+          "local_type": "JSON",
+          "nullable": false,
+          "declaration": "nullable=False, server_default=text(\"'[]'\"",
+          "source": "server/src/workpal_backend/workspaces/models.py:6"
+        },
+        {
+          "name": "issue_prefix",
+          "local_type": "String",
+          "nullable": false,
+          "declaration": "nullable=False",
+          "source": "server/src/workpal_backend/workspaces/models.py:7"
+        },
+        {
+          "name": "issue_counter",
+          "local_type": "Integer",
+          "nullable": false,
+          "declaration": "nullable=False, server_default='0'",
+          "source": "server/src/workpal_backend/workspaces/models.py:7"
+        },
+        {
+          "name": "attribution_fail_closed",
+          "local_type": "Boolean",
+          "nullable": false,
+          "declaration": "nullable=False, server_default='0'",
+          "source": "server/src/workpal_backend/workspaces/models.py:8"
+        },
+        {
+          "name": "created_at",
+          "local_type": "String",
+          "nullable": false,
+          "declaration": "nullable=False",
+          "source": "server/src/workpal_backend/workspaces/models.py:9"
+        },
+        {
+          "name": "updated_at",
+          "local_type": "String",
+          "nullable": false,
+          "declaration": "nullable=False",
+          "source": "server/src/workpal_backend/workspaces/models.py:9"
+        }
+      ]
+    },
+    "members": {
+      "go_table": "member",
+      "migration": "server/migrations/versions/0003_workspaces.py",
+      "fields": [
+        {
+          "name": "id",
+          "local_type": "String",
+          "nullable": false,
+          "declaration": "primary_key=True",
+          "source": "server/src/workpal_backend/workspaces/models.py:4"
+        },
+        {
+          "name": "workspace_id",
+          "local_type": "String",
+          "nullable": false,
+          "declaration": "ForeignKey('workspaces.id', nullable=False",
+          "source": "server/src/workpal_backend/workspaces/models.py:12"
+        },
+        {
+          "name": "user_id",
+          "local_type": "String",
+          "nullable": false,
+          "declaration": "ForeignKey('users.id', nullable=False",
+          "source": "server/src/workpal_backend/workspaces/models.py:13"
+        },
+        {
+          "name": "role",
+          "local_type": "String",
+          "nullable": false,
+          "declaration": "nullable=False",
+          "source": "server/src/workpal_backend/workspaces/models.py:13"
+        },
+        {
+          "name": "created_at",
+          "local_type": "String",
+          "nullable": false,
+          "declaration": "nullable=False",
+          "source": "server/src/workpal_backend/workspaces/models.py:9"
+        },
+        {
+          "name": "pinned_at",
+          "local_type": "String",
+          "nullable": true,
+          "declaration": "",
+          "source": "server/src/workpal_backend/workspaces/models.py:14"
+        }
+      ]
+    },
+    "issue_status": {
+      "go_table": "issue_status",
+      "migration": "server/migrations/versions/0003_workspaces.py",
+      "fields": [
+        {
+          "name": "id",
+          "local_type": "String",
+          "nullable": false,
+          "declaration": "primary_key=True",
+          "source": "server/src/workpal_backend/workspaces/models.py:17"
+        },
+        {
+          "name": "workspace_id",
+          "local_type": "String",
+          "nullable": false,
+          "declaration": "ForeignKey('workspaces.id', nullable=False",
+          "source": "server/src/workpal_backend/workspaces/models.py:17"
+        },
+        {
+          "name": "key",
+          "local_type": "String",
+          "nullable": false,
+          "declaration": "nullable=False",
+          "source": "server/src/workpal_backend/workspaces/models.py:18"
+        },
+        {
+          "name": "name",
+          "local_type": "String",
+          "nullable": false,
+          "declaration": "nullable=False",
+          "source": "server/src/workpal_backend/workspaces/models.py:18"
+        },
+        {
+          "name": "description",
+          "local_type": "String",
+          "nullable": false,
+          "declaration": "nullable=False, server_default=''",
+          "source": "server/src/workpal_backend/workspaces/models.py:19"
+        },
+        {
+          "name": "category",
+          "local_type": "String",
+          "nullable": false,
+          "declaration": "nullable=False",
+          "source": "server/src/workpal_backend/workspaces/models.py:18"
+        },
+        {
+          "name": "color",
+          "local_type": "String",
+          "nullable": false,
+          "declaration": "nullable=False",
+          "source": "server/src/workpal_backend/workspaces/models.py:18"
+        },
+        {
+          "name": "is_system",
+          "local_type": "Boolean",
+          "nullable": false,
+          "declaration": "nullable=False, server_default='0'",
+          "source": "server/src/workpal_backend/workspaces/models.py:21"
+        },
+        {
+          "name": "position",
+          "local_type": "Float",
+          "nullable": false,
+          "declaration": "nullable=False, server_default='0'",
+          "source": "server/src/workpal_backend/workspaces/models.py:21"
+        },
+        {
+          "name": "created_at",
+          "local_type": "String",
+          "nullable": false,
+          "declaration": "nullable=False",
+          "source": "server/src/workpal_backend/workspaces/models.py:22"
+        },
+        {
+          "name": "updated_at",
+          "local_type": "String",
+          "nullable": false,
+          "declaration": "nullable=False",
+          "source": "server/src/workpal_backend/workspaces/models.py:22"
+        },
+        {
+          "name": "archived_at",
+          "local_type": "String",
+          "nullable": true,
+          "declaration": "",
+          "source": "server/src/workpal_backend/workspaces/models.py:22"
+        },
+        {
+          "name": "icon",
+          "local_type": "String",
+          "nullable": false,
+          "declaration": "nullable=False, server_default=''",
+          "source": "server/src/workpal_backend/workspaces/models.py:20"
+        }
+      ],
+      "migrations": [
+        "server/migrations/versions/0003_workspaces.py:20",
+        "server/migrations/versions/0012_issue_status_constraints.py:9",
+        "server/migrations/versions/0013_issue_status_no_nul.py:12"
+      ]
+    },
+    "workspace_invitation": {
+      "go_table": "workspace_invitation",
+      "migration": "server/migrations/versions/0008_workspace_invitations.py:7",
+      "fields": [
+        {
+          "name": "id",
+          "local_declaration": "id TEXT PRIMARY KEY"
+        },
+        {
+          "name": "workspace_id",
+          "local_declaration": "workspace_id TEXT NOT NULL REFERENCES workspaces(id) ON DELETE CASCADE"
+        },
+        {
+          "name": "inviter_id",
+          "local_declaration": "inviter_id TEXT NOT NULL REFERENCES users(id)"
+        },
+        {
+          "name": "invitee_email",
+          "local_declaration": "invitee_email TEXT NOT NULL"
+        },
+        {
+          "name": "invitee_user_id",
+          "local_declaration": "invitee_user_id TEXT REFERENCES users(id)"
+        },
+        {
+          "name": "role",
+          "local_declaration": "role TEXT NOT NULL CHECK(role IN ('admin','member'))"
+        },
+        {
+          "name": "status",
+          "local_declaration": "status TEXT NOT NULL DEFAULT 'pending' CHECK(status IN ('pending','accepted','declined','expired'))"
+        },
+        {
+          "name": "created_at",
+          "local_declaration": "created_at TEXT NOT NULL"
+        },
+        {
+          "name": "updated_at",
+          "local_declaration": "updated_at TEXT NOT NULL"
+        },
+        {
+          "name": "expires_at",
+          "local_declaration": "expires_at TEXT NOT NULL"
+        }
+      ]
+    }
+  },
+  "reading_guide": "identity-workspace-schema.md",
+  "reconciliation": {
+    "status": "bounded_resolutions_with_open_gaps",
+    "notes": "Final reconciliation: frozen 0003_workspaces.py:20\u201327 remains historical (missing icon/defaults, Integer). Final workspaces/models.py:16\u201333 and 0012_issue_status_constraints.py:9\u201328 resolve icon, description/is_system/position defaults, Float ordering, key syntax/length, name/description lengths, lowercase hex color, canonical system pairs and system archive checks, and active workspace-scoped ASCII lower(name) uniqueness. 0013_issue_status_no_nul.py:12\u201332 rejects NUL in every status text column and preserves stored checks, indexes and triggers. Migration paths are under server/migrations/versions/; model under server/src/workpal_backend/.\n\nOpen: Unicode case/collation parity with PostgreSQL remains unproven. starter_content_state, member delete cascade parity and member indexing remain open as described above. Local status workspace FK NO ACTION remains stricter than Go's absent FK. Broader Task5/8 catalog, effective-status, archive and other behavior/schema work remains outside this bounded audit. Seven seeded statuses do not prove those workflows.\n\nExact source-inspected test references (under server/tests/): test_issue_status_schema.py:5 checks icon/FLOAT/check presence; test_issue_status_constraints.py:24 checks invalid INSERT/UPDATE and NUL, :37 system pairs/archive, :52 key/ASCII name uniqueness, :62 archive reuse/defaults/fractions, :72 boundaries/workspace isolation, :79 service seeding. test_issue_status_migration.py:46 verifies historical 0011\u2192head preservation of rows/neighbors, foreign keys and idempotence; :68 verifies invalid legacy upgrade atomicity including data/schema/revision. test_issue_status_nul_upgrade.py:7 verifies historical 0012 NUL failure rollback; :18 verifies 0012\u21920013 preservation, retained uniqueness, NUL checks and idempotence.\n\nPrior execution evidence supplied by the user: root independently reported 75 tests passed; agent reported full 571 tests plus 30 subtests and npm run check passed. No tests or npm checks were rerun for this reconciliation. This does not mark the global schema complete or establish executed PostgreSQL equivalence.\n"
+  }
+}

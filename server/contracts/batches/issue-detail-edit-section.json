@@ -1,0 +1,1174 @@
+{
+  "version": 1,
+  "coverage": "Finite requested query mappings recorded; root review pending; whole_source false",
+  "whole_source": false,
+  "files": [
+    {
+      "path": "packages/views/issues/components/issue-detail.tsx",
+      "sha256": "afbc077580392ae3b7ec41e28c087ee215dc3103c426f505fee9d96f5d8f9f1a",
+      "whole_source": false,
+      "reviewed_ranges": [
+        [
+          2440,
+          2539
+        ],
+        [
+          2540,
+          2639
+        ],
+        [
+          2640,
+          2739
+        ],
+        [
+          2740,
+          2839
+        ],
+        [
+          2840,
+          2939
+        ],
+        [
+          2940,
+          3039
+        ],
+        [
+          3040,
+          3139
+        ],
+        [
+          3140,
+          3239
+        ],
+        [
+          3240,
+          3339
+        ],
+        [
+          3340,
+          3439
+        ],
+        [
+          3440,
+          3485
+        ],
+        [
+          3486,
+          3500
+        ]
+      ]
+    },
+    {
+      "path": "packages/views/issues/actions/use-issue-actions.ts",
+      "sha256": "44c9bedc3eb28eb5e6ae5545132cb950227e6f0028a7767662e794c442f2b114",
+      "whole_source": false,
+      "reviewed_ranges": [
+        [
+          60,
+          120
+        ]
+      ]
+    },
+    {
+      "path": "packages/views/issues/surface/use-issue-surface-actions.ts",
+      "sha256": "8d511d0e0182281313aab37e7fba0e29d8428fbcb7e4306e3dd35d3d68a73789",
+      "whole_source": false,
+      "reviewed_ranges": [
+        [
+          50,
+          82
+        ]
+      ]
+    },
+    {
+      "path": "packages/core/issues/mutations.ts",
+      "sha256": "9b81f4b0b396a1d714b40c42115eb95af59a56b28e1ce515774f691c6770de4e",
+      "whole_source": false,
+      "reviewed_ranges": [
+        [
+          193,
+          230
+        ]
+      ]
+    },
+    {
+      "path": "packages/core/api/client.ts",
+      "sha256": "779bb65b5b7ead815836f7c704ec3c370bafae203e4f92119fadce93e982a4d7",
+      "whole_source": false,
+      "reviewed_ranges": [
+        [
+          1770,
+          1783
+        ]
+      ]
+    },
+    {
+      "path": "packages/core/issues/queries.ts",
+      "sha256": "10d939b302cbeca9280944c5b5ad0e3e8e042130d2c714496a6b6da6daf53c3e",
+      "whole_source": false,
+      "reviewed_ranges": [
+        [
+          507,
+          512
+        ],
+        [
+          556,
+          569
+        ],
+        [
+          582,
+          592
+        ],
+        [
+          737,
+          743
+        ]
+      ]
+    },
+    {
+      "path": "packages/core/projects/queries.ts",
+      "sha256": "39315862d7770c602ebfda690e8dc691b6732cd833a36975a8638ba3ff25a0d6",
+      "whole_source": false,
+      "reviewed_ranges": [
+        [
+          29,
+          35
+        ]
+      ]
+    },
+    {
+      "path": "packages/core/labels/queries.ts",
+      "sha256": "ece104fc62253b55ced08b4e1453a17faea01f2f9f36206c8dea71c765eb89d0",
+      "whole_source": false,
+      "reviewed_ranges": [
+        [
+          38,
+          46
+        ]
+      ]
+    },
+    {
+      "path": "packages/core/properties/queries.ts",
+      "sha256": "026994a0e30c6943515ccdc0f915e81a1c373be48fc5d0babf98526b55302aa5",
+      "whole_source": false,
+      "reviewed_ranges": [
+        [
+          1,
+          16
+        ]
+      ]
+    },
+    {
+      "path": "packages/core/inbox/queries.ts",
+      "sha256": "4612025ba86f4e32cb272acb366861d824988ba6fa7648df230e425072a4454d",
+      "whole_source": false,
+      "reviewed_ranges": [
+        [
+          79,
+          94
+        ]
+      ]
+    },
+    {
+      "path": "packages/views/issues/actions/inbox-restore.tsx",
+      "sha256": "ad80751a0520008cbbc5105d1e0fb01fc958eb1942b27122beeba39277594287",
+      "whole_source": false,
+      "reviewed_ranges": [
+        [
+          1,
+          23
+        ]
+      ]
+    },
+    {
+      "path": "packages/core/inbox/filters.ts",
+      "sha256": "085a7b7bba07a9f6eee46ee102bbb4e13eeabb37312e4f1c96ae167be9b24342",
+      "whole_source": false,
+      "reviewed_ranges": [
+        [
+          186,
+          199
+        ],
+        [
+          378,
+          402
+        ]
+      ]
+    },
+    {
+      "path": "packages/core/api/client.ts",
+      "sha256": "779bb65b5b7ead815836f7c704ec3c370bafae203e4f92119fadce93e982a4d7",
+      "whole_source": false,
+      "reviewed_ranges": [
+        [
+          1611,
+          1615
+        ],
+        [
+          1794,
+          1799
+        ],
+        [
+          1814,
+          1822
+        ],
+        [
+          3221,
+          3238
+        ],
+        [
+          4426,
+          4430
+        ],
+        [
+          4523,
+          4526
+        ],
+        [
+          4880,
+          4885
+        ],
+        [
+          5024,
+          5028
+        ]
+      ]
+    }
+  ],
+  "snapshots": [
+    {
+      "path": "packages/views/issues/components/issue-detail.tsx",
+      "start": 2440,
+      "end": 2539,
+      "code": "  // editor's click-time fresh-sign download: NodeViews match\n  // `src`/`href` against this list to resolve an attachment id before\n  // calling `/api/attachments/{id}`.\n  // The same list is the issue's complete file inventory: it labels each\n  // comment file with its comment, independent of the bounded timeline.\n  const { data: issueAttachments } = useQuery(issueAttachmentsOptions(id));\n  const deliverableInventory = useMemo(\n    () => deliverableInventoryFromAttachments(issueAttachments ?? []),\n    [issueAttachments],\n  );\n\n  // Sub-issue queries\n  const parentIssueId = issue?.parent_issue_id;\n  const { data: parentIssue = null } = useQuery({\n    ...issueDetailOptions(wsId, parentIssueId ?? \"\"),\n    enabled: !!parentIssueId,\n    initialData: () => allIssues.find((i) => i.id === parentIssueId),\n  });\n\n  // Project segment in the breadcrumb. The issue's project_id is the source of\n  // truth — same URL renders the same breadcrumb regardless of entry path.\n  const issueProjectId = issue?.project_id;\n  const { data: breadcrumbProject = null } = useQuery({\n    ...projectDetailOptions(wsId, issueProjectId ?? \"\"),\n    enabled: !!issueProjectId,\n  });\n  const {\n    data: childIssues = [],\n    isSuccess: childIssuesLoaded,\n    isFetching: childIssuesFetching,\n  } = useQuery({\n    ...childIssuesOptions(wsId, id),\n    enabled: !!issue,\n  });\n  // Whether this issue has sub-issues, as opposed to \"we have not looked yet\".\n  // childIssuesOptions sets refetchOnMount: \"always\", so a cached snapshot is\n  // re-fetched on every mount and isSuccess alone still describes the previous\n  // visit. The unsubscribe control below picks a different server write from\n  // this answer, so a defaulted or stale empty array must not count as \"no\n  // sub-issues\" (MUL-5714).\n  const childCountKnown = childIssuesLoaded && !childIssuesFetching;\n  // Parent's children — used to render the \"x/y\" progress next to the\n  // \"Sub-issue of …\" breadcrumb under the title.\n  const { data: parentChildIssues = [] } = useQuery({\n    ...childIssuesOptions(wsId, parentIssueId ?? \"\"),\n    enabled: !!parentIssueId,\n  });\n  // Workspace-wide parent→(done/total) map; lets each sub-issue row show its\n  // OWN nested progress ring without opening it. Same query the list\n  // surfaces use, so it's usually already cached.\n  const { data: subIssueProgress } = useQuery({\n    ...childIssueProgressOptions(wsId),\n    enabled: childIssues.length > 0,\n  });\n  // User-level display preference for sub-issue rows (built-in field toggles\n  // + opted-in workspace custom properties). `subIssueCustomProps` resolves\n  // the persisted ids against this workspace's live, non-archived property\n  // definitions — ids from other workspaces or archived properties drop out.\n  const subIssueRowProps = useSubIssueDisplayStore((s) => s.rowProperties);\n  const subIssueRowPropertyIds = useSubIssueDisplayStore((s) => s.rowPropertyIds);\n  // Store-backed (not useState) so the collapsed state survives leaving the\n  // issue and navigating back within the session.\n  const subIssuesCollapsed = useSubIssuesCollapseStore((s) =>\n    s.collapsedIssueIds.has(issueId),\n  );\n  const setSubIssuesCollapsedFor = useSubIssuesCollapseStore(\n    (s) => s.setCollapsed,\n  );\n  const setSubIssuesCollapsed = useCallback(\n    (update: boolean | ((prev: boolean) => boolean)) => {\n      const prev = useSubIssuesCollapseStore\n        .getState()\n        .collapsedIssueIds.has(issueId);\n      setSubIssuesCollapsedFor(\n        issueId,\n        typeof update === \"function\" ? update(prev) : update,\n      );\n    },\n    [issueId, setSubIssuesCollapsedFor],\n  );\n\n  const descriptionSectionId = useId();\n  const subIssuesSectionId = useId();\n  const subIssuesSectionRef = useRef<HTMLDivElement>(null);\n  const subIssuesJumpFrame = useRef(0);\n  useEffect(() => () => cancelAnimationFrame(subIssuesJumpFrame.current), [issueId]);\n  const jumpToSubIssues = useCallback(() => {\n    setSubIssuesCollapsed(false);\n    cancelAnimationFrame(subIssuesJumpFrame.current);\n    // Wait for expansion so the section can be reached even when a collapsed\n    // list left too little scrollable content below it.\n    subIssuesJumpFrame.current = requestAnimationFrame(() => {\n      const section = subIssuesSectionRef.current;\n      const container = scrollContainerEl;\n      if (!section || !container) return;\n      container.scrollTop = Math.max(0, container.scrollTop +\n        section.getBoundingClientRect().top - container.getBoundingClientRect().top - 16);\n    });\n  }, [setSubIssuesCollapsed, scrollContainerEl]);\n  const doneChildCount = childIssues.filter((child) => issueBehavesAs(child, \"done\")).length;"
+    },
+    {
+      "path": "packages/views/issues/components/issue-detail.tsx",
+      "start": 2540,
+      "end": 2639,
+      "code": "  const sidebarChildIssues = useMemo(() => {\n    let ordered = groupSubIssuesByStage(childIssues).flatMap(({ items }) => items);\n    if (ordered.length > SIDEBAR_SUB_ISSUES_LIMIT) {\n      const unfinished = ordered.filter((child) => !issueBehavesAsAny(child, [\"done\", \"closed\"]));\n      const finished = ordered.filter((child) => issueBehavesAsAny(child, [\"done\", \"closed\"]));\n      ordered = [...unfinished, ...finished];\n    }\n    return sidebarSubIssuesExpanded ? ordered : ordered.slice(0, SIDEBAR_SUB_ISSUES_LIMIT);\n  }, [childIssues, sidebarSubIssuesExpanded]);\n\n  // The sub-issue list owns its selection, reset per issue. Rows, select-all\n  // and the inline batch toolbar must read the same one: a peek renders this\n  // inside a surface whose own selection provider would otherwise win for the\n  // toolbar while the rows wrote elsewhere.\n  const subIssueSelection = useCreateIssueSurfaceSelection(`sub-issues:${id}`);\n  const {\n    selectedIds,\n    select: selectIds,\n    deselect: deselectIds,\n  } = subIssueSelection;\n\n  const childIssueIds = useMemo(() => childIssues.map((c) => c.id), [childIssues]);\n  const childSelectedCount = childIssueIds.filter((cid) =>\n    selectedIds.has(cid),\n  ).length;\n  const allChildrenSelected =\n    childIssueIds.length > 0 && childSelectedCount === childIssueIds.length;\n  const someChildrenSelected = childSelectedCount > 0;\n  const handleToggleSelectAllChildren = useCallback(() => {\n    if (allChildrenSelected) deselectIds(childIssueIds);\n    else selectIds(childIssueIds);\n  }, [allChildrenSelected, childIssueIds, deselectIds, selectIds]);\n\n  const loading = issueLoading;\n\n  // Deep links keep the timeline virtualized. Mount the enclosing row by\n  // index, then center and highlight the exact comment once its anchor exists.\n  //\n  // For a reply or threaded run inside a folded resolved thread, the target\n  // is not in items (only the resolved-bar root is). Auto-expand the thread\n  // first; the effect re-runs once items re-flatten.\n  //\n  // `scrollContainerEl` is in deps because the component early-returns a\n  // loading skeleton while the issue query is pending. The scroll-container\n  // ref populates only on the post-loading render, so it's the signal that\n  // the timeline (and the deep-link target id) has actually rendered.\n  useEffect(() => {\n    if (!highlightCommentId || items.length === 0 || timelineLoading || commentTasksLoading) return;\n    // An explicit replay request (re-click on the already-open notification\n    // row): the host cleared the memento entry and bumped the token, so\n    // re-arm the landing guard and fall through to the jump.\n    if (lastHighlightRequestTokenRef.current !== highlightRequestToken) {\n      lastHighlightRequestTokenRef.current = highlightRequestToken;\n      didHighlightRef.current = null;\n    }\n    // A landing this effect's cleanup cut short resumes (see the cleanup).\n    const resuming = interruptedLandingRef.current === highlightCommentId;\n    if (!resuming && didHighlightRef.current === highlightCommentId) return;\n    // The deep link already landed before this mount (memento entry — a tab\n    // switch back or an in-tab return). The restored scroll offset is the\n    // state the user left, and the jump must not fight it. A fresh selection\n    // clears the entry, so this only ever suppresses a *repeat* landing.\n    if (!resuming && !activeDeliverableJump && consumedHighlightRef.current === highlightCommentId) {\n      didHighlightRef.current = highlightCommentId;\n      return;\n    }\n\n    const targetId = highlightTargetId ?? highlightCommentId;\n    const rootId = highlightRootId ?? targetId;\n    const collapse = useCommentCollapseStore.getState();\n    if (collapse.isCollapsed(id, rootId)) collapse.toggle(id, rootId);\n    if (rootId) {\n      // Root resolved → the whole thread is a folded bar.\n      const rootItem = items[targetIdx];\n      if (rootItem?.kind === \"resolved-bar\" || (rootItem?.kind === \"run\" && rootItem.entry?.resolved_at && !expandedResolved.has(rootId))) {\n        toggleResolvedExpand(rootId, true);\n        return;\n      }\n      // A reply is the resolution → the other replies fold behind the\n      // \"N comments\" bar; expand if the target is one of those folded replies.\n      if ((rootItem?.kind === \"comment\" || rootItem?.kind === \"run\") && rootItem.entry && !expandedResolved.has(rootId)) {\n        const resolution = deriveThreadResolution(\n          rootItem.entry,\n          timelineView.threadReplies.get(rootId) ?? EMPTY_REPLIES,\n        );\n        if (resolution.kind === \"reply\" && resolution.resolutionId !== targetId) {\n          toggleResolvedExpand(rootId, true);\n          return;\n        }\n      }\n    }\n\n    // A deleted reply renders nothing, so the id a notification or share link\n    // carries has no anchor to scroll to and no row to flash. Land on the\n    // comment above where it was; the id itself stays this landing's identity\n    // for the guards and the memento below.\n    const threadRootId = rootId ?? targetId;\n    const landingId = commentLandingTarget(\n      targetId,\n      threadRootId,"
+    },
+    {
+      "path": "packages/views/issues/components/issue-detail.tsx",
+      "start": 2640,
+      "end": 2739,
+      "code": "      timelineView.threadReplies.get(threadRootId) ?? EMPTY_REPLIES,\n    );\n    const container = scrollContainerEl;\n    if (!container) return;\n    if (!isFlatTimeline) {\n      if (targetIdx < 0) return;\n      if (measuredTimelineId !== id) {\n        // A long description can put the whole list below the scroll viewport.\n        // Bring its probe row into view so Virtuoso can measure before jumping.\n        const list = virtualTimelineRef.current;\n        if (list) container.scrollTop += list.getBoundingClientRect().top - container.getBoundingClientRect().top;\n        return;\n      }\n    }\n\n    interruptedLandingRef.current = null;\n    let completed = false;\n    const cancel = scrollToTimelineComment({\n      container, virtualizer: isFlatTimeline ? null : virtuosoRef.current,\n      index: targetIdx, commentId: landingId,\n      onMounted: () => {\n        didHighlightRef.current = highlightCommentId;\n        writeViewState(issueHighlightMementoKey(id), highlightCommentId);\n        // Timer owned outside this effect, so a re-run cannot leave the\n        // highlight on.\n        flashJumpTarget(landingId, 2500);\n      },\n      onComplete: () => { completed = true; },\n    });\n    return () => {\n      cancel();\n      // A commit while the landing is still aligning (a realtime comment, a\n      // run refresh, the refetch of a cached timeline) re-runs this effect and\n      // cancels the loop here. Once the anchor has mounted, the guards above\n      // count the landing as done, so mark it for the re-run to resume;\n      // otherwise the viewport stays wherever the loop stopped, often the top\n      // of the issue (MUL-9068).\n      if (!completed && didHighlightRef.current === highlightCommentId) {\n        interruptedLandingRef.current = highlightCommentId;\n      }\n    };\n  }, [highlightCommentId, highlightTargetId, highlightRequestToken, activeDeliverableJump, id, writeViewState, items, targetIdx, scrollContainerEl, highlightRootId, expandedResolved, timelineView, toggleResolvedExpand, isFlatTimeline, measuredTimelineId, timelineLoading, commentTasksLoading, flashJumpTarget]);\n\n  const descEditorRef = useRef<ContentEditorRef>(null);\n  const descriptionEditingRef = useRef(false);\n  const descriptionSaveInFlightRef = useRef(false);\n  const descriptionSaveIssueIdRef = useRef(id);\n  const pendingDescriptionSaveRef = useRef<{\n    markdown: string;\n    baseMarkdown: string;\n    attachmentIds: string[];\n  } | null>(null);\n  // Keep the description editor mounted from the start. Unlike the empty\n  // composer shells, a long rendered description cannot swap between\n  // react-markdown and ProseMirror without small per-block height differences\n  // accumulating into a visible scroll/layout jump. The chunked Markdown path\n  // keeps this single eager editor affordable; title and composers stay lazy.\n  const titleEditorRef = useRef<TitleEditorRef>(null);\n  const titleBaseRef = useRef<string | undefined>(issue?.title);\n  const [titleConflictDraft, setTitleConflictDraft] = useState<string | null>(null);\n  // Bumped when a conflicting title draft is discarded. TitleEditor reads its\n  // text from `defaultValue` at mount and exposes no imperative setter, so\n  // remounting is the only way to put the server's title back in the editor.\n  const [titleResetToken, setTitleResetToken] = useState(0);\n  useEffect(() => {\n    setTitleConflictDraft(null);\n    titleBaseRef.current = undefined;\n    descriptionSaveInFlightRef.current = false;\n    descriptionSaveIssueIdRef.current = id;\n    pendingDescriptionSaveRef.current = null;\n  }, [id]);\n  const titleLazy = useLazyEditor({ editorRef: titleEditorRef, resetKey: id });\n  const { isDragOver: descDragOver, dropZoneProps: descDropZoneProps } = useFileDropZone({\n    onDrop: (files) => files.forEach((file) => descEditorRef.current?.uploadFile(file)),\n  });\n  // Pending uploads in the description editor. We don't pass `issueId` on\n  // upload (to avoid orphaning attachments when the user deletes the file\n  // from the markdown), so they start unattached and we re-bind them via\n  // `attachment_ids` on the next description save. Drives editor previews\n  // so text/code attachments show an Eye before the bind round-trips.\n  const [descPendingAttachments, setDescPendingAttachments] = useState<Attachment[]>([]);\n  const descPendingAttachmentsRef = useRef<Attachment[]>([]);\n  // Memoized because the image sequence below keys off this array: without it\n  // the concat branch hands a fresh reference to every render and rebuilds the\n  // whole issue's sequence on each one.\n  const descEditorAttachments = useMemo(\n    () =>\n      descPendingAttachments.length > 0\n        ? [...(issueAttachments ?? []), ...descPendingAttachments]\n        : issueAttachments,\n    [issueAttachments, descPendingAttachments],\n  );\n\n  // Every previewable file in this issue, in the order the page renders them:\n  // the description first, then each timeline comment with its thread replies\n  // nested under it (MUL-5752). Built from `items` rather than the flat\n  // timeline so a reply sits next to the root it renders under, and from data\n  // rather than the DOM because Virtuoso only mounts the visible window.\n  //\n  // A resolved thread that is currently collapsed still contributes its"
+    },
+    {
+      "path": "packages/views/issues/components/issue-detail.tsx",
+      "start": 2740,
+      "end": 2839,
+      "code": "  // files: they belong to the issue and are one click from being on screen,\n  // so leaving them out would make the counter change depending on which\n  // threads happen to be folded.\n  //\n  // The description renders no standalone cards, and its attachment list is\n  // the whole issue's (comment uploads keep `issue_id`) — it only resolves the\n  // description's own references, or every comment file would be counted at\n  // the description's position.\n  const deliverableSources = useMemo(\n    () => mergeDeliverableSources(deliverableInventory, timeline),\n    [deliverableInventory, timeline],\n  );\n  const previewSequence = useMemo(() => {\n    const blocks: ImageSequenceBlock[] = [\n      {\n        id: DESCRIPTION_BLOCK_ID,\n        content: issue?.description,\n        attachments: descEditorAttachments,\n        standalone: false,\n      },\n    ];\n    for (const entry of deliverableSources) {\n      blocks.push({ id: entry.id, content: entry.content, attachments: entry.attachments });\n    }\n    return collectPreviewSequence(blocks);\n  }, [issue?.description, descEditorAttachments, deliverableSources]);\n\n  // The files this issue has delivered as a whole: the sidebar section, the\n  // overview grid, the viewer's info panel and the comments' version badges\n  // all read this (MUL-7649).\n  const deliverableFiles = useMemo(() => collectDeliverableFiles(deliverableSources), [deliverableSources]);\n  const commentById = useMemo(\n    () =>\n      new Map(\n        deliverableSources\n          .filter((entry) => entry.type === \"comment\")\n          .map((entry) => [entry.id, entry] as const),\n      ),\n    [deliverableSources],\n  );\n\n  // File origins use the deep-link landing path: load missing thread context,\n  // unfold it and wait for virtual rows and their measured heights to settle.\n  const locateOrigin = useCallback(\n    (origin: DeliverableOrigin) => {\n      if (origin.kind === \"description\") {\n        scrollContainerEl?.scrollTo({ top: 0, behavior: \"smooth\" });\n        return;\n      }\n      setDeliverableJump((previous) => ({\n        issueId: id,\n        linkedCommentId,\n        linkedRequestToken,\n        commentId: origin.commentId,\n        token: Math.max(previous?.token ?? 0, linkedRequestToken ?? 0) + 1,\n      }));\n    },\n    [scrollContainerEl, id, linkedCommentId, linkedRequestToken],\n  );\n\n  // Identifier form, like the issue's own copy link: a pasted link should say\n  // which issue it points at.\n  const copyDeliverableLink = useCopyDeliverableLink(issue?.identifier ?? id);\n  const describeDeliverable = useDeliverableDetails({\n    files: deliverableFiles,\n    commentById,\n    onLocate: locateOrigin,\n    onCopyLink: copyDeliverableLink,\n  });\n  const deliverableLinkRead = useFreshTimelineRead(id, openDeliverable, timelineUpdatedAt);\n  // A `/deliverables/<name>` link that opened the viewer gives the address\n  // back once the reader is done with the file, through the viewer and the\n  // overview alike. Viewer sessions the reader opens themselves leave the\n  // address alone.\n  const deliverableLink = useDeliverableLinkSession(onDeliverableLinkDone);\n  const onDeliverableLinkDoneStable = useCallback(() => {\n    onDeliverableLinkDone?.();\n  }, [onDeliverableLinkDone]);\n  // The overview remembers the file the viewer was showing, so `G` can go\n  // back to it.\n  const [overview, setOverview] = useState<{ open: boolean; returnKey: string | null }>({\n    open: false,\n    returnKey: null,\n  });\n  useEffect(() => {\n    setOverview({ open: false, returnKey: null });\n  }, [id]);\n  const openOverview = useCallback(() => setOverview({ open: true, returnKey: null }), []);\n  const { onOverviewOpenedFromViewer, onOverviewClosed } = deliverableLink;\n  const openOverviewFromViewer = useCallback(\n    (key: string) => {\n      onOverviewOpenedFromViewer();\n      setOverview({ open: true, returnKey: key });\n    },\n    [onOverviewOpenedFromViewer],\n  );\n  const closeOverview = useCallback(() => {\n    setOverview((current) => ({ ...current, open: false }));\n    onOverviewClosed();\n  }, [onOverviewClosed]);"
+    },
+    {
+      "path": "packages/views/issues/components/issue-detail.tsx",
+      "start": 2840,
+      "end": 2939,
+      "code": "\n  const handleDescriptionUpload = useCallback(\n    async (file: File) => {\n      const result = await uploadWithToast(file);\n      if (result) {\n        descPendingAttachmentsRef.current = [\n          ...descPendingAttachmentsRef.current,\n          result,\n        ];\n        setDescPendingAttachments(descPendingAttachmentsRef.current);\n      }\n      return result;\n    },\n    [uploadWithToast],\n  );\n\n  useEffect(() => {\n    descPendingAttachmentsRef.current = [];\n    setDescPendingAttachments([]);\n  }, [id]);\n\n  // Shared issue actions (mutations, pin, copy-link, modal dispatch, etc.).\n  // Called before the `if (!issue)` early return so hook order stays stable.\n  const actions = useIssueActions(issue);\n  const handleUpdateField = actions.updateField;\n  // The inbox passes `onDone` and owns archive and restore there.\n  const archivedInboxItemId = useArchivedInboxItemId(id, !onDone);\n  const pageMenu = useIssuePageMenu();\n\n  // Labels live in their own query (not on the issue body) — fetch the count\n  // here so seeding can decide whether the \"Labels\" optional row should be\n  // shown for an issue that already has labels attached.\n  const { data: attachedLabels = [] } = useQuery(issueLabelsOptions(wsId, id));\n  const attachedLabelsCount = attachedLabels.length;\n\n  // Custom property catalog. Includes archived definitions: an issue can\n  // still carry a value written before the archive, and that row must stay\n  // renderable (read-only) until someone clears it.\n  const { data: workspaceProperties = [] } = useQuery(propertyListOptions(wsId, true));\n\n  // Sub-issue rows only surface live definitions: the display picker offers\n  // non-archived properties, and chips render only ids that resolve here.\n  const activeWorkspaceProperties = useMemo(\n    () => workspaceProperties.filter((p) => p.archived !== true),\n    [workspaceProperties],\n  );\n  const subIssueCustomProps = useMemo(\n    () =>\n      subIssueRowPropertyIds\n        .map((pid) => activeWorkspaceProperties.find((p) => p.id === pid))\n        .filter((p): p is IssueProperty => !!p),\n    [subIssueRowPropertyIds, activeWorkspaceProperties],\n  );\n\n  // Seed the visible-optional-props set:\n  //   - on issue switch, reset to whichever fields are currently set\n  //   - on the SAME issue, additively pick up fields the user just set\n  //     (so the row stays visible after they edit + clear in one session)\n  // Removal happens only on issue switch — never on clear.\n  const seededIssueIdRef = useRef<string | null>(null);\n  useEffect(() => {\n    if (!issue) return;\n    if (seededIssueIdRef.current !== issue.id) {\n      seededIssueIdRef.current = issue.id;\n      setAutoOpenProp(null);\n      setAutoOpenCustomProp(null);\n      const seed = new Set<OptionalPropKey>();\n      for (const k of OPTIONAL_PROP_KEYS) {\n        if (isOptionalPropSet(issue, k, attachedLabelsCount)) seed.add(k);\n      }\n      setVisibleOptionalProps(seed);\n      setVisibleCustomProps(new Set(Object.keys(issue.properties ?? {})));\n      return;\n    }\n    setVisibleOptionalProps((prev) => {\n      let next = prev;\n      for (const k of OPTIONAL_PROP_KEYS) {\n        if (isOptionalPropSet(issue, k, attachedLabelsCount) && !next.has(k)) {\n          if (next === prev) next = new Set(prev);\n          next.add(k);\n        }\n      }\n      return next;\n    });\n    setVisibleCustomProps((prev) => {\n      let next = prev;\n      for (const propertyId of Object.keys(issue.properties ?? {})) {\n        if (!next.has(propertyId)) {\n          if (next === prev) next = new Set(prev);\n          next.add(propertyId);\n        }\n      }\n      return next;\n    });\n  }, [issue, attachedLabelsCount]);\n\n  const addOptionalProp = useCallback(\n    (key: OptionalPropKey) => {\n      setVisibleOptionalProps((prev) => {\n        if (prev.has(key)) return prev;"
+    },
+    {
+      "path": "packages/views/issues/components/issue-detail.tsx",
+      "start": 2940,
+      "end": 3039,
+      "code": "        const next = new Set(prev);\n        next.add(key);\n        return next;\n      });\n      setAutoOpenProp(key);\n      // Dismiss the \"+ Add property\" popover so it doesn't sit stacked\n      // behind the picker we're about to auto-open.\n      setAddPropPopoverOpen(false);\n    },\n    [],\n  );\n\n  const addCustomProp = useCallback((propertyId: string) => {\n    setVisibleCustomProps((prev) => {\n      if (prev.has(propertyId)) return prev;\n      const next = new Set(prev);\n      next.add(propertyId);\n      return next;\n    });\n    setAutoOpenCustomProp(propertyId);\n    setAddPropPopoverOpen(false);\n  }, []);\n\n  // Clear the auto-open flag after the next render so pickers (which read\n  // `defaultOpen` once via a useState initializer) keep the open state they\n  // captured on mount, but later interactions don't re-trigger it.\n  useEffect(() => {\n    if (autoOpenProp === null) return;\n    setAutoOpenProp(null);\n  }, [autoOpenProp]);\n\n  useEffect(() => {\n    if (autoOpenCustomProp === null) return;\n    setAutoOpenCustomProp(null);\n  }, [autoOpenCustomProp]);\n\n  const handleToggleSidebar = useCallback(() => {\n    if (isMobile) {\n      setMobileSidebarOpen((open) => !open);\n      return;\n    }\n\n    const panel = sidebarRef.current;\n    if (!panel) return;\n    const nextOpen = panel.isCollapsed();\n    beginDesktopSidebarToggle(nextOpen);\n    window.requestAnimationFrame(() => {\n      if (nextOpen) panel.expand();\n      else panel.collapse();\n    });\n  }, [beginDesktopSidebarToggle, isMobile, sidebarRef]);\n\n  // The header's wakeup chip opens the sidebar and brings the Wakeups section\n  // into view with focus on its heading, showing it on this issue even when\n  // the reader hid it from the sidebar. The reveal lasts until the reader\n  // switches the section in settings or moves to another issue.\n  const [revealedWakeupsFor, setRevealedWakeupsFor] = useState<string | null>(null);\n  if (revealedWakeupsFor !== null && revealedWakeupsFor !== id) setRevealedWakeupsFor(null);\n  const openWakeups = useCallback(() => {\n    setRevealedWakeupsFor(id);\n    if (!sidebarOpen) handleToggleSidebar();\n    window.requestAnimationFrame(() => {\n      const heading = document.getElementById(`issue-wakeups-${id}`);\n      heading?.scrollIntoView({ block: \"nearest\" });\n      heading?.focus({ preventScroll: true });\n    });\n  }, [handleToggleSidebar, id, sidebarOpen]);\n\n  useRightSidebarShortcut(rightSidebarShortcutTargetRef, handleToggleSidebar);\n\n  useIssueDetailScrollRestore({\n    restoreKey: `${wsId}:${id}`,\n    scrollContainerEl,\n    ready: !!issue && !loading && !timelineLoading,\n    // Comment landings and semantic reading anchors own their scroll. Pixel\n    // restoration still covers positions outside the discussion (description,\n    // sub-issues) and adapters without a saved timeline anchor.\n    // A peek always opens at the top: it is a glance, not a place to return to.\n    disabled: isPeek || pendingHighlight || !!readingAnchor,\n    // The tab memento's offset, when the platform serves one. It must win\n    // over this hook's module-level map — see the parameter doc.\n    overrideTop: restoredScrollTop,\n  });\n\n  // Keep the identity value stable across unrelated issue-detail updates so\n  // context consumers only re-render when the owning issue changes identity.\n  const resolvedIssueId = issue?.id;\n  const resolvedIssueIdentifier = issue?.identifier;\n  const currentIssueRenderContext = useMemo(\n    () =>\n      resolvedIssueId && resolvedIssueIdentifier\n        ? { id: resolvedIssueId, identifier: resolvedIssueIdentifier }\n        : null,\n    [resolvedIssueId, resolvedIssueIdentifier],\n  );\n\n  if (issueReadState.loadFailed) {\n    return (\n      <IssueLoadError\n        showBackLink={!onDelete}"
+    },
+    {
+      "path": "packages/views/issues/components/issue-detail.tsx",
+      "start": 3040,
+      "end": 3139,
+      "code": "        leading={leadingAction}\n        trailing={trailingActions}\n        onRetry={issueReadState.retry}\n        isRetrying={issueReadState.isRetrying}\n      />\n    );\n  }\n\n  if (loading) {\n    // The host's trailing controls hold the peek's only close button, so the\n    // waiting and missing states carry them too.\n    return <IssueDetailSkeleton leading={leadingAction} trailing={trailingActions} sidebar={!isPeek && desktopSidebarOpen} layoutId={layoutId} />;\n  }\n\n  if (!issue) {\n    return <IssueNotFound showBackLink={!onDelete} leading={leadingAction} trailing={trailingActions} />;\n  }\n\n  const requesterName =\n    issue.creator_type === \"agent\" && issue.requester_id\n      ? getActorName(\"member\", issue.requester_id)\n      : undefined;\n\n  const persistDescriptionSave = (\n    draft: { markdown: string; baseMarkdown: string; attachmentIds: string[] },\n  ) => {\n    descriptionSaveInFlightRef.current = true;\n    handleUpdateField(\n      {\n        description: draft.markdown,\n        description_base: draft.baseMarkdown,\n        attachment_ids:\n          draft.attachmentIds.length > 0 ? draft.attachmentIds : undefined,\n      },\n      {\n        onSuccess: (serverIssue) => {\n          if (descriptionSaveIssueIdRef.current !== id) return;\n          descriptionSaveInFlightRef.current = false;\n          const pending = pendingDescriptionSaveRef.current;\n          pendingDescriptionSaveRef.current = null;\n          if (pending) {\n            // Usually the accepted document is exactly what we submitted. If\n            // the server appended late channel media, keep the submitted body\n            // as the next editor baseline: the server can recognize that the\n            // only delta is media the editor never saw and preserve it again.\n            const nextBase = serverIssue.description === draft.markdown\n              ? serverIssue.description\n              : draft.markdown;\n            persistDescriptionSave({ ...pending, baseMarkdown: nextBase });\n          }\n        },\n        onError: () => {\n          if (descriptionSaveIssueIdRef.current !== id) return;\n          descriptionSaveInFlightRef.current = false;\n          pendingDescriptionSaveRef.current = null;\n        },\n      },\n    );\n  };\n\n  const queueDescriptionSave = (\n    draft: { markdown: string; baseMarkdown: string; attachmentIds: string[] },\n  ) => {\n    if (descriptionSaveInFlightRef.current) {\n      pendingDescriptionSaveRef.current = draft;\n      return;\n    }\n    persistDescriptionSave(draft);\n  };\n\n  const canAddProperty = OPTIONAL_PROP_KEYS.some(\n    (key) => !visibleOptionalProps.has(key) && (key !== \"stage\" || issue.parent_issue_id != null),\n  ) || workspaceProperties.some(\n    (property) => !property.archived && !visibleCustomProps.has(property.id) && issue.properties?.[property.id] === undefined,\n  );\n  // \"+ Add property\" — an inline row at the bottom of the Properties grid\n  // that opens a Popover listing optional fields not yet displayed. Hidden\n  // once every optional field is on screen.\n  const addPropertyRow = canAddProperty && (\n    <div className=\"col-span-2 mt-1\">\n      <Popover open={addPropPopoverOpen} onOpenChange={setAddPropPopoverOpen}>\n        <PopoverTrigger\n          className=\"-mx-2 flex items-center gap-1.5 rounded-md px-2 py-1 text-label text-muted-foreground transition-colors hover:bg-accent/50 hover:text-foreground\"\n        >\n          <Plus className=\"h-3 w-3 shrink-0\" />\n          <span>{t(($) => $.detail.add_property_action)}</span>\n        </PopoverTrigger>\n        {/* Each option leads with the icon the resulting picker uses, so the\n            list reads as a preview of what will show up above. 388px is the\n            sidebar's 420px resize limit minus its 16px padding on each side.\n            Popover (unlike DropdownMenu) has no height bound of its own, so a\n            long property catalog must be capped to the space the positioner\n            reports and scroll inside, or its tail renders off-screen. */}\n        <PopoverContent\n          align=\"start\"\n          data-testid=\"add-property-popover\"\n          className=\"max-h-(--available-height) w-max min-w-44 max-w-[min(388px,var(--available-width))] overflow-y-auto overscroll-contain p-1\"\n        >\n          {OPTIONAL_PROP_KEYS.filter((k) => !visibleOptionalProps.has(k) && (k !== \"stage\" || issue.parent_issue_id != null)).map((k) => (\n            <button"
+    },
+    {
+      "path": "packages/views/issues/components/issue-detail.tsx",
+      "start": 3140,
+      "end": 3239,
+      "code": "              key={k}\n              type=\"button\"\n              onClick={() => addOptionalProp(k)}\n              className=\"flex w-full items-center gap-2 rounded-md px-2 py-1 text-left text-caption text-foreground transition-colors hover:bg-accent focus-visible:bg-accent focus-visible:outline-none\"\n            >\n              {k === \"priority\" && (\n                <PriorityIcon priority=\"medium\" inheritColor className=\"text-muted-foreground\" />\n              )}\n              {k === \"stage\" && (\n                <Milestone className=\"h-3.5 w-3.5 shrink-0 text-muted-foreground\" />\n              )}\n              {k === \"start_date\" && (\n                <CalendarClock className=\"h-3.5 w-3.5 shrink-0 text-muted-foreground\" />\n              )}\n              {k === \"due_date\" && (\n                <CalendarDays className=\"h-3.5 w-3.5 shrink-0 text-muted-foreground\" />\n              )}\n              {k === \"labels\" && (\n                <Tag className=\"h-3.5 w-3.5 shrink-0 text-muted-foreground\" />\n              )}\n              <span className=\"truncate\">\n                {k === \"priority\" && t(($) => $.detail.prop_priority)}\n                {k === \"stage\" && t(($) => $.detail.prop_stage)}\n                {k === \"start_date\" && t(($) => $.detail.prop_start_date)}\n                {k === \"due_date\" && t(($) => $.detail.prop_due_date)}\n                {k === \"labels\" && t(($) => $.detail.prop_labels)}\n              </span>\n            </button>\n          ))}\n          {(() => {\n            const addable = workspaceProperties.filter(\n              (p) =>\n                !p.archived &&\n                !visibleCustomProps.has(p.id) &&\n                issue.properties?.[p.id] === undefined,\n            );\n            if (addable.length === 0) return null;\n            return (\n              <>\n                <div className=\"my-1 h-px bg-border\" />\n                {addable.map((p) => (\n                  <TruncatedTooltip key={p.id} content={p.name}>\n                    <button\n                      type=\"button\"\n                      onClick={() => addCustomProp(p.id)}\n                      className=\"flex w-full items-center gap-2 rounded-md px-2 py-1 text-left text-caption text-foreground transition-colors hover:bg-accent focus-visible:bg-accent focus-visible:outline-none\"\n                    >\n                      {p.icon ? (\n                        <PropertyIcon property={p} className=\"size-3.5 text-caption\" />\n                      ) : (\n                        <SlidersHorizontal className=\"h-3.5 w-3.5 shrink-0 text-muted-foreground\" />\n                      )}\n                      <span className=\"line-clamp-2 min-w-0 break-words [overflow-wrap:anywhere]\">{p.name}</span>\n                    </button>\n                  </TruncatedTooltip>\n                ))}\n              </>\n            );\n          })()}\n        </PopoverContent>\n      </Popover>\n    </div>\n  );\n\n  const sidebarSections: Record<IssueSidebarSection, ReactNode> = {\n    properties: (\n      <div>\n        <IssueSidebarSectionHeader title={t(($) => $.detail.section_properties)} open={propertiesOpen} onOpenChange={setPropertiesOpen}  />\n        {propertiesOpen && <IssueSidebarPropertyGrid>\n          {/* Core props — always rendered. */}\n          <PropRow label={t(($) => $.detail.prop_status)}>\n            <StatusPicker\n              status={issue.status}\n              onUpdate={handleUpdateField}\n              align=\"start\"\n              projectId={issue.project_id}\n              issue={issue}\n              onMarkDuplicate={actions.openMarkDuplicate}\n              isDuplicate={isDuplicateIssue(issue)}\n            />\n          </PropRow>\n          <PropRow label={t(($) => $.detail.prop_assignee)}>\n            <AssigneePicker assigneeType={issue.assignee_type} assigneeId={issue.assignee_id} onUpdate={handleUpdateField} align=\"start\" />\n          </PropRow>\n          <PropRow label={t(($) => $.detail.prop_project)}>\n            <IssueProjectPicker\n              projectId={issue.project_id}\n              onUpdate={handleUpdateField}\n              issue={issue}\n            />\n          </PropRow>\n          <IssueWorkflowPropRow projectId={issue.project_id} status={issue.status} label={t(($) => $.workflows.project.label)} />\n\n          {/* Optional props — rendered only when set on the issue OR added\n              via \"+ Add property\" in this session. Row order follows the\n              order of `OPTIONAL_PROP_KEYS`. */}\n          {visibleOptionalProps.has(\"priority\") && (\n            <PropRow label={t(($) => $.detail.prop_priority)}>\n              <PriorityPicker\n                priority={issue.priority}"
+    },
+    {
+      "path": "packages/views/issues/components/issue-detail.tsx",
+      "start": 3240,
+      "end": 3339,
+      "code": "                onUpdate={handleUpdateField}\n                align=\"start\"\n                defaultOpen={autoOpenProp === \"priority\"}\n              />\n            </PropRow>\n          )}\n          {issue.parent_issue_id != null && visibleOptionalProps.has(\"stage\") && (\n            <PropRow label={t(($) => $.detail.prop_stage)}>\n              <StagePicker\n                stage={issue.stage}\n                onUpdate={handleUpdateField}\n                maxStage={maxSiblingStage(parentChildIssues)}\n                align=\"start\"\n                defaultOpen={autoOpenProp === \"stage\"}\n              />\n            </PropRow>\n          )}\n          {visibleOptionalProps.has(\"start_date\") && (\n            <PropRow label={t(($) => $.detail.prop_start_date)}>\n              <StartDatePicker\n                startDate={issue.start_date}\n                onUpdate={handleUpdateField}\n                defaultOpen={autoOpenProp === \"start_date\"}\n              />\n            </PropRow>\n          )}\n          {visibleOptionalProps.has(\"due_date\") && (\n            <PropRow label={t(($) => $.detail.prop_due_date)}>\n              <DueDatePicker\n                dueDate={issue.due_date}\n                onUpdate={handleUpdateField}\n                defaultOpen={autoOpenProp === \"due_date\"}\n              />\n            </PropRow>\n          )}\n          {visibleOptionalProps.has(\"labels\") && (\n            <PropRow label={t(($) => $.detail.prop_labels)}>\n              <LabelPicker\n                issueId={issue.id}\n                align=\"start\"\n                defaultOpen={autoOpenProp === \"labels\"}\n              />\n            </PropRow>\n          )}\n\n          {/* Custom properties — same progressive disclosure as the\n              built-in optional props: a row renders when the issue has a\n              value OR the user added the property this session. Archived\n              definitions render read-only until their value is cleared. */}\n          {workspaceProperties\n            .filter(\n              (p) =>\n                issue.properties?.[p.id] !== undefined ||\n                (!p.archived && visibleCustomProps.has(p.id)),\n            )\n            .map((p) => (\n              <PropRow\n                key={p.id}\n                label={\n                  <>\n                    <PropertyIcon property={p} className=\"size-3.5 text-caption\" />\n                    <TruncatedTooltip content={p.name} focusable>\n                      <span className=\"line-clamp-2 min-w-0 break-words [overflow-wrap:anywhere]\">{p.name}</span>\n                    </TruncatedTooltip>\n                  </>\n                }\n              >\n                <CustomPropertyValueEditor\n                  issue={issue}\n                  property={p}\n                  defaultOpen={autoOpenCustomProp === p.id}\n                />\n              </PropRow>\n            ))}\n\n          {addPropertyRow}\n        </IssueSidebarPropertyGrid>}\n      </div>\n    ),\n    quick_actions: <QuickActionsSection issueId={issue.id} />,\n    wakeups: (\n      <WakeupsSection\n        issueId={issue.id}\n        closed={[\"done\", \"closed\"].includes(resolveStatusCategory(issue.status))}\n        defaultAgentId={issue.assignee_type === \"agent\" ? (issue.assignee_id ?? undefined) : undefined}\n      />\n    ),\n    plugins: <PluginPanelSection issueId={issue.id} />,\n    // Parent issue — standalone section, only when the issue has a\n    // parent. Setting a parent is reachable via the issue actions menu;\n    // this card surfaces an existing parent without occupying sidebar\n    // space for issues that don't have one.\n    parent: parentIssue && (\n        <div>\n          <IssueSidebarSectionHeader title={t(($) => $.detail.section_parent_issue)} open={parentIssueOpen} onOpenChange={setParentIssueOpen}\n            actions={<IconButton size=\"icon-xs\" label={t(($) => $.actions.remove_parent_issue)} onClick={() => actions.removeParent()}><Unlink /></IconButton>} />\n          {parentIssueOpen && <div className=\"px-2\">\n            <div className=\"flex items-center gap-0.5 rounded-md px-2 hover:bg-accent/50 transition-colors group\">\n              <AppLink\n                href={paths.issueDetail(parentIssue.id)}"
+    },
+    {
+      "path": "packages/views/issues/components/issue-detail.tsx",
+      "start": 3340,
+      "end": 3439,
+      "code": "                className=\"flex flex-1 min-w-0 items-center gap-1.5 py-2 text-label\"\n              >\n                <StatusIcon\n                  status={parentIssue.status}\n                  color={resolveStatusColor(parentIssue.status)}\n                  icon={resolveStatusIcon(parentIssue.status)}\n                  category={issueStatusCategory(parentIssue) ?? undefined}\n                  className=\"h-3.5 w-3.5 shrink-0\"\n                />\n                <span className=\"text-muted-foreground shrink-0\">{parentIssue.identifier}</span>\n                <span className=\"truncate group-hover:text-foreground\">{parentIssue.title}</span>\n              </AppLink>\n\n            </div>\n          </div>}\n        </div>\n    ),\n    sub_issues: childIssuesLoaded && childIssues.length > 0 && (\n      <div>\n        <IssueSidebarSectionHeader\n          title={t(($) => $.detail.sub_issues_label)}\n          open={sidebarSubIssuesOpen}\n          onOpenChange={setSidebarSubIssuesOpen}\n          status={\n            <span\n              role=\"progressbar\"\n              aria-label={t(($) => $.detail.sub_issues_label)}\n              aria-valuemin={0}\n              aria-valuemax={childIssues.length}\n              aria-valuenow={doneChildCount}\n              aria-valuetext={t(($) => $.detail.sub_issues_nav_progress, { done: doneChildCount, total: childIssues.length })}\n              className=\"inline-flex shrink-0 items-center gap-1.5 pr-2 text-caption tabular-nums text-muted-foreground\"\n            >\n              <ProgressRing done={doneChildCount} total={childIssues.length} size={11} />\n              <span>{doneChildCount}/{childIssues.length}</span>\n            </span>\n          }\n        />\n        {sidebarSubIssuesOpen && (\n          <ul id={sidebarSubIssuesListId} className=\"px-2\">\n            {sidebarChildIssues.map((child) => (\n              <li key={child.id}>\n                <AppLink\n                  href={paths.issueDetail(child.id)}\n                  title={`${child.identifier} ${child.title}`}\n                  aria-label={`${child.identifier} ${child.title}, ${resolveStatusLabel(child.status)}`}\n                  className=\"group flex min-w-0 items-center gap-1.5 rounded-md px-2 py-2 text-label transition-colors hover:bg-accent/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring\"\n                >\n                  <span role=\"img\" aria-label={resolveStatusLabel(child.status)} className=\"shrink-0\">\n                    <StatusIcon\n                      status={child.status}\n                      color={resolveStatusColor(child.status)}\n                      icon={resolveStatusIcon(child.status)}\n                      category={issueStatusCategory(child) ?? undefined}\n                      className=\"h-3.5 w-3.5\"\n                    />\n                  </span>\n                  <span className=\"max-w-[45%] shrink-0 truncate text-muted-foreground\">{child.identifier}</span>\n                  <span className=\"min-w-0 truncate group-hover:text-foreground\">{child.title}</span>\n                </AppLink>\n              </li>\n            ))}\n            {childIssues.length > SIDEBAR_SUB_ISSUES_LIMIT && (\n              <li>\n                <Button\n                  type=\"button\"\n                  variant=\"ghost\"\n                  size=\"sm\"\n                  className=\"w-full justify-start text-muted-foreground\"\n                  aria-expanded={sidebarSubIssuesExpanded}\n                  aria-controls={sidebarSubIssuesListId}\n                  onClick={() => setSidebarSubIssuesExpanded((expanded) => !expanded)}\n                >\n                  {sidebarSubIssuesExpanded\n                    ? t(($) => $.detail.sub_issues_show_less)\n                    : t(($) => $.detail.sub_issues_show_more, { count: childIssues.length - SIDEBAR_SUB_ISSUES_LIMIT })}\n                </Button>\n              </li>\n            )}\n          </ul>\n        )}\n      </div>\n    ),\n    duplicates: <IssueDuplicatesSection issueId={issue.id} />,\n    // Pull requests — unavailable when the workspace disables the PR sidebar\n    // (or the GitHub master switch is off). Backend data is kept either\n    // way so re-enabling restores the section instantly.\n    pull_requests: (\n      <PullRequestsSection\n        issueId={id}\n        identifier={issue.identifier}\n        open={pullRequestsOpen}\n        onOpenChange={setPullRequestsOpen}\n      />\n    ),\n    // Environments the issue's runs left running, and the \"+\" that starts one.\n    environments: <IssueEnvironmentsSection issueId={id} assigneeType={issue.assignee_type} assigneeId={issue.assignee_id} />,\n    // Deliverables — the files this issue's comments delivered. Hidden\n    // while there are none.\n    deliverables: ("
+    },
+    {
+      "path": "packages/views/issues/components/issue-detail.tsx",
+      "start": 3440,
+      "end": 3485,
+      "code": "      <DeliverablesSection\n        files={deliverableFiles}\n        onOpenOverview={openOverview}\n        onCopyLink={copyDeliverableLink}\n      />\n    ),\n    // Apps the issue's runs used. Hidden until one makes a call.\n    apps: <IssueAppsSection issueId={id} />,\n    // Execution summary owns its query, realtime updates and disclosure.\n    execution_log: <ExecutionLogSection key={id} issueId={id} identifier={issue.identifier} issueTitle={issue.title} hasChildren={childIssues.length > 0} />,\n    // Details — creator and timestamps. Defaults to below the execution\n    // log because it is the least-read block in the sidebar: the values\n    // never change once the issue exists, while the log above it is\n    // what people actually come here to check.\n    details: (\n      <div>\n        <IssueSidebarSectionHeader title={t(($) => $.detail.section_details)} open={detailsOpen} onOpenChange={setDetailsOpen} />\n        {detailsOpen && <IssueSidebarPropertyGrid>\n          <PropRow\n            interactive={false}\n            label={t(($) => $.detail.prop_created_by)}\n            className={requesterName ? \"items-start py-1.5\" : undefined}\n          >\n            <div className=\"flex min-w-0 flex-1 items-start gap-1.5\">\n              <ActorAvatar actorType={issue.creator_type} actorId={issue.creator_id} size=\"sm\" enableHoverCard />\n              <div className=\"flex min-w-0 flex-1 flex-col\">\n                <span className=\"cursor-pointer truncate\">{getActorName(issue.creator_type, issue.creator_id)}</span>\n                {requesterName && issue.requester_id && (\n                  <HoverCard>\n                    <HoverCardTrigger\n                      render={<AppLink href={paths.memberDetail(issue.requester_id)} />}\n                      className=\"block truncate text-caption text-muted-foreground hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring\"\n                      title={t(($) => $.execution_log.attribution.on_behalf_of, { name: requesterName })}\n                    >\n                      {t(($) => $.execution_log.attribution.on_behalf_of, { name: requesterName })}\n                    </HoverCardTrigger>\n                    <HoverCardContent align=\"start\" className=\"w-72\">\n                      <MemberProfileCard userId={issue.requester_id} />\n                    </HoverCardContent>\n                  </HoverCard>\n                )}\n              </div>\n            </div>\n          </PropRow>\n          <PropRow interactive={false} label={t(($) => $.detail.prop_created)}>\n            <span className=\"text-muted-foreground\">{shortDate(issue.created_at, locale)}</span>"
+    },
+    {
+      "path": "packages/views/issues/components/issue-detail.tsx",
+      "start": 3486,
+      "end": 3500,
+      "code": "          </PropRow>\n          <PropRow interactive={false} label={t(($) => $.detail.prop_updated)}>\n            <span className=\"text-muted-foreground\">{shortDate(issue.updated_at, locale)}</span>\n          </PropRow>\n        </IssueSidebarPropertyGrid>}\n      </div>\n    ),\n    metadata: <MetadataSection metadata={issue.metadata ?? {}} />,\n  };\n\n  const sidebarContent = (\n    <IssueSidebarSections\n      sections={sidebarSections}\n      available={ISSUE_SIDEBAR_SECTIONS.filter(\n        (section) => (section !== \"pull_requests\" || githubSettings.prSidebar) && (section !== \"plugins\" || pluginsEnabled),"
+    }
+  ],
+  "edges": [
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:3067",
+      "kind": "description write",
+      "chain": [
+        "actions.updateField",
+        "useIssueActions.updateField:83",
+        "surfaceActions.updateIssue or updateIssue.mutate",
+        "useUpdateIssue mutationFn:198",
+        "api.updateIssue:1770"
+      ],
+      "inventory": [
+        {
+          "id": "client:1771",
+          "method": "PUT",
+          "path_expression": "/api/issues/${id}",
+          "route": {
+            "method": "PUT",
+            "path": "/api/issues/{id}"
+          }
+        }
+      ],
+      "effects": "No move_intent in description payload; both surface and fallback reach updateIssue. Success/error callbacks forwarded; toast is local."
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:2445",
+      "kind": "query read",
+      "chain": "issueAttachmentsOptions(id) → api.listAttachments(id)",
+      "enabled": "none",
+      "input_path": "id → issueId path",
+      "inventory": [
+        {
+          "id": "client:4427",
+          "method": "GET",
+          "path_expression": "/api/issues/${issueId}/attachments",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}/attachments"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:2453",
+      "kind": "query read",
+      "chain": "issueDetailOptions(wsId, parentIssueId ?? \"\") → api.getIssue",
+      "enabled": "!!parentIssueId",
+      "input_path": "issue?.parent_issue_id → encodeURIComponent(id); wsId cache key only; initialData from allIssues.find",
+      "inventory": [
+        {
+          "id": "client:1612",
+          "method": "GET",
+          "path_expression": "/api/issues/${encodeURIComponent(id)}",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:2462",
+      "kind": "query read",
+      "chain": "projectDetailOptions(wsId, issueProjectId ?? \"\") → api.getProject",
+      "enabled": "!!issueProjectId",
+      "input_path": "issue?.project_id → id path; wsId cache key only",
+      "inventory": [
+        {
+          "id": "client:4524",
+          "method": "GET",
+          "path_expression": "/api/projects/${id}",
+          "route": {
+            "method": "GET",
+            "path": "/api/projects/{id}"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:2470",
+      "kind": "query read",
+      "chain": "childIssuesOptions(wsId, id) → api.listChildIssues",
+      "enabled": "!!issue",
+      "input_path": "id → id path; wsId cache key only; response.issues; refetchOnMount always",
+      "inventory": [
+        {
+          "id": "client:1795",
+          "method": "GET",
+          "path_expression": "/api/issues/${id}/children",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}/children"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:2483",
+      "kind": "query read",
+      "chain": "childIssuesOptions(wsId, parentIssueId ?? \"\") → api.listChildIssues",
+      "enabled": "!!parentIssueId",
+      "input_path": "issue?.parent_issue_id → id path; response.issues; refetchOnMount always",
+      "inventory": [
+        {
+          "id": "client:1795",
+          "method": "GET",
+          "path_expression": "/api/issues/${id}/children",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}/children"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:2490",
+      "kind": "query read",
+      "chain": "childIssueProgressOptions(wsId) → api.getChildIssueProgress",
+      "enabled": "childIssues.length > 0",
+      "input_path": "wsId cache key only; no URL input; progress → Map(parent_issue_id,{done,total})",
+      "inventory": [
+        {
+          "id": "client:1817",
+          "method": "GET",
+          "path_expression": "/api/issues/child-progress",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/child-progress"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:2872",
+      "kind": "query read",
+      "chain": "issueLabelsOptions(wsId,id) → api.listLabelsForIssue",
+      "enabled": "Boolean(issueId)",
+      "input_path": "id → issueId path; response.labels; wsId cache key only",
+      "inventory": [
+        {
+          "id": "client:5025",
+          "method": "GET",
+          "path_expression": "/api/issues/${issueId}/labels",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}/labels"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:2878",
+      "kind": "query read",
+      "chain": "propertyListOptions(wsId,true) → api.listProperties",
+      "enabled": "none",
+      "input_path": "true → suffix ?include_archived=true; response.properties; wsId cache key only",
+      "inventory": [
+        {
+          "id": "client:4884",
+          "method": "GET",
+          "path_expression": "/api/properties${suffix}",
+          "route": {
+            "method": "GET",
+            "path": "/api/properties"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:2866",
+      "kind": "query read",
+      "chain": "useArchivedInboxItemId → archivedInboxLookupOptions → api.listArchivedInboxPage",
+      "enabled": "() => !onDone && focusManager.isFocused(); overrides factory !!groupId",
+      "input_path": "id → groupId → group_id; EMPTY_INBOX_FILTERS → empty params; limit=50; signal forwarded; no cursor. Returns first archived item id only when !onDone; refetchOnWindowFocus true; retry false",
+      "inventory": [
+        {
+          "id": "client:3232",
+          "method": "GET",
+          "path_expression": "/api/inbox/archived/page?${params}",
+          "route": {
+            "method": "GET",
+            "path": "/api/inbox/archived/page"
+          }
+        }
+      ]
+    }
+  ],
+  "boundary_completion": {
+    "declaration": "sidebarSections",
+    "start": 3205,
+    "end": 3494,
+    "extension": [
+      3340,
+      3494
+    ],
+    "following_declaration_not_audited": "sidebarContent"
+  },
+  "root_review": {
+    "status": "accepted finite section",
+    "checks": [
+      "Exact inventory tuples and current source hashes validated",
+      "Independent query/config/archived lookup gates checked",
+      "Root read remaining local editing helpers and scroll restoration/landing implementations"
+    ],
+    "limits": "No whole-file claim within this section; descendants and third-party interfaces separately bounded"
+  },
+  "observations": [
+    "Description queue: one in-flight; latest pending wins. Success uses returned description as next baseline only when equal to submitted markdown, otherwise submitted markdown. Issue-ID mismatch returns before ref changes. Errors discard pending.",
+    "Uploads append successful results to pending attachment refs/state; reset on issue id. Description attachment bindings are omitted when empty.",
+    "Parent and breadcrumb project queries are identity-gated; children require issue; nested progress requires children. Child count is known only after success and fetching ends.",
+    "Selection is scoped to sub-issues:id; select-all uses current child ids.",
+    "Local effects include disclosure stores, animation frame scroll/focus, landing cancellation/resumption and view-state memento, preview ordering, overview session state and property visibility seeding.",
+    "Title conflict draft/reset refs are initialized here; later title save callbacks are outside this finite section."
+  ],
+  "reused_evidence": [
+    {
+      "path": "server/contracts/batches/issue-query-transport-coverage.json",
+      "sha256": "3d4401929eee7294bc9f706a5c738a074300faffc6df01ec9275184d8a5be380",
+      "source_hash_checks": [
+        {
+          "path": "packages/core/issues/queries.ts",
+          "sha256": "10d939b302cbeca9280944c5b5ad0e3e8e042130d2c714496a6b6da6daf53c3e",
+          "matches": true
+        },
+        {
+          "path": "packages/core/projects/queries.ts",
+          "sha256": "39315862d7770c602ebfda690e8dc691b6732cd833a36975a8638ba3ff25a0d6",
+          "matches": true
+        },
+        {
+          "path": "packages/core/workspace/queries.ts",
+          "sha256": "1b16ae9e020e75a5a92cebc5270a14c58d97f6b7b0fe033d2f1d2c2d837d093a",
+          "matches": true
+        },
+        {
+          "path": "packages/core/issue-statuses/queries.ts",
+          "sha256": "4fdf01e78b7a60b42272518d2feb160ade1fc773f59a75f559f675f03f4a904d",
+          "matches": true
+        }
+      ],
+      "reuse": "Hash validation only; semantic dependency mapping remains pending"
+    },
+    {
+      "path": "server/contracts/batches/issue-mutations-transport-coverage.json",
+      "sha256": "43c8266c0e7248f5f12b8736bf795e424ab2771f21bea3eac4b210bf89dbd70a",
+      "source_hash_checks": [
+        {
+          "path": "packages/core/issues/mutations.ts",
+          "sha256": "9b81f4b0b396a1d714b40c42115eb95af59a56b28e1ce515774f691c6770de4e",
+          "matches": true
+        },
+        {
+          "path": "packages/views/modals/create-issue.tsx",
+          "sha256": "063ee4b223b0212f9575e8faa912304546810e579420e8eaef6d4ffc08336043",
+          "matches": true
+        },
+        {
+          "path": "packages/core/labels/mutations.ts",
+          "sha256": "33294dde9f3402f3469d4adef66162a65018c7e2c9cff1fd0bdd868595bfd043",
+          "matches": true
+        },
+        {
+          "path": "packages/core/issue-workflows/hooks.ts",
+          "sha256": "76c17295fbf0f71ef797580a1ed6fd1392d0aa2d27303e2a3cf9006aef46b529",
+          "matches": true
+        },
+        {
+          "path": "packages/core/issue-workflows/queries.ts",
+          "sha256": "f3845150af57564511f5ac2e3f6b2b96ffd3d35352001c8484a62d3514ab3185",
+          "matches": true
+        },
+        {
+          "path": "packages/core/issue-statuses/hooks.ts",
+          "sha256": "6a46a26af0f7d647b8c2a95188c01e6d79d77dce89f29af8766ca891b13856ae",
+          "matches": true
+        },
+        {
+          "path": "packages/core/issue-statuses/queries.ts",
+          "sha256": "4fdf01e78b7a60b42272518d2feb160ade1fc773f59a75f559f675f03f4a904d",
+          "matches": true
+        },
+        {
+          "path": "packages/core/properties/queries.ts",
+          "sha256": "026994a0e30c6943515ccdc0f915e81a1c373be48fc5d0babf98526b55302aa5",
+          "matches": true
+        },
+        {
+          "path": "packages/core/workspace/hooks.ts",
+          "sha256": "7531c31b1caa51b0254eff7738c3ed14cd831a467c311d9aa8cce3ddff2964d3",
+          "matches": true
+        },
+        {
+          "path": "packages/views/workflows/step-handler.ts",
+          "sha256": "45cea49d41dfdcc339638d2a70fe020908ff64ce32db452916f7f30e293026c5",
+          "matches": true
+        },
+        {
+          "path": "packages/views/modals/source-context-preview.tsx",
+          "sha256": "231e9be98189a1f2f0d712d2eb222e6e0f255e803dc8b1d9149536b1358c0aa6",
+          "matches": true
+        },
+        {
+          "path": "packages/core/api/client.ts",
+          "sha256": "779bb65b5b7ead815836f7c704ec3c370bafae203e4f92119fadce93e982a4d7",
+          "matches": true
+        },
+        {
+          "path": "packages/views/issues/components/comment-card.tsx",
+          "sha256": "7a73b902e970cd7582952cca944c342fff36a04d4e4fc087412c5a913678e8d6",
+          "matches": true
+        },
+        {
+          "path": "packages/views/issues/actions/issue-actions-menu-items.tsx",
+          "sha256": "d06938bc8aed3eea77c52a94bb54ea9eacd238de1894880a1a253a08bed6c210",
+          "matches": true
+        },
+        {
+          "path": "packages/core/issues/cache-coordinator.ts",
+          "sha256": "70108d123cb72357156bac5077f30ae263d782684ac39ea69622d5b285fa020c",
+          "matches": true
+        },
+        {
+          "path": "packages/core/issues/cache-helpers.ts",
+          "sha256": "cbb6f0199247f45d53edea6d949d991061b1b44aa23fc19e7881a86fdc066a37",
+          "matches": true
+        },
+        {
+          "path": "packages/core/issues/surface/membership.ts",
+          "sha256": "b83ea287e17646a5f8d6f96f55c579bc5a43a0023e8240e5ddc89bb1714648c0",
+          "matches": true
+        },
+        {
+          "path": "packages/core/issues/status-category.ts",
+          "sha256": "2bb7ccdfc42e10c75e81b14421110ebd360dc46a76f563b0cb5c5e69c9caa94b",
+          "matches": true
+        },
+        {
+          "path": "packages/core/inbox/ws-updaters.ts",
+          "sha256": "710af5cdd2f59c397d6f9a1b16146b923d08f70c0f619181074503db0f81c175",
+          "matches": true
+        },
+        {
+          "path": "packages/core/inbox/queries.ts",
+          "sha256": "4612025ba86f4e32cb272acb366861d824988ba6fa7648df230e425072a4454d",
+          "matches": true
+        },
+        {
+          "path": "packages/core/issues/queries.ts",
+          "sha256": "10d939b302cbeca9280944c5b5ad0e3e8e042130d2c714496a6b6da6daf53c3e",
+          "matches": true
+        },
+        {
+          "path": "packages/core/projects/queries.ts",
+          "sha256": "39315862d7770c602ebfda690e8dc691b6732cd833a36975a8638ba3ff25a0d6",
+          "matches": true
+        },
+        {
+          "path": "packages/core/workspace/queries.ts",
+          "sha256": "1b16ae9e020e75a5a92cebc5270a14c58d97f6b7b0fe033d2f1d2c2d837d093a",
+          "matches": true
+        },
+        {
+          "path": "packages/core/issues/ws-updaters.ts",
+          "sha256": "137eff80c057f21056bbc368ad1a59090289e6d2bac470e069d0ae3b8bf24c33",
+          "matches": true
+        },
+        {
+          "path": "packages/core/issues/delete-cache.ts",
+          "sha256": "06063942dde73286312d7e82ad1091207d98a20f0a77903c04bfcdcd85ce4088",
+          "matches": true
+        },
+        {
+          "path": "packages/core/issues/stores/recent-issues-store.ts",
+          "sha256": "ec12a6e98d24acfc35630fcdd1c448fda35be0cfa1708716886a2ce3b381f785",
+          "matches": true
+        },
+        {
+          "path": "packages/core/platform/storage.ts",
+          "sha256": "75867acb53d6ba44c1617f7a770bb765955a4ace19b9bb44e1873cf9ee1556b2",
+          "matches": true
+        },
+        {
+          "path": "packages/core/agents/queries.ts",
+          "sha256": "025f015886abe362104b169f55c1504ecfba0e1bb01c9059b31618274f913d64",
+          "matches": true
+        },
+        {
+          "path": "packages/core/inbox/filters.ts",
+          "sha256": "085a7b7bba07a9f6eee46ee102bbb4e13eeabb37312e4f1c96ae167be9b24342",
+          "matches": true
+        },
+        {
+          "path": "packages/core/labels/queries.ts",
+          "sha256": "ece104fc62253b55ced08b4e1453a17faea01f2f9f36206c8dea71c765eb89d0",
+          "matches": true
+        },
+        {
+          "path": "packages/views/issues/components/inline-comment-run.tsx",
+          "sha256": "d2d6d48c80b5307898426677c9bb817c7461b69a7f362e5b7eb8ce1dc51491c3",
+          "matches": true
+        },
+        {
+          "path": "packages/core/chat/queries.ts",
+          "sha256": "7cf8eac14be017406936c6b0eb46dba319db13095a41077c5ff6527cc9c62f3d",
+          "matches": true
+        },
+        {
+          "path": "packages/core/plugins/queries.ts",
+          "sha256": "9af5000968a140b65bc015bb67794e9d3e394cdf05611a7d9eef8b9abf4fbee5",
+          "matches": true
+        },
+        {
+          "path": "packages/views/common/task-transcript/use-trace-issue-labels.ts",
+          "sha256": "eb08808fcf5c7ad3ad430e88faa2119badd39f67f62c8580a44604c7724ddd71",
+          "matches": true
+        },
+        {
+          "path": "packages/views/common/task-transcript/trace-issue-labels.ts",
+          "sha256": "c7efacc397b06a4621c3436c89166e13b6d37c53a7b102605ff424c084b04f57",
+          "matches": true
+        },
+        {
+          "path": "packages/core/issues/subscribed.ts",
+          "sha256": "e17fcc73e4762d74379067581d7b7645b8334b12e6b1bd5ed8dad68b6103380d",
+          "matches": true
+        },
+        {
+          "path": "packages/core/issues/timeline-sort.ts",
+          "sha256": "c1a9ddae839cf26b0ca1103c2673b386cdbd7da4f3e9ba0c1a31a2e35c168e15",
+          "matches": true
+        },
+        {
+          "path": "packages/core/issues/comment-deletion.ts",
+          "sha256": "13e82cf958bbfdb59d5659ba9b36b7d0e23a8979574b5822a84888c1a00d79e6",
+          "matches": true
+        }
+      ],
+      "reuse": "Hash validation only; semantic dependency mapping remains pending"
+    },
+    {
+      "path": "server/contracts/batches/issue-detail-query-section.json",
+      "sha256": "d32ba85c3456f19e2601bb48a88c631e58008e8356245a5a3d95f2df864c5fee",
+      "source_hash_checks": [
+        {
+          "path": "packages/views/issues/components/issue-detail.tsx",
+          "sha256": "afbc077580392ae3b7ec41e28c087ee215dc3103c426f505fee9d96f5d8f9f1a",
+          "matches": true
+        },
+        {
+          "path": "packages/views/issues/hooks/use-issue-timeline.ts",
+          "sha256": "7feb9d4ee652aafd3cf02cfda249b97ed4551e70d40914705bb0d97d1b33192b",
+          "matches": true
+        },
+        {
+          "path": "packages/views/issues/hooks/use-issue-reactions.ts",
+          "sha256": "f135ef80116b02c1253908602414426cd25e9cf46a9d13651cb4404446cc97b4",
+          "matches": true
+        },
+        {
+          "path": "packages/views/issues/hooks/use-issue-subscribers.ts",
+          "sha256": "0611848704fe0ed326df321697511c6c336e94f8a20398ec5c81de75305efafc",
+          "matches": true
+        },
+        {
+          "path": "packages/core/workspace/hooks.ts",
+          "sha256": "7531c31b1caa51b0254eff7738c3ed14cd831a467c311d9aa8cce3ddff2964d3",
+          "matches": true
+        },
+        {
+          "path": "packages/core/github/use-github-settings.ts",
+          "sha256": "177a1f192f565ce12520c2ab4d2c1629af95909ef049dfa1bbdbdccbf26e8515",
+          "matches": true
+        },
+        {
+          "path": "packages/core/paths/hooks.tsx",
+          "sha256": "b10176beb112541c91a92551ddc5e1db6e07afa5f66a0221f934fda59ca750a5",
+          "matches": true
+        },
+        {
+          "path": "packages/core/issue-statuses/hooks.ts",
+          "sha256": "6a46a26af0f7d647b8c2a95188c01e6d79d77dce89f29af8766ca891b13856ae",
+          "matches": true
+        },
+        {
+          "path": "packages/views/issues/utils/status-label.ts",
+          "sha256": "15b642495cedbc22414e2a1d99ab2c350871c8bb6d919be46f22f00874bb1f54",
+          "matches": true
+        },
+        {
+          "path": "packages/views/editor/use-editor-upload.ts",
+          "sha256": "577b4d53238fb342b44c63108a72c89e16c80b22e90fa0823dbcf3614f37c7c8",
+          "matches": true
+        },
+        {
+          "path": "packages/core/plugins/queries.ts",
+          "sha256": "9af5000968a140b65bc015bb67794e9d3e394cdf05611a7d9eef8b9abf4fbee5",
+          "matches": true
+        }
+      ],
+      "reuse": "Hash validation only; semantic dependency mapping remains pending"
+    },
+    {
+      "path": "server/contracts/batches/issue-detail-helper-sections.json",
+      "sha256": "6602827dcae48895a5d575273c4f0a5d991affcae0962223782259b90ba0d19f",
+      "source_hash_checks": [
+        {
+          "path": "packages/views/issues/components/issue-detail.tsx",
+          "sha256": "afbc077580392ae3b7ec41e28c087ee215dc3103c426f505fee9d96f5d8f9f1a",
+          "matches": true
+        }
+      ],
+      "reuse": "Hash validation only; semantic dependency mapping remains pending"
+    },
+    {
+      "path": "server/contracts/batches/deliverable-transport-coverage.json",
+      "sha256": "1cda60587c666955b84616320dd3cf7449e3be6aa7436bb1d89035a90b342f5d",
+      "source_hash_checks": [
+        {
+          "path": "packages/views/issues/components/deliverables/attachment-versions.tsx",
+          "sha256": "89dc2f3c59eaf6d7e36a39c9bc4532a985992186210e0cece285f8e7db8365cd",
+          "matches": true
+        },
+        {
+          "path": "packages/views/issues/components/deliverables/deliverable-details.tsx",
+          "sha256": "7d9716f8f763a3e2f8d4bce9264461fd36eceef57f97b2c02eecac8d908d1b45",
+          "matches": true
+        },
+        {
+          "path": "packages/views/issues/components/deliverables/deliverable-link.tsx",
+          "sha256": "21a49f933d0793a61c6dddbe472a4854cfebec3ab5beca4e48c45e02fa223e52",
+          "matches": true
+        },
+        {
+          "path": "packages/views/issues/components/deliverables/deliverables-overview.tsx",
+          "sha256": "10182455ff84dcc49e8db239ac28e72bf0594b8f92fb22559b30e2cf10c4a169",
+          "matches": true
+        },
+        {
+          "path": "packages/views/issues/components/deliverables/version-badge.tsx",
+          "sha256": "be018c9958a1bfd36de8cbd04b12ce59f188296d6f890f24f3b6951901369002",
+          "matches": true
+        }
+      ],
+      "reuse": "Hash validation only; semantic dependency mapping remains pending"
+    },
+    {
+      "path": "server/contracts/batches/issue-surface-controller-closure.json",
+      "sha256": "1f467b6fdc6eb737611ce217efcedf487d9ca2692b00d8650c8076678f01af57",
+      "source_hash_checks": [
+        {
+          "path": "packages/views/issues/surface/issue-surface.tsx",
+          "sha256": "ee424febe23f9110abd2a3b2d6e88de8b9df5aa76dfe14ec675c72f428568f5d",
+          "matches": true
+        },
+        {
+          "path": "packages/views/issues/surface/use-issue-surface-controller.ts",
+          "sha256": "8871358a471ec6a9d5d124d1851a4b8bb373af9eda022eda7bdcb7021ae78dd6",
+          "matches": true
+        },
+        {
+          "path": "packages/core/issues/stores/surface-view-store.ts",
+          "sha256": "5d5956d9b841d26dedafb5a782a3130127d55b1edee6c75cf182c91bc5e80347",
+          "matches": true
+        },
+        {
+          "path": "packages/views/issues/surface/selection-context.tsx",
+          "sha256": "7370aca07cfd9afe6e667e43e60ed62dc14be989dcd39e1105d867cbedd1af1a",
+          "matches": true
+        },
+        {
+          "path": "packages/core/issue-views/use-active-view.ts",
+          "sha256": "ae09151fbb1d411fe0844eb5ba1c2b7b7afce0495fea6a37afeeddaf0b5ea312",
+          "matches": true
+        },
+        {
+          "path": "packages/core/issues/wakeups.ts",
+          "sha256": "3a34b9dae9fef802c0e2137da5f41222c1c8c3aa0446fb9eedee2c0a92941249",
+          "matches": true
+        },
+        {
+          "path": "packages/core/issue-views/queries.ts",
+          "sha256": "5f04125920259ec0794cbf2b0813a892c07183c97b1a1227ae0049c152bd79b4",
+          "matches": true
+        },
+        {
+          "path": "packages/views/issues/surface/use-issue-surface-data.ts",
+          "sha256": "f061b37e6a133df4da3feca59eec8cb9821879e1aec947c2f1de0ba3f5d3321a",
+          "matches": true
+        },
+        {
+          "path": "packages/views/issues/utils/workflow-columns.ts",
+          "sha256": "410de2e9be4a2156ec7e8f2bab9847c3d730f27f227de9956e4beaa5cb07c435",
+          "matches": true
+        },
+        {
+          "path": "packages/core/issues/surface/filter-dependency.ts",
+          "sha256": "2a7f47faf6f23a13b2898d0291c04891faf1a0051ec80911b4592aa76c2d78a5",
+          "matches": true
+        },
+        {
+          "path": "packages/core/issues/unread.ts",
+          "sha256": "841b7428051c81d3d3f83f2d4ff5195ebf2989c8772b42b13b2940a999ac92b1",
+          "matches": true
+        },
+        {
+          "path": "packages/views/issues/surface/use-issue-surface-actions.ts",
+          "sha256": "8d511d0e0182281313aab37e7fba0e29d8428fbcb7e4306e3dd35d3d68a73789",
+          "matches": true
+        },
+        {
+          "path": "packages/core/issue-workflows/hooks.ts",
+          "sha256": "76c17295fbf0f71ef797580a1ed6fd1392d0aa2d27303e2a3cf9006aef46b529",
+          "matches": true
+        },
+        {
+          "path": "packages/core/issue-workflows/queries.ts",
+          "sha256": "f3845150af57564511f5ac2e3f6b2b96ffd3d35352001c8484a62d3514ab3185",
+          "matches": true
+        },
+        {
+          "path": "packages/core/platform/workspace-storage.ts",
+          "sha256": "86f0f2ab838823d3c5dd10de0126c5095e815cb8c34a000e0ba04b8d015cf5bb",
+          "matches": true
+        },
+        {
+          "path": "packages/core/issue-views/active-view-store.ts",
+          "sha256": "638e8244870fa3f3a9e2539c1de142ee5f32fd1329805ecbd6e8d9f1df27c16e",
+          "matches": true
+        },
+        {
+          "path": "packages/core/modals/store.ts",
+          "sha256": "4ec4b6d57279d8cb0ad07728cdf6548d076bbc4fd1804ad6eddc94f36c8c6120",
+          "matches": true
+        },
+        {
+          "path": "packages/core/platform/storage.ts",
+          "sha256": "75867acb53d6ba44c1617f7a770bb765955a4ace19b9bb44e1873cf9ee1556b2",
+          "matches": true
+        },
+        {
+          "path": "packages/core/issues/surface/query-plan.ts",
+          "sha256": "02b3524ac8f4e75748c00f1f12acca7d706c34c6575d35b199973f1b19e7aed0",
+          "matches": true
+        },
+        {
+          "path": "packages/core/issues/surface/scope.ts",
+          "sha256": "d527301bd97d58354657c79fefb2fc97d550af136d32a7e486061ed2fefcc732",
+          "matches": true
+        },
+        {
+          "path": "packages/core/api/client.ts",
+          "sha256": "779bb65b5b7ead815836f7c704ec3c370bafae203e4f92119fadce93e982a4d7",
+          "matches": true
+        },
+        {
+          "path": "packages/core/issues/stores/view-store.ts",
+          "sha256": "69d8fb7c61c9dde00b58d579e9eeb7cf8ff3f526043f2e2aadf7ac3981c92285",
+          "matches": true
+        }
+      ],
+      "reuse": "Hash validation only; semantic dependency mapping remains pending"
+    },
+    {
+      "path": "server/contracts/batches/draft-attachment-transport-coverage.json",
+      "sha256": "496e9ff6f30b545e289ae4212951f2134b359510b0c4797621d7dc1889ef80e3",
+      "source_hash_checks": [
+        {
+          "path": "packages/core/drafts/cleanup-registry.ts",
+          "sha256": "1d97d67851082ea0459f61276d19bb149a79253386e755dbf456b6af40875e5b",
+          "matches": true
+        },
+        {
+          "path": "packages/core/drafts/draft-upload.ts",
+          "sha256": "2eb1bc0101d2757978ce69da585bfc058372766e5e81c718d13a54ef8a0fd11d",
+          "matches": true
+        },
+        {
+          "path": "packages/core/drafts/index.ts",
+          "sha256": "bdf316dea694d425a6eb74da9ee779445a8f92b6fe672ef79446aabc209a8872",
+          "matches": true
+        },
+        {
+          "path": "packages/core/drafts/upload-coordinator.ts",
+          "sha256": "e69aeeaf2e832f20945133d4c5e268dbd21ada47411a7923ab4e1f835134aaf4",
+          "matches": true
+        },
+        {
+          "path": "packages/core/hooks/use-file-upload.ts",
+          "sha256": "82ab928c6b762acc38c70b1a264bd9a5cafd62846ff27dafbb0bc65d8d5adf24",
+          "matches": true
+        },
+        {
+          "path": "packages/core/attachments/deliverables.ts",
+          "sha256": "dcdacf03a5886dcbcc8749c5f41a2b627166b9164cf0df141302cd676e095322",
+          "matches": true
+        },
+        {
+          "path": "packages/core/attachments/image-sequence.ts",
+          "sha256": "ebed6accf589fd16099425cafea69d0ea0d9411d08215e44a15ab74753dc8f85",
+          "matches": true
+        },
+        {
+          "path": "packages/views/editor/use-coordinated-uploads.ts",
+          "sha256": "42c31a37c8c8c8561d041615bcaec71753800ec6594a3887f9cfd25fa571689c",
+          "matches": true
+        },
+        {
+          "path": "packages/views/editor/use-download-attachment.ts",
+          "sha256": "173687e4ee4aaa437392c6058b0eaefe6c099f709d0e3b1c7c2c4831f71ff97f",
+          "matches": true
+        },
+        {
+          "path": "packages/views/editor/use-upload-gate.ts",
+          "sha256": "b46e4351cfc8d176a81b6c9f8c60a9ad59c97186c6613b780ee7154a0f47c369",
+          "matches": true
+        },
+        {
+          "path": "packages/views/editor/attachment-download-context.tsx",
+          "sha256": "f2a85f9dd2e5ee3569f6dde0cfe9c88d699005f9264993e2069de8289b27ce7e",
+          "matches": true
+        }
+      ],
+      "reuse": "Hash validation only; semantic dependency mapping remains pending"
+    },
+    {
+      "path": "server/contracts/batches/issue-detail-local-render-closure.json",
+      "sha256": "30d199d65a5fb3c087e7e713a7bd8b851f511577390163b473a446cd3b98c291",
+      "reuse": "Root-accepted finite deliverable/session/upload/display callback closure; preserve explicit descendant and third-party boundaries.",
+      "root_review": "accepted finite named callback transport scope after independent source review and checked reused source hashes; whole source remains false"
+    },
+    {
+      "path": "server/contracts/batches/issue-detail-render-section.json",
+      "sha256": "dc5b91bd8db87cfcd1ee65667a9907230eb9d0188d4c0b2a1026888994c4bd1d",
+      "reuse": "Root-accepted finite deliverable/session/upload/display callback closure; preserve explicit descendant and third-party boundaries.",
+      "root_review": "accepted finite render section; no whole IssueDetail or backend completion claim"
+    }
+  ],
+  "remaining_own_helper_definitions": [
+    {
+      "name": "setSubIssuesCollapsed",
+      "line": 2508,
+      "status": "root reviewed: local state/collections/DOM/scroll/panel interface; no extra HTTP beyond recorded query/host boundaries"
+    },
+    {
+      "name": "jumpToSubIssues",
+      "line": 2526,
+      "status": "root reviewed: local state/collections/DOM/scroll/panel interface; no extra HTTP beyond recorded query/host boundaries"
+    },
+    {
+      "name": "sidebarChildIssues",
+      "line": 2540,
+      "status": "root reviewed: local state/collections/DOM/scroll/panel interface; no extra HTTP beyond recorded query/host boundaries"
+    },
+    {
+      "name": "handleToggleSelectAllChildren",
+      "line": 2568,
+      "status": "root reviewed: local state/collections/DOM/scroll/panel interface; no extra HTTP beyond recorded query/host boundaries"
+    },
+    {
+      "name": "deep-link landing effect",
+      "line": 2579,
+      "status": "root reviewed: local state/collections/DOM/scroll/panel interface; no extra HTTP beyond recorded query/host boundaries"
+    },
+    {
+      "name": "optional property seeding effect",
+      "line": 2900,
+      "status": "root reviewed: local state/collections/DOM/scroll/panel interface; no extra HTTP beyond recorded query/host boundaries"
+    },
+    {
+      "name": "addOptionalProp",
+      "line": 2936,
+      "status": "root reviewed: local state/collections/DOM/scroll/panel interface; no extra HTTP beyond recorded query/host boundaries"
+    },
+    {
+      "name": "addCustomProp",
+      "line": 2952,
+      "status": "root reviewed: local state/collections/DOM/scroll/panel interface; no extra HTTP beyond recorded query/host boundaries"
+    },
+    {
+      "name": "handleToggleSidebar",
+      "line": 2976,
+      "status": "root reviewed: local state/collections/DOM/scroll/panel interface; no extra HTTP beyond recorded query/host boundaries"
+    },
+    {
+      "name": "openWakeups",
+      "line": 2998,
+      "status": "root reviewed: local state/collections/DOM/scroll/panel interface; no extra HTTP beyond recorded query/host boundaries"
+    }
+  ],
+  "validation": {
+    "json": "parsed successfully",
+    "inventory_sha256": "2670eec069d89d20045a5bc1043d7031f2a1460a4180a0b10256315abee03d21",
+    "source_hash_checks": [
+      {
+        "path": "packages/views/issues/components/issue-detail.tsx",
+        "matches": true
+      },
+      {
+        "path": "packages/views/issues/actions/use-issue-actions.ts",
+        "matches": true
+      },
+      {
+        "path": "packages/views/issues/surface/use-issue-surface-actions.ts",
+        "matches": true
+      },
+      {
+        "path": "packages/core/issues/mutations.ts",
+        "matches": true
+      },
+      {
+        "path": "packages/core/api/client.ts",
+        "matches": true
+      },
+      {
+        "path": "packages/core/issues/queries.ts",
+        "matches": true
+      },
+      {
+        "path": "packages/core/projects/queries.ts",
+        "matches": true
+      },
+      {
+        "path": "packages/core/labels/queries.ts",
+        "matches": true
+      },
+      {
+        "path": "packages/core/properties/queries.ts",
+        "matches": true
+      },
+      {
+        "path": "packages/core/inbox/queries.ts",
+        "matches": true
+      },
+      {
+        "path": "packages/views/issues/actions/inbox-restore.tsx",
+        "matches": true
+      },
+      {
+        "path": "packages/core/inbox/filters.ts",
+        "matches": true
+      },
+      {
+        "path": "packages/core/api/client.ts",
+        "matches": true
+      }
+    ],
+    "tuple_check": "Exact inventory id/method/path_expression/route copied; invoked clients use default GET. Description client:1771 PUT preserved."
+  },
+  "root_local_helper_sources": [
+    {
+      "path": "packages/core/issues/stores/sub-issues-collapse-store.ts",
+      "sha256": "28b0bb2ba0b2497e6df1374eb03278915c04e3343e89d8e928c9f3914a75d8cd"
+    },
+    {
+      "path": "packages/views/issues/hooks/use-issue-detail-scroll-restore.ts",
+      "sha256": "92cb3027a6ddfdae165a996ee58eb58d13107fcae8e908dc33cbc2ff71f67edb"
+    },
+    {
+      "path": "packages/views/issues/utils/scroll-to-timeline-comment.ts",
+      "sha256": "199afb0bdd3632161758ebacde7c13b6a5b6d86b757aed9460cb4442767ac557"
+    }
+  ]
+}

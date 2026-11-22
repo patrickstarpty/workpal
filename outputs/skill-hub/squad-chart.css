@@ -1,0 +1,88 @@
+.cap-chart.wp-team-chart{--wp-team-chart-stub:128px;--wp-team-chart-gap:10px;margin:0 0 28px;padding:20px;border:1px solid var(--border);border-radius:var(--radius);background:var(--card);color:var(--foreground);min-width:0;font-size:12px;line-height:1.4}
+.wp-team-chart *{box-sizing:border-box}
+.wp-team-chart button{font:inherit;color:inherit;cursor:pointer}
+.wp-team-chart button:focus-visible{outline:2px solid var(--ring);outline-offset:3px}
+.wp-team-chart-caption{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:14px}
+.wp-team-chart-eyebrow{margin:0 0 3px;font-size:11px;color:var(--muted-foreground)}
+.wp-team-chart-caption h2{margin:0;font-size:18px;line-height:1.25;letter-spacing:-.035em;font-weight:600}
+.wp-team-chart-totals{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:4px 13px;max-width:48%;margin:0;color:var(--muted-foreground);font-size:11px}
+.wp-team-chart-totals span{white-space:nowrap}
+.wp-team-chart-totals strong{color:var(--foreground);font-weight:600}
+.wp-team-chart-direction,.wp-team-chart-squad-row{display:grid;grid-template-columns:var(--wp-team-chart-stub) minmax(0,1fr);gap:var(--wp-team-chart-gap)}
+.wp-team-chart-side-label{font-size:11px;color:var(--muted-foreground);padding-top:9px}
+.wp-team-chart-side-label span{display:block;margin-top:4px;font-size:11px}
+.wp-team-chart-human{justify-self:center;min-width:224px;padding:4px 24px;border:1px solid var(--border);border-radius:var(--radius);background:var(--secondary);text-align:center;display:flex;flex-direction:column;gap:1px}
+.wp-team-chart-human strong{font-size:13px;font-weight:600}
+.wp-team-chart-human span{font-size:11px;color:var(--muted-foreground)}
+.wp-team-chart-branches{position:relative;height:25px;margin-left:calc(var(--wp-team-chart-stub) + var(--wp-team-chart-gap))}
+.wp-team-chart-branches:before{content:"";position:absolute;top:0;left:50%;height:13px;border-left:1px solid var(--border)}
+.wp-team-chart-branches span{position:absolute;top:12px;left:calc((100% + var(--wp-team-chart-gap)) / var(--wp-team-chart-squad-count) / 2 - var(--wp-team-chart-gap) / 2);right:calc((100% + var(--wp-team-chart-gap)) / var(--wp-team-chart-squad-count) / 2 - var(--wp-team-chart-gap) / 2);border-top:1px solid var(--border)}
+.wp-team-chart-lineups{display:grid;grid-template-columns:repeat(var(--wp-team-chart-squad-count),minmax(0,1fr));gap:var(--wp-team-chart-gap)}
+.wp-team-chart-squad{position:relative;display:flex;flex-direction:column;min-width:0;border:1px solid var(--border);border-radius:var(--radius);padding:10px;background:var(--card)}
+.wp-team-chart-squad:before{content:"";position:absolute;top:-14px;left:50%;height:13px;border-left:1px solid var(--border)}
+.wp-team-chart-squad-button{display:flex;flex-direction:column;align-items:flex-start;gap:5px;width:100%;min-height:47px;margin:0;padding:0 0 8px;border:0;background:none;text-align:left}
+.wp-team-chart-squad-button:hover strong{text-decoration:underline;text-underline-offset:3px}
+.wp-team-chart-squad-number{font-size:11px;line-height:1;color:var(--muted-foreground);font-variant-numeric:tabular-nums}
+.wp-team-chart-squad-button strong{font-size:12px;font-weight:600;line-height:1.35;overflow-wrap:normal}
+.wp-team-chart-lead{display:flex;align-items:center;gap:6px;padding:9px 0;border-top:1px solid var(--border);font-size:11px}
+.wp-team-chart-lead small{display:block;font-size:11px;color:var(--muted-foreground)}
+.wp-team-chart-lead-dot{width:8px;height:8px;flex:none;border-radius:50%;background:var(--foreground)}
+.wp-team-chart-core{margin-top:auto}
+.wp-team-chart-core>span{display:block;font-size:11px;color:var(--muted-foreground);margin-bottom:6px}
+.wp-team-chart-role-marks{display:flex;flex-wrap:wrap;gap:4px}
+.wp-team-chart-role{position:relative;display:flex;align-items:center;gap:7px;padding:0;border:0;background:none;min-width:0;text-align:left}
+.wp-team-chart-mark{display:grid;place-items:center;flex:none;width:22px;height:22px;border:1px solid var(--border);border-radius:50%;background:var(--secondary);font-size:11px;line-height:1;color:var(--foreground)}
+.wp-team-chart-role:hover .wp-team-chart-mark{border-color:var(--foreground)}
+.wp-team-chart-role-name{position:absolute;bottom:calc(100% + 6px);left:0;z-index:3;width:max-content;max-width:200px;padding:6px 8px;border:1px solid var(--border);border-radius:var(--radius);background:var(--card);color:var(--foreground);box-shadow:0 3px 12px color-mix(in srgb,var(--foreground) 8%,transparent);font-size:11px;line-height:1.4;pointer-events:none;opacity:0}
+.wp-team-chart-role:hover .wp-team-chart-role-name,.wp-team-chart-role:focus-visible .wp-team-chart-role-name{opacity:1}
+.wp-team-chart-squad:last-child .wp-team-chart-role-name{left:auto;right:0}
+.wp-team-chart-pool-heading{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin:17px 0 5px;font-size:11px}
+.wp-team-chart-pool-heading strong{font-weight:600}
+.wp-team-chart-pool-heading>span{display:flex;align-items:center;gap:4px;color:var(--muted-foreground)}
+.wp-team-chart-legend-dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--foreground);margin-left:2px}
+.wp-team-chart-connections{border-top:1px solid var(--border)}
+.wp-team-chart-connection-row{display:grid;grid-template-columns:var(--wp-team-chart-stub) repeat(var(--wp-team-chart-squad-count),minmax(0,1fr));gap:var(--wp-team-chart-gap);min-height:27px}
+.wp-team-chart-specialist-cell{display:flex;align-items:center;padding:4px 0}
+.wp-team-chart-specialist{border:0;background:none;padding:0;text-align:left;line-height:1.3;font-size:11px!important;text-decoration-thickness:1px;text-underline-offset:3px}
+.wp-team-chart-specialist:hover{text-decoration:underline}
+.wp-team-chart-connection-cell{position:relative;display:flex;align-items:center;justify-content:center;min-width:0;background:var(--secondary);border-bottom:1px solid var(--card)}
+.wp-team-chart-connection-mark{position:relative;width:5px;height:1px;background:var(--border)}
+.wp-team-chart-connection-cell.is-connected .wp-team-chart-connection-mark{width:7px;height:7px;border-radius:50%;background:var(--foreground)}
+.wp-team-chart-note{margin:10px 0 0;font-size:11px;color:var(--muted-foreground)}
+.wp-team-chart-mobile-support,.wp-team-chart-mobile-pool{display:none}
+.wp-team-chart-a11y{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@media(max-width:900px) and (min-width:601px){.cap-chart.wp-team-chart{--wp-team-chart-stub:114px;padding:16px;--wp-team-chart-gap:8px}.wp-team-chart-squad{padding:8px}.wp-team-chart-mark{width:20px;height:20px}.wp-team-chart-role-marks{gap:3px}}
+@media(max-width:600px){
+ .cap-chart.wp-team-chart{padding:12px}
+ .wp-team-chart-caption{align-items:flex-start;flex-direction:column;gap:8px;margin-bottom:12px}
+ .wp-team-chart-totals{justify-content:flex-start;max-width:none;gap:4px 12px}
+ .wp-team-chart-direction,.wp-team-chart-squad-row{display:block}
+ .wp-team-chart-side-label{display:none}
+ .wp-team-chart-human{min-width:0;width:100%;padding:4px 12px}
+ .wp-team-chart-branches{height:16px;margin-left:0}
+ .wp-team-chart-branches:before{height:16px}
+ .wp-team-chart-branches span{display:none}
+ .wp-team-chart-lineups{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+ .wp-team-chart-squad{padding:9px}
+ .wp-team-chart-squad:before{display:none}
+ .wp-team-chart-squad-button{display:grid;grid-template-columns:13px minmax(0,1fr);align-items:baseline;gap:5px;min-height:44px}
+ .wp-team-chart-squad-button strong{font-size:12px}
+ .wp-team-chart-lead{font-size:11px;padding:6px 0}
+ .wp-team-chart-core{margin-top:0}
+ .wp-team-chart-role-marks{display:flex;gap:3px}
+ .wp-team-chart-mark{width:21px;height:21px;font-size:11px}
+ .wp-team-chart-squad:nth-child(even) .wp-team-chart-role-name{left:auto;right:0}
+ .wp-team-chart-mobile-support{display:block;margin-top:8px;padding-top:7px;border-top:1px solid var(--border);font-size:11px;color:var(--muted-foreground)}
+ .wp-team-chart-mobile-support>div{display:flex;gap:4px;margin-top:5px}
+ .wp-team-chart-mobile-support button,.wp-team-chart-mobile-pool button{padding:0;border:0;background:none;text-align:left;line-height:1.4;font-size:11px;color:var(--foreground)}
+ .wp-team-chart-mobile-support button:hover,.wp-team-chart-mobile-pool button:hover{text-decoration:underline;text-underline-offset:3px}
+ .wp-team-chart-pool-heading{margin-top:10px}
+ .wp-team-chart-desktop-legend{display:none}
+ .wp-team-chart-connections{display:none}
+ .wp-team-chart-mobile-pool{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;margin-top:9px}
+ .wp-team-chart-mobile-pool button{display:flex;align-items:center;gap:5px;min-width:0}
+ .wp-team-chart-note{margin-top:10px}
+}
+
+.cap-chart.wp-team-chart{margin:24px 0 0;padding:0 0 24px;border:0;border-bottom:1px solid var(--border);border-radius:0;background:transparent}
+.wp-team-chart-caption h2{font-size:23px;font-weight:500}

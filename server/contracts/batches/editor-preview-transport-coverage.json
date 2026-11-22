@@ -1,0 +1,192 @@
+{
+  "version": 1,
+  "scope": [
+    "packages/views/editor/attachment-card.tsx",
+    "packages/views/editor/hooks/use-inline-media-url.ts",
+    "packages/views/editor/utils/iframe-fragment-nav.ts",
+    "packages/views/editor/utils/preview.ts",
+    "packages/views/editor/styles/attachment.css",
+    "packages/views/editor/use-lazy-editor.ts",
+    "packages/views/editor/index.ts"
+  ],
+  "coverage": "bounded static full-source semantic proof for seven targets only; no global coverage or backend support claim",
+  "files": [
+    {
+      "path": "packages/views/editor/attachment-card.tsx",
+      "sha256": "0cb4128a438979ea01b2eb42c8a4fb92ae42660ba928b0a082ba32628a3e5b36",
+      "whole_source": true,
+      "disposition": "AttachmentCardChrome suppresses mouse propagation and invokes supplied preview/download/delete callbacks; upload state suppresses actions. AttachmentCard uses href only as a truthy capability sentinel, never an anchor. AttachmentFileCard selects preview before download, disables repeated downloads, formats supplied metadata locally; no metadata request or DELETE is selected here. useAttachmentDownloadState guards active keys, tracks thenables and clears on either settlement or synchronous exception. Concrete Attachment caller/download/preview closures reuse editor and draft-attachment evidence; arbitrary supplied callbacks remain a boundary."
+    },
+    {
+      "path": "packages/views/editor/hooks/use-inline-media-url.ts",
+      "sha256": "69b613f83e0ec74938db32693f0f1c7feaacdf0f5f59de2c544f4c0cce8f9bf8",
+      "whole_source": true,
+      "disposition": "useResignedInlineMedia normalizes legacy local paths then extracts UUID download identity. Re-sign only for nonempty stable download URL with an id and nonempty API base or cross-origin HTTP URL. Metadata query has 20-minute stale/GC; accepts absolute HTTP(S) non-download-shaped fresh URL. Only blobFallback plus successful metadata without signed URL enables byte query. Authenticated metadata gates cached blob reuse; pending ends on failures. Stream hook requires enabled/id/url, always refreshes metadata on mount, zero GC, retries transient failures twice with exponential delay; permanent 4xx except 408/429 suppress retries. Proxy capability requires signed-download pathname, sig and positive exp seconds. Same-origin proxy PDF uses stable download resource; other proxy PDFs fetch authenticated bytes and slice MIME to application/pdf. Other capabilities use absolutized URL; signed storage uses fresh URL; otherwise picked URL. Expiry refresh runs only within five seconds of expiry and reports changed download_url. PDF URLs revoke on replacement/unmount. Image cache refcounts authenticated consumers and revokes five minutes after final unmount; reset test helper clears maps/timers without revoking. URL parsing, slicing, maps and timers are local standard-library operations."
+    },
+    {
+      "path": "packages/views/editor/utils/iframe-fragment-nav.ts",
+      "sha256": "82cfaf010775a4f62d3ffca32e4538072be60031d9acb6fbddf5256b31ba4881",
+      "whole_source": true,
+      "disposition": "Full embedded executable script reviewed: respects defaultPrevented, requires closest anchor and nontrivial leading #, decodes safely, resolves id then escaped named anchor, leaves missing targets alone, prevents default only for found target, replaces current fragment without adding history and smooth-scrolls. withFragmentNavShim appends verbatim script to html or empty string; exposed test constant adds no transport. No postMessage in this target."
+    },
+    {
+      "path": "packages/views/editor/utils/preview.ts",
+      "sha256": "7f08ae256c65857f96b41a736bff4bfc6a4443eb99d5c11edc9eda172e989040",
+      "whole_source": true,
+      "disposition": "All tables and executable functions reviewed. extOf/baseOf normalize path basename; MIME normalization removes parameters. Text whitelist and image-sequence predicate are local data/predicate imports. Dispatch priority PDF, video, audio, image, then text allowlist, markdown, HTML, table, structured, text. structured extension wins over MIME; delimiter picks TSV; file label uppercases extension; previewability wraps dispatch. canOpenPreview permits URL-only image/PDF/video/audio, otherwise needs record. wrapsByDefault uses extension language lookup; all helpers compute values without fetching. Comments about proxy describe consumers, not calls here."
+    },
+    {
+      "path": "packages/views/editor/styles/attachment.css",
+      "sha256": "8787159342733de8a9c1f74c5e23aa72e546e9f6240d4cd244a5cab48629a627",
+      "whole_source": true,
+      "disposition": "CSS declarations, selectors, media condition and keyframes are layout/appearance only. Structural resource references: url() = []; @import = []. var(), min(), calc(), color-mix(), blur() and cubic-bezier() are CSS functions, not URL loads."
+    },
+    {
+      "path": "packages/views/editor/use-lazy-editor.ts",
+      "sha256": "76cb3677219f396e56dac22faf85ba9b6d768642762a112a55f634d8b7e9a2b1",
+      "whole_source": true,
+      "disposition": "All useLazyEditor callbacks/effect reviewed: resetKey render reset clears focus and queued Files; activation mounts editor, focuses immediately if ready or after ready commit; anchor focus wins over coordinate then generic focus. onReady changes state. uploadOrQueue invokes optional injected editorRef.uploadFile when ready or queues File objects and activates; effect drains queue once ready. No File bytes read and no request selected. Concrete editor upload contract reuses existing use-editor-upload/coordinated multipart evidence; arbitrary imperative ref remains boundary."
+    },
+    {
+      "path": "packages/views/editor/index.ts",
+      "sha256": "0166619b51bb281338f8034960b41c568ef27bc7152432e72d262436683e3adf",
+      "whole_source": true,
+      "disposition": "Entire barrel reviewed: static value/type re-exports only. Re-export evaluation may load modules and their dependencies according to bundler semantics; it does not call exported hooks/components. No dynamic import expression or lazy factory in this file or use-lazy-editor. Do not invent API records for module/chunk loads; exported downstream behavior is bounded by reused audits, not whole transitive module coverage."
+    },
+    {
+      "path": "packages/core/types/attachment-url.ts",
+      "sha256": "c83769130ad8d227561077c5d10c8183f5f541aadbefed65dcc35023d0d2109f",
+      "whole_source": false,
+      "disposition": "Supporting concrete helper bodies only; no whole-source claim."
+    },
+    {
+      "path": "packages/views/editor/hooks/use-attachment-download-state.ts",
+      "sha256": "68f2884b362e9d82b2606d10bfbf01720de8681f998d4b778992a906c91f3713",
+      "whole_source": false,
+      "disposition": "Supporting concrete helper bodies only; no whole-source claim."
+    },
+    {
+      "path": "packages/core/api/client.ts",
+      "sha256": "779bb65b5b7ead815836f7c704ec3c370bafae203e4f92119fadce93e982a4d7",
+      "whole_source": false,
+      "disposition": "Supporting concrete helper bodies only; no whole-source claim."
+    },
+    {
+      "path": "packages/views/editor/html-preview-body.tsx",
+      "sha256": "59ba6eabda79cc461a20d5630475d52954c67bdaa486a2eae13cfe667a464afa",
+      "whole_source": false,
+      "disposition": "Supporting concrete helper bodies only; no whole-source claim."
+    },
+    {
+      "path": "packages/views/editor/code-block-iframe.tsx",
+      "sha256": "5b09e5a5c03566e31f804e351813eaec5b15dd7acb7f627a0cb5a640ab5f89d9",
+      "whole_source": false,
+      "disposition": "Supporting concrete helper bodies only; no whole-source claim."
+    },
+    {
+      "path": "packages/views/editor/hooks/use-html-preview-location.ts",
+      "sha256": "6b765ab58f3ca339502ca8d1be383dd5f09a937a6ecbc9dabbed7fd2aa5e40c5",
+      "whole_source": false,
+      "disposition": "Supporting concrete helper bodies only; no whole-source claim."
+    },
+    {
+      "path": "packages/views/editor/utils/iframe-location-bridge.ts",
+      "sha256": "e7b616c597390aec4d6c8d569067fdcf24d07356183b748dafad3e5fd75ef87c",
+      "whole_source": false,
+      "disposition": "Supporting concrete helper bodies only; no whole-source claim."
+    },
+    {
+      "path": "packages/views/editor/utils/iframe-width-bridge.ts",
+      "sha256": "2b5e81b4ed435b1b63f0e66482ae231a4d4ead45589c83c340b379e9165646af",
+      "whole_source": false,
+      "disposition": "Supporting concrete helper bodies only; no whole-source claim."
+    },
+    {
+      "path": "packages/views/editor/attachment-preview-modal.tsx",
+      "sha256": "bcaa6ff9aa7a20ea9a9c03d2f3593351931c6028e0d0fb8d12305284b045cb90",
+      "whole_source": false,
+      "disposition": "Supporting concrete helper bodies only; no whole-source claim."
+    }
+  ],
+  "edges": [
+    {
+      "source": "packages/views/editor/hooks/use-inline-media-url.ts:109",
+      "api_method": "getAttachment",
+      "kind": "query-or-mutation",
+      "inventory": [
+        {
+          "id": "client:4438",
+          "method": "GET",
+          "path_expression": "/api/attachments/${id}",
+          "route": {
+            "method": "GET",
+            "path": "/api/attachments/{id}"
+          }
+        }
+      ],
+      "disposition": "conditional inline re-sign"
+    },
+    {
+      "source": "packages/views/editor/hooks/use-inline-media-url.ts:129",
+      "api_method": "getAttachmentBlob",
+      "kind": "query-or-mutation",
+      "inventory": [
+        {
+          "id": "client:4508",
+          "method": "GET",
+          "path_expression": "/api/attachments/${id}/download",
+          "route": {
+            "method": "GET",
+            "path": "/api/attachments/{id}/download"
+          }
+        }
+      ],
+      "disposition": "conditional inline authenticated blob fallback"
+    },
+    {
+      "source": "packages/views/editor/hooks/use-inline-media-url.ts:187",
+      "api_method": "getAttachment",
+      "kind": "query-or-mutation",
+      "inventory": [
+        {
+          "id": "client:4438",
+          "method": "GET",
+          "path_expression": "/api/attachments/${id}",
+          "route": {
+            "method": "GET",
+            "path": "/api/attachments/{id}"
+          }
+        }
+      ],
+      "disposition": "active stream metadata refresh"
+    },
+    {
+      "source": "packages/views/editor/hooks/use-inline-media-url.ts:207",
+      "api_method": "getAttachmentBlob",
+      "kind": "query-or-mutation",
+      "inventory": [
+        {
+          "id": "client:4508",
+          "method": "GET",
+          "path_expression": "/api/attachments/${id}/download",
+          "route": {
+            "method": "GET",
+            "path": "/api/attachments/{id}/download"
+          }
+        }
+      ],
+      "disposition": "cross-origin proxy PDF bytes"
+    }
+  ],
+  "reused_evidence": [
+    "server/contracts/batches/core-query-transport-coverage.json",
+    "server/contracts/batches/editor-transport-coverage.json",
+    "server/contracts/batches/draft-attachment-transport-coverage.json",
+    ".superpowers/sdd/2026-11-21-python-go-backend/task1-direct-transports.md"
+  ],
+  "boundaries": "Concrete closure and boundaries: attachment-url helpers strip query/fragment, parse HTTP pathname and validate UUID; legacy /uploads/workspaces/<uuid>/<uuid>.<ext> becomes stable /api/attachments/<id>/download then API-base prefix. These recognizers do not validate arbitrary hosts as trusted; unmatched URLs pass through. Protocol-relative URLs are not prefixed. Browser resources can use signed-download capabilities, arbitrary server/input storage hosts, relative URLs, data: or blob:; these are not authenticated ApiClient calls. Existing inventory API IDs are not assigned to arbitrary-host resource loads.\n\nDownload closure reuses use-download-attachment: click-time getAttachment client:4438 or markdown resolver getAttachmentForDownload client:4447, then injected desktopAPI.downloadURL or temporary web anchor with forced URL, signed capability, or workspace-qualified stable download. openExternal is native injection/web window.open. Card callbacks alone establish none of these endpoints. Preview modal text query uses client:4475 GET /api/attachments/{id}/content; blob uses client:4508; images/video/audio/PDF use native resources. No backend support is asserted.\n\nHtmlPreviewBody composes fragment shim then location bridge and CodeBlockIframe srcDoc, sandbox allow-scripts without allow-same-origin. Location bridge is prepended after leading doctype, escapes < in JSON initial address, wraps pushState/replaceState, reports query/hash via postMessage(*), handles query-link reload requests and hash changes. Parent checks event.source against current frame window, marker/type/string length <=2048 and leading ?/#; navigate requests require active userActivation where available. Same-query nonempty hash posts to existing frame; other navigation/reload bumps frame key and recreates srcdoc. Frame script accepts hash messages only from parent. Width bridge separately reports bounded finite widths and document token; messages are local cross-window communication, not HTTP. Sandbox does not enumerate or prohibit all authored subresource/network requests: arbitrary uploaded HTML/scripts may reference arbitrary hosts; finite backend route union cannot describe them. Standard React/query hooks, URL/Blob/DOM/history/CSS APIs and injected callbacks are explicit library/browser boundaries, not invented application APIs.\n\nStatic module loading: no import() exists in the seven targets. Static barrel dependencies and bundler chunk loading are module loads; no request method/path is inferred from their names. This bounded proof does not claim every re-export implementation is exhaustively audited.\n",
+  "css_references": {
+    "url": [],
+    "import": []
+  }
+}

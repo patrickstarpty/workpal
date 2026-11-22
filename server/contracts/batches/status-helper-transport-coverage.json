@@ -1,0 +1,132 @@
+{
+  "version": 1,
+  "coverage": {
+    "complete": false,
+    "global_complete": false,
+    "scope": [
+      "packages/views/issues/utils/status-label.ts",
+      "packages/views/issues/utils/status-options.ts",
+      "packages/core/issues/status-category.ts",
+      "packages/core/issues/canonical-id.ts",
+      "packages/core/issues/surface/filter-dependency.ts"
+    ]
+  },
+  "method": "Static source audit only; no runtime, tests, network, git or shared inventory mutation.",
+  "files": [
+    {
+      "path": "packages/views/issues/utils/status-label.ts",
+      "sha256": "15b642495cedbc22414e2a1d99ab2c350871c8bb6d919be46f22f00874bb1f54",
+      "lines": 43,
+      "read_scope": "entire file, untruncated",
+      "status": "closed",
+      "anchors": [
+        "packages/views/issues/utils/status-label.ts:25"
+      ],
+      "finding": "useStatusLabel \u2192 useIssueStatuses \u2192 issueStatusListOptions \u2192 api.listIssueStatuses(true). Built-in/category translation and entryOf lookup are local; duplicate entryOf fallback does not fetch."
+    },
+    {
+      "path": "packages/views/issues/utils/status-options.ts",
+      "sha256": "3e4f80d2f9245b5e47a02856d8cf8b0c6da7a46267d997c72cddccf0034c0097",
+      "lines": 147,
+      "read_scope": "entire file, untruncated",
+      "status": "closed",
+      "anchors": [
+        "packages/views/issues/utils/status-options.ts:46",
+        "packages/views/issues/utils/status-options.ts:109"
+      ],
+      "finding": "useStatusOptions and useStatusLabel observe catalog; useIssueStatusOptions also observes workflow list for nonempty wsId and project list only with nonempty wsId/projectId. Sorting, archived inclusion, workflow step mapping and insertion of current Default status are local. null project selects Default; undefined returns catalog when no listed workflow. Query observers do not guarantee one HTTP request per hook invocation."
+    },
+    {
+      "path": "packages/core/issues/status-category.ts",
+      "sha256": "2bb7ccdfc42e10c75e81b14421110ebd360dc46a76f563b0cb5c5e69c9caa94b",
+      "lines": 198,
+      "read_scope": "entire file, untruncated",
+      "status": "closed-local-contract",
+      "anchors": [
+        "packages/core/issues/status-category.ts:21",
+        "packages/core/issues/status-category.ts:39",
+        "packages/core/issues/status-category.ts:46",
+        "packages/core/issues/status-category.ts:70",
+        "packages/core/issues/status-category.ts:106",
+        "packages/core/issues/status-category.ts:130",
+        "packages/core/issues/status-category.ts:148",
+        "packages/core/issues/status-category.ts:184",
+        "packages/core/issues/status-category.ts:192"
+      ],
+      "finding": "All exported functions are local synchronous category normalization, patch rewriting, set selection, sorting or predicates. pending/error are returned values, not requests. normalizeStatusPatch does not invalidate or refetch; downstream cache callers remain outside this file closure."
+    },
+    {
+      "path": "packages/core/issues/canonical-id.ts",
+      "sha256": "de6fcf914076ea66733ded5e4acb6046714dcf4489658dde57bbdb548e98c082",
+      "lines": 123,
+      "read_scope": "entire file, untruncated",
+      "status": "closed",
+      "anchors": [
+        "packages/core/issues/canonical-id.ts:10",
+        "packages/core/issues/canonical-id.ts:62"
+      ],
+      "finding": "Identifier resolver enabled only enabled && !UUID && wsId && routeId; UUID detail enabled only enabled && canonicalId && wsId. Both use issueDetailOptions \u2192 api.getIssue(encoded id). initialData seeds canonical observer; effect setQueryData seeds identifier only if absent. These are cache operations, not HTTP. Read-state retry calls selected observer refetch({cancelRefetch:false}) only on uncached non-unavailable failure, not fetching, no same-scope retry pending. ApiError 401/403/404 becomes notFound; cached data prevents loadFailed. No absolute request-count claim: cache freshness and observer configuration matter."
+    },
+    {
+      "path": "packages/core/issues/surface/filter-dependency.ts",
+      "sha256": "2a7f47faf6f23a13b2898d0291c04891faf1a0051ec80911b4592aa76c2d78a5",
+      "lines": 102,
+      "read_scope": "entire file, untruncated",
+      "status": "partial-production-callback-closure",
+      "anchors": [
+        "packages/core/issues/surface/filter-dependency.ts:28",
+        "packages/core/issues/surface/filter-dependency.ts:55",
+        "packages/core/issues/surface/filter-dependency.ts:77",
+        "packages/core/issues/surface/filter-dependency.ts:94"
+      ],
+      "finding": "Local contract fully read: inactive/defined data sources resolve, including stale data with error; false sources ignored. Undefined sources block; any failed undefined source wins over pending. retry invokes only captured failed unresolved sources, without awaiting/deduplicating/catching. combine retries captured error states only; statusCatalogSource forwards catalog.retry and exposes data only when loaded. Catalog retry closes through useIssueStatuses refetch \u2192 issueStatusListOptions \u2192 listIssueStatuses(true). Other injected callbacks require remaining caller closure described in markdown."
+    }
+  ],
+  "frontend_calls": [
+    {
+      "id": "client:4517",
+      "route": {
+        "method": "GET",
+        "path": "/api/projects"
+      },
+      "sources": [
+        "packages/core/api/client.ts:4517"
+      ]
+    },
+    {
+      "id": "client:4692",
+      "route": {
+        "method": "GET",
+        "path": "/api/issue-workflows"
+      },
+      "sources": [
+        "packages/core/api/client.ts:4692"
+      ]
+    },
+    {
+      "id": "client:4821",
+      "route": {
+        "method": "GET",
+        "path": "/api/issue-statuses"
+      },
+      "sources": [
+        "packages/core/api/client.ts:4821"
+      ]
+    },
+    {
+      "id": "client:1612",
+      "route": {
+        "method": "GET",
+        "path": "/api/issues/{id}"
+      },
+      "sources": [
+        "packages/core/api/client.ts:1612"
+      ],
+      "inventory_status": "pending-reconciliation"
+    }
+  ],
+  "limitations": [
+    "Generic non-catalog callback production closure remains partial; no global coverage promotion.",
+    "Client method bodies inspected; shared ApiClient.fetch implementation not re-audited in this batch."
+  ]
+}

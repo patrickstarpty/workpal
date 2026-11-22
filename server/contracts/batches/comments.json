@@ -1,0 +1,224 @@
+{
+  "batch": "comments",
+  "scope": "Task 1 contract only; no model execution",
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/api/issues/{id}/comments",
+      "handler": "ListComments",
+      "source": "server/go/internal/handler/comment.go",
+      "success_fixture": {
+        "request_body": null,
+        "status": 200,
+        "response_json": [
+          {
+            "id": "00000000-0000-4000-8000-000000000001",
+            "issue_id": "00000000-0000-4000-8000-000000000002",
+            "author_type": "member",
+            "author_id": "00000000-0000-4000-8000-000000000003",
+            "content": "Hello",
+            "type": "comment",
+            "parent_id": null,
+            "created_at": "2026-11-21T00:00:00Z",
+            "updated_at": "2026-11-21T00:00:00Z",
+            "revision": 1,
+            "resolved_at": null,
+            "resolved_by_type": null,
+            "resolved_by_id": null,
+            "reactions": [],
+            "attachments": []
+          }
+        ],
+        "empty_body": false
+      },
+      "event_disposition": "none: read only",
+      "status": "contract specified; runtime unimplemented"
+    },
+    {
+      "method": "POST",
+      "path": "/api/issues/{id}/comments",
+      "handler": "CreateComment",
+      "source": "server/go/internal/handler/comment.go",
+      "success_fixture": {
+        "request_body": {
+          "content": "Hello"
+        },
+        "status": 201,
+        "response_json": {
+          "id": "00000000-0000-4000-8000-000000000001",
+          "issue_id": "00000000-0000-4000-8000-000000000002",
+          "author_type": "member",
+          "author_id": "00000000-0000-4000-8000-000000000003",
+          "content": "Hello",
+          "type": "comment",
+          "parent_id": null,
+          "created_at": "2026-11-21T00:00:00Z",
+          "updated_at": "2026-11-21T00:00:00Z",
+          "revision": 1,
+          "resolved_at": null,
+          "resolved_by_type": null,
+          "resolved_by_id": null,
+          "reactions": [],
+          "attachments": [],
+          "issue_revision": 2
+        },
+        "empty_body": false
+      },
+      "event_disposition": "required; see comments.md",
+      "status": "contract specified; runtime unimplemented"
+    },
+    {
+      "method": "PUT",
+      "path": "/api/comments/{commentId}",
+      "handler": "UpdateComment",
+      "source": "server/go/internal/handler/comment.go",
+      "success_fixture": {
+        "request_body": {
+          "content": "Edited",
+          "content_base": "Hello",
+          "expected_revision": 1,
+          "attachment_ids": []
+        },
+        "status": 200,
+        "response_json": {
+          "id": "00000000-0000-4000-8000-000000000001",
+          "issue_id": "00000000-0000-4000-8000-000000000002",
+          "author_type": "member",
+          "author_id": "00000000-0000-4000-8000-000000000003",
+          "content": "Edited",
+          "type": "comment",
+          "parent_id": null,
+          "created_at": "2026-11-21T00:00:00Z",
+          "updated_at": "2026-11-21T00:00:00Z",
+          "revision": 2,
+          "resolved_at": null,
+          "resolved_by_type": null,
+          "resolved_by_id": null,
+          "reactions": [],
+          "attachments": [],
+          "issue_revision": 3
+        },
+        "empty_body": false
+      },
+      "event_disposition": "required; see comments.md",
+      "status": "contract specified; runtime unimplemented"
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/comments/{commentId}",
+      "handler": "DeleteComment",
+      "source": "server/go/internal/handler/comment.go",
+      "success_fixture": {
+        "request_body": null,
+        "status": 204,
+        "response_json": null,
+        "empty_body": true
+      },
+      "event_disposition": "required; see comments.md",
+      "status": "contract specified; runtime unimplemented"
+    }
+  ],
+  "delete_alias": "DELETE /api/comments/{commentId}/keep-replies",
+  "error_fixtures": [
+    {
+      "status": 400,
+      "body": {
+        "error": "invalid request body"
+      }
+    },
+    {
+      "status": 400,
+      "body": {
+        "error": "content is required"
+      }
+    },
+    {
+      "status": 400,
+      "body": {
+        "error": "invalid comment type"
+      }
+    },
+    {
+      "status": 404,
+      "body": {
+        "error": "comment not found"
+      }
+    },
+    {
+      "status": 403,
+      "body": {
+        "error": "only comment author or admin can edit"
+      }
+    },
+    {
+      "status": 403,
+      "body": {
+        "error": "only comment author or admin can delete"
+      }
+    },
+    {
+      "status": 409,
+      "body": {
+        "error": "additional messages cannot be edited"
+      }
+    },
+    {
+      "status": 409,
+      "body": {
+        "error": "additional message is still being delivered"
+      }
+    },
+    {
+      "status": 500,
+      "body": {
+        "error": "failed to create comment"
+      }
+    },
+    {
+      "status": 500,
+      "body": {
+        "error": "failed to update comment"
+      }
+    },
+    {
+      "status": 500,
+      "body": {
+        "error": "failed to delete comment"
+      }
+    },
+    {
+      "status": 500,
+      "body": {
+        "error": "failed to resolve project access"
+      }
+    }
+  ],
+  "revision_conflict": {
+    "status": 409,
+    "body": {
+      "error": "resource changed since it was loaded",
+      "code": "revision_conflict",
+      "resource_type": "comment",
+      "resource_id": "00000000-0000-4000-8000-000000000001",
+      "expected_revision": 1,
+      "actual_revision": 2
+    }
+  },
+  "content_base_conflict": {
+    "status": 409,
+    "body": {
+      "error": "resource field changed since it was loaded",
+      "code": "revision_conflict",
+      "resource_type": "comment",
+      "resource_id": "00000000-0000-4000-8000-000000000001"
+    }
+  },
+  "null_semantics": {
+    "create_parent_id": "missing/null => root",
+    "update_attachment_ids": "missing/null => preserve; [] => detach all",
+    "content_base": "missing/null => no base comparison",
+    "expected_revision": "missing/null => no revision comparison",
+    "response": "parent/resolution fields explicitly null; empty reactions/attachments arrays; zero issue_revision and unset source_task_id/deleted_at/quick_action_id/projection/trigger/supplement fields omitted"
+  },
+  "fixture_note": "IDs/timestamps are deterministic seeded examples, not observed production output. Delete 204 has no JSON null body."
+}

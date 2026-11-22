@@ -1,0 +1,353 @@
+{
+  "source_sha256": {
+    "server/go/internal/handler/runtime.go": "8032128a53ac1e5e892c622f571eb54306c66038892d48ba590ce434506d1f5f",
+    "server/go/pkg/db/queries/runtime.sql": "f7c03ab32d1448ec00060c032650547b5816122af9e0af43b9379dc698b32a40",
+    "server/go/internal/middleware/workspace.go": "d8b1eb22b5a7da16396facd1ebb87e16d7d7915cad68cef3aa9f69187cca5d7e",
+    "server/go/pkg/agent/agent.go": "29c2b61f70b4a05a659f5aacdd13db36858859c4108ba9821443150d3a688699",
+    "server/go/pkg/agent/builtin_runtimes.go": "7a6902de46c4e42ee5ccbe4f90f8f4ecd47a53dd311691c7ffa34d9c916e5565",
+    "server/tests/parity/go_runtime_list/main.go": "06321eae5fab9b056db2344d015801db15cf1cb4879167c356cb3d72b54cf57e",
+    "server/src/workpal_backend/runtimes/routes.py": "edc89ef08ea00ffee9b66f061d8f5a04892264db37208be536a17d42ffd4aaad",
+    "server/src/workpal_backend/runtimes/projection.py": "fecd93f066b7ebb4512a952c0d2a32a849bd222215e7825fdec0037764994db7",
+    "server/src/workpal_backend/workspaces/admission.py": "feb25ff44a957c120864f64699d0d86e7b0ddf7ae4bda24a2cd0dda70ad8f516",
+    "server/src/workpal_backend/infrastructure/go_response.py": "3d0b56c3f995294d445c37a26dc0b52d6ae72596d80ef903e8d607a69dd70044",
+    "server/src/workpal_backend/infrastructure/sqlite_compat.py": "f502f05ba40829fbeafeca4c8510792f1d3d288edc2cf9ec28d850fc630462f6",
+    "server/src/workpal_backend/infrastructure/go_json_value.py": "269d11f2a510b3c425bf29661dda48453b803eaf6a75aad027afe6349e7fe7f7"
+  },
+  "scope": "Runtime list handler and workspace middleware status/body; seeded actual PostgreSQL/SQLite. Full auth/CloudFront/transport framing not compared.",
+  "fixtures": [
+    {
+      "User": "10000000-0000-4000-8000-000000000001",
+      "Query": "workspace_slug=fixture",
+      "Headers": {}
+    },
+    {
+      "User": "10000000-0000-4000-8000-000000000002",
+      "Query": "workspace_slug=fixture",
+      "Headers": {}
+    },
+    {
+      "User": "10000000-0000-4000-8000-000000000003",
+      "Query": "workspace_slug=fixture",
+      "Headers": {}
+    },
+    {
+      "User": "10000000-0000-4000-8000-000000000001",
+      "Query": "workspace_slug=fixture&owner=me",
+      "Headers": {}
+    },
+    {
+      "User": "10000000-0000-4000-8000-000000000002",
+      "Query": "workspace_slug=fixture&owner=me",
+      "Headers": {}
+    },
+    {
+      "User": "10000000-0000-4000-8000-000000000002",
+      "Query": "workspace_slug=fixture&owner=me&owner=other",
+      "Headers": {}
+    },
+    {
+      "User": "10000000-0000-4000-8000-000000000002",
+      "Query": "",
+      "Headers": {}
+    },
+    {
+      "User": "10000000-0000-4000-8000-000000000002",
+      "Query": "workspace_id=nope",
+      "Headers": {}
+    },
+    {
+      "User": "10000000-0000-4000-8000-000000000002",
+      "Query": "workspace_slug=unknown",
+      "Headers": {
+        "X-Workspace-ID": "20000000-0000-4000-8000-000000000001"
+      }
+    },
+    {
+      "User": "10000000-0000-4000-8000-000000000002",
+      "Query": "workspace_slug=fixture",
+      "Headers": {
+        "X-Workspace-Slug": "unknown"
+      }
+    },
+    {
+      "User": "10000000-0000-4000-8000-000000000002",
+      "Query": "workspace_slug=unknown",
+      "Headers": {
+        "X-Workspace-Slug": "fixture"
+      }
+    },
+    {
+      "User": "10000000-0000-4000-8000-000000000002",
+      "Query": "workspace_id=%zz",
+      "Headers": {
+        "X-Workspace-ID": "20000000-0000-4000-8000-000000000001"
+      }
+    },
+    {
+      "User": "invalid",
+      "Query": "workspace_id=20000000-0000-4000-8000-000000000001",
+      "Headers": {}
+    }
+  ],
+  "pg_seed": [
+    "INSERT INTO \"user\"(id,name,email,created_at,updated_at) VALUES ('10000000-0000-4000-8000-000000000001','Fixture','10000000-0000-4000-8000-000000000001@example.com','2026-01-01T01:02:03Z','2026-01-01T01:02:03Z')",
+    "INSERT INTO \"user\"(id,name,email,created_at,updated_at) VALUES ('10000000-0000-4000-8000-000000000002','Fixture','10000000-0000-4000-8000-000000000002@example.com','2026-01-01T01:02:03Z','2026-01-01T01:02:03Z')",
+    "INSERT INTO \"user\"(id,name,email,created_at,updated_at) VALUES ('10000000-0000-4000-8000-000000000003','Fixture','10000000-0000-4000-8000-000000000003@example.com','2026-01-01T01:02:03Z','2026-01-01T01:02:03Z')",
+    "INSERT INTO workspace(id,name,slug,issue_prefix,created_at,updated_at) VALUES ('20000000-0000-4000-8000-000000000001','Fixture','fixture','FX','2026-01-01T01:02:03Z','2026-01-01T01:02:03Z')",
+    "INSERT INTO member(id,workspace_id,user_id,role,created_at) VALUES ('30000000-0000-4000-8000-000000000000','20000000-0000-4000-8000-000000000001','10000000-0000-4000-8000-000000000001','owner','2026-01-01T01:02:03Z')",
+    "INSERT INTO member(id,workspace_id,user_id,role,created_at) VALUES ('30000000-0000-4000-8000-000000000001','20000000-0000-4000-8000-000000000001','10000000-0000-4000-8000-000000000002','member','2026-01-01T01:02:03Z')",
+    "INSERT INTO agent_runtime (id,workspace_id,name,runtime_mode,provider,owner_id,visibility,metadata,created_at,updated_at,shared_with) VALUES ('40000000-0000-4000-8000-000000000000','20000000-0000-4000-8000-000000000001','Mine','local','omp','10000000-0000-4000-8000-000000000002','private','{}','2026-01-01T00:00:00Z','2026-01-01T01:02:03Z','{}')",
+    "INSERT INTO agent_runtime (id,workspace_id,name,runtime_mode,provider,owner_id,visibility,metadata,created_at,updated_at,shared_with) VALUES ('40000000-0000-4000-8000-000000000001','20000000-0000-4000-8000-000000000001','Private','local','claude','10000000-0000-4000-8000-000000000001','private','null','2026-01-02T01:02:03.456789Z','2026-01-01T01:02:03Z','{}')",
+    "INSERT INTO agent_runtime (id,workspace_id,name,runtime_mode,provider,owner_id,visibility,metadata,created_at,updated_at,shared_with) VALUES ('40000000-0000-4000-8000-000000000002','20000000-0000-4000-8000-000000000001','Shared','local','codex','10000000-0000-4000-8000-000000000001','private','{\"z\":1.0,\"a\":2,\"a\":1}','2026-01-01T00:00:00.1Z','2026-01-01T01:02:03Z','{NULL,10000000-0000-4000-8000-000000000002}')",
+    "INSERT INTO agent_runtime (id,workspace_id,name,runtime_mode,provider,owner_id,visibility,metadata,created_at,updated_at,shared_with) VALUES ('40000000-0000-4000-8000-000000000003','20000000-0000-4000-8000-000000000001','Public','local','unknown',NULL,'public','{\"large\": 9007199254740993, \"fraction\": 1e-07, \"small\": 1e-06, \"nested\": {\"z\": -0.0, \"a\": 1e+20}}','2026-01-01T01:00:00.2+01:00','2026-01-01T01:02:03Z','{}')",
+    "INSERT INTO agent_runtime (id,workspace_id,name,runtime_mode,provider,owner_id,visibility,metadata,created_at,updated_at,shared_with) VALUES ('40000000-0000-4000-8000-000000000004','20000000-0000-4000-8000-000000000001','Overflow','local','claude','10000000-0000-4000-8000-000000000001','public','{\"overflow\":1e999,\"fine\":1,\"dup\":1,\"dup\":{}}','2026-01-05T01:02:03.456789Z','2026-01-01T01:02:03Z','{}')"
+  ],
+  "go": [
+    {
+      "body": "[{\"id\":\"40000000-0000-4000-8000-000000000000\",\"workspace_id\":\"20000000-0000-4000-8000-000000000001\",\"daemon_id\":null,\"name\":\"Mine\",\"custom_name\":null,\"runtime_mode\":\"local\",\"provider\":\"omp\",\"launch_header\":\"omp (json mode)\",\"status\":\"offline\",\"device_info\":\"\",\"metadata\":{},\"owner_id\":\"10000000-0000-4000-8000-000000000002\",\"visibility\":\"private\",\"shared_with\":[],\"profile_id\":null,\"max_concurrent_tasks\":null,\"last_seen_at\":null,\"created_at\":\"2026-01-01T00:00:00Z\",\"updated_at\":\"2026-01-01T01:02:03Z\"},{\"id\":\"40000000-0000-4000-8000-000000000002\",\"workspace_id\":\"20000000-0000-4000-8000-000000000001\",\"daemon_id\":null,\"name\":\"Shared\",\"custom_name\":null,\"runtime_mode\":\"local\",\"provider\":\"codex\",\"launch_header\":\"codex app-server\",\"status\":\"offline\",\"device_info\":\"\",\"metadata\":{\"a\":1,\"z\":1},\"owner_id\":\"10000000-0000-4000-8000-000000000001\",\"visibility\":\"private\",\"shared_with\":[\"\",\"10000000-0000-4000-8000-000000000002\"],\"profile_id\":null,\"max_concurrent_tasks\":null,\"last_seen_at\":null,\"created_at\":\"2026-01-01T00:00:00Z\",\"updated_at\":\"2026-01-01T01:02:03Z\"},{\"id\":\"40000000-0000-4000-8000-000000000003\",\"workspace_id\":\"20000000-0000-4000-8000-000000000001\",\"daemon_id\":null,\"name\":\"Public\",\"custom_name\":null,\"runtime_mode\":\"local\",\"provider\":\"unknown\",\"launch_header\":\"\",\"status\":\"offline\",\"device_info\":\"\",\"metadata\":{\"fraction\":1e-7,\"large\":9007199254740992,\"nested\":{\"a\":100000000000000000000,\"z\":0},\"small\":0.000001},\"owner_id\":null,\"visibility\":\"public\",\"shared_with\":[],\"profile_id\":null,\"max_concurrent_tasks\":null,\"last_seen_at\":null,\"created_at\":\"2026-01-01T00:00:00Z\",\"updated_at\":\"2026-01-01T01:02:03Z\"},{\"id\":\"40000000-0000-4000-8000-000000000001\",\"workspace_id\":\"20000000-0000-4000-8000-000000000001\",\"daemon_id\":null,\"name\":\"Private\",\"custom_name\":null,\"runtime_mode\":\"local\",\"provider\":\"claude\",\"launch_header\":\"claude (stream-json)\",\"status\":\"offline\",\"device_info\":\"\",\"metadata\":{},\"owner_id\":\"10000000-0000-4000-8000-000000000001\",\"visibility\":\"private\",\"shared_with\":[],\"profile_id\":null,\"max_concurrent_tasks\":null,\"last_seen_at\":null,\"created_at\":\"2026-01-02T01:02:03Z\",\"updated_at\":\"2026-01-01T01:02:03Z\"},{\"id\":\"40000000-0000-4000-8000-000000000004\",\"workspace_id\":\"20000000-0000-4000-8000-000000000001\",\"daemon_id\":null,\"name\":\"Overflow\",\"custom_name\":null,\"runtime_mode\":\"local\",\"provider\":\"claude\",\"launch_header\":\"claude (stream-json)\",\"status\":\"offline\",\"device_info\":\"\",\"metadata\":{\"dup\":{},\"fine\":1,\"overflow\":null},\"owner_id\":\"10000000-0000-4000-8000-000000000001\",\"visibility\":\"public\",\"shared_with\":[],\"profile_id\":null,\"max_concurrent_tasks\":null,\"last_seen_at\":null,\"created_at\":\"2026-01-05T01:02:03Z\",\"updated_at\":\"2026-01-01T01:02:03Z\"}]\n",
+      "headers": {
+        "Content-Length": [
+          "2680"
+        ],
+        "Content-Type": [
+          "application/json"
+        ]
+      },
+      "status": 200
+    },
+    {
+      "body": "[{\"id\":\"40000000-0000-4000-8000-000000000000\",\"workspace_id\":\"20000000-0000-4000-8000-000000000001\",\"daemon_id\":null,\"name\":\"Mine\",\"custom_name\":null,\"runtime_mode\":\"local\",\"provider\":\"omp\",\"launch_header\":\"omp (json mode)\",\"status\":\"offline\",\"device_info\":\"\",\"metadata\":{},\"owner_id\":\"10000000-0000-4000-8000-000000000002\",\"visibility\":\"private\",\"shared_with\":[],\"profile_id\":null,\"max_concurrent_tasks\":null,\"last_seen_at\":null,\"created_at\":\"2026-01-01T00:00:00Z\",\"updated_at\":\"2026-01-01T01:02:03Z\"},{\"id\":\"40000000-0000-4000-8000-000000000002\",\"workspace_id\":\"20000000-0000-4000-8000-000000000001\",\"daemon_id\":null,\"name\":\"Shared\",\"custom_name\":null,\"runtime_mode\":\"local\",\"provider\":\"codex\",\"launch_header\":\"codex app-server\",\"status\":\"offline\",\"device_info\":\"\",\"metadata\":{\"a\":1,\"z\":1},\"owner_id\":\"10000000-0000-4000-8000-000000000001\",\"visibility\":\"private\",\"shared_with\":[\"\",\"10000000-0000-4000-8000-000000000002\"],\"profile_id\":null,\"max_concurrent_tasks\":null,\"last_seen_at\":null,\"created_at\":\"2026-01-01T00:00:00Z\",\"updated_at\":\"2026-01-01T01:02:03Z\"},{\"id\":\"40000000-0000-4000-8000-000000000003\",\"workspace_id\":\"20000000-0000-4000-8000-000000000001\",\"daemon_id\":null,\"name\":\"Public\",\"custom_name\":null,\"runtime_mode\":\"local\",\"provider\":\"unknown\",\"launch_header\":\"\",\"status\":\"offline\",\"device_info\":\"\",\"metadata\":{\"fraction\":1e-7,\"large\":9007199254740992,\"nested\":{\"a\":100000000000000000000,\"z\":0},\"small\":0.000001},\"owner_id\":null,\"visibility\":\"public\",\"shared_with\":[],\"profile_id\":null,\"max_concurrent_tasks\":null,\"last_seen_at\":null,\"created_at\":\"2026-01-01T00:00:00Z\",\"updated_at\":\"2026-01-01T01:02:03Z\"},{\"id\":\"40000000-0000-4000-8000-000000000004\",\"workspace_id\":\"20000000-0000-4000-8000-000000000001\",\"daemon_id\":null,\"name\":\"Overflow\",\"custom_name\":null,\"runtime_mode\":\"local\",\"provider\":\"claude\",\"launch_header\":\"claude (stream-json)\",\"status\":\"offline\",\"device_info\":\"\",\"metadata\":{\"dup\":{},\"fine\":1,\"overflow\":null},\"owner_id\":\"10000000-0000-4000-8000-000000000001\",\"visibility\":\"public\",\"shared_with\":[],\"profile_id\":null,\"max_concurrent_tasks\":null,\"last_seen_at\":null,\"created_at\":\"2026-01-05T01:02:03Z\",\"updated_at\":\"2026-01-01T01:02:03Z\"}]\n",
+      "headers": {
+        "Content-Length": [
+          "2167"
+        ],
+        "Content-Type": [
+          "application/json"
+        ]
+      },
+      "status": 200
+    },
+    {
+      "body": "{\"error\":\"workspace not found\"}",
+      "headers": {
+        "Content-Type": [
+          "application/json"
+        ]
+      },
+      "status": 404
+    },
+    {
+      "body": "[{\"id\":\"40000000-0000-4000-8000-000000000002\",\"workspace_id\":\"20000000-0000-4000-8000-000000000001\",\"daemon_id\":null,\"name\":\"Shared\",\"custom_name\":null,\"runtime_mode\":\"local\",\"provider\":\"codex\",\"launch_header\":\"codex app-server\",\"status\":\"offline\",\"device_info\":\"\",\"metadata\":{\"a\":1,\"z\":1},\"owner_id\":\"10000000-0000-4000-8000-000000000001\",\"visibility\":\"private\",\"shared_with\":[\"\",\"10000000-0000-4000-8000-000000000002\"],\"profile_id\":null,\"max_concurrent_tasks\":null,\"last_seen_at\":null,\"created_at\":\"2026-01-01T00:00:00Z\",\"updated_at\":\"2026-01-01T01:02:03Z\"},{\"id\":\"40000000-0000-4000-8000-000000000001\",\"workspace_id\":\"20000000-0000-4000-8000-000000000001\",\"daemon_id\":null,\"name\":\"Private\",\"custom_name\":null,\"runtime_mode\":\"local\",\"provider\":\"claude\",\"launch_header\":\"claude (stream-json)\",\"status\":\"offline\",\"device_info\":\"\",\"metadata\":{},\"owner_id\":\"10000000-0000-4000-8000-000000000001\",\"visibility\":\"private\",\"shared_with\":[],\"profile_id\":null,\"max_concurrent_tasks\":null,\"last_seen_at\":null,\"created_at\":\"2026-01-02T01:02:03Z\",\"updated_at\":\"2026-01-01T01:02:03Z\"},{\"id\":\"40000000-0000-4000-8000-000000000004\",\"workspace_id\":\"20000000-0000-4000-8000-000000000001\",\"daemon_id\":null,\"name\":\"Overflow\",\"custom_name\":null,\"runtime_mode\":\"local\",\"provider\":\"claude\",\"launch_header\":\"claude (stream-json)\",\"status\":\"offline\",\"device_info\":\"\",\"metadata\":{\"dup\":{},\"fine\":1,\"overflow\":null},\"owner_id\":\"10000000-0000-4000-8000-000000000001\",\"visibility\":\"public\",\"shared_with\":[],\"profile_id\":null,\"max_concurrent_tasks\":null,\"last_seen_at\":null,\"created_at\":\"2026-01-05T01:02:03Z\",\"updated_at\":\"2026-01-01T01:02:03Z\"}]\n",
+      "headers": {
+        "Content-Length": [
+          "1620"
+        ],
+        "Content-Type": [
+          "application/json"
+        ]
+      },
+      "status": 200
+    },
+    {
+      "body": "[{\"id\":\"40000000-0000-4000-8000-000000000000\",\"workspace_id\":\"20000000-0000-4000-8000-000000000001\",\"daemon_id\":null,\"name\":\"Mine\",\"custom_name\":null,\"runtime_mode\":\"local\",\"provider\":\"omp\",\"launch_header\":\"omp (json mode)\",\"status\":\"offline\",\"device_info\":\"\",\"metadata\":{},\"owner_id\":\"10000000-0000-4000-8000-000000000002\",\"visibility\":\"private\",\"shared_with\":[],\"profile_id\":null,\"max_concurrent_tasks\":null,\"last_seen_at\":null,\"created_at\":\"2026-01-01T00:00:00Z\",\"updated_at\":\"2026-01-01T01:02:03Z\"}]\n",
+      "headers": {
+        "Content-Length": [
+          "504"
+        ],
+        "Content-Type": [
+          "application/json"
+        ]
+      },
+      "status": 200
+    },
+    {
+      "body": "[{\"id\":\"40000000-0000-4000-8000-000000000000\",\"workspace_id\":\"20000000-0000-4000-8000-000000000001\",\"daemon_id\":null,\"name\":\"Mine\",\"custom_name\":null,\"runtime_mode\":\"local\",\"provider\":\"omp\",\"launch_header\":\"omp (json mode)\",\"status\":\"offline\",\"device_info\":\"\",\"metadata\":{},\"owner_id\":\"10000000-0000-4000-8000-000000000002\",\"visibility\":\"private\",\"shared_with\":[],\"profile_id\":null,\"max_concurrent_tasks\":null,\"last_seen_at\":null,\"created_at\":\"2026-01-01T00:00:00Z\",\"updated_at\":\"2026-01-01T01:02:03Z\"}]\n",
+      "headers": {
+        "Content-Length": [
+          "504"
+        ],
+        "Content-Type": [
+          "application/json"
+        ]
+      },
+      "status": 200
+    },
+    {
+      "body": "{\"error\":\"workspace_id or workspace_slug is required\"}",
+      "headers": {
+        "Content-Type": [
+          "application/json"
+        ]
+      },
+      "status": 400
+    },
+    {
+      "body": "{\"error\":\"invalid workspace_id\"}",
+      "headers": {
+        "Content-Type": [
+          "application/json"
+        ]
+      },
+      "status": 400
+    },
+    {
+      "body": "{\"error\":\"workspace not found\"}",
+      "headers": {
+        "Content-Type": [
+          "application/json"
+        ]
+      },
+      "status": 404
+    },
+    {
+      "body": "[{\"id\":\"40000000-0000-4000-8000-000000000000\",\"workspace_id\":\"20000000-0000-4000-8000-000000000001\",\"daemon_id\":null,\"name\":\"Mine\",\"custom_name\":null,\"runtime_mode\":\"local\",\"provider\":\"omp\",\"launch_header\":\"omp (json mode)\",\"status\":\"offline\",\"device_info\":\"\",\"metadata\":{},\"owner_id\":\"10000000-0000-4000-8000-000000000002\",\"visibility\":\"private\",\"shared_with\":[],\"profile_id\":null,\"max_concurrent_tasks\":null,\"last_seen_at\":null,\"created_at\":\"2026-01-01T00:00:00Z\",\"updated_at\":\"2026-01-01T01:02:03Z\"},{\"id\":\"40000000-0000-4000-8000-000000000002\",\"workspace_id\":\"20000000-0000-4000-8000-000000000001\",\"daemon_id\":null,\"name\":\"Shared\",\"custom_name\":null,\"runtime_mode\":\"local\",\"provider\":\"codex\",\"launch_header\":\"codex app-server\",\"status\":\"offline\",\"device_info\":\"\",\"metadata\":{\"a\":1,\"z\":1},\"owner_id\":\"10000000-0000-4000-8000-000000000001\",\"visibility\":\"private\",\"shared_with\":[\"\",\"10000000-0000-4000-8000-000000000002\"],\"profile_id\":null,\"max_concurrent_tasks\":null,\"last_seen_at\":null,\"created_at\":\"2026-01-01T00:00:00Z\",\"updated_at\":\"2026-01-01T01:02:03Z\"},{\"id\":\"40000000-0000-4000-8000-000000000003\",\"workspace_id\":\"20000000-0000-4000-8000-000000000001\",\"daemon_id\":null,\"name\":\"Public\",\"custom_name\":null,\"runtime_mode\":\"local\",\"provider\":\"unknown\",\"launch_header\":\"\",\"status\":\"offline\",\"device_info\":\"\",\"metadata\":{\"fraction\":1e-7,\"large\":9007199254740992,\"nested\":{\"a\":100000000000000000000,\"z\":0},\"small\":0.000001},\"owner_id\":null,\"visibility\":\"public\",\"shared_with\":[],\"profile_id\":null,\"max_concurrent_tasks\":null,\"last_seen_at\":null,\"created_at\":\"2026-01-01T00:00:00Z\",\"updated_at\":\"2026-01-01T01:02:03Z\"},{\"id\":\"40000000-0000-4000-8000-000000000004\",\"workspace_id\":\"20000000-0000-4000-8000-000000000001\",\"daemon_id\":null,\"name\":\"Overflow\",\"custom_name\":null,\"runtime_mode\":\"local\",\"provider\":\"claude\",\"launch_header\":\"claude (stream-json)\",\"status\":\"offline\",\"device_info\":\"\",\"metadata\":{\"dup\":{},\"fine\":1,\"overflow\":null},\"owner_id\":\"10000000-0000-4000-8000-000000000001\",\"visibility\":\"public\",\"shared_with\":[],\"profile_id\":null,\"max_concurrent_tasks\":null,\"last_seen_at\":null,\"created_at\":\"2026-01-05T01:02:03Z\",\"updated_at\":\"2026-01-01T01:02:03Z\"}]\n",
+      "headers": {
+        "Content-Length": [
+          "2167"
+        ],
+        "Content-Type": [
+          "application/json"
+        ]
+      },
+      "status": 200
+    },
+    {
+      "body": "{\"error\":\"workspace not found\"}",
+      "headers": {
+        "Content-Type": [
+          "application/json"
+        ]
+      },
+      "status": 404
+    },
+    {
+      "body": "[{\"id\":\"40000000-0000-4000-8000-000000000000\",\"workspace_id\":\"20000000-0000-4000-8000-000000000001\",\"daemon_id\":null,\"name\":\"Mine\",\"custom_name\":null,\"runtime_mode\":\"local\",\"provider\":\"omp\",\"launch_header\":\"omp (json mode)\",\"status\":\"offline\",\"device_info\":\"\",\"metadata\":{},\"owner_id\":\"10000000-0000-4000-8000-000000000002\",\"visibility\":\"private\",\"shared_with\":[],\"profile_id\":null,\"max_concurrent_tasks\":null,\"last_seen_at\":null,\"created_at\":\"2026-01-01T00:00:00Z\",\"updated_at\":\"2026-01-01T01:02:03Z\"},{\"id\":\"40000000-0000-4000-8000-000000000002\",\"workspace_id\":\"20000000-0000-4000-8000-000000000001\",\"daemon_id\":null,\"name\":\"Shared\",\"custom_name\":null,\"runtime_mode\":\"local\",\"provider\":\"codex\",\"launch_header\":\"codex app-server\",\"status\":\"offline\",\"device_info\":\"\",\"metadata\":{\"a\":1,\"z\":1},\"owner_id\":\"10000000-0000-4000-8000-000000000001\",\"visibility\":\"private\",\"shared_with\":[\"\",\"10000000-0000-4000-8000-000000000002\"],\"profile_id\":null,\"max_concurrent_tasks\":null,\"last_seen_at\":null,\"created_at\":\"2026-01-01T00:00:00Z\",\"updated_at\":\"2026-01-01T01:02:03Z\"},{\"id\":\"40000000-0000-4000-8000-000000000003\",\"workspace_id\":\"20000000-0000-4000-8000-000000000001\",\"daemon_id\":null,\"name\":\"Public\",\"custom_name\":null,\"runtime_mode\":\"local\",\"provider\":\"unknown\",\"launch_header\":\"\",\"status\":\"offline\",\"device_info\":\"\",\"metadata\":{\"fraction\":1e-7,\"large\":9007199254740992,\"nested\":{\"a\":100000000000000000000,\"z\":0},\"small\":0.000001},\"owner_id\":null,\"visibility\":\"public\",\"shared_with\":[],\"profile_id\":null,\"max_concurrent_tasks\":null,\"last_seen_at\":null,\"created_at\":\"2026-01-01T00:00:00Z\",\"updated_at\":\"2026-01-01T01:02:03Z\"},{\"id\":\"40000000-0000-4000-8000-000000000004\",\"workspace_id\":\"20000000-0000-4000-8000-000000000001\",\"daemon_id\":null,\"name\":\"Overflow\",\"custom_name\":null,\"runtime_mode\":\"local\",\"provider\":\"claude\",\"launch_header\":\"claude (stream-json)\",\"status\":\"offline\",\"device_info\":\"\",\"metadata\":{\"dup\":{},\"fine\":1,\"overflow\":null},\"owner_id\":\"10000000-0000-4000-8000-000000000001\",\"visibility\":\"public\",\"shared_with\":[],\"profile_id\":null,\"max_concurrent_tasks\":null,\"last_seen_at\":null,\"created_at\":\"2026-01-05T01:02:03Z\",\"updated_at\":\"2026-01-01T01:02:03Z\"}]\n",
+      "headers": {
+        "Content-Length": [
+          "2167"
+        ],
+        "Content-Type": [
+          "application/json"
+        ]
+      },
+      "status": 200
+    },
+    {
+      "body": "{\"error\":\"user not authenticated\"}",
+      "headers": {
+        "Content-Type": [
+          "application/json"
+        ]
+      },
+      "status": 401
+    }
+  ],
+  "python": [
+    {
+      "status": 200,
+      "body": "[{\"id\":\"40000000-0000-4000-8000-000000000000\",\"workspace_id\":\"20000000-0000-4000-8000-000000000001\",\"daemon_id\":null,\"name\":\"Mine\",\"custom_name\":null,\"runtime_mode\":\"local\",\"provider\":\"omp\",\"launch_header\":\"omp (json mode)\",\"status\":\"offline\",\"device_info\":\"\",\"metadata\":{},\"owner_id\":\"10000000-0000-4000-8000-000000000002\",\"visibility\":\"private\",\"shared_with\":[],\"profile_id\":null,\"max_concurrent_tasks\":null,\"last_seen_at\":null,\"created_at\":\"2026-01-01T00:00:00Z\",\"updated_at\":\"2026-01-01T01:02:03Z\"},{\"id\":\"40000000-0000-4000-8000-000000000002\",\"workspace_id\":\"20000000-0000-4000-8000-000000000001\",\"daemon_id\":null,\"name\":\"Shared\",\"custom_name\":null,\"runtime_mode\":\"local\",\"provider\":\"codex\",\"launch_header\":\"codex app-server\",\"status\":\"offline\",\"device_info\":\"\",\"metadata\":{\"a\":1,\"z\":1},\"owner_id\":\"10000000-0000-4000-8000-000000000001\",\"visibility\":\"private\",\"shared_with\":[\"\",\"10000000-0000-4000-8000-000000000002\"],\"profile_id\":null,\"max_concurrent_tasks\":null,\"last_seen_at\":null,\"created_at\":\"2026-01-01T00:00:00Z\",\"updated_at\":\"2026-01-01T01:02:03Z\"},{\"id\":\"40000000-0000-4000-8000-000000000003\",\"workspace_id\":\"20000000-0000-4000-8000-000000000001\",\"daemon_id\":null,\"name\":\"Public\",\"custom_name\":null,\"runtime_mode\":\"local\",\"provider\":\"unknown\",\"launch_header\":\"\",\"status\":\"offline\",\"device_info\":\"\",\"metadata\":{\"fraction\":1e-7,\"large\":9007199254740992,\"nested\":{\"a\":100000000000000000000,\"z\":0},\"small\":0.000001},\"owner_id\":null,\"visibility\":\"public\",\"shared_with\":[],\"profile_id\":null,\"max_concurrent_tasks\":null,\"last_seen_at\":null,\"created_at\":\"2026-01-01T00:00:00Z\",\"updated_at\":\"2026-01-01T01:02:03Z\"},{\"id\":\"40000000-0000-4000-8000-000000000001\",\"workspace_id\":\"20000000-0000-4000-8000-000000000001\",\"daemon_id\":null,\"name\":\"Private\",\"custom_name\":null,\"runtime_mode\":\"local\",\"provider\":\"claude\",\"launch_header\":\"claude (stream-json)\",\"status\":\"offline\",\"device_info\":\"\",\"metadata\":{},\"owner_id\":\"10000000-0000-4000-8000-000000000001\",\"visibility\":\"private\",\"shared_with\":[],\"profile_id\":null,\"max_concurrent_tasks\":null,\"last_seen_at\":null,\"created_at\":\"2026-01-02T01:02:03Z\",\"updated_at\":\"2026-01-01T01:02:03Z\"},{\"id\":\"40000000-0000-4000-8000-000000000004\",\"workspace_id\":\"20000000-0000-4000-8000-000000000001\",\"daemon_id\":null,\"name\":\"Overflow\",\"custom_name\":null,\"runtime_mode\":\"local\",\"provider\":\"claude\",\"launch_header\":\"claude (stream-json)\",\"status\":\"offline\",\"device_info\":\"\",\"metadata\":{\"dup\":{},\"fine\":1,\"overflow\":null},\"owner_id\":\"10000000-0000-4000-8000-000000000001\",\"visibility\":\"public\",\"shared_with\":[],\"profile_id\":null,\"max_concurrent_tasks\":null,\"last_seen_at\":null,\"created_at\":\"2026-01-05T01:02:03Z\",\"updated_at\":\"2026-01-01T01:02:03Z\"}]\n",
+      "headers": {
+        "content-length": "2680",
+        "content-type": "application/json"
+      }
+    },
+    {
+      "status": 200,
+      "body": "[{\"id\":\"40000000-0000-4000-8000-000000000000\",\"workspace_id\":\"20000000-0000-4000-8000-000000000001\",\"daemon_id\":null,\"name\":\"Mine\",\"custom_name\":null,\"runtime_mode\":\"local\",\"provider\":\"omp\",\"launch_header\":\"omp (json mode)\",\"status\":\"offline\",\"device_info\":\"\",\"metadata\":{},\"owner_id\":\"10000000-0000-4000-8000-000000000002\",\"visibility\":\"private\",\"shared_with\":[],\"profile_id\":null,\"max_concurrent_tasks\":null,\"last_seen_at\":null,\"created_at\":\"2026-01-01T00:00:00Z\",\"updated_at\":\"2026-01-01T01:02:03Z\"},{\"id\":\"40000000-0000-4000-8000-000000000002\",\"workspace_id\":\"20000000-0000-4000-8000-000000000001\",\"daemon_id\":null,\"name\":\"Shared\",\"custom_name\":null,\"runtime_mode\":\"local\",\"provider\":\"codex\",\"launch_header\":\"codex app-server\",\"status\":\"offline\",\"device_info\":\"\",\"metadata\":{\"a\":1,\"z\":1},\"owner_id\":\"10000000-0000-4000-8000-000000000001\",\"visibility\":\"private\",\"shared_with\":[\"\",\"10000000-0000-4000-8000-000000000002\"],\"profile_id\":null,\"max_concurrent_tasks\":null,\"last_seen_at\":null,\"created_at\":\"2026-01-01T00:00:00Z\",\"updated_at\":\"2026-01-01T01:02:03Z\"},{\"id\":\"40000000-0000-4000-8000-000000000003\",\"workspace_id\":\"20000000-0000-4000-8000-000000000001\",\"daemon_id\":null,\"name\":\"Public\",\"custom_name\":null,\"runtime_mode\":\"local\",\"provider\":\"unknown\",\"launch_header\":\"\",\"status\":\"offline\",\"device_info\":\"\",\"metadata\":{\"fraction\":1e-7,\"large\":9007199254740992,\"nested\":{\"a\":100000000000000000000,\"z\":0},\"small\":0.000001},\"owner_id\":null,\"visibility\":\"public\",\"shared_with\":[],\"profile_id\":null,\"max_concurrent_tasks\":null,\"last_seen_at\":null,\"created_at\":\"2026-01-01T00:00:00Z\",\"updated_at\":\"2026-01-01T01:02:03Z\"},{\"id\":\"40000000-0000-4000-8000-000000000004\",\"workspace_id\":\"20000000-0000-4000-8000-000000000001\",\"daemon_id\":null,\"name\":\"Overflow\",\"custom_name\":null,\"runtime_mode\":\"local\",\"provider\":\"claude\",\"launch_header\":\"claude (stream-json)\",\"status\":\"offline\",\"device_info\":\"\",\"metadata\":{\"dup\":{},\"fine\":1,\"overflow\":null},\"owner_id\":\"10000000-0000-4000-8000-000000000001\",\"visibility\":\"public\",\"shared_with\":[],\"profile_id\":null,\"max_concurrent_tasks\":null,\"last_seen_at\":null,\"created_at\":\"2026-01-05T01:02:03Z\",\"updated_at\":\"2026-01-01T01:02:03Z\"}]\n",
+      "headers": {
+        "content-length": "2167",
+        "content-type": "application/json"
+      }
+    },
+    {
+      "status": 404,
+      "body": "{\"error\":\"workspace not found\"}",
+      "headers": {
+        "content-length": "31",
+        "content-type": "application/json"
+      }
+    },
+    {
+      "status": 200,
+      "body": "[{\"id\":\"40000000-0000-4000-8000-000000000002\",\"workspace_id\":\"20000000-0000-4000-8000-000000000001\",\"daemon_id\":null,\"name\":\"Shared\",\"custom_name\":null,\"runtime_mode\":\"local\",\"provider\":\"codex\",\"launch_header\":\"codex app-server\",\"status\":\"offline\",\"device_info\":\"\",\"metadata\":{\"a\":1,\"z\":1},\"owner_id\":\"10000000-0000-4000-8000-000000000001\",\"visibility\":\"private\",\"shared_with\":[\"\",\"10000000-0000-4000-8000-000000000002\"],\"profile_id\":null,\"max_concurrent_tasks\":null,\"last_seen_at\":null,\"created_at\":\"2026-01-01T00:00:00Z\",\"updated_at\":\"2026-01-01T01:02:03Z\"},{\"id\":\"40000000-0000-4000-8000-000000000001\",\"workspace_id\":\"20000000-0000-4000-8000-000000000001\",\"daemon_id\":null,\"name\":\"Private\",\"custom_name\":null,\"runtime_mode\":\"local\",\"provider\":\"claude\",\"launch_header\":\"claude (stream-json)\",\"status\":\"offline\",\"device_info\":\"\",\"metadata\":{},\"owner_id\":\"10000000-0000-4000-8000-000000000001\",\"visibility\":\"private\",\"shared_with\":[],\"profile_id\":null,\"max_concurrent_tasks\":null,\"last_seen_at\":null,\"created_at\":\"2026-01-02T01:02:03Z\",\"updated_at\":\"2026-01-01T01:02:03Z\"},{\"id\":\"40000000-0000-4000-8000-000000000004\",\"workspace_id\":\"20000000-0000-4000-8000-000000000001\",\"daemon_id\":null,\"name\":\"Overflow\",\"custom_name\":null,\"runtime_mode\":\"local\",\"provider\":\"claude\",\"launch_header\":\"claude (stream-json)\",\"status\":\"offline\",\"device_info\":\"\",\"metadata\":{\"dup\":{},\"fine\":1,\"overflow\":null},\"owner_id\":\"10000000-0000-4000-8000-000000000001\",\"visibility\":\"public\",\"shared_with\":[],\"profile_id\":null,\"max_concurrent_tasks\":null,\"last_seen_at\":null,\"created_at\":\"2026-01-05T01:02:03Z\",\"updated_at\":\"2026-01-01T01:02:03Z\"}]\n",
+      "headers": {
+        "content-length": "1620",
+        "content-type": "application/json"
+      }
+    },
+    {
+      "status": 200,
+      "body": "[{\"id\":\"40000000-0000-4000-8000-000000000000\",\"workspace_id\":\"20000000-0000-4000-8000-000000000001\",\"daemon_id\":null,\"name\":\"Mine\",\"custom_name\":null,\"runtime_mode\":\"local\",\"provider\":\"omp\",\"launch_header\":\"omp (json mode)\",\"status\":\"offline\",\"device_info\":\"\",\"metadata\":{},\"owner_id\":\"10000000-0000-4000-8000-000000000002\",\"visibility\":\"private\",\"shared_with\":[],\"profile_id\":null,\"max_concurrent_tasks\":null,\"last_seen_at\":null,\"created_at\":\"2026-01-01T00:00:00Z\",\"updated_at\":\"2026-01-01T01:02:03Z\"}]\n",
+      "headers": {
+        "content-length": "504",
+        "content-type": "application/json"
+      }
+    },
+    {
+      "status": 200,
+      "body": "[{\"id\":\"40000000-0000-4000-8000-000000000000\",\"workspace_id\":\"20000000-0000-4000-8000-000000000001\",\"daemon_id\":null,\"name\":\"Mine\",\"custom_name\":null,\"runtime_mode\":\"local\",\"provider\":\"omp\",\"launch_header\":\"omp (json mode)\",\"status\":\"offline\",\"device_info\":\"\",\"metadata\":{},\"owner_id\":\"10000000-0000-4000-8000-000000000002\",\"visibility\":\"private\",\"shared_with\":[],\"profile_id\":null,\"max_concurrent_tasks\":null,\"last_seen_at\":null,\"created_at\":\"2026-01-01T00:00:00Z\",\"updated_at\":\"2026-01-01T01:02:03Z\"}]\n",
+      "headers": {
+        "content-length": "504",
+        "content-type": "application/json"
+      }
+    },
+    {
+      "status": 400,
+      "body": "{\"error\":\"workspace_id or workspace_slug is required\"}",
+      "headers": {
+        "content-length": "54",
+        "content-type": "application/json"
+      }
+    },
+    {
+      "status": 400,
+      "body": "{\"error\":\"invalid workspace_id\"}",
+      "headers": {
+        "content-length": "32",
+        "content-type": "application/json"
+      }
+    },
+    {
+      "status": 404,
+      "body": "{\"error\":\"workspace not found\"}",
+      "headers": {
+        "content-length": "31",
+        "content-type": "application/json"
+      }
+    },
+    {
+      "status": 200,
+      "body": "[{\"id\":\"40000000-0000-4000-8000-000000000000\",\"workspace_id\":\"20000000-0000-4000-8000-000000000001\",\"daemon_id\":null,\"name\":\"Mine\",\"custom_name\":null,\"runtime_mode\":\"local\",\"provider\":\"omp\",\"launch_header\":\"omp (json mode)\",\"status\":\"offline\",\"device_info\":\"\",\"metadata\":{},\"owner_id\":\"10000000-0000-4000-8000-000000000002\",\"visibility\":\"private\",\"shared_with\":[],\"profile_id\":null,\"max_concurrent_tasks\":null,\"last_seen_at\":null,\"created_at\":\"2026-01-01T00:00:00Z\",\"updated_at\":\"2026-01-01T01:02:03Z\"},{\"id\":\"40000000-0000-4000-8000-000000000002\",\"workspace_id\":\"20000000-0000-4000-8000-000000000001\",\"daemon_id\":null,\"name\":\"Shared\",\"custom_name\":null,\"runtime_mode\":\"local\",\"provider\":\"codex\",\"launch_header\":\"codex app-server\",\"status\":\"offline\",\"device_info\":\"\",\"metadata\":{\"a\":1,\"z\":1},\"owner_id\":\"10000000-0000-4000-8000-000000000001\",\"visibility\":\"private\",\"shared_with\":[\"\",\"10000000-0000-4000-8000-000000000002\"],\"profile_id\":null,\"max_concurrent_tasks\":null,\"last_seen_at\":null,\"created_at\":\"2026-01-01T00:00:00Z\",\"updated_at\":\"2026-01-01T01:02:03Z\"},{\"id\":\"40000000-0000-4000-8000-000000000003\",\"workspace_id\":\"20000000-0000-4000-8000-000000000001\",\"daemon_id\":null,\"name\":\"Public\",\"custom_name\":null,\"runtime_mode\":\"local\",\"provider\":\"unknown\",\"launch_header\":\"\",\"status\":\"offline\",\"device_info\":\"\",\"metadata\":{\"fraction\":1e-7,\"large\":9007199254740992,\"nested\":{\"a\":100000000000000000000,\"z\":0},\"small\":0.000001},\"owner_id\":null,\"visibility\":\"public\",\"shared_with\":[],\"profile_id\":null,\"max_concurrent_tasks\":null,\"last_seen_at\":null,\"created_at\":\"2026-01-01T00:00:00Z\",\"updated_at\":\"2026-01-01T01:02:03Z\"},{\"id\":\"40000000-0000-4000-8000-000000000004\",\"workspace_id\":\"20000000-0000-4000-8000-000000000001\",\"daemon_id\":null,\"name\":\"Overflow\",\"custom_name\":null,\"runtime_mode\":\"local\",\"provider\":\"claude\",\"launch_header\":\"claude (stream-json)\",\"status\":\"offline\",\"device_info\":\"\",\"metadata\":{\"dup\":{},\"fine\":1,\"overflow\":null},\"owner_id\":\"10000000-0000-4000-8000-000000000001\",\"visibility\":\"public\",\"shared_with\":[],\"profile_id\":null,\"max_concurrent_tasks\":null,\"last_seen_at\":null,\"created_at\":\"2026-01-05T01:02:03Z\",\"updated_at\":\"2026-01-01T01:02:03Z\"}]\n",
+      "headers": {
+        "content-length": "2167",
+        "content-type": "application/json"
+      }
+    },
+    {
+      "status": 404,
+      "body": "{\"error\":\"workspace not found\"}",
+      "headers": {
+        "content-length": "31",
+        "content-type": "application/json"
+      }
+    },
+    {
+      "status": 200,
+      "body": "[{\"id\":\"40000000-0000-4000-8000-000000000000\",\"workspace_id\":\"20000000-0000-4000-8000-000000000001\",\"daemon_id\":null,\"name\":\"Mine\",\"custom_name\":null,\"runtime_mode\":\"local\",\"provider\":\"omp\",\"launch_header\":\"omp (json mode)\",\"status\":\"offline\",\"device_info\":\"\",\"metadata\":{},\"owner_id\":\"10000000-0000-4000-8000-000000000002\",\"visibility\":\"private\",\"shared_with\":[],\"profile_id\":null,\"max_concurrent_tasks\":null,\"last_seen_at\":null,\"created_at\":\"2026-01-01T00:00:00Z\",\"updated_at\":\"2026-01-01T01:02:03Z\"},{\"id\":\"40000000-0000-4000-8000-000000000002\",\"workspace_id\":\"20000000-0000-4000-8000-000000000001\",\"daemon_id\":null,\"name\":\"Shared\",\"custom_name\":null,\"runtime_mode\":\"local\",\"provider\":\"codex\",\"launch_header\":\"codex app-server\",\"status\":\"offline\",\"device_info\":\"\",\"metadata\":{\"a\":1,\"z\":1},\"owner_id\":\"10000000-0000-4000-8000-000000000001\",\"visibility\":\"private\",\"shared_with\":[\"\",\"10000000-0000-4000-8000-000000000002\"],\"profile_id\":null,\"max_concurrent_tasks\":null,\"last_seen_at\":null,\"created_at\":\"2026-01-01T00:00:00Z\",\"updated_at\":\"2026-01-01T01:02:03Z\"},{\"id\":\"40000000-0000-4000-8000-000000000003\",\"workspace_id\":\"20000000-0000-4000-8000-000000000001\",\"daemon_id\":null,\"name\":\"Public\",\"custom_name\":null,\"runtime_mode\":\"local\",\"provider\":\"unknown\",\"launch_header\":\"\",\"status\":\"offline\",\"device_info\":\"\",\"metadata\":{\"fraction\":1e-7,\"large\":9007199254740992,\"nested\":{\"a\":100000000000000000000,\"z\":0},\"small\":0.000001},\"owner_id\":null,\"visibility\":\"public\",\"shared_with\":[],\"profile_id\":null,\"max_concurrent_tasks\":null,\"last_seen_at\":null,\"created_at\":\"2026-01-01T00:00:00Z\",\"updated_at\":\"2026-01-01T01:02:03Z\"},{\"id\":\"40000000-0000-4000-8000-000000000004\",\"workspace_id\":\"20000000-0000-4000-8000-000000000001\",\"daemon_id\":null,\"name\":\"Overflow\",\"custom_name\":null,\"runtime_mode\":\"local\",\"provider\":\"claude\",\"launch_header\":\"claude (stream-json)\",\"status\":\"offline\",\"device_info\":\"\",\"metadata\":{\"dup\":{},\"fine\":1,\"overflow\":null},\"owner_id\":\"10000000-0000-4000-8000-000000000001\",\"visibility\":\"public\",\"shared_with\":[],\"profile_id\":null,\"max_concurrent_tasks\":null,\"last_seen_at\":null,\"created_at\":\"2026-01-05T01:02:03Z\",\"updated_at\":\"2026-01-01T01:02:03Z\"}]\n",
+      "headers": {
+        "content-length": "2167",
+        "content-type": "application/json"
+      }
+    },
+    {
+      "status": 401,
+      "body": "{\"error\":\"user not authenticated\"}",
+      "headers": {
+        "content-length": "34",
+        "content-type": "application/json"
+      }
+    }
+  ],
+  "mismatches": [],
+  "binary_sha256": "4fe5467a8e56af1695cf3cdf2a271751c8a101ba77acc46bd77c7637d5a2a940"
+}

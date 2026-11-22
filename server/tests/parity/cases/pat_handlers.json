@@ -1,0 +1,109 @@
+[
+  {
+    "method": "GET",
+    "path": "/api/tokens",
+    "body": ""
+  },
+  {
+    "method": "POST",
+    "path": "/api/tokens",
+    "body": "{}"
+  },
+  {
+    "method": "POST",
+    "path": "/api/tokens",
+    "body": "null"
+  },
+  {
+    "method": "POST",
+    "path": "/api/tokens",
+    "body": "{\"name\":5,\"name\":\"A\"}"
+  },
+  {
+    "method": "POST",
+    "path": "/api/tokens",
+    "body": "{\"name\":\"A\",\"expires_in_days\":1.5}"
+  },
+  {
+    "method": "POST",
+    "path": "/api/tokens",
+    "body": "{\"name\":\"A\",\"expires_in_days\":9223372036854775808}"
+  },
+  {
+    "method": "POST",
+    "path": "/api/tokens/current/renew",
+    "body": ""
+  },
+  {
+    "method": "POST",
+    "path": "/api/tokens/current/renew",
+    "body": "",
+    "authorization": "Bearer mul_absent"
+  },
+  {
+    "method": "DELETE",
+    "path": "/api/tokens/not-uuid",
+    "body": ""
+  },
+  {
+    "method": "DELETE",
+    "path": "/api/tokens/22222222-2222-4222-8222-222222222222",
+    "body": ""
+  },
+  {
+    "method": "POST",
+    "path": "/api/tokens",
+    "body": "{",
+    "actor": "task_token"
+  },
+  {
+    "method": "GET",
+    "path": "/api/tokens",
+    "body": "",
+    "actor": "cloud_pat"
+  },
+  {
+    "method": "POST",
+    "path": "/api/tokens",
+    "body": "{\"name\":\"bad\\u0000name\"}"
+  },
+  {
+    "method": "POST",
+    "path": "/api/tokens/current/renew",
+    "body": "",
+    "authorization": "Bearer mul_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  {
+    "method": "DELETE",
+    "path": "/api/tokens/33333333-3333-4333-8333-333333333333",
+    "body": ""
+  },
+  {
+    "method": "GET",
+    "path": "/api/tokens",
+    "body": ""
+  },
+  {
+    "method": "POST",
+    "path": "/api/tokens/current/renew",
+    "body": "",
+    "authorization": "Bearer mul_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  {
+    "method": "DELETE",
+    "path": "/api/tokens/33333333-3333-4333-8333-333333333333",
+    "body": ""
+  },
+  {
+    "method": "POST",
+    "path": "/api/tokens/current/renew",
+    "body": "",
+    "authorization": "Bearer mul_bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+  },
+  {
+    "method": "POST",
+    "path": "/api/tokens/current/renew",
+    "body": "",
+    "authorization": "Bearer mul_cccccccccccccccccccccccccccccccccccccccc"
+  }
+]

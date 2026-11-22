@@ -1,0 +1,684 @@
+{
+  "version": 1,
+  "scope": [
+    "packages/core/agents/queries.ts",
+    "packages/core/agents/use-agent-activity.ts",
+    "packages/core/agents/use-workspace-presence-prefetch.ts",
+    "packages/core/connected-apps/queries.ts",
+    "packages/core/notification-preferences/queries.ts",
+    "packages/core/billing/mutations.ts"
+  ],
+  "coverage": "bounded static frontend callback closure only; no backend support or global coverage claim",
+  "files": [
+    {
+      "path": "packages/core/agents/queries.ts",
+      "sha256": "025f015886abe362104b169f55c1504ecfba0e1bb01c9059b31618274f913d64",
+      "whole_source": true,
+      "exports": [
+        {
+          "name": "agentTaskSnapshotKeys",
+          "anchor": "packages/core/agents/queries.ts:8"
+        },
+        {
+          "name": "workspaceWorkingAgentsKeys",
+          "anchor": "packages/core/agents/queries.ts:13"
+        },
+        {
+          "name": "agentActivityKeys",
+          "anchor": "packages/core/agents/queries.ts:33"
+        },
+        {
+          "name": "agentRunCountsKeys",
+          "anchor": "packages/core/agents/queries.ts:38"
+        },
+        {
+          "name": "agentTaskSnapshotOptions",
+          "anchor": "packages/core/agents/queries.ts:57"
+        },
+        {
+          "name": "workspaceWorkingAgentsOptions",
+          "anchor": "packages/core/agents/queries.ts:71"
+        },
+        {
+          "name": "agentActivity30dOptions",
+          "anchor": "packages/core/agents/queries.ts:98"
+        },
+        {
+          "name": "agentRunCounts30dOptions",
+          "anchor": "packages/core/agents/queries.ts:110"
+        },
+        {
+          "name": "agentTasksKeys",
+          "anchor": "packages/core/agents/queries.ts:120"
+        },
+        {
+          "name": "agentTasksOptions",
+          "anchor": "packages/core/agents/queries.ts:128"
+        },
+        {
+          "name": "agentBuilderSessionKeys",
+          "anchor": "packages/core/agents/queries.ts:142"
+        },
+        {
+          "name": "agentBuilderSessionListOptions",
+          "anchor": "packages/core/agents/queries.ts:147"
+        },
+        {
+          "name": "taskContextReceiptKeys",
+          "anchor": "packages/core/agents/queries.ts:161"
+        },
+        {
+          "name": "taskContextReceiptOptions",
+          "anchor": "packages/core/agents/queries.ts:172"
+        }
+      ],
+      "disposition": "Complete source read; transport callbacks mapped; keys/types/pure derivations local."
+    },
+    {
+      "path": "packages/core/agents/use-agent-activity.ts",
+      "sha256": "e184f567260ed8a9b20512a99bad4a4901e2962de57a8c5b5eee668af0856b68",
+      "whole_source": true,
+      "exports": [
+        {
+          "name": "ActivityBucket",
+          "anchor": "packages/core/agents/use-agent-activity.ts:13"
+        },
+        {
+          "name": "AgentActivity",
+          "anchor": "packages/core/agents/use-agent-activity.ts:20"
+        },
+        {
+          "name": "ActivityWindowSummary",
+          "anchor": "packages/core/agents/use-agent-activity.ts:45"
+        },
+        {
+          "name": "useWorkspaceActivityMap",
+          "anchor": "packages/core/agents/use-agent-activity.ts:92"
+        },
+        {
+          "name": "buildActivityMap",
+          "anchor": "packages/core/agents/use-agent-activity.ts:113"
+        },
+        {
+          "name": "deriveAgentActivity",
+          "anchor": "packages/core/agents/use-agent-activity.ts:147"
+        },
+        {
+          "name": "summarizeActivityWindow",
+          "anchor": "packages/core/agents/use-agent-activity.ts:206"
+        },
+        {
+          "name": "__EMPTY_ACTIVITY",
+          "anchor": "packages/core/agents/use-agent-activity.ts:253"
+        }
+      ],
+      "disposition": "Complete source read; transport callbacks mapped; keys/types/pure derivations local."
+    },
+    {
+      "path": "packages/core/agents/use-workspace-presence-prefetch.ts",
+      "sha256": "142d4c6c921e9748b18ee30409dabee32f8b305ee448d0929cc4d336170314a3",
+      "whole_source": true,
+      "exports": [
+        {
+          "name": "useWorkspacePresencePrefetch",
+          "anchor": "packages/core/agents/use-workspace-presence-prefetch.ts:24"
+        }
+      ],
+      "disposition": "Complete source read; transport callbacks mapped; keys/types/pure derivations local."
+    },
+    {
+      "path": "packages/core/connected-apps/queries.ts",
+      "sha256": "56fef26f890b13eb8befc44d02a65afd40f041423b6a38e48bc8a97f9a54eda2",
+      "whole_source": true,
+      "exports": [
+        {
+          "name": "connectedAppsKeys",
+          "anchor": "packages/core/connected-apps/queries.ts:7"
+        },
+        {
+          "name": "appsOverviewOptions",
+          "anchor": "packages/core/connected-apps/queries.ts:26"
+        },
+        {
+          "name": "appCatalogOptions",
+          "anchor": "packages/core/connected-apps/queries.ts:33"
+        },
+        {
+          "name": "issueAppCallsOptions",
+          "anchor": "packages/core/connected-apps/queries.ts:41"
+        },
+        {
+          "name": "appActivityOptions",
+          "anchor": "packages/core/connected-apps/queries.ts:47"
+        },
+        {
+          "name": "teamAppImpactOptions",
+          "anchor": "packages/core/connected-apps/queries.ts:53"
+        },
+        {
+          "name": "agentAppsOptions",
+          "anchor": "packages/core/connected-apps/queries.ts:59"
+        },
+        {
+          "name": "issueAppRequestsOptions",
+          "anchor": "packages/core/connected-apps/queries.ts:65"
+        },
+        {
+          "name": "chatAppRequestsOptions",
+          "anchor": "packages/core/connected-apps/queries.ts:71"
+        }
+      ],
+      "disposition": "Complete source read; transport callbacks mapped; keys/types/pure derivations local."
+    },
+    {
+      "path": "packages/core/notification-preferences/queries.ts",
+      "sha256": "af84fa2a93c006bc453746e6ddd544830a6cc2b79a85c048d306f6028241980c",
+      "whole_source": true,
+      "exports": [
+        {
+          "name": "notificationPreferenceKeys",
+          "anchor": "packages/core/notification-preferences/queries.ts:4"
+        },
+        {
+          "name": "notificationPreferenceOptions",
+          "anchor": "packages/core/notification-preferences/queries.ts:15"
+        }
+      ],
+      "disposition": "Complete source read; transport callbacks mapped; keys/types/pure derivations local."
+    },
+    {
+      "path": "packages/core/billing/mutations.ts",
+      "sha256": "b92deec55e25975f50c213ffd8a20ecd1c8875d6745ff8b1b1aacf936eec2cab",
+      "whole_source": true,
+      "exports": [
+        {
+          "name": "useCreateCloudBillingCheckoutSession",
+          "anchor": "packages/core/billing/mutations.ts:19"
+        },
+        {
+          "name": "useCreateCloudBillingPortalSession",
+          "anchor": "packages/core/billing/mutations.ts:33"
+        },
+        {
+          "name": "useInvalidateBillingDataAfterCredit",
+          "anchor": "packages/core/billing/mutations.ts:71"
+        }
+      ],
+      "disposition": "Complete source read; transport callbacks mapped; keys/types/pure derivations local."
+    },
+    {
+      "path": "packages/core/workspace/queries.ts",
+      "sha256": "1b16ae9e020e75a5a92cebc5270a14c58d97f6b7b0fe033d2f1d2c2d837d093a",
+      "whole_source": false,
+      "exports": [],
+      "disposition": "Supporting factory/client bodies only; no whole-file claim."
+    },
+    {
+      "path": "packages/core/runtimes/queries.ts",
+      "sha256": "7bdbc4bfa199c0f605e052c851eb8d494b4c051edb83626ffc35874c1620eaff",
+      "whole_source": false,
+      "exports": [],
+      "disposition": "Supporting factory/client bodies only; no whole-file claim."
+    },
+    {
+      "path": "packages/core/billing/queries.ts",
+      "sha256": "1f8ad96d0abb6bf7bf7b12511dfa30e62a933d19afe8a800a4d00debf4937c5b",
+      "whole_source": false,
+      "exports": [],
+      "disposition": "Supporting factory/client bodies only; no whole-file claim."
+    },
+    {
+      "path": "packages/core/api/client.ts",
+      "sha256": "779bb65b5b7ead815836f7c704ec3c370bafae203e4f92119fadce93e982a4d7",
+      "whole_source": false,
+      "exports": [],
+      "disposition": "Supporting factory/client bodies only; no whole-file claim."
+    }
+  ],
+  "edges": [
+    {
+      "source": "packages/core/agents/queries.ts:60",
+      "api_method": "getAgentTaskSnapshot",
+      "client_anchor": "packages/core/api/client.ts:3045",
+      "kind": "query-or-mutation",
+      "inventory": [
+        {
+          "id": "client:3046",
+          "method": "GET",
+          "path_expression": "/api/agent-task-snapshot",
+          "route": {
+            "method": "GET",
+            "path": "/api/agent-task-snapshot"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/agents/queries.ts:85",
+      "api_method": "getWorkspaceWorkingAgents",
+      "client_anchor": "packages/core/api/client.ts:3057",
+      "kind": "query-or-mutation",
+      "inventory": [
+        {
+          "id": "client:3071",
+          "method": "GET",
+          "path_expression": "/api/working-agents${query ? `?${query}` : \"\"}",
+          "route": {
+            "method": "GET",
+            "path": "/api/working-agents"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/agents/queries.ts:101",
+      "api_method": "getWorkspaceAgentActivity30d",
+      "client_anchor": "packages/core/api/client.ts:3078",
+      "kind": "query-or-mutation",
+      "inventory": [
+        {
+          "id": "client:3079",
+          "method": "GET",
+          "path_expression": "/api/agent-activity-30d",
+          "route": {
+            "method": "GET",
+            "path": "/api/agent-activity-30d"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/agents/queries.ts:113",
+      "api_method": "getWorkspaceAgentRunCounts",
+      "client_anchor": "packages/core/api/client.ts:3086",
+      "kind": "query-or-mutation",
+      "inventory": [
+        {
+          "id": "client:3087",
+          "method": "GET",
+          "path_expression": "/api/agent-run-counts",
+          "route": {
+            "method": "GET",
+            "path": "/api/agent-run-counts"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/agents/queries.ts:133",
+      "api_method": "listAgentTasksPage",
+      "client_anchor": "packages/core/api/client.ts:3022",
+      "kind": "query-or-mutation",
+      "inventory": [
+        {
+          "id": "client:3028",
+          "method": "GET",
+          "path_expression": "/api/agents/${agentId}/tasks?${search}",
+          "route": {
+            "method": "GET",
+            "path": "/api/agents/{id}/tasks"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/agents/queries.ts:150",
+      "api_method": "listAgentBuilderSessions",
+      "client_anchor": "packages/core/api/client.ts:2134",
+      "kind": "query-or-mutation",
+      "inventory": [
+        {
+          "id": "client:2137",
+          "method": "GET",
+          "path_expression": "/api/agent-builder/sessions",
+          "route": {
+            "method": "GET",
+            "path": "/api/agent-builder/sessions"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/agents/queries.ts:175",
+      "api_method": "getTaskContextReceipt",
+      "client_anchor": "packages/core/api/client.ts:3101",
+      "kind": "query-or-mutation",
+      "inventory": [
+        {
+          "id": "client:3102",
+          "method": "GET",
+          "path_expression": "/api/tasks/${taskId}/context-receipt",
+          "route": {
+            "method": "GET",
+            "path": "/api/tasks/{taskId}/context-receipt"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/connected-apps/queries.ts:29",
+      "api_method": "getAppsOverview",
+      "client_anchor": "packages/core/api/client.ts:5750",
+      "kind": "query-or-mutation",
+      "inventory": [
+        {
+          "id": "client:5751",
+          "method": "GET",
+          "path_expression": "/api/apps",
+          "route": {
+            "method": "GET",
+            "path": "/api/apps"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/connected-apps/queries.ts:36",
+      "api_method": "listAppCatalog",
+      "client_anchor": "packages/core/api/client.ts:5757",
+      "kind": "query-or-mutation",
+      "inventory": [
+        {
+          "id": "client:5758",
+          "method": "GET",
+          "path_expression": "/api/apps/catalog${view ? `?view=${view}` : \"\"}",
+          "route": {
+            "method": "GET",
+            "path": "/api/apps/catalog"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/connected-apps/queries.ts:44",
+      "api_method": "listIssueAppCalls",
+      "client_anchor": "packages/core/api/client.ts:5811",
+      "kind": "query-or-mutation",
+      "inventory": [
+        {
+          "id": "client:5812",
+          "method": "GET",
+          "path_expression": "/api/app-calls?issue_id=${encodeURIComponent(issueId)}",
+          "route": {
+            "method": "GET",
+            "path": "/api/app-calls"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/connected-apps/queries.ts:50",
+      "api_method": "listAppActivity",
+      "client_anchor": "packages/core/api/client.ts:5833",
+      "kind": "query-or-mutation",
+      "inventory": [
+        {
+          "id": "client:5834",
+          "method": "GET",
+          "path_expression": "/api/apps/activity?toolkit_slug=${encodeURIComponent(toolkitSlug)}&scope=${scope}",
+          "route": {
+            "method": "GET",
+            "path": "/api/apps/activity"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/connected-apps/queries.ts:56",
+      "api_method": "getTeamAppImpact",
+      "client_anchor": "packages/core/api/client.ts:5779",
+      "kind": "query-or-mutation",
+      "inventory": [
+        {
+          "id": "client:5780",
+          "method": "GET",
+          "path_expression": "/api/apps/team/impact?toolkit_slug=${encodeURIComponent(toolkitSlug)}",
+          "route": {
+            "method": "GET",
+            "path": "/api/apps/team/impact"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/connected-apps/queries.ts:62",
+      "api_method": "listAgentApps",
+      "client_anchor": "packages/core/api/client.ts:5838",
+      "kind": "query-or-mutation",
+      "inventory": [
+        {
+          "id": "client:5839",
+          "method": "GET",
+          "path_expression": "/api/agents/${agentId}/apps",
+          "route": {
+            "method": "GET",
+            "path": "/api/agents/{id}/apps"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/connected-apps/queries.ts:68",
+      "api_method": "listAppRequests",
+      "client_anchor": "packages/core/api/client.ts:5854",
+      "kind": "query-or-mutation",
+      "inventory": [
+        {
+          "id": "client:5862",
+          "method": "GET",
+          "path_expression": "/api/app-requests${query ? `?${query}` : \"\"}",
+          "route": {
+            "method": "GET",
+            "path": "/api/app-requests"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/connected-apps/queries.ts:74",
+      "api_method": "listAppRequests",
+      "client_anchor": "packages/core/api/client.ts:5854",
+      "kind": "query-or-mutation",
+      "inventory": [
+        {
+          "id": "client:5862",
+          "method": "GET",
+          "path_expression": "/api/app-requests${query ? `?${query}` : \"\"}",
+          "route": {
+            "method": "GET",
+            "path": "/api/app-requests"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/notification-preferences/queries.ts:18",
+      "api_method": "getNotificationPreferences",
+      "client_anchor": "packages/core/api/client.ts:3319",
+      "kind": "query-or-mutation",
+      "inventory": [
+        {
+          "id": "client:3320",
+          "method": "GET",
+          "path_expression": "/api/notification-preferences",
+          "route": {
+            "method": "GET",
+            "path": "/api/notification-preferences"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/billing/mutations.ts:23",
+      "api_method": "createCloudBillingCheckoutSession",
+      "client_anchor": "packages/core/api/client.ts:2401",
+      "kind": "query-or-mutation",
+      "inventory": [
+        {
+          "id": "client:2404",
+          "method": "POST",
+          "path_expression": "/api/cloud-billing/checkout-sessions",
+          "route": {
+            "method": "POST",
+            "path": "/api/cloud-billing/checkout-sessions"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/billing/mutations.ts:35",
+      "api_method": "createCloudBillingPortalSession",
+      "client_anchor": "packages/core/api/client.ts:2436",
+      "kind": "query-or-mutation",
+      "inventory": [
+        {
+          "id": "client:2437",
+          "method": "POST",
+          "path_expression": "/api/cloud-billing/portal-sessions",
+          "route": {
+            "method": "POST",
+            "path": "/api/cloud-billing/portal-sessions"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/workspace/queries.ts:54",
+      "api_method": "listAgents",
+      "client_anchor": "packages/core/api/client.ts:2062",
+      "kind": "query-or-mutation",
+      "inventory": [
+        {
+          "id": "client:2066",
+          "method": "GET",
+          "path_expression": "/api/agents?${search}",
+          "route": {
+            "method": "GET",
+            "path": "/api/agents"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/workspace/queries.ts:105",
+      "api_method": "listSquads",
+      "client_anchor": "packages/core/api/client.ts:5202",
+      "kind": "query-or-mutation",
+      "inventory": [
+        {
+          "id": "client:5203",
+          "method": "GET",
+          "path_expression": "/api/squads",
+          "route": {
+            "method": "GET",
+            "path": "/api/squads"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/runtimes/queries.ts:72",
+      "api_method": "listRuntimes",
+      "client_anchor": "packages/core/api/client.ts:2266",
+      "kind": "query-or-mutation",
+      "inventory": [
+        {
+          "id": "client:2276",
+          "method": "GET",
+          "path_expression": "/api/runtimes?${search}",
+          "route": {
+            "method": "GET",
+            "path": "/api/runtimes"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/billing/queries.ts:33",
+      "api_method": "getCloudBillingBalance",
+      "client_anchor": "packages/core/api/client.ts:2330",
+      "kind": "possible-refetch-union",
+      "inventory": [
+        {
+          "id": "client:2331",
+          "method": "GET",
+          "path_expression": "/api/cloud-billing/balance",
+          "route": {
+            "method": "GET",
+            "path": "/api/cloud-billing/balance"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/billing/queries.ts:47",
+      "api_method": "listCloudBillingTransactions",
+      "client_anchor": "packages/core/api/client.ts:2337",
+      "kind": "possible-refetch-union",
+      "inventory": [
+        {
+          "id": "client:2344",
+          "method": "GET",
+          "path_expression": "/api/cloud-billing/transactions${query ? `?${query}` : \"\"}",
+          "route": {
+            "method": "GET",
+            "path": "/api/cloud-billing/transactions"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/billing/queries.ts:58",
+      "api_method": "listCloudBillingBatches",
+      "client_anchor": "packages/core/api/client.ts:2355",
+      "kind": "possible-refetch-union",
+      "inventory": [
+        {
+          "id": "client:2362",
+          "method": "GET",
+          "path_expression": "/api/cloud-billing/batches${query ? `?${query}` : \"\"}",
+          "route": {
+            "method": "GET",
+            "path": "/api/cloud-billing/batches"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/billing/queries.ts:69",
+      "api_method": "listCloudBillingTopups",
+      "client_anchor": "packages/core/api/client.ts:2373",
+      "kind": "possible-refetch-union",
+      "inventory": [
+        {
+          "id": "client:2380",
+          "method": "GET",
+          "path_expression": "/api/cloud-billing/topups${query ? `?${query}` : \"\"}",
+          "route": {
+            "method": "GET",
+            "path": "/api/cloud-billing/topups"
+          }
+        }
+      ]
+    }
+  ],
+  "reused_evidence": [
+    {
+      "path": "server/contracts/batches/retry-callback-transport-coverage.json",
+      "sha256": "416205b53358f3ceb9bf03876285fa47ad22a1e19760c816427ea3369a0920e0"
+    },
+    {
+      "path": "server/contracts/batches/status-helper-transport-coverage.json",
+      "sha256": "d4d8b8e63d50e3c57cd863d6abf3db89cf224ae14dd7b2fe86f02a404cdbb812"
+    },
+    {
+      "path": "server/contracts/batches/active-web-auth-transport.json",
+      "sha256": "7715490bcdc6b9db985bdb75d055e4608e8b4290a94b5b687713d09c9bd04c24"
+    }
+  ],
+  "unresolved_edges": [],
+  "semantics": [
+    "Standard React/Tanstack/Zod semantics terminate tracing; node_modules excluded.",
+    "Observer registration and invalidation may refetch; listed methods are a static possible union, not runtime request counts."
+  ]
+}

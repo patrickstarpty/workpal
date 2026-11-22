@@ -1,0 +1,441 @@
+{
+  "scope": "Task target-selector status/body only; actual Go Auth and scripted DB. No Python task token DB/auth lifecycle claim.",
+  "test_only": true,
+  "fixtures": [
+    {
+      "Query": "",
+      "Headers": {}
+    },
+    {
+      "Query": "workspace_id=0a0a0a0a-0000-4000-8000-00000000000a",
+      "Headers": {}
+    },
+    {
+      "Query": "workspace_id=0b0b0b0b-0000-4000-8000-00000000000b",
+      "Headers": {}
+    },
+    {
+      "Query": "workspace_id=",
+      "Headers": {}
+    },
+    {
+      "Query": "workspace_id=0a0a0a0a-0000-4000-8000-00000000000a&workspace_id=0b0b0b0b-0000-4000-8000-00000000000b",
+      "Headers": {}
+    },
+    {
+      "Query": "workspace_slug=ws-a",
+      "Headers": {}
+    },
+    {
+      "Query": "workspace_slug=ws-b",
+      "Headers": {}
+    },
+    {
+      "Query": "workspace_slug=unknown",
+      "Headers": {}
+    },
+    {
+      "Query": "workspace_slug=ws-db-error",
+      "Headers": {}
+    },
+    {
+      "Query": "workspace_slug=ws-a&workspace_slug=ws-b",
+      "Headers": {}
+    },
+    {
+      "Query": "workspace_slug=ws%2Da&q=a%20b",
+      "Headers": {}
+    },
+    {
+      "Query": "workspace_id=nope",
+      "Headers": {}
+    },
+    {
+      "Query": "workspace_id=0a0a0a0a-0000-4000-8000-00000000000a&q=%zz",
+      "Headers": {}
+    },
+    {
+      "Query": "q=%",
+      "Headers": {}
+    },
+    {
+      "Query": "q=%0",
+      "Headers": {}
+    },
+    {
+      "Query": "q=;ignored=1",
+      "Headers": {}
+    },
+    {
+      "Query": "workspace_id=0a0a0a0a00004000800000000000000a",
+      "Headers": {}
+    },
+    {
+      "Query": "workspace_id=0A0A0A0A-0000-4000-8000-00000000000A",
+      "Headers": {}
+    },
+    {
+      "Query": "workspace_id=0a0a0a0aX0000X4000X8000X00000000000a",
+      "Headers": {}
+    },
+    {
+      "Query": "workspace_slug=&workspace_id=",
+      "Headers": {}
+    },
+    {
+      "Query": "workspace_slug=ws-a&q=%3B",
+      "Headers": {}
+    },
+    {
+      "Query": "",
+      "Headers": {
+        "X-Workspace-ID": [
+          "0a0a0a0a-0000-4000-8000-00000000000a",
+          "0b0b0b0b-0000-4000-8000-00000000000b"
+        ]
+      }
+    },
+    {
+      "Query": "",
+      "Headers": {
+        "X-Workspace-ID": [
+          "0a0a0a0a-0000-4000-8000-00000000000a",
+          "0a0a0a0a-0000-4000-8000-00000000000a"
+        ]
+      }
+    },
+    {
+      "Query": "",
+      "Headers": {
+        "X-Workspace-Slug": [
+          "ws-a",
+          "ws-b"
+        ]
+      }
+    },
+    {
+      "Query": "",
+      "Headers": {
+        "X-Workspace-Slug": [
+          "ws-a",
+          "ws-a"
+        ]
+      }
+    },
+    {
+      "Query": "workspace_id=0b0b0b0b-0000-4000-8000-00000000000b",
+      "Headers": {
+        "X-Workspace-ID": [
+          "invalid"
+        ]
+      }
+    },
+    {
+      "Query": "q=%zz",
+      "Headers": {
+        "X-Workspace-ID": [
+          "0b0b0b0b-0000-4000-8000-00000000000b"
+        ]
+      }
+    },
+    {
+      "Query": "workspace_slug=ws-a",
+      "Headers": {
+        "X-Workspace-Slug": [
+          "ws-a"
+        ]
+      }
+    },
+    {
+      "Query": "",
+      "Headers": {
+        "X-Workspace-ID": [
+          "0a0a0a0a-0000-4000-8000-00000000000a"
+        ],
+        "X-Workspace-Slug": [
+          "ws-b"
+        ]
+      }
+    },
+    {
+      "Query": "",
+      "Headers": {
+        "X-Workspace-ID": [
+          "urn:uuid:0a0a0a0a-0000-4000-8000-00000000000a"
+        ]
+      }
+    },
+    {
+      "Query": "",
+      "Headers": {
+        "X-Workspace-ID": [
+          ""
+        ],
+        "X-Workspace-Slug": [
+          ""
+        ]
+      }
+    }
+  ],
+  "go": [
+    {
+      "body": "",
+      "status": 204
+    },
+    {
+      "body": "",
+      "status": 204
+    },
+    {
+      "body": "{\"error\":\"task token is bound to a different workspace\"}",
+      "status": 403
+    },
+    {
+      "body": "",
+      "status": 204
+    },
+    {
+      "body": "{\"error\":\"task token is bound to a different workspace\"}",
+      "status": 403
+    },
+    {
+      "body": "",
+      "status": 204
+    },
+    {
+      "body": "{\"error\":\"task token is bound to a different workspace\"}",
+      "status": 403
+    },
+    {
+      "body": "{\"error\":\"workspace not found\"}",
+      "status": 404
+    },
+    {
+      "body": "{\"error\":\"failed to resolve workspace\"}",
+      "status": 500
+    },
+    {
+      "body": "{\"error\":\"task token is bound to a different workspace\"}",
+      "status": 403
+    },
+    {
+      "body": "",
+      "status": 204
+    },
+    {
+      "body": "{\"error\":\"invalid workspace_id\"}",
+      "status": 400
+    },
+    {
+      "body": "{\"error\":\"malformed query string\"}",
+      "status": 400
+    },
+    {
+      "body": "{\"error\":\"malformed query string\"}",
+      "status": 400
+    },
+    {
+      "body": "{\"error\":\"malformed query string\"}",
+      "status": 400
+    },
+    {
+      "body": "{\"error\":\"malformed query string\"}",
+      "status": 400
+    },
+    {
+      "body": "",
+      "status": 204
+    },
+    {
+      "body": "",
+      "status": 204
+    },
+    {
+      "body": "",
+      "status": 204
+    },
+    {
+      "body": "",
+      "status": 204
+    },
+    {
+      "body": "",
+      "status": 204
+    },
+    {
+      "body": "{\"error\":\"task token is bound to a different workspace\"}",
+      "status": 403
+    },
+    {
+      "body": "",
+      "status": 204
+    },
+    {
+      "body": "{\"error\":\"task token is bound to a different workspace\"}",
+      "status": 403
+    },
+    {
+      "body": "",
+      "status": 204
+    },
+    {
+      "body": "{\"error\":\"invalid workspace_id\"}",
+      "status": 400
+    },
+    {
+      "body": "{\"error\":\"malformed query string\"}",
+      "status": 400
+    },
+    {
+      "body": "",
+      "status": 204
+    },
+    {
+      "body": "{\"error\":\"task token is bound to a different workspace\"}",
+      "status": 403
+    },
+    {
+      "body": "{\"error\":\"invalid workspace_id\"}",
+      "status": 400
+    },
+    {
+      "body": "",
+      "status": 204
+    }
+  ],
+  "python": [
+    {
+      "status": 204,
+      "body": ""
+    },
+    {
+      "status": 204,
+      "body": ""
+    },
+    {
+      "status": 403,
+      "body": "{\"error\":\"task token is bound to a different workspace\"}"
+    },
+    {
+      "status": 204,
+      "body": ""
+    },
+    {
+      "status": 403,
+      "body": "{\"error\":\"task token is bound to a different workspace\"}"
+    },
+    {
+      "status": 204,
+      "body": ""
+    },
+    {
+      "status": 403,
+      "body": "{\"error\":\"task token is bound to a different workspace\"}"
+    },
+    {
+      "status": 404,
+      "body": "{\"error\":\"workspace not found\"}"
+    },
+    {
+      "status": 500,
+      "body": "{\"error\":\"failed to resolve workspace\"}"
+    },
+    {
+      "status": 403,
+      "body": "{\"error\":\"task token is bound to a different workspace\"}"
+    },
+    {
+      "status": 204,
+      "body": ""
+    },
+    {
+      "status": 400,
+      "body": "{\"error\":\"invalid workspace_id\"}"
+    },
+    {
+      "status": 400,
+      "body": "{\"error\":\"malformed query string\"}"
+    },
+    {
+      "status": 400,
+      "body": "{\"error\":\"malformed query string\"}"
+    },
+    {
+      "status": 400,
+      "body": "{\"error\":\"malformed query string\"}"
+    },
+    {
+      "status": 400,
+      "body": "{\"error\":\"malformed query string\"}"
+    },
+    {
+      "status": 204,
+      "body": ""
+    },
+    {
+      "status": 204,
+      "body": ""
+    },
+    {
+      "status": 204,
+      "body": ""
+    },
+    {
+      "status": 204,
+      "body": ""
+    },
+    {
+      "status": 204,
+      "body": ""
+    },
+    {
+      "status": 403,
+      "body": "{\"error\":\"task token is bound to a different workspace\"}"
+    },
+    {
+      "status": 204,
+      "body": ""
+    },
+    {
+      "status": 403,
+      "body": "{\"error\":\"task token is bound to a different workspace\"}"
+    },
+    {
+      "status": 204,
+      "body": ""
+    },
+    {
+      "status": 400,
+      "body": "{\"error\":\"invalid workspace_id\"}"
+    },
+    {
+      "status": 400,
+      "body": "{\"error\":\"malformed query string\"}"
+    },
+    {
+      "status": 204,
+      "body": ""
+    },
+    {
+      "status": 403,
+      "body": "{\"error\":\"task token is bound to a different workspace\"}"
+    },
+    {
+      "status": 400,
+      "body": "{\"error\":\"invalid workspace_id\"}"
+    },
+    {
+      "status": 204,
+      "body": ""
+    }
+  ],
+  "mismatches": [],
+  "go_exit_code": 0,
+  "source_sha256": {
+    "server/go/internal/middleware/task_token_workspace.go": "6babe7e3a5da123f3bc20668bc926f143999400cdbacb8e8b7ff16ac9fba8d12",
+    "server/go/internal/middleware/auth.go": "6fa16fcc9d3cb8c34942ee8db06673fbbb12e40ac93f182e8765eb2a6fc89e4b",
+    "server/go/internal/middleware/task_token_workspace_test.go": "44e063228d2efe8974c3ea6d0e4889363bbd32735b3d7005dcbbfff1c6c0847c",
+    "server/tests/parity/go_task_target/main.go": "e54ebbb110c8e5f9d0bc4c2710b1cf4e8aefcab20c82a60a1db93249ed6809d1"
+  },
+  "binary_sha256": "3bcac513572bc0229f67e8e19bbc54117766893a97977618fe72b0d8da2c752e"
+}

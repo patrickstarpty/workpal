@@ -1,0 +1,1197 @@
+{
+  "scope": "Original Go newEnvelope/Redis values/parse/peek/key helpers. Every Redis field compared as base64 bytes, payload unchanged. Creation time normalized by replacing Go CreatedAt with Go formatting of the fixture clock. No XADD, relay lifecycle, replay or transport equivalence certified.",
+  "fixtures": [
+    {
+      "Frame": "eyAidHlwZSI6ImNoYXQ6bWVzc2FnZSIsICJhY3Rvcl9pZCI6InUiLCAicGF5bG9hZCI6OTAwNzE5OTI1NDc0MDk5MyB9",
+      "Values": {
+        "payload_json": {
+          "base64": "eyAidHlwZSI6ImNoYXQ6bWVzc2FnZSIsICJhY3Rvcl9pZCI6InUiLCAicGF5bG9hZCI6OTAwNzE5OTI1NDc0MDk5MyB9"
+        },
+        "event_id": 17,
+        "scope": "chat"
+      },
+      "Nanos": 0
+    },
+    {
+      "Frame": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjozLCJhY3Rvcl9pZCI6InUifQ==",
+      "Values": {
+        "payload_json": {
+          "base64": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjozLCJhY3Rvcl9pZCI6InUifQ=="
+        },
+        "event_id": 17,
+        "scope": "chat"
+      },
+      "Nanos": 1234000000
+    },
+    {
+      "Frame": "eyJ0eXBlIjo3LCJhY3Rvcl9pZCI6InUifQ==",
+      "Values": {
+        "payload_json": {
+          "base64": "eyJ0eXBlIjo3LCJhY3Rvcl9pZCI6InUifQ=="
+        },
+        "event_id": 17,
+        "scope": "chat"
+      },
+      "Nanos": -1
+    },
+    {
+      "Frame": "eyJUWVBFIjoieCIsIkFDVE9SX0lEIjoidSIsInR5cGUiOm51bGx9",
+      "Values": {
+        "payload_json": {
+          "base64": "eyJUWVBFIjoieCIsIkFDVE9SX0lEIjoidSIsInR5cGUiOm51bGx9"
+        },
+        "event_id": 17,
+        "scope": "chat"
+      },
+      "Nanos": 0
+    },
+    {
+      "Frame": "eyJ0eXBlIjoieCIsfQ==",
+      "Values": {
+        "payload_json": {
+          "base64": "eyJ0eXBlIjoieCIsfQ=="
+        },
+        "event_id": 17,
+        "scope": "chat"
+      },
+      "Nanos": 1234000000
+    },
+    {
+      "Frame": "bnVsbA==",
+      "Values": {
+        "payload_json": {
+          "base64": "bnVsbA=="
+        },
+        "event_id": 17,
+        "scope": "chat"
+      },
+      "Nanos": -1
+    },
+    {
+      "Frame": "W10=",
+      "Values": {
+        "payload_json": {
+          "base64": "W10="
+        },
+        "event_id": 17,
+        "scope": "chat"
+      },
+      "Nanos": 0
+    },
+    {
+      "Frame": "b3BhcXVl/w==",
+      "Values": {
+        "payload_json": {
+          "base64": "b3BhcXVl/w=="
+        },
+        "event_id": 17,
+        "scope": "chat"
+      },
+      "Nanos": 1234000000
+    },
+    {
+      "Frame": "eyJ0eXBlIjoieCIsImV4dHJhIjpbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbWzBdXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXX0=",
+      "Values": {
+        "payload_json": {
+          "base64": "eyJ0eXBlIjoieCIsImV4dHJhIjpbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbWzBdXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXX0="
+        },
+        "event_id": 17,
+        "scope": "chat"
+      },
+      "Nanos": -1
+    },
+    {
+      "Frame": "",
+      "Values": {
+        "payload_json": "",
+        "node_id": {
+          "base64": "/w=="
+        }
+      },
+      "Nanos": 0
+    },
+    {
+      "Frame": "",
+      "Values": {
+        "payload_json": null,
+        "node_id": {
+          "base64": "/w=="
+        }
+      },
+      "Nanos": 0
+    },
+    {
+      "Frame": "",
+      "Values": {
+        "payload_json": true,
+        "node_id": {
+          "base64": "/w=="
+        }
+      },
+      "Nanos": 0
+    },
+    {
+      "Frame": "",
+      "Values": {
+        "payload_json": 3,
+        "node_id": {
+          "base64": "/w=="
+        }
+      },
+      "Nanos": 0
+    },
+    {
+      "Frame": "",
+      "Values": {
+        "payload_json": {},
+        "node_id": {
+          "base64": "/w=="
+        }
+      },
+      "Nanos": 0
+    },
+    {
+      "Frame": "",
+      "Values": {
+        "payload_json": "opaque",
+        "node_id": {
+          "base64": "/w=="
+        }
+      },
+      "Nanos": 0
+    }
+  ],
+  "go": [
+    {
+      "keys": [
+        "ws:scope:chat:a:b:stream",
+        "ws:scope:::nodes",
+        "ws:node:n:heartbeat"
+      ],
+      "new": {
+        "actor_id": "dQ==",
+        "created_at": "MTk3MC0wMS0wMVQwMDowMDowMFo=",
+        "event_id": "aWQ=",
+        "event_type": "Y2hhdDptZXNzYWdl",
+        "node_id": "bg==",
+        "payload_json": "eyAidHlwZSI6ImNoYXQ6bWVzc2FnZSIsICJhY3Rvcl9pZCI6InUiLCAicGF5bG9hZCI6OTAwNzE5OTI1NDc0MDk5MyB9",
+        "scope": "d29ya3NwYWNlX21lbWJlcg==",
+        "scope_id": "dzp1",
+        "workspace_id": "ZXhjZXB0"
+      },
+      "peek": [
+        "chat:message",
+        "u"
+      ],
+      "read": {
+        "actor_id": "",
+        "created_at": "",
+        "event_id": "",
+        "event_type": "",
+        "node_id": "",
+        "payload_json": "eyAidHlwZSI6ImNoYXQ6bWVzc2FnZSIsICJhY3Rvcl9pZCI6InUiLCAicGF5bG9hZCI6OTAwNzE5OTI1NDc0MDk5MyB9",
+        "scope": "Y2hhdA==",
+        "scope_id": "",
+        "workspace_id": ""
+      },
+      "valid": true
+    },
+    {
+      "keys": [
+        "ws:scope:chat:a:b:stream",
+        "ws:scope:::nodes",
+        "ws:node:n:heartbeat"
+      ],
+      "new": {
+        "actor_id": "dQ==",
+        "created_at": "MTk3MC0wMS0wMVQwMDowMDowMS4yMzRa",
+        "event_id": "aWQ=",
+        "event_type": "eA==",
+        "node_id": "bg==",
+        "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjozLCJhY3Rvcl9pZCI6InUifQ==",
+        "scope": "d29ya3NwYWNlX21lbWJlcg==",
+        "scope_id": "dzp1",
+        "workspace_id": "ZXhjZXB0"
+      },
+      "peek": [
+        "x",
+        "u"
+      ],
+      "read": {
+        "actor_id": "",
+        "created_at": "",
+        "event_id": "",
+        "event_type": "",
+        "node_id": "",
+        "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjozLCJhY3Rvcl9pZCI6InUifQ==",
+        "scope": "Y2hhdA==",
+        "scope_id": "",
+        "workspace_id": ""
+      },
+      "valid": true
+    },
+    {
+      "keys": [
+        "ws:scope:chat:a:b:stream",
+        "ws:scope:::nodes",
+        "ws:node:n:heartbeat"
+      ],
+      "new": {
+        "actor_id": "",
+        "created_at": "MTk2OS0xMi0zMVQyMzo1OTo1OS45OTk5OTk5OTla",
+        "event_id": "aWQ=",
+        "event_type": "",
+        "node_id": "bg==",
+        "payload_json": "eyJ0eXBlIjo3LCJhY3Rvcl9pZCI6InUifQ==",
+        "scope": "d29ya3NwYWNlX21lbWJlcg==",
+        "scope_id": "dzp1",
+        "workspace_id": "ZXhjZXB0"
+      },
+      "peek": [
+        "",
+        "u"
+      ],
+      "read": {
+        "actor_id": "",
+        "created_at": "",
+        "event_id": "",
+        "event_type": "",
+        "node_id": "",
+        "payload_json": "eyJ0eXBlIjo3LCJhY3Rvcl9pZCI6InUifQ==",
+        "scope": "Y2hhdA==",
+        "scope_id": "",
+        "workspace_id": ""
+      },
+      "valid": true
+    },
+    {
+      "keys": [
+        "ws:scope:chat:a:b:stream",
+        "ws:scope:::nodes",
+        "ws:node:n:heartbeat"
+      ],
+      "new": {
+        "actor_id": "dQ==",
+        "created_at": "MTk3MC0wMS0wMVQwMDowMDowMFo=",
+        "event_id": "aWQ=",
+        "event_type": "eA==",
+        "node_id": "bg==",
+        "payload_json": "eyJUWVBFIjoieCIsIkFDVE9SX0lEIjoidSIsInR5cGUiOm51bGx9",
+        "scope": "d29ya3NwYWNlX21lbWJlcg==",
+        "scope_id": "dzp1",
+        "workspace_id": "ZXhjZXB0"
+      },
+      "peek": [
+        "x",
+        "u"
+      ],
+      "read": {
+        "actor_id": "",
+        "created_at": "",
+        "event_id": "",
+        "event_type": "",
+        "node_id": "",
+        "payload_json": "eyJUWVBFIjoieCIsIkFDVE9SX0lEIjoidSIsInR5cGUiOm51bGx9",
+        "scope": "Y2hhdA==",
+        "scope_id": "",
+        "workspace_id": ""
+      },
+      "valid": true
+    },
+    {
+      "keys": [
+        "ws:scope:chat:a:b:stream",
+        "ws:scope:::nodes",
+        "ws:node:n:heartbeat"
+      ],
+      "new": {
+        "actor_id": "",
+        "created_at": "MTk3MC0wMS0wMVQwMDowMDowMS4yMzRa",
+        "event_id": "aWQ=",
+        "event_type": "",
+        "node_id": "bg==",
+        "payload_json": "eyJ0eXBlIjoieCIsfQ==",
+        "scope": "d29ya3NwYWNlX21lbWJlcg==",
+        "scope_id": "dzp1",
+        "workspace_id": "ZXhjZXB0"
+      },
+      "peek": [
+        "",
+        ""
+      ],
+      "read": {
+        "actor_id": "",
+        "created_at": "",
+        "event_id": "",
+        "event_type": "",
+        "node_id": "",
+        "payload_json": "eyJ0eXBlIjoieCIsfQ==",
+        "scope": "Y2hhdA==",
+        "scope_id": "",
+        "workspace_id": ""
+      },
+      "valid": true
+    },
+    {
+      "keys": [
+        "ws:scope:chat:a:b:stream",
+        "ws:scope:::nodes",
+        "ws:node:n:heartbeat"
+      ],
+      "new": {
+        "actor_id": "",
+        "created_at": "MTk2OS0xMi0zMVQyMzo1OTo1OS45OTk5OTk5OTla",
+        "event_id": "aWQ=",
+        "event_type": "",
+        "node_id": "bg==",
+        "payload_json": "bnVsbA==",
+        "scope": "d29ya3NwYWNlX21lbWJlcg==",
+        "scope_id": "dzp1",
+        "workspace_id": "ZXhjZXB0"
+      },
+      "peek": [
+        "",
+        ""
+      ],
+      "read": {
+        "actor_id": "",
+        "created_at": "",
+        "event_id": "",
+        "event_type": "",
+        "node_id": "",
+        "payload_json": "bnVsbA==",
+        "scope": "Y2hhdA==",
+        "scope_id": "",
+        "workspace_id": ""
+      },
+      "valid": true
+    },
+    {
+      "keys": [
+        "ws:scope:chat:a:b:stream",
+        "ws:scope:::nodes",
+        "ws:node:n:heartbeat"
+      ],
+      "new": {
+        "actor_id": "",
+        "created_at": "MTk3MC0wMS0wMVQwMDowMDowMFo=",
+        "event_id": "aWQ=",
+        "event_type": "",
+        "node_id": "bg==",
+        "payload_json": "W10=",
+        "scope": "d29ya3NwYWNlX21lbWJlcg==",
+        "scope_id": "dzp1",
+        "workspace_id": "ZXhjZXB0"
+      },
+      "peek": [
+        "",
+        ""
+      ],
+      "read": {
+        "actor_id": "",
+        "created_at": "",
+        "event_id": "",
+        "event_type": "",
+        "node_id": "",
+        "payload_json": "W10=",
+        "scope": "Y2hhdA==",
+        "scope_id": "",
+        "workspace_id": ""
+      },
+      "valid": true
+    },
+    {
+      "keys": [
+        "ws:scope:chat:a:b:stream",
+        "ws:scope:::nodes",
+        "ws:node:n:heartbeat"
+      ],
+      "new": {
+        "actor_id": "",
+        "created_at": "MTk3MC0wMS0wMVQwMDowMDowMS4yMzRa",
+        "event_id": "aWQ=",
+        "event_type": "",
+        "node_id": "bg==",
+        "payload_json": "b3BhcXVl/w==",
+        "scope": "d29ya3NwYWNlX21lbWJlcg==",
+        "scope_id": "dzp1",
+        "workspace_id": "ZXhjZXB0"
+      },
+      "peek": [
+        "",
+        ""
+      ],
+      "read": {
+        "actor_id": "",
+        "created_at": "",
+        "event_id": "",
+        "event_type": "",
+        "node_id": "",
+        "payload_json": "b3BhcXVl/w==",
+        "scope": "Y2hhdA==",
+        "scope_id": "",
+        "workspace_id": ""
+      },
+      "valid": true
+    },
+    {
+      "keys": [
+        "ws:scope:chat:a:b:stream",
+        "ws:scope:::nodes",
+        "ws:node:n:heartbeat"
+      ],
+      "new": {
+        "actor_id": "",
+        "created_at": "MTk2OS0xMi0zMVQyMzo1OTo1OS45OTk5OTk5OTla",
+        "event_id": "aWQ=",
+        "event_type": "eA==",
+        "node_id": "bg==",
+        "payload_json": "eyJ0eXBlIjoieCIsImV4dHJhIjpbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbWzBdXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXX0=",
+        "scope": "d29ya3NwYWNlX21lbWJlcg==",
+        "scope_id": "dzp1",
+        "workspace_id": "ZXhjZXB0"
+      },
+      "peek": [
+        "x",
+        ""
+      ],
+      "read": {
+        "actor_id": "",
+        "created_at": "",
+        "event_id": "",
+        "event_type": "",
+        "node_id": "",
+        "payload_json": "eyJ0eXBlIjoieCIsImV4dHJhIjpbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbWzBdXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXX0=",
+        "scope": "Y2hhdA==",
+        "scope_id": "",
+        "workspace_id": ""
+      },
+      "valid": true
+    },
+    {
+      "keys": [
+        "ws:scope:chat:a:b:stream",
+        "ws:scope:::nodes",
+        "ws:node:n:heartbeat"
+      ],
+      "new": {
+        "actor_id": "",
+        "created_at": "MTk3MC0wMS0wMVQwMDowMDowMFo=",
+        "event_id": "aWQ=",
+        "event_type": "",
+        "node_id": "bg==",
+        "payload_json": "",
+        "scope": "d29ya3NwYWNlX21lbWJlcg==",
+        "scope_id": "dzp1",
+        "workspace_id": "ZXhjZXB0"
+      },
+      "peek": [
+        "",
+        ""
+      ],
+      "read": {
+        "actor_id": "",
+        "created_at": "",
+        "event_id": "",
+        "event_type": "",
+        "node_id": "/w==",
+        "payload_json": "",
+        "scope": "",
+        "scope_id": "",
+        "workspace_id": ""
+      },
+      "valid": false
+    },
+    {
+      "keys": [
+        "ws:scope:chat:a:b:stream",
+        "ws:scope:::nodes",
+        "ws:node:n:heartbeat"
+      ],
+      "new": {
+        "actor_id": "",
+        "created_at": "MTk3MC0wMS0wMVQwMDowMDowMFo=",
+        "event_id": "aWQ=",
+        "event_type": "",
+        "node_id": "bg==",
+        "payload_json": "",
+        "scope": "d29ya3NwYWNlX21lbWJlcg==",
+        "scope_id": "dzp1",
+        "workspace_id": "ZXhjZXB0"
+      },
+      "peek": [
+        "",
+        ""
+      ],
+      "read": {
+        "actor_id": "",
+        "created_at": "",
+        "event_id": "",
+        "event_type": "",
+        "node_id": "/w==",
+        "payload_json": "",
+        "scope": "",
+        "scope_id": "",
+        "workspace_id": ""
+      },
+      "valid": false
+    },
+    {
+      "keys": [
+        "ws:scope:chat:a:b:stream",
+        "ws:scope:::nodes",
+        "ws:node:n:heartbeat"
+      ],
+      "new": {
+        "actor_id": "",
+        "created_at": "MTk3MC0wMS0wMVQwMDowMDowMFo=",
+        "event_id": "aWQ=",
+        "event_type": "",
+        "node_id": "bg==",
+        "payload_json": "",
+        "scope": "d29ya3NwYWNlX21lbWJlcg==",
+        "scope_id": "dzp1",
+        "workspace_id": "ZXhjZXB0"
+      },
+      "peek": [
+        "",
+        ""
+      ],
+      "read": {
+        "actor_id": "",
+        "created_at": "",
+        "event_id": "",
+        "event_type": "",
+        "node_id": "/w==",
+        "payload_json": "",
+        "scope": "",
+        "scope_id": "",
+        "workspace_id": ""
+      },
+      "valid": false
+    },
+    {
+      "keys": [
+        "ws:scope:chat:a:b:stream",
+        "ws:scope:::nodes",
+        "ws:node:n:heartbeat"
+      ],
+      "new": {
+        "actor_id": "",
+        "created_at": "MTk3MC0wMS0wMVQwMDowMDowMFo=",
+        "event_id": "aWQ=",
+        "event_type": "",
+        "node_id": "bg==",
+        "payload_json": "",
+        "scope": "d29ya3NwYWNlX21lbWJlcg==",
+        "scope_id": "dzp1",
+        "workspace_id": "ZXhjZXB0"
+      },
+      "peek": [
+        "",
+        ""
+      ],
+      "read": {
+        "actor_id": "",
+        "created_at": "",
+        "event_id": "",
+        "event_type": "",
+        "node_id": "/w==",
+        "payload_json": "",
+        "scope": "",
+        "scope_id": "",
+        "workspace_id": ""
+      },
+      "valid": false
+    },
+    {
+      "keys": [
+        "ws:scope:chat:a:b:stream",
+        "ws:scope:::nodes",
+        "ws:node:n:heartbeat"
+      ],
+      "new": {
+        "actor_id": "",
+        "created_at": "MTk3MC0wMS0wMVQwMDowMDowMFo=",
+        "event_id": "aWQ=",
+        "event_type": "",
+        "node_id": "bg==",
+        "payload_json": "",
+        "scope": "d29ya3NwYWNlX21lbWJlcg==",
+        "scope_id": "dzp1",
+        "workspace_id": "ZXhjZXB0"
+      },
+      "peek": [
+        "",
+        ""
+      ],
+      "read": {
+        "actor_id": "",
+        "created_at": "",
+        "event_id": "",
+        "event_type": "",
+        "node_id": "/w==",
+        "payload_json": "",
+        "scope": "",
+        "scope_id": "",
+        "workspace_id": ""
+      },
+      "valid": false
+    },
+    {
+      "keys": [
+        "ws:scope:chat:a:b:stream",
+        "ws:scope:::nodes",
+        "ws:node:n:heartbeat"
+      ],
+      "new": {
+        "actor_id": "",
+        "created_at": "MTk3MC0wMS0wMVQwMDowMDowMFo=",
+        "event_id": "aWQ=",
+        "event_type": "",
+        "node_id": "bg==",
+        "payload_json": "",
+        "scope": "d29ya3NwYWNlX21lbWJlcg==",
+        "scope_id": "dzp1",
+        "workspace_id": "ZXhjZXB0"
+      },
+      "peek": [
+        "",
+        ""
+      ],
+      "read": {
+        "actor_id": "",
+        "created_at": "",
+        "event_id": "",
+        "event_type": "",
+        "node_id": "/w==",
+        "payload_json": "b3BhcXVl",
+        "scope": "",
+        "scope_id": "",
+        "workspace_id": ""
+      },
+      "valid": true
+    }
+  ],
+  "python": [
+    {
+      "new": {
+        "event_id": "aWQ=",
+        "event_type": "Y2hhdDptZXNzYWdl",
+        "scope": "d29ya3NwYWNlX21lbWJlcg==",
+        "scope_id": "dzp1",
+        "workspace_id": "ZXhjZXB0",
+        "actor_id": "dQ==",
+        "created_at": "MTk3MC0wMS0wMVQwMDowMDowMFo=",
+        "node_id": "bg==",
+        "payload_json": "eyAidHlwZSI6ImNoYXQ6bWVzc2FnZSIsICJhY3Rvcl9pZCI6InUiLCAicGF5bG9hZCI6OTAwNzE5OTI1NDc0MDk5MyB9"
+      },
+      "read": {
+        "event_id": "",
+        "event_type": "",
+        "scope": "Y2hhdA==",
+        "scope_id": "",
+        "workspace_id": "",
+        "actor_id": "",
+        "created_at": "",
+        "node_id": "",
+        "payload_json": "eyAidHlwZSI6ImNoYXQ6bWVzc2FnZSIsICJhY3Rvcl9pZCI6InUiLCAicGF5bG9hZCI6OTAwNzE5OTI1NDc0MDk5MyB9"
+      },
+      "valid": true,
+      "peek": [
+        "chat:message",
+        "u"
+      ],
+      "keys": [
+        "ws:scope:chat:a:b:stream",
+        "ws:scope:::nodes",
+        "ws:node:n:heartbeat"
+      ]
+    },
+    {
+      "new": {
+        "event_id": "aWQ=",
+        "event_type": "eA==",
+        "scope": "d29ya3NwYWNlX21lbWJlcg==",
+        "scope_id": "dzp1",
+        "workspace_id": "ZXhjZXB0",
+        "actor_id": "dQ==",
+        "created_at": "MTk3MC0wMS0wMVQwMDowMDowMS4yMzRa",
+        "node_id": "bg==",
+        "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjozLCJhY3Rvcl9pZCI6InUifQ=="
+      },
+      "read": {
+        "event_id": "",
+        "event_type": "",
+        "scope": "Y2hhdA==",
+        "scope_id": "",
+        "workspace_id": "",
+        "actor_id": "",
+        "created_at": "",
+        "node_id": "",
+        "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjozLCJhY3Rvcl9pZCI6InUifQ=="
+      },
+      "valid": true,
+      "peek": [
+        "x",
+        "u"
+      ],
+      "keys": [
+        "ws:scope:chat:a:b:stream",
+        "ws:scope:::nodes",
+        "ws:node:n:heartbeat"
+      ]
+    },
+    {
+      "new": {
+        "event_id": "aWQ=",
+        "event_type": "",
+        "scope": "d29ya3NwYWNlX21lbWJlcg==",
+        "scope_id": "dzp1",
+        "workspace_id": "ZXhjZXB0",
+        "actor_id": "",
+        "created_at": "MTk2OS0xMi0zMVQyMzo1OTo1OS45OTk5OTk5OTla",
+        "node_id": "bg==",
+        "payload_json": "eyJ0eXBlIjo3LCJhY3Rvcl9pZCI6InUifQ=="
+      },
+      "read": {
+        "event_id": "",
+        "event_type": "",
+        "scope": "Y2hhdA==",
+        "scope_id": "",
+        "workspace_id": "",
+        "actor_id": "",
+        "created_at": "",
+        "node_id": "",
+        "payload_json": "eyJ0eXBlIjo3LCJhY3Rvcl9pZCI6InUifQ=="
+      },
+      "valid": true,
+      "peek": [
+        "",
+        "u"
+      ],
+      "keys": [
+        "ws:scope:chat:a:b:stream",
+        "ws:scope:::nodes",
+        "ws:node:n:heartbeat"
+      ]
+    },
+    {
+      "new": {
+        "event_id": "aWQ=",
+        "event_type": "eA==",
+        "scope": "d29ya3NwYWNlX21lbWJlcg==",
+        "scope_id": "dzp1",
+        "workspace_id": "ZXhjZXB0",
+        "actor_id": "dQ==",
+        "created_at": "MTk3MC0wMS0wMVQwMDowMDowMFo=",
+        "node_id": "bg==",
+        "payload_json": "eyJUWVBFIjoieCIsIkFDVE9SX0lEIjoidSIsInR5cGUiOm51bGx9"
+      },
+      "read": {
+        "event_id": "",
+        "event_type": "",
+        "scope": "Y2hhdA==",
+        "scope_id": "",
+        "workspace_id": "",
+        "actor_id": "",
+        "created_at": "",
+        "node_id": "",
+        "payload_json": "eyJUWVBFIjoieCIsIkFDVE9SX0lEIjoidSIsInR5cGUiOm51bGx9"
+      },
+      "valid": true,
+      "peek": [
+        "x",
+        "u"
+      ],
+      "keys": [
+        "ws:scope:chat:a:b:stream",
+        "ws:scope:::nodes",
+        "ws:node:n:heartbeat"
+      ]
+    },
+    {
+      "new": {
+        "event_id": "aWQ=",
+        "event_type": "",
+        "scope": "d29ya3NwYWNlX21lbWJlcg==",
+        "scope_id": "dzp1",
+        "workspace_id": "ZXhjZXB0",
+        "actor_id": "",
+        "created_at": "MTk3MC0wMS0wMVQwMDowMDowMS4yMzRa",
+        "node_id": "bg==",
+        "payload_json": "eyJ0eXBlIjoieCIsfQ=="
+      },
+      "read": {
+        "event_id": "",
+        "event_type": "",
+        "scope": "Y2hhdA==",
+        "scope_id": "",
+        "workspace_id": "",
+        "actor_id": "",
+        "created_at": "",
+        "node_id": "",
+        "payload_json": "eyJ0eXBlIjoieCIsfQ=="
+      },
+      "valid": true,
+      "peek": [
+        "",
+        ""
+      ],
+      "keys": [
+        "ws:scope:chat:a:b:stream",
+        "ws:scope:::nodes",
+        "ws:node:n:heartbeat"
+      ]
+    },
+    {
+      "new": {
+        "event_id": "aWQ=",
+        "event_type": "",
+        "scope": "d29ya3NwYWNlX21lbWJlcg==",
+        "scope_id": "dzp1",
+        "workspace_id": "ZXhjZXB0",
+        "actor_id": "",
+        "created_at": "MTk2OS0xMi0zMVQyMzo1OTo1OS45OTk5OTk5OTla",
+        "node_id": "bg==",
+        "payload_json": "bnVsbA=="
+      },
+      "read": {
+        "event_id": "",
+        "event_type": "",
+        "scope": "Y2hhdA==",
+        "scope_id": "",
+        "workspace_id": "",
+        "actor_id": "",
+        "created_at": "",
+        "node_id": "",
+        "payload_json": "bnVsbA=="
+      },
+      "valid": true,
+      "peek": [
+        "",
+        ""
+      ],
+      "keys": [
+        "ws:scope:chat:a:b:stream",
+        "ws:scope:::nodes",
+        "ws:node:n:heartbeat"
+      ]
+    },
+    {
+      "new": {
+        "event_id": "aWQ=",
+        "event_type": "",
+        "scope": "d29ya3NwYWNlX21lbWJlcg==",
+        "scope_id": "dzp1",
+        "workspace_id": "ZXhjZXB0",
+        "actor_id": "",
+        "created_at": "MTk3MC0wMS0wMVQwMDowMDowMFo=",
+        "node_id": "bg==",
+        "payload_json": "W10="
+      },
+      "read": {
+        "event_id": "",
+        "event_type": "",
+        "scope": "Y2hhdA==",
+        "scope_id": "",
+        "workspace_id": "",
+        "actor_id": "",
+        "created_at": "",
+        "node_id": "",
+        "payload_json": "W10="
+      },
+      "valid": true,
+      "peek": [
+        "",
+        ""
+      ],
+      "keys": [
+        "ws:scope:chat:a:b:stream",
+        "ws:scope:::nodes",
+        "ws:node:n:heartbeat"
+      ]
+    },
+    {
+      "new": {
+        "event_id": "aWQ=",
+        "event_type": "",
+        "scope": "d29ya3NwYWNlX21lbWJlcg==",
+        "scope_id": "dzp1",
+        "workspace_id": "ZXhjZXB0",
+        "actor_id": "",
+        "created_at": "MTk3MC0wMS0wMVQwMDowMDowMS4yMzRa",
+        "node_id": "bg==",
+        "payload_json": "b3BhcXVl/w=="
+      },
+      "read": {
+        "event_id": "",
+        "event_type": "",
+        "scope": "Y2hhdA==",
+        "scope_id": "",
+        "workspace_id": "",
+        "actor_id": "",
+        "created_at": "",
+        "node_id": "",
+        "payload_json": "b3BhcXVl/w=="
+      },
+      "valid": true,
+      "peek": [
+        "",
+        ""
+      ],
+      "keys": [
+        "ws:scope:chat:a:b:stream",
+        "ws:scope:::nodes",
+        "ws:node:n:heartbeat"
+      ]
+    },
+    {
+      "new": {
+        "event_id": "aWQ=",
+        "event_type": "eA==",
+        "scope": "d29ya3NwYWNlX21lbWJlcg==",
+        "scope_id": "dzp1",
+        "workspace_id": "ZXhjZXB0",
+        "actor_id": "",
+        "created_at": "MTk2OS0xMi0zMVQyMzo1OTo1OS45OTk5OTk5OTla",
+        "node_id": "bg==",
+        "payload_json": "eyJ0eXBlIjoieCIsImV4dHJhIjpbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbWzBdXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXX0="
+      },
+      "read": {
+        "event_id": "",
+        "event_type": "",
+        "scope": "Y2hhdA==",
+        "scope_id": "",
+        "workspace_id": "",
+        "actor_id": "",
+        "created_at": "",
+        "node_id": "",
+        "payload_json": "eyJ0eXBlIjoieCIsImV4dHJhIjpbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbW1tbWzBdXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXV1dXX0="
+      },
+      "valid": true,
+      "peek": [
+        "x",
+        ""
+      ],
+      "keys": [
+        "ws:scope:chat:a:b:stream",
+        "ws:scope:::nodes",
+        "ws:node:n:heartbeat"
+      ]
+    },
+    {
+      "new": {
+        "event_id": "aWQ=",
+        "event_type": "",
+        "scope": "d29ya3NwYWNlX21lbWJlcg==",
+        "scope_id": "dzp1",
+        "workspace_id": "ZXhjZXB0",
+        "actor_id": "",
+        "created_at": "MTk3MC0wMS0wMVQwMDowMDowMFo=",
+        "node_id": "bg==",
+        "payload_json": ""
+      },
+      "read": {
+        "event_id": "",
+        "event_type": "",
+        "scope": "",
+        "scope_id": "",
+        "workspace_id": "",
+        "actor_id": "",
+        "created_at": "",
+        "node_id": "/w==",
+        "payload_json": ""
+      },
+      "valid": false,
+      "peek": [
+        "",
+        ""
+      ],
+      "keys": [
+        "ws:scope:chat:a:b:stream",
+        "ws:scope:::nodes",
+        "ws:node:n:heartbeat"
+      ]
+    },
+    {
+      "new": {
+        "event_id": "aWQ=",
+        "event_type": "",
+        "scope": "d29ya3NwYWNlX21lbWJlcg==",
+        "scope_id": "dzp1",
+        "workspace_id": "ZXhjZXB0",
+        "actor_id": "",
+        "created_at": "MTk3MC0wMS0wMVQwMDowMDowMFo=",
+        "node_id": "bg==",
+        "payload_json": ""
+      },
+      "read": {
+        "event_id": "",
+        "event_type": "",
+        "scope": "",
+        "scope_id": "",
+        "workspace_id": "",
+        "actor_id": "",
+        "created_at": "",
+        "node_id": "/w==",
+        "payload_json": ""
+      },
+      "valid": false,
+      "peek": [
+        "",
+        ""
+      ],
+      "keys": [
+        "ws:scope:chat:a:b:stream",
+        "ws:scope:::nodes",
+        "ws:node:n:heartbeat"
+      ]
+    },
+    {
+      "new": {
+        "event_id": "aWQ=",
+        "event_type": "",
+        "scope": "d29ya3NwYWNlX21lbWJlcg==",
+        "scope_id": "dzp1",
+        "workspace_id": "ZXhjZXB0",
+        "actor_id": "",
+        "created_at": "MTk3MC0wMS0wMVQwMDowMDowMFo=",
+        "node_id": "bg==",
+        "payload_json": ""
+      },
+      "read": {
+        "event_id": "",
+        "event_type": "",
+        "scope": "",
+        "scope_id": "",
+        "workspace_id": "",
+        "actor_id": "",
+        "created_at": "",
+        "node_id": "/w==",
+        "payload_json": ""
+      },
+      "valid": false,
+      "peek": [
+        "",
+        ""
+      ],
+      "keys": [
+        "ws:scope:chat:a:b:stream",
+        "ws:scope:::nodes",
+        "ws:node:n:heartbeat"
+      ]
+    },
+    {
+      "new": {
+        "event_id": "aWQ=",
+        "event_type": "",
+        "scope": "d29ya3NwYWNlX21lbWJlcg==",
+        "scope_id": "dzp1",
+        "workspace_id": "ZXhjZXB0",
+        "actor_id": "",
+        "created_at": "MTk3MC0wMS0wMVQwMDowMDowMFo=",
+        "node_id": "bg==",
+        "payload_json": ""
+      },
+      "read": {
+        "event_id": "",
+        "event_type": "",
+        "scope": "",
+        "scope_id": "",
+        "workspace_id": "",
+        "actor_id": "",
+        "created_at": "",
+        "node_id": "/w==",
+        "payload_json": ""
+      },
+      "valid": false,
+      "peek": [
+        "",
+        ""
+      ],
+      "keys": [
+        "ws:scope:chat:a:b:stream",
+        "ws:scope:::nodes",
+        "ws:node:n:heartbeat"
+      ]
+    },
+    {
+      "new": {
+        "event_id": "aWQ=",
+        "event_type": "",
+        "scope": "d29ya3NwYWNlX21lbWJlcg==",
+        "scope_id": "dzp1",
+        "workspace_id": "ZXhjZXB0",
+        "actor_id": "",
+        "created_at": "MTk3MC0wMS0wMVQwMDowMDowMFo=",
+        "node_id": "bg==",
+        "payload_json": ""
+      },
+      "read": {
+        "event_id": "",
+        "event_type": "",
+        "scope": "",
+        "scope_id": "",
+        "workspace_id": "",
+        "actor_id": "",
+        "created_at": "",
+        "node_id": "/w==",
+        "payload_json": ""
+      },
+      "valid": false,
+      "peek": [
+        "",
+        ""
+      ],
+      "keys": [
+        "ws:scope:chat:a:b:stream",
+        "ws:scope:::nodes",
+        "ws:node:n:heartbeat"
+      ]
+    },
+    {
+      "new": {
+        "event_id": "aWQ=",
+        "event_type": "",
+        "scope": "d29ya3NwYWNlX21lbWJlcg==",
+        "scope_id": "dzp1",
+        "workspace_id": "ZXhjZXB0",
+        "actor_id": "",
+        "created_at": "MTk3MC0wMS0wMVQwMDowMDowMFo=",
+        "node_id": "bg==",
+        "payload_json": ""
+      },
+      "read": {
+        "event_id": "",
+        "event_type": "",
+        "scope": "",
+        "scope_id": "",
+        "workspace_id": "",
+        "actor_id": "",
+        "created_at": "",
+        "node_id": "/w==",
+        "payload_json": "b3BhcXVl"
+      },
+      "valid": true,
+      "peek": [
+        "",
+        ""
+      ],
+      "keys": [
+        "ws:scope:chat:a:b:stream",
+        "ws:scope:::nodes",
+        "ws:node:n:heartbeat"
+      ]
+    }
+  ],
+  "mismatches": [],
+  "source_sha256": {
+    "server/go/internal/realtime/redis_relay.go": "d0717fde50f3494be4731cb964c060faa54d761f2eaa6c3e1464158e53a58846",
+    "server/tests/parity/go_relay_envelope/wrapper.go": "3193aed828081629d5d197af7c4f75c23b9466664299e60d18c4cdbd2c7bd84a",
+    "server/tests/parity/go_relay_envelope/main.go": "c778c589c2de331cfa7e3856c53f377ae9ca62e2ebe17f6b4845dcb54dd4be9b",
+    "server/src/workpal_backend/realtime/relay_envelope.py": "2b1db1f7394cac21b8b1e7f06caa250eba7f205ce484d7f6c6381ac3e5a25d0d",
+    "server/src/workpal_backend/realtime/frame_decode.py": "c955e35b1d0bb6d83bd4d44a35edd86ae98422fee234892c67f996886347083e"
+  },
+  "binary_sha256": "c6027b25b63cb544bd7102023266faca3ca9bb54d2e6c1820b5d72cc016f6ea4"
+}

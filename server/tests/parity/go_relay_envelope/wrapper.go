@@ -1,0 +1,4 @@
+package realtime
+import("encoding/base64";"time";"github.com/redis/go-redis/v9")
+func parityEncoded(ev envelope)map[string]string{out:=map[string]string{};for k,v:=range envelopeRedisValues(ev){out[k]=base64.StdEncoding.EncodeToString([]byte(redisString(v)))};return out}
+func ParityEnvelope(frame []byte,values map[string]any,ns int64)map[string]any{for k,v:=range values{if m,ok:=v.(map[string]any);ok{if encoded,ok:=m["base64"].(string);ok{b,e:=base64.StdEncoding.DecodeString(encoded);if e!=nil{panic(e)};values[k]=b}}};created:=newEnvelope("n","workspace_member","w:u","except",frame,"id");created.CreatedAt=time.Unix(0,ns).UTC().Format(time.RFC3339Nano);read,ok:=envelopeFromXMessage(redis.XMessage{Values:values});kind,actor:=peekTypeActor(frame);return map[string]any{"new":parityEncoded(created),"read":parityEncoded(read),"valid":ok,"peek":[]string{kind,actor},"keys":[]string{StreamKey("chat","a:b"),NodesKey("",""),HeartbeatKey("n")}}}

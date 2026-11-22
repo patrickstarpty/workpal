@@ -1,0 +1,349 @@
+{
+  "version": 1,
+  "scope": "Whole shared controller invoked transport closure; root independent review pending; no backend/global coverage claim",
+  "files": [
+    {
+      "path": "packages/views/chat/components/use-chat-controller.ts",
+      "sha256": "4213008c952885e8217f4477cfe743cc74d41f8bc4403d709c4a2317b32bd428",
+      "whole_source": true
+    },
+    {
+      "path": "packages/views/chat/components/use-chat-project-context-support.ts",
+      "sha256": "b81482330f7a5026302970358a36d92d21d20eeefa3debe847feecbbd78e9825",
+      "whole_source": true
+    },
+    {
+      "path": "packages/core/agents/use-workspace-agent-availability.ts",
+      "sha256": "2b271b367a8b364aa5487d6d2bb084909f5fbcfb388169af171b5a9701134f81",
+      "whole_source": true
+    },
+    {
+      "path": "packages/core/agents/use-agent-presence.ts",
+      "sha256": "3c4927752ea6bbcd4895fe5d7c02362be23dec82882d41315e868f14d212df0d",
+      "whole_source": true
+    },
+    {
+      "path": "packages/views/chat/components/use-chat-draft-restore.ts",
+      "sha256": "835d11c3cf340873971c35791e8c218dbcc0edba194a0e27be8e37849351243a",
+      "whole_source": true
+    },
+    {
+      "path": "packages/core/chat/session-list.ts",
+      "sha256": "7e03356b12e84c9da9cc15de72af00ba15c40f549f22b9e7149a121a057bde20",
+      "whole_source": true
+    },
+    {
+      "path": "packages/core/workspace/queries.ts",
+      "sha256": "1b16ae9e020e75a5a92cebc5270a14c58d97f6b7b0fe033d2f1d2c2d837d093a",
+      "whole_source": false
+    },
+    {
+      "path": "packages/core/projects/queries.ts",
+      "sha256": "39315862d7770c602ebfda690e8dc691b6732cd833a36975a8638ba3ff25a0d6",
+      "whole_source": false
+    },
+    {
+      "path": "packages/core/chat/queries.ts",
+      "sha256": "7cf8eac14be017406936c6b0eb46dba319db13095a41077c5ff6527cc9c62f3d",
+      "whole_source": false
+    },
+    {
+      "path": "packages/core/chat/mutations.ts",
+      "sha256": "184cbe4bc6874757b8ed628f2b58d90cdbc539d5f85bcb2a5378a9ab61c502fe",
+      "whole_source": false
+    },
+    {
+      "path": "packages/core/runtimes/queries.ts",
+      "sha256": "7bdbc4bfa199c0f605e052c851eb8d494b4c051edb83626ffc35874c1620eaff",
+      "whole_source": false
+    },
+    {
+      "path": "packages/core/agents/queries.ts",
+      "sha256": "025f015886abe362104b169f55c1504ecfba0e1bb01c9059b31618274f913d64",
+      "whole_source": false
+    },
+    {
+      "path": "packages/views/common/use-app-foreground.ts",
+      "sha256": "84d2cccc987d0ac083bf75e0559c9a3819754f6c78097f0f9cc99df520807ece",
+      "whole_source": true
+    },
+    {
+      "path": "packages/core/api/client.ts",
+      "sha256": "779bb65b5b7ead815836f7c704ec3c370bafae203e4f92119fadce93e982a4d7",
+      "whole_source": false
+    }
+  ],
+  "snapshots": [
+    {
+      "path": "packages/views/chat/components/use-chat-controller.ts",
+      "sha256": "4213008c952885e8217f4477cfe743cc74d41f8bc4403d709c4a2317b32bd428",
+      "source": "\"use client\";\n\nimport { useCallback, useEffect, useRef, useState } from \"react\";\nimport {\n  useInfiniteQuery,\n  useQuery,\n  useQueryClient,\n} from \"@tanstack/react-query\";\nimport { toast } from \"sonner\";\nimport { useWorkspaceId } from \"@workpal/core/hooks\";\nimport { useAuthStore } from \"@workpal/core/auth\";\nimport { getCurrentWsId } from \"@workpal/core/platform\";\nimport { agentListOptions, memberListOptions } from \"@workpal/core/workspace/queries\";\nimport { projectListOptions } from \"@workpal/core/projects/queries\";\nimport { canAssignAgent } from \"../../issues/components/pickers/assignee-picker\";\nimport { api, dispatchReasonCode } from \"@workpal/core/api\";\nimport {\n  isAgentRuntimeBound as hasAgentRuntime,\n  useAgentPresenceDetail,\n  useWorkspaceAgentAvailability,\n} from \"@workpal/core/agents\";\nimport {\n  chatSessionsOptions,\n  chatMessagesPageOptions,\n  pendingChatTaskOptions,\n  chatKeys,\n  isTaskMessageTaskId,\n  sortChatSessions,\n} from \"@workpal/core/chat/queries\";\nimport {\n  useCreateChatSession,\n  useMarkChatSessionRead,\n  useSetChatSessionProject,\n  useSetChatSessionArchived,\n} from \"@workpal/core/chat/mutations\";\nimport { useChatStore } from \"@workpal/core/chat\";\nimport { upsertChatMessageToCaches } from \"@workpal/core/chat/message-cache\";\nimport { refetchChatSessionsAfterCommit } from \"@workpal/core/chat/session-list\";\nimport {\n  enqueuePendingChatTask,\n  hideQueuedChatMessages,\n} from \"@workpal/core/chat/pending\";\nimport { useChatDraftRestore } from \"./use-chat-draft-restore\";\nimport { useChatTaskActions } from \"./use-chat-task-actions\";\nimport { useChatProjectContextSupport } from \"./use-chat-project-context-support\";\nimport { createLogger } from \"@workpal/core/logger\";\nimport type {\n  Agent,\n  Attachment,\n  ChatMessage,\n  ChatPendingTask,\n} from \"@workpal/core/types\";\nimport { useT } from \"../../i18n\";\nimport { useAppForeground } from \"../../common/use-app-foreground\";\n\nconst uiLogger = createLogger(\"chat.ui\");\nconst apiLogger = createLogger(\"chat.api\");\n\n/**\n * After a send resolves: is the user still composing to the target they sent\n * from? Decides whether to scrub the composer and open the sent session, or\n * treat the send as fire-and-forget (the reply surfaces as unread instead).\n *\n * The active session answers this on its own, deliberately. The new-chat\n * composer is ONE box per workspace (see DRAFT_NEW_SESSION), so moving the\n * agent picker re-points where the next send goes without moving the view or\n * the draft slot — that is not \"navigating away\" (MUL-4864). Counting it as\n * such would leave a completed send's text sitting in the composer, primed to\n * be sent a second time to the agent just picked.\n */\nexport function isStillOnComposeTarget(\n  liveActiveSessionId: string | null,\n  sentFromSessionId: string | null,\n): boolean {\n  return liveActiveSessionId === sentFromSessionId;\n}\n\n/**\n * Decide what a project-context change should do, given the open session.\n *\n *  - `awaitSession`: an active session id is set but its row has not loaded\n *    yet. Bail so a persisted selection resolving before its sessions query\n *    cannot misfile a project change into the new-chat draft.\n *  - `detachCurrent`: removing context from the open session — safe in place,\n *    it only changes what future turns receive.\n *  - `startFreshChat`: switching to a DIFFERENT project. A fresh chat is\n *    started so the old project's provider memory / reused workdir cannot\n *    bleed in. It must stay bound to the agent whose session we are leaving\n *    (`agentId`): clearing the active session otherwise drops selection back\n *    to the stored `selectedAgentId`, which can be a stale preference for a\n *    different agent, sending the lazily-created session to the wrong agent.\n *  - `setDraftProject`: no open session, so this only adjusts the new-chat\n *    draft's project.\n */\nexport type ProjectContextChange =\n  | { kind: \"awaitSession\" }\n  | { kind: \"detachCurrent\"; sessionId: string }\n  | { kind: \"startFreshChat\"; agentId: string; projectId: string }\n  | { kind: \"setDraftProject\"; projectId: string | null };\n\nexport function planProjectContextChange(input: {\n  targetProjectId: string | null;\n  activeSessionId: string | null;\n  currentSession: { id: string; agent_id: string } | null;\n}): ProjectContextChange {\n  if (input.activeSessionId) {\n    if (!input.currentSession) return { kind: \"awaitSession\" };\n    if (input.targetProjectId === null) {\n      return { kind: \"detachCurrent\", sessionId: input.currentSession.id };\n    }\n    return {\n      kind: \"startFreshChat\",\n      agentId: input.currentSession.agent_id,\n      projectId: input.targetProjectId,\n    };\n  }\n  return { kind: \"setDraftProject\", projectId: input.targetProjectId };\n}\n\n// True when a session has an in-flight pending task in the cache — the signal\n// of a just-created (or actively-sending) session still awaiting server\n// confirmation, before the sessions-list refetch includes it. `handleSend`\n// seeds this task from the server response the instant the send is accepted, so\n// it is populated before `setActiveSession` publishes the new session.\n// Deliberately NOT \"has cached messages\": a session deleted elsewhere can still\n// have real cached history, which must not exempt it from the stale-session\n// self-heal.\nexport function hasInFlightPendingTask(\n  qc: ReturnType<typeof useQueryClient>,\n  sessionId: string,\n): boolean {\n  const pending = qc.getQueryData<ChatPendingTask>(chatKeys.pendingTask(sessionId));\n  return Boolean(pending?.task_id);\n}\n\nexport function seedAcceptedPendingTask(\n  qc: ReturnType<typeof useQueryClient>,\n  sessionId: string,\n  task: {\n    task_id: string;\n    created_at: string;\n    message_id: string;\n    content: string;\n    supports_queue?: boolean;\n    queued?: boolean;\n  },\n) {\n  qc.setQueryData<ChatPendingTask>(\n    chatKeys.pendingTask(sessionId),\n    (old) => {\n      const next = enqueuePendingChatTask(old, {\n        task_id: task.task_id,\n        status: \"queued\",\n        created_at: task.created_at,\n        message_id: task.message_id,\n        content: task.content,\n      }, task.queued);\n      if (task.supports_queue === true || old?.supports_queue === true) {\n        next.supports_queue = true;\n      }\n      return next;\n    },\n  );\n  qc.invalidateQueries({ queryKey: chatKeys.pendingTask(sessionId) });\n}\n\nconst CHAT_VIRTUOSO_INITIAL_FIRST_ITEM_INDEX = 1_000_000;\n\n\n/**\n * Layout-agnostic chat controller. Holds every piece of chat conversation\n * state and behavior — agent resolution, session lookup, the await-then-render\n * send/stop/cancel flow, message pagination, and auto-mark-read — so that\n * both surfaces render the same conversation logic:\n *\n *  - ChatWindow: the floating FAB overlay (adds resize / expand / minimize).\n *  - ChatPage:   the first-class Chat tab (two-pane thread list + conversation).\n *\n * The only thing the caller supplies is `isActive` — whether its surface is\n * currently on screen — which gates auto-mark-read so a background overlay\n * doesn't silently clear unread state the user hasn't actually seen.\n */\nexport function useChatController(opts?: { isActive?: boolean }) {\n  const isActive = opts?.isActive ?? true;\n  const { t } = useT(\"chat\");\n  const wsId = useWorkspaceId();\n  const activeSessionId = useChatStore((s) => s.activeSessionId);\n  const selectedAgentId = useChatStore((s) => s.selectedAgentId);\n  const selectedProjectId = useChatStore((s) => s.selectedProjectId);\n  const setActiveSession = useChatStore((s) => s.setActiveSession);\n  const setSelectedAgentId = useChatStore((s) => s.setSelectedAgentId);\n  const setSelectedProjectId = useChatStore((s) => s.setSelectedProjectId);\n  const user = useAuthStore((s) => s.user);\n  const { data: agents = [], isSuccess: agentsLoaded } = useQuery(\n    agentListOptions(wsId),\n  );\n  const { data: members = [], isSuccess: membersLoaded } = useQuery(\n    memberListOptions(wsId),\n  );\n  const { data: sessions = [], isSuccess: sessionsLoaded } = useQuery(\n    chatSessionsOptions(wsId),\n  );\n  const { data: projects = [], isSuccess: projectsLoaded } = useQuery(\n    projectListOptions(wsId),\n  );\n  const {\n    data: rawMessagePages,\n    isLoading: messagesLoading,\n    fetchNextPage: fetchOlderMessages,\n    hasNextPage: hasOlderMessages,\n    isFetchingNextPage: isFetchingOlderMessages,\n  } = useInfiniteQuery({\n    ...chatMessagesPageOptions(activeSessionId ?? \"\"),\n    // The floating window stays mounted while closed; it must not load a\n    // persisted session's transcript nobody is looking at.\n    enabled: !!activeSessionId && isActive,\n  });\n\n  const messagePages = activeSessionId ? rawMessagePages?.pages ?? [] : [];\n  const allMessages = [...messagePages].reverse().flatMap((page) => page.messages);\n\n  const { data: pendingTask, isLoading: pendingTaskLoading } = useQuery(\n    pendingChatTaskOptions(activeSessionId ?? \"\"),\n  );\n  const showSkeleton =\n    !!activeSessionId && (messagesLoading || pendingTaskLoading);\n  const messages = hideQueuedChatMessages(allMessages, pendingTask);\n  const olderMessageCount = messagePages\n    .slice(1)\n    .reduce((sum, page) => sum + page.messages.length, 0);\n  const firstItemIndex =\n    messages.length > 0\n      ? CHAT_VIRTUOSO_INITIAL_FIRST_ITEM_INDEX - olderMessageCount\n      : 0;\n  const pendingTaskId = pendingTask?.task_id ?? null;\n  const stopRequestedBeforeTaskRef = useRef(false);\n  // Durable deferred-cancellation draft restores (#5219). The whole lifecycle —\n  // fetch, offer, skip-and-re-offer, apply, consume, reconcile — lives in this\n  // hook, shared with the floating chat window.\n  //\n  // Gated on isActive AND app foreground: a backgrounded browser tab still renders\n  // this controller, and it must not fetch/apply/consume a restore the user is\n  // waiting on in a foreground surface. It recovers on its next fetch once the\n  // surface is on screen and the app is refocused. (appForeground also gates auto\n  // mark-read below.)\n  const appForeground = useAppForeground();\n  const { restoreDraftRequest, enqueueLocalRestore, handleRestoreDraftApplied } =\n    useChatDraftRestore(activeSessionId, isActive && appForeground);\n  const {\n    cancelChatTask,\n    handleEditQueuedTask,\n    handleRemoveQueuedTask,\n    handleClearQueuedTasks,\n    handleSendQueuedTaskNow,\n  } = useChatTaskActions(activeSessionId, enqueueLocalRestore);\n  // Nonce handed to ChatInput to pull focus into the compose box when a new\n  // chat starts (new chat, agent switch, project change, conversation\n  // starter), so selecting an existing chat or a deep link never steals focus.\n  const [focusInputRequest, setFocusInputRequest] = useState(0);\n  const requestInputFocus = useCallback(\n    () => setFocusInputRequest((n) => n + 1),\n    [],\n  );\n  const [conversationStarterRequest, setConversationStarterRequest] = useState<{\n    id: number;\n    content: string;\n  } | null>(null);\n  const nextConversationStarterRequestIdRef = useRef(0);\n  const sendConversationStarter = useCallback(\n    (prompt: string) => {\n      setConversationStarterRequest({\n        id: ++nextConversationStarterRequestIdRef.current,\n        content: prompt,\n      });\n      requestInputFocus();\n    },\n    [requestInputFocus],\n  );\n  const handleConversationStarterApplied = useCallback(\n    () => setConversationStarterRequest(null),\n    [],\n  );\n\n  const currentSession = activeSessionId\n    ? sessions.find((s) => s.id === activeSessionId)\n    : null;\n  const isSessionArchived = currentSession?.status === \"archived\";\n  const candidateProjectId = currentSession\n    ? currentSession.project_id ?? null\n    : selectedProjectId;\n  const activeProjectId = candidateProjectId &&\n    (!projectsLoaded || projects.some((project) => project.id === candidateProjectId))\n    ? candidateProjectId\n    : null;\n\n  // A project may be deleted on another client while this workspace's next\n  // chat preference is still persisted locally. Normalize it as soon as the\n  // authoritative project list settles so a future send cannot carry a stale\n  // selection. An outgoing route can retain its queries after the shared\n  // store has rehydrated another workspace; only clean up our own namespace.\n  useEffect(() => {\n    if (getCurrentWsId() !== wsId) return;\n    if (!projectsLoaded || !selectedProjectId) return;\n    if (projects.some((project) => project.id === selectedProjectId)) return;\n    setSelectedProjectId(null);\n  }, [wsId, projectsLoaded, projects, selectedProjectId, setSelectedProjectId]);\n\n  const qc = useQueryClient();\n  const createSession = useCreateChatSession();\n  const markRead = useMarkChatSessionRead();\n  const setSessionProject = useSetChatSessionProject();\n  const setArchived = useSetChatSessionArchived();\n\n  const currentMember = members.find((m) => m.user_id === user?.id);\n  const memberRole = currentMember?.role;\n  const availableAgents = agents.filter(\n    (a) => !a.archived_at && canAssignAgent(a, user?.id, memberRole),\n  );\n  // `availableAgents` is only trustworthy once BOTH queries above succeeded:\n  // the permission filter reads the member role, so agents-without-members\n  // misreports a public_to agent as unavailable. Consumers that must tell\n  // \"still loading\" apart from \"settled and not available\" (the `?agent=`\n  // deep link) gate on this instead of sniffing list emptiness. Query errors\n  // deliberately keep this false — a failed fetch is not a permission verdict.\n  const agentsSettled = agentsLoaded && membersLoaded;\n\n  // The agent bound to the OPEN session, resolved from the full agent list\n  // (archived included, since agentListOptions passes include_archived). An\n  // archived agent is filtered out of `availableAgents`, so resolving the\n  // active agent only from that list would make an archived-agent session\n  // silently render some *other* available agent — wrong avatar/name/presence\n  // in the header, and a send that targets the wrong agent. Binding to the\n  // session's real agent keeps the conversation honest; the archived state\n  // then makes it read-only (see isAgentArchived).\n  const sessionAgent = currentSession\n    ? agents.find((a) => a.id === currentSession.agent_id) ?? null\n    : null;\n  const isAgentArchived = !!sessionAgent?.archived_at;\n\n  // Resolve selected agent: open session's agent → stored preference → first\n  // available. New chats have no session, so they fall through to the picker.\n  const activeAgent =\n    sessionAgent ??\n    availableAgents.find((a) => a.id === selectedAgentId) ??\n    availableAgents[0] ??\n    null;\n  const isAgentRuntimeBound = !!activeAgent && hasAgentRuntime(activeAgent);\n\n  // A session outlives the permission that created it. The agent can be flipped\n  // to personal, change owner, or drop this member from its allow-list, and the\n  // server then refuses every send with `invocation_not_allowed` while still\n  // serving the transcript (MUL-4525 — read uses the view gate, send re-runs the\n  // invoke gate). Judge the SESSION's agent, not just the picker list, so the\n  // composer goes read-only up front instead of after the user types\n  // (MUL-6380). Same rule the server enforces, via the shared predicate.\n  const isAgentAccessRevoked =\n    !!activeAgent && !canAssignAgent(activeAgent, user?.id, memberRole);\n\n  const agentAvailability = useWorkspaceAgentAvailability();\n  const noAgent = agentAvailability === \"none\";\n\n  const projectContextSupport = useChatProjectContextSupport(wsId, activeAgent);\n\n  const presenceDetail = useAgentPresenceDetail(wsId, activeAgent?.id);\n  const availability =\n    presenceDetail === \"loading\" ? undefined : presenceDetail.availability;\n\n  // Auto mark-as-read whenever the user is actively looking at a session with\n  // unread state. `isActive` lets the caller say \"my surface is on screen\":\n  // the floating overlay passes `isOpen`, the tab passes `true`. `appForeground`\n  // additionally requires the window to be visible and focused: a reply landing\n  // while the app is backgrounded must stay unread so the sidebar badges it\n  // (MUL-4485); it clears the moment the user returns and this effect re-runs.\n  //\n  // The read is deferred by a tick and cancelled on cleanup, so a session that\n  // is only *momentarily* active never gets marked read. This is the fix for\n  // MUL-4360's mount race: `activeSessionId` is persisted, so on a bare `/chat`\n  // navigation the page restores the last session for one frame before its\n  // URL→store effect (which runs AFTER this hook's effects, since the hook is\n  // called first) clears it back to null. Without the defer, that restored-but-\n  // never-opened session was marked read in that gap — its badge vanished\n  // though the user never opened it (right pane still shows \"select a chat\").\n  // Deferring lets the subsequent activeSessionId change cancel the pending\n  // read via cleanup; the store re-check is a belt-and-suspenders guard. Only a\n  // session that stays active past the tick — a real select, deep link, or\n  // refresh — is read.\n  const currentHasUnread =\n    sessions.find((s) => s.id === activeSessionId)?.has_unread ?? false;\n  useEffect(() => {\n    if (!isActive || !appForeground || !activeSessionId) return;\n    if (!currentHasUnread) return;\n    const sessionId = activeSessionId;\n    const timer = setTimeout(() => {\n      if (useChatStore.getState().activeSessionId !== sessionId) return;\n      uiLogger.info(\"auto markRead\", { sessionId });\n      markRead.mutate(sessionId);\n    }, 0);\n    return () => clearTimeout(timer);\n    // eslint-disable-next-line react-hooks/exhaustive-deps -- markRead ref stable\n  }, [isActive, appForeground, activeSessionId, currentHasUnread]);\n\n  const sessionPromiseRef = useRef<Promise<string | null> | null>(null);\n  const ensureSession = useCallback(\n    async (): Promise<string | null> => {\n      // Trust the current session id only when it's real: present in the\n      // loaded list, or a just-created one still awaiting the list refetch\n      // (has an optimistic write). A dangling id (deleted / no access) must not\n      // be treated as an existing session — fall through and create a fresh one\n      // so the message lands somewhere instead of POSTing into a 404.\n      if (\n        activeSessionId &&\n        (!sessionsLoaded ||\n          sessions.some((s) => s.id === activeSessionId) ||\n          hasInFlightPendingTask(qc, activeSessionId))\n      ) {\n        return activeSessionId;\n      }\n      if (!activeAgent) return null;\n      if (sessionPromiseRef.current) return sessionPromiseRef.current;\n\n      const promise = (async () => {\n        try {\n          // Untitled on purpose: the server derives the title from the first\n          // message it accepts, the same rule for every client and channel.\n          const session = await createSession.mutateAsync({\n            agent_id: activeAgent.id,\n            project_id: activeProjectId,\n          });\n          return session.id;\n        } finally {\n          sessionPromiseRef.current = null;\n        }\n      })();\n      sessionPromiseRef.current = promise;\n      return promise;\n    },\n    [\n      activeSessionId,\n      activeAgent,\n      activeProjectId,\n      createSession,\n      sessions,\n      sessionsLoaded,\n      qc,\n    ],\n  );\n\n  // Self-heal a dangling `activeSessionId`. Once the sessions list has loaded\n  // and it isn't in the list — with no in-flight optimistic write exempting a\n  // just-created session — the id was deleted, lost access, or never existed\n  // (a stale `?session=` deep link, or a persisted floating-window selection).\n  // Clearing it stops BOTH surfaces (the tab and the floating window) from\n  // rendering an editable empty chat whose send would POST into a nonexistent\n  // session. Lives in the shared controller so every surface self-heals.\n  useEffect(() => {\n    if (getCurrentWsId() !== wsId) return;\n    if (!activeSessionId || !sessionsLoaded) return;\n    if (sessions.some((s) => s.id === activeSessionId)) return;\n    if (hasInFlightPendingTask(qc, activeSessionId)) return;\n    uiLogger.info(\"clearing dangling activeSessionId\", { sessionId: activeSessionId });\n    setActiveSession(null);\n  }, [wsId, activeSessionId, sessionsLoaded, sessions, qc, setActiveSession]);\n\n  // Upload transport moved into the coordinated-upload engine inside ChatInput\n  // (MUL-5181 L2); surfaces only forward whether the affordance exists.\n  const uploadEnabled = !!activeAgent;\n\n  const handleSend = useCallback(\n    async (\n      content: string,\n      attachmentIds?: string[],\n      commitInput?: (options?: { extraDraftKeys?: string[]; clearEditor?: boolean }) => void,\n      draftAttachments: Attachment[] = [],\n      options?: { queue?: boolean },\n    ): Promise<boolean> => {\n      if (!activeAgent) {\n        apiLogger.warn(\"sendChatMessage skipped: no active agent\");\n        return false;\n      }\n      // Read-only conversation: the agent is retired and can no longer pick up\n      // work, so refuse to enqueue a task that would sit orphaned forever. The\n      // input is disabled in this state; this is the belt-and-braces guard.\n      if (isAgentArchived) {\n        apiLogger.warn(\"sendChatMessage skipped: agent is archived\", {\n          sessionId: activeSessionId,\n          agentId: activeAgent.id,\n        });\n        return false;\n      }\n      // Invoke permission was revoked while this session was open. The server\n      // would refuse with a 403 before persisting anything; not attempting the\n      // send keeps the draft and avoids a pointless roundtrip. The input is\n      // disabled in this state — this is the belt-and-braces guard.\n      if (isAgentAccessRevoked) {\n        apiLogger.warn(\"sendChatMessage skipped: invoke permission revoked\", {\n          sessionId: activeSessionId,\n          agentId: activeAgent.id,\n        });\n        return false;\n      }\n      if (pendingTaskId && pendingTask?.supports_queue !== true) {\n        apiLogger.warn(\"sendChatMessage skipped: server does not support follow-up queues\", {\n          sessionId: activeSessionId,\n        });\n        return false;\n      }\n      if (!isAgentRuntimeBound) {\n        toast.error(t(($) => $.input.runtime_required_toast));\n        return false;\n      }\n\n      const finalContent = content;\n      const isNewSession = !activeSessionId;\n\n      apiLogger.info(\"sendChatMessage.start\", {\n        sessionId: activeSessionId,\n        isNewSession,\n        agentId: activeAgent.id,\n        contentLength: finalContent.length,\n        attachmentCount: attachmentIds?.length ?? 0,\n      });\n\n      let sessionId: string | null = null;\n      try {\n        sessionId = await ensureSession();\n      } catch (err) {\n        apiLogger.error(\"sendChatMessage.ensureSession.error\", err);\n        // A revoked invoke permission blocks session create with a structured\n        // 403 (MUL-4525) — name the cause instead of a generic failure.\n        const reason = dispatchReasonCode(err);\n        toast.error(\n          reason === \"invocation_not_allowed\"\n            ? t(($) => $.input.send_blocked_toast)\n            : reason === \"agent_runtime_required\"\n              ? t(($) => $.input.runtime_required_toast)\n              : reason === \"runtime_access_denied\"\n                ? t(($) => $.input.runtime_access_denied_toast)\n                : t(($) => $.input.send_failed_toast),\n        );\n        return false;\n      }\n      if (!sessionId) {\n        apiLogger.warn(\"sendChatMessage aborted: ensureSession returned null\");\n        return false;\n      }\n\n      // Await-then-render: the composer keeps the user's text and attachments\n      // in place (editor locked, button spinning via `submitting`) until the\n      // server accepts the send. Nothing is written into the caches, and the\n      // draft is never cleared, before the roundtrip settles — a slow send never\n      // reads as \"posted but the box is still full\", and a rejected one keeps\n      // the draft for retry (ChatInput never cleared it).\n      let result;\n      try {\n        result = options?.queue\n          ? await api.sendChatMessage(sessionId, finalContent, attachmentIds, options)\n          : await api.sendChatMessage(sessionId, finalContent, attachmentIds);\n      } catch (err) {\n        apiLogger.error(\"sendChatMessage.error\", { sessionId, err });\n        // Invoke permission can be revoked mid-session; the send is refused with\n        // a structured 403 before anything persists (MUL-4525). Surface the\n        // specific cause so the user knows it is a permission change, not a\n        // transient failure they should retry.\n        const reason = dispatchReasonCode(err);\n        toast.error(\n          reason === \"invocation_not_allowed\"\n            ? t(($) => $.input.send_blocked_toast)\n            : reason === \"agent_runtime_required\"\n              ? t(($) => $.input.runtime_required_toast)\n              : reason === \"runtime_access_denied\"\n                ? t(($) => $.input.runtime_access_denied_toast)\n                : t(($) => $.input.send_failed_toast),\n        );\n        return false;\n      }\n      apiLogger.info(\"sendChatMessage.success\", {\n        sessionId,\n        messageId: result.message_id,\n        taskId: result.task_id,\n      });\n\n      // Render the accepted message from the server response. Prime the message\n      // caches BEFORE publishing the session so the first useQuery read after\n      // activeSessionId flips hits data synchronously (no new-chat skeleton\n      // flash), and seed the pending task with the server's real id and\n      // created_at so the StatusPill mounts anchored to the true clock and the\n      // stale-session self-heal exempts this just-created session until the\n      // sessions-list refetch includes it.\n      const sent: ChatMessage = {\n        id: result.message_id,\n        chat_session_id: sessionId,\n        role: \"user\",\n        content: finalContent,\n        task_id: result.message_task_id ?? result.task_id,\n        created_at: result.message_created_at ?? result.created_at,\n        attachments: draftAttachments,\n      };\n      // Single door into the message caches (MUL-5711): idempotent by id, so\n      // this row and the chat:message echo of the same send converge in either\n      // arrival order, and this richer row (it carries the draft attachments)\n      // is never downgraded by the echo, which has no attachments field.\n      upsertChatMessageToCaches(qc, sessionId, sent, { seedIfMissing: true });\n      if (result.steered !== true) {\n        seedAcceptedPendingTask(qc, sessionId, {\n          task_id: result.task_id,\n          created_at: result.created_at,\n          message_id: result.message_id,\n          content: finalContent,\n          supports_queue: result.supports_queue,\n          queued: result.queued,\n        });\n      }\n      // This send just committed the new session's server-derived title.\n      if (sessionId !== activeSessionId) {\n        void refetchChatSessionsAfterCommit(qc, chatKeys.sessions(wsId));\n      }\n      // Cache primed → publish the new active session, but only if the user\n      // hasn't navigated away mid-send. See isStillOnComposeTarget. commitInput\n      // clears the sent draft, and scrubs the shared editor only when the user\n      // is still on the session they sent from.\n      const live = useChatStore.getState();\n      const stillOnSourceSession = isStillOnComposeTarget(live.activeSessionId, activeSessionId);\n      if (stillOnSourceSession) {\n        setActiveSession(sessionId);\n      }\n      commitInput?.({ extraDraftKeys: [sessionId], clearEditor: stillOnSourceSession });\n\n      if (stopRequestedBeforeTaskRef.current) {\n        stopRequestedBeforeTaskRef.current = false;\n        await cancelChatTask(result.task_id, sessionId, {\n          restoreDraftToInput: true,\n          source: \"deferred-send\",\n        });\n        return false;\n      }\n      if (attachmentIds && attachmentIds.length > 0 && result.attachment_ids) {\n        const boundIds = new Set(result.attachment_ids);\n        const missing = attachmentIds.filter((id) => !boundIds.has(id));\n        if (missing.length > 0) {\n          apiLogger.warn(\"sendChatMessage.attachments missing after send\", {\n            sessionId,\n            messageId: result.message_id,\n            missing,\n          });\n          toast.error(t(($) => $.input.attachment_bind_failed_toast));\n        }\n      }\n      qc.invalidateQueries({ queryKey: chatKeys.messages(sessionId) });\n      qc.invalidateQueries({ queryKey: chatKeys.messagesPage(sessionId) });\n      return true;\n    },\n    [\n      wsId,\n      activeSessionId,\n      activeAgent,\n      isAgentArchived,\n      isAgentAccessRevoked,\n      pendingTask,\n      pendingTaskId,\n      isAgentRuntimeBound,\n      ensureSession,\n      cancelChatTask,\n      qc,\n      setActiveSession,\n      t,\n    ],\n  );\n\n  const handleStop = useCallback(() => {\n    if (!pendingTaskId || !activeSessionId) {\n      apiLogger.debug(\"cancelTask skipped: no pending task\");\n      return;\n    }\n    if (!isTaskMessageTaskId(pendingTaskId)) {\n      stopRequestedBeforeTaskRef.current = true;\n      apiLogger.info(\"cancelTask.deferred until server task id\", {\n        taskId: pendingTaskId,\n        sessionId: activeSessionId,\n      });\n      return;\n    }\n    void cancelChatTask(pendingTaskId, activeSessionId, {\n      restoreDraftToInput: true,\n      source: \"active-input\",\n    });\n  }, [pendingTaskId, activeSessionId, cancelChatTask]);\n\n  const handleNewChat = useCallback(() => {\n    uiLogger.info(\"newChat\", {\n      previousSessionId: activeSessionId,\n      previousPendingTask: pendingTaskId,\n    });\n    // A fresh chat has no project unless the user explicitly chooses one.\n    // The open session's project is server-owned history, not a default for\n    // the next session.\n    setSelectedProjectId(null);\n    setActiveSession(null);\n    requestInputFocus();\n  }, [\n    activeSessionId,\n    pendingTaskId,\n    setSelectedProjectId,\n    setActiveSession,\n    requestInputFocus,\n  ]);\n\n  // Start a fresh chat bound to a chosen agent. Unlike handleSelectAgent this\n  // does not no-op when the agent is unchanged — \"new chat\" always clears the\n  // active session so the user lands on an empty compose for that agent. The\n  // session row is created lazily on the first send (see ensureSession).\n  const handleStartNewChat = useCallback(\n    (agent: Agent) => {\n      uiLogger.info(\"startNewChat\", {\n        agentId: agent.id,\n        previousSessionId: activeSessionId,\n      });\n      setSelectedAgentId(agent.id);\n      setSelectedProjectId(null);\n      setActiveSession(null);\n      requestInputFocus();\n    },\n    [\n      activeSessionId,\n      setSelectedAgentId,\n      setSelectedProjectId,\n      setActiveSession,\n      requestInputFocus,\n    ],\n  );\n\n  // Switch the composer to another agent (the floating window's agent picker).\n  const handleSelectAgent = useCallback(\n    (agent: Agent) => {\n      // No-op when clicking the already-active agent — don't clobber the\n      // current session just because the user closed the menu this way.\n      // Compare against activeAgent (what the UI shows), not selectedAgentId\n      // (which may be null / point to an archived agent on first load).\n      if (activeAgent && agent.id === activeAgent.id) return;\n      uiLogger.info(\"selectAgent\", {\n        from: selectedAgentId,\n        to: agent.id,\n        previousSessionId: activeSessionId,\n      });\n      setSelectedAgentId(agent.id);\n      // Preserve an explicitly chosen project while composing an unsent chat,\n      // but never inherit project context from the historical session being\n      // left behind.\n      setSelectedProjectId(currentSession ? null : activeProjectId);\n      setActiveSession(null);\n      requestInputFocus();\n    },\n    [\n      activeAgent,\n      selectedAgentId,\n      activeSessionId,\n      activeProjectId,\n      currentSession,\n      setSelectedAgentId,\n      setSelectedProjectId,\n      setActiveSession,\n      requestInputFocus,\n    ],\n  );\n\n  const handleSelectSession = useCallback(\n    (session: { id: string; agent_id: string; project_id?: string | null }) => {\n      // Sessions are bound 1:1 to an agent — picking a session from a\n      // different agent implicitly switches the agent too.\n      if (activeAgent && session.agent_id !== activeAgent.id) {\n        uiLogger.info(\"selectSession (cross-agent)\", {\n          from: activeAgent.id,\n          toAgent: session.agent_id,\n          toSession: session.id,\n        });\n        setSelectedAgentId(session.agent_id);\n      }\n      setActiveSession(session.id);\n    },\n    [activeAgent, setSelectedAgentId, setActiveSession],\n  );\n\n  const handleProjectChange = useCallback(\n    (projectId: string | null) => {\n      if (projectId === activeProjectId) return;\n      uiLogger.info(\"selectProjectContext\", {\n        from: activeProjectId,\n        to: projectId,\n        previousSessionId: activeSessionId,\n      });\n      const plan = planProjectContextChange({\n        targetProjectId: projectId,\n        activeSessionId,\n        currentSession: currentSession ?? null,\n      });\n      switch (plan.kind) {\n        case \"awaitSession\":\n          return;\n        case \"detachCurrent\":\n          setSessionProject.mutate({ sessionId: plan.sessionId, projectId: null });\n          break;\n        case \"startFreshChat\":\n          setSelectedAgentId(plan.agentId);\n          setSelectedProjectId(plan.projectId);\n          setActiveSession(null);\n          break;\n        case \"setDraftProject\":\n          setSelectedProjectId(plan.projectId);\n          break;\n      }\n      requestInputFocus();\n    }, [\n      activeProjectId,\n      activeSessionId,\n      currentSession,\n      setSessionProject,\n      setSelectedAgentId,\n      setSelectedProjectId,\n      setActiveSession,\n      requestInputFocus,\n    ],\n  );\n\n  // Archiving the chat currently in view would otherwise strand the\n  // conversation pane on a now read-only, \"dangling\" session. Mirror the Inbox\n  // list: advance selection to the next chat in the (sorted, non-archived)\n  // history, fall back to the previous one, and clear only when nothing is\n  // left. Routing the non-null advance through handleSelectSession keeps\n  // selectedAgentId in sync, so a follow-up \"new chat\" still defaults to the\n  // right agent even when the next chat belongs to a different agent. A no-op\n  // when the archived session isn't the open one — that selection stays put.\n  const advanceSelectionAfterArchive = useCallback(\n    (session: { id: string; agent_id: string }) => {\n      if (activeSessionId !== session.id) return;\n      const history = sortChatSessions(\n        sessions.filter((s) => s.status !== \"archived\"),\n      );\n      const idx = history.findIndex((s) => s.id === session.id);\n      const next = history[idx + 1] ?? history[idx - 1] ?? null;\n      if (next) handleSelectSession(next);\n      else setActiveSession(null);\n    },\n    [activeSessionId, sessions, handleSelectSession, setActiveSession],\n  );\n\n  const archiveSession = useCallback(\n    (sessionId: string) => setArchived.mutate({ sessionId, archived: true }),\n    [setArchived],\n  );\n\n  const hasMessages = messages.length > 0 || !!pendingTaskId;\n\n  return {\n    // identity / lists\n    wsId,\n    user,\n    agents,\n    availableAgents,\n    agentsSettled,\n    sessions,\n    projects,\n    activeSessionId,\n    selectedAgentId,\n    activeProjectId,\n    projectContextUnsupported: projectContextSupport === false,\n    isProjectUpdating:\n      setSessionProject.isPending || (!!activeSessionId && !currentSession),\n    currentSession,\n    isSessionArchived,\n    isAgentArchived,\n    isAgentAccessRevoked,\n    isAgentRuntimeBound,\n    activeAgent,\n    noAgent,\n    availability,\n    // messages\n    messages,\n    pendingTask,\n    pendingTaskLoading,\n    pendingTaskId,\n    showSkeleton,\n    hasMessages,\n    firstItemIndex,\n    hasOlderMessages: !!hasOlderMessages,\n    isFetchingOlderMessages,\n    fetchOlderMessages,\n    // draft restore\n    restoreDraftRequest,\n    handleRestoreDraftApplied,\n    // compose-box focus nonce (bumped on new chat)\n    focusInputRequest,\n    conversationStarterRequest,\n    handleConversationStarterApplied,\n    sendConversationStarter,\n    // actions\n    handleSend,\n    handleStop,\n    handleSendQueuedTaskNow,\n    handleEditQueuedTask,\n    handleRemoveQueuedTask,\n    handleClearQueuedTasks,\n    uploadEnabled,\n    handleNewChat,\n    handleStartNewChat,\n    handleSelectAgent,\n    handleSelectSession,\n    handleProjectChange,\n    advanceSelectionAfterArchive,\n    archiveSession,\n    // store setters (for surfaces that sync selection to the URL, etc.)\n    setActiveSession,\n    setSelectedAgentId,\n  };\n}\n\nexport type ChatController = ReturnType<typeof useChatController>;\n"
+    }
+  ],
+  "edges": [
+    {
+      "source": "packages/views/chat/components/use-chat-controller.ts",
+      "kind": "direct or executed hook transport and finite conservative refetch union",
+      "inventory": [
+        {
+          "id": "client:2066",
+          "method": "GET",
+          "path_expression": "/api/agents?${search}",
+          "route": {
+            "method": "GET",
+            "path": "/api/agents"
+          }
+        },
+        {
+          "id": "client:2276",
+          "method": "GET",
+          "path_expression": "/api/runtimes?${search}",
+          "route": {
+            "method": "GET",
+            "path": "/api/runtimes"
+          }
+        },
+        {
+          "id": "client:3046",
+          "method": "GET",
+          "path_expression": "/api/agent-task-snapshot",
+          "route": {
+            "method": "GET",
+            "path": "/api/agent-task-snapshot"
+          }
+        },
+        {
+          "id": "client:3765",
+          "method": "GET",
+          "path_expression": "/api/workspaces/${workspaceId}/members",
+          "route": {
+            "method": "GET",
+            "path": "/api/workspaces/{id}/members"
+          }
+        },
+        {
+          "id": "client:4106",
+          "method": "GET",
+          "path_expression": "/api/chat/sessions${query}",
+          "route": {
+            "method": "GET",
+            "path": "/api/chat/sessions"
+          }
+        },
+        {
+          "id": "client:4129",
+          "method": "POST",
+          "path_expression": "/api/chat/sessions",
+          "route": {
+            "method": "POST",
+            "path": "/api/chat/sessions"
+          }
+        },
+        {
+          "id": "client:4164",
+          "method": "PATCH",
+          "path_expression": "/api/chat/sessions/${id}",
+          "route": {
+            "method": "PATCH",
+            "path": "/api/chat/sessions/{sessionId}"
+          }
+        },
+        {
+          "id": "client:4178",
+          "method": "PATCH",
+          "path_expression": "/api/chat/sessions/${id}/archive",
+          "route": {
+            "method": "PATCH",
+            "path": "/api/chat/sessions/{sessionId}/archive"
+          }
+        },
+        {
+          "id": "client:4201",
+          "method": "GET",
+          "path_expression": "/api/chat/sessions/${sessionId}/messages",
+          "route": {
+            "method": "GET",
+            "path": "/api/chat/sessions/{sessionId}/messages"
+          }
+        },
+        {
+          "id": "client:4218",
+          "method": "GET",
+          "path_expression": "/api/chat/sessions/${sessionId}/messages/page?${query.toString()}",
+          "route": {
+            "method": "GET",
+            "path": "/api/chat/sessions/{sessionId}/messages/page"
+          }
+        },
+        {
+          "id": "client:4260",
+          "method": "POST",
+          "path_expression": "/api/chat/sessions/${sessionId}/messages",
+          "route": {
+            "method": "POST",
+            "path": "/api/chat/sessions/{sessionId}/messages"
+          }
+        },
+        {
+          "id": "client:4295",
+          "method": "GET",
+          "path_expression": "/api/chat/sessions/${sessionId}/pending-task",
+          "route": {
+            "method": "GET",
+            "path": "/api/chat/sessions/{sessionId}/pending-task"
+          }
+        },
+        {
+          "id": "client:4305",
+          "method": "POST",
+          "path_expression": "/api/chat/sessions/${sessionId}/queued-tasks/${taskId}/prioritize",
+          "route": {
+            "method": "POST",
+            "path": "/api/chat/sessions/{sessionId}/queued-tasks/{taskId}/prioritize"
+          }
+        },
+        {
+          "id": "client:4318",
+          "method": "DELETE",
+          "path_expression": "/api/chat/sessions/${sessionId}/queued-tasks",
+          "route": {
+            "method": "DELETE",
+            "path": "/api/chat/sessions/{sessionId}/queued-tasks"
+          }
+        },
+        {
+          "id": "client:4331",
+          "method": "GET",
+          "path_expression": "/api/chat/sessions/${sessionId}/draft-restores",
+          "route": {
+            "method": "GET",
+            "path": "/api/chat/sessions/{sessionId}/draft-restores"
+          }
+        },
+        {
+          "id": "client:4345",
+          "method": "DELETE",
+          "path_expression": "/api/chat/sessions/${sessionId}/draft-restores/${restoreId}",
+          "route": {
+            "method": "DELETE",
+            "path": "/api/chat/sessions/{sessionId}/draft-restores/{restoreId}"
+          }
+        },
+        {
+          "id": "client:4390",
+          "method": "GET",
+          "path_expression": "/api/chat/pending-tasks",
+          "route": {
+            "method": "GET",
+            "path": "/api/chat/pending-tasks"
+          }
+        },
+        {
+          "id": "client:4394",
+          "method": "GET",
+          "path_expression": "/api/chat/pending-tasks/has-any",
+          "route": {
+            "method": "GET",
+            "path": "/api/chat/pending-tasks/has-any"
+          }
+        },
+        {
+          "id": "client:4398",
+          "method": "POST",
+          "path_expression": "/api/chat/sessions/${sessionId}/read",
+          "route": {
+            "method": "POST",
+            "path": "/api/chat/sessions/{sessionId}/read"
+          }
+        },
+        {
+          "id": "client:4417",
+          "method": "POST",
+          "path_expression": "/api/tasks/${taskId}/cancel${query}",
+          "route": {
+            "method": "POST",
+            "path": "/api/tasks/{taskId}/cancel"
+          }
+        },
+        {
+          "id": "client:4517",
+          "method": "GET",
+          "path_expression": "/api/projects?${search}",
+          "route": {
+            "method": "GET",
+            "path": "/api/projects"
+          }
+        }
+      ]
+    }
+  ],
+  "semantics": [
+    "Whole controller lines 1-915 audited. No direct user fetch: user is an auth-store selector. Agents, members, sessions(status=all), projects(include_archived) are mounted without controller enabled/visibility gates; project select extracts data.projects. Duplicate availability observers use the same keys. Agent list polls every 30 seconds only with a nonarchived online/unstable row.",
+    "Messages page requires activeSessionId AND isActive; limit 50, reverse pages, cursor next only when has_more; initial page 404 fallback is flat messages. Pending requires session only, independent of visibility. Both staleTime Infinity. fetchOlderMessages is returned to callers, not executed at mount.",
+    "Availability hook uses isFetched (including errors), whereas agentsSettled requires BOTH isSuccess; user/member role and archive/permission filter resolve available agents. Session agent resolves from full list including archived before selected preference and first available. URL-agent intent is supplied by page: controller exposes agentsSettled and selection callbacks, performs no URL parsing/navigation.",
+    "Presence executes agents/runtimes/task-snapshot observers gated by workspace, even absent agent; errors degrade to empty data. Snapshot stale 30 seconds and focus refetch; 30-second presence interval is local recomputation and cleans up. Project-context support executes workspace-gated runtime list independent of agent; missing bound runtime returns unknown, version support is advisory, not send gate.",
+    "Auto-read requires active surface, app foreground, session and unread. Zero-delay timer rechecks live active session and cleans up; read mutation cancels/snapshots session list, optimistically clears unread, rolls back on error, invalidates on settle. Foreground uses DOM listeners or native focus promise/subscription, disposed on cleanup; no HTTP.",
+    "ensureSession trusts active ID until list succeeds or while pending task cached; otherwise creates lazily with active agent/project. Shared promise prevents concurrent creates, finally resets. Creation invalidates sessions on either settlement. Dangling session and stale project cleanup require current workspace identity; query errors do not authorize cleanup.",
+    "Send rejects missing/archived/access-revoked agent, unsupported follow-up queue and unbound runtime. No additional isActive/foreground/archive-session/project-version guard in callback. Ensure/create and send errors return false and preserve input; reason codes choose toast. Queue option passed only when requested. Accepted response primes message caches then pending unless steered, invalidates pending, and cancels/refetches sessions after commit if ID changed. Live active-session equality controls publishing and editor clearing; commitInput receives extra session draft key. Deferred stop cancels accepted task and returns false. Attachment binding mismatch toasts; ordinary completion invalidates flat/page messages and returns true.",
+    "Stop without pending/session is no-op; non-server task ID sets deferred-stop ref; real ID invokes shared cancel. Queue/cancel/archive settlement and finite aggregate refetch are inherited from queue/archive proof, including derived edit 409 retry and pre-try cancelQueries rejection caveat.",
+    "Project change equal-ID no-op; unloaded active row waits. Detach PATCHes project_id=null optimistically with snapshot rollback and sessions settlement invalidation. Different nonnull project starts local fresh chat bound to old session agent; no active session only updates persisted preference. Deleted project normalized only after list success. isProjectUpdating includes active row not yet loaded.",
+    "New/start/agent/session actions are local store selection and focus nonce changes, not create calls. Agent switch preserves explicit unsent project but clears historical context; same active agent no-op. Session selection synchronizes cross-agent preference. Conversation starter increments local request ID and focus nonce; applied clears request.",
+    "Archive advance only affects active target: sorted nonarchived history next, previous, null; handleSelectSession preserves cross-agent preference. Archive PATCH is separate; selection is not rolled back on mutation error.",
+    "Restore executes only session plus active/foreground; local queue has priority, off-session offer released, disabled offer released without consume. Applied durable IDs recorded before consume, in-flight Set prevents duplicate reconcile; successful consume forgets ledger, settle releases Set. Failed consume retained for future reconciliation. Local applied restore dequeues persisted session queue. Cache/store helpers reuse scoped proofs, do not introduce HTTP.",
+    "No arbitrary rendered descendants, third-party query internals, global realtime subscriptions or backend implementation claims are included. Invalidation is a possible active-observer refetch, not an unconditional request."
+  ],
+  "reused_evidence": [
+    {
+      "path": "server/contracts/batches/chat-queue-archive-transport-closure.json",
+      "sha256": "13c094507748fb4f420eba6c1a3b302a36ac77f05452cac5067a6148f1666909"
+    },
+    {
+      "path": "server/contracts/batches/chat-context-annotation-transport-closure.json",
+      "sha256": "99ea6be9d82f05549154f2148056a6ba644d5e65623759771c25c08cad028026"
+    },
+    {
+      "path": "server/contracts/batches/chat-input-transport-coverage.json",
+      "sha256": "c9d61a77c3939b5c2edbe5d2aea4c91888166174575dfff5e7e2dedde34779fe"
+    }
+  ],
+  "refetch_union": {
+    "keys": [
+      "sessions(wsId)",
+      "messages(sessionId)",
+      "messagesPage(sessionId)",
+      "pendingTask(sessionId)",
+      "draftRestores(sessionId)",
+      "pendingTasks workspace aggregate (list/has-any)"
+    ],
+    "inventory_ids": [
+      "client:4106",
+      "client:4201",
+      "client:4218",
+      "client:4295",
+      "client:4331",
+      "client:4390",
+      "client:4394"
+    ],
+    "bound": "Only matching existing active observers; no arbitrary query-cache expansion."
+  },
+  "remaining_controller_edges": [],
+  "verification": "Static source audit only; no runtime, tests, network, model, data or git operations.",
+  "historical_host_context": [
+    {
+      "path": "server/contracts/batches/chat-page-transport-closure.json",
+      "sha256": "f69cd342552264b94703be0ef10deece8db084bc75d80c5c7c8ed2be089459ea"
+    },
+    {
+      "path": "server/contracts/batches/chat-window-transport-closure.json",
+      "sha256": "458feec49ec819728cf18370465d63fbbe14e6a9e59dc7f1cf9c40908d45c3d1"
+    }
+  ],
+  "root_review": {
+    "status": "accepted_bounded_target",
+    "checks": [
+      "Independent read of mounted query gates, ensureSession, send error handling/cache publication/commit, deferred stop and archive advance",
+      "All source/reused hashes and 21 exact tuples validated"
+    ],
+    "qualification": "Host records retained as historical input context, not circular proof dependencies. Rendered descendants and runtime support excluded."
+  }
+}

@@ -1,0 +1,722 @@
+{
+  "scope": "Task1 static pointer reconciliation only; root review pending. No whole-application or backend completion claim.",
+  "input": "server/contracts/batches/transport-coverage-final-verification.json",
+  "input_pointer": "/sources_without_direct_matching_hash_pointer",
+  "source_count": 48,
+  "counts": {
+    "missing": 42,
+    "resolved": 6
+  },
+  "method": "Recursively inspect existing batch JSON source-associated SHA-256 records; exclude final-verification and shared ledger as derivative evidence. Compare recorded expected hashes with current source bytes. No source body re-audit. Partial original scopes remain partial.",
+  "inspected_artifacts": [
+    "server/contracts/batches/active-web-auth-transport.json",
+    "server/contracts/batches/agent-builder-transport-coverage.json",
+    "server/contracts/batches/agent-settings-transport-coverage.json",
+    "server/contracts/batches/api-client-execution-closure.json",
+    "server/contracts/batches/api-client-section-reconciliation.json",
+    "server/contracts/batches/api-client-wrappers-agents-cloud.json",
+    "server/contracts/batches/api-client-wrappers-attachments-chat.json",
+    "server/contracts/batches/api-client-wrappers-core.json",
+    "server/contracts/batches/api-client-wrappers-resources.json",
+    "server/contracts/batches/api-client-wrappers-tail.json",
+    "server/contracts/batches/auth-route-events.json",
+    "server/contracts/batches/auth-workspaces-health.json",
+    "server/contracts/batches/autopilot-detail-transport-coverage.json",
+    "server/contracts/batches/avatar-foreground-transport-coverage.json",
+    "server/contracts/batches/chat-context-annotation-transport-closure.json",
+    "server/contracts/batches/chat-controller-transport-coverage.json",
+    "server/contracts/batches/chat-host-transport-coverage.json",
+    "server/contracts/batches/chat-inbox-transport-coverage.json",
+    "server/contracts/batches/chat-input-transport-coverage.json",
+    "server/contracts/batches/chat-page-transport-closure.json",
+    "server/contracts/batches/chat-queue-archive-transport-closure.json",
+    "server/contracts/batches/chat-window-transport-closure.json",
+    "server/contracts/batches/comment-card-transport-coverage.json",
+    "server/contracts/batches/comments.json",
+    "server/contracts/batches/composer-submit-coverage.json",
+    "server/contracts/batches/contribution.json",
+    "server/contracts/batches/core-query-transport-coverage.json",
+    "server/contracts/batches/create-issue-transport-coverage.json",
+    "server/contracts/batches/creation-dialog-transport-coverage.json",
+    "server/contracts/batches/dashboard-surface-transport-coverage.json",
+    "server/contracts/batches/deliverable-transport-coverage.json",
+    "server/contracts/batches/draft-attachment-transport-coverage.json",
+    "server/contracts/batches/editor-extension-transport-coverage.json",
+    "server/contracts/batches/editor-preview-transport-coverage.json",
+    "server/contracts/batches/editor-transport-coverage.json",
+    "server/contracts/batches/external-transport-coverage.json",
+    "server/contracts/batches/files.json",
+    "server/contracts/batches/folders-rich-content-transport-coverage.json",
+    "server/contracts/batches/identity-lookup.json",
+    "server/contracts/batches/identity-workspace-schema.json",
+    "server/contracts/batches/identity-workspace-transport-coverage.json",
+    "server/contracts/batches/inline-run-transport-coverage.json",
+    "server/contracts/batches/invitation-decline.json",
+    "server/contracts/batches/issue-action-card-transport-coverage.json",
+    "server/contracts/batches/issue-aggregate-read-events.json",
+    "server/contracts/batches/issue-cache-transport-coverage.json",
+    "server/contracts/batches/issue-composer-transport-coverage.json",
+    "server/contracts/batches/issue-detail-edit-section.json",
+    "server/contracts/batches/issue-detail-helper-sections.json",
+    "server/contracts/batches/issue-detail-local-render-closure.json",
+    "server/contracts/batches/issue-detail-query-section.json",
+    "server/contracts/batches/issue-detail-render-section.json",
+    "server/contracts/batches/issue-detail-transport-coverage.json",
+    "server/contracts/batches/issue-display-transport-coverage.json",
+    "server/contracts/batches/issue-execution-read-events.json",
+    "server/contracts/batches/issue-menu-transport-coverage.json",
+    "server/contracts/batches/issue-mutations-transport-coverage.json",
+    "server/contracts/batches/issue-query-transport-coverage.json",
+    "server/contracts/batches/issue-read-events.json",
+    "server/contracts/batches/issue-resource-read-events.json",
+    "server/contracts/batches/issue-surface-action-transport.json",
+    "server/contracts/batches/issue-surface-controller-closure.json",
+    "server/contracts/batches/issue-surface-transport-coverage.json",
+    "server/contracts/batches/issue-trigger-transport-coverage.json",
+    "server/contracts/batches/issue-ws-updaters-transport-coverage.json",
+    "server/contracts/batches/issues-core.json",
+    "server/contracts/batches/issues-update-delete.json",
+    "server/contracts/batches/local-source-dispositions.json",
+    "server/contracts/batches/member-squad-transport-coverage.json",
+    "server/contracts/batches/observer-local-state-transport-coverage.json",
+    "server/contracts/batches/onboarding-completion.json",
+    "server/contracts/batches/onboarding.json",
+    "server/contracts/batches/platform-host-transport-coverage.json",
+    "server/contracts/batches/platform-session-transport-coverage.json",
+    "server/contracts/batches/plugin-surface-transport-coverage.json",
+    "server/contracts/batches/pr-view-refresh-event.json",
+    "server/contracts/batches/profile-update.json",
+    "server/contracts/batches/project-detail-update-delete.json",
+    "server/contracts/batches/project-list-create.json",
+    "server/contracts/batches/project-mutation-events.json",
+    "server/contracts/batches/realtime-replay-transport-coverage.json",
+    "server/contracts/batches/realtime.json",
+    "server/contracts/batches/retained-web-transport-closure.json",
+    "server/contracts/batches/retry-callback-transport-coverage.json",
+    "server/contracts/batches/schema-callback-transport-coverage.json",
+    "server/contracts/batches/schema-data-transport-coverage.json",
+    "server/contracts/batches/search-index-transport-coverage.json",
+    "server/contracts/batches/settings-integrations-transport-coverage.json",
+    "server/contracts/batches/settings-invitation-transport-coverage.json",
+    "server/contracts/batches/status-helper-transport-coverage.json",
+    "server/contracts/batches/surface-local-helper-closure.json",
+    "server/contracts/batches/swimlane-transport-coverage.json",
+    "server/contracts/batches/translation-transport-coverage.json",
+    "server/contracts/batches/voice-transport-coverage.json",
+    "server/contracts/batches/web-shell-transport-coverage.json",
+    "server/contracts/batches/workspace-deletion.json",
+    "server/contracts/batches/workspace-invitations.json",
+    "server/contracts/batches/workspace-membership-mutations.json",
+    "server/contracts/batches/ws-client-transport-coverage.json"
+  ],
+  "outcomes": [
+    {
+      "path": "apps/web/proxy.ts",
+      "outcome": "missing",
+      "current_sha256": "2a25fa333d06a4ffc4a460194e1b0206ebec6ecbf1a5bb65a7cf927d43037a81",
+      "proofs": [],
+      "limitation": "No source-associated prior SHA-256 record located in inspected batch JSON artifacts."
+    },
+    {
+      "path": "packages/core/analytics/exception-dedupe.ts",
+      "outcome": "missing",
+      "current_sha256": "5f48cbc3bb9cbcc64f3753b126602299e86dec008add952b6dbdbc5c48aa7242",
+      "proofs": [],
+      "limitation": "No source-associated prior SHA-256 record located in inspected batch JSON artifacts."
+    },
+    {
+      "path": "packages/core/analytics/index.ts",
+      "outcome": "missing",
+      "current_sha256": "c8f89eb97ee538a3168787f873702d35bea36696a50cfebf6014faebfb01538a",
+      "proofs": [],
+      "limitation": "No source-associated prior SHA-256 record located in inspected batch JSON artifacts."
+    },
+    {
+      "path": "packages/core/api/schemas.ts",
+      "outcome": "resolved",
+      "current_sha256": "f75704eeb37705c0f72b4bd89ff89e848289f3fe7cee154b9bed7ff280be674d",
+      "proofs": [
+        {
+          "artifact": "server/contracts/batches/api-client-section-reconciliation.json",
+          "hash_pointer": "/source_hash_checks/258/expected",
+          "expected_sha256": "f75704eeb37705c0f72b4bd89ff89e848289f3fe7cee154b9bed7ff280be674d",
+          "record_pointer": "/source_hash_checks/258",
+          "matches_current_bytes": true
+        },
+        {
+          "artifact": "server/contracts/batches/api-client-section-reconciliation.json",
+          "hash_pointer": "/source_hash_checks/274/expected",
+          "expected_sha256": "f75704eeb37705c0f72b4bd89ff89e848289f3fe7cee154b9bed7ff280be674d",
+          "record_pointer": "/source_hash_checks/274",
+          "matches_current_bytes": true
+        },
+        {
+          "artifact": "server/contracts/batches/api-client-section-reconciliation.json",
+          "hash_pointer": "/source_hash_checks/277/expected",
+          "expected_sha256": "f75704eeb37705c0f72b4bd89ff89e848289f3fe7cee154b9bed7ff280be674d",
+          "record_pointer": "/source_hash_checks/277",
+          "matches_current_bytes": true
+        },
+        {
+          "artifact": "server/contracts/batches/api-client-section-reconciliation.json",
+          "hash_pointer": "/schema_proof_reuse/checks/0/expected",
+          "expected_sha256": "f75704eeb37705c0f72b4bd89ff89e848289f3fe7cee154b9bed7ff280be674d",
+          "record_pointer": "/schema_proof_reuse/checks/0",
+          "matches_current_bytes": true
+        },
+        {
+          "artifact": "server/contracts/batches/api-client-wrappers-agents-cloud.json",
+          "hash_pointer": "/root_helper_review/sources/1/sha256",
+          "expected_sha256": "f75704eeb37705c0f72b4bd89ff89e848289f3fe7cee154b9bed7ff280be674d",
+          "record_pointer": "/root_helper_review/sources/1",
+          "matches_current_bytes": true
+        },
+        {
+          "artifact": "server/contracts/batches/api-client-wrappers-attachments-chat.json",
+          "hash_pointer": "/proofs/1/source_hash_checks/1/expected",
+          "expected_sha256": "f75704eeb37705c0f72b4bd89ff89e848289f3fe7cee154b9bed7ff280be674d",
+          "record_pointer": "/proofs/1/source_hash_checks/1",
+          "matches_current_bytes": true
+        },
+        {
+          "artifact": "server/contracts/batches/api-client-wrappers-attachments-chat.json",
+          "hash_pointer": "/proofs/2/source_hash_checks/0/expected",
+          "expected_sha256": "f75704eeb37705c0f72b4bd89ff89e848289f3fe7cee154b9bed7ff280be674d",
+          "record_pointer": "/proofs/2/source_hash_checks/0",
+          "matches_current_bytes": true
+        },
+        {
+          "artifact": "server/contracts/batches/api-client-wrappers-tail.json",
+          "hash_pointer": "/proof_reuse/1/checked_source_hashes/1/sha256",
+          "expected_sha256": "f75704eeb37705c0f72b4bd89ff89e848289f3fe7cee154b9bed7ff280be674d",
+          "record_pointer": "/proof_reuse/1/checked_source_hashes/1",
+          "matches_current_bytes": true
+        },
+        {
+          "artifact": "server/contracts/batches/api-client-wrappers-tail.json",
+          "hash_pointer": "/proof_reuse/2/checked_source_hashes/0/sha256",
+          "expected_sha256": "f75704eeb37705c0f72b4bd89ff89e848289f3fe7cee154b9bed7ff280be674d",
+          "record_pointer": "/proof_reuse/2/checked_source_hashes/0",
+          "matches_current_bytes": true
+        },
+        {
+          "artifact": "server/contracts/batches/local-source-dispositions.json",
+          "hash_pointer": "/sources/6/sha256",
+          "expected_sha256": "f75704eeb37705c0f72b4bd89ff89e848289f3fe7cee154b9bed7ff280be674d",
+          "record_pointer": "/sources/6",
+          "matches_current_bytes": true
+        },
+        {
+          "artifact": "server/contracts/batches/platform-session-transport-coverage.json",
+          "hash_pointer": "/files/5/sha256",
+          "expected_sha256": "f75704eeb37705c0f72b4bd89ff89e848289f3fe7cee154b9bed7ff280be674d",
+          "record_pointer": "/files/5",
+          "matches_current_bytes": true
+        },
+        {
+          "artifact": "server/contracts/batches/schema-callback-transport-coverage.json",
+          "hash_pointer": "/source/sha256",
+          "expected_sha256": "f75704eeb37705c0f72b4bd89ff89e848289f3fe7cee154b9bed7ff280be674d",
+          "record_pointer": "/source",
+          "matches_current_bytes": true
+        },
+        {
+          "artifact": "server/contracts/batches/schema-data-transport-coverage.json",
+          "hash_pointer": "/files/1/sha256",
+          "expected_sha256": "f75704eeb37705c0f72b4bd89ff89e848289f3fe7cee154b9bed7ff280be674d",
+          "record_pointer": "/files/1",
+          "matches_current_bytes": true
+        }
+      ],
+      "limitation": "Hash equality establishes byte identity only; original review scope is unchanged."
+    },
+    {
+      "path": "packages/core/auth/index.ts",
+      "outcome": "resolved",
+      "current_sha256": "d58b7c88eb046c4a8f85a304e53df1e772accc6b8b5962e1d9cd82e8d17daffe",
+      "proofs": [
+        {
+          "artifact": "server/contracts/batches/surface-local-helper-closure.json",
+          "hash_pointer": "/root_adapter_review/sources/3/sha256",
+          "expected_sha256": "d58b7c88eb046c4a8f85a304e53df1e772accc6b8b5962e1d9cd82e8d17daffe",
+          "record_pointer": "/root_adapter_review/sources/3",
+          "matches_current_bytes": true
+        }
+      ],
+      "limitation": "Hash equality establishes byte identity only; original review scope is unchanged."
+    },
+    {
+      "path": "packages/core/auth/store.ts",
+      "outcome": "resolved",
+      "current_sha256": "bdf848809606d29488ffb8135f88db3e0c55f22ebb93c2d6dc92b97442b6aaae",
+      "proofs": [
+        {
+          "artifact": "server/contracts/batches/platform-session-transport-coverage.json",
+          "hash_pointer": "/files/6/sha256",
+          "expected_sha256": "bdf848809606d29488ffb8135f88db3e0c55f22ebb93c2d6dc92b97442b6aaae",
+          "record_pointer": "/files/6",
+          "matches_current_bytes": true
+        }
+      ],
+      "limitation": "Hash equality establishes byte identity only; original review scope is unchanged."
+    },
+    {
+      "path": "packages/core/auth/utils.ts",
+      "outcome": "missing",
+      "current_sha256": "4e5587980441adb106f4c1390438d3f23fcc0a7c03cccba57947d99917b98e4c",
+      "proofs": [],
+      "limitation": "No source-associated prior SHA-256 record located in inspected batch JSON artifacts."
+    },
+    {
+      "path": "packages/core/onboarding/index.ts",
+      "outcome": "missing",
+      "current_sha256": "c1f6e1281127843d82927653ca480249f0717c618c8c893043f7d4b6398ca9eb",
+      "proofs": [],
+      "limitation": "No source-associated prior SHA-256 record located in inspected batch JSON artifacts."
+    },
+    {
+      "path": "packages/core/onboarding/mika.ts",
+      "outcome": "missing",
+      "current_sha256": "d37207c1bdb6af4aa38df73b6250be87938d0f5033915d8d89c892a6d4c3f345",
+      "proofs": [],
+      "limitation": "No source-associated prior SHA-256 record located in inspected batch JSON artifacts."
+    },
+    {
+      "path": "packages/core/onboarding/needs-backfill.ts",
+      "outcome": "missing",
+      "current_sha256": "f4ea2dd21d59bf71eed2bcbb18d44d4a1ca02e0df7e1d4ea79125b913e82eb06",
+      "proofs": [],
+      "limitation": "No source-associated prior SHA-256 record located in inspected batch JSON artifacts."
+    },
+    {
+      "path": "packages/core/onboarding/queries.ts",
+      "outcome": "missing",
+      "current_sha256": "2c15cadd1e4a4009117c642ca33a24e498a6b2489cff15b4d4faa78ba063e81d",
+      "proofs": [],
+      "limitation": "No source-associated prior SHA-256 record located in inspected batch JSON artifacts."
+    },
+    {
+      "path": "packages/core/onboarding/step-order.ts",
+      "outcome": "missing",
+      "current_sha256": "b4479f657ceaa50ac5969ffb66389842ea05c9c9b5b05f51c0e04f176b5b1763",
+      "proofs": [],
+      "limitation": "No source-associated prior SHA-256 record located in inspected batch JSON artifacts."
+    },
+    {
+      "path": "packages/core/onboarding/store.ts",
+      "outcome": "missing",
+      "current_sha256": "58b4710ed8fe681e0d9fceaea864877450506fed625d9e323ea64812e6bcdb01",
+      "proofs": [],
+      "limitation": "No source-associated prior SHA-256 record located in inspected batch JSON artifacts."
+    },
+    {
+      "path": "packages/core/onboarding/types.ts",
+      "outcome": "missing",
+      "current_sha256": "d6567cfdac15799f0591b44f7ff25e4211f946480f5091d792525b000413e3d5",
+      "proofs": [],
+      "limitation": "No source-associated prior SHA-256 record located in inspected batch JSON artifacts."
+    },
+    {
+      "path": "packages/core/onboarding/use-bootstrap-mika.ts",
+      "outcome": "missing",
+      "current_sha256": "b3e61f9a1ef5562ee25c77b1cb9ace96d74bb29c18c50d46213b3f093eff8880",
+      "proofs": [],
+      "limitation": "No source-associated prior SHA-256 record located in inspected batch JSON artifacts."
+    },
+    {
+      "path": "packages/core/search-index/client.ts",
+      "outcome": "missing",
+      "current_sha256": "a132891a806e86cb621174ee5b7673622a3ff1030c3faf45ab4ddfda3971fa3b",
+      "proofs": [],
+      "limitation": "No source-associated prior SHA-256 record located in inspected batch JSON artifacts."
+    },
+    {
+      "path": "packages/core/search-index/engine.ts",
+      "outcome": "missing",
+      "current_sha256": "49843f4a5a7cf59499ffc731a20d47837a59d6eb6fe3c2ba78c824e7612d5547",
+      "proofs": [],
+      "limitation": "No source-associated prior SHA-256 record located in inspected batch JSON artifacts."
+    },
+    {
+      "path": "packages/core/search-index/hooks.ts",
+      "outcome": "missing",
+      "current_sha256": "dbe0ee29db23e4e343e28b21a9d5f2928a89c9ff5e24741d3ffe3c7c47a1ed3f",
+      "proofs": [],
+      "limitation": "No source-associated prior SHA-256 record located in inspected batch JSON artifacts."
+    },
+    {
+      "path": "packages/core/search-index/host.ts",
+      "outcome": "missing",
+      "current_sha256": "1247835ab771a916e1fd212a291874422aba3a7d0bdfd78fc0887699dcc79697",
+      "proofs": [],
+      "limitation": "No source-associated prior SHA-256 record located in inspected batch JSON artifacts."
+    },
+    {
+      "path": "packages/core/search-index/index.ts",
+      "outcome": "missing",
+      "current_sha256": "fc1491b72c5715ab8ac7fe595951a8c070a2deba9848327907eb5f3acd5bd5cd",
+      "proofs": [],
+      "limitation": "No source-associated prior SHA-256 record located in inspected batch JSON artifacts."
+    },
+    {
+      "path": "packages/core/search-index/instance.ts",
+      "outcome": "missing",
+      "current_sha256": "1c77f39d03a439f438b085e68da08e02e4ec4c0ee9d348f7d1b84174eec41f76",
+      "proofs": [],
+      "limitation": "No source-associated prior SHA-256 record located in inspected batch JSON artifacts."
+    },
+    {
+      "path": "packages/core/search-index/protocol.ts",
+      "outcome": "missing",
+      "current_sha256": "afb4d520260ce4f0de2aaf1b86fe7eb5dcb7c477764674d83d4f686b2b383352",
+      "proofs": [],
+      "limitation": "No source-associated prior SHA-256 record located in inspected batch JSON artifacts."
+    },
+    {
+      "path": "packages/core/search-index/store.ts",
+      "outcome": "missing",
+      "current_sha256": "8f09399e799150bebf51bc17a56cbcd71a99d397216665e16d7309988660e317",
+      "proofs": [],
+      "limitation": "No source-associated prior SHA-256 record located in inspected batch JSON artifacts."
+    },
+    {
+      "path": "packages/core/search-index/sync.ts",
+      "outcome": "missing",
+      "current_sha256": "ad270abfe82ed00f068aa081274f067e450a303c3d0e44cc7e462ff1fed70036",
+      "proofs": [],
+      "limitation": "No source-associated prior SHA-256 record located in inspected batch JSON artifacts."
+    },
+    {
+      "path": "packages/core/search-index/testing.ts",
+      "outcome": "missing",
+      "current_sha256": "4d5ddfbb7f7ca48c48b26e36182694e5a91b05c1ad4c4027fb4a82a6189ff0d6",
+      "proofs": [],
+      "limitation": "No source-associated prior SHA-256 record located in inspected batch JSON artifacts."
+    },
+    {
+      "path": "packages/core/search-index/worker.ts",
+      "outcome": "missing",
+      "current_sha256": "a0efdaab79e904a84e77521c9c6f8e95085a63c0360db4bc8e87b2a923481587",
+      "proofs": [],
+      "limitation": "No source-associated prior SHA-256 record located in inspected batch JSON artifacts."
+    },
+    {
+      "path": "packages/core/workspace/avatar-url.ts",
+      "outcome": "resolved",
+      "current_sha256": "293b4ea5130a2abe9112f33c6452464b8eceae119d49883ce4c7fbbdc16d84e7",
+      "proofs": [
+        {
+          "artifact": "server/contracts/batches/avatar-foreground-transport-coverage.json",
+          "hash_pointer": "/files/7/sha256",
+          "expected_sha256": "293b4ea5130a2abe9112f33c6452464b8eceae119d49883ce4c7fbbdc16d84e7",
+          "record_pointer": "/files/7",
+          "matches_current_bytes": true
+        },
+        {
+          "artifact": "server/contracts/batches/dashboard-surface-transport-coverage.json",
+          "hash_pointer": "/files/15/sha256",
+          "expected_sha256": "293b4ea5130a2abe9112f33c6452464b8eceae119d49883ce4c7fbbdc16d84e7",
+          "record_pointer": "/files/15",
+          "matches_current_bytes": true
+        }
+      ],
+      "limitation": "Hash equality establishes byte identity only; original review scope is unchanged."
+    },
+    {
+      "path": "packages/core/workspace/hooks.ts",
+      "outcome": "resolved",
+      "current_sha256": "7531c31b1caa51b0254eff7738c3ed14cd831a467c311d9aa8cce3ddff2964d3",
+      "proofs": [
+        {
+          "artifact": "server/contracts/batches/api-client-section-reconciliation.json",
+          "hash_pointer": "/source_hash_checks/196/expected",
+          "expected_sha256": "7531c31b1caa51b0254eff7738c3ed14cd831a467c311d9aa8cce3ddff2964d3",
+          "record_pointer": "/source_hash_checks/196",
+          "matches_current_bytes": true
+        },
+        {
+          "artifact": "server/contracts/batches/api-client-section-reconciliation.json",
+          "hash_pointer": "/source_hash_checks/241/expected",
+          "expected_sha256": "7531c31b1caa51b0254eff7738c3ed14cd831a467c311d9aa8cce3ddff2964d3",
+          "record_pointer": "/source_hash_checks/241",
+          "matches_current_bytes": true
+        },
+        {
+          "artifact": "server/contracts/batches/api-client-wrappers-core.json",
+          "hash_pointer": "/reused_proofs/1/semantic_facts/files/8/sha256",
+          "expected_sha256": "7531c31b1caa51b0254eff7738c3ed14cd831a467c311d9aa8cce3ddff2964d3",
+          "record_pointer": "/reused_proofs/1/semantic_facts/files/8",
+          "matches_current_bytes": true
+        },
+        {
+          "artifact": "server/contracts/batches/api-client-wrappers-core.json",
+          "hash_pointer": "/reused_proofs/2/semantic_facts/files/8/sha256",
+          "expected_sha256": "7531c31b1caa51b0254eff7738c3ed14cd831a467c311d9aa8cce3ddff2964d3",
+          "record_pointer": "/reused_proofs/2/semantic_facts/files/8",
+          "matches_current_bytes": true
+        },
+        {
+          "artifact": "server/contracts/batches/create-issue-transport-coverage.json",
+          "hash_pointer": "/files/8/sha256",
+          "expected_sha256": "7531c31b1caa51b0254eff7738c3ed14cd831a467c311d9aa8cce3ddff2964d3",
+          "record_pointer": "/files/8",
+          "matches_current_bytes": true
+        },
+        {
+          "artifact": "server/contracts/batches/dashboard-surface-transport-coverage.json",
+          "hash_pointer": "/files/9/sha256",
+          "expected_sha256": "7531c31b1caa51b0254eff7738c3ed14cd831a467c311d9aa8cce3ddff2964d3",
+          "record_pointer": "/files/9",
+          "matches_current_bytes": true
+        },
+        {
+          "artifact": "server/contracts/batches/inline-run-transport-coverage.json",
+          "hash_pointer": "/files/4/sha256",
+          "expected_sha256": "7531c31b1caa51b0254eff7738c3ed14cd831a467c311d9aa8cce3ddff2964d3",
+          "record_pointer": "/files/4",
+          "matches_current_bytes": true
+        },
+        {
+          "artifact": "server/contracts/batches/issue-detail-edit-section.json",
+          "hash_pointer": "/reused_evidence/1/source_hash_checks/8/sha256",
+          "expected_sha256": "7531c31b1caa51b0254eff7738c3ed14cd831a467c311d9aa8cce3ddff2964d3",
+          "record_pointer": "/reused_evidence/1/source_hash_checks/8",
+          "matches_current_bytes": true
+        },
+        {
+          "artifact": "server/contracts/batches/issue-detail-edit-section.json",
+          "hash_pointer": "/reused_evidence/2/source_hash_checks/4/sha256",
+          "expected_sha256": "7531c31b1caa51b0254eff7738c3ed14cd831a467c311d9aa8cce3ddff2964d3",
+          "record_pointer": "/reused_evidence/2/source_hash_checks/4",
+          "matches_current_bytes": true
+        },
+        {
+          "artifact": "server/contracts/batches/issue-detail-query-section.json",
+          "hash_pointer": "/files/4/sha256",
+          "expected_sha256": "7531c31b1caa51b0254eff7738c3ed14cd831a467c311d9aa8cce3ddff2964d3",
+          "record_pointer": "/files/4",
+          "matches_current_bytes": true
+        },
+        {
+          "artifact": "server/contracts/batches/issue-detail-render-section.json",
+          "hash_pointer": "/root_resolver_sources/2/sha256",
+          "expected_sha256": "7531c31b1caa51b0254eff7738c3ed14cd831a467c311d9aa8cce3ddff2964d3",
+          "record_pointer": "/root_resolver_sources/2",
+          "matches_current_bytes": true
+        },
+        {
+          "artifact": "server/contracts/batches/issue-mutations-transport-coverage.json",
+          "hash_pointer": "/files/8/sha256",
+          "expected_sha256": "7531c31b1caa51b0254eff7738c3ed14cd831a467c311d9aa8cce3ddff2964d3",
+          "record_pointer": "/files/8",
+          "matches_current_bytes": true
+        },
+        {
+          "artifact": "server/contracts/batches/issue-surface-controller-closure.json",
+          "hash_pointer": "/reused_evidence/2/validated_sources/8/sha256",
+          "expected_sha256": "7531c31b1caa51b0254eff7738c3ed14cd831a467c311d9aa8cce3ddff2964d3",
+          "record_pointer": "/reused_evidence/2/validated_sources/8",
+          "matches_current_bytes": true
+        },
+        {
+          "artifact": "server/contracts/batches/surface-local-helper-closure.json",
+          "hash_pointer": "/reused_support/source_hash_checks/5/sha256",
+          "expected_sha256": "7531c31b1caa51b0254eff7738c3ed14cd831a467c311d9aa8cce3ddff2964d3",
+          "record_pointer": "/reused_support/source_hash_checks/5",
+          "matches_current_bytes": true
+        },
+        {
+          "artifact": "server/contracts/batches/swimlane-transport-coverage.json",
+          "hash_pointer": "/root_supporting_sources/7/sha256",
+          "expected_sha256": "7531c31b1caa51b0254eff7738c3ed14cd831a467c311d9aa8cce3ddff2964d3",
+          "record_pointer": "/root_supporting_sources/7",
+          "matches_current_bytes": true
+        }
+      ],
+      "limitation": "Hash equality establishes byte identity only; original review scope is unchanged."
+    },
+    {
+      "path": "packages/core/workspace/index.ts",
+      "outcome": "missing",
+      "current_sha256": "caf88cf4a54d9a8ea522b81ea12fc5513697acd0eb620d2e5d2837e34cbd41cb",
+      "proofs": [],
+      "limitation": "No source-associated prior SHA-256 record located in inspected batch JSON artifacts."
+    },
+    {
+      "path": "packages/core/workspace/mutations.ts",
+      "outcome": "missing",
+      "current_sha256": "adda48f2f085d43f47bad8324aec43a6a7ab3ce33e3900f52fc06e2945a07665",
+      "proofs": [],
+      "limitation": "No source-associated prior SHA-256 record located in inspected batch JSON artifacts."
+    },
+    {
+      "path": "packages/core/workspace/pending-delete.ts",
+      "outcome": "missing",
+      "current_sha256": "f078428d74d68e05d95ef785b766b1095e571bc3a2839c3d3878ff2e0a58f511",
+      "proofs": [],
+      "limitation": "No source-associated prior SHA-256 record located in inspected batch JSON artifacts."
+    },
+    {
+      "path": "packages/core/workspace/sort-workspaces.ts",
+      "outcome": "missing",
+      "current_sha256": "874c4c332e18ca9cacdfd131ccb00d14af797835fb45fc5d3b453f3ce7a2d02e",
+      "proofs": [],
+      "limitation": "No source-associated prior SHA-256 record located in inspected batch JSON artifacts."
+    },
+    {
+      "path": "packages/core/workspace/workspace-url.ts",
+      "outcome": "missing",
+      "current_sha256": "677079fbc96fc385c53963d8df46e4885d3a2d8f311363366871246a5c22e457",
+      "proofs": [],
+      "limitation": "No source-associated prior SHA-256 record located in inspected batch JSON artifacts."
+    },
+    {
+      "path": "packages/views/editor/attachment.tsx",
+      "outcome": "missing",
+      "current_sha256": "ef13ff980fbd2466ceac8853dd161738906280f506d065d30799f6c6adad922e",
+      "proofs": [],
+      "limitation": "No source-associated prior SHA-256 record located in inspected batch JSON artifacts."
+    },
+    {
+      "path": "packages/views/editor/paste-as-file.ts",
+      "outcome": "missing",
+      "current_sha256": "2718abe4f5e36b1d5e5b5618e9d89b9d7abca24ff42439ef4d754c2e13bed5f7",
+      "proofs": [],
+      "limitation": "No source-associated prior SHA-256 record located in inspected batch JSON artifacts."
+    },
+    {
+      "path": "packages/views/editor/preview-sequence-context.tsx",
+      "outcome": "missing",
+      "current_sha256": "c7321ab6181aa9ac65a6b0822175b55a3d979a43204cfb9a337ad68a17117efe",
+      "proofs": [],
+      "limitation": "No source-associated prior SHA-256 record located in inspected batch JSON artifacts."
+    },
+    {
+      "path": "packages/views/editor/use-composer-submit.ts",
+      "outcome": "missing",
+      "current_sha256": "17c5930a144fc9ffda4a27c213c247f87b9ab404d5bcc785ce8c7039bc7780a0",
+      "proofs": [],
+      "limitation": "No source-associated prior SHA-256 record located in inspected batch JSON artifacts."
+    },
+    {
+      "path": "packages/views/editor/use-editor-upload.ts",
+      "outcome": "resolved",
+      "current_sha256": "577b4d53238fb342b44c63108a72c89e16c80b22e90fa0823dbcf3614f37c7c8",
+      "proofs": [
+        {
+          "artifact": "server/contracts/batches/creation-dialog-transport-coverage.json",
+          "hash_pointer": "/files/6/sha256",
+          "expected_sha256": "577b4d53238fb342b44c63108a72c89e16c80b22e90fa0823dbcf3614f37c7c8",
+          "record_pointer": "/files/6",
+          "matches_current_bytes": true
+        },
+        {
+          "artifact": "server/contracts/batches/editor-extension-transport-coverage.json",
+          "hash_pointer": "/files/7/sha256",
+          "expected_sha256": "577b4d53238fb342b44c63108a72c89e16c80b22e90fa0823dbcf3614f37c7c8",
+          "record_pointer": "/files/7",
+          "matches_current_bytes": true
+        },
+        {
+          "artifact": "server/contracts/batches/issue-detail-edit-section.json",
+          "hash_pointer": "/reused_evidence/2/source_hash_checks/9/sha256",
+          "expected_sha256": "577b4d53238fb342b44c63108a72c89e16c80b22e90fa0823dbcf3614f37c7c8",
+          "record_pointer": "/reused_evidence/2/source_hash_checks/9",
+          "matches_current_bytes": true
+        },
+        {
+          "artifact": "server/contracts/batches/issue-detail-query-section.json",
+          "hash_pointer": "/files/9/sha256",
+          "expected_sha256": "577b4d53238fb342b44c63108a72c89e16c80b22e90fa0823dbcf3614f37c7c8",
+          "record_pointer": "/files/9",
+          "matches_current_bytes": true
+        },
+        {
+          "artifact": "server/contracts/batches/issue-detail-query-section.json",
+          "hash_pointer": "/remaining_helper_reconciliation/sources/5/sha256",
+          "expected_sha256": "577b4d53238fb342b44c63108a72c89e16c80b22e90fa0823dbcf3614f37c7c8",
+          "record_pointer": "/remaining_helper_reconciliation/sources/5",
+          "matches_current_bytes": true
+        },
+        {
+          "artifact": "server/contracts/batches/issue-detail-render-section.json",
+          "hash_pointer": "/root_upload_sources/0/sha256",
+          "expected_sha256": "577b4d53238fb342b44c63108a72c89e16c80b22e90fa0823dbcf3614f37c7c8",
+          "record_pointer": "/root_upload_sources/0",
+          "matches_current_bytes": true
+        }
+      ],
+      "limitation": "Hash equality establishes byte identity only; original review scope is unchanged."
+    },
+    {
+      "path": "packages/views/plugins/surface-bridge.ts",
+      "outcome": "missing",
+      "current_sha256": "550c96b4caa8c2443410b45eec25e94a9fe9e97421f657dfa5201f973d4e035a",
+      "proofs": [],
+      "limitation": "No source-associated prior SHA-256 record located in inspected batch JSON artifacts."
+    },
+    {
+      "path": "packages/views/runtimes/components/update-section.tsx",
+      "outcome": "missing",
+      "current_sha256": "b08c679773b22d6ebab5aa584bcfd0c5780db58861e18d119a9fe69512954ef1",
+      "proofs": [],
+      "limitation": "No source-associated prior SHA-256 record located in inspected batch JSON artifacts."
+    },
+    {
+      "path": "packages/views/voice/dialog-footer.tsx",
+      "outcome": "missing",
+      "current_sha256": "1798cf676bf866cc7ef39b9c446d52cb80576f687988964bb66ae88252e136cb",
+      "proofs": [],
+      "limitation": "No source-associated prior SHA-256 record located in inspected batch JSON artifacts."
+    },
+    {
+      "path": "packages/views/voice/engine.ts",
+      "outcome": "missing",
+      "current_sha256": "52cca1f87b9464a3ff2a82bb8a75645fa8f4c39400eddd2bf411b9ef3997ebcb",
+      "proofs": [],
+      "limitation": "No source-associated prior SHA-256 record located in inspected batch JSON artifacts."
+    },
+    {
+      "path": "packages/views/voice/index.ts",
+      "outcome": "missing",
+      "current_sha256": "3222686bd470113c026d46a8eaac2ab713fe3d2e3feb4c9899885ecde719565b",
+      "proofs": [],
+      "limitation": "No source-associated prior SHA-256 record located in inspected batch JSON artifacts."
+    },
+    {
+      "path": "packages/views/voice/recorder.ts",
+      "outcome": "missing",
+      "current_sha256": "64ae8632ec512772d829d1baf1baa1a76915e14c8e24d61a4b515ce52d31e0b0",
+      "proofs": [],
+      "limitation": "No source-associated prior SHA-256 record located in inspected batch JSON artifacts."
+    },
+    {
+      "path": "packages/views/voice/use-composer-voice.ts",
+      "outcome": "missing",
+      "current_sha256": "99ff79ebf5b20b1c16578d53f6cb4d0dbcb2810c9c6b765fa6cd6caf016d9aaf",
+      "proofs": [],
+      "limitation": "No source-associated prior SHA-256 record located in inspected batch JSON artifacts."
+    },
+    {
+      "path": "packages/views/voice/voice-models.tsx",
+      "outcome": "missing",
+      "current_sha256": "628d910862da7590ca2e04fc60853c86b5a6993c7fca661c7d3f9b287bc1d793",
+      "proofs": [],
+      "limitation": "No source-associated prior SHA-256 record located in inspected batch JSON artifacts."
+    },
+    {
+      "path": "packages/views/voice/voice-ui.tsx",
+      "outcome": "missing",
+      "current_sha256": "3d086337ec3ab30be5e62d5a39e1390a41761f12625c1a388012a8b16e830adb",
+      "proofs": [],
+      "limitation": "No source-associated prior SHA-256 record located in inspected batch JSON artifacts."
+    },
+    {
+      "path": "packages/views/voice/workspace-words.tsx",
+      "outcome": "missing",
+      "current_sha256": "9fc504f68a3f34c3449405d8b5e07143ccaaf635029b887d36683f634fcbc67e",
+      "proofs": [],
+      "limitation": "No source-associated prior SHA-256 record located in inspected batch JSON artifacts."
+    }
+  ]
+}

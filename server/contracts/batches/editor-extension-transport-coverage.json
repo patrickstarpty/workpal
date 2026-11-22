@@ -1,0 +1,241 @@
+{
+  "version": 1,
+  "scope": [
+    "packages/views/editor/content-editor.tsx",
+    "packages/views/editor/extensions/file-card.tsx",
+    "packages/views/editor/extensions/file-upload.ts",
+    "packages/views/editor/extensions/image-view.tsx",
+    "packages/views/editor/extensions/index.ts",
+    "packages/views/attachments/attachment-preview-page.tsx"
+  ],
+  "coverage": "bounded static frontend callback coverage only; no backend support or global closure claim",
+  "files": [
+    {
+      "path": "packages/views/editor/content-editor.tsx",
+      "sha256": "cb1957d1fd81e3619538622b90ddc8d26f7121d2accee7ab63ce15d539809943",
+      "whole_source": true,
+      "exports": [],
+      "disposition": "Complete executable source reviewed; bounded dependencies only."
+    },
+    {
+      "path": "packages/views/editor/extensions/file-card.tsx",
+      "sha256": "31395b128b392350d21f1c2fef68ec508d0935104e710b6666aeccd394a37394",
+      "whole_source": true,
+      "exports": [],
+      "disposition": "Complete executable source reviewed; bounded dependencies only."
+    },
+    {
+      "path": "packages/views/editor/extensions/file-upload.ts",
+      "sha256": "074890f5ba7595f1d62f4424d63e6f7d17c9cc274961bdb0af37e686a4b19677",
+      "whole_source": true,
+      "exports": [],
+      "disposition": "Complete executable source reviewed; bounded dependencies only."
+    },
+    {
+      "path": "packages/views/editor/extensions/image-view.tsx",
+      "sha256": "3cbe9c5aaccb5dacfa198125ee61d000a6f78e3521f24c44c105cf6c188b17ba",
+      "whole_source": true,
+      "exports": [],
+      "disposition": "Complete executable source reviewed; bounded dependencies only."
+    },
+    {
+      "path": "packages/views/editor/extensions/index.ts",
+      "sha256": "ce80123dcad1cb362348af768ce4e6b5314c613b92b8bae39de69fa0b59d5deb",
+      "whole_source": true,
+      "exports": [],
+      "disposition": "Complete executable source reviewed; bounded dependencies only."
+    },
+    {
+      "path": "packages/views/attachments/attachment-preview-page.tsx",
+      "sha256": "3946ef00950f8e399028e1e1dd7625fdf9ed0796c8e6d7527035f562c49fe6b5",
+      "whole_source": true,
+      "exports": [],
+      "disposition": "Complete executable source reviewed; bounded dependencies only."
+    },
+    {
+      "path": "packages/views/issues/components/issue-detail.tsx",
+      "sha256": "afbc077580392ae3b7ec41e28c087ee215dc3103c426f505fee9d96f5d8f9f1a",
+      "whole_source": false,
+      "exports": [],
+      "disposition": "Selected supporting callbacks only; no full closure claim."
+    },
+    {
+      "path": "packages/views/editor/use-editor-upload.ts",
+      "sha256": "577b4d53238fb342b44c63108a72c89e16c80b22e90fa0823dbcf3614f37c7c8",
+      "whole_source": false,
+      "exports": [],
+      "disposition": "Selected supporting callbacks only; no full closure claim."
+    },
+    {
+      "path": "packages/core/issues/queries.ts",
+      "sha256": "10d939b302cbeca9280944c5b5ad0e3e8e042130d2c714496a6b6da6daf53c3e",
+      "whole_source": false,
+      "exports": [],
+      "disposition": "Selected supporting callbacks only; no full closure claim."
+    },
+    {
+      "path": "packages/core/workspace/queries.ts",
+      "sha256": "1b16ae9e020e75a5a92cebc5270a14c58d97f6b7b0fe033d2f1d2c2d837d093a",
+      "whole_source": false,
+      "exports": [],
+      "disposition": "Selected supporting callbacks only; no full closure claim."
+    },
+    {
+      "path": "packages/core/api/client.ts",
+      "sha256": "779bb65b5b7ead815836f7c704ec3c370bafae203e4f92119fadce93e982a4d7",
+      "whole_source": false,
+      "exports": [],
+      "disposition": "Selected supporting callbacks only; no full closure claim."
+    }
+  ],
+  "edges": [
+    {
+      "source": "packages/views/editor/content-editor.tsx:560",
+      "api_method": "listWorkspaces",
+      "client_anchor": "packages/core/api/client.ts:3391",
+      "kind": "query-or-mutation",
+      "inventory": [
+        {
+          "id": "client:3391",
+          "method": "GET",
+          "path_expression": "/api/workspaces",
+          "route": {
+            "method": "GET",
+            "path": "/api/workspaces"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/views/editor/content-editor.tsx:571",
+      "api_method": "getIssue",
+      "client_anchor": "packages/core/api/client.ts:1612",
+      "kind": "query-or-mutation",
+      "inventory": [
+        {
+          "id": "client:1612",
+          "method": "GET",
+          "path_expression": "/api/issues/${encodeURIComponent(id)}",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/views/editor/extensions/file-upload.ts:244",
+      "api_method": "uploadFile",
+      "client_anchor": "packages/core/api/client.ts:4078",
+      "kind": "query-or-mutation",
+      "inventory": [
+        {
+          "id": "client:4078",
+          "method": "POST",
+          "path_expression": "`${this.baseUrl}/api/upload-file`",
+          "route": {
+            "method": "POST",
+            "path": "/api/upload-file"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/views/editor/extensions/file-card.tsx:47",
+      "api_method": "getAttachment",
+      "client_anchor": "packages/core/api/client.ts:4438",
+      "kind": "query-or-mutation",
+      "inventory": [
+        {
+          "id": "client:4438",
+          "method": "GET",
+          "path_expression": "/api/attachments/${id}",
+          "route": {
+            "method": "GET",
+            "path": "/api/attachments/{id}"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/views/editor/extensions/image-view.tsx:27",
+      "api_method": "getAttachmentBlob",
+      "client_anchor": "packages/core/api/client.ts:4508",
+      "kind": "query-or-mutation",
+      "inventory": [
+        {
+          "id": "client:4508",
+          "method": "GET",
+          "path_expression": "/api/attachments/${id}/download",
+          "route": {
+            "method": "GET",
+            "path": "/api/attachments/{id}/download"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/views/editor/extensions/file-card.tsx:47",
+      "api_method": "getAttachmentContent",
+      "client_anchor": "packages/core/api/client.ts:4475",
+      "kind": "query-or-mutation",
+      "inventory": [
+        {
+          "id": "client:4475",
+          "method": "GET",
+          "path_expression": "/api/attachments/${id}/content",
+          "route": {
+            "method": "GET",
+            "path": "/api/attachments/{id}/content"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/views/attachments/attachment-preview-page.tsx:68",
+      "api_method": "getAttachment",
+      "client_anchor": "packages/core/api/client.ts:4438",
+      "kind": "query-or-mutation",
+      "inventory": [
+        {
+          "id": "client:4438",
+          "method": "GET",
+          "path_expression": "/api/attachments/${id}",
+          "route": {
+            "method": "GET",
+            "path": "/api/attachments/{id}"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/views/issues/components/issue-detail.tsx:3067",
+      "api_method": "updateIssue",
+      "client_anchor": "packages/core/api/client.ts:1771",
+      "kind": "query-or-mutation",
+      "inventory": [
+        {
+          "id": "client:1771",
+          "method": "PUT",
+          "path_expression": "/api/issues/${id}",
+          "route": {
+            "method": "PUT",
+            "path": "/api/issues/{id}"
+          }
+        }
+      ]
+    }
+  ],
+  "reused_evidence": [
+    "server/contracts/batches/editor-preview-transport-coverage.json",
+    "server/contracts/batches/draft-attachment-transport-coverage.json",
+    "server/contracts/batches/composer-submit-coverage.json",
+    "server/contracts/batches/editor-transport-coverage.json"
+  ],
+  "boundaries": [
+    "standard React/Tiptap/browser APIs",
+    "injected callbacks and native adapters",
+    "dynamic resource URLs and authored HTML subresources",
+    "supporting modules not fully audited"
+  ]
+}

@@ -1,0 +1,413 @@
+{
+  "version": 1,
+  "coverage_complete": false,
+  "bounded_scope_complete": true,
+  "method": "Full executable source semantic review; static possible API union, not runtime observer enumeration.",
+  "reused_evidence": [
+    "transport-source-ledger.json",
+    "transport-source-ledger.md",
+    "editor-transport-coverage.json",
+    "editor-transport-coverage.md",
+    "composer-submit-coverage.json",
+    "composer-submit-coverage.md"
+  ],
+  "files": [
+    {
+      "path": "packages/core/drafts/cleanup-registry.ts",
+      "status": "full-source-semantic-disposition",
+      "reviewed_lines": [
+        1,
+        106
+      ],
+      "sha256": "1d97d67851082ea0459f61276d19bb149a79253386e755dbf456b6af40875e5b",
+      "anchors": [
+        {
+          "line": 43,
+          "text": "export function registerDraftCleanup(entry: DraftCleanupEntry): void {"
+        },
+        {
+          "line": 53,
+          "text": "export function clearRegisteredWorkspaceDrafts("
+        },
+        {
+          "line": 70,
+          "text": "export function resetAllRegisteredDrafts(): void {"
+        },
+        {
+          "line": 86,
+          "text": "export function registeredDraftKeys(): {"
+        },
+        {
+          "line": 99,
+          "text": "export function __clearDraftCleanupRegistryForTest(): void {"
+        },
+        {
+          "line": 104,
+          "text": "export function __getRegisteredDraftKeysForTest(): string[] {"
+        }
+      ],
+      "disposition": "Registry registration and key enumeration are local. Workspace cleanup invokes injected StorageAdapter.removeItem; reset aborts coordinator requests before invoking registered in-memory resets. Neither cleanup nor abort deletes server attachments. Adapter/store implementation is a boundary, not an HTTP endpoint.",
+      "prior_ledger_status": "unaudited"
+    },
+    {
+      "path": "packages/core/drafts/draft-upload.ts",
+      "status": "full-source-semantic-disposition",
+      "reviewed_lines": [
+        1,
+        147
+      ],
+      "sha256": "2eb1bc0101d2757978ce69da585bfc058372766e5e81c718d13a54ef8a0fd11d",
+      "anchors": [
+        {
+          "line": 54,
+          "text": "export function isUploaded(u: DraftUpload): u is UploadedDraftUpload {"
+        },
+        {
+          "line": 59,
+          "text": "export function uploadedAttachments(uploads: readonly DraftUpload[]): Attachment[] {"
+        },
+        {
+          "line": 68,
+          "text": "export function hasUploadingDraft(uploads: readonly DraftUpload[]): boolean {"
+        },
+        {
+          "line": 73,
+          "text": "export function attachmentToDraftUpload(attachment: Attachment): UploadedDraftUpload {"
+        },
+        {
+          "line": 121,
+          "text": "export function normalizeStoredUploads(raw: unknown): DraftUpload[] {"
+        }
+      ],
+      "disposition": "Types, uploaded filtering, upload gate predicate and legacy normalization only. attachmentToDraftUpload clears both ephemeral signed URL fields while preserving durable URL/markdown URL; already-shaped uploaded records are accepted after shape checks. Reload drops uploading records because File bytes are not persisted; failed/interrupted legacy records remain. No resume, retry or resource load.",
+      "prior_ledger_status": "unaudited"
+    },
+    {
+      "path": "packages/core/drafts/index.ts",
+      "status": "full-source-semantic-disposition",
+      "reviewed_lines": [
+        1,
+        30
+      ],
+      "sha256": "bdf316dea694d425a6eb74da9ee779445a8f92b6fe672ef79446aabc209a8872",
+      "anchors": [
+        {
+          "line": 1,
+          "text": "export {"
+        },
+        {
+          "line": 6,
+          "text": "export {"
+        },
+        {
+          "line": 12,
+          "text": "export {"
+        },
+        {
+          "line": 20,
+          "text": "export {"
+        }
+      ],
+      "disposition": "Re-export barrel only. create-draft-store is exported, not invoked here; coordinator and cleanup exports retain the dispositions in this batch. No transport on barrel evaluation established.",
+      "prior_ledger_status": "unaudited"
+    },
+    {
+      "path": "packages/core/drafts/upload-coordinator.ts",
+      "status": "full-source-semantic-disposition",
+      "reviewed_lines": [
+        1,
+        131
+      ],
+      "sha256": "e69aeeaf2e832f20945133d4c5e268dbd21ada47411a7923ab4e1f835134aaf4",
+      "anchors": [
+        {
+          "line": 62,
+          "text": "export function startUpload({"
+        },
+        {
+          "line": 74,
+          "text": "const attachment = await api.uploadFile("
+        },
+        {
+          "line": 108,
+          "text": "export function abortUpload(clientUploadId: string): void {"
+        },
+        {
+          "line": 119,
+          "text": "export function abortAll(): void {"
+        },
+        {
+          "line": 129,
+          "text": "export function __trackedUploadCountForTest(): number {"
+        }
+      ],
+      "disposition": "Injected api.uploadFile receives File, optional issue/comment/chat context and AbortSignal. Active coordinated caller supplies singleton api, resolving to client:4078 multipart POST. Map owns controller lifetime independently of editor mount. Success invokes onSettled; abort errors suppress settlement; other errors settle failed. Finally removes only matching controller. abortUpload/abortAll cancel locally, no DELETE or server cancellation route. A successful promise resolving after abort is not separately signal-guarded in success branch; caller generation guards matter.",
+      "prior_ledger_status": "unaudited"
+    },
+    {
+      "path": "packages/core/hooks/use-file-upload.ts",
+      "status": "full-source-semantic-disposition",
+      "reviewed_lines": [
+        1,
+        101
+      ],
+      "sha256": "82ab928c6b762acc38c70b1a264bd9a5cafd62846ff27dafbb0bc65d8d5adf24",
+      "anchors": [
+        {
+          "line": 39,
+          "text": "export function toUploadResult(att: Attachment): UploadResult {"
+        },
+        {
+          "line": 43,
+          "text": "export function useFileUpload("
+        },
+        {
+          "line": 75,
+          "text": "const att: Attachment = await api.uploadFile(file, {"
+        }
+      ],
+      "disposition": "Injected ApiClient uploadFile resolves to multipart client:4078 in active editor evidence. Rejects oversized File before call; in-flight counter increments/decrements in finally. uploadWithToast invokes supplied onError then returns null. toUploadResult preserves raw url as link and selects markdown_url, durable attachment-ID download path, then raw url. Computing links loads no bytes; no File is constructed or persisted here.",
+      "prior_ledger_status": "unaudited"
+    },
+    {
+      "path": "packages/core/attachments/deliverables.ts",
+      "status": "full-source-semantic-disposition",
+      "reviewed_lines": [
+        1,
+        167
+      ],
+      "sha256": "dcdacf03a5886dcbcc8749c5f41a2b627166b9164cf0df141302cd676e095322",
+      "anchors": [
+        {
+          "line": 51,
+          "text": "export function deliverableKey("
+        },
+        {
+          "line": 70,
+          "text": "export function collectDeliverableFiles("
+        },
+        {
+          "line": 103,
+          "text": "export function findDeliverableByName("
+        },
+        {
+          "line": 117,
+          "text": "export function findDeliverableVersion("
+        },
+        {
+          "line": 135,
+          "text": "export function deliverableInventoryFromAttachments("
+        },
+        {
+          "line": 157,
+          "text": "export function mergeDeliverableSources("
+        }
+      ],
+      "disposition": "Pure grouping and lookup: normalize MIME/filename, deduplicate attachment IDs, sort versions by date/id, newest-first deliverables. Inventory synthesizes comment entries only with complete origin; timeline comments override inventory including tombstones. No listing/fetch is performed despite inventory terminology.",
+      "prior_ledger_status": "unaudited"
+    },
+    {
+      "path": "packages/core/attachments/image-sequence.ts",
+      "status": "full-source-semantic-disposition",
+      "reviewed_lines": [
+        1,
+        520
+      ],
+      "sha256": "ebed6accf589fd16099425cafea69d0ea0d9411d08215e44a15ab74753dc8f85",
+      "anchors": [
+        {
+          "line": 70,
+          "text": "export function isImageAttachment("
+        },
+        {
+          "line": 109,
+          "text": "export function matchAttachmentByURL("
+        },
+        {
+          "line": 135,
+          "text": "export function selectStandaloneAttachments("
+        },
+        {
+          "line": 161,
+          "text": "export function standaloneAttachmentGroup("
+        },
+        {
+          "line": 174,
+          "text": "export function orderStandaloneAttachments<T extends Pick<Attachment, \"content_type\" | \"filename\">>("
+        },
+        {
+          "line": 432,
+          "text": "export function collectAttachmentSequence("
+        },
+        {
+          "line": 505,
+          "text": "export function collectImageSequence("
+        },
+        {
+          "line": 514,
+          "text": "export function indexOfImageKey("
+        }
+      ],
+      "disposition": "Pure URL matching, Markdown AST/reference definitions, HTML img attribute parsing/entity decode and file-card scanning excluding code ranges; bounded LRU stores content refs only. Match stable download/local upload IDs then normalized URL equality ignoring query/fragment. Select standalone excludes referenced duplicates; order images before files; collect walks inline then standalone, applies injected inclusion predicate and deduplicates keys. URL priority download_url, markdown_url, url, reference; collectImageSequence supplies local image predicate. No Image, fetch, DOM or resource load; later preview consumers load resources as existing editor evidence describes.",
+      "prior_ledger_status": "unaudited"
+    },
+    {
+      "path": "packages/views/editor/use-coordinated-uploads.ts",
+      "status": "full-source-semantic-disposition",
+      "reviewed_lines": [
+        1,
+        522
+      ],
+      "sha256": "42c31a37c8c8c8561d041615bcaec71753800ec6594a3887f9cfd25fa571689c",
+      "anchors": [
+        {
+          "line": 97,
+          "text": "export function __liveEditorRegistryKeysForTest(): string[] {"
+        },
+        {
+          "line": 104,
+          "text": "export function attachmentMarkdown(att: Attachment): string {"
+        },
+        {
+          "line": 241,
+          "text": "export function useCoordinatedUploads("
+        },
+        {
+          "line": 415,
+          "text": "startUpload({"
+        }
+      ],
+      "disposition": "Singleton api is injected into startUpload, finite target client:4078. File limit checked before placeholder/request. Snapshots draft target and context; local or persisted placeholders share editor upload ID. Registry acts as local editor ownership lease with identity-checked cleanup and loaded-key matching. Generation checks prevent stale write-back; unmounted success delivers markdown through editor replacement/insert or store append with bounded timer retries. Rebuild retries create local placeholders only. Failure removes placeholder and restores pasted source text; no resumable bytes. removeUpload aborts tracked uploading request then removes local record; gate combines document truth with current store/ref placeholders. No attachment DELETE. Aborted coordinator does not settle the returned wrapper Promise.",
+      "prior_ledger_status": "unaudited"
+    },
+    {
+      "path": "packages/views/editor/use-download-attachment.ts",
+      "status": "full-source-semantic-disposition",
+      "reviewed_lines": [
+        1,
+        201
+      ],
+      "sha256": "173687e4ee4aaa437392c6058b0eaefe6c099f709d0e3b1c7c2c4831f71ff97f",
+      "anchors": [
+        {
+          "line": 114,
+          "text": "export function useDownloadAttachment("
+        }
+      ],
+      "disposition": "Every invocation refetches metadata directly: workspace getAttachment client:4438 or markdown-link getAttachmentForDownload client:4447, bypassing stale query data. Desktop prefers fresh attachment_download_url then download_url, resolves API-relative URL and invokes injected downloadURL; missing URL/errors toast. Web prefers forced attachment_download_url, then only site-relative /api/attachments/ signed-download capability from download_url, else requires workspace slug and clicks unified /download?workspace_slug=... . Temporary anchor uses download attribute and is removed. Absolute inline download_url is deliberately excluded from web capability fallback. No renderer blob buffering here. Server-returned forced URL is passed through resolver without canonical-route inference.",
+      "prior_ledger_status": "unaudited"
+    },
+    {
+      "path": "packages/views/editor/use-upload-gate.ts",
+      "status": "full-source-semantic-disposition",
+      "reviewed_lines": [
+        1,
+        61
+      ],
+      "sha256": "b46e4351cfc8d176a81b6c9f8c60a9ad59c97186c6613b780ee7154a0f47c369",
+      "anchors": [
+        {
+          "line": 61,
+          "text": "export { useUploadGate, type UploadGate };"
+        }
+      ],
+      "disposition": "React state exposes reactive uploading; imperative isBlocked reads editorRef.hasActiveUploads at invocation. No submission/upload operation. Host submit semantics reused from composer-submit coverage.",
+      "prior_ledger_status": "unaudited"
+    },
+    {
+      "path": "packages/views/editor/attachment-download-context.tsx",
+      "status": "full-source-semantic-disposition",
+      "reviewed_lines": [
+        1,
+        93
+      ],
+      "sha256": "f2a85f9dd2e5ee3569f6dde0cfe9c88d699005f9264993e2069de8289b27ce7e",
+      "anchors": [
+        {
+          "line": 44,
+          "text": "export function AttachmentDownloadProvider({ attachments, children }: ProviderProps) {"
+        },
+        {
+          "line": 80,
+          "text": "export function useAttachmentDownloadResolver(): ResolvedDownload {"
+        }
+      ],
+      "disposition": "Context memoizes local matchAttachmentByURL. Known record invokes default workspace download hook; unmatched nonempty URL or absent provider invokes openExternal. Resolve methods only return data. openExternal active web adapter window.open with noopener/noreferrer; SSR no-op; injected desktop openExternal boundary is external/native, not backend support.",
+      "prior_ledger_status": "unaudited"
+    }
+  ],
+  "direct_or_delegated_api_union": [
+    {
+      "id": "client:4438",
+      "route": {
+        "method": "GET",
+        "path": "/api/attachments/{id}"
+      },
+      "sources": [
+        "packages/core/api/client.ts:4438",
+        "packages/views/editor/hooks/use-inline-media-url.ts:109"
+      ]
+    },
+    {
+      "id": "client:4447",
+      "route": {
+        "method": "GET",
+        "path": "/api/attachments/{id}/download-metadata"
+      },
+      "sources": [
+        "packages/core/api/client.ts:4447"
+      ]
+    },
+    {
+      "id": "client:4078",
+      "route": {
+        "method": "POST",
+        "path": "/api/upload-file"
+      },
+      "sources": [
+        "packages/core/api/client.ts:4078",
+        "packages/views/editor/use-editor-upload.ts:31",
+        "packages/views/modals/use-issue-create-uploads.ts:109",
+        "packages/core/hooks/use-file-upload.ts:76"
+      ]
+    }
+  ],
+  "browser_resource_union": [
+    "GET /api/attachments/{id}/download?workspace_slug=<encoded slug>",
+    "Server-returned /api/attachments/<id>/signed-download capability with query preserved",
+    "Server-returned attachment_download_url (relative API capability or absolute storage/CDN URL); concrete path/query are data, not invented canonical routes",
+    "Unmatched input URL opened externally; origins and redirects are input/server-defined"
+  ],
+  "preview_dependency_union": {
+    "reused_from": "editor-transport-coverage.json",
+    "ids": [
+      "client:4438",
+      "client:4475",
+      "client:4508"
+    ],
+    "note": "Downstream preview consumers can refresh metadata, GET content, or fetch authenticated download blob then use local object URL. Sequence collection itself does not load. blob/data URLs and object URL revocation are local renderer resources."
+  },
+  "adapter_evidence": [
+    "packages/core/api/index.ts:44",
+    "packages/core/api/client.ts:4078",
+    "packages/core/api/client.ts:4438",
+    "packages/core/api/client.ts:4447",
+    "packages/core/workspace/avatar-url.ts:3",
+    "packages/views/platform/open-external.ts:18"
+  ],
+  "partial_dependencies": [
+    {
+      "boundary": "Arbitrary injected ApiClient, StorageAdapter, registered cleanup, binding, editor and inclusion callbacks",
+      "disposition": "Declared contracts and finite active adapter evidence covered; arbitrary replacement implementations are not globally enumerated."
+    },
+    {
+      "boundary": "Native downloadURL/openExternal implementations and server-selected redirect/storage origins",
+      "disposition": "Renderer boundary resolved; native operation and external resource behavior are outside backend support and were not executed."
+    },
+    {
+      "boundary": "Global frontend coverage and unrelated query invalidation fanout",
+      "disposition": "Unchanged and incomplete; click-time download refetch union is fully resolved above."
+    }
+  ],
+  "execution": "Static reads only; no model/audio/upload/network execution; no backend support claim."
+}

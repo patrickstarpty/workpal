@@ -1,0 +1,125 @@
+{
+  "batch": "observer-local-state-transport-coverage",
+  "date": "2026-11-21",
+  "mode": "static source audit only",
+  "global_transport_coverage": false,
+  "backend_support_claim": false,
+  "sources": [
+    {
+      "path": "packages/core/api/index.ts",
+      "sha256": "318285b11b1ddb79f3df0b87e0b895110c7e178b16c6086c2084b619178133c2",
+      "lines": 50,
+      "full_source_read": true,
+      "disposition": "Singleton assignment/getter and property-forwarding Proxy; binds functions to injected ApiClient. Reexports are not dispatch. Actual calls depend on selected member; search-index-transport-coverage.md documents concrete ApiClient common transport seam."
+    },
+    {
+      "path": "packages/core/api/realtime-observer.ts",
+      "sha256": "263a345c1465247c71012631228e5d125dc7c5eee2969b2d119a4b8a9fe57996",
+      "lines": 94,
+      "full_source_read": true,
+      "disposition": "Observer/target registration and synchronous callback dispatch only. Cause context restored in finally; hold deduplicates and caps merged causes at 20; context does not follow await. replay invokes observer then registered target; drop delegates to target. Neither is intrinsically network-free at application boundary."
+    },
+    {
+      "path": "packages/core/api/request-observer.ts",
+      "sha256": "dff8a70c65aeabc4f2ba9b796ef4a03d9c22f5791843693b2864a078bfb82247",
+      "lines": 30,
+      "full_source_read": true,
+      "disposition": "Optional refusal plus start/end notification interface and singleton setter/getter only. No request dispatch here; common ApiClient transport owns invocation and refusal handling (search-index-transport-coverage.md). Arbitrary consumer callbacks need no recursive listener inventory."
+    },
+    {
+      "path": "packages/core/diagnostics/dev-recorder.ts",
+      "sha256": "b579f809c6dad7282facc157df2be0fafe5aadbd339d3d10ac8a399fc175fe6f",
+      "lines": 697,
+      "full_source_read": true,
+      "disposition": "In-memory bounded recording, redaction, pruning, timers, PerformanceObserver, console/error listeners and query-cache subscription. Known request observer records metadata and refuses replay writes; realtime observer records frames/reconnects. Subscriber notification invokes callbacks; application use-dev-metrics.ts uses useSyncExternalStore to reread recording. Replay checks workspace and retained raw message then delegates; drop delegates. No fetch, IndexedDB, localStorage write or debug download implementation in this file. Refusal permits GET/HEAD/readOnly and only protects synchronous active replay causes; it is not a global no-network guarantee."
+    },
+    {
+      "path": "packages/core/issues/stores/comment-draft-store.ts",
+      "sha256": "699c6270150453b38cc68e957c1dea05c4997a96e0228f3ff1b91a7842c46fa6",
+      "lines": 307,
+      "full_source_read": true,
+      "disposition": "Local Zustand draft CRUD, annotation validation/deduplication, upload metadata transitions and WeakMap derived attachment cache. No upload bytes dispatched. Rehydrate normalizes uploads and annotations, prunes 30-day stale/empty entries. Workspace-aware defaultStorage persists workpal_comment_drafts:<slug> to localStorage, not IndexedDB. Empty namespace merges empty drafts. Cleanup resets local drafts."
+    },
+    {
+      "path": "packages/core/issues/stores/draft-store.ts",
+      "sha256": "b16a27715fa629d73f242314117ae394a9a115d36bde133d461cc676760339a7",
+      "lines": 399,
+      "full_source_read": true,
+      "disposition": "Local shared/manual/agent draft updates, legacy migration, upload metadata normalization and recoverable-intent comparisons. Isolated draft backup and continuation baseline are in-memory; partialize persists ordinary backup and normalizes untouched continuation status. workpal_issue_draft:<slug> uses localStorage. Workspace rehydrate and registered cleanup are local state operations, not create-issue requests."
+    },
+    {
+      "path": "packages/core/chat/message-cache.ts",
+      "sha256": "0c7e56ec61551df34a26a7bc554d0dd4d84a9856e4f0eb8cc4b915e15f623429",
+      "lines": 135,
+      "full_source_read": true,
+      "disposition": "Only setQueryData to flat and paged chat caches. Identity by id; existing defined fields win, incoming fills undefined fields. New messages append to page zero; optional missing-cache seeding defaults false. No invalidation/refetch/send performed by this helper. Generic cache subscriber execution is outside its direct transport disposition."
+    }
+  ],
+  "application_edges": [
+    "Known application target: packages/core/realtime/use-realtime-sync.ts:896 registers replay: ws.replay and drop: () => client.drop(). Replay can execute invalidations/refetch handlers; refreshMap at 901 includes inbox invalidation and agent query invalidation. Full handler-to-request union is not closed by this batch; do not label replay local-only transport.",
+    "Connection drop reaches WSClient reconnect behavior; authenticated /ws handshake, subscriptions and reconnect refetch are described in existing realtime.md/json. No new endpoint or backend support follows.",
+    "Exact active-query request union after replay/reconnect depends on registered application query options. Remaining edge: enumerate only concrete application sync handler producers if a complete replay HTTP union is required; do not recursively audit React/Zustand/node_modules listeners.",
+    "IndexedDB belongs to search-index/store.ts, already dispositioned in search-index-transport-coverage.md; neither draft store nor message-cache uses IndexedDB. Draft upload producer/submit transport is separately covered by draft-attachment-transport-coverage and composer-submit-coverage; metadata mutation does not imply dispatch.",
+    "No debug download producer found in named sources or packages/views/dev-toolbar search for Blob/createObjectURL/download. Any external debug exporter is outside this proof and must be traced before assigning a transport disposition."
+  ],
+  "verification": "Full executable source review; SHA-256 over current complete file bytes. No runtime tests, network calls, data changes or shared inventory edits.",
+  "files": [
+    {
+      "path": "packages/core/api/index.ts",
+      "sha256": "318285b11b1ddb79f3df0b87e0b895110c7e178b16c6086c2084b619178133c2",
+      "lines": 50,
+      "full_source_read": true,
+      "disposition": "Singleton assignment/getter and property-forwarding Proxy; binds functions to injected ApiClient. Reexports are not dispatch. Actual calls depend on selected member; search-index-transport-coverage.md documents concrete ApiClient common transport seam.",
+      "whole_source": true
+    },
+    {
+      "path": "packages/core/api/realtime-observer.ts",
+      "sha256": "263a345c1465247c71012631228e5d125dc7c5eee2969b2d119a4b8a9fe57996",
+      "lines": 94,
+      "full_source_read": true,
+      "disposition": "Observer/target registration and synchronous callback dispatch only. Cause context restored in finally; hold deduplicates and caps merged causes at 20; context does not follow await. replay invokes observer then registered target; drop delegates to target. Neither is intrinsically network-free at application boundary.",
+      "whole_source": false
+    },
+    {
+      "path": "packages/core/api/request-observer.ts",
+      "sha256": "dff8a70c65aeabc4f2ba9b796ef4a03d9c22f5791843693b2864a078bfb82247",
+      "lines": 30,
+      "full_source_read": true,
+      "disposition": "Optional refusal plus start/end notification interface and singleton setter/getter only. No request dispatch here; common ApiClient transport owns invocation and refusal handling (search-index-transport-coverage.md). Arbitrary consumer callbacks need no recursive listener inventory.",
+      "whole_source": true
+    },
+    {
+      "path": "packages/core/diagnostics/dev-recorder.ts",
+      "sha256": "b579f809c6dad7282facc157df2be0fafe5aadbd339d3d10ac8a399fc175fe6f",
+      "lines": 697,
+      "full_source_read": true,
+      "disposition": "In-memory bounded recording, redaction, pruning, timers, PerformanceObserver, console/error listeners and query-cache subscription. Known request observer records metadata and refuses replay writes; realtime observer records frames/reconnects. Subscriber notification invokes callbacks; application use-dev-metrics.ts uses useSyncExternalStore to reread recording. Replay checks workspace and retained raw message then delegates; drop delegates. No fetch, IndexedDB, localStorage write or debug download implementation in this file. Refusal permits GET/HEAD/readOnly and only protects synchronous active replay causes; it is not a global no-network guarantee.",
+      "whole_source": false
+    },
+    {
+      "path": "packages/core/issues/stores/comment-draft-store.ts",
+      "sha256": "699c6270150453b38cc68e957c1dea05c4997a96e0228f3ff1b91a7842c46fa6",
+      "lines": 307,
+      "full_source_read": true,
+      "disposition": "Local Zustand draft CRUD, annotation validation/deduplication, upload metadata transitions and WeakMap derived attachment cache. No upload bytes dispatched. Rehydrate normalizes uploads and annotations, prunes 30-day stale/empty entries. Workspace-aware defaultStorage persists workpal_comment_drafts:<slug> to localStorage, not IndexedDB. Empty namespace merges empty drafts. Cleanup resets local drafts.",
+      "whole_source": true
+    },
+    {
+      "path": "packages/core/issues/stores/draft-store.ts",
+      "sha256": "b16a27715fa629d73f242314117ae394a9a115d36bde133d461cc676760339a7",
+      "lines": 399,
+      "full_source_read": true,
+      "disposition": "Local shared/manual/agent draft updates, legacy migration, upload metadata normalization and recoverable-intent comparisons. Isolated draft backup and continuation baseline are in-memory; partialize persists ordinary backup and normalizes untouched continuation status. workpal_issue_draft:<slug> uses localStorage. Workspace rehydrate and registered cleanup are local state operations, not create-issue requests.",
+      "whole_source": true
+    },
+    {
+      "path": "packages/core/chat/message-cache.ts",
+      "sha256": "0c7e56ec61551df34a26a7bc554d0dd4d84a9856e4f0eb8cc4b915e15f623429",
+      "lines": 135,
+      "full_source_read": true,
+      "disposition": "Only setQueryData to flat and paged chat caches. Identity by id; existing defined fields win, incoming fills undefined fields. New messages append to page zero; optional missing-cache seeding defaults false. No invalidation/refetch/send performed by this helper. Generic cache subscriber execution is outside its direct transport disposition.",
+      "whole_source": true
+    }
+  ],
+  "parent_review": "Five bounded source dispositions accepted; realtime-observer and dev-recorder retained pending concrete realtime handler/refetch closure. Spot-checked singleton proxy, request observer, draft rehydration/storage registrations, and actual replay/drop target registration."
+}

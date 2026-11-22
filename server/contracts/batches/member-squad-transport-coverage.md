@@ -1,0 +1,23 @@
+# Member and squad transport audit
+
+Bounded static source audit of MemberProfileCard and SquadDetailPage, including every local function body. No backend support or global closure claim.
+
+MemberProfileCard starts members, agents and workspace 30-day run-count observers before its loading/unavailable returns. It resolves by user_id, excludes archived owned agents, sorts by run count descending then name, and shows two plus overflow. RoleBadge maps owner/admin/other locally. OwnedAgentsSection navigates to agent detail and delegates avatar/status rendering without nested hover cards.
+
+SquadDetailPage derives squadId from the last pathname segment. Detail, roster, status and recent issues require workspace.id and squadId; members/agents factories have no enabled guard. Recent work sends squad assignee filter, updated_at descending, limit five. Status maps member_id to snapshots. Workspace role owner/admin or creator equality grants canManage. This is a UI gate, not server authorization proof. Missing detail shows skeleton or error state.
+
+Archived squads suppress assign-work, archive/create-agent actions, roster edits, leader picker and instructions edits. Name, description and avatar controls use canManage alone, including archived squads. Assign work opens create-issue with squad assignee defaults; create-agent navigates with encoded squad query. Copy link uses clipboard and shareable URL, no API call in this body.
+
+Update mutation sends optional name/description/instructions/avatar_url/leader_id, seeds detail cache, explicitly refetches detail and roster, and invalidates squads prefix. Leader mutation sends leader_id and refetches detail/roster plus prefix invalidation. Add sends member_type/member_id and trimmed role or undefined; remove sends type/id; role PATCH sends type/id/role. These three refetch roster only. Delete invalidates prefix then navigates to squad list. Errors show toast; no synthetic successful outputs.
+
+The prefix union includes listSquads, listInvolvedSquadIds, getSquad, listSquadMembers, getSquadMemberStatus and the recent listIssues observer. Invalidation may refetch active matching observers; explicit refetches are separate and may overlap. It does not imply every observer runs or expand to unrelated workspace trees.
+
+SquadMembersSection grants leader selection only to nonarchived agent nonleaders; removal excludes leader; role editing uses passed management gate. Agent detail navigation remains visible without management. Status issue links navigate only. SquadProperties filters leader candidates to nonarchived agents, skips unchanged leader, renders four avatar previews and local timestamps. SquadAvatar computes initials and resolves dynamic public image URL.
+
+AddMemberDialog excludes existing roster targets via parent filters and archived agents, searches names/pinyin locally, requires target and not submitting, submits optional role, closes on success and restores submitting on failure. RoleEditor trims, skips unchanged trimmed values, commits blur/Enter, cancels Escape and retains edit on failure. SquadDescriptionEditor skips unchanged/discard, saves raw draft on blur/send shortcut, retains failed draft for retry, and displays pending text. saveName trims, rejects empty/discard, resets on error. SquadInstructionsSection saves raw editor value only when dirty, preserves editing on failure, cancels locally; ContentEditor disables mentions. RecentWorkSection and useStatusLabel delegate status catalog observers; duplicate keys can share cache. Skeleton helpers are render-only.
+
+Child boundaries: ActorAvatar, AvatarUploadControl, ContentEditor/ReadonlyContent, title editor, status hooks, modal issue creation and agent creation are delegated to existing evidence, not counted as local helper bodies. Avatar upload may precede the parent's updateSquad avatar callback. Public avatar URLs and rich content resources are dynamic browser resources, not fixed authenticated route tuples. Creation navigation/modal opening alone does not execute creation. Existing identity/workspace evidence supplies context and query behavior; core-query and avatar evidence supply child observer/resource unions; editor and status evidence retain their own bounds.
+
+Validation: JSON parsed; all listed file hashes recomputed; helper and client anchors checked; every edge ID/method/path_expression/route matched exactly against frontend-calls.json. No app runtime, git, data, network, models or integrations operated.
+
+Root accepted bounded target scope after squad mutation/refetch callback and gate checks plus hash/tuple validation. Server permission parity and child implementations remain separate obligations.

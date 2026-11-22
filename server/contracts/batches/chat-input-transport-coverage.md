@@ -1,0 +1,30 @@
+# Chat input transport coverage
+
+Bounded static audit; root review pending. No runtime, network, model, integration or backend verification.
+
+ChatAddMenu: hidden multiple-file input resets value before invoking onSelectFile once per file; empty selection returns. Upload entry and input require callback. Project submenu requires callback; selection/null removal are injected callbacks, unsupported-context warning does not block selection. disabled gates trigger only. No direct HTTP.
+
+ChatInput local hooks: store selectors, refs, memoized bindings, focus, layout adoption, restore and starter effects are local. commitDraft writes loaded draft and prunes only uploaded attachments no longer referenced by any known URL or attachment-ID download path; failed/uploading entries remain. draftKey override else session else DRAFT_NEW_SESSION; editor identity stays stable. On draft switch active editor uploads defer adoption; flush writes old key, then forced adoption after gate settles. Focus nonce zero is inert.
+
+Upload: uploadEnabled = !!uploadAllowed && !disabled && !noAgent. Button/paste/drop route through editor uploadFile; direct coordinated handleUpload uses source loaded-key binding and live registry key. Reuse draft-attachment evidence: multipart upload has AbortSignal, coordinator survives unmount, logout aborts, reload drops File bytes; removal aborts local pending upload without server DELETE; abort does not settle wrapper Promise. No upload call was executed.
+
+Submit: useComposerSubmit normalizes annotation intent, rejects empty/inFlight/uploadGate.isBlocked synchronously, then locks until finally. Exceptions are rejection. Chat rejects disabled/noAgent/running without allowSubmitWhileRunning and loaded-key mismatch. Referenced attachment IDs deduplicated; flush precedes snapshot. Attached page prepends escaped mention. onSend false retains draft unless owner already committed; thrown callback caught by submit hook. Success commits once. commitInput flushes late typing, clears source only if undefined or equal snapshot, optionally preserves visible editor, clears extra keys, removes only sent annotation IDs and matching page chip. Refocus only if scrubbed and focus still belongs to composer; unmount cancels queued animation frame, not HTTP.
+
+Starter: consumes nonce before gates; rejects submitting/disabled/noAgent/running unsupported/key mismatch/upload blocked/nonempty live or stored text or attachments. Flushes before checks; adopts prompt and invokes same submit; rejection leaves prompt. Restore: resets applied ref when absent, deduplicates ID, waits for matching session and empty text plus zero staged uploads; writes content and completed attachment records before applied callback.
+
+Voice: insertText and gated submit injected; scope override else draftKey:selectedAgentId, hidden and disabled/noAgent passed. canSubmitNow requires !disabled && !noAgent && (!isRunning || allowSubmitWhileRunning). Voice proof covers scope/unregister cancellation and late-result suppression, native bridge boundary and agents/members/projects reads. No transcription executed. willSteer hint requires canSteerWhileRunning, no draftUploads and no slash skill marker; this hint does not itself authorize a transport.
+
+Project selection requires callback,!disabled,!noAgent,!submitting,!isProjectUpdating. ProjectPicker and clear invoke injected onProjectChange; no direct request here. Tab page toggle requires unmodified unclaimed noncomposing Tab originating inside editor and pageContext. Annotation edit/render are injected callbacks.
+
+Concrete main parent: chat-page.tsx and chat-window.tsx pass c.handleSend. Controller rejects absent/archived/revoked agent, unsupported running queue, unbound runtime; ensureSession rejection/null returns false. Existing composer proof resolves create session then send message. Success upserts accepted message and seeds pending task unless steered, conditionally refetches sessions for changed session, publishes active session only if still on source, commits with extra session key and clearEditor based on source. Deferred stop awaits cancel and returns false after commit. Missing bound attachment IDs toast; messages and messagesPage invalidated on normal accepted tail. Stop without task/session returns; temporary task records deferred stop; real task invokes cancelChatTask. These are parent operations, not request aborts.
+
+Draft restore hook: query enabled && !!activeSessionId; staleTime zero factory invokes listChatDraftRestores without signal argument. Existing chat-inbox proof covers mount/reconnect/cancel-finalized invalidation same list union. Disabled releases offer; mismatched session releases slot. Persisted local queue takes priority, durable rows exclude applied IDs and remove stale message from caches before offer. Applied durable records ledger before consume; local application dequeues. Consume Set suppresses duplicate reconciliation; success forgets ledger, settle removes Set entry; mutation retries three times exponential 1/2/4 seconds capped 8s, optimistically filters query list, logs exhausted failure without rollback or invalidation. Later fetched rows reconcile applied IDs; no new endpoint. No explicit abort on disabled/session switch or unmount. No consume before successful composer application.
+
+Remaining edges only:
+
+- Injected project change and annotation edit/render implementations beyond the bounded main send adapter are not enumerated.
+- ContentEditor, ProjectPicker, ReplyAnnotations, adornments and other descendant trees are not whole-source audited here.
+- Builder-specific encodeInput and alternative onSend implementations retain composer-submit proof boundaries.
+- Global invalidation observer fanout, native voice implementation and external resource origins remain outside this bounded audit.
+
+Root accepted bounded target scope after reviewing restore offer/application ledger and consume retry behavior, plus snapshot/hash/tuple validation. Remaining injected and descendant boundaries retained; no runtime verification.

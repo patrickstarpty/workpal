@@ -1,0 +1,3504 @@
+{
+  "version": 1,
+  "scope": "finite ApiClient tail wrappers",
+  "whole_source": false,
+  "root_review": {
+    "status": "partial_review",
+    "declarations_source_verified": 112,
+    "copied_tuple_occurrences_verified": 112,
+    "dynamic_command_helper": "resolved through all five static callers; independently read source",
+    "remaining": "Other named helper semantics and cross-section coverage still require reconciliation; no whole-client completion."
+  },
+  "backend_claim": false,
+  "runtime_verified": false,
+  "file": {
+    "path": "packages/core/api/client.ts",
+    "sha256": "779bb65b5b7ead815836f7c704ec3c370bafae203e4f92119fadce93e982a4d7",
+    "start": 5102,
+    "end": 6216
+  },
+  "proof_reuse": [
+    {
+      "path": "server/contracts/batches/api-client-execution-closure.json",
+      "sha256": "550a585c2351e0b2e8066bb11dd6690f17dff41641d78071e0f6479cdf3991e9",
+      "checked_source_hashes": [
+        {
+          "path": "packages/core/api/client.ts",
+          "sha256": "779bb65b5b7ead815836f7c704ec3c370bafae203e4f92119fadce93e982a4d7"
+        }
+      ]
+    },
+    {
+      "path": "server/contracts/batches/schema-data-transport-coverage.json",
+      "sha256": "cf5a8661dd7305cd787958b1f8f34d13e30326d3477a32edea2e7a487fd72021",
+      "checked_source_hashes": [
+        {
+          "path": "packages/core/types/agent.ts",
+          "sha256": "a1c494eb9f71de1f08350415eb1b41777387e601da6ace53ba4d639d193c640b"
+        },
+        {
+          "path": "packages/core/api/schemas.ts",
+          "sha256": "f75704eeb37705c0f72b4bd89ff89e848289f3fe7cee154b9bed7ff280be674d"
+        },
+        {
+          "path": "packages/views/dashboard/utils.ts",
+          "sha256": "0291f572d74f9a3c8bfd995563b4be97d8ff2a3ba63dcdaef3ccf70fadfcbf22"
+        }
+      ]
+    },
+    {
+      "path": "server/contracts/batches/schema-callback-transport-coverage.json",
+      "sha256": "a861f683eee43acb00571aa2216c95c104ce20001ed3d817928082af454f2cd3",
+      "checked_source_hashes": [
+        {
+          "path": "packages/core/api/schemas.ts",
+          "sha256": "f75704eeb37705c0f72b4bd89ff89e848289f3fe7cee154b9bed7ff280be674d"
+        }
+      ]
+    }
+  ],
+  "inventory_snapshot": {
+    "path": "server/contracts/frontend-calls.json",
+    "sha256": "2670eec069d89d20045a5bc1043d7031f2a1460a4180a0b10256315abee03d21"
+  },
+  "declarations": [
+    {
+      "name": "createIssueView",
+      "start": 5102,
+      "end": 5112,
+      "source": "  async createIssueView(data: CreateIssueViewRequest): Promise<IssueView | null> {\n    const raw = await this.fetch<unknown>(\"/api/issue-views\", {\n      method: \"POST\",\n      body: JSON.stringify(data),\n    });\n    // null fallback: the create itself succeeded server-side; a response we\n    // cannot parse must not crash the dialog — callers refetch the list.\n    return parseWithFallback(raw, IssueViewSchema.nullable(), null, {\n      endpoint: \"POST /api/issue-views\",\n    });\n  }",
+      "sha256": "c1543fab4fb8b8e1d5ddaa2af758c2064ad5674ae225bf3c8d84d53c9e545d33",
+      "requests": [
+        {
+          "line": 5103,
+          "source": "    const raw = await this.fetch<unknown>(\"/api/issue-views\", {",
+          "transport": "shared fetch",
+          "actual_method": "POST",
+          "inventory": [
+            {
+              "id": "client:5103",
+              "method": "POST",
+              "path_expression": "/api/issue-views",
+              "route": {
+                "method": "POST",
+                "path": "/api/issue-views"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "updateIssueView",
+      "start": 5114,
+      "end": 5132,
+      "source": "  async updateIssueView(\n    id: string,\n    data: {\n      name?: string;\n      visibility?: \"private\" | \"workspace\";\n      scope_variant?: string | null;\n      query?: Record<string, unknown>;\n      display?: Record<string, unknown>;\n      expected_revision: number;\n    },\n  ): Promise<IssueView | null> {\n    const raw = await this.fetch<unknown>(`/api/issue-views/${id}`, {\n      method: \"PATCH\",\n      body: JSON.stringify(data),\n    });\n    return parseWithFallback(raw, IssueViewSchema.nullable(), null, {\n      endpoint: \"PATCH /api/issue-views/{id}\",\n    });\n  }",
+      "sha256": "0cd806dbca74cf620a4bb07d171ad0a30b60e50aedb89124e6205d9e22437354",
+      "requests": [
+        {
+          "line": 5125,
+          "source": "    const raw = await this.fetch<unknown>(`/api/issue-views/${id}`, {",
+          "transport": "shared fetch",
+          "actual_method": "PATCH",
+          "inventory": [
+            {
+              "id": "client:5125",
+              "method": "PATCH",
+              "path_expression": "/api/issue-views/${id}",
+              "route": {
+                "method": "PATCH",
+                "path": "/api/issue-views/{id}"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "getIssueView",
+      "start": 5134,
+      "end": 5139,
+      "source": "  async getIssueView(id: string): Promise<IssueView | null> {\n    const raw = await this.fetch<unknown>(`/api/issue-views/${id}`);\n    return parseWithFallback(raw, IssueViewSchema.nullable(), null, {\n      endpoint: \"GET /api/issue-views/{id}\",\n    });\n  }",
+      "sha256": "460db4c1ee37c5676ec126148cafad8ada22d1faba20d497166e56d4be16a8e9",
+      "requests": [
+        {
+          "line": 5135,
+          "source": "    const raw = await this.fetch<unknown>(`/api/issue-views/${id}`);",
+          "transport": "shared fetch",
+          "actual_method": "GET",
+          "inventory": [
+            {
+              "id": "client:5135",
+              "method": "GET",
+              "path_expression": "/api/issue-views/${id}",
+              "route": {
+                "method": "GET",
+                "path": "/api/issue-views/{id}"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "deleteIssueView",
+      "start": 5141,
+      "end": 5143,
+      "source": "  async deleteIssueView(id: string): Promise<void> {\n    await this.fetch(`/api/issue-views/${id}`, { method: \"DELETE\" });\n  }",
+      "sha256": "07115eb52018879a787b25b715db38a24a0c62e5113fdeb2ff791d27c2f0d619",
+      "requests": [
+        {
+          "line": 5142,
+          "source": "    await this.fetch(`/api/issue-views/${id}`, { method: \"DELETE\" });",
+          "transport": "shared fetch",
+          "actual_method": "DELETE",
+          "inventory": [
+            {
+              "id": "client:5142",
+              "method": "DELETE",
+              "path_expression": "/api/issue-views/${id}",
+              "route": {
+                "method": "DELETE",
+                "path": "/api/issue-views/{id}"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "getIssueViewPreference",
+      "start": 5145,
+      "end": 5155,
+      "source": "  async getIssueViewPreference(params: {\n    scope_type: string;\n    scope_id?: string | null;\n  }): Promise<IssueViewPreference> {\n    const qs = new URLSearchParams({ scope_type: params.scope_type });\n    if (params.scope_id) qs.set(\"scope_id\", params.scope_id);\n    const raw = await this.fetch<unknown>(`/api/issue-view-preferences?${qs.toString()}`);\n    return parseWithFallback(raw, IssueViewPreferenceSchema, EMPTY_ISSUE_VIEW_PREFERENCE, {\n      endpoint: \"GET /api/issue-view-preferences\",\n    });\n  }",
+      "sha256": "b5eb8fa74d51f82301d7a669381486671904d60ad6476012f1b39a29e1c97541",
+      "requests": [
+        {
+          "line": 5151,
+          "source": "    const raw = await this.fetch<unknown>(`/api/issue-view-preferences?${qs.toString()}`);",
+          "transport": "shared fetch",
+          "actual_method": "GET",
+          "inventory": [
+            {
+              "id": "client:5151",
+              "method": "GET",
+              "path_expression": "/api/issue-view-preferences?${qs.toString()}",
+              "route": {
+                "method": "GET",
+                "path": "/api/issue-view-preferences"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "putIssueViewPreference",
+      "start": 5157,
+      "end": 5173,
+      "source": "  async putIssueViewPreference(\n    data: {\n      scope_type: string;\n      scope_id?: string | null;\n      prefs: Record<string, unknown>;\n    },\n    workspaceSlug?: string,\n  ): Promise<IssueViewPreference> {\n    const raw = await this.fetch<unknown>(\"/api/issue-view-preferences\", {\n      method: \"PUT\",\n      body: JSON.stringify(data),\n      headers: workspaceHeader(workspaceSlug),\n    });\n    return parseWithFallback(raw, IssueViewPreferenceSchema, EMPTY_ISSUE_VIEW_PREFERENCE, {\n      endpoint: \"PUT /api/issue-view-preferences\",\n    });\n  }",
+      "sha256": "a94ed50823d6f3ab5fe73d6eeb7576dad91d83b8ee55929891c9272b1bae890e",
+      "requests": [
+        {
+          "line": 5165,
+          "source": "    const raw = await this.fetch<unknown>(\"/api/issue-view-preferences\", {",
+          "transport": "shared fetch",
+          "actual_method": "PUT",
+          "inventory": [
+            {
+              "id": "client:5165",
+              "method": "PUT",
+              "path_expression": "/api/issue-view-preferences",
+              "route": {
+                "method": "PUT",
+                "path": "/api/issue-view-preferences"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "listPins",
+      "start": 5176,
+      "end": 5181,
+      "source": "  async listPins(): Promise<PinnedItem[]> {\n    // include=view is the capability opt-in: the server withholds view pins\n    // from clients that don't declare support (old builds treated any\n    // non-issue pin as a project pin and auto-deleted it on 404).\n    return this.fetch(\"/api/pins?include=view\");\n  }",
+      "sha256": "8ec5d9197df783141ec258e0d0438627e901b9fe204e706c15879164ca081c49",
+      "requests": [
+        {
+          "line": 5180,
+          "source": "    return this.fetch(\"/api/pins?include=view\");",
+          "transport": "shared fetch",
+          "actual_method": "GET",
+          "inventory": [
+            {
+              "id": "client:5180",
+              "method": "GET",
+              "path_expression": "/api/pins?include=view",
+              "route": {
+                "method": "GET",
+                "path": "/api/pins"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "createPin",
+      "start": 5183,
+      "end": 5188,
+      "source": "  async createPin(data: CreatePinRequest): Promise<PinnedItem> {\n    return this.fetch(\"/api/pins\", {\n      method: \"POST\",\n      body: JSON.stringify(data),\n    });\n  }",
+      "sha256": "f6f4f71d7c0f83dd97ab7f2c6c9498d20ce4fac393d709dd1cf1808e92512821",
+      "requests": [
+        {
+          "line": 5184,
+          "source": "    return this.fetch(\"/api/pins\", {",
+          "transport": "shared fetch",
+          "actual_method": "POST",
+          "inventory": [
+            {
+              "id": "client:5184",
+              "method": "POST",
+              "path_expression": "/api/pins",
+              "route": {
+                "method": "POST",
+                "path": "/api/pins"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "deletePin",
+      "start": 5190,
+      "end": 5192,
+      "source": "  async deletePin(itemType: PinnedItemType, itemId: string): Promise<void> {\n    await this.fetch(`/api/pins/${itemType}/${itemId}`, { method: \"DELETE\" });\n  }",
+      "sha256": "293b9a3d25f58b51778cd370e9160ee3472415856572c11ef3501da77d279720",
+      "requests": [
+        {
+          "line": 5191,
+          "source": "    await this.fetch(`/api/pins/${itemType}/${itemId}`, { method: \"DELETE\" });",
+          "transport": "shared fetch",
+          "actual_method": "DELETE",
+          "inventory": [
+            {
+              "id": "client:5191",
+              "method": "DELETE",
+              "path_expression": "/api/pins/${itemType}/${itemId}",
+              "route": {
+                "method": "DELETE",
+                "path": "/api/pins/{itemType}/{itemId}"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "reorderPins",
+      "start": 5194,
+      "end": 5199,
+      "source": "  async reorderPins(data: ReorderPinsRequest): Promise<void> {\n    await this.fetch(\"/api/pins/reorder\", {\n      method: \"PUT\",\n      body: JSON.stringify(data),\n    });\n  }",
+      "sha256": "696a51cd7e7c606f6ad1dd5bcc98e96f54769d72232da7fe92409a6c2187d48b",
+      "requests": [
+        {
+          "line": 5195,
+          "source": "    await this.fetch(\"/api/pins/reorder\", {",
+          "transport": "shared fetch",
+          "actual_method": "PUT",
+          "inventory": [
+            {
+              "id": "client:5195",
+              "method": "PUT",
+              "path_expression": "/api/pins/reorder",
+              "route": {
+                "method": "PUT",
+                "path": "/api/pins/reorder"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "listSquads",
+      "start": 5202,
+      "end": 5207,
+      "source": "  async listSquads(): Promise<Squad[]> {\n    const raw = await this.fetch<unknown>(`/api/squads`);\n    return parseWithFallback(raw, SquadListSchema, EMPTY_SQUAD_LIST, {\n      endpoint: \"GET /api/squads\",\n    }) as Squad[];\n  }",
+      "sha256": "3ea981114505ddfe2f68270412cfd65907b0906936cc05273177345b7d4246b7",
+      "requests": [
+        {
+          "line": 5203,
+          "source": "    const raw = await this.fetch<unknown>(`/api/squads`);",
+          "transport": "shared fetch",
+          "actual_method": "GET",
+          "inventory": [
+            {
+              "id": "client:5203",
+              "method": "GET",
+              "path_expression": "/api/squads",
+              "route": {
+                "method": "GET",
+                "path": "/api/squads"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "listInvolvedSquadIds",
+      "start": 5209,
+      "end": 5216,
+      "source": "  async listInvolvedSquadIds(): Promise<string[]> {\n    const raw = await this.fetch<unknown>(\"/api/squads/involved\");\n    const parsed = parseWithFallback<{ squad_ids: string[] } | null>(raw, InvolvedSquadIdsSchema, null, {\n      endpoint: \"GET /api/squads/involved\",\n    });\n    if (!parsed) throw new Error(\"GET /api/squads/involved returned a malformed body\");\n    return parsed.squad_ids;\n  }",
+      "sha256": "97ec8d601eefe4ab40d40aae97ca180eb7fc7ac62785b4df6e1af5f1f31c5418",
+      "requests": [
+        {
+          "line": 5210,
+          "source": "    const raw = await this.fetch<unknown>(\"/api/squads/involved\");",
+          "transport": "shared fetch",
+          "actual_method": "GET",
+          "inventory": [
+            {
+              "id": "client:5210",
+              "method": "GET",
+              "path_expression": "/api/squads/involved",
+              "route": {
+                "method": "GET",
+                "path": "/api/squads/involved"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "getSquad",
+      "start": 5218,
+      "end": 5223,
+      "source": "  async getSquad(id: string): Promise<Squad> {\n    const raw = await this.fetch<unknown>(`/api/squads/${id}`);\n    return parseWithFallback(raw, SquadSchema, EMPTY_SQUAD, {\n      endpoint: \"GET /api/squads/:id\",\n    }) as Squad;\n  }",
+      "sha256": "1ac49d8da22685d3cc9c46785f615d6e3cfae31bee23e900cfbe7d2f071765af",
+      "requests": [
+        {
+          "line": 5219,
+          "source": "    const raw = await this.fetch<unknown>(`/api/squads/${id}`);",
+          "transport": "shared fetch",
+          "actual_method": "GET",
+          "inventory": [
+            {
+              "id": "client:5219",
+              "method": "GET",
+              "path_expression": "/api/squads/${id}",
+              "route": {
+                "method": "GET",
+                "path": "/api/squads/{id}"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "createSquad",
+      "start": 5225,
+      "end": 5230,
+      "source": "  async createSquad(data: { name: string; description?: string; leader_id: string; avatar_url?: string }): Promise<Squad> {\n    const raw = await this.fetch<unknown>(\"/api/squads\", { method: \"POST\", body: JSON.stringify(data) });\n    return parseWithFallback(raw, SquadSchema, EMPTY_SQUAD, {\n      endpoint: \"POST /api/squads\",\n    }) as Squad;\n  }",
+      "sha256": "68ace12fe58caab5a0f1801b56169d26715031e5aaca2d5321fc3900c9ef44c2",
+      "requests": [
+        {
+          "line": 5226,
+          "source": "    const raw = await this.fetch<unknown>(\"/api/squads\", { method: \"POST\", body: JSON.stringify(data) });",
+          "transport": "shared fetch",
+          "actual_method": "POST",
+          "inventory": [
+            {
+              "id": "client:5226",
+              "method": "POST",
+              "path_expression": "/api/squads",
+              "route": {
+                "method": "POST",
+                "path": "/api/squads"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "updateSquad",
+      "start": 5232,
+      "end": 5237,
+      "source": "  async updateSquad(id: string, data: { name?: string; description?: string; instructions?: string; leader_id?: string; avatar_url?: string }): Promise<Squad> {\n    const raw = await this.fetch<unknown>(`/api/squads/${id}`, { method: \"PUT\", body: JSON.stringify(data) });\n    return parseWithFallback(raw, SquadSchema, EMPTY_SQUAD, {\n      endpoint: \"PUT /api/squads/:id\",\n    }) as Squad;\n  }",
+      "sha256": "09cf144886e036c0e0f587273e327c42cf1d3fc1a9c35a0da98b7954de3e3ad8",
+      "requests": [
+        {
+          "line": 5233,
+          "source": "    const raw = await this.fetch<unknown>(`/api/squads/${id}`, { method: \"PUT\", body: JSON.stringify(data) });",
+          "transport": "shared fetch",
+          "actual_method": "PUT",
+          "inventory": [
+            {
+              "id": "client:5233",
+              "method": "PUT",
+              "path_expression": "/api/squads/${id}",
+              "route": {
+                "method": "PUT",
+                "path": "/api/squads/{id}"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "deleteSquad",
+      "start": 5239,
+      "end": 5241,
+      "source": "  async deleteSquad(id: string): Promise<void> {\n    await this.fetch(`/api/squads/${id}`, { method: \"DELETE\" });\n  }",
+      "sha256": "78daafcbee7e7712b09f54fc01a8a6249e1a7fc1eeb0fae9765b220495faeb6d",
+      "requests": [
+        {
+          "line": 5240,
+          "source": "    await this.fetch(`/api/squads/${id}`, { method: \"DELETE\" });",
+          "transport": "shared fetch",
+          "actual_method": "DELETE",
+          "inventory": [
+            {
+              "id": "client:5240",
+              "method": "DELETE",
+              "path_expression": "/api/squads/${id}",
+              "route": {
+                "method": "DELETE",
+                "path": "/api/squads/{id}"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "listSquadMembers",
+      "start": 5243,
+      "end": 5245,
+      "source": "  async listSquadMembers(squadId: string): Promise<SquadMember[]> {\n    return this.fetch(`/api/squads/${squadId}/members`);\n  }",
+      "sha256": "26d82da37c60b4aa33c9b9c1d9240ab2d7750197feb53cd93bd43a70075b03cb",
+      "requests": [
+        {
+          "line": 5244,
+          "source": "    return this.fetch(`/api/squads/${squadId}/members`);",
+          "transport": "shared fetch",
+          "actual_method": "GET",
+          "inventory": [
+            {
+              "id": "client:5244",
+              "method": "GET",
+              "path_expression": "/api/squads/${squadId}/members",
+              "route": {
+                "method": "GET",
+                "path": "/api/squads/{id}/members"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "addSquadMember",
+      "start": 5247,
+      "end": 5249,
+      "source": "  async addSquadMember(squadId: string, data: { member_type: string; member_id: string; role?: string }): Promise<SquadMember> {\n    return this.fetch(`/api/squads/${squadId}/members`, { method: \"POST\", body: JSON.stringify(data) });\n  }",
+      "sha256": "5e69937305634ac43dec0946f0cfc6f7d935c888612a9a2c89beff38686bd5bb",
+      "requests": [
+        {
+          "line": 5248,
+          "source": "    return this.fetch(`/api/squads/${squadId}/members`, { method: \"POST\", body: JSON.stringify(data) });",
+          "transport": "shared fetch",
+          "actual_method": "POST",
+          "inventory": [
+            {
+              "id": "client:5248",
+              "method": "POST",
+              "path_expression": "/api/squads/${squadId}/members",
+              "route": {
+                "method": "POST",
+                "path": "/api/squads/{id}/members"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "removeSquadMember",
+      "start": 5251,
+      "end": 5253,
+      "source": "  async removeSquadMember(squadId: string, data: { member_type: string; member_id: string }): Promise<void> {\n    await this.fetch(`/api/squads/${squadId}/members`, { method: \"DELETE\", body: JSON.stringify(data) });\n  }",
+      "sha256": "c4bd022d35db6d011359e878655781cb46246a9f2202e00d9b889b6a01e2c7f6",
+      "requests": [
+        {
+          "line": 5252,
+          "source": "    await this.fetch(`/api/squads/${squadId}/members`, { method: \"DELETE\", body: JSON.stringify(data) });",
+          "transport": "shared fetch",
+          "actual_method": "DELETE",
+          "inventory": [
+            {
+              "id": "client:5252",
+              "method": "DELETE",
+              "path_expression": "/api/squads/${squadId}/members",
+              "route": {
+                "method": "DELETE",
+                "path": "/api/squads/{id}/members"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "updateSquadMemberRole",
+      "start": 5255,
+      "end": 5257,
+      "source": "  async updateSquadMemberRole(squadId: string, data: { member_type: string; member_id: string; role: string }): Promise<SquadMember> {\n    return this.fetch(`/api/squads/${squadId}/members/role`, { method: \"PATCH\", body: JSON.stringify(data) });\n  }",
+      "sha256": "8c552780fa34228ae0c9b093ec5a97914354deb3a8dcdb6fdb4b145af3bd042e",
+      "requests": [
+        {
+          "line": 5256,
+          "source": "    return this.fetch(`/api/squads/${squadId}/members/role`, { method: \"PATCH\", body: JSON.stringify(data) });",
+          "transport": "shared fetch",
+          "actual_method": "PATCH",
+          "inventory": [
+            {
+              "id": "client:5256",
+              "method": "PATCH",
+              "path_expression": "/api/squads/${squadId}/members/role",
+              "route": {
+                "method": "PATCH",
+                "path": "/api/squads/{id}/members/role"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "getSquadMemberStatus",
+      "start": 5263,
+      "end": 5268,
+      "source": "  async getSquadMemberStatus(squadId: string): Promise<SquadMemberStatusListResponse> {\n    const raw = await this.fetch<unknown>(`/api/squads/${squadId}/members/status`);\n    return parseWithFallback(raw, SquadMemberStatusListResponseSchema, EMPTY_SQUAD_MEMBER_STATUS_LIST, {\n      endpoint: \"GET /api/squads/:id/members/status\",\n    }) as SquadMemberStatusListResponse;\n  }",
+      "sha256": "07bc5cf3cb9847a2e1de52fff890c325d28bb858387cbc12dec06303ebc7ca31",
+      "requests": [
+        {
+          "line": 5264,
+          "source": "    const raw = await this.fetch<unknown>(`/api/squads/${squadId}/members/status`);",
+          "transport": "shared fetch",
+          "actual_method": "GET",
+          "inventory": [
+            {
+              "id": "client:5264",
+              "method": "GET",
+              "path_expression": "/api/squads/${squadId}/members/status",
+              "route": {
+                "method": "GET",
+                "path": "/api/squads/{id}/members/status"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "listAutopilots",
+      "start": 5271,
+      "end": 5281,
+      "source": "  async listAutopilots(params?: { status?: string }): Promise<ListAutopilotsResponse> {\n    const search = new URLSearchParams();\n    if (params?.status) search.set(\"status\", params.status);\n    const raw = await this.fetch<unknown>(`/api/autopilots?${search}`);\n    return parseWithFallback(\n      raw,\n      ListAutopilotsResponseSchema,\n      EMPTY_LIST_AUTOPILOTS_RESPONSE as ListAutopilotsResponse,\n      { endpoint: \"GET /api/autopilots\" },\n    );\n  }",
+      "sha256": "220e4649335fa2100cc9f06ca0d1d21c445bcf52b5e0020cefbb36ff5fbcd489",
+      "requests": [
+        {
+          "line": 5274,
+          "source": "    const raw = await this.fetch<unknown>(`/api/autopilots?${search}`);",
+          "transport": "shared fetch",
+          "actual_method": "GET",
+          "inventory": [
+            {
+              "id": "client:5274",
+              "method": "GET",
+              "path_expression": "/api/autopilots?${search}",
+              "route": {
+                "method": "GET",
+                "path": "/api/autopilots"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "getAutopilot",
+      "start": 5283,
+      "end": 5285,
+      "source": "  async getAutopilot(id: string): Promise<GetAutopilotResponse> {\n    return this.fetch(`/api/autopilots/${id}`);\n  }",
+      "sha256": "0a1fcf611f8521ae5d93495e7cc449a4de4c2b22e867e25e08668853ddda147c",
+      "requests": [
+        {
+          "line": 5284,
+          "source": "    return this.fetch(`/api/autopilots/${id}`);",
+          "transport": "shared fetch",
+          "actual_method": "GET",
+          "inventory": [
+            {
+              "id": "client:5284",
+              "method": "GET",
+              "path_expression": "/api/autopilots/${id}",
+              "route": {
+                "method": "GET",
+                "path": "/api/autopilots/{id}"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "createAutopilot",
+      "start": 5287,
+      "end": 5292,
+      "source": "  async createAutopilot(data: CreateAutopilotRequest): Promise<Autopilot> {\n    return this.fetch(\"/api/autopilots\", {\n      method: \"POST\",\n      body: JSON.stringify(data),\n    });\n  }",
+      "sha256": "48c55dccf4a12e4b26b97ab398c94eb58b9ccb6e9ba0705a41c419d26a1f9aa2",
+      "requests": [
+        {
+          "line": 5288,
+          "source": "    return this.fetch(\"/api/autopilots\", {",
+          "transport": "shared fetch",
+          "actual_method": "POST",
+          "inventory": [
+            {
+              "id": "client:5288",
+              "method": "POST",
+              "path_expression": "/api/autopilots",
+              "route": {
+                "method": "POST",
+                "path": "/api/autopilots"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "updateAutopilot",
+      "start": 5294,
+      "end": 5299,
+      "source": "  async updateAutopilot(id: string, data: UpdateAutopilotRequest): Promise<Autopilot> {\n    return this.fetch(`/api/autopilots/${id}`, {\n      method: \"PATCH\",\n      body: JSON.stringify(data),\n    });\n  }",
+      "sha256": "140b9c4f79dae1ea7fba8e86ffdc46c4e0e0ed30caefda003a33cd24df78b2a9",
+      "requests": [
+        {
+          "line": 5295,
+          "source": "    return this.fetch(`/api/autopilots/${id}`, {",
+          "transport": "shared fetch",
+          "actual_method": "PATCH",
+          "inventory": [
+            {
+              "id": "client:5295",
+              "method": "PATCH",
+              "path_expression": "/api/autopilots/${id}",
+              "route": {
+                "method": "PATCH",
+                "path": "/api/autopilots/{id}"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "deleteAutopilot",
+      "start": 5301,
+      "end": 5303,
+      "source": "  async deleteAutopilot(id: string): Promise<void> {\n    await this.fetch(`/api/autopilots/${id}`, { method: \"DELETE\" });\n  }",
+      "sha256": "32b23ceecee3cbde4e18da6d1bae29adb2cb04c93bd1c0921388847e75d8449e",
+      "requests": [
+        {
+          "line": 5302,
+          "source": "    await this.fetch(`/api/autopilots/${id}`, { method: \"DELETE\" });",
+          "transport": "shared fetch",
+          "actual_method": "DELETE",
+          "inventory": [
+            {
+              "id": "client:5302",
+              "method": "DELETE",
+              "path_expression": "/api/autopilots/${id}",
+              "route": {
+                "method": "DELETE",
+                "path": "/api/autopilots/{id}"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "grantAutopilotAccess",
+      "start": 5308,
+      "end": 5313,
+      "source": "  async grantAutopilotAccess(id: string, userId: string): Promise<AutopilotCollaboratorsResponse> {\n    return this.fetch(`/api/autopilots/${id}/collaborators`, {\n      method: \"POST\",\n      body: JSON.stringify({ user_id: userId }),\n    });\n  }",
+      "sha256": "38a8eebcda408bf60349bdf9d5df9df44559582656b895fb9dde8a5540a0dfb9",
+      "requests": [
+        {
+          "line": 5309,
+          "source": "    return this.fetch(`/api/autopilots/${id}/collaborators`, {",
+          "transport": "shared fetch",
+          "actual_method": "POST",
+          "inventory": [
+            {
+              "id": "client:5309",
+              "method": "POST",
+              "path_expression": "/api/autopilots/${id}/collaborators",
+              "route": {
+                "method": "POST",
+                "path": "/api/autopilots/{id}/collaborators"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "revokeAutopilotAccess",
+      "start": 5315,
+      "end": 5319,
+      "source": "  async revokeAutopilotAccess(id: string, userId: string): Promise<AutopilotCollaboratorsResponse> {\n    return this.fetch(`/api/autopilots/${id}/collaborators/${userId}`, {\n      method: \"DELETE\",\n    });\n  }",
+      "sha256": "9e4b471f030941c823ec9ab1a49f6c1380bfe1123ab6e717a0ccfec5eaef4a5b",
+      "requests": [
+        {
+          "line": 5316,
+          "source": "    return this.fetch(`/api/autopilots/${id}/collaborators/${userId}`, {",
+          "transport": "shared fetch",
+          "actual_method": "DELETE",
+          "inventory": [
+            {
+              "id": "client:5316",
+              "method": "DELETE",
+              "path_expression": "/api/autopilots/${id}/collaborators/${userId}",
+              "route": {
+                "method": "DELETE",
+                "path": "/api/autopilots/{id}/collaborators/{userId}"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "triggerAutopilot",
+      "start": 5321,
+      "end": 5332,
+      "source": "  async triggerAutopilot(id: string): Promise<AutopilotRun> {\n    // Manual \"run now\" usually returns a run, including downstream admission\n    // failures. Quota rejection is the exception and returns 429. The UI\n    // handles both paths without presenting a false-success toast.\n    const raw = await this.fetch<unknown>(`/api/autopilots/${id}/trigger`, {\n      method: \"POST\",\n      headers: { \"Idempotency-Key\": createSafeId() },\n    });\n    return parseWithFallback(raw, AutopilotRunSchema, FALLBACK_AUTOPILOT_RUN, {\n      endpoint: \"POST /api/autopilots/:id/trigger\",\n    });\n  }",
+      "sha256": "f2ba7c39a442fd9a4c1454edbcf99027105dc9e3e66192fdbdac50ac9537cf9b",
+      "requests": [
+        {
+          "line": 5325,
+          "source": "    const raw = await this.fetch<unknown>(`/api/autopilots/${id}/trigger`, {",
+          "transport": "shared fetch",
+          "actual_method": "POST",
+          "inventory": [
+            {
+              "id": "client:5325",
+              "method": "POST",
+              "path_expression": "/api/autopilots/${id}/trigger",
+              "route": {
+                "method": "POST",
+                "path": "/api/autopilots/{id}/trigger"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "getAutopilotQuotaUsage",
+      "start": 5334,
+      "end": 5353,
+      "source": "  async getAutopilotQuotaUsage(): Promise<AutopilotQuotaUsage> {\n    const raw = await this.fetch<unknown>(\"/api/autopilots/usage\");\n    return parseWithFallback(\n      raw,\n      AutopilotQuotaUsageSchema,\n      {\n        action: \"off\",\n        used: null,\n        reserved: null,\n        total: null,\n        limit: null,\n        reached: null,\n        period_start: null,\n        period_end: null,\n        reset_at: null,\n        blocked_counts: null,\n      },\n      { endpoint: \"GET /api/autopilots/usage\" },\n    );\n  }",
+      "sha256": "a03c57744d3471f9cec0c13b30d0e2b710277feebe2cc7637ea2da9afd5a6aa2",
+      "requests": [
+        {
+          "line": 5335,
+          "source": "    const raw = await this.fetch<unknown>(\"/api/autopilots/usage\");",
+          "transport": "shared fetch",
+          "actual_method": "GET",
+          "inventory": [
+            {
+              "id": "client:5335",
+              "method": "GET",
+              "path_expression": "/api/autopilots/usage",
+              "route": {
+                "method": "GET",
+                "path": "/api/autopilots/usage"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "listAutopilotRuns",
+      "start": 5355,
+      "end": 5360,
+      "source": "  async listAutopilotRuns(id: string, params?: { limit?: number; offset?: number }): Promise<ListAutopilotRunsResponse> {\n    const search = new URLSearchParams();\n    if (params?.limit) search.set(\"limit\", params.limit.toString());\n    if (params?.offset) search.set(\"offset\", params.offset.toString());\n    return this.fetch(`/api/autopilots/${id}/runs?${search}`);\n  }",
+      "sha256": "b7b98a2c529ec44e4c2cf959a30b5bcdc257b5890f76886072e19934f9888a45",
+      "requests": [
+        {
+          "line": 5359,
+          "source": "    return this.fetch(`/api/autopilots/${id}/runs?${search}`);",
+          "transport": "shared fetch",
+          "actual_method": "GET",
+          "inventory": [
+            {
+              "id": "client:5359",
+              "method": "GET",
+              "path_expression": "/api/autopilots/${id}/runs?${search}",
+              "route": {
+                "method": "GET",
+                "path": "/api/autopilots/{id}/runs"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "getAutopilotRun",
+      "start": 5365,
+      "end": 5367,
+      "source": "  async getAutopilotRun(autopilotId: string, runId: string): Promise<AutopilotRun> {\n    return this.fetch(`/api/autopilots/${autopilotId}/runs/${runId}`);\n  }",
+      "sha256": "77d37ecc3b1bdc6d0387a6e548411bd2b82a1eb355e3acef815914d29546a1ac",
+      "requests": [
+        {
+          "line": 5366,
+          "source": "    return this.fetch(`/api/autopilots/${autopilotId}/runs/${runId}`);",
+          "transport": "shared fetch",
+          "actual_method": "GET",
+          "inventory": [
+            {
+              "id": "client:5366",
+              "method": "GET",
+              "path_expression": "/api/autopilots/${autopilotId}/runs/${runId}",
+              "route": {
+                "method": "GET",
+                "path": "/api/autopilots/{id}/runs/{runId}"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "createAutopilotTrigger",
+      "start": 5369,
+      "end": 5375,
+      "source": "  async createAutopilotTrigger(autopilotId: string, data: CreateAutopilotTriggerRequest): Promise<AutopilotTrigger> {\n    assertWebhookPayloadConditionsWriteSupported(data);\n    return this.fetch(`/api/autopilots/${autopilotId}/triggers`, {\n      method: \"POST\",\n      body: JSON.stringify(data),\n    });\n  }",
+      "sha256": "9b28dcb485a134e4c2d29c48de6ece4cc1bd804c38d09c54440fbcc2c7457588",
+      "requests": [
+        {
+          "line": 5371,
+          "source": "    return this.fetch(`/api/autopilots/${autopilotId}/triggers`, {",
+          "transport": "shared fetch",
+          "actual_method": "POST",
+          "inventory": [
+            {
+              "id": "client:5371",
+              "method": "POST",
+              "path_expression": "/api/autopilots/${autopilotId}/triggers",
+              "route": {
+                "method": "POST",
+                "path": "/api/autopilots/{id}/triggers"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "updateAutopilotTrigger",
+      "start": 5377,
+      "end": 5383,
+      "source": "  async updateAutopilotTrigger(autopilotId: string, triggerId: string, data: UpdateAutopilotTriggerRequest): Promise<AutopilotTrigger> {\n    assertWebhookPayloadConditionsWriteSupported(data);\n    return this.fetch(`/api/autopilots/${autopilotId}/triggers/${triggerId}`, {\n      method: \"PATCH\",\n      body: JSON.stringify(data),\n    });\n  }",
+      "sha256": "8e1d611b10e418abd9cd469a951b2e2fd51de4bb77fe49de9ac46fda565ed1aa",
+      "requests": [
+        {
+          "line": 5379,
+          "source": "    return this.fetch(`/api/autopilots/${autopilotId}/triggers/${triggerId}`, {",
+          "transport": "shared fetch",
+          "actual_method": "PATCH",
+          "inventory": [
+            {
+              "id": "client:5379",
+              "method": "PATCH",
+              "path_expression": "/api/autopilots/${autopilotId}/triggers/${triggerId}",
+              "route": {
+                "method": "PATCH",
+                "path": "/api/autopilots/{id}/triggers/{triggerId}"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "deleteAutopilotTrigger",
+      "start": 5385,
+      "end": 5387,
+      "source": "  async deleteAutopilotTrigger(autopilotId: string, triggerId: string): Promise<void> {\n    await this.fetch(`/api/autopilots/${autopilotId}/triggers/${triggerId}`, { method: \"DELETE\" });\n  }",
+      "sha256": "b6a81b98b43127e5af354d24422d0ec7b2fb1de79f26c94f962431bbc1924b75",
+      "requests": [
+        {
+          "line": 5386,
+          "source": "    await this.fetch(`/api/autopilots/${autopilotId}/triggers/${triggerId}`, { method: \"DELETE\" });",
+          "transport": "shared fetch",
+          "actual_method": "DELETE",
+          "inventory": [
+            {
+              "id": "client:5386",
+              "method": "DELETE",
+              "path_expression": "/api/autopilots/${autopilotId}/triggers/${triggerId}",
+              "route": {
+                "method": "DELETE",
+                "path": "/api/autopilots/{id}/triggers/{triggerId}"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "cronPreview",
+      "start": 5389,
+      "end": 5400,
+      "source": "  async cronPreview(params: { expr: string; tz: string }): Promise<CronPreviewResponse> {\n    const search = new URLSearchParams();\n    search.set(\"expr\", params.expr);\n    search.set(\"tz\", params.tz);\n    const raw = await this.fetch<unknown>(`/api/autopilots/cron-preview?${search}`);\n    return parseWithFallback(\n      raw,\n      CronPreviewResponseSchema,\n      UNREADABLE_CRON_PREVIEW_RESPONSE,\n      { endpoint: \"GET /api/autopilots/cron-preview\" },\n    );\n  }",
+      "sha256": "327acf5190e427fd7d6405923206580edfea5e54bfdcfc7bee5a310fccc2d00d",
+      "requests": [
+        {
+          "line": 5393,
+          "source": "    const raw = await this.fetch<unknown>(`/api/autopilots/cron-preview?${search}`);",
+          "transport": "shared fetch",
+          "actual_method": "GET",
+          "inventory": [
+            {
+              "id": "client:5393",
+              "method": "GET",
+              "path_expression": "/api/autopilots/cron-preview?${search}",
+              "route": {
+                "method": "GET",
+                "path": "/api/autopilots/cron-preview"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "rotateAutopilotTriggerWebhookToken",
+      "start": 5402,
+      "end": 5410,
+      "source": "  async rotateAutopilotTriggerWebhookToken(\n    autopilotId: string,\n    triggerId: string,\n  ): Promise<AutopilotTrigger> {\n    return this.fetch(\n      `/api/autopilots/${autopilotId}/triggers/${triggerId}/rotate-webhook-token`,\n      { method: \"POST\" },\n    );\n  }",
+      "sha256": "391c5178f48fbec6c0e60e15ebb44cf1cf67ed95d82bb92083b41a8da98d2df2",
+      "requests": [
+        {
+          "line": 5406,
+          "source": "    return this.fetch(",
+          "transport": "shared fetch",
+          "actual_method": "POST",
+          "inventory": [
+            {
+              "id": "client:5406",
+              "method": "POST",
+              "path_expression": "/api/autopilots/${autopilotId}/triggers/${triggerId}/rotate-webhook-token",
+              "route": {
+                "method": "POST",
+                "path": "/api/autopilots/{id}/triggers/{triggerId}/rotate-webhook-token"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "listAutopilotDeliveries",
+      "start": 5417,
+      "end": 5433,
+      "source": "  async listAutopilotDeliveries(\n    autopilotId: string,\n    params?: { limit?: number; offset?: number },\n  ): Promise<ListWebhookDeliveriesResponse> {\n    const search = new URLSearchParams();\n    if (params?.limit) search.set(\"limit\", params.limit.toString());\n    if (params?.offset) search.set(\"offset\", params.offset.toString());\n    const raw = await this.fetch<unknown>(\n      `/api/autopilots/${autopilotId}/deliveries?${search}`,\n    );\n    return parseWithFallback(\n      raw,\n      ListWebhookDeliveriesResponseSchema,\n      EMPTY_LIST_WEBHOOK_DELIVERIES_RESPONSE,\n      { endpoint: \"GET /api/autopilots/:id/deliveries\" },\n    );\n  }",
+      "sha256": "ece5b3530f317ce4d91cf2223f7b0d27122046be9a2e7639b2b02dfbd64d8cff",
+      "requests": [
+        {
+          "line": 5424,
+          "source": "    const raw = await this.fetch<unknown>(",
+          "transport": "shared fetch",
+          "actual_method": "GET",
+          "inventory": [
+            {
+              "id": "client:5424",
+              "method": "GET",
+              "path_expression": "/api/autopilots/${autopilotId}/deliveries?${search}",
+              "route": {
+                "method": "GET",
+                "path": "/api/autopilots/{id}/deliveries"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "getAutopilotDelivery",
+      "start": 5435,
+      "end": 5448,
+      "source": "  async getAutopilotDelivery(\n    autopilotId: string,\n    deliveryId: string,\n  ): Promise<WebhookDelivery> {\n    const raw = await this.fetch<unknown>(\n      `/api/autopilots/${autopilotId}/deliveries/${deliveryId}`,\n    );\n    return parseWithFallback(\n      raw,\n      WebhookDeliveryResponseSchema,\n      { ...EMPTY_WEBHOOK_DELIVERY, id: deliveryId, autopilot_id: autopilotId },\n      { endpoint: \"GET /api/autopilots/:id/deliveries/:deliveryId\" },\n    );\n  }",
+      "sha256": "b0c6fbd89d6a37314367245079d73881205960e658939a43511a52e8fbda5081",
+      "requests": [
+        {
+          "line": 5439,
+          "source": "    const raw = await this.fetch<unknown>(",
+          "transport": "shared fetch",
+          "actual_method": "GET",
+          "inventory": [
+            {
+              "id": "client:5439",
+              "method": "GET",
+              "path_expression": "/api/autopilots/${autopilotId}/deliveries/${deliveryId}",
+              "route": {
+                "method": "GET",
+                "path": "/api/autopilots/{id}/deliveries/{deliveryId}"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "replayAutopilotDelivery",
+      "start": 5454,
+      "end": 5468,
+      "source": "  async replayAutopilotDelivery(\n    autopilotId: string,\n    deliveryId: string,\n  ): Promise<WebhookDelivery> {\n    const raw = await this.fetch<unknown>(\n      `/api/autopilots/${autopilotId}/deliveries/${deliveryId}/replay`,\n      { method: \"POST\", headers: { \"Idempotency-Key\": createSafeId() } },\n    );\n    return parseWithFallback(\n      raw,\n      WebhookDeliveryResponseSchema,\n      { ...EMPTY_WEBHOOK_DELIVERY, autopilot_id: autopilotId },\n      { endpoint: \"POST /api/autopilots/:id/deliveries/:deliveryId/replay\" },\n    );\n  }",
+      "sha256": "8d7a65b768464096df988362e12001b83c2640a669c82d10a69ebfa31e1bbf7c",
+      "requests": [
+        {
+          "line": 5458,
+          "source": "    const raw = await this.fetch<unknown>(",
+          "transport": "shared fetch",
+          "actual_method": "POST",
+          "inventory": [
+            {
+              "id": "client:5458",
+              "method": "POST",
+              "path_expression": "/api/autopilots/${autopilotId}/deliveries/${deliveryId}/replay",
+              "route": {
+                "method": "POST",
+                "path": "/api/autopilots/{id}/deliveries/{deliveryId}/replay"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "getGitHubConnectURL",
+      "start": 5471,
+      "end": 5484,
+      "source": "  async getGitHubConnectURL(\n    workspaceId: string,\n    options?: { desktop?: boolean },\n  ): Promise<GitHubConnectResponse> {\n    const raw = await this.fetch<unknown>(\n      `/api/workspaces/${workspaceId}/github/connect${options?.desktop ? \"?desktop=1\" : \"\"}`,\n    );\n    return parseWithFallback(\n      raw,\n      GitHubConnectResponseSchema,\n      EMPTY_GITHUB_CONNECT_RESPONSE,\n      { endpoint: \"GET /api/workspaces/:id/github/connect\" },\n    );\n  }",
+      "sha256": "b9dc0c4c53b7ba38ef81a319c07f13b84989e7ceb69dd3d86c18a7bef668c6fb",
+      "requests": [
+        {
+          "line": 5475,
+          "source": "    const raw = await this.fetch<unknown>(",
+          "transport": "shared fetch",
+          "actual_method": "GET",
+          "inventory": [
+            {
+              "id": "client:5475",
+              "method": "GET",
+              "path_expression": "/api/workspaces/${workspaceId}/github/connect${options?.desktop ? \"?desktop=1\" : \"\"}",
+              "route": {
+                "method": "GET",
+                "path": "/api/workspaces/{id}/github/connect"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "listGitHubInstallations",
+      "start": 5486,
+      "end": 5496,
+      "source": "  async listGitHubInstallations(workspaceId: string): Promise<ListGitHubInstallationsResponse> {\n    const raw = await this.fetch<unknown>(\n      `/api/workspaces/${workspaceId}/github/installations`,\n    );\n    return parseWithFallback(\n      raw,\n      ListGitHubInstallationsResponseSchema,\n      EMPTY_LIST_GITHUB_INSTALLATIONS_RESPONSE,\n      { endpoint: \"GET /api/workspaces/:id/github/installations\" },\n    );\n  }",
+      "sha256": "df667e4b357c93556a289c15543f390fea05832a0fb238416ec15ffc3ef1501b",
+      "requests": [
+        {
+          "line": 5487,
+          "source": "    const raw = await this.fetch<unknown>(",
+          "transport": "shared fetch",
+          "actual_method": "GET",
+          "inventory": [
+            {
+              "id": "client:5487",
+              "method": "GET",
+              "path_expression": "/api/workspaces/${workspaceId}/github/installations",
+              "route": {
+                "method": "GET",
+                "path": "/api/workspaces/{id}/github/installations"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "listGitHubInstallationRepositories",
+      "start": 5498,
+      "end": 5516,
+      "source": "  async listGitHubInstallationRepositories(\n    workspaceId: string,\n    installationId: string,\n    params: { page?: number; per_page?: number } = {},\n  ): Promise<ListGitHubRepositoriesResponse> {\n    const search = new URLSearchParams();\n    if (params.page !== undefined) search.set(\"page\", String(params.page));\n    if (params.per_page !== undefined) search.set(\"per_page\", String(params.per_page));\n    const suffix = search.size > 0 ? `?${search.toString()}` : \"\";\n    const raw = await this.fetch<unknown>(\n      `/api/workspaces/${workspaceId}/github/installations/${installationId}/repositories${suffix}`,\n    );\n    return parseWithFallback(\n      raw,\n      ListGitHubRepositoriesResponseSchema,\n      EMPTY_LIST_GITHUB_REPOSITORIES_RESPONSE,\n      { endpoint: \"GET /api/workspaces/:id/github/installations/:installationId/repositories\" },\n    );\n  }",
+      "sha256": "097d145d42931c623d576ec439dd7144db2fa79cf48e85bd10ca0b06bc16abde",
+      "requests": [
+        {
+          "line": 5507,
+          "source": "    const raw = await this.fetch<unknown>(",
+          "transport": "shared fetch",
+          "actual_method": "GET",
+          "inventory": [
+            {
+              "id": "client:5507",
+              "method": "GET",
+              "path_expression": "/api/workspaces/${workspaceId}/github/installations/${installationId}/repositories${suffix}",
+              "route": {
+                "method": "GET",
+                "path": "/api/workspaces/{id}/github/installations/{installationId}/repositories"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "deleteGitHubInstallation",
+      "start": 5518,
+      "end": 5522,
+      "source": "  async deleteGitHubInstallation(workspaceId: string, installationId: string): Promise<void> {\n    await this.fetch(`/api/workspaces/${workspaceId}/github/installations/${installationId}`, {\n      method: \"DELETE\",\n    });\n  }",
+      "sha256": "cc61919ebc2d4feda4ef353a63ed9cfa4c0905f0114df2746427651ec005843b",
+      "requests": [
+        {
+          "line": 5519,
+          "source": "    await this.fetch(`/api/workspaces/${workspaceId}/github/installations/${installationId}`, {",
+          "transport": "shared fetch",
+          "actual_method": "DELETE",
+          "inventory": [
+            {
+              "id": "client:5519",
+              "method": "DELETE",
+              "path_expression": "/api/workspaces/${workspaceId}/github/installations/${installationId}",
+              "route": {
+                "method": "DELETE",
+                "path": "/api/workspaces/{id}/github/installations/{installationId}"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "listIssuePullRequests",
+      "start": 5524,
+      "end": 5532,
+      "source": "  async listIssuePullRequests(issueId: string): Promise<IssuePullRequestsResponse> {\n    const raw = await this.fetch<unknown>(`/api/issues/${issueId}/pull-requests`);\n    return parseWithFallback(\n      raw,\n      IssuePullRequestsResponseSchema,\n      EMPTY_ISSUE_PULL_REQUESTS_RESPONSE,\n      { endpoint: \"GET /api/issues/:id/pull-requests\" },\n    );\n  }",
+      "sha256": "5d5e0ff53df6eadfa1025e9392c1731f45105068b5cee3e9148da40aaf0dd51c",
+      "requests": [
+        {
+          "line": 5525,
+          "source": "    const raw = await this.fetch<unknown>(`/api/issues/${issueId}/pull-requests`);",
+          "transport": "shared fetch",
+          "actual_method": "GET",
+          "inventory": [
+            {
+              "id": "client:5525",
+              "method": "GET",
+              "path_expression": "/api/issues/${issueId}/pull-requests",
+              "route": {
+                "method": "GET",
+                "path": "/api/issues/{id}/pull-requests"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "listIssueEnvironments",
+      "start": 5535,
+      "end": 5543,
+      "source": "  async listIssueEnvironments(issueId: string): Promise<IssueEnvironmentsResponse> {\n    const raw = await this.fetch<unknown>(`/api/issues/${issueId}/environments`);\n    return parseWithFallback(\n      raw,\n      IssueEnvironmentsResponseSchema,\n      EMPTY_ISSUE_ENVIRONMENTS_RESPONSE,\n      { endpoint: \"GET /api/issues/:id/environments\" },\n    );\n  }",
+      "sha256": "5267e626cf8c58080ab19f670bc764bba4e415edb12a928304e15232985a77db",
+      "requests": [
+        {
+          "line": 5536,
+          "source": "    const raw = await this.fetch<unknown>(`/api/issues/${issueId}/environments`);",
+          "transport": "shared fetch",
+          "actual_method": "GET",
+          "inventory": [
+            {
+              "id": "client:5536",
+              "method": "GET",
+              "path_expression": "/api/issues/${issueId}/environments",
+              "route": {
+                "method": "GET",
+                "path": "/api/issues/{id}/environments"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "stopIssueEnvironment",
+      "start": 5546,
+      "end": 5548,
+      "source": "  async stopIssueEnvironment(issueId: string, environmentId: string): Promise<IssueEnvironmentCommand> {\n    return this.issueEnvironmentCommand(`/api/issues/${issueId}/environments/${environmentId}/stop`, \"stop\", { method: \"POST\" });\n  }",
+      "sha256": "99dafb6949d123243dcbcb4fda0251836323ef39ce5769fb9c48b802cb1ed540",
+      "requests": [
+        {
+          "line": 5547,
+          "source": "    return this.issueEnvironmentCommand(`/api/issues/${issueId}/environments/${environmentId}/stop`, \"stop\", { method: \"POST\" });",
+          "transport": "issueEnvironmentCommand",
+          "actual_method": "POST",
+          "inventory": [
+            {
+              "id": "client:5547",
+              "method": "POST",
+              "path_expression": "/api/issues/${issueId}/environments/${environmentId}/stop",
+              "route": {
+                "method": "POST",
+                "path": "/api/issues/{id}/environments/{environmentId}/stop"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "restartIssueEnvironment",
+      "start": 5551,
+      "end": 5553,
+      "source": "  async restartIssueEnvironment(issueId: string, environmentId: string): Promise<IssueEnvironmentCommand> {\n    return this.issueEnvironmentCommand(`/api/issues/${issueId}/environments/${environmentId}/restart`, \"restart\", { method: \"POST\" });\n  }",
+      "sha256": "8edc947423191f4ef2c4557e7d9343a9232d3f1487de761a84ef50ddd81345c2",
+      "requests": [
+        {
+          "line": 5552,
+          "source": "    return this.issueEnvironmentCommand(`/api/issues/${issueId}/environments/${environmentId}/restart`, \"restart\", { method: \"POST\" });",
+          "transport": "issueEnvironmentCommand",
+          "actual_method": "POST",
+          "inventory": [
+            {
+              "id": "client:5552",
+              "method": "POST",
+              "path_expression": "/api/issues/${issueId}/environments/${environmentId}/restart",
+              "route": {
+                "method": "POST",
+                "path": "/api/issues/{id}/environments/{environmentId}/restart"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "readIssueEnvironmentLogs",
+      "start": 5556,
+      "end": 5558,
+      "source": "  async readIssueEnvironmentLogs(issueId: string, environmentId: string): Promise<IssueEnvironmentCommand> {\n    return this.issueEnvironmentCommand(`/api/issues/${issueId}/environments/${environmentId}/logs`, \"logs\", { method: \"POST\" });\n  }",
+      "sha256": "850542bb4c771248d6aa675ab279e92454b125520fe2f1aef34dc8dc24240055",
+      "requests": [
+        {
+          "line": 5557,
+          "source": "    return this.issueEnvironmentCommand(`/api/issues/${issueId}/environments/${environmentId}/logs`, \"logs\", { method: \"POST\" });",
+          "transport": "issueEnvironmentCommand",
+          "actual_method": "POST",
+          "inventory": [
+            {
+              "id": "client:5557",
+              "method": "POST",
+              "path_expression": "/api/issues/${issueId}/environments/${environmentId}/logs",
+              "route": {
+                "method": "POST",
+                "path": "/api/issues/{id}/environments/{environmentId}/logs"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "startIssueEnvironment",
+      "start": 5561,
+      "end": 5566,
+      "source": "  async startIssueEnvironment(issueId: string, body: StartIssueEnvironmentRequest): Promise<IssueEnvironmentCommand> {\n    return this.issueEnvironmentCommand(`/api/issues/${issueId}/environments/start`, \"start\", {\n      method: \"POST\",\n      body: JSON.stringify(body),\n    });\n  }",
+      "sha256": "26751455fb3418c085ba24ad445bb31fc4b7266d7a9ae645d3267afcd62ace12",
+      "requests": [
+        {
+          "line": 5562,
+          "source": "    return this.issueEnvironmentCommand(`/api/issues/${issueId}/environments/start`, \"start\", {",
+          "transport": "issueEnvironmentCommand",
+          "actual_method": "POST",
+          "inventory": [
+            {
+              "id": "client:5562",
+              "method": "POST",
+              "path_expression": "/api/issues/${issueId}/environments/start",
+              "route": {
+                "method": "POST",
+                "path": "/api/issues/{id}/environments/start"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "getIssueEnvironmentCommand",
+      "start": 5568,
+      "end": 5570,
+      "source": "  async getIssueEnvironmentCommand(issueId: string, commandId: string): Promise<IssueEnvironmentCommand> {\n    return this.issueEnvironmentCommand(`/api/issues/${issueId}/environment-commands/${commandId}`, \"logs\");\n  }",
+      "sha256": "65335323bf6cf95c3528d87c6352c5e56f609c817d351654cf56c9ac19600ebc",
+      "requests": [
+        {
+          "line": 5569,
+          "source": "    return this.issueEnvironmentCommand(`/api/issues/${issueId}/environment-commands/${commandId}`, \"logs\");",
+          "transport": "issueEnvironmentCommand",
+          "actual_method": "GET",
+          "inventory": [
+            {
+              "id": "client:5569",
+              "method": "GET",
+              "path_expression": "/api/issues/${issueId}/environment-commands/${commandId}",
+              "route": {
+                "method": "GET",
+                "path": "/api/issues/{id}/environment-commands/{commandId}"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "issueEnvironmentCommand",
+      "start": 5572,
+      "end": 5579,
+      "source": "  private async issueEnvironmentCommand(path: string, action: IssueEnvironmentAction, init?: RequestInit): Promise<IssueEnvironmentCommand> {\n    const raw = await this.fetch<unknown>(path, init);\n    const fallback: IssueEnvironmentCommand = {\n      id: \"\", action, status: \"failed\", error: \"\", environment_id: null, runtime_id: \"\", task_id: null, repo: \"\", name: \"\",\n      actor_type: \"member\", actor_id: null, created_at: new Date().toISOString(), completed_at: null, output: null,\n    };\n    return parseWithFallback(raw, IssueEnvironmentCommandSchema, fallback, { endpoint: `${init?.method ?? \"GET\"} ${path.replace(/[0-9a-f-]{36}/g, \":id\")}` });\n  }",
+      "sha256": "46605fbce117627b7703e9d898f21a41c909c2b35da8669fb91a662466855e60",
+      "requests": [
+        {
+          "line": 5573,
+          "source": "    const raw = await this.fetch<unknown>(path, init);",
+          "transport": "shared fetch",
+          "actual_method": "dynamic init; default GET",
+          "inventory": [],
+          "mapping_status": "resolved_via_five_explicit_callers",
+          "method_identity_verified": null,
+          "root_resolution": "See root_caller_resolution; do not invent a second endpoint for helper path."
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply.",
+      "root_caller_resolution": {
+        "source": "packages/core/api/client.ts:5545-5580",
+        "callers": [
+          "stopIssueEnvironment",
+          "restartIssueEnvironment",
+          "readIssueEnvironmentLogs",
+          "startIssueEnvironment",
+          "getIssueEnvironmentCommand"
+        ],
+        "inventory": [
+          {
+            "id": "client:5547",
+            "method": "POST",
+            "path_expression": "/api/issues/${issueId}/environments/${environmentId}/stop",
+            "route": {
+              "method": "POST",
+              "path": "/api/issues/{id}/environments/{environmentId}/stop"
+            }
+          },
+          {
+            "id": "client:5552",
+            "method": "POST",
+            "path_expression": "/api/issues/${issueId}/environments/${environmentId}/restart",
+            "route": {
+              "method": "POST",
+              "path": "/api/issues/{id}/environments/{environmentId}/restart"
+            }
+          },
+          {
+            "id": "client:5557",
+            "method": "POST",
+            "path_expression": "/api/issues/${issueId}/environments/${environmentId}/logs",
+            "route": {
+              "method": "POST",
+              "path": "/api/issues/{id}/environments/{environmentId}/logs"
+            }
+          },
+          {
+            "id": "client:5562",
+            "method": "POST",
+            "path_expression": "/api/issues/${issueId}/environments/start",
+            "route": {
+              "method": "POST",
+              "path": "/api/issues/{id}/environments/start"
+            }
+          },
+          {
+            "id": "client:5569",
+            "method": "GET",
+            "path_expression": "/api/issues/${issueId}/environment-commands/${commandId}",
+            "route": {
+              "method": "GET",
+              "path": "/api/issues/{id}/environment-commands/{commandId}"
+            }
+          }
+        ],
+        "behavior": "Four POST callers; command lookup defaults to GET. Private helper passes caller path/init unchanged; regex replacement only affects parser diagnostic endpoint, not transport. Fallback creates local failed command with current timestamp. No additional dynamic public target."
+      }
+    },
+    {
+      "name": "listIssuePullRequestSummaries",
+      "start": 5582,
+      "end": 5590,
+      "source": "  async listIssuePullRequestSummaries(): Promise<IssuePullRequestSummariesResponse> {\n    const raw = await this.fetch<unknown>(\"/api/issues/pull-requests\");\n    return parseWithFallback(\n      raw,\n      IssuePullRequestSummariesResponseSchema,\n      EMPTY_ISSUE_PULL_REQUEST_SUMMARIES_RESPONSE,\n      { endpoint: \"GET /api/issues/pull-requests\" },\n    );\n  }",
+      "sha256": "082145ee01e5cec4c07eb27a79bb62ae1a5676c85ed94bcb336d9be71264fa1e",
+      "requests": [
+        {
+          "line": 5583,
+          "source": "    const raw = await this.fetch<unknown>(\"/api/issues/pull-requests\");",
+          "transport": "shared fetch",
+          "actual_method": "GET",
+          "inventory": [
+            {
+              "id": "client:5583",
+              "method": "GET",
+              "path_expression": "/api/issues/pull-requests",
+              "route": {
+                "method": "GET",
+                "path": "/api/issues/pull-requests"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "linkIssuePullRequest",
+      "start": 5593,
+      "end": 5607,
+      "source": "  async linkIssuePullRequest(\n    issueId: string,\n    body: { url: string } | { pull_request_id: string },\n  ): Promise<IssuePullRequestsResponse> {\n    const raw = await this.fetch<unknown>(`/api/issues/${issueId}/pull-requests`, {\n      method: \"POST\",\n      body: JSON.stringify(body),\n    });\n    return parseWithFallback(\n      raw,\n      IssuePullRequestsResponseSchema,\n      EMPTY_ISSUE_PULL_REQUESTS_RESPONSE,\n      { endpoint: \"POST /api/issues/:id/pull-requests\" },\n    );\n  }",
+      "sha256": "105e0061511096ef6849c2db7a9660e1db987b17437f931542026cbf72dd0239",
+      "requests": [
+        {
+          "line": 5597,
+          "source": "    const raw = await this.fetch<unknown>(`/api/issues/${issueId}/pull-requests`, {",
+          "transport": "shared fetch",
+          "actual_method": "POST",
+          "inventory": [
+            {
+              "id": "client:5597",
+              "method": "POST",
+              "path_expression": "/api/issues/${issueId}/pull-requests",
+              "route": {
+                "method": "POST",
+                "path": "/api/issues/{id}/pull-requests"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "unlinkIssuePullRequest",
+      "start": 5610,
+      "end": 5621,
+      "source": "  async unlinkIssuePullRequest(issueId: string, pullRequestId: string): Promise<IssuePullRequestsResponse> {\n    const raw = await this.fetch<unknown>(\n      `/api/issues/${issueId}/pull-requests/${pullRequestId}`,\n      { method: \"DELETE\" },\n    );\n    return parseWithFallback(\n      raw,\n      IssuePullRequestsResponseSchema,\n      EMPTY_ISSUE_PULL_REQUESTS_RESPONSE,\n      { endpoint: \"DELETE /api/issues/:id/pull-requests/:prId\" },\n    );\n  }",
+      "sha256": "55d3e064b1c55a6c18d82e9a872d3c53ab503427bdf0835cc05b308525cc1356",
+      "requests": [
+        {
+          "line": 5611,
+          "source": "    const raw = await this.fetch<unknown>(",
+          "transport": "shared fetch",
+          "actual_method": "DELETE",
+          "inventory": [
+            {
+              "id": "client:5611",
+              "method": "DELETE",
+              "path_expression": "/api/issues/${issueId}/pull-requests/${pullRequestId}",
+              "route": {
+                "method": "DELETE",
+                "path": "/api/issues/{id}/pull-requests/{prId}"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "setIssuePRAutoComplete",
+      "start": 5624,
+      "end": 5635,
+      "source": "  async setIssuePRAutoComplete(issueId: string, disabled: boolean): Promise<IssuePullRequestsResponse> {\n    const raw = await this.fetch<unknown>(`/api/issues/${issueId}/pr-auto-complete`, {\n      method: \"PUT\",\n      body: JSON.stringify({ disabled }),\n    });\n    return parseWithFallback(\n      raw,\n      IssuePullRequestsResponseSchema,\n      EMPTY_ISSUE_PULL_REQUESTS_RESPONSE,\n      { endpoint: \"PUT /api/issues/:id/pr-auto-complete\" },\n    );\n  }",
+      "sha256": "5cc1a2cac9e1fbeb5a9f80264cb1fbd1e147af193e5f715b8cf54f5b4c1bfd1e",
+      "requests": [
+        {
+          "line": 5625,
+          "source": "    const raw = await this.fetch<unknown>(`/api/issues/${issueId}/pr-auto-complete`, {",
+          "transport": "shared fetch",
+          "actual_method": "PUT",
+          "inventory": [
+            {
+              "id": "client:5625",
+              "method": "PUT",
+              "path_expression": "/api/issues/${issueId}/pr-auto-complete",
+              "route": {
+                "method": "PUT",
+                "path": "/api/issues/{id}/pr-auto-complete"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "listVCSConnections",
+      "start": 5638,
+      "end": 5640,
+      "source": "  async listVCSConnections(workspaceId: string): Promise<ListVCSConnectionsResponse> {\n    return this.fetch(`/api/workspaces/${workspaceId}/vcs/connections`);\n  }",
+      "sha256": "baba927300eabd3ed9b835ab1a3092c780e0fb298834965957f26aae39e14e6f",
+      "requests": [
+        {
+          "line": 5639,
+          "source": "    return this.fetch(`/api/workspaces/${workspaceId}/vcs/connections`);",
+          "transport": "shared fetch",
+          "actual_method": "GET",
+          "inventory": [
+            {
+              "id": "client:5639",
+              "method": "GET",
+              "path_expression": "/api/workspaces/${workspaceId}/vcs/connections",
+              "route": {
+                "method": "GET",
+                "path": "/api/workspaces/{id}/vcs/connections"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "connectVCS",
+      "start": 5642,
+      "end": 5650,
+      "source": "  async connectVCS(\n    workspaceId: string,\n    body: ConnectVCSRequest,\n  ): Promise<ConnectVCSResponse> {\n    return this.fetch(`/api/workspaces/${workspaceId}/vcs/connections`, {\n      method: \"POST\",\n      body: JSON.stringify(body),\n    });\n  }",
+      "sha256": "066d3e45df7a50e2958eb18f726674ce90f079e909c707cf43875b63509af7d6",
+      "requests": [
+        {
+          "line": 5646,
+          "source": "    return this.fetch(`/api/workspaces/${workspaceId}/vcs/connections`, {",
+          "transport": "shared fetch",
+          "actual_method": "POST",
+          "inventory": [
+            {
+              "id": "client:5646",
+              "method": "POST",
+              "path_expression": "/api/workspaces/${workspaceId}/vcs/connections",
+              "route": {
+                "method": "POST",
+                "path": "/api/workspaces/{id}/vcs/connections"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "deleteVCSConnection",
+      "start": 5652,
+      "end": 5656,
+      "source": "  async deleteVCSConnection(workspaceId: string, connectionId: string): Promise<void> {\n    await this.fetch(`/api/workspaces/${workspaceId}/vcs/connections/${connectionId}`, {\n      method: \"DELETE\",\n    });\n  }",
+      "sha256": "4169285f81f905053b900aa88bbd4ffec147f0187e53195bca5ba5cba549acf5",
+      "requests": [
+        {
+          "line": 5653,
+          "source": "    await this.fetch(`/api/workspaces/${workspaceId}/vcs/connections/${connectionId}`, {",
+          "transport": "shared fetch",
+          "actual_method": "DELETE",
+          "inventory": [
+            {
+              "id": "client:5653",
+              "method": "DELETE",
+              "path_expression": "/api/workspaces/${workspaceId}/vcs/connections/${connectionId}",
+              "route": {
+                "method": "DELETE",
+                "path": "/api/workspaces/{id}/vcs/connections/{connectionId}"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "rotateVCSWebhook",
+      "start": 5658,
+      "end": 5666,
+      "source": "  async rotateVCSWebhook(\n    workspaceId: string,\n    connectionId: string,\n  ): Promise<ConnectVCSResponse> {\n    return this.fetch(\n      `/api/workspaces/${workspaceId}/vcs/connections/${connectionId}/rotate-webhook`,\n      { method: \"POST\" },\n    );\n  }",
+      "sha256": "0807cc2fb7d6d1b33af6a8897ab1276632df4a2b0eb832eddf099f753e6a1cb5",
+      "requests": [
+        {
+          "line": 5662,
+          "source": "    return this.fetch(",
+          "transport": "shared fetch",
+          "actual_method": "POST",
+          "inventory": [
+            {
+              "id": "client:5662",
+              "method": "POST",
+              "path_expression": "/api/workspaces/${workspaceId}/vcs/connections/${connectionId}/rotate-webhook",
+              "route": {
+                "method": "POST",
+                "path": "/api/workspaces/{id}/vcs/connections/{connectionId}/rotate-webhook"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "listLarkInstallations",
+      "start": 5669,
+      "end": 5677,
+      "source": "  async listLarkInstallations(workspaceId: string): Promise<ListLarkInstallationsResponse> {\n    const endpoint = `/api/workspaces/${workspaceId}/lark/installations`;\n    return parseWithFallback(\n      await this.fetch(endpoint),\n      ListLarkInstallationsResponseSchema,\n      EMPTY_LIST_LARK_INSTALLATIONS_RESPONSE,\n      { endpoint },\n    );\n  }",
+      "sha256": "848983956807a58e8527440021213cb523ce77cbae86791fdc140ef26670ad43",
+      "requests": [
+        {
+          "line": 5672,
+          "source": "      await this.fetch(endpoint),",
+          "transport": "shared fetch",
+          "actual_method": "GET",
+          "inventory": [
+            {
+              "id": "client:5672",
+              "method": "GET",
+              "path_expression": "/api/workspaces/${workspaceId}/lark/installations",
+              "route": {
+                "method": "GET",
+                "path": "/api/workspaces/{id}/lark/installations"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "beginLarkInstall",
+      "start": 5679,
+      "end": 5696,
+      "source": "  async beginLarkInstall(\n    workspaceId: string,\n    agentId: string,\n    region: \"feishu\" | \"lark\",\n  ): Promise<BeginLarkInstallResponse> {\n    // The user picks the cloud explicitly in the UI (\"Bind to Feishu\"\n    // vs \"Bind to Lark\"), and the backend POSTs the device-flow `begin`\n    // against the corresponding accounts host (accounts.feishu.cn vs\n    // accounts.larksuite.com) so the QR renders against the right\n    // cloud up front. Empty / omitted region still resolves to Feishu\n    // server-side (RegionOrDefault) — we surface region as a required\n    // arg here so every call site is forced to make a deliberate\n    // choice rather than silently defaulting to mainland.\n    const search = new URLSearchParams({ agent_id: agentId, region });\n    return this.fetch(`/api/workspaces/${workspaceId}/lark/install/begin?${search.toString()}`, {\n      method: \"POST\",\n    });\n  }",
+      "sha256": "099bdda96a267512622054c2da4aa0fd316af83c486d12565eefdd6b3ba0068f",
+      "requests": [
+        {
+          "line": 5693,
+          "source": "    return this.fetch(`/api/workspaces/${workspaceId}/lark/install/begin?${search.toString()}`, {",
+          "transport": "shared fetch",
+          "actual_method": "POST",
+          "inventory": [
+            {
+              "id": "client:5693",
+              "method": "POST",
+              "path_expression": "/api/workspaces/${workspaceId}/lark/install/begin?${search.toString()}",
+              "route": {
+                "method": "POST",
+                "path": "/api/workspaces/{id}/lark/install/begin"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "getLarkInstallStatus",
+      "start": 5698,
+      "end": 5700,
+      "source": "  async getLarkInstallStatus(workspaceId: string, sessionId: string): Promise<LarkInstallStatusResponse> {\n    return this.fetch(`/api/workspaces/${workspaceId}/lark/install/${sessionId}/status`);\n  }",
+      "sha256": "265bb00881f11c78c4580f1bae345c20b614ced91c2a2aeb0d979a3478c453cf",
+      "requests": [
+        {
+          "line": 5699,
+          "source": "    return this.fetch(`/api/workspaces/${workspaceId}/lark/install/${sessionId}/status`);",
+          "transport": "shared fetch",
+          "actual_method": "GET",
+          "inventory": [
+            {
+              "id": "client:5699",
+              "method": "GET",
+              "path_expression": "/api/workspaces/${workspaceId}/lark/install/${sessionId}/status",
+              "route": {
+                "method": "GET",
+                "path": "/api/workspaces/{id}/lark/install/{sessionId}/status"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "deleteLarkInstallation",
+      "start": 5702,
+      "end": 5706,
+      "source": "  async deleteLarkInstallation(workspaceId: string, installationId: string): Promise<void> {\n    await this.fetch(`/api/workspaces/${workspaceId}/lark/installations/${installationId}`, {\n      method: \"DELETE\",\n    });\n  }",
+      "sha256": "feba15fe76e584011f4fd0a8240c66940fa8736b244ea5888a6fd3ddf35e4adb",
+      "requests": [
+        {
+          "line": 5703,
+          "source": "    await this.fetch(`/api/workspaces/${workspaceId}/lark/installations/${installationId}`, {",
+          "transport": "shared fetch",
+          "actual_method": "DELETE",
+          "inventory": [
+            {
+              "id": "client:5703",
+              "method": "DELETE",
+              "path_expression": "/api/workspaces/${workspaceId}/lark/installations/${installationId}",
+              "route": {
+                "method": "DELETE",
+                "path": "/api/workspaces/{id}/lark/installations/{installationId}"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "redeemLarkBindingToken",
+      "start": 5708,
+      "end": 5713,
+      "source": "  async redeemLarkBindingToken(token: string): Promise<RedeemLarkBindingTokenResponse> {\n    return this.fetch(`/api/lark/binding/redeem`, {\n      method: \"POST\",\n      body: JSON.stringify({ token }),\n    });\n  }",
+      "sha256": "d3e2eb4fb4b9826d6ff71d337700a2dbc29d050f60ba70345ed1465f390d6b1f",
+      "requests": [
+        {
+          "line": 5709,
+          "source": "    return this.fetch(`/api/lark/binding/redeem`, {",
+          "transport": "shared fetch",
+          "actual_method": "POST",
+          "inventory": [
+            {
+              "id": "client:5709",
+              "method": "POST",
+              "path_expression": "/api/lark/binding/redeem",
+              "route": {
+                "method": "POST",
+                "path": "/api/lark/binding/redeem"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "listComposioToolkits",
+      "start": 5722,
+      "end": 5724,
+      "source": "  async listComposioToolkits(): Promise<ComposioToolkit[]> {\n    return this.fetch(`/api/integrations/composio/toolkits`);\n  }",
+      "sha256": "bad22b78565261caed72a05eb9046252e7bca9486affed0831af34c9a9ee418b",
+      "requests": [
+        {
+          "line": 5723,
+          "source": "    return this.fetch(`/api/integrations/composio/toolkits`);",
+          "transport": "shared fetch",
+          "actual_method": "GET",
+          "inventory": [
+            {
+              "id": "client:5723",
+              "method": "GET",
+              "path_expression": "/api/integrations/composio/toolkits",
+              "route": {
+                "method": "GET",
+                "path": "/api/integrations/composio/toolkits"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "listComposioConnections",
+      "start": 5727,
+      "end": 5729,
+      "source": "  async listComposioConnections(): Promise<ComposioConnection[]> {\n    return this.fetch(`/api/integrations/composio/connections`);\n  }",
+      "sha256": "1ad2247c4f7a74602cbe204598fbc89f2c939d29bab6741baa59af068a09c0c3",
+      "requests": [
+        {
+          "line": 5728,
+          "source": "    return this.fetch(`/api/integrations/composio/connections`);",
+          "transport": "shared fetch",
+          "actual_method": "GET",
+          "inventory": [
+            {
+              "id": "client:5728",
+              "method": "GET",
+              "path_expression": "/api/integrations/composio/connections",
+              "route": {
+                "method": "GET",
+                "path": "/api/integrations/composio/connections"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "beginComposioConnect",
+      "start": 5733,
+      "end": 5738,
+      "source": "  async beginComposioConnect(toolkitSlug: string): Promise<ComposioConnectInitResponse> {\n    return this.fetch(`/api/integrations/composio/connect/init`, {\n      method: \"POST\",\n      body: JSON.stringify({ toolkit_slug: toolkitSlug }),\n    });\n  }",
+      "sha256": "7a037ecd467c6f8f20d0dc03b4e4fddb071c76aa2d3c52267a5c81b30bad4310",
+      "requests": [
+        {
+          "line": 5734,
+          "source": "    return this.fetch(`/api/integrations/composio/connect/init`, {",
+          "transport": "shared fetch",
+          "actual_method": "POST",
+          "inventory": [
+            {
+              "id": "client:5734",
+              "method": "POST",
+              "path_expression": "/api/integrations/composio/connect/init",
+              "route": {
+                "method": "POST",
+                "path": "/api/integrations/composio/connect/init"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "deleteComposioConnection",
+      "start": 5741,
+      "end": 5745,
+      "source": "  async deleteComposioConnection(connectionId: string): Promise<void> {\n    await this.fetch(`/api/integrations/composio/connections/${connectionId}`, {\n      method: \"DELETE\",\n    });\n  }",
+      "sha256": "37adae4fd370edcd0a9e139cc877645603b18f1ae72890f0fdd356037e6a3a0e",
+      "requests": [
+        {
+          "line": 5742,
+          "source": "    await this.fetch(`/api/integrations/composio/connections/${connectionId}`, {",
+          "transport": "shared fetch",
+          "actual_method": "DELETE",
+          "inventory": [
+            {
+              "id": "client:5742",
+              "method": "DELETE",
+              "path_expression": "/api/integrations/composio/connections/${connectionId}",
+              "route": {
+                "method": "DELETE",
+                "path": "/api/integrations/composio/connections/{id}"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "getAppsOverview",
+      "start": 5750,
+      "end": 5753,
+      "source": "  async getAppsOverview(): Promise<AppsOverview> {\n    const raw = await this.fetch<unknown>(`/api/apps`);\n    return parseWithFallback(raw, AppsOverviewSchema, EMPTY_APPS_OVERVIEW, { endpoint: \"GET /api/apps\" });\n  }",
+      "sha256": "a2741f87320c6166aecbb60b79cf16e25fbad5bf44a6b0ecc0b1d583df74d5c4",
+      "requests": [
+        {
+          "line": 5751,
+          "source": "    const raw = await this.fetch<unknown>(`/api/apps`);",
+          "transport": "shared fetch",
+          "actual_method": "GET",
+          "inventory": [
+            {
+              "id": "client:5751",
+              "method": "GET",
+              "path_expression": "/api/apps",
+              "route": {
+                "method": "GET",
+                "path": "/api/apps"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "listAppCatalog",
+      "start": 5757,
+      "end": 5760,
+      "source": "  async listAppCatalog(view?: \"all\"): Promise<AppCatalogResponse> {\n    const raw = await this.fetch<unknown>(`/api/apps/catalog${view ? `?view=${view}` : \"\"}`);\n    return parseWithFallback(raw, AppCatalogResponseSchema, EMPTY_APP_CATALOG, { endpoint: \"GET /api/apps/catalog\" });\n  }",
+      "sha256": "6df7ef0452271863f0a0854177caa2059af41d765b6cb442e5aa1b1c1d70ad2a",
+      "requests": [
+        {
+          "line": 5758,
+          "source": "    const raw = await this.fetch<unknown>(`/api/apps/catalog${view ? `?view=${view}` : \"\"}`);",
+          "transport": "shared fetch",
+          "actual_method": "GET",
+          "inventory": [
+            {
+              "id": "client:5758",
+              "method": "GET",
+              "path_expression": "/api/apps/catalog${view ? `?view=${view}` : \"\"}",
+              "route": {
+                "method": "GET",
+                "path": "/api/apps/catalog"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "connectApp",
+      "start": 5764,
+      "end": 5773,
+      "source": "  async connectApp(scope: AppAccountScope, toolkitSlug: string, returnTo?: string): Promise<ComposioConnectInitResponse> {\n    const raw = await this.fetch<unknown>(`/api/apps/${scope}/connect`, {\n      method: \"POST\",\n      body: JSON.stringify({ toolkit_slug: toolkitSlug, ...(returnTo ? { return_to: returnTo } : {}) }),\n    });\n    const endpoint = `POST /api/apps/${scope}/connect`;\n    const parsed = parseWithFallback<ComposioConnectInitResponse | null>(raw, AppConnectInitSchema, null, { endpoint });\n    if (!parsed) throw new Error(`Malformed response from ${endpoint}`);\n    return parsed;\n  }",
+      "sha256": "3aae2e9ad96110551cb67a4654876fa4ff203ce878ace2d03a0851e752122388",
+      "requests": [
+        {
+          "line": 5765,
+          "source": "    const raw = await this.fetch<unknown>(`/api/apps/${scope}/connect`, {",
+          "transport": "shared fetch",
+          "actual_method": "POST",
+          "inventory": [
+            {
+              "id": "client:5765",
+              "method": "POST",
+              "path_expression": "/api/apps/${scope}/connect",
+              "route": {
+                "method": "POST",
+                "path": "/api/apps/team/connect"
+              }
+            },
+            {
+              "id": "client:5765:scope-personal",
+              "method": "POST",
+              "path_expression": "/api/apps/${scope}/connect",
+              "route": {
+                "method": "POST",
+                "path": "/api/apps/personal/connect"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "disconnectTeamApp",
+      "start": 5775,
+      "end": 5777,
+      "source": "  async disconnectTeamApp(connectionId: string): Promise<void> {\n    await this.fetch(`/api/apps/team/connections/${connectionId}`, { method: \"DELETE\" });\n  }",
+      "sha256": "42fec87285041eec7e423efb060d8b568f4f1e7cb5c1a7353f43f217e9bb87e4",
+      "requests": [
+        {
+          "line": 5776,
+          "source": "    await this.fetch(`/api/apps/team/connections/${connectionId}`, { method: \"DELETE\" });",
+          "transport": "shared fetch",
+          "actual_method": "DELETE",
+          "inventory": [
+            {
+              "id": "client:5776",
+              "method": "DELETE",
+              "path_expression": "/api/apps/team/connections/${connectionId}",
+              "route": {
+                "method": "DELETE",
+                "path": "/api/apps/team/connections/{id}"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "getTeamAppImpact",
+      "start": 5779,
+      "end": 5782,
+      "source": "  async getTeamAppImpact(toolkitSlug: string): Promise<TeamAppImpact> {\n    const raw = await this.fetch<unknown>(`/api/apps/team/impact?toolkit_slug=${encodeURIComponent(toolkitSlug)}`);\n    return parseWithFallback(raw, TeamAppImpactSchema, EMPTY_TEAM_APP_IMPACT, { endpoint: \"GET /api/apps/team/impact\" });\n  }",
+      "sha256": "747cdb55c32963d54594af67c4be7781cbee4af5e2e6f1fbe710ceb051273ebe",
+      "requests": [
+        {
+          "line": 5780,
+          "source": "    const raw = await this.fetch<unknown>(`/api/apps/team/impact?toolkit_slug=${encodeURIComponent(toolkitSlug)}`);",
+          "transport": "shared fetch",
+          "actual_method": "GET",
+          "inventory": [
+            {
+              "id": "client:5780",
+              "method": "GET",
+              "path_expression": "/api/apps/team/impact?toolkit_slug=${encodeURIComponent(toolkitSlug)}",
+              "route": {
+                "method": "GET",
+                "path": "/api/apps/team/impact"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "updateAppSettings",
+      "start": 5787,
+      "end": 5796,
+      "source": "  async updateAppSettings(body: {\n    catalog_mode: AppCatalogMode;\n    allowed_toolkits?: string[];\n  }): Promise<{ catalog_mode: AppCatalogMode; allowed_toolkits: string[] } | null> {\n    const raw = await this.fetch<unknown>(`/api/apps/settings`, {\n      method: \"PUT\",\n      body: JSON.stringify(body),\n    });\n    return parseWithFallback(raw, AppSettingsResponseSchema, null, { endpoint: \"PUT /api/apps/settings\" });\n  }",
+      "sha256": "4b55383763c10403819ebece383b6e212353f8bc4e1c2642985987c3d60d7c37",
+      "requests": [
+        {
+          "line": 5791,
+          "source": "    const raw = await this.fetch<unknown>(`/api/apps/settings`, {",
+          "transport": "shared fetch",
+          "actual_method": "PUT",
+          "inventory": [
+            {
+              "id": "client:5791",
+              "method": "PUT",
+              "path_expression": "/api/apps/settings",
+              "route": {
+                "method": "PUT",
+                "path": "/api/apps/settings"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "listAppTools",
+      "start": 5798,
+      "end": 5801,
+      "source": "  async listAppTools(toolkitSlug: string): Promise<{ tools: AppTool[] }> {\n    const raw = await this.fetch<unknown>(`/api/apps/tools?toolkit_slug=${encodeURIComponent(toolkitSlug)}`);\n    return parseWithFallback(raw, AppToolsResponseSchema, { tools: [] }, { endpoint: \"GET /api/apps/tools\" });\n  }",
+      "sha256": "44fcc4537a3a4d665d14adbd77e61e7ac946945667609d5ccd9d0e5d97b784e8",
+      "requests": [
+        {
+          "line": 5799,
+          "source": "    const raw = await this.fetch<unknown>(`/api/apps/tools?toolkit_slug=${encodeURIComponent(toolkitSlug)}`);",
+          "transport": "shared fetch",
+          "actual_method": "GET",
+          "inventory": [
+            {
+              "id": "client:5799",
+              "method": "GET",
+              "path_expression": "/api/apps/tools?toolkit_slug=${encodeURIComponent(toolkitSlug)}",
+              "route": {
+                "method": "GET",
+                "path": "/api/apps/tools"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "updateAppToolClass",
+      "start": 5804,
+      "end": 5809,
+      "source": "  async updateAppToolClass(toolkitSlug: string, toolSlug: string, actionClass: AppActionClass | null): Promise<void> {\n    await this.fetch(`/api/apps/tools/class`, {\n      method: \"PUT\",\n      body: JSON.stringify({ toolkit_slug: toolkitSlug, tool_slug: toolSlug, action_class: actionClass ?? \"\" }),\n    });\n  }",
+      "sha256": "f8931c7737dce9f923b443cf4605e563a12ec82ec06a6781d04fb394e9845051",
+      "requests": [
+        {
+          "line": 5805,
+          "source": "    await this.fetch(`/api/apps/tools/class`, {",
+          "transport": "shared fetch",
+          "actual_method": "PUT",
+          "inventory": [
+            {
+              "id": "client:5805",
+              "method": "PUT",
+              "path_expression": "/api/apps/tools/class",
+              "route": {
+                "method": "PUT",
+                "path": "/api/apps/tools/class"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "listIssueAppCalls",
+      "start": 5811,
+      "end": 5814,
+      "source": "  async listIssueAppCalls(issueId: string): Promise<{ calls: IssueAppCall[] }> {\n    const raw = await this.fetch<unknown>(`/api/app-calls?issue_id=${encodeURIComponent(issueId)}`);\n    return parseWithFallback(raw, IssueAppCallsResponseSchema, { calls: [] }, { endpoint: \"GET /api/app-calls\" });\n  }",
+      "sha256": "bd934fc851d64b520cf61ca57aae2a026cfd2a98fdd6d005d98c87a13c57cfff",
+      "requests": [
+        {
+          "line": 5812,
+          "source": "    const raw = await this.fetch<unknown>(`/api/app-calls?issue_id=${encodeURIComponent(issueId)}`);",
+          "transport": "shared fetch",
+          "actual_method": "GET",
+          "inventory": [
+            {
+              "id": "client:5812",
+              "method": "GET",
+              "path_expression": "/api/app-calls?issue_id=${encodeURIComponent(issueId)}",
+              "route": {
+                "method": "GET",
+                "path": "/api/app-calls"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "getAppRules",
+      "start": 5816,
+      "end": 5819,
+      "source": "  async getAppRules(toolkitSlug: string, scope: AppAccountScope): Promise<{ rules: AppRule[] }> {\n    const raw = await this.fetch<unknown>(`/api/apps/rules?toolkit_slug=${encodeURIComponent(toolkitSlug)}&scope=${scope}`);\n    return parseWithFallback(raw, AppRulesResponseSchema, { rules: [] }, { endpoint: \"GET /api/apps/rules\" });\n  }",
+      "sha256": "5d6bb5f92b66276e33a02ac0d1ba74c255240ba6dc8774a4554842216c1ae6c5",
+      "requests": [
+        {
+          "line": 5817,
+          "source": "    const raw = await this.fetch<unknown>(`/api/apps/rules?toolkit_slug=${encodeURIComponent(toolkitSlug)}&scope=${scope}`);",
+          "transport": "shared fetch",
+          "actual_method": "GET",
+          "inventory": [
+            {
+              "id": "client:5817",
+              "method": "GET",
+              "path_expression": "/api/apps/rules?toolkit_slug=${encodeURIComponent(toolkitSlug)}&scope=${scope}",
+              "route": {
+                "method": "GET",
+                "path": "/api/apps/rules"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "updateAppRules",
+      "start": 5821,
+      "end": 5831,
+      "source": "  async updateAppRules(\n    toolkitSlug: string,\n    scope: AppAccountScope,\n    rules: { action_class: AppActionClass; policy: AppActionPolicy }[],\n  ): Promise<{ rules: AppRule[] } | null> {\n    const raw = await this.fetch<unknown>(`/api/apps/rules?toolkit_slug=${encodeURIComponent(toolkitSlug)}&scope=${scope}`, {\n      method: \"PUT\",\n      body: JSON.stringify({ rules }),\n    });\n    return parseWithFallback(raw, AppRulesResponseSchema, null, { endpoint: \"PUT /api/apps/rules\" });\n  }",
+      "sha256": "d834b05ad2900fb2daf51f61dca43f15905a94b65777a98f4a5fb42a516da593",
+      "requests": [
+        {
+          "line": 5826,
+          "source": "    const raw = await this.fetch<unknown>(`/api/apps/rules?toolkit_slug=${encodeURIComponent(toolkitSlug)}&scope=${scope}`, {",
+          "transport": "shared fetch",
+          "actual_method": "PUT",
+          "inventory": [
+            {
+              "id": "client:5826",
+              "method": "PUT",
+              "path_expression": "/api/apps/rules?toolkit_slug=${encodeURIComponent(toolkitSlug)}&scope=${scope}",
+              "route": {
+                "method": "PUT",
+                "path": "/api/apps/rules"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "listAppActivity",
+      "start": 5833,
+      "end": 5836,
+      "source": "  async listAppActivity(toolkitSlug: string, scope: AppAccountScope): Promise<{ calls: AppToolCall[] }> {\n    const raw = await this.fetch<unknown>(`/api/apps/activity?toolkit_slug=${encodeURIComponent(toolkitSlug)}&scope=${scope}`);\n    return parseWithFallback(raw, AppActivityResponseSchema, { calls: [] }, { endpoint: \"GET /api/apps/activity\" });\n  }",
+      "sha256": "bde7bf8fa3caa437a8c5bc3accbc853f3b4e3f2873453d6da9ca4ad2db06d679",
+      "requests": [
+        {
+          "line": 5834,
+          "source": "    const raw = await this.fetch<unknown>(`/api/apps/activity?toolkit_slug=${encodeURIComponent(toolkitSlug)}&scope=${scope}`);",
+          "transport": "shared fetch",
+          "actual_method": "GET",
+          "inventory": [
+            {
+              "id": "client:5834",
+              "method": "GET",
+              "path_expression": "/api/apps/activity?toolkit_slug=${encodeURIComponent(toolkitSlug)}&scope=${scope}",
+              "route": {
+                "method": "GET",
+                "path": "/api/apps/activity"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "listAgentApps",
+      "start": 5838,
+      "end": 5841,
+      "source": "  async listAgentApps(agentId: string): Promise<{ apps: AgentApp[] }> {\n    const raw = await this.fetch<unknown>(`/api/agents/${agentId}/apps`);\n    return parseWithFallback(raw, AgentAppsResponseSchema, { apps: [] }, { endpoint: \"GET /api/agents/:id/apps\" });\n  }",
+      "sha256": "f92ee331c2c1ce2acb69aa4b343a1ed0bd66e89556e47d922ce33184e5c00b74",
+      "requests": [
+        {
+          "line": 5839,
+          "source": "    const raw = await this.fetch<unknown>(`/api/agents/${agentId}/apps`);",
+          "transport": "shared fetch",
+          "actual_method": "GET",
+          "inventory": [
+            {
+              "id": "client:5839",
+              "method": "GET",
+              "path_expression": "/api/agents/${agentId}/apps",
+              "route": {
+                "method": "GET",
+                "path": "/api/agents/{id}/apps"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "updateAgentApps",
+      "start": 5843,
+      "end": 5849,
+      "source": "  async updateAgentApps(agentId: string, body: UpdateAgentAppsRequest): Promise<{ apps: AgentApp[] } | null> {\n    const raw = await this.fetch<unknown>(`/api/agents/${agentId}/apps`, {\n      method: \"PUT\",\n      body: JSON.stringify(body),\n    });\n    return parseWithFallback(raw, AgentAppsResponseSchema, null, { endpoint: \"PUT /api/agents/:id/apps\" });\n  }",
+      "sha256": "f14f4ace31c5f79a8dc9e26d030b0f615292f0e123a9e21de896b77716bd85a4",
+      "requests": [
+        {
+          "line": 5844,
+          "source": "    const raw = await this.fetch<unknown>(`/api/agents/${agentId}/apps`, {",
+          "transport": "shared fetch",
+          "actual_method": "PUT",
+          "inventory": [
+            {
+              "id": "client:5844",
+              "method": "PUT",
+              "path_expression": "/api/agents/${agentId}/apps",
+              "route": {
+                "method": "PUT",
+                "path": "/api/agents/{id}/apps"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "listAppRequests",
+      "start": 5854,
+      "end": 5866,
+      "source": "  async listAppRequests(\n    params: { issueId?: string; chatSessionId?: string; before?: string } = {},\n  ): Promise<AppRequestList> {\n    const qs = new URLSearchParams();\n    if (params.issueId) qs.set(\"issue_id\", params.issueId);\n    if (params.chatSessionId) qs.set(\"chat_session_id\", params.chatSessionId);\n    if (params.before) qs.set(\"before\", params.before);\n    const query = qs.toString();\n    const raw = await this.fetch<unknown>(`/api/app-requests${query ? `?${query}` : \"\"}`);\n    return parseWithFallback(raw, AppRequestListSchema, { requests: [], next_before: null }, {\n      endpoint: \"GET /api/app-requests\",\n    });\n  }",
+      "sha256": "e8a10d3a014d86e50996f89aaf24383b55907a7ef7dbd46eacf5c35ed89ced1f",
+      "requests": [
+        {
+          "line": 5862,
+          "source": "    const raw = await this.fetch<unknown>(`/api/app-requests${query ? `?${query}` : \"\"}`);",
+          "transport": "shared fetch",
+          "actual_method": "GET",
+          "inventory": [
+            {
+              "id": "client:5862",
+              "method": "GET",
+              "path_expression": "/api/app-requests${query ? `?${query}` : \"\"}",
+              "route": {
+                "method": "GET",
+                "path": "/api/app-requests"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "approveAppRequest",
+      "start": 5868,
+      "end": 5874,
+      "source": "  async approveAppRequest(requestId: string, args?: Record<string, unknown>): Promise<AppRequest | null> {\n    const raw = await this.fetch<unknown>(`/api/app-requests/${requestId}/approve`, {\n      method: \"POST\",\n      body: JSON.stringify(args ? { arguments: args } : {}),\n    });\n    return parseWithFallback(raw, AppRequestSchema, null, { endpoint: \"POST /api/app-requests/:id/approve\" });\n  }",
+      "sha256": "54969a9a649c57c8afc3ac0dc98a5d9dd6b51e717d926da2e7b33b3c145f6d03",
+      "requests": [
+        {
+          "line": 5869,
+          "source": "    const raw = await this.fetch<unknown>(`/api/app-requests/${requestId}/approve`, {",
+          "transport": "shared fetch",
+          "actual_method": "POST",
+          "inventory": [
+            {
+              "id": "client:5869",
+              "method": "POST",
+              "path_expression": "/api/app-requests/${requestId}/approve",
+              "route": {
+                "method": "POST",
+                "path": "/api/app-requests/{id}/approve"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "rejectAppRequest",
+      "start": 5876,
+      "end": 5882,
+      "source": "  async rejectAppRequest(requestId: string, reason?: string): Promise<AppRequest | null> {\n    const raw = await this.fetch<unknown>(`/api/app-requests/${requestId}/reject`, {\n      method: \"POST\",\n      body: JSON.stringify(reason ? { reason } : {}),\n    });\n    return parseWithFallback(raw, AppRequestSchema, null, { endpoint: \"POST /api/app-requests/:id/reject\" });\n  }",
+      "sha256": "74b39bd3914078e946ebd0731bea68021375e680693cb8171644095df875289f",
+      "requests": [
+        {
+          "line": 5877,
+          "source": "    const raw = await this.fetch<unknown>(`/api/app-requests/${requestId}/reject`, {",
+          "transport": "shared fetch",
+          "actual_method": "POST",
+          "inventory": [
+            {
+              "id": "client:5877",
+              "method": "POST",
+              "path_expression": "/api/app-requests/${requestId}/reject",
+              "route": {
+                "method": "POST",
+                "path": "/api/app-requests/{id}/reject"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "listSlackInstallations",
+      "start": 5885,
+      "end": 5887,
+      "source": "  async listSlackInstallations(workspaceId: string): Promise<ListSlackInstallationsResponse> {\n    return this.fetch(`/api/workspaces/${workspaceId}/slack/installations`);\n  }",
+      "sha256": "5efabc23c87e4242cbcbc0e82c4db02cef5ca16248e000170aa3f722e05d19c0",
+      "requests": [
+        {
+          "line": 5886,
+          "source": "    return this.fetch(`/api/workspaces/${workspaceId}/slack/installations`);",
+          "transport": "shared fetch",
+          "actual_method": "GET",
+          "inventory": [
+            {
+              "id": "client:5886",
+              "method": "GET",
+              "path_expression": "/api/workspaces/${workspaceId}/slack/installations",
+              "route": {
+                "method": "GET",
+                "path": "/api/workspaces/{id}/slack/installations"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "registerSlackBYO",
+      "start": 5892,
+      "end": 5902,
+      "source": "  async registerSlackBYO(\n    workspaceId: string,\n    agentId: string,\n    body: RegisterSlackBYORequest,\n  ): Promise<SlackInstallation> {\n    const search = new URLSearchParams({ agent_id: agentId });\n    return this.fetch(`/api/workspaces/${workspaceId}/slack/install/byo?${search.toString()}`, {\n      method: \"POST\",\n      body: JSON.stringify(body),\n    });\n  }",
+      "sha256": "f1fab6134d98208dc3befd00cdc6bf6e480036371f83702e32b69b2d7f5e30eb",
+      "requests": [
+        {
+          "line": 5898,
+          "source": "    return this.fetch(`/api/workspaces/${workspaceId}/slack/install/byo?${search.toString()}`, {",
+          "transport": "shared fetch",
+          "actual_method": "POST",
+          "inventory": [
+            {
+              "id": "client:5898",
+              "method": "POST",
+              "path_expression": "/api/workspaces/${workspaceId}/slack/install/byo?${search.toString()}",
+              "route": {
+                "method": "POST",
+                "path": "/api/workspaces/{id}/slack/install/byo"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "deleteSlackInstallation",
+      "start": 5904,
+      "end": 5908,
+      "source": "  async deleteSlackInstallation(workspaceId: string, installationId: string): Promise<void> {\n    await this.fetch(`/api/workspaces/${workspaceId}/slack/installations/${installationId}`, {\n      method: \"DELETE\",\n    });\n  }",
+      "sha256": "39ac71b9cde5d02d69492cd29bcc97e1c9901eae015792e626235f62e8116cbc",
+      "requests": [
+        {
+          "line": 5905,
+          "source": "    await this.fetch(`/api/workspaces/${workspaceId}/slack/installations/${installationId}`, {",
+          "transport": "shared fetch",
+          "actual_method": "DELETE",
+          "inventory": [
+            {
+              "id": "client:5905",
+              "method": "DELETE",
+              "path_expression": "/api/workspaces/${workspaceId}/slack/installations/${installationId}",
+              "route": {
+                "method": "DELETE",
+                "path": "/api/workspaces/{id}/slack/installations/{installationId}"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "redeemSlackBindingToken",
+      "start": 5910,
+      "end": 5915,
+      "source": "  async redeemSlackBindingToken(token: string): Promise<RedeemSlackBindingTokenResponse> {\n    return this.fetch(`/api/slack/binding/redeem`, {\n      method: \"POST\",\n      body: JSON.stringify({ token }),\n    });\n  }",
+      "sha256": "c07755238f0c7f283f9f102dc827f0eb899c54c4b5a3c1d73a7e085a1e748214",
+      "requests": [
+        {
+          "line": 5911,
+          "source": "    return this.fetch(`/api/slack/binding/redeem`, {",
+          "transport": "shared fetch",
+          "actual_method": "POST",
+          "inventory": [
+            {
+              "id": "client:5911",
+              "method": "POST",
+              "path_expression": "/api/slack/binding/redeem",
+              "route": {
+                "method": "POST",
+                "path": "/api/slack/binding/redeem"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "listDingTalkInstallations",
+      "start": 5918,
+      "end": 5928,
+      "source": "  async listDingTalkInstallations(\n    workspaceId: string,\n  ): Promise<ListDingTalkInstallationsResponse> {\n    const raw = await this.fetch<unknown>(`/api/workspaces/${workspaceId}/dingtalk/installations`);\n    return parseWithFallback(\n      raw,\n      ListDingTalkInstallationsResponseSchema,\n      EMPTY_LIST_DINGTALK_INSTALLATIONS_RESPONSE,\n      { endpoint: \"GET /api/workspaces/:id/dingtalk/installations\" },\n    );\n  }",
+      "sha256": "454e2bcca33b5b038c64a3acfef26f75b5e3033047c05e9441abe9bbe0dad64c",
+      "requests": [
+        {
+          "line": 5921,
+          "source": "    const raw = await this.fetch<unknown>(`/api/workspaces/${workspaceId}/dingtalk/installations`);",
+          "transport": "shared fetch",
+          "actual_method": "GET",
+          "inventory": [
+            {
+              "id": "client:5921",
+              "method": "GET",
+              "path_expression": "/api/workspaces/${workspaceId}/dingtalk/installations",
+              "route": {
+                "method": "GET",
+                "path": "/api/workspaces/{id}/dingtalk/installations"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "listDingTalkGroups",
+      "start": 5930,
+      "end": 5957,
+      "source": "  async listDingTalkGroups(\n    workspaceId: string,\n    params: ListDingTalkGroupsParams = {},\n  ): Promise<ListDingTalkGroupsResponse> {\n    let raw: unknown;\n    try {\n      const search = dingTalkGroupSearch(params);\n      raw = await this.fetch<unknown>(`/api/workspaces/${workspaceId}/dingtalk/groups${search}`);\n    } catch (error) {\n      // Installed clients can be newer than the server they reconnect to. A\n      // backend predating group discovery 404s this additive endpoint. The\n      // first admin-only version returns 403 to members; both mean this client\n      // cannot use the workspace inventory, while real failures stay visible.\n      if (\n        error instanceof ApiError &&\n        (error.status === 404 || error.status === 403)\n      ) {\n        return EMPTY_LIST_DINGTALK_GROUPS_RESPONSE;\n      }\n      throw error;\n    }\n    return parseWithFallback(\n      raw,\n      ListDingTalkGroupsResponseSchema,\n      EMPTY_LIST_DINGTALK_GROUPS_RESPONSE,\n      { endpoint: \"GET /api/workspaces/:id/dingtalk/groups\" },\n    );\n  }",
+      "sha256": "89aeeabb8ee939a3437d0a875818cce0a82575bf6421c13a980da48938be24e4",
+      "requests": [
+        {
+          "line": 5937,
+          "source": "      raw = await this.fetch<unknown>(`/api/workspaces/${workspaceId}/dingtalk/groups${search}`);",
+          "transport": "shared fetch",
+          "actual_method": "GET",
+          "inventory": [
+            {
+              "id": "client:5937",
+              "method": "GET",
+              "path_expression": "/api/workspaces/${workspaceId}/dingtalk/groups${search}",
+              "route": {
+                "method": "GET",
+                "path": "/api/workspaces/{id}/dingtalk/groups"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "listAgentDingTalkGroups",
+      "start": 5959,
+      "end": 5981,
+      "source": "  async listAgentDingTalkGroups(\n    agentId: string,\n    params: ListDingTalkGroupsParams = {},\n  ): Promise<ListDingTalkGroupsResponse> {\n    let raw: unknown;\n    try {\n      const search = dingTalkGroupSearch(params);\n      raw = await this.fetch<unknown>(`/api/agents/${agentId}/dingtalk/groups${search}`);\n    } catch (error) {\n      // Keep installed clients compatible with servers that predate agent-\n      // scoped group discovery. Authorization failures must remain visible.\n      if (error instanceof ApiError && error.status === 404) {\n        return EMPTY_LIST_DINGTALK_GROUPS_RESPONSE;\n      }\n      throw error;\n    }\n    return parseWithFallback(\n      raw,\n      ListDingTalkGroupsResponseSchema,\n      EMPTY_LIST_DINGTALK_GROUPS_RESPONSE,\n      { endpoint: \"GET /api/agents/:id/dingtalk/groups\" },\n    );\n  }",
+      "sha256": "6e6255ef94ee5814315fe6f45d8f899d00fa637838bd219ac8fbc1560b0af713",
+      "requests": [
+        {
+          "line": 5966,
+          "source": "      raw = await this.fetch<unknown>(`/api/agents/${agentId}/dingtalk/groups${search}`);",
+          "transport": "shared fetch",
+          "actual_method": "GET",
+          "inventory": [
+            {
+              "id": "client:5966",
+              "method": "GET",
+              "path_expression": "/api/agents/${agentId}/dingtalk/groups${search}",
+              "route": {
+                "method": "GET",
+                "path": "/api/agents/{id}/dingtalk/groups"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "forgetDingTalkGroup",
+      "start": 5983,
+      "end": 5992,
+      "source": "  async forgetDingTalkGroup(\n    workspaceId: string,\n    installationId: string,\n    conversationId: string,\n  ): Promise<void> {\n    await this.fetch(\n      `/api/workspaces/${workspaceId}/dingtalk/installations/${installationId}/groups/${encodeURIComponent(conversationId)}`,\n      { method: \"DELETE\" },\n    );\n  }",
+      "sha256": "c5da1441bd0596d59de932ef698eb7dbfef046409f44f1d9208c9e6daf17220c",
+      "requests": [
+        {
+          "line": 5988,
+          "source": "    await this.fetch(",
+          "transport": "shared fetch",
+          "actual_method": "DELETE",
+          "inventory": [
+            {
+              "id": "client:5988",
+              "method": "DELETE",
+              "path_expression": "/api/workspaces/${workspaceId}/dingtalk/installations/${installationId}/groups/${encodeURIComponent(conversationId)}",
+              "route": {
+                "method": "DELETE",
+                "path": "/api/workspaces/{id}/dingtalk/installations/{installationId}/groups/{conversationId}"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "registerDingTalkBYO",
+      "start": 5998,
+      "end": 6014,
+      "source": "  async registerDingTalkBYO(\n    workspaceId: string,\n    agentId: string,\n    body: RegisterDingTalkBYORequest,\n  ): Promise<DingTalkInstallation> {\n    const search = new URLSearchParams({ agent_id: agentId });\n    const raw = await this.fetch<unknown>(\n      `/api/workspaces/${workspaceId}/dingtalk/install/byo?${search.toString()}`,\n      {\n        method: \"POST\",\n        body: JSON.stringify(body),\n      },\n    );\n    return parseWithFallback(raw, DingTalkInstallationSchema, EMPTY_DINGTALK_INSTALLATION, {\n      endpoint: \"POST /api/workspaces/:id/dingtalk/install/byo\",\n    });\n  }",
+      "sha256": "8f2657ebf29bf5c603e897d9303def894426c6c75da2239ec2ea12fe78b89b8a",
+      "requests": [
+        {
+          "line": 6004,
+          "source": "    const raw = await this.fetch<unknown>(",
+          "transport": "shared fetch",
+          "actual_method": "POST",
+          "inventory": [
+            {
+              "id": "client:6004",
+              "method": "POST",
+              "path_expression": "/api/workspaces/${workspaceId}/dingtalk/install/byo?${search.toString()}",
+              "route": {
+                "method": "POST",
+                "path": "/api/workspaces/{id}/dingtalk/install/byo"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "deleteDingTalkInstallation",
+      "start": 6016,
+      "end": 6020,
+      "source": "  async deleteDingTalkInstallation(workspaceId: string, installationId: string): Promise<void> {\n    await this.fetch(`/api/workspaces/${workspaceId}/dingtalk/installations/${installationId}`, {\n      method: \"DELETE\",\n    });\n  }",
+      "sha256": "b1a45a4bebaecbca2e6672f482da1d36836c50f5b70a7584a7013fbe0a07e463",
+      "requests": [
+        {
+          "line": 6017,
+          "source": "    await this.fetch(`/api/workspaces/${workspaceId}/dingtalk/installations/${installationId}`, {",
+          "transport": "shared fetch",
+          "actual_method": "DELETE",
+          "inventory": [
+            {
+              "id": "client:6017",
+              "method": "DELETE",
+              "path_expression": "/api/workspaces/${workspaceId}/dingtalk/installations/${installationId}",
+              "route": {
+                "method": "DELETE",
+                "path": "/api/workspaces/{id}/dingtalk/installations/{installationId}"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "redeemDingTalkBindingToken",
+      "start": 6022,
+      "end": 6035,
+      "source": "  async redeemDingTalkBindingToken(\n    token: string,\n  ): Promise<RedeemDingTalkBindingTokenResponse> {\n    const raw = await this.fetch<unknown>(`/api/dingtalk/binding/redeem`, {\n      method: \"POST\",\n      body: JSON.stringify({ token }),\n    });\n    return parseWithFallback(\n      raw,\n      RedeemDingTalkBindingTokenResponseSchema,\n      EMPTY_REDEEM_DINGTALK_BINDING_TOKEN_RESPONSE,\n      { endpoint: \"POST /api/dingtalk/binding/redeem\" },\n    );\n  }",
+      "sha256": "bbf8a5d6507a1272772ccee8cb6edf93dbed9f358320ef83e6e9511e6b6acf28",
+      "requests": [
+        {
+          "line": 6025,
+          "source": "    const raw = await this.fetch<unknown>(`/api/dingtalk/binding/redeem`, {",
+          "transport": "shared fetch",
+          "actual_method": "POST",
+          "inventory": [
+            {
+              "id": "client:6025",
+              "method": "POST",
+              "path_expression": "/api/dingtalk/binding/redeem",
+              "route": {
+                "method": "POST",
+                "path": "/api/dingtalk/binding/redeem"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "listWecomInstallations",
+      "start": 6041,
+      "end": 6049,
+      "source": "  async listWecomInstallations(workspaceId: string): Promise<ListWecomInstallationsResponse> {\n    const raw = await this.fetch<unknown>(`/api/workspaces/${workspaceId}/wecom/installations`);\n    return parseWithFallback(\n      raw,\n      ListWecomInstallationsResponseSchema,\n      EMPTY_LIST_WECOM_INSTALLATIONS_RESPONSE,\n      { endpoint: \"GET /api/workspaces/:id/wecom/installations\" },\n    );\n  }",
+      "sha256": "fb70021bcbb6c589ea100d7c0255dbebf988fe4b12db21fdf7aba5d6d6d20d9d",
+      "requests": [
+        {
+          "line": 6042,
+          "source": "    const raw = await this.fetch<unknown>(`/api/workspaces/${workspaceId}/wecom/installations`);",
+          "transport": "shared fetch",
+          "actual_method": "GET",
+          "inventory": [
+            {
+              "id": "client:6042",
+              "method": "GET",
+              "path_expression": "/api/workspaces/${workspaceId}/wecom/installations",
+              "route": {
+                "method": "GET",
+                "path": "/api/workspaces/{id}/wecom/installations"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "registerWecomBYO",
+      "start": 6055,
+      "end": 6071,
+      "source": "  async registerWecomBYO(\n    workspaceId: string,\n    agentId: string,\n    body: RegisterWecomBYORequest,\n  ): Promise<WecomInstallation> {\n    const search = new URLSearchParams({ agent_id: agentId });\n    const raw = await this.fetch<unknown>(\n      `/api/workspaces/${workspaceId}/wecom/install/byo?${search.toString()}`,\n      {\n        method: \"POST\",\n        body: JSON.stringify(body),\n      },\n    );\n    return parseWithFallback(raw, WecomInstallationSchema, EMPTY_WECOM_INSTALLATION, {\n      endpoint: \"POST /api/workspaces/:id/wecom/install/byo\",\n    });\n  }",
+      "sha256": "fbd463f6bff520a356efb6a9b42e0978188831addc621e3ed0ea095cc407e630",
+      "requests": [
+        {
+          "line": 6061,
+          "source": "    const raw = await this.fetch<unknown>(",
+          "transport": "shared fetch",
+          "actual_method": "POST",
+          "inventory": [
+            {
+              "id": "client:6061",
+              "method": "POST",
+              "path_expression": "/api/workspaces/${workspaceId}/wecom/install/byo?${search.toString()}",
+              "route": {
+                "method": "POST",
+                "path": "/api/workspaces/{id}/wecom/install/byo"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "beginWecomInstall",
+      "start": 6080,
+      "end": 6099,
+      "source": "  async beginWecomInstall(\n    workspaceId: string,\n    agentId: string,\n    idempotencyKey: string,\n  ): Promise<BeginWecomInstallResponse> {\n    const search = new URLSearchParams({ agent_id: agentId });\n    const raw = await this.fetch<unknown>(\n      `/api/workspaces/${workspaceId}/wecom/install/begin?${search.toString()}`,\n      {\n        method: \"POST\",\n        headers: { \"Idempotency-Key\": idempotencyKey },\n      },\n    );\n    return parseWithFallback(\n      raw,\n      BeginWecomInstallResponseSchema,\n      MALFORMED_BEGIN_WECOM_INSTALL_RESPONSE,\n      { endpoint: \"POST /api/workspaces/:id/wecom/install/begin\" },\n    );\n  }",
+      "sha256": "a81b3f150f7acc4bb4a0e9ff3bc5de80cd5ecb43706fcc2460926f7cf23d3be5",
+      "requests": [
+        {
+          "line": 6086,
+          "source": "    const raw = await this.fetch<unknown>(",
+          "transport": "shared fetch",
+          "actual_method": "POST",
+          "inventory": [
+            {
+              "id": "client:6086",
+              "method": "POST",
+              "path_expression": "/api/workspaces/${workspaceId}/wecom/install/begin?${search.toString()}",
+              "route": {
+                "method": "POST",
+                "path": "/api/workspaces/{id}/wecom/install/begin"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "getWecomInstallStatus",
+      "start": 6103,
+      "end": 6116,
+      "source": "  async getWecomInstallStatus(\n    workspaceId: string,\n    sessionId: string,\n  ): Promise<WecomInstallStatusResponse> {\n    const raw = await this.fetch<unknown>(\n      `/api/workspaces/${workspaceId}/wecom/install/${sessionId}`,\n    );\n    return parseWithFallback(\n      raw,\n      WecomInstallStatusResponseSchema,\n      MALFORMED_WECOM_INSTALL_STATUS_RESPONSE,\n      { endpoint: \"GET /api/workspaces/:id/wecom/install/:sessionId\" },\n    );\n  }",
+      "sha256": "e8e34b6af6e2258869b5fe0cb590af47ad763b0089b0c6a5923560f10a5f97cd",
+      "requests": [
+        {
+          "line": 6107,
+          "source": "    const raw = await this.fetch<unknown>(",
+          "transport": "shared fetch",
+          "actual_method": "GET",
+          "inventory": [
+            {
+              "id": "client:6107",
+              "method": "GET",
+              "path_expression": "/api/workspaces/${workspaceId}/wecom/install/${sessionId}",
+              "route": {
+                "method": "GET",
+                "path": "/api/workspaces/{id}/wecom/install/{sessionId}"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "deleteWecomInstallation",
+      "start": 6118,
+      "end": 6122,
+      "source": "  async deleteWecomInstallation(workspaceId: string, installationId: string): Promise<void> {\n    await this.fetch(`/api/workspaces/${workspaceId}/wecom/installations/${installationId}`, {\n      method: \"DELETE\",\n    });\n  }",
+      "sha256": "e2b7c38103de17b231e0476802b944cfe7c74a81dc56799d16fa2f62cb55bf09",
+      "requests": [
+        {
+          "line": 6119,
+          "source": "    await this.fetch(`/api/workspaces/${workspaceId}/wecom/installations/${installationId}`, {",
+          "transport": "shared fetch",
+          "actual_method": "DELETE",
+          "inventory": [
+            {
+              "id": "client:6119",
+              "method": "DELETE",
+              "path_expression": "/api/workspaces/${workspaceId}/wecom/installations/${installationId}",
+              "route": {
+                "method": "DELETE",
+                "path": "/api/workspaces/{id}/wecom/installations/{installationId}"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "redeemWecomBindingToken",
+      "start": 6131,
+      "end": 6142,
+      "source": "  async redeemWecomBindingToken(token: string): Promise<RedeemWecomBindingTokenResponse> {\n    const raw = await this.fetch<unknown>(`/api/wecom/binding/redeem`, {\n      method: \"POST\",\n      body: JSON.stringify({ token }),\n    });\n    return parseWithFallback(\n      raw,\n      RedeemWecomBindingTokenResponseSchema,\n      EMPTY_REDEEM_WECOM_BINDING_TOKEN_RESPONSE,\n      { endpoint: \"POST /api/wecom/binding/redeem\" },\n    );\n  }",
+      "sha256": "f0cc26f1b55ab76eee7b8a9114f0a11379b56b231556129552bea2a34951c977",
+      "requests": [
+        {
+          "line": 6132,
+          "source": "    const raw = await this.fetch<unknown>(`/api/wecom/binding/redeem`, {",
+          "transport": "shared fetch",
+          "actual_method": "POST",
+          "inventory": [
+            {
+              "id": "client:6132",
+              "method": "POST",
+              "path_expression": "/api/wecom/binding/redeem",
+              "route": {
+                "method": "POST",
+                "path": "/api/wecom/binding/redeem"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "listWeixinInstallations",
+      "start": 6144,
+      "end": 6147,
+      "source": "  async listWeixinInstallations(workspaceId: string): Promise<ListWeixinInstallationsResponse> {\n    const raw = await this.fetch<unknown>(`/api/workspaces/${workspaceId}/weixin/installations`);\n    return parseWithFallback(raw, ListWeixinInstallationsSchema, EMPTY_WEIXIN_INSTALLATIONS, { endpoint: \"GET /api/workspaces/:id/weixin/installations\" });\n  }",
+      "sha256": "b940f2daf1c5bb2b91d5545e529f656870bada7449d4f3cf01a2532531b2fbef",
+      "requests": [
+        {
+          "line": 6145,
+          "source": "    const raw = await this.fetch<unknown>(`/api/workspaces/${workspaceId}/weixin/installations`);",
+          "transport": "shared fetch",
+          "actual_method": "GET",
+          "inventory": [
+            {
+              "id": "client:6145",
+              "method": "GET",
+              "path_expression": "/api/workspaces/${workspaceId}/weixin/installations",
+              "route": {
+                "method": "GET",
+                "path": "/api/workspaces/{id}/weixin/installations"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "beginWeixinLogin",
+      "start": 6149,
+      "end": 6153,
+      "source": "  async beginWeixinLogin(workspaceId: string, agentId: string): Promise<WeixinLogin> {\n    const search = new URLSearchParams({ agent_id: agentId });\n    const raw = await this.fetch<unknown>(`/api/workspaces/${workspaceId}/weixin/logins?${search}`, { method: \"POST\" });\n    return parseWithFallback(raw, WeixinLoginSchema, INVALID_WEIXIN_LOGIN, { endpoint: \"POST /api/workspaces/:id/weixin/logins\" });\n  }",
+      "sha256": "9af52e35aca82a7df7d90d1c7c8cc9b9ae504061114aeabf03aea50f1217096d",
+      "requests": [
+        {
+          "line": 6151,
+          "source": "    const raw = await this.fetch<unknown>(`/api/workspaces/${workspaceId}/weixin/logins?${search}`, { method: \"POST\" });",
+          "transport": "shared fetch",
+          "actual_method": "POST",
+          "inventory": [
+            {
+              "id": "client:6151",
+              "method": "POST",
+              "path_expression": "/api/workspaces/${workspaceId}/weixin/logins?${search}",
+              "route": {
+                "method": "POST",
+                "path": "/api/workspaces/{id}/weixin/logins"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "pollWeixinLogin",
+      "start": 6155,
+      "end": 6158,
+      "source": "  async pollWeixinLogin(workspaceId: string, loginId: string, verifyCode = \"\", signal?: AbortSignal): Promise<WeixinLogin> {\n    const raw = await this.fetch<unknown>(`/api/workspaces/${workspaceId}/weixin/logins/${loginId}/poll`, { method: \"POST\", body: JSON.stringify({ verify_code: verifyCode }), signal });\n    return parseWithFallback(raw, WeixinLoginSchema, INVALID_WEIXIN_LOGIN, { endpoint: \"POST /api/workspaces/:id/weixin/logins/:loginId/poll\" });\n  }",
+      "sha256": "f93794b2ed8a5b212bcbc0f9c5cdf022da0efce376dc5377175e2be21293522b",
+      "requests": [
+        {
+          "line": 6156,
+          "source": "    const raw = await this.fetch<unknown>(`/api/workspaces/${workspaceId}/weixin/logins/${loginId}/poll`, { method: \"POST\", body: JSON.stringify({ verify_code: verifyCode }), signal });",
+          "transport": "shared fetch",
+          "actual_method": "POST",
+          "inventory": [
+            {
+              "id": "client:6156",
+              "method": "POST",
+              "path_expression": "/api/workspaces/${workspaceId}/weixin/logins/${loginId}/poll",
+              "route": {
+                "method": "POST",
+                "path": "/api/workspaces/{id}/weixin/logins/{loginId}/poll"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "cancelWeixinLogin",
+      "start": 6160,
+      "end": 6162,
+      "source": "  async cancelWeixinLogin(workspaceId: string, loginId: string): Promise<void> {\n    await this.fetch(`/api/workspaces/${workspaceId}/weixin/logins/${loginId}`, { method: \"DELETE\" });\n  }",
+      "sha256": "f3b66fba60592c2d7533ec48918bfa41a4b03c58c64ea4352ce60f4783b5311d",
+      "requests": [
+        {
+          "line": 6161,
+          "source": "    await this.fetch(`/api/workspaces/${workspaceId}/weixin/logins/${loginId}`, { method: \"DELETE\" });",
+          "transport": "shared fetch",
+          "actual_method": "DELETE",
+          "inventory": [
+            {
+              "id": "client:6161",
+              "method": "DELETE",
+              "path_expression": "/api/workspaces/${workspaceId}/weixin/logins/${loginId}",
+              "route": {
+                "method": "DELETE",
+                "path": "/api/workspaces/{id}/weixin/logins/{loginId}"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "deleteWeixinInstallation",
+      "start": 6164,
+      "end": 6166,
+      "source": "  async deleteWeixinInstallation(workspaceId: string, installationId: string): Promise<void> {\n    await this.fetch(`/api/workspaces/${workspaceId}/weixin/installations/${installationId}`, { method: \"DELETE\" });\n  }",
+      "sha256": "7c46c83612bf95fee92e062f3c3f3b94843c24c28f976e94353f7ef23cfc97ba",
+      "requests": [
+        {
+          "line": 6165,
+          "source": "    await this.fetch(`/api/workspaces/${workspaceId}/weixin/installations/${installationId}`, { method: \"DELETE\" });",
+          "transport": "shared fetch",
+          "actual_method": "DELETE",
+          "inventory": [
+            {
+              "id": "client:6165",
+              "method": "DELETE",
+              "path_expression": "/api/workspaces/${workspaceId}/weixin/installations/${installationId}",
+              "route": {
+                "method": "DELETE",
+                "path": "/api/workspaces/{id}/weixin/installations/{installationId}"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "listTelegramInstallations",
+      "start": 6168,
+      "end": 6178,
+      "source": "  async listTelegramInstallations(\n    workspaceId: string,\n  ): Promise<ListTelegramInstallationsResponse> {\n    const raw = await this.fetch<unknown>(`/api/workspaces/${workspaceId}/telegram/installations`);\n    return parseWithFallback(\n      raw,\n      ListTelegramInstallationsResponseSchema,\n      EMPTY_LIST_TELEGRAM_INSTALLATIONS_RESPONSE,\n      { endpoint: \"GET /api/workspaces/:id/telegram/installations\" },\n    );\n  }",
+      "sha256": "5df3394b53c8d5b030faa9cca85b6ae9455cbac587c58532e9b4717e85c5819c",
+      "requests": [
+        {
+          "line": 6171,
+          "source": "    const raw = await this.fetch<unknown>(`/api/workspaces/${workspaceId}/telegram/installations`);",
+          "transport": "shared fetch",
+          "actual_method": "GET",
+          "inventory": [
+            {
+              "id": "client:6171",
+              "method": "GET",
+              "path_expression": "/api/workspaces/${workspaceId}/telegram/installations",
+              "route": {
+                "method": "GET",
+                "path": "/api/workspaces/{id}/telegram/installations"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "registerTelegramBot",
+      "start": 6180,
+      "end": 6196,
+      "source": "  async registerTelegramBot(\n    workspaceId: string,\n    agentId: string,\n    body: RegisterTelegramRequest,\n  ): Promise<TelegramInstallation> {\n    const search = new URLSearchParams({ agent_id: agentId });\n    const raw = await this.fetch<unknown>(\n      `/api/workspaces/${workspaceId}/telegram/install?${search.toString()}`,\n      {\n        method: \"POST\",\n        body: JSON.stringify(body),\n      },\n    );\n    return parseWithFallback(raw, TelegramInstallationSchema, EMPTY_TELEGRAM_INSTALLATION, {\n      endpoint: \"POST /api/workspaces/:id/telegram/install\",\n    });\n  }",
+      "sha256": "6977a5113f121801a060149ca2666387ebb67f4119e1ee60b26c90d0f4d09b9a",
+      "requests": [
+        {
+          "line": 6186,
+          "source": "    const raw = await this.fetch<unknown>(",
+          "transport": "shared fetch",
+          "actual_method": "POST",
+          "inventory": [
+            {
+              "id": "client:6186",
+              "method": "POST",
+              "path_expression": "/api/workspaces/${workspaceId}/telegram/install?${search.toString()}",
+              "route": {
+                "method": "POST",
+                "path": "/api/workspaces/{id}/telegram/install"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "deleteTelegramInstallation",
+      "start": 6198,
+      "end": 6202,
+      "source": "  async deleteTelegramInstallation(workspaceId: string, installationId: string): Promise<void> {\n    await this.fetch(`/api/workspaces/${workspaceId}/telegram/installations/${installationId}`, {\n      method: \"DELETE\",\n    });\n  }",
+      "sha256": "8007f6f9f87b7afa279225f24f7c7b7cfb6c9f41372aba6798985d0574877f1d",
+      "requests": [
+        {
+          "line": 6199,
+          "source": "    await this.fetch(`/api/workspaces/${workspaceId}/telegram/installations/${installationId}`, {",
+          "transport": "shared fetch",
+          "actual_method": "DELETE",
+          "inventory": [
+            {
+              "id": "client:6199",
+              "method": "DELETE",
+              "path_expression": "/api/workspaces/${workspaceId}/telegram/installations/${installationId}",
+              "route": {
+                "method": "DELETE",
+                "path": "/api/workspaces/{id}/telegram/installations/{installationId}"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    },
+    {
+      "name": "redeemTelegramBindingToken",
+      "start": 6204,
+      "end": 6215,
+      "source": "  async redeemTelegramBindingToken(token: string): Promise<RedeemTelegramBindingTokenResponse> {\n    const raw = await this.fetch<unknown>(`/api/telegram/binding/redeem`, {\n      method: \"POST\",\n      body: JSON.stringify({ token }),\n    });\n    return parseWithFallback(\n      raw,\n      RedeemTelegramBindingTokenResponseSchema,\n      EMPTY_REDEEM_TELEGRAM_BINDING_TOKEN_RESPONSE,\n      { endpoint: \"POST /api/telegram/binding/redeem\" },\n    );\n  }",
+      "sha256": "bd4eaaf28ef00e863d92d5cc4cb8c5c9726f931c993888caed823e8909bc4509",
+      "requests": [
+        {
+          "line": 6205,
+          "source": "    const raw = await this.fetch<unknown>(`/api/telegram/binding/redeem`, {",
+          "transport": "shared fetch",
+          "actual_method": "POST",
+          "inventory": [
+            {
+              "id": "client:6205",
+              "method": "POST",
+              "path_expression": "/api/telegram/binding/redeem",
+              "route": {
+                "method": "POST",
+                "path": "/api/telegram/binding/redeem"
+              }
+            }
+          ],
+          "mapping_status": "mapped",
+          "method_identity_verified": true
+        }
+      ],
+      "type_only": false,
+      "semantics": "Exact executable branches, query/body/header construction and parsing are preserved in source; inherited shared execution rules apply."
+    }
+  ],
+  "trailing_top_level": {
+    "class_close": 6216,
+    "executable_helpers_or_exports": [],
+    "type_only_declarations": []
+  },
+  "named_helpers": [
+    "issueEnvironmentCommand",
+    "parseWithFallback",
+    "workspaceHeader",
+    "createSafeId",
+    "assertWebhookPayloadConditionsWriteSupported",
+    "dingTalkGroupSearch"
+  ],
+  "gaps": {
+    "before_assignment": "4056–5101 outside assigned tail; upload4058–4098 belongs to shared execution proof",
+    "after_assignment": null
+  },
+  "limitations": [
+    "Static frontend transport only; root review pending; no backend behavior asserted."
+  ]
+}

@@ -1,0 +1,115 @@
+[
+  {
+    "method": "GET",
+    "path": "/api/issues/{id}/usage",
+    "event": {
+      "disposition": "none",
+      "sources": [
+        "server/go/cmd/server/router.go:2226",
+        "server/go/internal/handler/daemon.go:6820",
+        "server/go/internal/handler/handler.go:1083",
+        "server/go/pkg/db/queries/task_usage.sql:84"
+      ],
+      "reason": "loadIssueForUser \u2192 GetIssueUsageSummary \u2192 response. SELECT aggregates task/task_usage token, cost and coverage counts; no lazy write or producer."
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/api/issues/{id}/metadata",
+    "event": {
+      "disposition": "none",
+      "sources": [
+        "server/go/cmd/server/router.go:2235",
+        "server/go/internal/handler/issue_metadata.go:148",
+        "server/go/internal/handler/handler.go:1083"
+      ],
+      "reason": "loadIssueForUser \u2192 parseIssueMetadata \u2192 response. Metadata comes from the loaded issue JSON; no metadata mutation or event."
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/api/issues/{id}/environments",
+    "event": {
+      "disposition": "none",
+      "sources": [
+        "server/go/cmd/server/router.go:2240",
+        "server/go/internal/handler/issue_environment.go:293",
+        "server/go/internal/handler/handler.go:1083",
+        "server/go/pkg/db/queries/issue_environment.sql:50",
+        "server/go/pkg/db/queries/issue_environment.sql:116",
+        "server/go/pkg/db/queries/issue_environment.sql:141"
+      ],
+      "reason": "loadIssueForUser \u2192 three snapshot/control/config SELECTs \u2192 environmentControlChecker (membership and runtime reads) \u2192 response projections. Time-derived unreachable/timeout state is presentation only; this GET does not start/stop an environment or enqueue a command."
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/api/issues/{id}/environment-commands/{commandId}",
+    "event": {
+      "disposition": "none",
+      "sources": [
+        "server/go/cmd/server/router.go:2245",
+        "server/go/internal/handler/issue_environment_control.go:364",
+        "server/go/internal/handler/handler.go:1083",
+        "server/go/pkg/db/queries/issue_environment.sql:112"
+      ],
+      "reason": "loadIssueForUser \u2192 UUID validation \u2192 issue/workspace-scoped GetIssueEnvironmentCommand SELECT \u2192 issueEnvironmentCommandToResponse(time.Now). Expiry is projected, not persisted; no claim/result write."
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/api/issues/{id}/pull-requests",
+    "event": {
+      "disposition": "required",
+      "sources": [
+        "server/go/cmd/server/router.go:2246",
+        "server/go/internal/handler/github.go:1125",
+        "server/go/internal/handler/handler.go:1083",
+        "server/go/pkg/db/queries/workspace.sql:28",
+        "server/go/pkg/db/queries/github.sql:146",
+        "server/go/pkg/db/queries/vcs.sql:105",
+        "server/go/pkg/db/queries/pr_automation.sql:44",
+        "server/go/pkg/db/queries/pr_automation.sql:5",
+        "server/go/pkg/db/queries/github_snapshot.sql:10",
+        "server/go/pkg/db/queries/github_snapshot.sql:19",
+        "server/go/pkg/db/queries/github_snapshot.sql:34",
+        "server/go/pkg/db/queries/github_snapshot.sql:39",
+        "server/go/pkg/db/queries/github_snapshot.sql:147",
+        "server/go/pkg/db/queries/github.sql:263",
+        "server/go/internal/integrations/ghsnapshot/refresh.go:204",
+        "server/go/internal/integrations/ghsnapshot/refresh.go:236",
+        "server/go/internal/integrations/ghsnapshot/refresh.go:410",
+        "server/go/internal/handler/handler.go:579",
+        "server/go/internal/handler/github.go:1249",
+        "server/go/internal/handler/github.go:1263",
+        "server/go/internal/handler/pr_auto_complete.go:173"
+      ],
+      "reason": "loadIssueForUser \u2192 workspace and linked GitHub SELECTs \u2192 MaybeEnqueueOnView for each GitHub row \u2192 VCS SELECT \u2192 decidePRAutoComplete (linked states, disabled flag, status catalog and project workflow reads) \u2192 response. Missing/stale/head-mismatched snapshots enqueue a deduplicated background refresh when enabled. worker \u2192 process \u2192 FetchPRSnapshot (external GitHub) \u2192 address lookup \u2192 applySnapshot transaction: head-guarded snapshot UPDATE, check-run DELETE/INSERT, commit \u2192 onApplied \u2192 broadcastPRSnapshotApplied \u2192 PR/link SELECTs \u2192 EventPullRequestUpdated publish. Current response can be stale; enqueue occurs before later VCS/decision errors. VCS rows have no view refresh here. Decision computation does not apply auto-completion."
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/api/comments/{commentId}/sub-issue-preview",
+    "event": {
+      "disposition": "none",
+      "sources": [
+        "server/go/cmd/server/router.go:2436",
+        "server/go/internal/handler/source_context.go:430",
+        "server/go/internal/handler/handler.go:1083",
+        "server/go/pkg/db/queries/comment.sql:481",
+        "server/go/pkg/db/queries/issue.sql:97",
+        "server/go/pkg/db/queries/workspace.sql:28",
+        "server/go/pkg/db/queries/attachment.sql:59",
+        "server/go/pkg/db/queries/comment.sql:846",
+        "server/go/pkg/db/queries/comment.sql:874",
+        "server/go/pkg/db/queries/attachment.sql:70",
+        "server/go/pkg/db/queries/user.sql:1",
+        "server/go/pkg/db/queries/agent.sql:46",
+        "server/go/internal/service/source_context.go:404",
+        "server/go/internal/service/source_context.go:271",
+        "server/go/internal/service/source_context.go:204"
+      ],
+      "reason": "workspace membership \u2192 commentInHiddenProject \u2192 BuildSourceContext \u2192 anchor SELECT \u2192 BuildSourceIssueSnapshot (issue/workspace/attachment SELECTs) \u2192 recursive ancestor/history SELECTs \u2192 buildSourceContextCommentSnapshots (attachment SELECT and author user/agent SELECTs) \u2192 limits, canonical digest and capture token \u2192 response. No capture persistence, object cloning, model execution or task enqueue; creation is a separate POST."
+    }
+  }
+]

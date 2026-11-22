@@ -1,0 +1,72 @@
+{
+  "version": 1,
+  "scope": [
+    "packages/views/issues/hooks/use-issue-trigger-preview.ts"
+  ],
+  "files": [
+    {
+      "path": "packages/views/issues/hooks/use-issue-trigger-preview.ts",
+      "sha256": "1c1f9c9bab35246b19ca774156646c31f54119409cd07daef4a2d70c61abc806",
+      "whole_source": true,
+      "reviewed_ranges": [
+        [
+          1,
+          91
+        ]
+      ],
+      "source_snapshot": "\"use client\";\n\nimport { useMemo } from \"react\";\nimport { keepPreviousData, useQuery } from \"@tanstack/react-query\";\nimport { api } from \"@workpal/core/api\";\nimport { issueKeys } from \"@workpal/core/issues/queries\";\nimport type { IssueAssigneeType, IssueStatus, IssueTriggerPreviewItem } from \"@workpal/core/types\";\n\nexport interface UseIssueTriggerPreviewParams {\n  /** Existing issues to evaluate (single assign/status or batch). */\n  issueIds?: string[];\n  /** Preview a not-yet-persisted issue from assignee/status (create modal). */\n  isCreate?: boolean;\n  assigneeType?: IssueAssigneeType | null;\n  assigneeId?: string | null;\n  status?: IssueStatus;\n  /** Caller gate — e.g. only fetch while a picker/modal is open. */\n  enabled?: boolean;\n}\n\nexport interface UseIssueTriggerPreviewResult {\n  triggers: IssueTriggerPreviewItem[];\n  totalCount: number;\n  isLoading: boolean;\n}\n\nconst EMPTY: IssueTriggerPreviewItem[] = [];\n\nfunction previewSignature(params: UseIssueTriggerPreviewParams): string {\n  return JSON.stringify({\n    ids: [...(params.issueIds ?? [])].sort(),\n    create: params.isCreate ?? false,\n    at: params.assigneeType ?? null,\n    aid: params.assigneeId ?? null,\n    status: params.status ?? null,\n  });\n}\n\n/** Reads the unified backend predicate via POST /api/issues/preview-trigger so\n *  the four entry points never re-implement \"will this start a run\" (MUL-3375).\n *\n *  The verdict changes only with the inputs (assignee / status), so the query\n *  refetches solely on signature change — it is deliberately NOT invalidated by\n *  WS task events. The assign source (create / assignee change) cancels existing\n *  tasks before enqueuing, so its verdict can't shift from a task event at all;\n *  the status source's pending dedup could, but the preview is advisory and the\n *  write path re-evaluates authoritatively, so a rare stale status label is\n *  harmless — far better than refetching every mounted preview on every\n *  workspace task event (the source of the visible flicker, MUL-3375).\n *\n *  Mirrors the comment-trigger preview's data handling: keepPreviousData so an\n *  input switch swaps the answer in place instead of collapsing, and only the\n *  very first load (no prior data) counts as loading. */\nexport function useIssueTriggerPreview(\n  params: UseIssueTriggerPreviewParams,\n): UseIssueTriggerPreviewResult {\n  const hasTarget =\n    (!!params.assigneeType && !!params.assigneeId) ||\n    !!params.status ||\n    (params.isCreate ?? false);\n  const enabled = (params.enabled ?? true) && hasTarget;\n\n  const signature = useMemo(() => previewSignature(params), [params]);\n\n  const previewQuery = useQuery({\n    queryKey: issueKeys.issueTriggerPreview(signature),\n    queryFn: () =>\n      api.previewIssueTrigger({\n        issueIds: params.issueIds,\n        isCreate: params.isCreate,\n        assigneeType: params.assigneeType,\n        assigneeId: params.assigneeId,\n        status: params.status,\n      }),\n    enabled,\n    retry: false,\n    staleTime: 0,\n    // Keep the prior verdict visible while a new signature (assignee/status\n    // switch) refetches, so the hint swaps in place rather than collapsing.\n    placeholderData: keepPreviousData,\n  });\n\n  const triggers = previewQuery.data?.triggers ?? EMPTY;\n  return {\n    triggers,\n    totalCount: previewQuery.data?.total_count ?? 0,\n    // Only the first load (no prior data) is \"loading\"; a background/placeholder\n    // refetch is not, so reveal animations gated on this never collapse mid-fetch.\n    isLoading: enabled && previewQuery.isLoading,\n  };\n}\n"
+    }
+  ],
+  "inventory_snapshot": {
+    "path": "server/contracts/frontend-calls.json",
+    "sha256": "2670eec069d89d20045a5bc1043d7031f2a1460a4180a0b10256315abee03d21",
+    "exact_tuple": {
+      "id": "client:1909",
+      "method": "POST",
+      "path_expression": "/api/issues/preview-trigger",
+      "route": {
+        "method": "POST",
+        "path": "/api/issues/preview-trigger"
+      },
+      "sources": [
+        "packages/core/api/client.ts:1909"
+      ],
+      "transport": "ApiClient.fetch; baseUrl + path; bearer or cookie credentials; workspace header from client context",
+      "auth": "requires endpoint-specific reconciliation",
+      "status": "pending-reconciliation"
+    }
+  },
+  "client_snapshot": {
+    "path": "packages/core/api/client.ts",
+    "sha256": "779bb65b5b7ead815836f7c704ec3c370bafae203e4f92119fadce93e982a4d7",
+    "reviewed_ranges": [
+      [
+        1908,
+        1923
+      ]
+    ]
+  },
+  "reused_evidence": [
+    {
+      "path": "server/contracts/batches/issue-query-transport-coverage.json",
+      "sha256": "3d4401929eee7294bc9f706a5c738a074300faffc6df01ec9275184d8a5be380"
+    },
+    {
+      "path": "server/contracts/batches/issue-composer-transport-coverage.json",
+      "sha256": "f2c1036ca9d134227d4e17739aba2e5476c9cfebf6809bb64a0663c49b572044"
+    }
+  ],
+  "disposition": "Complete target read in lines 1–97 (one <=100-line chunk). previewSignature (29–37) copies and sorts ids without deduplication, normalizes missing create to false and other fields to null. enabled is excluded from identity. useMemo depends on params identity: in-place mutation can preserve an old signature while the request closure reads mutated fields. There is no debounce, timer, content ref, cancellation signal, mutation, invalidation, or exported runtime helper other than useIssueTriggerPreview (54–97). Interfaces at 9 and 21 are type-only exports; EMPTY at 27 is a stable fallback.\nGate: (enabled ?? true) && ((truthy assigneeType && truthy assigneeId) || truthy status || (isCreate ?? false)). issueIds alone never enables. Query key is [issues, issue-trigger-preview, signature]; its two executed issueKeys helper bodies are reused from issue-query proof and checked at queries.ts:192–195. Query closure forwards all five prospective fields. No destructive write is reached.\nTransport: client:1909, POST /api/issues/preview-trigger, route POST /api/issues/preview-trigger, client.ts:1909. previewIssueTrigger body at 1908–1923 uses readOnly:true; includes nonempty issue_ids, truthy is_create:true and truthy assignee_type/assignee_id/status; parseWithFallback uses IssueTriggerPreviewSchema and {triggers:[],total_count:0}. Common fetch/parser seam remains reused evidence, not backend success.\nretry:false, staleTime:0, keepPreviousData without a context restriction. Old verdicts may appear for different ids/create/status/assignee contexts; no isCurrent or success/placeholder/error flag is exported. Missing data yields stable EMPTY and zero; cached/placeholder data can remain visible. isLoading is enabled && query.isLoading, so disabled and background/placeholder fetches do not present initial loading. Errors are not exposed. No claim that signature change is the sole refetch trigger: TanStack scheduling is a library boundary.\nOwn invalidation union is empty. Conservatively, external issues, issueTriggerPreviewAll, or exact-key invalidation can match this observer and possibly refetch the single POST when eligible; no arbitrary mounted observer/global fanout claim. Hook comment denies WS invalidation while key helper comment asserts it; comments do not prove global behavior. Composer proof supplies contrast only: its 300ms debounce and isCurrent guard do not apply here. No child component boundary exists in this hook.\nFinite disposition: whole target source closed for static transport reachability, exactly one possible preview transport, zero own mutations; no runtime/backend/integration guarantee.",
+  "counts": {
+    "possible_transports": 1,
+    "own_mutations": 0
+  },
+  "review": {
+    "status": "bounded-source-reviewed",
+    "limits": "Static source audit only; no backend or global closure claim."
+  },
+  "root_review": {
+    "status": "accepted whole-source transport scope",
+    "checks": "Root read complete 91-line hook and concrete client method. Placeholder verdict retention is source-observed advisory behavior, not a reproduced runtime defect. Hash/tuple validation via integration."
+  }
+}

@@ -1,0 +1,7559 @@
+{
+  "scope": "Actual DownloadAttachment with original generated query row fixtures and isolated storage. Permission/query order, mode selection, missing CloudFront, presign parameters/failure, proxy body and close. Successful CloudFront signing tested separately. Content-Length transport auto-generation excluded; no middleware/schema/live route certification.",
+  "fixtures": [
+    {
+      "Mode": "auto",
+      "Store": "none",
+      "Failure": "",
+      "URL": "http://localhost/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": 0
+    },
+    {
+      "Mode": "auto",
+      "Store": "none",
+      "Failure": "",
+      "URL": "http://localhost/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "HEAD",
+      "TTL": 0
+    },
+    {
+      "Mode": "auto",
+      "Store": "none",
+      "Failure": "",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": 0
+    },
+    {
+      "Mode": "auto",
+      "Store": "none",
+      "Failure": "",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "HEAD",
+      "TTL": 0
+    },
+    {
+      "Mode": "auto",
+      "Store": "plain",
+      "Failure": "",
+      "URL": "http://localhost/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": 0
+    },
+    {
+      "Mode": "auto",
+      "Store": "plain",
+      "Failure": "",
+      "URL": "http://localhost/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "HEAD",
+      "TTL": 0
+    },
+    {
+      "Mode": "auto",
+      "Store": "plain",
+      "Failure": "",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": 0
+    },
+    {
+      "Mode": "auto",
+      "Store": "plain",
+      "Failure": "",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "HEAD",
+      "TTL": 0
+    },
+    {
+      "Mode": "auto",
+      "Store": "presigner",
+      "Failure": "",
+      "URL": "http://localhost/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": 0
+    },
+    {
+      "Mode": "auto",
+      "Store": "presigner",
+      "Failure": "",
+      "URL": "http://localhost/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "HEAD",
+      "TTL": 0
+    },
+    {
+      "Mode": "auto",
+      "Store": "presigner",
+      "Failure": "",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": 0
+    },
+    {
+      "Mode": "auto",
+      "Store": "presigner",
+      "Failure": "",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "HEAD",
+      "TTL": 0
+    },
+    {
+      "Mode": "cloudfront",
+      "Store": "none",
+      "Failure": "",
+      "URL": "http://localhost/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": 0
+    },
+    {
+      "Mode": "cloudfront",
+      "Store": "none",
+      "Failure": "",
+      "URL": "http://localhost/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "HEAD",
+      "TTL": 0
+    },
+    {
+      "Mode": "cloudfront",
+      "Store": "none",
+      "Failure": "",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": 0
+    },
+    {
+      "Mode": "cloudfront",
+      "Store": "none",
+      "Failure": "",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "HEAD",
+      "TTL": 0
+    },
+    {
+      "Mode": "cloudfront",
+      "Store": "plain",
+      "Failure": "",
+      "URL": "http://localhost/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": 0
+    },
+    {
+      "Mode": "cloudfront",
+      "Store": "plain",
+      "Failure": "",
+      "URL": "http://localhost/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "HEAD",
+      "TTL": 0
+    },
+    {
+      "Mode": "cloudfront",
+      "Store": "plain",
+      "Failure": "",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": 0
+    },
+    {
+      "Mode": "cloudfront",
+      "Store": "plain",
+      "Failure": "",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "HEAD",
+      "TTL": 0
+    },
+    {
+      "Mode": "cloudfront",
+      "Store": "presigner",
+      "Failure": "",
+      "URL": "http://localhost/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": 0
+    },
+    {
+      "Mode": "cloudfront",
+      "Store": "presigner",
+      "Failure": "",
+      "URL": "http://localhost/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "HEAD",
+      "TTL": 0
+    },
+    {
+      "Mode": "cloudfront",
+      "Store": "presigner",
+      "Failure": "",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": 0
+    },
+    {
+      "Mode": "cloudfront",
+      "Store": "presigner",
+      "Failure": "",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "HEAD",
+      "TTL": 0
+    },
+    {
+      "Mode": "presign",
+      "Store": "none",
+      "Failure": "",
+      "URL": "http://localhost/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": 0
+    },
+    {
+      "Mode": "presign",
+      "Store": "none",
+      "Failure": "",
+      "URL": "http://localhost/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "HEAD",
+      "TTL": 0
+    },
+    {
+      "Mode": "presign",
+      "Store": "none",
+      "Failure": "",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": 0
+    },
+    {
+      "Mode": "presign",
+      "Store": "none",
+      "Failure": "",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "HEAD",
+      "TTL": 0
+    },
+    {
+      "Mode": "presign",
+      "Store": "plain",
+      "Failure": "",
+      "URL": "http://localhost/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": 0
+    },
+    {
+      "Mode": "presign",
+      "Store": "plain",
+      "Failure": "",
+      "URL": "http://localhost/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "HEAD",
+      "TTL": 0
+    },
+    {
+      "Mode": "presign",
+      "Store": "plain",
+      "Failure": "",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": 0
+    },
+    {
+      "Mode": "presign",
+      "Store": "plain",
+      "Failure": "",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "HEAD",
+      "TTL": 0
+    },
+    {
+      "Mode": "presign",
+      "Store": "presigner",
+      "Failure": "",
+      "URL": "http://localhost/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": 0
+    },
+    {
+      "Mode": "presign",
+      "Store": "presigner",
+      "Failure": "",
+      "URL": "http://localhost/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "HEAD",
+      "TTL": 0
+    },
+    {
+      "Mode": "presign",
+      "Store": "presigner",
+      "Failure": "",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": 0
+    },
+    {
+      "Mode": "presign",
+      "Store": "presigner",
+      "Failure": "",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "HEAD",
+      "TTL": 0
+    },
+    {
+      "Mode": "proxy",
+      "Store": "none",
+      "Failure": "",
+      "URL": "http://localhost/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": 0
+    },
+    {
+      "Mode": "proxy",
+      "Store": "none",
+      "Failure": "",
+      "URL": "http://localhost/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "HEAD",
+      "TTL": 0
+    },
+    {
+      "Mode": "proxy",
+      "Store": "none",
+      "Failure": "",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": 0
+    },
+    {
+      "Mode": "proxy",
+      "Store": "none",
+      "Failure": "",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "HEAD",
+      "TTL": 0
+    },
+    {
+      "Mode": "proxy",
+      "Store": "plain",
+      "Failure": "",
+      "URL": "http://localhost/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": 0
+    },
+    {
+      "Mode": "proxy",
+      "Store": "plain",
+      "Failure": "",
+      "URL": "http://localhost/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "HEAD",
+      "TTL": 0
+    },
+    {
+      "Mode": "proxy",
+      "Store": "plain",
+      "Failure": "",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": 0
+    },
+    {
+      "Mode": "proxy",
+      "Store": "plain",
+      "Failure": "",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "HEAD",
+      "TTL": 0
+    },
+    {
+      "Mode": "proxy",
+      "Store": "presigner",
+      "Failure": "",
+      "URL": "http://localhost/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": 0
+    },
+    {
+      "Mode": "proxy",
+      "Store": "presigner",
+      "Failure": "",
+      "URL": "http://localhost/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "HEAD",
+      "TTL": 0
+    },
+    {
+      "Mode": "proxy",
+      "Store": "presigner",
+      "Failure": "",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": 0
+    },
+    {
+      "Mode": "proxy",
+      "Store": "presigner",
+      "Failure": "",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "HEAD",
+      "TTL": 0
+    },
+    {
+      "Mode": "invalid",
+      "Store": "none",
+      "Failure": "",
+      "URL": "http://localhost/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": 0
+    },
+    {
+      "Mode": "invalid",
+      "Store": "none",
+      "Failure": "",
+      "URL": "http://localhost/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "HEAD",
+      "TTL": 0
+    },
+    {
+      "Mode": "invalid",
+      "Store": "none",
+      "Failure": "",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": 0
+    },
+    {
+      "Mode": "invalid",
+      "Store": "none",
+      "Failure": "",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "HEAD",
+      "TTL": 0
+    },
+    {
+      "Mode": "invalid",
+      "Store": "plain",
+      "Failure": "",
+      "URL": "http://localhost/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": 0
+    },
+    {
+      "Mode": "invalid",
+      "Store": "plain",
+      "Failure": "",
+      "URL": "http://localhost/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "HEAD",
+      "TTL": 0
+    },
+    {
+      "Mode": "invalid",
+      "Store": "plain",
+      "Failure": "",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": 0
+    },
+    {
+      "Mode": "invalid",
+      "Store": "plain",
+      "Failure": "",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "HEAD",
+      "TTL": 0
+    },
+    {
+      "Mode": "invalid",
+      "Store": "presigner",
+      "Failure": "",
+      "URL": "http://localhost/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": 0
+    },
+    {
+      "Mode": "invalid",
+      "Store": "presigner",
+      "Failure": "",
+      "URL": "http://localhost/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "HEAD",
+      "TTL": 0
+    },
+    {
+      "Mode": "invalid",
+      "Store": "presigner",
+      "Failure": "",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": 0
+    },
+    {
+      "Mode": "invalid",
+      "Store": "presigner",
+      "Failure": "",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "HEAD",
+      "TTL": 0
+    },
+    {
+      "Mode": "auto",
+      "Store": "none",
+      "Failure": "attachment",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": -1
+    },
+    {
+      "Mode": "auto",
+      "Store": "none",
+      "Failure": "attachment",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": 5500000000
+    },
+    {
+      "Mode": "auto",
+      "Store": "none",
+      "Failure": "attachment-missing",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": -1
+    },
+    {
+      "Mode": "auto",
+      "Store": "none",
+      "Failure": "attachment-missing",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": 5500000000
+    },
+    {
+      "Mode": "auto",
+      "Store": "none",
+      "Failure": "member",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": -1
+    },
+    {
+      "Mode": "auto",
+      "Store": "none",
+      "Failure": "member",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": 5500000000
+    },
+    {
+      "Mode": "auto",
+      "Store": "none",
+      "Failure": "member-missing",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": -1
+    },
+    {
+      "Mode": "auto",
+      "Store": "none",
+      "Failure": "member-missing",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": 5500000000
+    },
+    {
+      "Mode": "auto",
+      "Store": "none",
+      "Failure": "presign",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": -1
+    },
+    {
+      "Mode": "auto",
+      "Store": "none",
+      "Failure": "presign",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": 5500000000
+    },
+    {
+      "Mode": "auto",
+      "Store": "none",
+      "Failure": "presign-cancel",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": -1
+    },
+    {
+      "Mode": "auto",
+      "Store": "none",
+      "Failure": "presign-cancel",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": 5500000000
+    },
+    {
+      "Mode": "auto",
+      "Store": "presigner",
+      "Failure": "attachment",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": -1
+    },
+    {
+      "Mode": "auto",
+      "Store": "presigner",
+      "Failure": "attachment",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": 5500000000
+    },
+    {
+      "Mode": "auto",
+      "Store": "presigner",
+      "Failure": "attachment-missing",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": -1
+    },
+    {
+      "Mode": "auto",
+      "Store": "presigner",
+      "Failure": "attachment-missing",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": 5500000000
+    },
+    {
+      "Mode": "auto",
+      "Store": "presigner",
+      "Failure": "member",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": -1
+    },
+    {
+      "Mode": "auto",
+      "Store": "presigner",
+      "Failure": "member",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": 5500000000
+    },
+    {
+      "Mode": "auto",
+      "Store": "presigner",
+      "Failure": "member-missing",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": -1
+    },
+    {
+      "Mode": "auto",
+      "Store": "presigner",
+      "Failure": "member-missing",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": 5500000000
+    },
+    {
+      "Mode": "auto",
+      "Store": "presigner",
+      "Failure": "presign",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": -1
+    },
+    {
+      "Mode": "auto",
+      "Store": "presigner",
+      "Failure": "presign",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": 5500000000
+    },
+    {
+      "Mode": "auto",
+      "Store": "presigner",
+      "Failure": "presign-cancel",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": -1
+    },
+    {
+      "Mode": "auto",
+      "Store": "presigner",
+      "Failure": "presign-cancel",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": 5500000000
+    },
+    {
+      "Mode": "presign",
+      "Store": "none",
+      "Failure": "attachment",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": -1
+    },
+    {
+      "Mode": "presign",
+      "Store": "none",
+      "Failure": "attachment",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": 5500000000
+    },
+    {
+      "Mode": "presign",
+      "Store": "none",
+      "Failure": "attachment-missing",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": -1
+    },
+    {
+      "Mode": "presign",
+      "Store": "none",
+      "Failure": "attachment-missing",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": 5500000000
+    },
+    {
+      "Mode": "presign",
+      "Store": "none",
+      "Failure": "member",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": -1
+    },
+    {
+      "Mode": "presign",
+      "Store": "none",
+      "Failure": "member",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": 5500000000
+    },
+    {
+      "Mode": "presign",
+      "Store": "none",
+      "Failure": "member-missing",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": -1
+    },
+    {
+      "Mode": "presign",
+      "Store": "none",
+      "Failure": "member-missing",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": 5500000000
+    },
+    {
+      "Mode": "presign",
+      "Store": "none",
+      "Failure": "presign",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": -1
+    },
+    {
+      "Mode": "presign",
+      "Store": "none",
+      "Failure": "presign",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": 5500000000
+    },
+    {
+      "Mode": "presign",
+      "Store": "none",
+      "Failure": "presign-cancel",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": -1
+    },
+    {
+      "Mode": "presign",
+      "Store": "none",
+      "Failure": "presign-cancel",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": 5500000000
+    },
+    {
+      "Mode": "presign",
+      "Store": "presigner",
+      "Failure": "attachment",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": -1
+    },
+    {
+      "Mode": "presign",
+      "Store": "presigner",
+      "Failure": "attachment",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": 5500000000
+    },
+    {
+      "Mode": "presign",
+      "Store": "presigner",
+      "Failure": "attachment-missing",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": -1
+    },
+    {
+      "Mode": "presign",
+      "Store": "presigner",
+      "Failure": "attachment-missing",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": 5500000000
+    },
+    {
+      "Mode": "presign",
+      "Store": "presigner",
+      "Failure": "member",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": -1
+    },
+    {
+      "Mode": "presign",
+      "Store": "presigner",
+      "Failure": "member",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": 5500000000
+    },
+    {
+      "Mode": "presign",
+      "Store": "presigner",
+      "Failure": "member-missing",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": -1
+    },
+    {
+      "Mode": "presign",
+      "Store": "presigner",
+      "Failure": "member-missing",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": 5500000000
+    },
+    {
+      "Mode": "presign",
+      "Store": "presigner",
+      "Failure": "presign",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": -1
+    },
+    {
+      "Mode": "presign",
+      "Store": "presigner",
+      "Failure": "presign",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": 5500000000
+    },
+    {
+      "Mode": "presign",
+      "Store": "presigner",
+      "Failure": "presign-cancel",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": -1
+    },
+    {
+      "Mode": "presign",
+      "Store": "presigner",
+      "Failure": "presign-cancel",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": 5500000000
+    },
+    {
+      "Mode": "proxy",
+      "Store": "none",
+      "Failure": "attachment",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": -1
+    },
+    {
+      "Mode": "proxy",
+      "Store": "none",
+      "Failure": "attachment",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": 5500000000
+    },
+    {
+      "Mode": "proxy",
+      "Store": "none",
+      "Failure": "attachment-missing",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": -1
+    },
+    {
+      "Mode": "proxy",
+      "Store": "none",
+      "Failure": "attachment-missing",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": 5500000000
+    },
+    {
+      "Mode": "proxy",
+      "Store": "none",
+      "Failure": "member",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": -1
+    },
+    {
+      "Mode": "proxy",
+      "Store": "none",
+      "Failure": "member",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": 5500000000
+    },
+    {
+      "Mode": "proxy",
+      "Store": "none",
+      "Failure": "member-missing",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": -1
+    },
+    {
+      "Mode": "proxy",
+      "Store": "none",
+      "Failure": "member-missing",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": 5500000000
+    },
+    {
+      "Mode": "proxy",
+      "Store": "none",
+      "Failure": "presign",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": -1
+    },
+    {
+      "Mode": "proxy",
+      "Store": "none",
+      "Failure": "presign",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": 5500000000
+    },
+    {
+      "Mode": "proxy",
+      "Store": "none",
+      "Failure": "presign-cancel",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": -1
+    },
+    {
+      "Mode": "proxy",
+      "Store": "none",
+      "Failure": "presign-cancel",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": 5500000000
+    },
+    {
+      "Mode": "proxy",
+      "Store": "presigner",
+      "Failure": "attachment",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": -1
+    },
+    {
+      "Mode": "proxy",
+      "Store": "presigner",
+      "Failure": "attachment",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": 5500000000
+    },
+    {
+      "Mode": "proxy",
+      "Store": "presigner",
+      "Failure": "attachment-missing",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": -1
+    },
+    {
+      "Mode": "proxy",
+      "Store": "presigner",
+      "Failure": "attachment-missing",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": 5500000000
+    },
+    {
+      "Mode": "proxy",
+      "Store": "presigner",
+      "Failure": "member",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": -1
+    },
+    {
+      "Mode": "proxy",
+      "Store": "presigner",
+      "Failure": "member",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": 5500000000
+    },
+    {
+      "Mode": "proxy",
+      "Store": "presigner",
+      "Failure": "member-missing",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": -1
+    },
+    {
+      "Mode": "proxy",
+      "Store": "presigner",
+      "Failure": "member-missing",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": 5500000000
+    },
+    {
+      "Mode": "proxy",
+      "Store": "presigner",
+      "Failure": "presign",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": -1
+    },
+    {
+      "Mode": "proxy",
+      "Store": "presigner",
+      "Failure": "presign",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": 5500000000
+    },
+    {
+      "Mode": "proxy",
+      "Store": "presigner",
+      "Failure": "presign-cancel",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": -1
+    },
+    {
+      "Mode": "proxy",
+      "Store": "presigner",
+      "Failure": "presign-cancel",
+      "URL": "https://cdn.example/file",
+      "Filename": "\u62a5\u544a.pdf",
+      "ContentType": "application/pdf",
+      "Method": "GET",
+      "TTL": 5500000000
+    }
+  ],
+  "execution_batch_size": 32,
+  "go": [
+    {
+      "body": "{\"code\":\"storage_not_configured\",\"error\":\"storage not configured\"}\n",
+      "calls": [],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 403
+    },
+    {
+      "body": "{\"code\":\"storage_not_configured\",\"error\":\"storage not configured\"}\n",
+      "calls": [],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 403
+    },
+    {
+      "body": "{\"code\":\"storage_not_configured\",\"error\":\"storage not configured\"}\n",
+      "calls": [],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 403
+    },
+    {
+      "body": "{\"code\":\"storage_not_configured\",\"error\":\"storage not configured\"}\n",
+      "calls": [],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 403
+    },
+    {
+      "body": "abc",
+      "calls": [
+        [
+          "key",
+          "http://localhost/file"
+        ],
+        [
+          "read",
+          "key"
+        ]
+      ],
+      "closed": true,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "accept-ranges": "bytes",
+        "cache-control": "no-store",
+        "content-disposition": "inline; filename=\"__.pdf\"; filename*=UTF-8''%E6%8A%A5%E5%91%8A.pdf",
+        "content-security-policy": "default-src 'none'; img-src 'self' data:; media-src 'self'; frame-ancestors 'self' https://app.example; object-src 'none'; base-uri 'none'; form-action 'none'",
+        "content-type": "application/pdf",
+        "x-content-type-options": "nosniff"
+      },
+      "status": 200
+    },
+    {
+      "body": "",
+      "calls": [
+        [
+          "key",
+          "http://localhost/file"
+        ],
+        [
+          "read",
+          "key"
+        ]
+      ],
+      "closed": true,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "accept-ranges": "bytes",
+        "cache-control": "no-store",
+        "content-disposition": "inline; filename=\"__.pdf\"; filename*=UTF-8''%E6%8A%A5%E5%91%8A.pdf",
+        "content-security-policy": "default-src 'none'; img-src 'self' data:; media-src 'self'; frame-ancestors 'self' https://app.example; object-src 'none'; base-uri 'none'; form-action 'none'",
+        "content-type": "application/pdf",
+        "x-content-type-options": "nosniff"
+      },
+      "status": 200
+    },
+    {
+      "body": "abc",
+      "calls": [
+        [
+          "key",
+          "https://cdn.example/file"
+        ],
+        [
+          "read",
+          "key"
+        ]
+      ],
+      "closed": true,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "accept-ranges": "bytes",
+        "cache-control": "no-store",
+        "content-disposition": "inline; filename=\"__.pdf\"; filename*=UTF-8''%E6%8A%A5%E5%91%8A.pdf",
+        "content-security-policy": "default-src 'none'; img-src 'self' data:; media-src 'self'; frame-ancestors 'self' https://app.example; object-src 'none'; base-uri 'none'; form-action 'none'",
+        "content-type": "application/pdf",
+        "x-content-type-options": "nosniff"
+      },
+      "status": 200
+    },
+    {
+      "body": "",
+      "calls": [
+        [
+          "key",
+          "https://cdn.example/file"
+        ],
+        [
+          "read",
+          "key"
+        ]
+      ],
+      "closed": true,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "accept-ranges": "bytes",
+        "cache-control": "no-store",
+        "content-disposition": "inline; filename=\"__.pdf\"; filename*=UTF-8''%E6%8A%A5%E5%91%8A.pdf",
+        "content-security-policy": "default-src 'none'; img-src 'self' data:; media-src 'self'; frame-ancestors 'self' https://app.example; object-src 'none'; base-uri 'none'; form-action 'none'",
+        "content-type": "application/pdf",
+        "x-content-type-options": "nosniff"
+      },
+      "status": 200
+    },
+    {
+      "body": "abc",
+      "calls": [
+        [
+          "key",
+          "http://localhost/file"
+        ],
+        [
+          "read",
+          "key"
+        ]
+      ],
+      "closed": true,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "accept-ranges": "bytes",
+        "cache-control": "no-store",
+        "content-disposition": "inline; filename=\"__.pdf\"; filename*=UTF-8''%E6%8A%A5%E5%91%8A.pdf",
+        "content-security-policy": "default-src 'none'; img-src 'self' data:; media-src 'self'; frame-ancestors 'self' https://app.example; object-src 'none'; base-uri 'none'; form-action 'none'",
+        "content-type": "application/pdf",
+        "x-content-type-options": "nosniff"
+      },
+      "status": 200
+    },
+    {
+      "body": "",
+      "calls": [
+        [
+          "key",
+          "http://localhost/file"
+        ],
+        [
+          "read",
+          "key"
+        ]
+      ],
+      "closed": true,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "accept-ranges": "bytes",
+        "cache-control": "no-store",
+        "content-disposition": "inline; filename=\"__.pdf\"; filename*=UTF-8''%E6%8A%A5%E5%91%8A.pdf",
+        "content-security-policy": "default-src 'none'; img-src 'self' data:; media-src 'self'; frame-ancestors 'self' https://app.example; object-src 'none'; base-uri 'none'; form-action 'none'",
+        "content-type": "application/pdf",
+        "x-content-type-options": "nosniff"
+      },
+      "status": 200
+    },
+    {
+      "body": "<a href=\"https://cdn.example/signed?a=1&amp;b=2\">Found</a>.\n\n",
+      "calls": [
+        [
+          "key",
+          "https://cdn.example/file"
+        ],
+        [
+          "presign",
+          "key",
+          1800000000000,
+          "attachment; filename=\"__.pdf\"; filename*=UTF-8''%E6%8A%A5%E5%91%8A.pdf"
+        ]
+      ],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "content-security-policy": "default-src 'none'; img-src 'self' data:; media-src 'self'; frame-ancestors 'self' https://app.example; object-src 'none'; base-uri 'none'; form-action 'none'",
+        "content-type": "text/html; charset=utf-8",
+        "location": "https://cdn.example/signed?a=1&b=2"
+      },
+      "status": 302
+    },
+    {
+      "body": "",
+      "calls": [
+        [
+          "key",
+          "https://cdn.example/file"
+        ],
+        [
+          "presign",
+          "key",
+          1800000000000,
+          "attachment; filename=\"__.pdf\"; filename*=UTF-8''%E6%8A%A5%E5%91%8A.pdf"
+        ]
+      ],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "content-security-policy": "default-src 'none'; img-src 'self' data:; media-src 'self'; frame-ancestors 'self' https://app.example; object-src 'none'; base-uri 'none'; form-action 'none'",
+        "content-type": "text/html; charset=utf-8",
+        "location": "https://cdn.example/signed?a=1&b=2"
+      },
+      "status": 302
+    },
+    {
+      "body": "{\"code\":\"storage_not_configured\",\"error\":\"storage not configured\"}\n",
+      "calls": [],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 403
+    },
+    {
+      "body": "{\"code\":\"storage_not_configured\",\"error\":\"storage not configured\"}\n",
+      "calls": [],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 403
+    },
+    {
+      "body": "{\"code\":\"storage_not_configured\",\"error\":\"storage not configured\"}\n",
+      "calls": [],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 403
+    },
+    {
+      "body": "{\"code\":\"storage_not_configured\",\"error\":\"storage not configured\"}\n",
+      "calls": [],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 403
+    },
+    {
+      "body": "{\"error\":\"cloudfront attachment downloads are not configured\"}\n",
+      "calls": [
+        [
+          "key",
+          "http://localhost/file"
+        ]
+      ],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 500
+    },
+    {
+      "body": "{\"error\":\"cloudfront attachment downloads are not configured\"}\n",
+      "calls": [
+        [
+          "key",
+          "http://localhost/file"
+        ]
+      ],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 500
+    },
+    {
+      "body": "{\"error\":\"cloudfront attachment downloads are not configured\"}\n",
+      "calls": [
+        [
+          "key",
+          "https://cdn.example/file"
+        ]
+      ],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 500
+    },
+    {
+      "body": "{\"error\":\"cloudfront attachment downloads are not configured\"}\n",
+      "calls": [
+        [
+          "key",
+          "https://cdn.example/file"
+        ]
+      ],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 500
+    },
+    {
+      "body": "{\"error\":\"cloudfront attachment downloads are not configured\"}\n",
+      "calls": [
+        [
+          "key",
+          "http://localhost/file"
+        ]
+      ],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 500
+    },
+    {
+      "body": "{\"error\":\"cloudfront attachment downloads are not configured\"}\n",
+      "calls": [
+        [
+          "key",
+          "http://localhost/file"
+        ]
+      ],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 500
+    },
+    {
+      "body": "{\"error\":\"cloudfront attachment downloads are not configured\"}\n",
+      "calls": [
+        [
+          "key",
+          "https://cdn.example/file"
+        ]
+      ],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 500
+    },
+    {
+      "body": "{\"error\":\"cloudfront attachment downloads are not configured\"}\n",
+      "calls": [
+        [
+          "key",
+          "https://cdn.example/file"
+        ]
+      ],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 500
+    },
+    {
+      "body": "{\"code\":\"storage_not_configured\",\"error\":\"storage not configured\"}\n",
+      "calls": [],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 403
+    },
+    {
+      "body": "{\"code\":\"storage_not_configured\",\"error\":\"storage not configured\"}\n",
+      "calls": [],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 403
+    },
+    {
+      "body": "{\"code\":\"storage_not_configured\",\"error\":\"storage not configured\"}\n",
+      "calls": [],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 403
+    },
+    {
+      "body": "{\"code\":\"storage_not_configured\",\"error\":\"storage not configured\"}\n",
+      "calls": [],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 403
+    },
+    {
+      "body": "{\"error\":\"attachment storage does not support presigned downloads\"}\n",
+      "calls": [
+        [
+          "key",
+          "http://localhost/file"
+        ]
+      ],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 500
+    },
+    {
+      "body": "{\"error\":\"attachment storage does not support presigned downloads\"}\n",
+      "calls": [
+        [
+          "key",
+          "http://localhost/file"
+        ]
+      ],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 500
+    },
+    {
+      "body": "{\"error\":\"attachment storage does not support presigned downloads\"}\n",
+      "calls": [
+        [
+          "key",
+          "https://cdn.example/file"
+        ]
+      ],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 500
+    },
+    {
+      "body": "{\"error\":\"attachment storage does not support presigned downloads\"}\n",
+      "calls": [
+        [
+          "key",
+          "https://cdn.example/file"
+        ]
+      ],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 500
+    },
+    {
+      "body": "<a href=\"https://cdn.example/signed?a=1&amp;b=2\">Found</a>.\n\n",
+      "calls": [
+        [
+          "key",
+          "http://localhost/file"
+        ],
+        [
+          "presign",
+          "key",
+          1800000000000,
+          "attachment; filename=\"__.pdf\"; filename*=UTF-8''%E6%8A%A5%E5%91%8A.pdf"
+        ]
+      ],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "content-security-policy": "default-src 'none'; img-src 'self' data:; media-src 'self'; frame-ancestors 'self' https://app.example; object-src 'none'; base-uri 'none'; form-action 'none'",
+        "content-type": "text/html; charset=utf-8",
+        "location": "https://cdn.example/signed?a=1&b=2"
+      },
+      "status": 302
+    },
+    {
+      "body": "",
+      "calls": [
+        [
+          "key",
+          "http://localhost/file"
+        ],
+        [
+          "presign",
+          "key",
+          1800000000000,
+          "attachment; filename=\"__.pdf\"; filename*=UTF-8''%E6%8A%A5%E5%91%8A.pdf"
+        ]
+      ],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "content-security-policy": "default-src 'none'; img-src 'self' data:; media-src 'self'; frame-ancestors 'self' https://app.example; object-src 'none'; base-uri 'none'; form-action 'none'",
+        "content-type": "text/html; charset=utf-8",
+        "location": "https://cdn.example/signed?a=1&b=2"
+      },
+      "status": 302
+    },
+    {
+      "body": "<a href=\"https://cdn.example/signed?a=1&amp;b=2\">Found</a>.\n\n",
+      "calls": [
+        [
+          "key",
+          "https://cdn.example/file"
+        ],
+        [
+          "presign",
+          "key",
+          1800000000000,
+          "attachment; filename=\"__.pdf\"; filename*=UTF-8''%E6%8A%A5%E5%91%8A.pdf"
+        ]
+      ],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "content-security-policy": "default-src 'none'; img-src 'self' data:; media-src 'self'; frame-ancestors 'self' https://app.example; object-src 'none'; base-uri 'none'; form-action 'none'",
+        "content-type": "text/html; charset=utf-8",
+        "location": "https://cdn.example/signed?a=1&b=2"
+      },
+      "status": 302
+    },
+    {
+      "body": "",
+      "calls": [
+        [
+          "key",
+          "https://cdn.example/file"
+        ],
+        [
+          "presign",
+          "key",
+          1800000000000,
+          "attachment; filename=\"__.pdf\"; filename*=UTF-8''%E6%8A%A5%E5%91%8A.pdf"
+        ]
+      ],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "content-security-policy": "default-src 'none'; img-src 'self' data:; media-src 'self'; frame-ancestors 'self' https://app.example; object-src 'none'; base-uri 'none'; form-action 'none'",
+        "content-type": "text/html; charset=utf-8",
+        "location": "https://cdn.example/signed?a=1&b=2"
+      },
+      "status": 302
+    },
+    {
+      "body": "{\"code\":\"storage_not_configured\",\"error\":\"storage not configured\"}\n",
+      "calls": [],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 403
+    },
+    {
+      "body": "{\"code\":\"storage_not_configured\",\"error\":\"storage not configured\"}\n",
+      "calls": [],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 403
+    },
+    {
+      "body": "{\"code\":\"storage_not_configured\",\"error\":\"storage not configured\"}\n",
+      "calls": [],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 403
+    },
+    {
+      "body": "{\"code\":\"storage_not_configured\",\"error\":\"storage not configured\"}\n",
+      "calls": [],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 403
+    },
+    {
+      "body": "abc",
+      "calls": [
+        [
+          "key",
+          "http://localhost/file"
+        ],
+        [
+          "read",
+          "key"
+        ]
+      ],
+      "closed": true,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "accept-ranges": "bytes",
+        "cache-control": "no-store",
+        "content-disposition": "inline; filename=\"__.pdf\"; filename*=UTF-8''%E6%8A%A5%E5%91%8A.pdf",
+        "content-security-policy": "default-src 'none'; img-src 'self' data:; media-src 'self'; frame-ancestors 'self' https://app.example; object-src 'none'; base-uri 'none'; form-action 'none'",
+        "content-type": "application/pdf",
+        "x-content-type-options": "nosniff"
+      },
+      "status": 200
+    },
+    {
+      "body": "",
+      "calls": [
+        [
+          "key",
+          "http://localhost/file"
+        ],
+        [
+          "read",
+          "key"
+        ]
+      ],
+      "closed": true,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "accept-ranges": "bytes",
+        "cache-control": "no-store",
+        "content-disposition": "inline; filename=\"__.pdf\"; filename*=UTF-8''%E6%8A%A5%E5%91%8A.pdf",
+        "content-security-policy": "default-src 'none'; img-src 'self' data:; media-src 'self'; frame-ancestors 'self' https://app.example; object-src 'none'; base-uri 'none'; form-action 'none'",
+        "content-type": "application/pdf",
+        "x-content-type-options": "nosniff"
+      },
+      "status": 200
+    },
+    {
+      "body": "abc",
+      "calls": [
+        [
+          "key",
+          "https://cdn.example/file"
+        ],
+        [
+          "read",
+          "key"
+        ]
+      ],
+      "closed": true,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "accept-ranges": "bytes",
+        "cache-control": "no-store",
+        "content-disposition": "inline; filename=\"__.pdf\"; filename*=UTF-8''%E6%8A%A5%E5%91%8A.pdf",
+        "content-security-policy": "default-src 'none'; img-src 'self' data:; media-src 'self'; frame-ancestors 'self' https://app.example; object-src 'none'; base-uri 'none'; form-action 'none'",
+        "content-type": "application/pdf",
+        "x-content-type-options": "nosniff"
+      },
+      "status": 200
+    },
+    {
+      "body": "",
+      "calls": [
+        [
+          "key",
+          "https://cdn.example/file"
+        ],
+        [
+          "read",
+          "key"
+        ]
+      ],
+      "closed": true,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "accept-ranges": "bytes",
+        "cache-control": "no-store",
+        "content-disposition": "inline; filename=\"__.pdf\"; filename*=UTF-8''%E6%8A%A5%E5%91%8A.pdf",
+        "content-security-policy": "default-src 'none'; img-src 'self' data:; media-src 'self'; frame-ancestors 'self' https://app.example; object-src 'none'; base-uri 'none'; form-action 'none'",
+        "content-type": "application/pdf",
+        "x-content-type-options": "nosniff"
+      },
+      "status": 200
+    },
+    {
+      "body": "abc",
+      "calls": [
+        [
+          "key",
+          "http://localhost/file"
+        ],
+        [
+          "read",
+          "key"
+        ]
+      ],
+      "closed": true,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "accept-ranges": "bytes",
+        "cache-control": "no-store",
+        "content-disposition": "inline; filename=\"__.pdf\"; filename*=UTF-8''%E6%8A%A5%E5%91%8A.pdf",
+        "content-security-policy": "default-src 'none'; img-src 'self' data:; media-src 'self'; frame-ancestors 'self' https://app.example; object-src 'none'; base-uri 'none'; form-action 'none'",
+        "content-type": "application/pdf",
+        "x-content-type-options": "nosniff"
+      },
+      "status": 200
+    },
+    {
+      "body": "",
+      "calls": [
+        [
+          "key",
+          "http://localhost/file"
+        ],
+        [
+          "read",
+          "key"
+        ]
+      ],
+      "closed": true,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "accept-ranges": "bytes",
+        "cache-control": "no-store",
+        "content-disposition": "inline; filename=\"__.pdf\"; filename*=UTF-8''%E6%8A%A5%E5%91%8A.pdf",
+        "content-security-policy": "default-src 'none'; img-src 'self' data:; media-src 'self'; frame-ancestors 'self' https://app.example; object-src 'none'; base-uri 'none'; form-action 'none'",
+        "content-type": "application/pdf",
+        "x-content-type-options": "nosniff"
+      },
+      "status": 200
+    },
+    {
+      "body": "abc",
+      "calls": [
+        [
+          "key",
+          "https://cdn.example/file"
+        ],
+        [
+          "read",
+          "key"
+        ]
+      ],
+      "closed": true,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "accept-ranges": "bytes",
+        "cache-control": "no-store",
+        "content-disposition": "inline; filename=\"__.pdf\"; filename*=UTF-8''%E6%8A%A5%E5%91%8A.pdf",
+        "content-security-policy": "default-src 'none'; img-src 'self' data:; media-src 'self'; frame-ancestors 'self' https://app.example; object-src 'none'; base-uri 'none'; form-action 'none'",
+        "content-type": "application/pdf",
+        "x-content-type-options": "nosniff"
+      },
+      "status": 200
+    },
+    {
+      "body": "",
+      "calls": [
+        [
+          "key",
+          "https://cdn.example/file"
+        ],
+        [
+          "read",
+          "key"
+        ]
+      ],
+      "closed": true,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "accept-ranges": "bytes",
+        "cache-control": "no-store",
+        "content-disposition": "inline; filename=\"__.pdf\"; filename*=UTF-8''%E6%8A%A5%E5%91%8A.pdf",
+        "content-security-policy": "default-src 'none'; img-src 'self' data:; media-src 'self'; frame-ancestors 'self' https://app.example; object-src 'none'; base-uri 'none'; form-action 'none'",
+        "content-type": "application/pdf",
+        "x-content-type-options": "nosniff"
+      },
+      "status": 200
+    },
+    {
+      "body": "{\"code\":\"storage_not_configured\",\"error\":\"storage not configured\"}\n",
+      "calls": [],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 403
+    },
+    {
+      "body": "{\"code\":\"storage_not_configured\",\"error\":\"storage not configured\"}\n",
+      "calls": [],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 403
+    },
+    {
+      "body": "{\"code\":\"storage_not_configured\",\"error\":\"storage not configured\"}\n",
+      "calls": [],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 403
+    },
+    {
+      "body": "{\"code\":\"storage_not_configured\",\"error\":\"storage not configured\"}\n",
+      "calls": [],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 403
+    },
+    {
+      "body": "abc",
+      "calls": [
+        [
+          "key",
+          "http://localhost/file"
+        ],
+        [
+          "read",
+          "key"
+        ]
+      ],
+      "closed": true,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "accept-ranges": "bytes",
+        "cache-control": "no-store",
+        "content-disposition": "inline; filename=\"__.pdf\"; filename*=UTF-8''%E6%8A%A5%E5%91%8A.pdf",
+        "content-security-policy": "default-src 'none'; img-src 'self' data:; media-src 'self'; frame-ancestors 'self' https://app.example; object-src 'none'; base-uri 'none'; form-action 'none'",
+        "content-type": "application/pdf",
+        "x-content-type-options": "nosniff"
+      },
+      "status": 200
+    },
+    {
+      "body": "",
+      "calls": [
+        [
+          "key",
+          "http://localhost/file"
+        ],
+        [
+          "read",
+          "key"
+        ]
+      ],
+      "closed": true,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "accept-ranges": "bytes",
+        "cache-control": "no-store",
+        "content-disposition": "inline; filename=\"__.pdf\"; filename*=UTF-8''%E6%8A%A5%E5%91%8A.pdf",
+        "content-security-policy": "default-src 'none'; img-src 'self' data:; media-src 'self'; frame-ancestors 'self' https://app.example; object-src 'none'; base-uri 'none'; form-action 'none'",
+        "content-type": "application/pdf",
+        "x-content-type-options": "nosniff"
+      },
+      "status": 200
+    },
+    {
+      "body": "abc",
+      "calls": [
+        [
+          "key",
+          "https://cdn.example/file"
+        ],
+        [
+          "read",
+          "key"
+        ]
+      ],
+      "closed": true,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "accept-ranges": "bytes",
+        "cache-control": "no-store",
+        "content-disposition": "inline; filename=\"__.pdf\"; filename*=UTF-8''%E6%8A%A5%E5%91%8A.pdf",
+        "content-security-policy": "default-src 'none'; img-src 'self' data:; media-src 'self'; frame-ancestors 'self' https://app.example; object-src 'none'; base-uri 'none'; form-action 'none'",
+        "content-type": "application/pdf",
+        "x-content-type-options": "nosniff"
+      },
+      "status": 200
+    },
+    {
+      "body": "",
+      "calls": [
+        [
+          "key",
+          "https://cdn.example/file"
+        ],
+        [
+          "read",
+          "key"
+        ]
+      ],
+      "closed": true,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "accept-ranges": "bytes",
+        "cache-control": "no-store",
+        "content-disposition": "inline; filename=\"__.pdf\"; filename*=UTF-8''%E6%8A%A5%E5%91%8A.pdf",
+        "content-security-policy": "default-src 'none'; img-src 'self' data:; media-src 'self'; frame-ancestors 'self' https://app.example; object-src 'none'; base-uri 'none'; form-action 'none'",
+        "content-type": "application/pdf",
+        "x-content-type-options": "nosniff"
+      },
+      "status": 200
+    },
+    {
+      "body": "abc",
+      "calls": [
+        [
+          "key",
+          "http://localhost/file"
+        ],
+        [
+          "read",
+          "key"
+        ]
+      ],
+      "closed": true,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "accept-ranges": "bytes",
+        "cache-control": "no-store",
+        "content-disposition": "inline; filename=\"__.pdf\"; filename*=UTF-8''%E6%8A%A5%E5%91%8A.pdf",
+        "content-security-policy": "default-src 'none'; img-src 'self' data:; media-src 'self'; frame-ancestors 'self' https://app.example; object-src 'none'; base-uri 'none'; form-action 'none'",
+        "content-type": "application/pdf",
+        "x-content-type-options": "nosniff"
+      },
+      "status": 200
+    },
+    {
+      "body": "",
+      "calls": [
+        [
+          "key",
+          "http://localhost/file"
+        ],
+        [
+          "read",
+          "key"
+        ]
+      ],
+      "closed": true,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "accept-ranges": "bytes",
+        "cache-control": "no-store",
+        "content-disposition": "inline; filename=\"__.pdf\"; filename*=UTF-8''%E6%8A%A5%E5%91%8A.pdf",
+        "content-security-policy": "default-src 'none'; img-src 'self' data:; media-src 'self'; frame-ancestors 'self' https://app.example; object-src 'none'; base-uri 'none'; form-action 'none'",
+        "content-type": "application/pdf",
+        "x-content-type-options": "nosniff"
+      },
+      "status": 200
+    },
+    {
+      "body": "<a href=\"https://cdn.example/signed?a=1&amp;b=2\">Found</a>.\n\n",
+      "calls": [
+        [
+          "key",
+          "https://cdn.example/file"
+        ],
+        [
+          "presign",
+          "key",
+          1800000000000,
+          "attachment; filename=\"__.pdf\"; filename*=UTF-8''%E6%8A%A5%E5%91%8A.pdf"
+        ]
+      ],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "content-security-policy": "default-src 'none'; img-src 'self' data:; media-src 'self'; frame-ancestors 'self' https://app.example; object-src 'none'; base-uri 'none'; form-action 'none'",
+        "content-type": "text/html; charset=utf-8",
+        "location": "https://cdn.example/signed?a=1&b=2"
+      },
+      "status": 302
+    },
+    {
+      "body": "",
+      "calls": [
+        [
+          "key",
+          "https://cdn.example/file"
+        ],
+        [
+          "presign",
+          "key",
+          1800000000000,
+          "attachment; filename=\"__.pdf\"; filename*=UTF-8''%E6%8A%A5%E5%91%8A.pdf"
+        ]
+      ],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "content-security-policy": "default-src 'none'; img-src 'self' data:; media-src 'self'; frame-ancestors 'self' https://app.example; object-src 'none'; base-uri 'none'; form-action 'none'",
+        "content-type": "text/html; charset=utf-8",
+        "location": "https://cdn.example/signed?a=1&b=2"
+      },
+      "status": 302
+    },
+    {
+      "body": "{\"error\":\"attachment not found\"}\n",
+      "calls": [],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 404
+    },
+    {
+      "body": "{\"error\":\"attachment not found\"}\n",
+      "calls": [],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 404
+    },
+    {
+      "body": "{\"error\":\"attachment not found\"}\n",
+      "calls": [],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 404
+    },
+    {
+      "body": "{\"error\":\"attachment not found\"}\n",
+      "calls": [],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 404
+    },
+    {
+      "body": "{\"error\":\"attachment not found\"}\n",
+      "calls": [],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 404
+    },
+    {
+      "body": "{\"error\":\"attachment not found\"}\n",
+      "calls": [],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 404
+    },
+    {
+      "body": "{\"error\":\"attachment not found\"}\n",
+      "calls": [],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 404
+    },
+    {
+      "body": "{\"error\":\"attachment not found\"}\n",
+      "calls": [],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 404
+    },
+    {
+      "body": "{\"code\":\"storage_not_configured\",\"error\":\"storage not configured\"}\n",
+      "calls": [],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 403
+    },
+    {
+      "body": "{\"code\":\"storage_not_configured\",\"error\":\"storage not configured\"}\n",
+      "calls": [],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 403
+    },
+    {
+      "body": "{\"code\":\"storage_not_configured\",\"error\":\"storage not configured\"}\n",
+      "calls": [],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 403
+    },
+    {
+      "body": "{\"code\":\"storage_not_configured\",\"error\":\"storage not configured\"}\n",
+      "calls": [],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 403
+    },
+    {
+      "body": "{\"error\":\"attachment not found\"}\n",
+      "calls": [],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 404
+    },
+    {
+      "body": "{\"error\":\"attachment not found\"}\n",
+      "calls": [],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 404
+    },
+    {
+      "body": "{\"error\":\"attachment not found\"}\n",
+      "calls": [],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 404
+    },
+    {
+      "body": "{\"error\":\"attachment not found\"}\n",
+      "calls": [],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 404
+    },
+    {
+      "body": "{\"error\":\"attachment not found\"}\n",
+      "calls": [],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 404
+    },
+    {
+      "body": "{\"error\":\"attachment not found\"}\n",
+      "calls": [],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 404
+    },
+    {
+      "body": "{\"error\":\"attachment not found\"}\n",
+      "calls": [],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 404
+    },
+    {
+      "body": "{\"error\":\"attachment not found\"}\n",
+      "calls": [],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 404
+    },
+    {
+      "body": "{\"error\":\"failed to create download URL\"}\n",
+      "calls": [
+        [
+          "key",
+          "https://cdn.example/file"
+        ],
+        [
+          "presign",
+          "key",
+          1800000000000,
+          "attachment; filename=\"__.pdf\"; filename*=UTF-8''%E6%8A%A5%E5%91%8A.pdf"
+        ]
+      ],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 502
+    },
+    {
+      "body": "{\"error\":\"failed to create download URL\"}\n",
+      "calls": [
+        [
+          "key",
+          "https://cdn.example/file"
+        ],
+        [
+          "presign",
+          "key",
+          5500000000,
+          "attachment; filename=\"__.pdf\"; filename*=UTF-8''%E6%8A%A5%E5%91%8A.pdf"
+        ]
+      ],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 502
+    },
+    {
+      "body": "{\"error\":\"failed to create download URL\"}\n",
+      "calls": [
+        [
+          "key",
+          "https://cdn.example/file"
+        ],
+        [
+          "presign",
+          "key",
+          1800000000000,
+          "attachment; filename=\"__.pdf\"; filename*=UTF-8''%E6%8A%A5%E5%91%8A.pdf"
+        ]
+      ],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 502
+    },
+    {
+      "body": "{\"error\":\"failed to create download URL\"}\n",
+      "calls": [
+        [
+          "key",
+          "https://cdn.example/file"
+        ],
+        [
+          "presign",
+          "key",
+          5500000000,
+          "attachment; filename=\"__.pdf\"; filename*=UTF-8''%E6%8A%A5%E5%91%8A.pdf"
+        ]
+      ],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 502
+    },
+    {
+      "body": "{\"error\":\"attachment not found\"}\n",
+      "calls": [],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 404
+    },
+    {
+      "body": "{\"error\":\"attachment not found\"}\n",
+      "calls": [],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 404
+    },
+    {
+      "body": "{\"error\":\"attachment not found\"}\n",
+      "calls": [],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 404
+    },
+    {
+      "body": "{\"error\":\"attachment not found\"}\n",
+      "calls": [],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 404
+    },
+    {
+      "body": "{\"error\":\"attachment not found\"}\n",
+      "calls": [],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 404
+    },
+    {
+      "body": "{\"error\":\"attachment not found\"}\n",
+      "calls": [],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 404
+    },
+    {
+      "body": "{\"error\":\"attachment not found\"}\n",
+      "calls": [],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 404
+    },
+    {
+      "body": "{\"error\":\"attachment not found\"}\n",
+      "calls": [],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 404
+    },
+    {
+      "body": "{\"code\":\"storage_not_configured\",\"error\":\"storage not configured\"}\n",
+      "calls": [],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 403
+    },
+    {
+      "body": "{\"code\":\"storage_not_configured\",\"error\":\"storage not configured\"}\n",
+      "calls": [],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 403
+    },
+    {
+      "body": "{\"code\":\"storage_not_configured\",\"error\":\"storage not configured\"}\n",
+      "calls": [],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 403
+    },
+    {
+      "body": "{\"code\":\"storage_not_configured\",\"error\":\"storage not configured\"}\n",
+      "calls": [],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 403
+    },
+    {
+      "body": "{\"error\":\"attachment not found\"}\n",
+      "calls": [],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 404
+    },
+    {
+      "body": "{\"error\":\"attachment not found\"}\n",
+      "calls": [],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 404
+    },
+    {
+      "body": "{\"error\":\"attachment not found\"}\n",
+      "calls": [],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 404
+    },
+    {
+      "body": "{\"error\":\"attachment not found\"}\n",
+      "calls": [],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 404
+    },
+    {
+      "body": "{\"error\":\"attachment not found\"}\n",
+      "calls": [],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 404
+    },
+    {
+      "body": "{\"error\":\"attachment not found\"}\n",
+      "calls": [],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 404
+    },
+    {
+      "body": "{\"error\":\"attachment not found\"}\n",
+      "calls": [],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 404
+    },
+    {
+      "body": "{\"error\":\"attachment not found\"}\n",
+      "calls": [],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 404
+    },
+    {
+      "body": "{\"error\":\"failed to create download URL\"}\n",
+      "calls": [
+        [
+          "key",
+          "https://cdn.example/file"
+        ],
+        [
+          "presign",
+          "key",
+          1800000000000,
+          "attachment; filename=\"__.pdf\"; filename*=UTF-8''%E6%8A%A5%E5%91%8A.pdf"
+        ]
+      ],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 502
+    },
+    {
+      "body": "{\"error\":\"failed to create download URL\"}\n",
+      "calls": [
+        [
+          "key",
+          "https://cdn.example/file"
+        ],
+        [
+          "presign",
+          "key",
+          5500000000,
+          "attachment; filename=\"__.pdf\"; filename*=UTF-8''%E6%8A%A5%E5%91%8A.pdf"
+        ]
+      ],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 502
+    },
+    {
+      "body": "{\"error\":\"failed to create download URL\"}\n",
+      "calls": [
+        [
+          "key",
+          "https://cdn.example/file"
+        ],
+        [
+          "presign",
+          "key",
+          1800000000000,
+          "attachment; filename=\"__.pdf\"; filename*=UTF-8''%E6%8A%A5%E5%91%8A.pdf"
+        ]
+      ],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 502
+    },
+    {
+      "body": "{\"error\":\"failed to create download URL\"}\n",
+      "calls": [
+        [
+          "key",
+          "https://cdn.example/file"
+        ],
+        [
+          "presign",
+          "key",
+          5500000000,
+          "attachment; filename=\"__.pdf\"; filename*=UTF-8''%E6%8A%A5%E5%91%8A.pdf"
+        ]
+      ],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 502
+    },
+    {
+      "body": "{\"error\":\"attachment not found\"}\n",
+      "calls": [],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 404
+    },
+    {
+      "body": "{\"error\":\"attachment not found\"}\n",
+      "calls": [],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 404
+    },
+    {
+      "body": "{\"error\":\"attachment not found\"}\n",
+      "calls": [],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 404
+    },
+    {
+      "body": "{\"error\":\"attachment not found\"}\n",
+      "calls": [],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 404
+    },
+    {
+      "body": "{\"error\":\"attachment not found\"}\n",
+      "calls": [],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 404
+    },
+    {
+      "body": "{\"error\":\"attachment not found\"}\n",
+      "calls": [],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 404
+    },
+    {
+      "body": "{\"error\":\"attachment not found\"}\n",
+      "calls": [],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 404
+    },
+    {
+      "body": "{\"error\":\"attachment not found\"}\n",
+      "calls": [],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 404
+    },
+    {
+      "body": "{\"code\":\"storage_not_configured\",\"error\":\"storage not configured\"}\n",
+      "calls": [],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 403
+    },
+    {
+      "body": "{\"code\":\"storage_not_configured\",\"error\":\"storage not configured\"}\n",
+      "calls": [],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 403
+    },
+    {
+      "body": "{\"code\":\"storage_not_configured\",\"error\":\"storage not configured\"}\n",
+      "calls": [],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 403
+    },
+    {
+      "body": "{\"code\":\"storage_not_configured\",\"error\":\"storage not configured\"}\n",
+      "calls": [],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 403
+    },
+    {
+      "body": "{\"error\":\"attachment not found\"}\n",
+      "calls": [],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 404
+    },
+    {
+      "body": "{\"error\":\"attachment not found\"}\n",
+      "calls": [],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 404
+    },
+    {
+      "body": "{\"error\":\"attachment not found\"}\n",
+      "calls": [],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 404
+    },
+    {
+      "body": "{\"error\":\"attachment not found\"}\n",
+      "calls": [],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 404
+    },
+    {
+      "body": "{\"error\":\"attachment not found\"}\n",
+      "calls": [],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 404
+    },
+    {
+      "body": "{\"error\":\"attachment not found\"}\n",
+      "calls": [],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 404
+    },
+    {
+      "body": "{\"error\":\"attachment not found\"}\n",
+      "calls": [],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 404
+    },
+    {
+      "body": "{\"error\":\"attachment not found\"}\n",
+      "calls": [],
+      "closed": false,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "content-type": "application/json"
+      },
+      "status": 404
+    },
+    {
+      "body": "abc",
+      "calls": [
+        [
+          "key",
+          "https://cdn.example/file"
+        ],
+        [
+          "read",
+          "key"
+        ]
+      ],
+      "closed": true,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "accept-ranges": "bytes",
+        "cache-control": "no-store",
+        "content-disposition": "inline; filename=\"__.pdf\"; filename*=UTF-8''%E6%8A%A5%E5%91%8A.pdf",
+        "content-security-policy": "default-src 'none'; img-src 'self' data:; media-src 'self'; frame-ancestors 'self' https://app.example; object-src 'none'; base-uri 'none'; form-action 'none'",
+        "content-type": "application/pdf",
+        "x-content-type-options": "nosniff"
+      },
+      "status": 200
+    },
+    {
+      "body": "abc",
+      "calls": [
+        [
+          "key",
+          "https://cdn.example/file"
+        ],
+        [
+          "read",
+          "key"
+        ]
+      ],
+      "closed": true,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "accept-ranges": "bytes",
+        "cache-control": "no-store",
+        "content-disposition": "inline; filename=\"__.pdf\"; filename*=UTF-8''%E6%8A%A5%E5%91%8A.pdf",
+        "content-security-policy": "default-src 'none'; img-src 'self' data:; media-src 'self'; frame-ancestors 'self' https://app.example; object-src 'none'; base-uri 'none'; form-action 'none'",
+        "content-type": "application/pdf",
+        "x-content-type-options": "nosniff"
+      },
+      "status": 200
+    },
+    {
+      "body": "abc",
+      "calls": [
+        [
+          "key",
+          "https://cdn.example/file"
+        ],
+        [
+          "read",
+          "key"
+        ]
+      ],
+      "closed": true,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "accept-ranges": "bytes",
+        "cache-control": "no-store",
+        "content-disposition": "inline; filename=\"__.pdf\"; filename*=UTF-8''%E6%8A%A5%E5%91%8A.pdf",
+        "content-security-policy": "default-src 'none'; img-src 'self' data:; media-src 'self'; frame-ancestors 'self' https://app.example; object-src 'none'; base-uri 'none'; form-action 'none'",
+        "content-type": "application/pdf",
+        "x-content-type-options": "nosniff"
+      },
+      "status": 200
+    },
+    {
+      "body": "abc",
+      "calls": [
+        [
+          "key",
+          "https://cdn.example/file"
+        ],
+        [
+          "read",
+          "key"
+        ]
+      ],
+      "closed": true,
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "headers": {
+        "accept-ranges": "bytes",
+        "cache-control": "no-store",
+        "content-disposition": "inline; filename=\"__.pdf\"; filename*=UTF-8''%E6%8A%A5%E5%91%8A.pdf",
+        "content-security-policy": "default-src 'none'; img-src 'self' data:; media-src 'self'; frame-ancestors 'self' https://app.example; object-src 'none'; base-uri 'none'; form-action 'none'",
+        "content-type": "application/pdf",
+        "x-content-type-options": "nosniff"
+      },
+      "status": 200
+    }
+  ],
+  "python": [
+    {
+      "status": 403,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"code\":\"storage_not_configured\",\"error\":\"storage not configured\"}\n",
+      "calls": [],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 403,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"code\":\"storage_not_configured\",\"error\":\"storage not configured\"}\n",
+      "calls": [],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 403,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"code\":\"storage_not_configured\",\"error\":\"storage not configured\"}\n",
+      "calls": [],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 403,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"code\":\"storage_not_configured\",\"error\":\"storage not configured\"}\n",
+      "calls": [],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 200,
+      "headers": {
+        "content-type": "application/pdf",
+        "content-disposition": "inline; filename=\"__.pdf\"; filename*=UTF-8''%E6%8A%A5%E5%91%8A.pdf",
+        "cache-control": "no-store",
+        "x-content-type-options": "nosniff",
+        "content-security-policy": "default-src 'none'; img-src 'self' data:; media-src 'self'; frame-ancestors 'self' https://app.example; object-src 'none'; base-uri 'none'; form-action 'none'",
+        "accept-ranges": "bytes"
+      },
+      "body": "abc",
+      "calls": [
+        [
+          "key",
+          "http://localhost/file"
+        ],
+        [
+          "read",
+          "key"
+        ]
+      ],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": true
+    },
+    {
+      "status": 200,
+      "headers": {
+        "content-type": "application/pdf",
+        "content-disposition": "inline; filename=\"__.pdf\"; filename*=UTF-8''%E6%8A%A5%E5%91%8A.pdf",
+        "cache-control": "no-store",
+        "x-content-type-options": "nosniff",
+        "content-security-policy": "default-src 'none'; img-src 'self' data:; media-src 'self'; frame-ancestors 'self' https://app.example; object-src 'none'; base-uri 'none'; form-action 'none'",
+        "accept-ranges": "bytes"
+      },
+      "body": "",
+      "calls": [
+        [
+          "key",
+          "http://localhost/file"
+        ],
+        [
+          "read",
+          "key"
+        ]
+      ],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": true
+    },
+    {
+      "status": 200,
+      "headers": {
+        "content-type": "application/pdf",
+        "content-disposition": "inline; filename=\"__.pdf\"; filename*=UTF-8''%E6%8A%A5%E5%91%8A.pdf",
+        "cache-control": "no-store",
+        "x-content-type-options": "nosniff",
+        "content-security-policy": "default-src 'none'; img-src 'self' data:; media-src 'self'; frame-ancestors 'self' https://app.example; object-src 'none'; base-uri 'none'; form-action 'none'",
+        "accept-ranges": "bytes"
+      },
+      "body": "abc",
+      "calls": [
+        [
+          "key",
+          "https://cdn.example/file"
+        ],
+        [
+          "read",
+          "key"
+        ]
+      ],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": true
+    },
+    {
+      "status": 200,
+      "headers": {
+        "content-type": "application/pdf",
+        "content-disposition": "inline; filename=\"__.pdf\"; filename*=UTF-8''%E6%8A%A5%E5%91%8A.pdf",
+        "cache-control": "no-store",
+        "x-content-type-options": "nosniff",
+        "content-security-policy": "default-src 'none'; img-src 'self' data:; media-src 'self'; frame-ancestors 'self' https://app.example; object-src 'none'; base-uri 'none'; form-action 'none'",
+        "accept-ranges": "bytes"
+      },
+      "body": "",
+      "calls": [
+        [
+          "key",
+          "https://cdn.example/file"
+        ],
+        [
+          "read",
+          "key"
+        ]
+      ],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": true
+    },
+    {
+      "status": 200,
+      "headers": {
+        "content-type": "application/pdf",
+        "content-disposition": "inline; filename=\"__.pdf\"; filename*=UTF-8''%E6%8A%A5%E5%91%8A.pdf",
+        "cache-control": "no-store",
+        "x-content-type-options": "nosniff",
+        "content-security-policy": "default-src 'none'; img-src 'self' data:; media-src 'self'; frame-ancestors 'self' https://app.example; object-src 'none'; base-uri 'none'; form-action 'none'",
+        "accept-ranges": "bytes"
+      },
+      "body": "abc",
+      "calls": [
+        [
+          "key",
+          "http://localhost/file"
+        ],
+        [
+          "read",
+          "key"
+        ]
+      ],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": true
+    },
+    {
+      "status": 200,
+      "headers": {
+        "content-type": "application/pdf",
+        "content-disposition": "inline; filename=\"__.pdf\"; filename*=UTF-8''%E6%8A%A5%E5%91%8A.pdf",
+        "cache-control": "no-store",
+        "x-content-type-options": "nosniff",
+        "content-security-policy": "default-src 'none'; img-src 'self' data:; media-src 'self'; frame-ancestors 'self' https://app.example; object-src 'none'; base-uri 'none'; form-action 'none'",
+        "accept-ranges": "bytes"
+      },
+      "body": "",
+      "calls": [
+        [
+          "key",
+          "http://localhost/file"
+        ],
+        [
+          "read",
+          "key"
+        ]
+      ],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": true
+    },
+    {
+      "status": 302,
+      "headers": {
+        "content-security-policy": "default-src 'none'; img-src 'self' data:; media-src 'self'; frame-ancestors 'self' https://app.example; object-src 'none'; base-uri 'none'; form-action 'none'",
+        "location": "https://cdn.example/signed?a=1&b=2",
+        "content-type": "text/html; charset=utf-8"
+      },
+      "body": "<a href=\"https://cdn.example/signed?a=1&amp;b=2\">Found</a>.\n\n",
+      "calls": [
+        [
+          "key",
+          "https://cdn.example/file"
+        ],
+        [
+          "presign",
+          "key",
+          1800000000000,
+          "attachment; filename=\"__.pdf\"; filename*=UTF-8''%E6%8A%A5%E5%91%8A.pdf"
+        ]
+      ],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 302,
+      "headers": {
+        "content-security-policy": "default-src 'none'; img-src 'self' data:; media-src 'self'; frame-ancestors 'self' https://app.example; object-src 'none'; base-uri 'none'; form-action 'none'",
+        "location": "https://cdn.example/signed?a=1&b=2",
+        "content-type": "text/html; charset=utf-8"
+      },
+      "body": "",
+      "calls": [
+        [
+          "key",
+          "https://cdn.example/file"
+        ],
+        [
+          "presign",
+          "key",
+          1800000000000,
+          "attachment; filename=\"__.pdf\"; filename*=UTF-8''%E6%8A%A5%E5%91%8A.pdf"
+        ]
+      ],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 403,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"code\":\"storage_not_configured\",\"error\":\"storage not configured\"}\n",
+      "calls": [],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 403,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"code\":\"storage_not_configured\",\"error\":\"storage not configured\"}\n",
+      "calls": [],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 403,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"code\":\"storage_not_configured\",\"error\":\"storage not configured\"}\n",
+      "calls": [],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 403,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"code\":\"storage_not_configured\",\"error\":\"storage not configured\"}\n",
+      "calls": [],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 500,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"error\":\"cloudfront attachment downloads are not configured\"}\n",
+      "calls": [
+        [
+          "key",
+          "http://localhost/file"
+        ]
+      ],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 500,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"error\":\"cloudfront attachment downloads are not configured\"}\n",
+      "calls": [
+        [
+          "key",
+          "http://localhost/file"
+        ]
+      ],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 500,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"error\":\"cloudfront attachment downloads are not configured\"}\n",
+      "calls": [
+        [
+          "key",
+          "https://cdn.example/file"
+        ]
+      ],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 500,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"error\":\"cloudfront attachment downloads are not configured\"}\n",
+      "calls": [
+        [
+          "key",
+          "https://cdn.example/file"
+        ]
+      ],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 500,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"error\":\"cloudfront attachment downloads are not configured\"}\n",
+      "calls": [
+        [
+          "key",
+          "http://localhost/file"
+        ]
+      ],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 500,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"error\":\"cloudfront attachment downloads are not configured\"}\n",
+      "calls": [
+        [
+          "key",
+          "http://localhost/file"
+        ]
+      ],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 500,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"error\":\"cloudfront attachment downloads are not configured\"}\n",
+      "calls": [
+        [
+          "key",
+          "https://cdn.example/file"
+        ]
+      ],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 500,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"error\":\"cloudfront attachment downloads are not configured\"}\n",
+      "calls": [
+        [
+          "key",
+          "https://cdn.example/file"
+        ]
+      ],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 403,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"code\":\"storage_not_configured\",\"error\":\"storage not configured\"}\n",
+      "calls": [],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 403,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"code\":\"storage_not_configured\",\"error\":\"storage not configured\"}\n",
+      "calls": [],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 403,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"code\":\"storage_not_configured\",\"error\":\"storage not configured\"}\n",
+      "calls": [],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 403,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"code\":\"storage_not_configured\",\"error\":\"storage not configured\"}\n",
+      "calls": [],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 500,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"error\":\"attachment storage does not support presigned downloads\"}\n",
+      "calls": [
+        [
+          "key",
+          "http://localhost/file"
+        ]
+      ],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 500,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"error\":\"attachment storage does not support presigned downloads\"}\n",
+      "calls": [
+        [
+          "key",
+          "http://localhost/file"
+        ]
+      ],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 500,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"error\":\"attachment storage does not support presigned downloads\"}\n",
+      "calls": [
+        [
+          "key",
+          "https://cdn.example/file"
+        ]
+      ],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 500,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"error\":\"attachment storage does not support presigned downloads\"}\n",
+      "calls": [
+        [
+          "key",
+          "https://cdn.example/file"
+        ]
+      ],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 302,
+      "headers": {
+        "content-security-policy": "default-src 'none'; img-src 'self' data:; media-src 'self'; frame-ancestors 'self' https://app.example; object-src 'none'; base-uri 'none'; form-action 'none'",
+        "location": "https://cdn.example/signed?a=1&b=2",
+        "content-type": "text/html; charset=utf-8"
+      },
+      "body": "<a href=\"https://cdn.example/signed?a=1&amp;b=2\">Found</a>.\n\n",
+      "calls": [
+        [
+          "key",
+          "http://localhost/file"
+        ],
+        [
+          "presign",
+          "key",
+          1800000000000,
+          "attachment; filename=\"__.pdf\"; filename*=UTF-8''%E6%8A%A5%E5%91%8A.pdf"
+        ]
+      ],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 302,
+      "headers": {
+        "content-security-policy": "default-src 'none'; img-src 'self' data:; media-src 'self'; frame-ancestors 'self' https://app.example; object-src 'none'; base-uri 'none'; form-action 'none'",
+        "location": "https://cdn.example/signed?a=1&b=2",
+        "content-type": "text/html; charset=utf-8"
+      },
+      "body": "",
+      "calls": [
+        [
+          "key",
+          "http://localhost/file"
+        ],
+        [
+          "presign",
+          "key",
+          1800000000000,
+          "attachment; filename=\"__.pdf\"; filename*=UTF-8''%E6%8A%A5%E5%91%8A.pdf"
+        ]
+      ],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 302,
+      "headers": {
+        "content-security-policy": "default-src 'none'; img-src 'self' data:; media-src 'self'; frame-ancestors 'self' https://app.example; object-src 'none'; base-uri 'none'; form-action 'none'",
+        "location": "https://cdn.example/signed?a=1&b=2",
+        "content-type": "text/html; charset=utf-8"
+      },
+      "body": "<a href=\"https://cdn.example/signed?a=1&amp;b=2\">Found</a>.\n\n",
+      "calls": [
+        [
+          "key",
+          "https://cdn.example/file"
+        ],
+        [
+          "presign",
+          "key",
+          1800000000000,
+          "attachment; filename=\"__.pdf\"; filename*=UTF-8''%E6%8A%A5%E5%91%8A.pdf"
+        ]
+      ],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 302,
+      "headers": {
+        "content-security-policy": "default-src 'none'; img-src 'self' data:; media-src 'self'; frame-ancestors 'self' https://app.example; object-src 'none'; base-uri 'none'; form-action 'none'",
+        "location": "https://cdn.example/signed?a=1&b=2",
+        "content-type": "text/html; charset=utf-8"
+      },
+      "body": "",
+      "calls": [
+        [
+          "key",
+          "https://cdn.example/file"
+        ],
+        [
+          "presign",
+          "key",
+          1800000000000,
+          "attachment; filename=\"__.pdf\"; filename*=UTF-8''%E6%8A%A5%E5%91%8A.pdf"
+        ]
+      ],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 403,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"code\":\"storage_not_configured\",\"error\":\"storage not configured\"}\n",
+      "calls": [],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 403,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"code\":\"storage_not_configured\",\"error\":\"storage not configured\"}\n",
+      "calls": [],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 403,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"code\":\"storage_not_configured\",\"error\":\"storage not configured\"}\n",
+      "calls": [],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 403,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"code\":\"storage_not_configured\",\"error\":\"storage not configured\"}\n",
+      "calls": [],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 200,
+      "headers": {
+        "content-type": "application/pdf",
+        "content-disposition": "inline; filename=\"__.pdf\"; filename*=UTF-8''%E6%8A%A5%E5%91%8A.pdf",
+        "cache-control": "no-store",
+        "x-content-type-options": "nosniff",
+        "content-security-policy": "default-src 'none'; img-src 'self' data:; media-src 'self'; frame-ancestors 'self' https://app.example; object-src 'none'; base-uri 'none'; form-action 'none'",
+        "accept-ranges": "bytes"
+      },
+      "body": "abc",
+      "calls": [
+        [
+          "key",
+          "http://localhost/file"
+        ],
+        [
+          "read",
+          "key"
+        ]
+      ],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": true
+    },
+    {
+      "status": 200,
+      "headers": {
+        "content-type": "application/pdf",
+        "content-disposition": "inline; filename=\"__.pdf\"; filename*=UTF-8''%E6%8A%A5%E5%91%8A.pdf",
+        "cache-control": "no-store",
+        "x-content-type-options": "nosniff",
+        "content-security-policy": "default-src 'none'; img-src 'self' data:; media-src 'self'; frame-ancestors 'self' https://app.example; object-src 'none'; base-uri 'none'; form-action 'none'",
+        "accept-ranges": "bytes"
+      },
+      "body": "",
+      "calls": [
+        [
+          "key",
+          "http://localhost/file"
+        ],
+        [
+          "read",
+          "key"
+        ]
+      ],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": true
+    },
+    {
+      "status": 200,
+      "headers": {
+        "content-type": "application/pdf",
+        "content-disposition": "inline; filename=\"__.pdf\"; filename*=UTF-8''%E6%8A%A5%E5%91%8A.pdf",
+        "cache-control": "no-store",
+        "x-content-type-options": "nosniff",
+        "content-security-policy": "default-src 'none'; img-src 'self' data:; media-src 'self'; frame-ancestors 'self' https://app.example; object-src 'none'; base-uri 'none'; form-action 'none'",
+        "accept-ranges": "bytes"
+      },
+      "body": "abc",
+      "calls": [
+        [
+          "key",
+          "https://cdn.example/file"
+        ],
+        [
+          "read",
+          "key"
+        ]
+      ],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": true
+    },
+    {
+      "status": 200,
+      "headers": {
+        "content-type": "application/pdf",
+        "content-disposition": "inline; filename=\"__.pdf\"; filename*=UTF-8''%E6%8A%A5%E5%91%8A.pdf",
+        "cache-control": "no-store",
+        "x-content-type-options": "nosniff",
+        "content-security-policy": "default-src 'none'; img-src 'self' data:; media-src 'self'; frame-ancestors 'self' https://app.example; object-src 'none'; base-uri 'none'; form-action 'none'",
+        "accept-ranges": "bytes"
+      },
+      "body": "",
+      "calls": [
+        [
+          "key",
+          "https://cdn.example/file"
+        ],
+        [
+          "read",
+          "key"
+        ]
+      ],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": true
+    },
+    {
+      "status": 200,
+      "headers": {
+        "content-type": "application/pdf",
+        "content-disposition": "inline; filename=\"__.pdf\"; filename*=UTF-8''%E6%8A%A5%E5%91%8A.pdf",
+        "cache-control": "no-store",
+        "x-content-type-options": "nosniff",
+        "content-security-policy": "default-src 'none'; img-src 'self' data:; media-src 'self'; frame-ancestors 'self' https://app.example; object-src 'none'; base-uri 'none'; form-action 'none'",
+        "accept-ranges": "bytes"
+      },
+      "body": "abc",
+      "calls": [
+        [
+          "key",
+          "http://localhost/file"
+        ],
+        [
+          "read",
+          "key"
+        ]
+      ],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": true
+    },
+    {
+      "status": 200,
+      "headers": {
+        "content-type": "application/pdf",
+        "content-disposition": "inline; filename=\"__.pdf\"; filename*=UTF-8''%E6%8A%A5%E5%91%8A.pdf",
+        "cache-control": "no-store",
+        "x-content-type-options": "nosniff",
+        "content-security-policy": "default-src 'none'; img-src 'self' data:; media-src 'self'; frame-ancestors 'self' https://app.example; object-src 'none'; base-uri 'none'; form-action 'none'",
+        "accept-ranges": "bytes"
+      },
+      "body": "",
+      "calls": [
+        [
+          "key",
+          "http://localhost/file"
+        ],
+        [
+          "read",
+          "key"
+        ]
+      ],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": true
+    },
+    {
+      "status": 200,
+      "headers": {
+        "content-type": "application/pdf",
+        "content-disposition": "inline; filename=\"__.pdf\"; filename*=UTF-8''%E6%8A%A5%E5%91%8A.pdf",
+        "cache-control": "no-store",
+        "x-content-type-options": "nosniff",
+        "content-security-policy": "default-src 'none'; img-src 'self' data:; media-src 'self'; frame-ancestors 'self' https://app.example; object-src 'none'; base-uri 'none'; form-action 'none'",
+        "accept-ranges": "bytes"
+      },
+      "body": "abc",
+      "calls": [
+        [
+          "key",
+          "https://cdn.example/file"
+        ],
+        [
+          "read",
+          "key"
+        ]
+      ],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": true
+    },
+    {
+      "status": 200,
+      "headers": {
+        "content-type": "application/pdf",
+        "content-disposition": "inline; filename=\"__.pdf\"; filename*=UTF-8''%E6%8A%A5%E5%91%8A.pdf",
+        "cache-control": "no-store",
+        "x-content-type-options": "nosniff",
+        "content-security-policy": "default-src 'none'; img-src 'self' data:; media-src 'self'; frame-ancestors 'self' https://app.example; object-src 'none'; base-uri 'none'; form-action 'none'",
+        "accept-ranges": "bytes"
+      },
+      "body": "",
+      "calls": [
+        [
+          "key",
+          "https://cdn.example/file"
+        ],
+        [
+          "read",
+          "key"
+        ]
+      ],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": true
+    },
+    {
+      "status": 403,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"code\":\"storage_not_configured\",\"error\":\"storage not configured\"}\n",
+      "calls": [],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 403,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"code\":\"storage_not_configured\",\"error\":\"storage not configured\"}\n",
+      "calls": [],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 403,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"code\":\"storage_not_configured\",\"error\":\"storage not configured\"}\n",
+      "calls": [],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 403,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"code\":\"storage_not_configured\",\"error\":\"storage not configured\"}\n",
+      "calls": [],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 200,
+      "headers": {
+        "content-type": "application/pdf",
+        "content-disposition": "inline; filename=\"__.pdf\"; filename*=UTF-8''%E6%8A%A5%E5%91%8A.pdf",
+        "cache-control": "no-store",
+        "x-content-type-options": "nosniff",
+        "content-security-policy": "default-src 'none'; img-src 'self' data:; media-src 'self'; frame-ancestors 'self' https://app.example; object-src 'none'; base-uri 'none'; form-action 'none'",
+        "accept-ranges": "bytes"
+      },
+      "body": "abc",
+      "calls": [
+        [
+          "key",
+          "http://localhost/file"
+        ],
+        [
+          "read",
+          "key"
+        ]
+      ],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": true
+    },
+    {
+      "status": 200,
+      "headers": {
+        "content-type": "application/pdf",
+        "content-disposition": "inline; filename=\"__.pdf\"; filename*=UTF-8''%E6%8A%A5%E5%91%8A.pdf",
+        "cache-control": "no-store",
+        "x-content-type-options": "nosniff",
+        "content-security-policy": "default-src 'none'; img-src 'self' data:; media-src 'self'; frame-ancestors 'self' https://app.example; object-src 'none'; base-uri 'none'; form-action 'none'",
+        "accept-ranges": "bytes"
+      },
+      "body": "",
+      "calls": [
+        [
+          "key",
+          "http://localhost/file"
+        ],
+        [
+          "read",
+          "key"
+        ]
+      ],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": true
+    },
+    {
+      "status": 200,
+      "headers": {
+        "content-type": "application/pdf",
+        "content-disposition": "inline; filename=\"__.pdf\"; filename*=UTF-8''%E6%8A%A5%E5%91%8A.pdf",
+        "cache-control": "no-store",
+        "x-content-type-options": "nosniff",
+        "content-security-policy": "default-src 'none'; img-src 'self' data:; media-src 'self'; frame-ancestors 'self' https://app.example; object-src 'none'; base-uri 'none'; form-action 'none'",
+        "accept-ranges": "bytes"
+      },
+      "body": "abc",
+      "calls": [
+        [
+          "key",
+          "https://cdn.example/file"
+        ],
+        [
+          "read",
+          "key"
+        ]
+      ],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": true
+    },
+    {
+      "status": 200,
+      "headers": {
+        "content-type": "application/pdf",
+        "content-disposition": "inline; filename=\"__.pdf\"; filename*=UTF-8''%E6%8A%A5%E5%91%8A.pdf",
+        "cache-control": "no-store",
+        "x-content-type-options": "nosniff",
+        "content-security-policy": "default-src 'none'; img-src 'self' data:; media-src 'self'; frame-ancestors 'self' https://app.example; object-src 'none'; base-uri 'none'; form-action 'none'",
+        "accept-ranges": "bytes"
+      },
+      "body": "",
+      "calls": [
+        [
+          "key",
+          "https://cdn.example/file"
+        ],
+        [
+          "read",
+          "key"
+        ]
+      ],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": true
+    },
+    {
+      "status": 200,
+      "headers": {
+        "content-type": "application/pdf",
+        "content-disposition": "inline; filename=\"__.pdf\"; filename*=UTF-8''%E6%8A%A5%E5%91%8A.pdf",
+        "cache-control": "no-store",
+        "x-content-type-options": "nosniff",
+        "content-security-policy": "default-src 'none'; img-src 'self' data:; media-src 'self'; frame-ancestors 'self' https://app.example; object-src 'none'; base-uri 'none'; form-action 'none'",
+        "accept-ranges": "bytes"
+      },
+      "body": "abc",
+      "calls": [
+        [
+          "key",
+          "http://localhost/file"
+        ],
+        [
+          "read",
+          "key"
+        ]
+      ],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": true
+    },
+    {
+      "status": 200,
+      "headers": {
+        "content-type": "application/pdf",
+        "content-disposition": "inline; filename=\"__.pdf\"; filename*=UTF-8''%E6%8A%A5%E5%91%8A.pdf",
+        "cache-control": "no-store",
+        "x-content-type-options": "nosniff",
+        "content-security-policy": "default-src 'none'; img-src 'self' data:; media-src 'self'; frame-ancestors 'self' https://app.example; object-src 'none'; base-uri 'none'; form-action 'none'",
+        "accept-ranges": "bytes"
+      },
+      "body": "",
+      "calls": [
+        [
+          "key",
+          "http://localhost/file"
+        ],
+        [
+          "read",
+          "key"
+        ]
+      ],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": true
+    },
+    {
+      "status": 302,
+      "headers": {
+        "content-security-policy": "default-src 'none'; img-src 'self' data:; media-src 'self'; frame-ancestors 'self' https://app.example; object-src 'none'; base-uri 'none'; form-action 'none'",
+        "location": "https://cdn.example/signed?a=1&b=2",
+        "content-type": "text/html; charset=utf-8"
+      },
+      "body": "<a href=\"https://cdn.example/signed?a=1&amp;b=2\">Found</a>.\n\n",
+      "calls": [
+        [
+          "key",
+          "https://cdn.example/file"
+        ],
+        [
+          "presign",
+          "key",
+          1800000000000,
+          "attachment; filename=\"__.pdf\"; filename*=UTF-8''%E6%8A%A5%E5%91%8A.pdf"
+        ]
+      ],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 302,
+      "headers": {
+        "content-security-policy": "default-src 'none'; img-src 'self' data:; media-src 'self'; frame-ancestors 'self' https://app.example; object-src 'none'; base-uri 'none'; form-action 'none'",
+        "location": "https://cdn.example/signed?a=1&b=2",
+        "content-type": "text/html; charset=utf-8"
+      },
+      "body": "",
+      "calls": [
+        [
+          "key",
+          "https://cdn.example/file"
+        ],
+        [
+          "presign",
+          "key",
+          1800000000000,
+          "attachment; filename=\"__.pdf\"; filename*=UTF-8''%E6%8A%A5%E5%91%8A.pdf"
+        ]
+      ],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 404,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"error\":\"attachment not found\"}\n",
+      "calls": [],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 404,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"error\":\"attachment not found\"}\n",
+      "calls": [],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 404,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"error\":\"attachment not found\"}\n",
+      "calls": [],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 404,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"error\":\"attachment not found\"}\n",
+      "calls": [],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 404,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"error\":\"attachment not found\"}\n",
+      "calls": [],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 404,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"error\":\"attachment not found\"}\n",
+      "calls": [],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 404,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"error\":\"attachment not found\"}\n",
+      "calls": [],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 404,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"error\":\"attachment not found\"}\n",
+      "calls": [],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 403,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"code\":\"storage_not_configured\",\"error\":\"storage not configured\"}\n",
+      "calls": [],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 403,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"code\":\"storage_not_configured\",\"error\":\"storage not configured\"}\n",
+      "calls": [],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 403,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"code\":\"storage_not_configured\",\"error\":\"storage not configured\"}\n",
+      "calls": [],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 403,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"code\":\"storage_not_configured\",\"error\":\"storage not configured\"}\n",
+      "calls": [],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 404,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"error\":\"attachment not found\"}\n",
+      "calls": [],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 404,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"error\":\"attachment not found\"}\n",
+      "calls": [],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 404,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"error\":\"attachment not found\"}\n",
+      "calls": [],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 404,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"error\":\"attachment not found\"}\n",
+      "calls": [],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 404,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"error\":\"attachment not found\"}\n",
+      "calls": [],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 404,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"error\":\"attachment not found\"}\n",
+      "calls": [],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 404,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"error\":\"attachment not found\"}\n",
+      "calls": [],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 404,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"error\":\"attachment not found\"}\n",
+      "calls": [],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 502,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"error\":\"failed to create download URL\"}\n",
+      "calls": [
+        [
+          "key",
+          "https://cdn.example/file"
+        ],
+        [
+          "presign",
+          "key",
+          1800000000000,
+          "attachment; filename=\"__.pdf\"; filename*=UTF-8''%E6%8A%A5%E5%91%8A.pdf"
+        ]
+      ],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 502,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"error\":\"failed to create download URL\"}\n",
+      "calls": [
+        [
+          "key",
+          "https://cdn.example/file"
+        ],
+        [
+          "presign",
+          "key",
+          5500000000,
+          "attachment; filename=\"__.pdf\"; filename*=UTF-8''%E6%8A%A5%E5%91%8A.pdf"
+        ]
+      ],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 502,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"error\":\"failed to create download URL\"}\n",
+      "calls": [
+        [
+          "key",
+          "https://cdn.example/file"
+        ],
+        [
+          "presign",
+          "key",
+          1800000000000,
+          "attachment; filename=\"__.pdf\"; filename*=UTF-8''%E6%8A%A5%E5%91%8A.pdf"
+        ]
+      ],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 502,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"error\":\"failed to create download URL\"}\n",
+      "calls": [
+        [
+          "key",
+          "https://cdn.example/file"
+        ],
+        [
+          "presign",
+          "key",
+          5500000000,
+          "attachment; filename=\"__.pdf\"; filename*=UTF-8''%E6%8A%A5%E5%91%8A.pdf"
+        ]
+      ],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 404,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"error\":\"attachment not found\"}\n",
+      "calls": [],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 404,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"error\":\"attachment not found\"}\n",
+      "calls": [],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 404,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"error\":\"attachment not found\"}\n",
+      "calls": [],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 404,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"error\":\"attachment not found\"}\n",
+      "calls": [],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 404,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"error\":\"attachment not found\"}\n",
+      "calls": [],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 404,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"error\":\"attachment not found\"}\n",
+      "calls": [],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 404,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"error\":\"attachment not found\"}\n",
+      "calls": [],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 404,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"error\":\"attachment not found\"}\n",
+      "calls": [],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 403,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"code\":\"storage_not_configured\",\"error\":\"storage not configured\"}\n",
+      "calls": [],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 403,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"code\":\"storage_not_configured\",\"error\":\"storage not configured\"}\n",
+      "calls": [],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 403,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"code\":\"storage_not_configured\",\"error\":\"storage not configured\"}\n",
+      "calls": [],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 403,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"code\":\"storage_not_configured\",\"error\":\"storage not configured\"}\n",
+      "calls": [],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 404,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"error\":\"attachment not found\"}\n",
+      "calls": [],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 404,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"error\":\"attachment not found\"}\n",
+      "calls": [],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 404,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"error\":\"attachment not found\"}\n",
+      "calls": [],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 404,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"error\":\"attachment not found\"}\n",
+      "calls": [],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 404,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"error\":\"attachment not found\"}\n",
+      "calls": [],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 404,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"error\":\"attachment not found\"}\n",
+      "calls": [],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 404,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"error\":\"attachment not found\"}\n",
+      "calls": [],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 404,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"error\":\"attachment not found\"}\n",
+      "calls": [],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 502,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"error\":\"failed to create download URL\"}\n",
+      "calls": [
+        [
+          "key",
+          "https://cdn.example/file"
+        ],
+        [
+          "presign",
+          "key",
+          1800000000000,
+          "attachment; filename=\"__.pdf\"; filename*=UTF-8''%E6%8A%A5%E5%91%8A.pdf"
+        ]
+      ],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 502,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"error\":\"failed to create download URL\"}\n",
+      "calls": [
+        [
+          "key",
+          "https://cdn.example/file"
+        ],
+        [
+          "presign",
+          "key",
+          5500000000,
+          "attachment; filename=\"__.pdf\"; filename*=UTF-8''%E6%8A%A5%E5%91%8A.pdf"
+        ]
+      ],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 502,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"error\":\"failed to create download URL\"}\n",
+      "calls": [
+        [
+          "key",
+          "https://cdn.example/file"
+        ],
+        [
+          "presign",
+          "key",
+          1800000000000,
+          "attachment; filename=\"__.pdf\"; filename*=UTF-8''%E6%8A%A5%E5%91%8A.pdf"
+        ]
+      ],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 502,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"error\":\"failed to create download URL\"}\n",
+      "calls": [
+        [
+          "key",
+          "https://cdn.example/file"
+        ],
+        [
+          "presign",
+          "key",
+          5500000000,
+          "attachment; filename=\"__.pdf\"; filename*=UTF-8''%E6%8A%A5%E5%91%8A.pdf"
+        ]
+      ],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 404,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"error\":\"attachment not found\"}\n",
+      "calls": [],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 404,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"error\":\"attachment not found\"}\n",
+      "calls": [],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 404,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"error\":\"attachment not found\"}\n",
+      "calls": [],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 404,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"error\":\"attachment not found\"}\n",
+      "calls": [],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 404,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"error\":\"attachment not found\"}\n",
+      "calls": [],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 404,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"error\":\"attachment not found\"}\n",
+      "calls": [],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 404,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"error\":\"attachment not found\"}\n",
+      "calls": [],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 404,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"error\":\"attachment not found\"}\n",
+      "calls": [],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 403,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"code\":\"storage_not_configured\",\"error\":\"storage not configured\"}\n",
+      "calls": [],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 403,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"code\":\"storage_not_configured\",\"error\":\"storage not configured\"}\n",
+      "calls": [],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 403,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"code\":\"storage_not_configured\",\"error\":\"storage not configured\"}\n",
+      "calls": [],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 403,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"code\":\"storage_not_configured\",\"error\":\"storage not configured\"}\n",
+      "calls": [],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 404,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"error\":\"attachment not found\"}\n",
+      "calls": [],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 404,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"error\":\"attachment not found\"}\n",
+      "calls": [],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 404,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"error\":\"attachment not found\"}\n",
+      "calls": [],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 404,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"error\":\"attachment not found\"}\n",
+      "calls": [],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 404,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"error\":\"attachment not found\"}\n",
+      "calls": [],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 404,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"error\":\"attachment not found\"}\n",
+      "calls": [],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 404,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"error\":\"attachment not found\"}\n",
+      "calls": [],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 404,
+      "headers": {
+        "content-type": "application/json"
+      },
+      "body": "{\"error\":\"attachment not found\"}\n",
+      "calls": [],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": false
+    },
+    {
+      "status": 200,
+      "headers": {
+        "content-type": "application/pdf",
+        "content-disposition": "inline; filename=\"__.pdf\"; filename*=UTF-8''%E6%8A%A5%E5%91%8A.pdf",
+        "cache-control": "no-store",
+        "x-content-type-options": "nosniff",
+        "content-security-policy": "default-src 'none'; img-src 'self' data:; media-src 'self'; frame-ancestors 'self' https://app.example; object-src 'none'; base-uri 'none'; form-action 'none'",
+        "accept-ranges": "bytes"
+      },
+      "body": "abc",
+      "calls": [
+        [
+          "key",
+          "https://cdn.example/file"
+        ],
+        [
+          "read",
+          "key"
+        ]
+      ],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": true
+    },
+    {
+      "status": 200,
+      "headers": {
+        "content-type": "application/pdf",
+        "content-disposition": "inline; filename=\"__.pdf\"; filename*=UTF-8''%E6%8A%A5%E5%91%8A.pdf",
+        "cache-control": "no-store",
+        "x-content-type-options": "nosniff",
+        "content-security-policy": "default-src 'none'; img-src 'self' data:; media-src 'self'; frame-ancestors 'self' https://app.example; object-src 'none'; base-uri 'none'; form-action 'none'",
+        "accept-ranges": "bytes"
+      },
+      "body": "abc",
+      "calls": [
+        [
+          "key",
+          "https://cdn.example/file"
+        ],
+        [
+          "read",
+          "key"
+        ]
+      ],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": true
+    },
+    {
+      "status": 200,
+      "headers": {
+        "content-type": "application/pdf",
+        "content-disposition": "inline; filename=\"__.pdf\"; filename*=UTF-8''%E6%8A%A5%E5%91%8A.pdf",
+        "cache-control": "no-store",
+        "x-content-type-options": "nosniff",
+        "content-security-policy": "default-src 'none'; img-src 'self' data:; media-src 'self'; frame-ancestors 'self' https://app.example; object-src 'none'; base-uri 'none'; form-action 'none'",
+        "accept-ranges": "bytes"
+      },
+      "body": "abc",
+      "calls": [
+        [
+          "key",
+          "https://cdn.example/file"
+        ],
+        [
+          "read",
+          "key"
+        ]
+      ],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": true
+    },
+    {
+      "status": 200,
+      "headers": {
+        "content-type": "application/pdf",
+        "content-disposition": "inline; filename=\"__.pdf\"; filename*=UTF-8''%E6%8A%A5%E5%91%8A.pdf",
+        "cache-control": "no-store",
+        "x-content-type-options": "nosniff",
+        "content-security-policy": "default-src 'none'; img-src 'self' data:; media-src 'self'; frame-ancestors 'self' https://app.example; object-src 'none'; base-uri 'none'; form-action 'none'",
+        "accept-ranges": "bytes"
+      },
+      "body": "abc",
+      "calls": [
+        [
+          "key",
+          "https://cdn.example/file"
+        ],
+        [
+          "read",
+          "key"
+        ]
+      ],
+      "db_calls": [
+        [
+          "attachment",
+          "aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"
+        ],
+        [
+          "member",
+          "bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+          "cccccccc-cccc-cccc-cccc-cccccccccccc"
+        ]
+      ],
+      "closed": true
+    }
+  ],
+  "mismatches": [],
+  "source_sha256": {
+    "server/go/internal/handler/file.go": "686be2579bd04d92a1536cb1893d15d641f5bef110c835ea09b8cba6c7a57050",
+    "server/tests/parity/go_attachment_downloads/main.go": "b4bbd869abe8c79d5d977736a4c2962765e6a80227634011b7ffaf1aaab44e15",
+    "server/tests/parity/go_attachment_downloads/wrapper.go": "07eff8faae4cb8da86c5ec10cd338b06d917b754a6eda7270ab0074f00e7604f",
+    "server/tests/parity/go_attachment_loader/wrapper.go": "77c5213cb8cc6ad2db2fb02d1b1b5765f6800ba6057758eee14f33d408732ab6",
+    "server/src/workpal_backend/files/downloads.py": "8643f490b1458213e353dc7447a8444c11267cf28b303b8bbd59c9813fae001a",
+    "server/src/workpal_backend/files/loader.py": "525db60e75a4f8efdfda6dd7ec224825207f69d7f0c8b925e406dec21ecb1aa4",
+    "server/src/workpal_backend/files/proxy.py": "471876b4fb25b00e7ad889767bbc6c8ba04ee6d5a3cbd3338b13727e4abe541e",
+    "server/src/workpal_backend/files/attachment_io.py": "4a84220a4b8f5de34b385cf15b49770792e8046222121d3e92ab1909a77fc48c",
+    "server/src/workpal_backend/files/redirect.py": "0b7453a6755495de013aeeecc38a63b4d384a0bff003b43ab1570c5c0d884abb",
+    "server/tools/run_attachment_downloads_parity.py": "ef0eb6d9c8bb7be0efccf3849a84724aba36aaca6886f668f642fcb1b8c2032f"
+  }
+}

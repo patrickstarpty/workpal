@@ -1,0 +1,538 @@
+{
+  "status": "source-derived; Python DELETE absent; parity unexecuted",
+  "method": "DELETE",
+  "path": "/api/workspaces/{id}",
+  "request_body": null,
+  "fixtures": [
+    {
+      "condition": "malformed UUID",
+      "status": 400,
+      "json": {
+        "error": "invalid workspace_id"
+      }
+    },
+    {
+      "condition": "missing membership",
+      "status": 404,
+      "json": {
+        "error": "workspace not found"
+      }
+    },
+    {
+      "condition": "nonowner",
+      "status": 403,
+      "json": {
+        "error": "insufficient permissions"
+      }
+    },
+    {
+      "condition": "Qoder preparation fails",
+      "status": 409,
+      "json": {
+        "error": "Qoder cleanup is pending; retry workspace deletion shortly"
+      }
+    },
+    {
+      "condition": "step SQLSTATE 55P03/40P01",
+      "status": 503,
+      "json": {
+        "error": "workspace deletion is temporarily blocked by another operation, please try again"
+      }
+    },
+    {
+      "condition": "begin/ordinary step/commit fails",
+      "status": 500,
+      "json": {
+        "error": "failed to delete workspace"
+      }
+    },
+    {
+      "condition": "owner; every ordered teardown step commits",
+      "status": 204,
+      "body": null
+    }
+  ],
+  "sources": [
+    "server/go/cmd/server/router.go:1925",
+    "server/go/internal/middleware/workspace.go:237",
+    "server/go/internal/handler/workspace.go:1141",
+    "server/go/internal/handler/workspace.go:883",
+    "packages/core/api/client.ts:3865",
+    "packages/core/workspace/mutations.ts:61"
+  ],
+  "sql_dependency_ledger": [
+    {
+      "query": "SetWorkspaceTeardownMode",
+      "source": "server/go/pkg/db/queries/workspace_delete.sql:5",
+      "relations": []
+    },
+    {
+      "query": "LockTaskUsageRollupForWorkspaceDelete",
+      "source": "server/go/pkg/db/queries/workspace_delete.sql:10",
+      "relations": []
+    },
+    {
+      "query": "LockWorkspaceTaskOwnerAgents",
+      "source": "server/go/pkg/db/queries/workspace_delete.sql:19",
+      "relations": [
+        "agent"
+      ]
+    },
+    {
+      "query": "LockWorkspaceTaskOwnerIssues",
+      "source": "server/go/pkg/db/queries/workspace_delete.sql:39",
+      "relations": [
+        "issue"
+      ]
+    },
+    {
+      "query": "LockWorkspaceTaskOwnerRuntimes",
+      "source": "server/go/pkg/db/queries/workspace_delete.sql:42",
+      "relations": [
+        "agent_runtime"
+      ]
+    },
+    {
+      "query": "ListWorkspaceAgentIDFirstPage",
+      "source": "server/go/pkg/db/queries/workspace_delete.sql:45",
+      "relations": [
+        "agent"
+      ]
+    },
+    {
+      "query": "ListWorkspaceAgentIDPage",
+      "source": "server/go/pkg/db/queries/workspace_delete.sql:54",
+      "relations": [
+        "agent"
+      ]
+    },
+    {
+      "query": "ListWorkspaceIssueIDFirstPage",
+      "source": "server/go/pkg/db/queries/workspace_delete.sql:67",
+      "relations": [
+        "issue"
+      ]
+    },
+    {
+      "query": "ListWorkspaceIssueIDPage",
+      "source": "server/go/pkg/db/queries/workspace_delete.sql:76",
+      "relations": [
+        "issue"
+      ]
+    },
+    {
+      "query": "ListWorkspaceRuntimeIDFirstPage",
+      "source": "server/go/pkg/db/queries/workspace_delete.sql:83",
+      "relations": [
+        "agent_runtime"
+      ]
+    },
+    {
+      "query": "ListWorkspaceRuntimeIDPage",
+      "source": "server/go/pkg/db/queries/workspace_delete.sql:92",
+      "relations": [
+        "agent_runtime"
+      ]
+    },
+    {
+      "query": "ListTaskIDsByAgentFirstPage",
+      "source": "server/go/pkg/db/queries/workspace_delete.sql:99",
+      "relations": [
+        "agent_task_queue",
+        "rationale"
+      ]
+    },
+    {
+      "query": "ListTaskIDsByAgentPage",
+      "source": "server/go/pkg/db/queries/workspace_delete.sql:109",
+      "relations": [
+        "agent_task_queue",
+        "is"
+      ]
+    },
+    {
+      "query": "ListTaskIDsByIssueFirstPage",
+      "source": "server/go/pkg/db/queries/workspace_delete.sql:139",
+      "relations": [
+        "agent_task_queue",
+        "rationale"
+      ]
+    },
+    {
+      "query": "ListTaskIDsByIssuePage",
+      "source": "server/go/pkg/db/queries/workspace_delete.sql:149",
+      "relations": [
+        "agent_task_queue",
+        "rationale"
+      ]
+    },
+    {
+      "query": "ListTaskIDsByRuntimeFirstPage",
+      "source": "server/go/pkg/db/queries/workspace_delete.sql:158",
+      "relations": [
+        "agent_task_queue",
+        "rationale"
+      ]
+    },
+    {
+      "query": "ListTaskIDsByRuntimePage",
+      "source": "server/go/pkg/db/queries/workspace_delete.sql:168",
+      "relations": [
+        "agent_task_queue",
+        "rationale"
+      ]
+    },
+    {
+      "query": "DetachTaskBatchReferences",
+      "source": "server/go/pkg/db/queries/workspace_delete.sql:178",
+      "relations": [
+        "agent_task_queue",
+        "autopilot_run"
+      ]
+    },
+    {
+      "query": "DeleteTaskBatch",
+      "source": "server/go/pkg/db/queries/workspace_delete.sql:197",
+      "relations": [
+        "agent_task_queue",
+        "batch",
+        "channel_outbound_card_message",
+        "channel_task_delivery",
+        "chat_draft_restore",
+        "lark_outbound_card_message",
+        "task_context_receipt",
+        "task_message",
+        "task_supplement",
+        "task_supplement_capability",
+        "task_token",
+        "task_usage",
+        "unnest"
+      ]
+    },
+    {
+      "query": "DeleteTaskTokensByAgent",
+      "source": "server/go/pkg/db/queries/workspace_delete.sql:238",
+      "relations": [
+        "task_token"
+      ]
+    },
+    {
+      "query": "PrepareWorkspaceDeletionLinks",
+      "source": "server/go/pkg/db/queries/workspace_delete.sql:247",
+      "relations": [
+        "comment",
+        "issue",
+        "webhook_delivery"
+      ]
+    },
+    {
+      "query": "DeleteWorkspaceLeafData",
+      "source": "server/go/pkg/db/queries/workspace_delete.sql:272",
+      "relations": [
+        "activity_log",
+        "agent",
+        "agent_app",
+        "agent_builder_draft",
+        "agent_invocation_target",
+        "agent_skill",
+        "agent_to_label",
+        "app_action_request",
+        "app_action_rule",
+        "app_tool_call",
+        "app_tool_class_override",
+        "attachment",
+        "autopilot",
+        "autopilot_collaborator",
+        "autopilot_subscriber",
+        "channel_binding_token",
+        "channel_chat_context_generation",
+        "channel_chat_session_binding",
+        "channel_inbound_audit",
+        "channel_inbound_message_dedup",
+        "channel_installation",
+        "channel_media_pending_object",
+        "channel_outbound_card_message",
+        "channel_outbound_message",
+        "channel_reply_delivery",
+        "channel_task_delivery",
+        "channel_user_binding",
+        "chat_draft_restore",
+        "chat_session",
+        "chat_submission_receipt",
+        "chat_wakeup",
+        "comment_reaction",
+        "daemon_connection",
+        "dingtalk_group_route",
+        "github_pending_check_suite",
+        "github_pull_request",
+        "github_pull_request_check_run",
+        "github_pull_request_check_suite",
+        "inbox_item",
+        "issue",
+        "issue_dependency",
+        "issue_environment",
+        "issue_environment_command",
+        "issue_environment_config",
+        "issue_label",
+        "issue_pr_automation",
+        "issue_pull_request",
+        "issue_pull_request_exclusion",
+        "issue_reaction",
+        "issue_subscriber",
+        "issue_to_label",
+        "issue_vcs_pull_request",
+        "lark_binding_token",
+        "lark_chat_session_binding",
+        "lark_inbound_audit",
+        "lark_inbound_message_dedup",
+        "lark_installation",
+        "lark_outbound_card_message",
+        "lark_user_binding",
+        "project_resource",
+        "skill",
+        "skill_file",
+        "skill_to_label",
+        "squad",
+        "squad_member",
+        "task_context_receipt",
+        "task_supplement",
+        "task_supplement_capability",
+        "task_token",
+        "task_usage_hourly",
+        "task_usage_hourly_dirty",
+        "vcs_commit_status",
+        "vcs_connection",
+        "vcs_pull_request",
+        "webhook_delivery",
+        "wecom_install_session",
+        "weixin_account_state",
+        "weixin_login_session",
+        "workspace_app_setting",
+        "workspace_composio_connection",
+        "ws_agents",
+        "ws_autopilots",
+        "ws_channel_installations",
+        "ws_github_prs",
+        "ws_issues",
+        "ws_labels",
+        "ws_lark_installations",
+        "ws_sessions",
+        "ws_skills",
+        "ws_squads",
+        "ws_vcs_connections",
+        "ws_vcs_prs"
+      ]
+    },
+    {
+      "query": "DeleteWorkspaceChatMessages",
+      "source": "server/go/pkg/db/queries/workspace_delete.sql:579",
+      "relations": [
+        "chat_message",
+        "chat_session"
+      ]
+    },
+    {
+      "query": "DeleteWorkspaceCommunicationRoots",
+      "source": "server/go/pkg/db/queries/workspace_delete.sql:585",
+      "relations": [
+        "channel_installation",
+        "chat_session",
+        "dingtalk_bot_identity",
+        "dingtalk_group_presence",
+        "lark_installation"
+      ]
+    },
+    {
+      "query": "DeleteWorkspaceComments",
+      "source": "server/go/pkg/db/queries/workspace_delete.sql:602",
+      "relations": [
+        "comment"
+      ]
+    },
+    {
+      "query": "DeleteWorkspaceIssueRoots",
+      "source": "server/go/pkg/db/queries/workspace_delete.sql:605",
+      "relations": [
+        "issue",
+        "issue_child_event",
+        "issue_label",
+        "issue_property",
+        "issue_unread",
+        "issue_view",
+        "issue_view_preference",
+        "issue_wakeup",
+        "issue_wakeup_receipt",
+        "quick_action"
+      ]
+    },
+    {
+      "query": "DeleteWorkspaceAutopilotRuns",
+      "source": "server/go/pkg/db/queries/workspace_delete.sql:635",
+      "relations": [
+        "autopilot",
+        "autopilot_run"
+      ]
+    },
+    {
+      "query": "DeleteWorkspaceAutopilotQuotaReservations",
+      "source": "server/go/pkg/db/queries/workspace_delete.sql:641",
+      "relations": [
+        "autopilot_quota_reservation"
+      ]
+    },
+    {
+      "query": "DeleteWorkspaceAutopilotQuotaPeriods",
+      "source": "server/go/pkg/db/queries/workspace_delete.sql:645",
+      "relations": [
+        "autopilot_quota_period"
+      ]
+    },
+    {
+      "query": "DeleteWorkspaceEntitlementLimitOverages",
+      "source": "server/go/pkg/db/queries/workspace_delete.sql:649",
+      "relations": [
+        "entitlement_limit_overage"
+      ]
+    },
+    {
+      "query": "DeleteWorkspaceAutopilotChildren",
+      "source": "server/go/pkg/db/queries/workspace_delete.sql:653",
+      "relations": [
+        "autopilot",
+        "autopilot_rule_version",
+        "autopilot_trigger"
+      ]
+    },
+    {
+      "query": "DeleteWorkspaceAutopilots",
+      "source": "server/go/pkg/db/queries/workspace_delete.sql:664",
+      "relations": [
+        "autopilot"
+      ]
+    },
+    {
+      "query": "DeleteWorkspacePullRequests",
+      "source": "server/go/pkg/db/queries/workspace_delete.sql:667",
+      "relations": [
+        "github_pull_request",
+        "vcs_pull_request"
+      ]
+    },
+    {
+      "query": "DeleteWorkspaceConnections",
+      "source": "server/go/pkg/db/queries/workspace_delete.sql:674",
+      "relations": [
+        "github_installation",
+        "vcs_connection"
+      ]
+    },
+    {
+      "query": "DeleteWorkspaceSquadsAndSkills",
+      "source": "server/go/pkg/db/queries/workspace_delete.sql:681",
+      "relations": [
+        "skill",
+        "skill_version",
+        "squad"
+      ]
+    },
+    {
+      "query": "DeleteWorkspacePluginData",
+      "source": "server/go/pkg/db/queries/workspace_delete.sql:692",
+      "relations": [
+        "installations",
+        "plugin_hook_schedule",
+        "plugin_installation",
+        "plugin_invocation",
+        "plugin_package",
+        "plugin_package_file",
+        "plugin_package_version",
+        "plugin_secret",
+        "plugin_storage",
+        "versions"
+      ]
+    },
+    {
+      "query": "DeleteWorkspaceAgents",
+      "source": "server/go/pkg/db/queries/workspace_delete.sql:742",
+      "relations": [
+        "agent"
+      ]
+    },
+    {
+      "query": "DeleteWorkspaceRuntimesAndProjects",
+      "source": "server/go/pkg/db/queries/workspace_delete.sql:745",
+      "relations": [
+        "agent_runtime",
+        "project",
+        "project_folder",
+        "project_member",
+        "project_subscriber",
+        "runtime_profile",
+        "runtime_rate_limit"
+      ]
+    },
+    {
+      "query": "DeleteWorkspaceAdministration",
+      "source": "server/go/pkg/db/queries/workspace_delete.sql:767",
+      "relations": [
+        "client_usage_daily",
+        "daemon_token",
+        "feedback",
+        "member",
+        "notification_preference",
+        "pinned_item",
+        "workspace_invitation",
+        "workspace_share_link"
+      ]
+    },
+    {
+      "query": "DeleteWorkspace",
+      "source": "server/go/pkg/db/queries/workspace.sql:119",
+      "relations": [
+        "agent",
+        "agent_mcp_server",
+        "agent_to_label",
+        "channel_binding_token",
+        "channel_chat_context_generation",
+        "channel_chat_session_binding",
+        "channel_inbound_audit",
+        "channel_inbound_message_dedup",
+        "channel_installation",
+        "channel_outbound_card_message",
+        "channel_outbound_message",
+        "channel_reply_delivery",
+        "channel_task_delivery",
+        "channel_user_binding",
+        "chat_draft_restore",
+        "chat_session",
+        "chat_submission_receipt",
+        "cleared_chat_sessions",
+        "client_usage_daily",
+        "dingtalk_bot_identity",
+        "dingtalk_group_presence",
+        "dingtalk_group_route",
+        "github_pending_check_suite",
+        "github_pull_request",
+        "github_pull_request_check_run",
+        "issue_property",
+        "issue_vcs_pull_request",
+        "quick_action",
+        "skill",
+        "skill_to_label",
+        "vcs_commit_status",
+        "vcs_connection",
+        "vcs_pull_request",
+        "workspace",
+        "workspace_mcp_server",
+        "ws_agents",
+        "ws_github_prs",
+        "ws_installations",
+        "ws_mcp_servers",
+        "ws_sessions",
+        "ws_skills",
+        "ws_vcs_connections",
+        "ws_vcs_prs"
+      ]
+    }
+  ]
+}

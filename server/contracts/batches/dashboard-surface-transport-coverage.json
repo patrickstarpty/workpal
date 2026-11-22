@@ -1,0 +1,601 @@
+{
+  "version": 1,
+  "scope": [
+    "packages/views/dashboard/components/contribution-tab.tsx",
+    "packages/views/dashboard/components/dashboard-page.tsx",
+    "packages/views/dashboard/components/leaderboard.tsx"
+  ],
+  "coverage": "Bounded static source closure; root review required; no runtime/backend/global completion claim",
+  "files": [
+    {
+      "path": "packages/views/dashboard/components/contribution-tab.tsx",
+      "sha256": "ee2f42aac825d23ba6516c9b2026f5a5af60688008ee93645d2b65cdf843ad78",
+      "whole_source": true,
+      "exports": [
+        {
+          "name": "ContributionTab",
+          "anchor": "packages/views/dashboard/components/contribution-tab.tsx:34"
+        }
+      ],
+      "disposition": "Complete source reviewed"
+    },
+    {
+      "path": "packages/views/dashboard/components/dashboard-page.tsx",
+      "sha256": "311e6f8e9846917b045cb672e6c834433214b903c29da1f6f6551c60d9ee123c",
+      "whole_source": true,
+      "exports": [
+        {
+          "name": "DashboardPage",
+          "anchor": "packages/views/dashboard/components/dashboard-page.tsx:150"
+        }
+      ],
+      "disposition": "Complete source reviewed"
+    },
+    {
+      "path": "packages/views/dashboard/components/leaderboard.tsx",
+      "sha256": "eaebf28efc1721f5fb4d8137ce3f70796b3396bea2560f7c75782691b2616768",
+      "whole_source": true,
+      "exports": [
+        {
+          "name": "Leaderboard",
+          "anchor": "packages/views/dashboard/components/leaderboard.tsx:52"
+        }
+      ],
+      "disposition": "Complete source reviewed"
+    },
+    {
+      "path": "packages/core/dashboard/queries.ts",
+      "sha256": "04853f45c25fa332472e15eea17802c7e2da4c66067ecf9d867c698443a46553",
+      "whole_source": true,
+      "exports": [
+        {
+          "name": "dashboardKeys",
+          "anchor": "packages/core/dashboard/queries.ts:4"
+        },
+        {
+          "name": "dashboardUsageDailyOptions",
+          "anchor": "packages/core/dashboard/queries.ts:71"
+        },
+        {
+          "name": "dashboardUsageByAgentOptions",
+          "anchor": "packages/core/dashboard/queries.ts:96"
+        },
+        {
+          "name": "dashboardAgentRunTimeOptions",
+          "anchor": "packages/core/dashboard/queries.ts:121"
+        },
+        {
+          "name": "dashboardRunTimeDailyOptions",
+          "anchor": "packages/core/dashboard/queries.ts:146"
+        },
+        {
+          "name": "dashboardFailuresDailyOptions",
+          "anchor": "packages/core/dashboard/queries.ts:171"
+        },
+        {
+          "name": "dashboardFailuresByAgentOptions",
+          "anchor": "packages/core/dashboard/queries.ts:196"
+        }
+      ],
+      "disposition": "Complete source reviewed"
+    },
+    {
+      "path": "packages/core/dashboard/index.ts",
+      "sha256": "390e219a2b6d9ed7b76ff8ed7c5c2424d32c922a75ab220706d3d7509c6a8520",
+      "whole_source": true,
+      "exports": [],
+      "disposition": "Complete source reviewed"
+    },
+    {
+      "path": "packages/core/workspace/queries.ts",
+      "sha256": "1b16ae9e020e75a5a92cebc5270a14c58d97f6b7b0fe033d2f1d2c2d837d093a",
+      "whole_source": false,
+      "exports": [],
+      "disposition": "Bounded supporting methods only"
+    },
+    {
+      "path": "packages/core/projects/queries.ts",
+      "sha256": "39315862d7770c602ebfda690e8dc691b6732cd833a36975a8638ba3ff25a0d6",
+      "whole_source": false,
+      "exports": [],
+      "disposition": "Bounded supporting methods only"
+    },
+    {
+      "path": "packages/core/api/client.ts",
+      "sha256": "779bb65b5b7ead815836f7c704ec3c370bafae203e4f92119fadce93e982a4d7",
+      "whole_source": false,
+      "exports": [],
+      "disposition": "Bounded supporting methods only"
+    },
+    {
+      "path": "packages/views/common/actor-avatar.tsx",
+      "sha256": "ec36cfc2b7d80bac6c23aa713e714f5f0adacd2f0f24713e7364b263092daf25",
+      "whole_source": false,
+      "exports": [],
+      "disposition": "Bounded agent-hover supporting branch only"
+    },
+    {
+      "path": "packages/core/workspace/hooks.ts",
+      "sha256": "7531c31b1caa51b0254eff7738c3ed14cd831a467c311d9aa8cce3ddff2964d3",
+      "whole_source": false,
+      "exports": [],
+      "disposition": "Bounded agent-hover supporting branch only"
+    },
+    {
+      "path": "packages/views/agents/components/agent-profile-card.tsx",
+      "sha256": "83c2fdf961abc0162baf9a6f88e9489da8a25f4ce1f1838609bc4a7409894322",
+      "whole_source": false,
+      "exports": [],
+      "disposition": "Bounded agent-hover supporting branch only"
+    },
+    {
+      "path": "packages/core/agents/use-agent-presence.ts",
+      "sha256": "3c4927752ea6bbcd4895fe5d7c02362be23dec82882d41315e868f14d212df0d",
+      "whole_source": false,
+      "exports": [],
+      "disposition": "Bounded agent-hover supporting branch only"
+    },
+    {
+      "path": "packages/core/agents/queries.ts",
+      "sha256": "025f015886abe362104b169f55c1504ecfba0e1bb01c9059b31618274f913d64",
+      "whole_source": false,
+      "exports": [],
+      "disposition": "Bounded agent-hover supporting branch only"
+    },
+    {
+      "path": "packages/core/runtimes/queries.ts",
+      "sha256": "7bdbc4bfa199c0f605e052c851eb8d494b4c051edb83626ffc35874c1620eaff",
+      "whole_source": false,
+      "exports": [],
+      "disposition": "Bounded agent-hover supporting branch only"
+    },
+    {
+      "path": "packages/core/plugins/queries.ts",
+      "sha256": "9af5000968a140b65bc015bb67794e9d3e394cdf05611a7d9eef8b9abf4fbee5",
+      "whole_source": false,
+      "exports": [],
+      "disposition": "Bounded agent-hover supporting branch only"
+    },
+    {
+      "path": "packages/core/workspace/avatar-url.ts",
+      "sha256": "293b4ea5130a2abe9112f33c6452464b8eceae119d49883ce4c7fbbdc16d84e7",
+      "whole_source": false,
+      "exports": [],
+      "disposition": "Bounded agent-hover supporting branch only"
+    },
+    {
+      "path": "packages/ui/components/common/actor-avatar.tsx",
+      "sha256": "57bfa9e2be8eec414c3cd567a43c38ebf38a2eb929131f69c10040fc5f091e37",
+      "whole_source": false,
+      "exports": [],
+      "disposition": "Bounded agent-hover supporting branch only"
+    },
+    {
+      "path": "packages/ui/lib/avatar-emoji.ts",
+      "sha256": "d6c298deb5ff0880d6dfaf8e9feb14b90bb6f5b1d4f8df072186bb48bbed65f2",
+      "whole_source": false,
+      "exports": [],
+      "disposition": "Bounded agent-hover supporting branch only"
+    },
+    {
+      "path": "packages/ui/components/ui/hover-card.tsx",
+      "sha256": "0939aa391143d1c55cf0765329f5729a3d36b343caff45e787cb060c2ea1ca53",
+      "whole_source": false,
+      "exports": [],
+      "disposition": "Bounded agent-hover supporting branch only"
+    }
+  ],
+  "edges": [
+    {
+      "source": "packages/core/dashboard/queries.ts:81",
+      "api_method": "getDashboardUsageDaily",
+      "client_anchor": "packages/core/api/client.ts:2824",
+      "kind": "query",
+      "inventory": [
+        {
+          "id": "client:2831",
+          "method": "GET",
+          "path_expression": "/api/dashboard/usage/daily?${search}",
+          "route": {
+            "method": "GET",
+            "path": "/api/dashboard/usage/daily"
+          }
+        }
+      ],
+      "inputs": "days=chartFetchDays for daily series; days=selected days for per-agent series; project_id=validated projectId ?? undefined; tz=viewTZ. Truthy values added to URLSearchParams. GET default; no POST branch."
+    },
+    {
+      "source": "packages/core/dashboard/queries.ts:106",
+      "api_method": "getDashboardUsageByAgent",
+      "client_anchor": "packages/core/api/client.ts:2840",
+      "kind": "query",
+      "inventory": [
+        {
+          "id": "client:2847",
+          "method": "GET",
+          "path_expression": "/api/dashboard/usage/by-agent?${search}",
+          "route": {
+            "method": "GET",
+            "path": "/api/dashboard/usage/by-agent"
+          }
+        }
+      ],
+      "inputs": "days=chartFetchDays for daily series; days=selected days for per-agent series; project_id=validated projectId ?? undefined; tz=viewTZ. Truthy values added to URLSearchParams. GET default; no POST branch."
+    },
+    {
+      "source": "packages/core/dashboard/queries.ts:131",
+      "api_method": "getDashboardAgentRunTime",
+      "client_anchor": "packages/core/api/client.ts:2858",
+      "kind": "query",
+      "inventory": [
+        {
+          "id": "client:2865",
+          "method": "GET",
+          "path_expression": "/api/dashboard/agent-runtime?${search}",
+          "route": {
+            "method": "GET",
+            "path": "/api/dashboard/agent-runtime"
+          }
+        }
+      ],
+      "inputs": "days=chartFetchDays for daily series; days=selected days for per-agent series; project_id=validated projectId ?? undefined; tz=viewTZ. Truthy values added to URLSearchParams. GET default; no POST branch."
+    },
+    {
+      "source": "packages/core/dashboard/queries.ts:156",
+      "api_method": "getDashboardRunTimeDaily",
+      "client_anchor": "packages/core/api/client.ts:2876",
+      "kind": "query",
+      "inventory": [
+        {
+          "id": "client:2883",
+          "method": "GET",
+          "path_expression": "/api/dashboard/runtime/daily?${search}",
+          "route": {
+            "method": "GET",
+            "path": "/api/dashboard/runtime/daily"
+          }
+        }
+      ],
+      "inputs": "days=chartFetchDays for daily series; days=selected days for per-agent series; project_id=validated projectId ?? undefined; tz=viewTZ. Truthy values added to URLSearchParams. GET default; no POST branch."
+    },
+    {
+      "source": "packages/core/dashboard/queries.ts:181",
+      "api_method": "getDashboardFailuresDaily",
+      "client_anchor": "packages/core/api/client.ts:2894",
+      "kind": "query",
+      "inventory": [
+        {
+          "id": "client:2901",
+          "method": "GET",
+          "path_expression": "/api/dashboard/failures/daily?${search}",
+          "route": {
+            "method": "GET",
+            "path": "/api/dashboard/failures/daily"
+          }
+        }
+      ],
+      "inputs": "days=chartFetchDays for daily series; days=selected days for per-agent series; project_id=validated projectId ?? undefined; tz=viewTZ. Truthy values added to URLSearchParams. GET default; no POST branch."
+    },
+    {
+      "source": "packages/core/dashboard/queries.ts:206",
+      "api_method": "getDashboardFailuresByAgent",
+      "client_anchor": "packages/core/api/client.ts:2910",
+      "kind": "query",
+      "inventory": [
+        {
+          "id": "client:2917",
+          "method": "GET",
+          "path_expression": "/api/dashboard/failures/by-agent?${search}",
+          "route": {
+            "method": "GET",
+            "path": "/api/dashboard/failures/by-agent"
+          }
+        }
+      ],
+      "inputs": "days=chartFetchDays for daily series; days=selected days for per-agent series; project_id=validated projectId ?? undefined; tz=viewTZ. Truthy values added to URLSearchParams. GET default; no POST branch."
+    },
+    {
+      "source": "packages/core/workspace/queries.ts:54",
+      "api_method": "listAgents",
+      "kind": "query-or-mutation",
+      "inventory": [
+        {
+          "id": "client:2066",
+          "method": "GET",
+          "path_expression": "/api/agents?${search}",
+          "route": {
+            "method": "GET",
+            "path": "/api/agents"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/projects/queries.ts:25",
+      "api_method": "listProjects",
+      "kind": "query-or-mutation",
+      "inventory": [
+        {
+          "id": "client:4517",
+          "method": "GET",
+          "path_expression": "/api/projects?${search}",
+          "route": {
+            "method": "GET",
+            "path": "/api/projects"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/views/dashboard/components/contribution-tab.tsx:41",
+      "api_method": "request",
+      "kind": "query-or-mutation",
+      "inventory": [
+        {
+          "id": "contribution:41",
+          "method": "GET",
+          "path_expression": "/api/dashboard/contribution?${params}",
+          "route": {
+            "method": "GET",
+            "path": "/api/dashboard/contribution"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/views/dashboard/components/contribution-tab.tsx:50",
+      "api_method": "request",
+      "kind": "query-or-mutation",
+      "inventory": [
+        {
+          "id": "contribution:50",
+          "method": "PUT",
+          "path_expression": "/api/dashboard/contribution",
+          "route": {
+            "method": "PUT",
+            "path": "/api/dashboard/contribution"
+          }
+        }
+      ]
+    },
+    {
+      "source": "dashboard leaderboard agent hover via supporting queries",
+      "kind": "query",
+      "inventory": [
+        {
+          "id": "client:2276",
+          "method": "GET",
+          "path_expression": "/api/runtimes?${search}",
+          "route": {
+            "method": "GET",
+            "path": "/api/runtimes"
+          }
+        }
+      ]
+    },
+    {
+      "source": "dashboard leaderboard agent hover via supporting queries",
+      "kind": "query",
+      "inventory": [
+        {
+          "id": "client:3046",
+          "method": "GET",
+          "path_expression": "/api/agent-task-snapshot",
+          "route": {
+            "method": "GET",
+            "path": "/api/agent-task-snapshot"
+          }
+        }
+      ]
+    },
+    {
+      "source": "dashboard leaderboard agent hover via supporting queries",
+      "kind": "query",
+      "inventory": [
+        {
+          "id": "client:3425",
+          "method": "GET",
+          "path_expression": "/api/workspaces/${workspaceId}/plugins",
+          "route": {
+            "method": "GET",
+            "path": "/api/workspaces/{id}/plugins"
+          }
+        }
+      ]
+    },
+    {
+      "source": "dashboard leaderboard agent hover via supporting queries",
+      "kind": "query",
+      "inventory": [
+        {
+          "id": "client:3765",
+          "method": "GET",
+          "path_expression": "/api/workspaces/${workspaceId}/members",
+          "route": {
+            "method": "GET",
+            "path": "/api/workspaces/{id}/members"
+          }
+        }
+      ]
+    },
+    {
+      "source": "dashboard leaderboard agent hover via supporting queries",
+      "kind": "query",
+      "inventory": [
+        {
+          "id": "client:5203",
+          "method": "GET",
+          "path_expression": "/api/squads",
+          "route": {
+            "method": "GET",
+            "path": "/api/squads"
+          }
+        }
+      ]
+    }
+  ],
+  "inventory": [
+    {
+      "id": "client:2066",
+      "method": "GET",
+      "path_expression": "/api/agents?${search}",
+      "route": {
+        "method": "GET",
+        "path": "/api/agents"
+      }
+    },
+    {
+      "id": "client:2831",
+      "method": "GET",
+      "path_expression": "/api/dashboard/usage/daily?${search}",
+      "route": {
+        "method": "GET",
+        "path": "/api/dashboard/usage/daily"
+      }
+    },
+    {
+      "id": "client:2847",
+      "method": "GET",
+      "path_expression": "/api/dashboard/usage/by-agent?${search}",
+      "route": {
+        "method": "GET",
+        "path": "/api/dashboard/usage/by-agent"
+      }
+    },
+    {
+      "id": "client:2865",
+      "method": "GET",
+      "path_expression": "/api/dashboard/agent-runtime?${search}",
+      "route": {
+        "method": "GET",
+        "path": "/api/dashboard/agent-runtime"
+      }
+    },
+    {
+      "id": "client:2883",
+      "method": "GET",
+      "path_expression": "/api/dashboard/runtime/daily?${search}",
+      "route": {
+        "method": "GET",
+        "path": "/api/dashboard/runtime/daily"
+      }
+    },
+    {
+      "id": "client:2901",
+      "method": "GET",
+      "path_expression": "/api/dashboard/failures/daily?${search}",
+      "route": {
+        "method": "GET",
+        "path": "/api/dashboard/failures/daily"
+      }
+    },
+    {
+      "id": "client:2917",
+      "method": "GET",
+      "path_expression": "/api/dashboard/failures/by-agent?${search}",
+      "route": {
+        "method": "GET",
+        "path": "/api/dashboard/failures/by-agent"
+      }
+    },
+    {
+      "id": "client:4517",
+      "method": "GET",
+      "path_expression": "/api/projects?${search}",
+      "route": {
+        "method": "GET",
+        "path": "/api/projects"
+      }
+    },
+    {
+      "id": "contribution:41",
+      "method": "GET",
+      "path_expression": "/api/dashboard/contribution?${params}",
+      "route": {
+        "method": "GET",
+        "path": "/api/dashboard/contribution"
+      }
+    },
+    {
+      "id": "contribution:50",
+      "method": "PUT",
+      "path_expression": "/api/dashboard/contribution",
+      "route": {
+        "method": "PUT",
+        "path": "/api/dashboard/contribution"
+      }
+    },
+    {
+      "id": "client:2276",
+      "method": "GET",
+      "path_expression": "/api/runtimes?${search}",
+      "route": {
+        "method": "GET",
+        "path": "/api/runtimes"
+      }
+    },
+    {
+      "id": "client:3046",
+      "method": "GET",
+      "path_expression": "/api/agent-task-snapshot",
+      "route": {
+        "method": "GET",
+        "path": "/api/agent-task-snapshot"
+      }
+    },
+    {
+      "id": "client:3425",
+      "method": "GET",
+      "path_expression": "/api/workspaces/${workspaceId}/plugins",
+      "route": {
+        "method": "GET",
+        "path": "/api/workspaces/{id}/plugins"
+      }
+    },
+    {
+      "id": "client:3765",
+      "method": "GET",
+      "path_expression": "/api/workspaces/${workspaceId}/members",
+      "route": {
+        "method": "GET",
+        "path": "/api/workspaces/{id}/members"
+      }
+    },
+    {
+      "id": "client:5203",
+      "method": "GET",
+      "path_expression": "/api/squads",
+      "route": {
+        "method": "GET",
+        "path": "/api/squads"
+      }
+    }
+  ],
+  "reuse": [
+    "schema-data-transport-coverage.json: dashboard utils aggregation closure",
+    "core-query-transport-coverage.json: query union and agentListOptions",
+    "contribution.json: response/import contract"
+  ],
+  "branches": [
+    "Six rollups enabled iff wsId; 60s stale, 300s polling; previous data only if keys match except days index 3. All six mounted independent of tab.",
+    "chartFetchDays=max(1,ceil(days/7))*7; daily rows trimmed to viewer calendar cutoff; per-agent uses selected days. Invalid or all-project selection becomes null.",
+    "Project list includes archived; no status input. Agent list includes archived and workspace_id iff truthy; polling 30s only for unarchived online/unstable agents. Neither list factory adds enabled guard.",
+    "Tab URL errors/contribution accepted, others usage; replace URL locally. Refresh invalidates dashboard/wsId prefix including contribution, spinner/freshness only six rollups.",
+    "Usage loading OR four usage queries; empty iff all four arrays empty after loading. Errors loading OR two failure queries. Failed rollups default empty arrays; no dedicated page error branch.",
+    "Contribution pending skeleton; error Retry refetch; success rows/nonrows; zero totals safe percentages; calendar focus/click only status; ticket navigation encoded locally.",
+    "Import no file returns; >900000 bytes throws; file.text then JSON.parse locally; PUT JSON commits; count schema parse; await contribution prefix invalidation; error status; finally importing false; input reset. No download/export handler in targets.",
+    "Leaderboard tokens/cost/time/tasks stable descending sort; show first ten or all; toggle only >10; empty branch; synthetic deleted/restricted no ActorAvatar; deleted time/tasks dash; real row name fallback UUID. Unavailable totals dash; incomplete prefix ≥; coverage pending/unreported branches local."
+  ],
+  "boundaries": [
+    "Local aggregation/pricing/date/format/schema parse is not transport; schema-data closure reused.",
+    "React Query scheduling/cache invalidation is library boundary; does not introduce new route.",
+    "Native File.text and browser file picker parse text only; no installation/execution. Navigation push/replace are platform adapter boundaries.",
+    "ApiClient request delegates fetch → fetchRaw; GET default or explicit PUT; auth/workspace/CSRF/identity headers, credentials include; observer refusal before send; network errors throw; replayable 403 CSRF rejection retries once; 401 unauthorized handling; non-ok ApiError; 204 undefined otherwise JSON. No method promotion to POST."
+  ],
+  "review_status": "Static artifact prepared for root review; imported UI/native implementation boundaries explicitly bounded",
+  "agent_hover_closure": "Leaderboard agent hover closure (bounded supporting slices)\n\nleaderboard.tsx:269–274 passes agent type/id and enableHoverCard, with no showStatusDot, avatar override or live variant. actor-avatar.tsx:87–181 defaults profileRequiresDirectoryEntry=false and hoverCardVariant=profile; therefore real rows reach AgentAvatarHoverCard:278–300 and AgentProfileCard, never live peek, member or squad hover payloads. Synthetic rows bypass this wrapper. Shell:343–385 supplies content to the local HoverCard adapter; ui/components/ui/hover-card.tsx delegates mounting/open behavior to Base UI PreviewCard (library boundary), without a custom fetch callback.\n\nuseActorName (workspace/hooks.ts:94–220) registers members and agents without enabled guards, squads with !!wsId, and plugin installations only when pluginsEnabled && wsId.length>0. These queries run even for agent-only name/avatar lookup; passing a name would not remove them. Agent URL comes from matching directory agent.avatar_url. Profile card:31–174 registers agent/member/runtime lists before loading/missing-agent returns; runtime list has no enabled guard. Existing nonarchived agent mounts AgentAvailabilityLine:156–177 -> useAgentPresenceDetail:119–179: agents, runtimes and task snapshot each enabled=!!wsId. Archived/missing agents skip that presence child. Presence errors substitute empty arrays, missing data stays loading, missing agent yields fallback; tick/memo derivation is local.\n\nReuse core-query-transport-coverage query audit: snapshot key is workspaces/wsId/agent-task-snapshot/list, stale 30s, gc 5min, focus refetch true (agents/queries.ts:57–65). Agent-list key workspaces/wsId/agents polls every 30s iff an unarchived online/unstable row exists; member key workspaces/wsId/members, squad key workspaces/wsId/squads, plugin key workspaces/wsId/plugins/installed, runtime key runtimes/wsId/list. No additional interval in these list factories. Refetch union for this caller is listAgents/listMembers/listSquads/listPluginInstallations/listRuntimes/getAgentTaskSnapshot, subject to those gates and standard TanStack cache/focus/reconnect observer behavior; no request counts asserted. Dashboard refresh dashboard/wsId prefix does not match these keys. No card mutation or invalidation callback; detail/settings/profile navigation terminates at platform adapter.\n\nAvatar resources: workspace/avatar-url.ts:3–12 returns null for empty, prefixes trimmed API base for slash-leading values, otherwise preserves value. ui/components/common/actor-avatar.tsx:26–113 uses parseAvatarEmoji (ui/lib/avatar-emoji.ts:19–24), renders nonempty emoji locally, otherwise truthy URL as img src until onError fallback; URL change resets error. Both directory avatar and profile-card avatar use this path; profile uses base avatar directly, so no recursive hover. Browser image loading/redirects for arbitrary remote/data/blob/relative values are resource boundaries, with no fixed download endpoint inferred (reuse avatar-foreground E2). React/Base UI/TanStack and browser resource semantics terminate tracing. Only these concrete agent caller branches are closed; supporting modules have no whole-module coverage claim, unrelated member/squad hover payloads excluded. Static evidence only; no backend support claim.\n",
+  "root_review": {
+    "status": "accepted bounded target scope",
+    "verification": "Root checked current source hashes and exact inventory tuples; spot-checked concrete agent update rollback/cache writer and dashboard profile-hover/presence query branch. Supporting descendants remain explicitly bounded; no runtime support claim."
+  }
+}

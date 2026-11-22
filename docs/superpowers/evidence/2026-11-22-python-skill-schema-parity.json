@@ -1,0 +1,288 @@
+{
+  "scope": "Selected skill/agent_skill persistence acceptance/rejection only; not SQLSTATE, value canonicalization, lifecycle, API or full schema equivalence.",
+  "fixtures": [
+    {
+      "name": "valid-defaults",
+      "sql": []
+    },
+    {
+      "name": "skill.config='not-json'",
+      "sql": [
+        "UPDATE skill SET config='not-json'"
+      ]
+    },
+    {
+      "name": "skill.config='null'",
+      "sql": [
+        "UPDATE skill SET config='null'"
+      ]
+    },
+    {
+      "name": "skill.config='[1]'",
+      "sql": [
+        "UPDATE skill SET config='[1]'"
+      ]
+    },
+    {
+      "name": "skill.name=NULL",
+      "sql": [
+        "UPDATE skill SET name=NULL"
+      ]
+    },
+    {
+      "name": "skill.content=NULL",
+      "sql": [
+        "UPDATE skill SET content=NULL"
+      ]
+    },
+    {
+      "name": "skill.created_by='00000000-0000-4000-8000-000000000001'",
+      "sql": [
+        "UPDATE skill SET created_by='00000000-0000-4000-8000-000000000001'"
+      ]
+    },
+    {
+      "name": "skill.created_by=NULL",
+      "sql": [
+        "UPDATE skill SET created_by=NULL"
+      ]
+    },
+    {
+      "name": "skill.plugin_installation_id='00000000-0000-4000-8000-000000000001'",
+      "sql": [
+        "UPDATE skill SET plugin_installation_id='00000000-0000-4000-8000-000000000001'"
+      ]
+    },
+    {
+      "name": "agent_skill.enabled=NULL",
+      "sql": [
+        "UPDATE agent_skill SET enabled=NULL"
+      ]
+    },
+    {
+      "name": "agent_skill.enabled=true",
+      "sql": [
+        "UPDATE agent_skill SET enabled=true"
+      ]
+    },
+    {
+      "name": "agent_skill.enabled=false",
+      "sql": [
+        "UPDATE agent_skill SET enabled=false"
+      ]
+    },
+    {
+      "name": "agent_skill.agent_id='00000000-0000-4000-8000-000000000001'",
+      "sql": [
+        "UPDATE agent_skill SET agent_id='00000000-0000-4000-8000-000000000001'"
+      ]
+    },
+    {
+      "name": "agent_skill.skill_id='00000000-0000-4000-8000-000000000001'",
+      "sql": [
+        "UPDATE agent_skill SET skill_id='00000000-0000-4000-8000-000000000001'"
+      ]
+    },
+    {
+      "name": "duplicate-assignment",
+      "sql": [
+        "INSERT INTO agent_skill(agent_id,skill_id) VALUES ('10000000-0000-4000-8000-000000000004','10000000-0000-4000-8000-000000000005')"
+      ]
+    },
+    {
+      "name": "duplicate-name",
+      "sql": [
+        "INSERT INTO skill(workspace_id,name) VALUES ('10000000-0000-4000-8000-000000000002','Fixture skill')"
+      ]
+    },
+    {
+      "name": "delete-skill-cascade",
+      "sql": [
+        "DELETE FROM skill WHERE id='10000000-0000-4000-8000-000000000005'"
+      ]
+    },
+    {
+      "name": "delete-agent-cascade",
+      "sql": [
+        "DELETE FROM agent WHERE id='10000000-0000-4000-8000-000000000004'"
+      ]
+    }
+  ],
+  "go": [
+    {
+      "accepted": true,
+      "exit_code": 0,
+      "error": ""
+    },
+    {
+      "accepted": false,
+      "exit_code": 3,
+      "error": "ERROR:  invalid input syntax for type json\nLINE 1: UPDATE skill SET config='not-json';\n                                ^\nDETAIL:  Token \"not\" is invalid.\nCONTEXT:  JSON data, line 1: not..."
+    },
+    {
+      "accepted": true,
+      "exit_code": 0,
+      "error": ""
+    },
+    {
+      "accepted": true,
+      "exit_code": 0,
+      "error": ""
+    },
+    {
+      "accepted": false,
+      "exit_code": 3,
+      "error": "ERROR:  null value in column \"name\" of relation \"skill\" violates not-null constraint\nDETAIL:  Failing row contains (10000000-0000-4000-8000-000000000005, 10000000-0000-4000-8000-000000000002, null, , , {}, 10000000-0000-4000-8000-000000000001, 2026-11-21 20:00:59.451333+00, 2026-11-21 20:00:59.451333+00, null)."
+    },
+    {
+      "accepted": false,
+      "exit_code": 3,
+      "error": "ERROR:  null value in column \"content\" of relation \"skill\" violates not-null constraint\nDETAIL:  Failing row contains (10000000-0000-4000-8000-000000000005, 10000000-0000-4000-8000-000000000002, Fixture skill, , null, {}, 10000000-0000-4000-8000-000000000001, 2026-11-21 20:00:59.729869+00, 2026-11-21 20:00:59.729869+00, null)."
+    },
+    {
+      "accepted": false,
+      "exit_code": 3,
+      "error": "ERROR:  insert or update on table \"skill\" violates foreign key constraint \"skill_created_by_fkey\"\nDETAIL:  Key (created_by)=(00000000-0000-4000-8000-000000000001) is not present in table \"user\"."
+    },
+    {
+      "accepted": true,
+      "exit_code": 0,
+      "error": ""
+    },
+    {
+      "accepted": true,
+      "exit_code": 0,
+      "error": ""
+    },
+    {
+      "accepted": false,
+      "exit_code": 3,
+      "error": "ERROR:  null value in column \"enabled\" of relation \"agent_skill\" violates not-null constraint\nDETAIL:  Failing row contains (10000000-0000-4000-8000-000000000004, 10000000-0000-4000-8000-000000000005, 2026-11-21 20:01:00.643358+00, null)."
+    },
+    {
+      "accepted": true,
+      "exit_code": 0,
+      "error": ""
+    },
+    {
+      "accepted": true,
+      "exit_code": 0,
+      "error": ""
+    },
+    {
+      "accepted": false,
+      "exit_code": 3,
+      "error": "ERROR:  insert or update on table \"agent_skill\" violates foreign key constraint \"agent_skill_agent_id_fkey\"\nDETAIL:  Key (agent_id)=(00000000-0000-4000-8000-000000000001) is not present in table \"agent\"."
+    },
+    {
+      "accepted": false,
+      "exit_code": 3,
+      "error": "ERROR:  insert or update on table \"agent_skill\" violates foreign key constraint \"agent_skill_skill_id_fkey\"\nDETAIL:  Key (skill_id)=(00000000-0000-4000-8000-000000000001) is not present in table \"skill\"."
+    },
+    {
+      "accepted": false,
+      "exit_code": 3,
+      "error": "ERROR:  duplicate key value violates unique constraint \"agent_skill_pkey\"\nDETAIL:  Key (agent_id, skill_id)=(10000000-0000-4000-8000-000000000004, 10000000-0000-4000-8000-000000000005) already exists."
+    },
+    {
+      "accepted": false,
+      "exit_code": 3,
+      "error": "ERROR:  duplicate key value violates unique constraint \"skill_workspace_id_name_key\"\nDETAIL:  Key (workspace_id, name)=(10000000-0000-4000-8000-000000000002, Fixture skill) already exists."
+    },
+    {
+      "accepted": true,
+      "exit_code": 0,
+      "error": ""
+    },
+    {
+      "accepted": true,
+      "exit_code": 0,
+      "error": ""
+    }
+  ],
+  "python": [
+    {
+      "accepted": true,
+      "error": ""
+    },
+    {
+      "accepted": false,
+      "error": "CHECK constraint failed: workpal_jsonb_valid(config)=1"
+    },
+    {
+      "accepted": true,
+      "error": ""
+    },
+    {
+      "accepted": true,
+      "error": ""
+    },
+    {
+      "accepted": false,
+      "error": "NOT NULL constraint failed: skill.name"
+    },
+    {
+      "accepted": false,
+      "error": "NOT NULL constraint failed: skill.content"
+    },
+    {
+      "accepted": false,
+      "error": "FOREIGN KEY constraint failed"
+    },
+    {
+      "accepted": true,
+      "error": ""
+    },
+    {
+      "accepted": true,
+      "error": ""
+    },
+    {
+      "accepted": false,
+      "error": "NOT NULL constraint failed: agent_skill.enabled"
+    },
+    {
+      "accepted": true,
+      "error": ""
+    },
+    {
+      "accepted": true,
+      "error": ""
+    },
+    {
+      "accepted": false,
+      "error": "FOREIGN KEY constraint failed"
+    },
+    {
+      "accepted": false,
+      "error": "FOREIGN KEY constraint failed"
+    },
+    {
+      "accepted": false,
+      "error": "UNIQUE constraint failed: agent_skill.agent_id, agent_skill.skill_id"
+    },
+    {
+      "accepted": false,
+      "error": "UNIQUE constraint failed: skill.workspace_id, skill.name"
+    },
+    {
+      "accepted": true,
+      "error": ""
+    },
+    {
+      "accepted": true,
+      "error": ""
+    }
+  ],
+  "mismatches": [],
+  "migration_exit_code": 0,
+  "migrator_sha256": "3751ef1bed4ad85a884360b595efccbd9f96f393ed960944336e5481a40d2499",
+  "migration_manifest_sha256": "4b8b30ed1c2557a1407a9f75bff3d92a747b6ca39199868fe0b43e921fc6ff3a",
+  "python_sources_sha256": {
+    "server/migrations/versions/0018_skill.py": "adee6d45c5906c4ef042bf7596d06599cdc8c8ba4fc80dcf7731c5142cbd03b1",
+    "server/src/workpal_backend/infrastructure/sqlite_compat.py": "f502f05ba40829fbeafeca4c8510792f1d3d288edc2cf9ec28d850fc630462f6",
+    "server/src/workpal_backend/infrastructure/database.py": "f0b926ff1ad7789086049ae37db3df5ae76f0dd70db284cd84e2d388940ff669",
+    "server/migrations/env.py": "54aa6de0b91526e7902b2833ee156eeb5449a8ea2bd1df735b0f635f7b066393",
+    "server/tools/run_skill_schema_parity.py": "3ed71f21514ac491618c43c479a5c49f55e8234d0a5af225b440efba3de8d3ba"
+  }
+}

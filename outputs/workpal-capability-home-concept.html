@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Workpal capability home</title>
+<style>
+:root{color-scheme:light dark}
+*{box-sizing:border-box}
+body{margin:0;color:var(--foreground);font-family:Inter,var(--font-sans),sans-serif}
+#workpal-concept{font-size:14px;line-height:1.55}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible,summary:focus-visible{outline:2px solid var(--ring);outline-offset:3px}
+button:disabled{cursor:default}
+.masthead{display:flex;align-items:center;gap:24px;flex-wrap:wrap;padding:8px 0 18px;border-bottom:1px solid var(--border)}
+.brand{font-size:20px;font-weight:600;letter-spacing:-.8px;border:0;background:transparent;padding:0}
+.nav{display:flex;gap:18px;align-items:center;flex:1}
+.nav button{background:transparent;border:0;padding:7px 0;font-size:12px;color:var(--muted-foreground)}
+.nav button[aria-current=page]{color:var(--foreground);box-shadow:0 1px currentColor}
+.primary{border:1px solid var(--foreground);background:var(--foreground);color:var(--background);padding:9px 13px;border-radius:var(--radius);font-size:12px;white-space:nowrap}
+.plain{border:1px solid var(--border);background:var(--card);padding:8px 12px;border-radius:var(--radius);font-size:12px}
+.link{border:0;background:transparent;padding:0;text-align:left;font-size:12px;font-weight:500}
+.hero{padding:30px 0 24px;max-width:620px}
+.eyebrow{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted-foreground);margin:0 0 9px}
+h1,h2,h3,p{margin:0}
+h1{font-size:36px;letter-spacing:-1.5px;line-height:1.15;font-weight:500}
+h2{font-size:21px;line-height:1.3;letter-spacing:-.5px;font-weight:500}
+h3{font-size:15px;font-weight:500}
+.subtitle{color:var(--muted-foreground);margin-top:11px;max-width:580px}
+.scenario{display:flex;justify-content:space-between;gap:16px;align-items:center;margin:0 0 16px}
+.tag{font-size:11px;color:var(--muted-foreground);border:1px solid var(--border);border-radius:var(--radius);padding:3px 7px;white-space:nowrap}
+.stages{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:5px;margin-bottom:10px}
+.stage{border:0;border-bottom:2px solid var(--border);background:transparent;padding:10px 3px;font-size:12px;text-align:left}
+.stage[aria-pressed=true]{border-color:var(--foreground);font-weight:600}
+.feedback{font-size:11px;color:var(--muted-foreground);margin-bottom:18px}
+.panel{padding:16px;background:var(--card);border-radius:var(--radius)}
+.stage-detail{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:22px}
+.section-description{font-size:13px;color:var(--muted-foreground);margin-top:9px}
+.facts{display:grid;gap:14px;margin-top:20px}
+.label{font-size:11px;color:var(--muted-foreground);display:block;margin-bottom:4px}
+.value{font-size:13px}
+.chips{display:flex;flex-wrap:wrap;gap:5px}
+.chip{font-size:11px;background:var(--secondary);color:var(--secondary-foreground);padding:3px 7px;border-radius:var(--radius);border:0}
+.paper{padding-left:20px;border-left:1px solid var(--border)}
+.filename{font-family:var(--font-mono),monospace;font-size:15px;margin-bottom:14px}
+.outline{display:grid;gap:12px}
+.outline p{font-size:12px;color:var(--muted-foreground);margin-top:2px}
+.outline h3{font-size:12px}
+.decision{display:flex;justify-content:space-between;align-items:center;gap:16px;padding-top:16px;margin-top:18px;border-top:1px solid var(--border)}
+.teasers{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:24px}
+.teaser{border-top:1px solid var(--border);padding-top:17px;display:grid;gap:9px;align-content:start}
+.teaser p{font-size:12px;color:var(--muted-foreground)}
+.teaser .link{margin-top:5px}
+.concepts{margin-top:26px;border-top:1px solid var(--border);padding-top:14px}
+summary{cursor:pointer;font-size:12px}
+.definitions{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin-top:15px}
+.definitions p{font-size:12px;color:var(--muted-foreground);margin-top:4px}
+.filters{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:19px}
+.filters button{font-size:12px;border:1px solid var(--border);background:transparent;border-radius:var(--radius);padding:6px 10px}
+.filters button[aria-pressed=true]{background:var(--foreground);color:var(--background);border-color:var(--foreground)}
+.skill-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.skill-card{text-align:left;display:grid;align-content:start;gap:8px;border:1px solid var(--border);background:var(--card);border-radius:var(--radius);padding:16px;min-width:0}
+.skill-card p{font-size:12px;color:var(--muted-foreground)}
+.skill-card .skill-name{font-size:11px;color:var(--muted-foreground)}
+.selection{margin-top:18px}
+.selection-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:14px}
+.human{display:flex;justify-content:space-between;align-items:center;gap:15px;padding-bottom:16px;border-bottom:1px solid var(--border);font-size:12px}
+.human span{color:var(--muted-foreground)}
+.main-agent{margin:20px auto 0;padding:16px;border:1px solid var(--border);border-radius:var(--radius);max-width:380px;text-align:center;background:var(--card)}
+.main-agent h2{font-family:var(--font-mono),monospace;font-size:18px;letter-spacing:-.5px}
+.main-agent p{font-size:12px;color:var(--muted-foreground);margin-top:5px}
+.branch{height:34px;border-left:1px solid var(--border);width:1px;margin:0 auto}
+.agent-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.agent-card{position:relative;border:1px solid var(--border);background:var(--card);padding:16px;border-radius:var(--radius);text-align:left;min-width:0}
+.agent-card[aria-pressed=true]{border-color:var(--foreground)}
+.agent-card h3{font-family:var(--font-mono),monospace;font-size:13px;overflow-wrap:anywhere}
+.agent-card p{font-size:12px;color:var(--muted-foreground);margin-top:8px}
+.agent-detail{margin-top:20px}
+.small{font-size:12px;color:var(--muted-foreground)}
+.work-shell{display:grid;grid-template-columns:130px minmax(0,1fr);gap:24px;padding-top:26px}
+.work-nav{display:grid;align-content:start;gap:14px;font-size:13px;color:var(--muted-foreground);border-right:1px solid var(--border);padding:0 16px 30px 0}
+.work-content{padding-bottom:28px}
+.workspace-links{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:24px}
+.workspace-links div{padding:16px;background:var(--card);border-radius:var(--radius)}
+.workspace-links p{font-size:12px;color:var(--muted-foreground);margin-top:6px}
+@media(max-width:540px){.masthead{gap:14px}.brand{flex:1}.masthead>.primary{order:2}.nav{order:3;flex-basis:100%;gap:24px}h1{font-size:30px}.hero{padding-top:24px}.stages{grid-template-columns:repeat(3,minmax(0,1fr))}.stage-detail,.teasers,.skill-grid,.selection-grid,.definitions{grid-template-columns:1fr}.paper{border-left:0;border-top:1px solid var(--border);padding:16px 0 0}.agent-grid{grid-template-columns:1fr}.agent-card{padding:14px}.human,.scenario,.decision{align-items:start;flex-wrap:wrap}.work-shell{grid-template-columns:1fr}.work-nav{display:flex;flex-wrap:wrap;border-right:0;border-bottom:1px solid var(--border);padding-bottom:16px}.workspace-links{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<main id="workpal-concept">
+ <header class="masthead">
+  <button class="brand" type="button" data-nav="overview">Workpal</button>
+  <nav class="nav" aria-label="Capabilities"><button type="button" data-nav="overview" aria-current="page">Overview</button><button type="button" data-nav="skills">Skill Hub</button><button type="button" data-nav="team">Agent Team</button></nav>
+  <button class="primary" type="button" data-nav="workspace">Enter Workspace</button>
+ </header>
+ <div id="page"></div>
+</main>
+<script>
+(() => {
+ const root=document.getElementById('workpal-concept'),page=root.querySelector('#page');
+ let current='overview',stage=0,filter='All',selectedSkill=null,agent='researcher';
+ const stages=[
+ {name:'Plan',title:'Make the goal clear enough to act on.',desc:'Turn the upload-recovery request into scope, constraints and acceptance criteria.',input:'A business goal, existing behavior and constraints',file:'intent.md',outline:[['Problem','What happens when an upload is interrupted?'],['Outcome','What should a user be able to recover?'],['Constraints','Which permissions and file limits must hold?']],decision:'Confirm the problem and scope',skills:['Brainstorming','Ticket Refinement']},
+ {name:'Design',title:'Connect the request to the existing system.',desc:'Explore upload state, retries and document identity before choosing a recovery approach.',input:'Accepted intent and repository context',file:'spec.md',outline:[['Behavior','Recovery states and user actions'],['System boundaries','Document identity, parser attempts and storage'],['Open decisions','Retention and retry semantics']],decision:'Choose the approach and settle tradeoffs',skills:['Repository Onboarding','Dependency Mapping']},
+ {name:'Build',title:'Turn the accepted design into a change.',desc:'Plan the implementation, add regression coverage and simplify unnecessary complexity.',input:'Accepted design, implementation plan and conventions',file:'Change set',outline:[['Implementation','Upload recovery and retry handling'],['Tests','Interrupted connections and repeated retries'],['Change summary','Files touched and behavior affected']],decision:'Review scope changes and technical risks',skills:['Writing Plans','Test-driven Development','Upload Recovery']},
+ {name:'Test',title:'Make the behavior independently checkable.',desc:'Give the verifier the plan and the changed flow, with clear behavior to inspect.',input:'The change, agreed behavior and runnable checks',file:'Verification report',outline:[['Checks performed','Main recovery flow and neighboring behavior'],['Observations','What was actually seen when checks ran'],['Findings','Any behavior that differs from the plan']],decision:'Assess evidence and unresolved findings',skills:['Webapp Testing','Web Design Guidelines']},
+ {name:'Deploy',title:'Make the release decision reviewable.',desc:'Collect release requirements and recovery steps for a named decision owner.',input:'Reviewed change, verification evidence and environment rules',file:'Release checklist',outline:[['Readiness','Required checks and outstanding issues'],['Authorization','Who may authorize this release'],['Recovery','Rollback conditions and procedure']],decision:'Authorize the release',skills:['Release Readiness','Rollback Planning']},
+ {name:'Maintain',title:'Bring findings back into the next change.',desc:'Use incident evidence to define follow-up work and improve reusable knowledge.',input:'Incident records, user feedback or monitoring findings',file:'Next intent.md',outline:[['Evidence','Observed problem and affected behavior'],['Follow-up','Proposed change and its boundaries'],['Learning','Regression cases and knowledge to update']],decision:'Prioritize the follow-up',skills:['Incident Learning','Skill Creator']}
+ ];
+ const skills=[
+ {name:'Brainstorming',stage:'Plan',title:'Clarify a rough idea',desc:'Explore the problem, alternatives and scope.',input:'An idea, desired outcome and constraints',output:'Agreed direction and open questions'},
+ {name:'Ticket Refinement',stage:'Plan',title:'Make a request actionable',desc:'Define the scope and what acceptance means.',input:'A request and its surrounding context',output:'Refined work item and acceptance criteria'},
+ {name:'Repository Onboarding',stage:'Design',title:'Understand the existing system',desc:'Locate the relevant code and conventions.',input:'Repository context and a question',output:'A concise map of relevant code'},
+ {name:'Dependency Mapping',stage:'Design',title:'Expose dependencies before building',desc:'Identify what the change depends on.',input:'Proposed change and system boundaries',output:'Dependencies and unresolved decisions'},
+ {name:'Test-driven Development',stage:'Build',title:'Build from checkable behavior',desc:'Connect implementation to regression coverage.',input:'Acceptance criteria and the existing code',output:'A change with relevant tests'},
+ {name:'Upload Recovery',stage:'Build',title:'Design for interrupted uploads',desc:'Handle retries and document identity.',input:'Upload behavior and recovery requirements',output:'Recovery behavior and relevant edge cases'},
+ {name:'Webapp Testing',stage:'Test',title:'Check the application as a user',desc:'Exercise changed and neighboring behavior.',input:'A running app and acceptance criteria',output:'Observations and findings'},
+ {name:'Web Design Guidelines',stage:'Test',title:'Review interface quality',desc:'Inspect interaction and accessibility.',input:'An interface and its intended behavior',output:'Prioritized interface findings'},
+ {name:'Release Readiness',stage:'Deploy',title:'Prepare a release decision',desc:'Bring requirements and evidence together.',input:'Change summary and required checks',output:'Readiness findings and open items'},
+ {name:'Rollback Planning',stage:'Deploy',title:'Prepare for recovery',desc:'Define rollback conditions and steps.',input:'Release approach and failure conditions',output:'A reviewable recovery plan'},
+ {name:'Incident Learning',stage:'Maintain',title:'Turn incidents into follow-up work',desc:'Capture lessons for future changes.',input:'Incident evidence and decisions',output:'Follow-up actions and lessons'},
+ {name:'Skill Creator',stage:'Maintain',title:'Make a method reusable',desc:'Capture repeatable work as a skill.',input:'A recurring task and accepted method',output:'A skill definition for review'}
+ ];
+ const agents={
+ researcher:{title:'researcher',line:'Explore the codebase.',when:'When a task needs focused repository investigation.',input:'A scoped question and codebase context',output:'A concise report for the main agent',boundary:'Keep the main context focused on the task.'},
+ simplifier:{title:'code simplifier',line:'Reduce unnecessary complexity.',when:'After the main agent has completed implementation.',input:'The completed implementation and its intent',output:'A simpler implementation',boundary:'A scoped helper within a session.'},
+ verifier:{title:'verifier',line:'Check behavior with fresh context.',when:'When the main session believes the work is done.',input:'The plan, running app and behavior to verify',output:'Checks performed, observations and mismatches',boundary:'Report findings; do not fix the implementation.'}
+ };
+ const hero=(eye,title,sub)=>`<section class="hero"><p class="eyebrow">${eye}</p><h1>${title}</h1><p class="subtitle">${sub}</p></section>`;
+ const chips=names=>`<div class="chips">${names.map(n=>`<span class="chip">${n}</span>`).join('')}</div>`;
+ function overview(){const s=stages[stage];return hero('AI-native software development','From intent to verified delivery.','Explore the workflow, reusable skills and specialist agents behind software delivery.')+
+ `<div class="scenario"><div><span class="label">Work example</span><h3>Recover interrupted file uploads</h3></div><span class="tag">Explore the workflow</span></div>
+ <div class="stages" role="group" aria-label="Lifecycle stages">${stages.map((s,i)=>`<button type="button" class="stage" data-stage="${i}" aria-pressed="${i===stage}">${s.name}</button>`).join('')}</div>
+ <p class="feedback">Findings can revisit earlier stages. Learning returns to Plan.</p>
+ <section class="panel" aria-live="polite"><div class="stage-detail"><div><p class="eyebrow">${s.name}</p><h2>${s.title}</h2><p class="section-description">${s.desc}</p><div class="facts"><div><span class="label">Input</span><p class="value">${s.input}</p></div><div><span class="label">Relevant skills</span>${chips(s.skills)}</div></div></div><div class="paper"><span class="label">Expected deliverable · outline</span><p class="filename">${s.file}</p><div class="outline">${s.outline.map(([a,b])=>`<div><h3>${a}</h3><p>${b}</p></div>`).join('')}</div></div></div><div class="decision"><div><span class="label">Human decision</span><p class="value">${s.decision}</p></div><button type="button" class="plain" data-stage="${(stage+1)%6}">${stage===5?'Return to Plan':'Explore '+stages[(stage+1)%6].name} →</button></div></section>
+ <div class="teasers"><section class="teaser"><p class="eyebrow">Skill Hub</p><h3>Methods your team can reuse.</h3><p>Explore what a skill needs, how it helps and what it should produce.</p><button type="button" class="link" data-nav="skills">Explore skills →</button></section><section class="teaser"><p class="eyebrow">Agent Team</p><h3>Focused help inside each task.</h3><p>Meet the researcher, code simplifier and verifier.</p><button type="button" class="link" data-nav="team">Explore agent roles →</button></section></div>
+ <details class="concepts"><summary>What connects the workflow?</summary><div class="definitions"><div><h3>Context</h3><p>The goal, codebase and constraints the agent works from.</p></div><div><h3>Skills</h3><p>Reusable instructions and methods for recurring work.</p></div><div><h3>Artifacts</h3><p>Reviewable handoffs that carry decisions into the next step.</p></div><div><h3>Controls</h3><p>Tool permissions, deterministic checks and human decision gates.</p></div></div></details>`;}
+ function skillPage(){const visible=filter==='All'?skills:skills.filter(s=>s.stage===filter);const chosen=skills.find(s=>s.name===selectedSkill);return hero('Skill Hub','Reusable expertise.','Find a method by the work you need to accomplish.')+`<div class="filters" role="group" aria-label="Filter skills by stage">${['All',...stages.map(s=>s.name)].map(n=>`<button type="button" data-filter="${n}" aria-pressed="${filter===n}">${n}</button>`).join('')}</div><div class="skill-grid">${visible.map(s=>`<button type="button" class="skill-card" data-skill="${s.name}" aria-pressed="${selectedSkill===s.name}"><span class="skill-name">${s.name} · ${s.stage}</span><h3>${s.title}</h3><p>${s.desc}</p><span class="link">View input & expected output →</span></button>`).join('')}</div>${chosen?`<section class="panel selection" aria-live="polite"><h2>${chosen.name}</h2><div class="selection-grid"><div><span class="label">Input</span><p class="value">${chosen.input}</p></div><div><span class="label">Expected output</span><p class="value">${chosen.output}</p></div></div></section>`:''}`;}
+ function teamPage(){const a=agents[agent];return hero('Agent Team','One task. Focused specialists.','The main agent calls scoped helpers when the work needs them.')+`<div class="human"><strong>Human direction & decisions</strong><span>Set intent · resolve tradeoffs · approve critical actions</span></div><div class="main-agent"><h2>main agent</h2><p>Carries the task forward and uses specialist help as needed.</p></div><div class="branch" aria-hidden="true"></div><div class="agent-grid" role="group" aria-label="Specialist subagents">${Object.entries(agents).map(([id,a])=>`<button type="button" class="agent-card" data-agent="${id}" aria-pressed="${agent===id}"><h3>${a.title}</h3><p>${a.line}</p></button>`).join('')}</div><section class="panel agent-detail" aria-live="polite"><p class="eyebrow">${a.title}</p><h2>${a.when}</h2><div class="selection-grid"><div><span class="label">Input</span><p class="value">${a.input}</p></div><div><span class="label">Expected output</span><p class="value">${a.output}</p></div></div><p class="small" style="margin-top:16px">${a.boundary}</p></section><details class="concepts"><summary>Parallel sessions & event-triggered work</summary><div class="definitions"><div><h3>Parallel sessions</h3><p>Separate tasks run in separate worktrees, steered by an engineer. Each session can use its own subagents.</p></div><div><h3>Event-triggered work</h3><p>Monitoring findings can start a new task. Independent review and human decisions control how it proceeds.</p></div></div></details>`;}
+ function workspace(){return `<div class="work-shell"><aside class="work-nav" aria-label="Workspace areas"><span>Work</span><span>Team</span><span>Chat</span><span>Autopilots</span></aside><section class="work-content"><p class="eyebrow">Workspace</p><h1>Continue your work.</h1><p class="subtitle">Projects, issues, conversations and configuration live here.</p><div class="workspace-links"><div><h3>Projects & issues</h3><p>Organize and track the work.</p></div><div><h3>Team & skills</h3><p>Manage your workspace configuration.</p></div><div><h3>Chat</h3><p>Continue a conversation.</p></div><div><h3>Autopilots</h3><p>Manage recurring work.</p></div></div><button type="button" class="plain" data-nav="overview" style="margin-top:24px">← Back to capabilities</button></section></div>`;}
+ function render(){page.innerHTML=current==='overview'?overview():current==='skills'?skillPage():current==='team'?teamPage():workspace();root.querySelectorAll('nav [data-nav]').forEach(b=>{if(b.dataset.nav===current)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current');});const enter=root.querySelector('.masthead>.primary');enter.textContent=current==='workspace'?'Workspace':'Enter Workspace';enter.disabled=current==='workspace';}
+ root.addEventListener('click',event=>{const b=event.target.closest('button');if(!b)return;let restore=null;if(b.dataset.nav){current=b.dataset.nav;}else if(b.dataset.stage){stage=Number(b.dataset.stage);restore=`[data-stage="${stage}"]`;}else if(b.dataset.filter){filter=b.dataset.filter;selectedSkill=null;restore=`[data-filter="${filter}"]`;}else if(b.dataset.skill){selectedSkill=b.dataset.skill;restore=`[data-skill="${selectedSkill}"]`;}else if(b.dataset.agent){agent=b.dataset.agent;restore=`[data-agent="${agent}"]`;}else return;render();if(restore)root.querySelector(restore)?.focus({preventScroll:true});});
+ render();
+})();
+</script>
+</body>
+</html>

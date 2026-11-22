@@ -1,0 +1,25 @@
+{
+  "scope": "Original Go legacy runConsumer versus Python ScopeConsumer, real isolated Redis7.4.7 after XREADGROUP consumer registration, cancellation waits for5sBLOCK then removes consumer. Actual durations retained;4..6.5s assertion. No pool contention, reconnect/retry, late-message ACK or non-read timeout parity certified.",
+  "go": {
+    "consumers_after_wait": 0,
+    "context_timeout_enabled": false,
+    "stop_seconds": 5.063731627
+  },
+  "python": {
+    "stop_seconds": 5.055493749910966,
+    "consumers_after_wait": 0,
+    "context_timeout_enabled": false
+  },
+  "failures": [],
+  "source_sha256": {
+    "server/go/internal/realtime/redis_relay.go": "d0717fde50f3494be4731cb964c060faa54d761f2eaa6c3e1464158e53a58846",
+    "server/go/cmd/server/main.go": "ec0a03a29bee40082287f581119c0e8183429442d50b35a879e43b3102489a32",
+    "server/go/go.mod": "88fad09cb1190e4cc2eb3e8c0a35b91a45418d929aa985798b24df3fa247d483",
+    "server/tests/parity/go_redis_stop/main.go": "532a3b64ff1c1b77b35d25159ab67707fe627ecad5c65019316fd245620b330b",
+    "server/tests/parity/go_redis_stop/wrapper.go": "4cb74ce07f83c0b264c63fee6c551c1df6be51853ba8d8bb718dd963dc4058e4",
+    "server/tools/run_redis_stop_parity.py": "67ae00b36f5af28c971f348e0e3f1887ec6425d69791ecfad7b1cf2b7f77f5ac",
+    "server/src/workpal_backend/realtime/redis_client.py": "8098f3aff30b9a5e0a16d657ea7518beb2da5ea5e7b72e71c46e5cd15dccb4db",
+    "server/src/workpal_backend/realtime/relay_consumer.py": "5e93c33cdc1ebd72e11e8bc9ba9a7d3b3315ebf028098abb186b02e41ab5a185",
+    "server/src/workpal_backend/infrastructure/redis_cancellation.py": "fcb49035f1489850bdf178ba70a6fc66fcb0f162e9f223c6371a0fabe8e93ca1"
+  }
+}

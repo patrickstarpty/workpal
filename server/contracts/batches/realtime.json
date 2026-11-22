@@ -1,0 +1,136 @@
+{
+  "batch": "realtime",
+  "status": "specified_not_implemented",
+  "method": "GET",
+  "path": "/ws",
+  "documentation": "server/contracts/batches/realtime.md",
+  "sources": [
+    "apps/web/app/main.tsx",
+    "packages/core/api/ws-client.ts",
+    "packages/core/realtime/provider.tsx",
+    "packages/core/types/events.ts",
+    "packages/core/realtime/use-realtime-sync.ts",
+    "server/go/cmd/server/router.go",
+    "server/go/cmd/server/listeners.go",
+    "server/go/cmd/server/private_project_realtime.go",
+    "server/go/internal/events/bus.go",
+    "server/go/internal/handler/workspace.go",
+    "server/go/internal/realtime/hub.go",
+    "server/go/internal/realtime/membership.go",
+    "server/go/internal/realtime/membership_removal.go",
+    "server/go/internal/realtime/redis_relay.go",
+    "server/go/internal/realtime/sharded_stream_relay.go",
+    "server/go/internal/realtime/stream_retention.go",
+    "server/src/workpal_backend/infrastructure/delivery.py",
+    "server/src/workpal_backend/infrastructure/outbox.py"
+  ],
+  "fixtures": {
+    "auth": {
+      "type": "auth",
+      "payload": {
+        "token": "<signed-session-token>"
+      }
+    },
+    "auth_ack": {
+      "type": "auth_ack"
+    },
+    "auth_failure": {
+      "error": "invalid token"
+    },
+    "subscribe": {
+      "type": "subscribe",
+      "payload": {
+        "scope": "workspace",
+        "id": "workspace-1"
+      }
+    },
+    "unsubscribe": {
+      "type": "unsubscribe",
+      "payload": {
+        "scope": "workspace",
+        "id": "workspace-1"
+      }
+    },
+    "ping": {
+      "type": "ping"
+    },
+    "pong": {
+      "type": "pong"
+    },
+    "subscribe_ack": {
+      "type": "subscribe_ack",
+      "payload": {
+        "scope": "workspace",
+        "id": "workspace-1"
+      }
+    },
+    "unsubscribe_ack": {
+      "type": "unsubscribe_ack",
+      "payload": {
+        "scope": "workspace",
+        "id": "workspace-1"
+      }
+    },
+    "subscribe_error": {
+      "type": "subscribe_error",
+      "payload": {
+        "scope": "chat",
+        "id": "chat-1",
+        "error": "forbidden"
+      }
+    },
+    "unsubscribe_error": {
+      "type": "unsubscribe_error",
+      "payload": {
+        "scope": "",
+        "id": "",
+        "error": "invalid payload"
+      }
+    },
+    "workspace_updated": {
+      "type": "workspace:updated",
+      "payload": {
+        "workspace": {
+          "id": "workspace-1",
+          "name": "Renamed",
+          "slug": "team",
+          "description": null,
+          "context": null,
+          "settings": {},
+          "repos": [],
+          "issue_prefix": "TEAM",
+          "avatar_url": null,
+          "created_at": "2026-11-21T00:00:00Z",
+          "updated_at": "2026-11-21T01:00:00Z"
+        }
+      },
+      "actor_id": "user-1",
+      "actor_type": "member"
+    }
+  },
+  "internal_event": {
+    "eventID": "event-1",
+    "type": "workspace:updated",
+    "workspaceID": "workspace-1",
+    "actorID": "user-1",
+    "actorType": "member",
+    "payload": {
+      "workspace": {
+        "id": "workspace-1",
+        "name": "Renamed",
+        "slug": "team",
+        "description": null,
+        "context": null,
+        "settings": {},
+        "repos": [],
+        "issue_prefix": "TEAM",
+        "avatar_url": null,
+        "created_at": "2026-11-21T00:00:00Z",
+        "updated_at": "2026-11-21T01:00:00Z"
+      }
+    }
+  },
+  "browser_cursor": null,
+  "browser_delivery_ack": false,
+  "private_scope_policy": "deny unless authoritative audience proven"
+}

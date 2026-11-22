@@ -1,0 +1,11 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@import "@fontsource-variable/inter";
+@import "@workpal/ui/styles/tokens.css";
+@import "@workpal/ui/styles/theme-variables.css";
+@import "@workpal/ui/styles/appearance.css";
+@import "@workpal/ui/styles/base.css";
+@source "../../../packages/ui/**/*.tsx";
+@source "../../../packages/views/issues/components/pickers/property-picker.tsx";
+:root{--font-sans:"Inter Variable",Inter,sans-serif}body{font-family:var(--font-sans);background:var(--page-canvas)}

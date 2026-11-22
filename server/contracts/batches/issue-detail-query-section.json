@@ -1,0 +1,1201 @@
+{
+  "version": 1,
+  "status": "INCOMPLETE",
+  "coverage": "Finite query section with plugin/config/upload and local find/foreground mappings; root review pending",
+  "whole_source": false,
+  "root_review": {
+    "status": "accepted finite section",
+    "checks": [
+      "Exact inventory tuples and current source hashes validated",
+      "Independent query/config/archived lookup gates checked",
+      "Root read remaining local editing helpers and scroll restoration/landing implementations"
+    ],
+    "limits": "No whole-file claim within this section; descendants and third-party interfaces separately bounded"
+  },
+  "files": [
+    {
+      "path": "packages/views/issues/components/issue-detail.tsx",
+      "sha256": "afbc077580392ae3b7ec41e28c087ee215dc3103c426f505fee9d96f5d8f9f1a",
+      "whole_source": false,
+      "reviewed_ranges": [
+        [
+          1486,
+          1585
+        ],
+        [
+          1586,
+          1685
+        ],
+        [
+          1686,
+          1785
+        ],
+        [
+          1786,
+          1885
+        ],
+        [
+          1886,
+          1985
+        ],
+        [
+          1986,
+          2085
+        ],
+        [
+          2086,
+          2185
+        ],
+        [
+          2186,
+          2285
+        ],
+        [
+          2286,
+          2385
+        ],
+        [
+          2386,
+          2439
+        ]
+      ]
+    },
+    {
+      "path": "packages/views/issues/hooks/use-issue-timeline.ts",
+      "sha256": "7feb9d4ee652aafd3cf02cfda249b97ed4551e70d40914705bb0d97d1b33192b",
+      "whole_source": false
+    },
+    {
+      "path": "packages/views/issues/hooks/use-issue-reactions.ts",
+      "sha256": "f135ef80116b02c1253908602414426cd25e9cf46a9d13651cb4404446cc97b4",
+      "whole_source": false
+    },
+    {
+      "path": "packages/views/issues/hooks/use-issue-subscribers.ts",
+      "sha256": "0611848704fe0ed326df321697511c6c336e94f8a20398ec5c81de75305efafc",
+      "whole_source": false
+    },
+    {
+      "path": "packages/core/workspace/hooks.ts",
+      "sha256": "7531c31b1caa51b0254eff7738c3ed14cd831a467c311d9aa8cce3ddff2964d3",
+      "whole_source": false
+    },
+    {
+      "path": "packages/core/github/use-github-settings.ts",
+      "sha256": "177a1f192f565ce12520c2ab4d2c1629af95909ef049dfa1bbdbdccbf26e8515",
+      "whole_source": false
+    },
+    {
+      "path": "packages/core/paths/hooks.tsx",
+      "sha256": "b10176beb112541c91a92551ddc5e1db6e07afa5f66a0221f934fda59ca750a5",
+      "whole_source": false
+    },
+    {
+      "path": "packages/core/issue-statuses/hooks.ts",
+      "sha256": "6a46a26af0f7d647b8c2a95188c01e6d79d77dce89f29af8766ca891b13856ae",
+      "whole_source": false
+    },
+    {
+      "path": "packages/views/issues/utils/status-label.ts",
+      "sha256": "15b642495cedbc22414e2a1d99ab2c350871c8bb6d919be46f22f00874bb1f54",
+      "whole_source": false
+    },
+    {
+      "path": "packages/views/editor/use-editor-upload.ts",
+      "sha256": "577b4d53238fb342b44c63108a72c89e16c80b22e90fa0823dbcf3614f37c7c8",
+      "whole_source": false
+    },
+    {
+      "path": "packages/core/plugins/queries.ts",
+      "sha256": "9af5000968a140b65bc015bb67794e9d3e394cdf05611a7d9eef8b9abf4fbee5",
+      "whole_source": false
+    }
+  ],
+  "snapshots": [
+    {
+      "path": "packages/views/issues/components/issue-detail.tsx",
+      "start": 1486,
+      "end": 1585,
+      "code": "export function IssueDetail({ issueId, onDelete, onDone, onUnsubscribeArchive, defaultSidebarOpen = true, layoutId = ISSUE_DETAIL_LAYOUT_ID, highlightCommentId: linkedCommentId, highlightRequestToken: linkedRequestToken, highlightAppRequestId, leadingAction, variant = \"page\", trailingActions, notice, readsInbox = true, skipInitialRefetch = false, openDeliverable, onDeliverableLinkDone }: IssueDetailProps) {\n  const isPeek = variant === \"peek\";\n  const { t } = useT(\"issues\");\n  const { t: tCommon } = useT(\"common\");\n  const locale = useLocale();\n  const timeAgo = useTimeAgo();\n  const id = issueId;\n  const [deliverableJump, setDeliverableJump] = useState<{\n    issueId: string;\n    linkedCommentId: string | undefined;\n    linkedRequestToken: number | undefined;\n    commentId: string;\n    token: number;\n  } | null>(null);\n  const activeDeliverableJump = deliverableJump?.issueId === id &&\n    deliverableJump.linkedCommentId === linkedCommentId &&\n    deliverableJump.linkedRequestToken === linkedRequestToken ? deliverableJump : null;\n  const highlightCommentId = activeDeliverableJump?.commentId ?? linkedCommentId;\n  const highlightRequestToken = activeDeliverableJump?.token ?? linkedRequestToken;\n  useEffect(() => {\n    setDeliverableJump(null);\n  }, [id, linkedCommentId, linkedRequestToken]);\n  const user = useAuthStore((s) => s.user);\n  const paths = useWorkspacePaths();\n  const openModal = useModalStore((state) => state.open);\n\n  // Issue navigation — read from TQ list cache\n  const wsId = useWorkspaceId();\n  const { data: members = [] } = useQuery(memberListOptions(wsId));\n  const { data: agents = [] } = useQuery(agentListOptions(wsId));\n  // Workspace owners and admins moderate any comment authored by anyone\n  // (mirrors backend `comment.go:507-512`). Computed here so per-comment\n  // rendering doesn't have to re-derive it for every row.\n  const currentUserRole =\n    members.find((m) => m.user_id === user?.id)?.role ?? null;\n  const canModerateComments =\n    currentUserRole === \"owner\" || currentUserRole === \"admin\";\n  const { data: allIssues = [] } = useQuery(issueListOptions(wsId));\n  const { getActorName } = useActorName();\n  const resolveStatusLabel = useStatusLabel(wsId);\n  // Activity and issue visuals share the catalog's custom geometry and color;\n  // built-ins keep their fixed glyph and semantic token.\n  const { categoryOf: resolveStatusCategory, colorOf: resolveStatusColor, iconOf: resolveStatusIcon } =\n    useIssueStatuses(wsId);\n  // Description autosave is deliberately NOT gated (no explicit submit; the\n  // editor already strips `blob:` before serializing and binds ids on the\n  // later save). It still needs the failure toast, or a failed upload just\n  // erases its own placeholder and the file disappears unexplained.\n  const { uploadWithToast } = useEditorUpload();\n  const { defaultLayout, onLayoutChanged } = useDefaultLayout({\n    id: layoutId,\n  });\n  const sidebarRef = usePanelRef();\n  const isMobile = useIsMobile();\n  const desktopSidebarInitialOpen = getAnimatedRightSidebarInitialOpen(\n    defaultSidebarOpen,\n    defaultLayout,\n  );\n  const {\n    open: desktopSidebarOpen,\n    visualOpen: desktopSidebarVisualOpen,\n    motionEnabled: desktopSidebarMotionEnabled,\n    beginToggle: beginDesktopSidebarToggle,\n    handleResize: handleDesktopSidebarResize,\n  } = useAnimatedRightSidebarState(desktopSidebarInitialOpen);\n  const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);\n\n  useEffect(() => {\n    if (isMobile) {\n      setMobileSidebarOpen(false);\n    }\n  }, [isMobile]);\n  const sidebarOpen = isMobile ? mobileSidebarOpen : desktopSidebarOpen;\n  const [propertiesOpen, setPropertiesOpen] = useState(true);\n  const [detailsOpen, setDetailsOpen] = useState(false);\n  const [parentIssueOpen, setParentIssueOpen] = useState(true);\n  const [sidebarSubIssuesOpen, setSidebarSubIssuesOpen] = useState(true);\n  const [sidebarSubIssuesExpanded, setSidebarSubIssuesExpanded] = useState(false);\n  const sidebarSubIssuesListId = useId();\n  useEffect(() => setSidebarSubIssuesExpanded(false), [id]);\n  const [pullRequestsOpen, setPullRequestsOpen] = useState(true);\n  const githubSettings = useGitHubSettings();\n  const pluginsEnabled = useFeatureEnabled(PLUGINS_V1_FLAG, false);\n\n  // Per-issue, per-session set of optional properties currently visible in\n  // the sidebar Properties section. Seeded on issue switch with whichever\n  // fields are already set; \"+ Add property\" adds an entry, clearing a\n  // value does *not* remove one (avoids row-flicker on edit → clear).\n  // Resets when the user navigates to a different issue.\n  const [visibleOptionalProps, setVisibleOptionalProps] = useState<Set<OptionalPropKey>>(\n    () => new Set(),\n  );\n  // Same progressive-disclosure machinery for custom properties, keyed by\n  // property definition id instead of a static key union.\n  const [visibleCustomProps, setVisibleCustomProps] = useState<Set<string>>(() => new Set());\n  const [autoOpenCustomProp, setAutoOpenCustomProp] = useState<string | null>(null);\n  // Optional property to auto-open as soon as it's mounted (the user just\n  // picked it from \"+ Add property\" and we want them dropped straight into\n  // edit state). Consumed by the row that matches this key, cleared after.\n  const [autoOpenProp, setAutoOpenProp] = useState<OptionalPropKey | null>(null);\n"
+    },
+    {
+      "path": "packages/views/issues/components/issue-detail.tsx",
+      "start": 1586,
+      "end": 1685,
+      "code": "  // Controlled state for the \"+ Add property\" popover. Base UI's Popover\n  // doesn't auto-dismiss on item click (it's not a Menu primitive), so the\n  // popover would stay open behind the newly auto-opened picker — two\n  // popovers stacked. We close it explicitly in `addOptionalProp`.\n  const [addPropPopoverOpen, setAddPropPopoverOpen] = useState(false);\n  // Virtuoso's `customScrollParent` wants the HTMLElement, not a ref. A plain\n  // `useRef.current` does not trigger a re-render when it populates, so the\n  // Virtuoso prop would never receive the element. Callback ref + state fixes\n  // that: setState triggers the re-render that hands Virtuoso the element.\n  const [scrollContainerEl, setScrollContainerEl] = useState<HTMLDivElement | null>(null);\n  // Bottom comment composer. Measured when scrolling a freshly posted comment\n  // into view so its bottom lands above the composer rather than behind it.\n  const composerRef = useRef<HTMLDivElement | null>(null);\n  // Pull-based scroll restoration (MUL-4741): the platform serves the offset\n  // captured when this route was last left. The ref-attach assignment covers\n  // the flat render modes (real heights at commit); the virtualized browsing\n  // mode feeds the offset into Virtuoso's initialScrollTop below so the\n  // list's first render already materializes the rows around it.\n  //\n  // The container key carries the issue id: on the issue route that is\n  // redundant with the route scoping, but in the inbox the selection lives\n  // in the query string while memento entries key by pathname — a bare\n  // \"main\" would restore notification A's offset into notification B's\n  // detail.\n  // The peek gets its own key: it is an overlay on the board's route, and\n  // must neither restore the full page's offset nor leave one behind for it.\n  const scrollContainerKey = `${isPeek ? \"peek\" : \"main\"}:${id}`;\n  const restoredScrollTop = useRestoredScrollOffset(scrollContainerKey);\n  const restoreScrollRef = useRestoredScrollRef(scrollContainerKey);\n  // Whether this issue's comment-highlight deep link already landed here\n  // (survives the tab's unmount, unlike didHighlightRef below): a remount\n  // that restores the view must not re-run the jump.\n  //\n  // The landing effect reads it through a ref, NOT through its dependency\n  // array: recording the landing writes this very value, and as an effect\n  // dependency that write would re-fire the effect one commit after the\n  // jump — whose cleanup cancels the centering rAF loop and the highlight\n  // fade before a single frame ran. Every path that must re-evaluate the\n  // landing already re-runs the effect through another dependency (mount,\n  // items arriving, token bump), and the render that precedes it refreshes\n  // this ref.\n  const consumedHighlightId = useRestoredViewState(issueHighlightMementoKey(id));\n  const consumedHighlightRef = useRef(consumedHighlightId);\n  consumedHighlightRef.current = consumedHighlightId;\n  const writeViewState = useViewStateWriter();\n  const rightSidebarShortcutTargetRef = useRef<HTMLDivElement | null>(null);\n  const attachScrollContainer = useCallback(\n    (el: HTMLDivElement | null) => {\n      // The peek has no sidebar, so it must not claim the toggle shortcut.\n      rightSidebarShortcutTargetRef.current = isPeek ? null : el;\n      setScrollContainerEl(el);\n      restoreScrollRef(el);\n    },\n    [isPeek, restoreScrollRef],\n  );\n  const [pendingPostedCommentId, setPendingPostedCommentId] = useState<string | null>(null);\n  const scrollToTimelineBottom = useCallback((commentId: string) => {\n    setPendingPostedCommentId(commentId);\n  }, []);\n  const [highlightedId, setHighlightedId] = useState<string | null>(null);\n  // User preference: pin the bottom comment bar to the scroll viewport. Off\n  // below `md` regardless of the preference — see the hook.\n  const stickyComposer = useStickyComposer();\n  // Read by the image rules in editor/styles/attachment.css.\n  const commentImageLayout = useCommentComposerStore((s) => s.imageLayout);\n\n  // Per-session: which resolved threads the user has temporarily expanded.\n  // Not persisted (matches Linear) — reload collapses everything back to bars.\n  // Store-backed (not component state) so the command palette's fold/unfold\n  // all-comments commands can drive it from outside this page.\n  const expandedResolved = useResolvedExpandStore(selectExpandedResolved(id));\n  const setResolvedExpanded = useResolvedExpandStore((s) => s.setExpanded);\n  const toggleResolvedExpand = useCallback((commentId: string, expand: boolean) => {\n    setResolvedExpanded(id, commentId, expand);\n    // On collapse the thread shrinks and the viewport would jump to whatever was\n    // below; pull the just-folded thread back into view with the smallest\n    // movement. rAF waits for the collapse to land before measuring.\n    if (!expand) {\n      requestAnimationFrame(() =>\n        document.getElementById(`comment-${commentId}`)?.scrollIntoView({ block: \"nearest\" }),\n      );\n    }\n  }, [id, setResolvedExpanded]);\n  const clearResolvedExpand = useCallback((commentId: string) => {\n    setResolvedExpanded(id, commentId, false);\n  }, [id, setResolvedExpanded]);\n\n  // Per-session activity-block expansion overrides. The default rule is\n  // \"only the trailing block is expanded\" (computed from timelineView.groups\n  // below); these two sets capture user clicks that diverge from the default.\n  // Two sets are needed because \"default\" can flip when a new activity block\n  // appends — without an explicit collapse override, a manually-collapsed\n  // older block would re-expand when it stops being the trailing one (or vice\n  // versa). Not persisted, matches the resolved-thread behaviour above.\n  const [expandedActivityIds, setExpandedActivityIds] = useState<Set<string>>(() => new Set());\n  const [collapsedActivityIds, setCollapsedActivityIds] = useState<Set<string>>(() => new Set());\n  // Block IDs where the user has explicitly chosen to also reveal the older\n  // (pre-last-8) entries within the trailing block. Kept independent of the\n  // expanded/collapsed sets so collapsing then re-expanding preserves the\n  // \"show all\" choice, and so the choice survives the block losing its\n"
+    },
+    {
+      "path": "packages/views/issues/components/issue-detail.tsx",
+      "start": 1686,
+      "end": 1785,
+      "code": "  // trailing position when a new comment lands after it.\n  const [showOlderActivityIds, setShowOlderActivityIds] = useState<Set<string>>(() => new Set());\n  const toggleActivityBlock = useCallback((id: string, currentlyExpanded: boolean) => {\n    if (currentlyExpanded) {\n      setCollapsedActivityIds((prev) => {\n        const next = new Set(prev);\n        next.add(id);\n        return next;\n      });\n      setExpandedActivityIds((prev) => {\n        if (!prev.has(id)) return prev;\n        const next = new Set(prev);\n        next.delete(id);\n        return next;\n      });\n    } else {\n      setExpandedActivityIds((prev) => {\n        const next = new Set(prev);\n        next.add(id);\n        return next;\n      });\n      setCollapsedActivityIds((prev) => {\n        if (!prev.has(id)) return prev;\n        const next = new Set(prev);\n        next.delete(id);\n        return next;\n      });\n    }\n  }, []);\n  const showOlderActivities = useCallback((id: string) => {\n    setShowOlderActivityIds((prev) => {\n      if (prev.has(id)) return prev;\n      const next = new Set(prev);\n      next.add(id);\n      return next;\n    });\n  }, []);\n  const didHighlightRef = useRef<string | null>(null);\n  // Highlight whose landing was cancelled after its anchor mounted but before\n  // it finished aligning; the landing effect resumes it.\n  const interruptedLandingRef = useRef<string | null>(null);\n  // Last seen highlightRequestToken; a bump re-arms didHighlightRef so the\n  // landing effect below replays on an already-mounted detail.\n  const lastHighlightRequestTokenRef = useRef(highlightRequestToken);\n\n  // Issue data from TQ — uses detail query, seeded from list cache if available.\n  // Only seed when description is present; the list API omits it, so a partial\n  // list row must not masquerade as a hydrated issue detail.\n  const issueQuery = useQuery({\n    ...issueDetailOptions(wsId, id),\n    // List rows and issue-created realtime payloads intentionally omit the\n    // detail-only source-context snapshot. They can still seed this query via\n    // initialData, so reconcile with the authoritative detail endpoint when\n    // mounting unless the route already completed that read. Without this, the global Infinity staleTime\n    // hides source context until a full page refresh.\n    refetchOnMount: skipInitialRefetch ? false : \"always\",\n    initialData: () => {\n      const cached = allIssues.find((i) => i.id === id);\n      return cached?.description != null ? cached : undefined;\n    },\n  });\n  const { data: issue = null, isLoading: issueLoading, refetch: refetchIssue } = issueQuery;\n  const issueReadState = useIssueReadState(wsId, id, issueQuery);\n  useMarkIssueReadWhileViewing(wsId, issue?.id ?? \"\");\n  useMarkIssueInboxReadWhileViewing(wsId, issue?.id ?? \"\", readsInbox);\n  const descriptionSourceId = `description:${id}`;\n  const descriptionAnnotations = useCommentAnnotations({\n    issueId: id,\n    draftKey: `new:${id}`,\n    sources: [{ id: descriptionSourceId, name: \"Description\", revision: issue?.revision }],\n    enabled: !!user && !!issue,\n    editable: true,\n  });\n  const canAnnotateDescription = !!user;\n  const descriptionSelectionAction = useMemo(() => canAnnotateDescription ? {\n    label: t(($) => $.reply.annotations.add_comment),\n    onSelect: descriptionAnnotations.addSelection,\n  } : undefined, [canAnnotateDescription, t, descriptionAnnotations.addSelection]);\n  const openCommentSubIssue = useCallback((commentId: string, prompt?: string) => {\n    if (!issue) return;\n    openModal(\"quick-create-issue\", {\n      ...subIssueCreateDefaults(issue),\n      anchor_comment_id: commentId,\n      ...(prompt ? { prompt } : {}),\n    });\n  }, [issue, openModal]);\n\n  // Record recent visit\n  const recordVisit = useRecentIssuesStore((s) => s.recordVisit);\n  const recordRecentContext = useRecentContextStore((s) => s.recordVisit);\n  useEffect(() => {\n    if (issue) {\n      recordVisit(wsId, issue.id);\n      recordRecentContext(wsId, {\n        type: \"issue\",\n        id: issue.id,\n        label: issue.identifier,\n        subtitle: issue.title,\n        status: issue.status,\n      });\n"
+    },
+    {
+      "path": "packages/views/issues/components/issue-detail.tsx",
+      "start": 1786,
+      "end": 1885,
+      "code": "    }\n  }, [issue?.id, wsId]); // eslint-disable-line react-hooks/exhaustive-deps\n\n  const deletedFallbackPath = onDelete ? undefined : paths.issues();\n  useRegisterCommandBarContext(\n    useMemo(\n      () =>\n        issue ? { kind: \"issue\", issue, onDeletedFallbackPath: deletedFallbackPath } : null,\n      [issue, deletedFallbackPath],\n    ),\n  );\n\n  // Fire `onDelete` once when the issue transitions from loaded to missing.\n  // Delete goes through a shell-level modal, so the caller (e.g. inbox) can't\n  // be notified directly — instead, the detail page observes its own cache\n  // clearing and runs the callback. We navigate via `onDeletedFallbackPath` on\n  // the actions menu when no callback is supplied (standalone routes).\n  const hadIssueRef = useRef(false);\n  const firedDeleteCallbackRef = useRef(false);\n  useEffect(() => {\n    if (issue) {\n      hadIssueRef.current = true;\n      firedDeleteCallbackRef.current = false;\n      return;\n    }\n    if (\n      hadIssueRef.current &&\n      !issueLoading &&\n      !firedDeleteCallbackRef.current &&\n      onDelete\n    ) {\n      firedDeleteCallbackRef.current = true;\n      onDelete();\n    }\n  }, [issue, issueLoading, onDelete]);\n\n  // Custom hooks — encapsulate timeline, reactions, subscribers\n  const {\n    timeline, loading: timelineLoading, dataUpdatedAt: timelineUpdatedAt,\n    submitComment, submitReply,\n    editComment, deleteComment, toggleResolveComment, toggleReaction: handleToggleReaction,\n  } = useIssueTimeline(id, user?.id, activeDeliverableJump?.commentId);\n\n  const { data: commentTasks, isLoading: commentTasksLoading } = useQuery(issueTasksOptions(id));\n  const enteringRunIds = useNewRunIds(id, commentTasks);\n  const previousCommentRuns = useRef(new Map<string, CommentRun[]>());\n  const { runs: commentRuns, timeline: displayTimeline, standaloneRuns } = useMemo(() => {\n    const next = buildCommentRunView(commentTasks ?? [], timeline, previousCommentRuns.current);\n    previousCommentRuns.current = next.runs;\n    return next;\n  }, [commentTasks, timeline]);\n\n  // Resolve / unresolve must always clear the per-session expand entry so\n  // re-resolving an already-expanded thread folds it back to the bar (the\n  // expand Set is keyed only on commentId, not on resolution state). Without\n  // this wrapper, an expand → unresolve → resolve sequence keeps the thread\n  // visually expanded after the second resolve.\n  const handleResolveToggle = useCallback(\n    (commentId: string, resolved: boolean) => {\n      // Fold the thread back on any resolve change: clear the thread ROOT's\n      // expand entry (expand state is keyed on root id, but a resolve target\n      // can be a reply). Walk parent_id up to the root.\n      const byId = new Map(displayTimeline.map((e) => [e.id, e]));\n      let cur = byId.get(commentId);\n      while (cur?.parent_id && byId.get(cur.parent_id)) cur = byId.get(cur.parent_id)!;\n      clearResolvedExpand(cur?.id ?? commentId);\n      toggleResolveComment(commentId, resolved);\n    },\n    [displayTimeline, clearResolvedExpand, toggleResolveComment],\n  );\n\n  // Memoized timeline grouping. Each render rebuilds the per-parent map from\n  // the latest timeline, then pre-flattens each thread's reply subtree into a\n  // dedicated `threadReplies` slice per root. Slices are stabilized against\n  // the previous render via `prevThreadRepliesRef`: if a thread's flat list\n  // is shallow-equal to the previous one, we reuse the previous array so\n  // React.memo on CommentCard / ResolvedThreadBar can short-circuit. Without\n  // this, every WS event (including reactions, edits, AI streaming on an\n  // unrelated thread) hands every card a brand-new prop reference and forces\n  // every thread subtree to re-render in lockstep.\n  const prevThreadRepliesRef = useRef<Map<string, TimelineEntry[]>>(new Map());\n  const timelineView = useMemo(() => {\n    // Group entries: top-level = activities + root comments; replies are\n    // bucketed under their parent's id and rendered nested inside CommentCard.\n    // No orphan rescue needed: the timeline is fetched in full, so every\n    // reply's parent is always in the same array.\n    const topLevel = displayTimeline.filter(\n      (e) => e.type === \"activity\" || !e.parent_id,\n    );\n    const repliesByParent = new Map<string, TimelineEntry[]>();\n    for (const e of displayTimeline) {\n      if (e.type === \"comment\" && e.parent_id) {\n        const list = repliesByParent.get(e.parent_id) ?? [];\n        list.push(e);\n        repliesByParent.set(e.parent_id, list);\n      }\n    }\n\n    // Pre-flatten each top-level comment's thread subtree (parent + every\n    // descendant in render order). Reuse the previous array reference when\n"
+    },
+    {
+      "path": "packages/views/issues/components/issue-detail.tsx",
+      "start": 1886,
+      "end": 1985,
+      "code": "    // the thread is unchanged so unrelated CommentCards keep their memo.\n    const prevThreadReplies = prevThreadRepliesRef.current;\n    const threadReplies = new Map<string, TimelineEntry[]>();\n    for (const root of topLevel) {\n      if (root.type !== \"comment\") continue;\n      const fresh = collectThreadReplies(root.id, repliesByParent);\n      const previous = prevThreadReplies.get(root.id);\n      threadReplies.set(\n        root.id,\n        previous && shallowEqualEntries(previous, fresh) ? previous : fresh,\n      );\n    }\n    prevThreadRepliesRef.current = threadReplies;\n\n    // Coalesce consecutive activities from the same actor + action.\n    // - task_completed / task_failed: no time limit (these repeat across runs)\n    // - all other actions: within a 2-minute window\n    // - squad_leader_evaluated: never coalesce; outcome/reason are audit data\n    const COALESCE_MS = 2 * 60 * 1000;\n    const NO_TIME_LIMIT_ACTIONS = new Set([\"task_completed\", \"task_failed\", \"wakeup_checkin\"]);\n    // Duplicate marks name a different issue on every row.\n    const NEVER_COALESCE_ACTIONS = new Set([\n      \"squad_leader_evaluated\",\n      \"wakeup_created\",\n      \"wakeup_triggered\",\n      \"wakeup_timed_out\",\n      \"wakeup_paused\",\n      \"duplicate_marked\",\n      \"duplicate_unmarked\",\n      \"duplicate_added\",\n      \"duplicate_removed\",\n    ]);\n    // Unanchored runs keep their enqueue-time slot while working, then use\n    // the published reply's time or the run's end time.\n    const entryById = new Map(displayTimeline.map((entry) => [entry.id, entry]));\n    const chronological = orderTimelineWithRuns(topLevel, standaloneRuns, entryById);\n    const coalesced: (TimelineEntry | CommentRun)[] = [];\n    for (const entry of chronological) {\n      if (\"task\" in entry) {\n        coalesced.push(entry);\n        continue;\n      }\n      if (entry.type === \"activity\") {\n        const prev = coalesced[coalesced.length - 1];\n        if (\n          !NEVER_COALESCE_ACTIONS.has(entry.action!) &&\n          prev && !(\"task\" in prev) && prev.type === \"activity\" &&\n          prev.action === entry.action &&\n          prev.actor_type === entry.actor_type &&\n          prev.actor_id === entry.actor_id &&\n          (NO_TIME_LIMIT_ACTIONS.has(entry.action!) ||\n            Math.abs(new Date(entry.created_at).getTime() - new Date(prev.created_at).getTime()) <= COALESCE_MS)\n        ) {\n          coalesced[coalesced.length - 1] = { ...entry, coalesced_count: (prev.coalesced_count ?? 1) + 1 };\n          continue;\n        }\n      }\n      coalesced.push(entry);\n    }\n\n    // Group consecutive activities together so the connector line works\n    const groups: RawTimelineGroup[] = [];\n    for (const entry of coalesced) {\n      if (\"task\" in entry) {\n        groups.push({ type: \"run\", run: entry, entry: entry.hasReply && entry.commentId ? entryById.get(entry.commentId) : undefined });\n      } else if (entry.type === \"activity\") {\n        const last = groups[groups.length - 1];\n        if (last?.type === \"activities\") {\n          last.entries.push(entry);\n        } else {\n          groups.push({ type: \"activities\", entries: [entry] });\n        }\n      } else {\n        groups.push({ type: \"comment\", entries: [entry] });\n      }\n    }\n\n    return { threadReplies, groups };\n  }, [displayTimeline, standaloneRuns]);\n\n  // Flat array consumed by <Virtuoso>. Recomputed when timelineView.groups\n  // changes (timeline events) or expandedResolved flips (user toggles a\n  // resolved thread). Kept in a useMemo so Virtuoso's data identity is stable\n  // across unrelated re-renders.\n  const items = useMemo<TimelineItem[]>(\n    () => flattenGroups(timelineView.groups, expandedResolved),\n    [timelineView.groups, expandedResolved],\n  );\n\n  // In-page find (Cmd/Ctrl+F). `items.length` is the content signal that\n  // triggers a match recompute when comments are added/removed; text edits\n  // are caught by the hook's own MutationObserver. Opening find forces the\n  // timeline to render flat below so every comment is in the DOM to match.\n  const find = useInPageFind({\n    container: scrollContainerEl,\n    contentKey: items.length,\n    enabled: !!issue,\n  });\n  // Close the bar (and drop highlights) when navigating to another issue —\n  // the web route reuses this component instead of remounting.\n"
+    },
+    {
+      "path": "packages/views/issues/components/issue-detail.tsx",
+      "start": 1986,
+      "end": 2085,
+      "code": "  const closeFind = find.closeFind;\n  useEffect(() => {\n    closeFind();\n  }, [id, closeFind]);\n\n  // ID of the trailing activity block — the only one expanded by default.\n  const lastActivityGroupId = useMemo(() => {\n    for (let i = timelineView.groups.length - 1; i >= 0; i--) {\n      const g = timelineView.groups[i]!;\n      if (g.type === \"activities\") return g.entries[0]!.id;\n    }\n    return null;\n  }, [timelineView.groups]);\n\n  // Map of reply-comment id → root-comment id, so a deep-link to a reply\n  // (which lives inside a CommentCard, not in the flat items array) can fall\n  // back to scrolling the root thread into view. Without this, an inbox\n  // notification on a reply would land at items[-1] and short-circuit.\n  const replyToRoot = useMemo(() => {\n    const map = new Map<string, string>();\n    for (const [rootId, replies] of timelineView.threadReplies) {\n      for (const reply of replies) {\n        map.set(reply.id, rootId);\n      }\n    }\n    return map;\n  }, [timelineView.threadReplies]);\n\n  // The anchor a deep-link target renders under. A failed run's notification\n  // names its task, but a run that left a reply (its failure notice included)\n  // renders under the reply's id, in a thread slot and at the top level alike.\n  const highlightTargetId = useMemo(() => {\n    if (!highlightCommentId) return undefined;\n    const topLevel = items.find((it) => it.kind === \"run\" && it.run.task.id === highlightCommentId);\n    if (topLevel) return topLevel.id;\n    for (const runs of commentRuns.values()) {\n      const run = runs.find((candidate) => candidate.task.id === highlightCommentId);\n      if (!run) continue;\n      const reply = run.hasReply && run.commentId\n        ? displayTimeline.find((entry) => entry.id === run.commentId)\n        : undefined;\n      return reply && !isDeletedComment(reply) ? reply.id : run.task.id;\n    }\n    return highlightCommentId;\n  }, [highlightCommentId, items, commentRuns, displayTimeline]);\n\n  // Thread root of a deep-link target. A run sits in a slot inside the thread\n  // it answers, so it unfolds and scrolls with that thread exactly like a\n  // reply does.\n  const highlightRootId = useMemo(() => {\n    if (!highlightTargetId) return undefined;\n    const replyRoot = replyToRoot.get(highlightTargetId);\n    if (replyRoot) return replyRoot;\n    for (const [rootId, runs] of commentRuns) {\n      if (runs.some((run) => run.task.id === highlightCommentId)) return rootId;\n    }\n    return undefined;\n  }, [highlightTargetId, highlightCommentId, replyToRoot, commentRuns]);\n\n  // Deep-link target index in the flat items array. For root comments this is\n  // a direct findIndex hit; for replies and threaded runs we look up the\n  // enclosing root.\n  const targetIdx = useMemo(() => {\n    if (!highlightTargetId) return -1;\n    const direct = items.findIndex((it) => it.id === highlightTargetId);\n    if (direct >= 0) return direct;\n    if (!highlightRootId) return -1;\n    return items.findIndex((it) => it.id === highlightRootId);\n  }, [items, highlightTargetId, highlightRootId]);\n\n  // One entry per comment thread (folded resolved bars included), activity\n  // groups skipped. Derived from the same flat `items` array Virtuoso renders\n  // so the right-edge outline always matches the page order.\n  //\n  // The resolved flag comes from `deriveThreadResolution`, not from the\n  // `resolved-bar` kind: that kind only covers root resolutions that are\n  // currently folded, so it would miss reply resolutions and would flip off\n  // as soon as the user expanded a resolved thread.\n  const minimapThreads = useMemo<ThreadMinimapThread[]>(\n    () =>\n      items.flatMap((it) => {\n        if (it.kind === \"activity-group\" || !it.entry) return [];\n        const replies = timelineView.threadReplies.get(it.id) ?? EMPTY_REPLIES;\n        const resolution = deriveThreadResolution(it.entry, replies);\n        return [\n          {\n            id: it.id,\n            entry: it.entry,\n            resolved: resolution.kind !== \"none\",\n            participants: collectThreadParticipants(it.entry, replies),\n            // Tombstones render no row, so they get no tick either.\n            replies: replies.filter((reply) => !isDeletedComment(reply)),\n            resolutionReplyId: resolution.kind === \"reply\" ? resolution.resolutionId : null,\n          },\n        ];\n      }),\n    [items, timelineView.threadReplies],\n  );\n\n  // When in-page find renders the timeline flat, there is no\n"
+    },
+    {
+      "path": "packages/views/issues/components/issue-detail.tsx",
+      "start": 2086,
+      "end": 2185,
+      "code": "  // Virtuoso instance — minimap jumps drive the scroll container directly.\n  const isFlatTimeline = find.open;\n  const virtuosoRef = useRef<VirtuosoHandle>(null);\n  const virtualTimelineRef = useRef<HTMLDivElement>(null);\n  const [measuredTimelineId, setMeasuredTimelineId] = useState<string | null>(null);\n  const handleTimelineHeightChange = useCallback((height: number) => {\n    if (height > 0) setMeasuredTimelineId(id);\n  }, [id]);\n  // Whether Virtuoso's rendered rows (overscan included) stop short of the\n  // last one; rows past them are only estimated. Settled from Virtuoso's own\n  // range report, not `items.length`: a comment appended at the bottom is\n  // unrendered for a frame, and that frame must not read as \"away\".\n  const timelineItemCountRef = useRef(items.length);\n  timelineItemCountRef.current = items.length;\n  const [timelineTail, setTimelineTail] = useState({ issueId: id, pending: false });\n  const handleTimelineRangeChanged = useCallback((range: ListRange) => {\n    const pending = range.endIndex < timelineItemCountRef.current - 1;\n    setTimelineTail((prev) => (prev.issueId === id && prev.pending === pending ? prev : { issueId: id, pending }));\n  }, [id]);\n  // Mobile shows it only near the top of the page, where it covers the text\n  // column the least; desktop shows it whenever the latest entry is more than\n  // a screen away.\n  const jumpToLatest = useJumpToLatest(scrollContainerEl, {\n    nearTopOnly: isMobile,\n    tailPending: !isFlatTimeline && timelineTail.issueId === id && timelineTail.pending,\n  });\n  // Keyed to `away`, not `visible`: mobile hides the button past the top of\n  // the page, but the reader has not reached the new comments there.\n  const newComments = useNewCommentsWhileAway(timeline, {\n    ready: !timelineLoading,\n    away: jumpToLatest.away,\n    userId: user?.id,\n    resetKey: id,\n  });\n  const timelineReady = !issueLoading && !timelineLoading && !commentTasksLoading;\n  // A target the loaded timeline lacks (its comment was deleted) has nothing\n  // to land on, so the issue opens where the reader left off instead of at\n  // the top. If it arrives later, the landing still runs.\n  const highlightMissing = timelineReady && targetIdx < 0;\n  const pendingHighlight =\n    !!highlightCommentId && consumedHighlightId !== highlightCommentId && !highlightMissing;\n  const { pending: readingAnchor, complete: completeAnchorRestore } = useIssueTimelineAnchor({\n    containerKey: scrollContainerKey,\n    container: scrollContainerEl,\n    ready: timelineReady,\n    skipRestore: isPeek || pendingHighlight,\n  });\n  useEffect(() => {\n    const container = scrollContainerEl;\n    if (!readingAnchor || !container || issueLoading || timelineLoading || commentTasksLoading) return;\n    let rootId = replyToRoot.get(readingAnchor.commentId) ?? readingAnchor.commentId;\n    for (const [threadId, runs] of commentRuns) {\n      if (runs.some((run) => run.task.id === readingAnchor.commentId)) { rootId = threadId; break; }\n    }\n    const index = items.findIndex((item) => item.id === rootId);\n    if (index < 0) { completeAnchorRestore(); return; }\n    if (!isFlatTimeline && measuredTimelineId !== id) {\n      const list = virtualTimelineRef.current;\n      if (list) container.scrollTop += list.getBoundingClientRect().top - container.getBoundingClientRect().top;\n      return;\n    }\n    return scrollToTimelineComment({\n      container, virtualizer: isFlatTimeline ? null : virtuosoRef.current, index,\n      commentId: commentLandingTarget(readingAnchor.commentId, rootId, timelineView.threadReplies.get(rootId) ?? EMPTY_REPLIES),\n      offset: readingAnchor.offset, onComplete: completeAnchorRestore,\n    });\n  }, [readingAnchor, scrollContainerEl, issueLoading, timelineLoading, commentTasksLoading, replyToRoot, commentRuns, items, isFlatTimeline, measuredTimelineId, id, timelineView.threadReplies, completeAnchorRestore]);\n  // Scroll a freshly posted comment into view, aligned so its bottom sits just\n  // above the sticky composer (never behind it). A reply lives inside its root\n  // CommentCard, so the containing top-level row is the scroll target. Flat and\n  // virtualized timelines need separate scroll drivers, so they split into two\n  // effects below — kept apart because only the flat one depends on\n  // `scrollContainerEl`, and adding that dep to the virtualized effect would\n  // let a container re-measure cancel its in-flight scroll mid-flight.\n\n  // Virtualized mode: Virtuoso owns the scroll. The first jump materializes the\n  // row at its estimated height; once measured, the repeat aligns using the\n  // real height. The extra `offset` lifts the row's bottom clear of the sticky\n  // composer.\n  useEffect(() => {\n    if (!pendingPostedCommentId || isFlatTimeline) return;\n    const rootId = replyToRoot.get(pendingPostedCommentId) ?? pendingPostedCommentId;\n    const index = items.findIndex((item) => item.id === rootId);\n    if (index < 0) return;\n    let timer: number | undefined;\n    const scrollEnd = () => {\n      const composerHeight = composerRef.current?.getBoundingClientRect().height ?? 0;\n      virtuosoRef.current?.scrollToIndex({ index, align: \"end\", offset: composerHeight });\n    };\n    const frame = requestAnimationFrame(() => {\n      scrollEnd();\n      timer = window.setTimeout(() => {\n        scrollEnd();\n        setPendingPostedCommentId(null);\n      }, 100);\n    });\n    return () => {\n      cancelAnimationFrame(frame);\n      if (timer !== undefined) window.clearTimeout(timer);\n    };\n"
+    },
+    {
+      "path": "packages/views/issues/components/issue-detail.tsx",
+      "start": 2186,
+      "end": 2285,
+      "code": "  }, [pendingPostedCommentId, items, replyToRoot, isFlatTimeline]);\n\n  // Flat mode (find bar) has no Virtuoso, so drive scrollTop by\n  // hand: align the row's bottom to the composer's top edge. The comment's\n  // async layout (markdown, code highlight, images) keeps shifting its height,\n  // so re-align each frame until it settles (within 1px) or ~0.5s elapses — the\n  // same rAF stabilization the deep-link landing uses.\n  useEffect(() => {\n    if (!pendingPostedCommentId || !isFlatTimeline) return;\n    const rootId = replyToRoot.get(pendingPostedCommentId) ?? pendingPostedCommentId;\n    if (items.findIndex((item) => item.id === rootId) < 0) return;\n    let rafId = 0;\n    let frames = 0;\n    let last = -1;\n    const alignBottom = () => {\n      const el = document.getElementById(`comment-${rootId}`);\n      const container = scrollContainerEl;\n      if (el && container) {\n        const c = container.getBoundingClientRect();\n        const e = el.getBoundingClientRect();\n        const composerHeight = composerRef.current?.getBoundingClientRect().height ?? 0;\n        const target = Math.max(0, container.scrollTop + (e.bottom - c.bottom) + composerHeight);\n        container.scrollTop = target;\n        if (Math.abs(target - last) > 1 && ++frames < 30) {\n          last = target;\n          rafId = requestAnimationFrame(alignBottom);\n          return;\n        }\n      }\n      setPendingPostedCommentId(null);\n    };\n    rafId = requestAnimationFrame(alignBottom);\n    return () => cancelAnimationFrame(rafId);\n  }, [pendingPostedCommentId, items, replyToRoot, isFlatTimeline, scrollContainerEl]);\n  const jumpFlashTimerRef = useRef<number | null>(null);\n  useEffect(\n    () => () => {\n      if (jumpFlashTimerRef.current !== null) window.clearTimeout(jumpFlashTimerRef.current);\n    },\n    [],\n  );\n  // Flash the landed comment the same way inbox deep-links do, so the eye has\n  // an anchor after the instant jump. (Folded resolved bars don't take the\n  // highlight prop — the scroll itself is the feedback there.)\n  const flashJumpTarget = useCallback((commentId: string, duration = 2000) => {\n    setHighlightedId(commentId);\n    if (jumpFlashTimerRef.current !== null) window.clearTimeout(jumpFlashTimerRef.current);\n    jumpFlashTimerRef.current = window.setTimeout(() => setHighlightedId(null), duration);\n  }, []);\n  // Jump to a mounted comment: any row in flat mode, or a reply inside a\n  // rendered thread. Drive the container's scrollTop directly — never native\n  // scrollIntoView, which also scrolls the desktop shell (#3929).\n  const jumpToComment = useCallback(\n    (commentId: string) => {\n      const el = document.getElementById(`comment-${commentId}`);\n      const container = scrollContainerEl;\n      if (!el || !container) return;\n      const c = container.getBoundingClientRect();\n      const e = el.getBoundingClientRect();\n      container.scrollTop = Math.max(0, container.scrollTop + (e.top - c.top) - 16);\n      flashJumpTarget(commentId);\n    },\n    [scrollContainerEl, flashJumpTarget],\n  );\n  const jumpToThread = useCallback(\n    (threadId: string) => {\n      // Flat mode mounts every row, so the anchor is always in the DOM.\n      if (isFlatTimeline) return jumpToComment(threadId);\n      // Virtualized mode: the target row may not be mounted, so scroll by\n      // index and let Virtuoso mount it. Offset leaves a small top gap.\n      const index = items.findIndex((it) => it.id === threadId);\n      if (index < 0) return;\n      virtuosoRef.current?.scrollToIndex({ index, align: \"start\", offset: -16 });\n      flashJumpTarget(threadId);\n    },\n    [isFlatTimeline, items, jumpToComment, flashJumpTarget],\n  );\n  // Minimap jump to a reply. A reply's anchor exists only while its thread is\n  // open, so first undo whatever hides it — the reader's own collapse, a root\n  // resolution folding the whole thread into a bar, or a reply resolution\n  // folding the other replies — then mount the thread and let the effect\n  // below align the reply once its row lands.\n  const [pendingReplyJump, setPendingReplyJump] = useState<{ replyId: string; rootId: string } | null>(null);\n  const jumpToReply = useCallback(\n    (replyId: string) => {\n      const rootId = replyToRoot.get(replyId);\n      const index = rootId ? items.findIndex((it) => it.id === rootId) : -1;\n      const rootItem = items[index];\n      const root = rootItem && rootItem.kind !== \"activity-group\" ? rootItem.entry : undefined;\n      if (!rootId || !root) return;\n      const collapse = useCommentCollapseStore.getState();\n      if (collapse.isCollapsed(id, rootId)) collapse.toggle(id, rootId);\n      if (!expandedResolved.has(rootId)) {\n        const resolution = deriveThreadResolution(root, timelineView.threadReplies.get(rootId) ?? EMPTY_REPLIES);\n        if (resolution.kind === \"root\" || (resolution.kind === \"reply\" && resolution.resolutionId !== replyId)) {\n          toggleResolvedExpand(rootId, true);\n        }\n      }\n      if (!isFlatTimeline) virtuosoRef.current?.scrollToIndex({ index, align: \"start\", offset: -16 });\n      setPendingReplyJump({ replyId, rootId });\n"
+    },
+    {
+      "path": "packages/views/issues/components/issue-detail.tsx",
+      "start": 2286,
+      "end": 2385,
+      "code": "    },\n    [id, items, replyToRoot, expandedResolved, timelineView.threadReplies, toggleResolvedExpand, isFlatTimeline],\n  );\n  // Land the pending reply once its row is in the DOM. The expansion commits\n  // on the next render and Virtuoso mounts the thread a frame or two later, so\n  // wait by frame (~1s cap), then re-align until async layout (markdown, code\n  // highlight, images) settles. Drive scrollTop directly — never native\n  // scrollIntoView (#3929) — and clear any sticky thread bar pinned at the top\n  // of the viewport so it cannot cover the reply's header.\n  useEffect(() => {\n    const container = scrollContainerEl;\n    if (!pendingReplyJump || !container) return;\n    const { replyId, rootId } = pendingReplyJump;\n    let rafId = 0;\n    let frames = 0;\n    let last = -1;\n    const align = () => {\n      const el = document.getElementById(`comment-${replyId}`);\n      if (!el) {\n        if (++frames < 60) rafId = requestAnimationFrame(align);\n        else setPendingReplyJump(null);\n        return;\n      }\n      const stickyBar = document\n        .getElementById(`comment-${rootId}`)\n        ?.querySelector<HTMLElement>(\"[data-thread-sticky-bar]\");\n      const c = container.getBoundingClientRect();\n      const e = el.getBoundingClientRect();\n      const target = Math.max(\n        0,\n        container.scrollTop + (e.top - c.top) - 16 - (stickyBar?.offsetHeight ?? 0),\n      );\n      container.scrollTop = target;\n      if (Math.abs(target - last) > 1 && ++frames < 90) {\n        last = target;\n        rafId = requestAnimationFrame(align);\n        return;\n      }\n      flashJumpTarget(replyId);\n      setPendingReplyJump(null);\n    };\n    rafId = requestAnimationFrame(align);\n    return () => cancelAnimationFrame(rafId);\n  }, [pendingReplyJump, scrollContainerEl, flashJumpTarget]);\n  const jumpToMinimapTarget = useCallback(\n    (commentId: string) =>\n      replyToRoot.has(commentId) ? jumpToReply(commentId) : jumpToThread(commentId),\n    [replyToRoot, jumpToReply, jumpToThread],\n  );\n  // With comments that arrived while the reader was away, land on the first\n  // of them so they read in order; otherwise go to the very end.\n  const firstNewCommentId = newComments.ids[0];\n  const clearNewComments = newComments.clear;\n  const jumpLatest = jumpToLatest.jump;\n  const onJumpToLatest = useCallback(() => {\n    if (firstNewCommentId) {\n      clearNewComments();\n      jumpToMinimapTarget(firstNewCommentId);\n    } else {\n      jumpLatest();\n    }\n  }, [firstNewCommentId, clearNewComments, jumpToMinimapTarget, jumpLatest]);\n  const jumpToLatestLabel = newComments.ids.length > 0\n    ? t(($) => $.timeline.new_comments, { count: newComments.ids.length })\n    : t(($) => $.timeline.jump_to_latest);\n  // Header chip jump to a run's block. A run is either its own top-level row\n  // or a slot inside the thread it answers, so find that row, undo whatever\n  // folds the thread, scroll the row into place, then let the effect below\n  // align the block itself once it mounts.\n  const [pendingRunJump, setPendingRunJump] = useState<{ taskId: string; rootId: string; flashId: string } | null>(null);\n  const jumpToRun = useCallback(\n    (taskId: string) => {\n      let index = items.findIndex((it) => it.kind === \"run\" && it.run.task.id === taskId);\n      let run = index >= 0 ? (items[index] as Extract<TimelineItem, { kind: \"run\" }>).run : undefined;\n      if (!run) {\n        for (const [rootId, runs] of commentRuns) {\n          run = runs.find((candidate) => candidate.task.id === taskId);\n          if (run) {\n            index = items.findIndex((it) => it.id === rootId);\n            break;\n          }\n        }\n      }\n      const rootItem = items[index];\n      if (!run || !rootItem) return;\n      const root = rootItem.kind !== \"activity-group\" ? rootItem.entry : undefined;\n      const headsThread = run.hasReply && run.commentId === rootItem.id;\n      if (root && !headsThread) {\n        const collapse = useCommentCollapseStore.getState();\n        if (collapse.isCollapsed(id, root.id)) collapse.toggle(id, root.id);\n      }\n      if (\n        root && !expandedResolved.has(root.id) &&\n        deriveThreadResolution(root, timelineView.threadReplies.get(root.id) ?? EMPTY_REPLIES).kind !== \"none\"\n      ) {\n        toggleResolvedExpand(root.id, true);\n      }\n      if (!isFlatTimeline) virtuosoRef.current?.scrollToIndex({ index, align: \"start\", offset: -16 });\n      setPendingRunJump({ taskId, rootId: rootItem.id, flashId: run.hasReply && run.commentId ? run.commentId : taskId });\n    },\n"
+    },
+    {
+      "path": "packages/views/issues/components/issue-detail.tsx",
+      "start": 2386,
+      "end": 2439,
+      "code": "    [id, items, commentRuns, expandedResolved, timelineView.threadReplies, toggleResolvedExpand, isFlatTimeline],\n  );\n  // Same frame-by-frame landing as a reply jump. A run that has replied may\n  // only show as a log button in its comment's header, so align that comment.\n  useEffect(() => {\n    const container = scrollContainerEl;\n    if (!pendingRunJump || !container) return;\n    const { taskId, rootId, flashId } = pendingRunJump;\n    let rafId = 0;\n    let frames = 0;\n    let last = -1;\n    const align = () => {\n      const el = container.querySelector<HTMLElement>(`[data-run-slot-id=\"${taskId}\"]`)\n        ?? container.querySelector<HTMLElement>(`[data-run-id=\"${taskId}\"]`)?.closest<HTMLElement>(\"[id^='comment-']\");\n      if (!el) {\n        if (++frames < 60) rafId = requestAnimationFrame(align);\n        else setPendingRunJump(null);\n        return;\n      }\n      const stickyBar = document\n        .getElementById(`comment-${rootId}`)\n        ?.querySelector<HTMLElement>(\"[data-thread-sticky-bar]\");\n      const c = container.getBoundingClientRect();\n      const e = el.getBoundingClientRect();\n      const target = Math.max(\n        0,\n        container.scrollTop + (e.top - c.top) - 16 - (stickyBar && !el.contains(stickyBar) ? stickyBar.offsetHeight : 0),\n      );\n      container.scrollTop = target;\n      if (Math.abs(target - last) > 1 && ++frames < 90) {\n        last = target;\n        rafId = requestAnimationFrame(align);\n        return;\n      }\n      flashJumpTarget(flashId);\n      setPendingRunJump(null);\n    };\n    rafId = requestAnimationFrame(align);\n    return () => cancelAnimationFrame(rafId);\n  }, [pendingRunJump, scrollContainerEl, flashJumpTarget]);\n\n  const {\n    reactions: issueReactions,\n    toggleReaction: handleToggleIssueReaction,\n  } = useIssueReactions(id, user?.id);\n\n  const {\n    subscribers, isSubscribed, subscriptionReason, subscriptionDelivery, subscriptionKnown,\n    togglePending, subtreePending,\n    toggleSubscribe: handleToggleSubscribe, toggleSubscriber, followAllActivity,\n    unsubscribeFromSubtree: handleUnsubscribeSubtree,\n  } = useIssueSubscribers(id, user?.id);\n\n  // Attachments uploaded against this issue. Drives the description\n"
+    }
+  ],
+  "edges": [
+    {
+      "source": "issue-detail.tsx:1749-1750",
+      "kind": "automatic foreground read-state query and writes",
+      "inventory": [
+        {
+          "id": "client:3167",
+          "method": "GET",
+          "path_expression": "/api/issues/unread${query}",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/unread"
+          }
+        },
+        {
+          "id": "client:3187",
+          "method": "POST",
+          "path_expression": "/api/issues/${issueId}/read",
+          "route": {
+            "method": "POST",
+            "path": "/api/issues/{id}/read"
+          }
+        },
+        {
+          "id": "client:3295",
+          "method": "POST",
+          "path_expression": "/api/inbox/issues/${issueId}/read",
+          "route": {
+            "method": "POST",
+            "path": "/api/inbox/issues/{issueId}/read"
+          }
+        }
+      ],
+      "gates": "Issue unread query enabled by issueId; clear mark only after successful query and foreground, once per outcome/timestamp per viewing; preserve manual marks set during same viewing. Inbox write requires readsInbox enabled, issueId and foreground, once per workspace/issue/generation; generation advances on matching unread inbox:new and WS reconnect."
+    },
+    {
+      "source": "packages/core/issues/queries.ts:26",
+      "factory": "issueTasksOptions",
+      "api_method": "listTasksByIssue",
+      "client_anchor": "packages/core/api/client.ts:3111",
+      "kind": "possible-refetch-union",
+      "inventory": [
+        {
+          "id": "client:3116",
+          "method": "GET",
+          "path_expression": "/api/issues/${issueId}/task-runs${query}",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}/task-runs"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/issues/queries.ts:390",
+      "factory": "issueListOptions",
+      "api_method": "listIssues",
+      "client_anchor": "packages/core/api/client.ts:1277",
+      "kind": "possible-refetch-union",
+      "inventory": [
+        {
+          "id": "client:1344",
+          "method": "GET",
+          "path_expression": "/api/issues?${search}",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues"
+          }
+        }
+      ],
+      "parent_branch_review": "queryFn passes empty filter and declared IssueSort. Ordinary typed production callers have no ids; GET. The underlying generic listIssues client separately supports POST for truthy ids and creator fallback, but that is not this factory normal argument contract."
+    },
+    {
+      "source": "packages/core/issues/queries.ts:507",
+      "factory": "issueDetailOptions",
+      "api_method": "getIssue",
+      "client_anchor": "packages/core/api/client.ts:1611",
+      "kind": "possible-refetch-union",
+      "inventory": [
+        {
+          "id": "client:1612",
+          "method": "GET",
+          "path_expression": "/api/issues/${encodeURIComponent(id)}",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/issues/queries.ts:670",
+      "factory": "issueTimelineOptions",
+      "api_method": "listTimeline",
+      "client_anchor": "packages/core/api/client.ts:1925",
+      "kind": "possible-refetch-union",
+      "inventory": [
+        {
+          "id": "client:1926",
+          "method": "GET",
+          "path_expression": "/api/issues/${issueId}/timeline",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}/timeline"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/issues/queries.ts:677",
+      "factory": "issueCommentThreadOptions",
+      "api_method": "listComments",
+      "client_anchor": "packages/core/api/client.ts:1859",
+      "kind": "possible-refetch-union",
+      "inventory": [
+        {
+          "id": "client:1861",
+          "method": "GET",
+          "path_expression": "/api/issues/${issueId}/comments${query}",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}/comments"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/issues/queries.ts:690",
+      "factory": "issueReactionsOptions",
+      "api_method": "getIssue",
+      "client_anchor": "packages/core/api/client.ts:1611",
+      "kind": "possible-refetch-union",
+      "inventory": [
+        {
+          "id": "client:1612",
+          "method": "GET",
+          "path_expression": "/api/issues/${encodeURIComponent(id)}",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/issues/queries.ts:700",
+      "factory": "issueSubscribersOptions",
+      "api_method": "listIssueSubscribers",
+      "client_anchor": "packages/core/api/client.ts:2001",
+      "kind": "possible-refetch-union",
+      "inventory": [
+        {
+          "id": "client:2002",
+          "method": "GET",
+          "path_expression": "/api/issues/${issueId}/subscribers",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}/subscribers"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/workspace/queries.ts:28",
+      "factory": "workspaceListOptions",
+      "api_method": "listWorkspaces",
+      "client_anchor": "packages/core/api/client.ts:3390",
+      "kind": "possible-refetch-union",
+      "inventory": [
+        {
+          "id": "client:3391",
+          "method": "GET",
+          "path_expression": "/api/workspaces",
+          "route": {
+            "method": "GET",
+            "path": "/api/workspaces"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/workspace/queries.ts:43",
+      "factory": "memberListOptions",
+      "api_method": "listMembers",
+      "client_anchor": "packages/core/api/client.ts:3764",
+      "kind": "possible-refetch-union",
+      "inventory": [
+        {
+          "id": "client:3765",
+          "method": "GET",
+          "path_expression": "/api/workspaces/${workspaceId}/members",
+          "route": {
+            "method": "GET",
+            "path": "/api/workspaces/{id}/members"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/workspace/queries.ts:50",
+      "factory": "agentListOptions",
+      "api_method": "listAgents",
+      "client_anchor": "packages/core/api/client.ts:2062",
+      "kind": "possible-refetch-union",
+      "inventory": [
+        {
+          "id": "client:2066",
+          "method": "GET",
+          "path_expression": "/api/agents?${search}",
+          "route": {
+            "method": "GET",
+            "path": "/api/agents"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/workspace/queries.ts:102",
+      "factory": "squadListOptions",
+      "api_method": "listSquads",
+      "client_anchor": "packages/core/api/client.ts:5202",
+      "kind": "possible-refetch-union",
+      "inventory": [
+        {
+          "id": "client:5203",
+          "method": "GET",
+          "path_expression": "/api/squads",
+          "route": {
+            "method": "GET",
+            "path": "/api/squads"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/issue-statuses/queries.ts:27",
+      "factory": "issueStatusListOptions",
+      "api_method": "listIssueStatuses",
+      "client_anchor": "packages/core/api/client.ts:4819",
+      "kind": "possible-refetch-union",
+      "inventory": [
+        {
+          "id": "client:4821",
+          "method": "GET",
+          "path_expression": "/api/issue-statuses${query}",
+          "route": {
+            "method": "GET",
+            "path": "/api/issue-statuses"
+          }
+        }
+      ]
+    },
+    {
+      "source": "useCreateComment",
+      "kind": "exact invoked client request branches reviewed by root",
+      "inventory": [
+        {
+          "id": "client:1876",
+          "method": "POST",
+          "path_expression": "/api/issues/${issueId}/comments",
+          "route": {
+            "method": "POST",
+            "path": "/api/issues/{id}/comments"
+          }
+        }
+      ]
+    },
+    {
+      "source": "useUpdateComment",
+      "kind": "exact invoked client request branches reviewed by root",
+      "inventory": [
+        {
+          "id": "client:1939",
+          "method": "PUT",
+          "path_expression": "/api/comments/${commentId}",
+          "route": {
+            "method": "PUT",
+            "path": "/api/comments/{commentId}"
+          }
+        }
+      ]
+    },
+    {
+      "source": "useDeleteComment",
+      "kind": "exact invoked client request branches reviewed by root",
+      "inventory": [
+        {
+          "id": "client:1961",
+          "method": "DELETE",
+          "path_expression": "/api/comments/${commentId}",
+          "route": {
+            "method": "DELETE",
+            "path": "/api/comments/{commentId}"
+          }
+        },
+        {
+          "id": "client:1961:keep-replies",
+          "method": "DELETE",
+          "path_expression": "/api/comments/${commentId}/keep-replies",
+          "route": {
+            "method": "DELETE",
+            "path": "/api/comments/{commentId}/keep-replies"
+          }
+        }
+      ]
+    },
+    {
+      "source": "useResolveComment",
+      "kind": "exact invoked client request branches reviewed by root",
+      "inventory": [
+        {
+          "id": "client:1965",
+          "method": "POST",
+          "path_expression": "/api/comments/${commentId}/resolve",
+          "route": {
+            "method": "POST",
+            "path": "/api/comments/{commentId}/resolve"
+          }
+        },
+        {
+          "id": "client:1969",
+          "method": "DELETE",
+          "path_expression": "/api/comments/${commentId}/resolve",
+          "route": {
+            "method": "DELETE",
+            "path": "/api/comments/{commentId}/resolve"
+          }
+        }
+      ]
+    },
+    {
+      "source": "useToggleCommentReaction",
+      "kind": "exact invoked client request branches reviewed by root",
+      "inventory": [
+        {
+          "id": "client:1973",
+          "method": "POST",
+          "path_expression": "/api/comments/${commentId}/reactions",
+          "route": {
+            "method": "POST",
+            "path": "/api/comments/{commentId}/reactions"
+          }
+        },
+        {
+          "id": "client:1980",
+          "method": "DELETE",
+          "path_expression": "/api/comments/${commentId}/reactions",
+          "route": {
+            "method": "DELETE",
+            "path": "/api/comments/{commentId}/reactions"
+          }
+        }
+      ]
+    },
+    {
+      "source": "useToggleIssueReaction",
+      "kind": "exact invoked client request branches reviewed by root",
+      "inventory": [
+        {
+          "id": "client:1987",
+          "method": "POST",
+          "path_expression": "/api/issues/${issueId}/reactions",
+          "route": {
+            "method": "POST",
+            "path": "/api/issues/{id}/reactions"
+          }
+        },
+        {
+          "id": "client:1994",
+          "method": "DELETE",
+          "path_expression": "/api/issues/${issueId}/reactions",
+          "route": {
+            "method": "DELETE",
+            "path": "/api/issues/{id}/reactions"
+          }
+        }
+      ]
+    },
+    {
+      "source": "useToggleIssueSubscriber",
+      "kind": "exact invoked client request branches reviewed by root",
+      "inventory": [
+        {
+          "id": "client:2012",
+          "method": "POST",
+          "path_expression": "/api/issues/${issueId}/subscribe",
+          "route": {
+            "method": "POST",
+            "path": "/api/issues/{id}/subscribe"
+          }
+        },
+        {
+          "id": "client:2023",
+          "method": "POST",
+          "path_expression": "/api/issues/${issueId}/unsubscribe",
+          "route": {
+            "method": "POST",
+            "path": "/api/issues/{id}/unsubscribe"
+          }
+        }
+      ]
+    },
+    {
+      "source": "useUnsubscribeFromIssueSubtree",
+      "kind": "exact invoked client request branches reviewed by root",
+      "inventory": [
+        {
+          "id": "client:2046",
+          "method": "POST",
+          "path_expression": "/api/issues/${issueId}/unsubscribe/subtree",
+          "route": {
+            "method": "POST",
+            "path": "/api/issues/{id}/unsubscribe/subtree"
+          }
+        }
+      ]
+    }
+  ],
+  "direct_frontend_calls": [],
+  "query_gates": [
+    "memberListOptions(wsId), agentListOptions(wsId), issueListOptions(wsId): mounted unconditionally; factory gates require proof reuse",
+    "issueDetailOptions(wsId,id): refetchOnMount false when skipInitialRefetch, otherwise always; initialData only matching list row with non-null description",
+    "issueTasksOptions(id): mounted unconditionally",
+    "description annotations: enabled !!user && !!issue; editable true",
+    "find: enabled !!issue; container scrollContainerEl; contentKey items.length",
+    "read viewing hooks: issue?.id or empty string; inbox hook additionally readsInbox",
+    "timeline readiness: issue, timeline and task queries all no longer loading; anchor skips peek or pending highlight",
+    "member/agent factories have no enabled gate; agents poll 30 seconds only for a nonarchived online/unstable agent",
+    "squads enabled !!wsId; status hook enabled Boolean(wsId); workspace list has no enabled gate"
+  ],
+  "local_resources": [
+    "auth/modal/recent issues/recent context/comment composer/resolved expansion/comment collapse stores",
+    "platform scroll offset/ref/view state writer and consumed highlight memento",
+    "layout persistence, panel/mobile/sidebar state; optional/custom property visibility state",
+    "timeline run/reply maps, activity expansion sets, Virtuoso refs/range/height state",
+    "DOM comment/run anchors, composer dimensions, requestAnimationFrame loops and timeout handles"
+  ],
+  "callbacks": [
+    "openCommentSubIssue opens quick-create modal with issue defaults and optional prompt",
+    "loaded-to-missing issue invokes onDelete once; command context carries fallback path",
+    "resolve wrapper clears root expansion before toggleResolveComment",
+    "posted-comment scrolling: virtualized two-pass alignment, flat alignment capped at 30 frames",
+    "minimap dispatches root/reply jumps; reply expands collapsed/resolved thread and waits up to 60 mount frames, 90 total alignment frames",
+    "run jump finds standalone/thread run, expands parent, waits for slot or comment anchor with same 60/90 caps",
+    "jump-to-latest clears new-comment list before first-new jump, otherwise invokes jumpLatest"
+  ],
+  "cleanup_errors": [
+    "virtual posted scroll cancels rAF and clears 100ms timeout",
+    "flat/reply/run effects cancel scheduled rAF",
+    "flash timeout replaced per flash and cleared on unmount",
+    "anchor effect returns scrollToTimelineComment cleanup",
+    "collapse scroll rAF is not retained/cancelled in this section",
+    "missing DOM targets return or expire pending jumps; missing reading-anchor index completes restoration",
+    "no local network error handling in scoped body; hook error/settlement bodies remain unresolved"
+  ],
+  "boundaries": [
+    "React/TanStack/Virtuoso/resizable panel internals are explicit third-party boundaries.",
+    "Descendant rendering trees and later component sections excluded.",
+    "Config population and native desktop foreground implementations are injected boundaries; hook reads/interfaces only."
+  ],
+  "remaining": [],
+  "root_partial_review": {
+    "status": "read_state_edges_verified_other_hooks_pending",
+    "sources": [
+      {
+        "path": "packages/core/issues/read-state.ts",
+        "sha256": "1c04a973a2dcd848ca933cf6a85d78a51b2aab749eb2f961cc46f9a1025d43bc"
+      },
+      {
+        "path": "packages/core/issues/unread.ts",
+        "sha256": "841b7428051c81d3d3f83f2d4ff5195ebf2989c8772b42b13b2940a999ac92b1"
+      },
+      {
+        "path": "packages/views/issues/hooks/use-mark-issue-read-while-viewing.ts",
+        "sha256": "7875b68ed310abfc3561978966e4a81bdca073bd5b76ce99288bd52d5f306cd2"
+      },
+      {
+        "path": "packages/views/issues/hooks/use-mark-issue-inbox-read-while-viewing.ts",
+        "sha256": "34ab1c8006eeffa0f9fc11f8f6f926d0812674dd058ed1cc8abaaf65c72e4610"
+      },
+      {
+        "path": "packages/core/inbox/mutations.ts",
+        "sha256": "d3fb0ce1e4943449caccefb84495c4dd2b8f367d70ce94b0e5ad2334c47a22d4"
+      }
+    ],
+    "notes": [
+      "Manual primary-read retry coalesces by workspace/issue and uses cancelRefetch:false; cached errors do not make detail unavailable",
+      "Inbox read success only refreshes when count !== 0; absent count parsed null and refreshes",
+      "No whole section acceptance until remaining invoked hooks mapped"
+    ]
+  },
+  "reused_evidence": [
+    {
+      "path": "server/contracts/batches/issue-query-transport-coverage.json",
+      "sha256": "3d4401929eee7294bc9f706a5c738a074300faffc6df01ec9275184d8a5be380",
+      "validated_files": [
+        "packages/core/issues/queries.ts",
+        "packages/core/projects/queries.ts",
+        "packages/core/workspace/queries.ts",
+        "packages/core/issue-statuses/queries.ts"
+      ],
+      "mismatches": []
+    },
+    {
+      "path": "server/contracts/batches/issue-mutations-transport-coverage.json",
+      "sha256": "43c8266c0e7248f5f12b8736bf795e424ab2771f21bea3eac4b210bf89dbd70a",
+      "validated_files": [
+        "packages/core/issues/mutations.ts",
+        "packages/views/modals/create-issue.tsx",
+        "packages/core/labels/mutations.ts",
+        "packages/core/issue-workflows/hooks.ts",
+        "packages/core/issue-workflows/queries.ts",
+        "packages/core/issue-statuses/hooks.ts",
+        "packages/core/issue-statuses/queries.ts",
+        "packages/core/properties/queries.ts",
+        "packages/core/workspace/hooks.ts",
+        "packages/views/workflows/step-handler.ts",
+        "packages/views/modals/source-context-preview.tsx",
+        "packages/core/api/client.ts",
+        "packages/views/issues/components/comment-card.tsx",
+        "packages/views/issues/actions/issue-actions-menu-items.tsx",
+        "packages/core/issues/cache-coordinator.ts",
+        "packages/core/issues/cache-helpers.ts",
+        "packages/core/issues/surface/membership.ts",
+        "packages/core/issues/status-category.ts",
+        "packages/core/inbox/ws-updaters.ts",
+        "packages/core/inbox/queries.ts",
+        "packages/core/issues/queries.ts",
+        "packages/core/projects/queries.ts",
+        "packages/core/workspace/queries.ts",
+        "packages/core/issues/ws-updaters.ts",
+        "packages/core/issues/delete-cache.ts",
+        "packages/core/issues/stores/recent-issues-store.ts",
+        "packages/core/platform/storage.ts",
+        "packages/core/agents/queries.ts",
+        "packages/core/inbox/filters.ts",
+        "packages/core/labels/queries.ts",
+        "packages/views/issues/components/inline-comment-run.tsx",
+        "packages/core/chat/queries.ts",
+        "packages/core/plugins/queries.ts",
+        "packages/views/common/task-transcript/use-trace-issue-labels.ts",
+        "packages/views/common/task-transcript/trace-issue-labels.ts",
+        "packages/core/issues/subscribed.ts",
+        "packages/core/issues/timeline-sort.ts",
+        "packages/core/issues/comment-deletion.ts"
+      ],
+      "mismatches": []
+    },
+    {
+      "path": "server/contracts/batches/issue-cache-transport-coverage.json",
+      "sha256": "ca8ac1b4269c453cb9920c1ea565e909b513dc0cb74abe462467e24bf9b71b65",
+      "validated_files": [
+        "packages/core/issues/cache-coordinator.ts",
+        "packages/core/issues/cache-helpers.ts",
+        "packages/core/issues/surface/membership.ts",
+        "packages/core/issues/status-category.ts",
+        "packages/core/inbox/ws-updaters.ts",
+        "packages/core/inbox/queries.ts",
+        "packages/core/issues/queries.ts"
+      ],
+      "mismatches": []
+    },
+    {
+      "path": "server/contracts/batches/chat-context-annotation-transport-closure.json",
+      "sha256": "99ea6be9d82f05549154f2148056a6ba644d5e65623759771c25c08cad028026",
+      "validated_files": [
+        "packages/views/chat/components/use-chat-context-items.ts",
+        "packages/views/chat/components/use-chat-annotations.ts",
+        "packages/views/issues/components/use-comment-annotations.tsx",
+        "packages/views/issues/components/comment-annotation-selection.ts",
+        "packages/core/chat/recent-context-store.ts",
+        "packages/views/navigation/context.tsx",
+        "packages/core/issues/stores/comment-draft-store.ts",
+        "packages/core/platform/storage.ts",
+        "packages/core/platform/workspace-storage.ts",
+        "packages/core/drafts/reply-annotation.ts",
+        "packages/core/chat/queries.ts",
+        "packages/core/api/client.ts"
+      ],
+      "mismatches": []
+    },
+    {
+      "path": "server/contracts/batches/platform-host-transport-coverage.json",
+      "sha256": "2009830d5077094406bee049b7eef8a602868d7b6d20ccdd6370e8c8a5d3bd1f",
+      "validated_files": [
+        "packages/views/platform/local-directory.ts",
+        "packages/views/platform/local-voice.ts",
+        "packages/views/platform/open-external.ts",
+        "packages/views/platform/scroll-restoration.tsx",
+        "packages/views/platform/theme-folder.ts",
+        "packages/views/platform/use-desktop-unread-badge.ts",
+        "packages/views/platform/use-immersive-mode.ts",
+        "apps/web/platform/scroll-restoration.tsx",
+        "apps/web/components/web-providers.tsx",
+        "packages/core/inbox/queries.ts",
+        "packages/core/chat/queries.ts",
+        "packages/core/chat/unread.ts",
+        "packages/core/api/client.ts",
+        "packages/views/settings/components/appearance-tab.tsx"
+      ],
+      "mismatches": []
+    },
+    {
+      "path": "server/contracts/batches/editor-transport-coverage.json",
+      "sha256": "1f941073efbfc5c5af384ed41e903a815ea8a373f29cf67a1d1228cbadcf1045",
+      "validated_files": [],
+      "mismatches": []
+    },
+    {
+      "path": "server/contracts/batches/api-client-execution-closure.json",
+      "sha256": "550a585c2351e0b2e8066bb11dd6690f17dff41641d78071e0f6479cdf3991e9",
+      "validated_files": [
+        "packages/core/api/client.ts"
+      ],
+      "mismatches": []
+    },
+    {
+      "path": "server/contracts/batches/surface-local-helper-closure.json",
+      "sha256": "dd475004a84bd8d8f49a7ca60bbeac71e6d641eb86f1f0cc862310fca0ef8c29",
+      "validated_files": [],
+      "mismatches": []
+    },
+    {
+      "path": "server/contracts/batches/observer-local-state-transport-coverage.json",
+      "sha256": "1851b4d75f9b602380d14fa25c3aa055b2a364279168b3d7e0b958eff966e5a4",
+      "validated_files": [
+        "packages/core/api/index.ts",
+        "packages/core/api/realtime-observer.ts",
+        "packages/core/api/request-observer.ts",
+        "packages/core/diagnostics/dev-recorder.ts",
+        "packages/core/issues/stores/comment-draft-store.ts",
+        "packages/core/issues/stores/draft-store.ts",
+        "packages/core/chat/message-cache.ts"
+      ],
+      "mismatches": []
+    }
+  ],
+  "invoked_mutation_exports": [
+    {
+      "export": "useCreateComment",
+      "line": 884,
+      "direct_api": [
+        "createComment"
+      ],
+      "callback_and_gate_index": [
+        "onSuccess: (comment) => {",
+        "if (comment.issue_revision) {",
+        "invalidateIssueOwnerProjections(qc, wsId, issueId);",
+        "invalidateLastActivitySortedIssueLists(qc, wsId);",
+        "qc.setQueryData<TimelineCache>(issueKeys.timeline(issueId), (old) => {",
+        "if (!old) return [entry];",
+        "if (old.some((e) => e.id === entry.id)) {",
+        "if (steered) qc.invalidateQueries({ queryKey: issueKeys.tasks(issueId) });",
+        "qc.invalidateQueries({ queryKey: issueKeys.commentTriggerPreview(issueId) });",
+        "// No onSettled invalidate. The `comment:created` WS broadcast keeps",
+        "// recovery in useIssueTimeline already invalidates if the connection"
+      ],
+      "source_snapshot_range": "See separate snapshots for complete callback bodies, including multiline gates"
+    },
+    {
+      "export": "useUpdateComment",
+      "line": 956,
+      "direct_api": [
+        "updateComment"
+      ],
+      "callback_and_gate_index": [
+        "onMutate: async ({ commentId, content, attachmentIds }) => {",
+        "await qc.cancelQueries({ queryKey: issueKeys.timeline(issueId) });",
+        "qc.setQueryData<TimelineCache>(issueKeys.timeline(issueId), (old) =>",
+        "onError: (_err, _vars, ctx) => {",
+        "if (ctx?.prev !== undefined) {",
+        "qc.setQueryData(issueKeys.timeline(issueId), ctx.prev);",
+        "onSuccess: (comment) => {",
+        "if (comment.issue_revision) {",
+        "invalidateIssueOwnerProjections(qc, wsId, issueId);",
+        "invalidateLastActivitySortedIssueLists(qc, wsId);",
+        "onSettled: () => {",
+        "qc.invalidateQueries({ queryKey: issueKeys.timeline(issueId) });"
+      ],
+      "source_snapshot_range": "See separate snapshots for complete callback bodies, including multiline gates"
+    },
+    {
+      "export": "useDeleteComment",
+      "line": 1009,
+      "direct_api": [
+        "deleteComment"
+      ],
+      "callback_and_gate_index": [
+        "onSuccess: (keptReplies, commentId) => {",
+        "qc.setQueryData<TimelineCache>(issueKeys.timeline(issueId), (old) => {",
+        "if (!old) return old;",
+        "invalidateIssueOwnerProjections(qc, wsId, issueId);",
+        "invalidateLastActivitySortedIssueLists(qc, wsId);",
+        "onSettled: () => {",
+        "qc.invalidateQueries({ queryKey: issueKeys.timeline(issueId) });",
+        "if (e.type === \"comment\") byId.set(e.id, e);",
+        "if (e.parent_id) {",
+        "if (!ids.has(child)) {"
+      ],
+      "source_snapshot_range": "See separate snapshots for complete callback bodies, including multiline gates"
+    },
+    {
+      "export": "useResolveComment",
+      "line": 1088,
+      "direct_api": [
+        "resolveComment",
+        "unresolveComment"
+      ],
+      "callback_and_gate_index": [
+        "resolved ? api.resolveComment(commentId) : api.unresolveComment(commentId),",
+        "onMutate: async ({ commentId, resolved }) => {",
+        "await qc.cancelQueries({ queryKey: issueKeys.timeline(issueId) });",
+        "qc.setQueryData<TimelineCache>(issueKeys.timeline(issueId), (old) => {",
+        "if (!old) return old;",
+        "if (e.id === commentId) {",
+        "if (resolved && e.resolved_at && threadIds?.has(e.id)) {",
+        "onError: (_err, _vars, ctx) => {",
+        "if (ctx?.prev !== undefined) {",
+        "qc.setQueryData(issueKeys.timeline(issueId), ctx.prev);",
+        "onSettled: () => {",
+        "qc.invalidateQueries({ queryKey: issueKeys.timeline(issueId) });"
+      ],
+      "source_snapshot_range": "See separate snapshots for complete callback bodies, including multiline gates"
+    },
+    {
+      "export": "useToggleCommentReaction",
+      "line": 1132,
+      "direct_api": [
+        "removeReaction",
+        "addReaction"
+      ],
+      "callback_and_gate_index": [
+        "if (existing) {",
+        "onSettled: () => {",
+        "qc.invalidateQueries({ queryKey: issueKeys.timeline(issueId) });"
+      ],
+      "source_snapshot_range": "See separate snapshots for complete callback bodies, including multiline gates"
+    },
+    {
+      "export": "useToggleIssueReaction",
+      "line": 1155,
+      "direct_api": [
+        "removeIssueReaction",
+        "addIssueReaction"
+      ],
+      "callback_and_gate_index": [
+        "if (existing) {",
+        "onSuccess: (reaction) => {",
+        "onSettled: () => {",
+        "qc.invalidateQueries({ queryKey: issueKeys.reactions(issueId) });"
+      ],
+      "source_snapshot_range": "See separate snapshots for complete callback bodies, including multiline gates"
+    },
+    {
+      "export": "useToggleIssueSubscriber",
+      "line": 1181,
+      "direct_api": [
+        "unsubscribeFromIssue",
+        "subscribeToIssue"
+      ],
+      "callback_and_gate_index": [
+        "if (subscribed) {",
+        "onMutate: async ({ userId, userType, subscribed }) => {",
+        "await qc.cancelQueries({ queryKey: issueKeys.subscribers(issueId) });",
+        "if (subscribed) {",
+        "qc.setQueryData<IssueSubscriber[]>(",
+        "qc.setQueryData<IssueSubscriber[]>(",
+        "if (",
+        "onError: (_err, _vars, ctx) => {",
+        "if (ctx?.prev)",
+        "qc.setQueryData(issueKeys.subscribers(issueId), ctx.prev);",
+        "onSettled: (_data, _err, { userType }) => {",
+        "qc.invalidateQueries({ queryKey: issueKeys.subscribers(issueId) });",
+        "if (wsId && userType === \"member\") void refreshSubscribedIssues(qc, wsId);",
+        "* determinate to patch — invalidate every subscriber query instead and let the"
+      ],
+      "source_snapshot_range": "See separate snapshots for complete callback bodies, including multiline gates"
+    },
+    {
+      "export": "useUnsubscribeFromIssueSubtree",
+      "line": 1261,
+      "direct_api": [
+        "unsubscribeFromIssueSubtree"
+      ],
+      "callback_and_gate_index": [
+        "onSettled: (_data, _err, { userType }) => {",
+        "qc.invalidateQueries({ queryKey: issueKeys.subscribersAll() });",
+        "if (wsId && userType === \"member\") void refreshSubscribedIssues(qc, wsId);"
+      ],
+      "source_snapshot_range": "See separate snapshots for complete callback bodies, including multiline gates"
+    }
+  ],
+  "hook_inventory": [
+    "useActorName",
+    "useAnimatedRightSidebarState",
+    "useAuthStore",
+    "useCallback",
+    "useCommentAnnotations",
+    "useCommentCollapseStore",
+    "useCommentComposerStore",
+    "useDefaultLayout",
+    "useEditorUpload",
+    "useEffect",
+    "useFeatureEnabled",
+    "useGitHubSettings",
+    "useId",
+    "useInPageFind",
+    "useIsMobile",
+    "useIssueReactions",
+    "useIssueReadState",
+    "useIssueStatuses",
+    "useIssueSubscribers",
+    "useIssueTimeline",
+    "useIssueTimelineAnchor",
+    "useJumpToLatest",
+    "useLocale",
+    "useMarkIssueInboxReadWhileViewing",
+    "useMarkIssueReadWhileViewing",
+    "useMemo",
+    "useModalStore",
+    "useNewCommentsWhileAway",
+    "useNewRunIds",
+    "usePanelRef",
+    "useQuery",
+    "useRecentContextStore",
+    "useRecentIssuesStore",
+    "useRef",
+    "useRegisterCommandBarContext",
+    "useResolvedExpandStore",
+    "useRestoredScrollOffset",
+    "useRestoredScrollRef",
+    "useRestoredViewState",
+    "useState",
+    "useStatusLabel",
+    "useStickyComposer",
+    "useT",
+    "useTimeAgo",
+    "useViewStateWriter",
+    "useWorkspaceId",
+    "useWorkspacePaths"
+  ],
+  "hook_closure": {
+    "useIssueTimeline": {
+      "queries": [
+        "issueTimelineOptions(issueId)",
+        "issueCommentThreadOptions(issueId, focusCommentId ?? \"\")"
+      ],
+      "needsThread": "!!focusCommentId && !loading && !data?.some((entry) => entry.id === focusCommentId)",
+      "callsite_focus": "activeDeliverableJump?.commentId",
+      "loading": "loading || (needsThread && threadQuery.isPending)",
+      "mutations": [
+        "useCreateComment",
+        "useUpdateComment",
+        "useDeleteComment",
+        "useResolveComment",
+        "useToggleCommentReaction"
+      ],
+      "events": "comment:created/updated/resolved/unresolved/deleted, activity:created, reaction:added/removed: matching issue only; local cache writes; missing revision invalidates timeline; reconnect invalidates timeline",
+      "errors": "thread error while needsThread toasts; submit/reply reject blank or absent user and return false with error toast; edit propagates; delete/resolve catch and toast; trigger outcome warnings are local"
+    },
+    "useIssueReactions": {
+      "query": "issueReactionsOptions(issueId) calls getIssue, not a reactions GET endpoint",
+      "mutation": "useToggleIssueReaction; user required; existing own member reaction chooses removal",
+      "events": "matching issue_reaction added/removed patch local cache; reconnect invalidates reactions; pending variables derive local optimistic render"
+    },
+    "useIssueSubscribers": {
+      "query": "issueSubscribersOptions(issueId)",
+      "mutations": [
+        "useToggleIssueSubscriber",
+        "useUnsubscribeFromIssueSubtree"
+      ],
+      "events": "matching subscriber added/removed patch local cache; existing reason change clears delivery; reconnect invalidates subscribers",
+      "gates": "subscriptionKnown=isSuccess; own actions require user; direct toggles serialized by ref cleared onSettled; subtree plain non-JSON 404 uniquely reports unsupported"
+    },
+    "useActorName": "memberListOptions, agentListOptions, squadListOptions; pluginInstallationsOptions only pluginsEnabled && wsId.length > 0",
+    "useStatusLabel/useIssueStatuses": "shared issueStatusListOptions; enabled Boolean(wsId); labels/geometry derived locally",
+    "useGitHubSettings": "useCurrentWorkspace reads workspaceListOptions and selects URL slug; flags derived from workspace settings",
+    "useEditorUpload": "Closed by remaining_helper_reconciliation and root_upload_sources; direct multipart POST client:4078; descendant editor invocation boundary."
+  },
+  "remaining_helper_reconciliation": {
+    "scope": "Finite section only; existing root_partial_review, read-state and mutation edges preserved",
+    "sources": [
+      {
+        "path": "packages/core/plugins/queries.ts",
+        "sha256": "9af5000968a140b65bc015bb67794e9d3e394cdf05611a7d9eef8b9abf4fbee5"
+      },
+      {
+        "path": "packages/core/config/index.ts",
+        "sha256": "dd4846d1dabb9b7d157fe8379996354348fa16fabdc3cac3484ee5ad034c499b"
+      },
+      {
+        "path": "packages/core/api/client.ts",
+        "sha256": "779bb65b5b7ead815836f7c704ec3c370bafae203e4f92119fadce93e982a4d7"
+      },
+      {
+        "path": "packages/views/issues/hooks/use-in-page-find.ts",
+        "sha256": "35ad1097f61255953de96e71fca2a8bae1f7857fcdea41e2927b974c6f79226d"
+      },
+      {
+        "path": "packages/views/common/use-app-foreground.ts",
+        "sha256": "84d2cccc987d0ac083bf75e0559c9a3819754f6c78097f0f9cc99df520807ece"
+      },
+      {
+        "path": "packages/views/editor/use-editor-upload.ts",
+        "sha256": "577b4d53238fb342b44c63108a72c89e16c80b22e90fa0823dbcf3614f37c7c8"
+      },
+      {
+        "path": "packages/core/hooks/use-file-upload.ts",
+        "sha256": "82ab928c6b762acc38c70b1a264bd9a5cafd62846ff27dafbb0bc65d8d5adf24"
+      }
+    ],
+    "exact_tuples": [
+      {
+        "id": "client:3351",
+        "method": "GET",
+        "path_expression": "/api/config",
+        "route": {
+          "method": "GET",
+          "path": "/api/config"
+        }
+      },
+      {
+        "id": "client:3425",
+        "method": "GET",
+        "path_expression": "/api/workspaces/${workspaceId}/plugins",
+        "route": {
+          "method": "GET",
+          "path": "/api/workspaces/{id}/plugins"
+        }
+      },
+      {
+        "id": "client:4078",
+        "method": "POST",
+        "path_expression": "`${this.baseUrl}/api/upload-file`",
+        "route": {
+          "method": "POST",
+          "path": "/api/upload-file"
+        }
+      }
+    ],
+    "mapping": [
+      {
+        "helper": "pluginInstallationsOptions / api.listPluginInstallations",
+        "classification": "query",
+        "definition": "packages/core/plugins/queries.ts:10-16; packages/core/api/client.ts:3422-3434",
+        "tuple": "client:3425",
+        "effects": "GET; nonempty workspace and actor pluginsEnabled gate; 404 returns empty installation list; other errors propagate."
+      },
+      {
+        "helper": "useFeatureEnabled / featureFlagEnabled / useConfigStore",
+        "classification": "local store selector",
+        "definition": "packages/core/config/index.ts:130-151",
+        "effects": "flags[key] ?? defaultValue; no request. Config store population is upstream injected state; client:3351 GET /api/config is provenance, not a request issued by this hook."
+      },
+      {
+        "helper": "useEditorUpload / useFileUpload / toUploadResult / pickMarkdownLink",
+        "classification": "root-accepted upload interface reused",
+        "definition": "root_upload_sources in issue-detail-render-section.json; packages/core/api/client.ts:4058-4100",
+        "tuple": "client:4078",
+        "effects": "Injected api is concretely supplied by useEditorUpload. File size guard, in-flight counter/finally decrement; multipart POST; uploadWithToast reports error and returns null. Durable markdown URL then attachment path then raw URL. Editor descendant invocation excluded."
+      },
+      {
+        "helper": "useInPageFind / highlightApiSupported / collectTextMatches / isElementVisible / scrollRangeIntoView",
+        "classification": "local DOM state and effects",
+        "definition": "packages/views/issues/hooks/use-in-page-find.ts:1-328",
+        "effects": "Text walker excludes script/style/noscript and data-find-ignore. Local ranges/highlights, match navigation and container scrolling; frame recomputation and MutationObserver; keydown listener checks enabled, shortcut, IME and visibility. Cleanup removes listener/highlights, disconnects observer and cancels scheduled recomputation. No HTTP. Shortcut and IME utility interfaces are local input predicates; browser Highlight/Range/observer APIs are injected platform boundaries."
+      },
+      {
+        "helper": "useAppForeground / nativeForegroundAPI / subscribe / getSnapshot / getServerSnapshot",
+        "classification": "local platform signal",
+        "definition": "packages/views/common/use-app-foreground.ts:1-84",
+        "effects": "DOM visibility and focus subscription with cleanup; SSR true. Optional injected desktopAPI getWindowForeground/onWindowForegroundChanged; initial native false, event wins over initial promise, rejection keeps false; cleanup live guard and unsubscribe. No HTTP; native implementation boundary."
+      }
+    ],
+    "root_resolver_reuse": {
+      "proof": "issue-detail-render-section.json",
+      "fields": [
+        "bounded_callback_reconciliation",
+        "root_resolver_sources"
+      ],
+      "meaning": "Actor/status returned resolvers local; hook query subscriptions separate."
+    },
+    "finite_refetch_references": [
+      {
+        "proof": "issue-mutations-transport-coverage.json",
+        "edge_source": "query invalidation and helper calls",
+        "meaning": "Finite conservative possible query-refetch superset only; active observers/gates determine requests."
+      },
+      {
+        "proof": "issue-query-transport-coverage.json",
+        "factories": [
+          "issueDetailOptions",
+          "issueTimelineOptions",
+          "issueCommentThreadOptions",
+          "issueSubscribersOptions",
+          "issueReactionsOptions",
+          "issueAttachmentsOptions",
+          "childIssuesOptions",
+          "childIssueProgressOptions"
+        ],
+        "meaning": "Factory interfaces, not unconditional requests."
+      },
+      {
+        "source": "packages/core/pins/mutations.ts:8-47",
+        "query_key": "pinKeys.list(wsId,userId)",
+        "inventory": [
+          {
+            "id": "client:5180",
+            "method": "GET",
+            "path_expression": "/api/pins?include=view",
+            "route": {
+              "method": "GET",
+              "path": "/api/pins"
+            }
+          }
+        ]
+      }
+    ],
+    "validation": {
+      "json": "parsed",
+      "source_hashes": "matched current disk",
+      "frontend_calls_sha256": "2670eec069d89d20045a5bc1043d7031f2a1460a4180a0b10256315abee03d21",
+      "tuple_policy": "Exact inventory id/method/path_expression/route copied; upload POST differs from default GET fetch."
+    }
+  }
+}

@@ -1,0 +1,1531 @@
+{
+  "scope": "Original request/query cancellation helpers: actual parent context cancellation/deadline, wrapped and joined operation errors, PostgreSQL SQLSTATE selection, response status and empty body. Does not certify ASGI request-disconnect propagation or active query cancellation.",
+  "fixtures": [
+    {
+      "Parent": "live",
+      "Operation": "none",
+      "Wrap": "none"
+    },
+    {
+      "Parent": "live",
+      "Operation": "none",
+      "Wrap": "wrap"
+    },
+    {
+      "Parent": "live",
+      "Operation": "none",
+      "Wrap": "join_cancel"
+    },
+    {
+      "Parent": "live",
+      "Operation": "none",
+      "Wrap": "join_sql"
+    },
+    {
+      "Parent": "live",
+      "Operation": "cancel",
+      "Wrap": "none"
+    },
+    {
+      "Parent": "live",
+      "Operation": "cancel",
+      "Wrap": "wrap"
+    },
+    {
+      "Parent": "live",
+      "Operation": "cancel",
+      "Wrap": "join_cancel"
+    },
+    {
+      "Parent": "live",
+      "Operation": "cancel",
+      "Wrap": "join_sql"
+    },
+    {
+      "Parent": "live",
+      "Operation": "deadline",
+      "Wrap": "none"
+    },
+    {
+      "Parent": "live",
+      "Operation": "deadline",
+      "Wrap": "wrap"
+    },
+    {
+      "Parent": "live",
+      "Operation": "deadline",
+      "Wrap": "join_cancel"
+    },
+    {
+      "Parent": "live",
+      "Operation": "deadline",
+      "Wrap": "join_sql"
+    },
+    {
+      "Parent": "live",
+      "Operation": "other",
+      "Wrap": "none"
+    },
+    {
+      "Parent": "live",
+      "Operation": "other",
+      "Wrap": "wrap"
+    },
+    {
+      "Parent": "live",
+      "Operation": "other",
+      "Wrap": "join_cancel"
+    },
+    {
+      "Parent": "live",
+      "Operation": "other",
+      "Wrap": "join_sql"
+    },
+    {
+      "Parent": "live",
+      "Operation": "57014",
+      "Wrap": "none"
+    },
+    {
+      "Parent": "live",
+      "Operation": "57014",
+      "Wrap": "wrap"
+    },
+    {
+      "Parent": "live",
+      "Operation": "57014",
+      "Wrap": "join_cancel"
+    },
+    {
+      "Parent": "live",
+      "Operation": "57014",
+      "Wrap": "join_sql"
+    },
+    {
+      "Parent": "live",
+      "Operation": "08006",
+      "Wrap": "none"
+    },
+    {
+      "Parent": "live",
+      "Operation": "08006",
+      "Wrap": "wrap"
+    },
+    {
+      "Parent": "live",
+      "Operation": "08006",
+      "Wrap": "join_cancel"
+    },
+    {
+      "Parent": "live",
+      "Operation": "08006",
+      "Wrap": "join_sql"
+    },
+    {
+      "Parent": "cancel",
+      "Operation": "none",
+      "Wrap": "none"
+    },
+    {
+      "Parent": "cancel",
+      "Operation": "none",
+      "Wrap": "wrap"
+    },
+    {
+      "Parent": "cancel",
+      "Operation": "none",
+      "Wrap": "join_cancel"
+    },
+    {
+      "Parent": "cancel",
+      "Operation": "none",
+      "Wrap": "join_sql"
+    },
+    {
+      "Parent": "cancel",
+      "Operation": "cancel",
+      "Wrap": "none"
+    },
+    {
+      "Parent": "cancel",
+      "Operation": "cancel",
+      "Wrap": "wrap"
+    },
+    {
+      "Parent": "cancel",
+      "Operation": "cancel",
+      "Wrap": "join_cancel"
+    },
+    {
+      "Parent": "cancel",
+      "Operation": "cancel",
+      "Wrap": "join_sql"
+    },
+    {
+      "Parent": "cancel",
+      "Operation": "deadline",
+      "Wrap": "none"
+    },
+    {
+      "Parent": "cancel",
+      "Operation": "deadline",
+      "Wrap": "wrap"
+    },
+    {
+      "Parent": "cancel",
+      "Operation": "deadline",
+      "Wrap": "join_cancel"
+    },
+    {
+      "Parent": "cancel",
+      "Operation": "deadline",
+      "Wrap": "join_sql"
+    },
+    {
+      "Parent": "cancel",
+      "Operation": "other",
+      "Wrap": "none"
+    },
+    {
+      "Parent": "cancel",
+      "Operation": "other",
+      "Wrap": "wrap"
+    },
+    {
+      "Parent": "cancel",
+      "Operation": "other",
+      "Wrap": "join_cancel"
+    },
+    {
+      "Parent": "cancel",
+      "Operation": "other",
+      "Wrap": "join_sql"
+    },
+    {
+      "Parent": "cancel",
+      "Operation": "57014",
+      "Wrap": "none"
+    },
+    {
+      "Parent": "cancel",
+      "Operation": "57014",
+      "Wrap": "wrap"
+    },
+    {
+      "Parent": "cancel",
+      "Operation": "57014",
+      "Wrap": "join_cancel"
+    },
+    {
+      "Parent": "cancel",
+      "Operation": "57014",
+      "Wrap": "join_sql"
+    },
+    {
+      "Parent": "cancel",
+      "Operation": "08006",
+      "Wrap": "none"
+    },
+    {
+      "Parent": "cancel",
+      "Operation": "08006",
+      "Wrap": "wrap"
+    },
+    {
+      "Parent": "cancel",
+      "Operation": "08006",
+      "Wrap": "join_cancel"
+    },
+    {
+      "Parent": "cancel",
+      "Operation": "08006",
+      "Wrap": "join_sql"
+    },
+    {
+      "Parent": "deadline",
+      "Operation": "none",
+      "Wrap": "none"
+    },
+    {
+      "Parent": "deadline",
+      "Operation": "none",
+      "Wrap": "wrap"
+    },
+    {
+      "Parent": "deadline",
+      "Operation": "none",
+      "Wrap": "join_cancel"
+    },
+    {
+      "Parent": "deadline",
+      "Operation": "none",
+      "Wrap": "join_sql"
+    },
+    {
+      "Parent": "deadline",
+      "Operation": "cancel",
+      "Wrap": "none"
+    },
+    {
+      "Parent": "deadline",
+      "Operation": "cancel",
+      "Wrap": "wrap"
+    },
+    {
+      "Parent": "deadline",
+      "Operation": "cancel",
+      "Wrap": "join_cancel"
+    },
+    {
+      "Parent": "deadline",
+      "Operation": "cancel",
+      "Wrap": "join_sql"
+    },
+    {
+      "Parent": "deadline",
+      "Operation": "deadline",
+      "Wrap": "none"
+    },
+    {
+      "Parent": "deadline",
+      "Operation": "deadline",
+      "Wrap": "wrap"
+    },
+    {
+      "Parent": "deadline",
+      "Operation": "deadline",
+      "Wrap": "join_cancel"
+    },
+    {
+      "Parent": "deadline",
+      "Operation": "deadline",
+      "Wrap": "join_sql"
+    },
+    {
+      "Parent": "deadline",
+      "Operation": "other",
+      "Wrap": "none"
+    },
+    {
+      "Parent": "deadline",
+      "Operation": "other",
+      "Wrap": "wrap"
+    },
+    {
+      "Parent": "deadline",
+      "Operation": "other",
+      "Wrap": "join_cancel"
+    },
+    {
+      "Parent": "deadline",
+      "Operation": "other",
+      "Wrap": "join_sql"
+    },
+    {
+      "Parent": "deadline",
+      "Operation": "57014",
+      "Wrap": "none"
+    },
+    {
+      "Parent": "deadline",
+      "Operation": "57014",
+      "Wrap": "wrap"
+    },
+    {
+      "Parent": "deadline",
+      "Operation": "57014",
+      "Wrap": "join_cancel"
+    },
+    {
+      "Parent": "deadline",
+      "Operation": "57014",
+      "Wrap": "join_sql"
+    },
+    {
+      "Parent": "deadline",
+      "Operation": "08006",
+      "Wrap": "none"
+    },
+    {
+      "Parent": "deadline",
+      "Operation": "08006",
+      "Wrap": "wrap"
+    },
+    {
+      "Parent": "deadline",
+      "Operation": "08006",
+      "Wrap": "join_cancel"
+    },
+    {
+      "Parent": "deadline",
+      "Operation": "08006",
+      "Wrap": "join_sql"
+    }
+  ],
+  "execution_batch_size": 32,
+  "go": [
+    {
+      "body": "",
+      "direct": false,
+      "query": false,
+      "query_body": "",
+      "query_status": 200,
+      "status": 200
+    },
+    {
+      "body": "",
+      "direct": false,
+      "query": false,
+      "query_body": "",
+      "query_status": 200,
+      "status": 200
+    },
+    {
+      "body": "",
+      "direct": false,
+      "query": false,
+      "query_body": "",
+      "query_status": 200,
+      "status": 200
+    },
+    {
+      "body": "",
+      "direct": false,
+      "query": false,
+      "query_body": "",
+      "query_status": 200,
+      "status": 200
+    },
+    {
+      "body": "",
+      "direct": false,
+      "query": false,
+      "query_body": "",
+      "query_status": 200,
+      "status": 200
+    },
+    {
+      "body": "",
+      "direct": false,
+      "query": false,
+      "query_body": "",
+      "query_status": 200,
+      "status": 200
+    },
+    {
+      "body": "",
+      "direct": false,
+      "query": false,
+      "query_body": "",
+      "query_status": 200,
+      "status": 200
+    },
+    {
+      "body": "",
+      "direct": false,
+      "query": false,
+      "query_body": "",
+      "query_status": 200,
+      "status": 200
+    },
+    {
+      "body": "",
+      "direct": false,
+      "query": false,
+      "query_body": "",
+      "query_status": 200,
+      "status": 200
+    },
+    {
+      "body": "",
+      "direct": false,
+      "query": false,
+      "query_body": "",
+      "query_status": 200,
+      "status": 200
+    },
+    {
+      "body": "",
+      "direct": false,
+      "query": false,
+      "query_body": "",
+      "query_status": 200,
+      "status": 200
+    },
+    {
+      "body": "",
+      "direct": false,
+      "query": false,
+      "query_body": "",
+      "query_status": 200,
+      "status": 200
+    },
+    {
+      "body": "",
+      "direct": false,
+      "query": false,
+      "query_body": "",
+      "query_status": 200,
+      "status": 200
+    },
+    {
+      "body": "",
+      "direct": false,
+      "query": false,
+      "query_body": "",
+      "query_status": 200,
+      "status": 200
+    },
+    {
+      "body": "",
+      "direct": false,
+      "query": false,
+      "query_body": "",
+      "query_status": 200,
+      "status": 200
+    },
+    {
+      "body": "",
+      "direct": false,
+      "query": false,
+      "query_body": "",
+      "query_status": 200,
+      "status": 200
+    },
+    {
+      "body": "",
+      "direct": false,
+      "query": false,
+      "query_body": "",
+      "query_status": 200,
+      "status": 200
+    },
+    {
+      "body": "",
+      "direct": false,
+      "query": false,
+      "query_body": "",
+      "query_status": 200,
+      "status": 200
+    },
+    {
+      "body": "",
+      "direct": false,
+      "query": false,
+      "query_body": "",
+      "query_status": 200,
+      "status": 200
+    },
+    {
+      "body": "",
+      "direct": false,
+      "query": false,
+      "query_body": "",
+      "query_status": 200,
+      "status": 200
+    },
+    {
+      "body": "",
+      "direct": false,
+      "query": false,
+      "query_body": "",
+      "query_status": 200,
+      "status": 200
+    },
+    {
+      "body": "",
+      "direct": false,
+      "query": false,
+      "query_body": "",
+      "query_status": 200,
+      "status": 200
+    },
+    {
+      "body": "",
+      "direct": false,
+      "query": false,
+      "query_body": "",
+      "query_status": 200,
+      "status": 200
+    },
+    {
+      "body": "",
+      "direct": false,
+      "query": false,
+      "query_body": "",
+      "query_status": 200,
+      "status": 200
+    },
+    {
+      "body": "",
+      "direct": false,
+      "query": false,
+      "query_body": "",
+      "query_status": 200,
+      "status": 200
+    },
+    {
+      "body": "",
+      "direct": false,
+      "query": false,
+      "query_body": "",
+      "query_status": 200,
+      "status": 200
+    },
+    {
+      "body": "",
+      "direct": true,
+      "query": true,
+      "query_body": "",
+      "query_status": 499,
+      "status": 499
+    },
+    {
+      "body": "",
+      "direct": false,
+      "query": false,
+      "query_body": "",
+      "query_status": 200,
+      "status": 200
+    },
+    {
+      "body": "",
+      "direct": true,
+      "query": true,
+      "query_body": "",
+      "query_status": 499,
+      "status": 499
+    },
+    {
+      "body": "",
+      "direct": true,
+      "query": true,
+      "query_body": "",
+      "query_status": 499,
+      "status": 499
+    },
+    {
+      "body": "",
+      "direct": true,
+      "query": true,
+      "query_body": "",
+      "query_status": 499,
+      "status": 499
+    },
+    {
+      "body": "",
+      "direct": true,
+      "query": true,
+      "query_body": "",
+      "query_status": 499,
+      "status": 499
+    },
+    {
+      "body": "",
+      "direct": false,
+      "query": false,
+      "query_body": "",
+      "query_status": 200,
+      "status": 200
+    },
+    {
+      "body": "",
+      "direct": false,
+      "query": false,
+      "query_body": "",
+      "query_status": 200,
+      "status": 200
+    },
+    {
+      "body": "",
+      "direct": true,
+      "query": true,
+      "query_body": "",
+      "query_status": 499,
+      "status": 499
+    },
+    {
+      "body": "",
+      "direct": false,
+      "query": false,
+      "query_body": "",
+      "query_status": 200,
+      "status": 200
+    },
+    {
+      "body": "",
+      "direct": false,
+      "query": false,
+      "query_body": "",
+      "query_status": 200,
+      "status": 200
+    },
+    {
+      "body": "",
+      "direct": false,
+      "query": false,
+      "query_body": "",
+      "query_status": 200,
+      "status": 200
+    },
+    {
+      "body": "",
+      "direct": true,
+      "query": true,
+      "query_body": "",
+      "query_status": 499,
+      "status": 499
+    },
+    {
+      "body": "",
+      "direct": false,
+      "query": false,
+      "query_body": "",
+      "query_status": 200,
+      "status": 200
+    },
+    {
+      "body": "",
+      "direct": false,
+      "query": true,
+      "query_body": "",
+      "query_status": 499,
+      "status": 200
+    },
+    {
+      "body": "",
+      "direct": false,
+      "query": true,
+      "query_body": "",
+      "query_status": 499,
+      "status": 200
+    },
+    {
+      "body": "",
+      "direct": true,
+      "query": true,
+      "query_body": "",
+      "query_status": 499,
+      "status": 499
+    },
+    {
+      "body": "",
+      "direct": false,
+      "query": false,
+      "query_body": "",
+      "query_status": 200,
+      "status": 200
+    },
+    {
+      "body": "",
+      "direct": false,
+      "query": false,
+      "query_body": "",
+      "query_status": 200,
+      "status": 200
+    },
+    {
+      "body": "",
+      "direct": false,
+      "query": false,
+      "query_body": "",
+      "query_status": 200,
+      "status": 200
+    },
+    {
+      "body": "",
+      "direct": true,
+      "query": true,
+      "query_body": "",
+      "query_status": 499,
+      "status": 499
+    },
+    {
+      "body": "",
+      "direct": false,
+      "query": false,
+      "query_body": "",
+      "query_status": 200,
+      "status": 200
+    },
+    {
+      "body": "",
+      "direct": false,
+      "query": false,
+      "query_body": "",
+      "query_status": 200,
+      "status": 200
+    },
+    {
+      "body": "",
+      "direct": false,
+      "query": false,
+      "query_body": "",
+      "query_status": 200,
+      "status": 200
+    },
+    {
+      "body": "",
+      "direct": false,
+      "query": false,
+      "query_body": "",
+      "query_status": 200,
+      "status": 200
+    },
+    {
+      "body": "",
+      "direct": false,
+      "query": false,
+      "query_body": "",
+      "query_status": 200,
+      "status": 200
+    },
+    {
+      "body": "",
+      "direct": false,
+      "query": false,
+      "query_body": "",
+      "query_status": 200,
+      "status": 200
+    },
+    {
+      "body": "",
+      "direct": false,
+      "query": false,
+      "query_body": "",
+      "query_status": 200,
+      "status": 200
+    },
+    {
+      "body": "",
+      "direct": false,
+      "query": false,
+      "query_body": "",
+      "query_status": 200,
+      "status": 200
+    },
+    {
+      "body": "",
+      "direct": false,
+      "query": false,
+      "query_body": "",
+      "query_status": 200,
+      "status": 200
+    },
+    {
+      "body": "",
+      "direct": false,
+      "query": false,
+      "query_body": "",
+      "query_status": 200,
+      "status": 200
+    },
+    {
+      "body": "",
+      "direct": false,
+      "query": false,
+      "query_body": "",
+      "query_status": 200,
+      "status": 200
+    },
+    {
+      "body": "",
+      "direct": false,
+      "query": false,
+      "query_body": "",
+      "query_status": 200,
+      "status": 200
+    },
+    {
+      "body": "",
+      "direct": false,
+      "query": false,
+      "query_body": "",
+      "query_status": 200,
+      "status": 200
+    },
+    {
+      "body": "",
+      "direct": false,
+      "query": false,
+      "query_body": "",
+      "query_status": 200,
+      "status": 200
+    },
+    {
+      "body": "",
+      "direct": false,
+      "query": false,
+      "query_body": "",
+      "query_status": 200,
+      "status": 200
+    },
+    {
+      "body": "",
+      "direct": false,
+      "query": false,
+      "query_body": "",
+      "query_status": 200,
+      "status": 200
+    },
+    {
+      "body": "",
+      "direct": false,
+      "query": false,
+      "query_body": "",
+      "query_status": 200,
+      "status": 200
+    },
+    {
+      "body": "",
+      "direct": false,
+      "query": false,
+      "query_body": "",
+      "query_status": 200,
+      "status": 200
+    },
+    {
+      "body": "",
+      "direct": false,
+      "query": false,
+      "query_body": "",
+      "query_status": 200,
+      "status": 200
+    },
+    {
+      "body": "",
+      "direct": false,
+      "query": false,
+      "query_body": "",
+      "query_status": 200,
+      "status": 200
+    },
+    {
+      "body": "",
+      "direct": false,
+      "query": false,
+      "query_body": "",
+      "query_status": 200,
+      "status": 200
+    },
+    {
+      "body": "",
+      "direct": false,
+      "query": false,
+      "query_body": "",
+      "query_status": 200,
+      "status": 200
+    },
+    {
+      "body": "",
+      "direct": false,
+      "query": false,
+      "query_body": "",
+      "query_status": 200,
+      "status": 200
+    },
+    {
+      "body": "",
+      "direct": false,
+      "query": false,
+      "query_body": "",
+      "query_status": 200,
+      "status": 200
+    },
+    {
+      "body": "",
+      "direct": false,
+      "query": false,
+      "query_body": "",
+      "query_status": 200,
+      "status": 200
+    }
+  ],
+  "python": [
+    {
+      "direct": false,
+      "query": false,
+      "status": 200,
+      "query_status": 200,
+      "body": "",
+      "query_body": ""
+    },
+    {
+      "direct": false,
+      "query": false,
+      "status": 200,
+      "query_status": 200,
+      "body": "",
+      "query_body": ""
+    },
+    {
+      "direct": false,
+      "query": false,
+      "status": 200,
+      "query_status": 200,
+      "body": "",
+      "query_body": ""
+    },
+    {
+      "direct": false,
+      "query": false,
+      "status": 200,
+      "query_status": 200,
+      "body": "",
+      "query_body": ""
+    },
+    {
+      "direct": false,
+      "query": false,
+      "status": 200,
+      "query_status": 200,
+      "body": "",
+      "query_body": ""
+    },
+    {
+      "direct": false,
+      "query": false,
+      "status": 200,
+      "query_status": 200,
+      "body": "",
+      "query_body": ""
+    },
+    {
+      "direct": false,
+      "query": false,
+      "status": 200,
+      "query_status": 200,
+      "body": "",
+      "query_body": ""
+    },
+    {
+      "direct": false,
+      "query": false,
+      "status": 200,
+      "query_status": 200,
+      "body": "",
+      "query_body": ""
+    },
+    {
+      "direct": false,
+      "query": false,
+      "status": 200,
+      "query_status": 200,
+      "body": "",
+      "query_body": ""
+    },
+    {
+      "direct": false,
+      "query": false,
+      "status": 200,
+      "query_status": 200,
+      "body": "",
+      "query_body": ""
+    },
+    {
+      "direct": false,
+      "query": false,
+      "status": 200,
+      "query_status": 200,
+      "body": "",
+      "query_body": ""
+    },
+    {
+      "direct": false,
+      "query": false,
+      "status": 200,
+      "query_status": 200,
+      "body": "",
+      "query_body": ""
+    },
+    {
+      "direct": false,
+      "query": false,
+      "status": 200,
+      "query_status": 200,
+      "body": "",
+      "query_body": ""
+    },
+    {
+      "direct": false,
+      "query": false,
+      "status": 200,
+      "query_status": 200,
+      "body": "",
+      "query_body": ""
+    },
+    {
+      "direct": false,
+      "query": false,
+      "status": 200,
+      "query_status": 200,
+      "body": "",
+      "query_body": ""
+    },
+    {
+      "direct": false,
+      "query": false,
+      "status": 200,
+      "query_status": 200,
+      "body": "",
+      "query_body": ""
+    },
+    {
+      "direct": false,
+      "query": false,
+      "status": 200,
+      "query_status": 200,
+      "body": "",
+      "query_body": ""
+    },
+    {
+      "direct": false,
+      "query": false,
+      "status": 200,
+      "query_status": 200,
+      "body": "",
+      "query_body": ""
+    },
+    {
+      "direct": false,
+      "query": false,
+      "status": 200,
+      "query_status": 200,
+      "body": "",
+      "query_body": ""
+    },
+    {
+      "direct": false,
+      "query": false,
+      "status": 200,
+      "query_status": 200,
+      "body": "",
+      "query_body": ""
+    },
+    {
+      "direct": false,
+      "query": false,
+      "status": 200,
+      "query_status": 200,
+      "body": "",
+      "query_body": ""
+    },
+    {
+      "direct": false,
+      "query": false,
+      "status": 200,
+      "query_status": 200,
+      "body": "",
+      "query_body": ""
+    },
+    {
+      "direct": false,
+      "query": false,
+      "status": 200,
+      "query_status": 200,
+      "body": "",
+      "query_body": ""
+    },
+    {
+      "direct": false,
+      "query": false,
+      "status": 200,
+      "query_status": 200,
+      "body": "",
+      "query_body": ""
+    },
+    {
+      "direct": false,
+      "query": false,
+      "status": 200,
+      "query_status": 200,
+      "body": "",
+      "query_body": ""
+    },
+    {
+      "direct": false,
+      "query": false,
+      "status": 200,
+      "query_status": 200,
+      "body": "",
+      "query_body": ""
+    },
+    {
+      "direct": true,
+      "query": true,
+      "status": 499,
+      "query_status": 499,
+      "body": "",
+      "query_body": ""
+    },
+    {
+      "direct": false,
+      "query": false,
+      "status": 200,
+      "query_status": 200,
+      "body": "",
+      "query_body": ""
+    },
+    {
+      "direct": true,
+      "query": true,
+      "status": 499,
+      "query_status": 499,
+      "body": "",
+      "query_body": ""
+    },
+    {
+      "direct": true,
+      "query": true,
+      "status": 499,
+      "query_status": 499,
+      "body": "",
+      "query_body": ""
+    },
+    {
+      "direct": true,
+      "query": true,
+      "status": 499,
+      "query_status": 499,
+      "body": "",
+      "query_body": ""
+    },
+    {
+      "direct": true,
+      "query": true,
+      "status": 499,
+      "query_status": 499,
+      "body": "",
+      "query_body": ""
+    },
+    {
+      "direct": false,
+      "query": false,
+      "status": 200,
+      "query_status": 200,
+      "body": "",
+      "query_body": ""
+    },
+    {
+      "direct": false,
+      "query": false,
+      "status": 200,
+      "query_status": 200,
+      "body": "",
+      "query_body": ""
+    },
+    {
+      "direct": true,
+      "query": true,
+      "status": 499,
+      "query_status": 499,
+      "body": "",
+      "query_body": ""
+    },
+    {
+      "direct": false,
+      "query": false,
+      "status": 200,
+      "query_status": 200,
+      "body": "",
+      "query_body": ""
+    },
+    {
+      "direct": false,
+      "query": false,
+      "status": 200,
+      "query_status": 200,
+      "body": "",
+      "query_body": ""
+    },
+    {
+      "direct": false,
+      "query": false,
+      "status": 200,
+      "query_status": 200,
+      "body": "",
+      "query_body": ""
+    },
+    {
+      "direct": true,
+      "query": true,
+      "status": 499,
+      "query_status": 499,
+      "body": "",
+      "query_body": ""
+    },
+    {
+      "direct": false,
+      "query": false,
+      "status": 200,
+      "query_status": 200,
+      "body": "",
+      "query_body": ""
+    },
+    {
+      "direct": false,
+      "query": true,
+      "status": 200,
+      "query_status": 499,
+      "body": "",
+      "query_body": ""
+    },
+    {
+      "direct": false,
+      "query": true,
+      "status": 200,
+      "query_status": 499,
+      "body": "",
+      "query_body": ""
+    },
+    {
+      "direct": true,
+      "query": true,
+      "status": 499,
+      "query_status": 499,
+      "body": "",
+      "query_body": ""
+    },
+    {
+      "direct": false,
+      "query": false,
+      "status": 200,
+      "query_status": 200,
+      "body": "",
+      "query_body": ""
+    },
+    {
+      "direct": false,
+      "query": false,
+      "status": 200,
+      "query_status": 200,
+      "body": "",
+      "query_body": ""
+    },
+    {
+      "direct": false,
+      "query": false,
+      "status": 200,
+      "query_status": 200,
+      "body": "",
+      "query_body": ""
+    },
+    {
+      "direct": true,
+      "query": true,
+      "status": 499,
+      "query_status": 499,
+      "body": "",
+      "query_body": ""
+    },
+    {
+      "direct": false,
+      "query": false,
+      "status": 200,
+      "query_status": 200,
+      "body": "",
+      "query_body": ""
+    },
+    {
+      "direct": false,
+      "query": false,
+      "status": 200,
+      "query_status": 200,
+      "body": "",
+      "query_body": ""
+    },
+    {
+      "direct": false,
+      "query": false,
+      "status": 200,
+      "query_status": 200,
+      "body": "",
+      "query_body": ""
+    },
+    {
+      "direct": false,
+      "query": false,
+      "status": 200,
+      "query_status": 200,
+      "body": "",
+      "query_body": ""
+    },
+    {
+      "direct": false,
+      "query": false,
+      "status": 200,
+      "query_status": 200,
+      "body": "",
+      "query_body": ""
+    },
+    {
+      "direct": false,
+      "query": false,
+      "status": 200,
+      "query_status": 200,
+      "body": "",
+      "query_body": ""
+    },
+    {
+      "direct": false,
+      "query": false,
+      "status": 200,
+      "query_status": 200,
+      "body": "",
+      "query_body": ""
+    },
+    {
+      "direct": false,
+      "query": false,
+      "status": 200,
+      "query_status": 200,
+      "body": "",
+      "query_body": ""
+    },
+    {
+      "direct": false,
+      "query": false,
+      "status": 200,
+      "query_status": 200,
+      "body": "",
+      "query_body": ""
+    },
+    {
+      "direct": false,
+      "query": false,
+      "status": 200,
+      "query_status": 200,
+      "body": "",
+      "query_body": ""
+    },
+    {
+      "direct": false,
+      "query": false,
+      "status": 200,
+      "query_status": 200,
+      "body": "",
+      "query_body": ""
+    },
+    {
+      "direct": false,
+      "query": false,
+      "status": 200,
+      "query_status": 200,
+      "body": "",
+      "query_body": ""
+    },
+    {
+      "direct": false,
+      "query": false,
+      "status": 200,
+      "query_status": 200,
+      "body": "",
+      "query_body": ""
+    },
+    {
+      "direct": false,
+      "query": false,
+      "status": 200,
+      "query_status": 200,
+      "body": "",
+      "query_body": ""
+    },
+    {
+      "direct": false,
+      "query": false,
+      "status": 200,
+      "query_status": 200,
+      "body": "",
+      "query_body": ""
+    },
+    {
+      "direct": false,
+      "query": false,
+      "status": 200,
+      "query_status": 200,
+      "body": "",
+      "query_body": ""
+    },
+    {
+      "direct": false,
+      "query": false,
+      "status": 200,
+      "query_status": 200,
+      "body": "",
+      "query_body": ""
+    },
+    {
+      "direct": false,
+      "query": false,
+      "status": 200,
+      "query_status": 200,
+      "body": "",
+      "query_body": ""
+    },
+    {
+      "direct": false,
+      "query": false,
+      "status": 200,
+      "query_status": 200,
+      "body": "",
+      "query_body": ""
+    },
+    {
+      "direct": false,
+      "query": false,
+      "status": 200,
+      "query_status": 200,
+      "body": "",
+      "query_body": ""
+    },
+    {
+      "direct": false,
+      "query": false,
+      "status": 200,
+      "query_status": 200,
+      "body": "",
+      "query_body": ""
+    },
+    {
+      "direct": false,
+      "query": false,
+      "status": 200,
+      "query_status": 200,
+      "body": "",
+      "query_body": ""
+    },
+    {
+      "direct": false,
+      "query": false,
+      "status": 200,
+      "query_status": 200,
+      "body": "",
+      "query_body": ""
+    },
+    {
+      "direct": false,
+      "query": false,
+      "status": 200,
+      "query_status": 200,
+      "body": "",
+      "query_body": ""
+    },
+    {
+      "direct": false,
+      "query": false,
+      "status": 200,
+      "query_status": 200,
+      "body": "",
+      "query_body": ""
+    }
+  ],
+  "mismatches": [],
+  "source_sha256": {
+    "server/go/internal/handler/request_cancellation.go": "183375b43b08e545c1a41052b520deebed1ed083e930a1c4eee71a046ddcdd47",
+    "server/go/internal/handler/search.go": "0cd76a94838460b772aa941b54e8b6ce82cef85b3389c0ad41a64a420c0497f5",
+    "server/tests/parity/go_request_cancellation/main.go": "fc3e3965dbbdc8eb6eb84939904ec2425b69d6abed313d9a8a435fd1d7ae4f46",
+    "server/tests/parity/go_request_cancellation/wrapper.go": "eeef8d1b44b4debb35cb94ed2509e80361fcbdc25044b8f4aea1053f8d08fddf",
+    "server/src/workpal_backend/infrastructure/request_cancellation.py": "e90f0812671c68678ab2b846942d52c6960c81b998055bfd85004424d740bcda",
+    "server/tools/run_request_cancellation_parity.py": "96db907b7b969bac7f3d1d65fd9146b9f040525170eefee9e2d2e4443cac8752"
+  }
+}

@@ -1,0 +1,4 @@
+@import './style.css';
+@source '../../../multica/packages/views/**/*.tsx';
+@source './full-entry.tsx';
+html,body,#root{height:100%;margin:0}

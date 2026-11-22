@@ -1,0 +1,984 @@
+{
+  "scope": [
+    "apps/web/features/landing/i18n/en.ts",
+    "apps/web/features/landing/i18n/ja.ts",
+    "apps/web/features/landing/i18n/ko.ts",
+    "apps/web/features/landing/i18n/zh.ts"
+  ],
+  "method": "TypeScript 6.0.3 createSourceFile with parent nodes; recursive forEachChild across entire source including every function body, initializer and type. Histograms account for literals without reproducing copy. Structural edges enumerate all imports, calls, new expressions, spreads, function/callback declarations, returns and variables.",
+  "status": "bounded dictionary transport closure complete",
+  "files": [
+    {
+      "path": "apps/web/features/landing/i18n/en.ts",
+      "anchor": "apps/web/features/landing/i18n/en.ts:1",
+      "sha256": "7f71d604e64a95269e3e2f2bd039f915094d5d059c95e80080796a6c93166e34",
+      "line_count": 4435,
+      "parse_success": true,
+      "node_histogram": {
+        "SourceFile": 1,
+        "ImportDeclaration": 3,
+        "ImportClause": 3,
+        "NamedImports": 3,
+        "ImportSpecifier": 4,
+        "Identifier": 1226,
+        "StringLiteral": 3038,
+        "FunctionDeclaration": 1,
+        "ExportKeyword": 1,
+        "TypeReference": 1,
+        "Block": 1,
+        "ReturnStatement": 1,
+        "ObjectLiteralExpression": 216,
+        "SpreadAssignment": 1,
+        "PropertyAssignment": 1216,
+        "ArrayLiteralExpression": 546,
+        "FalseKeyword": 4,
+        "TrueKeyword": 4,
+        "BinaryExpression": 2,
+        "PlusToken": 2,
+        "EndOfFileToken": 1
+      },
+      "expression_histogram": {
+        "Identifier": 1226,
+        "StringLiteral": 3038,
+        "ObjectLiteralExpression": 216,
+        "ArrayLiteralExpression": 546,
+        "FalseKeyword": 4,
+        "TrueKeyword": 4,
+        "BinaryExpression": 2
+      },
+      "structural_edges": [
+        {
+          "kind": "ImportDeclaration",
+          "anchor": "apps/web/features/landing/i18n/en.ts:1",
+          "text": "import { githubUrl, discordUrl } from \"../components/shared\";"
+        },
+        {
+          "kind": "ImportDeclaration",
+          "anchor": "apps/web/features/landing/i18n/en.ts:2",
+          "text": "import type { LandingDict } from \"./types\";"
+        },
+        {
+          "kind": "ImportDeclaration",
+          "anchor": "apps/web/features/landing/i18n/en.ts:3",
+          "text": "import { enSiteCopy } from \"./site-en\";"
+        },
+        {
+          "kind": "FunctionDeclaration",
+          "anchor": "apps/web/features/landing/i18n/en.ts:5",
+          "text": "createEnDict (complete body traversed)"
+        },
+        {
+          "kind": "ReturnStatement",
+          "anchor": "apps/web/features/landing/i18n/en.ts:6",
+          "text": "return ObjectLiteralExpression"
+        },
+        {
+          "kind": "SpreadAssignment",
+          "anchor": "apps/web/features/landing/i18n/en.ts:7",
+          "text": "...enSiteCopy"
+        }
+      ]
+    },
+    {
+      "path": "apps/web/features/landing/i18n/ja.ts",
+      "anchor": "apps/web/features/landing/i18n/ja.ts:1",
+      "sha256": "c885213478e49eedf6e73e50576c91c6c7bfd4ac56df38bb57d85ebfa694ed7a",
+      "line_count": 3923,
+      "parse_success": true,
+      "node_histogram": {
+        "SourceFile": 1,
+        "ImportDeclaration": 4,
+        "ImportClause": 4,
+        "NamedImports": 4,
+        "ImportSpecifier": 5,
+        "Identifier": 1216,
+        "StringLiteral": 2562,
+        "FunctionDeclaration": 1,
+        "ExportKeyword": 1,
+        "TypeReference": 1,
+        "Block": 1,
+        "FirstStatement": 1,
+        "VariableDeclarationList": 1,
+        "VariableDeclaration": 1,
+        "CallExpression": 1,
+        "ReturnStatement": 1,
+        "ObjectLiteralExpression": 214,
+        "SpreadAssignment": 2,
+        "PropertyAssignment": 1202,
+        "ArrayLiteralExpression": 538,
+        "FalseKeyword": 4,
+        "TrueKeyword": 4,
+        "BinaryExpression": 2,
+        "PlusToken": 2,
+        "EndOfFileToken": 1
+      },
+      "expression_histogram": {
+        "Identifier": 1216,
+        "StringLiteral": 2562,
+        "CallExpression": 1,
+        "ObjectLiteralExpression": 214,
+        "ArrayLiteralExpression": 538,
+        "FalseKeyword": 4,
+        "TrueKeyword": 4,
+        "BinaryExpression": 2
+      },
+      "structural_edges": [
+        {
+          "kind": "ImportDeclaration",
+          "anchor": "apps/web/features/landing/i18n/ja.ts:1",
+          "text": "import { githubUrl, discordUrl } from \"../components/shared\";"
+        },
+        {
+          "kind": "ImportDeclaration",
+          "anchor": "apps/web/features/landing/i18n/ja.ts:2",
+          "text": "import { createEnDict } from \"./en\";"
+        },
+        {
+          "kind": "ImportDeclaration",
+          "anchor": "apps/web/features/landing/i18n/ja.ts:3",
+          "text": "import type { LandingDict } from \"./types\";"
+        },
+        {
+          "kind": "ImportDeclaration",
+          "anchor": "apps/web/features/landing/i18n/ja.ts:4",
+          "text": "import { jaSiteCopy } from \"./site-ja\";"
+        },
+        {
+          "kind": "FunctionDeclaration",
+          "anchor": "apps/web/features/landing/i18n/ja.ts:6",
+          "text": "createJaDict (complete body traversed)"
+        },
+        {
+          "kind": "VariableDeclaration",
+          "anchor": "apps/web/features/landing/i18n/ja.ts:7",
+          "text": "base = CallExpression"
+        },
+        {
+          "kind": "CallExpression",
+          "anchor": "apps/web/features/landing/i18n/ja.ts:7",
+          "text": "createEnDict()"
+        },
+        {
+          "kind": "ReturnStatement",
+          "anchor": "apps/web/features/landing/i18n/ja.ts:9",
+          "text": "return ObjectLiteralExpression"
+        },
+        {
+          "kind": "SpreadAssignment",
+          "anchor": "apps/web/features/landing/i18n/ja.ts:10",
+          "text": "...base"
+        },
+        {
+          "kind": "SpreadAssignment",
+          "anchor": "apps/web/features/landing/i18n/ja.ts:11",
+          "text": "...jaSiteCopy"
+        }
+      ]
+    },
+    {
+      "path": "apps/web/features/landing/i18n/ko.ts",
+      "anchor": "apps/web/features/landing/i18n/ko.ts:1",
+      "sha256": "dd3d6f0feefd81e418fd33239cd0b8336b81f4baea549c87c26246c0269c90ae",
+      "line_count": 3944,
+      "parse_success": true,
+      "node_histogram": {
+        "SourceFile": 1,
+        "ImportDeclaration": 4,
+        "ImportClause": 4,
+        "NamedImports": 4,
+        "ImportSpecifier": 5,
+        "Identifier": 1223,
+        "StringLiteral": 2579,
+        "FunctionDeclaration": 1,
+        "ExportKeyword": 1,
+        "TypeReference": 1,
+        "Block": 1,
+        "FirstStatement": 1,
+        "VariableDeclarationList": 1,
+        "VariableDeclaration": 1,
+        "CallExpression": 1,
+        "ReturnStatement": 1,
+        "ObjectLiteralExpression": 215,
+        "SpreadAssignment": 2,
+        "PropertyAssignment": 1209,
+        "ArrayLiteralExpression": 542,
+        "FalseKeyword": 4,
+        "TrueKeyword": 4,
+        "BinaryExpression": 2,
+        "PlusToken": 2,
+        "EndOfFileToken": 1
+      },
+      "expression_histogram": {
+        "Identifier": 1223,
+        "StringLiteral": 2579,
+        "CallExpression": 1,
+        "ObjectLiteralExpression": 215,
+        "ArrayLiteralExpression": 542,
+        "FalseKeyword": 4,
+        "TrueKeyword": 4,
+        "BinaryExpression": 2
+      },
+      "structural_edges": [
+        {
+          "kind": "ImportDeclaration",
+          "anchor": "apps/web/features/landing/i18n/ko.ts:1",
+          "text": "import { githubUrl, discordUrl } from \"../components/shared\";"
+        },
+        {
+          "kind": "ImportDeclaration",
+          "anchor": "apps/web/features/landing/i18n/ko.ts:2",
+          "text": "import { createEnDict } from \"./en\";"
+        },
+        {
+          "kind": "ImportDeclaration",
+          "anchor": "apps/web/features/landing/i18n/ko.ts:3",
+          "text": "import type { LandingDict } from \"./types\";"
+        },
+        {
+          "kind": "ImportDeclaration",
+          "anchor": "apps/web/features/landing/i18n/ko.ts:4",
+          "text": "import { koSiteCopy } from \"./site-ko\";"
+        },
+        {
+          "kind": "FunctionDeclaration",
+          "anchor": "apps/web/features/landing/i18n/ko.ts:6",
+          "text": "createKoDict (complete body traversed)"
+        },
+        {
+          "kind": "VariableDeclaration",
+          "anchor": "apps/web/features/landing/i18n/ko.ts:7",
+          "text": "base = CallExpression"
+        },
+        {
+          "kind": "CallExpression",
+          "anchor": "apps/web/features/landing/i18n/ko.ts:7",
+          "text": "createEnDict()"
+        },
+        {
+          "kind": "ReturnStatement",
+          "anchor": "apps/web/features/landing/i18n/ko.ts:9",
+          "text": "return ObjectLiteralExpression"
+        },
+        {
+          "kind": "SpreadAssignment",
+          "anchor": "apps/web/features/landing/i18n/ko.ts:10",
+          "text": "...base"
+        },
+        {
+          "kind": "SpreadAssignment",
+          "anchor": "apps/web/features/landing/i18n/ko.ts:11",
+          "text": "...koSiteCopy"
+        }
+      ]
+    },
+    {
+      "path": "apps/web/features/landing/i18n/zh.ts",
+      "anchor": "apps/web/features/landing/i18n/zh.ts:1",
+      "sha256": "c4acdb47a99243fba22b0f1dd65c7a7ea0c8ed7019447dd3d37faaa3bc8ec150",
+      "line_count": 4415,
+      "parse_success": true,
+      "node_histogram": {
+        "SourceFile": 1,
+        "ImportDeclaration": 3,
+        "ImportClause": 3,
+        "NamedImports": 3,
+        "ImportSpecifier": 4,
+        "Identifier": 1226,
+        "StringLiteral": 3040,
+        "FunctionDeclaration": 1,
+        "ExportKeyword": 1,
+        "TypeReference": 1,
+        "Block": 1,
+        "ReturnStatement": 1,
+        "ObjectLiteralExpression": 216,
+        "SpreadAssignment": 1,
+        "PropertyAssignment": 1216,
+        "ArrayLiteralExpression": 546,
+        "FalseKeyword": 4,
+        "TrueKeyword": 4,
+        "BinaryExpression": 2,
+        "PlusToken": 2,
+        "EndOfFileToken": 1
+      },
+      "expression_histogram": {
+        "Identifier": 1226,
+        "StringLiteral": 3040,
+        "ObjectLiteralExpression": 216,
+        "ArrayLiteralExpression": 546,
+        "FalseKeyword": 4,
+        "TrueKeyword": 4,
+        "BinaryExpression": 2
+      },
+      "structural_edges": [
+        {
+          "kind": "ImportDeclaration",
+          "anchor": "apps/web/features/landing/i18n/zh.ts:1",
+          "text": "import { githubUrl, discordUrl } from \"../components/shared\";"
+        },
+        {
+          "kind": "ImportDeclaration",
+          "anchor": "apps/web/features/landing/i18n/zh.ts:2",
+          "text": "import type { LandingDict } from \"./types\";"
+        },
+        {
+          "kind": "ImportDeclaration",
+          "anchor": "apps/web/features/landing/i18n/zh.ts:3",
+          "text": "import { zhSiteCopy } from \"./site-zh\";"
+        },
+        {
+          "kind": "FunctionDeclaration",
+          "anchor": "apps/web/features/landing/i18n/zh.ts:5",
+          "text": "createZhDict (complete body traversed)"
+        },
+        {
+          "kind": "ReturnStatement",
+          "anchor": "apps/web/features/landing/i18n/zh.ts:6",
+          "text": "return ObjectLiteralExpression"
+        },
+        {
+          "kind": "SpreadAssignment",
+          "anchor": "apps/web/features/landing/i18n/zh.ts:7",
+          "text": "...zhSiteCopy"
+        }
+      ]
+    },
+    {
+      "path": "apps/web/features/landing/i18n/site-en.ts",
+      "anchor": "apps/web/features/landing/i18n/site-en.ts:1",
+      "sha256": "6ea1231e867d7bacbd0e2d8104f5c9cd0334416519aa9e1af0193d46ae2ace95",
+      "line_count": 178,
+      "parse_success": true,
+      "node_histogram": {
+        "SourceFile": 1,
+        "ImportDeclaration": 2,
+        "ImportClause": 2,
+        "NamedImports": 2,
+        "ImportSpecifier": 2,
+        "Identifier": 143,
+        "StringLiteral": 112,
+        "FirstStatement": 1,
+        "ExportKeyword": 1,
+        "VariableDeclarationList": 1,
+        "VariableDeclaration": 1,
+        "TypeReference": 2,
+        "UnionType": 1,
+        "LiteralType": 4,
+        "ObjectLiteralExpression": 31,
+        "PropertyAssignment": 137,
+        "EndOfFileToken": 1
+      },
+      "expression_histogram": {
+        "Identifier": 143,
+        "StringLiteral": 112,
+        "ObjectLiteralExpression": 31
+      },
+      "structural_edges": [
+        {
+          "kind": "ImportDeclaration",
+          "anchor": "apps/web/features/landing/i18n/site-en.ts:1",
+          "text": "import type { LandingDict } from \"./types\";"
+        },
+        {
+          "kind": "ImportDeclaration",
+          "anchor": "apps/web/features/landing/i18n/site-en.ts:2",
+          "text": "import { enDemoCopy } from \"./demo-en\";"
+        },
+        {
+          "kind": "VariableDeclaration",
+          "anchor": "apps/web/features/landing/i18n/site-en.ts:4",
+          "text": "enSiteCopy = ObjectLiteralExpression"
+        }
+      ]
+    },
+    {
+      "path": "apps/web/features/landing/i18n/site-ja.ts",
+      "anchor": "apps/web/features/landing/i18n/site-ja.ts:1",
+      "sha256": "069c98a526a7811b048d7ed682836d3591aa6f4c929ba565205a9af0be65347f",
+      "line_count": 176,
+      "parse_success": true,
+      "node_histogram": {
+        "SourceFile": 1,
+        "ImportDeclaration": 2,
+        "ImportClause": 2,
+        "NamedImports": 2,
+        "ImportSpecifier": 2,
+        "Identifier": 143,
+        "StringLiteral": 112,
+        "FirstStatement": 1,
+        "ExportKeyword": 1,
+        "VariableDeclarationList": 1,
+        "VariableDeclaration": 1,
+        "TypeReference": 2,
+        "UnionType": 1,
+        "LiteralType": 4,
+        "ObjectLiteralExpression": 31,
+        "PropertyAssignment": 137,
+        "EndOfFileToken": 1
+      },
+      "expression_histogram": {
+        "Identifier": 143,
+        "StringLiteral": 112,
+        "ObjectLiteralExpression": 31
+      },
+      "structural_edges": [
+        {
+          "kind": "ImportDeclaration",
+          "anchor": "apps/web/features/landing/i18n/site-ja.ts:1",
+          "text": "import type { LandingDict } from \"./types\";"
+        },
+        {
+          "kind": "ImportDeclaration",
+          "anchor": "apps/web/features/landing/i18n/site-ja.ts:2",
+          "text": "import { jaDemoCopy } from \"./demo-ja\";"
+        },
+        {
+          "kind": "VariableDeclaration",
+          "anchor": "apps/web/features/landing/i18n/site-ja.ts:4",
+          "text": "jaSiteCopy = ObjectLiteralExpression"
+        }
+      ]
+    },
+    {
+      "path": "apps/web/features/landing/i18n/site-ko.ts",
+      "anchor": "apps/web/features/landing/i18n/site-ko.ts:1",
+      "sha256": "1d3b66c622e465ead0d8e64eca8aac54fd2fed92e9d2f5b1e4e89a4b3ccc5c82",
+      "line_count": 175,
+      "parse_success": true,
+      "node_histogram": {
+        "SourceFile": 1,
+        "ImportDeclaration": 2,
+        "ImportClause": 2,
+        "NamedImports": 2,
+        "ImportSpecifier": 2,
+        "Identifier": 143,
+        "StringLiteral": 112,
+        "FirstStatement": 1,
+        "ExportKeyword": 1,
+        "VariableDeclarationList": 1,
+        "VariableDeclaration": 1,
+        "TypeReference": 2,
+        "UnionType": 1,
+        "LiteralType": 4,
+        "ObjectLiteralExpression": 31,
+        "PropertyAssignment": 137,
+        "EndOfFileToken": 1
+      },
+      "expression_histogram": {
+        "Identifier": 143,
+        "StringLiteral": 112,
+        "ObjectLiteralExpression": 31
+      },
+      "structural_edges": [
+        {
+          "kind": "ImportDeclaration",
+          "anchor": "apps/web/features/landing/i18n/site-ko.ts:1",
+          "text": "import type { LandingDict } from \"./types\";"
+        },
+        {
+          "kind": "ImportDeclaration",
+          "anchor": "apps/web/features/landing/i18n/site-ko.ts:2",
+          "text": "import { koDemoCopy } from \"./demo-ko\";"
+        },
+        {
+          "kind": "VariableDeclaration",
+          "anchor": "apps/web/features/landing/i18n/site-ko.ts:4",
+          "text": "koSiteCopy = ObjectLiteralExpression"
+        }
+      ]
+    },
+    {
+      "path": "apps/web/features/landing/i18n/site-zh.ts",
+      "anchor": "apps/web/features/landing/i18n/site-zh.ts:1",
+      "sha256": "02c242f3735ccb2377ea36cd7613e981750d3f16c6243204589ce3ded685a163",
+      "line_count": 174,
+      "parse_success": true,
+      "node_histogram": {
+        "SourceFile": 1,
+        "ImportDeclaration": 2,
+        "ImportClause": 2,
+        "NamedImports": 2,
+        "ImportSpecifier": 2,
+        "Identifier": 143,
+        "StringLiteral": 112,
+        "FirstStatement": 1,
+        "ExportKeyword": 1,
+        "VariableDeclarationList": 1,
+        "VariableDeclaration": 1,
+        "TypeReference": 2,
+        "UnionType": 1,
+        "LiteralType": 4,
+        "ObjectLiteralExpression": 31,
+        "PropertyAssignment": 137,
+        "EndOfFileToken": 1
+      },
+      "expression_histogram": {
+        "Identifier": 143,
+        "StringLiteral": 112,
+        "ObjectLiteralExpression": 31
+      },
+      "structural_edges": [
+        {
+          "kind": "ImportDeclaration",
+          "anchor": "apps/web/features/landing/i18n/site-zh.ts:1",
+          "text": "import type { LandingDict } from \"./types\";"
+        },
+        {
+          "kind": "ImportDeclaration",
+          "anchor": "apps/web/features/landing/i18n/site-zh.ts:2",
+          "text": "import { zhDemoCopy } from \"./demo-zh\";"
+        },
+        {
+          "kind": "VariableDeclaration",
+          "anchor": "apps/web/features/landing/i18n/site-zh.ts:4",
+          "text": "zhSiteCopy = ObjectLiteralExpression"
+        }
+      ]
+    },
+    {
+      "path": "apps/web/features/landing/i18n/demo-en.ts",
+      "anchor": "apps/web/features/landing/i18n/demo-en.ts:1",
+      "sha256": "46346d7f6c50355a6f88168437a5fca56ae2976fa92fde00d3b768622766a558",
+      "line_count": 219,
+      "parse_success": true,
+      "node_histogram": {
+        "SourceFile": 1,
+        "ImportDeclaration": 1,
+        "ImportClause": 1,
+        "NamedImports": 1,
+        "ImportSpecifier": 1,
+        "Identifier": 173,
+        "StringLiteral": 289,
+        "FirstStatement": 1,
+        "ExportKeyword": 1,
+        "VariableDeclarationList": 1,
+        "VariableDeclaration": 1,
+        "TypeReference": 1,
+        "ObjectLiteralExpression": 41,
+        "PropertyAssignment": 242,
+        "ArrayLiteralExpression": 5,
+        "EndOfFileToken": 1
+      },
+      "expression_histogram": {
+        "Identifier": 173,
+        "StringLiteral": 289,
+        "ObjectLiteralExpression": 41,
+        "ArrayLiteralExpression": 5
+      },
+      "structural_edges": [
+        {
+          "kind": "ImportDeclaration",
+          "anchor": "apps/web/features/landing/i18n/demo-en.ts:1",
+          "text": "import type { DemoDict } from \"./types\";"
+        },
+        {
+          "kind": "VariableDeclaration",
+          "anchor": "apps/web/features/landing/i18n/demo-en.ts:3",
+          "text": "enDemoCopy = ObjectLiteralExpression"
+        }
+      ]
+    },
+    {
+      "path": "apps/web/features/landing/i18n/demo-ja.ts",
+      "anchor": "apps/web/features/landing/i18n/demo-ja.ts:1",
+      "sha256": "32add8d4b81c1793926f4b6d08d38efe38e41280f81a065e5dee3df95de36829",
+      "line_count": 219,
+      "parse_success": true,
+      "node_histogram": {
+        "SourceFile": 1,
+        "ImportDeclaration": 1,
+        "ImportClause": 1,
+        "NamedImports": 1,
+        "ImportSpecifier": 1,
+        "Identifier": 173,
+        "StringLiteral": 289,
+        "FirstStatement": 1,
+        "ExportKeyword": 1,
+        "VariableDeclarationList": 1,
+        "VariableDeclaration": 1,
+        "TypeReference": 1,
+        "ObjectLiteralExpression": 41,
+        "PropertyAssignment": 242,
+        "ArrayLiteralExpression": 5,
+        "EndOfFileToken": 1
+      },
+      "expression_histogram": {
+        "Identifier": 173,
+        "StringLiteral": 289,
+        "ObjectLiteralExpression": 41,
+        "ArrayLiteralExpression": 5
+      },
+      "structural_edges": [
+        {
+          "kind": "ImportDeclaration",
+          "anchor": "apps/web/features/landing/i18n/demo-ja.ts:1",
+          "text": "import type { DemoDict } from \"./types\";"
+        },
+        {
+          "kind": "VariableDeclaration",
+          "anchor": "apps/web/features/landing/i18n/demo-ja.ts:3",
+          "text": "jaDemoCopy = ObjectLiteralExpression"
+        }
+      ]
+    },
+    {
+      "path": "apps/web/features/landing/i18n/demo-ko.ts",
+      "anchor": "apps/web/features/landing/i18n/demo-ko.ts:1",
+      "sha256": "0a4868af68a994872c93e13008b2f74caf667b1ffd6108ee9c46e8588b6ab0e4",
+      "line_count": 219,
+      "parse_success": true,
+      "node_histogram": {
+        "SourceFile": 1,
+        "ImportDeclaration": 1,
+        "ImportClause": 1,
+        "NamedImports": 1,
+        "ImportSpecifier": 1,
+        "Identifier": 173,
+        "StringLiteral": 289,
+        "FirstStatement": 1,
+        "ExportKeyword": 1,
+        "VariableDeclarationList": 1,
+        "VariableDeclaration": 1,
+        "TypeReference": 1,
+        "ObjectLiteralExpression": 41,
+        "PropertyAssignment": 242,
+        "ArrayLiteralExpression": 5,
+        "EndOfFileToken": 1
+      },
+      "expression_histogram": {
+        "Identifier": 173,
+        "StringLiteral": 289,
+        "ObjectLiteralExpression": 41,
+        "ArrayLiteralExpression": 5
+      },
+      "structural_edges": [
+        {
+          "kind": "ImportDeclaration",
+          "anchor": "apps/web/features/landing/i18n/demo-ko.ts:1",
+          "text": "import type { DemoDict } from \"./types\";"
+        },
+        {
+          "kind": "VariableDeclaration",
+          "anchor": "apps/web/features/landing/i18n/demo-ko.ts:3",
+          "text": "koDemoCopy = ObjectLiteralExpression"
+        }
+      ]
+    },
+    {
+      "path": "apps/web/features/landing/i18n/demo-zh.ts",
+      "anchor": "apps/web/features/landing/i18n/demo-zh.ts:1",
+      "sha256": "e6aae13f95fc5d632dd27c05c1ad2c803c5d6c3b37b99561ed4e2d93b7fca125",
+      "line_count": 217,
+      "parse_success": true,
+      "node_histogram": {
+        "SourceFile": 1,
+        "ImportDeclaration": 1,
+        "ImportClause": 1,
+        "NamedImports": 1,
+        "ImportSpecifier": 1,
+        "Identifier": 173,
+        "StringLiteral": 289,
+        "FirstStatement": 1,
+        "ExportKeyword": 1,
+        "VariableDeclarationList": 1,
+        "VariableDeclaration": 1,
+        "TypeReference": 1,
+        "ObjectLiteralExpression": 41,
+        "PropertyAssignment": 242,
+        "ArrayLiteralExpression": 5,
+        "EndOfFileToken": 1
+      },
+      "expression_histogram": {
+        "Identifier": 173,
+        "StringLiteral": 289,
+        "ObjectLiteralExpression": 41,
+        "ArrayLiteralExpression": 5
+      },
+      "structural_edges": [
+        {
+          "kind": "ImportDeclaration",
+          "anchor": "apps/web/features/landing/i18n/demo-zh.ts:1",
+          "text": "import type { DemoDict } from \"./types\";"
+        },
+        {
+          "kind": "VariableDeclaration",
+          "anchor": "apps/web/features/landing/i18n/demo-zh.ts:3",
+          "text": "zhDemoCopy = ObjectLiteralExpression"
+        }
+      ]
+    },
+    {
+      "path": "apps/web/features/landing/components/shared.tsx",
+      "anchor": "apps/web/features/landing/components/shared.tsx:1",
+      "sha256": "c89129d61533495792cc35134e135841354c2560964c89b4e7b0de45ee298ad8",
+      "line_count": 54,
+      "parse_success": true,
+      "node_histogram": {
+        "SourceFile": 1,
+        "ImportDeclaration": 1,
+        "ImportClause": 1,
+        "NamedImports": 1,
+        "ImportSpecifier": 1,
+        "Identifier": 44,
+        "StringLiteral": 22,
+        "FirstStatement": 3,
+        "ExportKeyword": 7,
+        "VariableDeclarationList": 3,
+        "VariableDeclaration": 3,
+        "FunctionDeclaration": 4,
+        "Parameter": 4,
+        "ObjectBindingPattern": 3,
+        "BindingElement": 3,
+        "TypeLiteral": 3,
+        "PropertySignature": 3,
+        "QuestionToken": 4,
+        "StringKeyword": 3,
+        "Block": 4,
+        "ReturnStatement": 4,
+        "ParenthesizedExpression": 3,
+        "JsxElement": 3,
+        "JsxOpeningElement": 3,
+        "JsxAttributes": 6,
+        "JsxAttribute": 15,
+        "JsxExpression": 3,
+        "JsxText": 6,
+        "JsxSelfClosingElement": 3,
+        "JsxClosingElement": 3,
+        "UnionType": 1,
+        "LiteralType": 2,
+        "CallExpression": 1,
+        "ConditionalExpression": 1,
+        "BinaryExpression": 1,
+        "EqualsEqualsEqualsToken": 1,
+        "ColonToken": 1,
+        "EndOfFileToken": 1
+      },
+      "expression_histogram": {
+        "Identifier": 44,
+        "StringLiteral": 22,
+        "ParenthesizedExpression": 3,
+        "JsxElement": 3,
+        "JsxSelfClosingElement": 3,
+        "CallExpression": 1,
+        "ConditionalExpression": 1,
+        "BinaryExpression": 1
+      },
+      "structural_edges": [
+        {
+          "kind": "ImportDeclaration",
+          "anchor": "apps/web/features/landing/components/shared.tsx:1",
+          "text": "import { cn } from \"@workpal/ui/lib/utils\";"
+        },
+        {
+          "kind": "VariableDeclaration",
+          "anchor": "apps/web/features/landing/components/shared.tsx:3",
+          "text": "githubUrl = StringLiteral"
+        },
+        {
+          "kind": "VariableDeclaration",
+          "anchor": "apps/web/features/landing/components/shared.tsx:4",
+          "text": "twitterUrl = StringLiteral"
+        },
+        {
+          "kind": "VariableDeclaration",
+          "anchor": "apps/web/features/landing/components/shared.tsx:5",
+          "text": "discordUrl = StringLiteral"
+        },
+        {
+          "kind": "FunctionDeclaration",
+          "anchor": "apps/web/features/landing/components/shared.tsx:7",
+          "text": "GitHubMark (complete body traversed)"
+        },
+        {
+          "kind": "ReturnStatement",
+          "anchor": "apps/web/features/landing/components/shared.tsx:8",
+          "text": "return ParenthesizedExpression"
+        },
+        {
+          "kind": "FunctionDeclaration",
+          "anchor": "apps/web/features/landing/components/shared.tsx:20",
+          "text": "DiscordMark (complete body traversed)"
+        },
+        {
+          "kind": "ReturnStatement",
+          "anchor": "apps/web/features/landing/components/shared.tsx:21",
+          "text": "return ParenthesizedExpression"
+        },
+        {
+          "kind": "FunctionDeclaration",
+          "anchor": "apps/web/features/landing/components/shared.tsx:33",
+          "text": "XMark (complete body traversed)"
+        },
+        {
+          "kind": "ReturnStatement",
+          "anchor": "apps/web/features/landing/components/shared.tsx:34",
+          "text": "return ParenthesizedExpression"
+        },
+        {
+          "kind": "FunctionDeclaration",
+          "anchor": "apps/web/features/landing/components/shared.tsx:46",
+          "text": "heroButtonClassName (complete body traversed)"
+        },
+        {
+          "kind": "ReturnStatement",
+          "anchor": "apps/web/features/landing/components/shared.tsx:47",
+          "text": "return CallExpression"
+        },
+        {
+          "kind": "CallExpression",
+          "anchor": "apps/web/features/landing/components/shared.tsx:47",
+          "text": "cn(\n    \"inline-flex items-center justify-center gap-2 rounded-(--landing-radius-action) px-5 py-3 text-body font-semibold transition-colors\",\n    tone === \"solid\"\n      ? \"bg-white text-[#0a0d12] hover:bg-white/92\"\n      : \"border border-white/18 bg-black/16 text-white backdrop-blur-sm hover:bg-black/24\",\n  )"
+        }
+      ]
+    },
+    {
+      "path": "packages/ui/lib/utils.ts",
+      "anchor": "packages/ui/lib/utils.ts:1",
+      "sha256": "f9217d6a3ec4e54178ee40574284c01d8a605a238363028fc525bea3c184a987",
+      "line_count": 73,
+      "parse_success": true,
+      "node_histogram": {
+        "SourceFile": 1,
+        "ImportDeclaration": 2,
+        "ImportClause": 2,
+        "NamedImports": 2,
+        "ImportSpecifier": 3,
+        "Identifier": 16,
+        "StringLiteral": 37,
+        "FirstStatement": 1,
+        "VariableDeclarationList": 1,
+        "VariableDeclaration": 1,
+        "CallExpression": 3,
+        "ObjectLiteralExpression": 5,
+        "PropertyAssignment": 6,
+        "ArrayLiteralExpression": 3,
+        "FunctionDeclaration": 1,
+        "ExportKeyword": 1,
+        "Parameter": 1,
+        "DotDotDotToken": 1,
+        "ArrayType": 1,
+        "TypeReference": 1,
+        "Block": 1,
+        "ReturnStatement": 1,
+        "EndOfFileToken": 1
+      },
+      "expression_histogram": {
+        "Identifier": 16,
+        "StringLiteral": 37,
+        "CallExpression": 3,
+        "ObjectLiteralExpression": 5,
+        "ArrayLiteralExpression": 3
+      },
+      "structural_edges": [
+        {
+          "kind": "ImportDeclaration",
+          "anchor": "packages/ui/lib/utils.ts:1",
+          "text": "import { clsx, type ClassValue } from \"clsx\""
+        },
+        {
+          "kind": "ImportDeclaration",
+          "anchor": "packages/ui/lib/utils.ts:2",
+          "text": "import { extendTailwindMerge } from \"tailwind-merge\""
+        },
+        {
+          "kind": "VariableDeclaration",
+          "anchor": "packages/ui/lib/utils.ts:18",
+          "text": "twMerge = CallExpression"
+        },
+        {
+          "kind": "CallExpression",
+          "anchor": "packages/ui/lib/utils.ts:18",
+          "text": "extendTailwindMerge({\n  extend: {\n    // Component radii from packages/ui/styles/theme-variables.css.\n    theme: {\n      radius: [\n        \"page\",\n        \"card\",\n        \"menu\",\n        \"menu-item\",\n        \"popover\",\n        \"dialog\",\n        \"tooltip\",\n        \"input\",\n        \"button\",\n        \"button-sm\",\n        \"avatar\",\n        \"nav-item\",\n        \"rail-item\",\n        \"label\",\n        \"issue-group-header\",\n        \"board-column\",\n        \"board-card\",\n      ],\n    },\n    classGroups: {\n      \"font-size\": [\n        {\n          text: [\n            \"micro\",\n            \"caption\",\n            \"label\",\n            \"body\",\n            \"body-lg\",\n            \"title-sm\",\n            \"title\",\n            \"title-lg\",\n            \"display-sm\",\n            \"display\",\n            \"site-display\",\n            \"site-heading\",\n            \"site-title\",\n            \"site-card\",\n            \"site-body\",\n            \"site-small\",\n            \"site-label\",\n          ],\n        },\n      ],\n    },\n  },\n})"
+        },
+        {
+          "kind": "FunctionDeclaration",
+          "anchor": "packages/ui/lib/utils.ts:70",
+          "text": "cn (complete body traversed)"
+        },
+        {
+          "kind": "ReturnStatement",
+          "anchor": "packages/ui/lib/utils.ts:71",
+          "text": "return CallExpression"
+        },
+        {
+          "kind": "CallExpression",
+          "anchor": "packages/ui/lib/utils.ts:71",
+          "text": "twMerge(clsx(inputs))"
+        },
+        {
+          "kind": "CallExpression",
+          "anchor": "packages/ui/lib/utils.ts:71",
+          "text": "clsx(inputs)"
+        }
+      ]
+    }
+  ],
+  "proofs": [
+    {
+      "path": "apps/web/features/landing/i18n/en.ts",
+      "body_status": "complete structural coverage",
+      "module_chain_status": "closed-for-bounded-transport",
+      "disposition": "Factory returns local dictionary with locale site-copy spread and explicit overrides.",
+      "dependency_chain": [
+        "apps/web/features/landing/i18n/site-en.ts",
+        "apps/web/features/landing/i18n/demo-en.ts",
+        "apps/web/features/landing/components/shared.tsx",
+        "packages/ui/lib/utils.ts"
+      ],
+      "transport_calls": [],
+      "remaining_edge": null
+    },
+    {
+      "path": "apps/web/features/landing/i18n/ja.ts",
+      "body_status": "complete structural coverage",
+      "module_chain_status": "closed-for-bounded-transport",
+      "disposition": "createEnDict() constructs base locally; spreads base then locale site copy, then local dictionary overrides.",
+      "dependency_chain": [
+        "apps/web/features/landing/i18n/site-ja.ts",
+        "apps/web/features/landing/i18n/demo-ja.ts",
+        "apps/web/features/landing/components/shared.tsx",
+        "packages/ui/lib/utils.ts"
+      ],
+      "transport_calls": [],
+      "remaining_edge": null
+    },
+    {
+      "path": "apps/web/features/landing/i18n/ko.ts",
+      "body_status": "complete structural coverage",
+      "module_chain_status": "closed-for-bounded-transport",
+      "disposition": "createEnDict() constructs base locally; spreads base then locale site copy, then local dictionary overrides.",
+      "dependency_chain": [
+        "apps/web/features/landing/i18n/site-ko.ts",
+        "apps/web/features/landing/i18n/demo-ko.ts",
+        "apps/web/features/landing/components/shared.tsx",
+        "packages/ui/lib/utils.ts"
+      ],
+      "transport_calls": [],
+      "remaining_edge": null
+    },
+    {
+      "path": "apps/web/features/landing/i18n/zh.ts",
+      "body_status": "complete structural coverage",
+      "module_chain_status": "closed-for-bounded-transport",
+      "disposition": "Factory returns local dictionary with locale site-copy spread and explicit overrides.",
+      "dependency_chain": [
+        "apps/web/features/landing/i18n/site-zh.ts",
+        "apps/web/features/landing/i18n/demo-zh.ts",
+        "apps/web/features/landing/components/shared.tsx",
+        "packages/ui/lib/utils.ts"
+      ],
+      "transport_calls": [],
+      "remaining_edge": null
+    }
+  ],
+  "interpretation": "URL strings and imported empty githubUrl/discordUrl values are returned content, not executed requests. Site/demo objects are data initializers; no callbacks or calls there. shared.tsx icon JSX and heroButtonClassName bodies are fully traversed but are not invoked by dictionary factories. cn delegates clsx and twMerge when called; dictionary construction does not call cn. Import evaluation still reaches utils module-level extendTailwindMerge. No UI consumer, global transport or backend completion claim.",
+  "parent_review": {
+    "path": "node_modules/.pnpm/tailwind-merge@3.5.0/node_modules/tailwind-merge/dist/bundle-cjs.js",
+    "sha256": "19aa176d1cb3f9026e4019206b6d05f11c754bbb1c3009c9b4193a1da4f95b92",
+    "anchors": [
+      464,
+      487,
+      3285
+    ],
+    "finding": "extendTailwindMerge with the literal configuration invokes createTailwindMerge, which only initializes local variables and returns a closure. Configuration evaluation and class processing are lazy until that closure is called. Dictionary factories never call cn or the closure. The reported initialization edge is closed for this bounded transport analysis; this is not a security audit of all third-party module code."
+  }
+}

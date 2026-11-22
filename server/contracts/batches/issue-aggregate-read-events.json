@@ -1,0 +1,107 @@
+[
+  {
+    "method": "GET",
+    "path": "/api/issues/search",
+    "event": {
+      "disposition": "none",
+      "sources": [
+        "server/go/cmd/server/router.go:2169",
+        "server/go/internal/handler/issue.go:1156",
+        "server/go/internal/handler/issue.go:813",
+        "server/go/internal/handler/project_access.go:21",
+        "server/go/internal/projectaccess/projectaccess.go:104"
+      ],
+      "reason": "Search SELECT builder \u2192 runSearchQuery (search.go:111), transaction-local timeout/work_mem/read-only settings, Query and Commit; terminalIssueStatusKeys \u2192 ExpandCategories; prefix and status/duplicate enrichment. Reachable helpers only read or construct response data; no business writes, read-marker updates, lazy creation, publish, enqueue, or service event producer."
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/api/issues/child-progress",
+    "event": {
+      "disposition": "none",
+      "sources": [
+        "server/go/cmd/server/router.go:2170",
+        "server/go/internal/handler/issue.go:2777",
+        "server/go/pkg/db/queries/issue.sql:736",
+        "server/go/internal/handler/project_access.go:21",
+        "server/go/internal/projectaccess/projectaccess.go:104"
+      ],
+      "reason": "terminalIssueStatusKeys \u2192 ExpandCategories \u2192 ListIssueStatusKeysByCategories; ChildIssueProgress SELECT aggregates issue counts by parent. Reachable helpers only read or construct response data; no business writes, read-marker updates, lazy creation, publish, enqueue, or service event producer."
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/api/issues/pull-requests",
+    "event": {
+      "disposition": "none",
+      "sources": [
+        "server/go/cmd/server/router.go:2171",
+        "server/go/internal/handler/github.go:1209",
+        "server/go/pkg/db/queries/github.sql:206",
+        "server/go/internal/handler/project_access.go:21",
+        "server/go/internal/projectaccess/projectaccess.go:104"
+      ],
+      "reason": "ListIssuePullRequestSummaries SELECT UNION ALL joins GitHub and VCS PR/link/issue tables; serialization only; no snapshot refresh callback. Reachable helpers only read or construct response data; no business writes, read-marker updates, lazy creation, publish, enqueue, or service event producer."
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/api/issues/children",
+    "event": {
+      "disposition": "none",
+      "sources": [
+        "server/go/cmd/server/router.go:2172",
+        "server/go/internal/handler/issue.go:2699",
+        "server/go/pkg/db/queries/issue.sql:697",
+        "server/go/internal/handler/project_access.go:21",
+        "server/go/internal/projectaccess/projectaccess.go:104"
+      ],
+      "reason": "Empty parent input returns immediately; otherwise ListChildrenByParents SELECT \u2192 filterVisibleIssues \u2192 getIssuePrefix \u2192 labelsByIssue \u2192 Resolver.Category. Reachable helpers only read or construct response data; no business writes, read-marker updates, lazy creation, publish, enqueue, or service event producer."
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/api/issues/grouped",
+    "event": {
+      "disposition": "none",
+      "sources": [
+        "server/go/cmd/server/router.go:2173",
+        "server/go/internal/handler/issue.go:2086",
+        "server/go/internal/handler/issue.go:2484",
+        "server/go/internal/handler/project_access.go:21",
+        "server/go/internal/projectaccess/projectaccess.go:104"
+      ],
+      "reason": "Dynamic ranked SELECT with window counts and row numbers \u2192 DB.Query \u2192 labelsByIssue \u2192 getIssuePrefix \u2192 newStatusCategoryFiller; optional category filter uses ExpandCategories. Reachable helpers only read or construct response data; no business writes, read-marker updates, lazy creation, publish, enqueue, or service event producer."
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/api/issues/unread",
+    "event": {
+      "disposition": "none",
+      "sources": [
+        "server/go/cmd/server/router.go:2176",
+        "server/go/internal/handler/issue_unread.go:29",
+        "server/go/pkg/db/queries/issue_unread.sql:23",
+        "server/go/internal/handler/project_access.go:21",
+        "server/go/internal/projectaccess/projectaccess.go:104"
+      ],
+      "reason": "requireUserID/context workspace \u2192 ListIssueUnread SELECT with lateral latest live comment and cursor pagination; does not call setIssueUnread or MarkIssueRead. Reachable helpers only read or construct response data; no business writes, read-marker updates, lazy creation, publish, enqueue, or service event producer."
+    }
+  },
+  {
+    "method": "GET",
+    "path": "/api/issues/subscribed",
+    "event": {
+      "disposition": "none",
+      "sources": [
+        "server/go/cmd/server/router.go:2179",
+        "server/go/internal/handler/subscriber.go:139",
+        "server/go/pkg/db/queries/subscriber.sql:302",
+        "server/go/internal/handler/project_access.go:21",
+        "server/go/internal/projectaccess/projectaccess.go:104"
+      ],
+      "reason": "requireUserID/context workspace \u2192 ListSubscribedIssueIDs SELECT active member subscriptions joined to issues; does not call SubscribeToIssue or create subscribers. Reachable helpers only read or construct response data; no business writes, read-marker updates, lazy creation, publish, enqueue, or service event producer."
+    }
+  }
+]

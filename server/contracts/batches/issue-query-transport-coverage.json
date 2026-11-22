@@ -1,0 +1,2131 @@
+{
+  "version": 1,
+  "scope": [
+    "packages/core/issues/queries.ts",
+    "packages/core/projects/queries.ts",
+    "packages/core/workspace/queries.ts",
+    "packages/core/issue-statuses/queries.ts"
+  ],
+  "coverage": "Finite conservative static query factory union; no backend support claim.",
+  "files": [
+    {
+      "path": "packages/core/issues/queries.ts",
+      "sha256": "10d939b302cbeca9280944c5b5ad0e3e8e042130d2c714496a6b6da6daf53c3e",
+      "whole_source": true,
+      "reviewed_ranges": [
+        [
+          1,
+          743
+        ]
+      ],
+      "exports": [
+        {
+          "name": "issueTasksOptions",
+          "anchor": "packages/core/issues/queries.ts:26"
+        },
+        {
+          "name": "IssueSortParam",
+          "anchor": "packages/core/issues/queries.ts:39"
+        },
+        {
+          "name": "issueKeys",
+          "anchor": "packages/core/issues/queries.ts:51"
+        },
+        {
+          "name": "sourceContextPreviewOptions",
+          "anchor": "packages/core/issues/queries.ts:219"
+        },
+        {
+          "name": "MyIssuesFilter",
+          "anchor": "packages/core/issues/queries.ts:231"
+        },
+        {
+          "name": "IssueFlatFilter",
+          "anchor": "packages/core/issues/queries.ts:245"
+        },
+        {
+          "name": "AssigneeGroupedIssuesFilter",
+          "anchor": "packages/core/issues/queries.ts:261"
+        },
+        {
+          "name": "ISSUE_PAGE_SIZE",
+          "anchor": "packages/core/issues/queries.ts:267"
+        },
+        {
+          "name": "PAGINATED_CATEGORIES",
+          "anchor": "packages/core/issues/queries.ts:279"
+        },
+        {
+          "name": "flattenIssueBuckets",
+          "anchor": "packages/core/issues/queries.ts:282"
+        },
+        {
+          "name": "issueTableGroupsOptions",
+          "anchor": "packages/core/issues/queries.ts:308"
+        },
+        {
+          "name": "issueTableRowPageOptions",
+          "anchor": "packages/core/issues/queries.ts:334"
+        },
+        {
+          "name": "issueTableFacetsOptions",
+          "anchor": "packages/core/issues/queries.ts:372"
+        },
+        {
+          "name": "issueListOptions",
+          "anchor": "packages/core/issues/queries.ts:390"
+        },
+        {
+          "name": "PROJECT_GANTT_PAGE_LIMIT",
+          "anchor": "packages/core/issues/queries.ts:408"
+        },
+        {
+          "name": "PROJECT_GANTT_MAX_ISSUES",
+          "anchor": "packages/core/issues/queries.ts:416"
+        },
+        {
+          "name": "projectGanttIssuesOptions",
+          "anchor": "packages/core/issues/queries.ts:458"
+        },
+        {
+          "name": "sidebarIssuesOptions",
+          "anchor": "packages/core/issues/queries.ts:495"
+        },
+        {
+          "name": "issueDetailOptions",
+          "anchor": "packages/core/issues/queries.ts:507"
+        },
+        {
+          "name": "issueIdentifierOptions",
+          "anchor": "packages/core/issues/queries.ts:534"
+        },
+        {
+          "name": "childIssueProgressOptions",
+          "anchor": "packages/core/issues/queries.ts:556"
+        },
+        {
+          "name": "issueDuplicatesOptions",
+          "anchor": "packages/core/issues/queries.ts:571"
+        },
+        {
+          "name": "childIssuesOptions",
+          "anchor": "packages/core/issues/queries.ts:582"
+        },
+        {
+          "name": "CHILDREN_BY_PARENTS_CHUNK_SIZE",
+          "anchor": "packages/core/issues/queries.ts:600"
+        },
+        {
+          "name": "childrenByParentsOptions",
+          "anchor": "packages/core/issues/queries.ts:651"
+        },
+        {
+          "name": "issueTimelineOptions",
+          "anchor": "packages/core/issues/queries.ts:670"
+        },
+        {
+          "name": "issueCommentThreadOptions",
+          "anchor": "packages/core/issues/queries.ts:677"
+        },
+        {
+          "name": "issueReactionsOptions",
+          "anchor": "packages/core/issues/queries.ts:690"
+        },
+        {
+          "name": "issueSubscribersOptions",
+          "anchor": "packages/core/issues/queries.ts:700"
+        },
+        {
+          "name": "issueEnvironmentsOptions",
+          "anchor": "packages/core/issues/queries.ts:710"
+        },
+        {
+          "name": "issueUsageOptions",
+          "anchor": "packages/core/issues/queries.ts:726"
+        },
+        {
+          "name": "issueAttachmentsOptions",
+          "anchor": "packages/core/issues/queries.ts:737"
+        }
+      ]
+    },
+    {
+      "path": "packages/core/projects/queries.ts",
+      "sha256": "39315862d7770c602ebfda690e8dc691b6732cd833a36975a8638ba3ff25a0d6",
+      "whole_source": true,
+      "reviewed_ranges": [
+        [
+          1,
+          56
+        ]
+      ],
+      "exports": [
+        {
+          "name": "projectKeys",
+          "anchor": "packages/core/projects/queries.ts:4"
+        },
+        {
+          "name": "projectListOptions",
+          "anchor": "packages/core/projects/queries.ts:21"
+        },
+        {
+          "name": "projectDetailOptions",
+          "anchor": "packages/core/projects/queries.ts:29"
+        },
+        {
+          "name": "projectMembersOptions",
+          "anchor": "packages/core/projects/queries.ts:36"
+        },
+        {
+          "name": "privateProjectOverviewOptions",
+          "anchor": "packages/core/projects/queries.ts:43"
+        },
+        {
+          "name": "projectSubscriptionOptions",
+          "anchor": "packages/core/projects/queries.ts:51"
+        }
+      ]
+    },
+    {
+      "path": "packages/core/workspace/queries.ts",
+      "sha256": "1b16ae9e020e75a5a92cebc5270a14c58d97f6b7b0fe033d2f1d2c2d837d093a",
+      "whole_source": true,
+      "reviewed_ranges": [
+        [
+          1,
+          255
+        ]
+      ],
+      "exports": [
+        {
+          "name": "workspaceKeys",
+          "anchor": "packages/core/workspace/queries.ts:5"
+        },
+        {
+          "name": "workspaceListOptions",
+          "anchor": "packages/core/workspace/queries.ts:28"
+        },
+        {
+          "name": "workspaceBySlugOptions",
+          "anchor": "packages/core/workspace/queries.ts:36"
+        },
+        {
+          "name": "memberListOptions",
+          "anchor": "packages/core/workspace/queries.ts:43"
+        },
+        {
+          "name": "agentListOptions",
+          "anchor": "packages/core/workspace/queries.ts:50"
+        },
+        {
+          "name": "agentDetailOptions",
+          "anchor": "packages/core/workspace/queries.ts:69"
+        },
+        {
+          "name": "cacheAgentResponse",
+          "anchor": "packages/core/workspace/queries.ts:83"
+        },
+        {
+          "name": "squadListOptions",
+          "anchor": "packages/core/workspace/queries.ts:102"
+        },
+        {
+          "name": "involvedSquadIdsOptions",
+          "anchor": "packages/core/workspace/queries.ts:114"
+        },
+        {
+          "name": "squadMemberStatusOptions",
+          "anchor": "packages/core/workspace/queries.ts:126"
+        },
+        {
+          "name": "skillListOptions",
+          "anchor": "packages/core/workspace/queries.ts:136"
+        },
+        {
+          "name": "skillDetailOptions",
+          "anchor": "packages/core/workspace/queries.ts:143"
+        },
+        {
+          "name": "skillVersionsOptions",
+          "anchor": "packages/core/workspace/queries.ts:153"
+        },
+        {
+          "name": "skillVersionDetailOptions",
+          "anchor": "packages/core/workspace/queries.ts:162"
+        },
+        {
+          "name": "selectSkillAssignments",
+          "anchor": "packages/core/workspace/queries.ts:187"
+        },
+        {
+          "name": "invitationListOptions",
+          "anchor": "packages/core/workspace/queries.ts:203"
+        },
+        {
+          "name": "shareLinkListOptions",
+          "anchor": "packages/core/workspace/queries.ts:210"
+        },
+        {
+          "name": "myInvitationListOptions",
+          "anchor": "packages/core/workspace/queries.ts:218"
+        },
+        {
+          "name": "assigneeFrequencyOptions",
+          "anchor": "packages/core/workspace/queries.ts:228"
+        },
+        {
+          "name": "workspaceMcpServersOptions",
+          "anchor": "packages/core/workspace/queries.ts:240"
+        },
+        {
+          "name": "agentMcpServersOptions",
+          "anchor": "packages/core/workspace/queries.ts:249"
+        }
+      ]
+    },
+    {
+      "path": "packages/core/issue-statuses/queries.ts",
+      "sha256": "4fdf01e78b7a60b42272518d2feb160ade1fc773f59a75f559f675f03f4a904d",
+      "whole_source": true,
+      "reviewed_ranges": [
+        [
+          1,
+          230
+        ]
+      ],
+      "exports": [
+        {
+          "name": "issueStatusKeys",
+          "anchor": "packages/core/issue-statuses/queries.ts:22"
+        },
+        {
+          "name": "issueStatusListOptions",
+          "anchor": "packages/core/issue-statuses/queries.ts:27"
+        },
+        {
+          "name": "IssueStatusCatalog",
+          "anchor": "packages/core/issue-statuses/queries.ts:50"
+        },
+        {
+          "name": "compareIssueStatusEntries",
+          "anchor": "packages/core/issue-statuses/queries.ts:140"
+        },
+        {
+          "name": "isIssueStatusCategory",
+          "anchor": "packages/core/issue-statuses/queries.ts:156"
+        },
+        {
+          "name": "isBuiltInIssueStatus",
+          "anchor": "packages/core/issue-statuses/queries.ts:160"
+        },
+        {
+          "name": "issueStatusColor",
+          "anchor": "packages/core/issue-statuses/queries.ts:173"
+        },
+        {
+          "name": "buildIssueStatusCatalog",
+          "anchor": "packages/core/issue-statuses/queries.ts:182"
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "source": "packages/core/issues/queries.ts:26",
+      "factory": "issueTasksOptions",
+      "api_method": "listTasksByIssue",
+      "client_anchor": "packages/core/api/client.ts:3111",
+      "kind": "possible-refetch-union",
+      "inventory": [
+        {
+          "id": "client:3116",
+          "method": "GET",
+          "path_expression": "/api/issues/${issueId}/task-runs${query}",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}/task-runs"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/issues/queries.ts:219",
+      "factory": "sourceContextPreviewOptions",
+      "api_method": "getCommentSubIssuePreview",
+      "client_anchor": "packages/core/api/client.ts:1679",
+      "kind": "possible-refetch-union",
+      "inventory": [
+        {
+          "id": "client:1680",
+          "method": "GET",
+          "path_expression": "/api/comments/${anchorCommentId}/sub-issue-preview",
+          "route": {
+            "method": "GET",
+            "path": "/api/comments/{commentId}/sub-issue-preview"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/issues/queries.ts:308",
+      "factory": "issueTableGroupsOptions",
+      "api_method": "listIssueTableGroups",
+      "client_anchor": "packages/core/api/client.ts:1401",
+      "kind": "possible-refetch-union",
+      "inventory": [
+        {
+          "id": "client:1402",
+          "method": "POST",
+          "path_expression": "/api/issues/table/groups",
+          "route": {
+            "method": "POST",
+            "path": "/api/issues/table/groups"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/issues/queries.ts:334",
+      "factory": "issueTableRowPageOptions",
+      "api_method": "listIssueTableRows",
+      "client_anchor": "packages/core/api/client.ts:1415",
+      "kind": "possible-refetch-union",
+      "inventory": [
+        {
+          "id": "client:1416",
+          "method": "POST",
+          "path_expression": "/api/issues/table/rows",
+          "route": {
+            "method": "POST",
+            "path": "/api/issues/table/rows"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/issues/queries.ts:372",
+      "factory": "issueTableFacetsOptions",
+      "api_method": "listIssueTableFacets",
+      "client_anchor": "packages/core/api/client.ts:1429",
+      "kind": "possible-refetch-union",
+      "inventory": [
+        {
+          "id": "client:1430",
+          "method": "POST",
+          "path_expression": "/api/issues/table/facets",
+          "route": {
+            "method": "POST",
+            "path": "/api/issues/table/facets"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/issues/queries.ts:390",
+      "factory": "issueListOptions",
+      "api_method": "listIssues",
+      "client_anchor": "packages/core/api/client.ts:1277",
+      "kind": "possible-refetch-union",
+      "inventory": [
+        {
+          "id": "client:1344",
+          "method": "GET",
+          "path_expression": "/api/issues?${search}",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues"
+          }
+        }
+      ],
+      "parent_branch_review": "queryFn passes empty filter and declared IssueSort. Ordinary typed production callers have no ids; GET. The underlying generic listIssues client separately supports POST for truthy ids and creator fallback, but that is not this factory normal argument contract."
+    },
+    {
+      "source": "packages/core/issues/queries.ts:458",
+      "factory": "projectGanttIssuesOptions",
+      "api_method": "listIssues",
+      "client_anchor": "packages/core/api/client.ts:1277",
+      "kind": "possible-refetch-union",
+      "inventory": [
+        {
+          "id": "client:1344",
+          "method": "GET",
+          "path_expression": "/api/issues?${search}",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues"
+          }
+        }
+      ],
+      "parent_branch_review": "client.listIssues selects POST only for truthy ids, otherwise GET. Gantt passes project/scheduled/assignee/limit/offset and no ids, so GET. Generic list params can reach both; created_by_user_id fallback retries same transport with creator_id."
+    },
+    {
+      "source": "packages/core/issues/queries.ts:495",
+      "factory": "sidebarIssuesOptions",
+      "api_method": "listIssueTableRows",
+      "client_anchor": "packages/core/api/client.ts:1415",
+      "kind": "possible-refetch-union",
+      "inventory": [
+        {
+          "id": "client:1416",
+          "method": "POST",
+          "path_expression": "/api/issues/table/rows",
+          "route": {
+            "method": "POST",
+            "path": "/api/issues/table/rows"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/issues/queries.ts:507",
+      "factory": "issueDetailOptions",
+      "api_method": "getIssue",
+      "client_anchor": "packages/core/api/client.ts:1611",
+      "kind": "possible-refetch-union",
+      "inventory": [
+        {
+          "id": "client:1612",
+          "method": "GET",
+          "path_expression": "/api/issues/${encodeURIComponent(id)}",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/issues/queries.ts:534",
+      "factory": "issueIdentifierOptions",
+      "api_method": "getIssue",
+      "client_anchor": "packages/core/api/client.ts:1611",
+      "kind": "possible-refetch-union",
+      "inventory": [
+        {
+          "id": "client:1612",
+          "method": "GET",
+          "path_expression": "/api/issues/${encodeURIComponent(id)}",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/issues/queries.ts:556",
+      "factory": "childIssueProgressOptions",
+      "api_method": "getChildIssueProgress",
+      "client_anchor": "packages/core/api/client.ts:1814",
+      "kind": "possible-refetch-union",
+      "inventory": [
+        {
+          "id": "client:1817",
+          "method": "GET",
+          "path_expression": "/api/issues/child-progress",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/child-progress"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/issues/queries.ts:571",
+      "factory": "issueDuplicatesOptions",
+      "api_method": "listIssueDuplicates",
+      "client_anchor": "packages/core/api/client.ts:1784",
+      "kind": "possible-refetch-union",
+      "inventory": [
+        {
+          "id": "client:1785",
+          "method": "GET",
+          "path_expression": "/api/issues/${id}/duplicates",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}/duplicates"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/issues/queries.ts:582",
+      "factory": "childIssuesOptions",
+      "api_method": "listChildIssues",
+      "client_anchor": "packages/core/api/client.ts:1794",
+      "kind": "possible-refetch-union",
+      "inventory": [
+        {
+          "id": "client:1795",
+          "method": "GET",
+          "path_expression": "/api/issues/${id}/children",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}/children"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/issues/queries.ts:651",
+      "factory": "childrenByParentsOptions",
+      "api_method": "listChildrenByParents",
+      "client_anchor": "packages/core/api/client.ts:1805",
+      "kind": "possible-refetch-union",
+      "inventory": [
+        {
+          "id": "client:1806",
+          "method": "GET",
+          "path_expression": "/api/issues/children?parent_ids=${parentIds.join(\",\")}",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/children"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/issues/queries.ts:670",
+      "factory": "issueTimelineOptions",
+      "api_method": "listTimeline",
+      "client_anchor": "packages/core/api/client.ts:1925",
+      "kind": "possible-refetch-union",
+      "inventory": [
+        {
+          "id": "client:1926",
+          "method": "GET",
+          "path_expression": "/api/issues/${issueId}/timeline",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}/timeline"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/issues/queries.ts:677",
+      "factory": "issueCommentThreadOptions",
+      "api_method": "listComments",
+      "client_anchor": "packages/core/api/client.ts:1859",
+      "kind": "possible-refetch-union",
+      "inventory": [
+        {
+          "id": "client:1861",
+          "method": "GET",
+          "path_expression": "/api/issues/${issueId}/comments${query}",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}/comments"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/issues/queries.ts:690",
+      "factory": "issueReactionsOptions",
+      "api_method": "getIssue",
+      "client_anchor": "packages/core/api/client.ts:1611",
+      "kind": "possible-refetch-union",
+      "inventory": [
+        {
+          "id": "client:1612",
+          "method": "GET",
+          "path_expression": "/api/issues/${encodeURIComponent(id)}",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/issues/queries.ts:700",
+      "factory": "issueSubscribersOptions",
+      "api_method": "listIssueSubscribers",
+      "client_anchor": "packages/core/api/client.ts:2001",
+      "kind": "possible-refetch-union",
+      "inventory": [
+        {
+          "id": "client:2002",
+          "method": "GET",
+          "path_expression": "/api/issues/${issueId}/subscribers",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}/subscribers"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/issues/queries.ts:710",
+      "factory": "issueEnvironmentsOptions",
+      "api_method": "listIssueEnvironments",
+      "client_anchor": "packages/core/api/client.ts:5535",
+      "kind": "possible-refetch-union",
+      "inventory": [
+        {
+          "id": "client:5536",
+          "method": "GET",
+          "path_expression": "/api/issues/${issueId}/environments",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}/environments"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/issues/queries.ts:726",
+      "factory": "issueUsageOptions",
+      "api_method": "getIssueUsage",
+      "client_anchor": "packages/core/api/client.ts:3128",
+      "kind": "possible-refetch-union",
+      "inventory": [
+        {
+          "id": "client:3129",
+          "method": "GET",
+          "path_expression": "/api/issues/${issueId}/usage",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}/usage"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/issues/queries.ts:737",
+      "factory": "issueAttachmentsOptions",
+      "api_method": "listAttachments",
+      "client_anchor": "packages/core/api/client.ts:4426",
+      "kind": "possible-refetch-union",
+      "inventory": [
+        {
+          "id": "client:4427",
+          "method": "GET",
+          "path_expression": "/api/issues/${issueId}/attachments",
+          "route": {
+            "method": "GET",
+            "path": "/api/issues/{id}/attachments"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/projects/queries.ts:21",
+      "factory": "projectListOptions",
+      "api_method": "listProjects",
+      "client_anchor": "packages/core/api/client.ts:4513",
+      "kind": "possible-refetch-union",
+      "inventory": [
+        {
+          "id": "client:4517",
+          "method": "GET",
+          "path_expression": "/api/projects?${search}",
+          "route": {
+            "method": "GET",
+            "path": "/api/projects"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/projects/queries.ts:29",
+      "factory": "projectDetailOptions",
+      "api_method": "getProject",
+      "client_anchor": "packages/core/api/client.ts:4523",
+      "kind": "possible-refetch-union",
+      "inventory": [
+        {
+          "id": "client:4524",
+          "method": "GET",
+          "path_expression": "/api/projects/${id}",
+          "route": {
+            "method": "GET",
+            "path": "/api/projects/{id}"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/projects/queries.ts:36",
+      "factory": "projectMembersOptions",
+      "api_method": "getProjectMembers",
+      "client_anchor": "packages/core/api/client.ts:4560",
+      "kind": "possible-refetch-union",
+      "inventory": [
+        {
+          "id": "client:4561",
+          "method": "GET",
+          "path_expression": "/api/projects/${id}/members",
+          "route": {
+            "method": "GET",
+            "path": "/api/projects/{id}/members"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/projects/queries.ts:43",
+      "factory": "privateProjectOverviewOptions",
+      "api_method": "listPrivateProjectsForOwner",
+      "client_anchor": "packages/core/api/client.ts:4601",
+      "kind": "possible-refetch-union",
+      "inventory": [
+        {
+          "id": "client:4602",
+          "method": "GET",
+          "path_expression": "/api/projects/private",
+          "route": {
+            "method": "GET",
+            "path": "/api/projects/private"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/projects/queries.ts:51",
+      "factory": "projectSubscriptionOptions",
+      "api_method": "getProjectSubscription",
+      "client_anchor": "packages/core/api/client.ts:4567",
+      "kind": "possible-refetch-union",
+      "inventory": [
+        {
+          "id": "client:4569",
+          "method": "GET",
+          "path_expression": "/api/projects/${id}/subscription",
+          "route": {
+            "method": "GET",
+            "path": "/api/projects/{id}/subscription"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/workspace/queries.ts:28",
+      "factory": "workspaceListOptions",
+      "api_method": "listWorkspaces",
+      "client_anchor": "packages/core/api/client.ts:3390",
+      "kind": "possible-refetch-union",
+      "inventory": [
+        {
+          "id": "client:3391",
+          "method": "GET",
+          "path_expression": "/api/workspaces",
+          "route": {
+            "method": "GET",
+            "path": "/api/workspaces"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/workspace/queries.ts:36",
+      "factory": "workspaceBySlugOptions",
+      "api_method": "listWorkspaces",
+      "client_anchor": "packages/core/api/client.ts:3390",
+      "kind": "possible-refetch-union",
+      "inventory": [
+        {
+          "id": "client:3391",
+          "method": "GET",
+          "path_expression": "/api/workspaces",
+          "route": {
+            "method": "GET",
+            "path": "/api/workspaces"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/workspace/queries.ts:43",
+      "factory": "memberListOptions",
+      "api_method": "listMembers",
+      "client_anchor": "packages/core/api/client.ts:3764",
+      "kind": "possible-refetch-union",
+      "inventory": [
+        {
+          "id": "client:3765",
+          "method": "GET",
+          "path_expression": "/api/workspaces/${workspaceId}/members",
+          "route": {
+            "method": "GET",
+            "path": "/api/workspaces/{id}/members"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/workspace/queries.ts:50",
+      "factory": "agentListOptions",
+      "api_method": "listAgents",
+      "client_anchor": "packages/core/api/client.ts:2062",
+      "kind": "possible-refetch-union",
+      "inventory": [
+        {
+          "id": "client:2066",
+          "method": "GET",
+          "path_expression": "/api/agents?${search}",
+          "route": {
+            "method": "GET",
+            "path": "/api/agents"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/workspace/queries.ts:69",
+      "factory": "agentDetailOptions",
+      "api_method": "getAgent",
+      "client_anchor": "packages/core/api/client.ts:2069",
+      "kind": "possible-refetch-union",
+      "inventory": [
+        {
+          "id": "client:2070",
+          "method": "GET",
+          "path_expression": "/api/agents/${id}",
+          "route": {
+            "method": "GET",
+            "path": "/api/agents/{id}"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/workspace/queries.ts:102",
+      "factory": "squadListOptions",
+      "api_method": "listSquads",
+      "client_anchor": "packages/core/api/client.ts:5202",
+      "kind": "possible-refetch-union",
+      "inventory": [
+        {
+          "id": "client:5203",
+          "method": "GET",
+          "path_expression": "/api/squads",
+          "route": {
+            "method": "GET",
+            "path": "/api/squads"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/workspace/queries.ts:114",
+      "factory": "involvedSquadIdsOptions",
+      "api_method": "listInvolvedSquadIds",
+      "client_anchor": "packages/core/api/client.ts:5209",
+      "kind": "possible-refetch-union",
+      "inventory": [
+        {
+          "id": "client:5210",
+          "method": "GET",
+          "path_expression": "/api/squads/involved",
+          "route": {
+            "method": "GET",
+            "path": "/api/squads/involved"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/workspace/queries.ts:126",
+      "factory": "squadMemberStatusOptions",
+      "api_method": "getSquadMemberStatus",
+      "client_anchor": "packages/core/api/client.ts:5263",
+      "kind": "possible-refetch-union",
+      "inventory": [
+        {
+          "id": "client:5264",
+          "method": "GET",
+          "path_expression": "/api/squads/${squadId}/members/status",
+          "route": {
+            "method": "GET",
+            "path": "/api/squads/{id}/members/status"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/workspace/queries.ts:136",
+      "factory": "skillListOptions",
+      "api_method": "listSkills",
+      "client_anchor": "packages/core/api/client.ts:3872",
+      "kind": "possible-refetch-union",
+      "inventory": [
+        {
+          "id": "client:3876",
+          "method": "GET",
+          "path_expression": "/api/skills",
+          "route": {
+            "method": "GET",
+            "path": "/api/skills"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/workspace/queries.ts:143",
+      "factory": "skillDetailOptions",
+      "api_method": "getSkill",
+      "client_anchor": "packages/core/api/client.ts:3890",
+      "kind": "possible-refetch-union",
+      "inventory": [
+        {
+          "id": "client:3891",
+          "method": "GET",
+          "path_expression": "/api/skills/${id}",
+          "route": {
+            "method": "GET",
+            "path": "/api/skills/{id}"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/workspace/queries.ts:153",
+      "factory": "skillVersionsOptions",
+      "api_method": "listSkillVersions",
+      "client_anchor": "packages/core/api/client.ts:3966",
+      "kind": "possible-refetch-union",
+      "inventory": [
+        {
+          "id": "client:3967",
+          "method": "GET",
+          "path_expression": "/api/skills/${skillId}/versions",
+          "route": {
+            "method": "GET",
+            "path": "/api/skills/{id}/versions"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/workspace/queries.ts:162",
+      "factory": "skillVersionDetailOptions",
+      "api_method": "getSkillVersion",
+      "client_anchor": "packages/core/api/client.ts:3976",
+      "kind": "possible-refetch-union",
+      "inventory": [
+        {
+          "id": "client:3977",
+          "method": "GET",
+          "path_expression": "/api/skills/${skillId}/versions/${version}",
+          "route": {
+            "method": "GET",
+            "path": "/api/skills/{id}/versions/{version}"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/workspace/queries.ts:203",
+      "factory": "invitationListOptions",
+      "api_method": "listWorkspaceInvitations",
+      "client_anchor": "packages/core/api/client.ts:3795",
+      "kind": "possible-refetch-union",
+      "inventory": [
+        {
+          "id": "client:3796",
+          "method": "GET",
+          "path_expression": "/api/workspaces/${workspaceId}/invitations",
+          "route": {
+            "method": "GET",
+            "path": "/api/workspaces/{id}/invitations"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/workspace/queries.ts:210",
+      "factory": "shareLinkListOptions",
+      "api_method": "listShareLinks",
+      "client_anchor": "packages/core/api/client.ts:3835",
+      "kind": "possible-refetch-union",
+      "inventory": [
+        {
+          "id": "client:3836",
+          "method": "GET",
+          "path_expression": "/api/workspaces/${workspaceId}/share-links",
+          "route": {
+            "method": "GET",
+            "path": "/api/workspaces/{id}/share-links"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/workspace/queries.ts:218",
+      "factory": "myInvitationListOptions",
+      "api_method": "listMyInvitations",
+      "client_anchor": "packages/core/api/client.ts:3805",
+      "kind": "possible-refetch-union",
+      "inventory": [
+        {
+          "id": "client:3806",
+          "method": "GET",
+          "path_expression": "/api/invitations",
+          "route": {
+            "method": "GET",
+            "path": "/api/invitations"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/workspace/queries.ts:228",
+      "factory": "assigneeFrequencyOptions",
+      "api_method": "getAssigneeFrequency",
+      "client_anchor": "packages/core/api/client.ts:1934",
+      "kind": "possible-refetch-union",
+      "inventory": [
+        {
+          "id": "client:1935",
+          "method": "GET",
+          "path_expression": "/api/assignee-frequency",
+          "route": {
+            "method": "GET",
+            "path": "/api/assignee-frequency"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/workspace/queries.ts:240",
+      "factory": "workspaceMcpServersOptions",
+      "api_method": "listWorkspaceMcpServers",
+      "client_anchor": "packages/core/api/client.ts:3440",
+      "kind": "possible-refetch-union",
+      "inventory": [
+        {
+          "id": "client:3441",
+          "method": "GET",
+          "path_expression": "/api/workspaces/${workspaceId}/mcp-servers",
+          "route": {
+            "method": "GET",
+            "path": "/api/workspaces/{id}/mcp-servers"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/workspace/queries.ts:249",
+      "factory": "agentMcpServersOptions",
+      "api_method": "listAgentMcpServers",
+      "client_anchor": "packages/core/api/client.ts:3492",
+      "kind": "possible-refetch-union",
+      "inventory": [
+        {
+          "id": "client:3493",
+          "method": "GET",
+          "path_expression": "/api/agents/${agentId}/mcp-servers",
+          "route": {
+            "method": "GET",
+            "path": "/api/agents/{id}/mcp-servers"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/issue-statuses/queries.ts:27",
+      "factory": "issueStatusListOptions",
+      "api_method": "listIssueStatuses",
+      "client_anchor": "packages/core/api/client.ts:4819",
+      "kind": "possible-refetch-union",
+      "inventory": [
+        {
+          "id": "client:4821",
+          "method": "GET",
+          "path_expression": "/api/issue-statuses${query}",
+          "route": {
+            "method": "GET",
+            "path": "/api/issue-statuses"
+          }
+        }
+      ]
+    }
+  ],
+  "factories": [
+    {
+      "name": "issueTasksOptions",
+      "source": "packages/core/issues/queries.ts:26",
+      "query_key_expression": "view === \"history\" ? [...key, \"history\"] : key",
+      "api_methods": [
+        "listTasksByIssue"
+      ],
+      "executable_factory_source": "export function issueTasksOptions(issueId: string, includeDescendants = false, view: \"timeline\" | \"history\" = \"timeline\") {\n  const key = includeDescendants ? issueKeys.subtreeTasks(issueId) : issueKeys.tasks(issueId);\n  return queryOptions({\n    queryKey: view === \"history\" ? [...key, \"history\"] : key,\n    queryFn: () => view === \"timeline\"\n      ? api.listTasksByIssue(issueId, includeDescendants, { view })\n      : api.listTasksByIssue(issueId, includeDescendants),\n    enabled: !!issueId,\n    staleTime: 30_000,\n    refetchOnWindowFocus: true,\n  });\n}\n\nexport interface IssueSortParam {\n  sort_by?: ListIssuesParams[\"sort_by\"];\n  sort_direction?: ListIssuesParams[\"sort_direction\"];\n  date_field?: ListIssuesParams[\"date_field\"];\n  date_start?: ListIssuesParams[\"date_start\"];\n  date_end?: ListIssuesParams[\"date_end\"];\n  /** Server-side custom-property filter (definition id → accepted values).\n   *  Lives in the sort/window bag so every list surface, query key, and\n   *  load-more page carries it automatically. */\n  properties?: ListIssuesParams[\"properties\"];\n}\n\nexport const issueKeys = {\n  all: (wsId: string) => [\"issues\", wsId] as const,\n  /** PREFIX for invalidation — no sort. */\n  list: (wsId: string) => [...issueKeys.all(wsId), \"list\"] as const,\n  /** FULL KEY for queryOptions — includes sort. */\n  listSorted: (wsId: string, sort?: IssueSortParam) =>\n    [...issueKeys.list(wsId), sort ?? {}] as const,\n  flatAll: (wsId: string) => [...issueKeys.all(wsId), \"flat\"] as const,\n  flat: (\n    wsId: string,\n    scope: string,\n    filter: IssueFlatFilter,\n    sort?: IssueSortParam,\n  ) => [...issueKeys.flatAll(wsId), scope, filter, sort ?? {}] as const,\n  flatExport: (\n    wsId: string,\n    scope: string,\n    filter: IssueFlatFilter,\n    sort?: IssueSortParam,\n  ) => [...issueKeys.flatAll(wsId), \"export\", scope, filter, sort ?? {}] as const,\n  tableAll: (wsId: string) => [...issueKeys.all(wsId), \"table-query\"] as const,\n  tableGroups: (\n    wsId: string,\n    query: IssueTableQuerySpec,\n    group: IssueTableGroupsRequest[\"group\"],\n  ) => [...issueKeys.tableAll(wsId), \"groups\", query, group] as const,\n  tableFacets: (\n    wsId: string,\n    request: IssueTableFacetsRequest,\n  ) => [...issueKeys.tableAll(wsId), \"facets\", request] as const,\n  tableRows: (\n    wsId: string,\n    query: IssueTableQuerySpec,\n    group: IssueTableGroupSpec,\n    groupKey: string | null,\n    hierarchy: boolean,\n    parentId: string | null,\n  ) => [\n    ...issueKeys.tableAll(wsId),\n    \"rows\",\n    query,\n    group,\n    groupKey,\n    { hierarchy, parentId },\n  ] as const,\n  assigneeGroupsAll: (wsId: string) =>\n    [...issueKeys.all(wsId), \"assignee-groups\"] as const,\n  assigneeGroups: (wsId: string, filter: AssigneeGroupedIssuesFilter) =>\n    [...issueKeys.assigneeGroupsAll(wsId), filter] as const,\n  /** All \"my issues\" queries — use for bulk invalidation. */\n  myAll: (wsId: string) => [...issueKeys.all(wsId), \"my\"] as const,\n  /** PREFIX for per-scope invalidation — no sort. */\n  myList: (wsId: string, scope: string, filter: MyIssuesFilter) =>\n    [...issueKeys.myAll(wsId), scope, filter] as const,\n  /** FULL KEY for queryOptions — includes sort. */\n  myListSorted: (wsId: string, scope: string, filter: MyIssuesFilter, sort?: IssueSortParam) =>\n    [...issueKeys.myList(wsId, scope, filter), sort ?? {}] as const,\n  myAssigneeGroupsAll: (wsId: string) =>\n    [...issueKeys.myAll(wsId), \"assignee-groups\"] as const,\n  myAssigneeGroups: (\n    wsId: string,\n    scope: string,\n    filter: AssigneeGroupedIssuesFilter,\n  ) => [...issueKeys.myAssigneeGroupsAll(wsId), scope, filter] as const,\n  /** All Project Gantt queries — prefix-match key for cross-project invalidation. */\n  projectGanttAll: (wsId: string) =>\n    [...issueKeys.all(wsId), \"project-gantt\"] as const,\n  /**\n   * Per-project Gantt issue list (scheduled-only). Uses its own cache key\n   * rather than reusing the bucketed `myList` cache so WS handlers and\n   * cache helpers don't have to special-case a non-bucketed shape under\n   * the `my` prefix.\n   */\n  projectGantt: (\n    wsId: string,\n    projectId: string,\n    assigneeTypes?: IssueAssigneeType[],\n  ) =>\n    [\n      ...issueKeys.projectGanttAll(wsId),\n      projectId,\n      assigneeTypes ?? null,\n    ] as const,\n  /** Every sidebar issue list — prefix for cross-list refresh. */\n  sidebarAll: (wsId: string) => [...issueKeys.all(wsId), \"sidebar\"] as const,\n  /**\n   * One expanded sidebar row's issues. `source` (`project:{id}` / `view:{id}` / `builtin:{key}`)\n   * sits at a fixed index so realtime refresh can target a project's lists.\n   */\n  sidebar: (wsId: string, source: string, request: SidebarIssuesRequest, limit: number) =>\n    [...issueKeys.sidebarAll(wsId), source, request, limit] as const,\n  detail: (wsId: string, id: string) =>\n    [...issueKeys.all(wsId), \"detail\", id] as const,\n  /** Resolve a bare issue identifier (e.g. \"MUL-123\") to an issue. */\n  identifier: (wsId: string, identifier: string) =>\n    [...issueKeys.all(wsId), \"identifier\", identifier] as const,\n  /** Prefix for every per-issue duplicate-relation query in a workspace. */\n  duplicatesAll: (wsId: string) =>\n    [...issueKeys.all(wsId), \"duplicates\"] as const,\n  duplicates: (wsId: string, id: string) =>\n    [...issueKeys.duplicatesAll(wsId), id] as const,\n  /** Prefix for every per-parent children query in a workspace. */\n  childrenAll: (wsId: string) =>\n    [...issueKeys.all(wsId), \"children\"] as const,\n  children: (wsId: string, id: string) =>\n    [...issueKeys.childrenAll(wsId), id] as const,\n  /** Prefix for invalidating all batched-children queries in a workspace. */\n  childrenByParentsAll: (wsId: string) =>\n    [...issueKeys.all(wsId), \"children-by-parents\"] as const,\n  /** Full key — includes sorted parent ids for cache stability. */\n  childrenByParents: (wsId: string, parentIds: readonly string[]) =>\n    [...issueKeys.childrenByParentsAll(wsId), parentIds] as const,\n  childProgress: (wsId: string) =>\n    [...issueKeys.all(wsId), \"child-progress\"] as const,\n  /** Prefix for every per-issue environments query in a workspace. */\n  environmentsAll: (wsId: string) =>\n    [...issueKeys.all(wsId), \"environments\"] as const,\n  environments: (wsId: string, issueId: string) =>\n    [...issueKeys.environmentsAll(wsId), issueId] as const,\n  /** Prefix-match keys for invalidating the per-issue caches below across\n   *  all issues. These keys carry no wsId, so `issueKeys.all(wsId)` does NOT\n   *  cover them — WS reconnect recovery must invalidate these `*All`\n   *  prefixes explicitly, or missed events leave them stale forever under\n   *  the staleTime: Infinity default (#3953). */\n  timelineAll: () => [\"issues\", \"timeline\"] as const,\n  /** Full-issue timeline (single TanStack Query, no cursor). */\n  timeline: (issueId: string) =>\n    [...issueKeys.timelineAll(), issueId] as const,\n  commentThread: (issueId: string, commentId: string) =>\n    [...issueKeys.timeline(issueId), \"thread\", commentId] as const,\n  /** Prefix across all issues — WS task lifecycle events invalidate here so\n   *  an open composer's trigger preview refreshes when an agent's queue\n   *  state changes (the dedup guard makes the answer queue-dependent). */\n  commentTriggerPreviewAll: () => [\"issues\", \"comment-trigger-preview\"] as const,\n  /** PREFIX for invalidation — the composer hook appends parent + content signature. */\n  commentTriggerPreview: (issueId: string) =>\n    [...issueKeys.commentTriggerPreviewAll(), issueId] as const,\n  /** Prefix across all issue-trigger previews (assign/status/create/batch).\n   *  WS task lifecycle events invalidate here so the answer revalidates when an\n   *  agent's queue state changes (the status source's pending dedup makes it\n   *  queue-dependent, mirroring commentTriggerPreviewAll). */\n  issueTriggerPreviewAll: () => [\"issues\", \"issue-trigger-preview\"] as const,\n  /** PREFIX — the picker hook appends a signature of the prospective write. */\n  issueTriggerPreview: (signature: string) =>\n    [...issueKeys.issueTriggerPreviewAll(), signature] as const,\n  reactionsAll: () => [\"issues\", \"reactions\"] as const,\n  reactions: (issueId: string) =>\n    [...issueKeys.reactionsAll(), issueId] as const,\n  subscribersAll: () => [\"issues\", \"subscribers\"] as const,\n  subscribers: (issueId: string) =>\n    [...issueKeys.subscribersAll(), issueId] as const,\n  usageAll: () => [\"issues\", \"usage\"] as const,\n  usage: (issueId: string) => [...issueKeys.usageAll(), issueId] as const,\n  attachmentsAll: () => [\"issues\", \"attachments\"] as const,\n  /** Issue-level attachments — used by the description editor so its\n   *  inline file-card / image NodeViews can re-sign download URLs at\n   *  click time. */\n  attachments: (issueId: string) =>\n    [...issueKeys.attachmentsAll(), issueId] as const,\n  /** Prefix for reconnects and task events without an issue scope. */\n  tasksAll: () => [\"issues\", \"tasks\"] as const,\n  /** Per-issue task list (issue-detail Execution log section). */\n  tasks: (issueId: string) => [...issueKeys.tasksAll(), issueId] as const,\n  subtreeTasks: (issueId: string) => [...issueKeys.tasks(issueId), \"subtree\"] as const,\n  sourceContextPreview: (wsId: string, anchorCommentId: string) =>\n    [\"source-context\", \"preview\", wsId, anchorCommentId] as const,\n};\n\n",
+      "initialData": "absent"
+    },
+    {
+      "name": "sourceContextPreviewOptions",
+      "source": "packages/core/issues/queries.ts:219",
+      "query_key_expression": "issueKeys.sourceContextPreview(wsId, anchorCommentId ?? \"\")",
+      "api_methods": [
+        "getCommentSubIssuePreview"
+      ],
+      "executable_factory_source": "export function sourceContextPreviewOptions(\n  wsId: string,\n  anchorCommentId: string | null | undefined,\n) {\n  return queryOptions({\n    queryKey: issueKeys.sourceContextPreview(wsId, anchorCommentId ?? \"\"),\n    queryFn: () => api.getCommentSubIssuePreview(anchorCommentId!),\n    enabled: !!anchorCommentId,\n    staleTime: 0,\n  });\n}\n\nexport type MyIssuesFilter = Pick<\n  ListIssuesParams,\n  | \"assignee_id\"\n  | \"assignee_ids\"\n  | \"assignee_types\"\n  | \"creator_id\"\n  | \"created_by_user_id\"\n  | \"project_id\"\n  | \"involves_user_id\"\n>;\n\n/** Server-side contract for the flat table window. These facets must travel\n * with every offset page (and live in the query key); post-filtering a loaded\n * page can silently omit matching issues after the current offset. */\nexport type IssueFlatFilter = MyIssuesFilter &\n  Pick<\n    ListIssuesParams,\n    | \"q\"\n    | \"statuses\"\n    | \"priorities\"\n    | \"assignee_filters\"\n    | \"include_no_assignee\"\n    | \"creator_filters\"\n    | \"project_ids\"\n    | \"include_no_project\"\n    | \"label_ids\"\n    | \"top_level_only\"\n    | \"ids\"\n  >;\n\nexport type AssigneeGroupedIssuesFilter = Omit<\n  ListGroupedIssuesParams,\n  \"group_by\" | \"limit\" | \"offset\" | \"group_assignee_type\" | \"group_assignee_id\"\n>;\n\n/** Size of the issue list's first page, all categories together. */\nexport const ISSUE_PAGE_SIZE = 50;\n\n/**\n * CATEGORIES fetched and paginated into the list/board cache — all four,\n * `closed` included. It lives in the cache even when hidden by the surface's\n * display preferences; there is no separate\n * \"visible board\" subset. This constant governs fetch/cache membership.\n *\n * These are internal legacy cache buckets, not user-facing columns.\n * Board/List use independently paged exact-key table branches; Swimlane uses\n * compound status branches. Never derive visible column identity from this cache.\n */\nexport const PAGINATED_CATEGORIES: readonly IssueStatusCategory[] = ALL_STATUSES;\n\n/** Flatten a bucketed response to a single Issue[] for consumers that want the whole list. */\n",
+      "initialData": "absent"
+    },
+    {
+      "name": "issueTableGroupsOptions",
+      "source": "packages/core/issues/queries.ts:308",
+      "query_key_expression": "issueKeys.tableGroups(wsId, query, group)",
+      "api_methods": [
+        "listIssueTableGroups"
+      ],
+      "executable_factory_source": "export function issueTableGroupsOptions(\n  wsId: string,\n  query: IssueTableQuerySpec,\n  group: IssueTableGroupsRequest[\"group\"],\n) {\n  return infiniteQueryOptions({\n    queryKey: issueKeys.tableGroups(wsId, query, group),\n    initialPageParam: null as string | null,\n    queryFn: ({ pageParam }) =>\n      api.listIssueTableGroups({\n        query,\n        group,\n        page: { limit: 100, cursor: pageParam },\n    }),\n    getNextPageParam: (lastPage) => lastPage.next_cursor ?? undefined,\n    placeholderData: keepPreviousData,\n    retry: false,\n  });\n}\n\n/** One independently-addressable Table branch page.\n *\n * Table keeps every cursor page under its own query key so a refreshed head\n * can detach stale tail cursors before their responses land. Keep the request,\n * key shape, transition placeholder, and retry policy together here — the\n * dynamic branch graph in views should not duplicate this API contract. */\n",
+      "initialData": "absent"
+    },
+    {
+      "name": "issueTableRowPageOptions",
+      "source": "packages/core/issues/queries.ts:334",
+      "query_key_expression": "[\n      ...issueKeys.tableRows(\n        wsId,\n        request.query,\n        request.group,\n        request.group_key,\n        request.hierarchy.enabled,\n        request.parent_id,\n      ),\n      \"page\",\n      cursor,\n    ] as const",
+      "api_methods": [
+        "listIssueTableRows"
+      ],
+      "executable_factory_source": "export function issueTableRowPageOptions(\n  wsId: string,\n  request: IssueTableRowsRequest,\n) {\n  const cursor = request.page?.cursor ?? null;\n  return queryOptions({\n    queryKey: [\n      ...issueKeys.tableRows(\n        wsId,\n        request.query,\n        request.group,\n        request.group_key,\n        request.hierarchy.enabled,\n        request.parent_id,\n      ),\n      \"page\",\n      cursor,\n    ] as const,\n    queryFn: () => api.listIssueTableRows(request),\n    placeholderData: keepPreviousData,\n    retry: false,\n    // Dynamic useQueries observers detach/reinstall as sibling branches enter\n    // and leave the viewport. Keep an errored page errored until the user hits\n    // Retry — but still let a successful-but-invalidated page refetch on\n    // reattach, so a row page that gets WS-invalidated while its observer is\n    // detached doesn't stay stranded stale under the global `staleTime: Infinity`\n    // default (correct count, missing issue).\n    //\n    // Both guards are needed: `retryOnMount` covers a first-load error (no\n    // data), while the `refetchOnMount` guard covers a background-refetch error\n    // on a page that still holds data — TanStack flags such a page\n    // `isInvalidated`, so a plain `refetchOnMount: true` would re-fire the\n    // failing request on every reattach instead of waiting for explicit Retry.\n    retryOnMount: false,\n    refetchOnMount: (query) => query.state.status !== \"error\",\n  });\n}\n\n",
+      "initialData": "absent"
+    },
+    {
+      "name": "issueTableFacetsOptions",
+      "source": "packages/core/issues/queries.ts:372",
+      "query_key_expression": "issueKeys.tableFacets(wsId, request)",
+      "api_methods": [
+        "listIssueTableFacets"
+      ],
+      "executable_factory_source": "export function issueTableFacetsOptions(\n  wsId: string,\n  request: IssueTableFacetsRequest,\n) {\n  return queryOptions({\n    queryKey: issueKeys.tableFacets(wsId, request),\n    queryFn: () => api.listIssueTableFacets(request),\n  });\n}\n\n/**\n * CACHE SHAPE NOTE: The raw cache stores {@link ListIssuesCache} (buckets keyed\n * by status, each with `{ issues, total }`), and `select` flattens it to\n * `Issue[]` for consumers. Mutations and ws-updaters must use\n * `setQueryData<ListIssuesCache>(...)` and preserve the byStatus shape.\n *\n * Fetches the first page in one request and buckets it by category.\n */\n",
+      "initialData": "absent"
+    },
+    {
+      "name": "issueListOptions",
+      "source": "packages/core/issues/queries.ts:390",
+      "query_key_expression": "issueKeys.listSorted(wsId, sort)",
+      "api_methods": [
+        "listIssues"
+      ],
+      "executable_factory_source": "export function issueListOptions(wsId: string, sort?: IssueSortParam) {\n  return queryOptions({\n    queryKey: issueKeys.listSorted(wsId, sort),\n    queryFn: () => fetchFirstPages({}, sort),\n    select: flattenIssueBuckets,\n    placeholderData: keepPreviousData,\n  });\n}\n\n/**\n * Page size for the scheduled-issue fetch. The Gantt view always pulls every\n * scheduled issue (no client pagination), so this is just the chunk size we\n * use to walk the server's `(limit, offset)` window until we hit `total`.\n *\n * Must not exceed the server's `ListIssues` page-size cap (100): the server\n * silently clamps larger values, and a clamped page would otherwise look like\n * a short final page.\n */\nexport const PROJECT_GANTT_PAGE_LIMIT = 100;\n\n/**\n * Paranoia cap on the loop in {@link fetchProjectGanttIssues}. Real projects\n * shouldn't come close to this — a single project carrying 50k scheduled\n * issues is already a product problem, not a Gantt-rendering one — but the\n * guard prevents a buggy server `total` from spinning the loop forever.\n */\nexport const PROJECT_GANTT_MAX_ISSUES = 10_000;\n\n",
+      "initialData": "absent"
+    },
+    {
+      "name": "projectGanttIssuesOptions",
+      "source": "packages/core/issues/queries.ts:458",
+      "query_key_expression": "issueKeys.projectGantt(wsId, projectId, assigneeTypes)",
+      "api_methods": [
+        "listIssues"
+      ],
+      "executable_factory_source": "export function projectGanttIssuesOptions(\n  wsId: string,\n  projectId: string,\n  // The page's assignee-type tab narrows the Gantt exactly like every\n  // other mode — same scope, same single mapping upstream.\n  assigneeTypes?: IssueAssigneeType[],\n) {\n  return queryOptions({\n    queryKey: issueKeys.projectGantt(wsId, projectId, assigneeTypes),\n    queryFn: () => fetchProjectGanttIssues(projectId, assigneeTypes),\n  });\n}\n\n/** The table endpoint caps a page here, so a longer sidebar list is fetched in pages. */\nconst SIDEBAR_MAX_PAGE = 100;\n\n",
+      "initialData": "absent"
+    },
+    {
+      "name": "sidebarIssuesOptions",
+      "source": "packages/core/issues/queries.ts:495",
+      "query_key_expression": "issueKeys.sidebar(wsId, source, request, limit)",
+      "api_methods": [
+        "listIssueTableRows"
+      ],
+      "executable_factory_source": "export function sidebarIssuesOptions(\n  wsId: string,\n  source: string,\n  request: SidebarIssuesRequest,\n  limit: number,\n) {\n  return queryOptions({\n    queryKey: issueKeys.sidebar(wsId, source, request, limit),\n    queryFn: () => listSidebarTableIssues(request.table, limit),\n  });\n}\n\n",
+      "initialData": "absent"
+    },
+    {
+      "name": "issueDetailOptions",
+      "source": "packages/core/issues/queries.ts:507",
+      "query_key_expression": "issueKeys.detail(wsId, id)",
+      "api_methods": [
+        "getIssue"
+      ],
+      "executable_factory_source": "export function issueDetailOptions(wsId: string, id: string) {\n  return queryOptions({\n    queryKey: issueKeys.detail(wsId, id),\n    queryFn: () => api.getIssue(id),\n  });\n}\n\n/**\n * Resolve a bare issue identifier (\"MUL-123\") to its issue, or `null`.\n *\n * Backs the Linear-style autolink. This is an EXACT lookup, so it goes to\n * `GET /api/issues/{identifier}` — the server parses `PREFIX-NUMBER`, checks\n * the prefix against the workspace's own `issue_prefix`, and reads the issue\n * through the unique `(workspace_id, number)` index. A non-existent or\n * wrong-prefix identifier 404s, which maps to `null` here and renders as\n * plain text — the same contract the previous implementation had.\n *\n * It deliberately does NOT use `/api/issues/search`: that endpoint runs the\n * workspace-wide full-text query (title/description/comment `LIKE`, ranking,\n * and snippet subqueries) which is orders of magnitude more expensive than a\n * point read, and autolink resolution was the dominant caller of it\n * (MUL-6268).\n *\n * Server state → TanStack Query; the key includes `wsId` and the identifier,\n * so identical identifiers across the app share one request. Caller gates\n * `enabled` (identifier shape + workspace prefix).\n */\n",
+      "initialData": "absent"
+    },
+    {
+      "name": "issueIdentifierOptions",
+      "source": "packages/core/issues/queries.ts:534",
+      "query_key_expression": "workspaceKeys.list()",
+      "api_methods": [
+        "getIssue"
+      ],
+      "executable_factory_source": "export function issueIdentifierOptions(wsId: string, identifier: string) {\n  return queryOptions({\n    queryKey: issueKeys.identifier(wsId, identifier),\n    // Keep this small, cacheable lookup alive when the last mention unmounts.\n    // A remount can then share its request instead of aborting and restarting it.\n    queryFn: async () => {\n      try {\n        return await api.getIssue(identifier);\n      } catch (err) {\n        // Unknown identifier / wrong workspace prefix → render as plain text.\n        // Any other failure (401/5xx) must keep propagating so the query\n        // can retry instead of being cached as \"no such issue\".\n        if (err instanceof ApiError && err.status === 404) return null;\n        throw err;\n      }\n    },\n    // Identifier→issue mapping is effectively immutable; avoid refetch churn\n    // when the same key renders across many comments/messages.\n    staleTime: 5 * 60_000,\n  });\n}\n\n",
+      "initialData": "absent"
+    },
+    {
+      "name": "childIssueProgressOptions",
+      "source": "packages/core/issues/queries.ts:556",
+      "query_key_expression": "issueKeys.childProgress(wsId)",
+      "api_methods": [
+        "getChildIssueProgress"
+      ],
+      "executable_factory_source": "export function childIssueProgressOptions(wsId: string) {\n  return queryOptions({\n    queryKey: issueKeys.childProgress(wsId),\n    queryFn: () => api.getChildIssueProgress(),\n    select: (data) => {\n      const map = new Map<string, { done: number; total: number }>();\n      for (const entry of data.progress) {\n        map.set(entry.parent_issue_id, { done: entry.done, total: entry.total });\n      }\n      return map;\n    },\n  });\n}\n\n/** Both sides of an issue's duplicate relation: its original and its duplicates. */\n",
+      "initialData": "absent"
+    },
+    {
+      "name": "issueDuplicatesOptions",
+      "source": "packages/core/issues/queries.ts:571",
+      "query_key_expression": "issueKeys.duplicates(wsId, id)",
+      "api_methods": [
+        "listIssueDuplicates"
+      ],
+      "executable_factory_source": "export function issueDuplicatesOptions(wsId: string, id: string) {\n  return queryOptions({\n    queryKey: issueKeys.duplicates(wsId, id),\n    queryFn: () => api.listIssueDuplicates(id),\n    // Same reason as childIssuesOptions: a mark written while this workspace\n    // is not the active realtime subscription would otherwise leave the\n    // Infinity-stale snapshot wrong when the issue is opened again.\n    refetchOnMount: \"always\",\n  });\n}\n\n",
+      "initialData": "absent"
+    },
+    {
+      "name": "childIssuesOptions",
+      "source": "packages/core/issues/queries.ts:582",
+      "query_key_expression": "issueKeys.children(wsId, id)",
+      "api_methods": [
+        "listChildIssues"
+      ],
+      "executable_factory_source": "export function childIssuesOptions(wsId: string, id: string) {\n  return queryOptions({\n    queryKey: issueKeys.children(wsId, id),\n    queryFn: () => api.listChildIssues(id).then((r) => r.issues),\n    // Child creation can happen while this workspace is not the active\n    // realtime subscription (for example, an agent creates it while a\n    // desktop tab is showing another workspace). The global Infinity\n    // staleTime would otherwise reuse an incomplete children snapshot when\n    // the parent is opened again, with no later event guaranteed to heal it.\n    refetchOnMount: \"always\",\n  });\n}\n\n/**\n * Server cap on parent_ids per `GET /api/issues/children` request — must\n * match `listChildrenByParentsLimit` in server/go/internal/handler/issue.go.\n * Exceeding it returns 400, so the client chunks larger requests.\n */\nexport const CHILDREN_BY_PARENTS_CHUNK_SIZE = 200;\n\n/**\n * Batched variant of {@link childIssuesOptions}: fetches children for all\n * given parents in `GET /api/issues/children?parent_ids=…` requests, chunked\n * to {@link CHILDREN_BY_PARENTS_CHUNK_SIZE} parents each. The queryFn also\n * hydrates each parent's per-parent issueKeys.children cache so other\n * surfaces (issue-detail sub-issues panel, set-parent modal) hit the primed\n * cache instead of re-fetching. Hydration happens in queryFn (not a\n * useEffect) to avoid the setQueryData → re-render → effect loop.\n *\n * Used by SwimLaneView to resolve parent lanes without an N-request fan-out.\n * parentIds must be sorted + deduplicated by the caller for a stable cache key.\n */\n",
+      "initialData": "absent"
+    },
+    {
+      "name": "childrenByParentsOptions",
+      "source": "packages/core/issues/queries.ts:651",
+      "query_key_expression": "issueKeys.childrenByParents(wsId, parentIds)",
+      "api_methods": [
+        "listChildrenByParents"
+      ],
+      "executable_factory_source": "export function childrenByParentsOptions(\n  wsId: string,\n  parentIds: readonly string[],\n  qc: QueryClient,\n) {\n  return queryOptions({\n    queryKey: issueKeys.childrenByParents(wsId, parentIds),\n    queryFn: () => fetchAndHydrateChildrenByParents(qc, wsId, parentIds),\n    enabled: parentIds.length > 0,\n  });\n}\n\n/**\n * Single-fetch timeline options. The endpoint returns the full ordered set of\n * comments + activities for an issue (server caps at 2000 as a safety net).\n * Cursor pagination was removed in #1929 — at observed data sizes (p99 ~30\n * entries per issue) it added complexity without a UX win and broke reply\n * threads at page boundaries.\n */\n",
+      "initialData": "absent"
+    },
+    {
+      "name": "issueTimelineOptions",
+      "source": "packages/core/issues/queries.ts:670",
+      "query_key_expression": "issueKeys.timeline(issueId)",
+      "api_methods": [
+        "listTimeline"
+      ],
+      "executable_factory_source": "export function issueTimelineOptions(issueId: string) {\n  return queryOptions({\n    queryKey: issueKeys.timeline(issueId),\n    queryFn: () => api.listTimeline(issueId),\n  });\n}\n\n",
+      "initialData": "absent"
+    },
+    {
+      "name": "issueCommentThreadOptions",
+      "source": "packages/core/issues/queries.ts:677",
+      "query_key_expression": "issueKeys.commentThread(issueId, commentId)",
+      "api_methods": [
+        "listComments"
+      ],
+      "executable_factory_source": "export function issueCommentThreadOptions(issueId: string, commentId: string) {\n  return queryOptions({\n    queryKey: issueKeys.commentThread(issueId, commentId),\n    queryFn: async () => {\n      const comments = await api.listComments(issueId, { thread: commentId });\n      if (!comments.some((comment) => comment.id === commentId)) {\n        throw new Error(\"Comment not found in thread\");\n      }\n      return comments;\n    },\n  });\n}\n\n",
+      "initialData": "absent"
+    },
+    {
+      "name": "issueReactionsOptions",
+      "source": "packages/core/issues/queries.ts:690",
+      "query_key_expression": "issueKeys.reactions(issueId)",
+      "api_methods": [
+        "getIssue"
+      ],
+      "executable_factory_source": "export function issueReactionsOptions(issueId: string) {\n  return queryOptions({\n    queryKey: issueKeys.reactions(issueId),\n    queryFn: async () => {\n      const issue = await api.getIssue(issueId);\n      return issue.reactions ?? [];\n    },\n  });\n}\n\n",
+      "initialData": "absent"
+    },
+    {
+      "name": "issueSubscribersOptions",
+      "source": "packages/core/issues/queries.ts:700",
+      "query_key_expression": "issueKeys.subscribers(issueId)",
+      "api_methods": [
+        "listIssueSubscribers"
+      ],
+      "executable_factory_source": "export function issueSubscribersOptions(issueId: string) {\n  return queryOptions({\n    queryKey: issueKeys.subscribers(issueId),\n    queryFn: () => api.listIssueSubscribers(issueId),\n  });\n}\n\n// Reports arrive over realtime; the interval only re-derives \"unreachable\"\n// once a daemon goes quiet, and a command expiring when its machine never\n// answers, which no event announces.\n",
+      "initialData": "absent"
+    },
+    {
+      "name": "issueEnvironmentsOptions",
+      "source": "packages/core/issues/queries.ts:710",
+      "query_key_expression": "issueKeys.environments(wsId, issueId)",
+      "api_methods": [
+        "listIssueEnvironments"
+      ],
+      "executable_factory_source": "export function issueEnvironmentsOptions(wsId: string, issueId: string) {\n  return queryOptions({\n    queryKey: issueKeys.environments(wsId, issueId),\n    queryFn: () => api.listIssueEnvironments(issueId),\n    enabled: !!wsId && !!issueId,\n    refetchInterval: (query) => {\n      const data = query.state.data;\n      const pending = !!data && (\n        data.pending_starts.length > 0 ||\n        data.environments.some((env) => env.pending_action?.status === \"pending\")\n      );\n      return pending ? 5_000 : 60_000;\n    },\n  });\n}\n\n",
+      "initialData": "absent"
+    },
+    {
+      "name": "issueUsageOptions",
+      "source": "packages/core/issues/queries.ts:726",
+      "query_key_expression": "issueKeys.usage(issueId)",
+      "api_methods": [
+        "getIssueUsage"
+      ],
+      "executable_factory_source": "export function issueUsageOptions(issueId: string) {\n  return queryOptions({\n    queryKey: issueKeys.usage(issueId),\n    queryFn: () => api.getIssueUsage(issueId),\n  });\n}\n\n// Backs the description editor's fresh-sign download flow: NodeViews resolve\n// an attachment id by matching the markdown URL against this list. The list\n// is workspace-private metadata and lives on the same cache lifetime as the\n// rest of the issue detail surface.\n",
+      "initialData": "absent"
+    },
+    {
+      "name": "issueAttachmentsOptions",
+      "source": "packages/core/issues/queries.ts:737",
+      "query_key_expression": "issueKeys.attachments(issueId)",
+      "api_methods": [
+        "listAttachments"
+      ],
+      "executable_factory_source": "export function issueAttachmentsOptions(issueId: string) {\n  return queryOptions({\n    queryKey: issueKeys.attachments(issueId),\n    queryFn: () => api.listAttachments(issueId),\n  });\n}\n\n",
+      "initialData": "absent"
+    },
+    {
+      "name": "projectListOptions",
+      "source": "packages/core/projects/queries.ts:21",
+      "query_key_expression": "projectKeys.list(wsId)",
+      "api_methods": [
+        "listProjects"
+      ],
+      "executable_factory_source": "export function projectListOptions(wsId: string) {\n  return queryOptions({\n    queryKey: projectKeys.list(wsId),\n    queryFn: () => api.listProjects({ include_archived: true }),\n    select: (data) => data.projects,\n  });\n}\n\n",
+      "initialData": "absent"
+    },
+    {
+      "name": "projectDetailOptions",
+      "source": "packages/core/projects/queries.ts:29",
+      "query_key_expression": "projectKeys.detail(wsId, id)",
+      "api_methods": [
+        "getProject"
+      ],
+      "executable_factory_source": "export function projectDetailOptions(wsId: string, id: string) {\n  return queryOptions({\n    queryKey: projectKeys.detail(wsId, id),\n    queryFn: () => api.getProject(id),\n  });\n}\n\n",
+      "initialData": "absent"
+    },
+    {
+      "name": "projectMembersOptions",
+      "source": "packages/core/projects/queries.ts:36",
+      "query_key_expression": "projectKeys.members(wsId, id)",
+      "api_methods": [
+        "getProjectMembers"
+      ],
+      "executable_factory_source": "export function projectMembersOptions(wsId: string, id: string) {\n  return queryOptions({\n    queryKey: projectKeys.members(wsId, id),\n    queryFn: () => api.getProjectMembers(id),\n  });\n}\n\n",
+      "initialData": "absent"
+    },
+    {
+      "name": "privateProjectOverviewOptions",
+      "source": "packages/core/projects/queries.ts:43",
+      "query_key_expression": "projectKeys.privateOverview(wsId)",
+      "api_methods": [
+        "listPrivateProjectsForOwner"
+      ],
+      "executable_factory_source": "export function privateProjectOverviewOptions(wsId: string) {\n  return queryOptions({\n    queryKey: projectKeys.privateOverview(wsId),\n    queryFn: () => api.listPrivateProjectsForOwner(),\n    select: (data) => data.projects,\n  });\n}\n\n",
+      "initialData": "absent"
+    },
+    {
+      "name": "projectSubscriptionOptions",
+      "source": "packages/core/projects/queries.ts:51",
+      "query_key_expression": "projectKeys.subscription(wsId, id)",
+      "api_methods": [
+        "getProjectSubscription"
+      ],
+      "executable_factory_source": "export function projectSubscriptionOptions(wsId: string, id: string) {\n  return queryOptions({\n    queryKey: projectKeys.subscription(wsId, id),\n    queryFn: () => api.getProjectSubscription(id),\n  });\n}\n",
+      "initialData": "absent"
+    },
+    {
+      "name": "workspaceListOptions",
+      "source": "packages/core/workspace/queries.ts:28",
+      "query_key_expression": "workspaceKeys.list()",
+      "api_methods": [
+        "listWorkspaces"
+      ],
+      "executable_factory_source": "export function workspaceListOptions() {\n  return queryOptions({\n    queryKey: workspaceKeys.list(),\n    queryFn: () => api.listWorkspaces(),\n  });\n}\n\n/** Resolves the workspace whose slug matches, from the cached workspace list. */\n",
+      "initialData": "absent"
+    },
+    {
+      "name": "workspaceBySlugOptions",
+      "source": "packages/core/workspace/queries.ts:36",
+      "query_key_expression": "workspaceKeys.list()",
+      "api_methods": [
+        "listWorkspaces"
+      ],
+      "executable_factory_source": "export function workspaceBySlugOptions(slug: string) {\n  return queryOptions({\n    ...workspaceListOptions(),\n    select: (list: Workspace[]) => list.find((w) => w.slug === slug) ?? null,\n  });\n}\n\n",
+      "initialData": "absent"
+    },
+    {
+      "name": "memberListOptions",
+      "source": "packages/core/workspace/queries.ts:43",
+      "query_key_expression": "workspaceKeys.members(wsId)",
+      "api_methods": [
+        "listMembers"
+      ],
+      "executable_factory_source": "export function memberListOptions(wsId: string) {\n  return queryOptions({\n    queryKey: workspaceKeys.members(wsId),\n    queryFn: () => api.listMembers(wsId),\n  });\n}\n\n",
+      "initialData": "absent"
+    },
+    {
+      "name": "agentListOptions",
+      "source": "packages/core/workspace/queries.ts:50",
+      "query_key_expression": "workspaceKeys.agents(wsId)",
+      "api_methods": [
+        "listAgents"
+      ],
+      "executable_factory_source": "export function agentListOptions(wsId: string) {\n  return queryOptions({\n    queryKey: workspaceKeys.agents(wsId),\n    queryFn: () =>\n      api.listAgents({ workspace_id: wsId, include_archived: true }),\n    // Projected unstable can age offline without an event; polling online also\n    // covers a missed demotion. Offline recovery is event/reconnect-driven.\n    refetchInterval: (query) =>\n      query.state.data?.some(\n        (agent) =>\n          !agent.archived_at &&\n          (agent.runtime_availability === \"online\" ||\n            agent.runtime_availability === \"unstable\"),\n      )\n        ? 30_000\n        : false,\n  });\n}\n\n",
+      "initialData": "absent"
+    },
+    {
+      "name": "agentDetailOptions",
+      "source": "packages/core/workspace/queries.ts:69",
+      "query_key_expression": "workspaceKeys.agent(wsId, agentId)",
+      "api_methods": [
+        "getAgent"
+      ],
+      "executable_factory_source": "export function agentDetailOptions(wsId: string, agentId: string) {\n  return queryOptions({\n    queryKey: workspaceKeys.agent(wsId, agentId),\n    queryFn: () => api.getAgent(agentId),\n    enabled: !!wsId && !!agentId,\n    retry: false,\n  });\n}\n\n/**\n * Makes an authoritative agent response immediately visible to both agent\n * detail and list consumers. A cold list stays cold so one agent is never\n * mistaken for the complete workspace list.\n */\n",
+      "initialData": "absent"
+    },
+    {
+      "name": "squadListOptions",
+      "source": "packages/core/workspace/queries.ts:102",
+      "query_key_expression": "workspaceKeys.squads(wsId)",
+      "api_methods": [
+        "listSquads"
+      ],
+      "executable_factory_source": "export function squadListOptions(wsId: string) {\n  return queryOptions<Squad[]>({\n    queryKey: workspaceKeys.squads(wsId),\n    queryFn: () => api.listSquads(),\n    enabled: !!wsId,\n  });\n}\n\n/**\n * The squads behind the viewer's \"my agents\" relation, for evaluating it on\n * rows the client filters itself.\n */\n",
+      "initialData": "absent"
+    },
+    {
+      "name": "involvedSquadIdsOptions",
+      "source": "packages/core/workspace/queries.ts:114",
+      "query_key_expression": "workspaceKeys.involvedSquads(wsId)",
+      "api_methods": [
+        "listInvolvedSquadIds"
+      ],
+      "executable_factory_source": "export function involvedSquadIdsOptions(wsId: string) {\n  return queryOptions({\n    queryKey: workspaceKeys.involvedSquads(wsId),\n    queryFn: () => api.listInvolvedSquadIds(),\n    enabled: !!wsId,\n  });\n}\n\n// Per-squad members status snapshot. The freshness signal is the WS task /\n// agent / runtime invalidation wired in use-realtime-sync (which broadly\n// invalidates `[\"workspaces\", wsId, \"squads\"]`); the staleTime is a\n// tab-focus safety net.\n",
+      "initialData": "absent"
+    },
+    {
+      "name": "squadMemberStatusOptions",
+      "source": "packages/core/workspace/queries.ts:126",
+      "query_key_expression": "workspaceKeys.squadMemberStatus(wsId, squadId)",
+      "api_methods": [
+        "getSquadMemberStatus"
+      ],
+      "executable_factory_source": "export function squadMemberStatusOptions(wsId: string, squadId: string) {\n  return queryOptions({\n    queryKey: workspaceKeys.squadMemberStatus(wsId, squadId),\n    queryFn: () => api.getSquadMemberStatus(squadId),\n    enabled: !!wsId && !!squadId,\n    staleTime: 30 * 1000,\n    refetchOnWindowFocus: true,\n  });\n}\n\n",
+      "initialData": "absent"
+    },
+    {
+      "name": "skillListOptions",
+      "source": "packages/core/workspace/queries.ts:136",
+      "query_key_expression": "workspaceKeys.skills(wsId)",
+      "api_methods": [
+        "listSkills"
+      ],
+      "executable_factory_source": "export function skillListOptions(wsId: string) {\n  return queryOptions({\n    queryKey: workspaceKeys.skills(wsId),\n    queryFn: () => api.listSkills(),\n  });\n}\n\n",
+      "initialData": "absent"
+    },
+    {
+      "name": "skillDetailOptions",
+      "source": "packages/core/workspace/queries.ts:143",
+      "query_key_expression": "[...workspaceKeys.skills(wsId), skillId] as const",
+      "api_methods": [
+        "getSkill"
+      ],
+      "executable_factory_source": "export function skillDetailOptions(wsId: string, skillId: string) {\n  return queryOptions({\n    queryKey: [...workspaceKeys.skills(wsId), skillId] as const,\n    queryFn: () => api.getSkill(skillId),\n    enabled: !!skillId,\n  });\n}\n\n// Nested under the skill detail key so skill realtime events, which\n// invalidate the workspace skills prefix, refresh history too.\n",
+      "initialData": "absent"
+    },
+    {
+      "name": "skillVersionsOptions",
+      "source": "packages/core/workspace/queries.ts:153",
+      "query_key_expression": "[...workspaceKeys.skills(wsId), skillId, \"versions\"] as const",
+      "api_methods": [
+        "listSkillVersions"
+      ],
+      "executable_factory_source": "export function skillVersionsOptions(wsId: string, skillId: string) {\n  return queryOptions({\n    queryKey: [...workspaceKeys.skills(wsId), skillId, \"versions\"] as const,\n    queryFn: () => api.listSkillVersions(skillId),\n    enabled: !!skillId,\n  });\n}\n\n// A version never changes once written.\n",
+      "initialData": "absent"
+    },
+    {
+      "name": "skillVersionDetailOptions",
+      "source": "packages/core/workspace/queries.ts:162",
+      "query_key_expression": "[...workspaceKeys.skills(wsId), skillId, \"versions\", version] as const",
+      "api_methods": [
+        "getSkillVersion"
+      ],
+      "executable_factory_source": "export function skillVersionDetailOptions(\n  wsId: string,\n  skillId: string,\n  version: number | null,\n) {\n  return queryOptions({\n    queryKey: [...workspaceKeys.skills(wsId), skillId, \"versions\", version] as const,\n    queryFn: () => api.getSkillVersion(skillId, version as number),\n    enabled: !!skillId && version !== null,\n    staleTime: Infinity,\n  });\n}\n\n/**\n * Builds a `Map<skillId, Agent[]>` from the cached agent list. The server\n * already returns each agent with its full skill list inline, so no extra\n * request is needed — \"which agents use skill X\" is pure client-side fold.\n *\n * Exposed as a plain helper rather than a `queryOptions` with `select` so\n * the Map's identity is stable across unrelated agent-cache rerenders —\n * callers wrap this in `useMemo(..., [agents])` and only re-fold when the\n * agent array identity actually changes. Previously this was `{ select }`,\n * which returned a new Map every subscription tick and triggered cascading\n * re-renders on every `agent:updated` WS event.\n */\n",
+      "initialData": "absent"
+    },
+    {
+      "name": "invitationListOptions",
+      "source": "packages/core/workspace/queries.ts:203",
+      "query_key_expression": "workspaceKeys.invitations(wsId)",
+      "api_methods": [
+        "listWorkspaceInvitations"
+      ],
+      "executable_factory_source": "export function invitationListOptions(wsId: string) {\n  return queryOptions({\n    queryKey: workspaceKeys.invitations(wsId),\n    queryFn: () => api.listWorkspaceInvitations(wsId),\n  });\n}\n\n",
+      "initialData": "absent"
+    },
+    {
+      "name": "shareLinkListOptions",
+      "source": "packages/core/workspace/queries.ts:210",
+      "query_key_expression": "workspaceKeys.shareLinks(wsId)",
+      "api_methods": [
+        "listShareLinks"
+      ],
+      "executable_factory_source": "export function shareLinkListOptions(wsId: string, enabled = true) {\n  return queryOptions({\n    queryKey: workspaceKeys.shareLinks(wsId),\n    queryFn: () => api.listShareLinks(wsId),\n    enabled: enabled && !!wsId,\n  });\n}\n\n",
+      "initialData": "absent"
+    },
+    {
+      "name": "myInvitationListOptions",
+      "source": "packages/core/workspace/queries.ts:218",
+      "query_key_expression": "workspaceKeys.myInvitations()",
+      "api_methods": [
+        "listMyInvitations"
+      ],
+      "executable_factory_source": "export function myInvitationListOptions() {\n  return queryOptions({\n    queryKey: workspaceKeys.myInvitations(),\n    queryFn: () => api.listMyInvitations(),\n    // Recover missed realtime events without refetching on every tab switch.\n    staleTime: 30 * 1000,\n    refetchOnWindowFocus: true,\n  });\n}\n\n",
+      "initialData": "absent"
+    },
+    {
+      "name": "assigneeFrequencyOptions",
+      "source": "packages/core/workspace/queries.ts:228",
+      "query_key_expression": "workspaceKeys.assigneeFrequency(wsId)",
+      "api_methods": [
+        "getAssigneeFrequency"
+      ],
+      "executable_factory_source": "export function assigneeFrequencyOptions(wsId: string) {\n  return queryOptions({\n    queryKey: workspaceKeys.assigneeFrequency(wsId),\n    queryFn: () => api.getAssigneeFrequency(),\n  });\n}\n\n/**\n * The workspace's MCP server library. Fetched for plain members too — the\n * payload is names and transports only, and an agent owner needs to see what\n * is available to assign.\n */\n",
+      "initialData": "absent"
+    },
+    {
+      "name": "workspaceMcpServersOptions",
+      "source": "packages/core/workspace/queries.ts:240",
+      "query_key_expression": "workspaceKeys.mcpServers(wsId)",
+      "api_methods": [
+        "listWorkspaceMcpServers"
+      ],
+      "executable_factory_source": "export function workspaceMcpServersOptions(wsId: string) {\n  return queryOptions({\n    queryKey: workspaceKeys.mcpServers(wsId),\n    queryFn: () => api.listWorkspaceMcpServers(wsId),\n    enabled: wsId !== \"\",\n  });\n}\n\n/** The workspace MCP servers assigned to one agent, with their toggles. */\n",
+      "initialData": "absent"
+    },
+    {
+      "name": "agentMcpServersOptions",
+      "source": "packages/core/workspace/queries.ts:249",
+      "query_key_expression": "[\"agents\", agentId, \"mcp-servers\"] as const",
+      "api_methods": [
+        "listAgentMcpServers"
+      ],
+      "executable_factory_source": "export function agentMcpServersOptions(agentId: string) {\n  return queryOptions({\n    queryKey: [\"agents\", agentId, \"mcp-servers\"] as const,\n    queryFn: () => api.listAgentMcpServers(agentId),\n    enabled: agentId !== \"\",\n  });\n}\n",
+      "initialData": "absent"
+    },
+    {
+      "name": "issueStatusListOptions",
+      "source": "packages/core/issue-statuses/queries.ts:27",
+      "query_key_expression": "workspaceKeys.list()",
+      "api_methods": [
+        "listIssueStatuses"
+      ],
+      "executable_factory_source": "export function issueStatusListOptions(wsId: string) {\n  return queryOptions({\n    queryKey: issueStatusKeys.list(wsId),\n    // ARCHIVED entries included on purpose. Archiving retires a status from\n    // future assignment but leaves existing issues on it, and those issues must\n    // keep their real name, color and category. Dropping archived rows here\n    // would degrade them to a raw key with a guessed category. Pickers use\n    // `activeStatuses`, which excludes them. (MUL-6243)\n    queryFn: () => api.listIssueStatuses(true),\n    select: (data) => data.statuses,\n    // The catalog changes only when an admin edits it, which is rare, so a\n    // generous stale time keeps this off the critical path of every render\n    // that needs a status label.\n    staleTime: 5 * 60_000,\n  });\n}\n\n/**\n * A resolved view over the catalog. Every lookup falls back to something\n * renderable, because an issue can legitimately carry a status this client has\n * not heard of: a status created moments ago in another session, or one whose\n * catalog fetch has not landed yet.\n */\nexport interface IssueStatusCatalog {\n  /**\n   * Every status in display order, ARCHIVED INCLUDED, so an issue left on an\n   * archived status still resolves to its real name, color and category.\n   * For anything that offers a status to pick, use `activeStatuses`.\n   */\n  statuses: IssueStatusEntry[];\n  /** Assignable statuses — `statuses` minus archived ones. */\n  activeStatuses: IssueStatusEntry[];\n  /** Category for a status key; falls back to the built-in map, else \"unstarted\". */\n  categoryOf: (statusKey: string) => IssueStatusCategory;\n  /** Human label for a status key; falls back to the category label, then the raw key. */\n  labelOf: (statusKey: string) => string;\n  /** Catalog entry for a status key, when the catalog knows it. */\n  entryOf: (statusKey: string) => IssueStatusEntry | undefined;\n  /**\n   * The `#rrggbb` a surface must paint a status with, or null when it keeps\n   * its category's semantic token.\n   *\n   * ALWAYS null for a built-in. The seven built-ins carry a seeded hex in the\n   * catalog, but they are not recolorable (the server rejects any edit to a\n   * system row) and every surface renders them from the token — `text-success`\n   * and friends, which is what makes them follow the theme into dark mode. A\n   * caller that reaches for `entryOf(key)?.color` instead paints the raw seed\n   * and drifts from the same status two pixels away. (MUL-6440)\n   */\n  colorOf: (statusKey: string) => string | null;\n  /** Custom visual geometry; null keeps the default. Never drives behavior. */\n  iconOf: (statusKey: string) => string | null;\n  /** ACTIVE statuses belonging to one category, in display order. */\n  inCategory: (category: IssueStatusCategory) => IssueStatusEntry[];\n  /** True once the catalog has loaded; false while it is still in flight. */\n  isLoaded: boolean;\n  /**\n   * The catalog is still in flight and nothing has resolved yet.\n   *\n   * A surface that routes on a CUSTOM status key has to hold its loading state\n   * while this is true. `isLoaded === false` alone is not enough to act on:\n   * the difference between \"not here yet\" and \"the request failed\" decides\n   * whether the user sees a spinner or a retryable error, and the first cut\n   * showed neither — just a silently empty board. (MUL-6243)\n   */\n  isPending: boolean;\n  /**\n   * The catalog request failed AND there is no usable snapshot to fall back on.\n   *\n   * Narrower than \"the query errored\" on purpose: a BACKGROUND refetch can fail\n   * while the last successful catalog is still cached, and blocking a surface\n   * then would throw away data that is perfectly serviceable. Only a failure\n   * with nothing behind it is worth stopping for. (MUL-6243)\n   */\n  isError: boolean;\n  /** Re-runs the catalog request. Wired to the surface's retry affordance. */\n  retry: () => void;\n  /**\n   * True when the catalog is LOADED and holds at least one custom status.\n   *\n   * This is the switch for the category-grouped surface contract. Two reasons\n   * it has to be both conditions:\n   *\n   * - Rolling deploy. `group.kind=status_category` is a server contract this\n   *   feature introduced, so a client that sends it unconditionally 400s\n   *   against any pod that has not been updated yet. A workspace only HAS a\n   *   custom status once the creation flag was on, which means the fleet was\n   *   already serving this version.\n   * - Cold load. Until the catalog lands, `categoryOf` cannot tell a custom key\n   *   from an unknown one and falls back to `unstarted`. Routing on that guess\n   *   sends a saved `qa` filter to the wrong column and renders an empty board.\n   *\n   * Retained for callers that need to distinguish whether a workspace has\n   * extended its status vocabulary. (MUL-6243)\n   */\n  hasCustomStatuses: boolean;\n}\n\nconst BUILT_IN = new Set<string>(BUILT_IN_STATUS_ORDER);\nconst CATEGORY = new Set<string>(STATUS_ORDER);\n\nconst CATEGORY_RANK = new Map<string, number>(STATUS_ORDER.map((c, i) => [c, i]));\nconst BUILT_IN_RANK = new Map<string, number>(\n  BUILT_IN_STATUS_ORDER.map((status, index) => [status, index]),\n);\n\n/**\n * The server's catalog ordering, mirrored for client-side re-sorts.\n * Category rank, then intra-category position, then built-in rank/key to break ties —\n * see `ListIssueStatusEntries` in `issue_status.sql`. An optimistic reorder has\n * to re-sort with this or the new positions land in the cache while the list\n * still renders in the old order.\n */\n",
+      "initialData": "absent"
+    }
+  ],
+  "prefix_union": {
+    "view === \"history\" ? [...key, \"history\"] : key": [
+      "client:3116"
+    ],
+    "issueKeys.sourceContextPreview(wsId, anchorCommentId ?? \"\")": [
+      "client:1680"
+    ],
+    "issueKeys.tableGroups(wsId, query, group)": [
+      "client:1402"
+    ],
+    "[\n      ...issueKeys.tableRows(\n        wsId,\n        request.query,\n        request.group,\n        request.group_key,\n        request.hierarchy.enabled,\n        request.parent_id,\n      ),\n      \"page\",\n      cursor,\n    ] as const": [
+      "client:1416"
+    ],
+    "issueKeys.tableFacets(wsId, request)": [
+      "client:1430"
+    ],
+    "issueKeys.listSorted(wsId, sort)": [
+      "client:1344"
+    ],
+    "issueKeys.projectGantt(wsId, projectId, assigneeTypes)": [
+      "client:1344"
+    ],
+    "issueKeys.sidebar(wsId, source, request, limit)": [
+      "client:1416"
+    ],
+    "issueKeys.detail(wsId, id)": [
+      "client:1612"
+    ],
+    "workspaceKeys.list()": [
+      "client:4821"
+    ],
+    "issueKeys.childProgress(wsId)": [
+      "client:1817"
+    ],
+    "issueKeys.duplicates(wsId, id)": [
+      "client:1785"
+    ],
+    "issueKeys.children(wsId, id)": [
+      "client:1795"
+    ],
+    "issueKeys.childrenByParents(wsId, parentIds)": [
+      "client:1806"
+    ],
+    "issueKeys.timeline(issueId)": [
+      "client:1926"
+    ],
+    "issueKeys.commentThread(issueId, commentId)": [
+      "client:1861"
+    ],
+    "issueKeys.reactions(issueId)": [
+      "client:1612"
+    ],
+    "issueKeys.subscribers(issueId)": [
+      "client:2002"
+    ],
+    "issueKeys.environments(wsId, issueId)": [
+      "client:5536"
+    ],
+    "issueKeys.usage(issueId)": [
+      "client:3129"
+    ],
+    "issueKeys.attachments(issueId)": [
+      "client:4427"
+    ],
+    "projectKeys.list(wsId)": [
+      "client:4517"
+    ],
+    "projectKeys.detail(wsId, id)": [
+      "client:4524"
+    ],
+    "projectKeys.members(wsId, id)": [
+      "client:4561"
+    ],
+    "projectKeys.privateOverview(wsId)": [
+      "client:4602"
+    ],
+    "projectKeys.subscription(wsId, id)": [
+      "client:4569"
+    ],
+    "workspaceKeys.members(wsId)": [
+      "client:3765"
+    ],
+    "workspaceKeys.agents(wsId)": [
+      "client:2066"
+    ],
+    "workspaceKeys.agent(wsId, agentId)": [
+      "client:2070"
+    ],
+    "workspaceKeys.squads(wsId)": [
+      "client:5203"
+    ],
+    "workspaceKeys.involvedSquads(wsId)": [
+      "client:5210"
+    ],
+    "workspaceKeys.squadMemberStatus(wsId, squadId)": [
+      "client:5264"
+    ],
+    "workspaceKeys.skills(wsId)": [
+      "client:3876"
+    ],
+    "[...workspaceKeys.skills(wsId), skillId] as const": [
+      "client:3891"
+    ],
+    "[...workspaceKeys.skills(wsId), skillId, \"versions\"] as const": [
+      "client:3967"
+    ],
+    "[...workspaceKeys.skills(wsId), skillId, \"versions\", version] as const": [
+      "client:3977"
+    ],
+    "workspaceKeys.invitations(wsId)": [
+      "client:3796"
+    ],
+    "workspaceKeys.shareLinks(wsId)": [
+      "client:3836"
+    ],
+    "workspaceKeys.myInvitations()": [
+      "client:3806"
+    ],
+    "workspaceKeys.assigneeFrequency(wsId)": [
+      "client:1935"
+    ],
+    "workspaceKeys.mcpServers(wsId)": [
+      "client:3441"
+    ],
+    "[\"agents\", agentId, \"mcp-servers\"] as const": [
+      "client:3493"
+    ]
+  },
+  "inventory": {
+    "client:3116": {
+      "id": "client:3116",
+      "method": "GET",
+      "path_expression": "/api/issues/${issueId}/task-runs${query}",
+      "route": {
+        "method": "GET",
+        "path": "/api/issues/{id}/task-runs"
+      }
+    },
+    "client:1680": {
+      "id": "client:1680",
+      "method": "GET",
+      "path_expression": "/api/comments/${anchorCommentId}/sub-issue-preview",
+      "route": {
+        "method": "GET",
+        "path": "/api/comments/{commentId}/sub-issue-preview"
+      }
+    },
+    "client:1402": {
+      "id": "client:1402",
+      "method": "POST",
+      "path_expression": "/api/issues/table/groups",
+      "route": {
+        "method": "POST",
+        "path": "/api/issues/table/groups"
+      }
+    },
+    "client:1416": {
+      "id": "client:1416",
+      "method": "POST",
+      "path_expression": "/api/issues/table/rows",
+      "route": {
+        "method": "POST",
+        "path": "/api/issues/table/rows"
+      }
+    },
+    "client:1430": {
+      "id": "client:1430",
+      "method": "POST",
+      "path_expression": "/api/issues/table/facets",
+      "route": {
+        "method": "POST",
+        "path": "/api/issues/table/facets"
+      }
+    },
+    "client:1344": {
+      "id": "client:1344",
+      "method": "GET",
+      "path_expression": "/api/issues?${search}",
+      "route": {
+        "method": "GET",
+        "path": "/api/issues"
+      }
+    },
+    "client:1612": {
+      "id": "client:1612",
+      "method": "GET",
+      "path_expression": "/api/issues/${encodeURIComponent(id)}",
+      "route": {
+        "method": "GET",
+        "path": "/api/issues/{id}"
+      }
+    },
+    "client:1817": {
+      "id": "client:1817",
+      "method": "GET",
+      "path_expression": "/api/issues/child-progress",
+      "route": {
+        "method": "GET",
+        "path": "/api/issues/child-progress"
+      }
+    },
+    "client:1785": {
+      "id": "client:1785",
+      "method": "GET",
+      "path_expression": "/api/issues/${id}/duplicates",
+      "route": {
+        "method": "GET",
+        "path": "/api/issues/{id}/duplicates"
+      }
+    },
+    "client:1795": {
+      "id": "client:1795",
+      "method": "GET",
+      "path_expression": "/api/issues/${id}/children",
+      "route": {
+        "method": "GET",
+        "path": "/api/issues/{id}/children"
+      }
+    },
+    "client:1806": {
+      "id": "client:1806",
+      "method": "GET",
+      "path_expression": "/api/issues/children?parent_ids=${parentIds.join(\",\")}",
+      "route": {
+        "method": "GET",
+        "path": "/api/issues/children"
+      }
+    },
+    "client:1926": {
+      "id": "client:1926",
+      "method": "GET",
+      "path_expression": "/api/issues/${issueId}/timeline",
+      "route": {
+        "method": "GET",
+        "path": "/api/issues/{id}/timeline"
+      }
+    },
+    "client:1861": {
+      "id": "client:1861",
+      "method": "GET",
+      "path_expression": "/api/issues/${issueId}/comments${query}",
+      "route": {
+        "method": "GET",
+        "path": "/api/issues/{id}/comments"
+      }
+    },
+    "client:2002": {
+      "id": "client:2002",
+      "method": "GET",
+      "path_expression": "/api/issues/${issueId}/subscribers",
+      "route": {
+        "method": "GET",
+        "path": "/api/issues/{id}/subscribers"
+      }
+    },
+    "client:5536": {
+      "id": "client:5536",
+      "method": "GET",
+      "path_expression": "/api/issues/${issueId}/environments",
+      "route": {
+        "method": "GET",
+        "path": "/api/issues/{id}/environments"
+      }
+    },
+    "client:3129": {
+      "id": "client:3129",
+      "method": "GET",
+      "path_expression": "/api/issues/${issueId}/usage",
+      "route": {
+        "method": "GET",
+        "path": "/api/issues/{id}/usage"
+      }
+    },
+    "client:4427": {
+      "id": "client:4427",
+      "method": "GET",
+      "path_expression": "/api/issues/${issueId}/attachments",
+      "route": {
+        "method": "GET",
+        "path": "/api/issues/{id}/attachments"
+      }
+    },
+    "client:4517": {
+      "id": "client:4517",
+      "method": "GET",
+      "path_expression": "/api/projects?${search}",
+      "route": {
+        "method": "GET",
+        "path": "/api/projects"
+      }
+    },
+    "client:4524": {
+      "id": "client:4524",
+      "method": "GET",
+      "path_expression": "/api/projects/${id}",
+      "route": {
+        "method": "GET",
+        "path": "/api/projects/{id}"
+      }
+    },
+    "client:4561": {
+      "id": "client:4561",
+      "method": "GET",
+      "path_expression": "/api/projects/${id}/members",
+      "route": {
+        "method": "GET",
+        "path": "/api/projects/{id}/members"
+      }
+    },
+    "client:4602": {
+      "id": "client:4602",
+      "method": "GET",
+      "path_expression": "/api/projects/private",
+      "route": {
+        "method": "GET",
+        "path": "/api/projects/private"
+      }
+    },
+    "client:4569": {
+      "id": "client:4569",
+      "method": "GET",
+      "path_expression": "/api/projects/${id}/subscription",
+      "route": {
+        "method": "GET",
+        "path": "/api/projects/{id}/subscription"
+      }
+    },
+    "client:3391": {
+      "id": "client:3391",
+      "method": "GET",
+      "path_expression": "/api/workspaces",
+      "route": {
+        "method": "GET",
+        "path": "/api/workspaces"
+      }
+    },
+    "client:3765": {
+      "id": "client:3765",
+      "method": "GET",
+      "path_expression": "/api/workspaces/${workspaceId}/members",
+      "route": {
+        "method": "GET",
+        "path": "/api/workspaces/{id}/members"
+      }
+    },
+    "client:2066": {
+      "id": "client:2066",
+      "method": "GET",
+      "path_expression": "/api/agents?${search}",
+      "route": {
+        "method": "GET",
+        "path": "/api/agents"
+      }
+    },
+    "client:2070": {
+      "id": "client:2070",
+      "method": "GET",
+      "path_expression": "/api/agents/${id}",
+      "route": {
+        "method": "GET",
+        "path": "/api/agents/{id}"
+      }
+    },
+    "client:5203": {
+      "id": "client:5203",
+      "method": "GET",
+      "path_expression": "/api/squads",
+      "route": {
+        "method": "GET",
+        "path": "/api/squads"
+      }
+    },
+    "client:5210": {
+      "id": "client:5210",
+      "method": "GET",
+      "path_expression": "/api/squads/involved",
+      "route": {
+        "method": "GET",
+        "path": "/api/squads/involved"
+      }
+    },
+    "client:5264": {
+      "id": "client:5264",
+      "method": "GET",
+      "path_expression": "/api/squads/${squadId}/members/status",
+      "route": {
+        "method": "GET",
+        "path": "/api/squads/{id}/members/status"
+      }
+    },
+    "client:3876": {
+      "id": "client:3876",
+      "method": "GET",
+      "path_expression": "/api/skills",
+      "route": {
+        "method": "GET",
+        "path": "/api/skills"
+      }
+    },
+    "client:3891": {
+      "id": "client:3891",
+      "method": "GET",
+      "path_expression": "/api/skills/${id}",
+      "route": {
+        "method": "GET",
+        "path": "/api/skills/{id}"
+      }
+    },
+    "client:3967": {
+      "id": "client:3967",
+      "method": "GET",
+      "path_expression": "/api/skills/${skillId}/versions",
+      "route": {
+        "method": "GET",
+        "path": "/api/skills/{id}/versions"
+      }
+    },
+    "client:3977": {
+      "id": "client:3977",
+      "method": "GET",
+      "path_expression": "/api/skills/${skillId}/versions/${version}",
+      "route": {
+        "method": "GET",
+        "path": "/api/skills/{id}/versions/{version}"
+      }
+    },
+    "client:3796": {
+      "id": "client:3796",
+      "method": "GET",
+      "path_expression": "/api/workspaces/${workspaceId}/invitations",
+      "route": {
+        "method": "GET",
+        "path": "/api/workspaces/{id}/invitations"
+      }
+    },
+    "client:3836": {
+      "id": "client:3836",
+      "method": "GET",
+      "path_expression": "/api/workspaces/${workspaceId}/share-links",
+      "route": {
+        "method": "GET",
+        "path": "/api/workspaces/{id}/share-links"
+      }
+    },
+    "client:3806": {
+      "id": "client:3806",
+      "method": "GET",
+      "path_expression": "/api/invitations",
+      "route": {
+        "method": "GET",
+        "path": "/api/invitations"
+      }
+    },
+    "client:1935": {
+      "id": "client:1935",
+      "method": "GET",
+      "path_expression": "/api/assignee-frequency",
+      "route": {
+        "method": "GET",
+        "path": "/api/assignee-frequency"
+      }
+    },
+    "client:3441": {
+      "id": "client:3441",
+      "method": "GET",
+      "path_expression": "/api/workspaces/${workspaceId}/mcp-servers",
+      "route": {
+        "method": "GET",
+        "path": "/api/workspaces/{id}/mcp-servers"
+      }
+    },
+    "client:3493": {
+      "id": "client:3493",
+      "method": "GET",
+      "path_expression": "/api/agents/${agentId}/mcp-servers",
+      "route": {
+        "method": "GET",
+        "path": "/api/agents/{id}/mcp-servers"
+      }
+    },
+    "client:4821": {
+      "id": "client:4821",
+      "method": "GET",
+      "path_expression": "/api/issue-statuses${query}",
+      "route": {
+        "method": "GET",
+        "path": "/api/issue-statuses"
+      }
+    }
+  },
+  "counts": {
+    "files": 4,
+    "factories": 45,
+    "edges": 45,
+    "unique_requests": 40
+  },
+  "reused_evidence": [
+    {
+      "path": "server/contracts/batches/issue-surface-action-transport.md",
+      "sha256": "3eefca5a62c45b539d1851e9343081249fc4024cabdae6c2d5a0c5a5aaa526d3"
+    },
+    {
+      "path": "server/contracts/batches/chat-inbox-transport-coverage.json",
+      "sha256": "e79524ce8c9c2e7014f7098571c3e55c863fe90a92b7bc3c109772748711bbdc"
+    },
+    {
+      "path": "server/contracts/batches/core-query-transport-coverage.json",
+      "sha256": "890c8ba6a1eb1a5d0dc2402164db5c9b4a2369a088ecdd90c26ddc352edbe491"
+    },
+    {
+      "path": "server/contracts/batches/active-web-auth-transport.json",
+      "sha256": "7715490bcdc6b9db985bdb75d055e4608e8b4290a94b5b687713d09c9bd04c24"
+    }
+  ],
+  "semantics": [
+    "Prefix union is the union of every matching full query key above, including nested keys; no runtime observer enumeration.",
+    "issues/ws excludes timeline, tasks, reactions, subscribers, usage, attachments and source-context; environments ARE included. tableAll includes groups rows facets; timeline includes comment threads; projects/detail includes members and subscription; workspaces/agents includes detail; squads includes involved and member status; skills includes versions.",
+    "Key-only flat, my and assignee-group prefixes have no query factory in the fully reviewed issue target: empty factory union here. Trigger preview keys likewise have no factory here.",
+    "Inbox union is reused from chat-inbox-transport-coverage edges whose source is inbox/queries.ts; agents activity union is reused from core-query; auth fetch boundary evidence reused from active-web-auth.",
+    "React/Tanstack/Zod are library boundaries; callbacks are preserved verbatim in factories. No initialData in these four files."
+  ],
+  "parent_review": {
+    "status": "accepted-bounded-source-closure",
+    "method": "Root read complete type/comment-erased code for all four query files and all40 distinct ApiClient methods referenced; validated remaining parseProjectSubscription and parseWithFallback/logging helpers. Reused previously reviewed status-category/config/schema proofs and active common HTTP seam.",
+    "limits": "No successful HTTP/backend/schema-correctness claim. Arbitrary excess JavaScript object properties outside typed query argument contract excluded. Query prefix union is possible refetch set, not request count.",
+    "client_sha256": "779bb65b5b7ead815836f7c704ec3c370bafae203e4f92119fadce93e982a4d7",
+    "helper_sources": [
+      "packages/core/api/schema.ts",
+      "packages/core/logger.ts",
+      "packages/core/issues/status-category.ts",
+      "server/contracts/batches/schema-callback-transport-coverage.json"
+    ]
+  }
+}

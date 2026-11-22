@@ -1,0 +1,429 @@
+{
+  "scope": "workspace request decoding only; not endpoint parity",
+  "toolchain": "go version go1.26.9 linux/arm64",
+  "target": "linux/amd64 CGO_ENABLED=0 GOWORK=off GOFLAGS= tags=[] mod=readonly",
+  "source_sha256": "5dbdb2504746341794c0982df99408eadf343100cdc261a8d2fffd509c2c32c8",
+  "fixtures_sha256": "b0e94351201fdb5bfb4886f8d249a4527839eb1cf817a09b6b794dff714ededb",
+  "cases": [
+    {
+      "kind": "create",
+      "raw": "null"
+    },
+    {
+      "kind": "create",
+      "raw": "{}"
+    },
+    {
+      "kind": "create",
+      "raw": "{\"NAME\":\"A\",\"SLUG\":\"alpha\",\"description\":\" raw \",\"context\":\"ctx\"} trailing"
+    },
+    {
+      "kind": "create",
+      "raw": "{\"name\":2,\"name\":\"A\",\"slug\":\"alpha\"}"
+    },
+    {
+      "kind": "create",
+      "raw": "{\"name\":\"A\",\"name\":null}"
+    },
+    {
+      "kind": "create",
+      "raw": "{\"description\":\"first\",\"description\":null}"
+    },
+    {
+      "kind": "create",
+      "raw": "{\"unknown\":1e1000}"
+    },
+    {
+      "kind": "create",
+      "raw": "[]"
+    },
+    {
+      "kind": "create",
+      "raw": "{\"description\":7}"
+    },
+    {
+      "kind": "create",
+      "raw": "{\"name\":\"\\ud800\"}"
+    },
+    {
+      "kind": "update",
+      "raw": "null"
+    },
+    {
+      "kind": "update",
+      "raw": "{\"NAME\":\"B\",\"CONTEXT\":\" raw \"}{}"
+    },
+    {
+      "kind": "update",
+      "raw": "{\"name\":4,\"name\":\"B\"}"
+    },
+    {
+      "kind": "update",
+      "raw": "{\"name\":\"B\",\"name\":null}"
+    },
+    {
+      "kind": "update",
+      "raw": "{\"settings\":{\"x\":9007199254740993,\"y\":1e-400},\"repos\":[{\"url\":\"https://example.com\"}]}"
+    },
+    {
+      "kind": "update",
+      "raw": "{\"settings\":1e1000}"
+    },
+    {
+      "kind": "update",
+      "raw": "{\"settings\":{\"x\":1},\"settings\":{\"y\":2}}"
+    },
+    {
+      "kind": "update",
+      "raw": "{\"settings\":NaN}"
+    },
+    {
+      "kind": "pin",
+      "raw": "{\"PINNED\":true} trailing"
+    },
+    {
+      "kind": "pin",
+      "raw": "{\"pinned\":1,\"pinned\":true}"
+    },
+    {
+      "kind": "pin",
+      "raw": "{\"pinned\":true,\"pinned\":null}"
+    },
+    {
+      "kind": "pin",
+      "raw": "null"
+    }
+  ],
+  "go": [
+    {
+      "value": {
+        "name": "",
+        "slug": "",
+        "description": null,
+        "context": null,
+        "issue_prefix": null
+      }
+    },
+    {
+      "value": {
+        "name": "",
+        "slug": "",
+        "description": null,
+        "context": null,
+        "issue_prefix": null
+      }
+    },
+    {
+      "value": {
+        "name": "A",
+        "slug": "alpha",
+        "description": " raw ",
+        "context": "ctx",
+        "issue_prefix": null
+      }
+    },
+    {
+      "error": "invalid request body"
+    },
+    {
+      "value": {
+        "name": "A",
+        "slug": "",
+        "description": null,
+        "context": null,
+        "issue_prefix": null
+      }
+    },
+    {
+      "value": {
+        "name": "",
+        "slug": "",
+        "description": null,
+        "context": null,
+        "issue_prefix": null
+      }
+    },
+    {
+      "value": {
+        "name": "",
+        "slug": "",
+        "description": null,
+        "context": null,
+        "issue_prefix": null
+      }
+    },
+    {
+      "error": "invalid request body"
+    },
+    {
+      "error": "invalid request body"
+    },
+    {
+      "value": {
+        "name": "\ufffd",
+        "slug": "",
+        "description": null,
+        "context": null,
+        "issue_prefix": null
+      }
+    },
+    {
+      "value": {
+        "name": null,
+        "description": null,
+        "context": null,
+        "settings": null,
+        "repos": null,
+        "issue_prefix": null,
+        "avatar_url": null
+      }
+    },
+    {
+      "value": {
+        "name": "B",
+        "description": null,
+        "context": " raw ",
+        "settings": null,
+        "repos": null,
+        "issue_prefix": null,
+        "avatar_url": null
+      }
+    },
+    {
+      "error": "invalid request body"
+    },
+    {
+      "value": {
+        "name": null,
+        "description": null,
+        "context": null,
+        "settings": null,
+        "repos": null,
+        "issue_prefix": null,
+        "avatar_url": null
+      }
+    },
+    {
+      "value": {
+        "name": null,
+        "description": null,
+        "context": null,
+        "settings": {
+          "x": 9007199254740992,
+          "y": 0
+        },
+        "repos": [
+          {
+            "url": "https://example.com"
+          }
+        ],
+        "issue_prefix": null,
+        "avatar_url": null
+      }
+    },
+    {
+      "error": "invalid request body"
+    },
+    {
+      "value": {
+        "name": null,
+        "description": null,
+        "context": null,
+        "settings": {
+          "y": 2
+        },
+        "repos": null,
+        "issue_prefix": null,
+        "avatar_url": null
+      }
+    },
+    {
+      "error": "invalid request body"
+    },
+    {
+      "value": {
+        "pinned": true
+      }
+    },
+    {
+      "error": "invalid request body"
+    },
+    {
+      "value": {
+        "pinned": null
+      }
+    },
+    {
+      "value": {
+        "pinned": null
+      }
+    }
+  ],
+  "python": [
+    {
+      "value": {
+        "name": "",
+        "slug": "",
+        "description": null,
+        "context": null,
+        "issue_prefix": null
+      }
+    },
+    {
+      "value": {
+        "name": "",
+        "slug": "",
+        "description": null,
+        "context": null,
+        "issue_prefix": null
+      }
+    },
+    {
+      "value": {
+        "name": "A",
+        "slug": "alpha",
+        "description": " raw ",
+        "context": "ctx",
+        "issue_prefix": null
+      }
+    },
+    {
+      "error": "invalid request body"
+    },
+    {
+      "value": {
+        "name": "A",
+        "slug": "",
+        "description": null,
+        "context": null,
+        "issue_prefix": null
+      }
+    },
+    {
+      "value": {
+        "name": "",
+        "slug": "",
+        "description": null,
+        "context": null,
+        "issue_prefix": null
+      }
+    },
+    {
+      "value": {
+        "name": "",
+        "slug": "",
+        "description": null,
+        "context": null,
+        "issue_prefix": null
+      }
+    },
+    {
+      "error": "invalid request body"
+    },
+    {
+      "error": "invalid request body"
+    },
+    {
+      "value": {
+        "name": "\ufffd",
+        "slug": "",
+        "description": null,
+        "context": null,
+        "issue_prefix": null
+      }
+    },
+    {
+      "value": {
+        "name": null,
+        "description": null,
+        "context": null,
+        "issue_prefix": null,
+        "avatar_url": null,
+        "settings": null,
+        "repos": null
+      }
+    },
+    {
+      "value": {
+        "name": "B",
+        "description": null,
+        "context": " raw ",
+        "issue_prefix": null,
+        "avatar_url": null,
+        "settings": null,
+        "repos": null
+      }
+    },
+    {
+      "error": "invalid request body"
+    },
+    {
+      "value": {
+        "name": null,
+        "description": null,
+        "context": null,
+        "issue_prefix": null,
+        "avatar_url": null,
+        "settings": null,
+        "repos": null
+      }
+    },
+    {
+      "value": {
+        "name": null,
+        "description": null,
+        "context": null,
+        "issue_prefix": null,
+        "avatar_url": null,
+        "settings": {
+          "x": 9007199254740992.0,
+          "y": 0.0
+        },
+        "repos": [
+          {
+            "url": "https://example.com"
+          }
+        ]
+      }
+    },
+    {
+      "error": "invalid request body"
+    },
+    {
+      "value": {
+        "name": null,
+        "description": null,
+        "context": null,
+        "issue_prefix": null,
+        "avatar_url": null,
+        "settings": {
+          "y": 2.0
+        },
+        "repos": null
+      }
+    },
+    {
+      "error": "invalid request body"
+    },
+    {
+      "value": {
+        "pinned": true
+      }
+    },
+    {
+      "error": "invalid request body"
+    },
+    {
+      "value": {
+        "pinned": null
+      }
+    },
+    {
+      "value": {
+        "pinned": null
+      }
+    }
+  ],
+  "mismatches": [],
+  "exit_code": 0
+}

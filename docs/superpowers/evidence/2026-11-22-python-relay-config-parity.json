@@ -1,0 +1,7852 @@
+{
+  "scope": "Original server allowedOrigins and env mode/config helpers and cluster validation, Go1.26.9 ParseDuration values and validity. Logs and ParseDuration error wording excluded; no boot/client-configuration certification.",
+  "fixtures": [
+    {
+      "Env": {},
+      "Cluster": false,
+      "Duration": "1s"
+    },
+    {
+      "Env": {},
+      "Cluster": true,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_MODE": ""
+      },
+      "Cluster": false,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_MODE": ""
+      },
+      "Cluster": true,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_MODE": "legacy"
+      },
+      "Cluster": false,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_MODE": "legacy"
+      },
+      "Cluster": true,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_MODE": "dual"
+      },
+      "Cluster": false,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_MODE": "dual"
+      },
+      "Cluster": true,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_MODE": "SHARDED"
+      },
+      "Cluster": false,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_MODE": "SHARDED"
+      },
+      "Cluster": true,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_MODE": " \u2003DUAL "
+      },
+      "Cluster": false,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_MODE": " \u2003DUAL "
+      },
+      "Cluster": true,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_MODE": "unknown"
+      },
+      "Cluster": false,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_MODE": "unknown"
+      },
+      "Cluster": true,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_MODE": "\u001clegacy"
+      },
+      "Cluster": false,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_MODE": "\u001clegacy"
+      },
+      "Cluster": true,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_SHARDS": "0"
+      },
+      "Cluster": false,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_SHARDS": "0"
+      },
+      "Cluster": true,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_SHARDS": "-1"
+      },
+      "Cluster": false,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_SHARDS": "-1"
+      },
+      "Cluster": true,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_SHARDS": "+3"
+      },
+      "Cluster": false,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_SHARDS": "+3"
+      },
+      "Cluster": true,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_SHARDS": " 3"
+      },
+      "Cluster": false,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_SHARDS": " 3"
+      },
+      "Cluster": true,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_SHARDS": "3 "
+      },
+      "Cluster": false,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_SHARDS": "3 "
+      },
+      "Cluster": true,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_SHARDS": "01"
+      },
+      "Cluster": false,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_SHARDS": "01"
+      },
+      "Cluster": true,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_SHARDS": "1_000"
+      },
+      "Cluster": false,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_SHARDS": "1_000"
+      },
+      "Cluster": true,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_SHARDS": "9223372036854775807"
+      },
+      "Cluster": false,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_SHARDS": "9223372036854775807"
+      },
+      "Cluster": true,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_SHARDS": "9223372036854775808"
+      },
+      "Cluster": false,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_SHARDS": "9223372036854775808"
+      },
+      "Cluster": true,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_STREAM_MAXLEN": "0"
+      },
+      "Cluster": false,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_STREAM_MAXLEN": "0"
+      },
+      "Cluster": true,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_STREAM_MAXLEN": "-1"
+      },
+      "Cluster": false,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_STREAM_MAXLEN": "-1"
+      },
+      "Cluster": true,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_STREAM_MAXLEN": "+3"
+      },
+      "Cluster": false,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_STREAM_MAXLEN": "+3"
+      },
+      "Cluster": true,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_STREAM_MAXLEN": " 3"
+      },
+      "Cluster": false,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_STREAM_MAXLEN": " 3"
+      },
+      "Cluster": true,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_STREAM_MAXLEN": "9223372036854775808"
+      },
+      "Cluster": false,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_STREAM_MAXLEN": "9223372036854775808"
+      },
+      "Cluster": true,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_XREAD_COUNT": "0"
+      },
+      "Cluster": false,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_XREAD_COUNT": "0"
+      },
+      "Cluster": true,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_XREAD_COUNT": "-1"
+      },
+      "Cluster": false,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_XREAD_COUNT": "-1"
+      },
+      "Cluster": true,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_XREAD_COUNT": "+3"
+      },
+      "Cluster": false,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_XREAD_COUNT": "+3"
+      },
+      "Cluster": true,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_XREAD_COUNT": " 3"
+      },
+      "Cluster": false,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_XREAD_COUNT": " 3"
+      },
+      "Cluster": true,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_XREAD_COUNT": "9223372036854775808"
+      },
+      "Cluster": false,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_XREAD_COUNT": "9223372036854775808"
+      },
+      "Cluster": true,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_STREAM_TTL_ENABLED": "true"
+      },
+      "Cluster": false,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_STREAM_TTL_ENABLED": "true"
+      },
+      "Cluster": true,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_STREAM_TTL_ENABLED": "TRUE"
+      },
+      "Cluster": false,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_STREAM_TTL_ENABLED": "TRUE"
+      },
+      "Cluster": true,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_STREAM_TTL_ENABLED": "True"
+      },
+      "Cluster": false,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_STREAM_TTL_ENABLED": "True"
+      },
+      "Cluster": true,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_STREAM_TTL_ENABLED": "t"
+      },
+      "Cluster": false,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_STREAM_TTL_ENABLED": "t"
+      },
+      "Cluster": true,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_STREAM_TTL_ENABLED": "1"
+      },
+      "Cluster": false,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_STREAM_TTL_ENABLED": "1"
+      },
+      "Cluster": true,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_STREAM_TTL_ENABLED": "false"
+      },
+      "Cluster": false,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_STREAM_TTL_ENABLED": "false"
+      },
+      "Cluster": true,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_STREAM_TTL_ENABLED": "0"
+      },
+      "Cluster": false,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_STREAM_TTL_ENABLED": "0"
+      },
+      "Cluster": true,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_STREAM_TTL_ENABLED": "yes"
+      },
+      "Cluster": false,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_STREAM_TTL_ENABLED": "yes"
+      },
+      "Cluster": true,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_STREAM_TTL_ENABLED": " true"
+      },
+      "Cluster": false,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_STREAM_TTL_ENABLED": " true"
+      },
+      "Cluster": true,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_STREAM_TTL_ENABLED": "TrUe"
+      },
+      "Cluster": false,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_STREAM_TTL_ENABLED": "TrUe"
+      },
+      "Cluster": true,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_REPLAY_GRACE": "1.5s"
+      },
+      "Cluster": false,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_REPLAY_GRACE": "1.5s"
+      },
+      "Cluster": true,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_REPLAY_GRACE": "1ns"
+      },
+      "Cluster": false,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_REPLAY_GRACE": "1ns"
+      },
+      "Cluster": true,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_REPLAY_GRACE": "0"
+      },
+      "Cluster": false,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_REPLAY_GRACE": "0"
+      },
+      "Cluster": true,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_REPLAY_GRACE": "-1s"
+      },
+      "Cluster": false,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_REPLAY_GRACE": "-1s"
+      },
+      "Cluster": true,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_REPLAY_GRACE": "9223372036854775807ns"
+      },
+      "Cluster": false,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_REPLAY_GRACE": "9223372036854775807ns"
+      },
+      "Cluster": true,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_REPLAY_GRACE": "+3m"
+      },
+      "Cluster": false,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_REPLAY_GRACE": "+3m"
+      },
+      "Cluster": true,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_TRIM_HORIZON": "1ns"
+      },
+      "Cluster": false,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_TRIM_HORIZON": "1ns"
+      },
+      "Cluster": true,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_TRIM_HORIZON": "0"
+      },
+      "Cluster": false,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_TRIM_HORIZON": "0"
+      },
+      "Cluster": true,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_TRIM_HORIZON": "-1s"
+      },
+      "Cluster": false,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_TRIM_HORIZON": "-1s"
+      },
+      "Cluster": true,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_TRIM_HORIZON": "1h"
+      },
+      "Cluster": false,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_TRIM_HORIZON": "1h"
+      },
+      "Cluster": true,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_STREAM_TTL": "1ns"
+      },
+      "Cluster": false,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_STREAM_TTL": "1ns"
+      },
+      "Cluster": true,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_STREAM_TTL": "0"
+      },
+      "Cluster": false,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_STREAM_TTL": "0"
+      },
+      "Cluster": true,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_STREAM_TTL": "-1s"
+      },
+      "Cluster": false,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_STREAM_TTL": "-1s"
+      },
+      "Cluster": true,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_STREAM_TTL": "1h"
+      },
+      "Cluster": false,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_STREAM_TTL": "1h"
+      },
+      "Cluster": true,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_TTL_REFRESH_INTERVAL": "1ns"
+      },
+      "Cluster": false,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_TTL_REFRESH_INTERVAL": "1ns"
+      },
+      "Cluster": true,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_TTL_REFRESH_INTERVAL": "0"
+      },
+      "Cluster": false,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_TTL_REFRESH_INTERVAL": "0"
+      },
+      "Cluster": true,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_TTL_REFRESH_INTERVAL": "-1s"
+      },
+      "Cluster": false,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_TTL_REFRESH_INTERVAL": "-1s"
+      },
+      "Cluster": true,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_TTL_REFRESH_INTERVAL": "1h"
+      },
+      "Cluster": false,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_TTL_REFRESH_INTERVAL": "1h"
+      },
+      "Cluster": true,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_MAINTENANCE_INTERVAL": "1ns"
+      },
+      "Cluster": false,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_MAINTENANCE_INTERVAL": "1ns"
+      },
+      "Cluster": true,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_MAINTENANCE_INTERVAL": "0"
+      },
+      "Cluster": false,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_MAINTENANCE_INTERVAL": "0"
+      },
+      "Cluster": true,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_MAINTENANCE_INTERVAL": "-1s"
+      },
+      "Cluster": false,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_MAINTENANCE_INTERVAL": "-1s"
+      },
+      "Cluster": true,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_MAINTENANCE_INTERVAL": "1h"
+      },
+      "Cluster": false,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_MAINTENANCE_INTERVAL": "1h"
+      },
+      "Cluster": true,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_XREAD_BLOCK": "0"
+      },
+      "Cluster": false,
+      "Duration": "0"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_XREAD_BLOCK": "+0"
+      },
+      "Cluster": false,
+      "Duration": "+0"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_XREAD_BLOCK": "-0"
+      },
+      "Cluster": false,
+      "Duration": "-0"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_XREAD_BLOCK": ""
+      },
+      "Cluster": false,
+      "Duration": ""
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_XREAD_BLOCK": "1"
+      },
+      "Cluster": false,
+      "Duration": "1"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_XREAD_BLOCK": " 1s"
+      },
+      "Cluster": false,
+      "Duration": " 1s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_XREAD_BLOCK": "1s "
+      },
+      "Cluster": false,
+      "Duration": "1s "
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_XREAD_BLOCK": "1e3s"
+      },
+      "Cluster": false,
+      "Duration": "1e3s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_XREAD_BLOCK": ".s"
+      },
+      "Cluster": false,
+      "Duration": ".s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_XREAD_BLOCK": "1.s"
+      },
+      "Cluster": false,
+      "Duration": "1.s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_XREAD_BLOCK": ".5s"
+      },
+      "Cluster": false,
+      "Duration": ".5s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_XREAD_BLOCK": "+.5us"
+      },
+      "Cluster": false,
+      "Duration": "+.5us"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_XREAD_BLOCK": "1\u00b5s1\u03bcs"
+      },
+      "Cluster": false,
+      "Duration": "1\u00b5s1\u03bcs"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_XREAD_BLOCK": "1h2m3.000000004s"
+      },
+      "Cluster": false,
+      "Duration": "1h2m3.000000004s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_XREAD_BLOCK": "\uff11s"
+      },
+      "Cluster": false,
+      "Duration": "\uff11s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_XREAD_BLOCK": "9223372036854775807ns"
+      },
+      "Cluster": false,
+      "Duration": "9223372036854775807ns"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_XREAD_BLOCK": "9223372036854775808ns"
+      },
+      "Cluster": false,
+      "Duration": "9223372036854775808ns"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_XREAD_BLOCK": "-9223372036854775808ns"
+      },
+      "Cluster": false,
+      "Duration": "-9223372036854775808ns"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_XREAD_BLOCK": "-9223372036854775809ns"
+      },
+      "Cluster": false,
+      "Duration": "-9223372036854775809ns"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_XREAD_BLOCK": "2562047h47m16.854775807s"
+      },
+      "Cluster": false,
+      "Duration": "2562047h47m16.854775807s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_XREAD_BLOCK": "2562047h47m16.854775808s"
+      },
+      "Cluster": false,
+      "Duration": "2562047h47m16.854775808s"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_XREAD_BLOCK": "0.33333333333333333333333333333h"
+      },
+      "Cluster": false,
+      "Duration": "0.33333333333333333333333333333h"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_XREAD_BLOCK": ".9999999999999999999999999999ns"
+      },
+      "Cluster": false,
+      "Duration": ".9999999999999999999999999999ns"
+    },
+    {
+      "Env": {
+        "REALTIME_RELAY_XREAD_BLOCK": "000000000000000000000000000001s"
+      },
+      "Cluster": false,
+      "Duration": "000000000000000000000000000001s"
+    },
+    {
+      "Env": {
+        "ALLOWED_ORIGINS": "https://ignored"
+      },
+      "Cluster": false,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "CORS_ALLOWED_ORIGINS": ", ,"
+      },
+      "Cluster": false,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "FRONTEND_ORIGIN": " https://front , https://second "
+      },
+      "Cluster": false,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "CORS_ALLOWED_ORIGINS": "https://cors",
+        "FRONTEND_ORIGIN": "https://front"
+      },
+      "Cluster": false,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "CORS_ALLOWED_ORIGINS": " \u2003 ",
+        "FRONTEND_ORIGIN": "https://front"
+      },
+      "Cluster": false,
+      "Duration": "1s"
+    },
+    {
+      "Env": {
+        "CORS_ALLOWED_ORIGINS": ",",
+        "FRONTEND_ORIGIN": "https://front"
+      },
+      "Cluster": false,
+      "Duration": "1s"
+    }
+  ],
+  "go": [
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "legacy",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "REALTIME_RELAY_MODE=legacy is incompatible with REDIS_CLUSTER_MODE=true; use sharded mode",
+      "mode": "legacy",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "dual",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "REALTIME_RELAY_MODE=dual is incompatible with REDIS_CLUSTER_MODE=true; use sharded mode",
+      "mode": "dual",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "dual",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "REALTIME_RELAY_MODE=dual is incompatible with REDIS_CLUSTER_MODE=true; use sharded mode",
+      "mode": "dual",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        3,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        3,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        1,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        1,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        9223372036854775807,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        9223372036854775807,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        3,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        3,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        3,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        3,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        true
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        true
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        true
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        true
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        true
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        true
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        true
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        true
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        true
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        true
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        1500000000,
+        3000000000,
+        4500000000,
+        1500000000,
+        1500000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        1500000000,
+        3000000000,
+        4500000000,
+        1500000000,
+        1500000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        1,
+        2,
+        3,
+        1,
+        1,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        1,
+        2,
+        3,
+        1,
+        1,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        9223372036854775807,
+        -2,
+        9223372036854775805,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        9223372036854775807,
+        -2,
+        9223372036854775805,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        180000000000,
+        360000000000,
+        540000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        180000000000,
+        360000000000,
+        540000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        3600000000000,
+        3900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        3600000000000,
+        3900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        3600000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        3600000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        1,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        1,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        1,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        1,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 0,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 0,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 0,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 0,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": false
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 0,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": false
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 0,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": false
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 0,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": false
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 0,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": false
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 0,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": false
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        1000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        500000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 500000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        500,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 500,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        2000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 2000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        3723000000004,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 3723000000004,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 0,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": false
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        9223372036854775807,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 9223372036854775807,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 0,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": false
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": -9223372036854775808,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 0,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": false
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        9223372036854775807,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 9223372036854775807,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 0,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": false
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        1200000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1200000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        1,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        1000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "https://front",
+        "https://second"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "https://cors"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "https://front"
+      ],
+      "valid_duration": true
+    },
+    {
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "error": "",
+      "mode": "sharded",
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "valid_duration": true
+    }
+  ],
+  "python": [
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "legacy",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "legacy",
+      "error": "REALTIME_RELAY_MODE=legacy is incompatible with REDIS_CLUSTER_MODE=true; use sharded mode",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "dual",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "dual",
+      "error": "REALTIME_RELAY_MODE=dual is incompatible with REDIS_CLUSTER_MODE=true; use sharded mode",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "dual",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "dual",
+      "error": "REALTIME_RELAY_MODE=dual is incompatible with REDIS_CLUSTER_MODE=true; use sharded mode",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        3,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        3,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        1,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        1,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        9223372036854775807,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        9223372036854775807,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        3,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        3,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        3,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        3,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        true
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        true
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        true
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        true
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        true
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        true
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        true
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        true
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        true
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        true
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        1500000000,
+        3000000000,
+        4500000000,
+        1500000000,
+        1500000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        1500000000,
+        3000000000,
+        4500000000,
+        1500000000,
+        1500000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        1,
+        2,
+        3,
+        1,
+        1,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        1,
+        2,
+        3,
+        1,
+        1,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        9223372036854775807,
+        -2,
+        9223372036854775805,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        9223372036854775807,
+        -2,
+        9223372036854775805,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        180000000000,
+        360000000000,
+        540000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        180000000000,
+        360000000000,
+        540000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        3600000000000,
+        3900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        3600000000000,
+        3900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        3600000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        3600000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        1,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        1,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        1,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        1,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 0,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 0,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 0,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 0,
+      "valid_duration": false
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 0,
+      "valid_duration": false
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 0,
+      "valid_duration": false
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 0,
+      "valid_duration": false
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 0,
+      "valid_duration": false
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 0,
+      "valid_duration": false
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        1000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        500000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 500000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        500,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 500,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        2000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 2000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        3723000000004,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 3723000000004,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 0,
+      "valid_duration": false
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        9223372036854775807,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 9223372036854775807,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 0,
+      "valid_duration": false
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": -9223372036854775808,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 0,
+      "valid_duration": false
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        9223372036854775807,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 9223372036854775807,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 0,
+      "valid_duration": false
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        1200000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1200000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        1,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        1000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "https://front",
+        "https://second"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "https://cors"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "https://front"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    },
+    {
+      "origins": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174"
+      ],
+      "mode": "sharded",
+      "error": "",
+      "config": [
+        8,
+        2000,
+        128,
+        5000000000,
+        300000000000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000,
+        false
+      ],
+      "duration": 1000000000,
+      "valid_duration": true
+    }
+  ],
+  "mismatches": [],
+  "source_sha256": {
+    "server/go/cmd/server/router.go": "e214dfb54ab8085897d16e9d6713048753ef4d6b6b0407bfbff52b8d5deb4a63",
+    "server/src/workpal_backend/realtime/origins.py": "69642801eea41a7571a958b5ef01bebd51047b5408185317256c83b5ad61ad7b",
+    "server/go/cmd/server/main.go": "ec0a03a29bee40082287f581119c0e8183429442d50b35a879e43b3102489a32",
+    "server/go/internal/realtime/sharded_stream_relay.go": "672a624544ff57afd22973d160a4b5c47e8f0f4b65918cf5bc7b751ab63b0da2",
+    "server/tests/parity/go_relay_config/wrapper.go": "153ca4e6f2708449fb077d0df668a2e53c75de6c5730997a71dbfb4644cb36ab",
+    "server/src/workpal_backend/realtime/relay_config.py": "102254def9b5102996539626b426748a8e8912ebf62b91e3b7d3dab8becc047f",
+    "server/src/workpal_backend/realtime/sharded_config.py": "d3c033c35f8f22cabe8c1c6bd05b2b8d6dcd1406f817ff53052af3c26fccfd7e"
+  }
+}

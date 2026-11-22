@@ -1,0 +1,802 @@
+{
+  "scope": "Actual Go avatar signature/URL projection helpers with local storage; no attachment lookup, storage read, proxy/presign/CloudFront, or HTTP transport certification.",
+  "fixtures": [
+    {
+      "Raw": "/uploads/users/user/avatar.PNG",
+      "Key": "users/user/avatar.PNG",
+      "Base": "",
+      "Public": "https://api.example///",
+      "Disabled": false,
+      "TTL": 119.9
+    },
+    {
+      "Raw": "https://files.example/uploads/users/user/avatar.PNG",
+      "Key": "users/user/avatar.PNG",
+      "Base": "https://files.example/",
+      "Public": "https://api.example///",
+      "Disabled": false,
+      "TTL": 119.9
+    },
+    {
+      "Raw": "/uploads/users/user/.png",
+      "Key": "users/user/.png",
+      "Base": "",
+      "Public": "https://api.example///",
+      "Disabled": false,
+      "TTL": 119.9
+    },
+    {
+      "Raw": "https://files.example/uploads/users/user/.png",
+      "Key": "users/user/.png",
+      "Base": "https://files.example/",
+      "Public": "https://api.example///",
+      "Disabled": false,
+      "TTL": 119.9
+    },
+    {
+      "Raw": "/uploads/avatar.svg",
+      "Key": "avatar.svg",
+      "Base": "",
+      "Public": "https://api.example///",
+      "Disabled": false,
+      "TTL": 119.9
+    },
+    {
+      "Raw": "https://files.example/uploads/avatar.svg",
+      "Key": "avatar.svg",
+      "Base": "https://files.example/",
+      "Public": "https://api.example///",
+      "Disabled": false,
+      "TTL": 119.9
+    },
+    {
+      "Raw": "/uploads/space name.png",
+      "Key": "space name.png",
+      "Base": "",
+      "Public": "https://api.example///",
+      "Disabled": false,
+      "TTL": 119.9
+    },
+    {
+      "Raw": "https://files.example/uploads/space name.png",
+      "Key": "space name.png",
+      "Base": "https://files.example/",
+      "Public": "https://api.example///",
+      "Disabled": false,
+      "TTL": 119.9
+    },
+    {
+      "Raw": "/uploads/unicode-\u5934\u50cf.webp",
+      "Key": "unicode-\u5934\u50cf.webp",
+      "Base": "",
+      "Public": "https://api.example///",
+      "Disabled": false,
+      "TTL": 119.9
+    },
+    {
+      "Raw": "https://files.example/uploads/unicode-\u5934\u50cf.webp",
+      "Key": "unicode-\u5934\u50cf.webp",
+      "Base": "https://files.example/",
+      "Public": "https://api.example///",
+      "Disabled": false,
+      "TTL": 119.9
+    },
+    {
+      "Raw": "/uploads/a.png/",
+      "Key": "a.png/",
+      "Base": "",
+      "Public": "https://api.example///",
+      "Disabled": false,
+      "TTL": 119.9
+    },
+    {
+      "Raw": "https://files.example/uploads/a.png/",
+      "Key": "a.png/",
+      "Base": "https://files.example/",
+      "Public": "https://api.example///",
+      "Disabled": false,
+      "TTL": 119.9
+    },
+    {
+      "Raw": "/api/avatars/BeLALGpt29LheViVAlmlVVzftrpmNKy77tFVXQ3f3fw/users/user/avatar.png",
+      "Key": "users/user/avatar.png",
+      "Base": "",
+      "Public": "",
+      "Disabled": false,
+      "TTL": 0.5
+    },
+    {
+      "Raw": "https://api.example/api/avatars/BeLALGpt29LheViVAlmlVVzftrpmNKy77tFVXQ3f3fw/users/user/avatar.png",
+      "Key": "users/user/avatar.png",
+      "Base": "",
+      "Public": "",
+      "Disabled": false,
+      "TTL": 0.5
+    },
+    {
+      "Raw": "https://unrelated.example/api/avatars/BeLALGpt29LheViVAlmlVVzftrpmNKy77tFVXQ3f3fw/users/user/avatar.png",
+      "Key": "users/user/avatar.png",
+      "Base": "",
+      "Public": "",
+      "Disabled": false,
+      "TTL": 0.5
+    },
+    {
+      "Raw": "/api/avatars/BeLALGpt29LheViVAlmlVVzftrpmNKy77tFVXQ3f3fw/users/user/avatar.png?x=1",
+      "Key": "users/user/avatar.png",
+      "Base": "",
+      "Public": "",
+      "Disabled": false,
+      "TTL": 0.5
+    },
+    {
+      "Raw": "https://api.example/api/avatars/BeLALGpt29LheViVAlmlVVzftrpmNKy77tFVXQ3f3fw/users/user/avatar.png?x=1",
+      "Key": "users/user/avatar.png",
+      "Base": "",
+      "Public": "",
+      "Disabled": false,
+      "TTL": 0.5
+    },
+    {
+      "Raw": "/api/avatars/BeLALGpt29LheViVAlmlVVzftrpmNKy77tFVXQ3f3fw/users/user/changed.png",
+      "Key": "users/user/avatar.png",
+      "Base": "",
+      "Public": "",
+      "Disabled": false,
+      "TTL": 0.5
+    },
+    {
+      "Raw": "https://external.example/uploads/avatar.png",
+      "Key": "users/user/avatar.png",
+      "Base": "",
+      "Public": "",
+      "Disabled": false,
+      "TTL": 0.5
+    },
+    {
+      "Raw": "data:image/png;base64,AAAA",
+      "Key": "users/user/avatar.png",
+      "Base": "",
+      "Public": "",
+      "Disabled": false,
+      "TTL": 0.5
+    },
+    {
+      "Raw": "emoji:smile",
+      "Key": "users/user/avatar.png",
+      "Base": "",
+      "Public": "",
+      "Disabled": false,
+      "TTL": 0.5
+    },
+    {
+      "Raw": "",
+      "Key": "users/user/avatar.png",
+      "Base": "",
+      "Public": "",
+      "Disabled": false,
+      "TTL": 0.5
+    },
+    {
+      "Raw": "/uploads/avatar.png",
+      "Key": "avatar.png",
+      "Base": "",
+      "Public": "",
+      "Disabled": true,
+      "TTL": 300
+    },
+    {
+      "Raw": "",
+      "Key": "avatar.png",
+      "Base": "",
+      "Public": "",
+      "Disabled": false,
+      "TTL": 0
+    },
+    {
+      "Raw": "",
+      "Key": "avatar.png",
+      "Base": "",
+      "Public": "",
+      "Disabled": false,
+      "TTL": -1
+    },
+    {
+      "Raw": "",
+      "Key": "avatar.png",
+      "Base": "",
+      "Public": "",
+      "Disabled": false,
+      "TTL": 1.9
+    },
+    {
+      "Raw": "",
+      "Key": "avatar.png",
+      "Base": "",
+      "Public": "",
+      "Disabled": false,
+      "TTL": 2
+    },
+    {
+      "Raw": "",
+      "Key": "avatar.png",
+      "Base": "",
+      "Public": "",
+      "Disabled": false,
+      "TTL": 120
+    }
+  ],
+  "go": [
+    {
+      "content_type": "image/png",
+      "max_age": 59,
+      "normalized": "/uploads/users/user/avatar.PNG",
+      "path": "/api/avatars/9LHLBYZfg0tYiYbAJtaI_L4nnSFGziL72uS10doMt8g/users/user/avatar.PNG",
+      "resolved": "https://api.example/api/avatars/9LHLBYZfg0tYiYbAJtaI_L4nnSFGziL72uS10doMt8g/users/user/avatar.PNG",
+      "served_key": "",
+      "signature": "9LHLBYZfg0tYiYbAJtaI_L4nnSFGziL72uS10doMt8g",
+      "valid": false
+    },
+    {
+      "content_type": "image/png",
+      "max_age": 59,
+      "normalized": "https://files.example/uploads/users/user/avatar.PNG",
+      "path": "/api/avatars/9LHLBYZfg0tYiYbAJtaI_L4nnSFGziL72uS10doMt8g/users/user/avatar.PNG",
+      "resolved": "https://api.example/api/avatars/9LHLBYZfg0tYiYbAJtaI_L4nnSFGziL72uS10doMt8g/users/user/avatar.PNG",
+      "served_key": "",
+      "signature": "9LHLBYZfg0tYiYbAJtaI_L4nnSFGziL72uS10doMt8g",
+      "valid": false
+    },
+    {
+      "content_type": "image/png",
+      "max_age": 59,
+      "normalized": "/uploads/users/user/.png",
+      "path": "/api/avatars/NKTmhDUJP7IA_Nr6hvKBoXFVTdrYR2TRfkUmNpYwg0k/users/user/.png",
+      "resolved": "https://api.example/api/avatars/NKTmhDUJP7IA_Nr6hvKBoXFVTdrYR2TRfkUmNpYwg0k/users/user/.png",
+      "served_key": "",
+      "signature": "NKTmhDUJP7IA_Nr6hvKBoXFVTdrYR2TRfkUmNpYwg0k",
+      "valid": false
+    },
+    {
+      "content_type": "image/png",
+      "max_age": 59,
+      "normalized": "https://files.example/uploads/users/user/.png",
+      "path": "/api/avatars/NKTmhDUJP7IA_Nr6hvKBoXFVTdrYR2TRfkUmNpYwg0k/users/user/.png",
+      "resolved": "https://api.example/api/avatars/NKTmhDUJP7IA_Nr6hvKBoXFVTdrYR2TRfkUmNpYwg0k/users/user/.png",
+      "served_key": "",
+      "signature": "NKTmhDUJP7IA_Nr6hvKBoXFVTdrYR2TRfkUmNpYwg0k",
+      "valid": false
+    },
+    {
+      "content_type": "",
+      "max_age": 59,
+      "normalized": "/uploads/avatar.svg",
+      "path": "/api/avatars/9aJdJESDrfQV9NxHpgxAq7bgO3kP75ieyfltjyFffGM/avatar.svg",
+      "resolved": "/uploads/avatar.svg",
+      "served_key": "",
+      "signature": "9aJdJESDrfQV9NxHpgxAq7bgO3kP75ieyfltjyFffGM",
+      "valid": false
+    },
+    {
+      "content_type": "",
+      "max_age": 59,
+      "normalized": "https://files.example/uploads/avatar.svg",
+      "path": "/api/avatars/9aJdJESDrfQV9NxHpgxAq7bgO3kP75ieyfltjyFffGM/avatar.svg",
+      "resolved": "https://files.example/uploads/avatar.svg",
+      "served_key": "",
+      "signature": "9aJdJESDrfQV9NxHpgxAq7bgO3kP75ieyfltjyFffGM",
+      "valid": false
+    },
+    {
+      "content_type": "image/png",
+      "max_age": 59,
+      "normalized": "/uploads/space name.png",
+      "path": "/api/avatars/BWW5m69xG3syi-frmWXAG8zOB30cPaQAUz6g7QOAoMg/space name.png",
+      "resolved": "https://api.example/api/avatars/BWW5m69xG3syi-frmWXAG8zOB30cPaQAUz6g7QOAoMg/space name.png",
+      "served_key": "",
+      "signature": "BWW5m69xG3syi-frmWXAG8zOB30cPaQAUz6g7QOAoMg",
+      "valid": false
+    },
+    {
+      "content_type": "image/png",
+      "max_age": 59,
+      "normalized": "https://files.example/uploads/space name.png",
+      "path": "/api/avatars/BWW5m69xG3syi-frmWXAG8zOB30cPaQAUz6g7QOAoMg/space name.png",
+      "resolved": "https://api.example/api/avatars/BWW5m69xG3syi-frmWXAG8zOB30cPaQAUz6g7QOAoMg/space name.png",
+      "served_key": "",
+      "signature": "BWW5m69xG3syi-frmWXAG8zOB30cPaQAUz6g7QOAoMg",
+      "valid": false
+    },
+    {
+      "content_type": "image/webp",
+      "max_age": 59,
+      "normalized": "/uploads/unicode-\u5934\u50cf.webp",
+      "path": "/api/avatars/q0yW94b32B5pbrMlTrShPbCw8tx42GIZFn3lpsRcunA/unicode-\u5934\u50cf.webp",
+      "resolved": "https://api.example/api/avatars/q0yW94b32B5pbrMlTrShPbCw8tx42GIZFn3lpsRcunA/unicode-\u5934\u50cf.webp",
+      "served_key": "",
+      "signature": "q0yW94b32B5pbrMlTrShPbCw8tx42GIZFn3lpsRcunA",
+      "valid": false
+    },
+    {
+      "content_type": "image/webp",
+      "max_age": 59,
+      "normalized": "https://files.example/uploads/unicode-\u5934\u50cf.webp",
+      "path": "/api/avatars/q0yW94b32B5pbrMlTrShPbCw8tx42GIZFn3lpsRcunA/unicode-\u5934\u50cf.webp",
+      "resolved": "https://api.example/api/avatars/q0yW94b32B5pbrMlTrShPbCw8tx42GIZFn3lpsRcunA/unicode-\u5934\u50cf.webp",
+      "served_key": "",
+      "signature": "q0yW94b32B5pbrMlTrShPbCw8tx42GIZFn3lpsRcunA",
+      "valid": false
+    },
+    {
+      "content_type": "",
+      "max_age": 59,
+      "normalized": "/uploads/a.png/",
+      "path": "/api/avatars/ajvL7E_djaZaVpVVizk0UjUOXmPLu68VfBPZqzSHd1Y/a.png/",
+      "resolved": "/uploads/a.png/",
+      "served_key": "",
+      "signature": "ajvL7E_djaZaVpVVizk0UjUOXmPLu68VfBPZqzSHd1Y",
+      "valid": false
+    },
+    {
+      "content_type": "",
+      "max_age": 59,
+      "normalized": "https://files.example/uploads/a.png/",
+      "path": "/api/avatars/ajvL7E_djaZaVpVVizk0UjUOXmPLu68VfBPZqzSHd1Y/a.png/",
+      "resolved": "https://files.example/uploads/a.png/",
+      "served_key": "",
+      "signature": "ajvL7E_djaZaVpVVizk0UjUOXmPLu68VfBPZqzSHd1Y",
+      "valid": false
+    },
+    {
+      "content_type": "image/png",
+      "max_age": 0,
+      "normalized": "/uploads/users/user/avatar.png",
+      "path": "/api/avatars/BeLALGpt29LheViVAlmlVVzftrpmNKy77tFVXQ3f3fw/users/user/avatar.png",
+      "resolved": "/api/avatars/BeLALGpt29LheViVAlmlVVzftrpmNKy77tFVXQ3f3fw/users/user/avatar.png",
+      "served_key": "users/user/avatar.png",
+      "signature": "BeLALGpt29LheViVAlmlVVzftrpmNKy77tFVXQ3f3fw",
+      "valid": true
+    },
+    {
+      "content_type": "image/png",
+      "max_age": 0,
+      "normalized": "/uploads/users/user/avatar.png",
+      "path": "/api/avatars/BeLALGpt29LheViVAlmlVVzftrpmNKy77tFVXQ3f3fw/users/user/avatar.png",
+      "resolved": "/api/avatars/BeLALGpt29LheViVAlmlVVzftrpmNKy77tFVXQ3f3fw/users/user/avatar.png",
+      "served_key": "users/user/avatar.png",
+      "signature": "BeLALGpt29LheViVAlmlVVzftrpmNKy77tFVXQ3f3fw",
+      "valid": true
+    },
+    {
+      "content_type": "image/png",
+      "max_age": 0,
+      "normalized": "/uploads/users/user/avatar.png",
+      "path": "/api/avatars/BeLALGpt29LheViVAlmlVVzftrpmNKy77tFVXQ3f3fw/users/user/avatar.png",
+      "resolved": "/api/avatars/BeLALGpt29LheViVAlmlVVzftrpmNKy77tFVXQ3f3fw/users/user/avatar.png",
+      "served_key": "users/user/avatar.png",
+      "signature": "BeLALGpt29LheViVAlmlVVzftrpmNKy77tFVXQ3f3fw",
+      "valid": true
+    },
+    {
+      "content_type": "image/png",
+      "max_age": 0,
+      "normalized": "/api/avatars/BeLALGpt29LheViVAlmlVVzftrpmNKy77tFVXQ3f3fw/users/user/avatar.png?x=1",
+      "path": "/api/avatars/BeLALGpt29LheViVAlmlVVzftrpmNKy77tFVXQ3f3fw/users/user/avatar.png",
+      "resolved": "/api/avatars/BeLALGpt29LheViVAlmlVVzftrpmNKy77tFVXQ3f3fw/users/user/avatar.png?x=1",
+      "served_key": "",
+      "signature": "BeLALGpt29LheViVAlmlVVzftrpmNKy77tFVXQ3f3fw",
+      "valid": false
+    },
+    {
+      "content_type": "image/png",
+      "max_age": 0,
+      "normalized": "/uploads/users/user/avatar.png",
+      "path": "/api/avatars/BeLALGpt29LheViVAlmlVVzftrpmNKy77tFVXQ3f3fw/users/user/avatar.png",
+      "resolved": "/api/avatars/BeLALGpt29LheViVAlmlVVzftrpmNKy77tFVXQ3f3fw/users/user/avatar.png",
+      "served_key": "users/user/avatar.png",
+      "signature": "BeLALGpt29LheViVAlmlVVzftrpmNKy77tFVXQ3f3fw",
+      "valid": true
+    },
+    {
+      "content_type": "image/png",
+      "max_age": 0,
+      "normalized": "/api/avatars/BeLALGpt29LheViVAlmlVVzftrpmNKy77tFVXQ3f3fw/users/user/changed.png",
+      "path": "/api/avatars/BeLALGpt29LheViVAlmlVVzftrpmNKy77tFVXQ3f3fw/users/user/avatar.png",
+      "resolved": "/api/avatars/BeLALGpt29LheViVAlmlVVzftrpmNKy77tFVXQ3f3fw/users/user/changed.png",
+      "served_key": "",
+      "signature": "BeLALGpt29LheViVAlmlVVzftrpmNKy77tFVXQ3f3fw",
+      "valid": false
+    },
+    {
+      "content_type": "image/png",
+      "max_age": 0,
+      "normalized": "https://external.example/uploads/avatar.png",
+      "path": "/api/avatars/BeLALGpt29LheViVAlmlVVzftrpmNKy77tFVXQ3f3fw/users/user/avatar.png",
+      "resolved": "https://external.example/uploads/avatar.png",
+      "served_key": "",
+      "signature": "BeLALGpt29LheViVAlmlVVzftrpmNKy77tFVXQ3f3fw",
+      "valid": false
+    },
+    {
+      "content_type": "image/png",
+      "max_age": 0,
+      "normalized": "data:image/png;base64,AAAA",
+      "path": "/api/avatars/BeLALGpt29LheViVAlmlVVzftrpmNKy77tFVXQ3f3fw/users/user/avatar.png",
+      "resolved": "data:image/png;base64,AAAA",
+      "served_key": "",
+      "signature": "BeLALGpt29LheViVAlmlVVzftrpmNKy77tFVXQ3f3fw",
+      "valid": false
+    },
+    {
+      "content_type": "image/png",
+      "max_age": 0,
+      "normalized": "emoji:smile",
+      "path": "/api/avatars/BeLALGpt29LheViVAlmlVVzftrpmNKy77tFVXQ3f3fw/users/user/avatar.png",
+      "resolved": "emoji:smile",
+      "served_key": "",
+      "signature": "BeLALGpt29LheViVAlmlVVzftrpmNKy77tFVXQ3f3fw",
+      "valid": false
+    },
+    {
+      "content_type": "image/png",
+      "max_age": 0,
+      "normalized": "",
+      "path": "/api/avatars/BeLALGpt29LheViVAlmlVVzftrpmNKy77tFVXQ3f3fw/users/user/avatar.png",
+      "resolved": "",
+      "served_key": "",
+      "signature": "BeLALGpt29LheViVAlmlVVzftrpmNKy77tFVXQ3f3fw",
+      "valid": false
+    },
+    {
+      "content_type": "image/png",
+      "max_age": 60,
+      "normalized": "/uploads/avatar.png",
+      "path": "/api/avatars/2XbBC3pHEDo0fjOiFfkS1GmuNcjnjZKp0J0tX39cHQM/avatar.png",
+      "resolved": "/uploads/avatar.png",
+      "served_key": "",
+      "signature": "2XbBC3pHEDo0fjOiFfkS1GmuNcjnjZKp0J0tX39cHQM",
+      "valid": false
+    },
+    {
+      "content_type": "image/png",
+      "max_age": 60,
+      "normalized": "",
+      "path": "/api/avatars/2XbBC3pHEDo0fjOiFfkS1GmuNcjnjZKp0J0tX39cHQM/avatar.png",
+      "resolved": "",
+      "served_key": "",
+      "signature": "2XbBC3pHEDo0fjOiFfkS1GmuNcjnjZKp0J0tX39cHQM",
+      "valid": false
+    },
+    {
+      "content_type": "image/png",
+      "max_age": 60,
+      "normalized": "",
+      "path": "/api/avatars/2XbBC3pHEDo0fjOiFfkS1GmuNcjnjZKp0J0tX39cHQM/avatar.png",
+      "resolved": "",
+      "served_key": "",
+      "signature": "2XbBC3pHEDo0fjOiFfkS1GmuNcjnjZKp0J0tX39cHQM",
+      "valid": false
+    },
+    {
+      "content_type": "image/png",
+      "max_age": 0,
+      "normalized": "",
+      "path": "/api/avatars/2XbBC3pHEDo0fjOiFfkS1GmuNcjnjZKp0J0tX39cHQM/avatar.png",
+      "resolved": "",
+      "served_key": "",
+      "signature": "2XbBC3pHEDo0fjOiFfkS1GmuNcjnjZKp0J0tX39cHQM",
+      "valid": false
+    },
+    {
+      "content_type": "image/png",
+      "max_age": 1,
+      "normalized": "",
+      "path": "/api/avatars/2XbBC3pHEDo0fjOiFfkS1GmuNcjnjZKp0J0tX39cHQM/avatar.png",
+      "resolved": "",
+      "served_key": "",
+      "signature": "2XbBC3pHEDo0fjOiFfkS1GmuNcjnjZKp0J0tX39cHQM",
+      "valid": false
+    },
+    {
+      "content_type": "image/png",
+      "max_age": 60,
+      "normalized": "",
+      "path": "/api/avatars/2XbBC3pHEDo0fjOiFfkS1GmuNcjnjZKp0J0tX39cHQM/avatar.png",
+      "resolved": "",
+      "served_key": "",
+      "signature": "2XbBC3pHEDo0fjOiFfkS1GmuNcjnjZKp0J0tX39cHQM",
+      "valid": false
+    }
+  ],
+  "python": [
+    {
+      "signature": "9LHLBYZfg0tYiYbAJtaI_L4nnSFGziL72uS10doMt8g",
+      "path": "/api/avatars/9LHLBYZfg0tYiYbAJtaI_L4nnSFGziL72uS10doMt8g/users/user/avatar.PNG",
+      "content_type": "image/png",
+      "resolved": "https://api.example/api/avatars/9LHLBYZfg0tYiYbAJtaI_L4nnSFGziL72uS10doMt8g/users/user/avatar.PNG",
+      "normalized": "/uploads/users/user/avatar.PNG",
+      "served_key": "",
+      "valid": false,
+      "max_age": 59
+    },
+    {
+      "signature": "9LHLBYZfg0tYiYbAJtaI_L4nnSFGziL72uS10doMt8g",
+      "path": "/api/avatars/9LHLBYZfg0tYiYbAJtaI_L4nnSFGziL72uS10doMt8g/users/user/avatar.PNG",
+      "content_type": "image/png",
+      "resolved": "https://api.example/api/avatars/9LHLBYZfg0tYiYbAJtaI_L4nnSFGziL72uS10doMt8g/users/user/avatar.PNG",
+      "normalized": "https://files.example/uploads/users/user/avatar.PNG",
+      "served_key": "",
+      "valid": false,
+      "max_age": 59
+    },
+    {
+      "signature": "NKTmhDUJP7IA_Nr6hvKBoXFVTdrYR2TRfkUmNpYwg0k",
+      "path": "/api/avatars/NKTmhDUJP7IA_Nr6hvKBoXFVTdrYR2TRfkUmNpYwg0k/users/user/.png",
+      "content_type": "image/png",
+      "resolved": "https://api.example/api/avatars/NKTmhDUJP7IA_Nr6hvKBoXFVTdrYR2TRfkUmNpYwg0k/users/user/.png",
+      "normalized": "/uploads/users/user/.png",
+      "served_key": "",
+      "valid": false,
+      "max_age": 59
+    },
+    {
+      "signature": "NKTmhDUJP7IA_Nr6hvKBoXFVTdrYR2TRfkUmNpYwg0k",
+      "path": "/api/avatars/NKTmhDUJP7IA_Nr6hvKBoXFVTdrYR2TRfkUmNpYwg0k/users/user/.png",
+      "content_type": "image/png",
+      "resolved": "https://api.example/api/avatars/NKTmhDUJP7IA_Nr6hvKBoXFVTdrYR2TRfkUmNpYwg0k/users/user/.png",
+      "normalized": "https://files.example/uploads/users/user/.png",
+      "served_key": "",
+      "valid": false,
+      "max_age": 59
+    },
+    {
+      "signature": "9aJdJESDrfQV9NxHpgxAq7bgO3kP75ieyfltjyFffGM",
+      "path": "/api/avatars/9aJdJESDrfQV9NxHpgxAq7bgO3kP75ieyfltjyFffGM/avatar.svg",
+      "content_type": "",
+      "resolved": "/uploads/avatar.svg",
+      "normalized": "/uploads/avatar.svg",
+      "served_key": "",
+      "valid": false,
+      "max_age": 59
+    },
+    {
+      "signature": "9aJdJESDrfQV9NxHpgxAq7bgO3kP75ieyfltjyFffGM",
+      "path": "/api/avatars/9aJdJESDrfQV9NxHpgxAq7bgO3kP75ieyfltjyFffGM/avatar.svg",
+      "content_type": "",
+      "resolved": "https://files.example/uploads/avatar.svg",
+      "normalized": "https://files.example/uploads/avatar.svg",
+      "served_key": "",
+      "valid": false,
+      "max_age": 59
+    },
+    {
+      "signature": "BWW5m69xG3syi-frmWXAG8zOB30cPaQAUz6g7QOAoMg",
+      "path": "/api/avatars/BWW5m69xG3syi-frmWXAG8zOB30cPaQAUz6g7QOAoMg/space name.png",
+      "content_type": "image/png",
+      "resolved": "https://api.example/api/avatars/BWW5m69xG3syi-frmWXAG8zOB30cPaQAUz6g7QOAoMg/space name.png",
+      "normalized": "/uploads/space name.png",
+      "served_key": "",
+      "valid": false,
+      "max_age": 59
+    },
+    {
+      "signature": "BWW5m69xG3syi-frmWXAG8zOB30cPaQAUz6g7QOAoMg",
+      "path": "/api/avatars/BWW5m69xG3syi-frmWXAG8zOB30cPaQAUz6g7QOAoMg/space name.png",
+      "content_type": "image/png",
+      "resolved": "https://api.example/api/avatars/BWW5m69xG3syi-frmWXAG8zOB30cPaQAUz6g7QOAoMg/space name.png",
+      "normalized": "https://files.example/uploads/space name.png",
+      "served_key": "",
+      "valid": false,
+      "max_age": 59
+    },
+    {
+      "signature": "q0yW94b32B5pbrMlTrShPbCw8tx42GIZFn3lpsRcunA",
+      "path": "/api/avatars/q0yW94b32B5pbrMlTrShPbCw8tx42GIZFn3lpsRcunA/unicode-\u5934\u50cf.webp",
+      "content_type": "image/webp",
+      "resolved": "https://api.example/api/avatars/q0yW94b32B5pbrMlTrShPbCw8tx42GIZFn3lpsRcunA/unicode-\u5934\u50cf.webp",
+      "normalized": "/uploads/unicode-\u5934\u50cf.webp",
+      "served_key": "",
+      "valid": false,
+      "max_age": 59
+    },
+    {
+      "signature": "q0yW94b32B5pbrMlTrShPbCw8tx42GIZFn3lpsRcunA",
+      "path": "/api/avatars/q0yW94b32B5pbrMlTrShPbCw8tx42GIZFn3lpsRcunA/unicode-\u5934\u50cf.webp",
+      "content_type": "image/webp",
+      "resolved": "https://api.example/api/avatars/q0yW94b32B5pbrMlTrShPbCw8tx42GIZFn3lpsRcunA/unicode-\u5934\u50cf.webp",
+      "normalized": "https://files.example/uploads/unicode-\u5934\u50cf.webp",
+      "served_key": "",
+      "valid": false,
+      "max_age": 59
+    },
+    {
+      "signature": "ajvL7E_djaZaVpVVizk0UjUOXmPLu68VfBPZqzSHd1Y",
+      "path": "/api/avatars/ajvL7E_djaZaVpVVizk0UjUOXmPLu68VfBPZqzSHd1Y/a.png/",
+      "content_type": "",
+      "resolved": "/uploads/a.png/",
+      "normalized": "/uploads/a.png/",
+      "served_key": "",
+      "valid": false,
+      "max_age": 59
+    },
+    {
+      "signature": "ajvL7E_djaZaVpVVizk0UjUOXmPLu68VfBPZqzSHd1Y",
+      "path": "/api/avatars/ajvL7E_djaZaVpVVizk0UjUOXmPLu68VfBPZqzSHd1Y/a.png/",
+      "content_type": "",
+      "resolved": "https://files.example/uploads/a.png/",
+      "normalized": "https://files.example/uploads/a.png/",
+      "served_key": "",
+      "valid": false,
+      "max_age": 59
+    },
+    {
+      "signature": "BeLALGpt29LheViVAlmlVVzftrpmNKy77tFVXQ3f3fw",
+      "path": "/api/avatars/BeLALGpt29LheViVAlmlVVzftrpmNKy77tFVXQ3f3fw/users/user/avatar.png",
+      "content_type": "image/png",
+      "resolved": "/api/avatars/BeLALGpt29LheViVAlmlVVzftrpmNKy77tFVXQ3f3fw/users/user/avatar.png",
+      "normalized": "/uploads/users/user/avatar.png",
+      "served_key": "users/user/avatar.png",
+      "valid": true,
+      "max_age": 0
+    },
+    {
+      "signature": "BeLALGpt29LheViVAlmlVVzftrpmNKy77tFVXQ3f3fw",
+      "path": "/api/avatars/BeLALGpt29LheViVAlmlVVzftrpmNKy77tFVXQ3f3fw/users/user/avatar.png",
+      "content_type": "image/png",
+      "resolved": "/api/avatars/BeLALGpt29LheViVAlmlVVzftrpmNKy77tFVXQ3f3fw/users/user/avatar.png",
+      "normalized": "/uploads/users/user/avatar.png",
+      "served_key": "users/user/avatar.png",
+      "valid": true,
+      "max_age": 0
+    },
+    {
+      "signature": "BeLALGpt29LheViVAlmlVVzftrpmNKy77tFVXQ3f3fw",
+      "path": "/api/avatars/BeLALGpt29LheViVAlmlVVzftrpmNKy77tFVXQ3f3fw/users/user/avatar.png",
+      "content_type": "image/png",
+      "resolved": "/api/avatars/BeLALGpt29LheViVAlmlVVzftrpmNKy77tFVXQ3f3fw/users/user/avatar.png",
+      "normalized": "/uploads/users/user/avatar.png",
+      "served_key": "users/user/avatar.png",
+      "valid": true,
+      "max_age": 0
+    },
+    {
+      "signature": "BeLALGpt29LheViVAlmlVVzftrpmNKy77tFVXQ3f3fw",
+      "path": "/api/avatars/BeLALGpt29LheViVAlmlVVzftrpmNKy77tFVXQ3f3fw/users/user/avatar.png",
+      "content_type": "image/png",
+      "resolved": "/api/avatars/BeLALGpt29LheViVAlmlVVzftrpmNKy77tFVXQ3f3fw/users/user/avatar.png?x=1",
+      "normalized": "/api/avatars/BeLALGpt29LheViVAlmlVVzftrpmNKy77tFVXQ3f3fw/users/user/avatar.png?x=1",
+      "served_key": "",
+      "valid": false,
+      "max_age": 0
+    },
+    {
+      "signature": "BeLALGpt29LheViVAlmlVVzftrpmNKy77tFVXQ3f3fw",
+      "path": "/api/avatars/BeLALGpt29LheViVAlmlVVzftrpmNKy77tFVXQ3f3fw/users/user/avatar.png",
+      "content_type": "image/png",
+      "resolved": "/api/avatars/BeLALGpt29LheViVAlmlVVzftrpmNKy77tFVXQ3f3fw/users/user/avatar.png",
+      "normalized": "/uploads/users/user/avatar.png",
+      "served_key": "users/user/avatar.png",
+      "valid": true,
+      "max_age": 0
+    },
+    {
+      "signature": "BeLALGpt29LheViVAlmlVVzftrpmNKy77tFVXQ3f3fw",
+      "path": "/api/avatars/BeLALGpt29LheViVAlmlVVzftrpmNKy77tFVXQ3f3fw/users/user/avatar.png",
+      "content_type": "image/png",
+      "resolved": "/api/avatars/BeLALGpt29LheViVAlmlVVzftrpmNKy77tFVXQ3f3fw/users/user/changed.png",
+      "normalized": "/api/avatars/BeLALGpt29LheViVAlmlVVzftrpmNKy77tFVXQ3f3fw/users/user/changed.png",
+      "served_key": "",
+      "valid": false,
+      "max_age": 0
+    },
+    {
+      "signature": "BeLALGpt29LheViVAlmlVVzftrpmNKy77tFVXQ3f3fw",
+      "path": "/api/avatars/BeLALGpt29LheViVAlmlVVzftrpmNKy77tFVXQ3f3fw/users/user/avatar.png",
+      "content_type": "image/png",
+      "resolved": "https://external.example/uploads/avatar.png",
+      "normalized": "https://external.example/uploads/avatar.png",
+      "served_key": "",
+      "valid": false,
+      "max_age": 0
+    },
+    {
+      "signature": "BeLALGpt29LheViVAlmlVVzftrpmNKy77tFVXQ3f3fw",
+      "path": "/api/avatars/BeLALGpt29LheViVAlmlVVzftrpmNKy77tFVXQ3f3fw/users/user/avatar.png",
+      "content_type": "image/png",
+      "resolved": "data:image/png;base64,AAAA",
+      "normalized": "data:image/png;base64,AAAA",
+      "served_key": "",
+      "valid": false,
+      "max_age": 0
+    },
+    {
+      "signature": "BeLALGpt29LheViVAlmlVVzftrpmNKy77tFVXQ3f3fw",
+      "path": "/api/avatars/BeLALGpt29LheViVAlmlVVzftrpmNKy77tFVXQ3f3fw/users/user/avatar.png",
+      "content_type": "image/png",
+      "resolved": "emoji:smile",
+      "normalized": "emoji:smile",
+      "served_key": "",
+      "valid": false,
+      "max_age": 0
+    },
+    {
+      "signature": "BeLALGpt29LheViVAlmlVVzftrpmNKy77tFVXQ3f3fw",
+      "path": "/api/avatars/BeLALGpt29LheViVAlmlVVzftrpmNKy77tFVXQ3f3fw/users/user/avatar.png",
+      "content_type": "image/png",
+      "resolved": "",
+      "normalized": "",
+      "served_key": "",
+      "valid": false,
+      "max_age": 0
+    },
+    {
+      "signature": "2XbBC3pHEDo0fjOiFfkS1GmuNcjnjZKp0J0tX39cHQM",
+      "path": "/api/avatars/2XbBC3pHEDo0fjOiFfkS1GmuNcjnjZKp0J0tX39cHQM/avatar.png",
+      "content_type": "image/png",
+      "resolved": "/uploads/avatar.png",
+      "normalized": "/uploads/avatar.png",
+      "served_key": "",
+      "valid": false,
+      "max_age": 60
+    },
+    {
+      "signature": "2XbBC3pHEDo0fjOiFfkS1GmuNcjnjZKp0J0tX39cHQM",
+      "path": "/api/avatars/2XbBC3pHEDo0fjOiFfkS1GmuNcjnjZKp0J0tX39cHQM/avatar.png",
+      "content_type": "image/png",
+      "resolved": "",
+      "normalized": "",
+      "served_key": "",
+      "valid": false,
+      "max_age": 60
+    },
+    {
+      "signature": "2XbBC3pHEDo0fjOiFfkS1GmuNcjnjZKp0J0tX39cHQM",
+      "path": "/api/avatars/2XbBC3pHEDo0fjOiFfkS1GmuNcjnjZKp0J0tX39cHQM/avatar.png",
+      "content_type": "image/png",
+      "resolved": "",
+      "normalized": "",
+      "served_key": "",
+      "valid": false,
+      "max_age": 60
+    },
+    {
+      "signature": "2XbBC3pHEDo0fjOiFfkS1GmuNcjnjZKp0J0tX39cHQM",
+      "path": "/api/avatars/2XbBC3pHEDo0fjOiFfkS1GmuNcjnjZKp0J0tX39cHQM/avatar.png",
+      "content_type": "image/png",
+      "resolved": "",
+      "normalized": "",
+      "served_key": "",
+      "valid": false,
+      "max_age": 0
+    },
+    {
+      "signature": "2XbBC3pHEDo0fjOiFfkS1GmuNcjnjZKp0J0tX39cHQM",
+      "path": "/api/avatars/2XbBC3pHEDo0fjOiFfkS1GmuNcjnjZKp0J0tX39cHQM/avatar.png",
+      "content_type": "image/png",
+      "resolved": "",
+      "normalized": "",
+      "served_key": "",
+      "valid": false,
+      "max_age": 1
+    },
+    {
+      "signature": "2XbBC3pHEDo0fjOiFfkS1GmuNcjnjZKp0J0tX39cHQM",
+      "path": "/api/avatars/2XbBC3pHEDo0fjOiFfkS1GmuNcjnjZKp0J0tX39cHQM/avatar.png",
+      "content_type": "image/png",
+      "resolved": "",
+      "normalized": "",
+      "served_key": "",
+      "valid": false,
+      "max_age": 60
+    }
+  ],
+  "mismatches": [],
+  "source_sha256": {
+    "server/go/internal/handler/avatar.go": "2069f696ba7f5bd6ee6fb1f78db1ac5804b231286a4f405f6635653324c5a94a",
+    "server/go/internal/storage/local.go": "9adc50783c156969878c1389527787d6cf22b632e9ae20242e5b3d652cb8a5ed",
+    "server/tests/parity/go_avatar_urls/export.go": "aecce367f54693496da5871cd5047d3127b49857441078bfd21040a4c51bba31",
+    "server/tests/parity/go_avatar_urls/main.go": "70c8f32f0781fc8104a71c6bd0583c7b730d38748cc1d093fb655fb4e2c039b4",
+    "server/src/workpal_backend/files/avatar_urls.py": "322295d8427cf2f3df2c8068890361aeb343d7e09c51f75ba19b763169de6905"
+  },
+  "binary_sha256": "71f82087bc2427b6565a28ed82cb2838a89254e1ec2c34e9338c907e96fcae91"
+}

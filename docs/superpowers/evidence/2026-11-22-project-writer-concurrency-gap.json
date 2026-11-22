@@ -1,0 +1,14 @@
+{
+  "postgresql": {
+    "first_writer_open": true,
+    "second_writer_updated": true,
+    "error": ""
+  },
+  "sqlite": {
+    "first_writer_open": true,
+    "second_writer_updated": false,
+    "error": "database is locked"
+  },
+  "scope": "Two independent project row updates under one-second statement/busy timeout, first writer held open; isolated fresh schemas, actual Go project search triggers on PostgreSQL.",
+  "equivalent": false
+}

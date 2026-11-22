@@ -1,0 +1,1706 @@
+{
+  "source_sha256": {
+    "server/go/internal/handler/agent_env.go": "72ac933be6494e1ec910248f82a6c482bbba9fa0e57ed5f3d2f572991422a402",
+    "server/go/internal/handler/handler.go": "471e21dd3795a427723ecdf2f21bccf47385591bb6d02d089e487cdd2a6af7ef",
+    "server/go/internal/middleware/workspace.go": "d8b1eb22b5a7da16396facd1ebb87e16d7d7915cad68cef3aa9f69187cca5d7e",
+    "server/tests/parity/go_agent_env/main.go": "5b90c6957fbd8f1cfde5d6785bb9954393cdcb8d7af4e02b419b47b9b7c10b3f",
+    "server/src/workpal_backend/agents/env.py": "59f356f200a60cc9f515e6f33bf20c4123f4610ea5a3d251c7940056e1c5abed",
+    "server/migrations/versions/0017_activity_log.py": "ab9d0870bcc76791f54795540835443783fc376d6a64705d0a224cb0726879b3"
+  },
+  "scope": "Agent env reveal handler + workspace middleware status/body and audit fields; actual PostgreSQL/SQLite. UUIDv7 audit IDs and timestamps nondeterministic and excluded; full auth/task/CloudFront/transport not compared.",
+  "fixtures": [
+    {
+      "Path": "/api/agents/40000000-0000-4000-8000-000000000001/env",
+      "User": "10000000-0000-4000-8000-000000000002",
+      "Query": "workspace_slug=fixture",
+      "Headers": {},
+      "SQL": ""
+    },
+    {
+      "Path": "/api/agents/40000000-0000-4000-8000-000000000001/env",
+      "User": "10000000-0000-4000-8000-000000000001",
+      "Query": "workspace_slug=fixture",
+      "Headers": {},
+      "SQL": ""
+    },
+    {
+      "Path": "/api/agents/40000000-0000-4000-8000-000000000001/env",
+      "User": "10000000-0000-4000-8000-000000000003",
+      "Query": "workspace_slug=fixture",
+      "Headers": {},
+      "SQL": ""
+    },
+    {
+      "Path": "/api/agents/bad/env",
+      "User": "10000000-0000-4000-8000-000000000002",
+      "Query": "workspace_slug=fixture",
+      "Headers": {},
+      "SQL": ""
+    },
+    {
+      "Path": "/api/agents/40000000-0000-4000-8000-000000000001/env",
+      "User": "10000000-0000-4000-8000-000000000002",
+      "Query": "",
+      "Headers": {},
+      "SQL": ""
+    },
+    {
+      "Path": "/api/agents/40000000-0000-4000-8000-000000000001/env",
+      "User": "10000000-0000-4000-8000-000000000002",
+      "Query": "workspace_id=nope",
+      "Headers": {},
+      "SQL": ""
+    },
+    {
+      "Path": "/api/agents/40000000-0000-4000-8000-000000000001/env",
+      "User": "10000000-0000-4000-8000-000000000002",
+      "Query": "workspace_slug=fixture",
+      "Headers": {},
+      "SQL": "UPDATE agent SET owner_id=NULL"
+    },
+    {
+      "Path": "/api/agents/40000000-0000-4000-8000-000000000001/env",
+      "User": "10000000-0000-4000-8000-000000000001",
+      "Query": "workspace_slug=fixture",
+      "Headers": {},
+      "SQL": "UPDATE agent SET kind='system'"
+    },
+    {
+      "Path": "/api/agents/40000000-0000-4000-8000-000000000001/env",
+      "User": "10000000-0000-4000-8000-000000000001",
+      "Query": "workspace_slug=fixture",
+      "Headers": {},
+      "SQL": "UPDATE agent SET kind='user',custom_env='null'"
+    },
+    {
+      "Path": "/api/agents/40000000-0000-4000-8000-000000000001/env",
+      "User": "10000000-0000-4000-8000-000000000001",
+      "Query": "workspace_slug=fixture",
+      "Headers": {},
+      "SQL": "UPDATE agent SET custom_env='{\"a\":null}'"
+    },
+    {
+      "Path": "/api/agents/40000000-0000-4000-8000-000000000001/env",
+      "User": "10000000-0000-4000-8000-000000000001",
+      "Query": "workspace_slug=fixture",
+      "Headers": {},
+      "SQL": "UPDATE agent SET custom_env='{\"a\":42}'"
+    },
+    {
+      "Path": "/api/agents/40000000-0000-4000-8000-000000000001/env",
+      "User": "10000000-0000-4000-8000-000000000001",
+      "Query": "workspace_slug=fixture",
+      "Headers": {},
+      "SQL": "UPDATE agent SET custom_env='[1]'"
+    },
+    {
+      "Path": "/api/agents/40000000-0000-4000-8000-000000000001/env",
+      "User": "10000000-0000-4000-8000-000000000001",
+      "Query": "workspace_slug=fixture",
+      "Headers": {},
+      "SQL": "UPDATE agent SET custom_env='{\"dup\":\"first\",\"dup\":\"last\"}'"
+    },
+    {
+      "Path": "/api/agents/40000000-0000-4000-8000-000000000001/env",
+      "User": "10000000-0000-4000-8000-000000000001",
+      "Query": "workspace_slug=fixture",
+      "Headers": {},
+      "SQL": "ALTER TABLE activity_log ADD CONSTRAINT fixture_outage CHECK(action <> 'agent_env_revealed') NOT VALID"
+    }
+  ],
+  "pg_seed": [
+    "INSERT INTO \"user\"(id,name,email,created_at,updated_at) VALUES ('10000000-0000-4000-8000-000000000001','Fixture','10000000-0000-4000-8000-000000000001@example.com','2026-01-01T01:02:03Z','2026-01-01T01:02:03Z')",
+    "INSERT INTO \"user\"(id,name,email,created_at,updated_at) VALUES ('10000000-0000-4000-8000-000000000002','Fixture','10000000-0000-4000-8000-000000000002@example.com','2026-01-01T01:02:03Z','2026-01-01T01:02:03Z')",
+    "INSERT INTO \"user\"(id,name,email,created_at,updated_at) VALUES ('10000000-0000-4000-8000-000000000003','Fixture','10000000-0000-4000-8000-000000000003@example.com','2026-01-01T01:02:03Z','2026-01-01T01:02:03Z')",
+    "INSERT INTO workspace(id,name,slug,issue_prefix,created_at,updated_at) VALUES ('20000000-0000-4000-8000-000000000001','Fixture','fixture','FX','2026-01-01T01:02:03Z','2026-01-01T01:02:03Z')",
+    "INSERT INTO member(id,workspace_id,user_id,role,created_at) VALUES ('30000000-0000-4000-8000-000000000000','20000000-0000-4000-8000-000000000001','10000000-0000-4000-8000-000000000001','owner','2026-01-01T01:02:03Z')",
+    "INSERT INTO member(id,workspace_id,user_id,role,created_at) VALUES ('30000000-0000-4000-8000-000000000001','20000000-0000-4000-8000-000000000001','10000000-0000-4000-8000-000000000002','member','2026-01-01T01:02:03Z')",
+    "INSERT INTO agent(id,workspace_id,name,runtime_mode,owner_id,custom_env) VALUES ('40000000-0000-4000-8000-000000000001','20000000-0000-4000-8000-000000000001','Env fixture','local','10000000-0000-4000-8000-000000000002','{\"Z_KEY\":\"fixture-z\",\"A_KEY\":\"fixture-a\"}')"
+  ],
+  "go": [
+    {
+      "audits": [
+        {
+          "workspace_id": "20000000-0000-4000-8000-000000000001",
+          "issue_id": null,
+          "actor_type": "member",
+          "actor_id": "10000000-0000-4000-8000-000000000002",
+          "action": "agent_env_revealed",
+          "details": {
+            "agent_id": "40000000-0000-4000-8000-000000000001",
+            "key_count": 2,
+            "agent_name": "Env fixture",
+            "revealed_keys": [
+              "A_KEY",
+              "Z_KEY"
+            ]
+          }
+        }
+      ],
+      "body": "{\"agent_id\":\"40000000-0000-4000-8000-000000000001\",\"custom_env\":{\"A_KEY\":\"fixture-a\",\"Z_KEY\":\"fixture-z\"}}\n",
+      "status": 200
+    },
+    {
+      "audits": [
+        {
+          "workspace_id": "20000000-0000-4000-8000-000000000001",
+          "issue_id": null,
+          "actor_type": "member",
+          "actor_id": "10000000-0000-4000-8000-000000000002",
+          "action": "agent_env_revealed",
+          "details": {
+            "agent_id": "40000000-0000-4000-8000-000000000001",
+            "key_count": 2,
+            "agent_name": "Env fixture",
+            "revealed_keys": [
+              "A_KEY",
+              "Z_KEY"
+            ]
+          }
+        },
+        {
+          "workspace_id": "20000000-0000-4000-8000-000000000001",
+          "issue_id": null,
+          "actor_type": "member",
+          "actor_id": "10000000-0000-4000-8000-000000000001",
+          "action": "agent_env_revealed",
+          "details": {
+            "agent_id": "40000000-0000-4000-8000-000000000001",
+            "key_count": 2,
+            "agent_name": "Env fixture",
+            "revealed_keys": [
+              "A_KEY",
+              "Z_KEY"
+            ]
+          }
+        }
+      ],
+      "body": "{\"agent_id\":\"40000000-0000-4000-8000-000000000001\",\"custom_env\":{\"A_KEY\":\"fixture-a\",\"Z_KEY\":\"fixture-z\"}}\n",
+      "status": 200
+    },
+    {
+      "audits": [
+        {
+          "workspace_id": "20000000-0000-4000-8000-000000000001",
+          "issue_id": null,
+          "actor_type": "member",
+          "actor_id": "10000000-0000-4000-8000-000000000002",
+          "action": "agent_env_revealed",
+          "details": {
+            "agent_id": "40000000-0000-4000-8000-000000000001",
+            "key_count": 2,
+            "agent_name": "Env fixture",
+            "revealed_keys": [
+              "A_KEY",
+              "Z_KEY"
+            ]
+          }
+        },
+        {
+          "workspace_id": "20000000-0000-4000-8000-000000000001",
+          "issue_id": null,
+          "actor_type": "member",
+          "actor_id": "10000000-0000-4000-8000-000000000001",
+          "action": "agent_env_revealed",
+          "details": {
+            "agent_id": "40000000-0000-4000-8000-000000000001",
+            "key_count": 2,
+            "agent_name": "Env fixture",
+            "revealed_keys": [
+              "A_KEY",
+              "Z_KEY"
+            ]
+          }
+        }
+      ],
+      "body": "{\"error\":\"workspace not found\"}",
+      "status": 404
+    },
+    {
+      "audits": [
+        {
+          "workspace_id": "20000000-0000-4000-8000-000000000001",
+          "issue_id": null,
+          "actor_type": "member",
+          "actor_id": "10000000-0000-4000-8000-000000000002",
+          "action": "agent_env_revealed",
+          "details": {
+            "agent_id": "40000000-0000-4000-8000-000000000001",
+            "key_count": 2,
+            "agent_name": "Env fixture",
+            "revealed_keys": [
+              "A_KEY",
+              "Z_KEY"
+            ]
+          }
+        },
+        {
+          "workspace_id": "20000000-0000-4000-8000-000000000001",
+          "issue_id": null,
+          "actor_type": "member",
+          "actor_id": "10000000-0000-4000-8000-000000000001",
+          "action": "agent_env_revealed",
+          "details": {
+            "agent_id": "40000000-0000-4000-8000-000000000001",
+            "key_count": 2,
+            "agent_name": "Env fixture",
+            "revealed_keys": [
+              "A_KEY",
+              "Z_KEY"
+            ]
+          }
+        }
+      ],
+      "body": "{\"error\":\"invalid agent id\"}\n",
+      "status": 400
+    },
+    {
+      "audits": [
+        {
+          "workspace_id": "20000000-0000-4000-8000-000000000001",
+          "issue_id": null,
+          "actor_type": "member",
+          "actor_id": "10000000-0000-4000-8000-000000000002",
+          "action": "agent_env_revealed",
+          "details": {
+            "agent_id": "40000000-0000-4000-8000-000000000001",
+            "key_count": 2,
+            "agent_name": "Env fixture",
+            "revealed_keys": [
+              "A_KEY",
+              "Z_KEY"
+            ]
+          }
+        },
+        {
+          "workspace_id": "20000000-0000-4000-8000-000000000001",
+          "issue_id": null,
+          "actor_type": "member",
+          "actor_id": "10000000-0000-4000-8000-000000000001",
+          "action": "agent_env_revealed",
+          "details": {
+            "agent_id": "40000000-0000-4000-8000-000000000001",
+            "key_count": 2,
+            "agent_name": "Env fixture",
+            "revealed_keys": [
+              "A_KEY",
+              "Z_KEY"
+            ]
+          }
+        }
+      ],
+      "body": "{\"error\":\"workspace_id or workspace_slug is required\"}",
+      "status": 400
+    },
+    {
+      "audits": [
+        {
+          "workspace_id": "20000000-0000-4000-8000-000000000001",
+          "issue_id": null,
+          "actor_type": "member",
+          "actor_id": "10000000-0000-4000-8000-000000000002",
+          "action": "agent_env_revealed",
+          "details": {
+            "agent_id": "40000000-0000-4000-8000-000000000001",
+            "key_count": 2,
+            "agent_name": "Env fixture",
+            "revealed_keys": [
+              "A_KEY",
+              "Z_KEY"
+            ]
+          }
+        },
+        {
+          "workspace_id": "20000000-0000-4000-8000-000000000001",
+          "issue_id": null,
+          "actor_type": "member",
+          "actor_id": "10000000-0000-4000-8000-000000000001",
+          "action": "agent_env_revealed",
+          "details": {
+            "agent_id": "40000000-0000-4000-8000-000000000001",
+            "key_count": 2,
+            "agent_name": "Env fixture",
+            "revealed_keys": [
+              "A_KEY",
+              "Z_KEY"
+            ]
+          }
+        }
+      ],
+      "body": "{\"error\":\"invalid workspace_id\"}",
+      "status": 400
+    },
+    {
+      "audits": [
+        {
+          "workspace_id": "20000000-0000-4000-8000-000000000001",
+          "issue_id": null,
+          "actor_type": "member",
+          "actor_id": "10000000-0000-4000-8000-000000000002",
+          "action": "agent_env_revealed",
+          "details": {
+            "agent_id": "40000000-0000-4000-8000-000000000001",
+            "key_count": 2,
+            "agent_name": "Env fixture",
+            "revealed_keys": [
+              "A_KEY",
+              "Z_KEY"
+            ]
+          }
+        },
+        {
+          "workspace_id": "20000000-0000-4000-8000-000000000001",
+          "issue_id": null,
+          "actor_type": "member",
+          "actor_id": "10000000-0000-4000-8000-000000000001",
+          "action": "agent_env_revealed",
+          "details": {
+            "agent_id": "40000000-0000-4000-8000-000000000001",
+            "key_count": 2,
+            "agent_name": "Env fixture",
+            "revealed_keys": [
+              "A_KEY",
+              "Z_KEY"
+            ]
+          }
+        }
+      ],
+      "body": "{\"error\":\"only the agent owner or a workspace owner/admin can manage this agent's env\"}\n",
+      "status": 403
+    },
+    {
+      "audits": [
+        {
+          "workspace_id": "20000000-0000-4000-8000-000000000001",
+          "issue_id": null,
+          "actor_type": "member",
+          "actor_id": "10000000-0000-4000-8000-000000000002",
+          "action": "agent_env_revealed",
+          "details": {
+            "agent_id": "40000000-0000-4000-8000-000000000001",
+            "key_count": 2,
+            "agent_name": "Env fixture",
+            "revealed_keys": [
+              "A_KEY",
+              "Z_KEY"
+            ]
+          }
+        },
+        {
+          "workspace_id": "20000000-0000-4000-8000-000000000001",
+          "issue_id": null,
+          "actor_type": "member",
+          "actor_id": "10000000-0000-4000-8000-000000000001",
+          "action": "agent_env_revealed",
+          "details": {
+            "agent_id": "40000000-0000-4000-8000-000000000001",
+            "key_count": 2,
+            "agent_name": "Env fixture",
+            "revealed_keys": [
+              "A_KEY",
+              "Z_KEY"
+            ]
+          }
+        }
+      ],
+      "body": "{\"error\":\"agent not found\"}\n",
+      "status": 404
+    },
+    {
+      "audits": [
+        {
+          "workspace_id": "20000000-0000-4000-8000-000000000001",
+          "issue_id": null,
+          "actor_type": "member",
+          "actor_id": "10000000-0000-4000-8000-000000000002",
+          "action": "agent_env_revealed",
+          "details": {
+            "agent_id": "40000000-0000-4000-8000-000000000001",
+            "key_count": 2,
+            "agent_name": "Env fixture",
+            "revealed_keys": [
+              "A_KEY",
+              "Z_KEY"
+            ]
+          }
+        },
+        {
+          "workspace_id": "20000000-0000-4000-8000-000000000001",
+          "issue_id": null,
+          "actor_type": "member",
+          "actor_id": "10000000-0000-4000-8000-000000000001",
+          "action": "agent_env_revealed",
+          "details": {
+            "agent_id": "40000000-0000-4000-8000-000000000001",
+            "key_count": 2,
+            "agent_name": "Env fixture",
+            "revealed_keys": [
+              "A_KEY",
+              "Z_KEY"
+            ]
+          }
+        },
+        {
+          "workspace_id": "20000000-0000-4000-8000-000000000001",
+          "issue_id": null,
+          "actor_type": "member",
+          "actor_id": "10000000-0000-4000-8000-000000000001",
+          "action": "agent_env_revealed",
+          "details": {
+            "agent_id": "40000000-0000-4000-8000-000000000001",
+            "key_count": 0,
+            "agent_name": "Env fixture",
+            "revealed_keys": []
+          }
+        }
+      ],
+      "body": "{\"agent_id\":\"40000000-0000-4000-8000-000000000001\",\"custom_env\":{}}\n",
+      "status": 200
+    },
+    {
+      "audits": [
+        {
+          "workspace_id": "20000000-0000-4000-8000-000000000001",
+          "issue_id": null,
+          "actor_type": "member",
+          "actor_id": "10000000-0000-4000-8000-000000000002",
+          "action": "agent_env_revealed",
+          "details": {
+            "agent_id": "40000000-0000-4000-8000-000000000001",
+            "key_count": 2,
+            "agent_name": "Env fixture",
+            "revealed_keys": [
+              "A_KEY",
+              "Z_KEY"
+            ]
+          }
+        },
+        {
+          "workspace_id": "20000000-0000-4000-8000-000000000001",
+          "issue_id": null,
+          "actor_type": "member",
+          "actor_id": "10000000-0000-4000-8000-000000000001",
+          "action": "agent_env_revealed",
+          "details": {
+            "agent_id": "40000000-0000-4000-8000-000000000001",
+            "key_count": 2,
+            "agent_name": "Env fixture",
+            "revealed_keys": [
+              "A_KEY",
+              "Z_KEY"
+            ]
+          }
+        },
+        {
+          "workspace_id": "20000000-0000-4000-8000-000000000001",
+          "issue_id": null,
+          "actor_type": "member",
+          "actor_id": "10000000-0000-4000-8000-000000000001",
+          "action": "agent_env_revealed",
+          "details": {
+            "agent_id": "40000000-0000-4000-8000-000000000001",
+            "key_count": 0,
+            "agent_name": "Env fixture",
+            "revealed_keys": []
+          }
+        },
+        {
+          "workspace_id": "20000000-0000-4000-8000-000000000001",
+          "issue_id": null,
+          "actor_type": "member",
+          "actor_id": "10000000-0000-4000-8000-000000000001",
+          "action": "agent_env_revealed",
+          "details": {
+            "agent_id": "40000000-0000-4000-8000-000000000001",
+            "key_count": 1,
+            "agent_name": "Env fixture",
+            "revealed_keys": [
+              "a"
+            ]
+          }
+        }
+      ],
+      "body": "{\"agent_id\":\"40000000-0000-4000-8000-000000000001\",\"custom_env\":{\"a\":\"\"}}\n",
+      "status": 200
+    },
+    {
+      "audits": [
+        {
+          "workspace_id": "20000000-0000-4000-8000-000000000001",
+          "issue_id": null,
+          "actor_type": "member",
+          "actor_id": "10000000-0000-4000-8000-000000000002",
+          "action": "agent_env_revealed",
+          "details": {
+            "agent_id": "40000000-0000-4000-8000-000000000001",
+            "key_count": 2,
+            "agent_name": "Env fixture",
+            "revealed_keys": [
+              "A_KEY",
+              "Z_KEY"
+            ]
+          }
+        },
+        {
+          "workspace_id": "20000000-0000-4000-8000-000000000001",
+          "issue_id": null,
+          "actor_type": "member",
+          "actor_id": "10000000-0000-4000-8000-000000000001",
+          "action": "agent_env_revealed",
+          "details": {
+            "agent_id": "40000000-0000-4000-8000-000000000001",
+            "key_count": 2,
+            "agent_name": "Env fixture",
+            "revealed_keys": [
+              "A_KEY",
+              "Z_KEY"
+            ]
+          }
+        },
+        {
+          "workspace_id": "20000000-0000-4000-8000-000000000001",
+          "issue_id": null,
+          "actor_type": "member",
+          "actor_id": "10000000-0000-4000-8000-000000000001",
+          "action": "agent_env_revealed",
+          "details": {
+            "agent_id": "40000000-0000-4000-8000-000000000001",
+            "key_count": 0,
+            "agent_name": "Env fixture",
+            "revealed_keys": []
+          }
+        },
+        {
+          "workspace_id": "20000000-0000-4000-8000-000000000001",
+          "issue_id": null,
+          "actor_type": "member",
+          "actor_id": "10000000-0000-4000-8000-000000000001",
+          "action": "agent_env_revealed",
+          "details": {
+            "agent_id": "40000000-0000-4000-8000-000000000001",
+            "key_count": 1,
+            "agent_name": "Env fixture",
+            "revealed_keys": [
+              "a"
+            ]
+          }
+        },
+        {
+          "workspace_id": "20000000-0000-4000-8000-000000000001",
+          "issue_id": null,
+          "actor_type": "member",
+          "actor_id": "10000000-0000-4000-8000-000000000001",
+          "action": "agent_env_revealed",
+          "details": {
+            "agent_id": "40000000-0000-4000-8000-000000000001",
+            "key_count": 0,
+            "agent_name": "Env fixture",
+            "revealed_keys": []
+          }
+        }
+      ],
+      "body": "{\"agent_id\":\"40000000-0000-4000-8000-000000000001\",\"custom_env\":{}}\n",
+      "status": 200
+    },
+    {
+      "audits": [
+        {
+          "workspace_id": "20000000-0000-4000-8000-000000000001",
+          "issue_id": null,
+          "actor_type": "member",
+          "actor_id": "10000000-0000-4000-8000-000000000002",
+          "action": "agent_env_revealed",
+          "details": {
+            "agent_id": "40000000-0000-4000-8000-000000000001",
+            "key_count": 2,
+            "agent_name": "Env fixture",
+            "revealed_keys": [
+              "A_KEY",
+              "Z_KEY"
+            ]
+          }
+        },
+        {
+          "workspace_id": "20000000-0000-4000-8000-000000000001",
+          "issue_id": null,
+          "actor_type": "member",
+          "actor_id": "10000000-0000-4000-8000-000000000001",
+          "action": "agent_env_revealed",
+          "details": {
+            "agent_id": "40000000-0000-4000-8000-000000000001",
+            "key_count": 2,
+            "agent_name": "Env fixture",
+            "revealed_keys": [
+              "A_KEY",
+              "Z_KEY"
+            ]
+          }
+        },
+        {
+          "workspace_id": "20000000-0000-4000-8000-000000000001",
+          "issue_id": null,
+          "actor_type": "member",
+          "actor_id": "10000000-0000-4000-8000-000000000001",
+          "action": "agent_env_revealed",
+          "details": {
+            "agent_id": "40000000-0000-4000-8000-000000000001",
+            "key_count": 0,
+            "agent_name": "Env fixture",
+            "revealed_keys": []
+          }
+        },
+        {
+          "workspace_id": "20000000-0000-4000-8000-000000000001",
+          "issue_id": null,
+          "actor_type": "member",
+          "actor_id": "10000000-0000-4000-8000-000000000001",
+          "action": "agent_env_revealed",
+          "details": {
+            "agent_id": "40000000-0000-4000-8000-000000000001",
+            "key_count": 1,
+            "agent_name": "Env fixture",
+            "revealed_keys": [
+              "a"
+            ]
+          }
+        },
+        {
+          "workspace_id": "20000000-0000-4000-8000-000000000001",
+          "issue_id": null,
+          "actor_type": "member",
+          "actor_id": "10000000-0000-4000-8000-000000000001",
+          "action": "agent_env_revealed",
+          "details": {
+            "agent_id": "40000000-0000-4000-8000-000000000001",
+            "key_count": 0,
+            "agent_name": "Env fixture",
+            "revealed_keys": []
+          }
+        },
+        {
+          "workspace_id": "20000000-0000-4000-8000-000000000001",
+          "issue_id": null,
+          "actor_type": "member",
+          "actor_id": "10000000-0000-4000-8000-000000000001",
+          "action": "agent_env_revealed",
+          "details": {
+            "agent_id": "40000000-0000-4000-8000-000000000001",
+            "key_count": 0,
+            "agent_name": "Env fixture",
+            "revealed_keys": []
+          }
+        }
+      ],
+      "body": "{\"agent_id\":\"40000000-0000-4000-8000-000000000001\",\"custom_env\":{}}\n",
+      "status": 200
+    },
+    {
+      "audits": [
+        {
+          "workspace_id": "20000000-0000-4000-8000-000000000001",
+          "issue_id": null,
+          "actor_type": "member",
+          "actor_id": "10000000-0000-4000-8000-000000000002",
+          "action": "agent_env_revealed",
+          "details": {
+            "agent_id": "40000000-0000-4000-8000-000000000001",
+            "key_count": 2,
+            "agent_name": "Env fixture",
+            "revealed_keys": [
+              "A_KEY",
+              "Z_KEY"
+            ]
+          }
+        },
+        {
+          "workspace_id": "20000000-0000-4000-8000-000000000001",
+          "issue_id": null,
+          "actor_type": "member",
+          "actor_id": "10000000-0000-4000-8000-000000000001",
+          "action": "agent_env_revealed",
+          "details": {
+            "agent_id": "40000000-0000-4000-8000-000000000001",
+            "key_count": 2,
+            "agent_name": "Env fixture",
+            "revealed_keys": [
+              "A_KEY",
+              "Z_KEY"
+            ]
+          }
+        },
+        {
+          "workspace_id": "20000000-0000-4000-8000-000000000001",
+          "issue_id": null,
+          "actor_type": "member",
+          "actor_id": "10000000-0000-4000-8000-000000000001",
+          "action": "agent_env_revealed",
+          "details": {
+            "agent_id": "40000000-0000-4000-8000-000000000001",
+            "key_count": 0,
+            "agent_name": "Env fixture",
+            "revealed_keys": []
+          }
+        },
+        {
+          "workspace_id": "20000000-0000-4000-8000-000000000001",
+          "issue_id": null,
+          "actor_type": "member",
+          "actor_id": "10000000-0000-4000-8000-000000000001",
+          "action": "agent_env_revealed",
+          "details": {
+            "agent_id": "40000000-0000-4000-8000-000000000001",
+            "key_count": 1,
+            "agent_name": "Env fixture",
+            "revealed_keys": [
+              "a"
+            ]
+          }
+        },
+        {
+          "workspace_id": "20000000-0000-4000-8000-000000000001",
+          "issue_id": null,
+          "actor_type": "member",
+          "actor_id": "10000000-0000-4000-8000-000000000001",
+          "action": "agent_env_revealed",
+          "details": {
+            "agent_id": "40000000-0000-4000-8000-000000000001",
+            "key_count": 0,
+            "agent_name": "Env fixture",
+            "revealed_keys": []
+          }
+        },
+        {
+          "workspace_id": "20000000-0000-4000-8000-000000000001",
+          "issue_id": null,
+          "actor_type": "member",
+          "actor_id": "10000000-0000-4000-8000-000000000001",
+          "action": "agent_env_revealed",
+          "details": {
+            "agent_id": "40000000-0000-4000-8000-000000000001",
+            "key_count": 0,
+            "agent_name": "Env fixture",
+            "revealed_keys": []
+          }
+        },
+        {
+          "workspace_id": "20000000-0000-4000-8000-000000000001",
+          "issue_id": null,
+          "actor_type": "member",
+          "actor_id": "10000000-0000-4000-8000-000000000001",
+          "action": "agent_env_revealed",
+          "details": {
+            "agent_id": "40000000-0000-4000-8000-000000000001",
+            "key_count": 1,
+            "agent_name": "Env fixture",
+            "revealed_keys": [
+              "dup"
+            ]
+          }
+        }
+      ],
+      "body": "{\"agent_id\":\"40000000-0000-4000-8000-000000000001\",\"custom_env\":{\"dup\":\"last\"}}\n",
+      "status": 200
+    },
+    {
+      "audits": [
+        {
+          "workspace_id": "20000000-0000-4000-8000-000000000001",
+          "issue_id": null,
+          "actor_type": "member",
+          "actor_id": "10000000-0000-4000-8000-000000000002",
+          "action": "agent_env_revealed",
+          "details": {
+            "agent_id": "40000000-0000-4000-8000-000000000001",
+            "key_count": 2,
+            "agent_name": "Env fixture",
+            "revealed_keys": [
+              "A_KEY",
+              "Z_KEY"
+            ]
+          }
+        },
+        {
+          "workspace_id": "20000000-0000-4000-8000-000000000001",
+          "issue_id": null,
+          "actor_type": "member",
+          "actor_id": "10000000-0000-4000-8000-000000000001",
+          "action": "agent_env_revealed",
+          "details": {
+            "agent_id": "40000000-0000-4000-8000-000000000001",
+            "key_count": 2,
+            "agent_name": "Env fixture",
+            "revealed_keys": [
+              "A_KEY",
+              "Z_KEY"
+            ]
+          }
+        },
+        {
+          "workspace_id": "20000000-0000-4000-8000-000000000001",
+          "issue_id": null,
+          "actor_type": "member",
+          "actor_id": "10000000-0000-4000-8000-000000000001",
+          "action": "agent_env_revealed",
+          "details": {
+            "agent_id": "40000000-0000-4000-8000-000000000001",
+            "key_count": 0,
+            "agent_name": "Env fixture",
+            "revealed_keys": []
+          }
+        },
+        {
+          "workspace_id": "20000000-0000-4000-8000-000000000001",
+          "issue_id": null,
+          "actor_type": "member",
+          "actor_id": "10000000-0000-4000-8000-000000000001",
+          "action": "agent_env_revealed",
+          "details": {
+            "agent_id": "40000000-0000-4000-8000-000000000001",
+            "key_count": 1,
+            "agent_name": "Env fixture",
+            "revealed_keys": [
+              "a"
+            ]
+          }
+        },
+        {
+          "workspace_id": "20000000-0000-4000-8000-000000000001",
+          "issue_id": null,
+          "actor_type": "member",
+          "actor_id": "10000000-0000-4000-8000-000000000001",
+          "action": "agent_env_revealed",
+          "details": {
+            "agent_id": "40000000-0000-4000-8000-000000000001",
+            "key_count": 0,
+            "agent_name": "Env fixture",
+            "revealed_keys": []
+          }
+        },
+        {
+          "workspace_id": "20000000-0000-4000-8000-000000000001",
+          "issue_id": null,
+          "actor_type": "member",
+          "actor_id": "10000000-0000-4000-8000-000000000001",
+          "action": "agent_env_revealed",
+          "details": {
+            "agent_id": "40000000-0000-4000-8000-000000000001",
+            "key_count": 0,
+            "agent_name": "Env fixture",
+            "revealed_keys": []
+          }
+        },
+        {
+          "workspace_id": "20000000-0000-4000-8000-000000000001",
+          "issue_id": null,
+          "actor_type": "member",
+          "actor_id": "10000000-0000-4000-8000-000000000001",
+          "action": "agent_env_revealed",
+          "details": {
+            "agent_id": "40000000-0000-4000-8000-000000000001",
+            "key_count": 1,
+            "agent_name": "Env fixture",
+            "revealed_keys": [
+              "dup"
+            ]
+          }
+        }
+      ],
+      "body": "{\"error\":\"audit log write failed; refusing to serve env without a recorded reveal\"}\n",
+      "status": 500
+    }
+  ],
+  "python": [
+    {
+      "status": 200,
+      "body": "{\"agent_id\":\"40000000-0000-4000-8000-000000000001\",\"custom_env\":{\"A_KEY\":\"fixture-a\",\"Z_KEY\":\"fixture-z\"}}\n",
+      "audits": [
+        {
+          "workspace_id": "20000000-0000-4000-8000-000000000001",
+          "issue_id": null,
+          "actor_type": "member",
+          "actor_id": "10000000-0000-4000-8000-000000000002",
+          "action": "agent_env_revealed",
+          "details": {
+            "agent_id": "40000000-0000-4000-8000-000000000001",
+            "agent_name": "Env fixture",
+            "revealed_keys": [
+              "A_KEY",
+              "Z_KEY"
+            ],
+            "key_count": 2
+          }
+        }
+      ]
+    },
+    {
+      "status": 200,
+      "body": "{\"agent_id\":\"40000000-0000-4000-8000-000000000001\",\"custom_env\":{\"A_KEY\":\"fixture-a\",\"Z_KEY\":\"fixture-z\"}}\n",
+      "audits": [
+        {
+          "workspace_id": "20000000-0000-4000-8000-000000000001",
+          "issue_id": null,
+          "actor_type": "member",
+          "actor_id": "10000000-0000-4000-8000-000000000002",
+          "action": "agent_env_revealed",
+          "details": {
+            "agent_id": "40000000-0000-4000-8000-000000000001",
+            "agent_name": "Env fixture",
+            "revealed_keys": [
+              "A_KEY",
+              "Z_KEY"
+            ],
+            "key_count": 2
+          }
+        },
+        {
+          "workspace_id": "20000000-0000-4000-8000-000000000001",
+          "issue_id": null,
+          "actor_type": "member",
+          "actor_id": "10000000-0000-4000-8000-000000000001",
+          "action": "agent_env_revealed",
+          "details": {
+            "agent_id": "40000000-0000-4000-8000-000000000001",
+            "agent_name": "Env fixture",
+            "revealed_keys": [
+              "A_KEY",
+              "Z_KEY"
+            ],
+            "key_count": 2
+          }
+        }
+      ]
+    },
+    {
+      "status": 404,
+      "body": "{\"error\":\"workspace not found\"}",
+      "audits": [
+        {
+          "workspace_id": "20000000-0000-4000-8000-000000000001",
+          "issue_id": null,
+          "actor_type": "member",
+          "actor_id": "10000000-0000-4000-8000-000000000002",
+          "action": "agent_env_revealed",
+          "details": {
+            "agent_id": "40000000-0000-4000-8000-000000000001",
+            "agent_name": "Env fixture",
+            "revealed_keys": [
+              "A_KEY",
+              "Z_KEY"
+            ],
+            "key_count": 2
+          }
+        },
+        {
+          "workspace_id": "20000000-0000-4000-8000-000000000001",
+          "issue_id": null,
+          "actor_type": "member",
+          "actor_id": "10000000-0000-4000-8000-000000000001",
+          "action": "agent_env_revealed",
+          "details": {
+            "agent_id": "40000000-0000-4000-8000-000000000001",
+            "agent_name": "Env fixture",
+            "revealed_keys": [
+              "A_KEY",
+              "Z_KEY"
+            ],
+            "key_count": 2
+          }
+        }
+      ]
+    },
+    {
+      "status": 400,
+      "body": "{\"error\":\"invalid agent id\"}\n",
+      "audits": [
+        {
+          "workspace_id": "20000000-0000-4000-8000-000000000001",
+          "issue_id": null,
+          "actor_type": "member",
+          "actor_id": "10000000-0000-4000-8000-000000000002",
+          "action": "agent_env_revealed",
+          "details": {
+            "agent_id": "40000000-0000-4000-8000-000000000001",
+            "agent_name": "Env fixture",
+            "revealed_keys": [
+              "A_KEY",
+              "Z_KEY"
+            ],
+            "key_count": 2
+          }
+        },
+        {
+          "workspace_id": "20000000-0000-4000-8000-000000000001",
+          "issue_id": null,
+          "actor_type": "member",
+          "actor_id": "10000000-0000-4000-8000-000000000001",
+          "action": "agent_env_revealed",
+          "details": {
+            "agent_id": "40000000-0000-4000-8000-000000000001",
+            "agent_name": "Env fixture",
+            "revealed_keys": [
+              "A_KEY",
+              "Z_KEY"
+            ],
+            "key_count": 2
+          }
+        }
+      ]
+    },
+    {
+      "status": 400,
+      "body": "{\"error\":\"workspace_id or workspace_slug is required\"}",
+      "audits": [
+        {
+          "workspace_id": "20000000-0000-4000-8000-000000000001",
+          "issue_id": null,
+          "actor_type": "member",
+          "actor_id": "10000000-0000-4000-8000-000000000002",
+          "action": "agent_env_revealed",
+          "details": {
+            "agent_id": "40000000-0000-4000-8000-000000000001",
+            "agent_name": "Env fixture",
+            "revealed_keys": [
+              "A_KEY",
+              "Z_KEY"
+            ],
+            "key_count": 2
+          }
+        },
+        {
+          "workspace_id": "20000000-0000-4000-8000-000000000001",
+          "issue_id": null,
+          "actor_type": "member",
+          "actor_id": "10000000-0000-4000-8000-000000000001",
+          "action": "agent_env_revealed",
+          "details": {
+            "agent_id": "40000000-0000-4000-8000-000000000001",
+            "agent_name": "Env fixture",
+            "revealed_keys": [
+              "A_KEY",
+              "Z_KEY"
+            ],
+            "key_count": 2
+          }
+        }
+      ]
+    },
+    {
+      "status": 400,
+      "body": "{\"error\":\"invalid workspace_id\"}",
+      "audits": [
+        {
+          "workspace_id": "20000000-0000-4000-8000-000000000001",
+          "issue_id": null,
+          "actor_type": "member",
+          "actor_id": "10000000-0000-4000-8000-000000000002",
+          "action": "agent_env_revealed",
+          "details": {
+            "agent_id": "40000000-0000-4000-8000-000000000001",
+            "agent_name": "Env fixture",
+            "revealed_keys": [
+              "A_KEY",
+              "Z_KEY"
+            ],
+            "key_count": 2
+          }
+        },
+        {
+          "workspace_id": "20000000-0000-4000-8000-000000000001",
+          "issue_id": null,
+          "actor_type": "member",
+          "actor_id": "10000000-0000-4000-8000-000000000001",
+          "action": "agent_env_revealed",
+          "details": {
+            "agent_id": "40000000-0000-4000-8000-000000000001",
+            "agent_name": "Env fixture",
+            "revealed_keys": [
+              "A_KEY",
+              "Z_KEY"
+            ],
+            "key_count": 2
+          }
+        }
+      ]
+    },
+    {
+      "status": 403,
+      "body": "{\"error\":\"only the agent owner or a workspace owner/admin can manage this agent's env\"}\n",
+      "audits": [
+        {
+          "workspace_id": "20000000-0000-4000-8000-000000000001",
+          "issue_id": null,
+          "actor_type": "member",
+          "actor_id": "10000000-0000-4000-8000-000000000002",
+          "action": "agent_env_revealed",
+          "details": {
+            "agent_id": "40000000-0000-4000-8000-000000000001",
+            "agent_name": "Env fixture",
+            "revealed_keys": [
+              "A_KEY",
+              "Z_KEY"
+            ],
+            "key_count": 2
+          }
+        },
+        {
+          "workspace_id": "20000000-0000-4000-8000-000000000001",
+          "issue_id": null,
+          "actor_type": "member",
+          "actor_id": "10000000-0000-4000-8000-000000000001",
+          "action": "agent_env_revealed",
+          "details": {
+            "agent_id": "40000000-0000-4000-8000-000000000001",
+            "agent_name": "Env fixture",
+            "revealed_keys": [
+              "A_KEY",
+              "Z_KEY"
+            ],
+            "key_count": 2
+          }
+        }
+      ]
+    },
+    {
+      "status": 404,
+      "body": "{\"error\":\"agent not found\"}\n",
+      "audits": [
+        {
+          "workspace_id": "20000000-0000-4000-8000-000000000001",
+          "issue_id": null,
+          "actor_type": "member",
+          "actor_id": "10000000-0000-4000-8000-000000000002",
+          "action": "agent_env_revealed",
+          "details": {
+            "agent_id": "40000000-0000-4000-8000-000000000001",
+            "agent_name": "Env fixture",
+            "revealed_keys": [
+              "A_KEY",
+              "Z_KEY"
+            ],
+            "key_count": 2
+          }
+        },
+        {
+          "workspace_id": "20000000-0000-4000-8000-000000000001",
+          "issue_id": null,
+          "actor_type": "member",
+          "actor_id": "10000000-0000-4000-8000-000000000001",
+          "action": "agent_env_revealed",
+          "details": {
+            "agent_id": "40000000-0000-4000-8000-000000000001",
+            "agent_name": "Env fixture",
+            "revealed_keys": [
+              "A_KEY",
+              "Z_KEY"
+            ],
+            "key_count": 2
+          }
+        }
+      ]
+    },
+    {
+      "status": 200,
+      "body": "{\"agent_id\":\"40000000-0000-4000-8000-000000000001\",\"custom_env\":{}}\n",
+      "audits": [
+        {
+          "workspace_id": "20000000-0000-4000-8000-000000000001",
+          "issue_id": null,
+          "actor_type": "member",
+          "actor_id": "10000000-0000-4000-8000-000000000002",
+          "action": "agent_env_revealed",
+          "details": {
+            "agent_id": "40000000-0000-4000-8000-000000000001",
+            "agent_name": "Env fixture",
+            "revealed_keys": [
+              "A_KEY",
+              "Z_KEY"
+            ],
+            "key_count": 2
+          }
+        },
+        {
+          "workspace_id": "20000000-0000-4000-8000-000000000001",
+          "issue_id": null,
+          "actor_type": "member",
+          "actor_id": "10000000-0000-4000-8000-000000000001",
+          "action": "agent_env_revealed",
+          "details": {
+            "agent_id": "40000000-0000-4000-8000-000000000001",
+            "agent_name": "Env fixture",
+            "revealed_keys": [
+              "A_KEY",
+              "Z_KEY"
+            ],
+            "key_count": 2
+          }
+        },
+        {
+          "workspace_id": "20000000-0000-4000-8000-000000000001",
+          "issue_id": null,
+          "actor_type": "member",
+          "actor_id": "10000000-0000-4000-8000-000000000001",
+          "action": "agent_env_revealed",
+          "details": {
+            "agent_id": "40000000-0000-4000-8000-000000000001",
+            "agent_name": "Env fixture",
+            "revealed_keys": [],
+            "key_count": 0
+          }
+        }
+      ]
+    },
+    {
+      "status": 200,
+      "body": "{\"agent_id\":\"40000000-0000-4000-8000-000000000001\",\"custom_env\":{\"a\":\"\"}}\n",
+      "audits": [
+        {
+          "workspace_id": "20000000-0000-4000-8000-000000000001",
+          "issue_id": null,
+          "actor_type": "member",
+          "actor_id": "10000000-0000-4000-8000-000000000002",
+          "action": "agent_env_revealed",
+          "details": {
+            "agent_id": "40000000-0000-4000-8000-000000000001",
+            "agent_name": "Env fixture",
+            "revealed_keys": [
+              "A_KEY",
+              "Z_KEY"
+            ],
+            "key_count": 2
+          }
+        },
+        {
+          "workspace_id": "20000000-0000-4000-8000-000000000001",
+          "issue_id": null,
+          "actor_type": "member",
+          "actor_id": "10000000-0000-4000-8000-000000000001",
+          "action": "agent_env_revealed",
+          "details": {
+            "agent_id": "40000000-0000-4000-8000-000000000001",
+            "agent_name": "Env fixture",
+            "revealed_keys": [
+              "A_KEY",
+              "Z_KEY"
+            ],
+            "key_count": 2
+          }
+        },
+        {
+          "workspace_id": "20000000-0000-4000-8000-000000000001",
+          "issue_id": null,
+          "actor_type": "member",
+          "actor_id": "10000000-0000-4000-8000-000000000001",
+          "action": "agent_env_revealed",
+          "details": {
+            "agent_id": "40000000-0000-4000-8000-000000000001",
+            "agent_name": "Env fixture",
+            "revealed_keys": [],
+            "key_count": 0
+          }
+        },
+        {
+          "workspace_id": "20000000-0000-4000-8000-000000000001",
+          "issue_id": null,
+          "actor_type": "member",
+          "actor_id": "10000000-0000-4000-8000-000000000001",
+          "action": "agent_env_revealed",
+          "details": {
+            "agent_id": "40000000-0000-4000-8000-000000000001",
+            "agent_name": "Env fixture",
+            "revealed_keys": [
+              "a"
+            ],
+            "key_count": 1
+          }
+        }
+      ]
+    },
+    {
+      "status": 200,
+      "body": "{\"agent_id\":\"40000000-0000-4000-8000-000000000001\",\"custom_env\":{}}\n",
+      "audits": [
+        {
+          "workspace_id": "20000000-0000-4000-8000-000000000001",
+          "issue_id": null,
+          "actor_type": "member",
+          "actor_id": "10000000-0000-4000-8000-000000000002",
+          "action": "agent_env_revealed",
+          "details": {
+            "agent_id": "40000000-0000-4000-8000-000000000001",
+            "agent_name": "Env fixture",
+            "revealed_keys": [
+              "A_KEY",
+              "Z_KEY"
+            ],
+            "key_count": 2
+          }
+        },
+        {
+          "workspace_id": "20000000-0000-4000-8000-000000000001",
+          "issue_id": null,
+          "actor_type": "member",
+          "actor_id": "10000000-0000-4000-8000-000000000001",
+          "action": "agent_env_revealed",
+          "details": {
+            "agent_id": "40000000-0000-4000-8000-000000000001",
+            "agent_name": "Env fixture",
+            "revealed_keys": [
+              "A_KEY",
+              "Z_KEY"
+            ],
+            "key_count": 2
+          }
+        },
+        {
+          "workspace_id": "20000000-0000-4000-8000-000000000001",
+          "issue_id": null,
+          "actor_type": "member",
+          "actor_id": "10000000-0000-4000-8000-000000000001",
+          "action": "agent_env_revealed",
+          "details": {
+            "agent_id": "40000000-0000-4000-8000-000000000001",
+            "agent_name": "Env fixture",
+            "revealed_keys": [],
+            "key_count": 0
+          }
+        },
+        {
+          "workspace_id": "20000000-0000-4000-8000-000000000001",
+          "issue_id": null,
+          "actor_type": "member",
+          "actor_id": "10000000-0000-4000-8000-000000000001",
+          "action": "agent_env_revealed",
+          "details": {
+            "agent_id": "40000000-0000-4000-8000-000000000001",
+            "agent_name": "Env fixture",
+            "revealed_keys": [
+              "a"
+            ],
+            "key_count": 1
+          }
+        },
+        {
+          "workspace_id": "20000000-0000-4000-8000-000000000001",
+          "issue_id": null,
+          "actor_type": "member",
+          "actor_id": "10000000-0000-4000-8000-000000000001",
+          "action": "agent_env_revealed",
+          "details": {
+            "agent_id": "40000000-0000-4000-8000-000000000001",
+            "agent_name": "Env fixture",
+            "revealed_keys": [],
+            "key_count": 0
+          }
+        }
+      ]
+    },
+    {
+      "status": 200,
+      "body": "{\"agent_id\":\"40000000-0000-4000-8000-000000000001\",\"custom_env\":{}}\n",
+      "audits": [
+        {
+          "workspace_id": "20000000-0000-4000-8000-000000000001",
+          "issue_id": null,
+          "actor_type": "member",
+          "actor_id": "10000000-0000-4000-8000-000000000002",
+          "action": "agent_env_revealed",
+          "details": {
+            "agent_id": "40000000-0000-4000-8000-000000000001",
+            "agent_name": "Env fixture",
+            "revealed_keys": [
+              "A_KEY",
+              "Z_KEY"
+            ],
+            "key_count": 2
+          }
+        },
+        {
+          "workspace_id": "20000000-0000-4000-8000-000000000001",
+          "issue_id": null,
+          "actor_type": "member",
+          "actor_id": "10000000-0000-4000-8000-000000000001",
+          "action": "agent_env_revealed",
+          "details": {
+            "agent_id": "40000000-0000-4000-8000-000000000001",
+            "agent_name": "Env fixture",
+            "revealed_keys": [
+              "A_KEY",
+              "Z_KEY"
+            ],
+            "key_count": 2
+          }
+        },
+        {
+          "workspace_id": "20000000-0000-4000-8000-000000000001",
+          "issue_id": null,
+          "actor_type": "member",
+          "actor_id": "10000000-0000-4000-8000-000000000001",
+          "action": "agent_env_revealed",
+          "details": {
+            "agent_id": "40000000-0000-4000-8000-000000000001",
+            "agent_name": "Env fixture",
+            "revealed_keys": [],
+            "key_count": 0
+          }
+        },
+        {
+          "workspace_id": "20000000-0000-4000-8000-000000000001",
+          "issue_id": null,
+          "actor_type": "member",
+          "actor_id": "10000000-0000-4000-8000-000000000001",
+          "action": "agent_env_revealed",
+          "details": {
+            "agent_id": "40000000-0000-4000-8000-000000000001",
+            "agent_name": "Env fixture",
+            "revealed_keys": [
+              "a"
+            ],
+            "key_count": 1
+          }
+        },
+        {
+          "workspace_id": "20000000-0000-4000-8000-000000000001",
+          "issue_id": null,
+          "actor_type": "member",
+          "actor_id": "10000000-0000-4000-8000-000000000001",
+          "action": "agent_env_revealed",
+          "details": {
+            "agent_id": "40000000-0000-4000-8000-000000000001",
+            "agent_name": "Env fixture",
+            "revealed_keys": [],
+            "key_count": 0
+          }
+        },
+        {
+          "workspace_id": "20000000-0000-4000-8000-000000000001",
+          "issue_id": null,
+          "actor_type": "member",
+          "actor_id": "10000000-0000-4000-8000-000000000001",
+          "action": "agent_env_revealed",
+          "details": {
+            "agent_id": "40000000-0000-4000-8000-000000000001",
+            "agent_name": "Env fixture",
+            "revealed_keys": [],
+            "key_count": 0
+          }
+        }
+      ]
+    },
+    {
+      "status": 200,
+      "body": "{\"agent_id\":\"40000000-0000-4000-8000-000000000001\",\"custom_env\":{\"dup\":\"last\"}}\n",
+      "audits": [
+        {
+          "workspace_id": "20000000-0000-4000-8000-000000000001",
+          "issue_id": null,
+          "actor_type": "member",
+          "actor_id": "10000000-0000-4000-8000-000000000002",
+          "action": "agent_env_revealed",
+          "details": {
+            "agent_id": "40000000-0000-4000-8000-000000000001",
+            "agent_name": "Env fixture",
+            "revealed_keys": [
+              "A_KEY",
+              "Z_KEY"
+            ],
+            "key_count": 2
+          }
+        },
+        {
+          "workspace_id": "20000000-0000-4000-8000-000000000001",
+          "issue_id": null,
+          "actor_type": "member",
+          "actor_id": "10000000-0000-4000-8000-000000000001",
+          "action": "agent_env_revealed",
+          "details": {
+            "agent_id": "40000000-0000-4000-8000-000000000001",
+            "agent_name": "Env fixture",
+            "revealed_keys": [
+              "A_KEY",
+              "Z_KEY"
+            ],
+            "key_count": 2
+          }
+        },
+        {
+          "workspace_id": "20000000-0000-4000-8000-000000000001",
+          "issue_id": null,
+          "actor_type": "member",
+          "actor_id": "10000000-0000-4000-8000-000000000001",
+          "action": "agent_env_revealed",
+          "details": {
+            "agent_id": "40000000-0000-4000-8000-000000000001",
+            "agent_name": "Env fixture",
+            "revealed_keys": [],
+            "key_count": 0
+          }
+        },
+        {
+          "workspace_id": "20000000-0000-4000-8000-000000000001",
+          "issue_id": null,
+          "actor_type": "member",
+          "actor_id": "10000000-0000-4000-8000-000000000001",
+          "action": "agent_env_revealed",
+          "details": {
+            "agent_id": "40000000-0000-4000-8000-000000000001",
+            "agent_name": "Env fixture",
+            "revealed_keys": [
+              "a"
+            ],
+            "key_count": 1
+          }
+        },
+        {
+          "workspace_id": "20000000-0000-4000-8000-000000000001",
+          "issue_id": null,
+          "actor_type": "member",
+          "actor_id": "10000000-0000-4000-8000-000000000001",
+          "action": "agent_env_revealed",
+          "details": {
+            "agent_id": "40000000-0000-4000-8000-000000000001",
+            "agent_name": "Env fixture",
+            "revealed_keys": [],
+            "key_count": 0
+          }
+        },
+        {
+          "workspace_id": "20000000-0000-4000-8000-000000000001",
+          "issue_id": null,
+          "actor_type": "member",
+          "actor_id": "10000000-0000-4000-8000-000000000001",
+          "action": "agent_env_revealed",
+          "details": {
+            "agent_id": "40000000-0000-4000-8000-000000000001",
+            "agent_name": "Env fixture",
+            "revealed_keys": [],
+            "key_count": 0
+          }
+        },
+        {
+          "workspace_id": "20000000-0000-4000-8000-000000000001",
+          "issue_id": null,
+          "actor_type": "member",
+          "actor_id": "10000000-0000-4000-8000-000000000001",
+          "action": "agent_env_revealed",
+          "details": {
+            "agent_id": "40000000-0000-4000-8000-000000000001",
+            "agent_name": "Env fixture",
+            "revealed_keys": [
+              "dup"
+            ],
+            "key_count": 1
+          }
+        }
+      ]
+    },
+    {
+      "status": 500,
+      "body": "{\"error\":\"audit log write failed; refusing to serve env without a recorded reveal\"}\n",
+      "audits": [
+        {
+          "workspace_id": "20000000-0000-4000-8000-000000000001",
+          "issue_id": null,
+          "actor_type": "member",
+          "actor_id": "10000000-0000-4000-8000-000000000002",
+          "action": "agent_env_revealed",
+          "details": {
+            "agent_id": "40000000-0000-4000-8000-000000000001",
+            "agent_name": "Env fixture",
+            "revealed_keys": [
+              "A_KEY",
+              "Z_KEY"
+            ],
+            "key_count": 2
+          }
+        },
+        {
+          "workspace_id": "20000000-0000-4000-8000-000000000001",
+          "issue_id": null,
+          "actor_type": "member",
+          "actor_id": "10000000-0000-4000-8000-000000000001",
+          "action": "agent_env_revealed",
+          "details": {
+            "agent_id": "40000000-0000-4000-8000-000000000001",
+            "agent_name": "Env fixture",
+            "revealed_keys": [
+              "A_KEY",
+              "Z_KEY"
+            ],
+            "key_count": 2
+          }
+        },
+        {
+          "workspace_id": "20000000-0000-4000-8000-000000000001",
+          "issue_id": null,
+          "actor_type": "member",
+          "actor_id": "10000000-0000-4000-8000-000000000001",
+          "action": "agent_env_revealed",
+          "details": {
+            "agent_id": "40000000-0000-4000-8000-000000000001",
+            "agent_name": "Env fixture",
+            "revealed_keys": [],
+            "key_count": 0
+          }
+        },
+        {
+          "workspace_id": "20000000-0000-4000-8000-000000000001",
+          "issue_id": null,
+          "actor_type": "member",
+          "actor_id": "10000000-0000-4000-8000-000000000001",
+          "action": "agent_env_revealed",
+          "details": {
+            "agent_id": "40000000-0000-4000-8000-000000000001",
+            "agent_name": "Env fixture",
+            "revealed_keys": [
+              "a"
+            ],
+            "key_count": 1
+          }
+        },
+        {
+          "workspace_id": "20000000-0000-4000-8000-000000000001",
+          "issue_id": null,
+          "actor_type": "member",
+          "actor_id": "10000000-0000-4000-8000-000000000001",
+          "action": "agent_env_revealed",
+          "details": {
+            "agent_id": "40000000-0000-4000-8000-000000000001",
+            "agent_name": "Env fixture",
+            "revealed_keys": [],
+            "key_count": 0
+          }
+        },
+        {
+          "workspace_id": "20000000-0000-4000-8000-000000000001",
+          "issue_id": null,
+          "actor_type": "member",
+          "actor_id": "10000000-0000-4000-8000-000000000001",
+          "action": "agent_env_revealed",
+          "details": {
+            "agent_id": "40000000-0000-4000-8000-000000000001",
+            "agent_name": "Env fixture",
+            "revealed_keys": [],
+            "key_count": 0
+          }
+        },
+        {
+          "workspace_id": "20000000-0000-4000-8000-000000000001",
+          "issue_id": null,
+          "actor_type": "member",
+          "actor_id": "10000000-0000-4000-8000-000000000001",
+          "action": "agent_env_revealed",
+          "details": {
+            "agent_id": "40000000-0000-4000-8000-000000000001",
+            "agent_name": "Env fixture",
+            "revealed_keys": [
+              "dup"
+            ],
+            "key_count": 1
+          }
+        }
+      ]
+    }
+  ],
+  "mismatches": [],
+  "binary_sha256": "58c82c6716988c78e27aeff65cf9c7d0deef93c50239d012fc711dd7c5709b04"
+}

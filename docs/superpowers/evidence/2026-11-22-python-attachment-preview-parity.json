@@ -1,0 +1,7474 @@
+{
+  "scope": "Original isTextPreviewable vs Python whitelist selection using packaged identical rules, MIME parameters, filename paths and Unicode simple lowercase. No content endpoint, size limit, security headers or authorization certification.",
+  "fixtures": [
+    {
+      "Mime": "",
+      "Filename": "file.md"
+    },
+    {
+      "Mime": "",
+      "Filename": "file.markdown"
+    },
+    {
+      "Mime": "",
+      "Filename": "file.txt"
+    },
+    {
+      "Mime": "",
+      "Filename": "file.log"
+    },
+    {
+      "Mime": "",
+      "Filename": "file.csv"
+    },
+    {
+      "Mime": "",
+      "Filename": "file.tsv"
+    },
+    {
+      "Mime": "",
+      "Filename": "file.html"
+    },
+    {
+      "Mime": "",
+      "Filename": "file.htm"
+    },
+    {
+      "Mime": "",
+      "Filename": "file.json"
+    },
+    {
+      "Mime": "",
+      "Filename": "file.jsonl"
+    },
+    {
+      "Mime": "",
+      "Filename": "file.ndjson"
+    },
+    {
+      "Mime": "",
+      "Filename": "file.xml"
+    },
+    {
+      "Mime": "",
+      "Filename": "file.yml"
+    },
+    {
+      "Mime": "",
+      "Filename": "file.yaml"
+    },
+    {
+      "Mime": "",
+      "Filename": "file.toml"
+    },
+    {
+      "Mime": "",
+      "Filename": "file.ini"
+    },
+    {
+      "Mime": "",
+      "Filename": "file.conf"
+    },
+    {
+      "Mime": "",
+      "Filename": "file.dockerfile"
+    },
+    {
+      "Mime": "",
+      "Filename": "file.makefile"
+    },
+    {
+      "Mime": "",
+      "Filename": "file.gitignore"
+    },
+    {
+      "Mime": "",
+      "Filename": "file.sh"
+    },
+    {
+      "Mime": "",
+      "Filename": "file.bash"
+    },
+    {
+      "Mime": "",
+      "Filename": "file.zsh"
+    },
+    {
+      "Mime": "",
+      "Filename": "file.py"
+    },
+    {
+      "Mime": "",
+      "Filename": "file.rb"
+    },
+    {
+      "Mime": "",
+      "Filename": "file.go"
+    },
+    {
+      "Mime": "",
+      "Filename": "file.rs"
+    },
+    {
+      "Mime": "",
+      "Filename": "file.ts"
+    },
+    {
+      "Mime": "",
+      "Filename": "file.tsx"
+    },
+    {
+      "Mime": "",
+      "Filename": "file.js"
+    },
+    {
+      "Mime": "",
+      "Filename": "file.jsx"
+    },
+    {
+      "Mime": "",
+      "Filename": "file.mjs"
+    },
+    {
+      "Mime": "",
+      "Filename": "file.cjs"
+    },
+    {
+      "Mime": "",
+      "Filename": "file.css"
+    },
+    {
+      "Mime": "",
+      "Filename": "file.scss"
+    },
+    {
+      "Mime": "",
+      "Filename": "file.sass"
+    },
+    {
+      "Mime": "",
+      "Filename": "file.less"
+    },
+    {
+      "Mime": "",
+      "Filename": "file.sql"
+    },
+    {
+      "Mime": "",
+      "Filename": "file.java"
+    },
+    {
+      "Mime": "",
+      "Filename": "file.kt"
+    },
+    {
+      "Mime": "",
+      "Filename": "file.swift"
+    },
+    {
+      "Mime": "",
+      "Filename": "file.c"
+    },
+    {
+      "Mime": "",
+      "Filename": "file.cc"
+    },
+    {
+      "Mime": "",
+      "Filename": "file.cpp"
+    },
+    {
+      "Mime": "",
+      "Filename": "file.h"
+    },
+    {
+      "Mime": "",
+      "Filename": "file.hpp"
+    },
+    {
+      "Mime": "",
+      "Filename": "file.cs"
+    },
+    {
+      "Mime": "",
+      "Filename": "file.php"
+    },
+    {
+      "Mime": "",
+      "Filename": "file.lua"
+    },
+    {
+      "Mime": "",
+      "Filename": "file.vim"
+    },
+    {
+      "Mime": "",
+      "Filename": "dockerfile"
+    },
+    {
+      "Mime": "",
+      "Filename": "makefile"
+    },
+    {
+      "Mime": "",
+      "Filename": ".env"
+    },
+    {
+      "Mime": "",
+      "Filename": ".gitignore"
+    },
+    {
+      "Mime": "",
+      "Filename": "a.PY"
+    },
+    {
+      "Mime": "",
+      "Filename": "C:\\folder\\Dockerfile"
+    },
+    {
+      "Mime": "",
+      "Filename": "dir/.env/"
+    },
+    {
+      "Mime": "",
+      "Filename": "dir/../Makefile"
+    },
+    {
+      "Mime": "",
+      "Filename": "test.\u0130N\u0130"
+    },
+    {
+      "Mime": "",
+      "Filename": "test.py "
+    },
+    {
+      "Mime": "",
+      "Filename": "x.pdf"
+    },
+    {
+      "Mime": "",
+      "Filename": "x.png"
+    },
+    {
+      "Mime": "",
+      "Filename": "file.bin"
+    },
+    {
+      "Mime": "",
+      "Filename": ""
+    },
+    {
+      "Mime": "",
+      "Filename": "/"
+    },
+    {
+      "Mime": "",
+      "Filename": "."
+    },
+    {
+      "Mime": "",
+      "Filename": ".."
+    },
+    {
+      "Mime": "",
+      "Filename": "folder/.."
+    },
+    {
+      "Mime": "",
+      "Filename": "file.PY/.."
+    },
+    {
+      "Mime": "image/png",
+      "Filename": "file.md"
+    },
+    {
+      "Mime": "image/png",
+      "Filename": "file.markdown"
+    },
+    {
+      "Mime": "image/png",
+      "Filename": "file.txt"
+    },
+    {
+      "Mime": "image/png",
+      "Filename": "file.log"
+    },
+    {
+      "Mime": "image/png",
+      "Filename": "file.csv"
+    },
+    {
+      "Mime": "image/png",
+      "Filename": "file.tsv"
+    },
+    {
+      "Mime": "image/png",
+      "Filename": "file.html"
+    },
+    {
+      "Mime": "image/png",
+      "Filename": "file.htm"
+    },
+    {
+      "Mime": "image/png",
+      "Filename": "file.json"
+    },
+    {
+      "Mime": "image/png",
+      "Filename": "file.jsonl"
+    },
+    {
+      "Mime": "image/png",
+      "Filename": "file.ndjson"
+    },
+    {
+      "Mime": "image/png",
+      "Filename": "file.xml"
+    },
+    {
+      "Mime": "image/png",
+      "Filename": "file.yml"
+    },
+    {
+      "Mime": "image/png",
+      "Filename": "file.yaml"
+    },
+    {
+      "Mime": "image/png",
+      "Filename": "file.toml"
+    },
+    {
+      "Mime": "image/png",
+      "Filename": "file.ini"
+    },
+    {
+      "Mime": "image/png",
+      "Filename": "file.conf"
+    },
+    {
+      "Mime": "image/png",
+      "Filename": "file.dockerfile"
+    },
+    {
+      "Mime": "image/png",
+      "Filename": "file.makefile"
+    },
+    {
+      "Mime": "image/png",
+      "Filename": "file.gitignore"
+    },
+    {
+      "Mime": "image/png",
+      "Filename": "file.sh"
+    },
+    {
+      "Mime": "image/png",
+      "Filename": "file.bash"
+    },
+    {
+      "Mime": "image/png",
+      "Filename": "file.zsh"
+    },
+    {
+      "Mime": "image/png",
+      "Filename": "file.py"
+    },
+    {
+      "Mime": "image/png",
+      "Filename": "file.rb"
+    },
+    {
+      "Mime": "image/png",
+      "Filename": "file.go"
+    },
+    {
+      "Mime": "image/png",
+      "Filename": "file.rs"
+    },
+    {
+      "Mime": "image/png",
+      "Filename": "file.ts"
+    },
+    {
+      "Mime": "image/png",
+      "Filename": "file.tsx"
+    },
+    {
+      "Mime": "image/png",
+      "Filename": "file.js"
+    },
+    {
+      "Mime": "image/png",
+      "Filename": "file.jsx"
+    },
+    {
+      "Mime": "image/png",
+      "Filename": "file.mjs"
+    },
+    {
+      "Mime": "image/png",
+      "Filename": "file.cjs"
+    },
+    {
+      "Mime": "image/png",
+      "Filename": "file.css"
+    },
+    {
+      "Mime": "image/png",
+      "Filename": "file.scss"
+    },
+    {
+      "Mime": "image/png",
+      "Filename": "file.sass"
+    },
+    {
+      "Mime": "image/png",
+      "Filename": "file.less"
+    },
+    {
+      "Mime": "image/png",
+      "Filename": "file.sql"
+    },
+    {
+      "Mime": "image/png",
+      "Filename": "file.java"
+    },
+    {
+      "Mime": "image/png",
+      "Filename": "file.kt"
+    },
+    {
+      "Mime": "image/png",
+      "Filename": "file.swift"
+    },
+    {
+      "Mime": "image/png",
+      "Filename": "file.c"
+    },
+    {
+      "Mime": "image/png",
+      "Filename": "file.cc"
+    },
+    {
+      "Mime": "image/png",
+      "Filename": "file.cpp"
+    },
+    {
+      "Mime": "image/png",
+      "Filename": "file.h"
+    },
+    {
+      "Mime": "image/png",
+      "Filename": "file.hpp"
+    },
+    {
+      "Mime": "image/png",
+      "Filename": "file.cs"
+    },
+    {
+      "Mime": "image/png",
+      "Filename": "file.php"
+    },
+    {
+      "Mime": "image/png",
+      "Filename": "file.lua"
+    },
+    {
+      "Mime": "image/png",
+      "Filename": "file.vim"
+    },
+    {
+      "Mime": "image/png",
+      "Filename": "dockerfile"
+    },
+    {
+      "Mime": "image/png",
+      "Filename": "makefile"
+    },
+    {
+      "Mime": "image/png",
+      "Filename": ".env"
+    },
+    {
+      "Mime": "image/png",
+      "Filename": ".gitignore"
+    },
+    {
+      "Mime": "image/png",
+      "Filename": "a.PY"
+    },
+    {
+      "Mime": "image/png",
+      "Filename": "C:\\folder\\Dockerfile"
+    },
+    {
+      "Mime": "image/png",
+      "Filename": "dir/.env/"
+    },
+    {
+      "Mime": "image/png",
+      "Filename": "dir/../Makefile"
+    },
+    {
+      "Mime": "image/png",
+      "Filename": "test.\u0130N\u0130"
+    },
+    {
+      "Mime": "image/png",
+      "Filename": "test.py "
+    },
+    {
+      "Mime": "image/png",
+      "Filename": "x.pdf"
+    },
+    {
+      "Mime": "image/png",
+      "Filename": "x.png"
+    },
+    {
+      "Mime": "image/png",
+      "Filename": "file.bin"
+    },
+    {
+      "Mime": "image/png",
+      "Filename": ""
+    },
+    {
+      "Mime": "image/png",
+      "Filename": "/"
+    },
+    {
+      "Mime": "image/png",
+      "Filename": "."
+    },
+    {
+      "Mime": "image/png",
+      "Filename": ".."
+    },
+    {
+      "Mime": "image/png",
+      "Filename": "folder/.."
+    },
+    {
+      "Mime": "image/png",
+      "Filename": "file.PY/.."
+    },
+    {
+      "Mime": "application/octet-stream",
+      "Filename": "file.md"
+    },
+    {
+      "Mime": "application/octet-stream",
+      "Filename": "file.markdown"
+    },
+    {
+      "Mime": "application/octet-stream",
+      "Filename": "file.txt"
+    },
+    {
+      "Mime": "application/octet-stream",
+      "Filename": "file.log"
+    },
+    {
+      "Mime": "application/octet-stream",
+      "Filename": "file.csv"
+    },
+    {
+      "Mime": "application/octet-stream",
+      "Filename": "file.tsv"
+    },
+    {
+      "Mime": "application/octet-stream",
+      "Filename": "file.html"
+    },
+    {
+      "Mime": "application/octet-stream",
+      "Filename": "file.htm"
+    },
+    {
+      "Mime": "application/octet-stream",
+      "Filename": "file.json"
+    },
+    {
+      "Mime": "application/octet-stream",
+      "Filename": "file.jsonl"
+    },
+    {
+      "Mime": "application/octet-stream",
+      "Filename": "file.ndjson"
+    },
+    {
+      "Mime": "application/octet-stream",
+      "Filename": "file.xml"
+    },
+    {
+      "Mime": "application/octet-stream",
+      "Filename": "file.yml"
+    },
+    {
+      "Mime": "application/octet-stream",
+      "Filename": "file.yaml"
+    },
+    {
+      "Mime": "application/octet-stream",
+      "Filename": "file.toml"
+    },
+    {
+      "Mime": "application/octet-stream",
+      "Filename": "file.ini"
+    },
+    {
+      "Mime": "application/octet-stream",
+      "Filename": "file.conf"
+    },
+    {
+      "Mime": "application/octet-stream",
+      "Filename": "file.dockerfile"
+    },
+    {
+      "Mime": "application/octet-stream",
+      "Filename": "file.makefile"
+    },
+    {
+      "Mime": "application/octet-stream",
+      "Filename": "file.gitignore"
+    },
+    {
+      "Mime": "application/octet-stream",
+      "Filename": "file.sh"
+    },
+    {
+      "Mime": "application/octet-stream",
+      "Filename": "file.bash"
+    },
+    {
+      "Mime": "application/octet-stream",
+      "Filename": "file.zsh"
+    },
+    {
+      "Mime": "application/octet-stream",
+      "Filename": "file.py"
+    },
+    {
+      "Mime": "application/octet-stream",
+      "Filename": "file.rb"
+    },
+    {
+      "Mime": "application/octet-stream",
+      "Filename": "file.go"
+    },
+    {
+      "Mime": "application/octet-stream",
+      "Filename": "file.rs"
+    },
+    {
+      "Mime": "application/octet-stream",
+      "Filename": "file.ts"
+    },
+    {
+      "Mime": "application/octet-stream",
+      "Filename": "file.tsx"
+    },
+    {
+      "Mime": "application/octet-stream",
+      "Filename": "file.js"
+    },
+    {
+      "Mime": "application/octet-stream",
+      "Filename": "file.jsx"
+    },
+    {
+      "Mime": "application/octet-stream",
+      "Filename": "file.mjs"
+    },
+    {
+      "Mime": "application/octet-stream",
+      "Filename": "file.cjs"
+    },
+    {
+      "Mime": "application/octet-stream",
+      "Filename": "file.css"
+    },
+    {
+      "Mime": "application/octet-stream",
+      "Filename": "file.scss"
+    },
+    {
+      "Mime": "application/octet-stream",
+      "Filename": "file.sass"
+    },
+    {
+      "Mime": "application/octet-stream",
+      "Filename": "file.less"
+    },
+    {
+      "Mime": "application/octet-stream",
+      "Filename": "file.sql"
+    },
+    {
+      "Mime": "application/octet-stream",
+      "Filename": "file.java"
+    },
+    {
+      "Mime": "application/octet-stream",
+      "Filename": "file.kt"
+    },
+    {
+      "Mime": "application/octet-stream",
+      "Filename": "file.swift"
+    },
+    {
+      "Mime": "application/octet-stream",
+      "Filename": "file.c"
+    },
+    {
+      "Mime": "application/octet-stream",
+      "Filename": "file.cc"
+    },
+    {
+      "Mime": "application/octet-stream",
+      "Filename": "file.cpp"
+    },
+    {
+      "Mime": "application/octet-stream",
+      "Filename": "file.h"
+    },
+    {
+      "Mime": "application/octet-stream",
+      "Filename": "file.hpp"
+    },
+    {
+      "Mime": "application/octet-stream",
+      "Filename": "file.cs"
+    },
+    {
+      "Mime": "application/octet-stream",
+      "Filename": "file.php"
+    },
+    {
+      "Mime": "application/octet-stream",
+      "Filename": "file.lua"
+    },
+    {
+      "Mime": "application/octet-stream",
+      "Filename": "file.vim"
+    },
+    {
+      "Mime": "application/octet-stream",
+      "Filename": "dockerfile"
+    },
+    {
+      "Mime": "application/octet-stream",
+      "Filename": "makefile"
+    },
+    {
+      "Mime": "application/octet-stream",
+      "Filename": ".env"
+    },
+    {
+      "Mime": "application/octet-stream",
+      "Filename": ".gitignore"
+    },
+    {
+      "Mime": "application/octet-stream",
+      "Filename": "a.PY"
+    },
+    {
+      "Mime": "application/octet-stream",
+      "Filename": "C:\\folder\\Dockerfile"
+    },
+    {
+      "Mime": "application/octet-stream",
+      "Filename": "dir/.env/"
+    },
+    {
+      "Mime": "application/octet-stream",
+      "Filename": "dir/../Makefile"
+    },
+    {
+      "Mime": "application/octet-stream",
+      "Filename": "test.\u0130N\u0130"
+    },
+    {
+      "Mime": "application/octet-stream",
+      "Filename": "test.py "
+    },
+    {
+      "Mime": "application/octet-stream",
+      "Filename": "x.pdf"
+    },
+    {
+      "Mime": "application/octet-stream",
+      "Filename": "x.png"
+    },
+    {
+      "Mime": "application/octet-stream",
+      "Filename": "file.bin"
+    },
+    {
+      "Mime": "application/octet-stream",
+      "Filename": ""
+    },
+    {
+      "Mime": "application/octet-stream",
+      "Filename": "/"
+    },
+    {
+      "Mime": "application/octet-stream",
+      "Filename": "."
+    },
+    {
+      "Mime": "application/octet-stream",
+      "Filename": ".."
+    },
+    {
+      "Mime": "application/octet-stream",
+      "Filename": "folder/.."
+    },
+    {
+      "Mime": "application/octet-stream",
+      "Filename": "file.PY/.."
+    },
+    {
+      "Mime": "TEXT/PLAIN",
+      "Filename": "file.md"
+    },
+    {
+      "Mime": "TEXT/PLAIN",
+      "Filename": "file.markdown"
+    },
+    {
+      "Mime": "TEXT/PLAIN",
+      "Filename": "file.txt"
+    },
+    {
+      "Mime": "TEXT/PLAIN",
+      "Filename": "file.log"
+    },
+    {
+      "Mime": "TEXT/PLAIN",
+      "Filename": "file.csv"
+    },
+    {
+      "Mime": "TEXT/PLAIN",
+      "Filename": "file.tsv"
+    },
+    {
+      "Mime": "TEXT/PLAIN",
+      "Filename": "file.html"
+    },
+    {
+      "Mime": "TEXT/PLAIN",
+      "Filename": "file.htm"
+    },
+    {
+      "Mime": "TEXT/PLAIN",
+      "Filename": "file.json"
+    },
+    {
+      "Mime": "TEXT/PLAIN",
+      "Filename": "file.jsonl"
+    },
+    {
+      "Mime": "TEXT/PLAIN",
+      "Filename": "file.ndjson"
+    },
+    {
+      "Mime": "TEXT/PLAIN",
+      "Filename": "file.xml"
+    },
+    {
+      "Mime": "TEXT/PLAIN",
+      "Filename": "file.yml"
+    },
+    {
+      "Mime": "TEXT/PLAIN",
+      "Filename": "file.yaml"
+    },
+    {
+      "Mime": "TEXT/PLAIN",
+      "Filename": "file.toml"
+    },
+    {
+      "Mime": "TEXT/PLAIN",
+      "Filename": "file.ini"
+    },
+    {
+      "Mime": "TEXT/PLAIN",
+      "Filename": "file.conf"
+    },
+    {
+      "Mime": "TEXT/PLAIN",
+      "Filename": "file.dockerfile"
+    },
+    {
+      "Mime": "TEXT/PLAIN",
+      "Filename": "file.makefile"
+    },
+    {
+      "Mime": "TEXT/PLAIN",
+      "Filename": "file.gitignore"
+    },
+    {
+      "Mime": "TEXT/PLAIN",
+      "Filename": "file.sh"
+    },
+    {
+      "Mime": "TEXT/PLAIN",
+      "Filename": "file.bash"
+    },
+    {
+      "Mime": "TEXT/PLAIN",
+      "Filename": "file.zsh"
+    },
+    {
+      "Mime": "TEXT/PLAIN",
+      "Filename": "file.py"
+    },
+    {
+      "Mime": "TEXT/PLAIN",
+      "Filename": "file.rb"
+    },
+    {
+      "Mime": "TEXT/PLAIN",
+      "Filename": "file.go"
+    },
+    {
+      "Mime": "TEXT/PLAIN",
+      "Filename": "file.rs"
+    },
+    {
+      "Mime": "TEXT/PLAIN",
+      "Filename": "file.ts"
+    },
+    {
+      "Mime": "TEXT/PLAIN",
+      "Filename": "file.tsx"
+    },
+    {
+      "Mime": "TEXT/PLAIN",
+      "Filename": "file.js"
+    },
+    {
+      "Mime": "TEXT/PLAIN",
+      "Filename": "file.jsx"
+    },
+    {
+      "Mime": "TEXT/PLAIN",
+      "Filename": "file.mjs"
+    },
+    {
+      "Mime": "TEXT/PLAIN",
+      "Filename": "file.cjs"
+    },
+    {
+      "Mime": "TEXT/PLAIN",
+      "Filename": "file.css"
+    },
+    {
+      "Mime": "TEXT/PLAIN",
+      "Filename": "file.scss"
+    },
+    {
+      "Mime": "TEXT/PLAIN",
+      "Filename": "file.sass"
+    },
+    {
+      "Mime": "TEXT/PLAIN",
+      "Filename": "file.less"
+    },
+    {
+      "Mime": "TEXT/PLAIN",
+      "Filename": "file.sql"
+    },
+    {
+      "Mime": "TEXT/PLAIN",
+      "Filename": "file.java"
+    },
+    {
+      "Mime": "TEXT/PLAIN",
+      "Filename": "file.kt"
+    },
+    {
+      "Mime": "TEXT/PLAIN",
+      "Filename": "file.swift"
+    },
+    {
+      "Mime": "TEXT/PLAIN",
+      "Filename": "file.c"
+    },
+    {
+      "Mime": "TEXT/PLAIN",
+      "Filename": "file.cc"
+    },
+    {
+      "Mime": "TEXT/PLAIN",
+      "Filename": "file.cpp"
+    },
+    {
+      "Mime": "TEXT/PLAIN",
+      "Filename": "file.h"
+    },
+    {
+      "Mime": "TEXT/PLAIN",
+      "Filename": "file.hpp"
+    },
+    {
+      "Mime": "TEXT/PLAIN",
+      "Filename": "file.cs"
+    },
+    {
+      "Mime": "TEXT/PLAIN",
+      "Filename": "file.php"
+    },
+    {
+      "Mime": "TEXT/PLAIN",
+      "Filename": "file.lua"
+    },
+    {
+      "Mime": "TEXT/PLAIN",
+      "Filename": "file.vim"
+    },
+    {
+      "Mime": "TEXT/PLAIN",
+      "Filename": "dockerfile"
+    },
+    {
+      "Mime": "TEXT/PLAIN",
+      "Filename": "makefile"
+    },
+    {
+      "Mime": "TEXT/PLAIN",
+      "Filename": ".env"
+    },
+    {
+      "Mime": "TEXT/PLAIN",
+      "Filename": ".gitignore"
+    },
+    {
+      "Mime": "TEXT/PLAIN",
+      "Filename": "a.PY"
+    },
+    {
+      "Mime": "TEXT/PLAIN",
+      "Filename": "C:\\folder\\Dockerfile"
+    },
+    {
+      "Mime": "TEXT/PLAIN",
+      "Filename": "dir/.env/"
+    },
+    {
+      "Mime": "TEXT/PLAIN",
+      "Filename": "dir/../Makefile"
+    },
+    {
+      "Mime": "TEXT/PLAIN",
+      "Filename": "test.\u0130N\u0130"
+    },
+    {
+      "Mime": "TEXT/PLAIN",
+      "Filename": "test.py "
+    },
+    {
+      "Mime": "TEXT/PLAIN",
+      "Filename": "x.pdf"
+    },
+    {
+      "Mime": "TEXT/PLAIN",
+      "Filename": "x.png"
+    },
+    {
+      "Mime": "TEXT/PLAIN",
+      "Filename": "file.bin"
+    },
+    {
+      "Mime": "TEXT/PLAIN",
+      "Filename": ""
+    },
+    {
+      "Mime": "TEXT/PLAIN",
+      "Filename": "/"
+    },
+    {
+      "Mime": "TEXT/PLAIN",
+      "Filename": "."
+    },
+    {
+      "Mime": "TEXT/PLAIN",
+      "Filename": ".."
+    },
+    {
+      "Mime": "TEXT/PLAIN",
+      "Filename": "folder/.."
+    },
+    {
+      "Mime": "TEXT/PLAIN",
+      "Filename": "file.PY/.."
+    },
+    {
+      "Mime": " TEXT/PLAIN ; charset=utf-8",
+      "Filename": "file.md"
+    },
+    {
+      "Mime": " TEXT/PLAIN ; charset=utf-8",
+      "Filename": "file.markdown"
+    },
+    {
+      "Mime": " TEXT/PLAIN ; charset=utf-8",
+      "Filename": "file.txt"
+    },
+    {
+      "Mime": " TEXT/PLAIN ; charset=utf-8",
+      "Filename": "file.log"
+    },
+    {
+      "Mime": " TEXT/PLAIN ; charset=utf-8",
+      "Filename": "file.csv"
+    },
+    {
+      "Mime": " TEXT/PLAIN ; charset=utf-8",
+      "Filename": "file.tsv"
+    },
+    {
+      "Mime": " TEXT/PLAIN ; charset=utf-8",
+      "Filename": "file.html"
+    },
+    {
+      "Mime": " TEXT/PLAIN ; charset=utf-8",
+      "Filename": "file.htm"
+    },
+    {
+      "Mime": " TEXT/PLAIN ; charset=utf-8",
+      "Filename": "file.json"
+    },
+    {
+      "Mime": " TEXT/PLAIN ; charset=utf-8",
+      "Filename": "file.jsonl"
+    },
+    {
+      "Mime": " TEXT/PLAIN ; charset=utf-8",
+      "Filename": "file.ndjson"
+    },
+    {
+      "Mime": " TEXT/PLAIN ; charset=utf-8",
+      "Filename": "file.xml"
+    },
+    {
+      "Mime": " TEXT/PLAIN ; charset=utf-8",
+      "Filename": "file.yml"
+    },
+    {
+      "Mime": " TEXT/PLAIN ; charset=utf-8",
+      "Filename": "file.yaml"
+    },
+    {
+      "Mime": " TEXT/PLAIN ; charset=utf-8",
+      "Filename": "file.toml"
+    },
+    {
+      "Mime": " TEXT/PLAIN ; charset=utf-8",
+      "Filename": "file.ini"
+    },
+    {
+      "Mime": " TEXT/PLAIN ; charset=utf-8",
+      "Filename": "file.conf"
+    },
+    {
+      "Mime": " TEXT/PLAIN ; charset=utf-8",
+      "Filename": "file.dockerfile"
+    },
+    {
+      "Mime": " TEXT/PLAIN ; charset=utf-8",
+      "Filename": "file.makefile"
+    },
+    {
+      "Mime": " TEXT/PLAIN ; charset=utf-8",
+      "Filename": "file.gitignore"
+    },
+    {
+      "Mime": " TEXT/PLAIN ; charset=utf-8",
+      "Filename": "file.sh"
+    },
+    {
+      "Mime": " TEXT/PLAIN ; charset=utf-8",
+      "Filename": "file.bash"
+    },
+    {
+      "Mime": " TEXT/PLAIN ; charset=utf-8",
+      "Filename": "file.zsh"
+    },
+    {
+      "Mime": " TEXT/PLAIN ; charset=utf-8",
+      "Filename": "file.py"
+    },
+    {
+      "Mime": " TEXT/PLAIN ; charset=utf-8",
+      "Filename": "file.rb"
+    },
+    {
+      "Mime": " TEXT/PLAIN ; charset=utf-8",
+      "Filename": "file.go"
+    },
+    {
+      "Mime": " TEXT/PLAIN ; charset=utf-8",
+      "Filename": "file.rs"
+    },
+    {
+      "Mime": " TEXT/PLAIN ; charset=utf-8",
+      "Filename": "file.ts"
+    },
+    {
+      "Mime": " TEXT/PLAIN ; charset=utf-8",
+      "Filename": "file.tsx"
+    },
+    {
+      "Mime": " TEXT/PLAIN ; charset=utf-8",
+      "Filename": "file.js"
+    },
+    {
+      "Mime": " TEXT/PLAIN ; charset=utf-8",
+      "Filename": "file.jsx"
+    },
+    {
+      "Mime": " TEXT/PLAIN ; charset=utf-8",
+      "Filename": "file.mjs"
+    },
+    {
+      "Mime": " TEXT/PLAIN ; charset=utf-8",
+      "Filename": "file.cjs"
+    },
+    {
+      "Mime": " TEXT/PLAIN ; charset=utf-8",
+      "Filename": "file.css"
+    },
+    {
+      "Mime": " TEXT/PLAIN ; charset=utf-8",
+      "Filename": "file.scss"
+    },
+    {
+      "Mime": " TEXT/PLAIN ; charset=utf-8",
+      "Filename": "file.sass"
+    },
+    {
+      "Mime": " TEXT/PLAIN ; charset=utf-8",
+      "Filename": "file.less"
+    },
+    {
+      "Mime": " TEXT/PLAIN ; charset=utf-8",
+      "Filename": "file.sql"
+    },
+    {
+      "Mime": " TEXT/PLAIN ; charset=utf-8",
+      "Filename": "file.java"
+    },
+    {
+      "Mime": " TEXT/PLAIN ; charset=utf-8",
+      "Filename": "file.kt"
+    },
+    {
+      "Mime": " TEXT/PLAIN ; charset=utf-8",
+      "Filename": "file.swift"
+    },
+    {
+      "Mime": " TEXT/PLAIN ; charset=utf-8",
+      "Filename": "file.c"
+    },
+    {
+      "Mime": " TEXT/PLAIN ; charset=utf-8",
+      "Filename": "file.cc"
+    },
+    {
+      "Mime": " TEXT/PLAIN ; charset=utf-8",
+      "Filename": "file.cpp"
+    },
+    {
+      "Mime": " TEXT/PLAIN ; charset=utf-8",
+      "Filename": "file.h"
+    },
+    {
+      "Mime": " TEXT/PLAIN ; charset=utf-8",
+      "Filename": "file.hpp"
+    },
+    {
+      "Mime": " TEXT/PLAIN ; charset=utf-8",
+      "Filename": "file.cs"
+    },
+    {
+      "Mime": " TEXT/PLAIN ; charset=utf-8",
+      "Filename": "file.php"
+    },
+    {
+      "Mime": " TEXT/PLAIN ; charset=utf-8",
+      "Filename": "file.lua"
+    },
+    {
+      "Mime": " TEXT/PLAIN ; charset=utf-8",
+      "Filename": "file.vim"
+    },
+    {
+      "Mime": " TEXT/PLAIN ; charset=utf-8",
+      "Filename": "dockerfile"
+    },
+    {
+      "Mime": " TEXT/PLAIN ; charset=utf-8",
+      "Filename": "makefile"
+    },
+    {
+      "Mime": " TEXT/PLAIN ; charset=utf-8",
+      "Filename": ".env"
+    },
+    {
+      "Mime": " TEXT/PLAIN ; charset=utf-8",
+      "Filename": ".gitignore"
+    },
+    {
+      "Mime": " TEXT/PLAIN ; charset=utf-8",
+      "Filename": "a.PY"
+    },
+    {
+      "Mime": " TEXT/PLAIN ; charset=utf-8",
+      "Filename": "C:\\folder\\Dockerfile"
+    },
+    {
+      "Mime": " TEXT/PLAIN ; charset=utf-8",
+      "Filename": "dir/.env/"
+    },
+    {
+      "Mime": " TEXT/PLAIN ; charset=utf-8",
+      "Filename": "dir/../Makefile"
+    },
+    {
+      "Mime": " TEXT/PLAIN ; charset=utf-8",
+      "Filename": "test.\u0130N\u0130"
+    },
+    {
+      "Mime": " TEXT/PLAIN ; charset=utf-8",
+      "Filename": "test.py "
+    },
+    {
+      "Mime": " TEXT/PLAIN ; charset=utf-8",
+      "Filename": "x.pdf"
+    },
+    {
+      "Mime": " TEXT/PLAIN ; charset=utf-8",
+      "Filename": "x.png"
+    },
+    {
+      "Mime": " TEXT/PLAIN ; charset=utf-8",
+      "Filename": "file.bin"
+    },
+    {
+      "Mime": " TEXT/PLAIN ; charset=utf-8",
+      "Filename": ""
+    },
+    {
+      "Mime": " TEXT/PLAIN ; charset=utf-8",
+      "Filename": "/"
+    },
+    {
+      "Mime": " TEXT/PLAIN ; charset=utf-8",
+      "Filename": "."
+    },
+    {
+      "Mime": " TEXT/PLAIN ; charset=utf-8",
+      "Filename": ".."
+    },
+    {
+      "Mime": " TEXT/PLAIN ; charset=utf-8",
+      "Filename": "folder/.."
+    },
+    {
+      "Mime": " TEXT/PLAIN ; charset=utf-8",
+      "Filename": "file.PY/.."
+    },
+    {
+      "Mime": "application/jsonx",
+      "Filename": "file.md"
+    },
+    {
+      "Mime": "application/jsonx",
+      "Filename": "file.markdown"
+    },
+    {
+      "Mime": "application/jsonx",
+      "Filename": "file.txt"
+    },
+    {
+      "Mime": "application/jsonx",
+      "Filename": "file.log"
+    },
+    {
+      "Mime": "application/jsonx",
+      "Filename": "file.csv"
+    },
+    {
+      "Mime": "application/jsonx",
+      "Filename": "file.tsv"
+    },
+    {
+      "Mime": "application/jsonx",
+      "Filename": "file.html"
+    },
+    {
+      "Mime": "application/jsonx",
+      "Filename": "file.htm"
+    },
+    {
+      "Mime": "application/jsonx",
+      "Filename": "file.json"
+    },
+    {
+      "Mime": "application/jsonx",
+      "Filename": "file.jsonl"
+    },
+    {
+      "Mime": "application/jsonx",
+      "Filename": "file.ndjson"
+    },
+    {
+      "Mime": "application/jsonx",
+      "Filename": "file.xml"
+    },
+    {
+      "Mime": "application/jsonx",
+      "Filename": "file.yml"
+    },
+    {
+      "Mime": "application/jsonx",
+      "Filename": "file.yaml"
+    },
+    {
+      "Mime": "application/jsonx",
+      "Filename": "file.toml"
+    },
+    {
+      "Mime": "application/jsonx",
+      "Filename": "file.ini"
+    },
+    {
+      "Mime": "application/jsonx",
+      "Filename": "file.conf"
+    },
+    {
+      "Mime": "application/jsonx",
+      "Filename": "file.dockerfile"
+    },
+    {
+      "Mime": "application/jsonx",
+      "Filename": "file.makefile"
+    },
+    {
+      "Mime": "application/jsonx",
+      "Filename": "file.gitignore"
+    },
+    {
+      "Mime": "application/jsonx",
+      "Filename": "file.sh"
+    },
+    {
+      "Mime": "application/jsonx",
+      "Filename": "file.bash"
+    },
+    {
+      "Mime": "application/jsonx",
+      "Filename": "file.zsh"
+    },
+    {
+      "Mime": "application/jsonx",
+      "Filename": "file.py"
+    },
+    {
+      "Mime": "application/jsonx",
+      "Filename": "file.rb"
+    },
+    {
+      "Mime": "application/jsonx",
+      "Filename": "file.go"
+    },
+    {
+      "Mime": "application/jsonx",
+      "Filename": "file.rs"
+    },
+    {
+      "Mime": "application/jsonx",
+      "Filename": "file.ts"
+    },
+    {
+      "Mime": "application/jsonx",
+      "Filename": "file.tsx"
+    },
+    {
+      "Mime": "application/jsonx",
+      "Filename": "file.js"
+    },
+    {
+      "Mime": "application/jsonx",
+      "Filename": "file.jsx"
+    },
+    {
+      "Mime": "application/jsonx",
+      "Filename": "file.mjs"
+    },
+    {
+      "Mime": "application/jsonx",
+      "Filename": "file.cjs"
+    },
+    {
+      "Mime": "application/jsonx",
+      "Filename": "file.css"
+    },
+    {
+      "Mime": "application/jsonx",
+      "Filename": "file.scss"
+    },
+    {
+      "Mime": "application/jsonx",
+      "Filename": "file.sass"
+    },
+    {
+      "Mime": "application/jsonx",
+      "Filename": "file.less"
+    },
+    {
+      "Mime": "application/jsonx",
+      "Filename": "file.sql"
+    },
+    {
+      "Mime": "application/jsonx",
+      "Filename": "file.java"
+    },
+    {
+      "Mime": "application/jsonx",
+      "Filename": "file.kt"
+    },
+    {
+      "Mime": "application/jsonx",
+      "Filename": "file.swift"
+    },
+    {
+      "Mime": "application/jsonx",
+      "Filename": "file.c"
+    },
+    {
+      "Mime": "application/jsonx",
+      "Filename": "file.cc"
+    },
+    {
+      "Mime": "application/jsonx",
+      "Filename": "file.cpp"
+    },
+    {
+      "Mime": "application/jsonx",
+      "Filename": "file.h"
+    },
+    {
+      "Mime": "application/jsonx",
+      "Filename": "file.hpp"
+    },
+    {
+      "Mime": "application/jsonx",
+      "Filename": "file.cs"
+    },
+    {
+      "Mime": "application/jsonx",
+      "Filename": "file.php"
+    },
+    {
+      "Mime": "application/jsonx",
+      "Filename": "file.lua"
+    },
+    {
+      "Mime": "application/jsonx",
+      "Filename": "file.vim"
+    },
+    {
+      "Mime": "application/jsonx",
+      "Filename": "dockerfile"
+    },
+    {
+      "Mime": "application/jsonx",
+      "Filename": "makefile"
+    },
+    {
+      "Mime": "application/jsonx",
+      "Filename": ".env"
+    },
+    {
+      "Mime": "application/jsonx",
+      "Filename": ".gitignore"
+    },
+    {
+      "Mime": "application/jsonx",
+      "Filename": "a.PY"
+    },
+    {
+      "Mime": "application/jsonx",
+      "Filename": "C:\\folder\\Dockerfile"
+    },
+    {
+      "Mime": "application/jsonx",
+      "Filename": "dir/.env/"
+    },
+    {
+      "Mime": "application/jsonx",
+      "Filename": "dir/../Makefile"
+    },
+    {
+      "Mime": "application/jsonx",
+      "Filename": "test.\u0130N\u0130"
+    },
+    {
+      "Mime": "application/jsonx",
+      "Filename": "test.py "
+    },
+    {
+      "Mime": "application/jsonx",
+      "Filename": "x.pdf"
+    },
+    {
+      "Mime": "application/jsonx",
+      "Filename": "x.png"
+    },
+    {
+      "Mime": "application/jsonx",
+      "Filename": "file.bin"
+    },
+    {
+      "Mime": "application/jsonx",
+      "Filename": ""
+    },
+    {
+      "Mime": "application/jsonx",
+      "Filename": "/"
+    },
+    {
+      "Mime": "application/jsonx",
+      "Filename": "."
+    },
+    {
+      "Mime": "application/jsonx",
+      "Filename": ".."
+    },
+    {
+      "Mime": "application/jsonx",
+      "Filename": "folder/.."
+    },
+    {
+      "Mime": "application/jsonx",
+      "Filename": "file.PY/.."
+    },
+    {
+      "Mime": "application/pdf",
+      "Filename": "file.md"
+    },
+    {
+      "Mime": "application/pdf",
+      "Filename": "file.markdown"
+    },
+    {
+      "Mime": "application/pdf",
+      "Filename": "file.txt"
+    },
+    {
+      "Mime": "application/pdf",
+      "Filename": "file.log"
+    },
+    {
+      "Mime": "application/pdf",
+      "Filename": "file.csv"
+    },
+    {
+      "Mime": "application/pdf",
+      "Filename": "file.tsv"
+    },
+    {
+      "Mime": "application/pdf",
+      "Filename": "file.html"
+    },
+    {
+      "Mime": "application/pdf",
+      "Filename": "file.htm"
+    },
+    {
+      "Mime": "application/pdf",
+      "Filename": "file.json"
+    },
+    {
+      "Mime": "application/pdf",
+      "Filename": "file.jsonl"
+    },
+    {
+      "Mime": "application/pdf",
+      "Filename": "file.ndjson"
+    },
+    {
+      "Mime": "application/pdf",
+      "Filename": "file.xml"
+    },
+    {
+      "Mime": "application/pdf",
+      "Filename": "file.yml"
+    },
+    {
+      "Mime": "application/pdf",
+      "Filename": "file.yaml"
+    },
+    {
+      "Mime": "application/pdf",
+      "Filename": "file.toml"
+    },
+    {
+      "Mime": "application/pdf",
+      "Filename": "file.ini"
+    },
+    {
+      "Mime": "application/pdf",
+      "Filename": "file.conf"
+    },
+    {
+      "Mime": "application/pdf",
+      "Filename": "file.dockerfile"
+    },
+    {
+      "Mime": "application/pdf",
+      "Filename": "file.makefile"
+    },
+    {
+      "Mime": "application/pdf",
+      "Filename": "file.gitignore"
+    },
+    {
+      "Mime": "application/pdf",
+      "Filename": "file.sh"
+    },
+    {
+      "Mime": "application/pdf",
+      "Filename": "file.bash"
+    },
+    {
+      "Mime": "application/pdf",
+      "Filename": "file.zsh"
+    },
+    {
+      "Mime": "application/pdf",
+      "Filename": "file.py"
+    },
+    {
+      "Mime": "application/pdf",
+      "Filename": "file.rb"
+    },
+    {
+      "Mime": "application/pdf",
+      "Filename": "file.go"
+    },
+    {
+      "Mime": "application/pdf",
+      "Filename": "file.rs"
+    },
+    {
+      "Mime": "application/pdf",
+      "Filename": "file.ts"
+    },
+    {
+      "Mime": "application/pdf",
+      "Filename": "file.tsx"
+    },
+    {
+      "Mime": "application/pdf",
+      "Filename": "file.js"
+    },
+    {
+      "Mime": "application/pdf",
+      "Filename": "file.jsx"
+    },
+    {
+      "Mime": "application/pdf",
+      "Filename": "file.mjs"
+    },
+    {
+      "Mime": "application/pdf",
+      "Filename": "file.cjs"
+    },
+    {
+      "Mime": "application/pdf",
+      "Filename": "file.css"
+    },
+    {
+      "Mime": "application/pdf",
+      "Filename": "file.scss"
+    },
+    {
+      "Mime": "application/pdf",
+      "Filename": "file.sass"
+    },
+    {
+      "Mime": "application/pdf",
+      "Filename": "file.less"
+    },
+    {
+      "Mime": "application/pdf",
+      "Filename": "file.sql"
+    },
+    {
+      "Mime": "application/pdf",
+      "Filename": "file.java"
+    },
+    {
+      "Mime": "application/pdf",
+      "Filename": "file.kt"
+    },
+    {
+      "Mime": "application/pdf",
+      "Filename": "file.swift"
+    },
+    {
+      "Mime": "application/pdf",
+      "Filename": "file.c"
+    },
+    {
+      "Mime": "application/pdf",
+      "Filename": "file.cc"
+    },
+    {
+      "Mime": "application/pdf",
+      "Filename": "file.cpp"
+    },
+    {
+      "Mime": "application/pdf",
+      "Filename": "file.h"
+    },
+    {
+      "Mime": "application/pdf",
+      "Filename": "file.hpp"
+    },
+    {
+      "Mime": "application/pdf",
+      "Filename": "file.cs"
+    },
+    {
+      "Mime": "application/pdf",
+      "Filename": "file.php"
+    },
+    {
+      "Mime": "application/pdf",
+      "Filename": "file.lua"
+    },
+    {
+      "Mime": "application/pdf",
+      "Filename": "file.vim"
+    },
+    {
+      "Mime": "application/pdf",
+      "Filename": "dockerfile"
+    },
+    {
+      "Mime": "application/pdf",
+      "Filename": "makefile"
+    },
+    {
+      "Mime": "application/pdf",
+      "Filename": ".env"
+    },
+    {
+      "Mime": "application/pdf",
+      "Filename": ".gitignore"
+    },
+    {
+      "Mime": "application/pdf",
+      "Filename": "a.PY"
+    },
+    {
+      "Mime": "application/pdf",
+      "Filename": "C:\\folder\\Dockerfile"
+    },
+    {
+      "Mime": "application/pdf",
+      "Filename": "dir/.env/"
+    },
+    {
+      "Mime": "application/pdf",
+      "Filename": "dir/../Makefile"
+    },
+    {
+      "Mime": "application/pdf",
+      "Filename": "test.\u0130N\u0130"
+    },
+    {
+      "Mime": "application/pdf",
+      "Filename": "test.py "
+    },
+    {
+      "Mime": "application/pdf",
+      "Filename": "x.pdf"
+    },
+    {
+      "Mime": "application/pdf",
+      "Filename": "x.png"
+    },
+    {
+      "Mime": "application/pdf",
+      "Filename": "file.bin"
+    },
+    {
+      "Mime": "application/pdf",
+      "Filename": ""
+    },
+    {
+      "Mime": "application/pdf",
+      "Filename": "/"
+    },
+    {
+      "Mime": "application/pdf",
+      "Filename": "."
+    },
+    {
+      "Mime": "application/pdf",
+      "Filename": ".."
+    },
+    {
+      "Mime": "application/pdf",
+      "Filename": "folder/.."
+    },
+    {
+      "Mime": "application/pdf",
+      "Filename": "file.PY/.."
+    },
+    {
+      "Mime": "text/",
+      "Filename": "file.md"
+    },
+    {
+      "Mime": "text/",
+      "Filename": "file.markdown"
+    },
+    {
+      "Mime": "text/",
+      "Filename": "file.txt"
+    },
+    {
+      "Mime": "text/",
+      "Filename": "file.log"
+    },
+    {
+      "Mime": "text/",
+      "Filename": "file.csv"
+    },
+    {
+      "Mime": "text/",
+      "Filename": "file.tsv"
+    },
+    {
+      "Mime": "text/",
+      "Filename": "file.html"
+    },
+    {
+      "Mime": "text/",
+      "Filename": "file.htm"
+    },
+    {
+      "Mime": "text/",
+      "Filename": "file.json"
+    },
+    {
+      "Mime": "text/",
+      "Filename": "file.jsonl"
+    },
+    {
+      "Mime": "text/",
+      "Filename": "file.ndjson"
+    },
+    {
+      "Mime": "text/",
+      "Filename": "file.xml"
+    },
+    {
+      "Mime": "text/",
+      "Filename": "file.yml"
+    },
+    {
+      "Mime": "text/",
+      "Filename": "file.yaml"
+    },
+    {
+      "Mime": "text/",
+      "Filename": "file.toml"
+    },
+    {
+      "Mime": "text/",
+      "Filename": "file.ini"
+    },
+    {
+      "Mime": "text/",
+      "Filename": "file.conf"
+    },
+    {
+      "Mime": "text/",
+      "Filename": "file.dockerfile"
+    },
+    {
+      "Mime": "text/",
+      "Filename": "file.makefile"
+    },
+    {
+      "Mime": "text/",
+      "Filename": "file.gitignore"
+    },
+    {
+      "Mime": "text/",
+      "Filename": "file.sh"
+    },
+    {
+      "Mime": "text/",
+      "Filename": "file.bash"
+    },
+    {
+      "Mime": "text/",
+      "Filename": "file.zsh"
+    },
+    {
+      "Mime": "text/",
+      "Filename": "file.py"
+    },
+    {
+      "Mime": "text/",
+      "Filename": "file.rb"
+    },
+    {
+      "Mime": "text/",
+      "Filename": "file.go"
+    },
+    {
+      "Mime": "text/",
+      "Filename": "file.rs"
+    },
+    {
+      "Mime": "text/",
+      "Filename": "file.ts"
+    },
+    {
+      "Mime": "text/",
+      "Filename": "file.tsx"
+    },
+    {
+      "Mime": "text/",
+      "Filename": "file.js"
+    },
+    {
+      "Mime": "text/",
+      "Filename": "file.jsx"
+    },
+    {
+      "Mime": "text/",
+      "Filename": "file.mjs"
+    },
+    {
+      "Mime": "text/",
+      "Filename": "file.cjs"
+    },
+    {
+      "Mime": "text/",
+      "Filename": "file.css"
+    },
+    {
+      "Mime": "text/",
+      "Filename": "file.scss"
+    },
+    {
+      "Mime": "text/",
+      "Filename": "file.sass"
+    },
+    {
+      "Mime": "text/",
+      "Filename": "file.less"
+    },
+    {
+      "Mime": "text/",
+      "Filename": "file.sql"
+    },
+    {
+      "Mime": "text/",
+      "Filename": "file.java"
+    },
+    {
+      "Mime": "text/",
+      "Filename": "file.kt"
+    },
+    {
+      "Mime": "text/",
+      "Filename": "file.swift"
+    },
+    {
+      "Mime": "text/",
+      "Filename": "file.c"
+    },
+    {
+      "Mime": "text/",
+      "Filename": "file.cc"
+    },
+    {
+      "Mime": "text/",
+      "Filename": "file.cpp"
+    },
+    {
+      "Mime": "text/",
+      "Filename": "file.h"
+    },
+    {
+      "Mime": "text/",
+      "Filename": "file.hpp"
+    },
+    {
+      "Mime": "text/",
+      "Filename": "file.cs"
+    },
+    {
+      "Mime": "text/",
+      "Filename": "file.php"
+    },
+    {
+      "Mime": "text/",
+      "Filename": "file.lua"
+    },
+    {
+      "Mime": "text/",
+      "Filename": "file.vim"
+    },
+    {
+      "Mime": "text/",
+      "Filename": "dockerfile"
+    },
+    {
+      "Mime": "text/",
+      "Filename": "makefile"
+    },
+    {
+      "Mime": "text/",
+      "Filename": ".env"
+    },
+    {
+      "Mime": "text/",
+      "Filename": ".gitignore"
+    },
+    {
+      "Mime": "text/",
+      "Filename": "a.PY"
+    },
+    {
+      "Mime": "text/",
+      "Filename": "C:\\folder\\Dockerfile"
+    },
+    {
+      "Mime": "text/",
+      "Filename": "dir/.env/"
+    },
+    {
+      "Mime": "text/",
+      "Filename": "dir/../Makefile"
+    },
+    {
+      "Mime": "text/",
+      "Filename": "test.\u0130N\u0130"
+    },
+    {
+      "Mime": "text/",
+      "Filename": "test.py "
+    },
+    {
+      "Mime": "text/",
+      "Filename": "x.pdf"
+    },
+    {
+      "Mime": "text/",
+      "Filename": "x.png"
+    },
+    {
+      "Mime": "text/",
+      "Filename": "file.bin"
+    },
+    {
+      "Mime": "text/",
+      "Filename": ""
+    },
+    {
+      "Mime": "text/",
+      "Filename": "/"
+    },
+    {
+      "Mime": "text/",
+      "Filename": "."
+    },
+    {
+      "Mime": "text/",
+      "Filename": ".."
+    },
+    {
+      "Mime": "text/",
+      "Filename": "folder/.."
+    },
+    {
+      "Mime": "text/",
+      "Filename": "file.PY/.."
+    },
+    {
+      "Mime": "text",
+      "Filename": "file.md"
+    },
+    {
+      "Mime": "text",
+      "Filename": "file.markdown"
+    },
+    {
+      "Mime": "text",
+      "Filename": "file.txt"
+    },
+    {
+      "Mime": "text",
+      "Filename": "file.log"
+    },
+    {
+      "Mime": "text",
+      "Filename": "file.csv"
+    },
+    {
+      "Mime": "text",
+      "Filename": "file.tsv"
+    },
+    {
+      "Mime": "text",
+      "Filename": "file.html"
+    },
+    {
+      "Mime": "text",
+      "Filename": "file.htm"
+    },
+    {
+      "Mime": "text",
+      "Filename": "file.json"
+    },
+    {
+      "Mime": "text",
+      "Filename": "file.jsonl"
+    },
+    {
+      "Mime": "text",
+      "Filename": "file.ndjson"
+    },
+    {
+      "Mime": "text",
+      "Filename": "file.xml"
+    },
+    {
+      "Mime": "text",
+      "Filename": "file.yml"
+    },
+    {
+      "Mime": "text",
+      "Filename": "file.yaml"
+    },
+    {
+      "Mime": "text",
+      "Filename": "file.toml"
+    },
+    {
+      "Mime": "text",
+      "Filename": "file.ini"
+    },
+    {
+      "Mime": "text",
+      "Filename": "file.conf"
+    },
+    {
+      "Mime": "text",
+      "Filename": "file.dockerfile"
+    },
+    {
+      "Mime": "text",
+      "Filename": "file.makefile"
+    },
+    {
+      "Mime": "text",
+      "Filename": "file.gitignore"
+    },
+    {
+      "Mime": "text",
+      "Filename": "file.sh"
+    },
+    {
+      "Mime": "text",
+      "Filename": "file.bash"
+    },
+    {
+      "Mime": "text",
+      "Filename": "file.zsh"
+    },
+    {
+      "Mime": "text",
+      "Filename": "file.py"
+    },
+    {
+      "Mime": "text",
+      "Filename": "file.rb"
+    },
+    {
+      "Mime": "text",
+      "Filename": "file.go"
+    },
+    {
+      "Mime": "text",
+      "Filename": "file.rs"
+    },
+    {
+      "Mime": "text",
+      "Filename": "file.ts"
+    },
+    {
+      "Mime": "text",
+      "Filename": "file.tsx"
+    },
+    {
+      "Mime": "text",
+      "Filename": "file.js"
+    },
+    {
+      "Mime": "text",
+      "Filename": "file.jsx"
+    },
+    {
+      "Mime": "text",
+      "Filename": "file.mjs"
+    },
+    {
+      "Mime": "text",
+      "Filename": "file.cjs"
+    },
+    {
+      "Mime": "text",
+      "Filename": "file.css"
+    },
+    {
+      "Mime": "text",
+      "Filename": "file.scss"
+    },
+    {
+      "Mime": "text",
+      "Filename": "file.sass"
+    },
+    {
+      "Mime": "text",
+      "Filename": "file.less"
+    },
+    {
+      "Mime": "text",
+      "Filename": "file.sql"
+    },
+    {
+      "Mime": "text",
+      "Filename": "file.java"
+    },
+    {
+      "Mime": "text",
+      "Filename": "file.kt"
+    },
+    {
+      "Mime": "text",
+      "Filename": "file.swift"
+    },
+    {
+      "Mime": "text",
+      "Filename": "file.c"
+    },
+    {
+      "Mime": "text",
+      "Filename": "file.cc"
+    },
+    {
+      "Mime": "text",
+      "Filename": "file.cpp"
+    },
+    {
+      "Mime": "text",
+      "Filename": "file.h"
+    },
+    {
+      "Mime": "text",
+      "Filename": "file.hpp"
+    },
+    {
+      "Mime": "text",
+      "Filename": "file.cs"
+    },
+    {
+      "Mime": "text",
+      "Filename": "file.php"
+    },
+    {
+      "Mime": "text",
+      "Filename": "file.lua"
+    },
+    {
+      "Mime": "text",
+      "Filename": "file.vim"
+    },
+    {
+      "Mime": "text",
+      "Filename": "dockerfile"
+    },
+    {
+      "Mime": "text",
+      "Filename": "makefile"
+    },
+    {
+      "Mime": "text",
+      "Filename": ".env"
+    },
+    {
+      "Mime": "text",
+      "Filename": ".gitignore"
+    },
+    {
+      "Mime": "text",
+      "Filename": "a.PY"
+    },
+    {
+      "Mime": "text",
+      "Filename": "C:\\folder\\Dockerfile"
+    },
+    {
+      "Mime": "text",
+      "Filename": "dir/.env/"
+    },
+    {
+      "Mime": "text",
+      "Filename": "dir/../Makefile"
+    },
+    {
+      "Mime": "text",
+      "Filename": "test.\u0130N\u0130"
+    },
+    {
+      "Mime": "text",
+      "Filename": "test.py "
+    },
+    {
+      "Mime": "text",
+      "Filename": "x.pdf"
+    },
+    {
+      "Mime": "text",
+      "Filename": "x.png"
+    },
+    {
+      "Mime": "text",
+      "Filename": "file.bin"
+    },
+    {
+      "Mime": "text",
+      "Filename": ""
+    },
+    {
+      "Mime": "text",
+      "Filename": "/"
+    },
+    {
+      "Mime": "text",
+      "Filename": "."
+    },
+    {
+      "Mime": "text",
+      "Filename": ".."
+    },
+    {
+      "Mime": "text",
+      "Filename": "folder/.."
+    },
+    {
+      "Mime": "text",
+      "Filename": "file.PY/.."
+    },
+    {
+      "Mime": "application/json",
+      "Filename": "file.md"
+    },
+    {
+      "Mime": "application/json",
+      "Filename": "file.markdown"
+    },
+    {
+      "Mime": "application/json",
+      "Filename": "file.txt"
+    },
+    {
+      "Mime": "application/json",
+      "Filename": "file.log"
+    },
+    {
+      "Mime": "application/json",
+      "Filename": "file.csv"
+    },
+    {
+      "Mime": "application/json",
+      "Filename": "file.tsv"
+    },
+    {
+      "Mime": "application/json",
+      "Filename": "file.html"
+    },
+    {
+      "Mime": "application/json",
+      "Filename": "file.htm"
+    },
+    {
+      "Mime": "application/json",
+      "Filename": "file.json"
+    },
+    {
+      "Mime": "application/json",
+      "Filename": "file.jsonl"
+    },
+    {
+      "Mime": "application/json",
+      "Filename": "file.ndjson"
+    },
+    {
+      "Mime": "application/json",
+      "Filename": "file.xml"
+    },
+    {
+      "Mime": "application/json",
+      "Filename": "file.yml"
+    },
+    {
+      "Mime": "application/json",
+      "Filename": "file.yaml"
+    },
+    {
+      "Mime": "application/json",
+      "Filename": "file.toml"
+    },
+    {
+      "Mime": "application/json",
+      "Filename": "file.ini"
+    },
+    {
+      "Mime": "application/json",
+      "Filename": "file.conf"
+    },
+    {
+      "Mime": "application/json",
+      "Filename": "file.dockerfile"
+    },
+    {
+      "Mime": "application/json",
+      "Filename": "file.makefile"
+    },
+    {
+      "Mime": "application/json",
+      "Filename": "file.gitignore"
+    },
+    {
+      "Mime": "application/json",
+      "Filename": "file.sh"
+    },
+    {
+      "Mime": "application/json",
+      "Filename": "file.bash"
+    },
+    {
+      "Mime": "application/json",
+      "Filename": "file.zsh"
+    },
+    {
+      "Mime": "application/json",
+      "Filename": "file.py"
+    },
+    {
+      "Mime": "application/json",
+      "Filename": "file.rb"
+    },
+    {
+      "Mime": "application/json",
+      "Filename": "file.go"
+    },
+    {
+      "Mime": "application/json",
+      "Filename": "file.rs"
+    },
+    {
+      "Mime": "application/json",
+      "Filename": "file.ts"
+    },
+    {
+      "Mime": "application/json",
+      "Filename": "file.tsx"
+    },
+    {
+      "Mime": "application/json",
+      "Filename": "file.js"
+    },
+    {
+      "Mime": "application/json",
+      "Filename": "file.jsx"
+    },
+    {
+      "Mime": "application/json",
+      "Filename": "file.mjs"
+    },
+    {
+      "Mime": "application/json",
+      "Filename": "file.cjs"
+    },
+    {
+      "Mime": "application/json",
+      "Filename": "file.css"
+    },
+    {
+      "Mime": "application/json",
+      "Filename": "file.scss"
+    },
+    {
+      "Mime": "application/json",
+      "Filename": "file.sass"
+    },
+    {
+      "Mime": "application/json",
+      "Filename": "file.less"
+    },
+    {
+      "Mime": "application/json",
+      "Filename": "file.sql"
+    },
+    {
+      "Mime": "application/json",
+      "Filename": "file.java"
+    },
+    {
+      "Mime": "application/json",
+      "Filename": "file.kt"
+    },
+    {
+      "Mime": "application/json",
+      "Filename": "file.swift"
+    },
+    {
+      "Mime": "application/json",
+      "Filename": "file.c"
+    },
+    {
+      "Mime": "application/json",
+      "Filename": "file.cc"
+    },
+    {
+      "Mime": "application/json",
+      "Filename": "file.cpp"
+    },
+    {
+      "Mime": "application/json",
+      "Filename": "file.h"
+    },
+    {
+      "Mime": "application/json",
+      "Filename": "file.hpp"
+    },
+    {
+      "Mime": "application/json",
+      "Filename": "file.cs"
+    },
+    {
+      "Mime": "application/json",
+      "Filename": "file.php"
+    },
+    {
+      "Mime": "application/json",
+      "Filename": "file.lua"
+    },
+    {
+      "Mime": "application/json",
+      "Filename": "file.vim"
+    },
+    {
+      "Mime": "application/json",
+      "Filename": "dockerfile"
+    },
+    {
+      "Mime": "application/json",
+      "Filename": "makefile"
+    },
+    {
+      "Mime": "application/json",
+      "Filename": ".env"
+    },
+    {
+      "Mime": "application/json",
+      "Filename": ".gitignore"
+    },
+    {
+      "Mime": "application/json",
+      "Filename": "a.PY"
+    },
+    {
+      "Mime": "application/json",
+      "Filename": "C:\\folder\\Dockerfile"
+    },
+    {
+      "Mime": "application/json",
+      "Filename": "dir/.env/"
+    },
+    {
+      "Mime": "application/json",
+      "Filename": "dir/../Makefile"
+    },
+    {
+      "Mime": "application/json",
+      "Filename": "test.\u0130N\u0130"
+    },
+    {
+      "Mime": "application/json",
+      "Filename": "test.py "
+    },
+    {
+      "Mime": "application/json",
+      "Filename": "x.pdf"
+    },
+    {
+      "Mime": "application/json",
+      "Filename": "x.png"
+    },
+    {
+      "Mime": "application/json",
+      "Filename": "file.bin"
+    },
+    {
+      "Mime": "application/json",
+      "Filename": ""
+    },
+    {
+      "Mime": "application/json",
+      "Filename": "/"
+    },
+    {
+      "Mime": "application/json",
+      "Filename": "."
+    },
+    {
+      "Mime": "application/json",
+      "Filename": ".."
+    },
+    {
+      "Mime": "application/json",
+      "Filename": "folder/.."
+    },
+    {
+      "Mime": "application/json",
+      "Filename": "file.PY/.."
+    },
+    {
+      "Mime": "application/x-ndjson",
+      "Filename": "file.md"
+    },
+    {
+      "Mime": "application/x-ndjson",
+      "Filename": "file.markdown"
+    },
+    {
+      "Mime": "application/x-ndjson",
+      "Filename": "file.txt"
+    },
+    {
+      "Mime": "application/x-ndjson",
+      "Filename": "file.log"
+    },
+    {
+      "Mime": "application/x-ndjson",
+      "Filename": "file.csv"
+    },
+    {
+      "Mime": "application/x-ndjson",
+      "Filename": "file.tsv"
+    },
+    {
+      "Mime": "application/x-ndjson",
+      "Filename": "file.html"
+    },
+    {
+      "Mime": "application/x-ndjson",
+      "Filename": "file.htm"
+    },
+    {
+      "Mime": "application/x-ndjson",
+      "Filename": "file.json"
+    },
+    {
+      "Mime": "application/x-ndjson",
+      "Filename": "file.jsonl"
+    },
+    {
+      "Mime": "application/x-ndjson",
+      "Filename": "file.ndjson"
+    },
+    {
+      "Mime": "application/x-ndjson",
+      "Filename": "file.xml"
+    },
+    {
+      "Mime": "application/x-ndjson",
+      "Filename": "file.yml"
+    },
+    {
+      "Mime": "application/x-ndjson",
+      "Filename": "file.yaml"
+    },
+    {
+      "Mime": "application/x-ndjson",
+      "Filename": "file.toml"
+    },
+    {
+      "Mime": "application/x-ndjson",
+      "Filename": "file.ini"
+    },
+    {
+      "Mime": "application/x-ndjson",
+      "Filename": "file.conf"
+    },
+    {
+      "Mime": "application/x-ndjson",
+      "Filename": "file.dockerfile"
+    },
+    {
+      "Mime": "application/x-ndjson",
+      "Filename": "file.makefile"
+    },
+    {
+      "Mime": "application/x-ndjson",
+      "Filename": "file.gitignore"
+    },
+    {
+      "Mime": "application/x-ndjson",
+      "Filename": "file.sh"
+    },
+    {
+      "Mime": "application/x-ndjson",
+      "Filename": "file.bash"
+    },
+    {
+      "Mime": "application/x-ndjson",
+      "Filename": "file.zsh"
+    },
+    {
+      "Mime": "application/x-ndjson",
+      "Filename": "file.py"
+    },
+    {
+      "Mime": "application/x-ndjson",
+      "Filename": "file.rb"
+    },
+    {
+      "Mime": "application/x-ndjson",
+      "Filename": "file.go"
+    },
+    {
+      "Mime": "application/x-ndjson",
+      "Filename": "file.rs"
+    },
+    {
+      "Mime": "application/x-ndjson",
+      "Filename": "file.ts"
+    },
+    {
+      "Mime": "application/x-ndjson",
+      "Filename": "file.tsx"
+    },
+    {
+      "Mime": "application/x-ndjson",
+      "Filename": "file.js"
+    },
+    {
+      "Mime": "application/x-ndjson",
+      "Filename": "file.jsx"
+    },
+    {
+      "Mime": "application/x-ndjson",
+      "Filename": "file.mjs"
+    },
+    {
+      "Mime": "application/x-ndjson",
+      "Filename": "file.cjs"
+    },
+    {
+      "Mime": "application/x-ndjson",
+      "Filename": "file.css"
+    },
+    {
+      "Mime": "application/x-ndjson",
+      "Filename": "file.scss"
+    },
+    {
+      "Mime": "application/x-ndjson",
+      "Filename": "file.sass"
+    },
+    {
+      "Mime": "application/x-ndjson",
+      "Filename": "file.less"
+    },
+    {
+      "Mime": "application/x-ndjson",
+      "Filename": "file.sql"
+    },
+    {
+      "Mime": "application/x-ndjson",
+      "Filename": "file.java"
+    },
+    {
+      "Mime": "application/x-ndjson",
+      "Filename": "file.kt"
+    },
+    {
+      "Mime": "application/x-ndjson",
+      "Filename": "file.swift"
+    },
+    {
+      "Mime": "application/x-ndjson",
+      "Filename": "file.c"
+    },
+    {
+      "Mime": "application/x-ndjson",
+      "Filename": "file.cc"
+    },
+    {
+      "Mime": "application/x-ndjson",
+      "Filename": "file.cpp"
+    },
+    {
+      "Mime": "application/x-ndjson",
+      "Filename": "file.h"
+    },
+    {
+      "Mime": "application/x-ndjson",
+      "Filename": "file.hpp"
+    },
+    {
+      "Mime": "application/x-ndjson",
+      "Filename": "file.cs"
+    },
+    {
+      "Mime": "application/x-ndjson",
+      "Filename": "file.php"
+    },
+    {
+      "Mime": "application/x-ndjson",
+      "Filename": "file.lua"
+    },
+    {
+      "Mime": "application/x-ndjson",
+      "Filename": "file.vim"
+    },
+    {
+      "Mime": "application/x-ndjson",
+      "Filename": "dockerfile"
+    },
+    {
+      "Mime": "application/x-ndjson",
+      "Filename": "makefile"
+    },
+    {
+      "Mime": "application/x-ndjson",
+      "Filename": ".env"
+    },
+    {
+      "Mime": "application/x-ndjson",
+      "Filename": ".gitignore"
+    },
+    {
+      "Mime": "application/x-ndjson",
+      "Filename": "a.PY"
+    },
+    {
+      "Mime": "application/x-ndjson",
+      "Filename": "C:\\folder\\Dockerfile"
+    },
+    {
+      "Mime": "application/x-ndjson",
+      "Filename": "dir/.env/"
+    },
+    {
+      "Mime": "application/x-ndjson",
+      "Filename": "dir/../Makefile"
+    },
+    {
+      "Mime": "application/x-ndjson",
+      "Filename": "test.\u0130N\u0130"
+    },
+    {
+      "Mime": "application/x-ndjson",
+      "Filename": "test.py "
+    },
+    {
+      "Mime": "application/x-ndjson",
+      "Filename": "x.pdf"
+    },
+    {
+      "Mime": "application/x-ndjson",
+      "Filename": "x.png"
+    },
+    {
+      "Mime": "application/x-ndjson",
+      "Filename": "file.bin"
+    },
+    {
+      "Mime": "application/x-ndjson",
+      "Filename": ""
+    },
+    {
+      "Mime": "application/x-ndjson",
+      "Filename": "/"
+    },
+    {
+      "Mime": "application/x-ndjson",
+      "Filename": "."
+    },
+    {
+      "Mime": "application/x-ndjson",
+      "Filename": ".."
+    },
+    {
+      "Mime": "application/x-ndjson",
+      "Filename": "folder/.."
+    },
+    {
+      "Mime": "application/x-ndjson",
+      "Filename": "file.PY/.."
+    },
+    {
+      "Mime": "application/javascript",
+      "Filename": "file.md"
+    },
+    {
+      "Mime": "application/javascript",
+      "Filename": "file.markdown"
+    },
+    {
+      "Mime": "application/javascript",
+      "Filename": "file.txt"
+    },
+    {
+      "Mime": "application/javascript",
+      "Filename": "file.log"
+    },
+    {
+      "Mime": "application/javascript",
+      "Filename": "file.csv"
+    },
+    {
+      "Mime": "application/javascript",
+      "Filename": "file.tsv"
+    },
+    {
+      "Mime": "application/javascript",
+      "Filename": "file.html"
+    },
+    {
+      "Mime": "application/javascript",
+      "Filename": "file.htm"
+    },
+    {
+      "Mime": "application/javascript",
+      "Filename": "file.json"
+    },
+    {
+      "Mime": "application/javascript",
+      "Filename": "file.jsonl"
+    },
+    {
+      "Mime": "application/javascript",
+      "Filename": "file.ndjson"
+    },
+    {
+      "Mime": "application/javascript",
+      "Filename": "file.xml"
+    },
+    {
+      "Mime": "application/javascript",
+      "Filename": "file.yml"
+    },
+    {
+      "Mime": "application/javascript",
+      "Filename": "file.yaml"
+    },
+    {
+      "Mime": "application/javascript",
+      "Filename": "file.toml"
+    },
+    {
+      "Mime": "application/javascript",
+      "Filename": "file.ini"
+    },
+    {
+      "Mime": "application/javascript",
+      "Filename": "file.conf"
+    },
+    {
+      "Mime": "application/javascript",
+      "Filename": "file.dockerfile"
+    },
+    {
+      "Mime": "application/javascript",
+      "Filename": "file.makefile"
+    },
+    {
+      "Mime": "application/javascript",
+      "Filename": "file.gitignore"
+    },
+    {
+      "Mime": "application/javascript",
+      "Filename": "file.sh"
+    },
+    {
+      "Mime": "application/javascript",
+      "Filename": "file.bash"
+    },
+    {
+      "Mime": "application/javascript",
+      "Filename": "file.zsh"
+    },
+    {
+      "Mime": "application/javascript",
+      "Filename": "file.py"
+    },
+    {
+      "Mime": "application/javascript",
+      "Filename": "file.rb"
+    },
+    {
+      "Mime": "application/javascript",
+      "Filename": "file.go"
+    },
+    {
+      "Mime": "application/javascript",
+      "Filename": "file.rs"
+    },
+    {
+      "Mime": "application/javascript",
+      "Filename": "file.ts"
+    },
+    {
+      "Mime": "application/javascript",
+      "Filename": "file.tsx"
+    },
+    {
+      "Mime": "application/javascript",
+      "Filename": "file.js"
+    },
+    {
+      "Mime": "application/javascript",
+      "Filename": "file.jsx"
+    },
+    {
+      "Mime": "application/javascript",
+      "Filename": "file.mjs"
+    },
+    {
+      "Mime": "application/javascript",
+      "Filename": "file.cjs"
+    },
+    {
+      "Mime": "application/javascript",
+      "Filename": "file.css"
+    },
+    {
+      "Mime": "application/javascript",
+      "Filename": "file.scss"
+    },
+    {
+      "Mime": "application/javascript",
+      "Filename": "file.sass"
+    },
+    {
+      "Mime": "application/javascript",
+      "Filename": "file.less"
+    },
+    {
+      "Mime": "application/javascript",
+      "Filename": "file.sql"
+    },
+    {
+      "Mime": "application/javascript",
+      "Filename": "file.java"
+    },
+    {
+      "Mime": "application/javascript",
+      "Filename": "file.kt"
+    },
+    {
+      "Mime": "application/javascript",
+      "Filename": "file.swift"
+    },
+    {
+      "Mime": "application/javascript",
+      "Filename": "file.c"
+    },
+    {
+      "Mime": "application/javascript",
+      "Filename": "file.cc"
+    },
+    {
+      "Mime": "application/javascript",
+      "Filename": "file.cpp"
+    },
+    {
+      "Mime": "application/javascript",
+      "Filename": "file.h"
+    },
+    {
+      "Mime": "application/javascript",
+      "Filename": "file.hpp"
+    },
+    {
+      "Mime": "application/javascript",
+      "Filename": "file.cs"
+    },
+    {
+      "Mime": "application/javascript",
+      "Filename": "file.php"
+    },
+    {
+      "Mime": "application/javascript",
+      "Filename": "file.lua"
+    },
+    {
+      "Mime": "application/javascript",
+      "Filename": "file.vim"
+    },
+    {
+      "Mime": "application/javascript",
+      "Filename": "dockerfile"
+    },
+    {
+      "Mime": "application/javascript",
+      "Filename": "makefile"
+    },
+    {
+      "Mime": "application/javascript",
+      "Filename": ".env"
+    },
+    {
+      "Mime": "application/javascript",
+      "Filename": ".gitignore"
+    },
+    {
+      "Mime": "application/javascript",
+      "Filename": "a.PY"
+    },
+    {
+      "Mime": "application/javascript",
+      "Filename": "C:\\folder\\Dockerfile"
+    },
+    {
+      "Mime": "application/javascript",
+      "Filename": "dir/.env/"
+    },
+    {
+      "Mime": "application/javascript",
+      "Filename": "dir/../Makefile"
+    },
+    {
+      "Mime": "application/javascript",
+      "Filename": "test.\u0130N\u0130"
+    },
+    {
+      "Mime": "application/javascript",
+      "Filename": "test.py "
+    },
+    {
+      "Mime": "application/javascript",
+      "Filename": "x.pdf"
+    },
+    {
+      "Mime": "application/javascript",
+      "Filename": "x.png"
+    },
+    {
+      "Mime": "application/javascript",
+      "Filename": "file.bin"
+    },
+    {
+      "Mime": "application/javascript",
+      "Filename": ""
+    },
+    {
+      "Mime": "application/javascript",
+      "Filename": "/"
+    },
+    {
+      "Mime": "application/javascript",
+      "Filename": "."
+    },
+    {
+      "Mime": "application/javascript",
+      "Filename": ".."
+    },
+    {
+      "Mime": "application/javascript",
+      "Filename": "folder/.."
+    },
+    {
+      "Mime": "application/javascript",
+      "Filename": "file.PY/.."
+    },
+    {
+      "Mime": "application/xml",
+      "Filename": "file.md"
+    },
+    {
+      "Mime": "application/xml",
+      "Filename": "file.markdown"
+    },
+    {
+      "Mime": "application/xml",
+      "Filename": "file.txt"
+    },
+    {
+      "Mime": "application/xml",
+      "Filename": "file.log"
+    },
+    {
+      "Mime": "application/xml",
+      "Filename": "file.csv"
+    },
+    {
+      "Mime": "application/xml",
+      "Filename": "file.tsv"
+    },
+    {
+      "Mime": "application/xml",
+      "Filename": "file.html"
+    },
+    {
+      "Mime": "application/xml",
+      "Filename": "file.htm"
+    },
+    {
+      "Mime": "application/xml",
+      "Filename": "file.json"
+    },
+    {
+      "Mime": "application/xml",
+      "Filename": "file.jsonl"
+    },
+    {
+      "Mime": "application/xml",
+      "Filename": "file.ndjson"
+    },
+    {
+      "Mime": "application/xml",
+      "Filename": "file.xml"
+    },
+    {
+      "Mime": "application/xml",
+      "Filename": "file.yml"
+    },
+    {
+      "Mime": "application/xml",
+      "Filename": "file.yaml"
+    },
+    {
+      "Mime": "application/xml",
+      "Filename": "file.toml"
+    },
+    {
+      "Mime": "application/xml",
+      "Filename": "file.ini"
+    },
+    {
+      "Mime": "application/xml",
+      "Filename": "file.conf"
+    },
+    {
+      "Mime": "application/xml",
+      "Filename": "file.dockerfile"
+    },
+    {
+      "Mime": "application/xml",
+      "Filename": "file.makefile"
+    },
+    {
+      "Mime": "application/xml",
+      "Filename": "file.gitignore"
+    },
+    {
+      "Mime": "application/xml",
+      "Filename": "file.sh"
+    },
+    {
+      "Mime": "application/xml",
+      "Filename": "file.bash"
+    },
+    {
+      "Mime": "application/xml",
+      "Filename": "file.zsh"
+    },
+    {
+      "Mime": "application/xml",
+      "Filename": "file.py"
+    },
+    {
+      "Mime": "application/xml",
+      "Filename": "file.rb"
+    },
+    {
+      "Mime": "application/xml",
+      "Filename": "file.go"
+    },
+    {
+      "Mime": "application/xml",
+      "Filename": "file.rs"
+    },
+    {
+      "Mime": "application/xml",
+      "Filename": "file.ts"
+    },
+    {
+      "Mime": "application/xml",
+      "Filename": "file.tsx"
+    },
+    {
+      "Mime": "application/xml",
+      "Filename": "file.js"
+    },
+    {
+      "Mime": "application/xml",
+      "Filename": "file.jsx"
+    },
+    {
+      "Mime": "application/xml",
+      "Filename": "file.mjs"
+    },
+    {
+      "Mime": "application/xml",
+      "Filename": "file.cjs"
+    },
+    {
+      "Mime": "application/xml",
+      "Filename": "file.css"
+    },
+    {
+      "Mime": "application/xml",
+      "Filename": "file.scss"
+    },
+    {
+      "Mime": "application/xml",
+      "Filename": "file.sass"
+    },
+    {
+      "Mime": "application/xml",
+      "Filename": "file.less"
+    },
+    {
+      "Mime": "application/xml",
+      "Filename": "file.sql"
+    },
+    {
+      "Mime": "application/xml",
+      "Filename": "file.java"
+    },
+    {
+      "Mime": "application/xml",
+      "Filename": "file.kt"
+    },
+    {
+      "Mime": "application/xml",
+      "Filename": "file.swift"
+    },
+    {
+      "Mime": "application/xml",
+      "Filename": "file.c"
+    },
+    {
+      "Mime": "application/xml",
+      "Filename": "file.cc"
+    },
+    {
+      "Mime": "application/xml",
+      "Filename": "file.cpp"
+    },
+    {
+      "Mime": "application/xml",
+      "Filename": "file.h"
+    },
+    {
+      "Mime": "application/xml",
+      "Filename": "file.hpp"
+    },
+    {
+      "Mime": "application/xml",
+      "Filename": "file.cs"
+    },
+    {
+      "Mime": "application/xml",
+      "Filename": "file.php"
+    },
+    {
+      "Mime": "application/xml",
+      "Filename": "file.lua"
+    },
+    {
+      "Mime": "application/xml",
+      "Filename": "file.vim"
+    },
+    {
+      "Mime": "application/xml",
+      "Filename": "dockerfile"
+    },
+    {
+      "Mime": "application/xml",
+      "Filename": "makefile"
+    },
+    {
+      "Mime": "application/xml",
+      "Filename": ".env"
+    },
+    {
+      "Mime": "application/xml",
+      "Filename": ".gitignore"
+    },
+    {
+      "Mime": "application/xml",
+      "Filename": "a.PY"
+    },
+    {
+      "Mime": "application/xml",
+      "Filename": "C:\\folder\\Dockerfile"
+    },
+    {
+      "Mime": "application/xml",
+      "Filename": "dir/.env/"
+    },
+    {
+      "Mime": "application/xml",
+      "Filename": "dir/../Makefile"
+    },
+    {
+      "Mime": "application/xml",
+      "Filename": "test.\u0130N\u0130"
+    },
+    {
+      "Mime": "application/xml",
+      "Filename": "test.py "
+    },
+    {
+      "Mime": "application/xml",
+      "Filename": "x.pdf"
+    },
+    {
+      "Mime": "application/xml",
+      "Filename": "x.png"
+    },
+    {
+      "Mime": "application/xml",
+      "Filename": "file.bin"
+    },
+    {
+      "Mime": "application/xml",
+      "Filename": ""
+    },
+    {
+      "Mime": "application/xml",
+      "Filename": "/"
+    },
+    {
+      "Mime": "application/xml",
+      "Filename": "."
+    },
+    {
+      "Mime": "application/xml",
+      "Filename": ".."
+    },
+    {
+      "Mime": "application/xml",
+      "Filename": "folder/.."
+    },
+    {
+      "Mime": "application/xml",
+      "Filename": "file.PY/.."
+    },
+    {
+      "Mime": "application/x-yaml",
+      "Filename": "file.md"
+    },
+    {
+      "Mime": "application/x-yaml",
+      "Filename": "file.markdown"
+    },
+    {
+      "Mime": "application/x-yaml",
+      "Filename": "file.txt"
+    },
+    {
+      "Mime": "application/x-yaml",
+      "Filename": "file.log"
+    },
+    {
+      "Mime": "application/x-yaml",
+      "Filename": "file.csv"
+    },
+    {
+      "Mime": "application/x-yaml",
+      "Filename": "file.tsv"
+    },
+    {
+      "Mime": "application/x-yaml",
+      "Filename": "file.html"
+    },
+    {
+      "Mime": "application/x-yaml",
+      "Filename": "file.htm"
+    },
+    {
+      "Mime": "application/x-yaml",
+      "Filename": "file.json"
+    },
+    {
+      "Mime": "application/x-yaml",
+      "Filename": "file.jsonl"
+    },
+    {
+      "Mime": "application/x-yaml",
+      "Filename": "file.ndjson"
+    },
+    {
+      "Mime": "application/x-yaml",
+      "Filename": "file.xml"
+    },
+    {
+      "Mime": "application/x-yaml",
+      "Filename": "file.yml"
+    },
+    {
+      "Mime": "application/x-yaml",
+      "Filename": "file.yaml"
+    },
+    {
+      "Mime": "application/x-yaml",
+      "Filename": "file.toml"
+    },
+    {
+      "Mime": "application/x-yaml",
+      "Filename": "file.ini"
+    },
+    {
+      "Mime": "application/x-yaml",
+      "Filename": "file.conf"
+    },
+    {
+      "Mime": "application/x-yaml",
+      "Filename": "file.dockerfile"
+    },
+    {
+      "Mime": "application/x-yaml",
+      "Filename": "file.makefile"
+    },
+    {
+      "Mime": "application/x-yaml",
+      "Filename": "file.gitignore"
+    },
+    {
+      "Mime": "application/x-yaml",
+      "Filename": "file.sh"
+    },
+    {
+      "Mime": "application/x-yaml",
+      "Filename": "file.bash"
+    },
+    {
+      "Mime": "application/x-yaml",
+      "Filename": "file.zsh"
+    },
+    {
+      "Mime": "application/x-yaml",
+      "Filename": "file.py"
+    },
+    {
+      "Mime": "application/x-yaml",
+      "Filename": "file.rb"
+    },
+    {
+      "Mime": "application/x-yaml",
+      "Filename": "file.go"
+    },
+    {
+      "Mime": "application/x-yaml",
+      "Filename": "file.rs"
+    },
+    {
+      "Mime": "application/x-yaml",
+      "Filename": "file.ts"
+    },
+    {
+      "Mime": "application/x-yaml",
+      "Filename": "file.tsx"
+    },
+    {
+      "Mime": "application/x-yaml",
+      "Filename": "file.js"
+    },
+    {
+      "Mime": "application/x-yaml",
+      "Filename": "file.jsx"
+    },
+    {
+      "Mime": "application/x-yaml",
+      "Filename": "file.mjs"
+    },
+    {
+      "Mime": "application/x-yaml",
+      "Filename": "file.cjs"
+    },
+    {
+      "Mime": "application/x-yaml",
+      "Filename": "file.css"
+    },
+    {
+      "Mime": "application/x-yaml",
+      "Filename": "file.scss"
+    },
+    {
+      "Mime": "application/x-yaml",
+      "Filename": "file.sass"
+    },
+    {
+      "Mime": "application/x-yaml",
+      "Filename": "file.less"
+    },
+    {
+      "Mime": "application/x-yaml",
+      "Filename": "file.sql"
+    },
+    {
+      "Mime": "application/x-yaml",
+      "Filename": "file.java"
+    },
+    {
+      "Mime": "application/x-yaml",
+      "Filename": "file.kt"
+    },
+    {
+      "Mime": "application/x-yaml",
+      "Filename": "file.swift"
+    },
+    {
+      "Mime": "application/x-yaml",
+      "Filename": "file.c"
+    },
+    {
+      "Mime": "application/x-yaml",
+      "Filename": "file.cc"
+    },
+    {
+      "Mime": "application/x-yaml",
+      "Filename": "file.cpp"
+    },
+    {
+      "Mime": "application/x-yaml",
+      "Filename": "file.h"
+    },
+    {
+      "Mime": "application/x-yaml",
+      "Filename": "file.hpp"
+    },
+    {
+      "Mime": "application/x-yaml",
+      "Filename": "file.cs"
+    },
+    {
+      "Mime": "application/x-yaml",
+      "Filename": "file.php"
+    },
+    {
+      "Mime": "application/x-yaml",
+      "Filename": "file.lua"
+    },
+    {
+      "Mime": "application/x-yaml",
+      "Filename": "file.vim"
+    },
+    {
+      "Mime": "application/x-yaml",
+      "Filename": "dockerfile"
+    },
+    {
+      "Mime": "application/x-yaml",
+      "Filename": "makefile"
+    },
+    {
+      "Mime": "application/x-yaml",
+      "Filename": ".env"
+    },
+    {
+      "Mime": "application/x-yaml",
+      "Filename": ".gitignore"
+    },
+    {
+      "Mime": "application/x-yaml",
+      "Filename": "a.PY"
+    },
+    {
+      "Mime": "application/x-yaml",
+      "Filename": "C:\\folder\\Dockerfile"
+    },
+    {
+      "Mime": "application/x-yaml",
+      "Filename": "dir/.env/"
+    },
+    {
+      "Mime": "application/x-yaml",
+      "Filename": "dir/../Makefile"
+    },
+    {
+      "Mime": "application/x-yaml",
+      "Filename": "test.\u0130N\u0130"
+    },
+    {
+      "Mime": "application/x-yaml",
+      "Filename": "test.py "
+    },
+    {
+      "Mime": "application/x-yaml",
+      "Filename": "x.pdf"
+    },
+    {
+      "Mime": "application/x-yaml",
+      "Filename": "x.png"
+    },
+    {
+      "Mime": "application/x-yaml",
+      "Filename": "file.bin"
+    },
+    {
+      "Mime": "application/x-yaml",
+      "Filename": ""
+    },
+    {
+      "Mime": "application/x-yaml",
+      "Filename": "/"
+    },
+    {
+      "Mime": "application/x-yaml",
+      "Filename": "."
+    },
+    {
+      "Mime": "application/x-yaml",
+      "Filename": ".."
+    },
+    {
+      "Mime": "application/x-yaml",
+      "Filename": "folder/.."
+    },
+    {
+      "Mime": "application/x-yaml",
+      "Filename": "file.PY/.."
+    },
+    {
+      "Mime": "application/yaml",
+      "Filename": "file.md"
+    },
+    {
+      "Mime": "application/yaml",
+      "Filename": "file.markdown"
+    },
+    {
+      "Mime": "application/yaml",
+      "Filename": "file.txt"
+    },
+    {
+      "Mime": "application/yaml",
+      "Filename": "file.log"
+    },
+    {
+      "Mime": "application/yaml",
+      "Filename": "file.csv"
+    },
+    {
+      "Mime": "application/yaml",
+      "Filename": "file.tsv"
+    },
+    {
+      "Mime": "application/yaml",
+      "Filename": "file.html"
+    },
+    {
+      "Mime": "application/yaml",
+      "Filename": "file.htm"
+    },
+    {
+      "Mime": "application/yaml",
+      "Filename": "file.json"
+    },
+    {
+      "Mime": "application/yaml",
+      "Filename": "file.jsonl"
+    },
+    {
+      "Mime": "application/yaml",
+      "Filename": "file.ndjson"
+    },
+    {
+      "Mime": "application/yaml",
+      "Filename": "file.xml"
+    },
+    {
+      "Mime": "application/yaml",
+      "Filename": "file.yml"
+    },
+    {
+      "Mime": "application/yaml",
+      "Filename": "file.yaml"
+    },
+    {
+      "Mime": "application/yaml",
+      "Filename": "file.toml"
+    },
+    {
+      "Mime": "application/yaml",
+      "Filename": "file.ini"
+    },
+    {
+      "Mime": "application/yaml",
+      "Filename": "file.conf"
+    },
+    {
+      "Mime": "application/yaml",
+      "Filename": "file.dockerfile"
+    },
+    {
+      "Mime": "application/yaml",
+      "Filename": "file.makefile"
+    },
+    {
+      "Mime": "application/yaml",
+      "Filename": "file.gitignore"
+    },
+    {
+      "Mime": "application/yaml",
+      "Filename": "file.sh"
+    },
+    {
+      "Mime": "application/yaml",
+      "Filename": "file.bash"
+    },
+    {
+      "Mime": "application/yaml",
+      "Filename": "file.zsh"
+    },
+    {
+      "Mime": "application/yaml",
+      "Filename": "file.py"
+    },
+    {
+      "Mime": "application/yaml",
+      "Filename": "file.rb"
+    },
+    {
+      "Mime": "application/yaml",
+      "Filename": "file.go"
+    },
+    {
+      "Mime": "application/yaml",
+      "Filename": "file.rs"
+    },
+    {
+      "Mime": "application/yaml",
+      "Filename": "file.ts"
+    },
+    {
+      "Mime": "application/yaml",
+      "Filename": "file.tsx"
+    },
+    {
+      "Mime": "application/yaml",
+      "Filename": "file.js"
+    },
+    {
+      "Mime": "application/yaml",
+      "Filename": "file.jsx"
+    },
+    {
+      "Mime": "application/yaml",
+      "Filename": "file.mjs"
+    },
+    {
+      "Mime": "application/yaml",
+      "Filename": "file.cjs"
+    },
+    {
+      "Mime": "application/yaml",
+      "Filename": "file.css"
+    },
+    {
+      "Mime": "application/yaml",
+      "Filename": "file.scss"
+    },
+    {
+      "Mime": "application/yaml",
+      "Filename": "file.sass"
+    },
+    {
+      "Mime": "application/yaml",
+      "Filename": "file.less"
+    },
+    {
+      "Mime": "application/yaml",
+      "Filename": "file.sql"
+    },
+    {
+      "Mime": "application/yaml",
+      "Filename": "file.java"
+    },
+    {
+      "Mime": "application/yaml",
+      "Filename": "file.kt"
+    },
+    {
+      "Mime": "application/yaml",
+      "Filename": "file.swift"
+    },
+    {
+      "Mime": "application/yaml",
+      "Filename": "file.c"
+    },
+    {
+      "Mime": "application/yaml",
+      "Filename": "file.cc"
+    },
+    {
+      "Mime": "application/yaml",
+      "Filename": "file.cpp"
+    },
+    {
+      "Mime": "application/yaml",
+      "Filename": "file.h"
+    },
+    {
+      "Mime": "application/yaml",
+      "Filename": "file.hpp"
+    },
+    {
+      "Mime": "application/yaml",
+      "Filename": "file.cs"
+    },
+    {
+      "Mime": "application/yaml",
+      "Filename": "file.php"
+    },
+    {
+      "Mime": "application/yaml",
+      "Filename": "file.lua"
+    },
+    {
+      "Mime": "application/yaml",
+      "Filename": "file.vim"
+    },
+    {
+      "Mime": "application/yaml",
+      "Filename": "dockerfile"
+    },
+    {
+      "Mime": "application/yaml",
+      "Filename": "makefile"
+    },
+    {
+      "Mime": "application/yaml",
+      "Filename": ".env"
+    },
+    {
+      "Mime": "application/yaml",
+      "Filename": ".gitignore"
+    },
+    {
+      "Mime": "application/yaml",
+      "Filename": "a.PY"
+    },
+    {
+      "Mime": "application/yaml",
+      "Filename": "C:\\folder\\Dockerfile"
+    },
+    {
+      "Mime": "application/yaml",
+      "Filename": "dir/.env/"
+    },
+    {
+      "Mime": "application/yaml",
+      "Filename": "dir/../Makefile"
+    },
+    {
+      "Mime": "application/yaml",
+      "Filename": "test.\u0130N\u0130"
+    },
+    {
+      "Mime": "application/yaml",
+      "Filename": "test.py "
+    },
+    {
+      "Mime": "application/yaml",
+      "Filename": "x.pdf"
+    },
+    {
+      "Mime": "application/yaml",
+      "Filename": "x.png"
+    },
+    {
+      "Mime": "application/yaml",
+      "Filename": "file.bin"
+    },
+    {
+      "Mime": "application/yaml",
+      "Filename": ""
+    },
+    {
+      "Mime": "application/yaml",
+      "Filename": "/"
+    },
+    {
+      "Mime": "application/yaml",
+      "Filename": "."
+    },
+    {
+      "Mime": "application/yaml",
+      "Filename": ".."
+    },
+    {
+      "Mime": "application/yaml",
+      "Filename": "folder/.."
+    },
+    {
+      "Mime": "application/yaml",
+      "Filename": "file.PY/.."
+    },
+    {
+      "Mime": "application/toml",
+      "Filename": "file.md"
+    },
+    {
+      "Mime": "application/toml",
+      "Filename": "file.markdown"
+    },
+    {
+      "Mime": "application/toml",
+      "Filename": "file.txt"
+    },
+    {
+      "Mime": "application/toml",
+      "Filename": "file.log"
+    },
+    {
+      "Mime": "application/toml",
+      "Filename": "file.csv"
+    },
+    {
+      "Mime": "application/toml",
+      "Filename": "file.tsv"
+    },
+    {
+      "Mime": "application/toml",
+      "Filename": "file.html"
+    },
+    {
+      "Mime": "application/toml",
+      "Filename": "file.htm"
+    },
+    {
+      "Mime": "application/toml",
+      "Filename": "file.json"
+    },
+    {
+      "Mime": "application/toml",
+      "Filename": "file.jsonl"
+    },
+    {
+      "Mime": "application/toml",
+      "Filename": "file.ndjson"
+    },
+    {
+      "Mime": "application/toml",
+      "Filename": "file.xml"
+    },
+    {
+      "Mime": "application/toml",
+      "Filename": "file.yml"
+    },
+    {
+      "Mime": "application/toml",
+      "Filename": "file.yaml"
+    },
+    {
+      "Mime": "application/toml",
+      "Filename": "file.toml"
+    },
+    {
+      "Mime": "application/toml",
+      "Filename": "file.ini"
+    },
+    {
+      "Mime": "application/toml",
+      "Filename": "file.conf"
+    },
+    {
+      "Mime": "application/toml",
+      "Filename": "file.dockerfile"
+    },
+    {
+      "Mime": "application/toml",
+      "Filename": "file.makefile"
+    },
+    {
+      "Mime": "application/toml",
+      "Filename": "file.gitignore"
+    },
+    {
+      "Mime": "application/toml",
+      "Filename": "file.sh"
+    },
+    {
+      "Mime": "application/toml",
+      "Filename": "file.bash"
+    },
+    {
+      "Mime": "application/toml",
+      "Filename": "file.zsh"
+    },
+    {
+      "Mime": "application/toml",
+      "Filename": "file.py"
+    },
+    {
+      "Mime": "application/toml",
+      "Filename": "file.rb"
+    },
+    {
+      "Mime": "application/toml",
+      "Filename": "file.go"
+    },
+    {
+      "Mime": "application/toml",
+      "Filename": "file.rs"
+    },
+    {
+      "Mime": "application/toml",
+      "Filename": "file.ts"
+    },
+    {
+      "Mime": "application/toml",
+      "Filename": "file.tsx"
+    },
+    {
+      "Mime": "application/toml",
+      "Filename": "file.js"
+    },
+    {
+      "Mime": "application/toml",
+      "Filename": "file.jsx"
+    },
+    {
+      "Mime": "application/toml",
+      "Filename": "file.mjs"
+    },
+    {
+      "Mime": "application/toml",
+      "Filename": "file.cjs"
+    },
+    {
+      "Mime": "application/toml",
+      "Filename": "file.css"
+    },
+    {
+      "Mime": "application/toml",
+      "Filename": "file.scss"
+    },
+    {
+      "Mime": "application/toml",
+      "Filename": "file.sass"
+    },
+    {
+      "Mime": "application/toml",
+      "Filename": "file.less"
+    },
+    {
+      "Mime": "application/toml",
+      "Filename": "file.sql"
+    },
+    {
+      "Mime": "application/toml",
+      "Filename": "file.java"
+    },
+    {
+      "Mime": "application/toml",
+      "Filename": "file.kt"
+    },
+    {
+      "Mime": "application/toml",
+      "Filename": "file.swift"
+    },
+    {
+      "Mime": "application/toml",
+      "Filename": "file.c"
+    },
+    {
+      "Mime": "application/toml",
+      "Filename": "file.cc"
+    },
+    {
+      "Mime": "application/toml",
+      "Filename": "file.cpp"
+    },
+    {
+      "Mime": "application/toml",
+      "Filename": "file.h"
+    },
+    {
+      "Mime": "application/toml",
+      "Filename": "file.hpp"
+    },
+    {
+      "Mime": "application/toml",
+      "Filename": "file.cs"
+    },
+    {
+      "Mime": "application/toml",
+      "Filename": "file.php"
+    },
+    {
+      "Mime": "application/toml",
+      "Filename": "file.lua"
+    },
+    {
+      "Mime": "application/toml",
+      "Filename": "file.vim"
+    },
+    {
+      "Mime": "application/toml",
+      "Filename": "dockerfile"
+    },
+    {
+      "Mime": "application/toml",
+      "Filename": "makefile"
+    },
+    {
+      "Mime": "application/toml",
+      "Filename": ".env"
+    },
+    {
+      "Mime": "application/toml",
+      "Filename": ".gitignore"
+    },
+    {
+      "Mime": "application/toml",
+      "Filename": "a.PY"
+    },
+    {
+      "Mime": "application/toml",
+      "Filename": "C:\\folder\\Dockerfile"
+    },
+    {
+      "Mime": "application/toml",
+      "Filename": "dir/.env/"
+    },
+    {
+      "Mime": "application/toml",
+      "Filename": "dir/../Makefile"
+    },
+    {
+      "Mime": "application/toml",
+      "Filename": "test.\u0130N\u0130"
+    },
+    {
+      "Mime": "application/toml",
+      "Filename": "test.py "
+    },
+    {
+      "Mime": "application/toml",
+      "Filename": "x.pdf"
+    },
+    {
+      "Mime": "application/toml",
+      "Filename": "x.png"
+    },
+    {
+      "Mime": "application/toml",
+      "Filename": "file.bin"
+    },
+    {
+      "Mime": "application/toml",
+      "Filename": ""
+    },
+    {
+      "Mime": "application/toml",
+      "Filename": "/"
+    },
+    {
+      "Mime": "application/toml",
+      "Filename": "."
+    },
+    {
+      "Mime": "application/toml",
+      "Filename": ".."
+    },
+    {
+      "Mime": "application/toml",
+      "Filename": "folder/.."
+    },
+    {
+      "Mime": "application/toml",
+      "Filename": "file.PY/.."
+    },
+    {
+      "Mime": "application/x-sh",
+      "Filename": "file.md"
+    },
+    {
+      "Mime": "application/x-sh",
+      "Filename": "file.markdown"
+    },
+    {
+      "Mime": "application/x-sh",
+      "Filename": "file.txt"
+    },
+    {
+      "Mime": "application/x-sh",
+      "Filename": "file.log"
+    },
+    {
+      "Mime": "application/x-sh",
+      "Filename": "file.csv"
+    },
+    {
+      "Mime": "application/x-sh",
+      "Filename": "file.tsv"
+    },
+    {
+      "Mime": "application/x-sh",
+      "Filename": "file.html"
+    },
+    {
+      "Mime": "application/x-sh",
+      "Filename": "file.htm"
+    },
+    {
+      "Mime": "application/x-sh",
+      "Filename": "file.json"
+    },
+    {
+      "Mime": "application/x-sh",
+      "Filename": "file.jsonl"
+    },
+    {
+      "Mime": "application/x-sh",
+      "Filename": "file.ndjson"
+    },
+    {
+      "Mime": "application/x-sh",
+      "Filename": "file.xml"
+    },
+    {
+      "Mime": "application/x-sh",
+      "Filename": "file.yml"
+    },
+    {
+      "Mime": "application/x-sh",
+      "Filename": "file.yaml"
+    },
+    {
+      "Mime": "application/x-sh",
+      "Filename": "file.toml"
+    },
+    {
+      "Mime": "application/x-sh",
+      "Filename": "file.ini"
+    },
+    {
+      "Mime": "application/x-sh",
+      "Filename": "file.conf"
+    },
+    {
+      "Mime": "application/x-sh",
+      "Filename": "file.dockerfile"
+    },
+    {
+      "Mime": "application/x-sh",
+      "Filename": "file.makefile"
+    },
+    {
+      "Mime": "application/x-sh",
+      "Filename": "file.gitignore"
+    },
+    {
+      "Mime": "application/x-sh",
+      "Filename": "file.sh"
+    },
+    {
+      "Mime": "application/x-sh",
+      "Filename": "file.bash"
+    },
+    {
+      "Mime": "application/x-sh",
+      "Filename": "file.zsh"
+    },
+    {
+      "Mime": "application/x-sh",
+      "Filename": "file.py"
+    },
+    {
+      "Mime": "application/x-sh",
+      "Filename": "file.rb"
+    },
+    {
+      "Mime": "application/x-sh",
+      "Filename": "file.go"
+    },
+    {
+      "Mime": "application/x-sh",
+      "Filename": "file.rs"
+    },
+    {
+      "Mime": "application/x-sh",
+      "Filename": "file.ts"
+    },
+    {
+      "Mime": "application/x-sh",
+      "Filename": "file.tsx"
+    },
+    {
+      "Mime": "application/x-sh",
+      "Filename": "file.js"
+    },
+    {
+      "Mime": "application/x-sh",
+      "Filename": "file.jsx"
+    },
+    {
+      "Mime": "application/x-sh",
+      "Filename": "file.mjs"
+    },
+    {
+      "Mime": "application/x-sh",
+      "Filename": "file.cjs"
+    },
+    {
+      "Mime": "application/x-sh",
+      "Filename": "file.css"
+    },
+    {
+      "Mime": "application/x-sh",
+      "Filename": "file.scss"
+    },
+    {
+      "Mime": "application/x-sh",
+      "Filename": "file.sass"
+    },
+    {
+      "Mime": "application/x-sh",
+      "Filename": "file.less"
+    },
+    {
+      "Mime": "application/x-sh",
+      "Filename": "file.sql"
+    },
+    {
+      "Mime": "application/x-sh",
+      "Filename": "file.java"
+    },
+    {
+      "Mime": "application/x-sh",
+      "Filename": "file.kt"
+    },
+    {
+      "Mime": "application/x-sh",
+      "Filename": "file.swift"
+    },
+    {
+      "Mime": "application/x-sh",
+      "Filename": "file.c"
+    },
+    {
+      "Mime": "application/x-sh",
+      "Filename": "file.cc"
+    },
+    {
+      "Mime": "application/x-sh",
+      "Filename": "file.cpp"
+    },
+    {
+      "Mime": "application/x-sh",
+      "Filename": "file.h"
+    },
+    {
+      "Mime": "application/x-sh",
+      "Filename": "file.hpp"
+    },
+    {
+      "Mime": "application/x-sh",
+      "Filename": "file.cs"
+    },
+    {
+      "Mime": "application/x-sh",
+      "Filename": "file.php"
+    },
+    {
+      "Mime": "application/x-sh",
+      "Filename": "file.lua"
+    },
+    {
+      "Mime": "application/x-sh",
+      "Filename": "file.vim"
+    },
+    {
+      "Mime": "application/x-sh",
+      "Filename": "dockerfile"
+    },
+    {
+      "Mime": "application/x-sh",
+      "Filename": "makefile"
+    },
+    {
+      "Mime": "application/x-sh",
+      "Filename": ".env"
+    },
+    {
+      "Mime": "application/x-sh",
+      "Filename": ".gitignore"
+    },
+    {
+      "Mime": "application/x-sh",
+      "Filename": "a.PY"
+    },
+    {
+      "Mime": "application/x-sh",
+      "Filename": "C:\\folder\\Dockerfile"
+    },
+    {
+      "Mime": "application/x-sh",
+      "Filename": "dir/.env/"
+    },
+    {
+      "Mime": "application/x-sh",
+      "Filename": "dir/../Makefile"
+    },
+    {
+      "Mime": "application/x-sh",
+      "Filename": "test.\u0130N\u0130"
+    },
+    {
+      "Mime": "application/x-sh",
+      "Filename": "test.py "
+    },
+    {
+      "Mime": "application/x-sh",
+      "Filename": "x.pdf"
+    },
+    {
+      "Mime": "application/x-sh",
+      "Filename": "x.png"
+    },
+    {
+      "Mime": "application/x-sh",
+      "Filename": "file.bin"
+    },
+    {
+      "Mime": "application/x-sh",
+      "Filename": ""
+    },
+    {
+      "Mime": "application/x-sh",
+      "Filename": "/"
+    },
+    {
+      "Mime": "application/x-sh",
+      "Filename": "."
+    },
+    {
+      "Mime": "application/x-sh",
+      "Filename": ".."
+    },
+    {
+      "Mime": "application/x-sh",
+      "Filename": "folder/.."
+    },
+    {
+      "Mime": "application/x-sh",
+      "Filename": "file.PY/.."
+    },
+    {
+      "Mime": "application/x-httpd-php",
+      "Filename": "file.md"
+    },
+    {
+      "Mime": "application/x-httpd-php",
+      "Filename": "file.markdown"
+    },
+    {
+      "Mime": "application/x-httpd-php",
+      "Filename": "file.txt"
+    },
+    {
+      "Mime": "application/x-httpd-php",
+      "Filename": "file.log"
+    },
+    {
+      "Mime": "application/x-httpd-php",
+      "Filename": "file.csv"
+    },
+    {
+      "Mime": "application/x-httpd-php",
+      "Filename": "file.tsv"
+    },
+    {
+      "Mime": "application/x-httpd-php",
+      "Filename": "file.html"
+    },
+    {
+      "Mime": "application/x-httpd-php",
+      "Filename": "file.htm"
+    },
+    {
+      "Mime": "application/x-httpd-php",
+      "Filename": "file.json"
+    },
+    {
+      "Mime": "application/x-httpd-php",
+      "Filename": "file.jsonl"
+    },
+    {
+      "Mime": "application/x-httpd-php",
+      "Filename": "file.ndjson"
+    },
+    {
+      "Mime": "application/x-httpd-php",
+      "Filename": "file.xml"
+    },
+    {
+      "Mime": "application/x-httpd-php",
+      "Filename": "file.yml"
+    },
+    {
+      "Mime": "application/x-httpd-php",
+      "Filename": "file.yaml"
+    },
+    {
+      "Mime": "application/x-httpd-php",
+      "Filename": "file.toml"
+    },
+    {
+      "Mime": "application/x-httpd-php",
+      "Filename": "file.ini"
+    },
+    {
+      "Mime": "application/x-httpd-php",
+      "Filename": "file.conf"
+    },
+    {
+      "Mime": "application/x-httpd-php",
+      "Filename": "file.dockerfile"
+    },
+    {
+      "Mime": "application/x-httpd-php",
+      "Filename": "file.makefile"
+    },
+    {
+      "Mime": "application/x-httpd-php",
+      "Filename": "file.gitignore"
+    },
+    {
+      "Mime": "application/x-httpd-php",
+      "Filename": "file.sh"
+    },
+    {
+      "Mime": "application/x-httpd-php",
+      "Filename": "file.bash"
+    },
+    {
+      "Mime": "application/x-httpd-php",
+      "Filename": "file.zsh"
+    },
+    {
+      "Mime": "application/x-httpd-php",
+      "Filename": "file.py"
+    },
+    {
+      "Mime": "application/x-httpd-php",
+      "Filename": "file.rb"
+    },
+    {
+      "Mime": "application/x-httpd-php",
+      "Filename": "file.go"
+    },
+    {
+      "Mime": "application/x-httpd-php",
+      "Filename": "file.rs"
+    },
+    {
+      "Mime": "application/x-httpd-php",
+      "Filename": "file.ts"
+    },
+    {
+      "Mime": "application/x-httpd-php",
+      "Filename": "file.tsx"
+    },
+    {
+      "Mime": "application/x-httpd-php",
+      "Filename": "file.js"
+    },
+    {
+      "Mime": "application/x-httpd-php",
+      "Filename": "file.jsx"
+    },
+    {
+      "Mime": "application/x-httpd-php",
+      "Filename": "file.mjs"
+    },
+    {
+      "Mime": "application/x-httpd-php",
+      "Filename": "file.cjs"
+    },
+    {
+      "Mime": "application/x-httpd-php",
+      "Filename": "file.css"
+    },
+    {
+      "Mime": "application/x-httpd-php",
+      "Filename": "file.scss"
+    },
+    {
+      "Mime": "application/x-httpd-php",
+      "Filename": "file.sass"
+    },
+    {
+      "Mime": "application/x-httpd-php",
+      "Filename": "file.less"
+    },
+    {
+      "Mime": "application/x-httpd-php",
+      "Filename": "file.sql"
+    },
+    {
+      "Mime": "application/x-httpd-php",
+      "Filename": "file.java"
+    },
+    {
+      "Mime": "application/x-httpd-php",
+      "Filename": "file.kt"
+    },
+    {
+      "Mime": "application/x-httpd-php",
+      "Filename": "file.swift"
+    },
+    {
+      "Mime": "application/x-httpd-php",
+      "Filename": "file.c"
+    },
+    {
+      "Mime": "application/x-httpd-php",
+      "Filename": "file.cc"
+    },
+    {
+      "Mime": "application/x-httpd-php",
+      "Filename": "file.cpp"
+    },
+    {
+      "Mime": "application/x-httpd-php",
+      "Filename": "file.h"
+    },
+    {
+      "Mime": "application/x-httpd-php",
+      "Filename": "file.hpp"
+    },
+    {
+      "Mime": "application/x-httpd-php",
+      "Filename": "file.cs"
+    },
+    {
+      "Mime": "application/x-httpd-php",
+      "Filename": "file.php"
+    },
+    {
+      "Mime": "application/x-httpd-php",
+      "Filename": "file.lua"
+    },
+    {
+      "Mime": "application/x-httpd-php",
+      "Filename": "file.vim"
+    },
+    {
+      "Mime": "application/x-httpd-php",
+      "Filename": "dockerfile"
+    },
+    {
+      "Mime": "application/x-httpd-php",
+      "Filename": "makefile"
+    },
+    {
+      "Mime": "application/x-httpd-php",
+      "Filename": ".env"
+    },
+    {
+      "Mime": "application/x-httpd-php",
+      "Filename": ".gitignore"
+    },
+    {
+      "Mime": "application/x-httpd-php",
+      "Filename": "a.PY"
+    },
+    {
+      "Mime": "application/x-httpd-php",
+      "Filename": "C:\\folder\\Dockerfile"
+    },
+    {
+      "Mime": "application/x-httpd-php",
+      "Filename": "dir/.env/"
+    },
+    {
+      "Mime": "application/x-httpd-php",
+      "Filename": "dir/../Makefile"
+    },
+    {
+      "Mime": "application/x-httpd-php",
+      "Filename": "test.\u0130N\u0130"
+    },
+    {
+      "Mime": "application/x-httpd-php",
+      "Filename": "test.py "
+    },
+    {
+      "Mime": "application/x-httpd-php",
+      "Filename": "x.pdf"
+    },
+    {
+      "Mime": "application/x-httpd-php",
+      "Filename": "x.png"
+    },
+    {
+      "Mime": "application/x-httpd-php",
+      "Filename": "file.bin"
+    },
+    {
+      "Mime": "application/x-httpd-php",
+      "Filename": ""
+    },
+    {
+      "Mime": "application/x-httpd-php",
+      "Filename": "/"
+    },
+    {
+      "Mime": "application/x-httpd-php",
+      "Filename": "."
+    },
+    {
+      "Mime": "application/x-httpd-php",
+      "Filename": ".."
+    },
+    {
+      "Mime": "application/x-httpd-php",
+      "Filename": "folder/.."
+    },
+    {
+      "Mime": "application/x-httpd-php",
+      "Filename": "file.PY/.."
+    }
+  ],
+  "go": [
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true
+  ],
+  "python": [
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    false,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true
+  ],
+  "mismatches": [],
+  "source_sha256": {
+    "server/go/internal/handler/file.go": "686be2579bd04d92a1536cb1893d15d641f5bef110c835ea09b8cba6c7a57050",
+    "server/tests/parity/go_attachment_preview/main.go": "b9dfcb77b373953fc357079a13c92c125211da64f00d36592ceb07d776e0cdc9",
+    "server/tests/parity/go_attachment_preview/wrapper.go": "7f51ab70d24ace029ba48c32d7e42756015fdeb8be9a0af9668a5c3586217f38",
+    "server/src/workpal_backend/files/preview.py": "10a826c9a8dd7e14feb979d0f6912fc37d4a7808f7f2d3720d8a120f88ac9082",
+    "server/src/workpal_backend/auth/profile_decode.py": "f81f362f86ad9c19f060a15a69e715e2435dd51c04ef692362e484e75b41adb7",
+    "server/src/workpal_backend/workspaces/decode.py": "288017f81d560c7acf8f1e3af25e0dc8ec8ead5c0e16a15f2730bad373913a08",
+    "server/go/internal/handler/attachment_text_preview.go": "ec7de4eda8d8d84bdd3b0a577688ce6855f6695e21b21a5d2c425ee0e469bd23",
+    "server/go/internal/handler/attachment_text_preview.json": "76fca167d112ed395facbc9518bf9e23ee885643e4ca445db01f085e711a52ce",
+    "server/src/workpal_backend/files/attachment_text_preview.json": "76fca167d112ed395facbc9518bf9e23ee885643e4ca445db01f085e711a52ce",
+    "server/tools/run_attachment_preview_parity.py": "aa93fb6856ffd669c1153a813954c3d5b88f79d18c87a819ecdd5bdd3baba214"
+  }
+}

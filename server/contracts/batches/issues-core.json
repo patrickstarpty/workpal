@@ -1,0 +1,754 @@
+{
+  "batch": "issues-core",
+  "status": "contract-only; not implemented or runtime verified",
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/api/issues",
+      "handler": "ListIssues"
+    },
+    {
+      "method": "POST",
+      "path": "/api/issues",
+      "handler": "CreateIssue"
+    },
+    {
+      "method": "GET",
+      "path": "/api/issues/{id}",
+      "handler": "GetIssue"
+    }
+  ],
+  "sources": [
+    "server/go/cmd/server/router.go:2165-2191",
+    "server/go/internal/handler/issue.go:1347-1930",
+    "server/go/internal/handler/issue.go:2576-2643",
+    "server/go/internal/handler/issue.go:3201-3755",
+    "server/go/internal/service/issue.go:233-640",
+    "server/go/internal/handler/handler.go:1083-1135",
+    "server/go/internal/handler/project_access.go:18-90",
+    "server/go/pkg/db/queries/issue.sql",
+    "server/go/pkg/db/queries/issue_label.sql",
+    "packages/core/issues/queries.test.ts:333-512"
+  ],
+  "request_fields": {
+    "title": {
+      "go_type": "string",
+      "optional_wire": false,
+      "go_json_tag_omitempty": false,
+      "validation": "nonempty string required"
+    },
+    "description": {
+      "go_type": "*string",
+      "optional_wire": true,
+      "go_json_tag_omitempty": false,
+      "validation": "may be omitted; supplied values remain subject to handler/service validation"
+    },
+    "status": {
+      "go_type": "string",
+      "optional_wire": true,
+      "go_json_tag_omitempty": false,
+      "validation": "may be omitted; supplied values remain subject to handler/service validation"
+    },
+    "priority": {
+      "go_type": "string",
+      "optional_wire": true,
+      "go_json_tag_omitempty": false,
+      "validation": "may be omitted; supplied values remain subject to handler/service validation"
+    },
+    "assignee_type": {
+      "go_type": "*string",
+      "optional_wire": true,
+      "go_json_tag_omitempty": false,
+      "validation": "may be omitted; supplied values remain subject to handler/service validation"
+    },
+    "assignee_id": {
+      "go_type": "*string",
+      "optional_wire": true,
+      "go_json_tag_omitempty": false,
+      "validation": "may be omitted; supplied values remain subject to handler/service validation"
+    },
+    "parent_issue_id": {
+      "go_type": "*string",
+      "optional_wire": true,
+      "go_json_tag_omitempty": false,
+      "validation": "may be omitted; supplied values remain subject to handler/service validation"
+    },
+    "project_id": {
+      "go_type": "*string",
+      "optional_wire": true,
+      "go_json_tag_omitempty": false,
+      "validation": "may be omitted; supplied values remain subject to handler/service validation"
+    },
+    "stage": {
+      "go_type": "*int32",
+      "optional_wire": true,
+      "go_json_tag_omitempty": true,
+      "validation": "may be omitted; supplied values remain subject to handler/service validation"
+    },
+    "start_date": {
+      "go_type": "*string",
+      "optional_wire": true,
+      "go_json_tag_omitempty": false,
+      "validation": "may be omitted; supplied values remain subject to handler/service validation"
+    },
+    "due_date": {
+      "go_type": "*string",
+      "optional_wire": true,
+      "go_json_tag_omitempty": false,
+      "validation": "may be omitted; supplied values remain subject to handler/service validation"
+    },
+    "attachment_ids": {
+      "go_type": "[]string",
+      "optional_wire": true,
+      "go_json_tag_omitempty": true,
+      "validation": "may be omitted; supplied values remain subject to handler/service validation"
+    },
+    "label_ids": {
+      "go_type": "[]string",
+      "optional_wire": true,
+      "go_json_tag_omitempty": true,
+      "validation": "may be omitted; supplied values remain subject to handler/service validation"
+    },
+    "properties": {
+      "go_type": "map[string]json.RawMessage",
+      "optional_wire": true,
+      "go_json_tag_omitempty": true,
+      "validation": "may be omitted; supplied values remain subject to handler/service validation"
+    },
+    "origin_type": {
+      "go_type": "*string",
+      "optional_wire": true,
+      "go_json_tag_omitempty": true,
+      "validation": "may be omitted; supplied values remain subject to handler/service validation"
+    },
+    "origin_id": {
+      "go_type": "*string",
+      "optional_wire": true,
+      "go_json_tag_omitempty": true,
+      "validation": "may be omitted; supplied values remain subject to handler/service validation"
+    },
+    "allow_duplicate": {
+      "go_type": "bool",
+      "optional_wire": true,
+      "go_json_tag_omitempty": true,
+      "validation": "may be omitted; supplied values remain subject to handler/service validation"
+    },
+    "pr_auto_complete_disabled": {
+      "go_type": "bool",
+      "optional_wire": true,
+      "go_json_tag_omitempty": true,
+      "validation": "may be omitted; supplied values remain subject to handler/service validation"
+    }
+  },
+  "response_fields": {
+    "id": {
+      "go_type": "string",
+      "optional_wire": false
+    },
+    "workspace_id": {
+      "go_type": "string",
+      "optional_wire": false
+    },
+    "number": {
+      "go_type": "int32",
+      "optional_wire": false
+    },
+    "identifier": {
+      "go_type": "string",
+      "optional_wire": false
+    },
+    "title": {
+      "go_type": "string",
+      "optional_wire": false
+    },
+    "description": {
+      "go_type": "*string",
+      "optional_wire": false
+    },
+    "status": {
+      "go_type": "string",
+      "optional_wire": false
+    },
+    "status_category": {
+      "go_type": "string",
+      "optional_wire": true
+    },
+    "status_name": {
+      "go_type": "string",
+      "optional_wire": false
+    },
+    "priority": {
+      "go_type": "string",
+      "optional_wire": false
+    },
+    "assignee_type": {
+      "go_type": "*string",
+      "optional_wire": false
+    },
+    "assignee_id": {
+      "go_type": "*string",
+      "optional_wire": false
+    },
+    "creator_type": {
+      "go_type": "string",
+      "optional_wire": false
+    },
+    "creator_id": {
+      "go_type": "string",
+      "optional_wire": false
+    },
+    "requester_id": {
+      "go_type": "*string",
+      "optional_wire": false
+    },
+    "parent_issue_id": {
+      "go_type": "*string",
+      "optional_wire": false
+    },
+    "duplicate_of": {
+      "go_type": "*IssueRefResponse",
+      "optional_wire": false
+    },
+    "project_id": {
+      "go_type": "*string",
+      "optional_wire": false
+    },
+    "position": {
+      "go_type": "float64",
+      "optional_wire": false
+    },
+    "stage": {
+      "go_type": "*int32",
+      "optional_wire": false
+    },
+    "start_date": {
+      "go_type": "*string",
+      "optional_wire": false
+    },
+    "due_date": {
+      "go_type": "*string",
+      "optional_wire": false
+    },
+    "created_at": {
+      "go_type": "string",
+      "optional_wire": false
+    },
+    "updated_at": {
+      "go_type": "string",
+      "optional_wire": false
+    },
+    "revision": {
+      "go_type": "int64",
+      "optional_wire": false
+    },
+    "last_activity_at": {
+      "go_type": "*string",
+      "optional_wire": false
+    },
+    "metadata": {
+      "go_type": "map[string]any",
+      "optional_wire": false
+    },
+    "properties": {
+      "go_type": "map[string]any",
+      "optional_wire": false
+    },
+    "reactions": {
+      "go_type": "[]IssueReactionResponse",
+      "optional_wire": true
+    },
+    "attachments": {
+      "go_type": "[]AttachmentResponse",
+      "optional_wire": true
+    },
+    "labels": {
+      "go_type": "*[]LabelResponse",
+      "optional_wire": true
+    },
+    "source_context": {
+      "go_type": "*sourceContextDetailResponse",
+      "optional_wire": true
+    }
+  },
+  "pagination": {
+    "default_limit": 100,
+    "max_limit": 100,
+    "default_offset": 0,
+    "invalid_limit": "default 100; positive values clamped to 100",
+    "invalid_offset": "default 0",
+    "envelope": {
+      "created_by_user_id": "raw query string, empty when absent",
+      "issues": [],
+      "total": "filtered count before pagination"
+    },
+    "open_only": "literal true; no pagination, total returned length; distinct static query"
+  },
+  "filters": {
+    "ordinary": "AND between facets; OR within comma lists; plural statuses/priorities/status_categories supersede singular aliases. Actor-pair facets OR with unassigned; project_ids OR no-project. label_ids matches ANY label. ids present empty matches nothing. top_level_only excludes children; scheduled requires either date. Metadata containment, typed property AND-of-OR groups. involves_user_id excludes direct member assignment and includes owned agents / related squads. created_by_user_id uses attribution predicate rather than creator_id equality.",
+    "date": "date_field created_at or updated_at + RFC3339Nano date_start/date_end required together; inclusive start exclusive end",
+    "sort": "position ASC ignores direction; last_activity DESC default; others ASC default; direction case insensitive asc/desc. Sparse dates/activity/properties NULLS LAST. last_activity ties id DESC; other sorts created_at DESC,id DESC. Status catalog display order; priorities urgent/high/medium/low/none. Unknown property definitions degrade to position."
+  },
+  "fixtures": [
+    {
+      "request": {
+        "method": "POST",
+        "path": "/api/issues",
+        "body": {}
+      },
+      "status": 400,
+      "json": {
+        "error": "title is required"
+      }
+    },
+    {
+      "request": {
+        "method": "POST",
+        "path": "/api/issues",
+        "raw_body": "{\"title\":"
+      },
+      "status": 400,
+      "json": {
+        "error": "invalid request body"
+      }
+    },
+    {
+      "request": {
+        "method": "POST",
+        "path": "/api/issues",
+        "body": {
+          "title": "A",
+          "stage": 0
+        }
+      },
+      "status": 400,
+      "json": {
+        "error": "stage must be >= 1"
+      }
+    },
+    {
+      "request": {
+        "method": "GET",
+        "path": "/api/issues?ids="
+      },
+      "status": 200,
+      "json": {
+        "created_by_user_id": "",
+        "issues": [],
+        "total": 0
+      }
+    },
+    {
+      "request": {
+        "method": "GET",
+        "path": "/api/issues/not-a-uuid"
+      },
+      "status": 404,
+      "json": {
+        "error": "issue not found"
+      }
+    },
+    {
+      "status": 400,
+      "json": {
+        "error": "invalid sort value"
+      }
+    },
+    {
+      "status": 400,
+      "json": {
+        "error": "invalid direction value"
+      }
+    },
+    {
+      "status": 400,
+      "json": {
+        "error": "invalid assignee_types"
+      }
+    },
+    {
+      "status": 400,
+      "json": {
+        "error": "date_field, date_start, and date_end are required together"
+      }
+    },
+    {
+      "status": 400,
+      "json": {
+        "error": "invalid date_field"
+      }
+    },
+    {
+      "status": 400,
+      "json": {
+        "error": "invalid date_start"
+      }
+    },
+    {
+      "status": 400,
+      "json": {
+        "error": "invalid date_end"
+      }
+    },
+    {
+      "status": 400,
+      "json": {
+        "error": "date_start must be before date_end"
+      }
+    },
+    {
+      "status": 400,
+      "json": {
+        "error": "parent issue not found in this workspace"
+      }
+    },
+    {
+      "status": 400,
+      "json": {
+        "error": "project not found in this workspace"
+      }
+    },
+    {
+      "status": 400,
+      "json": {
+        "error": "one or more labels not found in this workspace"
+      }
+    },
+    {
+      "status": 400,
+      "json": {
+        "error": "origin_type and origin_id must be provided together"
+      }
+    },
+    {
+      "status": 400,
+      "json": {
+        "error": "unsupported origin_type"
+      }
+    },
+    {
+      "status": 400,
+      "json": {
+        "error": "invalid start_date format, expected YYYY-MM-DD"
+      }
+    },
+    {
+      "status": 400,
+      "json": {
+        "error": "invalid due_date format, expected YYYY-MM-DD"
+      }
+    },
+    {
+      "name": "minimal-create",
+      "seed": "minimal",
+      "evidence": "source-derived; not executed against Go",
+      "request": {
+        "method": "POST",
+        "path": "/api/issues",
+        "body": {
+          "title": "A"
+        }
+      },
+      "status": 201,
+      "json": {
+        "id": "33333333-3333-4333-8333-333333333333",
+        "workspace_id": "11111111-1111-4111-8111-111111111111",
+        "number": 1,
+        "identifier": "WP-1",
+        "title": "A",
+        "description": null,
+        "status": "todo",
+        "status_category": "todo",
+        "status_name": "",
+        "priority": "none",
+        "assignee_type": null,
+        "assignee_id": null,
+        "creator_type": "member",
+        "creator_id": "22222222-2222-4222-8222-222222222222",
+        "requester_id": null,
+        "parent_issue_id": null,
+        "duplicate_of": null,
+        "project_id": null,
+        "position": -1,
+        "stage": null,
+        "start_date": null,
+        "due_date": null,
+        "created_at": "2026-11-21T04:05:06Z",
+        "updated_at": "2026-11-21T04:05:06Z",
+        "revision": 1,
+        "last_activity_at": "2026-11-21T04:05:06.123456Z",
+        "metadata": {},
+        "properties": {},
+        "labels": [],
+        "pr_auto_complete_disabled": false
+      },
+      "derivation": "issue.go:3362-3395,3740-3755; service/issue.go:409-486; issue.sql:183-192"
+    },
+    {
+      "name": "minimal-detail-no-source",
+      "seed": "minimal",
+      "evidence": "source-derived; not executed against Go",
+      "request": {
+        "method": "GET",
+        "path": "/api/issues/33333333-3333-4333-8333-333333333333"
+      },
+      "status": 200,
+      "json": {
+        "id": "33333333-3333-4333-8333-333333333333",
+        "workspace_id": "11111111-1111-4111-8111-111111111111",
+        "number": 1,
+        "identifier": "WP-1",
+        "title": "A",
+        "description": null,
+        "status": "todo",
+        "status_category": "todo",
+        "status_name": "",
+        "priority": "none",
+        "assignee_type": null,
+        "assignee_id": null,
+        "creator_type": "member",
+        "creator_id": "22222222-2222-4222-8222-222222222222",
+        "requester_id": null,
+        "parent_issue_id": null,
+        "duplicate_of": null,
+        "project_id": null,
+        "position": -1,
+        "stage": null,
+        "start_date": null,
+        "due_date": null,
+        "created_at": "2026-11-21T04:05:06Z",
+        "updated_at": "2026-11-21T04:05:06Z",
+        "revision": 1,
+        "last_activity_at": "2026-11-21T04:05:06.123456Z",
+        "metadata": {},
+        "properties": {},
+        "labels": []
+      },
+      "derivation": "issue.go:477-514,2576-2643; source_context.go:252 onward"
+    },
+    {
+      "name": "minimal-list",
+      "seed": "minimal",
+      "evidence": "source-derived; not executed against Go",
+      "request": {
+        "method": "GET",
+        "path": "/api/issues"
+      },
+      "status": 200,
+      "json": {
+        "created_by_user_id": "",
+        "issues": [
+          {
+            "id": "33333333-3333-4333-8333-333333333333",
+            "workspace_id": "11111111-1111-4111-8111-111111111111",
+            "number": 1,
+            "identifier": "WP-1",
+            "title": "A",
+            "description": null,
+            "status": "todo",
+            "status_category": "todo",
+            "status_name": "",
+            "priority": "none",
+            "assignee_type": null,
+            "assignee_id": null,
+            "creator_type": "member",
+            "creator_id": "22222222-2222-4222-8222-222222222222",
+            "requester_id": null,
+            "parent_issue_id": null,
+            "duplicate_of": null,
+            "project_id": null,
+            "position": -1,
+            "stage": null,
+            "start_date": null,
+            "due_date": null,
+            "created_at": "2026-11-21T04:05:06Z",
+            "updated_at": "2026-11-21T04:05:06Z",
+            "revision": 1,
+            "last_activity_at": "2026-11-21T04:05:06.123456Z",
+            "metadata": {},
+            "properties": {},
+            "labels": []
+          }
+        ],
+        "total": 1
+      },
+      "derivation": "issue.go:517-553,1900-1930"
+    },
+    {
+      "name": "custom-resolved",
+      "seed": "minimal",
+      "evidence": "source-derived; not executed against Go",
+      "request": {
+        "method": "GET",
+        "path": "/api/issues/33333333-3333-4333-8333-333333333333"
+      },
+      "status": 200,
+      "json": {
+        "id": "33333333-3333-4333-8333-333333333333",
+        "workspace_id": "11111111-1111-4111-8111-111111111111",
+        "number": 1,
+        "identifier": "WP-1",
+        "title": "A",
+        "description": null,
+        "status": "review",
+        "status_category": "in_progress",
+        "status_name": "Review",
+        "priority": "none",
+        "assignee_type": null,
+        "assignee_id": null,
+        "creator_type": "member",
+        "creator_id": "22222222-2222-4222-8222-222222222222",
+        "requester_id": null,
+        "parent_issue_id": null,
+        "duplicate_of": null,
+        "project_id": null,
+        "position": -1,
+        "stage": null,
+        "start_date": null,
+        "due_date": null,
+        "created_at": "2026-11-21T04:05:06Z",
+        "updated_at": "2026-11-21T04:05:06Z",
+        "revision": 1,
+        "last_activity_at": "2026-11-21T04:05:06.123456Z",
+        "metadata": {},
+        "properties": {},
+        "labels": []
+      },
+      "derivation": "Seed replaces stored status; resolved catalog review has category started/name Review; missing_status has no catalog row. issue.go:376-399; issuestatus.go:186-205,426-440,632-689. GET seed only, not a valid create claim."
+    },
+    {
+      "name": "custom-unresolved",
+      "seed": "minimal",
+      "evidence": "source-derived; not executed against Go",
+      "request": {
+        "method": "GET",
+        "path": "/api/issues/33333333-3333-4333-8333-333333333333"
+      },
+      "status": 200,
+      "json": {
+        "id": "33333333-3333-4333-8333-333333333333",
+        "workspace_id": "11111111-1111-4111-8111-111111111111",
+        "number": 1,
+        "identifier": "WP-1",
+        "title": "A",
+        "description": null,
+        "status": "missing_status",
+        "status_name": "",
+        "priority": "none",
+        "assignee_type": null,
+        "assignee_id": null,
+        "creator_type": "member",
+        "creator_id": "22222222-2222-4222-8222-222222222222",
+        "requester_id": null,
+        "parent_issue_id": null,
+        "duplicate_of": null,
+        "project_id": null,
+        "position": -1,
+        "stage": null,
+        "start_date": null,
+        "due_date": null,
+        "created_at": "2026-11-21T04:05:06Z",
+        "updated_at": "2026-11-21T04:05:06Z",
+        "revision": 1,
+        "last_activity_at": "2026-11-21T04:05:06.123456Z",
+        "metadata": {},
+        "properties": {},
+        "labels": []
+      },
+      "derivation": "Seed replaces stored status; resolved catalog review has category started/name Review; missing_status has no catalog row. issue.go:376-399; issuestatus.go:186-205,426-440,632-689. GET seed only, not a valid create claim."
+    },
+    {
+      "name": "visible-duplicate-detail",
+      "seed": "minimal",
+      "evidence": "source-derived; not executed against Go",
+      "request": {
+        "method": "GET",
+        "path": "/api/issues/33333333-3333-4333-8333-333333333333"
+      },
+      "status": 200,
+      "json": {
+        "id": "33333333-3333-4333-8333-333333333333",
+        "workspace_id": "11111111-1111-4111-8111-111111111111",
+        "number": 1,
+        "identifier": "WP-1",
+        "title": "A",
+        "description": null,
+        "status": "cancelled",
+        "status_category": "cancelled",
+        "status_name": "",
+        "priority": "none",
+        "assignee_type": null,
+        "assignee_id": null,
+        "creator_type": "member",
+        "creator_id": "22222222-2222-4222-8222-222222222222",
+        "requester_id": null,
+        "parent_issue_id": null,
+        "duplicate_of": {
+          "id": "44444444-4444-4444-8444-444444444444",
+          "identifier": "WP-2",
+          "title": "Original",
+          "status": "todo"
+        },
+        "project_id": null,
+        "position": -1,
+        "stage": null,
+        "start_date": null,
+        "due_date": null,
+        "created_at": "2026-11-21T04:05:06Z",
+        "updated_at": "2026-11-21T04:05:06Z",
+        "revision": 1,
+        "last_activity_at": "2026-11-21T04:05:06.123456Z",
+        "metadata": {},
+        "properties": {},
+        "labels": []
+      },
+      "derivation": "Seed cancelled row with duplicate_of_issue_id pointing to same-workspace visible original number 2/title Original/status todo, no project; issue.go:403-475. Independent read seed, not minimal-create result."
+    }
+  ],
+  "defaults": {
+    "status": "todo at HTTP boundary; database historical default backlog must not override it",
+    "priority": "none",
+    "creator": "authenticated actor, never client creator fields",
+    "labels": "authoritative [] on all three routes",
+    "metadata": {},
+    "properties": {},
+    "create_only": "pr_auto_complete_disabled always boolean"
+  },
+  "verification": "JSON syntax and temporary structural assertions only; all new fixtures source-derived, no Go parity execution",
+  "seeded_fixture_sets": [
+    {
+      "id": "minimal",
+      "assumptions": [
+        "Authenticated member creator_id in workspace_id; prefix WP; issue counter 0; no issues in todo column; no workflow/project/parent/assignment/origin/labels/properties/attachments/reactions/source snapshot.",
+        "Generated UUID fixed to response id; database transaction clock 2026-11-21T04:05:06.123456Z in UTC; no subsequent activity consumers mutate the row before reads."
+      ],
+      "derivation": "See contracts-issues-fixtures.md minimal derivation."
+    }
+  ],
+  "wire_expectations": {
+    "null_fields": [
+      "description",
+      "assignee_type",
+      "assignee_id",
+      "requester_id",
+      "parent_issue_id",
+      "duplicate_of",
+      "project_id",
+      "stage",
+      "start_date",
+      "due_date"
+    ],
+    "absent_minimal": [
+      "reactions",
+      "attachments",
+      "source_context"
+    ],
+    "create_only": "pr_auto_complete_disabled is emitted boolean false for omitted input; true echoes true; absent on list/detail even when persisted true",
+    "objects": [
+      "metadata",
+      "properties"
+    ],
+    "labels": "[] present, never null or absent on these three routes",
+    "timestamps": "created_at/updated_at RFC3339 seconds; last_activity_at RFC3339Nano, trailing fraction zeros trimmed; no forced UTC conversion in helper: UTC seed yields Z",
+    "custom_status": "status_name always present; unknown custom category omitted, never null; resolved started maps to in_progress"
+  }
+}

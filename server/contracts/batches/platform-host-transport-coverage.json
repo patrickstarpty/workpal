@@ -1,0 +1,247 @@
+{
+  "version": 1,
+  "scope": [
+    "packages/views/platform/local-directory.ts",
+    "packages/views/platform/local-voice.ts",
+    "packages/views/platform/open-external.ts",
+    "packages/views/platform/scroll-restoration.tsx",
+    "packages/views/platform/theme-folder.ts",
+    "packages/views/platform/use-desktop-unread-badge.ts",
+    "packages/views/platform/use-immersive-mode.ts"
+  ],
+  "coverage": "bounded static full target-body semantic audit; no runtime or backend support claim; pending root review",
+  "files": [
+    {
+      "path": "packages/views/platform/local-directory.ts",
+      "sha256": "eaa05004fee9f806fd45ac1058ed5594acf53a4e9b9dec12178281cb598f468a",
+      "whole_source": true,
+      "exports": [
+        {
+          "name": "isDesktopShell",
+          "anchor": "packages/views/platform/local-directory.ts:51"
+        },
+        {
+          "name": "pickDirectory",
+          "anchor": "packages/views/platform/local-directory.ts:56"
+        },
+        {
+          "name": "validateLocalDirectory",
+          "anchor": "packages/views/platform/local-directory.ts:64"
+        }
+      ],
+      "disposition": "SSR-safe optional desktopAPI discovery; shell detection checks pickDirectory function only. Picker/validator delegate unchanged arguments/results; absent methods return unsupported. No browser filesystem picker or HTTP here."
+    },
+    {
+      "path": "packages/views/platform/local-voice.ts",
+      "sha256": "ef75d3f35816b474d0f7cba61a9f8cced4ea027af9f8e042833fdf045015aa7a",
+      "whole_source": true,
+      "exports": [
+        {
+          "name": "localVoiceAPI",
+          "anchor": "packages/views/platform/local-voice.ts:43"
+        }
+      ],
+      "disposition": "SSR-safe voice capability gate requires listModels/onModelsChanged/transcribe only; cast does not validate prepare/download/history members. Interfaces describe native models, PCM and history, not implemented HTTP."
+    },
+    {
+      "path": "packages/views/platform/open-external.ts",
+      "sha256": "2275f53be840291d6cf24f0d8c285d651d7ce765a085c066bd3544fc3a02e5c9",
+      "whole_source": true,
+      "exports": [
+        {
+          "name": "openExternal",
+          "anchor": "packages/views/platform/open-external.ts:16"
+        }
+      ],
+      "disposition": "SSR no-op; injected openExternal takes precedence and returned promise is ignored. Otherwise same-tab location.assign or window.open with noopener,noreferrer. Navigation is browser resource behavior; comments do not prove native protocol guards."
+    },
+    {
+      "path": "packages/views/platform/scroll-restoration.tsx",
+      "sha256": "855627dd0f930eb2c0e2193f4023ba4de94019de98c07ec72d0181ca49434286",
+      "whole_source": true,
+      "exports": [
+        {
+          "name": "ScrollRestorationProvider",
+          "anchor": "packages/views/platform/scroll-restoration.tsx:104"
+        },
+        {
+          "name": "useScrollRestorationAdapter",
+          "anchor": "packages/views/platform/scroll-restoration.tsx:123"
+        },
+        {
+          "name": "useRestoredScrollEntry",
+          "anchor": "packages/views/platform/scroll-restoration.tsx:132"
+        },
+        {
+          "name": "useRestoredScrollOffset",
+          "anchor": "packages/views/platform/scroll-restoration.tsx:146"
+        },
+        {
+          "name": "useRestoredScrollRef",
+          "anchor": "packages/views/platform/scroll-restoration.tsx:158"
+        },
+        {
+          "name": "useRestoredViewState",
+          "anchor": "packages/views/platform/scroll-restoration.tsx:183"
+        },
+        {
+          "name": "useViewStateWriter",
+          "anchor": "packages/views/platform/scroll-restoration.tsx:193"
+        }
+      ],
+      "disposition": "Context provider and hooks forward optional adapter callbacks. get reads entry; positive top only restoration; ref cleans previous capture before attach/detach, applies positive top/left then registers root. View state writer forwards string/undefined. Active web adapter overrides stale no-provider comments."
+    },
+    {
+      "path": "packages/views/platform/theme-folder.ts",
+      "sha256": "106063d17b3193cb5b3ba40e01c8f616cf1fe179aaffa4c2dd17b6fbef97e95a",
+      "whole_source": true,
+      "exports": [
+        {
+          "name": "themeFolderAPI",
+          "anchor": "packages/views/platform/theme-folder.ts:25"
+        }
+      ],
+      "disposition": "SSR-safe four-method capability gate; snapshot paths/bytes and write results represent native filesystem content, not URLs or HTTP. No native implementation established."
+    },
+    {
+      "path": "packages/views/platform/use-desktop-unread-badge.ts",
+      "sha256": "951dca55cc7662f783b93d2b13f054ae46ed761953b6fc831fb891f06d15b815",
+      "whole_source": true,
+      "exports": [
+        {
+          "name": "useDesktopUnreadBadge",
+          "anchor": "packages/views/platform/use-desktop-unread-badge.ts:22"
+        }
+      ],
+      "disposition": "Inbox observer stays enabled while hidden for valid workspace; chat observer enabled only with workspace. Sum uses zero defaults and all session unread_count values. Effect optionally calls setUnreadBadge; absent injection does not prevent query observers."
+    },
+    {
+      "path": "packages/views/platform/use-immersive-mode.ts",
+      "sha256": "1a308e20dbae69a07743d42712ca60394ec8ed1c5fd0db174720655966c7242e",
+      "whole_source": true,
+      "exports": [
+        {
+          "name": "useImmersiveMode",
+          "anchor": "packages/views/platform/use-immersive-mode.ts:25"
+        }
+      ],
+      "disposition": "Effect skips entirely when disabled; otherwise optional true call and cleanup false using captured API. No platform test or error handling beyond optional invocation; absent bridge is no-op."
+    },
+    {
+      "path": "apps/web/platform/scroll-restoration.tsx",
+      "sha256": "28b8f4836310413ca50d322dc2af18aa46a169d0dde60232a66dd4800de9602c",
+      "whole_source": false,
+      "exports": [],
+      "disposition": "Supporting concrete adapter/callback bodies only; no whole-source claim."
+    },
+    {
+      "path": "apps/web/components/web-providers.tsx",
+      "sha256": "45c7fe326029a9063f5a57dced7743027e11c8d114ce5ff3aa776ad47b579b2a",
+      "whole_source": false,
+      "exports": [],
+      "disposition": "Supporting concrete adapter/callback bodies only; no whole-source claim."
+    },
+    {
+      "path": "packages/core/inbox/queries.ts",
+      "sha256": "4612025ba86f4e32cb272acb366861d824988ba6fa7648df230e425072a4454d",
+      "whole_source": false,
+      "exports": [],
+      "disposition": "Supporting concrete adapter/callback bodies only; no whole-source claim."
+    },
+    {
+      "path": "packages/core/chat/queries.ts",
+      "sha256": "7cf8eac14be017406936c6b0eb46dba319db13095a41077c5ff6527cc9c62f3d",
+      "whole_source": false,
+      "exports": [],
+      "disposition": "Supporting concrete adapter/callback bodies only; no whole-source claim."
+    },
+    {
+      "path": "packages/core/chat/unread.ts",
+      "sha256": "ec8897390e245dd2405ab306ee6f15348825fb90d76aaf41f45078fd78099895",
+      "whole_source": false,
+      "exports": [],
+      "disposition": "Supporting concrete adapter/callback bodies only; no whole-source claim."
+    },
+    {
+      "path": "packages/core/api/client.ts",
+      "sha256": "779bb65b5b7ead815836f7c704ec3c370bafae203e4f92119fadce93e982a4d7",
+      "whole_source": false,
+      "exports": [],
+      "disposition": "Supporting concrete adapter/callback bodies only; no whole-source claim."
+    },
+    {
+      "path": "packages/views/settings/components/appearance-tab.tsx",
+      "sha256": "b13ac55b7a710bc5c707f8f9527d3b23d258ed36ddbe0331972f22cf57ecf1ce",
+      "whole_source": false,
+      "exports": [],
+      "disposition": "Supporting concrete adapter/callback bodies only; no whole-source claim."
+    }
+  ],
+  "edges": [
+    {
+      "source": "packages/core/inbox/queries.ts:144",
+      "api_method": "getInboxUnreadSummary",
+      "client_anchor": "packages/core/api/client.ts:3277",
+      "kind": "query-or-mutation",
+      "inventory": [
+        {
+          "id": "client:3278",
+          "method": "GET",
+          "path_expression": "/api/inbox/unread-summary",
+          "route": {
+            "method": "GET",
+            "path": "/api/inbox/unread-summary"
+          }
+        }
+      ]
+    },
+    {
+      "source": "packages/core/chat/queries.ts:83",
+      "api_method": "listChatSessions",
+      "client_anchor": "packages/core/api/client.ts:4101",
+      "kind": "query-or-mutation",
+      "inventory": [
+        {
+          "id": "client:4106",
+          "method": "GET",
+          "path_expression": "/api/chat/sessions${query}",
+          "route": {
+            "method": "GET",
+            "path": "/api/chat/sessions"
+          }
+        }
+      ]
+    }
+  ],
+  "reused_evidence": [
+    {
+      "path": "server/contracts/batches/voice-transport-coverage.json",
+      "sha256": "c43ffa5d02f1fa4d7c6060d7a66196ee55ba3e310baaa4b7d9ffdfbc0ba7ee12"
+    },
+    {
+      "path": "server/contracts/batches/avatar-foreground-transport-coverage.json",
+      "sha256": "e77f14f94346e57e519f019aee88faa75ffee16dedae2a0d9ecd6c5f32d8b374"
+    },
+    {
+      "path": "server/contracts/batches/local-source-dispositions.json",
+      "sha256": "816b299dac4f47c8fc70bdf3a990f0331fcb08f057d85b833515882f7a9d6370"
+    },
+    {
+      "path": "server/contracts/batches/transport-source-ledger.json",
+      "sha256": "09d3d3dce8e400dae3c95d838724a3d63a98a28cf459ebe7b3f7b54bc15719c7"
+    }
+  ],
+  "unresolved_edges": [
+    {
+      "source": "window.desktopAPI",
+      "boundary": "Injected native directory, voice/history, theme folder, external navigation, badge and immersive methods; implementation absent from active web; no native HTTP inferred."
+    }
+  ],
+  "semantics": [
+    "Standard browser/React/Tanstack APIs terminate tracing; no recursive library audit. Static possible request union, not measured execution.",
+    "Retained Next WebProviders mounts WebScrollRestorationProvider; the active Vite main.tsx does not mount this provider. Module Maps keyed pathname::key retain offsets/view state per tab until reload. Capture passive scroll listener accepts marked HTMLElements, defaults empty key to main, deletes origin offsets, records height/left; get suppresses writes for 1000ms via performance.now. Cleanup removes listener. Web adapter has no registerScrollRoot/externalSource; hooks optional calls terminate locally.",
+    "No desktopAPI implementation found in apps/web; native bridge implementations remain explicit boundaries, not blanket blockers for browser or HTTP closure.",
+    "Appearance supporting picker uses input File lists and webkitdirectory; these browser-local files differ from desktop directory path validation. Web duplicate exports ZIP download; native duplicate writes represented files and opens folder. Appearance settings and installed theme state are distinct from filesystem and backendHTTP. Theme CSS source proof is reused without upgrading AST-only claims.",
+    "Voice/avatar existing proofs retain browser audio/File/blob/canvas resource versus injected native distinctions. Arbitrary URL navigation is not an invented backend endpoint."
+  ]
+}

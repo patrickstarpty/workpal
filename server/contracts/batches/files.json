@@ -1,0 +1,99 @@
+{
+  "batch": "files",
+  "status": "source-resolved-implementation-pending",
+  "contract": "files.md",
+  "scope": "attachment upload/download/delete and byte-serving metadata dependencies",
+  "routes": [
+    {
+      "method": "POST",
+      "path": "/api/upload-file",
+      "producer_or_handler": "UploadFile",
+      "source": "server/go/internal/handler/file.go",
+      "test_file": "server/tests/test_files.py",
+      "event_disposition": "issue_attachments:changed and comment:updated when associated; transactional attachment.attached/detached wakeups",
+      "details": "files.md"
+    },
+    {
+      "method": "GET",
+      "path": "/api/attachments/{id}",
+      "producer_or_handler": "GetAttachmentByID",
+      "source": "server/go/internal/handler/file.go",
+      "test_file": "server/tests/test_files.py",
+      "event_disposition": "none: read only",
+      "details": "files.md"
+    },
+    {
+      "method": "GET",
+      "path": "/api/attachments/{id}/download-metadata",
+      "producer_or_handler": "GetAttachmentForDownload",
+      "source": "server/go/internal/handler/file.go",
+      "test_file": "server/tests/test_files.py",
+      "event_disposition": "none: read only",
+      "details": "files.md"
+    },
+    {
+      "method": "GET",
+      "path": "/api/attachments/{id}/download",
+      "producer_or_handler": "DownloadAttachment",
+      "source": "server/go/internal/handler/file.go",
+      "test_file": "server/tests/test_files.py",
+      "event_disposition": "none: read only",
+      "details": "files.md"
+    },
+    {
+      "method": "GET",
+      "path": "/api/attachments/{id}/signed-download",
+      "producer_or_handler": "DownloadAttachmentWithCapability",
+      "source": "server/go/internal/handler/attachment_capability.go",
+      "test_file": "server/tests/test_files.py",
+      "event_disposition": "none: read only",
+      "details": "files.md"
+    },
+    {
+      "method": "GET",
+      "path": "/api/attachments/{id}/content",
+      "producer_or_handler": "GetAttachmentContent",
+      "source": "server/go/internal/handler/file.go",
+      "test_file": "server/tests/test_files.py",
+      "event_disposition": "none: read only",
+      "details": "files.md"
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/attachments/{id}",
+      "producer_or_handler": "DeleteAttachment",
+      "source": "server/go/internal/handler/file.go",
+      "test_file": "server/tests/test_files.py",
+      "event_disposition": "issue_attachments:changed and comment:updated when associated; transactional attachment.attached/detached wakeups",
+      "details": "files.md"
+    },
+    {
+      "method": "GET",
+      "path": "/api/files/{id}",
+      "producer_or_handler": "mock avatar alias",
+      "source": "server/api.mjs:26-43",
+      "test_file": "server/tests/test_files.py",
+      "event_disposition": "none: read only",
+      "details": "files.md"
+    }
+  ],
+  "recovery_tests": "server/tests/test_upload_recovery.py",
+  "implementation_files": [
+    "src/workpal_backend/files/routes.py",
+    "src/workpal_backend/files/schemas.py",
+    "src/workpal_backend/files/service.py",
+    "src/workpal_backend/files/repository.py",
+    "src/workpal_backend/files/storage.py",
+    "src/workpal_backend/files/reconcile.py"
+  ],
+  "protocol": [
+    "commit pending lease",
+    "bounded staging write",
+    "file fsync",
+    "atomic rename",
+    "directory fsync",
+    "transactional ready association revisions outbox",
+    "authorized ready-only serving"
+  ],
+  "verification_status": "specification only; no implementation tests claimed"
+}

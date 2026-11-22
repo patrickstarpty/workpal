@@ -1,0 +1,2097 @@
+[
+  {
+    "source": "server/go/cmd/server/notification_listeners.go:393",
+    "text": "bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/notification_listeners.go:433",
+    "text": "bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/activity_listeners.go:340",
+    "text": "bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/runtime_gc_test.go:495",
+    "text": "func TestRuntimeGC_RuntimeLockRejectsConcurrentEnqueue(t *testing.T) {",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/subscription_delivery_test.go:91",
+    "text": "bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/plugin_hook_schedule_job_test.go:185",
+    "text": "scheduleRow, err := queries.CreatePluginHookSchedule(ctx, db.CreatePluginHookScheduleParams{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/notification_chat_reply_test.go:19",
+    "text": "bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/autopilot_listeners_test.go:533",
+    "text": "func TestAutopilotCreateIssueMentionEnqueuedBeforeDispatch(t *testing.T) {",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/autopilot_listeners_test.go:659",
+    "text": "func TestAutopilotCreateIssueWebhookRecoveryLinksDispatch(t *testing.T) {",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/notification_project_subscriber_test.go:100",
+    "text": "bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/notification_project_subscriber_test.go:149",
+    "text": "bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/notification_project_subscriber_test.go:158",
+    "text": "bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/notification_project_subscriber_test.go:255",
+    "text": "bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/bystander_tier_test.go:154",
+    "text": "bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/bystander_tier_test.go:215",
+    "text": "bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/delegated_subscriber_test.go:93",
+    "text": "bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/delegated_subscriber_test.go:702",
+    "text": "bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/activity_listeners_test.go:49",
+    "text": "bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/activity_listeners_test.go:100",
+    "text": "bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/activity_listeners_test.go:148",
+    "text": "bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/activity_listeners_test.go:204",
+    "text": "bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/activity_listeners_test.go:263",
+    "text": "bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/activity_listeners_test.go:321",
+    "text": "bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/activity_listeners_test.go:359",
+    "text": "bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/activity_listeners_test.go:412",
+    "text": "bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/activity_listeners_test.go:450",
+    "text": "bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/activity_listeners_test.go:569",
+    "text": "bus.Publish(duplicateMarkEvent(duplicateID, \"MUL-7624\", \"cancelled\", nil, &originalID, map[string]any{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/activity_listeners_test.go:596",
+    "text": "bus.Publish(duplicateMarkEvent(duplicateID, \"MUL-7624\", \"todo\", &originalID, nil, map[string]any{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/activity_listeners_test.go:625",
+    "text": "bus.Publish(duplicateMarkEvent(duplicateID, \"MUL-7624\", \"cancelled\", &firstID, &secondID, nil))",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/activity_listeners_test.go:645",
+    "text": "bus.Publish(duplicateMarkEvent(duplicateID, \"MUL-7624\", \"cancelled\", &gone, nil, map[string]any{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/activity_listeners_test.go:660",
+    "text": "bus.Publish(duplicateMarkEvent(duplicateID, \"MUL-7624\", \"cancelled\", &originalID, &originalID, nil))",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/activity_listeners_test.go:676",
+    "text": "bus.Publish(duplicateMarkEvent(issueID, \"MUL-7624\", \"cancelled\", nil, nil, map[string]any{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/chat_realtime_privacy_test.go:148",
+    "text": "bus.Publish(events.Event{Type: protocol.EventIssueUpdated, WorkspaceID: testWorkspaceID, Payload: map[string]string{}})",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/chat_realtime_privacy_test.go:232",
+    "text": "bus.Publish(events.Event{Type: protocol.EventIssueUpdated, WorkspaceID: otherWS, Payload: map[string]string{}})",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/chat_realtime_privacy_test.go:267",
+    "text": "bus.Publish(events.Event{Type: protocol.EventIssueUpdated, WorkspaceID: otherWS, Payload: map[string]string{}})",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/notification_membership_test.go:167",
+    "text": "bus.Publish(e)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/notification_membership_test.go:199",
+    "text": "bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/issue_updated_projection_test.go:57",
+    "text": "bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/issue_updated_projection_test.go:192",
+    "text": "bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/runtime_sweeper.go:288",
+    "text": "bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/runtime_sweeper.go:752",
+    "text": "bus.Publish(e)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/runtime_sweeper.go:768",
+    "text": "bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/squad_assignee_listeners_test.go:82",
+    "text": "bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/squad_assignee_listeners_test.go:89",
+    "text": "bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/issue_unread_listeners.go:57",
+    "text": "bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/shutdown.go:30",
+    "text": "// calling Schedule() before the scheduler stops, and no new task",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/notification_listeners_test.go:140",
+    "text": "bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/notification_listeners_test.go:203",
+    "text": "bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/notification_listeners_test.go:249",
+    "text": "bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/notification_listeners_test.go:303",
+    "text": "bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/notification_listeners_test.go:443",
+    "text": "bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/notification_listeners_test.go:503",
+    "text": "bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/notification_listeners_test.go:569",
+    "text": "bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/notification_listeners_test.go:652",
+    "text": "bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/notification_listeners_test.go:693",
+    "text": "bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/notification_listeners_test.go:749",
+    "text": "bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/notification_listeners_test.go:835",
+    "text": "bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/notification_listeners_test.go:872",
+    "text": "bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/notification_listeners_test.go:923",
+    "text": "bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/notification_listeners_test.go:989",
+    "text": "bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/notification_listeners_test.go:1050",
+    "text": "bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/notification_listeners_test.go:1116",
+    "text": "bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/notification_listeners_test.go:1181",
+    "text": "bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/notification_listeners_test.go:1229",
+    "text": "bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/notification_listeners_test.go:1291",
+    "text": "bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/notification_listeners_test.go:1339",
+    "text": "bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/notification_listeners_test.go:1604",
+    "text": "bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/notification_listeners_test.go:1646",
+    "text": "bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/notification_listeners_test.go:1665",
+    "text": "bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/subscriber_listeners_test.go:99",
+    "text": "bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/subscriber_listeners_test.go:138",
+    "text": "bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/subscriber_listeners_test.go:180",
+    "text": "bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/subscriber_listeners_test.go:237",
+    "text": "bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/subscriber_listeners_test.go:298",
+    "text": "bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/subscriber_listeners_test.go:333",
+    "text": "bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/subscriber_listeners_test.go:371",
+    "text": "bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/subscriber_listeners_test.go:406",
+    "text": "bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/subscriber_listeners_test.go:453",
+    "text": "bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/listeners_scope_test.go:28",
+    "text": "bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/listeners_scope_test.go:54",
+    "text": "bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/listeners_scope_test.go:146",
+    "text": "bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/listeners_scope_test.go:191",
+    "text": "bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/listeners_scope_test.go:226",
+    "text": "bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/listeners_scope_test.go:260",
+    "text": "bus.Publish(e)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/listeners_scope_test.go:286",
+    "text": "bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/listeners_scope_test.go:311",
+    "text": "bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/listeners_scope_test.go:334",
+    "text": "bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/listeners_scope_test.go:351",
+    "text": "bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/listeners_scope_test.go:381",
+    "text": "bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/listeners_scope_test.go:424",
+    "text": "bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/listeners_scope_test.go:445",
+    "text": "bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/issue_unread_listeners_test.go:77",
+    "text": "bus.Publish(events.Event{Type: eventType, WorkspaceID: testWorkspaceID, Payload: payload})",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/notification_mentions_test.go:70",
+    "text": "bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/chat_reply_notifications_test.go:56",
+    "text": "bus.Publish(chatAlertEvent())",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/chat_reply_notifications_test.go:111",
+    "text": "bus.Publish(e)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/chat_reply_notifications_test.go:140",
+    "text": "bus.Publish(e)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/chat_reply_notifications_test.go:159",
+    "text": "bus.Publish(e)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/dingtalk_reactions_integration_test.go:143",
+    "text": "bus.Publish(events.Event{Type: protocol.EventChatDone, TaskID: taskID, ChatSessionID: sessionID, Payload: protocol.ChatDonePayload{Content: \"answer\"}})",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/realtime_membership_test.go:160",
+    "text": "bus.Publish(events.Event{Type: typ, WorkspaceID: wsID, Payload: map[string]string{\"body\": \"new-workspace-content\"}})",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/realtime_membership_test.go:167",
+    "text": "bus.Publish(events.Event{Type: protocol.EventIssueUpdated, WorkspaceID: otherWS, Payload: map[string]string{\"title\": \"other-workspace\"}})",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/plugin_schedule_pulse_example_test.go:293",
+    "text": "scheduleRow, err := queries.CreatePluginHookSchedule(ctx, db.CreatePluginHookScheduleParams{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/subscriber_listeners.go:325",
+    "text": "bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/autopilot_failure_monitor.go:183",
+    "text": "bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/private_project_realtime_test.go:172",
+    "text": "bus.Publish(e)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/private_project_realtime_test.go:195",
+    "text": "bus.Publish(e)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/private_project_realtime_test.go:210",
+    "text": "bus.Publish(events.Event{Type: eventType, WorkspaceID: ppWorkspace, Payload: map[string]any{\"project_id\": projectID, \"folder_id\": \"f\"}})",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/private_project_realtime_test.go:235",
+    "text": "bus.Publish(events.Event{Type: protocol.EventIssueUpdated, WorkspaceID: ppWorkspace, Payload: map[string]any{\"issue_id\": ppSecretIssue}})",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/private_project_realtime_test.go:249",
+    "text": "bus.Publish(events.Event{Type: eventType, WorkspaceID: ppWorkspace, TaskID: ppSecretTask,",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/private_project_realtime_test.go:259",
+    "text": "bus.Publish(events.Event{Type: protocol.EventTaskProgress, WorkspaceID: ppWorkspace, TaskID: ppSecretTask,",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/private_project_realtime_test.go:270",
+    "text": "bus.Publish(events.Event{Type: protocol.EventTaskMessage, WorkspaceID: ppWorkspace, TaskID: ppCrossProjectTask,",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/private_project_aggregate_realtime_test.go:17",
+    "text": "bus.Publish(e)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/listeners_frame_test.go:66",
+    "text": "bus.Publish(tc.event)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/cmd/server/autopilot_issue_listener_test.go:17",
+    "text": "bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/ee/projectfolder/handler.go:207",
+    "text": "s.h.Publish(EventCreated, workspaceID, actorType, actorID, map[string]any{\"folder\": resp})",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/ee/projectfolder/handler.go:247",
+    "text": "s.h.Publish(EventUpdated, workspaceID, actorType, actorID, map[string]any{\"folder\": resp})",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/ee/projectfolder/handler.go:296",
+    "text": "s.h.Publish(EventDeleted, workspaceID, actorType, actorID, map[string]any{\"folder_id\": util.UUIDToString(idUUID)})",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/ee/projectfolder/handler.go:365",
+    "text": "s.h.Publish(EventFiled, workspaceID, actorType, actorID, map[string]any{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/handler/autopilot_private_leader_test.go:152",
+    "text": "func TestTriggerAutopilot_SquadPrivateLeader_OwnerCanDispatch(t *testing.T) {",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/handler/handler.go:793",
+    "text": "h.Bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/handler/handler.go:843",
+    "text": "h.Bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/handler/comment.go:2098",
+    "text": "status, reason := h.resolveCommentTriggerEnqueue(ctx, issue, trigger, triggerCommentID)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/handler/comment.go:2140",
+    "text": "func (h *Handler) resolveCommentTriggerEnqueue(ctx context.Context, issue db.Issue, trigger commentAgentTrigger, triggerCommentID pgtype.UUID) (DispatchStatus, DispatchReasonCode) {",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/handler/comment_content_sanitize_test.go:62",
+    "text": "func TestCommentTriggers_NullByteHiddenMention_PreviewMatchesEnqueue(t *testing.T) {",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/handler/plugin_hook_test.go:359",
+    "text": "dispatcher.Dispatch(plugincontract.EventIssueCreated, testWorkspaceID, map[string]any{})",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/handler/runtime_local_skills_test.go:399",
+    "text": "func TestInitiateImportLocalSkill_WakesDaemonAfterValidEnqueue(t *testing.T) {",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/handler/pin.go:297",
+    "text": "h.Bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/handler/extension_api.go:24",
+    "text": "func (h *Handler) Publish(eventType, workspaceID, actorType, actorID string, payload any) {",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/handler/issue_view_preference.go:154",
+    "text": "h.Bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/handler/squad_private_leader_test.go:144",
+    "text": "func TestComment_SquadPrivateLeader_PlainMemberNoEnqueue(t *testing.T) {",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/handler/autopilot_webhook_handler_test.go:465",
+    "text": "func TestCreateAutopilotTrigger_RejectsEventFiltersOnSchedule(t *testing.T) {",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/handler/issue_view.go:126",
+    "text": "h.Bus.Publish(e)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/handler/heartbeat_scheduler.go:42",
+    "text": "Schedule(ctx context.Context, runtimeID, workspaceID pgtype.UUID) error",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/handler/heartbeat_scheduler.go:58",
+    "text": "func (p *PassthroughHeartbeatScheduler) Schedule(ctx context.Context, runtimeID, workspaceID pgtype.UUID) error {",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/handler/heartbeat_scheduler.go:148",
+    "text": "func (b *BatchedHeartbeatScheduler) Schedule(_ context.Context, runtimeID, _ pgtype.UUID) error {",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/handler/channel_new_e2e_test.go:458",
+    "text": "prepared, err := testHandler.TaskService.PrepareChatTaskEnqueue(ctx, util.MustParseUUID(agentID), util.MustParseUUID(testUserID))",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/handler/workspace_delete_fence_test.go:112",
+    "text": "blockedEnqueue(\"enqueue via the victim's agent\", f.victimAgent, f.neighbourRuntime, f.neighbourIssue)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/handler/workspace_delete_fence_test.go:113",
+    "text": "blockedEnqueue(\"enqueue via the victim's runtime\", unboundAgent, f.victimRuntime, f.neighbourIssue)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/handler/workspace_delete_fence_test.go:114",
+    "text": "blockedEnqueue(\"enqueue via the victim's issue\", f.neighbourAgent, f.neighbourRuntime, f.victimIssue)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/handler/plugin_test.go:255",
+    "text": "enabled, generation1, cron := loadSchedule()",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/handler/plugin_test.go:266",
+    "text": "enabled, generationDisabled, _ := loadSchedule()",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/handler/plugin_test.go:285",
+    "text": "enabled, generation2, _ := loadSchedule()",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/handler/plugin_test.go:302",
+    "text": "_, generationUnchanged, _ := loadSchedule()",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/handler/plugin_test.go:317",
+    "text": "_, generation3, cron := loadSchedule()",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/handler/plugin_test.go:352",
+    "text": "loadSchedule()",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/handler/issue_trigger_preview_test.go:194",
+    "text": "func TestUpdateIssueSuppressRunSkipsEnqueue(t *testing.T) {",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/handler/heartbeat_test.go:74",
+    "text": "func (s *recordingHeartbeatScheduler) Schedule(_ context.Context, id, _ pgtype.UUID) error {",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/handler/fail_task_successor_test.go:473",
+    "text": "func TestPromoteDueDeferred_ToleratesConcurrentUncommittedEnqueue(t *testing.T) {",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/handler/skill_refresh_test.go:433",
+    "text": "func TestFetchImportedSkillFromOrigin_GitHubDispatch(t *testing.T) {",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/handler/daemon.go:1772",
+    "text": "if err := h.HeartbeatScheduler.Schedule(ctx, runtimeUUID, state.WorkspaceID); err != nil {",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/handler/daemon.go:5724",
+    "text": "h.Bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/handler/daemon.go:6045",
+    "text": "h.Bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/handler/heartbeat_scheduler_test.go:38",
+    "text": "if err := sched.Schedule(context.Background(), rt.ID, rt.WorkspaceID); err != nil {",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/handler/heartbeat_scheduler_test.go:83",
+    "text": "if err := sched.Schedule(context.Background(), rt.ID, rt.WorkspaceID); err != nil {",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/handler/heartbeat_scheduler_test.go:140",
+    "text": "if err := sched.Schedule(context.Background(), rt.ID, rt.WorkspaceID); err != nil {",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/handler/heartbeat_scheduler_test.go:164",
+    "text": "func TestBatchedHeartbeatScheduler_StopFlushesLateSchedule(t *testing.T) {",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/handler/heartbeat_scheduler_test.go:188",
+    "text": "if err := sched.Schedule(context.Background(), rt.ID, rt.WorkspaceID); err != nil {",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/handler/heartbeat_scheduler_test.go:220",
+    "text": "if err := sched.Schedule(context.Background(), rt.ID, rt.WorkspaceID); err != nil {",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/handler/heartbeat_scheduler_test.go:288",
+    "text": "if err := sched.Schedule(context.Background(), rt.ID, rt.WorkspaceID); err != nil {",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/handler/heartbeat_scheduler_test.go:332",
+    "text": "if err := sched.Schedule(context.Background(), rt.ID, rt.WorkspaceID); err != nil {",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/handler/heartbeat_scheduler_test.go:366",
+    "text": "if err := sched.Schedule(context.Background(), rt.ID, rt.WorkspaceID); err != nil {",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/handler/heartbeat_scheduler_test.go:382",
+    "text": "if err := sched.Schedule(scheduleCtx, rt2.ID, rt2.WorkspaceID); err != nil {",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/handler/chat_archive_cancel_test.go:158",
+    "text": "func TestArchivingInsideTheDebounceWindowRefusesTheLateEnqueue(t *testing.T) {",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/handler/github.go:1536",
+    "text": "h.PRRefresh.Enqueue(p.Installation.ID, p.Repository.Owner.Login, p.Repository.Name, p.PullRequest.Number)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/handler/github.go:1721",
+    "text": "h.PRRefresh.Enqueue(p.Installation.ID, owner, repo, number)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/inbox/deliver.go:17",
+    "text": "Publish(events.Event)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/inbox/deliver.go:72",
+    "text": "func (d *Deferred) Publish(e events.Event) {",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/inbox/deliver.go:94",
+    "text": "pub.Publish(e)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/inbox/deliver_test.go:52",
+    "text": "pending.Publish(events.Event{Type: protocol.EventInboxNew, ActorID: \"a\"})",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/inbox/deliver_test.go:53",
+    "text": "pending.Publish(events.Event{Type: protocol.EventInboxNew, ActorID: \"b\"})",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/inbox/deliver_test.go:71",
+    "text": "pending.Publish(events.Event{Type: protocol.EventInboxNew})",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/scheduler/jobs_plugin_hook.go:236",
+    "text": "row, err := queries.GetPluginHookSchedule(ctx, scheduleID)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/dingtalk/outbound_test.go:265",
+    "text": "bus.Publish(events.Event{Type: eventType, TaskID: util.UUIDToString(sessionUUID(63)), ChatSessionID: util.UUIDToString(sid)})",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/dingtalk/ack_archive_test.go:34",
+    "text": "bus.Publish(e)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/dingtalk/ack_archive_test.go:35",
+    "text": "bus.Publish(e)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/dingtalk/ack_archive_test.go:37",
+    "text": "bus.Publish(events.Event{Type: protocol.EventAgentRestored, Payload: e.Payload})",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/ghsnapshot/refresh_db_test.go:519",
+    "text": "m.Enqueue(pr.InstallationID, pr.RepoOwner, pr.RepoName, pr.PrNumber)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/ghsnapshot/refresh_db_test.go:529",
+    "text": "m.Enqueue(pr.InstallationID, pr.RepoOwner, pr.RepoName, pr.PrNumber)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/ghsnapshot/refresh.go:171",
+    "text": "func (m *Manager) Enqueue(installationID int64, owner, repo string, number int32) {",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/ghsnapshot/refresh.go:211",
+    "text": "m.Enqueue(installationID, owner, repo, number)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/ghsnapshot/refresh.go:490",
+    "text": "m.Enqueue(addr.InstallationID, addr.Owner, addr.Repo, addr.Number)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/ghsnapshot/refresh.go:545",
+    "text": "m.Enqueue(r.InstallationID, r.RepoOwner, r.RepoName, r.PrNumber)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/ghsnapshot/refresh.go:576",
+    "text": "m.Enqueue(r.InstallationID, r.RepoOwner, r.RepoName, r.PrNumber)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/ghsnapshot/refresh_test.go:87",
+    "text": "m.Enqueue(1, \"o\", \"r\", 2)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/ghsnapshot/refresh_test.go:102",
+    "text": "m.Enqueue(1, \"o\", \"r\", 7)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/ghsnapshot/refresh_test.go:103",
+    "text": "m.Enqueue(1, \"o\", \"r\", 7)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/ghsnapshot/refresh_test.go:104",
+    "text": "m.Enqueue(1, \"o\", \"r\", 7)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/ghsnapshot/refresh_test.go:108",
+    "text": "m.Enqueue(1, \"o\", \"r\", 8) // different PR",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/ghsnapshot/refresh_test.go:109",
+    "text": "m.Enqueue(1, \"o\", \"other\", 7)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/ghsnapshot/refresh_test.go:178",
+    "text": "m.Enqueue(1, \"o\", \"r\", number)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/ghsnapshot/refresh_test.go:180",
+    "text": "m.Enqueue(2, \"o\", \"r\", 1)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/lark/registration_service.go:242",
+    "text": "s.bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/lark/ws_connector_enrich_test.go:32",
+    "text": "func TestWSConnectorEnrichesBeforeEmit(t *testing.T) {",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/lark/outbound_test.go:907",
+    "text": "bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/lark/outbound_test.go:970",
+    "text": "bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/wecom/task_failed_db_test.go:39",
+    "text": "bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/wecom/relay_publish_state_test.go:129",
+    "text": "if got := (relayPublish(relayAccepted)).routed(); !got {",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/wecom/relay_publish_state_test.go:134",
+    "text": "t.Errorf(\"relayPublish(%d).routed() = true, want false\", p)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/wecom/resolvers_test.go:287",
+    "text": "bus.Publish(events.Event{Type: protocol.EventChatDone, ChatSessionID: \"55555555-5555-5555-5555-555555555555\", Payload: protocol.ChatDonePayload{Content: \"x\"}})",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/wecom/progress_route_test.go:160",
+    "text": "rig.bus.Publish(events.Event{Type: protocol.EventTaskMessage, TaskID: id,",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/wecom/progress_route_test.go:223",
+    "text": "rig.bus.Publish(events.Event{Type: protocol.EventTaskMessage, TaskID: id,",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/wecom/progress_route_test.go:463",
+    "text": "rig.bus.Publish(events.Event{Type: protocol.EventTaskMessage, TaskID: id,",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/wecom/progress_rounds_test.go:179",
+    "text": "p.bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/wecom/progress_rounds_test.go:201",
+    "text": "p.bus.Publish(events.Event{Type: protocol.EventTaskMessage, TaskID: id, Payload: msg})",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/wecom/task_failed_test.go:28",
+    "text": "r.bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/wecom/relay_ordering_db_test.go:216",
+    "text": "publisher.bus.Publish(chatDoneWith(first, firstAnswer))",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/wecom/relay_ordering_db_test.go:217",
+    "text": "publisher.bus.Publish(chatDoneWith(second, secondAnswer))",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/wecom/relay_ordering_db_test.go:358",
+    "text": "a.bus.Publish(chatDoneWith(turn, \"nobody can send this\"))",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/wecom/relay_ordering_db_test.go:396",
+    "text": "publisher.bus.Publish(chatDoneWith(turn, \"\u7b54\u6848\"))",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/wecom/inbound_media_bind_db_test.go:173",
+    "text": "func (*bindTestTasks) PrepareChatTaskEnqueue(context.Context, pgtype.UUID, pgtype.UUID) (service.PreparedChatTaskEnqueue, error) {",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/wecom/inbound_media_bind_db_test.go:179",
+    "text": "func (*bindTestTasks) FinalizeChatTaskEnqueue(context.Context, db.AgentTaskQueue) {}",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/wecom/install_worker.go:360",
+    "text": "w.bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/wecom/progress_two_replica_db_test.go:154",
+    "text": "r.bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/wecom/progress_two_replica_db_test.go:178",
+    "text": "r.bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/wecom/progress_two_replica_db_test.go:424",
+    "text": "b.bus.Publish(chatDoneFor(turn.boundTurn))",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/wecom/progress_two_replica_db_test.go:491",
+    "text": "c.bus.Publish(chatDoneFor(turn.boundTurn))",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/wecom/stream_bubble_test.go:419",
+    "text": "r.bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/wecom/stream_bubble_test.go:465",
+    "text": "r.bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/wecom/stream_bubble_test.go:481",
+    "text": "r.bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/wecom/stream_bubble_db_test.go:82",
+    "text": "r.bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/wecom/stream_bubble_db_test.go:130",
+    "text": "r.bus.Publish(chatDoneFor(turn))",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/wecom/outbound_two_replica_db_test.go:242",
+    "text": "publisher.bus.Publish(chatDoneFor(turn))",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/wecom/outbound_two_replica_db_test.go:270",
+    "text": "leaseHolder.bus.Publish(chatDoneFor(turn))",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/wecom/outbound_two_replica_db_test.go:589",
+    "text": "publisher.bus.Publish(chatDoneFor(turn))",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/wecom/outbound_two_replica_db_test.go:615",
+    "text": "publisher.bus.Publish(chatDoneFor(turn))",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/wecom/outbound_two_replica_db_test.go:645",
+    "text": "publisher.bus.Publish(chatDoneFor(turn))",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/wecom/outbound_two_replica_db_test.go:751",
+    "text": "publisher.bus.Publish(chatDoneFor(turn))",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/wecom/outbound_two_replica_db_test.go:769",
+    "text": "publisher.bus.Publish(chatDoneFor(turn))",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/wecom/outbound_two_replica_db_test.go:1182",
+    "text": "publisher.bus.Publish(chatDoneFor(turn))",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/wecom/outbound_two_replica_db_test.go:1222",
+    "text": "publisher.bus.Publish(chatDoneFor(turn))",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/wecom/outbound_two_replica_db_test.go:1259",
+    "text": "publisher.bus.Publish(chatDoneFor(turn))",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/wecom/outbound_two_replica_db_test.go:1299",
+    "text": "publisher.bus.Publish(chatDoneFor(turn))",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/wecom/outbound_inbox_relay_db_test.go:152",
+    "text": "publisher.bus.Publish(inboxRelayEvent(fx, \"inbox-no-holder\"))",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/wecom/outbound_inbox_relay_db_test.go:188",
+    "text": "publisher.bus.Publish(inboxRelayEvent(fx, \"inbox-lost-response\"))",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/channel/engine/router_test.go:382",
+    "text": "func (f *fakeTasks) PrepareChatTaskEnqueue(context.Context, pgtype.UUID, pgtype.UUID) (service.PreparedChatTaskEnqueue, error) {",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/channel/engine/router_test.go:392",
+    "text": "func (f *fakeTasks) FinalizeChatTaskEnqueue(context.Context, db.AgentTaskQueue) {}",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/channel/engine/batcher_test.go:89",
+    "text": "b.Schedule(\"s\", flush)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/channel/engine/batcher_test.go:90",
+    "text": "b.Schedule(\"s\", flush)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/channel/engine/batcher_test.go:91",
+    "text": "b.Schedule(\"s\", flush)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/channel/engine/batcher_test.go:114",
+    "text": "b.Schedule(\"a\", func() { a++ })",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/channel/engine/batcher_test.go:115",
+    "text": "b.Schedule(\"c\", func() { c++ })",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/channel/engine/batcher_test.go:131",
+    "text": "b.Schedule(\"s\", func() { calls++ })",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/channel/engine/batcher_test.go:133",
+    "text": "b.Schedule(\"s\", func() { calls++ }) // resets: cancels first, arms a new timer",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/channel/engine/batcher_test.go:152",
+    "text": "b.Schedule(\"s\", func() { firstCalls++ })",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/channel/engine/batcher_test.go:169",
+    "text": "b.Schedule(\"a\", func() { a++ })",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/channel/engine/batcher_test.go:170",
+    "text": "b.Schedule(\"c\", func() { c++ })",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/channel/engine/batcher_test.go:181",
+    "text": "b.Schedule(\"d\", func() { ran = true })",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/channel/engine/batcher_test.go:199",
+    "text": "b.Schedule(\"s\", func() { close(done) })",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/channel/engine/resolvers.go:478",
+    "text": "PrepareChatTaskEnqueue(ctx context.Context, agentID, initiatorUserID pgtype.UUID) (service.PreparedChatTaskEnqueue, error)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/channel/engine/resolvers.go:480",
+    "text": "FinalizeChatTaskEnqueue(ctx context.Context, task db.AgentTaskQueue)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/channel/engine/batcher.go:81",
+    "text": "func (b *pendingBatcher) Schedule(key string, flush func()) {",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/channel/engine/router.go:449",
+    "text": "prepared, prepareErr := r.tasks.PrepareChatTaskEnqueue(ctx, inst.AgentID, identity.UserID)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/channel/engine/router.go:498",
+    "text": "r.tasks.FinalizeChatTaskEnqueue(ctx, startedTask)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/channel/engine/router.go:1031",
+    "text": "r.batcher.Schedule(key, flush)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/weixin/channel.go:69",
+    "text": "deps.Bus.Publish(events.Event{Type: protocol.EventWeixinInstallationRevoked, WorkspaceID: util.UUIDToString(inst.WorkspaceID), ActorType: \"system\", Payload: map[string]any{\"id\": util.UUIDToString(inst.ID)}})",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/weixin/outbound_test.go:45",
+    "text": "go bus.Publish(events.Event{Type: protocol.EventChatDone, ChatSessionID: \"session\", TaskID: \"task\"})",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/weixin/outbound_test.go:149",
+    "text": "bus.Publish(first)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/weixin/outbound_test.go:155",
+    "text": "bus.Publish(second)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/weixin/outbound_test.go:156",
+    "text": "bus.Publish(events.Event{Type: protocol.EventChatDone, ChatSessionID: fastSession, TaskID: util.UUIDToString(dbid.NewV7())})",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/weixin/outbound_test.go:157",
+    "text": "bus.Publish(other)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/telegram/outbound_test.go:361",
+    "text": "bus.Publish(events.Event{Type: protocol.EventTaskCancelled, TaskID: taskID})",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/telegram/outbound_test.go:831",
+    "text": "bus.Publish(telegramTestEvent())",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/telegram/outbound_test.go:1248",
+    "text": "func TestOutboundRejectedTerminalReplyReleasesStreamSchedule(t *testing.T) {",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/slack/slash_control.go:21",
+    "text": "PrepareChatTaskEnqueue(ctx context.Context, agentID, initiator pgtype.UUID) (service.PreparedChatTaskEnqueue, error)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/slack/slash_control.go:23",
+    "text": "FinalizeChatTaskEnqueue(ctx context.Context, task db.AgentTaskQueue)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/slack/slash_control.go:61",
+    "text": "prepared, err = s.tasks.PrepareChatTaskEnqueue(ctx, inst.AgentID, userID)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/slack/slash_control.go:116",
+    "text": "s.tasks.FinalizeChatTaskEnqueue(ctx, task)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/slack/slash_control.go:139",
+    "text": "prepared, err = s.tasks.PrepareChatTaskEnqueue(ctx, inst.AgentID, userID)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/slack/slash_control.go:188",
+    "text": "s.tasks.FinalizeChatTaskEnqueue(ctx, task)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/slack/typing_indicator_test.go:187",
+    "text": "bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/slack/typing_indicator_test.go:232",
+    "text": "bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/slack/typing_indicator_test.go:279",
+    "text": "bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/slack/typing_indicator_test.go:327",
+    "text": "bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/integrations/slack/typing_indicator_test.go:363",
+    "text": "bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/connectedapps/service.go:447",
+    "text": "s.bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/connectedapps/requests.go:398",
+    "text": "s.bus.Publish(e)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/daemon/client.go:673",
+    "text": "return c.completeTaskWithRetrySchedule(ctx, taskID, output, branchName, sessionID, workDir, sessionRolloutMissing, retiredSessionID, durableWorkDir, defaultTerminalRetrySchedule)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/daemon/client.go:676",
+    "text": "func (c *Client) completeTaskWithRetrySchedule(ctx context.Context, taskID, output, branchName, sessionID, workDir string, sessionRolloutMissing bool, retiredSessionID, durableWorkDir string, schedule []time.Duration) error {",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/daemon/client.go:818",
+    "text": "return c.failTaskWithRetrySchedule(ctx, taskID, errMsg, sessionID, workDir, branchName, failureReason, sessionRolloutMissing, retiredSessionID, durableWorkDir, defaultTerminalRetrySchedule)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/daemon/client.go:821",
+    "text": "func (c *Client) failTaskWithRetrySchedule(ctx context.Context, taskID, errMsg, sessionID, workDir, branchName, failureReason string, sessionRolloutMissing bool, retiredSessionID, durableWorkDir string, schedule []time.Duration) error {",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/daemon/gc_test.go:2170",
+    "text": "func TestShouldCleanTaskDir_KindDispatch(t *testing.T) {",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/daemon/daemon.go:6807",
+    "text": "return d.client.completeTaskWithRetrySchedule(ctx, report.taskID, report.output, report.branchName, report.sessionID, report.workDir, report.sessionRolloutMissing, report.retiredSessionID, report.durableWorkDir, schedule)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/daemon/daemon.go:6809",
+    "text": "return d.client.failTaskWithRetrySchedule(ctx, report.taskID, report.errorMessage, report.sessionID, report.workDir, report.branchName, report.failureReason, report.sessionRolloutMissing, report.retiredSessionID, report.durableWorkDir, schedule)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/daemon/execenv/execenv_test.go:6955",
+    "text": "func TestReleaseLockFreesEnvRootForALaterDispatch(t *testing.T) {",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/plugin_event_dispatch_test.go:44",
+    "text": "bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/plugin_event_dispatch_test.go:73",
+    "text": "dispatcher.Dispatch(plugincontract.EventIssueCreated, \"00000000-0000-4000-8000-000000000001\", nil)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/plugin_event_dispatch_test.go:96",
+    "text": "bus.Publish(events.Event{Type: protocol.EventIssueCreated, WorkspaceID: workspace})",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/plugin_event_dispatch_test.go:97",
+    "text": "bus.Publish(events.Event{Type: protocol.EventCommentCreated, WorkspaceID: workspace})",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/plugin_event_dispatch_test.go:98",
+    "text": "bus.Publish(events.Event{Type: protocol.EventTaskRunning, WorkspaceID: workspace})",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/plugin_event_dispatch_test.go:99",
+    "text": "bus.Publish(events.Event{Type: protocol.EventTaskCompleted, WorkspaceID: workspace})",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/plugin_event_dispatch_test.go:100",
+    "text": "bus.Publish(events.Event{Type: protocol.EventTaskFailed, WorkspaceID: workspace})",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/plugin_event_dispatch_test.go:102",
+    "text": "bus.Publish(events.Event{Type: protocol.EventIssueUpdated, WorkspaceID: workspace, Payload: map[string]any{\"title_changed\": true}})",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/plugin_event_dispatch_test.go:104",
+    "text": "bus.Publish(events.Event{Type: protocol.EventIssueUpdated, WorkspaceID: workspace, Payload: map[string]any{\"status_changed\": true}})",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/plugin_event_dispatch_test.go:224",
+    "text": "func (r recordingSink) Dispatch(eventType, _ string, _ any) { r(eventType) }",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/plugin_event_dispatch_test.go:292",
+    "text": "bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/issue_wakeup_test.go:47",
+    "text": "func wakeDispatch(t *testing.T, s *IssueWakeupService, w db.IssueWakeup) {",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/issue_wakeup_test.go:101",
+    "text": "wakeDispatch(t, s, w)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/issue_wakeup_test.go:102",
+    "text": "wakeDispatch(t, s, w)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/issue_wakeup_test.go:117",
+    "text": "wakeDispatch(t, s, w)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/issue_wakeup_test.go:122",
+    "text": "wakeDispatch(t, s, w)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/issue_wakeup_test.go:141",
+    "text": "wakeDispatch(t, s, w)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/issue_wakeup_test.go:162",
+    "text": "wakeDispatch(t, s, w)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/issue_wakeup_test.go:175",
+    "text": "wakeDispatch(t, s, w)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/issue_wakeup_test.go:184",
+    "text": "wakeDispatch(t, s, w)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/issue_wakeup_test.go:186",
+    "text": "wakeDispatch(t, s, w)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/issue_wakeup_test.go:230",
+    "text": "wakeDispatch(t, s, w)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/issue_wakeup_test.go:231",
+    "text": "wakeDispatch(t, s, w)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/issue_wakeup_test.go:248",
+    "text": "wakeDispatch(t, s, updated)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/issue_wakeup_test.go:271",
+    "text": "wakeDispatch(t, s, w)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/issue_wakeup_test.go:296",
+    "text": "wakeDispatch(t, s, w)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/runtime_unusable_notice.go:51",
+    "text": "s.Bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/chat_wakeup.go:274",
+    "text": "locked, err := qtx.LockChatSessionForEnqueue(ctx, session.ID)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/chat_wakeup.go:736",
+    "text": "prepared, err := s.Tasks.PrepareChatTaskEnqueue(ctx, w.AgentID, w.RequesterID)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/chat_wakeup.go:796",
+    "text": "s.Tasks.finalizeChatWakeupEnqueue(ctx, task)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/chat_wakeup.go:956",
+    "text": "s.Tasks.Bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/issue_wakeup.go:804",
+    "text": "lim.beforeDispatch(w)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/issue_wakeup.go:848",
+    "text": "if touchErr := s.Tasks.Queries.TouchWakeupDispatch(outcomeCtx, w.ID); touchErr != nil && ctx.Err() == nil {",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/issue_wakeup_activity.go:115",
+    "text": "s.Tasks.Bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/chat_quick_actions.go:285",
+    "text": "s.Bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/private_project_background_runs_test.go:94",
+    "text": "wakeDispatch(t, s, w)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/private_project_background_runs_test.go:127",
+    "text": "wakeDispatch(t, s, w)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/private_project_background_runs_test.go:171",
+    "text": "wakeDispatch(t, s, w)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/admission_mul4525_test.go:134",
+    "text": "if reason, _, skip := svc.shouldSkipDispatch(ctx, ap, util.MustParseUUID(ownerID), pgtype.UUID{}); skip {",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/admission_mul4525_test.go:147",
+    "text": "reason, code, skip := svc.shouldSkipDispatch(ctx, ap, pgtype.UUID{}, pgtype.UUID{})",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/autopilot.go:209",
+    "text": "if reason, _, skip := s.shouldSkipDispatch(ctx, autopilot, pgtype.UUID{}, triggerID); skip {",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/autopilot.go:593",
+    "text": "if reason, code, skip := s.shouldSkipDispatch(ctx, autopilot, actorUserID, triggerID); skip {",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/autopilot.go:695",
+    "text": "s.Bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/autopilot.go:902",
+    "text": "s.Bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/autopilot.go:1224",
+    "text": "if !ok && issueAwaitsAgentDispatch(issue) {",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/autopilot.go:1511",
+    "text": "func issueAwaitsAgentDispatch(issue db.Issue) bool {",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/autopilot.go:1614",
+    "text": "func (s *AutopilotService) shouldSkipDispatch(ctx context.Context, ap db.Autopilot, actorUserID, triggerID pgtype.UUID) (string, dispatch.ReasonCode, bool) {",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/autopilot.go:1851",
+    "text": "s.Bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/plugin_event_bridge.go:26",
+    "text": "Dispatch(eventType, workspaceID string, payload any)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/plugin_event_bridge.go:47",
+    "text": "dispatcher.Dispatch(pluginEvent, e.WorkspaceID, e.Payload)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/plugin_event_bridge.go:63",
+    "text": "dispatcher.Dispatch(plugincontract.EventIssueUpdated, e.WorkspaceID, e.Payload)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/plugin_event_bridge.go:66",
+    "text": "dispatcher.Dispatch(plugincontract.EventIssueStatusChanged, e.WorkspaceID, e.Payload)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/task.go:1826",
+    "text": "if _, err := qtx.LockAgentForTaskEnqueue(ctx, parent.AgentID); err != nil {",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/task.go:1933",
+    "text": "func (s *TaskService) PrepareChatTaskEnqueue(",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/task.go:2011",
+    "text": "prepared, err := s.PrepareChatTaskEnqueue(ctx, chatSession.AgentID, initiatorUserID)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/task.go:2034",
+    "text": "s.FinalizeChatTaskEnqueue(ctx, task)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/task.go:2071",
+    "text": "currentSession, err := qtx.LockChatSessionForEnqueue(ctx, chatSession.ID)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/task.go:2214",
+    "text": "func (s *TaskService) FinalizeChatTaskEnqueue(ctx context.Context, task db.AgentTaskQueue) {",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/task.go:2902",
+    "text": "s.Bus.Publish(e)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/task.go:3719",
+    "text": "s.Bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/task.go:3896",
+    "text": "s.broadcastTaskDispatch(ctx, *claimed)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/task.go:5492",
+    "text": "_, cerr := qtx.LockAgentForTaskEnqueue(ctx, t.AgentID)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/task.go:6002",
+    "text": "_, err = qtx.LockAgentForTaskEnqueue(ctx, parent.AgentID)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/task.go:6932",
+    "text": "s.Bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/task.go:7086",
+    "text": "s.Bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/task.go:7348",
+    "text": "s.Bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/task.go:7376",
+    "text": "s.Bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/task.go:7768",
+    "text": "func (s *TaskService) broadcastTaskDispatch(ctx context.Context, task db.AgentTaskQueue) {",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/task.go:7788",
+    "text": "s.Bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/task.go:7833",
+    "text": "s.Bus.Publish(taskEvent(eventType, workspaceID, task, extra...))",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/task.go:8011",
+    "text": "s.Bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/task.go:8038",
+    "text": "s.Bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/task.go:8125",
+    "text": "s.Bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/task.go:8172",
+    "text": "s.Bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/issue_wakeup_capacity_test.go:26",
+    "text": "wakeDispatch(t, s, first)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/issue_wakeup_capacity_test.go:120",
+    "text": "wakeDispatch(t, s, w)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/issue_wakeup_capacity_test.go:290",
+    "text": "wakeDispatch(t, s, w)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/task_channel_seal_race_test.go:95",
+    "text": "func TestEnqueueChatTaskSealsMessageWhenReplyCommitsDuringEnqueue(t *testing.T) {",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/task_complete_race_test.go:183",
+    "text": "func TestProviderNetworkRetrySchedule(t *testing.T) {",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/issue_wakeup_actor_test.go:21",
+    "text": "wakeDispatch(t, s, w)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/issue_wakeup_actor_test.go:30",
+    "text": "wakeDispatch(t, s, w)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/issue_wakeup_actor_test.go:167",
+    "text": "wakeDispatch(t, s, w)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/cron_test.go:172",
+    "text": "if _, _, err := parseCronSchedule(expr, \"UTC\"); err == nil {",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/cron_test.go:208",
+    "text": "if _, _, err := parseCronSchedule(expr, \"UTC\"); err == nil {",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/task_channel_media_race_test.go:288",
+    "text": "func TestEnqueueChatTaskDefersWhenMediaMessageCommitsDuringEnqueue(t *testing.T) {",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/chat_wakeup_dispatch.go:36",
+    "text": "session, err := qtx.LockChatSessionForEnqueue(ctx, w.ChatSessionID)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/chat_wakeup_dispatch.go:149",
+    "text": "func (s *TaskService) finalizeChatWakeupEnqueue(ctx context.Context, task db.AgentTaskQueue) {",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/issue_wakeup_review_test.go:42",
+    "text": "wakeDispatch(t, s, w)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/issue_wakeup_review_test.go:49",
+    "text": "wakeDispatch(t, s, w)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/issue_wakeup_review_test.go:56",
+    "text": "wakeDispatch(t, s, w)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/issue_wakeup_review_test.go:79",
+    "text": "wakeDispatch(t, s, w)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/issue_wakeup_review_test.go:86",
+    "text": "wakeDispatch(t, s, w)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/issue_wakeup_review_test.go:102",
+    "text": "wakeDispatch(t, s, w)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/issue_wakeup_condition_test.go:34",
+    "text": "wakeDispatch(t, s, w)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/cron.go:27",
+    "text": "sched, loc, err := parseCronSchedule(cronExpr, timezone)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/cron.go:44",
+    "text": "sched, loc, err := parseCronSchedule(cronExpr, timezone)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/cron.go:72",
+    "text": "sched, loc, err := parseCronSchedule(cronExpr, timezone)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/cron.go:120",
+    "text": "func parseCronSchedule(cronExpr, timezone string) (cron.Schedule, *time.Location, error) {",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/issue_wakeup_workflow_test.go:29",
+    "text": "wakeDispatch(t, s, w)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/issue_wakeup_workflow_test.go:114",
+    "text": "wakeDispatch(t, s, w)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/issue_wakeup_collaboration_test.go:99",
+    "text": "wakeDispatch(t, s, w)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/plugin_event_dispatch.go:148",
+    "text": "func (d *PluginEventDispatcher) Dispatch(eventType, workspaceID string, payload any) {",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/plugin_schedule.go:51",
+    "text": "if _, err := queries.CreatePluginHookSchedule(ctx, db.CreatePluginHookScheduleParams{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/plugin_schedule.go:80",
+    "text": "if err := queries.DeletePluginHookSchedule(ctx, orphan.ID); err != nil {",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/plugin_schedule.go:123",
+    "text": "if _, err := queries.ReactivatePluginHookSchedule(ctx, db.ReactivatePluginHookScheduleParams{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/issue_wakeup_instruction_test.go:58",
+    "text": "wakeDispatch(t, s, after)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/issue_wakeup_instruction_test.go:92",
+    "text": "wakeDispatch(t, s, w)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/issue_wakeup_lock_order_test.go:41",
+    "text": "wakeDispatch(t, s, w)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/issue_wakeup_lock_order_test.go:55",
+    "text": "wakeDispatch(t, s, w)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/task_archive_cancel_test.go:194",
+    "text": "func TestCancelTasksForArchivedAgentCommitFailureDoesNotPublish(t *testing.T) {",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/issue_wakeup_enable_test.go:82",
+    "text": "wakeDispatch(t, s, restored)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/issue_channel_media_test.go:381",
+    "text": "func TestCreateIssuePropertiesAreVisibleAtCommitBeforeEnqueue(t *testing.T) {",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/issue_wakeup_squad_test.go:57",
+    "text": "wakeDispatch(t, s, w)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/runtime_health_gate_test.go:189",
+    "text": "resetStaleDispatch()",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/runtime_health_gate_test.go:213",
+    "text": "resetStaleDispatch()",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/issue_wakeup_evidence_test.go:62",
+    "text": "wakeDispatch(t, s, w)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/issue_wakeup_evidence_test.go:64",
+    "text": "wakeDispatch(t, s, w)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/issue_wakeup_expiry_test.go:56",
+    "text": "wakeDispatch(t, s, w)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/issue_wakeup_expiry_test.go:72",
+    "text": "wakeDispatch(t, s, w)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/issue_wakeup_expiry_test.go:73",
+    "text": "wakeDispatch(t, s, w)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/issue_wakeup_expiry_test.go:115",
+    "text": "wakeDispatch(t, s, w)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/issue_wakeup_expiry_test.go:138",
+    "text": "wakeDispatch(t, s, w)",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/issue.go:800",
+    "text": "s.Bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/issue.go:844",
+    "text": "s.Bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/service/issue.go:867",
+    "text": "s.Bus.Publish(events.Event{",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/events/bus_test.go:19",
+    "text": "bus.Publish(Event{Type: \"test:event\", Payload: \"hello\"})",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/events/bus_test.go:34",
+    "text": "bus.Publish(Event{Type: \"type:b\"})",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/events/bus_test.go:52",
+    "text": "bus.Publish(Event{Type: \"test:panic\"})",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/events/bus_test.go:67",
+    "text": "bus.Publish(Event{Type: \"issue:created\"})",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/events/bus_test.go:68",
+    "text": "bus.Publish(Event{Type: \"comment:deleted\"})",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/events/bus_test.go:69",
+    "text": "bus.Publish(Event{Type: \"skill:updated\"})",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/events/bus_test.go:90",
+    "text": "bus.Publish(Event{Type: \"issue:created\"})",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/events/bus_test.go:108",
+    "text": "bus.Publish(Event{Type: \"test\"})",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/internal/events/bus.go:94",
+    "text": "func (b *Bus) Publish(e Event) {",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/pkg/plugincontract/manifest.go:673",
+    "text": "if err := validateHookSchedule(field+\".schedule\", *hook.Schedule); err != nil {",
+    "review": "unresolved"
+  },
+  {
+    "source": "server/go/pkg/plugincontract/manifest.go:710",
+    "text": "func validateHookSchedule(field string, schedule HookSchedule) error {",
+    "review": "unresolved"
+  }
+]
