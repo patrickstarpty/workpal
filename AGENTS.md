@@ -6,6 +6,7 @@ The active application in `apps/web/` uses the copied Workpal React frontend wit
 - Keep prototype, research and simulation labels out of the product interface. Describe backend limitations honestly in delivery notes; do not invent agent outputs or measured results.
 - Actual model execution and production integrations are out of scope. Unsupported backend operations must fail explicitly.
 - Treat user input as text. Do not execute skill installation commands.
+- Distinguish FDS (Functional Design Specification: behavior and acceptance) from TDS (Technical Design Specification: implementation design). Show separate document activities in FDS-before-TDS order; persist both complete documents in SQLite.
 - Persist displayed business data and complete deliverable/attachment contents in SQLite so copying the database restores them on another machine. Do not rely on machine-local file paths for document delivery. Static UI text and styles may remain in code.
 - Preserve keyboard access, narrow-screen layouts, SQLite records and archived local review notes.
 - Verify active app changes with `npm run check`. Browser tests use Playwright when available; no real model calls.

@@ -20,7 +20,7 @@ try:
    iid=f'workflow-work-{number:02d}';cid='smart-activity-v1-'+iid+'-'+suffix
    comment=repo.get_record(s,wid,'comments',cid)
    if not comment:raise RuntimeError('Missing origin '+cid)
-   filename=f'TDS-SMART-{number}.docx';data=(ROOT/'apps/web/public/delivery/tds'/filename).read_bytes();aid=f'smart-tds-v1-{number}';url='/delivery/tds/'+filename
+   filename=f'FDS-SMART-{number}.docx';data=(ROOT/'apps/web/public/delivery/fds'/filename).read_bytes();aid=f'smart-tds-v1-{number}';url='/delivery/fds/'+filename
    existing=repo.get_record(s,wid,'attachments',aid)
    if existing:
     if existing.get('sha256')!=hashlib.sha256(data).hexdigest():raise RuntimeError('Existing revision changed')
@@ -30,6 +30,6 @@ try:
     comment['attachments']=[*comment.get('attachments',[]),attachment]
     repo.put_record(s,wid,'comments',comment)
    result.append({'ticket':f'SMART-{number}','activity_id':cid,'run_id':comment.get('source_task_id'),'attachment_id':aid,'filename':filename,'sha256':hashlib.sha256(data).hexdigest()})
- (ROOT/'docs/handoffs/smart-tds-publication.json').write_text(json.dumps(result,indent=2)+'\n')
+ (ROOT/'docs/handoffs/smart-fds-publication.json').write_text(json.dumps(result,indent=2)+'\n')
  print(json.dumps({'attached':len(result),'backup':backup}))
 finally:db.close()

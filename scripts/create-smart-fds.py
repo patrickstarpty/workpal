@@ -1,8 +1,8 @@
-"""Create user-requested sample TDS documents for SMART design activities."""
+"""Create user-requested sample FDS documents for SMART design activities."""
 from pathlib import Path
 from docx import Document
 from docx.shared import Inches,Pt,RGBColor
-OUT=Path('apps/web/public/delivery/tds');OUT.mkdir(parents=True,exist_ok=True)
+OUT=Path('apps/web/public/delivery/fds');OUT.mkdir(parents=True,exist_ok=True)
 DESIGNS={
 2:('Ticket relationship navigation','Connect related tickets without losing workspace context.', ['Open the relationship picker from the ticket toolbar. Focus the search input and show the source ticket identifier.','Search only tickets accessible in the active workspace. Display identifier, title and relationship type for each match.','Select a result and confirm once. Reject self-links and duplicate relationships. Keep the dialog open when saving fails.','Render the saved relationship as an identifiable link. Allow keyboard-accessible removal and preserve a return path to the source ticket.'], ['Search pending: show a loading status without discarding the query.','No matches: show No matching tickets and retain editable search text.','Access revoked: hide private content, reject the save and explain that the ticket is unavailable.']),
 8:('Upload recovery interactions','Help users recover interrupted uploads with clear actions and preserved context.', ['Show filename, confirmed progress and Cancel during upload.','On connection loss show Upload interrupted with Retry upload and Cancel. Offer Resume only when the backend confirms continuation support.','On expired authorization show Sign in to continue. Revalidate access before retrying.','When local bytes are unavailable ask the user to select the file again. Validate identity before continuing a previous transfer.','Cancellation invalidates queued retries and ignores late progress or completion callbacks.'], ['Interrupted: retain the filename and last confirmed progress.','Authorization required: never loop automatic retries.','File unavailable: Choose file opens the native picker; Cancel keeps the upload cancelled.','Completed: replace recovery controls with an attachment link only after durable server acknowledgement.']),
@@ -16,7 +16,7 @@ for number,(title,purpose,requirements,states) in DESIGNS.items():
  normal=d.styles['Normal'];normal.font.name='Arial';normal.font.size=Pt(10);normal.paragraph_format.space_after=Pt(7)
  for name in ('Title','Heading 1','Heading 2'):d.styles[name].font.name='Arial';d.styles[name].font.color.rgb=RGBColor(0,0,0)
  sec.header.paragraphs[0].text='WORKPAL  /  FUNCTIONAL DESIGN'
- d.add_heading(title,0);d.add_paragraph(f'TDS-SMART-{number}   |   Version 1.0   |   22 November 2026')
+ d.add_heading(title,0);d.add_paragraph(f'FDS-SMART-{number}   |   Version 1.0   |   22 November 2026')
  d.add_heading('Purpose and scope',1);d.add_paragraph(purpose)
  d.add_paragraph('Audience: product, design, engineering and QA. This specification defines the user-facing behavior and the acceptance cases for the ticket.')
  d.add_heading('Functional behavior',1)
@@ -31,7 +31,7 @@ for number,(title,purpose,requirements,states) in DESIGNS.items():
  d.add_heading('Acceptance cases',1)
  for r in ['Complete the main flow using only the keyboard and verify the persisted outcome.','Exercise each error state above and verify that the corresponding recovery action is available.','Cancel an in-progress interaction and verify that no late callback applies an unwanted change.','Repeat the flow at 390 px and verify that labels, content and actions remain accessible.','Check a workspace switch or revoked access and verify that private ticket content is not leaked.']:d.add_paragraph(r,style='List Bullet')
  d.add_heading('Handoff',1);d.add_paragraph(f'Ticket: SMART-{number}. Engineering uses FR identifiers to reference implementation work. QA records expected and actual outcomes for each acceptance case. Review comments and revised document versions remain on the originating Activity.')
- sec.footer.paragraphs[0].text=f'Workpal  |  TDS-SMART-{number}  |  1.0'
+ sec.footer.paragraphs[0].text=f'Workpal  |  FDS-SMART-{number}  |  1.0'
  d.core_properties.title=title;d.core_properties.subject=f'SMART-{number} functional design';d.core_properties.comments='User-authorized sample design document for product demonstration; not evidence of real execution or acceptance.'
- d.save(OUT/f'TDS-SMART-{number}.docx')
- print(OUT/f'TDS-SMART-{number}.docx')
+ d.save(OUT/f'FDS-SMART-{number}.docx')
+ print(OUT/f'FDS-SMART-{number}.docx')
