@@ -1,9 +1,10 @@
 """Authenticated local workspace content, without execution or integrations."""
 from datetime import datetime, timezone
 import json
+import base64
 import math
 from uuid import uuid4
-from urllib.parse import urlencode
+from urllib.parse import urlencode, quote
 
 from fastapi import APIRouter, Depends, HTTPException, Request
 from fastapi.responses import JSONResponse, Response
@@ -535,6 +536,11 @@ def attachment_detail(attachment_id: str, request: Request, operation: str = 'me
             return attachment
         if operation in ('content', 'download'):
             content = required_record(session, workspace['id'], 'attachment_contents', attachment_id)
+            if content.get('encoding') == 'base64':
+                return Response(base64.b64decode(content['data'], validate=True),
+                    media_type=attachment.get('content_type', 'application/octet-stream'),
+                    headers={'Content-Disposition': "attachment; filename*=UTF-8''" + quote(attachment.get('filename', 'document'), safe=''),
+                             'X-Content-Type-Options': 'nosniff', 'Cache-Control': 'private, no-store'})
             return Response(content['text'], media_type='text/plain', headers={
                 'X-Original-Content-Type': attachment.get('content_type', 'text/plain'),
                 'X-Content-Type-Options': 'nosniff', 'Cache-Control': 'private, no-store',
