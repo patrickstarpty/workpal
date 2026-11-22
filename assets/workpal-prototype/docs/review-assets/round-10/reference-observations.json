@@ -1,0 +1,1840 @@
+[
+  {
+    "route": "projects",
+    "errors": [],
+    "failure": false,
+    "text": "T\nWork\nTeam\nChat\nAuto\nP\nWork\nInbox\n\nNo notifications\n\nViews\nAll issues\nMy work\nWorking\nSubscribed\nSnoozed\nAll views\n5\nProjects\nNo project\nTAP\n29\nDeveloper Platform\n25\nSkill Hub\n30\nAll 3 projects\nAll projects\nName\nStatus\nPriority\nProgress\nLead\nDue date\nRecent activity\nCreated\n📁\nDeveloper Platform\nIn Progress\nNo priority\n67/92\nP\nPatrick\n—\nToday\nToday\n📁\nSkill Hub\nIn Progress\nNo priority\n61/91\nP\nPatrick\n—\nToday\nToday\n📁\nTAP\nIn Progress\nNo priority\n70/99\nP\nPatrick\n—\nToday\nToday\nAsk Multica",
+    "requests": [
+      {
+        "url": "/api/agents?workspace_id=review-workspace&include_archived=true",
+        "body": {}
+      },
+      {
+        "url": "/api/runtimes?workspace_id=review-workspace",
+        "body": {}
+      },
+      {
+        "url": "/api/agent-task-snapshot",
+        "body": {}
+      },
+      {
+        "url": "/api/squads",
+        "body": {}
+      },
+      {
+        "url": "/api/invitations",
+        "body": {}
+      },
+      {
+        "url": "/api/inbox/unread-summary",
+        "body": {}
+      },
+      {
+        "url": "/api/inbox/snoozed",
+        "body": {}
+      },
+      {
+        "url": "/api/chat/sessions?status=all",
+        "body": {}
+      },
+      {
+        "url": "/api/workspaces/review-workspace/members",
+        "body": {}
+      },
+      {
+        "url": "/api/issue-statuses?include_archived=true",
+        "body": {}
+      },
+      {
+        "url": "/api/issue-view-preferences?scope_type=sidebar_projects",
+        "body": {}
+      },
+      {
+        "url": "/api/working-agents?type=issue",
+        "body": {}
+      },
+      {
+        "url": "/api/issue-views?scope_type=all",
+        "body": {}
+      },
+      {
+        "url": "/api/issue-view-preferences?scope_type=sidebar",
+        "body": {}
+      },
+      {
+        "url": "/api/pins?include=view",
+        "body": {}
+      },
+      {
+        "url": "/api/inbox",
+        "body": {}
+      },
+      {
+        "url": "/api/issue-view-preferences?scope_type=projects_page",
+        "body": {}
+      },
+      {
+        "url": "/api/chat/pending-tasks",
+        "body": {}
+      },
+      {
+        "url": "/api/config",
+        "body": {}
+      },
+      {
+        "url": "/api/me",
+        "body": {}
+      },
+      {
+        "url": "/api/agents?workspace_id=review-workspace&include_archived=true",
+        "body": {}
+      },
+      {
+        "url": "/api/workspaces/review-workspace/members",
+        "body": {}
+      },
+      {
+        "url": "/api/squads",
+        "body": {}
+      },
+      {
+        "url": "/api/projects?include_archived=true",
+        "body": {}
+      },
+      {
+        "url": "/api/runtimes?workspace_id=review-workspace",
+        "body": {}
+      },
+      {
+        "url": "/api/agent-task-snapshot",
+        "body": {}
+      },
+      {
+        "url": "/api/working-agents?type=issue",
+        "body": {}
+      },
+      {
+        "url": "/api/chat/sessions?status=all",
+        "body": {}
+      },
+      {
+        "url": "/api/chat/pending-tasks",
+        "body": {}
+      },
+      {
+        "url": "/api/issue-statuses?include_archived=true",
+        "body": {}
+      },
+      {
+        "url": "/api/issue-views?scope_type=all",
+        "body": {}
+      },
+      {
+        "url": "/api/issue-view-preferences?scope_type=sidebar",
+        "body": {}
+      },
+      {
+        "url": "/api/issue-view-preferences?scope_type=sidebar_projects",
+        "body": {}
+      },
+      {
+        "url": "/api/issue-view-preferences?scope_type=projects_page",
+        "body": {}
+      },
+      {
+        "url": "/api/invitations",
+        "body": {}
+      },
+      {
+        "url": "/api/workspaces",
+        "body": {}
+      },
+      {
+        "url": "/api/inbox/snoozed",
+        "body": {}
+      },
+      {
+        "url": "/api/inbox",
+        "body": {}
+      },
+      {
+        "url": "/api/inbox/unread-summary",
+        "body": {}
+      },
+      {
+        "url": "/api/issues/table/facets",
+        "body": {
+          "query": {
+            "scope": {
+              "kind": "workspace"
+            },
+            "filters": {
+              "statuses": [],
+              "include_sub_issues": true
+            },
+            "sort": {
+              "field": "position",
+              "direction": "asc"
+            }
+          },
+          "facets": [
+            {
+              "kind": "project"
+            }
+          ],
+          "include_total": false
+        }
+      },
+      {
+        "url": "/api/agent-run-counts",
+        "body": {}
+      },
+      {
+        "url": "/api/agent-activity-30d",
+        "body": {}
+      },
+      {
+        "url": "/api/skills",
+        "body": {}
+      },
+      {
+        "url": "/api/autopilots",
+        "body": {}
+      }
+    ]
+  },
+  {
+    "route": "agents",
+    "errors": [],
+    "failure": false,
+    "text": "T\nWork\nTeam\nChat\nAuto\nP\nTeam\nAgents\nAll agents\n4\nMy agents\n4\nSquads & members\nSquads\n3\nP\n1 member\nResources\nSkills\n30\nRuntimes\n0 online\nAnalytics\nMy agents\nAgent\nStatus\nRuntime\nModel\nLast active\nRuns\nArchitecture partner\nYou\nSystem design\nOffline\nCopilot CLI\n—\nNo activity (30d)\n0\nEngineering partner\nYou\nImplementation\nOffline\nCopilot CLI\n—\nNo activity (30d)\n0\nProduct partner\nYou\nProduct definition\nOffline\nCopilot CLI\n—\nNo activity (30d)\n0\nQuality partner\nYou\nVerification\nOffline\nCopilot CLI\n—\nNo activity (30d)\n0\nAsk Multica",
+    "requests": [
+      {
+        "url": "/api/agents?workspace_id=review-workspace&include_archived=true",
+        "body": {}
+      },
+      {
+        "url": "/api/runtimes?workspace_id=review-workspace",
+        "body": {}
+      },
+      {
+        "url": "/api/agent-task-snapshot",
+        "body": {}
+      },
+      {
+        "url": "/api/squads",
+        "body": {}
+      },
+      {
+        "url": "/api/invitations",
+        "body": {}
+      },
+      {
+        "url": "/api/inbox/unread-summary",
+        "body": {}
+      },
+      {
+        "url": "/api/inbox/snoozed",
+        "body": {}
+      },
+      {
+        "url": "/api/chat/sessions?status=all",
+        "body": {}
+      },
+      {
+        "url": "/api/workspaces/review-workspace/members",
+        "body": {}
+      },
+      {
+        "url": "/api/skills",
+        "body": {}
+      },
+      {
+        "url": "/api/agent-run-counts",
+        "body": {}
+      },
+      {
+        "url": "/api/agent-activity-30d",
+        "body": {}
+      },
+      {
+        "url": "/api/chat/pending-tasks",
+        "body": {}
+      },
+      {
+        "url": "/api/config",
+        "body": {}
+      },
+      {
+        "url": "/api/me",
+        "body": {}
+      },
+      {
+        "url": "/api/agents?workspace_id=review-workspace&include_archived=true",
+        "body": {}
+      },
+      {
+        "url": "/api/workspaces/review-workspace/members",
+        "body": {}
+      },
+      {
+        "url": "/api/squads",
+        "body": {}
+      },
+      {
+        "url": "/api/skills",
+        "body": {}
+      },
+      {
+        "url": "/api/runtimes?workspace_id=review-workspace",
+        "body": {}
+      },
+      {
+        "url": "/api/agent-task-snapshot",
+        "body": {}
+      },
+      {
+        "url": "/api/agent-activity-30d",
+        "body": {}
+      },
+      {
+        "url": "/api/agent-run-counts",
+        "body": {}
+      },
+      {
+        "url": "/api/chat/sessions?status=all",
+        "body": {}
+      },
+      {
+        "url": "/api/chat/pending-tasks",
+        "body": {}
+      },
+      {
+        "url": "/api/invitations",
+        "body": {}
+      },
+      {
+        "url": "/api/workspaces",
+        "body": {}
+      },
+      {
+        "url": "/api/inbox/snoozed",
+        "body": {}
+      },
+      {
+        "url": "/api/inbox/unread-summary",
+        "body": {}
+      },
+      {
+        "url": "/api/autopilots",
+        "body": {}
+      },
+      {
+        "url": "/api/projects?include_archived=true",
+        "body": {}
+      },
+      {
+        "url": "/api/pins?include=view",
+        "body": {}
+      }
+    ]
+  },
+  {
+    "route": "skills",
+    "errors": [],
+    "failure": false,
+    "text": "T\nWork\nTeam\nChat\nAuto\nP\nTeam\nAgents\nAll agents\n4\nMy agents\n4\nSquads & members\nSquads\n3\nP\n1 member\nResources\nSkills\n30\nRuntimes\n0 online\nAnalytics\nAll skills\nName\nUsed by\nAdded by\nUpdated\nBrainstorming\nClarify constraints and acceptance criteria before implementation.\nProduct partner\nPA\nPatrick\n13h ago\nWriting Plans\nBreak an approved design into small, verifiable engineering tasks.\nArchitecture partner\nPA\nPatrick\n13h ago\nTest-driven Development\nDrive implementation from a failing test to a verified behavior.\nEngineering partner\nPA\nPatrick\n13h ago\nWebapp Testing\nCheck browser workflows with repeatable tests and screenshots.\nQuality partner\nPA\nPatrick\n13h ago\nFrontend Design\nDesign a distinctive interface around a specific product context.\nEngineering partner\nPA\nPatrick\n13h ago\nWeb Design Guidelines\nReview interaction quality and accessibility in a web interface.\nQuality partner\nPA\nPatrick\n13h ago\nVerification Before Completion\nCollect fresh evidence before marking a task complete.\nArchitecture partner\nPA\nPatrick\n13h ago\nSkill Creator\nTurn a repeated practice into a skill with a test case.\nProduct partner\nPA\nPatrick\n13h ago\nFind Skills\nDiscover skills by the task you want an agent to complete.\n— unused\nPA\nPatrick\n13h ago\nAgent Browser\nDrive browser interactions from an agent workflow.\n— unused\nPA\nPatrick\n13h ago\nReact Best Practices\nReview React and Next.js performance patterns during implementation.\n— unused\nPA\nPatrick\n13h ago\nImpeccable\nRefine interface typography, layout and interaction design.\n— unused\nPA\nPatrick\n13h ago\nCitation Audit\nCheck quoted passages, document permissions and deep-link anchors.\nPA\nPatrick\n13h ago\nUpload Recovery\nImplement resumable uploads with deduplication and safe cancellation.\nPA\nPatrick\n13h ago\nRetrieval Tuning\nTune title boosts and access filters using representative query cases.\nPA\nPatrick\n13h ago\nConversation State\nPreserve drafts, pagination and navigation state across conversations.\nPA\nPatrick\n13h ago\nRepository Onboarding\nMap branches, packages and webhook permissions before connecting a repository.\nPA\nPatrick\n13h ago\nPipeline Triage\nSeparate flaky tests, runner failures and reproducible build errors.\nPA\nPatrick\n13h ago\nAccess Review\nReview permission changes, credential expiry and least-privilege boundaries.\nPA\nPatrick\n13h ago\nRelease Readiness\nAssemble rollback steps, dependency gates and the approved commit scope.\nPA\nPatrick\n13h ago\nSkill Discovery\nFind reusable skills by task intent and assess their source and scope.\nPA\nPatrick\n13h ago\nSkill Versioning\nCompare releases, pin versions and prepare rollback-compatible updates.\nPA\nPatrick\n13h ago\nSkill Review\nReview skill instructions, attribution and installation commands before publication.\nPA\nPatrick\n13h ago\nCollection Governance\nDefine collection ownership, visibility and team access rules.\nPA\nPatrick\n13h ago\nTicket Refinement\nTurn a product request into scoped tickets and observable acceptance criteria.\nProduct partner\nPA\nPatrick\n13h ago\nDependency Mapping\nIdentify release blockers and record cross-ticket dependencies.\nArchitecture partner\nPA\nPatrick\n13h ago\nCommit Attribution\nLink commits to tickets and record Workpal co-authorship consistently.\nEngineering partner\nPA\nPatrick\n13h ago\nReview Handoff\nPackage change references, acceptance evidence and unresolved questions.\nQuality partner\nPA\nPatrick\n13h ago\nRollback Planning\nDefine rollback triggers, data compatibility and recovery checkpoints.\nEngineering partner\nPA\nPatrick\n13h ago\nIncident Learning\nExtract reusable practices from failures and human interventions.\nProduct partner\nPA\nPatrick\n13h ago\nAsk Multica",
+    "requests": [
+      {
+        "url": "/api/agents?workspace_id=review-workspace&include_archived=true",
+        "body": {}
+      },
+      {
+        "url": "/api/runtimes?workspace_id=review-workspace",
+        "body": {}
+      },
+      {
+        "url": "/api/agent-task-snapshot",
+        "body": {}
+      },
+      {
+        "url": "/api/squads",
+        "body": {}
+      },
+      {
+        "url": "/api/invitations",
+        "body": {}
+      },
+      {
+        "url": "/api/inbox/unread-summary",
+        "body": {}
+      },
+      {
+        "url": "/api/inbox/snoozed",
+        "body": {}
+      },
+      {
+        "url": "/api/chat/sessions?status=all",
+        "body": {}
+      },
+      {
+        "url": "/api/workspaces/review-workspace/members",
+        "body": {}
+      },
+      {
+        "url": "/api/skills",
+        "body": {}
+      },
+      {
+        "url": "/api/labels?resource_type=skill",
+        "body": {}
+      },
+      {
+        "url": "/api/chat/pending-tasks",
+        "body": {}
+      },
+      {
+        "url": "/api/config",
+        "body": {}
+      },
+      {
+        "url": "/api/me",
+        "body": {}
+      },
+      {
+        "url": "/api/agents?workspace_id=review-workspace&include_archived=true",
+        "body": {}
+      },
+      {
+        "url": "/api/workspaces/review-workspace/members",
+        "body": {}
+      },
+      {
+        "url": "/api/squads",
+        "body": {}
+      },
+      {
+        "url": "/api/skills",
+        "body": {}
+      },
+      {
+        "url": "/api/runtimes?workspace_id=review-workspace",
+        "body": {}
+      },
+      {
+        "url": "/api/agent-task-snapshot",
+        "body": {}
+      },
+      {
+        "url": "/api/chat/sessions?status=all",
+        "body": {}
+      },
+      {
+        "url": "/api/chat/pending-tasks",
+        "body": {}
+      },
+      {
+        "url": "/api/labels?resource_type=skill",
+        "body": {}
+      },
+      {
+        "url": "/api/invitations",
+        "body": {}
+      },
+      {
+        "url": "/api/workspaces",
+        "body": {}
+      },
+      {
+        "url": "/api/inbox/snoozed",
+        "body": {}
+      },
+      {
+        "url": "/api/inbox/unread-summary",
+        "body": {}
+      },
+      {
+        "url": "/api/agent-run-counts",
+        "body": {}
+      },
+      {
+        "url": "/api/agent-activity-30d",
+        "body": {}
+      },
+      {
+        "url": "/api/autopilots",
+        "body": {}
+      },
+      {
+        "url": "/api/projects?include_archived=true",
+        "body": {}
+      },
+      {
+        "url": "/api/pins?include=view",
+        "body": {}
+      }
+    ]
+  },
+  {
+    "route": "issues",
+    "errors": [],
+    "failure": false,
+    "text": "T\nWork\nTeam\nChat\nAuto\nP\nWork\nInbox\n\nNo notifications\n\nViews\nAll issues\nMy work\nWorking\nSubscribed\nSnoozed\nAll views\n5\nProjects\nNo project\nTAP\n29\nDeveloper Platform\n25\nSkill Hub\n30\nAll 3 projects\nAll issues\nBacklog\n13\n\nTAP-030\n\nDefine acceptance criteria for test design\n\n📁\nTAP\nProduct partner\nUpdated 13h ago\n\nTAP-031\n\nReview conversational context boundaries\n\n📁\nTAP\nArchitecture partner\nUpdated 13h ago\n\nSKILL-1064\n\nKeep filters when returning from a skill detail\n\n📁\nSkill Hub\nP\nNov 18\n\nSKILL-1067\n\nHandle an unavailable upstream skill\n\n📁\nSkill Hub\nP\nNov 21\n\nSKILL-1075\n\nRecord who approved a version change\n\n📁\nSkill Hub\nNov 22\n\nSKILL-1077\n\nMigrate legacy unversioned installations\n\n📁\nSkill Hub\nNov 24\n\nSKILL-1079\n\nRequire an example input for skill submissions\n\n📁\nSkill Hub\nNov 17\n\nSKILL-1082\n\nFlag installation commands for manual inspection\n\n📁\nSkill Hub\nNov 20\n\nSKILL-1085\n\nShare a collection with a team\n\n📁\nSkill Hub\nP\nNov 17\n\nSKILL-1086\n\nKeep private skills out of public collections\n\n📁\nSkill Hub\nP\nNov 18\n\nSKILL-1087\n\nReorder skills with keyboard controls\n\n📁\nSkill Hub\nNov 19\n\nSKILL-1088\n\nTransfer collection ownership\n\n📁\nSkill Hub\nNov 20\n\nSKILL-1089\n\nExplain why a shared skill is unavailable\n\n📁\nSkill Hub\nP\nNov 21\nTodo\n16\n\nTAP-034\n\nApprove the next rollout cohort\n\n📁\nTAP\nP\nPatrick\nUpdated 13h ago\n\nTAP-1001\n\nKeep page anchors stable after PDF re-indexing\n\n📁\nTAP\nP\nNov 17\n\nTAP-1006\n\nSupport two sources for the same claim\n\n📁\nTAP\nNov 22\n\nTAP-1009\n\nResume multipart uploads after a network drop\n\n📁\nTAP\nNov 17\n\nDEV-1034\n\nRecover from an expired installation token\n\n📁\nDeveloper Platform\nNov 19\n\nDEV-1037\n\nShow repository permission changes\n\n📁\nDeveloper Platform\nNov 22\n\nDEV-1043\n\nSeparate flaky tests from deterministic failures\n\n📁\nDeveloper Platform\nP\nNov 21\n\nDEV-1045\n\nLimit parallel jobs per repository\n\n📁\nDeveloper Platform\nNov 23\n\nDEV-1051\n\nAudit changes to environment permissions\n\n📁\nDeveloper Platform\nNov 20\n\nDEV-1058\n\nKeep release approvals attached to the reviewed SHA\n\n📁\nDeveloper Platform\nNov 20\n\nSKILL-1065\n\nRank exact skill names above keyword matches\n\n📁\nSkill Hub\nNov 19\n\nSKILL-1068\n\nDeduplicate skills published from repository forks\n\n📁\nSkill Hub\nNov 22\n\nSKILL-1073\n\nDetect removed files in an upstream release\n\n📁\nSkill Hub\nNov 20\n\nSKILL-1074\n\nPrevent concurrent updates to the same skill\n\n📁\nSkill Hub\nNov 21\n\nSKILL-1081\n\nKeep reviewer comments across revisions\n\n📁\nSkill Hub\nNov 19\n\nSKILL-1083\n\nBlock publishing until review is resolved\n\n📁\nSkill Hub\nP\nNov 21\nIn Progress\n39\n\nTAP-029\n\nTest document upload edge cases\n\n📁\nTAP\nEngineering partner\nUpdated 13h ago\n\nTAP-032\n\nReview the Knowledge Chat rollout\n\n📁\nTAP\nTAP delivery\nUpdated 13h ago\n\nINIT-1000\n\nCitation navigation release\n\n📁\nTAP\nTAP delivery\nUpdated 13h ago\n\nTAP-1004\n\nRestore focus after closing the source drawer\n\n📁\nTAP\nNov 20\n\nINIT-1008\n\nDocument ingestion release\n\n📁\nTAP\nTAP delivery\nUpdated 13h ago\n\nTAP-1013\n\nRetry parsing without creating a second document\n\n📁\nTAP\nP\nNov 21\n\nTAP-1014\n\nShow actionable errors for password-protected PDFs\n\n📁\nTAP\nNov 22\n\nINIT-1018\n\nSearch relevance release\n\n📁\nTAP\nTAP delivery\nUpdated 13h ago\nIn Review\n10\n\nTAP-028\n\nTrace sources in Knowledge Chat\n\n📁\nTAP\nQuality partner\nUpdated 13h ago\n\nTAP-1017\n\nCancel queued OCR jobs when a document is deleted\n\n📁\nTAP\nNov 25\n\nTAP-1022\n\nTune score thresholds for short queries\n\n📁\nTAP\nNov 20\n\nDEV-1032\n\nDetect the default branch during repository setup\n\n📁\nDeveloper Platform\nNov 17\n\nDEV-1035\n\nIndex monorepo package boundaries\n\n📁\nDeveloper Platform\nNov 20\n\nDEV-1040\n\nReuse dependency caches across pull requests\n\n📁\nDeveloper Platform\nP\nNov 18\n\nDEV-1052\n\nBlock deployments when approval has expired\n\n📁\nDeveloper Platform\nNov 21\n\nDEV-1053\n\nRotate the shared staging credential\n\n📁\nDeveloper Platform\nNov 22\n\nSKILL-1072\n\nRetain the previous version for rollback\n\n📁\nSkill Hub\nNov 19\n\nSKILL-1090\n\nRestore accidentally removed collection items\n\n📁\nSkill Hub\nP\nNov 22\nBlocked\n6\n\nTAP-033\n\nConfirm recovery after interrupted upload\n\n📁\nTAP\nEngineering partner\nUpdated 13h ago\n\nTAP-1020\n\nExclude archived documents from retrieval\n\n📁\nTAP\nNov 18\n\nTAP-1023\n\nKeep selected filters after opening a result\n\n📁\nTAP\nNov 21\n\nTAP-1026\n\nRestore drafts after switching conversations\n\n📁\nTAP\nNov 17\n\nDEV-1044\n\nKeep build logs after a runner disconnect\n\n📁\nDeveloper Platform\nP\nNov 22\n\nDEV-1056\n\nRequire rollback instructions before approval\n\n📁\nDeveloper Platform\nNov 18\nDone\n198\n\nTAP-027\n\nClarify knowledge search states\n\n📁\nTAP\nEngineering partner\nUpdated 13h ago\n\nTAP-1002\n\nScroll to the quoted paragraph from a citation\n\n📁\nTAP\nP\nNov 18\n\nTAP-1003\n\nShow deleted-source warnings in older answers\n\n📁\nTAP\nP\nNov 19\n\nTAP-1005\n\nFix citation numbers after streaming reconnect\n\n📁\nTAP\nP\nNov 21\n\nTAP-1007\n\nRetain source access checks when sharing a conversation\n\n📁\nTAP\nNov 23\n\nTAP-1010\n\nSkip duplicate files using content hashes\n\n📁\nTAP\nNov 18\n\nTAP-1011\n\nMove scanned PDFs to the OCR queue\n\n📁\nTAP\nP\nNov 19\nNo more\nAsk Multica",
+    "requests": [
+      {
+        "url": "/api/agents?workspace_id=review-workspace&include_archived=true",
+        "body": {}
+      },
+      {
+        "url": "/api/runtimes?workspace_id=review-workspace",
+        "body": {}
+      },
+      {
+        "url": "/api/agent-task-snapshot",
+        "body": {}
+      },
+      {
+        "url": "/api/squads",
+        "body": {}
+      },
+      {
+        "url": "/api/invitations",
+        "body": {}
+      },
+      {
+        "url": "/api/inbox/unread-summary",
+        "body": {}
+      },
+      {
+        "url": "/api/inbox/snoozed",
+        "body": {}
+      },
+      {
+        "url": "/api/chat/sessions?status=all",
+        "body": {}
+      },
+      {
+        "url": "/api/workspaces/review-workspace/members",
+        "body": {}
+      },
+      {
+        "url": "/api/issue-statuses?include_archived=true",
+        "body": {}
+      },
+      {
+        "url": "/api/issue-view-preferences?scope_type=sidebar_projects",
+        "body": {}
+      },
+      {
+        "url": "/api/working-agents?type=issue",
+        "body": {}
+      },
+      {
+        "url": "/api/issue-views?scope_type=all",
+        "body": {}
+      },
+      {
+        "url": "/api/issue-view-preferences?scope_type=sidebar",
+        "body": {}
+      },
+      {
+        "url": "/api/pins?include=view",
+        "body": {}
+      },
+      {
+        "url": "/api/inbox",
+        "body": {}
+      },
+      {
+        "url": "/api/properties",
+        "body": {}
+      },
+      {
+        "url": "/api/issue-views?scope_type=workspace",
+        "body": {}
+      },
+      {
+        "url": "/api/issue-wakeup-summaries",
+        "body": {}
+      },
+      {
+        "url": "/api/issue-workflows",
+        "body": {}
+      },
+      {
+        "url": "/api/issues/table/facets",
+        "body": {
+          "query": {
+            "scope": {
+              "kind": "workspace"
+            },
+            "filters": {
+              "include_sub_issues": true
+            },
+            "sort": {
+              "field": "updated_at",
+              "direction": "desc"
+            }
+          },
+          "facets": [
+            {
+              "kind": "status"
+            }
+          ],
+          "include_total": true
+        }
+      },
+      {
+        "url": "/api/issues/table/facets",
+        "body": {
+          "query": {
+            "scope": {
+              "kind": "workspace"
+            },
+            "filters": {
+              "include_sub_issues": true
+            },
+            "sort": {
+              "field": "updated_at",
+              "direction": "desc"
+            }
+          },
+          "facets": [
+            {
+              "kind": "working_agents"
+            }
+          ],
+          "include_total": false
+        }
+      },
+      {
+        "url": "/api/issues/child-progress",
+        "body": {}
+      },
+      {
+        "url": "/api/chat/pending-tasks",
+        "body": {}
+      },
+      {
+        "url": "/api/config",
+        "body": {}
+      },
+      {
+        "url": "/api/me",
+        "body": {}
+      },
+      {
+        "url": "/api/issues/table/facets",
+        "body": {
+          "query": {
+            "scope": {
+              "kind": "workspace"
+            },
+            "filters": {
+              "include_sub_issues": true
+            },
+            "sort": {
+              "field": "updated_at",
+              "direction": "desc"
+            }
+          },
+          "facets": [
+            {
+              "kind": "status"
+            }
+          ],
+          "include_total": true
+        }
+      },
+      {
+        "url": "/api/issues/table/facets",
+        "body": {
+          "query": {
+            "scope": {
+              "kind": "workspace"
+            },
+            "filters": {
+              "include_sub_issues": true
+            },
+            "sort": {
+              "field": "updated_at",
+              "direction": "desc"
+            }
+          },
+          "facets": [
+            {
+              "kind": "working_agents"
+            }
+          ],
+          "include_total": false
+        }
+      },
+      {
+        "url": "/api/issues/child-progress",
+        "body": {}
+      },
+      {
+        "url": "/api/agents?workspace_id=review-workspace&include_archived=true",
+        "body": {}
+      },
+      {
+        "url": "/api/workspaces/review-workspace/members",
+        "body": {}
+      },
+      {
+        "url": "/api/squads",
+        "body": {}
+      },
+      {
+        "url": "/api/projects?include_archived=true",
+        "body": {}
+      },
+      {
+        "url": "/api/runtimes?workspace_id=review-workspace",
+        "body": {}
+      },
+      {
+        "url": "/api/agent-task-snapshot",
+        "body": {}
+      },
+      {
+        "url": "/api/working-agents?type=issue",
+        "body": {}
+      },
+      {
+        "url": "/api/chat/sessions?status=all",
+        "body": {}
+      },
+      {
+        "url": "/api/chat/pending-tasks",
+        "body": {}
+      },
+      {
+        "url": "/api/properties",
+        "body": {}
+      },
+      {
+        "url": "/api/issue-statuses?include_archived=true",
+        "body": {}
+      },
+      {
+        "url": "/api/issue-workflows",
+        "body": {}
+      },
+      {
+        "url": "/api/issue-views?scope_type=all",
+        "body": {}
+      },
+      {
+        "url": "/api/issue-views?scope_type=workspace",
+        "body": {}
+      },
+      {
+        "url": "/api/issue-view-preferences?scope_type=sidebar",
+        "body": {}
+      },
+      {
+        "url": "/api/issue-view-preferences?scope_type=sidebar_projects",
+        "body": {}
+      },
+      {
+        "url": "/api/invitations",
+        "body": {}
+      },
+      {
+        "url": "/api/workspaces",
+        "body": {}
+      },
+      {
+        "url": "/api/issues/table/rows",
+        "body": {
+          "query": {
+            "scope": {
+              "kind": "workspace"
+            },
+            "filters": {
+              "include_sub_issues": true
+            },
+            "sort": {
+              "field": "updated_at",
+              "direction": "desc"
+            }
+          },
+          "group": {
+            "kind": "status"
+          },
+          "group_key": "status:backlog",
+          "hierarchy": {
+            "enabled": false
+          },
+          "parent_id": null,
+          "page": {
+            "limit": 50,
+            "cursor": null
+          }
+        }
+      },
+      {
+        "url": "/api/issues/table/rows",
+        "body": {
+          "query": {
+            "scope": {
+              "kind": "workspace"
+            },
+            "filters": {
+              "include_sub_issues": true
+            },
+            "sort": {
+              "field": "updated_at",
+              "direction": "desc"
+            }
+          },
+          "group": {
+            "kind": "status"
+          },
+          "group_key": "status:todo",
+          "hierarchy": {
+            "enabled": false
+          },
+          "parent_id": null,
+          "page": {
+            "limit": 50,
+            "cursor": null
+          }
+        }
+      },
+      {
+        "url": "/api/issues/table/rows",
+        "body": {
+          "query": {
+            "scope": {
+              "kind": "workspace"
+            },
+            "filters": {
+              "include_sub_issues": true
+            },
+            "sort": {
+              "field": "updated_at",
+              "direction": "desc"
+            }
+          },
+          "group": {
+            "kind": "status"
+          },
+          "group_key": "status:in_progress",
+          "hierarchy": {
+            "enabled": false
+          },
+          "parent_id": null,
+          "page": {
+            "limit": 50,
+            "cursor": null
+          }
+        }
+      },
+      {
+        "url": "/api/issues/table/rows",
+        "body": {
+          "query": {
+            "scope": {
+              "kind": "workspace"
+            },
+            "filters": {
+              "include_sub_issues": true
+            },
+            "sort": {
+              "field": "updated_at",
+              "direction": "desc"
+            }
+          },
+          "group": {
+            "kind": "status"
+          },
+          "group_key": "status:in_review",
+          "hierarchy": {
+            "enabled": false
+          },
+          "parent_id": null,
+          "page": {
+            "limit": 50,
+            "cursor": null
+          }
+        }
+      },
+      {
+        "url": "/api/issues/table/rows",
+        "body": {
+          "query": {
+            "scope": {
+              "kind": "workspace"
+            },
+            "filters": {
+              "include_sub_issues": true
+            },
+            "sort": {
+              "field": "updated_at",
+              "direction": "desc"
+            }
+          },
+          "group": {
+            "kind": "status"
+          },
+          "group_key": "status:blocked",
+          "hierarchy": {
+            "enabled": false
+          },
+          "parent_id": null,
+          "page": {
+            "limit": 50,
+            "cursor": null
+          }
+        }
+      },
+      {
+        "url": "/api/issues/table/rows",
+        "body": {
+          "query": {
+            "scope": {
+              "kind": "workspace"
+            },
+            "filters": {
+              "include_sub_issues": true
+            },
+            "sort": {
+              "field": "updated_at",
+              "direction": "desc"
+            }
+          },
+          "group": {
+            "kind": "status"
+          },
+          "group_key": "status:done",
+          "hierarchy": {
+            "enabled": false
+          },
+          "parent_id": null,
+          "page": {
+            "limit": 50,
+            "cursor": null
+          }
+        }
+      },
+      {
+        "url": "/api/inbox/snoozed",
+        "body": {}
+      },
+      {
+        "url": "/api/inbox",
+        "body": {}
+      },
+      {
+        "url": "/api/inbox/unread-summary",
+        "body": {}
+      },
+      {
+        "url": "/api/issues/table/facets",
+        "body": {
+          "query": {
+            "scope": {
+              "kind": "workspace"
+            },
+            "filters": {
+              "statuses": [],
+              "include_sub_issues": true
+            },
+            "sort": {
+              "field": "position",
+              "direction": "asc"
+            }
+          },
+          "facets": [
+            {
+              "kind": "project"
+            }
+          ],
+          "include_total": false
+        }
+      },
+      {
+        "url": "/api/labels?resource_type=issue",
+        "body": {}
+      },
+      {
+        "url": "/api/issue-wakeup-paused",
+        "body": {}
+      },
+      {
+        "url": "/api/agent-run-counts",
+        "body": {}
+      },
+      {
+        "url": "/api/agent-activity-30d",
+        "body": {}
+      },
+      {
+        "url": "/api/skills",
+        "body": {}
+      },
+      {
+        "url": "/api/autopilots",
+        "body": {}
+      }
+    ]
+  },
+  {
+    "route": "squads",
+    "errors": [],
+    "failure": false,
+    "text": "T\nWork\nTeam\nChat\nAuto\nP\nTeam\nAgents\nAll agents\n4\nMy agents\n4\nSquads & members\nSquads\n3\nP\n1 member\nResources\nSkills\n30\nRuntimes\n0 online\nAnalytics\nMy squads\nSquad\nLeader\nMembers\nCreated by\nDeveloper Platform delivery\nCoordinate developer experience.\nEngineering partner\n+2\nP\nPatrick\nSkill Hub delivery\nCoordinate reusable skills.\nEngineering partner\n+2\nP\nPatrick\nTAP delivery\nCoordinate TAP delivery and the release decision.\nEngineering partner\n+2\nP\nPatrick\nAsk Multica",
+    "requests": [
+      {
+        "url": "/api/agents?workspace_id=review-workspace&include_archived=true",
+        "body": {}
+      },
+      {
+        "url": "/api/runtimes?workspace_id=review-workspace",
+        "body": {}
+      },
+      {
+        "url": "/api/agent-task-snapshot",
+        "body": {}
+      },
+      {
+        "url": "/api/squads",
+        "body": {}
+      },
+      {
+        "url": "/api/invitations",
+        "body": {}
+      },
+      {
+        "url": "/api/inbox/unread-summary",
+        "body": {}
+      },
+      {
+        "url": "/api/inbox/snoozed",
+        "body": {}
+      },
+      {
+        "url": "/api/chat/sessions?status=all",
+        "body": {}
+      },
+      {
+        "url": "/api/workspaces/review-workspace/members",
+        "body": {}
+      },
+      {
+        "url": "/api/skills",
+        "body": {}
+      },
+      {
+        "url": "/api/chat/pending-tasks",
+        "body": {}
+      },
+      {
+        "url": "/api/config",
+        "body": {}
+      },
+      {
+        "url": "/api/me",
+        "body": {}
+      },
+      {
+        "url": "/api/agents?workspace_id=review-workspace&include_archived=true",
+        "body": {}
+      },
+      {
+        "url": "/api/workspaces/review-workspace/members",
+        "body": {}
+      },
+      {
+        "url": "/api/squads",
+        "body": {}
+      },
+      {
+        "url": "/api/skills",
+        "body": {}
+      },
+      {
+        "url": "/api/runtimes?workspace_id=review-workspace",
+        "body": {}
+      },
+      {
+        "url": "/api/agent-task-snapshot",
+        "body": {}
+      },
+      {
+        "url": "/api/chat/sessions?status=all",
+        "body": {}
+      },
+      {
+        "url": "/api/chat/pending-tasks",
+        "body": {}
+      },
+      {
+        "url": "/api/invitations",
+        "body": {}
+      },
+      {
+        "url": "/api/workspaces",
+        "body": {}
+      },
+      {
+        "url": "/api/inbox/snoozed",
+        "body": {}
+      },
+      {
+        "url": "/api/inbox/unread-summary",
+        "body": {}
+      },
+      {
+        "url": "/api/agent-run-counts",
+        "body": {}
+      },
+      {
+        "url": "/api/agent-activity-30d",
+        "body": {}
+      },
+      {
+        "url": "/api/autopilots",
+        "body": {}
+      },
+      {
+        "url": "/api/projects?include_archived=true",
+        "body": {}
+      },
+      {
+        "url": "/api/pins?include=view",
+        "body": {}
+      }
+    ]
+  },
+  {
+    "route": "autopilots",
+    "errors": [],
+    "failure": false,
+    "text": "T\nWork\nTeam\nChat\nAuto\nP\nAutopilot\nAll autopilots\nIssue wakeups\nFrom a template\nDaily news digest\nPR review reminder\nBug triage\nAll autopilots\nName\nTrigger\nAssignee\nLast run\nNext run\nStatus\nAutopilot\nLet agents start work on their own\n\nSet a schedule or a webhook. Each time it fires, Multica creates an issue for an agent, or runs the agent directly. Pick a template and adjust it.\n\nNew autopilot\nRead the docs\nStart from a template\nDaily news digest\nSearch and summarize today's news for the team\nAt 09:00 · Every day\nPR review reminder\nFlag stale pull requests that need review\nAt 10:00 · Mon–Fri\nBug triage\nAssess and prioritize new bug reports\nAt 09:00 · Mon–Fri\nWeekly progress report\nCompile a weekly summary of team progress\nAt 17:00 · Mon\nDependency audit\nScan for security vulnerabilities and outdated packages\nAt 08:00 · Mon\nDocumentation check\nReview recent changes for documentation gaps\nAt 14:00 · Mon\nAsk Multica",
+    "requests": [
+      {
+        "url": "/api/agents?workspace_id=review-workspace&include_archived=true",
+        "body": {}
+      },
+      {
+        "url": "/api/runtimes?workspace_id=review-workspace",
+        "body": {}
+      },
+      {
+        "url": "/api/agent-task-snapshot",
+        "body": {}
+      },
+      {
+        "url": "/api/squads",
+        "body": {}
+      },
+      {
+        "url": "/api/invitations",
+        "body": {}
+      },
+      {
+        "url": "/api/inbox/unread-summary",
+        "body": {}
+      },
+      {
+        "url": "/api/inbox/snoozed",
+        "body": {}
+      },
+      {
+        "url": "/api/chat/sessions?status=all",
+        "body": {}
+      },
+      {
+        "url": "/api/autopilots",
+        "body": {}
+      },
+      {
+        "url": "/api/issue-wakeups?scope=paused&kind=all&source=&search=&agent_id=&offset=0&limit=1",
+        "body": {}
+      },
+      {
+        "url": "/api/workspaces/review-workspace/members",
+        "body": {}
+      },
+      {
+        "url": "/api/chat/pending-tasks",
+        "body": {}
+      },
+      {
+        "url": "/api/config",
+        "body": {}
+      },
+      {
+        "url": "/api/me",
+        "body": {}
+      },
+      {
+        "url": "/api/agents?workspace_id=review-workspace&include_archived=true",
+        "body": {}
+      },
+      {
+        "url": "/api/workspaces/review-workspace/members",
+        "body": {}
+      },
+      {
+        "url": "/api/squads",
+        "body": {}
+      },
+      {
+        "url": "/api/runtimes?workspace_id=review-workspace",
+        "body": {}
+      },
+      {
+        "url": "/api/autopilots",
+        "body": {}
+      },
+      {
+        "url": "/api/agent-task-snapshot",
+        "body": {}
+      },
+      {
+        "url": "/api/chat/sessions?status=all",
+        "body": {}
+      },
+      {
+        "url": "/api/chat/pending-tasks",
+        "body": {}
+      },
+      {
+        "url": "/api/invitations",
+        "body": {}
+      },
+      {
+        "url": "/api/workspaces",
+        "body": {}
+      },
+      {
+        "url": "/api/inbox/snoozed",
+        "body": {}
+      },
+      {
+        "url": "/api/inbox/unread-summary",
+        "body": {}
+      },
+      {
+        "url": "/api/agent-run-counts",
+        "body": {}
+      },
+      {
+        "url": "/api/agent-activity-30d",
+        "body": {}
+      },
+      {
+        "url": "/api/skills",
+        "body": {}
+      },
+      {
+        "url": "/api/projects?include_archived=true",
+        "body": {}
+      },
+      {
+        "url": "/api/pins?include=view",
+        "body": {}
+      }
+    ]
+  },
+  {
+    "route": "inbox",
+    "errors": [],
+    "failure": false,
+    "text": "T\nWork\nTeam\nChat\nAuto\nP\nWork\nInbox\n\nNo notifications\n\nViews\nAll issues\nMy work\nWorking\nSubscribed\nSnoozed\nAll views\n5\nProjects\nNo project\nTAP\n29\nDeveloper Platform\n25\nSkill Hub\n30\nAll 3 projects\nInbox\n\nYour inbox is empty\n\nAsk Multica",
+    "requests": [
+      {
+        "url": "/api/agents?workspace_id=review-workspace&include_archived=true",
+        "body": {}
+      },
+      {
+        "url": "/api/runtimes?workspace_id=review-workspace",
+        "body": {}
+      },
+      {
+        "url": "/api/agent-task-snapshot",
+        "body": {}
+      },
+      {
+        "url": "/api/squads",
+        "body": {}
+      },
+      {
+        "url": "/api/invitations",
+        "body": {}
+      },
+      {
+        "url": "/api/inbox/unread-summary",
+        "body": {}
+      },
+      {
+        "url": "/api/inbox/snoozed",
+        "body": {}
+      },
+      {
+        "url": "/api/chat/sessions?status=all",
+        "body": {}
+      },
+      {
+        "url": "/api/workspaces/review-workspace/members",
+        "body": {}
+      },
+      {
+        "url": "/api/issue-statuses?include_archived=true",
+        "body": {}
+      },
+      {
+        "url": "/api/issue-view-preferences?scope_type=sidebar_projects",
+        "body": {}
+      },
+      {
+        "url": "/api/working-agents?type=issue",
+        "body": {}
+      },
+      {
+        "url": "/api/issue-views?scope_type=all",
+        "body": {}
+      },
+      {
+        "url": "/api/issue-view-preferences?scope_type=sidebar",
+        "body": {}
+      },
+      {
+        "url": "/api/pins?include=view",
+        "body": {}
+      },
+      {
+        "url": "/api/inbox",
+        "body": {}
+      },
+      {
+        "url": "/api/chat/pending-tasks",
+        "body": {}
+      },
+      {
+        "url": "/api/config",
+        "body": {}
+      },
+      {
+        "url": "/api/me",
+        "body": {}
+      },
+      {
+        "url": "/api/agents?workspace_id=review-workspace&include_archived=true",
+        "body": {}
+      },
+      {
+        "url": "/api/workspaces/review-workspace/members",
+        "body": {}
+      },
+      {
+        "url": "/api/squads",
+        "body": {}
+      },
+      {
+        "url": "/api/projects?include_archived=true",
+        "body": {}
+      },
+      {
+        "url": "/api/runtimes?workspace_id=review-workspace",
+        "body": {}
+      },
+      {
+        "url": "/api/agent-task-snapshot",
+        "body": {}
+      },
+      {
+        "url": "/api/working-agents?type=issue",
+        "body": {}
+      },
+      {
+        "url": "/api/chat/sessions?status=all",
+        "body": {}
+      },
+      {
+        "url": "/api/chat/pending-tasks",
+        "body": {}
+      },
+      {
+        "url": "/api/issue-statuses?include_archived=true",
+        "body": {}
+      },
+      {
+        "url": "/api/issue-views?scope_type=all",
+        "body": {}
+      },
+      {
+        "url": "/api/issue-view-preferences?scope_type=sidebar",
+        "body": {}
+      },
+      {
+        "url": "/api/issue-view-preferences?scope_type=sidebar_projects",
+        "body": {}
+      },
+      {
+        "url": "/api/invitations",
+        "body": {}
+      },
+      {
+        "url": "/api/workspaces",
+        "body": {}
+      },
+      {
+        "url": "/api/inbox/snoozed",
+        "body": {}
+      },
+      {
+        "url": "/api/inbox",
+        "body": {}
+      },
+      {
+        "url": "/api/inbox/unread-summary",
+        "body": {}
+      },
+      {
+        "url": "/api/issues/table/facets",
+        "body": {
+          "query": {
+            "scope": {
+              "kind": "workspace"
+            },
+            "filters": {
+              "statuses": [],
+              "include_sub_issues": true
+            },
+            "sort": {
+              "field": "position",
+              "direction": "asc"
+            }
+          },
+          "facets": [
+            {
+              "kind": "project"
+            }
+          ],
+          "include_total": false
+        }
+      },
+      {
+        "url": "/api/agent-run-counts",
+        "body": {}
+      },
+      {
+        "url": "/api/agent-activity-30d",
+        "body": {}
+      },
+      {
+        "url": "/api/skills",
+        "body": {}
+      },
+      {
+        "url": "/api/autopilots",
+        "body": {}
+      }
+    ]
+  },
+  {
+    "route": "chat",
+    "errors": [],
+    "failure": false,
+    "text": "T\nWork\nTeam\nChat\nAuto\nP\nChat\nDEV · Search API rejects the new filter\n08:00 AM\nArchitecture partner\n·\nNo messages yet\nUAT · Upload retry creates a second document\n08:00 AM\nQuality partner\n·\nNo messages yet\nPRD · Knowledge search errors after deployment\n08:00 AM\nEngineering partner\n·\nNo messages yet\n\nPick a conversation, or start a new one with +",
+    "requests": [
+      {
+        "url": "/api/agents?workspace_id=review-workspace&include_archived=true",
+        "body": {}
+      },
+      {
+        "url": "/api/runtimes?workspace_id=review-workspace",
+        "body": {}
+      },
+      {
+        "url": "/api/agent-task-snapshot",
+        "body": {}
+      },
+      {
+        "url": "/api/squads",
+        "body": {}
+      },
+      {
+        "url": "/api/invitations",
+        "body": {}
+      },
+      {
+        "url": "/api/inbox/unread-summary",
+        "body": {}
+      },
+      {
+        "url": "/api/inbox/snoozed",
+        "body": {}
+      },
+      {
+        "url": "/api/chat/sessions?status=all",
+        "body": {}
+      },
+      {
+        "url": "/api/chat/pending-tasks",
+        "body": {}
+      },
+      {
+        "url": "/api/chat/my-wakeups",
+        "body": {}
+      },
+      {
+        "url": "/api/workspaces/review-workspace/members",
+        "body": {}
+      },
+      {
+        "url": "/api/config",
+        "body": {}
+      },
+      {
+        "url": "/api/me",
+        "body": {}
+      },
+      {
+        "url": "/api/agents?workspace_id=review-workspace&include_archived=true",
+        "body": {}
+      },
+      {
+        "url": "/api/workspaces/review-workspace/members",
+        "body": {}
+      },
+      {
+        "url": "/api/squads",
+        "body": {}
+      },
+      {
+        "url": "/api/projects?include_archived=true",
+        "body": {}
+      },
+      {
+        "url": "/api/runtimes?workspace_id=review-workspace",
+        "body": {}
+      },
+      {
+        "url": "/api/agent-task-snapshot",
+        "body": {}
+      },
+      {
+        "url": "/api/chat/sessions?status=all",
+        "body": {}
+      },
+      {
+        "url": "/api/chat/pending-tasks",
+        "body": {}
+      },
+      {
+        "url": "/api/chat/my-wakeups",
+        "body": {}
+      },
+      {
+        "url": "/api/invitations",
+        "body": {}
+      },
+      {
+        "url": "/api/workspaces",
+        "body": {}
+      },
+      {
+        "url": "/api/inbox/snoozed",
+        "body": {}
+      },
+      {
+        "url": "/api/inbox/unread-summary",
+        "body": {}
+      },
+      {
+        "url": "/api/agent-run-counts",
+        "body": {}
+      },
+      {
+        "url": "/api/agent-activity-30d",
+        "body": {}
+      },
+      {
+        "url": "/api/skills",
+        "body": {}
+      },
+      {
+        "url": "/api/autopilots",
+        "body": {}
+      },
+      {
+        "url": "/api/pins?include=view",
+        "body": {}
+      }
+    ]
+  },
+  {
+    "route": "settings",
+    "errors": [],
+    "failure": false,
+    "text": "T\nWork\nTeam\nChat\nAuto\nP\nSettings\nPersonal\nProfile\nPreferences\nAppearance\nNotifications\nShortcuts\nAPI Tokens\nWorkspace\nGeneral\nMembers\nIssues & workflow\nWorkflows\nLabels\nProperties\nQuick Actions\nConnections & extensions\nCode\nMessaging\nMCP servers\nProfile\nAccount · synced\nPersonal information\nAvatar\nClick to upload avatar\nP\nName\nAbout you\nIncluded in every run performed on your behalf.\n0/2000\nAsk Multica",
+    "requests": [
+      {
+        "url": "/api/agents?workspace_id=review-workspace&include_archived=true",
+        "body": {}
+      },
+      {
+        "url": "/api/runtimes?workspace_id=review-workspace",
+        "body": {}
+      },
+      {
+        "url": "/api/agent-task-snapshot",
+        "body": {}
+      },
+      {
+        "url": "/api/squads",
+        "body": {}
+      },
+      {
+        "url": "/api/invitations",
+        "body": {}
+      },
+      {
+        "url": "/api/inbox/unread-summary",
+        "body": {}
+      },
+      {
+        "url": "/api/inbox/snoozed",
+        "body": {}
+      },
+      {
+        "url": "/api/chat/sessions?status=all",
+        "body": {}
+      },
+      {
+        "url": "/api/workspaces/review-workspace/members",
+        "body": {}
+      },
+      {
+        "url": "/api/chat/pending-tasks",
+        "body": {}
+      },
+      {
+        "url": "/api/config",
+        "body": {}
+      },
+      {
+        "url": "/api/me",
+        "body": {}
+      },
+      {
+        "url": "/api/agents?workspace_id=review-workspace&include_archived=true",
+        "body": {}
+      },
+      {
+        "url": "/api/workspaces/review-workspace/members",
+        "body": {}
+      },
+      {
+        "url": "/api/squads",
+        "body": {}
+      },
+      {
+        "url": "/api/runtimes?workspace_id=review-workspace",
+        "body": {}
+      },
+      {
+        "url": "/api/agent-task-snapshot",
+        "body": {}
+      },
+      {
+        "url": "/api/chat/sessions?status=all",
+        "body": {}
+      },
+      {
+        "url": "/api/chat/pending-tasks",
+        "body": {}
+      },
+      {
+        "url": "/api/invitations",
+        "body": {}
+      },
+      {
+        "url": "/api/workspaces",
+        "body": {}
+      },
+      {
+        "url": "/api/inbox/snoozed",
+        "body": {}
+      },
+      {
+        "url": "/api/inbox/unread-summary",
+        "body": {}
+      },
+      {
+        "url": "/api/agent-run-counts",
+        "body": {}
+      },
+      {
+        "url": "/api/agent-activity-30d",
+        "body": {}
+      },
+      {
+        "url": "/api/skills",
+        "body": {}
+      },
+      {
+        "url": "/api/autopilots",
+        "body": {}
+      },
+      {
+        "url": "/api/projects?include_archived=true",
+        "body": {}
+      },
+      {
+        "url": "/api/pins?include=view",
+        "body": {}
+      }
+    ]
+  },
+  {
+    "route": "dashboard",
+    "errors": [],
+    "failure": false,
+    "text": "T\nWork\nTeam\nChat\nAuto\nP\nAnalytics\nUsage\nErrors\nGMT+8 · updated 09:39 PM\n30d\nAll projects\nNo usage yet\n\nOnce agents start running, token usage, cost, and failure rate show up here.\n\nAsk Multica",
+    "requests": [
+      {
+        "url": "/api/agents?workspace_id=review-workspace&include_archived=true",
+        "body": {}
+      },
+      {
+        "url": "/api/runtimes?workspace_id=review-workspace",
+        "body": {}
+      },
+      {
+        "url": "/api/agent-task-snapshot",
+        "body": {}
+      },
+      {
+        "url": "/api/squads",
+        "body": {}
+      },
+      {
+        "url": "/api/invitations",
+        "body": {}
+      },
+      {
+        "url": "/api/inbox/unread-summary",
+        "body": {}
+      },
+      {
+        "url": "/api/inbox/snoozed",
+        "body": {}
+      },
+      {
+        "url": "/api/chat/sessions?status=all",
+        "body": {}
+      },
+      {
+        "url": "/api/dashboard/usage/daily?days=35&tz=Asia%2FShanghai",
+        "body": {}
+      },
+      {
+        "url": "/api/dashboard/usage/by-agent?days=30&tz=Asia%2FShanghai",
+        "body": {}
+      },
+      {
+        "url": "/api/dashboard/agent-runtime?days=30&tz=Asia%2FShanghai",
+        "body": {}
+      },
+      {
+        "url": "/api/dashboard/runtime/daily?days=35&tz=Asia%2FShanghai",
+        "body": {}
+      },
+      {
+        "url": "/api/dashboard/failures/daily?days=35&tz=Asia%2FShanghai",
+        "body": {}
+      },
+      {
+        "url": "/api/dashboard/failures/by-agent?days=30&tz=Asia%2FShanghai",
+        "body": {}
+      },
+      {
+        "url": "/api/chat/pending-tasks",
+        "body": {}
+      },
+      {
+        "url": "/api/config",
+        "body": {}
+      },
+      {
+        "url": "/api/me",
+        "body": {}
+      },
+      {
+        "url": "/api/agents?workspace_id=review-workspace&include_archived=true",
+        "body": {}
+      },
+      {
+        "url": "/api/squads",
+        "body": {}
+      },
+      {
+        "url": "/api/projects?include_archived=true",
+        "body": {}
+      },
+      {
+        "url": "/api/runtimes?workspace_id=review-workspace",
+        "body": {}
+      },
+      {
+        "url": "/api/agent-task-snapshot",
+        "body": {}
+      },
+      {
+        "url": "/api/chat/sessions?status=all",
+        "body": {}
+      },
+      {
+        "url": "/api/chat/pending-tasks",
+        "body": {}
+      },
+      {
+        "url": "/api/invitations",
+        "body": {}
+      },
+      {
+        "url": "/api/workspaces",
+        "body": {}
+      },
+      {
+        "url": "/api/inbox/snoozed",
+        "body": {}
+      },
+      {
+        "url": "/api/inbox/unread-summary",
+        "body": {}
+      },
+      {
+        "url": "/api/workspaces/review-workspace/members",
+        "body": {}
+      },
+      {
+        "url": "/api/agent-run-counts",
+        "body": {}
+      },
+      {
+        "url": "/api/agent-activity-30d",
+        "body": {}
+      },
+      {
+        "url": "/api/skills",
+        "body": {}
+      },
+      {
+        "url": "/api/autopilots",
+        "body": {}
+      },
+      {
+        "url": "/api/pins?include=view",
+        "body": {}
+      }
+    ]
+  }
+]

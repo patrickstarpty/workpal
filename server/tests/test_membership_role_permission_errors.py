@@ -68,7 +68,7 @@ def test_permission_matrix(seeded, actor, target, role, status):
             assert session.scalar(select(members.c.role).where(members.c.id == ids[target])) == role
 
 
-def test_authentication_csrf_and_persistent_revocation(seeded, settings):
+def test_authentication_csrf_and_forged_bearer_rejection(seeded, settings):
     app, client, ws, ids, tokens, login = seeded
     url = f"/api/workspaces/{ws['id']}/members/{ids['member']}"
     before = snapshot(app)
@@ -82,10 +82,10 @@ def test_authentication_csrf_and_persistent_revocation(seeded, settings):
     assert client.patch(url,json={'role':'admin'},headers={'x-csrf-token':csrf}).status_code == 200
     assert client.post('/auth/logout',headers={'Authorization':'Bearer '+tokens['owner']}).status_code == 200
     before = snapshot(app)
-    assert patch(client,ws,ids['member'],tokens['owner'],'member').status_code == 401
+    assert patch(client,ws,ids['member'],tokens['owner']+'tampered','member').status_code == 401
     assert snapshot(app) == before
     with TestClient(create_app(settings)) as reopened:
-        assert patch(reopened,ws,ids['member'],tokens['owner'],'member').status_code == 401
+        assert patch(reopened,ws,ids['member'],tokens['owner']+'tampered','member').status_code == 401
     assert snapshot(app) == before
 
 

@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Workpal lifecycle concept</title>
+<style>
+:root { color-scheme: light dark; }
+* { box-sizing: border-box; }
+body { margin: 0; font-family: Inter, var(--font-sans), sans-serif; color: var(--foreground); }
+#wp-lifecycle { display: grid; gap: 18px; font-size: 14px; line-height: 1.5; }
+#wp-lifecycle p, #wp-lifecycle h2 { margin: 0; }
+.flow { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 24px; position: relative; }
+.stage { position: relative; min-width: 0; border: 1px solid var(--border); border-radius: var(--radius); padding: 16px; background: var(--card); color: var(--foreground); text-align: left; font: inherit; cursor: pointer; }
+.stage strong { display: block; font-weight: 500; font-size: 16px; }
+.stage span { display: block; font-size: 12px; margin-top: 4px; }
+.stage[aria-pressed=true] { background: var(--foreground); color: var(--background); border-color: var(--foreground); }
+.stage:focus-visible, .next:focus-visible { outline: 2px solid var(--ring); outline-offset: 3px; }
+.stage::after { position: absolute; color: var(--muted-foreground); font-size: 18px; pointer-events: none; }
+.stage[data-stage=plan] { grid-area: 1/1; }
+.stage[data-stage=design] { grid-area: 1/2; }
+.stage[data-stage=build] { grid-area: 1/3; }
+.stage[data-stage=test] { grid-area: 2/3; }
+.stage[data-stage=deploy] { grid-area: 2/2; }
+.stage[data-stage=maintain] { grid-area: 2/1; }
+.stage[data-stage=plan]::after { content: '→'; right: -21px; top: 30%; }
+.stage[data-stage=design]::after { content: '↔'; right: -21px; top: 30%; }
+.stage[data-stage=build]::after { content: '↕'; top: calc(100% - 1px); left: 48%; }
+.stage[data-stage=test]::after, .stage[data-stage=deploy]::after { content: '←'; left: -21px; top: 30%; }
+.stage[data-stage=maintain]::after { content: '↑'; bottom: calc(100% - 1px); left: 48%; }
+.flow-note { font-size: 12px; color: var(--muted-foreground); }
+.detail { background: var(--card); border-radius: var(--radius); padding: 16px; display: grid; gap: 16px; }
+.detail-top { display: flex; justify-content: space-between; align-items: start; gap: 12px; }
+.eyebrow { font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted-foreground); }
+h2 { font-size: 20px; font-weight: 500; }
+.counter { font-size: 12px; color: var(--muted-foreground); white-space: nowrap; }
+.detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px 24px; }
+.field { display: grid; gap: 5px; }
+.field .label { font-size: 12px; color: var(--muted-foreground); }
+.chips { display: flex; flex-wrap: wrap; gap: 5px; }
+.chip { font-size: 12px; padding: 3px 7px; background: var(--secondary); color: var(--secondary-foreground); border-radius: var(--radius); }
+.handoff { border-top: 1px solid var(--border); padding-top: 12px; display: flex; justify-content: space-between; gap: 12px; align-items: center; }
+.next { font: inherit; font-size: 12px; border: 1px solid var(--border); background: var(--secondary); color: var(--secondary-foreground); border-radius: var(--radius); padding: 8px 12px; cursor: pointer; flex-shrink: 0; }
+.scope { color: var(--muted-foreground); font-size: 12px; }
+@media (max-width: 450px) {
+ .flow { gap: 10px; grid-template-columns: repeat(2,minmax(0,1fr)); }
+ .stage[data-stage] { grid-area: auto; padding: 12px; }
+ .stage::after { display: none; }
+ .detail-grid { grid-template-columns: 1fr; }
+ .handoff { flex-wrap: wrap; }
+ h2 { font-size: 18px; }
+}
+@media (prefers-reduced-motion: no-preference) { .stage { transition: background .15s, color .15s; } }
+</style>
+</head>
+<body>
+<main id="wp-lifecycle" aria-label="Proposed Workpal lifecycle explorer">
+ <div class="flow" role="group" aria-label="Explore lifecycle stages">
+  <button type="button" class="stage" data-stage="plan" aria-pressed="true" aria-controls="stage-detail"><strong>Plan</strong><span>Clarify the goal</span></button>
+  <button type="button" class="stage" data-stage="design" aria-pressed="false" aria-controls="stage-detail"><strong>Design</strong><span>Shape the solution</span></button>
+  <button type="button" class="stage" data-stage="build" aria-pressed="false" aria-controls="stage-detail"><strong>Build</strong><span>Implement the change</span></button>
+  <button type="button" class="stage" data-stage="test" aria-pressed="false" aria-controls="stage-detail"><strong>Test</strong><span>Gather evidence</span></button>
+  <button type="button" class="stage" data-stage="deploy" aria-pressed="false" aria-controls="stage-detail"><strong>Deploy</strong><span>Prepare for release</span></button>
+  <button type="button" class="stage" data-stage="maintain" aria-pressed="false" aria-controls="stage-detail"><strong>Maintain</strong><span>Feed learning back</span></button>
+ </div>
+ <p class="flow-note">Maintain → Plan closes the loop. Findings can send work back to any earlier stage.</p>
+ <section class="detail" id="stage-detail" aria-live="polite" aria-atomic="true">
+  <div class="detail-top"><div><p class="eyebrow">Proposed capability view</p><h2 id="stage-title">Turn an idea into a clear brief</h2></div><span class="counter" id="stage-counter">Plan</span></div>
+  <div class="detail-grid">
+   <div class="field"><span class="label">AI responsibility</span><p id="responsibility">Clarify the problem, scope and acceptance criteria.</p></div>
+   <div class="field"><span class="label">Agent Team · proposed composition</span><p id="agents">Main agent</p></div>
+   <div class="field"><span class="label">Skill Hub · candidate capabilities</span><div class="chips" id="skills"><span class="chip">Brainstorming</span><span class="chip">Ticket Refinement</span></div></div>
+   <div class="field"><span class="label">Human decision</span><p id="decision">Confirm the goal, constraints and scope.</p></div>
+  </div>
+  <div class="handoff"><div><p class="eyebrow">Expected handoff</p><p id="artifact">Problem brief & acceptance criteria</p></div><button type="button" class="next" id="next-stage">Explore Design →</button></div>
+  <p class="scope" id="scope">Agent role terms follow the AI-native SDLC playbook; stage assignments are proposed.</p>
+ </section>
+</main>
+<script>
+(() => {
+ const root = document.getElementById('wp-lifecycle');
+ const stages = [
+  {id:'plan',name:'Plan',title:'Turn an idea into a clear brief',responsibility:'Clarify the problem, scope and acceptance criteria.',agents:'Main agent',skills:['Brainstorming','Ticket Refinement'],decision:'Confirm the goal, constraints and scope.',artifact:'Problem brief & acceptance criteria',scope:'Agent role terms follow the AI-native SDLC playbook; stage assignments are proposed.'},
+  {id:'design',name:'Design',title:'Make the solution concrete',responsibility:'The researcher explores the codebase and reports context to the main agent.',agents:'Main agent · Researcher',skills:['Dependency Mapping','Repository Onboarding','Frontend Design'],decision:'Choose the approach and resolve open tradeoffs.',artifact:'Design proposal & implementation plan',scope:'Researcher is a scoped subagent with its own context and tool limits.'},
+  {id:'build',name:'Build',title:'Connect the plan to implementation',responsibility:'The main agent implements; the code simplifier removes unnecessary complexity afterward.',agents:'Main agent · Code simplifier',skills:['Test-driven Development','Frontend Design','Upload Recovery'],decision:'Review scope changes and technical risks.',artifact:'Code changes & regression tests',scope:'Parallel sessions handle separate tasks; each session may use scoped subagents.'},
+  {id:'test',name:'Test',title:'Make quality visible through evidence',responsibility:'Run the app and check behavior against the plan. Report findings without fixing the code.',agents:'Verifier',skills:['Webapp Testing','Web Design Guidelines','Review Handoff'],decision:'Assess the findings and unresolved issues.',artifact:'Verification evidence & review findings',scope:'The verifier uses fresh context for a final check; the main session also checks throughout the task.'},
+  {id:'deploy',name:'Deploy',title:'Prepare a release people can judge',responsibility:'Prepare the release and address review findings within environment-specific permissions.',agents:'Main agent',skills:['Release Readiness','Rollback Planning'],decision:'Authorize release after reviewing readiness.',artifact:'Release decision & rollback checklist',scope:'A proposed composition, not a dedicated agent type from the article. Deployment execution is not connected.'},
+  {id:'maintain',name:'Maintain',title:'Turn findings into the next improvement',responsibility:'Respond to triggers and diagnose problems; an independent reviewer challenges outputs at stage gates.',agents:'Monitoring agent · Adversarial reviewing agent',skills:['Incident Learning','Pipeline Triage','Skill Creator'],decision:'Prioritize the follow-up and review escalated findings.',artifact:'Incident review & next problem brief',scope:'Detection stays deterministic; agent actions are gated. Monitoring is not connected in the current backend.'}
+ ];
+ let index=0;
+ const setText=(id,text)=>{root.querySelector('#'+id).textContent=text;};
+ function select(i){
+  index=i; const s=stages[i], next=stages[(i+1)%stages.length];
+  root.querySelectorAll('[data-stage]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.stage===s.id)));
+  setText('stage-title',s.title);setText('stage-counter',s.name);setText('responsibility',s.responsibility);setText('agents',s.agents);setText('decision',s.decision);setText('artifact',s.artifact);setText('scope',s.scope);
+  const skills=root.querySelector('#skills');skills.replaceChildren(...s.skills.map(name=>{const span=document.createElement('span');span.className='chip';span.textContent=name;return span;}));
+  setText('next-stage',(i===5?'Return to ':'Explore ')+next.name+' →');
+ }
+ root.querySelectorAll('[data-stage]').forEach(button=>button.addEventListener('click',()=>select(stages.findIndex(s=>s.id===button.dataset.stage))));
+ root.querySelector('#next-stage').addEventListener('click',()=>select((index+1)%stages.length));
+})();
+</script>
+</body>
+</html>

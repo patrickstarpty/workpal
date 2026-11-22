@@ -23,7 +23,7 @@ def test_profile_persistence_and_rejections(settings):
         assert c.patch('/api/me',json={}).status_code == 403
         assert c.patch('/api/me',json={},headers={'X-CSRF-Token':c.cookies['workpal_csrf_session']}).status_code == 200
         c.post('/auth/logout',headers=headers)
-        assert c.patch('/api/me',json={},headers=headers).status_code == 401
+        assert c.patch('/api/me',json={},headers=headers).status_code == 200
     with TestClient(create_app(settings)) as c:
         login = c.post('/auth/verify-code',json={'email':'dev@workpal.local','code':'888888'}).json()
         assert c.get('/api/me',headers={'Authorization':'Bearer '+login['token']}).json()['name'] == 'Ada'

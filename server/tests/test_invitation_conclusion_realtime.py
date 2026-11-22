@@ -1,3 +1,4 @@
+import json
 import asyncio
 import pytest
 from workpal_backend.realtime.protocol import project_event, ProjectionError
@@ -11,7 +12,7 @@ def test_conclusion_union_and_strict_projection(kind):
     async def exercise():
         class Socket:
             def __init__(self): self.frames = []
-            async def send_json(self, frame): self.frames.append(frame)
+            async def send_text(self, raw): self.frames.append(json.loads(raw))
             async def close(self, code): pass
         sockets = [Socket() for _ in range(5)]
         def denied(): raise PermissionError()
@@ -33,7 +34,7 @@ def test_conclusion_personal_fallback_excludes_bound_source_workspace(kind):
     async def exercise():
         class Socket:
             def __init__(self): self.frames = []
-            async def send_json(self, frame): self.frames.append(frame)
+            async def send_text(self, raw): self.frames.append(json.loads(raw))
             async def close(self, code): pass
         sockets = [Socket() for _ in range(4)]
         connections = [Connection(socket, lambda: None, workspace, 'invitee')

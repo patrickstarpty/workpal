@@ -1,0 +1,4628 @@
+{
+  "scope": "Original Go legacy sweeper, empty local scopes, three scan passes, Redis boundary recorder. TTL modes, repair errors, cursor and observed sets. Does not certify heartbeat, real Redis IO, timeout/cancellation or periodic lifecycle.",
+  "fixtures": [
+    {
+      "Enabled": false,
+      "TTL": -2,
+      "Failure": ""
+    },
+    {
+      "Enabled": false,
+      "TTL": -2,
+      "Failure": "trim"
+    },
+    {
+      "Enabled": false,
+      "TTL": -2,
+      "Failure": "pttl"
+    },
+    {
+      "Enabled": false,
+      "TTL": -2,
+      "Failure": "expire"
+    },
+    {
+      "Enabled": false,
+      "TTL": -2,
+      "Failure": "persist"
+    },
+    {
+      "Enabled": false,
+      "TTL": -2,
+      "Failure": "gone"
+    },
+    {
+      "Enabled": false,
+      "TTL": -2,
+      "Failure": "scan"
+    },
+    {
+      "Enabled": false,
+      "TTL": -1,
+      "Failure": ""
+    },
+    {
+      "Enabled": false,
+      "TTL": -1,
+      "Failure": "trim"
+    },
+    {
+      "Enabled": false,
+      "TTL": -1,
+      "Failure": "pttl"
+    },
+    {
+      "Enabled": false,
+      "TTL": -1,
+      "Failure": "expire"
+    },
+    {
+      "Enabled": false,
+      "TTL": -1,
+      "Failure": "persist"
+    },
+    {
+      "Enabled": false,
+      "TTL": -1,
+      "Failure": "gone"
+    },
+    {
+      "Enabled": false,
+      "TTL": -1,
+      "Failure": "scan"
+    },
+    {
+      "Enabled": false,
+      "TTL": 300,
+      "Failure": ""
+    },
+    {
+      "Enabled": false,
+      "TTL": 300,
+      "Failure": "trim"
+    },
+    {
+      "Enabled": false,
+      "TTL": 300,
+      "Failure": "pttl"
+    },
+    {
+      "Enabled": false,
+      "TTL": 300,
+      "Failure": "expire"
+    },
+    {
+      "Enabled": false,
+      "TTL": 300,
+      "Failure": "persist"
+    },
+    {
+      "Enabled": false,
+      "TTL": 300,
+      "Failure": "gone"
+    },
+    {
+      "Enabled": false,
+      "TTL": 300,
+      "Failure": "scan"
+    },
+    {
+      "Enabled": true,
+      "TTL": -2,
+      "Failure": ""
+    },
+    {
+      "Enabled": true,
+      "TTL": -2,
+      "Failure": "trim"
+    },
+    {
+      "Enabled": true,
+      "TTL": -2,
+      "Failure": "pttl"
+    },
+    {
+      "Enabled": true,
+      "TTL": -2,
+      "Failure": "expire"
+    },
+    {
+      "Enabled": true,
+      "TTL": -2,
+      "Failure": "persist"
+    },
+    {
+      "Enabled": true,
+      "TTL": -2,
+      "Failure": "gone"
+    },
+    {
+      "Enabled": true,
+      "TTL": -2,
+      "Failure": "scan"
+    },
+    {
+      "Enabled": true,
+      "TTL": -1,
+      "Failure": ""
+    },
+    {
+      "Enabled": true,
+      "TTL": -1,
+      "Failure": "trim"
+    },
+    {
+      "Enabled": true,
+      "TTL": -1,
+      "Failure": "pttl"
+    },
+    {
+      "Enabled": true,
+      "TTL": -1,
+      "Failure": "expire"
+    },
+    {
+      "Enabled": true,
+      "TTL": -1,
+      "Failure": "persist"
+    },
+    {
+      "Enabled": true,
+      "TTL": -1,
+      "Failure": "gone"
+    },
+    {
+      "Enabled": true,
+      "TTL": -1,
+      "Failure": "scan"
+    },
+    {
+      "Enabled": true,
+      "TTL": 300,
+      "Failure": ""
+    },
+    {
+      "Enabled": true,
+      "TTL": 300,
+      "Failure": "trim"
+    },
+    {
+      "Enabled": true,
+      "TTL": 300,
+      "Failure": "pttl"
+    },
+    {
+      "Enabled": true,
+      "TTL": 300,
+      "Failure": "expire"
+    },
+    {
+      "Enabled": true,
+      "TTL": 300,
+      "Failure": "persist"
+    },
+    {
+      "Enabled": true,
+      "TTL": 300,
+      "Failure": "gone"
+    },
+    {
+      "Enabled": true,
+      "TTL": 300,
+      "Failure": "scan"
+    }
+  ],
+  "go": [
+    {
+      "calls": [
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "trim",
+          "legacy",
+          "400123-0"
+        ],
+        [
+          "pttl",
+          "legacy"
+        ],
+        [
+          "scan",
+          7,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ]
+      ],
+      "states": [
+        {
+          "cursor": 7,
+          "errors": 0,
+          "trimmed": 2,
+          "without": []
+        },
+        {
+          "cursor": 0,
+          "errors": 0,
+          "trimmed": 2,
+          "without": []
+        },
+        {
+          "cursor": 0,
+          "errors": 0,
+          "trimmed": 2,
+          "without": []
+        }
+      ]
+    },
+    {
+      "calls": [
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "trim",
+          "legacy",
+          "400123-0"
+        ],
+        [
+          "pttl",
+          "legacy"
+        ],
+        [
+          "scan",
+          7,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ]
+      ],
+      "states": [
+        {
+          "cursor": 7,
+          "errors": 1,
+          "trimmed": 0,
+          "without": []
+        },
+        {
+          "cursor": 0,
+          "errors": 1,
+          "trimmed": 0,
+          "without": []
+        },
+        {
+          "cursor": 0,
+          "errors": 1,
+          "trimmed": 0,
+          "without": []
+        }
+      ]
+    },
+    {
+      "calls": [
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "trim",
+          "legacy",
+          "400123-0"
+        ],
+        [
+          "pttl",
+          "legacy"
+        ],
+        [
+          "scan",
+          7,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ]
+      ],
+      "states": [
+        {
+          "cursor": 7,
+          "errors": 1,
+          "trimmed": 2,
+          "without": []
+        },
+        {
+          "cursor": 0,
+          "errors": 1,
+          "trimmed": 2,
+          "without": []
+        },
+        {
+          "cursor": 0,
+          "errors": 1,
+          "trimmed": 2,
+          "without": []
+        }
+      ]
+    },
+    {
+      "calls": [
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "trim",
+          "legacy",
+          "400123-0"
+        ],
+        [
+          "pttl",
+          "legacy"
+        ],
+        [
+          "scan",
+          7,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ]
+      ],
+      "states": [
+        {
+          "cursor": 7,
+          "errors": 0,
+          "trimmed": 2,
+          "without": []
+        },
+        {
+          "cursor": 0,
+          "errors": 0,
+          "trimmed": 2,
+          "without": []
+        },
+        {
+          "cursor": 0,
+          "errors": 0,
+          "trimmed": 2,
+          "without": []
+        }
+      ]
+    },
+    {
+      "calls": [
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "trim",
+          "legacy",
+          "400123-0"
+        ],
+        [
+          "pttl",
+          "legacy"
+        ],
+        [
+          "scan",
+          7,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ]
+      ],
+      "states": [
+        {
+          "cursor": 7,
+          "errors": 0,
+          "trimmed": 2,
+          "without": []
+        },
+        {
+          "cursor": 0,
+          "errors": 0,
+          "trimmed": 2,
+          "without": []
+        },
+        {
+          "cursor": 0,
+          "errors": 0,
+          "trimmed": 2,
+          "without": []
+        }
+      ]
+    },
+    {
+      "calls": [
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "trim",
+          "legacy",
+          "400123-0"
+        ],
+        [
+          "pttl",
+          "legacy"
+        ],
+        [
+          "scan",
+          7,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ]
+      ],
+      "states": [
+        {
+          "cursor": 7,
+          "errors": 0,
+          "trimmed": 2,
+          "without": []
+        },
+        {
+          "cursor": 0,
+          "errors": 0,
+          "trimmed": 2,
+          "without": []
+        },
+        {
+          "cursor": 0,
+          "errors": 0,
+          "trimmed": 2,
+          "without": []
+        }
+      ]
+    },
+    {
+      "calls": [
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "trim",
+          "legacy",
+          "400123-0"
+        ],
+        [
+          "pttl",
+          "legacy"
+        ],
+        [
+          "scan",
+          7,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "scan",
+          7,
+          "ws:scope:*:stream",
+          128
+        ]
+      ],
+      "states": [
+        {
+          "cursor": 7,
+          "errors": 0,
+          "trimmed": 2,
+          "without": []
+        },
+        {
+          "cursor": 7,
+          "errors": 1,
+          "trimmed": 2,
+          "without": []
+        },
+        {
+          "cursor": 0,
+          "errors": 1,
+          "trimmed": 2,
+          "without": []
+        }
+      ]
+    },
+    {
+      "calls": [
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "trim",
+          "legacy",
+          "400123-0"
+        ],
+        [
+          "pttl",
+          "legacy"
+        ],
+        [
+          "scan",
+          7,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ]
+      ],
+      "states": [
+        {
+          "cursor": 7,
+          "errors": 0,
+          "trimmed": 2,
+          "without": []
+        },
+        {
+          "cursor": 0,
+          "errors": 0,
+          "trimmed": 2,
+          "without": []
+        },
+        {
+          "cursor": 0,
+          "errors": 0,
+          "trimmed": 2,
+          "without": []
+        }
+      ]
+    },
+    {
+      "calls": [
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "trim",
+          "legacy",
+          "400123-0"
+        ],
+        [
+          "pttl",
+          "legacy"
+        ],
+        [
+          "scan",
+          7,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ]
+      ],
+      "states": [
+        {
+          "cursor": 7,
+          "errors": 1,
+          "trimmed": 0,
+          "without": []
+        },
+        {
+          "cursor": 0,
+          "errors": 1,
+          "trimmed": 0,
+          "without": []
+        },
+        {
+          "cursor": 0,
+          "errors": 1,
+          "trimmed": 0,
+          "without": []
+        }
+      ]
+    },
+    {
+      "calls": [
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "trim",
+          "legacy",
+          "400123-0"
+        ],
+        [
+          "pttl",
+          "legacy"
+        ],
+        [
+          "scan",
+          7,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ]
+      ],
+      "states": [
+        {
+          "cursor": 7,
+          "errors": 1,
+          "trimmed": 2,
+          "without": []
+        },
+        {
+          "cursor": 0,
+          "errors": 1,
+          "trimmed": 2,
+          "without": []
+        },
+        {
+          "cursor": 0,
+          "errors": 1,
+          "trimmed": 2,
+          "without": []
+        }
+      ]
+    },
+    {
+      "calls": [
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "trim",
+          "legacy",
+          "400123-0"
+        ],
+        [
+          "pttl",
+          "legacy"
+        ],
+        [
+          "scan",
+          7,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ]
+      ],
+      "states": [
+        {
+          "cursor": 7,
+          "errors": 0,
+          "trimmed": 2,
+          "without": []
+        },
+        {
+          "cursor": 0,
+          "errors": 0,
+          "trimmed": 2,
+          "without": []
+        },
+        {
+          "cursor": 0,
+          "errors": 0,
+          "trimmed": 2,
+          "without": []
+        }
+      ]
+    },
+    {
+      "calls": [
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "trim",
+          "legacy",
+          "400123-0"
+        ],
+        [
+          "pttl",
+          "legacy"
+        ],
+        [
+          "scan",
+          7,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ]
+      ],
+      "states": [
+        {
+          "cursor": 7,
+          "errors": 0,
+          "trimmed": 2,
+          "without": []
+        },
+        {
+          "cursor": 0,
+          "errors": 0,
+          "trimmed": 2,
+          "without": []
+        },
+        {
+          "cursor": 0,
+          "errors": 0,
+          "trimmed": 2,
+          "without": []
+        }
+      ]
+    },
+    {
+      "calls": [
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "trim",
+          "legacy",
+          "400123-0"
+        ],
+        [
+          "pttl",
+          "legacy"
+        ],
+        [
+          "scan",
+          7,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ]
+      ],
+      "states": [
+        {
+          "cursor": 7,
+          "errors": 0,
+          "trimmed": 2,
+          "without": []
+        },
+        {
+          "cursor": 0,
+          "errors": 0,
+          "trimmed": 2,
+          "without": []
+        },
+        {
+          "cursor": 0,
+          "errors": 0,
+          "trimmed": 2,
+          "without": []
+        }
+      ]
+    },
+    {
+      "calls": [
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "trim",
+          "legacy",
+          "400123-0"
+        ],
+        [
+          "pttl",
+          "legacy"
+        ],
+        [
+          "scan",
+          7,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "scan",
+          7,
+          "ws:scope:*:stream",
+          128
+        ]
+      ],
+      "states": [
+        {
+          "cursor": 7,
+          "errors": 0,
+          "trimmed": 2,
+          "without": []
+        },
+        {
+          "cursor": 7,
+          "errors": 1,
+          "trimmed": 2,
+          "without": []
+        },
+        {
+          "cursor": 0,
+          "errors": 1,
+          "trimmed": 2,
+          "without": []
+        }
+      ]
+    },
+    {
+      "calls": [
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "trim",
+          "legacy",
+          "400123-0"
+        ],
+        [
+          "pttl",
+          "legacy"
+        ],
+        [
+          "persist",
+          "legacy"
+        ],
+        [
+          "scan",
+          7,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ]
+      ],
+      "states": [
+        {
+          "cursor": 7,
+          "errors": 0,
+          "trimmed": 2,
+          "without": []
+        },
+        {
+          "cursor": 0,
+          "errors": 0,
+          "trimmed": 2,
+          "without": []
+        },
+        {
+          "cursor": 0,
+          "errors": 0,
+          "trimmed": 2,
+          "without": []
+        }
+      ]
+    },
+    {
+      "calls": [
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "trim",
+          "legacy",
+          "400123-0"
+        ],
+        [
+          "pttl",
+          "legacy"
+        ],
+        [
+          "persist",
+          "legacy"
+        ],
+        [
+          "scan",
+          7,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ]
+      ],
+      "states": [
+        {
+          "cursor": 7,
+          "errors": 1,
+          "trimmed": 0,
+          "without": []
+        },
+        {
+          "cursor": 0,
+          "errors": 1,
+          "trimmed": 0,
+          "without": []
+        },
+        {
+          "cursor": 0,
+          "errors": 1,
+          "trimmed": 0,
+          "without": []
+        }
+      ]
+    },
+    {
+      "calls": [
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "trim",
+          "legacy",
+          "400123-0"
+        ],
+        [
+          "pttl",
+          "legacy"
+        ],
+        [
+          "scan",
+          7,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ]
+      ],
+      "states": [
+        {
+          "cursor": 7,
+          "errors": 1,
+          "trimmed": 2,
+          "without": []
+        },
+        {
+          "cursor": 0,
+          "errors": 1,
+          "trimmed": 2,
+          "without": []
+        },
+        {
+          "cursor": 0,
+          "errors": 1,
+          "trimmed": 2,
+          "without": []
+        }
+      ]
+    },
+    {
+      "calls": [
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "trim",
+          "legacy",
+          "400123-0"
+        ],
+        [
+          "pttl",
+          "legacy"
+        ],
+        [
+          "persist",
+          "legacy"
+        ],
+        [
+          "scan",
+          7,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ]
+      ],
+      "states": [
+        {
+          "cursor": 7,
+          "errors": 0,
+          "trimmed": 2,
+          "without": []
+        },
+        {
+          "cursor": 0,
+          "errors": 0,
+          "trimmed": 2,
+          "without": []
+        },
+        {
+          "cursor": 0,
+          "errors": 0,
+          "trimmed": 2,
+          "without": []
+        }
+      ]
+    },
+    {
+      "calls": [
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "trim",
+          "legacy",
+          "400123-0"
+        ],
+        [
+          "pttl",
+          "legacy"
+        ],
+        [
+          "persist",
+          "legacy"
+        ],
+        [
+          "scan",
+          7,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ]
+      ],
+      "states": [
+        {
+          "cursor": 7,
+          "errors": 1,
+          "trimmed": 2,
+          "without": []
+        },
+        {
+          "cursor": 0,
+          "errors": 1,
+          "trimmed": 2,
+          "without": []
+        },
+        {
+          "cursor": 0,
+          "errors": 1,
+          "trimmed": 2,
+          "without": []
+        }
+      ]
+    },
+    {
+      "calls": [
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "trim",
+          "legacy",
+          "400123-0"
+        ],
+        [
+          "pttl",
+          "legacy"
+        ],
+        [
+          "persist",
+          "legacy"
+        ],
+        [
+          "scan",
+          7,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ]
+      ],
+      "states": [
+        {
+          "cursor": 7,
+          "errors": 0,
+          "trimmed": 2,
+          "without": []
+        },
+        {
+          "cursor": 0,
+          "errors": 0,
+          "trimmed": 2,
+          "without": []
+        },
+        {
+          "cursor": 0,
+          "errors": 0,
+          "trimmed": 2,
+          "without": []
+        }
+      ]
+    },
+    {
+      "calls": [
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "trim",
+          "legacy",
+          "400123-0"
+        ],
+        [
+          "pttl",
+          "legacy"
+        ],
+        [
+          "persist",
+          "legacy"
+        ],
+        [
+          "scan",
+          7,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "scan",
+          7,
+          "ws:scope:*:stream",
+          128
+        ]
+      ],
+      "states": [
+        {
+          "cursor": 7,
+          "errors": 0,
+          "trimmed": 2,
+          "without": []
+        },
+        {
+          "cursor": 7,
+          "errors": 1,
+          "trimmed": 2,
+          "without": []
+        },
+        {
+          "cursor": 0,
+          "errors": 1,
+          "trimmed": 2,
+          "without": []
+        }
+      ]
+    },
+    {
+      "calls": [
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "trim",
+          "legacy",
+          "400123-0"
+        ],
+        [
+          "pttl",
+          "legacy"
+        ],
+        [
+          "scan",
+          7,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ]
+      ],
+      "states": [
+        {
+          "cursor": 7,
+          "errors": 0,
+          "trimmed": 2,
+          "without": []
+        },
+        {
+          "cursor": 0,
+          "errors": 0,
+          "trimmed": 2,
+          "without": []
+        },
+        {
+          "cursor": 0,
+          "errors": 0,
+          "trimmed": 2,
+          "without": []
+        }
+      ]
+    },
+    {
+      "calls": [
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "trim",
+          "legacy",
+          "400123-0"
+        ],
+        [
+          "pttl",
+          "legacy"
+        ],
+        [
+          "scan",
+          7,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ]
+      ],
+      "states": [
+        {
+          "cursor": 7,
+          "errors": 1,
+          "trimmed": 0,
+          "without": []
+        },
+        {
+          "cursor": 0,
+          "errors": 1,
+          "trimmed": 0,
+          "without": []
+        },
+        {
+          "cursor": 0,
+          "errors": 1,
+          "trimmed": 0,
+          "without": []
+        }
+      ]
+    },
+    {
+      "calls": [
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "trim",
+          "legacy",
+          "400123-0"
+        ],
+        [
+          "pttl",
+          "legacy"
+        ],
+        [
+          "scan",
+          7,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ]
+      ],
+      "states": [
+        {
+          "cursor": 7,
+          "errors": 1,
+          "trimmed": 2,
+          "without": []
+        },
+        {
+          "cursor": 0,
+          "errors": 1,
+          "trimmed": 2,
+          "without": []
+        },
+        {
+          "cursor": 0,
+          "errors": 1,
+          "trimmed": 2,
+          "without": []
+        }
+      ]
+    },
+    {
+      "calls": [
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "trim",
+          "legacy",
+          "400123-0"
+        ],
+        [
+          "pttl",
+          "legacy"
+        ],
+        [
+          "scan",
+          7,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ]
+      ],
+      "states": [
+        {
+          "cursor": 7,
+          "errors": 0,
+          "trimmed": 2,
+          "without": []
+        },
+        {
+          "cursor": 0,
+          "errors": 0,
+          "trimmed": 2,
+          "without": []
+        },
+        {
+          "cursor": 0,
+          "errors": 0,
+          "trimmed": 2,
+          "without": []
+        }
+      ]
+    },
+    {
+      "calls": [
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "trim",
+          "legacy",
+          "400123-0"
+        ],
+        [
+          "pttl",
+          "legacy"
+        ],
+        [
+          "scan",
+          7,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ]
+      ],
+      "states": [
+        {
+          "cursor": 7,
+          "errors": 0,
+          "trimmed": 2,
+          "without": []
+        },
+        {
+          "cursor": 0,
+          "errors": 0,
+          "trimmed": 2,
+          "without": []
+        },
+        {
+          "cursor": 0,
+          "errors": 0,
+          "trimmed": 2,
+          "without": []
+        }
+      ]
+    },
+    {
+      "calls": [
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "trim",
+          "legacy",
+          "400123-0"
+        ],
+        [
+          "pttl",
+          "legacy"
+        ],
+        [
+          "scan",
+          7,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ]
+      ],
+      "states": [
+        {
+          "cursor": 7,
+          "errors": 0,
+          "trimmed": 2,
+          "without": []
+        },
+        {
+          "cursor": 0,
+          "errors": 0,
+          "trimmed": 2,
+          "without": []
+        },
+        {
+          "cursor": 0,
+          "errors": 0,
+          "trimmed": 2,
+          "without": []
+        }
+      ]
+    },
+    {
+      "calls": [
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "trim",
+          "legacy",
+          "400123-0"
+        ],
+        [
+          "pttl",
+          "legacy"
+        ],
+        [
+          "scan",
+          7,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "scan",
+          7,
+          "ws:scope:*:stream",
+          128
+        ]
+      ],
+      "states": [
+        {
+          "cursor": 7,
+          "errors": 0,
+          "trimmed": 2,
+          "without": []
+        },
+        {
+          "cursor": 7,
+          "errors": 1,
+          "trimmed": 2,
+          "without": []
+        },
+        {
+          "cursor": 0,
+          "errors": 1,
+          "trimmed": 2,
+          "without": []
+        }
+      ]
+    },
+    {
+      "calls": [
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "trim",
+          "legacy",
+          "400123-0"
+        ],
+        [
+          "pttl",
+          "legacy"
+        ],
+        [
+          "expire",
+          "legacy",
+          900000
+        ],
+        [
+          "scan",
+          7,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ]
+      ],
+      "states": [
+        {
+          "cursor": 7,
+          "errors": 0,
+          "trimmed": 2,
+          "without": []
+        },
+        {
+          "cursor": 0,
+          "errors": 0,
+          "trimmed": 2,
+          "without": []
+        },
+        {
+          "cursor": 0,
+          "errors": 0,
+          "trimmed": 2,
+          "without": []
+        }
+      ]
+    },
+    {
+      "calls": [
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "trim",
+          "legacy",
+          "400123-0"
+        ],
+        [
+          "pttl",
+          "legacy"
+        ],
+        [
+          "expire",
+          "legacy",
+          900000
+        ],
+        [
+          "scan",
+          7,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ]
+      ],
+      "states": [
+        {
+          "cursor": 7,
+          "errors": 1,
+          "trimmed": 0,
+          "without": []
+        },
+        {
+          "cursor": 0,
+          "errors": 1,
+          "trimmed": 0,
+          "without": []
+        },
+        {
+          "cursor": 0,
+          "errors": 1,
+          "trimmed": 0,
+          "without": []
+        }
+      ]
+    },
+    {
+      "calls": [
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "trim",
+          "legacy",
+          "400123-0"
+        ],
+        [
+          "pttl",
+          "legacy"
+        ],
+        [
+          "scan",
+          7,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ]
+      ],
+      "states": [
+        {
+          "cursor": 7,
+          "errors": 1,
+          "trimmed": 2,
+          "without": []
+        },
+        {
+          "cursor": 0,
+          "errors": 1,
+          "trimmed": 2,
+          "without": []
+        },
+        {
+          "cursor": 0,
+          "errors": 1,
+          "trimmed": 2,
+          "without": []
+        }
+      ]
+    },
+    {
+      "calls": [
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "trim",
+          "legacy",
+          "400123-0"
+        ],
+        [
+          "pttl",
+          "legacy"
+        ],
+        [
+          "expire",
+          "legacy",
+          900000
+        ],
+        [
+          "scan",
+          7,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ]
+      ],
+      "states": [
+        {
+          "cursor": 7,
+          "errors": 1,
+          "trimmed": 2,
+          "without": [
+            "legacy"
+          ]
+        },
+        {
+          "cursor": 0,
+          "errors": 1,
+          "trimmed": 2,
+          "without": [
+            "legacy"
+          ]
+        },
+        {
+          "cursor": 0,
+          "errors": 1,
+          "trimmed": 2,
+          "without": []
+        }
+      ]
+    },
+    {
+      "calls": [
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "trim",
+          "legacy",
+          "400123-0"
+        ],
+        [
+          "pttl",
+          "legacy"
+        ],
+        [
+          "expire",
+          "legacy",
+          900000
+        ],
+        [
+          "scan",
+          7,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ]
+      ],
+      "states": [
+        {
+          "cursor": 7,
+          "errors": 0,
+          "trimmed": 2,
+          "without": []
+        },
+        {
+          "cursor": 0,
+          "errors": 0,
+          "trimmed": 2,
+          "without": []
+        },
+        {
+          "cursor": 0,
+          "errors": 0,
+          "trimmed": 2,
+          "without": []
+        }
+      ]
+    },
+    {
+      "calls": [
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "trim",
+          "legacy",
+          "400123-0"
+        ],
+        [
+          "pttl",
+          "legacy"
+        ],
+        [
+          "expire",
+          "legacy",
+          900000
+        ],
+        [
+          "scan",
+          7,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ]
+      ],
+      "states": [
+        {
+          "cursor": 7,
+          "errors": 0,
+          "trimmed": 2,
+          "without": []
+        },
+        {
+          "cursor": 0,
+          "errors": 0,
+          "trimmed": 2,
+          "without": []
+        },
+        {
+          "cursor": 0,
+          "errors": 0,
+          "trimmed": 2,
+          "without": []
+        }
+      ]
+    },
+    {
+      "calls": [
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "trim",
+          "legacy",
+          "400123-0"
+        ],
+        [
+          "pttl",
+          "legacy"
+        ],
+        [
+          "expire",
+          "legacy",
+          900000
+        ],
+        [
+          "scan",
+          7,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "scan",
+          7,
+          "ws:scope:*:stream",
+          128
+        ]
+      ],
+      "states": [
+        {
+          "cursor": 7,
+          "errors": 0,
+          "trimmed": 2,
+          "without": []
+        },
+        {
+          "cursor": 7,
+          "errors": 1,
+          "trimmed": 2,
+          "without": []
+        },
+        {
+          "cursor": 0,
+          "errors": 1,
+          "trimmed": 2,
+          "without": []
+        }
+      ]
+    },
+    {
+      "calls": [
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "trim",
+          "legacy",
+          "400123-0"
+        ],
+        [
+          "pttl",
+          "legacy"
+        ],
+        [
+          "scan",
+          7,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ]
+      ],
+      "states": [
+        {
+          "cursor": 7,
+          "errors": 0,
+          "trimmed": 2,
+          "without": []
+        },
+        {
+          "cursor": 0,
+          "errors": 0,
+          "trimmed": 2,
+          "without": []
+        },
+        {
+          "cursor": 0,
+          "errors": 0,
+          "trimmed": 2,
+          "without": []
+        }
+      ]
+    },
+    {
+      "calls": [
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "trim",
+          "legacy",
+          "400123-0"
+        ],
+        [
+          "pttl",
+          "legacy"
+        ],
+        [
+          "scan",
+          7,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ]
+      ],
+      "states": [
+        {
+          "cursor": 7,
+          "errors": 1,
+          "trimmed": 0,
+          "without": []
+        },
+        {
+          "cursor": 0,
+          "errors": 1,
+          "trimmed": 0,
+          "without": []
+        },
+        {
+          "cursor": 0,
+          "errors": 1,
+          "trimmed": 0,
+          "without": []
+        }
+      ]
+    },
+    {
+      "calls": [
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "trim",
+          "legacy",
+          "400123-0"
+        ],
+        [
+          "pttl",
+          "legacy"
+        ],
+        [
+          "scan",
+          7,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ]
+      ],
+      "states": [
+        {
+          "cursor": 7,
+          "errors": 1,
+          "trimmed": 2,
+          "without": []
+        },
+        {
+          "cursor": 0,
+          "errors": 1,
+          "trimmed": 2,
+          "without": []
+        },
+        {
+          "cursor": 0,
+          "errors": 1,
+          "trimmed": 2,
+          "without": []
+        }
+      ]
+    },
+    {
+      "calls": [
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "trim",
+          "legacy",
+          "400123-0"
+        ],
+        [
+          "pttl",
+          "legacy"
+        ],
+        [
+          "scan",
+          7,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ]
+      ],
+      "states": [
+        {
+          "cursor": 7,
+          "errors": 0,
+          "trimmed": 2,
+          "without": []
+        },
+        {
+          "cursor": 0,
+          "errors": 0,
+          "trimmed": 2,
+          "without": []
+        },
+        {
+          "cursor": 0,
+          "errors": 0,
+          "trimmed": 2,
+          "without": []
+        }
+      ]
+    },
+    {
+      "calls": [
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "trim",
+          "legacy",
+          "400123-0"
+        ],
+        [
+          "pttl",
+          "legacy"
+        ],
+        [
+          "scan",
+          7,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ]
+      ],
+      "states": [
+        {
+          "cursor": 7,
+          "errors": 0,
+          "trimmed": 2,
+          "without": []
+        },
+        {
+          "cursor": 0,
+          "errors": 0,
+          "trimmed": 2,
+          "without": []
+        },
+        {
+          "cursor": 0,
+          "errors": 0,
+          "trimmed": 2,
+          "without": []
+        }
+      ]
+    },
+    {
+      "calls": [
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "trim",
+          "legacy",
+          "400123-0"
+        ],
+        [
+          "pttl",
+          "legacy"
+        ],
+        [
+          "scan",
+          7,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ]
+      ],
+      "states": [
+        {
+          "cursor": 7,
+          "errors": 0,
+          "trimmed": 2,
+          "without": []
+        },
+        {
+          "cursor": 0,
+          "errors": 0,
+          "trimmed": 2,
+          "without": []
+        },
+        {
+          "cursor": 0,
+          "errors": 0,
+          "trimmed": 2,
+          "without": []
+        }
+      ]
+    },
+    {
+      "calls": [
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "trim",
+          "legacy",
+          "400123-0"
+        ],
+        [
+          "pttl",
+          "legacy"
+        ],
+        [
+          "scan",
+          7,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "scan",
+          7,
+          "ws:scope:*:stream",
+          128
+        ]
+      ],
+      "states": [
+        {
+          "cursor": 7,
+          "errors": 0,
+          "trimmed": 2,
+          "without": []
+        },
+        {
+          "cursor": 7,
+          "errors": 1,
+          "trimmed": 2,
+          "without": []
+        },
+        {
+          "cursor": 0,
+          "errors": 1,
+          "trimmed": 2,
+          "without": []
+        }
+      ]
+    }
+  ],
+  "python": [
+    {
+      "calls": [
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "trim",
+          "legacy",
+          "400123-0"
+        ],
+        [
+          "pttl",
+          "legacy"
+        ],
+        [
+          "scan",
+          7,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ]
+      ],
+      "states": [
+        {
+          "cursor": 7,
+          "without": [],
+          "errors": 0,
+          "trimmed": 2
+        },
+        {
+          "cursor": 0,
+          "without": [],
+          "errors": 0,
+          "trimmed": 2
+        },
+        {
+          "cursor": 0,
+          "without": [],
+          "errors": 0,
+          "trimmed": 2
+        }
+      ]
+    },
+    {
+      "calls": [
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "trim",
+          "legacy",
+          "400123-0"
+        ],
+        [
+          "pttl",
+          "legacy"
+        ],
+        [
+          "scan",
+          7,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ]
+      ],
+      "states": [
+        {
+          "cursor": 7,
+          "without": [],
+          "errors": 1,
+          "trimmed": 0
+        },
+        {
+          "cursor": 0,
+          "without": [],
+          "errors": 1,
+          "trimmed": 0
+        },
+        {
+          "cursor": 0,
+          "without": [],
+          "errors": 1,
+          "trimmed": 0
+        }
+      ]
+    },
+    {
+      "calls": [
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "trim",
+          "legacy",
+          "400123-0"
+        ],
+        [
+          "pttl",
+          "legacy"
+        ],
+        [
+          "scan",
+          7,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ]
+      ],
+      "states": [
+        {
+          "cursor": 7,
+          "without": [],
+          "errors": 1,
+          "trimmed": 2
+        },
+        {
+          "cursor": 0,
+          "without": [],
+          "errors": 1,
+          "trimmed": 2
+        },
+        {
+          "cursor": 0,
+          "without": [],
+          "errors": 1,
+          "trimmed": 2
+        }
+      ]
+    },
+    {
+      "calls": [
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "trim",
+          "legacy",
+          "400123-0"
+        ],
+        [
+          "pttl",
+          "legacy"
+        ],
+        [
+          "scan",
+          7,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ]
+      ],
+      "states": [
+        {
+          "cursor": 7,
+          "without": [],
+          "errors": 0,
+          "trimmed": 2
+        },
+        {
+          "cursor": 0,
+          "without": [],
+          "errors": 0,
+          "trimmed": 2
+        },
+        {
+          "cursor": 0,
+          "without": [],
+          "errors": 0,
+          "trimmed": 2
+        }
+      ]
+    },
+    {
+      "calls": [
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "trim",
+          "legacy",
+          "400123-0"
+        ],
+        [
+          "pttl",
+          "legacy"
+        ],
+        [
+          "scan",
+          7,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ]
+      ],
+      "states": [
+        {
+          "cursor": 7,
+          "without": [],
+          "errors": 0,
+          "trimmed": 2
+        },
+        {
+          "cursor": 0,
+          "without": [],
+          "errors": 0,
+          "trimmed": 2
+        },
+        {
+          "cursor": 0,
+          "without": [],
+          "errors": 0,
+          "trimmed": 2
+        }
+      ]
+    },
+    {
+      "calls": [
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "trim",
+          "legacy",
+          "400123-0"
+        ],
+        [
+          "pttl",
+          "legacy"
+        ],
+        [
+          "scan",
+          7,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ]
+      ],
+      "states": [
+        {
+          "cursor": 7,
+          "without": [],
+          "errors": 0,
+          "trimmed": 2
+        },
+        {
+          "cursor": 0,
+          "without": [],
+          "errors": 0,
+          "trimmed": 2
+        },
+        {
+          "cursor": 0,
+          "without": [],
+          "errors": 0,
+          "trimmed": 2
+        }
+      ]
+    },
+    {
+      "calls": [
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "trim",
+          "legacy",
+          "400123-0"
+        ],
+        [
+          "pttl",
+          "legacy"
+        ],
+        [
+          "scan",
+          7,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "scan",
+          7,
+          "ws:scope:*:stream",
+          128
+        ]
+      ],
+      "states": [
+        {
+          "cursor": 7,
+          "without": [],
+          "errors": 0,
+          "trimmed": 2
+        },
+        {
+          "cursor": 7,
+          "without": [],
+          "errors": 1,
+          "trimmed": 2
+        },
+        {
+          "cursor": 0,
+          "without": [],
+          "errors": 1,
+          "trimmed": 2
+        }
+      ]
+    },
+    {
+      "calls": [
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "trim",
+          "legacy",
+          "400123-0"
+        ],
+        [
+          "pttl",
+          "legacy"
+        ],
+        [
+          "scan",
+          7,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ]
+      ],
+      "states": [
+        {
+          "cursor": 7,
+          "without": [],
+          "errors": 0,
+          "trimmed": 2
+        },
+        {
+          "cursor": 0,
+          "without": [],
+          "errors": 0,
+          "trimmed": 2
+        },
+        {
+          "cursor": 0,
+          "without": [],
+          "errors": 0,
+          "trimmed": 2
+        }
+      ]
+    },
+    {
+      "calls": [
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "trim",
+          "legacy",
+          "400123-0"
+        ],
+        [
+          "pttl",
+          "legacy"
+        ],
+        [
+          "scan",
+          7,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ]
+      ],
+      "states": [
+        {
+          "cursor": 7,
+          "without": [],
+          "errors": 1,
+          "trimmed": 0
+        },
+        {
+          "cursor": 0,
+          "without": [],
+          "errors": 1,
+          "trimmed": 0
+        },
+        {
+          "cursor": 0,
+          "without": [],
+          "errors": 1,
+          "trimmed": 0
+        }
+      ]
+    },
+    {
+      "calls": [
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "trim",
+          "legacy",
+          "400123-0"
+        ],
+        [
+          "pttl",
+          "legacy"
+        ],
+        [
+          "scan",
+          7,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ]
+      ],
+      "states": [
+        {
+          "cursor": 7,
+          "without": [],
+          "errors": 1,
+          "trimmed": 2
+        },
+        {
+          "cursor": 0,
+          "without": [],
+          "errors": 1,
+          "trimmed": 2
+        },
+        {
+          "cursor": 0,
+          "without": [],
+          "errors": 1,
+          "trimmed": 2
+        }
+      ]
+    },
+    {
+      "calls": [
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "trim",
+          "legacy",
+          "400123-0"
+        ],
+        [
+          "pttl",
+          "legacy"
+        ],
+        [
+          "scan",
+          7,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ]
+      ],
+      "states": [
+        {
+          "cursor": 7,
+          "without": [],
+          "errors": 0,
+          "trimmed": 2
+        },
+        {
+          "cursor": 0,
+          "without": [],
+          "errors": 0,
+          "trimmed": 2
+        },
+        {
+          "cursor": 0,
+          "without": [],
+          "errors": 0,
+          "trimmed": 2
+        }
+      ]
+    },
+    {
+      "calls": [
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "trim",
+          "legacy",
+          "400123-0"
+        ],
+        [
+          "pttl",
+          "legacy"
+        ],
+        [
+          "scan",
+          7,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ]
+      ],
+      "states": [
+        {
+          "cursor": 7,
+          "without": [],
+          "errors": 0,
+          "trimmed": 2
+        },
+        {
+          "cursor": 0,
+          "without": [],
+          "errors": 0,
+          "trimmed": 2
+        },
+        {
+          "cursor": 0,
+          "without": [],
+          "errors": 0,
+          "trimmed": 2
+        }
+      ]
+    },
+    {
+      "calls": [
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "trim",
+          "legacy",
+          "400123-0"
+        ],
+        [
+          "pttl",
+          "legacy"
+        ],
+        [
+          "scan",
+          7,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ]
+      ],
+      "states": [
+        {
+          "cursor": 7,
+          "without": [],
+          "errors": 0,
+          "trimmed": 2
+        },
+        {
+          "cursor": 0,
+          "without": [],
+          "errors": 0,
+          "trimmed": 2
+        },
+        {
+          "cursor": 0,
+          "without": [],
+          "errors": 0,
+          "trimmed": 2
+        }
+      ]
+    },
+    {
+      "calls": [
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "trim",
+          "legacy",
+          "400123-0"
+        ],
+        [
+          "pttl",
+          "legacy"
+        ],
+        [
+          "scan",
+          7,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "scan",
+          7,
+          "ws:scope:*:stream",
+          128
+        ]
+      ],
+      "states": [
+        {
+          "cursor": 7,
+          "without": [],
+          "errors": 0,
+          "trimmed": 2
+        },
+        {
+          "cursor": 7,
+          "without": [],
+          "errors": 1,
+          "trimmed": 2
+        },
+        {
+          "cursor": 0,
+          "without": [],
+          "errors": 1,
+          "trimmed": 2
+        }
+      ]
+    },
+    {
+      "calls": [
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "trim",
+          "legacy",
+          "400123-0"
+        ],
+        [
+          "pttl",
+          "legacy"
+        ],
+        [
+          "persist",
+          "legacy"
+        ],
+        [
+          "scan",
+          7,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ]
+      ],
+      "states": [
+        {
+          "cursor": 7,
+          "without": [],
+          "errors": 0,
+          "trimmed": 2
+        },
+        {
+          "cursor": 0,
+          "without": [],
+          "errors": 0,
+          "trimmed": 2
+        },
+        {
+          "cursor": 0,
+          "without": [],
+          "errors": 0,
+          "trimmed": 2
+        }
+      ]
+    },
+    {
+      "calls": [
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "trim",
+          "legacy",
+          "400123-0"
+        ],
+        [
+          "pttl",
+          "legacy"
+        ],
+        [
+          "persist",
+          "legacy"
+        ],
+        [
+          "scan",
+          7,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ]
+      ],
+      "states": [
+        {
+          "cursor": 7,
+          "without": [],
+          "errors": 1,
+          "trimmed": 0
+        },
+        {
+          "cursor": 0,
+          "without": [],
+          "errors": 1,
+          "trimmed": 0
+        },
+        {
+          "cursor": 0,
+          "without": [],
+          "errors": 1,
+          "trimmed": 0
+        }
+      ]
+    },
+    {
+      "calls": [
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "trim",
+          "legacy",
+          "400123-0"
+        ],
+        [
+          "pttl",
+          "legacy"
+        ],
+        [
+          "scan",
+          7,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ]
+      ],
+      "states": [
+        {
+          "cursor": 7,
+          "without": [],
+          "errors": 1,
+          "trimmed": 2
+        },
+        {
+          "cursor": 0,
+          "without": [],
+          "errors": 1,
+          "trimmed": 2
+        },
+        {
+          "cursor": 0,
+          "without": [],
+          "errors": 1,
+          "trimmed": 2
+        }
+      ]
+    },
+    {
+      "calls": [
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "trim",
+          "legacy",
+          "400123-0"
+        ],
+        [
+          "pttl",
+          "legacy"
+        ],
+        [
+          "persist",
+          "legacy"
+        ],
+        [
+          "scan",
+          7,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ]
+      ],
+      "states": [
+        {
+          "cursor": 7,
+          "without": [],
+          "errors": 0,
+          "trimmed": 2
+        },
+        {
+          "cursor": 0,
+          "without": [],
+          "errors": 0,
+          "trimmed": 2
+        },
+        {
+          "cursor": 0,
+          "without": [],
+          "errors": 0,
+          "trimmed": 2
+        }
+      ]
+    },
+    {
+      "calls": [
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "trim",
+          "legacy",
+          "400123-0"
+        ],
+        [
+          "pttl",
+          "legacy"
+        ],
+        [
+          "persist",
+          "legacy"
+        ],
+        [
+          "scan",
+          7,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ]
+      ],
+      "states": [
+        {
+          "cursor": 7,
+          "without": [],
+          "errors": 1,
+          "trimmed": 2
+        },
+        {
+          "cursor": 0,
+          "without": [],
+          "errors": 1,
+          "trimmed": 2
+        },
+        {
+          "cursor": 0,
+          "without": [],
+          "errors": 1,
+          "trimmed": 2
+        }
+      ]
+    },
+    {
+      "calls": [
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "trim",
+          "legacy",
+          "400123-0"
+        ],
+        [
+          "pttl",
+          "legacy"
+        ],
+        [
+          "persist",
+          "legacy"
+        ],
+        [
+          "scan",
+          7,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ]
+      ],
+      "states": [
+        {
+          "cursor": 7,
+          "without": [],
+          "errors": 0,
+          "trimmed": 2
+        },
+        {
+          "cursor": 0,
+          "without": [],
+          "errors": 0,
+          "trimmed": 2
+        },
+        {
+          "cursor": 0,
+          "without": [],
+          "errors": 0,
+          "trimmed": 2
+        }
+      ]
+    },
+    {
+      "calls": [
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "trim",
+          "legacy",
+          "400123-0"
+        ],
+        [
+          "pttl",
+          "legacy"
+        ],
+        [
+          "persist",
+          "legacy"
+        ],
+        [
+          "scan",
+          7,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "scan",
+          7,
+          "ws:scope:*:stream",
+          128
+        ]
+      ],
+      "states": [
+        {
+          "cursor": 7,
+          "without": [],
+          "errors": 0,
+          "trimmed": 2
+        },
+        {
+          "cursor": 7,
+          "without": [],
+          "errors": 1,
+          "trimmed": 2
+        },
+        {
+          "cursor": 0,
+          "without": [],
+          "errors": 1,
+          "trimmed": 2
+        }
+      ]
+    },
+    {
+      "calls": [
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "trim",
+          "legacy",
+          "400123-0"
+        ],
+        [
+          "pttl",
+          "legacy"
+        ],
+        [
+          "scan",
+          7,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ]
+      ],
+      "states": [
+        {
+          "cursor": 7,
+          "without": [],
+          "errors": 0,
+          "trimmed": 2
+        },
+        {
+          "cursor": 0,
+          "without": [],
+          "errors": 0,
+          "trimmed": 2
+        },
+        {
+          "cursor": 0,
+          "without": [],
+          "errors": 0,
+          "trimmed": 2
+        }
+      ]
+    },
+    {
+      "calls": [
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "trim",
+          "legacy",
+          "400123-0"
+        ],
+        [
+          "pttl",
+          "legacy"
+        ],
+        [
+          "scan",
+          7,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ]
+      ],
+      "states": [
+        {
+          "cursor": 7,
+          "without": [],
+          "errors": 1,
+          "trimmed": 0
+        },
+        {
+          "cursor": 0,
+          "without": [],
+          "errors": 1,
+          "trimmed": 0
+        },
+        {
+          "cursor": 0,
+          "without": [],
+          "errors": 1,
+          "trimmed": 0
+        }
+      ]
+    },
+    {
+      "calls": [
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "trim",
+          "legacy",
+          "400123-0"
+        ],
+        [
+          "pttl",
+          "legacy"
+        ],
+        [
+          "scan",
+          7,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ]
+      ],
+      "states": [
+        {
+          "cursor": 7,
+          "without": [],
+          "errors": 1,
+          "trimmed": 2
+        },
+        {
+          "cursor": 0,
+          "without": [],
+          "errors": 1,
+          "trimmed": 2
+        },
+        {
+          "cursor": 0,
+          "without": [],
+          "errors": 1,
+          "trimmed": 2
+        }
+      ]
+    },
+    {
+      "calls": [
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "trim",
+          "legacy",
+          "400123-0"
+        ],
+        [
+          "pttl",
+          "legacy"
+        ],
+        [
+          "scan",
+          7,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ]
+      ],
+      "states": [
+        {
+          "cursor": 7,
+          "without": [],
+          "errors": 0,
+          "trimmed": 2
+        },
+        {
+          "cursor": 0,
+          "without": [],
+          "errors": 0,
+          "trimmed": 2
+        },
+        {
+          "cursor": 0,
+          "without": [],
+          "errors": 0,
+          "trimmed": 2
+        }
+      ]
+    },
+    {
+      "calls": [
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "trim",
+          "legacy",
+          "400123-0"
+        ],
+        [
+          "pttl",
+          "legacy"
+        ],
+        [
+          "scan",
+          7,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ]
+      ],
+      "states": [
+        {
+          "cursor": 7,
+          "without": [],
+          "errors": 0,
+          "trimmed": 2
+        },
+        {
+          "cursor": 0,
+          "without": [],
+          "errors": 0,
+          "trimmed": 2
+        },
+        {
+          "cursor": 0,
+          "without": [],
+          "errors": 0,
+          "trimmed": 2
+        }
+      ]
+    },
+    {
+      "calls": [
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "trim",
+          "legacy",
+          "400123-0"
+        ],
+        [
+          "pttl",
+          "legacy"
+        ],
+        [
+          "scan",
+          7,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ]
+      ],
+      "states": [
+        {
+          "cursor": 7,
+          "without": [],
+          "errors": 0,
+          "trimmed": 2
+        },
+        {
+          "cursor": 0,
+          "without": [],
+          "errors": 0,
+          "trimmed": 2
+        },
+        {
+          "cursor": 0,
+          "without": [],
+          "errors": 0,
+          "trimmed": 2
+        }
+      ]
+    },
+    {
+      "calls": [
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "trim",
+          "legacy",
+          "400123-0"
+        ],
+        [
+          "pttl",
+          "legacy"
+        ],
+        [
+          "scan",
+          7,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "scan",
+          7,
+          "ws:scope:*:stream",
+          128
+        ]
+      ],
+      "states": [
+        {
+          "cursor": 7,
+          "without": [],
+          "errors": 0,
+          "trimmed": 2
+        },
+        {
+          "cursor": 7,
+          "without": [],
+          "errors": 1,
+          "trimmed": 2
+        },
+        {
+          "cursor": 0,
+          "without": [],
+          "errors": 1,
+          "trimmed": 2
+        }
+      ]
+    },
+    {
+      "calls": [
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "trim",
+          "legacy",
+          "400123-0"
+        ],
+        [
+          "pttl",
+          "legacy"
+        ],
+        [
+          "expire",
+          "legacy",
+          900000
+        ],
+        [
+          "scan",
+          7,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ]
+      ],
+      "states": [
+        {
+          "cursor": 7,
+          "without": [],
+          "errors": 0,
+          "trimmed": 2
+        },
+        {
+          "cursor": 0,
+          "without": [],
+          "errors": 0,
+          "trimmed": 2
+        },
+        {
+          "cursor": 0,
+          "without": [],
+          "errors": 0,
+          "trimmed": 2
+        }
+      ]
+    },
+    {
+      "calls": [
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "trim",
+          "legacy",
+          "400123-0"
+        ],
+        [
+          "pttl",
+          "legacy"
+        ],
+        [
+          "expire",
+          "legacy",
+          900000
+        ],
+        [
+          "scan",
+          7,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ]
+      ],
+      "states": [
+        {
+          "cursor": 7,
+          "without": [],
+          "errors": 1,
+          "trimmed": 0
+        },
+        {
+          "cursor": 0,
+          "without": [],
+          "errors": 1,
+          "trimmed": 0
+        },
+        {
+          "cursor": 0,
+          "without": [],
+          "errors": 1,
+          "trimmed": 0
+        }
+      ]
+    },
+    {
+      "calls": [
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "trim",
+          "legacy",
+          "400123-0"
+        ],
+        [
+          "pttl",
+          "legacy"
+        ],
+        [
+          "scan",
+          7,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ]
+      ],
+      "states": [
+        {
+          "cursor": 7,
+          "without": [],
+          "errors": 1,
+          "trimmed": 2
+        },
+        {
+          "cursor": 0,
+          "without": [],
+          "errors": 1,
+          "trimmed": 2
+        },
+        {
+          "cursor": 0,
+          "without": [],
+          "errors": 1,
+          "trimmed": 2
+        }
+      ]
+    },
+    {
+      "calls": [
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "trim",
+          "legacy",
+          "400123-0"
+        ],
+        [
+          "pttl",
+          "legacy"
+        ],
+        [
+          "expire",
+          "legacy",
+          900000
+        ],
+        [
+          "scan",
+          7,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ]
+      ],
+      "states": [
+        {
+          "cursor": 7,
+          "without": [
+            "legacy"
+          ],
+          "errors": 1,
+          "trimmed": 2
+        },
+        {
+          "cursor": 0,
+          "without": [
+            "legacy"
+          ],
+          "errors": 1,
+          "trimmed": 2
+        },
+        {
+          "cursor": 0,
+          "without": [],
+          "errors": 1,
+          "trimmed": 2
+        }
+      ]
+    },
+    {
+      "calls": [
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "trim",
+          "legacy",
+          "400123-0"
+        ],
+        [
+          "pttl",
+          "legacy"
+        ],
+        [
+          "expire",
+          "legacy",
+          900000
+        ],
+        [
+          "scan",
+          7,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ]
+      ],
+      "states": [
+        {
+          "cursor": 7,
+          "without": [],
+          "errors": 0,
+          "trimmed": 2
+        },
+        {
+          "cursor": 0,
+          "without": [],
+          "errors": 0,
+          "trimmed": 2
+        },
+        {
+          "cursor": 0,
+          "without": [],
+          "errors": 0,
+          "trimmed": 2
+        }
+      ]
+    },
+    {
+      "calls": [
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "trim",
+          "legacy",
+          "400123-0"
+        ],
+        [
+          "pttl",
+          "legacy"
+        ],
+        [
+          "expire",
+          "legacy",
+          900000
+        ],
+        [
+          "scan",
+          7,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ]
+      ],
+      "states": [
+        {
+          "cursor": 7,
+          "without": [],
+          "errors": 0,
+          "trimmed": 2
+        },
+        {
+          "cursor": 0,
+          "without": [],
+          "errors": 0,
+          "trimmed": 2
+        },
+        {
+          "cursor": 0,
+          "without": [],
+          "errors": 0,
+          "trimmed": 2
+        }
+      ]
+    },
+    {
+      "calls": [
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "trim",
+          "legacy",
+          "400123-0"
+        ],
+        [
+          "pttl",
+          "legacy"
+        ],
+        [
+          "expire",
+          "legacy",
+          900000
+        ],
+        [
+          "scan",
+          7,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "scan",
+          7,
+          "ws:scope:*:stream",
+          128
+        ]
+      ],
+      "states": [
+        {
+          "cursor": 7,
+          "without": [],
+          "errors": 0,
+          "trimmed": 2
+        },
+        {
+          "cursor": 7,
+          "without": [],
+          "errors": 1,
+          "trimmed": 2
+        },
+        {
+          "cursor": 0,
+          "without": [],
+          "errors": 1,
+          "trimmed": 2
+        }
+      ]
+    },
+    {
+      "calls": [
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "trim",
+          "legacy",
+          "400123-0"
+        ],
+        [
+          "pttl",
+          "legacy"
+        ],
+        [
+          "scan",
+          7,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ]
+      ],
+      "states": [
+        {
+          "cursor": 7,
+          "without": [],
+          "errors": 0,
+          "trimmed": 2
+        },
+        {
+          "cursor": 0,
+          "without": [],
+          "errors": 0,
+          "trimmed": 2
+        },
+        {
+          "cursor": 0,
+          "without": [],
+          "errors": 0,
+          "trimmed": 2
+        }
+      ]
+    },
+    {
+      "calls": [
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "trim",
+          "legacy",
+          "400123-0"
+        ],
+        [
+          "pttl",
+          "legacy"
+        ],
+        [
+          "scan",
+          7,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ]
+      ],
+      "states": [
+        {
+          "cursor": 7,
+          "without": [],
+          "errors": 1,
+          "trimmed": 0
+        },
+        {
+          "cursor": 0,
+          "without": [],
+          "errors": 1,
+          "trimmed": 0
+        },
+        {
+          "cursor": 0,
+          "without": [],
+          "errors": 1,
+          "trimmed": 0
+        }
+      ]
+    },
+    {
+      "calls": [
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "trim",
+          "legacy",
+          "400123-0"
+        ],
+        [
+          "pttl",
+          "legacy"
+        ],
+        [
+          "scan",
+          7,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ]
+      ],
+      "states": [
+        {
+          "cursor": 7,
+          "without": [],
+          "errors": 1,
+          "trimmed": 2
+        },
+        {
+          "cursor": 0,
+          "without": [],
+          "errors": 1,
+          "trimmed": 2
+        },
+        {
+          "cursor": 0,
+          "without": [],
+          "errors": 1,
+          "trimmed": 2
+        }
+      ]
+    },
+    {
+      "calls": [
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "trim",
+          "legacy",
+          "400123-0"
+        ],
+        [
+          "pttl",
+          "legacy"
+        ],
+        [
+          "scan",
+          7,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ]
+      ],
+      "states": [
+        {
+          "cursor": 7,
+          "without": [],
+          "errors": 0,
+          "trimmed": 2
+        },
+        {
+          "cursor": 0,
+          "without": [],
+          "errors": 0,
+          "trimmed": 2
+        },
+        {
+          "cursor": 0,
+          "without": [],
+          "errors": 0,
+          "trimmed": 2
+        }
+      ]
+    },
+    {
+      "calls": [
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "trim",
+          "legacy",
+          "400123-0"
+        ],
+        [
+          "pttl",
+          "legacy"
+        ],
+        [
+          "scan",
+          7,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ]
+      ],
+      "states": [
+        {
+          "cursor": 7,
+          "without": [],
+          "errors": 0,
+          "trimmed": 2
+        },
+        {
+          "cursor": 0,
+          "without": [],
+          "errors": 0,
+          "trimmed": 2
+        },
+        {
+          "cursor": 0,
+          "without": [],
+          "errors": 0,
+          "trimmed": 2
+        }
+      ]
+    },
+    {
+      "calls": [
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "trim",
+          "legacy",
+          "400123-0"
+        ],
+        [
+          "pttl",
+          "legacy"
+        ],
+        [
+          "scan",
+          7,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ]
+      ],
+      "states": [
+        {
+          "cursor": 7,
+          "without": [],
+          "errors": 0,
+          "trimmed": 2
+        },
+        {
+          "cursor": 0,
+          "without": [],
+          "errors": 0,
+          "trimmed": 2
+        },
+        {
+          "cursor": 0,
+          "without": [],
+          "errors": 0,
+          "trimmed": 2
+        }
+      ]
+    },
+    {
+      "calls": [
+        [
+          "scan",
+          0,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "trim",
+          "legacy",
+          "400123-0"
+        ],
+        [
+          "pttl",
+          "legacy"
+        ],
+        [
+          "scan",
+          7,
+          "ws:scope:*:stream",
+          128
+        ],
+        [
+          "scan",
+          7,
+          "ws:scope:*:stream",
+          128
+        ]
+      ],
+      "states": [
+        {
+          "cursor": 7,
+          "without": [],
+          "errors": 0,
+          "trimmed": 2
+        },
+        {
+          "cursor": 7,
+          "without": [],
+          "errors": 1,
+          "trimmed": 2
+        },
+        {
+          "cursor": 0,
+          "without": [],
+          "errors": 1,
+          "trimmed": 2
+        }
+      ]
+    }
+  ],
+  "mismatches": [],
+  "source_sha256": {
+    "server/go/internal/realtime/redis_relay.go": "d0717fde50f3494be4731cb964c060faa54d761f2eaa6c3e1464158e53a58846",
+    "server/go/internal/realtime/stream_retention.go": "04bdc8af4a8ae51dc50aa6f27e23eae051d9a1b2631fa71ab4911fdfde6918fc",
+    "server/src/workpal_backend/realtime/relay_maintenance.py": "d0529a31cee41ed9c1ccbcfd9f93298722e3e27bf01c2d9205c2717d36c913f4",
+    "server/src/workpal_backend/realtime/stream_retention.py": "a1241c9b9005eba38a834494abdddfb29587880dd373d17f2b89eb0ed6c99c37",
+    "server/tests/parity/go_relay_maintenance/main.go": "c38cc4e4751ec5f4a407a38f45051275a65039a9b103ce87a8b261d11ab927f5",
+    "server/tests/parity/go_relay_maintenance/wrapper.go": "3c7146f93ecae7b5e7146e01a22a3e49cc90798f77f018af00dd8351c193f70f"
+  }
+}

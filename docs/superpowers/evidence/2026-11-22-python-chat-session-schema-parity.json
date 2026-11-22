@@ -1,0 +1,596 @@
+{
+  "scope": "Selected canonical chat_session persistence acceptance/rejection plus projected defaults and cascade/unbind row state; timestamps compared by transaction equality only. Not SQLSTATE, full type domains, API or full schema equivalence.",
+  "fixtures": [
+    {
+      "name": "valid-defaults",
+      "sql": []
+    },
+    {
+      "name": "chat_session.status='deleted'",
+      "sql": [
+        "UPDATE chat_session SET status='deleted'"
+      ]
+    },
+    {
+      "name": "chat_session.status='archived'",
+      "sql": [
+        "UPDATE chat_session SET status='archived'"
+      ]
+    },
+    {
+      "name": "chat_session.status=NULL",
+      "sql": [
+        "UPDATE chat_session SET status=NULL"
+      ]
+    },
+    {
+      "name": "chat_session.title=NULL",
+      "sql": [
+        "UPDATE chat_session SET title=NULL"
+      ]
+    },
+    {
+      "name": "chat_session.title=''",
+      "sql": [
+        "UPDATE chat_session SET title=''"
+      ]
+    },
+    {
+      "name": "chat_session.is_agent_intro=NULL",
+      "sql": [
+        "UPDATE chat_session SET is_agent_intro=NULL"
+      ]
+    },
+    {
+      "name": "chat_session.is_agent_intro=true",
+      "sql": [
+        "UPDATE chat_session SET is_agent_intro=true"
+      ]
+    },
+    {
+      "name": "chat_session.is_agent_intro=false",
+      "sql": [
+        "UPDATE chat_session SET is_agent_intro=false"
+      ]
+    },
+    {
+      "name": "chat_session.agent_id='00000000-0000-4000-8000-000000000001'",
+      "sql": [
+        "UPDATE chat_session SET agent_id='00000000-0000-4000-8000-000000000001'"
+      ]
+    },
+    {
+      "name": "chat_session.creator_id='00000000-0000-4000-8000-000000000001'",
+      "sql": [
+        "UPDATE chat_session SET creator_id='00000000-0000-4000-8000-000000000001'"
+      ]
+    },
+    {
+      "name": "chat_session.workspace_id='00000000-0000-4000-8000-000000000001'",
+      "sql": [
+        "UPDATE chat_session SET workspace_id='00000000-0000-4000-8000-000000000001'"
+      ]
+    },
+    {
+      "name": "chat_session.runtime_id='00000000-0000-4000-8000-000000000001'",
+      "sql": [
+        "UPDATE chat_session SET runtime_id='00000000-0000-4000-8000-000000000001'"
+      ]
+    },
+    {
+      "name": "chat_session.runtime_id=NULL",
+      "sql": [
+        "UPDATE chat_session SET runtime_id=NULL"
+      ]
+    },
+    {
+      "name": "chat_session.project_id='00000000-0000-4000-8000-000000000001'",
+      "sql": [
+        "UPDATE chat_session SET project_id='00000000-0000-4000-8000-000000000001'"
+      ]
+    },
+    {
+      "name": "delete-agent-cascade",
+      "sql": [
+        "DELETE FROM agent WHERE id='10000000-0000-4000-8000-000000000004'"
+      ]
+    },
+    {
+      "name": "delete-runtime-unbind",
+      "sql": [
+        "UPDATE agent SET runtime_id=NULL",
+        "DELETE FROM agent_runtime WHERE id='10000000-0000-4000-8000-000000000003'"
+      ]
+    }
+  ],
+  "go": [
+    {
+      "accepted": true,
+      "exit_code": 0,
+      "error": "",
+      "state": [
+        {
+          "id": "10000000-0000-4000-8000-000000000005",
+          "workspace_id": "10000000-0000-4000-8000-000000000002",
+          "agent_id": "10000000-0000-4000-8000-000000000004",
+          "creator_id": "10000000-0000-4000-8000-000000000001",
+          "title": "",
+          "session_id": null,
+          "work_dir": null,
+          "status": "active",
+          "runtime_id": "10000000-0000-4000-8000-000000000003",
+          "is_agent_intro": false,
+          "project_id": null,
+          "unread_since": null,
+          "pinned_at": null,
+          "explicitly_created_at": null,
+          "default_clock_match": true
+        }
+      ]
+    },
+    {
+      "accepted": false,
+      "exit_code": 3,
+      "error": "ERROR:  new row for relation \"chat_session\" violates check constraint \"chat_session_status_check\"\nDETAIL:  Failing row contains (10000000-0000-4000-8000-000000000005, 10000000-0000-4000-8000-000000000002, 10000000-0000-4000-8000-000000000004, 10000000-0000-4000-8000-000000000001, , null, null, deleted, 2026-11-21 20:35:21.617936+00, 2026-11-21 20:35:21.617936+00, null, 10000000-0000-4000-8000-000000000003, 2026-11-21 20:35:21.617936+00, f, null, null, null).",
+      "state": null
+    },
+    {
+      "accepted": true,
+      "exit_code": 0,
+      "error": "",
+      "state": [
+        {
+          "id": "10000000-0000-4000-8000-000000000005",
+          "workspace_id": "10000000-0000-4000-8000-000000000002",
+          "agent_id": "10000000-0000-4000-8000-000000000004",
+          "creator_id": "10000000-0000-4000-8000-000000000001",
+          "title": "",
+          "session_id": null,
+          "work_dir": null,
+          "status": "archived",
+          "runtime_id": "10000000-0000-4000-8000-000000000003",
+          "is_agent_intro": false,
+          "project_id": null,
+          "unread_since": null,
+          "pinned_at": null,
+          "explicitly_created_at": null,
+          "default_clock_match": true
+        }
+      ]
+    },
+    {
+      "accepted": false,
+      "exit_code": 3,
+      "error": "ERROR:  null value in column \"status\" of relation \"chat_session\" violates not-null constraint\nDETAIL:  Failing row contains (10000000-0000-4000-8000-000000000005, 10000000-0000-4000-8000-000000000002, 10000000-0000-4000-8000-000000000004, 10000000-0000-4000-8000-000000000001, , null, null, null, 2026-11-21 20:35:22.046315+00, 2026-11-21 20:35:22.046315+00, null, 10000000-0000-4000-8000-000000000003, 2026-11-21 20:35:22.046315+00, f, null, null, null).",
+      "state": null
+    },
+    {
+      "accepted": false,
+      "exit_code": 3,
+      "error": "ERROR:  null value in column \"title\" of relation \"chat_session\" violates not-null constraint\nDETAIL:  Failing row contains (10000000-0000-4000-8000-000000000005, 10000000-0000-4000-8000-000000000002, 10000000-0000-4000-8000-000000000004, 10000000-0000-4000-8000-000000000001, null, null, null, active, 2026-11-21 20:35:22.301491+00, 2026-11-21 20:35:22.301491+00, null, 10000000-0000-4000-8000-000000000003, 2026-11-21 20:35:22.301491+00, f, null, null, null).",
+      "state": null
+    },
+    {
+      "accepted": true,
+      "exit_code": 0,
+      "error": "",
+      "state": [
+        {
+          "id": "10000000-0000-4000-8000-000000000005",
+          "workspace_id": "10000000-0000-4000-8000-000000000002",
+          "agent_id": "10000000-0000-4000-8000-000000000004",
+          "creator_id": "10000000-0000-4000-8000-000000000001",
+          "title": "",
+          "session_id": null,
+          "work_dir": null,
+          "status": "active",
+          "runtime_id": "10000000-0000-4000-8000-000000000003",
+          "is_agent_intro": false,
+          "project_id": null,
+          "unread_since": null,
+          "pinned_at": null,
+          "explicitly_created_at": null,
+          "default_clock_match": true
+        }
+      ]
+    },
+    {
+      "accepted": false,
+      "exit_code": 3,
+      "error": "ERROR:  null value in column \"is_agent_intro\" of relation \"chat_session\" violates not-null constraint\nDETAIL:  Failing row contains (10000000-0000-4000-8000-000000000005, 10000000-0000-4000-8000-000000000002, 10000000-0000-4000-8000-000000000004, 10000000-0000-4000-8000-000000000001, , null, null, active, 2026-11-21 20:35:22.745546+00, 2026-11-21 20:35:22.745546+00, null, 10000000-0000-4000-8000-000000000003, 2026-11-21 20:35:22.745546+00, null, null, null, null).",
+      "state": null
+    },
+    {
+      "accepted": true,
+      "exit_code": 0,
+      "error": "",
+      "state": [
+        {
+          "id": "10000000-0000-4000-8000-000000000005",
+          "workspace_id": "10000000-0000-4000-8000-000000000002",
+          "agent_id": "10000000-0000-4000-8000-000000000004",
+          "creator_id": "10000000-0000-4000-8000-000000000001",
+          "title": "",
+          "session_id": null,
+          "work_dir": null,
+          "status": "active",
+          "runtime_id": "10000000-0000-4000-8000-000000000003",
+          "is_agent_intro": true,
+          "project_id": null,
+          "unread_since": null,
+          "pinned_at": null,
+          "explicitly_created_at": null,
+          "default_clock_match": true
+        }
+      ]
+    },
+    {
+      "accepted": true,
+      "exit_code": 0,
+      "error": "",
+      "state": [
+        {
+          "id": "10000000-0000-4000-8000-000000000005",
+          "workspace_id": "10000000-0000-4000-8000-000000000002",
+          "agent_id": "10000000-0000-4000-8000-000000000004",
+          "creator_id": "10000000-0000-4000-8000-000000000001",
+          "title": "",
+          "session_id": null,
+          "work_dir": null,
+          "status": "active",
+          "runtime_id": "10000000-0000-4000-8000-000000000003",
+          "is_agent_intro": false,
+          "project_id": null,
+          "unread_since": null,
+          "pinned_at": null,
+          "explicitly_created_at": null,
+          "default_clock_match": true
+        }
+      ]
+    },
+    {
+      "accepted": false,
+      "exit_code": 3,
+      "error": "ERROR:  insert or update on table \"chat_session\" violates foreign key constraint \"chat_session_agent_id_fkey\"\nDETAIL:  Key (agent_id)=(00000000-0000-4000-8000-000000000001) is not present in table \"agent\".",
+      "state": null
+    },
+    {
+      "accepted": false,
+      "exit_code": 3,
+      "error": "ERROR:  insert or update on table \"chat_session\" violates foreign key constraint \"chat_session_creator_id_fkey\"\nDETAIL:  Key (creator_id)=(00000000-0000-4000-8000-000000000001) is not present in table \"user\".",
+      "state": null
+    },
+    {
+      "accepted": false,
+      "exit_code": 3,
+      "error": "ERROR:  insert or update on table \"chat_session\" violates foreign key constraint \"chat_session_workspace_id_fkey\"\nDETAIL:  Key (workspace_id)=(00000000-0000-4000-8000-000000000001) is not present in table \"workspace\".",
+      "state": null
+    },
+    {
+      "accepted": false,
+      "exit_code": 3,
+      "error": "ERROR:  insert or update on table \"chat_session\" violates foreign key constraint \"chat_session_runtime_id_fkey\"\nDETAIL:  Key (runtime_id)=(00000000-0000-4000-8000-000000000001) is not present in table \"agent_runtime\".",
+      "state": null
+    },
+    {
+      "accepted": true,
+      "exit_code": 0,
+      "error": "",
+      "state": [
+        {
+          "id": "10000000-0000-4000-8000-000000000005",
+          "workspace_id": "10000000-0000-4000-8000-000000000002",
+          "agent_id": "10000000-0000-4000-8000-000000000004",
+          "creator_id": "10000000-0000-4000-8000-000000000001",
+          "title": "",
+          "session_id": null,
+          "work_dir": null,
+          "status": "active",
+          "runtime_id": null,
+          "is_agent_intro": false,
+          "project_id": null,
+          "unread_since": null,
+          "pinned_at": null,
+          "explicitly_created_at": null,
+          "default_clock_match": true
+        }
+      ]
+    },
+    {
+      "accepted": true,
+      "exit_code": 0,
+      "error": "",
+      "state": [
+        {
+          "id": "10000000-0000-4000-8000-000000000005",
+          "workspace_id": "10000000-0000-4000-8000-000000000002",
+          "agent_id": "10000000-0000-4000-8000-000000000004",
+          "creator_id": "10000000-0000-4000-8000-000000000001",
+          "title": "",
+          "session_id": null,
+          "work_dir": null,
+          "status": "active",
+          "runtime_id": "10000000-0000-4000-8000-000000000003",
+          "is_agent_intro": false,
+          "project_id": "00000000-0000-4000-8000-000000000001",
+          "unread_since": null,
+          "pinned_at": null,
+          "explicitly_created_at": null,
+          "default_clock_match": true
+        }
+      ]
+    },
+    {
+      "accepted": true,
+      "exit_code": 0,
+      "error": "",
+      "state": []
+    },
+    {
+      "accepted": true,
+      "exit_code": 0,
+      "error": "",
+      "state": [
+        {
+          "id": "10000000-0000-4000-8000-000000000005",
+          "workspace_id": "10000000-0000-4000-8000-000000000002",
+          "agent_id": "10000000-0000-4000-8000-000000000004",
+          "creator_id": "10000000-0000-4000-8000-000000000001",
+          "title": "",
+          "session_id": null,
+          "work_dir": null,
+          "status": "active",
+          "runtime_id": null,
+          "is_agent_intro": false,
+          "project_id": null,
+          "unread_since": null,
+          "pinned_at": null,
+          "explicitly_created_at": null,
+          "default_clock_match": true
+        }
+      ]
+    }
+  ],
+  "python": [
+    {
+      "accepted": true,
+      "error": "",
+      "state": [
+        {
+          "id": "10000000-0000-4000-8000-000000000005",
+          "workspace_id": "10000000-0000-4000-8000-000000000002",
+          "agent_id": "10000000-0000-4000-8000-000000000004",
+          "creator_id": "10000000-0000-4000-8000-000000000001",
+          "title": "",
+          "session_id": null,
+          "work_dir": null,
+          "status": "active",
+          "runtime_id": "10000000-0000-4000-8000-000000000003",
+          "is_agent_intro": false,
+          "project_id": null,
+          "unread_since": null,
+          "pinned_at": null,
+          "explicitly_created_at": null,
+          "default_clock_match": true
+        }
+      ]
+    },
+    {
+      "accepted": false,
+      "error": "CHECK constraint failed: chat_session_status_check",
+      "state": null
+    },
+    {
+      "accepted": true,
+      "error": "",
+      "state": [
+        {
+          "id": "10000000-0000-4000-8000-000000000005",
+          "workspace_id": "10000000-0000-4000-8000-000000000002",
+          "agent_id": "10000000-0000-4000-8000-000000000004",
+          "creator_id": "10000000-0000-4000-8000-000000000001",
+          "title": "",
+          "session_id": null,
+          "work_dir": null,
+          "status": "archived",
+          "runtime_id": "10000000-0000-4000-8000-000000000003",
+          "is_agent_intro": false,
+          "project_id": null,
+          "unread_since": null,
+          "pinned_at": null,
+          "explicitly_created_at": null,
+          "default_clock_match": true
+        }
+      ]
+    },
+    {
+      "accepted": false,
+      "error": "NOT NULL constraint failed: chat_session.status",
+      "state": null
+    },
+    {
+      "accepted": false,
+      "error": "NOT NULL constraint failed: chat_session.title",
+      "state": null
+    },
+    {
+      "accepted": true,
+      "error": "",
+      "state": [
+        {
+          "id": "10000000-0000-4000-8000-000000000005",
+          "workspace_id": "10000000-0000-4000-8000-000000000002",
+          "agent_id": "10000000-0000-4000-8000-000000000004",
+          "creator_id": "10000000-0000-4000-8000-000000000001",
+          "title": "",
+          "session_id": null,
+          "work_dir": null,
+          "status": "active",
+          "runtime_id": "10000000-0000-4000-8000-000000000003",
+          "is_agent_intro": false,
+          "project_id": null,
+          "unread_since": null,
+          "pinned_at": null,
+          "explicitly_created_at": null,
+          "default_clock_match": true
+        }
+      ]
+    },
+    {
+      "accepted": false,
+      "error": "NOT NULL constraint failed: chat_session.is_agent_intro",
+      "state": null
+    },
+    {
+      "accepted": true,
+      "error": "",
+      "state": [
+        {
+          "id": "10000000-0000-4000-8000-000000000005",
+          "workspace_id": "10000000-0000-4000-8000-000000000002",
+          "agent_id": "10000000-0000-4000-8000-000000000004",
+          "creator_id": "10000000-0000-4000-8000-000000000001",
+          "title": "",
+          "session_id": null,
+          "work_dir": null,
+          "status": "active",
+          "runtime_id": "10000000-0000-4000-8000-000000000003",
+          "is_agent_intro": true,
+          "project_id": null,
+          "unread_since": null,
+          "pinned_at": null,
+          "explicitly_created_at": null,
+          "default_clock_match": true
+        }
+      ]
+    },
+    {
+      "accepted": true,
+      "error": "",
+      "state": [
+        {
+          "id": "10000000-0000-4000-8000-000000000005",
+          "workspace_id": "10000000-0000-4000-8000-000000000002",
+          "agent_id": "10000000-0000-4000-8000-000000000004",
+          "creator_id": "10000000-0000-4000-8000-000000000001",
+          "title": "",
+          "session_id": null,
+          "work_dir": null,
+          "status": "active",
+          "runtime_id": "10000000-0000-4000-8000-000000000003",
+          "is_agent_intro": false,
+          "project_id": null,
+          "unread_since": null,
+          "pinned_at": null,
+          "explicitly_created_at": null,
+          "default_clock_match": true
+        }
+      ]
+    },
+    {
+      "accepted": false,
+      "error": "FOREIGN KEY constraint failed",
+      "state": null
+    },
+    {
+      "accepted": false,
+      "error": "FOREIGN KEY constraint failed",
+      "state": null
+    },
+    {
+      "accepted": false,
+      "error": "FOREIGN KEY constraint failed",
+      "state": null
+    },
+    {
+      "accepted": false,
+      "error": "FOREIGN KEY constraint failed",
+      "state": null
+    },
+    {
+      "accepted": true,
+      "error": "",
+      "state": [
+        {
+          "id": "10000000-0000-4000-8000-000000000005",
+          "workspace_id": "10000000-0000-4000-8000-000000000002",
+          "agent_id": "10000000-0000-4000-8000-000000000004",
+          "creator_id": "10000000-0000-4000-8000-000000000001",
+          "title": "",
+          "session_id": null,
+          "work_dir": null,
+          "status": "active",
+          "runtime_id": null,
+          "is_agent_intro": false,
+          "project_id": null,
+          "unread_since": null,
+          "pinned_at": null,
+          "explicitly_created_at": null,
+          "default_clock_match": true
+        }
+      ]
+    },
+    {
+      "accepted": true,
+      "error": "",
+      "state": [
+        {
+          "id": "10000000-0000-4000-8000-000000000005",
+          "workspace_id": "10000000-0000-4000-8000-000000000002",
+          "agent_id": "10000000-0000-4000-8000-000000000004",
+          "creator_id": "10000000-0000-4000-8000-000000000001",
+          "title": "",
+          "session_id": null,
+          "work_dir": null,
+          "status": "active",
+          "runtime_id": "10000000-0000-4000-8000-000000000003",
+          "is_agent_intro": false,
+          "project_id": "00000000-0000-4000-8000-000000000001",
+          "unread_since": null,
+          "pinned_at": null,
+          "explicitly_created_at": null,
+          "default_clock_match": true
+        }
+      ]
+    },
+    {
+      "accepted": true,
+      "error": "",
+      "state": []
+    },
+    {
+      "accepted": true,
+      "error": "",
+      "state": [
+        {
+          "id": "10000000-0000-4000-8000-000000000005",
+          "workspace_id": "10000000-0000-4000-8000-000000000002",
+          "agent_id": "10000000-0000-4000-8000-000000000004",
+          "creator_id": "10000000-0000-4000-8000-000000000001",
+          "title": "",
+          "session_id": null,
+          "work_dir": null,
+          "status": "active",
+          "runtime_id": null,
+          "is_agent_intro": false,
+          "project_id": null,
+          "unread_since": null,
+          "pinned_at": null,
+          "explicitly_created_at": null,
+          "default_clock_match": true
+        }
+      ]
+    }
+  ],
+  "mismatches": [],
+  "migration_exit_code": 0,
+  "migrator_sha256": "3751ef1bed4ad85a884360b595efccbd9f96f393ed960944336e5481a40d2499",
+  "migration_manifest_sha256": "4b8b30ed1c2557a1407a9f75bff3d92a747b6ca39199868fe0b43e921fc6ff3a",
+  "python_sources_sha256": {
+    "server/migrations/versions/0019_chat_session.py": "781b3b15d827c7a24b91f7f2d97e6ed5106e5b34ab0b1051ab613f0ffa51fb6b",
+    "server/src/workpal_backend/infrastructure/sqlite_compat.py": "f502f05ba40829fbeafeca4c8510792f1d3d288edc2cf9ec28d850fc630462f6",
+    "server/src/workpal_backend/infrastructure/database.py": "f0b926ff1ad7789086049ae37db3df5ae76f0dd70db284cd84e2d388940ff669",
+    "server/migrations/env.py": "54aa6de0b91526e7902b2833ee156eeb5449a8ea2bd1df735b0f635f7b066393",
+    "server/tools/run_chat_session_schema_parity.py": "240765a88f9aec245254f19e78c9bfa65d4722eb6e197611e3420d28147fbc33"
+  }
+}

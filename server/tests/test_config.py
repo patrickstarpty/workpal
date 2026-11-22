@@ -44,3 +44,36 @@ def test_upload_protects_configured_mock_directory_alias(tmp_path, monkeypatch):
 def test_upload_accepts_dedicated_roots(tmp_path):
     assert Settings(upload_dir=tmp_path/'uploads').upload_dir == (tmp_path/'uploads').resolve()
     assert Settings().upload_dir == ROOT/'server/data/python/uploads'
+
+
+def test_upstream_auth_environment_names_take_precedence(monkeypatch):
+    monkeypatch.setenv('JWT_SECRET', 'upstream-test-key-' * 4)
+    monkeypatch.setenv('AUTH_SECRET', 'legacy-test-key-' * 4)
+    monkeypatch.setenv('APP_ENV', 'development')
+    monkeypatch.setenv('WORKPAL_ENV', 'production')
+    settings = Settings()
+    assert settings.auth_secret == 'upstream-test-key-' * 4
+    assert settings.environment == 'development'
+
+
+def test_legacy_auth_environment_aliases_remain_usable(monkeypatch):
+    monkeypatch.delenv('JWT_SECRET', raising=False)
+    monkeypatch.delenv('APP_ENV', raising=False)
+    monkeypatch.setenv('AUTH_SECRET', 'legacy-test-key-' * 4)
+    monkeypatch.setenv('WORKPAL_ENV', 'development')
+    assert Settings().auth_secret == 'legacy-test-key-' * 4
+    assert Settings().environment == 'development'
+
+
+@pytest.mark.parametrize('secret', [None, '', 'workpal-dev-secret-change-in-production',
+                                    ' change-me-in-production '])
+@pytest.mark.parametrize('environment', ['production', ' PRODUCTION '])
+def test_production_refuses_upstream_insecure_secrets(secret, environment):
+    with pytest.raises(ValueError, match='JWT_SECRET'):
+        Settings(environment=environment, auth_secret=secret)
+
+
+def test_go_development_secret_fallback_is_not_production_default():
+    assert Settings(auth_secret=None).auth_secret == 'workpal-dev-secret-change-in-production'
+    # Go's boot check rejects known placeholders, not all short strings.
+    assert Settings(environment='production', auth_secret='fixture-custom-key').auth_secret == 'fixture-custom-key'

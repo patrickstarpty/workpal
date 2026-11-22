@@ -1,0 +1,9 @@
+package realtime
+import("context";"sync";"time";"errors";"github.com/redis/go-redis/v9")
+type ParityOwnerFixture struct{Separate bool;Failure string}
+type parityOwnerClient struct{redis.UniversalClient;name,failure string;calls *[]string;mu *sync.Mutex;heartbeat,scan chan bool}
+func(c *parityOwnerClient)Ping(ctx context.Context)*redis.StatusCmd{c.mu.Lock();*c.calls=append(*c.calls,c.name);c.mu.Unlock();if c.failure==c.name{return redis.NewStatusResult("",errors.New("ping failed"))};return redis.NewStatusResult("PONG",nil)}
+func(c *parityOwnerClient)Set(ctx context.Context,key string,value any,ttl time.Duration)*redis.StatusCmd{c.heartbeat<-true;<-ctx.Done();return redis.NewStatusResult("",ctx.Err())}
+func(c *parityOwnerClient)Exists(ctx context.Context,keys ...string)*redis.IntCmd{c.scan<-true;<-ctx.Done();return redis.NewIntResult(0,ctx.Err())}
+func(c *parityOwnerClient)XRead(ctx context.Context,a *redis.XReadArgs)*redis.XStreamSliceCmd{<-ctx.Done();return redis.NewXStreamSliceCmdResult(nil,ctx.Err())}
+func ParityOwner(f ParityOwnerFixture)any{ctx,cancel:=context.WithCancel(context.Background());defer cancel();calls:=[]string{};mu:=&sync.Mutex{};write:=&parityOwnerClient{name:"write",failure:f.Failure,calls:&calls,mu:mu,heartbeat:make(chan bool,1),scan:make(chan bool,1)};read:=write;if f.Separate{read=&parityOwnerClient{name:"read",failure:f.Failure,calls:&calls,mu:mu}};r:=NewShardedStreamRelay(NewHub(),write,read,ShardedStreamRelayConfig{Shards:2});beforeErrors:=M.RedisRelayRetentionErrors.Load();r.Start(ctx);connected:=M.RedisConnected.Load();<-write.heartbeat;<-write.scan;r.Stop();stoppedParent:=ctx.Err()!=nil;cancel();r.Wait();return map[string]any{"pings":calls,"connected":connected,"stop_canceled_parent":stoppedParent,"joined":true,"final_connected":M.RedisConnected.Load(),"retention_errors":M.RedisRelayRetentionErrors.Load()-beforeErrors}}

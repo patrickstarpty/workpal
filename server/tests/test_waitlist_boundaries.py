@@ -78,7 +78,7 @@ def test_auth_boundaries(authenticated):
     assert client.post(PATH,json={'email':'a@example.com'},headers={'x-csrf-token':csrf}).status_code == 200
     client.post('/auth/logout')
     before = snapshot(client)
-    assert client.post(PATH,json={'email':'a@example.com'},headers=headers).status_code == 401
+    assert client.post(PATH,json={'email':'a@example.com'},headers={k:v+'tampered' for k,v in headers.items()}).status_code == 401
     client.cookies.clear()
     assert client.post(PATH,json={'email':'a@example.com'}).status_code == 401
     assert snapshot(client) == before

@@ -1,7 +1,10 @@
-"""Go hub.go wire semantics, with private subscriptions denied until implemented."""
+"""Go hub.go frame handling with injected task/chat subscription authorization."""
 from copy import deepcopy
 from dataclasses import dataclass
 import json
+from .frame_decode import decode_frame,decode_subscription
+from .forwarding import PERSONAL_EVENTS,MEMBER_PRIVATE_EVENTS,project_outbound
+from ..infrastructure.go_response import marshal_map_json
 
 MAX_FRAME_BYTES = 65536
 
@@ -12,32 +15,24 @@ class FrameResult:
     close_code: int | None = None
 
 
-def parse_frame(raw: str | bytes, workspace_id: str, user_id: str) -> FrameResult:
+def parse_frame(raw: str | bytes, workspace_id: str, user_id: str, *, authorizer=None) -> FrameResult:
     """Return reply and proposed hub operation; caller authenticates identity first.
 
     Oversize means close 1009, ignored input means an empty result. Unsubscribe
     mirrors Go: it removes an existing room without authorizing a new audience.
-    No room operation is performed here. Task/chat subscribe always fails closed.
+    No room operation is performed here. Missing task/chat authorizers fail closed.
     """
     if len(raw.encode('utf-8') if isinstance(raw, str) else raw) > MAX_FRAME_BYTES:
         return FrameResult(close_code=1009)
     try:
-        frame = json.loads(raw)
-    except (ValueError, UnicodeError):
+        kind,payload = decode_frame(raw)
+    except (ValueError, UnicodeError, RecursionError):
         return FrameResult()
-    if not isinstance(frame, dict) or not isinstance(frame.get('type'), str):
-        return FrameResult()
-    kind = frame['type']
     if kind == 'ping':
         return FrameResult(reply={'type': 'pong'})
     if kind not in ('subscribe', 'unsubscribe'):
         return FrameResult()
-    payload = frame.get('payload')
-    scope = payload.get('scope') if isinstance(payload, dict) else None
-    room = payload.get('id') if isinstance(payload, dict) else None
-    valid = isinstance(scope, str) and isinstance(room, str) and scope != '' and room != ''
-    scope = scope if isinstance(scope, str) else ''
-    room = room if isinstance(room, str) else ''
+    scope,room,valid = decode_subscription(payload)
     error = None
     if not valid:
         error = 'invalid payload'
@@ -46,7 +41,11 @@ def parse_frame(raw: str | bytes, workspace_id: str, user_id: str) -> FrameResul
             if room != {'workspace': workspace_id, 'user': user_id}[scope]:
                 error = 'forbidden'
         elif scope in ('task', 'chat'):
-            error = 'forbidden'
+            try:
+                if authorizer is None or not authorizer(user_id,workspace_id,scope,room):
+                    error = 'forbidden'
+            except Exception:
+                error = 'lookup_failed'
         else:
             error = 'unknown_scope'
     response = {'scope': scope, 'id': room}
@@ -62,12 +61,42 @@ class ProjectionError(ValueError):
     """Reject/quarantine this event; caller must never broadcast on failure."""
 
 
+def private_kind(event):
+    if not isinstance(event,dict):return None
+    kind=event.get('type','')
+    if not isinstance(kind,str):return None
+    # Personal subscribers and dual-delivery events retain their existing path.
+    if kind in PERSONAL_EVENTS or kind in ('invitation:accepted','invitation:declined','member:added'):
+        return None
+    if kind.startswith('chat:') or (kind=='task:message' and event.get('chatSessionID')):
+        return 'chatSessionOwnerID'
+    if event.get('memberPrivateUserID') or kind in MEMBER_PRIVATE_EVENTS:
+        return 'memberPrivateUserID'
+    return None
+
+
+def project_private(event,workspace_id):
+    strings={'type','workspaceID','actorID','actorType','taskID','chatSessionID',
+             'chatSessionOwnerID','memberPrivateUserID','eventID'}
+    if set(event)-strings-{'payload'} or any(not isinstance(event[key],str) for key in strings & set(event)):
+        raise ProjectionError('invalid private envelope')
+    if event.get('workspaceID')!=workspace_id:
+        raise ProjectionError('foreign workspace')
+    frame=dict(type=event['type'],payload=project_outbound(event['type'],event.get('payload')),
+               actor_id=event.get('actorID',''),actor_type=event.get('actorType',''))
+    try:marshal_map_json(frame)
+    except (ValueError,TypeError,UnicodeError,RecursionError) as exc:
+        raise ProjectionError('non JSON private event') from exc
+    return deepcopy(frame)
+
+
 def project_event(event: dict, workspace_id: str) -> dict:
     """Project only a complete workspace response for the specified audience.
 
     Membership/session checks remain mandatory at the hub content-write boundary.
     Internal eventID is deliberately absent from browser frames.
     """
+    if private_kind(event):return project_private(event,workspace_id)
     allowed = {'eventID', 'type', 'workspaceID', 'actorID', 'actorType', 'payload'}
     if not isinstance(event, dict) or set(event) - allowed:
         raise ProjectionError('unsupported envelope fields or private audience hints')
@@ -143,6 +172,10 @@ def resolve_audience(event):
     A null invitee intentionally has no audience; never fall back to workspace.
     """
     project_event(event, event.get('workspaceID'))
+    recipient_key=private_kind(event)
+    if recipient_key:
+        recipient=event.get(recipient_key,'');workspace=event.get('workspaceID','')
+        return ('workspace_member',workspace+':'+recipient) if recipient and workspace else None
     if event['type'] in ('invitation:accepted', 'invitation:declined', 'member:added'):
         recipient = event['payload']['member']['user_id'] if event['type'] == 'member:added' else event['actorID']
         return frozenset({('workspace', event['workspaceID'])} | ({('user', recipient)} if recipient else set()))

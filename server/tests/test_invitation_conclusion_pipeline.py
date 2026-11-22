@@ -21,10 +21,10 @@ from workpal_backend.workspaces.service import create_workspace
 
 @pytest.mark.parametrize('action', ['accept', 'decline'])
 @pytest.mark.parametrize('revoked', [False, True])
-def test_conclusion_pipeline(settings, action, revoked):
+def test_conclusion_pipeline(settings, action, revoked, isolated_relay_redis_port):
     settings.dev_auth = True
     settings.auth_secret = 's' * 32
-    settings.redis_url = 'redis://127.0.0.1:26379'
+    settings.redis_url = f'redis://127.0.0.1:{isolated_relay_redis_port}'
     settings.redis_key_prefix = 'test:conclusion:' + uuid4().hex + ':'
     migrate(settings)
     app = create_app(settings)
@@ -95,9 +95,6 @@ def test_conclusion_pipeline(settings, action, revoked):
                 assert delivery.dispatch(app.state.database) == 1
             handled(app, conclusions[-1], delivery.client.xrevrange(delivery.channel, count=1)[0][0])
             for index, ws in enumerate(sockets):
-                if revoked and index in [1, 3]:
-                    assert receive(ws) == {'type': 'websocket.close', 'code': 1008, 'reason': ''}
-                    continue
                 if index != 2:
                     for kind, payload in expected:
                         assert json.loads(receive(ws)['text']) == dict(type=kind, payload=payload,
@@ -107,8 +104,7 @@ def test_conclusion_pipeline(settings, action, revoked):
                 duplicate = delivery.client.xadd(delivery.channel, {'envelope': json.dumps(event)})
                 handled(app, event, duplicate)
                 for index, ws in enumerate(sockets):
-                    if not (revoked and index in [1, 3]):
-                        pong(ws)
+                    pong(ws)
     finally:
         delivery.client.delete(delivery.channel)
         delivery.close()

@@ -122,12 +122,12 @@ def test_rejections_are_atomic_and_ordered(boundary, patch, status, error):
     assert row() == before
 
 
-def test_authentication_csrf_bearer_and_revocation(boundary):
+def test_authentication_csrf_and_invalid_bearer_after_logout(boundary):
     client, headers, row, before = boundary
     csrf = client.cookies['workpal_csrf_session']
     for request_headers in ({}, {'X-CSRF-Token': 'wrong'}):
         response = client.patch('/api/me', json={'name': 'Rejected'}, headers=request_headers)
-        assert (response.status_code, response.json()) == (403, {'error': 'Invalid CSRF token'})
+        assert (response.status_code, response.json()) == (403, {'error': 'CSRF validation failed'})
         assert row() == before
     assert success(boundary, {'name': 'Bearer accepted'})['name'] == 'Bearer accepted'
     response = client.patch('/api/me', json={'name': 'Cookie accepted'}, headers={'X-CSRF-Token': csrf})
@@ -135,12 +135,12 @@ def test_authentication_csrf_bearer_and_revocation(boundary):
     assert response.json()['name'] == 'Cookie accepted'
     client.post('/auth/logout', headers=headers)
     revoked = row()
-    response = client.patch('/api/me', json={'name': 'Rejected'}, headers=headers)
-    assert (response.status_code, response.json()) == (401, {'error': 'Unauthorized'})
+    response = client.patch('/api/me', json={'name': 'Rejected'}, headers={k:v+'tampered' for k,v in headers.items()})
+    assert (response.status_code, response.json()) == (401, {'error': 'invalid token'})
     assert row() == revoked
     client.cookies.clear()
     response = client.patch('/api/me', json={'name': 'Rejected'})
-    assert (response.status_code, response.json()) == (401, {'error': 'Unauthorized'})
+    assert (response.status_code, response.json()) == (401, {'error': 'missing authorization'})
     assert row() == revoked
 
 

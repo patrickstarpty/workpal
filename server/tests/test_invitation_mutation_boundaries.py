@@ -17,11 +17,11 @@ from workpal_backend.workspaces.invitation_admission import InvitationAdmission
 
 
 @pytest.fixture
-def boundary(settings):
+def boundary(settings, isolated_relay_redis_port):
     settings.dev_auth = True
     settings.auth_secret = 's' * 32
     settings.busy_timeout_ms = 100
-    settings.redis_url = 'redis://127.0.0.1:26379'
+    settings.redis_url = f'redis://127.0.0.1:{isolated_relay_redis_port}'
     settings.redis_key_prefix = 'test:boundaries:' + uuid4().hex + ':'
     migrate(settings)
     redis = Redis.from_url(settings.redis_url)

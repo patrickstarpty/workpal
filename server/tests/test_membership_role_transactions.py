@@ -99,7 +99,7 @@ def test_caught_failure_must_not_commit_partial_change(seeded, monkeypatch, fail
         assert s.scalar(select(users.c.name).where(users.c.id == first)) == 'Unrelated caller change'
 
 
-def test_reopen_and_real_redis_outage_recovery_fifo(settings, seeded):
+def test_reopen_and_real_redis_outage_recovery_fifo(settings, seeded, isolated_relay_redis_port):
     db, ws, first, second = seeded
     settings.redis_key_prefix = 'test:member-role:'+uuid4().hex+':'
     with db.transaction() as s:
@@ -114,7 +114,7 @@ def test_reopen_and_real_redis_outage_recovery_fifo(settings, seeded):
         failed.close()
         db.close()
     reopened = Database(settings)
-    settings.redis_url = 'redis://127.0.0.1:26379'
+    settings.redis_url = f'redis://127.0.0.1:{isolated_relay_redis_port}'
     delivery = OutboxDelivery(settings)
     client = Redis.from_url(settings.redis_url, socket_timeout=2)
     try:

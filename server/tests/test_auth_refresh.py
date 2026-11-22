@@ -3,8 +3,10 @@ from workpal_backend.app import create_app
 from workpal_backend.infrastructure.database import migrate
 from workpal_backend.auth.tokens import issue_session, decode_session
 import time
+import pytest
 
-def test_refresh_and_safe_renewal(settings):
+@pytest.mark.parametrize('fallback_header', [None, 'Basic ignored', 'bearer ignored', ''])
+def test_refresh_and_safe_renewal(settings, fallback_header):
     settings.dev_auth = True
     settings.auth_secret = 's'*32
     settings.auth_token_ttl = 60
@@ -19,7 +21,7 @@ def test_refresh_and_safe_renewal(settings):
         old = issue_session(user['id'],user['email'],user['name'],settings.auth_secret,60,now=int(time.time())-31,sid=decode_session(login['token'],settings.auth_secret)['sid'])
         c.cookies.set('workpal_auth',old,domain='testserver.local',path='/')
         csrf = c.cookies['workpal_csrf_session']
-        r = c.get('/api/me')
+        r = c.get('/api/me', headers={} if fallback_header is None else {'Authorization':fallback_header})
         assert r.status_code == 200
         renewed = c.cookies['workpal_auth']
         assert renewed != old

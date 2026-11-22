@@ -1,0 +1,368 @@
+{
+  "shell": {
+    "theme": "neutral",
+    "dock": {
+      "width": 56,
+      "height": 900,
+      "x": 0,
+      "y": 0,
+      "fontSize": "14px",
+      "lineHeight": "20px",
+      "borderRadius": "0px"
+    },
+    "panel": {
+      "width": 280,
+      "height": 860,
+      "x": 56,
+      "y": 8,
+      "fontSize": "14px",
+      "lineHeight": "20px",
+      "borderRadius": "12px 0px 0px 12px"
+    },
+    "pencil": {
+      "width": 36,
+      "height": 32,
+      "x": 10,
+      "y": 57,
+      "fontSize": "13px",
+      "lineHeight": "18px",
+      "borderRadius": "8px"
+    },
+    "pencilSVG": {
+      "width": 18,
+      "height": 18,
+      "x": 19,
+      "y": 64,
+      "fontSize": "13px",
+      "lineHeight": "18px",
+      "borderRadius": "0px"
+    },
+    "heading": {
+      "width": 1096,
+      "height": 48,
+      "x": 336,
+      "y": 8,
+      "fontSize": "14px",
+      "lineHeight": "20px",
+      "borderRadius": "0px"
+    },
+    "groupTags": [
+      {
+        "tag": "DIV",
+        "text": "Inbox",
+        "expanded": null
+      },
+      {
+        "tag": "DIV",
+        "text": "Views",
+        "expanded": null
+      },
+      {
+        "tag": "DIV",
+        "text": "Projects",
+        "expanded": null
+      },
+      {
+        "tag": "DIV",
+        "text": "Workspace",
+        "expanded": null
+      }
+    ]
+  },
+  "searchOpen": {
+    "focus": "<button type=\"button\" class=\"btn icon-only\" aria-label=\"Close dialog\" title=\"Close dialog\" data-act=\"dismiss\" data-id=\"\"><svg class=\"icon\" aria-hidden=\"true\" vi",
+    "width": 560,
+    "height": 220,
+    "y": 340,
+    "placeholder": null,
+    "inputHeight": 34,
+    "role": null,
+    "header": "Search workspace"
+  },
+  "beforeSubmit": {
+    "results": 0
+  },
+  "afterSubmit": {
+    "results": 1,
+    "focus": "BODY"
+  },
+  "projectPencil": {
+    "page": "Skill Hub",
+    "selectedProject": "TAP"
+  },
+  "createShortcut": {
+    "dialogOpen": false
+  },
+  "mobile": [
+    {
+      "tag": "BUTTON",
+      "label": "Switch workspace, TAP",
+      "inRail": true,
+      "inMain": false
+    },
+    {
+      "tag": "BUTTON",
+      "label": "New issue",
+      "inRail": true,
+      "inMain": false
+    },
+    {
+      "tag": "BUTTON",
+      "label": "Search workspace",
+      "inRail": true,
+      "inMain": false
+    },
+    {
+      "tag": "A",
+      "label": "Work",
+      "inRail": true,
+      "inMain": false
+    },
+    {
+      "tag": "A",
+      "label": "Team",
+      "inRail": true,
+      "inMain": false
+    },
+    {
+      "tag": "A",
+      "label": "Chat",
+      "inRail": true,
+      "inMain": false
+    },
+    {
+      "tag": "A",
+      "label": "Auto",
+      "inRail": true,
+      "inMain": false
+    },
+    {
+      "tag": "A",
+      "label": "Settings",
+      "inRail": true,
+      "inMain": false
+    },
+    {
+      "tag": "BUTTON",
+      "label": "Account and workspaces",
+      "inRail": true,
+      "inMain": false
+    },
+    {
+      "tag": "BUTTON",
+      "label": "Collapse sidebar",
+      "inRail": true,
+      "inMain": false
+    },
+    {
+      "tag": "A",
+      "label": "Inbox",
+      "inRail": true,
+      "inMain": false
+    },
+    {
+      "tag": "A",
+      "label": "All issues282",
+      "inRail": true,
+      "inMain": false
+    },
+    {
+      "tag": "A",
+      "label": "My work27",
+      "inRail": true,
+      "inMain": false
+    },
+    {
+      "tag": "A",
+      "label": "Saved views",
+      "inRail": true,
+      "inMain": false
+    },
+    {
+      "tag": "BUTTON",
+      "label": "Needs review",
+      "inRail": true,
+      "inMain": false
+    },
+    {
+      "tag": "A",
+      "label": "Projects",
+      "inRail": true,
+      "inMain": false
+    },
+    {
+      "tag": "BUTTON",
+      "label": "TAP99",
+      "inRail": true,
+      "inMain": false
+    },
+    {
+      "tag": "BUTTON",
+      "label": "Developer Platform92",
+      "inRail": true,
+      "inMain": false
+    },
+    {
+      "tag": "BUTTON",
+      "label": "Skill Hub91",
+      "inRail": true,
+      "inMain": false
+    },
+    {
+      "tag": "A",
+      "label": "Overview",
+      "inRail": true,
+      "inMain": false
+    },
+    {
+      "tag": "A",
+      "label": "Reports",
+      "inRail": true,
+      "inMain": false
+    },
+    {
+      "tag": "BUTTON",
+      "label": "Workspace menu",
+      "inRail": false,
+      "inMain": true
+    },
+    {
+      "tag": "BUTTON",
+      "label": "Filter issues",
+      "inRail": false,
+      "inMain": true
+    },
+    {
+      "tag": "SUMMARY",
+      "label": "Display",
+      "inRail": false,
+      "inMain": true
+    },
+    {
+      "tag": "BUTTON",
+      "label": "New issue",
+      "inRail": false,
+      "inMain": true
+    },
+    {
+      "tag": "A",
+      "label": "All issues",
+      "inRail": false,
+      "inMain": true
+    },
+    {
+      "tag": "A",
+      "label": "Archived 0",
+      "inRail": false,
+      "inMain": true
+    },
+    {
+      "tag": "BUTTON",
+      "label": "Collapse Backlog",
+      "inRail": false,
+      "inMain": true
+    },
+    {
+      "tag": "BUTTON",
+      "label": "New issue in Backlog",
+      "inRail": false,
+      "inMain": true
+    },
+    {
+      "tag": "BUTTON",
+      "label": "TAP-030Define acceptance criteria f",
+      "inRail": false,
+      "inMain": true
+    },
+    {
+      "tag": "BUTTON",
+      "label": "TAP-031Review conversational contex",
+      "inRail": false,
+      "inMain": true
+    },
+    {
+      "tag": "BUTTON",
+      "label": "SKILL-1064Keep filters when returni",
+      "inRail": false,
+      "inMain": true
+    },
+    {
+      "tag": "BUTTON",
+      "label": "SKILL-1067Handle an unavailable ups",
+      "inRail": false,
+      "inMain": true
+    },
+    {
+      "tag": "BUTTON",
+      "label": "SKILL-1075Record who approved a ver",
+      "inRail": false,
+      "inMain": true
+    },
+    {
+      "tag": "BUTTON",
+      "label": "SKILL-1077Migrate legacy unversione",
+      "inRail": false,
+      "inMain": true
+    },
+    {
+      "tag": "BUTTON",
+      "label": "SKILL-1079Require an example input ",
+      "inRail": false,
+      "inMain": true
+    },
+    {
+      "tag": "BUTTON",
+      "label": "SKILL-1082Flag installation command",
+      "inRail": false,
+      "inMain": true
+    },
+    {
+      "tag": "BUTTON",
+      "label": "SKILL-1085Share a collection with a",
+      "inRail": false,
+      "inMain": true
+    },
+    {
+      "tag": "BUTTON",
+      "label": "SKILL-1086Keep private skills out o",
+      "inRail": false,
+      "inMain": true
+    },
+    {
+      "tag": "BUTTON",
+      "label": "SKILL-1087Reorder skills with keybo",
+      "inRail": false,
+      "inMain": true
+    },
+    {
+      "tag": "BUTTON",
+      "label": "SKILL-1088Transfer collection owner",
+      "inRail": false,
+      "inMain": true
+    },
+    {
+      "tag": "BUTTON",
+      "label": "SKILL-1089Explain why a shared skil",
+      "inRail": false,
+      "inMain": true
+    },
+    {
+      "tag": "BUTTON",
+      "label": "Collapse To do",
+      "inRail": false,
+      "inMain": true
+    },
+    {
+      "tag": "BUTTON",
+      "label": "New issue in To do",
+      "inRail": false,
+      "inMain": true
+    },
+    {
+      "tag": "BUTTON",
+      "label": "TAP-034Approve the next rollout coh",
+      "inRail": false,
+      "inMain": true
+    }
+  ]
+}

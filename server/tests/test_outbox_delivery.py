@@ -9,7 +9,7 @@ from workpal_backend.infrastructure.outbox import append_event, outbox, claim_ba
 from workpal_backend.infrastructure.delivery import OutboxDelivery
 
 
-def test_outage_recovery_rollback_restart(settings):
+def test_outage_recovery_rollback_restart(settings, isolated_relay_redis_port):
     settings.redis_key_prefix = 'test:delivery:' + uuid4().hex + ':'
     migrate(settings)
     db = Database(settings)
@@ -33,7 +33,7 @@ def test_outage_recovery_rollback_restart(settings):
         failed.close()
         db.close()
     time.sleep(1.05)  # Simulate restart after the durable lease expires.
-    settings.redis_url = 'redis://127.0.0.1:26379'
+    settings.redis_url = f'redis://127.0.0.1:{isolated_relay_redis_port}'
     subscriber = Redis.from_url(settings.redis_url, socket_timeout=2)
     delivery = OutboxDelivery(settings)
     db = Database(settings)
@@ -126,11 +126,11 @@ def test_worker_wiring_and_client_shutdown(settings, tmp_path, monkeypatch):
     finally: db.close()
 
 
-def test_duplicate_attempt_after_ack_failure_keeps_event_id(settings, monkeypatch):
+def test_duplicate_attempt_after_ack_failure_keeps_event_id(settings, monkeypatch, isolated_relay_redis_port):
     import workpal_backend.infrastructure.delivery as module
     from sqlalchemy import update
     settings.redis_key_prefix = 'test:delivery:' + uuid4().hex + ':'
-    settings.redis_url = 'redis://127.0.0.1:26379'
+    settings.redis_url = f'redis://127.0.0.1:{isolated_relay_redis_port}'
     migrate(settings)
     db = Database(settings)
     delivery = OutboxDelivery(settings)

@@ -1,6 +1,6 @@
 # SQLite schema translation map
 
-Status: source-complete DDL ledger; per-constraint implementation and behavioral verification pending.
+Status: source-complete DDL ledger; per-constraint implementation and behavioral verification pending. The user approved retaining SQLite with concurrency/snapshot differences only; see `database-exceptions.json` and the approved database decision. Constraints, authorization, atomic rollback, durable data and business behavior remain required. This approval is not implementation evidence.
 
 UUID → TEXT retaining wire format; timestamptz → UTC canonical text; boolean → INTEGER CHECK 0/1; json/jsonb → validated JSON TEXT; bytea → BLOB; arrays → child relation tables where referenced, otherwise JSON with explicit order semantics. Translate PostgreSQL enum constraints to CHECK or lookup tables. Preserve NULL and default distinctions. Preserve every UNIQUE/FK/ON DELETE below; enable foreign_keys for each connection. PostgreSQL sequences require explicit per-workspace atomic allocation. Partial indexes require matching SQLite predicates. GIN/trigram/tsvector search requires separately tested tokenization/ranking; no claimed equivalence. FOR UPDATE/SKIP LOCKED → bounded short SQLite claim transactions with owner/fencing predicates. SQL functions/triggers/RLS need explicit repository authorization and migration equivalents.
 

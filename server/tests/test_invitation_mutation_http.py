@@ -8,10 +8,10 @@ from workpal_backend.auth.models import users
 from sqlalchemy import select
 
 
-def test_create_http_real_admission(settings):
+def test_create_http_real_admission(settings, isolated_relay_redis_port):
     settings.dev_auth = True
     settings.auth_secret = 's' * 32
-    settings.redis_url = 'redis://127.0.0.1:26379'
+    settings.redis_url = f'redis://127.0.0.1:{isolated_relay_redis_port}'
     settings.redis_key_prefix = 'test:mutation:' + uuid4().hex + ':'
     migrate(settings)
     redis = Redis.from_url(settings.redis_url)

@@ -63,7 +63,7 @@ def test_unauthorized(workspace):
                 service.update_workspace(s, principal, ws['id'], {'name':'Denied'})
     assert rows(db) == []
 
-def test_outage_recovery(workspace, settings):
+def test_outage_recovery(workspace, settings, isolated_relay_redis_port):
     db, actor, ws = workspace
     settings.redis_key_prefix = 'test:workspace-producer:' + uuid4().hex + ':'
     with db.transaction() as s:
@@ -76,7 +76,7 @@ def test_outage_recovery(workspace, settings):
     assert row['state'] == 'pending'
     with db.transaction() as s:
         assert service.get_workspace(s, actor, ws['id']) == result
-    settings.redis_url = 'redis://127.0.0.1:26379'
+    settings.redis_url = f'redis://127.0.0.1:{isolated_relay_redis_port}'
     delivery = OutboxDelivery(settings)
     try:
         assert delivery.dispatch(db) == 1

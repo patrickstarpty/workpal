@@ -26,7 +26,7 @@ def audience(settings):
     identities = []
     with TestClient(app) as client:
         for index in range(2):
-            uid = f'audience-user-{index}'
+            uid = f'00000000-0000-0000-0000-{index+1:012x}'
             email = f'audience-{index}@example.com'
             with app.state.database.transaction() as session:
                 session.execute(users.insert().values(id=uid, email=email, name=uid,
@@ -67,25 +67,29 @@ def event(identity):
             'payload': {'workspace': identity[2]}}
 
 
-def test_idle_membership_removal_closes(audience):
+def test_idle_membership_removal_is_enforced_on_next_content_write(audience):
     client, app, settings, identities = audience
     identity = identities[0]
     with connected(client, app, identity) as ws:
         pong(ws)
-        started = time.monotonic()
         with app.state.database.transaction() as session:
             session.execute(delete(members).where(members.c.user_id == identity[0]))
+        # Go readPump does not poll membership. A database-only change leaves
+        # an idle connection open until a content write or removal event.
+        ws.portal.call(anyio.sleep, .65)
+        assert app.state.realtime.connections
+        ws.send_json({'type':'ping'})
         assert receive(ws) == {'type': 'websocket.close', 'code': 1008, 'reason': ''}
-        assert time.monotonic() - started < 2
 
 
-def test_real_expiry_after_handshake_closes(audience):
+def test_real_expiry_after_handshake_keeps_connection(audience):
     client, app, settings, identities = audience
     identity = identities[0]
     token = issue_session(identity[0], identity[1], identity[0], settings.auth_secret, 2)
     with connected(client, app, identity, token) as ws:
         pong(ws)
-        assert receive(ws, 4) == {'type': 'websocket.close', 'code': 1008, 'reason': ''}
+        time.sleep(2.1)
+        pong(ws)
 
 
 def test_simultaneous_workspace_audiences(audience):
@@ -120,4 +124,8 @@ def test_invalidation_before_publish_drops_content(audience, invalidate):
             else:
                 revoke_session(session, settings, identity[3])
         client.portal.call(app.state.realtime.publish, event(identity))
-        assert receive(ws) == {'type': 'websocket.close', 'code': 1008, 'reason': ''}
+        if invalidate == 'remove':
+            assert receive(ws) == {'type': 'websocket.close', 'code': 1008, 'reason': ''}
+        else:
+            assert json.loads(receive(ws)['text'])['type'] == 'workspace:updated'
+            pong(ws)

@@ -1,0 +1,3985 @@
+{
+  "scope": "Actual Go membership cache: disabled cache, raw key composition, presence not value truthiness, command order, TTL, and client error fallback. Injected command outcomes; real Redis lifecycle tested separately; no transport retry/cancellation timing certification.",
+  "fixtures": [
+    {
+      "Disabled": false,
+      "User": "user",
+      "Workspace": "workspace",
+      "Value": "",
+      "Present": false,
+      "Failure": ""
+    },
+    {
+      "Disabled": false,
+      "User": "user",
+      "Workspace": "workspace",
+      "Value": "",
+      "Present": false,
+      "Failure": "unavailable"
+    },
+    {
+      "Disabled": false,
+      "User": "user",
+      "Workspace": "workspace",
+      "Value": "",
+      "Present": true,
+      "Failure": ""
+    },
+    {
+      "Disabled": false,
+      "User": "user",
+      "Workspace": "workspace",
+      "Value": "",
+      "Present": true,
+      "Failure": "unavailable"
+    },
+    {
+      "Disabled": false,
+      "User": "user",
+      "Workspace": "workspace",
+      "Value": "0",
+      "Present": false,
+      "Failure": ""
+    },
+    {
+      "Disabled": false,
+      "User": "user",
+      "Workspace": "workspace",
+      "Value": "0",
+      "Present": false,
+      "Failure": "unavailable"
+    },
+    {
+      "Disabled": false,
+      "User": "user",
+      "Workspace": "workspace",
+      "Value": "0",
+      "Present": true,
+      "Failure": ""
+    },
+    {
+      "Disabled": false,
+      "User": "user",
+      "Workspace": "workspace",
+      "Value": "0",
+      "Present": true,
+      "Failure": "unavailable"
+    },
+    {
+      "Disabled": false,
+      "User": "user",
+      "Workspace": "workspace",
+      "Value": "1",
+      "Present": false,
+      "Failure": ""
+    },
+    {
+      "Disabled": false,
+      "User": "user",
+      "Workspace": "workspace",
+      "Value": "1",
+      "Present": false,
+      "Failure": "unavailable"
+    },
+    {
+      "Disabled": false,
+      "User": "user",
+      "Workspace": "workspace",
+      "Value": "1",
+      "Present": true,
+      "Failure": ""
+    },
+    {
+      "Disabled": false,
+      "User": "user",
+      "Workspace": "workspace",
+      "Value": "1",
+      "Present": true,
+      "Failure": "unavailable"
+    },
+    {
+      "Disabled": false,
+      "User": "user",
+      "Workspace": "workspace",
+      "Value": "arbitrary",
+      "Present": false,
+      "Failure": ""
+    },
+    {
+      "Disabled": false,
+      "User": "user",
+      "Workspace": "workspace",
+      "Value": "arbitrary",
+      "Present": false,
+      "Failure": "unavailable"
+    },
+    {
+      "Disabled": false,
+      "User": "user",
+      "Workspace": "workspace",
+      "Value": "arbitrary",
+      "Present": true,
+      "Failure": ""
+    },
+    {
+      "Disabled": false,
+      "User": "user",
+      "Workspace": "workspace",
+      "Value": "arbitrary",
+      "Present": true,
+      "Failure": "unavailable"
+    },
+    {
+      "Disabled": false,
+      "User": "",
+      "Workspace": "",
+      "Value": "",
+      "Present": false,
+      "Failure": ""
+    },
+    {
+      "Disabled": false,
+      "User": "",
+      "Workspace": "",
+      "Value": "",
+      "Present": false,
+      "Failure": "unavailable"
+    },
+    {
+      "Disabled": false,
+      "User": "",
+      "Workspace": "",
+      "Value": "",
+      "Present": true,
+      "Failure": ""
+    },
+    {
+      "Disabled": false,
+      "User": "",
+      "Workspace": "",
+      "Value": "",
+      "Present": true,
+      "Failure": "unavailable"
+    },
+    {
+      "Disabled": false,
+      "User": "",
+      "Workspace": "",
+      "Value": "0",
+      "Present": false,
+      "Failure": ""
+    },
+    {
+      "Disabled": false,
+      "User": "",
+      "Workspace": "",
+      "Value": "0",
+      "Present": false,
+      "Failure": "unavailable"
+    },
+    {
+      "Disabled": false,
+      "User": "",
+      "Workspace": "",
+      "Value": "0",
+      "Present": true,
+      "Failure": ""
+    },
+    {
+      "Disabled": false,
+      "User": "",
+      "Workspace": "",
+      "Value": "0",
+      "Present": true,
+      "Failure": "unavailable"
+    },
+    {
+      "Disabled": false,
+      "User": "",
+      "Workspace": "",
+      "Value": "1",
+      "Present": false,
+      "Failure": ""
+    },
+    {
+      "Disabled": false,
+      "User": "",
+      "Workspace": "",
+      "Value": "1",
+      "Present": false,
+      "Failure": "unavailable"
+    },
+    {
+      "Disabled": false,
+      "User": "",
+      "Workspace": "",
+      "Value": "1",
+      "Present": true,
+      "Failure": ""
+    },
+    {
+      "Disabled": false,
+      "User": "",
+      "Workspace": "",
+      "Value": "1",
+      "Present": true,
+      "Failure": "unavailable"
+    },
+    {
+      "Disabled": false,
+      "User": "",
+      "Workspace": "",
+      "Value": "arbitrary",
+      "Present": false,
+      "Failure": ""
+    },
+    {
+      "Disabled": false,
+      "User": "",
+      "Workspace": "",
+      "Value": "arbitrary",
+      "Present": false,
+      "Failure": "unavailable"
+    },
+    {
+      "Disabled": false,
+      "User": "",
+      "Workspace": "",
+      "Value": "arbitrary",
+      "Present": true,
+      "Failure": ""
+    },
+    {
+      "Disabled": false,
+      "User": "",
+      "Workspace": "",
+      "Value": "arbitrary",
+      "Present": true,
+      "Failure": "unavailable"
+    },
+    {
+      "Disabled": false,
+      "User": "u:x",
+      "Workspace": "w:y",
+      "Value": "",
+      "Present": false,
+      "Failure": ""
+    },
+    {
+      "Disabled": false,
+      "User": "u:x",
+      "Workspace": "w:y",
+      "Value": "",
+      "Present": false,
+      "Failure": "unavailable"
+    },
+    {
+      "Disabled": false,
+      "User": "u:x",
+      "Workspace": "w:y",
+      "Value": "",
+      "Present": true,
+      "Failure": ""
+    },
+    {
+      "Disabled": false,
+      "User": "u:x",
+      "Workspace": "w:y",
+      "Value": "",
+      "Present": true,
+      "Failure": "unavailable"
+    },
+    {
+      "Disabled": false,
+      "User": "u:x",
+      "Workspace": "w:y",
+      "Value": "0",
+      "Present": false,
+      "Failure": ""
+    },
+    {
+      "Disabled": false,
+      "User": "u:x",
+      "Workspace": "w:y",
+      "Value": "0",
+      "Present": false,
+      "Failure": "unavailable"
+    },
+    {
+      "Disabled": false,
+      "User": "u:x",
+      "Workspace": "w:y",
+      "Value": "0",
+      "Present": true,
+      "Failure": ""
+    },
+    {
+      "Disabled": false,
+      "User": "u:x",
+      "Workspace": "w:y",
+      "Value": "0",
+      "Present": true,
+      "Failure": "unavailable"
+    },
+    {
+      "Disabled": false,
+      "User": "u:x",
+      "Workspace": "w:y",
+      "Value": "1",
+      "Present": false,
+      "Failure": ""
+    },
+    {
+      "Disabled": false,
+      "User": "u:x",
+      "Workspace": "w:y",
+      "Value": "1",
+      "Present": false,
+      "Failure": "unavailable"
+    },
+    {
+      "Disabled": false,
+      "User": "u:x",
+      "Workspace": "w:y",
+      "Value": "1",
+      "Present": true,
+      "Failure": ""
+    },
+    {
+      "Disabled": false,
+      "User": "u:x",
+      "Workspace": "w:y",
+      "Value": "1",
+      "Present": true,
+      "Failure": "unavailable"
+    },
+    {
+      "Disabled": false,
+      "User": "u:x",
+      "Workspace": "w:y",
+      "Value": "arbitrary",
+      "Present": false,
+      "Failure": ""
+    },
+    {
+      "Disabled": false,
+      "User": "u:x",
+      "Workspace": "w:y",
+      "Value": "arbitrary",
+      "Present": false,
+      "Failure": "unavailable"
+    },
+    {
+      "Disabled": false,
+      "User": "u:x",
+      "Workspace": "w:y",
+      "Value": "arbitrary",
+      "Present": true,
+      "Failure": ""
+    },
+    {
+      "Disabled": false,
+      "User": "u:x",
+      "Workspace": "w:y",
+      "Value": "arbitrary",
+      "Present": true,
+      "Failure": "unavailable"
+    },
+    {
+      "Disabled": false,
+      "User": "\u7528\u6237",
+      "Workspace": "\u5de5\u4f5c\u533a",
+      "Value": "",
+      "Present": false,
+      "Failure": ""
+    },
+    {
+      "Disabled": false,
+      "User": "\u7528\u6237",
+      "Workspace": "\u5de5\u4f5c\u533a",
+      "Value": "",
+      "Present": false,
+      "Failure": "unavailable"
+    },
+    {
+      "Disabled": false,
+      "User": "\u7528\u6237",
+      "Workspace": "\u5de5\u4f5c\u533a",
+      "Value": "",
+      "Present": true,
+      "Failure": ""
+    },
+    {
+      "Disabled": false,
+      "User": "\u7528\u6237",
+      "Workspace": "\u5de5\u4f5c\u533a",
+      "Value": "",
+      "Present": true,
+      "Failure": "unavailable"
+    },
+    {
+      "Disabled": false,
+      "User": "\u7528\u6237",
+      "Workspace": "\u5de5\u4f5c\u533a",
+      "Value": "0",
+      "Present": false,
+      "Failure": ""
+    },
+    {
+      "Disabled": false,
+      "User": "\u7528\u6237",
+      "Workspace": "\u5de5\u4f5c\u533a",
+      "Value": "0",
+      "Present": false,
+      "Failure": "unavailable"
+    },
+    {
+      "Disabled": false,
+      "User": "\u7528\u6237",
+      "Workspace": "\u5de5\u4f5c\u533a",
+      "Value": "0",
+      "Present": true,
+      "Failure": ""
+    },
+    {
+      "Disabled": false,
+      "User": "\u7528\u6237",
+      "Workspace": "\u5de5\u4f5c\u533a",
+      "Value": "0",
+      "Present": true,
+      "Failure": "unavailable"
+    },
+    {
+      "Disabled": false,
+      "User": "\u7528\u6237",
+      "Workspace": "\u5de5\u4f5c\u533a",
+      "Value": "1",
+      "Present": false,
+      "Failure": ""
+    },
+    {
+      "Disabled": false,
+      "User": "\u7528\u6237",
+      "Workspace": "\u5de5\u4f5c\u533a",
+      "Value": "1",
+      "Present": false,
+      "Failure": "unavailable"
+    },
+    {
+      "Disabled": false,
+      "User": "\u7528\u6237",
+      "Workspace": "\u5de5\u4f5c\u533a",
+      "Value": "1",
+      "Present": true,
+      "Failure": ""
+    },
+    {
+      "Disabled": false,
+      "User": "\u7528\u6237",
+      "Workspace": "\u5de5\u4f5c\u533a",
+      "Value": "1",
+      "Present": true,
+      "Failure": "unavailable"
+    },
+    {
+      "Disabled": false,
+      "User": "\u7528\u6237",
+      "Workspace": "\u5de5\u4f5c\u533a",
+      "Value": "arbitrary",
+      "Present": false,
+      "Failure": ""
+    },
+    {
+      "Disabled": false,
+      "User": "\u7528\u6237",
+      "Workspace": "\u5de5\u4f5c\u533a",
+      "Value": "arbitrary",
+      "Present": false,
+      "Failure": "unavailable"
+    },
+    {
+      "Disabled": false,
+      "User": "\u7528\u6237",
+      "Workspace": "\u5de5\u4f5c\u533a",
+      "Value": "arbitrary",
+      "Present": true,
+      "Failure": ""
+    },
+    {
+      "Disabled": false,
+      "User": "\u7528\u6237",
+      "Workspace": "\u5de5\u4f5c\u533a",
+      "Value": "arbitrary",
+      "Present": true,
+      "Failure": "unavailable"
+    },
+    {
+      "Disabled": true,
+      "User": "user",
+      "Workspace": "workspace",
+      "Value": "",
+      "Present": false,
+      "Failure": ""
+    },
+    {
+      "Disabled": true,
+      "User": "user",
+      "Workspace": "workspace",
+      "Value": "",
+      "Present": false,
+      "Failure": "unavailable"
+    },
+    {
+      "Disabled": true,
+      "User": "user",
+      "Workspace": "workspace",
+      "Value": "",
+      "Present": true,
+      "Failure": ""
+    },
+    {
+      "Disabled": true,
+      "User": "user",
+      "Workspace": "workspace",
+      "Value": "",
+      "Present": true,
+      "Failure": "unavailable"
+    },
+    {
+      "Disabled": true,
+      "User": "user",
+      "Workspace": "workspace",
+      "Value": "0",
+      "Present": false,
+      "Failure": ""
+    },
+    {
+      "Disabled": true,
+      "User": "user",
+      "Workspace": "workspace",
+      "Value": "0",
+      "Present": false,
+      "Failure": "unavailable"
+    },
+    {
+      "Disabled": true,
+      "User": "user",
+      "Workspace": "workspace",
+      "Value": "0",
+      "Present": true,
+      "Failure": ""
+    },
+    {
+      "Disabled": true,
+      "User": "user",
+      "Workspace": "workspace",
+      "Value": "0",
+      "Present": true,
+      "Failure": "unavailable"
+    },
+    {
+      "Disabled": true,
+      "User": "user",
+      "Workspace": "workspace",
+      "Value": "1",
+      "Present": false,
+      "Failure": ""
+    },
+    {
+      "Disabled": true,
+      "User": "user",
+      "Workspace": "workspace",
+      "Value": "1",
+      "Present": false,
+      "Failure": "unavailable"
+    },
+    {
+      "Disabled": true,
+      "User": "user",
+      "Workspace": "workspace",
+      "Value": "1",
+      "Present": true,
+      "Failure": ""
+    },
+    {
+      "Disabled": true,
+      "User": "user",
+      "Workspace": "workspace",
+      "Value": "1",
+      "Present": true,
+      "Failure": "unavailable"
+    },
+    {
+      "Disabled": true,
+      "User": "user",
+      "Workspace": "workspace",
+      "Value": "arbitrary",
+      "Present": false,
+      "Failure": ""
+    },
+    {
+      "Disabled": true,
+      "User": "user",
+      "Workspace": "workspace",
+      "Value": "arbitrary",
+      "Present": false,
+      "Failure": "unavailable"
+    },
+    {
+      "Disabled": true,
+      "User": "user",
+      "Workspace": "workspace",
+      "Value": "arbitrary",
+      "Present": true,
+      "Failure": ""
+    },
+    {
+      "Disabled": true,
+      "User": "user",
+      "Workspace": "workspace",
+      "Value": "arbitrary",
+      "Present": true,
+      "Failure": "unavailable"
+    },
+    {
+      "Disabled": true,
+      "User": "",
+      "Workspace": "",
+      "Value": "",
+      "Present": false,
+      "Failure": ""
+    },
+    {
+      "Disabled": true,
+      "User": "",
+      "Workspace": "",
+      "Value": "",
+      "Present": false,
+      "Failure": "unavailable"
+    },
+    {
+      "Disabled": true,
+      "User": "",
+      "Workspace": "",
+      "Value": "",
+      "Present": true,
+      "Failure": ""
+    },
+    {
+      "Disabled": true,
+      "User": "",
+      "Workspace": "",
+      "Value": "",
+      "Present": true,
+      "Failure": "unavailable"
+    },
+    {
+      "Disabled": true,
+      "User": "",
+      "Workspace": "",
+      "Value": "0",
+      "Present": false,
+      "Failure": ""
+    },
+    {
+      "Disabled": true,
+      "User": "",
+      "Workspace": "",
+      "Value": "0",
+      "Present": false,
+      "Failure": "unavailable"
+    },
+    {
+      "Disabled": true,
+      "User": "",
+      "Workspace": "",
+      "Value": "0",
+      "Present": true,
+      "Failure": ""
+    },
+    {
+      "Disabled": true,
+      "User": "",
+      "Workspace": "",
+      "Value": "0",
+      "Present": true,
+      "Failure": "unavailable"
+    },
+    {
+      "Disabled": true,
+      "User": "",
+      "Workspace": "",
+      "Value": "1",
+      "Present": false,
+      "Failure": ""
+    },
+    {
+      "Disabled": true,
+      "User": "",
+      "Workspace": "",
+      "Value": "1",
+      "Present": false,
+      "Failure": "unavailable"
+    },
+    {
+      "Disabled": true,
+      "User": "",
+      "Workspace": "",
+      "Value": "1",
+      "Present": true,
+      "Failure": ""
+    },
+    {
+      "Disabled": true,
+      "User": "",
+      "Workspace": "",
+      "Value": "1",
+      "Present": true,
+      "Failure": "unavailable"
+    },
+    {
+      "Disabled": true,
+      "User": "",
+      "Workspace": "",
+      "Value": "arbitrary",
+      "Present": false,
+      "Failure": ""
+    },
+    {
+      "Disabled": true,
+      "User": "",
+      "Workspace": "",
+      "Value": "arbitrary",
+      "Present": false,
+      "Failure": "unavailable"
+    },
+    {
+      "Disabled": true,
+      "User": "",
+      "Workspace": "",
+      "Value": "arbitrary",
+      "Present": true,
+      "Failure": ""
+    },
+    {
+      "Disabled": true,
+      "User": "",
+      "Workspace": "",
+      "Value": "arbitrary",
+      "Present": true,
+      "Failure": "unavailable"
+    },
+    {
+      "Disabled": true,
+      "User": "u:x",
+      "Workspace": "w:y",
+      "Value": "",
+      "Present": false,
+      "Failure": ""
+    },
+    {
+      "Disabled": true,
+      "User": "u:x",
+      "Workspace": "w:y",
+      "Value": "",
+      "Present": false,
+      "Failure": "unavailable"
+    },
+    {
+      "Disabled": true,
+      "User": "u:x",
+      "Workspace": "w:y",
+      "Value": "",
+      "Present": true,
+      "Failure": ""
+    },
+    {
+      "Disabled": true,
+      "User": "u:x",
+      "Workspace": "w:y",
+      "Value": "",
+      "Present": true,
+      "Failure": "unavailable"
+    },
+    {
+      "Disabled": true,
+      "User": "u:x",
+      "Workspace": "w:y",
+      "Value": "0",
+      "Present": false,
+      "Failure": ""
+    },
+    {
+      "Disabled": true,
+      "User": "u:x",
+      "Workspace": "w:y",
+      "Value": "0",
+      "Present": false,
+      "Failure": "unavailable"
+    },
+    {
+      "Disabled": true,
+      "User": "u:x",
+      "Workspace": "w:y",
+      "Value": "0",
+      "Present": true,
+      "Failure": ""
+    },
+    {
+      "Disabled": true,
+      "User": "u:x",
+      "Workspace": "w:y",
+      "Value": "0",
+      "Present": true,
+      "Failure": "unavailable"
+    },
+    {
+      "Disabled": true,
+      "User": "u:x",
+      "Workspace": "w:y",
+      "Value": "1",
+      "Present": false,
+      "Failure": ""
+    },
+    {
+      "Disabled": true,
+      "User": "u:x",
+      "Workspace": "w:y",
+      "Value": "1",
+      "Present": false,
+      "Failure": "unavailable"
+    },
+    {
+      "Disabled": true,
+      "User": "u:x",
+      "Workspace": "w:y",
+      "Value": "1",
+      "Present": true,
+      "Failure": ""
+    },
+    {
+      "Disabled": true,
+      "User": "u:x",
+      "Workspace": "w:y",
+      "Value": "1",
+      "Present": true,
+      "Failure": "unavailable"
+    },
+    {
+      "Disabled": true,
+      "User": "u:x",
+      "Workspace": "w:y",
+      "Value": "arbitrary",
+      "Present": false,
+      "Failure": ""
+    },
+    {
+      "Disabled": true,
+      "User": "u:x",
+      "Workspace": "w:y",
+      "Value": "arbitrary",
+      "Present": false,
+      "Failure": "unavailable"
+    },
+    {
+      "Disabled": true,
+      "User": "u:x",
+      "Workspace": "w:y",
+      "Value": "arbitrary",
+      "Present": true,
+      "Failure": ""
+    },
+    {
+      "Disabled": true,
+      "User": "u:x",
+      "Workspace": "w:y",
+      "Value": "arbitrary",
+      "Present": true,
+      "Failure": "unavailable"
+    },
+    {
+      "Disabled": true,
+      "User": "\u7528\u6237",
+      "Workspace": "\u5de5\u4f5c\u533a",
+      "Value": "",
+      "Present": false,
+      "Failure": ""
+    },
+    {
+      "Disabled": true,
+      "User": "\u7528\u6237",
+      "Workspace": "\u5de5\u4f5c\u533a",
+      "Value": "",
+      "Present": false,
+      "Failure": "unavailable"
+    },
+    {
+      "Disabled": true,
+      "User": "\u7528\u6237",
+      "Workspace": "\u5de5\u4f5c\u533a",
+      "Value": "",
+      "Present": true,
+      "Failure": ""
+    },
+    {
+      "Disabled": true,
+      "User": "\u7528\u6237",
+      "Workspace": "\u5de5\u4f5c\u533a",
+      "Value": "",
+      "Present": true,
+      "Failure": "unavailable"
+    },
+    {
+      "Disabled": true,
+      "User": "\u7528\u6237",
+      "Workspace": "\u5de5\u4f5c\u533a",
+      "Value": "0",
+      "Present": false,
+      "Failure": ""
+    },
+    {
+      "Disabled": true,
+      "User": "\u7528\u6237",
+      "Workspace": "\u5de5\u4f5c\u533a",
+      "Value": "0",
+      "Present": false,
+      "Failure": "unavailable"
+    },
+    {
+      "Disabled": true,
+      "User": "\u7528\u6237",
+      "Workspace": "\u5de5\u4f5c\u533a",
+      "Value": "0",
+      "Present": true,
+      "Failure": ""
+    },
+    {
+      "Disabled": true,
+      "User": "\u7528\u6237",
+      "Workspace": "\u5de5\u4f5c\u533a",
+      "Value": "0",
+      "Present": true,
+      "Failure": "unavailable"
+    },
+    {
+      "Disabled": true,
+      "User": "\u7528\u6237",
+      "Workspace": "\u5de5\u4f5c\u533a",
+      "Value": "1",
+      "Present": false,
+      "Failure": ""
+    },
+    {
+      "Disabled": true,
+      "User": "\u7528\u6237",
+      "Workspace": "\u5de5\u4f5c\u533a",
+      "Value": "1",
+      "Present": false,
+      "Failure": "unavailable"
+    },
+    {
+      "Disabled": true,
+      "User": "\u7528\u6237",
+      "Workspace": "\u5de5\u4f5c\u533a",
+      "Value": "1",
+      "Present": true,
+      "Failure": ""
+    },
+    {
+      "Disabled": true,
+      "User": "\u7528\u6237",
+      "Workspace": "\u5de5\u4f5c\u533a",
+      "Value": "1",
+      "Present": true,
+      "Failure": "unavailable"
+    },
+    {
+      "Disabled": true,
+      "User": "\u7528\u6237",
+      "Workspace": "\u5de5\u4f5c\u533a",
+      "Value": "arbitrary",
+      "Present": false,
+      "Failure": ""
+    },
+    {
+      "Disabled": true,
+      "User": "\u7528\u6237",
+      "Workspace": "\u5de5\u4f5c\u533a",
+      "Value": "arbitrary",
+      "Present": false,
+      "Failure": "unavailable"
+    },
+    {
+      "Disabled": true,
+      "User": "\u7528\u6237",
+      "Workspace": "\u5de5\u4f5c\u533a",
+      "Value": "arbitrary",
+      "Present": true,
+      "Failure": ""
+    },
+    {
+      "Disabled": true,
+      "User": "\u7528\u6237",
+      "Workspace": "\u5de5\u4f5c\u533a",
+      "Value": "arbitrary",
+      "Present": true,
+      "Failure": "unavailable"
+    }
+  ],
+  "execution_batch_size": 32,
+  "go": [
+    {
+      "calls": [
+        [
+          "get",
+          "mul:auth:member:user:workspace"
+        ],
+        [
+          "set",
+          "mul:auth:member:user:workspace",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member:user:workspace"
+        ]
+      ],
+      "hit": false
+    },
+    {
+      "calls": [
+        [
+          "get",
+          "mul:auth:member:user:workspace"
+        ],
+        [
+          "set",
+          "mul:auth:member:user:workspace",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member:user:workspace"
+        ]
+      ],
+      "hit": false
+    },
+    {
+      "calls": [
+        [
+          "get",
+          "mul:auth:member:user:workspace"
+        ],
+        [
+          "set",
+          "mul:auth:member:user:workspace",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member:user:workspace"
+        ]
+      ],
+      "hit": true
+    },
+    {
+      "calls": [
+        [
+          "get",
+          "mul:auth:member:user:workspace"
+        ],
+        [
+          "set",
+          "mul:auth:member:user:workspace",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member:user:workspace"
+        ]
+      ],
+      "hit": false
+    },
+    {
+      "calls": [
+        [
+          "get",
+          "mul:auth:member:user:workspace"
+        ],
+        [
+          "set",
+          "mul:auth:member:user:workspace",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member:user:workspace"
+        ]
+      ],
+      "hit": false
+    },
+    {
+      "calls": [
+        [
+          "get",
+          "mul:auth:member:user:workspace"
+        ],
+        [
+          "set",
+          "mul:auth:member:user:workspace",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member:user:workspace"
+        ]
+      ],
+      "hit": false
+    },
+    {
+      "calls": [
+        [
+          "get",
+          "mul:auth:member:user:workspace"
+        ],
+        [
+          "set",
+          "mul:auth:member:user:workspace",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member:user:workspace"
+        ]
+      ],
+      "hit": true
+    },
+    {
+      "calls": [
+        [
+          "get",
+          "mul:auth:member:user:workspace"
+        ],
+        [
+          "set",
+          "mul:auth:member:user:workspace",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member:user:workspace"
+        ]
+      ],
+      "hit": false
+    },
+    {
+      "calls": [
+        [
+          "get",
+          "mul:auth:member:user:workspace"
+        ],
+        [
+          "set",
+          "mul:auth:member:user:workspace",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member:user:workspace"
+        ]
+      ],
+      "hit": false
+    },
+    {
+      "calls": [
+        [
+          "get",
+          "mul:auth:member:user:workspace"
+        ],
+        [
+          "set",
+          "mul:auth:member:user:workspace",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member:user:workspace"
+        ]
+      ],
+      "hit": false
+    },
+    {
+      "calls": [
+        [
+          "get",
+          "mul:auth:member:user:workspace"
+        ],
+        [
+          "set",
+          "mul:auth:member:user:workspace",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member:user:workspace"
+        ]
+      ],
+      "hit": true
+    },
+    {
+      "calls": [
+        [
+          "get",
+          "mul:auth:member:user:workspace"
+        ],
+        [
+          "set",
+          "mul:auth:member:user:workspace",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member:user:workspace"
+        ]
+      ],
+      "hit": false
+    },
+    {
+      "calls": [
+        [
+          "get",
+          "mul:auth:member:user:workspace"
+        ],
+        [
+          "set",
+          "mul:auth:member:user:workspace",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member:user:workspace"
+        ]
+      ],
+      "hit": false
+    },
+    {
+      "calls": [
+        [
+          "get",
+          "mul:auth:member:user:workspace"
+        ],
+        [
+          "set",
+          "mul:auth:member:user:workspace",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member:user:workspace"
+        ]
+      ],
+      "hit": false
+    },
+    {
+      "calls": [
+        [
+          "get",
+          "mul:auth:member:user:workspace"
+        ],
+        [
+          "set",
+          "mul:auth:member:user:workspace",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member:user:workspace"
+        ]
+      ],
+      "hit": true
+    },
+    {
+      "calls": [
+        [
+          "get",
+          "mul:auth:member:user:workspace"
+        ],
+        [
+          "set",
+          "mul:auth:member:user:workspace",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member:user:workspace"
+        ]
+      ],
+      "hit": false
+    },
+    {
+      "calls": [
+        [
+          "get",
+          "mul:auth:member::"
+        ],
+        [
+          "set",
+          "mul:auth:member::",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member::"
+        ]
+      ],
+      "hit": false
+    },
+    {
+      "calls": [
+        [
+          "get",
+          "mul:auth:member::"
+        ],
+        [
+          "set",
+          "mul:auth:member::",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member::"
+        ]
+      ],
+      "hit": false
+    },
+    {
+      "calls": [
+        [
+          "get",
+          "mul:auth:member::"
+        ],
+        [
+          "set",
+          "mul:auth:member::",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member::"
+        ]
+      ],
+      "hit": true
+    },
+    {
+      "calls": [
+        [
+          "get",
+          "mul:auth:member::"
+        ],
+        [
+          "set",
+          "mul:auth:member::",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member::"
+        ]
+      ],
+      "hit": false
+    },
+    {
+      "calls": [
+        [
+          "get",
+          "mul:auth:member::"
+        ],
+        [
+          "set",
+          "mul:auth:member::",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member::"
+        ]
+      ],
+      "hit": false
+    },
+    {
+      "calls": [
+        [
+          "get",
+          "mul:auth:member::"
+        ],
+        [
+          "set",
+          "mul:auth:member::",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member::"
+        ]
+      ],
+      "hit": false
+    },
+    {
+      "calls": [
+        [
+          "get",
+          "mul:auth:member::"
+        ],
+        [
+          "set",
+          "mul:auth:member::",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member::"
+        ]
+      ],
+      "hit": true
+    },
+    {
+      "calls": [
+        [
+          "get",
+          "mul:auth:member::"
+        ],
+        [
+          "set",
+          "mul:auth:member::",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member::"
+        ]
+      ],
+      "hit": false
+    },
+    {
+      "calls": [
+        [
+          "get",
+          "mul:auth:member::"
+        ],
+        [
+          "set",
+          "mul:auth:member::",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member::"
+        ]
+      ],
+      "hit": false
+    },
+    {
+      "calls": [
+        [
+          "get",
+          "mul:auth:member::"
+        ],
+        [
+          "set",
+          "mul:auth:member::",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member::"
+        ]
+      ],
+      "hit": false
+    },
+    {
+      "calls": [
+        [
+          "get",
+          "mul:auth:member::"
+        ],
+        [
+          "set",
+          "mul:auth:member::",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member::"
+        ]
+      ],
+      "hit": true
+    },
+    {
+      "calls": [
+        [
+          "get",
+          "mul:auth:member::"
+        ],
+        [
+          "set",
+          "mul:auth:member::",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member::"
+        ]
+      ],
+      "hit": false
+    },
+    {
+      "calls": [
+        [
+          "get",
+          "mul:auth:member::"
+        ],
+        [
+          "set",
+          "mul:auth:member::",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member::"
+        ]
+      ],
+      "hit": false
+    },
+    {
+      "calls": [
+        [
+          "get",
+          "mul:auth:member::"
+        ],
+        [
+          "set",
+          "mul:auth:member::",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member::"
+        ]
+      ],
+      "hit": false
+    },
+    {
+      "calls": [
+        [
+          "get",
+          "mul:auth:member::"
+        ],
+        [
+          "set",
+          "mul:auth:member::",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member::"
+        ]
+      ],
+      "hit": true
+    },
+    {
+      "calls": [
+        [
+          "get",
+          "mul:auth:member::"
+        ],
+        [
+          "set",
+          "mul:auth:member::",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member::"
+        ]
+      ],
+      "hit": false
+    },
+    {
+      "calls": [
+        [
+          "get",
+          "mul:auth:member:u:x:w:y"
+        ],
+        [
+          "set",
+          "mul:auth:member:u:x:w:y",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member:u:x:w:y"
+        ]
+      ],
+      "hit": false
+    },
+    {
+      "calls": [
+        [
+          "get",
+          "mul:auth:member:u:x:w:y"
+        ],
+        [
+          "set",
+          "mul:auth:member:u:x:w:y",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member:u:x:w:y"
+        ]
+      ],
+      "hit": false
+    },
+    {
+      "calls": [
+        [
+          "get",
+          "mul:auth:member:u:x:w:y"
+        ],
+        [
+          "set",
+          "mul:auth:member:u:x:w:y",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member:u:x:w:y"
+        ]
+      ],
+      "hit": true
+    },
+    {
+      "calls": [
+        [
+          "get",
+          "mul:auth:member:u:x:w:y"
+        ],
+        [
+          "set",
+          "mul:auth:member:u:x:w:y",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member:u:x:w:y"
+        ]
+      ],
+      "hit": false
+    },
+    {
+      "calls": [
+        [
+          "get",
+          "mul:auth:member:u:x:w:y"
+        ],
+        [
+          "set",
+          "mul:auth:member:u:x:w:y",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member:u:x:w:y"
+        ]
+      ],
+      "hit": false
+    },
+    {
+      "calls": [
+        [
+          "get",
+          "mul:auth:member:u:x:w:y"
+        ],
+        [
+          "set",
+          "mul:auth:member:u:x:w:y",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member:u:x:w:y"
+        ]
+      ],
+      "hit": false
+    },
+    {
+      "calls": [
+        [
+          "get",
+          "mul:auth:member:u:x:w:y"
+        ],
+        [
+          "set",
+          "mul:auth:member:u:x:w:y",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member:u:x:w:y"
+        ]
+      ],
+      "hit": true
+    },
+    {
+      "calls": [
+        [
+          "get",
+          "mul:auth:member:u:x:w:y"
+        ],
+        [
+          "set",
+          "mul:auth:member:u:x:w:y",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member:u:x:w:y"
+        ]
+      ],
+      "hit": false
+    },
+    {
+      "calls": [
+        [
+          "get",
+          "mul:auth:member:u:x:w:y"
+        ],
+        [
+          "set",
+          "mul:auth:member:u:x:w:y",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member:u:x:w:y"
+        ]
+      ],
+      "hit": false
+    },
+    {
+      "calls": [
+        [
+          "get",
+          "mul:auth:member:u:x:w:y"
+        ],
+        [
+          "set",
+          "mul:auth:member:u:x:w:y",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member:u:x:w:y"
+        ]
+      ],
+      "hit": false
+    },
+    {
+      "calls": [
+        [
+          "get",
+          "mul:auth:member:u:x:w:y"
+        ],
+        [
+          "set",
+          "mul:auth:member:u:x:w:y",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member:u:x:w:y"
+        ]
+      ],
+      "hit": true
+    },
+    {
+      "calls": [
+        [
+          "get",
+          "mul:auth:member:u:x:w:y"
+        ],
+        [
+          "set",
+          "mul:auth:member:u:x:w:y",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member:u:x:w:y"
+        ]
+      ],
+      "hit": false
+    },
+    {
+      "calls": [
+        [
+          "get",
+          "mul:auth:member:u:x:w:y"
+        ],
+        [
+          "set",
+          "mul:auth:member:u:x:w:y",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member:u:x:w:y"
+        ]
+      ],
+      "hit": false
+    },
+    {
+      "calls": [
+        [
+          "get",
+          "mul:auth:member:u:x:w:y"
+        ],
+        [
+          "set",
+          "mul:auth:member:u:x:w:y",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member:u:x:w:y"
+        ]
+      ],
+      "hit": false
+    },
+    {
+      "calls": [
+        [
+          "get",
+          "mul:auth:member:u:x:w:y"
+        ],
+        [
+          "set",
+          "mul:auth:member:u:x:w:y",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member:u:x:w:y"
+        ]
+      ],
+      "hit": true
+    },
+    {
+      "calls": [
+        [
+          "get",
+          "mul:auth:member:u:x:w:y"
+        ],
+        [
+          "set",
+          "mul:auth:member:u:x:w:y",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member:u:x:w:y"
+        ]
+      ],
+      "hit": false
+    },
+    {
+      "calls": [
+        [
+          "get",
+          "mul:auth:member:\u7528\u6237:\u5de5\u4f5c\u533a"
+        ],
+        [
+          "set",
+          "mul:auth:member:\u7528\u6237:\u5de5\u4f5c\u533a",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member:\u7528\u6237:\u5de5\u4f5c\u533a"
+        ]
+      ],
+      "hit": false
+    },
+    {
+      "calls": [
+        [
+          "get",
+          "mul:auth:member:\u7528\u6237:\u5de5\u4f5c\u533a"
+        ],
+        [
+          "set",
+          "mul:auth:member:\u7528\u6237:\u5de5\u4f5c\u533a",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member:\u7528\u6237:\u5de5\u4f5c\u533a"
+        ]
+      ],
+      "hit": false
+    },
+    {
+      "calls": [
+        [
+          "get",
+          "mul:auth:member:\u7528\u6237:\u5de5\u4f5c\u533a"
+        ],
+        [
+          "set",
+          "mul:auth:member:\u7528\u6237:\u5de5\u4f5c\u533a",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member:\u7528\u6237:\u5de5\u4f5c\u533a"
+        ]
+      ],
+      "hit": true
+    },
+    {
+      "calls": [
+        [
+          "get",
+          "mul:auth:member:\u7528\u6237:\u5de5\u4f5c\u533a"
+        ],
+        [
+          "set",
+          "mul:auth:member:\u7528\u6237:\u5de5\u4f5c\u533a",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member:\u7528\u6237:\u5de5\u4f5c\u533a"
+        ]
+      ],
+      "hit": false
+    },
+    {
+      "calls": [
+        [
+          "get",
+          "mul:auth:member:\u7528\u6237:\u5de5\u4f5c\u533a"
+        ],
+        [
+          "set",
+          "mul:auth:member:\u7528\u6237:\u5de5\u4f5c\u533a",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member:\u7528\u6237:\u5de5\u4f5c\u533a"
+        ]
+      ],
+      "hit": false
+    },
+    {
+      "calls": [
+        [
+          "get",
+          "mul:auth:member:\u7528\u6237:\u5de5\u4f5c\u533a"
+        ],
+        [
+          "set",
+          "mul:auth:member:\u7528\u6237:\u5de5\u4f5c\u533a",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member:\u7528\u6237:\u5de5\u4f5c\u533a"
+        ]
+      ],
+      "hit": false
+    },
+    {
+      "calls": [
+        [
+          "get",
+          "mul:auth:member:\u7528\u6237:\u5de5\u4f5c\u533a"
+        ],
+        [
+          "set",
+          "mul:auth:member:\u7528\u6237:\u5de5\u4f5c\u533a",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member:\u7528\u6237:\u5de5\u4f5c\u533a"
+        ]
+      ],
+      "hit": true
+    },
+    {
+      "calls": [
+        [
+          "get",
+          "mul:auth:member:\u7528\u6237:\u5de5\u4f5c\u533a"
+        ],
+        [
+          "set",
+          "mul:auth:member:\u7528\u6237:\u5de5\u4f5c\u533a",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member:\u7528\u6237:\u5de5\u4f5c\u533a"
+        ]
+      ],
+      "hit": false
+    },
+    {
+      "calls": [
+        [
+          "get",
+          "mul:auth:member:\u7528\u6237:\u5de5\u4f5c\u533a"
+        ],
+        [
+          "set",
+          "mul:auth:member:\u7528\u6237:\u5de5\u4f5c\u533a",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member:\u7528\u6237:\u5de5\u4f5c\u533a"
+        ]
+      ],
+      "hit": false
+    },
+    {
+      "calls": [
+        [
+          "get",
+          "mul:auth:member:\u7528\u6237:\u5de5\u4f5c\u533a"
+        ],
+        [
+          "set",
+          "mul:auth:member:\u7528\u6237:\u5de5\u4f5c\u533a",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member:\u7528\u6237:\u5de5\u4f5c\u533a"
+        ]
+      ],
+      "hit": false
+    },
+    {
+      "calls": [
+        [
+          "get",
+          "mul:auth:member:\u7528\u6237:\u5de5\u4f5c\u533a"
+        ],
+        [
+          "set",
+          "mul:auth:member:\u7528\u6237:\u5de5\u4f5c\u533a",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member:\u7528\u6237:\u5de5\u4f5c\u533a"
+        ]
+      ],
+      "hit": true
+    },
+    {
+      "calls": [
+        [
+          "get",
+          "mul:auth:member:\u7528\u6237:\u5de5\u4f5c\u533a"
+        ],
+        [
+          "set",
+          "mul:auth:member:\u7528\u6237:\u5de5\u4f5c\u533a",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member:\u7528\u6237:\u5de5\u4f5c\u533a"
+        ]
+      ],
+      "hit": false
+    },
+    {
+      "calls": [
+        [
+          "get",
+          "mul:auth:member:\u7528\u6237:\u5de5\u4f5c\u533a"
+        ],
+        [
+          "set",
+          "mul:auth:member:\u7528\u6237:\u5de5\u4f5c\u533a",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member:\u7528\u6237:\u5de5\u4f5c\u533a"
+        ]
+      ],
+      "hit": false
+    },
+    {
+      "calls": [
+        [
+          "get",
+          "mul:auth:member:\u7528\u6237:\u5de5\u4f5c\u533a"
+        ],
+        [
+          "set",
+          "mul:auth:member:\u7528\u6237:\u5de5\u4f5c\u533a",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member:\u7528\u6237:\u5de5\u4f5c\u533a"
+        ]
+      ],
+      "hit": false
+    },
+    {
+      "calls": [
+        [
+          "get",
+          "mul:auth:member:\u7528\u6237:\u5de5\u4f5c\u533a"
+        ],
+        [
+          "set",
+          "mul:auth:member:\u7528\u6237:\u5de5\u4f5c\u533a",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member:\u7528\u6237:\u5de5\u4f5c\u533a"
+        ]
+      ],
+      "hit": true
+    },
+    {
+      "calls": [
+        [
+          "get",
+          "mul:auth:member:\u7528\u6237:\u5de5\u4f5c\u533a"
+        ],
+        [
+          "set",
+          "mul:auth:member:\u7528\u6237:\u5de5\u4f5c\u533a",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member:\u7528\u6237:\u5de5\u4f5c\u533a"
+        ]
+      ],
+      "hit": false
+    },
+    {
+      "calls": [],
+      "hit": false
+    },
+    {
+      "calls": [],
+      "hit": false
+    },
+    {
+      "calls": [],
+      "hit": false
+    },
+    {
+      "calls": [],
+      "hit": false
+    },
+    {
+      "calls": [],
+      "hit": false
+    },
+    {
+      "calls": [],
+      "hit": false
+    },
+    {
+      "calls": [],
+      "hit": false
+    },
+    {
+      "calls": [],
+      "hit": false
+    },
+    {
+      "calls": [],
+      "hit": false
+    },
+    {
+      "calls": [],
+      "hit": false
+    },
+    {
+      "calls": [],
+      "hit": false
+    },
+    {
+      "calls": [],
+      "hit": false
+    },
+    {
+      "calls": [],
+      "hit": false
+    },
+    {
+      "calls": [],
+      "hit": false
+    },
+    {
+      "calls": [],
+      "hit": false
+    },
+    {
+      "calls": [],
+      "hit": false
+    },
+    {
+      "calls": [],
+      "hit": false
+    },
+    {
+      "calls": [],
+      "hit": false
+    },
+    {
+      "calls": [],
+      "hit": false
+    },
+    {
+      "calls": [],
+      "hit": false
+    },
+    {
+      "calls": [],
+      "hit": false
+    },
+    {
+      "calls": [],
+      "hit": false
+    },
+    {
+      "calls": [],
+      "hit": false
+    },
+    {
+      "calls": [],
+      "hit": false
+    },
+    {
+      "calls": [],
+      "hit": false
+    },
+    {
+      "calls": [],
+      "hit": false
+    },
+    {
+      "calls": [],
+      "hit": false
+    },
+    {
+      "calls": [],
+      "hit": false
+    },
+    {
+      "calls": [],
+      "hit": false
+    },
+    {
+      "calls": [],
+      "hit": false
+    },
+    {
+      "calls": [],
+      "hit": false
+    },
+    {
+      "calls": [],
+      "hit": false
+    },
+    {
+      "calls": [],
+      "hit": false
+    },
+    {
+      "calls": [],
+      "hit": false
+    },
+    {
+      "calls": [],
+      "hit": false
+    },
+    {
+      "calls": [],
+      "hit": false
+    },
+    {
+      "calls": [],
+      "hit": false
+    },
+    {
+      "calls": [],
+      "hit": false
+    },
+    {
+      "calls": [],
+      "hit": false
+    },
+    {
+      "calls": [],
+      "hit": false
+    },
+    {
+      "calls": [],
+      "hit": false
+    },
+    {
+      "calls": [],
+      "hit": false
+    },
+    {
+      "calls": [],
+      "hit": false
+    },
+    {
+      "calls": [],
+      "hit": false
+    },
+    {
+      "calls": [],
+      "hit": false
+    },
+    {
+      "calls": [],
+      "hit": false
+    },
+    {
+      "calls": [],
+      "hit": false
+    },
+    {
+      "calls": [],
+      "hit": false
+    },
+    {
+      "calls": [],
+      "hit": false
+    },
+    {
+      "calls": [],
+      "hit": false
+    },
+    {
+      "calls": [],
+      "hit": false
+    },
+    {
+      "calls": [],
+      "hit": false
+    },
+    {
+      "calls": [],
+      "hit": false
+    },
+    {
+      "calls": [],
+      "hit": false
+    },
+    {
+      "calls": [],
+      "hit": false
+    },
+    {
+      "calls": [],
+      "hit": false
+    },
+    {
+      "calls": [],
+      "hit": false
+    },
+    {
+      "calls": [],
+      "hit": false
+    },
+    {
+      "calls": [],
+      "hit": false
+    },
+    {
+      "calls": [],
+      "hit": false
+    },
+    {
+      "calls": [],
+      "hit": false
+    },
+    {
+      "calls": [],
+      "hit": false
+    },
+    {
+      "calls": [],
+      "hit": false
+    },
+    {
+      "calls": [],
+      "hit": false
+    }
+  ],
+  "python": [
+    {
+      "hit": false,
+      "calls": [
+        [
+          "get",
+          "mul:auth:member:user:workspace"
+        ],
+        [
+          "set",
+          "mul:auth:member:user:workspace",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member:user:workspace"
+        ]
+      ]
+    },
+    {
+      "hit": false,
+      "calls": [
+        [
+          "get",
+          "mul:auth:member:user:workspace"
+        ],
+        [
+          "set",
+          "mul:auth:member:user:workspace",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member:user:workspace"
+        ]
+      ]
+    },
+    {
+      "hit": true,
+      "calls": [
+        [
+          "get",
+          "mul:auth:member:user:workspace"
+        ],
+        [
+          "set",
+          "mul:auth:member:user:workspace",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member:user:workspace"
+        ]
+      ]
+    },
+    {
+      "hit": false,
+      "calls": [
+        [
+          "get",
+          "mul:auth:member:user:workspace"
+        ],
+        [
+          "set",
+          "mul:auth:member:user:workspace",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member:user:workspace"
+        ]
+      ]
+    },
+    {
+      "hit": false,
+      "calls": [
+        [
+          "get",
+          "mul:auth:member:user:workspace"
+        ],
+        [
+          "set",
+          "mul:auth:member:user:workspace",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member:user:workspace"
+        ]
+      ]
+    },
+    {
+      "hit": false,
+      "calls": [
+        [
+          "get",
+          "mul:auth:member:user:workspace"
+        ],
+        [
+          "set",
+          "mul:auth:member:user:workspace",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member:user:workspace"
+        ]
+      ]
+    },
+    {
+      "hit": true,
+      "calls": [
+        [
+          "get",
+          "mul:auth:member:user:workspace"
+        ],
+        [
+          "set",
+          "mul:auth:member:user:workspace",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member:user:workspace"
+        ]
+      ]
+    },
+    {
+      "hit": false,
+      "calls": [
+        [
+          "get",
+          "mul:auth:member:user:workspace"
+        ],
+        [
+          "set",
+          "mul:auth:member:user:workspace",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member:user:workspace"
+        ]
+      ]
+    },
+    {
+      "hit": false,
+      "calls": [
+        [
+          "get",
+          "mul:auth:member:user:workspace"
+        ],
+        [
+          "set",
+          "mul:auth:member:user:workspace",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member:user:workspace"
+        ]
+      ]
+    },
+    {
+      "hit": false,
+      "calls": [
+        [
+          "get",
+          "mul:auth:member:user:workspace"
+        ],
+        [
+          "set",
+          "mul:auth:member:user:workspace",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member:user:workspace"
+        ]
+      ]
+    },
+    {
+      "hit": true,
+      "calls": [
+        [
+          "get",
+          "mul:auth:member:user:workspace"
+        ],
+        [
+          "set",
+          "mul:auth:member:user:workspace",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member:user:workspace"
+        ]
+      ]
+    },
+    {
+      "hit": false,
+      "calls": [
+        [
+          "get",
+          "mul:auth:member:user:workspace"
+        ],
+        [
+          "set",
+          "mul:auth:member:user:workspace",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member:user:workspace"
+        ]
+      ]
+    },
+    {
+      "hit": false,
+      "calls": [
+        [
+          "get",
+          "mul:auth:member:user:workspace"
+        ],
+        [
+          "set",
+          "mul:auth:member:user:workspace",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member:user:workspace"
+        ]
+      ]
+    },
+    {
+      "hit": false,
+      "calls": [
+        [
+          "get",
+          "mul:auth:member:user:workspace"
+        ],
+        [
+          "set",
+          "mul:auth:member:user:workspace",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member:user:workspace"
+        ]
+      ]
+    },
+    {
+      "hit": true,
+      "calls": [
+        [
+          "get",
+          "mul:auth:member:user:workspace"
+        ],
+        [
+          "set",
+          "mul:auth:member:user:workspace",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member:user:workspace"
+        ]
+      ]
+    },
+    {
+      "hit": false,
+      "calls": [
+        [
+          "get",
+          "mul:auth:member:user:workspace"
+        ],
+        [
+          "set",
+          "mul:auth:member:user:workspace",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member:user:workspace"
+        ]
+      ]
+    },
+    {
+      "hit": false,
+      "calls": [
+        [
+          "get",
+          "mul:auth:member::"
+        ],
+        [
+          "set",
+          "mul:auth:member::",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member::"
+        ]
+      ]
+    },
+    {
+      "hit": false,
+      "calls": [
+        [
+          "get",
+          "mul:auth:member::"
+        ],
+        [
+          "set",
+          "mul:auth:member::",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member::"
+        ]
+      ]
+    },
+    {
+      "hit": true,
+      "calls": [
+        [
+          "get",
+          "mul:auth:member::"
+        ],
+        [
+          "set",
+          "mul:auth:member::",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member::"
+        ]
+      ]
+    },
+    {
+      "hit": false,
+      "calls": [
+        [
+          "get",
+          "mul:auth:member::"
+        ],
+        [
+          "set",
+          "mul:auth:member::",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member::"
+        ]
+      ]
+    },
+    {
+      "hit": false,
+      "calls": [
+        [
+          "get",
+          "mul:auth:member::"
+        ],
+        [
+          "set",
+          "mul:auth:member::",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member::"
+        ]
+      ]
+    },
+    {
+      "hit": false,
+      "calls": [
+        [
+          "get",
+          "mul:auth:member::"
+        ],
+        [
+          "set",
+          "mul:auth:member::",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member::"
+        ]
+      ]
+    },
+    {
+      "hit": true,
+      "calls": [
+        [
+          "get",
+          "mul:auth:member::"
+        ],
+        [
+          "set",
+          "mul:auth:member::",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member::"
+        ]
+      ]
+    },
+    {
+      "hit": false,
+      "calls": [
+        [
+          "get",
+          "mul:auth:member::"
+        ],
+        [
+          "set",
+          "mul:auth:member::",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member::"
+        ]
+      ]
+    },
+    {
+      "hit": false,
+      "calls": [
+        [
+          "get",
+          "mul:auth:member::"
+        ],
+        [
+          "set",
+          "mul:auth:member::",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member::"
+        ]
+      ]
+    },
+    {
+      "hit": false,
+      "calls": [
+        [
+          "get",
+          "mul:auth:member::"
+        ],
+        [
+          "set",
+          "mul:auth:member::",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member::"
+        ]
+      ]
+    },
+    {
+      "hit": true,
+      "calls": [
+        [
+          "get",
+          "mul:auth:member::"
+        ],
+        [
+          "set",
+          "mul:auth:member::",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member::"
+        ]
+      ]
+    },
+    {
+      "hit": false,
+      "calls": [
+        [
+          "get",
+          "mul:auth:member::"
+        ],
+        [
+          "set",
+          "mul:auth:member::",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member::"
+        ]
+      ]
+    },
+    {
+      "hit": false,
+      "calls": [
+        [
+          "get",
+          "mul:auth:member::"
+        ],
+        [
+          "set",
+          "mul:auth:member::",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member::"
+        ]
+      ]
+    },
+    {
+      "hit": false,
+      "calls": [
+        [
+          "get",
+          "mul:auth:member::"
+        ],
+        [
+          "set",
+          "mul:auth:member::",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member::"
+        ]
+      ]
+    },
+    {
+      "hit": true,
+      "calls": [
+        [
+          "get",
+          "mul:auth:member::"
+        ],
+        [
+          "set",
+          "mul:auth:member::",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member::"
+        ]
+      ]
+    },
+    {
+      "hit": false,
+      "calls": [
+        [
+          "get",
+          "mul:auth:member::"
+        ],
+        [
+          "set",
+          "mul:auth:member::",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member::"
+        ]
+      ]
+    },
+    {
+      "hit": false,
+      "calls": [
+        [
+          "get",
+          "mul:auth:member:u:x:w:y"
+        ],
+        [
+          "set",
+          "mul:auth:member:u:x:w:y",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member:u:x:w:y"
+        ]
+      ]
+    },
+    {
+      "hit": false,
+      "calls": [
+        [
+          "get",
+          "mul:auth:member:u:x:w:y"
+        ],
+        [
+          "set",
+          "mul:auth:member:u:x:w:y",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member:u:x:w:y"
+        ]
+      ]
+    },
+    {
+      "hit": true,
+      "calls": [
+        [
+          "get",
+          "mul:auth:member:u:x:w:y"
+        ],
+        [
+          "set",
+          "mul:auth:member:u:x:w:y",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member:u:x:w:y"
+        ]
+      ]
+    },
+    {
+      "hit": false,
+      "calls": [
+        [
+          "get",
+          "mul:auth:member:u:x:w:y"
+        ],
+        [
+          "set",
+          "mul:auth:member:u:x:w:y",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member:u:x:w:y"
+        ]
+      ]
+    },
+    {
+      "hit": false,
+      "calls": [
+        [
+          "get",
+          "mul:auth:member:u:x:w:y"
+        ],
+        [
+          "set",
+          "mul:auth:member:u:x:w:y",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member:u:x:w:y"
+        ]
+      ]
+    },
+    {
+      "hit": false,
+      "calls": [
+        [
+          "get",
+          "mul:auth:member:u:x:w:y"
+        ],
+        [
+          "set",
+          "mul:auth:member:u:x:w:y",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member:u:x:w:y"
+        ]
+      ]
+    },
+    {
+      "hit": true,
+      "calls": [
+        [
+          "get",
+          "mul:auth:member:u:x:w:y"
+        ],
+        [
+          "set",
+          "mul:auth:member:u:x:w:y",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member:u:x:w:y"
+        ]
+      ]
+    },
+    {
+      "hit": false,
+      "calls": [
+        [
+          "get",
+          "mul:auth:member:u:x:w:y"
+        ],
+        [
+          "set",
+          "mul:auth:member:u:x:w:y",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member:u:x:w:y"
+        ]
+      ]
+    },
+    {
+      "hit": false,
+      "calls": [
+        [
+          "get",
+          "mul:auth:member:u:x:w:y"
+        ],
+        [
+          "set",
+          "mul:auth:member:u:x:w:y",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member:u:x:w:y"
+        ]
+      ]
+    },
+    {
+      "hit": false,
+      "calls": [
+        [
+          "get",
+          "mul:auth:member:u:x:w:y"
+        ],
+        [
+          "set",
+          "mul:auth:member:u:x:w:y",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member:u:x:w:y"
+        ]
+      ]
+    },
+    {
+      "hit": true,
+      "calls": [
+        [
+          "get",
+          "mul:auth:member:u:x:w:y"
+        ],
+        [
+          "set",
+          "mul:auth:member:u:x:w:y",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member:u:x:w:y"
+        ]
+      ]
+    },
+    {
+      "hit": false,
+      "calls": [
+        [
+          "get",
+          "mul:auth:member:u:x:w:y"
+        ],
+        [
+          "set",
+          "mul:auth:member:u:x:w:y",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member:u:x:w:y"
+        ]
+      ]
+    },
+    {
+      "hit": false,
+      "calls": [
+        [
+          "get",
+          "mul:auth:member:u:x:w:y"
+        ],
+        [
+          "set",
+          "mul:auth:member:u:x:w:y",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member:u:x:w:y"
+        ]
+      ]
+    },
+    {
+      "hit": false,
+      "calls": [
+        [
+          "get",
+          "mul:auth:member:u:x:w:y"
+        ],
+        [
+          "set",
+          "mul:auth:member:u:x:w:y",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member:u:x:w:y"
+        ]
+      ]
+    },
+    {
+      "hit": true,
+      "calls": [
+        [
+          "get",
+          "mul:auth:member:u:x:w:y"
+        ],
+        [
+          "set",
+          "mul:auth:member:u:x:w:y",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member:u:x:w:y"
+        ]
+      ]
+    },
+    {
+      "hit": false,
+      "calls": [
+        [
+          "get",
+          "mul:auth:member:u:x:w:y"
+        ],
+        [
+          "set",
+          "mul:auth:member:u:x:w:y",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member:u:x:w:y"
+        ]
+      ]
+    },
+    {
+      "hit": false,
+      "calls": [
+        [
+          "get",
+          "mul:auth:member:\u7528\u6237:\u5de5\u4f5c\u533a"
+        ],
+        [
+          "set",
+          "mul:auth:member:\u7528\u6237:\u5de5\u4f5c\u533a",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member:\u7528\u6237:\u5de5\u4f5c\u533a"
+        ]
+      ]
+    },
+    {
+      "hit": false,
+      "calls": [
+        [
+          "get",
+          "mul:auth:member:\u7528\u6237:\u5de5\u4f5c\u533a"
+        ],
+        [
+          "set",
+          "mul:auth:member:\u7528\u6237:\u5de5\u4f5c\u533a",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member:\u7528\u6237:\u5de5\u4f5c\u533a"
+        ]
+      ]
+    },
+    {
+      "hit": true,
+      "calls": [
+        [
+          "get",
+          "mul:auth:member:\u7528\u6237:\u5de5\u4f5c\u533a"
+        ],
+        [
+          "set",
+          "mul:auth:member:\u7528\u6237:\u5de5\u4f5c\u533a",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member:\u7528\u6237:\u5de5\u4f5c\u533a"
+        ]
+      ]
+    },
+    {
+      "hit": false,
+      "calls": [
+        [
+          "get",
+          "mul:auth:member:\u7528\u6237:\u5de5\u4f5c\u533a"
+        ],
+        [
+          "set",
+          "mul:auth:member:\u7528\u6237:\u5de5\u4f5c\u533a",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member:\u7528\u6237:\u5de5\u4f5c\u533a"
+        ]
+      ]
+    },
+    {
+      "hit": false,
+      "calls": [
+        [
+          "get",
+          "mul:auth:member:\u7528\u6237:\u5de5\u4f5c\u533a"
+        ],
+        [
+          "set",
+          "mul:auth:member:\u7528\u6237:\u5de5\u4f5c\u533a",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member:\u7528\u6237:\u5de5\u4f5c\u533a"
+        ]
+      ]
+    },
+    {
+      "hit": false,
+      "calls": [
+        [
+          "get",
+          "mul:auth:member:\u7528\u6237:\u5de5\u4f5c\u533a"
+        ],
+        [
+          "set",
+          "mul:auth:member:\u7528\u6237:\u5de5\u4f5c\u533a",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member:\u7528\u6237:\u5de5\u4f5c\u533a"
+        ]
+      ]
+    },
+    {
+      "hit": true,
+      "calls": [
+        [
+          "get",
+          "mul:auth:member:\u7528\u6237:\u5de5\u4f5c\u533a"
+        ],
+        [
+          "set",
+          "mul:auth:member:\u7528\u6237:\u5de5\u4f5c\u533a",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member:\u7528\u6237:\u5de5\u4f5c\u533a"
+        ]
+      ]
+    },
+    {
+      "hit": false,
+      "calls": [
+        [
+          "get",
+          "mul:auth:member:\u7528\u6237:\u5de5\u4f5c\u533a"
+        ],
+        [
+          "set",
+          "mul:auth:member:\u7528\u6237:\u5de5\u4f5c\u533a",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member:\u7528\u6237:\u5de5\u4f5c\u533a"
+        ]
+      ]
+    },
+    {
+      "hit": false,
+      "calls": [
+        [
+          "get",
+          "mul:auth:member:\u7528\u6237:\u5de5\u4f5c\u533a"
+        ],
+        [
+          "set",
+          "mul:auth:member:\u7528\u6237:\u5de5\u4f5c\u533a",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member:\u7528\u6237:\u5de5\u4f5c\u533a"
+        ]
+      ]
+    },
+    {
+      "hit": false,
+      "calls": [
+        [
+          "get",
+          "mul:auth:member:\u7528\u6237:\u5de5\u4f5c\u533a"
+        ],
+        [
+          "set",
+          "mul:auth:member:\u7528\u6237:\u5de5\u4f5c\u533a",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member:\u7528\u6237:\u5de5\u4f5c\u533a"
+        ]
+      ]
+    },
+    {
+      "hit": true,
+      "calls": [
+        [
+          "get",
+          "mul:auth:member:\u7528\u6237:\u5de5\u4f5c\u533a"
+        ],
+        [
+          "set",
+          "mul:auth:member:\u7528\u6237:\u5de5\u4f5c\u533a",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member:\u7528\u6237:\u5de5\u4f5c\u533a"
+        ]
+      ]
+    },
+    {
+      "hit": false,
+      "calls": [
+        [
+          "get",
+          "mul:auth:member:\u7528\u6237:\u5de5\u4f5c\u533a"
+        ],
+        [
+          "set",
+          "mul:auth:member:\u7528\u6237:\u5de5\u4f5c\u533a",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member:\u7528\u6237:\u5de5\u4f5c\u533a"
+        ]
+      ]
+    },
+    {
+      "hit": false,
+      "calls": [
+        [
+          "get",
+          "mul:auth:member:\u7528\u6237:\u5de5\u4f5c\u533a"
+        ],
+        [
+          "set",
+          "mul:auth:member:\u7528\u6237:\u5de5\u4f5c\u533a",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member:\u7528\u6237:\u5de5\u4f5c\u533a"
+        ]
+      ]
+    },
+    {
+      "hit": false,
+      "calls": [
+        [
+          "get",
+          "mul:auth:member:\u7528\u6237:\u5de5\u4f5c\u533a"
+        ],
+        [
+          "set",
+          "mul:auth:member:\u7528\u6237:\u5de5\u4f5c\u533a",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member:\u7528\u6237:\u5de5\u4f5c\u533a"
+        ]
+      ]
+    },
+    {
+      "hit": true,
+      "calls": [
+        [
+          "get",
+          "mul:auth:member:\u7528\u6237:\u5de5\u4f5c\u533a"
+        ],
+        [
+          "set",
+          "mul:auth:member:\u7528\u6237:\u5de5\u4f5c\u533a",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member:\u7528\u6237:\u5de5\u4f5c\u533a"
+        ]
+      ]
+    },
+    {
+      "hit": false,
+      "calls": [
+        [
+          "get",
+          "mul:auth:member:\u7528\u6237:\u5de5\u4f5c\u533a"
+        ],
+        [
+          "set",
+          "mul:auth:member:\u7528\u6237:\u5de5\u4f5c\u533a",
+          "1",
+          300
+        ],
+        [
+          "delete",
+          "mul:auth:member:\u7528\u6237:\u5de5\u4f5c\u533a"
+        ]
+      ]
+    },
+    {
+      "hit": false,
+      "calls": []
+    },
+    {
+      "hit": false,
+      "calls": []
+    },
+    {
+      "hit": false,
+      "calls": []
+    },
+    {
+      "hit": false,
+      "calls": []
+    },
+    {
+      "hit": false,
+      "calls": []
+    },
+    {
+      "hit": false,
+      "calls": []
+    },
+    {
+      "hit": false,
+      "calls": []
+    },
+    {
+      "hit": false,
+      "calls": []
+    },
+    {
+      "hit": false,
+      "calls": []
+    },
+    {
+      "hit": false,
+      "calls": []
+    },
+    {
+      "hit": false,
+      "calls": []
+    },
+    {
+      "hit": false,
+      "calls": []
+    },
+    {
+      "hit": false,
+      "calls": []
+    },
+    {
+      "hit": false,
+      "calls": []
+    },
+    {
+      "hit": false,
+      "calls": []
+    },
+    {
+      "hit": false,
+      "calls": []
+    },
+    {
+      "hit": false,
+      "calls": []
+    },
+    {
+      "hit": false,
+      "calls": []
+    },
+    {
+      "hit": false,
+      "calls": []
+    },
+    {
+      "hit": false,
+      "calls": []
+    },
+    {
+      "hit": false,
+      "calls": []
+    },
+    {
+      "hit": false,
+      "calls": []
+    },
+    {
+      "hit": false,
+      "calls": []
+    },
+    {
+      "hit": false,
+      "calls": []
+    },
+    {
+      "hit": false,
+      "calls": []
+    },
+    {
+      "hit": false,
+      "calls": []
+    },
+    {
+      "hit": false,
+      "calls": []
+    },
+    {
+      "hit": false,
+      "calls": []
+    },
+    {
+      "hit": false,
+      "calls": []
+    },
+    {
+      "hit": false,
+      "calls": []
+    },
+    {
+      "hit": false,
+      "calls": []
+    },
+    {
+      "hit": false,
+      "calls": []
+    },
+    {
+      "hit": false,
+      "calls": []
+    },
+    {
+      "hit": false,
+      "calls": []
+    },
+    {
+      "hit": false,
+      "calls": []
+    },
+    {
+      "hit": false,
+      "calls": []
+    },
+    {
+      "hit": false,
+      "calls": []
+    },
+    {
+      "hit": false,
+      "calls": []
+    },
+    {
+      "hit": false,
+      "calls": []
+    },
+    {
+      "hit": false,
+      "calls": []
+    },
+    {
+      "hit": false,
+      "calls": []
+    },
+    {
+      "hit": false,
+      "calls": []
+    },
+    {
+      "hit": false,
+      "calls": []
+    },
+    {
+      "hit": false,
+      "calls": []
+    },
+    {
+      "hit": false,
+      "calls": []
+    },
+    {
+      "hit": false,
+      "calls": []
+    },
+    {
+      "hit": false,
+      "calls": []
+    },
+    {
+      "hit": false,
+      "calls": []
+    },
+    {
+      "hit": false,
+      "calls": []
+    },
+    {
+      "hit": false,
+      "calls": []
+    },
+    {
+      "hit": false,
+      "calls": []
+    },
+    {
+      "hit": false,
+      "calls": []
+    },
+    {
+      "hit": false,
+      "calls": []
+    },
+    {
+      "hit": false,
+      "calls": []
+    },
+    {
+      "hit": false,
+      "calls": []
+    },
+    {
+      "hit": false,
+      "calls": []
+    },
+    {
+      "hit": false,
+      "calls": []
+    },
+    {
+      "hit": false,
+      "calls": []
+    },
+    {
+      "hit": false,
+      "calls": []
+    },
+    {
+      "hit": false,
+      "calls": []
+    },
+    {
+      "hit": false,
+      "calls": []
+    },
+    {
+      "hit": false,
+      "calls": []
+    },
+    {
+      "hit": false,
+      "calls": []
+    },
+    {
+      "hit": false,
+      "calls": []
+    }
+  ],
+  "mismatches": [],
+  "source_sha256": {
+    "server/go/internal/auth/membership_cache.go": "2a720d2069f076f544b97d4dc2950d1c1f9a580a7cc45f51034ea87e07ed7df2",
+    "server/tests/parity/go_membership_cache/main.go": "3616af9e9e379bb189ee464e81d69c7c0bea723ec10643e7b46ebade61e397c9",
+    "server/src/workpal_backend/auth/membership_cache.py": "790329f3a4e53a71323c917a71d57c540c636394d7b559e1a37dddaa1ac8a5a6",
+    "server/tools/run_membership_cache_parity.py": "58742f10f8d370dbe5a7d1d1f235416340bc668cde202ea06c9b0b5c71423e97"
+  }
+}

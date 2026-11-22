@@ -74,7 +74,7 @@ def test_security_boundaries(settings):
 def test_auth_configuration(settings):
     from workpal_backend.config import Settings
     values = settings.model_dump()
-    for overrides in ({'dev_auth':True}, {'dev_auth':True,'auth_secret':'short'},
+    for overrides in ({'dev_auth':True,'auth_secret':None}, {'dev_auth':True,'auth_secret':'short'},
                       {'dev_auth':True,'auth_secret':'s'*32,'environment':'production'}):
         with pytest.raises(ValueError):
             Settings(**(values | overrides))

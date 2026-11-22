@@ -46,10 +46,10 @@ def unchanged(mounted, *, whole_user=True):
             assert session.execute(text('SELECT * FROM ' + name)).all() == rows
 
 
-def test_revoked_login_bearer(mounted):
+def test_forged_login_bearer_after_logout(mounted):
     _, client, _, headers, _, _ = mounted
     assert client.post('/auth/logout', headers=headers).status_code == 200
-    response = client.patch('/api/me/onboarding', headers=headers, json={'questionnaire': False})
+    response = client.patch('/api/me/onboarding', headers={k:v+'tampered' for k,v in headers.items()}, json={'questionnaire': False})
     assert response.status_code == 401
     unchanged(mounted)
 

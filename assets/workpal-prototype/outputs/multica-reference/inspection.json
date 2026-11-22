@@ -1,0 +1,202 @@
+{
+  "errors": [],
+  "text": "T\nWork\nTeam\nChat\nAuto\nP\nWork\nInbox\n\nNo notifications\n\nViews\nAll issues\nMy work\nWorking\nSubscribed\nSnoozed\nAll views\n5\nProjects\nNo project\nTAP\n29\nDeveloper Platform\n25\nSkill Hub\n30\nAll 3 projects\nAll projects\nName\nStatus\nPriority\nProgress\nLead\nDue date\nRecent activity\nCreated\n📁\nDeveloper Platform\nIn Progress\nNo priority\n67/92\nP\nPatrick\n—\nToday\nToday\n📁\nSkill Hub\nIn Progress\nNo priority\n61/91\nP\nPatrick\n—\nToday\nToday\n📁\nTAP\nIn Progress\nNo priority\n70/99\nP\nPatrick\n—\nToday\nToday\nAsk Multica",
+  "requests": [
+    {
+      "url": "/api/agents?workspace_id=review-workspace&include_archived=true",
+      "body": {}
+    },
+    {
+      "url": "/api/runtimes?workspace_id=review-workspace",
+      "body": {}
+    },
+    {
+      "url": "/api/agent-task-snapshot",
+      "body": {}
+    },
+    {
+      "url": "/api/squads",
+      "body": {}
+    },
+    {
+      "url": "/api/invitations",
+      "body": {}
+    },
+    {
+      "url": "/api/inbox/unread-summary",
+      "body": {}
+    },
+    {
+      "url": "/api/inbox/snoozed",
+      "body": {}
+    },
+    {
+      "url": "/api/chat/sessions?status=all",
+      "body": {}
+    },
+    {
+      "url": "/api/workspaces/review-workspace/members",
+      "body": {}
+    },
+    {
+      "url": "/api/issue-statuses?include_archived=true",
+      "body": {}
+    },
+    {
+      "url": "/api/issue-view-preferences?scope_type=sidebar_projects",
+      "body": {}
+    },
+    {
+      "url": "/api/working-agents?type=issue",
+      "body": {}
+    },
+    {
+      "url": "/api/issue-views?scope_type=all",
+      "body": {}
+    },
+    {
+      "url": "/api/issue-view-preferences?scope_type=sidebar",
+      "body": {}
+    },
+    {
+      "url": "/api/pins?include=view",
+      "body": {}
+    },
+    {
+      "url": "/api/inbox",
+      "body": {}
+    },
+    {
+      "url": "/api/issue-view-preferences?scope_type=projects_page",
+      "body": {}
+    },
+    {
+      "url": "/api/chat/pending-tasks",
+      "body": {}
+    },
+    {
+      "url": "/api/config",
+      "body": {}
+    },
+    {
+      "url": "/api/me",
+      "body": {}
+    },
+    {
+      "url": "/api/agents?workspace_id=review-workspace&include_archived=true",
+      "body": {}
+    },
+    {
+      "url": "/api/workspaces/review-workspace/members",
+      "body": {}
+    },
+    {
+      "url": "/api/squads",
+      "body": {}
+    },
+    {
+      "url": "/api/projects?include_archived=true",
+      "body": {}
+    },
+    {
+      "url": "/api/runtimes?workspace_id=review-workspace",
+      "body": {}
+    },
+    {
+      "url": "/api/agent-task-snapshot",
+      "body": {}
+    },
+    {
+      "url": "/api/working-agents?type=issue",
+      "body": {}
+    },
+    {
+      "url": "/api/chat/sessions?status=all",
+      "body": {}
+    },
+    {
+      "url": "/api/chat/pending-tasks",
+      "body": {}
+    },
+    {
+      "url": "/api/issue-statuses?include_archived=true",
+      "body": {}
+    },
+    {
+      "url": "/api/issue-views?scope_type=all",
+      "body": {}
+    },
+    {
+      "url": "/api/issue-view-preferences?scope_type=sidebar",
+      "body": {}
+    },
+    {
+      "url": "/api/issue-view-preferences?scope_type=sidebar_projects",
+      "body": {}
+    },
+    {
+      "url": "/api/issue-view-preferences?scope_type=projects_page",
+      "body": {}
+    },
+    {
+      "url": "/api/invitations",
+      "body": {}
+    },
+    {
+      "url": "/api/workspaces",
+      "body": {}
+    },
+    {
+      "url": "/api/inbox/snoozed",
+      "body": {}
+    },
+    {
+      "url": "/api/inbox",
+      "body": {}
+    },
+    {
+      "url": "/api/inbox/unread-summary",
+      "body": {}
+    },
+    {
+      "url": "/api/issues/table/facets",
+      "body": {
+        "query": {
+          "scope": {
+            "kind": "workspace"
+          },
+          "filters": {
+            "statuses": [],
+            "include_sub_issues": true
+          },
+          "sort": {
+            "field": "position",
+            "direction": "asc"
+          }
+        },
+        "facets": [
+          {
+            "kind": "project"
+          }
+        ],
+        "include_total": false
+      }
+    },
+    {
+      "url": "/api/agent-run-counts",
+      "body": {}
+    },
+    {
+      "url": "/api/agent-activity-30d",
+      "body": {}
+    },
+    {
+      "url": "/api/skills",
+      "body": {}
+    },
+    {
+      "url": "/api/autopilots",
+      "body": {}
+    }
+  ]
+}

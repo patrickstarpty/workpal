@@ -1,0 +1,735 @@
+{
+  "scope": "Actual Go LocalStorage upload/read/delete isolated file snapshots and success/failure; no exactOSerrorstrings, concurrency, symlink policy, HTTP or attachment authorization certification.",
+  "fixtures": [
+    {
+      "Op": "upload",
+      "Key": "users/u/a.png",
+      "Data": "original",
+      "Type": "image/png",
+      "Filename": "display<&>.png",
+      "Broken": false
+    },
+    {
+      "Op": "read",
+      "Key": "users/u/a.png",
+      "Data": "",
+      "Type": "image/png",
+      "Filename": "",
+      "Broken": false
+    },
+    {
+      "Op": "upload",
+      "Key": "users/u/a.png",
+      "Data": "",
+      "Type": "image/png",
+      "Filename": "new.png",
+      "Broken": true
+    },
+    {
+      "Op": "read",
+      "Key": "users/u/a.png.meta.json",
+      "Data": "",
+      "Type": "image/png",
+      "Filename": "",
+      "Broken": false
+    },
+    {
+      "Op": "read",
+      "Key": "users/u/.a.png.tmp",
+      "Data": "",
+      "Type": "image/png",
+      "Filename": "",
+      "Broken": false
+    },
+    {
+      "Op": "upload",
+      "Key": "users/u/a.png",
+      "Data": "replacement",
+      "Type": "image/png",
+      "Filename": "",
+      "Broken": false
+    },
+    {
+      "Op": "fixture-file",
+      "Key": "users/u/.a.png.tmp",
+      "Data": "crash",
+      "Type": "image/png",
+      "Filename": "",
+      "Broken": false
+    },
+    {
+      "Op": "delete",
+      "Key": "users/u/a.png",
+      "Data": "",
+      "Type": "image/png",
+      "Filename": "",
+      "Broken": false
+    },
+    {
+      "Op": "delete",
+      "Key": "users/u/a.png",
+      "Data": "",
+      "Type": "image/png",
+      "Filename": "",
+      "Broken": false
+    },
+    {
+      "Op": "fixture-dir",
+      "Key": ".blocked.tmp",
+      "Data": "",
+      "Type": "image/png",
+      "Filename": "",
+      "Broken": false
+    },
+    {
+      "Op": "upload",
+      "Key": "blocked",
+      "Data": "body",
+      "Type": "image/png",
+      "Filename": "",
+      "Broken": false
+    },
+    {
+      "Op": "fixture-dir",
+      "Key": "sidecar.png.meta.json",
+      "Data": "",
+      "Type": "image/png",
+      "Filename": "",
+      "Broken": false
+    },
+    {
+      "Op": "upload",
+      "Key": "sidecar.png",
+      "Data": "body",
+      "Type": "image/png",
+      "Filename": "name.png",
+      "Broken": false
+    },
+    {
+      "Op": "delete",
+      "Key": "sidecar.png",
+      "Data": "",
+      "Type": "image/png",
+      "Filename": "",
+      "Broken": false
+    },
+    {
+      "Op": "from-reader",
+      "Key": "new/failed.png",
+      "Data": "",
+      "Type": "image/png",
+      "Filename": "new.png",
+      "Broken": true
+    },
+    {
+      "Op": "from-reader",
+      "Key": "new/good.png",
+      "Data": "good",
+      "Type": "image/png",
+      "Filename": "good.png",
+      "Broken": false
+    },
+    {
+      "Op": "read",
+      "Key": "../outside",
+      "Data": "",
+      "Type": "image/png",
+      "Filename": "",
+      "Broken": false
+    },
+    {
+      "Op": "read",
+      "Key": "",
+      "Data": "",
+      "Type": "image/png",
+      "Filename": "",
+      "Broken": false
+    },
+    {
+      "Op": "upload",
+      "Key": "/leading.png",
+      "Data": "body",
+      "Type": "image/png",
+      "Filename": "",
+      "Broken": false
+    },
+    {
+      "Op": "read",
+      "Key": "/leading.png",
+      "Data": "",
+      "Type": "image/png",
+      "Filename": "",
+      "Broken": false
+    },
+    {
+      "Op": "upload",
+      "Key": "notes.tmp",
+      "Data": "body",
+      "Type": "image/png",
+      "Filename": "",
+      "Broken": false
+    },
+    {
+      "Op": "read",
+      "Key": "notes.tmp",
+      "Data": "",
+      "Type": "image/png",
+      "Filename": "",
+      "Broken": false
+    }
+  ],
+  "go": [
+    {
+      "dirs": [
+        "users",
+        "users/u"
+      ],
+      "files": {
+        "users/u/a.png": "original",
+        "users/u/a.png.meta.json": "{\"filename\":\"display\\u003c\\u0026\\u003e.png\",\"content_type\":\"image/png\"}"
+      },
+      "ok": true,
+      "value": "https://files.example/uploads/users/u/a.png"
+    },
+    {
+      "dirs": [
+        "users",
+        "users/u"
+      ],
+      "files": {
+        "users/u/a.png": "original",
+        "users/u/a.png.meta.json": "{\"filename\":\"display\\u003c\\u0026\\u003e.png\",\"content_type\":\"image/png\"}"
+      },
+      "ok": true,
+      "value": "original"
+    },
+    {
+      "dirs": [
+        "users",
+        "users/u"
+      ],
+      "files": {
+        "users/u/a.png": "original",
+        "users/u/a.png.meta.json": "{\"filename\":\"display\\u003c\\u0026\\u003e.png\",\"content_type\":\"image/png\"}"
+      },
+      "ok": false,
+      "value": ""
+    },
+    {
+      "dirs": [
+        "users",
+        "users/u"
+      ],
+      "files": {
+        "users/u/a.png": "original",
+        "users/u/a.png.meta.json": "{\"filename\":\"display\\u003c\\u0026\\u003e.png\",\"content_type\":\"image/png\"}"
+      },
+      "ok": false,
+      "value": ""
+    },
+    {
+      "dirs": [
+        "users",
+        "users/u"
+      ],
+      "files": {
+        "users/u/a.png": "original",
+        "users/u/a.png.meta.json": "{\"filename\":\"display\\u003c\\u0026\\u003e.png\",\"content_type\":\"image/png\"}"
+      },
+      "ok": false,
+      "value": ""
+    },
+    {
+      "dirs": [
+        "users",
+        "users/u"
+      ],
+      "files": {
+        "users/u/a.png": "replacement",
+        "users/u/a.png.meta.json": "{\"filename\":\"display\\u003c\\u0026\\u003e.png\",\"content_type\":\"image/png\"}"
+      },
+      "ok": true,
+      "value": "https://files.example/uploads/users/u/a.png"
+    },
+    {
+      "dirs": [
+        "users",
+        "users/u"
+      ],
+      "files": {
+        "users/u/.a.png.tmp": "crash",
+        "users/u/a.png": "replacement",
+        "users/u/a.png.meta.json": "{\"filename\":\"display\\u003c\\u0026\\u003e.png\",\"content_type\":\"image/png\"}"
+      },
+      "ok": true,
+      "value": ""
+    },
+    {
+      "dirs": [
+        "users",
+        "users/u"
+      ],
+      "files": {},
+      "ok": true,
+      "value": ""
+    },
+    {
+      "dirs": [
+        "users",
+        "users/u"
+      ],
+      "files": {},
+      "ok": true,
+      "value": ""
+    },
+    {
+      "dirs": [
+        ".blocked.tmp",
+        "users",
+        "users/u"
+      ],
+      "files": {},
+      "ok": true,
+      "value": ""
+    },
+    {
+      "dirs": [
+        ".blocked.tmp",
+        "users",
+        "users/u"
+      ],
+      "files": {},
+      "ok": false,
+      "value": ""
+    },
+    {
+      "dirs": [
+        ".blocked.tmp",
+        "sidecar.png.meta.json",
+        "users",
+        "users/u"
+      ],
+      "files": {},
+      "ok": true,
+      "value": ""
+    },
+    {
+      "dirs": [
+        ".blocked.tmp",
+        "sidecar.png.meta.json",
+        "users",
+        "users/u"
+      ],
+      "files": {
+        "sidecar.png": "body"
+      },
+      "ok": true,
+      "value": "https://files.example/uploads/sidecar.png"
+    },
+    {
+      "dirs": [
+        ".blocked.tmp",
+        "users",
+        "users/u"
+      ],
+      "files": {},
+      "ok": true,
+      "value": ""
+    },
+    {
+      "dirs": [
+        ".blocked.tmp",
+        "users",
+        "users/u"
+      ],
+      "files": {},
+      "ok": false,
+      "value": ""
+    },
+    {
+      "dirs": [
+        ".blocked.tmp",
+        "new",
+        "users",
+        "users/u"
+      ],
+      "files": {
+        "new/good.png": "good",
+        "new/good.png.meta.json": "{\"filename\":\"good.png\",\"content_type\":\"image/png\"}"
+      },
+      "ok": true,
+      "value": "https://files.example/uploads/new/good.png"
+    },
+    {
+      "dirs": [
+        ".blocked.tmp",
+        "new",
+        "users",
+        "users/u"
+      ],
+      "files": {
+        "new/good.png": "good",
+        "new/good.png.meta.json": "{\"filename\":\"good.png\",\"content_type\":\"image/png\"}"
+      },
+      "ok": false,
+      "value": ""
+    },
+    {
+      "dirs": [
+        ".blocked.tmp",
+        "new",
+        "users",
+        "users/u"
+      ],
+      "files": {
+        "new/good.png": "good",
+        "new/good.png.meta.json": "{\"filename\":\"good.png\",\"content_type\":\"image/png\"}"
+      },
+      "ok": false,
+      "value": ""
+    },
+    {
+      "dirs": [
+        ".blocked.tmp",
+        "new",
+        "users",
+        "users/u"
+      ],
+      "files": {
+        "leading.png": "body",
+        "new/good.png": "good",
+        "new/good.png.meta.json": "{\"filename\":\"good.png\",\"content_type\":\"image/png\"}"
+      },
+      "ok": true,
+      "value": "https://files.example/uploads//leading.png"
+    },
+    {
+      "dirs": [
+        ".blocked.tmp",
+        "new",
+        "users",
+        "users/u"
+      ],
+      "files": {
+        "leading.png": "body",
+        "new/good.png": "good",
+        "new/good.png.meta.json": "{\"filename\":\"good.png\",\"content_type\":\"image/png\"}"
+      },
+      "ok": true,
+      "value": "body"
+    },
+    {
+      "dirs": [
+        ".blocked.tmp",
+        "new",
+        "users",
+        "users/u"
+      ],
+      "files": {
+        "leading.png": "body",
+        "new/good.png": "good",
+        "new/good.png.meta.json": "{\"filename\":\"good.png\",\"content_type\":\"image/png\"}",
+        "notes.tmp": "body"
+      },
+      "ok": true,
+      "value": "https://files.example/uploads/notes.tmp"
+    },
+    {
+      "dirs": [
+        ".blocked.tmp",
+        "new",
+        "users",
+        "users/u"
+      ],
+      "files": {
+        "leading.png": "body",
+        "new/good.png": "good",
+        "new/good.png.meta.json": "{\"filename\":\"good.png\",\"content_type\":\"image/png\"}",
+        "notes.tmp": "body"
+      },
+      "ok": true,
+      "value": "body"
+    }
+  ],
+  "python": [
+    {
+      "ok": true,
+      "value": "https://files.example/uploads/users/u/a.png",
+      "files": {
+        "users/u/a.png.meta.json": "{\"filename\":\"display\\u003c\\u0026\\u003e.png\",\"content_type\":\"image/png\"}",
+        "users/u/a.png": "original"
+      },
+      "dirs": [
+        "users",
+        "users/u"
+      ]
+    },
+    {
+      "ok": true,
+      "value": "original",
+      "files": {
+        "users/u/a.png.meta.json": "{\"filename\":\"display\\u003c\\u0026\\u003e.png\",\"content_type\":\"image/png\"}",
+        "users/u/a.png": "original"
+      },
+      "dirs": [
+        "users",
+        "users/u"
+      ]
+    },
+    {
+      "ok": false,
+      "value": "",
+      "files": {
+        "users/u/a.png.meta.json": "{\"filename\":\"display\\u003c\\u0026\\u003e.png\",\"content_type\":\"image/png\"}",
+        "users/u/a.png": "original"
+      },
+      "dirs": [
+        "users",
+        "users/u"
+      ]
+    },
+    {
+      "ok": false,
+      "value": "",
+      "files": {
+        "users/u/a.png.meta.json": "{\"filename\":\"display\\u003c\\u0026\\u003e.png\",\"content_type\":\"image/png\"}",
+        "users/u/a.png": "original"
+      },
+      "dirs": [
+        "users",
+        "users/u"
+      ]
+    },
+    {
+      "ok": false,
+      "value": "",
+      "files": {
+        "users/u/a.png.meta.json": "{\"filename\":\"display\\u003c\\u0026\\u003e.png\",\"content_type\":\"image/png\"}",
+        "users/u/a.png": "original"
+      },
+      "dirs": [
+        "users",
+        "users/u"
+      ]
+    },
+    {
+      "ok": true,
+      "value": "https://files.example/uploads/users/u/a.png",
+      "files": {
+        "users/u/a.png.meta.json": "{\"filename\":\"display\\u003c\\u0026\\u003e.png\",\"content_type\":\"image/png\"}",
+        "users/u/a.png": "replacement"
+      },
+      "dirs": [
+        "users",
+        "users/u"
+      ]
+    },
+    {
+      "ok": true,
+      "value": "",
+      "files": {
+        "users/u/a.png.meta.json": "{\"filename\":\"display\\u003c\\u0026\\u003e.png\",\"content_type\":\"image/png\"}",
+        "users/u/.a.png.tmp": "crash",
+        "users/u/a.png": "replacement"
+      },
+      "dirs": [
+        "users",
+        "users/u"
+      ]
+    },
+    {
+      "ok": true,
+      "value": "",
+      "files": {},
+      "dirs": [
+        "users",
+        "users/u"
+      ]
+    },
+    {
+      "ok": true,
+      "value": "",
+      "files": {},
+      "dirs": [
+        "users",
+        "users/u"
+      ]
+    },
+    {
+      "ok": true,
+      "value": "",
+      "files": {},
+      "dirs": [
+        ".blocked.tmp",
+        "users",
+        "users/u"
+      ]
+    },
+    {
+      "ok": false,
+      "value": "",
+      "files": {},
+      "dirs": [
+        ".blocked.tmp",
+        "users",
+        "users/u"
+      ]
+    },
+    {
+      "ok": true,
+      "value": "",
+      "files": {},
+      "dirs": [
+        ".blocked.tmp",
+        "sidecar.png.meta.json",
+        "users",
+        "users/u"
+      ]
+    },
+    {
+      "ok": true,
+      "value": "https://files.example/uploads/sidecar.png",
+      "files": {
+        "sidecar.png": "body"
+      },
+      "dirs": [
+        ".blocked.tmp",
+        "sidecar.png.meta.json",
+        "users",
+        "users/u"
+      ]
+    },
+    {
+      "ok": true,
+      "value": "",
+      "files": {},
+      "dirs": [
+        ".blocked.tmp",
+        "users",
+        "users/u"
+      ]
+    },
+    {
+      "ok": false,
+      "value": "",
+      "files": {},
+      "dirs": [
+        ".blocked.tmp",
+        "users",
+        "users/u"
+      ]
+    },
+    {
+      "ok": true,
+      "value": "https://files.example/uploads/new/good.png",
+      "files": {
+        "new/good.png": "good",
+        "new/good.png.meta.json": "{\"filename\":\"good.png\",\"content_type\":\"image/png\"}"
+      },
+      "dirs": [
+        ".blocked.tmp",
+        "new",
+        "users",
+        "users/u"
+      ]
+    },
+    {
+      "ok": false,
+      "value": "",
+      "files": {
+        "new/good.png": "good",
+        "new/good.png.meta.json": "{\"filename\":\"good.png\",\"content_type\":\"image/png\"}"
+      },
+      "dirs": [
+        ".blocked.tmp",
+        "new",
+        "users",
+        "users/u"
+      ]
+    },
+    {
+      "ok": false,
+      "value": "",
+      "files": {
+        "new/good.png": "good",
+        "new/good.png.meta.json": "{\"filename\":\"good.png\",\"content_type\":\"image/png\"}"
+      },
+      "dirs": [
+        ".blocked.tmp",
+        "new",
+        "users",
+        "users/u"
+      ]
+    },
+    {
+      "ok": true,
+      "value": "https://files.example/uploads//leading.png",
+      "files": {
+        "leading.png": "body",
+        "new/good.png": "good",
+        "new/good.png.meta.json": "{\"filename\":\"good.png\",\"content_type\":\"image/png\"}"
+      },
+      "dirs": [
+        ".blocked.tmp",
+        "new",
+        "users",
+        "users/u"
+      ]
+    },
+    {
+      "ok": true,
+      "value": "body",
+      "files": {
+        "leading.png": "body",
+        "new/good.png": "good",
+        "new/good.png.meta.json": "{\"filename\":\"good.png\",\"content_type\":\"image/png\"}"
+      },
+      "dirs": [
+        ".blocked.tmp",
+        "new",
+        "users",
+        "users/u"
+      ]
+    },
+    {
+      "ok": true,
+      "value": "https://files.example/uploads/notes.tmp",
+      "files": {
+        "notes.tmp": "body",
+        "leading.png": "body",
+        "new/good.png": "good",
+        "new/good.png.meta.json": "{\"filename\":\"good.png\",\"content_type\":\"image/png\"}"
+      },
+      "dirs": [
+        ".blocked.tmp",
+        "new",
+        "users",
+        "users/u"
+      ]
+    },
+    {
+      "ok": true,
+      "value": "body",
+      "files": {
+        "notes.tmp": "body",
+        "leading.png": "body",
+        "new/good.png": "good",
+        "new/good.png.meta.json": "{\"filename\":\"good.png\",\"content_type\":\"image/png\"}"
+      },
+      "dirs": [
+        ".blocked.tmp",
+        "new",
+        "users",
+        "users/u"
+      ]
+    }
+  ],
+  "mismatches": [],
+  "source_sha256": {
+    "server/go/internal/storage/local.go": "9adc50783c156969878c1389527787d6cf22b632e9ae20242e5b3d652cb8a5ed",
+    "server/tests/parity/go_local_storage/main.go": "ef08c248b3ddd9075abefebc2ac79400e368ec869af8903b9dbcddcf73686fe4",
+    "server/src/workpal_backend/files/local_storage.py": "42fe126a8175b97f8786c5035ea246fbcc12b7ba464ad5d3c7ef8faca4aa4117",
+    "server/src/workpal_backend/files/avatar_urls.py": "322295d8427cf2f3df2c8068890361aeb343d7e09c51f75ba19b763169de6905"
+  },
+  "binary_sha256": "aae1e10b662f096dd930f616fa9156444bc443337d5ae492ca34512ba4978a7b"
+}

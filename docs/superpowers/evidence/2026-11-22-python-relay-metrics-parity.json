@@ -1,0 +1,935 @@
+{
+  "scope": "Original Go Redis metrics snapshot defaults and sixteen state transitions; map replacement, per-mode TTL sums, error overwrite/clear, counters, reset preserves node ID. Does not certify concurrent counter writers or full HTTP metrics/Hub producer coverage.",
+  "fixtures": [
+    [
+      {
+        "Op": "snapshot"
+      },
+      {
+        "Op": "node",
+        "Key": "node"
+      },
+      {
+        "Op": "connected",
+        "Value": 1
+      },
+      {
+        "Op": "error",
+        "Key": "write failed"
+      },
+      {
+        "Op": "write",
+        "Value": 3,
+        "Other": 77
+      },
+      {
+        "Op": "stream",
+        "Key": "s",
+        "Value": 3,
+        "Other": -1
+      },
+      {
+        "Op": "stream",
+        "Key": "t",
+        "Value": 0,
+        "Other": -2
+      },
+      {
+        "Op": "ttl",
+        "Key": "legacy",
+        "Value": 2
+      },
+      {
+        "Op": "ttl",
+        "Key": "sharded",
+        "Value": 3
+      },
+      {
+        "Op": "ttl",
+        "Key": "legacy",
+        "Value": 1
+      },
+      {
+        "Op": "stream",
+        "Key": "s",
+        "Value": 8,
+        "Other": 123
+      },
+      {
+        "Op": "retention",
+        "Value": 2,
+        "Other": 5
+      },
+      {
+        "Op": "error",
+        "Key": ""
+      },
+      {
+        "Op": "reset"
+      },
+      {
+        "Op": "ttl",
+        "Key": "legacy",
+        "Value": 9
+      },
+      {
+        "Op": "reset"
+      }
+    ]
+  ],
+  "go": [
+    [
+      {
+        "ack_total": 0,
+        "connected": false,
+        "evicted_keys": 0,
+        "last_error": "",
+        "last_xadd_lag_micros": 0,
+        "max_memory_bytes": 0,
+        "mirror_divergence_total": 0,
+        "mirror_primary_errors": 0,
+        "mirror_secondary_errors": 0,
+        "node_id": "",
+        "retention_errors": 0,
+        "stream_missing_total": 0,
+        "stream_trimmed_total": 0,
+        "streams": {},
+        "streams_without_ttl": 0,
+        "used_memory_bytes": 0,
+        "xadd_errors": 0,
+        "xadd_total": 0,
+        "xread_errors": 0,
+        "xread_total": 0
+      },
+      {
+        "ack_total": 0,
+        "connected": false,
+        "evicted_keys": 0,
+        "last_error": "",
+        "last_xadd_lag_micros": 0,
+        "max_memory_bytes": 0,
+        "mirror_divergence_total": 0,
+        "mirror_primary_errors": 0,
+        "mirror_secondary_errors": 0,
+        "node_id": "node",
+        "retention_errors": 0,
+        "stream_missing_total": 0,
+        "stream_trimmed_total": 0,
+        "streams": {},
+        "streams_without_ttl": 0,
+        "used_memory_bytes": 0,
+        "xadd_errors": 0,
+        "xadd_total": 0,
+        "xread_errors": 0,
+        "xread_total": 0
+      },
+      {
+        "ack_total": 0,
+        "connected": true,
+        "evicted_keys": 0,
+        "last_error": "",
+        "last_xadd_lag_micros": 0,
+        "max_memory_bytes": 0,
+        "mirror_divergence_total": 0,
+        "mirror_primary_errors": 0,
+        "mirror_secondary_errors": 0,
+        "node_id": "node",
+        "retention_errors": 0,
+        "stream_missing_total": 0,
+        "stream_trimmed_total": 0,
+        "streams": {},
+        "streams_without_ttl": 0,
+        "used_memory_bytes": 0,
+        "xadd_errors": 0,
+        "xadd_total": 0,
+        "xread_errors": 0,
+        "xread_total": 0
+      },
+      {
+        "ack_total": 0,
+        "connected": true,
+        "evicted_keys": 0,
+        "last_error": "write failed",
+        "last_xadd_lag_micros": 0,
+        "max_memory_bytes": 0,
+        "mirror_divergence_total": 0,
+        "mirror_primary_errors": 0,
+        "mirror_secondary_errors": 0,
+        "node_id": "node",
+        "retention_errors": 0,
+        "stream_missing_total": 0,
+        "stream_trimmed_total": 0,
+        "streams": {},
+        "streams_without_ttl": 0,
+        "used_memory_bytes": 0,
+        "xadd_errors": 0,
+        "xadd_total": 0,
+        "xread_errors": 0,
+        "xread_total": 0
+      },
+      {
+        "ack_total": 0,
+        "connected": true,
+        "evicted_keys": 0,
+        "last_error": "write failed",
+        "last_xadd_lag_micros": 77,
+        "max_memory_bytes": 0,
+        "mirror_divergence_total": 0,
+        "mirror_primary_errors": 0,
+        "mirror_secondary_errors": 0,
+        "node_id": "node",
+        "retention_errors": 0,
+        "stream_missing_total": 0,
+        "stream_trimmed_total": 0,
+        "streams": {},
+        "streams_without_ttl": 0,
+        "used_memory_bytes": 0,
+        "xadd_errors": 0,
+        "xadd_total": 3,
+        "xread_errors": 0,
+        "xread_total": 0
+      },
+      {
+        "ack_total": 0,
+        "connected": true,
+        "evicted_keys": 0,
+        "last_error": "write failed",
+        "last_xadd_lag_micros": 77,
+        "max_memory_bytes": 0,
+        "mirror_divergence_total": 0,
+        "mirror_primary_errors": 0,
+        "mirror_secondary_errors": 0,
+        "node_id": "node",
+        "retention_errors": 0,
+        "stream_missing_total": 0,
+        "stream_trimmed_total": 0,
+        "streams": {
+          "s": {
+            "entries": 3,
+            "pttl_millis": -1
+          }
+        },
+        "streams_without_ttl": 0,
+        "used_memory_bytes": 0,
+        "xadd_errors": 0,
+        "xadd_total": 3,
+        "xread_errors": 0,
+        "xread_total": 0
+      },
+      {
+        "ack_total": 0,
+        "connected": true,
+        "evicted_keys": 0,
+        "last_error": "write failed",
+        "last_xadd_lag_micros": 77,
+        "max_memory_bytes": 0,
+        "mirror_divergence_total": 0,
+        "mirror_primary_errors": 0,
+        "mirror_secondary_errors": 0,
+        "node_id": "node",
+        "retention_errors": 0,
+        "stream_missing_total": 0,
+        "stream_trimmed_total": 0,
+        "streams": {
+          "s": {
+            "entries": 3,
+            "pttl_millis": -1
+          },
+          "t": {
+            "entries": 0,
+            "pttl_millis": -2
+          }
+        },
+        "streams_without_ttl": 0,
+        "used_memory_bytes": 0,
+        "xadd_errors": 0,
+        "xadd_total": 3,
+        "xread_errors": 0,
+        "xread_total": 0
+      },
+      {
+        "ack_total": 0,
+        "connected": true,
+        "evicted_keys": 0,
+        "last_error": "write failed",
+        "last_xadd_lag_micros": 77,
+        "max_memory_bytes": 0,
+        "mirror_divergence_total": 0,
+        "mirror_primary_errors": 0,
+        "mirror_secondary_errors": 0,
+        "node_id": "node",
+        "retention_errors": 0,
+        "stream_missing_total": 0,
+        "stream_trimmed_total": 0,
+        "streams": {
+          "s": {
+            "entries": 3,
+            "pttl_millis": -1
+          },
+          "t": {
+            "entries": 0,
+            "pttl_millis": -2
+          }
+        },
+        "streams_without_ttl": 2,
+        "used_memory_bytes": 0,
+        "xadd_errors": 0,
+        "xadd_total": 3,
+        "xread_errors": 0,
+        "xread_total": 0
+      },
+      {
+        "ack_total": 0,
+        "connected": true,
+        "evicted_keys": 0,
+        "last_error": "write failed",
+        "last_xadd_lag_micros": 77,
+        "max_memory_bytes": 0,
+        "mirror_divergence_total": 0,
+        "mirror_primary_errors": 0,
+        "mirror_secondary_errors": 0,
+        "node_id": "node",
+        "retention_errors": 0,
+        "stream_missing_total": 0,
+        "stream_trimmed_total": 0,
+        "streams": {
+          "s": {
+            "entries": 3,
+            "pttl_millis": -1
+          },
+          "t": {
+            "entries": 0,
+            "pttl_millis": -2
+          }
+        },
+        "streams_without_ttl": 5,
+        "used_memory_bytes": 0,
+        "xadd_errors": 0,
+        "xadd_total": 3,
+        "xread_errors": 0,
+        "xread_total": 0
+      },
+      {
+        "ack_total": 0,
+        "connected": true,
+        "evicted_keys": 0,
+        "last_error": "write failed",
+        "last_xadd_lag_micros": 77,
+        "max_memory_bytes": 0,
+        "mirror_divergence_total": 0,
+        "mirror_primary_errors": 0,
+        "mirror_secondary_errors": 0,
+        "node_id": "node",
+        "retention_errors": 0,
+        "stream_missing_total": 0,
+        "stream_trimmed_total": 0,
+        "streams": {
+          "s": {
+            "entries": 3,
+            "pttl_millis": -1
+          },
+          "t": {
+            "entries": 0,
+            "pttl_millis": -2
+          }
+        },
+        "streams_without_ttl": 4,
+        "used_memory_bytes": 0,
+        "xadd_errors": 0,
+        "xadd_total": 3,
+        "xread_errors": 0,
+        "xread_total": 0
+      },
+      {
+        "ack_total": 0,
+        "connected": true,
+        "evicted_keys": 0,
+        "last_error": "write failed",
+        "last_xadd_lag_micros": 77,
+        "max_memory_bytes": 0,
+        "mirror_divergence_total": 0,
+        "mirror_primary_errors": 0,
+        "mirror_secondary_errors": 0,
+        "node_id": "node",
+        "retention_errors": 0,
+        "stream_missing_total": 0,
+        "stream_trimmed_total": 0,
+        "streams": {
+          "s": {
+            "entries": 8,
+            "pttl_millis": 123
+          },
+          "t": {
+            "entries": 0,
+            "pttl_millis": -2
+          }
+        },
+        "streams_without_ttl": 4,
+        "used_memory_bytes": 0,
+        "xadd_errors": 0,
+        "xadd_total": 3,
+        "xread_errors": 0,
+        "xread_total": 0
+      },
+      {
+        "ack_total": 0,
+        "connected": true,
+        "evicted_keys": 0,
+        "last_error": "write failed",
+        "last_xadd_lag_micros": 77,
+        "max_memory_bytes": 0,
+        "mirror_divergence_total": 0,
+        "mirror_primary_errors": 0,
+        "mirror_secondary_errors": 0,
+        "node_id": "node",
+        "retention_errors": 2,
+        "stream_missing_total": 0,
+        "stream_trimmed_total": 5,
+        "streams": {
+          "s": {
+            "entries": 8,
+            "pttl_millis": 123
+          },
+          "t": {
+            "entries": 0,
+            "pttl_millis": -2
+          }
+        },
+        "streams_without_ttl": 4,
+        "used_memory_bytes": 0,
+        "xadd_errors": 0,
+        "xadd_total": 3,
+        "xread_errors": 0,
+        "xread_total": 0
+      },
+      {
+        "ack_total": 0,
+        "connected": true,
+        "evicted_keys": 0,
+        "last_error": "",
+        "last_xadd_lag_micros": 77,
+        "max_memory_bytes": 0,
+        "mirror_divergence_total": 0,
+        "mirror_primary_errors": 0,
+        "mirror_secondary_errors": 0,
+        "node_id": "node",
+        "retention_errors": 2,
+        "stream_missing_total": 0,
+        "stream_trimmed_total": 5,
+        "streams": {
+          "s": {
+            "entries": 8,
+            "pttl_millis": 123
+          },
+          "t": {
+            "entries": 0,
+            "pttl_millis": -2
+          }
+        },
+        "streams_without_ttl": 4,
+        "used_memory_bytes": 0,
+        "xadd_errors": 0,
+        "xadd_total": 3,
+        "xread_errors": 0,
+        "xread_total": 0
+      },
+      {
+        "ack_total": 0,
+        "connected": false,
+        "evicted_keys": 0,
+        "last_error": "",
+        "last_xadd_lag_micros": 0,
+        "max_memory_bytes": 0,
+        "mirror_divergence_total": 0,
+        "mirror_primary_errors": 0,
+        "mirror_secondary_errors": 0,
+        "node_id": "node",
+        "retention_errors": 0,
+        "stream_missing_total": 0,
+        "stream_trimmed_total": 0,
+        "streams": {},
+        "streams_without_ttl": 0,
+        "used_memory_bytes": 0,
+        "xadd_errors": 0,
+        "xadd_total": 0,
+        "xread_errors": 0,
+        "xread_total": 0
+      },
+      {
+        "ack_total": 0,
+        "connected": false,
+        "evicted_keys": 0,
+        "last_error": "",
+        "last_xadd_lag_micros": 0,
+        "max_memory_bytes": 0,
+        "mirror_divergence_total": 0,
+        "mirror_primary_errors": 0,
+        "mirror_secondary_errors": 0,
+        "node_id": "node",
+        "retention_errors": 0,
+        "stream_missing_total": 0,
+        "stream_trimmed_total": 0,
+        "streams": {},
+        "streams_without_ttl": 9,
+        "used_memory_bytes": 0,
+        "xadd_errors": 0,
+        "xadd_total": 0,
+        "xread_errors": 0,
+        "xread_total": 0
+      },
+      {
+        "ack_total": 0,
+        "connected": false,
+        "evicted_keys": 0,
+        "last_error": "",
+        "last_xadd_lag_micros": 0,
+        "max_memory_bytes": 0,
+        "mirror_divergence_total": 0,
+        "mirror_primary_errors": 0,
+        "mirror_secondary_errors": 0,
+        "node_id": "node",
+        "retention_errors": 0,
+        "stream_missing_total": 0,
+        "stream_trimmed_total": 0,
+        "streams": {},
+        "streams_without_ttl": 0,
+        "used_memory_bytes": 0,
+        "xadd_errors": 0,
+        "xadd_total": 0,
+        "xread_errors": 0,
+        "xread_total": 0
+      }
+    ]
+  ],
+  "python": [
+    [
+      {
+        "connected": false,
+        "node_id": "",
+        "xadd_total": 0,
+        "xadd_errors": 0,
+        "xread_total": 0,
+        "xread_errors": 0,
+        "ack_total": 0,
+        "last_xadd_lag_micros": 0,
+        "mirror_primary_errors": 0,
+        "mirror_secondary_errors": 0,
+        "mirror_divergence_total": 0,
+        "stream_missing_total": 0,
+        "retention_errors": 0,
+        "used_memory_bytes": 0,
+        "max_memory_bytes": 0,
+        "evicted_keys": 0,
+        "last_error": "",
+        "stream_trimmed_total": 0,
+        "streams_without_ttl": 0,
+        "streams": {}
+      },
+      {
+        "connected": false,
+        "node_id": "node",
+        "xadd_total": 0,
+        "xadd_errors": 0,
+        "xread_total": 0,
+        "xread_errors": 0,
+        "ack_total": 0,
+        "last_xadd_lag_micros": 0,
+        "mirror_primary_errors": 0,
+        "mirror_secondary_errors": 0,
+        "mirror_divergence_total": 0,
+        "stream_missing_total": 0,
+        "retention_errors": 0,
+        "used_memory_bytes": 0,
+        "max_memory_bytes": 0,
+        "evicted_keys": 0,
+        "last_error": "",
+        "stream_trimmed_total": 0,
+        "streams_without_ttl": 0,
+        "streams": {}
+      },
+      {
+        "connected": true,
+        "node_id": "node",
+        "xadd_total": 0,
+        "xadd_errors": 0,
+        "xread_total": 0,
+        "xread_errors": 0,
+        "ack_total": 0,
+        "last_xadd_lag_micros": 0,
+        "mirror_primary_errors": 0,
+        "mirror_secondary_errors": 0,
+        "mirror_divergence_total": 0,
+        "stream_missing_total": 0,
+        "retention_errors": 0,
+        "used_memory_bytes": 0,
+        "max_memory_bytes": 0,
+        "evicted_keys": 0,
+        "last_error": "",
+        "stream_trimmed_total": 0,
+        "streams_without_ttl": 0,
+        "streams": {}
+      },
+      {
+        "connected": true,
+        "node_id": "node",
+        "xadd_total": 0,
+        "xadd_errors": 0,
+        "xread_total": 0,
+        "xread_errors": 0,
+        "ack_total": 0,
+        "last_xadd_lag_micros": 0,
+        "mirror_primary_errors": 0,
+        "mirror_secondary_errors": 0,
+        "mirror_divergence_total": 0,
+        "stream_missing_total": 0,
+        "retention_errors": 0,
+        "used_memory_bytes": 0,
+        "max_memory_bytes": 0,
+        "evicted_keys": 0,
+        "last_error": "write failed",
+        "stream_trimmed_total": 0,
+        "streams_without_ttl": 0,
+        "streams": {}
+      },
+      {
+        "connected": true,
+        "node_id": "node",
+        "xadd_total": 3,
+        "xadd_errors": 0,
+        "xread_total": 0,
+        "xread_errors": 0,
+        "ack_total": 0,
+        "last_xadd_lag_micros": 77,
+        "mirror_primary_errors": 0,
+        "mirror_secondary_errors": 0,
+        "mirror_divergence_total": 0,
+        "stream_missing_total": 0,
+        "retention_errors": 0,
+        "used_memory_bytes": 0,
+        "max_memory_bytes": 0,
+        "evicted_keys": 0,
+        "last_error": "write failed",
+        "stream_trimmed_total": 0,
+        "streams_without_ttl": 0,
+        "streams": {}
+      },
+      {
+        "connected": true,
+        "node_id": "node",
+        "xadd_total": 3,
+        "xadd_errors": 0,
+        "xread_total": 0,
+        "xread_errors": 0,
+        "ack_total": 0,
+        "last_xadd_lag_micros": 77,
+        "mirror_primary_errors": 0,
+        "mirror_secondary_errors": 0,
+        "mirror_divergence_total": 0,
+        "stream_missing_total": 0,
+        "retention_errors": 0,
+        "used_memory_bytes": 0,
+        "max_memory_bytes": 0,
+        "evicted_keys": 0,
+        "last_error": "write failed",
+        "stream_trimmed_total": 0,
+        "streams_without_ttl": 0,
+        "streams": {
+          "s": {
+            "entries": 3,
+            "pttl_millis": -1
+          }
+        }
+      },
+      {
+        "connected": true,
+        "node_id": "node",
+        "xadd_total": 3,
+        "xadd_errors": 0,
+        "xread_total": 0,
+        "xread_errors": 0,
+        "ack_total": 0,
+        "last_xadd_lag_micros": 77,
+        "mirror_primary_errors": 0,
+        "mirror_secondary_errors": 0,
+        "mirror_divergence_total": 0,
+        "stream_missing_total": 0,
+        "retention_errors": 0,
+        "used_memory_bytes": 0,
+        "max_memory_bytes": 0,
+        "evicted_keys": 0,
+        "last_error": "write failed",
+        "stream_trimmed_total": 0,
+        "streams_without_ttl": 0,
+        "streams": {
+          "s": {
+            "entries": 3,
+            "pttl_millis": -1
+          },
+          "t": {
+            "entries": 0,
+            "pttl_millis": -2
+          }
+        }
+      },
+      {
+        "connected": true,
+        "node_id": "node",
+        "xadd_total": 3,
+        "xadd_errors": 0,
+        "xread_total": 0,
+        "xread_errors": 0,
+        "ack_total": 0,
+        "last_xadd_lag_micros": 77,
+        "mirror_primary_errors": 0,
+        "mirror_secondary_errors": 0,
+        "mirror_divergence_total": 0,
+        "stream_missing_total": 0,
+        "retention_errors": 0,
+        "used_memory_bytes": 0,
+        "max_memory_bytes": 0,
+        "evicted_keys": 0,
+        "last_error": "write failed",
+        "stream_trimmed_total": 0,
+        "streams_without_ttl": 2,
+        "streams": {
+          "s": {
+            "entries": 3,
+            "pttl_millis": -1
+          },
+          "t": {
+            "entries": 0,
+            "pttl_millis": -2
+          }
+        }
+      },
+      {
+        "connected": true,
+        "node_id": "node",
+        "xadd_total": 3,
+        "xadd_errors": 0,
+        "xread_total": 0,
+        "xread_errors": 0,
+        "ack_total": 0,
+        "last_xadd_lag_micros": 77,
+        "mirror_primary_errors": 0,
+        "mirror_secondary_errors": 0,
+        "mirror_divergence_total": 0,
+        "stream_missing_total": 0,
+        "retention_errors": 0,
+        "used_memory_bytes": 0,
+        "max_memory_bytes": 0,
+        "evicted_keys": 0,
+        "last_error": "write failed",
+        "stream_trimmed_total": 0,
+        "streams_without_ttl": 5,
+        "streams": {
+          "s": {
+            "entries": 3,
+            "pttl_millis": -1
+          },
+          "t": {
+            "entries": 0,
+            "pttl_millis": -2
+          }
+        }
+      },
+      {
+        "connected": true,
+        "node_id": "node",
+        "xadd_total": 3,
+        "xadd_errors": 0,
+        "xread_total": 0,
+        "xread_errors": 0,
+        "ack_total": 0,
+        "last_xadd_lag_micros": 77,
+        "mirror_primary_errors": 0,
+        "mirror_secondary_errors": 0,
+        "mirror_divergence_total": 0,
+        "stream_missing_total": 0,
+        "retention_errors": 0,
+        "used_memory_bytes": 0,
+        "max_memory_bytes": 0,
+        "evicted_keys": 0,
+        "last_error": "write failed",
+        "stream_trimmed_total": 0,
+        "streams_without_ttl": 4,
+        "streams": {
+          "s": {
+            "entries": 3,
+            "pttl_millis": -1
+          },
+          "t": {
+            "entries": 0,
+            "pttl_millis": -2
+          }
+        }
+      },
+      {
+        "connected": true,
+        "node_id": "node",
+        "xadd_total": 3,
+        "xadd_errors": 0,
+        "xread_total": 0,
+        "xread_errors": 0,
+        "ack_total": 0,
+        "last_xadd_lag_micros": 77,
+        "mirror_primary_errors": 0,
+        "mirror_secondary_errors": 0,
+        "mirror_divergence_total": 0,
+        "stream_missing_total": 0,
+        "retention_errors": 0,
+        "used_memory_bytes": 0,
+        "max_memory_bytes": 0,
+        "evicted_keys": 0,
+        "last_error": "write failed",
+        "stream_trimmed_total": 0,
+        "streams_without_ttl": 4,
+        "streams": {
+          "s": {
+            "entries": 8,
+            "pttl_millis": 123
+          },
+          "t": {
+            "entries": 0,
+            "pttl_millis": -2
+          }
+        }
+      },
+      {
+        "connected": true,
+        "node_id": "node",
+        "xadd_total": 3,
+        "xadd_errors": 0,
+        "xread_total": 0,
+        "xread_errors": 0,
+        "ack_total": 0,
+        "last_xadd_lag_micros": 77,
+        "mirror_primary_errors": 0,
+        "mirror_secondary_errors": 0,
+        "mirror_divergence_total": 0,
+        "stream_missing_total": 0,
+        "retention_errors": 2,
+        "used_memory_bytes": 0,
+        "max_memory_bytes": 0,
+        "evicted_keys": 0,
+        "last_error": "write failed",
+        "stream_trimmed_total": 5,
+        "streams_without_ttl": 4,
+        "streams": {
+          "s": {
+            "entries": 8,
+            "pttl_millis": 123
+          },
+          "t": {
+            "entries": 0,
+            "pttl_millis": -2
+          }
+        }
+      },
+      {
+        "connected": true,
+        "node_id": "node",
+        "xadd_total": 3,
+        "xadd_errors": 0,
+        "xread_total": 0,
+        "xread_errors": 0,
+        "ack_total": 0,
+        "last_xadd_lag_micros": 77,
+        "mirror_primary_errors": 0,
+        "mirror_secondary_errors": 0,
+        "mirror_divergence_total": 0,
+        "stream_missing_total": 0,
+        "retention_errors": 2,
+        "used_memory_bytes": 0,
+        "max_memory_bytes": 0,
+        "evicted_keys": 0,
+        "last_error": "",
+        "stream_trimmed_total": 5,
+        "streams_without_ttl": 4,
+        "streams": {
+          "s": {
+            "entries": 8,
+            "pttl_millis": 123
+          },
+          "t": {
+            "entries": 0,
+            "pttl_millis": -2
+          }
+        }
+      },
+      {
+        "connected": false,
+        "node_id": "node",
+        "xadd_total": 0,
+        "xadd_errors": 0,
+        "xread_total": 0,
+        "xread_errors": 0,
+        "ack_total": 0,
+        "last_xadd_lag_micros": 0,
+        "mirror_primary_errors": 0,
+        "mirror_secondary_errors": 0,
+        "mirror_divergence_total": 0,
+        "stream_missing_total": 0,
+        "retention_errors": 0,
+        "used_memory_bytes": 0,
+        "max_memory_bytes": 0,
+        "evicted_keys": 0,
+        "last_error": "",
+        "stream_trimmed_total": 0,
+        "streams_without_ttl": 0,
+        "streams": {}
+      },
+      {
+        "connected": false,
+        "node_id": "node",
+        "xadd_total": 0,
+        "xadd_errors": 0,
+        "xread_total": 0,
+        "xread_errors": 0,
+        "ack_total": 0,
+        "last_xadd_lag_micros": 0,
+        "mirror_primary_errors": 0,
+        "mirror_secondary_errors": 0,
+        "mirror_divergence_total": 0,
+        "stream_missing_total": 0,
+        "retention_errors": 0,
+        "used_memory_bytes": 0,
+        "max_memory_bytes": 0,
+        "evicted_keys": 0,
+        "last_error": "",
+        "stream_trimmed_total": 0,
+        "streams_without_ttl": 9,
+        "streams": {}
+      },
+      {
+        "connected": false,
+        "node_id": "node",
+        "xadd_total": 0,
+        "xadd_errors": 0,
+        "xread_total": 0,
+        "xread_errors": 0,
+        "ack_total": 0,
+        "last_xadd_lag_micros": 0,
+        "mirror_primary_errors": 0,
+        "mirror_secondary_errors": 0,
+        "mirror_divergence_total": 0,
+        "stream_missing_total": 0,
+        "retention_errors": 0,
+        "used_memory_bytes": 0,
+        "max_memory_bytes": 0,
+        "evicted_keys": 0,
+        "last_error": "",
+        "stream_trimmed_total": 0,
+        "streams_without_ttl": 0,
+        "streams": {}
+      }
+    ]
+  ],
+  "mismatches": [],
+  "source_sha256": {
+    "server/go/internal/realtime/metrics.go": "034108ea4f442eea5c6c25e0acf97a85f6a1d1b9656d2ba3c92098f294ef461d",
+    "server/src/workpal_backend/realtime/relay_metrics.py": "36dde5e15f24b28e5abf835285b15235cc2054a6bff00dee06799586dfcb5460",
+    "server/tests/parity/go_relay_metrics/main.go": "5cb0b9775c9587aef73a3fd51ba25ebc81633f5c0a757df369e78c1bdf885129",
+    "server/tests/parity/go_relay_metrics/wrapper.go": "a9f7be83afe6771c8cd1b8a188ad36df000792b9e362683f83c40a1e3f956af0"
+  }
+}

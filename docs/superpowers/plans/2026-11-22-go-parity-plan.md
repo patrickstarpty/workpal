@@ -2,17 +2,19 @@
 
 > **For agentic workers:** 用户已在三项审阅修订后回复“可以了，你自己来做”，批准实施。使用 executing-plans 逐项执行，未批准的行为差异仍须停下提交审核。
 
-**Goal:** 按固定 Go 源码复刻后端行为，每个入口及其权限、数据、事务、事件和错误均有等价证据。
+**Goal:** 按固定 Go 源码实现 Python 后端，每个入口及其权限、数据、事务、事件和错误均有验收证据；仅数据库并发和快照语义适用用户已批准的 SQLite 差异。
 
-**Architecture:** Python/FastAPI 按 Go 领域模块实现，复用经核验的基础设施；SQLite/Redis 适配必须逐项证明 Go 可观测语义。外部调用使用隔离测试依赖，真实模型和生产服务不调用。
+**Architecture:** Python/FastAPI 按 Go 领域模块实现，复用经核验的基础设施；SQLite/Redis 适配必须逐项验证 Go 可观测语义；SQLite 并发/快照按[已批准方案 B](2026-11-22-python-database-parity-decision.md)记录差异，其余要求不变。外部调用使用隔离测试依赖，真实模型和生产服务不调用。
 
 **Tech Stack:** Python 3.11、FastAPI、SQLAlchemy、Alembic、SQLite、Redis、pytest、Playwright；Go 与隔离 PostgreSQL 用于基准/差分验证。数据库语义无法等价时先提交方案审核，不擅自改变范围。
 
 **Spec:** [逐项等价设计](../specs/2026-11-22-go-parity-design.md)
 
+**最新验收调整：** 用户要求“功能尽量对齐，要做好并发锁，性能上可以稍微妥协”。保留 Python + SQLite；功能差异逐项披露，未实现项不伪装完成。并发正确性、事务原子性和数据完整性不豁免；适度性能让步须有同条件实测，不能虚构统一容差。数据库并发/快照差异按已批准方案 B 单列。
+
 ## 全局约束
 
-- 当前仅文档审核；批准前不得修改功能代码、测试、依赖或启动配置，不得停服务/切库/删除 Node。
+- 当前已批准实施。真实停写、数据切换及 Node 退役仍须满足计划末尾的全部适用验收门槛。
 - Go 文件及 SHA256 是行为基线；前端页面和 Node mock 不是 Go 的替代规范。
 - 保留用户数据、上传文件、归档和此前未提交改动。实现时只提交本任务明确拥有的文件。
 - 未实现不等于范围外；临时 501、空数组、通用 CRUD 不能标记等价。
@@ -24,14 +26,14 @@
 1. 工作区成员读取私有项目/任务/附件：分别验证列表计数、分页和详情均不泄漏，不能只检查 workspace membership。
 2. 会话、PAT、daemon/task token 混用及伪造头：按 Go 每条路由验证身份种类和拒绝语义。
 3. 写入后事件失败或 worker 崩溃：验证事务、幂等、顺序、重试和重连，不把发布成功等同于用户收到。
-4. PostgreSQL 锁、搜索、JSON/null 和 SQLite 差异：用相同输入、并发调度及边界证明，不靠 API 表面结构。
+4. PostgreSQL 锁、搜索、JSON/null 和 SQLite 差异：用相同输入、并发调度及边界验证；已批准的并发/快照差异保留双端证据，搜索、JSON/null、约束及业务正确性仍须对齐。
 5. 附件写入/关联/删除中断和私有权限变化：验证字节、元数据、引用、下载和回收一致性。
 
 ## 任务 0：用户批准与工作区基线
 
 **Files:** 本设计/计划、`docs/superpowers/evidence/2026-11-22-go-source-sha256.json`、现有工作区差异清单。
 
-- [x] 用户明确批准设计、范围和实施计划；未新增任何 Go 行为差异豁免。
+- [x] 用户明确批准设计、范围和实施计划；后续明确选择保留 SQLite，允许数据库并发和快照差异。批准边界见数据库方案及 `server/contracts/database-exceptions.json`，其他差异不自动豁免。
 - [ ] 校验完整受保护输入集合、摘要、固定 build profile 和 Git 基线，记录已有未提交代码；不把它们当作本次新实现或等价证据。
 - [ ] 确认隔离实现/验证工作区，真实服务和数据库保持原状。
 
@@ -66,7 +68,7 @@
 **Interfaces:** 保留 Go 配置名与优先级；principal 包含 Go 对应身份与作用域；业务 service 不信任客户端伪造身份头；事务和授权接口供后续模块使用。
 
 - [ ] 对 main/router/auth/middleware 逐项派生环境、启动失败、JWT/PAT/task、Cookie/CSRF、权限撤销和工作区角色测试，先红后绿。
-- [ ] 对 Go 数据约束、锁/重试和时间精度建立 SQLite 等价测试；无法等价的条目作为明确阻塞提交用户。
+- [ ] 对 Go 数据约束、锁/重试和时间精度建立 SQLite 测试。并发/快照按已批准方案 B 显式分类并验证 SQLite 原子性、回滚和安全性；其他无法等价的条目仍作为阻塞提交用户。
 - [ ] 配置使用上游 `.env` 首次初始化并复用，旧 Python 名称若保留只作明确兼容别名；不默默重置密钥。
 - [ ] 验证认证全部协议；固定开发账户模式仅作为单独适配，不代替其他协议验收。
 
@@ -148,8 +150,20 @@
 
 Go 1.26.9 工具链已取得；linux/amd64 镜像在宿主仿真下曾退出 137，重试发生 TLS 证书解析 SIGSEGV。改用原生 linux/arm64 编译工具进程并显式保持目标 GOOS=linux / GOARCH=amd64，不改变基准目标。目标依赖图解析通过，默认 EE 包已确认，证据见 go-build-selection.json。尚无 Go 业务差分测试通过的声明。
 
-### Go 基线编译阻塞（等待用户决定）
+### Go 基线编译阻塞（原记录；已批准参考副本修复，见下）
 
 实际 Go 类型审计失败于 `server/go/pkg/remotemcp/client.go:91`：`netip.Addr.IsLinkLocalWorkpalst` / `IsWorkpalst` 不存在。检查还发现 `internal/integrations/wecom/media_guard.go` 与 `internal/handler/file.go` 有同类品牌替换。原始受保护文件未修改。
 
 已准备 `../evidence/2026-11-22-go-baseline-build-fix.patch`，仅将 3 文件中的 6 处调用恢复为标准库 `IsLinkLocalMulticast`、`IsInterfaceLocalMulticast`、`IsMulticast`。补丁只做了适用性检查，未应用；也没有声称修复后可完整编译。等待用户批准在独立参考副本应用并记录派生基线，不擅自更改已批准的 Go 源码基准。该阻塞不抹去已完成的检查器工作，也不能作为跳过 Go 验证的理由。
+
+### 已批准派生基线执行记录
+
+用户随后明确允许修复参考副本并记录派生基线。补丁已应用到 `.superpowers/sdd/2026-11-22-go-parity-plan/go-reference-v1`，原始 Go 不变，逐文件验证只有获批 3 文件/6 调用不同。完整派生文件摘要、原始/候选摘要与补丁摘要见 `../evidence/2026-11-22-go-derived-baseline.json`。
+
+Go/types 审计退出 0，产物及可复现审计工具文本见 `go-typed-registration-audit.json` 与 `.go.txt`。所有现有 Go 路由账本条目都有类型解析支持的 handler 绑定，包括两组公共插件 API 前缀、health factory 和 WS closure；这证明入口声明绑定，不代表继承中间件、完整输入分支、SQL 和副作用已经等价。完成检查仍保留阻断。
+
+Go 测试结果判定器已补充 TestMain 以 0 退出却未执行任何测试、skip、未完成及包级失败的拒绝测试。仅进程 exit 0 不构成测试通过。
+
+参考副本验证继续完成：保持 Go 1.26.9、linux/amd64、CGO=0、默认 !oss 构建目标，cmd/server 测试二进制编译成功；独立 PostgreSQL tmpfs 数据库运行 Go 迁移至 682。实际执行健康检查及实时指标选定测试，25 个测试/子测试通过、0 跳过、0 失败。原生 arm64 工具仅负责交叉编译和输出解析，实际运行的测试二进制为 amd64；仿真 Go 工具的 int32 overflow 单独记录。原始事件和验证摘要见 `../evidence/2026-11-22-go-derived-validation.json`。这不是 Python 差分通过，整体任务 1/2 仍在进行。
+
+本轮 npm run check 通过（765 Python tests、30 subtests，Node/launcher 检查和前端构建通过）。再次核验原始受保护输入和派生全文件摘要，原件未变，参考副本仅获批 3 文件不同。没有停止现有服务、迁移真实数据库或删除 Node。

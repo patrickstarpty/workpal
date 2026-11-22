@@ -1,0 +1,84 @@
+/* A restrained technical layer. All colours follow the active Workpal theme. */
+.cap-chart{
+ --chart-grid:color-mix(in srgb,var(--foreground) 4%,transparent);
+ --chart-rail:color-mix(in srgb,var(--muted-foreground) 58%,var(--page-canvas));
+ --chart-edge:color-mix(in srgb,var(--surface-border) 72%,var(--foreground) 10%);
+ --chart-inner-edge:color-mix(in srgb,var(--surface-raised) 80%,transparent);
+}
+.delivery-loop{
+ --loop-gap-x:20px;
+ --loop-gap-y:20px;
+ grid-template-areas:"phase0 phase1 phase2" "bridge-start control bridge-end" "phase5 phase4 phase3";
+ gap:var(--loop-gap-y) var(--loop-gap-x);
+ padding:20px;
+ border:1px solid var(--surface-border);
+ border-radius:var(--page-radius,calc(var(--radius)*1.5));
+ background-color:var(--page-canvas);
+ background-image:radial-gradient(ellipse at 12% 6%,color-mix(in srgb,var(--chart-1) 7%,transparent),transparent 62%),linear-gradient(var(--chart-grid) 1px,transparent 1px),linear-gradient(90deg,var(--chart-grid) 1px,transparent 1px);
+ background-size:auto,24px 24px,24px 24px;
+ box-shadow:inset 0 1px 0 var(--chart-inner-edge);
+}
+.delivery-node{
+ padding:14px;gap:9px;
+ border-color:var(--chart-edge);
+ background:var(--surface);
+ box-shadow:inset 0 1px 0 var(--chart-inner-edge),0 4px 12px color-mix(in srgb,var(--foreground) 4%,transparent);
+ transition:background-color 140ms ease,border-color 140ms ease,box-shadow 140ms ease;
+}
+.delivery-step{display:flex;align-items:center;gap:8px;font-size:var(--text-micro);line-height:var(--text-micro--line-height)}
+.delivery-index{font-family:var(--font-mono);font-variant-numeric:tabular-nums;color:var(--muted-foreground);border-right:1px solid var(--surface-border);padding-right:8px}
+.delivery-artifact{font-family:var(--font-mono);color:var(--muted-foreground);font-size:var(--text-micro);line-height:var(--text-micro--line-height)}
+.delivery-node[aria-pressed=true]{background:var(--surface-selected);color:var(--surface-selected-foreground);border-color:var(--ring);box-shadow:inset 0 1px 0 var(--chart-inner-edge),0 0 0 3px color-mix(in srgb,var(--ring) 9%,transparent)}
+.delivery-node:hover{background:var(--surface-hover);color:var(--foreground);border-color:var(--ring)}
+.delivery-node[aria-pressed=true]:hover{background:var(--surface-selected)}
+/* Four horizontal gaps, then two vertical gaps: no fixed SVG coordinates. */
+.delivery-node:is([data-chart-stage="0"],[data-chart-stage="1"],[data-chart-stage="4"],[data-chart-stage="5"])::after{
+ content:"";position:absolute;top:50%;left:100%;width:calc(var(--loop-gap-x) + 2px);height:1px;background:var(--chart-rail);pointer-events:none;
+}
+.delivery-bridge{position:relative;align-self:stretch;justify-self:center;width:1px;pointer-events:none}
+.delivery-bridge-start{grid-area:bridge-start}
+.delivery-bridge-end{grid-area:bridge-end}
+.delivery-bridge::before{content:"";position:absolute;inset:calc(-1 * var(--loop-gap-y)) 0;background:var(--chart-rail)}
+.delivery-control{
+ grid-area:control;justify-self:center;align-self:center;position:relative;z-index:1;
+ padding:10px 14px;border:1px solid var(--chart-edge);border-radius:var(--card-radius,calc(var(--radius)*1.5));
+ background:var(--surface);box-shadow:inset 0 1px 0 var(--chart-inner-edge);font-size:var(--text-caption);font-weight:500;
+}
+.delivery-control span{font-size:var(--text-micro);font-weight:400}
+/* Keep the two accepted charts intact; add depth only to their visual surfaces. */
+.coverage-heading,.wp-team-chart-caption{padding-bottom:12px;border-bottom:1px solid var(--surface-border)}
+.coverage-heading h2 strong{font-variant-numeric:tabular-nums}
+.coverage-axis{font-variant-numeric:tabular-nums}
+.wp-team-chart-lineups{position:relative;background-image:linear-gradient(90deg,var(--chart-grid) 1px,transparent 1px);background-size:24px 24px}
+.wp-team-chart-squad{border-color:var(--chart-edge);box-shadow:inset 0 1px 0 var(--chart-inner-edge),0 3px 10px color-mix(in srgb,var(--foreground) 3%,transparent)}
+.wp-team-chart-human{border-color:var(--chart-edge);box-shadow:inset 0 1px 0 var(--chart-inner-edge)}
+.wp-team-chart-branches:before,.wp-team-chart-branches span,.wp-team-chart-squad:before{border-color:var(--chart-rail)}
+.wp-team-chart-connection-cell.is-connected .wp-team-chart-connection-mark{background:var(--foreground);box-shadow:0 0 0 3px color-mix(in srgb,var(--foreground) 5%,transparent)}
+.wp-team-chart-squad:hover{border-color:var(--ring)}
+/* Only node surfaces become translucent. Text, marks and selected states stay solid. */
+@supports ((backdrop-filter:blur(8px)) or (-webkit-backdrop-filter:blur(8px))){
+ .delivery-node:not([aria-pressed=true]),.delivery-control,.wp-team-chart-squad,.wp-team-chart-human{
+  background:color-mix(in srgb,var(--surface) 92%,transparent);
+  -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);
+ }
+ .delivery-node:hover:not([aria-pressed=true]){background:var(--surface-hover)}
+}
+@media(max-width:540px){
+ .delivery-loop{--loop-gap-x:10px;--loop-gap-y:16px;padding:12px 8px}
+ .delivery-node{padding:10px 6px;gap:8px}
+ .delivery-step{gap:5px}
+ .delivery-index{padding-right:5px}
+ .delivery-node strong{font-size:var(--text-title-sm);line-height:var(--text-title-sm--line-height);overflow-wrap:anywhere}
+ .delivery-artifact{overflow-wrap:anywhere}
+ .delivery-control{padding:7px 9px;max-width:none}
+ .delivery-control span{white-space:normal;max-width:150px}
+}
+@media(prefers-reduced-transparency:reduce){
+ .delivery-node:not([aria-pressed=true]),.delivery-control,.wp-team-chart-squad,.wp-team-chart-human{background:var(--surface);-webkit-backdrop-filter:none;backdrop-filter:none}
+ .delivery-loop,.wp-team-chart-lineups{background-image:none}
+}
+@media(forced-colors:active){
+ .delivery-loop,.wp-team-chart-lineups{background-image:none}
+ .delivery-node::after,.delivery-bridge::before{background:CanvasText}
+ .delivery-node[aria-pressed=true]{border:2px solid Highlight}
+}

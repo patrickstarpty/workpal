@@ -178,7 +178,7 @@ def test_foreign_and_removed_membership(context, settings):
         reopened.close()
 
 
-def test_redis_outage_recovery_preserves_order_and_ids(context, settings):
+def test_redis_outage_recovery_preserves_order_and_ids(context, settings, isolated_relay_redis_port):
     from workpal_backend.infrastructure.delivery import OutboxDelivery
     from redis import Redis
     db, actor, target, _, _ = context
@@ -193,7 +193,7 @@ def test_redis_outage_recovery_preserves_order_and_ids(context, settings):
         assert offline.dispatch(db, retry_delay=0) == 0
     finally:
         offline.close()
-    online = OutboxDelivery(settings.model_copy(update={'redis_url': 'redis://127.0.0.1:26379/0', 'redis_key_prefix': prefix}))
+    online = OutboxDelivery(settings.model_copy(update={'redis_url': f'redis://127.0.0.1:{isolated_relay_redis_port}/0', 'redis_key_prefix': prefix}))
     try:
         assert online.client.ping()
         for _ in envelopes:

@@ -71,3 +71,10 @@ def test_go_csrf_and_legacy():
         assert verify_csrf(value, SECRET, 'session', legacy_token=legacy)
     for value in ['', '.', 'zz.00', '00.zz', '00.00', None, 'a.b.c']:
         assert not verify_csrf(value, SECRET, 'session')
+
+
+def test_go_csrf_accepts_configured_short_key():
+    key = 'custom-test-key'
+    token = csrf_token(key, 'session')
+    assert verify_csrf(token, key, 'session')
+    assert not verify_csrf(token, key, 'other')

@@ -1,0 +1,45 @@
+{
+  "version": 1,
+  "database": "sqlite",
+  "decision": "B",
+  "approval_quote": "保留 SQLite，明确允许数据库并发和快照差异",
+  "decision_document": "docs/superpowers/plans/2026-11-22-python-database-parity-decision.md",
+  "exceptions": [
+    {
+      "id": "sqlite-writer-concurrency",
+      "scope": "Writer serialization, lock waiting/timeouts and interleavings that differ from PostgreSQL row-level concurrency",
+      "evidence": [
+        "docs/superpowers/evidence/2026-11-22-project-writer-concurrency-gap.json"
+      ]
+    },
+    {
+      "id": "sqlite-transaction-snapshots",
+      "scope": "Transaction snapshot visibility and PostgreSQL transaction/snapshot identity semantics",
+      "evidence": [
+        "docs/superpowers/evidence/2026-11-22-project-search-initial-differences.json"
+      ]
+    }
+  ],
+  "required_invariants": [
+    "authorization and tenant isolation",
+    "business feature coverage",
+    "non-contention API behavior",
+    "database constraints and references",
+    "atomic commits and rollback",
+    "durable records and upload bytes",
+    "event commit boundaries",
+    "idempotency and exclusive task claims"
+  ],
+  "application_rule": "Retain both original observations; classify affected cases explicitly with an exception ID. Do not globally ignore status, data or event mismatches. No unimplemented route or missing test is approved.",
+  "source_sha256": {
+    "docs/superpowers/evidence/2026-11-22-project-writer-concurrency-gap.json": "44b58c6d072591f2f6f2a48e907af7dc7b7522fbcd41863f10a3b19458c9c3a4",
+    "docs/superpowers/evidence/2026-11-22-project-search-initial-differences.json": "9c8e6f4e7437064082067a97f3e0de5d3486a379e99864a47ca32f58d221a71e"
+  },
+  "latest_user_requirement": "功能尽量对齐，要做好并发锁，性能上可以稍微妥协",
+  "functional_policy": "Implement toward Go parity; explicitly disclose remaining feature differences. No blanket authorization to omit features or mark placeholders complete.",
+  "performance_policy": {
+    "target": "Comparable ordinary-use performance with modest measured compromises permitted",
+    "threshold": "No universal percentage agreed; retain same-condition measurements and disclose regressions",
+    "concurrency_correctness": "Required; serialization is allowed, lost updates, duplicate claims, broken references and non-atomic rollback are not"
+  }
+}

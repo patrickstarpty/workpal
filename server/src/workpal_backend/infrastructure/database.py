@@ -30,11 +30,16 @@ class Database:
         self.settings = settings
         self.engine = create_engine(settings.database_url, connect_args={'check_same_thread':False,'timeout':settings.busy_timeout_ms/1000})
         @event.listens_for(self.engine,'connect')
-        def configure(conn, _):
+        def configure(conn, record):
             inspect_revisions(settings)
             conn.execute('PRAGMA foreign_keys=ON')
             conn.execute(f'PRAGMA busy_timeout={settings.busy_timeout_ms}')
             conn.execute('PRAGMA journal_mode=WAL')
+        from .sqlite_compat import install
+        install(self.engine)
+    def begin_write(self):
+        from .sqlite_write import SQLiteWriteTransaction
+        return SQLiteWriteTransaction(self.engine)
     @contextmanager
     def transaction(self):
         try:

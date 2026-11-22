@@ -1,3 +1,4 @@
+import json
 import asyncio
 from copy import deepcopy
 
@@ -51,7 +52,7 @@ def test_existing_hub_workspace_only_and_session_boundary():
     async def exercise():
         class Socket:
             def __init__(self): self.frames, self.closed = [], False
-            async def send_json(self, frame): self.frames.append(frame)
+            async def send_text(self, raw): self.frames.append(json.loads(raw))
             async def close(self, code): self.closed = True
         sockets = [Socket() for _ in range(5)]
         checks = []

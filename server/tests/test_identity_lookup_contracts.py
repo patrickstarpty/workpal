@@ -68,6 +68,6 @@ def test_persisted_identity_contract(identity, settings):
     for token in ('bad', 'mul_fake', 'mat_fake', 'mcn_fake', login['token'] + 'tampered'):
         response = client.get('/api/me', headers={'Authorization': 'Bearer ' + token})
         assert response.status_code == 401
-        assert response.json() == {'error': 'Unauthorized'}
+        assert response.json() == {'error': 'invalid token'}
     with TestClient(create_app(settings)) as reopened:
         assert reopened.get('/api/me', headers={'Authorization': 'Bearer ' + login['token']}).json() == result.json()

@@ -1,0 +1,6068 @@
+{
+  "scope": "Original HandleWebSocket HTTP denials vs actual Python ASGI route: duplicate/malformed query values, Cookie selection/3000-cookie limit, slug resolver order, invalid-cookie-before-origin precedence, exact status/body and semantic denial headers. Slug storage dependency fixture; no successful upgrade, valid-token membership, HTTP framing or middleware-stack certification.",
+  "fixtures": [
+    {
+      "Query": "",
+      "Cookies": []
+    },
+    {
+      "Query": "",
+      "Cookies": [
+        "workpal_auth=bad"
+      ]
+    },
+    {
+      "Query": "",
+      "Cookies": [
+        "workpal_auth=; workpal_auth=bad"
+      ]
+    },
+    {
+      "Query": "",
+      "Cookies": [
+        "workpal_auth=bad; workpal_auth="
+      ]
+    },
+    {
+      "Query": "",
+      "Cookies": [
+        "workpal_auth=\"bad\""
+      ]
+    },
+    {
+      "Query": "",
+      "Cookies": [
+        "workpal_auth=bad\\value; workpal_auth="
+      ]
+    },
+    {
+      "Query": "",
+      "Cookies": [
+        "workpal_auth=",
+        "workpal_auth=bad"
+      ]
+    },
+    {
+      "Query": "",
+      "Cookies": [
+        "other=x",
+        "workpal_auth=bad"
+      ]
+    },
+    {
+      "Query": "",
+      "Cookies": [
+        "workpal_auth= value "
+      ]
+    },
+    {
+      "Query": "",
+      "Cookies": [
+        "workpal_auth=\u00ff"
+      ]
+    },
+    {
+      "Query": "",
+      "Cookies": [
+        "workpal_auth=\"bad"
+      ]
+    },
+    {
+      "Query": "",
+      "Cookies": [
+        "workpal_auth"
+      ]
+    },
+    {
+      "Query": "workspace_id=w",
+      "Cookies": []
+    },
+    {
+      "Query": "workspace_id=w",
+      "Cookies": [
+        "workpal_auth=bad"
+      ]
+    },
+    {
+      "Query": "workspace_id=w",
+      "Cookies": [
+        "workpal_auth=; workpal_auth=bad"
+      ]
+    },
+    {
+      "Query": "workspace_id=w",
+      "Cookies": [
+        "workpal_auth=bad; workpal_auth="
+      ]
+    },
+    {
+      "Query": "workspace_id=w",
+      "Cookies": [
+        "workpal_auth=\"bad\""
+      ]
+    },
+    {
+      "Query": "workspace_id=w",
+      "Cookies": [
+        "workpal_auth=bad\\value; workpal_auth="
+      ]
+    },
+    {
+      "Query": "workspace_id=w",
+      "Cookies": [
+        "workpal_auth=",
+        "workpal_auth=bad"
+      ]
+    },
+    {
+      "Query": "workspace_id=w",
+      "Cookies": [
+        "other=x",
+        "workpal_auth=bad"
+      ]
+    },
+    {
+      "Query": "workspace_id=w",
+      "Cookies": [
+        "workpal_auth= value "
+      ]
+    },
+    {
+      "Query": "workspace_id=w",
+      "Cookies": [
+        "workpal_auth=\u00ff"
+      ]
+    },
+    {
+      "Query": "workspace_id=w",
+      "Cookies": [
+        "workpal_auth=\"bad"
+      ]
+    },
+    {
+      "Query": "workspace_id=w",
+      "Cookies": [
+        "workpal_auth"
+      ]
+    },
+    {
+      "Query": "workspace_id=&workspace_id=w",
+      "Cookies": []
+    },
+    {
+      "Query": "workspace_id=&workspace_id=w",
+      "Cookies": [
+        "workpal_auth=bad"
+      ]
+    },
+    {
+      "Query": "workspace_id=&workspace_id=w",
+      "Cookies": [
+        "workpal_auth=; workpal_auth=bad"
+      ]
+    },
+    {
+      "Query": "workspace_id=&workspace_id=w",
+      "Cookies": [
+        "workpal_auth=bad; workpal_auth="
+      ]
+    },
+    {
+      "Query": "workspace_id=&workspace_id=w",
+      "Cookies": [
+        "workpal_auth=\"bad\""
+      ]
+    },
+    {
+      "Query": "workspace_id=&workspace_id=w",
+      "Cookies": [
+        "workpal_auth=bad\\value; workpal_auth="
+      ]
+    },
+    {
+      "Query": "workspace_id=&workspace_id=w",
+      "Cookies": [
+        "workpal_auth=",
+        "workpal_auth=bad"
+      ]
+    },
+    {
+      "Query": "workspace_id=&workspace_id=w",
+      "Cookies": [
+        "other=x",
+        "workpal_auth=bad"
+      ]
+    },
+    {
+      "Query": "workspace_id=&workspace_id=w",
+      "Cookies": [
+        "workpal_auth= value "
+      ]
+    },
+    {
+      "Query": "workspace_id=&workspace_id=w",
+      "Cookies": [
+        "workpal_auth=\u00ff"
+      ]
+    },
+    {
+      "Query": "workspace_id=&workspace_id=w",
+      "Cookies": [
+        "workpal_auth=\"bad"
+      ]
+    },
+    {
+      "Query": "workspace_id=&workspace_id=w",
+      "Cookies": [
+        "workpal_auth"
+      ]
+    },
+    {
+      "Query": "workspace_id=w&workspace_id=",
+      "Cookies": []
+    },
+    {
+      "Query": "workspace_id=w&workspace_id=",
+      "Cookies": [
+        "workpal_auth=bad"
+      ]
+    },
+    {
+      "Query": "workspace_id=w&workspace_id=",
+      "Cookies": [
+        "workpal_auth=; workpal_auth=bad"
+      ]
+    },
+    {
+      "Query": "workspace_id=w&workspace_id=",
+      "Cookies": [
+        "workpal_auth=bad; workpal_auth="
+      ]
+    },
+    {
+      "Query": "workspace_id=w&workspace_id=",
+      "Cookies": [
+        "workpal_auth=\"bad\""
+      ]
+    },
+    {
+      "Query": "workspace_id=w&workspace_id=",
+      "Cookies": [
+        "workpal_auth=bad\\value; workpal_auth="
+      ]
+    },
+    {
+      "Query": "workspace_id=w&workspace_id=",
+      "Cookies": [
+        "workpal_auth=",
+        "workpal_auth=bad"
+      ]
+    },
+    {
+      "Query": "workspace_id=w&workspace_id=",
+      "Cookies": [
+        "other=x",
+        "workpal_auth=bad"
+      ]
+    },
+    {
+      "Query": "workspace_id=w&workspace_id=",
+      "Cookies": [
+        "workpal_auth= value "
+      ]
+    },
+    {
+      "Query": "workspace_id=w&workspace_id=",
+      "Cookies": [
+        "workpal_auth=\u00ff"
+      ]
+    },
+    {
+      "Query": "workspace_id=w&workspace_id=",
+      "Cookies": [
+        "workpal_auth=\"bad"
+      ]
+    },
+    {
+      "Query": "workspace_id=w&workspace_id=",
+      "Cookies": [
+        "workpal_auth"
+      ]
+    },
+    {
+      "Query": "workspace_id=bad%zz&workspace_id=w",
+      "Cookies": []
+    },
+    {
+      "Query": "workspace_id=bad%zz&workspace_id=w",
+      "Cookies": [
+        "workpal_auth=bad"
+      ]
+    },
+    {
+      "Query": "workspace_id=bad%zz&workspace_id=w",
+      "Cookies": [
+        "workpal_auth=; workpal_auth=bad"
+      ]
+    },
+    {
+      "Query": "workspace_id=bad%zz&workspace_id=w",
+      "Cookies": [
+        "workpal_auth=bad; workpal_auth="
+      ]
+    },
+    {
+      "Query": "workspace_id=bad%zz&workspace_id=w",
+      "Cookies": [
+        "workpal_auth=\"bad\""
+      ]
+    },
+    {
+      "Query": "workspace_id=bad%zz&workspace_id=w",
+      "Cookies": [
+        "workpal_auth=bad\\value; workpal_auth="
+      ]
+    },
+    {
+      "Query": "workspace_id=bad%zz&workspace_id=w",
+      "Cookies": [
+        "workpal_auth=",
+        "workpal_auth=bad"
+      ]
+    },
+    {
+      "Query": "workspace_id=bad%zz&workspace_id=w",
+      "Cookies": [
+        "other=x",
+        "workpal_auth=bad"
+      ]
+    },
+    {
+      "Query": "workspace_id=bad%zz&workspace_id=w",
+      "Cookies": [
+        "workpal_auth= value "
+      ]
+    },
+    {
+      "Query": "workspace_id=bad%zz&workspace_id=w",
+      "Cookies": [
+        "workpal_auth=\u00ff"
+      ]
+    },
+    {
+      "Query": "workspace_id=bad%zz&workspace_id=w",
+      "Cookies": [
+        "workpal_auth=\"bad"
+      ]
+    },
+    {
+      "Query": "workspace_id=bad%zz&workspace_id=w",
+      "Cookies": [
+        "workpal_auth"
+      ]
+    },
+    {
+      "Query": "workspace_id=bad;ignored&workspace_id=w",
+      "Cookies": []
+    },
+    {
+      "Query": "workspace_id=bad;ignored&workspace_id=w",
+      "Cookies": [
+        "workpal_auth=bad"
+      ]
+    },
+    {
+      "Query": "workspace_id=bad;ignored&workspace_id=w",
+      "Cookies": [
+        "workpal_auth=; workpal_auth=bad"
+      ]
+    },
+    {
+      "Query": "workspace_id=bad;ignored&workspace_id=w",
+      "Cookies": [
+        "workpal_auth=bad; workpal_auth="
+      ]
+    },
+    {
+      "Query": "workspace_id=bad;ignored&workspace_id=w",
+      "Cookies": [
+        "workpal_auth=\"bad\""
+      ]
+    },
+    {
+      "Query": "workspace_id=bad;ignored&workspace_id=w",
+      "Cookies": [
+        "workpal_auth=bad\\value; workpal_auth="
+      ]
+    },
+    {
+      "Query": "workspace_id=bad;ignored&workspace_id=w",
+      "Cookies": [
+        "workpal_auth=",
+        "workpal_auth=bad"
+      ]
+    },
+    {
+      "Query": "workspace_id=bad;ignored&workspace_id=w",
+      "Cookies": [
+        "other=x",
+        "workpal_auth=bad"
+      ]
+    },
+    {
+      "Query": "workspace_id=bad;ignored&workspace_id=w",
+      "Cookies": [
+        "workpal_auth= value "
+      ]
+    },
+    {
+      "Query": "workspace_id=bad;ignored&workspace_id=w",
+      "Cookies": [
+        "workpal_auth=\u00ff"
+      ]
+    },
+    {
+      "Query": "workspace_id=bad;ignored&workspace_id=w",
+      "Cookies": [
+        "workpal_auth=\"bad"
+      ]
+    },
+    {
+      "Query": "workspace_id=bad;ignored&workspace_id=w",
+      "Cookies": [
+        "workpal_auth"
+      ]
+    },
+    {
+      "Query": "workspace_id=bad;ignored",
+      "Cookies": []
+    },
+    {
+      "Query": "workspace_id=bad;ignored",
+      "Cookies": [
+        "workpal_auth=bad"
+      ]
+    },
+    {
+      "Query": "workspace_id=bad;ignored",
+      "Cookies": [
+        "workpal_auth=; workpal_auth=bad"
+      ]
+    },
+    {
+      "Query": "workspace_id=bad;ignored",
+      "Cookies": [
+        "workpal_auth=bad; workpal_auth="
+      ]
+    },
+    {
+      "Query": "workspace_id=bad;ignored",
+      "Cookies": [
+        "workpal_auth=\"bad\""
+      ]
+    },
+    {
+      "Query": "workspace_id=bad;ignored",
+      "Cookies": [
+        "workpal_auth=bad\\value; workpal_auth="
+      ]
+    },
+    {
+      "Query": "workspace_id=bad;ignored",
+      "Cookies": [
+        "workpal_auth=",
+        "workpal_auth=bad"
+      ]
+    },
+    {
+      "Query": "workspace_id=bad;ignored",
+      "Cookies": [
+        "other=x",
+        "workpal_auth=bad"
+      ]
+    },
+    {
+      "Query": "workspace_id=bad;ignored",
+      "Cookies": [
+        "workpal_auth= value "
+      ]
+    },
+    {
+      "Query": "workspace_id=bad;ignored",
+      "Cookies": [
+        "workpal_auth=\u00ff"
+      ]
+    },
+    {
+      "Query": "workspace_id=bad;ignored",
+      "Cookies": [
+        "workpal_auth=\"bad"
+      ]
+    },
+    {
+      "Query": "workspace_id=bad;ignored",
+      "Cookies": [
+        "workpal_auth"
+      ]
+    },
+    {
+      "Query": "workspace%5fid=w",
+      "Cookies": []
+    },
+    {
+      "Query": "workspace%5fid=w",
+      "Cookies": [
+        "workpal_auth=bad"
+      ]
+    },
+    {
+      "Query": "workspace%5fid=w",
+      "Cookies": [
+        "workpal_auth=; workpal_auth=bad"
+      ]
+    },
+    {
+      "Query": "workspace%5fid=w",
+      "Cookies": [
+        "workpal_auth=bad; workpal_auth="
+      ]
+    },
+    {
+      "Query": "workspace%5fid=w",
+      "Cookies": [
+        "workpal_auth=\"bad\""
+      ]
+    },
+    {
+      "Query": "workspace%5fid=w",
+      "Cookies": [
+        "workpal_auth=bad\\value; workpal_auth="
+      ]
+    },
+    {
+      "Query": "workspace%5fid=w",
+      "Cookies": [
+        "workpal_auth=",
+        "workpal_auth=bad"
+      ]
+    },
+    {
+      "Query": "workspace%5fid=w",
+      "Cookies": [
+        "other=x",
+        "workpal_auth=bad"
+      ]
+    },
+    {
+      "Query": "workspace%5fid=w",
+      "Cookies": [
+        "workpal_auth= value "
+      ]
+    },
+    {
+      "Query": "workspace%5fid=w",
+      "Cookies": [
+        "workpal_auth=\u00ff"
+      ]
+    },
+    {
+      "Query": "workspace%5fid=w",
+      "Cookies": [
+        "workpal_auth=\"bad"
+      ]
+    },
+    {
+      "Query": "workspace%5fid=w",
+      "Cookies": [
+        "workpal_auth"
+      ]
+    },
+    {
+      "Query": "workspace_id=a+b",
+      "Cookies": []
+    },
+    {
+      "Query": "workspace_id=a+b",
+      "Cookies": [
+        "workpal_auth=bad"
+      ]
+    },
+    {
+      "Query": "workspace_id=a+b",
+      "Cookies": [
+        "workpal_auth=; workpal_auth=bad"
+      ]
+    },
+    {
+      "Query": "workspace_id=a+b",
+      "Cookies": [
+        "workpal_auth=bad; workpal_auth="
+      ]
+    },
+    {
+      "Query": "workspace_id=a+b",
+      "Cookies": [
+        "workpal_auth=\"bad\""
+      ]
+    },
+    {
+      "Query": "workspace_id=a+b",
+      "Cookies": [
+        "workpal_auth=bad\\value; workpal_auth="
+      ]
+    },
+    {
+      "Query": "workspace_id=a+b",
+      "Cookies": [
+        "workpal_auth=",
+        "workpal_auth=bad"
+      ]
+    },
+    {
+      "Query": "workspace_id=a+b",
+      "Cookies": [
+        "other=x",
+        "workpal_auth=bad"
+      ]
+    },
+    {
+      "Query": "workspace_id=a+b",
+      "Cookies": [
+        "workpal_auth= value "
+      ]
+    },
+    {
+      "Query": "workspace_id=a+b",
+      "Cookies": [
+        "workpal_auth=\u00ff"
+      ]
+    },
+    {
+      "Query": "workspace_id=a+b",
+      "Cookies": [
+        "workpal_auth=\"bad"
+      ]
+    },
+    {
+      "Query": "workspace_id=a+b",
+      "Cookies": [
+        "workpal_auth"
+      ]
+    },
+    {
+      "Query": "workspace_id=%ff",
+      "Cookies": []
+    },
+    {
+      "Query": "workspace_id=%ff",
+      "Cookies": [
+        "workpal_auth=bad"
+      ]
+    },
+    {
+      "Query": "workspace_id=%ff",
+      "Cookies": [
+        "workpal_auth=; workpal_auth=bad"
+      ]
+    },
+    {
+      "Query": "workspace_id=%ff",
+      "Cookies": [
+        "workpal_auth=bad; workpal_auth="
+      ]
+    },
+    {
+      "Query": "workspace_id=%ff",
+      "Cookies": [
+        "workpal_auth=\"bad\""
+      ]
+    },
+    {
+      "Query": "workspace_id=%ff",
+      "Cookies": [
+        "workpal_auth=bad\\value; workpal_auth="
+      ]
+    },
+    {
+      "Query": "workspace_id=%ff",
+      "Cookies": [
+        "workpal_auth=",
+        "workpal_auth=bad"
+      ]
+    },
+    {
+      "Query": "workspace_id=%ff",
+      "Cookies": [
+        "other=x",
+        "workpal_auth=bad"
+      ]
+    },
+    {
+      "Query": "workspace_id=%ff",
+      "Cookies": [
+        "workpal_auth= value "
+      ]
+    },
+    {
+      "Query": "workspace_id=%ff",
+      "Cookies": [
+        "workpal_auth=\u00ff"
+      ]
+    },
+    {
+      "Query": "workspace_id=%ff",
+      "Cookies": [
+        "workpal_auth=\"bad"
+      ]
+    },
+    {
+      "Query": "workspace_id=%ff",
+      "Cookies": [
+        "workpal_auth"
+      ]
+    },
+    {
+      "Query": "workspace_slug=good",
+      "Cookies": []
+    },
+    {
+      "Query": "workspace_slug=good",
+      "Cookies": [
+        "workpal_auth=bad"
+      ]
+    },
+    {
+      "Query": "workspace_slug=good",
+      "Cookies": [
+        "workpal_auth=; workpal_auth=bad"
+      ]
+    },
+    {
+      "Query": "workspace_slug=good",
+      "Cookies": [
+        "workpal_auth=bad; workpal_auth="
+      ]
+    },
+    {
+      "Query": "workspace_slug=good",
+      "Cookies": [
+        "workpal_auth=\"bad\""
+      ]
+    },
+    {
+      "Query": "workspace_slug=good",
+      "Cookies": [
+        "workpal_auth=bad\\value; workpal_auth="
+      ]
+    },
+    {
+      "Query": "workspace_slug=good",
+      "Cookies": [
+        "workpal_auth=",
+        "workpal_auth=bad"
+      ]
+    },
+    {
+      "Query": "workspace_slug=good",
+      "Cookies": [
+        "other=x",
+        "workpal_auth=bad"
+      ]
+    },
+    {
+      "Query": "workspace_slug=good",
+      "Cookies": [
+        "workpal_auth= value "
+      ]
+    },
+    {
+      "Query": "workspace_slug=good",
+      "Cookies": [
+        "workpal_auth=\u00ff"
+      ]
+    },
+    {
+      "Query": "workspace_slug=good",
+      "Cookies": [
+        "workpal_auth=\"bad"
+      ]
+    },
+    {
+      "Query": "workspace_slug=good",
+      "Cookies": [
+        "workpal_auth"
+      ]
+    },
+    {
+      "Query": "workspace_slug=bad",
+      "Cookies": []
+    },
+    {
+      "Query": "workspace_slug=bad",
+      "Cookies": [
+        "workpal_auth=bad"
+      ]
+    },
+    {
+      "Query": "workspace_slug=bad",
+      "Cookies": [
+        "workpal_auth=; workpal_auth=bad"
+      ]
+    },
+    {
+      "Query": "workspace_slug=bad",
+      "Cookies": [
+        "workpal_auth=bad; workpal_auth="
+      ]
+    },
+    {
+      "Query": "workspace_slug=bad",
+      "Cookies": [
+        "workpal_auth=\"bad\""
+      ]
+    },
+    {
+      "Query": "workspace_slug=bad",
+      "Cookies": [
+        "workpal_auth=bad\\value; workpal_auth="
+      ]
+    },
+    {
+      "Query": "workspace_slug=bad",
+      "Cookies": [
+        "workpal_auth=",
+        "workpal_auth=bad"
+      ]
+    },
+    {
+      "Query": "workspace_slug=bad",
+      "Cookies": [
+        "other=x",
+        "workpal_auth=bad"
+      ]
+    },
+    {
+      "Query": "workspace_slug=bad",
+      "Cookies": [
+        "workpal_auth= value "
+      ]
+    },
+    {
+      "Query": "workspace_slug=bad",
+      "Cookies": [
+        "workpal_auth=\u00ff"
+      ]
+    },
+    {
+      "Query": "workspace_slug=bad",
+      "Cookies": [
+        "workpal_auth=\"bad"
+      ]
+    },
+    {
+      "Query": "workspace_slug=bad",
+      "Cookies": [
+        "workpal_auth"
+      ]
+    },
+    {
+      "Query": "workspace_slug=bad&workspace_slug=good",
+      "Cookies": []
+    },
+    {
+      "Query": "workspace_slug=bad&workspace_slug=good",
+      "Cookies": [
+        "workpal_auth=bad"
+      ]
+    },
+    {
+      "Query": "workspace_slug=bad&workspace_slug=good",
+      "Cookies": [
+        "workpal_auth=; workpal_auth=bad"
+      ]
+    },
+    {
+      "Query": "workspace_slug=bad&workspace_slug=good",
+      "Cookies": [
+        "workpal_auth=bad; workpal_auth="
+      ]
+    },
+    {
+      "Query": "workspace_slug=bad&workspace_slug=good",
+      "Cookies": [
+        "workpal_auth=\"bad\""
+      ]
+    },
+    {
+      "Query": "workspace_slug=bad&workspace_slug=good",
+      "Cookies": [
+        "workpal_auth=bad\\value; workpal_auth="
+      ]
+    },
+    {
+      "Query": "workspace_slug=bad&workspace_slug=good",
+      "Cookies": [
+        "workpal_auth=",
+        "workpal_auth=bad"
+      ]
+    },
+    {
+      "Query": "workspace_slug=bad&workspace_slug=good",
+      "Cookies": [
+        "other=x",
+        "workpal_auth=bad"
+      ]
+    },
+    {
+      "Query": "workspace_slug=bad&workspace_slug=good",
+      "Cookies": [
+        "workpal_auth= value "
+      ]
+    },
+    {
+      "Query": "workspace_slug=bad&workspace_slug=good",
+      "Cookies": [
+        "workpal_auth=\u00ff"
+      ]
+    },
+    {
+      "Query": "workspace_slug=bad&workspace_slug=good",
+      "Cookies": [
+        "workpal_auth=\"bad"
+      ]
+    },
+    {
+      "Query": "workspace_slug=bad&workspace_slug=good",
+      "Cookies": [
+        "workpal_auth"
+      ]
+    },
+    {
+      "Query": "workspace_id=&workspace_slug=good",
+      "Cookies": []
+    },
+    {
+      "Query": "workspace_id=&workspace_slug=good",
+      "Cookies": [
+        "workpal_auth=bad"
+      ]
+    },
+    {
+      "Query": "workspace_id=&workspace_slug=good",
+      "Cookies": [
+        "workpal_auth=; workpal_auth=bad"
+      ]
+    },
+    {
+      "Query": "workspace_id=&workspace_slug=good",
+      "Cookies": [
+        "workpal_auth=bad; workpal_auth="
+      ]
+    },
+    {
+      "Query": "workspace_id=&workspace_slug=good",
+      "Cookies": [
+        "workpal_auth=\"bad\""
+      ]
+    },
+    {
+      "Query": "workspace_id=&workspace_slug=good",
+      "Cookies": [
+        "workpal_auth=bad\\value; workpal_auth="
+      ]
+    },
+    {
+      "Query": "workspace_id=&workspace_slug=good",
+      "Cookies": [
+        "workpal_auth=",
+        "workpal_auth=bad"
+      ]
+    },
+    {
+      "Query": "workspace_id=&workspace_slug=good",
+      "Cookies": [
+        "other=x",
+        "workpal_auth=bad"
+      ]
+    },
+    {
+      "Query": "workspace_id=&workspace_slug=good",
+      "Cookies": [
+        "workpal_auth= value "
+      ]
+    },
+    {
+      "Query": "workspace_id=&workspace_slug=good",
+      "Cookies": [
+        "workpal_auth=\u00ff"
+      ]
+    },
+    {
+      "Query": "workspace_id=&workspace_slug=good",
+      "Cookies": [
+        "workpal_auth=\"bad"
+      ]
+    },
+    {
+      "Query": "workspace_id=&workspace_slug=good",
+      "Cookies": [
+        "workpal_auth"
+      ]
+    },
+    {
+      "Query": "workspace_id=w&workspace_slug=bad",
+      "Cookies": []
+    },
+    {
+      "Query": "workspace_id=w&workspace_slug=bad",
+      "Cookies": [
+        "workpal_auth=bad"
+      ]
+    },
+    {
+      "Query": "workspace_id=w&workspace_slug=bad",
+      "Cookies": [
+        "workpal_auth=; workpal_auth=bad"
+      ]
+    },
+    {
+      "Query": "workspace_id=w&workspace_slug=bad",
+      "Cookies": [
+        "workpal_auth=bad; workpal_auth="
+      ]
+    },
+    {
+      "Query": "workspace_id=w&workspace_slug=bad",
+      "Cookies": [
+        "workpal_auth=\"bad\""
+      ]
+    },
+    {
+      "Query": "workspace_id=w&workspace_slug=bad",
+      "Cookies": [
+        "workpal_auth=bad\\value; workpal_auth="
+      ]
+    },
+    {
+      "Query": "workspace_id=w&workspace_slug=bad",
+      "Cookies": [
+        "workpal_auth=",
+        "workpal_auth=bad"
+      ]
+    },
+    {
+      "Query": "workspace_id=w&workspace_slug=bad",
+      "Cookies": [
+        "other=x",
+        "workpal_auth=bad"
+      ]
+    },
+    {
+      "Query": "workspace_id=w&workspace_slug=bad",
+      "Cookies": [
+        "workpal_auth= value "
+      ]
+    },
+    {
+      "Query": "workspace_id=w&workspace_slug=bad",
+      "Cookies": [
+        "workpal_auth=\u00ff"
+      ]
+    },
+    {
+      "Query": "workspace_id=w&workspace_slug=bad",
+      "Cookies": [
+        "workpal_auth=\"bad"
+      ]
+    },
+    {
+      "Query": "workspace_id=w&workspace_slug=bad",
+      "Cookies": [
+        "workpal_auth"
+      ]
+    },
+    {
+      "Query": "workspace_id=w",
+      "Cookies": [
+        "workpal_auth=bad;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;"
+      ]
+    },
+    {
+      "Query": "workspace_id=w",
+      "Cookies": [
+        "workpal_auth=bad;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;"
+      ]
+    },
+    {
+      "Query": "workspace_id=w",
+      "Cookies": [
+        "workpal_auth=bad;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;x=1;"
+      ]
+    }
+  ],
+  "go": [
+    {
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZV9pZCBvciB3b3Jrc3BhY2Vfc2x1ZyByZXF1aXJlZCJ9Cg==",
+      "cookie": "",
+      "has_cookie": false,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 400,
+      "workspace": ""
+    },
+    {
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZV9pZCBvciB3b3Jrc3BhY2Vfc2x1ZyByZXF1aXJlZCJ9Cg==",
+      "cookie": "bad",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 400,
+      "workspace": ""
+    },
+    {
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZV9pZCBvciB3b3Jrc3BhY2Vfc2x1ZyByZXF1aXJlZCJ9Cg==",
+      "cookie": "",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 400,
+      "workspace": ""
+    },
+    {
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZV9pZCBvciB3b3Jrc3BhY2Vfc2x1ZyByZXF1aXJlZCJ9Cg==",
+      "cookie": "bad",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 400,
+      "workspace": ""
+    },
+    {
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZV9pZCBvciB3b3Jrc3BhY2Vfc2x1ZyByZXF1aXJlZCJ9Cg==",
+      "cookie": "bad",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 400,
+      "workspace": ""
+    },
+    {
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZV9pZCBvciB3b3Jrc3BhY2Vfc2x1ZyByZXF1aXJlZCJ9Cg==",
+      "cookie": "",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 400,
+      "workspace": ""
+    },
+    {
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZV9pZCBvciB3b3Jrc3BhY2Vfc2x1ZyByZXF1aXJlZCJ9Cg==",
+      "cookie": "",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 400,
+      "workspace": ""
+    },
+    {
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZV9pZCBvciB3b3Jrc3BhY2Vfc2x1ZyByZXF1aXJlZCJ9Cg==",
+      "cookie": "bad",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 400,
+      "workspace": ""
+    },
+    {
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZV9pZCBvciB3b3Jrc3BhY2Vfc2x1ZyByZXF1aXJlZCJ9Cg==",
+      "cookie": " value",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 400,
+      "workspace": ""
+    },
+    {
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZV9pZCBvciB3b3Jrc3BhY2Vfc2x1ZyByZXF1aXJlZCJ9Cg==",
+      "cookie": "",
+      "has_cookie": false,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 400,
+      "workspace": ""
+    },
+    {
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZV9pZCBvciB3b3Jrc3BhY2Vfc2x1ZyByZXF1aXJlZCJ9Cg==",
+      "cookie": "",
+      "has_cookie": false,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 400,
+      "workspace": ""
+    },
+    {
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZV9pZCBvciB3b3Jrc3BhY2Vfc2x1ZyByZXF1aXJlZCJ9Cg==",
+      "cookie": "",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 400,
+      "workspace": ""
+    },
+    {
+      "body": "Rm9yYmlkZGVuCg==",
+      "cookie": "",
+      "has_cookie": false,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "13",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 403,
+      "workspace": "dw=="
+    },
+    {
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo=",
+      "cookie": "bad",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 401,
+      "workspace": "dw=="
+    },
+    {
+      "body": "Rm9yYmlkZGVuCg==",
+      "cookie": "",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "13",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 403,
+      "workspace": "dw=="
+    },
+    {
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo=",
+      "cookie": "bad",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 401,
+      "workspace": "dw=="
+    },
+    {
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo=",
+      "cookie": "bad",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 401,
+      "workspace": "dw=="
+    },
+    {
+      "body": "Rm9yYmlkZGVuCg==",
+      "cookie": "",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "13",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 403,
+      "workspace": "dw=="
+    },
+    {
+      "body": "Rm9yYmlkZGVuCg==",
+      "cookie": "",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "13",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 403,
+      "workspace": "dw=="
+    },
+    {
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo=",
+      "cookie": "bad",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 401,
+      "workspace": "dw=="
+    },
+    {
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo=",
+      "cookie": " value",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 401,
+      "workspace": "dw=="
+    },
+    {
+      "body": "Rm9yYmlkZGVuCg==",
+      "cookie": "",
+      "has_cookie": false,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "13",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 403,
+      "workspace": "dw=="
+    },
+    {
+      "body": "Rm9yYmlkZGVuCg==",
+      "cookie": "",
+      "has_cookie": false,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "13",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 403,
+      "workspace": "dw=="
+    },
+    {
+      "body": "Rm9yYmlkZGVuCg==",
+      "cookie": "",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "13",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 403,
+      "workspace": "dw=="
+    },
+    {
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZV9pZCBvciB3b3Jrc3BhY2Vfc2x1ZyByZXF1aXJlZCJ9Cg==",
+      "cookie": "",
+      "has_cookie": false,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 400,
+      "workspace": ""
+    },
+    {
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZV9pZCBvciB3b3Jrc3BhY2Vfc2x1ZyByZXF1aXJlZCJ9Cg==",
+      "cookie": "bad",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 400,
+      "workspace": ""
+    },
+    {
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZV9pZCBvciB3b3Jrc3BhY2Vfc2x1ZyByZXF1aXJlZCJ9Cg==",
+      "cookie": "",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 400,
+      "workspace": ""
+    },
+    {
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZV9pZCBvciB3b3Jrc3BhY2Vfc2x1ZyByZXF1aXJlZCJ9Cg==",
+      "cookie": "bad",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 400,
+      "workspace": ""
+    },
+    {
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZV9pZCBvciB3b3Jrc3BhY2Vfc2x1ZyByZXF1aXJlZCJ9Cg==",
+      "cookie": "bad",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 400,
+      "workspace": ""
+    },
+    {
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZV9pZCBvciB3b3Jrc3BhY2Vfc2x1ZyByZXF1aXJlZCJ9Cg==",
+      "cookie": "",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 400,
+      "workspace": ""
+    },
+    {
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZV9pZCBvciB3b3Jrc3BhY2Vfc2x1ZyByZXF1aXJlZCJ9Cg==",
+      "cookie": "",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 400,
+      "workspace": ""
+    },
+    {
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZV9pZCBvciB3b3Jrc3BhY2Vfc2x1ZyByZXF1aXJlZCJ9Cg==",
+      "cookie": "bad",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 400,
+      "workspace": ""
+    },
+    {
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZV9pZCBvciB3b3Jrc3BhY2Vfc2x1ZyByZXF1aXJlZCJ9Cg==",
+      "cookie": " value",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 400,
+      "workspace": ""
+    },
+    {
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZV9pZCBvciB3b3Jrc3BhY2Vfc2x1ZyByZXF1aXJlZCJ9Cg==",
+      "cookie": "",
+      "has_cookie": false,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 400,
+      "workspace": ""
+    },
+    {
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZV9pZCBvciB3b3Jrc3BhY2Vfc2x1ZyByZXF1aXJlZCJ9Cg==",
+      "cookie": "",
+      "has_cookie": false,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 400,
+      "workspace": ""
+    },
+    {
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZV9pZCBvciB3b3Jrc3BhY2Vfc2x1ZyByZXF1aXJlZCJ9Cg==",
+      "cookie": "",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 400,
+      "workspace": ""
+    },
+    {
+      "body": "Rm9yYmlkZGVuCg==",
+      "cookie": "",
+      "has_cookie": false,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "13",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 403,
+      "workspace": "dw=="
+    },
+    {
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo=",
+      "cookie": "bad",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 401,
+      "workspace": "dw=="
+    },
+    {
+      "body": "Rm9yYmlkZGVuCg==",
+      "cookie": "",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "13",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 403,
+      "workspace": "dw=="
+    },
+    {
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo=",
+      "cookie": "bad",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 401,
+      "workspace": "dw=="
+    },
+    {
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo=",
+      "cookie": "bad",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 401,
+      "workspace": "dw=="
+    },
+    {
+      "body": "Rm9yYmlkZGVuCg==",
+      "cookie": "",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "13",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 403,
+      "workspace": "dw=="
+    },
+    {
+      "body": "Rm9yYmlkZGVuCg==",
+      "cookie": "",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "13",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 403,
+      "workspace": "dw=="
+    },
+    {
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo=",
+      "cookie": "bad",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 401,
+      "workspace": "dw=="
+    },
+    {
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo=",
+      "cookie": " value",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 401,
+      "workspace": "dw=="
+    },
+    {
+      "body": "Rm9yYmlkZGVuCg==",
+      "cookie": "",
+      "has_cookie": false,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "13",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 403,
+      "workspace": "dw=="
+    },
+    {
+      "body": "Rm9yYmlkZGVuCg==",
+      "cookie": "",
+      "has_cookie": false,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "13",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 403,
+      "workspace": "dw=="
+    },
+    {
+      "body": "Rm9yYmlkZGVuCg==",
+      "cookie": "",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "13",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 403,
+      "workspace": "dw=="
+    },
+    {
+      "body": "Rm9yYmlkZGVuCg==",
+      "cookie": "",
+      "has_cookie": false,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "13",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 403,
+      "workspace": "dw=="
+    },
+    {
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo=",
+      "cookie": "bad",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 401,
+      "workspace": "dw=="
+    },
+    {
+      "body": "Rm9yYmlkZGVuCg==",
+      "cookie": "",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "13",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 403,
+      "workspace": "dw=="
+    },
+    {
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo=",
+      "cookie": "bad",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 401,
+      "workspace": "dw=="
+    },
+    {
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo=",
+      "cookie": "bad",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 401,
+      "workspace": "dw=="
+    },
+    {
+      "body": "Rm9yYmlkZGVuCg==",
+      "cookie": "",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "13",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 403,
+      "workspace": "dw=="
+    },
+    {
+      "body": "Rm9yYmlkZGVuCg==",
+      "cookie": "",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "13",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 403,
+      "workspace": "dw=="
+    },
+    {
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo=",
+      "cookie": "bad",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 401,
+      "workspace": "dw=="
+    },
+    {
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo=",
+      "cookie": " value",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 401,
+      "workspace": "dw=="
+    },
+    {
+      "body": "Rm9yYmlkZGVuCg==",
+      "cookie": "",
+      "has_cookie": false,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "13",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 403,
+      "workspace": "dw=="
+    },
+    {
+      "body": "Rm9yYmlkZGVuCg==",
+      "cookie": "",
+      "has_cookie": false,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "13",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 403,
+      "workspace": "dw=="
+    },
+    {
+      "body": "Rm9yYmlkZGVuCg==",
+      "cookie": "",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "13",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 403,
+      "workspace": "dw=="
+    },
+    {
+      "body": "Rm9yYmlkZGVuCg==",
+      "cookie": "",
+      "has_cookie": false,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "13",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 403,
+      "workspace": "dw=="
+    },
+    {
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo=",
+      "cookie": "bad",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 401,
+      "workspace": "dw=="
+    },
+    {
+      "body": "Rm9yYmlkZGVuCg==",
+      "cookie": "",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "13",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 403,
+      "workspace": "dw=="
+    },
+    {
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo=",
+      "cookie": "bad",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 401,
+      "workspace": "dw=="
+    },
+    {
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo=",
+      "cookie": "bad",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 401,
+      "workspace": "dw=="
+    },
+    {
+      "body": "Rm9yYmlkZGVuCg==",
+      "cookie": "",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "13",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 403,
+      "workspace": "dw=="
+    },
+    {
+      "body": "Rm9yYmlkZGVuCg==",
+      "cookie": "",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "13",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 403,
+      "workspace": "dw=="
+    },
+    {
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo=",
+      "cookie": "bad",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 401,
+      "workspace": "dw=="
+    },
+    {
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo=",
+      "cookie": " value",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 401,
+      "workspace": "dw=="
+    },
+    {
+      "body": "Rm9yYmlkZGVuCg==",
+      "cookie": "",
+      "has_cookie": false,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "13",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 403,
+      "workspace": "dw=="
+    },
+    {
+      "body": "Rm9yYmlkZGVuCg==",
+      "cookie": "",
+      "has_cookie": false,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "13",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 403,
+      "workspace": "dw=="
+    },
+    {
+      "body": "Rm9yYmlkZGVuCg==",
+      "cookie": "",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "13",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 403,
+      "workspace": "dw=="
+    },
+    {
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZV9pZCBvciB3b3Jrc3BhY2Vfc2x1ZyByZXF1aXJlZCJ9Cg==",
+      "cookie": "",
+      "has_cookie": false,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 400,
+      "workspace": ""
+    },
+    {
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZV9pZCBvciB3b3Jrc3BhY2Vfc2x1ZyByZXF1aXJlZCJ9Cg==",
+      "cookie": "bad",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 400,
+      "workspace": ""
+    },
+    {
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZV9pZCBvciB3b3Jrc3BhY2Vfc2x1ZyByZXF1aXJlZCJ9Cg==",
+      "cookie": "",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 400,
+      "workspace": ""
+    },
+    {
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZV9pZCBvciB3b3Jrc3BhY2Vfc2x1ZyByZXF1aXJlZCJ9Cg==",
+      "cookie": "bad",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 400,
+      "workspace": ""
+    },
+    {
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZV9pZCBvciB3b3Jrc3BhY2Vfc2x1ZyByZXF1aXJlZCJ9Cg==",
+      "cookie": "bad",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 400,
+      "workspace": ""
+    },
+    {
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZV9pZCBvciB3b3Jrc3BhY2Vfc2x1ZyByZXF1aXJlZCJ9Cg==",
+      "cookie": "",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 400,
+      "workspace": ""
+    },
+    {
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZV9pZCBvciB3b3Jrc3BhY2Vfc2x1ZyByZXF1aXJlZCJ9Cg==",
+      "cookie": "",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 400,
+      "workspace": ""
+    },
+    {
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZV9pZCBvciB3b3Jrc3BhY2Vfc2x1ZyByZXF1aXJlZCJ9Cg==",
+      "cookie": "bad",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 400,
+      "workspace": ""
+    },
+    {
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZV9pZCBvciB3b3Jrc3BhY2Vfc2x1ZyByZXF1aXJlZCJ9Cg==",
+      "cookie": " value",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 400,
+      "workspace": ""
+    },
+    {
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZV9pZCBvciB3b3Jrc3BhY2Vfc2x1ZyByZXF1aXJlZCJ9Cg==",
+      "cookie": "",
+      "has_cookie": false,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 400,
+      "workspace": ""
+    },
+    {
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZV9pZCBvciB3b3Jrc3BhY2Vfc2x1ZyByZXF1aXJlZCJ9Cg==",
+      "cookie": "",
+      "has_cookie": false,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 400,
+      "workspace": ""
+    },
+    {
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZV9pZCBvciB3b3Jrc3BhY2Vfc2x1ZyByZXF1aXJlZCJ9Cg==",
+      "cookie": "",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 400,
+      "workspace": ""
+    },
+    {
+      "body": "Rm9yYmlkZGVuCg==",
+      "cookie": "",
+      "has_cookie": false,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "13",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 403,
+      "workspace": "dw=="
+    },
+    {
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo=",
+      "cookie": "bad",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 401,
+      "workspace": "dw=="
+    },
+    {
+      "body": "Rm9yYmlkZGVuCg==",
+      "cookie": "",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "13",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 403,
+      "workspace": "dw=="
+    },
+    {
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo=",
+      "cookie": "bad",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 401,
+      "workspace": "dw=="
+    },
+    {
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo=",
+      "cookie": "bad",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 401,
+      "workspace": "dw=="
+    },
+    {
+      "body": "Rm9yYmlkZGVuCg==",
+      "cookie": "",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "13",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 403,
+      "workspace": "dw=="
+    },
+    {
+      "body": "Rm9yYmlkZGVuCg==",
+      "cookie": "",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "13",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 403,
+      "workspace": "dw=="
+    },
+    {
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo=",
+      "cookie": "bad",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 401,
+      "workspace": "dw=="
+    },
+    {
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo=",
+      "cookie": " value",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 401,
+      "workspace": "dw=="
+    },
+    {
+      "body": "Rm9yYmlkZGVuCg==",
+      "cookie": "",
+      "has_cookie": false,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "13",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 403,
+      "workspace": "dw=="
+    },
+    {
+      "body": "Rm9yYmlkZGVuCg==",
+      "cookie": "",
+      "has_cookie": false,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "13",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 403,
+      "workspace": "dw=="
+    },
+    {
+      "body": "Rm9yYmlkZGVuCg==",
+      "cookie": "",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "13",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 403,
+      "workspace": "dw=="
+    },
+    {
+      "body": "Rm9yYmlkZGVuCg==",
+      "cookie": "",
+      "has_cookie": false,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "13",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 403,
+      "workspace": "YSBi"
+    },
+    {
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo=",
+      "cookie": "bad",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 401,
+      "workspace": "YSBi"
+    },
+    {
+      "body": "Rm9yYmlkZGVuCg==",
+      "cookie": "",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "13",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 403,
+      "workspace": "YSBi"
+    },
+    {
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo=",
+      "cookie": "bad",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 401,
+      "workspace": "YSBi"
+    },
+    {
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo=",
+      "cookie": "bad",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 401,
+      "workspace": "YSBi"
+    },
+    {
+      "body": "Rm9yYmlkZGVuCg==",
+      "cookie": "",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "13",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 403,
+      "workspace": "YSBi"
+    },
+    {
+      "body": "Rm9yYmlkZGVuCg==",
+      "cookie": "",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "13",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 403,
+      "workspace": "YSBi"
+    },
+    {
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo=",
+      "cookie": "bad",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 401,
+      "workspace": "YSBi"
+    },
+    {
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo=",
+      "cookie": " value",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 401,
+      "workspace": "YSBi"
+    },
+    {
+      "body": "Rm9yYmlkZGVuCg==",
+      "cookie": "",
+      "has_cookie": false,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "13",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 403,
+      "workspace": "YSBi"
+    },
+    {
+      "body": "Rm9yYmlkZGVuCg==",
+      "cookie": "",
+      "has_cookie": false,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "13",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 403,
+      "workspace": "YSBi"
+    },
+    {
+      "body": "Rm9yYmlkZGVuCg==",
+      "cookie": "",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "13",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 403,
+      "workspace": "YSBi"
+    },
+    {
+      "body": "Rm9yYmlkZGVuCg==",
+      "cookie": "",
+      "has_cookie": false,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "13",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 403,
+      "workspace": "/w=="
+    },
+    {
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo=",
+      "cookie": "bad",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 401,
+      "workspace": "/w=="
+    },
+    {
+      "body": "Rm9yYmlkZGVuCg==",
+      "cookie": "",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "13",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 403,
+      "workspace": "/w=="
+    },
+    {
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo=",
+      "cookie": "bad",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 401,
+      "workspace": "/w=="
+    },
+    {
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo=",
+      "cookie": "bad",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 401,
+      "workspace": "/w=="
+    },
+    {
+      "body": "Rm9yYmlkZGVuCg==",
+      "cookie": "",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "13",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 403,
+      "workspace": "/w=="
+    },
+    {
+      "body": "Rm9yYmlkZGVuCg==",
+      "cookie": "",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "13",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 403,
+      "workspace": "/w=="
+    },
+    {
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo=",
+      "cookie": "bad",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 401,
+      "workspace": "/w=="
+    },
+    {
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo=",
+      "cookie": " value",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 401,
+      "workspace": "/w=="
+    },
+    {
+      "body": "Rm9yYmlkZGVuCg==",
+      "cookie": "",
+      "has_cookie": false,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "13",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 403,
+      "workspace": "/w=="
+    },
+    {
+      "body": "Rm9yYmlkZGVuCg==",
+      "cookie": "",
+      "has_cookie": false,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "13",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 403,
+      "workspace": "/w=="
+    },
+    {
+      "body": "Rm9yYmlkZGVuCg==",
+      "cookie": "",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "13",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 403,
+      "workspace": "/w=="
+    },
+    {
+      "body": "Rm9yYmlkZGVuCg==",
+      "cookie": "",
+      "has_cookie": false,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "13",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [
+        "good"
+      ],
+      "status": 403,
+      "workspace": ""
+    },
+    {
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo=",
+      "cookie": "bad",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [
+        "good"
+      ],
+      "status": 401,
+      "workspace": ""
+    },
+    {
+      "body": "Rm9yYmlkZGVuCg==",
+      "cookie": "",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "13",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [
+        "good"
+      ],
+      "status": 403,
+      "workspace": ""
+    },
+    {
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo=",
+      "cookie": "bad",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [
+        "good"
+      ],
+      "status": 401,
+      "workspace": ""
+    },
+    {
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo=",
+      "cookie": "bad",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [
+        "good"
+      ],
+      "status": 401,
+      "workspace": ""
+    },
+    {
+      "body": "Rm9yYmlkZGVuCg==",
+      "cookie": "",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "13",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [
+        "good"
+      ],
+      "status": 403,
+      "workspace": ""
+    },
+    {
+      "body": "Rm9yYmlkZGVuCg==",
+      "cookie": "",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "13",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [
+        "good"
+      ],
+      "status": 403,
+      "workspace": ""
+    },
+    {
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo=",
+      "cookie": "bad",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [
+        "good"
+      ],
+      "status": 401,
+      "workspace": ""
+    },
+    {
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo=",
+      "cookie": " value",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [
+        "good"
+      ],
+      "status": 401,
+      "workspace": ""
+    },
+    {
+      "body": "Rm9yYmlkZGVuCg==",
+      "cookie": "",
+      "has_cookie": false,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "13",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [
+        "good"
+      ],
+      "status": 403,
+      "workspace": ""
+    },
+    {
+      "body": "Rm9yYmlkZGVuCg==",
+      "cookie": "",
+      "has_cookie": false,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "13",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [
+        "good"
+      ],
+      "status": 403,
+      "workspace": ""
+    },
+    {
+      "body": "Rm9yYmlkZGVuCg==",
+      "cookie": "",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "13",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [
+        "good"
+      ],
+      "status": 403,
+      "workspace": ""
+    },
+    {
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZSBub3QgZm91bmQifQo=",
+      "cookie": "",
+      "has_cookie": false,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [
+        "bad"
+      ],
+      "status": 404,
+      "workspace": ""
+    },
+    {
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZSBub3QgZm91bmQifQo=",
+      "cookie": "bad",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [
+        "bad"
+      ],
+      "status": 404,
+      "workspace": ""
+    },
+    {
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZSBub3QgZm91bmQifQo=",
+      "cookie": "",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [
+        "bad"
+      ],
+      "status": 404,
+      "workspace": ""
+    },
+    {
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZSBub3QgZm91bmQifQo=",
+      "cookie": "bad",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [
+        "bad"
+      ],
+      "status": 404,
+      "workspace": ""
+    },
+    {
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZSBub3QgZm91bmQifQo=",
+      "cookie": "bad",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [
+        "bad"
+      ],
+      "status": 404,
+      "workspace": ""
+    },
+    {
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZSBub3QgZm91bmQifQo=",
+      "cookie": "",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [
+        "bad"
+      ],
+      "status": 404,
+      "workspace": ""
+    },
+    {
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZSBub3QgZm91bmQifQo=",
+      "cookie": "",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [
+        "bad"
+      ],
+      "status": 404,
+      "workspace": ""
+    },
+    {
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZSBub3QgZm91bmQifQo=",
+      "cookie": "bad",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [
+        "bad"
+      ],
+      "status": 404,
+      "workspace": ""
+    },
+    {
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZSBub3QgZm91bmQifQo=",
+      "cookie": " value",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [
+        "bad"
+      ],
+      "status": 404,
+      "workspace": ""
+    },
+    {
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZSBub3QgZm91bmQifQo=",
+      "cookie": "",
+      "has_cookie": false,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [
+        "bad"
+      ],
+      "status": 404,
+      "workspace": ""
+    },
+    {
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZSBub3QgZm91bmQifQo=",
+      "cookie": "",
+      "has_cookie": false,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [
+        "bad"
+      ],
+      "status": 404,
+      "workspace": ""
+    },
+    {
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZSBub3QgZm91bmQifQo=",
+      "cookie": "",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [
+        "bad"
+      ],
+      "status": 404,
+      "workspace": ""
+    },
+    {
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZSBub3QgZm91bmQifQo=",
+      "cookie": "",
+      "has_cookie": false,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [
+        "bad"
+      ],
+      "status": 404,
+      "workspace": ""
+    },
+    {
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZSBub3QgZm91bmQifQo=",
+      "cookie": "bad",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [
+        "bad"
+      ],
+      "status": 404,
+      "workspace": ""
+    },
+    {
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZSBub3QgZm91bmQifQo=",
+      "cookie": "",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [
+        "bad"
+      ],
+      "status": 404,
+      "workspace": ""
+    },
+    {
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZSBub3QgZm91bmQifQo=",
+      "cookie": "bad",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [
+        "bad"
+      ],
+      "status": 404,
+      "workspace": ""
+    },
+    {
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZSBub3QgZm91bmQifQo=",
+      "cookie": "bad",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [
+        "bad"
+      ],
+      "status": 404,
+      "workspace": ""
+    },
+    {
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZSBub3QgZm91bmQifQo=",
+      "cookie": "",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [
+        "bad"
+      ],
+      "status": 404,
+      "workspace": ""
+    },
+    {
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZSBub3QgZm91bmQifQo=",
+      "cookie": "",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [
+        "bad"
+      ],
+      "status": 404,
+      "workspace": ""
+    },
+    {
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZSBub3QgZm91bmQifQo=",
+      "cookie": "bad",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [
+        "bad"
+      ],
+      "status": 404,
+      "workspace": ""
+    },
+    {
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZSBub3QgZm91bmQifQo=",
+      "cookie": " value",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [
+        "bad"
+      ],
+      "status": 404,
+      "workspace": ""
+    },
+    {
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZSBub3QgZm91bmQifQo=",
+      "cookie": "",
+      "has_cookie": false,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [
+        "bad"
+      ],
+      "status": 404,
+      "workspace": ""
+    },
+    {
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZSBub3QgZm91bmQifQo=",
+      "cookie": "",
+      "has_cookie": false,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [
+        "bad"
+      ],
+      "status": 404,
+      "workspace": ""
+    },
+    {
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZSBub3QgZm91bmQifQo=",
+      "cookie": "",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [
+        "bad"
+      ],
+      "status": 404,
+      "workspace": ""
+    },
+    {
+      "body": "Rm9yYmlkZGVuCg==",
+      "cookie": "",
+      "has_cookie": false,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "13",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [
+        "good"
+      ],
+      "status": 403,
+      "workspace": ""
+    },
+    {
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo=",
+      "cookie": "bad",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [
+        "good"
+      ],
+      "status": 401,
+      "workspace": ""
+    },
+    {
+      "body": "Rm9yYmlkZGVuCg==",
+      "cookie": "",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "13",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [
+        "good"
+      ],
+      "status": 403,
+      "workspace": ""
+    },
+    {
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo=",
+      "cookie": "bad",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [
+        "good"
+      ],
+      "status": 401,
+      "workspace": ""
+    },
+    {
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo=",
+      "cookie": "bad",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [
+        "good"
+      ],
+      "status": 401,
+      "workspace": ""
+    },
+    {
+      "body": "Rm9yYmlkZGVuCg==",
+      "cookie": "",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "13",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [
+        "good"
+      ],
+      "status": 403,
+      "workspace": ""
+    },
+    {
+      "body": "Rm9yYmlkZGVuCg==",
+      "cookie": "",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "13",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [
+        "good"
+      ],
+      "status": 403,
+      "workspace": ""
+    },
+    {
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo=",
+      "cookie": "bad",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [
+        "good"
+      ],
+      "status": 401,
+      "workspace": ""
+    },
+    {
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo=",
+      "cookie": " value",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [
+        "good"
+      ],
+      "status": 401,
+      "workspace": ""
+    },
+    {
+      "body": "Rm9yYmlkZGVuCg==",
+      "cookie": "",
+      "has_cookie": false,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "13",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [
+        "good"
+      ],
+      "status": 403,
+      "workspace": ""
+    },
+    {
+      "body": "Rm9yYmlkZGVuCg==",
+      "cookie": "",
+      "has_cookie": false,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "13",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [
+        "good"
+      ],
+      "status": 403,
+      "workspace": ""
+    },
+    {
+      "body": "Rm9yYmlkZGVuCg==",
+      "cookie": "",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "13",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [
+        "good"
+      ],
+      "status": 403,
+      "workspace": ""
+    },
+    {
+      "body": "Rm9yYmlkZGVuCg==",
+      "cookie": "",
+      "has_cookie": false,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "13",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 403,
+      "workspace": "dw=="
+    },
+    {
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo=",
+      "cookie": "bad",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 401,
+      "workspace": "dw=="
+    },
+    {
+      "body": "Rm9yYmlkZGVuCg==",
+      "cookie": "",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "13",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 403,
+      "workspace": "dw=="
+    },
+    {
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo=",
+      "cookie": "bad",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 401,
+      "workspace": "dw=="
+    },
+    {
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo=",
+      "cookie": "bad",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 401,
+      "workspace": "dw=="
+    },
+    {
+      "body": "Rm9yYmlkZGVuCg==",
+      "cookie": "",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "13",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 403,
+      "workspace": "dw=="
+    },
+    {
+      "body": "Rm9yYmlkZGVuCg==",
+      "cookie": "",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "13",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 403,
+      "workspace": "dw=="
+    },
+    {
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo=",
+      "cookie": "bad",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 401,
+      "workspace": "dw=="
+    },
+    {
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo=",
+      "cookie": " value",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 401,
+      "workspace": "dw=="
+    },
+    {
+      "body": "Rm9yYmlkZGVuCg==",
+      "cookie": "",
+      "has_cookie": false,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "13",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 403,
+      "workspace": "dw=="
+    },
+    {
+      "body": "Rm9yYmlkZGVuCg==",
+      "cookie": "",
+      "has_cookie": false,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "13",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 403,
+      "workspace": "dw=="
+    },
+    {
+      "body": "Rm9yYmlkZGVuCg==",
+      "cookie": "",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "13",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 403,
+      "workspace": "dw=="
+    },
+    {
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo=",
+      "cookie": "bad",
+      "has_cookie": true,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 401,
+      "workspace": "dw=="
+    },
+    {
+      "body": "Rm9yYmlkZGVuCg==",
+      "cookie": "",
+      "has_cookie": false,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "13",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 403,
+      "workspace": "dw=="
+    },
+    {
+      "body": "Rm9yYmlkZGVuCg==",
+      "cookie": "",
+      "has_cookie": false,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Sec-WebSocket-Version": "13",
+        "X-Content-Type-Options": "nosniff"
+      },
+      "slugs": [],
+      "status": 403,
+      "workspace": "dw=="
+    }
+  ],
+  "python": [
+    {
+      "workspace": "",
+      "cookie": "",
+      "has_cookie": false,
+      "slugs": [],
+      "status": 400,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZV9pZCBvciB3b3Jrc3BhY2Vfc2x1ZyByZXF1aXJlZCJ9Cg=="
+    },
+    {
+      "workspace": "",
+      "cookie": "bad",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 400,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZV9pZCBvciB3b3Jrc3BhY2Vfc2x1ZyByZXF1aXJlZCJ9Cg=="
+    },
+    {
+      "workspace": "",
+      "cookie": "",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 400,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZV9pZCBvciB3b3Jrc3BhY2Vfc2x1ZyByZXF1aXJlZCJ9Cg=="
+    },
+    {
+      "workspace": "",
+      "cookie": "bad",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 400,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZV9pZCBvciB3b3Jrc3BhY2Vfc2x1ZyByZXF1aXJlZCJ9Cg=="
+    },
+    {
+      "workspace": "",
+      "cookie": "bad",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 400,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZV9pZCBvciB3b3Jrc3BhY2Vfc2x1ZyByZXF1aXJlZCJ9Cg=="
+    },
+    {
+      "workspace": "",
+      "cookie": "",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 400,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZV9pZCBvciB3b3Jrc3BhY2Vfc2x1ZyByZXF1aXJlZCJ9Cg=="
+    },
+    {
+      "workspace": "",
+      "cookie": "",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 400,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZV9pZCBvciB3b3Jrc3BhY2Vfc2x1ZyByZXF1aXJlZCJ9Cg=="
+    },
+    {
+      "workspace": "",
+      "cookie": "bad",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 400,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZV9pZCBvciB3b3Jrc3BhY2Vfc2x1ZyByZXF1aXJlZCJ9Cg=="
+    },
+    {
+      "workspace": "",
+      "cookie": " value",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 400,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZV9pZCBvciB3b3Jrc3BhY2Vfc2x1ZyByZXF1aXJlZCJ9Cg=="
+    },
+    {
+      "workspace": "",
+      "cookie": "",
+      "has_cookie": false,
+      "slugs": [],
+      "status": 400,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZV9pZCBvciB3b3Jrc3BhY2Vfc2x1ZyByZXF1aXJlZCJ9Cg=="
+    },
+    {
+      "workspace": "",
+      "cookie": "",
+      "has_cookie": false,
+      "slugs": [],
+      "status": 400,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZV9pZCBvciB3b3Jrc3BhY2Vfc2x1ZyByZXF1aXJlZCJ9Cg=="
+    },
+    {
+      "workspace": "",
+      "cookie": "",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 400,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZV9pZCBvciB3b3Jrc3BhY2Vfc2x1ZyByZXF1aXJlZCJ9Cg=="
+    },
+    {
+      "workspace": "dw==",
+      "cookie": "",
+      "has_cookie": false,
+      "slugs": [],
+      "status": 403,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": "13"
+      },
+      "body": "Rm9yYmlkZGVuCg=="
+    },
+    {
+      "workspace": "dw==",
+      "cookie": "bad",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 401,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo="
+    },
+    {
+      "workspace": "dw==",
+      "cookie": "",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 403,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": "13"
+      },
+      "body": "Rm9yYmlkZGVuCg=="
+    },
+    {
+      "workspace": "dw==",
+      "cookie": "bad",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 401,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo="
+    },
+    {
+      "workspace": "dw==",
+      "cookie": "bad",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 401,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo="
+    },
+    {
+      "workspace": "dw==",
+      "cookie": "",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 403,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": "13"
+      },
+      "body": "Rm9yYmlkZGVuCg=="
+    },
+    {
+      "workspace": "dw==",
+      "cookie": "",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 403,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": "13"
+      },
+      "body": "Rm9yYmlkZGVuCg=="
+    },
+    {
+      "workspace": "dw==",
+      "cookie": "bad",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 401,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo="
+    },
+    {
+      "workspace": "dw==",
+      "cookie": " value",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 401,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo="
+    },
+    {
+      "workspace": "dw==",
+      "cookie": "",
+      "has_cookie": false,
+      "slugs": [],
+      "status": 403,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": "13"
+      },
+      "body": "Rm9yYmlkZGVuCg=="
+    },
+    {
+      "workspace": "dw==",
+      "cookie": "",
+      "has_cookie": false,
+      "slugs": [],
+      "status": 403,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": "13"
+      },
+      "body": "Rm9yYmlkZGVuCg=="
+    },
+    {
+      "workspace": "dw==",
+      "cookie": "",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 403,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": "13"
+      },
+      "body": "Rm9yYmlkZGVuCg=="
+    },
+    {
+      "workspace": "",
+      "cookie": "",
+      "has_cookie": false,
+      "slugs": [],
+      "status": 400,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZV9pZCBvciB3b3Jrc3BhY2Vfc2x1ZyByZXF1aXJlZCJ9Cg=="
+    },
+    {
+      "workspace": "",
+      "cookie": "bad",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 400,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZV9pZCBvciB3b3Jrc3BhY2Vfc2x1ZyByZXF1aXJlZCJ9Cg=="
+    },
+    {
+      "workspace": "",
+      "cookie": "",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 400,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZV9pZCBvciB3b3Jrc3BhY2Vfc2x1ZyByZXF1aXJlZCJ9Cg=="
+    },
+    {
+      "workspace": "",
+      "cookie": "bad",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 400,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZV9pZCBvciB3b3Jrc3BhY2Vfc2x1ZyByZXF1aXJlZCJ9Cg=="
+    },
+    {
+      "workspace": "",
+      "cookie": "bad",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 400,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZV9pZCBvciB3b3Jrc3BhY2Vfc2x1ZyByZXF1aXJlZCJ9Cg=="
+    },
+    {
+      "workspace": "",
+      "cookie": "",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 400,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZV9pZCBvciB3b3Jrc3BhY2Vfc2x1ZyByZXF1aXJlZCJ9Cg=="
+    },
+    {
+      "workspace": "",
+      "cookie": "",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 400,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZV9pZCBvciB3b3Jrc3BhY2Vfc2x1ZyByZXF1aXJlZCJ9Cg=="
+    },
+    {
+      "workspace": "",
+      "cookie": "bad",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 400,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZV9pZCBvciB3b3Jrc3BhY2Vfc2x1ZyByZXF1aXJlZCJ9Cg=="
+    },
+    {
+      "workspace": "",
+      "cookie": " value",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 400,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZV9pZCBvciB3b3Jrc3BhY2Vfc2x1ZyByZXF1aXJlZCJ9Cg=="
+    },
+    {
+      "workspace": "",
+      "cookie": "",
+      "has_cookie": false,
+      "slugs": [],
+      "status": 400,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZV9pZCBvciB3b3Jrc3BhY2Vfc2x1ZyByZXF1aXJlZCJ9Cg=="
+    },
+    {
+      "workspace": "",
+      "cookie": "",
+      "has_cookie": false,
+      "slugs": [],
+      "status": 400,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZV9pZCBvciB3b3Jrc3BhY2Vfc2x1ZyByZXF1aXJlZCJ9Cg=="
+    },
+    {
+      "workspace": "",
+      "cookie": "",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 400,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZV9pZCBvciB3b3Jrc3BhY2Vfc2x1ZyByZXF1aXJlZCJ9Cg=="
+    },
+    {
+      "workspace": "dw==",
+      "cookie": "",
+      "has_cookie": false,
+      "slugs": [],
+      "status": 403,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": "13"
+      },
+      "body": "Rm9yYmlkZGVuCg=="
+    },
+    {
+      "workspace": "dw==",
+      "cookie": "bad",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 401,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo="
+    },
+    {
+      "workspace": "dw==",
+      "cookie": "",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 403,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": "13"
+      },
+      "body": "Rm9yYmlkZGVuCg=="
+    },
+    {
+      "workspace": "dw==",
+      "cookie": "bad",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 401,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo="
+    },
+    {
+      "workspace": "dw==",
+      "cookie": "bad",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 401,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo="
+    },
+    {
+      "workspace": "dw==",
+      "cookie": "",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 403,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": "13"
+      },
+      "body": "Rm9yYmlkZGVuCg=="
+    },
+    {
+      "workspace": "dw==",
+      "cookie": "",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 403,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": "13"
+      },
+      "body": "Rm9yYmlkZGVuCg=="
+    },
+    {
+      "workspace": "dw==",
+      "cookie": "bad",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 401,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo="
+    },
+    {
+      "workspace": "dw==",
+      "cookie": " value",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 401,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo="
+    },
+    {
+      "workspace": "dw==",
+      "cookie": "",
+      "has_cookie": false,
+      "slugs": [],
+      "status": 403,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": "13"
+      },
+      "body": "Rm9yYmlkZGVuCg=="
+    },
+    {
+      "workspace": "dw==",
+      "cookie": "",
+      "has_cookie": false,
+      "slugs": [],
+      "status": 403,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": "13"
+      },
+      "body": "Rm9yYmlkZGVuCg=="
+    },
+    {
+      "workspace": "dw==",
+      "cookie": "",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 403,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": "13"
+      },
+      "body": "Rm9yYmlkZGVuCg=="
+    },
+    {
+      "workspace": "dw==",
+      "cookie": "",
+      "has_cookie": false,
+      "slugs": [],
+      "status": 403,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": "13"
+      },
+      "body": "Rm9yYmlkZGVuCg=="
+    },
+    {
+      "workspace": "dw==",
+      "cookie": "bad",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 401,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo="
+    },
+    {
+      "workspace": "dw==",
+      "cookie": "",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 403,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": "13"
+      },
+      "body": "Rm9yYmlkZGVuCg=="
+    },
+    {
+      "workspace": "dw==",
+      "cookie": "bad",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 401,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo="
+    },
+    {
+      "workspace": "dw==",
+      "cookie": "bad",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 401,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo="
+    },
+    {
+      "workspace": "dw==",
+      "cookie": "",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 403,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": "13"
+      },
+      "body": "Rm9yYmlkZGVuCg=="
+    },
+    {
+      "workspace": "dw==",
+      "cookie": "",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 403,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": "13"
+      },
+      "body": "Rm9yYmlkZGVuCg=="
+    },
+    {
+      "workspace": "dw==",
+      "cookie": "bad",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 401,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo="
+    },
+    {
+      "workspace": "dw==",
+      "cookie": " value",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 401,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo="
+    },
+    {
+      "workspace": "dw==",
+      "cookie": "",
+      "has_cookie": false,
+      "slugs": [],
+      "status": 403,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": "13"
+      },
+      "body": "Rm9yYmlkZGVuCg=="
+    },
+    {
+      "workspace": "dw==",
+      "cookie": "",
+      "has_cookie": false,
+      "slugs": [],
+      "status": 403,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": "13"
+      },
+      "body": "Rm9yYmlkZGVuCg=="
+    },
+    {
+      "workspace": "dw==",
+      "cookie": "",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 403,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": "13"
+      },
+      "body": "Rm9yYmlkZGVuCg=="
+    },
+    {
+      "workspace": "dw==",
+      "cookie": "",
+      "has_cookie": false,
+      "slugs": [],
+      "status": 403,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": "13"
+      },
+      "body": "Rm9yYmlkZGVuCg=="
+    },
+    {
+      "workspace": "dw==",
+      "cookie": "bad",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 401,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo="
+    },
+    {
+      "workspace": "dw==",
+      "cookie": "",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 403,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": "13"
+      },
+      "body": "Rm9yYmlkZGVuCg=="
+    },
+    {
+      "workspace": "dw==",
+      "cookie": "bad",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 401,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo="
+    },
+    {
+      "workspace": "dw==",
+      "cookie": "bad",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 401,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo="
+    },
+    {
+      "workspace": "dw==",
+      "cookie": "",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 403,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": "13"
+      },
+      "body": "Rm9yYmlkZGVuCg=="
+    },
+    {
+      "workspace": "dw==",
+      "cookie": "",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 403,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": "13"
+      },
+      "body": "Rm9yYmlkZGVuCg=="
+    },
+    {
+      "workspace": "dw==",
+      "cookie": "bad",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 401,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo="
+    },
+    {
+      "workspace": "dw==",
+      "cookie": " value",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 401,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo="
+    },
+    {
+      "workspace": "dw==",
+      "cookie": "",
+      "has_cookie": false,
+      "slugs": [],
+      "status": 403,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": "13"
+      },
+      "body": "Rm9yYmlkZGVuCg=="
+    },
+    {
+      "workspace": "dw==",
+      "cookie": "",
+      "has_cookie": false,
+      "slugs": [],
+      "status": 403,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": "13"
+      },
+      "body": "Rm9yYmlkZGVuCg=="
+    },
+    {
+      "workspace": "dw==",
+      "cookie": "",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 403,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": "13"
+      },
+      "body": "Rm9yYmlkZGVuCg=="
+    },
+    {
+      "workspace": "",
+      "cookie": "",
+      "has_cookie": false,
+      "slugs": [],
+      "status": 400,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZV9pZCBvciB3b3Jrc3BhY2Vfc2x1ZyByZXF1aXJlZCJ9Cg=="
+    },
+    {
+      "workspace": "",
+      "cookie": "bad",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 400,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZV9pZCBvciB3b3Jrc3BhY2Vfc2x1ZyByZXF1aXJlZCJ9Cg=="
+    },
+    {
+      "workspace": "",
+      "cookie": "",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 400,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZV9pZCBvciB3b3Jrc3BhY2Vfc2x1ZyByZXF1aXJlZCJ9Cg=="
+    },
+    {
+      "workspace": "",
+      "cookie": "bad",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 400,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZV9pZCBvciB3b3Jrc3BhY2Vfc2x1ZyByZXF1aXJlZCJ9Cg=="
+    },
+    {
+      "workspace": "",
+      "cookie": "bad",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 400,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZV9pZCBvciB3b3Jrc3BhY2Vfc2x1ZyByZXF1aXJlZCJ9Cg=="
+    },
+    {
+      "workspace": "",
+      "cookie": "",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 400,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZV9pZCBvciB3b3Jrc3BhY2Vfc2x1ZyByZXF1aXJlZCJ9Cg=="
+    },
+    {
+      "workspace": "",
+      "cookie": "",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 400,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZV9pZCBvciB3b3Jrc3BhY2Vfc2x1ZyByZXF1aXJlZCJ9Cg=="
+    },
+    {
+      "workspace": "",
+      "cookie": "bad",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 400,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZV9pZCBvciB3b3Jrc3BhY2Vfc2x1ZyByZXF1aXJlZCJ9Cg=="
+    },
+    {
+      "workspace": "",
+      "cookie": " value",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 400,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZV9pZCBvciB3b3Jrc3BhY2Vfc2x1ZyByZXF1aXJlZCJ9Cg=="
+    },
+    {
+      "workspace": "",
+      "cookie": "",
+      "has_cookie": false,
+      "slugs": [],
+      "status": 400,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZV9pZCBvciB3b3Jrc3BhY2Vfc2x1ZyByZXF1aXJlZCJ9Cg=="
+    },
+    {
+      "workspace": "",
+      "cookie": "",
+      "has_cookie": false,
+      "slugs": [],
+      "status": 400,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZV9pZCBvciB3b3Jrc3BhY2Vfc2x1ZyByZXF1aXJlZCJ9Cg=="
+    },
+    {
+      "workspace": "",
+      "cookie": "",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 400,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZV9pZCBvciB3b3Jrc3BhY2Vfc2x1ZyByZXF1aXJlZCJ9Cg=="
+    },
+    {
+      "workspace": "dw==",
+      "cookie": "",
+      "has_cookie": false,
+      "slugs": [],
+      "status": 403,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": "13"
+      },
+      "body": "Rm9yYmlkZGVuCg=="
+    },
+    {
+      "workspace": "dw==",
+      "cookie": "bad",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 401,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo="
+    },
+    {
+      "workspace": "dw==",
+      "cookie": "",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 403,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": "13"
+      },
+      "body": "Rm9yYmlkZGVuCg=="
+    },
+    {
+      "workspace": "dw==",
+      "cookie": "bad",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 401,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo="
+    },
+    {
+      "workspace": "dw==",
+      "cookie": "bad",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 401,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo="
+    },
+    {
+      "workspace": "dw==",
+      "cookie": "",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 403,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": "13"
+      },
+      "body": "Rm9yYmlkZGVuCg=="
+    },
+    {
+      "workspace": "dw==",
+      "cookie": "",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 403,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": "13"
+      },
+      "body": "Rm9yYmlkZGVuCg=="
+    },
+    {
+      "workspace": "dw==",
+      "cookie": "bad",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 401,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo="
+    },
+    {
+      "workspace": "dw==",
+      "cookie": " value",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 401,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo="
+    },
+    {
+      "workspace": "dw==",
+      "cookie": "",
+      "has_cookie": false,
+      "slugs": [],
+      "status": 403,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": "13"
+      },
+      "body": "Rm9yYmlkZGVuCg=="
+    },
+    {
+      "workspace": "dw==",
+      "cookie": "",
+      "has_cookie": false,
+      "slugs": [],
+      "status": 403,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": "13"
+      },
+      "body": "Rm9yYmlkZGVuCg=="
+    },
+    {
+      "workspace": "dw==",
+      "cookie": "",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 403,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": "13"
+      },
+      "body": "Rm9yYmlkZGVuCg=="
+    },
+    {
+      "workspace": "YSBi",
+      "cookie": "",
+      "has_cookie": false,
+      "slugs": [],
+      "status": 403,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": "13"
+      },
+      "body": "Rm9yYmlkZGVuCg=="
+    },
+    {
+      "workspace": "YSBi",
+      "cookie": "bad",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 401,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo="
+    },
+    {
+      "workspace": "YSBi",
+      "cookie": "",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 403,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": "13"
+      },
+      "body": "Rm9yYmlkZGVuCg=="
+    },
+    {
+      "workspace": "YSBi",
+      "cookie": "bad",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 401,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo="
+    },
+    {
+      "workspace": "YSBi",
+      "cookie": "bad",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 401,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo="
+    },
+    {
+      "workspace": "YSBi",
+      "cookie": "",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 403,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": "13"
+      },
+      "body": "Rm9yYmlkZGVuCg=="
+    },
+    {
+      "workspace": "YSBi",
+      "cookie": "",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 403,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": "13"
+      },
+      "body": "Rm9yYmlkZGVuCg=="
+    },
+    {
+      "workspace": "YSBi",
+      "cookie": "bad",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 401,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo="
+    },
+    {
+      "workspace": "YSBi",
+      "cookie": " value",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 401,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo="
+    },
+    {
+      "workspace": "YSBi",
+      "cookie": "",
+      "has_cookie": false,
+      "slugs": [],
+      "status": 403,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": "13"
+      },
+      "body": "Rm9yYmlkZGVuCg=="
+    },
+    {
+      "workspace": "YSBi",
+      "cookie": "",
+      "has_cookie": false,
+      "slugs": [],
+      "status": 403,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": "13"
+      },
+      "body": "Rm9yYmlkZGVuCg=="
+    },
+    {
+      "workspace": "YSBi",
+      "cookie": "",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 403,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": "13"
+      },
+      "body": "Rm9yYmlkZGVuCg=="
+    },
+    {
+      "workspace": "/w==",
+      "cookie": "",
+      "has_cookie": false,
+      "slugs": [],
+      "status": 403,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": "13"
+      },
+      "body": "Rm9yYmlkZGVuCg=="
+    },
+    {
+      "workspace": "/w==",
+      "cookie": "bad",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 401,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo="
+    },
+    {
+      "workspace": "/w==",
+      "cookie": "",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 403,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": "13"
+      },
+      "body": "Rm9yYmlkZGVuCg=="
+    },
+    {
+      "workspace": "/w==",
+      "cookie": "bad",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 401,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo="
+    },
+    {
+      "workspace": "/w==",
+      "cookie": "bad",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 401,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo="
+    },
+    {
+      "workspace": "/w==",
+      "cookie": "",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 403,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": "13"
+      },
+      "body": "Rm9yYmlkZGVuCg=="
+    },
+    {
+      "workspace": "/w==",
+      "cookie": "",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 403,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": "13"
+      },
+      "body": "Rm9yYmlkZGVuCg=="
+    },
+    {
+      "workspace": "/w==",
+      "cookie": "bad",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 401,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo="
+    },
+    {
+      "workspace": "/w==",
+      "cookie": " value",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 401,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo="
+    },
+    {
+      "workspace": "/w==",
+      "cookie": "",
+      "has_cookie": false,
+      "slugs": [],
+      "status": 403,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": "13"
+      },
+      "body": "Rm9yYmlkZGVuCg=="
+    },
+    {
+      "workspace": "/w==",
+      "cookie": "",
+      "has_cookie": false,
+      "slugs": [],
+      "status": 403,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": "13"
+      },
+      "body": "Rm9yYmlkZGVuCg=="
+    },
+    {
+      "workspace": "/w==",
+      "cookie": "",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 403,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": "13"
+      },
+      "body": "Rm9yYmlkZGVuCg=="
+    },
+    {
+      "workspace": "",
+      "cookie": "",
+      "has_cookie": false,
+      "slugs": [
+        "good"
+      ],
+      "status": 403,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": "13"
+      },
+      "body": "Rm9yYmlkZGVuCg=="
+    },
+    {
+      "workspace": "",
+      "cookie": "bad",
+      "has_cookie": true,
+      "slugs": [
+        "good"
+      ],
+      "status": 401,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo="
+    },
+    {
+      "workspace": "",
+      "cookie": "",
+      "has_cookie": true,
+      "slugs": [
+        "good"
+      ],
+      "status": 403,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": "13"
+      },
+      "body": "Rm9yYmlkZGVuCg=="
+    },
+    {
+      "workspace": "",
+      "cookie": "bad",
+      "has_cookie": true,
+      "slugs": [
+        "good"
+      ],
+      "status": 401,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo="
+    },
+    {
+      "workspace": "",
+      "cookie": "bad",
+      "has_cookie": true,
+      "slugs": [
+        "good"
+      ],
+      "status": 401,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo="
+    },
+    {
+      "workspace": "",
+      "cookie": "",
+      "has_cookie": true,
+      "slugs": [
+        "good"
+      ],
+      "status": 403,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": "13"
+      },
+      "body": "Rm9yYmlkZGVuCg=="
+    },
+    {
+      "workspace": "",
+      "cookie": "",
+      "has_cookie": true,
+      "slugs": [
+        "good"
+      ],
+      "status": 403,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": "13"
+      },
+      "body": "Rm9yYmlkZGVuCg=="
+    },
+    {
+      "workspace": "",
+      "cookie": "bad",
+      "has_cookie": true,
+      "slugs": [
+        "good"
+      ],
+      "status": 401,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo="
+    },
+    {
+      "workspace": "",
+      "cookie": " value",
+      "has_cookie": true,
+      "slugs": [
+        "good"
+      ],
+      "status": 401,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo="
+    },
+    {
+      "workspace": "",
+      "cookie": "",
+      "has_cookie": false,
+      "slugs": [
+        "good"
+      ],
+      "status": 403,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": "13"
+      },
+      "body": "Rm9yYmlkZGVuCg=="
+    },
+    {
+      "workspace": "",
+      "cookie": "",
+      "has_cookie": false,
+      "slugs": [
+        "good"
+      ],
+      "status": 403,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": "13"
+      },
+      "body": "Rm9yYmlkZGVuCg=="
+    },
+    {
+      "workspace": "",
+      "cookie": "",
+      "has_cookie": true,
+      "slugs": [
+        "good"
+      ],
+      "status": 403,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": "13"
+      },
+      "body": "Rm9yYmlkZGVuCg=="
+    },
+    {
+      "workspace": "",
+      "cookie": "",
+      "has_cookie": false,
+      "slugs": [
+        "bad"
+      ],
+      "status": 404,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZSBub3QgZm91bmQifQo="
+    },
+    {
+      "workspace": "",
+      "cookie": "bad",
+      "has_cookie": true,
+      "slugs": [
+        "bad"
+      ],
+      "status": 404,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZSBub3QgZm91bmQifQo="
+    },
+    {
+      "workspace": "",
+      "cookie": "",
+      "has_cookie": true,
+      "slugs": [
+        "bad"
+      ],
+      "status": 404,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZSBub3QgZm91bmQifQo="
+    },
+    {
+      "workspace": "",
+      "cookie": "bad",
+      "has_cookie": true,
+      "slugs": [
+        "bad"
+      ],
+      "status": 404,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZSBub3QgZm91bmQifQo="
+    },
+    {
+      "workspace": "",
+      "cookie": "bad",
+      "has_cookie": true,
+      "slugs": [
+        "bad"
+      ],
+      "status": 404,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZSBub3QgZm91bmQifQo="
+    },
+    {
+      "workspace": "",
+      "cookie": "",
+      "has_cookie": true,
+      "slugs": [
+        "bad"
+      ],
+      "status": 404,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZSBub3QgZm91bmQifQo="
+    },
+    {
+      "workspace": "",
+      "cookie": "",
+      "has_cookie": true,
+      "slugs": [
+        "bad"
+      ],
+      "status": 404,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZSBub3QgZm91bmQifQo="
+    },
+    {
+      "workspace": "",
+      "cookie": "bad",
+      "has_cookie": true,
+      "slugs": [
+        "bad"
+      ],
+      "status": 404,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZSBub3QgZm91bmQifQo="
+    },
+    {
+      "workspace": "",
+      "cookie": " value",
+      "has_cookie": true,
+      "slugs": [
+        "bad"
+      ],
+      "status": 404,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZSBub3QgZm91bmQifQo="
+    },
+    {
+      "workspace": "",
+      "cookie": "",
+      "has_cookie": false,
+      "slugs": [
+        "bad"
+      ],
+      "status": 404,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZSBub3QgZm91bmQifQo="
+    },
+    {
+      "workspace": "",
+      "cookie": "",
+      "has_cookie": false,
+      "slugs": [
+        "bad"
+      ],
+      "status": 404,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZSBub3QgZm91bmQifQo="
+    },
+    {
+      "workspace": "",
+      "cookie": "",
+      "has_cookie": true,
+      "slugs": [
+        "bad"
+      ],
+      "status": 404,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZSBub3QgZm91bmQifQo="
+    },
+    {
+      "workspace": "",
+      "cookie": "",
+      "has_cookie": false,
+      "slugs": [
+        "bad"
+      ],
+      "status": 404,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZSBub3QgZm91bmQifQo="
+    },
+    {
+      "workspace": "",
+      "cookie": "bad",
+      "has_cookie": true,
+      "slugs": [
+        "bad"
+      ],
+      "status": 404,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZSBub3QgZm91bmQifQo="
+    },
+    {
+      "workspace": "",
+      "cookie": "",
+      "has_cookie": true,
+      "slugs": [
+        "bad"
+      ],
+      "status": 404,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZSBub3QgZm91bmQifQo="
+    },
+    {
+      "workspace": "",
+      "cookie": "bad",
+      "has_cookie": true,
+      "slugs": [
+        "bad"
+      ],
+      "status": 404,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZSBub3QgZm91bmQifQo="
+    },
+    {
+      "workspace": "",
+      "cookie": "bad",
+      "has_cookie": true,
+      "slugs": [
+        "bad"
+      ],
+      "status": 404,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZSBub3QgZm91bmQifQo="
+    },
+    {
+      "workspace": "",
+      "cookie": "",
+      "has_cookie": true,
+      "slugs": [
+        "bad"
+      ],
+      "status": 404,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZSBub3QgZm91bmQifQo="
+    },
+    {
+      "workspace": "",
+      "cookie": "",
+      "has_cookie": true,
+      "slugs": [
+        "bad"
+      ],
+      "status": 404,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZSBub3QgZm91bmQifQo="
+    },
+    {
+      "workspace": "",
+      "cookie": "bad",
+      "has_cookie": true,
+      "slugs": [
+        "bad"
+      ],
+      "status": 404,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZSBub3QgZm91bmQifQo="
+    },
+    {
+      "workspace": "",
+      "cookie": " value",
+      "has_cookie": true,
+      "slugs": [
+        "bad"
+      ],
+      "status": 404,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZSBub3QgZm91bmQifQo="
+    },
+    {
+      "workspace": "",
+      "cookie": "",
+      "has_cookie": false,
+      "slugs": [
+        "bad"
+      ],
+      "status": 404,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZSBub3QgZm91bmQifQo="
+    },
+    {
+      "workspace": "",
+      "cookie": "",
+      "has_cookie": false,
+      "slugs": [
+        "bad"
+      ],
+      "status": 404,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZSBub3QgZm91bmQifQo="
+    },
+    {
+      "workspace": "",
+      "cookie": "",
+      "has_cookie": true,
+      "slugs": [
+        "bad"
+      ],
+      "status": 404,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6IndvcmtzcGFjZSBub3QgZm91bmQifQo="
+    },
+    {
+      "workspace": "",
+      "cookie": "",
+      "has_cookie": false,
+      "slugs": [
+        "good"
+      ],
+      "status": 403,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": "13"
+      },
+      "body": "Rm9yYmlkZGVuCg=="
+    },
+    {
+      "workspace": "",
+      "cookie": "bad",
+      "has_cookie": true,
+      "slugs": [
+        "good"
+      ],
+      "status": 401,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo="
+    },
+    {
+      "workspace": "",
+      "cookie": "",
+      "has_cookie": true,
+      "slugs": [
+        "good"
+      ],
+      "status": 403,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": "13"
+      },
+      "body": "Rm9yYmlkZGVuCg=="
+    },
+    {
+      "workspace": "",
+      "cookie": "bad",
+      "has_cookie": true,
+      "slugs": [
+        "good"
+      ],
+      "status": 401,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo="
+    },
+    {
+      "workspace": "",
+      "cookie": "bad",
+      "has_cookie": true,
+      "slugs": [
+        "good"
+      ],
+      "status": 401,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo="
+    },
+    {
+      "workspace": "",
+      "cookie": "",
+      "has_cookie": true,
+      "slugs": [
+        "good"
+      ],
+      "status": 403,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": "13"
+      },
+      "body": "Rm9yYmlkZGVuCg=="
+    },
+    {
+      "workspace": "",
+      "cookie": "",
+      "has_cookie": true,
+      "slugs": [
+        "good"
+      ],
+      "status": 403,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": "13"
+      },
+      "body": "Rm9yYmlkZGVuCg=="
+    },
+    {
+      "workspace": "",
+      "cookie": "bad",
+      "has_cookie": true,
+      "slugs": [
+        "good"
+      ],
+      "status": 401,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo="
+    },
+    {
+      "workspace": "",
+      "cookie": " value",
+      "has_cookie": true,
+      "slugs": [
+        "good"
+      ],
+      "status": 401,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo="
+    },
+    {
+      "workspace": "",
+      "cookie": "",
+      "has_cookie": false,
+      "slugs": [
+        "good"
+      ],
+      "status": 403,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": "13"
+      },
+      "body": "Rm9yYmlkZGVuCg=="
+    },
+    {
+      "workspace": "",
+      "cookie": "",
+      "has_cookie": false,
+      "slugs": [
+        "good"
+      ],
+      "status": 403,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": "13"
+      },
+      "body": "Rm9yYmlkZGVuCg=="
+    },
+    {
+      "workspace": "",
+      "cookie": "",
+      "has_cookie": true,
+      "slugs": [
+        "good"
+      ],
+      "status": 403,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": "13"
+      },
+      "body": "Rm9yYmlkZGVuCg=="
+    },
+    {
+      "workspace": "dw==",
+      "cookie": "",
+      "has_cookie": false,
+      "slugs": [],
+      "status": 403,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": "13"
+      },
+      "body": "Rm9yYmlkZGVuCg=="
+    },
+    {
+      "workspace": "dw==",
+      "cookie": "bad",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 401,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo="
+    },
+    {
+      "workspace": "dw==",
+      "cookie": "",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 403,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": "13"
+      },
+      "body": "Rm9yYmlkZGVuCg=="
+    },
+    {
+      "workspace": "dw==",
+      "cookie": "bad",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 401,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo="
+    },
+    {
+      "workspace": "dw==",
+      "cookie": "bad",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 401,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo="
+    },
+    {
+      "workspace": "dw==",
+      "cookie": "",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 403,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": "13"
+      },
+      "body": "Rm9yYmlkZGVuCg=="
+    },
+    {
+      "workspace": "dw==",
+      "cookie": "",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 403,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": "13"
+      },
+      "body": "Rm9yYmlkZGVuCg=="
+    },
+    {
+      "workspace": "dw==",
+      "cookie": "bad",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 401,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo="
+    },
+    {
+      "workspace": "dw==",
+      "cookie": " value",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 401,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo="
+    },
+    {
+      "workspace": "dw==",
+      "cookie": "",
+      "has_cookie": false,
+      "slugs": [],
+      "status": 403,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": "13"
+      },
+      "body": "Rm9yYmlkZGVuCg=="
+    },
+    {
+      "workspace": "dw==",
+      "cookie": "",
+      "has_cookie": false,
+      "slugs": [],
+      "status": 403,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": "13"
+      },
+      "body": "Rm9yYmlkZGVuCg=="
+    },
+    {
+      "workspace": "dw==",
+      "cookie": "",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 403,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": "13"
+      },
+      "body": "Rm9yYmlkZGVuCg=="
+    },
+    {
+      "workspace": "dw==",
+      "cookie": "bad",
+      "has_cookie": true,
+      "slugs": [],
+      "status": 401,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": ""
+      },
+      "body": "eyJlcnJvciI6ImludmFsaWQgdG9rZW4ifQo="
+    },
+    {
+      "workspace": "dw==",
+      "cookie": "",
+      "has_cookie": false,
+      "slugs": [],
+      "status": 403,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": "13"
+      },
+      "body": "Rm9yYmlkZGVuCg=="
+    },
+    {
+      "workspace": "dw==",
+      "cookie": "",
+      "has_cookie": false,
+      "slugs": [],
+      "status": 403,
+      "headers": {
+        "Content-Type": "text/plain; charset=utf-8",
+        "X-Content-Type-Options": "nosniff",
+        "Sec-WebSocket-Version": "13"
+      },
+      "body": "Rm9yYmlkZGVuCg=="
+    }
+  ],
+  "mismatches": [],
+  "source_sha256": {
+    "server/go/internal/realtime/hub.go": "33970bffe2c3d5c423dbdb57d6793d422a1ba8f0a3ae7f657faf51295fd9e57a",
+    "server/tests/parity/go_ws_request/main.go": "231cf46e9557770ddf8d63ad7addccfe3c21c5b64d1e1d4d73f63957c10ac5cc",
+    "server/tests/parity/go_ws_request/wrapper.go": "0b7f0411092d0ab3d5e5fdf1fde8096f5fcc988f015a6391328908c65cd47287",
+    "server/src/workpal_backend/realtime/request_values.py": "a592effec693935e06fdd8576ab497bce497c96677e542536da95dd6ab570932",
+    "server/src/workpal_backend/realtime/routes.py": "cbf60f4b8ffd33bd2c2bf918ffa84dbafb73759f60f6a5d9a128412d6d775b2e",
+    "server/src/workpal_backend/realtime/origins.py": "69642801eea41a7571a958b5ef01bebd51047b5408185317256c83b5ad61ad7b",
+    "server/src/workpal_backend/auth/errors.py": "e8ec8148c05964f0940d98c4d7f1e1e4462dde5dbd9eaf21d8318bfda7e1f4d3",
+    "server/tools/run_ws_request_parity.py": "99953d20d6d11193f1a0f03f6b1e5895edc2746a36459e44df31910297073992"
+  }
+}

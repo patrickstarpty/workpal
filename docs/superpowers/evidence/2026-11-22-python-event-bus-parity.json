@@ -1,0 +1,131 @@
+{
+  "scope": "Actual Go event bus callback order, registration counts, shallow event copy, shared payload, reentrant calls and failure isolation. Cross-thread scheduling and Redis/listener topology not certified.",
+  "fixtures": [
+    "copy",
+    "subscriptions",
+    "reentrant",
+    "nil-and-global-failure",
+    "empty"
+  ],
+  "go": [
+    {
+      "counts": [],
+      "original": {
+        "payload": {
+          "value": "new"
+        },
+        "type": "agent:status",
+        "workspaceID": "workspace"
+      },
+      "trace": [
+        "agent:status/workspace/new"
+      ]
+    },
+    {
+      "counts": [
+        1,
+        0,
+        2,
+        3
+      ],
+      "original": {},
+      "trace": [
+        "first",
+        "global",
+        "second-publish",
+        "first",
+        "late",
+        "global",
+        "late-global"
+      ]
+    },
+    {
+      "counts": [],
+      "original": {},
+      "trace": [
+        "outer",
+        "nested",
+        "global:nested",
+        "global:x"
+      ]
+    },
+    {
+      "counts": [],
+      "original": {},
+      "trace": [
+        "survived"
+      ]
+    },
+    {
+      "counts": [],
+      "original": {},
+      "trace": [
+        "global:"
+      ]
+    }
+  ],
+  "python": [
+    {
+      "trace": [
+        "agent:status/workspace/new"
+      ],
+      "counts": [],
+      "original": {
+        "type": "agent:status",
+        "workspaceID": "workspace",
+        "payload": {
+          "value": "new"
+        }
+      }
+    },
+    {
+      "trace": [
+        "first",
+        "global",
+        "second-publish",
+        "first",
+        "late",
+        "global",
+        "late-global"
+      ],
+      "counts": [
+        1,
+        0,
+        2,
+        3
+      ],
+      "original": {}
+    },
+    {
+      "trace": [
+        "outer",
+        "nested",
+        "global:nested",
+        "global:x"
+      ],
+      "counts": [],
+      "original": {}
+    },
+    {
+      "trace": [
+        "survived"
+      ],
+      "counts": [],
+      "original": {}
+    },
+    {
+      "trace": [
+        "global:"
+      ],
+      "counts": [],
+      "original": {}
+    }
+  ],
+  "mismatches": [],
+  "source_sha256": {
+    "server/go/internal/events/bus.go": "1b8d22dcd86a8359767e23302c8874806e5b5b668f5c15914aa9659015ae7b57",
+    "server/tests/parity/go_event_bus/main.go": "693acceddac55f07390fd2ed037e0d1fd6809a3a87aa2e0cab99963a1aefa384",
+    "server/src/workpal_backend/infrastructure/events.py": "d5fa328402fa8b2ee3db01b2bad331d159ce7ab4a4b57d07ac135ffb59e1c0b8"
+  },
+  "binary_sha256": "4cda167dcfa381d7396827ac79b1fa065364637fdc8a219ff78ac0bb3ad7cbdc"
+}

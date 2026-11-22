@@ -1,0 +1,3120 @@
+{
+  "scope": "Actual Go retention config normalization and claim/release/forget/stale transitions. No Redis I/O, maintenance scheduling, or publisher lifecycle certified.",
+  "fixtures": [
+    {
+      "Config": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "Enabled": false,
+      "Steps": [
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 100
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 100
+        },
+        {
+          "Op": "claim",
+          "Key": "b",
+          "At": 100
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 99
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 30000000099
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 30000000100
+        },
+        {
+          "Op": "release",
+          "Key": "a",
+          "At": 100
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 30000000100
+        },
+        {
+          "Op": "stale",
+          "Key": "",
+          "At": 30000000100
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 30000000100
+        },
+        {
+          "Op": "claim",
+          "Key": "b",
+          "At": 30000000100
+        },
+        {
+          "Op": "release",
+          "Key": "a",
+          "At": 30000000100
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 30000000100
+        },
+        {
+          "Op": "forget",
+          "Key": "a",
+          "At": 0
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 0
+        }
+      ]
+    },
+    {
+      "Config": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "Enabled": true,
+      "Steps": [
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 100
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 100
+        },
+        {
+          "Op": "claim",
+          "Key": "b",
+          "At": 100
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 99
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 30000000099
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 30000000100
+        },
+        {
+          "Op": "release",
+          "Key": "a",
+          "At": 100
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 30000000100
+        },
+        {
+          "Op": "stale",
+          "Key": "",
+          "At": 30000000100
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 30000000100
+        },
+        {
+          "Op": "claim",
+          "Key": "b",
+          "At": 30000000100
+        },
+        {
+          "Op": "release",
+          "Key": "a",
+          "At": 30000000100
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 30000000100
+        },
+        {
+          "Op": "forget",
+          "Key": "a",
+          "At": 0
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 0
+        }
+      ]
+    },
+    {
+      "Config": [
+        -1,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "Enabled": false,
+      "Steps": [
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 100
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 100
+        },
+        {
+          "Op": "claim",
+          "Key": "b",
+          "At": 100
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 99
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 30000000099
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 30000000100
+        },
+        {
+          "Op": "release",
+          "Key": "a",
+          "At": 100
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 30000000100
+        },
+        {
+          "Op": "stale",
+          "Key": "",
+          "At": 30000000100
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 30000000100
+        },
+        {
+          "Op": "claim",
+          "Key": "b",
+          "At": 30000000100
+        },
+        {
+          "Op": "release",
+          "Key": "a",
+          "At": 30000000100
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 30000000100
+        },
+        {
+          "Op": "forget",
+          "Key": "a",
+          "At": 0
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 0
+        }
+      ]
+    },
+    {
+      "Config": [
+        -1,
+        -1,
+        -1,
+        -1,
+        -1
+      ],
+      "Enabled": true,
+      "Steps": [
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 100
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 100
+        },
+        {
+          "Op": "claim",
+          "Key": "b",
+          "At": 100
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 99
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 30000000099
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 30000000100
+        },
+        {
+          "Op": "release",
+          "Key": "a",
+          "At": 100
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 30000000100
+        },
+        {
+          "Op": "stale",
+          "Key": "",
+          "At": 30000000100
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 30000000100
+        },
+        {
+          "Op": "claim",
+          "Key": "b",
+          "At": 30000000100
+        },
+        {
+          "Op": "release",
+          "Key": "a",
+          "At": 30000000100
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 30000000100
+        },
+        {
+          "Op": "forget",
+          "Key": "a",
+          "At": 0
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 0
+        }
+      ]
+    },
+    {
+      "Config": [
+        7,
+        3,
+        3,
+        3,
+        3
+      ],
+      "Enabled": false,
+      "Steps": [
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 100
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 100
+        },
+        {
+          "Op": "claim",
+          "Key": "b",
+          "At": 100
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 99
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 100
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 101
+        },
+        {
+          "Op": "release",
+          "Key": "a",
+          "At": 100
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 101
+        },
+        {
+          "Op": "stale",
+          "Key": "",
+          "At": 101
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 101
+        },
+        {
+          "Op": "claim",
+          "Key": "b",
+          "At": 101
+        },
+        {
+          "Op": "release",
+          "Key": "a",
+          "At": 101
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 101
+        },
+        {
+          "Op": "forget",
+          "Key": "a",
+          "At": 0
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 0
+        }
+      ]
+    },
+    {
+      "Config": [
+        7,
+        3,
+        3,
+        3,
+        3
+      ],
+      "Enabled": true,
+      "Steps": [
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 100
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 100
+        },
+        {
+          "Op": "claim",
+          "Key": "b",
+          "At": 100
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 99
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 100
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 101
+        },
+        {
+          "Op": "release",
+          "Key": "a",
+          "At": 100
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 101
+        },
+        {
+          "Op": "stale",
+          "Key": "",
+          "At": 101
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 101
+        },
+        {
+          "Op": "claim",
+          "Key": "b",
+          "At": 101
+        },
+        {
+          "Op": "release",
+          "Key": "a",
+          "At": 101
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 101
+        },
+        {
+          "Op": "forget",
+          "Key": "a",
+          "At": 0
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 0
+        }
+      ]
+    },
+    {
+      "Config": [
+        7,
+        1,
+        1,
+        0,
+        0
+      ],
+      "Enabled": false,
+      "Steps": [
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 100
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 100
+        },
+        {
+          "Op": "claim",
+          "Key": "b",
+          "At": 100
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 99
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 100
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 101
+        },
+        {
+          "Op": "release",
+          "Key": "a",
+          "At": 100
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 101
+        },
+        {
+          "Op": "stale",
+          "Key": "",
+          "At": 101
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 101
+        },
+        {
+          "Op": "claim",
+          "Key": "b",
+          "At": 101
+        },
+        {
+          "Op": "release",
+          "Key": "a",
+          "At": 101
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 101
+        },
+        {
+          "Op": "forget",
+          "Key": "a",
+          "At": 0
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 0
+        }
+      ]
+    },
+    {
+      "Config": [
+        7,
+        1,
+        1,
+        0,
+        0
+      ],
+      "Enabled": true,
+      "Steps": [
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 100
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 100
+        },
+        {
+          "Op": "claim",
+          "Key": "b",
+          "At": 100
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 99
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 100
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 101
+        },
+        {
+          "Op": "release",
+          "Key": "a",
+          "At": 100
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 101
+        },
+        {
+          "Op": "stale",
+          "Key": "",
+          "At": 101
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 101
+        },
+        {
+          "Op": "claim",
+          "Key": "b",
+          "At": 101
+        },
+        {
+          "Op": "release",
+          "Key": "a",
+          "At": 101
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 101
+        },
+        {
+          "Op": "forget",
+          "Key": "a",
+          "At": 0
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 0
+        }
+      ]
+    },
+    {
+      "Config": [
+        7,
+        2,
+        2,
+        0,
+        0
+      ],
+      "Enabled": false,
+      "Steps": [
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 100
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 100
+        },
+        {
+          "Op": "claim",
+          "Key": "b",
+          "At": 100
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 99
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 100
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 101
+        },
+        {
+          "Op": "release",
+          "Key": "a",
+          "At": 100
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 101
+        },
+        {
+          "Op": "stale",
+          "Key": "",
+          "At": 101
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 101
+        },
+        {
+          "Op": "claim",
+          "Key": "b",
+          "At": 101
+        },
+        {
+          "Op": "release",
+          "Key": "a",
+          "At": 101
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 101
+        },
+        {
+          "Op": "forget",
+          "Key": "a",
+          "At": 0
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 0
+        }
+      ]
+    },
+    {
+      "Config": [
+        7,
+        2,
+        2,
+        0,
+        0
+      ],
+      "Enabled": true,
+      "Steps": [
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 100
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 100
+        },
+        {
+          "Op": "claim",
+          "Key": "b",
+          "At": 100
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 99
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 100
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 101
+        },
+        {
+          "Op": "release",
+          "Key": "a",
+          "At": 100
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 101
+        },
+        {
+          "Op": "stale",
+          "Key": "",
+          "At": 101
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 101
+        },
+        {
+          "Op": "claim",
+          "Key": "b",
+          "At": 101
+        },
+        {
+          "Op": "release",
+          "Key": "a",
+          "At": 101
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 101
+        },
+        {
+          "Op": "forget",
+          "Key": "a",
+          "At": 0
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 0
+        }
+      ]
+    },
+    {
+      "Config": [
+        200,
+        100,
+        99,
+        20,
+        30
+      ],
+      "Enabled": false,
+      "Steps": [
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 100
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 100
+        },
+        {
+          "Op": "claim",
+          "Key": "b",
+          "At": 100
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 99
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 119
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 120
+        },
+        {
+          "Op": "release",
+          "Key": "a",
+          "At": 100
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 120
+        },
+        {
+          "Op": "stale",
+          "Key": "",
+          "At": 120
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 120
+        },
+        {
+          "Op": "claim",
+          "Key": "b",
+          "At": 120
+        },
+        {
+          "Op": "release",
+          "Key": "a",
+          "At": 120
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 120
+        },
+        {
+          "Op": "forget",
+          "Key": "a",
+          "At": 0
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 0
+        }
+      ]
+    },
+    {
+      "Config": [
+        200,
+        100,
+        99,
+        20,
+        30
+      ],
+      "Enabled": true,
+      "Steps": [
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 100
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 100
+        },
+        {
+          "Op": "claim",
+          "Key": "b",
+          "At": 100
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 99
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 119
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 120
+        },
+        {
+          "Op": "release",
+          "Key": "a",
+          "At": 100
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 120
+        },
+        {
+          "Op": "stale",
+          "Key": "",
+          "At": 120
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 120
+        },
+        {
+          "Op": "claim",
+          "Key": "b",
+          "At": 120
+        },
+        {
+          "Op": "release",
+          "Key": "a",
+          "At": 120
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 120
+        },
+        {
+          "Op": "forget",
+          "Key": "a",
+          "At": 0
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 0
+        }
+      ]
+    },
+    {
+      "Config": [
+        200,
+        100,
+        100,
+        99,
+        100
+      ],
+      "Enabled": false,
+      "Steps": [
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 100
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 100
+        },
+        {
+          "Op": "claim",
+          "Key": "b",
+          "At": 100
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 99
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 198
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 199
+        },
+        {
+          "Op": "release",
+          "Key": "a",
+          "At": 100
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 199
+        },
+        {
+          "Op": "stale",
+          "Key": "",
+          "At": 199
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 199
+        },
+        {
+          "Op": "claim",
+          "Key": "b",
+          "At": 199
+        },
+        {
+          "Op": "release",
+          "Key": "a",
+          "At": 199
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 199
+        },
+        {
+          "Op": "forget",
+          "Key": "a",
+          "At": 0
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 0
+        }
+      ]
+    },
+    {
+      "Config": [
+        200,
+        100,
+        100,
+        99,
+        100
+      ],
+      "Enabled": true,
+      "Steps": [
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 100
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 100
+        },
+        {
+          "Op": "claim",
+          "Key": "b",
+          "At": 100
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 99
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 198
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 199
+        },
+        {
+          "Op": "release",
+          "Key": "a",
+          "At": 100
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 199
+        },
+        {
+          "Op": "stale",
+          "Key": "",
+          "At": 199
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 199
+        },
+        {
+          "Op": "claim",
+          "Key": "b",
+          "At": 199
+        },
+        {
+          "Op": "release",
+          "Key": "a",
+          "At": 199
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 199
+        },
+        {
+          "Op": "forget",
+          "Key": "a",
+          "At": 0
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 0
+        }
+      ]
+    },
+    {
+      "Config": [
+        1,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000
+      ],
+      "Enabled": false,
+      "Steps": [
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 100
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 100
+        },
+        {
+          "Op": "claim",
+          "Key": "b",
+          "At": 100
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 99
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 30000000099
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 30000000100
+        },
+        {
+          "Op": "release",
+          "Key": "a",
+          "At": 100
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 30000000100
+        },
+        {
+          "Op": "stale",
+          "Key": "",
+          "At": 30000000100
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 30000000100
+        },
+        {
+          "Op": "claim",
+          "Key": "b",
+          "At": 30000000100
+        },
+        {
+          "Op": "release",
+          "Key": "a",
+          "At": 30000000100
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 30000000100
+        },
+        {
+          "Op": "forget",
+          "Key": "a",
+          "At": 0
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 0
+        }
+      ]
+    },
+    {
+      "Config": [
+        1,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000
+      ],
+      "Enabled": true,
+      "Steps": [
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 100
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 100
+        },
+        {
+          "Op": "claim",
+          "Key": "b",
+          "At": 100
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 99
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 30000000099
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 30000000100
+        },
+        {
+          "Op": "release",
+          "Key": "a",
+          "At": 100
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 30000000100
+        },
+        {
+          "Op": "stale",
+          "Key": "",
+          "At": 30000000100
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 30000000100
+        },
+        {
+          "Op": "claim",
+          "Key": "b",
+          "At": 30000000100
+        },
+        {
+          "Op": "release",
+          "Key": "a",
+          "At": 30000000100
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 30000000100
+        },
+        {
+          "Op": "forget",
+          "Key": "a",
+          "At": 0
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 0
+        }
+      ]
+    },
+    {
+      "Config": [
+        1,
+        600000000000,
+        900000000000,
+        900000000000,
+        900000000001
+      ],
+      "Enabled": false,
+      "Steps": [
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 100
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 100
+        },
+        {
+          "Op": "claim",
+          "Key": "b",
+          "At": 100
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 99
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 30000000099
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 30000000100
+        },
+        {
+          "Op": "release",
+          "Key": "a",
+          "At": 100
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 30000000100
+        },
+        {
+          "Op": "stale",
+          "Key": "",
+          "At": 30000000100
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 30000000100
+        },
+        {
+          "Op": "claim",
+          "Key": "b",
+          "At": 30000000100
+        },
+        {
+          "Op": "release",
+          "Key": "a",
+          "At": 30000000100
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 30000000100
+        },
+        {
+          "Op": "forget",
+          "Key": "a",
+          "At": 0
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 0
+        }
+      ]
+    },
+    {
+      "Config": [
+        1,
+        600000000000,
+        900000000000,
+        900000000000,
+        900000000001
+      ],
+      "Enabled": true,
+      "Steps": [
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 100
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 100
+        },
+        {
+          "Op": "claim",
+          "Key": "b",
+          "At": 100
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 99
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 30000000099
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 30000000100
+        },
+        {
+          "Op": "release",
+          "Key": "a",
+          "At": 100
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 30000000100
+        },
+        {
+          "Op": "stale",
+          "Key": "",
+          "At": 30000000100
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 30000000100
+        },
+        {
+          "Op": "claim",
+          "Key": "b",
+          "At": 30000000100
+        },
+        {
+          "Op": "release",
+          "Key": "a",
+          "At": 30000000100
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 30000000100
+        },
+        {
+          "Op": "forget",
+          "Key": "a",
+          "At": 0
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 0
+        }
+      ]
+    },
+    {
+      "Config": [
+        1,
+        9223372036854775807,
+        0,
+        0,
+        0
+      ],
+      "Enabled": false,
+      "Steps": [
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 100
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 100
+        },
+        {
+          "Op": "claim",
+          "Key": "b",
+          "At": 100
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 99
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 100
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 101
+        },
+        {
+          "Op": "release",
+          "Key": "a",
+          "At": 100
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 101
+        },
+        {
+          "Op": "stale",
+          "Key": "",
+          "At": 101
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 101
+        },
+        {
+          "Op": "claim",
+          "Key": "b",
+          "At": 101
+        },
+        {
+          "Op": "release",
+          "Key": "a",
+          "At": 101
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 101
+        },
+        {
+          "Op": "forget",
+          "Key": "a",
+          "At": 0
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 0
+        }
+      ]
+    },
+    {
+      "Config": [
+        1,
+        9223372036854775807,
+        0,
+        0,
+        0
+      ],
+      "Enabled": true,
+      "Steps": [
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 100
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 100
+        },
+        {
+          "Op": "claim",
+          "Key": "b",
+          "At": 100
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 99
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 100
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 101
+        },
+        {
+          "Op": "release",
+          "Key": "a",
+          "At": 100
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 101
+        },
+        {
+          "Op": "stale",
+          "Key": "",
+          "At": 101
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 101
+        },
+        {
+          "Op": "claim",
+          "Key": "b",
+          "At": 101
+        },
+        {
+          "Op": "release",
+          "Key": "a",
+          "At": 101
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 101
+        },
+        {
+          "Op": "forget",
+          "Key": "a",
+          "At": 0
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 0
+        }
+      ]
+    },
+    {
+      "Config": [
+        1,
+        9223371736854775808,
+        0,
+        0,
+        0
+      ],
+      "Enabled": false,
+      "Steps": [
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 100
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 100
+        },
+        {
+          "Op": "claim",
+          "Key": "b",
+          "At": 100
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 99
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 100
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 101
+        },
+        {
+          "Op": "release",
+          "Key": "a",
+          "At": 100
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 101
+        },
+        {
+          "Op": "stale",
+          "Key": "",
+          "At": 101
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 101
+        },
+        {
+          "Op": "claim",
+          "Key": "b",
+          "At": 101
+        },
+        {
+          "Op": "release",
+          "Key": "a",
+          "At": 101
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 101
+        },
+        {
+          "Op": "forget",
+          "Key": "a",
+          "At": 0
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 0
+        }
+      ]
+    },
+    {
+      "Config": [
+        1,
+        9223371736854775808,
+        0,
+        0,
+        0
+      ],
+      "Enabled": true,
+      "Steps": [
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 100
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 100
+        },
+        {
+          "Op": "claim",
+          "Key": "b",
+          "At": 100
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 99
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 100
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 101
+        },
+        {
+          "Op": "release",
+          "Key": "a",
+          "At": 100
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 101
+        },
+        {
+          "Op": "stale",
+          "Key": "",
+          "At": 101
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 101
+        },
+        {
+          "Op": "claim",
+          "Key": "b",
+          "At": 101
+        },
+        {
+          "Op": "release",
+          "Key": "a",
+          "At": 101
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 101
+        },
+        {
+          "Op": "forget",
+          "Key": "a",
+          "At": 0
+        },
+        {
+          "Op": "claim",
+          "Key": "a",
+          "At": 0
+        }
+      ]
+    }
+  ],
+  "go": [
+    {
+      "config": [
+        2000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000
+      ],
+      "enabled": false,
+      "results": [
+        true,
+        false,
+        true,
+        false,
+        false,
+        true,
+        null,
+        false,
+        null,
+        false,
+        true,
+        null,
+        true,
+        null,
+        true
+      ]
+    },
+    {
+      "config": [
+        2000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000
+      ],
+      "enabled": true,
+      "results": [
+        true,
+        false,
+        true,
+        false,
+        false,
+        true,
+        null,
+        false,
+        null,
+        false,
+        true,
+        null,
+        true,
+        null,
+        true
+      ]
+    },
+    {
+      "config": [
+        2000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000
+      ],
+      "enabled": false,
+      "results": [
+        true,
+        false,
+        true,
+        false,
+        false,
+        true,
+        null,
+        false,
+        null,
+        false,
+        true,
+        null,
+        true,
+        null,
+        true
+      ]
+    },
+    {
+      "config": [
+        2000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000
+      ],
+      "enabled": true,
+      "results": [
+        true,
+        false,
+        true,
+        false,
+        false,
+        true,
+        null,
+        false,
+        null,
+        false,
+        true,
+        null,
+        true,
+        null,
+        true
+      ]
+    },
+    {
+      "config": [
+        7,
+        3,
+        3,
+        1,
+        1
+      ],
+      "enabled": false,
+      "results": [
+        true,
+        false,
+        true,
+        false,
+        false,
+        true,
+        null,
+        false,
+        null,
+        false,
+        true,
+        null,
+        true,
+        null,
+        true
+      ]
+    },
+    {
+      "config": [
+        7,
+        3,
+        3,
+        1,
+        1
+      ],
+      "enabled": true,
+      "results": [
+        true,
+        false,
+        true,
+        false,
+        false,
+        true,
+        null,
+        false,
+        null,
+        false,
+        true,
+        null,
+        true,
+        null,
+        true
+      ]
+    },
+    {
+      "config": [
+        7,
+        1,
+        1,
+        1,
+        1
+      ],
+      "enabled": false,
+      "results": [
+        true,
+        false,
+        true,
+        false,
+        false,
+        true,
+        null,
+        false,
+        null,
+        false,
+        true,
+        null,
+        true,
+        null,
+        true
+      ]
+    },
+    {
+      "config": [
+        7,
+        1,
+        1,
+        1,
+        1
+      ],
+      "enabled": true,
+      "results": [
+        true,
+        false,
+        true,
+        false,
+        false,
+        true,
+        null,
+        false,
+        null,
+        false,
+        true,
+        null,
+        true,
+        null,
+        true
+      ]
+    },
+    {
+      "config": [
+        7,
+        2,
+        2,
+        1,
+        1
+      ],
+      "enabled": false,
+      "results": [
+        true,
+        false,
+        true,
+        false,
+        false,
+        true,
+        null,
+        false,
+        null,
+        false,
+        true,
+        null,
+        true,
+        null,
+        true
+      ]
+    },
+    {
+      "config": [
+        7,
+        2,
+        2,
+        1,
+        1
+      ],
+      "enabled": true,
+      "results": [
+        true,
+        false,
+        true,
+        false,
+        false,
+        true,
+        null,
+        false,
+        null,
+        false,
+        true,
+        null,
+        true,
+        null,
+        true
+      ]
+    },
+    {
+      "config": [
+        200,
+        100,
+        300000000100,
+        20,
+        30
+      ],
+      "enabled": false,
+      "results": [
+        true,
+        false,
+        true,
+        false,
+        false,
+        true,
+        null,
+        false,
+        null,
+        false,
+        true,
+        null,
+        true,
+        null,
+        true
+      ]
+    },
+    {
+      "config": [
+        200,
+        100,
+        300000000100,
+        20,
+        30
+      ],
+      "enabled": true,
+      "results": [
+        true,
+        false,
+        true,
+        false,
+        false,
+        true,
+        null,
+        false,
+        null,
+        false,
+        true,
+        null,
+        true,
+        null,
+        true
+      ]
+    },
+    {
+      "config": [
+        200,
+        100,
+        100,
+        99,
+        33
+      ],
+      "enabled": false,
+      "results": [
+        true,
+        false,
+        true,
+        false,
+        false,
+        true,
+        null,
+        false,
+        null,
+        false,
+        true,
+        null,
+        true,
+        null,
+        true
+      ]
+    },
+    {
+      "config": [
+        200,
+        100,
+        100,
+        99,
+        33
+      ],
+      "enabled": true,
+      "results": [
+        true,
+        false,
+        true,
+        false,
+        false,
+        true,
+        null,
+        false,
+        null,
+        false,
+        true,
+        null,
+        true,
+        null,
+        true
+      ]
+    },
+    {
+      "config": [
+        1,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000
+      ],
+      "enabled": false,
+      "results": [
+        true,
+        false,
+        true,
+        false,
+        false,
+        true,
+        null,
+        false,
+        null,
+        false,
+        true,
+        null,
+        true,
+        null,
+        true
+      ]
+    },
+    {
+      "config": [
+        1,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000
+      ],
+      "enabled": true,
+      "results": [
+        true,
+        false,
+        true,
+        false,
+        false,
+        true,
+        null,
+        false,
+        null,
+        false,
+        true,
+        null,
+        true,
+        null,
+        true
+      ]
+    },
+    {
+      "config": [
+        1,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000
+      ],
+      "enabled": false,
+      "results": [
+        true,
+        false,
+        true,
+        false,
+        false,
+        true,
+        null,
+        false,
+        null,
+        false,
+        true,
+        null,
+        true,
+        null,
+        true
+      ]
+    },
+    {
+      "config": [
+        1,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000
+      ],
+      "enabled": true,
+      "results": [
+        true,
+        false,
+        true,
+        false,
+        false,
+        true,
+        null,
+        false,
+        null,
+        false,
+        true,
+        null,
+        true,
+        null,
+        true
+      ]
+    },
+    {
+      "config": [
+        1,
+        9223372036854775807,
+        -9223371736854775809,
+        1,
+        1
+      ],
+      "enabled": false,
+      "results": [
+        true,
+        false,
+        true,
+        false,
+        false,
+        true,
+        null,
+        false,
+        null,
+        false,
+        true,
+        null,
+        true,
+        null,
+        true
+      ]
+    },
+    {
+      "config": [
+        1,
+        9223372036854775807,
+        -9223371736854775809,
+        1,
+        1
+      ],
+      "enabled": true,
+      "results": [
+        true,
+        false,
+        true,
+        false,
+        false,
+        true,
+        null,
+        false,
+        null,
+        false,
+        true,
+        null,
+        true,
+        null,
+        true
+      ]
+    },
+    {
+      "config": [
+        1,
+        9223371736854775808,
+        -9223372036854775808,
+        1,
+        1
+      ],
+      "enabled": false,
+      "results": [
+        true,
+        false,
+        true,
+        false,
+        false,
+        true,
+        null,
+        false,
+        null,
+        false,
+        true,
+        null,
+        true,
+        null,
+        true
+      ]
+    },
+    {
+      "config": [
+        1,
+        9223371736854775808,
+        -9223372036854775808,
+        1,
+        1
+      ],
+      "enabled": true,
+      "results": [
+        true,
+        false,
+        true,
+        false,
+        false,
+        true,
+        null,
+        false,
+        null,
+        false,
+        true,
+        null,
+        true,
+        null,
+        true
+      ]
+    }
+  ],
+  "python": [
+    {
+      "config": [
+        2000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000
+      ],
+      "enabled": false,
+      "results": [
+        true,
+        false,
+        true,
+        false,
+        false,
+        true,
+        null,
+        false,
+        null,
+        false,
+        true,
+        null,
+        true,
+        null,
+        true
+      ]
+    },
+    {
+      "config": [
+        2000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000
+      ],
+      "enabled": true,
+      "results": [
+        true,
+        false,
+        true,
+        false,
+        false,
+        true,
+        null,
+        false,
+        null,
+        false,
+        true,
+        null,
+        true,
+        null,
+        true
+      ]
+    },
+    {
+      "config": [
+        2000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000
+      ],
+      "enabled": false,
+      "results": [
+        true,
+        false,
+        true,
+        false,
+        false,
+        true,
+        null,
+        false,
+        null,
+        false,
+        true,
+        null,
+        true,
+        null,
+        true
+      ]
+    },
+    {
+      "config": [
+        2000,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000
+      ],
+      "enabled": true,
+      "results": [
+        true,
+        false,
+        true,
+        false,
+        false,
+        true,
+        null,
+        false,
+        null,
+        false,
+        true,
+        null,
+        true,
+        null,
+        true
+      ]
+    },
+    {
+      "config": [
+        7,
+        3,
+        3,
+        1,
+        1
+      ],
+      "enabled": false,
+      "results": [
+        true,
+        false,
+        true,
+        false,
+        false,
+        true,
+        null,
+        false,
+        null,
+        false,
+        true,
+        null,
+        true,
+        null,
+        true
+      ]
+    },
+    {
+      "config": [
+        7,
+        3,
+        3,
+        1,
+        1
+      ],
+      "enabled": true,
+      "results": [
+        true,
+        false,
+        true,
+        false,
+        false,
+        true,
+        null,
+        false,
+        null,
+        false,
+        true,
+        null,
+        true,
+        null,
+        true
+      ]
+    },
+    {
+      "config": [
+        7,
+        1,
+        1,
+        1,
+        1
+      ],
+      "enabled": false,
+      "results": [
+        true,
+        false,
+        true,
+        false,
+        false,
+        true,
+        null,
+        false,
+        null,
+        false,
+        true,
+        null,
+        true,
+        null,
+        true
+      ]
+    },
+    {
+      "config": [
+        7,
+        1,
+        1,
+        1,
+        1
+      ],
+      "enabled": true,
+      "results": [
+        true,
+        false,
+        true,
+        false,
+        false,
+        true,
+        null,
+        false,
+        null,
+        false,
+        true,
+        null,
+        true,
+        null,
+        true
+      ]
+    },
+    {
+      "config": [
+        7,
+        2,
+        2,
+        1,
+        1
+      ],
+      "enabled": false,
+      "results": [
+        true,
+        false,
+        true,
+        false,
+        false,
+        true,
+        null,
+        false,
+        null,
+        false,
+        true,
+        null,
+        true,
+        null,
+        true
+      ]
+    },
+    {
+      "config": [
+        7,
+        2,
+        2,
+        1,
+        1
+      ],
+      "enabled": true,
+      "results": [
+        true,
+        false,
+        true,
+        false,
+        false,
+        true,
+        null,
+        false,
+        null,
+        false,
+        true,
+        null,
+        true,
+        null,
+        true
+      ]
+    },
+    {
+      "config": [
+        200,
+        100,
+        300000000100,
+        20,
+        30
+      ],
+      "enabled": false,
+      "results": [
+        true,
+        false,
+        true,
+        false,
+        false,
+        true,
+        null,
+        false,
+        null,
+        false,
+        true,
+        null,
+        true,
+        null,
+        true
+      ]
+    },
+    {
+      "config": [
+        200,
+        100,
+        300000000100,
+        20,
+        30
+      ],
+      "enabled": true,
+      "results": [
+        true,
+        false,
+        true,
+        false,
+        false,
+        true,
+        null,
+        false,
+        null,
+        false,
+        true,
+        null,
+        true,
+        null,
+        true
+      ]
+    },
+    {
+      "config": [
+        200,
+        100,
+        100,
+        99,
+        33
+      ],
+      "enabled": false,
+      "results": [
+        true,
+        false,
+        true,
+        false,
+        false,
+        true,
+        null,
+        false,
+        null,
+        false,
+        true,
+        null,
+        true,
+        null,
+        true
+      ]
+    },
+    {
+      "config": [
+        200,
+        100,
+        100,
+        99,
+        33
+      ],
+      "enabled": true,
+      "results": [
+        true,
+        false,
+        true,
+        false,
+        false,
+        true,
+        null,
+        false,
+        null,
+        false,
+        true,
+        null,
+        true,
+        null,
+        true
+      ]
+    },
+    {
+      "config": [
+        1,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000
+      ],
+      "enabled": false,
+      "results": [
+        true,
+        false,
+        true,
+        false,
+        false,
+        true,
+        null,
+        false,
+        null,
+        false,
+        true,
+        null,
+        true,
+        null,
+        true
+      ]
+    },
+    {
+      "config": [
+        1,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000
+      ],
+      "enabled": true,
+      "results": [
+        true,
+        false,
+        true,
+        false,
+        false,
+        true,
+        null,
+        false,
+        null,
+        false,
+        true,
+        null,
+        true,
+        null,
+        true
+      ]
+    },
+    {
+      "config": [
+        1,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000
+      ],
+      "enabled": false,
+      "results": [
+        true,
+        false,
+        true,
+        false,
+        false,
+        true,
+        null,
+        false,
+        null,
+        false,
+        true,
+        null,
+        true,
+        null,
+        true
+      ]
+    },
+    {
+      "config": [
+        1,
+        600000000000,
+        900000000000,
+        30000000000,
+        60000000000
+      ],
+      "enabled": true,
+      "results": [
+        true,
+        false,
+        true,
+        false,
+        false,
+        true,
+        null,
+        false,
+        null,
+        false,
+        true,
+        null,
+        true,
+        null,
+        true
+      ]
+    },
+    {
+      "config": [
+        1,
+        9223372036854775807,
+        -9223371736854775809,
+        1,
+        1
+      ],
+      "enabled": false,
+      "results": [
+        true,
+        false,
+        true,
+        false,
+        false,
+        true,
+        null,
+        false,
+        null,
+        false,
+        true,
+        null,
+        true,
+        null,
+        true
+      ]
+    },
+    {
+      "config": [
+        1,
+        9223372036854775807,
+        -9223371736854775809,
+        1,
+        1
+      ],
+      "enabled": true,
+      "results": [
+        true,
+        false,
+        true,
+        false,
+        false,
+        true,
+        null,
+        false,
+        null,
+        false,
+        true,
+        null,
+        true,
+        null,
+        true
+      ]
+    },
+    {
+      "config": [
+        1,
+        9223371736854775808,
+        -9223372036854775808,
+        1,
+        1
+      ],
+      "enabled": false,
+      "results": [
+        true,
+        false,
+        true,
+        false,
+        false,
+        true,
+        null,
+        false,
+        null,
+        false,
+        true,
+        null,
+        true,
+        null,
+        true
+      ]
+    },
+    {
+      "config": [
+        1,
+        9223371736854775808,
+        -9223372036854775808,
+        1,
+        1
+      ],
+      "enabled": true,
+      "results": [
+        true,
+        false,
+        true,
+        false,
+        false,
+        true,
+        null,
+        false,
+        null,
+        false,
+        true,
+        null,
+        true,
+        null,
+        true
+      ]
+    }
+  ],
+  "mismatches": [],
+  "source_sha256": {
+    "server/go/internal/realtime/stream_retention.go": "04bdc8af4a8ae51dc50aa6f27e23eae051d9a1b2631fa71ab4911fdfde6918fc",
+    "server/go/internal/realtime/sharded_stream_relay.go": "672a624544ff57afd22973d160a4b5c47e8f0f4b65918cf5bc7b751ab63b0da2",
+    "server/tests/parity/go_retention/main.go": "9a2a9e7b1230479dd8e0918deaa04770f223f14cf10a2eaedff7373c5082bcc7",
+    "server/tests/parity/go_retention/wrapper.go": "70280f51c3e2dc2254122d3bde146ce63aeccc376a5acde8ab4e76d2dc241a21",
+    "server/src/workpal_backend/realtime/stream_retention.py": "8d244bc48cb0ca02e4cf90831afcc34bcf80eea197aef739d564baebc88d7586"
+  },
+  "binary_sha256": "41d10cad60a4139317ceb0be523dcb3d6ddecaad128d6d684e493b2528fcebc8"
+}

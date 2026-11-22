@@ -1,0 +1,282 @@
+{
+  "pages": {
+    "tasks": {
+      "title": "All issues · TAP · Workpal",
+      "headings": [
+        "Work",
+        "All issues",
+        "Columns",
+        "Card properties"
+      ],
+      "overflow": false,
+      "body": "All issues\nArchived\n0\nDone shows 50 issues per page. Archive older work to keep this view focused.\nBacklog\n13\nTAP-030\nDefine acceptance criteria for test design\nTAP\nTAP-031\nReview conversational context boundaries\nTAP\nSKILL-1064\nKeep filters when returning from a skill detail\nSkill Hub\nNov 18\nPa\nSKILL-1067\nHandle an unavailable upstream skill\nSkill Hub\nNov 21\nPa\nSKILL-1075\nRecord who approved a version change\nSkill Hub\nNov 22\nSKILL-1077\nMigrate legacy unversioned installations\nSkill Hub\nNov 24\nSKILL-1079\nRequire an example input for skill submissions\nSkill Hub\nNov 17\nSKILL-1082\nFlag installation commands for manual inspection\nSkill Hub\nNov 20\nSKILL-1085\nShare a collection with a team\nSkill Hub\nNov 17\nPa\nSKILL-1086\nKeep private skills out of public collections\nSkill Hub\nNov 18\nPa\nSKILL-1087\nReorder skills with keyboard controls\nSkill Hub\nNov 19\nSKILL-1088\nTransfer collection ownership\nSkill Hub\nNov 20\nSKILL-1089\nExplain why a shared skill is unavailable\nSkill Hub\nNov 21\nPa\nTo do\n16\nTAP-034\nApprove the next rollout cohort\nTAP\nPa\nTAP-1001\nKeep page anchors stable after PDF re-indexing\nTAP\nNov 17\nPa\nTAP-1006\nSupport two sources for the same claim\nTAP\nNov 22\nTAP-1009\nResume multipart uploads after a network drop\nTAP\nNov 17\nDEV-1034\nRecover from an expired installation token\nDeveloper Platform\nNov 19\nDEV-1037\nShow repository permission changes\nDeveloper Platform\nNov 22\nDEV-1043\nSepar"
+    },
+    "projects": {
+      "title": "Projects · TAP · Workpal",
+      "headings": [
+        "Work",
+        "Projects",
+        "Project directory"
+      ],
+      "overflow": false,
+      "body": "Project directory\n＋ New project\nTAP\n99 issues\nDeveloper Platform\n92 issues\nSkill Hub\n91 issues"
+    },
+    "agents": {
+      "title": "Agents · TAP · Workpal",
+      "headings": [
+        "Team",
+        "Agents"
+      ],
+      "overflow": false,
+      "body": "Name\nRuntime\nSkills\nStatus\nProduct partner\nCopilot CLI\n5 skills\nOffline\nArchitecture partner\nCopilot CLI\n9 skills\nOffline\nEngineering partner\nCopilot CLI\n16 skills\nOffline\nQuality partner\nCopilot CLI\n11 skills\nOffline"
+    },
+    "skills": {
+      "title": "Skill Hub · TAP · Workpal",
+      "headings": [
+        "Team",
+        "Skill Hub",
+        "Skill usage rate"
+      ],
+      "overflow": false,
+      "body": "Workspace library\nLast 4 weeks · independent of directory filters\nTOTAL SKILLS\n30\nACTIVE SKILLS\n13\nACTIVATIONS\n59\nAUTOMATIC ACTIVATIONS\n5\nAUTO ACTIVATION SHARE\n8%\nSkill usage rate\n0%\n25%\n50%\n75%\n100%\nOct 24\nOct 31\nNov 7\nNov 14\nUsage rate\n\nWeekly usage rate = skills used at least once ÷ all skills in the workspace library. Each point represents a 7-day period. Hover or focus points for details. Use arrow keys to move.\n\nDirectory\nOn agents\nSaved\n＋ Add skill\nAll stages\nDiscover\nDesign\nBuild\nVerify\nShip\nLearn\nSkills.sh ranking\nMost used in TAP\nName A–Z\nRank\nSkill / Description\nStage / Version\nActivations\n#1\nFind Skills\nDiscover skills by the task you want an agent to complete.\nvercel-labs/skills\nDiscover\nUnversioned\n0\n#3\nAgent Browser\nDrive browser interactions from an agent workflow.\nvercel-labs/agent-browser\nVerify\nUnversioned\n0\n#15\nFrontend Design\nDesign a distinctive interface around a specific product context.\nanthropics/skills\nBuild\nUnversioned\n0\n#57\nReact Best Practices\nReview React and Next.js performance patterns during implementation.\nvercel-labs/agent-skills\nBuild\nUnversioned\n0\n#62\nWeb Design Guidelines\nReview interaction quality and accessibility in a web interface.\nvercel-labs/agent-skills\nVerify\nUnversioned\n0\n#199\nSkill Creator\nTurn a repeated practice into a skill with a test case.\nanthropics/skills\nLearn\nUnversioned\n0\n#202\nBrainstorming\nClarify constraints and accep"
+    },
+    "squads": {
+      "title": "Squads · TAP · Workpal",
+      "headings": [
+        "Team",
+        "Squads"
+      ],
+      "overflow": false,
+      "body": "Name\nLeader\nMembers\nCreated by\nTAP delivery\nEngineering partner\n5\nPa\nPatrick\nDeveloper Platform delivery\nEngineering partner\n5\nPa\nPatrick\nSkill Hub delivery\nEngineering partner\n5\nPa\nPatrick"
+    },
+    "chatroom": {
+      "title": "Chat · TAP · Workpal",
+      "headings": [
+        "Chat",
+        "Chat",
+        "What needs investigating?"
+      ],
+      "overflow": false,
+      "body": "Chat\nArchived\nDEV · Search API rejects the new filter\nDEV · TAP\nThe follow-up should establish which request shape each supported client uses, then decide whether to update the serializer alone or introduce a temporary compatibility adapter. Acceptance evidence to collect: running service commit, both request/response pairs, supported-client inventory and contract test results. The schema mismatch remains a hypothesis until the running instance is verified.\n02:44 PM\nUAT · Upload retry creates a second document\nUAT · TAP\nAgreed retest scope: retry the same upload session, deliberately start a new session, and upload different content with an identical filename. Identity should be checked using the session and content rules, not the filename alone. Before sign-off, attach the server timeline and demonstrate one document for a retry while preserving deliberate separate uploads. The release owner still needs to review that evidence; this conversation does not mark the acceptance case as passed.\n03:44 PM\nPRD · Knowledge search errors after deployment\nPRD · TAP\nDecision brief to prepare: • Confirmed impact window, affected paths and supporting request IDs. • Effective settings and revision for each serving instance. • Evidence linking the failures to the timeout/pool change, or evidence against that hypothesis. • Compatibility of the previous release with current data and dependencie"
+    },
+    "auto": {
+      "title": "Autopilots · TAP · Workpal",
+      "headings": [
+        "Auto",
+        "Autopilots"
+      ],
+      "overflow": false,
+      "body": "Name\nAgent\nSchedule\nStatus\nDaily delivery brief\nEngineering partner\n09:00 daily\nPaused"
+    },
+    "inbox": {
+      "title": "Inbox · TAP · Workpal",
+      "headings": [
+        "Work",
+        "Inbox",
+        "Inbox"
+      ],
+      "overflow": false,
+      "body": "Active\nSnoozed\nArchived\nInbox\nRestore drafts after switching conversations\nTAP-1026 · Blocked · Unread\n\nDependency: TAP-1004 must clear review before this can proceed.\n\nMark read\nArchive\nSnooze 1 hour\nKeep build logs after a runner disconnect\nDEV-1044 · Blocked · Unread\n\nDependency: DEV-1032 must clear review before this can proceed.\n\nMark read\nArchive\nSnooze 1 hour\nReuse dependency caches across pull requests\nDEV-1040 · In review · Unread\n\nDEV-1040 · review\n\nMark read\nArchive\nSnooze 1 hour\nReview the Knowledge Chat rollout\nTAP-032 · In progress · Unread\n\nKeep the approval on the sign-off issue so the decision is easy to find.\n\nMark read\nArchive\nSnooze 1 hour\nFlag installation commands for manual inspection\nSKILL-1082 · Backlog · Unread\n\nSKILL-1082 · backlog\n\nMark read\nArchive\nSnooze 1 hour\nKeep page anchors stable after PDF re-indexing\nTAP-1001 · To do · Unread\n\nTAP-1001 · todo\n\nMark read\nArchive\nSnooze 1 hour\nTransfer collection ownership\nSKILL-1088 · Backlog · Unread\n\nSKILL-1088 · backlog\n\nMark read\nArchive\nSnooze 1 hour\nHandle an unavailable upstream skill\nSKILL-1067 · Backlog · Unread\n\nSKILL-1067 · backlog\n\nMark read\nArchive\nSnooze 1 hour\nDetect the default branch during repository setup\nDEV-1032 · In review · Unread\n\nDEV-1032 · review · RUN-1018 · DEL-1009\n\nMark read\nArchive\nSnooze 1 hour\nRequire an example input for skill submissions\nSKILL-1079 · Backlog · Unread\n\nSKILL-"
+    },
+    "settings?tab=code": {
+      "title": "Settings · TAP · Workpal",
+      "headings": [
+        "Settings",
+        "Settings",
+        "Code",
+        "Code hosting",
+        "Repositories",
+        "Pull requests & issues"
+      ],
+      "overflow": false,
+      "body": "Code\n\nManage your code hosting, repositories and pull requests.\n\nCode hosting\n\nConnect your code host to link pull requests and track development.\n\nGitHub\n\nNot connected\n\nConnect GitHub\nGitHub patrickstarpty\nAuthorization required\nMy account · Not connected\nEdit setup\nRemove setup\nGitHub Workpal Engineering\nAuthorization required\nTeam account · Not connected\nEdit setup\nRemove setup\nRepositories\n\nRepositories available to this workspace.\n\nAdd repository\nhttps://github.com/patrickstarpty/workpal\n\nWorkpal workspace UI, agent collaboration and skill sharing.\n\nhttps://git.example.com/workpal/tap-web\n\nTAP frontend: knowledge search, citations and document upload.\n\ngit@git.example.com:workpal/tap-api.git\n\nTAP services: retrieval, document ingestion and access policies.\n\nhttps://git.example.com/workpal/skill-hub\n\nSkill catalog, versioning, review and team collections.\n\ngit@git.example.com:workpal/developer-platform.git\n\nRuntime configuration, CI pipelines and release tooling.\n\nPull requests & issues\n\nManage how pull requests appear alongside your issues.\n\nPull Request sidebar\nShow linked pull requests in issue details.\nAuto-link issues and PRs\nMatch issue identifiers in branch names and PR titles when connected.\nCo-authored-by trailer\nInclude Workpal attribution in agent commit preferences.\nAfter PRs merge, move the issue to\nDon’t change\nDone\nDone applies to eligible issues after all r"
+    },
+    "stats": {
+      "title": "Analytics · TAP · Workpal",
+      "headings": [
+        "Team",
+        "Analytics",
+        "Weekly tokens",
+        "Token composition",
+        "Runs by agent",
+        "Leaderboard"
+      ],
+      "overflow": false,
+      "body": "COST · 365D\n$109.96\nTOKENS · 365D\n7.4M\nInput 4.5M · Output 916.1K\nRUN TIME · 365D\n76h 2m\nAcross 213 runs\nRUNS · 365D\n213\n16 failed\nWeekly tokens\nTokens\nCost\nTime\nRuns\n0\n200K\n400K\n600K\n800K\nNov 17\nDec 22\nJan 26\nMar 2\nApr 6\nMay 11\nJun 15\nJul 20\nAug 24\nSep 28\nNov 2\nInput\nOutput\nCache read\nCache write\nToken composition\n7.4M\nTotal\nInput\n4.5M\nOutput\n916.1K\nCache read\n1.6M\nCache write\n360.2K\nRuns by agent\nEngineering partner\n154\nArchitecture partner\n39\nQuality partner\n20\nLeaderboard\nTokens\nCost\nTime\nRuns\n3 agents\nAgent\t\tTokens\tCost\tTime\tRuns\n\nEngineering partner\n\t\n\t5.4M\t$78.31\t54h 23m\t154\n\nArchitecture partner\n\t\n\t1.3M\t$19.73\t13h 54m\t39\n\nQuality partner\n\t\n\t655.4K\t$11.91\t7h 45m\t20"
+    }
+  },
+  "errors": [],
+  "geometry": {
+    ".app-dock": {
+      "x": 0,
+      "y": 0,
+      "width": 56,
+      "height": 900,
+      "font": "14px / 20px Inter, -apple-system, \"system-ui\", \"Segoe UI\", \"PingFang SC\", sans-serif",
+      "fontSize": "14px",
+      "background": "oklch(0.964435 0.001327 286.375)",
+      "radius": "0px",
+      "transition": "all"
+    },
+    ".space-panel": {
+      "x": 56,
+      "y": 8,
+      "width": 280,
+      "height": 860,
+      "font": "14px / 20px Inter, -apple-system, \"system-ui\", \"Segoe UI\", \"PingFang SC\", sans-serif",
+      "fontSize": "14px",
+      "background": "oklch(0.988087 0 0)",
+      "radius": "12px 0px 0px 12px",
+      "transition": "all"
+    },
+    ".top": {
+      "x": 336,
+      "y": 8,
+      "width": 1096,
+      "height": 48,
+      "font": "14px / 20px Inter, -apple-system, \"system-ui\", \"Segoe UI\", \"PingFang SC\", sans-serif",
+      "fontSize": "14px",
+      "background": "rgba(0, 0, 0, 0)",
+      "radius": "0px",
+      "transition": "all"
+    },
+    ".dock-command": {
+      "x": 10,
+      "y": 57,
+      "width": 36,
+      "height": 36,
+      "font": "500 14px / 20px Inter, -apple-system, \"system-ui\", \"Segoe UI\", \"PingFang SC\", sans-serif",
+      "fontSize": "14px",
+      "background": "rgba(0, 0, 0, 0)",
+      "radius": "8px",
+      "transition": "background 0.12s, border-color 0.12s, box-shadow 0.12s, transform 0.12s"
+    },
+    ".btn": {
+      "x": 10,
+      "y": 57,
+      "width": 36,
+      "height": 36,
+      "font": "500 14px / 20px Inter, -apple-system, \"system-ui\", \"Segoe UI\", \"PingFang SC\", sans-serif",
+      "fontSize": "14px",
+      "background": "rgba(0, 0, 0, 0)",
+      "radius": "8px",
+      "transition": "background 0.12s, border-color 0.12s, box-shadow 0.12s, transform 0.12s"
+    },
+    ".issue.row": {
+      "x": 344,
+      "y": 143,
+      "width": 1080,
+      "height": 36,
+      "font": "14px / 20px Inter, -apple-system, \"system-ui\", \"Segoe UI\", \"PingFang SC\", sans-serif",
+      "fontSize": "14px",
+      "background": "rgba(0, 0, 0, 0)",
+      "radius": "6px",
+      "transition": "background 0.1s"
+    },
+    ".issue-group-header": {
+      "x": 344,
+      "y": 103,
+      "width": 1080,
+      "height": 40,
+      "font": "12px / 20px Inter, -apple-system, \"system-ui\", \"Segoe UI\", \"PingFang SC\", sans-serif",
+      "fontSize": "12px",
+      "background": "oklch(0.967 0.001 286.375)",
+      "radius": "8px",
+      "transition": "all"
+    },
+    ".main": {
+      "x": 336,
+      "y": 8,
+      "width": 1096,
+      "height": 860,
+      "font": "14px / 20px Inter, -apple-system, \"system-ui\", \"Segoe UI\", \"PingFang SC\", sans-serif",
+      "fontSize": "14px",
+      "background": "oklch(0.988087 0 0)",
+      "radius": "0px 12px 12px 0px",
+      "transition": "all"
+    }
+  },
+  "search": {
+    "initialFocus": {
+      "tag": "INPUT",
+      "id": "command-input",
+      "text": "",
+      "name": null
+    },
+    "initialText": "Esc\nActions\nNew issue\nNew project\nPages\nOverview\nAll issues\nProjects\nRuns\nAgents\nSkill Hub\nAnalytics\nReports\nInbox\nMy work\nSettings\nChat\nSquads\nAutopilots\nSaved views\nWorkflows\nRuntimes\nIssues\nTAP-028 Trace sources in Knowledge Chat\nTAP-029 Test document upload edge cases\nTAP-030 Define acceptance criteria for test design\nTAP-027 Clarify knowledge search states\nTAP-031 Review conversational context boundaries\nTAP-032 Review the Knowledge Chat rollout\nTAP-033 Confirm recovery after interrupted upload\nTAP-034 Approve the next rollout cohort\nINIT-1000 Citation navigation release\nTAP-1001 Keep page anchors stable after PDF re-indexing\nTAP-1002 Scroll to the quoted paragraph from a citation\nTAP-1003 Show deleted-source warnings in older answers\nTAP-1004 Restore focus after closing the source drawer\nTAP-1005 Fix citation numbers after streaming reconnect\nTAP-1006 Support two sources for the same claim\nTAP-1007 Retain source access checks when sharing a conversation\nINIT-1008 Document ingestion release\nTAP-1009 Resume multipart uploads after a network drop\nTAP-1010 Skip duplicate files using content hashes\nTAP-1011 Move scanned PDFs to the OCR queue\nTAP-1012 Clean up abandoned upload sessions\nTAP-1013 Retry parsing without creating a second document\nTAP-1014 Show actionable errors for password-protected PDFs\nTAP-1015 Preserve filenames containing emoji\nTAP-1016 Limit concurrent uploads per workspace\nTAP-1017 Cancel queued OCR jobs when a document is deleted\nINIT-1018 Search relevance release\nTAP-1019 Boost exact document-title matches\nTAP-1020 Exclude archived documents from retrieval\nTAP-1021 Fix stale permission filters in cached results\nTAP-1022 Tune score thresholds for short queries\nTAP-1023 Keep selected filters after opening a result\nTAP-1024 Measure query coverage for mixed-language documents\nINIT-1025 Conversation history release\nTAP-1026 Restore drafts after switching conversations\nTAP-1027 Paginate long conversation histories\nTAP-1028 Rename threads without losing selection\nTAP-1029 Remove deleted threads from browser history\nTAP-1030 Export answers with their source references\nINIT-1031 Repository onboarding release\nDEV-1032 Detect the default branch during repository setup\nDEV-1033 Reject repositories outside the approved organization\nDEV-1034 Recover from an expired installation token\nDEV-1035 Index monorepo package boundaries\nDEV-1036 Avoid duplicate webhook subscriptions\nDEV-1037 Show repository permission changes\nINIT-1038 Build pipelines release\nDEV-1039 Cancel superseded branch builds\nDEV-1040 Reuse dependency caches across pull requests\nDEV-1041 Surface the first failing test in build summaries\nDEV-1042 Retry interrupted artifact uploads\nDEV-1043 Separate flaky tests from deterministic failures\nDEV-1044 Keep build logs after a runner disconnect\nDEV-1045 Limit parallel jobs per repository\nDEV-1046 Link build artifacts to the originating commit\nINIT-1047 Environment access release\nDEV-1048 Expire temporary environment access after review\nDEV-1049 Require an owner for production credentials\nDEV-1050 Remove stale runtime registrations\nDEV-1051 Audit changes to environment permissions\nDEV-1052 Block deployments when approval has expired\nDEV-1053 Rotate the shared staging credential\nINIT-1054 Release controls release\nDEV-1055 Generate release notes from merged tickets\nDEV-1056 Require rollback instructions before approval\nDEV-1057 Stop promotion when a dependency is blocked\nDEV-1058 Keep release approvals attached to the reviewed SHA\nDEV-1059 Show partial rollout progress\nDEV-1060 Recover a cancelled release draft\nDEV-1061 Link hotfixes to the previous release\nINIT-1062 Skill discovery release\nSKILL-1063 Match skill search against descriptions\nSKILL-1064 Keep filters when returning from a skill detail\nSKILL-1065 Rank exact skill names above keyword matches\nSKILL-1066 Show the source repository on result cards\nSKILL-1067 Handle an unavailable upstream skill\nSKILL-1068 Deduplicate skills published from repository forks\nINIT-1069 Version management release\nSKILL-1070 Pin installed skills to a version\nSKILL-1071 Show breaking changes before updating\nSKILL-1072 Retain the previous version for rollback\nSKILL-1073 Detect removed files in an upstream release\nSKILL-1074 Prevent concurrent updates to the same skill\nSKILL-1075 Record who approved a version change\nSKILL-1076 Compare permissions between skill versions\nSKILL-1077 Migrate legacy unversioned installations\nINIT-1078 Quality review release\nSKILL-1079 Require an example input for skill submissions\nSKILL-1080 Return submissions with missing source attribution\nSKILL-1081 Keep reviewer comments across revisions\nSKILL-1082 Flag installation commands for manual inspection\nSKILL-1083 Block publishing until review is resolved\nINIT-1084 Team collections release\nSKILL-1085 Share a collection with a team\nSKILL-1086 Keep private skills out of public collections\nSKILL-1087 Reorder skills with keyboard controls\nSKILL-1088 Transfer collection ownership\nSKILL-1089 Explain why a shared skill is unavailable\nSKILL-1090 Restore accidentally removed collection items\nSKILL-1091 Remove access after a member leaves\nDEV-2000 Block deployments when approval has expired · 2025-11-21\nSKILL-2001 Compare permissions between skill versions · 2025-11-23\nTAP-2002 Retain source access checks when sharing a conversation · 2025-11-25\nDEV-2003 Retry interrupted artifact uploads · 2025-11-27\nSKILL-2004 Return submissions with missing source attribution · 2025-11-29\nTAP-2005 Tune score thresholds for short queries · 2025-12-01\nDEV-2006 Retry interrupted artifact uploads · 2025-12-03\nSKILL-2007 Remove access after a member leaves · 2025-12-05\nTAP-2008 Skip duplicate files using content hashes · 2025-12-07\nDEV-2009 Recover a cancelled release draft · 2025-12-09\nSKILL-2010 Retain the previous version for rollback · 2025-12-11\nTAP-2011 Rename threads without losing selection · 2025-12-13\nDEV-2012 Reject repositories outside the approved organization · 2025-12-15\nSKILL-2013 Retain the previous version for rollback · 2025-12-17\nTAP-2014 Clean up abandoned upload sessions · 2025-12-19\nDEV-2015 Block deployments when approval has expired · 2025-12-21\nSKILL-2016 Compare permissions between skill versions · 2025-12-23\nTAP-2017 Export answers with their source references · 2025-12-25\nDEV-2018 Retry interrupted artifact uploads · 2025-12-27\nSKILL-2019 Return submissions with missing source attribution · 2025-12-29\nTAP-2020 Preserve filenames containing emoji · 2025-12-31\nDEV-2021 Retry interrupted artifact uploads · 2026-01-02\nSKILL-2022 Remove access after a member leaves · 2026-01-04\nTAP-2023 Fix stale permission filters in cached results · 2026-01-06\nDEV-2024 Recover a cancelled release draft · 2026-01-08\nSKILL-2025 Retain the previous version for rollback · 2026-01-10\nTAP-2026 Cancel queued OCR jobs when a document is deleted · 2026-01-12\nDEV-2027 Reject repositories outside the approved organization · 2026-01-14\nSKILL-2028 Retain the previous version for rollback · 2026-01-16\nTAP-2029 Skip duplicate files using content hashes · 2026-01-18\nDEV-2030 Block deployments when approval has expired · 2026-01-20\nSKILL-2031 Compare permissions between skill versions · 2026-01-22\nTAP-2032 Fix stale permission filters in cached results · 2026-01-24\nDEV-2033 Retry interrupted artifact uploads · 2026-01-26\nSKILL-2034 Return submissions with missing source attribution · 2026-01-28\nTAP-2035 Retain source access checks when sharing a conversation · 2026-01-30\nDEV-2036 Retry interrupted artifact uploads · 2026-02-01\nSKILL-2037 Remove access after a member leaves · 2026-02-03\nTAP-2038 Tune score thresholds for short queries · 2026-02-05\nDEV-2039 Recover a cancelled release draft · 2026-02-07\nSKILL-2040 Retain the previous version for rollback · 2026-02-09\nTAP-2041 Skip duplicate files using content hashes · 2026-02-11\nDEV-2042 Reject repositories outside the approved organization · 2026-02-13\nSKILL-2043 Retain the previous version for rollback · 2026-02-15\nTAP-2044 Rename threads without losing selection · 2026-02-17\nDEV-2045 Block deployments when approval has expired · 2026-02-19\nSKILL-2046 Compare permissions between skill versions · 2026-02-21\nTAP-2047 Clean up abandoned upload sessions · 2026-02-23\nDEV-2048 Retry interrupted artifact uploads · 2026-02-25\nSKILL-2049 Return submissions with missing source attribution · 2026-02-27\nTAP-2050 Export answers with their source references · 2026-03-01\nDEV-2051 Retry interrupted artifact uploads · 2026-03-03\nSKILL-2052 Remove access after a member leaves · 2026-03-05\nTAP-2053 Preserve filenames containing emoji · 2026-03-07\nDEV-2054 Recover a cancelled release draft · 2026-03-09\nSKILL-2055 Retain the previous version for rollback · 2026-03-11\nTAP-2056 Fix stale permission filters in cached results · 2026-03-13\nDEV-2057 Reject repositories outside the approved organization · 2026-03-15\nSKILL-2058 Retain the previous version for rollback · 2026-03-17\nTAP-2059 Cancel queued OCR jobs when a document is deleted · 2026-03-19\nDEV-2060 Block deployments when approval has expired · 2026-03-21\nSKILL-2061 Compare permissions between skill versions · 2026-03-23\nTAP-2062 Skip duplicate files using content hashes · 2026-03-25\nDEV-2063 Retry interrupted artifact uploads · 2026-03-27\nSKILL-2064 Return submissions with missing source attribution · 2026-03-29\nTAP-2065 Fix stale permission filters in cached results · 2026-03-31\nDEV-2066 Retry interrupted artifact uploads · 2026-04-02\nSKILL-2067 Remove access after a member leaves · 2026-04-04\nTAP-2068 Retain source access checks when sharing a conversation · 2026-04-06\nDEV-2069 Recover a cancelled release draft · 2026-04-08\nSKILL-2070 Retain the previous version for rollback · 2026-04-10\nTAP-2071 Tune score thresholds for short queries · 2026-04-12\nDEV-2072 Reject repositories outside the approved organization · 2026-04-14\nSKILL-2073 Retain the previous version for rollback · 2026-04-16\nTAP-2074 Skip duplicate files using content hashes · 2026-04-18\nDEV-2075 Block deployments when approval has expired · 2026-04-20\nSKILL-2076 Compare permissions between skill versions · 2026-04-22\nTAP-2077 Rename threads without losing selection · 2026-04-24\nDEV-2078 Retry interrupted artifact uploads · 2026-04-26\nSKILL-2079 Return submissions with missing source attribution · 2026-04-28\nTAP-2080 Clean up abandoned upload sessions · 2026-04-30\nDEV-2081 Retry interrupted artifact uploads · 2026-05-02\nSKILL-2082 Remove access after a member leaves · 2026-05-04\nTAP-2083 Export answers with their source references · 2026-05-06\nDEV-2084 Recover a cancelled release draft · 2026-05-08\nSKILL-2085 Retain the previous version for rollback · 2026-05-10\nTAP-2086 Preserve filenames containing emoji · 2026-05-12\nDEV-2087 Reject repositories outside the approved organization · 2026-05-14\nSKILL-2088 Retain the previous version for rollback · 2026-05-16\nTAP-2089 Fix stale permission filters in cached results · 2026-05-18\nDEV-2090 Block deployments when approval has expired · 2026-05-20\nSKILL-2091 Compare permissions between skill versions · 2026-05-22\nTAP-2092 Cancel queued OCR jobs when a document is deleted · 2026-05-24\nDEV-2093 Retry interrupted artifact uploads · 2026-05-26\nSKILL-2094 Return submissions with missing source attribution · 2026-05-28\nTAP-2095 Skip duplicate files using content hashes · 2026-05-30\nDEV-2096 Retry interrupted artifact uploads · 2026-06-01\nSKILL-2097 Remove access after a member leaves · 2026-06-03\nTAP-2098 Fix stale permission filters in cached results · 2026-06-05\nDEV-2099 Recover a cancelled release draft · 2026-06-07\nSKILL-2100 Retain the previous version for rollback · 2026-06-09\nTAP-2101 Retain source access checks when sharing a conversation · 2026-06-11\nDEV-2102 Reject repositories outside the approved organization · 2026-06-13\nSKILL-2103 Retain the previous version for rollback · 2026-06-15\nTAP-2104 Tune score thresholds for short queries · 2026-06-17\nDEV-2105 Block deployments when approval has expired · 2026-06-19\nSKILL-2106 Compare permissions between skill versions · 2026-06-21\nTAP-2107 Skip duplicate files using content hashes · 2026-06-23\nDEV-2108 Retry interrupted artifact uploads · 2026-06-25\nSKILL-2109 Return submissions with missing source attribution · 2026-06-27\nTAP-2110 Rename threads without losing selection · 2026-06-29\nDEV-2111 Retry interrupted artifact uploads · 2026-07-01\nSKILL-2112 Remove access after a member leaves · 2026-07-03\nTAP-2113 Clean up abandoned upload sessions · 2026-07-05\nDEV-2114 Recover a cancelled release draft · 2026-07-07\nSKILL-2115 Retain the previous version for rollback · 2026-07-09\nTAP-2116 Export answers with their source references · 2026-07-11\nDEV-2117 Reject repositories outside the approved organization · 2026-07-13\nSKILL-2118 Retain the previous version for rollback · 2026-07-15\nTAP-2119 Preserve filenames containing emoji · 2026-07-17\nDEV-2120 Block deployments when approval has expired · 2026-07-19\nSKILL-2121 Compare permissions between skill versions · 2026-07-21\nTAP-2122 Fix stale permission filters in cached results · 2026-07-23\nDEV-2123 Retry interrupted artifact uploads · 2026-07-25\nSKILL-2124 Return submissions with missing source attribution · 2026-07-27\nTAP-2125 Cancel queued OCR jobs when a document is deleted · 2026-07-29\nDEV-2126 Retry interrupted artifact uploads · 2026-07-31\nSKILL-2127 Remove access after a member leaves · 2026-08-02\nTAP-2128 Skip duplicate files using content hashes · 2026-08-04\nDEV-2129 Recover a cancelled release draft · 2026-08-06\nSKILL-2130 Retain the previous version for rollback · 2026-08-08\nTAP-2131 Fix stale permission filters in cached results · 2026-08-10\nDEV-2132 Reject repositories outside the approved organization · 2026-08-12\nSKILL-2133 Retain the previous version for rollback · 2026-08-14\nTAP-2134 Retain source access checks when sharing a conversation · 2026-08-16\nDEV-2135 Block deployments when approval has expired · 2026-08-18\nSKILL-2136 Compare permissions between skill versions · 2026-08-20\nTAP-2137 Tune score thresholds for short queries · 2026-08-22\nDEV-2138 Retry interrupted artifact uploads · 2026-08-24\nSKILL-2139 Return submissions with missing source attribution · 2026-08-26\nTAP-2140 Skip duplicate files using content hashes · 2026-08-28\nDEV-2141 Retry interrupted artifact uploads · 2026-08-30\nSKILL-2142 Remove access after a member leaves · 2026-09-01\nTAP-2143 Rename threads without losing selection · 2026-09-03\nDEV-2144 Recover a cancelled release draft · 2026-09-05\nSKILL-2145 Retain the previous version for rollback · 2026-09-07\nTAP-2146 Clean up abandoned upload sessions · 2026-09-09\nDEV-2147 Reject repositories outside the approved organization · 2026-09-11\nSKILL-2148 Retain the previous version for rollback · 2026-09-13\nTAP-2149 Export answers with their source references · 2026-09-15\nDEV-2150 Block deployments when approval has expired · 2026-09-17\nSKILL-2151 Compare permissions between skill versions · 2026-09-19\nTAP-2152 Preserve filenames containing emoji · 2026-09-21\nDEV-2153 Retry interrupted artifact uploads · 2026-09-23\nSKILL-2154 Return submissions with missing source attribution · 2026-09-25\nTAP-2155 Fix stale permission filters in cached results · 2026-09-27\nDEV-2156 Retry interrupted artifact uploads · 2026-09-29\nSKILL-2157 Remove access after a member leaves · 2026-10-01\nTAP-2158 Cancel queued OCR jobs when a document is deleted · 2026-10-03\nDEV-2159 Recover a cancelled release draft · 2026-10-05\nSKILL-2160 Retain the previous version for rollback · 2026-10-07\nTAP-2161 Skip duplicate files using content hashes · 2026-10-09\nDEV-2162 Reject repositories outside the approved organization · 2026-10-11\nSKILL-2163 Retain the previous version for rollback · 2026-10-13\nTAP-2164 Fix stale permission filters in cached results · 2026-10-15\nDEV-2165 Block deployments when approval has expired · 2026-10-17\nSKILL-2166 Compare permissions between skill versions · 2026-10-19\nTAP-2167 Retain source access checks when sharing a conversation · 2026-10-21\nDEV-2168 Retry interrupted artifact uploads · 2026-10-23\nSKILL-2169 Return submissions with missing source attribution · 2026-10-25\nTAP-2170 Tune score thresholds for short queries · 2026-10-27\nDEV-2171 Retry interrupted artifact uploads · 2026-10-29\nSKILL-2172 Remove access after a member leaves · 2026-10-31\nTAP-2173 Skip duplicate files using content hashes · 2026-11-02\nDEV-2174 Recover a cancelled release draft · 2026-11-04\nSKILL-2175 Retain the previous version for rollback · 2026-11-06\nTAP-2176 Rename threads without losing selection · 2026-11-08\nDEV-2177 Reject repositories outside the approved organization · 2026-11-10\nSKILL-2178 Retain the previous version for rollback · 2026-11-12\nTAP-2179 Clean up abandoned upload sessions · 2026-11-14\nDEV-2180 Block deployments when approval has expired · 2026-11-16\nSKILL-2181 Compare permissions between skill versions · 2026-11-18\nProjects\nTAP\nDeveloper Platform\nSkill Hub\nSkills\nBrainstorming\nWriting Plans\nTest-driven Development\nWebapp Testing\nFrontend Design\nWeb Design Guidelines\nVerification Before Completion\nSkill Creator\nFind Skills\nAgent Browser\nReact Best Practices\nImpeccable\nCitation Audit\nUpload Recovery\nRetrieval Tuning\nConversation State\nRepository Onboarding\nPipeline Triage\nAccess Review\nRelease Readiness\nSkill Discovery\nSkill Versioning\nSkill Review\nCollection Governance\nTicket Refinement\nDependency Mapping\nCommit Attribution\nReview Handoff\nRollback Planning\nIncident Learning\nPeople\nProduct partner\nArchitecture partner\nEngineering partner\nQuality partner\nSquads\nTAP delivery\nDeveloper Platform delivery\nSkill Hub delivery\n↑ ↓ Navigate · Enter Open · Esc Close",
+    "geometry": {
+      "x": 400,
+      "y": 180,
+      "width": 640,
+      "height": 505
+    },
+    "results": "People\nEngineering partner",
+    "arrowFocus": {
+      "tag": "BUTTON",
+      "id": "",
+      "text": "Engineering partner",
+      "name": null
+    },
+    "queryAfterTypingAfterArrow": "Engineering",
+    "afterClose": {
+      "tag": "BUTTON",
+      "id": "",
+      "text": "",
+      "name": null
+    }
+  },
+  "create": {
+    "project": "Skill Hub",
+    "focus": {
+      "tag": "BUTTON",
+      "id": "",
+      "text": "",
+      "name": null
+    },
+    "geometry": {
+      "x": 440,
+      "y": 33.203125,
+      "width": 560,
+      "height": 833.578125
+    },
+    "fields": "Issue\nIssue title\nDescription\nProject\nNo project\nTAP\nDeveloper Platform\nSkill Hub\nTeam\nProduct\nEngineering\nQuality\nUnassigned\nAssignee\nUnassigned\nPatrick\nProduct partner\nArchitecture partner\nEngineering partner\nQuality partner\nTAP delivery\nDeveloper Platform delivery\nSkill Hub delivery\nStatus\nBacklog\nTo do\nIn progress\nIn review\nBlocked\nDone\nPriority\nLow\nNormal\nHigh\nUrgent\nDue date\nLabels\nAcceptance criteria · one per line\nQueue the assigned agent or workflow handler\n\nAfter saving: To do · Unassigned. No new run.\n\nCreate issue"
+  },
+  "issue": {
+    "url": "file:///Users/patrick/Desktop/Workspace/ai-native/workpal/dist/Workpal.html#tasks?id=TAP-030",
+    "text": "Define acceptance criteria for test design\nDescription\nEdit issue\n\nSpecify the inputs, outputs and human checks for generated tests.\n\nAcceptance criteria\nList representative scenarios\nDefine the quality rubric\nCode delivery\nLink PR\nDelivery approval\nNot approved\nPR merge\nNo linked PRs\nIssue status\nBacklog\nRecord completion\nDeliveries\n\nNo delivery yet. Submit a summary, an artifact and evidence for each acceptance criterion.\n\nSub-issues\nAdd sub-issue\n\nNo matching issues.\n\nActivity\nSubscribe\nProperties\nStatus\nBacklog\nAssignee\nProduct partner\nPriority\nNormal\nProject\nTAP\nTeam\nProduct\nDue date\nNo date\nLabels\nNone\nQuick actions\nAdd\n\nSave a frequent request.\n\nWakeups\nAdd\n\nNo wakeups.\n\nAgent runs\nStart run\n\nLaunch a workflow to record its first decision."
+  },
+  "property": {
+    "geometry": {
+      "x": 440,
+      "y": 312.40625,
+      "width": 560,
+      "height": 275.1875
+    },
+    "text": "Issue property\nStatus\nBacklog\nTo do\nIn progress\nIn review\nBlocked\nDone\n\nAfter saving: Backlog · Product partner. No new run.\n\nSave",
+    "focus": {
+      "tag": "BUTTON",
+      "id": "",
+      "text": "",
+      "name": null
+    }
+  },
+  "display": {
+    "text": "Board\nList\nGrouping\nStatus\nColumns\nBacklog\nTo do\nIn progress\nIn review\nBlocked\nDone\nCard properties\nPriority\nAssignee\nDue date\nProject\nLabels\nSub-issue progress"
+  },
+  "mobile": {
+    "initial": {
+      "tag": "BUTTON",
+      "id": "",
+      "text": "T",
+      "name": null
+    },
+    "backgroundInert": true,
+    "focusOutside": [],
+    "afterClose": {
+      "tag": "BUTTON",
+      "id": "",
+      "text": "",
+      "name": null
+    }
+  }
+}

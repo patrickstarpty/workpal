@@ -1,0 +1,14 @@
+{
+  "scope": "Original Go readPump+writePump idle for700ms with rejecting membership checker: no idle lookups, next content write denied and TCP closed. Reference behavior probe only; Python application regression is test_idle_membership_removal_is_enforced_on_next_content_write.",
+  "observation": {
+    "close_code": 1006,
+    "idle_lookup_count": 0,
+    "write_lookup_count": 1
+  },
+  "source_sha256": {
+    "server/go/internal/realtime/hub.go": "33970bffe2c3d5c423dbdb57d6793d422a1ba8f0a3ae7f657faf51295fd9e57a",
+    "server/go/internal/realtime/membership.go": "94be251b5be0bcdc2a863652f210e6f6f47f5d8a2947270abbec679133ea40fd",
+    "server/tests/parity/go_idle_membership/main.go": "effee6c028e88225b1028b74f62481fc858c55dea595dee6092cc81625a956fc",
+    "server/tests/parity/go_idle_membership/wrapper.go": "bae0f4a2c9f4013ea017957b1d6a9d02771728a1dd6ba9d10e785ce8dc813329"
+  }
+}

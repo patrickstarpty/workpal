@@ -2,9 +2,9 @@
 from uuid import UUID
 from fastapi import APIRouter, Depends, HTTPException, Request
 from fastapi.responses import JSONResponse
+from starlette.concurrency import run_in_threadpool
 from workpal_backend.auth.dependencies import Principal, require_principal
 from workpal_backend.infrastructure.database import DatabaseBusy
-from .schemas import CreateWorkspace, UpdateWorkspace
 from . import service
 
 router = APIRouter()
@@ -17,7 +17,7 @@ def creation_policy(request: Request, principal: Principal):
     """
     settings = request.app.state.settings
     if settings.disable_workspace_creation or not getattr(request.app.state, 'workspace_creation_enabled', True):
-        raise HTTPException(403, 'workspace creation is disabled')
+        raise HTTPException(403, 'workspace creation is disabled for this instance')
     emails = {email.strip().lower() for email in settings.workspace_creation_allowed_emails.split(',') if email.strip()}
     if emails:
         from workpal_backend.auth.service import get_user
@@ -35,6 +35,8 @@ def execute(request, operation):
             return operation(session)
     except DatabaseBusy:
         return JSONResponse({'error':'Database is busy; retry later','retryable':True}, status_code=503, headers={'Retry-After':'1'})
+    except service.WorkspacePersistenceError as exc:
+        raise HTTPException(500, str(exc))
     except service.WorkspaceValidationError as exc:
         raise HTTPException(400, str(exc))
     except service.WorkspaceConflictError as exc:
@@ -49,9 +51,15 @@ def list_workspaces(request: Request, principal: Principal = Depends(require_pri
     return execute(request, lambda session: service.list_workspaces(session, principal.user_id))
 
 @router.post('/api/workspaces', status_code=201)
-def create_workspace(body: CreateWorkspace, request: Request, principal: Principal = Depends(require_principal)):
-    creation_policy(request, principal)
-    return execute(request, lambda session: service.create_workspace(session, principal.user_id, body.name, body.slug, body.issue_prefix))
+async def create_workspace(request: Request, principal: Principal = Depends(require_principal)):
+    await run_in_threadpool(creation_policy, request, principal)
+    from .decode import decode_create
+    try:
+        body = decode_create(await request.body())
+    except ValueError as exc:
+        raise HTTPException(400, str(exc))
+    return await run_in_threadpool(execute, request, lambda session: service.create_workspace(session, principal.user_id,
+        body['name'], body['slug'], body['issue_prefix'], body['description'], body['context']))
 
 @router.get('/api/workspaces/{workspace_id}')
 def get_workspace(workspace_id: str, request: Request, principal: Principal = Depends(require_principal)):
@@ -71,20 +79,30 @@ def workspace_uuid(value):
 
 @router.put('/api/workspaces/{workspace_id}')
 @router.patch('/api/workspaces/{workspace_id}')
-def update_workspace(workspace_id: str, body: UpdateWorkspace, request: Request, principal: Principal = Depends(require_principal)):
+async def update_workspace(workspace_id: str, request: Request, principal: Principal = Depends(require_principal)):
     workspace_id = workspace_uuid(workspace_id)
-    return execute(request, lambda session: service.update_workspace(session, principal, workspace_id, body.model_dump()))
+    member = await run_in_threadpool(execute, request, lambda session: service.require_workspace_access(session, principal, workspace_id))
+    if isinstance(member, JSONResponse):
+        return member
+    if member['role'] not in ('owner', 'admin'):
+        raise HTTPException(403, 'insufficient permissions')
+    from .decode import decode_update
+    try:
+        body = decode_update(await request.body())
+    except ValueError as exc:
+        raise HTTPException(400, str(exc))
+    return await run_in_threadpool(execute, request, lambda session: service.update_workspace(session, principal, workspace_id, body))
 
 
 @router.put('/api/workspaces/{workspace_id}/pin')
 async def pin_workspace(workspace_id: str, request: Request, principal: Principal = Depends(require_principal)):
     workspace_id = workspace_uuid(workspace_id)
+    from .decode import decode_pin
     try:
-        body = await request.json()
+        pinned = decode_pin(await request.body())
     except ValueError:
-        body = None
-    pinned = body.get('pinned') if isinstance(body, dict) else None
-    return execute(request, lambda session: service.set_pinned(session, principal, workspace_id, pinned))
+        pinned = None
+    return await run_in_threadpool(execute, request, lambda session: service.set_pinned(session, principal, workspace_id, pinned))
 
 
 @router.get('/api/workspaces/{workspace_id}/members')

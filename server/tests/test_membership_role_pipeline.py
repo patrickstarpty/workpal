@@ -21,10 +21,10 @@ from workpal_backend.workspaces.service import create_workspace
 
 
 @pytest.mark.parametrize('mode', ['normal', 'revoke_session', 'remove_membership'])
-def test_membership_role_pipeline(settings, mode):
+def test_membership_role_pipeline(settings, mode, isolated_relay_redis_port):
     settings.dev_auth = True
     settings.auth_secret = 's' * 32
-    settings.redis_url = 'redis://127.0.0.1:26379'
+    settings.redis_url = f'redis://127.0.0.1:{isolated_relay_redis_port}'
     settings.redis_key_prefix = 'test:member-role:' + uuid4().hex + ':'
     migrate(settings)
     app = create_app(settings)
@@ -88,7 +88,7 @@ def test_membership_role_pipeline(settings, mode):
             handled(app, event, delivery.client.xrevrange(delivery.channel, count=1)[0][0])
             expected = dict(type='member:updated', payload={'member': response.json()},
                 actor_id=owner[0], actor_type='member')
-            closed = {1, 2} if mode == 'revoke_session' else {1} if mode == 'remove_membership' else set()
+            closed = {1} if mode == 'remove_membership' else set()
             for index, ws in enumerate(sockets):
                 if index in closed:
                     assert receive(ws) == {'type': 'websocket.close', 'code': 1008, 'reason': ''}

@@ -1,0 +1,1355 @@
+{
+  "scope": "Original Go registerListeners with isolated audience resolver and broadcaster. Compares global-listener routing and exact serialized bytes, plus supported private project_event/resolve_audience bridge decisions. Includes events_sent_by_type counts, including zero-recipient private events. Personal subscriber typed payloads, audience SQL/deadlines, transport, revocation and live wiring are not certified.",
+  "fixtures": [
+    {
+      "Event": {
+        "type": "chat:new",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "html": "<>&\u2028",
+          "value": 1e-07
+        },
+        "chatSessionID": "chat",
+        "chatSessionOwnerID": "owner",
+        "memberPrivateUserID": "member"
+      },
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "chat:new",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "html": "<>&\u2028",
+          "value": 1e-07
+        },
+        "chatSessionID": "chat"
+      },
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "chat:future",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "html": "<>&\u2028",
+          "value": 1e-07
+        },
+        "chatSessionID": "chat",
+        "chatSessionOwnerID": "owner",
+        "memberPrivateUserID": "member"
+      },
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "chat:future",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "html": "<>&\u2028",
+          "value": 1e-07
+        },
+        "chatSessionID": "chat"
+      },
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "task:message",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "html": "<>&\u2028",
+          "value": 1e-07
+        },
+        "chatSessionID": "chat",
+        "chatSessionOwnerID": "owner",
+        "memberPrivateUserID": "member"
+      },
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "task:message",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "html": "<>&\u2028",
+          "value": 1e-07
+        },
+        "chatSessionID": "chat"
+      },
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "task:failed",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "html": "<>&\u2028",
+          "value": 1e-07
+        },
+        "chatSessionID": "chat",
+        "chatSessionOwnerID": "owner",
+        "memberPrivateUserID": "member"
+      },
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "task:failed",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "html": "<>&\u2028",
+          "value": 1e-07
+        },
+        "chatSessionID": "chat"
+      },
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "pin:created",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "html": "<>&\u2028",
+          "value": 1e-07
+        },
+        "chatSessionID": "chat",
+        "chatSessionOwnerID": "owner",
+        "memberPrivateUserID": "member"
+      },
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "pin:created",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "html": "<>&\u2028",
+          "value": 1e-07
+        },
+        "chatSessionID": "chat"
+      },
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "pin:deleted",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "html": "<>&\u2028",
+          "value": 1e-07
+        },
+        "chatSessionID": "chat",
+        "chatSessionOwnerID": "owner",
+        "memberPrivateUserID": "member"
+      },
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "pin:deleted",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "html": "<>&\u2028",
+          "value": 1e-07
+        },
+        "chatSessionID": "chat"
+      },
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "pin:reordered",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "html": "<>&\u2028",
+          "value": 1e-07
+        },
+        "chatSessionID": "chat",
+        "chatSessionOwnerID": "owner",
+        "memberPrivateUserID": "member"
+      },
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "pin:reordered",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "html": "<>&\u2028",
+          "value": 1e-07
+        },
+        "chatSessionID": "chat"
+      },
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "issue_view_preference:changed",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "html": "<>&\u2028",
+          "value": 1e-07
+        },
+        "chatSessionID": "chat",
+        "chatSessionOwnerID": "owner",
+        "memberPrivateUserID": "member"
+      },
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "issue_view_preference:changed",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "html": "<>&\u2028",
+          "value": 1e-07
+        },
+        "chatSessionID": "chat"
+      },
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "arbitrary",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "html": "<>&\u2028",
+          "value": 1e-07
+        },
+        "chatSessionID": "chat",
+        "chatSessionOwnerID": "owner",
+        "memberPrivateUserID": "member"
+      },
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "arbitrary",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "html": "<>&\u2028",
+          "value": 1e-07
+        },
+        "chatSessionID": "chat"
+      },
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "task:message",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "html": "<>&\u2028",
+          "value": 1e-07
+        }
+      },
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "chat:new",
+        "workspaceID": "",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "html": "<>&\u2028",
+          "value": 1e-07
+        },
+        "chatSessionOwnerID": "owner"
+      },
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "arbitrary",
+        "workspaceID": "",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "html": "<>&\u2028",
+          "value": 1e-07
+        },
+        "memberPrivateUserID": "member"
+      },
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "daemon:future",
+        "workspaceID": "",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "html": "<>&\u2028",
+          "value": 1e-07
+        }
+      },
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "arbitrary",
+        "workspaceID": "",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "html": "<>&\u2028",
+          "value": 1e-07
+        }
+      },
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "task:failed",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "error": "secret",
+          "task_id": "t"
+        },
+        "chatSessionID": "chat",
+        "chatSessionOwnerID": "owner"
+      },
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "issue:updated",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "prev_description": "secret",
+          "prev_title": "old",
+          "issue": {
+            "title": "new"
+          }
+        }
+      },
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "task:failed",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": [
+          "error"
+        ]
+      },
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "issue:updated",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "html": "<>&\u2028",
+          "value": 1e-07
+        }
+      },
+      "Recipients": [
+        "u",
+        "u",
+        "v"
+      ],
+      "Private": true,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "issue:updated",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "html": "<>&\u2028",
+          "value": 1e-07
+        }
+      },
+      "Recipients": [],
+      "Private": true,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "issue:updated",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "html": "<>&\u2028",
+          "value": 1e-07
+        }
+      },
+      "Recipients": null,
+      "Private": true,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "issue:updated",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {
+          "html": "<>&\u2028",
+          "value": 1e-07
+        }
+      },
+      "Recipients": [],
+      "Private": false,
+      "Failure": true
+    },
+    {
+      "Event": {
+        "type": "inbox:new",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {}
+      },
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "inbox:read",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {}
+      },
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "invitation:created",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {}
+      },
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "invitation:revoked",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {}
+      },
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    },
+    {
+      "Event": {
+        "type": "issue_unread:changed",
+        "workspaceID": "w",
+        "actorID": "actor",
+        "actorType": "member",
+        "payload": {}
+      },
+      "Recipients": [],
+      "Private": false,
+      "Failure": false
+    }
+  ],
+  "go": [
+    {
+      "calls": [
+        {
+          "scope": "workspace_member",
+          "id": "w:owner",
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"html\":\"\\u003c\\u003e\\u0026\\u2028\",\"value\":1e-7},\"type\":\"chat:new\"}"
+        }
+      ],
+      "events": {
+        "chat:new": 1
+      }
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [
+        {
+          "scope": "workspace_member",
+          "id": "w:owner",
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"html\":\"\\u003c\\u003e\\u0026\\u2028\",\"value\":1e-7},\"type\":\"chat:future\"}"
+        }
+      ],
+      "events": {
+        "chat:future": 1
+      }
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [
+        {
+          "scope": "workspace_member",
+          "id": "w:owner",
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"html\":\"\\u003c\\u003e\\u0026\\u2028\",\"value\":1e-7},\"type\":\"task:message\"}"
+        }
+      ],
+      "events": {
+        "task:message": 1
+      }
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [
+        {
+          "scope": "workspace_member",
+          "id": "w:member",
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"html\":\"\\u003c\\u003e\\u0026\\u2028\",\"value\":1e-7},\"type\":\"task:failed\"}"
+        }
+      ],
+      "events": {
+        "task:failed": 1
+      }
+    },
+    {
+      "calls": [
+        {
+          "scope": "workspace",
+          "id": "w",
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"html\":\"\\u003c\\u003e\\u0026\\u2028\",\"value\":1e-7},\"type\":\"task:failed\"}"
+        }
+      ],
+      "events": {
+        "task:failed": 1
+      }
+    },
+    {
+      "calls": [
+        {
+          "scope": "workspace_member",
+          "id": "w:member",
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"html\":\"\\u003c\\u003e\\u0026\\u2028\",\"value\":1e-7},\"type\":\"pin:created\"}"
+        }
+      ],
+      "events": {
+        "pin:created": 1
+      }
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [
+        {
+          "scope": "workspace_member",
+          "id": "w:member",
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"html\":\"\\u003c\\u003e\\u0026\\u2028\",\"value\":1e-7},\"type\":\"pin:deleted\"}"
+        }
+      ],
+      "events": {
+        "pin:deleted": 1
+      }
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [
+        {
+          "scope": "workspace_member",
+          "id": "w:member",
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"html\":\"\\u003c\\u003e\\u0026\\u2028\",\"value\":1e-7},\"type\":\"pin:reordered\"}"
+        }
+      ],
+      "events": {
+        "pin:reordered": 1
+      }
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [
+        {
+          "scope": "workspace_member",
+          "id": "w:member",
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"html\":\"\\u003c\\u003e\\u0026\\u2028\",\"value\":1e-7},\"type\":\"issue_view_preference:changed\"}"
+        }
+      ],
+      "events": {
+        "issue_view_preference:changed": 1
+      }
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [
+        {
+          "scope": "workspace_member",
+          "id": "w:member",
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"html\":\"\\u003c\\u003e\\u0026\\u2028\",\"value\":1e-7},\"type\":\"arbitrary\"}"
+        }
+      ],
+      "events": {
+        "arbitrary": 1
+      }
+    },
+    {
+      "calls": [
+        {
+          "scope": "workspace",
+          "id": "w",
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"html\":\"\\u003c\\u003e\\u0026\\u2028\",\"value\":1e-7},\"type\":\"arbitrary\"}"
+        }
+      ],
+      "events": {
+        "arbitrary": 1
+      }
+    },
+    {
+      "calls": [
+        {
+          "scope": "workspace",
+          "id": "w",
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"html\":\"\\u003c\\u003e\\u0026\\u2028\",\"value\":1e-7},\"type\":\"task:message\"}"
+        }
+      ],
+      "events": {
+        "task:message": 1
+      }
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [
+        {
+          "scope": "global",
+          "id": "",
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"html\":\"\\u003c\\u003e\\u0026\\u2028\",\"value\":1e-7},\"type\":\"daemon:future\"}"
+        }
+      ],
+      "events": {
+        "daemon:future": 1
+      }
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [
+        {
+          "scope": "workspace",
+          "id": "w",
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"task_id\":\"t\"},\"type\":\"task:failed\"}"
+        }
+      ],
+      "events": {
+        "task:failed": 1
+      }
+    },
+    {
+      "calls": [
+        {
+          "scope": "workspace",
+          "id": "w",
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"issue\":{\"title\":\"new\"}},\"type\":\"issue:updated\"}"
+        }
+      ],
+      "events": {
+        "issue:updated": 1
+      }
+    },
+    {
+      "calls": [
+        {
+          "scope": "workspace",
+          "id": "w",
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":[\"error\"],\"type\":\"task:failed\"}"
+        }
+      ],
+      "events": {
+        "task:failed": 1
+      }
+    },
+    {
+      "calls": [
+        {
+          "scope": "workspace_member",
+          "id": "w:u",
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"html\":\"\\u003c\\u003e\\u0026\\u2028\",\"value\":1e-7},\"type\":\"issue:updated\"}"
+        },
+        {
+          "scope": "workspace_member",
+          "id": "w:u",
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"html\":\"\\u003c\\u003e\\u0026\\u2028\",\"value\":1e-7},\"type\":\"issue:updated\"}"
+        },
+        {
+          "scope": "workspace_member",
+          "id": "w:v",
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"html\":\"\\u003c\\u003e\\u0026\\u2028\",\"value\":1e-7},\"type\":\"issue:updated\"}"
+        }
+      ],
+      "events": {
+        "issue:updated": 1
+      }
+    },
+    {
+      "calls": [],
+      "events": {
+        "issue:updated": 1
+      }
+    },
+    {
+      "calls": [],
+      "events": {
+        "issue:updated": 1
+      }
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    }
+  ],
+  "python": [
+    {
+      "calls": [
+        {
+          "scope": "workspace_member",
+          "id": "w:owner",
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"html\":\"\\u003c\\u003e\\u0026\\u2028\",\"value\":1e-7},\"type\":\"chat:new\"}"
+        }
+      ],
+      "events": {
+        "chat:new": 1
+      }
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [
+        {
+          "scope": "workspace_member",
+          "id": "w:owner",
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"html\":\"\\u003c\\u003e\\u0026\\u2028\",\"value\":1e-7},\"type\":\"chat:future\"}"
+        }
+      ],
+      "events": {
+        "chat:future": 1
+      }
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [
+        {
+          "scope": "workspace_member",
+          "id": "w:owner",
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"html\":\"\\u003c\\u003e\\u0026\\u2028\",\"value\":1e-7},\"type\":\"task:message\"}"
+        }
+      ],
+      "events": {
+        "task:message": 1
+      }
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [
+        {
+          "scope": "workspace_member",
+          "id": "w:member",
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"html\":\"\\u003c\\u003e\\u0026\\u2028\",\"value\":1e-7},\"type\":\"task:failed\"}"
+        }
+      ],
+      "events": {
+        "task:failed": 1
+      }
+    },
+    {
+      "calls": [
+        {
+          "scope": "workspace",
+          "id": "w",
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"html\":\"\\u003c\\u003e\\u0026\\u2028\",\"value\":1e-7},\"type\":\"task:failed\"}"
+        }
+      ],
+      "events": {
+        "task:failed": 1
+      }
+    },
+    {
+      "calls": [
+        {
+          "scope": "workspace_member",
+          "id": "w:member",
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"html\":\"\\u003c\\u003e\\u0026\\u2028\",\"value\":1e-7},\"type\":\"pin:created\"}"
+        }
+      ],
+      "events": {
+        "pin:created": 1
+      }
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [
+        {
+          "scope": "workspace_member",
+          "id": "w:member",
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"html\":\"\\u003c\\u003e\\u0026\\u2028\",\"value\":1e-7},\"type\":\"pin:deleted\"}"
+        }
+      ],
+      "events": {
+        "pin:deleted": 1
+      }
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [
+        {
+          "scope": "workspace_member",
+          "id": "w:member",
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"html\":\"\\u003c\\u003e\\u0026\\u2028\",\"value\":1e-7},\"type\":\"pin:reordered\"}"
+        }
+      ],
+      "events": {
+        "pin:reordered": 1
+      }
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [
+        {
+          "scope": "workspace_member",
+          "id": "w:member",
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"html\":\"\\u003c\\u003e\\u0026\\u2028\",\"value\":1e-7},\"type\":\"issue_view_preference:changed\"}"
+        }
+      ],
+      "events": {
+        "issue_view_preference:changed": 1
+      }
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [
+        {
+          "scope": "workspace_member",
+          "id": "w:member",
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"html\":\"\\u003c\\u003e\\u0026\\u2028\",\"value\":1e-7},\"type\":\"arbitrary\"}"
+        }
+      ],
+      "events": {
+        "arbitrary": 1
+      }
+    },
+    {
+      "calls": [
+        {
+          "scope": "workspace",
+          "id": "w",
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"html\":\"\\u003c\\u003e\\u0026\\u2028\",\"value\":1e-7},\"type\":\"arbitrary\"}"
+        }
+      ],
+      "events": {
+        "arbitrary": 1
+      }
+    },
+    {
+      "calls": [
+        {
+          "scope": "workspace",
+          "id": "w",
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"html\":\"\\u003c\\u003e\\u0026\\u2028\",\"value\":1e-7},\"type\":\"task:message\"}"
+        }
+      ],
+      "events": {
+        "task:message": 1
+      }
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [
+        {
+          "scope": "global",
+          "id": "",
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"html\":\"\\u003c\\u003e\\u0026\\u2028\",\"value\":1e-7},\"type\":\"daemon:future\"}"
+        }
+      ],
+      "events": {
+        "daemon:future": 1
+      }
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [
+        {
+          "scope": "workspace",
+          "id": "w",
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"task_id\":\"t\"},\"type\":\"task:failed\"}"
+        }
+      ],
+      "events": {
+        "task:failed": 1
+      }
+    },
+    {
+      "calls": [
+        {
+          "scope": "workspace",
+          "id": "w",
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"issue\":{\"title\":\"new\"}},\"type\":\"issue:updated\"}"
+        }
+      ],
+      "events": {
+        "issue:updated": 1
+      }
+    },
+    {
+      "calls": [
+        {
+          "scope": "workspace",
+          "id": "w",
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":[\"error\"],\"type\":\"task:failed\"}"
+        }
+      ],
+      "events": {
+        "task:failed": 1
+      }
+    },
+    {
+      "calls": [
+        {
+          "scope": "workspace_member",
+          "id": "w:u",
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"html\":\"\\u003c\\u003e\\u0026\\u2028\",\"value\":1e-7},\"type\":\"issue:updated\"}"
+        },
+        {
+          "scope": "workspace_member",
+          "id": "w:u",
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"html\":\"\\u003c\\u003e\\u0026\\u2028\",\"value\":1e-7},\"type\":\"issue:updated\"}"
+        },
+        {
+          "scope": "workspace_member",
+          "id": "w:v",
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"html\":\"\\u003c\\u003e\\u0026\\u2028\",\"value\":1e-7},\"type\":\"issue:updated\"}"
+        }
+      ],
+      "events": {
+        "issue:updated": 1
+      }
+    },
+    {
+      "calls": [],
+      "events": {
+        "issue:updated": 1
+      }
+    },
+    {
+      "calls": [],
+      "events": {
+        "issue:updated": 1
+      }
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    },
+    {
+      "calls": [],
+      "events": {}
+    }
+  ],
+  "private_bridge": [
+    {
+      "case": 0,
+      "python": [
+        {
+          "scope": "workspace_member",
+          "id": "w:owner",
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"html\":\"\\u003c\\u003e\\u0026\\u2028\",\"value\":1e-7},\"type\":\"chat:new\"}"
+        }
+      ],
+      "go": [
+        {
+          "scope": "workspace_member",
+          "id": "w:owner",
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"html\":\"\\u003c\\u003e\\u0026\\u2028\",\"value\":1e-7},\"type\":\"chat:new\"}"
+        }
+      ]
+    },
+    {
+      "case": 1,
+      "python": [],
+      "go": []
+    },
+    {
+      "case": 2,
+      "python": [
+        {
+          "scope": "workspace_member",
+          "id": "w:owner",
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"html\":\"\\u003c\\u003e\\u0026\\u2028\",\"value\":1e-7},\"type\":\"chat:future\"}"
+        }
+      ],
+      "go": [
+        {
+          "scope": "workspace_member",
+          "id": "w:owner",
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"html\":\"\\u003c\\u003e\\u0026\\u2028\",\"value\":1e-7},\"type\":\"chat:future\"}"
+        }
+      ]
+    },
+    {
+      "case": 3,
+      "python": [],
+      "go": []
+    },
+    {
+      "case": 4,
+      "python": [
+        {
+          "scope": "workspace_member",
+          "id": "w:owner",
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"html\":\"\\u003c\\u003e\\u0026\\u2028\",\"value\":1e-7},\"type\":\"task:message\"}"
+        }
+      ],
+      "go": [
+        {
+          "scope": "workspace_member",
+          "id": "w:owner",
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"html\":\"\\u003c\\u003e\\u0026\\u2028\",\"value\":1e-7},\"type\":\"task:message\"}"
+        }
+      ]
+    },
+    {
+      "case": 5,
+      "python": [],
+      "go": []
+    },
+    {
+      "case": 6,
+      "python": [
+        {
+          "scope": "workspace_member",
+          "id": "w:member",
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"html\":\"\\u003c\\u003e\\u0026\\u2028\",\"value\":1e-7},\"type\":\"task:failed\"}"
+        }
+      ],
+      "go": [
+        {
+          "scope": "workspace_member",
+          "id": "w:member",
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"html\":\"\\u003c\\u003e\\u0026\\u2028\",\"value\":1e-7},\"type\":\"task:failed\"}"
+        }
+      ]
+    },
+    {
+      "case": 8,
+      "python": [
+        {
+          "scope": "workspace_member",
+          "id": "w:member",
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"html\":\"\\u003c\\u003e\\u0026\\u2028\",\"value\":1e-7},\"type\":\"pin:created\"}"
+        }
+      ],
+      "go": [
+        {
+          "scope": "workspace_member",
+          "id": "w:member",
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"html\":\"\\u003c\\u003e\\u0026\\u2028\",\"value\":1e-7},\"type\":\"pin:created\"}"
+        }
+      ]
+    },
+    {
+      "case": 9,
+      "python": [],
+      "go": []
+    },
+    {
+      "case": 10,
+      "python": [
+        {
+          "scope": "workspace_member",
+          "id": "w:member",
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"html\":\"\\u003c\\u003e\\u0026\\u2028\",\"value\":1e-7},\"type\":\"pin:deleted\"}"
+        }
+      ],
+      "go": [
+        {
+          "scope": "workspace_member",
+          "id": "w:member",
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"html\":\"\\u003c\\u003e\\u0026\\u2028\",\"value\":1e-7},\"type\":\"pin:deleted\"}"
+        }
+      ]
+    },
+    {
+      "case": 11,
+      "python": [],
+      "go": []
+    },
+    {
+      "case": 12,
+      "python": [
+        {
+          "scope": "workspace_member",
+          "id": "w:member",
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"html\":\"\\u003c\\u003e\\u0026\\u2028\",\"value\":1e-7},\"type\":\"pin:reordered\"}"
+        }
+      ],
+      "go": [
+        {
+          "scope": "workspace_member",
+          "id": "w:member",
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"html\":\"\\u003c\\u003e\\u0026\\u2028\",\"value\":1e-7},\"type\":\"pin:reordered\"}"
+        }
+      ]
+    },
+    {
+      "case": 13,
+      "python": [],
+      "go": []
+    },
+    {
+      "case": 14,
+      "python": [
+        {
+          "scope": "workspace_member",
+          "id": "w:member",
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"html\":\"\\u003c\\u003e\\u0026\\u2028\",\"value\":1e-7},\"type\":\"issue_view_preference:changed\"}"
+        }
+      ],
+      "go": [
+        {
+          "scope": "workspace_member",
+          "id": "w:member",
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"html\":\"\\u003c\\u003e\\u0026\\u2028\",\"value\":1e-7},\"type\":\"issue_view_preference:changed\"}"
+        }
+      ]
+    },
+    {
+      "case": 15,
+      "python": [],
+      "go": []
+    },
+    {
+      "case": 16,
+      "python": [
+        {
+          "scope": "workspace_member",
+          "id": "w:member",
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"html\":\"\\u003c\\u003e\\u0026\\u2028\",\"value\":1e-7},\"type\":\"arbitrary\"}"
+        }
+      ],
+      "go": [
+        {
+          "scope": "workspace_member",
+          "id": "w:member",
+          "data": "{\"actor_id\":\"actor\",\"actor_type\":\"member\",\"payload\":{\"html\":\"\\u003c\\u003e\\u0026\\u2028\",\"value\":1e-7},\"type\":\"arbitrary\"}"
+        }
+      ]
+    },
+    {
+      "case": 19,
+      "python": [],
+      "go": []
+    },
+    {
+      "case": 20,
+      "python": [],
+      "go": []
+    }
+  ],
+  "mismatches": [],
+  "source_sha256": {
+    "server/go/cmd/server/listeners.go": "367141ba8584f32ca1de337f65afcfbc7cb1dc0ae65012d0848812722dd303c9",
+    "server/tests/parity/go_realtime_forwarding/main.go": "4ebfae822010d17053c53e7b1e69c9697ac346d6830fb3fac097ac79bb4215d9",
+    "server/src/workpal_backend/realtime/forwarding.py": "df47f99f091de289f46da4695d3e93a30bb37cb330a3766a4cf208d94e53537b",
+    "server/src/workpal_backend/infrastructure/go_response.py": "a12ff4754b7af898c6682e6a298438fe71c85bef8bd89e6d2fb54bf98dd645af",
+    "server/src/workpal_backend/realtime/protocol.py": "f48333c7f4d499015fe340a2bde1197037870d4f59ec0b7c98ac27598be5a209",
+    "server/src/workpal_backend/realtime/metrics.py": "ea4b6d77c74980550055c51c29433a6275b0f70bc6b84013528b7d412a110fe6"
+  },
+  "binary_sha256": "59731428ce99d42be2421e35a2c3d1440d63503ddf9a9f42b68338f57932784b"
+}

@@ -9,9 +9,9 @@ from workpal_backend.infrastructure.redis import RedisResources
 from workpal_backend.workspaces.invitation_admission import InvitationAdmission, InvitationAdmissionError, WindowLimit
 
 
-def test_admission():
+def test_admission(isolated_relay_redis_port):
     async def run():
-        resources = RedisResources(SimpleNamespace(redis_url='redis://localhost:26379/0', redis_key_prefix=f'test:admission:{uuid4()}:'))
+        resources = RedisResources(SimpleNamespace(redis_url=f'redis://localhost:{isolated_relay_redis_port}/0', redis_key_prefix=f'test:admission:{uuid4()}:'))
         keys = set()
         def limiter(limits):
             return InvitationAdmission(resources, limits=limits)
@@ -19,7 +19,7 @@ def test_admission():
             keys.update(gate.keys(actor, workspace, email))
             await gate.admit(actor, workspace, email, **kw)
         try:
-            assert await resources.ready(), 'real Redis on 26379 required'
+            assert await resources.ready(), 'isolated Redis required'
             for dimension in range(3):
                 gate = limiter(tuple(WindowLimit(1 if i == dimension else 100, 10) for i in range(3)))
                 a, w, e = f'a{dimension}', f'w{dimension}', f'e{dimension}@x'

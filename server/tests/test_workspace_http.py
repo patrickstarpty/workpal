@@ -76,7 +76,7 @@ def test_denial_rollback_busy_and_policy(settings, monkeypatch):
         assert response.status_code == 503 and response.json()['retryable'] is True
 
 
-def test_authentication_database_busy_is_retryable(settings, monkeypatch):
+def test_go_jwt_authentication_does_not_read_legacy_session_table(settings, monkeypatch):
     from workpal_backend.auth import dependencies
     from workpal_backend.infrastructure.database import DatabaseBusy
     settings.dev_auth = True
@@ -88,6 +88,6 @@ def test_authentication_database_busy_is_retryable(settings, monkeypatch):
             raise DatabaseBusy('locked')
         monkeypatch.setattr(dependencies, 'validate_session', busy)
         response = client.get('/api/workspaces')
-        assert response.status_code == 503
-        assert response.json()['retryable'] is True
-        assert response.headers['retry-after'] == '1'
+        assert response.status_code == 200
+        assert response.json() == []
+        assert 'retry-after' not in response.headers

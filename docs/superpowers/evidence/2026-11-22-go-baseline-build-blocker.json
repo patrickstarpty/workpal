@@ -1,5 +1,5 @@
 {
-  "status": "approval_required_not_applied",
+  "status": "approved_reference_copy_patch_applied_type_audit_passed",
   "reason": "frozen Go baseline references nonexistent netip.Addr methods after branding substitution",
   "compiler_exit_code": 1,
   "changes": [
@@ -21,5 +21,8 @@
       "candidate_sha256": "21a0b8e11c6c7a6dd96259dc8775105d8aa2816e7255d539de8d869e7e3bbab1",
       "restored_calls": 1
     }
-  ]
+  ],
+  "approval": "User permitted the reference-copy repair and derived baseline explicitly",
+  "derived_baseline": "2026-11-22-go-derived-baseline.json",
+  "validation": "Go/types audit exits 0 after the approved patch; no behavioral parity result claimed"
 }

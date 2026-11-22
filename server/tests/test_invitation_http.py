@@ -86,4 +86,5 @@ def test_persisted_permissions_revoke_and_rollback(settings, monkeypatch):
         from workpal_backend.auth.sessions import revoke_session
         with app.state.database.transaction() as session:
             revoke_session(session, settings, login['token'])
-        assert client.get('/api/invitations', headers=owner_headers).status_code == 401
+        # Go JWT auth ignores local revocation rows; the business DB error remains visible.
+        assert client.get('/api/invitations', headers=owner_headers).status_code == 503

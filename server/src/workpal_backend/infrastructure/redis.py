@@ -1,4 +1,4 @@
-from redis.asyncio import Redis
+from .redis_cancellation import Redis
 from redis.exceptions import RedisError
 class RedisResources:
     def __init__(self, settings):

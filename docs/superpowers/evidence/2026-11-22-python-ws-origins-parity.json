@@ -1,0 +1,8479 @@
+{
+  "scope": "Original realtime checkOrigin, trusted proxy matching and Go1.26.9 URL host validity against Python policy. Selected schemes, malformed URLs, Unicode folds, proxy CIDRs, IPv4-mapped and scoped IPv6. No actual upgrade transport, environment origin selection or complete URL grammar certification.",
+  "fixtures": [
+    {
+      "Origin": "",
+      "Host": "host",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "",
+      "Host": "HOST",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "",
+      "Host": "",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "",
+      "Host": "[::1]",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "",
+      "Host": "k",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "",
+      "Host": "SS",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "https://host",
+      "Host": "host",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "https://host",
+      "Host": "HOST",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "https://host",
+      "Host": "",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "https://host",
+      "Host": "[::1]",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "https://host",
+      "Host": "k",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "https://host",
+      "Host": "SS",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "HTTP://HOST/path?x=1#fragment",
+      "Host": "host",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "HTTP://HOST/path?x=1#fragment",
+      "Host": "HOST",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "HTTP://HOST/path?x=1#fragment",
+      "Host": "",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "HTTP://HOST/path?x=1#fragment",
+      "Host": "[::1]",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "HTTP://HOST/path?x=1#fragment",
+      "Host": "k",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "HTTP://HOST/path?x=1#fragment",
+      "Host": "SS",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "//host",
+      "Host": "host",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "//host",
+      "Host": "HOST",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "//host",
+      "Host": "",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "//host",
+      "Host": "[::1]",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "//host",
+      "Host": "k",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "//host",
+      "Host": "SS",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "///host",
+      "Host": "host",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "///host",
+      "Host": "HOST",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "///host",
+      "Host": "",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "///host",
+      "Host": "[::1]",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "///host",
+      "Host": "k",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "///host",
+      "Host": "SS",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http:/host",
+      "Host": "host",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http:/host",
+      "Host": "HOST",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http:/host",
+      "Host": "",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http:/host",
+      "Host": "[::1]",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http:/host",
+      "Host": "k",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http:/host",
+      "Host": "SS",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "wss://host",
+      "Host": "host",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "wss://host",
+      "Host": "HOST",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "wss://host",
+      "Host": "",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "wss://host",
+      "Host": "[::1]",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "wss://host",
+      "Host": "k",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "wss://host",
+      "Host": "SS",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://user:p@ss@host",
+      "Host": "host",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://user:p@ss@host",
+      "Host": "HOST",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://user:p@ss@host",
+      "Host": "",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://user:p@ss@host",
+      "Host": "[::1]",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://user:p@ss@host",
+      "Host": "k",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://user:p@ss@host",
+      "Host": "SS",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://user%20name@host",
+      "Host": "host",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://user%20name@host",
+      "Host": "HOST",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://user%20name@host",
+      "Host": "",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://user%20name@host",
+      "Host": "[::1]",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://user%20name@host",
+      "Host": "k",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://user%20name@host",
+      "Host": "SS",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://\u00fc@host",
+      "Host": "host",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://\u00fc@host",
+      "Host": "HOST",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://\u00fc@host",
+      "Host": "",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://\u00fc@host",
+      "Host": "[::1]",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://\u00fc@host",
+      "Host": "k",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://\u00fc@host",
+      "Host": "SS",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://host:80",
+      "Host": "host",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://host:80",
+      "Host": "HOST",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://host:80",
+      "Host": "",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://host:80",
+      "Host": "[::1]",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://host:80",
+      "Host": "k",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://host:80",
+      "Host": "SS",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://host:bad",
+      "Host": "host",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://host:bad",
+      "Host": "HOST",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://host:bad",
+      "Host": "",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://host:bad",
+      "Host": "[::1]",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://host:bad",
+      "Host": "k",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://host:bad",
+      "Host": "SS",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://host:",
+      "Host": "host",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://host:",
+      "Host": "HOST",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://host:",
+      "Host": "",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://host:",
+      "Host": "[::1]",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://host:",
+      "Host": "k",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://host:",
+      "Host": "SS",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://host:80:90",
+      "Host": "host",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://host:80:90",
+      "Host": "HOST",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://host:80:90",
+      "Host": "",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://host:80:90",
+      "Host": "[::1]",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://host:80:90",
+      "Host": "k",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://host:80:90",
+      "Host": "SS",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "ws://host:80:90",
+      "Host": "host",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "ws://host:80:90",
+      "Host": "HOST",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "ws://host:80:90",
+      "Host": "",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "ws://host:80:90",
+      "Host": "[::1]",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "ws://host:80:90",
+      "Host": "k",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "ws://host:80:90",
+      "Host": "SS",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://host/%zz",
+      "Host": "host",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://host/%zz",
+      "Host": "HOST",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://host/%zz",
+      "Host": "",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://host/%zz",
+      "Host": "[::1]",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://host/%zz",
+      "Host": "k",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://host/%zz",
+      "Host": "SS",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://host/?x=%zz",
+      "Host": "host",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://host/?x=%zz",
+      "Host": "HOST",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://host/?x=%zz",
+      "Host": "",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://host/?x=%zz",
+      "Host": "[::1]",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://host/?x=%zz",
+      "Host": "k",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://host/?x=%zz",
+      "Host": "SS",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://host/#%zz",
+      "Host": "host",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://host/#%zz",
+      "Host": "HOST",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://host/#%zz",
+      "Host": "",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://host/#%zz",
+      "Host": "[::1]",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://host/#%zz",
+      "Host": "k",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://host/#%zz",
+      "Host": "SS",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://h%6fst",
+      "Host": "host",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://h%6fst",
+      "Host": "HOST",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://h%6fst",
+      "Host": "",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://h%6fst",
+      "Host": "[::1]",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://h%6fst",
+      "Host": "k",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://h%6fst",
+      "Host": "SS",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://host%25",
+      "Host": "host",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://host%25",
+      "Host": "HOST",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://host%25",
+      "Host": "",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://host%25",
+      "Host": "[::1]",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://host%25",
+      "Host": "k",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://host%25",
+      "Host": "SS",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://%C3%BC",
+      "Host": "host",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://%C3%BC",
+      "Host": "HOST",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://%C3%BC",
+      "Host": "",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://%C3%BC",
+      "Host": "[::1]",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://%C3%BC",
+      "Host": "k",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://%C3%BC",
+      "Host": "SS",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://[::1]",
+      "Host": "host",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://[::1]",
+      "Host": "HOST",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://[::1]",
+      "Host": "",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://[::1]",
+      "Host": "[::1]",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://[::1]",
+      "Host": "k",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://[::1]",
+      "Host": "SS",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://[::1%25eth0]",
+      "Host": "host",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://[::1%25eth0]",
+      "Host": "HOST",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://[::1%25eth0]",
+      "Host": "",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://[::1%25eth0]",
+      "Host": "[::1]",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://[::1%25eth0]",
+      "Host": "k",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://[::1%25eth0]",
+      "Host": "SS",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://[::1%25eth%20zero]",
+      "Host": "host",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://[::1%25eth%20zero]",
+      "Host": "HOST",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://[::1%25eth%20zero]",
+      "Host": "",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://[::1%25eth%20zero]",
+      "Host": "[::1]",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://[::1%25eth%20zero]",
+      "Host": "k",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://[::1%25eth%20zero]",
+      "Host": "SS",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://[127.0.0.1]",
+      "Host": "host",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://[127.0.0.1]",
+      "Host": "HOST",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://[127.0.0.1]",
+      "Host": "",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://[127.0.0.1]",
+      "Host": "[::1]",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://[127.0.0.1]",
+      "Host": "k",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://[127.0.0.1]",
+      "Host": "SS",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://[broken]",
+      "Host": "host",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://[broken]",
+      "Host": "HOST",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://[broken]",
+      "Host": "",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://[broken]",
+      "Host": "[::1]",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://[broken]",
+      "Host": "k",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://[broken]",
+      "Host": "SS",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://host[::1]",
+      "Host": "host",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://host[::1]",
+      "Host": "HOST",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://host[::1]",
+      "Host": "",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://host[::1]",
+      "Host": "[::1]",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://host[::1]",
+      "Host": "k",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://host[::1]",
+      "Host": "SS",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://host]",
+      "Host": "host",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://host]",
+      "Host": "HOST",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://host]",
+      "Host": "",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://host]",
+      "Host": "[::1]",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://host]",
+      "Host": "k",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://host]",
+      "Host": "SS",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://host\\evil",
+      "Host": "host",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://host\\evil",
+      "Host": "HOST",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://host\\evil",
+      "Host": "",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://host\\evil",
+      "Host": "[::1]",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://host\\evil",
+      "Host": "k",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://host\\evil",
+      "Host": "SS",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://host\t",
+      "Host": "host",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://host\t",
+      "Host": "HOST",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://host\t",
+      "Host": "",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://host\t",
+      "Host": "[::1]",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://host\t",
+      "Host": "k",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://host\t",
+      "Host": "SS",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://host/#\u0000",
+      "Host": "host",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://host/#\u0000",
+      "Host": "HOST",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://host/#\u0000",
+      "Host": "",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://host/#\u0000",
+      "Host": "[::1]",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://host/#\u0000",
+      "Host": "k",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://host/#\u0000",
+      "Host": "SS",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": " http://host",
+      "Host": "host",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": " http://host",
+      "Host": "HOST",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": " http://host",
+      "Host": "",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": " http://host",
+      "Host": "[::1]",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": " http://host",
+      "Host": "k",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": " http://host",
+      "Host": "SS",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "host",
+      "Host": "host",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "host",
+      "Host": "HOST",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "host",
+      "Host": "",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "host",
+      "Host": "[::1]",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "host",
+      "Host": "k",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "host",
+      "Host": "SS",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "1a:host",
+      "Host": "host",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "1a:host",
+      "Host": "HOST",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "1a:host",
+      "Host": "",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "1a:host",
+      "Host": "[::1]",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "1a:host",
+      "Host": "k",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "1a:host",
+      "Host": "SS",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "scheme:opaque%zz",
+      "Host": "host",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "scheme:opaque%zz",
+      "Host": "HOST",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "scheme:opaque%zz",
+      "Host": "",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "scheme:opaque%zz",
+      "Host": "[::1]",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "scheme:opaque%zz",
+      "Host": "k",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "scheme:opaque%zz",
+      "Host": "SS",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "https://\u212a",
+      "Host": "host",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "https://\u212a",
+      "Host": "HOST",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "https://\u212a",
+      "Host": "",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "https://\u212a",
+      "Host": "[::1]",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "https://\u212a",
+      "Host": "k",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "https://\u212a",
+      "Host": "SS",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "https://k",
+      "Host": "host",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "https://k",
+      "Host": "HOST",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "https://k",
+      "Host": "",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "https://k",
+      "Host": "[::1]",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "https://k",
+      "Host": "k",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "https://k",
+      "Host": "SS",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "https://\u017f",
+      "Host": "host",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "https://\u017f",
+      "Host": "HOST",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "https://\u017f",
+      "Host": "",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "https://\u017f",
+      "Host": "[::1]",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "https://\u017f",
+      "Host": "k",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "https://\u017f",
+      "Host": "SS",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "https://S",
+      "Host": "host",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "https://S",
+      "Host": "HOST",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "https://S",
+      "Host": "",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "https://S",
+      "Host": "[::1]",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "https://S",
+      "Host": "k",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "https://S",
+      "Host": "SS",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "https://\u00df",
+      "Host": "host",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "https://\u00df",
+      "Host": "HOST",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "https://\u00df",
+      "Host": "",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "https://\u00df",
+      "Host": "[::1]",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "https://\u00df",
+      "Host": "k",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "https://\u00df",
+      "Host": "SS",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "https://SS",
+      "Host": "host",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "https://SS",
+      "Host": "HOST",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "https://SS",
+      "Host": "",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "https://SS",
+      "Host": "[::1]",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "https://SS",
+      "Host": "k",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "https://SS",
+      "Host": "SS",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "https://allowed.example",
+      "Host": "host",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "https://allowed.example",
+      "Host": "HOST",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "https://allowed.example",
+      "Host": "",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "https://allowed.example",
+      "Host": "[::1]",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "https://allowed.example",
+      "Host": "k",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "https://allowed.example",
+      "Host": "SS",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "https://host?x=1",
+      "Host": "host",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "https://host?x=1",
+      "Host": "HOST",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "https://host?x=1",
+      "Host": "",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "https://host?x=1",
+      "Host": "[::1]",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "https://host?x=1",
+      "Host": "k",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "https://host?x=1",
+      "Host": "SS",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "https://host/path",
+      "Host": "host",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "https://host/path",
+      "Host": "HOST",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "https://host/path",
+      "Host": "",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "https://host/path",
+      "Host": "[::1]",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "https://host/path",
+      "Host": "k",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "https://host/path",
+      "Host": "SS",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "https://host:99999",
+      "Host": "host",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "https://host:99999",
+      "Host": "HOST",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "https://host:99999",
+      "Host": "",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "https://host:99999",
+      "Host": "[::1]",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "https://host:99999",
+      "Host": "k",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "https://host:99999",
+      "Host": "SS",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://<host>",
+      "Host": "host",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://<host>",
+      "Host": "HOST",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://<host>",
+      "Host": "",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://<host>",
+      "Host": "[::1]",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://<host>",
+      "Host": "k",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://<host>",
+      "Host": "SS",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://\"host\"",
+      "Host": "host",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://\"host\"",
+      "Host": "HOST",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://\"host\"",
+      "Host": "",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://\"host\"",
+      "Host": "[::1]",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://\"host\"",
+      "Host": "k",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "http://\"host\"",
+      "Host": "SS",
+      "Remote": "127.0.0.1:1000",
+      "Forwarded": " host, proxy",
+      "Allowed": [
+        "https://allowed.example"
+      ],
+      "Proxies": [
+        "127.0.0.0/8"
+      ]
+    },
+    {
+      "Origin": "https://public",
+      "Host": "internal",
+      "Remote": "127.0.0.1:80",
+      "Forwarded": " public, inner ",
+      "Allowed": [],
+      "Proxies": []
+    },
+    {
+      "Origin": "https://public",
+      "Host": "internal",
+      "Remote": "127.0.0.1:80",
+      "Forwarded": " public, inner ",
+      "Allowed": [],
+      "Proxies": [
+        "127.0.0.1/8"
+      ]
+    },
+    {
+      "Origin": "https://public",
+      "Host": "internal",
+      "Remote": "127.0.0.1:80",
+      "Forwarded": " public, inner ",
+      "Allowed": [],
+      "Proxies": [
+        "::1/128"
+      ]
+    },
+    {
+      "Origin": "https://public",
+      "Host": "internal",
+      "Remote": "127.0.0.1:80",
+      "Forwarded": " public, inner ",
+      "Allowed": [],
+      "Proxies": [
+        "::ffff:127.0.0.0/104"
+      ]
+    },
+    {
+      "Origin": "https://public",
+      "Host": "internal",
+      "Remote": "127.0.0.1:80",
+      "Forwarded": " public, inner ",
+      "Allowed": [],
+      "Proxies": [
+        "0.0.0.0/00"
+      ]
+    },
+    {
+      "Origin": "https://public",
+      "Host": "internal",
+      "Remote": "127.0.0.1:80",
+      "Forwarded": " public, inner ",
+      "Allowed": [],
+      "Proxies": [
+        "127.0.0.1"
+      ]
+    },
+    {
+      "Origin": "https://public",
+      "Host": "internal",
+      "Remote": "127.0.0.1:80",
+      "Forwarded": " public, inner ",
+      "Allowed": [],
+      "Proxies": [
+        "invalid",
+        "0.0.0.0/0",
+        "::/0"
+      ]
+    },
+    {
+      "Origin": "https://public",
+      "Host": "internal",
+      "Remote": "127.1.2.3:",
+      "Forwarded": " public, inner ",
+      "Allowed": [],
+      "Proxies": []
+    },
+    {
+      "Origin": "https://public",
+      "Host": "internal",
+      "Remote": "127.1.2.3:",
+      "Forwarded": " public, inner ",
+      "Allowed": [],
+      "Proxies": [
+        "127.0.0.1/8"
+      ]
+    },
+    {
+      "Origin": "https://public",
+      "Host": "internal",
+      "Remote": "127.1.2.3:",
+      "Forwarded": " public, inner ",
+      "Allowed": [],
+      "Proxies": [
+        "::1/128"
+      ]
+    },
+    {
+      "Origin": "https://public",
+      "Host": "internal",
+      "Remote": "127.1.2.3:",
+      "Forwarded": " public, inner ",
+      "Allowed": [],
+      "Proxies": [
+        "::ffff:127.0.0.0/104"
+      ]
+    },
+    {
+      "Origin": "https://public",
+      "Host": "internal",
+      "Remote": "127.1.2.3:",
+      "Forwarded": " public, inner ",
+      "Allowed": [],
+      "Proxies": [
+        "0.0.0.0/00"
+      ]
+    },
+    {
+      "Origin": "https://public",
+      "Host": "internal",
+      "Remote": "127.1.2.3:",
+      "Forwarded": " public, inner ",
+      "Allowed": [],
+      "Proxies": [
+        "127.0.0.1"
+      ]
+    },
+    {
+      "Origin": "https://public",
+      "Host": "internal",
+      "Remote": "127.1.2.3:",
+      "Forwarded": " public, inner ",
+      "Allowed": [],
+      "Proxies": [
+        "invalid",
+        "0.0.0.0/0",
+        "::/0"
+      ]
+    },
+    {
+      "Origin": "https://public",
+      "Host": "internal",
+      "Remote": "[::1]:80",
+      "Forwarded": " public, inner ",
+      "Allowed": [],
+      "Proxies": []
+    },
+    {
+      "Origin": "https://public",
+      "Host": "internal",
+      "Remote": "[::1]:80",
+      "Forwarded": " public, inner ",
+      "Allowed": [],
+      "Proxies": [
+        "127.0.0.1/8"
+      ]
+    },
+    {
+      "Origin": "https://public",
+      "Host": "internal",
+      "Remote": "[::1]:80",
+      "Forwarded": " public, inner ",
+      "Allowed": [],
+      "Proxies": [
+        "::1/128"
+      ]
+    },
+    {
+      "Origin": "https://public",
+      "Host": "internal",
+      "Remote": "[::1]:80",
+      "Forwarded": " public, inner ",
+      "Allowed": [],
+      "Proxies": [
+        "::ffff:127.0.0.0/104"
+      ]
+    },
+    {
+      "Origin": "https://public",
+      "Host": "internal",
+      "Remote": "[::1]:80",
+      "Forwarded": " public, inner ",
+      "Allowed": [],
+      "Proxies": [
+        "0.0.0.0/00"
+      ]
+    },
+    {
+      "Origin": "https://public",
+      "Host": "internal",
+      "Remote": "[::1]:80",
+      "Forwarded": " public, inner ",
+      "Allowed": [],
+      "Proxies": [
+        "127.0.0.1"
+      ]
+    },
+    {
+      "Origin": "https://public",
+      "Host": "internal",
+      "Remote": "[::1]:80",
+      "Forwarded": " public, inner ",
+      "Allowed": [],
+      "Proxies": [
+        "invalid",
+        "0.0.0.0/0",
+        "::/0"
+      ]
+    },
+    {
+      "Origin": "https://public",
+      "Host": "internal",
+      "Remote": "[::ffff:127.0.0.1]:80",
+      "Forwarded": " public, inner ",
+      "Allowed": [],
+      "Proxies": []
+    },
+    {
+      "Origin": "https://public",
+      "Host": "internal",
+      "Remote": "[::ffff:127.0.0.1]:80",
+      "Forwarded": " public, inner ",
+      "Allowed": [],
+      "Proxies": [
+        "127.0.0.1/8"
+      ]
+    },
+    {
+      "Origin": "https://public",
+      "Host": "internal",
+      "Remote": "[::ffff:127.0.0.1]:80",
+      "Forwarded": " public, inner ",
+      "Allowed": [],
+      "Proxies": [
+        "::1/128"
+      ]
+    },
+    {
+      "Origin": "https://public",
+      "Host": "internal",
+      "Remote": "[::ffff:127.0.0.1]:80",
+      "Forwarded": " public, inner ",
+      "Allowed": [],
+      "Proxies": [
+        "::ffff:127.0.0.0/104"
+      ]
+    },
+    {
+      "Origin": "https://public",
+      "Host": "internal",
+      "Remote": "[::ffff:127.0.0.1]:80",
+      "Forwarded": " public, inner ",
+      "Allowed": [],
+      "Proxies": [
+        "0.0.0.0/00"
+      ]
+    },
+    {
+      "Origin": "https://public",
+      "Host": "internal",
+      "Remote": "[::ffff:127.0.0.1]:80",
+      "Forwarded": " public, inner ",
+      "Allowed": [],
+      "Proxies": [
+        "127.0.0.1"
+      ]
+    },
+    {
+      "Origin": "https://public",
+      "Host": "internal",
+      "Remote": "[::ffff:127.0.0.1]:80",
+      "Forwarded": " public, inner ",
+      "Allowed": [],
+      "Proxies": [
+        "invalid",
+        "0.0.0.0/0",
+        "::/0"
+      ]
+    },
+    {
+      "Origin": "https://public",
+      "Host": "internal",
+      "Remote": "::1",
+      "Forwarded": " public, inner ",
+      "Allowed": [],
+      "Proxies": []
+    },
+    {
+      "Origin": "https://public",
+      "Host": "internal",
+      "Remote": "::1",
+      "Forwarded": " public, inner ",
+      "Allowed": [],
+      "Proxies": [
+        "127.0.0.1/8"
+      ]
+    },
+    {
+      "Origin": "https://public",
+      "Host": "internal",
+      "Remote": "::1",
+      "Forwarded": " public, inner ",
+      "Allowed": [],
+      "Proxies": [
+        "::1/128"
+      ]
+    },
+    {
+      "Origin": "https://public",
+      "Host": "internal",
+      "Remote": "::1",
+      "Forwarded": " public, inner ",
+      "Allowed": [],
+      "Proxies": [
+        "::ffff:127.0.0.0/104"
+      ]
+    },
+    {
+      "Origin": "https://public",
+      "Host": "internal",
+      "Remote": "::1",
+      "Forwarded": " public, inner ",
+      "Allowed": [],
+      "Proxies": [
+        "0.0.0.0/00"
+      ]
+    },
+    {
+      "Origin": "https://public",
+      "Host": "internal",
+      "Remote": "::1",
+      "Forwarded": " public, inner ",
+      "Allowed": [],
+      "Proxies": [
+        "127.0.0.1"
+      ]
+    },
+    {
+      "Origin": "https://public",
+      "Host": "internal",
+      "Remote": "::1",
+      "Forwarded": " public, inner ",
+      "Allowed": [],
+      "Proxies": [
+        "invalid",
+        "0.0.0.0/0",
+        "::/0"
+      ]
+    },
+    {
+      "Origin": "https://public",
+      "Host": "internal",
+      "Remote": "[::1]",
+      "Forwarded": " public, inner ",
+      "Allowed": [],
+      "Proxies": []
+    },
+    {
+      "Origin": "https://public",
+      "Host": "internal",
+      "Remote": "[::1]",
+      "Forwarded": " public, inner ",
+      "Allowed": [],
+      "Proxies": [
+        "127.0.0.1/8"
+      ]
+    },
+    {
+      "Origin": "https://public",
+      "Host": "internal",
+      "Remote": "[::1]",
+      "Forwarded": " public, inner ",
+      "Allowed": [],
+      "Proxies": [
+        "::1/128"
+      ]
+    },
+    {
+      "Origin": "https://public",
+      "Host": "internal",
+      "Remote": "[::1]",
+      "Forwarded": " public, inner ",
+      "Allowed": [],
+      "Proxies": [
+        "::ffff:127.0.0.0/104"
+      ]
+    },
+    {
+      "Origin": "https://public",
+      "Host": "internal",
+      "Remote": "[::1]",
+      "Forwarded": " public, inner ",
+      "Allowed": [],
+      "Proxies": [
+        "0.0.0.0/00"
+      ]
+    },
+    {
+      "Origin": "https://public",
+      "Host": "internal",
+      "Remote": "[::1]",
+      "Forwarded": " public, inner ",
+      "Allowed": [],
+      "Proxies": [
+        "127.0.0.1"
+      ]
+    },
+    {
+      "Origin": "https://public",
+      "Host": "internal",
+      "Remote": "[::1]",
+      "Forwarded": " public, inner ",
+      "Allowed": [],
+      "Proxies": [
+        "invalid",
+        "0.0.0.0/0",
+        "::/0"
+      ]
+    },
+    {
+      "Origin": "https://public",
+      "Host": "internal",
+      "Remote": "[::1%eth0]:80",
+      "Forwarded": " public, inner ",
+      "Allowed": [],
+      "Proxies": []
+    },
+    {
+      "Origin": "https://public",
+      "Host": "internal",
+      "Remote": "[::1%eth0]:80",
+      "Forwarded": " public, inner ",
+      "Allowed": [],
+      "Proxies": [
+        "127.0.0.1/8"
+      ]
+    },
+    {
+      "Origin": "https://public",
+      "Host": "internal",
+      "Remote": "[::1%eth0]:80",
+      "Forwarded": " public, inner ",
+      "Allowed": [],
+      "Proxies": [
+        "::1/128"
+      ]
+    },
+    {
+      "Origin": "https://public",
+      "Host": "internal",
+      "Remote": "[::1%eth0]:80",
+      "Forwarded": " public, inner ",
+      "Allowed": [],
+      "Proxies": [
+        "::ffff:127.0.0.0/104"
+      ]
+    },
+    {
+      "Origin": "https://public",
+      "Host": "internal",
+      "Remote": "[::1%eth0]:80",
+      "Forwarded": " public, inner ",
+      "Allowed": [],
+      "Proxies": [
+        "0.0.0.0/00"
+      ]
+    },
+    {
+      "Origin": "https://public",
+      "Host": "internal",
+      "Remote": "[::1%eth0]:80",
+      "Forwarded": " public, inner ",
+      "Allowed": [],
+      "Proxies": [
+        "127.0.0.1"
+      ]
+    },
+    {
+      "Origin": "https://public",
+      "Host": "internal",
+      "Remote": "[::1%eth0]:80",
+      "Forwarded": " public, inner ",
+      "Allowed": [],
+      "Proxies": [
+        "invalid",
+        "0.0.0.0/0",
+        "::/0"
+      ]
+    },
+    {
+      "Origin": "https://public",
+      "Host": "internal",
+      "Remote": "192.0.2.1:80",
+      "Forwarded": " public, inner ",
+      "Allowed": [],
+      "Proxies": []
+    },
+    {
+      "Origin": "https://public",
+      "Host": "internal",
+      "Remote": "192.0.2.1:80",
+      "Forwarded": " public, inner ",
+      "Allowed": [],
+      "Proxies": [
+        "127.0.0.1/8"
+      ]
+    },
+    {
+      "Origin": "https://public",
+      "Host": "internal",
+      "Remote": "192.0.2.1:80",
+      "Forwarded": " public, inner ",
+      "Allowed": [],
+      "Proxies": [
+        "::1/128"
+      ]
+    },
+    {
+      "Origin": "https://public",
+      "Host": "internal",
+      "Remote": "192.0.2.1:80",
+      "Forwarded": " public, inner ",
+      "Allowed": [],
+      "Proxies": [
+        "::ffff:127.0.0.0/104"
+      ]
+    },
+    {
+      "Origin": "https://public",
+      "Host": "internal",
+      "Remote": "192.0.2.1:80",
+      "Forwarded": " public, inner ",
+      "Allowed": [],
+      "Proxies": [
+        "0.0.0.0/00"
+      ]
+    },
+    {
+      "Origin": "https://public",
+      "Host": "internal",
+      "Remote": "192.0.2.1:80",
+      "Forwarded": " public, inner ",
+      "Allowed": [],
+      "Proxies": [
+        "127.0.0.1"
+      ]
+    },
+    {
+      "Origin": "https://public",
+      "Host": "internal",
+      "Remote": "192.0.2.1:80",
+      "Forwarded": " public, inner ",
+      "Allowed": [],
+      "Proxies": [
+        "invalid",
+        "0.0.0.0/0",
+        "::/0"
+      ]
+    },
+    {
+      "Origin": "https://public",
+      "Host": "internal",
+      "Remote": "localhost:80",
+      "Forwarded": " public, inner ",
+      "Allowed": [],
+      "Proxies": []
+    },
+    {
+      "Origin": "https://public",
+      "Host": "internal",
+      "Remote": "localhost:80",
+      "Forwarded": " public, inner ",
+      "Allowed": [],
+      "Proxies": [
+        "127.0.0.1/8"
+      ]
+    },
+    {
+      "Origin": "https://public",
+      "Host": "internal",
+      "Remote": "localhost:80",
+      "Forwarded": " public, inner ",
+      "Allowed": [],
+      "Proxies": [
+        "::1/128"
+      ]
+    },
+    {
+      "Origin": "https://public",
+      "Host": "internal",
+      "Remote": "localhost:80",
+      "Forwarded": " public, inner ",
+      "Allowed": [],
+      "Proxies": [
+        "::ffff:127.0.0.0/104"
+      ]
+    },
+    {
+      "Origin": "https://public",
+      "Host": "internal",
+      "Remote": "localhost:80",
+      "Forwarded": " public, inner ",
+      "Allowed": [],
+      "Proxies": [
+        "0.0.0.0/00"
+      ]
+    },
+    {
+      "Origin": "https://public",
+      "Host": "internal",
+      "Remote": "localhost:80",
+      "Forwarded": " public, inner ",
+      "Allowed": [],
+      "Proxies": [
+        "127.0.0.1"
+      ]
+    },
+    {
+      "Origin": "https://public",
+      "Host": "internal",
+      "Remote": "localhost:80",
+      "Forwarded": " public, inner ",
+      "Allowed": [],
+      "Proxies": [
+        "invalid",
+        "0.0.0.0/0",
+        "::/0"
+      ]
+    },
+    {
+      "Origin": "https://public",
+      "Host": "internal",
+      "Remote": "127.0.0.1:bad",
+      "Forwarded": " public, inner ",
+      "Allowed": [],
+      "Proxies": []
+    },
+    {
+      "Origin": "https://public",
+      "Host": "internal",
+      "Remote": "127.0.0.1:bad",
+      "Forwarded": " public, inner ",
+      "Allowed": [],
+      "Proxies": [
+        "127.0.0.1/8"
+      ]
+    },
+    {
+      "Origin": "https://public",
+      "Host": "internal",
+      "Remote": "127.0.0.1:bad",
+      "Forwarded": " public, inner ",
+      "Allowed": [],
+      "Proxies": [
+        "::1/128"
+      ]
+    },
+    {
+      "Origin": "https://public",
+      "Host": "internal",
+      "Remote": "127.0.0.1:bad",
+      "Forwarded": " public, inner ",
+      "Allowed": [],
+      "Proxies": [
+        "::ffff:127.0.0.0/104"
+      ]
+    },
+    {
+      "Origin": "https://public",
+      "Host": "internal",
+      "Remote": "127.0.0.1:bad",
+      "Forwarded": " public, inner ",
+      "Allowed": [],
+      "Proxies": [
+        "0.0.0.0/00"
+      ]
+    },
+    {
+      "Origin": "https://public",
+      "Host": "internal",
+      "Remote": "127.0.0.1:bad",
+      "Forwarded": " public, inner ",
+      "Allowed": [],
+      "Proxies": [
+        "127.0.0.1"
+      ]
+    },
+    {
+      "Origin": "https://public",
+      "Host": "internal",
+      "Remote": "127.0.0.1:bad",
+      "Forwarded": " public, inner ",
+      "Allowed": [],
+      "Proxies": [
+        "invalid",
+        "0.0.0.0/0",
+        "::/0"
+      ]
+    },
+    {
+      "Origin": "https://public",
+      "Host": "internal",
+      "Remote": "127.0.0.01:80",
+      "Forwarded": " public, inner ",
+      "Allowed": [],
+      "Proxies": []
+    },
+    {
+      "Origin": "https://public",
+      "Host": "internal",
+      "Remote": "127.0.0.01:80",
+      "Forwarded": " public, inner ",
+      "Allowed": [],
+      "Proxies": [
+        "127.0.0.1/8"
+      ]
+    },
+    {
+      "Origin": "https://public",
+      "Host": "internal",
+      "Remote": "127.0.0.01:80",
+      "Forwarded": " public, inner ",
+      "Allowed": [],
+      "Proxies": [
+        "::1/128"
+      ]
+    },
+    {
+      "Origin": "https://public",
+      "Host": "internal",
+      "Remote": "127.0.0.01:80",
+      "Forwarded": " public, inner ",
+      "Allowed": [],
+      "Proxies": [
+        "::ffff:127.0.0.0/104"
+      ]
+    },
+    {
+      "Origin": "https://public",
+      "Host": "internal",
+      "Remote": "127.0.0.01:80",
+      "Forwarded": " public, inner ",
+      "Allowed": [],
+      "Proxies": [
+        "0.0.0.0/00"
+      ]
+    },
+    {
+      "Origin": "https://public",
+      "Host": "internal",
+      "Remote": "127.0.0.01:80",
+      "Forwarded": " public, inner ",
+      "Allowed": [],
+      "Proxies": [
+        "127.0.0.1"
+      ]
+    },
+    {
+      "Origin": "https://public",
+      "Host": "internal",
+      "Remote": "127.0.0.01:80",
+      "Forwarded": " public, inner ",
+      "Allowed": [],
+      "Proxies": [
+        "invalid",
+        "0.0.0.0/0",
+        "::/0"
+      ]
+    }
+  ],
+  "go": [
+    {
+      "allowed": true,
+      "host": "",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "host": "",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "host": "",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "host": "",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "host": "",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "host": "",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "host": "host",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "host": "host",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "host": "host",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "host": "host",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "host": "host",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "host": "host",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "host": "HOST",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "host": "HOST",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "host": "HOST",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "host": "HOST",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "host": "HOST",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "host": "HOST",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "host": "host",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "host": "host",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "host": "host",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "host": "host",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "host": "host",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "host": "host",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "host": "",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "host": "",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "host": "host",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "host": "host",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "host": "host",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "host": "host",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "host": "host",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "host": "host",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "host": "host",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "host": "host",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "host": "host",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "host": "host",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "host": "host",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "host": "host",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "host": "host",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "host": "host",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "host": "host",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "host": "host",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "host": "host",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "host": "host",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "",
+      "trusted": true,
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "host": "",
+      "trusted": true,
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "host": "",
+      "trusted": true,
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "host": "",
+      "trusted": true,
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "host": "",
+      "trusted": true,
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "host": "",
+      "trusted": true,
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "host": "host:80",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "host:80",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "host:80",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "host:80",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "host:80",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "host:80",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "",
+      "trusted": true,
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "host": "",
+      "trusted": true,
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "host": "",
+      "trusted": true,
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "host": "",
+      "trusted": true,
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "host": "",
+      "trusted": true,
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "host": "",
+      "trusted": true,
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "host": "host:",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "host:",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "host:",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "host:",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "host:",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "host:",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "",
+      "trusted": true,
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "host": "",
+      "trusted": true,
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "host": "",
+      "trusted": true,
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "host": "",
+      "trusted": true,
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "host": "",
+      "trusted": true,
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "host": "",
+      "trusted": true,
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "host": "host:80:90",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "host:80:90",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "host:80:90",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "host:80:90",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "host:80:90",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "host:80:90",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "",
+      "trusted": true,
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "host": "",
+      "trusted": true,
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "host": "",
+      "trusted": true,
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "host": "",
+      "trusted": true,
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "host": "",
+      "trusted": true,
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "host": "",
+      "trusted": true,
+      "valid_url": false
+    },
+    {
+      "allowed": true,
+      "host": "host",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "host": "host",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "host": "host",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "host": "host",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "host": "host",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "host": "host",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "",
+      "trusted": true,
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "host": "",
+      "trusted": true,
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "host": "",
+      "trusted": true,
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "host": "",
+      "trusted": true,
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "host": "",
+      "trusted": true,
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "host": "",
+      "trusted": true,
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "host": "",
+      "trusted": true,
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "host": "",
+      "trusted": true,
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "host": "",
+      "trusted": true,
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "host": "",
+      "trusted": true,
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "host": "",
+      "trusted": true,
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "host": "",
+      "trusted": true,
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "host": "host%",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "host%",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "host%",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "host%",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "host%",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "host%",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "\u00fc",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "\u00fc",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "\u00fc",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "\u00fc",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "\u00fc",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "\u00fc",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "[::1]",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "[::1]",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "[::1]",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "host": "[::1]",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "[::1]",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "[::1]",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "[::1%eth0]",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "[::1%eth0]",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "[::1%eth0]",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "[::1%eth0]",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "[::1%eth0]",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "[::1%eth0]",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "[::1%eth zero]",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "[::1%eth zero]",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "[::1%eth zero]",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "[::1%eth zero]",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "[::1%eth zero]",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "[::1%eth zero]",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "",
+      "trusted": true,
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "host": "",
+      "trusted": true,
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "host": "",
+      "trusted": true,
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "host": "",
+      "trusted": true,
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "host": "",
+      "trusted": true,
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "host": "",
+      "trusted": true,
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "host": "",
+      "trusted": true,
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "host": "",
+      "trusted": true,
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "host": "",
+      "trusted": true,
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "host": "",
+      "trusted": true,
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "host": "",
+      "trusted": true,
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "host": "",
+      "trusted": true,
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "host": "",
+      "trusted": true,
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "host": "",
+      "trusted": true,
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "host": "",
+      "trusted": true,
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "host": "",
+      "trusted": true,
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "host": "",
+      "trusted": true,
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "host": "",
+      "trusted": true,
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "host": "host]",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "host]",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "host]",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "host]",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "host]",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "host]",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "",
+      "trusted": true,
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "host": "",
+      "trusted": true,
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "host": "",
+      "trusted": true,
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "host": "",
+      "trusted": true,
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "host": "",
+      "trusted": true,
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "host": "",
+      "trusted": true,
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "host": "",
+      "trusted": true,
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "host": "",
+      "trusted": true,
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "host": "",
+      "trusted": true,
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "host": "",
+      "trusted": true,
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "host": "",
+      "trusted": true,
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "host": "",
+      "trusted": true,
+      "valid_url": false
+    },
+    {
+      "allowed": true,
+      "host": "host",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "host": "host",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "host": "host",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "host": "host",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "host": "host",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "host": "host",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "",
+      "trusted": true,
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "host": "",
+      "trusted": true,
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "host": "",
+      "trusted": true,
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "host": "",
+      "trusted": true,
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "host": "",
+      "trusted": true,
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "host": "",
+      "trusted": true,
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "host": "",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "host": "",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "",
+      "trusted": true,
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "host": "",
+      "trusted": true,
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "host": "",
+      "trusted": true,
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "host": "",
+      "trusted": true,
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "host": "",
+      "trusted": true,
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "host": "",
+      "trusted": true,
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "host": "",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "host": "",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "\u212a",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "\u212a",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "\u212a",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "\u212a",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "host": "\u212a",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "\u212a",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "k",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "k",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "k",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "k",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "host": "k",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "k",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "\u017f",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "\u017f",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "\u017f",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "\u017f",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "\u017f",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "\u017f",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "S",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "S",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "S",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "S",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "S",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "S",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "\u00df",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "\u00df",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "\u00df",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "\u00df",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "\u00df",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "\u00df",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "SS",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "SS",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "SS",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "SS",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "SS",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "host": "SS",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "host": "allowed.example",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "host": "allowed.example",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "host": "allowed.example",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "host": "allowed.example",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "host": "allowed.example",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "host": "allowed.example",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "host": "host",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "host": "host",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "host": "host",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "host": "host",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "host": "host",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "host": "host",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "host": "host",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "host": "host",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "host": "host",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "host": "host",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "host": "host",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "host": "host",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "host:99999",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "host:99999",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "host:99999",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "host:99999",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "host:99999",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "host:99999",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "<host>",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "<host>",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "<host>",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "<host>",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "<host>",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "<host>",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "\"host\"",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "\"host\"",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "\"host\"",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "\"host\"",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "\"host\"",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "\"host\"",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "public",
+      "trusted": false,
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "host": "public",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "public",
+      "trusted": false,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "public",
+      "trusted": false,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "public",
+      "trusted": false,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "public",
+      "trusted": false,
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "host": "public",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "public",
+      "trusted": false,
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "host": "public",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "public",
+      "trusted": false,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "public",
+      "trusted": false,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "public",
+      "trusted": false,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "public",
+      "trusted": false,
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "host": "public",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "public",
+      "trusted": false,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "public",
+      "trusted": false,
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "host": "public",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "public",
+      "trusted": false,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "public",
+      "trusted": false,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "public",
+      "trusted": false,
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "host": "public",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "public",
+      "trusted": false,
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "host": "public",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "public",
+      "trusted": false,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "public",
+      "trusted": false,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "public",
+      "trusted": false,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "public",
+      "trusted": false,
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "host": "public",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "public",
+      "trusted": false,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "public",
+      "trusted": false,
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "host": "public",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "public",
+      "trusted": false,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "public",
+      "trusted": false,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "public",
+      "trusted": false,
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "host": "public",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "public",
+      "trusted": false,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "public",
+      "trusted": false,
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "host": "public",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "public",
+      "trusted": false,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "public",
+      "trusted": false,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "public",
+      "trusted": false,
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "host": "public",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "public",
+      "trusted": false,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "public",
+      "trusted": false,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "public",
+      "trusted": false,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "public",
+      "trusted": false,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "public",
+      "trusted": false,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "public",
+      "trusted": false,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "public",
+      "trusted": false,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "public",
+      "trusted": false,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "public",
+      "trusted": false,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "public",
+      "trusted": false,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "public",
+      "trusted": false,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "public",
+      "trusted": false,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "public",
+      "trusted": false,
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "host": "public",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "public",
+      "trusted": false,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "public",
+      "trusted": false,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "public",
+      "trusted": false,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "public",
+      "trusted": false,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "public",
+      "trusted": false,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "public",
+      "trusted": false,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "public",
+      "trusted": false,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "public",
+      "trusted": false,
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "host": "public",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "public",
+      "trusted": false,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "public",
+      "trusted": false,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "public",
+      "trusted": false,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "public",
+      "trusted": false,
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "host": "public",
+      "trusted": true,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "public",
+      "trusted": false,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "public",
+      "trusted": false,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "public",
+      "trusted": false,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "public",
+      "trusted": false,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "public",
+      "trusted": false,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "public",
+      "trusted": false,
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "host": "public",
+      "trusted": false,
+      "valid_url": true
+    }
+  ],
+  "python": [
+    {
+      "allowed": true,
+      "trusted": true,
+      "host": "",
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "trusted": true,
+      "host": "",
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "trusted": true,
+      "host": "",
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "trusted": true,
+      "host": "",
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "trusted": true,
+      "host": "",
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "trusted": true,
+      "host": "",
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "trusted": true,
+      "host": "host",
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "trusted": true,
+      "host": "host",
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "trusted": true,
+      "host": "host",
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "trusted": true,
+      "host": "host",
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "trusted": true,
+      "host": "host",
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "trusted": true,
+      "host": "host",
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "trusted": true,
+      "host": "HOST",
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "trusted": true,
+      "host": "HOST",
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "trusted": true,
+      "host": "HOST",
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "trusted": true,
+      "host": "HOST",
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "trusted": true,
+      "host": "HOST",
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "trusted": true,
+      "host": "HOST",
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "trusted": true,
+      "host": "host",
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "trusted": true,
+      "host": "host",
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "trusted": true,
+      "host": "host",
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "trusted": true,
+      "host": "host",
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "trusted": true,
+      "host": "host",
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "trusted": true,
+      "host": "host",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "",
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "trusted": true,
+      "host": "",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "",
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "trusted": true,
+      "host": "",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "",
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "trusted": true,
+      "host": "host",
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "trusted": true,
+      "host": "host",
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "trusted": true,
+      "host": "host",
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "trusted": true,
+      "host": "host",
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "trusted": true,
+      "host": "host",
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "trusted": true,
+      "host": "host",
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "trusted": true,
+      "host": "host",
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "trusted": true,
+      "host": "host",
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "trusted": true,
+      "host": "host",
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "trusted": true,
+      "host": "host",
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "trusted": true,
+      "host": "host",
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "trusted": true,
+      "host": "host",
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "trusted": true,
+      "host": "host",
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "trusted": true,
+      "host": "host",
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "trusted": true,
+      "host": "host",
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "trusted": true,
+      "host": "host",
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "trusted": true,
+      "host": "host",
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "trusted": true,
+      "host": "host",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "",
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "",
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "",
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "",
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "",
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "",
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "host:80",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "host:80",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "host:80",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "host:80",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "host:80",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "host:80",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "",
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "",
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "",
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "",
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "",
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "",
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "host:",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "host:",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "host:",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "host:",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "host:",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "host:",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "",
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "",
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "",
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "",
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "",
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "",
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "host:80:90",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "host:80:90",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "host:80:90",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "host:80:90",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "host:80:90",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "host:80:90",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "",
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "",
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "",
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "",
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "",
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "",
+      "valid_url": false
+    },
+    {
+      "allowed": true,
+      "trusted": true,
+      "host": "host",
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "trusted": true,
+      "host": "host",
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "trusted": true,
+      "host": "host",
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "trusted": true,
+      "host": "host",
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "trusted": true,
+      "host": "host",
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "trusted": true,
+      "host": "host",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "",
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "",
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "",
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "",
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "",
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "",
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "",
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "",
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "",
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "",
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "",
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "",
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "host%",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "host%",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "host%",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "host%",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "host%",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "host%",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "\u00fc",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "\u00fc",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "\u00fc",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "\u00fc",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "\u00fc",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "\u00fc",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "[::1]",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "[::1]",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "[::1]",
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "trusted": true,
+      "host": "[::1]",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "[::1]",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "[::1]",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "[::1%eth0]",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "[::1%eth0]",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "[::1%eth0]",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "[::1%eth0]",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "[::1%eth0]",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "[::1%eth0]",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "[::1%eth zero]",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "[::1%eth zero]",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "[::1%eth zero]",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "[::1%eth zero]",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "[::1%eth zero]",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "[::1%eth zero]",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "",
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "",
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "",
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "",
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "",
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "",
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "",
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "",
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "",
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "",
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "",
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "",
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "",
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "",
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "",
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "",
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "",
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "",
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "host]",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "host]",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "host]",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "host]",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "host]",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "host]",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "",
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "",
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "",
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "",
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "",
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "",
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "",
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "",
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "",
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "",
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "",
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "",
+      "valid_url": false
+    },
+    {
+      "allowed": true,
+      "trusted": true,
+      "host": "host",
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "trusted": true,
+      "host": "host",
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "trusted": true,
+      "host": "host",
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "trusted": true,
+      "host": "host",
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "trusted": true,
+      "host": "host",
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "trusted": true,
+      "host": "host",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "",
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "",
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "",
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "",
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "",
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "",
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "",
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "trusted": true,
+      "host": "",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "",
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "",
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "",
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "",
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "",
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "",
+      "valid_url": false
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "",
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "trusted": true,
+      "host": "",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "\u212a",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "\u212a",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "\u212a",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "\u212a",
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "trusted": true,
+      "host": "\u212a",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "\u212a",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "k",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "k",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "k",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "k",
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "trusted": true,
+      "host": "k",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "k",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "\u017f",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "\u017f",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "\u017f",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "\u017f",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "\u017f",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "\u017f",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "S",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "S",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "S",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "S",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "S",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "S",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "\u00df",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "\u00df",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "\u00df",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "\u00df",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "\u00df",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "\u00df",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "SS",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "SS",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "SS",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "SS",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "SS",
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "trusted": true,
+      "host": "SS",
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "trusted": true,
+      "host": "allowed.example",
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "trusted": true,
+      "host": "allowed.example",
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "trusted": true,
+      "host": "allowed.example",
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "trusted": true,
+      "host": "allowed.example",
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "trusted": true,
+      "host": "allowed.example",
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "trusted": true,
+      "host": "allowed.example",
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "trusted": true,
+      "host": "host",
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "trusted": true,
+      "host": "host",
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "trusted": true,
+      "host": "host",
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "trusted": true,
+      "host": "host",
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "trusted": true,
+      "host": "host",
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "trusted": true,
+      "host": "host",
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "trusted": true,
+      "host": "host",
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "trusted": true,
+      "host": "host",
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "trusted": true,
+      "host": "host",
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "trusted": true,
+      "host": "host",
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "trusted": true,
+      "host": "host",
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "trusted": true,
+      "host": "host",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "host:99999",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "host:99999",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "host:99999",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "host:99999",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "host:99999",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "host:99999",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "<host>",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "<host>",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "<host>",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "<host>",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "<host>",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "<host>",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "\"host\"",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "\"host\"",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "\"host\"",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "\"host\"",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "\"host\"",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": true,
+      "host": "\"host\"",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": false,
+      "host": "public",
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "trusted": true,
+      "host": "public",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": false,
+      "host": "public",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": false,
+      "host": "public",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": false,
+      "host": "public",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": false,
+      "host": "public",
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "trusted": true,
+      "host": "public",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": false,
+      "host": "public",
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "trusted": true,
+      "host": "public",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": false,
+      "host": "public",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": false,
+      "host": "public",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": false,
+      "host": "public",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": false,
+      "host": "public",
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "trusted": true,
+      "host": "public",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": false,
+      "host": "public",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": false,
+      "host": "public",
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "trusted": true,
+      "host": "public",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": false,
+      "host": "public",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": false,
+      "host": "public",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": false,
+      "host": "public",
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "trusted": true,
+      "host": "public",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": false,
+      "host": "public",
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "trusted": true,
+      "host": "public",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": false,
+      "host": "public",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": false,
+      "host": "public",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": false,
+      "host": "public",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": false,
+      "host": "public",
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "trusted": true,
+      "host": "public",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": false,
+      "host": "public",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": false,
+      "host": "public",
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "trusted": true,
+      "host": "public",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": false,
+      "host": "public",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": false,
+      "host": "public",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": false,
+      "host": "public",
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "trusted": true,
+      "host": "public",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": false,
+      "host": "public",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": false,
+      "host": "public",
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "trusted": true,
+      "host": "public",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": false,
+      "host": "public",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": false,
+      "host": "public",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": false,
+      "host": "public",
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "trusted": true,
+      "host": "public",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": false,
+      "host": "public",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": false,
+      "host": "public",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": false,
+      "host": "public",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": false,
+      "host": "public",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": false,
+      "host": "public",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": false,
+      "host": "public",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": false,
+      "host": "public",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": false,
+      "host": "public",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": false,
+      "host": "public",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": false,
+      "host": "public",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": false,
+      "host": "public",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": false,
+      "host": "public",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": false,
+      "host": "public",
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "trusted": true,
+      "host": "public",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": false,
+      "host": "public",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": false,
+      "host": "public",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": false,
+      "host": "public",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": false,
+      "host": "public",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": false,
+      "host": "public",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": false,
+      "host": "public",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": false,
+      "host": "public",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": false,
+      "host": "public",
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "trusted": true,
+      "host": "public",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": false,
+      "host": "public",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": false,
+      "host": "public",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": false,
+      "host": "public",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": false,
+      "host": "public",
+      "valid_url": true
+    },
+    {
+      "allowed": true,
+      "trusted": true,
+      "host": "public",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": false,
+      "host": "public",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": false,
+      "host": "public",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": false,
+      "host": "public",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": false,
+      "host": "public",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": false,
+      "host": "public",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": false,
+      "host": "public",
+      "valid_url": true
+    },
+    {
+      "allowed": false,
+      "trusted": false,
+      "host": "public",
+      "valid_url": true
+    }
+  ],
+  "mismatches": [],
+  "source_sha256": {
+    "server/go/internal/realtime/hub.go": "33970bffe2c3d5c423dbdb57d6793d422a1ba8f0a3ae7f657faf51295fd9e57a",
+    "server/tests/parity/go_ws_origins/main.go": "7f44139ca2e50c563189f9d85768b7a19dcfe6fee9458aab55fa08db06ae68ff",
+    "server/tests/parity/go_ws_origins/wrapper.go": "6296dc94bc23f3574d50077e1d71e639d9c47acd5b7cc8a7e4d9769b6cc042ef",
+    "server/src/workpal_backend/realtime/origins.py": "69642801eea41a7571a958b5ef01bebd51047b5408185317256c83b5ad61ad7b",
+    "server/tools/run_ws_origins_parity.py": "5b969c6167efa9d4be810ecbf1da6a930f146cf1d6936c0230639f5265123548"
+  }
+}

@@ -167,6 +167,17 @@ def test_cli_dry_run_does_not_migrate_then_import_is_repeatable(target, source):
     env = dict(os.environ, PYTHONPATH=str(root/'src'), WORKPAL_DATABASE_URL=str(target.engine.url))
     command = [sys.executable, '-m', 'workpal_backend.cli', 'import-legacy', '--source', str(source), '--owner-email', 'dev@workpal.local']
     with target.engine.begin() as conn:
+        conn.exec_driver_sql('DROP TABLE activity_log')
+        conn.exec_driver_sql('DROP TABLE project')
+        conn.exec_driver_sql('DROP TABLE search_index_change')
+        conn.exec_driver_sql('DROP TABLE search_index_prune_mark')
+        conn.exec_driver_sql('DROP TABLE workpal_transaction_clock')
+        conn.exec_driver_sql('DROP TABLE chat_session')
+        conn.exec_driver_sql('DROP TABLE agent_skill')
+        conn.exec_driver_sql('DROP TABLE skill')
+        conn.exec_driver_sql('DROP TABLE agent')
+        conn.exec_driver_sql('DROP TABLE agent_runtime')
+        conn.exec_driver_sql('DROP TABLE personal_access_tokens')
         conn.exec_driver_sql('DROP TABLE legacy_imports')
         conn.exec_driver_sql('DROP TABLE workspace_records')
         conn.exec_driver_sql("UPDATE alembic_version SET version_num='0013'")

@@ -1,3 +1,4 @@
+import json
 import pytest
 from workpal_backend.realtime.protocol import project_event, ProjectionError
 
@@ -13,8 +14,12 @@ def test_revocation_projection():
 
 
 @pytest.mark.parametrize('kind', ['chat:updated', 'task:updated'])
-def test_unknown_types_closed(kind):
-    with pytest.raises(ProjectionError): project_event(event(kind), 'source')
+def test_unimplemented_public_types_and_ownerless_chat_closed(kind):
+    if kind.startswith('chat:'):
+        from workpal_backend.realtime.protocol import resolve_audience
+        assert resolve_audience(event(kind)) is None
+    else:
+        with pytest.raises(ProjectionError): project_event(event(kind), 'source')
 
 
 def test_created_audience_and_strict_payload():
@@ -46,7 +51,7 @@ def test_personal_fanout_cross_workspace_and_revalidation():
     async def exercise():
         class Socket:
             def __init__(self): self.frames = []
-            async def send_json(self, frame): self.frames.append(frame)
+            async def send_text(self, raw): self.frames.append(json.loads(raw))
             async def close(self, code): pass
         good, other, denied = Socket(), Socket(), Socket()
         def reject(): raise PermissionError()

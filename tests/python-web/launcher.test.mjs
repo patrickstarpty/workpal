@@ -104,10 +104,21 @@ for(const failed of ['serve','readiness'])test(`${failed} failure cleans up sibl
  await writeFile(`${dir}/fake.cjs`, `const cmd=process.argv[2];if(cmd==='migrate')process.exit(0);if(cmd===${JSON.stringify(failed)})process.exit(8);setInterval(()=>{},1000);`);
  try{await assert.rejects(launch({env:{...process.env,REDIS_URL:'redis://127.0.0.1:26379',WORKPAL_DATABASE_URL:`sqlite:///${dir}/db`,WORKPAL_PORT:'25185',WORKPAL_WEB_PORT:'25184'},python:process.execPath,pythonArgs:[`${dir}/fake.cjs`],readinessTimeout:200}),failed==='serve'?/exited/:/readiness/);}finally{await rm(dir,{recursive:true,force:true});}
 });
-test('unavailable Redis prevents real application readiness',async()=>{
+test('unavailable Redis does not gate Go-compatible readiness',async()=>{
+ const {spawn}=await import('node:child_process');
  const {mkdtemp,rm}=await import('node:fs/promises');
  const {tmpdir}=await import('node:os');
  const dir=await mkdtemp(`${tmpdir()}/workpal-no-redis-`);
- try{await assert.rejects(launch({mode:'production',env:{...process.env,WORKPAL_ENV:'development',WORKPAL_HOST:'127.0.0.1',WORKPAL_DATABASE_URL:`sqlite:///${dir}/db`,WORKPAL_UPLOAD_DIR:`${dir}/uploads`,REDIS_URL:'redis://127.0.0.1:1',REDIS_KEY_PREFIX:'workpal:unavailable-test:',WORKPAL_PORT:'25285'},readinessTimeout:1500}),/exited|readiness/);}finally{await rm(dir,{recursive:true,force:true});}
+ const child=spawn(process.execPath,['scripts/workpal-start.mjs'],{env:{...process.env,WORKPAL_ENV:'development',WORKPAL_HOST:'127.0.0.1',WORKPAL_DATABASE_URL:`sqlite:///${dir}/db`,WORKPAL_UPLOAD_DIR:`${dir}/uploads`,REDIS_URL:'redis://127.0.0.1:1',REDIS_KEY_PREFIX:'workpal:unavailable-test:',WORKPAL_PORT:'25285'},stdio:'ignore'});
+ const done=new Promise(resolve=>child.on('exit',resolve));
+ try {
+  let response;
+  for(let i=0;i<100;i++){
+   try{response=await fetch('http://127.0.0.1:25285/readyz',{signal:AbortSignal.timeout(500)});if(response.ok)break;}catch{}
+   await new Promise(resolve=>setTimeout(resolve,100));
+  }
+  assert.equal(response?.status,200);
+  assert.deepEqual(await response.json(),{status:'ok',checks:{db:'ok',migrations:'ok'}});
+ } finally {child.kill('SIGTERM');await done;await rm(dir,{recursive:true,force:true});}
  await assertFree(25285);
 });

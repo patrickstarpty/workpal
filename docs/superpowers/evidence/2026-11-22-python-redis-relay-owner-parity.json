@@ -1,0 +1,166 @@
+{
+  "scope": "Original Go Start ping order and initial connected state, immediate maintenance entry, Stop leaves parent active, Wait joins after parent cancellation. Empty Hub, cancellable Redis boundary. Includes final connected state and retention error count for blocked heartbeat/SCAN cancellation. Does not certify all event ordering, repeated Start, or full application integration.",
+  "fixtures": [
+    {
+      "Separate": false,
+      "Failure": ""
+    },
+    {
+      "Separate": false,
+      "Failure": "write"
+    },
+    {
+      "Separate": false,
+      "Failure": "read"
+    },
+    {
+      "Separate": true,
+      "Failure": ""
+    },
+    {
+      "Separate": true,
+      "Failure": "write"
+    },
+    {
+      "Separate": true,
+      "Failure": "read"
+    }
+  ],
+  "go": [
+    {
+      "connected": true,
+      "final_connected": false,
+      "joined": true,
+      "pings": [
+        "write"
+      ],
+      "retention_errors": 1,
+      "stop_canceled_parent": false
+    },
+    {
+      "connected": false,
+      "final_connected": false,
+      "joined": true,
+      "pings": [
+        "write"
+      ],
+      "retention_errors": 1,
+      "stop_canceled_parent": false
+    },
+    {
+      "connected": true,
+      "final_connected": false,
+      "joined": true,
+      "pings": [
+        "write"
+      ],
+      "retention_errors": 1,
+      "stop_canceled_parent": false
+    },
+    {
+      "connected": true,
+      "final_connected": false,
+      "joined": true,
+      "pings": [
+        "write",
+        "read"
+      ],
+      "retention_errors": 1,
+      "stop_canceled_parent": false
+    },
+    {
+      "connected": false,
+      "final_connected": false,
+      "joined": true,
+      "pings": [
+        "write"
+      ],
+      "retention_errors": 1,
+      "stop_canceled_parent": false
+    },
+    {
+      "connected": false,
+      "final_connected": false,
+      "joined": true,
+      "pings": [
+        "write",
+        "read"
+      ],
+      "retention_errors": 1,
+      "stop_canceled_parent": false
+    }
+  ],
+  "python": [
+    {
+      "pings": [
+        "write"
+      ],
+      "connected": true,
+      "stop_canceled_parent": false,
+      "joined": true,
+      "final_connected": false,
+      "retention_errors": 1
+    },
+    {
+      "pings": [
+        "write"
+      ],
+      "connected": false,
+      "stop_canceled_parent": false,
+      "joined": true,
+      "final_connected": false,
+      "retention_errors": 1
+    },
+    {
+      "pings": [
+        "write"
+      ],
+      "connected": true,
+      "stop_canceled_parent": false,
+      "joined": true,
+      "final_connected": false,
+      "retention_errors": 1
+    },
+    {
+      "pings": [
+        "write",
+        "read"
+      ],
+      "connected": true,
+      "stop_canceled_parent": false,
+      "joined": true,
+      "final_connected": false,
+      "retention_errors": 1
+    },
+    {
+      "pings": [
+        "write"
+      ],
+      "connected": false,
+      "stop_canceled_parent": false,
+      "joined": true,
+      "final_connected": false,
+      "retention_errors": 1
+    },
+    {
+      "pings": [
+        "write",
+        "read"
+      ],
+      "connected": false,
+      "stop_canceled_parent": false,
+      "joined": true,
+      "final_connected": false,
+      "retention_errors": 1
+    }
+  ],
+  "mismatches": [],
+  "source_sha256": {
+    "server/go/internal/realtime/redis_relay.go": "d0717fde50f3494be4731cb964c060faa54d761f2eaa6c3e1464158e53a58846",
+    "server/src/workpal_backend/realtime/redis_relay.py": "7bc43e319055a54adf806236f12d35a054f98991f9f7a40f22cdb125a059959a",
+    "server/src/workpal_backend/realtime/relay_consumers.py": "a69a2922a5ba244f3f6a4523680f21c8fb411d6524af2d9473bd0b79020cfdd7",
+    "server/src/workpal_backend/realtime/relay_maintenance.py": "d0529a31cee41ed9c1ccbcfd9f93298722e3e27bf01c2d9205c2717d36c913f4",
+    "server/tests/parity/go_redis_relay_owner/main.go": "ffba7ba229d0c5de7969a49ccc2393b8b33f2160615af4e0316d627c97cafbcc",
+    "server/tests/parity/go_redis_relay_owner/wrapper.go": "f03b46ecfe42ed5853542a462c6247fb6e0cc3a11c9a97a1dda5c8eaf65432c9"
+  }
+}

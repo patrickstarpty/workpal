@@ -1,0 +1,1105 @@
+{
+  "scope": "Fleet verifier identity/error and HTTP application request; offline, no Redis/HTTP middleware acceptance",
+  "test_only": true,
+  "fixtures": [
+    {
+      "body": "{\"valid\":true,\"owner_id\":\"owner\",\"instance_id\":\"i\",\"instance_record_id\":\"r\"}",
+      "status": 200,
+      "token": "mcn_fixture",
+      "owner": "exists"
+    },
+    {
+      "body": "{\"valid\":false}",
+      "status": 200,
+      "token": "mcn_fixture",
+      "owner": "exists"
+    },
+    {
+      "body": "{}",
+      "status": 200,
+      "token": "mcn_fixture",
+      "owner": "exists"
+    },
+    {
+      "body": "null",
+      "status": 200,
+      "token": "mcn_fixture",
+      "owner": "exists"
+    },
+    {
+      "body": "[]",
+      "status": 200,
+      "token": "mcn_fixture",
+      "owner": "exists"
+    },
+    {
+      "body": "{\"valid\":true}",
+      "status": 200,
+      "token": "mcn_fixture",
+      "owner": "exists"
+    },
+    {
+      "body": "{\"valid\":\"true\"}",
+      "status": 200,
+      "token": "mcn_fixture",
+      "owner": "exists"
+    },
+    {
+      "body": "{\"valid\":true,\"owner_id\":7}",
+      "status": 200,
+      "token": "mcn_fixture",
+      "owner": "exists"
+    },
+    {
+      "body": "{\"valid\":true,\"owner_id\":\"owner\"} trailing",
+      "status": 200,
+      "token": "mcn_fixture",
+      "owner": "exists"
+    },
+    {
+      "body": "{\"VALID\":true,\"OWNER_ID\":\"owner\"}",
+      "status": 200,
+      "token": "mcn_fixture",
+      "owner": "exists"
+    },
+    {
+      "body": "{\"valid\":null}",
+      "status": 200,
+      "token": "mcn_fixture",
+      "owner": "exists"
+    },
+    {
+      "body": "{\"valid\":true,\"owner_id\":\"owner\",\"owner_id\":null}",
+      "status": 200,
+      "token": "mcn_fixture",
+      "owner": "exists"
+    },
+    {
+      "body": "{\"valid\":true,\"owner_id\":7,\"owner_id\":\"owner\"}",
+      "status": 200,
+      "token": "mcn_fixture",
+      "owner": "exists"
+    },
+    {
+      "body": "{\"valid\":true,\"owner_id\":\"owner\",\"unknown\":7}",
+      "status": 200,
+      "token": "mcn_fixture",
+      "owner": "exists"
+    },
+    {
+      "body": "{\"valid\":true,\"owner_id\":\"owner\",\"instance_id\":\"i\",\"instance_record_id\":\"r\"}",
+      "status": 201,
+      "token": "mcn_fixture",
+      "owner": "exists"
+    },
+    {
+      "body": "{\"valid\":true,\"owner_id\":\"owner\",\"instance_id\":\"i\",\"instance_record_id\":\"r\"}",
+      "status": 400,
+      "token": "mcn_fixture",
+      "owner": "exists"
+    },
+    {
+      "body": "{\"valid\":true,\"owner_id\":\"owner\",\"instance_id\":\"i\",\"instance_record_id\":\"r\"}",
+      "status": 401,
+      "token": "mcn_fixture",
+      "owner": "exists"
+    },
+    {
+      "body": "{\"valid\":true,\"owner_id\":\"owner\",\"instance_id\":\"i\",\"instance_record_id\":\"r\"}",
+      "status": 403,
+      "token": "mcn_fixture",
+      "owner": "exists"
+    },
+    {
+      "body": "{\"valid\":true,\"owner_id\":\"owner\",\"instance_id\":\"i\",\"instance_record_id\":\"r\"}",
+      "status": 429,
+      "token": "mcn_fixture",
+      "owner": "exists"
+    },
+    {
+      "body": "{\"valid\":true,\"owner_id\":\"owner\",\"instance_id\":\"i\",\"instance_record_id\":\"r\"}",
+      "status": 500,
+      "token": "mcn_fixture",
+      "owner": "exists"
+    },
+    {
+      "body": "{\"valid\":true,\"owner_id\":\"owner\",\"instance_id\":\"i\",\"instance_record_id\":\"r\"}",
+      "status": 503,
+      "token": "mcn_fixture",
+      "owner": "exists"
+    },
+    {
+      "body": "{\"valid\":true,\"owner_id\":\"owner\",\"instance_id\":\"i\",\"instance_record_id\":\"r\"}",
+      "status": 200,
+      "token": "mcn_fixture",
+      "owner": "missing"
+    },
+    {
+      "body": "{\"valid\":true,\"owner_id\":\"owner\",\"instance_id\":\"i\",\"instance_record_id\":\"r\"}",
+      "status": 200,
+      "token": "mcn_fixture",
+      "owner": "error"
+    },
+    {
+      "body": "{\"valid\":true,\"owner_id\":\"owner\",\"instance_id\":\"i\",\"instance_record_id\":\"r\"}",
+      "status": 200,
+      "token": "",
+      "owner": "exists"
+    },
+    {
+      "body": "{\"valid\":true,\"owner_id\":\"owner\",\"instance_id\":\"i\",\"instance_record_id\":\"r\"}",
+      "status": 200,
+      "token": "mcn_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+      "owner": "exists"
+    },
+    {
+      "body": "{\"valid\":true,\"owner_id\":\"owner\",\"instance_id\":\"i\",\"instance_record_id\":\"r\"}",
+      "status": 200,
+      "token": "mcn_<&>",
+      "owner": "exists"
+    }
+  ],
+  "go": [
+    {
+      "calls": [
+        {
+          "accept": "application/json",
+          "body": "{\"token\":\"mcn_fixture\"}",
+          "content_type": "application/json",
+          "method": "POST",
+          "path": "/api/v1/pat/verify"
+        }
+      ],
+      "identity": {
+        "o": "owner",
+        "i": "i",
+        "r": "r"
+      },
+      "kind": "ok",
+      "owners": [
+        "owner"
+      ]
+    },
+    {
+      "calls": [
+        {
+          "accept": "application/json",
+          "body": "{\"token\":\"mcn_fixture\"}",
+          "content_type": "application/json",
+          "method": "POST",
+          "path": "/api/v1/pat/verify"
+        }
+      ],
+      "identity": {
+        "o": "",
+        "i": "",
+        "r": ""
+      },
+      "kind": "invalid",
+      "owners": []
+    },
+    {
+      "calls": [
+        {
+          "accept": "application/json",
+          "body": "{\"token\":\"mcn_fixture\"}",
+          "content_type": "application/json",
+          "method": "POST",
+          "path": "/api/v1/pat/verify"
+        }
+      ],
+      "identity": {
+        "o": "",
+        "i": "",
+        "r": ""
+      },
+      "kind": "invalid",
+      "owners": []
+    },
+    {
+      "calls": [
+        {
+          "accept": "application/json",
+          "body": "{\"token\":\"mcn_fixture\"}",
+          "content_type": "application/json",
+          "method": "POST",
+          "path": "/api/v1/pat/verify"
+        }
+      ],
+      "identity": {
+        "o": "",
+        "i": "",
+        "r": ""
+      },
+      "kind": "invalid",
+      "owners": []
+    },
+    {
+      "calls": [
+        {
+          "accept": "application/json",
+          "body": "{\"token\":\"mcn_fixture\"}",
+          "content_type": "application/json",
+          "method": "POST",
+          "path": "/api/v1/pat/verify"
+        }
+      ],
+      "identity": {
+        "o": "",
+        "i": "",
+        "r": ""
+      },
+      "kind": "unavailable",
+      "owners": []
+    },
+    {
+      "calls": [
+        {
+          "accept": "application/json",
+          "body": "{\"token\":\"mcn_fixture\"}",
+          "content_type": "application/json",
+          "method": "POST",
+          "path": "/api/v1/pat/verify"
+        }
+      ],
+      "identity": {
+        "o": "",
+        "i": "",
+        "r": ""
+      },
+      "kind": "unavailable",
+      "owners": []
+    },
+    {
+      "calls": [
+        {
+          "accept": "application/json",
+          "body": "{\"token\":\"mcn_fixture\"}",
+          "content_type": "application/json",
+          "method": "POST",
+          "path": "/api/v1/pat/verify"
+        }
+      ],
+      "identity": {
+        "o": "",
+        "i": "",
+        "r": ""
+      },
+      "kind": "unavailable",
+      "owners": []
+    },
+    {
+      "calls": [
+        {
+          "accept": "application/json",
+          "body": "{\"token\":\"mcn_fixture\"}",
+          "content_type": "application/json",
+          "method": "POST",
+          "path": "/api/v1/pat/verify"
+        }
+      ],
+      "identity": {
+        "o": "",
+        "i": "",
+        "r": ""
+      },
+      "kind": "unavailable",
+      "owners": []
+    },
+    {
+      "calls": [
+        {
+          "accept": "application/json",
+          "body": "{\"token\":\"mcn_fixture\"}",
+          "content_type": "application/json",
+          "method": "POST",
+          "path": "/api/v1/pat/verify"
+        }
+      ],
+      "identity": {
+        "o": "",
+        "i": "",
+        "r": ""
+      },
+      "kind": "unavailable",
+      "owners": []
+    },
+    {
+      "calls": [
+        {
+          "accept": "application/json",
+          "body": "{\"token\":\"mcn_fixture\"}",
+          "content_type": "application/json",
+          "method": "POST",
+          "path": "/api/v1/pat/verify"
+        }
+      ],
+      "identity": {
+        "o": "owner",
+        "i": "",
+        "r": ""
+      },
+      "kind": "ok",
+      "owners": [
+        "owner"
+      ]
+    },
+    {
+      "calls": [
+        {
+          "accept": "application/json",
+          "body": "{\"token\":\"mcn_fixture\"}",
+          "content_type": "application/json",
+          "method": "POST",
+          "path": "/api/v1/pat/verify"
+        }
+      ],
+      "identity": {
+        "o": "",
+        "i": "",
+        "r": ""
+      },
+      "kind": "invalid",
+      "owners": []
+    },
+    {
+      "calls": [
+        {
+          "accept": "application/json",
+          "body": "{\"token\":\"mcn_fixture\"}",
+          "content_type": "application/json",
+          "method": "POST",
+          "path": "/api/v1/pat/verify"
+        }
+      ],
+      "identity": {
+        "o": "owner",
+        "i": "",
+        "r": ""
+      },
+      "kind": "ok",
+      "owners": [
+        "owner"
+      ]
+    },
+    {
+      "calls": [
+        {
+          "accept": "application/json",
+          "body": "{\"token\":\"mcn_fixture\"}",
+          "content_type": "application/json",
+          "method": "POST",
+          "path": "/api/v1/pat/verify"
+        }
+      ],
+      "identity": {
+        "o": "",
+        "i": "",
+        "r": ""
+      },
+      "kind": "unavailable",
+      "owners": []
+    },
+    {
+      "calls": [
+        {
+          "accept": "application/json",
+          "body": "{\"token\":\"mcn_fixture\"}",
+          "content_type": "application/json",
+          "method": "POST",
+          "path": "/api/v1/pat/verify"
+        }
+      ],
+      "identity": {
+        "o": "owner",
+        "i": "",
+        "r": ""
+      },
+      "kind": "ok",
+      "owners": [
+        "owner"
+      ]
+    },
+    {
+      "calls": [
+        {
+          "accept": "application/json",
+          "body": "{\"token\":\"mcn_fixture\"}",
+          "content_type": "application/json",
+          "method": "POST",
+          "path": "/api/v1/pat/verify"
+        }
+      ],
+      "identity": {
+        "o": "",
+        "i": "",
+        "r": ""
+      },
+      "kind": "unavailable",
+      "owners": []
+    },
+    {
+      "calls": [
+        {
+          "accept": "application/json",
+          "body": "{\"token\":\"mcn_fixture\"}",
+          "content_type": "application/json",
+          "method": "POST",
+          "path": "/api/v1/pat/verify"
+        }
+      ],
+      "identity": {
+        "o": "",
+        "i": "",
+        "r": ""
+      },
+      "kind": "unavailable",
+      "owners": []
+    },
+    {
+      "calls": [
+        {
+          "accept": "application/json",
+          "body": "{\"token\":\"mcn_fixture\"}",
+          "content_type": "application/json",
+          "method": "POST",
+          "path": "/api/v1/pat/verify"
+        }
+      ],
+      "identity": {
+        "o": "",
+        "i": "",
+        "r": ""
+      },
+      "kind": "unavailable",
+      "owners": []
+    },
+    {
+      "calls": [
+        {
+          "accept": "application/json",
+          "body": "{\"token\":\"mcn_fixture\"}",
+          "content_type": "application/json",
+          "method": "POST",
+          "path": "/api/v1/pat/verify"
+        }
+      ],
+      "identity": {
+        "o": "",
+        "i": "",
+        "r": ""
+      },
+      "kind": "unavailable",
+      "owners": []
+    },
+    {
+      "calls": [
+        {
+          "accept": "application/json",
+          "body": "{\"token\":\"mcn_fixture\"}",
+          "content_type": "application/json",
+          "method": "POST",
+          "path": "/api/v1/pat/verify"
+        }
+      ],
+      "identity": {
+        "o": "",
+        "i": "",
+        "r": ""
+      },
+      "kind": "unavailable",
+      "owners": []
+    },
+    {
+      "calls": [
+        {
+          "accept": "application/json",
+          "body": "{\"token\":\"mcn_fixture\"}",
+          "content_type": "application/json",
+          "method": "POST",
+          "path": "/api/v1/pat/verify"
+        }
+      ],
+      "identity": {
+        "o": "",
+        "i": "",
+        "r": ""
+      },
+      "kind": "unavailable",
+      "owners": []
+    },
+    {
+      "calls": [
+        {
+          "accept": "application/json",
+          "body": "{\"token\":\"mcn_fixture\"}",
+          "content_type": "application/json",
+          "method": "POST",
+          "path": "/api/v1/pat/verify"
+        }
+      ],
+      "identity": {
+        "o": "",
+        "i": "",
+        "r": ""
+      },
+      "kind": "unavailable",
+      "owners": []
+    },
+    {
+      "calls": [
+        {
+          "accept": "application/json",
+          "body": "{\"token\":\"mcn_fixture\"}",
+          "content_type": "application/json",
+          "method": "POST",
+          "path": "/api/v1/pat/verify"
+        }
+      ],
+      "identity": {
+        "o": "",
+        "i": "",
+        "r": ""
+      },
+      "kind": "invalid",
+      "owners": [
+        "owner"
+      ]
+    },
+    {
+      "calls": [
+        {
+          "accept": "application/json",
+          "body": "{\"token\":\"mcn_fixture\"}",
+          "content_type": "application/json",
+          "method": "POST",
+          "path": "/api/v1/pat/verify"
+        }
+      ],
+      "identity": {
+        "o": "",
+        "i": "",
+        "r": ""
+      },
+      "kind": "unavailable",
+      "owners": [
+        "owner"
+      ]
+    },
+    {
+      "calls": [],
+      "identity": {
+        "o": "",
+        "i": "",
+        "r": ""
+      },
+      "kind": "invalid",
+      "owners": []
+    },
+    {
+      "calls": [],
+      "identity": {
+        "o": "",
+        "i": "",
+        "r": ""
+      },
+      "kind": "unavailable",
+      "owners": []
+    },
+    {
+      "calls": [
+        {
+          "accept": "application/json",
+          "body": "{\"token\":\"mcn_\\u003c\\u0026\\u003e\"}",
+          "content_type": "application/json",
+          "method": "POST",
+          "path": "/api/v1/pat/verify"
+        }
+      ],
+      "identity": {
+        "o": "owner",
+        "i": "i",
+        "r": "r"
+      },
+      "kind": "ok",
+      "owners": [
+        "owner"
+      ]
+    }
+  ],
+  "python": [
+    {
+      "kind": "ok",
+      "identity": {
+        "o": "owner",
+        "i": "i",
+        "r": "r"
+      },
+      "calls": [
+        {
+          "method": "POST",
+          "path": "/api/v1/pat/verify",
+          "body": "{\"token\":\"mcn_fixture\"}",
+          "content_type": "application/json",
+          "accept": "application/json"
+        }
+      ],
+      "owners": [
+        "owner"
+      ]
+    },
+    {
+      "kind": "invalid",
+      "identity": {
+        "o": "",
+        "i": "",
+        "r": ""
+      },
+      "calls": [
+        {
+          "method": "POST",
+          "path": "/api/v1/pat/verify",
+          "body": "{\"token\":\"mcn_fixture\"}",
+          "content_type": "application/json",
+          "accept": "application/json"
+        }
+      ],
+      "owners": []
+    },
+    {
+      "kind": "invalid",
+      "identity": {
+        "o": "",
+        "i": "",
+        "r": ""
+      },
+      "calls": [
+        {
+          "method": "POST",
+          "path": "/api/v1/pat/verify",
+          "body": "{\"token\":\"mcn_fixture\"}",
+          "content_type": "application/json",
+          "accept": "application/json"
+        }
+      ],
+      "owners": []
+    },
+    {
+      "kind": "invalid",
+      "identity": {
+        "o": "",
+        "i": "",
+        "r": ""
+      },
+      "calls": [
+        {
+          "method": "POST",
+          "path": "/api/v1/pat/verify",
+          "body": "{\"token\":\"mcn_fixture\"}",
+          "content_type": "application/json",
+          "accept": "application/json"
+        }
+      ],
+      "owners": []
+    },
+    {
+      "kind": "unavailable",
+      "identity": {
+        "o": "",
+        "i": "",
+        "r": ""
+      },
+      "calls": [
+        {
+          "method": "POST",
+          "path": "/api/v1/pat/verify",
+          "body": "{\"token\":\"mcn_fixture\"}",
+          "content_type": "application/json",
+          "accept": "application/json"
+        }
+      ],
+      "owners": []
+    },
+    {
+      "kind": "unavailable",
+      "identity": {
+        "o": "",
+        "i": "",
+        "r": ""
+      },
+      "calls": [
+        {
+          "method": "POST",
+          "path": "/api/v1/pat/verify",
+          "body": "{\"token\":\"mcn_fixture\"}",
+          "content_type": "application/json",
+          "accept": "application/json"
+        }
+      ],
+      "owners": []
+    },
+    {
+      "kind": "unavailable",
+      "identity": {
+        "o": "",
+        "i": "",
+        "r": ""
+      },
+      "calls": [
+        {
+          "method": "POST",
+          "path": "/api/v1/pat/verify",
+          "body": "{\"token\":\"mcn_fixture\"}",
+          "content_type": "application/json",
+          "accept": "application/json"
+        }
+      ],
+      "owners": []
+    },
+    {
+      "kind": "unavailable",
+      "identity": {
+        "o": "",
+        "i": "",
+        "r": ""
+      },
+      "calls": [
+        {
+          "method": "POST",
+          "path": "/api/v1/pat/verify",
+          "body": "{\"token\":\"mcn_fixture\"}",
+          "content_type": "application/json",
+          "accept": "application/json"
+        }
+      ],
+      "owners": []
+    },
+    {
+      "kind": "unavailable",
+      "identity": {
+        "o": "",
+        "i": "",
+        "r": ""
+      },
+      "calls": [
+        {
+          "method": "POST",
+          "path": "/api/v1/pat/verify",
+          "body": "{\"token\":\"mcn_fixture\"}",
+          "content_type": "application/json",
+          "accept": "application/json"
+        }
+      ],
+      "owners": []
+    },
+    {
+      "kind": "ok",
+      "identity": {
+        "o": "owner",
+        "i": "",
+        "r": ""
+      },
+      "calls": [
+        {
+          "method": "POST",
+          "path": "/api/v1/pat/verify",
+          "body": "{\"token\":\"mcn_fixture\"}",
+          "content_type": "application/json",
+          "accept": "application/json"
+        }
+      ],
+      "owners": [
+        "owner"
+      ]
+    },
+    {
+      "kind": "invalid",
+      "identity": {
+        "o": "",
+        "i": "",
+        "r": ""
+      },
+      "calls": [
+        {
+          "method": "POST",
+          "path": "/api/v1/pat/verify",
+          "body": "{\"token\":\"mcn_fixture\"}",
+          "content_type": "application/json",
+          "accept": "application/json"
+        }
+      ],
+      "owners": []
+    },
+    {
+      "kind": "ok",
+      "identity": {
+        "o": "owner",
+        "i": "",
+        "r": ""
+      },
+      "calls": [
+        {
+          "method": "POST",
+          "path": "/api/v1/pat/verify",
+          "body": "{\"token\":\"mcn_fixture\"}",
+          "content_type": "application/json",
+          "accept": "application/json"
+        }
+      ],
+      "owners": [
+        "owner"
+      ]
+    },
+    {
+      "kind": "unavailable",
+      "identity": {
+        "o": "",
+        "i": "",
+        "r": ""
+      },
+      "calls": [
+        {
+          "method": "POST",
+          "path": "/api/v1/pat/verify",
+          "body": "{\"token\":\"mcn_fixture\"}",
+          "content_type": "application/json",
+          "accept": "application/json"
+        }
+      ],
+      "owners": []
+    },
+    {
+      "kind": "ok",
+      "identity": {
+        "o": "owner",
+        "i": "",
+        "r": ""
+      },
+      "calls": [
+        {
+          "method": "POST",
+          "path": "/api/v1/pat/verify",
+          "body": "{\"token\":\"mcn_fixture\"}",
+          "content_type": "application/json",
+          "accept": "application/json"
+        }
+      ],
+      "owners": [
+        "owner"
+      ]
+    },
+    {
+      "kind": "unavailable",
+      "identity": {
+        "o": "",
+        "i": "",
+        "r": ""
+      },
+      "calls": [
+        {
+          "method": "POST",
+          "path": "/api/v1/pat/verify",
+          "body": "{\"token\":\"mcn_fixture\"}",
+          "content_type": "application/json",
+          "accept": "application/json"
+        }
+      ],
+      "owners": []
+    },
+    {
+      "kind": "unavailable",
+      "identity": {
+        "o": "",
+        "i": "",
+        "r": ""
+      },
+      "calls": [
+        {
+          "method": "POST",
+          "path": "/api/v1/pat/verify",
+          "body": "{\"token\":\"mcn_fixture\"}",
+          "content_type": "application/json",
+          "accept": "application/json"
+        }
+      ],
+      "owners": []
+    },
+    {
+      "kind": "unavailable",
+      "identity": {
+        "o": "",
+        "i": "",
+        "r": ""
+      },
+      "calls": [
+        {
+          "method": "POST",
+          "path": "/api/v1/pat/verify",
+          "body": "{\"token\":\"mcn_fixture\"}",
+          "content_type": "application/json",
+          "accept": "application/json"
+        }
+      ],
+      "owners": []
+    },
+    {
+      "kind": "unavailable",
+      "identity": {
+        "o": "",
+        "i": "",
+        "r": ""
+      },
+      "calls": [
+        {
+          "method": "POST",
+          "path": "/api/v1/pat/verify",
+          "body": "{\"token\":\"mcn_fixture\"}",
+          "content_type": "application/json",
+          "accept": "application/json"
+        }
+      ],
+      "owners": []
+    },
+    {
+      "kind": "unavailable",
+      "identity": {
+        "o": "",
+        "i": "",
+        "r": ""
+      },
+      "calls": [
+        {
+          "method": "POST",
+          "path": "/api/v1/pat/verify",
+          "body": "{\"token\":\"mcn_fixture\"}",
+          "content_type": "application/json",
+          "accept": "application/json"
+        }
+      ],
+      "owners": []
+    },
+    {
+      "kind": "unavailable",
+      "identity": {
+        "o": "",
+        "i": "",
+        "r": ""
+      },
+      "calls": [
+        {
+          "method": "POST",
+          "path": "/api/v1/pat/verify",
+          "body": "{\"token\":\"mcn_fixture\"}",
+          "content_type": "application/json",
+          "accept": "application/json"
+        }
+      ],
+      "owners": []
+    },
+    {
+      "kind": "unavailable",
+      "identity": {
+        "o": "",
+        "i": "",
+        "r": ""
+      },
+      "calls": [
+        {
+          "method": "POST",
+          "path": "/api/v1/pat/verify",
+          "body": "{\"token\":\"mcn_fixture\"}",
+          "content_type": "application/json",
+          "accept": "application/json"
+        }
+      ],
+      "owners": []
+    },
+    {
+      "kind": "invalid",
+      "identity": {
+        "o": "",
+        "i": "",
+        "r": ""
+      },
+      "calls": [
+        {
+          "method": "POST",
+          "path": "/api/v1/pat/verify",
+          "body": "{\"token\":\"mcn_fixture\"}",
+          "content_type": "application/json",
+          "accept": "application/json"
+        }
+      ],
+      "owners": [
+        "owner"
+      ]
+    },
+    {
+      "kind": "unavailable",
+      "identity": {
+        "o": "",
+        "i": "",
+        "r": ""
+      },
+      "calls": [
+        {
+          "method": "POST",
+          "path": "/api/v1/pat/verify",
+          "body": "{\"token\":\"mcn_fixture\"}",
+          "content_type": "application/json",
+          "accept": "application/json"
+        }
+      ],
+      "owners": [
+        "owner"
+      ]
+    },
+    {
+      "kind": "invalid",
+      "identity": {
+        "o": "",
+        "i": "",
+        "r": ""
+      },
+      "calls": [],
+      "owners": []
+    },
+    {
+      "kind": "unavailable",
+      "identity": {
+        "o": "",
+        "i": "",
+        "r": ""
+      },
+      "calls": [],
+      "owners": []
+    },
+    {
+      "kind": "ok",
+      "identity": {
+        "o": "owner",
+        "i": "i",
+        "r": "r"
+      },
+      "calls": [
+        {
+          "method": "POST",
+          "path": "/api/v1/pat/verify",
+          "body": "{\"token\":\"mcn_\\u003c\\u0026\\u003e\"}",
+          "content_type": "application/json",
+          "accept": "application/json"
+        }
+      ],
+      "owners": [
+        "owner"
+      ]
+    }
+  ],
+  "mismatches": [],
+  "go_exit_code": 0,
+  "source_sha256": {
+    "server/go/internal/auth/cloud_pat.go": "84b35ab3b67ea511d83f101f25ea10150b647a303b0a4fddc430bf9316cc9dc4",
+    "server/tests/parity/go_cloud_pat/main.go": "eb40c00f287be624b465da30ac392238017a6f07c164d0668f25e42245d4e153"
+  },
+  "binary_sha256": "a41c14d779ad35c5a648a41cc244c060b20e982ab19f87c2647434b9d7d7806e"
+}

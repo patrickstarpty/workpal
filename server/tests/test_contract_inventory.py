@@ -135,3 +135,21 @@ class RequiredGoBindingTests(HardeningTests):
     def test_go_route_cannot_claim_completion_without_binding(self):
         route=self.record();route['origin']='go'
         assert any('missing handler binding' in e for e in self.complete(route))
+
+class NonMethodBindingTests(ContractInventoryTests):
+    def test_factory_handler_is_bound_to_factory_declaration(self):
+        route={'method':'GET','path':'/health/realtime','handler_binding':{
+            'kind':'factory','package':'workpal.local/workpal/server/cmd/server',
+            'receiver':'','method':'realtimeMetricsHandler','source':'server/go/cmd/server/health_realtime.go:31'}}
+        assert not any('handler binding' in e for e in self.check([route],[]))
+        route['handler_binding']['method']='differentFactory'
+        assert any('handler binding' in e for e in self.check([route],[]))
+
+    def test_inline_websocket_handler_retains_registration_anchor(self):
+        route={'method':'GET','path':'/ws','handler_binding':{
+            'kind':'closure','package':'workpal.local/workpal/server/cmd/server',
+            'receiver':'','method':'anonymous','source':'server/go/cmd/server/router.go:1581',
+            'registration_source':'server/go/cmd/server/router.go:1581'}}
+        assert not any('handler binding' in e for e in self.check([route],[]))
+        route['handler_binding']['registration_source']='server/go/cmd/server/router.go:1568'
+        assert any('handler binding' in e for e in self.check([route],[]))

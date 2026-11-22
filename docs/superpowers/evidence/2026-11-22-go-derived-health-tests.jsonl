@@ -1,0 +1,104 @@
+{"Action":"start","Package":"workpal.local/workpal/server/cmd/server"}
+{"Action":"output","Package":"workpal.local/workpal/server/cmd/server","Output":"EmailService: DEV mode — codes printed to stdout (set WORKPAL_DEV_VERIFICATION_CODE in .env for a fixed local code)\n"}
+{"Action":"run","Package":"workpal.local/workpal/server/cmd/server","Test":"TestRealtimeMetricsHandler_TokenRequired"}
+{"Action":"output","Package":"workpal.local/workpal/server/cmd/server","Test":"TestRealtimeMetricsHandler_TokenRequired","Output":"=== RUN   TestRealtimeMetricsHandler_TokenRequired\n"}
+{"Action":"run","Package":"workpal.local/workpal/server/cmd/server","Test":"TestRealtimeMetricsHandler_TokenRequired/missing_auth_rejected"}
+{"Action":"output","Package":"workpal.local/workpal/server/cmd/server","Test":"TestRealtimeMetricsHandler_TokenRequired/missing_auth_rejected","Output":"=== RUN   TestRealtimeMetricsHandler_TokenRequired/missing_auth_rejected\n"}
+{"Action":"output","Package":"workpal.local/workpal/server/cmd/server","Test":"TestRealtimeMetricsHandler_TokenRequired/missing_auth_rejected","Output":"--- PASS: TestRealtimeMetricsHandler_TokenRequired/missing_auth_rejected (0.00s)\n"}
+{"Action":"pass","Package":"workpal.local/workpal/server/cmd/server","Test":"TestRealtimeMetricsHandler_TokenRequired/missing_auth_rejected"}
+{"Action":"run","Package":"workpal.local/workpal/server/cmd/server","Test":"TestRealtimeMetricsHandler_TokenRequired/loopback_without_token_rejected_when_token_configured"}
+{"Action":"output","Package":"workpal.local/workpal/server/cmd/server","Test":"TestRealtimeMetricsHandler_TokenRequired/loopback_without_token_rejected_when_token_configured","Output":"=== RUN   TestRealtimeMetricsHandler_TokenRequired/loopback_without_token_rejected_when_token_configured\n"}
+{"Action":"output","Package":"workpal.local/workpal/server/cmd/server","Test":"TestRealtimeMetricsHandler_TokenRequired/loopback_without_token_rejected_when_token_configured","Output":"--- PASS: TestRealtimeMetricsHandler_TokenRequired/loopback_without_token_rejected_when_token_configured (0.00s)\n"}
+{"Action":"pass","Package":"workpal.local/workpal/server/cmd/server","Test":"TestRealtimeMetricsHandler_TokenRequired/loopback_without_token_rejected_when_token_configured"}
+{"Action":"run","Package":"workpal.local/workpal/server/cmd/server","Test":"TestRealtimeMetricsHandler_TokenRequired/wrong_token_rejected"}
+{"Action":"output","Package":"workpal.local/workpal/server/cmd/server","Test":"TestRealtimeMetricsHandler_TokenRequired/wrong_token_rejected","Output":"=== RUN   TestRealtimeMetricsHandler_TokenRequired/wrong_token_rejected\n"}
+{"Action":"output","Package":"workpal.local/workpal/server/cmd/server","Test":"TestRealtimeMetricsHandler_TokenRequired/wrong_token_rejected","Output":"--- PASS: TestRealtimeMetricsHandler_TokenRequired/wrong_token_rejected (0.00s)\n"}
+{"Action":"pass","Package":"workpal.local/workpal/server/cmd/server","Test":"TestRealtimeMetricsHandler_TokenRequired/wrong_token_rejected"}
+{"Action":"run","Package":"workpal.local/workpal/server/cmd/server","Test":"TestRealtimeMetricsHandler_TokenRequired/non-bearer_scheme_rejected"}
+{"Action":"output","Package":"workpal.local/workpal/server/cmd/server","Test":"TestRealtimeMetricsHandler_TokenRequired/non-bearer_scheme_rejected","Output":"=== RUN   TestRealtimeMetricsHandler_TokenRequired/non-bearer_scheme_rejected\n"}
+{"Action":"output","Package":"workpal.local/workpal/server/cmd/server","Test":"TestRealtimeMetricsHandler_TokenRequired/non-bearer_scheme_rejected","Output":"--- PASS: TestRealtimeMetricsHandler_TokenRequired/non-bearer_scheme_rejected (0.00s)\n"}
+{"Action":"pass","Package":"workpal.local/workpal/server/cmd/server","Test":"TestRealtimeMetricsHandler_TokenRequired/non-bearer_scheme_rejected"}
+{"Action":"run","Package":"workpal.local/workpal/server/cmd/server","Test":"TestRealtimeMetricsHandler_TokenRequired/correct_bearer_token_accepted"}
+{"Action":"output","Package":"workpal.local/workpal/server/cmd/server","Test":"TestRealtimeMetricsHandler_TokenRequired/correct_bearer_token_accepted","Output":"=== RUN   TestRealtimeMetricsHandler_TokenRequired/correct_bearer_token_accepted\n"}
+{"Action":"output","Package":"workpal.local/workpal/server/cmd/server","Test":"TestRealtimeMetricsHandler_TokenRequired/correct_bearer_token_accepted","Output":"--- PASS: TestRealtimeMetricsHandler_TokenRequired/correct_bearer_token_accepted (0.01s)\n"}
+{"Action":"pass","Package":"workpal.local/workpal/server/cmd/server","Test":"TestRealtimeMetricsHandler_TokenRequired/correct_bearer_token_accepted"}
+{"Action":"output","Package":"workpal.local/workpal/server/cmd/server","Test":"TestRealtimeMetricsHandler_TokenRequired","Output":"--- PASS: TestRealtimeMetricsHandler_TokenRequired (0.02s)\n"}
+{"Action":"pass","Package":"workpal.local/workpal/server/cmd/server","Test":"TestRealtimeMetricsHandler_TokenRequired"}
+{"Action":"run","Package":"workpal.local/workpal/server/cmd/server","Test":"TestRealtimeMetricsHandler_NoToken_LoopbackOnly"}
+{"Action":"output","Package":"workpal.local/workpal/server/cmd/server","Test":"TestRealtimeMetricsHandler_NoToken_LoopbackOnly","Output":"=== RUN   TestRealtimeMetricsHandler_NoToken_LoopbackOnly\n"}
+{"Action":"run","Package":"workpal.local/workpal/server/cmd/server","Test":"TestRealtimeMetricsHandler_NoToken_LoopbackOnly/loopback_ipv4_allowed"}
+{"Action":"output","Package":"workpal.local/workpal/server/cmd/server","Test":"TestRealtimeMetricsHandler_NoToken_LoopbackOnly/loopback_ipv4_allowed","Output":"=== RUN   TestRealtimeMetricsHandler_NoToken_LoopbackOnly/loopback_ipv4_allowed\n"}
+{"Action":"output","Package":"workpal.local/workpal/server/cmd/server","Test":"TestRealtimeMetricsHandler_NoToken_LoopbackOnly/loopback_ipv4_allowed","Output":"--- PASS: TestRealtimeMetricsHandler_NoToken_LoopbackOnly/loopback_ipv4_allowed (0.01s)\n"}
+{"Action":"pass","Package":"workpal.local/workpal/server/cmd/server","Test":"TestRealtimeMetricsHandler_NoToken_LoopbackOnly/loopback_ipv4_allowed"}
+{"Action":"run","Package":"workpal.local/workpal/server/cmd/server","Test":"TestRealtimeMetricsHandler_NoToken_LoopbackOnly/loopback_ipv6_allowed"}
+{"Action":"output","Package":"workpal.local/workpal/server/cmd/server","Test":"TestRealtimeMetricsHandler_NoToken_LoopbackOnly/loopback_ipv6_allowed","Output":"=== RUN   TestRealtimeMetricsHandler_NoToken_LoopbackOnly/loopback_ipv6_allowed\n"}
+{"Action":"output","Package":"workpal.local/workpal/server/cmd/server","Test":"TestRealtimeMetricsHandler_NoToken_LoopbackOnly/loopback_ipv6_allowed","Output":"--- PASS: TestRealtimeMetricsHandler_NoToken_LoopbackOnly/loopback_ipv6_allowed (0.00s)\n"}
+{"Action":"pass","Package":"workpal.local/workpal/server/cmd/server","Test":"TestRealtimeMetricsHandler_NoToken_LoopbackOnly/loopback_ipv6_allowed"}
+{"Action":"run","Package":"workpal.local/workpal/server/cmd/server","Test":"TestRealtimeMetricsHandler_NoToken_LoopbackOnly/non-loopback_returns_404"}
+{"Action":"output","Package":"workpal.local/workpal/server/cmd/server","Test":"TestRealtimeMetricsHandler_NoToken_LoopbackOnly/non-loopback_returns_404","Output":"=== RUN   TestRealtimeMetricsHandler_NoToken_LoopbackOnly/non-loopback_returns_404\n"}
+{"Action":"output","Package":"workpal.local/workpal/server/cmd/server","Test":"TestRealtimeMetricsHandler_NoToken_LoopbackOnly/non-loopback_returns_404","Output":"--- PASS: TestRealtimeMetricsHandler_NoToken_LoopbackOnly/non-loopback_returns_404 (0.00s)\n"}
+{"Action":"pass","Package":"workpal.local/workpal/server/cmd/server","Test":"TestRealtimeMetricsHandler_NoToken_LoopbackOnly/non-loopback_returns_404"}
+{"Action":"run","Package":"workpal.local/workpal/server/cmd/server","Test":"TestRealtimeMetricsHandler_NoToken_LoopbackOnly/public_ipv6_returns_404"}
+{"Action":"output","Package":"workpal.local/workpal/server/cmd/server","Test":"TestRealtimeMetricsHandler_NoToken_LoopbackOnly/public_ipv6_returns_404","Output":"=== RUN   TestRealtimeMetricsHandler_NoToken_LoopbackOnly/public_ipv6_returns_404\n"}
+{"Action":"output","Package":"workpal.local/workpal/server/cmd/server","Test":"TestRealtimeMetricsHandler_NoToken_LoopbackOnly/public_ipv6_returns_404","Output":"--- PASS: TestRealtimeMetricsHandler_NoToken_LoopbackOnly/public_ipv6_returns_404 (0.00s)\n"}
+{"Action":"pass","Package":"workpal.local/workpal/server/cmd/server","Test":"TestRealtimeMetricsHandler_NoToken_LoopbackOnly/public_ipv6_returns_404"}
+{"Action":"run","Package":"workpal.local/workpal/server/cmd/server","Test":"TestRealtimeMetricsHandler_NoToken_LoopbackOnly/proxied_x-forwarded-for_via_loopback_returns_404"}
+{"Action":"output","Package":"workpal.local/workpal/server/cmd/server","Test":"TestRealtimeMetricsHandler_NoToken_LoopbackOnly/proxied_x-forwarded-for_via_loopback_returns_404","Output":"=== RUN   TestRealtimeMetricsHandler_NoToken_LoopbackOnly/proxied_x-forwarded-for_via_loopback_returns_404\n"}
+{"Action":"output","Package":"workpal.local/workpal/server/cmd/server","Test":"TestRealtimeMetricsHandler_NoToken_LoopbackOnly/proxied_x-forwarded-for_via_loopback_returns_404","Output":"--- PASS: TestRealtimeMetricsHandler_NoToken_LoopbackOnly/proxied_x-forwarded-for_via_loopback_returns_404 (0.00s)\n"}
+{"Action":"pass","Package":"workpal.local/workpal/server/cmd/server","Test":"TestRealtimeMetricsHandler_NoToken_LoopbackOnly/proxied_x-forwarded-for_via_loopback_returns_404"}
+{"Action":"run","Package":"workpal.local/workpal/server/cmd/server","Test":"TestRealtimeMetricsHandler_NoToken_LoopbackOnly/proxied_x-forwarded-for_chain_via_loopback_returns_404"}
+{"Action":"output","Package":"workpal.local/workpal/server/cmd/server","Test":"TestRealtimeMetricsHandler_NoToken_LoopbackOnly/proxied_x-forwarded-for_chain_via_loopback_returns_404","Output":"=== RUN   TestRealtimeMetricsHandler_NoToken_LoopbackOnly/proxied_x-forwarded-for_chain_via_loopback_returns_404\n"}
+{"Action":"output","Package":"workpal.local/workpal/server/cmd/server","Test":"TestRealtimeMetricsHandler_NoToken_LoopbackOnly/proxied_x-forwarded-for_chain_via_loopback_returns_404","Output":"--- PASS: TestRealtimeMetricsHandler_NoToken_LoopbackOnly/proxied_x-forwarded-for_chain_via_loopback_returns_404 (0.00s)\n"}
+{"Action":"pass","Package":"workpal.local/workpal/server/cmd/server","Test":"TestRealtimeMetricsHandler_NoToken_LoopbackOnly/proxied_x-forwarded-for_chain_via_loopback_returns_404"}
+{"Action":"run","Package":"workpal.local/workpal/server/cmd/server","Test":"TestRealtimeMetricsHandler_NoToken_LoopbackOnly/proxied_x-real-ip_via_loopback_returns_404"}
+{"Action":"output","Package":"workpal.local/workpal/server/cmd/server","Test":"TestRealtimeMetricsHandler_NoToken_LoopbackOnly/proxied_x-real-ip_via_loopback_returns_404","Output":"=== RUN   TestRealtimeMetricsHandler_NoToken_LoopbackOnly/proxied_x-real-ip_via_loopback_returns_404\n"}
+{"Action":"output","Package":"workpal.local/workpal/server/cmd/server","Test":"TestRealtimeMetricsHandler_NoToken_LoopbackOnly/proxied_x-real-ip_via_loopback_returns_404","Output":"--- PASS: TestRealtimeMetricsHandler_NoToken_LoopbackOnly/proxied_x-real-ip_via_loopback_returns_404 (0.00s)\n"}
+{"Action":"pass","Package":"workpal.local/workpal/server/cmd/server","Test":"TestRealtimeMetricsHandler_NoToken_LoopbackOnly/proxied_x-real-ip_via_loopback_returns_404"}
+{"Action":"run","Package":"workpal.local/workpal/server/cmd/server","Test":"TestRealtimeMetricsHandler_NoToken_LoopbackOnly/proxied_x-forwarded-host_via_loopback_returns_404"}
+{"Action":"output","Package":"workpal.local/workpal/server/cmd/server","Test":"TestRealtimeMetricsHandler_NoToken_LoopbackOnly/proxied_x-forwarded-host_via_loopback_returns_404","Output":"=== RUN   TestRealtimeMetricsHandler_NoToken_LoopbackOnly/proxied_x-forwarded-host_via_loopback_returns_404\n"}
+{"Action":"output","Package":"workpal.local/workpal/server/cmd/server","Test":"TestRealtimeMetricsHandler_NoToken_LoopbackOnly/proxied_x-forwarded-host_via_loopback_returns_404","Output":"--- PASS: TestRealtimeMetricsHandler_NoToken_LoopbackOnly/proxied_x-forwarded-host_via_loopback_returns_404 (0.00s)\n"}
+{"Action":"pass","Package":"workpal.local/workpal/server/cmd/server","Test":"TestRealtimeMetricsHandler_NoToken_LoopbackOnly/proxied_x-forwarded-host_via_loopback_returns_404"}
+{"Action":"run","Package":"workpal.local/workpal/server/cmd/server","Test":"TestRealtimeMetricsHandler_NoToken_LoopbackOnly/proxied_x-forwarded-proto_via_loopback_returns_404"}
+{"Action":"output","Package":"workpal.local/workpal/server/cmd/server","Test":"TestRealtimeMetricsHandler_NoToken_LoopbackOnly/proxied_x-forwarded-proto_via_loopback_returns_404","Output":"=== RUN   TestRealtimeMetricsHandler_NoToken_LoopbackOnly/proxied_x-forwarded-proto_via_loopback_returns_404\n"}
+{"Action":"output","Package":"workpal.local/workpal/server/cmd/server","Test":"TestRealtimeMetricsHandler_NoToken_LoopbackOnly/proxied_x-forwarded-proto_via_loopback_returns_404","Output":"--- PASS: TestRealtimeMetricsHandler_NoToken_LoopbackOnly/proxied_x-forwarded-proto_via_loopback_returns_404 (0.00s)\n"}
+{"Action":"pass","Package":"workpal.local/workpal/server/cmd/server","Test":"TestRealtimeMetricsHandler_NoToken_LoopbackOnly/proxied_x-forwarded-proto_via_loopback_returns_404"}
+{"Action":"run","Package":"workpal.local/workpal/server/cmd/server","Test":"TestRealtimeMetricsHandler_NoToken_LoopbackOnly/proxied_forwarded_rfc7239_via_loopback_returns_404"}
+{"Action":"output","Package":"workpal.local/workpal/server/cmd/server","Test":"TestRealtimeMetricsHandler_NoToken_LoopbackOnly/proxied_forwarded_rfc7239_via_loopback_returns_404","Output":"=== RUN   TestRealtimeMetricsHandler_NoToken_LoopbackOnly/proxied_forwarded_rfc7239_via_loopback_returns_404\n"}
+{"Action":"output","Package":"workpal.local/workpal/server/cmd/server","Test":"TestRealtimeMetricsHandler_NoToken_LoopbackOnly/proxied_forwarded_rfc7239_via_loopback_returns_404","Output":"--- PASS: TestRealtimeMetricsHandler_NoToken_LoopbackOnly/proxied_forwarded_rfc7239_via_loopback_returns_404 (0.00s)\n"}
+{"Action":"pass","Package":"workpal.local/workpal/server/cmd/server","Test":"TestRealtimeMetricsHandler_NoToken_LoopbackOnly/proxied_forwarded_rfc7239_via_loopback_returns_404"}
+{"Action":"run","Package":"workpal.local/workpal/server/cmd/server","Test":"TestRealtimeMetricsHandler_NoToken_LoopbackOnly/proxied_loopback_ipv6_returns_404"}
+{"Action":"output","Package":"workpal.local/workpal/server/cmd/server","Test":"TestRealtimeMetricsHandler_NoToken_LoopbackOnly/proxied_loopback_ipv6_returns_404","Output":"=== RUN   TestRealtimeMetricsHandler_NoToken_LoopbackOnly/proxied_loopback_ipv6_returns_404\n"}
+{"Action":"output","Package":"workpal.local/workpal/server/cmd/server","Test":"TestRealtimeMetricsHandler_NoToken_LoopbackOnly/proxied_loopback_ipv6_returns_404","Output":"--- PASS: TestRealtimeMetricsHandler_NoToken_LoopbackOnly/proxied_loopback_ipv6_returns_404 (0.00s)\n"}
+{"Action":"pass","Package":"workpal.local/workpal/server/cmd/server","Test":"TestRealtimeMetricsHandler_NoToken_LoopbackOnly/proxied_loopback_ipv6_returns_404"}
+{"Action":"run","Package":"workpal.local/workpal/server/cmd/server","Test":"TestRealtimeMetricsHandler_NoToken_LoopbackOnly/empty_forwarding_header_still_allows_loopback"}
+{"Action":"output","Package":"workpal.local/workpal/server/cmd/server","Test":"TestRealtimeMetricsHandler_NoToken_LoopbackOnly/empty_forwarding_header_still_allows_loopback","Output":"=== RUN   TestRealtimeMetricsHandler_NoToken_LoopbackOnly/empty_forwarding_header_still_allows_loopback\n"}
+{"Action":"output","Package":"workpal.local/workpal/server/cmd/server","Test":"TestRealtimeMetricsHandler_NoToken_LoopbackOnly/empty_forwarding_header_still_allows_loopback","Output":"--- PASS: TestRealtimeMetricsHandler_NoToken_LoopbackOnly/empty_forwarding_header_still_allows_loopback (0.00s)\n"}
+{"Action":"pass","Package":"workpal.local/workpal/server/cmd/server","Test":"TestRealtimeMetricsHandler_NoToken_LoopbackOnly/empty_forwarding_header_still_allows_loopback"}
+{"Action":"output","Package":"workpal.local/workpal/server/cmd/server","Test":"TestRealtimeMetricsHandler_NoToken_LoopbackOnly","Output":"--- PASS: TestRealtimeMetricsHandler_NoToken_LoopbackOnly (0.02s)\n"}
+{"Action":"pass","Package":"workpal.local/workpal/server/cmd/server","Test":"TestRealtimeMetricsHandler_NoToken_LoopbackOnly"}
+{"Action":"run","Package":"workpal.local/workpal/server/cmd/server","Test":"TestServerHealthReadyHandlerDBPingFailure"}
+{"Action":"output","Package":"workpal.local/workpal/server/cmd/server","Test":"TestServerHealthReadyHandlerDBPingFailure","Output":"=== RUN   TestServerHealthReadyHandlerDBPingFailure\n"}
+{"Action":"output","Package":"workpal.local/workpal/server/cmd/server","Test":"TestServerHealthReadyHandlerDBPingFailure","Output":"--- PASS: TestServerHealthReadyHandlerDBPingFailure (0.00s)\n"}
+{"Action":"pass","Package":"workpal.local/workpal/server/cmd/server","Test":"TestServerHealthReadyHandlerDBPingFailure"}
+{"Action":"run","Package":"workpal.local/workpal/server/cmd/server","Test":"TestServerHealthReadyHandlerMigrationOutOfDate"}
+{"Action":"output","Package":"workpal.local/workpal/server/cmd/server","Test":"TestServerHealthReadyHandlerMigrationOutOfDate","Output":"=== RUN   TestServerHealthReadyHandlerMigrationOutOfDate\n"}
+{"Action":"output","Package":"workpal.local/workpal/server/cmd/server","Test":"TestServerHealthReadyHandlerMigrationOutOfDate","Output":"--- PASS: TestServerHealthReadyHandlerMigrationOutOfDate (0.00s)\n"}
+{"Action":"pass","Package":"workpal.local/workpal/server/cmd/server","Test":"TestServerHealthReadyHandlerMigrationOutOfDate"}
+{"Action":"run","Package":"workpal.local/workpal/server/cmd/server","Test":"TestServerHealthReadyHandlerMigrationPartiallyApplied"}
+{"Action":"output","Package":"workpal.local/workpal/server/cmd/server","Test":"TestServerHealthReadyHandlerMigrationPartiallyApplied","Output":"=== RUN   TestServerHealthReadyHandlerMigrationPartiallyApplied\n"}
+{"Action":"output","Package":"workpal.local/workpal/server/cmd/server","Test":"TestServerHealthReadyHandlerMigrationPartiallyApplied","Output":"--- PASS: TestServerHealthReadyHandlerMigrationPartiallyApplied (0.00s)\n"}
+{"Action":"pass","Package":"workpal.local/workpal/server/cmd/server","Test":"TestServerHealthReadyHandlerMigrationPartiallyApplied"}
+{"Action":"run","Package":"workpal.local/workpal/server/cmd/server","Test":"TestServerHealthReadinessCachesResult"}
+{"Action":"output","Package":"workpal.local/workpal/server/cmd/server","Test":"TestServerHealthReadinessCachesResult","Output":"=== RUN   TestServerHealthReadinessCachesResult\n"}
+{"Action":"output","Package":"workpal.local/workpal/server/cmd/server","Test":"TestServerHealthReadinessCachesResult","Output":"--- PASS: TestServerHealthReadinessCachesResult (0.00s)\n"}
+{"Action":"pass","Package":"workpal.local/workpal/server/cmd/server","Test":"TestServerHealthReadinessCachesResult"}
+{"Action":"run","Package":"workpal.local/workpal/server/cmd/server","Test":"TestServerHealthLiveHandlerReportsProcessIdentity"}
+{"Action":"output","Package":"workpal.local/workpal/server/cmd/server","Test":"TestServerHealthLiveHandlerReportsProcessIdentity","Output":"=== RUN   TestServerHealthLiveHandlerReportsProcessIdentity\n"}
+{"Action":"output","Package":"workpal.local/workpal/server/cmd/server","Test":"TestServerHealthLiveHandlerReportsProcessIdentity","Output":"--- PASS: TestServerHealthLiveHandlerReportsProcessIdentity (0.00s)\n"}
+{"Action":"pass","Package":"workpal.local/workpal/server/cmd/server","Test":"TestServerHealthLiveHandlerReportsProcessIdentity"}
+{"Action":"run","Package":"workpal.local/workpal/server/cmd/server","Test":"TestServerHealthLiveHandlerOmitsZeroStartedAt"}
+{"Action":"output","Package":"workpal.local/workpal/server/cmd/server","Test":"TestServerHealthLiveHandlerOmitsZeroStartedAt","Output":"=== RUN   TestServerHealthLiveHandlerOmitsZeroStartedAt\n"}
+{"Action":"output","Package":"workpal.local/workpal/server/cmd/server","Test":"TestServerHealthLiveHandlerOmitsZeroStartedAt","Output":"--- PASS: TestServerHealthLiveHandlerOmitsZeroStartedAt (0.00s)\n"}
+{"Action":"pass","Package":"workpal.local/workpal/server/cmd/server","Test":"TestServerHealthLiveHandlerOmitsZeroStartedAt"}
+{"Action":"output","Package":"workpal.local/workpal/server/cmd/server","Output":"PASS\n"}
+{"Action":"pass","Package":"workpal.local/workpal/server/cmd/server"}

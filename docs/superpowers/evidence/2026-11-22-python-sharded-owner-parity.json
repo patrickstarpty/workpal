@@ -1,0 +1,168 @@
+{
+  "scope": "Original Go Start ping order and initial connected state, immediate maintenance entry, Stop leaves parent active, Wait joins after parent cancellation. Two blocked shard readers, empty Hub, cancellable Redis boundary. Includes final connected state and retention error count for blocked heartbeat/EXISTS cancellation. Does not certify all event ordering, repeated Start, or full application integration.",
+  "fixtures": [
+    {
+      "Separate": false,
+      "Failure": ""
+    },
+    {
+      "Separate": false,
+      "Failure": "write"
+    },
+    {
+      "Separate": false,
+      "Failure": "read"
+    },
+    {
+      "Separate": true,
+      "Failure": ""
+    },
+    {
+      "Separate": true,
+      "Failure": "write"
+    },
+    {
+      "Separate": true,
+      "Failure": "read"
+    }
+  ],
+  "go": [
+    {
+      "connected": true,
+      "final_connected": false,
+      "joined": true,
+      "pings": [
+        "write"
+      ],
+      "retention_errors": 1,
+      "stop_canceled_parent": false
+    },
+    {
+      "connected": false,
+      "final_connected": false,
+      "joined": true,
+      "pings": [
+        "write"
+      ],
+      "retention_errors": 1,
+      "stop_canceled_parent": false
+    },
+    {
+      "connected": true,
+      "final_connected": false,
+      "joined": true,
+      "pings": [
+        "write"
+      ],
+      "retention_errors": 1,
+      "stop_canceled_parent": false
+    },
+    {
+      "connected": true,
+      "final_connected": false,
+      "joined": true,
+      "pings": [
+        "write",
+        "read"
+      ],
+      "retention_errors": 1,
+      "stop_canceled_parent": false
+    },
+    {
+      "connected": false,
+      "final_connected": false,
+      "joined": true,
+      "pings": [
+        "write"
+      ],
+      "retention_errors": 1,
+      "stop_canceled_parent": false
+    },
+    {
+      "connected": false,
+      "final_connected": false,
+      "joined": true,
+      "pings": [
+        "write",
+        "read"
+      ],
+      "retention_errors": 1,
+      "stop_canceled_parent": false
+    }
+  ],
+  "python": [
+    {
+      "pings": [
+        "write"
+      ],
+      "connected": true,
+      "stop_canceled_parent": false,
+      "joined": true,
+      "final_connected": false,
+      "retention_errors": 1
+    },
+    {
+      "pings": [
+        "write"
+      ],
+      "connected": false,
+      "stop_canceled_parent": false,
+      "joined": true,
+      "final_connected": false,
+      "retention_errors": 1
+    },
+    {
+      "pings": [
+        "write"
+      ],
+      "connected": true,
+      "stop_canceled_parent": false,
+      "joined": true,
+      "final_connected": false,
+      "retention_errors": 1
+    },
+    {
+      "pings": [
+        "write",
+        "read"
+      ],
+      "connected": true,
+      "stop_canceled_parent": false,
+      "joined": true,
+      "final_connected": false,
+      "retention_errors": 1
+    },
+    {
+      "pings": [
+        "write"
+      ],
+      "connected": false,
+      "stop_canceled_parent": false,
+      "joined": true,
+      "final_connected": false,
+      "retention_errors": 1
+    },
+    {
+      "pings": [
+        "write",
+        "read"
+      ],
+      "connected": false,
+      "stop_canceled_parent": false,
+      "joined": true,
+      "final_connected": false,
+      "retention_errors": 1
+    }
+  ],
+  "mismatches": [],
+  "source_sha256": {
+    "server/go/internal/realtime/sharded_stream_relay.go": "672a624544ff57afd22973d160a4b5c47e8f0f4b65918cf5bc7b751ab63b0da2",
+    "server/src/workpal_backend/realtime/redis_relay.py": "f9d23d33635ad5333151d1178a65bd8458e14b234990922c478dfcf555a95168",
+    "server/src/workpal_backend/realtime/sharded_relay.py": "477bd7cc00b151f0770f832dde56db7a550c8dc16897c2d6ee21ea615cc1715d",
+    "server/src/workpal_backend/realtime/sharded_maintenance.py": "88b37fe6c985ea556ff12f7da25939dcf321abf1a39547ac22b94d7e1c911b98",
+    "server/src/workpal_backend/realtime/sharded_reader.py": "82b4000a70cd5cf4b83fe586c43a5c9f0fa024137581908798f33621ae9f0dbc",
+    "server/src/workpal_backend/realtime/relay_maintenance.py": "d0529a31cee41ed9c1ccbcfd9f93298722e3e27bf01c2d9205c2717d36c913f4",
+    "server/tests/parity/go_sharded_owner/main.go": "ffba7ba229d0c5de7969a49ccc2393b8b33f2160615af4e0316d627c97cafbcc",
+    "server/tests/parity/go_sharded_owner/wrapper.go": "ac54f73490e337292853c192ce1e20717c94f02e35107b2c2d68842784c7ad2a"
+  }
+}

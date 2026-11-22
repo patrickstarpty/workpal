@@ -8,10 +8,10 @@ from workpal_backend.infrastructure.database import migrate
 from workpal_backend.infrastructure.delivery import OutboxDelivery
 
 
-def test_http_mutation_reaches_websocket_and_consumer_stops(settings):
+def test_http_mutation_reaches_websocket_and_consumer_stops(settings, isolated_relay_redis_port):
     settings.dev_auth = True
     settings.auth_secret = 's' * 32
-    settings.redis_url = 'redis://127.0.0.1:26379'
+    settings.redis_url = f'redis://127.0.0.1:{isolated_relay_redis_port}'
     settings.redis_key_prefix = 'test:pipeline:' + uuid4().hex + ':'
     migrate(settings)
     delivery = OutboxDelivery(settings)

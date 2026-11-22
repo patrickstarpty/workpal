@@ -1,0 +1,151 @@
+{
+  "source": {
+    "id": "superpowers",
+    "label": "Superpowers",
+    "author": "Jesse Vincent (obra)",
+    "repo": "obra/superpowers",
+    "commitSha": "22f0b463e7a5e579904dd6211a520321035526f7",
+    "repositoryUrl": "https://github.com/obra/superpowers",
+    "retrievedAt": "2026-11-20T18:34:49.192Z",
+    "licenseUrl": "https://github.com/obra/superpowers/blob/22f0b463e7a5e579904dd6211a520321035526f7/LICENSE",
+    "licenseSummary": "MIT License. Copyright (c) 2025 Jesse Vincent. Source LICENSE requires preservation of the copyright and permission notice in copies or substantial portions. Imported names and descriptions only; no skill bodies or scripts were copied."
+  },
+  "skills": [
+    {
+      "id": "superpowers:skills/brainstorming/SKILL.md",
+      "name": "brainstorming",
+      "description": "You MUST use this before any creative work - creating features, building components, adding functionality, modifying behavior, or planning anything new, in software or out of it (a talk, a business, a renovation).",
+      "path": "skills/brainstorming/SKILL.md",
+      "url": "https://github.com/obra/superpowers/blob/22f0b463e7a5e579904dd6211a520321035526f7/skills/brainstorming/SKILL.md",
+      "blobSha": "9eb0edc7fedf26e1d3e2f3f223e5bcc5058aed6a",
+      "scope": "skill"
+    },
+    {
+      "id": "superpowers:skills/diagnosing-superpowers/SKILL.md",
+      "name": "diagnosing-superpowers",
+      "description": "Use when a superpowers session went wrong and your human partner wants to know why — repeated work, ignored plans, stumbles, poor results, a skill that didn't fire, \"it took too long\", \"why is it so expensive\", \"what is it doing\" — or wants to build a bug report for the superpowers maintainers, for the current session or a past one identified by id or path, on any harness.",
+      "path": "skills/diagnosing-superpowers/SKILL.md",
+      "url": "https://github.com/obra/superpowers/blob/22f0b463e7a5e579904dd6211a520321035526f7/skills/diagnosing-superpowers/SKILL.md",
+      "blobSha": "dda2692d528574c410b118a6de545d6afc7eb047",
+      "scope": "skill"
+    },
+    {
+      "id": "superpowers:skills/dispatching-parallel-agents/SKILL.md",
+      "name": "dispatching-parallel-agents",
+      "description": "Use when facing 2+ independent tasks that can be worked on without shared state or sequential dependencies",
+      "path": "skills/dispatching-parallel-agents/SKILL.md",
+      "url": "https://github.com/obra/superpowers/blob/22f0b463e7a5e579904dd6211a520321035526f7/skills/dispatching-parallel-agents/SKILL.md",
+      "blobSha": "3fa091b348bbe0a18eaa0e17e9092c97f7005cbe",
+      "scope": "skill"
+    },
+    {
+      "id": "superpowers:skills/executing-plans/SKILL.md",
+      "name": "executing-plans",
+      "description": "Use when executing an implementation plan in the current session as the implementer yourself — your human partner chose inline execution, or no subagent tool is available",
+      "path": "skills/executing-plans/SKILL.md",
+      "url": "https://github.com/obra/superpowers/blob/22f0b463e7a5e579904dd6211a520321035526f7/skills/executing-plans/SKILL.md",
+      "blobSha": "ea23196d745043eefb0287387112825d2ca99f05",
+      "scope": "skill"
+    },
+    {
+      "id": "superpowers:skills/finishing-a-development-branch/SKILL.md",
+      "name": "finishing-a-development-branch",
+      "description": "Use when implementation is complete, all tests pass, and you need to decide how to integrate the work",
+      "path": "skills/finishing-a-development-branch/SKILL.md",
+      "url": "https://github.com/obra/superpowers/blob/22f0b463e7a5e579904dd6211a520321035526f7/skills/finishing-a-development-branch/SKILL.md",
+      "blobSha": "fa8aecaf8813f1b19d19996f7957d1b0121f2d9c",
+      "scope": "skill"
+    },
+    {
+      "id": "superpowers:skills/receiving-code-review/SKILL.md",
+      "name": "receiving-code-review",
+      "description": "Use when receiving code review feedback, before implementing suggestions, especially if feedback seems unclear or technically questionable - requires technical rigor and verification, not performative agreement or blind implementation",
+      "path": "skills/receiving-code-review/SKILL.md",
+      "url": "https://github.com/obra/superpowers/blob/22f0b463e7a5e579904dd6211a520321035526f7/skills/receiving-code-review/SKILL.md",
+      "blobSha": "950da7b74bf6dbed6b8726d12ddadd65a9f5fda7",
+      "scope": "skill"
+    },
+    {
+      "id": "superpowers:skills/requesting-code-review/SKILL.md",
+      "name": "requesting-code-review",
+      "description": "Use when completing tasks, implementing major features, or before merging to verify work meets requirements",
+      "path": "skills/requesting-code-review/SKILL.md",
+      "url": "https://github.com/obra/superpowers/blob/22f0b463e7a5e579904dd6211a520321035526f7/skills/requesting-code-review/SKILL.md",
+      "blobSha": "68d338a58ecdd8b77bfbb519b781ef223dbbb842",
+      "scope": "skill"
+    },
+    {
+      "id": "superpowers:skills/subagent-driven-development/SKILL.md",
+      "name": "subagent-driven-development",
+      "description": "Use when executing implementation plans with independent tasks in the current session",
+      "path": "skills/subagent-driven-development/SKILL.md",
+      "url": "https://github.com/obra/superpowers/blob/22f0b463e7a5e579904dd6211a520321035526f7/skills/subagent-driven-development/SKILL.md",
+      "blobSha": "45195787cb3f5d141af203e2fdc12f158be14522",
+      "scope": "skill"
+    },
+    {
+      "id": "superpowers:skills/systematic-debugging/SKILL.md",
+      "name": "systematic-debugging",
+      "description": "Use when encountering any bug, test failure, or unexpected behavior, before proposing fixes",
+      "path": "skills/systematic-debugging/SKILL.md",
+      "url": "https://github.com/obra/superpowers/blob/22f0b463e7a5e579904dd6211a520321035526f7/skills/systematic-debugging/SKILL.md",
+      "blobSha": "62fc752aaef59a8bbed5d305f4cadc60f8ae07ed",
+      "scope": "skill"
+    },
+    {
+      "id": "superpowers:skills/test-driven-development/SKILL.md",
+      "name": "test-driven-development",
+      "description": "Use when implementing any feature or bugfix, before writing implementation code",
+      "path": "skills/test-driven-development/SKILL.md",
+      "url": "https://github.com/obra/superpowers/blob/22f0b463e7a5e579904dd6211a520321035526f7/skills/test-driven-development/SKILL.md",
+      "blobSha": "46838cc9e893c06259e3bdad0fc2425b36242f15",
+      "scope": "skill"
+    },
+    {
+      "id": "superpowers:skills/using-git-worktrees/SKILL.md",
+      "name": "using-git-worktrees",
+      "description": "Use when starting feature work that needs isolation from current workspace or before executing implementation plans - ensures an isolated workspace exists via native tools or git worktree fallback",
+      "path": "skills/using-git-worktrees/SKILL.md",
+      "url": "https://github.com/obra/superpowers/blob/22f0b463e7a5e579904dd6211a520321035526f7/skills/using-git-worktrees/SKILL.md",
+      "blobSha": "1381dacb3516b94382dd6ec736ede21ee8ede2b3",
+      "scope": "skill"
+    },
+    {
+      "id": "superpowers:skills/using-superpowers/SKILL.md",
+      "name": "using-superpowers",
+      "description": "Use when starting any conversation - establishes how to find and use skills, requiring skill invocation before ANY response including clarifying questions",
+      "path": "skills/using-superpowers/SKILL.md",
+      "url": "https://github.com/obra/superpowers/blob/22f0b463e7a5e579904dd6211a520321035526f7/skills/using-superpowers/SKILL.md",
+      "blobSha": "069d578445805a28b8dacbf70cdf045e1673def0",
+      "scope": "skill"
+    },
+    {
+      "id": "superpowers:skills/verification-before-completion/SKILL.md",
+      "name": "verification-before-completion",
+      "description": "Use when about to claim work is complete, fixed, or passing, before committing or creating PRs - requires running verification commands and confirming output before making any success claims; evidence before assertions always",
+      "path": "skills/verification-before-completion/SKILL.md",
+      "url": "https://github.com/obra/superpowers/blob/22f0b463e7a5e579904dd6211a520321035526f7/skills/verification-before-completion/SKILL.md",
+      "blobSha": "7d45333cc4a49c57a80df6c1fe2fa777a207afbc",
+      "scope": "skill"
+    },
+    {
+      "id": "superpowers:skills/writing-plans/SKILL.md",
+      "name": "writing-plans",
+      "description": "Use when you have a spec or requirements for a multi-step task, before touching code",
+      "path": "skills/writing-plans/SKILL.md",
+      "url": "https://github.com/obra/superpowers/blob/22f0b463e7a5e579904dd6211a520321035526f7/skills/writing-plans/SKILL.md",
+      "blobSha": "4cf0275d88d67aa4ef09f4bbca9970ed6ff74a00",
+      "scope": "skill"
+    },
+    {
+      "id": "superpowers:skills/writing-skills/SKILL.md",
+      "name": "writing-skills",
+      "description": "Use when creating new skills, editing existing skills, or verifying skills work before deployment",
+      "path": "skills/writing-skills/SKILL.md",
+      "url": "https://github.com/obra/superpowers/blob/22f0b463e7a5e579904dd6211a520321035526f7/skills/writing-skills/SKILL.md",
+      "blobSha": "09d76b79dd4080fe4dcc9bfb3c54d05dbff8a563",
+      "scope": "skill"
+    }
+  ],
+  "excluded": []
+}

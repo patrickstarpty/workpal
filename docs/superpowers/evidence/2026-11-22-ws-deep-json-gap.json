@@ -1,0 +1,56 @@
+{
+  "scope": "Historical pre-fix deep frame JSON difference; observations retained unchanged.",
+  "cases": [
+    {
+      "depth": 100,
+      "bytes": 227,
+      "python": {
+        "type": "pong"
+      },
+      "go": {
+        "type": "pong"
+      }
+    },
+    {
+      "depth": 900,
+      "bytes": 1827,
+      "python": {
+        "type": "pong"
+      },
+      "go": {
+        "type": "pong"
+      }
+    },
+    {
+      "depth": 1100,
+      "bytes": 2227,
+      "python": null,
+      "go": {
+        "type": "pong"
+      }
+    },
+    {
+      "depth": 2000,
+      "bytes": 4027,
+      "python": null,
+      "go": {
+        "type": "pong"
+      }
+    },
+    {
+      "depth": 9999,
+      "bytes": 20025,
+      "python": null,
+      "go": {
+        "type": "pong"
+      }
+    },
+    {
+      "depth": 10000,
+      "bytes": 20027,
+      "python": null,
+      "go": null
+    }
+  ],
+  "resolved_by": "2026-11-22-python-ws-frames-parity.json"
+}

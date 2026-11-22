@@ -1,0 +1,4 @@
+package main
+import("encoding/base64";"encoding/json";"net/http/httptest";"net/url";"os";"strings")
+type Fixture struct {Query,Name string; Values []string}
+func main(){var fixtures []Fixture;if e:=json.NewDecoder(os.Stdin).Decode(&fixtures);e!=nil{panic(e)};out:=[]any{};for _,f:=range fixtures{body:="";for _,value:=range f.Values{body+="--boundary\r\nContent-Disposition: form-data; name=\"issue_id\"\r\n\r\n"+value+"\r\n"};body+="--boundary--\r\n";r:=httptest.NewRequest("POST","http://internal/upload",strings.NewReader(body));r.URL=&url.URL{RawQuery:f.Query};r.Header.Set("Content-Type","multipart/form-data; boundary=boundary");parseError:=r.ParseMultipartForm(100<<20);out=append(out,map[string]any{"parse_error":parseError!=nil,"value":base64.StdEncoding.EncodeToString([]byte(r.FormValue(f.Name)))});r.MultipartForm.RemoveAll()};json.NewEncoder(os.Stdout).Encode(out)}

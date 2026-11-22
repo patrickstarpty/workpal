@@ -1,0 +1,3145 @@
+{
+  "scope": "Original MirroredRelay start/sink/stop/wait ordering and node metric, same-id sequential publish, daemon_runtime primary-only, joined error text and divergence counters. Child boundary recorders, not concurrent cancellation or real Redis IO.",
+  "fixtures": [
+    {
+      "Scope": "workspace",
+      "ID": "id",
+      "Exclude": "w",
+      "EventID": "event",
+      "Frame": "b3BhcXVl/w==",
+      "PrimaryError": false,
+      "MirrorError": false
+    },
+    {
+      "Scope": "workspace",
+      "ID": "id",
+      "Exclude": "w",
+      "EventID": "event",
+      "Frame": "b3BhcXVl/w==",
+      "PrimaryError": false,
+      "MirrorError": true
+    },
+    {
+      "Scope": "workspace",
+      "ID": "id",
+      "Exclude": "w",
+      "EventID": "event",
+      "Frame": "b3BhcXVl/w==",
+      "PrimaryError": true,
+      "MirrorError": false
+    },
+    {
+      "Scope": "workspace",
+      "ID": "id",
+      "Exclude": "w",
+      "EventID": "event",
+      "Frame": "b3BhcXVl/w==",
+      "PrimaryError": true,
+      "MirrorError": true
+    },
+    {
+      "Scope": "user",
+      "ID": "id",
+      "Exclude": "w",
+      "EventID": "event",
+      "Frame": "b3BhcXVl/w==",
+      "PrimaryError": false,
+      "MirrorError": false
+    },
+    {
+      "Scope": "user",
+      "ID": "id",
+      "Exclude": "w",
+      "EventID": "event",
+      "Frame": "b3BhcXVl/w==",
+      "PrimaryError": false,
+      "MirrorError": true
+    },
+    {
+      "Scope": "user",
+      "ID": "id",
+      "Exclude": "w",
+      "EventID": "event",
+      "Frame": "b3BhcXVl/w==",
+      "PrimaryError": true,
+      "MirrorError": false
+    },
+    {
+      "Scope": "user",
+      "ID": "id",
+      "Exclude": "w",
+      "EventID": "event",
+      "Frame": "b3BhcXVl/w==",
+      "PrimaryError": true,
+      "MirrorError": true
+    },
+    {
+      "Scope": "global",
+      "ID": "id",
+      "Exclude": "w",
+      "EventID": "event",
+      "Frame": "b3BhcXVl/w==",
+      "PrimaryError": false,
+      "MirrorError": false
+    },
+    {
+      "Scope": "global",
+      "ID": "id",
+      "Exclude": "w",
+      "EventID": "event",
+      "Frame": "b3BhcXVl/w==",
+      "PrimaryError": false,
+      "MirrorError": true
+    },
+    {
+      "Scope": "global",
+      "ID": "id",
+      "Exclude": "w",
+      "EventID": "event",
+      "Frame": "b3BhcXVl/w==",
+      "PrimaryError": true,
+      "MirrorError": false
+    },
+    {
+      "Scope": "global",
+      "ID": "id",
+      "Exclude": "w",
+      "EventID": "event",
+      "Frame": "b3BhcXVl/w==",
+      "PrimaryError": true,
+      "MirrorError": true
+    },
+    {
+      "Scope": "daemon_runtime",
+      "ID": "id",
+      "Exclude": "w",
+      "EventID": "event",
+      "Frame": "b3BhcXVl/w==",
+      "PrimaryError": false,
+      "MirrorError": false
+    },
+    {
+      "Scope": "daemon_runtime",
+      "ID": "id",
+      "Exclude": "w",
+      "EventID": "event",
+      "Frame": "b3BhcXVl/w==",
+      "PrimaryError": false,
+      "MirrorError": true
+    },
+    {
+      "Scope": "daemon_runtime",
+      "ID": "id",
+      "Exclude": "w",
+      "EventID": "event",
+      "Frame": "b3BhcXVl/w==",
+      "PrimaryError": true,
+      "MirrorError": false
+    },
+    {
+      "Scope": "daemon_runtime",
+      "ID": "id",
+      "Exclude": "w",
+      "EventID": "event",
+      "Frame": "b3BhcXVl/w==",
+      "PrimaryError": true,
+      "MirrorError": true
+    },
+    {
+      "Scope": "wecom_outbound",
+      "ID": "id",
+      "Exclude": "w",
+      "EventID": "event",
+      "Frame": "b3BhcXVl/w==",
+      "PrimaryError": false,
+      "MirrorError": false
+    },
+    {
+      "Scope": "wecom_outbound",
+      "ID": "id",
+      "Exclude": "w",
+      "EventID": "event",
+      "Frame": "b3BhcXVl/w==",
+      "PrimaryError": false,
+      "MirrorError": true
+    },
+    {
+      "Scope": "wecom_outbound",
+      "ID": "id",
+      "Exclude": "w",
+      "EventID": "event",
+      "Frame": "b3BhcXVl/w==",
+      "PrimaryError": true,
+      "MirrorError": false
+    },
+    {
+      "Scope": "wecom_outbound",
+      "ID": "id",
+      "Exclude": "w",
+      "EventID": "event",
+      "Frame": "b3BhcXVl/w==",
+      "PrimaryError": true,
+      "MirrorError": true
+    },
+    {
+      "Scope": "unknown",
+      "ID": "id",
+      "Exclude": "w",
+      "EventID": "event",
+      "Frame": "b3BhcXVl/w==",
+      "PrimaryError": false,
+      "MirrorError": false
+    },
+    {
+      "Scope": "unknown",
+      "ID": "id",
+      "Exclude": "w",
+      "EventID": "event",
+      "Frame": "b3BhcXVl/w==",
+      "PrimaryError": false,
+      "MirrorError": true
+    },
+    {
+      "Scope": "unknown",
+      "ID": "id",
+      "Exclude": "w",
+      "EventID": "event",
+      "Frame": "b3BhcXVl/w==",
+      "PrimaryError": true,
+      "MirrorError": false
+    },
+    {
+      "Scope": "unknown",
+      "ID": "id",
+      "Exclude": "w",
+      "EventID": "event",
+      "Frame": "b3BhcXVl/w==",
+      "PrimaryError": true,
+      "MirrorError": true
+    }
+  ],
+  "go": [
+    {
+      "calls": [
+        [
+          "primary",
+          "workspace",
+          "id",
+          "w",
+          "b3BhcXVl/w==",
+          "event"
+        ],
+        [
+          "mirror",
+          "workspace",
+          "id",
+          "w",
+          "b3BhcXVl/w==",
+          "event"
+        ]
+      ],
+      "error": "",
+      "lifecycle": [
+        [
+          "start",
+          "primary"
+        ],
+        [
+          "start",
+          "mirror"
+        ],
+        [
+          "sink",
+          "primary"
+        ],
+        [
+          "sink",
+          "mirror"
+        ],
+        [
+          "stop",
+          "primary"
+        ],
+        [
+          "stop",
+          "mirror"
+        ],
+        [
+          "wait",
+          "primary"
+        ],
+        [
+          "wait",
+          "mirror"
+        ]
+      ],
+      "metric_node_id": "primary",
+      "metrics": [
+        0,
+        0,
+        0
+      ],
+      "node_id": "primary"
+    },
+    {
+      "calls": [
+        [
+          "primary",
+          "workspace",
+          "id",
+          "w",
+          "b3BhcXVl/w==",
+          "event"
+        ],
+        [
+          "mirror",
+          "workspace",
+          "id",
+          "w",
+          "b3BhcXVl/w==",
+          "event"
+        ]
+      ],
+      "error": "mirror failed",
+      "lifecycle": [
+        [
+          "start",
+          "primary"
+        ],
+        [
+          "start",
+          "mirror"
+        ],
+        [
+          "sink",
+          "primary"
+        ],
+        [
+          "sink",
+          "mirror"
+        ],
+        [
+          "stop",
+          "primary"
+        ],
+        [
+          "stop",
+          "mirror"
+        ],
+        [
+          "wait",
+          "primary"
+        ],
+        [
+          "wait",
+          "mirror"
+        ]
+      ],
+      "metric_node_id": "primary",
+      "metrics": [
+        0,
+        1,
+        1
+      ],
+      "node_id": "primary"
+    },
+    {
+      "calls": [
+        [
+          "primary",
+          "workspace",
+          "id",
+          "w",
+          "b3BhcXVl/w==",
+          "event"
+        ],
+        [
+          "mirror",
+          "workspace",
+          "id",
+          "w",
+          "b3BhcXVl/w==",
+          "event"
+        ]
+      ],
+      "error": "primary failed",
+      "lifecycle": [
+        [
+          "start",
+          "primary"
+        ],
+        [
+          "start",
+          "mirror"
+        ],
+        [
+          "sink",
+          "primary"
+        ],
+        [
+          "sink",
+          "mirror"
+        ],
+        [
+          "stop",
+          "primary"
+        ],
+        [
+          "stop",
+          "mirror"
+        ],
+        [
+          "wait",
+          "primary"
+        ],
+        [
+          "wait",
+          "mirror"
+        ]
+      ],
+      "metric_node_id": "primary",
+      "metrics": [
+        1,
+        0,
+        1
+      ],
+      "node_id": "primary"
+    },
+    {
+      "calls": [
+        [
+          "primary",
+          "workspace",
+          "id",
+          "w",
+          "b3BhcXVl/w==",
+          "event"
+        ],
+        [
+          "mirror",
+          "workspace",
+          "id",
+          "w",
+          "b3BhcXVl/w==",
+          "event"
+        ]
+      ],
+      "error": "primary failed\nmirror failed",
+      "lifecycle": [
+        [
+          "start",
+          "primary"
+        ],
+        [
+          "start",
+          "mirror"
+        ],
+        [
+          "sink",
+          "primary"
+        ],
+        [
+          "sink",
+          "mirror"
+        ],
+        [
+          "stop",
+          "primary"
+        ],
+        [
+          "stop",
+          "mirror"
+        ],
+        [
+          "wait",
+          "primary"
+        ],
+        [
+          "wait",
+          "mirror"
+        ]
+      ],
+      "metric_node_id": "primary",
+      "metrics": [
+        1,
+        1,
+        0
+      ],
+      "node_id": "primary"
+    },
+    {
+      "calls": [
+        [
+          "primary",
+          "user",
+          "id",
+          "w",
+          "b3BhcXVl/w==",
+          "event"
+        ],
+        [
+          "mirror",
+          "user",
+          "id",
+          "w",
+          "b3BhcXVl/w==",
+          "event"
+        ]
+      ],
+      "error": "",
+      "lifecycle": [
+        [
+          "start",
+          "primary"
+        ],
+        [
+          "start",
+          "mirror"
+        ],
+        [
+          "sink",
+          "primary"
+        ],
+        [
+          "sink",
+          "mirror"
+        ],
+        [
+          "stop",
+          "primary"
+        ],
+        [
+          "stop",
+          "mirror"
+        ],
+        [
+          "wait",
+          "primary"
+        ],
+        [
+          "wait",
+          "mirror"
+        ]
+      ],
+      "metric_node_id": "primary",
+      "metrics": [
+        0,
+        0,
+        0
+      ],
+      "node_id": "primary"
+    },
+    {
+      "calls": [
+        [
+          "primary",
+          "user",
+          "id",
+          "w",
+          "b3BhcXVl/w==",
+          "event"
+        ],
+        [
+          "mirror",
+          "user",
+          "id",
+          "w",
+          "b3BhcXVl/w==",
+          "event"
+        ]
+      ],
+      "error": "mirror failed",
+      "lifecycle": [
+        [
+          "start",
+          "primary"
+        ],
+        [
+          "start",
+          "mirror"
+        ],
+        [
+          "sink",
+          "primary"
+        ],
+        [
+          "sink",
+          "mirror"
+        ],
+        [
+          "stop",
+          "primary"
+        ],
+        [
+          "stop",
+          "mirror"
+        ],
+        [
+          "wait",
+          "primary"
+        ],
+        [
+          "wait",
+          "mirror"
+        ]
+      ],
+      "metric_node_id": "primary",
+      "metrics": [
+        0,
+        1,
+        1
+      ],
+      "node_id": "primary"
+    },
+    {
+      "calls": [
+        [
+          "primary",
+          "user",
+          "id",
+          "w",
+          "b3BhcXVl/w==",
+          "event"
+        ],
+        [
+          "mirror",
+          "user",
+          "id",
+          "w",
+          "b3BhcXVl/w==",
+          "event"
+        ]
+      ],
+      "error": "primary failed",
+      "lifecycle": [
+        [
+          "start",
+          "primary"
+        ],
+        [
+          "start",
+          "mirror"
+        ],
+        [
+          "sink",
+          "primary"
+        ],
+        [
+          "sink",
+          "mirror"
+        ],
+        [
+          "stop",
+          "primary"
+        ],
+        [
+          "stop",
+          "mirror"
+        ],
+        [
+          "wait",
+          "primary"
+        ],
+        [
+          "wait",
+          "mirror"
+        ]
+      ],
+      "metric_node_id": "primary",
+      "metrics": [
+        1,
+        0,
+        1
+      ],
+      "node_id": "primary"
+    },
+    {
+      "calls": [
+        [
+          "primary",
+          "user",
+          "id",
+          "w",
+          "b3BhcXVl/w==",
+          "event"
+        ],
+        [
+          "mirror",
+          "user",
+          "id",
+          "w",
+          "b3BhcXVl/w==",
+          "event"
+        ]
+      ],
+      "error": "primary failed\nmirror failed",
+      "lifecycle": [
+        [
+          "start",
+          "primary"
+        ],
+        [
+          "start",
+          "mirror"
+        ],
+        [
+          "sink",
+          "primary"
+        ],
+        [
+          "sink",
+          "mirror"
+        ],
+        [
+          "stop",
+          "primary"
+        ],
+        [
+          "stop",
+          "mirror"
+        ],
+        [
+          "wait",
+          "primary"
+        ],
+        [
+          "wait",
+          "mirror"
+        ]
+      ],
+      "metric_node_id": "primary",
+      "metrics": [
+        1,
+        1,
+        0
+      ],
+      "node_id": "primary"
+    },
+    {
+      "calls": [
+        [
+          "primary",
+          "global",
+          "id",
+          "w",
+          "b3BhcXVl/w==",
+          "event"
+        ],
+        [
+          "mirror",
+          "global",
+          "id",
+          "w",
+          "b3BhcXVl/w==",
+          "event"
+        ]
+      ],
+      "error": "",
+      "lifecycle": [
+        [
+          "start",
+          "primary"
+        ],
+        [
+          "start",
+          "mirror"
+        ],
+        [
+          "sink",
+          "primary"
+        ],
+        [
+          "sink",
+          "mirror"
+        ],
+        [
+          "stop",
+          "primary"
+        ],
+        [
+          "stop",
+          "mirror"
+        ],
+        [
+          "wait",
+          "primary"
+        ],
+        [
+          "wait",
+          "mirror"
+        ]
+      ],
+      "metric_node_id": "primary",
+      "metrics": [
+        0,
+        0,
+        0
+      ],
+      "node_id": "primary"
+    },
+    {
+      "calls": [
+        [
+          "primary",
+          "global",
+          "id",
+          "w",
+          "b3BhcXVl/w==",
+          "event"
+        ],
+        [
+          "mirror",
+          "global",
+          "id",
+          "w",
+          "b3BhcXVl/w==",
+          "event"
+        ]
+      ],
+      "error": "mirror failed",
+      "lifecycle": [
+        [
+          "start",
+          "primary"
+        ],
+        [
+          "start",
+          "mirror"
+        ],
+        [
+          "sink",
+          "primary"
+        ],
+        [
+          "sink",
+          "mirror"
+        ],
+        [
+          "stop",
+          "primary"
+        ],
+        [
+          "stop",
+          "mirror"
+        ],
+        [
+          "wait",
+          "primary"
+        ],
+        [
+          "wait",
+          "mirror"
+        ]
+      ],
+      "metric_node_id": "primary",
+      "metrics": [
+        0,
+        1,
+        1
+      ],
+      "node_id": "primary"
+    },
+    {
+      "calls": [
+        [
+          "primary",
+          "global",
+          "id",
+          "w",
+          "b3BhcXVl/w==",
+          "event"
+        ],
+        [
+          "mirror",
+          "global",
+          "id",
+          "w",
+          "b3BhcXVl/w==",
+          "event"
+        ]
+      ],
+      "error": "primary failed",
+      "lifecycle": [
+        [
+          "start",
+          "primary"
+        ],
+        [
+          "start",
+          "mirror"
+        ],
+        [
+          "sink",
+          "primary"
+        ],
+        [
+          "sink",
+          "mirror"
+        ],
+        [
+          "stop",
+          "primary"
+        ],
+        [
+          "stop",
+          "mirror"
+        ],
+        [
+          "wait",
+          "primary"
+        ],
+        [
+          "wait",
+          "mirror"
+        ]
+      ],
+      "metric_node_id": "primary",
+      "metrics": [
+        1,
+        0,
+        1
+      ],
+      "node_id": "primary"
+    },
+    {
+      "calls": [
+        [
+          "primary",
+          "global",
+          "id",
+          "w",
+          "b3BhcXVl/w==",
+          "event"
+        ],
+        [
+          "mirror",
+          "global",
+          "id",
+          "w",
+          "b3BhcXVl/w==",
+          "event"
+        ]
+      ],
+      "error": "primary failed\nmirror failed",
+      "lifecycle": [
+        [
+          "start",
+          "primary"
+        ],
+        [
+          "start",
+          "mirror"
+        ],
+        [
+          "sink",
+          "primary"
+        ],
+        [
+          "sink",
+          "mirror"
+        ],
+        [
+          "stop",
+          "primary"
+        ],
+        [
+          "stop",
+          "mirror"
+        ],
+        [
+          "wait",
+          "primary"
+        ],
+        [
+          "wait",
+          "mirror"
+        ]
+      ],
+      "metric_node_id": "primary",
+      "metrics": [
+        1,
+        1,
+        0
+      ],
+      "node_id": "primary"
+    },
+    {
+      "calls": [
+        [
+          "primary",
+          "daemon_runtime",
+          "id",
+          "w",
+          "b3BhcXVl/w==",
+          "event"
+        ]
+      ],
+      "error": "",
+      "lifecycle": [
+        [
+          "start",
+          "primary"
+        ],
+        [
+          "start",
+          "mirror"
+        ],
+        [
+          "sink",
+          "primary"
+        ],
+        [
+          "sink",
+          "mirror"
+        ],
+        [
+          "stop",
+          "primary"
+        ],
+        [
+          "stop",
+          "mirror"
+        ],
+        [
+          "wait",
+          "primary"
+        ],
+        [
+          "wait",
+          "mirror"
+        ]
+      ],
+      "metric_node_id": "primary",
+      "metrics": [
+        0,
+        0,
+        0
+      ],
+      "node_id": "primary"
+    },
+    {
+      "calls": [
+        [
+          "primary",
+          "daemon_runtime",
+          "id",
+          "w",
+          "b3BhcXVl/w==",
+          "event"
+        ]
+      ],
+      "error": "",
+      "lifecycle": [
+        [
+          "start",
+          "primary"
+        ],
+        [
+          "start",
+          "mirror"
+        ],
+        [
+          "sink",
+          "primary"
+        ],
+        [
+          "sink",
+          "mirror"
+        ],
+        [
+          "stop",
+          "primary"
+        ],
+        [
+          "stop",
+          "mirror"
+        ],
+        [
+          "wait",
+          "primary"
+        ],
+        [
+          "wait",
+          "mirror"
+        ]
+      ],
+      "metric_node_id": "primary",
+      "metrics": [
+        0,
+        0,
+        0
+      ],
+      "node_id": "primary"
+    },
+    {
+      "calls": [
+        [
+          "primary",
+          "daemon_runtime",
+          "id",
+          "w",
+          "b3BhcXVl/w==",
+          "event"
+        ]
+      ],
+      "error": "primary failed",
+      "lifecycle": [
+        [
+          "start",
+          "primary"
+        ],
+        [
+          "start",
+          "mirror"
+        ],
+        [
+          "sink",
+          "primary"
+        ],
+        [
+          "sink",
+          "mirror"
+        ],
+        [
+          "stop",
+          "primary"
+        ],
+        [
+          "stop",
+          "mirror"
+        ],
+        [
+          "wait",
+          "primary"
+        ],
+        [
+          "wait",
+          "mirror"
+        ]
+      ],
+      "metric_node_id": "primary",
+      "metrics": [
+        0,
+        0,
+        0
+      ],
+      "node_id": "primary"
+    },
+    {
+      "calls": [
+        [
+          "primary",
+          "daemon_runtime",
+          "id",
+          "w",
+          "b3BhcXVl/w==",
+          "event"
+        ]
+      ],
+      "error": "primary failed",
+      "lifecycle": [
+        [
+          "start",
+          "primary"
+        ],
+        [
+          "start",
+          "mirror"
+        ],
+        [
+          "sink",
+          "primary"
+        ],
+        [
+          "sink",
+          "mirror"
+        ],
+        [
+          "stop",
+          "primary"
+        ],
+        [
+          "stop",
+          "mirror"
+        ],
+        [
+          "wait",
+          "primary"
+        ],
+        [
+          "wait",
+          "mirror"
+        ]
+      ],
+      "metric_node_id": "primary",
+      "metrics": [
+        0,
+        0,
+        0
+      ],
+      "node_id": "primary"
+    },
+    {
+      "calls": [
+        [
+          "primary",
+          "wecom_outbound",
+          "id",
+          "w",
+          "b3BhcXVl/w==",
+          "event"
+        ],
+        [
+          "mirror",
+          "wecom_outbound",
+          "id",
+          "w",
+          "b3BhcXVl/w==",
+          "event"
+        ]
+      ],
+      "error": "",
+      "lifecycle": [
+        [
+          "start",
+          "primary"
+        ],
+        [
+          "start",
+          "mirror"
+        ],
+        [
+          "sink",
+          "primary"
+        ],
+        [
+          "sink",
+          "mirror"
+        ],
+        [
+          "stop",
+          "primary"
+        ],
+        [
+          "stop",
+          "mirror"
+        ],
+        [
+          "wait",
+          "primary"
+        ],
+        [
+          "wait",
+          "mirror"
+        ]
+      ],
+      "metric_node_id": "primary",
+      "metrics": [
+        0,
+        0,
+        0
+      ],
+      "node_id": "primary"
+    },
+    {
+      "calls": [
+        [
+          "primary",
+          "wecom_outbound",
+          "id",
+          "w",
+          "b3BhcXVl/w==",
+          "event"
+        ],
+        [
+          "mirror",
+          "wecom_outbound",
+          "id",
+          "w",
+          "b3BhcXVl/w==",
+          "event"
+        ]
+      ],
+      "error": "mirror failed",
+      "lifecycle": [
+        [
+          "start",
+          "primary"
+        ],
+        [
+          "start",
+          "mirror"
+        ],
+        [
+          "sink",
+          "primary"
+        ],
+        [
+          "sink",
+          "mirror"
+        ],
+        [
+          "stop",
+          "primary"
+        ],
+        [
+          "stop",
+          "mirror"
+        ],
+        [
+          "wait",
+          "primary"
+        ],
+        [
+          "wait",
+          "mirror"
+        ]
+      ],
+      "metric_node_id": "primary",
+      "metrics": [
+        0,
+        1,
+        1
+      ],
+      "node_id": "primary"
+    },
+    {
+      "calls": [
+        [
+          "primary",
+          "wecom_outbound",
+          "id",
+          "w",
+          "b3BhcXVl/w==",
+          "event"
+        ],
+        [
+          "mirror",
+          "wecom_outbound",
+          "id",
+          "w",
+          "b3BhcXVl/w==",
+          "event"
+        ]
+      ],
+      "error": "primary failed",
+      "lifecycle": [
+        [
+          "start",
+          "primary"
+        ],
+        [
+          "start",
+          "mirror"
+        ],
+        [
+          "sink",
+          "primary"
+        ],
+        [
+          "sink",
+          "mirror"
+        ],
+        [
+          "stop",
+          "primary"
+        ],
+        [
+          "stop",
+          "mirror"
+        ],
+        [
+          "wait",
+          "primary"
+        ],
+        [
+          "wait",
+          "mirror"
+        ]
+      ],
+      "metric_node_id": "primary",
+      "metrics": [
+        1,
+        0,
+        1
+      ],
+      "node_id": "primary"
+    },
+    {
+      "calls": [
+        [
+          "primary",
+          "wecom_outbound",
+          "id",
+          "w",
+          "b3BhcXVl/w==",
+          "event"
+        ],
+        [
+          "mirror",
+          "wecom_outbound",
+          "id",
+          "w",
+          "b3BhcXVl/w==",
+          "event"
+        ]
+      ],
+      "error": "primary failed\nmirror failed",
+      "lifecycle": [
+        [
+          "start",
+          "primary"
+        ],
+        [
+          "start",
+          "mirror"
+        ],
+        [
+          "sink",
+          "primary"
+        ],
+        [
+          "sink",
+          "mirror"
+        ],
+        [
+          "stop",
+          "primary"
+        ],
+        [
+          "stop",
+          "mirror"
+        ],
+        [
+          "wait",
+          "primary"
+        ],
+        [
+          "wait",
+          "mirror"
+        ]
+      ],
+      "metric_node_id": "primary",
+      "metrics": [
+        1,
+        1,
+        0
+      ],
+      "node_id": "primary"
+    },
+    {
+      "calls": [
+        [
+          "primary",
+          "unknown",
+          "id",
+          "w",
+          "b3BhcXVl/w==",
+          "event"
+        ],
+        [
+          "mirror",
+          "unknown",
+          "id",
+          "w",
+          "b3BhcXVl/w==",
+          "event"
+        ]
+      ],
+      "error": "",
+      "lifecycle": [
+        [
+          "start",
+          "primary"
+        ],
+        [
+          "start",
+          "mirror"
+        ],
+        [
+          "sink",
+          "primary"
+        ],
+        [
+          "sink",
+          "mirror"
+        ],
+        [
+          "stop",
+          "primary"
+        ],
+        [
+          "stop",
+          "mirror"
+        ],
+        [
+          "wait",
+          "primary"
+        ],
+        [
+          "wait",
+          "mirror"
+        ]
+      ],
+      "metric_node_id": "primary",
+      "metrics": [
+        0,
+        0,
+        0
+      ],
+      "node_id": "primary"
+    },
+    {
+      "calls": [
+        [
+          "primary",
+          "unknown",
+          "id",
+          "w",
+          "b3BhcXVl/w==",
+          "event"
+        ],
+        [
+          "mirror",
+          "unknown",
+          "id",
+          "w",
+          "b3BhcXVl/w==",
+          "event"
+        ]
+      ],
+      "error": "mirror failed",
+      "lifecycle": [
+        [
+          "start",
+          "primary"
+        ],
+        [
+          "start",
+          "mirror"
+        ],
+        [
+          "sink",
+          "primary"
+        ],
+        [
+          "sink",
+          "mirror"
+        ],
+        [
+          "stop",
+          "primary"
+        ],
+        [
+          "stop",
+          "mirror"
+        ],
+        [
+          "wait",
+          "primary"
+        ],
+        [
+          "wait",
+          "mirror"
+        ]
+      ],
+      "metric_node_id": "primary",
+      "metrics": [
+        0,
+        1,
+        1
+      ],
+      "node_id": "primary"
+    },
+    {
+      "calls": [
+        [
+          "primary",
+          "unknown",
+          "id",
+          "w",
+          "b3BhcXVl/w==",
+          "event"
+        ],
+        [
+          "mirror",
+          "unknown",
+          "id",
+          "w",
+          "b3BhcXVl/w==",
+          "event"
+        ]
+      ],
+      "error": "primary failed",
+      "lifecycle": [
+        [
+          "start",
+          "primary"
+        ],
+        [
+          "start",
+          "mirror"
+        ],
+        [
+          "sink",
+          "primary"
+        ],
+        [
+          "sink",
+          "mirror"
+        ],
+        [
+          "stop",
+          "primary"
+        ],
+        [
+          "stop",
+          "mirror"
+        ],
+        [
+          "wait",
+          "primary"
+        ],
+        [
+          "wait",
+          "mirror"
+        ]
+      ],
+      "metric_node_id": "primary",
+      "metrics": [
+        1,
+        0,
+        1
+      ],
+      "node_id": "primary"
+    },
+    {
+      "calls": [
+        [
+          "primary",
+          "unknown",
+          "id",
+          "w",
+          "b3BhcXVl/w==",
+          "event"
+        ],
+        [
+          "mirror",
+          "unknown",
+          "id",
+          "w",
+          "b3BhcXVl/w==",
+          "event"
+        ]
+      ],
+      "error": "primary failed\nmirror failed",
+      "lifecycle": [
+        [
+          "start",
+          "primary"
+        ],
+        [
+          "start",
+          "mirror"
+        ],
+        [
+          "sink",
+          "primary"
+        ],
+        [
+          "sink",
+          "mirror"
+        ],
+        [
+          "stop",
+          "primary"
+        ],
+        [
+          "stop",
+          "mirror"
+        ],
+        [
+          "wait",
+          "primary"
+        ],
+        [
+          "wait",
+          "mirror"
+        ]
+      ],
+      "metric_node_id": "primary",
+      "metrics": [
+        1,
+        1,
+        0
+      ],
+      "node_id": "primary"
+    }
+  ],
+  "python": [
+    {
+      "calls": [
+        [
+          "primary",
+          "workspace",
+          "id",
+          "w",
+          "b3BhcXVl/w==",
+          "event"
+        ],
+        [
+          "mirror",
+          "workspace",
+          "id",
+          "w",
+          "b3BhcXVl/w==",
+          "event"
+        ]
+      ],
+      "lifecycle": [
+        [
+          "start",
+          "primary"
+        ],
+        [
+          "start",
+          "mirror"
+        ],
+        [
+          "sink",
+          "primary"
+        ],
+        [
+          "sink",
+          "mirror"
+        ],
+        [
+          "stop",
+          "primary"
+        ],
+        [
+          "stop",
+          "mirror"
+        ],
+        [
+          "wait",
+          "primary"
+        ],
+        [
+          "wait",
+          "mirror"
+        ]
+      ],
+      "error": "",
+      "node_id": "primary",
+      "metric_node_id": "primary",
+      "metrics": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "calls": [
+        [
+          "primary",
+          "workspace",
+          "id",
+          "w",
+          "b3BhcXVl/w==",
+          "event"
+        ],
+        [
+          "mirror",
+          "workspace",
+          "id",
+          "w",
+          "b3BhcXVl/w==",
+          "event"
+        ]
+      ],
+      "lifecycle": [
+        [
+          "start",
+          "primary"
+        ],
+        [
+          "start",
+          "mirror"
+        ],
+        [
+          "sink",
+          "primary"
+        ],
+        [
+          "sink",
+          "mirror"
+        ],
+        [
+          "stop",
+          "primary"
+        ],
+        [
+          "stop",
+          "mirror"
+        ],
+        [
+          "wait",
+          "primary"
+        ],
+        [
+          "wait",
+          "mirror"
+        ]
+      ],
+      "error": "mirror failed",
+      "node_id": "primary",
+      "metric_node_id": "primary",
+      "metrics": [
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "calls": [
+        [
+          "primary",
+          "workspace",
+          "id",
+          "w",
+          "b3BhcXVl/w==",
+          "event"
+        ],
+        [
+          "mirror",
+          "workspace",
+          "id",
+          "w",
+          "b3BhcXVl/w==",
+          "event"
+        ]
+      ],
+      "lifecycle": [
+        [
+          "start",
+          "primary"
+        ],
+        [
+          "start",
+          "mirror"
+        ],
+        [
+          "sink",
+          "primary"
+        ],
+        [
+          "sink",
+          "mirror"
+        ],
+        [
+          "stop",
+          "primary"
+        ],
+        [
+          "stop",
+          "mirror"
+        ],
+        [
+          "wait",
+          "primary"
+        ],
+        [
+          "wait",
+          "mirror"
+        ]
+      ],
+      "error": "primary failed",
+      "node_id": "primary",
+      "metric_node_id": "primary",
+      "metrics": [
+        1,
+        0,
+        1
+      ]
+    },
+    {
+      "calls": [
+        [
+          "primary",
+          "workspace",
+          "id",
+          "w",
+          "b3BhcXVl/w==",
+          "event"
+        ],
+        [
+          "mirror",
+          "workspace",
+          "id",
+          "w",
+          "b3BhcXVl/w==",
+          "event"
+        ]
+      ],
+      "lifecycle": [
+        [
+          "start",
+          "primary"
+        ],
+        [
+          "start",
+          "mirror"
+        ],
+        [
+          "sink",
+          "primary"
+        ],
+        [
+          "sink",
+          "mirror"
+        ],
+        [
+          "stop",
+          "primary"
+        ],
+        [
+          "stop",
+          "mirror"
+        ],
+        [
+          "wait",
+          "primary"
+        ],
+        [
+          "wait",
+          "mirror"
+        ]
+      ],
+      "error": "primary failed\nmirror failed",
+      "node_id": "primary",
+      "metric_node_id": "primary",
+      "metrics": [
+        1,
+        1,
+        0
+      ]
+    },
+    {
+      "calls": [
+        [
+          "primary",
+          "user",
+          "id",
+          "w",
+          "b3BhcXVl/w==",
+          "event"
+        ],
+        [
+          "mirror",
+          "user",
+          "id",
+          "w",
+          "b3BhcXVl/w==",
+          "event"
+        ]
+      ],
+      "lifecycle": [
+        [
+          "start",
+          "primary"
+        ],
+        [
+          "start",
+          "mirror"
+        ],
+        [
+          "sink",
+          "primary"
+        ],
+        [
+          "sink",
+          "mirror"
+        ],
+        [
+          "stop",
+          "primary"
+        ],
+        [
+          "stop",
+          "mirror"
+        ],
+        [
+          "wait",
+          "primary"
+        ],
+        [
+          "wait",
+          "mirror"
+        ]
+      ],
+      "error": "",
+      "node_id": "primary",
+      "metric_node_id": "primary",
+      "metrics": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "calls": [
+        [
+          "primary",
+          "user",
+          "id",
+          "w",
+          "b3BhcXVl/w==",
+          "event"
+        ],
+        [
+          "mirror",
+          "user",
+          "id",
+          "w",
+          "b3BhcXVl/w==",
+          "event"
+        ]
+      ],
+      "lifecycle": [
+        [
+          "start",
+          "primary"
+        ],
+        [
+          "start",
+          "mirror"
+        ],
+        [
+          "sink",
+          "primary"
+        ],
+        [
+          "sink",
+          "mirror"
+        ],
+        [
+          "stop",
+          "primary"
+        ],
+        [
+          "stop",
+          "mirror"
+        ],
+        [
+          "wait",
+          "primary"
+        ],
+        [
+          "wait",
+          "mirror"
+        ]
+      ],
+      "error": "mirror failed",
+      "node_id": "primary",
+      "metric_node_id": "primary",
+      "metrics": [
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "calls": [
+        [
+          "primary",
+          "user",
+          "id",
+          "w",
+          "b3BhcXVl/w==",
+          "event"
+        ],
+        [
+          "mirror",
+          "user",
+          "id",
+          "w",
+          "b3BhcXVl/w==",
+          "event"
+        ]
+      ],
+      "lifecycle": [
+        [
+          "start",
+          "primary"
+        ],
+        [
+          "start",
+          "mirror"
+        ],
+        [
+          "sink",
+          "primary"
+        ],
+        [
+          "sink",
+          "mirror"
+        ],
+        [
+          "stop",
+          "primary"
+        ],
+        [
+          "stop",
+          "mirror"
+        ],
+        [
+          "wait",
+          "primary"
+        ],
+        [
+          "wait",
+          "mirror"
+        ]
+      ],
+      "error": "primary failed",
+      "node_id": "primary",
+      "metric_node_id": "primary",
+      "metrics": [
+        1,
+        0,
+        1
+      ]
+    },
+    {
+      "calls": [
+        [
+          "primary",
+          "user",
+          "id",
+          "w",
+          "b3BhcXVl/w==",
+          "event"
+        ],
+        [
+          "mirror",
+          "user",
+          "id",
+          "w",
+          "b3BhcXVl/w==",
+          "event"
+        ]
+      ],
+      "lifecycle": [
+        [
+          "start",
+          "primary"
+        ],
+        [
+          "start",
+          "mirror"
+        ],
+        [
+          "sink",
+          "primary"
+        ],
+        [
+          "sink",
+          "mirror"
+        ],
+        [
+          "stop",
+          "primary"
+        ],
+        [
+          "stop",
+          "mirror"
+        ],
+        [
+          "wait",
+          "primary"
+        ],
+        [
+          "wait",
+          "mirror"
+        ]
+      ],
+      "error": "primary failed\nmirror failed",
+      "node_id": "primary",
+      "metric_node_id": "primary",
+      "metrics": [
+        1,
+        1,
+        0
+      ]
+    },
+    {
+      "calls": [
+        [
+          "primary",
+          "global",
+          "id",
+          "w",
+          "b3BhcXVl/w==",
+          "event"
+        ],
+        [
+          "mirror",
+          "global",
+          "id",
+          "w",
+          "b3BhcXVl/w==",
+          "event"
+        ]
+      ],
+      "lifecycle": [
+        [
+          "start",
+          "primary"
+        ],
+        [
+          "start",
+          "mirror"
+        ],
+        [
+          "sink",
+          "primary"
+        ],
+        [
+          "sink",
+          "mirror"
+        ],
+        [
+          "stop",
+          "primary"
+        ],
+        [
+          "stop",
+          "mirror"
+        ],
+        [
+          "wait",
+          "primary"
+        ],
+        [
+          "wait",
+          "mirror"
+        ]
+      ],
+      "error": "",
+      "node_id": "primary",
+      "metric_node_id": "primary",
+      "metrics": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "calls": [
+        [
+          "primary",
+          "global",
+          "id",
+          "w",
+          "b3BhcXVl/w==",
+          "event"
+        ],
+        [
+          "mirror",
+          "global",
+          "id",
+          "w",
+          "b3BhcXVl/w==",
+          "event"
+        ]
+      ],
+      "lifecycle": [
+        [
+          "start",
+          "primary"
+        ],
+        [
+          "start",
+          "mirror"
+        ],
+        [
+          "sink",
+          "primary"
+        ],
+        [
+          "sink",
+          "mirror"
+        ],
+        [
+          "stop",
+          "primary"
+        ],
+        [
+          "stop",
+          "mirror"
+        ],
+        [
+          "wait",
+          "primary"
+        ],
+        [
+          "wait",
+          "mirror"
+        ]
+      ],
+      "error": "mirror failed",
+      "node_id": "primary",
+      "metric_node_id": "primary",
+      "metrics": [
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "calls": [
+        [
+          "primary",
+          "global",
+          "id",
+          "w",
+          "b3BhcXVl/w==",
+          "event"
+        ],
+        [
+          "mirror",
+          "global",
+          "id",
+          "w",
+          "b3BhcXVl/w==",
+          "event"
+        ]
+      ],
+      "lifecycle": [
+        [
+          "start",
+          "primary"
+        ],
+        [
+          "start",
+          "mirror"
+        ],
+        [
+          "sink",
+          "primary"
+        ],
+        [
+          "sink",
+          "mirror"
+        ],
+        [
+          "stop",
+          "primary"
+        ],
+        [
+          "stop",
+          "mirror"
+        ],
+        [
+          "wait",
+          "primary"
+        ],
+        [
+          "wait",
+          "mirror"
+        ]
+      ],
+      "error": "primary failed",
+      "node_id": "primary",
+      "metric_node_id": "primary",
+      "metrics": [
+        1,
+        0,
+        1
+      ]
+    },
+    {
+      "calls": [
+        [
+          "primary",
+          "global",
+          "id",
+          "w",
+          "b3BhcXVl/w==",
+          "event"
+        ],
+        [
+          "mirror",
+          "global",
+          "id",
+          "w",
+          "b3BhcXVl/w==",
+          "event"
+        ]
+      ],
+      "lifecycle": [
+        [
+          "start",
+          "primary"
+        ],
+        [
+          "start",
+          "mirror"
+        ],
+        [
+          "sink",
+          "primary"
+        ],
+        [
+          "sink",
+          "mirror"
+        ],
+        [
+          "stop",
+          "primary"
+        ],
+        [
+          "stop",
+          "mirror"
+        ],
+        [
+          "wait",
+          "primary"
+        ],
+        [
+          "wait",
+          "mirror"
+        ]
+      ],
+      "error": "primary failed\nmirror failed",
+      "node_id": "primary",
+      "metric_node_id": "primary",
+      "metrics": [
+        1,
+        1,
+        0
+      ]
+    },
+    {
+      "calls": [
+        [
+          "primary",
+          "daemon_runtime",
+          "id",
+          "w",
+          "b3BhcXVl/w==",
+          "event"
+        ]
+      ],
+      "lifecycle": [
+        [
+          "start",
+          "primary"
+        ],
+        [
+          "start",
+          "mirror"
+        ],
+        [
+          "sink",
+          "primary"
+        ],
+        [
+          "sink",
+          "mirror"
+        ],
+        [
+          "stop",
+          "primary"
+        ],
+        [
+          "stop",
+          "mirror"
+        ],
+        [
+          "wait",
+          "primary"
+        ],
+        [
+          "wait",
+          "mirror"
+        ]
+      ],
+      "error": "",
+      "node_id": "primary",
+      "metric_node_id": "primary",
+      "metrics": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "calls": [
+        [
+          "primary",
+          "daemon_runtime",
+          "id",
+          "w",
+          "b3BhcXVl/w==",
+          "event"
+        ]
+      ],
+      "lifecycle": [
+        [
+          "start",
+          "primary"
+        ],
+        [
+          "start",
+          "mirror"
+        ],
+        [
+          "sink",
+          "primary"
+        ],
+        [
+          "sink",
+          "mirror"
+        ],
+        [
+          "stop",
+          "primary"
+        ],
+        [
+          "stop",
+          "mirror"
+        ],
+        [
+          "wait",
+          "primary"
+        ],
+        [
+          "wait",
+          "mirror"
+        ]
+      ],
+      "error": "",
+      "node_id": "primary",
+      "metric_node_id": "primary",
+      "metrics": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "calls": [
+        [
+          "primary",
+          "daemon_runtime",
+          "id",
+          "w",
+          "b3BhcXVl/w==",
+          "event"
+        ]
+      ],
+      "lifecycle": [
+        [
+          "start",
+          "primary"
+        ],
+        [
+          "start",
+          "mirror"
+        ],
+        [
+          "sink",
+          "primary"
+        ],
+        [
+          "sink",
+          "mirror"
+        ],
+        [
+          "stop",
+          "primary"
+        ],
+        [
+          "stop",
+          "mirror"
+        ],
+        [
+          "wait",
+          "primary"
+        ],
+        [
+          "wait",
+          "mirror"
+        ]
+      ],
+      "error": "primary failed",
+      "node_id": "primary",
+      "metric_node_id": "primary",
+      "metrics": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "calls": [
+        [
+          "primary",
+          "daemon_runtime",
+          "id",
+          "w",
+          "b3BhcXVl/w==",
+          "event"
+        ]
+      ],
+      "lifecycle": [
+        [
+          "start",
+          "primary"
+        ],
+        [
+          "start",
+          "mirror"
+        ],
+        [
+          "sink",
+          "primary"
+        ],
+        [
+          "sink",
+          "mirror"
+        ],
+        [
+          "stop",
+          "primary"
+        ],
+        [
+          "stop",
+          "mirror"
+        ],
+        [
+          "wait",
+          "primary"
+        ],
+        [
+          "wait",
+          "mirror"
+        ]
+      ],
+      "error": "primary failed",
+      "node_id": "primary",
+      "metric_node_id": "primary",
+      "metrics": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "calls": [
+        [
+          "primary",
+          "wecom_outbound",
+          "id",
+          "w",
+          "b3BhcXVl/w==",
+          "event"
+        ],
+        [
+          "mirror",
+          "wecom_outbound",
+          "id",
+          "w",
+          "b3BhcXVl/w==",
+          "event"
+        ]
+      ],
+      "lifecycle": [
+        [
+          "start",
+          "primary"
+        ],
+        [
+          "start",
+          "mirror"
+        ],
+        [
+          "sink",
+          "primary"
+        ],
+        [
+          "sink",
+          "mirror"
+        ],
+        [
+          "stop",
+          "primary"
+        ],
+        [
+          "stop",
+          "mirror"
+        ],
+        [
+          "wait",
+          "primary"
+        ],
+        [
+          "wait",
+          "mirror"
+        ]
+      ],
+      "error": "",
+      "node_id": "primary",
+      "metric_node_id": "primary",
+      "metrics": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "calls": [
+        [
+          "primary",
+          "wecom_outbound",
+          "id",
+          "w",
+          "b3BhcXVl/w==",
+          "event"
+        ],
+        [
+          "mirror",
+          "wecom_outbound",
+          "id",
+          "w",
+          "b3BhcXVl/w==",
+          "event"
+        ]
+      ],
+      "lifecycle": [
+        [
+          "start",
+          "primary"
+        ],
+        [
+          "start",
+          "mirror"
+        ],
+        [
+          "sink",
+          "primary"
+        ],
+        [
+          "sink",
+          "mirror"
+        ],
+        [
+          "stop",
+          "primary"
+        ],
+        [
+          "stop",
+          "mirror"
+        ],
+        [
+          "wait",
+          "primary"
+        ],
+        [
+          "wait",
+          "mirror"
+        ]
+      ],
+      "error": "mirror failed",
+      "node_id": "primary",
+      "metric_node_id": "primary",
+      "metrics": [
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "calls": [
+        [
+          "primary",
+          "wecom_outbound",
+          "id",
+          "w",
+          "b3BhcXVl/w==",
+          "event"
+        ],
+        [
+          "mirror",
+          "wecom_outbound",
+          "id",
+          "w",
+          "b3BhcXVl/w==",
+          "event"
+        ]
+      ],
+      "lifecycle": [
+        [
+          "start",
+          "primary"
+        ],
+        [
+          "start",
+          "mirror"
+        ],
+        [
+          "sink",
+          "primary"
+        ],
+        [
+          "sink",
+          "mirror"
+        ],
+        [
+          "stop",
+          "primary"
+        ],
+        [
+          "stop",
+          "mirror"
+        ],
+        [
+          "wait",
+          "primary"
+        ],
+        [
+          "wait",
+          "mirror"
+        ]
+      ],
+      "error": "primary failed",
+      "node_id": "primary",
+      "metric_node_id": "primary",
+      "metrics": [
+        1,
+        0,
+        1
+      ]
+    },
+    {
+      "calls": [
+        [
+          "primary",
+          "wecom_outbound",
+          "id",
+          "w",
+          "b3BhcXVl/w==",
+          "event"
+        ],
+        [
+          "mirror",
+          "wecom_outbound",
+          "id",
+          "w",
+          "b3BhcXVl/w==",
+          "event"
+        ]
+      ],
+      "lifecycle": [
+        [
+          "start",
+          "primary"
+        ],
+        [
+          "start",
+          "mirror"
+        ],
+        [
+          "sink",
+          "primary"
+        ],
+        [
+          "sink",
+          "mirror"
+        ],
+        [
+          "stop",
+          "primary"
+        ],
+        [
+          "stop",
+          "mirror"
+        ],
+        [
+          "wait",
+          "primary"
+        ],
+        [
+          "wait",
+          "mirror"
+        ]
+      ],
+      "error": "primary failed\nmirror failed",
+      "node_id": "primary",
+      "metric_node_id": "primary",
+      "metrics": [
+        1,
+        1,
+        0
+      ]
+    },
+    {
+      "calls": [
+        [
+          "primary",
+          "unknown",
+          "id",
+          "w",
+          "b3BhcXVl/w==",
+          "event"
+        ],
+        [
+          "mirror",
+          "unknown",
+          "id",
+          "w",
+          "b3BhcXVl/w==",
+          "event"
+        ]
+      ],
+      "lifecycle": [
+        [
+          "start",
+          "primary"
+        ],
+        [
+          "start",
+          "mirror"
+        ],
+        [
+          "sink",
+          "primary"
+        ],
+        [
+          "sink",
+          "mirror"
+        ],
+        [
+          "stop",
+          "primary"
+        ],
+        [
+          "stop",
+          "mirror"
+        ],
+        [
+          "wait",
+          "primary"
+        ],
+        [
+          "wait",
+          "mirror"
+        ]
+      ],
+      "error": "",
+      "node_id": "primary",
+      "metric_node_id": "primary",
+      "metrics": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "calls": [
+        [
+          "primary",
+          "unknown",
+          "id",
+          "w",
+          "b3BhcXVl/w==",
+          "event"
+        ],
+        [
+          "mirror",
+          "unknown",
+          "id",
+          "w",
+          "b3BhcXVl/w==",
+          "event"
+        ]
+      ],
+      "lifecycle": [
+        [
+          "start",
+          "primary"
+        ],
+        [
+          "start",
+          "mirror"
+        ],
+        [
+          "sink",
+          "primary"
+        ],
+        [
+          "sink",
+          "mirror"
+        ],
+        [
+          "stop",
+          "primary"
+        ],
+        [
+          "stop",
+          "mirror"
+        ],
+        [
+          "wait",
+          "primary"
+        ],
+        [
+          "wait",
+          "mirror"
+        ]
+      ],
+      "error": "mirror failed",
+      "node_id": "primary",
+      "metric_node_id": "primary",
+      "metrics": [
+        0,
+        1,
+        1
+      ]
+    },
+    {
+      "calls": [
+        [
+          "primary",
+          "unknown",
+          "id",
+          "w",
+          "b3BhcXVl/w==",
+          "event"
+        ],
+        [
+          "mirror",
+          "unknown",
+          "id",
+          "w",
+          "b3BhcXVl/w==",
+          "event"
+        ]
+      ],
+      "lifecycle": [
+        [
+          "start",
+          "primary"
+        ],
+        [
+          "start",
+          "mirror"
+        ],
+        [
+          "sink",
+          "primary"
+        ],
+        [
+          "sink",
+          "mirror"
+        ],
+        [
+          "stop",
+          "primary"
+        ],
+        [
+          "stop",
+          "mirror"
+        ],
+        [
+          "wait",
+          "primary"
+        ],
+        [
+          "wait",
+          "mirror"
+        ]
+      ],
+      "error": "primary failed",
+      "node_id": "primary",
+      "metric_node_id": "primary",
+      "metrics": [
+        1,
+        0,
+        1
+      ]
+    },
+    {
+      "calls": [
+        [
+          "primary",
+          "unknown",
+          "id",
+          "w",
+          "b3BhcXVl/w==",
+          "event"
+        ],
+        [
+          "mirror",
+          "unknown",
+          "id",
+          "w",
+          "b3BhcXVl/w==",
+          "event"
+        ]
+      ],
+      "lifecycle": [
+        [
+          "start",
+          "primary"
+        ],
+        [
+          "start",
+          "mirror"
+        ],
+        [
+          "sink",
+          "primary"
+        ],
+        [
+          "sink",
+          "mirror"
+        ],
+        [
+          "stop",
+          "primary"
+        ],
+        [
+          "stop",
+          "mirror"
+        ],
+        [
+          "wait",
+          "primary"
+        ],
+        [
+          "wait",
+          "mirror"
+        ]
+      ],
+      "error": "primary failed\nmirror failed",
+      "node_id": "primary",
+      "metric_node_id": "primary",
+      "metrics": [
+        1,
+        1,
+        0
+      ]
+    }
+  ],
+  "mismatches": [],
+  "source_sha256": {
+    "server/go/internal/realtime/relay_lifecycle.go": "c7f9002d8a6893ff512c174c6a1c658f1a112ff7ae6f0c01cc9acfe2dc6eb5f1",
+    "server/tests/parity/go_mirrored_relay/main.go": "2c228ee04ee59e2c999c67f8f1373b9f4d6be737451ddb84a0b82c2ba8666cd5",
+    "server/tests/parity/go_mirrored_relay/wrapper.go": "c8365031b113463351c58cd1b3bc8ef2c04435e15bb4ccea9fd0dbd9e2867a64",
+    "server/src/workpal_backend/realtime/relay_modes.py": "7778e2d707d9c94ec4fd5d8eec8892bdd04a26516ca80f053e99c7f54d190a72",
+    "server/src/workpal_backend/realtime/relay_metrics.py": "36dde5e15f24b28e5abf835285b15235cc2054a6bff00dee06799586dfcb5460"
+  }
+}

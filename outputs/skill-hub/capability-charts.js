@@ -1,0 +1,17 @@
+function overviewChart(){
+ const artifacts=['intent.md','spec.md','Code + tests','Evidence','Release','Learning'];
+ const verbs=['Clarify','Design','Code','Verify','Ship','Improve'];
+ return '<figure class="cap-chart delivery-chart" aria-labelledby="delivery-chart-title"><figcaption class="chart-heading"><div><p class="eyebrow">Overview · Delivery loop</p><h2 id="delivery-chart-title">One goal. A complete lifecycle.</h2></div><span class="chart-note">Select a stage</span></figcaption>'+
+ '<div class="delivery-loop"><span class="delivery-bridge delivery-bridge-start" aria-hidden="true"></span><span class="delivery-bridge delivery-bridge-end" aria-hidden="true"></span><div class="delivery-control">Human direction <span>Goals · judgment · decisions</span></div>'+
+ stages.map((s,i)=>'<button type="button" class="delivery-node" style="grid-area:phase'+i+'" data-chart-stage="'+i+'" aria-pressed="'+(stage===i)+'" aria-label="'+esc(s.name)+': '+verbs[i]+'; expected artifact '+artifacts[i]+'"><span class="delivery-step"><span class="delivery-index">'+String(i+1).padStart(2,'0')+'</span><span>'+esc(s.name)+'</span></span><strong>'+verbs[i]+'</strong><span class="delivery-artifact">'+artifacts[i]+'</span></button>').join('')+'</div><p class="chart-note chart-footnote">Feedback can return to any stage. People own the critical decisions.</p></figure>';
+}
+
+function skillCoverageChart(){
+ const rows=catalog.types.map(t=>({...t,parts:catalog.sources.map(source=>({source,count:catalog.skills.filter(s=>s.id.startsWith(source.id+':')&&s.types.includes(t.id)).length}))})).map(t=>({...t,total:t.parts.reduce((sum,p)=>sum+p.count,0)})).sort((a,b)=>b.total-a.total||a.label.localeCompare(b.label));
+ const maximum=Math.ceil(Math.max(...rows.map(r=>r.total))/10)*10;
+ return '<figure class="cap-chart coverage-chart" aria-labelledby="coverage-chart-title"><figcaption class="coverage-heading"><div><p class="eyebrow">Skill Hub · Capability coverage</p><h2 id="coverage-chart-title"><strong>'+catalog.skills.length+'</strong> <span>catalog entries</span></h2></div><p class="chart-note">'+catalog.types.length+' types<br>'+catalog.sources.length+' sources</p></figcaption>'+
+ '<div class="coverage-legend">'+catalog.sources.map((s,i)=>'<span><i class="source-swatch source-'+i+'" aria-hidden="true"></i>'+esc(s.label)+'</span>').join('')+'</div>'+
+ '<div class="coverage-axis" aria-hidden="true"><span>Entries tagged per type</span><div><span>0</span><span>'+maximum/2+'</span><span>'+maximum+'</span></div><span></span></div>'+
+ '<div class="coverage-rows">'+rows.map(r=>'<button type="button" class="coverage-row" data-chart-type="'+r.id+'" data-total="'+r.total+'" aria-pressed="'+(typeFilter===r.id)+'" aria-label="Browse '+esc(r.label)+', '+r.total+' entries. '+r.parts.filter(p=>p.count).map(p=>esc(p.source.label)+': '+p.count).join('; ')+'"><span class="coverage-label">'+esc(r.label)+'</span><span class="coverage-track" aria-hidden="true">'+r.parts.map((p,i)=>'<span class="coverage-segment source-'+i+'" style="width:'+(p.count/maximum*100)+'%" data-source="'+p.source.id+'" data-count="'+p.count+'" data-tooltip="'+esc(p.source.label)+': '+p.count+'"></span>').join('')+'</span><strong class="coverage-total">'+r.total+'</strong></button>').join('')+'</div>'+
+ '<p class="chart-note chart-footnote">Full catalog · Entries can have several types. Select a bar to browse that type.</p></figure>';
+}

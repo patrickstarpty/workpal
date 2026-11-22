@@ -1,0 +1,63 @@
+{
+  "scope": "Go reference health and realtime metrics tests only; no Python differential acceptance",
+  "summary": {
+    "status": "passed",
+    "exit_code": 0,
+    "passed": 25,
+    "skipped": 0,
+    "failed": 0,
+    "errors": []
+  },
+  "build_profile": {
+    "go_version": "1.26.9",
+    "GOOS": "linux",
+    "GOARCH": "amd64",
+    "CGO_ENABLED": "0",
+    "GOWORK": "off",
+    "GOFLAGS": "",
+    "tags": [],
+    "edition": "default !oss including ee",
+    "module_mode": "readonly"
+  },
+  "compiler_host": "linux/arm64",
+  "executed_binary_target": "linux/amd64",
+  "binary_sha256": "7005019d604f09d92013b04cef875fb20bb7c057a14371486b7465c8d9ec3a21",
+  "command": [
+    "/out/server.test",
+    "-test.v=test2json",
+    "-test.timeout=90s",
+    "-test.run",
+    "TestServerHealth|TestRealtimeMetricsHandler"
+  ],
+  "database": "isolated postgres:17-alpine tmpfs, internal network, no published ports; Go migrations through 682",
+  "events": "2026-11-22-go-derived-health-tests.jsonl",
+  "events_sha256": "df4d59780d9e47b1ec9aa675f5fb0a6e9267c7e442210a06a684f0bc1f542c86",
+  "tests": [
+    "TestRealtimeMetricsHandler_TokenRequired/missing_auth_rejected",
+    "TestRealtimeMetricsHandler_TokenRequired/loopback_without_token_rejected_when_token_configured",
+    "TestRealtimeMetricsHandler_TokenRequired/wrong_token_rejected",
+    "TestRealtimeMetricsHandler_TokenRequired/non-bearer_scheme_rejected",
+    "TestRealtimeMetricsHandler_TokenRequired/correct_bearer_token_accepted",
+    "TestRealtimeMetricsHandler_TokenRequired",
+    "TestRealtimeMetricsHandler_NoToken_LoopbackOnly/loopback_ipv4_allowed",
+    "TestRealtimeMetricsHandler_NoToken_LoopbackOnly/loopback_ipv6_allowed",
+    "TestRealtimeMetricsHandler_NoToken_LoopbackOnly/non-loopback_returns_404",
+    "TestRealtimeMetricsHandler_NoToken_LoopbackOnly/public_ipv6_returns_404",
+    "TestRealtimeMetricsHandler_NoToken_LoopbackOnly/proxied_x-forwarded-for_via_loopback_returns_404",
+    "TestRealtimeMetricsHandler_NoToken_LoopbackOnly/proxied_x-forwarded-for_chain_via_loopback_returns_404",
+    "TestRealtimeMetricsHandler_NoToken_LoopbackOnly/proxied_x-real-ip_via_loopback_returns_404",
+    "TestRealtimeMetricsHandler_NoToken_LoopbackOnly/proxied_x-forwarded-host_via_loopback_returns_404",
+    "TestRealtimeMetricsHandler_NoToken_LoopbackOnly/proxied_x-forwarded-proto_via_loopback_returns_404",
+    "TestRealtimeMetricsHandler_NoToken_LoopbackOnly/proxied_forwarded_rfc7239_via_loopback_returns_404",
+    "TestRealtimeMetricsHandler_NoToken_LoopbackOnly/proxied_loopback_ipv6_returns_404",
+    "TestRealtimeMetricsHandler_NoToken_LoopbackOnly/empty_forwarding_header_still_allows_loopback",
+    "TestRealtimeMetricsHandler_NoToken_LoopbackOnly",
+    "TestServerHealthReadyHandlerDBPingFailure",
+    "TestServerHealthReadyHandlerMigrationOutOfDate",
+    "TestServerHealthReadyHandlerMigrationPartiallyApplied",
+    "TestServerHealthReadinessCachesResult",
+    "TestServerHealthLiveHandlerReportsProcessIdentity",
+    "TestServerHealthLiveHandlerOmitsZeroStartedAt"
+  ],
+  "tooling_note": "amd64 go tool test2json failed before execution with int32 index overflow. Direct amd64 test binary exited 0; raw test2json-marked output converted using native arm64 Go 1.26.9 tool."
+}

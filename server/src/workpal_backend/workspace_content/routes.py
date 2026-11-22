@@ -430,7 +430,7 @@ for _path in ('/api/working-agents', '/api/agent-activity-30d', '/api/search-ind
     router.add_api_route(_path, unavailable_projection, methods=METHODS)
 
 
-router.add_api_route('/api/runtimes', known_read_endpoint(collection='runtimes'), methods=METHODS)
+router.add_api_route('/api/runtimes', known_read_endpoint(collection='runtimes'), methods=[method for method in METHODS if method != 'GET'])
 router.add_api_route('/api/runtimes/{record_path:path}', record_endpoint('runtimes'), methods=METHODS)
 router.add_api_route('/api/chat/sessions', known_read_endpoint(collection='sessions'), methods=METHODS)
 router.add_api_route('/api/chat/sessions/{record_path:path}', record_endpoint('sessions'), methods=METHODS)

@@ -77,9 +77,21 @@ def check_handler_binding(root: Path, route: dict) -> list[str]:
         lines = (root / relative).read_text().splitlines()
         number = int(line)
         declaration = lines[number - 1] if 0 < number <= len(lines) else ''
-        pattern = (r'^func \(\w+ \*' + re.escape(binding['receiver']) + r'\) '
-                   + re.escape(binding['method']) + r'\(\w+ http.ResponseWriter, \w+ \*http.Request\)')
-        if not re.match(pattern, declaration):
+        kind = binding.get('kind', 'method')
+        if kind == 'method':
+            pattern = (r'^func \(\w+ \*' + re.escape(binding['receiver']) + r'\) '
+                       + re.escape(binding['method']) + r'\(\w+ http.ResponseWriter, \w+ \*http.Request\)')
+            valid = re.match(pattern, declaration)
+        elif kind == 'factory':
+            valid = (not binding.get('receiver') and re.match(
+                r'^func ' + re.escape(binding['method']) + r'\(.*\) http.HandlerFunc \{', declaration))
+        elif kind == 'closure':
+            valid = (binding.get('method') == 'anonymous' and not binding.get('receiver')
+                     and binding.get('registration_source') == source
+                     and re.search(r'func\(\w+ http.ResponseWriter, \w+ \*http.Request\)', declaration))
+        else:
+            valid = False
+        if not valid:
             return [f'{label}: receiver/method/signature mismatch']
         fixtures = route.get('fixtures', {})
         candidates = fixtures.get('source_handlers', []) if isinstance(fixtures, dict) else []
@@ -131,6 +143,36 @@ def check_execution_evidence(root: Path, route: dict) -> list[str]:
                 return [f'{label}: stale source {name}']
     except (OSError, ValueError, KeyError, TypeError, AttributeError):
         return [f'{label}: missing or malformed run record']
+    return []
+
+
+def check_typed_handler_evidence(root: Path, route: dict) -> list[str]:
+    label = f"{route.get('method')} {route.get('path')}: typed handler evidence"
+    try:
+        binding = route['handler_binding']
+        path = root / binding['audit_artifact']
+        if not path.resolve().is_relative_to(root.resolve()) or path.is_symlink():
+            return [f'{label}: unconfined artifact']
+        data = path.read_bytes()
+        if hashlib.sha256(data).hexdigest() != binding['audit_sha256']:
+            return [f'{label}: audit digest mismatch']
+        report = json.loads(data)
+        if type(report.get('exit_code')) is not int or report['exit_code'] != 0:
+            return [f'{label}: audit did not pass']
+        candidates = [entry for entry in report['registrations']
+                      if entry.get('registration') == binding['registration_source']
+                      and entry.get('method') == route['method']]
+        if len(candidates) != 1:
+            return [f'{label}: missing or ambiguous typed registration']
+        entry = candidates[0]
+        receiver = entry.get('receiver', '').rsplit('.', 1)[-1]
+        if any((entry.get('source') != binding['source'],
+                entry.get('kind') != binding.get('kind', 'method'),
+                entry.get('handler_package') != binding['package'],
+                entry.get('handler') != binding['method'], receiver != binding['receiver'])):
+            return [f'{label}: declaration differs from Go type resolution']
+    except (OSError, ValueError, KeyError, TypeError, AttributeError):
+        return [f'{label}: missing or malformed type audit']
     return []
 
 
@@ -263,6 +305,7 @@ def check_contracts(routes_path: Path, callers_path: Path, *, require_complete: 
         if require_complete:
             if route.get('origin') == 'go':
                 errors.extend(check_execution_evidence(root, route))
+                errors.extend(check_typed_handler_evidence(root, route))
             if route.get('origin') == 'go' and not route.get('handler_binding'):
                 errors.append(f'{label}: missing handler binding')
             references(route.get('tests'), f'{label} tests', test=True)

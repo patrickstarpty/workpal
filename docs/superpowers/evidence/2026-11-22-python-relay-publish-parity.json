@@ -1,0 +1,1312 @@
+{
+  "scope": "Original Go publishWithID command args/bytes, errors, counters and opt-in expiry/retry. Redis command boundary recorder, not actual Go Redis I/O. Clock normalized. No ULID, timeout/cancellation, metrics endpoint, subscription or lifecycle equivalence certified.",
+  "fixtures": [
+    {
+      "Scope": "user",
+      "ID": "u",
+      "Exclude": "w",
+      "EventID": "e",
+      "Frame": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+      "Enabled": false,
+      "MaxLen": 7,
+      "Failure": "",
+      "Count": 2
+    },
+    {
+      "Scope": "user",
+      "ID": "u",
+      "Exclude": "w",
+      "EventID": "e",
+      "Frame": "b3BhcXVl/w==",
+      "Enabled": false,
+      "MaxLen": 7,
+      "Failure": "",
+      "Count": 2
+    },
+    {
+      "Scope": "user",
+      "ID": "u",
+      "Exclude": "w",
+      "EventID": "e",
+      "Frame": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+      "Enabled": false,
+      "MaxLen": 7,
+      "Failure": "write",
+      "Count": 2
+    },
+    {
+      "Scope": "user",
+      "ID": "u",
+      "Exclude": "w",
+      "EventID": "e",
+      "Frame": "b3BhcXVl/w==",
+      "Enabled": false,
+      "MaxLen": 7,
+      "Failure": "write",
+      "Count": 2
+    },
+    {
+      "Scope": "user",
+      "ID": "u",
+      "Exclude": "w",
+      "EventID": "e",
+      "Frame": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+      "Enabled": false,
+      "MaxLen": 7,
+      "Failure": "expiry",
+      "Count": 2
+    },
+    {
+      "Scope": "user",
+      "ID": "u",
+      "Exclude": "w",
+      "EventID": "e",
+      "Frame": "b3BhcXVl/w==",
+      "Enabled": false,
+      "MaxLen": 7,
+      "Failure": "expiry",
+      "Count": 2
+    },
+    {
+      "Scope": "user",
+      "ID": "u",
+      "Exclude": "w",
+      "EventID": "e",
+      "Frame": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+      "Enabled": true,
+      "MaxLen": 7,
+      "Failure": "",
+      "Count": 2
+    },
+    {
+      "Scope": "user",
+      "ID": "u",
+      "Exclude": "w",
+      "EventID": "e",
+      "Frame": "b3BhcXVl/w==",
+      "Enabled": true,
+      "MaxLen": 7,
+      "Failure": "",
+      "Count": 2
+    },
+    {
+      "Scope": "user",
+      "ID": "u",
+      "Exclude": "w",
+      "EventID": "e",
+      "Frame": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+      "Enabled": true,
+      "MaxLen": 7,
+      "Failure": "write",
+      "Count": 2
+    },
+    {
+      "Scope": "user",
+      "ID": "u",
+      "Exclude": "w",
+      "EventID": "e",
+      "Frame": "b3BhcXVl/w==",
+      "Enabled": true,
+      "MaxLen": 7,
+      "Failure": "write",
+      "Count": 2
+    },
+    {
+      "Scope": "user",
+      "ID": "u",
+      "Exclude": "w",
+      "EventID": "e",
+      "Frame": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+      "Enabled": true,
+      "MaxLen": 7,
+      "Failure": "expiry",
+      "Count": 2
+    },
+    {
+      "Scope": "user",
+      "ID": "u",
+      "Exclude": "w",
+      "EventID": "e",
+      "Frame": "b3BhcXVl/w==",
+      "Enabled": true,
+      "MaxLen": 7,
+      "Failure": "expiry",
+      "Count": 2
+    }
+  ],
+  "go": [
+    {
+      "errors": [
+        "",
+        ""
+      ],
+      "expires": [],
+      "metrics": [
+        2,
+        0,
+        0
+      ],
+      "writes": [
+        {
+          "approximate": true,
+          "key": "ws:scope:user:u:stream",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+            "scope": "dXNlcg==",
+            "scope_id": "dQ==",
+            "workspace_id": "dw=="
+          }
+        },
+        {
+          "approximate": true,
+          "key": "ws:scope:user:u:stream",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+            "scope": "dXNlcg==",
+            "scope_id": "dQ==",
+            "workspace_id": "dw=="
+          }
+        }
+      ]
+    },
+    {
+      "errors": [
+        "",
+        ""
+      ],
+      "expires": [],
+      "metrics": [
+        2,
+        0,
+        0
+      ],
+      "writes": [
+        {
+          "approximate": true,
+          "key": "ws:scope:user:u:stream",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w==",
+            "scope": "dXNlcg==",
+            "scope_id": "dQ==",
+            "workspace_id": "dw=="
+          }
+        },
+        {
+          "approximate": true,
+          "key": "ws:scope:user:u:stream",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w==",
+            "scope": "dXNlcg==",
+            "scope_id": "dQ==",
+            "workspace_id": "dw=="
+          }
+        }
+      ]
+    },
+    {
+      "errors": [
+        "write unavailable",
+        "write unavailable"
+      ],
+      "expires": [],
+      "metrics": [
+        0,
+        2,
+        0
+      ],
+      "writes": [
+        {
+          "approximate": true,
+          "key": "ws:scope:user:u:stream",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+            "scope": "dXNlcg==",
+            "scope_id": "dQ==",
+            "workspace_id": "dw=="
+          }
+        },
+        {
+          "approximate": true,
+          "key": "ws:scope:user:u:stream",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+            "scope": "dXNlcg==",
+            "scope_id": "dQ==",
+            "workspace_id": "dw=="
+          }
+        }
+      ]
+    },
+    {
+      "errors": [
+        "write unavailable",
+        "write unavailable"
+      ],
+      "expires": [],
+      "metrics": [
+        0,
+        2,
+        0
+      ],
+      "writes": [
+        {
+          "approximate": true,
+          "key": "ws:scope:user:u:stream",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w==",
+            "scope": "dXNlcg==",
+            "scope_id": "dQ==",
+            "workspace_id": "dw=="
+          }
+        },
+        {
+          "approximate": true,
+          "key": "ws:scope:user:u:stream",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w==",
+            "scope": "dXNlcg==",
+            "scope_id": "dQ==",
+            "workspace_id": "dw=="
+          }
+        }
+      ]
+    },
+    {
+      "errors": [
+        "",
+        ""
+      ],
+      "expires": [],
+      "metrics": [
+        2,
+        0,
+        0
+      ],
+      "writes": [
+        {
+          "approximate": true,
+          "key": "ws:scope:user:u:stream",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+            "scope": "dXNlcg==",
+            "scope_id": "dQ==",
+            "workspace_id": "dw=="
+          }
+        },
+        {
+          "approximate": true,
+          "key": "ws:scope:user:u:stream",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+            "scope": "dXNlcg==",
+            "scope_id": "dQ==",
+            "workspace_id": "dw=="
+          }
+        }
+      ]
+    },
+    {
+      "errors": [
+        "",
+        ""
+      ],
+      "expires": [],
+      "metrics": [
+        2,
+        0,
+        0
+      ],
+      "writes": [
+        {
+          "approximate": true,
+          "key": "ws:scope:user:u:stream",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w==",
+            "scope": "dXNlcg==",
+            "scope_id": "dQ==",
+            "workspace_id": "dw=="
+          }
+        },
+        {
+          "approximate": true,
+          "key": "ws:scope:user:u:stream",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w==",
+            "scope": "dXNlcg==",
+            "scope_id": "dQ==",
+            "workspace_id": "dw=="
+          }
+        }
+      ]
+    },
+    {
+      "errors": [
+        "",
+        ""
+      ],
+      "expires": [
+        {
+          "key": "ws:scope:user:u:stream",
+          "ttl_ns": 900000000000
+        }
+      ],
+      "metrics": [
+        2,
+        0,
+        0
+      ],
+      "writes": [
+        {
+          "approximate": true,
+          "key": "ws:scope:user:u:stream",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+            "scope": "dXNlcg==",
+            "scope_id": "dQ==",
+            "workspace_id": "dw=="
+          }
+        },
+        {
+          "approximate": true,
+          "key": "ws:scope:user:u:stream",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+            "scope": "dXNlcg==",
+            "scope_id": "dQ==",
+            "workspace_id": "dw=="
+          }
+        }
+      ]
+    },
+    {
+      "errors": [
+        "",
+        ""
+      ],
+      "expires": [
+        {
+          "key": "ws:scope:user:u:stream",
+          "ttl_ns": 900000000000
+        }
+      ],
+      "metrics": [
+        2,
+        0,
+        0
+      ],
+      "writes": [
+        {
+          "approximate": true,
+          "key": "ws:scope:user:u:stream",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w==",
+            "scope": "dXNlcg==",
+            "scope_id": "dQ==",
+            "workspace_id": "dw=="
+          }
+        },
+        {
+          "approximate": true,
+          "key": "ws:scope:user:u:stream",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w==",
+            "scope": "dXNlcg==",
+            "scope_id": "dQ==",
+            "workspace_id": "dw=="
+          }
+        }
+      ]
+    },
+    {
+      "errors": [
+        "write unavailable",
+        "write unavailable"
+      ],
+      "expires": [],
+      "metrics": [
+        0,
+        2,
+        0
+      ],
+      "writes": [
+        {
+          "approximate": true,
+          "key": "ws:scope:user:u:stream",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+            "scope": "dXNlcg==",
+            "scope_id": "dQ==",
+            "workspace_id": "dw=="
+          }
+        },
+        {
+          "approximate": true,
+          "key": "ws:scope:user:u:stream",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+            "scope": "dXNlcg==",
+            "scope_id": "dQ==",
+            "workspace_id": "dw=="
+          }
+        }
+      ]
+    },
+    {
+      "errors": [
+        "write unavailable",
+        "write unavailable"
+      ],
+      "expires": [],
+      "metrics": [
+        0,
+        2,
+        0
+      ],
+      "writes": [
+        {
+          "approximate": true,
+          "key": "ws:scope:user:u:stream",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w==",
+            "scope": "dXNlcg==",
+            "scope_id": "dQ==",
+            "workspace_id": "dw=="
+          }
+        },
+        {
+          "approximate": true,
+          "key": "ws:scope:user:u:stream",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w==",
+            "scope": "dXNlcg==",
+            "scope_id": "dQ==",
+            "workspace_id": "dw=="
+          }
+        }
+      ]
+    },
+    {
+      "errors": [
+        "",
+        ""
+      ],
+      "expires": [
+        {
+          "key": "ws:scope:user:u:stream",
+          "ttl_ns": 900000000000
+        },
+        {
+          "key": "ws:scope:user:u:stream",
+          "ttl_ns": 900000000000
+        }
+      ],
+      "metrics": [
+        2,
+        0,
+        2
+      ],
+      "writes": [
+        {
+          "approximate": true,
+          "key": "ws:scope:user:u:stream",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+            "scope": "dXNlcg==",
+            "scope_id": "dQ==",
+            "workspace_id": "dw=="
+          }
+        },
+        {
+          "approximate": true,
+          "key": "ws:scope:user:u:stream",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9",
+            "scope": "dXNlcg==",
+            "scope_id": "dQ==",
+            "workspace_id": "dw=="
+          }
+        }
+      ]
+    },
+    {
+      "errors": [
+        "",
+        ""
+      ],
+      "expires": [
+        {
+          "key": "ws:scope:user:u:stream",
+          "ttl_ns": 900000000000
+        },
+        {
+          "key": "ws:scope:user:u:stream",
+          "ttl_ns": 900000000000
+        }
+      ],
+      "metrics": [
+        2,
+        0,
+        2
+      ],
+      "writes": [
+        {
+          "approximate": true,
+          "key": "ws:scope:user:u:stream",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w==",
+            "scope": "dXNlcg==",
+            "scope_id": "dQ==",
+            "workspace_id": "dw=="
+          }
+        },
+        {
+          "approximate": true,
+          "key": "ws:scope:user:u:stream",
+          "maxlen": 7,
+          "values": {
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "event_id": "ZQ==",
+            "event_type": "",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w==",
+            "scope": "dXNlcg==",
+            "scope_id": "dQ==",
+            "workspace_id": "dw=="
+          }
+        }
+      ]
+    }
+  ],
+  "python": [
+    {
+      "writes": [
+        {
+          "key": "ws:scope:user:u:stream",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "scope": "dXNlcg==",
+            "scope_id": "dQ==",
+            "workspace_id": "dw==",
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9"
+          },
+          "maxlen": 7,
+          "approximate": true
+        },
+        {
+          "key": "ws:scope:user:u:stream",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "scope": "dXNlcg==",
+            "scope_id": "dQ==",
+            "workspace_id": "dw==",
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9"
+          },
+          "maxlen": 7,
+          "approximate": true
+        }
+      ],
+      "expires": [],
+      "errors": [
+        "",
+        ""
+      ],
+      "metrics": [
+        2,
+        0,
+        0
+      ]
+    },
+    {
+      "writes": [
+        {
+          "key": "ws:scope:user:u:stream",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "",
+            "scope": "dXNlcg==",
+            "scope_id": "dQ==",
+            "workspace_id": "dw==",
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w=="
+          },
+          "maxlen": 7,
+          "approximate": true
+        },
+        {
+          "key": "ws:scope:user:u:stream",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "",
+            "scope": "dXNlcg==",
+            "scope_id": "dQ==",
+            "workspace_id": "dw==",
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w=="
+          },
+          "maxlen": 7,
+          "approximate": true
+        }
+      ],
+      "expires": [],
+      "errors": [
+        "",
+        ""
+      ],
+      "metrics": [
+        2,
+        0,
+        0
+      ]
+    },
+    {
+      "writes": [
+        {
+          "key": "ws:scope:user:u:stream",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "scope": "dXNlcg==",
+            "scope_id": "dQ==",
+            "workspace_id": "dw==",
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9"
+          },
+          "maxlen": 7,
+          "approximate": true
+        },
+        {
+          "key": "ws:scope:user:u:stream",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "scope": "dXNlcg==",
+            "scope_id": "dQ==",
+            "workspace_id": "dw==",
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9"
+          },
+          "maxlen": 7,
+          "approximate": true
+        }
+      ],
+      "expires": [],
+      "errors": [
+        "write unavailable",
+        "write unavailable"
+      ],
+      "metrics": [
+        0,
+        2,
+        0
+      ]
+    },
+    {
+      "writes": [
+        {
+          "key": "ws:scope:user:u:stream",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "",
+            "scope": "dXNlcg==",
+            "scope_id": "dQ==",
+            "workspace_id": "dw==",
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w=="
+          },
+          "maxlen": 7,
+          "approximate": true
+        },
+        {
+          "key": "ws:scope:user:u:stream",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "",
+            "scope": "dXNlcg==",
+            "scope_id": "dQ==",
+            "workspace_id": "dw==",
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w=="
+          },
+          "maxlen": 7,
+          "approximate": true
+        }
+      ],
+      "expires": [],
+      "errors": [
+        "write unavailable",
+        "write unavailable"
+      ],
+      "metrics": [
+        0,
+        2,
+        0
+      ]
+    },
+    {
+      "writes": [
+        {
+          "key": "ws:scope:user:u:stream",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "scope": "dXNlcg==",
+            "scope_id": "dQ==",
+            "workspace_id": "dw==",
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9"
+          },
+          "maxlen": 7,
+          "approximate": true
+        },
+        {
+          "key": "ws:scope:user:u:stream",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "scope": "dXNlcg==",
+            "scope_id": "dQ==",
+            "workspace_id": "dw==",
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9"
+          },
+          "maxlen": 7,
+          "approximate": true
+        }
+      ],
+      "expires": [],
+      "errors": [
+        "",
+        ""
+      ],
+      "metrics": [
+        2,
+        0,
+        0
+      ]
+    },
+    {
+      "writes": [
+        {
+          "key": "ws:scope:user:u:stream",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "",
+            "scope": "dXNlcg==",
+            "scope_id": "dQ==",
+            "workspace_id": "dw==",
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w=="
+          },
+          "maxlen": 7,
+          "approximate": true
+        },
+        {
+          "key": "ws:scope:user:u:stream",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "",
+            "scope": "dXNlcg==",
+            "scope_id": "dQ==",
+            "workspace_id": "dw==",
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w=="
+          },
+          "maxlen": 7,
+          "approximate": true
+        }
+      ],
+      "expires": [],
+      "errors": [
+        "",
+        ""
+      ],
+      "metrics": [
+        2,
+        0,
+        0
+      ]
+    },
+    {
+      "writes": [
+        {
+          "key": "ws:scope:user:u:stream",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "scope": "dXNlcg==",
+            "scope_id": "dQ==",
+            "workspace_id": "dw==",
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9"
+          },
+          "maxlen": 7,
+          "approximate": true
+        },
+        {
+          "key": "ws:scope:user:u:stream",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "scope": "dXNlcg==",
+            "scope_id": "dQ==",
+            "workspace_id": "dw==",
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9"
+          },
+          "maxlen": 7,
+          "approximate": true
+        }
+      ],
+      "expires": [
+        {
+          "key": "ws:scope:user:u:stream",
+          "ttl_ns": 900000000000
+        }
+      ],
+      "errors": [
+        "",
+        ""
+      ],
+      "metrics": [
+        2,
+        0,
+        0
+      ]
+    },
+    {
+      "writes": [
+        {
+          "key": "ws:scope:user:u:stream",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "",
+            "scope": "dXNlcg==",
+            "scope_id": "dQ==",
+            "workspace_id": "dw==",
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w=="
+          },
+          "maxlen": 7,
+          "approximate": true
+        },
+        {
+          "key": "ws:scope:user:u:stream",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "",
+            "scope": "dXNlcg==",
+            "scope_id": "dQ==",
+            "workspace_id": "dw==",
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w=="
+          },
+          "maxlen": 7,
+          "approximate": true
+        }
+      ],
+      "expires": [
+        {
+          "key": "ws:scope:user:u:stream",
+          "ttl_ns": 900000000000
+        }
+      ],
+      "errors": [
+        "",
+        ""
+      ],
+      "metrics": [
+        2,
+        0,
+        0
+      ]
+    },
+    {
+      "writes": [
+        {
+          "key": "ws:scope:user:u:stream",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "scope": "dXNlcg==",
+            "scope_id": "dQ==",
+            "workspace_id": "dw==",
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9"
+          },
+          "maxlen": 7,
+          "approximate": true
+        },
+        {
+          "key": "ws:scope:user:u:stream",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "scope": "dXNlcg==",
+            "scope_id": "dQ==",
+            "workspace_id": "dw==",
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9"
+          },
+          "maxlen": 7,
+          "approximate": true
+        }
+      ],
+      "expires": [],
+      "errors": [
+        "write unavailable",
+        "write unavailable"
+      ],
+      "metrics": [
+        0,
+        2,
+        0
+      ]
+    },
+    {
+      "writes": [
+        {
+          "key": "ws:scope:user:u:stream",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "",
+            "scope": "dXNlcg==",
+            "scope_id": "dQ==",
+            "workspace_id": "dw==",
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w=="
+          },
+          "maxlen": 7,
+          "approximate": true
+        },
+        {
+          "key": "ws:scope:user:u:stream",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "",
+            "scope": "dXNlcg==",
+            "scope_id": "dQ==",
+            "workspace_id": "dw==",
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w=="
+          },
+          "maxlen": 7,
+          "approximate": true
+        }
+      ],
+      "expires": [],
+      "errors": [
+        "write unavailable",
+        "write unavailable"
+      ],
+      "metrics": [
+        0,
+        2,
+        0
+      ]
+    },
+    {
+      "writes": [
+        {
+          "key": "ws:scope:user:u:stream",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "scope": "dXNlcg==",
+            "scope_id": "dQ==",
+            "workspace_id": "dw==",
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9"
+          },
+          "maxlen": 7,
+          "approximate": true
+        },
+        {
+          "key": "ws:scope:user:u:stream",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "eA==",
+            "scope": "dXNlcg==",
+            "scope_id": "dQ==",
+            "workspace_id": "dw==",
+            "actor_id": "YQ==",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "eyJ0eXBlIjoieCIsImFjdG9yX2lkIjoiYSIsInBheWxvYWQiOjkwMDcxOTkyNTQ3NDA5OTN9"
+          },
+          "maxlen": 7,
+          "approximate": true
+        }
+      ],
+      "expires": [
+        {
+          "key": "ws:scope:user:u:stream",
+          "ttl_ns": 900000000000
+        },
+        {
+          "key": "ws:scope:user:u:stream",
+          "ttl_ns": 900000000000
+        }
+      ],
+      "errors": [
+        "",
+        ""
+      ],
+      "metrics": [
+        2,
+        0,
+        2
+      ]
+    },
+    {
+      "writes": [
+        {
+          "key": "ws:scope:user:u:stream",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "",
+            "scope": "dXNlcg==",
+            "scope_id": "dQ==",
+            "workspace_id": "dw==",
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w=="
+          },
+          "maxlen": 7,
+          "approximate": true
+        },
+        {
+          "key": "ws:scope:user:u:stream",
+          "values": {
+            "event_id": "ZQ==",
+            "event_type": "",
+            "scope": "dXNlcg==",
+            "scope_id": "dQ==",
+            "workspace_id": "dw==",
+            "actor_id": "",
+            "created_at": "PGNsb2NrPg==",
+            "node_id": "bm9kZQ==",
+            "payload_json": "b3BhcXVl/w=="
+          },
+          "maxlen": 7,
+          "approximate": true
+        }
+      ],
+      "expires": [
+        {
+          "key": "ws:scope:user:u:stream",
+          "ttl_ns": 900000000000
+        },
+        {
+          "key": "ws:scope:user:u:stream",
+          "ttl_ns": 900000000000
+        }
+      ],
+      "errors": [
+        "",
+        ""
+      ],
+      "metrics": [
+        2,
+        0,
+        2
+      ]
+    }
+  ],
+  "mismatches": [],
+  "source_sha256": {
+    "server/go/internal/realtime/redis_relay.go": "d0717fde50f3494be4731cb964c060faa54d761f2eaa6c3e1464158e53a58846",
+    "server/go/internal/realtime/stream_retention.go": "04bdc8af4a8ae51dc50aa6f27e23eae051d9a1b2631fa71ab4911fdfde6918fc",
+    "server/tests/parity/go_relay_publish/main.go": "1f0c9d12d0b8e3c3081d9fff6b3f7718fb8edbc52a07ef3867368fd14063f397",
+    "server/tests/parity/go_relay_publish/wrapper.go": "3eaa78c4c731a4e9e52216a27e79ab87303696b0634529c1010d7fb16d96ea25",
+    "server/src/workpal_backend/realtime/relay_publisher.py": "f674ed39c89d0a0a564f8e18fadfa0fcbe8881b8e22356fed80577bcd8ab4f75",
+    "server/src/workpal_backend/realtime/stream_retention.py": "b4568230b190695ac2e9965bfc0c719bf95418a6dc4df38b8050ec0238dd8dbc",
+    "server/src/workpal_backend/realtime/relay_envelope.py": "2b1db1f7394cac21b8b1e7f06caa250eba7f205ce484d7f6c6381ac3e5a25d0d"
+  },
+  "binary_sha256": "173de916ad56b1e509d82c6b7d6b20dc3b6e5d7a2eb85f94ca8aca9e58a72cde"
+}

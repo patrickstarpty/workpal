@@ -1,0 +1,946 @@
+{
+  "scope": "Project constraints and trigger state; transaction IDs/timestamps compared relationally. Snapshot grammar/visibility fixtures. Full concurrency, retention and HTTP gates remain pending.",
+  "cases": [
+    {
+      "name": "defaults",
+      "sql": []
+    },
+    {
+      "name": "status='cancelled'",
+      "sql": [
+        "UPDATE project SET status='cancelled'"
+      ]
+    },
+    {
+      "name": "status='archived'",
+      "sql": [
+        "UPDATE project SET status='archived'"
+      ]
+    },
+    {
+      "name": "priority='high'",
+      "sql": [
+        "UPDATE project SET priority='high'"
+      ]
+    },
+    {
+      "name": "priority='unknown'",
+      "sql": [
+        "UPDATE project SET priority='unknown'"
+      ]
+    },
+    {
+      "name": "lead_type='agent'",
+      "sql": [
+        "UPDATE project SET lead_type='agent'"
+      ]
+    },
+    {
+      "name": "lead_type='system'",
+      "sql": [
+        "UPDATE project SET lead_type='system'"
+      ]
+    },
+    {
+      "name": "visibility='custom-value'",
+      "sql": [
+        "UPDATE project SET visibility='custom-value'"
+      ]
+    },
+    {
+      "name": "title=NULL",
+      "sql": [
+        "UPDATE project SET title=NULL"
+      ]
+    },
+    {
+      "name": "title=''",
+      "sql": [
+        "UPDATE project SET title=''"
+      ]
+    },
+    {
+      "name": "delete-tombstone",
+      "sql": [
+        "DELETE FROM project"
+      ]
+    },
+    {
+      "name": "suppress-teardown",
+      "sql": [
+        "SET LOCAL workpal.workspace_teardown = 'on'",
+        "DELETE FROM project"
+      ]
+    },
+    {
+      "name": "savepoint-rollback",
+      "sql": [
+        "DELETE FROM project",
+        "SAVEPOINT nested",
+        "INSERT INTO project(id,workspace_id,title) VALUES ('10000000-0000-4000-8000-000000000003','10000000-0000-4000-8000-000000000002','Fixture')",
+        "ROLLBACK TO nested",
+        "INSERT INTO project(id,workspace_id,title) VALUES ('10000000-0000-4000-8000-000000000003','10000000-0000-4000-8000-000000000002','Fixture')"
+      ]
+    }
+  ],
+  "go": [
+    {
+      "accepted": true,
+      "state": {
+        "projects": [
+          {
+            "id": "10000000-0000-4000-8000-000000000003",
+            "workspace_id": "10000000-0000-4000-8000-000000000002",
+            "title": "Fixture",
+            "description": null,
+            "icon": null,
+            "status": "planned",
+            "lead_type": null,
+            "lead_id": null,
+            "priority": "none",
+            "start_date": null,
+            "due_date": null,
+            "workflow_id": null,
+            "creator_type": null,
+            "creator_id": null,
+            "visibility": "workspace",
+            "archived_at": null,
+            "archived_by_type": null,
+            "archived_by_id": null,
+            "folder_id": null
+          }
+        ],
+        "changes": [
+          {
+            "entity_type": "project",
+            "entity_id": "10000000-0000-4000-8000-000000000003",
+            "workspace_id": "10000000-0000-4000-8000-000000000002",
+            "own_xid": true,
+            "same_clock": true
+          }
+        ],
+        "own_visible": false
+      },
+      "error": ""
+    },
+    {
+      "accepted": true,
+      "state": {
+        "projects": [
+          {
+            "id": "10000000-0000-4000-8000-000000000003",
+            "workspace_id": "10000000-0000-4000-8000-000000000002",
+            "title": "Fixture",
+            "description": null,
+            "icon": null,
+            "status": "cancelled",
+            "lead_type": null,
+            "lead_id": null,
+            "priority": "none",
+            "start_date": null,
+            "due_date": null,
+            "workflow_id": null,
+            "creator_type": null,
+            "creator_id": null,
+            "visibility": "workspace",
+            "archived_at": null,
+            "archived_by_type": null,
+            "archived_by_id": null,
+            "folder_id": null
+          }
+        ],
+        "changes": [
+          {
+            "entity_type": "project",
+            "entity_id": "10000000-0000-4000-8000-000000000003",
+            "workspace_id": "10000000-0000-4000-8000-000000000002",
+            "own_xid": true,
+            "same_clock": true
+          }
+        ],
+        "own_visible": false
+      },
+      "error": ""
+    },
+    {
+      "accepted": false,
+      "state": null,
+      "error": "ERROR:  new row for relation \"project\" violates check constraint \"project_status_check\"\nDETAIL:  Failing row contains (10000000-0000-4000-8000-000000000003, 10000000-0000-4000-8000-000000000002, Fixture, null, null, archived, null, null, 2026-11-21 20:42:14.829105+00, 2026-11-21 20:42:14.829105+00, none, null, null, null, null, null, workspace, null, null, null, null)."
+    },
+    {
+      "accepted": true,
+      "state": {
+        "projects": [
+          {
+            "id": "10000000-0000-4000-8000-000000000003",
+            "workspace_id": "10000000-0000-4000-8000-000000000002",
+            "title": "Fixture",
+            "description": null,
+            "icon": null,
+            "status": "planned",
+            "lead_type": null,
+            "lead_id": null,
+            "priority": "high",
+            "start_date": null,
+            "due_date": null,
+            "workflow_id": null,
+            "creator_type": null,
+            "creator_id": null,
+            "visibility": "workspace",
+            "archived_at": null,
+            "archived_by_type": null,
+            "archived_by_id": null,
+            "folder_id": null
+          }
+        ],
+        "changes": [
+          {
+            "entity_type": "project",
+            "entity_id": "10000000-0000-4000-8000-000000000003",
+            "workspace_id": "10000000-0000-4000-8000-000000000002",
+            "own_xid": true,
+            "same_clock": true
+          }
+        ],
+        "own_visible": false
+      },
+      "error": ""
+    },
+    {
+      "accepted": false,
+      "state": null,
+      "error": "ERROR:  new row for relation \"project\" violates check constraint \"project_priority_check\"\nDETAIL:  Failing row contains (10000000-0000-4000-8000-000000000003, 10000000-0000-4000-8000-000000000002, Fixture, null, null, planned, null, null, 2026-11-21 20:42:15.302483+00, 2026-11-21 20:42:15.302483+00, unknown, null, null, null, null, null, workspace, null, null, null, null)."
+    },
+    {
+      "accepted": true,
+      "state": {
+        "projects": [
+          {
+            "id": "10000000-0000-4000-8000-000000000003",
+            "workspace_id": "10000000-0000-4000-8000-000000000002",
+            "title": "Fixture",
+            "description": null,
+            "icon": null,
+            "status": "planned",
+            "lead_type": "agent",
+            "lead_id": null,
+            "priority": "none",
+            "start_date": null,
+            "due_date": null,
+            "workflow_id": null,
+            "creator_type": null,
+            "creator_id": null,
+            "visibility": "workspace",
+            "archived_at": null,
+            "archived_by_type": null,
+            "archived_by_id": null,
+            "folder_id": null
+          }
+        ],
+        "changes": [
+          {
+            "entity_type": "project",
+            "entity_id": "10000000-0000-4000-8000-000000000003",
+            "workspace_id": "10000000-0000-4000-8000-000000000002",
+            "own_xid": true,
+            "same_clock": true
+          }
+        ],
+        "own_visible": false
+      },
+      "error": ""
+    },
+    {
+      "accepted": false,
+      "state": null,
+      "error": "ERROR:  new row for relation \"project\" violates check constraint \"project_lead_type_check\"\nDETAIL:  Failing row contains (10000000-0000-4000-8000-000000000003, 10000000-0000-4000-8000-000000000002, Fixture, null, null, planned, system, null, 2026-11-21 20:42:15.803544+00, 2026-11-21 20:42:15.803544+00, none, null, null, null, null, null, workspace, null, null, null, null)."
+    },
+    {
+      "accepted": true,
+      "state": {
+        "projects": [
+          {
+            "id": "10000000-0000-4000-8000-000000000003",
+            "workspace_id": "10000000-0000-4000-8000-000000000002",
+            "title": "Fixture",
+            "description": null,
+            "icon": null,
+            "status": "planned",
+            "lead_type": null,
+            "lead_id": null,
+            "priority": "none",
+            "start_date": null,
+            "due_date": null,
+            "workflow_id": null,
+            "creator_type": null,
+            "creator_id": null,
+            "visibility": "custom-value",
+            "archived_at": null,
+            "archived_by_type": null,
+            "archived_by_id": null,
+            "folder_id": null
+          }
+        ],
+        "changes": [
+          {
+            "entity_type": "project",
+            "entity_id": "10000000-0000-4000-8000-000000000003",
+            "workspace_id": "10000000-0000-4000-8000-000000000002",
+            "own_xid": true,
+            "same_clock": true
+          }
+        ],
+        "own_visible": false
+      },
+      "error": ""
+    },
+    {
+      "accepted": false,
+      "state": null,
+      "error": "ERROR:  null value in column \"title\" of relation \"project\" violates not-null constraint\nDETAIL:  Failing row contains (10000000-0000-4000-8000-000000000003, 10000000-0000-4000-8000-000000000002, null, null, null, planned, null, null, 2026-11-21 20:42:16.323851+00, 2026-11-21 20:42:16.323851+00, none, null, null, null, null, null, workspace, null, null, null, null)."
+    },
+    {
+      "accepted": true,
+      "state": {
+        "projects": [
+          {
+            "id": "10000000-0000-4000-8000-000000000003",
+            "workspace_id": "10000000-0000-4000-8000-000000000002",
+            "title": "",
+            "description": null,
+            "icon": null,
+            "status": "planned",
+            "lead_type": null,
+            "lead_id": null,
+            "priority": "none",
+            "start_date": null,
+            "due_date": null,
+            "workflow_id": null,
+            "creator_type": null,
+            "creator_id": null,
+            "visibility": "workspace",
+            "archived_at": null,
+            "archived_by_type": null,
+            "archived_by_id": null,
+            "folder_id": null
+          }
+        ],
+        "changes": [
+          {
+            "entity_type": "project",
+            "entity_id": "10000000-0000-4000-8000-000000000003",
+            "workspace_id": "10000000-0000-4000-8000-000000000002",
+            "own_xid": true,
+            "same_clock": true
+          }
+        ],
+        "own_visible": false
+      },
+      "error": ""
+    },
+    {
+      "accepted": true,
+      "state": {
+        "projects": [],
+        "changes": [
+          {
+            "entity_type": "project",
+            "entity_id": "10000000-0000-4000-8000-000000000003",
+            "workspace_id": "10000000-0000-4000-8000-000000000002",
+            "own_xid": true,
+            "same_clock": true
+          }
+        ],
+        "own_visible": false
+      },
+      "error": ""
+    },
+    {
+      "accepted": true,
+      "state": {
+        "projects": [],
+        "changes": [
+          {
+            "entity_type": "project",
+            "entity_id": "10000000-0000-4000-8000-000000000003",
+            "workspace_id": "10000000-0000-4000-8000-000000000002",
+            "own_xid": true,
+            "same_clock": true
+          }
+        ],
+        "own_visible": false
+      },
+      "error": ""
+    },
+    {
+      "accepted": true,
+      "state": {
+        "projects": [
+          {
+            "id": "10000000-0000-4000-8000-000000000003",
+            "workspace_id": "10000000-0000-4000-8000-000000000002",
+            "title": "Fixture",
+            "description": null,
+            "icon": null,
+            "status": "planned",
+            "lead_type": null,
+            "lead_id": null,
+            "priority": "none",
+            "start_date": null,
+            "due_date": null,
+            "workflow_id": null,
+            "creator_type": null,
+            "creator_id": null,
+            "visibility": "workspace",
+            "archived_at": null,
+            "archived_by_type": null,
+            "archived_by_id": null,
+            "folder_id": null
+          }
+        ],
+        "changes": [
+          {
+            "entity_type": "project",
+            "entity_id": "10000000-0000-4000-8000-000000000003",
+            "workspace_id": "10000000-0000-4000-8000-000000000002",
+            "own_xid": true,
+            "same_clock": true
+          }
+        ],
+        "own_visible": true
+      },
+      "error": ""
+    }
+  ],
+  "python": [
+    {
+      "accepted": true,
+      "state": {
+        "projects": [
+          {
+            "id": "10000000-0000-4000-8000-000000000003",
+            "workspace_id": "10000000-0000-4000-8000-000000000002",
+            "title": "Fixture",
+            "description": null,
+            "icon": null,
+            "status": "planned",
+            "lead_type": null,
+            "lead_id": null,
+            "priority": "none",
+            "start_date": null,
+            "due_date": null,
+            "workflow_id": null,
+            "creator_type": null,
+            "creator_id": null,
+            "visibility": "workspace",
+            "archived_at": null,
+            "archived_by_type": null,
+            "archived_by_id": null,
+            "folder_id": null
+          }
+        ],
+        "changes": [
+          {
+            "entity_type": "project",
+            "entity_id": "10000000-0000-4000-8000-000000000003",
+            "workspace_id": "10000000-0000-4000-8000-000000000002",
+            "own_xid": true,
+            "same_clock": true
+          }
+        ],
+        "own_visible": false
+      },
+      "error": ""
+    },
+    {
+      "accepted": true,
+      "state": {
+        "projects": [
+          {
+            "id": "10000000-0000-4000-8000-000000000003",
+            "workspace_id": "10000000-0000-4000-8000-000000000002",
+            "title": "Fixture",
+            "description": null,
+            "icon": null,
+            "status": "cancelled",
+            "lead_type": null,
+            "lead_id": null,
+            "priority": "none",
+            "start_date": null,
+            "due_date": null,
+            "workflow_id": null,
+            "creator_type": null,
+            "creator_id": null,
+            "visibility": "workspace",
+            "archived_at": null,
+            "archived_by_type": null,
+            "archived_by_id": null,
+            "folder_id": null
+          }
+        ],
+        "changes": [
+          {
+            "entity_type": "project",
+            "entity_id": "10000000-0000-4000-8000-000000000003",
+            "workspace_id": "10000000-0000-4000-8000-000000000002",
+            "own_xid": true,
+            "same_clock": true
+          }
+        ],
+        "own_visible": false
+      },
+      "error": ""
+    },
+    {
+      "accepted": false,
+      "state": null,
+      "error": "CHECK constraint failed: project_status_check"
+    },
+    {
+      "accepted": true,
+      "state": {
+        "projects": [
+          {
+            "id": "10000000-0000-4000-8000-000000000003",
+            "workspace_id": "10000000-0000-4000-8000-000000000002",
+            "title": "Fixture",
+            "description": null,
+            "icon": null,
+            "status": "planned",
+            "lead_type": null,
+            "lead_id": null,
+            "priority": "high",
+            "start_date": null,
+            "due_date": null,
+            "workflow_id": null,
+            "creator_type": null,
+            "creator_id": null,
+            "visibility": "workspace",
+            "archived_at": null,
+            "archived_by_type": null,
+            "archived_by_id": null,
+            "folder_id": null
+          }
+        ],
+        "changes": [
+          {
+            "entity_type": "project",
+            "entity_id": "10000000-0000-4000-8000-000000000003",
+            "workspace_id": "10000000-0000-4000-8000-000000000002",
+            "own_xid": true,
+            "same_clock": true
+          }
+        ],
+        "own_visible": false
+      },
+      "error": ""
+    },
+    {
+      "accepted": false,
+      "state": null,
+      "error": "CHECK constraint failed: project_priority_check"
+    },
+    {
+      "accepted": true,
+      "state": {
+        "projects": [
+          {
+            "id": "10000000-0000-4000-8000-000000000003",
+            "workspace_id": "10000000-0000-4000-8000-000000000002",
+            "title": "Fixture",
+            "description": null,
+            "icon": null,
+            "status": "planned",
+            "lead_type": "agent",
+            "lead_id": null,
+            "priority": "none",
+            "start_date": null,
+            "due_date": null,
+            "workflow_id": null,
+            "creator_type": null,
+            "creator_id": null,
+            "visibility": "workspace",
+            "archived_at": null,
+            "archived_by_type": null,
+            "archived_by_id": null,
+            "folder_id": null
+          }
+        ],
+        "changes": [
+          {
+            "entity_type": "project",
+            "entity_id": "10000000-0000-4000-8000-000000000003",
+            "workspace_id": "10000000-0000-4000-8000-000000000002",
+            "own_xid": true,
+            "same_clock": true
+          }
+        ],
+        "own_visible": false
+      },
+      "error": ""
+    },
+    {
+      "accepted": false,
+      "state": null,
+      "error": "CHECK constraint failed: project_lead_type_check"
+    },
+    {
+      "accepted": true,
+      "state": {
+        "projects": [
+          {
+            "id": "10000000-0000-4000-8000-000000000003",
+            "workspace_id": "10000000-0000-4000-8000-000000000002",
+            "title": "Fixture",
+            "description": null,
+            "icon": null,
+            "status": "planned",
+            "lead_type": null,
+            "lead_id": null,
+            "priority": "none",
+            "start_date": null,
+            "due_date": null,
+            "workflow_id": null,
+            "creator_type": null,
+            "creator_id": null,
+            "visibility": "custom-value",
+            "archived_at": null,
+            "archived_by_type": null,
+            "archived_by_id": null,
+            "folder_id": null
+          }
+        ],
+        "changes": [
+          {
+            "entity_type": "project",
+            "entity_id": "10000000-0000-4000-8000-000000000003",
+            "workspace_id": "10000000-0000-4000-8000-000000000002",
+            "own_xid": true,
+            "same_clock": true
+          }
+        ],
+        "own_visible": false
+      },
+      "error": ""
+    },
+    {
+      "accepted": false,
+      "state": null,
+      "error": "NOT NULL constraint failed: project.title"
+    },
+    {
+      "accepted": true,
+      "state": {
+        "projects": [
+          {
+            "id": "10000000-0000-4000-8000-000000000003",
+            "workspace_id": "10000000-0000-4000-8000-000000000002",
+            "title": "",
+            "description": null,
+            "icon": null,
+            "status": "planned",
+            "lead_type": null,
+            "lead_id": null,
+            "priority": "none",
+            "start_date": null,
+            "due_date": null,
+            "workflow_id": null,
+            "creator_type": null,
+            "creator_id": null,
+            "visibility": "workspace",
+            "archived_at": null,
+            "archived_by_type": null,
+            "archived_by_id": null,
+            "folder_id": null
+          }
+        ],
+        "changes": [
+          {
+            "entity_type": "project",
+            "entity_id": "10000000-0000-4000-8000-000000000003",
+            "workspace_id": "10000000-0000-4000-8000-000000000002",
+            "own_xid": true,
+            "same_clock": true
+          }
+        ],
+        "own_visible": false
+      },
+      "error": ""
+    },
+    {
+      "accepted": true,
+      "state": {
+        "projects": [],
+        "changes": [
+          {
+            "entity_type": "project",
+            "entity_id": "10000000-0000-4000-8000-000000000003",
+            "workspace_id": "10000000-0000-4000-8000-000000000002",
+            "own_xid": true,
+            "same_clock": true
+          }
+        ],
+        "own_visible": false
+      },
+      "error": ""
+    },
+    {
+      "accepted": true,
+      "state": {
+        "projects": [],
+        "changes": [
+          {
+            "entity_type": "project",
+            "entity_id": "10000000-0000-4000-8000-000000000003",
+            "workspace_id": "10000000-0000-4000-8000-000000000002",
+            "own_xid": true,
+            "same_clock": true
+          }
+        ],
+        "own_visible": false
+      },
+      "error": ""
+    },
+    {
+      "accepted": true,
+      "state": {
+        "projects": [
+          {
+            "id": "10000000-0000-4000-8000-000000000003",
+            "workspace_id": "10000000-0000-4000-8000-000000000002",
+            "title": "Fixture",
+            "description": null,
+            "icon": null,
+            "status": "planned",
+            "lead_type": null,
+            "lead_id": null,
+            "priority": "none",
+            "start_date": null,
+            "due_date": null,
+            "workflow_id": null,
+            "creator_type": null,
+            "creator_id": null,
+            "visibility": "workspace",
+            "archived_at": null,
+            "archived_by_type": null,
+            "archived_by_id": null,
+            "folder_id": null
+          }
+        ],
+        "changes": [
+          {
+            "entity_type": "project",
+            "entity_id": "10000000-0000-4000-8000-000000000003",
+            "workspace_id": "10000000-0000-4000-8000-000000000002",
+            "own_xid": true,
+            "same_clock": true
+          }
+        ],
+        "own_visible": false
+      },
+      "error": ""
+    }
+  ],
+  "snapshots": [
+    "3:3:",
+    "3:6:4",
+    "3:6:5,4",
+    "3:6:4,4",
+    "0:0:",
+    "0:1:",
+    "5:3:",
+    "3:6:2",
+    "3:6:6",
+    " 3:3:",
+    "3:3: ",
+    "03:06:04",
+    "3:18446744073709551615:4",
+    "3:18446744073709551616:",
+    "invalid"
+  ],
+  "go_snapshots": [
+    {
+      "accepted": true,
+      "state": {
+        "canonical": "3:3:",
+        "visible": false
+      }
+    },
+    {
+      "accepted": true,
+      "state": {
+        "canonical": "3:6:4",
+        "visible": false
+      }
+    },
+    {
+      "accepted": false,
+      "state": null
+    },
+    {
+      "accepted": true,
+      "state": {
+        "canonical": "3:6:4",
+        "visible": false
+      }
+    },
+    {
+      "accepted": false,
+      "state": null
+    },
+    {
+      "accepted": false,
+      "state": null
+    },
+    {
+      "accepted": false,
+      "state": null
+    },
+    {
+      "accepted": false,
+      "state": null
+    },
+    {
+      "accepted": false,
+      "state": null
+    },
+    {
+      "accepted": true,
+      "state": {
+        "canonical": "3:3:",
+        "visible": false
+      }
+    },
+    {
+      "accepted": false,
+      "state": null
+    },
+    {
+      "accepted": true,
+      "state": {
+        "canonical": "3:6:4",
+        "visible": false
+      }
+    },
+    {
+      "accepted": true,
+      "state": {
+        "canonical": "3:18446744073709551615:4",
+        "visible": false
+      }
+    },
+    {
+      "accepted": true,
+      "state": {
+        "canonical": "3:18446744073709551615:",
+        "visible": true
+      }
+    },
+    {
+      "accepted": false,
+      "state": null
+    }
+  ],
+  "python_snapshots": [
+    {
+      "accepted": true,
+      "state": {
+        "canonical": "3:3:",
+        "visible": false
+      }
+    },
+    {
+      "accepted": true,
+      "state": {
+        "canonical": "3:6:4",
+        "visible": false
+      }
+    },
+    {
+      "accepted": true,
+      "state": {
+        "canonical": "3:6:4,5",
+        "visible": false
+      }
+    },
+    {
+      "accepted": true,
+      "state": {
+        "canonical": "3:6:4",
+        "visible": false
+      }
+    },
+    {
+      "accepted": true,
+      "state": {
+        "canonical": "0:0:",
+        "visible": false
+      }
+    },
+    {
+      "accepted": true,
+      "state": {
+        "canonical": "0:1:",
+        "visible": false
+      }
+    },
+    {
+      "accepted": false,
+      "state": null
+    },
+    {
+      "accepted": false,
+      "state": null
+    },
+    {
+      "accepted": false,
+      "state": null
+    },
+    {
+      "accepted": false,
+      "state": null
+    },
+    {
+      "accepted": false,
+      "state": null
+    },
+    {
+      "accepted": true,
+      "state": {
+        "canonical": "3:6:4",
+        "visible": false
+      }
+    },
+    {
+      "accepted": true,
+      "state": {
+        "canonical": "3:18446744073709551615:4",
+        "visible": false
+      }
+    },
+    {
+      "accepted": false,
+      "state": null
+    },
+    {
+      "accepted": false,
+      "state": null
+    }
+  ],
+  "mismatches": [
+    12
+  ],
+  "snapshot_mismatches": [
+    2,
+    4,
+    5,
+    9,
+    13
+  ],
+  "source_sha256": {
+    "server/go/migrations/561_search_index_change.up.sql": "50a32943ecabb810fe17901e43584660f7d05f2b90a60c44abb98f9995bf1065",
+    "server/migrations/versions/0020_project_search.py": "9f244353018aab881577e1cf7e38e911f0551ec4c4bc084e9e8eecfac338a8bd",
+    "server/src/workpal_backend/infrastructure/snapshots.py": "d57698c3934d9d844964eccd21290f41214a1dbe42f657f2d0edc354d3eba84f",
+    "server/src/workpal_backend/infrastructure/sqlite_compat.py": "afe7317387489d34b73d15491212587b20b80bde201edff11521118e231c1869"
+  }
+}

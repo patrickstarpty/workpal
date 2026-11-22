@@ -1,0 +1,49 @@
+{
+  "recordedAt": "2026-11-20T13:57:17.793Z",
+  "frontendTests": 102,
+  "backendTests": 2,
+  "fullPagePairs": 30,
+  "widths": [
+    1440,
+    768,
+    390
+  ],
+  "pageErrors": 0,
+  "pageOverflow": 0,
+  "interactions": [
+    {
+      "width": 1440,
+      "passed": true,
+      "checks": [
+        "creator disabled/ready",
+        "Ctrl+Enter",
+        "Create another retains context and focus",
+        "literal text",
+        "collection select all/clear/search"
+      ],
+      "errors": []
+    },
+    {
+      "width": 390,
+      "passed": true,
+      "checks": [
+        "creator disabled/ready",
+        "Ctrl+Enter",
+        "Create another retains context and focus",
+        "literal text",
+        "collection select all/clear/search"
+      ],
+      "errors": []
+    }
+  ],
+  "archiveRowsTested": 10000,
+  "systemKeyboardVerified": false,
+  "systemKeyboardBlocker": "ios-keyboard-blocker.json",
+  "hashes": {
+    "dist/Workpal.html": "bd556b4afb84f42d2d181858ec6cbead9cc6cabf9fd7bcdcd50220d5949a51e6",
+    "src/studio.js": "d6e98e05f5cb23b42efa292586b33369092995a19da796da821d0c6ab3fac5e5",
+    "src/ui.js": "c63245e8e985730da82efa2d731c4f88768e951ef737417450e31495e6613bea",
+    "src/ui.css": "d5e8281dbf13e790b418aabd4291a42b2230c84bf80cedde963110c0f16a1150",
+    "outputs/multica-reference/workpal-seed.json": "06db797fa1fe31c7eef5053ced138cd126d67e5c6949f8882c0fcbb33dc71659"
+  }
+}

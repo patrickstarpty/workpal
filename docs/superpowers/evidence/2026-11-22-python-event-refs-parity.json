@@ -1,0 +1,1569 @@
+{
+  "scope": "Original extractEventRefs with actual EE projectfolder initialization. JSON payload reference precedence/null/malformed element handling; no audience SQL/cache/transport coverage.",
+  "fixtures": [
+    {
+      "type": "project:updated",
+      "payload": {
+        "project": {
+          "id": "nested"
+        },
+        "project_id": "top"
+      }
+    },
+    {
+      "type": "project:updated",
+      "payload": {
+        "project_id": "top"
+      }
+    },
+    {
+      "type": "project:updated",
+      "payload": {
+        "project_id": null
+      }
+    },
+    {
+      "type": "project:updated",
+      "payload": {
+        "project_id": 7
+      }
+    },
+    {
+      "type": "project_resource:created",
+      "payload": {
+        "project": {
+          "id": "nested"
+        },
+        "project_id": "top"
+      }
+    },
+    {
+      "type": "project_resource:created",
+      "payload": {
+        "project_id": "top"
+      }
+    },
+    {
+      "type": "project_resource:created",
+      "payload": {
+        "project_id": null
+      }
+    },
+    {
+      "type": "project_resource:created",
+      "payload": {
+        "project_id": 7
+      }
+    },
+    {
+      "type": "project_folder:filed",
+      "payload": {
+        "project": {
+          "id": "nested"
+        },
+        "project_id": "top"
+      }
+    },
+    {
+      "type": "project_folder:filed",
+      "payload": {
+        "project_id": "top"
+      }
+    },
+    {
+      "type": "project_folder:filed",
+      "payload": {
+        "project_id": null
+      }
+    },
+    {
+      "type": "project_folder:filed",
+      "payload": {
+        "project_id": 7
+      }
+    },
+    {
+      "type": "project_folder:other",
+      "payload": {
+        "project": {
+          "id": "nested"
+        },
+        "project_id": "top"
+      }
+    },
+    {
+      "type": "project_folder:other",
+      "payload": {
+        "project_id": "top"
+      }
+    },
+    {
+      "type": "project_folder:other",
+      "payload": {
+        "project_id": null
+      }
+    },
+    {
+      "type": "project_folder:other",
+      "payload": {
+        "project_id": 7
+      }
+    },
+    {
+      "type": "issue:deleted",
+      "payload": {
+        "project": {
+          "id": "nested"
+        },
+        "project_id": "top"
+      }
+    },
+    {
+      "type": "issue:deleted",
+      "payload": {
+        "project_id": "top"
+      }
+    },
+    {
+      "type": "issue:deleted",
+      "payload": {
+        "project_id": null
+      }
+    },
+    {
+      "type": "issue:deleted",
+      "payload": {
+        "project_id": 7
+      }
+    },
+    {
+      "type": "unknown",
+      "payload": {
+        "project": {
+          "id": "nested"
+        },
+        "project_id": "top"
+      }
+    },
+    {
+      "type": "unknown",
+      "payload": {
+        "project_id": "top"
+      }
+    },
+    {
+      "type": "unknown",
+      "payload": {
+        "project_id": null
+      }
+    },
+    {
+      "type": "unknown",
+      "payload": {
+        "project_id": 7
+      }
+    },
+    {
+      "type": "issue:updated",
+      "payload": {
+        "issue": {
+          "project_id": null,
+          "id": "i"
+        },
+        "autopilot": {
+          "project_id": null
+        },
+        "autopilot_id": "a",
+        "comment": {
+          "id": "c",
+          "issue_id": "ci"
+        }
+      }
+    },
+    {
+      "type": "issue:updated",
+      "payload": {
+        "issue": {
+          "project_id": "",
+          "id": "i"
+        },
+        "autopilot": {
+          "project_id": ""
+        },
+        "autopilot_id": "a",
+        "comment": {
+          "id": "c",
+          "issue_id": "ci"
+        }
+      }
+    },
+    {
+      "type": "issue:updated",
+      "payload": {
+        "issue": {
+          "project_id": 7,
+          "id": "i"
+        },
+        "autopilot": {
+          "project_id": 7
+        },
+        "autopilot_id": "a",
+        "comment": {
+          "id": "c",
+          "issue_id": "ci"
+        }
+      }
+    },
+    {
+      "type": "issue:updated",
+      "payload": {
+        "issue": {
+          "project_id": "p",
+          "id": "i"
+        },
+        "autopilot": {
+          "project_id": "p"
+        },
+        "autopilot_id": "a",
+        "comment": {
+          "id": "c",
+          "issue_id": "ci"
+        }
+      }
+    },
+    {
+      "type": "issue:updated",
+      "payload": {
+        "issue": {
+          "project_id": false,
+          "id": "i"
+        },
+        "autopilot": {
+          "project_id": false
+        },
+        "autopilot_id": "a",
+        "comment": {
+          "id": "c",
+          "issue_id": "ci"
+        }
+      }
+    },
+    {
+      "type": "issue:updated",
+      "payload": {
+        "issue": {
+          "project_id": [],
+          "id": "i"
+        },
+        "autopilot": {
+          "project_id": []
+        },
+        "autopilot_id": "a",
+        "comment": {
+          "id": "c",
+          "issue_id": "ci"
+        }
+      }
+    },
+    {
+      "type": "issue:updated",
+      "payload": {
+        "issue": {
+          "project_id": {},
+          "id": "i"
+        },
+        "autopilot": {
+          "project_id": {}
+        },
+        "autopilot_id": "a",
+        "comment": {
+          "id": "c",
+          "issue_id": "ci"
+        }
+      }
+    },
+    {
+      "type": "autopilot:updated",
+      "payload": {
+        "issue": {
+          "project_id": null,
+          "id": "i"
+        },
+        "autopilot": {
+          "project_id": null
+        },
+        "autopilot_id": "a",
+        "comment": {
+          "id": "c",
+          "issue_id": "ci"
+        }
+      }
+    },
+    {
+      "type": "autopilot:updated",
+      "payload": {
+        "issue": {
+          "project_id": "",
+          "id": "i"
+        },
+        "autopilot": {
+          "project_id": ""
+        },
+        "autopilot_id": "a",
+        "comment": {
+          "id": "c",
+          "issue_id": "ci"
+        }
+      }
+    },
+    {
+      "type": "autopilot:updated",
+      "payload": {
+        "issue": {
+          "project_id": 7,
+          "id": "i"
+        },
+        "autopilot": {
+          "project_id": 7
+        },
+        "autopilot_id": "a",
+        "comment": {
+          "id": "c",
+          "issue_id": "ci"
+        }
+      }
+    },
+    {
+      "type": "autopilot:updated",
+      "payload": {
+        "issue": {
+          "project_id": "p",
+          "id": "i"
+        },
+        "autopilot": {
+          "project_id": "p"
+        },
+        "autopilot_id": "a",
+        "comment": {
+          "id": "c",
+          "issue_id": "ci"
+        }
+      }
+    },
+    {
+      "type": "autopilot:updated",
+      "payload": {
+        "issue": {
+          "project_id": false,
+          "id": "i"
+        },
+        "autopilot": {
+          "project_id": false
+        },
+        "autopilot_id": "a",
+        "comment": {
+          "id": "c",
+          "issue_id": "ci"
+        }
+      }
+    },
+    {
+      "type": "autopilot:updated",
+      "payload": {
+        "issue": {
+          "project_id": [],
+          "id": "i"
+        },
+        "autopilot": {
+          "project_id": []
+        },
+        "autopilot_id": "a",
+        "comment": {
+          "id": "c",
+          "issue_id": "ci"
+        }
+      }
+    },
+    {
+      "type": "autopilot:updated",
+      "payload": {
+        "issue": {
+          "project_id": {},
+          "id": "i"
+        },
+        "autopilot": {
+          "project_id": {}
+        },
+        "autopilot_id": "a",
+        "comment": {
+          "id": "c",
+          "issue_id": "ci"
+        }
+      }
+    },
+    {
+      "type": "comment:updated",
+      "payload": {
+        "issue": {
+          "project_id": null,
+          "id": "i"
+        },
+        "autopilot": {
+          "project_id": null
+        },
+        "autopilot_id": "a",
+        "comment": {
+          "id": "c",
+          "issue_id": "ci"
+        }
+      }
+    },
+    {
+      "type": "comment:updated",
+      "payload": {
+        "issue": {
+          "project_id": "",
+          "id": "i"
+        },
+        "autopilot": {
+          "project_id": ""
+        },
+        "autopilot_id": "a",
+        "comment": {
+          "id": "c",
+          "issue_id": "ci"
+        }
+      }
+    },
+    {
+      "type": "comment:updated",
+      "payload": {
+        "issue": {
+          "project_id": 7,
+          "id": "i"
+        },
+        "autopilot": {
+          "project_id": 7
+        },
+        "autopilot_id": "a",
+        "comment": {
+          "id": "c",
+          "issue_id": "ci"
+        }
+      }
+    },
+    {
+      "type": "comment:updated",
+      "payload": {
+        "issue": {
+          "project_id": "p",
+          "id": "i"
+        },
+        "autopilot": {
+          "project_id": "p"
+        },
+        "autopilot_id": "a",
+        "comment": {
+          "id": "c",
+          "issue_id": "ci"
+        }
+      }
+    },
+    {
+      "type": "comment:updated",
+      "payload": {
+        "issue": {
+          "project_id": false,
+          "id": "i"
+        },
+        "autopilot": {
+          "project_id": false
+        },
+        "autopilot_id": "a",
+        "comment": {
+          "id": "c",
+          "issue_id": "ci"
+        }
+      }
+    },
+    {
+      "type": "comment:updated",
+      "payload": {
+        "issue": {
+          "project_id": [],
+          "id": "i"
+        },
+        "autopilot": {
+          "project_id": []
+        },
+        "autopilot_id": "a",
+        "comment": {
+          "id": "c",
+          "issue_id": "ci"
+        }
+      }
+    },
+    {
+      "type": "comment:updated",
+      "payload": {
+        "issue": {
+          "project_id": {},
+          "id": "i"
+        },
+        "autopilot": {
+          "project_id": {}
+        },
+        "autopilot_id": "a",
+        "comment": {
+          "id": "c",
+          "issue_id": "ci"
+        }
+      }
+    },
+    {
+      "type": "pull_request:updated",
+      "payload": {
+        "issue": {
+          "id": null
+        },
+        "issue_id": "fallback",
+        "comment_id": "c"
+      }
+    },
+    {
+      "type": "pull_request:updated",
+      "payload": {
+        "comment": {
+          "id": "c",
+          "issue_id": null
+        },
+        "comment_id": "fallback"
+      }
+    },
+    {
+      "type": "pull_request:updated",
+      "payload": {
+        "linked_issue_ids": [
+          "i",
+          null,
+          23,
+          "j",
+          {},
+          true
+        ]
+      }
+    },
+    {
+      "type": "pull_request:updated",
+      "payload": {
+        "linked_issue_ids": []
+      }
+    },
+    {
+      "type": "pull_request:updated",
+      "payload": {
+        "linked_issue_ids": null
+      }
+    },
+    {
+      "type": "pull_request:updated",
+      "payload": {
+        "linked_issue_ids": "invalid"
+      }
+    },
+    {
+      "type": "pull_request:updated",
+      "payload": {
+        "issue_id": "i",
+        "linked_issue_ids": [
+          "other"
+        ]
+      }
+    },
+    {
+      "type": "pull_request:updated",
+      "payload": {
+        "comment_id": "c",
+        "linked_issue_ids": [
+          "other"
+        ]
+      }
+    },
+    {
+      "type": "pull_request:updated",
+      "payload": null
+    },
+    {
+      "type": "pull_request:updated",
+      "payload": []
+    },
+    {
+      "type": "pull_request:updated",
+      "payload": 42
+    },
+    {
+      "type": "pull_request:updated",
+      "payload": "text"
+    },
+    {
+      "type": "pull_request:updated",
+      "payload": {
+        "issue": []
+      }
+    }
+  ],
+  "go": [
+    {
+      "autopilot_id": "",
+      "comment_id": "",
+      "issue_id": "",
+      "linked_issue_ids": null,
+      "project_id": "nested",
+      "project_known": true
+    },
+    {
+      "autopilot_id": "",
+      "comment_id": "",
+      "issue_id": "",
+      "linked_issue_ids": null,
+      "project_id": "top",
+      "project_known": true
+    },
+    {
+      "autopilot_id": "",
+      "comment_id": "",
+      "issue_id": "",
+      "linked_issue_ids": null,
+      "project_id": "",
+      "project_known": false
+    },
+    {
+      "autopilot_id": "",
+      "comment_id": "",
+      "issue_id": "",
+      "linked_issue_ids": null,
+      "project_id": "",
+      "project_known": false
+    },
+    {
+      "autopilot_id": "",
+      "comment_id": "",
+      "issue_id": "",
+      "linked_issue_ids": null,
+      "project_id": "nested",
+      "project_known": true
+    },
+    {
+      "autopilot_id": "",
+      "comment_id": "",
+      "issue_id": "",
+      "linked_issue_ids": null,
+      "project_id": "top",
+      "project_known": true
+    },
+    {
+      "autopilot_id": "",
+      "comment_id": "",
+      "issue_id": "",
+      "linked_issue_ids": null,
+      "project_id": "",
+      "project_known": false
+    },
+    {
+      "autopilot_id": "",
+      "comment_id": "",
+      "issue_id": "",
+      "linked_issue_ids": null,
+      "project_id": "",
+      "project_known": false
+    },
+    {
+      "autopilot_id": "",
+      "comment_id": "",
+      "issue_id": "",
+      "linked_issue_ids": null,
+      "project_id": "top",
+      "project_known": true
+    },
+    {
+      "autopilot_id": "",
+      "comment_id": "",
+      "issue_id": "",
+      "linked_issue_ids": null,
+      "project_id": "top",
+      "project_known": true
+    },
+    {
+      "autopilot_id": "",
+      "comment_id": "",
+      "issue_id": "",
+      "linked_issue_ids": null,
+      "project_id": "",
+      "project_known": false
+    },
+    {
+      "autopilot_id": "",
+      "comment_id": "",
+      "issue_id": "",
+      "linked_issue_ids": null,
+      "project_id": "",
+      "project_known": false
+    },
+    {
+      "autopilot_id": "",
+      "comment_id": "",
+      "issue_id": "",
+      "linked_issue_ids": null,
+      "project_id": "",
+      "project_known": false
+    },
+    {
+      "autopilot_id": "",
+      "comment_id": "",
+      "issue_id": "",
+      "linked_issue_ids": null,
+      "project_id": "",
+      "project_known": false
+    },
+    {
+      "autopilot_id": "",
+      "comment_id": "",
+      "issue_id": "",
+      "linked_issue_ids": null,
+      "project_id": "",
+      "project_known": false
+    },
+    {
+      "autopilot_id": "",
+      "comment_id": "",
+      "issue_id": "",
+      "linked_issue_ids": null,
+      "project_id": "",
+      "project_known": false
+    },
+    {
+      "autopilot_id": "",
+      "comment_id": "",
+      "issue_id": "",
+      "linked_issue_ids": null,
+      "project_id": "top",
+      "project_known": true
+    },
+    {
+      "autopilot_id": "",
+      "comment_id": "",
+      "issue_id": "",
+      "linked_issue_ids": null,
+      "project_id": "top",
+      "project_known": true
+    },
+    {
+      "autopilot_id": "",
+      "comment_id": "",
+      "issue_id": "",
+      "linked_issue_ids": null,
+      "project_id": "",
+      "project_known": false
+    },
+    {
+      "autopilot_id": "",
+      "comment_id": "",
+      "issue_id": "",
+      "linked_issue_ids": null,
+      "project_id": "",
+      "project_known": false
+    },
+    {
+      "autopilot_id": "",
+      "comment_id": "",
+      "issue_id": "",
+      "linked_issue_ids": null,
+      "project_id": "",
+      "project_known": false
+    },
+    {
+      "autopilot_id": "",
+      "comment_id": "",
+      "issue_id": "",
+      "linked_issue_ids": null,
+      "project_id": "",
+      "project_known": false
+    },
+    {
+      "autopilot_id": "",
+      "comment_id": "",
+      "issue_id": "",
+      "linked_issue_ids": null,
+      "project_id": "",
+      "project_known": false
+    },
+    {
+      "autopilot_id": "",
+      "comment_id": "",
+      "issue_id": "",
+      "linked_issue_ids": null,
+      "project_id": "",
+      "project_known": false
+    },
+    {
+      "autopilot_id": "",
+      "comment_id": "",
+      "issue_id": "",
+      "linked_issue_ids": null,
+      "project_id": "",
+      "project_known": true
+    },
+    {
+      "autopilot_id": "",
+      "comment_id": "",
+      "issue_id": "",
+      "linked_issue_ids": null,
+      "project_id": "",
+      "project_known": true
+    },
+    {
+      "autopilot_id": "",
+      "comment_id": "",
+      "issue_id": "i",
+      "linked_issue_ids": null,
+      "project_id": "",
+      "project_known": false
+    },
+    {
+      "autopilot_id": "",
+      "comment_id": "",
+      "issue_id": "",
+      "linked_issue_ids": null,
+      "project_id": "p",
+      "project_known": true
+    },
+    {
+      "autopilot_id": "",
+      "comment_id": "",
+      "issue_id": "i",
+      "linked_issue_ids": null,
+      "project_id": "",
+      "project_known": false
+    },
+    {
+      "autopilot_id": "",
+      "comment_id": "",
+      "issue_id": "i",
+      "linked_issue_ids": null,
+      "project_id": "",
+      "project_known": false
+    },
+    {
+      "autopilot_id": "",
+      "comment_id": "",
+      "issue_id": "i",
+      "linked_issue_ids": null,
+      "project_id": "",
+      "project_known": false
+    },
+    {
+      "autopilot_id": "",
+      "comment_id": "",
+      "issue_id": "",
+      "linked_issue_ids": null,
+      "project_id": "",
+      "project_known": true
+    },
+    {
+      "autopilot_id": "",
+      "comment_id": "",
+      "issue_id": "",
+      "linked_issue_ids": null,
+      "project_id": "",
+      "project_known": true
+    },
+    {
+      "autopilot_id": "a",
+      "comment_id": "",
+      "issue_id": "",
+      "linked_issue_ids": null,
+      "project_id": "",
+      "project_known": false
+    },
+    {
+      "autopilot_id": "",
+      "comment_id": "",
+      "issue_id": "",
+      "linked_issue_ids": null,
+      "project_id": "p",
+      "project_known": true
+    },
+    {
+      "autopilot_id": "a",
+      "comment_id": "",
+      "issue_id": "",
+      "linked_issue_ids": null,
+      "project_id": "",
+      "project_known": false
+    },
+    {
+      "autopilot_id": "a",
+      "comment_id": "",
+      "issue_id": "",
+      "linked_issue_ids": null,
+      "project_id": "",
+      "project_known": false
+    },
+    {
+      "autopilot_id": "a",
+      "comment_id": "",
+      "issue_id": "",
+      "linked_issue_ids": null,
+      "project_id": "",
+      "project_known": false
+    },
+    {
+      "autopilot_id": "",
+      "comment_id": "",
+      "issue_id": "",
+      "linked_issue_ids": null,
+      "project_id": "",
+      "project_known": true
+    },
+    {
+      "autopilot_id": "",
+      "comment_id": "",
+      "issue_id": "",
+      "linked_issue_ids": null,
+      "project_id": "",
+      "project_known": true
+    },
+    {
+      "autopilot_id": "",
+      "comment_id": "",
+      "issue_id": "i",
+      "linked_issue_ids": null,
+      "project_id": "",
+      "project_known": false
+    },
+    {
+      "autopilot_id": "",
+      "comment_id": "",
+      "issue_id": "",
+      "linked_issue_ids": null,
+      "project_id": "p",
+      "project_known": true
+    },
+    {
+      "autopilot_id": "",
+      "comment_id": "",
+      "issue_id": "i",
+      "linked_issue_ids": null,
+      "project_id": "",
+      "project_known": false
+    },
+    {
+      "autopilot_id": "",
+      "comment_id": "",
+      "issue_id": "i",
+      "linked_issue_ids": null,
+      "project_id": "",
+      "project_known": false
+    },
+    {
+      "autopilot_id": "",
+      "comment_id": "",
+      "issue_id": "i",
+      "linked_issue_ids": null,
+      "project_id": "",
+      "project_known": false
+    },
+    {
+      "autopilot_id": "",
+      "comment_id": "",
+      "issue_id": "fallback",
+      "linked_issue_ids": null,
+      "project_id": "",
+      "project_known": false
+    },
+    {
+      "autopilot_id": "",
+      "comment_id": "c",
+      "issue_id": "",
+      "linked_issue_ids": null,
+      "project_id": "",
+      "project_known": false
+    },
+    {
+      "autopilot_id": "",
+      "comment_id": "",
+      "issue_id": "",
+      "linked_issue_ids": [
+        "i",
+        "",
+        "",
+        "j",
+        "",
+        ""
+      ],
+      "project_id": "",
+      "project_known": false
+    },
+    {
+      "autopilot_id": "",
+      "comment_id": "",
+      "issue_id": "",
+      "linked_issue_ids": [],
+      "project_id": "",
+      "project_known": false
+    },
+    {
+      "autopilot_id": "",
+      "comment_id": "",
+      "issue_id": "",
+      "linked_issue_ids": null,
+      "project_id": "",
+      "project_known": false
+    },
+    {
+      "autopilot_id": "",
+      "comment_id": "",
+      "issue_id": "",
+      "linked_issue_ids": null,
+      "project_id": "",
+      "project_known": false
+    },
+    {
+      "autopilot_id": "",
+      "comment_id": "",
+      "issue_id": "i",
+      "linked_issue_ids": null,
+      "project_id": "",
+      "project_known": false
+    },
+    {
+      "autopilot_id": "",
+      "comment_id": "c",
+      "issue_id": "",
+      "linked_issue_ids": null,
+      "project_id": "",
+      "project_known": false
+    },
+    {
+      "autopilot_id": "",
+      "comment_id": "",
+      "issue_id": "",
+      "linked_issue_ids": null,
+      "project_id": "",
+      "project_known": false
+    },
+    {
+      "autopilot_id": "",
+      "comment_id": "",
+      "issue_id": "",
+      "linked_issue_ids": null,
+      "project_id": "",
+      "project_known": false
+    },
+    {
+      "autopilot_id": "",
+      "comment_id": "",
+      "issue_id": "",
+      "linked_issue_ids": null,
+      "project_id": "",
+      "project_known": false
+    },
+    {
+      "autopilot_id": "",
+      "comment_id": "",
+      "issue_id": "",
+      "linked_issue_ids": null,
+      "project_id": "",
+      "project_known": false
+    },
+    {
+      "autopilot_id": "",
+      "comment_id": "",
+      "issue_id": "",
+      "linked_issue_ids": null,
+      "project_id": "",
+      "project_known": false
+    }
+  ],
+  "python": [
+    {
+      "project_known": true,
+      "project_id": "nested",
+      "issue_id": "",
+      "comment_id": "",
+      "autopilot_id": "",
+      "linked_issue_ids": null
+    },
+    {
+      "project_known": true,
+      "project_id": "top",
+      "issue_id": "",
+      "comment_id": "",
+      "autopilot_id": "",
+      "linked_issue_ids": null
+    },
+    {
+      "project_known": false,
+      "project_id": "",
+      "issue_id": "",
+      "comment_id": "",
+      "autopilot_id": "",
+      "linked_issue_ids": null
+    },
+    {
+      "project_known": false,
+      "project_id": "",
+      "issue_id": "",
+      "comment_id": "",
+      "autopilot_id": "",
+      "linked_issue_ids": null
+    },
+    {
+      "project_known": true,
+      "project_id": "nested",
+      "issue_id": "",
+      "comment_id": "",
+      "autopilot_id": "",
+      "linked_issue_ids": null
+    },
+    {
+      "project_known": true,
+      "project_id": "top",
+      "issue_id": "",
+      "comment_id": "",
+      "autopilot_id": "",
+      "linked_issue_ids": null
+    },
+    {
+      "project_known": false,
+      "project_id": "",
+      "issue_id": "",
+      "comment_id": "",
+      "autopilot_id": "",
+      "linked_issue_ids": null
+    },
+    {
+      "project_known": false,
+      "project_id": "",
+      "issue_id": "",
+      "comment_id": "",
+      "autopilot_id": "",
+      "linked_issue_ids": null
+    },
+    {
+      "project_known": true,
+      "project_id": "top",
+      "issue_id": "",
+      "comment_id": "",
+      "autopilot_id": "",
+      "linked_issue_ids": null
+    },
+    {
+      "project_known": true,
+      "project_id": "top",
+      "issue_id": "",
+      "comment_id": "",
+      "autopilot_id": "",
+      "linked_issue_ids": null
+    },
+    {
+      "project_known": false,
+      "project_id": "",
+      "issue_id": "",
+      "comment_id": "",
+      "autopilot_id": "",
+      "linked_issue_ids": null
+    },
+    {
+      "project_known": false,
+      "project_id": "",
+      "issue_id": "",
+      "comment_id": "",
+      "autopilot_id": "",
+      "linked_issue_ids": null
+    },
+    {
+      "project_known": false,
+      "project_id": "",
+      "issue_id": "",
+      "comment_id": "",
+      "autopilot_id": "",
+      "linked_issue_ids": null
+    },
+    {
+      "project_known": false,
+      "project_id": "",
+      "issue_id": "",
+      "comment_id": "",
+      "autopilot_id": "",
+      "linked_issue_ids": null
+    },
+    {
+      "project_known": false,
+      "project_id": "",
+      "issue_id": "",
+      "comment_id": "",
+      "autopilot_id": "",
+      "linked_issue_ids": null
+    },
+    {
+      "project_known": false,
+      "project_id": "",
+      "issue_id": "",
+      "comment_id": "",
+      "autopilot_id": "",
+      "linked_issue_ids": null
+    },
+    {
+      "project_known": true,
+      "project_id": "top",
+      "issue_id": "",
+      "comment_id": "",
+      "autopilot_id": "",
+      "linked_issue_ids": null
+    },
+    {
+      "project_known": true,
+      "project_id": "top",
+      "issue_id": "",
+      "comment_id": "",
+      "autopilot_id": "",
+      "linked_issue_ids": null
+    },
+    {
+      "project_known": false,
+      "project_id": "",
+      "issue_id": "",
+      "comment_id": "",
+      "autopilot_id": "",
+      "linked_issue_ids": null
+    },
+    {
+      "project_known": false,
+      "project_id": "",
+      "issue_id": "",
+      "comment_id": "",
+      "autopilot_id": "",
+      "linked_issue_ids": null
+    },
+    {
+      "project_known": false,
+      "project_id": "",
+      "issue_id": "",
+      "comment_id": "",
+      "autopilot_id": "",
+      "linked_issue_ids": null
+    },
+    {
+      "project_known": false,
+      "project_id": "",
+      "issue_id": "",
+      "comment_id": "",
+      "autopilot_id": "",
+      "linked_issue_ids": null
+    },
+    {
+      "project_known": false,
+      "project_id": "",
+      "issue_id": "",
+      "comment_id": "",
+      "autopilot_id": "",
+      "linked_issue_ids": null
+    },
+    {
+      "project_known": false,
+      "project_id": "",
+      "issue_id": "",
+      "comment_id": "",
+      "autopilot_id": "",
+      "linked_issue_ids": null
+    },
+    {
+      "project_known": true,
+      "project_id": "",
+      "issue_id": "",
+      "comment_id": "",
+      "autopilot_id": "",
+      "linked_issue_ids": null
+    },
+    {
+      "project_known": true,
+      "project_id": "",
+      "issue_id": "",
+      "comment_id": "",
+      "autopilot_id": "",
+      "linked_issue_ids": null
+    },
+    {
+      "project_known": false,
+      "project_id": "",
+      "issue_id": "i",
+      "comment_id": "",
+      "autopilot_id": "",
+      "linked_issue_ids": null
+    },
+    {
+      "project_known": true,
+      "project_id": "p",
+      "issue_id": "",
+      "comment_id": "",
+      "autopilot_id": "",
+      "linked_issue_ids": null
+    },
+    {
+      "project_known": false,
+      "project_id": "",
+      "issue_id": "i",
+      "comment_id": "",
+      "autopilot_id": "",
+      "linked_issue_ids": null
+    },
+    {
+      "project_known": false,
+      "project_id": "",
+      "issue_id": "i",
+      "comment_id": "",
+      "autopilot_id": "",
+      "linked_issue_ids": null
+    },
+    {
+      "project_known": false,
+      "project_id": "",
+      "issue_id": "i",
+      "comment_id": "",
+      "autopilot_id": "",
+      "linked_issue_ids": null
+    },
+    {
+      "project_known": true,
+      "project_id": "",
+      "issue_id": "",
+      "comment_id": "",
+      "autopilot_id": "",
+      "linked_issue_ids": null
+    },
+    {
+      "project_known": true,
+      "project_id": "",
+      "issue_id": "",
+      "comment_id": "",
+      "autopilot_id": "",
+      "linked_issue_ids": null
+    },
+    {
+      "project_known": false,
+      "project_id": "",
+      "issue_id": "",
+      "comment_id": "",
+      "autopilot_id": "a",
+      "linked_issue_ids": null
+    },
+    {
+      "project_known": true,
+      "project_id": "p",
+      "issue_id": "",
+      "comment_id": "",
+      "autopilot_id": "",
+      "linked_issue_ids": null
+    },
+    {
+      "project_known": false,
+      "project_id": "",
+      "issue_id": "",
+      "comment_id": "",
+      "autopilot_id": "a",
+      "linked_issue_ids": null
+    },
+    {
+      "project_known": false,
+      "project_id": "",
+      "issue_id": "",
+      "comment_id": "",
+      "autopilot_id": "a",
+      "linked_issue_ids": null
+    },
+    {
+      "project_known": false,
+      "project_id": "",
+      "issue_id": "",
+      "comment_id": "",
+      "autopilot_id": "a",
+      "linked_issue_ids": null
+    },
+    {
+      "project_known": true,
+      "project_id": "",
+      "issue_id": "",
+      "comment_id": "",
+      "autopilot_id": "",
+      "linked_issue_ids": null
+    },
+    {
+      "project_known": true,
+      "project_id": "",
+      "issue_id": "",
+      "comment_id": "",
+      "autopilot_id": "",
+      "linked_issue_ids": null
+    },
+    {
+      "project_known": false,
+      "project_id": "",
+      "issue_id": "i",
+      "comment_id": "",
+      "autopilot_id": "",
+      "linked_issue_ids": null
+    },
+    {
+      "project_known": true,
+      "project_id": "p",
+      "issue_id": "",
+      "comment_id": "",
+      "autopilot_id": "",
+      "linked_issue_ids": null
+    },
+    {
+      "project_known": false,
+      "project_id": "",
+      "issue_id": "i",
+      "comment_id": "",
+      "autopilot_id": "",
+      "linked_issue_ids": null
+    },
+    {
+      "project_known": false,
+      "project_id": "",
+      "issue_id": "i",
+      "comment_id": "",
+      "autopilot_id": "",
+      "linked_issue_ids": null
+    },
+    {
+      "project_known": false,
+      "project_id": "",
+      "issue_id": "i",
+      "comment_id": "",
+      "autopilot_id": "",
+      "linked_issue_ids": null
+    },
+    {
+      "project_known": false,
+      "project_id": "",
+      "issue_id": "fallback",
+      "comment_id": "",
+      "autopilot_id": "",
+      "linked_issue_ids": null
+    },
+    {
+      "project_known": false,
+      "project_id": "",
+      "issue_id": "",
+      "comment_id": "c",
+      "autopilot_id": "",
+      "linked_issue_ids": null
+    },
+    {
+      "project_known": false,
+      "project_id": "",
+      "issue_id": "",
+      "comment_id": "",
+      "autopilot_id": "",
+      "linked_issue_ids": [
+        "i",
+        "",
+        "",
+        "j",
+        "",
+        ""
+      ]
+    },
+    {
+      "project_known": false,
+      "project_id": "",
+      "issue_id": "",
+      "comment_id": "",
+      "autopilot_id": "",
+      "linked_issue_ids": []
+    },
+    {
+      "project_known": false,
+      "project_id": "",
+      "issue_id": "",
+      "comment_id": "",
+      "autopilot_id": "",
+      "linked_issue_ids": null
+    },
+    {
+      "project_known": false,
+      "project_id": "",
+      "issue_id": "",
+      "comment_id": "",
+      "autopilot_id": "",
+      "linked_issue_ids": null
+    },
+    {
+      "project_known": false,
+      "project_id": "",
+      "issue_id": "i",
+      "comment_id": "",
+      "autopilot_id": "",
+      "linked_issue_ids": null
+    },
+    {
+      "project_known": false,
+      "project_id": "",
+      "issue_id": "",
+      "comment_id": "c",
+      "autopilot_id": "",
+      "linked_issue_ids": null
+    },
+    {
+      "project_known": false,
+      "project_id": "",
+      "issue_id": "",
+      "comment_id": "",
+      "autopilot_id": "",
+      "linked_issue_ids": null
+    },
+    {
+      "project_known": false,
+      "project_id": "",
+      "issue_id": "",
+      "comment_id": "",
+      "autopilot_id": "",
+      "linked_issue_ids": null
+    },
+    {
+      "project_known": false,
+      "project_id": "",
+      "issue_id": "",
+      "comment_id": "",
+      "autopilot_id": "",
+      "linked_issue_ids": null
+    },
+    {
+      "project_known": false,
+      "project_id": "",
+      "issue_id": "",
+      "comment_id": "",
+      "autopilot_id": "",
+      "linked_issue_ids": null
+    },
+    {
+      "project_known": false,
+      "project_id": "",
+      "issue_id": "",
+      "comment_id": "",
+      "autopilot_id": "",
+      "linked_issue_ids": null
+    }
+  ],
+  "mismatches": [],
+  "source_sha256": {
+    "server/go/cmd/server/private_project_realtime.go": "f864f0616cf6d55f737beb4453a382246dc11558248dc5467c735bef95f85ba1",
+    "server/go/ee/projectfolder/handler.go": "a2ab30d40b7309ce6d51a8f5a280de356a38c8ff4f57e48b72417dc3f25f0d6d",
+    "server/tests/parity/go_event_refs/main.go": "859275709828eac65b0b8e2b31e30ef1ea1d62fe233eb7e9f2d922451f4613c7",
+    "server/src/workpal_backend/realtime/event_refs.py": "8556fa417f14ff38408d284cc266b8c01ae530c0c25dd58225c23efd677f445c"
+  },
+  "binary_sha256": "24469c53e41b0a4b7ecc2b2dd4dd5818af232ba03f4a11bca339461e88f708a2"
+}

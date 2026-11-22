@@ -29,7 +29,7 @@ def test_malformed_and_limit():
 def test_projection():
     assert project_event(FIX['internal_event'], 'workspace-1') == FIX['fixtures']['workspace_updated']
 
-@pytest.mark.parametrize('change', [dict(type='unknown'),dict(workspaceID='foreign'),dict(actorID=3),dict(chatSessionID='secret'),dict(memberPrivateUserID='secret')])
+@pytest.mark.parametrize('change', [dict(type='unknown'),dict(workspaceID='foreign'),dict(actorID=3),dict(chatSessionID='secret')])
 def test_reject_envelope(change):
     event = copy.deepcopy(FIX['internal_event']); event.update(change)
     with pytest.raises(ProjectionError): project_event(event,'workspace-1')

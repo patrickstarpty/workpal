@@ -1,0 +1,430 @@
+{
+  "scope": "Original Go startConsumer/stopConsumer/Stop/Wait ownership with blocking cancellable Redis boundary; compare map entries and group create/consumer cleanup counts across duplicate starts, restart, parent cancellation and permanent stop. Does not execute full RedisRelay.Start heartbeat/sweeper/ping, certify rapid overlapping same-scope cleanup races or real Redis transport timing.",
+  "fixtures": [
+    [
+      {
+        "Op": "start",
+        "ID": "a"
+      },
+      {
+        "Op": "start",
+        "ID": "a"
+      },
+      {
+        "Op": "start",
+        "ID": "b"
+      },
+      {
+        "Op": "stop",
+        "ID": "a"
+      },
+      {
+        "Op": "stop",
+        "ID": "a"
+      },
+      {
+        "Op": "start",
+        "ID": "a"
+      },
+      {
+        "Op": "stop_all",
+        "ID": ""
+      },
+      {
+        "Op": "start",
+        "ID": "c"
+      }
+    ],
+    [
+      {
+        "Op": "start",
+        "ID": "a"
+      },
+      {
+        "Op": "start",
+        "ID": "b"
+      },
+      {
+        "Op": "cancel",
+        "ID": ""
+      },
+      {
+        "Op": "start",
+        "ID": "c"
+      },
+      {
+        "Op": "stop",
+        "ID": "a"
+      },
+      {
+        "Op": "stop_all",
+        "ID": ""
+      }
+    ],
+    [
+      {
+        "Op": "cancel",
+        "ID": ""
+      },
+      {
+        "Op": "start",
+        "ID": "a"
+      },
+      {
+        "Op": "stop",
+        "ID": "a"
+      },
+      {
+        "Op": "stop_all",
+        "ID": ""
+      }
+    ]
+  ],
+  "go": [
+    [
+      {
+        "counts": {
+          "create:ws:scope:chat:a:stream": 1
+        },
+        "keys": [
+          "a"
+        ]
+      },
+      {
+        "counts": {
+          "create:ws:scope:chat:a:stream": 1
+        },
+        "keys": [
+          "a"
+        ]
+      },
+      {
+        "counts": {
+          "create:ws:scope:chat:a:stream": 1,
+          "create:ws:scope:chat:b:stream": 1
+        },
+        "keys": [
+          "a",
+          "b"
+        ]
+      },
+      {
+        "counts": {
+          "clean:ws:scope:chat:a:stream": 1,
+          "create:ws:scope:chat:a:stream": 1,
+          "create:ws:scope:chat:b:stream": 1
+        },
+        "keys": [
+          "b"
+        ]
+      },
+      {
+        "counts": {
+          "clean:ws:scope:chat:a:stream": 1,
+          "create:ws:scope:chat:a:stream": 1,
+          "create:ws:scope:chat:b:stream": 1
+        },
+        "keys": [
+          "b"
+        ]
+      },
+      {
+        "counts": {
+          "clean:ws:scope:chat:a:stream": 1,
+          "create:ws:scope:chat:a:stream": 2,
+          "create:ws:scope:chat:b:stream": 1
+        },
+        "keys": [
+          "a",
+          "b"
+        ]
+      },
+      {
+        "counts": {
+          "clean:ws:scope:chat:a:stream": 2,
+          "clean:ws:scope:chat:b:stream": 1,
+          "create:ws:scope:chat:a:stream": 2,
+          "create:ws:scope:chat:b:stream": 1
+        },
+        "keys": [
+          "a",
+          "b"
+        ]
+      },
+      {
+        "counts": {
+          "clean:ws:scope:chat:a:stream": 2,
+          "clean:ws:scope:chat:b:stream": 1,
+          "create:ws:scope:chat:a:stream": 2,
+          "create:ws:scope:chat:b:stream": 1
+        },
+        "keys": [
+          "a",
+          "b"
+        ]
+      }
+    ],
+    [
+      {
+        "counts": {
+          "create:ws:scope:chat:a:stream": 1
+        },
+        "keys": [
+          "a"
+        ]
+      },
+      {
+        "counts": {
+          "create:ws:scope:chat:a:stream": 1,
+          "create:ws:scope:chat:b:stream": 1
+        },
+        "keys": [
+          "a",
+          "b"
+        ]
+      },
+      {
+        "counts": {
+          "clean:ws:scope:chat:a:stream": 1,
+          "clean:ws:scope:chat:b:stream": 1,
+          "create:ws:scope:chat:a:stream": 1,
+          "create:ws:scope:chat:b:stream": 1
+        },
+        "keys": [
+          "a",
+          "b"
+        ]
+      },
+      {
+        "counts": {
+          "clean:ws:scope:chat:a:stream": 1,
+          "clean:ws:scope:chat:b:stream": 1,
+          "create:ws:scope:chat:a:stream": 1,
+          "create:ws:scope:chat:b:stream": 1
+        },
+        "keys": [
+          "a",
+          "b"
+        ]
+      },
+      {
+        "counts": {
+          "clean:ws:scope:chat:a:stream": 1,
+          "clean:ws:scope:chat:b:stream": 1,
+          "create:ws:scope:chat:a:stream": 1,
+          "create:ws:scope:chat:b:stream": 1
+        },
+        "keys": [
+          "b"
+        ]
+      },
+      {
+        "counts": {
+          "clean:ws:scope:chat:a:stream": 1,
+          "clean:ws:scope:chat:b:stream": 1,
+          "create:ws:scope:chat:a:stream": 1,
+          "create:ws:scope:chat:b:stream": 1
+        },
+        "keys": [
+          "b"
+        ]
+      }
+    ],
+    [
+      {
+        "counts": {},
+        "keys": []
+      },
+      {
+        "counts": {},
+        "keys": []
+      },
+      {
+        "counts": {},
+        "keys": []
+      },
+      {
+        "counts": {},
+        "keys": []
+      }
+    ]
+  ],
+  "python": [
+    [
+      {
+        "keys": [
+          "a"
+        ],
+        "counts": {
+          "create:ws:scope:chat:a:stream": 1
+        }
+      },
+      {
+        "keys": [
+          "a"
+        ],
+        "counts": {
+          "create:ws:scope:chat:a:stream": 1
+        }
+      },
+      {
+        "keys": [
+          "a",
+          "b"
+        ],
+        "counts": {
+          "create:ws:scope:chat:a:stream": 1,
+          "create:ws:scope:chat:b:stream": 1
+        }
+      },
+      {
+        "keys": [
+          "b"
+        ],
+        "counts": {
+          "create:ws:scope:chat:a:stream": 1,
+          "create:ws:scope:chat:b:stream": 1,
+          "clean:ws:scope:chat:a:stream": 1
+        }
+      },
+      {
+        "keys": [
+          "b"
+        ],
+        "counts": {
+          "create:ws:scope:chat:a:stream": 1,
+          "create:ws:scope:chat:b:stream": 1,
+          "clean:ws:scope:chat:a:stream": 1
+        }
+      },
+      {
+        "keys": [
+          "a",
+          "b"
+        ],
+        "counts": {
+          "create:ws:scope:chat:a:stream": 2,
+          "create:ws:scope:chat:b:stream": 1,
+          "clean:ws:scope:chat:a:stream": 1
+        }
+      },
+      {
+        "keys": [
+          "a",
+          "b"
+        ],
+        "counts": {
+          "create:ws:scope:chat:a:stream": 2,
+          "create:ws:scope:chat:b:stream": 1,
+          "clean:ws:scope:chat:a:stream": 2,
+          "clean:ws:scope:chat:b:stream": 1
+        }
+      },
+      {
+        "keys": [
+          "a",
+          "b"
+        ],
+        "counts": {
+          "create:ws:scope:chat:a:stream": 2,
+          "create:ws:scope:chat:b:stream": 1,
+          "clean:ws:scope:chat:a:stream": 2,
+          "clean:ws:scope:chat:b:stream": 1
+        }
+      }
+    ],
+    [
+      {
+        "keys": [
+          "a"
+        ],
+        "counts": {
+          "create:ws:scope:chat:a:stream": 1
+        }
+      },
+      {
+        "keys": [
+          "a",
+          "b"
+        ],
+        "counts": {
+          "create:ws:scope:chat:a:stream": 1,
+          "create:ws:scope:chat:b:stream": 1
+        }
+      },
+      {
+        "keys": [
+          "a",
+          "b"
+        ],
+        "counts": {
+          "create:ws:scope:chat:a:stream": 1,
+          "create:ws:scope:chat:b:stream": 1,
+          "clean:ws:scope:chat:a:stream": 1,
+          "clean:ws:scope:chat:b:stream": 1
+        }
+      },
+      {
+        "keys": [
+          "a",
+          "b"
+        ],
+        "counts": {
+          "create:ws:scope:chat:a:stream": 1,
+          "create:ws:scope:chat:b:stream": 1,
+          "clean:ws:scope:chat:a:stream": 1,
+          "clean:ws:scope:chat:b:stream": 1
+        }
+      },
+      {
+        "keys": [
+          "b"
+        ],
+        "counts": {
+          "create:ws:scope:chat:a:stream": 1,
+          "create:ws:scope:chat:b:stream": 1,
+          "clean:ws:scope:chat:a:stream": 1,
+          "clean:ws:scope:chat:b:stream": 1
+        }
+      },
+      {
+        "keys": [
+          "b"
+        ],
+        "counts": {
+          "create:ws:scope:chat:a:stream": 1,
+          "create:ws:scope:chat:b:stream": 1,
+          "clean:ws:scope:chat:a:stream": 1,
+          "clean:ws:scope:chat:b:stream": 1
+        }
+      }
+    ],
+    [
+      {
+        "keys": [],
+        "counts": {}
+      },
+      {
+        "keys": [],
+        "counts": {}
+      },
+      {
+        "keys": [],
+        "counts": {}
+      },
+      {
+        "keys": [],
+        "counts": {}
+      }
+    ]
+  ],
+  "mismatches": [],
+  "source_sha256": {
+    "server/go/internal/realtime/redis_relay.go": "d0717fde50f3494be4731cb964c060faa54d761f2eaa6c3e1464158e53a58846",
+    "server/tests/parity/go_relay_consumers/main.go": "b78fae37f3effd28ba13a7118dd8071f838ea97986590b060e55ec3f3d85ed40",
+    "server/tests/parity/go_relay_consumers/wrapper.go": "c915b18c2e62b43f9fe9956c70ed2bdc607768d7bd319e466c52ed39804db4dd",
+    "server/src/workpal_backend/realtime/relay_consumers.py": "a69a2922a5ba244f3f6a4523680f21c8fb411d6524af2d9473bd0b79020cfdd7",
+    "server/src/workpal_backend/realtime/relay_consumer.py": "6639b2df113b0c2edafe4c923332d39aad11f0d908d3047d44e08df3c6c5190a"
+  },
+  "binary_sha256": "b8f7616c9b0b735ec33b3c689616c3e7facc457734ede4c6e62cd3574a9220e1"
+}

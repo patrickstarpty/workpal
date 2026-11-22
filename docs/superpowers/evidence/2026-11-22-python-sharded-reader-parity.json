@@ -1,0 +1,2023 @@
+{
+  "scope": "Original readShardOnce Redis arguments normalized to wire block milliseconds, cursor/return/metrics, invalid envelope advancement and actual Hub queue delivery. Nil/context/network error and parent-stop cases. No real Go Redis IO, generation reset loop or socket transport certification.",
+  "fixtures": [
+    {
+      "Error": "",
+      "Stop": false,
+      "Last": "0-0",
+      "Rows": [
+        {
+          "ID": "1-0",
+          "Values": {}
+        },
+        {
+          "ID": "2-0",
+          "Values": {
+            "payload_json": "missing scope"
+          }
+        },
+        {
+          "ID": "3-0",
+          "Values": {
+            "scope": "workspace",
+            "payload_json": "missing ID"
+          }
+        },
+        {
+          "ID": "4-0",
+          "Values": {
+            "scope": "workspace",
+            "scope_id": "w",
+            "payload_json": "{\"type\":\"fixture\"}",
+            "event_id": "e"
+          }
+        },
+        {
+          "ID": "5-0",
+          "Values": {
+            "scope": "workspace",
+            "scope_id": "w",
+            "payload_json": "{\"type\":\"fixture\"}",
+            "event_id": "e"
+          }
+        },
+        {
+          "ID": "6-0",
+          "Values": {
+            "scope": "global",
+            "scope_id": "all",
+            "payload_json": "global"
+          }
+        },
+        {
+          "ID": "7-0",
+          "Values": {
+            "scope": "workspace",
+            "scope_id": "foreign",
+            "payload_json": "hidden"
+          }
+        },
+        {
+          "ID": "8-0",
+          "Values": {
+            "scope": "daemon_runtime",
+            "scope_id": "r",
+            "payload_json": "daemon"
+          }
+        },
+        {
+          "ID": "9-0",
+          "Values": {
+            "scope": "workspace",
+            "scope_id": "w",
+            "payload_json": 3
+          }
+        }
+      ],
+      "Block": 0
+    },
+    {
+      "Error": "",
+      "Stop": true,
+      "Last": "0-0",
+      "Rows": [
+        {
+          "ID": "1-0",
+          "Values": {}
+        },
+        {
+          "ID": "2-0",
+          "Values": {
+            "payload_json": "missing scope"
+          }
+        },
+        {
+          "ID": "3-0",
+          "Values": {
+            "scope": "workspace",
+            "payload_json": "missing ID"
+          }
+        },
+        {
+          "ID": "4-0",
+          "Values": {
+            "scope": "workspace",
+            "scope_id": "w",
+            "payload_json": "{\"type\":\"fixture\"}",
+            "event_id": "e"
+          }
+        },
+        {
+          "ID": "5-0",
+          "Values": {
+            "scope": "workspace",
+            "scope_id": "w",
+            "payload_json": "{\"type\":\"fixture\"}",
+            "event_id": "e"
+          }
+        },
+        {
+          "ID": "6-0",
+          "Values": {
+            "scope": "global",
+            "scope_id": "all",
+            "payload_json": "global"
+          }
+        },
+        {
+          "ID": "7-0",
+          "Values": {
+            "scope": "workspace",
+            "scope_id": "foreign",
+            "payload_json": "hidden"
+          }
+        },
+        {
+          "ID": "8-0",
+          "Values": {
+            "scope": "daemon_runtime",
+            "scope_id": "r",
+            "payload_json": "daemon"
+          }
+        },
+        {
+          "ID": "9-0",
+          "Values": {
+            "scope": "workspace",
+            "scope_id": "w",
+            "payload_json": 3
+          }
+        }
+      ],
+      "Block": 0
+    },
+    {
+      "Error": "nil",
+      "Stop": false,
+      "Last": "0-0",
+      "Rows": [
+        {
+          "ID": "1-0",
+          "Values": {}
+        },
+        {
+          "ID": "2-0",
+          "Values": {
+            "payload_json": "missing scope"
+          }
+        },
+        {
+          "ID": "3-0",
+          "Values": {
+            "scope": "workspace",
+            "payload_json": "missing ID"
+          }
+        },
+        {
+          "ID": "4-0",
+          "Values": {
+            "scope": "workspace",
+            "scope_id": "w",
+            "payload_json": "{\"type\":\"fixture\"}",
+            "event_id": "e"
+          }
+        },
+        {
+          "ID": "5-0",
+          "Values": {
+            "scope": "workspace",
+            "scope_id": "w",
+            "payload_json": "{\"type\":\"fixture\"}",
+            "event_id": "e"
+          }
+        },
+        {
+          "ID": "6-0",
+          "Values": {
+            "scope": "global",
+            "scope_id": "all",
+            "payload_json": "global"
+          }
+        },
+        {
+          "ID": "7-0",
+          "Values": {
+            "scope": "workspace",
+            "scope_id": "foreign",
+            "payload_json": "hidden"
+          }
+        },
+        {
+          "ID": "8-0",
+          "Values": {
+            "scope": "daemon_runtime",
+            "scope_id": "r",
+            "payload_json": "daemon"
+          }
+        },
+        {
+          "ID": "9-0",
+          "Values": {
+            "scope": "workspace",
+            "scope_id": "w",
+            "payload_json": 3
+          }
+        }
+      ],
+      "Block": 0
+    },
+    {
+      "Error": "nil",
+      "Stop": true,
+      "Last": "0-0",
+      "Rows": [
+        {
+          "ID": "1-0",
+          "Values": {}
+        },
+        {
+          "ID": "2-0",
+          "Values": {
+            "payload_json": "missing scope"
+          }
+        },
+        {
+          "ID": "3-0",
+          "Values": {
+            "scope": "workspace",
+            "payload_json": "missing ID"
+          }
+        },
+        {
+          "ID": "4-0",
+          "Values": {
+            "scope": "workspace",
+            "scope_id": "w",
+            "payload_json": "{\"type\":\"fixture\"}",
+            "event_id": "e"
+          }
+        },
+        {
+          "ID": "5-0",
+          "Values": {
+            "scope": "workspace",
+            "scope_id": "w",
+            "payload_json": "{\"type\":\"fixture\"}",
+            "event_id": "e"
+          }
+        },
+        {
+          "ID": "6-0",
+          "Values": {
+            "scope": "global",
+            "scope_id": "all",
+            "payload_json": "global"
+          }
+        },
+        {
+          "ID": "7-0",
+          "Values": {
+            "scope": "workspace",
+            "scope_id": "foreign",
+            "payload_json": "hidden"
+          }
+        },
+        {
+          "ID": "8-0",
+          "Values": {
+            "scope": "daemon_runtime",
+            "scope_id": "r",
+            "payload_json": "daemon"
+          }
+        },
+        {
+          "ID": "9-0",
+          "Values": {
+            "scope": "workspace",
+            "scope_id": "w",
+            "payload_json": 3
+          }
+        }
+      ],
+      "Block": 0
+    },
+    {
+      "Error": "deadline",
+      "Stop": false,
+      "Last": "0-0",
+      "Rows": [
+        {
+          "ID": "1-0",
+          "Values": {}
+        },
+        {
+          "ID": "2-0",
+          "Values": {
+            "payload_json": "missing scope"
+          }
+        },
+        {
+          "ID": "3-0",
+          "Values": {
+            "scope": "workspace",
+            "payload_json": "missing ID"
+          }
+        },
+        {
+          "ID": "4-0",
+          "Values": {
+            "scope": "workspace",
+            "scope_id": "w",
+            "payload_json": "{\"type\":\"fixture\"}",
+            "event_id": "e"
+          }
+        },
+        {
+          "ID": "5-0",
+          "Values": {
+            "scope": "workspace",
+            "scope_id": "w",
+            "payload_json": "{\"type\":\"fixture\"}",
+            "event_id": "e"
+          }
+        },
+        {
+          "ID": "6-0",
+          "Values": {
+            "scope": "global",
+            "scope_id": "all",
+            "payload_json": "global"
+          }
+        },
+        {
+          "ID": "7-0",
+          "Values": {
+            "scope": "workspace",
+            "scope_id": "foreign",
+            "payload_json": "hidden"
+          }
+        },
+        {
+          "ID": "8-0",
+          "Values": {
+            "scope": "daemon_runtime",
+            "scope_id": "r",
+            "payload_json": "daemon"
+          }
+        },
+        {
+          "ID": "9-0",
+          "Values": {
+            "scope": "workspace",
+            "scope_id": "w",
+            "payload_json": 3
+          }
+        }
+      ],
+      "Block": 0
+    },
+    {
+      "Error": "deadline",
+      "Stop": true,
+      "Last": "0-0",
+      "Rows": [
+        {
+          "ID": "1-0",
+          "Values": {}
+        },
+        {
+          "ID": "2-0",
+          "Values": {
+            "payload_json": "missing scope"
+          }
+        },
+        {
+          "ID": "3-0",
+          "Values": {
+            "scope": "workspace",
+            "payload_json": "missing ID"
+          }
+        },
+        {
+          "ID": "4-0",
+          "Values": {
+            "scope": "workspace",
+            "scope_id": "w",
+            "payload_json": "{\"type\":\"fixture\"}",
+            "event_id": "e"
+          }
+        },
+        {
+          "ID": "5-0",
+          "Values": {
+            "scope": "workspace",
+            "scope_id": "w",
+            "payload_json": "{\"type\":\"fixture\"}",
+            "event_id": "e"
+          }
+        },
+        {
+          "ID": "6-0",
+          "Values": {
+            "scope": "global",
+            "scope_id": "all",
+            "payload_json": "global"
+          }
+        },
+        {
+          "ID": "7-0",
+          "Values": {
+            "scope": "workspace",
+            "scope_id": "foreign",
+            "payload_json": "hidden"
+          }
+        },
+        {
+          "ID": "8-0",
+          "Values": {
+            "scope": "daemon_runtime",
+            "scope_id": "r",
+            "payload_json": "daemon"
+          }
+        },
+        {
+          "ID": "9-0",
+          "Values": {
+            "scope": "workspace",
+            "scope_id": "w",
+            "payload_json": 3
+          }
+        }
+      ],
+      "Block": 0
+    },
+    {
+      "Error": "canceled",
+      "Stop": false,
+      "Last": "0-0",
+      "Rows": [
+        {
+          "ID": "1-0",
+          "Values": {}
+        },
+        {
+          "ID": "2-0",
+          "Values": {
+            "payload_json": "missing scope"
+          }
+        },
+        {
+          "ID": "3-0",
+          "Values": {
+            "scope": "workspace",
+            "payload_json": "missing ID"
+          }
+        },
+        {
+          "ID": "4-0",
+          "Values": {
+            "scope": "workspace",
+            "scope_id": "w",
+            "payload_json": "{\"type\":\"fixture\"}",
+            "event_id": "e"
+          }
+        },
+        {
+          "ID": "5-0",
+          "Values": {
+            "scope": "workspace",
+            "scope_id": "w",
+            "payload_json": "{\"type\":\"fixture\"}",
+            "event_id": "e"
+          }
+        },
+        {
+          "ID": "6-0",
+          "Values": {
+            "scope": "global",
+            "scope_id": "all",
+            "payload_json": "global"
+          }
+        },
+        {
+          "ID": "7-0",
+          "Values": {
+            "scope": "workspace",
+            "scope_id": "foreign",
+            "payload_json": "hidden"
+          }
+        },
+        {
+          "ID": "8-0",
+          "Values": {
+            "scope": "daemon_runtime",
+            "scope_id": "r",
+            "payload_json": "daemon"
+          }
+        },
+        {
+          "ID": "9-0",
+          "Values": {
+            "scope": "workspace",
+            "scope_id": "w",
+            "payload_json": 3
+          }
+        }
+      ],
+      "Block": 0
+    },
+    {
+      "Error": "canceled",
+      "Stop": true,
+      "Last": "0-0",
+      "Rows": [
+        {
+          "ID": "1-0",
+          "Values": {}
+        },
+        {
+          "ID": "2-0",
+          "Values": {
+            "payload_json": "missing scope"
+          }
+        },
+        {
+          "ID": "3-0",
+          "Values": {
+            "scope": "workspace",
+            "payload_json": "missing ID"
+          }
+        },
+        {
+          "ID": "4-0",
+          "Values": {
+            "scope": "workspace",
+            "scope_id": "w",
+            "payload_json": "{\"type\":\"fixture\"}",
+            "event_id": "e"
+          }
+        },
+        {
+          "ID": "5-0",
+          "Values": {
+            "scope": "workspace",
+            "scope_id": "w",
+            "payload_json": "{\"type\":\"fixture\"}",
+            "event_id": "e"
+          }
+        },
+        {
+          "ID": "6-0",
+          "Values": {
+            "scope": "global",
+            "scope_id": "all",
+            "payload_json": "global"
+          }
+        },
+        {
+          "ID": "7-0",
+          "Values": {
+            "scope": "workspace",
+            "scope_id": "foreign",
+            "payload_json": "hidden"
+          }
+        },
+        {
+          "ID": "8-0",
+          "Values": {
+            "scope": "daemon_runtime",
+            "scope_id": "r",
+            "payload_json": "daemon"
+          }
+        },
+        {
+          "ID": "9-0",
+          "Values": {
+            "scope": "workspace",
+            "scope_id": "w",
+            "payload_json": 3
+          }
+        }
+      ],
+      "Block": 0
+    },
+    {
+      "Error": "network",
+      "Stop": false,
+      "Last": "0-0",
+      "Rows": [
+        {
+          "ID": "1-0",
+          "Values": {}
+        },
+        {
+          "ID": "2-0",
+          "Values": {
+            "payload_json": "missing scope"
+          }
+        },
+        {
+          "ID": "3-0",
+          "Values": {
+            "scope": "workspace",
+            "payload_json": "missing ID"
+          }
+        },
+        {
+          "ID": "4-0",
+          "Values": {
+            "scope": "workspace",
+            "scope_id": "w",
+            "payload_json": "{\"type\":\"fixture\"}",
+            "event_id": "e"
+          }
+        },
+        {
+          "ID": "5-0",
+          "Values": {
+            "scope": "workspace",
+            "scope_id": "w",
+            "payload_json": "{\"type\":\"fixture\"}",
+            "event_id": "e"
+          }
+        },
+        {
+          "ID": "6-0",
+          "Values": {
+            "scope": "global",
+            "scope_id": "all",
+            "payload_json": "global"
+          }
+        },
+        {
+          "ID": "7-0",
+          "Values": {
+            "scope": "workspace",
+            "scope_id": "foreign",
+            "payload_json": "hidden"
+          }
+        },
+        {
+          "ID": "8-0",
+          "Values": {
+            "scope": "daemon_runtime",
+            "scope_id": "r",
+            "payload_json": "daemon"
+          }
+        },
+        {
+          "ID": "9-0",
+          "Values": {
+            "scope": "workspace",
+            "scope_id": "w",
+            "payload_json": 3
+          }
+        }
+      ],
+      "Block": 0
+    },
+    {
+      "Error": "network",
+      "Stop": true,
+      "Last": "0-0",
+      "Rows": [
+        {
+          "ID": "1-0",
+          "Values": {}
+        },
+        {
+          "ID": "2-0",
+          "Values": {
+            "payload_json": "missing scope"
+          }
+        },
+        {
+          "ID": "3-0",
+          "Values": {
+            "scope": "workspace",
+            "payload_json": "missing ID"
+          }
+        },
+        {
+          "ID": "4-0",
+          "Values": {
+            "scope": "workspace",
+            "scope_id": "w",
+            "payload_json": "{\"type\":\"fixture\"}",
+            "event_id": "e"
+          }
+        },
+        {
+          "ID": "5-0",
+          "Values": {
+            "scope": "workspace",
+            "scope_id": "w",
+            "payload_json": "{\"type\":\"fixture\"}",
+            "event_id": "e"
+          }
+        },
+        {
+          "ID": "6-0",
+          "Values": {
+            "scope": "global",
+            "scope_id": "all",
+            "payload_json": "global"
+          }
+        },
+        {
+          "ID": "7-0",
+          "Values": {
+            "scope": "workspace",
+            "scope_id": "foreign",
+            "payload_json": "hidden"
+          }
+        },
+        {
+          "ID": "8-0",
+          "Values": {
+            "scope": "daemon_runtime",
+            "scope_id": "r",
+            "payload_json": "daemon"
+          }
+        },
+        {
+          "ID": "9-0",
+          "Values": {
+            "scope": "workspace",
+            "scope_id": "w",
+            "payload_json": 3
+          }
+        }
+      ],
+      "Block": 0
+    },
+    {
+      "Error": "",
+      "Stop": false,
+      "Last": "123-4",
+      "Rows": [],
+      "Block": 1
+    },
+    {
+      "Error": "",
+      "Stop": false,
+      "Last": "123-4",
+      "Rows": [],
+      "Block": 1000000
+    },
+    {
+      "Error": "",
+      "Stop": false,
+      "Last": "123-4",
+      "Rows": [],
+      "Block": 5000000000
+    },
+    {
+      "Error": "",
+      "Stop": false,
+      "Last": "123-4",
+      "Rows": [
+        {
+          "ID": "1-0",
+          "Values": {}
+        },
+        {
+          "ID": "2-0",
+          "Values": {
+            "payload_json": "missing scope"
+          }
+        },
+        {
+          "ID": "3-0",
+          "Values": {
+            "scope": "workspace",
+            "payload_json": "missing ID"
+          }
+        }
+      ],
+      "Block": 1
+    },
+    {
+      "Error": "",
+      "Stop": false,
+      "Last": "123-4",
+      "Rows": [
+        {
+          "ID": "1-0",
+          "Values": {}
+        },
+        {
+          "ID": "2-0",
+          "Values": {
+            "payload_json": "missing scope"
+          }
+        },
+        {
+          "ID": "3-0",
+          "Values": {
+            "scope": "workspace",
+            "payload_json": "missing ID"
+          }
+        }
+      ],
+      "Block": 1000000
+    },
+    {
+      "Error": "",
+      "Stop": false,
+      "Last": "123-4",
+      "Rows": [
+        {
+          "ID": "1-0",
+          "Values": {}
+        },
+        {
+          "ID": "2-0",
+          "Values": {
+            "payload_json": "missing scope"
+          }
+        },
+        {
+          "ID": "3-0",
+          "Values": {
+            "scope": "workspace",
+            "payload_json": "missing ID"
+          }
+        }
+      ],
+      "Block": 5000000000
+    },
+    {
+      "Error": "",
+      "Stop": false,
+      "Last": "123-4",
+      "Rows": [
+        {
+          "ID": "4-0",
+          "Values": {
+            "scope": "workspace",
+            "scope_id": "w",
+            "payload_json": "{\"type\":\"fixture\"}",
+            "event_id": "e"
+          }
+        },
+        {
+          "ID": "5-0",
+          "Values": {
+            "scope": "workspace",
+            "scope_id": "w",
+            "payload_json": "{\"type\":\"fixture\"}",
+            "event_id": "e"
+          }
+        }
+      ],
+      "Block": 1
+    },
+    {
+      "Error": "",
+      "Stop": false,
+      "Last": "123-4",
+      "Rows": [
+        {
+          "ID": "4-0",
+          "Values": {
+            "scope": "workspace",
+            "scope_id": "w",
+            "payload_json": "{\"type\":\"fixture\"}",
+            "event_id": "e"
+          }
+        },
+        {
+          "ID": "5-0",
+          "Values": {
+            "scope": "workspace",
+            "scope_id": "w",
+            "payload_json": "{\"type\":\"fixture\"}",
+            "event_id": "e"
+          }
+        }
+      ],
+      "Block": 1000000
+    },
+    {
+      "Error": "",
+      "Stop": false,
+      "Last": "123-4",
+      "Rows": [
+        {
+          "ID": "4-0",
+          "Values": {
+            "scope": "workspace",
+            "scope_id": "w",
+            "payload_json": "{\"type\":\"fixture\"}",
+            "event_id": "e"
+          }
+        },
+        {
+          "ID": "5-0",
+          "Values": {
+            "scope": "workspace",
+            "scope_id": "w",
+            "payload_json": "{\"type\":\"fixture\"}",
+            "event_id": "e"
+          }
+        }
+      ],
+      "Block": 5000000000
+    },
+    {
+      "Error": "",
+      "Stop": false,
+      "Last": "123-4",
+      "Rows": [
+        {
+          "ID": "6-0",
+          "Values": {
+            "scope": "global",
+            "scope_id": "all",
+            "payload_json": "global"
+          }
+        },
+        {
+          "ID": "7-0",
+          "Values": {
+            "scope": "workspace",
+            "scope_id": "foreign",
+            "payload_json": "hidden"
+          }
+        },
+        {
+          "ID": "8-0",
+          "Values": {
+            "scope": "daemon_runtime",
+            "scope_id": "r",
+            "payload_json": "daemon"
+          }
+        },
+        {
+          "ID": "9-0",
+          "Values": {
+            "scope": "workspace",
+            "scope_id": "w",
+            "payload_json": 3
+          }
+        }
+      ],
+      "Block": 1
+    },
+    {
+      "Error": "",
+      "Stop": false,
+      "Last": "123-4",
+      "Rows": [
+        {
+          "ID": "6-0",
+          "Values": {
+            "scope": "global",
+            "scope_id": "all",
+            "payload_json": "global"
+          }
+        },
+        {
+          "ID": "7-0",
+          "Values": {
+            "scope": "workspace",
+            "scope_id": "foreign",
+            "payload_json": "hidden"
+          }
+        },
+        {
+          "ID": "8-0",
+          "Values": {
+            "scope": "daemon_runtime",
+            "scope_id": "r",
+            "payload_json": "daemon"
+          }
+        },
+        {
+          "ID": "9-0",
+          "Values": {
+            "scope": "workspace",
+            "scope_id": "w",
+            "payload_json": 3
+          }
+        }
+      ],
+      "Block": 1000000
+    },
+    {
+      "Error": "",
+      "Stop": false,
+      "Last": "123-4",
+      "Rows": [
+        {
+          "ID": "6-0",
+          "Values": {
+            "scope": "global",
+            "scope_id": "all",
+            "payload_json": "global"
+          }
+        },
+        {
+          "ID": "7-0",
+          "Values": {
+            "scope": "workspace",
+            "scope_id": "foreign",
+            "payload_json": "hidden"
+          }
+        },
+        {
+          "ID": "8-0",
+          "Values": {
+            "scope": "daemon_runtime",
+            "scope_id": "r",
+            "payload_json": "daemon"
+          }
+        },
+        {
+          "ID": "9-0",
+          "Values": {
+            "scope": "workspace",
+            "scope_id": "w",
+            "payload_json": 3
+          }
+        }
+      ],
+      "Block": 5000000000
+    }
+  ],
+  "go": [
+    {
+      "calls": [
+        {
+          "block": 5000,
+          "count": 128,
+          "streams": [
+            "ws:relay:shard:0",
+            "0-0"
+          ]
+        }
+      ],
+      "frames": [
+        "eyJldmVudF9pZCI6ImUiLCJ0eXBlIjoiZml4dHVyZSJ9",
+        "Z2xvYmFs"
+      ],
+      "last": "9-0",
+      "metrics": [
+        9,
+        0,
+        0,
+        ""
+      ],
+      "more": true
+    },
+    {
+      "calls": [
+        {
+          "block": 5000,
+          "count": 128,
+          "streams": [
+            "ws:relay:shard:0",
+            "0-0"
+          ]
+        }
+      ],
+      "frames": [
+        "eyJldmVudF9pZCI6ImUiLCJ0eXBlIjoiZml4dHVyZSJ9",
+        "Z2xvYmFs"
+      ],
+      "last": "9-0",
+      "metrics": [
+        9,
+        0,
+        0,
+        ""
+      ],
+      "more": true
+    },
+    {
+      "calls": [
+        {
+          "block": 5000,
+          "count": 128,
+          "streams": [
+            "ws:relay:shard:0",
+            "0-0"
+          ]
+        }
+      ],
+      "frames": [],
+      "last": "0-0",
+      "metrics": [
+        0,
+        0,
+        0,
+        ""
+      ],
+      "more": true
+    },
+    {
+      "calls": [
+        {
+          "block": 5000,
+          "count": 128,
+          "streams": [
+            "ws:relay:shard:0",
+            "0-0"
+          ]
+        }
+      ],
+      "frames": [],
+      "last": "0-0",
+      "metrics": [
+        0,
+        0,
+        0,
+        ""
+      ],
+      "more": true
+    },
+    {
+      "calls": [
+        {
+          "block": 5000,
+          "count": 128,
+          "streams": [
+            "ws:relay:shard:0",
+            "0-0"
+          ]
+        }
+      ],
+      "frames": [],
+      "last": "0-0",
+      "metrics": [
+        0,
+        0,
+        0,
+        ""
+      ],
+      "more": true
+    },
+    {
+      "calls": [
+        {
+          "block": 5000,
+          "count": 128,
+          "streams": [
+            "ws:relay:shard:0",
+            "0-0"
+          ]
+        }
+      ],
+      "frames": [],
+      "last": "0-0",
+      "metrics": [
+        0,
+        0,
+        0,
+        ""
+      ],
+      "more": true
+    },
+    {
+      "calls": [
+        {
+          "block": 5000,
+          "count": 128,
+          "streams": [
+            "ws:relay:shard:0",
+            "0-0"
+          ]
+        }
+      ],
+      "frames": [],
+      "last": "0-0",
+      "metrics": [
+        0,
+        0,
+        0,
+        ""
+      ],
+      "more": true
+    },
+    {
+      "calls": [
+        {
+          "block": 5000,
+          "count": 128,
+          "streams": [
+            "ws:relay:shard:0",
+            "0-0"
+          ]
+        }
+      ],
+      "frames": [],
+      "last": "0-0",
+      "metrics": [
+        0,
+        0,
+        0,
+        ""
+      ],
+      "more": true
+    },
+    {
+      "calls": [
+        {
+          "block": 5000,
+          "count": 128,
+          "streams": [
+            "ws:relay:shard:0",
+            "0-0"
+          ]
+        }
+      ],
+      "frames": [],
+      "last": "0-0",
+      "metrics": [
+        0,
+        1,
+        0,
+        "io unavailable"
+      ],
+      "more": true
+    },
+    {
+      "calls": [
+        {
+          "block": 5000,
+          "count": 128,
+          "streams": [
+            "ws:relay:shard:0",
+            "0-0"
+          ]
+        }
+      ],
+      "frames": [],
+      "last": "0-0",
+      "metrics": [
+        0,
+        1,
+        0,
+        "io unavailable"
+      ],
+      "more": false
+    },
+    {
+      "calls": [
+        {
+          "block": 1,
+          "count": 128,
+          "streams": [
+            "ws:relay:shard:0",
+            "123-4"
+          ]
+        }
+      ],
+      "frames": [],
+      "last": "123-4",
+      "metrics": [
+        0,
+        0,
+        0,
+        ""
+      ],
+      "more": true
+    },
+    {
+      "calls": [
+        {
+          "block": 1,
+          "count": 128,
+          "streams": [
+            "ws:relay:shard:0",
+            "123-4"
+          ]
+        }
+      ],
+      "frames": [],
+      "last": "123-4",
+      "metrics": [
+        0,
+        0,
+        0,
+        ""
+      ],
+      "more": true
+    },
+    {
+      "calls": [
+        {
+          "block": 5000,
+          "count": 128,
+          "streams": [
+            "ws:relay:shard:0",
+            "123-4"
+          ]
+        }
+      ],
+      "frames": [],
+      "last": "123-4",
+      "metrics": [
+        0,
+        0,
+        0,
+        ""
+      ],
+      "more": true
+    },
+    {
+      "calls": [
+        {
+          "block": 1,
+          "count": 128,
+          "streams": [
+            "ws:relay:shard:0",
+            "123-4"
+          ]
+        }
+      ],
+      "frames": [],
+      "last": "3-0",
+      "metrics": [
+        3,
+        0,
+        0,
+        ""
+      ],
+      "more": true
+    },
+    {
+      "calls": [
+        {
+          "block": 1,
+          "count": 128,
+          "streams": [
+            "ws:relay:shard:0",
+            "123-4"
+          ]
+        }
+      ],
+      "frames": [],
+      "last": "3-0",
+      "metrics": [
+        3,
+        0,
+        0,
+        ""
+      ],
+      "more": true
+    },
+    {
+      "calls": [
+        {
+          "block": 5000,
+          "count": 128,
+          "streams": [
+            "ws:relay:shard:0",
+            "123-4"
+          ]
+        }
+      ],
+      "frames": [],
+      "last": "3-0",
+      "metrics": [
+        3,
+        0,
+        0,
+        ""
+      ],
+      "more": true
+    },
+    {
+      "calls": [
+        {
+          "block": 1,
+          "count": 128,
+          "streams": [
+            "ws:relay:shard:0",
+            "123-4"
+          ]
+        }
+      ],
+      "frames": [
+        "eyJldmVudF9pZCI6ImUiLCJ0eXBlIjoiZml4dHVyZSJ9"
+      ],
+      "last": "5-0",
+      "metrics": [
+        2,
+        0,
+        0,
+        ""
+      ],
+      "more": true
+    },
+    {
+      "calls": [
+        {
+          "block": 1,
+          "count": 128,
+          "streams": [
+            "ws:relay:shard:0",
+            "123-4"
+          ]
+        }
+      ],
+      "frames": [
+        "eyJldmVudF9pZCI6ImUiLCJ0eXBlIjoiZml4dHVyZSJ9"
+      ],
+      "last": "5-0",
+      "metrics": [
+        2,
+        0,
+        0,
+        ""
+      ],
+      "more": true
+    },
+    {
+      "calls": [
+        {
+          "block": 5000,
+          "count": 128,
+          "streams": [
+            "ws:relay:shard:0",
+            "123-4"
+          ]
+        }
+      ],
+      "frames": [
+        "eyJldmVudF9pZCI6ImUiLCJ0eXBlIjoiZml4dHVyZSJ9"
+      ],
+      "last": "5-0",
+      "metrics": [
+        2,
+        0,
+        0,
+        ""
+      ],
+      "more": true
+    },
+    {
+      "calls": [
+        {
+          "block": 1,
+          "count": 128,
+          "streams": [
+            "ws:relay:shard:0",
+            "123-4"
+          ]
+        }
+      ],
+      "frames": [
+        "Z2xvYmFs"
+      ],
+      "last": "9-0",
+      "metrics": [
+        4,
+        0,
+        0,
+        ""
+      ],
+      "more": true
+    },
+    {
+      "calls": [
+        {
+          "block": 1,
+          "count": 128,
+          "streams": [
+            "ws:relay:shard:0",
+            "123-4"
+          ]
+        }
+      ],
+      "frames": [
+        "Z2xvYmFs"
+      ],
+      "last": "9-0",
+      "metrics": [
+        4,
+        0,
+        0,
+        ""
+      ],
+      "more": true
+    },
+    {
+      "calls": [
+        {
+          "block": 5000,
+          "count": 128,
+          "streams": [
+            "ws:relay:shard:0",
+            "123-4"
+          ]
+        }
+      ],
+      "frames": [
+        "Z2xvYmFs"
+      ],
+      "last": "9-0",
+      "metrics": [
+        4,
+        0,
+        0,
+        ""
+      ],
+      "more": true
+    }
+  ],
+  "python": [
+    {
+      "calls": [
+        {
+          "streams": [
+            "ws:relay:shard:0",
+            "0-0"
+          ],
+          "count": 128,
+          "block": 5000
+        }
+      ],
+      "more": true,
+      "last": "9-0",
+      "frames": [
+        "eyJldmVudF9pZCI6ImUiLCJ0eXBlIjoiZml4dHVyZSJ9",
+        "Z2xvYmFs"
+      ],
+      "metrics": [
+        9,
+        0,
+        0,
+        ""
+      ]
+    },
+    {
+      "calls": [
+        {
+          "streams": [
+            "ws:relay:shard:0",
+            "0-0"
+          ],
+          "count": 128,
+          "block": 5000
+        }
+      ],
+      "more": true,
+      "last": "9-0",
+      "frames": [
+        "eyJldmVudF9pZCI6ImUiLCJ0eXBlIjoiZml4dHVyZSJ9",
+        "Z2xvYmFs"
+      ],
+      "metrics": [
+        9,
+        0,
+        0,
+        ""
+      ]
+    },
+    {
+      "calls": [
+        {
+          "streams": [
+            "ws:relay:shard:0",
+            "0-0"
+          ],
+          "count": 128,
+          "block": 5000
+        }
+      ],
+      "more": true,
+      "last": "0-0",
+      "frames": [],
+      "metrics": [
+        0,
+        0,
+        0,
+        ""
+      ]
+    },
+    {
+      "calls": [
+        {
+          "streams": [
+            "ws:relay:shard:0",
+            "0-0"
+          ],
+          "count": 128,
+          "block": 5000
+        }
+      ],
+      "more": true,
+      "last": "0-0",
+      "frames": [],
+      "metrics": [
+        0,
+        0,
+        0,
+        ""
+      ]
+    },
+    {
+      "calls": [
+        {
+          "streams": [
+            "ws:relay:shard:0",
+            "0-0"
+          ],
+          "count": 128,
+          "block": 5000
+        }
+      ],
+      "more": true,
+      "last": "0-0",
+      "frames": [],
+      "metrics": [
+        0,
+        0,
+        0,
+        ""
+      ]
+    },
+    {
+      "calls": [
+        {
+          "streams": [
+            "ws:relay:shard:0",
+            "0-0"
+          ],
+          "count": 128,
+          "block": 5000
+        }
+      ],
+      "more": true,
+      "last": "0-0",
+      "frames": [],
+      "metrics": [
+        0,
+        0,
+        0,
+        ""
+      ]
+    },
+    {
+      "calls": [
+        {
+          "streams": [
+            "ws:relay:shard:0",
+            "0-0"
+          ],
+          "count": 128,
+          "block": 5000
+        }
+      ],
+      "more": true,
+      "last": "0-0",
+      "frames": [],
+      "metrics": [
+        0,
+        0,
+        0,
+        ""
+      ]
+    },
+    {
+      "calls": [
+        {
+          "streams": [
+            "ws:relay:shard:0",
+            "0-0"
+          ],
+          "count": 128,
+          "block": 5000
+        }
+      ],
+      "more": true,
+      "last": "0-0",
+      "frames": [],
+      "metrics": [
+        0,
+        0,
+        0,
+        ""
+      ]
+    },
+    {
+      "calls": [
+        {
+          "streams": [
+            "ws:relay:shard:0",
+            "0-0"
+          ],
+          "count": 128,
+          "block": 5000
+        }
+      ],
+      "more": true,
+      "last": "0-0",
+      "frames": [],
+      "metrics": [
+        0,
+        1,
+        0,
+        "io unavailable"
+      ]
+    },
+    {
+      "calls": [
+        {
+          "streams": [
+            "ws:relay:shard:0",
+            "0-0"
+          ],
+          "count": 128,
+          "block": 5000
+        }
+      ],
+      "more": false,
+      "last": "0-0",
+      "frames": [],
+      "metrics": [
+        0,
+        1,
+        0,
+        "io unavailable"
+      ]
+    },
+    {
+      "calls": [
+        {
+          "streams": [
+            "ws:relay:shard:0",
+            "123-4"
+          ],
+          "count": 128,
+          "block": 1
+        }
+      ],
+      "more": true,
+      "last": "123-4",
+      "frames": [],
+      "metrics": [
+        0,
+        0,
+        0,
+        ""
+      ]
+    },
+    {
+      "calls": [
+        {
+          "streams": [
+            "ws:relay:shard:0",
+            "123-4"
+          ],
+          "count": 128,
+          "block": 1
+        }
+      ],
+      "more": true,
+      "last": "123-4",
+      "frames": [],
+      "metrics": [
+        0,
+        0,
+        0,
+        ""
+      ]
+    },
+    {
+      "calls": [
+        {
+          "streams": [
+            "ws:relay:shard:0",
+            "123-4"
+          ],
+          "count": 128,
+          "block": 5000
+        }
+      ],
+      "more": true,
+      "last": "123-4",
+      "frames": [],
+      "metrics": [
+        0,
+        0,
+        0,
+        ""
+      ]
+    },
+    {
+      "calls": [
+        {
+          "streams": [
+            "ws:relay:shard:0",
+            "123-4"
+          ],
+          "count": 128,
+          "block": 1
+        }
+      ],
+      "more": true,
+      "last": "3-0",
+      "frames": [],
+      "metrics": [
+        3,
+        0,
+        0,
+        ""
+      ]
+    },
+    {
+      "calls": [
+        {
+          "streams": [
+            "ws:relay:shard:0",
+            "123-4"
+          ],
+          "count": 128,
+          "block": 1
+        }
+      ],
+      "more": true,
+      "last": "3-0",
+      "frames": [],
+      "metrics": [
+        3,
+        0,
+        0,
+        ""
+      ]
+    },
+    {
+      "calls": [
+        {
+          "streams": [
+            "ws:relay:shard:0",
+            "123-4"
+          ],
+          "count": 128,
+          "block": 5000
+        }
+      ],
+      "more": true,
+      "last": "3-0",
+      "frames": [],
+      "metrics": [
+        3,
+        0,
+        0,
+        ""
+      ]
+    },
+    {
+      "calls": [
+        {
+          "streams": [
+            "ws:relay:shard:0",
+            "123-4"
+          ],
+          "count": 128,
+          "block": 1
+        }
+      ],
+      "more": true,
+      "last": "5-0",
+      "frames": [
+        "eyJldmVudF9pZCI6ImUiLCJ0eXBlIjoiZml4dHVyZSJ9"
+      ],
+      "metrics": [
+        2,
+        0,
+        0,
+        ""
+      ]
+    },
+    {
+      "calls": [
+        {
+          "streams": [
+            "ws:relay:shard:0",
+            "123-4"
+          ],
+          "count": 128,
+          "block": 1
+        }
+      ],
+      "more": true,
+      "last": "5-0",
+      "frames": [
+        "eyJldmVudF9pZCI6ImUiLCJ0eXBlIjoiZml4dHVyZSJ9"
+      ],
+      "metrics": [
+        2,
+        0,
+        0,
+        ""
+      ]
+    },
+    {
+      "calls": [
+        {
+          "streams": [
+            "ws:relay:shard:0",
+            "123-4"
+          ],
+          "count": 128,
+          "block": 5000
+        }
+      ],
+      "more": true,
+      "last": "5-0",
+      "frames": [
+        "eyJldmVudF9pZCI6ImUiLCJ0eXBlIjoiZml4dHVyZSJ9"
+      ],
+      "metrics": [
+        2,
+        0,
+        0,
+        ""
+      ]
+    },
+    {
+      "calls": [
+        {
+          "streams": [
+            "ws:relay:shard:0",
+            "123-4"
+          ],
+          "count": 128,
+          "block": 1
+        }
+      ],
+      "more": true,
+      "last": "9-0",
+      "frames": [
+        "Z2xvYmFs"
+      ],
+      "metrics": [
+        4,
+        0,
+        0,
+        ""
+      ]
+    },
+    {
+      "calls": [
+        {
+          "streams": [
+            "ws:relay:shard:0",
+            "123-4"
+          ],
+          "count": 128,
+          "block": 1
+        }
+      ],
+      "more": true,
+      "last": "9-0",
+      "frames": [
+        "Z2xvYmFs"
+      ],
+      "metrics": [
+        4,
+        0,
+        0,
+        ""
+      ]
+    },
+    {
+      "calls": [
+        {
+          "streams": [
+            "ws:relay:shard:0",
+            "123-4"
+          ],
+          "count": 128,
+          "block": 5000
+        }
+      ],
+      "more": true,
+      "last": "9-0",
+      "frames": [
+        "Z2xvYmFs"
+      ],
+      "metrics": [
+        4,
+        0,
+        0,
+        ""
+      ]
+    }
+  ],
+  "mismatches": [],
+  "source_sha256": {
+    "server/go/internal/realtime/sharded_stream_relay.go": "672a624544ff57afd22973d160a4b5c47e8f0f4b65918cf5bc7b751ab63b0da2",
+    "server/tests/parity/go_sharded_reader/main.go": "b71a74f622d55d8df01649e6866409001fd1a29461209469066bd59871ba8a6d",
+    "server/tests/parity/go_sharded_reader/wrapper.go": "756a0fc0a370ddd1ab4977afbfde40c2a2544cfd2267808c136b05ecfd794d15",
+    "server/src/workpal_backend/realtime/sharded_reader.py": "82b4000a70cd5cf4b83fe586c43a5c9f0fa024137581908798f33621ae9f0dbc",
+    "server/src/workpal_backend/realtime/sharded_config.py": "d3c033c35f8f22cabe8c1c6bd05b2b8d6dcd1406f817ff53052af3c26fccfd7e",
+    "server/src/workpal_backend/realtime/hub.py": "c63cab50b5a339920478e96b63a3848ed133fb11e5cb83d6aa3b531c327d3ac4",
+    "server/src/workpal_backend/realtime/relay_delivery.py": "2f3a0caa3ab99628290b947c8dec6c5194786cb07b9a885382fc8b52f9c35a62"
+  }
+}

@@ -1,0 +1,1834 @@
+{
+  "scope": "JWT Auth status/identity/error body and listed explicit headers; no DB, renewals, or full transport claim",
+  "compared_headers": [
+    "content-type",
+    "x-content-type-options",
+    "x-fixture-user"
+  ],
+  "unverified": [
+    "Content-Length transport framing",
+    "other response headers",
+    "renewal cookies",
+    "PAT/task/cloud branches"
+  ],
+  "test_only": true,
+  "fixtures": [
+    {
+      "method": "GET",
+      "headers": {
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyIn0.AmjB64bqQtoy8gVtovTL4hZotdU-O2Z_KMNgoh1HNMM"
+      }
+    },
+    {
+      "method": "GET",
+      "headers": {
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyIiwiaWF0Ijo5OTk5OTk5OTk5fQ.PDFF68AOB6zD0tZi7LeY_1O6T8nzjEJHdCKXBg6UTC4"
+      }
+    },
+    {
+      "method": "GET",
+      "headers": {
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyIiwiaWF0IjoiaWdub3JlZCJ9.rOtWtvUT8UwQR7R2AQSLhjUWvY3oqG8DHjdn7ugtiJU"
+      }
+    },
+    {
+      "method": "GET",
+      "headers": {
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyIiwiZXhwIjowfQ.2WrocOmkY1_fUyJ86fLr_NS0_PNZ6S1zrTxcJ4P_RDI"
+      }
+    },
+    {
+      "method": "GET",
+      "headers": {
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyIiwiZXhwIjpudWxsfQ.3FcvAL69BmMyyr-lknertesh57BfoHOM_xD8lIdJ6cs"
+      }
+    },
+    {
+      "method": "GET",
+      "headers": {
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyIiwiZXhwIjoiNDEwMjQ0NDgwMCJ9.oUGQXESf-dq09yM-ssTTMr6-pormu8VPyWVtb5ZWSv4"
+      }
+    },
+    {
+      "method": "GET",
+      "headers": {
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyIiwiZXhwIjoxfQ.tBTWXgvok5DB9eUOXij-ouU6GmAiSsdKiQVqoXmoLus"
+      }
+    },
+    {
+      "method": "GET",
+      "headers": {
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyIiwibmJmIjo0MTAyNDQ0ODAwfQ.9oq_nSf87yEdI4Wa4LTgDBtzHiMH99L7FKt6oLdmC5w"
+      }
+    },
+    {
+      "method": "GET",
+      "headers": {
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyIiwibmJmIjpudWxsfQ.FdC7mQqp6JMm7JJd4V8CcQkTYsoDKJmlGT91eDqBB9U"
+      }
+    },
+    {
+      "method": "GET",
+      "headers": {
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyIiwibmJmIjowfQ.6UBmtoGu5g3zj_a7Ml0zzMznM6IB2oeAG635-pn1vRI"
+      }
+    },
+    {
+      "method": "GET",
+      "headers": {
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyIiwibmJmIjoxLjl9.PetjOwkyzwiulayTgQP2KHgg9lOiQakUHXirMHQLJzA"
+      }
+    },
+    {
+      "method": "GET",
+      "headers": {
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyIiwiZW1haWwiOjcsInNpZCI6bnVsbH0.zk8D5APL6qItTOLf1SeIaIKy1I4AAacP1RjIuheT-rk"
+      }
+    },
+    {
+      "method": "GET",
+      "headers": {
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.e30.TvjrZ6ikNGkPlIpLr2fbI2EPwyKdD8OOtDOOIOstOcI"
+      }
+    },
+    {
+      "method": "GET",
+      "headers": {
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjd9.0r3Wzjd-I7OiurNsSmu7E5OELF4HtDzpGqg3EOCH4W8"
+      }
+    },
+    {
+      "method": "GET",
+      "headers": {
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIgXHQifQ.TOCB3K8W-O4ZWMQ5U6BRPgfZHlEplAoCIGCvW0Vqh7Y"
+      }
+    },
+    {
+      "method": "GET",
+      "headers": {
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1MTQ0OTJmNy1iMzBmLTQxNDctYmQzMy1jMGU4Y2U1ZDZkNGYifQ.XO-w5rIkbiVRYwOIVlYwhEwnk32F3lVFJEnE59hSB4g"
+      }
+    },
+    {
+      "method": "GET",
+      "headers": {
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyIiwiZW1haWwiOiIgUERaWkVSNjhARU1CQVNTWUJBU0UuQ09NICJ9.hPR5QwS3oUDBqmXtnGEl0Dvbn_g_AXf74cSXuafArmA"
+      }
+    },
+    {
+      "method": "GET",
+      "headers": {
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyIiwiZXh0cmEiOk5hTn0.qYG8oQVcUG4U15S8_l7F_uoqfWEvSgJtJ5xI6l-DtzU"
+      }
+    },
+    {
+      "method": "GET",
+      "headers": {
+        "Authorization": "Bearer eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyIn0.SjBJM-vK5zUCKQuIzC7DUhICEOAC6jpjyE6PRm0cblVEW7yxrBBBq0vUbM-AYwpa"
+      }
+    },
+    {
+      "method": "GET",
+      "headers": {
+        "Authorization": "Bearer eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyIiwiaWF0Ijo5OTk5OTk5OTk5fQ.1Bu5zKCe7BM5vZOHb1lRUYHBHt9ZBJPCBUyahleg3BqDK99EokDhj3_yjQQ1z541"
+      }
+    },
+    {
+      "method": "GET",
+      "headers": {
+        "Authorization": "Bearer eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyIiwiaWF0IjoiaWdub3JlZCJ9.OjKhx1G_7bZYsuTZbJ1GmUmvzwPJMtl_i8oePA-ItmU5uI8mDPp_G1djR7IpQz0J"
+      }
+    },
+    {
+      "method": "GET",
+      "headers": {
+        "Authorization": "Bearer eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyIiwiZXhwIjowfQ.Bnhn4BNRDYeTq710HgNz19wik6BhJw6NHx0YzPQhsqIsRvHAmvlZbQnUE25oclj2"
+      }
+    },
+    {
+      "method": "GET",
+      "headers": {
+        "Authorization": "Bearer eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyIiwiZXhwIjpudWxsfQ.jhEwD3zKMCtZX5UYCdl04AnHoEB6eaRB8pCL-UgGlgdaeE-r0NpFGlvQ-m24yngn"
+      }
+    },
+    {
+      "method": "GET",
+      "headers": {
+        "Authorization": "Bearer eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyIiwiZXhwIjoiNDEwMjQ0NDgwMCJ9.bU0xRrJDCXEVRM8uGOY0Rja3KtEpIk-9etGfydNpmIkrv7L3ovDn17IALjqBJl0c"
+      }
+    },
+    {
+      "method": "GET",
+      "headers": {
+        "Authorization": "Bearer eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyIiwiZXhwIjoxfQ.kgH9gbGbeKGyhgpHTMiSMz6JHvSfJYjfj3FT2vube3TTe2DWOy75Y7bqLW-WdH_F"
+      }
+    },
+    {
+      "method": "GET",
+      "headers": {
+        "Authorization": "Bearer eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyIiwibmJmIjo0MTAyNDQ0ODAwfQ.1SKim55261NcAIqNHTcgMsNZv3VEkEUX9SXjTGKN1bE0AFq1HS0w-u-rsi0Xo55x"
+      }
+    },
+    {
+      "method": "GET",
+      "headers": {
+        "Authorization": "Bearer eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyIiwibmJmIjpudWxsfQ.jekzV-quVII5ZYPfAxrj3kCe_ev_pa8zUF3cbGzRMCl2d6Bgkoi1vHlDxWWf86_k"
+      }
+    },
+    {
+      "method": "GET",
+      "headers": {
+        "Authorization": "Bearer eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyIiwibmJmIjowfQ.fDCovusKFKL4pl4oKUPsdFgcS00Vpy-8DrhRv7ZhgypDay0uOk9wNPr00IbL0rkZ"
+      }
+    },
+    {
+      "method": "GET",
+      "headers": {
+        "Authorization": "Bearer eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyIiwibmJmIjoxLjl9.rKoml_HtfkLrk6oJ8wEghMXwtRv_2cloc83zJzpqogIVXqsFFmOH4d8m6L4SPpaq"
+      }
+    },
+    {
+      "method": "GET",
+      "headers": {
+        "Authorization": "Bearer eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyIiwiZW1haWwiOjcsInNpZCI6bnVsbH0.T6xnNqh8bgHuDQHPcG3A2ylUA7FPnKAm6bheTFInAkKLAKmRG5h1QqSSRKnpzxFL"
+      }
+    },
+    {
+      "method": "GET",
+      "headers": {
+        "Authorization": "Bearer eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.e30.J5z_EH7ytzhAOxs0j6-zn1P-94LjUNPUAcIHq6eF1M4VP4b0oC4uSnzT0ox91_1N"
+      }
+    },
+    {
+      "method": "GET",
+      "headers": {
+        "Authorization": "Bearer eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJzdWIiOjd9.lB-ur5-_44tSGjazR1FTZ5O0KXo5OtXUcyOIERTZx77XvI-AZZQ5-tZAuiWa8ZiF"
+      }
+    },
+    {
+      "method": "GET",
+      "headers": {
+        "Authorization": "Bearer eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIgXHQifQ.S4jM9wGbVYQFc7p7poJlUxvXdYsgdCOZHgoiPxacF0iKy35FjjzR4gw5NTw53jdX"
+      }
+    },
+    {
+      "method": "GET",
+      "headers": {
+        "Authorization": "Bearer eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1MTQ0OTJmNy1iMzBmLTQxNDctYmQzMy1jMGU4Y2U1ZDZkNGYifQ.GVkTbQRcEH4XO4PNLuxMBWeq_7lCYWcOTrDK1xizoslY4Lv4NTTYjRgse43F3yNI"
+      }
+    },
+    {
+      "method": "GET",
+      "headers": {
+        "Authorization": "Bearer eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyIiwiZW1haWwiOiIgUERaWkVSNjhARU1CQVNTWUJBU0UuQ09NICJ9.7njdHQFIogScw20KKQcy7MxY3ljtJaV_cD_mD6vpwfBiNfa8caLIlY9DMkZ25uAI"
+      }
+    },
+    {
+      "method": "GET",
+      "headers": {
+        "Authorization": "Bearer eyJhbGciOiJIUzM4NCIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyIiwiZXh0cmEiOk5hTn0.yghoACEi1bTthngy7KCjEB4A-xj_C2WBg792l2Jn6ih3q0LJJ44Calj40yy6UUaN"
+      }
+    },
+    {
+      "method": "GET",
+      "headers": {
+        "Authorization": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyIn0.ritBu4AtF3fI2pABAL83nMBZckLyOiXPidxun_AmQ5i8F8VdeEt_DTR9orUMD_sMMDsQ4rR-HJ5eIKtcvo14SA"
+      }
+    },
+    {
+      "method": "GET",
+      "headers": {
+        "Authorization": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyIiwiaWF0Ijo5OTk5OTk5OTk5fQ.VZuY691YFYpg4sK0LC7w4VQ92rA0BdnAoK8u_QnvlMIXFBK1K0PZhPPpCdRAhY8OGB8hx2PgR7hzquwZeoN6oA"
+      }
+    },
+    {
+      "method": "GET",
+      "headers": {
+        "Authorization": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyIiwiaWF0IjoiaWdub3JlZCJ9.9tN1hrR2JoOe4aNy6hw8dKxp87RP66P9RwNi_sIpud1mDIza4MGTHenEvUagGH9DrUTNfB_SXULge8xWjoiXCQ"
+      }
+    },
+    {
+      "method": "GET",
+      "headers": {
+        "Authorization": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyIiwiZXhwIjowfQ.gjOLK193zsQAkH0z8Q0yBS_aYRIMs8UyYzFoERt9_F2qrtHvMU0gNs_3yBUx1ICwZk1_E8RTRZMr-SusuSuiJA"
+      }
+    },
+    {
+      "method": "GET",
+      "headers": {
+        "Authorization": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyIiwiZXhwIjpudWxsfQ.YTW6s27D0h5aSZ-PIVrY6sAHYVfou5450WG2mMcQxCuffRZZOagP9crO0EtzLTS_VvGXgIfkVcqmNHTHlqqi3A"
+      }
+    },
+    {
+      "method": "GET",
+      "headers": {
+        "Authorization": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyIiwiZXhwIjoiNDEwMjQ0NDgwMCJ9.RJH3GirwXHiwAbkbogwihueAc4KGhGnh5990X0ps_KFLMgWzKpHoUmN1X1PBA1R-C0GQK9Gm1-XBosB2E7EUKQ"
+      }
+    },
+    {
+      "method": "GET",
+      "headers": {
+        "Authorization": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyIiwiZXhwIjoxfQ.WOJjbieMvNs9py8a4u15oQA9K37BcsJgmBo5ztNvFS5moUwGJsJZJQBeIhLRBCfEtXyxmaJiK6Sj-f1Dvr8thQ"
+      }
+    },
+    {
+      "method": "GET",
+      "headers": {
+        "Authorization": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyIiwibmJmIjo0MTAyNDQ0ODAwfQ.Bw6izSU9FjoCYi6bUQXMbzG6Uw-Xw0VWFInvedIGfUn382pv1kHv0Po7MU0dTE3n3Mz-xqC3OqCLQ6J-fLNzjQ"
+      }
+    },
+    {
+      "method": "GET",
+      "headers": {
+        "Authorization": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyIiwibmJmIjpudWxsfQ.QFovyWI8chtIhhE3rjNcPz6xq8xtCN1ahqyQX2I_hy7ewE_tFTmCwCH_W3exRsqlJYQBAs8xlaQqHkVSD-CCLQ"
+      }
+    },
+    {
+      "method": "GET",
+      "headers": {
+        "Authorization": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyIiwibmJmIjowfQ.LqrE_oSbe3hapIgF_qkfr5BGb4QJK4-9xItSySbOckDIx9d7BhwsywcZx5UHRgDPn3oz0qExieWrctbFhT_jxg"
+      }
+    },
+    {
+      "method": "GET",
+      "headers": {
+        "Authorization": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyIiwibmJmIjoxLjl9._Y-yUbBVHx5-us3sgadjhozGldiuS1Bo-jMwKPbRDCp8FaOeMLdgUFufog1welRbD4kiQWLUP7G9FD1r7UgUTg"
+      }
+    },
+    {
+      "method": "GET",
+      "headers": {
+        "Authorization": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyIiwiZW1haWwiOjcsInNpZCI6bnVsbH0.iIU769nxxAvxx7YdZyTLTwpj33Eubuf8NCJ_cCvM3WapWZTTwSqTh7l46c84Xa4kUqwveXPD5Y-uZpnyEJSArg"
+      }
+    },
+    {
+      "method": "GET",
+      "headers": {
+        "Authorization": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.e30.qTPdlr6cshC7WNWEHRt1SCr7shkHkTGhHUBvybxsYjAquMKCecM10TcRxJrKxklO2TKYsRfGv16tXNx_qM6D0Q"
+      }
+    },
+    {
+      "method": "GET",
+      "headers": {
+        "Authorization": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjd9.l9APgARMvYNS3tEQyadEZROXjY9igvWGUCqixDBLVbT3StaZUDnR8lA3S53SCrPNF3o5NFe1XrIpf9Tm0ZgsLw"
+      }
+    },
+    {
+      "method": "GET",
+      "headers": {
+        "Authorization": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIgXHQifQ.CN0lrRavsLSRuDmSCmB_y5Tz4p2_nRP1FpHa8hDTj8NvRe1Xvi74CWSB9cRja_aqNPF3br8Rbiix8Qmp_G1wYg"
+      }
+    },
+    {
+      "method": "GET",
+      "headers": {
+        "Authorization": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI1MTQ0OTJmNy1iMzBmLTQxNDctYmQzMy1jMGU4Y2U1ZDZkNGYifQ.DfSl7w1maoy66nkbg2SJ_hKqFUrGxzyEJmiKErJ0xrGhcaXwh0M2wyT7m1T9EWbC7ccMbzoQC1hDJxsTpY3JUA"
+      }
+    },
+    {
+      "method": "GET",
+      "headers": {
+        "Authorization": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyIiwiZW1haWwiOiIgUERaWkVSNjhARU1CQVNTWUJBU0UuQ09NICJ9.X9Rt7WrfkaSoFGLlKWHUp7xzDA54fEKNmFSp5NydmgohaG4mdz53kpypVrqdjSIFYKLiOSDLOYdQpODr_6861A"
+      }
+    },
+    {
+      "method": "GET",
+      "headers": {
+        "Authorization": "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyIiwiZXh0cmEiOk5hTn0.54p4DTqlAXYdomvSWy5jn0lOR1G6UyoiBl3RCGZ0YY--uhqiDmkM29H-2ER4EXr3dTzk7EYB-jTujhQamZTFBg"
+      }
+    },
+    {
+      "method": "GET",
+      "headers": {}
+    },
+    {
+      "method": "GET",
+      "headers": {
+        "Authorization": "Bearer invalid"
+      }
+    },
+    {
+      "method": "POST",
+      "headers": {
+        "Cookie": "workpal_auth=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyIiwic2lkIjoib2xkIiwiZXhwIjoxfQ.8V1vcCgC-vJiX4VAIhQAzgufdeVRNURSEOupZLis2-Q"
+      }
+    },
+    {
+      "method": "POST",
+      "headers": {
+        "Cookie": "workpal_auth=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ1c2VyIiwic2lkIjoib2xkIiwiZXhwIjoxfQ.8V1vcCgC-vJiX4VAIhQAzgufdeVRNURSEOupZLis2-Q",
+        "X-CSRF-Token": "608e066a23ecc983832dc396873a6956.b59a0360f2bc33cedf77b5a75bed9220d6bf41343c926ec5728736e6bc015218"
+      }
+    }
+  ],
+  "go": [
+    {
+      "body": "",
+      "headers": {
+        "x-fixture-user": [
+          "user"
+        ]
+      },
+      "status": 204,
+      "user_id": "user"
+    },
+    {
+      "body": "",
+      "headers": {
+        "x-fixture-user": [
+          "user"
+        ]
+      },
+      "status": 204,
+      "user_id": "user"
+    },
+    {
+      "body": "",
+      "headers": {
+        "x-fixture-user": [
+          "user"
+        ]
+      },
+      "status": 204,
+      "user_id": "user"
+    },
+    {
+      "body": "",
+      "headers": {
+        "x-fixture-user": [
+          "user"
+        ]
+      },
+      "status": 204,
+      "user_id": "user"
+    },
+    {
+      "body": "{\"error\":\"invalid token\"}\n",
+      "headers": {
+        "content-type": [
+          "text/plain; charset=utf-8"
+        ],
+        "x-content-type-options": [
+          "nosniff"
+        ]
+      },
+      "status": 401,
+      "user_id": ""
+    },
+    {
+      "body": "{\"error\":\"invalid token\"}\n",
+      "headers": {
+        "content-type": [
+          "text/plain; charset=utf-8"
+        ],
+        "x-content-type-options": [
+          "nosniff"
+        ]
+      },
+      "status": 401,
+      "user_id": ""
+    },
+    {
+      "body": "{\"error\":\"invalid token\"}\n",
+      "headers": {
+        "content-type": [
+          "text/plain; charset=utf-8"
+        ],
+        "x-content-type-options": [
+          "nosniff"
+        ]
+      },
+      "status": 401,
+      "user_id": ""
+    },
+    {
+      "body": "{\"error\":\"invalid token\"}\n",
+      "headers": {
+        "content-type": [
+          "text/plain; charset=utf-8"
+        ],
+        "x-content-type-options": [
+          "nosniff"
+        ]
+      },
+      "status": 401,
+      "user_id": ""
+    },
+    {
+      "body": "{\"error\":\"invalid token\"}\n",
+      "headers": {
+        "content-type": [
+          "text/plain; charset=utf-8"
+        ],
+        "x-content-type-options": [
+          "nosniff"
+        ]
+      },
+      "status": 401,
+      "user_id": ""
+    },
+    {
+      "body": "",
+      "headers": {
+        "x-fixture-user": [
+          "user"
+        ]
+      },
+      "status": 204,
+      "user_id": "user"
+    },
+    {
+      "body": "",
+      "headers": {
+        "x-fixture-user": [
+          "user"
+        ]
+      },
+      "status": 204,
+      "user_id": "user"
+    },
+    {
+      "body": "",
+      "headers": {
+        "x-fixture-user": [
+          "user"
+        ]
+      },
+      "status": 204,
+      "user_id": "user"
+    },
+    {
+      "body": "{\"error\":\"invalid claims\"}\n",
+      "headers": {
+        "content-type": [
+          "text/plain; charset=utf-8"
+        ],
+        "x-content-type-options": [
+          "nosniff"
+        ]
+      },
+      "status": 401,
+      "user_id": ""
+    },
+    {
+      "body": "{\"error\":\"invalid claims\"}\n",
+      "headers": {
+        "content-type": [
+          "text/plain; charset=utf-8"
+        ],
+        "x-content-type-options": [
+          "nosniff"
+        ]
+      },
+      "status": 401,
+      "user_id": ""
+    },
+    {
+      "body": "{\"error\":\"invalid claims\"}\n",
+      "headers": {
+        "content-type": [
+          "text/plain; charset=utf-8"
+        ],
+        "x-content-type-options": [
+          "nosniff"
+        ]
+      },
+      "status": 401,
+      "user_id": ""
+    },
+    {
+      "body": "{\"error\":\"account disabled\"}",
+      "headers": {
+        "content-type": [
+          "application/json"
+        ]
+      },
+      "status": 403,
+      "user_id": ""
+    },
+    {
+      "body": "{\"error\":\"account disabled\"}",
+      "headers": {
+        "content-type": [
+          "application/json"
+        ]
+      },
+      "status": 403,
+      "user_id": ""
+    },
+    {
+      "body": "{\"error\":\"invalid token\"}\n",
+      "headers": {
+        "content-type": [
+          "text/plain; charset=utf-8"
+        ],
+        "x-content-type-options": [
+          "nosniff"
+        ]
+      },
+      "status": 401,
+      "user_id": ""
+    },
+    {
+      "body": "",
+      "headers": {
+        "x-fixture-user": [
+          "user"
+        ]
+      },
+      "status": 204,
+      "user_id": "user"
+    },
+    {
+      "body": "",
+      "headers": {
+        "x-fixture-user": [
+          "user"
+        ]
+      },
+      "status": 204,
+      "user_id": "user"
+    },
+    {
+      "body": "",
+      "headers": {
+        "x-fixture-user": [
+          "user"
+        ]
+      },
+      "status": 204,
+      "user_id": "user"
+    },
+    {
+      "body": "",
+      "headers": {
+        "x-fixture-user": [
+          "user"
+        ]
+      },
+      "status": 204,
+      "user_id": "user"
+    },
+    {
+      "body": "{\"error\":\"invalid token\"}\n",
+      "headers": {
+        "content-type": [
+          "text/plain; charset=utf-8"
+        ],
+        "x-content-type-options": [
+          "nosniff"
+        ]
+      },
+      "status": 401,
+      "user_id": ""
+    },
+    {
+      "body": "{\"error\":\"invalid token\"}\n",
+      "headers": {
+        "content-type": [
+          "text/plain; charset=utf-8"
+        ],
+        "x-content-type-options": [
+          "nosniff"
+        ]
+      },
+      "status": 401,
+      "user_id": ""
+    },
+    {
+      "body": "{\"error\":\"invalid token\"}\n",
+      "headers": {
+        "content-type": [
+          "text/plain; charset=utf-8"
+        ],
+        "x-content-type-options": [
+          "nosniff"
+        ]
+      },
+      "status": 401,
+      "user_id": ""
+    },
+    {
+      "body": "{\"error\":\"invalid token\"}\n",
+      "headers": {
+        "content-type": [
+          "text/plain; charset=utf-8"
+        ],
+        "x-content-type-options": [
+          "nosniff"
+        ]
+      },
+      "status": 401,
+      "user_id": ""
+    },
+    {
+      "body": "{\"error\":\"invalid token\"}\n",
+      "headers": {
+        "content-type": [
+          "text/plain; charset=utf-8"
+        ],
+        "x-content-type-options": [
+          "nosniff"
+        ]
+      },
+      "status": 401,
+      "user_id": ""
+    },
+    {
+      "body": "",
+      "headers": {
+        "x-fixture-user": [
+          "user"
+        ]
+      },
+      "status": 204,
+      "user_id": "user"
+    },
+    {
+      "body": "",
+      "headers": {
+        "x-fixture-user": [
+          "user"
+        ]
+      },
+      "status": 204,
+      "user_id": "user"
+    },
+    {
+      "body": "",
+      "headers": {
+        "x-fixture-user": [
+          "user"
+        ]
+      },
+      "status": 204,
+      "user_id": "user"
+    },
+    {
+      "body": "{\"error\":\"invalid claims\"}\n",
+      "headers": {
+        "content-type": [
+          "text/plain; charset=utf-8"
+        ],
+        "x-content-type-options": [
+          "nosniff"
+        ]
+      },
+      "status": 401,
+      "user_id": ""
+    },
+    {
+      "body": "{\"error\":\"invalid claims\"}\n",
+      "headers": {
+        "content-type": [
+          "text/plain; charset=utf-8"
+        ],
+        "x-content-type-options": [
+          "nosniff"
+        ]
+      },
+      "status": 401,
+      "user_id": ""
+    },
+    {
+      "body": "{\"error\":\"invalid claims\"}\n",
+      "headers": {
+        "content-type": [
+          "text/plain; charset=utf-8"
+        ],
+        "x-content-type-options": [
+          "nosniff"
+        ]
+      },
+      "status": 401,
+      "user_id": ""
+    },
+    {
+      "body": "{\"error\":\"account disabled\"}",
+      "headers": {
+        "content-type": [
+          "application/json"
+        ]
+      },
+      "status": 403,
+      "user_id": ""
+    },
+    {
+      "body": "{\"error\":\"account disabled\"}",
+      "headers": {
+        "content-type": [
+          "application/json"
+        ]
+      },
+      "status": 403,
+      "user_id": ""
+    },
+    {
+      "body": "{\"error\":\"invalid token\"}\n",
+      "headers": {
+        "content-type": [
+          "text/plain; charset=utf-8"
+        ],
+        "x-content-type-options": [
+          "nosniff"
+        ]
+      },
+      "status": 401,
+      "user_id": ""
+    },
+    {
+      "body": "",
+      "headers": {
+        "x-fixture-user": [
+          "user"
+        ]
+      },
+      "status": 204,
+      "user_id": "user"
+    },
+    {
+      "body": "",
+      "headers": {
+        "x-fixture-user": [
+          "user"
+        ]
+      },
+      "status": 204,
+      "user_id": "user"
+    },
+    {
+      "body": "",
+      "headers": {
+        "x-fixture-user": [
+          "user"
+        ]
+      },
+      "status": 204,
+      "user_id": "user"
+    },
+    {
+      "body": "",
+      "headers": {
+        "x-fixture-user": [
+          "user"
+        ]
+      },
+      "status": 204,
+      "user_id": "user"
+    },
+    {
+      "body": "{\"error\":\"invalid token\"}\n",
+      "headers": {
+        "content-type": [
+          "text/plain; charset=utf-8"
+        ],
+        "x-content-type-options": [
+          "nosniff"
+        ]
+      },
+      "status": 401,
+      "user_id": ""
+    },
+    {
+      "body": "{\"error\":\"invalid token\"}\n",
+      "headers": {
+        "content-type": [
+          "text/plain; charset=utf-8"
+        ],
+        "x-content-type-options": [
+          "nosniff"
+        ]
+      },
+      "status": 401,
+      "user_id": ""
+    },
+    {
+      "body": "{\"error\":\"invalid token\"}\n",
+      "headers": {
+        "content-type": [
+          "text/plain; charset=utf-8"
+        ],
+        "x-content-type-options": [
+          "nosniff"
+        ]
+      },
+      "status": 401,
+      "user_id": ""
+    },
+    {
+      "body": "{\"error\":\"invalid token\"}\n",
+      "headers": {
+        "content-type": [
+          "text/plain; charset=utf-8"
+        ],
+        "x-content-type-options": [
+          "nosniff"
+        ]
+      },
+      "status": 401,
+      "user_id": ""
+    },
+    {
+      "body": "{\"error\":\"invalid token\"}\n",
+      "headers": {
+        "content-type": [
+          "text/plain; charset=utf-8"
+        ],
+        "x-content-type-options": [
+          "nosniff"
+        ]
+      },
+      "status": 401,
+      "user_id": ""
+    },
+    {
+      "body": "",
+      "headers": {
+        "x-fixture-user": [
+          "user"
+        ]
+      },
+      "status": 204,
+      "user_id": "user"
+    },
+    {
+      "body": "",
+      "headers": {
+        "x-fixture-user": [
+          "user"
+        ]
+      },
+      "status": 204,
+      "user_id": "user"
+    },
+    {
+      "body": "",
+      "headers": {
+        "x-fixture-user": [
+          "user"
+        ]
+      },
+      "status": 204,
+      "user_id": "user"
+    },
+    {
+      "body": "{\"error\":\"invalid claims\"}\n",
+      "headers": {
+        "content-type": [
+          "text/plain; charset=utf-8"
+        ],
+        "x-content-type-options": [
+          "nosniff"
+        ]
+      },
+      "status": 401,
+      "user_id": ""
+    },
+    {
+      "body": "{\"error\":\"invalid claims\"}\n",
+      "headers": {
+        "content-type": [
+          "text/plain; charset=utf-8"
+        ],
+        "x-content-type-options": [
+          "nosniff"
+        ]
+      },
+      "status": 401,
+      "user_id": ""
+    },
+    {
+      "body": "{\"error\":\"invalid claims\"}\n",
+      "headers": {
+        "content-type": [
+          "text/plain; charset=utf-8"
+        ],
+        "x-content-type-options": [
+          "nosniff"
+        ]
+      },
+      "status": 401,
+      "user_id": ""
+    },
+    {
+      "body": "{\"error\":\"account disabled\"}",
+      "headers": {
+        "content-type": [
+          "application/json"
+        ]
+      },
+      "status": 403,
+      "user_id": ""
+    },
+    {
+      "body": "{\"error\":\"account disabled\"}",
+      "headers": {
+        "content-type": [
+          "application/json"
+        ]
+      },
+      "status": 403,
+      "user_id": ""
+    },
+    {
+      "body": "{\"error\":\"invalid token\"}\n",
+      "headers": {
+        "content-type": [
+          "text/plain; charset=utf-8"
+        ],
+        "x-content-type-options": [
+          "nosniff"
+        ]
+      },
+      "status": 401,
+      "user_id": ""
+    },
+    {
+      "body": "{\"error\":\"missing authorization\"}\n",
+      "headers": {
+        "content-type": [
+          "text/plain; charset=utf-8"
+        ],
+        "x-content-type-options": [
+          "nosniff"
+        ]
+      },
+      "status": 401,
+      "user_id": ""
+    },
+    {
+      "body": "{\"error\":\"invalid token\"}\n",
+      "headers": {
+        "content-type": [
+          "text/plain; charset=utf-8"
+        ],
+        "x-content-type-options": [
+          "nosniff"
+        ]
+      },
+      "status": 401,
+      "user_id": ""
+    },
+    {
+      "body": "{\"error\":\"CSRF validation failed\"}\n",
+      "headers": {
+        "content-type": [
+          "text/plain; charset=utf-8"
+        ],
+        "x-content-type-options": [
+          "nosniff"
+        ]
+      },
+      "status": 403,
+      "user_id": ""
+    },
+    {
+      "body": "{\"error\":\"invalid token\"}\n",
+      "headers": {
+        "content-type": [
+          "text/plain; charset=utf-8"
+        ],
+        "x-content-type-options": [
+          "nosniff"
+        ]
+      },
+      "status": 401,
+      "user_id": ""
+    }
+  ],
+  "python": [
+    {
+      "status": 204,
+      "body": "",
+      "headers": {
+        "x-fixture-user": [
+          "user"
+        ]
+      },
+      "user_id": "user"
+    },
+    {
+      "status": 204,
+      "body": "",
+      "headers": {
+        "x-fixture-user": [
+          "user"
+        ]
+      },
+      "user_id": "user"
+    },
+    {
+      "status": 204,
+      "body": "",
+      "headers": {
+        "x-fixture-user": [
+          "user"
+        ]
+      },
+      "user_id": "user"
+    },
+    {
+      "status": 204,
+      "body": "",
+      "headers": {
+        "x-fixture-user": [
+          "user"
+        ]
+      },
+      "user_id": "user"
+    },
+    {
+      "status": 401,
+      "body": "{\"error\":\"invalid token\"}\n",
+      "headers": {
+        "x-content-type-options": [
+          "nosniff"
+        ],
+        "content-length": [
+          "26"
+        ],
+        "content-type": [
+          "text/plain; charset=utf-8"
+        ]
+      },
+      "user_id": ""
+    },
+    {
+      "status": 401,
+      "body": "{\"error\":\"invalid token\"}\n",
+      "headers": {
+        "x-content-type-options": [
+          "nosniff"
+        ],
+        "content-length": [
+          "26"
+        ],
+        "content-type": [
+          "text/plain; charset=utf-8"
+        ]
+      },
+      "user_id": ""
+    },
+    {
+      "status": 401,
+      "body": "{\"error\":\"invalid token\"}\n",
+      "headers": {
+        "x-content-type-options": [
+          "nosniff"
+        ],
+        "content-length": [
+          "26"
+        ],
+        "content-type": [
+          "text/plain; charset=utf-8"
+        ]
+      },
+      "user_id": ""
+    },
+    {
+      "status": 401,
+      "body": "{\"error\":\"invalid token\"}\n",
+      "headers": {
+        "x-content-type-options": [
+          "nosniff"
+        ],
+        "content-length": [
+          "26"
+        ],
+        "content-type": [
+          "text/plain; charset=utf-8"
+        ]
+      },
+      "user_id": ""
+    },
+    {
+      "status": 401,
+      "body": "{\"error\":\"invalid token\"}\n",
+      "headers": {
+        "x-content-type-options": [
+          "nosniff"
+        ],
+        "content-length": [
+          "26"
+        ],
+        "content-type": [
+          "text/plain; charset=utf-8"
+        ]
+      },
+      "user_id": ""
+    },
+    {
+      "status": 204,
+      "body": "",
+      "headers": {
+        "x-fixture-user": [
+          "user"
+        ]
+      },
+      "user_id": "user"
+    },
+    {
+      "status": 204,
+      "body": "",
+      "headers": {
+        "x-fixture-user": [
+          "user"
+        ]
+      },
+      "user_id": "user"
+    },
+    {
+      "status": 204,
+      "body": "",
+      "headers": {
+        "x-fixture-user": [
+          "user"
+        ]
+      },
+      "user_id": "user"
+    },
+    {
+      "status": 401,
+      "body": "{\"error\":\"invalid claims\"}\n",
+      "headers": {
+        "x-content-type-options": [
+          "nosniff"
+        ],
+        "content-length": [
+          "27"
+        ],
+        "content-type": [
+          "text/plain; charset=utf-8"
+        ]
+      },
+      "user_id": ""
+    },
+    {
+      "status": 401,
+      "body": "{\"error\":\"invalid claims\"}\n",
+      "headers": {
+        "x-content-type-options": [
+          "nosniff"
+        ],
+        "content-length": [
+          "27"
+        ],
+        "content-type": [
+          "text/plain; charset=utf-8"
+        ]
+      },
+      "user_id": ""
+    },
+    {
+      "status": 401,
+      "body": "{\"error\":\"invalid claims\"}\n",
+      "headers": {
+        "x-content-type-options": [
+          "nosniff"
+        ],
+        "content-length": [
+          "27"
+        ],
+        "content-type": [
+          "text/plain; charset=utf-8"
+        ]
+      },
+      "user_id": ""
+    },
+    {
+      "status": 403,
+      "body": "{\"error\":\"account disabled\"}",
+      "headers": {
+        "content-length": [
+          "28"
+        ],
+        "content-type": [
+          "application/json"
+        ]
+      },
+      "user_id": ""
+    },
+    {
+      "status": 403,
+      "body": "{\"error\":\"account disabled\"}",
+      "headers": {
+        "content-length": [
+          "28"
+        ],
+        "content-type": [
+          "application/json"
+        ]
+      },
+      "user_id": ""
+    },
+    {
+      "status": 401,
+      "body": "{\"error\":\"invalid token\"}\n",
+      "headers": {
+        "x-content-type-options": [
+          "nosniff"
+        ],
+        "content-length": [
+          "26"
+        ],
+        "content-type": [
+          "text/plain; charset=utf-8"
+        ]
+      },
+      "user_id": ""
+    },
+    {
+      "status": 204,
+      "body": "",
+      "headers": {
+        "x-fixture-user": [
+          "user"
+        ]
+      },
+      "user_id": "user"
+    },
+    {
+      "status": 204,
+      "body": "",
+      "headers": {
+        "x-fixture-user": [
+          "user"
+        ]
+      },
+      "user_id": "user"
+    },
+    {
+      "status": 204,
+      "body": "",
+      "headers": {
+        "x-fixture-user": [
+          "user"
+        ]
+      },
+      "user_id": "user"
+    },
+    {
+      "status": 204,
+      "body": "",
+      "headers": {
+        "x-fixture-user": [
+          "user"
+        ]
+      },
+      "user_id": "user"
+    },
+    {
+      "status": 401,
+      "body": "{\"error\":\"invalid token\"}\n",
+      "headers": {
+        "x-content-type-options": [
+          "nosniff"
+        ],
+        "content-length": [
+          "26"
+        ],
+        "content-type": [
+          "text/plain; charset=utf-8"
+        ]
+      },
+      "user_id": ""
+    },
+    {
+      "status": 401,
+      "body": "{\"error\":\"invalid token\"}\n",
+      "headers": {
+        "x-content-type-options": [
+          "nosniff"
+        ],
+        "content-length": [
+          "26"
+        ],
+        "content-type": [
+          "text/plain; charset=utf-8"
+        ]
+      },
+      "user_id": ""
+    },
+    {
+      "status": 401,
+      "body": "{\"error\":\"invalid token\"}\n",
+      "headers": {
+        "x-content-type-options": [
+          "nosniff"
+        ],
+        "content-length": [
+          "26"
+        ],
+        "content-type": [
+          "text/plain; charset=utf-8"
+        ]
+      },
+      "user_id": ""
+    },
+    {
+      "status": 401,
+      "body": "{\"error\":\"invalid token\"}\n",
+      "headers": {
+        "x-content-type-options": [
+          "nosniff"
+        ],
+        "content-length": [
+          "26"
+        ],
+        "content-type": [
+          "text/plain; charset=utf-8"
+        ]
+      },
+      "user_id": ""
+    },
+    {
+      "status": 401,
+      "body": "{\"error\":\"invalid token\"}\n",
+      "headers": {
+        "x-content-type-options": [
+          "nosniff"
+        ],
+        "content-length": [
+          "26"
+        ],
+        "content-type": [
+          "text/plain; charset=utf-8"
+        ]
+      },
+      "user_id": ""
+    },
+    {
+      "status": 204,
+      "body": "",
+      "headers": {
+        "x-fixture-user": [
+          "user"
+        ]
+      },
+      "user_id": "user"
+    },
+    {
+      "status": 204,
+      "body": "",
+      "headers": {
+        "x-fixture-user": [
+          "user"
+        ]
+      },
+      "user_id": "user"
+    },
+    {
+      "status": 204,
+      "body": "",
+      "headers": {
+        "x-fixture-user": [
+          "user"
+        ]
+      },
+      "user_id": "user"
+    },
+    {
+      "status": 401,
+      "body": "{\"error\":\"invalid claims\"}\n",
+      "headers": {
+        "x-content-type-options": [
+          "nosniff"
+        ],
+        "content-length": [
+          "27"
+        ],
+        "content-type": [
+          "text/plain; charset=utf-8"
+        ]
+      },
+      "user_id": ""
+    },
+    {
+      "status": 401,
+      "body": "{\"error\":\"invalid claims\"}\n",
+      "headers": {
+        "x-content-type-options": [
+          "nosniff"
+        ],
+        "content-length": [
+          "27"
+        ],
+        "content-type": [
+          "text/plain; charset=utf-8"
+        ]
+      },
+      "user_id": ""
+    },
+    {
+      "status": 401,
+      "body": "{\"error\":\"invalid claims\"}\n",
+      "headers": {
+        "x-content-type-options": [
+          "nosniff"
+        ],
+        "content-length": [
+          "27"
+        ],
+        "content-type": [
+          "text/plain; charset=utf-8"
+        ]
+      },
+      "user_id": ""
+    },
+    {
+      "status": 403,
+      "body": "{\"error\":\"account disabled\"}",
+      "headers": {
+        "content-length": [
+          "28"
+        ],
+        "content-type": [
+          "application/json"
+        ]
+      },
+      "user_id": ""
+    },
+    {
+      "status": 403,
+      "body": "{\"error\":\"account disabled\"}",
+      "headers": {
+        "content-length": [
+          "28"
+        ],
+        "content-type": [
+          "application/json"
+        ]
+      },
+      "user_id": ""
+    },
+    {
+      "status": 401,
+      "body": "{\"error\":\"invalid token\"}\n",
+      "headers": {
+        "x-content-type-options": [
+          "nosniff"
+        ],
+        "content-length": [
+          "26"
+        ],
+        "content-type": [
+          "text/plain; charset=utf-8"
+        ]
+      },
+      "user_id": ""
+    },
+    {
+      "status": 204,
+      "body": "",
+      "headers": {
+        "x-fixture-user": [
+          "user"
+        ]
+      },
+      "user_id": "user"
+    },
+    {
+      "status": 204,
+      "body": "",
+      "headers": {
+        "x-fixture-user": [
+          "user"
+        ]
+      },
+      "user_id": "user"
+    },
+    {
+      "status": 204,
+      "body": "",
+      "headers": {
+        "x-fixture-user": [
+          "user"
+        ]
+      },
+      "user_id": "user"
+    },
+    {
+      "status": 204,
+      "body": "",
+      "headers": {
+        "x-fixture-user": [
+          "user"
+        ]
+      },
+      "user_id": "user"
+    },
+    {
+      "status": 401,
+      "body": "{\"error\":\"invalid token\"}\n",
+      "headers": {
+        "x-content-type-options": [
+          "nosniff"
+        ],
+        "content-length": [
+          "26"
+        ],
+        "content-type": [
+          "text/plain; charset=utf-8"
+        ]
+      },
+      "user_id": ""
+    },
+    {
+      "status": 401,
+      "body": "{\"error\":\"invalid token\"}\n",
+      "headers": {
+        "x-content-type-options": [
+          "nosniff"
+        ],
+        "content-length": [
+          "26"
+        ],
+        "content-type": [
+          "text/plain; charset=utf-8"
+        ]
+      },
+      "user_id": ""
+    },
+    {
+      "status": 401,
+      "body": "{\"error\":\"invalid token\"}\n",
+      "headers": {
+        "x-content-type-options": [
+          "nosniff"
+        ],
+        "content-length": [
+          "26"
+        ],
+        "content-type": [
+          "text/plain; charset=utf-8"
+        ]
+      },
+      "user_id": ""
+    },
+    {
+      "status": 401,
+      "body": "{\"error\":\"invalid token\"}\n",
+      "headers": {
+        "x-content-type-options": [
+          "nosniff"
+        ],
+        "content-length": [
+          "26"
+        ],
+        "content-type": [
+          "text/plain; charset=utf-8"
+        ]
+      },
+      "user_id": ""
+    },
+    {
+      "status": 401,
+      "body": "{\"error\":\"invalid token\"}\n",
+      "headers": {
+        "x-content-type-options": [
+          "nosniff"
+        ],
+        "content-length": [
+          "26"
+        ],
+        "content-type": [
+          "text/plain; charset=utf-8"
+        ]
+      },
+      "user_id": ""
+    },
+    {
+      "status": 204,
+      "body": "",
+      "headers": {
+        "x-fixture-user": [
+          "user"
+        ]
+      },
+      "user_id": "user"
+    },
+    {
+      "status": 204,
+      "body": "",
+      "headers": {
+        "x-fixture-user": [
+          "user"
+        ]
+      },
+      "user_id": "user"
+    },
+    {
+      "status": 204,
+      "body": "",
+      "headers": {
+        "x-fixture-user": [
+          "user"
+        ]
+      },
+      "user_id": "user"
+    },
+    {
+      "status": 401,
+      "body": "{\"error\":\"invalid claims\"}\n",
+      "headers": {
+        "x-content-type-options": [
+          "nosniff"
+        ],
+        "content-length": [
+          "27"
+        ],
+        "content-type": [
+          "text/plain; charset=utf-8"
+        ]
+      },
+      "user_id": ""
+    },
+    {
+      "status": 401,
+      "body": "{\"error\":\"invalid claims\"}\n",
+      "headers": {
+        "x-content-type-options": [
+          "nosniff"
+        ],
+        "content-length": [
+          "27"
+        ],
+        "content-type": [
+          "text/plain; charset=utf-8"
+        ]
+      },
+      "user_id": ""
+    },
+    {
+      "status": 401,
+      "body": "{\"error\":\"invalid claims\"}\n",
+      "headers": {
+        "x-content-type-options": [
+          "nosniff"
+        ],
+        "content-length": [
+          "27"
+        ],
+        "content-type": [
+          "text/plain; charset=utf-8"
+        ]
+      },
+      "user_id": ""
+    },
+    {
+      "status": 403,
+      "body": "{\"error\":\"account disabled\"}",
+      "headers": {
+        "content-length": [
+          "28"
+        ],
+        "content-type": [
+          "application/json"
+        ]
+      },
+      "user_id": ""
+    },
+    {
+      "status": 403,
+      "body": "{\"error\":\"account disabled\"}",
+      "headers": {
+        "content-length": [
+          "28"
+        ],
+        "content-type": [
+          "application/json"
+        ]
+      },
+      "user_id": ""
+    },
+    {
+      "status": 401,
+      "body": "{\"error\":\"invalid token\"}\n",
+      "headers": {
+        "x-content-type-options": [
+          "nosniff"
+        ],
+        "content-length": [
+          "26"
+        ],
+        "content-type": [
+          "text/plain; charset=utf-8"
+        ]
+      },
+      "user_id": ""
+    },
+    {
+      "status": 401,
+      "body": "{\"error\":\"missing authorization\"}\n",
+      "headers": {
+        "x-content-type-options": [
+          "nosniff"
+        ],
+        "content-length": [
+          "34"
+        ],
+        "content-type": [
+          "text/plain; charset=utf-8"
+        ]
+      },
+      "user_id": ""
+    },
+    {
+      "status": 401,
+      "body": "{\"error\":\"invalid token\"}\n",
+      "headers": {
+        "x-content-type-options": [
+          "nosniff"
+        ],
+        "content-length": [
+          "26"
+        ],
+        "content-type": [
+          "text/plain; charset=utf-8"
+        ]
+      },
+      "user_id": ""
+    },
+    {
+      "status": 403,
+      "body": "{\"error\":\"CSRF validation failed\"}\n",
+      "headers": {
+        "x-content-type-options": [
+          "nosniff"
+        ],
+        "content-length": [
+          "35"
+        ],
+        "content-type": [
+          "text/plain; charset=utf-8"
+        ]
+      },
+      "user_id": ""
+    },
+    {
+      "status": 401,
+      "body": "{\"error\":\"invalid token\"}\n",
+      "headers": {
+        "x-content-type-options": [
+          "nosniff"
+        ],
+        "content-length": [
+          "26"
+        ],
+        "content-type": [
+          "text/plain; charset=utf-8"
+        ]
+      },
+      "user_id": ""
+    }
+  ],
+  "mismatches": [],
+  "go_exit_code": 0,
+  "source_sha256": {
+    "server/go/internal/middleware/auth.go": "6fa16fcc9d3cb8c34942ee8db06673fbbb12e40ac93f182e8765eb2a6fc89e4b",
+    "server/go/internal/auth/cookie.go": "744132f85956db35fde970e67d1a0c56d738b0759365f44fd009493e24758901",
+    "server/go/internal/auth/temporary_disabled_users.go": "27650c3c3373d12a1e031f98b29ab746b15191cf5021c55fa03f1fa086be861f",
+    "server/tests/parity/go_jwt/main.go": "171009e78e36540292c807bdf3b30966e55f656595fa0dff994bce4c6432e470"
+  },
+  "binary_sha256": "4c123f997372bdf617b914eee5d9f29a40bfac35c62fa08708464d5cc21080bd"
+}

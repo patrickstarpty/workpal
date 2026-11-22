@@ -36,7 +36,7 @@ def main():
     elif args.command == 'serve':
         import uvicorn
         from workpal_backend.app import create_app
-        uvicorn.run(create_app(settings),host=settings.host,port=settings.port)
+        uvicorn.run(create_app(settings),host=settings.host,port=settings.port,ws="workpal_backend.realtime.transport:RelayWebSocketProtocol")
     else:
         from workpal_backend.worker import run
         run(settings)

@@ -34,10 +34,10 @@ def handled(app, event, stream_id):
 
 
 @pytest.mark.parametrize('mode', ['normal', 'null', 'revoke_session', 'remove_membership'])
-def test_invitation_pipeline(settings, mode):
+def test_invitation_pipeline(settings, mode, isolated_relay_redis_port):
     settings.dev_auth = True
     settings.auth_secret = 's' * 32
-    settings.redis_url = 'redis://127.0.0.1:26379'
+    settings.redis_url = f'redis://127.0.0.1:{isolated_relay_redis_port}'
     settings.redis_key_prefix = 'test:invitation-pipeline:' + uuid4().hex + ':'
     migrate(settings)
     app = create_app(settings)
@@ -90,7 +90,7 @@ def test_invitation_pipeline(settings, mode):
                 assert delivery.dispatch(app.state.database) == 1
                 stream_id = delivery.client.xrevrange(delivery.channel, count=1)[0][0]
                 handled(app, event, stream_id)
-                if mode == 'normal':
+                if mode in ['normal', 'revoke_session']:
                     assert json.loads(receive(sockets[1])['text']) == dict(type=kind, payload=expected,
                         actor_id=owner[0], actor_type='member')
                 elif mode == 'null':
@@ -101,7 +101,7 @@ def test_invitation_pipeline(settings, mode):
                 pong(sockets[2])
                 duplicate = delivery.client.xadd(delivery.channel, {'envelope': json.dumps(event)})
                 handled(app, event, duplicate)
-                for index in ([0, 1, 2] if mode in ['normal', 'null'] else [0, 2]):
+                for index in ([0, 1, 2] if mode in ['normal', 'null', 'revoke_session'] else [0, 2]):
                     pong(sockets[index])
     finally:
         delivery.client.delete(delivery.channel)

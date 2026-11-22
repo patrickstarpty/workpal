@@ -3,11 +3,14 @@ import re
 from datetime import datetime, timezone
 from uuid import uuid4
 from sqlalchemy import select, delete, update, func
-from sqlalchemy.exc import IntegrityError
+from sqlalchemy.exc import IntegrityError, SQLAlchemyError
 from .models import workspaces, members, issue_status
 from .repository import membership
+from .decode import go_lower, go_upper
+from workpal_backend.auth.profile_decode import go_trim_space
 from workpal_backend.infrastructure.outbox import append_event
 
+class WorkspacePersistenceError(RuntimeError): pass
 class WorkspaceValidationError(ValueError): pass
 class WorkspaceConflictError(ValueError): pass
 class WorkspaceAccessError(PermissionError): pass
@@ -21,35 +24,44 @@ STATUSES = [('backlog', 'Backlog', 'Parked. Assigning an issue here never starts
 def response(row):
     return {k: row[k] for k in ('id','name','slug','description','context','settings','repos','issue_prefix','avatar_url','created_at','updated_at')}
 
-def create_workspace(session, user_id, name, slug, issue_prefix=None):
+def create_workspace(session, user_id, name, slug, issue_prefix=None, description=None, context=None):
     if not isinstance(name, str) or not isinstance(slug, str):
         raise WorkspaceValidationError('name and slug are required')
-    name, slug = name.strip(), slug.strip().lower()
-    if not name or not re.fullmatch('[a-z0-9]+(?:-[a-z0-9]+)*', slug) or slug in RESERVED:
-        raise WorkspaceValidationError('invalid or reserved slug, or empty name')
+    name, slug = go_trim_space(name), go_lower(go_trim_space(slug))
+    if not name or not slug:
+        raise WorkspaceValidationError('name and slug are required')
+    if not re.fullmatch('[a-z0-9]+(?:-[a-z0-9]+)*', slug):
+        raise WorkspaceValidationError('slug must contain only lowercase letters, numbers, and hyphens')
+    if slug in RESERVED:
+        raise WorkspaceValidationError('slug is reserved')
     if issue_prefix is not None and not isinstance(issue_prefix, str):
-        raise WorkspaceValidationError('invalid issue prefix')
-    prefix = (issue_prefix or '').strip().upper()
+        raise WorkspaceValidationError('issue prefix must be 1-10 uppercase letters or digits')
+    prefix = go_upper(go_trim_space(issue_prefix or ''))
     if prefix and not re.fullmatch('[A-Z0-9]{1,10}', prefix):
-        raise WorkspaceValidationError('invalid issue prefix')
+        raise WorkspaceValidationError('issue prefix must be 1-10 uppercase letters or digits')
     prefix = prefix or slug.replace('-', '')[:4].upper()
     now = datetime.now(timezone.utc).isoformat(timespec='microseconds').replace('+00:00', 'Z')
     wid = str(uuid4())
     # Ensure a real outer SQLite transaction before SAVEPOINT (legacy sqlite driver).
-    conn = session.connection()
-    if not conn.connection.driver_connection.in_transaction:
-        conn.exec_driver_sql('BEGIN')
+    stage = 'failed to create workspace'
     try:
+        conn = session.connection()
+        if not conn.connection.driver_connection.in_transaction:
+            conn.exec_driver_sql('BEGIN')
         with session.begin_nested():
-            session.execute(workspaces.insert().values(id=wid,name=name,slug=slug,issue_prefix=prefix,created_at=now,updated_at=now))
+            row = session.execute(workspaces.insert().values(id=wid,name=name,slug=slug,description=description,context=context,issue_prefix=prefix,created_at=now,updated_at=now).returning(*workspaces.c)).mappings().one()
+            stage = 'failed to add owner'
             session.execute(members.insert().values(id=str(uuid4()),workspace_id=wid,user_id=user_id,role='owner',created_at=now))
+            stage = 'failed to seed issue statuses'
             for key, label, description, category, color in STATUSES:
                 session.execute(issue_status.insert().values(id=str(uuid4()),workspace_id=wid,key=key,name=label,description=description,category=category,color=color,is_system=True,position=0,created_at=now,updated_at=now))
-            return response(session.execute(select(workspaces).where(workspaces.c.id == wid)).mappings().one())
+            return response(row)
     except IntegrityError as exc:
-        if 'workspaces.slug' in str(exc):
+        if stage == 'failed to create workspace' and 'workspaces.slug' in str(exc):
             raise WorkspaceConflictError('workspace slug already exists') from exc
-        raise
+        raise WorkspacePersistenceError(stage) from exc
+    except SQLAlchemyError as exc:
+        raise WorkspacePersistenceError(stage) from exc
 
 def list_workspaces(session, user_id):
     rows = session.execute(select(workspaces, members.c.pinned_at).join(members).where(members.c.user_id == user_id).order_by(members.c.pinned_at.desc().nulls_last(),workspaces.c.created_at,workspaces.c.id)).mappings()
@@ -58,8 +70,8 @@ def list_workspaces(session, user_id):
 def require_workspace_access(session, principal, workspace_id):
     def field(k):
         return principal.get(k) if isinstance(principal, dict) else getattr(principal,k,None)
-    if field('identity_kind') != 'session':
-        raise UnsupportedIdentityError('only session identities are supported')
+    if field('identity_kind') not in ('session', 'cloud_pat'):
+        raise UnsupportedIdentityError('unsupported identity')
     member = membership(session, field('user_id'), workspace_id)
     if member is None:
         raise WorkspaceAccessError('workspace access denied')
@@ -95,11 +107,11 @@ def update_workspace(session, principal, workspace_id, body):
     stored = get_workspace(session, principal, workspace_id)
     values = {k:v for k,v in body.items() if v is not None}
     if 'name' in values:
-        values['name'] = values['name'].strip()
+        values['name'] = go_trim_space(values['name'])
         if not values['name']:
             raise WorkspaceValidationError('name is required')
     if 'issue_prefix' in values:
-        prefix = values.pop('issue_prefix').strip().upper()
+        prefix = go_upper(go_trim_space(values.pop('issue_prefix')))
         if prefix and not re.fullmatch('[A-Z0-9]{1,10}', prefix):
             raise WorkspaceValidationError('issue prefix must be 1-10 uppercase letters or digits')
         if prefix:

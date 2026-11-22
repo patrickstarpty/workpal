@@ -1,6 +1,6 @@
 from pathlib import Path
 import os
-from pydantic import Field, model_validator, field_validator
+from pydantic import AliasChoices, Field, model_validator, field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 from sqlalchemy.engine import make_url
 ROOT = Path(__file__).resolve().parents[3]
@@ -10,14 +10,18 @@ class Settings(BaseSettings):
     frontend_dir: Path | None = Field(default=None, validation_alias='WORKPAL_FRONTEND_DIR')
     database_url: str = Field(default='sqlite:///server/data/python/workpal.sqlite', validation_alias='WORKPAL_DATABASE_URL')
     redis_url: str = Field(default='redis://127.0.0.1:6379', validation_alias='REDIS_URL', repr=False)
+    realtime_metrics_token: str = Field(default='', validation_alias='REALTIME_METRICS_TOKEN', repr=False)
     redis_key_prefix: str = Field(default='workpal:', validation_alias='REDIS_KEY_PREFIX')
     host: str = Field(default='127.0.0.1', validation_alias='WORKPAL_HOST')
     port: int = Field(default=4175, ge=1, le=65535, validation_alias='WORKPAL_PORT')
-    environment: str = Field(default='development', validation_alias='WORKPAL_ENV')
+    environment: str = Field(default='development', validation_alias=AliasChoices('APP_ENV', 'WORKPAL_ENV'))
     dev_auth: bool = Field(default=False, validation_alias='WORKPAL_DEV_AUTH')
-    auth_secret: str | None = Field(default=None, validation_alias='AUTH_SECRET', repr=False)
+    auth_secret: str | None = Field(default=None, validation_alias=AliasChoices('JWT_SECRET', 'AUTH_SECRET'), repr=False)
     frontend_origin: str = Field(default='http://localhost:4173', validation_alias='FRONTEND_ORIGIN')
+    cors_allowed_origins: str = Field(default='', validation_alias='CORS_ALLOWED_ORIGINS')
+    trusted_proxies: str = Field(default='', validation_alias='WORKPAL_TRUSTED_PROXIES')
     auth_token_ttl: int = Field(default=2592000, ge=60, validation_alias='AUTH_TOKEN_TTL')
+    cloud_url: str = Field(default='', validation_alias='WORKPAL_CLOUD_URL')
     cookie_domain: str = Field(default='', validation_alias='COOKIE_DOMAIN')
 
     @field_validator('cookie_domain', mode='before')
@@ -77,10 +81,17 @@ class Settings(BaseSettings):
 
     @model_validator(mode='after')
     def validate_local(self):
+        from .auth.profile_decode import go_trim_space
+        if go_trim_space(self.environment).lower() == 'production':
+            if go_trim_space(self.auth_secret or '') in (
+                    '', 'workpal-dev-secret-change-in-production', 'change-me-in-production'):
+                raise ValueError('JWT_SECRET is empty or a known insecure default')
         if self.dev_auth and (self.environment != 'development' or self.host not in ('127.0.0.1','::1','localhost')):
             raise ValueError('Development authentication requires development mode and loopback binding')
         if self.dev_auth and (not self.auth_secret or len(self.auth_secret.encode()) < 32):
             raise ValueError('AUTH_SECRET must contain at least 32 bytes')
+        if not self.auth_secret:
+            self.auth_secret = 'workpal-dev-secret-change-in-production'
         url = make_url(self.database_url)
         if url.drivername != 'sqlite' or not url.database or url.database == ':memory:' or url.query:
             raise ValueError('A dedicated SQLite file is required')

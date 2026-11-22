@@ -41,8 +41,8 @@ def stamp(now=None):
 
 def identity(principal):
     def field(k): return principal.get(k) if isinstance(principal, dict) else getattr(principal,k,None)
-    if field('identity_kind') != 'session' or not field('user_id'):
-        raise InvitationIdentityError('only session identities are supported')
+    if field('identity_kind') not in ('session', 'cloud_pat') or not field('user_id'):
+        raise InvitationIdentityError('unsupported identity')
     return field('user_id')
 
 def authorize(session, principal, wid, admin=False):

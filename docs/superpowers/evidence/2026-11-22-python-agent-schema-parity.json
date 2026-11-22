@@ -1,0 +1,438 @@
+{
+  "scope": "Selected agent/runtime persistence acceptance/rejection only; not SQLSTATE, value canonicalization, lifecycle, API or full schema equivalence.",
+  "fixtures": [
+    {
+      "name": "valid-defaults",
+      "sql": []
+    },
+    {
+      "name": "agent.status='online'",
+      "sql": [
+        "UPDATE agent SET status='online'"
+      ]
+    },
+    {
+      "name": "agent.status='working'",
+      "sql": [
+        "UPDATE agent SET status='working'"
+      ]
+    },
+    {
+      "name": "agent.permission_mode='workspace'",
+      "sql": [
+        "UPDATE agent SET permission_mode='workspace'"
+      ]
+    },
+    {
+      "name": "agent.permission_mode='public_to'",
+      "sql": [
+        "UPDATE agent SET permission_mode='public_to'"
+      ]
+    },
+    {
+      "name": "agent.kind='fake'",
+      "sql": [
+        "UPDATE agent SET kind='fake'"
+      ]
+    },
+    {
+      "name": "agent.kind='system'",
+      "sql": [
+        "UPDATE agent SET kind='system'"
+      ]
+    },
+    {
+      "name": "agent.description='xxxxxxxxxxxxxxxxxxx",
+      "sql": [
+        "UPDATE agent SET description='xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'"
+      ]
+    },
+    {
+      "name": "agent.conversation_starters='{}'",
+      "sql": [
+        "UPDATE agent SET conversation_starters='{}'"
+      ]
+    },
+    {
+      "name": "agent.conversation_starters='[1,2,3,4]'",
+      "sql": [
+        "UPDATE agent SET conversation_starters='[1,2,3,4]'"
+      ]
+    },
+    {
+      "name": "agent.conversation_starters='[1,2,3]'",
+      "sql": [
+        "UPDATE agent SET conversation_starters='[1,2,3]'"
+      ]
+    },
+    {
+      "name": "agent.runtime_config='not-json'",
+      "sql": [
+        "UPDATE agent SET runtime_config='not-json'"
+      ]
+    },
+    {
+      "name": "agent.runtime_config='null'",
+      "sql": [
+        "UPDATE agent SET runtime_config='null'"
+      ]
+    },
+    {
+      "name": "agent.max_concurrent_tasks=2147483648",
+      "sql": [
+        "UPDATE agent SET max_concurrent_tasks=2147483648"
+      ]
+    },
+    {
+      "name": "agent.max_concurrent_tasks=-2147483649",
+      "sql": [
+        "UPDATE agent SET max_concurrent_tasks=-2147483649"
+      ]
+    },
+    {
+      "name": "agent.max_concurrent_tasks=-1",
+      "sql": [
+        "UPDATE agent SET max_concurrent_tasks=-1"
+      ]
+    },
+    {
+      "name": "agent.max_concurrent_tasks=0",
+      "sql": [
+        "UPDATE agent SET max_concurrent_tasks=0"
+      ]
+    },
+    {
+      "name": "agent_runtime.visibility='workspace'",
+      "sql": [
+        "UPDATE agent_runtime SET visibility='workspace'"
+      ]
+    },
+    {
+      "name": "agent_runtime.visibility='public'",
+      "sql": [
+        "UPDATE agent_runtime SET visibility='public'"
+      ]
+    },
+    {
+      "name": "agent_runtime.status='working'",
+      "sql": [
+        "UPDATE agent_runtime SET status='working'"
+      ]
+    },
+    {
+      "name": "agent_runtime.status='online'",
+      "sql": [
+        "UPDATE agent_runtime SET status='online'"
+      ]
+    },
+    {
+      "name": "agent_runtime.max_concurrent_tasks=2147483648",
+      "sql": [
+        "UPDATE agent_runtime SET max_concurrent_tasks=2147483648"
+      ]
+    },
+    {
+      "name": "agent_runtime.max_concurrent_tasks=NULL",
+      "sql": [
+        "UPDATE agent_runtime SET max_concurrent_tasks=NULL"
+      ]
+    },
+    {
+      "name": "runtime-delete-restrict",
+      "sql": [
+        "DELETE FROM agent_runtime WHERE id='10000000-0000-4000-8000-000000000003'"
+      ]
+    },
+    {
+      "name": "agent-name-unique",
+      "sql": [
+        "INSERT INTO agent(workspace_id,name,runtime_mode) VALUES ('10000000-0000-4000-8000-000000000002','Agent','local')"
+      ]
+    },
+    {
+      "name": "daemon-provider-unique",
+      "sql": [
+        "INSERT INTO agent_runtime(workspace_id,name,runtime_mode,provider,daemon_id) VALUES ('10000000-0000-4000-8000-000000000002','Another','local','claude-code','daemon')"
+      ]
+    },
+    {
+      "name": "system-identity-unique",
+      "sql": [
+        "INSERT INTO agent(workspace_id,name,runtime_mode,runtime_id,owner_id,system_key) VALUES ('10000000-0000-4000-8000-000000000002','Other','local','10000000-0000-4000-8000-000000000003','10000000-0000-4000-8000-000000000001','fixture')"
+      ]
+    },
+    {
+      "name": "runtime-profile-allows-other",
+      "sql": [
+        "INSERT INTO agent_runtime(workspace_id,name,runtime_mode,provider,daemon_id,profile_id) VALUES ('10000000-0000-4000-8000-000000000002','Another','local','claude-code','daemon','10000000-0000-4000-8000-000000000004')"
+      ]
+    }
+  ],
+  "go": [
+    {
+      "accepted": true,
+      "exit_code": 0,
+      "error": ""
+    },
+    {
+      "accepted": false,
+      "exit_code": 3,
+      "error": "ERROR:  new row for relation \"agent\" violates check constraint \"agent_status_check\"\nDETAIL:  Failing row contains (10000000-0000-4000-8000-000000000004, 10000000-0000-4000-8000-000000000002, Agent, null, local, {}, private, online, 6, 10000000-0000-4000-8000-000000000001, 2026-11-21 19:20:02.005653+00, 2026-11-21 19:20:02.005653+00, , 10000000-0000-4000-8000-000000000003, , null, null, {}, [], null, null, null, null, private, user, fixture, [], null, [])."
+    },
+    {
+      "accepted": true,
+      "exit_code": 0,
+      "error": ""
+    },
+    {
+      "accepted": false,
+      "exit_code": 3,
+      "error": "ERROR:  new row for relation \"agent\" violates check constraint \"agent_permission_mode_check\"\nDETAIL:  Failing row contains (10000000-0000-4000-8000-000000000004, 10000000-0000-4000-8000-000000000002, Agent, null, local, {}, private, offline, 6, 10000000-0000-4000-8000-000000000001, 2026-11-21 19:20:02.480355+00, 2026-11-21 19:20:02.480355+00, , 10000000-0000-4000-8000-000000000003, , null, null, {}, [], null, null, null, null, workspace, user, fixture, [], null, [])."
+    },
+    {
+      "accepted": true,
+      "exit_code": 0,
+      "error": ""
+    },
+    {
+      "accepted": false,
+      "exit_code": 3,
+      "error": "ERROR:  new row for relation \"agent\" violates check constraint \"agent_kind_check\"\nDETAIL:  Failing row contains (10000000-0000-4000-8000-000000000004, 10000000-0000-4000-8000-000000000002, Agent, null, local, {}, private, offline, 6, 10000000-0000-4000-8000-000000000001, 2026-11-21 19:20:03.045387+00, 2026-11-21 19:20:03.045387+00, , 10000000-0000-4000-8000-000000000003, , null, null, {}, [], null, null, null, null, private, fake, fixture, [], null, [])."
+    },
+    {
+      "accepted": true,
+      "exit_code": 0,
+      "error": ""
+    },
+    {
+      "accepted": false,
+      "exit_code": 3,
+      "error": "ERROR:  new row for relation \"agent\" violates check constraint \"agent_description_length\"\nDETAIL:  Failing row contains (10000000-0000-4000-8000-000000000004, 10000000-0000-4000-8000-000000000002, Agent, null, local, {}, private, offline, 6, 10000000-0000-4000-8000-000000000001, 2026-11-21 19:20:03.528352+00, 2026-11-21 19:20:03.528352+00, xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx..., 10000000-0000-4000-8000-000000000003, , null, null, {}, [], null, null, null, null, private, user, fixture, [], null, [])."
+    },
+    {
+      "accepted": false,
+      "exit_code": 3,
+      "error": "ERROR:  new row for relation \"agent\" violates check constraint \"agent_conversation_starters_check\"\nDETAIL:  Failing row contains (10000000-0000-4000-8000-000000000004, 10000000-0000-4000-8000-000000000002, Agent, null, local, {}, private, offline, 6, 10000000-0000-4000-8000-000000000001, 2026-11-21 19:20:03.719686+00, 2026-11-21 19:20:03.719686+00, , 10000000-0000-4000-8000-000000000003, , null, null, {}, [], null, null, null, null, private, user, fixture, [], null, {})."
+    },
+    {
+      "accepted": false,
+      "exit_code": 3,
+      "error": "ERROR:  new row for relation \"agent\" violates check constraint \"agent_conversation_starters_check\"\nDETAIL:  Failing row contains (10000000-0000-4000-8000-000000000004, 10000000-0000-4000-8000-000000000002, Agent, null, local, {}, private, offline, 6, 10000000-0000-4000-8000-000000000001, 2026-11-21 19:20:03.89012+00, 2026-11-21 19:20:03.89012+00, , 10000000-0000-4000-8000-000000000003, , null, null, {}, [], null, null, null, null, private, user, fixture, [], null, [1, 2, 3, 4])."
+    },
+    {
+      "accepted": true,
+      "exit_code": 0,
+      "error": ""
+    },
+    {
+      "accepted": false,
+      "exit_code": 3,
+      "error": "ERROR:  invalid input syntax for type json\nLINE 1: UPDATE agent SET runtime_config='not-json';\n                                        ^\nDETAIL:  Token \"not\" is invalid.\nCONTEXT:  JSON data, line 1: not..."
+    },
+    {
+      "accepted": true,
+      "exit_code": 0,
+      "error": ""
+    },
+    {
+      "accepted": false,
+      "exit_code": 3,
+      "error": "ERROR:  integer out of range"
+    },
+    {
+      "accepted": false,
+      "exit_code": 3,
+      "error": "ERROR:  integer out of range"
+    },
+    {
+      "accepted": true,
+      "exit_code": 0,
+      "error": ""
+    },
+    {
+      "accepted": true,
+      "exit_code": 0,
+      "error": ""
+    },
+    {
+      "accepted": false,
+      "exit_code": 3,
+      "error": "ERROR:  new row for relation \"agent_runtime\" violates check constraint \"agent_runtime_visibility_check\"\nDETAIL:  Failing row contains (10000000-0000-4000-8000-000000000003, 10000000-0000-4000-8000-000000000002, daemon, Runtime, local, claude-code, offline, , {}, null, 2026-11-21 19:20:05.40498+00, 2026-11-21 19:20:05.40498+00, null, null, workspace, null, null, {}, null)."
+    },
+    {
+      "accepted": true,
+      "exit_code": 0,
+      "error": ""
+    },
+    {
+      "accepted": false,
+      "exit_code": 3,
+      "error": "ERROR:  new row for relation \"agent_runtime\" violates check constraint \"agent_runtime_status_check\"\nDETAIL:  Failing row contains (10000000-0000-4000-8000-000000000003, 10000000-0000-4000-8000-000000000002, daemon, Runtime, local, claude-code, working, , {}, null, 2026-11-21 19:20:05.921759+00, 2026-11-21 19:20:05.921759+00, null, null, private, null, null, {}, null)."
+    },
+    {
+      "accepted": true,
+      "exit_code": 0,
+      "error": ""
+    },
+    {
+      "accepted": false,
+      "exit_code": 3,
+      "error": "ERROR:  integer out of range"
+    },
+    {
+      "accepted": true,
+      "exit_code": 0,
+      "error": ""
+    },
+    {
+      "accepted": false,
+      "exit_code": 3,
+      "error": "ERROR:  update or delete on table \"agent_runtime\" violates foreign key constraint \"agent_runtime_id_fkey\" on table \"agent\"\nDETAIL:  Key (id)=(10000000-0000-4000-8000-000000000003) is still referenced from table \"agent\"."
+    },
+    {
+      "accepted": false,
+      "exit_code": 3,
+      "error": "ERROR:  duplicate key value violates unique constraint \"agent_workspace_name_unique\"\nDETAIL:  Key (workspace_id, name)=(10000000-0000-4000-8000-000000000002, Agent) already exists."
+    },
+    {
+      "accepted": false,
+      "exit_code": 3,
+      "error": "ERROR:  duplicate key value violates unique constraint \"agent_runtime_workspace_daemon_provider_key\"\nDETAIL:  Key (workspace_id, daemon_id, provider)=(10000000-0000-4000-8000-000000000002, daemon, claude-code) already exists."
+    },
+    {
+      "accepted": false,
+      "exit_code": 3,
+      "error": "ERROR:  duplicate key value violates unique constraint \"agent_system_identity_unique\"\nDETAIL:  Key (workspace_id, owner_id, runtime_id, system_key)=(10000000-0000-4000-8000-000000000002, 10000000-0000-4000-8000-000000000001, 10000000-0000-4000-8000-000000000003, fixture) already exists."
+    },
+    {
+      "accepted": true,
+      "exit_code": 0,
+      "error": ""
+    }
+  ],
+  "python": [
+    {
+      "accepted": true,
+      "error": ""
+    },
+    {
+      "accepted": false,
+      "error": "CHECK constraint failed: status IN ('idle','working','blocked','error','offline')"
+    },
+    {
+      "accepted": true,
+      "error": ""
+    },
+    {
+      "accepted": false,
+      "error": "CHECK constraint failed: permission_mode IN ('private','public_to')"
+    },
+    {
+      "accepted": true,
+      "error": ""
+    },
+    {
+      "accepted": false,
+      "error": "CHECK constraint failed: kind IN ('user','system')"
+    },
+    {
+      "accepted": true,
+      "error": ""
+    },
+    {
+      "accepted": false,
+      "error": "CHECK constraint failed: length(description)<=255"
+    },
+    {
+      "accepted": false,
+      "error": "CHECK constraint failed: json_type(conversation_starters)='array' AND json_array_length(conversation_starters)<=3"
+    },
+    {
+      "accepted": false,
+      "error": "CHECK constraint failed: json_type(conversation_starters)='array' AND json_array_length(conversation_starters)<=3"
+    },
+    {
+      "accepted": true,
+      "error": ""
+    },
+    {
+      "accepted": false,
+      "error": "CHECK constraint failed: runtime_config IS NULL OR workpal_jsonb_valid(runtime_config)=1"
+    },
+    {
+      "accepted": true,
+      "error": ""
+    },
+    {
+      "accepted": false,
+      "error": "CHECK constraint failed: max_concurrent_tasks IS NULL OR (typeof(max_concurrent_tasks)='integer' AND max_concurrent_tasks BETWEEN -2147483648 AND 2147483647)"
+    },
+    {
+      "accepted": false,
+      "error": "CHECK constraint failed: max_concurrent_tasks IS NULL OR (typeof(max_concurrent_tasks)='integer' AND max_concurrent_tasks BETWEEN -2147483648 AND 2147483647)"
+    },
+    {
+      "accepted": true,
+      "error": ""
+    },
+    {
+      "accepted": true,
+      "error": ""
+    },
+    {
+      "accepted": false,
+      "error": "CHECK constraint failed: visibility IN ('private','public')"
+    },
+    {
+      "accepted": true,
+      "error": ""
+    },
+    {
+      "accepted": false,
+      "error": "CHECK constraint failed: status IN ('online','offline')"
+    },
+    {
+      "accepted": true,
+      "error": ""
+    },
+    {
+      "accepted": false,
+      "error": "CHECK constraint failed: max_concurrent_tasks IS NULL OR (typeof(max_concurrent_tasks)='integer' AND max_concurrent_tasks BETWEEN -2147483648 AND 2147483647)"
+    },
+    {
+      "accepted": true,
+      "error": ""
+    },
+    {
+      "accepted": false,
+      "error": "FOREIGN KEY constraint failed"
+    },
+    {
+      "accepted": false,
+      "error": "UNIQUE constraint failed: agent.workspace_id, agent.name"
+    },
+    {
+      "accepted": false,
+      "error": "UNIQUE constraint failed: agent_runtime.workspace_id, agent_runtime.daemon_id, agent_runtime.provider"
+    },
+    {
+      "accepted": false,
+      "error": "UNIQUE constraint failed: agent.workspace_id, agent.owner_id, agent.runtime_id, agent.system_key"
+    },
+    {
+      "accepted": true,
+      "error": ""
+    }
+  ],
+  "mismatches": [],
+  "migration_exit_code": 0,
+  "migrator_sha256": "3751ef1bed4ad85a884360b595efccbd9f96f393ed960944336e5481a40d2499",
+  "migration_manifest_sha256": "4b8b30ed1c2557a1407a9f75bff3d92a747b6ca39199868fe0b43e921fc6ff3a",
+  "python_sources_sha256": {
+    "server/migrations/versions/0016_agent_runtime.py": "f2e069b1b670163fa57a9ae2e990d90a131f5a2826a3d0048e61a9370467abf8",
+    "server/src/workpal_backend/infrastructure/sqlite_compat.py": "2be04306703b318706ad9a02fbb4c2b1a203b1b90fdfcc82a512d3110d0e71c1",
+    "server/src/workpal_backend/infrastructure/database.py": "f0b926ff1ad7789086049ae37db3df5ae76f0dd70db284cd84e2d388940ff669",
+    "server/migrations/env.py": "54aa6de0b91526e7902b2833ee156eeb5449a8ea2bd1df735b0f635f7b066393",
+    "server/tools/run_agent_schema_parity.py": "45b45e053b06b519a9c7fa9cdba53925abb21b05df4eef0c43335f84e3fd4653"
+  }
+}

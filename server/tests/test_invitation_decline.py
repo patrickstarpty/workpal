@@ -142,7 +142,7 @@ def test_independent_connection_races(context, settings, op):
         assert list(s.execute(select(outbox)).all()) == before
 
 
-def test_reopen_outage_fifo(context, settings):
+def test_reopen_outage_fifo(context, settings, isolated_relay_redis_port):
     from workpal_backend.infrastructure.delivery import OutboxDelivery
     db, owner, target, stranger, wid = context
     settings.redis_key_prefix = 'test:decline:' + uuid4().hex + ':'
@@ -157,7 +157,7 @@ def test_reopen_outage_fifo(context, settings):
         failed.close()
         db.close()
     reopened = Database(settings)
-    settings.redis_url = 'redis://127.0.0.1:26379'
+    settings.redis_url = f'redis://127.0.0.1:{isolated_relay_redis_port}'
     delivery = OutboxDelivery(settings)
     try:
         with reopened.transaction() as s:

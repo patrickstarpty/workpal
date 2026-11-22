@@ -1,0 +1,1509 @@
+{
+  "scope": "Original Go checkWriteMembership fixed-cohort query dedup/order and decisions for live/expired/cancelled/error/missing/denied cases. Cancellation maps to false, including cancelled Python futures. No exact timing/collector scheduling, SQL query equivalence, worker cancellation or transport certification.",
+  "fixtures": [
+    {
+      "IDs": [],
+      "States": [],
+      "Mode": "allow",
+      "CancelDuring": false
+    },
+    {
+      "IDs": [],
+      "States": [],
+      "Mode": "allow",
+      "CancelDuring": true
+    },
+    {
+      "IDs": [],
+      "States": [],
+      "Mode": "deny",
+      "CancelDuring": false
+    },
+    {
+      "IDs": [],
+      "States": [],
+      "Mode": "deny",
+      "CancelDuring": true
+    },
+    {
+      "IDs": [],
+      "States": [],
+      "Mode": "error",
+      "CancelDuring": false
+    },
+    {
+      "IDs": [],
+      "States": [],
+      "Mode": "error",
+      "CancelDuring": true
+    },
+    {
+      "IDs": [],
+      "States": [],
+      "Mode": "missing",
+      "CancelDuring": false
+    },
+    {
+      "IDs": [],
+      "States": [],
+      "Mode": "missing",
+      "CancelDuring": true
+    },
+    {
+      "IDs": [
+        [
+          "w",
+          "u"
+        ]
+      ],
+      "States": [
+        "live"
+      ],
+      "Mode": "allow",
+      "CancelDuring": false
+    },
+    {
+      "IDs": [
+        [
+          "w",
+          "u"
+        ]
+      ],
+      "States": [
+        "live"
+      ],
+      "Mode": "allow",
+      "CancelDuring": true
+    },
+    {
+      "IDs": [
+        [
+          "w",
+          "u"
+        ]
+      ],
+      "States": [
+        "live"
+      ],
+      "Mode": "deny",
+      "CancelDuring": false
+    },
+    {
+      "IDs": [
+        [
+          "w",
+          "u"
+        ]
+      ],
+      "States": [
+        "live"
+      ],
+      "Mode": "deny",
+      "CancelDuring": true
+    },
+    {
+      "IDs": [
+        [
+          "w",
+          "u"
+        ]
+      ],
+      "States": [
+        "live"
+      ],
+      "Mode": "error",
+      "CancelDuring": false
+    },
+    {
+      "IDs": [
+        [
+          "w",
+          "u"
+        ]
+      ],
+      "States": [
+        "live"
+      ],
+      "Mode": "error",
+      "CancelDuring": true
+    },
+    {
+      "IDs": [
+        [
+          "w",
+          "u"
+        ]
+      ],
+      "States": [
+        "live"
+      ],
+      "Mode": "missing",
+      "CancelDuring": false
+    },
+    {
+      "IDs": [
+        [
+          "w",
+          "u"
+        ]
+      ],
+      "States": [
+        "live"
+      ],
+      "Mode": "missing",
+      "CancelDuring": true
+    },
+    {
+      "IDs": [
+        [
+          "w",
+          "u"
+        ],
+        [
+          "w",
+          "u"
+        ],
+        [
+          "x",
+          "v"
+        ]
+      ],
+      "States": [
+        "live",
+        "live",
+        "live"
+      ],
+      "Mode": "allow",
+      "CancelDuring": false
+    },
+    {
+      "IDs": [
+        [
+          "w",
+          "u"
+        ],
+        [
+          "w",
+          "u"
+        ],
+        [
+          "x",
+          "v"
+        ]
+      ],
+      "States": [
+        "live",
+        "live",
+        "live"
+      ],
+      "Mode": "allow",
+      "CancelDuring": true
+    },
+    {
+      "IDs": [
+        [
+          "w",
+          "u"
+        ],
+        [
+          "w",
+          "u"
+        ],
+        [
+          "x",
+          "v"
+        ]
+      ],
+      "States": [
+        "live",
+        "live",
+        "live"
+      ],
+      "Mode": "deny",
+      "CancelDuring": false
+    },
+    {
+      "IDs": [
+        [
+          "w",
+          "u"
+        ],
+        [
+          "w",
+          "u"
+        ],
+        [
+          "x",
+          "v"
+        ]
+      ],
+      "States": [
+        "live",
+        "live",
+        "live"
+      ],
+      "Mode": "deny",
+      "CancelDuring": true
+    },
+    {
+      "IDs": [
+        [
+          "w",
+          "u"
+        ],
+        [
+          "w",
+          "u"
+        ],
+        [
+          "x",
+          "v"
+        ]
+      ],
+      "States": [
+        "live",
+        "live",
+        "live"
+      ],
+      "Mode": "error",
+      "CancelDuring": false
+    },
+    {
+      "IDs": [
+        [
+          "w",
+          "u"
+        ],
+        [
+          "w",
+          "u"
+        ],
+        [
+          "x",
+          "v"
+        ]
+      ],
+      "States": [
+        "live",
+        "live",
+        "live"
+      ],
+      "Mode": "error",
+      "CancelDuring": true
+    },
+    {
+      "IDs": [
+        [
+          "w",
+          "u"
+        ],
+        [
+          "w",
+          "u"
+        ],
+        [
+          "x",
+          "v"
+        ]
+      ],
+      "States": [
+        "live",
+        "live",
+        "live"
+      ],
+      "Mode": "missing",
+      "CancelDuring": false
+    },
+    {
+      "IDs": [
+        [
+          "w",
+          "u"
+        ],
+        [
+          "w",
+          "u"
+        ],
+        [
+          "x",
+          "v"
+        ]
+      ],
+      "States": [
+        "live",
+        "live",
+        "live"
+      ],
+      "Mode": "missing",
+      "CancelDuring": true
+    },
+    {
+      "IDs": [
+        [
+          "w",
+          "u"
+        ],
+        [
+          "w",
+          "u"
+        ],
+        [
+          "x",
+          "v"
+        ]
+      ],
+      "States": [
+        "expired",
+        "live",
+        "cancelled"
+      ],
+      "Mode": "allow",
+      "CancelDuring": false
+    },
+    {
+      "IDs": [
+        [
+          "w",
+          "u"
+        ],
+        [
+          "w",
+          "u"
+        ],
+        [
+          "x",
+          "v"
+        ]
+      ],
+      "States": [
+        "expired",
+        "live",
+        "cancelled"
+      ],
+      "Mode": "allow",
+      "CancelDuring": true
+    },
+    {
+      "IDs": [
+        [
+          "w",
+          "u"
+        ],
+        [
+          "w",
+          "u"
+        ],
+        [
+          "x",
+          "v"
+        ]
+      ],
+      "States": [
+        "expired",
+        "live",
+        "cancelled"
+      ],
+      "Mode": "deny",
+      "CancelDuring": false
+    },
+    {
+      "IDs": [
+        [
+          "w",
+          "u"
+        ],
+        [
+          "w",
+          "u"
+        ],
+        [
+          "x",
+          "v"
+        ]
+      ],
+      "States": [
+        "expired",
+        "live",
+        "cancelled"
+      ],
+      "Mode": "deny",
+      "CancelDuring": true
+    },
+    {
+      "IDs": [
+        [
+          "w",
+          "u"
+        ],
+        [
+          "w",
+          "u"
+        ],
+        [
+          "x",
+          "v"
+        ]
+      ],
+      "States": [
+        "expired",
+        "live",
+        "cancelled"
+      ],
+      "Mode": "error",
+      "CancelDuring": false
+    },
+    {
+      "IDs": [
+        [
+          "w",
+          "u"
+        ],
+        [
+          "w",
+          "u"
+        ],
+        [
+          "x",
+          "v"
+        ]
+      ],
+      "States": [
+        "expired",
+        "live",
+        "cancelled"
+      ],
+      "Mode": "error",
+      "CancelDuring": true
+    },
+    {
+      "IDs": [
+        [
+          "w",
+          "u"
+        ],
+        [
+          "w",
+          "u"
+        ],
+        [
+          "x",
+          "v"
+        ]
+      ],
+      "States": [
+        "expired",
+        "live",
+        "cancelled"
+      ],
+      "Mode": "missing",
+      "CancelDuring": false
+    },
+    {
+      "IDs": [
+        [
+          "w",
+          "u"
+        ],
+        [
+          "w",
+          "u"
+        ],
+        [
+          "x",
+          "v"
+        ]
+      ],
+      "States": [
+        "expired",
+        "live",
+        "cancelled"
+      ],
+      "Mode": "missing",
+      "CancelDuring": true
+    },
+    {
+      "IDs": [
+        [
+          "w",
+          "u"
+        ],
+        [
+          "w",
+          "u"
+        ]
+      ],
+      "States": [
+        "expired",
+        "cancelled"
+      ],
+      "Mode": "allow",
+      "CancelDuring": false
+    },
+    {
+      "IDs": [
+        [
+          "w",
+          "u"
+        ],
+        [
+          "w",
+          "u"
+        ]
+      ],
+      "States": [
+        "expired",
+        "cancelled"
+      ],
+      "Mode": "allow",
+      "CancelDuring": true
+    },
+    {
+      "IDs": [
+        [
+          "w",
+          "u"
+        ],
+        [
+          "w",
+          "u"
+        ]
+      ],
+      "States": [
+        "expired",
+        "cancelled"
+      ],
+      "Mode": "deny",
+      "CancelDuring": false
+    },
+    {
+      "IDs": [
+        [
+          "w",
+          "u"
+        ],
+        [
+          "w",
+          "u"
+        ]
+      ],
+      "States": [
+        "expired",
+        "cancelled"
+      ],
+      "Mode": "deny",
+      "CancelDuring": true
+    },
+    {
+      "IDs": [
+        [
+          "w",
+          "u"
+        ],
+        [
+          "w",
+          "u"
+        ]
+      ],
+      "States": [
+        "expired",
+        "cancelled"
+      ],
+      "Mode": "error",
+      "CancelDuring": false
+    },
+    {
+      "IDs": [
+        [
+          "w",
+          "u"
+        ],
+        [
+          "w",
+          "u"
+        ]
+      ],
+      "States": [
+        "expired",
+        "cancelled"
+      ],
+      "Mode": "error",
+      "CancelDuring": true
+    },
+    {
+      "IDs": [
+        [
+          "w",
+          "u"
+        ],
+        [
+          "w",
+          "u"
+        ]
+      ],
+      "States": [
+        "expired",
+        "cancelled"
+      ],
+      "Mode": "missing",
+      "CancelDuring": false
+    },
+    {
+      "IDs": [
+        [
+          "w",
+          "u"
+        ],
+        [
+          "w",
+          "u"
+        ]
+      ],
+      "States": [
+        "expired",
+        "cancelled"
+      ],
+      "Mode": "missing",
+      "CancelDuring": true
+    }
+  ],
+  "go": [
+    {
+      "calls": [],
+      "results": []
+    },
+    {
+      "calls": [],
+      "results": []
+    },
+    {
+      "calls": [],
+      "results": []
+    },
+    {
+      "calls": [],
+      "results": []
+    },
+    {
+      "calls": [],
+      "results": []
+    },
+    {
+      "calls": [],
+      "results": []
+    },
+    {
+      "calls": [],
+      "results": []
+    },
+    {
+      "calls": [],
+      "results": []
+    },
+    {
+      "calls": [
+        [
+          [
+            "w",
+            "u"
+          ]
+        ]
+      ],
+      "results": [
+        true
+      ]
+    },
+    {
+      "calls": [
+        [
+          [
+            "w",
+            "u"
+          ]
+        ]
+      ],
+      "results": [
+        false
+      ]
+    },
+    {
+      "calls": [
+        [
+          [
+            "w",
+            "u"
+          ]
+        ]
+      ],
+      "results": [
+        false
+      ]
+    },
+    {
+      "calls": [
+        [
+          [
+            "w",
+            "u"
+          ]
+        ]
+      ],
+      "results": [
+        false
+      ]
+    },
+    {
+      "calls": [
+        [
+          [
+            "w",
+            "u"
+          ]
+        ]
+      ],
+      "results": [
+        false
+      ]
+    },
+    {
+      "calls": [
+        [
+          [
+            "w",
+            "u"
+          ]
+        ]
+      ],
+      "results": [
+        false
+      ]
+    },
+    {
+      "calls": [],
+      "results": [
+        false
+      ]
+    },
+    {
+      "calls": [],
+      "results": [
+        false
+      ]
+    },
+    {
+      "calls": [
+        [
+          [
+            "w",
+            "u"
+          ],
+          [
+            "x",
+            "v"
+          ]
+        ]
+      ],
+      "results": [
+        true,
+        true,
+        true
+      ]
+    },
+    {
+      "calls": [
+        [
+          [
+            "w",
+            "u"
+          ],
+          [
+            "x",
+            "v"
+          ]
+        ]
+      ],
+      "results": [
+        false,
+        true,
+        true
+      ]
+    },
+    {
+      "calls": [
+        [
+          [
+            "w",
+            "u"
+          ],
+          [
+            "x",
+            "v"
+          ]
+        ]
+      ],
+      "results": [
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "calls": [
+        [
+          [
+            "w",
+            "u"
+          ],
+          [
+            "x",
+            "v"
+          ]
+        ]
+      ],
+      "results": [
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "calls": [
+        [
+          [
+            "w",
+            "u"
+          ],
+          [
+            "x",
+            "v"
+          ]
+        ]
+      ],
+      "results": [
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "calls": [
+        [
+          [
+            "w",
+            "u"
+          ],
+          [
+            "x",
+            "v"
+          ]
+        ]
+      ],
+      "results": [
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "calls": [],
+      "results": [
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "calls": [],
+      "results": [
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "calls": [
+        [
+          [
+            "w",
+            "u"
+          ]
+        ]
+      ],
+      "results": [
+        false,
+        true,
+        false
+      ]
+    },
+    {
+      "calls": [
+        [
+          [
+            "w",
+            "u"
+          ]
+        ]
+      ],
+      "results": [
+        false,
+        true,
+        false
+      ]
+    },
+    {
+      "calls": [
+        [
+          [
+            "w",
+            "u"
+          ]
+        ]
+      ],
+      "results": [
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "calls": [
+        [
+          [
+            "w",
+            "u"
+          ]
+        ]
+      ],
+      "results": [
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "calls": [
+        [
+          [
+            "w",
+            "u"
+          ]
+        ]
+      ],
+      "results": [
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "calls": [
+        [
+          [
+            "w",
+            "u"
+          ]
+        ]
+      ],
+      "results": [
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "calls": [],
+      "results": [
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "calls": [],
+      "results": [
+        false,
+        false,
+        false
+      ]
+    },
+    {
+      "calls": [],
+      "results": [
+        false,
+        false
+      ]
+    },
+    {
+      "calls": [],
+      "results": [
+        false,
+        false
+      ]
+    },
+    {
+      "calls": [],
+      "results": [
+        false,
+        false
+      ]
+    },
+    {
+      "calls": [],
+      "results": [
+        false,
+        false
+      ]
+    },
+    {
+      "calls": [],
+      "results": [
+        false,
+        false
+      ]
+    },
+    {
+      "calls": [],
+      "results": [
+        false,
+        false
+      ]
+    },
+    {
+      "calls": [],
+      "results": [
+        false,
+        false
+      ]
+    },
+    {
+      "calls": [],
+      "results": [
+        false,
+        false
+      ]
+    }
+  ],
+  "python": [
+    {
+      "results": [],
+      "calls": []
+    },
+    {
+      "results": [],
+      "calls": []
+    },
+    {
+      "results": [],
+      "calls": []
+    },
+    {
+      "results": [],
+      "calls": []
+    },
+    {
+      "results": [],
+      "calls": []
+    },
+    {
+      "results": [],
+      "calls": []
+    },
+    {
+      "results": [],
+      "calls": []
+    },
+    {
+      "results": [],
+      "calls": []
+    },
+    {
+      "results": [
+        true
+      ],
+      "calls": [
+        [
+          [
+            "w",
+            "u"
+          ]
+        ]
+      ]
+    },
+    {
+      "results": [
+        false
+      ],
+      "calls": [
+        [
+          [
+            "w",
+            "u"
+          ]
+        ]
+      ]
+    },
+    {
+      "results": [
+        false
+      ],
+      "calls": [
+        [
+          [
+            "w",
+            "u"
+          ]
+        ]
+      ]
+    },
+    {
+      "results": [
+        false
+      ],
+      "calls": [
+        [
+          [
+            "w",
+            "u"
+          ]
+        ]
+      ]
+    },
+    {
+      "results": [
+        false
+      ],
+      "calls": [
+        [
+          [
+            "w",
+            "u"
+          ]
+        ]
+      ]
+    },
+    {
+      "results": [
+        false
+      ],
+      "calls": [
+        [
+          [
+            "w",
+            "u"
+          ]
+        ]
+      ]
+    },
+    {
+      "results": [
+        false
+      ],
+      "calls": []
+    },
+    {
+      "results": [
+        false
+      ],
+      "calls": []
+    },
+    {
+      "results": [
+        true,
+        true,
+        true
+      ],
+      "calls": [
+        [
+          [
+            "w",
+            "u"
+          ],
+          [
+            "x",
+            "v"
+          ]
+        ]
+      ]
+    },
+    {
+      "results": [
+        false,
+        true,
+        true
+      ],
+      "calls": [
+        [
+          [
+            "w",
+            "u"
+          ],
+          [
+            "x",
+            "v"
+          ]
+        ]
+      ]
+    },
+    {
+      "results": [
+        false,
+        false,
+        false
+      ],
+      "calls": [
+        [
+          [
+            "w",
+            "u"
+          ],
+          [
+            "x",
+            "v"
+          ]
+        ]
+      ]
+    },
+    {
+      "results": [
+        false,
+        false,
+        false
+      ],
+      "calls": [
+        [
+          [
+            "w",
+            "u"
+          ],
+          [
+            "x",
+            "v"
+          ]
+        ]
+      ]
+    },
+    {
+      "results": [
+        false,
+        false,
+        false
+      ],
+      "calls": [
+        [
+          [
+            "w",
+            "u"
+          ],
+          [
+            "x",
+            "v"
+          ]
+        ]
+      ]
+    },
+    {
+      "results": [
+        false,
+        false,
+        false
+      ],
+      "calls": [
+        [
+          [
+            "w",
+            "u"
+          ],
+          [
+            "x",
+            "v"
+          ]
+        ]
+      ]
+    },
+    {
+      "results": [
+        false,
+        false,
+        false
+      ],
+      "calls": []
+    },
+    {
+      "results": [
+        false,
+        false,
+        false
+      ],
+      "calls": []
+    },
+    {
+      "results": [
+        false,
+        true,
+        false
+      ],
+      "calls": [
+        [
+          [
+            "w",
+            "u"
+          ]
+        ]
+      ]
+    },
+    {
+      "results": [
+        false,
+        true,
+        false
+      ],
+      "calls": [
+        [
+          [
+            "w",
+            "u"
+          ]
+        ]
+      ]
+    },
+    {
+      "results": [
+        false,
+        false,
+        false
+      ],
+      "calls": [
+        [
+          [
+            "w",
+            "u"
+          ]
+        ]
+      ]
+    },
+    {
+      "results": [
+        false,
+        false,
+        false
+      ],
+      "calls": [
+        [
+          [
+            "w",
+            "u"
+          ]
+        ]
+      ]
+    },
+    {
+      "results": [
+        false,
+        false,
+        false
+      ],
+      "calls": [
+        [
+          [
+            "w",
+            "u"
+          ]
+        ]
+      ]
+    },
+    {
+      "results": [
+        false,
+        false,
+        false
+      ],
+      "calls": [
+        [
+          [
+            "w",
+            "u"
+          ]
+        ]
+      ]
+    },
+    {
+      "results": [
+        false,
+        false,
+        false
+      ],
+      "calls": []
+    },
+    {
+      "results": [
+        false,
+        false,
+        false
+      ],
+      "calls": []
+    },
+    {
+      "results": [
+        false,
+        false
+      ],
+      "calls": []
+    },
+    {
+      "results": [
+        false,
+        false
+      ],
+      "calls": []
+    },
+    {
+      "results": [
+        false,
+        false
+      ],
+      "calls": []
+    },
+    {
+      "results": [
+        false,
+        false
+      ],
+      "calls": []
+    },
+    {
+      "results": [
+        false,
+        false
+      ],
+      "calls": []
+    },
+    {
+      "results": [
+        false,
+        false
+      ],
+      "calls": []
+    },
+    {
+      "results": [
+        false,
+        false
+      ],
+      "calls": []
+    },
+    {
+      "results": [
+        false,
+        false
+      ],
+      "calls": []
+    }
+  ],
+  "mismatches": [],
+  "source_sha256": {
+    "server/go/internal/realtime/membership_batch.go": "852a46e90c09b684de0e198786b4241f3b7f80b1ae70cb8635b673bdfe7c33ad",
+    "server/tests/parity/go_membership_batch/main.go": "e65c2f62c65947b3adc3029ff49d973d8d5fcd499b11bb173391cafacb3906b8",
+    "server/tests/parity/go_membership_batch/wrapper.go": "daf06360d9f59efde02a0c1ab906112c9b6ce61c5efa07d377a81386f151a2d8",
+    "server/src/workpal_backend/realtime/membership_batch.py": "62defc6a2ead4a74d8c13349e44f70e0c1e8e1407877a39df1a66c7e96bcf437"
+  },
+  "binary_sha256": "d5c90caf5af2c47a9ac0ab6d9b676c9fe67b3e932e9b3e7d8f9c5da3353aae89"
+}

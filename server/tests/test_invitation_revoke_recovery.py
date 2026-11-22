@@ -11,7 +11,7 @@ from workpal_backend.infrastructure.outbox import outbox
 from workpal_backend.workspaces import invitations
 
 
-def test_revoke_reopen_outage_fifo(context, settings):
+def test_revoke_reopen_outage_fifo(context, settings, isolated_relay_redis_port):
     db, owner, target, _, wid = context
     settings.redis_key_prefix = 'test:revoke-recovery:' + uuid4().hex + ':'
     # Port 1 is the fixture's real unavailable endpoint; never stop shared Redis.
@@ -43,7 +43,7 @@ def test_revoke_reopen_outage_fifo(context, settings):
         failed.close()
         db.close()
     reopened = Database(settings)
-    settings.redis_url = 'redis://127.0.0.1:26379'
+    settings.redis_url = f'redis://127.0.0.1:{isolated_relay_redis_port}'
     delivery = OutboxDelivery(settings)
     try:
         assert delivery.client.exists(delivery.channel) == 0

@@ -10,9 +10,9 @@ from workpal_backend.infrastructure.redis import RedisResources
 from workpal_backend.realtime.consumer import RealtimeConsumer, quarantine
 
 
-def test_restart_duplicate_poison_crash(settings):
+def test_restart_duplicate_poison_crash(settings, isolated_relay_redis_port):
     async def exercise():
-        settings.redis_url = 'redis://127.0.0.1:26379'
+        settings.redis_url = f'redis://127.0.0.1:{isolated_relay_redis_port}'
         settings.redis_key_prefix = 'test:consumer:' + uuid4().hex + ':'
         migrate(settings)
         db = Database(settings)
@@ -53,13 +53,13 @@ def test_restart_duplicate_poison_crash(settings):
 
 
 @pytest.mark.parametrize('context', [None, 'x' * 70000, '中文' * 70000])
-def test_authorized_delivery_and_failed_fanout(settings, context):
+def test_authorized_delivery_and_failed_fanout(settings, context, isolated_relay_redis_port):
     from workpal_backend.auth.service import get_or_create_development_user
     from workpal_backend.workspaces import service
     from workpal_backend.infrastructure.delivery import OutboxDelivery
     from workpal_backend.realtime.protocol import project_event
     async def exercise():
-        settings.redis_url = 'redis://127.0.0.1:26379'
+        settings.redis_url = f'redis://127.0.0.1:{isolated_relay_redis_port}'
         settings.redis_key_prefix = 'test:consumer:' + uuid4().hex + ':'
         migrate(settings)
         db = Database(settings)

@@ -11,6 +11,7 @@ from .schemas import SendCode, VerifyCode
 from .dependencies import Principal, require_principal
 from .service import get_or_create_development_user, get_user
 from .tokens import issue_session, decode_session, csrf_token
+from .token_source import extract_token
 
 router = APIRouter()
 COOKIES = ('workpal_auth', 'workpal_csrf_session', 'workpal_csrf')
@@ -68,17 +69,6 @@ def verify_code(body: VerifyCode, request: Request, response: Response):
 
 @router.post('/auth/logout')
 def logout(response: Response, request: Request):
-    from jwt import InvalidTokenError
-    from .sessions import revoke_session
-    authorization = request.headers.get('authorization')
-    token = request.cookies.get('workpal_auth') if authorization is None else (authorization[7:] if authorization.lower().startswith('bearer ') else None)
-    if token and request.app.state.settings.dev_auth:
-        try:
-            with request.app.state.database.transaction() as session:
-                revoke_session(session, request.app.state.settings, token)
-        except (InvalidTokenError, ValueError):
-            pass
-
     for name in COOKIES:
         response.set_cookie(name, '', max_age=-1, expires=datetime(1970,1,1,tzinfo=timezone.utc), path='/', domain=request.app.state.settings.cookie_domain or None, samesite='strict', httponly=name == 'workpal_auth', secure=urlsplit(request.app.state.settings.frontend_origin).scheme == 'https')
     return {'message': 'logged out'}
@@ -100,26 +90,30 @@ def me(request: Request, principal: Principal = Depends(require_principal)):
 
 @router.post('/api/auth/refresh')
 def refresh(request: Request, response: Response, principal: Principal = Depends(require_principal)):
-    import time
-    settings = request.app.state.settings
-    from .sessions import validate_session
     from jwt import InvalidTokenError
-    authorization = request.headers.get('authorization')
-    token = request.cookies.get('workpal_auth') if authorization is None else (authorization[7:] if authorization.lower().startswith('bearer ') else None)
+    from .tokens import decode_auth_jwt
+    from . import session_renewal as renewal
+    settings=request.app.state.settings
+    raw,from_cookie=extract_token(request)
     try:
-        with request.app.state.database.transaction() as session:
-            claims, _ = validate_session(session, settings, token)
-    except (InvalidTokenError, ValueError):
-        raise HTTPException(401, 'Unauthorized')
-    now = int(time.time())
-    renewed = 0 < claims['exp'] - now <= settings.auth_token_ttl / 2
-    result = {'expires_at': datetime.fromtimestamp(claims['exp'], timezone.utc).isoformat().replace('+00:00', 'Z'), 'renewed': renewed, 'check_again_in_seconds': min(max(settings.auth_token_ttl // 10, 5), 604800, settings.auth_token_ttl // 4)}
-    if renewed:
-        token = issue_session(claims['sub'], claims['email'], claims['name'], settings.auth_secret, settings.auth_token_ttl, sid=claims['sid'])
-        result['expires_at'] = datetime.fromtimestamp(now + settings.auth_token_ttl, timezone.utc).isoformat().replace('+00:00', 'Z')
-        if request.headers.get('authorization') is not None:
-            result['token'] = token
-        else:
-            for name, value in [('workpal_auth', token), ('workpal_csrf_session', csrf_token(settings.auth_secret, claims['sid']))]:
-                response.set_cookie(name, value, httponly=name == 'workpal_auth', secure=urlsplit(settings.frontend_origin).scheme == 'https', samesite='strict', path='/', domain=settings.cookie_domain or None, max_age=settings.auth_token_ttl, expires=datetime.now(timezone.utc)+timedelta(seconds=settings.auth_token_ttl))
+        claims=decode_auth_jwt(raw,settings.auth_secret)
+    except (InvalidTokenError,ValueError):
+        raise HTTPException(400,'only interactive sessions can be refreshed')
+    if claims['sub'] != principal.user_id:
+        raise HTTPException(401,'token does not belong to caller')
+    result={'expires_at':renewal.format_expiry(renewal.expiry(claims)),'renewed':False,
+        'check_again_in_seconds':min(max(settings.auth_token_ttl//10,5),604800,settings.auth_token_ttl//4)}
+    if not renewal.due(claims,settings):return result
+    try:
+        token,expires=renewal.renew_claims(claims,settings)
+    except HTTPException:
+        raise
+    except Exception:
+        return result
+    if from_cookie:
+        try:renewal.set_cookies(response,token,settings)
+        except Exception:return result
+    else:
+        result={'token':token,**result}
+    result.update(expires_at=renewal.format_expiry(expires),renewed=True)
     return result

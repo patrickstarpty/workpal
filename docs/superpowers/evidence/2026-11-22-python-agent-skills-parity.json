@@ -1,0 +1,255 @@
+{
+  "source_sha256": {
+    "server/go/internal/handler/skill.go": "c5bbfa63737b75159fdf2ef4607276a399d3d902effabc8b1fc800d1aec74c3a",
+    "server/go/pkg/db/queries/skill.sql": "012b974ad5e9e84b99db639135cb275ddce4c38e8fa884006713baf6038af89a",
+    "server/go/internal/handler/handler.go": "471e21dd3795a427723ecdf2f21bccf47385591bb6d02d089e487cdd2a6af7ef",
+    "server/go/internal/middleware/workspace.go": "d8b1eb22b5a7da16396facd1ebb87e16d7d7915cad68cef3aa9f69187cca5d7e",
+    "server/tests/parity/go_agent_skills/main.go": "8a37ec5beefba37dab2d03b39d266616ef8e59dd64352b8e2c55c2a4ac9674a8",
+    "server/src/workpal_backend/agents/skills.py": "afa0e0dbf175210b5b0939eb707b85ea6eab08cfe304eb43c29e824c5f4603d5",
+    "server/migrations/versions/0018_skill.py": "adee6d45c5906c4ef042bf7596d06599cdc8c8ba4fc80dcf7731c5142cbd03b1",
+    "server/src/workpal_backend/infrastructure/go_json_value.py": "269d11f2a510b3c425bf29661dda48453b803eaf6a75aad027afe6349e7fe7f7"
+  },
+  "scope": "Agent skill summary handler + workspace middleware status/body and audit fields; actual PostgreSQL/SQLite. UUIDv7 audit IDs and timestamps nondeterministic and excluded; full auth/task/CloudFront/transport not compared.",
+  "fixtures": [
+    {
+      "Path": "/api/agents/40000000-0000-4000-8000-000000000001/skills",
+      "User": "10000000-0000-4000-8000-000000000002",
+      "Query": "workspace_slug=fixture",
+      "Headers": {},
+      "SQL": ""
+    },
+    {
+      "Path": "/api/agents/40000000-0000-4000-8000-000000000001/skills",
+      "User": "10000000-0000-4000-8000-000000000001",
+      "Query": "workspace_slug=fixture",
+      "Headers": {},
+      "SQL": ""
+    },
+    {
+      "Path": "/api/agents/40000000-0000-4000-8000-000000000001/skills",
+      "User": "10000000-0000-4000-8000-000000000003",
+      "Query": "workspace_slug=fixture",
+      "Headers": {},
+      "SQL": ""
+    },
+    {
+      "Path": "/api/agents/bad/skills",
+      "User": "10000000-0000-4000-8000-000000000002",
+      "Query": "workspace_slug=fixture",
+      "Headers": {},
+      "SQL": ""
+    },
+    {
+      "Path": "/api/agents/40000000-0000-4000-8000-000000000001/skills",
+      "User": "10000000-0000-4000-8000-000000000002",
+      "Query": "",
+      "Headers": {},
+      "SQL": ""
+    },
+    {
+      "Path": "/api/agents/40000000-0000-4000-8000-000000000001/skills",
+      "User": "10000000-0000-4000-8000-000000000002",
+      "Query": "workspace_id=nope",
+      "Headers": {},
+      "SQL": ""
+    },
+    {
+      "Path": "/api/agents/40000000-0000-4000-8000-000000000001/skills",
+      "User": "10000000-0000-4000-8000-000000000002",
+      "Query": "workspace_slug=fixture",
+      "Headers": {},
+      "SQL": "UPDATE agent SET owner_id=NULL"
+    },
+    {
+      "Path": "/api/agents/40000000-0000-4000-8000-000000000001/skills",
+      "User": "10000000-0000-4000-8000-000000000001",
+      "Query": "workspace_slug=fixture",
+      "Headers": {},
+      "SQL": "UPDATE agent SET kind='system'"
+    },
+    {
+      "Path": "/api/agents/40000000-0000-4000-8000-000000000001/skills",
+      "User": "10000000-0000-4000-8000-000000000001",
+      "Query": "workspace_slug=fixture",
+      "Headers": {},
+      "SQL": "UPDATE agent SET kind='user'"
+    },
+    {
+      "Path": "/api/agents/40000000-0000-4000-8000-000000000001/skills",
+      "User": "10000000-0000-4000-8000-000000000001",
+      "Query": "workspace_slug=fixture",
+      "Headers": {},
+      "SQL": "UPDATE skill SET config='[1,true,null]'"
+    },
+    {
+      "Path": "/api/agents/40000000-0000-4000-8000-000000000001/skills",
+      "User": "10000000-0000-4000-8000-000000000001",
+      "Query": "workspace_slug=fixture",
+      "Headers": {},
+      "SQL": "UPDATE skill SET config='{\"a\":1e999,\"b\":-0.0,\"c\":9007199254740993}'"
+    },
+    {
+      "Path": "/api/agents/40000000-0000-4000-8000-000000000001/skills",
+      "User": "10000000-0000-4000-8000-000000000001",
+      "Query": "workspace_slug=fixture",
+      "Headers": {},
+      "SQL": "DELETE FROM agent_skill"
+    },
+    {
+      "Path": "/api/agents/40000000-0000-4000-8000-000000000001/skills",
+      "User": "10000000-0000-4000-8000-000000000001",
+      "Query": "workspace_slug=fixture",
+      "Headers": {},
+      "SQL": "ALTER TABLE skill RENAME TO fixture_missing_skill"
+    }
+  ],
+  "pg_seed": [
+    "INSERT INTO \"user\"(id,name,email,created_at,updated_at) VALUES ('10000000-0000-4000-8000-000000000001','Fixture','10000000-0000-4000-8000-000000000001@example.com','2026-01-01T01:02:03Z','2026-01-01T01:02:03Z')",
+    "INSERT INTO \"user\"(id,name,email,created_at,updated_at) VALUES ('10000000-0000-4000-8000-000000000002','Fixture','10000000-0000-4000-8000-000000000002@example.com','2026-01-01T01:02:03Z','2026-01-01T01:02:03Z')",
+    "INSERT INTO \"user\"(id,name,email,created_at,updated_at) VALUES ('10000000-0000-4000-8000-000000000003','Fixture','10000000-0000-4000-8000-000000000003@example.com','2026-01-01T01:02:03Z','2026-01-01T01:02:03Z')",
+    "INSERT INTO workspace(id,name,slug,issue_prefix,created_at,updated_at) VALUES ('20000000-0000-4000-8000-000000000001','Fixture','fixture','FX','2026-01-01T01:02:03Z','2026-01-01T01:02:03Z')",
+    "INSERT INTO member(id,workspace_id,user_id,role,created_at) VALUES ('30000000-0000-4000-8000-000000000000','20000000-0000-4000-8000-000000000001','10000000-0000-4000-8000-000000000001','owner','2026-01-01T01:02:03Z')",
+    "INSERT INTO member(id,workspace_id,user_id,role,created_at) VALUES ('30000000-0000-4000-8000-000000000001','20000000-0000-4000-8000-000000000001','10000000-0000-4000-8000-000000000002','member','2026-01-01T01:02:03Z')",
+    "INSERT INTO agent(id,workspace_id,name,runtime_mode,owner_id,custom_env) VALUES ('40000000-0000-4000-8000-000000000001','20000000-0000-4000-8000-000000000001','Env fixture','local','10000000-0000-4000-8000-000000000002','{\"Z_KEY\":\"fixture-z\",\"A_KEY\":\"fixture-a\"}')",
+    "INSERT INTO skill(id,workspace_id,name,content,config,created_at,updated_at) VALUES ('50000000-0000-4000-8000-000000000000','20000000-0000-4000-8000-000000000001','Z skill','fixture body; never execute','null','2026-01-01T01:02:03Z','2026-01-01T01:02:03Z')",
+    "INSERT INTO agent_skill(agent_id,skill_id,enabled) VALUES ('40000000-0000-4000-8000-000000000001','50000000-0000-4000-8000-000000000000',false)",
+    "INSERT INTO skill(id,workspace_id,name,content,config,created_at,updated_at) VALUES ('50000000-0000-4000-8000-000000000001','20000000-0000-4000-8000-000000000001','A skill','fixture body; never execute','{\"z\":1,\"a\":2,\"a\":1}','2026-01-01T01:02:03Z','2026-01-01T01:02:03Z')",
+    "INSERT INTO agent_skill(agent_id,skill_id,enabled) VALUES ('40000000-0000-4000-8000-000000000001','50000000-0000-4000-8000-000000000001',true)"
+  ],
+  "go": [
+    {
+      "audits": [],
+      "body": "[{\"id\":\"50000000-0000-4000-8000-000000000001\",\"workspace_id\":\"20000000-0000-4000-8000-000000000001\",\"name\":\"A skill\",\"description\":\"\",\"config\":{\"a\":1,\"z\":1},\"created_by\":null,\"created_at\":\"2026-01-01T01:02:03Z\",\"updated_at\":\"2026-01-01T01:02:03Z\",\"enabled\":true},{\"id\":\"50000000-0000-4000-8000-000000000000\",\"workspace_id\":\"20000000-0000-4000-8000-000000000001\",\"name\":\"Z skill\",\"description\":\"\",\"config\":{},\"created_by\":null,\"created_at\":\"2026-01-01T01:02:03Z\",\"updated_at\":\"2026-01-01T01:02:03Z\",\"enabled\":false}]\n",
+      "status": 200
+    },
+    {
+      "audits": [],
+      "body": "[{\"id\":\"50000000-0000-4000-8000-000000000001\",\"workspace_id\":\"20000000-0000-4000-8000-000000000001\",\"name\":\"A skill\",\"description\":\"\",\"config\":{\"a\":1,\"z\":1},\"created_by\":null,\"created_at\":\"2026-01-01T01:02:03Z\",\"updated_at\":\"2026-01-01T01:02:03Z\",\"enabled\":true},{\"id\":\"50000000-0000-4000-8000-000000000000\",\"workspace_id\":\"20000000-0000-4000-8000-000000000001\",\"name\":\"Z skill\",\"description\":\"\",\"config\":{},\"created_by\":null,\"created_at\":\"2026-01-01T01:02:03Z\",\"updated_at\":\"2026-01-01T01:02:03Z\",\"enabled\":false}]\n",
+      "status": 200
+    },
+    {
+      "audits": [],
+      "body": "{\"error\":\"workspace not found\"}",
+      "status": 404
+    },
+    {
+      "audits": [],
+      "body": "{\"error\":\"invalid agent id\"}\n",
+      "status": 400
+    },
+    {
+      "audits": [],
+      "body": "{\"error\":\"workspace_id or workspace_slug is required\"}",
+      "status": 400
+    },
+    {
+      "audits": [],
+      "body": "{\"error\":\"invalid workspace_id\"}",
+      "status": 400
+    },
+    {
+      "audits": [],
+      "body": "[{\"id\":\"50000000-0000-4000-8000-000000000001\",\"workspace_id\":\"20000000-0000-4000-8000-000000000001\",\"name\":\"A skill\",\"description\":\"\",\"config\":{\"a\":1,\"z\":1},\"created_by\":null,\"created_at\":\"2026-01-01T01:02:03Z\",\"updated_at\":\"2026-01-01T01:02:03Z\",\"enabled\":true},{\"id\":\"50000000-0000-4000-8000-000000000000\",\"workspace_id\":\"20000000-0000-4000-8000-000000000001\",\"name\":\"Z skill\",\"description\":\"\",\"config\":{},\"created_by\":null,\"created_at\":\"2026-01-01T01:02:03Z\",\"updated_at\":\"2026-01-01T01:02:03Z\",\"enabled\":false}]\n",
+      "status": 200
+    },
+    {
+      "audits": [],
+      "body": "{\"error\":\"agent not found\"}\n",
+      "status": 404
+    },
+    {
+      "audits": [],
+      "body": "[{\"id\":\"50000000-0000-4000-8000-000000000001\",\"workspace_id\":\"20000000-0000-4000-8000-000000000001\",\"name\":\"A skill\",\"description\":\"\",\"config\":{\"a\":1,\"z\":1},\"created_by\":null,\"created_at\":\"2026-01-01T01:02:03Z\",\"updated_at\":\"2026-01-01T01:02:03Z\",\"enabled\":true},{\"id\":\"50000000-0000-4000-8000-000000000000\",\"workspace_id\":\"20000000-0000-4000-8000-000000000001\",\"name\":\"Z skill\",\"description\":\"\",\"config\":{},\"created_by\":null,\"created_at\":\"2026-01-01T01:02:03Z\",\"updated_at\":\"2026-01-01T01:02:03Z\",\"enabled\":false}]\n",
+      "status": 200
+    },
+    {
+      "audits": [],
+      "body": "[{\"id\":\"50000000-0000-4000-8000-000000000001\",\"workspace_id\":\"20000000-0000-4000-8000-000000000001\",\"name\":\"A skill\",\"description\":\"\",\"config\":[1,true,null],\"created_by\":null,\"created_at\":\"2026-01-01T01:02:03Z\",\"updated_at\":\"2026-01-01T01:02:03Z\",\"enabled\":true},{\"id\":\"50000000-0000-4000-8000-000000000000\",\"workspace_id\":\"20000000-0000-4000-8000-000000000001\",\"name\":\"Z skill\",\"description\":\"\",\"config\":[1,true,null],\"created_by\":null,\"created_at\":\"2026-01-01T01:02:03Z\",\"updated_at\":\"2026-01-01T01:02:03Z\",\"enabled\":false}]\n",
+      "status": 200
+    },
+    {
+      "audits": [],
+      "body": "[{\"id\":\"50000000-0000-4000-8000-000000000001\",\"workspace_id\":\"20000000-0000-4000-8000-000000000001\",\"name\":\"A skill\",\"description\":\"\",\"config\":{\"a\":null,\"b\":0,\"c\":9007199254740992},\"created_by\":null,\"created_at\":\"2026-01-01T01:02:03Z\",\"updated_at\":\"2026-01-01T01:02:03Z\",\"enabled\":true},{\"id\":\"50000000-0000-4000-8000-000000000000\",\"workspace_id\":\"20000000-0000-4000-8000-000000000001\",\"name\":\"Z skill\",\"description\":\"\",\"config\":{\"a\":null,\"b\":0,\"c\":9007199254740992},\"created_by\":null,\"created_at\":\"2026-01-01T01:02:03Z\",\"updated_at\":\"2026-01-01T01:02:03Z\",\"enabled\":false}]\n",
+      "status": 200
+    },
+    {
+      "audits": [],
+      "body": "[]\n",
+      "status": 200
+    },
+    {
+      "audits": [],
+      "body": "{\"error\":\"failed to list agent skills\"}\n",
+      "status": 500
+    }
+  ],
+  "python": [
+    {
+      "status": 200,
+      "body": "[{\"id\":\"50000000-0000-4000-8000-000000000001\",\"workspace_id\":\"20000000-0000-4000-8000-000000000001\",\"name\":\"A skill\",\"description\":\"\",\"config\":{\"a\":1,\"z\":1},\"created_by\":null,\"created_at\":\"2026-01-01T01:02:03Z\",\"updated_at\":\"2026-01-01T01:02:03Z\",\"enabled\":true},{\"id\":\"50000000-0000-4000-8000-000000000000\",\"workspace_id\":\"20000000-0000-4000-8000-000000000001\",\"name\":\"Z skill\",\"description\":\"\",\"config\":{},\"created_by\":null,\"created_at\":\"2026-01-01T01:02:03Z\",\"updated_at\":\"2026-01-01T01:02:03Z\",\"enabled\":false}]\n",
+      "audits": []
+    },
+    {
+      "status": 200,
+      "body": "[{\"id\":\"50000000-0000-4000-8000-000000000001\",\"workspace_id\":\"20000000-0000-4000-8000-000000000001\",\"name\":\"A skill\",\"description\":\"\",\"config\":{\"a\":1,\"z\":1},\"created_by\":null,\"created_at\":\"2026-01-01T01:02:03Z\",\"updated_at\":\"2026-01-01T01:02:03Z\",\"enabled\":true},{\"id\":\"50000000-0000-4000-8000-000000000000\",\"workspace_id\":\"20000000-0000-4000-8000-000000000001\",\"name\":\"Z skill\",\"description\":\"\",\"config\":{},\"created_by\":null,\"created_at\":\"2026-01-01T01:02:03Z\",\"updated_at\":\"2026-01-01T01:02:03Z\",\"enabled\":false}]\n",
+      "audits": []
+    },
+    {
+      "status": 404,
+      "body": "{\"error\":\"workspace not found\"}",
+      "audits": []
+    },
+    {
+      "status": 400,
+      "body": "{\"error\":\"invalid agent id\"}\n",
+      "audits": []
+    },
+    {
+      "status": 400,
+      "body": "{\"error\":\"workspace_id or workspace_slug is required\"}",
+      "audits": []
+    },
+    {
+      "status": 400,
+      "body": "{\"error\":\"invalid workspace_id\"}",
+      "audits": []
+    },
+    {
+      "status": 200,
+      "body": "[{\"id\":\"50000000-0000-4000-8000-000000000001\",\"workspace_id\":\"20000000-0000-4000-8000-000000000001\",\"name\":\"A skill\",\"description\":\"\",\"config\":{\"a\":1,\"z\":1},\"created_by\":null,\"created_at\":\"2026-01-01T01:02:03Z\",\"updated_at\":\"2026-01-01T01:02:03Z\",\"enabled\":true},{\"id\":\"50000000-0000-4000-8000-000000000000\",\"workspace_id\":\"20000000-0000-4000-8000-000000000001\",\"name\":\"Z skill\",\"description\":\"\",\"config\":{},\"created_by\":null,\"created_at\":\"2026-01-01T01:02:03Z\",\"updated_at\":\"2026-01-01T01:02:03Z\",\"enabled\":false}]\n",
+      "audits": []
+    },
+    {
+      "status": 404,
+      "body": "{\"error\":\"agent not found\"}\n",
+      "audits": []
+    },
+    {
+      "status": 200,
+      "body": "[{\"id\":\"50000000-0000-4000-8000-000000000001\",\"workspace_id\":\"20000000-0000-4000-8000-000000000001\",\"name\":\"A skill\",\"description\":\"\",\"config\":{\"a\":1,\"z\":1},\"created_by\":null,\"created_at\":\"2026-01-01T01:02:03Z\",\"updated_at\":\"2026-01-01T01:02:03Z\",\"enabled\":true},{\"id\":\"50000000-0000-4000-8000-000000000000\",\"workspace_id\":\"20000000-0000-4000-8000-000000000001\",\"name\":\"Z skill\",\"description\":\"\",\"config\":{},\"created_by\":null,\"created_at\":\"2026-01-01T01:02:03Z\",\"updated_at\":\"2026-01-01T01:02:03Z\",\"enabled\":false}]\n",
+      "audits": []
+    },
+    {
+      "status": 200,
+      "body": "[{\"id\":\"50000000-0000-4000-8000-000000000001\",\"workspace_id\":\"20000000-0000-4000-8000-000000000001\",\"name\":\"A skill\",\"description\":\"\",\"config\":[1,true,null],\"created_by\":null,\"created_at\":\"2026-01-01T01:02:03Z\",\"updated_at\":\"2026-01-01T01:02:03Z\",\"enabled\":true},{\"id\":\"50000000-0000-4000-8000-000000000000\",\"workspace_id\":\"20000000-0000-4000-8000-000000000001\",\"name\":\"Z skill\",\"description\":\"\",\"config\":[1,true,null],\"created_by\":null,\"created_at\":\"2026-01-01T01:02:03Z\",\"updated_at\":\"2026-01-01T01:02:03Z\",\"enabled\":false}]\n",
+      "audits": []
+    },
+    {
+      "status": 200,
+      "body": "[{\"id\":\"50000000-0000-4000-8000-000000000001\",\"workspace_id\":\"20000000-0000-4000-8000-000000000001\",\"name\":\"A skill\",\"description\":\"\",\"config\":{\"a\":null,\"b\":0,\"c\":9007199254740992},\"created_by\":null,\"created_at\":\"2026-01-01T01:02:03Z\",\"updated_at\":\"2026-01-01T01:02:03Z\",\"enabled\":true},{\"id\":\"50000000-0000-4000-8000-000000000000\",\"workspace_id\":\"20000000-0000-4000-8000-000000000001\",\"name\":\"Z skill\",\"description\":\"\",\"config\":{\"a\":null,\"b\":0,\"c\":9007199254740992},\"created_by\":null,\"created_at\":\"2026-01-01T01:02:03Z\",\"updated_at\":\"2026-01-01T01:02:03Z\",\"enabled\":false}]\n",
+      "audits": []
+    },
+    {
+      "status": 200,
+      "body": "[]\n",
+      "audits": []
+    },
+    {
+      "status": 500,
+      "body": "{\"error\":\"failed to list agent skills\"}\n",
+      "audits": []
+    }
+  ],
+  "mismatches": [],
+  "binary_sha256": "71faa03d76e0f55cf74668aa86e1d4797bd1eb2ec533cfbc0b076c3bc1044675"
+}
