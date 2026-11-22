@@ -1,7 +1,7 @@
 # SMART Activity deliverables — final audit
 
 ## What was delivered
-All 21 SMART tickets now carry concrete materials in the Activity that submitted them: 23 immutable documents plus four source-snapshot attachments. Requirements/designs are full specifications; verification reports contain actual commands/results and uncovered scope; development reviews contain inspected comparisons and explicit missing historical basis; handoffs reference exact document revisions. Historical comments link to the later evidence Activity without falsely claiming it was produced by the original Run.
+All 21 SMART tickets now carry concrete materials in the Activity that submitted them: 23 immutable documents plus four source-snapshot attachments. Requirements/designs are full specifications; test reports contain actual commands/results and uncovered scope; development reviews contain inspected comparisons and explicit missing historical basis; handoffs reference exact document revisions. Historical comments link to the later evidence Activity without falsely claiming it was produced by the original Run.
 
 This completes the requested evidence repair and inspection path. It does **not** complete the underlying upload feature, establish historical owner approval, or certify external integrations. Where source evidence does not exist, the document identifies what is missing instead of inventing a diff, review, test result or acceptance.
 

@@ -294,15 +294,13 @@ def test_ordinary_comment_and_identifier_regression(content, settings):
     assert client.post(path, headers=foreign, json={'content': 'foreign'}).status_code == 404
 
 
-def test_authored_history_is_labelled_without_rewriting_storage(content):
+def test_authored_history_is_archived_without_rewriting_storage(content):
     from workpal_backend.workspace_content.repository import get_record
     app, client, headers, workspace = content
     issue = client.post('/api/issues', headers=headers, json={'title':'History provenance'}).json()
     seed(app, workspace, 'comments', [{'id':'authored-note','issue_id':issue['id'],'content':'Original note','fixture_source':'authored-review-v1'}])
     for suffix in ['comments','timeline']:
-        note = client.get(f"/api/issues/{issue['id']}/{suffix}",headers=headers).json()[0]
-        assert 'not a verified execution record' in note['content']
-        assert 'Original note' in note['content']
+        assert client.get(f"/api/issues/{issue['id']}/{suffix}",headers=headers).json() == []
     with app.state.database.transaction() as session:
         assert get_record(session,workspace['id'],'comments','authored-note')['content']=='Original note'
 

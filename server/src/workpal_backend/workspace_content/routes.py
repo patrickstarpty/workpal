@@ -78,9 +78,13 @@ async def read_body(request):
     return body
 
 
+def archived_record(row):
+    return bool(row.get('_fixture') or row.get('fixture_source'))
+
+
 def required_record(session, workspace_id, kind, record_id):
     row = repo.get_record(session, workspace_id, kind, record_id)
-    if row is None:
+    if row is None or (kind in ('task_runs', 'attachments', 'attachment_contents') and archived_record(row)):
         raise HTTPException(404, 'Record not found')
     return row
 
@@ -214,6 +218,13 @@ def save_collection(session, workspace, principal, kind, body, old=None):
                 'actor_id': principal.user_id, 'created_at': now,
                 'details': {'from_type': before[0], 'from_id': before[1], 'to_type': after[0], 'to_id': after[1]},
             })
+        if old is not None and previous.get('status') != row.get('status'):
+            repo.put_record(session, workspace['id'], 'activities', {
+                'id': str(uuid4()), 'workspace_id': workspace['id'], 'issue_id': record_id,
+                'type': 'activity', 'action': 'status_changed', 'actor_type': 'member',
+                'actor_id': principal.user_id, 'created_at': now,
+                'details': {'from': previous.get('status'), 'to': row.get('status')},
+            })
     return saved
 
 
@@ -225,23 +236,13 @@ def detail(session, workspace, principal, kind, record, operation, params=None):
         if operation in ('comments', 'timeline'):
             comments = sorted((row for row in repo.list_records(session, workspace_id, 'comments')
                                if row.get('issue_id') == record_id), key=lambda row: row.get('created_at') or '')
-            later_reviews = [r for r in repo.list_records(session, workspace_id, 'evidence_imports')
-                             if r.get('issue_id') == record_id and r.get('activity_id')]
-            later_links = '\n'.join(
-                f"[Later evidence review {index + 1}](/{workspace['slug']}/issues/{record_id}#comment-{review['activity_id']})"
-                for index, review in enumerate(later_reviews))
-            notice = '**Evidence pending — this record has no verified delivery evidence.**\n\n'
-            if later_links:
-                notice += later_links + '\n\nThese later materials do not establish historical execution or approval.\n\n'
-            comments = [{**row, 'content': notice + str(row.get('content', ''))}
-                        if row.get('_fixture') else row for row in comments]
-            comments = [{**row, 'content': '**Historical reference note — authored example, not a verified execution record.**\n\n' + str(row.get('content', ''))} if row.get('fixture_source') else row for row in comments]
+            comments = [row for row in comments if not archived_record(row)]
             if operation == 'comments':
                 return comments
             entries = [{**row, 'type': 'comment', 'comment_type': row.get('type'),
                         'actor_type': row.get('author_type'), 'actor_id': row.get('author_id')} for row in comments]
             entries.extend(row for row in repo.list_records(session, workspace_id, 'activities')
-                           if row.get('issue_id') == record_id)
+                           if row.get('issue_id') == record_id and not archived_record(row))
             return sorted(entries, key=lambda row: (row.get('created_at') or '', row['id']))
         if operation in ('task-runs', 'tasks', 'runs', 'attachments', 'activity'):
             collection = {'attachments': 'attachments', 'activity': 'activities'}.get(operation, 'task_runs')
@@ -254,7 +255,7 @@ def detail(session, workspace, principal, kind, record, operation, params=None):
                         break
                     issue_ids.update(children)
             rows = [row for row in repo.list_records(session, workspace_id, collection)
-                    if row.get('issue_id') in issue_ids]
+                    if row.get('issue_id') in issue_ids and not archived_record(row)]
             return sorted(rows, key=lambda row: (row.get('created_at') or '', row['id']))
         if operation == 'children':
             return {'issues': [row for row in repo.list_records(session, workspace_id, 'issues') if row.get('parent_issue_id') == record_id]}
@@ -514,7 +515,7 @@ def task_detail(task_id: str, operation: str, request: Request, principal: Princ
             raise HTTPException(501, UNAVAILABLE)
         if operation == 'messages':
             return sorted((row for row in repo.list_records(session, workspace['id'], 'task_messages')
-                           if row.get('task_id') == task_id), key=lambda row: row.get('seq', 0))
+                           if row.get('task_id') == task_id and not archived_record(row)), key=lambda row: row.get('seq', 0))
         if operation == 'context-receipt':
             return {'receipt': task.get('context_receipt')}
         raise HTTPException(501, UNAVAILABLE)

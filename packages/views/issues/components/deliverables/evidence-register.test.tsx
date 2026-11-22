@@ -12,7 +12,7 @@ function show(){return render(<QueryClientProvider client={new QueryClient({defa
 it('shows pending evidence and submits the full report without asserting success', async()=>{
  const data={revisions:[],reviews:[],requirements:{requirements:['criteria','exclusions'],test:['method','results','failures','uncovered']}};
  fetcher.mockResolvedValue({ok:true,json:async()=>data});show();
- expect(await screen.findByText(/Evidence pending/)).toBeTruthy();
+ expect(await screen.findByText(/No deliverables submitted yet/)).toBeTruthy();
  fireEvent.click(screen.getByText('Add deliverable'));
  fireEvent.change(screen.getByLabelText('Type'),{target:{value:'test'}});
  for(const [label,value] of Object.entries({'Title':'Regression','Full document':'Case 1','method':'Manual','results':'Not run','failures':'Unknown','uncovered':'All'})) fireEvent.change(screen.getByLabelText(label),{target:{value}});

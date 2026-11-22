@@ -50,7 +50,7 @@ export function EvidenceRegister({issueId,onLocate}:{issueId:string;onLocate?:(i
   return <section className="space-y-3 p-3 text-sm" aria-label="Delivery evidence">
     <h3 className="font-medium">Delivery evidence</h3>
     {query.isPending ? <p role="status">Loading evidence…</p> : query.isError ? <><p role="alert">Unable to load delivery evidence.</p><Button onClick={()=>query.refetch()}>Retry</Button></> : <>
-      <p className="text-muted-foreground">{query.data.revisions.length ? 'Submitted documents require review. Decisions apply only to the named revision.' : 'Evidence pending. Activity statements and attachment counts do not establish completion.'}</p>
+      <p className="text-muted-foreground">{query.data.revisions.length ? 'Submitted documents require review. Decisions apply only to the named revision.' : 'No deliverables submitted yet.'}</p>
       {query.data.revisions.map(item=><details key={item.id} className="rounded-md border border-border p-2">
         <summary className="cursor-pointer">{item.title} · v{item.version} · {item.kind}</summary>
         <div className="space-y-2 pt-2">

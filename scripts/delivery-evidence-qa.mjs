@@ -8,7 +8,7 @@ try {
  await page.evaluate(()=>{location.hash='/workpal-team/issues/workflow-work-10';});
  const evidence=page.getByRole('region',{name:'Delivery evidence'});
  await expect(evidence).toBeVisible();
- await expect(evidence.getByText(/Evidence pending/)).toBeVisible();
+ await expect(evidence.getByText(/No deliverables submitted yet/)).toBeVisible();
  await evidence.getByRole('button',{name:'Add deliverable'}).click();
  await evidence.getByLabel('Type',{exact:true}).selectOption('test');
  for(const name of ['method','results','failures','uncovered']) await expect(evidence.getByLabel(name,{exact:true})).toBeVisible();

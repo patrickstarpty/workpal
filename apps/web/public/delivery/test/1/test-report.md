@@ -1,4 +1,4 @@
-# Test — Verification Report
+# Test — Test Report
 
 Revision: 1
 Ticket: TAP-287

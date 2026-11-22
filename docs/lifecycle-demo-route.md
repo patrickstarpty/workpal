@@ -7,7 +7,7 @@ Open http://127.0.0.1:4174 and sign in with `workpal@fwd.com` (local code `88888
 1. **TAP-284 · Plan:** accepted scope, Research Analyst review, scope brief v1/v2 and owner acceptance.
 2. **TAP-285 · Design:** stable identity decision, Adversarial Reviewer feedback, revised architecture and approval.
 3. **TAP-286 · Build:** open the full Execution log to see all four runs. The first attempt fails on a rate limit; attempt 2 succeeds. Code Reviewer finds a leader mapping defect; the revision fixes it. Hover a run and choose View transcript to inspect tool inputs/results and the final summary.
-4. **TAP-287 · Test:** QA opens Q-01 for the missing maintenance return link; Maintenance Engineer fixes it. The revised verification report closes the finding.
+4. **TAP-287 · Test:** QA opens Q-01 for the missing maintenance return link; Maintenance Engineer fixes it. The revised test report closes the finding.
 5. **TAP-288 · Deploy:** Security Engineer reviews the release checklist; the workspace owner approves v2 and rollback ownership. Release Engineer hands off to Reliability Engineer.
 6. **TAP-289 · Maintain:** initial review is accepted, but the ticket remains in progress for the next source update. Its handoff returns to Plan.
 

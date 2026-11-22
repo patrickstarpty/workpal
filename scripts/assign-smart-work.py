@@ -37,7 +37,7 @@ def assign(session):
    body+='\n\n## Work assignment\nThe squad owns this ticket’s outcome. Individual runs and comments identify who actually performed each action; squad membership alone does not imply participation. A focused task may be assigned directly to an agent, with the handoff recorded here.'
   else:
    body=f"**Direct assignee:** {target['name']}\n\n**Responsibility:** {target.get('description','')}\n\nThis scope can be handled directly without creating a squad. Request reviewers or hand work to a squad when needed; keep the result and review attached to this ticket."
-  body+='\n\n## Acceptance and evidence\n'+issue['metadata']['completion_criteria']+'\n\nAttach the relevant specification, change/review or verification report to the work that produces it. Assignment does not start a model run or change the ticket’s completion state.'
+  body+='\n\n## Acceptance and evidence\n'+issue['metadata']['completion_criteria']+'\n\nAttach the relevant specification, change/review or test report to the work that produces it. Assignment does not start a model run or change the ticket’s completion state.'
   stamp=datetime.now(timezone.utc).isoformat()
   put_record(session,wid,'comments',{'id':cid,'workspace_id':wid,'issue_id':iid,'type':'comment','author_type':'member','author_id':owner['id'],
    'content':'## Work coordination\n\n'+body,'created_at':stamp,'updated_at':stamp,'revision':1,'attachments':[],'reactions':[],'parent_id':None})
